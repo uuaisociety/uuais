@@ -1,0 +1,8 @@
+[
+    {
+      "origin": ["http://localhost:3000", "http://localhost:5000", "http://127.0.0.1:5001", "https://uuais.vercel.app", "https://www.uuais.com", "https://uuais.se"],
+      "method": ["GET", "POST", "PUT", "DELETE"],
+      "responseHeader": ["Content-Type", "Content-Disposition"]
+    }
+  ]
+  
