@@ -1,5 +1,5 @@
 # UUAIS - Uppsala University AI Society
-
+xD
 This is a [Next.js](https://nextjs.org) project for the Uppsala University AI Society website, built with TypeScript, Tailwind CSS, and Firebase.
 
 ## How to Run Locally
