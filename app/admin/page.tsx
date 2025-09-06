@@ -93,7 +93,7 @@ const AdminPage = () => {
         <div className="bg-yellow-500/20 p-4 text-yellow-200 text-sm">
           <div className="max-w-7xl mx-auto flex justify-between items-center">
             <p>
-              <strong>Note:</strong> This is a password-protected admin page.
+              <strong>Note:</strong> This is a password-protected admin page. Please don't give too many ppl access.
             </p>
             <button onClick={() => setShowInfo(false)} className="text-yellow-200 hover:text-white">
               ✕
