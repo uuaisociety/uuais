@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "home": "Hem",
+    "events": "Evenemang",
+    "about": "Om oss",
+    "application": "Ansökan"
+  },
+  "theme": {
+    "toggle": "Växla tema"
+  },
+  "language": {
+    "toggle": "Byt till engelska"
+  },
+  "hero": {
+    "title": "UU AI Society",
+    "description": "Vi är en deltagardriven förening för alla som är intresserade av AI vid Uppsala universitet"
+  },
+  "about": {
+    "title": "Om oss",
+    "description": "Grundad av fyra studenter - Axel, Alex, Nils och Victor - \n\nUUAIS föddes ur en gemensam vision om att ge ambitiösa studenter möjlighet att forma framtidens AI-teknik redan från början av sin akademiska resa. Vi tror att studenter, oavsett bakgrund eller studieområde, har en enorm kreativ potential att driva innovation framåt. Genom samarbeten med industripartners, forskare och andra studentorganisationer strävar vi efter att maximera vår påverkan och utforska AIs fascinerande gränser. Vårt uppdrag är att leverera noggrant kurerade nätverksevenemang, utbildande föreläsningar, praktiska workshops, engagerande hackatons och studentledda forskningsprojekt - allt utformat för att utveckla nästa generation av AI-innovatörer."
+  },
+  "events": {
+    "title": "Evenemang",
+    "loading": "Laddar evenemang...",
+    "noEvents": "Inga evenemang just nu.",
+    "upcoming": "Kommande",
+    "past": "Tidigare",
+    "noImage": "Ingen bild tillgänglig",
+    "apply": "Ansök nu",
+    "close": "Stäng"
+  },
+  "application": {
+    "title": "Ansök till {{eventName}}",
+    "submit": "Skicka ansökan",
+    "submitting": "Skickar...",
+    "success": "Tack för din ansökan.",
+    "error": "Ett fel uppstod vid inskickning av ansökan. Försök igen.",
+    "form": {
+      "name": "Namn",
+      "email": "E-post",
+      "yearOfStudy": "Årskurs",
+      "program": "Program",
+      "relevantExperience": "Relevant erfarenhet",
+      "desiredTeammates": "Önskade gruppmedlemmar (om några)",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    }
+  },
+  "founders": {
+    "title": "SÖKER GRUNDANDE MEDLEMMAR",
+    "description": "Skicka ansökningar till info@uuais.com med ditt namn, studieområde och en kort beskrivning av hur dina intressen passar med föreningen.",
+    "social": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    }
+  },
+  "quiz": {
+    "title": "AI-kunskapsquiz",
+    "description": "Testa din förståelse för AI-koncept med vårt interaktiva quiz!",
+    "info": "7 frågor • Flerval • Få ditt resultat direkt",
+    "startButton": "Börja Quiz",
+    "navigation": {
+      "previous": "Föregående",
+      "next": "Nästa",
+      "finish": "Avsluta Quiz"
+    },
+    "progress": "Fråga {{current}} av {{total}}",
+    "results": {
+      "title": "Quiz Avslutat!",
+      "score": "Du fick {{percentage}}%",
+      "feedback": {
+        "excellent": "Utmärkt arbete!",
+        "good": "Bra jobbat!",
+        "fair": "Inte illa, fortsätt lära dig!",
+        "poor": "Fortsätt studera AI-koncept!"
+      },
+      "newsletter": {
+        "label": "Gå med i vårt nyhetsbrev för mer AI-innehåll",
+        "placeholder": "Ange din e-postadress",
+        "gdpr": "Vi sparar din e-post i 6 månader enligt GDPR-regler. Du kan avregistrera dig när som helst.",
+        "subscribe": "Prenumerera",
+        "subscribing": "Skickar...",
+        "success": "✓ Tack för din prenumeration på vårt nyhetsbrev!",
+        "error": "Det uppstod ett fel när e-postadressen skulle sparas. Försök igen."
+      },
+      "retake": "Gör Quiz Igen",
+      "retakeButton": "Gör Om Quiz"
+    }
+  }
+}

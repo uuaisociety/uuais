@@ -1,9 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import '@/i18n/client';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
@@ -89,6 +91,7 @@ const quizQuestions = [
 ];
 
 export default function QuizPage() {
+  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState<'start' | 'quiz' | 'results'>('start');
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
@@ -165,13 +168,13 @@ export default function QuizPage() {
         <Card className="w-full max-w-2xl bg-gray-900 border-gray-700">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold text-white mb-4">
-              AI Knowledge Quiz
+              {t('quiz.title')}
             </CardTitle>
             <p className="text-gray-300 text-lg">
-              Test your understanding of AI concepts with our interactive quiz!
+              {t('quiz.description')}
             </p>
             <p className="text-gray-400 mt-2">
-              7 questions • Multiple choice • Get your results instantly
+              {t('quiz.info')}
             </p>
           </CardHeader>
           <CardContent className="text-center">
@@ -180,7 +183,7 @@ export default function QuizPage() {
               className="bg-[#c8102e] hover:bg-[#a00d26] text-white px-8 py-3 text-lg"
               size="lg"
             >
-              Begin Quiz
+              {t('quiz.startButton')}
             </Button>
           </CardContent>
         </Card>
@@ -198,7 +201,7 @@ export default function QuizPage() {
           <CardHeader>
             <div className="flex justify-between items-center mb-4">
               <span className="text-gray-400">
-                Question {currentQuestion + 1} of {quizQuestions.length}
+                {t('quiz.progress', { current: currentQuestion + 1, total: quizQuestions.length })}
               </span>
               <div className="w-full max-w-xs bg-gray-700 rounded-full h-2 ml-4">
                 <div
@@ -241,14 +244,16 @@ export default function QuizPage() {
                 variant="outline"
                 className="border-gray-600 text-gray-300 hover:bg-gray-700"
               >
-                Previous
+                {t('quiz.navigation.previous')}
               </Button>
               <Button
                 onClick={handleNextQuestion}
                 disabled={selectedAnswer === undefined}
                 className="bg-[#c8102e] hover:bg-[#a00d26] text-white"
               >
-                {currentQuestion === quizQuestions.length - 1 ? 'Finish Quiz' : 'Next'}
+                {currentQuestion === quizQuestions.length - 1 
+                  ? t('quiz.navigation.finish') 
+                  : t('quiz.navigation.next')}
               </Button>
             </div>
           </CardContent>
@@ -266,19 +271,19 @@ export default function QuizPage() {
         <Card className="w-full max-w-2xl bg-gray-900 border-gray-700">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold text-white mb-4">
-              Quiz Complete!
+              {t('quiz.results.title')}
             </CardTitle>
             <div className="text-6xl font-bold text-[#c8102e] mb-2">
               {score}/{quizQuestions.length}
             </div>
             <p className="text-xl text-gray-300 mb-4">
-              You scored {percentage}%
+              {t('quiz.results.score', { percentage })}
             </p>
             <p className="text-gray-400">
-              {percentage >= 80 ? 'Excellent work!' : 
-               percentage >= 60 ? 'Good job!' : 
-               percentage >= 40 ? 'Not bad, keep learning!' : 
-               'Keep studying AI concepts!'}
+              {percentage >= 80 ? t('quiz.results.feedback.excellent') : 
+               percentage >= 60 ? t('quiz.results.feedback.good') : 
+               percentage >= 40 ? t('quiz.results.feedback.fair') : 
+               t('quiz.results.feedback.poor')}
             </p>
           </CardHeader>
           <CardContent>
@@ -286,20 +291,19 @@ export default function QuizPage() {
               <form onSubmit={handleEmailSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                    Join our newsletter for more AI content
+                    {t('quiz.results.newsletter.label')}
                   </label>
                   <Input
                     type="email"
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
+                    placeholder={t('quiz.results.newsletter.placeholder')}
                     required
                     className="bg-gray-800 border-gray-600 text-white placeholder-gray-400"
                   />
                   <p className="text-xs text-gray-500 mt-2">
-                    We will keep your email for 6 months according to GDPR regulations. 
-                    You can unsubscribe at any time.
+                    {t('quiz.results.newsletter.gdpr')}
                   </p>
                 </div>
                 <div className="flex space-x-3">
@@ -308,7 +312,7 @@ export default function QuizPage() {
                     disabled={isSubmitting}
                     className="bg-[#c8102e] hover:bg-[#a00d26] text-white flex-1"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Subscribe'}
+                    {isSubmitting ? t('quiz.results.newsletter.subscribing') : t('quiz.results.newsletter.subscribe')}
                   </Button>
                   <Button
                     type="button"
@@ -316,7 +320,7 @@ export default function QuizPage() {
                     variant="outline"
                     className="border-gray-600 text-gray-300 hover:bg-gray-700"
                   >
-                    Retake Quiz
+                    {t('quiz.results.retakeButton')}
                   </Button>
                 </div>
               </form>
