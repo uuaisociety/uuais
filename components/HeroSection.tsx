@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 
 const HeroSection = () => {
+
   return (
     <section className="relative min-h-[80vh] flex items-center justify-center">
       {/* Background Image */}
@@ -25,7 +28,6 @@ const HeroSection = () => {
         <p className="text-lg sm:text-xl text-white/90 mb-6 max-w-2xl mx-auto">
           We are a participatory society for everyone into AI at Uppsala University
         </p>
-
       </div>
     </section>
   );

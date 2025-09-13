@@ -166,7 +166,7 @@ const ApplicationForm = ({ event, onClose }: { event: Event; onClose: () => void
         />
       </div>
       <div>
-        <label htmlFor="relevantExperience" className="block text-white mb-1 text-sm">Relevant Experience*</label>
+        <label htmlFor="relevantExperience" className="block text-white mb-1 text-sm">Relevant Experience *</label>
         <textarea
           id="relevantExperience"
           name="relevantExperience"
@@ -261,7 +261,7 @@ const EventsSection = () => {
   };
 
   return (
-    <section id="events" className="py-16 bg-[#1a1a1a]/50">
+    <section id="events" className="py-16 bg-[#1a1a1a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-2xl font-bold text-white mb-3">Events</h2>

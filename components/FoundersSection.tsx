@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 
 const founders = [
@@ -37,7 +39,7 @@ const FoundersSection = () => {
             <a href="mailto:info@uuais.com" className="text-[#c8102e] hover:underline">
               info@uuais.com
             </a>
-            {' '}containing your name, field of study, <br></br> and a short description of how your interests align with the society.
+            {' '}containing your name, field of study, and a short description of how your interests align with the society.
           </p>
         </div>
 
