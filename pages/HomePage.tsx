@@ -51,7 +51,7 @@ export const HomePage: React.FC = () => {
   // ];
 
   return (
-    <div className="relative min-h-screen bg-white dark:bg-gray-950 transition-colors duration-300">
+    <div className="relative min-h-screen bg-white dark:bg-gray-950 pt-16 transition-colors duration-300">
       {/* Floating Logo Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
         {[...Array(15)].map((_, i) => (
