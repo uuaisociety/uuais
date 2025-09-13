@@ -8,6 +8,7 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '../utils/seo';
 import { format } from 'date-fns';
+import Image from 'next/image';
 
 export const BlogPage: React.FC = () => {
   const { state } = useApp();
@@ -75,7 +76,7 @@ export const BlogPage: React.FC = () => {
                 <Card className="overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <div className="md:flex">
                     <div className="md:w-1/2">
-                      <img
+                      <Image
                         src={featuredPost.image}
                         alt={featuredPost.title}
                         className="w-full h-64 md:h-full object-cover"
@@ -127,7 +128,7 @@ export const BlogPage: React.FC = () => {
                   {otherPosts.map((post) => (
                     <Card key={post.id} className="h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                       <div className="aspect-video relative overflow-hidden rounded-t-lg">
-                        <img
+                        <Image
                           src={post.image}
                           alt={post.title}
                           className="w-full h-full object-cover"

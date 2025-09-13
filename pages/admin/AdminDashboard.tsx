@@ -15,6 +15,8 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
+import Image from 'next/image';
+import { BlogPost } from '@/types';
 
 export const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
@@ -69,7 +71,7 @@ export const AdminDashboard: React.FC = () => {
     }
   };
 
-  const toggleBlogPostVisibility = (post: any) => {
+  const toggleBlogPostVisibility = (post: BlogPost) => {
     dispatch({
       type: 'UPDATE_BLOG_POST',
       payload: { ...post, published: !post.published }
@@ -148,7 +150,7 @@ export const AdminDashboard: React.FC = () => {
           <Card key={member.id}>
             <CardContent className="p-6">
               <div className="flex items-start space-x-4">
-                <img
+                <Image
                   src={member.image}
                   alt={member.name}
                   className="w-16 h-16 rounded-full object-cover"
@@ -339,15 +341,15 @@ export const AdminDashboard: React.FC = () => {
         <div className="mb-8">
           <div className="border-b border-gray-200">
             <nav className="-mb-px flex space-x-8">
-              {[
+              {([
                 { key: 'events', label: 'Events', icon: Calendar },
                 { key: 'team', label: 'Team', icon: Users },
                 { key: 'blog', label: 'Blog', icon: FileText },
                 { key: 'analytics', label: 'Analytics', icon: TrendingUp }
-              ].map(({ key, label, icon: Icon }) => (
+              ] as const).map(({ key, label, icon: Icon }) => (
                 <button
                   key={key}
-                  onClick={() => setActiveTab(key as any)}
+                  onClick={() => setActiveTab(key)}
                   className={`flex items-center py-2 px-1 border-b-2 font-medium text-sm ${
                     activeTab === key
                       ? 'border-red-500 text-red-600'

@@ -9,6 +9,7 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '../utils/seo';
 import { format } from 'date-fns';
+import Image from 'next/image';
 
 export const EventsPage: React.FC = () => {
   const { state } = useApp();
@@ -129,7 +130,7 @@ export const EventsPage: React.FC = () => {
             {filteredEvents.map((event) => (
               <Card key={event.id} className="h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <div className="aspect-video relative overflow-hidden rounded-t-lg">
-                  <img
+                  <Image
                     src={event.image}
                     alt={event.title}
                     className="w-full h-full object-cover"

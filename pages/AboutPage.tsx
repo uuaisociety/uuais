@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '../utils/seo';
+import Image from 'next/image';
 
 export const AboutPage: React.FC = () => {
   const { state } = useApp();
@@ -123,9 +124,11 @@ export const AboutPage: React.FC = () => {
               <Card key={member.id} className="text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader>
                   <div className="mx-auto mb-4">
-                    <img
+                    <Image
                       src={member.image}
                       alt={member.name}
+                      // width={100}
+                      // height={100}
                       className="w-24 h-24 rounded-full object-cover mx-auto border-4 border-red-100 dark:border-red-800"
                     />
                   </div>
