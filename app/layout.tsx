@@ -1,7 +1,11 @@
+'use client'
+
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import { Providers } from './providers'
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { Providers } from './providers';
+import { AppProvider } from '@/contexts/AppContext';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,12 +21,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans bg-[#1a1a1a] text-white min-h-screen`}>
         <Providers>
-          <div className="bg-white dark:bg-[#1a1a1a] text-black dark:text-white">
-            <Navbar />
-            <main className="pt-16">
-              {children}
-            </main>
-          </div>
+          <AppProvider>
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <main className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </AppProvider>
         </Providers>
       </body>
     </html>

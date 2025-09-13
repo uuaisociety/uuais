@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     url: 'https://uuais.com/',
     siteName: 'UU AI Society',
     title: 'UU AI Society',
-    description: 'Uppsala University AI Society - Connecting students passionate about Artificial Intelligence',
+    description: 'UU AI Society - Connecting students passionate about Artificial Intelligence',
     images: [
       {
         url: '/images/campus.png',
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'UU AI Society',
-    description: 'Uppsala University AI Society - Connecting students passionate about Artificial Intelligence',
+    description: 'UU AI Society - Connecting students passionate about Artificial Intelligence',
     images: ['/images/campus.png'],
     creator: '@uuais',
   },
