@@ -7,7 +7,17 @@ export const updatePageMeta = (title: string, description?: string) => {
   }
 };
 
-export const generateStructuredData = (type: 'Organization' | 'Event', data: any) => {
+interface EventData {
+  title: string;
+  description: string;
+  date: string;
+  location: string;
+}
+
+export const generateStructuredData = (
+  type: 'Organization' | 'Event',
+  data?: EventData
+) => {
   const baseData = {
     '@context': 'https://schema.org',
     '@type': type,
@@ -27,6 +37,9 @@ export const generateStructuredData = (type: 'Organization' | 'Event', data: any
   }
 
   if (type === 'Event') {
+    if (!data) {
+      throw new Error('Event data is required when type is "Event"');
+    }
     return {
       ...baseData,
       name: data.title,

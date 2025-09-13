@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "test": "jest --silent",
     "test:watch": "jest --watch",
     "test:coverage": "jest --config jest.config.ts --coverage"
