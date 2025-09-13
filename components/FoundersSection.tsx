@@ -1,8 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useTranslation } from 'react-i18next';
-import '../i18n/client';
 
 const founders = [
   {
@@ -31,19 +29,17 @@ const founders = [
 ];
 
 const FoundersSection = () => {
-  const { t } = useTranslation();
-
   return (
     <section id="application" className="py-16 bg-[#1a1a1a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-2xl font-bold text-white mb-3">{t('founders.title')}</h2>
+          <h2 className="text-2xl font-bold text-white mb-3">SEEKING FOUNDING MEMBERS</h2>
           <p className="text-base text-white/80 text-center">
             Email applications to{' '}
             <a href="mailto:info@uuais.com" className="text-[#c8102e] hover:underline">
               info@uuais.com
             </a>
-            {' '}{t('founders.description')}
+            {' '}containing your name, field of study, and a short description of how your interests align with the society.
           </p>
         </div>
 
@@ -69,7 +65,7 @@ const FoundersSection = () => {
                   rel="noopener noreferrer"
                   className="text-sm text-white hover:text-[#c8102e] transition-colors"
                 >
-                  {t('founders.social.linkedin')}
+                  LinkedIn
                 </a>
                 <a
                   href={founder.github}
@@ -77,7 +73,7 @@ const FoundersSection = () => {
                   rel="noopener noreferrer"
                   className="text-sm text-white hover:text-[#c8102e] transition-colors"
                 >
-                  {t('founders.social.github')}
+                  GitHub
                 </a>
               </div>
             </div>

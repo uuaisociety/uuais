@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useTranslation } from 'react-i18next';
-import '../i18n/client';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
 
@@ -85,7 +83,6 @@ const EventModal = ({ isOpen, onClose, children, showApplyButton, onApply }: {
 };
 
 const ApplicationForm = ({ event, onClose }: { event: Event; onClose: () => void }) => {
-  const { t } = useTranslation();
   const [formData, setFormData] = useState<ApplicationForm>(initialFormState);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -121,7 +118,7 @@ const ApplicationForm = ({ event, onClose }: { event: Event; onClose: () => void
   return (
     <form onSubmit={handleSubmit} className="space-y-3">
       <div>
-        <label htmlFor="name" className="block text-white mb-1 text-sm">{t('application.form.name')} *</label>
+        <label htmlFor="name" className="block text-white mb-1 text-sm">Name *</label>
         <input
           type="text"
           id="name"
@@ -133,7 +130,7 @@ const ApplicationForm = ({ event, onClose }: { event: Event; onClose: () => void
         />
       </div>
       <div>
-        <label htmlFor="email" className="block text-white mb-1 text-sm">{t('application.form.email')} *</label>
+        <label htmlFor="email" className="block text-white mb-1 text-sm">Email *</label>
         <input
           type="email"
           id="email"
@@ -145,7 +142,7 @@ const ApplicationForm = ({ event, onClose }: { event: Event; onClose: () => void
         />
       </div>
       <div>
-        <label htmlFor="yearOfStudy" className="block text-white mb-1 text-sm">{t('application.form.yearOfStudy')} *</label>
+        <label htmlFor="yearOfStudy" className="block text-white mb-1 text-sm">Year of Study *</label>
         <input
           type="text"
           id="yearOfStudy"
@@ -157,7 +154,7 @@ const ApplicationForm = ({ event, onClose }: { event: Event; onClose: () => void
         />
       </div>
       <div>
-        <label htmlFor="program" className="block text-white mb-1 text-sm">{t('application.form.program')} *</label>
+        <label htmlFor="program" className="block text-white mb-1 text-sm">Program *</label>
         <input
           type="text"
           id="program"
@@ -169,7 +166,7 @@ const ApplicationForm = ({ event, onClose }: { event: Event; onClose: () => void
         />
       </div>
       <div>
-        <label htmlFor="relevantExperience" className="block text-white mb-1 text-sm">{t('application.form.relevantExperience')} *</label>
+        <label htmlFor="relevantExperience" className="block text-white mb-1 text-sm">Relevant Experience *</label>
         <textarea
           id="relevantExperience"
           name="relevantExperience"
@@ -181,7 +178,7 @@ const ApplicationForm = ({ event, onClose }: { event: Event; onClose: () => void
         />
       </div>
       <div>
-        <label htmlFor="desiredTeammates" className="block text-white mb-1 text-sm">{t('application.form.desiredTeammates')}</label>
+        <label htmlFor="desiredTeammates" className="block text-white mb-1 text-sm">Desired Teammates (if any)</label>
         <textarea
           id="desiredTeammates"
           name="desiredTeammates"
@@ -192,7 +189,7 @@ const ApplicationForm = ({ event, onClose }: { event: Event; onClose: () => void
         />
       </div>
       <div>
-        <label htmlFor="linkedin" className="block text-white mb-1 text-sm">{t('application.form.linkedin')}</label>
+        <label htmlFor="linkedin" className="block text-white mb-1 text-sm">LinkedIn</label>
         <input
           type="url"
           id="linkedin"
@@ -203,7 +200,7 @@ const ApplicationForm = ({ event, onClose }: { event: Event; onClose: () => void
         />
       </div>
       <div>
-        <label htmlFor="github" className="block text-white mb-1 text-sm">{t('application.form.github')}</label>
+        <label htmlFor="github" className="block text-white mb-1 text-sm">GitHub</label>
         <input
           type="url"
           id="github"
@@ -218,20 +215,19 @@ const ApplicationForm = ({ event, onClose }: { event: Event; onClose: () => void
         disabled={isSubmitting}
         className="w-full px-4 py-2 mt-2 bg-[#c8102e] text-white rounded-md hover:bg-[#a00d24] transition-colors disabled:opacity-50 text-sm"
       >
-        {isSubmitting ? t('application.submitting') : t('application.submit')}
+        {isSubmitting ? 'Submitting...' : 'Submit Application'}
       </button>
       {submitStatus === 'success' && (
-        <p className="text-green-500 text-center text-sm">{t('application.success')}</p>
+        <p className="text-green-500 text-center text-sm">Thank you for your application.</p>
       )}
       {submitStatus === 'error' && (
-        <p className="text-red-500 text-center text-sm">{t('application.error')}</p>
+        <p className="text-red-500 text-center text-sm">Error submitting application. Please try again.</p>
       )}
     </form>
   );
 };
 
 const EventsSection = () => {
-  const { t } = useTranslation();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
@@ -268,13 +264,13 @@ const EventsSection = () => {
     <section id="events" className="py-16 bg-[#1a1a1a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-2xl font-bold text-white mb-3">{t('events.title')}</h2>
+          <h2 className="text-2xl font-bold text-white mb-3">Events</h2>
         </div>
 
         {loading ? (
-          <div className="text-center text-white/70">{t('events.loading')}</div>
+          <div className="text-center text-white/70">Loading events...</div>
         ) : events.length === 0 ? (
-          <div className="text-center text-white/70">{t('events.noEvents')}</div>
+          <div className="text-center text-white/70">No events at this time.</div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {events.map((event) => (

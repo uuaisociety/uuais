@@ -3,14 +3,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { LanguageToggle } from '@/components/LanguageToggle'
-import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import '../i18n';
 
 const Navbar = () => {
-  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (e: React.MouseEvent, id: string) => {
@@ -62,13 +58,13 @@ const Navbar = () => {
                 onClick={(e) => scrollToSection(e, 'events')}
                 className="text-black dark:text-white hover:text-[#c8102e] px-3 py-2 rounded-md text-sm font-medium"
               >
-                {t('nav.events')}
+                Events
               </a>
               <Link 
                 href="/application" 
                 className="text-black dark:text-white hover:text-[#c8102e] px-3 py-2 rounded-md text-sm font-medium"
               >
-                {t('nav.application')}
+                Application
               </Link>
               <Link href="/quiz" className="text-white hover:text-[#c8102e] px-3 py-2 rounded-md text-sm font-medium">
                 Quiz
@@ -78,7 +74,7 @@ const Navbar = () => {
                 onClick={(e) => scrollToSection(e, 'about')}
                 className="text-black dark:text-white hover:text-[#c8102e] px-3 py-2 rounded-md text-sm font-medium"
               >
-                {t('nav.about')}
+                About
               </a>
               <a
                 href="https://www.linkedin.com/company/uu-ai-society"
@@ -89,7 +85,6 @@ const Navbar = () => {
                 LinkedIn
               </a>
               <ThemeToggle />
-              <LanguageToggle />
             </div>
           </div>
         </div>
@@ -102,21 +97,21 @@ const Navbar = () => {
               onClick={(e) => scrollToSection(e, 'events')}
               className="text-black dark:text-white hover:text-[#c8102e] block px-3 py-2 rounded-md text-base font-medium"
             >
-              {t('nav.events')}
+              Events
             </a>
             <Link 
               href="/application"
               onClick={() => setIsMenuOpen(false)}
               className="text-black dark:text-white hover:text-[#c8102e] block px-3 py-2 rounded-md text-base font-medium"
             >
-              {t('nav.application')}
+              Application
             </Link>
             <a
               href="#about"
               onClick={(e) => scrollToSection(e, 'about')}
               className="text-black dark:text-white hover:text-[#c8102e] block px-3 py-2 rounded-md text-base font-medium"
             >
-              {t('nav.about')}
+              About
             </a>
             <a
               href="https://www.linkedin.com/company/uu-ai-society"
@@ -128,7 +123,6 @@ const Navbar = () => {
             </a>
             <div className="flex items-center space-x-2 px-3 py-2">
               <ThemeToggle />
-              <LanguageToggle />
             </div>
           </div>
         </div>
