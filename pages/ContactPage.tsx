@@ -79,14 +79,14 @@ export const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Contact Us
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Have questions about UU AI Society? Want to collaborate or partner with us? 
             We&apos;d love to hear from you!
           </p>
@@ -97,29 +97,29 @@ export const ContactPage: React.FC = () => {
           <div className="lg:col-span-1">
             <div className="space-y-6">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                   Get in Touch
                 </h2>
-                <p className="text-gray-600 mb-8">
+                <p className="text-gray-600 dark:text-gray-300 mb-8">
                   Whether you&apos;re a student interested in AI, a company looking to collaborate, 
                   or just curious about what we do, we&apos;re here to help.
                 </p>
               </div>
 
               {contactInfo.map((info, index) => (
-                <Card key={index} className="p-4">
+                <Card key={index} className="p-4 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300">
                   <div className="flex items-start space-x-4">
-                    <div className="p-3 bg-red-100 rounded-lg">
-                      <info.icon className="h-6 w-6 text-red-600" />
+                    <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-lg">
+                      <info.icon className="h-6 w-6 text-red-600 dark:text-red-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-1">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                         {info.title}
                       </h3>
-                      <p className="text-gray-900 font-medium mb-1">
+                      <p className="text-gray-900 dark:text-gray-100 font-medium mb-1">
                         {info.details}
                       </p>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
                         {info.description}
                       </p>
                     </div>
@@ -131,20 +131,20 @@ export const ContactPage: React.FC = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card>
+            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   Send us a Message
                 </h2>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-300">
                   Fill out the form below and we&apos;ll get back to you as soon as possible.
                 </p>
               </CardHeader>
               <CardContent>
                 {isSubmitted && (
-                  <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center space-x-3">
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                    <p className="text-green-800">
+                  <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded-lg flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
+                    <p className="text-green-800 dark:text-green-300">
                       Thank you for your message! We&apos;ll get back to you within 24 hours.
                     </p>
                   </div>

@@ -2,7 +2,7 @@
 
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
+import Navbar from "@/components/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Providers } from './providers';
 import { AppProvider } from '@/contexts/AppContext';
@@ -19,11 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans bg-[#1a1a1a] text-white min-h-screen`}>
+      <body className={`${inter.variable} font-sans bg-white dark:bg-gray-950 text-gray-900 dark:text-white min-h-screen transition-colors duration-300`}>
         <Providers>
           <AppProvider>
             <div className="min-h-screen flex flex-col">
-              <Header />
+              <Navbar />
               <main className="flex-grow">
                 {children}
               </main>

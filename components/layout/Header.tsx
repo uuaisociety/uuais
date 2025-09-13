@@ -4,11 +4,14 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
+import { useTheme } from '@/providers/ThemeProvider';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { theme, toggleTheme } = useTheme();
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -24,7 +27,7 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+    <header className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -39,7 +42,7 @@ export const Header: React.FC = () => {
                     priority
                 />
             </div>
-            <span className="ml-2 font-bold text-xl text-gray-900">UU AI Society</span>
+            <span className="ml-2 font-bold text-xl text-gray-900 dark:text-white">UU AI Society</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -50,8 +53,8 @@ export const Header: React.FC = () => {
                 href={item.href}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   isActive(item.href)
-                    ? 'text-red-600 bg-red-50'
-                    : 'text-gray-700 hover:text-red-600 hover:bg-red-50'
+                    ? 'text-red-600 bg-red-50 dark:text-red-400 dark:bg-red-900/20'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20'
                 }`}
               >
                 {item.name}
@@ -62,7 +65,7 @@ export const Header: React.FC = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:text-red-600 hover:bg-red-50 transition-colors"
+            className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
             aria-expanded="false"
           >
             <span className="sr-only">Open main menu</span>
@@ -72,11 +75,23 @@ export const Header: React.FC = () => {
               <Menu className="h-6 w-6" />
             )}
           </button>
+          <Button
+          onClick={toggleTheme}
+          variant="outline"
+          size="icon"
+          className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 hover:bg-white dark:hover:bg-gray-800 transition-all duration-300"
+        >
+          {theme === 'dark' ? (
+            <Sun className="h-4 w-4 text-yellow-500" />
+          ) : (
+            <Moon className="h-4 w-4 text-gray-700" />
+          )}
+        </Button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-100">
+          <div className="md:hidden py-4 border-t border-gray-100 dark:border-gray-800">
             <nav className="flex flex-col space-y-2">
               {navigation.map((item) => (
                 <Link
@@ -85,8 +100,8 @@ export const Header: React.FC = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className={`px-3 py-2 rounded-md text-base font-medium transition-colors ${
                     isActive(item.href)
-                      ? 'text-red-600 bg-red-50'
-                      : 'text-gray-700 hover:text-red-600 hover:bg-red-50'
+                      ? 'text-red-600 bg-red-50 dark:text-red-400 dark:bg-red-900/20'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20'
                   }`}
                 >
                   {item.name}

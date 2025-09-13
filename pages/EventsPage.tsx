@@ -49,27 +49,27 @@ export const EventsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Events
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Join our community events and expand your knowledge in artificial intelligence
           </p>
         </div>
 
         {/* Tabs */}
         <div className="flex justify-center mb-8">
-          <div className="bg-white p-1 rounded-lg shadow-sm border">
+          <div className="bg-white dark:bg-gray-800 p-1 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
             <button
               onClick={() => setActiveTab('upcoming')}
               className={`px-6 py-2 rounded-md font-medium transition-colors ${
                 activeTab === 'upcoming'
                   ? 'bg-red-600 text-white'
-                  : 'text-gray-600 hover:text-gray-900'
+                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
               Upcoming Events
@@ -79,7 +79,7 @@ export const EventsPage: React.FC = () => {
               className={`px-6 py-2 rounded-md font-medium transition-colors ${
                 activeTab === 'past'
                   ? 'bg-red-600 text-white'
-                  : 'text-gray-600 hover:text-gray-900'
+                  : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
               Past Events
@@ -88,7 +88,7 @@ export const EventsPage: React.FC = () => {
         </div>
 
         {/* Filters */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border mb-8">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-8">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <Input
@@ -113,11 +113,11 @@ export const EventsPage: React.FC = () => {
         {/* Events Grid */}
         {filteredEvents.length === 0 ? (
           <div className="text-center py-12">
-            <Calendar className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">
+            <Calendar className="h-16 w-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
               No events found
             </h3>
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               {activeTab === 'upcoming' 
                 ? 'No upcoming events match your search criteria.'
                 : 'No past events match your search criteria.'
@@ -127,7 +127,7 @@ export const EventsPage: React.FC = () => {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredEvents.map((event) => (
-              <Card key={event.id} hover className="h-full">
+              <Card key={event.id} className="h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <div className="aspect-video relative overflow-hidden rounded-t-lg">
                   <img
                     src={event.image}
@@ -149,33 +149,33 @@ export const EventsPage: React.FC = () => {
                 </div>
                 
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
                     {event.title}
                   </h3>
                   
-                  <p className="text-gray-600 mb-4 line-clamp-3">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
                     {event.description}
                   </p>
                   
                   <div className="space-y-2 mb-6">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Calendar className="h-4 w-4 mr-2 text-red-600" />
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                      <Calendar className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
                       <span>{format(new Date(event.date), 'MMM d, yyyy')}</span>
                     </div>
                     
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Clock className="h-4 w-4 mr-2 text-red-600" />
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                      <Clock className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
                       <span>{event.time}</span>
                     </div>
                     
-                    <div className="flex items-center text-sm text-gray-600">
-                      <MapPin className="h-4 w-4 mr-2 text-red-600" />
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                      <MapPin className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
                       <span>{event.location}</span>
                     </div>
                     
                     {event.maxCapacity && (
-                      <div className="flex items-center text-sm text-gray-600">
-                        <Users className="h-4 w-4 mr-2 text-red-600" />
+                      <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                        <Users className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
                         <span>
                           {event.currentRegistrations || 0} / {event.maxCapacity} registered
                         </span>

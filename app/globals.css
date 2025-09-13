@@ -168,3 +168,105 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #444;
 }
+
+/* Floating animation for background logos */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+.animate-float {
+  animation: float 20s ease-in-out infinite;
+}
+
+/* Hover Glow Effect for CTA Button */
+@keyframes glowing {
+  0% { 
+    background-position: 0 0; 
+  }
+  50% { 
+    background-position: 400% 0; 
+  }
+  100% { 
+    background-position: 0 0; 
+  }
+}
+
+.glow-on-hover {
+  border: none;
+  outline: none;
+  color: #000;
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+}
+.dark .glow-on-hover{
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  color: #ffffff;
+  box-shadow: 0 8px 25px rgba(185, 28, 28, 0.4);
+}   
+/* .dark .glow-on-hover{
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  color: #ffffff;
+  box-shadow: 0 8px 25px rgba(185, 28, 28, 0.4);
+}    */
+
+.glow-on-hover:before {
+  content: '';
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+
+.glow-on-hover:active {
+  color: #000;
+}
+
+.glow-on-hover:active{
+  color: #000;
+}
+
+.glow-on-hover:hover:before {
+  opacity: 0.85;
+}
+
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #FAF9F6, #eebfbf);
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+.dark .glow-on-hover:after {
+  background: linear-gradient(135deg, #121212, #312c2c);
+}
+
