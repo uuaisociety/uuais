@@ -1,5 +1,8 @@
 'use client'
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
+
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,8 +13,8 @@ import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Select } from '@/components/ui/Select';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
-import { updatePageMeta } from '../utils/seo';
-import type { JoinFormData } from '../types';
+import { updatePageMeta } from '@/utils/seo';
+import type { JoinFormData } from '@/types';
 
 const joinSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
@@ -28,7 +31,7 @@ const joinSchema = z.object({
   linkedin: z.string().url('Please enter a valid LinkedIn URL').optional().or(z.literal(''))
 });
 
-export const JoinPage: React.FC = () => {
+const JoinPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
 
@@ -346,3 +349,5 @@ export const JoinPage: React.FC = () => {
     </div>
   );
 };
+
+export default JoinPage;

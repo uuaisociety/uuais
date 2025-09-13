@@ -1,4 +1,4 @@
-import { JoinPage } from '@/pages/JoinPage';
+import JoinPage from '@/components/pages/JoinPage';
 
 export default function Page() {
   return <JoinPage />;

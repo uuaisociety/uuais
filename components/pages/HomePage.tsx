@@ -1,4 +1,8 @@
 'use client'
+
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
+
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,10 +10,10 @@ import { ArrowRight, Calendar, Users, Award, Brain, Zap, Globe } from 'lucide-re
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
-import { updatePageMeta } from '../utils/seo';
+import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
 
-export const HomePage: React.FC = () => {
+const HomePage: React.FC = () => {
   const { state } = useApp();
 
   useEffect(() => {
@@ -256,3 +260,5 @@ export const HomePage: React.FC = () => {
     </div>
   );
 };
+
+export default HomePage;

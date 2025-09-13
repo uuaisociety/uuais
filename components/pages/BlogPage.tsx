@@ -1,16 +1,19 @@
 'use client'
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
+
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Calendar, User, Search } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Card, CardContent } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
-import { updatePageMeta } from '../utils/seo';
+import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
 import Image from 'next/image';
 
-export const BlogPage: React.FC = () => {
+const BlogPage: React.FC = () => {
   const { state } = useApp();
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -207,3 +210,5 @@ export const BlogPage: React.FC = () => {
     </div>
   );
 };
+
+export default BlogPage;

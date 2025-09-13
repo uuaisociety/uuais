@@ -1,5 +1,8 @@
 'use client'
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
+
 import React, { useEffect, useState } from 'react';
 import { Calendar, Clock, MapPin, Users } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -7,11 +10,11 @@ import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Card, CardContent } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
-import { updatePageMeta } from '../utils/seo';
+import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
 import Image from 'next/image';
 
-export const EventsPage: React.FC = () => {
+const EventsPage: React.FC = () => {
   const { state } = useApp();
   const [activeTab, setActiveTab] = useState<'upcoming' | 'past'>('upcoming');
   const [searchTerm, setSearchTerm] = useState('');
@@ -202,3 +205,5 @@ export const EventsPage: React.FC = () => {
     </div>
   );
 };
+
+export default EventsPage;

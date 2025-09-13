@@ -1,5 +1,8 @@
 'use client'
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
+
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -19,7 +22,7 @@ const contactSchema = z.object({
   message: z.string().min(20, 'Message must be at least 20 characters')
 });
 
-export const ContactPage: React.FC = () => {
+const ContactPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
@@ -247,3 +250,5 @@ export const ContactPage: React.FC = () => {
     </div>
   );
 };
+
+export default ContactPage;

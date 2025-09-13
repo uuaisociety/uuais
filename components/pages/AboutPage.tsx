@@ -1,14 +1,17 @@
 'use client'
 
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
+
 import React, { useEffect } from 'react';
-import { Mail, Linkedin, Twitter, Target, Eye, Award, Users } from 'lucide-react';
+import { Mail, Twitter, Target, Eye, Award, Users } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
-import { updatePageMeta } from '../utils/seo';
+import { updatePageMeta } from '@/utils/seo';
 import Image from 'next/image';
 
-export const AboutPage: React.FC = () => {
+const AboutPage: React.FC = () => {
   const { state } = useApp();
 
   useEffect(() => {
@@ -159,7 +162,7 @@ export const AboutPage: React.FC = () => {
                         rel="noopener noreferrer"
                         className="p-2 text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       >
-                        <Linkedin className="h-4 w-4" />
+                        <Mail className="h-4 w-4" />
                       </a>
                     )}
                     {member.twitter && (
@@ -208,3 +211,5 @@ export const AboutPage: React.FC = () => {
     </div>
   );
 };
+
+export default AboutPage;

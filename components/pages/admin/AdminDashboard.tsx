@@ -1,3 +1,8 @@
+'use client'
+
+// Disable static generation for this page
+export const dynamic = 'force-dynamic';
+
 import React, { useEffect, useState } from 'react';
 import { 
   Calendar, 
@@ -18,7 +23,7 @@ import { format } from 'date-fns';
 import Image from 'next/image';
 import { BlogPost } from '@/types';
 
-export const AdminDashboard: React.FC = () => {
+const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
   const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'analytics'>('events');
 
@@ -375,3 +380,5 @@ export const AdminDashboard: React.FC = () => {
     </div>
   );
 };
+
+export default AdminDashboard;
