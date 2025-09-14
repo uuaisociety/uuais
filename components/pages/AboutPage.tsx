@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const AboutPage: React.FC = () => {
   const { state } = useApp();
@@ -194,13 +195,14 @@ const AboutPage: React.FC = () => {
             Be part of a community that&apos;s shaping the future of AI. Connect, learn, and grow with us.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
+            {/* <Button 
               size="lg"
               variant="secondary"
               className="bg-white text-red-600 hover:bg-gray-100 transform hover:scale-105 transition-all duration-300"
             >
               Become a Member
-            </Button>
+            </Button> */}
+            <Link href="/contact">
             <Button 
               size="lg"
               variant="outline"
@@ -208,6 +210,7 @@ const AboutPage: React.FC = () => {
             >
               Contact Us
             </Button>
+            </Link>
           </div>
         </section>
       </div>
