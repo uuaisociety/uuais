@@ -2,7 +2,7 @@
 
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Providers } from './providers';
 import { AppProvider } from '@/contexts/AppContext';
@@ -23,7 +23,7 @@ export default function RootLayout({
         <Providers>
           <AppProvider>
             <div className="min-h-screen flex flex-col">
-              <Navbar />
+              <Header />
               <main className="flex-grow">
                 {children}
               </main>
