@@ -13,10 +13,10 @@ export const Header: React.FC = () => {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
 
+  // { name: 'Join Us', href: '/join' },
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Events', href: '/events' },
-    { name: 'Join Us', href: '/join' },
     { name: 'Blog', href: '/blog' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }
