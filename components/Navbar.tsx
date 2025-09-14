@@ -19,13 +19,13 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
               <Image
-                src="/images/logo.png"
+                src="/images/logo-highdef.png"
                 alt="UU AI Society Logo"
-                width={40}
-                height={40}
-                className="h-8 w-auto"
+                width={150}
+                height={150}
+                className="h-11 w-auto pb-0.5"
               />
-              <span className="ml-2 text-white font-bold text-xl">UU AI Society</span>
+              <span className="text-white font-bold text-xl">UU AI Society</span>
             </Link>
           </div>
           
