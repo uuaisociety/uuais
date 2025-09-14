@@ -180,34 +180,32 @@ a:hover {
 
 /* Mail link specific styling */
 a[href^="mailto:"] {
-  color: #3b82f6;
-  text-decoration: none;
+  color: #1d4ed8;
+  font-weight: 500;
 }
 
 .dark a[href^="mailto:"] {
   color: #60a5fa;
+  font-weight: 500;
 }
 
 a[href^="mailto:"]:hover {
-  color: #1d4ed8;
-  text-decoration: underline;
-}
+  color: #1e40af;
 
-.dark a[href^="mailto:"]:hover {
-  color: #93c5fd;
 }
 
 button {
     border: none;
     outline: none;
-    color: #000;
+    color: #1f2937;
     cursor: pointer;
     position: relative;
     z-index: 0;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    font-weight: 500;
 }
 
 .dark button {
