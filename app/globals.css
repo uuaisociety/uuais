@@ -169,6 +169,64 @@
   background: #444;
 }
 
+/* Link styles */
+a {
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+  transform: translateY(-1px);
+}
+
+/* Mail link specific styling */
+a[href^="mailto:"] {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.dark a[href^="mailto:"] {
+  color: #60a5fa;
+}
+
+a[href^="mailto:"]:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.dark a[href^="mailto:"]:hover {
+  color: #93c5fd;
+}
+
+button {
+    border: none;
+    outline: none;
+    color: #000;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.dark button {
+    color: #ffffff;
+    background: linear-gradient(135deg, #374151, #4b5563);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    transform: scale(1.05);
+    transition: all 300ms ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dark button:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+
 /* Floating animation for background logos */
 @keyframes float {
   0%, 100% {
@@ -206,7 +264,6 @@
   border: none;
   outline: none;
   color: #000;
-  background: linear-gradient(135deg, #dc2626, #ef4444);
   cursor: pointer;
   position: relative;
   z-index: 0;
@@ -215,7 +272,6 @@
   box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
 }
 .dark .glow-on-hover{
-  background: linear-gradient(135deg, #b91c1c, #dc2626);
   color: #ffffff;
   box-shadow: 0 8px 25px rgba(185, 28, 28, 0.4);
 }   
@@ -260,13 +316,9 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #FAF9F6, #eebfbf);
+  background: inherit;
   left: 0;
   top: 0;
   border-radius: 10px;
-}
-
-.dark .glow-on-hover:after {
-  background: linear-gradient(135deg, #121212, #312c2c);
 }
 
