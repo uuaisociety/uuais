@@ -15,6 +15,7 @@
 /functions*
 /dataconnect*
 /dataconnect-generated/js*
+*.log
 
 # next.js
 /.next/
