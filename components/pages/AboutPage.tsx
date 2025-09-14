@@ -5,6 +5,7 @@ export const dynamic = 'force-dynamic';
 
 import React, { useEffect } from 'react';
 import { Mail, Twitter, Target, Eye } from 'lucide-react';
+import { Linkedin01Icon }  from 'hugeicons-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
@@ -132,8 +133,8 @@ const AboutPage: React.FC = () => {
                     <Image
                       src={member.image}
                       alt={member.name}
-                      // width={100}
-                      // height={100}
+                      width={100}
+                      height={100}
                       className="w-24 h-24 rounded-full object-cover mx-auto border-4 border-red-100 dark:border-red-800"
                     />
                   </div>
@@ -152,7 +153,7 @@ const AboutPage: React.FC = () => {
                     {member.email && (
                       <a
                         href={`mailto:${member.email}`}
-                        className="p-2 text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                        className="p-2 text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       >
                         <Mail className="h-4 w-4" />
                       </a>
@@ -164,17 +165,7 @@ const AboutPage: React.FC = () => {
                         rel="noopener noreferrer"
                         className="p-2 text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       >
-                        <Mail className="h-4 w-4" />
-                      </a>
-                    )}
-                    {member.twitter && (
-                      <a
-                        href={member.twitter}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 text-gray-400 dark:text-gray-500 hover:text-blue-400 dark:hover:text-blue-300 transition-colors"
-                      >
-                        <Twitter className="h-4 w-4" />
+                        <Linkedin01Icon className="h-4 w-4" />
                       </a>
                     )}
                   </div>

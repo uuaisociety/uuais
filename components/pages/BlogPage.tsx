@@ -82,6 +82,8 @@ const BlogPage: React.FC = () => {
                       <Image
                         src={featuredPost.image}
                         alt={featuredPost.title}
+                        width={100}
+                        height={100}
                         className="w-full h-64 md:h-full object-cover"
                       />
                     </div>
@@ -134,6 +136,8 @@ const BlogPage: React.FC = () => {
                         <Image
                           src={post.image}
                           alt={post.title}
+                          width={100}
+                          height={100}
                           className="w-full h-full object-cover"
                         />
                       </div>

@@ -41,7 +41,7 @@ const EventsPage: React.FC = () => {
       return matchesSearch && matchesCategory;
     })
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
+  
   const getCategoryColor = (category: string) => {
     const colors = {
       workshop: 'bg-blue-100 text-blue-800',
@@ -136,6 +136,8 @@ const EventsPage: React.FC = () => {
                   <Image
                     src={event.image}
                     alt={event.title}
+                    width={500}
+                    height={500}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-4 left-4">
