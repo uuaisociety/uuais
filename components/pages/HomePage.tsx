@@ -56,35 +56,35 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-white dark:bg-gray-950 pt-16 transition-colors duration-300">
-      {/* Floating Logo Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute opacity-5 dark:opacity-10 animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 10}s`,
-              animationDuration: `${15 + Math.random() * 10}s`
-            }}
-          >
-            <Image
-              src="/images/logo.png"
-              alt=""
-              width={48}
-              height={48}
-              className="w-12 h-12 md:w-16 md:h-16 opacity-30"
-            />
-          </div>
-        ))}
-      </div>
 
       <div className="relative z-10 space-y-16">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white py-20 overflow-hidden">
           <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
-          <div className="absolute inset-0">
+          {/* Floating Logo Background - Only in Hero Section */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {[...Array(8)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute animate-float"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 2}s`,
+                  animationDuration: `${15 + Math.random() * 10}s`
+                }}
+              >
+                <Image
+                  src="/images/logo.png"
+                  alt="UU AI Society Logo"
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 md:w-12 md:h-12 opacity-10 filter brightness-0 invert"
+                  priority={false}
+                  unoptimized
+                />
+              </div>
+            ))}
             <div className="absolute top-10 left-10 w-20 h-20 bg-white/5 rounded-full animate-pulse"></div>
             <div className="absolute top-32 right-20 w-16 h-16 bg-white/5 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
             <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-white/5 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
@@ -104,7 +104,7 @@ const HomePage: React.FC = () => {
                   <ArrowRight className="ml-2 mr-2 h-5 w-5" />
               </Button>
             </Link>
-            <Link href="/events">
+            <Link href="/contact">
               <Button 
                 size="lg"
                 variant="outline"
