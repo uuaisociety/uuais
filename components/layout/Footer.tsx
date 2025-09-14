@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Brain, Mail, MapPin, Phone, ArrowUp } from 'lucide-react';
+import Image from 'next/image';
+import { Mail, MessageSquareCode, ArrowUp } from 'lucide-react';
 import { Linkedin01Icon, InstagramIcon } from 'hugeicons-react';
 // import { SiInstagram } from '@icons-pack/react-simple-icons';
 import { Button } from '@/components/ui/Button';
@@ -37,10 +38,21 @@ export const Footer: React.FC = () => {
           {/* Brand and Description */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="p-2 bg-red-600 rounded-lg">
-                <Brain className="h-6 w-6 text-white" />
+              <div className="p-2 rounded-lg">
+                <div className="pl-2 pb-2 rounded-lg">
+                  <div className="flex items-center space-x-2">
+                    <Image
+                        src="/images/logo.png"
+                        alt="UU AI Society Logo"
+                        width={40}
+                        height={40}
+                        className="h-12 w-auto"
+                        priority
+                    />
+                    <span className="ml-2 font-bold text-xl text-gray-100 dark:text-white">UU AI Society</span>
+                  </div>
+                </div>
               </div>
-              <span className="text-xl font-bold">UU AI Society</span>
             </div>
             <p className="text-gray-300 text-sm">
               Connecting students passionate about Artificial Intelligence. Join us in exploring the future of technology through hands-on learning and innovation.
@@ -64,7 +76,7 @@ export const Footer: React.FC = () => {
               <li><Link href="/events" className="text-gray-300 hover:text-white transition-colors">Events</Link></li>
               <li><Link href="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="/blog" className="text-gray-300 hover:text-white transition-colors">Blog</Link></li>
-              <li><Link href="/join" className="text-gray-300 hover:text-white transition-colors">Join Us</Link></li>
+              {/* <li><Link href="/join" className="text-gray-300 hover:text-white transition-colors">Join Us</Link></li> */}
               <li><Link href="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
@@ -75,20 +87,20 @@ export const Footer: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300 text-sm">hello@aisociety.edu</span>
+                <span className="text-gray-300 text-sm"><a href="mailto:contact@uuais.com" className="text-blue-700">contact@uuais.com</a></span>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300 text-sm">+1 (555) 123-4567</span>
+                <MessageSquareCode className="h-4 w-4 text-gray-400" />
+                <span className="text-gray-300 text-sm"><a href="mailto:dev@uuais.com" className="text-blue-700">dev@uuais.com</a></span>
               </div>
-              <div className="flex items-start space-x-3">
+              {/* <div className="flex items-start space-x-3">
                 <MapPin className="h-4 w-4 text-gray-400 mt-0.5" />
                 <span className="text-gray-300 text-sm">
                   Computer Science Building<br />
                   University Campus<br />
                   City, State 12345
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -111,8 +123,9 @@ export const Footer: React.FC = () => {
                 type="submit"
                 variant="default"
                 size="sm"
+                className="cursor-pointer p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-color sw-full"
+                fullWidth
                 // loading={loading}
-                className="w-full"
               >
                 Subscribe
               </Button>
@@ -123,15 +136,15 @@ export const Footer: React.FC = () => {
         {/* Bottom bar */}
         <div className="py-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} UU AI Society. All rights reserved.
+            © {new Date().getFullYear()} UU AI Society (Org number: 802551-8930). All rights reserved.
           </p>
           <div className="flex items-center space-x-6">
             <Link href="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
+            {/* <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
               Terms of Service
-            </Link>
+            </Link> */}
             <Button
               onClick={scrollToTop}
               className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
