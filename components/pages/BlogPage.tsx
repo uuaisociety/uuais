@@ -183,7 +183,7 @@ const BlogPage: React.FC = () => {
         )}
 
         {/* CTA Section */}
-        <div className="mt-16 bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 rounded-2xl p-8 text-center text-white">
+        {/* <div className="mt-16 bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 rounded-2xl p-8 text-center text-white">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
             Want to Contribute?
           </h2>
@@ -205,7 +205,7 @@ const BlogPage: React.FC = () => {
               Join Our Community
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

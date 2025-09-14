@@ -4,7 +4,7 @@
 export const dynamic = 'force-dynamic';
 
 import React, { useEffect } from 'react';
-import { Mail, Twitter, Target, Eye, Award, Users } from 'lucide-react';
+import { Mail, Twitter, Target, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
@@ -18,23 +18,23 @@ const AboutPage: React.FC = () => {
     updatePageMeta('About Us', 'Learn about UU AI Society\'s mission, vision, and the amazing team behind our community');
   }, []);
 
-  const achievements = [
-    {
-      icon: Award,
-      title: 'Best Student Organization 2023',
-      description: 'Recognized for outstanding contribution to AI education'
-    },
-    {
-      icon: Users,
-      title: '500+ Members Strong',
-      description: 'Building the largest AI community on campus'
-    },
-    {
-      icon: Target,
-      title: '50+ Successful Events',
-      description: 'Workshops, seminars, and hackathons that matter'
-    }
-  ];
+  // const achievements = [
+  //   {
+  //     icon: Award,
+  //     title: 'Best Student Organization 2023',
+  //     description: 'Recognized for outstanding contribution to AI education'
+  //   },
+  //   {
+  //     icon: Users,
+  //     title: '500+ Members Strong',
+  //     description: 'Building the largest AI community on campus'
+  //   },
+  //   {
+  //     icon: Target,
+  //     title: '50+ Successful Events',
+  //     description: 'Workshops, seminars, and hackathons that matter'
+  //   }
+  // ];
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 pt-24 pb-8 transition-colors duration-300">
@@ -45,7 +45,7 @@ const AboutPage: React.FC = () => {
             About UU AI Society
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            We are a vibrant community of students passionate about artificial intelligence, 
+            We are a community of students passionate about artificial intelligence, 
             dedicated to learning, innovation, and shaping the future of technology.
           </p>
         </div>
@@ -64,7 +64,8 @@ const AboutPage: React.FC = () => {
             <CardContent>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
                 To democratize AI education and create an inclusive environment where students 
-                can explore, learn, and contribute to the advancement of artificial intelligence. 
+                can explore, learn, and contribute to the advancement of artificial intelligence
+                outside the classroom. 
                 We believe in hands-on learning, collaborative innovation, and building bridges 
                 between academic knowledge and real-world applications.
               </p>
@@ -82,9 +83,9 @@ const AboutPage: React.FC = () => {
             </CardHeader>
             <CardContent>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                To be the leading student organization that shapes the next generation of AI 
+                To be the leading student organization in Uppsala that shapes the next generation of AI 
                 leaders, innovators, and ethical practitioners. We envision a future where our 
-                members become catalysts for positive change in the AI industry, contributing 
+                members become catalysts for positive change in the global AI industry, contributing 
                 to solutions that benefit humanity.
               </p>
             </CardContent>
@@ -92,7 +93,7 @@ const AboutPage: React.FC = () => {
         </div>
 
         {/* Achievements */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
             Our Achievements
           </h2>
@@ -115,7 +116,7 @@ const AboutPage: React.FC = () => {
               </Card>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Team Section */}
         <div className="mb-16">
@@ -183,11 +184,13 @@ const AboutPage: React.FC = () => {
         </div>
 
         {/* Call to Action */}
-        <div className="bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 rounded-2xl p-12 text-center text-white transition-colors duration-300">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <section className="relative bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 rounded-2xl p-12 text-center text-white transition-colors duration-300">
+          <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
+
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             Ready to Join Our Mission?
           </h2>
-          <p className="text-xl text-red-100 dark:text-red-50 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-red-100 dark:text-red-75 mb-8 max-w-2xl mx-auto">
             Be part of a community that&apos;s shaping the future of AI. Connect, learn, and grow with us.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -206,7 +209,7 @@ const AboutPage: React.FC = () => {
               Contact Us
             </Button>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );

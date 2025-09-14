@@ -68,26 +68,26 @@ const EventsPage: React.FC = () => {
         {/* Tabs */}
         <div className="flex justify-center mb-8">
           <div className="bg-white dark:bg-gray-800 p-1 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-            <button
+            <Button
               onClick={() => setActiveTab('upcoming')}
-              className={`px-6 py-2 rounded-md font-medium transition-colors ${
+              className={`px-6 py-2 rounded-md font-medium transition-colors  border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
                 activeTab === 'upcoming'
                   ? 'bg-red-600 text-white'
                   : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
               Upcoming Events
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => setActiveTab('past')}
-              className={`px-6 py-2 rounded-md font-medium transition-colors ${
+              className={`px-6 py-2 rounded-md font-medium transition-colors border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
                 activeTab === 'past'
                   ? 'bg-red-600 text-white'
                   : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
               }`}
             >
               Past Events
-            </button>
+            </Button>
           </div>
         </div>
 

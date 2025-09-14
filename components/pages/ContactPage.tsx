@@ -3,83 +3,83 @@
 // Disable static generation for this page
 export const dynamic = 'force-dynamic';
 
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { Mail, Phone, MapPin, Clock, CheckCircle } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
-import { Textarea } from '@/components/ui/Textarea';
-import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import React, { useEffect } from 'react';
+// import { useForm } from 'react-hook-form';
+// import { zodResolver } from '@hookform/resolvers/zod';
+// import { z } from 'zod';
+import { Mail } from 'lucide-react';
+// import { Button } from '@/components/ui/Button';
+// import { Input } from '@/components/ui/Input';
+// import { Textarea } from '@/components/ui/Textarea';
+import { Card, CardContent } from '@/components/ui/Card';
 import { updatePageMeta } from '@/utils/seo';
-import type { ContactFormData } from '@/types';
+// import type { ContactFormData } from '@/types';
 
-const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email address'),
-  subject: z.string().min(5, 'Subject must be at least 5 characters'),
-  message: z.string().min(20, 'Message must be at least 20 characters')
-});
+// const contactSchema = z.object({
+//   name: z.string().min(2, 'Name must be at least 2 characters'),
+//   email: z.string().email('Please enter a valid email address'),
+//   subject: z.string().min(5, 'Subject must be at least 5 characters'),
+//   message: z.string().min(20, 'Message must be at least 20 characters')
+// });
 
 const ContactPage: React.FC = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     updatePageMeta('Contact Us', 'Get in touch with UU AI Society for questions, partnerships, or general inquiries');
   }, []);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema)
-  });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  //   reset
+  // } = useForm<ContactFormData>({
+  //   resolver: zodResolver(contactSchema)
+  // });
 
   const contactInfo = [
     {
       icon: Mail,
       title: 'Email',
-      details: 'hello@aisociety.edu',
+      details: 'contact@uuais.com',
       description: 'Send us an email anytime'
     },
-    {
-      icon: Phone,
-      title: 'Phone',
-      details: '+1 (555) 123-4567',
-      description: 'Monday - Friday, 9AM - 5PM'
-    },
-    {
-      icon: MapPin,
-      title: 'Location',
-      details: 'Computer Science Building, Room 201',
-      description: 'University Campus, City, State 12345'
-    },
-    {
-      icon: Clock,
-      title: 'Office Hours',
-      details: 'Mon-Fri: 2PM - 6PM',
-      description: 'Drop by for in-person meetings'
-    }
+    // {
+    //   icon: Phone,
+    //   title: 'Phone',
+    //   details: '+1 (555) 123-4567',
+    //   description: 'Monday - Friday, 9AM - 5PM'
+    // },
+    // {
+    //   icon: MapPin,
+    //   title: 'Location',
+    //   details: 'Computer Science Building, Room 201',
+    //   description: 'University Campus, City, State 12345'
+    // },
+    // {
+    //   icon: Clock,
+    //   title: 'Office Hours',
+    //   details: 'Mon-Fri: 2PM - 6PM',
+    //   description: 'Drop by for in-person meetings'
+    // }
   ];
 
-  const onSubmit = async (data: ContactFormData) => {
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+  // const onSubmit = async (data: ContactFormData) => {
+  //   try {
+  //     // Simulate API call
+  //     await new Promise(resolve => setTimeout(resolve, 2000));
       
-      console.log('Contact form submitted:', data);
-      setIsSubmitted(true);
-      reset();
+  //     console.log('Contact form submitted:', data);
+  //     setIsSubmitted(true);
+  //     reset();
       
-      // Reset success message after 5 seconds
-      setTimeout(() => setIsSubmitted(false), 5000);
-    } catch (error) {
-      console.error('Submission error:', error);
-    }
-  };
+  //     // Reset success message after 5 seconds
+  //     setTimeout(() => setIsSubmitted(false), 5000);
+  //   } catch (error) {
+  //     console.error('Submission error:', error);
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 pt-24 pb-8 transition-colors duration-300">
@@ -134,7 +134,7 @@ const ContactPage: React.FC = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            {/* <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
               <CardHeader>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   Send us a Message
@@ -199,46 +199,46 @@ const ContactPage: React.FC = () => {
                   </div>
                 </form>
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* FAQ Section */}
             <div className="mt-12">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 dark:text-white">
                 Frequently Asked Questions
               </h2>
               <div className="space-y-4">
-                <Card>
+                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 pt-4">
                   <CardContent className="p-6">
-                    <h3 className="font-semibold text-gray-900 mb-2">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                       How can I join UU AI Society?
                     </h3>
-                    <p className="text-gray-600">
-                      You can join by filling out our membership application form on the 
-                      &quot;Join Us&quot; page. We welcome students of all experience levels!
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Currently we are not accepting new applications. 
+                      We will announce the next application period on our social media channels. 
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 pt-4">
                   <CardContent className="p-6">
-                    <h3 className="font-semibold text-gray-900 mb-2">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                       Are your events free for students?
                     </h3>
-                    <p className="text-gray-600">
-                      Yes! All our workshops, seminars, and networking events are free for 
-                      registered members. Some special events may have limited capacity.
+                    <p className="text-gray-600 dark:text-gray-300">
+                      In general all our workshops, seminars, and networking events are free for 
+                      students, although some special events may have limited capacity and or require a small fee.
                     </p>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 pt-4">
                   <CardContent className="p-6">
-                    <h3 className="font-semibold text-gray-900 mb-2">
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                       Can companies sponsor or collaborate with UU AI Society?
                     </h3>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 dark:text-gray-300">
                       Absolutely! We&apos;re always looking for industry partnerships. 
-                      Contact us to discuss sponsorship opportunities and collaboration ideas.
+                      Contact us at <a href="mailto:contact@uuais.com" className="text-blue-700">contact@uuais.com</a> to discuss sponsorship opportunities and collaboration ideas.
                     </p>
                   </CardContent>
                 </Card>

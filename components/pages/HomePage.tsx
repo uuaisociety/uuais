@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Calendar, Users, Award, Brain, Zap, Globe } from 'lucide-react';
+import { ArrowRight, Calendar, Users, Brain, Zap, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
@@ -28,12 +28,12 @@ const HomePage: React.FC = () => {
     {
       icon: Brain,
       title: 'AI Education',
-      description: 'Comprehensive workshops and seminars covering the latest in artificial intelligence and machine learning.'
+      description: 'Comprehensive workshops and seminars from real industry professionals covering the latest in artificial intelligence and machine learning.'
     },
     {
       icon: Users,
       title: 'Community',
-      description: 'Connect with like-minded students and build lasting relationships in the AI community.'
+      description: 'Connect with like-minded students and build lasting relationships and connections in the AI community.'
     },
     {
       icon: Zap,
@@ -43,7 +43,7 @@ const HomePage: React.FC = () => {
     {
       icon: Globe,
       title: 'Industry Connections',
-      description: 'Network with industry professionals and gain insights into career opportunities in AI.'
+      description: 'Network with industry professionals and gain insights into career opportunities in AI, from startups to international giants.'
     }
   ];
 
@@ -98,21 +98,21 @@ const HomePage: React.FC = () => {
               Join the next generation of AI innovators. Learn, create, and shape the future of artificial intelligence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="glow-on-hover px-8 py-4 text-lg font-semibold hover:scale-105 transition-all duration-300 hover:shadow-xl">
-                <Link href="/events" className="flex items-center">
-                  View Events
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </button>
+            <Link href="/events" className="">
+              <Button className="glow-on-hover h-full px-12 py-4 text-lg font-semibold hover:shadow-xl">
+                  <span className="ml-4">View Events</span>
+                  <ArrowRight className="ml-2 mr-2 h-5 w-5" />
+              </Button>
+            </Link>
+            <Link href="/events">
               <Button 
                 size="lg"
                 variant="outline"
-                className="glow-on-hover px-8 py-4 text-lg h-full border-white text-white hover:bg-white text-black transform hover:scale-105 transition-all duration-300 hover:shadow-xl"
+                className="glow-on-hover px-8 py-4 text-lg h-full border-white text-white hover:bg-white text-black hover:shadow-xl"
               >
-                <Link href="/events">
                   Contact us
-                </Link>
               </Button>
+            </Link>
             </div>
           </div>
         </section>
@@ -143,7 +143,7 @@ const HomePage: React.FC = () => {
                 Why Join UU AI Society?
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                Discover the opportunities that await you in our vibrant community of AI enthusiasts.
+                Discover the opportunities that await you in our community of AI enthusiasts.
               </p>
             </div>
             
@@ -181,11 +181,12 @@ const HomePage: React.FC = () => {
                   Don&apos;t miss out on our latest workshops, seminars, and networking events.
                 </p>
               </div>
-              <Button variant="outline" className="hover:scale-105 transition-all duration-300 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                <Link href="/events">
+              <Link href="/events">
+              <Button variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
                   View All Events
-                </Link>
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
+              </Link>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -228,13 +229,14 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16 bg-red-600 dark:bg-red-700 text-white transition-colors duration-300">
+        {/* <section className="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white py-20 overflow-hidden">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
             <Award className="h-16 w-16 mx-auto mb-6 text-yellow-300 dark:text-yellow-400 animate-bounce" />
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 ">
               Ready to Start Your AI Journey?
             </h2>
-            <p className="text-xl text-red-100 dark:text-red-50 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-red-100 dark:text-red-75 mb-8 max-w-2xl mx-auto">
               Join hundreds of students who are already exploring the exciting world of artificial intelligence with us.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -247,7 +249,7 @@ const HomePage: React.FC = () => {
               <Button 
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-red-600 transform hover:scale-105 transition-all duration-300 hover:shadow-xl"
+                className="px-8 py-4 text-lg h-full border-white text-white hover:bg-white text-black transform hover:scale-105 transition-all duration-300 hover:shadow-xl"
               >
                 <Link href="/contact">
                   Get in Touch
@@ -255,7 +257,7 @@ const HomePage: React.FC = () => {
               </Button>
             </div>
           </div>
-        </section>
+        </section> */}
       </div>
     </div>
   );
