@@ -4,7 +4,7 @@
 export const dynamic = 'force-dynamic';
 
 import React, { useEffect } from 'react';
-import { Mail, Twitter, Target, Eye } from 'lucide-react';
+import { Mail, Target, Eye } from 'lucide-react';
 import { Linkedin01Icon }  from 'hugeicons-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';

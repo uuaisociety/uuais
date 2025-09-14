@@ -79,13 +79,15 @@ const BlogPage: React.FC = () => {
                 <Card className="overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <div className="md:flex">
                     <div className="md:w-1/2">
+                    <Link href={`/blog/${featuredPost.id}`}>
                       <Image
                         src={featuredPost.image}
                         alt={featuredPost.title}
-                        width={100}
-                        height={100}
+                        width={500}
+                        height={500}
                         className="w-full h-64 md:h-full object-cover"
                       />
+                    </Link>
                     </div>
                     <div className="md:w-1/2 p-8">
                       <div className="flex flex-wrap gap-2 mb-4">

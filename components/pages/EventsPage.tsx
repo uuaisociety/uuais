@@ -13,6 +13,7 @@ import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const EventsPage: React.FC = () => {
   const { state } = useApp();
@@ -133,13 +134,15 @@ const EventsPage: React.FC = () => {
             {filteredEvents.map((event) => (
               <Card key={event.id} className="h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <div className="aspect-video relative overflow-hidden rounded-t-lg">
-                  <Image
-                    src={event.image}
-                    alt={event.title}
-                    width={500}
-                    height={500}
-                    className="w-full h-full object-cover"
-                  />
+                  <Link href={`/events/${event.id}`}>
+                    <Image
+                      src={event.image}
+                      alt={event.title}
+                      width={500}
+                      height={500}
+                      className="w-full h-full object-cover"
+                    />
+                  </Link>
                   <div className="absolute top-4 left-4">
                     <span className={`px-3 py-1 text-sm font-medium rounded-full ${getCategoryColor(event.category)}`}>
                       {event.category}
@@ -155,12 +158,17 @@ const EventsPage: React.FC = () => {
                 </div>
                 
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                    {event.title}
+                  <h3 className="text-xl pt-2 font-semibold text-gray-900 dark:text-white mb-3">
+                    <Link 
+                      href={`/events/${event.id}`}
+                      className="hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                    >
+                      {event.title}
+                    </Link>
                   </h3>
                   
                   <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                    {event.description}
+                    {event.description.slice(0, 100) + (event.description.length > 100 ? '...': '')}
                   </p>
                   
                   <div className="space-y-2 mb-6">
@@ -189,15 +197,17 @@ const EventsPage: React.FC = () => {
                     )}
                   </div>
                   
-                  {activeTab === 'upcoming' ? (
-                    <Button variant="default" size="sm">
-                      Register Now
-                    </Button>
-                  ) : (
-                    <Button variant="outline" size="sm">
-                      View Details
-                    </Button>
-                  )}
+                  <Link href={`/events/${event.id}`}>
+                    {activeTab === 'upcoming' ? (
+                      <Button variant="default" size="sm">
+                        View Details & Register
+                      </Button>
+                    ) : (
+                      <Button variant="outline" size="sm">
+                        View Details
+                      </Button>
+                    )}
+                  </Link>
                 </CardContent>
               </Card>
             ))}
