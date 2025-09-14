@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import AdminEvents from '@/components/AdminEvents';
+import AdminDashboard from '@/components/pages/admin/AdminDashboard';
 
 const AdminPage = () => {
-  const [showInfo, setShowInfo] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,13 +22,14 @@ const AdminPage = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ password }),
+        credentials: 'include', // Include cookies
       });
 
       const data = await response.json();
 
       if (response.ok) {
         setIsAuthenticated(true);
-        localStorage.setItem('adminAuth', 'true');
+        setPassword(''); // Clear password from memory
       } else {
         setError(data.message || 'Invalid password');
       }
@@ -40,12 +41,35 @@ const AdminPage = () => {
     }
   };
 
+
   useEffect(() => {
-    // Check if the user was previously authenticated
-    if (localStorage.getItem('adminAuth') === 'true') {
-      setIsAuthenticated(true);
-    }
+    // Check server-side authentication status
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth', {
+          method: 'GET',
+          credentials: 'include',
+        });
+        const data = await response.json();
+        setIsAuthenticated(data.authenticated || false);
+      } catch (err) {
+        console.error('Auth check error:', err);
+        setIsAuthenticated(false);
+      } finally {
+        setCheckingAuth(false);
+      }
+    };
+    
+    checkAuth();
   }, []);
+
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen bg-[#121212] flex items-center justify-center">
+        <div className="text-white">Checking authentication...</div>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
@@ -71,6 +95,7 @@ const AdminPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-2 bg-[#1a1a1a] text-white rounded-md border border-white/10 focus:outline-none focus:border-[#c8102e]"
                 required
+                autoComplete="current-password"
               />
             </div>
             
@@ -87,36 +112,38 @@ const AdminPage = () => {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-[#121212]">
-      {showInfo && (
-        <div className="bg-yellow-500/20 p-4 text-yellow-200 text-sm">
-          <div className="max-w-7xl mx-auto flex justify-between items-center">
-            <p>
-              <strong>Note:</strong> This is a password-protected admin page.
-            </p>
-            <button onClick={() => setShowInfo(false)} className="text-yellow-200 hover:text-white">
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
-      <div className="container mx-auto py-8">
-        <div className="flex justify-end mb-4">
-          <button
-            onClick={() => {
-              localStorage.removeItem('adminAuth');
-              setIsAuthenticated(false);
-            }}
-            className="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition-colors text-sm"
-          >
-            Logout
-          </button>
-        </div>
-        <AdminEvents />
-      </div>
-    </div>
-  );
+  return <AdminDashboard />;
+
+  // return (
+  //   <div className="min-h-screen bg-[#121212]">
+  //     {showInfo && (
+  //       <div className="bg-yellow-500/20 p-4 text-yellow-200 text-sm">
+  //         <div className="max-w-7xl mx-auto flex justify-between items-center">
+  //           <p>
+  //             <strong>Note:</strong> This is a password-protected admin page.
+  //           </p>
+  //           <button onClick={() => setShowInfo(false)} className="text-yellow-200 hover:text-white">
+  //             ✕
+  //           </button>
+  //         </div>
+  //       </div>
+  //     )}
+  //     <div className="container mx-auto py-8">
+  //       <div className="flex justify-end mb-4">
+  //         <button
+  //           onClick={() => {
+  //             localStorage.removeItem('adminAuth');
+  //             setIsAuthenticated(false);
+  //           }}
+  //           className="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition-colors text-sm"
+  //         >
+  //           Logout
+  //         </button>
+  //       </div>
+  //       <AdminEvents />
+  //     </div>
+  //   </div>
+  // );
 };
 
 export default AdminPage; 
