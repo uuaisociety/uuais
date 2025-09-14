@@ -6,6 +6,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Providers } from './providers';
 import { AppProvider } from '@/contexts/AppContext';
+import UpcomingEventsBanner from '@/components/common/UpcomingEventsBanner';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({
                 {children}
               </main>
               <Footer />
+              <UpcomingEventsBanner />
             </div>
           </AppProvider>
         </Providers>
