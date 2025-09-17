@@ -7,11 +7,10 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Calendar, User, Search } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card, CardContent, CardMedia } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
-import Image from 'next/image';
 
 const BlogPage: React.FC = () => {
   const { state } = useApp();
@@ -80,12 +79,11 @@ const BlogPage: React.FC = () => {
                   <div className="md:flex">
                     <div className="md:w-1/2">
                     <Link href={`/blog/${featuredPost.id}`}>
-                      <Image
+                      <CardMedia
                         src={featuredPost.image}
                         alt={featuredPost.title}
-                        width={500}
-                        height={500}
-                        className="w-full h-64 md:h-full object-cover"
+                        fill
+                        className="h-64 md:h-full"
                       />
                     </Link>
                     </div>
@@ -134,15 +132,12 @@ const BlogPage: React.FC = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {otherPosts.map((post) => (
                     <Card key={post.id} className="h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-                      <div className="aspect-video relative overflow-hidden rounded-t-lg">
-                        <Image
-                          src={post.image}
-                          alt={post.title}
-                          width={100}
-                          height={100}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+                      <CardMedia
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="aspect-video"
+                      />
                       
                       <CardContent className="p-6">
                         <div className="flex flex-wrap gap-1 mb-3">

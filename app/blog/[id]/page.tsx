@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { notFound, useParams } from 'next/navigation';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card, CardContent, CardMedia } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
 import Link from 'next/link';
@@ -120,12 +120,11 @@ const BlogDetailPage: React.FC = () => {
                 <Card key={post.id} className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
                     {post.image && (
-                      <Image
+                      <CardMedia
                         src={post.image}
                         alt={post.title}
-                        width={300}
-                        height={200}
-                        className="w-full h-32 object-cover rounded-lg mb-4"
+                        fill
+                        className="h-32 rounded-lg mb-4"
                       />
                     )}
                     <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
