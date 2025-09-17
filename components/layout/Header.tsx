@@ -14,8 +14,8 @@ export const Header: React.FC = () => {
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Events', href: '/events' },
-    { name: 'About', href: '/about' },
     { name: 'Blog', href: '/blog' },
+    { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }
   ];
 
