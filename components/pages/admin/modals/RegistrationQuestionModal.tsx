@@ -26,7 +26,17 @@ const RegistrationQuestionModal: React.FC<RegistrationQuestionModalProps> = ({ o
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">{editing ? 'Edit Registration Question' : 'Add Registration Question'}</h2>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"><X className="h-6 w-6" /></button>
         </div>
-        <form onSubmit={(e) => { e.preventDefault(); editing ? onUpdate() : onAdd(); }} className="space-y-4">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (editing) {
+              onUpdate();
+            } else {
+              onAdd();
+            }
+          }}
+          className="space-y-4"
+        >
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Question</label>
             <input className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" value={form.question} onChange={(e) => setForm(prev => ({ ...prev, question: e.target.value }))} required />

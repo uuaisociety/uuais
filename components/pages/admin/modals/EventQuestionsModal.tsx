@@ -90,7 +90,7 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
           )}
         </div>
 
-        <form onSubmit={submit} className="space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+        <form onSubmit={submit} className="space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4" data-event-id={eventId}>
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold">{editingId ? 'Edit Question' : 'Add New Question'}</h3>
             {!editingId && (

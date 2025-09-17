@@ -1,5 +1,3 @@
-'use client'
-
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -7,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Providers } from './providers';
 import { AppProvider } from '@/contexts/AppContext';
 import UpcomingEventsBanner from '@/components/common/UpcomingEventsBanner';
+export { metadata, viewport } from './metadata';
 
 const inter = Inter({
   subsets: ["latin"],

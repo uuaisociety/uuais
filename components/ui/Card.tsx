@@ -1,6 +1,7 @@
 import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
+import Image, { type ImageProps } from 'next/image';
 
 const cardVariants = cva(
   'rounded-lg transition-all duration-200 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white',
@@ -45,7 +46,35 @@ export const CardContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ cl
   <div className={cn('p-6 pt-0', className)} {...props} />
 );
 
-export const CardMedia: React.FC<React.ImgHTMLAttributes<HTMLImageElement>> = ({ className = '', alt, ...props }) => (
-  // Consumer can use Next/Image; this is a simple fallback for plain img usage
-  <img className={cn('w-full rounded-t-lg object-cover', className)} alt={alt ?? ''} {...props} />
-);
+type CardMediaProps = Omit<ImageProps, 'alt' | 'className'> & {
+  alt?: string;
+  className?: string;
+};
+
+export const CardMedia: React.FC<CardMediaProps> = ({ className = '', alt = '', fill, width, height, sizes, priority, ...rest }) => {
+  // Provide sensible defaults if neither fill nor explicit dimensions provided
+  const useDefaults = !fill && (!width || !height);
+  const w = useDefaults ? 1200 : width;
+  const h = useDefaults ? 675 : height;
+  const sz = sizes || (fill ? '(min-width: 1024px) 800px, 100vw' : '100vw');
+
+  if (fill) {
+    return (
+      <div className={cn('relative w-full h-48 rounded-t-lg overflow-hidden', className)}>
+        <Image alt={alt} fill sizes={sz} priority={priority} className="object-cover" {...rest} />
+      </div>
+    );
+  }
+
+  return (
+    <Image
+      alt={alt}
+      width={w as number}
+      height={h as number}
+      sizes={sz}
+      priority={priority}
+      className={cn('w-full rounded-t-lg object-cover', className)}
+      {...rest}
+    />
+  );
+};
