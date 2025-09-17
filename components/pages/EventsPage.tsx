@@ -151,7 +151,7 @@ const EventsPage: React.FC = () => {
                   </div>
                   {event.registrationRequired && activeTab === 'upcoming' && (
                     <div className="absolute top-4 right-4">
-                      <span className="px-2 py-1 bg-red-600 text-white text-xs font-medium rounded">
+                      <span className="px-2 py-1 bg-red-600 text-white text-xs font-medium rounded-full">
                         Registration Required
                       </span>
                     </div>

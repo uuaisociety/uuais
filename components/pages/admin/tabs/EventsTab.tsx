@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Edit3, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
 import { Event } from "@/types";
+import Tag from "@/components/ui/Tag";
 
 export interface EventsTabProps {
   events: Event[];
@@ -43,18 +44,10 @@ const EventsTab: React.FC<EventsTabProps> = ({
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       {event.title}
                     </h3>
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        event.status === "upcoming"
-                          ? "bg-green-100 dark:bg-gray-800 text-green-800 dark:text-green-400"
-                          : "bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-400"
-                      }`}
-                    >
+                    <Tag variant={event.status === "upcoming" ? "green" : "gray"} size="sm">
                       {event.status}
-                    </span>
-                    <span className="px-2 py-1 bg-blue-100 dark:bg-gray-800 text-blue-800 dark:text-blue-400 rounded-full text-xs font-medium">
-                      {event.category}
-                    </span>
+                    </Tag>
+                    <Tag variant="blue" size="sm">{event.category}</Tag>
                   </div>
                   <p className="text-gray-600 mb-2 dark:text-gray-400">{event.description}</p>
                   <div className="text-sm text-gray-500 dark:text-gray-400">

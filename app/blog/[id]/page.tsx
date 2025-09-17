@@ -1,19 +1,28 @@
 'use client'
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { notFound, useParams } from 'next/navigation';
 import { Card, CardContent, CardMedia } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, User } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
+import { incrementBlogRead } from '@/lib/firestore';
+import Tag from '@/components/ui/Tag';
 import { useApp } from '@/contexts/AppContext';
 
 const BlogDetailPage: React.FC = () => {
   const params = useParams();
   const blogId = params.id as string;
   const { state } = useApp();
+
+  // Increment unique blog read on mount (deduped via localStorage in helper)
+  useEffect(() => {
+    if (blogId) {
+      incrementBlogRead(blogId).catch(() => {});
+    }
+  }, [blogId]);
 
   if (state.blogPosts.length === 0) {
     return (
@@ -67,13 +76,7 @@ const BlogDetailPage: React.FC = () => {
           {blogPost.tags && blogPost.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-6">
               {blogPost.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm rounded-full"
-                >
-                  <Tag className="w-3 h-3" />
-                  {tag}
-                </span>
+                <Tag key={index} variant="red" size="md">{tag}</Tag>
               ))}
             </div>
           )}
