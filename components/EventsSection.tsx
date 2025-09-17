@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Tag from '@/components/ui/Tag';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, getDocs } from 'firebase/firestore';
+import { incrementEventUniqueClick } from '@/lib/firestore';
 
 interface ApplicationForm {
   name: string;
@@ -277,7 +279,7 @@ const EventsSection = () => {
               <div
                 key={event.id}
                 className="bg-[#2a2a2a] rounded-lg overflow-hidden cursor-pointer transform transition-transform hover:scale-105 flex flex-col h-full"
-                onClick={() => setSelectedEvent(event)}
+                onClick={() => { incrementEventUniqueClick(event.id); setSelectedEvent(event); }}
               >
                 <div className="relative aspect-[16/9] w-full">
                   {event.coverImage ? (
@@ -293,13 +295,11 @@ const EventsSection = () => {
                       <p className="text-gray-500">No image available</p>
                     </div>
                   )}
-                  <span
-                    className={`absolute bottom-2 left-2 px-3 py-1 text-sm font-medium rounded ${
-                      new Date(event.date) > new Date() ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
-                    }`}
-                  >
-                    {new Date(event.date) > new Date() ? 'Upcoming' : 'Past'}
-                  </span>
+                  <div className="absolute bottom-2 left-2">
+                    <Tag variant={new Date(event.date) > new Date() ? 'green' : 'gray'} size="sm">
+                      {new Date(event.date) > new Date() ? 'Upcoming' : 'Past'}
+                    </Tag>
+                  </div>
                 </div>
                 <div className="flex flex-col h-full flex-1">
                   <div className="p-6 flex-1">
