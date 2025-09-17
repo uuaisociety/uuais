@@ -11,6 +11,7 @@ import { Card, CardContent, CardMedia } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
+import Tag from '@/components/ui/Tag';
 
 const BlogPage: React.FC = () => {
   const { state } = useApp();
@@ -90,12 +91,7 @@ const BlogPage: React.FC = () => {
                     <div className="md:w-1/2 p-8">
                       <div className="flex flex-wrap gap-2 mb-4">
                         {featuredPost.tags.map((tag, index) => (
-                          <span
-                            key={index}
-                            className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-400 text-sm font-medium rounded-full"
-                          >
-                            {tag}
-                          </span>
+                          <Tag key={index} variant="red" size="md">{tag}</Tag>
                         ))}
                       </div>
                       
@@ -140,14 +136,9 @@ const BlogPage: React.FC = () => {
                       />
                       
                       <CardContent className="p-6">
-                        <div className="flex flex-wrap gap-1 mb-3">
+                        <div className="flex flex-wrap gap-2 mb-3">
                           {post.tags.slice(0, 2).map((tag, index) => (
-                            <span
-                              key={index}
-                              className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs font-medium rounded"
-                            >
-                              {tag}
-                            </span>
+                            <Tag key={index} variant="gray" size="sm">{tag}</Tag>
                           ))}
                         </div>
                         

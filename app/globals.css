@@ -179,19 +179,10 @@ a:hover {
 }
 
 /* Mail link specific styling */
-a[href^="mailto:"] {
-  color: #1d4ed8;
-  font-weight: 500;
-}
 
-.dark a[href^="mailto:"] {
+a[href^="mailto:"] {
   color: #60a5fa;
   font-weight: 500;
-}
-
-a[href^="mailto:"]:hover {
-  color: #1e40af;
-
 }
 
 button {

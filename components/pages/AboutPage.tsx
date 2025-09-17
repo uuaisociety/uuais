@@ -165,7 +165,7 @@ const AboutPage: React.FC = () => {
                         rel="noopener noreferrer"
                         className="p-2 text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       >
-                        <Linkedin01Icon className="h-4 w-4 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400" />
+                        <Linkedin01Icon className="h-4 w-4 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400" />
                       </a>
                     )}
                   </div>
