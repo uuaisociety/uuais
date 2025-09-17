@@ -177,12 +177,12 @@ const AboutPage: React.FC = () => {
 
         {/* Call to Action */}
         <section className="relative bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 rounded-2xl p-12 text-center text-white transition-colors duration-300">
-          <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
+          <div className="absolute inset-0 bg-black/20"></div>
 
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white  leading-tight">
             Ready to Join Our Mission?
           </h2>
-          <p className="text-xl text-red-100 dark:text-red-75 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
             Be part of a community that&apos;s shaping the future of AI. Connect, learn, and grow with us.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

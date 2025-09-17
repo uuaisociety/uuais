@@ -273,11 +273,6 @@ button:hover {
   color: #ffffff;
   box-shadow: 0 8px 25px rgba(185, 28, 28, 0.4);
 }   
-/* .dark .glow-on-hover{
-  background: linear-gradient(135deg, #b91c1c, #dc2626);
-  color: #ffffff;
-  box-shadow: 0 8px 25px rgba(185, 28, 28, 0.4);
-}    */
 
 .glow-on-hover:before {
   content: '';
