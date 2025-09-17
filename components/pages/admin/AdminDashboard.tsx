@@ -484,6 +484,7 @@ const AdminDashboard: React.FC = () => {
                   date: e.date,
                   currentRegistrations: e.currentRegistrations || 0,
                 }))}
+                blogs={state.blogPosts.map(b => ({ id: b.id, title: b.title, date: b.date }))}
               />
             )}
             {activeTab === 'faq' && (

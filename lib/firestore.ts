@@ -11,7 +11,9 @@ import {
   orderBy,
   serverTimestamp,
   increment,
-  where 
+  where,
+  setDoc,
+  DocumentData,
 } from 'firebase/firestore';
 import { db } from './firebase-client';
 import { Event, TeamMember, BlogPost, FAQ, RegistrationQuestion, EventRegistration, EventCustomQuestion } from '@/types';
@@ -44,6 +46,83 @@ export const addEvent = async (event: Omit<Event, 'id'>): Promise<string> => {
   const docRef = await addDoc(eventsRef, event);
   return docRef.id;
 };
+
+// ----------------------------
+// Client-side Analytics Helpers
+// ----------------------------
+
+function todayKey() {
+  const d = new Date();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${d.getFullYear()}${mm}${dd}`;
+}
+
+/**
+ * Increment unique event clicks once per day per browser using localStorage dedup.
+ * Writes to collection 'analytics_events', doc {eventId}, field 'clicks'.
+ */
+export async function incrementEventUniqueClick(eventId: string): Promise<void> {
+  try {
+    if (typeof window === 'undefined') return;
+    const key = `clicked_event_${eventId}_${todayKey()}`;
+    if (localStorage.getItem(key) === '1') return;
+    localStorage.setItem(key, '1');
+    const ref = doc(db, 'analytics_events', eventId);
+    await updateDoc(ref, { clicks: increment(1), updatedAt: serverTimestamp() }).catch(async () => {
+      // If doc doesn't exist, create it
+      await setDoc(ref, { clicks: 1, updatedAt: serverTimestamp() }, { merge: true });
+    });
+  } catch (e) {
+    // Non-fatal
+    console.warn('incrementEventUniqueClick failed', e);
+  }
+}
+
+/**
+ * Increment unique blog reads once per day per browser using localStorage dedup.
+ * Writes to collection 'analytics_blogs', doc {blogId}, field 'reads'.
+ */
+export async function incrementBlogRead(blogId: string): Promise<void> {
+  try {
+    if (typeof window === 'undefined') return;
+    const key = `read_blog_${blogId}_${todayKey()}`;
+    if (localStorage.getItem(key) === '1') return;
+    localStorage.setItem(key, '1');
+    const ref = doc(db, 'analytics_blogs', blogId);
+    await updateDoc(ref, { reads: increment(1), updatedAt: serverTimestamp() }).catch(async () => {
+      await setDoc(ref, { reads: 1, updatedAt: serverTimestamp() }, { merge: true });
+    });
+  } catch (e) {
+    console.warn('incrementBlogRead failed', e);
+  }
+}
+
+/**
+ * Fetch clicks counts for a list of event IDs.
+ */
+export async function getEventClicksCounts(ids: string[]): Promise<Record<string, number>> {
+  const counts: Record<string, number> = {};
+  await Promise.all(ids.map(async (id) => {
+    const d = await getDoc(doc(db, 'analytics_events', id));
+    const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
+    counts[id] = data?.clicks ?? 0;
+  }));
+  return counts;
+}
+
+/**
+ * Fetch reads counts for a list of blog IDs.
+ */
+export async function getBlogReadsCounts(ids: string[]): Promise<Record<string, number>> {
+  const counts: Record<string, number> = {};
+  await Promise.all(ids.map(async (id) => {
+    const d = await getDoc(doc(db, 'analytics_blogs', id));
+    const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
+    counts[id] = data?.reads ?? 0;
+  }));
+  return counts;
+}
 
 export const updateEvent = async (id: string, event: Partial<Event>): Promise<void> => {
   const eventRef = doc(db, 'events', id);

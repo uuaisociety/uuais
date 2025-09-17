@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import { BlogPost } from "@/types";
 import { Edit3, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
+import Tag from "@/components/ui/Tag";
 
 export interface BlogTabProps {
   posts: BlogPost[];
@@ -25,26 +26,24 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onEdit, onDelete, 
 
       <div className="grid gap-4">
         {posts.map((post) => (
-          <Card key={post.id} className="bg-white dark:bg-gray-800 text-black dark:text-white">
+          <Card key={post.id}>
             <CardContent className="p-6">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center space-x-3 mb-2">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{post.title}</h3>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${post.published ? 'bg-green-100 dark:bg-gray-800 text-green-800 dark:text-green-400' : 'bg-yellow-100 dark:bg-gray-800 text-yellow-800 dark:text-yellow-400'}`}>
+                    <Tag variant={post.published ? 'green' : 'yellow'} size="sm">
                       {post.published ? 'Published' : 'Draft'}
-                    </span>
+                    </Tag>
                   </div>
                   <p className="text-gray-600 mb-2 dark:text-gray-400">{post.excerpt}</p>
                   <div className="text-sm text-gray-500 mb-2 dark:text-gray-400">
                     <span className="mr-4">👤 {post.author}</span>
                     <span>📅 {format(new Date(post.date), 'MMM d, yyyy')}</span>
                   </div>
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-2">
                     {post.tags.map((tag, index) => (
-                      <span key={index} className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-400 text-xs rounded">
-                        {tag}
-                      </span>
+                      <Tag key={index} variant="red" size="md">{tag}</Tag>
                     ))}
                   </div>
                 </div>
