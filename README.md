@@ -157,3 +157,115 @@ To learn more about the technologies used in this project:
 - [TypeScript](https://www.typescriptlang.org/docs/) - TypeScript documentation
 - [Firebase](https://firebase.google.com/docs) - Firebase documentation
 - [Radix UI](https://www.radix-ui.com/) - Accessible component library
+
+## Admin Authentication and Developer Override
+
+All admin authentication is centralized in `app/admin/page.tsx` via `components/auth/AdminGate.tsx` and the `hooks/useAdmin.ts` hook.
+
+- **Google Sign-In (Production)**
+  - `AdminGate` prompts for Google sign-in using Firebase Auth and checks for the `admin` custom claim on the user.
+  - If the user has the claim, the `AdminDashboard` is rendered.
+
+- **Dev Admin Override (Local Development Only)**
+  - Controlled by environment flags and intended for local development when Google sign-in is not configured.
+  - Add to your `.env.local`:
+
+    ```env
+    NEXT_PUBLIC_ENABLE_DEV_ADMIN=true
+    NEXT_PUBLIC_DEV_ADMIN_PASSWORD=change-this-strong-password
+    ```
+
+  - The Admin page will show a small "Dev Admin Override" section with a password field. Enter the password to elevate. A top-right amber badge "Dev Admin Override Active" appears when enabled.
+  - Clear the override using the "Clear" button or by removing `devAdmin` from localStorage.
+
+## Environment Variables
+
+Create a `.env.local` file at the project root with at least the following keys (see `.env.example` for the full list):
+
+```env
+# Firebase
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+
+GOOGLE_APPLICATION_CREDENTIALS=/absolute/path/to/serviceAccount.json
+
+
+# Dev admin override (local only)
+NEXT_PUBLIC_ENABLE_DEV_ADMIN=false
+NEXT_PUBLIC_DEV_ADMIN_PASSWORD=
+
+```
+
+Restart the dev server after changing any `NEXT_PUBLIC_` variables.
+
+### Adding a new admin
+Before adding a new admin please make sure that the user is already in the Firebase Auth database (has tried to login to the admin page). You also need to download the service account key from the Firebase console and place it in the root of the project and add the path to your .env file.
+You may need to install `ts-node` and `dotenv` if you haven't already.
+```bash
+npm i -D dotenv ts-node typescript @types/node
+```
+
+To add a new admin, run the following command:
+
+```bash
+npm run set:admin -- <email> true
+```
+
+To remove an admin, run the following command:
+
+```bash
+npm run set:admin -- <email> false
+```
+
+
+## Local Firebase Setup (Emulators)
+
+You can run against Firebase emulators during development.
+
+1. Install the Firebase CLI (if not already):
+
+   ```bash
+   npm install -g firebase-tools
+   ```
+
+2. Log in and initialize (if needed):
+
+   ```bash
+   firebase login
+   firebase init emulators
+   ```
+
+3. Review `firebase.json` (ports can be adjusted as needed):
+
+   ```json
+   {
+     "emulators": {
+       "auth": { "port": 9099 },
+       "database": { "port": 9000 },
+       "ui": { "enabled": true },
+       "singleProjectMode": true
+     }
+   }
+   ```
+
+4. Start the emulators:
+
+   ```bash
+   firebase emulators:start
+   ```
+
+5. Point your app to the emulators in `lib/firebase.ts` if desired (or rely on production services):
+   - Example (pseudo):
+
+     ```ts
+     // import { connectAuthEmulator } from 'firebase/auth';
+     // import { connectFirestoreEmulator } from 'firebase/firestore';
+     // if (process.env.NEXT_PUBLIC_USE_EMULATORS === 'true') {
+     //   connectAuthEmulator(auth, 'http://localhost:9099');
+     //   connectFirestoreEmulator(db, 'localhost', 8080);
+     // }
+     ```
