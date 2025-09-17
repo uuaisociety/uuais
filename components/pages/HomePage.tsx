@@ -55,7 +55,7 @@ const HomePage: React.FC = () => {
   // ];
 
   return (
-    <div className="relative min-h-screen bg-white dark:bg-gray-950 pt-16 transition-colors duration-300">
+    <div className="relative min-h-screen bg-white dark:bg-gray-900 pt-16 transition-colors duration-300">
 
       <div className="relative z-10 space-y-16">
         {/* Hero Section */}
@@ -86,33 +86,33 @@ const HomePage: React.FC = () => {
               </div>
             ))}
             <div className="absolute top-10 left-10 w-20 h-20 bg-white/5 rounded-full animate-pulse"></div>
-            <div className="absolute top-32 right-20 w-16 h-16 bg-white/5 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-            <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-white/5 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
+            <div className="absolute top-32 right-20 w-16 h-16 bg-white/5 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-white/5 rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
           </div>
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Welcome to 
+              Welcome to
               <span className="block">UU AI Society</span>
             </h1>
             <p className="text-xl md:text-2xl text-red-100 dark:text-red-50 mb-8 max-w-3xl mx-auto leading-relaxed">
               Join the next generation of AI innovators. Learn, create, and shape the future of artificial intelligence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/events" className="">
-              <Button className="glow-on-hover h-full px-12 py-4 text-lg font-semibold hover:shadow-xl">
+              <Link href="/events" className="">
+                <Button variant="cta" className="px-12 py-4 text-lg h-full font-semibold hover:shadow-xl">
                   <span className="ml-4">View Events</span>
                   <ArrowRight className="ml-2 mr-2 h-5 w-5" />
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button 
-                size="lg"
-                variant="outline"
-                className="glow-on-hover px-8 py-4 text-lg h-full border-white text-white hover:bg-white text-black hover:shadow-xl"
-              >
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button
+                  size="lg"
+                  variant="cta"
+                  className="px-8 py-4 text-lg h-full font-semibold hover:shadow-xl"
+                >
                   Contact us
-              </Button>
-            </Link>
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
@@ -136,7 +136,7 @@ const HomePage: React.FC = () => {
         </section> */}
 
         {/* Features Section */}
-        <section className="py-16 bg-white dark:bg-gray-950 transition-colors duration-300">
+        <section className="py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -146,7 +146,7 @@ const HomePage: React.FC = () => {
                 Discover the opportunities that await you in our community of AI enthusiasts.
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {features.map((feature, index) => (
                 <Card key={index} className="text-center h-full group hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
@@ -182,10 +182,10 @@ const HomePage: React.FC = () => {
                 </p>
               </div>
               <Link href="/events">
-              <Button variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                <Button variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
                   View All Events
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
               </Link>
             </div>
 
@@ -193,12 +193,15 @@ const HomePage: React.FC = () => {
               {upcomingEvents.map((event) => (
                 <Card key={event.id} className="h-full group hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <div className="aspect-video relative overflow-hidden rounded-t-lg">
-                    <Image
-                      src={event.image}
-                      alt={event.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
+                    <Link href={`/events/${event.id}`}>
+
+                      <Image
+                        src={event.image}
+                        alt={event.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </Link>
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 bg-red-600 dark:bg-red-500 text-white text-sm font-medium rounded-full">
                         {event.category}

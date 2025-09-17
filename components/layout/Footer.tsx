@@ -31,7 +31,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-gray-900 dark:bg-gray-950 text-white transition-colors duration-300">
+    <footer className="bg-gray-800 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 text-white transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main footer content */}
         <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

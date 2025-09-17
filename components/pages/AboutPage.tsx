@@ -39,7 +39,7 @@ const AboutPage: React.FC = () => {
   // ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 pt-24 pb-8 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -126,7 +126,7 @@ const AboutPage: React.FC = () => {
             Meet Our Team
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {state.teamMembers.map((member) => (
+            {state.teamMembers.filter(member => member.published !== false).map((member) => (
               <Card key={member.id} className="text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                 <CardHeader>
                   <div className="mx-auto mb-4">
@@ -155,7 +155,7 @@ const AboutPage: React.FC = () => {
                         href={`mailto:${member.email}`}
                         className="p-2 text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       >
-                        <Mail className="h-4 w-4" />
+                        <Mail className="h-4 w-4 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400" />
                       </a>
                     )}
                     {member.linkedin && (
@@ -165,7 +165,7 @@ const AboutPage: React.FC = () => {
                         rel="noopener noreferrer"
                         className="p-2 text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       >
-                        <Linkedin01Icon className="h-4 w-4" />
+                        <Linkedin01Icon className="h-4 w-4 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400" />
                       </a>
                     )}
                   </div>

@@ -34,6 +34,7 @@ const EventsPage: React.FC = () => {
   ];
 
   const filteredEvents = state.events
+    .filter(event => event.published !== false)
     .filter(event => event.status === activeTab)
     .filter(event => {
       const matchesSearch = event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -54,7 +55,7 @@ const EventsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 pt-24 pb-8 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -68,7 +69,7 @@ const EventsPage: React.FC = () => {
 
         {/* Tabs */}
         <div className="flex justify-center mb-8">
-          <div className="bg-white dark:bg-gray-800 p-1 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="flex bg-white dark:bg-black p-1 rounded-lg shadow-sm gap-2">
             <Button
               onClick={() => setActiveTab('upcoming')}
               className={`px-6 py-2 rounded-md font-medium transition-colors  border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
