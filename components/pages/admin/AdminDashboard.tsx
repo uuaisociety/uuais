@@ -23,8 +23,8 @@ import FAQModal from '@/components/pages/admin/modals/FAQModal';
 import RegistrationQuestionModal from '@/components/pages/admin/modals/RegistrationQuestionModal';
 import EventQuestionsModal from '@/components/pages/admin/modals/EventQuestionsModal';
 import { useApp } from '@/contexts/AppContext';
-import AdminGate from '@/components/auth/AdminGate';
 import { updatePageMeta } from '@/utils/seo';
+import { useAdmin } from '@/hooks/useAdmin';
 // format imported where needed in tab components
 import { BlogPost, Event, TeamMember, FAQ, RegistrationQuestion, EventCustomQuestion } from '@/types';
 import {
@@ -36,6 +36,7 @@ import {
 
 const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
+  const { enableDev, devActive, user, logout, clearDevAdmin } = useAdmin();
   const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'registration' | 'analytics'>('events');
   const placeholderImage = '@/public/placeholder.png';
 
@@ -363,38 +364,31 @@ const AdminDashboard: React.FC = () => {
 
 
   return (
-    <AdminGate>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 pt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="mb-8 flex justify-between items-start">
+          <div className="mb-8 flex justify-between items-start gap-4">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Admin Dashboard</h1>
               <p className="text-gray-600 dark:text-gray-300">Manage your UU AI Society content and events</p>
             </div>
-            <button
-              onClick={async () => {
-                try {
-                  await fetch('/api/auth', {
-                    method: 'DELETE',
-                    credentials: 'include',
-                  });
-                  window.location.href = '/admin';
-                } catch (err) {
-                  console.error('Logout error:', err);
-                  window.location.href = '/admin';
-                }
-              }}
-              className="px-4 py-2 bg-gray-700 dark:bg-gray-600 text-white rounded-md hover:bg-gray-600 dark:hover:bg-gray-500 transition-colors text-sm"
-            >
-              Logout
-            </button>
+            <div className="flex items-center gap-2">
+              {enableDev && devActive && (
+                <div className="px-3 py-1 rounded bg-amber-500 text-white text-sm h-fit">Dev Mode On</div>
+              )}
+              {enableDev && devActive && (
+                <Button size="sm" variant="outline" onClick={clearDevAdmin}>Clear Dev Admin</Button>
+              )}
+              {user && (
+                <Button size="sm" variant="outline" onClick={logout}>Logout</Button>
+              )}
+            </div>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {stats.map((stat, index) => (
-              <Card key={index} className="bg-white dark:bg-gray-800 pt-4 border-gray-200 dark:border-gray-700">
+              <Card key={index}>
                 <CardContent className="p-6">
                   <div className="flex items-center">
                     <div className={`p-3 rounded-lg ${stat.color} text-white mr-4`}>
@@ -484,6 +478,12 @@ const AdminDashboard: React.FC = () => {
                   draftArticles: state.blogPosts.filter(p => !p.published).length,
                   teamMembers: state.teamMembers.length,
                 }}
+                events={state.events.map(e => ({
+                  id: e.id,
+                  title: e.title,
+                  date: e.date,
+                  currentRegistrations: e.currentRegistrations || 0,
+                }))}
               />
             )}
             {activeTab === 'faq' && (
@@ -953,7 +953,6 @@ const AdminDashboard: React.FC = () => {
           />
         </div>
       </div>
-    </AdminGate>
   );
 };
 
