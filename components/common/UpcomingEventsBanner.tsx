@@ -4,13 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { useApp } from '@/contexts/AppContext';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Calendar, Clock, MapPin, X, ChevronRight } from 'lucide-react';
+import { Calendar, Clock, MapPin, X, ChevronRight, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { format, isToday, isTomorrow, isThisWeek } from 'date-fns';
 
 const UpcomingEventsBanner: React.FC = () => {
   const { state } = useApp();
   const [isVisible, setIsVisible] = useState(true);
+  const [isDismissed, setIsDismissed] = useState(false);
   const [, setLastEventCount] = useState(0);
 
   // Get upcoming events (next 7 days)
@@ -25,13 +26,34 @@ const UpcomingEventsBanner: React.FC = () => {
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
     .slice(0, 3); // Show max 3 events
 
-  // Check for new events
+  // Check for dismissed state and new events
   useEffect(() => {
+    const dismissed = localStorage.getItem('eventBannerDismissed');
+    const dismissedTimestamp = localStorage.getItem('eventBannerDismissedTime');
+    
+    // Check if banner was dismissed within the last 7 days
+    if (dismissed === 'true' && dismissedTimestamp) {
+      const dismissedTime = parseInt(dismissedTimestamp);
+      const weekAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+      
+      if (dismissedTime > weekAgo) {
+        setIsDismissed(true);
+        setIsVisible(false);
+        return;
+      } else {
+        // Clear old dismissal if more than a week has passed
+        localStorage.removeItem('eventBannerDismissed');
+        localStorage.removeItem('eventBannerDismissedTime');
+      }
+    }
+    
     const currentEventCount = upcomingEvents.length;
     const storedCount = localStorage.getItem('lastEventCount');
     
-    if (storedCount && parseInt(storedCount) < currentEventCount) {
+    // Show banner if there are new events or if it hasn't been dismissed
+    if (currentEventCount > 0 && (!dismissed || (storedCount && parseInt(storedCount) < currentEventCount))) {
       setIsVisible(true);
+      setIsDismissed(false);
     }
     
     setLastEventCount(currentEventCount);
@@ -45,7 +67,18 @@ const UpcomingEventsBanner: React.FC = () => {
     return format(eventDate, 'MMM dd');
   };
 
-  if (!isVisible || upcomingEvents.length === 0) {
+  const handleDismiss = () => {
+    setIsVisible(false);
+  };
+  
+  const handleDontShowAgain = () => {
+    localStorage.setItem('eventBannerDismissed', 'true');
+    localStorage.setItem('eventBannerDismissedTime', Date.now().toString());
+    setIsDismissed(true);
+    setIsVisible(false);
+  };
+
+  if (!isVisible || isDismissed || upcomingEvents.length === 0) {
     return null;
   }
 
@@ -60,12 +93,22 @@ const UpcomingEventsBanner: React.FC = () => {
                 {upcomingEvents.length === 1 ? 'Upcoming Event' : 'Upcoming Events'}
               </h3>
             </div>
-            <button
-              onClick={() => setIsVisible(false)}
-              className="text-white/80 absolute top-0 right-0 hover:text-white transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
+            <div className="absolute top-2 right-2 flex gap-1">
+              <button
+                onClick={handleDontShowAgain}
+                className="text-white/80 hover:text-white transition-colors p-1 rounded"
+                title="Don't show again for 7 days"
+              >
+                <EyeOff className="w-4 h-4" />
+              </button>
+              <button
+                onClick={handleDismiss}
+                className="text-white/80 hover:text-white transition-colors p-1 rounded"
+                title="Close"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
           <div className="space-y-3">
