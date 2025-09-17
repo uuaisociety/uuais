@@ -1,11 +1,13 @@
 'use client'
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { Event, TeamMember, BlogPost } from '../types';
+import { Event, TeamMember, BlogPost, FAQ, RegistrationQuestion } from '../types';
 import { 
   subscribeToEvents, 
   subscribeToTeamMembers, 
   subscribeToBlogPosts,
+  subscribeToFaqs,
+  subscribeToRegistrationQuestions,
   addEvent as addEventToFirestore,
   updateEvent as updateEventInFirestore,
   deleteEvent as deleteEventFromFirestore,
@@ -14,13 +16,21 @@ import {
   deleteTeamMember as deleteTeamMemberFromFirestore,
   addBlogPost as addBlogPostToFirestore,
   updateBlogPost as updateBlogPostInFirestore,
-  deleteBlogPost as deleteBlogPostFromFirestore
+  deleteBlogPost as deleteBlogPostFromFirestore,
+  addFaq as addFaqToFirestore,
+  updateFaq as updateFaqInFirestore,
+  deleteFaq as deleteFaqFromFirestore,
+  addRegistrationQuestion as addRegistrationQuestionToFirestore,
+  updateRegistrationQuestion as updateRegistrationQuestionInFirestore,
+  deleteRegistrationQuestion as deleteRegistrationQuestionFromFirestore
 } from '../lib/firestore';
 
 interface AppState {
   events: Event[];
   teamMembers: TeamMember[];
   blogPosts: BlogPost[];
+  faqs: FAQ[];
+  registrationQuestions: RegistrationQuestion[];
   isLoading: boolean;
   error: string | null;
 }
@@ -39,7 +49,15 @@ type AppAction =
   | { type: 'SET_BLOG_POSTS'; payload: BlogPost[] }
   | { type: 'ADD_BLOG_POST'; payload: BlogPost }
   | { type: 'UPDATE_BLOG_POST'; payload: BlogPost }
-  | { type: 'DELETE_BLOG_POST'; payload: string };
+  | { type: 'DELETE_BLOG_POST'; payload: string }
+  | { type: 'SET_FAQS'; payload: FAQ[] }
+  | { type: 'ADD_FAQS'; payload: FAQ }
+  | { type: 'UPDATE_FAQS'; payload: FAQ }
+  | { type: 'DELETE_FAQS'; payload: string }
+  | { type: 'SET_REGISTRATION_QUESTIONS'; payload: RegistrationQuestion[] }
+  | { type: 'ADD_REGISTRATION_QUESTION'; payload: RegistrationQuestion }
+  | { type: 'UPDATE_REGISTRATION_QUESTION'; payload: RegistrationQuestion }
+  | { type: 'DELETE_REGISTRATION_QUESTION'; payload: string };
 
 type FirestoreAction = 
   | { firestoreAction: 'ADD_EVENT'; payload: Omit<Event, 'id'> }
@@ -50,12 +68,20 @@ type FirestoreAction =
   | { firestoreAction: 'DELETE_TEAM_MEMBER'; payload: string }
   | { firestoreAction: 'ADD_BLOG_POST'; payload: Omit<BlogPost, 'id'> }
   | { firestoreAction: 'UPDATE_BLOG_POST'; payload: BlogPost }
-  | { firestoreAction: 'DELETE_BLOG_POST'; payload: string };
+  | { firestoreAction: 'DELETE_BLOG_POST'; payload: string }
+  | { firestoreAction: 'ADD_FAQS'; payload: Omit<FAQ, 'id'> }
+  | { firestoreAction: 'UPDATE_FAQS'; payload: FAQ }
+  | { firestoreAction: 'DELETE_FAQS'; payload: string }
+  | { firestoreAction: 'ADD_REGISTRATION_QUESTION'; payload: Omit<RegistrationQuestion, 'id'> }
+  | { firestoreAction: 'UPDATE_REGISTRATION_QUESTION'; payload: RegistrationQuestion }
+  | { firestoreAction: 'DELETE_REGISTRATION_QUESTION'; payload: string };
 
 const initialState: AppState = {
   events: [],
   teamMembers: [],
   blogPosts: [],
+  faqs: [],
+  registrationQuestions: [],
   isLoading: false,
   error: null
 };
@@ -114,6 +140,34 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         ...state, 
         blogPosts: state.blogPosts.filter(post => post.id !== action.payload) 
       };
+    case 'SET_FAQS':
+      return { ...state, faqs: action.payload };
+    case 'ADD_FAQS':
+      return { ...state, faqs: [...state.faqs, action.payload] };
+    case 'UPDATE_FAQS':
+      return {
+        ...state,
+        faqs: state.faqs.map(f => f.id === action.payload.id ? action.payload : f)
+      };
+    case 'DELETE_FAQS':
+      return {
+        ...state,
+        faqs: state.faqs.filter(f => f.id !== action.payload)
+      };
+    case 'SET_REGISTRATION_QUESTIONS':
+      return { ...state, registrationQuestions: action.payload };
+    case 'ADD_REGISTRATION_QUESTION':
+      return { ...state, registrationQuestions: [...state.registrationQuestions, action.payload] };
+    case 'UPDATE_REGISTRATION_QUESTION':
+      return {
+        ...state,
+        registrationQuestions: state.registrationQuestions.map(q => q.id === action.payload.id ? action.payload : q)
+      };
+    case 'DELETE_REGISTRATION_QUESTION':
+      return {
+        ...state,
+        registrationQuestions: state.registrationQuestions.filter(q => q.id !== action.payload)
+      };
     default:
       return state;
   }
@@ -140,12 +194,20 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const unsubscribeBlogPosts = subscribeToBlogPosts((posts) => {
       dispatch({ type: 'SET_BLOG_POSTS', payload: posts });
     });
+    const unsubscribeFaqs = subscribeToFaqs((faqs) => {
+      dispatch({ type: 'SET_FAQS', payload: faqs });
+    });
+    const unsubscribeRegistrationQuestions = subscribeToRegistrationQuestions((qs) => {
+      dispatch({ type: 'SET_REGISTRATION_QUESTIONS', payload: qs });
+    });
 
     // Cleanup subscriptions on unmount
     return () => {
       unsubscribeEvents();
       unsubscribeTeamMembers();
       unsubscribeBlogPosts();
+      unsubscribeFaqs();
+      unsubscribeRegistrationQuestions();
     };
   }, []);
 
@@ -185,6 +247,24 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             break;
           case 'DELETE_BLOG_POST':
             await deleteBlogPostFromFirestore(action.payload);
+            break;
+          case 'ADD_FAQS':
+            await addFaqToFirestore(action.payload);
+            break;
+          case 'UPDATE_FAQS':
+            await updateFaqInFirestore(action.payload.id, action.payload);
+            break;
+          case 'DELETE_FAQS':
+            await deleteFaqFromFirestore(action.payload);
+            break;
+          case 'ADD_REGISTRATION_QUESTION':
+            await addRegistrationQuestionToFirestore(action.payload);
+            break;
+          case 'UPDATE_REGISTRATION_QUESTION':
+            await updateRegistrationQuestionInFirestore(action.payload.id, action.payload);
+            break;
+          case 'DELETE_REGISTRATION_QUESTION':
+            await deleteRegistrationQuestionFromFirestore(action.payload);
             break;
         }
       } else {

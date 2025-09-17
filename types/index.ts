@@ -11,6 +11,7 @@ export interface Event {
   registrationRequired: boolean;
   maxCapacity?: number;
   currentRegistrations?: number;
+  published?: boolean;
 }
 
 export interface TeamMember {
@@ -22,6 +23,7 @@ export interface TeamMember {
   linkedin?: string;
   twitter?: string;
   email?: string;
+  published?: boolean;
 }
 
 export interface BlogPost {
@@ -60,4 +62,42 @@ export interface ContactFormData {
 
 export interface NewsletterData {
   email: string;
+}
+
+export interface FAQ {
+  id: string;
+  question: string;
+  answer: string;
+  category: string;
+  order: number;
+  published: boolean;
+}
+
+export interface RegistrationQuestion {
+  id: string;
+  question: string;
+  type: 'text' | 'textarea' | 'select' | 'checkbox' | 'radio';
+  options?: string[];
+  required: boolean;
+  order: number;
+  eventTypes: string[];
+}
+
+export interface EventRegistration {
+  id: string;
+  eventId: string;
+  userId: string;
+  registrationData: Record<string, string | number | boolean | string[]>;
+  registeredAt: string;
+  status: 'registered' | 'waitlist' | 'cancelled';
+}
+
+export interface EventCustomQuestion {
+  id: string;
+  eventId: string;
+  question: string;
+  type: 'text' | 'textarea' | 'select' | 'checkbox' | 'radio';
+  options?: string[];
+  required: boolean;
+  order: number;
 }

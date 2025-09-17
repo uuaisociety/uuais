@@ -13,6 +13,7 @@ import { Mail } from 'lucide-react';
 // import { Textarea } from '@/components/ui/Textarea';
 import { Card, CardContent } from '@/components/ui/Card';
 import { updatePageMeta } from '@/utils/seo';
+import { useApp } from '@/contexts/AppContext';
 // import type { ContactFormData } from '@/types';
 
 // const contactSchema = z.object({
@@ -24,6 +25,7 @@ import { updatePageMeta } from '@/utils/seo';
 
 const ContactPage: React.FC = () => {
   // const [isSubmitted, setIsSubmitted] = useState(false);
+  const { state } = useApp();
 
   useEffect(() => {
     updatePageMeta('Contact Us', 'Get in touch with UU AI Society for questions, partnerships, or general inquiries');
@@ -82,7 +84,7 @@ const ContactPage: React.FC = () => {
   // };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 pt-24 pb-8 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -207,7 +209,7 @@ const ContactPage: React.FC = () => {
                 Frequently Asked Questions
               </h2>
               <div className="space-y-4">
-                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 pt-4">
+                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                       How can I join UU AI Society?
@@ -219,7 +221,7 @@ const ContactPage: React.FC = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 pt-4">
+                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                       Are your events free for students?
@@ -231,7 +233,7 @@ const ContactPage: React.FC = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 pt-4">
+                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                       Can companies sponsor or collaborate with UU AI Society?
@@ -242,6 +244,18 @@ const ContactPage: React.FC = () => {
                     </p>
                   </CardContent>
                 </Card>
+                {state.faqs.sort((a, b) => a.order - b.order).map((faq) => (
+                  <Card key={faq.id} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                    <CardContent className="p-6">
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                        {faq.question}
+                      </h3>
+                      <p className="text-gray-600 dark:text-gray-300">
+                        {faq.answer}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
             </div>
           </div>

@@ -1,19 +1,34 @@
 'use client'
 
 import React from 'react';
-import { useParams, notFound } from 'next/navigation';
-import { useApp } from '@/contexts/AppContext';
+import { notFound, useParams } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
+import { useApp } from '@/contexts/AppContext';
 
 const BlogDetailPage: React.FC = () => {
   const params = useParams();
-  const { state } = useApp();
   const blogId = params.id as string;
+  const { state } = useApp();
+
+  if (state.blogPosts.length === 0) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-gray-900 pt-24 py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="animate-pulse space-y-6">
+            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
+            <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded" />
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const blogPost = state.blogPosts.find(post => post.id === blogId);
 

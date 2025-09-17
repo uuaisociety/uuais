@@ -1,21 +1,38 @@
 'use client'
 
 import React from 'react';
-import { useParams, notFound } from 'next/navigation';
-import { useApp } from '@/contexts/AppContext';
+import { notFound, useParams } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ArrowLeft, Calendar, Clock, MapPin, Users, Tag } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
+import EventRegistrationDialog from '@/components/events/EventRegistrationDialog';
+import { useApp } from '@/contexts/AppContext';
 
 const EventDetailPage: React.FC = () => {
   const params = useParams();
-  const { state } = useApp();
   const eventId = params.id as string;
+  const { state } = useApp();
 
-  const event = state.events.find(event => event.id === eventId);
+  // Show loading state while events are being fetched the first time
+  if (state.events.length === 0) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-gray-900 py-12 pt-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="animate-pulse space-y-6">
+            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
+            <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded" />
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const event = state.events.find(e => e.id === eventId);
 
   if (!event) {
     notFound();
@@ -75,7 +92,7 @@ const EventDetailPage: React.FC = () => {
           {/* Registration Info */}
           {event.registrationRequired && (
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between pb-2">
                 <div className="flex items-center gap-2">
                   <Users className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                   <span className="text-blue-800 dark:text-blue-200 font-medium">
@@ -87,9 +104,7 @@ const EventDetailPage: React.FC = () => {
                 </div>
               </div>
               {isUpcoming && (
-                <Button className="mt-3 bg-blue-600 hover:bg-blue-700">
-                  Register Now
-                </Button>
+                <EventRegistrationDialog event={event} />
               )}
             </div>
           )}
@@ -160,7 +175,7 @@ const EventDetailPage: React.FC = () => {
           </Card>
 
           {event.registrationRequired && (
-            <Card>
+            <Card className="h-full dark:bg-gray-800 pt-4" >
               <CardContent className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                   Registration
@@ -186,12 +201,9 @@ const EventDetailPage: React.FC = () => {
                   </div>
                 </div>
                 {isUpcoming && (
-                  <Button className="w-full mt-4 bg-blue-600 hover:bg-blue-700">
-                    {event.maxCapacity && (event.currentRegistrations || 0) >= event.maxCapacity
-                      ? 'Join Waitlist' 
-                      : 'Register Now'
-                    }
-                  </Button>
+                  <div className="w-full mt-4">
+                    <EventRegistrationDialog event={event} />
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -199,40 +211,40 @@ const EventDetailPage: React.FC = () => {
         </div>
 
         {/* Related Events */}
-        <div className="mt-12">
+        <div className="mt-12 ">
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             Other Upcoming Events
           </h3>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 ">
             {state.events
               .filter(e => e.id !== eventId && new Date(e.date) > new Date())
               .slice(0, 2)
-              .map((event) => (
-                <Card key={event.id} className="hover:shadow-lg transition-shadow">
+              .map((relatedEvent) => (
+                <Card key={relatedEvent.id} className="hover:shadow-lg transition-shadow dark:bg-gray-800 pt-4">
                   <CardContent className="p-6">
-                    {event.image && (
+                    {relatedEvent.image && (
                       <Image
-                        src={event.image}
-                        alt={event.title}
+                        src={relatedEvent.image}
+                        alt={relatedEvent.title}
                         width={300}
                         height={200}
                         className="w-full h-32 object-cover rounded-lg mb-4"
                       />
                     )}
                     <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                      {event.title}
+                      {relatedEvent.title}
                     </h4>
                     <div className="text-gray-600 dark:text-gray-300 text-sm mb-4 space-y-1">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
-                        <span>{format(new Date(event.date), 'MMM dd, yyyy')}</span>
+                        <span>{format(new Date(relatedEvent.date), 'MMM dd, yyyy')}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4" />
-                        <span>{event.location}</span>
+                        <span>{relatedEvent.location}</span>
                       </div>
                     </div>
-                    <Link href={`/events/${event.id}`}>
+                    <Link href={`/events/${relatedEvent.id}`}>
                       <Button variant="outline" size="sm">
                         View Details
                       </Button>
