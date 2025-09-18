@@ -13,6 +13,8 @@ import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
 import Tag from '@/components/ui/Tag';
 
+import campus from '@/public/images/campus.png';
+
 const BlogPage: React.FC = () => {
   const { state } = useApp();
   const [searchTerm, setSearchTerm] = useState('');
@@ -129,7 +131,7 @@ const BlogPage: React.FC = () => {
                   {otherPosts.map((post) => (
                     <Card key={post.id} className="h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                       <CardMedia
-                        src={post.image}
+                        src={post.image || campus}
                         alt={post.title}
                         fill
                         className="aspect-video"

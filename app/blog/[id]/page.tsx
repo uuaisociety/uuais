@@ -12,6 +12,8 @@ import { incrementBlogRead } from '@/lib/firestore';
 import Tag from '@/components/ui/Tag';
 import { useApp } from '@/contexts/AppContext';
 
+import campus from '@/public/images/campus.png';
+
 const BlogDetailPage: React.FC = () => {
   const params = useParams();
   const blogId = params.id as string;
@@ -91,7 +93,7 @@ const BlogDetailPage: React.FC = () => {
         {blogPost.image && (
           <div className="mb-8">
             <Image
-              src={blogPost.image}
+              src={blogPost.image || campus}
               alt={blogPost.title}
               width={800}
               height={400}

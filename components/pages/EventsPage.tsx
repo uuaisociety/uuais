@@ -14,6 +14,8 @@ import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
+import campus from '@/public/images/campus.png';
+
 
 const EventsPage: React.FC = () => {
   const { state } = useApp();
@@ -137,7 +139,7 @@ const EventsPage: React.FC = () => {
                 <div className="aspect-video relative overflow-hidden rounded-t-lg">
                   <Link href={`/events/${event.id}`}>
                     <Image
-                      src={event.image}
+                      src={event.image || campus}
                       alt={event.title}
                       width={500}
                       height={500}

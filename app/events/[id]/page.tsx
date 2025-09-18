@@ -11,6 +11,8 @@ import { format } from 'date-fns';
 import EventRegistrationDialog from '@/components/events/EventRegistrationDialog';
 import { useApp } from '@/contexts/AppContext';
 
+import campus from '@/public/images/campus.png';
+
 const EventDetailPage: React.FC = () => {
   const params = useParams();
   const eventId = params.id as string;
@@ -114,7 +116,7 @@ const EventDetailPage: React.FC = () => {
         {event.image && (
           <div className="mb-8">
             <Image
-              src={event.image}
+              src={event.image || campus}
               alt={event.title}
               width={800}
               height={400}
@@ -224,7 +226,7 @@ const EventDetailPage: React.FC = () => {
                   <CardContent className="p-6">
                     {relatedEvent.image && (
                       <Image
-                        src={relatedEvent.image}
+                        src={relatedEvent.image || campus}
                         alt={relatedEvent.title}
                         width={300}
                         height={200}
