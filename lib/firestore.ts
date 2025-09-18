@@ -14,6 +14,7 @@ import {
   where,
   setDoc,
   DocumentData,
+  Timestamp,
 } from 'firebase/firestore';
 import { db } from './firebase-client';
 import { Event, TeamMember, BlogPost, FAQ, RegistrationQuestion, EventRegistration, EventCustomQuestion } from '@/types';
@@ -44,6 +45,15 @@ export const getEventById = async (id: string): Promise<Event | null> => {
 export const addEvent = async (event: Omit<Event, 'id'>): Promise<string> => {
   const eventsRef = collection(db, 'events');
   const docRef = await addDoc(eventsRef, event);
+  // Initialize analytics document so the Admin dashboard always has an entry
+  try {
+    const analyticsRef = doc(db, 'analyticsEvents', docRef.id);
+    await setDoc(
+      analyticsRef,
+      { clicks: 0, updatedAt: serverTimestamp() },
+      { merge: true }
+    );
+  } catch {}
   return docRef.id;
 };
 
@@ -60,7 +70,7 @@ function todayKey() {
 
 /**
  * Increment unique event clicks once per day per browser using localStorage dedup.
- * Writes to collection 'analytics_events', doc {eventId}, field 'clicks'.
+ * Writes to collection 'analyticsEvents', doc {eventId}, field 'clicks'.
  */
 export async function incrementEventUniqueClick(eventId: string): Promise<void> {
   try {
@@ -68,11 +78,9 @@ export async function incrementEventUniqueClick(eventId: string): Promise<void> 
     const key = `clicked_event_${eventId}_${todayKey()}`;
     if (localStorage.getItem(key) === '1') return;
     localStorage.setItem(key, '1');
-    const ref = doc(db, 'analytics_events', eventId);
-    await updateDoc(ref, { clicks: increment(1), updatedAt: serverTimestamp() }).catch(async () => {
-      // If doc doesn't exist, create it
-      await setDoc(ref, { clicks: 1, updatedAt: serverTimestamp() }, { merge: true });
-    });
+    const ref = doc(db, 'analyticsEvents', eventId);
+    // Using setDoc with merge and increment guarantees doc creation and atomic increment
+    await setDoc(ref, { clicks: increment(1), updatedAt: serverTimestamp() }, { merge: true });
   } catch (e) {
     // Non-fatal
     console.warn('incrementEventUniqueClick failed', e);
@@ -81,7 +89,7 @@ export async function incrementEventUniqueClick(eventId: string): Promise<void> 
 
 /**
  * Increment unique blog reads once per day per browser using localStorage dedup.
- * Writes to collection 'analytics_blogs', doc {blogId}, field 'reads'.
+ * Writes to collection 'analyticsBlogs', doc {blogId}, field 'reads'.
  */
 export async function incrementBlogRead(blogId: string): Promise<void> {
   try {
@@ -89,10 +97,8 @@ export async function incrementBlogRead(blogId: string): Promise<void> {
     const key = `read_blog_${blogId}_${todayKey()}`;
     if (localStorage.getItem(key) === '1') return;
     localStorage.setItem(key, '1');
-    const ref = doc(db, 'analytics_blogs', blogId);
-    await updateDoc(ref, { reads: increment(1), updatedAt: serverTimestamp() }).catch(async () => {
-      await setDoc(ref, { reads: 1, updatedAt: serverTimestamp() }, { merge: true });
-    });
+    const ref = doc(db, 'analyticsBlogs', blogId);
+    await setDoc(ref, { reads: increment(1), updatedAt: serverTimestamp() }, { merge: true });
   } catch (e) {
     console.warn('incrementBlogRead failed', e);
   }
@@ -104,7 +110,7 @@ export async function incrementBlogRead(blogId: string): Promise<void> {
 export async function getEventClicksCounts(ids: string[]): Promise<Record<string, number>> {
   const counts: Record<string, number> = {};
   await Promise.all(ids.map(async (id) => {
-    const d = await getDoc(doc(db, 'analytics_events', id));
+    const d = await getDoc(doc(db, 'analyticsEvents', id));
     const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
     counts[id] = data?.clicks ?? 0;
   }));
@@ -117,7 +123,7 @@ export async function getEventClicksCounts(ids: string[]): Promise<Record<string
 export async function getBlogReadsCounts(ids: string[]): Promise<Record<string, number>> {
   const counts: Record<string, number> = {};
   await Promise.all(ids.map(async (id) => {
-    const d = await getDoc(doc(db, 'analytics_blogs', id));
+    const d = await getDoc(doc(db, 'analyticsBlogs', id));
     const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
     counts[id] = data?.reads ?? 0;
   }));
@@ -179,6 +185,15 @@ export const getBlogPostById = async (id: string): Promise<BlogPost | null> => {
 export const addBlogPost = async (post: Omit<BlogPost, 'id'>): Promise<string> => {
   const postsRef = collection(db, 'blogPosts');
   const docRef = await addDoc(postsRef, post);
+  // Initialize analytics document so the Admin dashboard always has an entry
+  try {
+    const analyticsRef = doc(db, 'analyticsBlogs', docRef.id);
+    await setDoc(
+      analyticsRef,
+      { reads: 0, updatedAt: serverTimestamp() },
+      { merge: true }
+    );
+  } catch {}
   return docRef.id;
 };
 
@@ -362,4 +377,57 @@ export const registerForEvent = async (
   }
 
   return docRef.id;
+};
+
+// Fetch registrations for a specific event
+export const getEventRegistrations = async (
+  eventId: string
+): Promise<EventRegistration[]> => {
+  const regRef = collection(db, 'registrations');
+  const qy = query(regRef, where('eventId', '==', eventId));
+  const snapshot = await getDocs(qy);
+  return snapshot.docs.map((d) => {
+    const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
+    const ts = data?.registeredAt;
+    const registeredAt = ts instanceof Timestamp
+      ? ts.toDate().toISOString()
+      : '';
+    const registrationData = (data?.registrationData ?? {}) as EventRegistration['registrationData'];
+    return {
+      id: d.id,
+      eventId: data?.eventId ?? '',
+      userId: data?.userId ?? '',
+      registrationData,
+      registeredAt,
+      status: data?.status ?? 'registered',
+    } as EventRegistration;
+  });
+};
+
+// Subscribe to registrations for a specific event
+export const subscribeToEventRegistrations = (
+  eventId: string,
+  callback: (regs: EventRegistration[]) => void
+) => {
+  const regRef = collection(db, 'registrations');
+  const qy = query(regRef, where('eventId', '==', eventId));
+  return onSnapshot(qy, (snapshot) => {
+    const regs: EventRegistration[] = snapshot.docs.map((d) => {
+      const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
+      const ts = data?.registeredAt;
+      const registeredAt = ts instanceof Timestamp
+        ? ts.toDate().toISOString()
+        : '';
+      const registrationData = (data?.registrationData ?? {}) as EventRegistration['registrationData'];
+      return {
+        id: d.id,
+        eventId: data?.eventId ?? '',
+        userId: data?.userId ?? '',
+        registrationData,
+        registeredAt,
+        status: data?.status ?? 'registered',
+      } as EventRegistration;
+    });
+    callback(regs);
+  });
 };

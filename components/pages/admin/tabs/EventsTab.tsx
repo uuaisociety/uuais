@@ -15,6 +15,7 @@ export interface EventsTabProps {
   onDelete: (id: string) => void;
   onTogglePublish: (event: Event) => void;
   onManageQuestions: (event: Event) => void;
+  onViewRegistrations: (event: Event) => void;
 }
 
 const EventsTab: React.FC<EventsTabProps> = ({
@@ -24,6 +25,7 @@ const EventsTab: React.FC<EventsTabProps> = ({
   onDelete,
   onTogglePublish,
   onManageQuestions,
+  onViewRegistrations,
 }) => {
   return (
     <div>
@@ -72,6 +74,9 @@ const EventsTab: React.FC<EventsTabProps> = ({
                   </Button>
                   <Button size="sm" variant="outline" onClick={() => onManageQuestions(event)}>
                     Manage Questions
+                  </Button>
+                  <Button size="sm" variant="outline" onClick={() => onViewRegistrations(event)}>
+                    Registrations
                   </Button>
                   <Button size="sm" variant="outline" icon={Edit3} onClick={() => onEdit(event)}>
                     Edit

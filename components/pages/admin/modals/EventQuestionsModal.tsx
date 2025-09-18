@@ -104,7 +104,7 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Type</label>
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-black dark:text-white" value={form.type} onChange={(e) => setForm(prev => ({ ...prev, type: e.target.value as EventCustomQuestion['type'] }))}>
+              <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-black dark:text-white bg-white dark:bg-gray-700" value={form.type} onChange={(e) => setForm(prev => ({ ...prev, type: e.target.value as EventCustomQuestion['type'] }))}>
                 <option className="text-black dark:text-white" value="text">Text</option>
                 <option className="text-black dark:text-white" value="textarea">Textarea</option>
                 <option className="text-black dark:text-white" value="select">Select</option>
@@ -118,8 +118,20 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Options (comma-separated)</label>
-            <input className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" value={(form.options || []).join(', ')} onChange={(e) => setForm(prev => ({ ...prev, options: e.target.value.split(',').map(s => s.trim()).filter(Boolean) }))} disabled={form.type === 'text' || form.type === 'textarea'} />
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Options (comma separated)</label>
+            <textarea
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 text-black dark:text-white"
+              rows={3}
+              value={(form.options || []).join(', ')}
+              onChange={(e) => setForm(prev => ({
+                ...prev,
+                options: e.target.value
+                  .split(',')
+                  .map(o => o.trim())
+                  .filter(o => o.length > 0)
+              }))}
+              disabled={form.type === 'text' || form.type === 'textarea'}
+            />
           </div>
           <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={form.required} onChange={(e) => setForm(prev => ({ ...prev, required: e.target.checked }))} /> Required</label>
           <div className="flex justify-end gap-2">
