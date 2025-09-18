@@ -51,7 +51,7 @@ const BlogDetailPage: React.FC = () => {
         {/* Back Button */}
         <Link href="/blog">
           <Button variant="outline" className="mb-8" icon={ArrowLeft}>
-            Back to Blog
+            Back to Newsletter
           </Button>
         </Link>
 

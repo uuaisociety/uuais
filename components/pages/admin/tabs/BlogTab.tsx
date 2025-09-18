@@ -20,7 +20,7 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onEdit, onDelete, 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Blog Management</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Newsletter Management</h2>
         <Button icon={Plus} onClick={onAddClick}>New Article</Button>
       </div>
 

@@ -18,7 +18,7 @@ const BlogPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    updatePageMeta('Blog', 'Read the latest articles and insights from UU AI Society members and industry experts');
+    updatePageMeta('Newsletter', 'Read the latest articles and insights from UU AI Society members and industry experts');
   }, []);
 
   const filteredPosts = state.blogPosts
@@ -40,7 +40,7 @@ const BlogPage: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Blog
+            Newsletter
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Insights, tutorials, and thoughts from our community of AI enthusiasts

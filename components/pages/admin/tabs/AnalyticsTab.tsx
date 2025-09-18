@@ -60,12 +60,12 @@ const AnalyticsTab: React.FC<AnalyticsTabProps> = ({ stats, events = [], blogs =
           {([
             { key: 'overview', label: 'Summary' },
             { key: 'events', label: 'Events' },
-            { key: 'blogs', label: 'Blogs' },
+            { key: 'blogs', label: 'Newsletter' },
           ] as const).map(({ key, label }) => (
             <button
               key={key}
               onClick={() => setActiveSubtab(key)}
-              className={`py-2 px-1 border-b-2 text-sm font-medium ${activeSubtab === key
+              className={`py-2 px-4 border-b-2 text-sm font-medium ${activeSubtab === key
                 ? 'border-red-500 text-red-600 dark:text-red-400'
                 : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
               }`}
@@ -166,7 +166,7 @@ const AnalyticsTab: React.FC<AnalyticsTabProps> = ({ stats, events = [], blogs =
       {activeSubtab === 'blogs' && (
         <Card className='bg-white dark:bg-gray-800 text-black dark:text-white'>
           <CardHeader>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Blog Reads</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Newsletter Reads</h3>
           </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
