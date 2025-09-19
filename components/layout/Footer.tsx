@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, MessageSquareCode, ArrowUp } from 'lucide-react';
+import { Mail, MessageSquareCode, ArrowUp, Handshake } from 'lucide-react';
 import { Linkedin01Icon, InstagramIcon } from 'hugeicons-react';
 // import { SiInstagram } from '@icons-pack/react-simple-icons';
 import { Button } from '@/components/ui/Button';
@@ -87,11 +87,15 @@ export const Footer: React.FC = () => {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300 text-sm"><a href="mailto:contact@uuais.com" className="text-blue-700">contact@uuais.com</a></span>
+                <span className="text-gray-300 text-sm"><a href="mailto:contact@uuais.com">contact@uuais.com</a></span>
               </div>
               <div className="flex items-center space-x-3">
-                <MessageSquareCode className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300 text-sm"><a href="mailto:dev@uuais.com" className="text-blue-700">dev@uuais.com</a></span>
+                <MessageSquareCode className="h-4 w-4 text-gray-400" /> 
+                <span className="text-gray-300 text-sm"><a href="mailto:dev@uuais.com">dev@uuais.com</a></span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Handshake className="h-4 w-4 text-gray-400" />
+                <span className="text-gray-300 text-sm"><a href="mailto:partnerships@uuais.com">partnerships@uuais.com</a></span>
               </div>
               {/* <div className="flex items-start space-x-3">
                 <MapPin className="h-4 w-4 text-gray-400 mt-0.5" />

@@ -28,7 +28,7 @@ export const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
+          <Link href="/" className="flex items-center space-x-2 group no-underline">
             <div className="pl-2 pb-2 rounded-lg">
                 <Image
                     src="/images/logo.png"

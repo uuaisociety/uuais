@@ -7,7 +7,7 @@ import React, { useEffect } from 'react';
 // import { useForm } from 'react-hook-form';
 // import { zodResolver } from '@hookform/resolvers/zod';
 // import { z } from 'zod';
-import { Mail } from 'lucide-react';
+import { Mail, MessageSquareCode, Handshake } from 'lucide-react';
 // import { Button } from '@/components/ui/Button';
 // import { Input } from '@/components/ui/Input';
 // import { Textarea } from '@/components/ui/Textarea';
@@ -43,39 +43,33 @@ const ContactPage: React.FC = () => {
   const contactInfo = [
     {
       icon: Mail,
-      title: 'Email',
-      details: 'contact@uuais.com',
-      description: 'Send us an email anytime'
+      title: 'General',
+      details: <a href="mailto:contact@uuais.com">contact@uuais.com</a>,
+      description: 'For general inquiries.'
     },
-    // {
-    //   icon: Phone,
-    //   title: 'Phone',
-    //   details: '+1 (555) 123-4567',
-    //   description: 'Monday - Friday, 9AM - 5PM'
-    // },
-    // {
-    //   icon: MapPin,
-    //   title: 'Location',
-    //   details: 'Computer Science Building, Room 201',
-    //   description: 'University Campus, City, State 12345'
-    // },
-    // {
-    //   icon: Clock,
-    //   title: 'Office Hours',
-    //   details: 'Mon-Fri: 2PM - 6PM',
-    //   description: 'Drop by for in-person meetings'
-    // }
+    {
+      icon: Handshake,
+      title: 'Partnership',
+      details: <a href="mailto:partnership@uuais.com">partnership@uuais.com</a>,
+      description: 'For partnerships, sponsorships, or collaborations.'
+    },
+    {
+      icon: MessageSquareCode,
+      title: 'Development',
+      details: <a href="mailto:dev@uuais.com">dev@uuais.com</a>,
+      description: 'For inquiries related to our projects or website.'
+    }
   ];
 
   // const onSubmit = async (data: ContactFormData) => {
   //   try {
   //     // Simulate API call
   //     await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
   //     console.log('Contact form submitted:', data);
   //     setIsSubmitted(true);
   //     reset();
-      
+
   //     // Reset success message after 5 seconds
   //     setTimeout(() => setIsSubmitted(false), 5000);
   //   } catch (error) {
@@ -92,7 +86,7 @@ const ContactPage: React.FC = () => {
             Contact Us
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Have questions about UU AI Society? Want to collaborate or partner with us? 
+            Have questions about UU AI Society? Want to collaborate or partner with us?
             We&apos;d love to hear from you!
           </p>
         </div>
@@ -106,7 +100,7 @@ const ContactPage: React.FC = () => {
                   Get in Touch
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300 mb-8">
-                  Whether you&apos;re a student interested in AI, a company looking to collaborate, 
+                  Whether you&apos;re a student interested in AI, a company looking to collaborate,
                   or just curious about what we do, we&apos;re here to help.
                 </p>
               </div>
@@ -215,8 +209,8 @@ const ContactPage: React.FC = () => {
                       How can I join UU AI Society?
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Currently we are not accepting new applications. 
-                      We will announce the next application period on our social media channels. 
+                      Currently we are not accepting new applications.
+                      We will announce the next application period on our social media channels.
                     </p>
                   </CardContent>
                 </Card>
@@ -227,7 +221,7 @@ const ContactPage: React.FC = () => {
                       Are your events free for students?
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300">
-                      In general all our workshops, seminars, and networking events are free for 
+                      In general all our workshops, seminars, and networking events are free for
                       students, although some special events may have limited capacity and or require a small fee.
                     </p>
                   </CardContent>
@@ -239,8 +233,8 @@ const ContactPage: React.FC = () => {
                       Can companies sponsor or collaborate with UU AI Society?
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300">
-                      Absolutely! We&apos;re always looking for industry partnerships. 
-                      Contact us at <a href="mailto:contact@uuais.com" className="text-blue-700">contact@uuais.com</a> to discuss sponsorship opportunities and collaboration ideas.
+                      Absolutely! We&apos;re always looking for industry partnerships.
+                      Contact us at <a href="mailto:contact@uuais.com">contact@uuais.com</a> to discuss sponsorship opportunities and collaboration ideas.
                     </p>
                   </CardContent>
                 </Card>

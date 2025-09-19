@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Calendar, Users, Brain, Zap, Globe } from 'lucide-react';
+import { ArrowRight, Calendar, Users, Zap, Globe, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
@@ -26,19 +26,19 @@ const HomePage: React.FC = () => {
 
   const features = [
     {
-      icon: Brain,
-      title: 'AI Education',
-      description: 'Comprehensive workshops and seminars from real industry professionals covering the latest in artificial intelligence and machine learning.'
+      icon: BookOpen,
+      title: 'AI Knowledge',
+      description: 'Workshops and seminars from real industry professionals with knowledge of the latest in artificial intelligence and machine learning.'
     },
     {
       icon: Users,
       title: 'Community',
-      description: 'Connect with like-minded students and build lasting relationships and connections in the AI community.'
+      description: 'Find like-minded students and connect with the AI community at large.'
     },
     {
       icon: Zap,
       title: 'Innovation',
-      description: 'Work on cutting-edge projects and participate in hackathons to push the boundaries of AI.'
+      description: 'Work on projects and participate in hackathons to push your knowledge of AI and discover new opportunities.'
     },
     {
       icon: Globe,
