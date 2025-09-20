@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
+import campus from '@/public/images/campus.png';
 
 const HomePage: React.FC = () => {
   const { state } = useApp();
@@ -182,7 +183,7 @@ const HomePage: React.FC = () => {
                 </p>
               </div>
               <Link href="/events">
-                <Button variant="outline" className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                <Button variant="default">
                   View All Events
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
@@ -193,10 +194,10 @@ const HomePage: React.FC = () => {
               {upcomingEvents.map((event) => (
                 <Card key={event.id} className="h-full group hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <div className="aspect-video relative overflow-hidden rounded-t-lg">
-                    <Link href={`/events/${event.id}`}>
+                    <Link href={`/events/${event.id}`} >
 
                       <Image
-                        src={event.image}
+                        src={event.image || campus}
                         alt={event.title}
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-300"
