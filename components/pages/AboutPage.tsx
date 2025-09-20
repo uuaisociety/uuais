@@ -4,8 +4,8 @@
 export const dynamic = 'force-dynamic';
 
 import React, { useEffect } from 'react';
-import { Mail, Target, Eye } from 'lucide-react';
-import { Linkedin01Icon }  from 'hugeicons-react';
+import { Mail, Target, Eye, Globe } from 'lucide-react';
+import { Linkedin01Icon, GithubIcon }  from 'hugeicons-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
@@ -150,22 +150,70 @@ const AboutPage: React.FC = () => {
                     {member.bio}
                   </p>
                   <div className="flex justify-center space-x-3">
-                    {member.email && (
+                    {/* Personal email */}
+                    {/* {member.personalEmail && (
                       <a
-                        href={`mailto:${member.email}`}
+                        href={`mailto:${member.personalEmail}`}
                         className="p-2 text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        aria-label={`Email ${member.name}`}
                       >
-                        <Mail className="h-4 w-4 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400" />
+                        <Mail className="h-4 w-4" />
+                      </a>
+                    )} */}
+                    {/* Organization email */}
+                    {member.companyEmail && (
+                      <a
+                        href={`mailto:${member.companyEmail}`}
+                        className="p-2 text-gray-400 dark:text-gray-600 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        aria-label={`Email (organization) ${member.name}`}
+                      >
+                        <Mail className="h-4 w-4" />
                       </a>
                     )}
+                    {/* Backward compatibility: generic email field */}
+                    {!member.personalEmail && !member.companyEmail && member.email && (
+                      <a
+                        href={`mailto:${member.email}`}
+                        className="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        aria-label={`Email ${member.name}`}
+                      >
+                        <Mail className="h-4 w-4" />
+                      </a>
+                    )}
+                    {/* LinkedIn */}
                     {member.linkedin && (
                       <a
                         href={member.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        className="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        aria-label={`LinkedIn profile of ${member.name}`}
                       >
-                        <Linkedin01Icon className="h-4 w-4 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400" />
+                        <Linkedin01Icon className="h-4 w-4" />
+                      </a>
+                    )}
+                    {/* GitHub */}
+                    {member.github && (
+                      <a
+                        href={member.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        aria-label={`GitHub profile of ${member.name}`}
+                      >
+                        <GithubIcon className="h-4 w-4" />
+                      </a>
+                    )}
+                    {/* Website */}
+                    {member.website && (
+                      <a
+                        href={member.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                        aria-label={`Website of ${member.name}`}
+                      >
+                        <Globe className="h-4 w-4" />
                       </a>
                     )}
                   </div>

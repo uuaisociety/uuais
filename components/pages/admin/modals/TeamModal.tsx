@@ -10,6 +10,10 @@ export interface TeamFormState {
   bio: string;
   image: string;
   linkedin: string;
+  github: string;
+  personalEmail: string;
+  companyEmail: string;
+  website: string;
 }
 
 interface TeamModalProps {
@@ -55,6 +59,28 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn URL (optional)</label>
             <input type="url" value={form.linkedin} onChange={(e) => setForm(prev => ({ ...prev, linkedin: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">GitHub URL (optional)</label>
+              <input type="url" value={form.github} onChange={(e) => setForm(prev => ({ ...prev, github: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="https://github.com/username" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Website (optional)</label>
+              <input type="url" value={form.website} onChange={(e) => setForm(prev => ({ ...prev, website: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="https://example.com" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Personal Email (optional)</label>
+              <input type="email" value={form.personalEmail} onChange={(e) => setForm(prev => ({ ...prev, personalEmail: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="name@example.com" />
+            </div> */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Organization Email (optional)</label>
+              <input type="email" value={form.companyEmail} onChange={(e) => setForm(prev => ({ ...prev, companyEmail: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="name@uu.se" />
+            </div>
           </div>
 
           <div className="flex justify-end space-x-3 pt-4">
