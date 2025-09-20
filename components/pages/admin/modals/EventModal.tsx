@@ -14,6 +14,9 @@ export interface EventFormState {
   category: 'workshop' | 'seminar' | 'competition' | 'social';
   registrationRequired: boolean;
   maxCapacity: number;
+  // New fields
+  startAt: string; // ISO-like string compatible with datetime-local input (YYYY-MM-DDTHH:mm)
+  lastRegistrationAt: string; // ISO-like string compatible with datetime-local input
 }
 
 interface EventModalProps {
@@ -51,6 +54,19 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
             />
           </div>
 
+          {/* New: Start date & time */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Start Date & Time</label>
+            <input
+              type="datetime-local"
+              value={form.startAt || ''}
+              onChange={(e) => setForm(prev => ({ ...prev, startAt: e.target.value }))}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              placeholder="YYYY-MM-DDTHH:mm"
+            />
+            <p className="text-xs text-gray-500 mt-1">Recommended. Used for ordering, upcoming logic, and precise start time. If omitted, date + time will be used.</p>
+          </div>
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Description</label>
             <textarea
@@ -84,6 +100,19 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
                 required
               />
             </div>
+          </div>
+
+          {/* New: Last Registration Date & Time */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Last Registration Date & Time (optional)</label>
+            <input
+              type="datetime-local"
+              value={form.lastRegistrationAt || ''}
+              onChange={(e) => setForm(prev => ({ ...prev, lastRegistrationAt: e.target.value }))}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              placeholder="YYYY-MM-DDTHH:mm"
+            />
+            <p className="text-xs text-gray-500 mt-1">After this time, normal registrations are closed; users may join the waitlist.</p>
           </div>
 
           <div>

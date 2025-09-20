@@ -12,6 +12,7 @@ import EventRegistrationDialog from '@/components/events/EventRegistrationDialog
 import { useApp } from '@/contexts/AppContext';
 
 import campus from '@/public/images/campus.png';
+import { incrementEventUniqueClick } from '@/lib/firestore';
 
 const EventDetailPage: React.FC = () => {
   const params = useParams();
@@ -43,6 +44,8 @@ const EventDetailPage: React.FC = () => {
   const isUpcoming = new Date(event.date) > new Date();
   const isPastEvent = new Date(event.date) < new Date();
 
+  // If we render the event details we should update the unique click count
+  incrementEventUniqueClick(event.id); 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-12 pt-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

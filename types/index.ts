@@ -12,6 +12,9 @@ export interface Event {
   maxCapacity?: number;
   currentRegistrations?: number;
   published?: boolean;
+  /** ISO datetime string for the event start time (e.g., 2025-10-03T15:30:00Z or local). */
+  startAt?: string;
+  lastRegistrationAt?: string;
 }
 
 export interface TeamMember {

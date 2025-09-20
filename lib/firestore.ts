@@ -22,8 +22,9 @@ import { Event, TeamMember, BlogPost, FAQ, RegistrationQuestion, EventRegistrati
 // Events
 export const getEvents = async (): Promise<Event[]> => {
   const eventsRef = collection(db, 'events');
-  const q = query(eventsRef, orderBy('date', 'asc'));
-  const snapshot = await getDocs(q);
+  // Prefer ordering by startAt when present
+  const qy = query(eventsRef, orderBy('startAt', 'asc'));
+  const snapshot = await getDocs(qy);
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Event));
 };
 
@@ -61,21 +62,21 @@ export const addEvent = async (event: Omit<Event, 'id'>): Promise<string> => {
 // Client-side Analytics Helpers
 // ----------------------------
 
-function todayKey() {
-  const d = new Date();
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  return `${d.getFullYear()}${mm}${dd}`;
-}
+// function todayKey() {
+//   const d = new Date();
+//   const mm = String(d.getMonth() + 1).padStart(2, '0');
+//   const dd = String(d.getDate()).padStart(2, '0');
+//   return `${d.getFullYear()}${mm}${dd}`;
+// }
 
 /**
- * Increment unique event clicks once per day per browser using localStorage dedup.
+ * Increment unique event clicks.
  * Writes to collection 'analyticsEvents', doc {eventId}, field 'clicks'.
  */
 export async function incrementEventUniqueClick(eventId: string): Promise<void> {
   try {
     if (typeof window === 'undefined') return;
-    const key = `clicked_event_${eventId}_${todayKey()}`;
+    const key = `clicked_event_${eventId}`;
     if (localStorage.getItem(key) === '1') return;
     localStorage.setItem(key, '1');
     const ref = doc(db, 'analyticsEvents', eventId);
@@ -88,13 +89,13 @@ export async function incrementEventUniqueClick(eventId: string): Promise<void> 
 }
 
 /**
- * Increment unique blog reads once per day per browser using localStorage dedup.
+ * Increment unique blog reads.
  * Writes to collection 'analyticsBlogs', doc {blogId}, field 'reads'.
  */
 export async function incrementBlogRead(blogId: string): Promise<void> {
   try {
     if (typeof window === 'undefined') return;
-    const key = `read_blog_${blogId}_${todayKey()}`;
+    const key = `read_blog_${blogId}`;
     if (localStorage.getItem(key) === '1') return;
     localStorage.setItem(key, '1');
     const ref = doc(db, 'analyticsBlogs', blogId);
@@ -210,8 +211,8 @@ export const deleteBlogPost = async (id: string): Promise<void> => {
 // Real-time listeners
 export const subscribeToEvents = (callback: (events: Event[]) => void) => {
   const eventsRef = collection(db, 'events');
-  const q = query(eventsRef, orderBy('date', 'asc'));
-  return onSnapshot(q, (snapshot) => {
+  const qy = query(eventsRef, orderBy('startAt', 'asc'));
+  return onSnapshot(qy, (snapshot) => {
     const events = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Event));
     callback(events);
   });
@@ -349,9 +350,65 @@ export const registerForEvent = async (
   },
   options?: { waitlist?: boolean }
 ): Promise<string> => {
-  // Create registration entry
+  // Create registration entry with validations
   const regRef = collection(db, 'registrations');
-  const status: EventRegistration['status'] = options?.waitlist ? 'waitlist' : 'registered';
+
+  // Normalize inputs for uniqueness checks
+  const normalizedEmail = (payload.userEmail || '').trim().toLowerCase();
+  const rawPhone = String(payload.registrationData?.phone ?? '').trim();
+  const normalizedPhone = rawPhone.replace(/[\s\-()]/g, '');
+
+  // Load event for capacity and lastRegistrationAt checks
+  const eventRef = doc(db, 'events', eventId);
+  const eventSnap = await getDoc(eventRef);
+  const eventData = eventSnap.exists() ? (eventSnap.data() as Partial<Event>) : {};
+
+  const maxCapacity = typeof eventData.maxCapacity === 'number' ? eventData.maxCapacity : undefined;
+  const currentRegistrations = typeof eventData.currentRegistrations === 'number' ? eventData.currentRegistrations : 0;
+  const isCapacityFull = typeof maxCapacity === 'number' ? currentRegistrations >= maxCapacity : false;
+
+  const lastRegistrationAtIso = eventData.lastRegistrationAt;
+  const now = new Date();
+  const isAfterLastRegistration = typeof lastRegistrationAtIso === 'string' && lastRegistrationAtIso
+    ? now.getTime() > new Date(lastRegistrationAtIso).getTime()
+    : false;
+
+  // Enforce single registration per event by email or phone (no login required)
+  // Prefer efficient queries; if missing index, fall back to client-side filter by event.
+  const duplicates: string[] = [];
+  try {
+    if (normalizedEmail) {
+      const q1 = query(regRef, where('eventId', '==', eventId), where('registrationData.email', '==', normalizedEmail));
+      const s1 = await getDocs(q1);
+      if (!s1.empty) duplicates.push('email');
+    }
+    if (normalizedPhone) {
+      const q2 = query(regRef, where('eventId', '==', eventId), where('registrationData.phone', '==', normalizedPhone));
+      const s2 = await getDocs(q2);
+      if (!s2.empty) duplicates.push('phone');
+    }
+  } catch {
+    // Likely missing index. Fallback to fetch-by-event and filter client-side.
+    const qAll = query(regRef, where('eventId', '==', eventId));
+    const all = await getDocs(qAll);
+    for (const d of all.docs) {
+      const data = d.data() as DocumentData;
+      const eEmail = String((data?.registrationData as DocumentData | undefined)?.email ?? '').trim().toLowerCase();
+      const ePhone = String((data?.registrationData as DocumentData | undefined)?.phone ?? '').trim().replace(/[\s\-()]/g, '');
+      if (normalizedEmail && eEmail && eEmail === normalizedEmail) duplicates.push('email');
+      if (normalizedPhone && ePhone && ePhone === normalizedPhone) duplicates.push('phone');
+      if (duplicates.length) break;
+    }
+  }
+
+  if (duplicates.length) {
+    throw new Error('You have already registered for this event using the same contact details.');
+  }
+
+  // Determine final status
+  const status: EventRegistration['status'] = (options?.waitlist || isCapacityFull || isAfterLastRegistration)
+    ? 'waitlist'
+    : 'registered';
   type EventRegistrationDoc = {
     eventId: string;
     registrationData: EventRegistration['registrationData'];
@@ -371,8 +428,7 @@ export const registerForEvent = async (
   const docRef = await addDoc(regRef, regDoc);
 
   // If not waitlist, increment currentRegistrations on event
-  if (!options?.waitlist) {
-    const eventRef = doc(db, 'events', eventId);
+  if (status === 'registered') {
     await updateDoc(eventRef, { currentRegistrations: increment(1) });
   }
 

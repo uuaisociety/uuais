@@ -67,7 +67,6 @@ uuais/
 │   ├── ui/                       # UI components (shadcn/ui)
 │   ├── AboutSection.tsx          # About section component
 │   ├── AdminEvents.tsx           # Admin events management
-│   ├── EventsSection.tsx         # Events display component
 │   ├── FoundersSection.tsx       # Founders showcase component
 │   ├── HeroSection.tsx           # Homepage hero section
 │   └── Navbar.tsx                # Navigation component
