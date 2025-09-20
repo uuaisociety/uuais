@@ -1,7 +1,14 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import { Providers } from './providers'
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { Providers } from './providers';
+import { AppProvider } from '@/contexts/AppContext';
+// import UpcomingEventsBanner from '@/components/common/UpcomingEventsBanner';
+
+// import { metadata, viewport } from "./metadata";
+export { metadata, viewport } from "./metadata";;
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,15 +21,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans bg-[#1a1a1a] text-white min-h-screen`}>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+      <body className={`${inter.variable} font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen transition-colors duration-300`}>
         <Providers>
-          <div className="bg-white dark:bg-[#1a1a1a] text-black dark:text-white">
-            <Navbar />
-            <main className="pt-16">
-              {children}
-            </main>
-          </div>
+          <AppProvider>
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <main id="main" className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+              {/* <UpcomingEventsBanner /> */}
+            </div>
+          </AppProvider>
         </Providers>
       </body>
     </html>

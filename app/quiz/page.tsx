@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button_old';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card_old';
+import { Input } from '@/components/ui/Input';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 

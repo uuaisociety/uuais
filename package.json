@@ -6,13 +6,15 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
+    "set:admin": "ts-node tools/setAdminClaim.ts",
     "test": "jest --silent",
     "test:watch": "jest --watch",
     "test:coverage": "jest --config jest.config.ts --coverage"
   },
   "dependencies": {
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
+    "@hookform/resolvers": "^5.2.1",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-collapsible": "^1.1.3",
     "@radix-ui/react-dialog": "^1.1.6",
@@ -29,14 +31,18 @@
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.5.2",
     "firebase": "^11.10.0",
+    "firebase-admin": "^13.5.0",
+    "hugeicons-react": "^0.3.0",
     "input-otp": "^1.4.2",
+    "jose": "^6.1.0",
     "lucide-react": "^0.486.0",
     "next": "^15.5.2",
     "react": "^18.2.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^3.1.0",
-    "tw-animate-css": "^1.2.5"
+    "tw-animate-css": "^1.2.5",
+    "zod": "^4.1.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -45,10 +51,11 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^30.0.0",
-    "@types/node": "^20",
+    "@types/node": "^20.19.16",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.21",
+    "dotenv": "^17.2.2",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "jest": "^30.1.1",
@@ -57,6 +64,6 @@
     "tailwindcss": "^4.1.12",
     "ts-jest": "^29.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5.9.2"
   }
 }
