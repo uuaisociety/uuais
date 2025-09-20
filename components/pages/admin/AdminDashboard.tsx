@@ -64,7 +64,9 @@ const AdminDashboard: React.FC = () => {
     image: '',
     category: 'workshop' as 'workshop' | 'seminar' | 'competition' | 'social',
     registrationRequired: false,
-    maxCapacity: 0
+    maxCapacity: 1,
+    startAt: '',
+    lastRegistrationAt: ''
   });
 
   // Event-specific question form handled inside EventQuestionsModal
@@ -148,7 +150,9 @@ const AdminDashboard: React.FC = () => {
       image: '',
       category: 'workshop',
       registrationRequired: false,
-      maxCapacity: 0
+      maxCapacity: 1,
+      startAt: '',
+      lastRegistrationAt: ''
     });
     setTeamForm({
       name: '',
@@ -234,7 +238,9 @@ const AdminDashboard: React.FC = () => {
       image: event.image,
       category: event.category,
       registrationRequired: event.registrationRequired || false,
-      maxCapacity: event.maxCapacity || 0
+      maxCapacity: event.maxCapacity || 1,
+      startAt: event.startAt || '',
+      lastRegistrationAt: event.lastRegistrationAt || ''
     });
     setShowEventModal(true);
   };

@@ -125,7 +125,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({ event
           userEmail: formData.email,
           userName: `${formData.firstName} ${formData.lastName}`.trim(),
         },
-        { waitlist: isCapacityFull }
+        { waitlist: isWaitlistOnly }
       );
       
       // Reset form and close dialog
@@ -144,26 +144,30 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({ event
       setIsOpen(false);
       
       // Show success message (you might want to use a toast notification)
-      alert(isCapacityFull
+      alert(isWaitlistOnly
         ? 'You have been added to the waitlist. We will contact you if a spot opens.'
-        : 'Registration successful! You will receive a confirmation email shortly.');
+        : 'Registration successful!');
     } catch (error) {
       console.error('Registration failed:', error);
-      alert('Registration failed. Please try again.');
+      alert(`Registration failed ${error}`);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const isCapacityFull = typeof event.maxCapacity === 'number' && (event.currentRegistrations || 0) >= event.maxCapacity;
+  const isAfterLastRegistration = typeof event.lastRegistrationAt === 'string' && event.lastRegistrationAt
+    ? new Date().getTime() > new Date(event.lastRegistrationAt).getTime()
+    : false;
+  const isWaitlistOnly = isCapacityFull || isAfterLastRegistration;
 
   return (
     <>
       <Button 
-        className={`${isCapacityFull ? 'bg-orange-600 hover:bg-orange-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
+        className={`${isWaitlistOnly ? 'bg-orange-600 hover:bg-orange-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
         onClick={() => setIsOpen(true)}
       >
-        {isCapacityFull ? 'Join Waitlist' : 'Register Now'}
+        {isWaitlistOnly ? 'Join Waitlist' : 'Register Now'}
       </Button>
 
       {isOpen && (
@@ -466,7 +470,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({ event
                       disabled={isSubmitting}
                       className="bg-blue-600 hover:bg-blue-700 text-white"
                     >
-                      {isSubmitting ? 'Submitting...' : (isCapacityFull ? 'Join Waitlist' : 'Register')}
+                      {isSubmitting ? 'Submitting...' : (isWaitlistOnly ? 'Join Waitlist' : 'Register')}
                     </Button>
                   </div>
                 </form>
