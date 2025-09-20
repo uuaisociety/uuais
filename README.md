@@ -193,10 +193,6 @@ NEXT_PUBLIC_FIREBASE_APP_ID=
 GOOGLE_APPLICATION_CREDENTIALS=/absolute/path/to/serviceAccount.json
 
 
-# Dev admin override (local only)
-NEXT_PUBLIC_ENABLE_DEV_ADMIN=false
-NEXT_PUBLIC_DEV_ADMIN_PASSWORD=
-
 ```
 
 Restart the dev server after changing any `NEXT_PUBLIC_` variables.
