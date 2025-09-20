@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { notFound, useParams } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -18,6 +18,13 @@ const EventDetailPage: React.FC = () => {
   const params = useParams();
   const eventId = params.id as string;
   const { state } = useApp();
+
+  // Increment unique event click on mount 
+  useEffect(() => {
+    if (eventId) {
+      incrementEventUniqueClick(eventId).catch(() => {});
+    }
+  }, [eventId]);
 
   // Show loading state while events are being fetched the first time
   if (state.events.length === 0) {
@@ -44,8 +51,6 @@ const EventDetailPage: React.FC = () => {
   const isUpcoming = new Date(event.date) > new Date();
   const isPastEvent = new Date(event.date) < new Date();
 
-  // If we render the event details we should update the unique click count
-  incrementEventUniqueClick(event.id); 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-12 pt-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

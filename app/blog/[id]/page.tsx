@@ -19,7 +19,7 @@ const BlogDetailPage: React.FC = () => {
   const blogId = params.id as string;
   const { state } = useApp();
 
-  // Increment unique blog read on mount (deduped via localStorage in helper)
+  // Increment unique blog read on mount 
   useEffect(() => {
     if (blogId) {
       incrementBlogRead(blogId).catch(() => {});
