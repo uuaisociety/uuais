@@ -1,0 +1,119 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    // Helper: limit updates to only specific keys
+    function changedOnly(allowed) {
+      return request.resource.data.diff(resource.data).changedKeys().hasOnly(allowed);
+    }
+
+    // Helper: field unchanged equality
+    function unchanged(field) {
+      return request.resource.data[field] == resource.data[field];
+    }
+
+    // EVENTS
+    match /events/{eventId} {
+      allow read: if resource.data.published == true || isAdmin();
+
+      // Full create/update/delete restricted to admins
+      allow create, update, delete: if isAdmin();
+
+      // Optional: If you keep client-side increment for currentRegistrations:
+      // allow update to ONLY increment by +1 and not exceed maxCapacity.
+      // If you move this to Cloud Functions, remove this whole block.
+      allow update: if changedOnly(['currentRegistrations'])
+        && request.resource.data.currentRegistrations == resource.data.currentRegistrations + 1
+        && request.resource.data.currentRegistrations <= resource.data.maxCapacity;
+    }
+
+    // TEAM MEMBERS
+    match /teamMembers/{id} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // BLOG POSTS
+    match /blogPosts/{postId} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
+    // FAQ
+    match /faqs/{faqId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // REGISTRATION QUESTIONS (global)
+    match /registrationQuestions/{rqId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // EVENT CUSTOM QUESTIONS (per-event)
+    match /eventCustomQuestions/{cqId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // REGISTRATIONS
+    match /registrations/{regId} {
+      // Anyone signed-in can create a registration
+      allow create: if 
+        // Lock certain fields: only these are allowed by client
+        request.resource.data.keys().hasOnly(
+             ['eventId', 'registrationData', 'registeredAt', 'status', 'userEmail', 'userName']
+           )
+        // Restrict status to registered|waitlist
+        && (request.resource.data.status in ['registered', 'waitlist'])
+        // registeredAt must be a timestamp (serverTimestamp is allowed)
+        && (request.resource.data.registeredAt is timestamp);
+
+      // Only admins may update or delete registrations
+      allow update, delete: if isAdmin();
+
+      // Reads: admin only, or restrict further as needed
+      allow read: if isAdmin();
+    }
+
+    // ANALYTICS (client-side dedup with localStorage; guarded increments)
+    // Events: unique clicks (increment-only)
+    match /analyticsEvents/{eventId} {
+      // Admin can read analytics; you can open reads if you want
+      allow read: if isAdmin();
+
+      // Create initial doc with clicks:1
+      allow create: if request.resource.data.keys().hasOnly(['clicks', 'updatedAt'])
+        && request.resource.data.clicks == 1;
+
+      // Update: only clicks (+1) and updatedAt allowed
+      allow update: if changedOnly(['clicks', 'updatedAt'])
+        && request.resource.data.clicks == resource.data.clicks + 1;
+
+      // No deletes from clients
+      allow delete: if isAdmin();
+    }
+
+    // Blogs: unique reads (increment-only)
+    match /analyticsBlogs/{blogId} {
+      allow read: if isAdmin();
+
+      allow create: if request.resource.data.keys().hasOnly(['reads', 'updatedAt'])
+        && request.resource.data.reads == 1;
+
+      allow update: if changedOnly(['reads', 'updatedAt'])
+        && request.resource.data.reads == resource.data.reads + 1;
+
+      allow delete: if isAdmin();
+    }
+  }
+}
