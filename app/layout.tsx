@@ -1,22 +1,19 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { Providers } from './providers';
+import { AppProvider } from '@/contexts/AppContext';
+// import UpcomingEventsBanner from '@/components/common/UpcomingEventsBanner';
+
+// import { metadata, viewport } from "./metadata";
+export { metadata, viewport } from "./metadata";;
+
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
-
-export const metadata: Metadata = {
-  title: "UU AI Society",
-  description: "A participatory society for everyone into AI at Uppsala University",
-  manifest: "/site.webmanifest",
-  icons: {
-    apple: "/images/apple-touch-icon.png",
-    icon: "/images/favicon-96x96.png",
-  },
-};
 
 export default function RootLayout({
   children,
@@ -24,12 +21,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.variable} font-sans bg-[#1a1a1a] text-white min-h-screen`}>
-        <Navbar />
-        <main className="pt-16">
-          {children}
-        </main>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+      <body className={`${inter.variable} font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen transition-colors duration-300`}>
+        <Providers>
+          <AppProvider>
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <main id="main" className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+              {/* <UpcomingEventsBanner /> */}
+            </div>
+          </AppProvider>
+        </Providers>
       </body>
     </html>
   );

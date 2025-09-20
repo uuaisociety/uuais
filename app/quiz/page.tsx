@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button_old';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card_old';
+import { Input } from '@/components/ui/Input';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
@@ -248,7 +248,9 @@ export default function QuizPage() {
                 disabled={selectedAnswer === undefined}
                 className="bg-[#c8102e] hover:bg-[#a00d26] text-white"
               >
-                {currentQuestion === quizQuestions.length - 1 ? 'Finish Quiz' : 'Next'}
+                {currentQuestion === quizQuestions.length - 1 
+                  ? 'Finish Quiz'
+                  : 'Next'}
               </Button>
             </div>
           </CardContent>
@@ -298,8 +300,7 @@ export default function QuizPage() {
                     className="bg-gray-800 border-gray-600 text-white placeholder-gray-400"
                   />
                   <p className="text-xs text-gray-500 mt-2">
-                    We will keep your email for 6 months according to GDPR regulations. 
-                    You can unsubscribe at any time.
+                    We will keep your email for 6 months according to GDPR regulations. You can unsubscribe at any time.
                   </p>
                 </div>
                 <div className="flex space-x-3">
@@ -316,7 +317,7 @@ export default function QuizPage() {
                     variant="outline"
                     className="border-gray-600 text-gray-300 hover:bg-gray-700"
                   >
-                    Retake Quiz
+                    Take Quiz Again
                   </Button>
                 </div>
               </form>
