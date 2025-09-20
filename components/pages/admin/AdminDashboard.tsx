@@ -37,7 +37,7 @@ import {
 
 const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
-  const { enableDev, devActive, user, logout, clearDevAdmin } = useAdmin();
+  const { user, logout } = useAdmin();
   const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics'>('events');
   const placeholderImage = '@/public/placeholder.png';
 
@@ -85,7 +85,11 @@ const AdminDashboard: React.FC = () => {
     position: '',
     bio: '',
     image: '',
-    linkedin: ''
+    linkedin: '',
+    github: '',
+    personalEmail: '',
+    companyEmail: '',
+    website: ''
   });
 
   const [blogForm, setBlogForm] = useState({
@@ -159,7 +163,11 @@ const AdminDashboard: React.FC = () => {
       position: '',
       bio: '',
       image: '',
-      linkedin: ''
+      linkedin: '',
+      github: '',
+      personalEmail: '',
+      companyEmail: '',
+      website: ''
     });
     setBlogForm({
       title: '',
@@ -252,7 +260,11 @@ const AdminDashboard: React.FC = () => {
       position: member.position,
       bio: member.bio,
       image: member.image,
-      linkedin: member.linkedin || ''
+      linkedin: member.linkedin || '',
+      github: member.github || '',
+      personalEmail: member.personalEmail || member.email || '',
+      companyEmail: member.companyEmail || '',
+      website: member.website || ''
     });
     setShowTeamModal(true);
   };
@@ -338,12 +350,6 @@ const AdminDashboard: React.FC = () => {
             <p className="text-gray-600 dark:text-gray-300">Manage your UU AI Society content and events</p>
           </div>
           <div className="flex items-center gap-2">
-            {enableDev && devActive && (
-              <div className="px-3 py-1 rounded bg-amber-500 text-white text-sm h-fit">Dev Mode On</div>
-            )}
-            {enableDev && devActive && (
-              <Button size="sm" variant="outline" onClick={clearDevAdmin}>Clear Dev Admin</Button>
-            )}
             {user && (
               <Button size="sm" variant="outline" onClick={logout}>Logout</Button>
             )}

@@ -26,6 +26,10 @@ export interface TeamMember {
   linkedin?: string;
   twitter?: string;
   email?: string;
+  github?: string;
+  personalEmail?: string;
+  companyEmail?: string;
+  website?: string;
   published?: boolean;
 }
 
