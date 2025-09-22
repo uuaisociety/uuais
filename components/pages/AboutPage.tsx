@@ -6,12 +6,12 @@ export const dynamic = 'force-dynamic';
 import React, { useEffect } from 'react';
 import { Mail, Target, Eye, Globe } from 'lucide-react';
 import { Linkedin01Icon, GithubIcon }  from 'hugeicons-react';
-import { Button } from '@/components/ui/Button';
+// import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 import Image from 'next/image';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 const AboutPage: React.FC = () => {
   const { state } = useApp();
@@ -224,7 +224,7 @@ const AboutPage: React.FC = () => {
         </div>
 
         {/* Call to Action */}
-        <section className="relative bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 rounded-2xl p-12 text-center text-white transition-colors duration-300">
+        {/* <section className="relative bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 rounded-2xl p-12 text-center text-white transition-colors duration-300">
           <div className="absolute inset-0 bg-black/20"></div>
 
           <h2 className="text-4xl md:text-6xl font-bold mb-6 text-white  leading-tight">
@@ -233,7 +233,7 @@ const AboutPage: React.FC = () => {
           <p className="text-xl text-white mb-8 max-w-2xl mx-auto">
             Be part of a community that&apos;s shaping the future of AI. Connect, learn, and grow with us.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center"> */}
             {/* <Button 
               size="lg"
               variant="secondary"
@@ -241,7 +241,7 @@ const AboutPage: React.FC = () => {
             >
               Become a Member
             </Button> */}
-            <Link href="/contact">
+            {/* <Link href="/contact">
             <Button 
               size="lg"
               variant="outline"
@@ -251,7 +251,7 @@ const AboutPage: React.FC = () => {
             </Button>
             </Link>
           </div>
-        </section>
+        </section> */}
       </div>
     </div>
   );
