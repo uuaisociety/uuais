@@ -23,6 +23,28 @@ import { useApp } from '@/contexts/AppContext';
 //   message: z.string().min(20, 'Message must be at least 20 characters')
 // });
 
+// Utility function to convert email addresses in text to mailto links
+const convertEmailsToLinks = (text: string): React.ReactNode => {
+  const emailRegex = /\b([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})\b/g;
+  const parts = text.split(emailRegex);
+  const matches = text.match(emailRegex);
+  
+  return parts.map((part, index) => {
+    console.log("part: ",part)
+    console.log("matches: ",matches)
+    if (index < parts.length - 1 && matches && matches.includes(part)) {
+      return (
+        <React.Fragment key={index}>
+          <a href={`mailto:${part}`}>
+            {part}
+          </a>
+        </React.Fragment>
+      );
+    }
+    return part;
+  });
+};
+
 const ContactPage: React.FC = () => {
   // const [isSubmitted, setIsSubmitted] = useState(false);
   const { state } = useApp();
@@ -76,7 +98,7 @@ const ContactPage: React.FC = () => {
   //     console.error('Submission error:', error);
   //   }
   // };
-
+  console.log(state.faqs);
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -203,49 +225,14 @@ const ContactPage: React.FC = () => {
                 Frequently Asked Questions
               </h2>
               <div className="space-y-4">
-                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                      How can I join UU AI Society?
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      Currently we are not accepting new applications.
-                      We will announce the next application period on our social media channels.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                      Are your events free for students?
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      In general all our workshops, seminars, and networking events are free for
-                      students, although some special events may have limited capacity and or require a small fee.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                      Can companies sponsor or collaborate with UU AI Society?
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      Absolutely! We&apos;re always looking for industry partnerships.
-                      Contact us at <a href="mailto:contact@uuais.com">contact@uuais.com</a> to discuss sponsorship opportunities and collaboration ideas.
-                    </p>
-                  </CardContent>
-                </Card>
-                {state.faqs.sort((a, b) => a.order - b.order).map((faq) => (
+                {state.faqs.sort((a, b) => a.order - b.order).filter(faq => faq.published).map((faq) => (
                   <Card key={faq.id} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                     <CardContent className="p-6">
                       <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
                         {faq.question}
                       </h3>
                       <p className="text-gray-600 dark:text-gray-300">
-                        {faq.answer}
+                        {convertEmailsToLinks(faq.answer)}
                       </p>
                     </CardContent>
                   </Card>
