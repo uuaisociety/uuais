@@ -62,7 +62,7 @@ const AdminDashboard: React.FC = () => {
     time: '',
     location: '',
     image: '',
-    category: 'workshop' as 'workshop' | 'seminar' | 'competition' | 'social',
+    category: 'workshop' as 'workshop' | 'guest_lecture' | 'hackathon' | 'other',
     registrationRequired: false,
     maxCapacity: 1,
     startAt: '',

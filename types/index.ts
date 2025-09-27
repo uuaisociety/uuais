@@ -6,7 +6,7 @@ export interface Event {
   time: string;
   location: string;
   image: string;
-  category: 'workshop' | 'seminar' | 'competition' | 'social';
+  category: 'workshop' | 'guest_lecture' | 'hackathon' | 'other';
   status: 'upcoming' | 'past';
   registrationRequired: boolean;
   maxCapacity?: number;

@@ -8,6 +8,15 @@ import { Edit3, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
 import { Event } from "@/types";
 import Tag from "@/components/ui/Tag";
 
+const categoryOptions = [
+  { value: 'all', label: 'All Categorie' },
+  { value: 'workshop', label: 'Workshop' },
+  { value: 'guest_lecture', label: 'Guest Lecture' },
+  { value: 'hackathon', label: 'Hackathon ' },
+  { value: 'other', label: 'Other' }
+];
+
+
 export interface EventsTabProps {
   events: Event[];
   onAddClick: () => void;
@@ -49,7 +58,7 @@ const EventsTab: React.FC<EventsTabProps> = ({
                     <Tag variant={event.status === "upcoming" ? "green" : "gray"} size="sm">
                       {event.status}
                     </Tag>
-                    <Tag variant="blue" size="sm">{event.category}</Tag>
+                    <Tag variant="blue" size="sm">{categoryOptions.find(option => option.value === event.category)?.label || event.category}</Tag>
                   </div>
                   <p className="text-gray-600 mb-2 dark:text-gray-400">{event.description}</p>
                   <div className="text-sm text-gray-500 dark:text-gray-400">

@@ -24,15 +24,15 @@ const EventsPage: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = useState('all');
 
   useEffect(() => {
-    updatePageMeta('Events', 'Join our upcoming AI workshops, seminars, and networking events');
+    updatePageMeta('Events', 'Join our upcoming AI workshops, guest lectures, and networking events');
   }, []);
 
   const categoryOptions = [
     { value: 'all', label: 'All Categories' },
-    { value: 'workshop', label: 'Workshops' },
-    { value: 'seminar', label: 'Seminars' },
-    { value: 'competition', label: 'Competitions' },
-    { value: 'social', label: 'Social Events' }
+    { value: 'workshop', label: 'Workshop' },
+    { value: 'guest_lecture', label: 'Guest Lecture' },
+    { value: 'hackathon', label: 'Hackathon' },
+    { value: 'other', label: 'Other' },
   ];
 
   const filteredEvents = state.events
@@ -49,9 +49,9 @@ const EventsPage: React.FC = () => {
   const getCategoryColor = (category: string) => {
     const colors = {
       workshop: 'bg-blue-100 text-blue-800',
-      seminar: 'bg-green-100 text-green-800',
-      competition: 'bg-purple-100 text-purple-800',
-      social: 'bg-yellow-100 text-yellow-800'
+      guest_lecture: 'bg-green-100 text-green-800',
+      other: 'bg-purple-100 text-purple-800',
+      hackathon: 'bg-yellow-100 text-yellow-800'
     };
     return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
@@ -148,7 +148,7 @@ const EventsPage: React.FC = () => {
                   </Link>
                   <div className="absolute top-4 left-4">
                     <span className={`px-3 py-1 text-sm font-medium rounded-full ${getCategoryColor(event.category)}`}>
-                      {event.category}
+                      {categoryOptions.find(option => option.value === event.category)?.label || event.category}
                     </span>
                   </div>
                   {event.registrationRequired && activeTab === 'upcoming' && (

@@ -29,7 +29,7 @@ const HomePage: React.FC = () => {
     {
       icon: BookOpen,
       title: 'AI Knowledge',
-      description: 'Workshops and seminars from real industry professionals with knowledge of the latest in artificial intelligence and machine learning.'
+      description: 'Workshops and guest lectures from real industry professionals with knowledge of the latest in artificial intelligence and machine learning.'
     },
     {
       icon: Users,
@@ -179,7 +179,7 @@ const HomePage: React.FC = () => {
                   Upcoming Events
                 </h2>
                 <p className="text-xl text-gray-600 dark:text-gray-300">
-                  Don&apos;t miss out on our latest workshops, seminars, and networking events.
+                  Don&apos;t miss out on our latest workshops, guest lectures, and networking events.
                 </p>
               </div>
               <Link href="/events">

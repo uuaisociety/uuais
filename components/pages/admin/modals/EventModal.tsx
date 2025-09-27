@@ -11,7 +11,7 @@ export interface EventFormState {
   time: string;
   location: string;
   image: string;
-  category: 'workshop' | 'seminar' | 'competition' | 'social';
+  category: 'workshop' | 'guest_lecture' | 'hackathon' | 'other' ;
   registrationRequired: boolean;
   maxCapacity: number;
   // New fields
@@ -145,9 +145,9 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               <option value="workshop">Workshop</option>
-              <option value="seminar">Seminar</option>
-              <option value="competition">Competition</option>
-              <option value="social">Social</option>
+              <option value="guest_lecture">Guest Lecture</option>
+              <option value="hackathon">Hackathon</option>
+              <option value="other">Other</option>
             </select>
           </div>
 
