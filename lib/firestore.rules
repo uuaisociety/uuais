@@ -10,6 +10,15 @@ service cloud.firestore {
       return isSignedIn() && request.auth.token.admin == true;
     }
 
+    // Helper: fetch caller's user profile
+    function callerProfile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function isMember() {
+      return isSignedIn() && callerProfile().data.isMember == true;
+    }
+
     // Helper: limit updates to only specific keys
     function changedOnly(allowed) {
       return request.resource.data.diff(resource.data).changedKeys().hasOnly(allowed);
@@ -18,6 +27,28 @@ service cloud.firestore {
     // Helper: field unchanged equality
     function unchanged(field) {
       return request.resource.data[field] == resource.data[field];
+    }
+
+    // USERS (member profiles)
+    match /users/{uid} {
+      // Users may read their own profile; admins may read all; optionally open some fields publicly later.
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
+
+      // Create own document at first sign-in or profile completion
+      allow create: if isSignedIn() && request.auth.uid == uid
+        // Limit client-writable fields; prevent role escalation
+        && request.resource.data.keys().hasOnly([
+          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt'
+        ]);
+
+      // Update own doc but cannot alter privileged fields except allowed ones
+      allow update: if isSignedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly([
+          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt'
+        ]);
+
+      // Admin full control
+      allow create, update, delete: if isAdmin();
     }
 
     // EVENTS
@@ -67,22 +98,24 @@ service cloud.firestore {
 
     // REGISTRATIONS
     match /registrations/{regId} {
-      // Anyone signed-in can create a registration
-      allow create: if 
+      // Only members can create a registration for themselves
+      allow create: if isMember()
+        // Ensure registration is created for the caller
+        && request.resource.data.userId == request.auth.uid
         // Lock certain fields: only these are allowed by client
-        request.resource.data.keys().hasOnly(
-             ['eventId', 'registrationData', 'registeredAt', 'status', 'userEmail', 'userName']
+        && request.resource.data.keys().hasOnly(
+             ['eventId', 'registrationData', 'registeredAt', 'status', 'userEmail', 'userName', 'userId']
            )
         // Restrict status to registered|waitlist
         && (request.resource.data.status in ['registered', 'waitlist'])
         // registeredAt must be a timestamp (serverTimestamp is allowed)
         && (request.resource.data.registeredAt is timestamp);
 
+      // Users can read their own registrations; admins can read all
+      allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+
       // Only admins may update or delete registrations
       allow update, delete: if isAdmin();
-
-      // Reads: admin only, or restrict further as needed
-      allow read: if isAdmin();
     }
 
     // ANALYTICS (client-side dedup with localStorage; guarded increments)

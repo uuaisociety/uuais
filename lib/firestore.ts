@@ -19,6 +19,81 @@ import {
 import { db } from './firebase-client';
 import { Event, TeamMember, BlogPost, FAQ, RegistrationQuestion, EventRegistration, EventCustomQuestion } from '@/types';
 
+// ----------------------------
+// ----------------------------
+
+export type UserProfile = {
+  id: string;
+  displayName?: string;
+  name?: string;
+  email?: string;
+  photoURL?: string;
+  isMember?: boolean;
+  // Academic / profile fields
+  studentStatus?: 'student' | 'alumni' | 'other';
+  campus?: 'Uppsala' | 'Gotland' | 'other';
+  university?: 'Uppsala' | 'none' | 'other';
+  program?: string;
+  expectedGraduationYear?: number;
+  gender?: string;
+  linkedin?: string;
+  github?: string;
+  website?: string;
+  bio?: string;
+  heardOfUs?: string;
+  // Preferences
+  newsletter?: boolean;
+  lookingForJob?: boolean;
+  // Privacy & preferences
+  privacyAcceptedAt?: string; // ISO
+  marketingOptIn?: boolean;
+  analyticsOptIn?: boolean;
+  partnerContactOptIn?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+// Admin: list all users
+export const listUsers = async (): Promise<UserProfile[]> => {
+  const ref = collection(db, 'users');
+  const snapshot = await getDocs(ref);
+  return snapshot.docs.map((d) => ({ id: d.id, ...(d.data() as DocumentData) } as UserProfile));
+};
+
+// Admin: delete a user profile document (does not remove Firebase Auth user)
+export const deleteUser = async (uid: string): Promise<void> => {
+  const ref = doc(db, 'users', uid);
+  await deleteDoc(ref);
+};
+
+export const getUserProfile = async (uid: string): Promise<UserProfile | null> => {
+  const ref = doc(db, 'users', uid);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) return null;
+  const data = snap.data() as DocumentData;
+  return { id: snap.id, ...(data as Record<string, unknown>) } as UserProfile;
+};
+
+export const upsertUserProfile = async (
+  uid: string,
+  data: Partial<Omit<UserProfile, 'id'>>
+): Promise<void> => {
+  const ref = doc(db, 'users', uid);
+  await setDoc(
+    ref,
+    { ...data, updatedAt: new Date().toISOString(), createdAt: data?.createdAt ?? new Date().toISOString() },
+    { merge: true }
+  );
+};
+
+export const updateUserProfile = async (
+  uid: string,
+  patch: Partial<Omit<UserProfile, 'id' | 'createdAt'>>
+): Promise<void> => {
+  const ref = doc(db, 'users', uid);
+  await updateDoc(ref, { ...(patch as unknown as DocumentData), updatedAt: new Date().toISOString() } as DocumentData);
+};
+
 // Events
 export const getEvents = async (): Promise<Event[]> => {
   const eventsRef = collection(db, 'events');
@@ -26,6 +101,29 @@ export const getEvents = async (): Promise<Event[]> => {
   const qy = query(eventsRef, orderBy('startAt', 'asc'));
   const snapshot = await getDocs(qy);
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Event));
+};
+
+// Fetch registrations for the signed-in user
+export const getMyRegistrations = async (
+  userId: string
+): Promise<EventRegistration[]> => {
+  const regRef = collection(db, 'registrations');
+  const qy = query(regRef, where('userId', '==', userId));
+  const snapshot = await getDocs(qy);
+  return snapshot.docs.map((d) => {
+    const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
+    const ts = data?.registeredAt;
+    const registeredAt = ts instanceof Timestamp ? ts.toDate().toISOString() : '';
+    const registrationData = (data?.registrationData ?? {}) as EventRegistration['registrationData'];
+    return {
+      id: d.id,
+      eventId: data?.eventId ?? '',
+      userId: data?.userId ?? '',
+      registrationData,
+      registeredAt,
+      status: data?.status ?? 'registered',
+    } as EventRegistration;
+  });
 };
 
 export const getAllEvents = async (): Promise<Event[]> => {
@@ -345,6 +443,7 @@ export const registerForEvent = async (
   eventId: string,
   payload: Omit<EventRegistration, 'id' | 'eventId' | 'registeredAt' | 'status' | 'userId'> & {
     registrationData: EventRegistration['registrationData'];
+    userId: string; // required by security rules
     userEmail?: string;
     userName?: string;
   },
@@ -357,6 +456,15 @@ export const registerForEvent = async (
   const normalizedEmail = (payload.userEmail || '').trim().toLowerCase();
   const rawPhone = String(payload.registrationData?.phone ?? '').trim();
   const normalizedPhone = rawPhone.replace(/[\s\-()]/g, '');
+
+  // Block duplicate by userId + eventId
+  {
+    const qDup = query(regRef, where('eventId', '==', eventId), where('userId', '==', payload.userId));
+    const sDup = await getDocs(qDup);
+    if (!sDup.empty) {
+      throw new Error('You have already registered for this event.');
+    }
+  }
 
   // Load event for capacity and lastRegistrationAt checks
   const eventRef = doc(db, 'events', eventId);
@@ -425,7 +533,9 @@ export const registerForEvent = async (
     userEmail: payload.userEmail || null,
     userName: payload.userName || null,
   };
-  const docRef = await addDoc(regRef, regDoc);
+  // Add userId per rules
+  (regDoc as unknown as Record<string, unknown>)['userId'] = payload.userId;
+  const docRef = await addDoc(regRef, regDoc as unknown as DocumentData);
 
   // If not waitlist, increment currentRegistrations on event
   if (status === 'registered') {
