@@ -54,7 +54,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
             />
           </div>
 
-          {/* New: Start date & time */}
+          {/* Start date & time */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Start Date & Time</label>
             <input
