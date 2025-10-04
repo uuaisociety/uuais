@@ -30,8 +30,7 @@ const convertEmailsToLinks = (text: string): React.ReactNode => {
   const matches = text.match(emailRegex);
   
   return parts.map((part, index) => {
-    console.log("part: ",part)
-    console.log("matches: ",matches)
+
     if (index < parts.length - 1 && matches && matches.includes(part)) {
       return (
         <React.Fragment key={index}>

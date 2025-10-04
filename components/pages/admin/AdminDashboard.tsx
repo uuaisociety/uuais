@@ -10,7 +10,6 @@ import {
   FileText,
   TrendingUp,
 } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import EventsTab from '@/components/pages/admin/tabs/EventsTab';
 import TeamTab from '@/components/pages/admin/tabs/TeamTab';
@@ -19,26 +18,28 @@ import FAQTab from '@/components/pages/admin/tabs/FAQTab';
 import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import FAQModal from '@/components/pages/admin/modals/FAQModal';
 import EventQuestionsModal from '@/components/pages/admin/modals/EventQuestionsModal';
-import EventModal from '@/components/pages/admin/modals/EventModal';
+import EventModal, { type EventFormState } from '@/components/pages/admin/modals/EventModal';
 import TeamModal from '@/components/pages/admin/modals/TeamModal';
 import BlogModal from '@/components/pages/admin/modals/BlogModal';
 import EventRegistrationsModal from '@/components/pages/admin/modals/EventRegistrationsModal';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
-import { useAdmin } from '@/hooks/useAdmin';
+//import { useAdmin } from '@/hooks/useAdmin';
 // format imported where needed in tab components
 import { BlogPost, Event, TeamMember, FAQ, EventCustomQuestion } from '@/types';
 import {
   subscribeToEventCustomQuestions,
   addEventCustomQuestion,
   updateEventCustomQuestion,
-  deleteEventCustomQuestion
+  deleteEventCustomQuestion,
+  addEvent,
 } from '@/lib/firestore';
+import MembersTab from '@/components/pages/admin/tabs/membersTab';
 
 const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
-  const { user, logout } = useAdmin();
-  const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics'>('events');
+  //const { user, logout } = useAdmin();
+  const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members'>('events');
   const placeholderImage = '@/public/placeholder.png';
 
   // Modal states
@@ -54,17 +55,19 @@ const AdminDashboard: React.FC = () => {
   const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | null>(null);
   const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
 
+  // Members tab handled in component
+
   // Form states
-  const [eventForm, setEventForm] = useState({
+  const [eventForm, setEventForm] = useState<EventFormState>({
     title: '',
     description: '',
     date: '',
     time: '',
     location: '',
     image: '',
-    category: 'workshop' as 'workshop' | 'guest_lecture' | 'hackathon' | 'other',
+    category: 'workshop',
     registrationRequired: false,
-    maxCapacity: 1,
+    maxCapacity: undefined,
     startAt: '',
     lastRegistrationAt: ''
   });
@@ -117,6 +120,8 @@ const AdminDashboard: React.FC = () => {
     updatePageMeta('Admin Dashboard', 'Manage UU AI Society content and events');
   }, []);
 
+  // No-op; members tab loads internally
+
   const stats = [
     {
       title: 'Total Events',
@@ -154,7 +159,7 @@ const AdminDashboard: React.FC = () => {
       image: '',
       category: 'workshop',
       registrationRequired: false,
-      maxCapacity: 1,
+      maxCapacity: undefined,
       startAt: '',
       lastRegistrationAt: ''
     });
@@ -181,13 +186,37 @@ const AdminDashboard: React.FC = () => {
     setEditingItem(null);
   };
 
-  const handleAddEvent = () => {
-    const newEvent = {
-      ...eventForm,
+  const handleAddEvent = async () => {
+    // Persist to Firestore first to get an ID
+    const payload: Omit<Event, 'id'> = {
+      title: eventForm.title,
+      description: eventForm.description,
+      date: eventForm.date,
+      time: eventForm.time,
+      location: eventForm.location,
+      image: eventForm.image,
+      category: eventForm.category,
+      status: 'upcoming',
+      registrationRequired: eventForm.registrationRequired,
       currentRegistrations: 0,
-      status: 'upcoming' as const
+      published: true,
+      startAt: eventForm.startAt || undefined,
+      lastRegistrationAt: eventForm.lastRegistrationAt || undefined,
+      ...(eventForm.maxCapacity !== undefined ? { maxCapacity: eventForm.maxCapacity } : {}),
     };
-    dispatch({ firestoreAction: 'ADD_EVENT', payload: newEvent });
+    const newId = await addEvent(payload);
+    // Add default dietary restrictions custom question
+    try {
+      await addEventCustomQuestion({
+        eventId: newId,
+        question: 'Dietary restrictions / Allergies',
+        type: 'text',
+        required: false,
+        order: 100,
+      });
+    } catch {}
+    // Optimistically update local state with ID
+    dispatch({ firestoreAction: 'ADD_EVENT', payload: { id: newId, ...payload } as Event });
     setShowEventModal(false);
     resetForms();
   };
@@ -246,7 +275,7 @@ const AdminDashboard: React.FC = () => {
       image: event.image,
       category: event.category,
       registrationRequired: event.registrationRequired || false,
-      maxCapacity: event.maxCapacity || 1,
+      maxCapacity: event.maxCapacity,
       startAt: event.startAt || '',
       lastRegistrationAt: event.lastRegistrationAt || ''
     });
@@ -349,11 +378,6 @@ const AdminDashboard: React.FC = () => {
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Admin Dashboard</h1>
             <p className="text-gray-600 dark:text-gray-300">Manage your UU AI Society content and events</p>
           </div>
-          <div className="flex items-center gap-2">
-            {user && (
-              <Button size="sm" variant="outline" onClick={logout}>Logout</Button>
-            )}
-          </div>
         </div>
 
         {/* Stats */}
@@ -384,7 +408,8 @@ const AdminDashboard: React.FC = () => {
                 { key: 'team', label: 'Team', icon: Users },
                 { key: 'blog', label: 'Newsletter', icon: FileText },
                 { key: 'faq', label: 'FAQ', icon: FileText },
-                { key: 'analytics', label: 'Analytics', icon: TrendingUp }
+                { key: 'analytics', label: 'Analytics', icon: TrendingUp },
+                { key: 'members', label: 'Members', icon: Users },
               ] as const).map(({ key, label, icon: Icon }) => (
                 <button
                   key={key}
@@ -466,6 +491,7 @@ const AdminDashboard: React.FC = () => {
               onDelete={(id) => handleDeleteFaq(id)}
             />
           )}
+          {activeTab === 'members' && (<MembersTab onChanged={() => { /* could trigger toast */ }} />)}
 
           {/* Event Modal */}
           <EventModal
@@ -554,6 +580,9 @@ const AdminDashboard: React.FC = () => {
           />
         </div>
       </div>
+
+      {/* Members modal handled in MembersTab */}
+
     </div>
   );
 };
