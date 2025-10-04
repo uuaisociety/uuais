@@ -4,348 +4,268 @@
 export const dynamic = 'force-dynamic';
 
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { CheckCircle, Users, Award, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
-import { Textarea } from '@/components/ui/Textarea';
-import { Select } from '@/components/ui/Select';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { GithubIcon, GoogleIcon, MicrosoftIcon } from 'hugeicons-react';
 import { updatePageMeta } from '@/utils/seo';
-import type { JoinFormData } from '@/types';
-
-const joinSchema = z.object({
-  firstName: z.string().min(2, 'First name must be at least 2 characters'),
-  lastName: z.string().min(2, 'Last name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email address'),
-  studentId: z.string().min(1, 'Student ID is required'),
-  university: z.string().min(1, 'University is required'),
-  major: z.string().min(1, 'Major is required'),
-  year: z.string().min(1, 'Academic year is required'),
-  experience: z.string().min(1, 'Please select your AI experience level'),
-  interests: z.array(z.string()).min(1, 'Please select at least one interest'),
-  motivation: z.string().min(50, 'Please provide at least 50 characters explaining your motivation'),
-  portfolio: z.string().url('Please enter a valid URL').optional().or(z.literal('')),
-  linkedin: z.string().url('Please enter a valid LinkedIn URL').optional().or(z.literal(''))
-});
+import { auth, signInWithGooglePopup, signInWithGithubPopup, signInWithMicrosoftPopup } from '@/lib/firebase-client';
+import { getUserProfile, upsertUserProfile, updateUserProfile, type UserProfile } from '@/lib/firestore';
+import Link from 'next/link';
+import { FieldGroup, InputBase, SelectBase, TextareaBase } from '@/components/ui/Form';
+import { useNotify } from '@/components/ui/Notifications';
+import { useRouter } from 'next/navigation';
 
 const JoinPage: React.FC = () => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+  const router = useRouter();
+  const [uid, setUid] = useState<string | null>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  // const [captchaOk, setCaptchaOk] = useState(false); // CAPTCHA temporarily disabled
+  const [form, setForm] = useState<Partial<UserProfile>>({});
+  const [saving, setSaving] = useState(false);
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
+  const { notify } = useNotify();
 
   useEffect(() => {
-    updatePageMeta('Join Us', 'Become a member of UU AI Society and join our community of AI enthusiasts');
+    updatePageMeta('Join Us', 'Create an account and become a member of UU AI Society');
   }, []);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    reset
-  } = useForm<JoinFormData>({
-    resolver: zodResolver(joinSchema)
-  });
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged(async (u) => {
+      if (!u) {
+        setUid(null);
+        setProfile(null);
+        setForm({});
+        return;
+      }
+      setUid(u.uid);
+      const p = await getUserProfile(u.uid);
+      setProfile(p);
+      setForm((prev) => ({
+        ...prev,
+        ...(p || { isMember: true }),
+        // default fallbacks from auth
+        displayName: p?.displayName ?? u.displayName ?? (u.email ? u.email.split('@')[0] : prev.displayName),
+        email: p?.email ?? u.email ?? prev.email,
+      }));
+    });
+    return () => unsub();
+  }, []);
 
-  const yearOptions = [
-    { value: '', label: 'Select your year' },
-    { value: 'freshman', label: 'Freshman' },
-    { value: 'sophomore', label: 'Sophomore' },
-    { value: 'junior', label: 'Junior' },
-    { value: 'senior', label: 'Senior' },
-    { value: 'graduate', label: 'Graduate Student' },
-    { value: 'phd', label: 'PhD Student' }
-  ];
-
-  const experienceOptions = [
-    { value: '', label: 'Select your experience level' },
-    { value: 'beginner', label: 'Beginner - New to AI/ML' },
-    { value: 'intermediate', label: 'Intermediate - Some coursework or projects' },
-    { value: 'advanced', label: 'Advanced - Significant experience or research' },
-    { value: 'expert', label: 'Expert - Professional or extensive research experience' }
-  ];
-
-  const interestOptions = [
-    'Machine Learning',
-    'Deep Learning',
-    'Natural Language Processing',
-    'Computer Vision',
-    'Robotics',
-    'AI Ethics',
-    'Data Science',
-    'Neural Networks',
-    'Reinforcement Learning',
-    'AI Research',
-    'Industry Applications',
-    'Startups & Entrepreneurship'
-  ];
-
-  const benefits = [
-    {
-      icon: Users,
-      title: 'Networking Opportunities',
-      description: 'Connect with like-minded students and industry professionals'
-    },
-    {
-      icon: Brain,
-      title: 'Exclusive Workshops',
-      description: 'Access to hands-on workshops and technical sessions'
-    },
-    {
-      icon: Award,
-      title: 'Leadership Opportunities',
-      description: 'Take on leadership roles and organize community events'
-    }
-  ];
-
-  const handleInterestChange = (interest: string) => {
-    const updated = selectedInterests.includes(interest)
-      ? selectedInterests.filter(i => i !== interest)
-      : [...selectedInterests, interest];
-    
-    setSelectedInterests(updated);
-    setValue('interests', updated);
-  };
-
-  const onSubmit = async (data: JoinFormData) => {
+  const handleSave = async () => {
+    if (!uid) return;
+    setSaving(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      console.log('Form submitted:', data);
-      setIsSubmitted(true);
-      reset();
-      setSelectedInterests([]);
-    } catch (error) {
-      console.error('Submission error:', error);
+      const data: Partial<UserProfile> = {
+        ...form,
+        isMember: true,
+        privacyAcceptedAt: privacyAccepted ? new Date().toISOString() : undefined,
+      };
+      if (!profile) {
+        await upsertUserProfile(uid, data);
+      } else {
+        await updateUserProfile(uid, data);
+      }
+      const refreshed = await getUserProfile(uid);
+      setProfile(refreshed);
+      notify({ type: 'success', title: 'Saved', message: 'Profile saved successfully.' });
+      router.push('/account');
+    } finally {
+      setSaving(false);
     }
   };
-
-  if (isSubmitted) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-12 flex items-center justify-center">
-        <div className="max-w-md mx-auto">
-          <Card className="text-center">
-            <CardContent className="p-8">
-              <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Application Submitted!
-              </h2>
-              <p className="text-gray-600 mb-6">
-                Thank you for your interest in joining UU AI Society. We&apos;ll review your application and get back to you within 3-5 business days.
-              </p>
-              <Button
-                onClick={() => setIsSubmitted(false)}
-                variant="default"
-              >
-                Submit Another Application
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-8 transition-colors duration-300">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Join UU AI Society
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Ready to dive into the world of artificial intelligence? Join our community of passionate students and start your AI journey today.
-          </p>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 dark:[color-scheme:dark]">
+      <div className="max-w-3xl mx-auto px-4 space-y-8">
+        <div className="text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">Join UU AI Society</h1>
+          <p className="text-gray-600 dark:text-gray-300">Create an account with a trusted provider. No passwords to manage.</p>
         </div>
 
-        {/* Benefits */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
-          {benefits.map((benefit, index) => (
-            <Card key={index} className="text-center bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300">
-              <CardHeader>
-                <div className="mx-auto w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center mb-4">
-                  <benefit.icon className="h-6 w-6 text-red-600 dark:text-red-400" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {benefit.title}
-                </h3>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  {benefit.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        {/* Logged-in/member banner */}
+        {uid && (
+          (profile?.isMember && profile?.privacyAcceptedAt) ? (
+            <div className="p-4 rounded-md border border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950 text-blue-900 dark:text-blue-200">
+              You are logged in {form.displayName ? `as ${form.displayName}` : ''}. You are already a member. Manage your details anytime at <Link href="/account">/account</Link>.
+            </div>
+          ) : (
+            <div className="p-4 rounded-md border border-yellow-200 dark:border-yellow-900 bg-yellow-50 dark:bg-yellow-950 text-yellow-900 dark:text-yellow-200">
+              To access this resource, please complete your profile below and accept the privacy policy.
+            </div>
+          )
+        )}
 
-        {/* Application Form */}
-        <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+        {/* CAPTCHA disabled for now per request */}
+
+        <Card>
           <CardHeader>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Membership Application
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300">
-              Fill out the form below to apply for membership. All fields marked with * are required.
-            </p>
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Sign in or Create Account</h2>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Use one of the providers below. You can link more providers later in your account.</p>
           </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {/* Basic Information */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Basic Information</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Input
-                    label="First Name *"
-                    {...register('firstName')}
-                    error={errors.firstName?.message}
-                    fullWidth
-                  />
-                  <Input
-                    label="Last Name *"
-                    {...register('lastName')}
-                    error={errors.lastName?.message}
-                    fullWidth
-                  />
-                </div>
-                <div className="grid md:grid-cols-2 gap-4 mt-4">
-                  <Input
-                    label="Email Address *"
-                    type="email"
-                    {...register('email')}
-                    error={errors.email?.message}
-                    fullWidth
-                  />
-                  <Input
-                    label="Student ID *"
-                    {...register('studentId')}
-                    error={errors.studentId?.message}
-                    fullWidth
-                  />
-                </div>
+          <CardContent className="space-y-3 flex flex-col md:flex-col justify-center gap-2 pt-4 items-center max-w-md mx-auto">
+            {/* TODO: Add colors to icons */}
+            <Button onClick={() => signInWithGooglePopup()} variant="default">
+              <span className="flex items-center gap-2"><GoogleIcon className="h-4 w-4"/> Continue with Google</span>
+            </Button>
+            <Button onClick={() => signInWithGithubPopup()} variant="outline">
+              <span className="flex items-center gap-2"><GithubIcon className="h-4 w-4"/> Continue with GitHub</span>
+            </Button>
+            <Button onClick={() => signInWithMicrosoftPopup()} variant="outline">
+              <span className="flex items-center gap-2"><MicrosoftIcon className="h-4 w-4"/> Continue with Microsoft</span>
+            </Button>
+          </CardContent>
+        </Card>
+
+        {uid && (
+          <Card>
+            <CardHeader>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Step 3: Complete your profile</h2>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">These details help us serve members better. You can edit them anytime in <Link href="/account" className="underline">/account</Link>.</p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <FieldGroup label="Display name" requiredHint="Required. Shown publicly.">
+                  <InputBase placeholder="e.g. Alex" value={form.displayName || ''} onChange={(e) => setForm(f => ({ ...f, displayName: e.target.value }))} />
+                </FieldGroup>
+                <FieldGroup label="Full name" requiredHint="Required. Your legal name or preferred full name.">
+                  <InputBase placeholder="e.g. Alex Doe" value={form.name || ''} onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))} />
+                </FieldGroup>
               </div>
 
-              {/* Academic Information */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Academic Information</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Input
-                    label="University *"
-                    {...register('university')}
-                    error={errors.university?.message}
-                    fullWidth
-                  />
-                  <Input
-                    label="Major *"
-                    {...register('major')}
-                    error={errors.major?.message}
-                    fullWidth
-                  />
-                </div>
-                <div className="grid md:grid-cols-2 gap-4 mt-4">
-                  <Select
-                    label="Academic Year *"
-                    options={yearOptions}
-                    {...register('year')}
-                    error={errors.year?.message}
-                    fullWidth
-                  />
-                  <Select
-                    label="AI Experience Level *"
-                    options={experienceOptions}
-                    {...register('experience')}
-                    error={errors.experience?.message}
-                    fullWidth
-                  />
-                </div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Contact & Social</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <FieldGroup label="Student status" requiredHint="Optional.">
+                  <SelectBase value={form.studentStatus ?? 'student'} onChange={(e) => setForm(f => ({ ...f, studentStatus: e.target.value as 'student' | 'alumni' | 'other' }))}>
+                    <option value="student">Student</option>
+                    <option value="alumni">Alumni</option>
+                    <option value="other">Other</option>
+                  </SelectBase>
+                </FieldGroup>
+                <FieldGroup label="Campus" requiredHint="Optional">
+                  <SelectBase value={form.campus ?? 'Uppsala'} onChange={(e) => setForm(f => ({ ...f, campus: e.target.value as 'Uppsala' | 'Gotland' | 'other' }))}>
+                    <option value="Uppsala">Uppsala</option>
+                    <option value="Gotland">Gotland</option>
+                    <option value="other">Other</option>
+                  </SelectBase>
+                </FieldGroup>
+                <FieldGroup label="LinkedIn URL" requiredHint="Optional">
+                  <InputBase placeholder="https://linkedin.com/in/..." value={form.linkedin || ''} onChange={(e) => setForm(f => ({ ...f, linkedin: e.target.value }))} />
+                </FieldGroup>
+                <FieldGroup label="GitHub URL" requiredHint="Optional">
+                  <InputBase placeholder="https://github.com/username" value={form.github || ''} onChange={(e) => setForm(f => ({ ...f, github: e.target.value }))} />
+                </FieldGroup>
+                <FieldGroup label="Website" requiredHint="Optional">
+                  <InputBase placeholder="https://example.com" value={form.website || ''} onChange={(e) => setForm(f => ({ ...f, website: e.target.value }))} />
+                </FieldGroup>
               </div>
 
-              {/* Interests */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  Areas of Interest *
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  Select all areas that interest you (minimum 1 required):
-                </p>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  {interestOptions.map((interest) => (
-                    <label
-                      key={interest}
-                      className="flex items-center space-x-2 cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={selectedInterests.includes(interest)}
-                        onChange={() => handleInterestChange(interest)}
-                        className="rounded border-gray-300 text-red-600 focus:ring-red-500"
-                      />
-                      <span className="text-sm text-gray-700 dark:text-gray-300">{interest}</span>
-                    </label>
-                  ))}
-                </div>
-                {errors.interests && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                    {errors.interests.message}
-                  </p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Academic Information</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <FieldGroup label="University" requiredHint="Required if student.">
+                  <SelectBase value={form.university ?? 'Uppsala'} onChange={(e) => setForm(f => ({ ...f, university: e.target.value as 'Uppsala' | 'none' | 'other' }))}>
+                    <option value="Uppsala">Uppsala</option>
+                    <option value="none">None</option>
+                    <option value="other">Other</option>
+                  </SelectBase>
+                </FieldGroup>
+                <FieldGroup label="Program / Major" requiredHint="Required if student.">
+                  <InputBase placeholder="e.g. Computer Science" value={form.program || ''} onChange={(e) => setForm(f => ({ ...f, program: e.target.value }))} />
+                </FieldGroup>
+                <FieldGroup label="Expected Graduation Year" requiredHint="Optional">
+                  <InputBase placeholder="e.g. 2026" type="number" value={form.expectedGraduationYear ?? ''} onChange={(e) => setForm(f => ({ ...f, expectedGraduationYear: e.target.value ? Number(e.target.value) : undefined }))} />
+                </FieldGroup>
+                <FieldGroup label="Gender" requiredHint="Optional">
+                  <SelectBase value={form.gender || 'other'} onChange={(e) => setForm(f => ({ ...f, gender: e.target.value }))}>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="nonbinary">Non-binary</option>
+                    <option value="prefer_not">Prefer not to say</option>
+                    <option value="other">Other</option>
+                  </SelectBase>
+                </FieldGroup>
+              </div>
+              {/* Heard of us */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <FieldGroup label="How did you hear of us?" requiredHint="Optional">
+                  <SelectBase
+                    value={form.heardOfUs || ''}
+                    onChange={(e)=>{
+                      const v = e.target.value;
+                      if (v === 'other') {
+                        setForm(f=>({ ...f, heardOfUs: '' }));
+                      } else {
+                        setForm(f=>({ ...f, heardOfUs: v }));
+                      }
+                    }}
+                  >
+                    <option value="">Select an option</option>
+                    <option value="posters">Posters</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="friends">Friends</option>
+                    <option value="events">Events</option>
+                    <option value="lecture">During lecture</option>
+                    <option value="other">Other</option>
+                  </SelectBase>
+                </FieldGroup>
+                {(form.heardOfUs === '' || (form.heardOfUs && !['posters','instagram','linkedin','friends','events','lecture'].includes(form.heardOfUs))) && (
+                  <FieldGroup label="If other, please specify" requiredHint="Optional">
+                    <InputBase placeholder="Type here" value={form.heardOfUs || ''} onChange={(e)=>setForm(f=>({...f, heardOfUs: e.target.value}))} />
+                  </FieldGroup>
                 )}
               </div>
-
-              {/* Motivation */}
-              <div>
-                <Textarea
-                  label="Why do you want to join UU AI Society? *"
-                  rows={4}
-                  placeholder="Tell us about your interest in AI and what you hope to gain from joining our community..."
-                  {...register('motivation')}
-                  error={errors.motivation?.message}
-                  fullWidth
-                />
+              <FieldGroup label="Bio" requiredHint="Optional">
+                <TextareaBase placeholder="Write a short bio" value={form.bio || ''} onChange={(e) => setForm(f => ({ ...f, bio: e.target.value }))} />
+              </FieldGroup>
+              <div className="flex items-center gap-6">
+                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                  <input type="checkbox" checked={!!form.newsletter} onChange={(e) => setForm(f => ({ ...f, newsletter: e.target.checked }))} />
+                  Subscribe to newsletter
+                </label>
+                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                  <input type="checkbox" checked={!!form.lookingForJob} onChange={(e) => setForm(f => ({ ...f, lookingForJob: e.target.checked }))} />
+                  Looking for job opportunities
+                </label>
               </div>
-
-              {/* Optional Links */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                  Optional Information
-                </h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Input
-                    label="Portfolio/GitHub URL"
-                    type="url"
-                    placeholder="https://github.com/yourusername"
-                    {...register('portfolio')}
-                    error={errors.portfolio?.message}
-                    fullWidth
-                  />
-                  <Input
-                    label="LinkedIn Profile"
-                    type="url"
-                    placeholder="https://linkedin.com/in/yourprofile"
-                    {...register('linkedin')}
-                    error={errors.linkedin?.message}
-                    fullWidth
-                  />
-                </div>
+              <div className="flex flex-col gap-3 pt-2">
+                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                  <input type="checkbox" checked={privacyAccepted} onChange={(e) => setPrivacyAccepted(e.target.checked)} />
+                  I accept the <a className="underline" href="/privacy" target="_blank" rel="noreferrer">Privacy Policy</a> (required)
+                </label>
+                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                  <input type="checkbox" checked={!!form.marketingOptIn} onChange={(e) => setForm(f => ({ ...f, marketingOptIn: e.target.checked }))} />
+                  Allow marketing communications
+                </label>
+                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                  <input type="checkbox" checked={!!form.analyticsOptIn} onChange={(e) => setForm(f => ({ ...f, analyticsOptIn: e.target.checked }))} />
+                  Allow anonymous analytics
+                </label>
+                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                  <input type="checkbox" checked={!!form.partnerContactOptIn} onChange={(e) => setForm(f => ({ ...f, partnerContactOptIn: e.target.checked }))} />
+                  Allow contact from partner companies
+                </label>
               </div>
-
               <div className="flex justify-end">
-                <Button
-                  type="submit"
-                  size="lg"
-                  // loading={isSubmitting}
-                  className="min-w-32"
-                >
-                  Submit Application
-                </Button>
+                <Button disabled={saving || !privacyAccepted} onClick={handleSave}>{saving ? 'Saving...' : 'Save & Become Member'}</Button>
               </div>
-            </form>
+            </CardContent>
+          </Card>
+        )}
+
+        <Card>
+          <CardHeader>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Already a member?</h2>
+          </CardHeader>
+          <CardContent>
+            <p className="text-gray-600 dark:text-gray-300">Manage your profile and linked accounts at <Link href="/account">/account</Link>. Your event applications appear there as well.</p>
           </CardContent>
         </Card>
       </div>
+
+      <style jsx global>{`
+        .input { @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white; }
+      `}</style>
     </div>
   );
 };
