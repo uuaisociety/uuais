@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
-import { X, MessageSquare } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Event, EventCustomQuestion } from '@/types';
 import { registerForEvent, subscribeToEventCustomQuestions, getUserProfile, type UserProfile } from '@/lib/firestore';
 import { auth } from '@/lib/firebase-client';
