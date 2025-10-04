@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "set:admin": "ts-node tools/setAdminClaim.ts",
+    "remove:admin": "ts-node tools/removeAdminClaim.ts",
     "test": "jest --silent",
     "test:watch": "jest --watch",
     "test:coverage": "jest --config jest.config.ts --coverage"
