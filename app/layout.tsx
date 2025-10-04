@@ -4,6 +4,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Providers } from './providers';
 import { AppProvider } from '@/contexts/AppContext';
+import { NotificationsProvider } from '@/components/ui/Notifications';
+import RegistrationGate from '@/components/auth/RegistrationGate';
 // import UpcomingEventsBanner from '@/components/common/UpcomingEventsBanner';
 
 // import { metadata, viewport } from "./metadata";
@@ -24,16 +26,19 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className={`${inter.variable} font-sans bg-white dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen transition-colors duration-300`}>
         <Providers>
-          <AppProvider>
-            <div className="min-h-screen flex flex-col">
-              <Header />
-              <main id="main" className="flex-grow">
-                {children}
-              </main>
-              <Footer />
-              {/* <UpcomingEventsBanner /> */}
-            </div>
-          </AppProvider>
+          <NotificationsProvider>
+            <AppProvider>
+              <div className="min-h-screen flex flex-col">
+                <Header />
+                <RegistrationGate />
+                <main id="main" className="flex-grow">
+                  {children}
+                </main>
+                <Footer />
+                {/* <UpcomingEventsBanner /> */}
+              </div>
+            </AppProvider>
+          </NotificationsProvider>
         </Providers>
       </body>
     </html>
