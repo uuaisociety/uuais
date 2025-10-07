@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "dev": "uuais-dev",
+    "prod": "uuais-58867"
+  }
+}
