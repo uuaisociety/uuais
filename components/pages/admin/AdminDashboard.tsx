@@ -33,6 +33,7 @@ import {
   updateEventCustomQuestion,
   deleteEventCustomQuestion,
   addEvent,
+  patchEvent,
 } from '@/lib/firestore';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 
@@ -215,8 +216,6 @@ const AdminDashboard: React.FC = () => {
         order: 100,
       });
     } catch {}
-    // Optimistically update local state with ID
-    dispatch({ firestoreAction: 'ADD_EVENT', payload: { id: newId, ...payload } as Event });
     setShowEventModal(false);
     resetForms();
   };
@@ -313,9 +312,55 @@ const AdminDashboard: React.FC = () => {
   };
 
   const handleUpdateEvent = () => {
-    if (editingItem) {
-      const updatedEvent = { ...editingItem, ...eventForm } as Event;
-      dispatch({ firestoreAction: 'UPDATE_EVENT', payload: updatedEvent });
+    if (editingItem && (editingItem as Event).id) {
+      const editingEvent = editingItem as Event;
+      // Build a minimal patch object: only include fields that changed or are explicitly set.
+      const patch: Partial<Event> = {};
+      const f = eventForm;
+
+      if (f.title !== editingEvent.title) patch.title = f.title;
+      if (f.description !== editingEvent.description) patch.description = f.description;
+      if (f.date !== editingEvent.date) patch.date = f.date;
+      if (f.time !== editingEvent.time) patch.time = f.time;
+      if (f.location !== editingEvent.location) patch.location = f.location;
+      if (f.image !== editingEvent.image) patch.image = f.image;
+      if (f.category !== editingEvent.category) patch.category = f.category;
+      if (f.registrationRequired !== editingEvent.registrationRequired) patch.registrationRequired = f.registrationRequired;
+
+      // maxCapacity: only include if user provided a value (number) — leave unchanged if empty/undefined
+      if (typeof f.maxCapacity === 'number') patch.maxCapacity = f.maxCapacity;
+
+      // startAt / lastRegistrationAt: only include when non-empty strings (user explicitly set)
+      if (f.startAt && f.startAt !== (editingEvent.startAt ?? '')) patch.startAt = f.startAt;
+      if (f.lastRegistrationAt && f.lastRegistrationAt !== (editingEvent.lastRegistrationAt ?? '')) patch.lastRegistrationAt = f.lastRegistrationAt;
+
+      // If nothing changed, skip the update
+      if (Object.keys(patch).length === 0) {
+        setShowEventModal(false);
+        resetForms();
+        return;
+      }
+
+      // If user cleared maxCapacity (wants registration but no limit) or turned off registration,
+      // we should delete the `maxCapacity` field in Firestore. Use patchEvent for deletions.
+      const needsDeleteMax = (editingEvent.maxCapacity !== undefined) && (
+        (typeof f.maxCapacity !== 'number' && f.registrationRequired === true) || // cleared input but registration still required
+        f.registrationRequired === false // registration removed => remove capacity
+      );
+
+      if (needsDeleteMax) {
+        // remove field in Firestore
+        (async () => {
+          try {
+            await patchEvent(editingEvent.id, patch, ['maxCapacity']);
+          } catch (e) {
+            console.error('patchEvent failed', e);
+          }
+        })();
+      } else {
+        // Dispatch only the changed fields plus id — updateEvent will merge the patch server-side
+        dispatch({ firestoreAction: 'UPDATE_EVENT', payload: { id: editingEvent.id, ...patch } as Event });
+      }
       setShowEventModal(false);
       resetForms();
     }

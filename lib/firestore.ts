@@ -13,6 +13,7 @@ import {
   increment,
   where,
   setDoc,
+  deleteField,
   DocumentData,
   Timestamp,
 } from 'firebase/firestore';
@@ -21,6 +22,29 @@ import { Event, TeamMember, BlogPost, FAQ, RegistrationQuestion, EventRegistrati
 
 // ----------------------------
 // ----------------------------
+
+// Utility: strip undefined values from an object before sending to Firestore
+// Works recursively for nested objects/arrays.
+function stripUndefined(value: unknown): unknown {
+  if (value === undefined) return undefined;
+  if (value === null) return null;
+  if (Array.isArray(value)) {
+    const arr = value
+      .map((v) => stripUndefined(v))
+      .filter((v) => v !== undefined);
+    return arr;
+  }
+  if (typeof value === 'object' && value !== null) {
+    const obj = value as Record<string, unknown>;
+    const out: Record<string, unknown> = {};
+    Object.keys(obj).forEach((k) => {
+      const v = stripUndefined(obj[k]);
+      if (v !== undefined) out[k] = v as unknown;
+    });
+    return out;
+  }
+  return value;
+}
 
 export type UserProfile = {
   id: string;
@@ -81,7 +105,7 @@ export const upsertUserProfile = async (
   const ref = doc(db, 'users', uid);
   await setDoc(
     ref,
-    { ...data, updatedAt: new Date().toISOString(), createdAt: data?.createdAt ?? new Date().toISOString() },
+    { ...(stripUndefined(data as Record<string, unknown>) as Record<string, unknown>), updatedAt: new Date().toISOString(), createdAt: data?.createdAt ?? new Date().toISOString() },
     { merge: true }
   );
 };
@@ -91,7 +115,7 @@ export const updateUserProfile = async (
   patch: Partial<Omit<UserProfile, 'id' | 'createdAt'>>
 ): Promise<void> => {
   const ref = doc(db, 'users', uid);
-  await updateDoc(ref, { ...(patch as unknown as DocumentData), updatedAt: new Date().toISOString() } as DocumentData);
+  await updateDoc(ref, { ...(stripUndefined(patch as Record<string, unknown>) as DocumentData), updatedAt: new Date().toISOString() } as DocumentData);
 };
 
 // Events
@@ -143,7 +167,8 @@ export const getEventById = async (id: string): Promise<Event | null> => {
 
 export const addEvent = async (event: Omit<Event, 'id'>): Promise<string> => {
   const eventsRef = collection(db, 'events');
-  const docRef = await addDoc(eventsRef, event);
+  const safe = stripUndefined(event) as DocumentData;
+  const docRef = await addDoc(eventsRef, safe);
   // Initialize analytics document so the Admin dashboard always has an entry
   try {
     const analyticsRef = doc(db, 'analyticsEvents', docRef.id);
@@ -231,7 +256,24 @@ export async function getBlogReadsCounts(ids: string[]): Promise<Record<string, 
 
 export const updateEvent = async (id: string, event: Partial<Event>): Promise<void> => {
   const eventRef = doc(db, 'events', id);
-  await updateDoc(eventRef, event);
+  // Never write the id field; use merge to create-if-missing and update safely
+  const patch: Record<string, unknown> = { ...(event as unknown as Record<string, unknown>) };
+  delete patch.id;
+  const safePatch = stripUndefined(patch);
+  await setDoc(eventRef, safePatch as DocumentData, { merge: true });
+};
+
+// Patch an event and optionally delete specified fields (using deleteField sentinel)
+export const patchEvent = async (id: string, patch: Partial<Event>, removeFields?: string[]): Promise<void> => {
+  const eventRef = doc(db, 'events', id);
+  const safe = stripUndefined(patch) as DocumentData;
+  const updates: DocumentData = { ...safe };
+  if (Array.isArray(removeFields)) {
+    for (const f of removeFields) {
+      (updates as Record<string, unknown>)[f] = deleteField();
+    }
+  }
+  await updateDoc(eventRef, updates);
 };
 
 export const deleteEvent = async (id: string): Promise<void> => {
@@ -254,7 +296,7 @@ export const addTeamMember = async (member: Omit<TeamMember, 'id'>): Promise<str
 
 export const updateTeamMember = async (id: string, member: Partial<TeamMember>): Promise<void> => {
   const memberRef = doc(db, 'teamMembers', id);
-  await updateDoc(memberRef, member);
+  await updateDoc(memberRef, stripUndefined(member) as DocumentData);
 };
 
 export const deleteTeamMember = async (id: string): Promise<void> => {
@@ -298,7 +340,7 @@ export const addBlogPost = async (post: Omit<BlogPost, 'id'>): Promise<string> =
 
 export const updateBlogPost = async (id: string, post: Partial<BlogPost>): Promise<void> => {
   const postRef = doc(db, 'blogPosts', id);
-  await updateDoc(postRef, post);
+  await updateDoc(postRef, stripUndefined(post) as DocumentData);
 };
 
 export const deleteBlogPost = async (id: string): Promise<void> => {
@@ -349,7 +391,7 @@ export const addFaq = async (faq: Omit<FAQ, 'id'>): Promise<string> => {
 
 export const updateFaq = async (id: string, faq: Partial<FAQ>): Promise<void> => {
   const faqRef = doc(db, 'faqs', id);
-  await updateDoc(faqRef, faq);
+  await updateDoc(faqRef, stripUndefined(faq) as DocumentData);
 };
 
 export const deleteFaq = async (id: string): Promise<void> => {
@@ -381,7 +423,7 @@ export const addRegistrationQuestion = async (rq: Omit<RegistrationQuestion, 'id
 
 export const updateRegistrationQuestion = async (id: string, rq: Partial<RegistrationQuestion>): Promise<void> => {
   const rqRef = doc(db, 'registrationQuestions', id);
-  await updateDoc(rqRef, rq);
+  await updateDoc(rqRef, stripUndefined(rq) as DocumentData);
 };
 
 export const deleteRegistrationQuestion = async (id: string): Promise<void> => {
@@ -430,7 +472,7 @@ export const updateEventCustomQuestion = async (
   patch: Partial<EventCustomQuestion>
 ): Promise<void> => {
   const cqDoc = doc(db, 'eventCustomQuestions', id);
-  await updateDoc(cqDoc, patch);
+  await updateDoc(cqDoc, stripUndefined(patch) as DocumentData);
 };
 
 export const deleteEventCustomQuestion = async (id: string): Promise<void> => {
