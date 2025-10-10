@@ -1,13 +1,14 @@
 'use client'
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { Event, TeamMember, BlogPost, FAQ, RegistrationQuestion } from '../types';
+import { Event, TeamMember, BlogPost, FAQ, RegistrationQuestion, Job } from '../types';
 import { 
   subscribeToEvents, 
   subscribeToTeamMembers, 
   subscribeToBlogPosts,
   subscribeToFaqs,
   subscribeToRegistrationQuestions,
+  subscribeToJobs,
   addEvent as addEventToFirestore,
   updateEvent as updateEventInFirestore,
   deleteEvent as deleteEventFromFirestore,
@@ -22,7 +23,10 @@ import {
   deleteFaq as deleteFaqFromFirestore,
   addRegistrationQuestion as addRegistrationQuestionToFirestore,
   updateRegistrationQuestion as updateRegistrationQuestionInFirestore,
-  deleteRegistrationQuestion as deleteRegistrationQuestionFromFirestore
+  deleteRegistrationQuestion as deleteRegistrationQuestionFromFirestore,
+  addJob as addJobToFirestore,
+  updateJob as updateJobInFirestore,
+  deleteJob as deleteJobFromFirestore
 } from '../lib/firestore';
 
 interface AppState {
@@ -31,6 +35,7 @@ interface AppState {
   blogPosts: BlogPost[];
   faqs: FAQ[];
   registrationQuestions: RegistrationQuestion[];
+  jobs: Job[];
   isLoading: boolean;
   error: string | null;
 }
@@ -57,7 +62,11 @@ type AppAction =
   | { type: 'SET_REGISTRATION_QUESTIONS'; payload: RegistrationQuestion[] }
   | { type: 'ADD_REGISTRATION_QUESTION'; payload: RegistrationQuestion }
   | { type: 'UPDATE_REGISTRATION_QUESTION'; payload: RegistrationQuestion }
-  | { type: 'DELETE_REGISTRATION_QUESTION'; payload: string };
+  | { type: 'DELETE_REGISTRATION_QUESTION'; payload: string }
+  | { type: 'SET_JOBS'; payload: Job[] }
+  | { type: 'ADD_JOB'; payload: Job }
+  | { type: 'UPDATE_JOB'; payload: Job }
+  | { type: 'DELETE_JOB'; payload: string };
 
 type FirestoreAction = 
   | { firestoreAction: 'ADD_EVENT'; payload: Omit<Event, 'id'> }
@@ -74,7 +83,10 @@ type FirestoreAction =
   | { firestoreAction: 'DELETE_FAQS'; payload: string }
   | { firestoreAction: 'ADD_REGISTRATION_QUESTION'; payload: Omit<RegistrationQuestion, 'id'> }
   | { firestoreAction: 'UPDATE_REGISTRATION_QUESTION'; payload: RegistrationQuestion }
-  | { firestoreAction: 'DELETE_REGISTRATION_QUESTION'; payload: string };
+  | { firestoreAction: 'DELETE_REGISTRATION_QUESTION'; payload: string }
+  | { firestoreAction: 'ADD_JOB'; payload: Omit<Job, 'id' | 'createdAt'> }
+  | { firestoreAction: 'UPDATE_JOB'; payload: Job }
+  | { firestoreAction: 'DELETE_JOB'; payload: string };
 
 const initialState: AppState = {
   events: [],
@@ -82,6 +94,7 @@ const initialState: AppState = {
   blogPosts: [],
   faqs: [],
   registrationQuestions: [],
+  jobs: [],
   isLoading: false,
   error: null
 };
@@ -168,6 +181,20 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         registrationQuestions: state.registrationQuestions.filter(q => q.id !== action.payload)
       };
+    case 'SET_JOBS':
+      return { ...state, jobs: action.payload };
+    case 'ADD_JOB':
+      return { ...state, jobs: [...state.jobs, action.payload] };
+    case 'UPDATE_JOB':
+      return {
+        ...state,
+        jobs: state.jobs.map(j => j.id === action.payload.id ? action.payload : j)
+      };
+    case 'DELETE_JOB':
+      return {
+        ...state,
+        jobs: state.jobs.filter(j => j.id !== action.payload)
+      };
     default:
       return state;
   }
@@ -194,6 +221,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const unsubscribeBlogPosts = subscribeToBlogPosts((posts) => {
       dispatch({ type: 'SET_BLOG_POSTS', payload: posts });
     });
+    const unsubscribeJobs = subscribeToJobs((jobs) => {
+      dispatch({ type: 'SET_JOBS', payload: jobs });
+    });
     const unsubscribeFaqs = subscribeToFaqs((faqs) => {
       dispatch({ type: 'SET_FAQS', payload: faqs });
     });
@@ -208,6 +238,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       unsubscribeBlogPosts();
       unsubscribeFaqs();
       unsubscribeRegistrationQuestions();
+      unsubscribeJobs();
     };
   }, []);
 
@@ -265,6 +296,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             break;
           case 'DELETE_REGISTRATION_QUESTION':
             await deleteRegistrationQuestionFromFirestore(action.payload);
+            break;
+          case 'ADD_JOB':
+            await addJobToFirestore(action.payload);
+            break;
+          case 'UPDATE_JOB':
+            await updateJobInFirestore(action.payload.id, action.payload);
+            break;
+          case 'DELETE_JOB':
+            await deleteJobFromFirestore(action.payload);
             break;
         }
       } else {
