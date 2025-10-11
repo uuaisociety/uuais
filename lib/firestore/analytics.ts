@@ -4,8 +4,14 @@ import { db } from '@/lib/firebase-client';
 export async function incrementEventUniqueClick(eventId: string): Promise<void> {
   if (typeof window === 'undefined') return;
   const key = `clicked_event_${eventId}`;
-  if (localStorage.getItem(key) === '1') return;
-  localStorage.setItem(key, '1');
+  try {
+    if (window?.localStorage?.getItem(key) === '1') return;
+    window?.localStorage?.setItem(key, '1');
+  } catch {
+    // In sandboxed contexts (origin null, no allow-same-origin), localStorage is inaccessible.
+    // To avoid overcounting and runtime errors, skip increment when we cannot dedupe.
+    return;
+  }
   const ref = doc(db, 'analyticsEvents', eventId);
   await setDoc(ref, { clicks: increment(1), updatedAt: serverTimestamp() }, { merge: true });
 }
@@ -23,8 +29,13 @@ export const getEventClicksCounts = async (ids: string[]): Promise<Record<string
 export async function incrementBlogRead(blogId: string): Promise<void> {
   if (typeof window === 'undefined') return;
   const key = `read_blog_${blogId}`;
-  if (localStorage.getItem(key) === '1') return;
-  localStorage.setItem(key, '1');
+  try {
+    if (window?.localStorage?.getItem(key) === '1') return;
+    window?.localStorage?.setItem(key, '1');
+  } catch {
+    // Skip increment in sandboxed contexts to avoid client exception and overcounting.
+    return;
+  }
   const ref = doc(db, 'analyticsBlogs', blogId);
   await setDoc(ref, { reads: increment(1), updatedAt: serverTimestamp() }, { merge: true });
 }
