@@ -190,12 +190,10 @@ const EventsPage: React.FC = () => {
                       <span>{event.location}</span>
                     </div>
                     
-                    {event.maxCapacity && (
+                    {typeof event.maxCapacity === 'number' && (
                       <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                         <Users className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
-                        <span>
-                          {event.currentRegistrations || 0} / {event.maxCapacity} registered
-                        </span>
+                        <span>Capacity: {event.maxCapacity}</span>
                       </div>
                     )}
                   </div>
