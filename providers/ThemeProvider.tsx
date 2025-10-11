@@ -20,7 +20,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMounted(true)
     if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme') as Theme
+      const savedTheme = window?.localStorage?.getItem('theme') as Theme
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
       setTheme(savedTheme || systemTheme)
     }
@@ -32,7 +32,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (typeof document !== 'undefined') {
       document.documentElement.classList.remove('light', 'dark')
       document.documentElement.classList.add(theme)
-      localStorage.setItem('theme', theme)
+      window?.localStorage?.setItem('theme', theme)
     }
   }, [theme, mounted])
 

@@ -44,28 +44,30 @@ This is a [Next.js](https://nextjs.org) project for the Uppsala University AI So
 The page will automatically reload when you make changes to the code.
 
 ### Setup Firebase (Database and Authentication)
-1. **Create a Firebase Project**
+Based on https://www.scipress.io/post/OMsrfAaWdIgwNEF0P6za/Part-2---Firebase
 
-  - Go to the Firebase Console.
-  - Click Add Project (or select an existing one).
-  - Navigate to Project Overview → Project Settings → General.
-  - Scroll down to Your apps → Web and create a new web app.
-  - Copy the provided API keys and config values into your .env file (see Environment Setup).
+1. **Login and setup dev project**
 
-2. **Generate Service Account Credentials**
-
-  - In Project Settings, open the Service Accounts tab.
-  - Click Generate new private key and save the downloaded file.
-  - Place this file securely in your repo (or locally, outside version control if preferred).
-  - Add an environment variable pointing to it.
-```bash
-GOOGLE_APPLICATION_CREDENTIALS=./path/to/serviceAccountKey.json
+```bash 
+npm install -g firebase-tools
+cd lib/
+firebase login # Use uuais account
+firebase use dev
 ```
-3. **Enable Authentication**
 
-  - In the Firebase Console, go to Build → Authentication.
-  - Click Get Started.
-  - Add and enable Google as a sign-in method.
+#TODO: Setup emulators
+
+2. **Create service account**
+  - Go to https://console.firebase.google.com/u/2/project/uuais-dev/settings/general/web:OTg4MTQwOTYtNDI4NS00Zjk1LThkOWEtZTE2YmFkYmUwN2Yx
+  - Go to Service Accounts
+  - Click on "Create new private key"
+  - Save the file in the root of your project
+
+3. **Copy SDK setup and configuration**
+  - Go to https://console.firebase.google.com/u/2/project/uuais-dev/settings/general/web:OTg4MTQwOTYtNDI4NS00Zjk1LThkOWEtZTE2YmFkYmUwN2Yx
+  - Scroll down to uuais-dev web app
+  - Copy over values from apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId
+  to .env file (see below).
 
 4. **Environment Variables**
   - Create a .env file in the root of your project and add the Firebase config values from .env.example

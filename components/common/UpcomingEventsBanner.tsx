@@ -38,8 +38,8 @@ const UpcomingEventsBanner: React.FC = () => {
     .slice(0, 3);
 
   useEffect(() => {
-    const dismissed = localStorage.getItem('eventBannerDismissed');
-    const dismissedTimestamp = localStorage.getItem('eventBannerDismissedTime');
+    const dismissed = window?.localStorage?.getItem('eventBannerDismissed');
+    const dismissedTimestamp = window?.localStorage?.getItem('eventBannerDismissedTime');
 
     if (dismissed === 'true' && dismissedTimestamp) {
       const dismissedTime = parseInt(dismissedTimestamp);
@@ -50,13 +50,13 @@ const UpcomingEventsBanner: React.FC = () => {
         setIsVisible(false);
         return;
       } else {
-        localStorage.removeItem('eventBannerDismissed');
-        localStorage.removeItem('eventBannerDismissedTime');
+        window?.localStorage?.removeItem('eventBannerDismissed');
+        window?.localStorage?.removeItem('eventBannerDismissedTime');
       }
     }
 
     const currentEventCount = upcomingEvents.length;
-    const storedCount = localStorage.getItem('lastEventCount');
+    const storedCount = window?.localStorage?.getItem('lastEventCount');
 
     if (currentEventCount > 0 && (!dismissed || (storedCount && parseInt(storedCount) < currentEventCount))) {
       setIsVisible(true);
@@ -64,7 +64,7 @@ const UpcomingEventsBanner: React.FC = () => {
     }
 
     setLastEventCount(currentEventCount);
-    localStorage.setItem('lastEventCount', currentEventCount.toString());
+    window?.localStorage?.setItem('lastEventCount', currentEventCount.toString());
   }, [upcomingEvents.length]);
 
   const getEventTimeLabel = (eventDate: Date) => {
@@ -76,8 +76,8 @@ const UpcomingEventsBanner: React.FC = () => {
 
   const handleDismiss = () => setIsVisible(false);
   const handleDontShowAgain = () => {
-    localStorage.setItem('eventBannerDismissed', 'true');
-    localStorage.setItem('eventBannerDismissedTime', Date.now().toString());
+    window?.localStorage?.setItem('eventBannerDismissed', 'true');
+    window?.localStorage?.setItem('eventBannerDismissedTime', Date.now().toString());
     setIsDismissed(true);
     setIsVisible(false);
   };

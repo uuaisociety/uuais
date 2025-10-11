@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: 'UU AI Society',
     template: '%s | UU AI Society'
   },
-  description: 'Uppsala University AI Society - Connecting students passionate about Artificial Intelligence',
+  description: 'UU AI Society - Connecting students passionate about Artificial Intelligence in Uppsala',
   keywords: [
     'AI',
     'Artificial Intelligence',

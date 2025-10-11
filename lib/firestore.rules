@@ -10,6 +10,15 @@ service cloud.firestore {
       return isSignedIn() && request.auth.token.admin == true;
     }
 
+    // Helper: fetch caller's user profile
+    function callerProfile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function isMember() {
+      return isSignedIn() && callerProfile().data.isMember == true;
+    }
+
     // Helper: limit updates to only specific keys
     function changedOnly(allowed) {
       return request.resource.data.diff(resource.data).changedKeys().hasOnly(allowed);
@@ -18,6 +27,28 @@ service cloud.firestore {
     // Helper: field unchanged equality
     function unchanged(field) {
       return request.resource.data[field] == resource.data[field];
+    }
+
+    // USERS (member profiles)
+    match /users/{uid} {
+      // Users may read their own profile; admins may read all; optionally open some fields publicly later.
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
+
+      // Create own document at first sign-in or profile completion
+      allow create: if isSignedIn() && request.auth.uid == uid
+        // Limit client-writable fields; prevent role escalation
+        && request.resource.data.keys().hasOnly([
+          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails'
+        ]);
+
+      // Update own doc but cannot alter privileged fields except allowed ones
+      allow update: if isSignedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly([
+          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails'
+        ]);
+
+      // Admin full control
+      allow create, update, delete: if isAdmin();
     }
 
     // EVENTS
@@ -67,22 +98,41 @@ service cloud.firestore {
 
     // REGISTRATIONS
     match /registrations/{regId} {
-      // Anyone signed-in can create a registration
-      allow create: if 
+      // Only members can create a registration for themselves
+      allow create: if isMember()
+        // Ensure registration is created for the caller
+        && request.resource.data.userId == request.auth.uid
         // Lock certain fields: only these are allowed by client
-        request.resource.data.keys().hasOnly(
-             ['eventId', 'registrationData', 'registeredAt', 'status', 'userEmail', 'userName']
+        && request.resource.data.keys().hasOnly(
+             ['eventId', 'registrationData', 'registeredAt', 'status', 'userEmail', 'userName', 'userId']
            )
         // Restrict status to registered|waitlist
         && (request.resource.data.status in ['registered', 'waitlist'])
         // registeredAt must be a timestamp (serverTimestamp is allowed)
         && (request.resource.data.registeredAt is timestamp);
 
-      // Only admins may update or delete registrations
-      allow update, delete: if isAdmin();
+      // Users can read their own registrations; admins can read all
+      allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
 
-      // Reads: admin only, or restrict further as needed
-      allow read: if isAdmin();
+      // Only admins may delete registrations
+      allow delete: if isAdmin();
+
+      // Admin full update
+      allow update: if isAdmin();
+
+      // Exception: allow invited -> confirmed transition for token-based confirmation on the public confirmation page.
+      // Constraints:
+      // - Only fields changed: status, confirmedAt, confirmationToken
+      // - Existing status must be 'invited'
+      // - New status must be 'confirmed'
+      // - Existing confirmationToken must be non-null
+      // - New confirmationToken must be null
+      allow update: if
+        changedOnly(['status','confirmedAt','confirmationToken']) &&
+        resource.data.status == 'invited' &&
+        request.resource.data.status == 'confirmed' &&
+        resource.data.confirmationToken != null &&
+        request.resource.data.confirmationToken == null;
     }
 
     // ANALYTICS (client-side dedup with localStorage; guarded increments)
@@ -109,11 +159,20 @@ service cloud.firestore {
 
       allow create: if request.resource.data.keys().hasOnly(['reads', 'updatedAt'])
         && request.resource.data.reads == 1;
-
       allow update: if changedOnly(['reads', 'updatedAt'])
         && request.resource.data.reads == resource.data.reads + 1;
 
       allow delete: if isAdmin();
+    }
+
+    // MAIL QUEUE for Firebase Trigger Email extension
+    match /mail/{messageId} {
+      // Only admins can enqueue outgoing emails from the client
+      allow create: if isAdmin();
+      // Optional: allow admins to read messages for debugging
+      allow read: if isAdmin();
+      // No client updates or deletes
+      allow update, delete: if false;
     }
   }
 }

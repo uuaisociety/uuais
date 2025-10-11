@@ -11,9 +11,9 @@ export interface EventFormState {
   time: string;
   location: string;
   image: string;
-  category: 'workshop' | 'guest_lecture' | 'hackathon' | 'other' ;
+  category: 'workshop' | 'guest_lecture' | 'hackathon' | 'other';
   registrationRequired: boolean;
-  maxCapacity: number;
+  maxCapacity?: number;
   // New fields
   startAt: string; // ISO-like string compatible with datetime-local input (YYYY-MM-DDTHH:mm)
   lastRegistrationAt: string; // ISO-like string compatible with datetime-local input
@@ -49,35 +49,32 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
               type="text"
               value={form.title}
               onChange={(e) => setForm(prev => ({ ...prev, title: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
               required
             />
           </div>
 
-          {/* New: Start date & time */}
+          {/* Start date & time */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Start Date & Time</label>
             <input
               type="datetime-local"
               value={form.startAt || ''}
               onChange={(e) => setForm(prev => ({ ...prev, startAt: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
               placeholder="YYYY-MM-DDTHH:mm"
             />
             <p className="text-xs text-gray-500 mt-1">Recommended. Used for ordering, upcoming logic, and precise start time. If omitted, date + time will be used.</p>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Description</label>
-            <textarea
-              value={form.description}
-              onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))}
-              rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-              required
-            />
-          </div>
-
+          <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Description</label>
+          <textarea
+            value={form.description}
+            onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))}
+            rows={3}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
+            required
+          />
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Date</label>
@@ -85,7 +82,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm(prev => ({ ...prev, date: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-300 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
                 required
               />
             </div>
@@ -96,7 +93,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
                 type="time"
                 value={form.time}
                 onChange={(e) => setForm(prev => ({ ...prev, time: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
                 required
               />
             </div>
@@ -109,7 +106,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
               type="datetime-local"
               value={form.lastRegistrationAt || ''}
               onChange={(e) => setForm(prev => ({ ...prev, lastRegistrationAt: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
               placeholder="YYYY-MM-DDTHH:mm"
             />
             <p className="text-xs text-gray-500 mt-1">After this time, normal registrations are closed; users may join the waitlist.</p>
@@ -121,7 +118,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
               type="text"
               value={form.location}
               onChange={(e) => setForm(prev => ({ ...prev, location: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
               required
             />
           </div>
@@ -132,7 +129,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
               type="url"
               value={form.image}
               onChange={(e) => setForm(prev => ({ ...prev, image: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
               placeholder="Optional; a placeholder will be used if empty"
             />
           </div>
@@ -142,7 +139,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
             <select
               value={form.category}
               onChange={(e) => setForm(prev => ({ ...prev, category: e.target.value as EventFormState['category'] }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
             >
               <option value="workshop">Workshop</option>
               <option value="guest_lecture">Guest Lecture</option>
@@ -164,14 +161,19 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
 
             {form.registrationRequired && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Max Capacity</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Max Capacity (optional)</label>
                 <input
                   type="number"
-                  value={form.maxCapacity}
-                  onChange={(e) => setForm(prev => ({ ...prev, maxCapacity: parseInt(e.target.value) || 0 }))}
-                  className="w-24 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  value={form.maxCapacity ?? ''}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    setForm(prev => ({ ...prev, maxCapacity: v === '' ? undefined : Math.max(1, parseInt(v) || 1) }));
+                  }}
+                  className="w-32 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 min-w-[240px]"
                   min="1"
+                  placeholder="Leave empty for unlimited"
                 />
+                <p className="text-xs text-gray-500 mt-1">Leave empty when you want registration required but no capacity limit.</p>
               </div>
             )}
           </div>

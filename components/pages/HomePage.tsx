@@ -14,6 +14,14 @@ import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
 import campus from '@/public/images/campus.png';
 
+const categoryOptions = [
+  { value: 'all', label: 'All Categories' },
+  { value: 'workshop', label: 'Workshop' },
+  { value: 'guest_lecture', label: 'Guest Lecture' },
+  { value: 'hackathon', label: 'Hackathon' },
+  { value: 'other', label: 'Other' },
+];
+
 const HomePage: React.FC = () => {
   const { state } = useApp();
 
@@ -205,7 +213,7 @@ const HomePage: React.FC = () => {
                     </Link>
                     <div className="absolute top-4 left-4">
                       <span className="px-3 py-1 bg-red-600 dark:bg-red-500 text-white text-sm font-medium rounded-full">
-                        {event.category}
+                        {categoryOptions.find(option => option.value === event.category)?.label || event.category}
                       </span>
                     </div>
                   </div>

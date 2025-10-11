@@ -2,26 +2,22 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
-import { X, User, Mail, GraduationCap, MessageSquare } from 'lucide-react';
+import { X } from 'lucide-react';
 import { Event, EventCustomQuestion } from '@/types';
-import { registerForEvent, subscribeToEventCustomQuestions } from '@/lib/firestore';
+import { registerForEvent } from '@/lib/firestore/registrations';
+import { subscribeToEventCustomQuestions } from '@/lib/firestore/questions';
+import { getUserProfile, type UserProfile } from '@/lib/firestore/users';
+import { auth } from '@/lib/firebase-client';
+import { useNotify } from '@/components/ui/Notifications';
 
 interface EventRegistrationDialogProps {
   event: Event;
 }
 
 interface RegistrationFormData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  university: string;
-  studentId: string;
-  year: string;
-  major: string;
-  dietaryRestrictions: string;
   additionalInfo: string;
 }
 
@@ -30,16 +26,10 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({ event
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [customQuestions, setCustomQuestions] = useState<EventCustomQuestion[]>([]);
   const [customAnswers, setCustomAnswers] = useState<Record<string, string | string[]>>({});
+  const [uid, setUid] = useState<string | null>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const { notify } = useNotify();
   const [formData, setFormData] = useState<RegistrationFormData>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    university: '',
-    studentId: '',
-    year: '',
-    major: '',
-    dietaryRestrictions: '',
     additionalInfo: ''
   });
 
@@ -57,6 +47,21 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({ event
       if (typeof unsub === 'function') unsub();
     };
   }, [event.id]);
+
+  // Auth + profile
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged(async (u) => {
+      if (!u) {
+        setUid(null);
+        setProfile(null);
+        return;
+      }
+      setUid(u.uid);
+      const p = await getUserProfile(u.uid);
+      setProfile(p);
+    });
+    return () => unsub();
+  }, []);
 
   const handleCustomAnswerChange = (
     q: EventCustomQuestion,
@@ -82,6 +87,9 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({ event
     setIsSubmitting(true);
 
     try {
+      if (!uid || !profile?.isMember) {
+        throw new Error('You must be a signed-in member to apply.');
+      }
       // Validate required custom questions
       for (const q of customQuestions) {
         if (!q.required) continue;
@@ -91,22 +99,13 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({ event
           ans === '' ||
           (Array.isArray(ans) && ans.length === 0);
         if (missing) {
-          alert(`Please answer: ${q.question}`);
+          notify({ type: 'warning', title: 'Missing answer', message: `Please answer: ${q.question}` });
           setIsSubmitting(false);
           return;
         }
       }
 
       const registrationData = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        university: formData.university,
-        studentId: formData.studentId,
-        year: formData.year,
-        major: formData.major,
-        dietaryRestrictions: formData.dietaryRestrictions,
         additionalInfo: formData.additionalInfo,
         // Map custom answers by question text for readability
         ...customQuestions.reduce((acc, q) => {
@@ -122,34 +121,31 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({ event
         event.id,
         {
           registrationData,
-          userEmail: formData.email,
-          userName: `${formData.firstName} ${formData.lastName}`.trim(),
+          userId: uid,
+          userEmail: profile?.email || undefined,
+          userName: (profile?.displayName || profile?.name || '').trim() || undefined,
         },
         { waitlist: isWaitlistOnly }
       );
-      
+
       // Reset form and close dialog
       setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        university: '',
-        studentId: '',
-        year: '',
-        major: '',
-        dietaryRestrictions: '',
         additionalInfo: ''
       });
       setIsOpen(false);
-      
-      // Show success message (you might want to use a toast notification)
-      alert(isWaitlistOnly
-        ? 'You have been added to the waitlist. We will contact you if a spot opens.'
-        : 'Registration successful!');
+
+      // Show success message via notification
+      notify({
+        type: 'success',
+        title: isWaitlistOnly ? 'Waitlist joined' : 'Registration successful',
+        message: isWaitlistOnly
+          ? 'You have been added to the waitlist. We will contact you if a spot opens.'
+          : 'You are registered for the event.'
+      });
     } catch (error) {
       console.error('Registration failed:', error);
-      alert(`Registration failed ${error}`);
+      const msg = error instanceof Error ? error.message : String(error);
+      notify({ type: 'error', title: 'Registration failed', message: msg });
     } finally {
       setIsSubmitting(false);
     }
@@ -160,15 +156,30 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({ event
     ? new Date().getTime() > new Date(event.lastRegistrationAt).getTime()
     : false;
   const isWaitlistOnly = isCapacityFull || isAfterLastRegistration;
+  const canApply = Boolean(uid && profile?.isMember);
 
   return (
     <>
-      <Button 
-        className={`${isWaitlistOnly ? 'bg-orange-600 hover:bg-orange-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
-        onClick={() => setIsOpen(true)}
-      >
-        {isWaitlistOnly ? 'Join Waitlist' : 'Register Now'}
-      </Button>
+      {canApply ? (
+        <Button
+          className={`${isWaitlistOnly ? 'bg-orange-600 hover:bg-orange-700' : 'bg-blue-600 hover:bg-blue-700'} text-white`}
+          onClick={() => setIsOpen(true)}
+        >
+          {isWaitlistOnly ? 'Join Waitlist' : 'Register Now'}
+        </Button>
+      ) : (
+        <div className="flex items-center gap-3">
+          <Button
+            className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 cursor-not-allowed"
+            disabled
+          >
+            Register (members only)
+          </Button>
+          <Link href="/join" className="text-blue-600 dark:text-blue-400 underline">
+            Login / Create account
+          </Link>
+        </div>
+      )}
 
       {isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -193,189 +204,6 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({ event
 
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Personal Information */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                      <User className="h-5 w-5 mr-2" />
-                      Personal Information
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          First Name *
-                        </label>
-                        <input
-                          type="text"
-                          name="firstName"
-                          value={formData.firstName}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                          placeholder="Enter your first name"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Last Name *
-                        </label>
-                        <input
-                          type="text"
-                          name="lastName"
-                          value={formData.lastName}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                          placeholder="Enter your last name"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Contact Information */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                      <Mail className="h-5 w-5 mr-2" />
-                      Contact Information
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Email Address *
-                        </label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                          placeholder="your.email@example.com"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Phone Number
-                        </label>
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                          placeholder="+31 6 12345678"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Academic Information */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                      <GraduationCap className="h-5 w-5 mr-2" />
-                      Academic Information
-                    </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          University *
-                        </label>
-                        <input
-                          type="text"
-                          name="university"
-                          value={formData.university}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                          placeholder="Utrecht University"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Student ID
-                        </label>
-                        <input
-                          type="text"
-                          name="studentId"
-                          value={formData.studentId}
-                          onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                          placeholder="1234567"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Study Year *
-                        </label>
-                        <select
-                          name="year"
-                          value={formData.year}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                        >
-                          <option value="">Select your year</option>
-                          <option value="1">1st Year Bachelor</option>
-                          <option value="2">2nd Year Bachelor</option>
-                          <option value="3">3rd Year Bachelor</option>
-                          <option value="master1">1st Year Master</option>
-                          <option value="master2">2nd Year Master</option>
-                          <option value="phd">PhD</option>
-                          <option value="other">Other</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Major/Field of Study *
-                        </label>
-                        <input
-                          type="text"
-                          name="major"
-                          value={formData.major}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                          placeholder="Computer Science, AI, etc."
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Additional Information */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                      <MessageSquare className="h-5 w-5 mr-2" />
-                      Additional Information
-                    </h3>
-                    <div className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Dietary Restrictions/Allergies
-                        </label>
-                        <input
-                          type="text"
-                          name="dietaryRestrictions"
-                          value={formData.dietaryRestrictions}
-                          onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                          placeholder="Vegetarian, Vegan, Allergies, etc."
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                          Additional Comments
-                        </label>
-                        <textarea
-                          name="additionalInfo"
-                          value={formData.additionalInfo}
-                          onChange={handleInputChange}
-                          rows={3}
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                          placeholder="Any questions or special requirements?"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
                   {/* Event-specific Custom Questions */}
                   {customQuestions.length > 0 && (
                     <div>
@@ -454,7 +282,24 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({ event
                       </div>
                     </div>
                   )}
-
+                  {/* Additional Information (comments only) */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+                      Additional Comments
+                    </h3>
+                    <div className="space-y-4">
+                      <div>
+                        <textarea
+                          name="additionalInfo"
+                          value={formData.additionalInfo}
+                          onChange={handleInputChange}
+                          rows={3}
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                          placeholder="Any questions or special requirements?"
+                        />
+                      </div>
+                    </div>
+                  </div>
                   {/* Submit Button */}
                   <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-600">
                     <Button

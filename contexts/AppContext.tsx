@@ -2,28 +2,11 @@
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { Event, TeamMember, BlogPost, FAQ, RegistrationQuestion } from '../types';
-import { 
-  subscribeToEvents, 
-  subscribeToTeamMembers, 
-  subscribeToBlogPosts,
-  subscribeToFaqs,
-  subscribeToRegistrationQuestions,
-  addEvent as addEventToFirestore,
-  updateEvent as updateEventInFirestore,
-  deleteEvent as deleteEventFromFirestore,
-  addTeamMember as addTeamMemberToFirestore,
-  updateTeamMember as updateTeamMemberInFirestore,
-  deleteTeamMember as deleteTeamMemberFromFirestore,
-  addBlogPost as addBlogPostToFirestore,
-  updateBlogPost as updateBlogPostInFirestore,
-  deleteBlogPost as deleteBlogPostFromFirestore,
-  addFaq as addFaqToFirestore,
-  updateFaq as updateFaqInFirestore,
-  deleteFaq as deleteFaqFromFirestore,
-  addRegistrationQuestion as addRegistrationQuestionToFirestore,
-  updateRegistrationQuestion as updateRegistrationQuestionInFirestore,
-  deleteRegistrationQuestion as deleteRegistrationQuestionFromFirestore
-} from '../lib/firestore';
+import { subscribeToEvents, addEvent as addEventToFirestore, updateEvent as updateEventInFirestore, deleteEvent as deleteEventFromFirestore } from '@/lib/firestore/events';
+import { subscribeToTeamMembers, addTeamMember as addTeamMemberToFirestore, updateTeamMember as updateTeamMemberInFirestore, deleteTeamMember as deleteTeamMemberFromFirestore } from '@/lib/firestore/team';
+import { subscribeToBlogPosts, addBlogPost as addBlogPostToFirestore, updateBlogPost as updateBlogPostInFirestore, deleteBlogPost as deleteBlogPostFromFirestore } from '@/lib/firestore/blog';
+import { subscribeToFaqs, addFaq as addFaqToFirestore, updateFaq as updateFaqInFirestore, deleteFaq as deleteFaqFromFirestore } from '@/lib/firestore/faqs';
+import { subscribeToRegistrationQuestions, addRegistrationQuestion as addRegistrationQuestionToFirestore, updateRegistrationQuestion as updateRegistrationQuestionInFirestore, deleteRegistrationQuestion as deleteRegistrationQuestionFromFirestore } from '@/lib/firestore/questions';
 
 interface AppState {
   events: Event[];

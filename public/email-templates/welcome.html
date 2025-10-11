@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome to UUAIS</title>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color:#111827; }
+    .container { max-width: 640px; margin: 0 auto; padding: 24px; }
+    .card { background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:24px; }
+    .btn { display:inline-block; padding:10px 16px; background:#dc2626; color:#fff; text-decoration:none; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Welcome, {{name}}!</h1>
+      <p>Thanks for joining the Uppsala University AI Society. We’re excited to have you.</p>
+      <p>You can manage your profile and preferences any time:</p>
+      <p>
+        <a class="btn" href="{{account_url}}" target="_blank" rel="noopener noreferrer">Go to your account</a>
+      </p>
+    </div>
+    {{footer}}
+  </div>
+</body>
+</html>

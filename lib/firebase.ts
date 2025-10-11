@@ -1,7 +1,7 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
-import { getAuth } from 'firebase/auth';
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
+import { getStorage, connectStorageEmulator } from 'firebase/storage';
+import { getAuth, connectAuthEmulator } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -21,10 +21,29 @@ if (!firebaseConfig.projectId) {
     apiKey: firebaseConfig.apiKey ? '[REDACTED]' : undefined
   });
 }
-
 // Reuse existing app instance if it exists (prevents duplicate-app errors during HMR)
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 export const auth = getAuth(app);
+
+// Connect to local emulators in development when explicitly enabled
+// Set NEXT_PUBLIC_USE_FIREBASE_EMULATORS="true" to enable
+declare global {
+  var FIREBASE_EMULATORS_STARTED: boolean | undefined;
+}
+
+const useEmulators = process.env.NEXT_PUBLIC_USE_FIREBASE_EMULATORS === 'true';
+
+if (useEmulators && !globalThis.FIREBASE_EMULATORS_STARTED) {
+  try {
+    connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
+    connectFirestoreEmulator(db, '127.0.0.1', 8082);
+    connectStorageEmulator(storage, '127.0.0.1', 9199);
+    globalThis.FIREBASE_EMULATORS_STARTED = true;
+    console.info('Connected to Firebase emulators (auth:9099, firestore:8080, storage:9199)');
+  } catch (e) {
+    console.warn('Failed to connect to Firebase emulators:', e);
+  }
+}

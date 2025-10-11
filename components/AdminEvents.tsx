@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { db, storage } from '@/lib/firebase';
-import { collection, addDoc, getDocs, deleteDoc, doc, getCountFromServer, updateDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, deleteDoc, doc, getCountFromServer, updateDoc, where, query } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import Image from 'next/image';
 
@@ -19,6 +19,23 @@ interface Application {
   yearOfStudy: string;
   desiredTeammates?: string;
 }
+
+type RegistrationRow = {
+  id: string;
+  userName: string;
+  userEmail: string;
+  status: string;
+  registeredAt: string;
+  answers: Record<string, unknown>;
+};
+
+type RegistrationDoc = {
+  userName?: string;
+  userEmail?: string;
+  status?: string;
+  registeredAt?: { toDate?: () => Date } | Date | string;
+  registrationData?: Record<string, unknown>;
+};
 
 interface Event {
   id: string;
@@ -84,6 +101,9 @@ const AdminEvents = () => {
   const [loadingApplications, setLoadingApplications] = useState(false);
   const [editingEvent, setEditingEvent] = useState<Event | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [expandedEventId, setExpandedEventId] = useState<string | null>(null);
+  const [waitlistOnly, setWaitlistOnly] = useState(false);
+  const [registrationsByEvent, setRegistrationsByEvent] = useState<Record<string, RegistrationRow[]>>({});
 
   useEffect(() => {
     fetchEvents();
@@ -272,20 +292,49 @@ const AdminEvents = () => {
   const handleViewApplications = async (event: Event) => {
     setLoadingApplications(true);
     try {
+      // legacy applications fetch retained (modal)
       const applicationsSnapshot = await getDocs(collection(db, event.internalName));
-      const applications = applicationsSnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as Application[];
-      
-      setSelectedEventApplications({
-        event,
-        applications
-      });
+      const applications = applicationsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })) as Application[];
+      setSelectedEventApplications({ event, applications });
     } catch (error) {
       console.error('Error fetching applications:', error);
     } finally {
       setLoadingApplications(false);
+    }
+  };
+
+  const toggleExpandRegistrations = async (eventId: string) => {
+    setExpandedEventId(prev => (prev === eventId ? null : eventId));
+    if (registrationsByEvent[eventId]) return;
+    // fetch registrations from unified 'registrations' collection
+    try {
+      const qy = query(collection(db, 'registrations'), where('eventId', '==', eventId));
+      const snap = await getDocs(qy);
+      const rows: RegistrationRow[] = snap.docs.map(d => {
+        const data = d.data() as RegistrationDoc;
+        const regData = (data?.registrationData || {}) as Record<string, unknown>;
+        return {
+          id: d.id,
+          userName: String(data?.userName || ''),
+          userEmail: String(data?.userEmail || ''),
+          status: String(data?.status || 'registered'),
+          registeredAt: (() => {
+            const ts = data?.registeredAt;
+            try {
+              if (typeof ts === 'object' && ts && 'toDate' in ts && typeof ts.toDate === 'function') {
+                return ts.toDate().toISOString();
+              }
+              if (ts instanceof Date) return ts.toISOString();
+              if (typeof ts === 'string') return new Date(ts).toISOString();
+            } catch {}
+            return '';
+          })(),
+          answers: regData,
+        };
+      });
+      setRegistrationsByEvent(prev => ({ ...prev, [eventId]: rows }));
+    } catch (e) {
+      console.error('Failed to load registrations', e);
     }
   };
 
@@ -439,7 +488,8 @@ const AdminEvents = () => {
               </thead>
               <tbody>
                 {events.map((event) => (
-                  <tr key={event.id} className="border-b border-white/10">
+                  <React.Fragment key={event.id}>
+                  <tr className="border-b border-white/10">
                     <td className="py-3 px-4">{event.title}</td>
                     <td className="py-3 px-4">{event.internalName}</td>
                     <td className="py-3 px-4">
@@ -453,6 +503,12 @@ const AdminEvents = () => {
                     </td>
                     <td className="py-3 px-4">
                       <div className="flex space-x-2">
+                        <button
+                          onClick={() => toggleExpandRegistrations(event.id)}
+                          className="px-3 py-1 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition-colors text-sm"
+                        >
+                          {expandedEventId === event.id ? 'Hide Registrations' : 'Show Registrations'}
+                        </button>
                         <button
                           onClick={() => handleEdit(event)}
                           className="px-3 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm"
@@ -468,6 +524,56 @@ const AdminEvents = () => {
                       </div>
                     </td>
                   </tr>
+                  {expandedEventId === event.id && (
+                    <tr>
+                      <td colSpan={4} className="bg-[#1f1f1f] p-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="text-white font-semibold">Registrations</h4>
+                          <label className="text-white text-sm flex items-center gap-2">
+                            <input type="checkbox" checked={waitlistOnly} onChange={(e)=>setWaitlistOnly(e.target.checked)} />
+                            Show waitlist only
+                          </label>
+                        </div>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-white text-sm">
+                            <thead className="border-b border-white/10">
+                              <tr>
+                                <th className="text-left py-2 px-3">Name</th>
+                                <th className="text-left py-2 px-3">Email</th>
+                                <th className="text-left py-2 px-3">Status</th>
+                                <th className="text-left py-2 px-3">Registered</th>
+                                <th className="text-left py-2 px-3">Answers</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {(registrationsByEvent[event.id] || [])
+                                .filter(r => (waitlistOnly ? r.status === 'waitlist' : true))
+                                .map(r => (
+                                <tr key={r.id} className="border-b border-white/5">
+                                  <td className="py-2 px-3">{r.userName || '-'}</td>
+                                  <td className="py-2 px-3">{r.userEmail || '-'}</td>
+                                  <td className="py-2 px-3">{r.status}</td>
+                                  <td className="py-2 px-3">{r.registeredAt ? new Date(r.registeredAt).toLocaleString() : '-'}</td>
+                                  <td className="py-2 px-3">
+                                    <div className="space-y-1">
+                                      {Object.keys(r.answers).length === 0 ? (
+                                        <span className="text-white/60">No answers</span>
+                                      ) : (
+                                        Object.entries(r.answers).map(([k,v]) => (
+                                          <div key={k} className="text-white/80"><span className="text-white/50">{k}:</span> {Array.isArray(v) ? v.join(', ') : String(v)}</div>
+                                        ))
+                                      )}
+                                    </div>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>
