@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { X, Users, Mail } from "lucide-react";
-import { subscribeToEventRegistrations } from "@/lib/firestore/registrations";
+import { X, Users, Mail, Send } from "lucide-react";
+import { subscribeToEventRegistrations, inviteRegistrant } from "@/lib/firestore/registrations";
 import { EventRegistration } from "@/types";
+import { Button } from "@/components/ui/Button";
+import { useNotify } from "@/components/ui/Notifications";
 
 interface EventRegistrationsModalProps {
   open: boolean;
@@ -14,6 +16,8 @@ interface EventRegistrationsModalProps {
 
 const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open, eventId, eventTitle, onClose }) => {
   const [registrations, setRegistrations] = useState<EventRegistration[]>([]);
+  const [invitingId, setInvitingId] = useState<string | null>(null);
+  const { notify } = useNotify();
 
   useEffect(() => {
     if (!open || !eventId) return;
@@ -48,6 +52,7 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                     <th className="py-2 pr-4">Email</th>
                     <th className="py-2 pr-4">Status</th>
                     <th className="py-2 pr-4">Registered At</th>
+                    <th className="py-2 pr-4">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -70,6 +75,28 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                         </td>
                         <td className="py-2 pr-4">{r.status}</td>
                         <td className="py-2 pr-4">{r.registeredAt ? new Date(r.registeredAt).toLocaleString() : '—'}</td>
+                        <td className="py-2 pr-4">
+                          <Button
+                            size="sm"
+                            disabled={invitingId === r.id}
+                            onClick={async () => {
+                              try {
+                                setInvitingId(r.id);
+                                const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '');
+                                await inviteRegistrant(r.id, { baseUrl });
+                                notify({ type: 'success', message: 'Invitation sent' });
+                              } catch (e) {
+                                notify({ type: 'error', message: e instanceof Error ? e.message : 'Failed to send invitation' });
+                              } finally {
+                                setInvitingId(null);
+                              }
+                            }}
+                            className="inline-flex items-center gap-1"
+                            title="Send invitation"
+                          >
+                            <Send className="h-4 w-4" /> Invite
+                          </Button>
+                        </td>
                       </tr>
                     );
                   })}
