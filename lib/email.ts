@@ -14,13 +14,13 @@ export type SendEmailInput = {
 
 // Writes to Firestore `mail` collection to be picked up by Firebase Trigger Email extension.
 export async function sendEmail(input: SendEmailInput): Promise<string> {
+  const message: Record<string, unknown> = { subject: input.subject };
+  if (input.html !== undefined) message.html = input.html;
+  if (input.text !== undefined) message.text = input.text;
+
   const payload: Record<string, unknown> = {
     to: input.to,
-    message: {
-      subject: input.subject,
-      html: input.html,
-      text: input.text,
-    },
+    message,
     createdAt: serverTimestamp(),
   };
   if (input.cc) (payload as Record<string, unknown>).cc = input.cc;
