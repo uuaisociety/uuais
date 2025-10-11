@@ -6,9 +6,9 @@ export const dynamic = 'force-dynamic';
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
-import { GithubIcon, GoogleIcon, MicrosoftIcon } from 'hugeicons-react';
+import { GithubIcon, GoogleIcon } from 'hugeicons-react';
 import { updatePageMeta } from '@/utils/seo';
-import { auth, signInWithGooglePopup, signInWithGithubPopup, signInWithMicrosoftPopup } from '@/lib/firebase-client';
+import { auth, signInWithGooglePopup, signInWithGithubPopup } from '@/lib/firebase-client';
 import { getUserProfile, upsertUserProfile, updateUserProfile, type UserProfile } from '@/lib/firestore/users';
 import Link from 'next/link';
 import { FieldGroup, InputBase, SelectBase, TextareaBase } from '@/components/ui/Form';
@@ -110,9 +110,9 @@ const JoinPage: React.FC = () => {
             <Button onClick={() => signInWithGithubPopup()} variant="outline">
               <span className="flex items-center gap-2"><GithubIcon className="h-4 w-4"/> Continue with GitHub</span>
             </Button>
-            <Button onClick={() => signInWithMicrosoftPopup()} variant="outline">
+            {/* <Button onClick={() => signInWithMicrosoftPopup()} variant="outline">
               <span className="flex items-center gap-2"><MicrosoftIcon className="h-4 w-4"/> Continue with Microsoft</span>
-            </Button>
+            </Button> */}
           </CardContent>
         </Card>
 
