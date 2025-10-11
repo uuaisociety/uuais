@@ -7,7 +7,7 @@ import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAdmin } from '@/hooks/useAdmin';
 import { useEffect, useState } from 'react';
-import { getUserProfile, type UserProfile } from '@/lib/firestore';
+import { getUserProfile, type UserProfile } from '@/lib/firestore/users';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
