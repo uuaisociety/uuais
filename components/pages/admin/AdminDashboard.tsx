@@ -27,14 +27,8 @@ import { updatePageMeta } from '@/utils/seo';
 //import { useAdmin } from '@/hooks/useAdmin';
 // format imported where needed in tab components
 import { BlogPost, Event, TeamMember, FAQ, EventCustomQuestion } from '@/types';
-import {
-  subscribeToEventCustomQuestions,
-  addEventCustomQuestion,
-  updateEventCustomQuestion,
-  deleteEventCustomQuestion,
-  addEvent,
-  patchEvent,
-} from '@/lib/firestore';
+import { subscribeToEventCustomQuestions, addEventCustomQuestion, updateEventCustomQuestion, deleteEventCustomQuestion } from '@/lib/firestore/questions';
+import { addEvent, patchEvent } from '@/lib/firestore/events';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 
 const AdminDashboard: React.FC = () => {

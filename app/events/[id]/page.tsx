@@ -12,7 +12,7 @@ import EventRegistrationDialog from '@/components/events/EventRegistrationDialog
 import { useApp } from '@/contexts/AppContext';
 
 import campus from '@/public/images/campus.png';
-import { incrementEventUniqueClick } from '@/lib/firestore';
+import { incrementEventUniqueClick } from '@/lib/firestore/analytics';
 
 const EventDetailPage: React.FC = () => {
   const params = useParams();
@@ -109,9 +109,11 @@ const EventDetailPage: React.FC = () => {
                     Registration Required
                   </span>
                 </div>
-                <div className="text-blue-600 dark:text-blue-400">
-                  {event.currentRegistrations || 0} / {event.maxCapacity} registered
-                </div>
+                {typeof event.maxCapacity === 'number' && (
+                  <div className="text-blue-600 dark:text-blue-400">
+                    Capacity: {event.maxCapacity}
+                  </div>
+                )}
               </div>
               {isUpcoming && (
                 <EventRegistrationDialog event={event} />
@@ -194,19 +196,7 @@ const EventDetailPage: React.FC = () => {
                   <div className="flex justify-between">
                     <span className="text-gray-600 dark:text-gray-300">Capacity:</span>
                     <span className="text-gray-900 dark:text-white font-medium">
-                      {event.maxCapacity || 'Unlimited'} people
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-300">Registered:</span>
-                    <span className="text-gray-900 dark:text-white font-medium">
-                      {event.currentRegistrations || 0} people
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-300">Available:</span>
-                    <span className="text-gray-900 dark:text-white font-medium">
-                      {event.maxCapacity ? event.maxCapacity - (event.currentRegistrations || 0) : 'Unlimited'} spots
+                      {event.maxCapacity ?? 'Unlimited'} people
                     </span>
                   </div>
                 </div>

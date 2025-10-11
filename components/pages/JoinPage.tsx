@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { GithubIcon, GoogleIcon, MicrosoftIcon } from 'hugeicons-react';
 import { updatePageMeta } from '@/utils/seo';
 import { auth, signInWithGooglePopup, signInWithGithubPopup, signInWithMicrosoftPopup } from '@/lib/firebase-client';
-import { getUserProfile, upsertUserProfile, updateUserProfile, type UserProfile } from '@/lib/firestore';
+import { getUserProfile, upsertUserProfile, updateUserProfile, type UserProfile } from '@/lib/firestore/users';
 import Link from 'next/link';
 import { FieldGroup, InputBase, SelectBase, TextareaBase } from '@/components/ui/Form';
 import { useNotify } from '@/components/ui/Notifications';

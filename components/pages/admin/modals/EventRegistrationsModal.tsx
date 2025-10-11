@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { X, Users, Mail } from "lucide-react";
-import { subscribeToEventRegistrations } from "@/lib/firestore";
+import { subscribeToEventRegistrations } from "@/lib/firestore/registrations";
 import { EventRegistration } from "@/types";
 
 interface EventRegistrationsModalProps {
@@ -58,8 +58,10 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                     };
                     const first = getStr('firstName') || getStr('First Name') || getStr('first_name');
                     const last = getStr('lastName') || getStr('Last Name') || getStr('last_name');
-                    const name = (first || last) ? `${first} ${last}`.trim() : (getStr('Name') || '');
-                    const email = getStr('email') || getStr('Email');
+                    const fallbackName = (first || last) ? `${first} ${last}`.trim() : (getStr('Name') || '');
+                    const fallbackEmail = getStr('email') || getStr('Email');
+                    const name = (r.userName || '').trim() || fallbackName;
+                    const email = (r.userEmail || '').trim() || fallbackEmail;
                     return (
                       <tr key={r.id} className="border-b border-gray-100 dark:border-gray-700/50">
                         <td className="py-2 pr-4 text-gray-900 dark:text-white">{name || '—'}</td>

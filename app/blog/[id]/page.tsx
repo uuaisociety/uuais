@@ -8,7 +8,7 @@ import { ArrowLeft, Calendar, User } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
-import { incrementBlogRead } from '@/lib/firestore';
+import { incrementBlogRead } from '@/lib/firestore/analytics';
 import Tag from '@/components/ui/Tag';
 import { useApp } from '@/contexts/AppContext';
 
