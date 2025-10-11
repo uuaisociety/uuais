@@ -7,7 +7,9 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { X } from 'lucide-react';
 import { Event, EventCustomQuestion } from '@/types';
-import { registerForEvent, subscribeToEventCustomQuestions, getUserProfile, type UserProfile } from '@/lib/firestore';
+import { registerForEvent } from '@/lib/firestore/registrations';
+import { subscribeToEventCustomQuestions } from '@/lib/firestore/questions';
+import { getUserProfile, type UserProfile } from '@/lib/firestore/users';
 import { auth } from '@/lib/firebase-client';
 import { useNotify } from '@/components/ui/Notifications';
 
