@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Event Invitation</title>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color:#111827; }
+    .container { max-width: 640px; margin: 0 auto; padding: 24px; }
+    .card { background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:24px; }
+    .btn { display:inline-block; padding:10px 16px; background:#16a34a; color:#fff; text-decoration:none; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>You're invited, {{name}}!</h1>
+      <p>You have been invited to confirm your spot for this event.</p>
+      <p>
+        <a class="btn" href="{{confirm_link}}" target="_blank" rel="noopener noreferrer">Confirm your spot</a>
+      </p>
+      <p>If the button doesn't work, copy and paste this link into your browser:</p>
+      <p><a href="{{confirm_link}}" target="_blank" rel="noopener noreferrer">{{confirm_link}}</a></p>
+    </div>
+    {{footer}}
+  </div>
+</body>
+</html>
