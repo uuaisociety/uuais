@@ -96,7 +96,12 @@ export interface EventRegistration {
   userId: string;
   registrationData: Record<string, string | number | boolean | string[]>;
   registeredAt: string;
-  status: 'registered' | 'waitlist' | 'cancelled';
+  status: 'registered' | 'waitlist' | 'invited' | 'confirmed' | 'declined' | 'cancelled';
+  userName?: string | null;
+  userEmail?: string | null;
+  selectedAt?: string | null;
+  confirmedAt?: string | null;
+  confirmationToken?: string | null;
 }
 
 export interface EventCustomQuestion {
