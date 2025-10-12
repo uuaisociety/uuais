@@ -29,8 +29,11 @@ const HomePage: React.FC = () => {
     updatePageMeta('Home', 'UU AI Society - Connecting students passionate about Artificial Intelligence');
   }, []);
 
+  const now = new Date();
   const upcomingEvents = state.events
-    .filter(event => event.status === 'upcoming')
+    .filter(event => event.published === true)
+    .filter(event => !event.publishAt || new Date(event.publishAt) <= now)
+    .filter(event => event.eventStartAt && new Date(event.eventStartAt) > now)
     .slice(0, 3);
 
   const features = [
@@ -198,7 +201,7 @@ const HomePage: React.FC = () => {
               </Link>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {upcomingEvents.length > 0 ? <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {upcomingEvents.map((event) => (
                 <Card key={event.id} className="h-full group hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <div className="aspect-video relative overflow-hidden rounded-t-lg">
@@ -227,7 +230,10 @@ const HomePage: React.FC = () => {
                     <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
                       <Calendar className="h-4 w-4 mr-2" />
                       <span>
-                        {format(new Date(event.date), 'MMM d, yyyy')} at {event.time}
+                        {(() => {
+                          const d = new Date(event.eventStartAt);
+                          return `${format(d, 'MMM d, yyyy')} at ${format(d, 'HH:mm')}`;
+                        })()}
                       </span>
                     </div>
                     <Button variant="outline" size="sm" className="hover:scale-105 transition-all duration-300 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -237,6 +243,8 @@ const HomePage: React.FC = () => {
                 </Card>
               ))}
             </div>
+            : <i className="text-gray-600 dark:text-gray-300">No events found. Please check back later.</i>
+            }
           </div>
         </section>
 

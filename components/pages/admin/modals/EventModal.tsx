@@ -7,16 +7,14 @@ import { X } from "lucide-react";
 export interface EventFormState {
   title: string;
   description: string;
-  date: string;
-  time: string;
   location: string;
   image: string;
   category: 'workshop' | 'guest_lecture' | 'hackathon' | 'other';
   registrationRequired: boolean;
   maxCapacity?: number;
-  // New fields
-  startAt: string; // ISO-like string compatible with datetime-local input (YYYY-MM-DDTHH:mm)
-  lastRegistrationAt: string; // ISO-like string compatible with datetime-local input
+  eventStartAt: string;
+  registrationClosesAt: string;
+  publishAt: string;
 }
 
 interface EventModalProps {
@@ -54,17 +52,16 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
             />
           </div>
 
-          {/* Start date & time */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Start Date & Time</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Event Start (date & time)</label>
             <input
               type="datetime-local"
-              value={form.startAt || ''}
-              onChange={(e) => setForm(prev => ({ ...prev, startAt: e.target.value }))}
+              value={form.eventStartAt || ''}
+              onChange={(e) => setForm(prev => ({ ...prev, eventStartAt: e.target.value }))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
               placeholder="YYYY-MM-DDTHH:mm"
+              required
             />
-            <p className="text-xs text-gray-500 mt-1">Recommended. Used for ordering, upcoming logic, and precise start time. If omitted, date + time will be used.</p>
           </div>
 
           <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Description</label>
@@ -75,41 +72,28 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
             required
           />
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Date</label>
-              <input
-                type="date"
-                value={form.date}
-                onChange={(e) => setForm(prev => ({ ...prev, date: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-neutral-300 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
-                required
-              />
-            </div>
+          
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Time</label>
-              <input
-                type="time"
-                value={form.time}
-                onChange={(e) => setForm(prev => ({ ...prev, time: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
-                required
-              />
-            </div>
-          </div>
-
-          {/* New: Last Registration Date & Time */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Last Registration Date & Time (optional)</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Registration closes (optional)</label>
             <input
               type="datetime-local"
-              value={form.lastRegistrationAt || ''}
-              onChange={(e) => setForm(prev => ({ ...prev, lastRegistrationAt: e.target.value }))}
+              value={form.registrationClosesAt || ''}
+              onChange={(e) => setForm(prev => ({ ...prev, registrationClosesAt: e.target.value }))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
               placeholder="YYYY-MM-DDTHH:mm"
             />
-            <p className="text-xs text-gray-500 mt-1">After this time, normal registrations are closed; users may join the waitlist.</p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Publish at (optional)</label>
+            <input
+              type="datetime-local"
+              value={form.publishAt || ''}
+              onChange={(e) => setForm(prev => ({ ...prev, publishAt: e.target.value }))}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
+              placeholder="YYYY-MM-DDTHH:mm"
+            />
           </div>
 
           <div>

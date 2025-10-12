@@ -2,8 +2,6 @@ export interface Event {
   id: string;
   title: string;
   description: string;
-  date: string;
-  time: string;
   location: string;
   image: string;
   category: 'workshop' | 'guest_lecture' | 'hackathon' | 'other';
@@ -12,9 +10,12 @@ export interface Event {
   maxCapacity?: number;
   currentRegistrations?: number;
   published?: boolean;
-  /** ISO datetime string for the event start time (e.g., 2025-10-03T15:30:00Z or local). */
-  startAt?: string;
-  lastRegistrationAt?: string;
+  /** ISO datetime when the event starts (IRL start). */
+  eventStartAt: string;
+  /** ISO datetime when normal registrations close (optional). */
+  registrationClosesAt?: string;
+  /** ISO datetime when the event should start being published/visible (optional, UI-driven; rules may still use `published`). */
+  publishAt?: string;
 }
 
 export interface TeamMember {

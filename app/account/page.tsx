@@ -37,10 +37,11 @@ export default function AccountPage() {
       // Build event meta map (title + time)
       try {
         const events = await getAllEvents();
-        const map: Record<string, { title: string; startAt?: string; date?: string; time?: string }> = {};
+        const map: Record<string, { title: string; startAt?: string; }> = {};
         for (const ev of events) {
-          map[ev.id] = { title: ev.title || ev.id, startAt: ev.startAt, date: ev.date, time: ev.time };
+          map[ev.id] = { title: ev.title, startAt: ev.eventStartAt };
         }
+        
         setEventMeta(map);
       } catch { }
       setLoading(false);
