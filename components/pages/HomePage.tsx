@@ -65,16 +65,6 @@ const HomePage: React.FC = () => {
   //   { number: '25+', label: 'Industry Partners' },
   //   { number: '3', label: 'Years of Excellence' }
   // ];
-  useEffect(() => {
-    console.log(upcomingEvents);
-    console.log(state.events);
-    console.log("now: ", new Date());
-    state.events.forEach(event => {
-      const start = event.eventStartAt;
-      console.log(start);
-      console.log(start && start > new Date());
-    })
-  }, [state.events]);
 
   return (
     <div className="relative min-h-screen bg-white dark:bg-gray-900 pt-16 transition-colors duration-300">
