@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/Button";
-import { signInWithGooglePopup, signInWithGithubPopup, signInWithMicrosoftPopup } from '@/lib/firebase-client'
-import { GithubIcon, GoogleIcon, MicrosoftIcon } from 'hugeicons-react'
+import { signInWithGooglePopup, signInWithGithubPopup } from '@/lib/firebase-client'
+import { GithubIcon, GoogleIcon } from 'hugeicons-react'
 import Link from "next/link";
 
 interface LoginCardProps {
@@ -22,9 +22,9 @@ const LoginCard: React.FC<LoginCardProps> = ({ after }) => {
                     <Button variant="outline" onClick={() => signInWithGithubPopup().then(after)}>
                         <span className="flex items-center gap-2"><GithubIcon className="h-4 w-4" /> Continue with GitHub</span>
                     </Button>
-                    <Button variant="outline" onClick={() => signInWithMicrosoftPopup().then(after)}>
+                    {/* <Button variant="outline" onClick={() => signInWithMicrosoftPopup().then(after)}>
                         <span className="flex items-center gap-2"><MicrosoftIcon className="h-4 w-4" /> Continue with Microsoft</span>
-                    </Button>
+                    </Button> */}
                 </div>
                 <div className="text-center mt-8">
                     <p className="text-sm text-gray-600 dark:text-gray-400">

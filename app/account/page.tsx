@@ -270,14 +270,14 @@ export default function AccountPage() {
                   <Button variant="outline" onClick={() => handleLink("github")}>Link</Button>
                 )}
               </div>
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <span className="text-gray-800 dark:text-gray-200">Microsoft</span>
                 {isLinked.microsoft ? (
                   <span className="text-green-600">Linked</span>
                 ) : (
                   <Button variant="outline" onClick={() => handleLink("microsoft")}>Link</Button>
                 )}
-              </div>
+              </div> */}
             </CardContent>
           </Card>
         </div>
