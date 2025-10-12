@@ -56,15 +56,14 @@ const AdminDashboard: React.FC = () => {
   const [eventForm, setEventForm] = useState<EventFormState>({
     title: '',
     description: '',
-    date: '',
-    time: '',
     location: '',
     image: '',
     category: 'workshop',
     registrationRequired: false,
     maxCapacity: undefined,
-    startAt: '',
-    lastRegistrationAt: ''
+    eventStartAt: '',
+    registrationClosesAt: '',
+    publishAt: ''
   });
 
   // Event-specific question form handled inside EventQuestionsModal
@@ -148,15 +147,14 @@ const AdminDashboard: React.FC = () => {
     setEventForm({
       title: '',
       description: '',
-      date: '',
-      time: '',
       location: '',
       image: '',
       category: 'workshop',
       registrationRequired: false,
       maxCapacity: undefined,
-      startAt: '',
-      lastRegistrationAt: ''
+      eventStartAt: '',
+      registrationClosesAt: '',
+      publishAt: ''
     });
     setTeamForm({
       name: '',
@@ -186,8 +184,6 @@ const AdminDashboard: React.FC = () => {
     const payload: Omit<Event, 'id'> = {
       title: eventForm.title,
       description: eventForm.description,
-      date: eventForm.date,
-      time: eventForm.time,
       location: eventForm.location,
       image: eventForm.image,
       category: eventForm.category,
@@ -195,8 +191,9 @@ const AdminDashboard: React.FC = () => {
       registrationRequired: eventForm.registrationRequired,
       currentRegistrations: 0,
       published: true,
-      startAt: eventForm.startAt || undefined,
-      lastRegistrationAt: eventForm.lastRegistrationAt || undefined,
+      eventStartAt: eventForm.eventStartAt,
+      ...(eventForm.registrationClosesAt ? { registrationClosesAt: eventForm.registrationClosesAt } : {}),
+      ...(eventForm.publishAt ? { publishAt: eventForm.publishAt } : {}),
       ...(eventForm.maxCapacity !== undefined ? { maxCapacity: eventForm.maxCapacity } : {}),
     };
     const newId = await addEvent(payload);
@@ -262,15 +259,14 @@ const AdminDashboard: React.FC = () => {
     setEventForm({
       title: event.title,
       description: event.description,
-      date: event.date,
-      time: event.time,
       location: event.location,
       image: event.image,
       category: event.category,
       registrationRequired: event.registrationRequired || false,
       maxCapacity: event.maxCapacity,
-      startAt: event.startAt || '',
-      lastRegistrationAt: event.lastRegistrationAt || ''
+      eventStartAt: event.eventStartAt || '',
+      registrationClosesAt: event.registrationClosesAt || '',
+      publishAt: event.publishAt || ''
     });
     setShowEventModal(true);
   };
@@ -314,8 +310,6 @@ const AdminDashboard: React.FC = () => {
 
       if (f.title !== editingEvent.title) patch.title = f.title;
       if (f.description !== editingEvent.description) patch.description = f.description;
-      if (f.date !== editingEvent.date) patch.date = f.date;
-      if (f.time !== editingEvent.time) patch.time = f.time;
       if (f.location !== editingEvent.location) patch.location = f.location;
       if (f.image !== editingEvent.image) patch.image = f.image;
       if (f.category !== editingEvent.category) patch.category = f.category;
@@ -324,9 +318,10 @@ const AdminDashboard: React.FC = () => {
       // maxCapacity: only include if user provided a value (number) — leave unchanged if empty/undefined
       if (typeof f.maxCapacity === 'number') patch.maxCapacity = f.maxCapacity;
 
-      // startAt / lastRegistrationAt: only include when non-empty strings (user explicitly set)
-      if (f.startAt && f.startAt !== (editingEvent.startAt ?? '')) patch.startAt = f.startAt;
-      if (f.lastRegistrationAt && f.lastRegistrationAt !== (editingEvent.lastRegistrationAt ?? '')) patch.lastRegistrationAt = f.lastRegistrationAt;
+      // date-times: only include when non-empty strings (user explicitly set)
+      if (f.eventStartAt && f.eventStartAt !== (editingEvent.eventStartAt ?? '')) patch.eventStartAt = f.eventStartAt;
+      if (f.registrationClosesAt && f.registrationClosesAt !== (editingEvent.registrationClosesAt ?? '')) patch.registrationClosesAt = f.registrationClosesAt;
+      if (f.publishAt && f.publishAt !== (editingEvent.publishAt ?? '')) patch.publishAt = f.publishAt;
 
       // If nothing changed, skip the update
       if (Object.keys(patch).length === 0) {
@@ -516,7 +511,7 @@ const AdminDashboard: React.FC = () => {
               events={state.events.map(e => ({
                 id: e.id,
                 title: e.title,
-                date: e.date,
+                date: e.eventStartAt,
                 currentRegistrations: e.currentRegistrations || 0,
               }))}
               blogs={state.blogPosts.map(b => ({ id: b.id, title: b.title, date: b.date }))}
