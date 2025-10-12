@@ -9,13 +9,12 @@ import { Event } from "@/types";
 import Tag from "@/components/ui/Tag";
 
 const categoryOptions = [
-  { value: 'all', label: 'All Categorie' },
-  { value: 'workshop', label: 'Workshop' },
-  { value: 'guest_lecture', label: 'Guest Lecture' },
-  { value: 'hackathon', label: 'Hackathon ' },
-  { value: 'other', label: 'Other' }
+  { value: "all", label: "All Categorie" },
+  { value: "workshop", label: "Workshop" },
+  { value: "guest_lecture", label: "Guest Lecture" },
+  { value: "hackathon", label: "Hackathon " },
+  { value: "other", label: "Other" },
 ];
-
 
 export interface EventsTabProps {
   events: Event[];
@@ -39,7 +38,9 @@ const EventsTab: React.FC<EventsTabProps> = ({
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Events Management</h2>
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+          Events Management
+        </h2>
         <Button icon={Plus} onClick={onAddClick}>
           Add New Event
         </Button>
@@ -47,7 +48,10 @@ const EventsTab: React.FC<EventsTabProps> = ({
 
       <div className="grid gap-4">
         {events.map((event) => (
-          <Card key={event.id} className="bg-white dark:bg-gray-800 text-black dark:text-white">
+          <Card
+            key={event.id}
+            className="bg-white dark:bg-gray-800 text-black dark:text-white"
+          >
             <CardContent className="p-6">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -55,20 +59,40 @@ const EventsTab: React.FC<EventsTabProps> = ({
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       {event.title}
                     </h3>
-                    <Tag variant={event.status === "upcoming" ? "green" : "gray"} size="sm">
+                    <Tag
+                      variant={event.status === "upcoming" ? "green" : "gray"}
+                      size="sm"
+                    >
                       {event.status}
                     </Tag>
-                    <Tag variant="blue" size="sm">{categoryOptions.find(option => option.value === event.category)?.label || event.category}</Tag>
+                    <Tag variant="blue" size="sm">
+                      {categoryOptions.find(
+                        (option) => option.value === event.category
+                      )?.label || event.category}
+                    </Tag>
                   </div>
-                  <p className="text-gray-600 mb-2 dark:text-gray-400">{event.description}</p>
+                  <p className="text-gray-600 mb-2 dark:text-gray-400">
+                    {event.description}
+                  </p>
                   <div className="text-sm text-gray-500 dark:text-gray-400">
-                    <span className="mr-4">📅 {format(new Date(event.date), "MMM d, yyyy")}</span>
-                    <span className="mr-4">🕒 {event.time}</span>
+                    <span className="mr-4">
+                      📅{" "}
+                      {event.eventStartAt
+                        ? format(new Date(event.eventStartAt), "MMM d, yyyy")
+                        : "-"}
+                    </span>
+                    <span className="mr-4">
+                      🕒{" "}
+                      {event.eventStartAt
+                        ? format(new Date(event.eventStartAt), "HH:mm")
+                        : "-"}
+                    </span>
                     <span>📍 {event.location}</span>
                   </div>
                   {event.registrationRequired && (
                     <div className="text-sm text-gray-500 mt-1">
-                      👥 {event.currentRegistrations || 0} / {event.maxCapacity} registered
+                      👥 {event.currentRegistrations || 0} / {event.maxCapacity}{" "}
+                      registered
                     </div>
                   )}
                 </div>
@@ -81,13 +105,26 @@ const EventsTab: React.FC<EventsTabProps> = ({
                   >
                     {event.published ? "Unpublish" : "Publish"}
                   </Button>
-                  <Button size="sm" variant="outline" onClick={() => onManageQuestions(event)}>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => onManageQuestions(event)}
+                  >
                     Manage Questions
                   </Button>
-                  <Button size="sm" variant="outline" onClick={() => onViewRegistrations(event)}>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => onViewRegistrations(event)}
+                  >
                     Registrations
                   </Button>
-                  <Button size="sm" variant="outline" icon={Edit3} onClick={() => onEdit(event)}>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    icon={Edit3}
+                    onClick={() => onEdit(event)}
+                  >
                     Edit
                   </Button>
                   <Button
