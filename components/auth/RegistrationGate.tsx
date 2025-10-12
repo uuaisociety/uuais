@@ -29,7 +29,7 @@ export default function RegistrationGate() {
       if (!u) return; // anonymous visitors are allowed to public pages; private pages should also check auth separately
 
       const profile = await getUserProfile(u.uid);
-      console.log("profile", profile);
+
       const completed = Boolean(profile?.isMember) && Boolean(profile?.privacyAcceptedAt);
       if (!completed) {
         router.push("/join");
