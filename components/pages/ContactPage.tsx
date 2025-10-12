@@ -71,7 +71,7 @@ const ContactPage: React.FC = () => {
     {
       icon: Handshake,
       title: 'Partnership',
-      details: <a href="mailto:partnership@uuais.com">partnership@uuais.com</a>,
+      details: <a href="mailto:partnerships@uuais.com">partnerships@uuais.com</a>,
       description: 'For partnerships, sponsorships, or collaborations.'
     },
     {
