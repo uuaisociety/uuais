@@ -128,7 +128,7 @@ export const registerForEvent = async (
   const currentRegistrations = typeof eventData.currentRegistrations === 'number' ? eventData.currentRegistrations : 0;
   const isCapacityFull = typeof maxCapacity === 'number' ? currentRegistrations >= maxCapacity : false;
 
-  const lastRegistrationAtIso = eventData.lastRegistrationAt;
+  const lastRegistrationAtIso = eventData.registrationClosesAt;
   const now = new Date();
   const isAfterLastRegistration = typeof lastRegistrationAtIso === 'string' && lastRegistrationAtIso
     ? now.getTime() > new Date(lastRegistrationAtIso).getTime()

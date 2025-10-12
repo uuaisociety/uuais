@@ -27,7 +27,7 @@ const UpcomingEventsBanner: React.FC = () => {
   };
 
   const upcomingEvents = state.events
-    .map(e => ({ ...e, _dt: parseDateTime(e.date, e.time, e.startAt) }))
+    .map(e => ({ ...e, _dt: parseDateTime(e.eventStartAt) }))
     .filter(e => {
       const now = new Date();
       const weekFromNow = new Date(now);
@@ -119,7 +119,7 @@ const UpcomingEventsBanner: React.FC = () => {
           {/* Events */}
           <div className="space-y-3">
             {upcomingEvents.map((event) => {
-              const eventDate = parseDateTime(event.date, event.time, event.startAt);
+              const eventDate = parseDateTime(event.eventStartAt);
               return (
                 <div key={event.id} className="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-3">
                   <div className="flex items-start justify-between">
@@ -134,7 +134,7 @@ const UpcomingEventsBanner: React.FC = () => {
                         </div>
                         <div className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
-                          <span>{event.time}</span>
+                          <span>{event.eventStartAt}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <MapPin className="w-3 h-3" />
