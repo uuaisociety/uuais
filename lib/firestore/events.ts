@@ -25,7 +25,7 @@ export const getEvents = async (): Promise<Event[]> => {
   return snapshot.docs.map((docSnap) => {
     const raw = docSnap.data() as Event;
     const normalized: Event = {
-      id: raw.id,
+      id: docSnap.id,
       title: raw.title,
       description: raw.description,
       location: raw.location,
@@ -51,8 +51,9 @@ export const getEventById = async (id: string): Promise<Event | null> => {
   const eventSnap = await getDoc(eventRef);
   if (!eventSnap.exists()) return null;
   const raw = eventSnap.data() as Event;
+  
   const normalized: Event = {
-    id: raw.id,
+    id: eventSnap.id,
     title: raw.title,
     description: raw.description,
     location: raw.location,
