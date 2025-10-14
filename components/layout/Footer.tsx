@@ -137,6 +137,37 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* Partners strip */}
+        <div className="py-8 border-t border-gray-900">
+          <h3 className="text-center text-lg font-semibold mb-6 text-gray-100">Our partners</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5  gap-6 items-center">
+            {/* Fill out grid */}
+            {Array.from({ length: 2 }).map((_, idx) => (
+              <div key={idx} className="flex items-center justify-center  rounded-lg border border-gray-800 dark:border-gray-900 p-4 h-24">
+                <div className="w-full h-full bg-gray-800 dark:bg-gray-900 rounded-lg"></div>
+              </div>
+            ))}
+            {[
+              { src: '/images/partners/Uppsala_kommun_Logo_Bl_Yellow_RGB.png', alt: 'Uppsala Kommun' },
+              // { src: '/images/partners/UU_innovation.png', alt: 'UU Innovation' },
+              { src: '/images/partners/vantel_logo.png', alt: 'Vantel logo' },
+              // { src: '/images/partners/partner4.png', alt: 'Partner 4' },
+              // { src: '/images/partners/partner5.png', alt: 'Partner 5' },
+              // { src: '/images/partners/partner6.png', alt: 'Partner 6' },
+            ].map((p, idx) => (
+              <div key={idx} className="flex items-center justify-center bg-gray-300 rounded-lg border border-gray-800 p-4 h-24">
+                <Image
+                  src={p.src}
+                  alt={p.alt}
+                  width={100}
+                  height={80}
+                  className="max-h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Bottom bar */}
         <div className="py-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
