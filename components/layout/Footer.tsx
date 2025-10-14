@@ -140,7 +140,7 @@ export const Footer: React.FC = () => {
         {/* Partners strip */}
         <div className="py-8 border-t border-gray-900">
           <h3 className="text-center text-lg font-semibold mb-6 text-gray-100">Our partners</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5  gap-6 items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  gap-6 items-center">
             {/* Fill out grid */}
             {Array.from({ length: 2 }).map((_, idx) => (
               <div key={idx} className="flex items-center justify-center  rounded-lg border border-gray-800 dark:border-gray-900 p-4 h-24">
