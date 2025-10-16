@@ -79,7 +79,7 @@ const JoinPage: React.FC = () => {
       <div className="max-w-3xl mx-auto px-4 space-y-8">
         <div className="text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">Join UU AI Society</h1>
-          <p className="text-gray-600 dark:text-gray-300">Create an account with a trusted provider. No passwords to manage.</p>
+          <p className="text-gray-600 dark:text-gray-300">Create an account to become a member of UU AI Society.</p>
         </div>
 
         {/* Logged-in/member banner */}
