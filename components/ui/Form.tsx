@@ -34,7 +34,10 @@ export const InputBase = React.forwardRef<HTMLInputElement, React.InputHTMLAttri
           bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
           placeholder-gray-500 dark:placeholder-gray-400
           px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500
-          transition-colors ${className || ""}
+          transition-colors
+          disabled:border-0 disabled:bg-transparent disabled:shadow-none
+          disabled:focus:ring-0 disabled:focus:border-transparent disabled:cursor-default disabled:opacity-100
+          ${className || ""}
         `}
         {...rest}
       />
@@ -52,7 +55,10 @@ export const SelectBase = React.forwardRef<HTMLSelectElement, React.SelectHTMLAt
           w-full rounded-md border border-gray-300 dark:border-gray-700
           bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
           px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500
-          transition-colors appearance-none ${className || ""}
+          transition-colors appearance-none
+          disabled:border-0 disabled:bg-transparent disabled:shadow-none
+          disabled:focus:ring-0 disabled:focus:border-transparent disabled:cursor-default disabled:opacity-100
+          ${className || ""}
         `}
         {...rest}
       >
@@ -73,7 +79,10 @@ export const TextareaBase = React.forwardRef<HTMLTextAreaElement, React.Textarea
           bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
           placeholder-gray-500 dark:placeholder-gray-400
           px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500
-          transition-colors ${className || ""}
+          transition-colors
+          disabled:border-0 disabled:bg-transparent disabled:shadow-none
+          disabled:focus:ring-0 disabled:focus:border-transparent disabled:cursor-default disabled:opacity-100
+          ${className || ""}
         `}
         {...rest}
       />

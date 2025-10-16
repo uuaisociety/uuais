@@ -50,8 +50,6 @@ const AdminDashboard: React.FC = () => {
   const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | null>(null);
   const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
 
-  // Members tab handled in component
-
   // Form states
   const [eventForm, setEventForm] = useState<EventFormState>({
     title: '',
@@ -65,8 +63,6 @@ const AdminDashboard: React.FC = () => {
     registrationClosesAt: '',
     publishAt: ''
   });
-
-  // Event-specific question form handled inside EventQuestionsModal
 
   // Subscribe to event-specific questions when modal opens
   useEffect(() => {
