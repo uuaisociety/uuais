@@ -19,7 +19,6 @@ import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import FAQModal from '@/components/pages/admin/modals/FAQModal';
 import EventQuestionsModal from '@/components/pages/admin/modals/EventQuestionsModal';
 import EventModal, { type EventFormState } from '@/components/pages/admin/modals/EventModal';
-import TeamModal, { TeamFormState } from '@/components/pages/admin/modals/TeamModal';
 import BlogModal from '@/components/pages/admin/modals/BlogModal';
 import EventRegistrationsModal from '@/components/pages/admin/modals/EventRegistrationsModal';
 import { useApp } from '@/contexts/AppContext';
@@ -39,7 +38,6 @@ const AdminDashboard: React.FC = () => {
 
   // Modal states
   const [showEventModal, setShowEventModal] = useState(false);
-  const [showTeamModal, setShowTeamModal] = useState(false);
   const [showBlogModal, setShowBlogModal] = useState(false);
   const [showFaqModal, setShowFaqModal] = useState(false);
   const [showEventQModal, setShowEventQModal] = useState(false);
@@ -73,18 +71,7 @@ const AdminDashboard: React.FC = () => {
     };
   }, [showEventQModal, activeEventForQuestions]);
 
-  const [teamForm, setTeamForm] = useState<TeamFormState>({
-    name: '',
-    position: '',
-    bio: '',
-    image: '',
-    imagePath: undefined,
-    linkedin: '',
-    github: '',
-    personalEmail: '',
-    companyEmail: '',
-    website: ''
-  });
+  // TeamTab manages team form/modal state now.
 
   const [blogForm, setBlogForm] = useState({
     title: '',
@@ -153,18 +140,6 @@ const AdminDashboard: React.FC = () => {
       registrationClosesAt: '',
       publishAt: ''
     });
-    setTeamForm({
-      name: '',
-      position: '',
-      bio: '',
-      image: '',
-      imagePath: undefined,
-      linkedin: '',
-      github: '',
-      personalEmail: '',
-      companyEmail: '',
-      website: ''
-    });
     setBlogForm({
       title: '',
       excerpt: '',
@@ -206,17 +181,6 @@ const AdminDashboard: React.FC = () => {
       });
     } catch {}
     setShowEventModal(false);
-    resetForms();
-  };
-
-  const handleAddTeamMember = () => {
-    const newMember = {
-      ...teamForm,
-      image: teamForm.image || placeholderImage,
-      imagePath: teamForm.imagePath,
-    };
-    dispatch({ firestoreAction: 'ADD_TEAM_MEMBER', payload: newMember });
-    setShowTeamModal(false);
     resetForms();
   };
 
@@ -268,24 +232,6 @@ const AdminDashboard: React.FC = () => {
       publishAt: event.publishAt || ''
     });
     setShowEventModal(true);
-  };
-
-  const handleEditTeamMember = (member: TeamMember) => {
-    setEditingItem(member);
-    const ip = (member as unknown as { imagePath?: string }).imagePath;
-    setTeamForm({
-      name: member.name,
-      position: member.position,
-      bio: member.bio,
-      image: member.image,
-      imagePath: ip,
-      linkedin: member.linkedin || '',
-      github: member.github || '',
-      personalEmail: member.personalEmail || member.email || '',
-      companyEmail: member.companyEmail || '',
-      website: member.website || ''
-    });
-    setShowTeamModal(true);
   };
 
   const handleEditBlogPost = (post: BlogPost) => {
@@ -356,15 +302,6 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  const handleUpdateTeamMember = () => {
-    if (editingItem) {
-      const updatedMember = { ...editingItem, ...teamForm } as TeamMember;
-      dispatch({ firestoreAction: 'UPDATE_TEAM_MEMBER', payload: updatedMember });
-      setShowTeamModal(false);
-      resetForms();
-    }
-  };
-
   const handleUpdateBlogPost = () => {
     if (editingItem) {
       const updatedPost = { ...editingItem, ...blogForm } as BlogPost;
@@ -380,11 +317,7 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  const handleDeleteTeamMember = (memberId: string) => {
-    if (window.confirm('Are you sure you want to remove this team member?')) {
-      dispatch({ firestoreAction: 'DELETE_TEAM_MEMBER', payload: memberId });
-    }
-  };
+  // TeamTab handles add/edit/delete for team members now.
 
   const handleDeleteBlogPost = (postId: string) => {
     if (window.confirm('Are you sure you want to delete this blog post?')) {
@@ -481,13 +414,6 @@ const AdminDashboard: React.FC = () => {
           {activeTab === 'team' && (
             <TeamTab
               members={state.teamMembers}
-              onAddClick={() => setShowTeamModal(true)}
-              onEdit={(member) => handleEditTeamMember(member)}
-              onDelete={(id) => handleDeleteTeamMember(id)}
-              onTogglePublish={(member) => {
-                const patched = { ...member, published: !member.published } as TeamMember;
-                dispatch({ firestoreAction: 'UPDATE_TEAM_MEMBER', payload: patched });
-              }}
             />
           )}
           {activeTab === 'blog' && (
@@ -544,21 +470,7 @@ const AdminDashboard: React.FC = () => {
             }}
           />
 
-          {/* Team Modal */}
-          <TeamModal
-            open={showTeamModal}
-            editing={!!editingItem}
-            form={teamForm}
-            setForm={setTeamForm}
-            onClose={() => { setShowTeamModal(false); resetForms(); }}
-            onSubmit={() => {
-              if (editingItem) {
-                handleUpdateTeamMember();
-              } else {
-                handleAddTeamMember();
-              }
-            }}
-          />
+          {/* Team UI handled inside TeamTab component */}
 
           {/* Blog Modal */}
           <BlogModal

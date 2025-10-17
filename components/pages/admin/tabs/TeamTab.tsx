@@ -1,32 +1,116 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Edit3, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
 import { TeamMember } from "@/types";
+import TeamModal, { TeamFormState } from '@/components/pages/admin/modals/TeamModal';
+import { useApp } from '@/contexts/AppContext';
 
 export interface TeamTabProps {
   members: TeamMember[];
-  onAddClick: () => void;
-  onEdit: (member: TeamMember) => void;
-  onDelete: (id: string) => void;
-  onTogglePublish: (member: TeamMember) => void;
 }
 
-const TeamTab: React.FC<TeamTabProps> = ({
-  members,
-  onAddClick,
-  onEdit,
-  onDelete,
-  onTogglePublish,
-}) => {
+const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
+  const { dispatch } = useApp();
+  const placeholderImage = '/placeholder.png';
+
+  const [showTeamModal, setShowTeamModal] = useState(false);
+  const [editingItem, setEditingItem] = useState<TeamMember | null>(null);
+
+  const [teamForm, setTeamForm] = useState<TeamFormState>({
+    id: undefined,
+    name: '',
+    position: '',
+    bio: '',
+    image: '',
+    imagePath: undefined,
+    linkedin: '',
+    github: '',
+    personalEmail: '',
+    companyEmail: '',
+    website: ''
+  });
+
+  const resetForms = () => {
+    setTeamForm({
+      id: undefined,
+      name: '',
+      position: '',
+      bio: '',
+      image: '',
+      imagePath: undefined,
+      linkedin: '',
+      github: '',
+      personalEmail: '',
+      companyEmail: '',
+      website: ''
+    });
+    setEditingItem(null);
+  };
+
+  const handleAddClick = () => {
+    resetForms();
+    setShowTeamModal(true);
+  };
+
+  const handleEdit = (member: TeamMember) => {
+    setEditingItem(member);
+    const ip = (member as unknown as { imagePath?: string }).imagePath;
+    setTeamForm({
+      id: member.id,
+      name: member.name,
+      position: member.position,
+      bio: member.bio,
+      image: member.image,
+      imagePath: ip,
+      linkedin: member.linkedin || '',
+      github: member.github || '',
+      personalEmail: member.personalEmail || member.email || '',
+      companyEmail: member.companyEmail || '',
+      website: member.website || ''
+    });
+    setShowTeamModal(true);
+  };
+
+  const handleAddTeamMember = () => {
+    const newMember = {
+      ...teamForm,
+      image: teamForm.image || placeholderImage,
+      imagePath: teamForm.imagePath,
+    } as TeamMember;
+    dispatch({ firestoreAction: 'ADD_TEAM_MEMBER', payload: newMember });
+    setShowTeamModal(false);
+    resetForms();
+  };
+
+  const handleUpdateTeamMember = () => {
+    if (editingItem) {
+      const updatedMember = { ...editingItem, ...teamForm } as TeamMember;
+      dispatch({ firestoreAction: 'UPDATE_TEAM_MEMBER', payload: updatedMember });
+      setShowTeamModal(false);
+      resetForms();
+    }
+  };
+
+  const handleDeleteTeamMember = (memberId: string) => {
+    if (window.confirm('Are you sure you want to remove this team member?')) {
+      dispatch({ firestoreAction: 'DELETE_TEAM_MEMBER', payload: memberId });
+    }
+  };
+
+  const handleTogglePublish = (member: TeamMember) => {
+    const patched = { ...member, published: !member.published } as TeamMember;
+    dispatch({ firestoreAction: 'UPDATE_TEAM_MEMBER', payload: patched });
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Team Management</h2>
-        <Button icon={Plus} onClick={onAddClick}>Add Team Member</Button>
+        <Button icon={Plus} onClick={handleAddClick}>Add Team Member</Button>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
@@ -50,18 +134,18 @@ const TeamTab: React.FC<TeamTabProps> = ({
                       size="sm"
                       variant="outline"
                       icon={member.published ? EyeOff : Eye}
-                      onClick={() => onTogglePublish(member)}
+                      onClick={() => handleTogglePublish(member)}
                     >
                       {member.published ? "Unpublish" : "Publish"}
                     </Button>
-                    <Button size="sm" variant="outline" icon={Edit3} onClick={() => onEdit(member)}>
+                    <Button size="sm" variant="outline" icon={Edit3} onClick={() => handleEdit(member)}>
                       Edit
                     </Button>
                     <Button
                       size="sm"
                       variant="outline"
                       icon={Trash2}
-                      onClick={() => onDelete(member.id)}
+                      onClick={() => handleDeleteTeamMember(member.id)}
                       className="text-red-600 hover:text-red-700"
                     >
                       Remove
@@ -73,6 +157,17 @@ const TeamTab: React.FC<TeamTabProps> = ({
           </Card>
         ))}
       </div>
+
+      <TeamModal
+        open={showTeamModal}
+        editing={!!editingItem}
+        form={teamForm}
+        setForm={setTeamForm}
+        onClose={() => { setShowTeamModal(false); resetForms(); }}
+        onSubmit={() => {
+          if (editingItem) handleUpdateTeamMember(); else handleAddTeamMember();
+        }}
+      />
     </div>
   );
 };
