@@ -8,7 +8,7 @@ if (!admin.apps.length) {
   try {
     const credPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
     const storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || process.env.FIREBASE_STORAGE_BUCKET;
-    const projectId = process.env.FIREBASE_PROJECT_ID;
+    const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
     if (credPath) {
       const abs = path.isAbsolute(credPath) ? credPath : path.resolve(process.cwd(), credPath);
       if (fs.existsSync(abs)) {
