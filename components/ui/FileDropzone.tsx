@@ -2,8 +2,6 @@
 
 import React, { useCallback, useState } from 'react';
 import { useRef } from 'react';
-import { auth } from '@/lib/firebase-client';
-import type { User } from 'firebase/auth';
 import Image from 'next/image';
 import { ImagePlus } from 'lucide-react';
 
@@ -11,6 +9,8 @@ type Props = {
   folder?: string; // storage folder prefix
   // onUploaded returns the download url and the storage fullPath (so callers can persist path)
   onUploaded?: (result: { url: string; path: string }) => void;
+  // onFileSelected notifies parent with the selected File so parent can handle upload
+  onFileSelected?: (file: File) => void;
   onError?: (err: unknown) => void;
   // optional delete callback; receives a storage path to delete
   onDelete?: (path: string) => Promise<void> | void;
@@ -20,55 +20,25 @@ type Props = {
   initialPath?: string;
 };
 
-const FileDropzone: React.FC<Props> = ({ folder = 'uploads', onUploaded, onError, onDelete, accept = 'image/*', maxSizeBytes = 5_000_000, initialUrl, initialPath }) => {
+const FileDropzone: React.FC<Props> = ({ onFileSelected, onError, onDelete, accept = 'image/*', maxSizeBytes = 5_000_000, initialUrl, initialPath }) => {
   const [dragging, setDragging] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [uploading] = useState(false);
   const [preview, setPreview] = useState<string | undefined>(initialUrl);
 
-  const uploadFile = useCallback(async (file: File) => {
+  // When a file is selected, FileDropzone will show the preview and notify parent via onFileSelected.
+  const uploadFile = useCallback((file: File) => {
+    // show local preview
+    const reader = new FileReader();
+    reader.onload = () => setPreview(String(reader.result));
+    reader.readAsDataURL(file);
+    // notify parent to handle actual upload/back-end interactions
     try {
-      setUploading(true);
-      // Server-side upload: send file as form data to our server endpoint.
-      const form = new FormData();
-      form.append('file', file);
-      form.append('folder', folder);
-      if (initialPath) form.append('previousPath', initialPath);
-
-      // (do not append idToken to form; we rely on Authorization header)
-
-      // attach ID token if available for server auth
-      let token: string | null = null;
-      try {
-        const user = auth.currentUser;
-        if (user) {
-          const { getIdToken } = await import('firebase/auth');
-          token = await getIdToken(user as User);
-        }
-      } catch {}
-
-  const headers: Record<string, string> = {};
-  if (token) headers['Authorization'] = `Bearer ${token}`;
-  // debug: indicate whether we found a token
-  console.debug('FileDropzone: uploading, token present?', Boolean(token));
-
-      const res = await fetch('/api/admin/team-image', { method: 'POST', body: form, headers });
-      if (!res.ok) {
-        let body = null;
-        try { body = await res.json(); } catch {}
-        throw new Error(`upload failed${body && body.error ? ': ' + String(body.error) : ''}${body && body.detail ? ' - ' + String(body.detail) : ''}`);
-      }
-      const data = await res.json();
-      const url = data.url || ''; 
-      const fullPath = data.path;
-      setPreview(() => url || undefined);
-      onUploaded?.({ url: url || '', path: fullPath });
+      onFileSelected?.(file);
     } catch (err) {
-      console.error('Upload failed', err);
+      console.error('onFileSelected threw', err);
       onError?.(err);
-    } finally {
-      setUploading(false);
     }
-  }, [folder, onUploaded, onError, initialPath]);
+  }, [onFileSelected, onError]);
 
   const onDeleteRef = useRef(onDelete);
   onDeleteRef.current = onDelete;
@@ -76,17 +46,12 @@ const FileDropzone: React.FC<Props> = ({ folder = 'uploads', onUploaded, onError
   const handleDelete = useCallback(async (path?: string) => {
     if (!path) return;
     try {
-      // If caller provided onDelete, prefer that (may call server route)
       const cb = onDeleteRef.current;
       if (cb) {
         await cb(path);
       } else {
-        // Server-side delete via our endpoint. Attach token if available.
-        let token: string | null = null;
-  try { const user = auth.currentUser; if (user) { const { getIdToken } = await import('firebase/auth'); token = await getIdToken(user as User); } } catch {}
-        const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-        if (token) headers['Authorization'] = `Bearer ${token}`;
-        await fetch('/api/admin/team-image', { method: 'DELETE', headers, body: JSON.stringify({ path }) });
+        // No server-side deletion from inside FileDropzone — parent must handle deletion.
+        console.warn('No onDelete handler provided; FileDropzone will not perform server-side delete for path:', path);
       }
     } catch (e) {
       console.error('delete failed', e);
@@ -108,7 +73,7 @@ const FileDropzone: React.FC<Props> = ({ folder = 'uploads', onUploaded, onError
     const reader = new FileReader();
     reader.onload = () => setPreview(String(reader.result));
     reader.readAsDataURL(file);
-    // upload in background
+    // notify parent and show preview
     uploadFile(file);
   }, [accept, maxSizeBytes, onError, uploadFile]);
 
@@ -142,10 +107,10 @@ const FileDropzone: React.FC<Props> = ({ folder = 'uploads', onUploaded, onError
           <div className="relative h-20 w-20 rounded-md overflow-hidden border">
             <Image src={preview} alt="preview" fill style={{ objectFit: 'cover' }} />
           </div>
-            <div className="text-sm text-gray-700 dark:text-gray-200">{uploading ? 'Uploading...' : 'Preview'}</div>
-            {initialPath && (
-              <button type="button" className="text-sm text-red-600 underline ml-2" onClick={() => handleDelete(initialPath)}>Delete file</button>
-            )}
+          <div className="text-sm text-gray-700 dark:text-gray-200">{uploading ? 'Uploading...' : 'Preview'}</div>
+          {initialPath && (
+            <button type="button" className="text-sm text-red-600 underline ml-2" onClick={() => handleDelete(initialPath)}>Delete file</button>
+          )}
         </div>
       )}
     </div>

@@ -1,11 +1,14 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { Button } from "@/components/ui/Button";
 import { X } from "lucide-react";
 import FileDropzone from '@/components/ui/FileDropzone';
+import { auth } from '@/lib/firebase-client';
+import type { User } from 'firebase/auth';
 
 export interface TeamFormState {
+  id?: string;
   name: string;
   position: string;
   bio: string;
@@ -28,6 +31,68 @@ interface TeamModalProps {
 }
 
 const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onClose, onSubmit }) => {
+  const uploadToServer = useCallback(async (file: File) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('folder', 'team-images');
+      if (form.imagePath) formData.append('previousPath', form.imagePath);
+      if (editing && form.id) formData.append('teamId', form.id);
+
+      // attach id token
+      let token: string | null = null;
+      try {
+        const { getIdToken } = await import('firebase/auth');
+        const user = auth.currentUser as User | null;
+        if (user) token = await getIdToken(user);
+      } catch (e) {
+        console.warn('could not get id token', e);
+      }
+
+      const headers: Record<string, string> = {};
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+
+      const res = await fetch('/api/admin/team-image', { method: 'POST', body: formData, headers });
+      if (!res.ok) {
+        let body = null;
+        try { body = await res.json(); } catch { }
+        throw new Error(`upload failed: ${body?.error || res.statusText}`);
+      }
+      const data = await res.json();
+      const url = data.urlPublic || data.url || '';
+      const path = data.path;
+      setForm(prev => ({ ...prev, image: url, imagePath: path }));
+    } catch (e) {
+      console.error('upload failed', e);
+    } finally {
+      // noop
+    }
+  }, [editing, form.id, form.imagePath, setForm]);
+
+  const deleteFromServer = useCallback(async (path?: string) => {
+    if (!path) return;
+    try {
+      let token: string | null = null;
+      try {
+        const { getIdToken } = await import('firebase/auth');
+        const user = auth.currentUser as User | null;
+        if (user) token = await getIdToken(user);
+      } catch (e) {
+        console.warn('could not get id token', e);
+      }
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = `Bearer ${token}`;
+      const res = await fetch('/api/admin/team-image', { method: 'DELETE', headers, body: JSON.stringify({ path }) });
+      if (!res.ok) {
+        let body = null; try { body = await res.json(); } catch { }
+        throw new Error(`delete failed: ${body?.error || res.statusText}`);
+      }
+      // clear local form image fields on success
+      setForm(prev => ({ ...prev, image: '', imagePath: undefined }));
+    } catch (e) {
+      console.error('delete failed', e);
+    }
+  }, [setForm]);
   if (!open) return null;
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -57,13 +122,10 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
             <FileDropzone
-              folder="team-images"
               initialUrl={form.image}
               initialPath={form.imagePath}
-              onUploaded={({ url, path }) => setForm(prev => ({ ...prev, image: url, imagePath: path }))}
-              onDelete={async () => {
-                setForm(prev => ({ ...prev, image: '', imagePath: undefined }));
-              }}
+              onFileSelected={uploadToServer}
+              onDelete={async () => deleteFromServer(form.imagePath)}
               onError={(err) => console.error('FileDrop error', err)}
             />
             <p className="text-xs text-gray-500">Optional; a placeholder will be used if empty</p>
