@@ -20,7 +20,7 @@ import { stripUndefined } from "./utils";
 
 export const getEvents = async (): Promise<Event[]> => {
   const eventsRef = collection(db, "events");
-  const qy = query(eventsRef, orderBy("eventStartAt", "asc"));
+  const qy = query(eventsRef, orderBy("eventStartAt", "desc"));
   const snapshot = await getDocs(qy);
   return snapshot.docs.map((docSnap) => {
     const raw = docSnap.data() as Event;
@@ -124,7 +124,7 @@ export const subscribeToEvents = (callback: (events: Event[]) => void) => {
   const qy = query(
     eventsRef,
     where("published", "==", true),
-    orderBy("eventStartAt", "asc")
+    orderBy("eventStartAt", "desc")
   );
 
   return onSnapshot(qy, (snapshot) => {
