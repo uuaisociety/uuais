@@ -97,11 +97,21 @@ export async function POST(req: NextRequest) {
 
     await fileRef.save(buffer, { metadata: { contentType, cacheControl: 'public, max-age=31536000' } });
 
-    // Try to generate a signed url (long expiration). As a fallback, rely on storage path.
-    let url: string | null = null;
+    // Try to make the file public (best for preview) and build a public URL.
+    let publicUrl: string | null = null;
+    try {
+      await fileRef.makePublic();
+      const bn = bucketName;
+      publicUrl = `https://storage.googleapis.com/${bn}/${encodeURIComponent(path)}`;
+    } catch (e) {
+      console.warn('makePublic failed, will try signed url', e);
+    }
+
+    // Try to generate a signed url (long expiration) as fallback.
+    let signedUrl: string | null = null;
     try {
       const [signed] = await fileRef.getSignedUrl({ action: 'read', expires: '03-09-2491' });
-      url = signed;
+      signedUrl = signed;
     } catch (e) {
       console.warn('getSignedUrl failed', e);
     }
@@ -117,7 +127,25 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    return NextResponse.json({ ok: true, path, url });
+    // If caller provided a teamId, update the teamMembers doc atomically.
+    // If the Firestore update fails, delete the uploaded file to avoid orphaned files.
+    const teamId = form.get('teamId')?.toString();
+    if (teamId) {
+      try {
+        const docRef = admin.firestore().doc(`teamMembers/${teamId}`);
+        await docRef.update({ image: publicUrl || signedUrl || null, imagePath: path });
+      } catch (e) {
+        console.warn('failed to update team member doc, rolling back uploaded file', e);
+        try {
+          await fileRef.delete();
+        } catch (delErr) {
+          console.error('rollback delete failed', delErr);
+        }
+        return NextResponse.json({ ok: false, error: 'firestore-update-failed', detail: String(e) }, { status: 500 });
+      }
+    }
+
+    return NextResponse.json({ ok: true, path, url: signedUrl, urlPublic: publicUrl });
   } catch (err) {
     console.error('team-image upload error', err);
     return NextResponse.json({ error: String(err) }, { status: 500 });
