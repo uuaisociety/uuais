@@ -1,8 +1,18 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+    match /team-images/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // other folders can have different rules
     match /{allPaths=**} {
-      allow read, write: if false;
+      allow read: if false;
+      allow write: if false;
     }
   }
 }
