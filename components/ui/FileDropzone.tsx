@@ -49,6 +49,7 @@ const FileDropzone: React.FC<Props> = ({ onFileSelected, onError, onDelete, acce
       const cb = onDeleteRef.current;
       if (cb) {
         await cb(path);
+        setPreview(undefined);
       } else {
         // No server-side deletion from inside FileDropzone — parent must handle deletion.
         console.warn('No onDelete handler provided; FileDropzone will not perform server-side delete for path:', path);
