@@ -3,12 +3,14 @@
 import React from "react";
 import { Button } from "@/components/ui/Button";
 import { X } from "lucide-react";
+import FileDropzone from '@/components/ui/FileDropzone';
 
 export interface TeamFormState {
   name: string;
   position: string;
   bio: string;
   image: string;
+  imagePath?: string; // optional storage path for cleanup
   linkedin: string;
   github: string;
   personalEmail: string;
@@ -53,8 +55,18 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
             <textarea value={form.bio} onChange={(e) => setForm(prev => ({ ...prev, bio: e.target.value }))} rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Profile Image URL</label>
-            <input type="url" value={form.image} onChange={(e) => setForm(prev => ({ ...prev, image: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Optional; a placeholder will be used if empty" />
+            <label className="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
+            <FileDropzone
+              folder="team-images"
+              initialUrl={form.image}
+              initialPath={form.imagePath}
+              onUploaded={({ url, path }) => setForm(prev => ({ ...prev, image: url, imagePath: path }))}
+              onDelete={async () => {
+                setForm(prev => ({ ...prev, image: '', imagePath: undefined }));
+              }}
+              onError={(err) => console.error('FileDrop error', err)}
+            />
+            <p className="text-xs text-gray-500">Optional; a placeholder will be used if empty</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn URL (optional)</label>

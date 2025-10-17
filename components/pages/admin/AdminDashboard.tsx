@@ -19,7 +19,7 @@ import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import FAQModal from '@/components/pages/admin/modals/FAQModal';
 import EventQuestionsModal from '@/components/pages/admin/modals/EventQuestionsModal';
 import EventModal, { type EventFormState } from '@/components/pages/admin/modals/EventModal';
-import TeamModal from '@/components/pages/admin/modals/TeamModal';
+import TeamModal, { TeamFormState } from '@/components/pages/admin/modals/TeamModal';
 import BlogModal from '@/components/pages/admin/modals/BlogModal';
 import EventRegistrationsModal from '@/components/pages/admin/modals/EventRegistrationsModal';
 import { useApp } from '@/contexts/AppContext';
@@ -73,11 +73,12 @@ const AdminDashboard: React.FC = () => {
     };
   }, [showEventQModal, activeEventForQuestions]);
 
-  const [teamForm, setTeamForm] = useState({
+  const [teamForm, setTeamForm] = useState<TeamFormState>({
     name: '',
     position: '',
     bio: '',
     image: '',
+    imagePath: undefined,
     linkedin: '',
     github: '',
     personalEmail: '',
@@ -157,6 +158,7 @@ const AdminDashboard: React.FC = () => {
       position: '',
       bio: '',
       image: '',
+      imagePath: undefined,
       linkedin: '',
       github: '',
       personalEmail: '',
@@ -211,6 +213,7 @@ const AdminDashboard: React.FC = () => {
     const newMember = {
       ...teamForm,
       image: teamForm.image || placeholderImage,
+      imagePath: teamForm.imagePath,
     };
     dispatch({ firestoreAction: 'ADD_TEAM_MEMBER', payload: newMember });
     setShowTeamModal(false);
@@ -269,11 +272,13 @@ const AdminDashboard: React.FC = () => {
 
   const handleEditTeamMember = (member: TeamMember) => {
     setEditingItem(member);
+    const ip = (member as unknown as { imagePath?: string }).imagePath;
     setTeamForm({
       name: member.name,
       position: member.position,
       bio: member.bio,
       image: member.image,
+      imagePath: ip,
       linkedin: member.linkedin || '',
       github: member.github || '',
       personalEmail: member.personalEmail || member.email || '',
