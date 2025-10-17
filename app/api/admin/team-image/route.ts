@@ -1,40 +1,27 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import admin from 'firebase-admin';
-import fs from 'fs';
-import path from 'path';
 
 if (!admin.apps.length) {
-  try {
-    const credPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
-    const storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || process.env.FIREBASE_STORAGE_BUCKET;
-    const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
-    if (credPath) {
-      const abs = path.isAbsolute(credPath) ? credPath : path.resolve(process.cwd(), credPath);
-      if (fs.existsSync(abs)) {
-        const serviceAccount = JSON.parse(fs.readFileSync(abs, 'utf8'));
-        admin.initializeApp({
-          credential: admin.credential.cert(serviceAccount),
-          storageBucket: storageBucket,
-          projectId: projectId
-        });
-      } else {
-        // fall back to default initialization but pass storageBucket if available
-        admin.initializeApp({
-          projectId,
-          storageBucket,
-        });      
-    }
-    } else {
-      admin.initializeApp({
-        projectId,
-        storageBucket,
-      });
-    }
-  } catch (e) {
-    console.warn('firebase-admin init failed', e);
+  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+  const storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || process.env.FIREBASE_STORAGE_BUCKET;
+
+  if (!projectId || !clientEmail || !privateKey) {
+    console.error('Missing Firebase admin credentials.');
   }
+
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId,
+      clientEmail,
+      privateKey,
+    }),
+    storageBucket,
+  });
 }
+
 //   const tokenRes = await getIdTokenResult(u, true);
 //   const tokenClaims = (tokenRes.claims || {}) as Record<string, unknown>;
 //   setClaims(tokenClaims);
