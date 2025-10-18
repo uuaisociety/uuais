@@ -1,14 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { X } from "lucide-react";
+import FileDropzone from '@/components/ui/FileDropzone';
+import { uploadFileToServer, deleteFileFromServer } from '@/utils/fileUploader';
+import { useNotify } from '@/components/ui/Notifications';
 
 export interface EventFormState {
   title: string;
   description: string;
   location: string;
   image: string;
+  imagePath?: string;
   category: 'workshop' | 'guest_lecture' | 'hackathon' | 'other';
   registrationRequired: boolean;
   maxCapacity?: number;
@@ -27,6 +31,39 @@ interface EventModalProps {
 }
 
 const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, onClose, onSubmit }) => {
+  const notifyCtx = useNotify();
+  const { notify } = notifyCtx;
+  const [uploading, setUploading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  const uploadToServer = useCallback(async (file: File) => {
+    setUploading(true);
+    try {
+      const res = await uploadFileToServer(file, { folder: 'event-images', previousPath: form.imagePath });
+      setForm(prev => ({ ...prev, image: res.url || '', imagePath: res.path }));
+      notify({ type: 'success', message: 'Event image uploaded' });
+    } catch (e) {
+      console.error('event image upload failed', e);
+      notify({ type: 'error', message: 'Event image upload failed' });
+    } finally {
+      setUploading(false);
+    }
+  }, [form.imagePath, setForm, notify, setUploading]);
+
+  const deleteFromServer = useCallback(async (path?: string) => {
+    if (!path) return;
+    setDeleting(true);
+    try {
+      await deleteFileFromServer(path);
+      setForm(prev => ({ ...prev, image: '', imagePath: undefined }));
+      notify({ type: 'success', message: 'Event image deleted' });
+    } catch (e) {
+      console.error('event image delete failed', e);
+      notify({ type: 'error', message: 'Event image delete failed' });
+    } finally {
+      setDeleting(false);
+    }
+  }, [setForm, notify, setDeleting]);
   if (!open) return null;
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -116,6 +153,17 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
               placeholder="Optional; a placeholder will be used if empty"
             />
+            <div className="mt-3">
+              <FileDropzone
+                initialUrl={form.image}
+                initialPath={form.imagePath}
+                onFileSelected={uploadToServer}
+                onDelete={async () => deleteFromServer(form.imagePath)}
+                onError={(err) => console.error('Event FileDrop error', err)}
+                uploading={uploading}
+                deleting={deleting}
+              />
+            </div>
           </div>
 
           <div>
@@ -164,7 +212,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
 
           <div className="flex justify-end space-x-3 pt-4">
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-            <Button type="submit">{editing ? 'Update Event' : 'Create Event'}</Button>
+            <Button type="submit" disabled={uploading || deleting}>{editing ? 'Update Event' : 'Create Event'}</Button>
           </div>
         </form>
       </div>

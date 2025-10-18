@@ -18,7 +18,6 @@ import FAQTab from '@/components/pages/admin/tabs/FAQTab';
 import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import FAQModal from '@/components/pages/admin/modals/FAQModal';
 import EventQuestionsModal from '@/components/pages/admin/modals/EventQuestionsModal';
-import EventModal, { type EventFormState } from '@/components/pages/admin/modals/EventModal';
 import BlogModal from '@/components/pages/admin/modals/BlogModal';
 import EventRegistrationsModal from '@/components/pages/admin/modals/EventRegistrationsModal';
 import { useApp } from '@/contexts/AppContext';
@@ -26,8 +25,7 @@ import { updatePageMeta } from '@/utils/seo';
 //import { useAdmin } from '@/hooks/useAdmin';
 // format imported where needed in tab components
 import { BlogPost, Event, TeamMember, FAQ, EventCustomQuestion } from '@/types';
-import { subscribeToEventCustomQuestions, addEventCustomQuestion, updateEventCustomQuestion, deleteEventCustomQuestion } from '@/lib/firestore/questions';
-import { addEvent, patchEvent } from '@/lib/firestore/events';
+import { addEventCustomQuestion, updateEventCustomQuestion, deleteEventCustomQuestion } from '@/lib/firestore/questions';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 
 const AdminDashboard: React.FC = () => {
@@ -37,39 +35,17 @@ const AdminDashboard: React.FC = () => {
   const placeholderImage = '@/public/placeholder.png';
 
   // Modal states
-  const [showEventModal, setShowEventModal] = useState(false);
   const [showBlogModal, setShowBlogModal] = useState(false);
   const [showFaqModal, setShowFaqModal] = useState(false);
   const [showEventQModal, setShowEventQModal] = useState(false);
   const [activeEventForQuestions, setActiveEventForQuestions] = useState<Event | null>(null);
-  const [eventQuestions, setEventQuestions] = useState<EventCustomQuestion[]>([]);
+  const [eventQuestions] = useState<EventCustomQuestion[]>([]);
   const [showEventRegsModal, setShowEventRegsModal] = useState(false);
   const [activeEventForRegs, setActiveEventForRegs] = useState<Event | null>(null);
   const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | null>(null);
   const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
 
-  // Form states
-  const [eventForm, setEventForm] = useState<EventFormState>({
-    title: '',
-    description: '',
-    location: '',
-    image: '',
-    category: 'workshop',
-    registrationRequired: false,
-    maxCapacity: undefined,
-    eventStartAt: '',
-    registrationClosesAt: '',
-    publishAt: ''
-  });
-
-  // Subscribe to event-specific questions when modal opens
-  useEffect(() => {
-    if (!showEventQModal || !activeEventForQuestions) return;
-    const unsub = subscribeToEventCustomQuestions(activeEventForQuestions.id, (qs) => setEventQuestions(qs));
-    return () => {
-      if (typeof unsub === 'function') unsub();
-    };
-  }, [showEventQModal, activeEventForQuestions]);
+  // Event form and event CRUD moved into EventsTab/EventModal
 
   // TeamTab manages team form/modal state now.
 
@@ -128,18 +104,6 @@ const AdminDashboard: React.FC = () => {
   ];
 
   const resetForms = () => {
-    setEventForm({
-      title: '',
-      description: '',
-      location: '',
-      image: '',
-      category: 'workshop',
-      registrationRequired: false,
-      maxCapacity: undefined,
-      eventStartAt: '',
-      registrationClosesAt: '',
-      publishAt: ''
-    });
     setBlogForm({
       title: '',
       excerpt: '',
@@ -152,37 +116,6 @@ const AdminDashboard: React.FC = () => {
     setEditingItem(null);
   };
 
-  const handleAddEvent = async () => {
-    // Persist to Firestore first to get an ID
-    const payload: Omit<Event, 'id'> = {
-      title: eventForm.title,
-      description: eventForm.description,
-      location: eventForm.location,
-      image: eventForm.image,
-      category: eventForm.category,
-      status: 'upcoming',
-      registrationRequired: eventForm.registrationRequired,
-      currentRegistrations: 0,
-      published: true,
-      eventStartAt: eventForm.eventStartAt,
-      ...(eventForm.registrationClosesAt ? { registrationClosesAt: eventForm.registrationClosesAt } : {}),
-      ...(eventForm.publishAt ? { publishAt: eventForm.publishAt } : {}),
-      ...(eventForm.maxCapacity !== undefined ? { maxCapacity: eventForm.maxCapacity } : {}),
-    };
-    const newId = await addEvent(payload);
-    // Add default dietary restrictions custom question
-    try {
-      await addEventCustomQuestion({
-        eventId: newId,
-        question: 'Dietary restrictions / Allergies',
-        type: 'text',
-        required: false,
-        order: 100,
-      });
-    } catch {}
-    setShowEventModal(false);
-    resetForms();
-  };
 
   const handleAddBlogPost = () => {
     const newPost = {
@@ -217,22 +150,6 @@ const AdminDashboard: React.FC = () => {
 
   // Registration Questions handlers removed as unused
 
-  const handleEditEvent = (event: Event) => {
-    setEditingItem(event);
-    setEventForm({
-      title: event.title,
-      description: event.description,
-      location: event.location,
-      image: event.image,
-      category: event.category,
-      registrationRequired: event.registrationRequired || false,
-      maxCapacity: event.maxCapacity,
-      eventStartAt: event.eventStartAt || '',
-      registrationClosesAt: event.registrationClosesAt || '',
-      publishAt: event.publishAt || ''
-    });
-    setShowEventModal(true);
-  };
 
   const handleEditBlogPost = (post: BlogPost) => {
     setEditingItem(post);
@@ -248,59 +165,7 @@ const AdminDashboard: React.FC = () => {
     setShowBlogModal(true);
   };
 
-  const handleUpdateEvent = () => {
-    if (editingItem && (editingItem as Event).id) {
-      const editingEvent = editingItem as Event;
-      // Build a minimal patch object: only include fields that changed or are explicitly set.
-      const patch: Partial<Event> = {};
-      const f = eventForm;
-
-      if (f.title !== editingEvent.title) patch.title = f.title;
-      if (f.description !== editingEvent.description) patch.description = f.description;
-      if (f.location !== editingEvent.location) patch.location = f.location;
-      if (f.image !== editingEvent.image) patch.image = f.image;
-      if (f.category !== editingEvent.category) patch.category = f.category;
-      if (f.registrationRequired !== editingEvent.registrationRequired) patch.registrationRequired = f.registrationRequired;
-
-      // maxCapacity: only include if user provided a value (number) — leave unchanged if empty/undefined
-      if (typeof f.maxCapacity === 'number') patch.maxCapacity = f.maxCapacity;
-
-      // date-times: only include when non-empty strings (user explicitly set)
-      if (f.eventStartAt && f.eventStartAt !== (editingEvent.eventStartAt ?? '')) patch.eventStartAt = f.eventStartAt;
-      if (f.registrationClosesAt && f.registrationClosesAt !== (editingEvent.registrationClosesAt ?? '')) patch.registrationClosesAt = f.registrationClosesAt;
-      if (f.publishAt && f.publishAt !== (editingEvent.publishAt ?? '')) patch.publishAt = f.publishAt;
-
-      // If nothing changed, skip the update
-      if (Object.keys(patch).length === 0) {
-        setShowEventModal(false);
-        resetForms();
-        return;
-      }
-
-      // If user cleared maxCapacity (wants registration but no limit) or turned off registration,
-      // we should delete the `maxCapacity` field in Firestore. Use patchEvent for deletions.
-      const needsDeleteMax = (editingEvent.maxCapacity !== undefined) && (
-        (typeof f.maxCapacity !== 'number' && f.registrationRequired === true) || // cleared input but registration still required
-        f.registrationRequired === false // registration removed => remove capacity
-      );
-
-      if (needsDeleteMax) {
-        // remove field in Firestore
-        (async () => {
-          try {
-            await patchEvent(editingEvent.id, patch, ['maxCapacity']);
-          } catch (e) {
-            console.error('patchEvent failed', e);
-          }
-        })();
-      } else {
-        // Dispatch only the changed fields plus id — updateEvent will merge the patch server-side
-        dispatch({ firestoreAction: 'UPDATE_EVENT', payload: { id: editingEvent.id, ...patch } as Event });
-      }
-      setShowEventModal(false);
-      resetForms();
-    }
-  };
+  // Events are managed within the EventsTab component (add/edit/delete/publish live there now).
 
   const handleUpdateBlogPost = () => {
     if (editingItem) {
@@ -311,13 +176,6 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  const handleDeleteEvent = (eventId: string) => {
-    if (window.confirm('Are you sure you want to delete this event?')) {
-      dispatch({ firestoreAction: 'DELETE_EVENT', payload: eventId });
-    }
-  };
-
-  // TeamTab handles add/edit/delete for team members now.
 
   const handleDeleteBlogPost = (postId: string) => {
     if (window.confirm('Are you sure you want to delete this blog post?')) {
@@ -400,13 +258,6 @@ const AdminDashboard: React.FC = () => {
           {activeTab === 'events' && (
             <EventsTab
               events={state.events}
-              onAddClick={() => setShowEventModal(true)}
-              onEdit={(event) => handleEditEvent(event)}
-              onDelete={(id) => handleDeleteEvent(id)}
-              onTogglePublish={(event) => {
-                const updatedEvent = { ...event, published: !event.published } as Event;
-                dispatch({ firestoreAction: 'UPDATE_EVENT', payload: updatedEvent });
-              }}
               onManageQuestions={(event) => { setActiveEventForQuestions(event); setShowEventQModal(true); }}
               onViewRegistrations={(event) => { setActiveEventForRegs(event); setShowEventRegsModal(true); }}
             />
@@ -452,25 +303,9 @@ const AdminDashboard: React.FC = () => {
               onDelete={(id) => handleDeleteFaq(id)}
             />
           )}
-          {activeTab === 'members' && (<MembersTab onChanged={() => { /* could trigger toast */ }} />)}
-
-          {/* Event Modal */}
-          <EventModal
-            open={showEventModal}
-            editing={!!editingItem}
-            form={eventForm}
-            setForm={setEventForm}
-            onClose={() => { setShowEventModal(false); resetForms(); }}
-            onSubmit={() => {
-              if (editingItem) {
-                handleUpdateEvent();
-              } else {
-                handleAddEvent();
-              }
-            }}
-          />
-
-          {/* Team UI handled inside TeamTab component */}
+          {activeTab === 'members' && (
+            <MembersTab onChanged={() => { /* could trigger toast */ }} />
+          )}
 
           {/* Blog Modal */}
           <BlogModal

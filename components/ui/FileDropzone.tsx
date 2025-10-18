@@ -14,15 +14,17 @@ type Props = {
   onError?: (err: unknown) => void;
   // optional delete callback; receives a storage path to delete
   onDelete?: (path: string) => Promise<void> | void;
+  // UI state props
+  uploading?: boolean;
+  deleting?: boolean;
   accept?: string; // mime types e.g. 'image/*'
   maxSizeBytes?: number;
   initialUrl?: string;
   initialPath?: string;
 };
 
-const FileDropzone: React.FC<Props> = ({ onFileSelected, onError, onDelete, accept = 'image/*', maxSizeBytes = 5_000_000, initialUrl, initialPath }) => {
+const FileDropzone: React.FC<Props> = ({ onFileSelected, onError, onDelete, accept = 'image/*', maxSizeBytes = 5_000_000, initialUrl, initialPath, uploading = false, deleting = false }) => {
   const [dragging, setDragging] = useState(false);
-  const [uploading] = useState(false);
   const [preview, setPreview] = useState<string | undefined>(initialUrl);
 
   // When a file is selected, FileDropzone will show the preview and notify parent via onFileSelected.
@@ -95,22 +97,26 @@ const FileDropzone: React.FC<Props> = ({ onFileSelected, onError, onDelete, acce
         onDrop={handleDrop}
         onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
         onDragLeave={() => setDragging(false)}
-        className={`w-full border-2 rounded-md p-4 flex items-center justify-center gap-3 ${dragging ? 'border-blue-400 bg-blue-50/20' : 'border-dashed border-gray-300 dark:border-gray-700'} cursor-pointer`}
+        className={`w-full border-2 rounded-md p-4 flex items-center justify-center gap-3 ${dragging ? 'border-blue-400 bg-blue-50/20' : 'border-dashed border-gray-300 dark:border-gray-700'} ${uploading || deleting ? 'opacity-60 pointer-events-none' : 'cursor-pointer'}`}
       >
         <div className="flex items-center gap-3">
           <ImagePlus className="h-6 w-6 text-gray-500" />
-          <div className="text-sm text-gray-600 dark:text-gray-300">Drop an image here or <label className="text-blue-600 underline cursor-pointer"><input type="file" accept={accept} onChange={handleChange} className="hidden" /> browse</label></div>
+          <div className="text-sm text-gray-600 dark:text-gray-300">
+            {uploading ? 'Uploading...' : deleting ? 'Deleting...' : (
+              <>Drop an image here or <label className="text-blue-600 underline cursor-pointer"><input type="file" accept={accept} onChange={handleChange} className="hidden" /> browse</label></>
+            )}
+          </div>
         </div>
       </div>
 
       {preview && (
-        <div className="mt-3 flex items-center gap-3">
+          <div className="mt-3 flex items-center gap-3">
           <div className="relative h-20 w-20 rounded-md overflow-hidden border">
             <Image src={preview} alt="preview" fill style={{ objectFit: 'cover' }} />
           </div>
-          <div className="text-sm text-gray-700 dark:text-gray-200">{uploading ? 'Uploading...' : 'Preview'}</div>
+          <div className="text-sm text-gray-700 dark:text-gray-200">{uploading ? 'Uploading...' : deleting ? 'Deleting...' : 'Preview'}</div>
           {initialPath && (
-            <button type="button" className="text-sm text-red-600 underline ml-2" onClick={() => handleDelete(initialPath)}>Delete file</button>
+            <button type="button" className="text-sm text-red-600 underline ml-2" onClick={() => handleDelete(initialPath)} disabled={deleting}>{deleting ? 'Deleting...' : 'Delete file'}</button>
           )}
         </div>
       )}

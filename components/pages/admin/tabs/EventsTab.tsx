@@ -1,12 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Edit3, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
 import { Event } from "@/types";
 import Tag from "@/components/ui/Tag";
+import EventModal, { type EventFormState } from '@/components/pages/admin/modals/EventModal';
+import { useApp } from '@/contexts/AppContext';
+import { addEvent } from '@/lib/firestore/events';
+import { addEventCustomQuestion } from '@/lib/firestore/questions';
 
 const categoryOptions = [
   { value: "all", label: "All Categorie" },
@@ -18,30 +22,126 @@ const categoryOptions = [
 
 export interface EventsTabProps {
   events: Event[];
-  onAddClick: () => void;
-  onEdit: (event: Event) => void;
-  onDelete: (id: string) => void;
-  onTogglePublish: (event: Event) => void;
   onManageQuestions: (event: Event) => void;
   onViewRegistrations: (event: Event) => void;
 }
 
-const EventsTab: React.FC<EventsTabProps> = ({
-  events,
-  onAddClick,
-  onEdit,
-  onDelete,
-  onTogglePublish,
-  onManageQuestions,
-  onViewRegistrations,
-}) => {
+const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onViewRegistrations }) => {
+  const { dispatch } = useApp();
+  const [showEventModal, setShowEventModal] = useState(false);
+  const [editingItem, setEditingItem] = useState<Event | null>(null);
+  const [eventForm, setEventForm] = useState<EventFormState>({
+    title: '',
+    description: '',
+    location: '',
+    image: '',
+    category: 'workshop',
+    registrationRequired: false,
+    maxCapacity: undefined,
+    eventStartAt: '',
+    registrationClosesAt: '',
+    publishAt: ''
+  });
+
+  useEffect(() => {
+    // keep form defaults when opening modal to add
+  }, []);
+
+  const resetForms = () => {
+    setEventForm({
+      title: '',
+      description: '',
+      location: '',
+      image: '',
+      category: 'workshop',
+      registrationRequired: false,
+      maxCapacity: undefined,
+      eventStartAt: '',
+      registrationClosesAt: '',
+      publishAt: ''
+    });
+    setEditingItem(null);
+  };
+
+  const handleAddClick = () => {
+    resetForms();
+    setShowEventModal(true);
+  };
+
+  const handleEdit = (event: Event) => {
+    setEditingItem(event);
+    setEventForm({
+      title: event.title,
+      description: event.description,
+      location: event.location,
+      image: event.image,
+      category: event.category as EventFormState['category'],
+      registrationRequired: event.registrationRequired || false,
+      maxCapacity: event.maxCapacity,
+      eventStartAt: event.eventStartAt || '',
+      registrationClosesAt: event.registrationClosesAt || '',
+      publishAt: event.publishAt || ''
+    });
+    setShowEventModal(true);
+  };
+
+  const handleAddEvent = async () => {
+    const payload: Omit<Event, 'id'> = {
+      title: eventForm.title,
+      description: eventForm.description,
+      location: eventForm.location,
+      image: eventForm.image,
+      category: eventForm.category,
+      status: 'upcoming',
+      registrationRequired: eventForm.registrationRequired,
+      currentRegistrations: 0,
+      published: true,
+      eventStartAt: eventForm.eventStartAt,
+      ...(eventForm.registrationClosesAt ? { registrationClosesAt: eventForm.registrationClosesAt } : {}),
+      ...(eventForm.publishAt ? { publishAt: eventForm.publishAt } : {}),
+      ...(eventForm.maxCapacity !== undefined ? { maxCapacity: eventForm.maxCapacity } : {}),
+    };
+    const newId = await addEvent(payload);
+    try {
+      await addEventCustomQuestion({
+        eventId: newId,
+        question: 'Dietary restrictions / Allergies',
+        type: 'text',
+        required: false,
+        order: 100,
+      });
+    } catch {}
+    setShowEventModal(false);
+    resetForms();
+  };
+
+  const handleUpdateEvent = () => {
+    if (editingItem && editingItem.id) {
+      const updatedEvent = { ...editingItem, ...eventForm } as Event;
+      dispatch({ firestoreAction: 'UPDATE_EVENT', payload: updatedEvent });
+      setShowEventModal(false);
+      resetForms();
+    }
+  };
+
+  const handleDeleteEvent = (eventId: string) => {
+    if (window.confirm('Are you sure you want to delete this event?')) {
+      dispatch({ firestoreAction: 'DELETE_EVENT', payload: eventId });
+    }
+  };
+
+  const handleTogglePublish = (event: Event) => {
+    const updatedEvent = { ...event, published: !event.published } as Event;
+    dispatch({ firestoreAction: 'UPDATE_EVENT', payload: updatedEvent });
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
           Events Management
         </h2>
-        <Button icon={Plus} onClick={onAddClick}>
+        <Button icon={Plus} onClick={handleAddClick}>
           Add New Event
         </Button>
       </div>
@@ -101,7 +201,7 @@ const EventsTab: React.FC<EventsTabProps> = ({
                     size="sm"
                     variant="outline"
                     icon={event.published ? EyeOff : Eye}
-                    onClick={() => onTogglePublish(event)}
+                    onClick={() => handleTogglePublish(event)}
                   >
                     {event.published ? "Unpublish" : "Publish"}
                   </Button>
@@ -123,7 +223,7 @@ const EventsTab: React.FC<EventsTabProps> = ({
                     size="sm"
                     variant="outline"
                     icon={Edit3}
-                    onClick={() => onEdit(event)}
+                    onClick={() => handleEdit(event)}
                   >
                     Edit
                   </Button>
@@ -131,7 +231,7 @@ const EventsTab: React.FC<EventsTabProps> = ({
                     size="sm"
                     variant="outline"
                     icon={Trash2}
-                    onClick={() => onDelete(event.id)}
+                    onClick={() => handleDeleteEvent(event.id)}
                     className="text-red-600 hover:text-red-700"
                   >
                     Delete
@@ -142,6 +242,17 @@ const EventsTab: React.FC<EventsTabProps> = ({
           </Card>
         ))}
       </div>
+
+      <EventModal
+        open={showEventModal}
+        editing={!!editingItem}
+        form={eventForm}
+        setForm={setEventForm}
+        onClose={() => { setShowEventModal(false); resetForms(); }}
+        onSubmit={() => {
+          if (editingItem) handleUpdateEvent(); else handleAddEvent();
+        }}
+      />
     </div>
   );
 };

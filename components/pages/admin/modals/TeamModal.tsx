@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { X } from "lucide-react";
 import FileDropzone from '@/components/ui/FileDropzone';
-import { auth } from '@/lib/firebase-client';
-import type { User } from 'firebase/auth';
+import { uploadFileToServer, deleteFileFromServer } from '@/utils/fileUploader';
+import { useNotify } from '@/components/ui/Notifications';
 
 export interface TeamFormState {
   id?: string;
@@ -31,68 +31,43 @@ interface TeamModalProps {
 }
 
 const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onClose, onSubmit }) => {
+  const notifyCtx = useNotify();
+  const { notify } = notifyCtx;
+  const [uploading, setUploading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
   const uploadToServer = useCallback(async (file: File) => {
+    setUploading(true);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      formData.append('folder', 'team-images');
-      if (form.imagePath) formData.append('previousPath', form.imagePath);
-      if (editing && form.id) formData.append('teamId', form.id);
-
-      // attach id token
-      let token: string | null = null;
-      try {
-        const { getIdToken } = await import('firebase/auth');
-        const user = auth.currentUser as User | null;
-        if (user) token = await getIdToken(user);
-      } catch (e) {
-        console.warn('could not get id token', e);
-      }
-
-      const headers: Record<string, string> = {};
-      if (token) headers['Authorization'] = `Bearer ${token}`;
-
-      const res = await fetch('/api/admin/team-image', { method: 'POST', body: formData, headers });
-      if (!res.ok) {
-        let body = null;
-        try { body = await res.json(); } catch { }
-        throw new Error(`upload failed: ${body?.error || res.statusText}`);
-      }
-      const data = await res.json();
-      const url = data.urlPublic || data.url || '';
-      const path = data.path;
-      setForm(prev => ({ ...prev, image: url, imagePath: path }));
+      const res = await uploadFileToServer(file, {
+        folder: 'team-images',
+        previousPath: form.imagePath,
+        teamId: editing && form.id ? form.id : undefined,
+      });
+      setForm(prev => ({ ...prev, image: res.url || '', imagePath: res.path }));
+      notify({ type: 'success', message: 'Image uploaded' });
     } catch (e) {
       console.error('upload failed', e);
+      notify({ type: 'error', message: 'Image upload failed' });
     } finally {
-      // noop
+      setUploading(false);
     }
-  }, [editing, form.id, form.imagePath, setForm]);
+  }, [editing, form.id, form.imagePath, setForm, notify, setUploading]);
 
   const deleteFromServer = useCallback(async (path?: string) => {
     if (!path) return;
+    setDeleting(true);
     try {
-      let token: string | null = null;
-      try {
-        const { getIdToken } = await import('firebase/auth');
-        const user = auth.currentUser as User | null;
-        if (user) token = await getIdToken(user);
-      } catch (e) {
-        console.warn('could not get id token', e);
-      }
-      const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-      if (token) headers['Authorization'] = `Bearer ${token}`;
-      const res = await fetch('/api/admin/team-image', { method: 'DELETE', headers, body: JSON.stringify({ path }) });
-      if (!res.ok) {
-        let body = null; try { body = await res.json(); } catch { }
-        throw new Error(`delete failed: ${body?.error || res.statusText}`);
-      }
-      // clear local form image fields on success
+      await deleteFileFromServer(path);
       setForm(prev => ({ ...prev, image: '', imagePath: undefined }));
+      notify({ type: 'success', message: 'Image deleted' });
     } catch (e) {
       console.error('delete failed', e);
+      notify({ type: 'error', message: 'Image delete failed' });
+    } finally {
+      setDeleting(false);
     }
-  }, [setForm]);
+  }, [setForm, notify, setDeleting]);
   if (!open) return null;
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -127,6 +102,8 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
               onFileSelected={uploadToServer}
               onDelete={async () => deleteFromServer(form.imagePath)}
               onError={(err) => console.error('FileDrop error', err)}
+              uploading={uploading}
+              deleting={deleting}
             />
             <p className="text-xs text-gray-500">Optional; a placeholder will be used if empty</p>
           </div>
@@ -159,7 +136,7 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
 
           <div className="flex justify-end space-x-3 pt-4">
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-            <Button type="submit">{editing ? 'Update Member' : 'Add Member'}</Button>
+            <Button type="submit" disabled={uploading || deleting}>{editing ? 'Update Member' : 'Add Member'}</Button>
           </div>
         </form>
       </div>
