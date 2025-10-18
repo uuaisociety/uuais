@@ -171,7 +171,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
             <select
               value={form.category}
               onChange={(e) => setForm(prev => ({ ...prev, category: e.target.value as EventFormState['category'] }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-black dark:text-white bg-white dark:bg-gray-700"
             >
               <option value="workshop">Workshop</option>
               <option value="guest_lecture">Guest Lecture</option>
