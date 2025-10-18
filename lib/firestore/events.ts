@@ -121,9 +121,9 @@ export const deleteEvent = async (id: string): Promise<void> => {
 export const subscribeToEvents = (callback: (events: Event[]) => void) => {
   const eventsRef = collection(db, "events");
 
+  // Only getting published events is handled by firestore.rules
   const qy = query(
     eventsRef,
-    where("published", "==", true),
     orderBy("eventStartAt", "desc")
   );
 
