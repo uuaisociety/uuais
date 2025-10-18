@@ -17,15 +17,12 @@ import BlogTab from '@/components/pages/admin/tabs/BlogTab';
 import FAQTab from '@/components/pages/admin/tabs/FAQTab';
 import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import FAQModal from '@/components/pages/admin/modals/FAQModal';
-import EventQuestionsModal from '@/components/pages/admin/modals/EventQuestionsModal';
 import BlogModal from '@/components/pages/admin/modals/BlogModal';
-import EventRegistrationsModal from '@/components/pages/admin/modals/EventRegistrationsModal';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 //import { useAdmin } from '@/hooks/useAdmin';
 // format imported where needed in tab components
-import { BlogPost, Event, TeamMember, FAQ, EventCustomQuestion } from '@/types';
-import { addEventCustomQuestion, updateEventCustomQuestion, deleteEventCustomQuestion } from '@/lib/firestore/questions';
+import { BlogPost, Event, TeamMember, FAQ } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 
 const AdminDashboard: React.FC = () => {
@@ -37,11 +34,6 @@ const AdminDashboard: React.FC = () => {
   // Modal states
   const [showBlogModal, setShowBlogModal] = useState(false);
   const [showFaqModal, setShowFaqModal] = useState(false);
-  const [showEventQModal, setShowEventQModal] = useState(false);
-  const [activeEventForQuestions, setActiveEventForQuestions] = useState<Event | null>(null);
-  const [eventQuestions] = useState<EventCustomQuestion[]>([]);
-  const [showEventRegsModal, setShowEventRegsModal] = useState(false);
-  const [activeEventForRegs, setActiveEventForRegs] = useState<Event | null>(null);
   const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | null>(null);
   const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
 
@@ -258,8 +250,8 @@ const AdminDashboard: React.FC = () => {
           {activeTab === 'events' && (
             <EventsTab
               events={state.events}
-              onManageQuestions={(event) => { setActiveEventForQuestions(event); setShowEventQModal(true); }}
-              onViewRegistrations={(event) => { setActiveEventForRegs(event); setShowEventRegsModal(true); }}
+              onManageQuestions={() => {}}
+              onViewRegistrations={() => {}}
             />
           )}
           {activeTab === 'team' && (
@@ -335,36 +327,8 @@ const AdminDashboard: React.FC = () => {
 
           {/* Registration questions are currently unused; modal intentionally not rendered. */}
 
-          <EventQuestionsModal
-            open={showEventQModal && !!activeEventForQuestions}
-            eventTitle={activeEventForQuestions?.title || ''}
-            eventId={activeEventForQuestions?.id || ''}
-            questions={eventQuestions}
-            onClose={() => { setShowEventQModal(false); setActiveEventForQuestions(null); }}
-            onAdd={async (data) => {
-              if (!activeEventForQuestions) return;
-              await addEventCustomQuestion({ eventId: activeEventForQuestions.id, ...data });
-            }}
-            onUpdate={async (id, data) => {
-              await updateEventCustomQuestion(id, data);
-            }}
-            onDelete={async (id) => {
-              await deleteEventCustomQuestion(id);
-            }}
-          />
-
-          {/* Event Registrations Modal */}
-          <EventRegistrationsModal
-            open={showEventRegsModal && !!activeEventForRegs}
-            eventId={activeEventForRegs?.id || ''}
-            eventTitle={activeEventForRegs?.title || ''}
-            onClose={() => { setShowEventRegsModal(false); setActiveEventForRegs(null); }}
-          />
         </div>
       </div>
-
-      {/* Members modal handled in MembersTab */}
-
     </div>
   );
 };

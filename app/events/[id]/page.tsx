@@ -142,10 +142,16 @@ const EventDetailPage: React.FC = () => {
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               About This Event
             </h2>
-            <div
-              className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300"
-              dangerouslySetInnerHTML={{ __html: event.description }}
-            />
+            {/<\/?[a-z][\s\S]*>/i.test(event.description || '') ? (
+              <div
+                className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300"
+                dangerouslySetInnerHTML={{ __html: event.description || '' }}
+              />
+            ) : (
+              <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 whitespace-pre-wrap">
+                {event.description}
+              </div>
+            )}
           </CardContent>
         </Card>
 

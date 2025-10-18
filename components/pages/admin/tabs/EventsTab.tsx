@@ -5,12 +5,15 @@ import { format } from "date-fns";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Edit3, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
+import { EventCustomQuestion } from '@/types';
 import { Event } from "@/types";
 import Tag from "@/components/ui/Tag";
 import EventModal, { type EventFormState } from '@/components/pages/admin/modals/EventModal';
+import EventQuestionsModal from '@/components/pages/admin/modals/EventQuestionsModal';
+import EventRegistrationsModal from '@/components/pages/admin/modals/EventRegistrationsModal';
 import { useApp } from '@/contexts/AppContext';
 import { addEvent } from '@/lib/firestore/events';
-import { addEventCustomQuestion } from '@/lib/firestore/questions';
+import { subscribeToEventCustomQuestions, addEventCustomQuestion, updateEventCustomQuestion, deleteEventCustomQuestion } from '@/lib/firestore/questions';
 
 const categoryOptions = [
   { value: "all", label: "All Categorie" },
@@ -28,6 +31,11 @@ export interface EventsTabProps {
 
 const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onViewRegistrations }) => {
   const { dispatch } = useApp();
+  const [showEventQModal, setShowEventQModal] = useState(false);
+  const [activeEventForQuestions, setActiveEventForQuestions] = useState<Event | null>(null);
+  const [eventQuestions, setEventQuestions] = useState<EventCustomQuestion[]>([]);
+  const [showEventRegsModal, setShowEventRegsModal] = useState(false);
+  const [activeEventForRegs, setActiveEventForRegs] = useState<Event | null>(null);
   const [showEventModal, setShowEventModal] = useState(false);
   const [editingItem, setEditingItem] = useState<Event | null>(null);
   const [eventForm, setEventForm] = useState<EventFormState>({
@@ -84,6 +92,15 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
     });
     setShowEventModal(true);
   };
+
+  useEffect(() => {
+    // subscribe to custom questions when questions or registrations modal is open for an event
+    const eventId = activeEventForQuestions?.id || activeEventForRegs?.id;
+    const open = showEventQModal || showEventRegsModal;
+    if (!open || !eventId) return;
+    const unsub = subscribeToEventCustomQuestions(eventId, (qs: EventCustomQuestion[]) => setEventQuestions(qs));
+    return () => { if (typeof unsub === 'function') unsub(); };
+  }, [activeEventForQuestions, activeEventForRegs, showEventQModal, showEventRegsModal]);
 
   const handleAddEvent = async () => {
     const payload: Omit<Event, 'id'> = {
@@ -171,8 +188,9 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
                       )?.label || event.category}
                     </Tag>
                   </div>
-                  <p className="text-gray-600 mb-2 dark:text-gray-400">
-                    {event.description}
+                  <p className="text-gray-600 mb-2 dark:text-gray-400 whitespace-pre-wrap">
+                    {event.description.slice(0, 100) +
+                      (event.description.length > 100 ? "..." : "")}
                   </p>
                   <div className="text-sm text-gray-500 dark:text-gray-400">
                     <span className="mr-4">
@@ -208,14 +226,14 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
                   <Button
                     size="sm"
                     variant="outline"
-                    onClick={() => onManageQuestions(event)}
+                    onClick={() => { setActiveEventForQuestions(event); setShowEventQModal(true); onManageQuestions(event); }}
                   >
                     Manage Questions
                   </Button>
                   <Button
                     size="sm"
                     variant="outline"
-                    onClick={() => onViewRegistrations(event)}
+                    onClick={() => { setActiveEventForRegs(event); setShowEventRegsModal(true); onViewRegistrations(event); }}
                   >
                     Registrations
                   </Button>
@@ -252,6 +270,31 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
         onSubmit={() => {
           if (editingItem) handleUpdateEvent(); else handleAddEvent();
         }}
+      />
+      {/* Questions modal — moved from AdminDashboard: parent still may call onManageQuestions to toggle */}
+      <EventQuestionsModal
+        open={showEventQModal && !!activeEventForQuestions}
+        eventTitle={activeEventForQuestions?.title || ''}
+        eventId={activeEventForQuestions?.id || ''}
+        questions={eventQuestions}
+        onClose={() => { setShowEventQModal(false); setActiveEventForQuestions(null); }}
+        onAdd={async (data) => {
+          if (!activeEventForQuestions) return;
+          await addEventCustomQuestion({ eventId: activeEventForQuestions.id, ...data });
+        }}
+        onUpdate={async (id, data) => {
+          await updateEventCustomQuestion(id, data);
+        }}
+        onDelete={async (id) => {
+          await deleteEventCustomQuestion(id);
+        }}
+      />
+
+      <EventRegistrationsModal
+        open={showEventRegsModal && !!activeEventForRegs}
+        eventId={activeEventForRegs?.id || ''}
+        eventTitle={activeEventForRegs?.title || ''}
+        onClose={() => { setShowEventRegsModal(false); setActiveEventForRegs(null); }}
       />
     </div>
   );
