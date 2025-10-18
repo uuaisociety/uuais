@@ -83,19 +83,19 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
 
         <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Name</label>
             <input type="text" value={form.name} onChange={(e) => setForm(prev => ({ ...prev, name: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Position</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Position</label>
             <input type="text" value={form.position} onChange={(e) => setForm(prev => ({ ...prev, position: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Bio</label>
             <textarea value={form.bio} onChange={(e) => setForm(prev => ({ ...prev, bio: e.target.value }))} rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Profile Image</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Profile Image</label>
             <FileDropzone
               initialUrl={form.image}
               initialPath={form.imagePath}
@@ -108,17 +108,17 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
             <p className="text-xs text-gray-500">Optional; a placeholder will be used if empty</p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">LinkedIn URL (optional)</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">LinkedIn URL (optional)</label>
             <input type="url" value={form.linkedin} onChange={(e) => setForm(prev => ({ ...prev, linkedin: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">GitHub URL (optional)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">GitHub URL (optional)</label>
               <input type="url" value={form.github} onChange={(e) => setForm(prev => ({ ...prev, github: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="https://github.com/username" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Website (optional)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Website (optional)</label>
               <input type="url" value={form.website} onChange={(e) => setForm(prev => ({ ...prev, website: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="https://example.com" />
             </div>
           </div>
@@ -129,7 +129,7 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
               <input type="email" value={form.personalEmail} onChange={(e) => setForm(prev => ({ ...prev, personalEmail: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="name@example.com" />
             </div> */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Organization Email (optional)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Organization Email (optional)</label>
               <input type="email" value={form.companyEmail} onChange={(e) => setForm(prev => ({ ...prev, companyEmail: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="name@uu.se" />
             </div>
           </div>
