@@ -38,15 +38,6 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
     additionalInfo: "",
   });
 
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
   // Subscribe to event-specific custom questions
   useEffect(() => {
     const unsub = subscribeToEventCustomQuestions(event.id, (qs) => {
@@ -345,24 +336,6 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                       </div>
                     </div>
                   )}
-                  {/* Additional Information (comments only) */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                      Additional Comments
-                    </h3>
-                    <div className="space-y-4">
-                      <div>
-                        <textarea
-                          name="additionalInfo"
-                          value={formData.additionalInfo}
-                          onChange={handleInputChange}
-                          rows={3}
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
-                          placeholder="Any questions or special requirements?"
-                        />
-                      </div>
-                    </div>
-                  </div>
                   {/* Submit Button */}
                   <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-600">
                     <Button

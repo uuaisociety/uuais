@@ -127,6 +127,13 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
         required: false,
         order: 100,
       });
+      await addEventCustomQuestion({
+        eventId: newId,
+        question: 'Additional Comments',
+        type: 'text',
+        required: false,
+        order: 999,
+      });
     } catch {}
     setShowEventModal(false);
     resetForms();
