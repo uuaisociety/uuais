@@ -162,7 +162,7 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
           <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={form.required} onChange={(e) => setForm(prev => ({ ...prev, required: e.target.checked }))} /> Required</label>
           <div className="flex justify-end gap-2">
             {mode === 'edit' ? (
-              <Button size="sm" variant="outline" onClick={() => stopEdit()}>Cancel Edit</Button>
+              <Button type="button" variant="outline" onClick={() => stopEdit()}>Cancel Edit</Button>
             ) : (
               <Button type="button" variant="outline" onClick={() => { stopEdit(); onClose(); }}>Close</Button>
             )}
