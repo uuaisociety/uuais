@@ -1,6 +1,7 @@
 import {
   collection,
   query,
+  where,
   orderBy,
   getDocs,
   addDoc,
@@ -19,7 +20,13 @@ import { stripUndefined } from "./utils";
 
 export const getEvents = async (): Promise<Event[]> => {
   const eventsRef = collection(db, "events");
-  const qy = query(eventsRef, orderBy("eventStartAt", "desc"));
+  // Only return published events for public (unauthenticated) readers to
+  // respect Firestore rules (read allowed when published == true or admin).
+  const qy = query(
+    eventsRef,
+    where("published", "==", true),
+    orderBy("eventStartAt", "desc")
+  );
   const snapshot = await getDocs(qy);
   return snapshot.docs.map((docSnap) => {
     const raw = docSnap.data() as Event;
@@ -117,14 +124,18 @@ export const deleteEvent = async (id: string): Promise<void> => {
   await deleteDoc(eventRef);
 };
 
-export const subscribeToEvents = (callback: (events: Event[]) => void) => {
+export const subscribeToEvents = (
+  callback: (events: Event[]) => void,
+  options?: { includeUnpublished?: boolean }
+) => {
   const eventsRef = collection(db, "events");
 
-  // Only getting published events is handled by firestore.rules
-  const qy = query(
-    eventsRef,
-    orderBy("eventStartAt", "desc")
-  );
+  // If includeUnpublished is true (admin), query without the published filter.
+  // Otherwise, restrict to published == true so public listeners don't request
+  // forbidden documents and trigger permission-denied errors.
+  const qy = options && options.includeUnpublished
+    ? query(eventsRef, orderBy("eventStartAt", "desc"))
+    : query(eventsRef, where("published", "==", true), orderBy("eventStartAt", "desc"));
 
   return onSnapshot(qy, (snapshot) => {
     const events = snapshot.docs.map((docSnap) => ({

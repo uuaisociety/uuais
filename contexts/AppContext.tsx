@@ -3,6 +3,8 @@
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { Event, TeamMember, BlogPost, FAQ, RegistrationQuestion } from '../types';
 import { subscribeToEvents, addEvent as addEventToFirestore, updateEvent as updateEventInFirestore, deleteEvent as deleteEventFromFirestore } from '@/lib/firestore/events';
+import { auth } from '@/lib/firebase-client';
+import { onIdTokenChanged } from 'firebase/auth';
 import { subscribeToTeamMembers, addTeamMember as addTeamMemberToFirestore, updateTeamMember as updateTeamMemberInFirestore, deleteTeamMember as deleteTeamMemberFromFirestore } from '@/lib/firestore/team';
 import { subscribeToBlogPosts, addBlogPost as addBlogPostToFirestore, updateBlogPost as updateBlogPostInFirestore, deleteBlogPost as deleteBlogPostFromFirestore } from '@/lib/firestore/blog';
 import { subscribeToFaqs, addFaq as addFaqToFirestore, updateFaq as updateFaqInFirestore, deleteFaq as deleteFaqFromFirestore } from '@/lib/firestore/faqs';
@@ -166,10 +168,24 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   // Set up real-time listeners for Firestore
   useEffect(() => {
-    const unsubscribeEvents = subscribeToEvents((events) => {
-      dispatch({ type: 'SET_EVENTS', payload: events });
-    });
+    // Track the unsubscribe function for events so we can re-subscribe when admin status changes
+    let unsubscribeEvents: (() => void) | null = null;
 
+    const subscribe = (includeUnpublished = false) => {
+      // Unsubscribe previous if any
+      if (unsubscribeEvents) {
+        try { unsubscribeEvents(); } catch { /* ignore */ }
+        unsubscribeEvents = null;
+      }
+      unsubscribeEvents = subscribeToEvents((events) => {
+        dispatch({ type: 'SET_EVENTS', payload: events });
+      }, { includeUnpublished });
+    };
+
+    // Initial subscription: assume not admin (public)
+    subscribe(false);
+
+    // Other static subscriptions that don't depend on auth
     const unsubscribeTeamMembers = subscribeToTeamMembers((members) => {
       dispatch({ type: 'SET_TEAM_MEMBERS', payload: members });
     });
@@ -184,13 +200,32 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       dispatch({ type: 'SET_REGISTRATION_QUESTIONS', payload: qs });
     });
 
+    // Listen for ID token changes to detect admin claim changes.
+    const idTokenUnsub = onIdTokenChanged(auth, async (user) => {
+      if (!user) {
+        // Not signed in — ensure public subscription
+        subscribe(false);
+        return;
+      }
+
+      // Refresh token to ensure custom claims are present
+      const tokenResult = await user.getIdTokenResult(true);
+      const adminClaim = !!tokenResult.claims.admin;
+  // Re-subscribe with adminClaim (true/false)
+      // Re-subscribe to events with or without unpublished docs
+      subscribe(adminClaim);
+    });
+
     // Cleanup subscriptions on unmount
     return () => {
-      unsubscribeEvents();
+      if (unsubscribeEvents) {
+        try { unsubscribeEvents(); } catch { /* ignore */ }
+      }
       unsubscribeTeamMembers();
       unsubscribeBlogPosts();
       unsubscribeFaqs();
       unsubscribeRegistrationQuestions();
+      idTokenUnsub();
     };
   }, []);
 
