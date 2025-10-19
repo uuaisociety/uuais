@@ -58,12 +58,14 @@ service cloud.firestore {
       // Full create/update/delete restricted to admins
       allow create, update, delete: if isAdmin();
 
-      // Optional: If you keep client-side increment for currentRegistrations:
-      // allow update to ONLY increment by +1 and not exceed maxCapacity.
-      // If you move this to Cloud Functions, remove this whole block.
       allow update: if changedOnly(['currentRegistrations'])
-        && request.resource.data.currentRegistrations == resource.data.currentRegistrations + 1
-        && request.resource.data.currentRegistrations <= resource.data.maxCapacity;
+        // Allow increment when currentRegistrations was previously missing/null
+        // (treat as 0) or when it's explicitly incremented by +1.
+        && (
+          (resource.data.currentRegistrations == null && request.resource.data.currentRegistrations == 1)
+          || (request.resource.data.currentRegistrations == resource.data.currentRegistrations + 1)
+        )
+        && (resource.data.maxCapacity == null || request.resource.data.currentRegistrations <= resource.data.maxCapacity);
     }
 
     // TEAM MEMBERS
@@ -108,8 +110,13 @@ service cloud.firestore {
            )
         // Restrict status to registered|waitlist
         && (request.resource.data.status in ['registered', 'waitlist'])
-        // registeredAt must be a timestamp (serverTimestamp is allowed)
-        && (request.resource.data.registeredAt is timestamp);
+        // registeredAt must be a timestamp. When clients use serverTimestamp
+        // transforms the field can appear as null in the request, so allow
+        // either a timestamp or null here.
+        && (
+          (request.resource.data.registeredAt is timestamp) ||
+          (request.resource.data.registeredAt == null)
+        );
 
       // Users can read their own registrations; admins can read all
       allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);

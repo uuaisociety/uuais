@@ -110,9 +110,6 @@ export const registerForEvent = async (
 ): Promise<string> => {
   const regRef = collection(db, 'registrations');
 
-  const normalizedEmail = (payload.userEmail || '').trim().toLowerCase();
-  const rawPhone = String(payload.registrationData?.phone ?? '').trim();
-  const normalizedPhone = rawPhone.replace(/[\s\-()]/g, '');
 
   {
     const qDup = query(regRef, where('eventId', '==', eventId), where('userId', '==', payload.userId));
@@ -121,8 +118,17 @@ export const registerForEvent = async (
   }
 
   const eventRef = doc(db, 'events', eventId);
-  const eventSnap = await getDoc(eventRef);
-  const eventData = eventSnap.exists() ? (eventSnap.data() as Partial<Event>) : {};
+  let eventData: Partial<Event> = {};
+  try {
+    const eventSnap = await getDoc(eventRef);
+    eventData = eventSnap.exists() ? (eventSnap.data() as Partial<Event>) : {};
+  } catch (err: unknown) {
+    // Likely permission-denied (unpublished event). Surface a friendly error.
+    if (err && typeof err === 'object' && 'code' in err && (err as { code?: string }).code === 'permission-denied') {
+      throw new Error('You do not have permission to register for this event.');
+    }
+    throw err;
+  }
 
   const maxCapacity = typeof eventData.maxCapacity === 'number' ? eventData.maxCapacity : undefined;
   const currentRegistrations = typeof eventData.currentRegistrations === 'number' ? eventData.currentRegistrations : 0;
@@ -133,33 +139,6 @@ export const registerForEvent = async (
   const isAfterLastRegistration = typeof lastRegistrationAtIso === 'string' && lastRegistrationAtIso
     ? now.getTime() > new Date(lastRegistrationAtIso).getTime()
     : false;
-
-  const duplicates: string[] = [];
-  try {
-    if (normalizedEmail) {
-      const q1 = query(regRef, where('eventId', '==', eventId), where('registrationData.email', '==', normalizedEmail));
-      const s1 = await getDocs(q1);
-      if (!s1.empty) duplicates.push('email');
-    }
-    if (normalizedPhone) {
-      const q2 = query(regRef, where('eventId', '==', eventId), where('registrationData.phone', '==', normalizedPhone));
-      const s2 = await getDocs(q2);
-      if (!s2.empty) duplicates.push('phone');
-    }
-  } catch {
-    const qAll = query(regRef, where('eventId', '==', eventId));
-    const all = await getDocs(qAll);
-    for (const d of all.docs) {
-      const data = d.data() as DocumentData;
-      const eEmail = String((data?.registrationData as DocumentData | undefined)?.email ?? '').trim().toLowerCase();
-      const ePhone = String((data?.registrationData as DocumentData | undefined)?.phone ?? '').trim().replace(/[\s\-()]/g, '');
-      if (normalizedEmail && eEmail && eEmail === normalizedEmail) duplicates.push('email');
-      if (normalizedPhone && ePhone && ePhone === normalizedPhone) duplicates.push('phone');
-      if (duplicates.length) break;
-    }
-  }
-
-  if (duplicates.length) throw new Error('You have already registered for this event using the same contact details.');
 
   const status: EventRegistration['status'] = (options?.waitlist || isCapacityFull || isAfterLastRegistration)
     ? 'waitlist'
@@ -175,13 +154,27 @@ export const registerForEvent = async (
     userId: payload.userId,
   };
 
+  // Create the registration document first. Then attempt to increment the
+  // event's currentRegistrations as a best-effort operation. We avoid using
+  // a transaction here because transaction commits were triggering
+  // permission-denied in some client environments. If the increment fails
+  // due to permissions, we still return the registration id — admins or a
+  // server-side worker can reconcile counts later.
   const docRef = await addDoc(regRef, regDoc as DocumentData);
+  const newRegId = docRef.id;
 
   if (status === 'registered') {
-    await updateDoc(eventRef, { currentRegistrations: increment(1) });
+    try {
+      await updateDoc(eventRef, { currentRegistrations: increment(1) });
+    } catch (err: unknown) {
+      // Do not block registration on event update failures. Surface a
+      // warning for server-side monitoring; client callers get the
+      // registration id and can be informed that counts may be stale.
+      console.warn('Failed to increment event.currentRegistrations', err);
+    }
   }
 
-  return docRef.id;
+  return newRegId;
 };
 
 // ----------------------------
