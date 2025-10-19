@@ -119,7 +119,7 @@ const JoinPage: React.FC = () => {
         {uid && (
           <Card>
             <CardHeader>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Step 3: Complete your profile</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Complete your profile</h2>
               <p className="text-gray-600 dark:text-gray-300 text-sm">These details help us serve members better. You can edit them anytime in <Link href="/account" className="underline">/account</Link>.</p>
             </CardHeader>
             <CardContent className="space-y-6">
