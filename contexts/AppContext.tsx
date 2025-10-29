@@ -1,21 +1,19 @@
 'use client'
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { Event, TeamMember, BlogPost, FAQ, RegistrationQuestion } from '../types';
+import { Event, TeamMember, BlogPost, FAQ } from '../types';
 import { subscribeToEvents, addEvent as addEventToFirestore, updateEvent as updateEventInFirestore, deleteEvent as deleteEventFromFirestore } from '@/lib/firestore/events';
 import { auth } from '@/lib/firebase-client';
 import { onIdTokenChanged } from 'firebase/auth';
 import { subscribeToTeamMembers, addTeamMember as addTeamMemberToFirestore, updateTeamMember as updateTeamMemberInFirestore, deleteTeamMember as deleteTeamMemberFromFirestore } from '@/lib/firestore/team';
 import { subscribeToBlogPosts, addBlogPost as addBlogPostToFirestore, updateBlogPost as updateBlogPostInFirestore, deleteBlogPost as deleteBlogPostFromFirestore } from '@/lib/firestore/blog';
 import { subscribeToFaqs, addFaq as addFaqToFirestore, updateFaq as updateFaqInFirestore, deleteFaq as deleteFaqFromFirestore } from '@/lib/firestore/faqs';
-import { subscribeToRegistrationQuestions, addRegistrationQuestion as addRegistrationQuestionToFirestore, updateRegistrationQuestion as updateRegistrationQuestionInFirestore, deleteRegistrationQuestion as deleteRegistrationQuestionFromFirestore } from '@/lib/firestore/questions';
 
 interface AppState {
   events: Event[];
   teamMembers: TeamMember[];
   blogPosts: BlogPost[];
   faqs: FAQ[];
-  registrationQuestions: RegistrationQuestion[];
   isLoading: boolean;
   error: string | null;
 }
@@ -38,11 +36,7 @@ type AppAction =
   | { type: 'SET_FAQS'; payload: FAQ[] }
   | { type: 'ADD_FAQS'; payload: FAQ }
   | { type: 'UPDATE_FAQS'; payload: FAQ }
-  | { type: 'DELETE_FAQS'; payload: string }
-  | { type: 'SET_REGISTRATION_QUESTIONS'; payload: RegistrationQuestion[] }
-  | { type: 'ADD_REGISTRATION_QUESTION'; payload: RegistrationQuestion }
-  | { type: 'UPDATE_REGISTRATION_QUESTION'; payload: RegistrationQuestion }
-  | { type: 'DELETE_REGISTRATION_QUESTION'; payload: string };
+  | { type: 'DELETE_FAQS'; payload: string };
 
 type FirestoreAction = 
   | { firestoreAction: 'ADD_EVENT'; payload: Omit<Event, 'id'> }
@@ -56,17 +50,13 @@ type FirestoreAction =
   | { firestoreAction: 'DELETE_BLOG_POST'; payload: string }
   | { firestoreAction: 'ADD_FAQS'; payload: Omit<FAQ, 'id'> }
   | { firestoreAction: 'UPDATE_FAQS'; payload: FAQ }
-  | { firestoreAction: 'DELETE_FAQS'; payload: string }
-  | { firestoreAction: 'ADD_REGISTRATION_QUESTION'; payload: Omit<RegistrationQuestion, 'id'> }
-  | { firestoreAction: 'UPDATE_REGISTRATION_QUESTION'; payload: RegistrationQuestion }
-  | { firestoreAction: 'DELETE_REGISTRATION_QUESTION'; payload: string };
+  | { firestoreAction: 'DELETE_FAQS'; payload: string };
 
 const initialState: AppState = {
   events: [],
   teamMembers: [],
   blogPosts: [],
   faqs: [],
-  registrationQuestions: [],
   isLoading: false,
   error: null
 };
@@ -139,20 +129,6 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         faqs: state.faqs.filter(f => f.id !== action.payload)
       };
-    case 'SET_REGISTRATION_QUESTIONS':
-      return { ...state, registrationQuestions: action.payload };
-    case 'ADD_REGISTRATION_QUESTION':
-      return { ...state, registrationQuestions: [...state.registrationQuestions, action.payload] };
-    case 'UPDATE_REGISTRATION_QUESTION':
-      return {
-        ...state,
-        registrationQuestions: state.registrationQuestions.map(q => q.id === action.payload.id ? action.payload : q)
-      };
-    case 'DELETE_REGISTRATION_QUESTION':
-      return {
-        ...state,
-        registrationQuestions: state.registrationQuestions.filter(q => q.id !== action.payload)
-      };
     default:
       return state;
   }
@@ -196,9 +172,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const unsubscribeFaqs = subscribeToFaqs((faqs) => {
       dispatch({ type: 'SET_FAQS', payload: faqs });
     });
-    const unsubscribeRegistrationQuestions = subscribeToRegistrationQuestions((qs) => {
-      dispatch({ type: 'SET_REGISTRATION_QUESTIONS', payload: qs });
-    });
+    
 
     // Listen for ID token changes to detect admin claim changes.
     const idTokenUnsub = onIdTokenChanged(auth, async (user) => {
@@ -224,7 +198,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       unsubscribeTeamMembers();
       unsubscribeBlogPosts();
       unsubscribeFaqs();
-      unsubscribeRegistrationQuestions();
       idTokenUnsub();
     };
   }, []);
@@ -274,15 +247,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             break;
           case 'DELETE_FAQS':
             await deleteFaqFromFirestore(action.payload);
-            break;
-          case 'ADD_REGISTRATION_QUESTION':
-            await addRegistrationQuestionToFirestore(action.payload);
-            break;
-          case 'UPDATE_REGISTRATION_QUESTION':
-            await updateRegistrationQuestionInFirestore(action.payload.id, action.payload);
-            break;
-          case 'DELETE_REGISTRATION_QUESTION':
-            await deleteRegistrationQuestionFromFirestore(action.payload);
             break;
         }
       } else {

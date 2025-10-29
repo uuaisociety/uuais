@@ -1,7 +1,6 @@
 import {
   collection,
   query,
-  orderBy,
   onSnapshot,
   getDocs,
   addDoc,
@@ -48,9 +47,11 @@ export const subscribeToRegistrationQuestions = (callback: (qs: RegistrationQues
 // Event-specific Custom Questions
 export const getEventCustomQuestions = async (eventId: string): Promise<EventCustomQuestion[]> => {
   const cqRef = collection(db, 'eventCustomQuestions');
-  const qy = query(cqRef, where('eventId', '==', eventId), orderBy('order', 'asc'));
+  const qy = query(cqRef, where('eventId', '==', eventId));
   const snapshot = await getDocs(qy);
-  return snapshot.docs.map(d => ({ id: d.id, ...d.data() } as EventCustomQuestion));
+  return snapshot.docs
+    .map(d => ({ id: d.id, ...d.data() } as EventCustomQuestion))
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
 };
 
 export const subscribeToEventCustomQuestions = (
@@ -58,9 +59,11 @@ export const subscribeToEventCustomQuestions = (
   callback: (qs: EventCustomQuestion[]) => void
 ) => {
   const cqRef = collection(db, 'eventCustomQuestions');
-  const qy = query(cqRef, where('eventId', '==', eventId), orderBy('order', 'asc'));
+  const qy = query(cqRef, where('eventId', '==', eventId));
   return onSnapshot(qy, (snapshot) => {
-    const qs = snapshot.docs.map(d => ({ id: d.id, ...d.data() } as EventCustomQuestion));
+    const qs = snapshot.docs
+      .map(d => ({ id: d.id, ...d.data() } as EventCustomQuestion))
+      .sort((a, b) => (a.order || 0) - (b.order || 0));
     callback(qs);
   });
 };
