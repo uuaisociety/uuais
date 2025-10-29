@@ -29,9 +29,14 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
   const [mode, setMode] = useState<'idle' | 'add' | 'edit'>('idle');
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  const allQuestions = questions.sort((a, b) => (a.order || 0) - (b.order || 0));
-  const initialOrder = useMemo(() => (allQuestions.length ? Math.max(...allQuestions.map(q => q.order)) + 1 : 1), [allQuestions]);
+  const sortedQuestions = useMemo(() => {
+    return [...questions].sort((a, b) => (a.order || 0) - (b.order || 0));
+  }, [questions]);
+  const initialOrder = useMemo(() => (
+    sortedQuestions.length ? Math.max(...sortedQuestions.map(q => q.order || 0)) + 1 : 1
+  ), [sortedQuestions]);
   const [form, setForm] = useState<QuestionInput>({ question: "", type: "text", options: [], required: true, order: initialOrder });
+  const [optionsText, setOptionsText] = useState<string>("");
   // when editing a default question, we prefill the form but save as a new custom question (override)
 
   if (!open) return null;
@@ -44,20 +49,26 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
       // Editing a default question becomes an add-with-prefill (override) flow
       setEditingId(null);
       setForm({ question: q.question, type: q.type, options: q.options || [], required: q.required, order: q.order });
+      setOptionsText((q.options || []).join(', '));
       setMode('add');
       return;
     }
     setEditingId(q.id || null);
     setForm({ question: q.question, type: q.type, options: q.options || [], required: q.required, order: q.order });
+    setOptionsText((q.options || []).join(', '));
     setMode('edit');
   };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const parsedOptions = (optionsText || '')
+      .split(',')
+      .map(o => o.trim())
+      .filter(o => o.length > 0);
     const payload: Omit<EventCustomQuestion, "id" | "eventId"> = {
       question: form.question,
       type: form.type,
-      options: form.type === "text" || form.type === "textarea" ? [] : (form.options || []),
+      options: (form.type === "text" || form.type === 'textarea') ? [] : parsedOptions,
       required: form.required,
       order: form.order,
     };
@@ -71,12 +82,14 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
     setMode('idle');
     setEditingId(null);
     setForm({ question: "", type: "text", options: [], required: true, order: initialOrder });
+    setOptionsText("");
   };
 
   const stopEdit = () => {
     setMode('idle');
     setEditingId(null);
     setForm({ question: "", type: "text", options: [], required: true, order: initialOrder });
+    setOptionsText("");
   }
 
   return (
@@ -92,7 +105,7 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
         </div>
 
         <div className="space-y-3 mb-6">
-          {allQuestions.map((q) => (
+          {sortedQuestions.map((q) => (
             <div key={q.id} className="border border-gray-200 dark:border-gray-700 rounded p-3 flex items-start justify-between">
               <div>
                 <div className="font-medium">{q.question}{q.id?.startsWith('default:') ? ' (default)' : ''}</div>
@@ -111,7 +124,7 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
               </div>
             </div>
           ))}
-          {allQuestions.length === 0 && (
+          {sortedQuestions.length === 0 && (
             <div className="text-sm text-gray-500 dark:text-gray-400">No questions yet.</div>
           )}
         </div>
@@ -120,7 +133,7 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold">{mode === 'edit' ? 'Edit Question' : 'Add New Question'}</h3>
             {mode === 'add' && (
-              <Button type="button" variant="outline" onClick={() => { setMode('idle'); setForm({ question: "", type: "text", options: [], required: true, order: initialOrder }); }}>Reset</Button>
+              <Button type="button" variant="outline" onClick={() => { setMode('idle'); setForm({ question: "", type: "text", options: [], required: true, order: initialOrder }); setOptionsText(""); }}>Reset</Button>
             )}
           </div>
           <div>
@@ -130,11 +143,18 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Type</label>
-              <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-black dark:text-white bg-white dark:bg-gray-700" value={form.type} onChange={(e) => setForm(prev => ({ ...prev, type: e.target.value as EventCustomQuestion['type'] }))}>
+              <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 text-black dark:text-white bg-white dark:bg-gray-700" value={form.type} onChange={(e) => {
+                const nextType = e.target.value as EventCustomQuestion['type'];
+                setForm(prev => ({ ...prev, type: nextType }));
+                // Keep existing optionsText when switching among option-based types
+                if (nextType === 'text' || nextType === 'textarea') {
+                  setOptionsText('');
+                }
+              }}>
                 <option className="text-black dark:text-white" value="text">Text</option>
-                <option className="text-black dark:text-white" value="textarea">Textarea</option>
+                <option className="text-black dark:text-white" value="textarea">Longer text</option>
                 <option className="text-black dark:text-white" value="select">Select</option>
-                <option className="text-black dark:text-white" value="checkbox">Checkbox (DOESNT WORK)</option>
+                <option className="text-black dark:text-white" value="checkbox">Checkbox</option>
                 <option className="text-black dark:text-white" value="radio">Radio</option>
               </select>
             </div>
@@ -148,14 +168,8 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
             <textarea
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 bg-white dark:bg-gray-700 text-black dark:text-white"
               rows={3}
-              value={(form.options || []).join(', ')}
-              onChange={(e) => setForm(prev => ({
-                ...prev,
-                options: e.target.value
-                  .split(',')
-                  .map(o => o.trim())
-                  .filter(o => o.length > 0)
-              }))}
+              value={optionsText}
+              onChange={(e) => setOptionsText(e.target.value)}
               disabled={form.type === 'text' || form.type === 'textarea'}
             />
           </div>
