@@ -6,7 +6,10 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { X } from "lucide-react";
 import { Event, EventCustomQuestion } from "@/types";
-import { registerForEvent } from "@/lib/firestore/registrations";
+import {
+  registerForEvent,
+  getMyRegistrations,
+} from "@/lib/firestore/registrations";
 import { subscribeToEventCustomQuestions } from "@/lib/firestore/questions";
 import { getUserProfile, type UserProfile } from "@/lib/firestore/users";
 import { auth } from "@/lib/firebase-client";
@@ -33,6 +36,9 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
   >({});
   const [uid, setUid] = useState<string | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [alreadyRegistered, setAlreadyRegistered] = useState<null | {
+    status: string;
+  }>(null);
   const { notify } = useNotify();
   const [formData, setFormData] = useState<RegistrationFormData>({
     additionalInfo: "",
@@ -48,20 +54,34 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
     };
   }, [event.id]);
 
-  // Auth + profile
+  // Auth + profile + my registrations
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(async (u) => {
       if (!u) {
         setUid(null);
         setProfile(null);
+        setAlreadyRegistered(null);
         return;
       }
       setUid(u.uid);
       const p = await getUserProfile(u.uid);
       setProfile(p);
+      try {
+        const regs = await getMyRegistrations(u.uid);
+        const mine = regs.find(
+          (r) =>
+            r.eventId === event.id &&
+            r.status !== "cancelled" &&
+            r.status !== "declined"
+        );
+        if (mine) setAlreadyRegistered({ status: mine.status });
+        else setAlreadyRegistered(null);
+      } catch {
+        setAlreadyRegistered(null);
+      }
     });
     return () => unsub();
-  }, []);
+  }, [event.id]);
 
   const handleCustomAnswerChange = (
     q: EventCustomQuestion,
@@ -183,7 +203,16 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
 
   return (
     <>
-      {canApply ? (
+      {alreadyRegistered ? (
+        <div className="text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded px-3 py-2">
+          {alreadyRegistered.status == "invited" &&
+            "You have been invited to this event."}
+          {alreadyRegistered.status === "waitlist" &&
+            "You have already joined the waitlist"}
+          {alreadyRegistered.status === "registered" &&
+            "You have already registered for this event."}
+        </div>
+      ) : canApply ? (
         <Button
           className={`${
             isWaitlistOnly
@@ -211,7 +240,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
         </div>
       )}
 
-      {isOpen && (
+      {isOpen && !alreadyRegistered && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white dark:bg-gray-800 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <Card className="border-0 shadow-none dark:bg-gray-800">
@@ -306,7 +335,10 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                             )}
                             {q.type === "checkbox" && (
                               <div className="space-y-1">
-                                {(q.options || []).map((opt) => {
+                                {(q.options && q.options.length > 0
+                                  ? q.options
+                                  : ["Yes"]
+                                ).map((opt) => {
                                   const arr =
                                     (customAnswers[q.id] as
                                       | string[]
