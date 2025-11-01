@@ -14,6 +14,13 @@ import { useApp } from "@/contexts/AppContext";
 import campus from "@/public/images/campus.png";
 import { incrementEventUniqueClick } from "@/lib/firestore/analytics";
 
+const categoryOptions = [
+  { value: "all", label: "All Categories" },
+  { value: "workshop", label: "Workshop" },
+  { value: "guest_lecture", label: "Guest Lecture" },
+  { value: "hackathon", label: "Hackathon" },
+  { value: "other", label: "Other" },
+];
 const EventDetailPage: React.FC = () => {
   const params = useParams();
   const eventId = params.id as string;
@@ -138,7 +145,7 @@ const EventDetailPage: React.FC = () => {
 
         {/* Event Description */}
         <Card className="h-full dark:bg-gray-800 pt-4">
-          <CardContent className="p-8">
+          <CardContent className="pt-4 pb-6 pl-6 pr-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               About This Event
             </h2>
@@ -158,7 +165,7 @@ const EventDetailPage: React.FC = () => {
         {/* Event Details */}
         <div className="grid md:grid-cols-2 gap-8 mt-8">
           <Card className="h-full dark:bg-gray-800 pt-4">
-            <CardContent className="p-6">
+            <CardContent className="pt-4">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                 Event Details
               </h3>
@@ -193,7 +200,9 @@ const EventDetailPage: React.FC = () => {
                       Category:
                     </span>
                     <span className="text-gray-900 dark:text-white font-medium capitalize">
-                      {event.category}
+                      {categoryOptions.find(
+                        (option) => option.value === event.category
+                      )?.label || event.category}
                     </span>
                   </div>
                 )}
@@ -203,7 +212,7 @@ const EventDetailPage: React.FC = () => {
 
           {event.registrationRequired && (
             <Card className="h-full dark:bg-gray-800 pt-4">
-              <CardContent className="p-6">
+              <CardContent className="pt-4">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                   Registration
                 </h3>
@@ -217,11 +226,6 @@ const EventDetailPage: React.FC = () => {
                     </span>
                   </div>
                 </div>
-                {isUpcoming && (
-                  <div className="w-full mt-4">
-                    <EventRegistrationDialog event={event} />
-                  </div>
-                )}
               </CardContent>
             </Card>
           )}
@@ -243,7 +247,7 @@ const EventDetailPage: React.FC = () => {
                   key={relatedEvent.id}
                   className="hover:shadow-lg transition-shadow dark:bg-gray-800 pt-4"
                 >
-                  <CardContent className="p-6">
+                  <CardContent className="pt-4">
                     {relatedEvent.image && (
                       <Image
                         src={relatedEvent.image || campus}
