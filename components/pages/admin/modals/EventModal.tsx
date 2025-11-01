@@ -31,8 +31,7 @@ interface EventModalProps {
 }
 
 const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, onClose, onSubmit }) => {
-  const notifyCtx = useNotify();
-  const { notify } = notifyCtx;
+  const { notify } = useNotify();
   const [uploading, setUploading] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
@@ -44,7 +43,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
       notify({ type: 'success', message: 'Event image uploaded' });
     } catch (e) {
       console.error('event image upload failed', e);
-      notify({ type: 'error', message: 'Event image upload failed' });
+      notify({ type: 'error', message: 'Event image upload failed: ' + e });
     } finally {
       setUploading(false);
     }
@@ -59,7 +58,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
       notify({ type: 'success', message: 'Event image deleted' });
     } catch (e) {
       console.error('event image delete failed', e);
-      notify({ type: 'error', message: 'Event image delete failed' });
+      notify({ type: 'error', message: 'Event image delete failed: ' + e });
     } finally {
       setDeleting(false);
     }
@@ -159,7 +158,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
                 initialPath={form.imagePath}
                 onFileSelected={uploadToServer}
                 onDelete={async () => deleteFromServer(form.imagePath)}
-                onError={(err) => console.error('Event FileDrop error', err)}
+                onError={(e) => notify({ type: 'error', message: 'Event image upload failed ' + e })}
                 uploading={uploading}
                 deleting={deleting}
               />

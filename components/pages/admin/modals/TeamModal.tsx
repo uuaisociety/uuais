@@ -31,8 +31,7 @@ interface TeamModalProps {
 }
 
 const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onClose, onSubmit }) => {
-  const notifyCtx = useNotify();
-  const { notify } = notifyCtx;
+  const { notify } = useNotify();
   const [uploading, setUploading] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
@@ -101,7 +100,7 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
               initialPath={form.imagePath}
               onFileSelected={uploadToServer}
               onDelete={async () => deleteFromServer(form.imagePath)}
-              onError={(err) => console.error('FileDrop error', err)}
+              onError={(e) => notify({ type: 'error', message: 'Team image upload failed: ' + e })}
               uploading={uploading}
               deleting={deleting}
             />
