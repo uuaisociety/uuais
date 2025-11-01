@@ -155,6 +155,15 @@ service cloud.firestore {
       // Admin full update
       allow update: if isAdmin();
 
+      // Allow a signed-in user to cancel their own registration by setting status -> 'cancelled'
+      // Constraints:
+      // - Only the owner (userId == auth.uid)
+      // - Only allowed field change: status
+      // - New status must be exactly 'cancelled'
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid
+        && changedOnly(['status'])
+        && request.resource.data.status == 'cancelled';
+
       // Exception: allow invited -> confirmed transition for token-based confirmation on the public confirmation page.
       // Constraints:
       // - Only fields changed: status, confirmedAt, confirmationToken
