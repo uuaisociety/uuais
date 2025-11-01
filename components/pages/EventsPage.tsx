@@ -50,11 +50,7 @@ const EventsPage: React.FC = () => {
       const matchesCategory =
         categoryFilter === "all" || event.category === categoryFilter;
       return matchesSearch && matchesCategory;
-    })
-    .sort(
-      (a, b) =>
-        new Date(a.eventStartAt).getTime() - new Date(b.eventStartAt).getTime()
-    );
+    });
 
   const pastEvents = state.events
     .filter((e) => e.published !== false)
@@ -67,11 +63,7 @@ const EventsPage: React.FC = () => {
       const matchesCategory =
         categoryFilter === "all" || e.category === categoryFilter;
       return matchesSearch && matchesCategory;
-    })
-    .sort(
-      (a, b) =>
-        new Date(a.eventStartAt).getTime() - new Date(b.eventStartAt).getTime()
-    );
+    });
 
   const getCategoryColor = (category: string) => {
     const colors = {
