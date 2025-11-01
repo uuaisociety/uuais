@@ -23,7 +23,7 @@ type Props = {
   initialPath?: string;
 };
 
-const FileDropzone: React.FC<Props> = ({ onFileSelected, onError, onDelete, accept = 'image/*', maxSizeBytes = 5_000_000, initialUrl, initialPath, uploading = false, deleting = false }) => {
+const FileDropzone: React.FC<Props> = ({ onFileSelected, onError, onDelete, accept = 'image/*', maxSizeBytes = 10_000_000, initialUrl, initialPath, uploading = false, deleting = false }) => {
   const [dragging, setDragging] = useState(false);
   const [preview, setPreview] = useState<string | undefined>(initialUrl);
 
@@ -69,7 +69,8 @@ const FileDropzone: React.FC<Props> = ({ onFileSelected, onError, onDelete, acce
       return;
     }
     if (file.size > maxSizeBytes) {
-      onError?.(new Error('File too large'));
+      const human_readable_bytes = Math.round(maxSizeBytes / 1024 / 1024);
+      onError?.(new Error('File too large, max size is ' + human_readable_bytes + ' Mb'));
       return;
     }
     // show local preview
