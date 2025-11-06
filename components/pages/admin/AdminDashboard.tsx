@@ -24,9 +24,11 @@ import { updatePageMeta } from '@/utils/seo';
 // format imported where needed in tab components
 import { BlogPost, Event, TeamMember, FAQ } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
+import { listUsers } from '@/lib/firestore/users';
 
 const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
+  const [nrUsers, setNrUsers] = useState<number>(0);
   //const { user, logout } = useAdmin();
   const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members'>('events');
   const placeholderImage = '@/public/placeholder.png';
@@ -60,13 +62,12 @@ const AdminDashboard: React.FC = () => {
     published: true,
   });
 
-  // Registration Questions UI removed as unused
-
   useEffect(() => {
     updatePageMeta('Admin Dashboard', 'Manage UU AI Society content and events');
+    (async () => {
+      setNrUsers((await listUsers()).length);
+    })();
   }, []);
-
-  // No-op; members tab loads internally
 
   const stats = [
     {
@@ -88,8 +89,8 @@ const AdminDashboard: React.FC = () => {
       color: 'bg-purple-500'
     },
     {
-      title: 'Published Posts',
-      value: state.blogPosts.filter(post => post.published).length,
+      title: 'Users',
+      value: nrUsers || 'N/A',
       icon: TrendingUp,
       color: 'bg-red-500'
     }
