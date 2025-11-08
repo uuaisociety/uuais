@@ -67,11 +67,11 @@ const HomePage: React.FC = () => {
   // ];
 
   return (
-    <div className="relative min-h-screen bg-white dark:bg-gray-900 pt-16 transition-colors duration-300">
+    <div className="relative min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
 
       <div className="relative z-10 space-y-16">
         {/* Hero Section */}
-        <section className="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white py-20 overflow-hidden">
+        <section className="relative bg-gradient-to-br pt-16 from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white py-20 overflow-hidden">
           <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
           {/* Floating Logo Background - Only in Hero Section */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -101,7 +101,7 @@ const HomePage: React.FC = () => {
             <div className="absolute top-32 right-20 w-16 h-16 bg-white/5 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-white/5 rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
           </div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="relative pt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Welcome to
               <span className="block">UU AI Society</span>

@@ -167,7 +167,7 @@ export const Header: React.FC = () => {
       </div>
     </header>
     {/* Automatic spacer under fixed header: ~24px to avoid cramped content */}
-    <div aria-hidden className="h-6" />
+    <div aria-hidden className="h-12" />
     </>
   );
 };
