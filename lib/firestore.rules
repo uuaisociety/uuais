@@ -149,8 +149,12 @@ service cloud.firestore {
       // Users can read their own registrations; admins can read all
       allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
 
-      // Only admins may delete registrations
+      // Only admins may delete registrations by default
       allow delete: if isAdmin();
+
+      // Allow a user to delete their own registration if it has already been cancelled.
+      // This supports a clean re-register flow by removing stale cancelled docs.
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid && resource.data.status == 'cancelled';
 
       // Admin full update
       allow update: if isAdmin();

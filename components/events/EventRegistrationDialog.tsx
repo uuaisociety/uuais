@@ -31,6 +31,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [canApply, SetCanApply] = useState(false);
   const [customQuestions, setCustomQuestions] = useState<EventCustomQuestion[]>(
     []
   );
@@ -88,6 +89,14 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
     });
     return () => unsub();
   }, [event.id]);
+
+  useEffect(() => {
+    if (!uid || !profile?.isMember) {
+      SetCanApply(false);
+      return;
+    }
+    SetCanApply(true);
+  }, [uid, profile]);
 
   const handleCustomAnswerChange = (
     q: EventCustomQuestion,
@@ -180,6 +189,11 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
           ? "You have been added to the waitlist. We will contact you if a spot opens."
           : "You are registered for the event.",
       });
+      if(isWaitlistOnly){
+        setAlreadyRegistered({ status: "waitlist", regId: "" });
+      }else{
+        setAlreadyRegistered({ status: "registered", regId: "" });
+      }
     } catch (error) {
       console.error("Registration failed:", error);
       const msg = error instanceof Error ? error.message : String(error);
@@ -205,7 +219,6 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
       ? new Date().getTime() > new Date(event.registrationClosesAt).getTime()
       : false;
   const isWaitlistOnly = isCapacityFull || isAfterLastRegistration;
-  const canApply = Boolean(uid && profile?.isMember);
 
   return (
     <>

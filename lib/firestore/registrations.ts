@@ -12,6 +12,7 @@ import {
   increment,
   DocumentData,
   Timestamp,
+  deleteDoc,
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 import { Event, EventRegistration } from '@/types';
@@ -110,11 +111,22 @@ export const registerForEvent = async (
 ): Promise<string> => {
   const regRef = collection(db, 'registrations');
 
-
   {
     const qDup = query(regRef, where('eventId', '==', eventId), where('userId', '==', payload.userId));
     const sDup = await getDocs(qDup);
-    if (!sDup.empty) throw new Error('You have already registered for this event.');
+    let hasActive = false;
+    for (const d of sDup.docs) {
+      const data = d.data() as DocumentData;
+      const status = String(data?.status || 'registered');
+      if (status === 'cancelled') {
+        try {
+          await deleteDoc(doc(db, 'registrations', d.id));
+        } catch {}
+      } else {
+        hasActive = true;
+      }
+    }
+    if (hasActive) throw new Error('You have already registered for this event.');
   }
 
   const eventRef = doc(db, 'events', eventId);
@@ -290,6 +302,40 @@ export async function declineRegistration(regId: string): Promise<void> {
 
 export async function cancelRegistration(regId: string): Promise<void> {
   await updateDoc(doc(db, 'registrations', regId), { status: 'cancelled' } as DocumentData);
+}
+
+export async function getMyRegistrationForEvent(userId: string, eventId: string): Promise<EventRegistration | null> {
+  const regRef = collection(db, 'registrations');
+  const qy = query(regRef, where('userId', '==', userId), where('eventId', '==', eventId));
+  const snap = await getDocs(qy);
+  if (snap.empty) return null;
+  const d = snap.docs[0];
+  const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
+  const ts = data?.registeredAt;
+  const registeredAt = ts instanceof Timestamp ? ts.toDate().toISOString() : '';
+  const registrationData = (data?.registrationData ?? {}) as EventRegistration['registrationData'];
+  return {
+    id: d.id,
+    eventId: data?.eventId ?? '',
+    userId: data?.userId ?? '',
+    registrationData,
+    registeredAt,
+    status: (data?.status ?? 'registered') as EventRegistration['status'],
+    userName: (data?.userName ?? null) as EventRegistration['userName'],
+    userEmail: (data?.userEmail ?? null) as EventRegistration['userEmail'],
+    selectedAt: (data?.selectedAt ?? null) as EventRegistration['selectedAt'],
+    confirmedAt: (data?.confirmedAt ?? null) as EventRegistration['confirmedAt'],
+    confirmationToken: (data?.confirmationToken ?? null) as EventRegistration['confirmationToken'],
+  } as EventRegistration;
+}
+
+export async function cancelMyRegistrationForEvent(userId: string, eventId: string): Promise<void> {
+  const regRef = collection(db, 'registrations');
+  const qy = query(regRef, where('userId', '==', userId), where('eventId', '==', eventId));
+  const snap = await getDocs(qy);
+  if (snap.empty) return;
+  const d = snap.docs.find((x) => (x.data() as DocumentData)?.status !== 'cancelled') || snap.docs[0];
+  await updateDoc(doc(db, 'registrations', d.id), { status: 'cancelled' } as DocumentData);
 }
 
 export async function confirmRegistration(regId: string, token: string): Promise<{ ok: boolean; message: string }> {
