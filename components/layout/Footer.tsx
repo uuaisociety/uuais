@@ -42,14 +42,14 @@ export const Footer: React.FC = () => {
                 <div className="pl-2 pb-2 rounded-lg">
                   <div className="flex items-center space-x-2">
                     <Image
-                        src="/images/logo.png"
+                        src="/images/logo-highdef.png"
                         alt="UU AI Society Logo"
-                        width={40}
+                        width={240}
                         height={40}
-                        className="h-12 w-auto"
+                        className="mb-1 h-12 w-auto"
                         priority
                     />
-                    <span className="ml-2 font-bold text-xl text-gray-100 dark:text-white">UU AI Society</span>
+                    <span className="font-bold text-xl text-gray-100 dark:text-white">UU AI Society</span>
                   </div>
                 </div>
               </div>
