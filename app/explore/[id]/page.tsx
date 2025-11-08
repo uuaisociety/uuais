@@ -1,0 +1,26 @@
+import { fetchCourseById, fetchCourses } from "@/lib/courses";
+import CourseDetailClient from "@/components/courses/CourseDetailClient";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { ArrowLeft } from "lucide-react";
+
+export default async function ExploreDetailPage({ params }: { params: { id: string } }) {
+  const [course, all] = await Promise.all([
+    fetchCourseById(params.id),
+    fetchCourses(),
+  ]);
+  if (!course) return notFound();
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Link href="/explore">
+        <Button variant="outline" className="mb-8" icon={ArrowLeft}>
+          Back to Courses
+        </Button>
+      </Link>
+        <CourseDetailClient course={course} all={all} hrefBase="/explore" />
+      </div>
+    </div>
+  );
+}
