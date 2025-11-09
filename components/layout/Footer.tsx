@@ -142,16 +142,16 @@ export const Footer: React.FC = () => {
           <h3 className="text-center text-lg font-semibold mb-6 text-gray-100">Our partners</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  gap-6 items-center">
             {/* Fill out grid */}
-            {Array.from({ length: 2 }).map((_, idx) => (
-              <div key={idx} className="flex items-center justify-center  rounded-lg border border-gray-800 dark:border-gray-900 p-4 h-24">
+            {Array.from({ length: 1 }).map((_, idx) => (
+              <div key={idx} className="flex items-center justify-center rounded-lg border border-gray-800 dark:border-gray-900 p-4 h-24">
                 <div className="w-full h-full bg-gray-800 dark:bg-gray-900 rounded-lg"></div>
               </div>
             ))}
             {[
               { src: '/images/partners/Uppsala_kommun_Logo_Bl_Yellow_RGB.png', alt: 'Uppsala Kommun' },
-              // { src: '/images/partners/UU_innovation.png', alt: 'UU Innovation' },
+              { src: '/images/partners/thalamind_logo.png', alt: 'Thalamind' },
               { src: '/images/partners/vantel_logo.png', alt: 'Vantel logo' },
-              // { src: '/images/partners/partner4.png', alt: 'Partner 4' },
+              { src: '/images/partners/voi_logo.png', alt: 'Voi logo' },
               // { src: '/images/partners/partner5.png', alt: 'Partner 5' },
               // { src: '/images/partners/partner6.png', alt: 'Partner 6' },
             ].map((p, idx) => (
@@ -159,7 +159,7 @@ export const Footer: React.FC = () => {
                 <Image
                   src={p.src}
                   alt={p.alt}
-                  width={100}
+                  width={400}
                   height={80}
                   className="max-h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
                 />
