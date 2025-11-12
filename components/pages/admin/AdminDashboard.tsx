@@ -87,10 +87,16 @@ const AdminDashboard: React.FC = () => {
       color: 'bg-purple-500'
     },
     {
-      title: 'Users',
+      title: 'Users registered',
       value: nrUsers || 'N/A',
       icon: TrendingUp,
       color: 'bg-red-500'
+    },
+    {
+      title: 'Job Postings',
+      value: state.jobs.length,
+      icon: BriefcaseBusiness,
+      color: 'bg-yellow-500'
     }
   ];
 
@@ -189,11 +195,11 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8 items-center">
           {stats.map((stat, index) => (
-            <Card key={index}>
-              <CardContent className="p-6">
-                <div className="flex items-center">
+            <Card key={index} className="h-full">
+              <CardContent className="pl-6 pr-6 pt-6 h-full">
+                <div className="flex items-center h-full">
                   <div className={`p-3 rounded-lg ${stat.color} text-white mr-4`}>
                     <stat.icon className="h-6 w-6" />
                   </div>
