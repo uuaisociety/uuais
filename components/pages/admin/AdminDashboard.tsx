@@ -23,10 +23,9 @@ import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 //import { useAdmin } from '@/hooks/useAdmin';
 // format imported where needed in tab components
-import { BlogPost, Event, TeamMember, FAQ, Job } from '@/types';
+import { BlogPost, Event, TeamMember, FAQ } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
-import JobModal from '@/components/pages/admin/modals/JobModal';
 import { listUsers } from '@/lib/firestore/users';
 
 const AdminDashboard: React.FC = () => {
@@ -39,118 +38,8 @@ const AdminDashboard: React.FC = () => {
   // Modal states
   const [showBlogModal, setShowBlogModal] = useState(false);
   const [showFaqModal, setShowFaqModal] = useState(false);
-  const [showEventQModal, setShowEventQModal] = useState(false);
-  const [showJobModal, setShowJobModal] = useState(false);
-  const [activeEventForQuestions, setActiveEventForQuestions] = useState<Event | null>(null);
-  const [eventQuestions, setEventQuestions] = useState<EventCustomQuestion[]>([]);
-  const [showEventRegsModal, setShowEventRegsModal] = useState(false);
-  const [activeEventForRegs, setActiveEventForRegs] = useState<Event | null>(null);
-  const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | Job | null>(null);
+  const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | null>(null);
   const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
-
-  // Members tab handled in component
-
-  // Form states
-  const [eventForm, setEventForm] = useState<EventFormState>({
-    title: '',
-    description: '',
-    date: '',
-    time: '',
-    location: '',
-    image: '',
-    category: 'workshop',
-    registrationRequired: false,
-    maxCapacity: undefined,
-    startAt: '',
-    lastRegistrationAt: ''
-  });
-
-  const [jobForm, setJobForm] = useState<Omit<Job, 'id' | 'createdAt'>>({
-    type: 'startup',
-    title: '',
-    company: '',
-    location: '',
-    description: '',
-    applyUrl: '',
-    applyEmail: '',
-    tags: [],
-    published: true,
-  });
-
-  // Event-specific question form handled inside EventQuestionsModal
-
-  // Subscribe to event-specific questions when modal opens
-  useEffect(() => {
-    if (!showEventQModal || !activeEventForQuestions) return;
-    const unsub = subscribeToEventCustomQuestions(activeEventForQuestions.id, (qs) => setEventQuestions(qs));
-    return () => {
-      if (typeof unsub === 'function') unsub();
-    };
-  }, [showEventQModal, activeEventForQuestions]);
-
-  // Jobs: CRUD handlers
-  const handleAddJob = async () => {
-    const payload = { ...jobForm } as Omit<Job, 'id' | 'createdAt'>;
-    // normalize empties
-    if (!payload.applyUrl) delete (payload as unknown as Record<string, unknown>).applyUrl;
-    if (!payload.applyEmail) delete (payload as unknown as Record<string, unknown>).applyEmail;
-    if (!payload.location) delete (payload as unknown as Record<string, unknown>).location;
-    try {
-      await dispatch({ firestoreAction: 'ADD_JOB', payload });
-      setShowJobModal(false);
-      resetForms();
-    } catch (e) { console.error(e); }
-  };
-
-  const handleEditJob = (job: Job) => {
-    setEditingItem(job);
-    setJobForm({
-      type: job.type,
-      title: job.title,
-      company: job.company,
-      location: job.location || '',
-      description: job.description,
-      applyUrl: job.applyUrl || '',
-      applyEmail: job.applyEmail || '',
-      tags: job.tags || [],
-      published: !!job.published,
-    });
-    setShowJobModal(true);
-  };
-
-  const handleUpdateJob = async () => {
-    if (editingItem && (editingItem as Job).id) {
-      const editingJob = editingItem as Job;
-      const updated: Job = {
-        ...editingJob,
-        ...jobForm,
-        location: jobForm.location || undefined,
-        applyUrl: jobForm.applyUrl || undefined,
-        applyEmail: jobForm.applyEmail || undefined,
-      };
-      await dispatch({ firestoreAction: 'UPDATE_JOB', payload: updated });
-      setShowJobModal(false);
-      resetForms();
-    }
-  };
-
-  const handleDeleteJob = (jobId: string) => {
-    if (window.confirm('Are you sure you want to delete this job?')) {
-      dispatch({ firestoreAction: 'DELETE_JOB', payload: jobId });
-    }
-  };
-
-  const [teamForm, setTeamForm] = useState({
-    name: '',
-    position: '',
-    bio: '',
-    image: '',
-    linkedin: '',
-    github: '',
-    personalEmail: '',
-    companyEmail: '',
-    website: ''
-  });
 
   const [blogForm, setBlogForm] = useState({
     title: '',
@@ -215,7 +104,6 @@ const AdminDashboard: React.FC = () => {
       tags: [],
       published: false
     });
-    setJobForm({ type: 'startup', title: '', company: '', location: '', description: '', applyUrl: '', applyEmail: '', tags: [], published: true });
     setEditingItem(null);
   };
 
@@ -251,8 +139,6 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  // Registration Questions handlers removed as unused
-
 
   const handleEditBlogPost = (post: BlogPost) => {
     setEditingItem(post);
@@ -267,8 +153,6 @@ const AdminDashboard: React.FC = () => {
     });
     setShowBlogModal(true);
   };
-
-  // Events are managed within the EventsTab component (add/edit/delete/publish live there now).
 
   const handleUpdateBlogPost = () => {
     if (editingItem) {
@@ -286,17 +170,12 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  // Tag input management moved into BlogModal component
-
   const toggleBlogPostVisibility = (post: BlogPost) => {
     dispatch({
       type: 'UPDATE_BLOG_POST',
       payload: { ...post, published: !post.published }
     });
   };
-
-
-
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 pt-24">
@@ -367,28 +246,7 @@ const AdminDashboard: React.FC = () => {
             />
           )}
           {activeTab === 'jobs' && (
-            <JobsTab
-              jobs={state.jobs}
-              onAddClick={() => setShowJobModal(true)}
-              onEdit={(job: Job) => handleEditJob(job)}
-              onDelete={(id: string) => handleDeleteJob(id)}
-              onTogglePublish={(job: Job) => {
-                const updated = { ...job, published: !job.published } as Job;
-                dispatch({ firestoreAction: 'UPDATE_JOB', payload: updated });
-              }}
-            />
-          )}
-          {activeTab === 'jobs' && (
-            <JobsTab
-              jobs={state.jobs}
-              onAddClick={() => setShowJobModal(true)}
-              onEdit={(job: Job) => handleEditJob(job)}
-              onDelete={(id: string) => handleDeleteJob(id)}
-              onTogglePublish={(job: Job) => {
-                const updated = { ...job, published: !job.published } as Job;
-                dispatch({ firestoreAction: 'UPDATE_JOB', payload: updated });
-              }}
-            />
+            <JobsTab />
           )}
           {activeTab === 'team' && (
             <TeamTab
@@ -451,22 +309,6 @@ const AdminDashboard: React.FC = () => {
             }}
           />
 
-          {/* Job Modal */}
-          <JobModal
-            open={showJobModal}
-            editing={!!editingItem && (editingItem as Job).id !== undefined}
-            form={jobForm}
-            setForm={setJobForm}
-            onClose={() => { setShowJobModal(false); resetForms(); }}
-            onSubmit={() => {
-              if (editingItem && (editingItem as Job).id) {
-                handleUpdateJob();
-              } else {
-                handleAddJob();
-              }
-            }}
-          />
-
           <FAQModal
             open={showFaqModal}
             onClose={() => { setShowFaqModal(false); setEditingFaq(null); }}
@@ -476,8 +318,6 @@ const AdminDashboard: React.FC = () => {
             onAdd={handleAddFaq}
             onUpdate={handleUpdateFaq}
           />
-
-          {/* Registration questions are currently unused; modal intentionally not rendered. */}
 
         </div>
       </div>

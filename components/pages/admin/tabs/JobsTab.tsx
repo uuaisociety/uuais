@@ -1,26 +1,102 @@
 "use client";
 
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import Tag from "@/components/ui/Tag";
 import { Job } from "@/types";
 import { Edit3, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
+import { useApp } from "@/contexts/AppContext";
+import JobModal, { JobFormState } from "@/components/pages/admin/modals/JobModal";
 
-export interface JobsTabProps {
-  jobs: Job[];
-  onAddClick: () => void;
-  onEdit: (job: Job) => void;
-  onDelete: (id: string) => void;
-  onTogglePublish: (job: Job) => void;
-}
+const JobsTab: React.FC = () => {
+  const { state, dispatch } = useApp();
 
-const JobsTab: React.FC<JobsTabProps> = ({ jobs, onAddClick, onEdit, onDelete, onTogglePublish }) => {
+  const emptyForm: JobFormState = useMemo(
+    () => ({
+      type: "startup",
+      title: "",
+      company: "",
+      location: "",
+      description: "",
+      applyUrl: "",
+      applyEmail: "",
+      tags: [],
+      published: true,
+    }),
+    []
+  );
+
+  const [open, setOpen] = useState(false);
+  const [editingJob, setEditingJob] = useState<Job | null>(null);
+  const [form, setForm] = useState<JobFormState>(emptyForm);
+
+  const handleOpenNew = () => {
+    setEditingJob(null);
+    setForm(emptyForm);
+    setOpen(true);
+  };
+
+  const handleEdit = (job: Job) => {
+    setEditingJob(job);
+    const rest: Partial<Job> = { ...job };
+    delete (rest as { id?: string }).id;
+    delete (rest as { createdAt?: unknown }).createdAt;
+    setForm({
+      ...(rest as JobFormState),
+      location: rest.location || "",
+      applyUrl: rest.applyUrl || "",
+      applyEmail: rest.applyEmail || "",
+      tags: Array.isArray(rest.tags) ? rest.tags : [],
+    });
+    setOpen(true);
+  };
+
+  const handleDelete = (id: string) => {
+    if (window.confirm("Are you sure you want to delete this job?")) {
+      dispatch({ firestoreAction: "DELETE_JOB", payload: id });
+    }
+  };
+
+  const handleTogglePublish = (job: Job) => {
+    const updated = { ...job, published: !job.published } as Job;
+    dispatch({ firestoreAction: "UPDATE_JOB", payload: updated });
+  };
+
+  const normalizeForm = (f: JobFormState): JobFormState => {
+    const payload = { ...f } as JobFormState;
+    if (!payload.applyUrl) delete (payload as unknown as Record<string, unknown>).applyUrl;
+    if (!payload.applyEmail) delete (payload as unknown as Record<string, unknown>).applyEmail;
+    if (!payload.location) delete (payload as unknown as Record<string, unknown>).location;
+    if (!payload.tags || payload.tags.length === 0)
+      payload.tags = [];
+    return payload;
+  };
+
+  const handleSubmit = async () => {
+    const payload = normalizeForm(form);
+    if (editingJob && editingJob.id) {
+      const updated: Job = {
+        ...editingJob,
+        ...payload,
+        location: payload.location || undefined,
+        applyUrl: payload.applyUrl || undefined,
+        applyEmail: payload.applyEmail || undefined,
+      } as Job;
+      await dispatch({ firestoreAction: "UPDATE_JOB", payload: updated });
+    } else {
+      await dispatch({ firestoreAction: "ADD_JOB", payload });
+    }
+    setOpen(false);
+  };
+
+  const jobs = state.jobs;
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Jobs Management</h2>
-        <Button icon={Plus} onClick={onAddClick}>New Job</Button>
+        <Button icon={Plus} onClick={handleOpenNew}>New Job</Button>
       </div>
 
       <div className="grid gap-4">
@@ -48,13 +124,13 @@ const JobsTab: React.FC<JobsTabProps> = ({ jobs, onAddClick, onEdit, onDelete, o
                   )}
                 </div>
                 <div className="flex space-x-2 ml-4">
-                  <Button size="sm" variant="outline" icon={job.published ? EyeOff : Eye} onClick={() => onTogglePublish(job)}>
+                  <Button size="sm" variant="outline" icon={job.published ? EyeOff : Eye} onClick={() => handleTogglePublish(job)}>
                     {job.published ? 'Unpublish' : 'Publish'}
                   </Button>
-                  <Button size="sm" variant="outline" icon={Edit3} onClick={() => onEdit(job)}>
+                  <Button size="sm" variant="outline" icon={Edit3} onClick={() => handleEdit(job)}>
                     Edit
                   </Button>
-                  <Button size="sm" variant="outline" icon={Trash2} onClick={() => onDelete(job.id)} className="text-red-600 hover:text-red-700">
+                  <Button size="sm" variant="outline" icon={Trash2} onClick={() => handleDelete(job.id)} className="text-red-600 hover:text-red-700">
                     Delete
                   </Button>
                 </div>
@@ -66,6 +142,15 @@ const JobsTab: React.FC<JobsTabProps> = ({ jobs, onAddClick, onEdit, onDelete, o
           <div className="text-gray-600 dark:text-gray-300">No jobs yet. Click &quot;New Job&quot; to add one.</div>
         )}
       </div>
+
+      <JobModal
+        open={open}
+        editing={!!editingJob}
+        form={form}
+        setForm={setForm}
+        onClose={() => setOpen(false)}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 };
