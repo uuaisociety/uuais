@@ -1,6 +1,7 @@
 import {
   collection,
   query,
+  where,
   orderBy,
   getDocs,
   addDoc,
@@ -12,69 +13,136 @@ import {
   serverTimestamp,
   DocumentData,
   onSnapshot,
-} from 'firebase/firestore';
-import { db } from '@/lib/firebase-client';
-import { Event } from '@/types';
-import { stripUndefined } from './utils';
+} from "firebase/firestore";
+import { db } from "@/lib/firebase-client";
+import { Event } from "@/types";
+import { stripUndefined } from "./utils";
 
 export const getEvents = async (): Promise<Event[]> => {
-  const eventsRef = collection(db, 'events');
-  const qy = query(eventsRef, orderBy('startAt', 'asc'));
+  const eventsRef = collection(db, "events");
+  // Only return published events for public (unauthenticated) readers to
+  // respect Firestore rules (read allowed when published == true or admin).
+  const qy = query(
+    eventsRef,
+    where("published", "==", true),
+    orderBy("eventStartAt", "desc")
+  );
   const snapshot = await getDocs(qy);
-  return snapshot.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() } as Event));
+  return snapshot.docs.map((docSnap) => {
+    const raw = docSnap.data() as Event;
+    const normalized: Event = {
+      id: docSnap.id,
+      title: raw.title,
+      description: raw.description,
+      location: raw.location,
+      image: raw.image,
+      category: raw.category,
+      status: raw.status,
+      registrationRequired: !!raw.registrationRequired,
+      currentRegistrations: raw.currentRegistrations,
+      maxCapacity: raw.maxCapacity,
+      published: raw.published,
+      eventStartAt: raw.eventStartAt,
+      registrationClosesAt: raw.registrationClosesAt,
+      publishAt: raw.publishAt,
+    };
+    return normalized;
+  });
 };
 
 export const getAllEvents = async (): Promise<Event[]> => getEvents();
 
 export const getEventById = async (id: string): Promise<Event | null> => {
-  const eventRef = doc(db, 'events', id);
+  const eventRef = doc(db, "events", id);
   const eventSnap = await getDoc(eventRef);
-  return eventSnap.exists() ? ({ id: eventSnap.id, ...eventSnap.data() } as Event) : null;
+  if (!eventSnap.exists()) return null;
+  const raw = eventSnap.data() as Event;
+  
+  const normalized: Event = {
+    id: eventSnap.id,
+    title: raw.title,
+    description: raw.description,
+    location: raw.location,
+    image: raw.image,
+    category: raw.category,
+    status: raw.status,
+    registrationRequired: !!raw.registrationRequired,
+    currentRegistrations: raw.currentRegistrations,
+    maxCapacity: raw.maxCapacity,
+    published: raw.published,
+    eventStartAt: raw.eventStartAt,
+    registrationClosesAt: raw.registrationClosesAt,
+    publishAt: raw.publishAt,
+  };
+  return normalized;
 };
 
-export const addEvent = async (event: Omit<Event, 'id'>): Promise<string> => {
-  const eventsRef = collection(db, 'events');
+export const addEvent = async (event: Omit<Event, "id">): Promise<string> => {
+  const eventsRef = collection(db, "events");
   const safe = stripUndefined(event) as DocumentData;
   const docRef = await addDoc(eventsRef, safe);
   try {
-    const analyticsRef = doc(db, 'analyticsEvents', docRef.id);
-    await setDoc(analyticsRef, { clicks: 0, updatedAt: serverTimestamp() }, { merge: true });
+    const analyticsRef = doc(db, "analyticsEvents", docRef.id);
+    await setDoc(analyticsRef, { clicks: 1, updatedAt: serverTimestamp() });
   } catch (error) {
-    console.warn('Failed to initialise analyticsEvents doc', error);
+    console.warn("Failed to initialise analyticsEvents doc", error);
   }
   return docRef.id;
 };
 
-export const updateEvent = async (id: string, event: Partial<Event>): Promise<void> => {
-  const eventRef = doc(db, 'events', id);
-  const patch: Record<string, unknown> = { ...(event as Record<string, unknown>) };
+export const updateEvent = async (
+  id: string,
+  event: Partial<Event>
+): Promise<void> => {
+  const eventRef = doc(db, "events", id);
+  const patch: Record<string, unknown> = {
+    ...(event as Record<string, unknown>),
+  };
   delete patch.id;
   const safePatch = stripUndefined(patch) as DocumentData;
   await setDoc(eventRef, safePatch, { merge: true });
 };
 
-export const patchEvent = async (id: string, patch: Partial<Event>, removeFields?: string[]): Promise<void> => {
-  const eventRef = doc(db, 'events', id);
+export const patchEvent = async (
+  id: string,
+  patch: Partial<Event>,
+  removeFields?: string[]
+): Promise<void> => {
+  const eventRef = doc(db, "events", id);
   const safe = stripUndefined(patch) as DocumentData;
   const updates: DocumentData = { ...safe };
   if (Array.isArray(removeFields)) {
     for (const field of removeFields) {
-      updates[field] = (await import('firebase/firestore')).deleteField();
+      updates[field] = (await import("firebase/firestore")).deleteField();
     }
   }
   await updateDoc(eventRef, updates);
 };
 
 export const deleteEvent = async (id: string): Promise<void> => {
-  const eventRef = doc(db, 'events', id);
+  const eventRef = doc(db, "events", id);
   await deleteDoc(eventRef);
 };
 
-export const subscribeToEvents = (callback: (events: Event[]) => void) => {
-  const eventsRef = collection(db, 'events');
-  const qy = query(eventsRef, orderBy('startAt', 'asc'));
+export const subscribeToEvents = (
+  callback: (events: Event[]) => void,
+  options?: { includeUnpublished?: boolean }
+) => {
+  const eventsRef = collection(db, "events");
+
+  // If includeUnpublished is true (admin), query without the published filter.
+  // Otherwise, restrict to published == true so public listeners don't request
+  // forbidden documents and trigger permission-denied errors.
+  const qy = options && options.includeUnpublished
+    ? query(eventsRef, orderBy("eventStartAt", "desc"))
+    : query(eventsRef, where("published", "==", true), orderBy("eventStartAt", "desc"));
+
   return onSnapshot(qy, (snapshot) => {
-    const events = snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() } as Event));
+    const events = snapshot.docs.map((docSnap) => ({
+      // @ts-expect-error id is not returned from docSnap.data()
+      id: docSnap.id,
+      ...(docSnap.data() as Event),
+    }));
     callback(events);
   });
 };

@@ -18,31 +18,25 @@ import BlogTab from '@/components/pages/admin/tabs/BlogTab';
 import FAQTab from '@/components/pages/admin/tabs/FAQTab';
 import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import FAQModal from '@/components/pages/admin/modals/FAQModal';
-import EventQuestionsModal from '@/components/pages/admin/modals/EventQuestionsModal';
-import EventModal, { type EventFormState } from '@/components/pages/admin/modals/EventModal';
-import TeamModal from '@/components/pages/admin/modals/TeamModal';
 import BlogModal from '@/components/pages/admin/modals/BlogModal';
-import EventRegistrationsModal from '@/components/pages/admin/modals/EventRegistrationsModal';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 //import { useAdmin } from '@/hooks/useAdmin';
 // format imported where needed in tab components
-import { BlogPost, Event, TeamMember, FAQ, EventCustomQuestion, Job } from '@/types';
-import { subscribeToEventCustomQuestions, addEventCustomQuestion, updateEventCustomQuestion, deleteEventCustomQuestion } from '@/lib/firestore/questions';
-import { addEvent, patchEvent } from '@/lib/firestore/events';
+import { BlogPost, Event, TeamMember, FAQ, Job } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
 import JobModal from '@/components/pages/admin/modals/JobModal';
+import { listUsers } from '@/lib/firestore/users';
 
 const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
+  const [nrUsers, setNrUsers] = useState<number>(0);
   //const { user, logout } = useAdmin();
   const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members' | 'jobs'>('events');
   const placeholderImage = '@/public/placeholder.png';
 
   // Modal states
-  const [showEventModal, setShowEventModal] = useState(false);
-  const [showTeamModal, setShowTeamModal] = useState(false);
   const [showBlogModal, setShowBlogModal] = useState(false);
   const [showFaqModal, setShowFaqModal] = useState(false);
   const [showEventQModal, setShowEventQModal] = useState(false);
@@ -177,13 +171,12 @@ const AdminDashboard: React.FC = () => {
     published: true,
   });
 
-  // Registration Questions UI removed as unused
-
   useEffect(() => {
     updatePageMeta('Admin Dashboard', 'Manage UU AI Society content and events');
+    (async () => {
+      setNrUsers((await listUsers()).length);
+    })();
   }, []);
-
-  // No-op; members tab loads internally
 
   const stats = [
     {
@@ -205,38 +198,14 @@ const AdminDashboard: React.FC = () => {
       color: 'bg-purple-500'
     },
     {
-      title: 'Published Posts',
-      value: state.blogPosts.filter(post => post.published).length,
+      title: 'Users',
+      value: nrUsers || 'N/A',
       icon: TrendingUp,
       color: 'bg-red-500'
     }
   ];
 
   const resetForms = () => {
-    setEventForm({
-      title: '',
-      description: '',
-      date: '',
-      time: '',
-      location: '',
-      image: '',
-      category: 'workshop',
-      registrationRequired: false,
-      maxCapacity: undefined,
-      startAt: '',
-      lastRegistrationAt: ''
-    });
-    setTeamForm({
-      name: '',
-      position: '',
-      bio: '',
-      image: '',
-      linkedin: '',
-      github: '',
-      personalEmail: '',
-      companyEmail: '',
-      website: ''
-    });
     setBlogForm({
       title: '',
       excerpt: '',
@@ -250,48 +219,6 @@ const AdminDashboard: React.FC = () => {
     setEditingItem(null);
   };
 
-  const handleAddEvent = async () => {
-    // Persist to Firestore first to get an ID
-    const payload: Omit<Event, 'id'> = {
-      title: eventForm.title,
-      description: eventForm.description,
-      date: eventForm.date,
-      time: eventForm.time,
-      location: eventForm.location,
-      image: eventForm.image,
-      category: eventForm.category,
-      status: 'upcoming',
-      registrationRequired: eventForm.registrationRequired,
-      currentRegistrations: 0,
-      published: true,
-      startAt: eventForm.startAt || undefined,
-      lastRegistrationAt: eventForm.lastRegistrationAt || undefined,
-      ...(eventForm.maxCapacity !== undefined ? { maxCapacity: eventForm.maxCapacity } : {}),
-    };
-    const newId = await addEvent(payload);
-    // Add default dietary restrictions custom question
-    try {
-      await addEventCustomQuestion({
-        eventId: newId,
-        question: 'Dietary restrictions / Allergies',
-        type: 'text',
-        required: false,
-        order: 100,
-      });
-    } catch {}
-    setShowEventModal(false);
-    resetForms();
-  };
-
-  const handleAddTeamMember = () => {
-    const newMember = {
-      ...teamForm,
-      image: teamForm.image || placeholderImage,
-    };
-    dispatch({ firestoreAction: 'ADD_TEAM_MEMBER', payload: newMember });
-    setShowTeamModal(false);
-    resetForms();
-  };
 
   const handleAddBlogPost = () => {
     const newPost = {
@@ -326,39 +253,6 @@ const AdminDashboard: React.FC = () => {
 
   // Registration Questions handlers removed as unused
 
-  const handleEditEvent = (event: Event) => {
-    setEditingItem(event);
-    setEventForm({
-      title: event.title,
-      description: event.description,
-      date: event.date,
-      time: event.time,
-      location: event.location,
-      image: event.image,
-      category: event.category,
-      registrationRequired: event.registrationRequired || false,
-      maxCapacity: event.maxCapacity,
-      startAt: event.startAt || '',
-      lastRegistrationAt: event.lastRegistrationAt || ''
-    });
-    setShowEventModal(true);
-  };
-
-  const handleEditTeamMember = (member: TeamMember) => {
-    setEditingItem(member);
-    setTeamForm({
-      name: member.name,
-      position: member.position,
-      bio: member.bio,
-      image: member.image,
-      linkedin: member.linkedin || '',
-      github: member.github || '',
-      personalEmail: member.personalEmail || member.email || '',
-      companyEmail: member.companyEmail || '',
-      website: member.website || ''
-    });
-    setShowTeamModal(true);
-  };
 
   const handleEditBlogPost = (post: BlogPost) => {
     setEditingItem(post);
@@ -374,69 +268,7 @@ const AdminDashboard: React.FC = () => {
     setShowBlogModal(true);
   };
 
-  const handleUpdateEvent = () => {
-    if (editingItem && (editingItem as Event).id) {
-      const editingEvent = editingItem as Event;
-      // Build a minimal patch object: only include fields that changed or are explicitly set.
-      const patch: Partial<Event> = {};
-      const f = eventForm;
-
-      if (f.title !== editingEvent.title) patch.title = f.title;
-      if (f.description !== editingEvent.description) patch.description = f.description;
-      if (f.date !== editingEvent.date) patch.date = f.date;
-      if (f.time !== editingEvent.time) patch.time = f.time;
-      if (f.location !== editingEvent.location) patch.location = f.location;
-      if (f.image !== editingEvent.image) patch.image = f.image;
-      if (f.category !== editingEvent.category) patch.category = f.category;
-      if (f.registrationRequired !== editingEvent.registrationRequired) patch.registrationRequired = f.registrationRequired;
-
-      // maxCapacity: only include if user provided a value (number) — leave unchanged if empty/undefined
-      if (typeof f.maxCapacity === 'number') patch.maxCapacity = f.maxCapacity;
-
-      // startAt / lastRegistrationAt: only include when non-empty strings (user explicitly set)
-      if (f.startAt && f.startAt !== (editingEvent.startAt ?? '')) patch.startAt = f.startAt;
-      if (f.lastRegistrationAt && f.lastRegistrationAt !== (editingEvent.lastRegistrationAt ?? '')) patch.lastRegistrationAt = f.lastRegistrationAt;
-
-      // If nothing changed, skip the update
-      if (Object.keys(patch).length === 0) {
-        setShowEventModal(false);
-        resetForms();
-        return;
-      }
-
-      // If user cleared maxCapacity (wants registration but no limit) or turned off registration,
-      // we should delete the `maxCapacity` field in Firestore. Use patchEvent for deletions.
-      const needsDeleteMax = (editingEvent.maxCapacity !== undefined) && (
-        (typeof f.maxCapacity !== 'number' && f.registrationRequired === true) || // cleared input but registration still required
-        f.registrationRequired === false // registration removed => remove capacity
-      );
-
-      if (needsDeleteMax) {
-        // remove field in Firestore
-        (async () => {
-          try {
-            await patchEvent(editingEvent.id, patch, ['maxCapacity']);
-          } catch (e) {
-            console.error('patchEvent failed', e);
-          }
-        })();
-      } else {
-        // Dispatch only the changed fields plus id — updateEvent will merge the patch server-side
-        dispatch({ firestoreAction: 'UPDATE_EVENT', payload: { id: editingEvent.id, ...patch } as Event });
-      }
-      setShowEventModal(false);
-      resetForms();
-    }
-  };
-
-  const handleUpdateTeamMember = () => {
-    if (editingItem) {
-      const updatedMember = { ...editingItem, ...teamForm } as TeamMember;
-      dispatch({ firestoreAction: 'UPDATE_TEAM_MEMBER', payload: updatedMember });
-      setShowTeamModal(false);
-      resetForms();
-    }
-  };
+  // Events are managed within the EventsTab component (add/edit/delete/publish live there now).
 
   const handleUpdateBlogPost = () => {
     if (editingItem) {
@@ -447,17 +279,6 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  const handleDeleteEvent = (eventId: string) => {
-    if (window.confirm('Are you sure you want to delete this event?')) {
-      dispatch({ firestoreAction: 'DELETE_EVENT', payload: eventId });
-    }
-  };
-
-  const handleDeleteTeamMember = (memberId: string) => {
-    if (window.confirm('Are you sure you want to remove this team member?')) {
-      dispatch({ firestoreAction: 'DELETE_TEAM_MEMBER', payload: memberId });
-    }
-  };
 
   const handleDeleteBlogPost = (postId: string) => {
     if (window.confirm('Are you sure you want to delete this blog post?')) {
@@ -541,15 +362,20 @@ const AdminDashboard: React.FC = () => {
           {activeTab === 'events' && (
             <EventsTab
               events={state.events}
-              onAddClick={() => setShowEventModal(true)}
-              onEdit={(event) => handleEditEvent(event)}
-              onDelete={(id) => handleDeleteEvent(id)}
-              onTogglePublish={(event) => {
-                const updatedEvent = { ...event, published: !event.published } as Event;
-                dispatch({ firestoreAction: 'UPDATE_EVENT', payload: updatedEvent });
+              onManageQuestions={() => {}}
+              onViewRegistrations={() => {}}
+            />
+          )}
+          {activeTab === 'jobs' && (
+            <JobsTab
+              jobs={state.jobs}
+              onAddClick={() => setShowJobModal(true)}
+              onEdit={(job: Job) => handleEditJob(job)}
+              onDelete={(id: string) => handleDeleteJob(id)}
+              onTogglePublish={(job: Job) => {
+                const updated = { ...job, published: !job.published } as Job;
+                dispatch({ firestoreAction: 'UPDATE_JOB', payload: updated });
               }}
-              onManageQuestions={(event) => { setActiveEventForQuestions(event); setShowEventQModal(true); }}
-              onViewRegistrations={(event) => { setActiveEventForRegs(event); setShowEventRegsModal(true); }}
             />
           )}
           {activeTab === 'jobs' && (
@@ -567,13 +393,6 @@ const AdminDashboard: React.FC = () => {
           {activeTab === 'team' && (
             <TeamTab
               members={state.teamMembers}
-              onAddClick={() => setShowTeamModal(true)}
-              onEdit={(member) => handleEditTeamMember(member)}
-              onDelete={(id) => handleDeleteTeamMember(id)}
-              onTogglePublish={(member) => {
-                const patched = { ...member, published: !member.published } as TeamMember;
-                dispatch({ firestoreAction: 'UPDATE_TEAM_MEMBER', payload: patched });
-              }}
             />
           )}
           {activeTab === 'blog' && (
@@ -598,7 +417,7 @@ const AdminDashboard: React.FC = () => {
               events={state.events.map(e => ({
                 id: e.id,
                 title: e.title,
-                date: e.date,
+                date: e.eventStartAt,
                 currentRegistrations: e.currentRegistrations || 0,
               }))}
               blogs={state.blogPosts.map(b => ({ id: b.id, title: b.title, date: b.date }))}
@@ -612,39 +431,9 @@ const AdminDashboard: React.FC = () => {
               onDelete={(id) => handleDeleteFaq(id)}
             />
           )}
-          {activeTab === 'members' && (<MembersTab onChanged={() => { /* could trigger toast */ }} />)}
-
-          {/* Event Modal */}
-          <EventModal
-            open={showEventModal}
-            editing={!!editingItem}
-            form={eventForm}
-            setForm={setEventForm}
-            onClose={() => { setShowEventModal(false); resetForms(); }}
-            onSubmit={() => {
-              if (editingItem) {
-                handleUpdateEvent();
-              } else {
-                handleAddEvent();
-              }
-            }}
-          />
-
-          {/* Team Modal */}
-          <TeamModal
-            open={showTeamModal}
-            editing={!!editingItem}
-            form={teamForm}
-            setForm={setTeamForm}
-            onClose={() => { setShowTeamModal(false); resetForms(); }}
-            onSubmit={() => {
-              if (editingItem) {
-                handleUpdateTeamMember();
-              } else {
-                handleAddTeamMember();
-              }
-            }}
-          />
+          {activeTab === 'members' && (
+            <MembersTab onChanged={() => { /* could trigger toast */ }} />
+          )}
 
           {/* Blog Modal */}
           <BlogModal
@@ -690,36 +479,8 @@ const AdminDashboard: React.FC = () => {
 
           {/* Registration questions are currently unused; modal intentionally not rendered. */}
 
-          <EventQuestionsModal
-            open={showEventQModal && !!activeEventForQuestions}
-            eventTitle={activeEventForQuestions?.title || ''}
-            eventId={activeEventForQuestions?.id || ''}
-            questions={eventQuestions}
-            onClose={() => { setShowEventQModal(false); setActiveEventForQuestions(null); }}
-            onAdd={async (data) => {
-              if (!activeEventForQuestions) return;
-              await addEventCustomQuestion({ eventId: activeEventForQuestions.id, ...data });
-            }}
-            onUpdate={async (id, data) => {
-              await updateEventCustomQuestion(id, data);
-            }}
-            onDelete={async (id) => {
-              await deleteEventCustomQuestion(id);
-            }}
-          />
-
-          {/* Event Registrations Modal */}
-          <EventRegistrationsModal
-            open={showEventRegsModal && !!activeEventForRegs}
-            eventId={activeEventForRegs?.id || ''}
-            eventTitle={activeEventForRegs?.title || ''}
-            onClose={() => { setShowEventRegsModal(false); setActiveEventForRegs(null); }}
-          />
         </div>
       </div>
-
-      {/* Members modal handled in MembersTab */}
-
     </div>
   );
 };

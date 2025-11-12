@@ -29,6 +29,21 @@ service cloud.firestore {
       return request.resource.data[field] == resource.data[field];
     }
 
+    // Validate shape of an eventCustomQuestions document
+    function validEventCustomQuestion(d) {
+      return d.eventId is string && d.eventId.size() > 0
+        && d.question is string && d.question.size() > 0
+        && d.type in ['text','textarea','select','checkbox','radio']
+        && d.required is bool
+        && d.order is number
+        && (
+          // For option-based types, options must exist and be a list
+          (d.type in ['select','checkbox','radio'] && ('options' in d) && d.options is list)
+          // For free-text types, options must be absent or an empty list
+          || (d.type in ['text','textarea'] && (!('options' in d) || (d.options is list && d.options.size() == 0)))
+        );
+    }
+
     // USERS (member profiles)
     match /users/{uid} {
       // Users may read their own profile; admins may read all; optionally open some fields publicly later.
@@ -58,12 +73,14 @@ service cloud.firestore {
       // Full create/update/delete restricted to admins
       allow create, update, delete: if isAdmin();
 
-      // Optional: If you keep client-side increment for currentRegistrations:
-      // allow update to ONLY increment by +1 and not exceed maxCapacity.
-      // If you move this to Cloud Functions, remove this whole block.
       allow update: if changedOnly(['currentRegistrations'])
-        && request.resource.data.currentRegistrations == resource.data.currentRegistrations + 1
-        && request.resource.data.currentRegistrations <= resource.data.maxCapacity;
+        // Allow increment when currentRegistrations was previously missing/null
+        // (treat as 0) or when it's explicitly incremented by +1.
+        && (
+          (resource.data.currentRegistrations == null && request.resource.data.currentRegistrations == 1)
+          || (request.resource.data.currentRegistrations == resource.data.currentRegistrations + 1)
+        )
+        && (resource.data.maxCapacity == null || request.resource.data.currentRegistrations <= resource.data.maxCapacity);
     }
 
     // TEAM MEMBERS
@@ -100,8 +117,21 @@ service cloud.firestore {
 
     // EVENT CUSTOM QUESTIONS (per-event)
     match /eventCustomQuestions/{cqId} {
+      // Publicly readable to render forms
       allow read: if true;
-      allow create, update, delete: if isAdmin();
+
+      // Only admins may write, with strict schema validation
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasOnly(['eventId','question','type','options','required','order'])
+        && validEventCustomQuestion(request.resource.data);
+
+      allow update: if isAdmin()
+        && request.resource.data.keys().hasOnly(['eventId','question','type','options','required','order'])
+        && validEventCustomQuestion(request.resource.data)
+        // eventId must not change once created
+        && request.resource.data.eventId == resource.data.eventId;
+
+      allow delete: if isAdmin();
     }
 
     // REGISTRATIONS
@@ -116,17 +146,35 @@ service cloud.firestore {
            )
         // Restrict status to registered|waitlist
         && (request.resource.data.status in ['registered', 'waitlist'])
-        // registeredAt must be a timestamp (serverTimestamp is allowed)
-        && (request.resource.data.registeredAt is timestamp);
+        // registeredAt must be a timestamp. When clients use serverTimestamp
+        // transforms the field can appear as null in the request, so allow
+        // either a timestamp or null here.
+        && (
+          (request.resource.data.registeredAt is timestamp) ||
+          (request.resource.data.registeredAt == null)
+        );
 
       // Users can read their own registrations; admins can read all
       allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
 
-      // Only admins may delete registrations
+      // Only admins may delete registrations by default
       allow delete: if isAdmin();
+
+      // Allow a user to delete their own registration if it has already been cancelled.
+      // This supports a clean re-register flow by removing stale cancelled docs.
+      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid && resource.data.status == 'cancelled';
 
       // Admin full update
       allow update: if isAdmin();
+
+      // Allow a signed-in user to cancel their own registration by setting status -> 'cancelled'
+      // Constraints:
+      // - Only the owner (userId == auth.uid)
+      // - Only allowed field change: status
+      // - New status must be exactly 'cancelled'
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid
+        && changedOnly(['status'])
+        && request.resource.data.status == 'cancelled';
 
       // Exception: allow invited -> confirmed transition for token-based confirmation on the public confirmation page.
       // Constraints:

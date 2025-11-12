@@ -42,14 +42,14 @@ export const Footer: React.FC = () => {
                 <div className="pl-2 pb-2 rounded-lg">
                   <div className="flex items-center space-x-2">
                     <Image
-                        src="/images/logo.png"
+                        src="/images/logo-highdef.png"
                         alt="UU AI Society Logo"
-                        width={40}
+                        width={240}
                         height={40}
-                        className="h-12 w-auto"
+                        className="mb-1 h-12 w-auto"
                         priority
                     />
-                    <span className="ml-2 font-bold text-xl text-gray-100 dark:text-white">UU AI Society</span>
+                    <span className="font-bold text-xl text-gray-100 dark:text-white">UU AI Society</span>
                   </div>
                 </div>
               </div>
@@ -134,6 +134,37 @@ export const Footer: React.FC = () => {
                 Subscribe
               </Button>
             </form>
+          </div>
+        </div>
+
+        {/* Partners strip */}
+        <div className="py-8 border-t border-gray-900">
+          <h3 className="text-center text-lg font-semibold mb-6 text-gray-100">Our partners</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  gap-6 items-center">
+            {/* Fill out grid */}
+            {Array.from({ length: 1 }).map((_, idx) => (
+              <div key={idx} className="flex items-center justify-center rounded-lg border border-gray-800 dark:border-gray-900 p-4 h-24">
+                <div className="w-full h-full bg-gray-800 dark:bg-gray-900 rounded-lg"></div>
+              </div>
+            ))}
+            {[
+              { src: '/images/partners/Uppsala_kommun_Logo_Bl_Yellow_RGB.png', alt: 'Uppsala Kommun' },
+              { src: '/images/partners/thalamind_logo.png', alt: 'Thalamind' },
+              { src: '/images/partners/vantel_logo.png', alt: 'Vantel logo' },
+              { src: '/images/partners/voi_logo.png', alt: 'Voi logo' },
+              // { src: '/images/partners/partner5.png', alt: 'Partner 5' },
+              // { src: '/images/partners/partner6.png', alt: 'Partner 6' },
+            ].map((p, idx) => (
+              <div key={idx} className="flex items-center justify-center bg-gray-300 rounded-lg border border-gray-800 p-4 h-24">
+                <Image
+                  src={p.src}
+                  alt={p.alt}
+                  width={400}
+                  height={80}
+                  className="max-h-12 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                />
+              </div>
+            ))}
           </div>
         </div>
 

@@ -1,25 +1,32 @@
-'use client'
+"use client";
 
-import React, { useEffect } from 'react';
-import { notFound, useParams } from 'next/navigation';
-import { Card, CardContent } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { ArrowLeft, Calendar, Clock, MapPin, Users, Tag } from 'lucide-react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { format } from 'date-fns';
-import EventRegistrationDialog from '@/components/events/EventRegistrationDialog';
-import { useApp } from '@/contexts/AppContext';
+import React, { useEffect } from "react";
+import { notFound, useParams } from "next/navigation";
+import { Card, CardContent } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { ArrowLeft, Calendar, Clock, MapPin, Users, Tag } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { format } from "date-fns";
+import EventRegistrationDialog from "@/components/events/EventRegistrationDialog";
+import { useApp } from "@/contexts/AppContext";
 
-import campus from '@/public/images/campus.png';
-import { incrementEventUniqueClick } from '@/lib/firestore/analytics';
+import campus from "@/public/images/campus.png";
+import { incrementEventUniqueClick } from "@/lib/firestore/analytics";
 
+const categoryOptions = [
+  { value: "all", label: "All Categories" },
+  { value: "workshop", label: "Workshop" },
+  { value: "guest_lecture", label: "Guest Lecture" },
+  { value: "hackathon", label: "Hackathon" },
+  { value: "other", label: "Other" },
+];
 const EventDetailPage: React.FC = () => {
   const params = useParams();
   const eventId = params.id as string;
   const { state } = useApp();
 
-  // Increment unique event click on mount 
+  // Increment unique event click on mount
   useEffect(() => {
     if (eventId) {
       incrementEventUniqueClick(eventId).catch(() => {});
@@ -41,15 +48,14 @@ const EventDetailPage: React.FC = () => {
       </div>
     );
   }
-
-  const event = state.events.find(e => e.id === eventId);
-
+  
+  const event = state.events.find((e) => e.id === eventId);
+  
   if (!event) {
     notFound();
   }
-
-  const isUpcoming = new Date(event.date) > new Date();
-  const isPastEvent = new Date(event.date) < new Date();
+  const isUpcoming = new Date(event.eventStartAt) > new Date();
+  const isPastEvent = new Date(event.eventStartAt) < new Date();
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-12 pt-24">
@@ -67,25 +73,29 @@ const EventDetailPage: React.FC = () => {
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
               {event.title}
             </h1>
-            <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-              isUpcoming 
-                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                : isPastEvent
-                ? 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
-                : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
-            }`}>
-              {isUpcoming ? 'Upcoming' : isPastEvent ? 'Past Event' : 'Today'}
+            <span
+              className={`px-3 py-1 rounded-full text-sm font-medium ${
+                isUpcoming
+                  ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                  : isPastEvent
+                  ? "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200"
+                  : "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+              }`}
+            >
+              {isUpcoming ? "Upcoming" : isPastEvent ? "Past Event" : "Today"}
             </span>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-4 text-gray-600 dark:text-gray-300 mb-6">
             <div className="flex items-center gap-2">
               <Calendar className="w-5 h-5" />
-              <span>{format(new Date(event.date), 'EEEE, MMMM dd, yyyy')}</span>
+              <span>
+                {format(new Date(event.eventStartAt), "EEEE, MMMM dd, yyyy")}
+              </span>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="w-5 h-5" />
-              <span>{event.time}</span>
+              <span>{format(new Date(event.eventStartAt), "HH:mm")}</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-5 h-5" />
@@ -100,7 +110,7 @@ const EventDetailPage: React.FC = () => {
           </div>
 
           {/* Registration Info */}
-          {event.registrationRequired && (
+          {event.registrationRequired && isUpcoming && (
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
               <div className="flex items-center justify-between pb-2">
                 <div className="flex items-center gap-2">
@@ -109,15 +119,13 @@ const EventDetailPage: React.FC = () => {
                     Registration Required
                   </span>
                 </div>
-                {typeof event.maxCapacity === 'number' && (
+                {typeof event.maxCapacity === "number" && (
                   <div className="text-blue-600 dark:text-blue-400">
                     Capacity: {event.maxCapacity}
                   </div>
                 )}
               </div>
-              {isUpcoming && (
-                <EventRegistrationDialog event={event} />
-              )}
+              <EventRegistrationDialog event={event} />
             </div>
           )}
         </div>
@@ -137,48 +145,64 @@ const EventDetailPage: React.FC = () => {
 
         {/* Event Description */}
         <Card className="h-full dark:bg-gray-800 pt-4">
-          <CardContent className="p-8">
+          <CardContent className="pt-4 pb-6 pl-6 pr-6">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               About This Event
             </h2>
-            <div 
-              className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300"
-              dangerouslySetInnerHTML={{ __html: event.description }}
-            />
+            {/<\/?[a-z][\s\S]*>/i.test(event.description || '') ? (
+              <div
+                className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300"
+                dangerouslySetInnerHTML={{ __html: event.description || '' }}
+              />
+            ) : (
+              <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 whitespace-pre-wrap">
+                {event.description}
+              </div>
+            )}
           </CardContent>
         </Card>
 
         {/* Event Details */}
         <div className="grid md:grid-cols-2 gap-8 mt-8">
-          <Card className="h-full dark:bg-gray-800 pt-4" >
-            <CardContent className="p-6">
+          <Card className="h-full dark:bg-gray-800 pt-4">
+            <CardContent className="pt-4">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                 Event Details
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">Date:</span>
+                  <span className="text-gray-600 dark:text-gray-300">
+                    Date:
+                  </span>
                   <span className="text-gray-900 dark:text-white font-medium">
-                    {format(new Date(event.date), 'MMM dd, yyyy')}
+                    {format(new Date(event.eventStartAt), "MMM dd, yyyy")}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">Time:</span>
+                  <span className="text-gray-600 dark:text-gray-300">
+                    Time:
+                  </span>
                   <span className="text-gray-900 dark:text-white font-medium">
-                    {event.time}
+                    {format(new Date(event.eventStartAt), "HH:mm")}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">Location:</span>
+                  <span className="text-gray-600 dark:text-gray-300">
+                    Location:
+                  </span>
                   <span className="text-gray-900 dark:text-white font-medium">
                     {event.location}
                   </span>
                 </div>
                 {event.category && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-300">Category:</span>
+                    <span className="text-gray-600 dark:text-gray-300">
+                      Category:
+                    </span>
                     <span className="text-gray-900 dark:text-white font-medium capitalize">
-                      {event.category}
+                      {categoryOptions.find(
+                        (option) => option.value === event.category
+                      )?.label || event.category}
                     </span>
                   </div>
                 )}
@@ -187,24 +211,21 @@ const EventDetailPage: React.FC = () => {
           </Card>
 
           {event.registrationRequired && (
-            <Card className="h-full dark:bg-gray-800 pt-4" >
-              <CardContent className="p-6">
+            <Card className="h-full dark:bg-gray-800 pt-4">
+              <CardContent className="pt-4">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                   Registration
                 </h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-300">Capacity:</span>
+                    <span className="text-gray-600 dark:text-gray-300">
+                      Capacity:
+                    </span>
                     <span className="text-gray-900 dark:text-white font-medium">
-                      {event.maxCapacity ?? 'Unlimited'} people
+                      {event.maxCapacity || "TBA"}
                     </span>
                   </div>
                 </div>
-                {isUpcoming && (
-                  <div className="w-full mt-4">
-                    <EventRegistrationDialog event={event} />
-                  </div>
-                )}
               </CardContent>
             </Card>
           )}
@@ -217,11 +238,16 @@ const EventDetailPage: React.FC = () => {
           </h3>
           <div className="grid md:grid-cols-2 gap-6 ">
             {state.events
-              .filter(e => e.id !== eventId && new Date(e.date) > new Date())
+              .filter(
+                (e) => e.id !== eventId && new Date(e.eventStartAt) > new Date()
+              )
               .slice(0, 2)
               .map((relatedEvent) => (
-                <Card key={relatedEvent.id} className="hover:shadow-lg transition-shadow dark:bg-gray-800 pt-4">
-                  <CardContent className="p-6">
+                <Card
+                  key={relatedEvent.id}
+                  className="hover:shadow-lg transition-shadow dark:bg-gray-800 pt-4"
+                >
+                  <CardContent className="pt-4">
                     {relatedEvent.image && (
                       <Image
                         src={relatedEvent.image || campus}
@@ -237,7 +263,12 @@ const EventDetailPage: React.FC = () => {
                     <div className="text-gray-600 dark:text-gray-300 text-sm mb-4 space-y-1">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
-                        <span>{format(new Date(relatedEvent.date), 'MMM dd, yyyy')}</span>
+                        <span>
+                          {format(
+                            new Date(relatedEvent.eventStartAt),
+                            "MMM dd, yyyy"
+                          )}
+                        </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-4 h-4" />

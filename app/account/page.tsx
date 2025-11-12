@@ -4,10 +4,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { auth, linkGoogleToCurrentUser, linkGithubToCurrentUser, linkMicrosoftToCurrentUser } from "@/lib/firebase-client";
 import { getUserProfile, upsertUserProfile, updateUserProfile, getMyRegistrations, getAllEvents, type UserProfile } from "@/lib/firestore";
+import { cancelRegistration, confirmRegistration } from "@/lib/firestore/registrations";
+import type { EventRegistration } from "@/types";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { FieldGroup, InputBase, SelectBase, TextareaBase } from "@/components/ui/Form";
 import { useNotify } from "@/components/ui/Notifications";
+import ConfirmModal from "@/components/ui/ConfirmModal";
 import LoginModal from '@/components/ui/LoginModal'
 import router from "next/router";
 
@@ -16,9 +19,10 @@ export default function AccountPage() {
   const [uid, setUid] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState<Partial<UserProfile>>({});
-  const [registrations, setRegistrations] = useState<Array<{ id: string; eventId: string; status: string; registeredAt: string }>>([]);
+  const [registrations, setRegistrations] = useState<EventRegistration[]>([]);
   const [eventMeta, setEventMeta] = useState<Record<string, { title: string; startAt?: string; date?: string; time?: string }>>({});
   const [providers, setProviders] = useState<string[]>([]);
+  const [confirmRegId, setConfirmRegId] = useState<string | null>(null);
 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(async (u) => {
@@ -33,14 +37,15 @@ export default function AccountPage() {
       setForm(p || {});
       setProviders((u.providerData || []).map(pd => pd.providerId));
       const regs = await getMyRegistrations(u.uid);
-      setRegistrations(regs.map(r => ({ id: r.id, eventId: r.eventId, status: r.status, registeredAt: r.registeredAt })));
+      setRegistrations(regs);
       // Build event meta map (title + time)
       try {
         const events = await getAllEvents();
-        const map: Record<string, { title: string; startAt?: string; date?: string; time?: string }> = {};
+        const map: Record<string, { title: string; startAt?: string; }> = {};
         for (const ev of events) {
-          map[ev.id] = { title: ev.title || ev.id, startAt: ev.startAt, date: ev.date, time: ev.time };
+          map[ev.id] = { title: ev.title, startAt: ev.eventStartAt };
         }
+        
         setEventMeta(map);
       } catch { }
       setLoading(false);
@@ -109,7 +114,76 @@ export default function AccountPage() {
         <div className="flex items-center justify-between">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">My Account</h1>
         </div>
-
+        {registrations.length > 0 && (
+        <Card>
+          <CardHeader>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">My Event Applications</h2>
+          </CardHeader>
+          <CardContent>
+              <ul className="space-y-2">
+                {registrations.map((r) => (
+                  <li key={r.id} className="flex items-center justify-between text-gray-800 dark:text-gray-200">
+                    <div className="flex items-center gap-2">
+                      <span>
+                      <Link className="underline" href={`/events/${r.eventId}`}>{eventMeta[r.eventId]?.title || 'Unknown'}</Link>
+                        {(() => {
+                          const meta = eventMeta[r.eventId];
+                          if (!meta) return null;
+                          let dt: Date | null = null;
+                          if (meta.startAt) {
+                            const d = new Date(meta.startAt);
+                            if (!isNaN(d.getTime())) dt = d;
+                          }
+                          if (!dt && meta.date && meta.time) {
+                            const d = new Date(`${meta.date}T${meta.time}`);
+                            if (!isNaN(d.getTime())) dt = d;
+                          }
+                          return dt ? <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">• {dt.toLocaleString()}</span> : null;
+                        })()}
+                      </span>
+                      <span className="text-sm">• {r.status}{r.registeredAt ? ` • ${new Date(r.registeredAt).toLocaleString()}` : ''}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {r.status === 'invited' && (
+                        <Button
+                          size="sm"
+                          className="bg-green-600 text-white"
+                          onClick={async () => {
+                            try {
+                              if (!r.confirmationToken) throw new Error('Missing confirmation token. Please contact us if you have problems confirming your spot.');
+                              const res = await confirmRegistration(r.id, r.confirmationToken);
+                              if (!res.ok) throw new Error(res.message);
+                              notify({ type: 'success', title: 'Confirmed', message: 'Your spot has been confirmed.' });
+                              // refresh registrations
+                              if (uid) {
+                                const fresh = await getMyRegistrations(uid);
+                                setRegistrations(fresh);
+                              }
+                            } catch (e: unknown) {
+                              const msg = e instanceof Error ? e.message : 'Could not confirm. Please contact us if you have problems confirming your spot.';
+                              notify({ type: 'error', title: 'Confirm failed', message: msg });
+                            }
+                          }}
+                        >
+                          Confirm spot
+                        </Button>
+                      )}
+                      {(r.status === 'registered' || r.status === 'waitlist' || r.status === 'invited') && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => setConfirmRegId(r.id)}
+                        >
+                          Cancel
+                        </Button>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+          </CardContent>
+        </Card>
+        )}
         <div className="grid md:grid-cols-3 gap-6">
           <Card className="md:col-span-2">
             <CardHeader>
@@ -282,46 +356,38 @@ export default function AccountPage() {
           </Card>
         </div>
 
-        <Card>
-          <CardHeader>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">My Event Applications</h2>
-          </CardHeader>
-          <CardContent>
-            {registrations.length === 0 ? (
-              <div className="text-gray-600 dark:text-gray-300">No applications yet.</div>
-            ) : (
-              <ul className="space-y-2">
-                {registrations.map(r => (
-                  <li key={r.id} className="flex items-center justify-between text-gray-800 dark:text-gray-200">
-                    <span>
-                      Event: <Link className="underline" href={`/events/${r.eventId}`}>{eventMeta[r.eventId]?.title || r.eventId}</Link>
-                      {(() => {
-                        const meta = eventMeta[r.eventId];
-                        if (!meta) return null;
-                        let dt: Date | null = null;
-                        if (meta.startAt) {
-                          const d = new Date(meta.startAt);
-                          if (!isNaN(d.getTime())) dt = d;
-                        }
-                        if (!dt && meta.date && meta.time) {
-                          const d = new Date(`${meta.date}T${meta.time}`);
-                          if (!isNaN(d.getTime())) dt = d;
-                        }
-                        return dt ? <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">• {dt.toLocaleString()}</span> : null;
-                      })()}
-                    </span>
-                    <span className="text-sm">{r.status} • {r.registeredAt ? new Date(r.registeredAt).toLocaleString() : ''}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </CardContent>
-        </Card>
+        
       </div>
 
       <style jsx global>{`
         .input { @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white; }
       `}</style>
+
+      {/* Confirm unregister modal */}
+      <ConfirmModal
+        open={!!confirmRegId}
+        title="Unregister from event"
+        description="Are you sure you want to unregister from this event?"
+        confirmText="Yes, unregister"
+        cancelText="Keep registration"
+        onClose={() => setConfirmRegId(null)}
+        onConfirm={async () => {
+          if (!confirmRegId) return;
+          try {
+            await cancelRegistration(confirmRegId);
+            notify({ type: 'success', title: 'Cancelled', message: 'Your registration has been cancelled.' });
+            if (uid) {
+              const fresh = await getMyRegistrations(uid);
+              setRegistrations(fresh);
+            }
+          } catch (e: unknown) {
+            const msg = e instanceof Error ? e.message : 'Could not cancel. Please contact us if you have problems unregistering for the event.';
+            notify({ type: 'error', title: 'Cancel failed', message: msg });
+          } finally {
+            setConfirmRegId(null);
+          }
+        }}
+      />
     </div>
   );
 }
