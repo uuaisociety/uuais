@@ -251,7 +251,7 @@ export const Footer: React.FC = () => {
                     alt={p.alt}
                     loading="lazy"
                     objectFit="contain"
-                    width={400}
+                    width={190}
                     height={80}
                     className="object-contain max-h-[80px] md:max-h-[100px] p-2 opacity-80 hover:opacity-100 transition-opacity"
                   />
