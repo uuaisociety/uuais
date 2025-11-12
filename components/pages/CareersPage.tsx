@@ -90,13 +90,13 @@ export default function CareersPage() {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Job board</h1>
           <div className="text-gray-700 dark:text-gray-300 space-y-2 mt-2">
             <p>
-              At UU AI Society, we connect our members with the industry through relevant opportunities across startups,
-              internships, master theses, and full-time roles.
+              At UU AI Society, we connect our members with the industry through relevant opportunities with everything
+              from startups to multinationals and everything in between. We post job openings for internships,
+              master theses, and full-time roles here.
             </p>
             <p>
-              Companies shaping tomorrow need the talent of today. Explore the latest openings below and take on new challenges.
-              For partnerships or to post a role, contact us at <a className="underline" href="mailto:alexander.anderson@uuais.com">alexander.anderson@uuais.com</a>
-              &nbsp;with a job title, description, company name, location, logo and link to your application portal.
+              Companies that need the talent offered by our members can post job openings here.
+              To post a role here contact us at <a className="underline" href="mailto:alexander.anderson@uuais.com">alexander.anderson@uuais.com</a>.
             </p>
           </div>
         </header>
