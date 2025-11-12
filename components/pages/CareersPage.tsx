@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useMemo } from "react";
+import DOMPurify from 'dompurify';
 import { useApp } from "@/contexts/AppContext";
 import { auth } from "@/lib/firebase-client";
 import LoginModal from "@/components/ui/LoginModal";
@@ -23,17 +24,26 @@ function JobItem({ job }: { job: Job }) {
                 <Tag key={i} variant="yellow" size="sm">{t}</Tag>
               ))}
             </div>
-            <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{job.description}</p>
+            {/<\/?[a-z][\s\S]*>/i.test(job.description || '') ? (
+              <div
+                className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300"
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(job.description || '') }}
+              />
+            ) : (
+              <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 whitespace-pre-wrap">
+                {job.description}
+              </div>
+            )}
           </div>
-          <div className="ml-4 flex flex-col gap-2">
+          <div className="ml-4 flex flex-col gap-2 items-end">
             {job.applyUrl && (
               <a href={job.applyUrl} target="_blank" rel="noreferrer">
-                <Button size="sm" variant="outline">Apply Link</Button>
+                <Button size="sm" variant="outline">Apply</Button>
               </a>
             )}
             {job.applyEmail && (
               <a href={`mailto:${job.applyEmail}`}>
-                <Button size="sm" variant="outline">Apply by Email</Button>
+                {job.applyEmail}
               </a>
             )}
           </div>
