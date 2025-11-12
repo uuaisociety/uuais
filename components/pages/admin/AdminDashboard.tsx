@@ -9,6 +9,7 @@ import {
   Users,
   FileText,
   TrendingUp,
+  BriefcaseBusiness,
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/Card';
 import EventsTab from '@/components/pages/admin/tabs/EventsTab';
@@ -24,13 +25,14 @@ import { updatePageMeta } from '@/utils/seo';
 // format imported where needed in tab components
 import { BlogPost, Event, TeamMember, FAQ } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
+import JobsTab from '@/components/pages/admin/tabs/JobsTab';
 import { listUsers } from '@/lib/firestore/users';
 
 const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
   const [nrUsers, setNrUsers] = useState<number>(0);
   //const { user, logout } = useAdmin();
-  const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members'>('events');
+  const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members' | 'jobs'>('events');
   const placeholderImage = '@/public/placeholder.png';
 
   // Modal states
@@ -38,10 +40,6 @@ const AdminDashboard: React.FC = () => {
   const [showFaqModal, setShowFaqModal] = useState(false);
   const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | null>(null);
   const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
-
-  // Event form and event CRUD moved into EventsTab/EventModal
-
-  // TeamTab manages team form/modal state now.
 
   const [blogForm, setBlogForm] = useState({
     title: '',
@@ -89,10 +87,16 @@ const AdminDashboard: React.FC = () => {
       color: 'bg-purple-500'
     },
     {
-      title: 'Users',
+      title: 'Users registered',
       value: nrUsers || 'N/A',
       icon: TrendingUp,
       color: 'bg-red-500'
+    },
+    {
+      title: 'Job Postings',
+      value: state.jobs.length,
+      icon: BriefcaseBusiness,
+      color: 'bg-yellow-500'
     }
   ];
 
@@ -141,8 +145,6 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  // Registration Questions handlers removed as unused
-
 
   const handleEditBlogPost = (post: BlogPost) => {
     setEditingItem(post);
@@ -157,8 +159,6 @@ const AdminDashboard: React.FC = () => {
     });
     setShowBlogModal(true);
   };
-
-  // Events are managed within the EventsTab component (add/edit/delete/publish live there now).
 
   const handleUpdateBlogPost = () => {
     if (editingItem) {
@@ -176,17 +176,12 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  // Tag input management moved into BlogModal component
-
   const toggleBlogPostVisibility = (post: BlogPost) => {
     dispatch({
       type: 'UPDATE_BLOG_POST',
       payload: { ...post, published: !post.published }
     });
   };
-
-
-
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 pt-24">
@@ -200,11 +195,11 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8 items-center">
           {stats.map((stat, index) => (
-            <Card key={index}>
-              <CardContent className="p-6">
-                <div className="flex items-center">
+            <Card key={index} className="h-full">
+              <CardContent className="pl-6 pr-6 pt-6 h-full">
+                <div className="flex items-center h-full">
                   <div className={`p-3 rounded-lg ${stat.color} text-white mr-4`}>
                     <stat.icon className="h-6 w-6" />
                   </div>
@@ -229,6 +224,7 @@ const AdminDashboard: React.FC = () => {
                 { key: 'faq', label: 'FAQ', icon: FileText },
                 { key: 'analytics', label: 'Analytics', icon: TrendingUp },
                 { key: 'members', label: 'Members', icon: Users },
+                { key: 'jobs', label: 'Jobs', icon: BriefcaseBusiness },
               ] as const).map(({ key, label, icon: Icon }) => (
                 <button
                   key={key}
@@ -254,6 +250,9 @@ const AdminDashboard: React.FC = () => {
               onManageQuestions={() => {}}
               onViewRegistrations={() => {}}
             />
+          )}
+          {activeTab === 'jobs' && (
+            <JobsTab />
           )}
           {activeTab === 'team' && (
             <TeamTab
@@ -325,8 +324,6 @@ const AdminDashboard: React.FC = () => {
             onAdd={handleAddFaq}
             onUpdate={handleUpdateFaq}
           />
-
-          {/* Registration questions are currently unused; modal intentionally not rendered. */}
 
         </div>
       </div>

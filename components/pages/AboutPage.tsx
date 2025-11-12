@@ -85,10 +85,10 @@ const AboutPage: React.FC = () => {
             </CardHeader>
             <CardContent>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                To be the leading student organization in Uppsala that shapes the next generation of AI 
-                leaders, innovators, and ethical practitioners. We envision a future where our 
-                members become catalysts for positive change in the global AI industry, contributing 
-                to solutions that benefit humanity.
+                A student led non-profit that cultivates the
+                next generation of AI builders and leaders
+                at UU by connecting students with the
+                forefront of AI innovation.
               </p>
             </CardContent>
           </Card>

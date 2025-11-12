@@ -95,6 +95,14 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    // JOBS
+    match /jobs/{jobId} {
+      // Read if published or admin
+      allow read: if resource.data.published == true || isAdmin();
+      // Only admins can write
+      allow create, update, delete: if isAdmin();
+    }
+
     // FAQ
     match /faqs/{faqId} {
       allow read: if true;
