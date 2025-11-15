@@ -32,7 +32,9 @@ const FAQTab: React.FC<FAQTabProps> = ({ faqs, onAddClick, onEdit, onDelete }) =
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" variant="outline" icon={Edit3} onClick={() => onEdit(faq)}>Edit</Button>
-                  <Button size="sm" variant="outline" icon={Trash2} className="text-red-600" onClick={() => onDelete(faq.id)}>Delete</Button>
+                  <Button size="sm" variant="destructive" icon={Trash2} onClick={() => onDelete(faq.id)}>
+                    Delete
+                  </Button>
                 </div>
               </div>
             </CardContent>

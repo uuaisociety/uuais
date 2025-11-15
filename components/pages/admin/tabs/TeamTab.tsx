@@ -143,12 +143,11 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
                     </Button>
                     <Button
                       size="sm"
-                      variant="outline"
+                      variant="destructive"
                       icon={Trash2}
                       onClick={() => handleDeleteTeamMember(member.id)}
-                      className="text-red-600 hover:text-red-700"
                     >
-                      Remove
+                      Delete
                     </Button>
                   </div>
                 </div>
