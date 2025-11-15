@@ -154,13 +154,14 @@ export const Header: React.FC = () => {
                   href="/admin"
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${isActive('/admin')
-                    ? 'bg-red-600/20'
+                    ? 'text-gray-700 dark:text-gray-300 bg-red-600/20'
                     : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
                     }`}
                 >
                   Admin
                 </Link>
               )}
+              <ThemeToggle />
             </div>
           </div>
         </div>
