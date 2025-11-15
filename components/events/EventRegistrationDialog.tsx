@@ -237,7 +237,6 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
           <div className="flex items-center gap-2">
             {(alreadyRegistered.status === 'registered' || alreadyRegistered.status === 'waitlist' || alreadyRegistered.status === 'invited') && (
               <Button
-                variant="outline"
                 onClick={() => setConfirmOpen(true)}
               >
                 Cancel
@@ -245,7 +244,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
             )}
             {alreadyRegistered.status === 'invited' && (
               <Button
-                className="bg-green-600 text-white"
+                className="bg-green-600/80 hover:bg-green-600 text-white"
                 onClick={async () => {
                   try {
                     if (!alreadyRegistered.token) throw new Error('Missing confirmation token. Please contact us if you have problems confirming your spot.');
@@ -268,8 +267,8 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
         <Button
           className={`${
             isWaitlistOnly
-              ? "bg-orange-600 hover:bg-orange-700"
-              : "bg-blue-600 hover:bg-blue-700"
+              ? "bg-orange-600/80 hover:bg-orange-600"
+              : "bg-blue-600/80 hover:bg-blue-600"
           } text-white`}
           onClick={() => setIsOpen(true)}
         >

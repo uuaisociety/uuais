@@ -179,7 +179,7 @@ export const Footer: React.FC = () => {
                 type="submit"
                 variant="default"
                 size="sm"
-                className="cursor-pointer p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-color sw-full"
+                className="cursor-pointer p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-color sw-full text-white"
                 fullWidth
                 // loading={loading}
               >
@@ -279,7 +279,7 @@ export const Footer: React.FC = () => {
             </Link> */}
             <Button
               onClick={scrollToTop}
-              className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
+              className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors text-white"
               aria-label="Scroll to top"
             >
               <ArrowUp className="h-4 w-4" />

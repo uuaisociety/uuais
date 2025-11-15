@@ -66,7 +66,7 @@ const AnalyticsTab: React.FC<AnalyticsTabProps> = ({ stats, events = [], blogs =
             <button
               key={key}
               onClick={() => setActiveSubtab(key)}
-              className={`py-2 px-4 border-b-2 text-sm font-medium ${activeSubtab === key
+              className={`cursor-pointer py-2 px-4 border-b-2 text-sm font-medium transition-all duration-200 ease-in-out ${activeSubtab === key
                 ? 'border-red-500 text-red-600 dark:text-red-400'
                 : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
               }`}
@@ -158,7 +158,7 @@ const AnalyticsTab: React.FC<AnalyticsTabProps> = ({ stats, events = [], blogs =
                   )}
                 </tbody>
               </table>
-              <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">Note: &quot;Attended&quot; requires additional instrumentation (e.g., check-in flow). &quot;Unique Clicks&quot; are deduped client-side per day.</p>
+              <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">Note: &quot;Attended&quot; is not implemented. &quot;Unique Clicks&quot; are deduped client-side per day.</p>
             </div>
           </CardContent>
         </Card>
@@ -194,7 +194,7 @@ const AnalyticsTab: React.FC<AnalyticsTabProps> = ({ stats, events = [], blogs =
                   )}
                 </tbody>
               </table>
-              <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">Reads are deduped client-side per day per browser. For stronger guarantees, move to server-side instrumentation.</p>
+              <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">Note: Reads are deduped client-side per day per browser.</p>
             </div>
           </CardContent>
         </Card>
