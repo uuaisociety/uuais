@@ -171,13 +171,13 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
       </div>
 
       <div className="grid gap-4">
-        {events.map((event) => (
+        {events.map((event) => ( 
           <Card
             key={event.id}
-            className="bg-white dark:bg-gray-800 text-black dark:text-white"
+            className="bg-white dark:bg-gray-800 text-black dark:text-white overflow-x-auto"
           >
             <CardContent className="p-6">
-              <div className="flex items-start justify-between">
+              <div className="flex items-start justify-between flex-col lg:flex-row">
                 <div className="flex-1">
                   <div className="flex items-center space-x-3 mb-2">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -221,7 +221,7 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
                     </div>
                   )}
                 </div>
-                <div className="flex space-x-2 ml-4">
+                <div className="flex gap-2 flex-col lg:flex-row mt-4 lg:mt-0 w-full lg:w-auto ">
                   <Button
                     size="sm"
                     variant="outline"
@@ -254,10 +254,9 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
                   </Button>
                   <Button
                     size="sm"
-                    variant="outline"
+                    variant="destructive"
                     icon={Trash2}
                     onClick={() => handleDeleteEvent(event.id)}
-                    className="text-red-600 hover:text-red-700"
                   >
                     Delete
                   </Button>

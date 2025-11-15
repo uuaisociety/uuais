@@ -19,10 +19,10 @@ const LoginCard: React.FC<LoginCardProps> = ({ after }) => {
                     <Button onClick={() => signInWithGooglePopup().then(after)}>
                         <span className="flex items-center gap-2"><GoogleIcon className="h-4 w-4" /> Continue with Google</span>
                     </Button>
-                    <Button variant="outline" onClick={() => signInWithGithubPopup().then(after)}>
+                    <Button onClick={() => signInWithGithubPopup().then(after)}>
                         <span className="flex items-center gap-2"><GithubIcon className="h-4 w-4" /> Continue with GitHub</span>
                     </Button>
-                    {/* <Button variant="outline" onClick={() => signInWithMicrosoftPopup().then(after)}>
+                    {/* <Button onClick={() => signInWithMicrosoftPopup().then(after)}>
                         <span className="flex items-center gap-2"><MicrosoftIcon className="h-4 w-4" /> Continue with Microsoft</span>
                     </Button> */}
                 </div>

@@ -147,7 +147,7 @@ export default function AccountPage() {
                       {r.status === 'invited' && (
                         <Button
                           size="sm"
-                          className="bg-green-600 text-white"
+                          className="bg-green-600/80 hover:bg-green-600 text-white"
                           onClick={async () => {
                             try {
                               if (!r.confirmationToken) throw new Error('Missing confirmation token. Please contact us if you have problems confirming your spot.');
@@ -171,7 +171,7 @@ export default function AccountPage() {
                       {(r.status === 'registered' || r.status === 'waitlist' || r.status === 'invited') && (
                         <Button
                           size="sm"
-                          variant="outline"
+                          className="bg-red-600/80 hover:bg-red-600 text-white"
                           onClick={() => setConfirmRegId(r.id)}
                         >
                           Cancel
@@ -333,7 +333,7 @@ export default function AccountPage() {
                 {isLinked.google ? (
                   <span className="text-green-600">Linked</span>
                 ) : (
-                  <Button variant="outline" onClick={() => handleLink("google")}>Link</Button>
+                  <Button onClick={() => handleLink("google")}>Link</Button>
                 )}
               </div>
               <div className="flex items-center justify-between">
@@ -341,7 +341,7 @@ export default function AccountPage() {
                 {isLinked.github ? (
                   <span className="text-green-600">Linked</span>
                 ) : (
-                  <Button variant="outline" onClick={() => handleLink("github")}>Link</Button>
+                  <Button onClick={() => handleLink("github")}>Link</Button>
                 )}
               </div>
               {/* <div className="flex items-center justify-between">
@@ -349,7 +349,7 @@ export default function AccountPage() {
                 {isLinked.microsoft ? (
                   <span className="text-green-600">Linked</span>
                 ) : (
-                  <Button variant="outline" onClick={() => handleLink("microsoft")}>Link</Button>
+                  <Button onClick={() => handleLink("microsoft")}>Link</Button>
                 )}
               </div> */}
             </CardContent>

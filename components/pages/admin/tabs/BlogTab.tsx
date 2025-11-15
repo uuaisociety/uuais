@@ -54,8 +54,13 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onEdit, onDelete, 
                   <Button size="sm" variant="outline" icon={Edit3} onClick={() => onEdit(post)}>
                     Edit
                   </Button>
-                  <Button size="sm" variant="outline" icon={Trash2} onClick={() => onDelete(post.id)} className="text-red-600 hover:text-red-700">
-                    Delete
+                  <Button 
+                    size="sm" 
+                    variant="destructive" 
+                    icon={Trash2} 
+                    onClick={() => onDelete(post.id)} 
+                  >
+                    <span className="text-black dark:text-white">Delete</span>
                   </Button>
                 </div>
               </div>
