@@ -140,6 +140,7 @@ const EventsPage: React.FC = () => {
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
                 fullWidth
+                className="dark:bg-gray-800"
               />
             </div>
           </div>
