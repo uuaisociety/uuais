@@ -13,7 +13,7 @@ const CheckinPage: React.FC = () => {
   const eventId = searchParams.get("eventId") || "";
   const scannedUserId = searchParams.get("userId") || "";
   const { user, isAdmin, loading } = useAdmin();
-  const [status, setStatus] = useState<"idle" | "working" | "done">("idle");
+  const [status, setStatus] = useState<"idle" | "working" | "done" | "error">("idle");
   const [message, setMessage] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
 
@@ -40,11 +40,11 @@ const CheckinPage: React.FC = () => {
         setStatus("done");
         setMessage("Attendance has been recorded.");
       } catch (e) {
-        setStatus("done");
+        setStatus("error");
         setMessage(e instanceof Error ? e.message : "Failed to record attendance.");
       }
     })();
-  }, [eventId, user, isAdmin, loading, status]);
+  }, [eventId, user, isAdmin, loading, status, scannedUserId]);
 
   useEffect(() => {
     // Get user name
@@ -53,6 +53,7 @@ const CheckinPage: React.FC = () => {
       const user = await getUserProfile(scannedUserId);
       if (!user) {
         setMessage("User not found.");
+        setStatus("error");
         return;
       }
       setUserName(user.name || user.displayName || user.email || "Unknown User");
@@ -71,7 +72,7 @@ const CheckinPage: React.FC = () => {
               <h1 className="text-gray-700 dark:text-gray-300 mb-6 text-xl font-bold">
                 {userName}
               </h1>
-              <p className="text-gray-700 dark:text-gray-300 mb-6">
+              <p className={`mb-6 ${status === "error" ? "text-red-600" : status === "done" ? "text-green-600 dark:text-green-400/80" : "text-gray-700 dark:text-gray-300"}`}>
                 {message || "Processing your check-in..."}
               </p>
 
