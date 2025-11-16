@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { X, Users, Send, ChevronDown } from "lucide-react";
+import { X, Users, Send, ChevronDown, Check } from "lucide-react";
 import { subscribeToEventRegistrations, inviteRegistrant } from "@/lib/firestore/registrations";
+import { subscribeToEventAttendance, setAttendanceForUser, type EventAttendanceEntry } from "@/lib/firestore/attendance";
 import { EventRegistration } from "@/types";
 import { Button } from "@/components/ui/Button";
 import { useNotify } from "@/components/ui/Notifications";
@@ -28,12 +29,34 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
   const [sortKey, setSortKey] = useState<'name' | 'status' | 'time'>('time');
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
   const { notify } = useNotify();
+  const [attendanceByUser, setAttendanceByUser] = useState<Record<string, EventAttendanceEntry>>({});
 
   useEffect(() => {
     if (!open || !eventId) return;
     const unsub = subscribeToEventRegistrations(eventId, setRegistrations);
     return () => { if (typeof unsub === 'function') unsub(); };
   }, [open, eventId]);
+
+  useEffect(() => {
+    if (!open || !eventId) return;
+    const unsub = subscribeToEventAttendance(eventId, (entries) => {
+      const map: Record<string, EventAttendanceEntry> = {};
+      for (const a of entries) {
+        if (!a || !a.userId) continue;
+        map[a.userId] = a;
+      }
+      setAttendanceByUser(map);
+    });
+    return () => { if (typeof unsub === 'function') unsub(); };
+  }, [open, eventId]);
+
+  const totalRegistered = registrations.filter((r) => r.status !== 'cancelled' && r.status !== 'declined').length;
+  const attendedCount = registrations.filter((r) => {
+    const a = attendanceByUser[r.userId];
+    return !!a && a.attended === true;
+  }).length || 0;
+
+  const attendancePct = totalRegistered > 0 ? Math.round((attendedCount / totalRegistered) * 100) : 0;
 
   // Derive a display name using userName or common name fields from registrationData
   const displayNameFor = (r: EventRegistration): string => {
@@ -182,6 +205,10 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
               {/* Top controls: count + bulk actions */}
               <div className="flex items-center justify-between mb-2 gap-2 flex-wrap">
                 <div className="text-sm text-gray-700 dark:text-gray-300">Total registrations: <span className="font-medium text-gray-900 dark:text-white">{registrations.length}</span></div>
+                <div className="text-xs text-gray-700 dark:text-gray-300 flex flex-col sm:flex-row sm:items-center gap-1">
+                  <span>Present: <span className="font-semibold">{attendedCount || 0}</span></span>
+                  <span className="sm:ml-3">Attendance: <span className="font-semibold">{attendancePct}%</span></span>
+                </div>
                 <div className="flex items-center gap-2 ml-auto">
                   <Button size="sm" variant="outline" onClick={() => {
                     const map: Record<string, boolean> = {};
@@ -265,6 +292,8 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                       const email = (r.userEmail || '').trim() || fallbackEmail;
                       const signedUp = r.registeredAt ? new Date(r.registeredAt).toLocaleString() : '—';
                       const status = r.status || 'registered';
+                      const attendanceEntry = attendanceByUser[r.userId];
+                      const isPresent = attendanceEntry?.attended === true;
 
                       const statusTag = () => {
                         switch (status) {
@@ -302,7 +331,8 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
 
                       return (
                         <React.Fragment key={r.id}>
-                          <TableRow className="border-t border-gray-200 dark:border-gray-700">
+                          <TableRow className={`border-t border-gray-200 dark:border-gray-700 hover:bg-gray-200/40 dark:hover:bg-gray-900/20
+                            ${isPresent ? 'bg-green-200/80 dark:bg-green-900/20 hover:bg-green-200/90 dark:hover:bg-green-900/40' : ''}`}>
                             <TableCell className="py-2 pr-2">
                               <input
                                 type="checkbox"
@@ -317,11 +347,35 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                             <TableCell className="py-2 pr-4">{signedUp}</TableCell>
                             <TableCell className="py-2 pr-2">
                               <div className="flex items-center gap-2 justify-end">
+                                <Button
+                                  size="sm"
+                                  variant={isPresent ? "outline" : "outline"}
+                                  onClick={async () => {
+                                    if (!eventId || !r.userId) return;
+                                    const next = !isPresent;
+                                    try {
+                                      await setAttendanceForUser(eventId, r.userId, next);
+                                      setAttendanceByUser((prev) => ({
+                                        ...prev,
+                                        [r.userId]: {
+                                          userId: r.userId,
+                                          attended: next,
+                                          timestamp: next ? Date.now() : null,
+                                        },
+                                      }));
+                                      notify({ type: next? 'success' : 'warning', message: next ? `${name || email || r.id} marked as present` : `${name || email || r.id} marked as absent` });
+                                    } catch (e) {
+                                      notify({ type: 'error', message: e instanceof Error ? e.message : 'Failed to update attendance' });
+                                    }
+                                  }}
+                                >
+                                  {isPresent ? <><Check className="h-4 w-4 mr-1" />Mark absent</> : <><X className="h-4 w-4 mr-1" />Mark present</>}
+                                </Button>
                                 <Button size="sm" variant="outline" disabled={true} //invitingId === r.id || status === 'invited' || status === 'confirmed' 
                                 onClick={async () => {
                                   try { setInvitingId(r.id); const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : ''); await inviteRegistrant(r.id, { baseUrl }); notify({ type: 'success', message: 'Invitation sent' }); } catch (e) { notify({ type: 'error', message: e instanceof Error ? e.message : 'Failed to send invitation' }); } finally { setInvitingId(null); }
                                 }} title="Send invitation"><Send className="h-4 w-4" /> Invite</Button>
-                                <Button size="sm" variant="ghost" onClick={toggle}>
+                                <Button size="sm" onClick={toggle}>
                                   <ChevronDown className={`h-4 w-4 mr-1 transition-transform ${expanded[r.id] ? 'rotate-180' : ''}`} />
                                   {expanded[r.id] ? 'Hide details' : 'View details'}
                                 </Button>
