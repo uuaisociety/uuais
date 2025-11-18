@@ -53,13 +53,13 @@ service cloud.firestore {
       allow create: if isSignedIn() && request.auth.uid == uid
         // Limit client-writable fields; prevent role escalation
         && request.resource.data.keys().hasOnly([
-          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails'
+          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails','eventHistory'
         ]);
 
       // Update own doc but cannot alter privileged fields except allowed ones
       allow update: if isSignedIn() && request.auth.uid == uid
         && request.resource.data.keys().hasOnly([
-          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails'
+          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails','eventHistory'
         ]);
 
       // Admin full control

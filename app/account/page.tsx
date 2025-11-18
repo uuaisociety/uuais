@@ -37,16 +37,22 @@ export default function AccountPage() {
       setForm(p || {});
       setProviders((u.providerData || []).map(pd => pd.providerId));
       const regs = await getMyRegistrations(u.uid);
-      setRegistrations(regs);
+      const events = await getAllEvents();
+      // Only display registrations to events that are published and not already past more than 24 hours ago
+      const filtered = regs.filter(
+        reg => events.some(ev => ev.id === reg.eventId && ev.published === true &&
+          ev.eventStartAt && new Date(ev.eventStartAt).getTime() > new Date().getTime() - 24 * 60 * 60 * 1000
+        )
+      );
       // Build event meta map (title + time)
       try {
-        const events = await getAllEvents();
         const map: Record<string, { title: string; startAt?: string; }> = {};
         for (const ev of events) {
           map[ev.id] = { title: ev.title, startAt: ev.eventStartAt };
         }
         
         setEventMeta(map);
+        setRegistrations(filtered);
       } catch { }
       setLoading(false);
     });
@@ -168,6 +174,7 @@ export default function AccountPage() {
                           Confirm spot
                         </Button>
                       )}
+                      {/* Only display cancel if we are registered, waitlist or invited */}
                       {(r.status === 'registered' || r.status === 'waitlist' || r.status === 'invited') && (
                         <Button
                           size="sm"
