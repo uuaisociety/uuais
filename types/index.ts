@@ -16,6 +16,11 @@ export interface Event {
   registrationClosesAt?: string;
   /** ISO datetime when the event should start being published/visible (optional, UI-driven; rules may still use `published`). */
   publishAt?: string;
+  attendees?: {
+    userId: string;
+    attended: boolean | null;
+    timestamp: number | null;
+  }[];
 }
 
 export interface TeamMember {
