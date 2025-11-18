@@ -7,3 +7,4 @@ export * from './firestore/blog';
 export * from './firestore/faqs';
 export * from './firestore/analytics';
 export * from './firestore/attendance';
+export * from './firestore/jobs';

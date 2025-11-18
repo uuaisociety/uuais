@@ -119,3 +119,19 @@ export interface EventCustomQuestion {
   required: boolean;
   order: number;
 }
+
+export type JobType = 'startup' | 'internship' | 'master_thesis' | 'job';
+
+export interface Job {
+  id: string;
+  type: JobType;
+  title: string;
+  company: string;
+  location?: string;
+  description: string;
+  applyUrl?: string;
+  applyEmail?: string;
+  tags?: string[];
+  published: boolean;
+  createdAt?: string; // ISO string for client convenience
+}

@@ -36,6 +36,7 @@ export const Header: React.FC = () => {
     { name: 'Home', href: '/' },
     { name: 'Events', href: '/events' },
     { name: 'Newsletter', href: '/blog' },
+    { name: 'Job board', href: '/careers' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }
   ];
@@ -102,6 +103,7 @@ export const Header: React.FC = () => {
                   </Link>
                 ))}
                 {isAdmin && (
+                  <>                 
                   <Link
                     href="/admin"
                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/admin')
@@ -111,6 +113,7 @@ export const Header: React.FC = () => {
                   >
                     Admin
                   </Link>
+                  </>
                 )}
                 <ThemeToggle />
               </nav>

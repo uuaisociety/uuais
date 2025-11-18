@@ -81,47 +81,12 @@ export const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/events"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Events
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Newsletter
-                </Link>
-              </li>
-              {/* <li><Link href="/join" className="text-gray-300 hover:text-white transition-colors">Join Us</Link></li> */}
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-gray-300 hover:text-white transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
+              <li><Link href="/" className="text-gray-300 hover:text-white transition-colors">Home</Link></li>
+              <li><Link href="/events" className="text-gray-300 hover:text-white transition-colors">Events</Link></li>
+              <li><Link href="/blog" className="text-gray-300 hover:text-white transition-colors">Newsletter</Link></li>
+              <li><Link href="/careers" className="text-gray-300 hover:text-white transition-colors">Job board</Link></li>
+              <li><Link href="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 
