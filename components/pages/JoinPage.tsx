@@ -107,10 +107,10 @@ const JoinPage: React.FC = () => {
             <Button onClick={() => signInWithGooglePopup()} variant="default">
               <span className="flex items-center gap-2"><GoogleIcon className="h-4 w-4"/> Continue with Google</span>
             </Button>
-            <Button onClick={() => signInWithGithubPopup()} variant="outline">
+            <Button onClick={() => signInWithGithubPopup()} variant="default">
               <span className="flex items-center gap-2"><GithubIcon className="h-4 w-4"/> Continue with GitHub</span>
             </Button>
-            {/* <Button onClick={() => signInWithMicrosoftPopup()} variant="outline">
+            {/* <Button onClick={() => signInWithMicrosoftPopup()} variant="default">
               <span className="flex items-center gap-2"><MicrosoftIcon className="h-4 w-4"/> Continue with Microsoft</span>
             </Button> */}
           </CardContent>

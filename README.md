@@ -78,7 +78,7 @@ The page will automatically reload when you make changes to the code.
   - You will see that you are not authorized.
   - Install dev packages and set the email as an admin (replace <email> with your gmail):
    ```bash
-   npm install -D @types/node @types/react @types/react-dom @types/jest
+   npm install -D @types/node @types/react @types/react-dom
    npm run set:admin -- <email> true
    ```
 

@@ -219,9 +219,9 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="mb-8">
+        <div className="overflow-x-auto mb-8">
           <div className="pb-4 border-b border-gray-200 dark:border-gray-700">
-            <nav className="-mb-px flex space-x-8">
+            <nav className="-mb-px flex space-x-8 md:space-x-12">
               {([
                 { key: 'events', label: 'Events', icon: Calendar },
                 { key: 'team', label: 'Team', icon: Users },
@@ -233,7 +233,7 @@ const AdminDashboard: React.FC = () => {
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
-                  className={`flex items-center py-2 px-3 border-b-2 font-medium text-sm ${activeTab === key
+                  className={`cursor-pointer flex items-center py-2 px-3 border-b-2 font-medium text-sm transition-all duration-200 ease-in-out ${activeTab === key
                     ? 'border-red-500 text-red-600 dark:text-red-400'
                     : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
                     }`}

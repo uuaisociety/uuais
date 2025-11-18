@@ -3,7 +3,7 @@
 // Disable static generation for this page
 export const dynamic = "force-dynamic";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Calendar, Clock, MapPin, Users } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -38,8 +38,8 @@ const EventsPage: React.FC = () => {
     { value: "other", label: "Other" },
   ];
 
-  const now = new Date();
-  const futureEvents = state.events
+  const now = useMemo(() => new Date(), []);
+  const futureEvents = useMemo(() => state.events
     .filter((event) => event.published !== false)
     .filter((event) => !event.publishAt || new Date(event.publishAt) <= now)
     .filter((event) => new Date(event.eventStartAt) > now)
@@ -50,9 +50,9 @@ const EventsPage: React.FC = () => {
       const matchesCategory =
         categoryFilter === "all" || event.category === categoryFilter;
       return matchesSearch && matchesCategory;
-    });
+    }), [state.events, searchTerm, categoryFilter, now]);
 
-  const pastEvents = state.events
+  const pastEvents = useMemo(() => state.events
     .filter((e) => e.published !== false)
     .filter((e) => !e.publishAt || new Date(e.publishAt) <= now)
     .filter((e) => new Date(e.eventStartAt) < now)
@@ -63,7 +63,8 @@ const EventsPage: React.FC = () => {
       const matchesCategory =
         categoryFilter === "all" || e.category === categoryFilter;
       return matchesSearch && matchesCategory;
-    });
+    }), [state.events, searchTerm, categoryFilter, now]);
+
 
   const getCategoryColor = (category: string) => {
     const colors = {
@@ -100,7 +101,7 @@ const EventsPage: React.FC = () => {
           <div className="flex bg-white dark:bg-gray-900 transition-colors p-1 rounded-lg gap-2">
             <Button
               onClick={() => setActiveTab("upcoming")}
-              className={`px-6 py-2 font-medium transition-colors text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
+              className={`px-6 py-2 font-medium transition-all duration-500 ease-in-out text-gray-700 dark:text-gray-300 ${
                 activeTab === "upcoming"
                   ? "bg-red-600 text-white"
                   : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
@@ -110,7 +111,7 @@ const EventsPage: React.FC = () => {
             </Button>
             <Button
               onClick={() => setActiveTab("past")}
-              className={`px-6 py-2 rounded-md font-medium transition-colors text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 ${
+              className={`px-6 py-2 rounded-md font-medium transition-all duration-500 ease-in-out animate-gradientMove text-gray-700 dark:text-gray-300 ${
                 activeTab === "past"
                   ? "bg-red-600 text-white"
                   : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
@@ -139,6 +140,7 @@ const EventsPage: React.FC = () => {
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
                 fullWidth
+                className="dark:bg-gray-800"
               />
             </div>
           </div>
@@ -239,11 +241,11 @@ const EventsPage: React.FC = () => {
 
                   <Link href={`/events/${event.id}`}>
                     {activeTab === "upcoming" ? (
-                      <Button variant="default" size="sm">
+                      <Button size="sm">
                         View Details & Register
                       </Button>
                     ) : (
-                      <Button variant="outline" size="sm">
+                      <Button size="sm">
                         View Details
                       </Button>
                     )}
