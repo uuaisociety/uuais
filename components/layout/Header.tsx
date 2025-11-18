@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
     { name: 'Home', href: '/' },
     { name: 'Events', href: '/events' },
     { name: 'Newsletter', href: '/blog' },
-    // { name: 'Job board', href: '/careers' },
+    { name: 'Job board', href: '/careers' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }
   ];
@@ -103,11 +103,7 @@ export const Header: React.FC = () => {
                   </Link>
                 ))}
                 {isAdmin && (
-                  <> 
-                  {/* Job board as admin-only for testing */}
-                  <Link href="/careers" className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/careers')
-                    ? 'bg-red-600/20 text-red-600 dark:text-red-400'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'}`}>Job board</Link>
+                  <>                 
                   <Link
                     href="/admin"
                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/admin')
