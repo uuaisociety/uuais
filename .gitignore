@@ -12,7 +12,6 @@
 
 # testing
 /coverage
-/functions*
 /dataconnect*
 /dataconnect-generated/js*
 *.log
@@ -52,6 +51,7 @@ yarn-error.log*
 next-env.d.ts
 
 # Firebase functions and dataconnect
-/functions
+/functions/node_modules
+/functions/.eslintrc.js
 /dataconnect
 /dataconnect-generated
