@@ -55,3 +55,7 @@ next-env.d.ts
 /functions/.eslintrc.js
 /dataconnect
 /dataconnect-generated
+
+# local firebase emulators
+.firebaserc
+firebase.json
