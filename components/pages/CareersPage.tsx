@@ -72,6 +72,7 @@ export default function CareersPage() {
     if (filter === 'all') return publishedJobs;
     if (filter === 'startup') return publishedJobs.filter(j => j.type === 'startup');
     if (filter === 'internships') return publishedJobs.filter(j => j.type === 'internship' || j.type === 'master_thesis');
+    if (filter === 'other') return publishedJobs.filter(j => j.type === 'other');
     return publishedJobs.filter(j => j.type === 'job');
   }, [filter, publishedJobs]);
 
