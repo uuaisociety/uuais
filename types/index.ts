@@ -120,7 +120,7 @@ export interface EventCustomQuestion {
   order: number;
 }
 
-export type JobType = 'startup' | 'internship' | 'master_thesis' | 'job';
+export type JobType = 'startup' | 'internship' | 'master_thesis' | 'job' | 'other';
 
 export interface Job {
   id: string;

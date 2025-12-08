@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { X } from "lucide-react";
 import { Job, JobType } from "@/types";
@@ -18,6 +18,11 @@ interface JobModalProps {
 
 const JobModal: React.FC<JobModalProps> = ({ open, editing, form, setForm, onClose, onSubmit }) => {
   const [tagsText, setTagsText] = useState((form.tags || []).join(', '));
+  useEffect(() => {
+    setTagsText((form.tags || []).join(', '));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editing]);
+
   if (!open) return null;
 
   return (
@@ -45,6 +50,7 @@ const JobModal: React.FC<JobModalProps> = ({ open, editing, form, setForm, onClo
                 <option value="internship">Internship</option>
                 <option value="master_thesis">Master Thesis</option>
                 <option value="job">Job</option>
+                <option value="other">Other</option>
               </select>
             </div>
             <div>
