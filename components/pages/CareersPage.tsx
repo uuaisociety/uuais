@@ -57,7 +57,7 @@ export default function CareersPage() {
   const { state } = useApp();
   const [uid, setUid] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<'all' | 'startup' | 'internships' | 'jobs'>('all');
+  const [filter, setFilter] = useState<'all' | 'startup' | 'internships' | 'jobs' | 'other'>('all');
 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged((u) => {
@@ -132,6 +132,13 @@ export default function CareersPage() {
               aria-pressed={filter === 'jobs'}
             >
               Jobs
+            </Button>
+            <Button
+              variant={filter === 'other' ? 'default' : 'outline'}
+              onClick={() => setFilter('other')}
+              aria-pressed={filter === 'other'}
+            >
+              Other
             </Button>
           </div>
         </div>
