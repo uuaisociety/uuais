@@ -161,10 +161,11 @@ exports.sendAttendanceConfirmationEmail = onSchedule(
         const registrationsSnapshot = await db
           .collection("registrations")
           .where("eventId", "==", eventId)
+          .where("status", "==", "invited")
           .get();
 
         if (registrationsSnapshot.empty) {
-          console.log(`No registrations found for event: ${eventData.title}.`);
+          console.log(`No registrations found for event: ${eventData.title} with status invited.`);
           continue;
         }
 
