@@ -94,7 +94,7 @@ exports.sendConfirmationEmail = functions.firestore
 // Email asking for confirmation to attend an event
 exports.sendAttendanceConfirmationEmail = onSchedule(
   {
-    schedule: "every day 18:00", // At 18:00 UTC every day
+    schedule: "every day 17:00", // At 17:00 UTC every day
     timezone: "Europe/Stockholm",
     secrets: [SENDGRID_API_KEY],
     timeoutSeconds: 300, // Allow extra time for sending multiple emails
