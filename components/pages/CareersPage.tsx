@@ -1,10 +1,8 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import DOMPurify from 'dompurify';
 import { useApp } from "@/contexts/AppContext";
-import { auth } from "@/lib/firebase-client";
-import LoginModal from "@/components/ui/LoginModal";
 import { Card, CardContent } from "@/components/ui/Card";
 import Tag from "@/components/ui/Tag";
 import { Button } from "@/components/ui/Button";
@@ -38,7 +36,7 @@ function JobItem({ job }: { job: Job }) {
           <div className="ml-4 flex flex-col gap-2 items-end">
             {job.applyUrl && (
               <a href={job.applyUrl} target="_blank" rel="noreferrer">
-                <Button size="sm" variant="outline">Apply</Button>
+                <Button size="sm" variant="default">Read more</Button>
               </a>
             )}
             {job.applyEmail && (
@@ -55,17 +53,7 @@ function JobItem({ job }: { job: Job }) {
 
 export default function CareersPage() {
   const { state } = useApp();
-  const [uid, setUid] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'startup' | 'internships' | 'jobs' | 'other'>('all');
-
-  useEffect(() => {
-    const unsub = auth.onAuthStateChanged((u) => {
-      setUid(u ? u.uid : null);
-      setLoading(false);
-    });
-    return () => unsub();
-  }, []);
 
   const publishedJobs = useMemo(() => state.jobs.filter(j => j.published), [state.jobs]);
   const filteredJobs = useMemo(() => {
@@ -76,13 +64,6 @@ export default function CareersPage() {
     return publishedJobs.filter(j => j.type === 'job');
   }, [filter, publishedJobs]);
 
-  if (loading) {
-    return <div className="pt-24 px-4 max-w-6xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
-  }
-
-  if (!uid) {
-    return <LoginModal after={() => window.location.assign('/careers')} />;
-  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12">
@@ -91,12 +72,6 @@ export default function CareersPage() {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Job board</h1>
           <div className="text-gray-700 dark:text-gray-300 space-y-2 mt-2">
             <p>
-              At UU AI Society, we connect our members with the industry through relevant opportunities with everything
-              from startups to multinationals and everything in between. We post job openings for internships,
-              master theses, and full-time roles here.
-            </p>
-            <p>
-              Companies that need the talent offered by our members can post job openings here.
               To post a role here contact us at <a className="underline" href="mailto:alexander.anderson@uuais.com">alexander.anderson@uuais.com</a>.
             </p>
           </div>
