@@ -1,4 +1,4 @@
-import { collection, query, orderBy, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, DocumentData, onSnapshot, Timestamp } from 'firebase/firestore';
+import { collection, query, orderBy, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, DocumentData, onSnapshot, Timestamp, where } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 import { Job } from '@/types';
 import { stripUndefined } from './utils';
@@ -7,7 +7,11 @@ import { stripUndefined } from './utils';
 // Jobs
 export const getJobs = async (): Promise<Job[]> => {
   const jobsRef = collection(db, 'jobs');
-  const qy = query(jobsRef, orderBy('createdAt', 'desc'));
+  const qy = query(
+    jobsRef,
+    where('published', '==', true),
+    orderBy('createdAt', 'desc')
+  );
   const snapshot = await getDocs(qy);
   return snapshot.docs.map((d) => {
     const data = d.data() as DocumentData;
@@ -37,7 +41,11 @@ export const deleteJob = async (id: string): Promise<void> => {
 
 export const subscribeToJobs = (callback: (jobs: Job[]) => void) => {
   const jobsRef = collection(db, 'jobs');
-  const qy = query(jobsRef, orderBy('createdAt', 'desc'));
+  const qy = query(
+    jobsRef,
+    where('published', '==', true),
+    orderBy('createdAt', 'desc')
+  );
   return onSnapshot(qy, (snapshot) => {
     const jobs = snapshot.docs.map((d) => {
       const data = d.data() as DocumentData;
