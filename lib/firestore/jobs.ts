@@ -22,9 +22,8 @@ export const getJobs = async (): Promise<Job[]> => {
 };
 
 export const addJob = async (job: Omit<Job, 'id' | 'createdAt'> & { createdAt?: never }): Promise<string> => {
-  const jobsRef = collection(db, 'jobs');
-  const payload = stripUndefined({ ...job, createdAt: serverTimestamp() }) as DocumentData;
-  const docRef = await addDoc(jobsRef, payload);
+  const payload = stripUndefined(job) as DocumentData; // serverTimestamp will be destroyed if mutated̈́
+  const docRef = await addDoc(collection(db, 'jobs'), {...payload, createdAt: serverTimestamp() });
   return docRef.id;
 };
 
@@ -39,13 +38,16 @@ export const deleteJob = async (id: string): Promise<void> => {
   await deleteDoc(jobRef);
 };
 
-export const subscribeToJobs = (callback: (jobs: Job[]) => void) => {
+export const subscribeToJobs = (
+  callback: (jobs: Job[]) => void,
+  options?: { includeUnpublished?: boolean }
+
+) => {
   const jobsRef = collection(db, 'jobs');
-  const qy = query(
-    jobsRef,
-    where('published', '==', true),
-    orderBy('createdAt', 'desc')
-  );
+  const qy = options && options.includeUnpublished
+    ? query(jobsRef, orderBy("createdAt", "desc"))
+    : query(jobsRef, where("published", "==", true), orderBy("createdAt", "desc"));
+
   return onSnapshot(qy, (snapshot) => {
     const jobs = snapshot.docs.map((d) => {
       const data = d.data() as DocumentData;

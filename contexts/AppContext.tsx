@@ -170,9 +170,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   useEffect(() => {
     // Track the unsubscribe function for events so we can re-subscribe when admin status changes
     let unsubscribeEvents: (() => void) | null = null;
+    let unsubscribeJobs: (() => void) | null = null;
 
     const subscribe = (includeUnpublished = false) => {
-      // Unsubscribe previous if any
+      // includeUnpublished: boolean indicates admin status
+
+      // Unsubscribe previous
       if (unsubscribeEvents) {
         try { unsubscribeEvents(); } catch { /* ignore */ }
         unsubscribeEvents = null;
@@ -180,6 +183,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       unsubscribeEvents = subscribeToEvents((events) => {
         dispatch({ type: 'SET_EVENTS', payload: events });
       }, { includeUnpublished });
+
+      if (unsubscribeJobs)  {
+        try { unsubscribeJobs(); } catch { /* ignore */ }
+        unsubscribeJobs = null;
+      }
+      unsubscribeJobs = subscribeToJobs((jobs) => {
+        dispatch({ type: 'SET_JOBS', payload: jobs });
+      }, { includeUnpublished });
+
     };
 
     // Initial subscription: assume not admin (public)
@@ -192,9 +204,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     const unsubscribeBlogPosts = subscribeToBlogPosts((posts) => {
       dispatch({ type: 'SET_BLOG_POSTS', payload: posts });
-    });
-    const unsubscribeJobs = subscribeToJobs((jobs) => {
-      dispatch({ type: 'SET_JOBS', payload: jobs });
     });
     const unsubscribeFaqs = subscribeToFaqs((faqs) => {
       dispatch({ type: 'SET_FAQS', payload: faqs });
@@ -212,8 +221,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       // Refresh token to ensure custom claims are present
       const tokenResult = await user.getIdTokenResult(true);
       const adminClaim = !!tokenResult.claims.admin;
-  // Re-subscribe with adminClaim (true/false)
-      // Re-subscribe to events with or without unpublished docs
+      // Re-subscribe with adminClaim (true/false)
       subscribe(adminClaim);
     });
 
@@ -226,7 +234,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       unsubscribeBlogPosts();
       unsubscribeFaqs();
       idTokenUnsub();
-      unsubscribeJobs();
     };
   }, []);
 

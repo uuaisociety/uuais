@@ -1,3 +1,4 @@
+import { Timestamp } from 'firebase/firestore';
 export interface Event {
   id: string;
   title: string;
@@ -133,5 +134,5 @@ export interface Job {
   applyEmail?: string;
   tags?: string[];
   published: boolean;
-  createdAt?: string; // ISO string for client convenience
+  createdAt?: Timestamp; // ISO string for client convenience
 }
