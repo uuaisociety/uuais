@@ -1,19 +1,21 @@
 'use client'
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { Event, TeamMember, BlogPost, FAQ } from '../types';
+import { Event, TeamMember, BlogPost, FAQ, Job } from '../types';
 import { subscribeToEvents, addEvent as addEventToFirestore, updateEvent as updateEventInFirestore, deleteEvent as deleteEventFromFirestore } from '@/lib/firestore/events';
 import { auth } from '@/lib/firebase-client';
 import { onIdTokenChanged } from 'firebase/auth';
 import { subscribeToTeamMembers, addTeamMember as addTeamMemberToFirestore, updateTeamMember as updateTeamMemberInFirestore, deleteTeamMember as deleteTeamMemberFromFirestore } from '@/lib/firestore/team';
 import { subscribeToBlogPosts, addBlogPost as addBlogPostToFirestore, updateBlogPost as updateBlogPostInFirestore, deleteBlogPost as deleteBlogPostFromFirestore } from '@/lib/firestore/blog';
 import { subscribeToFaqs, addFaq as addFaqToFirestore, updateFaq as updateFaqInFirestore, deleteFaq as deleteFaqFromFirestore } from '@/lib/firestore/faqs';
+import { subscribeToJobs, addJob as addJobToFirestore, updateJob as updateJobInFirestore, deleteJob as deleteJobFromFirestore } from '@/lib/firestore/jobs';
 
 interface AppState {
   events: Event[];
   teamMembers: TeamMember[];
   blogPosts: BlogPost[];
   faqs: FAQ[];
+  jobs: Job[];
   isLoading: boolean;
   error: string | null;
 }
@@ -36,7 +38,11 @@ type AppAction =
   | { type: 'SET_FAQS'; payload: FAQ[] }
   | { type: 'ADD_FAQS'; payload: FAQ }
   | { type: 'UPDATE_FAQS'; payload: FAQ }
-  | { type: 'DELETE_FAQS'; payload: string };
+  | { type: 'DELETE_FAQS'; payload: string }
+  | { type: 'SET_JOBS'; payload: Job[] }
+  | { type: 'ADD_JOB'; payload: Job }
+  | { type: 'UPDATE_JOB'; payload: Job }
+  | { type: 'DELETE_JOB'; payload: string };
 
 type FirestoreAction = 
   | { firestoreAction: 'ADD_EVENT'; payload: Omit<Event, 'id'> }
@@ -50,13 +56,17 @@ type FirestoreAction =
   | { firestoreAction: 'DELETE_BLOG_POST'; payload: string }
   | { firestoreAction: 'ADD_FAQS'; payload: Omit<FAQ, 'id'> }
   | { firestoreAction: 'UPDATE_FAQS'; payload: FAQ }
-  | { firestoreAction: 'DELETE_FAQS'; payload: string };
+  | { firestoreAction: 'DELETE_FAQS'; payload: string }
+  | { firestoreAction: 'ADD_JOB'; payload: Omit<Job, 'id' | 'createdAt'> }
+  | { firestoreAction: 'UPDATE_JOB'; payload: Job }
+  | { firestoreAction: 'DELETE_JOB'; payload: string };
 
 const initialState: AppState = {
   events: [],
   teamMembers: [],
   blogPosts: [],
   faqs: [],
+  jobs: [],
   isLoading: false,
   error: null
 };
@@ -129,6 +139,20 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         faqs: state.faqs.filter(f => f.id !== action.payload)
       };
+    case 'SET_JOBS':
+      return { ...state, jobs: action.payload };
+    case 'ADD_JOB':
+      return { ...state, jobs: [...state.jobs, action.payload] };
+    case 'UPDATE_JOB':
+      return {
+        ...state,
+        jobs: state.jobs.map(j => j.id === action.payload.id ? action.payload : j)
+      };
+    case 'DELETE_JOB':
+      return {
+        ...state,
+        jobs: state.jobs.filter(j => j.id !== action.payload)
+      };
     default:
       return state;
   }
@@ -146,9 +170,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   useEffect(() => {
     // Track the unsubscribe function for events so we can re-subscribe when admin status changes
     let unsubscribeEvents: (() => void) | null = null;
+    let unsubscribeJobs: (() => void) | null = null;
 
     const subscribe = (includeUnpublished = false) => {
-      // Unsubscribe previous if any
+      // includeUnpublished: boolean indicates admin status
+
+      // Unsubscribe previous
       if (unsubscribeEvents) {
         try { unsubscribeEvents(); } catch { /* ignore */ }
         unsubscribeEvents = null;
@@ -156,6 +183,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       unsubscribeEvents = subscribeToEvents((events) => {
         dispatch({ type: 'SET_EVENTS', payload: events });
       }, { includeUnpublished });
+
+      if (unsubscribeJobs)  {
+        try { unsubscribeJobs(); } catch { /* ignore */ }
+        unsubscribeJobs = null;
+      }
+      unsubscribeJobs = subscribeToJobs((jobs) => {
+        dispatch({ type: 'SET_JOBS', payload: jobs });
+      }, { includeUnpublished });
+
     };
 
     // Initial subscription: assume not admin (public)
@@ -185,8 +221,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       // Refresh token to ensure custom claims are present
       const tokenResult = await user.getIdTokenResult(true);
       const adminClaim = !!tokenResult.claims.admin;
-  // Re-subscribe with adminClaim (true/false)
-      // Re-subscribe to events with or without unpublished docs
+      // Re-subscribe with adminClaim (true/false)
       subscribe(adminClaim);
     });
 
@@ -247,6 +282,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             break;
           case 'DELETE_FAQS':
             await deleteFaqFromFirestore(action.payload);
+            break;
+          case 'ADD_JOB':
+            await addJobToFirestore(action.payload);
+            break;
+          case 'UPDATE_JOB':
+            await updateJobInFirestore(action.payload.id, action.payload);
+            break;
+          case 'DELETE_JOB':
+            await deleteJobFromFirestore(action.payload);
             break;
         }
       } else {

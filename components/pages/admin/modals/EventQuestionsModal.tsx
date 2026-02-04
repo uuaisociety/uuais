@@ -120,7 +120,7 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
                   : (
                     <Button size="sm" variant="outline" icon={Edit3} onClick={() => startEdit(q)}>Edit</Button>
                   )}
-                <Button size="sm" variant="outline" icon={Trash2} className="text-red-600" onClick={async () => { if (confirm('Delete this question?')) await onDelete(q.id); }}>Delete</Button>
+                <Button size="sm" variant="destructive" icon={Trash2} onClick={async () => { if (confirm('Delete this question?')) await onDelete(q.id); }}>Delete</Button>
               </div>
             </div>
           ))}

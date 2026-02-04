@@ -31,6 +31,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [canApply, SetCanApply] = useState(false);
   const [customQuestions, setCustomQuestions] = useState<EventCustomQuestion[]>(
     []
   );
@@ -88,6 +89,14 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
     });
     return () => unsub();
   }, [event.id]);
+
+  useEffect(() => {
+    if (!uid || !profile?.isMember) {
+      SetCanApply(false);
+      return;
+    }
+    SetCanApply(true);
+  }, [uid, profile]);
 
   const handleCustomAnswerChange = (
     q: EventCustomQuestion,
@@ -180,6 +189,11 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
           ? "You have been added to the waitlist. We will contact you if a spot opens."
           : "You are registered for the event.",
       });
+      if(isWaitlistOnly){
+        setAlreadyRegistered({ status: "waitlist", regId: "" });
+      }else{
+        setAlreadyRegistered({ status: "registered", regId: "" });
+      }
     } catch (error) {
       console.error("Registration failed:", error);
       const msg = error instanceof Error ? error.message : String(error);
@@ -205,7 +219,6 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
       ? new Date().getTime() > new Date(event.registrationClosesAt).getTime()
       : false;
   const isWaitlistOnly = isCapacityFull || isAfterLastRegistration;
-  const canApply = Boolean(uid && profile?.isMember);
 
   return (
     <>
@@ -224,7 +237,6 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
           <div className="flex items-center gap-2">
             {(alreadyRegistered.status === 'registered' || alreadyRegistered.status === 'waitlist' || alreadyRegistered.status === 'invited') && (
               <Button
-                variant="outline"
                 onClick={() => setConfirmOpen(true)}
               >
                 Cancel
@@ -232,7 +244,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
             )}
             {alreadyRegistered.status === 'invited' && (
               <Button
-                className="bg-green-600 text-white"
+                className="bg-green-600/80 hover:bg-green-600 text-white"
                 onClick={async () => {
                   try {
                     if (!alreadyRegistered.token) throw new Error('Missing confirmation token. Please contact us if you have problems confirming your spot.');
@@ -255,8 +267,8 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
         <Button
           className={`${
             isWaitlistOnly
-              ? "bg-orange-600 hover:bg-orange-700"
-              : "bg-blue-600 hover:bg-blue-700"
+              ? "bg-orange-600/80 hover:bg-orange-600"
+              : "bg-blue-600/80 hover:bg-blue-600"
           } text-white`}
           onClick={() => setIsOpen(true)}
         >

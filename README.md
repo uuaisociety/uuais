@@ -11,93 +11,76 @@ This is a [Next.js](https://nextjs.org) project for the Uppsala University AI So
 ### Installation and Setup
 
 1. **Clone the repository:**
+
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/uuaisociety/uuais
    cd uuais
    ```
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   # or
-   bun install
+#### Setup Firebase (Database and Authentication)
+(Based on https://www.scipress.io/post/OMsrfAaWdIgwNEF0P6za/Part-2---Firebase)
+
+2. **Login and setup dev project**
+
+   ```bash 
+   npm install -g firebase-tools
+   cd lib/
+   firebase login # Use uuais account
+   firebase use dev
    ```
-
-3. **Run the development server:**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
-   # or
-   bun dev
-   ```
-
-4. **Open your browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
-
-The page will automatically reload when you make changes to the code.
-
-### Setup Firebase (Database and Authentication)
-Based on https://www.scipress.io/post/OMsrfAaWdIgwNEF0P6za/Part-2---Firebase
-
-1. **Login and setup dev project**
-
-```bash 
-npm install -g firebase-tools
-cd lib/
-firebase login # Use uuais account
-firebase use dev
-```
 
 #TODO: Setup emulators
 
-2. **Create service account**
+3. **Create service account**
   - Go to https://console.firebase.google.com/u/2/project/uuais-dev/settings/general/web:OTg4MTQwOTYtNDI4NS00Zjk1LThkOWEtZTE2YmFkYmUwN2Yx
   - Go to Service Accounts
   - Click on "Create new private key"
   - Save the file in the root of your project
 
-3. **Copy SDK setup and configuration**
+4. **Copy SDK setup and configuration**
   - Go to https://console.firebase.google.com/u/2/project/uuais-dev/settings/general/web:OTg4MTQwOTYtNDI4NS00Zjk1LThkOWEtZTE2YmFkYmUwN2Yx
   - Scroll down to uuais-dev web app
   - Copy over values from apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId
   to .env file (see below).
 
-4. **Environment Variables**
+5. **Environment Variables**
   - Create a .env file in the root of your project and add the Firebase config values from .env.example
-```bash
-NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+   
+      ```bash
+      NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+      NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
+      NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+      NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
+      NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+      NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+      
+      GOOGLE_APPLICATION_CREDENTIALS=./path/to/serviceAccountKey.json
+      ```
 
-GOOGLE_APPLICATION_CREDENTIALS=./path/to/serviceAccountKey.json
-```
+6. **Run the App in the development server**
 
-5. **Run the App**
-```bash
-npm install
-npm run dev
-```
+   ```bash
+   npm install
+   ```
+   ```bash
+   npm run dev
+   # or
+   npx next dev --turbopack
+   ```
+   
 Your app should now be running at [http://localhost:3000](http://localhost:3000)
 
-6. **Set admin user**
+The page will automatically reload when you make changes to the code.
+
+7. **Set admin user**
   - Navigate to [http://localhost:3000/admin](http://localhost:3000/admin)
   - Sign in with Google
   - You will see that you are not authorized.
   - Install dev packages and set the email as an admin (replace <email> with your gmail):
-```bash
-npm install -D @types/node @types/react @types/react-dom @types/jest
-npm run set:admin -- <email> true
-```
+   ```bash
+   npm install -D @types/node @types/react @types/react-dom
+   npm run set:admin -- <email> true
+   ```
 
 
 ### Available Scripts

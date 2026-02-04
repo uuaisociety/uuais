@@ -1,3 +1,4 @@
+import { Timestamp } from 'firebase/firestore';
 export interface Event {
   id: string;
   title: string;
@@ -16,6 +17,11 @@ export interface Event {
   registrationClosesAt?: string;
   /** ISO datetime when the event should start being published/visible (optional, UI-driven; rules may still use `published`). */
   publishAt?: string;
+  attendees?: {
+    userId: string;
+    attended: boolean | null;
+    timestamp: number | null;
+  }[];
 }
 
 export interface TeamMember {
@@ -113,4 +119,20 @@ export interface EventCustomQuestion {
   options?: string[];
   required: boolean;
   order: number;
+}
+
+export type JobType = 'startup' | 'internship' | 'master_thesis' | 'job' | 'other';
+
+export interface Job {
+  id: string;
+  type: JobType;
+  title: string;
+  company: string;
+  location?: string;
+  description: string;
+  applyUrl?: string;
+  applyEmail?: string;
+  tags?: string[];
+  published: boolean;
+  createdAt?: Timestamp; // ISO string for client convenience
 }

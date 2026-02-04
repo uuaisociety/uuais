@@ -37,6 +37,7 @@ export const Header: React.FC = () => {
     { name: 'Explore', href: '/explore' },
     { name: 'Events', href: '/events' },
     { name: 'Newsletter', href: '/blog' },
+    { name: 'Job board', href: '/careers' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }
   ];
@@ -76,15 +77,15 @@ export const Header: React.FC = () => {
             <Link href="/" className="flex items-center space-x-2 group no-underline">
               <div className="pl-2 pb-2 rounded-lg">
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo-highdef.png"
                   alt="UU AI Society Logo"
-                  width={40}
+                  width={240}
                   height={40}
                   className="h-12 w-auto"
                   priority
                 />
               </div>
-              <span className="ml-2 font-bold text-xl text-gray-900 dark:text-white">UU AI Society</span>
+              <span className="font-bold text-xl text-gray-900 dark:text-white">UU AI Society</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -103,6 +104,7 @@ export const Header: React.FC = () => {
                   </Link>
                 ))}
                 {isAdmin && (
+                  <>                 
                   <Link
                     href="/admin"
                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/admin')
@@ -112,6 +114,7 @@ export const Header: React.FC = () => {
                   >
                     Admin
                   </Link>
+                  </>
                 )}
                 <ThemeToggle />
               </nav>
@@ -155,20 +158,21 @@ export const Header: React.FC = () => {
                   href="/admin"
                   onClick={() => setIsMenuOpen(false)}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${isActive('/admin')
-                    ? 'bg-red-600/20'
+                    ? 'text-gray-700 dark:text-gray-300 bg-red-600/20'
                     : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
                     }`}
                 >
                   Admin
                 </Link>
               )}
+              <ThemeToggle />
             </div>
           </div>
         </div>
       </div>
     </header>
     {/* Automatic spacer under fixed header: ~24px to avoid cramped content */}
-    <div aria-hidden className="h-6" />
+    <div aria-hidden className="h-12" />
     </>
   );
 };

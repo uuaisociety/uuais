@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect } from 'react';
+import DOMPurify from 'dompurify';
 import { notFound, useParams } from 'next/navigation';
 import { Card, CardContent, CardMedia } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -107,7 +108,7 @@ const BlogDetailPage: React.FC = () => {
           <CardContent className="p-8">
             <div 
               className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300"
-              dangerouslySetInnerHTML={{ __html: blogPost.content }}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogPost.content) }}
             />
           </CardContent>
         </Card>

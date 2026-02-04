@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import DOMPurify from 'dompurify';
 import { notFound, useParams } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -13,6 +14,9 @@ import { useApp } from "@/contexts/AppContext";
 
 import campus from "@/public/images/campus.png";
 import { incrementEventUniqueClick } from "@/lib/firestore/analytics";
+import { auth } from "@/lib/firebase-client";
+import { getMyRegistrationForEvent } from "@/lib/firestore/registrations";
+import QRCode from "react-qr-code";
 
 const categoryOptions = [
   { value: "all", label: "All Categories" },
@@ -25,6 +29,8 @@ const EventDetailPage: React.FC = () => {
   const params = useParams();
   const eventId = params.id as string;
   const { state } = useApp();
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [hasEligibleRegistration, setHasEligibleRegistration] = useState(false);
 
   // Increment unique event click on mount
   useEffect(() => {
@@ -32,6 +38,38 @@ const EventDetailPage: React.FC = () => {
       incrementEventUniqueClick(eventId).catch(() => {});
     }
   }, [eventId]);
+
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged((u) => {
+      setCurrentUserId(u ? u.uid : null);
+    });
+    return () => unsub();
+  }, []);
+
+  const event = state.events.find((e) => e.id === eventId);
+
+  useEffect(() => {
+    if (!currentUserId || !eventId || !event || !event.eventStartAt) {
+      setHasEligibleRegistration(false);
+      return;
+    }
+    (async () => {
+      try {
+        const reg = await getMyRegistrationForEvent(currentUserId, eventId);
+        if (!reg) {
+          setHasEligibleRegistration(false);
+          return;
+        }
+        const status = reg.status;
+        const eventStartMs = new Date(event.eventStartAt).getTime();
+        const withinWindow = Math.abs(eventStartMs - Date.now()) <= 48 * 60 * 60 * 1000;
+        const eligibleStatus = status === "registered" || status === "confirmed";
+        setHasEligibleRegistration(eligibleStatus && withinWindow);
+      } catch {
+        setHasEligibleRegistration(false);
+      }
+    })();
+  }, [currentUserId, eventId, event]);
 
   // Show loading state while events are being fetched the first time
   if (state.events.length === 0) {
@@ -48,21 +86,21 @@ const EventDetailPage: React.FC = () => {
       </div>
     );
   }
-  
-  const event = state.events.find((e) => e.id === eventId);
-  
+
   if (!event) {
     notFound();
   }
-  const isUpcoming = new Date(event.eventStartAt) > new Date();
-  const isPastEvent = new Date(event.eventStartAt) < new Date();
 
+  const eventStart = new Date(event.eventStartAt);
+  const now = new Date();
+  const isUpcoming = eventStart > now;
+  const isPastEvent = eventStart < now;
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-12 pt-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <Link href="/events">
-          <Button variant="outline" className="mb-8" icon={ArrowLeft}>
+          <Button className="mb-8" icon={ArrowLeft}>
             Back to Events
           </Button>
         </Link>
@@ -128,6 +166,23 @@ const EventDetailPage: React.FC = () => {
               <EventRegistrationDialog event={event} />
             </div>
           )}
+          {currentUserId && hasEligibleRegistration && (
+            <div className="mt-4 flex justify-center">
+              <div className="mt-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg inline-block bg-white dark:bg-gray-800">
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                  Show this QR code to the event organizer. They will scan it to record your attendance.
+                </p>
+                <div className="p-3 rounded-md justify-center items-center text-center m-0 ml-auto mr-auto">
+                  <div className="bg-white inline-block p-3 rounded-md">
+                    <QRCode
+                      value={`${process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : '')}/checkin?eventId=${eventId}&userId=${currentUserId}`}
+                      size={240}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Featured Image */}
@@ -152,7 +207,7 @@ const EventDetailPage: React.FC = () => {
             {/<\/?[a-z][\s\S]*>/i.test(event.description || '') ? (
               <div
                 className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300"
-                dangerouslySetInnerHTML={{ __html: event.description || '' }}
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(event.description || '') }}
               />
             ) : (
               <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 whitespace-pre-wrap">
