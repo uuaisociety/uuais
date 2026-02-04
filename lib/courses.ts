@@ -97,16 +97,29 @@ async function loadData(): Promise<Course[]> {
 }
 
 export async function fetchCourses(): Promise<Course[]> {
-  return loadData();
+  const courses = await loadData();
+  if(!courses) {
+    console.error('Failed to fetch courses ');  
+    throw new Error('Failed to fetch courses');
+  }
+  return courses;
 }
 
 export async function fetchCourseById(id: string): Promise<Course | undefined> {
   const courses = await loadData();
+  if(!courses) {
+    console.error('Failed to fetch course by id');  
+    throw new Error('Failed to fetch course by id');
+  }
   return courses.find((c) => c.id === id);
 }
 
 export async function searchCourses(query: string): Promise<Course[]> {
   const courses = await loadData();
+  if(!courses) {
+    console.error('Failed to search courses');  
+    throw new Error('Failed to search courses');
+  }
   const q = query.trim().toLowerCase();
   if (!q) return courses;
   return courses.filter((c) =>
