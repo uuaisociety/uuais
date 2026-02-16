@@ -1,12 +1,56 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
 import { Tag } from "@/components/ui/Tag";
+import { Button } from "@/components/ui/Button";
+import { Heart } from "lucide-react";
 import type { Course } from "@/lib/courses";
 import CourseConnectionsFlow from "./CourseConnectionsFlow";
+import { auth } from "@/lib/firebase-client";
+import { onAuthStateChanged } from "firebase/auth";
+import { isCourseFavorited, toggleFavorite } from "@/lib/firestore/favorites";
 
 type Props = { course: Course; all: Course[]; hrefBase?: string };
 
 export default function CourseDetailClient({ course, all, hrefBase = "/explore" }: Props) {
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [user, setUser] = useState<{ uid: string } | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => setUser(u ? { uid: u.uid } : null));
+    return () => unsub();
+  }, []);
+
+  const checkFavoriteStatus = useCallback(async () => {
+    if (!user) return;
+    try {
+      const favorited = await isCourseFavorited(user.uid, course.id);
+      setIsFavorited(favorited);
+    } catch (e) {
+      console.error("Failed to check favorite status:", e);
+    }
+  }, [user, course.id]);
+
+  useEffect(() => {
+    if (user) {
+      checkFavoriteStatus();
+    }
+  }, [user, course.id, checkFavoriteStatus]);
+
+  const handleToggleFavorite = async () => {
+    if (!user || isLoading) return;
+    setIsLoading(true);
+    try {
+      const newStatus = await toggleFavorite(user.uid, course.id);
+      setIsFavorited(newStatus);
+    } catch (e) {
+      console.error("Failed to toggle favorite:", e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
@@ -16,6 +60,17 @@ export default function CourseDetailClient({ course, all, hrefBase = "/explore" 
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{course.title}</h1>
             <a href={course.link} target="_blank" rel="noopener noreferrer">View uu.se course page</a>
           </div>
+          {user && (
+            <Button
+              variant="outline"
+              onClick={handleToggleFavorite}
+              disabled={isLoading}
+              className={isFavorited ? "text-red-500 border-red-500" : ""}
+            >
+              <Heart className={`h-5 w-5 mr-2 ${isFavorited ? "fill-current" : ""}`} />
+              {isFavorited ? "Favorited" : "Add to Favorites"}
+            </Button>
+          )}
         </div>
       </div>
 
