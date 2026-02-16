@@ -5,7 +5,8 @@ import { useAdmin } from '@/hooks/useAdmin';
 import { Button } from '@/components/ui/Button';
 import LoginModal from '@/components/ui/LoginModal';
 import { useRouter } from 'next/navigation';
-import { GoogleIcon } from 'hugeicons-react'
+import { HugeiconsIcon } from '@hugeicons/react'
+import { GoogleIcon } from '@hugeicons/core-free-icons'
 interface AdminGateProps {
   children: React.ReactNode;
 }
@@ -36,7 +37,7 @@ const AdminGate: React.FC<AdminGateProps> = ({ children }) => {
          You are not authorized to access this page. Please sign in with a Google account that has admin access.
         </p>
         <div className="space-y-3">
-          <Button onClick={signInWithGoogle} className="w-full"><GoogleIcon /> Sign in with Google</Button>
+          <Button onClick={signInWithGoogle} className="w-full"><HugeiconsIcon icon={GoogleIcon} /> Sign in with Google</Button>
         </div>
       </div>
     </div>

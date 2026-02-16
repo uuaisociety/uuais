@@ -6,7 +6,8 @@ export const dynamic = 'force-dynamic';
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
-import { GithubIcon, GoogleIcon } from 'hugeicons-react';
+import { GoogleIcon, GithubIcon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 import { updatePageMeta } from '@/utils/seo';
 import { auth, signInWithGooglePopup, signInWithGithubPopup } from '@/lib/firebase-client';
 import { getUserProfile, upsertUserProfile, updateUserProfile, type UserProfile } from '@/lib/firestore/users';
@@ -105,10 +106,10 @@ const JoinPage: React.FC = () => {
           <CardContent className="space-y-3 flex flex-col md:flex-col justify-center gap-2 pt-4 items-center max-w-md mx-auto">
             {/* TODO: Add colors to icons */}
             <Button onClick={() => signInWithGooglePopup()} variant="default">
-              <span className="flex items-center gap-2"><GoogleIcon className="h-4 w-4"/> Continue with Google</span>
+              <span className="flex items-center gap-2"><HugeiconsIcon icon={GoogleIcon} className="h-4 w-4"/> Continue with Google</span>
             </Button>
             <Button onClick={() => signInWithGithubPopup()} variant="default">
-              <span className="flex items-center gap-2"><GithubIcon className="h-4 w-4"/> Continue with GitHub</span>
+              <span className="flex items-center gap-2"><HugeiconsIcon icon={GithubIcon} className="h-4 w-4"/> Continue with GitHub</span>
             </Button>
             {/* <Button onClick={() => signInWithMicrosoftPopup()} variant="default">
               <span className="flex items-center gap-2"><MicrosoftIcon className="h-4 w-4"/> Continue with Microsoft</span>
