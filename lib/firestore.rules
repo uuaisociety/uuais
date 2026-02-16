@@ -10,6 +10,10 @@ service cloud.firestore {
       return isSignedIn() && request.auth.token.admin == true;
     }
 
+    function isSuperAdmin() {
+      return isSignedIn() && request.auth.token.superAdmin == true;
+    }
+
     // Helper: fetch caller's user profile
     function callerProfile() {
       return get(/databases/$(database)/documents/users/$(request.auth.uid));
@@ -229,6 +233,39 @@ service cloud.firestore {
       allow read: if isAdmin();
       // No client updates or deletes
       allow update, delete: if false;
+    }
+
+    // AI CHATS - user chat history
+    match /ai_chats/{userId}/chats/{chatId} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    // FAVORITES - user favorite courses
+    match /favorites/{userId}/courses/{courseId} {
+      // Users can only read/write their own favorites
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    // COURSE CATEGORIES - user-defined categories
+    match /course_categories/{userId}/categories/{categoryId} {
+      // Users can only read/write their own categories
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    // CATEGORY COURSES - many-to-many mapping
+    match /category_courses/{categoryId}/courses/{courseId} {
+      // Allow read if user owns the category (need to check parent)
+      allow read: if isSignedIn() && get(/databases/$(database)/documents/course_categories/$(request.auth.uid)/categories/$(categoryId)).data.userId == request.auth.uid;
+      // Allow write if user owns the category
+      allow write: if isSignedIn() && get(/databases/$(database)/documents/course_categories/$(request.auth.uid)/categories/$(categoryId)).data.userId == request.auth.uid;
+    }
+
+    // AI SETTINGS - admin configuration
+    match /config/ai_settings {
+      // Anyone can read (used by client for rate limits)
+      allow read: if true;
+      // Only super admins can write
+      allow write: if isSuperAdmin();
     }
   }
 }
