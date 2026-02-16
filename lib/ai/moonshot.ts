@@ -29,6 +29,7 @@ export interface GenerateOptions {
   maxTokens?: number;
   temperature?: number;
   responseFormat?: { type: 'json_object' | 'text' };
+  model?: string;
 }
 
 export class MoonshotError extends Error {
@@ -54,7 +55,8 @@ export async function generateCompletion(
 
   const {
     maxTokens = 1024,
-    responseFormat = { type: 'json_object' }
+    responseFormat = { type: 'json_object' },
+    model = 'moonshot-v1-8k',
   } = options;
 
   try {
@@ -65,7 +67,7 @@ export async function generateCompletion(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'moonshot-v1-8k',
+        model,
         messages,
         max_tokens: maxTokens,
         response_format: responseFormat,

@@ -1,6 +1,8 @@
 import { adminDb } from '@/lib/firebase-admin';
 import { FieldValue, Timestamp } from 'firebase-admin/firestore';
 
+const DEFAULT_RATE_LIMIT_REQUESTS_PER_DAY = 10;
+
 export interface RateLimitStatus {
   allowed: boolean;
   remaining: number;
@@ -16,8 +18,6 @@ export interface AIUsageRecord {
   lastRequest: Timestamp;
 }
 
-const WARNING_THRESHOLD = 7;
-
 function getTodayString(): string {
   return new Date().toISOString().split('T')[0];
 }
@@ -29,12 +29,24 @@ function getTomorrowDate(): Date {
   return tomorrow;
 }
 
-function getDailyLimit(): number {
-  return parseInt(process.env.RATE_LIMIT_REQUESTS_PER_DAY || '10', 10);
+async function getDailyLimit(): Promise<number> {
+  try {
+    const settingsDoc = await adminDb.collection('config').doc('ai_settings').get();
+    if (settingsDoc.exists) {
+      const data = settingsDoc.data();
+      if (data && typeof data.rateLimitRequestsPerDay === 'number') {
+        return data.rateLimitRequestsPerDay;
+      }
+    }
+  } catch (e) {
+    console.warn('Failed to load AI settings from Firestore, using default:', e);
+  }
+  // Fallback to env var or default
+  return parseInt(process.env.RATE_LIMIT_REQUESTS_PER_DAY || String(DEFAULT_RATE_LIMIT_REQUESTS_PER_DAY), 10);
 }
 
 export async function checkRateLimit(userId: string): Promise<RateLimitStatus> {
-  const dailyLimit = getDailyLimit();
+  const dailyLimit = await getDailyLimit();
   const today = getTodayString();
   const docRef = adminDb.collection('ai_usage').doc(`${userId}_${today}`);
   
@@ -64,6 +76,7 @@ export async function incrementUsage(
   userId: string,
   tokensUsed: number
 ): Promise<RateLimitStatus> {
+  const dailyLimit = await getDailyLimit();
   const today = getTodayString();
   const docRef = adminDb.collection('ai_usage').doc(`${userId}_${today}`);
   
@@ -80,7 +93,8 @@ export async function incrementUsage(
   
   const newStatus = await checkRateLimit(userId);
   
-  if (newStatus.remaining === WARNING_THRESHOLD) {
+  const warningThreshold = Math.ceil(dailyLimit * 0.3); // Warn at 30% remaining
+  if (newStatus.remaining === warningThreshold) {
     console.warn(`User ${userId} approaching rate limit: ${newStatus.remaining} requests remaining`);
   }
   

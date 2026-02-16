@@ -1,5 +1,53 @@
 import { generateStructured } from './moonshot';
 import { fetchCourses, type Course } from '@/lib/courses';
+import { adminDb } from '@/lib/firebase-admin';
+
+const DEFAULT_MAX_TOKENS = 1024;
+const DEFAULT_MAX_HISTORY = 4;
+
+async function getAISettings() {
+  try {
+    const settingsDoc = await adminDb.collection('config').doc('ai_settings').get();
+    if (settingsDoc.exists) {
+      const data = settingsDoc.data();
+      return {
+        systemPrompt: data?.systemPrompt,
+        model: data?.model,
+        maxTokensPerRequest: data?.maxTokensPerRequest,
+        maxConversationHistory: data?.maxConversationHistory,
+      };
+    }
+  } catch (e) {
+    console.warn('Failed to load AI settings from Firestore, using defaults:', e);
+  }
+  return {
+    systemPrompt: null,
+    model: null,
+    maxTokensPerRequest: null,
+    maxConversationHistory: null,
+  };
+}
+
+const DEFAULT_SYSTEM_PROMPT = `You are an AI course advisor for Uppsala University students.
+
+Your task:
+1. Analyze the user's query and the provided course context
+2. Recommend 1-10 courses that best match their needs
+3. Explain why each course is relevant
+
+Rules:
+- ONLY recommend from the provided course list
+- Use the exact "ID" field (e.g., "teaching-spanish-culture...") in your recommendations array, NOT the course code
+- Be specific about why a course matches (level, credits, content, prerequisites)
+- If no courses match well, say so clearly
+- Keep explanations concise but informative
+- Return your response as valid JSON
+
+Response format:
+{
+  "message": "A helpful response explaining your recommendations",
+  "recommendations": ["course-id-1", "course-id-2", ...]
+}`;
 
 export type ChatRecommendation = {
   courseId: string;
@@ -68,27 +116,6 @@ function buildContext(courses: Course[]): string {
   }).join('\n\n');
 }
 
-const SYSTEM_PROMPT = `You are an AI course advisor for Uppsala University students.
-
-Your task:
-1. Analyze the user's query and the provided course context
-2. Recommend 1-10 courses that best match their needs
-3. Explain why each course is relevant
-
-Rules:
-- ONLY recommend from the provided course list
-- Use the exact "ID" field (e.g., "teaching-spanish-culture...") in your recommendations array, NOT the course code
-- Be specific about why a course matches (level, credits, content, prerequisites)
-- If no courses match well, say so clearly
-- Keep explanations concise but informative
-- Return your response as valid JSON
-
-Response format:
-{
-  "message": "A helpful response explaining your recommendations",
-  "recommendations": ["course-id-1", "course-id-2", ...]
-}`;
-
 export async function processRAGRequest({
   query,
   conversationHistory = [],
@@ -97,6 +124,13 @@ export async function processRAGRequest({
   userId?: string;
   conversationHistory?: { role: 'user' | 'assistant'; content: string }[];
 }): Promise<{ result: RAGResult; usage: { promptTokens: number; completionTokens: number; totalTokens: number } }> {
+  // Load AI settings from Firestore
+  const settings = await getAISettings();
+  const systemPrompt = settings.systemPrompt || DEFAULT_SYSTEM_PROMPT;
+  const model = settings.model || 'moonshot-v1-8k';
+  const maxTokens = settings.maxTokensPerRequest || DEFAULT_MAX_TOKENS;
+  const maxHistory = settings.maxConversationHistory || DEFAULT_MAX_HISTORY;
+
   // Retrieve relevant courses
   const relevantCourses = await retrieveRelevantCourses(query);
 
@@ -115,8 +149,8 @@ export async function processRAGRequest({
 
   // Build messages
   const messages = [
-    { role: 'system' as const, content: SYSTEM_PROMPT },
-    ...conversationHistory.slice(-4), // Keep last 4 messages for context
+    { role: 'system' as const, content: systemPrompt },
+    ...conversationHistory.slice(-maxHistory),
     {
       role: 'user' as const,
       content: `Available courses:\n${context}\n\nUser query: ${query}\n\nRespond with JSON containing "message" (string) and "recommendations" (array of course IDs from the list above).`,
@@ -126,7 +160,7 @@ export async function processRAGRequest({
   // Call Moonshot AI
   const response = await generateStructured(
     messages,
-    { maxTokens: 1024 }
+    { maxTokens, model }
   );
 
   const resultData = response.data as { message: string; recommendations: string[] };

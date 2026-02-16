@@ -8,3 +8,7 @@ export * from './firestore/faqs';
 export * from './firestore/analytics';
 export * from './firestore/attendance';
 export * from './firestore/jobs';
+export * from './firestore/ai-chats';
+export * from './firestore/favorites';
+export * from './firestore/course-categories';
+export * from './firestore/ai-settings';
