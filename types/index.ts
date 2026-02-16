@@ -1,4 +1,42 @@
 import { Timestamp } from 'firebase/firestore';
+
+export interface AIChat {
+  id: string;
+  userId: string;
+  title: string;
+  messages: { role: 'user' | 'assistant'; content: string; timestamp: string }[];
+  recommendedCourseIds: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CourseFavorite {
+  courseId: string;
+  userId: string;
+  createdAt: string;
+}
+
+export interface CourseCategory {
+  id: string;
+  userId: string;
+  name: string;
+  color?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AISettings {
+  systemPrompt: string;
+  model: string;
+  costPer1kTokensUsd: number;
+  rateLimitRequestsPerDay: number;
+  maxTokensPerRequest: number;
+  maxConversationHistory: number;
+  maxStoredChatsPerUser: number;
+  updatedAt: string;
+  updatedBy: string;
+}
+
 export interface Event {
   id: string;
   title: string;
