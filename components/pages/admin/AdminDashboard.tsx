@@ -10,6 +10,7 @@ import {
   FileText,
   TrendingUp,
   BriefcaseBusiness,
+  Bot,
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/Card';
 import EventsTab from '@/components/pages/admin/tabs/EventsTab';
@@ -26,13 +27,14 @@ import { updatePageMeta } from '@/utils/seo';
 import { BlogPost, Event, TeamMember, FAQ } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
+import AISettingsTab from '@/components/pages/admin/tabs/AISettingsTab';
 import { listUsers } from '@/lib/firestore/users';
 
 const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
   const [nrUsers, setNrUsers] = useState<number>(0);
   //const { user, logout } = useAdmin();
-  const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members' | 'jobs'>('events');
+  const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members' | 'jobs' | 'ai-settings'>('events');
   const placeholderImage = '@/public/placeholder.png';
 
   // Modal states
@@ -225,6 +227,7 @@ const AdminDashboard: React.FC = () => {
                 { key: 'analytics', label: 'Analytics', icon: TrendingUp },
                 { key: 'members', label: 'Members', icon: Users },
                 { key: 'jobs', label: 'Jobs', icon: BriefcaseBusiness },
+                { key: 'ai-settings', label: 'AI Settings', icon: Bot },
               ] as const).map(({ key, label, icon: Icon }) => (
                 <button
                   key={key}
@@ -298,6 +301,7 @@ const AdminDashboard: React.FC = () => {
           {activeTab === 'members' && (
             <MembersTab onChanged={() => { /* could trigger toast */ }} />
           )}
+          {activeTab === 'ai-settings' && <AISettingsTab />}
 
           {/* Blog Modal */}
           <BlogModal
