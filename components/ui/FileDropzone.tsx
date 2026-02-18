@@ -1,4 +1,6 @@
 "use client";
+// Ref update during render is intentional - need to keep callback ref current for async operations
+/* eslint-disable react-hooks/refs */
 
 import React, { useCallback, useState } from 'react';
 import { useRef } from 'react';

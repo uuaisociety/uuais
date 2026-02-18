@@ -53,7 +53,10 @@ export default function AccountPage() {
         
         setEventMeta(map);
         setRegistrations(filtered);
-      } catch { }
+      } catch (err) {
+        // Silently ignore - user can see their registrations even if event meta fails to load
+        console.warn('Failed to load event meta:', err);
+      }
       setLoading(false);
     });
     return () => unsub();

@@ -121,7 +121,10 @@ export const registerForEvent = async (
       if (status === 'cancelled') {
         try {
           await deleteDoc(doc(db, 'registrations', d.id));
-        } catch {}
+        } catch (err) {
+          // Silently ignore - cancelled registration deletion failure is non-critical
+          console.warn('Failed to delete cancelled registration:', err);
+        }
       } else {
         hasActive = true;
       }
@@ -237,7 +240,10 @@ export async function inviteRegistrant(
       const u = userSnap.exists() ? (userSnap.data() as DocumentData) : undefined;
       unsub = !!u?.unsubscribedFromEmails;
     }
-  } catch {}
+  } catch (err) {
+    // Silently ignore - user profile fetch failure shouldn't block email sending
+    console.warn('Failed to check unsubscribe status:', err);
+  }
   if (unsub) return;
 
   const base = options?.baseUrl || (typeof window !== 'undefined' ? window.location.origin : '');
@@ -250,7 +256,10 @@ export async function inviteRegistrant(
       const e = eSnap.exists() ? (eSnap.data() as Partial<Event>) : undefined;
       if (e?.title) subject = `Invitation to ${e.title}`;
     }
-  } catch {}
+  } catch (err) {
+    // Silently ignore - event fetch failure shouldn't block email sending
+    console.warn('Failed to fetch event title for email:', err);
+  }
   await sendTemplatedEmail({
     to,
     subject,

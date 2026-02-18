@@ -1,4 +1,6 @@
 "use client";
+// setState in useEffect is intentional - need to reset analytics data when eventIds/blogIds change
+/* eslint-disable react-hooks/set-state-in-effect */
 
 import React, { useEffect, useMemo, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";

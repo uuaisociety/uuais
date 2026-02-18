@@ -1,9 +1,11 @@
+// Math.random in useMemo is intentional - need random positions for floating logo animation
+/* eslint-disable react-hooks/purity */
 'use client'
 
 // Disable static generation for this page
 export const dynamic = 'force-dynamic';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Calendar, Users, Zap, Globe, BookOpen } from 'lucide-react';
@@ -28,6 +30,15 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     updatePageMeta('Home', 'UU AI Society - Connecting students passionate about Artificial Intelligence');
   }, []);
+
+  const floatingLogos = useMemo(() => 
+    [...Array(8)].map(() => ({
+      seed: Math.random(),
+      top: Math.random(),
+      delaySeed: Math.random(),
+      durationSeed: Math.random(),
+    })), []
+  );
 
   const now = new Date();
   const upcomingEvents = state.events
@@ -75,15 +86,15 @@ const HomePage: React.FC = () => {
           <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
           {/* Floating Logo Background - Only in Hero Section */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {[...Array(8)].map((_, i) => (
+            {floatingLogos.map((_, i) => (
               <div
                 key={i}
                 className="absolute animate-float"
                 style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 2}s`,
-                  animationDuration: `${15 + Math.random() * 10}s`
+                  left: `${floatingLogos[i].seed * 100}%`,
+                  top: `${floatingLogos[i].top * 100}%`,
+                  animationDelay: `${floatingLogos[i].delaySeed * 2}s`,
+                  animationDuration: `${15 + floatingLogos[i].durationSeed * 10}s`
                 }}
               >
                 <Image

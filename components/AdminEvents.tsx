@@ -326,7 +326,9 @@ const AdminEvents = () => {
               }
               if (ts instanceof Date) return ts.toISOString();
               if (typeof ts === 'string') return new Date(ts).toISOString();
-            } catch {}
+            } catch {
+              // Ignore parsing errors, return empty string
+            }
             return '';
           })(),
           answers: regData,

@@ -1,4 +1,6 @@
 "use client";
+// setState in useEffect is intentional - need to check eligibility based on props before async check
+/* eslint-disable react-hooks/set-state-in-effect */
 
 import React, { useEffect, useState } from "react";
 import DOMPurify from 'dompurify';
