@@ -5,7 +5,8 @@ export const dynamic = 'force-dynamic';
 
 import React, { useEffect } from 'react';
 import { Mail, Target, Eye, Globe } from 'lucide-react';
-import { Linkedin01Icon, GithubIcon }  from 'hugeicons-react';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { LinkedinIcon, GithubIcon } from '@hugeicons/core-free-icons';
 // import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
@@ -189,7 +190,7 @@ const AboutPage: React.FC = () => {
                         className="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                         aria-label={`LinkedIn profile of ${member.name}`}
                       >
-                        <Linkedin01Icon className="h-4 w-4" />
+                        <HugeiconsIcon icon={LinkedinIcon} className="h-4 w-4" />
                       </a>
                     )}
                     {/* GitHub */}
@@ -201,7 +202,7 @@ const AboutPage: React.FC = () => {
                         className="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                         aria-label={`GitHub profile of ${member.name}`}
                       >
-                        <GithubIcon className="h-4 w-4" />
+                        <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />
                       </a>
                     )}
                     {/* Website */}
