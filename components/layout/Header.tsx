@@ -6,11 +6,13 @@ import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAdmin } from '@/hooks/useAdmin';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getUserProfile, type UserProfile } from '@/lib/firestore/users';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const projectsRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { user, isAdmin, loading, logout } = useAdmin();
   const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -35,7 +37,6 @@ export const Header: React.FC = () => {
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Events', href: '/events' },
-    { name: 'Newsletter', href: '/blog' },
     { name: 'Job board', href: '/careers' },
     { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }
@@ -97,11 +98,45 @@ export const Header: React.FC = () => {
                     className={`px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 ${isActive(item.href)
                       ? 'bg-red-600/20'
                       : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                      }`}
+                    }`}
                   >
                     {item.name}
                   </Link>
                 ))}
+                {isAdmin && (
+                  <div key="Projects" className="relative" ref={projectsRef}>
+                    <button
+                      onClick={() => setIsProjectsOpen(!isProjectsOpen)}
+                      className={`px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 flex items-center gap-1 cursor-pointer ${isActive('/projects')
+                        ? 'bg-red-600/20'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                      }`}
+                    >
+                      Projects
+                      <svg className={`w-4 h-4 transition-transform ${isProjectsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    {isProjectsOpen && (
+                      <div className="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 border border-gray-100 dark:border-gray-700">
+                        <Link
+                          href="/projects"
+                          onClick={() => setIsProjectsOpen(false)}
+                          className="block px-4 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
+                        >
+                          All Projects
+                        </Link>
+                        <Link
+                          href="/projects/course-navigator"
+                          onClick={() => setIsProjectsOpen(false)}
+                          className="block px-4 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
+                        >
+                          Course Navigator
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                )}
                 {isAdmin && (
                   <>                 
                   <Link
@@ -152,6 +187,36 @@ export const Header: React.FC = () => {
                   {item.name}
                 </Link>
               ))}
+              {isAdmin && (
+                <>
+                  <Link
+                    href="/projects"
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 cursor-pointer ${isActive('/projects')
+                      ? 'text-gray-700 dark:text-gray-300 bg-red-600/20'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                      }`}
+                  >
+                    Projects
+                  </Link>
+                  <div className="pl-4 space-y-1">
+                    <Link
+                      href="/projects"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
+                    >
+                      All Projects
+                    </Link>
+                    <Link
+                      href="/projects/course-navigator"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
+                    >
+                      Course Navigator
+                    </Link>
+                  </div>
+                </>
+              )}
               {isAdmin && (
                 <Link
                   href="/admin"
