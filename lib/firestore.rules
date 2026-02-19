@@ -267,5 +267,13 @@ service cloud.firestore {
       // Only super admins can write
       allow write: if isSuperAdmin();
     }
+
+    // COURSE EMBEDDINGS - vector store for semantic search
+    match /course_embeddings/{courseId} {
+      // Anyone can read for search functionality
+      allow read: if true;
+      // Only super admins can write (generate embeddings)
+      allow write: if isSuperAdmin();
+    }
   }
 }
