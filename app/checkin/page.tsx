@@ -1,4 +1,6 @@
 "use client";
+// setState in useEffect is intentional here for URL parameter validation before async operations
+/* eslint-disable react-hooks/set-state-in-effect */
 
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -19,7 +21,7 @@ const CheckinPage: React.FC = () => {
 
   useEffect(() => {
     if (!eventId || !scannedUserId) {
-      setMessage("Missing event or user information in URL.");
+      setMessage(() => "Missing event or user information in URL.");
       return;
     }
     if (loading) return;

@@ -22,7 +22,10 @@ export const addBlogPost = async (post: Omit<BlogPost, 'id'>): Promise<string> =
   try {
     const analyticsRef = doc(db, 'analyticsBlogs', docRef.id);
     await setDoc(analyticsRef, { reads: 0, updatedAt: serverTimestamp() }, { merge: true });
-  } catch {}
+  } catch (err) {
+    // Analytics document is optional - blog post creation should succeed even if analytics fails
+    console.warn('Failed to create analytics document:', err);
+  }
   return docRef.id;
 };
 

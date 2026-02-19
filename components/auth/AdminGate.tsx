@@ -5,8 +5,9 @@ import { useAdmin } from '@/hooks/useAdmin';
 import { Button } from '@/components/ui/Button';
 import LoginModal from '@/components/ui/LoginModal';
 import { useRouter } from 'next/navigation';
-import { HugeiconsIcon } from '@hugeicons/react'
-import { GoogleIcon } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react';
+import { GoogleIcon } from '@hugeicons/core-free-icons';
+
 interface AdminGateProps {
   children: React.ReactNode;
 }

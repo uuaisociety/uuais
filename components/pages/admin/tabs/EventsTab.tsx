@@ -1,5 +1,6 @@
 "use client";
 
+//TODO: This needs more work on styling to look good.
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/Button";
@@ -134,7 +135,10 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
         required: false,
         order: 999,
       });
-    } catch {}
+    } catch (err) {
+      // Silently ignore - default questions are optional
+      console.warn('Failed to add default custom questions:', err);
+    }
     setShowEventModal(false);
     resetForms();
   };

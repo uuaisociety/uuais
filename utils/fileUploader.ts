@@ -37,7 +37,9 @@ export async function uploadFileToServer(
   const res = await fetch(route, { method: 'POST', body: form, headers });
   if (!res.ok) {
     let body = null;
-    try { body = await res.json(); } catch {}
+    try { body = await res.json(); } catch {
+      // Response may not be JSON - ignore and use statusText
+    }
     throw new Error(`upload failed: ${body?.error || res.statusText}`);
   }
   const data = await res.json();
@@ -54,7 +56,10 @@ export async function deleteFileFromServer(path?: string, opts?: { route?: strin
   const route = opts?.route || defaultRouteForFolder();
   const res = await fetch(route, { method: 'DELETE', headers, body: JSON.stringify({ path }) });
   if (!res.ok) {
-    let body = null; try { body = await res.json(); } catch {}
+    let body = null;
+    try { body = await res.json(); } catch {
+      // Response may not be JSON - ignore and use statusText
+    }
     throw new Error(`delete failed: ${body?.error || res.statusText}`);
   }
   return true;

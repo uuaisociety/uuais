@@ -4,9 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, MessageSquareCode, ArrowUp, Handshake } from "lucide-react";
-
-import { HugeiconsIcon } from "@hugeicons/react";
-import { InstagramIcon, LinkedinIcon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from '@hugeicons/react';
+import { LinkedinIcon, InstagramIcon } from '@hugeicons/core-free-icons';
 // import { SiInstagram } from '@icons-pack/react-simple-icons';
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/input_old";

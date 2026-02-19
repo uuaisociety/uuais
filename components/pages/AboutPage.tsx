@@ -5,9 +5,8 @@ export const dynamic = 'force-dynamic';
 
 import React, { useEffect } from 'react';
 import { Mail, Target, Eye, Globe } from 'lucide-react';
-
-import { HugeiconsIcon } from "@hugeicons/react";
-import { LinkedinIcon, GithubIcon }  from '@hugeicons/core-free-icons';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { LinkedinIcon, GithubIcon } from '@hugeicons/core-free-icons';
 // import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';

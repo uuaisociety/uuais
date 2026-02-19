@@ -1,4 +1,6 @@
 'use client'
+// setState in useEffect is intentional - need to set mounted flag after hydration
+/* eslint-disable react-hooks/set-state-in-effect */
 
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-layout-effect'

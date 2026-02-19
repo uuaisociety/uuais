@@ -1,4 +1,6 @@
 "use client";
+// setState in useEffect is intentional - need to filter events based on activeTab
+/* eslint-disable react-hooks/set-state-in-effect */
 
 // Disable static generation for this page
 export const dynamic = "force-dynamic";

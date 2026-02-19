@@ -1,4 +1,6 @@
 "use client"
+// Math.random in useMemo is intentional - need random width for skeleton animation
+/* eslint-disable react-hooks/purity */
 
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"

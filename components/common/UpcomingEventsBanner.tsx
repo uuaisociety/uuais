@@ -1,4 +1,6 @@
 'use client'
+// setState in useEffect is intentional - need to check localStorage on mount
+/* eslint-disable react-hooks/set-state-in-effect */
 
 //TODO: This needs more work on styling to look good.
 // Figure out if a rectangular popup is good or if we should have a banner/notification instead?
