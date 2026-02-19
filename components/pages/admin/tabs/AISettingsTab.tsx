@@ -8,8 +8,17 @@ import { Select } from '@/components/ui/Select';
 import { AISettings } from '@/types';
 import { getAISettings, updateAISettings } from '@/lib/firestore/ai-settings';
 import { auth } from '@/lib/firebase-client';
-import { Loader2, Save, Bot, Settings2, BarChart3 } from 'lucide-react';
+import { Loader2, Save, Bot, Settings2, BarChart3, RefreshCw } from 'lucide-react';
 import { useAdmin } from '@/hooks/useAdmin';
+
+type OpenRouterModelInfo = {
+  id: string;
+  name: string;
+  pricing: {
+    prompt: string;
+    completion: string;
+  };
+};
 
 type UsageStats = {
   date: string;
@@ -29,11 +38,17 @@ const AISettingsTab: React.FC = () => {
   const [usage, setUsage] = useState<UsageStats | null>(null);
   const [usageLoading, setUsageLoading] = useState(false);
 
+  const [openRouterModels, setOpenRouterModels] = useState<{ value: string; label: string; description?: string }[]>([]);
+  const [modelsLoading, setModelsLoading] = useState(false);
+
   const { isSuperAdmin } = useAdmin();
 
   useEffect(() => {
     loadSettings();
     loadUsage();
+    if (isSuperAdmin) {
+      loadOpenRouterModels();
+    }
   }, []);
 
   const loadSettings = async () => {
@@ -75,6 +90,48 @@ const AISettingsTab: React.FC = () => {
     }
   };
 
+  const loadOpenRouterModels = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+    try {
+      setModelsLoading(true);
+      const token = await user.getIdToken();
+      const res = await fetch('/api/admin/openrouter-models', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) {
+        console.warn('Failed to load OpenRouter models');
+        return;
+      }
+      const data = await res.json();
+      setOpenRouterModels(data.models || []);
+      // Store raw models for pricing lookup
+      (window as unknown as { rawModels: OpenRouterModelInfo[] }).rawModels = data.rawModels;
+    } catch (e) {
+      console.warn('Failed to load OpenRouter models:', e);
+    } finally {
+      setModelsLoading(false);
+    }
+  };
+
+  const handleModelChange = (modelId: string) => {
+    if (!settings) return;
+    
+    // Auto-set cost based on model pricing
+    const rawModels = (window as unknown as { rawModels?: OpenRouterModelInfo[] }).rawModels;
+    if (rawModels) {
+      const rawModel = rawModels.find(m => m.id === modelId);
+      console.log("rawmodel:", rawModel);
+      if (rawModel) {
+        const costPer1k = (parseFloat(rawModel.pricing.prompt) + parseFloat(rawModel.pricing.completion)) * 1000;
+        console.log("costPer1k:", costPer1k);
+        setSettings({ ...settings, model: modelId, costPer1kTokensUsd: costPer1k });
+        return;
+      }
+    }
+    setSettings({ ...settings, model: modelId });
+  };
+
   const handleSave = async () => {
     if (!settings) return;
     const user = auth.currentUser;
@@ -95,6 +152,7 @@ const AISettingsTab: React.FC = () => {
         {
           systemPrompt: settings.systemPrompt,
           model: settings.model,
+          apiProvider: settings.apiProvider,
           costPer1kTokensUsd: settings.costPer1kTokensUsd,
           rateLimitRequestsPerDay: settings.rateLimitRequestsPerDay,
           maxTokensPerRequest: settings.maxTokensPerRequest,
@@ -127,7 +185,8 @@ When recommending courses:
 - Be concise but informative
 
 Always base your recommendations on the provided course context.`,
-        model: 'moonshot-v1-8k',
+        model: 'mistralai/mistral-nemo',
+        apiProvider: 'openrouter',
         costPer1kTokensUsd: 0,
         rateLimitRequestsPerDay: 10,
         maxTokensPerRequest: 1024,
@@ -176,7 +235,6 @@ Always base your recommendations on the provided course context.`,
           <Button
             onClick={handleSave}
             disabled={saving || !isSuperAdmin}
-            className="bg-[#990000] hover:bg-[#7f0000] text-white"
             title={!isSuperAdmin ? 'Only super admins can update AI settings' : undefined}
           >
             {saving ? (
@@ -214,29 +272,75 @@ Always base your recommendations on the provided course context.`,
         </CardContent>
       </Card>
 
-      {/* Rate Limits */}
+      {/* API Provider & Model */}
       <div className="grid md:grid-cols-2 gap-6">
         <Card>
           <CardContent className="p-6">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Model</h3>
+            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">API Provider</h3>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                AI model
+                AI API Provider
               </label>
               <Select
-                value={settings.model}
-                onChange={(e) => setSettings({ ...settings, model: e.target.value })}
+                value={settings.apiProvider}
+                onChange={(e) => setSettings({ ...settings, apiProvider: e.target.value as 'moonshot' | 'openrouter', model: e.target.value === 'openrouter' ? 'openai/gpt-4o-mini' : 'moonshot-v1-8k' })}
                 disabled={!isSuperAdmin}
                 options={[
-                  { value: 'moonshot-v1-8k', label: 'moonshot-v1-8k' },
-                  { value: 'moonshot-v1-32k', label: 'moonshot-v1-32k' },
+                  { value: 'openrouter', label: 'OpenRouter (recommended)' },
+                  { value: 'moonshot', label: 'Moonshot' },
                 ]}
               />
-              <p className="text-xs text-gray-500 mt-1">Only super admins can change the model</p>
+              <p className="text-xs text-gray-500 mt-1">OpenRouter supports many models including GPT-4, Claude, Gemini</p>
             </div>
           </CardContent>
         </Card>
 
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white">Model</h3>
+              {isSuperAdmin && settings.apiProvider === 'openrouter' && (
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={loadOpenRouterModels}
+                  disabled={modelsLoading}
+                >
+                  {modelsLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <RefreshCw className="h-4 w-4" />
+                  )}
+                </Button>
+              )}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                AI model (USD per 1M tokens)
+              </label>
+              <Select
+                value={settings.model}
+                onChange={(e) => handleModelChange(e.target.value)}
+                disabled={!isSuperAdmin}
+                options={settings.apiProvider === 'openrouter' 
+                  ? (openRouterModels.length > 0 ? openRouterModels : [])
+                  : [
+                      { value: 'moonshot-v1-8k', label: 'moonshot-v1-8k' },
+                      { value: 'moonshot-v1-32k', label: 'moonshot-v1-32k' },
+                    ]}
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                {settings.apiProvider === 'openrouter' && openRouterModels.length > 0
+                  ? `Loaded ${openRouterModels.length} models from OpenRouter`
+                  : 'Only super admins can change the model'}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Cost */}
+      <div className="grid md:grid-cols-2 gap-6">
         <Card>
           <CardContent className="p-6">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Cost</h3>
@@ -256,7 +360,10 @@ Always base your recommendations on the provided course context.`,
             </div>
           </CardContent>
         </Card>
+      </div>
 
+      {/* Rate Limiting */}
+      <div className="grid md:grid-cols-2 gap-6">
         <Card>
           <CardContent className="p-6">
             <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Rate Limiting</h3>
