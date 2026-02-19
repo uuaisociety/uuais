@@ -14,6 +14,11 @@ import type { QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
 
 type Message = { id: string; role: "user" | "assistant"; content: string; ts: number; recommendations?: string[] };
 type RateLimitInfo = { remaining: number; resetAt: string; allowed: boolean };
+type ChatError = {
+  message: string;
+  type: 'rate_limit' | 'api_key' | 'server' | 'network' | 'unknown';
+  details?: string;
+};
 
 interface Props {
   onRecommendations?: (courseIds: string[]) => void;
@@ -27,7 +32,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
   const [user, setUser] = useState<{ uid: string } | null>(null);
   const [loading, setLoading] = useState(false);
   const [rateLimit, setRateLimit] = useState<RateLimitInfo | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<ChatError | null>(null);
   const [chats, setChats] = useState<AIChat[]>([]);
   const [showSidebar, setShowSidebar] = useState(true);
   const [currentChatId, setCurrentChatId] = useState<string | null>(null);
@@ -118,7 +123,14 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
   async function send() {
     const q = value.trim();
     if (!q || !user || loading) return;
-    if (rateLimit?.remaining === 0) { setError("Daily limit reached. Try again tomorrow."); return; }
+    if (rateLimit?.remaining === 0) { 
+      setError({ 
+        message: "Daily limit reached", 
+        type: 'rate_limit',
+        details: "You've used all your AI requests for today. Try again tomorrow."
+      }); 
+      return; 
+    }
 
     setLoading(true);
     setError(null);
@@ -136,7 +148,23 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Request failed");
+      if (!res.ok) {
+        let errorType: ChatError['type'] = 'unknown';
+        let errorDetails: string | undefined;
+        
+        if (res.status === 429) {
+          errorType = 'rate_limit';
+          errorDetails = "You've reached the daily rate limit. Please try again tomorrow.";
+        } else if (res.status === 401 || res.status === 403) {
+          errorType = 'api_key';
+          errorDetails = "API key error. Please check that the OpenRouter API key is configured correctly.";
+        } else if (res.status >= 500) {
+          errorType = 'server';
+          errorDetails = "Server error. Our AI service is temporarily unavailable.";
+        }
+        
+        throw { message: data.message || "Request failed", type: errorType, details: errorDetails } as ChatError;
+      }
 
       const assistantMsg: Message = {
         id: crypto.randomUUID(),
@@ -152,7 +180,13 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
       
       await persistChat(finalMessages, data.data.recommendations || []);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "An error occurred");
+      if (typeof e === 'object' && e && 'type' in e) {
+        setError(e as ChatError);
+      } else if (e instanceof Error) {
+        setError({ message: e.message, type: 'network', details: "Network error. Please check your connection and try again." });
+      } else {
+        setError({ message: "An unexpected error occurred", type: 'unknown' });
+      }
     } finally {
       setLoading(false);
     }
@@ -182,6 +216,20 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
       await loadInitialChats();
     } catch (e) {
       console.error("Failed to save chat:", e);
+    }
+  }
+
+  function clearError() {
+    setError(null);
+  }
+
+  function getErrorIcon(type: ChatError['type']) {
+    switch (type) {
+      case 'rate_limit': return '⏱️';
+      case 'api_key': return '🔑';
+      case 'server': return '🔧';
+      case 'network': return '📡';
+      default: return '⚠️';
     }
   }
 
@@ -234,6 +282,10 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
       (el as HTMLInputElement | undefined)?.focus();
     }
   }, [focused]);
+
+  useEffect(() => {
+    console.log("Error:", error);
+  }, [error]);
 
   if (!user) {
     return (
@@ -341,7 +393,35 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
               </div>
               {/* Fill space between messages and chat input */}
               <div className="flex-1"></div>
-              {error && <div className="text-red-500 text-sm mb-2">{error}</div>}
+              {error && (
+                <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 mb-3">
+                  <div className="flex items-start gap-2">
+                    <span className="text-lg">{getErrorIcon(error.type)}</span>
+                    <div className="flex-1">
+                      <div className="font-medium text-red-700 dark:text-red-300 text-sm">{error.message}</div>
+                      {error.details && (
+                        <div className="text-red-600 dark:text-red-400 text-xs mt-1">{error.details}</div>
+                      )}
+                      {error.type === 'api_key' && (
+                        <div className="text-xs text-gray-500 mt-2">
+                          Contact an admin to check the API configuration.
+                        </div>
+                      )}
+                      {error.type === 'rate_limit' && rateLimit?.resetAt && (
+                        <div className="text-xs text-gray-500 mt-2">
+                          Resets at: {new Date(rateLimit.resetAt).toLocaleString()}
+                        </div>
+                      )}
+                    </div>
+                    <button 
+                      onClick={clearError}
+                      className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              )}
               <form
                 onSubmit={(e) => { e.preventDefault(); send(); }}
                 className="mt-3 flex gap-2"
@@ -353,7 +433,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
               </form>
             </div>
           </div>
-          <div className="p-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">Powered by Moonshot AI • {rateLimit?.remaining ?? '?'} requests remaining today</div>
+          <div className="p-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">LLM RAG Prototype • {rateLimit?.remaining ?? '?'} requests remaining today</div>
         </div>
       </div>
 
