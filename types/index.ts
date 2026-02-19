@@ -28,6 +28,7 @@ export interface CourseCategory {
 export interface AISettings {
   systemPrompt: string;
   model: string;
+  apiProvider: 'moonshot' | 'openrouter';
   costPer1kTokensUsd: number;
   rateLimitRequestsPerDay: number;
   maxTokensPerRequest: number;

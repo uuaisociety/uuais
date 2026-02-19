@@ -16,7 +16,8 @@ When recommending courses:
 - Be concise but informative
 
 Always base your recommendations on the provided course context.`,
-  model: "moonshot-v1-8k",
+  model: "mistralai/mistral-nemo",
+  apiProvider: "openrouter",
   costPer1kTokensUsd: 0,
   rateLimitRequestsPerDay: 10,
   maxTokensPerRequest: 1024,
@@ -38,6 +39,7 @@ export const getAISettings = async (): Promise<AISettings> => {
   return {
     systemPrompt: data.systemPrompt ?? DEFAULT_AI_SETTINGS.systemPrompt,
     model: data.model ?? DEFAULT_AI_SETTINGS.model,
+    apiProvider: data.apiProvider ?? DEFAULT_AI_SETTINGS.apiProvider,
     costPer1kTokensUsd: typeof data.costPer1kTokensUsd === 'number' ? data.costPer1kTokensUsd : DEFAULT_AI_SETTINGS.costPer1kTokensUsd,
     rateLimitRequestsPerDay: data.rateLimitRequestsPerDay ?? DEFAULT_AI_SETTINGS.rateLimitRequestsPerDay,
     maxTokensPerRequest: data.maxTokensPerRequest ?? DEFAULT_AI_SETTINGS.maxTokensPerRequest,

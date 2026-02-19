@@ -1,6 +1,7 @@
-import { generateStructured } from './moonshot';
+import { generateStructured } from './openrouter';
 import { fetchCourses, type Course } from '@/lib/courses';
 import { adminDb } from '@/lib/firebase-admin';
+import { findSimilarCourses } from './vector-store';
 
 const DEFAULT_MAX_TOKENS = 1024;
 const DEFAULT_MAX_HISTORY = 4;
@@ -15,6 +16,7 @@ async function getAISettings() {
         model: data?.model,
         maxTokensPerRequest: data?.maxTokensPerRequest,
         maxConversationHistory: data?.maxConversationHistory,
+        apiProvider: data?.apiProvider || 'openrouter',
       };
     }
   } catch (e) {
@@ -25,6 +27,7 @@ async function getAISettings() {
     model: null,
     maxTokensPerRequest: null,
     maxConversationHistory: null,
+    apiProvider: 'openrouter',
   };
 }
 
@@ -56,7 +59,7 @@ export type ChatRecommendation = {
 
 export type RAGResult = {
   message: string;
-  recommendations: string[]; // course IDs
+  recommendations: string[];
 };
 
 // Simple keyword extraction and scoring for initial retrieval
@@ -88,12 +91,11 @@ function scoreCourse(course: Course, keywords: string[]): number {
   return score;
 }
 
-async function retrieveRelevantCourses(query: string, topK = 15): Promise<Course[]> {
+async function retrieveRelevantCoursesKeyword(query: string, topK = 15): Promise<Course[]> {
   const allCourses = await fetchCourses();
   const keywords = extractKeywords(query);
 
   if (keywords.length === 0) {
-    // Return random selection if no keywords
     return allCourses.sort(() => Math.random() - 0.5).slice(0, topK);
   }
 
@@ -101,6 +103,36 @@ async function retrieveRelevantCourses(query: string, topK = 15): Promise<Course
   scored.sort((a, b) => b.score - a.score);
 
   return scored.filter(s => s.score > 0).slice(0, topK).map(s => s.course);
+}
+
+async function retrieveRelevantCoursesVector(query: string, topK = 15): Promise<Course[]> {
+  try {
+    const similarCourses = await findSimilarCourses(query, topK);
+    if (similarCourses.length === 0) {
+      return [];
+    }
+
+    const allCourses = await fetchCourses();
+    const courseMap = new Map(allCourses.map(c => [c.id, c]));
+
+    const courses: Course[] = [];
+    for (const sc of similarCourses) {
+      const course = courseMap.get(sc.courseId);
+      if (course) {
+        courses.push(course);
+      }
+    }
+
+    return courses;
+  } catch (error) {
+    console.warn('Vector search failed, falling back to keyword search:', error);
+    return retrieveRelevantCoursesKeyword(query, topK);
+  }
+}
+
+async function retrieveRelevantCourses(query: string, topK = 15): Promise<Course[]> {
+  return retrieveRelevantCoursesKeyword(query, topK);
+  //return retrieveRelevantCoursesVector(query, topK);
 }
 
 function buildContext(courses: Course[]): string {
@@ -127,7 +159,7 @@ export async function processRAGRequest({
   // Load AI settings from Firestore
   const settings = await getAISettings();
   const systemPrompt = settings.systemPrompt || DEFAULT_SYSTEM_PROMPT;
-  const model = settings.model || 'moonshot-v1-8k';
+  const model = settings.model || 'mistralai/mistral-nemo';
   const maxTokens = settings.maxTokensPerRequest || DEFAULT_MAX_TOKENS;
   const maxHistory = settings.maxConversationHistory || DEFAULT_MAX_HISTORY;
 
@@ -157,7 +189,7 @@ export async function processRAGRequest({
     },
   ];
 
-  // Call Moonshot AI
+  // Call AI
   const response = await generateStructured(
     messages,
     { maxTokens, model }
