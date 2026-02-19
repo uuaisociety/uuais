@@ -13,6 +13,9 @@ import { CourseCategory } from "@/types";
 import { Heart, Plus, Trash2, Folder, X } from "lucide-react";
 import Link from "next/link";
 import { updatePageMeta } from "@/utils/seo";
+import { useAdmin } from "@/hooks/useAdmin";
+import { notFound } from "next/navigation";
+
 
 export default function MyCoursesPage() {
   const [user, setUser] = useState<{ uid: string } | null>(null);
@@ -24,6 +27,7 @@ export default function MyCoursesPage() {
   const [newCategoryName, setNewCategoryName] = useState("");
   const [activeTab, setActiveTab] = useState<"favorites" | string>("favorites");
   const [loading, setLoading] = useState(true);
+  const { isAdmin, loading: pageLoading } = useAdmin();
 
   useEffect(() => {
     updatePageMeta("My Courses", "View your favorite courses and custom categories");
@@ -92,6 +96,15 @@ export default function MyCoursesPage() {
     ? favoriteCourses 
     : courses.filter(c => activeCategoryCourseIds.includes(c.id));
 
+  if(pageLoading){
+    return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
+  }
+
+  // Return 404-page for non-admin users
+  if(!loading && !isAdmin){
+    return notFound();
+  }
+
   if (!user) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12">
@@ -121,7 +134,7 @@ export default function MyCoursesPage() {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
               <button
                 onClick={() => setActiveTab("favorites")}
-                className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
+                className={`w-full flex items-center gap-3 px-4 py-3 text-left transition cursor-pointer ${
                   activeTab === "favorites"
                     ? "bg-red-50 dark:bg-red-900/20 border-l-4 border-[#990000]"
                     : "hover:bg-gray-50 dark:hover:bg-gray-700 border-l-4 border-transparent"
@@ -143,13 +156,13 @@ export default function MyCoursesPage() {
                   <div key={cat.id} className="group relative">
                     <button
                       onClick={() => setActiveTab(cat.id)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
+                      className={`w-full flex items-center gap-3 px-4 py-3 text-left transition cursor-pointer ${
                         activeTab === cat.id
                           ? "bg-gray-50 dark:bg-gray-700 border-l-4 border-gray-400"
                           : "hover:bg-gray-50 dark:hover:bg-gray-700 border-l-4 border-transparent"
                       }`}
                     >
-                      <Folder className={`h-5 w-5 ${activeTab === cat.id ? "text-gray-600" : "text-gray-400"}`} />
+                      <Folder className={`h-5 w-5 hover:text-blue-500 transition-colors ${activeTab === cat.id ? "text-blue-500" : "text-gray-400"}`} />
                       <div className="flex-1 min-w-0">
                         <div className="font-medium text-gray-900 dark:text-white truncate">{cat.name}</div>
                         <div className="text-xs text-gray-500">{(categoryCourses[cat.id] || []).length} courses</div>
@@ -157,7 +170,7 @@ export default function MyCoursesPage() {
                     </button>
                     <button
                       onClick={() => handleDeleteCategory(cat.id)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 p-1 text-gray-400 hover:text-red-500 transition-opacity"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 p-1 text-gray-400 hover:text-red-500 transition-opacity cursor-pointer"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>

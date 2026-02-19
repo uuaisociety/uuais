@@ -8,6 +8,8 @@ import { updatePageMeta } from "@/utils/seo";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
+import { useAdmin } from "@/hooks/useAdmin";
+import { notFound } from "next/navigation";
 
 export default function ExplorePage() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -20,6 +22,7 @@ export default function ExplorePage() {
   const [groupBy, setGroupBy] = useState<string>("none");
 
   const [visibleCount, setVisibleCount] = useState<number>(50);
+  const { isAdmin, loading } = useAdmin();
 
   useEffect(() => {
     updatePageMeta(
@@ -103,6 +106,15 @@ export default function ExplorePage() {
       .filter((k) => (groups[k] || []).length > 0)
       .map((k) => ({ key: k, courses: groups[k] }));
   }, [groupBy, visibleResults]);
+
+  if (loading) {
+    return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
+  }
+  // Return 404-page for non-admin users
+  if(!loading && !isAdmin){
+    return notFound();
+  }
+
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300">
