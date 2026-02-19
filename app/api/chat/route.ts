@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 import { adminAuth } from '@/lib/firebase-admin';
 import { checkRateLimit, incrementUsage, RateLimitError } from '@/lib/ai/rate-limit';
 import { processRAGRequest } from '@/lib/ai/rag';
-import { MoonshotError } from '@/lib/ai/moonshot';
+import { OpenRouterError } from '@/lib/ai/openrouter';
 
 interface ChatRequest {
   query: string;
@@ -116,13 +116,15 @@ export async function POST(req: NextRequest) {
       );
     }
     
-    if (error instanceof MoonshotError) {
+    if (error instanceof OpenRouterError) {
+      const statusCode = error.statusCode || 503;
       return NextResponse.json(
         { 
           error: 'AI service error', 
-          message: error.message 
+          message: error.message,
+          type: statusCode === 401 ? 'api_key' : 'server'
         },
-        { status: 503 }
+        { status: statusCode }
       );
     }
     
