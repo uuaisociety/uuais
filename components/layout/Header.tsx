@@ -34,6 +34,22 @@ export const Header: React.FC = () => {
     return () => { mounted = false; };
   }, [user]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (projectsRef.current && !projectsRef.current.contains(event.target as Node)) {
+        setIsProjectsOpen(false);
+      }
+    };
+
+    if (isProjectsOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isProjectsOpen]);
+
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Events', href: '/events' },
