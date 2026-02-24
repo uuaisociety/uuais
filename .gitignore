@@ -9,6 +9,8 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.conda
+.venv
 
 # testing
 /coverage
@@ -55,3 +57,6 @@ next-env.d.ts
 /functions
 /dataconnect
 /dataconnect-generated
+
+# API Keys used in scraper
+/course_scraper/api_keys
