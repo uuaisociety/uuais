@@ -1,0 +1,14 @@
+[project]
+name = "uu-data-processing"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiohttp>=3.13.3",
+    "firebase-admin>=7.1.0",
+    "google-cloud-firestore>=2.23.0",
+    "google-genai>=1.64.0",
+    "numpy>=2.4.2",
+    "requests>=2.32.5",
+]

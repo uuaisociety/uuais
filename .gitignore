@@ -55,3 +55,6 @@ next-env.d.ts
 /functions
 /dataconnect
 /dataconnect-generated
+
+# API Keys used in scraper
+/course_scraper/api_keys
