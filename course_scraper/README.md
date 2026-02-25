@@ -21,5 +21,5 @@ TODO: Switch to using Openrouter and development/production keys
 
 ## 3. Run the scraper
 ```bash
-python3 main.py
+python3 scraper_pipeline.py
 ```
