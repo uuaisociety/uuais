@@ -15,7 +15,7 @@ export interface TeamTabProps {
 
 const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
   const { dispatch } = useApp();
-  const placeholderImage = '/public/images/logo-highdef.png';
+  const placeholderImage = '/images/logo-highdef.png';
 
 
   const [showTeamModal, setShowTeamModal] = useState(false);

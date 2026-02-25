@@ -33,7 +33,7 @@ const AdminDashboard: React.FC = () => {
   const [nrUsers, setNrUsers] = useState<number>(0);
   //const { user, logout } = useAdmin();
   const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members' | 'jobs'>('events');
-  const placeholderImage = '/public/images/logo-highdef.png';
+  const placeholderImage = '/images/logo-highdef.png';
 
   // Modal states
   const [showBlogModal, setShowBlogModal] = useState(false);
