@@ -11,7 +11,7 @@ export const getTeamMembers = async (): Promise<TeamMember[]> => {
 
 export const addTeamMember = async (member: Omit<TeamMember, 'id'>): Promise<string> => {
   const membersRef = collection(db, 'teamMembers');
-  const docRef = await addDoc(membersRef, member);
+  const docRef = await addDoc(membersRef, stripUndefined(member) as DocumentData);
   return docRef.id;
 };
 
