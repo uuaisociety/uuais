@@ -15,7 +15,8 @@ export interface TeamTabProps {
 
 const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
   const { dispatch } = useApp();
-  const placeholderImage = '/placeholder.png';
+  const placeholderImage = '/public/images/logo-highdef.png';
+
 
   const [showTeamModal, setShowTeamModal] = useState(false);
   const [editingItem, setEditingItem] = useState<TeamMember | null>(null);
@@ -64,7 +65,7 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
       name: member.name,
       position: member.position,
       bio: member.bio,
-      image: member.image,
+      image: member.image || placeholderImage,
       imagePath: ip,
       linkedin: member.linkedin || '',
       github: member.github || '',
