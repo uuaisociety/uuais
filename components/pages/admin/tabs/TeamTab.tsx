@@ -120,7 +120,7 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
             <CardContent className="p-6">
               <div className="flex items-start space-x-4">
                 <Image
-                  src={member.image}
+                  src={member.image || placeholderImage}
                   alt={member.name}
                   width={100}
                   height={100}
