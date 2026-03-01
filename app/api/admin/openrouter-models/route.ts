@@ -1,15 +1,8 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 import { fetchOpenRouterModels, formatModelsForSelect } from '@/lib/ai/openrouter-models';
-import { authorizeSuperAdmin } from '@/app/api/admin/AuthorizeAPI';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
-    const auth = await authorizeSuperAdmin(req);
-    if (!auth.ok) {
-      return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-    }
-
     const models = await fetchOpenRouterModels();
 
     return NextResponse.json({

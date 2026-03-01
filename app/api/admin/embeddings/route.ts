@@ -2,15 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { fetchCourses } from '@/lib/courses';
 import { generateAndStoreCourseEmbedding, getEmbeddingCount } from '@/lib/ai/vector-store';
-import { authorizeSuperAdmin } from '@/app/api/admin/AuthorizeAPI';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
-    const auth = await authorizeSuperAdmin(req);
-    if (!auth.ok) {
-      return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-    }
-
     const count = await getEmbeddingCount();
     const courses = await fetchCourses();
 
@@ -27,11 +21,6 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const auth = await authorizeSuperAdmin(req);
-    if (!auth.ok) {
-      return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-    }
-
     const body = await req.json();
     const { courseId } = body;
 
@@ -55,13 +44,8 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function PUT(req: NextRequest) {
+export async function PUT() {
   try {
-    const auth = await authorizeSuperAdmin(req);
-    if (!auth.ok) {
-      return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-    }
-
     const courses = await fetchCourses();
     let generated = 0;
     let failed = 0;
