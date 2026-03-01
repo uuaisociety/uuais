@@ -1,3 +1,4 @@
+"use server";
 import { NextRequest } from 'next/server';
 import { adminAuth } from '@/lib/firebase-admin';
 
