@@ -19,22 +19,25 @@ import admin from 'firebase-admin';
 if (!admin.apps.length) {
   try {
     let credential;
+    let projectId;
 
     // Try FIREBASE_SERVICE_ACCOUNT_KEY first (full JSON)
     const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
     if (serviceAccountKey) {
       const serviceAccount = JSON.parse(serviceAccountKey);
+      projectId = serviceAccount.project_id;
       credential = admin.credential.cert(serviceAccount);
     } else {
       // Fallback to individual variables
       const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
       const privateKey = process.env.FIREBASE_PRIVATE_KEY;
-      const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+      const envProjectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
 
-      if (!clientEmail || !privateKey || !projectId) {
+      if (!clientEmail || !privateKey || !envProjectId) {
         throw new Error('Missing Firebase credentials. Set either FIREBASE_SERVICE_ACCOUNT_KEY or FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY, and NEXT_PUBLIC_FIREBASE_PROJECT_ID');
       }
 
+      projectId = envProjectId;
       credential = admin.credential.cert({
         clientEmail,
         privateKey: privateKey.replace(/\\n/g, '\n'),
@@ -43,7 +46,7 @@ if (!admin.apps.length) {
     }
 
     admin.initializeApp({ credential });
-    console.log('Firebase Admin SDK initialized successfully');
+    console.log('Firebase Admin SDK initialized successfully for project:', projectId);
   } catch (error) {
     console.error('Failed to initialize Firebase Admin SDK:', error);
     throw error;
