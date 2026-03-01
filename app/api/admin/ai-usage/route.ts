@@ -10,6 +10,7 @@ function getTodayString(): string {
 export async function GET(req: NextRequest) {
   try {
     const auth = await authorizeAdmin(req);
+    console.log("Auth: ", auth);
     if (!auth.ok) {
       return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
     }
