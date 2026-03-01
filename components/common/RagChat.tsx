@@ -114,7 +114,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
   }, [user, loadInitialChats]);
 
   async function fetchRateLimit() {
-    const token = await auth.currentUser?.getIdToken();
+    const token = await auth.currentUser?.getIdToken(true);
     if (!token) return;
     const res = await fetch("/api/chat", { headers: { Authorization: `Bearer ${token}` } });
     if (res.ok) setRateLimit(await res.json());
@@ -140,7 +140,13 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
     setValue("");
 
     try {
-      const token = await auth.currentUser!.getIdToken();
+      // Force refresh token to get fresh claims
+      const token = await auth.currentUser?.getIdToken(true);
+      if (!token) {
+        setError({ message: "Not authenticated", type: 'unknown' });
+        setLoading(false);
+        return;
+      }
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },

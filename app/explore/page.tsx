@@ -12,7 +12,6 @@ import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { useAdmin } from "@/hooks/useAdmin";
 import { useRouter } from "next/navigation";
-import { auth } from "@/lib/firebase-client";
 
 export default function ExplorePage() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -34,10 +33,8 @@ export default function ExplorePage() {
   const [visibleCount, setVisibleCount] = useState<number>(50);
   
   const [viewMode, setViewMode] = useState<"grid" | "embedding">("grid");
-  const { isAdmin, loading: adminLoading } = useAdmin();
+  const { user, isAdmin, loading: adminLoading } = useAdmin();
   const router = useRouter();
-
-  const user = auth.currentUser;
 
   // Load initial courses on mount
   useEffect(() => {
@@ -51,16 +48,18 @@ export default function ExplorePage() {
 
   // Load courses function
   const loadCourses = useCallback(async (pageNum: number, searchQuery?: string, level?: string) => {
+    if (adminLoading) return;
     setIsLoading(true);
     try {
-      const token = await user?.getIdToken();
-      console.log("token:", token);
+      // Force refresh token to ensure fresh admin claims
+      const token = await user?.getIdToken(true);
+      console.log("Loading courses with token:", token);
       const result = await fetchCoursesClient({ 
         page: pageNum, 
         limit: 50,
         search: searchQuery || '',
         level: level || 'all',
-        token: token as string, // For admin verification
+        token: token || '',
       });
       
       if (pageNum === 1) {
@@ -77,10 +76,11 @@ export default function ExplorePage() {
     } finally {
       setIsLoading(false);
     }
-  }, [user]);
+  }, [user, adminLoading]);
 
   // Fetch full course details for recommendations
   const loadRecommendedCourses = useCallback(async (ids: string[]) => {
+    if (adminLoading) return;
     if (ids.length === 0) {
       setRecommendedCourses([]);
       return;
@@ -88,10 +88,10 @@ export default function ExplorePage() {
     
     setIsLoadingRecommendations(true);
     try {
-      // Fetch all courses to get full details for recommended IDs
-      const token = await user?.getIdToken();
+      // Force refresh token to ensure fresh admin claims
+      const token = await user?.getIdToken(true);
       console.log("token:", token);
-      const allCourses = await fetchAllCoursesClient(token as string);
+      const allCourses = await fetchAllCoursesClient(token || '');
       
       // Filter and sort by recommendation order
       const idToIndex = new Map(ids.map((id, idx) => [id, idx] as const));
@@ -105,7 +105,7 @@ export default function ExplorePage() {
     } finally {
       setIsLoadingRecommendations(false);
     }
-  }, [user]);
+  }, [user, adminLoading]);
 
   // Handle AI recommendations
   useEffect(() => {
@@ -324,17 +324,20 @@ export default function ExplorePage() {
           {viewMode === "embedding" ? (
             <div className="mt-6">
               {/* <p>Temporarily disabled</p> */}
-              <EmbeddingMap
-                recommendedIds={recommendedIds}
-                onCourseClick={(id) => router.push(`/explore/${id}`)}
-                height={560}
-              />
+              {!adminLoading && user && (
+                <EmbeddingMap
+                  recommendedIds={recommendedIds}
+                  onCourseClick={(id) => router.push(`/explore/${id}`)}
+                  height={560}
+                  user={user}
+                />
+              )}
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
                 Each dot represents a course, projected from its 768-dimensional embedding. Similar courses appear closer together. Recommended courses are highlighted.
               </p>
             </div>
           ) : results.length === 0 ? (
-            <div className="text-center py-12 text-gray-600 dark:text-gray-300">No courses match your filters.</div>
+            <div className="text-center py-12 text-gray-600 dark:text-gray-300">No courses found, please try again.</div>
           ) : groupedResults ? (
             <div className="space-y-10">
               {groupedResults.map((g) => (

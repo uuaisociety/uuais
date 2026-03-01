@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 //import type { Course } from "@/lib/courses";
-
+import { User } from "firebase/auth";
 interface EmbeddingPoint {
     courseId: string;
     title: string;
@@ -17,6 +17,7 @@ type Props = {
     recommendedIds?: string[];
     onCourseClick?: (courseId: string) => void;
     height?: number;
+    user?: User;
 };
 
 const LEVEL_COLORS: Record<string, string> = {
@@ -33,7 +34,7 @@ const LEVEL_COLORS_MUTED: Record<string, string> = {
     "": "rgba(148,163,184,0.2)",
 };
 
-export default function EmbeddingMap({ recommendedIds = [], onCourseClick, height = 500 }: Props) {
+export default function EmbeddingMap({ recommendedIds = [], onCourseClick, height = 500, user }: Props) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [points, setPoints] = useState<EmbeddingPoint[]>([]);
@@ -46,7 +47,6 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
     const [isFullscreen, setIsFullscreen] = useState(false);
     const animFrameRef = useRef<number>(0);
-
     const recommendedSet = useMemo(() => new Set(recommendedIds), [recommendedIds]);
 
     const getCanvasRect = useCallback(() => {
@@ -60,7 +60,12 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
             try {
                 setLoading(true);
                 setError(null);
-                const res = await fetch('/api/courses/embedding-map?dimensions=2&algorithm=tsne');
+                const token = await user?.getIdToken(true);
+                const res = await fetch('/api/courses/embedding-map?dimensions=2&algorithm=tsne', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
                 if (!res.ok) throw new Error('Failed to load embedding map');
                 const data = await res.json();
                 setPoints(data.points || []);
@@ -71,7 +76,7 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
             }
         };
         fetchMap();
-    }, []);
+    }, [user]);
 
     // Resize observer
     useEffect(() => {

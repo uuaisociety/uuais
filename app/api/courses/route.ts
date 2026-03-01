@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     try {
         const auth = await authorizeAdmin(request);
         if (!auth.ok) {
-            console.log('Unauthorized');
+            console.warn('Unauthorized');
             return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
         }
         const { searchParams } = new URL(request.url);
