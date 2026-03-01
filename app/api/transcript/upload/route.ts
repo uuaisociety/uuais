@@ -176,7 +176,9 @@ interface CourseMatch {
 async function extractTextFromPDF(buffer: Buffer): Promise<string> {
     try {
         // Try using pdf-parse if available
-        const pdfParse = await import('pdf-parse').then(m => m.default || m).catch(() => null);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any 
+        const pdfParse = await import('pdf-parse').then((m: any) => m.default || m).catch(() => null);
+        //const pdfParse = await import('pdf-parse').then(m => m.default || m).catch(() => null);
         if (pdfParse) {
             const data = await pdfParse(buffer);
             return data.text;
