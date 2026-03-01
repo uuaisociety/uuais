@@ -1,3 +1,5 @@
+"use server";
+
 import { adminDb } from '@/lib/firebase-admin';
 import { gzipSync, gunzipSync } from 'zlib';
 
@@ -139,8 +141,8 @@ export type Course = {
   level?: 'Preparatory' | "Bachelor's" | "Master's";
   credits?: number;
   entry_requirements?: string;
-  prerequisites?: string | null;
-  prerequisite_of?: string | null;
+  prerequisites?: string[] | null;
+  prerequisite_of?: string[] | null;
   language_of_instruction?: string;
   pace_of_study?: string;
   location?: string;
@@ -273,8 +275,8 @@ function docToCourse(id: string, data: Record<string, unknown>): Course {
     level,
     credits,
     entry_requirements,
-    prerequisites: (data.prerequisites as string | null) ?? null,
-    prerequisite_of: (data.prerequisite_of as string | null) ?? null,
+    prerequisites: (data.prerequisites as string[] | null) ?? null,
+    prerequisite_of: (data.prerequisite_of as string[] | null) ?? null,
     language_of_instruction: (data.language_of_instruction as string) || (data.language as string) || undefined,
     pace_of_study: (data.pace_of_study as string) || undefined,
     location: (data.location as string) || undefined,

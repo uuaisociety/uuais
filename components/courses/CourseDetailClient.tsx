@@ -5,34 +5,20 @@ import { Tag } from "@/components/ui/Tag";
 import { Button } from "@/components/ui/Button";
 import { Heart } from "lucide-react";
 import type { Course } from "@/lib/courses";
-//import CourseConnectionsFlow from "./CourseConnectionsFlow";
+import CourseConnectionsFlow from "./CourseConnectionsFlow";
 //import EligibilityBadge from "./EligibilityBadge";
-import { auth } from "@/lib/firebase-client";
-import { onAuthStateChanged } from "firebase/auth";
 import { isCourseFavorited, toggleFavorite } from "@/lib/firestore/favorites";
+import { useAdmin } from "@/hooks/useAdmin";
 //import { evaluateEligibility, buildProfileFromTranscript, type EligibilityResult } from "@/lib/eligibility/engine";
 //import { type EligibilityResult } from "@/lib/eligibility/engine";
-type Props = { course: Course; all: Course[]; hrefBase?: string };
+type Props = { course: Course; hrefBase?: string };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function CourseDetailClient({ course, all, hrefBase = "/explore" }: Props) {
+export default function CourseDetailClient({ course, hrefBase = "/explore" }: Props) {
   const [isFavorited, setIsFavorited] = useState(false);
-  const [user, setUser] = useState<{ uid: string } | null>(null);
+  const { user, loading: userLoading } = useAdmin();
+  
   const [isLoading, setIsLoading] = useState(false);
   // const [eligibilityResult, setEligibilityResult] = useState<EligibilityResult | null>(null);
-
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (u) => {
-      setUser(u ? { uid: u.uid } : null);
-      // if (u) {
-      //   checkTranscriptAndEligibility();
-      // } else {
-      //   setEligibilityResult(null);
-      // }
-    });
-    return () => unsub();
-  });
-
   // const checkTranscriptAndEligibility = async () => {
   //   if (!course.structured_requirements) return;
   //   try {
@@ -59,14 +45,14 @@ export default function CourseDetailClient({ course, all, hrefBase = "/explore" 
   // };
 
   const checkFavoriteStatus = useCallback(async () => {
-    if (!user) return;
+    if (userLoading || !user) return;
     try {
       const favorited = await isCourseFavorited(user.uid, course.id);
       setIsFavorited(favorited);
     } catch (e) {
       console.error("Failed to check favorite status:", e);
     }
-  }, [user, course.id]);
+  }, [user, course.id, userLoading]);
 
   useEffect(() => {
     if (user) {
@@ -87,6 +73,14 @@ export default function CourseDetailClient({ course, all, hrefBase = "/explore" 
     }
   };
 
+  if (userLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <div>Not authorized</div>;
+  }
+  console.log("course: ", course);
   return (
     <div className="space-y-6">
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
@@ -94,7 +88,7 @@ export default function CourseDetailClient({ course, all, hrefBase = "/explore" 
           <div>
             <div className="text-sm text-gray-500 dark:text-gray-400">{course.code}</div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{course.title}</h1>
-            <a href={course.link} target="_blank" rel="noopener noreferrer" className="text-[#990000] hover:underline block mt-1">View uu.se course page</a>
+            <a href={course.link || `https://uu.se/en/study/course?query=${course.id}`} target="_blank" rel="noopener noreferrer" className="hover:underline block mt-1">View uu.se course page</a>
           </div>
           <div className="flex items-center gap-3">
             {user && (
@@ -138,7 +132,7 @@ export default function CourseDetailClient({ course, all, hrefBase = "/explore" 
 
       <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
         <h2 className="text-lg font-semibold mb-3">Connections</h2>
-        {/* <CourseConnectionsFlow focus={course} all={all} hrefBase={hrefBase} /> */}
+        <CourseConnectionsFlow focus={course} hrefBase={hrefBase} />
         <div className="mt-2 text-xs text-gray-600 dark:text-gray-300">Blue: prerequisites · Green: courses needing this · Gray: related</div>
       </div>
     </div>

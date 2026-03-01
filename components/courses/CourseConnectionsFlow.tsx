@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useMemo, useCallback, useState } from "react";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
 import ReactFlow, { Background, Controls, Node, Edge, Position } from "reactflow";
 import "reactflow/dist/style.css";
 import type { Course, StructuredRequirement } from "@/lib/courses";
 import { useRouter } from "next/navigation";
 import dagre from "dagre";
+import { fetchCourseById } from "@/lib/courses";
 
 type Props = {
   focus: Course;
-  all: Course[];
   height?: number;
   hrefBase?: string; // e.g., "/explore"
 };
@@ -17,17 +17,70 @@ type Props = {
 const nodeWidth = 220;
 const nodeHeight = 64;
 
-export default function CourseConnectionsFlow({ focus, all, height = 360, hrefBase = "/explore" }: Props) {
+export default function CourseConnectionsFlow({ focus, height = 360, hrefBase = "/explore" }: Props) {
   const router = useRouter();
   const [isFull, setIsFull] = useState(false);
+  const [prereqCourses, setPrereqCourses] = useState<Map<string, Course>>(new Map());
+  const [relatedCourses, setRelatedCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch prerequisite and dependent course details
+  useEffect(() => {
+    const loadRelatedCourses = async () => {
+      setLoading(true);
+      try {
+        // Load prerequisite courses
+        const prereqMap = new Map<string, Course>();
+        const prereqIds = focus.prerequisites;
+        
+        if (!prereqIds) return;
+        await Promise.all(
+          prereqIds.map(async (id) => {
+            try {
+              const course = await fetchCourseById(id);
+              if (course) prereqMap.set(id, course);
+            } catch {
+              // Ignore missing courses
+            }
+          })
+        );
+        setPrereqCourses(prereqMap);
+
+        // Load related courses from focus.relatedCourses
+        const related: Course[] = [];
+        if (focus.relatedCourses?.length) {
+          await Promise.all(
+            focus.relatedCourses.map(async (id) => {
+              try {
+                const course = await fetchCourseById(id);
+                if (course) related.push(course);
+              } catch {
+                // Ignore missing courses
+              }
+            })
+          );
+        }
+        setRelatedCourses(related);
+
+        // Note: Dependents would require a query to find courses that have this as a prerequisite
+        // For now, we skip dependents to avoid fetching all courses
+      } catch (error) {
+        console.error("Failed to load related courses:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadRelatedCourses();
+  }, [focus]);
 
   const { nodes, edges } = useMemo(() => {
-    console.log("Starting layout for:", focus.code, "with", all.length, "courses");
+    console.log("Starting layout for:", focus.code);
     const nodes: Node[] = [];
     const edges: Edge[] = [];
 
-    const byId = new Map(all.map((c) => [c.id, c] as const));
-    const byCode = new Map(all.map((c) => [c.code.toUpperCase(), c]));
+    const byId = new Map(prereqCourses);
+    const byCode = new Map(Array.from(prereqCourses.values()).map((c) => [c.code.toUpperCase(), c]));
 
     const g = new dagre.graphlib.Graph();
     g.setGraph({ rankdir: 'TB', ranksep: 60, nodesep: 60 });
@@ -90,8 +143,8 @@ export default function CourseConnectionsFlow({ focus, all, height = 360, hrefBa
       traverseRequirement(focus.structured_requirements, focus.id);
 
     } else {
-      // Legacy fallback
-      const reqCourseIds = (focus.requirements || []).filter((id) => byId.has(id));
+      // Legacy fallback - use loaded prerequisite courses
+      const reqCourseIds = Array.from(prereqCourses.keys());
       const generalReqs = (focus.generalRequirements || []).filter(Boolean);
 
       const codeRegex = /\b[0-9A-Z]{2,}[0-9]{2,}\b/gi;
@@ -100,7 +153,7 @@ export default function CourseConnectionsFlow({ focus, all, height = 360, hrefBa
 
       generalReqs.forEach((text) => {
         const found = (text.match(codeRegex) || []).map((s) => s.toUpperCase());
-        const matchedCourses = all.filter((c) => c.code && found.includes(c.code.toUpperCase()));
+        const matchedCourses = Array.from(prereqCourses.values()).filter((c) => c.code && found.includes(c.code.toUpperCase()));
         matchedCourses.forEach((c) => extractedReqCourseIds.add(c.id));
         let reduced = text;
         found.forEach((code) => {
@@ -116,8 +169,11 @@ export default function CourseConnectionsFlow({ focus, all, height = 360, hrefBa
       g.setNode(focus.id, { width: nodeWidth, height: nodeHeight, kind: 'focus', course: focus });
 
       mergedReqCourseIds.forEach((id) => {
-        g.setNode(id, { width: nodeWidth, height: nodeHeight, kind: 'course', course: byId.get(id) });
-        g.setEdge(id, focus.id);
+        const course = prereqCourses.get(id);
+        if (course) {
+          g.setNode(id, { width: nodeWidth, height: nodeHeight, kind: 'course', course });
+          g.setEdge(id, focus.id);
+        }
       });
 
       cleanedGeneralReqs.forEach((text, i) => {
@@ -127,18 +183,9 @@ export default function CourseConnectionsFlow({ focus, all, height = 360, hrefBa
       });
     }
 
-    // Add dependents
-    //const dependents = all.filter((c) => (c.requirements || []).includes(focus.id) || (c.prerequisites || []).includes(focus.id));
-    const dependents = all.filter((c) => {
-      const isReq = c.requirements?.includes(focus.id);
-      const isPrereq = c.prerequisites?.includes(focus.id);
-      return isReq || isPrereq;
-    });
-
-    dependents.forEach((d) => {
-      g.setNode(d.id, { width: nodeWidth, height: nodeHeight, kind: 'course', course: d });
-      g.setEdge(focus.id, d.id);
-    });
+    // Note: Dependents are not loaded to avoid fetching all courses
+    // In a production app, you'd have an API endpoint to query: 
+    // "find courses where requirements contains focus.id"
     try {
       dagre.layout(g);
     } catch (e) {
@@ -240,16 +287,15 @@ export default function CourseConnectionsFlow({ focus, all, height = 360, hrefBa
     });
 
     // Add related courses to the right side
-    const reqCourseIds = (focus.requirements || []).filter((id) => byId.has(id));
-    const related = (focus.relatedCourses || []).filter((id) => byId.has(id) && !reqCourseIds.includes(id) && !dependents.some(d => d.id === id));
+    const reqCourseIds = Array.from(prereqCourses.keys());
+    const related = relatedCourses.filter((c) => !reqCourseIds.includes(c.id));
 
-    related.forEach((rid, i) => {
-      const c = byId.get(rid)!;
+    related.forEach((c, i) => {
       const base = g.node(focus.id);
       const y = base.y - (related.length - 1) * 40 + i * 80;
 
       nodes.push({
-        id: rid,
+        id: c.id,
         data: { label: c.title },
         position: { x: base.x + 320, y: y - nodeHeight / 2 },
         targetPosition: Position.Left,
@@ -264,9 +310,9 @@ export default function CourseConnectionsFlow({ focus, all, height = 360, hrefBa
       });
 
       edges.push({
-        id: `rel-${focus.id}-${rid}`,
+        id: `rel-${focus.id}-${c.id}`,
         source: focus.id,
-        target: rid,
+        target: c.id,
         type: 'straight',
         style: { stroke: "#cbd5e1", strokeDasharray: "4 4" },
         label: "related",
@@ -277,7 +323,7 @@ export default function CourseConnectionsFlow({ focus, all, height = 360, hrefBa
     });
 
     return { nodes, edges };
-  }, [focus, all]);
+  }, [focus, prereqCourses, relatedCourses]);
 
   const onNodeClick = useCallback((_e: React.MouseEvent, node: Node) => {
     // Only navigate to actual courses
@@ -295,6 +341,11 @@ export default function CourseConnectionsFlow({ focus, all, height = 360, hrefBa
         >
           {isFull ? "Exit Fullscreen" : "Fullscreen"}
         </button>
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-50/80 dark:bg-gray-900/80 z-10">
+            <span className="text-sm text-gray-500">Loading course connections...</span>
+          </div>
+        )}
         <div style={{ width: "100%", height: isFull ? "100%" : height }}>
           <ReactFlow nodes={nodes} edges={edges} fitView onNodeClick={onNodeClick} attributionPosition="bottom-right">
             <Background gap={16} color="#cbd5e1" />
