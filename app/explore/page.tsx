@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { fetchCoursesClient } from "@/lib/firestore/courses";
+import { useEffect, useMemo, useState, useCallback } from "react";
+import { fetchCoursesClient, fetchAllCoursesClient } from "@/lib/firestore/courses";
 import type { Course } from "@/lib/courses";
 import RagChat from "@/components/common/RagChat";
 import CourseCard from "@/components/courses/CourseCard";
@@ -11,15 +11,14 @@ import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { useAdmin } from "@/hooks/useAdmin";
-import { notFound } from "next/navigation";
-// import TranscriptUpload from "@/components/courses/TranscriptUpload";
-// import { auth } from "@/lib/firebase-client";
-// import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { auth } from "@/lib/firebase-client";
 
 export default function ExplorePage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [recommendedIds, setRecommendedIds] = useState<string[]>([]);
+  const [recommendedCourses, setRecommendedCourses] = useState<Course[]>([]);
+  const [isLoadingRecommendations, setIsLoadingRecommendations] = useState(false);
 
   const [showAllCourses, setShowAllCourses] = useState(false);
   const [search, setSearch] = useState("");
@@ -27,46 +26,107 @@ export default function ExplorePage() {
   const [sortBy, setSortBy] = useState<string>("relevance");
   const [groupBy, setGroupBy] = useState<string>("none");
 
+  // Pagination state
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [visibleCount, setVisibleCount] = useState<number>(50);
+  
   const [viewMode, setViewMode] = useState<"grid" | "embedding">("grid");
-  const { isAdmin, loading } = useAdmin();
+  const { isAdmin, loading: adminLoading } = useAdmin();
   const router = useRouter();
-  // const [user, setUser] = useState<{ uid: string } | null>(null);
 
-  // useEffect(() => {
-  //   const unsub = onAuthStateChanged(auth, (u) => {
-  //     setUser(u ? { uid: u.uid } : null);
-  //   });
-  //   return () => unsub();
-  // }, []);
+  const user = auth.currentUser;
 
+  // Load initial courses on mount
   useEffect(() => {
     updatePageMeta(
       "Explore Courses",
       "Discover, search, and compare all Uppsala University courses"
     );
-    fetchCoursesClient().then(setCourses);
+    loadCourses(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Load courses function
+  const loadCourses = useCallback(async (pageNum: number, searchQuery?: string, level?: string) => {
+    setIsLoading(true);
+    try {
+      const token = await user?.getIdToken();
+      console.log("token:", token);
+      const result = await fetchCoursesClient({ 
+        page: pageNum, 
+        limit: 50,
+        search: searchQuery || '',
+        level: level || 'all',
+        token: token, // For admin verification
+      });
+      
+      if (pageNum === 1) {
+        setCourses(result.courses);
+      } else {
+        setCourses(prev => [...prev, ...result.courses]);
+      }
+      
+      setPage(result.pagination.page);
+      setTotalPages(result.pagination.totalPages);
+      setHasNextPage(result.pagination.hasNextPage);
+    } catch (error) {
+      console.error('Failed to load courses:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  // Fetch full course details for recommendations
+  const loadRecommendedCourses = useCallback(async (ids: string[]) => {
+    if (ids.length === 0) {
+      setRecommendedCourses([]);
+      return;
+    }
+    
+    setIsLoadingRecommendations(true);
+    try {
+      // Fetch all courses to get full details for recommended IDs
+      const token = await user?.getIdToken();
+      console.log("token:", token);
+      const allCourses = await fetchAllCoursesClient(token);
+      
+      // Filter and sort by recommendation order
+      const idToIndex = new Map(ids.map((id, idx) => [id, idx] as const));
+      const matched = allCourses
+        .filter(c => idToIndex.has(c.id))
+        .sort((a, b) => (idToIndex.get(a.id) ?? 0) - (idToIndex.get(b.id) ?? 0));
+      
+      setRecommendedCourses(matched);
+    } catch (error) {
+      console.error('Failed to load recommended courses:', error);
+    } finally {
+      setIsLoadingRecommendations(false);
+    }
+  }, []);
+
+  // Handle AI recommendations
   useEffect(() => {
     if (recommendedIds.length > 0) {
       setShowAllCourses(false);
       setSortBy("relevance");
+      loadRecommendedCourses(recommendedIds);
+    } else {
+      setRecommendedCourses([]);
     }
-  }, [recommendedIds]);
+  }, [recommendedIds, loadRecommendedCourses]);
 
   const baseResults = useMemo(() => {
     if (!showAllCourses && recommendedIds.length > 0) {
-      // AI recommendations view
-      const idToIndex = new Map(recommendedIds.map((id, idx) => [id, idx] as const));
-      return courses
-        .filter((c) => idToIndex.has(c.id))
-        .sort((a, b) => (idToIndex.get(a.id) ?? 0) - (idToIndex.get(b.id) ?? 0));
+      // AI recommendations view - use pre-loaded recommended courses
+      return recommendedCourses;
     }
 
     // Non-AI view
     return courses;
-  }, [courses, recommendedIds, showAllCourses]);
+  }, [courses, recommendedIds, recommendedCourses, showAllCourses]);
 
 
   const results = useMemo(() => {
@@ -95,16 +155,20 @@ export default function ExplorePage() {
       const order: Record<string, number> = { Preparatory: 1, "Bachelor's": 2, "Master's": 3, Unknown: 4 };
       sorted.sort((a, b) => (order[a.level || "Unknown"] ?? 99) - (order[b.level || "Unknown"] ?? 99));
     } else if (sortBy === "random") {
-      // eslint-disable-next-line
       sorted.sort(() => Math.random() - 0.5);
     }
 
     return sorted;
   }, [baseResults, search, levelFilter, sortBy]);
 
+  // Reset pagination when filters change
   useEffect(() => {
     setVisibleCount(50);
-  }, [search, levelFilter, sortBy, groupBy, showAllCourses, recommendedIds]);
+    // Reload courses with new filters
+    if (showAllCourses) {
+      loadCourses(1, search, levelFilter);
+    }
+  }, [search, levelFilter, showAllCourses, loadCourses]);
 
   const visibleResults = useMemo(() => {
     return results.slice(0, Math.min(visibleCount, results.length));
@@ -124,14 +188,22 @@ export default function ExplorePage() {
       .map((k) => ({ key: k, courses: groups[k] }));
   }, [groupBy, visibleResults]);
 
-  if (loading) {
+  const handleLoadMore = useCallback(() => {
+    if (hasNextPage && !isLoading) {
+      loadCourses(page + 1, search, levelFilter);
+    } else {
+      // Client-side pagination for already loaded courses
+      setVisibleCount(prev => Math.min(results.length, prev + 10));
+    }
+  }, [hasNextPage, isLoading, page, search, levelFilter, loadCourses, results.length]);
+
+  // Admin auth check
+  if (adminLoading) {
     return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
   }
-  // Return 404-page for non-admin users
-  if (!loading && !isAdmin) {
-    return notFound();
+  if (!isAdmin) {
+    return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Not authorized</div>;
   }
-
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300">
@@ -139,6 +211,7 @@ export default function ExplorePage() {
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">UUAIS Course Navigator</h1>
           <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Search all Uppsala University courses with natural language and explore their connections. Remember AI can and will make mistakes, double check information!</p>
+           <div className="text-sm text-gray-600 dark:text-gray-300 italic pt-2">This is a very early prototype, expect some inaccuracies.</div>
         </div>
 
         <div className="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-10">
@@ -153,7 +226,9 @@ export default function ExplorePage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-4">
             <div>
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                {!showAllCourses && recommendedIds.length > 0 ? "AI Recommendations" : "All Courses"}
+                {!showAllCourses && recommendedIds.length > 0 ? (
+                  isLoadingRecommendations ? "Loading AI Recommendations..." : "AI Recommendations"
+                ) : "All Courses"}
               </h2>
               <div className="text-sm text-gray-600 dark:text-gray-300">
                 {!showAllCourses && recommendedIds.length > 0
@@ -167,7 +242,7 @@ export default function ExplorePage() {
               <div className="flex rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden">
                 <button
                   onClick={() => setViewMode("grid")}
-                  className={`px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${viewMode === "grid"
+                  className={`px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${viewMode === "grid"
                     ? "bg-[#990000] text-white"
                     : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                     }`}
@@ -176,27 +251,16 @@ export default function ExplorePage() {
                 </button>
                 <button
                   onClick={() => setViewMode("embedding")}
-                  className={`px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${viewMode === "embedding"
+                  className={`px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${viewMode === "embedding"
                     ? "bg-[#990000] text-white"
                     : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
                     }`}
                 >
-                  Embedding Map
+                  Embedding Space
                 </button>
               </div>
 
-              {recommendedIds.length > 0 && !showAllCourses && (
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    setShowAllCourses(true);
-                    setRecommendedIds([]);
-                  }}
-                >
-                  View all
-                </Button>
-              )}
-              {recommendedIds.length > 0 && (
+              {/* {recommendedIds.length > 0 && (
                 <Button
                   variant="outline"
                   onClick={() => {
@@ -206,7 +270,7 @@ export default function ExplorePage() {
                 >
                   Clear AI results
                 </Button>
-              )}
+              )} */}
             </div>
           </div>
 
@@ -252,13 +316,14 @@ export default function ExplorePage() {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mt-3">
               <div className="text-xs text-gray-500 dark:text-gray-400">
                 Showing {visibleResults.length} of {results.length} course{results.length === 1 ? "" : "s"}
+                {hasNextPage && ` (page ${page} of ${totalPages})`}
               </div>
             </div>
           </div>
 
           {viewMode === "embedding" ? (
             <div className="mt-6">
-              <p>Temporarily disabled</p>
+              {/* <p>Temporarily disabled</p> */}
               <EmbeddingMap
                 recommendedIds={recommendedIds}
                 onCourseClick={(id) => router.push(`/explore/${id}`)}
@@ -288,6 +353,15 @@ export default function ExplorePage() {
               {visibleResults.map((c) => (
                 <CourseCard key={c.id} course={c} hrefBase="/explore" />
               ))}
+              {hasNextPage && !isLoading && (
+                <Button
+                  variant="outline"
+                  className="col-span-1 self-center md:col-span-2 lg:col-span-3"
+                  onClick={handleLoadMore}
+                >
+                  Load more from server
+                </Button>
+              )}
               {visibleResults.length < results.length && (
                 <Button
                   variant="outline"

@@ -1,4 +1,129 @@
 import { adminDb } from '@/lib/firebase-admin';
+import { gzipSync, gunzipSync } from 'zlib';
+
+// ---- Cache Configuration ----
+const CACHE_DOC_ID = 'courses_cache_v1';
+const CACHE_COLLECTION = '_cache';
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+// In-memory cache for the current process (faster than Firestore read)
+let memoryCache: { courses: Course[]; timestamp: number } | null = null;
+
+/**
+ * Get courses from persistent cache or refresh from source.
+ * This ensures at most 1 read per day for the full course catalog,
+ * regardless of how many users or server instances are active.
+ */
+async function getCachedCourses(): Promise<Course[]> {
+  const now = Date.now();
+  
+  // 1. Check in-memory cache first (fastest, same process)
+  if (memoryCache && (now - memoryCache.timestamp) < CACHE_TTL_MS) {
+    console.log("Returning memoryCache");
+    return memoryCache.courses;
+  }
+  
+  try {
+    // 2. Check persistent Firestore cache (shared across all instances)
+    const cacheDoc = await adminDb.collection(CACHE_COLLECTION).doc(CACHE_DOC_ID).get();
+    
+    if (cacheDoc.exists) {
+      const data = cacheDoc.data();
+      const cacheAge = now - (data?.updatedAt ?? 0);
+      
+      if (cacheAge < CACHE_TTL_MS && data?.data && data?.compressed) {
+        // Persistent cache is valid - decompress and use it
+        const compressed = Buffer.from(data.data, 'base64');
+        const decompressed = gunzipSync(compressed);
+        const courses = JSON.parse(decompressed.toString()) as Course[];
+        memoryCache = { courses, timestamp: now };
+        console.log("Returning cacheDoc");
+        return courses;
+      }
+    }
+    
+    // 3. Cache miss or expired - refresh from source
+    return await refreshCourseCache();
+  } catch (error) {
+    console.error('Cache read failed, falling back to source:', error);
+    // Fallback: fetch directly from source without caching
+    return await fetchCoursesFromSource();
+  }
+}
+
+/**
+ * Sanitize course data for Firestore storage by removing undefined values.
+ * Firestore doesn't accept undefined as a valid value.
+ */
+function sanitizeCourseForCache(course: Course): Record<string, unknown> {
+  const sanitized: Record<string, unknown> = {};
+  
+  for (const [key, value] of Object.entries(course)) {
+    if (value !== undefined) {
+      sanitized[key] = value;
+    }
+  }
+  
+  return sanitized;
+}
+
+/**
+ * Refresh the cache by fetching all courses from Firestore and storing them.
+ * This is the ONLY place where we read the entire courses collection.
+ */
+async function refreshCourseCache(): Promise<Course[]> {
+  console.log("Refreshing course cache");
+  const courses = await fetchCoursesFromSource();
+  const now = Date.now();
+  
+  try {
+    // Sanitize courses before storing (Firestore doesn't accept undefined)
+    const sanitizedCourses = courses.map(sanitizeCourseForCache);
+    
+    // Compress courses to fit within Firestore's 1MB document limit
+    const jsonString = JSON.stringify(sanitizedCourses);
+    const compressed = gzipSync(jsonString);
+    const base64Data = compressed.toString('base64');
+    
+    // Store in persistent cache (shared across all instances)
+    await adminDb.collection(CACHE_COLLECTION).doc(CACHE_DOC_ID).set({
+      data: base64Data,
+      compressed: true,
+      updatedAt: now,
+      version: 2,
+      courseCount: courses.length,
+    });
+    
+    // Update in-memory cache
+    memoryCache = { courses, timestamp: now };
+    
+    console.log(`[Courses] Cache refreshed with ${courses.length} courses at ${new Date(now).toISOString()}`);
+  } catch (error) {
+    console.error('Failed to write cache, but returning courses:', error);
+  }
+  
+  return courses;
+}
+
+/**
+ * Direct fetch from Firestore source - expensive operation, use sparingly.
+ */
+async function fetchCoursesFromSource(): Promise<Course[]> {
+  const snapshot = await adminDb.collection('courses').get();
+  return snapshot.docs.map(doc => docToCourse(doc.id, doc.data() as Record<string, unknown>));
+}
+
+/**
+ * Force refresh the cache - useful for admin operations or scheduled jobs.
+ */
+export async function invalidateCourseCache(): Promise<void> {
+  memoryCache = null;
+  try {
+    await adminDb.collection(CACHE_COLLECTION).doc(CACHE_DOC_ID).delete();
+  } catch {
+    // Ignore if doesn't exist
+  }
+}
 
 export type Course = {
   id: string;
@@ -167,21 +292,8 @@ function docToCourse(id: string, data: Record<string, unknown>): Course {
 
 // ---- Server-side Firestore data access ----
 
-let coursesCache: Course[] | null = null;
-let lastFetch = 0;
-const CACHE_TTL = 24*60*60*1000; // 1 day
-
 export async function fetchCourses(): Promise<Course[]> {
-  const now = Date.now();
-  if (coursesCache && (now - lastFetch < CACHE_TTL)) {
-    console.log("Using cached courses");
-    return coursesCache;
-  }
-  const snapshot = await adminDb.collection('courses').get();
-  coursesCache = snapshot.docs.map(doc => docToCourse(doc.id, doc.data() as Record<string, unknown>));
-  lastFetch = now;
-  console.log("Using fresh courses");
-  return coursesCache;
+  return getCachedCourses();
 }
 
 export async function fetchCourseById(id: string): Promise<Course | undefined> {
