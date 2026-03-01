@@ -1,9 +1,9 @@
-"use server";
 import { NextRequest } from 'next/server';
 import { adminAuth } from '@/lib/firebase-admin';
 
 export async function authorizeAdmin(req: NextRequest): Promise<{ ok: true; uid: string } | { ok: false }> {
     const authHeader = req.headers.get('authorization');
+    console.log("authorizing admin");
     if (!authHeader || !authHeader.startsWith('Bearer ')) return { ok: false };
 
     const idToken = authHeader.slice('Bearer '.length);
