@@ -1,18 +1,12 @@
 import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
-import { authorizeAdmin } from '@/app/api/admin/AuthorizeAPI';
 
 function getTodayString(): string {
   return new Date().toISOString().split('T')[0];
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
-    const auth = await authorizeAdmin(req);
-    if (!auth.ok) {
-      return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-    }
 
     const today = getTodayString();
 

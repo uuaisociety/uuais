@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { fetchCourses } from '@/lib/courses';
-import { authorizeAdmin } from '@/app/api/admin/AuthorizeAPI';
 export const dynamic = 'force-dynamic';
 
 const MAX_PAGE_SIZE = 50;
@@ -22,11 +21,6 @@ const DEFAULT_PAGE_SIZE = 50;
  */
 export async function GET(request: NextRequest) {
     try {
-        const auth = await authorizeAdmin(request);
-        if (!auth.ok) {
-            console.warn('Unauthorized');
-            return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-        }
         const { searchParams } = new URL(request.url);
         
         // Parse pagination parameters

@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { projectEmbeddings, type ProjectionAlgorithm } from '@/lib/ai/projection';
-import { authorizeAdmin } from '@/app/api/admin/AuthorizeAPI';
 
 export interface EmbeddingPoint {
     courseId: string;
@@ -32,10 +31,6 @@ function normalizeLevel(lvl: unknown): string {
 }
 
 export async function GET(req: NextRequest) {
-    const auth = await authorizeAdmin(req);
-    if (!auth.ok) {
-        return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-    }
     try {
         const url = new URL(req.url);
         const dims = (parseInt(url.searchParams.get('dimensions') || '2') === 3 ? 3 : 2) as 2 | 3;

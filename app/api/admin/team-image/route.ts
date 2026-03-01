@@ -1,42 +1,35 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { adminAuth, adminDb } from '@/lib/firebase-admin';
+import { getStorage } from 'firebase-admin/storage';
 import admin from 'firebase-admin';
 
-if (!admin.apps.length) {
-  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
-  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
-  const storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || process.env.FIREBASE_STORAGE_BUCKET;
+const storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || process.env.FIREBASE_STORAGE_BUCKET;
 
-  if (!projectId || !clientEmail || !privateKey) {
-    console.error('Missing Firebase admin credentials.');
+// Initialize storage if not already done
+if (storageBucket && admin.apps.length > 0) {
+  const app = admin.app();
+  // Only set storage bucket if not already configured
+  const currentBucket = app.options.storageBucket;
+  if (!currentBucket) {
+    try {
+      admin.app().options.storageBucket = storageBucket;
+    } catch {
+      // Ignore if already initialized
+    }
   }
-
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId,
-      clientEmail,
-      privateKey,
-    }),
-    storageBucket,
-  });
 }
 
-//   const tokenRes = await getIdTokenResult(u, true);
-//   const tokenClaims = (tokenRes.claims || {}) as Record<string, unknown>;
-//   setClaims(tokenClaims);
-//   setIsAdmin(Boolean(tokenClaims.admin));
 async function authorizeRequest(req: NextRequest) {
   const authHeader = req.headers.get('authorization');
   if (!authHeader || !authHeader.startsWith('Bearer ')) return { ok: false, reason: 'no-auth' };
   const idToken = authHeader.slice('Bearer '.length);
   try {
-    const decoded = await admin.auth().verifyIdToken(idToken);
+    const decoded = await adminAuth.verifyIdToken(idToken);
     if (decoded && decoded.admin === true) return { ok: true, uid: decoded.uid };
     return { ok: false, reason: 'not-admin' };
   } catch (err) {
     console.warn('verifyIdToken failed', err);
-    // attempt to decode without verification to provide diagnostic info (dev only)
     return { ok: false, reason: 'invalid-token', detail: String(err instanceof Error ? err.message : err) };
   }
 }
@@ -132,7 +125,7 @@ export async function POST(req: NextRequest) {
     const teamId = form.get('teamId')?.toString();
     if (teamId) {
       try {
-        const docRef = admin.firestore().doc(`teamMembers/${teamId}`);
+        const docRef = adminDb.doc(`teamMembers/${teamId}`);
         await docRef.update({ image: publicUrl || signedUrl || null, imagePath: path });
       } catch (e) {
         console.warn('failed to update team member doc, rolling back uploaded file', e);
@@ -161,7 +154,7 @@ export async function DELETE(req: NextRequest) {
     const { path } = body as { path?: string };
     if (!path) return NextResponse.json({ error: 'missing path' }, { status: 400 });
 
-    const bucket = admin.storage().bucket();
+    const bucket = getStorage().bucket();
     const file = bucket.file(path);
     const [exists] = await file.exists();
     if (!exists) return NextResponse.json({ ok: true, deleted: false, reason: 'not-found' });
