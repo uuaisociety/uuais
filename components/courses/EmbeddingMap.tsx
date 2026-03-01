@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
-import type { Course } from "@/lib/courses";
+//import type { Course } from "@/lib/courses";
 
 interface EmbeddingPoint {
     courseId: string;
@@ -44,7 +44,6 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
     const [transform, setTransform] = useState({ offsetX: 0, offsetY: 0, scale: 1 });
     const [isDragging, setIsDragging] = useState(false);
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-    const [resizeTick, setResizeTick] = useState(0);
     const [isFullscreen, setIsFullscreen] = useState(false);
     const animFrameRef = useRef<number>(0);
 
@@ -79,10 +78,10 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const observer = new ResizeObserver(() => setResizeTick(t => t + 1));
+        const observer = new ResizeObserver(() => render());
         observer.observe(canvas);
         return () => observer.disconnect();
-    }, []);
+    });
 
     // Convert data coordinates to canvas coordinates
     const toCanvas = useCallback((x: number, y: number) => {
@@ -97,16 +96,16 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
     }, [getCanvasRect, transform]);
 
     // Convert canvas coordinates back to data coordinates
-    const fromCanvas = useCallback((cx: number, cy: number) => {
-        const padding = 60;
-        const rect = getCanvasRect();
-        const plotW = rect.width - padding * 2;
-        const plotH = rect.height - padding * 2;
-        return {
-            x: ((cx - transform.offsetX) / transform.scale - padding) / plotW,
-            y: ((cy - transform.offsetY) / transform.scale - padding) / plotH,
-        };
-    }, [getCanvasRect, transform]);
+    // const fromCanvas = useCallback((cx: number, cy: number) => {
+    //     const padding = 60;
+    //     const rect = getCanvasRect();
+    //     const plotW = rect.width - padding * 2;
+    //     const plotH = rect.height - padding * 2;
+    //     return {
+    //         x: ((cx - transform.offsetX) / transform.scale - padding) / plotW,
+    //         y: ((cy - transform.offsetY) / transform.scale - padding) / plotH,
+    //     };
+    // }, [getCanvasRect, transform]);
 
     // Find nearest point to mouse
     const findNearest = useCallback((mx: number, my: number): EmbeddingPoint | null => {
@@ -260,7 +259,7 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
             ctx.fillStyle = '#64748b';
             ctx.fillText(`${recommendedSet.size} recommended highlighted`, legendX, legendY + 4);
         }
-    }, [points, recommendedSet, hoveredPoint, getCanvasRect, toCanvas, transform, resizeTick]);
+    }, [points, recommendedSet, hoveredPoint, getCanvasRect, toCanvas, transform]);
 
     // Animation loop for pulsing recommended points
     useEffect(() => {
