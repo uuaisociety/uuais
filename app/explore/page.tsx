@@ -60,7 +60,7 @@ export default function ExplorePage() {
         limit: 50,
         search: searchQuery || '',
         level: level || 'all',
-        token: token, // For admin verification
+        token: token as string, // For admin verification
       });
       
       if (pageNum === 1) {
@@ -77,7 +77,7 @@ export default function ExplorePage() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [user]);
 
   // Fetch full course details for recommendations
   const loadRecommendedCourses = useCallback(async (ids: string[]) => {
@@ -91,7 +91,7 @@ export default function ExplorePage() {
       // Fetch all courses to get full details for recommended IDs
       const token = await user?.getIdToken();
       console.log("token:", token);
-      const allCourses = await fetchAllCoursesClient(token);
+      const allCourses = await fetchAllCoursesClient(token as string);
       
       // Filter and sort by recommendation order
       const idToIndex = new Map(ids.map((id, idx) => [id, idx] as const));
@@ -105,7 +105,7 @@ export default function ExplorePage() {
     } finally {
       setIsLoadingRecommendations(false);
     }
-  }, []);
+  }, [user]);
 
   // Handle AI recommendations
   useEffect(() => {
