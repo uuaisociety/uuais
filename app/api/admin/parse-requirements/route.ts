@@ -3,7 +3,6 @@ import type { NextRequest } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { fetchCourses } from '@/lib/courses';
 import { parseRequirements } from '@/lib/prerequisites/parser';
-import { authorizeAdmin } from '@/app/api/admin/AuthorizeAPI';
 
 /**
  * POST /api/admin/parse-requirements
@@ -15,11 +14,6 @@ import { authorizeAdmin } from '@/app/api/admin/AuthorizeAPI';
  */
 export async function POST(req: NextRequest) {
     try {
-        const auth = await authorizeAdmin(req);
-        if (!auth.ok) {
-            return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-        }
-
         const body = await req.json();
         const { courseId } = body;
 
