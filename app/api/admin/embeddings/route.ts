@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { adminAuth, adminDb } from '@/lib/firebase-admin';
+import { adminAuth } from '@/lib/firebase-admin';
 import { fetchCourses } from '@/lib/courses';
 import { generateAndStoreCourseEmbedding, getEmbeddingCount } from '@/lib/ai/vector-store';
 
