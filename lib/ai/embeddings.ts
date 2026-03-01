@@ -39,8 +39,9 @@ export async function generateEmbedding(text: string): Promise<number[]> {
         'X-Title': 'UUAIS Course Advisor',
       },
       body: JSON.stringify({
-        model: 'text-embedding-3-small',
+        model: 'google/gemini-embedding-001',
         input: text,
+        dimensions: 768,
       }),
     });
 
@@ -98,8 +99,9 @@ export async function generateEmbeddings(texts: string[]): Promise<number[][]> {
         'X-Title': 'UUAIS Course Advisor',
       },
       body: JSON.stringify({
-        model: 'text-embedding-3-small',
+        model: 'google/gemini-embedding-001',
         input: texts,
+        dimensions: 768,
       }),
     });
 
