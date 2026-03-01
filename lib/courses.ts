@@ -304,6 +304,83 @@ export async function fetchCourseById(id: string): Promise<Course | undefined> {
   return docToCourse(doc.id, doc.data() as Record<string, unknown>);
 }
 
+// ---- Lightweight course connection data for graphs ----
+
+export type CourseConnection = {
+  id: string;
+  title: string;
+  code: string;
+  prerequisites: string[] | null;
+  prerequisite_of: string[] | null;
+  relatedCourses: string[];
+  level?: 'Preparatory' | "Bachelor's" | "Master's";
+  credits?: number;
+};
+
+/**
+ * Fetch only essential connection fields for a course.
+ * Much more efficient than full Course fetch for graph visualization.
+ * @param maxConnections - Max number of related/prereq courses to return (default 20)
+ */
+export async function fetchCourseConnections(
+  id: string, 
+  maxConnections: number = 20
+): Promise<CourseConnection | undefined> {
+  const doc = await adminDb.collection('courses').doc(id).get();
+  if (!doc.exists) return undefined;
+  
+  const data = doc.data() as Record<string, unknown>;
+  const title = (data.Course_name as string)?.trim() || (data.title as string)?.trim() || 'Untitled';
+  const code = (data.code as string) || '';
+  const level = normalizeLevel(data.level as string | undefined);
+  const creditsRaw = data.credits;
+  const credits = typeof creditsRaw === 'number' ? creditsRaw : (typeof creditsRaw === 'string' ? parseFloat(creditsRaw) || undefined : undefined);
+  
+  const prereqs = (data.prerequisites as string[] | null) ?? null;
+  const prereqOf = (data.prerequisite_of as string[] | null) ?? null;
+  const related = (data.relatedCourses as string[]) || [];
+  
+  // Cap the number of connections to prevent overwhelming the graph
+  const cappedPrereqs = prereqs ? prereqs.slice(0, maxConnections) : null;
+  const cappedPrereqOf = prereqOf ? prereqOf.slice(0, maxConnections) : null;
+  const cappedRelated = related.slice(0, maxConnections);
+  
+  return {
+    id,
+    title,
+    code,
+    prerequisites: cappedPrereqs,
+    prerequisite_of: cappedPrereqOf,
+    relatedCourses: cappedRelated,
+    level,
+    credits,
+  };
+}
+
+/**
+ * Batch fetch connection data for multiple course IDs.
+ * Efficient for loading graph data with controlled concurrency.
+ */
+export async function fetchMultipleCourseConnections(
+  ids: string[],
+  maxConnections: number = 20,
+  maxConcurrency: number = 5
+): Promise<Map<string, CourseConnection>> {
+  const results = new Map<string, CourseConnection>();
+  
+  // Process in batches to avoid overwhelming Firestore
+  for (let i = 0; i < ids.length; i += maxConcurrency) {
+    const batch = ids.slice(i, i + maxConcurrency);
+    const batchPromises = batch.map(async (id) => {
+      const conn = await fetchCourseConnections(id, maxConnections);
+      if (conn) results.set(id, conn);
+    });
+    await Promise.all(batchPromises);
+  }
+  
+  return results;
+}
+
 export async function searchCourses(query: string): Promise<Course[]> {
   const courses = await fetchCourses();
   const q = query.trim().toLowerCase();

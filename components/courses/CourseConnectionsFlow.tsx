@@ -3,67 +3,63 @@
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import ReactFlow, { Background, Controls, Node, Edge, Position } from "reactflow";
 import "reactflow/dist/style.css";
-import type { Course, StructuredRequirement } from "@/lib/courses";
+import type { Course, CourseConnection, StructuredRequirement } from "@/lib/courses";
 import { useRouter } from "next/navigation";
 import dagre from "dagre";
-import { fetchCourseById } from "@/lib/courses";
+import { fetchCourseConnections, fetchMultipleCourseConnections } from "@/lib/courses";
+import { TargetLabelEdge } from "./TargetLabelEdge";
 
 type Props = {
   focus: Course;
   height?: number;
-  hrefBase?: string; // e.g., "/explore"
+  hrefBase?: string;
+  maxConnections?: number; // Cap on connections to prevent overwhelming the server
 };
 
 const nodeWidth = 220;
 const nodeHeight = 64;
+const MAX_CONNECTIONS_DEFAULT = 15; // Default cap on connections
 
-export default function CourseConnectionsFlow({ focus, height = 360, hrefBase = "/explore" }: Props) {
+export default function CourseConnectionsFlow({ 
+  focus, 
+  height = 360, 
+  hrefBase = "/explore",
+  maxConnections = MAX_CONNECTIONS_DEFAULT 
+}: Props) {
   const router = useRouter();
   const [isFull, setIsFull] = useState(false);
-  const [prereqCourses, setPrereqCourses] = useState<Map<string, Course>>(new Map());
-  const [relatedCourses, setRelatedCourses] = useState<Course[]>([]);
+  const [prereqCourses, setPrereqCourses] = useState<Map<string, CourseConnection>>(new Map());
+  const [prereqOfCourses, setPrereqOfCourses] = useState<Map<string, CourseConnection>>(new Map());
+  const [relatedCourses, setRelatedCourses] = useState<CourseConnection[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch prerequisite and dependent course details
+  // Fetch prerequisite and dependent course details with caps
   useEffect(() => {
     const loadRelatedCourses = async () => {
       setLoading(true);
       try {
-        // Load prerequisite courses
-        const prereqMap = new Map<string, Course>();
-        const prereqIds = focus.prerequisites;
+        // Fetch focus course connection data
+        const focusConn = await fetchCourseConnections(focus.id, maxConnections);
         
-        if (!prereqIds) return;
-        await Promise.all(
-          prereqIds.map(async (id) => {
-            try {
-              const course = await fetchCourseById(id);
-              if (course) prereqMap.set(id, course);
-            } catch {
-              // Ignore missing courses
-            }
-          })
-        );
+        if (!focusConn) {
+          setLoading(false);
+          return;
+        }
+
+        // Load prerequisite courses (up to maxConnections)
+        const prereqIds = focusConn.prerequisites?.slice(0, maxConnections) || [];
+        const prereqMap = await fetchMultipleCourseConnections(prereqIds, maxConnections, 3);
         setPrereqCourses(prereqMap);
 
-        // Load related courses from focus.relatedCourses
-        const related: Course[] = [];
-        if (focus.relatedCourses?.length) {
-          await Promise.all(
-            focus.relatedCourses.map(async (id) => {
-              try {
-                const course = await fetchCourseById(id);
-                if (course) related.push(course);
-              } catch {
-                // Ignore missing courses
-              }
-            })
-          );
-        }
-        setRelatedCourses(related);
+        // Load prerequisite_of courses (courses that depend on this one) - up to maxConnections
+        const prereqOfIds = focusConn.prerequisite_of?.slice(0, maxConnections) || [];
+        const prereqOfMap = await fetchMultipleCourseConnections(prereqOfIds, maxConnections, 3);
+        setPrereqOfCourses(prereqOfMap);
 
-        // Note: Dependents would require a query to find courses that have this as a prerequisite
-        // For now, we skip dependents to avoid fetching all courses
+        // Load related courses - up to maxConnections
+        const relatedIds = focusConn.relatedCourses.slice(0, maxConnections);
+        const relatedMap = await fetchMultipleCourseConnections(relatedIds, maxConnections, 3);
+        setRelatedCourses(Array.from(relatedMap.values()));
       } catch (error) {
         console.error("Failed to load related courses:", error);
       } finally {
@@ -72,10 +68,10 @@ export default function CourseConnectionsFlow({ focus, height = 360, hrefBase = 
     };
 
     loadRelatedCourses();
-  }, [focus]);
+  }, [focus, maxConnections]);
 
   const { nodes, edges } = useMemo(() => {
-    console.log("Starting layout for:", focus.code);
+
     const nodes: Node[] = [];
     const edges: Edge[] = [];
 
@@ -197,9 +193,9 @@ export default function CourseConnectionsFlow({ focus, height = 360, hrefBase = 
       const node = g.node(id);
       if (!node) return;
 
-      if (node.kind === 'course' || node.kind === 'focus') {
-        const c = node.course as Course;
-        const credits = c.tags.find((t) => t.toLowerCase().includes("credits")) || "";
+        if (node.kind === 'course' || node.kind === 'focus') {
+        const c = node.course as CourseConnection;
+        const credits = c.credits ? `${c.credits} credits` : "";
         nodes.push({
           id,
           data: { label: `${c.title}${credits ? ` (${credits})` : ""}` },
@@ -322,8 +318,49 @@ export default function CourseConnectionsFlow({ focus, height = 360, hrefBase = 
       });
     });
 
+    // Add prerequisite_of courses (courses that depend on this one) below
+    const prereqOfList = Array.from(prereqOfCourses.values());
+    const total = prereqOfList.length;
+    
+    prereqOfList.forEach((c, i) => {
+      const base = g.node(focus.id);
+      const x = (total/2 - i)*240+ base.x;
+      const y = base.y + 240;
+
+      nodes.push({
+        id: c.id,
+        data: { label: c.title },
+        position: { x, y: y - nodeHeight / 2 },
+        targetPosition: Position.Top,
+        sourcePosition: Position.Bottom,
+        style: {
+          borderRadius: 8,
+          padding: 8,
+          border: "2px solid #22c55e",
+          background: "#f0fdf4",
+          width: nodeWidth,
+        },
+      });
+      // Move label to end of the line
+      edges.push({
+        id: `prereqof-${focus.id}-${c.id}`,
+        source: focus.id,
+        target: c.id,
+        type: 'targetLabel',
+        style: { stroke: "#22c55e", strokeWidth: 2 },
+        label: "required for",
+        labelBgPadding: [4, 2], 
+        labelBgBorderRadius: 20,
+        labelStyle: { fill: "#15803d" }
+      });
+    });
+
     return { nodes, edges };
-  }, [focus, prereqCourses, relatedCourses]);
+  }, [focus, prereqCourses, relatedCourses, prereqOfCourses]);
+
+  const edgeTypes = {
+    targetLabel: TargetLabelEdge,
+  };
 
   const onNodeClick = useCallback((_e: React.MouseEvent, node: Node) => {
     // Only navigate to actual courses
@@ -347,7 +384,7 @@ export default function CourseConnectionsFlow({ focus, height = 360, hrefBase = 
           </div>
         )}
         <div style={{ width: "100%", height: isFull ? "100%" : height }}>
-          <ReactFlow nodes={nodes} edges={edges} fitView onNodeClick={onNodeClick} attributionPosition="bottom-right">
+          <ReactFlow nodes={nodes} edges={edges} edgeTypes={edgeTypes} fitView onNodeClick={onNodeClick} attributionPosition="bottom-right">
             <Background gap={16} color="#cbd5e1" />
             <Controls showInteractive={false} />
           </ReactFlow>
