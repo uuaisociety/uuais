@@ -299,8 +299,8 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
   return (
     <div ref={containerRef} className="relative">
       {/* Chat grows upwards above the input only when focused and the user has sent at least one query  */}
-      <div className={`overflow-hidden transition-all duration-450 ease-out ${focused ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"}`}>
-        <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 mb-3 h-full ">
+      <div className={`overflow-hidden transition-all duration-450 ease-out ${focused ? "max-h-[700px] opacity-100 p-0" : "max-h-0 opacity-0"}`}>
+        <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
           <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-2">
               <Button size="sm" variant="ghost" onClick={() => setShowSidebar(!showSidebar)} className="p-1">
@@ -313,7 +313,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
               <Button size="sm" onClick={() => setFocused(false)}>Close</Button>
             </div>
           </div>
-          <div className="max-h-[700px] min-h-[400px] flex">
+          <div className="max-h-[600px] min-h-[400px] flex">
             {/* Allow transition on sidebar */}
             {showSidebar && (
               <div className="w-64 border-r border-gray-200 dark:border-gray-700 flex flex-col bg-gray-50 dark:bg-gray-800 transition-all duration-450 ease-out">
@@ -378,9 +378,10 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
                 </Button>
               )}
               <div ref={listRef} className="space-y-3 overflow-auto pt-5 pb-5 max-h-[500px]">
-                {messages.length === 0 && (
-                  <div className="text-sm text-gray-600 dark:text-gray-300 italic">Ask anything, e.g courses covering machine learning or statistics.</div>
-                )}
+                {messages.length === 0 && (<div className="flex flex-col items-center">
+                  <div className="text-sm text-gray-600 dark:text-gray-300 italic">Ask about anything related to course selection, e.g "Find me courses covering machine learning and LLMs"</div>
+                </div>
+              )}
                 {messages.map((m) => (
                   <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} items-end gap-2`}>
                     {m.role === "assistant" && (
