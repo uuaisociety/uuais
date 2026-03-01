@@ -3,8 +3,11 @@ import nextPlugin from "@next/eslint-plugin-next";
 import ts from "typescript-eslint";
 import reactPlugin from "eslint-plugin-react";
 import hooksPlugin from "eslint-plugin-react-hooks";
+import { defineConfig, globalIgnores } from "eslint/config";
 
-export default ts.config(
+
+
+export default defineConfig(ts.config(
   js.configs.recommended,
   ...ts.configs.recommended,
   {
@@ -33,7 +36,8 @@ export default ts.config(
       },
     },
   },
+  globalIgnores(["**/*.js", "**/*.cjs", "**/*.mjs", "**/*.py"]),
   {
-    ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"],
+    ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts", ".venv/**"],
   }
-);
+));
