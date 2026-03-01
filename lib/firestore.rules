@@ -268,12 +268,21 @@ service cloud.firestore {
       allow write: if isSuperAdmin();
     }
 
-    // COURSE EMBEDDINGS - vector store for semantic search
-    match /course_embeddings/{courseId} {
-      // Anyone can read for search functionality
+    // COURSES - course catalog
+    match /courses/{courseId} {
       allow read: if true;
-      // Only super admins can write (generate embeddings)
-      allow write: if isSuperAdmin();
+      allow write: if isAdmin();
+    }
+
+    // CONFIG - application configuration (embedding projections, prerequisite graph, etc.)
+    match /config/{configId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // TRANSCRIPT DATA - user-uploaded academic records (privacy-first)
+    match /users/{uid}/transcript_data/{docId} {
+      allow read, write, delete: if isSignedIn() && request.auth.uid == uid;
     }
   }
 }
