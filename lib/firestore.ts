@@ -12,3 +12,4 @@ export * from './firestore/ai-chats';
 export * from './firestore/favorites';
 export * from './firestore/course-categories';
 export * from './firestore/ai-settings';
+export * from './firestore/courses';
