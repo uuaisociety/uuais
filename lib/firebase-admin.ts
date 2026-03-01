@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import admin from 'firebase-admin';
 function getPrivateKey(): string | undefined {
   const key = process.env.FIREBASE_PRIVATE_KEY;
@@ -30,12 +31,15 @@ if (!admin.apps.length) {
 
   try {
     admin.initializeApp({
-      credential: admin.credential.cert({
-        projectId,
-        clientEmail,
-        privateKey,
-      }),
+      credential: admin.credential.applicationDefault(),
     });
+    // admin.initializeApp({
+    //   credential: admin.credential.cert({
+    //     projectId,
+    //     clientEmail,
+    //     privateKey,
+    //   }),
+    // });
     console.log('Firebase Admin SDK initialized successfully');
   } catch (error) {
     console.error('Failed to initialize Firebase Admin SDK:', error);
