@@ -174,11 +174,13 @@ const CACHE_TTL = 24*60*60*1000; // 1 day
 export async function fetchCourses(): Promise<Course[]> {
   const now = Date.now();
   if (coursesCache && (now - lastFetch < CACHE_TTL)) {
+    console.log("Using cached courses");
     return coursesCache;
   }
   const snapshot = await adminDb.collection('courses').get();
   coursesCache = snapshot.docs.map(doc => docToCourse(doc.id, doc.data() as Record<string, unknown>));
   lastFetch = now;
+  console.log("Using fresh courses");
   return coursesCache;
 }
 
