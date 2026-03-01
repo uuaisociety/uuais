@@ -3,7 +3,7 @@ import { adminAuth } from '@/lib/firebase-admin';
 
 export async function authorizeAdmin(req: NextRequest): Promise<{ ok: true; uid: string } | { ok: false }> {
     const authHeader = req.headers.get('authorization');
-    console.log("authorizing admin");
+    console.log("authorizing admin: ", authHeader);
     if (!authHeader || !authHeader.startsWith('Bearer ')) return { ok: false };
 
     const idToken = authHeader.slice('Bearer '.length);
