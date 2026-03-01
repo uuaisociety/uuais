@@ -1,15 +1,21 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { fetchCourses, type Course } from "@/lib/courses";
+import { fetchCoursesClient } from "@/lib/firestore/courses";
+import type { Course } from "@/lib/courses";
 import RagChat from "@/components/common/RagChat";
 import CourseCard from "@/components/courses/CourseCard";
+import EmbeddingMap from "@/components/courses/EmbeddingMap";
 import { updatePageMeta } from "@/utils/seo";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { useAdmin } from "@/hooks/useAdmin";
 import { notFound } from "next/navigation";
+// import TranscriptUpload from "@/components/courses/TranscriptUpload";
+// import { auth } from "@/lib/firebase-client";
+// import { onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 export default function ExplorePage() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -22,14 +28,24 @@ export default function ExplorePage() {
   const [groupBy, setGroupBy] = useState<string>("none");
 
   const [visibleCount, setVisibleCount] = useState<number>(50);
+  const [viewMode, setViewMode] = useState<"grid" | "embedding">("grid");
   const { isAdmin, loading } = useAdmin();
+  const router = useRouter();
+  // const [user, setUser] = useState<{ uid: string } | null>(null);
+
+  // useEffect(() => {
+  //   const unsub = onAuthStateChanged(auth, (u) => {
+  //     setUser(u ? { uid: u.uid } : null);
+  //   });
+  //   return () => unsub();
+  // }, []);
 
   useEffect(() => {
     updatePageMeta(
       "Explore Courses",
       "Discover, search, and compare all Uppsala University courses"
     );
-    fetchCourses().then(setCourses);
+    fetchCoursesClient().then(setCourses);
   }, []);
 
   useEffect(() => {
@@ -79,6 +95,7 @@ export default function ExplorePage() {
       const order: Record<string, number> = { Preparatory: 1, "Bachelor's": 2, "Master's": 3, Unknown: 4 };
       sorted.sort((a, b) => (order[a.level || "Unknown"] ?? 99) - (order[b.level || "Unknown"] ?? 99));
     } else if (sortBy === "random") {
+      // eslint-disable-next-line
       sorted.sort(() => Math.random() - 0.5);
     }
 
@@ -111,7 +128,7 @@ export default function ExplorePage() {
     return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
   }
   // Return 404-page for non-admin users
-  if(!loading && !isAdmin){
+  if (!loading && !isAdmin) {
     return notFound();
   }
 
@@ -126,6 +143,10 @@ export default function ExplorePage() {
 
         <div className="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-10">
           <RagChat onRecommendations={setRecommendedIds} placeholder="Ask about courses, e.g. 'beginner statistics with labs'" />
+          {/* {user && (<div className="mt-4 pt-4 ml-auto border-t border-gray-200 dark:border-gray-700 flex justify-end flex-col items-center gap-2">
+            <p className="text-gray-600 dark:text-gray-300 italic">This feature is still under testing</p>
+            <TranscriptUpload />
+          </div>)} */}
         </div>
 
         <div className="mt-10">
@@ -142,6 +163,28 @@ export default function ExplorePage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
+              {/* View mode toggle */}
+              <div className="flex rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden">
+                <button
+                  onClick={() => setViewMode("grid")}
+                  className={`px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${viewMode === "grid"
+                    ? "bg-[#990000] text-white"
+                    : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                    }`}
+                >
+                  Grid
+                </button>
+                <button
+                  onClick={() => setViewMode("embedding")}
+                  className={`px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${viewMode === "embedding"
+                    ? "bg-[#990000] text-white"
+                    : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                    }`}
+                >
+                  Embedding Map
+                </button>
+              </div>
+
               {recommendedIds.length > 0 && !showAllCourses && (
                 <Button
                   variant="outline"
@@ -213,7 +256,19 @@ export default function ExplorePage() {
             </div>
           </div>
 
-          {results.length === 0 ? (
+          {viewMode === "embedding" ? (
+            <div className="mt-6">
+              <p>Temporarily disabled</p>
+              <EmbeddingMap
+                recommendedIds={recommendedIds}
+                onCourseClick={(id) => router.push(`/explore/${id}`)}
+                height={560}
+              />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                Each dot represents a course, projected from its 768-dimensional embedding. Similar courses appear closer together. Recommended courses are highlighted.
+              </p>
+            </div>
+          ) : results.length === 0 ? (
             <div className="text-center py-12 text-gray-600 dark:text-gray-300">No courses match your filters.</div>
           ) : groupedResults ? (
             <div className="space-y-10">
@@ -234,9 +289,9 @@ export default function ExplorePage() {
                 <CourseCard key={c.id} course={c} hrefBase="/explore" />
               ))}
               {visibleResults.length < results.length && (
-                <Button 
-                  variant="outline" 
-                  className="col-span-1 self-center md:col-span-2 lg:col-span-3" 
+                <Button
+                  variant="outline"
+                  className="col-span-1 self-center md:col-span-2 lg:col-span-3"
                   onClick={() => {
                     setVisibleCount((prev) => Math.min(results.length, prev + 10));
                   }}

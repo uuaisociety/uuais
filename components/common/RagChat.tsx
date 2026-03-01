@@ -300,7 +300,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
     <div ref={containerRef} className="relative">
       {/* Chat grows upwards above the input only when focused and the user has sent at least one query  */}
       <div className={`overflow-hidden transition-all duration-450 ease-out ${focused ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"}`}>
-        <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 mb-3">
+        <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 mb-3 h-full ">
           <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-2">
               <Button size="sm" variant="ghost" onClick={() => setShowSidebar(!showSidebar)} className="p-1">
@@ -310,7 +310,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
             </div>
             <div className="flex items-center gap-2">
               {rateLimit && <span className="text-xs text-gray-500">{rateLimit.remaining} left today</span>}
-              <Button size="sm" variant="outline" onClick={() => setFocused(false)}>Close</Button>
+              <Button size="sm" onClick={() => setFocused(false)}>Close</Button>
             </div>
           </div>
           <div className="max-h-[700px] min-h-[400px] flex">
@@ -318,7 +318,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
             {showSidebar && (
               <div className="w-64 border-r border-gray-200 dark:border-gray-700 flex flex-col bg-gray-50 dark:bg-gray-800 transition-all duration-450 ease-out">
                 <div className="p-3 border-b border-gray-200 dark:border-gray-700">
-                  <Button size="sm" variant="outline" onClick={startNewChat} className="w-full">
+                  <Button size="sm" onClick={startNewChat} className="w-full">
                     <Plus className="h-4 w-4 mr-1" /> New Chat
                   </Button>
                 </div>
@@ -357,7 +357,6 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
                   {chatsHasMore && !chatsLoading && (
                     <Button
                       size="sm"
-                      variant="outline"
                       onClick={handleLoadMoreChats}
                       className="w-full mt-2"
                     >
@@ -380,7 +379,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
               )}
               <div ref={listRef} className="space-y-3 overflow-auto pt-5 pb-5 max-h-[500px]">
                 {messages.length === 0 && (
-                  <div className="text-sm text-gray-600 dark:text-gray-300 italic">Ask anything like &quot;Bachelor&apos;s level on-campus courses with 15 credits in Uppsala&quot;</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-300 italic">Ask anything, e.g courses covering machine learning or statistics.</div>
                 )}
                 {messages.map((m) => (
                   <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} items-end gap-2`}>
@@ -390,6 +389,24 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
                     <div className={`${m.role === "user" ? "bg-red-600 text-white" : "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"} px-3 py-2 rounded-lg max-w-[80%] text-sm shadow-sm`}>{m.content}</div>
                   </div>
                 ))}
+                {/* If loading response show "Thinking..." with animated dots*/}
+                {loading && (
+                  <div className={`flex items-center gap-2`}>
+                    <Image src="/images/logo.png" alt="AI" width={40} height={50} className="rounded-sm opacity-80" />
+                    <div className="flex items-center justify-center pt-2">
+                      {/* Animated dots */}
+                      <div className="flex items-center space-x-1 font-medium text-gray-600 dark:text-gray-400 animate-pulse">
+                        <span>Thinking</span>
+                        <div className="flex pt-2">
+                          <span className="ml-1 thinking-dot [animation-delay:800ms]">.</span>
+                          <span className="thinking-dot [animation-delay:1000ms]">.</span>
+                          <span className="thinking-dot [animation-delay:1200ms]">.</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
               </div>
               {/* Fill space between messages and chat input */}
               <div className="flex-1"></div>
@@ -440,7 +457,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
       {/* Input visible at the bottom only when not focused; focusing expands the chat above */}
       <form
         onSubmit={(e) => { e.preventDefault(); setFocused(true); send(); }}
-        className="flex gap-3 w-full"
+        className="flex gap-2 w-full"
         style={{ display: focused ? "none" : "flex" }}
       >
         <Input
