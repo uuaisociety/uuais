@@ -49,7 +49,7 @@ const AISettingsTab: React.FC = () => {
     if (isSuperAdmin) {
       loadOpenRouterModels();
     }
-  }, []);
+  }, [isSuperAdmin]);
 
   const loadSettings = async () => {
     try {
