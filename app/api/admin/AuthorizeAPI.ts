@@ -16,7 +16,11 @@ export async function authorizeAdmin(req: NextRequest): Promise<{ ok: true; uid:
             return { ok: true, uid: decoded.uid };
         }
         return { ok: false };
-    } catch {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+        console.error("Full Auth Error:", error);
+        console.error("Error Code:", error.code);
+        console.error("Error Message:", error.message);
         return { ok: false };
     }
 }
@@ -32,7 +36,11 @@ export async function authorizeSuperAdmin(req: NextRequest): Promise<{ ok: true;
       return { ok: true, uid: decoded.uid };
     }
     return { ok: false };
-  } catch {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    console.error("Full Auth Error:", error);
+    console.error("Error Code:", error.code);
+    console.error("Error Message:", error.message);
     return { ok: false };
   }
 }
