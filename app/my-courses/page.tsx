@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { fetchCourses, type Course } from "@/lib/courses";
+//import { fetchCoursesClient } from "@/lib/firestore/courses";
+import type { Course } from "@/lib/courses";
 import CourseCard from "@/components/courses/CourseCard";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -19,6 +20,7 @@ import { notFound } from "next/navigation";
 
 export default function MyCoursesPage() {
   const [user, setUser] = useState<{ uid: string } | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [courses, setCourses] = useState<Course[]>([]);
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
   const [categories, setCategories] = useState<CourseCategory[]>([]);
@@ -31,7 +33,7 @@ export default function MyCoursesPage() {
 
   useEffect(() => {
     updatePageMeta("My Courses", "View your favorite courses and custom categories");
-    fetchCourses().then(setCourses);
+    //fetchCoursesClient().then(setCourses);
     const unsub = onAuthStateChanged(auth, (u) => setUser(u ? { uid: u.uid } : null));
     return () => unsub();
   }, []);
@@ -45,10 +47,10 @@ export default function MyCoursesPage() {
     try {
       const favorites = await getUserFavorites(user.uid);
       setFavoriteIds(favorites.map(f => f.courseId));
-      
+
       const cats = await getUserCategories(user.uid);
       setCategories(cats);
-      
+
       const catCourses: Record<string, string[]> = {};
       for (const cat of cats) {
         catCourses[cat.id] = await getCategoryCourses(cat.id);
@@ -92,16 +94,16 @@ export default function MyCoursesPage() {
   const favoriteCourses = courses.filter(c => favoriteIds.includes(c.id));
   const activeCategory = categories.find(c => c.id === activeTab);
   const activeCategoryCourseIds = activeTab === "favorites" ? favoriteIds : (categoryCourses[activeTab] || []);
-  const displayedCourses = activeTab === "favorites" 
-    ? favoriteCourses 
+  const displayedCourses = activeTab === "favorites"
+    ? favoriteCourses
     : courses.filter(c => activeCategoryCourseIds.includes(c.id));
 
-  if(pageLoading){
+  if (pageLoading) {
     return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
   }
 
   // Return 404-page for non-admin users
-  if(!loading && !isAdmin){
+  if (!loading && !isAdmin) {
     return notFound();
   }
 
@@ -128,17 +130,15 @@ export default function MyCoursesPage() {
             <Plus className="h-4 w-4 mr-2" /> New Category
           </Button>
         </div>
-
         <div className="grid md:grid-cols-4 gap-6">
           <div className="md:col-span-1">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
               <button
                 onClick={() => setActiveTab("favorites")}
-                className={`w-full flex items-center gap-3 px-4 py-3 text-left transition cursor-pointer ${
-                  activeTab === "favorites"
+                className={`w-full flex items-center gap-3 px-4 py-3 text-left transition cursor-pointer ${activeTab === "favorites"
                     ? "bg-red-50 dark:bg-red-900/20 border-l-4 border-[#990000]"
                     : "hover:bg-gray-50 dark:hover:bg-gray-700 border-l-4 border-transparent"
-                }`}
+                  }`}
               >
                 <Heart className={`h-5 w-5 ${activeTab === "favorites" ? "text-[#990000] fill-current" : "text-gray-400"}`} />
                 <div className="flex-1">
@@ -146,7 +146,7 @@ export default function MyCoursesPage() {
                   <div className="text-xs text-gray-500">{favoriteIds.length} courses</div>
                 </div>
               </button>
-              
+
               <div className="border-t border-gray-200 dark:border-gray-700">
                 <div className="px-4 py-2 text-xs font-medium text-gray-500 uppercase tracking-wide">Categories</div>
                 {categories.length === 0 && (
@@ -156,11 +156,10 @@ export default function MyCoursesPage() {
                   <div key={cat.id} className="group relative">
                     <button
                       onClick={() => setActiveTab(cat.id)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 text-left transition cursor-pointer ${
-                        activeTab === cat.id
+                      className={`w-full flex items-center gap-3 px-4 py-3 text-left transition cursor-pointer ${activeTab === cat.id
                           ? "bg-gray-50 dark:bg-gray-700 border-l-4 border-gray-400"
                           : "hover:bg-gray-50 dark:hover:bg-gray-700 border-l-4 border-transparent"
-                      }`}
+                        }`}
                     >
                       <Folder className={`h-5 w-5 hover:text-blue-500 transition-colors ${activeTab === cat.id ? "text-blue-500" : "text-gray-400"}`} />
                       <div className="flex-1 min-w-0">
@@ -192,6 +191,7 @@ export default function MyCoursesPage() {
                   {activeTab === "favorites" ? "Favorites" : activeCategory?.name}
                 </h2>
               </div>
+              <h2 className="text-red-500 text-center">UNDER DEVELOPMENT</h2>
 
               {loading ? (
                 <div className="text-center py-12 text-gray-600 dark:text-gray-300">Loading...</div>
@@ -236,8 +236,8 @@ export default function MyCoursesPage() {
             />
             <div className="flex gap-3 justify-end">
               <Button variant="outline" onClick={() => setShowNewCategoryModal(false)}>Cancel</Button>
-              <Button 
-                onClick={handleCreateCategory} 
+              <Button
+                onClick={handleCreateCategory}
                 disabled={!newCategoryName.trim()}
                 className="bg-[#990000] hover:bg-[#7f0000] text-white"
               >
