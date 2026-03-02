@@ -101,19 +101,18 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
     }
   }, [user, chatsHasMore, chatsCursor, chats.length]);
 
-  useEffect(() => {
-    if(userLoading) return;
-    if (user) {
-      fetchRateLimit();
-      loadInitialChats();
-    }
-  }, [user,userLoading, loadInitialChats]);
 
-  async function fetchRateLimit() {
-    if (!user) return;
-    const res = await fetch(`/api/chat?uid=${user.uid}`);
-    if (res.ok) setRateLimit(await res.json());
-  }
+  useEffect(() => {
+    async function init() {
+      if(userLoading) return;
+      if (user) {
+        const res = await fetch(`/api/chat?uid=${user.uid}`);
+        if (res.ok) setRateLimit(await res.json());
+        loadInitialChats();
+      }
+    }
+    init();
+  }, [user,userLoading, loadInitialChats]);
 
   async function send() {
     const q = value.trim();
