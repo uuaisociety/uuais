@@ -16,6 +16,7 @@ import Image from 'next/image';
 
 const AboutPage: React.FC = () => {
   const { state } = useApp();
+  const placeholderImage = '/images/logo-highdef.png';
 
   useEffect(() => {
     updatePageMeta('About Us', 'Learn about UU AI Society\'s mission, vision, and the amazing team behind our community');
@@ -48,7 +49,7 @@ const AboutPage: React.FC = () => {
             About UU AI Society
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            We are a community of students passionate about artificial intelligence, 
+            We are a community of students passionate about artificial intelligence,
             dedicated to learning, innovation, and shaping the future of technology.
           </p>
         </div>
@@ -66,10 +67,10 @@ const AboutPage: React.FC = () => {
             </CardHeader>
             <CardContent>
               <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                To democratize AI education and create an inclusive environment where students 
+                To democratize AI education and create an inclusive environment where students
                 can explore, learn, and contribute to the advancement of artificial intelligence
-                outside the classroom. 
-                We believe in hands-on learning, collaborative innovation, and building bridges 
+                outside the classroom.
+                We believe in hands-on learning, collaborative innovation, and building bridges
                 between academic knowledge and real-world applications.
               </p>
             </CardContent>
@@ -132,7 +133,7 @@ const AboutPage: React.FC = () => {
                 <CardHeader>
                   <div className="mx-auto mb-4">
                     <Image
-                      src={member.image}
+                      src={member.image || placeholderImage}
                       alt={member.name}
                       width={100}
                       height={100}
@@ -235,14 +236,14 @@ const AboutPage: React.FC = () => {
             Be part of a community that&apos;s shaping the future of AI. Connect, learn, and grow with us.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center"> */}
-            {/* <Button 
+        {/* <Button 
               size="lg"
               variant="secondary"
               className="bg-white text-red-600 hover:bg-gray-100 transform hover:scale-105 transition-all duration-300"
             >
               Become a Member
             </Button> */}
-            {/* <Link href="/contact">
+        {/* <Link href="/contact">
             <Button 
               size="lg"
               variant="outline"

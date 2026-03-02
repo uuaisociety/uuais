@@ -68,7 +68,7 @@ export interface TeamMember {
   name: string;
   position: string;
   bio: string;
-  image: string;
+  image?: string;
   linkedin?: string;
   twitter?: string;
   email?: string;

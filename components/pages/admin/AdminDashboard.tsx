@@ -34,8 +34,8 @@ const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
   const [nrUsers, setNrUsers] = useState<number>(0);
   //const { user, logout } = useAdmin();
-  const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members' | 'jobs' | 'ai-settings'>('events');
-  const placeholderImage = '@/public/placeholder.png';
+  const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members' | 'jobs'>('events');
+  const placeholderImage = '/images/logo-highdef.png';
 
   // Modal states
   const [showBlogModal, setShowBlogModal] = useState(false);
@@ -250,8 +250,8 @@ const AdminDashboard: React.FC = () => {
           {activeTab === 'events' && (
             <EventsTab
               events={state.events}
-              onManageQuestions={() => {}}
-              onViewRegistrations={() => {}}
+              onManageQuestions={() => { }}
+              onViewRegistrations={() => { }}
             />
           )}
           {activeTab === 'jobs' && (
