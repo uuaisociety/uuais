@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, MessageSquareCode, ArrowUp, Handshake } from "lucide-react";
@@ -8,24 +8,24 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { LinkedinIcon, InstagramIcon } from '@hugeicons/core-free-icons';
 // import { SiInstagram } from '@icons-pack/react-simple-icons';
 import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/input_old";
+//import { Input } from "@/components/ui/input_old";
 
 export const Footer: React.FC = () => {
-  const [email, setEmail] = useState("");
-  //   const [loading, setLoading] = useState(false);
+  // const [email, setEmail] = useState("");
+  // //   const [loading, setLoading] = useState(false);
 
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    // setLoading(true);
+  // const handleNewsletterSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   // setLoading(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+  //   // Simulate API call
+  //   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    //console.log("Newsletter subscription:", email);
-    setEmail("");
-    // setLoading(false);
-    alert("Thank you for subscribing to our newsletter!");
-  };
+  //   //console.log("Newsletter subscription:", email);
+  //   setEmail("");
+  //   // setLoading(false);
+  //   alert("Thank you for subscribing to our newsletter!");
+  // };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -35,7 +35,7 @@ export const Footer: React.FC = () => {
     <footer className="bg-gray-800 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 text-white transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main footer content */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Brand and Description */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
@@ -127,7 +127,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Newsletter */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-4">Newsletter</h3>
             <p className="text-gray-300 text-sm mb-4">
               Stay updated with our latest events and AI insights.
@@ -152,7 +152,7 @@ export const Footer: React.FC = () => {
                 Subscribe
               </Button>
             </form>
-          </div>
+          </div> */}
         </div>
 
         {/* Partners strip */}
