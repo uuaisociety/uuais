@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    console.log("Newsletter subscription:", email);
+    //console.log("Newsletter subscription:", email);
     setEmail("");
     // setLoading(false);
     alert("Thank you for subscribing to our newsletter!");

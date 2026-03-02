@@ -27,7 +27,7 @@ export type OpenRouterModelsResponse = {
 export async function fetchOpenRouterModels(): Promise<OpenRouterModel[]> {
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
-    console.log("OPENROUTER_API_KEY is not set");
+    //console.log("OPENROUTER_API_KEY is not set");
     throw new Error("OPENROUTER_API_KEY is not set");
   }
   try {

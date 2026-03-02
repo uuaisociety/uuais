@@ -100,7 +100,7 @@ export async function generateCompletion(
 
     const data: OpenRouterResponse = await response.json();
 
-    console.log('OpenRouter Response:', JSON.stringify(data, null, 2));
+    //console.log('OpenRouter Response:', JSON.stringify(data, null, 2));
 
     if (!data.choices?.[0]?.message?.content) {
       throw new OpenRouterError(`Invalid response format from OpenRouter API: ${JSON.stringify(data)}`);

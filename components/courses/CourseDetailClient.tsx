@@ -80,7 +80,7 @@ export default function CourseDetailClient({ course, hrefBase = "/explore" }: Pr
   if (!user) {
     return <div>Not authorized</div>;
   }
-  console.log("course: ", course);
+  
   return (
     <div className="space-y-6">
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">

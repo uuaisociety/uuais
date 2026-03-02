@@ -53,7 +53,7 @@ export default function ExplorePage() {
     try {
       // Force refresh token to ensure fresh admin claims
       const token = await user?.getIdToken(true);
-      console.log("Loading courses with token:", token);
+
       const result = await fetchCoursesClient({ 
         page: pageNum, 
         limit: 50,
@@ -90,7 +90,7 @@ export default function ExplorePage() {
     try {
       // Force refresh token to ensure fresh admin claims
       const token = await user?.getIdToken(true);
-      console.log("token:", token);
+
       const allCourses = await fetchAllCoursesClient(token || '');
       
       // Filter and sort by recommendation order

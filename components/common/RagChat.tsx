@@ -283,10 +283,6 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
     }
   }, [focused]);
 
-  useEffect(() => {
-    console.log("Error:", error);
-  }, [error]);
-
   if(userLoading){
     return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
   }
