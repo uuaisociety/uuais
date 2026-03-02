@@ -304,5 +304,24 @@ button:hover {
 select.input {
   appearance: none;
 }
+
+@layer components {
+  .thinking-dot {
+    @apply opacity-0 inline-block;
+    animation: faded-bounce 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+
+  @keyframes faded-bounce {
+    0%, 100% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-4px);
+    }
+  }
+}
+
 @import "tailwindcss";
 @import "tw-animate-css";

@@ -16,10 +16,10 @@ const firebaseConfig = {
 // Add logging to check if environment variables are loaded
 if (!firebaseConfig.projectId) {
   console.error('Firebase projectId is not defined. Environment variables may not be properly loaded.');
-  console.log('Current Firebase config:', {
-    ...firebaseConfig,
-    apiKey: firebaseConfig.apiKey ? '[REDACTED]' : undefined
-  });
+  // console.log('Current Firebase config:', {
+  //   ...firebaseConfig,
+  //   apiKey: firebaseConfig.apiKey ? '[REDACTED]' : undefined
+  // });
 }
 // Reuse existing app instance if it exists (prevents duplicate-app errors during HMR)
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
@@ -34,7 +34,8 @@ declare global {
   var FIREBASE_EMULATORS_STARTED: boolean | undefined;
 }
 
-const useEmulators = process.env.NEXT_PUBLIC_USE_FIREBASE_EMULATORS === 'true';
+const isLocalDevelopment = process.env.NODE_ENV === 'development';
+const useEmulators = isLocalDevelopment && process.env.NEXT_PUBLIC_USE_FIREBASE_EMULATORS === 'true';
 
 if (useEmulators && !globalThis.FIREBASE_EMULATORS_STARTED) {
   try {

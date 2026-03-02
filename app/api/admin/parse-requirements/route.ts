@@ -1,0 +1,91 @@
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { adminDb } from '@/lib/firebase-admin';
+import { fetchCourses } from '@/lib/courses';
+import { parseRequirements } from '@/lib/prerequisites/parser';
+
+/**
+ * POST /api/admin/parse-requirements
+ *
+ * Body: { courseId: string } or { courseId: "all" }
+ *
+ * Parses entry_requirements from the course document(s) into structured requirements
+ * and writes them back to Firestore.
+ */
+export async function POST(req: NextRequest) {
+    try {
+        const body = await req.json();
+        const { courseId } = body;
+
+        if (!courseId) {
+            return NextResponse.json({ error: 'courseId required' }, { status: 400 });
+        }
+
+        const allCourses = await fetchCourses();
+        const knownCourses = allCourses.map(c => ({ code: c.code, title: c.title, id: c.id }));
+
+        if (courseId === 'all') {
+            // Batch parse all courses
+            let parsed = 0;
+            let skipped = 0;
+            let failed = 0;
+            const errors: string[] = [];
+
+            for (const course of allCourses) {
+                const entryReq = course.entry_requirements || course.generalRequirements?.[0];
+                if (!entryReq || entryReq.trim().length === 0) {
+                    skipped++;
+                    continue;
+                }
+
+                try {
+                    const structured = await parseRequirements(entryReq, knownCourses);
+                    await adminDb.collection('courses').doc(course.id).update({
+                        structured_requirements: structured,
+                    });
+                    parsed++;
+                } catch (error) {
+                    failed++;
+                    errors.push(`${course.id}: ${error instanceof Error ? error.message : 'unknown error'}`);
+                }
+            }
+
+            return NextResponse.json({
+                success: true,
+                parsed: parsed,
+                skipped: skipped,
+                failed: failed,
+                total: allCourses.length,
+                errors: errors.slice(0, 10),
+            });
+        } else {
+            // Parse single course
+            const course = allCourses.find(c => c.id === courseId);
+            if (!course) {
+                return NextResponse.json({ error: 'course not found' }, { status: 404 });
+            }
+
+            const entryReq = course.entry_requirements || course.generalRequirements?.[0];
+            if (!entryReq || entryReq.trim().length === 0) {
+                return NextResponse.json({ error: 'course has no entry requirements to parse' }, { status: 400 });
+            }
+
+            const structured = await parseRequirements(entryReq, knownCourses);
+            await adminDb.collection('courses').doc(course.id).update({
+                structured_requirements: structured,
+            });
+
+            return NextResponse.json({
+                success: true,
+                courseId: courseId,
+                structured_requirements: structured,
+            });
+        }
+    } catch (error) {
+        console.error('Parse requirements error:', error);
+        return NextResponse.json(
+            { error: 'internal error', message: error instanceof Error ? error.message : 'unknown' },
+            { status: 500 }
+        );
+    }
+}

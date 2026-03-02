@@ -1,6 +1,8 @@
 export const updatePageMeta = (title: string, description?: string) => {
+  if (typeof document === 'undefined') return;
+
   document.title = `${title} | UU AI Society`;
-  
+
   const metaDescription = document.querySelector('meta[name="description"]');
   if (metaDescription && description) {
     metaDescription.setAttribute('content', description);

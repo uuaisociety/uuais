@@ -8,6 +8,7 @@ export type AdminState = {
   user: User | null;
   loading: boolean;
   isAdmin: boolean;
+  isSuperAdmin: boolean;
   claims: Record<string, unknown> | null;
   signInWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
@@ -17,6 +18,7 @@ export function useAdmin(): AdminState {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [claims, setClaims] = useState<Record<string, unknown> | null>(null);
 
   useEffect(() => {
@@ -28,13 +30,16 @@ export function useAdmin(): AdminState {
           const tokenClaims = (tokenRes.claims || {}) as Record<string, unknown>;
           setClaims(tokenClaims);
           setIsAdmin(Boolean(tokenClaims.admin));
+          setIsSuperAdmin(Boolean(tokenClaims.superAdmin));
         } catch (e) {
           console.error('Failed to get ID token claims', e);
           setIsAdmin(false);
+          setIsSuperAdmin(false);
           setClaims(null);
         }
       } else {
         setIsAdmin(false);
+        setIsSuperAdmin(false);
         setClaims(null);
       }
       setLoading(false);
@@ -54,5 +59,5 @@ export function useAdmin(): AdminState {
     await signOut(auth);
   }, []);
 
-  return { user, loading, isAdmin, claims, signInWithGoogle, logout };
+  return { user, loading, isAdmin, isSuperAdmin, claims, signInWithGoogle, logout };
 }

@@ -1,14 +1,17 @@
 import { Button } from "@/components/ui/Button";
 import { signInWithGooglePopup, signInWithGithubPopup } from '@/lib/firebase-client'
-import { HugeiconsIcon } from '@hugeicons/react';
-import { GithubIcon, GoogleIcon } from '@hugeicons/core-free-icons';
+
+import type { FC } from "react";
 import Link from "next/link";
+import { GoogleIcon, GithubIcon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
+
 
 interface LoginCardProps {
     after: () => void;
 }
 
-const LoginCard: React.FC<LoginCardProps> = ({ after }) => {
+const LoginCard: FC<LoginCardProps> = ({ after }) => {
     return (
         <div className="min-h-screen pt-24 pb-12 bg-gray-50 dark:bg-gray-900">
             <div className="max-w-xs mx-auto px-4">

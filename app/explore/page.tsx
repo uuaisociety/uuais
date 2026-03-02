@@ -1,0 +1,385 @@
+"use client";
+
+import { useEffect, useMemo, useState, useCallback } from "react";
+import { fetchCoursesClient, fetchAllCoursesClient } from "@/lib/firestore/courses";
+import type { Course } from "@/lib/courses";
+import RagChat from "@/components/common/RagChat";
+import CourseCard from "@/components/courses/CourseCard";
+import EmbeddingMap from "@/components/courses/EmbeddingMap";
+import { updatePageMeta } from "@/utils/seo";
+import { Input } from "@/components/ui/Input";
+import { Select } from "@/components/ui/Select";
+import { Button } from "@/components/ui/Button";
+import { useAdmin } from "@/hooks/useAdmin";
+import { useRouter } from "next/navigation";
+
+export default function ExplorePage() {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [recommendedIds, setRecommendedIds] = useState<string[]>([]);
+  const [recommendedCourses, setRecommendedCourses] = useState<Course[]>([]);
+  const [isLoadingRecommendations, setIsLoadingRecommendations] = useState(false);
+
+  const [showAllCourses, setShowAllCourses] = useState(false);
+  const [search, setSearch] = useState("");
+  const [levelFilter, setLevelFilter] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<string>("relevance");
+  const [groupBy, setGroupBy] = useState<string>("none");
+
+  // Pagination state
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [visibleCount, setVisibleCount] = useState<number>(50);
+  
+  const [viewMode, setViewMode] = useState<"grid" | "embedding">("grid");
+  const { user, isAdmin, loading: adminLoading } = useAdmin();
+  const router = useRouter();
+
+  // Load initial courses on mount
+  useEffect(() => {
+    updatePageMeta(
+      "Explore Courses",
+      "Discover, search, and compare all Uppsala University courses"
+    );
+    loadCourses(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Load courses function
+  const loadCourses = useCallback(async (pageNum: number, searchQuery?: string, level?: string) => {
+    if (adminLoading) return;
+    setIsLoading(true);
+    try {
+      // Force refresh token to ensure fresh admin claims
+      const token = await user?.getIdToken(true);
+
+      const result = await fetchCoursesClient({ 
+        page: pageNum, 
+        limit: 50,
+        search: searchQuery || '',
+        level: level || 'all',
+        token: token || '',
+      });
+      
+      if (pageNum === 1) {
+        setCourses(result.courses);
+      } else {
+        setCourses(prev => [...prev, ...result.courses]);
+      }
+      
+      setPage(result.pagination.page);
+      setTotalPages(result.pagination.totalPages);
+      setHasNextPage(result.pagination.hasNextPage);
+    } catch (error) {
+      console.error('Failed to load courses:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [user, adminLoading]);
+
+  // Fetch full course details for recommendations
+  const loadRecommendedCourses = useCallback(async (ids: string[]) => {
+    if (adminLoading) return;
+    if (ids.length === 0) {
+      setRecommendedCourses([]);
+      return;
+    }
+    
+    setIsLoadingRecommendations(true);
+    try {
+      // Force refresh token to ensure fresh admin claims
+      const token = await user?.getIdToken(true);
+
+      const allCourses = await fetchAllCoursesClient(token || '');
+      
+      // Filter and sort by recommendation order
+      const idToIndex = new Map(ids.map((id, idx) => [id, idx] as const));
+      const matched = allCourses
+        .filter(c => idToIndex.has(c.id))
+        .sort((a, b) => (idToIndex.get(a.id) ?? 0) - (idToIndex.get(b.id) ?? 0));
+      
+      setRecommendedCourses(matched);
+    } catch (error) {
+      console.error('Failed to load recommended courses:', error);
+    } finally {
+      setIsLoadingRecommendations(false);
+    }
+  }, [user, adminLoading]);
+
+  // Handle AI recommendations
+  useEffect(() => {
+    if (recommendedIds.length > 0) {
+      setShowAllCourses(false);
+      setSortBy("relevance");
+      loadRecommendedCourses(recommendedIds);
+    } else {
+      setRecommendedCourses([]);
+    }
+  }, [recommendedIds, loadRecommendedCourses]);
+
+  const baseResults = useMemo(() => {
+    if (!showAllCourses && recommendedIds.length > 0) {
+      // AI recommendations view - use pre-loaded recommended courses
+      return recommendedCourses;
+    }
+
+    // Non-AI view
+    return courses;
+  }, [courses, recommendedIds, recommendedCourses, showAllCourses]);
+
+
+  const results = useMemo(() => {
+    let next = baseResults;
+
+    const q = search.trim().toLowerCase();
+    if (q) {
+      next = next.filter((c) => {
+        const hay = [c.title, c.code, c.description, ...(c.tags || [])]
+          .join(" ")
+          .toLowerCase();
+        return hay.includes(q);
+      });
+    }
+
+    if (levelFilter !== "all") {
+      next = next.filter((c) => (c.level || "Unknown") === levelFilter);
+    }
+
+    const sorted = [...next];
+    if (sortBy === "title") {
+      sorted.sort((a, b) => a.title.localeCompare(b.title));
+    } else if (sortBy === "code") {
+      sorted.sort((a, b) => (a.code || "").localeCompare(b.code || ""));
+    } else if (sortBy === "level") {
+      const order: Record<string, number> = { Preparatory: 1, "Bachelor's": 2, "Master's": 3, Unknown: 4 };
+      sorted.sort((a, b) => (order[a.level || "Unknown"] ?? 99) - (order[b.level || "Unknown"] ?? 99));
+    } else if (sortBy === "random") {
+      sorted.sort(() => Math.random() - 0.5);
+    }
+
+    return sorted;
+  }, [baseResults, search, levelFilter, sortBy]);
+
+  // Reset pagination when filters change
+  useEffect(() => {
+    setVisibleCount(50);
+    // Reload courses with new filters
+    if (showAllCourses) {
+      loadCourses(1, search, levelFilter);
+    }
+  }, [search, levelFilter, showAllCourses, loadCourses]);
+
+  const visibleResults = useMemo(() => {
+    return results.slice(0, Math.min(visibleCount, results.length));
+  }, [results, visibleCount]);
+
+  const groupedResults = useMemo(() => {
+    if (groupBy !== "level") return null;
+    const groups: Record<string, Course[]> = {};
+    for (const c of visibleResults) {
+      const key = c.level || "Unknown";
+      groups[key] = groups[key] || [];
+      groups[key].push(c);
+    }
+    const order = ["Preparatory", "Bachelor's", "Master's", "Unknown"];
+    return order
+      .filter((k) => (groups[k] || []).length > 0)
+      .map((k) => ({ key: k, courses: groups[k] }));
+  }, [groupBy, visibleResults]);
+
+  const handleLoadMore = useCallback(() => {
+    if (hasNextPage && !isLoading) {
+      loadCourses(page + 1, search, levelFilter);
+    } else {
+      // Client-side pagination for already loaded courses
+      setVisibleCount(prev => Math.min(results.length, prev + 10));
+    }
+  }, [hasNextPage, isLoading, page, search, levelFilter, loadCourses, results.length]);
+
+  // Admin auth check
+  if (adminLoading) {
+    return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
+  }
+  if (!isAdmin) {
+    return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Not authorized</div>;
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">UUAIS Course Navigator</h1>
+          <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Search all Uppsala University courses with natural language and explore their connections. Remember AI can and will make mistakes, double check information!</p>
+           <div className="text-sm text-gray-600 dark:text-gray-300 italic pt-2">This is a very early prototype, expect some inaccuracies.</div>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-10">
+          <RagChat onRecommendations={setRecommendedIds} placeholder="Ask about courses, e.g. 'beginner statistics with labs'" />
+          {/* {user && (<div className="mt-4 pt-4 ml-auto border-t border-gray-200 dark:border-gray-700 flex justify-end flex-col items-center gap-2">
+            <p className="text-gray-600 dark:text-gray-300 italic">This feature is still under testing</p>
+            <TranscriptUpload />
+          </div>)} */}
+        </div>
+
+        <div className="mt-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-4">
+            <div>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                {!showAllCourses && recommendedIds.length > 0 ? (
+                  isLoadingRecommendations ? "Loading AI Recommendations..." : "AI Recommendations"
+                ) : "All Courses"}
+              </h2>
+              <div className="text-sm text-gray-600 dark:text-gray-300">
+                {!showAllCourses && recommendedIds.length > 0
+                  ? "Showing courses recommended by the AI."
+                  : "Browse all courses without AI intervention."}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              {/* View mode toggle */}
+              <div className="flex rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden">
+                <button
+                  onClick={() => setViewMode("grid")}
+                  className={`px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${viewMode === "grid"
+                    ? "bg-[#990000] text-white"
+                    : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                    }`}
+                >
+                  Grid
+                </button>
+                <button
+                  onClick={() => setViewMode("embedding")}
+                  className={`px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${viewMode === "embedding"
+                    ? "bg-[#990000] text-white"
+                    : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
+                    }`}
+                >
+                  Embedding Space
+                </button>
+              </div>
+
+              {/* {recommendedIds.length > 0 && (
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setRecommendedIds([]);
+                    setShowAllCourses(true);
+                  }}
+                >
+                  Clear AI results
+                </Button>
+              )} */}
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <Input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Filter by title, code, tag…"
+                fullWidth
+              />
+              <Select
+                value={levelFilter}
+                onChange={(e) => setLevelFilter(e.target.value)}
+                options={[
+                  { value: "all", label: "All levels" },
+                  { value: "Preparatory", label: "Preparatory" },
+                  { value: "Bachelor's", label: "Bachelor's" },
+                  { value: "Master's", label: "Master's" },
+                  { value: "Unknown", label: "Unknown" },
+                ]}
+              />
+              <Select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                options={[
+                  { value: "relevance", label: "Sort: relevance" },
+                  { value: "title", label: "Sort: title" },
+                  { value: "code", label: "Sort: code" },
+                  { value: "level", label: "Sort: level" },
+                  { value: "random", label: "Sort: random" },
+                ]}
+              />
+              <Select
+                value={groupBy}
+                onChange={(e) => setGroupBy(e.target.value)}
+                options={[
+                  { value: "none", label: "Group: none" },
+                  { value: "level", label: "Group: level" },
+                ]}
+              />
+            </div>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mt-3">
+              <div className="text-xs text-gray-500 dark:text-gray-400">
+                Showing {visibleResults.length} of {results.length} course{results.length === 1 ? "" : "s"}
+                {hasNextPage && ` (page ${page} of ${totalPages})`}
+              </div>
+            </div>
+          </div>
+
+          {viewMode === "embedding" ? (
+            <div className="mt-6">
+              {/* <p>Temporarily disabled</p> */}
+              {!adminLoading && user && (
+                <EmbeddingMap
+                  recommendedIds={recommendedIds}
+                  onCourseClick={(id) => router.push(`/explore/${id}`)}
+                  height={560}
+                  user={user}
+                />
+              )}
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                Each dot represents a course, projected from its 768-dimensional embedding. Similar courses appear closer together. Recommended courses are highlighted.
+              </p>
+            </div>
+          ) : results.length === 0 ? (
+            <div className="text-center py-12 text-gray-600 dark:text-gray-300">No courses found, please try again.</div>
+          ) : groupedResults ? (
+            <div className="space-y-10">
+              {groupedResults.map((g) => (
+                <div key={g.key}>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{g.key}</h3>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {g.courses.map((c) => (
+                      <CourseCard key={c.id} course={c} hrefBase="/explore" />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {visibleResults.map((c) => (
+                <CourseCard key={c.id} course={c} hrefBase="/explore" />
+              ))}
+              {hasNextPage && !isLoading && (
+                <Button
+                  variant="outline"
+                  className="col-span-1 self-center md:col-span-2 lg:col-span-3"
+                  onClick={handleLoadMore}
+                >
+                  Load more from server
+                </Button>
+              )}
+              {visibleResults.length < results.length && (
+                <Button
+                  variant="outline"
+                  className="col-span-1 self-center md:col-span-2 lg:col-span-3"
+                  onClick={() => {
+                    setVisibleCount((prev) => Math.min(results.length, prev + 10));
+                  }}
+                >
+                  Show more
+                </Button>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
