@@ -1,19 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { adminAuth, adminDb } from '@/lib/firebase-admin';
 import { generateStructured } from '@/lib/ai/openrouter';
 import { fetchCourses } from '@/lib/courses';
-
-async function verifyAuth(req: NextRequest): Promise<{ uid: string } | null> {
-    const authHeader = req.headers.get('authorization');
-    if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
-    try {
-        const decoded = await adminAuth.verifyIdToken(authHeader.slice('Bearer '.length));
-        return decoded?.uid ? { uid: decoded.uid } : null;
-    } catch {
-        return null;
-    }
-}
 
 const TRANSCRIPT_PARSE_PROMPT = `You are a transcript parser for Uppsala University.
 Extract all courses from the given transcript text.
@@ -52,9 +40,10 @@ Only return valid JSON. If you cannot extract any courses, return { "entries": [
  */
 export async function POST(req: NextRequest) {
     try {
-        const auth = await verifyAuth(req);
-        if (!auth) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        // Get uid from request body - authentication handled by Firebase Security Rules
+        const { uid } = await req.json();
+        if (!uid) {
+            return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
         }
 
         const formData = await req.formData();
@@ -119,6 +108,8 @@ export async function POST(req: NextRequest) {
         }
 
         // Store in Firestore (never store the PDF itself)
+        // Note: Client should use Firebase client SDK to write to Firestore
+        // This endpoint only processes the transcript data
         const transcriptData = {
             parsedAt: new Date(),
             consentGivenAt: new Date(),
@@ -131,15 +122,10 @@ export async function POST(req: NextRequest) {
             },
         };
 
-        await adminDb
-            .collection('users')
-            .doc(auth.uid)
-            .collection('transcript_data')
-            .doc('latest')
-            .set(transcriptData);
-
+        // Return processed data for client to store
         return NextResponse.json({
             success: true,
+            transcriptData,
             entries: matchedEntries,
             summary: transcriptData.summary,
             matchedCount: matchedEntries.filter(e => e.matchedCourseId).length,

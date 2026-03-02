@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { adminAuth } from '@/lib/firebase-admin';
 import { checkRateLimit, incrementUsage, RateLimitError } from '@/lib/ai/rate-limit';
 import { processRAGRequest } from '@/lib/ai/rag';
 import { OpenRouterError } from '@/lib/ai/openrouter';
@@ -8,41 +7,40 @@ import { OpenRouterError } from '@/lib/ai/openrouter';
 interface ChatRequest {
   query: string;
   conversationHistory?: { role: 'user' | 'assistant'; content: string }[];
-}
-
-async function verifyAuth(req: NextRequest): Promise<{ uid: string } | null> {
-  const authHeader = req.headers.get('authorization');
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return null;
-  }
-  
-  const idToken = authHeader.slice('Bearer '.length);
-  
-  try {
-    const decoded = await adminAuth.verifyIdToken(idToken);
-    if (decoded.uid) {
-      return { uid: decoded.uid };
-    }
-    return null;
-  } catch (err) {
-    console.warn('Auth verification failed:', err);
-    return null;
-  }
+  uid: string;
 }
 
 export async function POST(req: NextRequest) {
   try {
-    // Verify authentication
-    const auth = await verifyAuth(req);
-    if (!auth) {
+    // Parse request body
+    let body: ChatRequest;
+    try {
+      body = await req.json();
+    } catch {
       return NextResponse.json(
-        { error: 'Unauthorized', message: 'Please sign in to use AI recommendations' },
-        { status: 401 }
+        { error: 'Bad request', message: 'Invalid JSON body' },
+        { status: 400 }
+      );
+    }
+    
+    const { query, conversationHistory, uid } = body;
+    
+    if (!uid) {
+      return NextResponse.json(
+        { error: 'Bad request', message: 'User ID is required' },
+        { status: 400 }
+      );
+    }
+    
+    if (!query || typeof query !== 'string' || query.trim().length === 0) {
+      return NextResponse.json(
+        { error: 'Bad request', message: 'Query is required' },
+        { status: 400 }
       );
     }
     
     // Check rate limit
-    const rateLimitStatus = await checkRateLimit(auth.uid);
+    const rateLimitStatus = await checkRateLimit(uid);
     if (!rateLimitStatus.allowed) {
       return NextResponse.json(
         { 
@@ -55,35 +53,15 @@ export async function POST(req: NextRequest) {
       );
     }
     
-    // Parse request body
-    let body: ChatRequest;
-    try {
-      body = await req.json();
-    } catch {
-      return NextResponse.json(
-        { error: 'Bad request', message: 'Invalid JSON body' },
-        { status: 400 }
-      );
-    }
-    
-    const { query, conversationHistory } = body;
-    
-    if (!query || typeof query !== 'string' || query.trim().length === 0) {
-      return NextResponse.json(
-        { error: 'Bad request', message: 'Query is required' },
-        { status: 400 }
-      );
-    }
-    
     // Process RAG request
     const { result, usage } = await processRAGRequest({
       query: query.trim(),
-      userId: auth.uid,
+      userId: uid,
       conversationHistory,
     });
     
     // Increment usage
-    const newStatus = await incrementUsage(auth.uid, usage.totalTokens);
+    const newStatus = await incrementUsage(uid, usage.totalTokens);
     
     // Return response
     return NextResponse.json({
@@ -140,15 +118,17 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    const auth = await verifyAuth(req);
-    if (!auth) {
+    const { searchParams } = new URL(req.url);
+    const uid = searchParams.get('uid');
+    
+    if (!uid) {
       return NextResponse.json(
-        { error: 'Unauthorized', message: 'Please sign in' },
-        { status: 401 }
+        { error: 'Bad request', message: 'User ID is required' },
+        { status: 400 }
       );
     }
     
-    const rateLimitStatus = await checkRateLimit(auth.uid);
+    const rateLimitStatus = await checkRateLimit(uid);
     
     return NextResponse.json({
       remaining: rateLimitStatus.remaining,

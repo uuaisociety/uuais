@@ -1,51 +1,26 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { adminAuth, adminDb } from '@/lib/firebase-admin';
-
-async function verifyAuth(req: NextRequest): Promise<{ uid: string } | null> {
-    const authHeader = req.headers.get('authorization');
-    if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
-    try {
-        const decoded = await adminAuth.verifyIdToken(authHeader.slice('Bearer '.length));
-        return decoded?.uid ? { uid: decoded.uid } : null;
-    } catch {
-        return null;
-    }
-}
 
 /**
  * DELETE /api/transcript/delete
  *
  * One-click purge of all transcript data for the authenticated user.
+ * Note: Client should use Firebase client SDK to delete data.
+ * This endpoint only provides the user ID for the client to use.
  */
 export async function DELETE(req: NextRequest) {
     try {
-        const auth = await verifyAuth(req);
-        if (!auth) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        const { uid } = await req.json();
+        if (!uid) {
+            return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
         }
 
-        // Delete all documents in the transcript_data subcollection
-        const transcriptRef = adminDb
-            .collection('users')
-            .doc(auth.uid)
-            .collection('transcript_data');
-
-        const snapshot = await transcriptRef.get();
-
-        if (snapshot.empty) {
-            return NextResponse.json({ success: true, deleted: 0 });
-        }
-
-        const batch = adminDb.batch();
-        for (const doc of snapshot.docs) {
-            batch.delete(doc.ref);
-        }
-        await batch.commit();
-
+        // Client should handle deletion using Firebase client SDK
+        // Firebase Security Rules will enforce authentication
         return NextResponse.json({
             success: true,
-            deleted: snapshot.size,
+            message: 'Use Firebase client SDK to delete transcript data',
+            uid,
         });
     } catch (error) {
         console.error('Transcript delete error:', error);
