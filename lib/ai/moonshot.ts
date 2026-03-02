@@ -96,9 +96,7 @@ export async function generateCompletion(
     }
 
     const data: MoonshotResponse = await response.json();
-    
-    console.log('Moonshot Response:', JSON.stringify(data, null, 2));
-    
+       
     if (!data.choices?.[0]?.message?.content) {
       throw new MoonshotError(`Invalid response format from Moonshot API: ${JSON.stringify(data)}`);
     }

@@ -121,10 +121,10 @@ const AISettingsTab: React.FC = () => {
     const rawModels = (window as unknown as { rawModels?: OpenRouterModelInfo[] }).rawModels;
     if (rawModels) {
       const rawModel = rawModels.find(m => m.id === modelId);
-      console.log("rawmodel:", rawModel);
+
       if (rawModel) {
         const costPer1k = (parseFloat(rawModel.pricing.prompt) + parseFloat(rawModel.pricing.completion)) * 1000;
-        console.log("costPer1k:", costPer1k);
+
         setSettings({ ...settings, model: modelId, costPer1kTokensUsd: costPer1k });
         return;
       }
