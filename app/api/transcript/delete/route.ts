@@ -20,7 +20,7 @@ export async function DELETE(req: NextRequest) {
         return NextResponse.json({
             success: true,
             message: 'Use Firebase client SDK to delete transcript data',
-            uid,
+            uid: uid,
         });
     } catch (error) {
         console.error('Transcript delete error:', error);

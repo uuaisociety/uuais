@@ -61,10 +61,10 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({
             courses: paginatedCourses,
             pagination: {
-                page,
-                limit,
-                total,
-                totalPages,
+                page: page,
+                limit:limit,
+                total: total,
+                totalPages: totalPages,
                 hasNextPage: page < totalPages,
                 hasPrevPage: page > 1,
             },

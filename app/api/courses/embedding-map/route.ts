@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
         if (coursesSnap.empty) {
             return NextResponse.json({
                 points: [],
-                algorithm,
+                algorithm: algorithm,
                 dimensions: dims,
                 courseCount: 0,
             });
@@ -98,7 +98,7 @@ export async function GET(req: NextRequest) {
         if (embeddings.length === 0) {
             return NextResponse.json({
                 points: [],
-                algorithm,
+                algorithm: algorithm,
                 dimensions: dims,
                 courseCount: 0,
             });
@@ -135,8 +135,8 @@ export async function GET(req: NextRequest) {
         });
 
         return NextResponse.json({
-            points,
-            algorithm,
+            points: points,
+            algorithm: algorithm,
             dimensions: dims,
             courseCount: points.length,
             cached: false,

@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
     await generateAndStoreCourseEmbedding(course);
 
-    return NextResponse.json({ success: true, courseId });
+    return NextResponse.json({ success: true, courseId: courseId });
   } catch (error) {
     console.error('Error generating embedding:', error);
     return NextResponse.json({ error: 'internal error' }, { status: 500 });
@@ -63,8 +63,8 @@ export async function PUT() {
 
     return NextResponse.json({
       success: true,
-      generated,
-      failed,
+      generated: generated,
+      failed: failed,
       errors: errors.slice(0, 10),
     });
   } catch (error) {

@@ -40,15 +40,14 @@ Only return valid JSON. If you cannot extract any courses, return { "entries": [
  */
 export async function POST(req: NextRequest) {
     try {
-        // Get uid from request body - authentication handled by Firebase Security Rules
-        const { uid } = await req.json();
+        const formData = await req.formData();
+        const uid = formData.get('uid') as string | null;
+        const file = formData.get('file') as File | null;
+        const consent = formData.get('consent') as string;
+
         if (!uid) {
             return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
         }
-
-        const formData = await req.formData();
-        const file = formData.get('file') as File | null;
-        const consent = formData.get('consent') as string;
 
         if (consent !== 'true') {
             return NextResponse.json({ error: 'Consent is required' }, { status: 400 });

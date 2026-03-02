@@ -47,11 +47,11 @@ export async function GET() {
 
     return NextResponse.json({
       date: today,
-      totalRequests,
-      activeUsers,
-      averageTokensPerRequest,
-      totalTokens,
-      estimatedCostUsd,
+      totalRequests: totalRequests,
+      activeUsers: activeUsers,
+      averageTokensPerRequest: averageTokensPerRequest,
+      totalTokens: totalTokens,
+      estimatedCostUsd: estimatedCostUsd,
     });
   } catch (e) {
     console.error('ai-usage admin api error:', e);

@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/Button";
 import { Send, Loader2, History, Trash2, Plus, MessageSquare, ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import { auth } from "@/lib/firebase-client";
-import { onAuthStateChanged } from "firebase/auth";
 import Link from "next/link";
 import { AIChat } from "@/types";
 import { getUserChatsPage, saveChat, deleteChat, generateChatTitle } from "@/lib/firestore/ai-chats";
 import type { QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
+import { useAdmin } from "@/hooks/useAdmin";
 
 type Message = { id: string; role: "user" | "assistant"; content: string; ts: number; recommendations?: string[] };
 type RateLimitInfo = { remaining: number; resetAt: string; allowed: boolean };
@@ -29,7 +29,6 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [user, setUser] = useState<{ uid: string } | null>(null);
   const [loading, setLoading] = useState(false);
   const [rateLimit, setRateLimit] = useState<RateLimitInfo | null>(null);
   const [error, setError] = useState<ChatError | null>(null);
@@ -42,17 +41,13 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
   const chatsLoadingRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-
+  const { user, loading: userLoading } = useAdmin();
   //const lastAssistant = useMemo(() => [...messages].reverse().find(m => m.role === "assistant"), [messages]);
 
   useEffect(() => {
     if (listRef.current) listRef.current.scrollTop = listRef.current.scrollHeight;
   }, [messages, focused]);
 
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (u) => setUser(u ? { uid: u.uid } : null));
-    return () => unsub();
-  }, []);
 
   const loadInitialChats = useCallback(async () => {
     if (!user) return;
@@ -107,16 +102,16 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
   }, [user, chatsHasMore, chatsCursor, chats.length]);
 
   useEffect(() => {
+    if(userLoading) return;
     if (user) {
       fetchRateLimit();
       loadInitialChats();
     }
-  }, [user, loadInitialChats]);
+  }, [user,userLoading, loadInitialChats]);
 
   async function fetchRateLimit() {
-    const token = await auth.currentUser?.getIdToken(true);
-    if (!token) return;
-    const res = await fetch("/api/chat", { headers: { Authorization: `Bearer ${token}` } });
+    if (!user) return;
+    const res = await fetch(`/api/chat?uid=${user.uid}`);
     if (res.ok) setRateLimit(await res.json());
   }
 
@@ -149,8 +144,8 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
       }
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ query: q }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: q, uid: user.uid}),
       });
 
       const data = await res.json();
@@ -292,6 +287,10 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
   useEffect(() => {
     console.log("Error:", error);
   }, [error]);
+
+  if(userLoading){
+    return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
+  }
 
   if (!user) {
     return (

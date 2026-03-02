@@ -52,9 +52,9 @@ export async function POST(req: NextRequest) {
 
             return NextResponse.json({
                 success: true,
-                parsed,
-                skipped,
-                failed,
+                parsed: parsed,
+                skipped: skipped,
+                failed: failed,
                 total: allCourses.length,
                 errors: errors.slice(0, 10),
             });
@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
 
             return NextResponse.json({
                 success: true,
-                courseId,
+                courseId: courseId,
                 structured_requirements: structured,
             });
         }
