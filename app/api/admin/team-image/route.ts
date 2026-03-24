@@ -145,7 +145,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    return NextResponse.json({ ok: true, path, url: signedUrl, urlPublic: publicUrl });
+    return NextResponse.json({ ok: true, path: path, url: signedUrl, urlPublic: publicUrl });
   } catch (err) {
     console.error('team-image upload error', err);
     return NextResponse.json({ error: String(err) }, { status: 500 });
