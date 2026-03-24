@@ -216,12 +216,13 @@ const HomePage: React.FC = () => {
               {upcomingEvents.map((event) => (
                 <Card key={event.id} className="h-full group hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <div className="aspect-video relative overflow-hidden rounded-t-lg">
-                    <Link href={`/events/${event.id}`} >
+                    <Link href={`/events/${event.id}`} className="relative block w-full h-full">
 
                       <Image
                         src={event.image || campus}
                         alt={event.title}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     </Link>

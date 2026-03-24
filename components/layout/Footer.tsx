@@ -209,14 +209,11 @@ export const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="relative flex items-center justify-center bg-gray-300 rounded-lg border border-gray-800 h-24 hover:bg-gray-200 transition-colors"
               >
-                {/* relative flex items-center justify-center bg-gray-300 rounded-lg border border-gray-800 p-6 h-24 */}
-
                 <div className="relative w-full h-full flex items-center justify-center">
                   <Image
                     src={p.src}
                     alt={p.alt}
                     loading="lazy"
-                    objectFit="contain"
                     width={190}
                     height={80}
                     className="object-contain max-h-[80px] md:max-h-[100px] p-2 opacity-80 hover:opacity-100 transition-opacity"

@@ -115,7 +115,7 @@ const FileDropzone: React.FC<Props> = ({ onFileSelected, onError, onDelete, acce
       {preview && (
           <div className="mt-3 flex items-center gap-3">
           <div className="relative h-20 w-20 rounded-md overflow-hidden border">
-            <Image src={preview} alt="preview" fill style={{ objectFit: 'cover' }} />
+            <Image src={preview} alt="preview" fill sizes="80px" style={{ objectFit: 'cover' }} />
           </div>
           <div className="text-sm text-gray-700 dark:text-gray-200">{uploading ? 'Uploading...' : deleting ? 'Deleting...' : 'Preview'}</div>
           {initialPath && (

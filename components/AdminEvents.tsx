@@ -445,6 +445,7 @@ const AdminEvents = () => {
                   src={imagePreview} 
                   alt="Cover preview" 
                   fill
+                  sizes="(max-width: 768px) 100vw, 400px"
                   style={{ objectFit: 'contain' }}
                   className="bg-white/10 rounded-md" 
                 />
@@ -755,6 +756,7 @@ const AdminEvents = () => {
                       src={imagePreview} 
                       alt="Cover preview" 
                       fill
+                      sizes="(max-width: 768px) 100vw, 400px"
                       style={{ objectFit: 'contain' }}
                       className="bg-white/10 rounded-md" 
                     />
