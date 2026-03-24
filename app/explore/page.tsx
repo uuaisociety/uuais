@@ -18,6 +18,8 @@ export default function ExplorePage() {
   const [recommendedIds, setRecommendedIds] = useState<string[]>([]);
   const [recommendedCourses, setRecommendedCourses] = useState<Course[]>([]);
   const [isLoadingRecommendations, setIsLoadingRecommendations] = useState(false);
+  const [hasLoadedRecommendations, setHasLoadedRecommendations] = useState(false);
+  const [isWaitingForAI, setIsWaitingForAI] = useState(false);
 
   const [showAllCourses, setShowAllCourses] = useState(false);
   const [search, setSearch] = useState("");
@@ -100,8 +102,10 @@ export default function ExplorePage() {
         .sort((a, b) => (idToIndex.get(a.id) ?? 0) - (idToIndex.get(b.id) ?? 0));
       
       setRecommendedCourses(matched);
+      setHasLoadedRecommendations(true);
     } catch (error) {
       console.error('Failed to load recommended courses:', error);
+      setHasLoadedRecommendations(true);
     } finally {
       setIsLoadingRecommendations(false);
     }
@@ -112,9 +116,12 @@ export default function ExplorePage() {
     if (recommendedIds.length > 0) {
       setShowAllCourses(false);
       setSortBy("relevance");
+      setHasLoadedRecommendations(false);
+      setIsWaitingForAI(false);
       loadRecommendedCourses(recommendedIds);
     } else {
       setRecommendedCourses([]);
+      setHasLoadedRecommendations(false);
     }
   }, [recommendedIds, loadRecommendedCourses]);
 
@@ -215,7 +222,14 @@ export default function ExplorePage() {
         </div>
 
         <div className="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-10">
-          <RagChat onRecommendations={setRecommendedIds} placeholder="Ask about courses, e.g. 'beginner statistics with labs'" />
+          <RagChat 
+            onRecommendations={(ids) => {
+              setIsWaitingForAI(false);
+              setRecommendedIds(ids);
+            }} 
+            onThinkingStart={() => setIsWaitingForAI(true)}
+            placeholder="Ask about courses, e.g. 'beginner statistics with labs'" 
+          />
           {/* {user && (<div className="mt-4 pt-4 ml-auto border-t border-gray-200 dark:border-gray-700 flex justify-end flex-col items-center gap-2">
             <p className="text-gray-600 dark:text-gray-300 italic">This feature is still under testing</p>
             <TranscriptUpload />
@@ -226,7 +240,7 @@ export default function ExplorePage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-4">
             <div>
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                {!showAllCourses && recommendedIds.length > 0 ? (
+                {isWaitingForAI ? "AI is thinking..." : !showAllCourses && recommendedIds.length > 0 ? (
                   isLoadingRecommendations ? "Loading AI Recommendations..." : "AI Recommendations"
                 ) : "All Courses"}
               </h2>
@@ -335,6 +349,24 @@ export default function ExplorePage() {
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
                 Each dot represents a course, projected from its 768-dimensional embedding. Similar courses appear closer together. Recommended courses are highlighted.
               </p>
+            </div>
+          ) : isWaitingForAI || (!hasLoadedRecommendations && recommendedIds.length > 0) || isLoadingRecommendations ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 animate-pulse">
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3"></div>
+                  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-4"></div>
+                  <div className="space-y-2">
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-4/6"></div>
+                  </div>
+                  <div className="mt-4 flex gap-2">
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-12"></div>
+                  </div>
+                </div>
+              ))}
             </div>
           ) : results.length === 0 ? (
             <div className="text-center py-12 text-gray-600 dark:text-gray-300">No courses found, please try again.</div>

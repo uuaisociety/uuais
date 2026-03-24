@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { Send, Loader2, History, Trash2, Plus, MessageSquare, ChevronLeft } from "lucide-react";
+import { Send, Loader2, History, Trash2, Plus, MessageSquare, ChevronLeft, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { auth } from "@/lib/firebase-client";
 import Link from "next/link";
@@ -11,6 +11,7 @@ import { AIChat } from "@/types";
 import { getUserChatsPage, saveChat, deleteChat, generateChatTitle } from "@/lib/firestore/ai-chats";
 import type { QueryDocumentSnapshot, DocumentData } from "firebase/firestore";
 import { useAdmin } from "@/hooks/useAdmin";
+import type { Course } from "@/lib/courses";
 
 type Message = { id: string; role: "user" | "assistant"; content: string; ts: number; recommendations?: string[] };
 type RateLimitInfo = { remaining: number; resetAt: string; allowed: boolean };
@@ -22,10 +23,11 @@ type ChatError = {
 
 interface Props {
   onRecommendations?: (courseIds: string[]) => void;
+  onThinkingStart?: () => void;
   placeholder?: string;
 }
 
-export default function RagChat({ onRecommendations, placeholder = "Ask about courses..." }: Props) {
+export default function RagChat({ onRecommendations, onThinkingStart, placeholder = "Ask about courses..." }: Props) {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -42,6 +44,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const { user, loading: userLoading } = useAdmin();
+  const [courseCache, setCourseCache] = useState<Map<string, Course>>(new Map());
   //const lastAssistant = useMemo(() => [...messages].reverse().find(m => m.role === "assistant"), [messages]);
 
   useEffect(() => {
@@ -128,6 +131,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
 
     setLoading(true);
     setError(null);
+    onThinkingStart?.();
     const userMsg: Message = { id: crypto.randomUUID(), role: "user", content: q, ts: Date.now() };
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
@@ -177,6 +181,11 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
       setMessages(finalMessages);
       setRateLimit(data.rateLimit);
       if (data.data.recommendations?.length && onRecommendations) onRecommendations(data.data.recommendations);
+      
+      // Fetch course details for recommendations
+      if (data.data.recommendations?.length) {
+        await fetchRecommendedCourses(data.data.recommendations);
+      }
       
       await persistChat(finalMessages, data.data.recommendations || []);
     } catch (e) {
@@ -240,10 +249,14 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
       role: m.role,
       content: m.content,
       ts: new Date(m.timestamp).getTime(),
+      // Only assistant messages have recommendations
+      recommendations: m.role === 'assistant' && idx > 0 ? chat.recommendedCourseIds : undefined,
     }));
     setMessages(loadedMessages);
     if (chat.recommendedCourseIds?.length && onRecommendations) {
       onRecommendations(chat.recommendedCourseIds);
+      // Fetch course details for loaded chat
+      await fetchRecommendedCourses(chat.recommendedCourseIds);
     }
     setShowSidebar(true);
     setFocused(true);
@@ -275,6 +288,39 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
   const handleLoadMoreChats = useCallback(async () => {
     await loadMoreChats();
   }, [loadMoreChats]);
+
+  const fetchRecommendedCourses = useCallback(async (courseIds: string[]) => {
+    if (!user) return;
+    
+    // Filter out courses we already have in cache
+    const uncachedIds = courseIds.filter(id => !courseCache.has(id));
+    if (uncachedIds.length === 0) return;
+    
+    try {
+      const token = await auth.currentUser?.getIdToken(true);
+      const res = await fetch('/api/courses/batch', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ ids: uncachedIds }),
+      });
+      
+      if (res.ok) {
+        const { courses } = await res.json();
+        setCourseCache(prev => {
+          const newCache = new Map(prev);
+          courses.forEach((course: Course) => {
+            newCache.set(course.id, course);
+          });
+          return newCache;
+        });
+      }
+    } catch (e) {
+      console.error('Failed to fetch recommended courses:', e);
+    }
+  }, [user, courseCache]);
 
   useEffect(() => {
     if (focused) {
@@ -381,13 +427,54 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
                 {messages.length === 0 && (<div className="flex flex-col items-center">
                   <div className="text-sm text-gray-600 dark:text-gray-300 italic">Ask about anything related to course selection, e.g "Find me courses covering machine learning and LLMs"</div>
                 </div>
-              )}
+                )}
                 {messages.map((m) => (
-                  <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} items-end gap-2`}>
-                    {m.role === "assistant" && (
-                      <Image src="/images/logo.png" alt="AI" width={40} height={50} className="rounded-sm opacity-80" />
+                  <div key={m.id} className="flex flex-col gap-2">
+                    <div className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} items-end gap-2`}>
+                      {m.role === "assistant" && (
+                        <Image src="/images/logo.png" alt="AI" width={40} height={50} className="rounded-sm opacity-80" />
+                      )}
+                      <div className={`${m.role === "user" ? "bg-red-600 text-white" : "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"} px-3 py-2 rounded-lg max-w-[80%] text-sm shadow-sm`}>{m.content}</div>
+                    </div>
+                    {m.role === "assistant" && m.recommendations && m.recommendations.length > 0 && (
+                      <div className="ml-12 space-y-2">
+                        <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">Recommended courses:</div>
+                        {m.recommendations.map((courseId) => {
+                          const course = courseCache.get(courseId);
+                          if (!course) return null;
+                          return (
+                            <Link
+                              key={`${m.id}-${courseId}`}
+                              href={`/explore/${courseId}`}
+                              className="block group"
+                            >
+                              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 hover:border-[#990000] dark:hover:border-[#990000] transition-all cursor-pointer shadow-sm hover:shadow-md">
+                                <div className="flex items-start justify-between gap-2">
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <span className="text-xs font-medium text-[#990000] bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded">{course.code}</span>
+                                      {course.level && (
+                                        <span className="text-xs text-gray-500 dark:text-gray-400">{course.level}</span>
+                                      )}
+                                      {course.credits && (
+                                        <span className="text-xs text-gray-500 dark:text-gray-400">{course.credits} credits</span>
+                                      )}
+                                    </div>
+                                    <div className="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-[#990000] transition-colors">
+                                      {course.title}
+                                    </div>
+                                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
+                                      {course.description}
+                                    </div>
+                                  </div>
+                                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-[#990000] transition-colors shrink-0 mt-1" />
+                                </div>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
                     )}
-                    <div className={`${m.role === "user" ? "bg-red-600 text-white" : "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100"} px-3 py-2 rounded-lg max-w-[80%] text-sm shadow-sm`}>{m.content}</div>
                   </div>
                 ))}
                 {/* If loading response show "Thinking..." with animated dots*/}
@@ -457,7 +544,7 @@ export default function RagChat({ onRecommendations, placeholder = "Ask about co
 
       {/* Input visible at the bottom only when not focused; focusing expands the chat above */}
       <form
-        onSubmit={(e) => { e.preventDefault(); setFocused(true); send(); }}
+        onSubmit={(e) => { e.preventDefault(); startNewChat(); setFocused(true); send(); }}
         className="flex gap-2 w-full"
         style={{ display: focused ? "none" : "flex" }}
       >
