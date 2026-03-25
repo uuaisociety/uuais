@@ -1,38 +1,40 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { jwtVerify } from 'jose';
+import { authMiddleware } from 'next-firebase-auth-edge';
+import { authConfig } from '@/lib/auth-config';
 
 export const runtime = 'nodejs';
 
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET
-);
-
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname } = request.nextUrl;
 
   // Only protect admin routes except the main admin login page
   if (pathname.startsWith('/admin') && pathname !== '/admin') {
-    const token = request.cookies.get('admin-token')?.value;
-    
-    if (!token) {
-      return NextResponse.redirect(new URL('/admin', request.url));
-    }
-    
-    try {
-      await jwtVerify(token, JWT_SECRET);
-      return NextResponse.next();
-    } catch {
-      // Invalid token, redirect to login
-      const response = NextResponse.redirect(new URL('/admin', request.url));
-      response.cookies.delete('admin-token');
-      return response;
-    }
+    return authMiddleware(request, {
+      ...authConfig,
+      loginPath: '/api/login',
+      logoutPath: '/api/logout',
+      handleValidToken: async () => {
+        return NextResponse.next();
+      },
+      handleInvalidToken: async () => {
+        return NextResponse.redirect(new URL('/admin', request.url));
+      },
+      handleError: async () => {
+        const response = NextResponse.redirect(new URL('/admin', request.url));
+        return response;
+      },
+    });
   }
-  
-  return NextResponse.next();
+
+  // For all other routes, just run auth middleware to refresh tokens
+  return authMiddleware(request, {
+    ...authConfig,
+    loginPath: '/api/login',
+    logoutPath: '/api/logout',
+  });
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/admin/:path*', '/api/:path*'],
 };
