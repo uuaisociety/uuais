@@ -80,14 +80,13 @@ export default function TranscriptUpload({ onDataLoaded, onDataDeleted }: Props)
         setError(null);
 
         try {
-            const token = await user.getIdToken();
+            // Auth is handled via cookies by next-firebase-auth-edge middleware
             const formData = new FormData();
             formData.append('file', file);
             formData.append('consent', 'true');
 
             const res = await fetch('/api/transcript/upload', {
                 method: 'POST',
-                headers: { Authorization: `Bearer ${token}` },
                 body: formData,
             });
 
@@ -119,10 +118,9 @@ export default function TranscriptUpload({ onDataLoaded, onDataDeleted }: Props)
 
         setDeleting(true);
         try {
-            const token = await user.getIdToken();
+            // Auth is handled via cookies by next-firebase-auth-edge middleware
             const res = await fetch('/api/transcript/delete', {
                 method: 'DELETE',
-                headers: { Authorization: `Bearer ${token}` },
             });
 
             if (!res.ok) {

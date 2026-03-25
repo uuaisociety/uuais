@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getTokens } from 'next-firebase-auth-edge';
+import { authConfig } from '@/lib/auth-config';
 import { adminDb } from '@/lib/firebase-admin';
 import { projectEmbeddings, type ProjectionAlgorithm } from '@/lib/ai/projection';
 
@@ -32,6 +34,12 @@ function normalizeLevel(lvl: unknown): string {
 
 export async function GET(req: NextRequest) {
     try {
+        // Verify Firebase auth using next-firebase-auth-edge
+        const tokens = await getTokens(req.cookies, authConfig);
+        if (!tokens) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
         const url = new URL(req.url);
         const dims = (parseInt(url.searchParams.get('dimensions') || '2') === 3 ? 3 : 2) as 2 | 3;
         const algorithm = (url.searchParams.get('algorithm') || 'tsne') as ProjectionAlgorithm;

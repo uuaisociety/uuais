@@ -3,15 +3,43 @@ import type { NextRequest } from 'next/server';
 import { checkRateLimit, incrementUsage, RateLimitError } from '@/lib/ai/rate-limit';
 import { processRAGRequest } from '@/lib/ai/rag';
 import { OpenRouterError } from '@/lib/ai/openrouter';
+import { getTokens } from 'next-firebase-auth-edge';
+import { authConfig } from '@/lib/auth-config';
 
 interface ChatRequest {
   query: string;
   conversationHistory?: { role: 'user' | 'assistant'; content: string }[];
-  uid: string;
 }
 
 export async function POST(req: NextRequest) {
   try {
+    // Debug: Log cookies and auth config
+    console.log('[chat] Cookies:', req.cookies.getAll().map(c => c.name));
+    console.log('[chat] AuthConfig:', {
+      apiKey: authConfig.apiKey ? 'set' : 'missing',
+      cookieName: authConfig.cookieName,
+      hasServiceAccount: !!authConfig.serviceAccount,
+    });
+
+    // Verify Firebase auth using next-firebase-auth-edge
+    const tokens = await getTokens(req.cookies, authConfig);
+    console.log('[chat] Tokens result:', tokens ? { uid: tokens.decodedToken.uid } : null);
+    
+    if (!tokens) {
+      return NextResponse.json(
+        { error: 'Unauthorized', message: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
+    const uid = tokens.decodedToken.uid;
+    if (!uid) {
+      return NextResponse.json(
+        { error: 'Unauthorized', message: 'Invalid token: missing user ID' },
+        { status: 401 }
+      );
+    }
+
     // Parse request body
     let body: ChatRequest;
     try {
@@ -23,14 +51,7 @@ export async function POST(req: NextRequest) {
       );
     }
     
-    const { query, conversationHistory, uid } = body;
-    
-    if (!uid) {
-      return NextResponse.json(
-        { error: 'Bad request', message: 'User ID is required' },
-        { status: 400 }
-      );
-    }
+    const { query, conversationHistory } = body;
     
     if (!query || typeof query !== 'string' || query.trim().length === 0) {
       return NextResponse.json(
@@ -118,13 +139,21 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const uid = searchParams.get('uid');
+    // Verify Firebase auth using next-firebase-auth-edge
+    const tokens = await getTokens(req.cookies, authConfig);
     
+    if (!tokens) {
+      return NextResponse.json(
+        { error: 'Unauthorized', message: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
+    const uid = tokens.decodedToken.uid;
     if (!uid) {
       return NextResponse.json(
-        { error: 'Bad request', message: 'User ID is required' },
-        { status: 400 }
+        { error: 'Unauthorized', message: 'Invalid token: missing user ID' },
+        { status: 401 }
       );
     }
     

@@ -109,8 +109,25 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
     async function init() {
       if(userLoading) return;
       if (user) {
-        const res = await fetch(`/api/chat?uid=${user.uid}`);
-        if (res.ok) setRateLimit(await res.json());
+        // Set auth cookies via /api/login for next-firebase-auth-edge
+        const token = await auth.currentUser?.getIdToken(true);
+        if (token) {
+          // next-firebase-auth-edge expects the Firebase idToken in the Authorization header.
+          const loginRes = await fetch("/api/login", {
+            headers: { Authorization: `Bearer ${token}` },
+            credentials: "include",
+          });
+          if (!loginRes.ok) {
+            const body = await loginRes.text().catch(() => "");
+            console.error("Failed to set auth cookies via /api/login", {
+              status: loginRes.status,
+              body,
+            });
+          }
+          // Fetch rate limit - auth is now cookie-based
+          const res = await fetch("/api/chat", { credentials: "include" });
+          if (res.ok) setRateLimit(await res.json());
+        }
         loadInitialChats();
       }
     }
@@ -138,17 +155,14 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
     setValue("");
 
     try {
-      // Force refresh token to get fresh claims
-      const token = await auth.currentUser?.getIdToken(true);
-      if (!token) {
-        setError({ message: "Not authenticated", type: 'unknown' });
-        setLoading(false);
-        return;
-      }
+      // Auth is handled via cookies by next-firebase-auth-edge middleware
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: q, uid: user.uid}),
+        headers: { 
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ query: q }),
       });
 
       const data = await res.json();
@@ -297,12 +311,11 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
     if (uncachedIds.length === 0) return;
     
     try {
-      const token = await auth.currentUser?.getIdToken(true);
+      // Auth is handled via cookies by next-firebase-auth-edge middleware
       const res = await fetch('/api/courses/batch', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ ids: uncachedIds }),
       });

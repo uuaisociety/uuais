@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getTokens } from 'next-firebase-auth-edge';
+import { authConfig } from '@/lib/auth-config';
 import admin from 'firebase-admin';
 
 if (!admin.apps.length) {
@@ -27,16 +29,14 @@ if (!admin.apps.length) {
 //   setClaims(tokenClaims);
 //   setIsAdmin(Boolean(tokenClaims.admin));
 async function authorizeRequest(req: NextRequest) {
-  const authHeader = req.headers.get('authorization');
-  if (!authHeader || !authHeader.startsWith('Bearer ')) return { ok: false, reason: 'no-auth' };
-  const idToken = authHeader.slice('Bearer '.length);
   try {
-    const decoded = await admin.auth().verifyIdToken(idToken);
-    if (decoded && decoded.admin === true) return { ok: true, uid: decoded.uid };
-    return { ok: false, reason: 'not-admin' };
+    const tokens = await getTokens(req.cookies, authConfig);
+    if (!tokens) return { ok: false, reason: 'no-auth' };
+    const isAdmin = tokens.decodedToken.admin === true || tokens.decodedToken.superAdmin === true;
+    if (!isAdmin) return { ok: false, reason: 'not-admin' };
+    return { ok: true, uid: tokens.decodedToken.uid };
   } catch (err) {
-    console.warn('verifyIdToken failed', err);
-    // attempt to decode without verification to provide diagnostic info (dev only)
+    console.warn('getTokens failed', err);
     return { ok: false, reason: 'invalid-token', detail: String(err instanceof Error ? err.message : err) };
   }
 }

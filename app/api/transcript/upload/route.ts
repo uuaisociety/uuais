@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getTokens } from 'next-firebase-auth-edge';
+import { authConfig } from '@/lib/auth-config';
 import { generateStructured } from '@/lib/ai/openrouter';
 import { fetchCourses } from '@/lib/courses';
 
@@ -40,14 +42,16 @@ Only return valid JSON. If you cannot extract any courses, return { "entries": [
  */
 export async function POST(req: NextRequest) {
     try {
+        // Verify Firebase auth using next-firebase-auth-edge
+        const tokens = await getTokens(req.cookies, authConfig);
+        if (!tokens) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+        const uid = tokens.decodedToken.uid;
+
         const formData = await req.formData();
-        const uid = formData.get('uid') as string | null;
         const file = formData.get('file') as File | null;
         const consent = formData.get('consent') as string;
-
-        if (!uid) {
-            return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
-        }
 
         if (consent !== 'true') {
             return NextResponse.json({ error: 'Consent is required' }, { status: 400 });
@@ -124,6 +128,7 @@ export async function POST(req: NextRequest) {
         // Return processed data for client to store
         return NextResponse.json({
             success: true,
+            uid,
             transcriptData,
             entries: matchedEntries,
             summary: transcriptData.summary,

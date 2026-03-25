@@ -69,10 +69,8 @@ const AISettingsTab: React.FC = () => {
     if (!user) return;
     try {
       setUsageLoading(true);
-      const token = await user.getIdToken();
-      const res = await fetch('/api/admin/ai-usage', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      // Auth is handled via cookies by next-firebase-auth-edge middleware
+      const res = await fetch('/api/admin/ai-usage');
       if (!res.ok) return;
       const data = (await res.json()) as Partial<UsageStats>;
       setUsage({
@@ -95,10 +93,8 @@ const AISettingsTab: React.FC = () => {
     if (!user) return;
     try {
       setModelsLoading(true);
-      const token = await user.getIdToken();
-      const res = await fetch('/api/admin/openrouter-models', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      // Auth is handled via cookies by next-firebase-auth-edge middleware
+      const res = await fetch('/api/admin/openrouter-models');
       if (!res.ok) {
         console.warn('Failed to load OpenRouter models');
         return;
