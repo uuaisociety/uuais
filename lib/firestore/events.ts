@@ -45,6 +45,8 @@ export const getEvents = async (): Promise<Event[]> => {
       eventStartAt: raw.eventStartAt,
       registrationClosesAt: raw.registrationClosesAt,
       publishAt: raw.publishAt,
+      externalRegistrationUrl: raw.externalRegistrationUrl,
+      externalRegistrationMembersOnly: !!raw.externalRegistrationMembersOnly,
     };
     return normalized;
   });
@@ -73,6 +75,8 @@ export const getEventById = async (id: string): Promise<Event | null> => {
     eventStartAt: raw.eventStartAt,
     registrationClosesAt: raw.registrationClosesAt,
     publishAt: raw.publishAt,
+    externalRegistrationUrl: raw.externalRegistrationUrl,
+    externalRegistrationMembersOnly: !!raw.externalRegistrationMembersOnly,
   };
   return normalized;
 };

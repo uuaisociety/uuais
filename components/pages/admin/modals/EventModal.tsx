@@ -19,6 +19,9 @@ export interface EventFormState {
   eventStartAt: string;
   registrationClosesAt: string;
   publishAt: string;
+  externalRegistrationUrl: string;
+  /** When true, only signed-in users can use the external registration link on the public event page. */
+  externalRegistrationMembersOnly: boolean;
 }
 
 interface EventModalProps {
@@ -207,6 +210,51 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
                 <p className="text-xs text-gray-500 mt-1">Leave empty when you want registration required but no capacity limit.</p>
               </div>
             )}
+          </div>
+
+          <div className="rounded-lg border border-gray-200 dark:border-gray-600 p-4 space-y-3 bg-gray-50/50 dark:bg-gray-900/30">
+            <p className="text-sm font-medium text-gray-900 dark:text-white">External registration</p>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white" htmlFor="external-registration-url">
+                Registration link (optional)
+              </label>
+              <input
+                id="external-registration-url"
+                type="url"
+                value={form.externalRegistrationUrl}
+                onChange={(e) => setForm(prev => ({ ...prev, externalRegistrationUrl: e.target.value }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 valid:border-green-500 valid:focus:ring-green-500 invalid:border-red-500 invalid:focus:ring-red-500 dark:bg-gray-800 dark:border-gray-600"
+                placeholder="https://…"
+              />
+              <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
+                If set, the event detail page shows a button that opens this URL in a new tab.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <input
+                id="external-registration-members-only"
+                type="checkbox"
+                className="mt-1 rounded border-gray-300 shrink-0"
+                checked={form.externalRegistrationMembersOnly}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    externalRegistrationMembersOnly: e.target.checked,
+                  }))
+                }
+              />
+              <div>
+                <label
+                  htmlFor="external-registration-members-only"
+                  className="text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
+                >
+                  Require sign-in to view the link
+                </label>
+                <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">
+                  When checked, visitors who are not logged in see a disabled control and must sign in before they can open the external registration page.
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="flex justify-end space-x-3 pt-4">

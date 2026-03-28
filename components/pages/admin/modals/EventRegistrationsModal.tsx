@@ -11,7 +11,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tag } from "@/components/ui/Tag";
 
 
-interface EventRegistrationsModalProps {
+export interface EventRegistrationsModalProps {
   open: boolean;
   eventId: string;
   eventTitle: string;

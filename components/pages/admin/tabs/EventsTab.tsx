@@ -49,7 +49,9 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
     maxCapacity: undefined,
     eventStartAt: '',
     registrationClosesAt: '',
-    publishAt: ''
+    publishAt: '',
+    externalRegistrationUrl: '',
+    externalRegistrationMembersOnly: false,
   });
 
   useEffect(() => {
@@ -67,7 +69,9 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
       maxCapacity: undefined,
       eventStartAt: '',
       registrationClosesAt: '',
-      publishAt: ''
+      publishAt: '',
+      externalRegistrationUrl: '',
+      externalRegistrationMembersOnly: false,
     });
     setEditingItem(null);
   };
@@ -89,7 +93,9 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
       maxCapacity: event.maxCapacity,
       eventStartAt: event.eventStartAt || '',
       registrationClosesAt: event.registrationClosesAt || '',
-      publishAt: event.publishAt || ''
+      publishAt: event.publishAt || '',
+      externalRegistrationUrl: event.externalRegistrationUrl || '',
+      externalRegistrationMembersOnly: !!event.externalRegistrationMembersOnly,
     });
     setShowEventModal(true);
   };
@@ -104,6 +110,7 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
   }, [activeEventForQuestions, activeEventForRegs, showEventQModal, showEventRegsModal]);
 
   const handleAddEvent = async () => {
+    const trimmedExternal = eventForm.externalRegistrationUrl?.trim();
     const payload: Omit<Event, 'id'> = {
       title: eventForm.title,
       description: eventForm.description,
@@ -118,6 +125,12 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
       ...(eventForm.registrationClosesAt ? { registrationClosesAt: eventForm.registrationClosesAt } : {}),
       ...(eventForm.publishAt ? { publishAt: eventForm.publishAt } : {}),
       ...(eventForm.maxCapacity !== undefined ? { maxCapacity: eventForm.maxCapacity } : {}),
+      ...(trimmedExternal
+        ? {
+            externalRegistrationUrl: trimmedExternal,
+            externalRegistrationMembersOnly: !!eventForm.externalRegistrationMembersOnly,
+          }
+        : {}),
     };
     const newId = await addEvent(payload);
     try {
@@ -145,7 +158,15 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
 
   const handleUpdateEvent = () => {
     if (editingItem && editingItem.id) {
-      const updatedEvent = { ...editingItem, ...eventForm } as Event;
+      const trimmedExternal = eventForm.externalRegistrationUrl?.trim() ?? '';
+      const updatedEvent = {
+        ...editingItem,
+        ...eventForm,
+        externalRegistrationUrl: trimmedExternal,
+        externalRegistrationMembersOnly: trimmedExternal
+          ? !!eventForm.externalRegistrationMembersOnly
+          : false,
+      } as Event;
       dispatch({ firestoreAction: 'UPDATE_EVENT', payload: updatedEvent });
       setShowEventModal(false);
       resetForms();

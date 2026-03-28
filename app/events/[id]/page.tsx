@@ -6,8 +6,9 @@ import React, { useEffect, useState } from "react";
 import DOMPurify from 'dompurify';
 import { notFound, useParams } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { ArrowLeft, Calendar, Clock, MapPin, Users, Tag } from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
+import { ArrowLeft, Calendar, Clock, MapPin, Users, Tag, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { format } from "date-fns";
@@ -168,6 +169,52 @@ const EventDetailPage: React.FC = () => {
               <EventRegistrationDialog event={event} />
             </div>
           )}
+
+          {isUpcoming && event.externalRegistrationUrl?.trim() && (
+            <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-6 bg-white dark:bg-gray-800/50">
+              <p className="text-sm font-medium text-gray-900 dark:text-white mb-3">
+                External registration
+              </p>
+              {event.externalRegistrationMembersOnly && !currentUserId ? (
+                <div className="space-y-2">
+                  <button
+                    type="button"
+                    disabled
+                    aria-disabled="true"
+                    className={cn(
+                      buttonVariants({ variant: "outline", size: "default" }),
+                      "w-full sm:w-auto opacity-70 cursor-not-allowed border-gray-400 text-gray-500 bg-gray-50 dark:bg-gray-900/40 dark:border-gray-600 dark:text-gray-400"
+                    )}
+                  >
+                    Login to register
+                  </button>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <Link
+                      href="/login"
+                      className="text-red-600 dark:text-red-400 font-medium underline hover:no-underline"
+                    >
+                      Sign in
+                    </Link>{" "}
+                    to open the registration page.
+                  </p>
+                </div>
+              ) : (
+                <a
+                  href={event.externalRegistrationUrl.trim()}
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  className={cn(
+                    buttonVariants({ variant: "outline", size: "default" }),
+                    "inline-flex no-underline text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline"
+                  )}
+                > 
+                  <span className="mr-2">Register externally</span>
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
+            </div>
+          )}
+
           {currentUserId && hasEligibleRegistration && (
             <div className="mt-4 flex justify-center">
               <div className="mt-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg inline-block bg-white dark:bg-gray-800">

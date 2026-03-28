@@ -56,6 +56,10 @@ export interface Event {
   registrationClosesAt?: string;
   /** ISO datetime when the event should start being published/visible (optional, UI-driven; rules may still use `published`). */
   publishAt?: string;
+  /** Optional third-party registration page (https URL). Shown on the event detail page when set. */
+  externalRegistrationUrl?: string;
+  /** If true, only signed-in users can open the external registration link; others see a disabled control. */
+  externalRegistrationMembersOnly?: boolean;
   attendees?: {
     userId: string;
     attended: boolean | null;
