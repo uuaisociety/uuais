@@ -343,7 +343,6 @@ export default function ExplorePage() {
                   recommendedIds={recommendedIds}
                   onCourseClick={(id) => router.push(`/explore/${id}`)}
                   height={560}
-                  user={user}
                 />
               )}
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
