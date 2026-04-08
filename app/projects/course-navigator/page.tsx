@@ -79,7 +79,7 @@ export default function CourseNavigatorPage() {
                 your interests, career goals, and academic background to suggest the most suitable 
                 courses and pathways.
               </p>
-
+              {/*
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 mt-8">
                 How It Works
               </h2>
@@ -138,7 +138,8 @@ export default function CourseNavigatorPage() {
                   </div>
                 </div>
               </div>
-
+              */}
+              {/*
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 mt-8">
                 Screenshots
               </h2>
@@ -154,7 +155,7 @@ export default function CourseNavigatorPage() {
                   </div>
                 </div>
               </div>
-
+              */}
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Coming Soon Features
               </h2>
