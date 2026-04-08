@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, useCallback } from "react";
-import { fetchCoursesClient, fetchAllCoursesClient } from "@/lib/firestore/courses";
+import { fetchCoursesClient, fetchCoursesByIdsClient, primeCourseClientCache } from "@/lib/firestore/courses";
 import type { Course } from "@/lib/courses";
 import RagChat from "@/components/common/RagChat";
 import CourseCard from "@/components/courses/CourseCard";
@@ -69,6 +69,7 @@ export default function ExplorePage() {
       } else {
         setCourses(prev => [...prev, ...result.courses]);
       }
+      primeCourseClientCache(result.courses);
       
       setPage(result.pagination.page);
       setTotalPages(result.pagination.totalPages);
@@ -92,15 +93,7 @@ export default function ExplorePage() {
     try {
       // Force refresh token to ensure fresh admin claims
       const token = await user?.getIdToken(true);
-
-      const allCourses = await fetchAllCoursesClient(token || '');
-      
-      // Filter and sort by recommendation order
-      const idToIndex = new Map(ids.map((id, idx) => [id, idx] as const));
-      const matched = allCourses
-        .filter(c => idToIndex.has(c.id))
-        .sort((a, b) => (idToIndex.get(a.id) ?? 0) - (idToIndex.get(b.id) ?? 0));
-      
+      const matched = await fetchCoursesByIdsClient(ids, token || '');
       setRecommendedCourses(matched);
       setHasLoadedRecommendations(true);
     } catch (error) {

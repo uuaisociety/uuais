@@ -1,4 +1,4 @@
-import { generateStructured } from './openrouter';
+import { generateStructured, OpenRouterError } from './openrouter';
 //import { fetchCourses, type Course } from '@/lib/courses';
 import { type Course } from '@/lib/courses';
 import { adminDb } from '@/lib/firebase-admin';
@@ -258,11 +258,27 @@ Respond with JSON containing "message" (string) and "recommendations" (array of 
     },
   ];
 
-  // Call AI
-  const response = await generateStructured(
-    messages,
-    { maxTokens, model }
-  );
+  // Call AI. If the model returns malformed output, fall back gracefully
+  // to vector-ranked recommendations instead of failing the whole request.
+  let response: { data: { message: string; recommendations: string[] }; usage: { promptTokens: number; completionTokens: number; totalTokens: number } };
+  try {
+    response = await generateStructured<{ message: string; recommendations: string[] }>(
+      messages,
+      { maxTokens, model }
+    );
+  } catch (error) {
+    if (error instanceof OpenRouterError && (error.statusCode === 502 || error.statusCode === 503)) {
+      const fallbackRecommendations = relevantCourses.slice(0, 5).map((c) => c.id);
+      return {
+        result: {
+          message: "I had trouble formatting the AI response just now. Here are some likely course matches based on your query.",
+          recommendations: fallbackRecommendations,
+        },
+        usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
+      };
+    }
+    throw error;
+  }
 
   const resultData = response.data as { message: string; recommendations: string[] };
 

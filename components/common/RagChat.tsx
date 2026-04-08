@@ -168,20 +168,24 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
       const data = await res.json();
       if (!res.ok) {
         let errorType: ChatError['type'] = 'unknown';
+        let errorMessage = "Something went wrong. Please try again.";
         let errorDetails: string | undefined;
         
         if (res.status === 429) {
           errorType = 'rate_limit';
+          errorMessage = "Daily limit reached";
           errorDetails = "You've reached the daily rate limit. Please try again tomorrow.";
         } else if (res.status === 401 || res.status === 403) {
           errorType = 'api_key';
-          errorDetails = "API key error. Please check that the OpenRouter API key is configured correctly.";
+          errorMessage = "AI service configuration issue";
+          errorDetails = "The AI service is not configured correctly. Please contact an admin.";
         } else if (res.status >= 500) {
           errorType = 'server';
-          errorDetails = "Server error. Our AI service is temporarily unavailable.";
+          errorMessage = "AI service temporarily unavailable";
+          errorDetails = "Please try again in a moment.";
         }
         
-        throw { message: data.message || "Request failed", type: errorType, details: errorDetails } as ChatError;
+        throw { message: errorMessage, type: errorType, details: errorDetails } as ChatError;
       }
 
       const assistantMsg: Message = {
@@ -206,7 +210,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
       if (typeof e === 'object' && e && 'type' in e) {
         setError(e as ChatError);
       } else if (e instanceof Error) {
-        setError({ message: e.message, type: 'network', details: "Network error. Please check your connection and try again." });
+        setError({ message: "Connection problem", type: 'network', details: "Please check your internet connection and try again." });
       } else {
         setError({ message: "An unexpected error occurred", type: 'unknown' });
       }

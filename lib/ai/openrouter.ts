@@ -14,9 +14,14 @@ export type OpenRouterResponse = {
     index: number;
     message: {
       role: string;
-      content: string;
+      content: string | null;
+      reasoning?: string | null;
+      reasoning_details?: Array<{
+        type?: string;
+        text?: string;
+      }>;
     };
-    finish_reason: string;
+    finish_reason?: string | null;
   }[];
   usage: {
     prompt_tokens: number;
@@ -41,6 +46,34 @@ export class OpenRouterError extends Error {
     super(message);
     this.name = 'OpenRouterError';
   }
+}
+
+function extractJsonObjectFromText(text: string): string | null {
+  const start = text.indexOf('{');
+  if (start === -1) return null;
+  let depth = 0;
+  for (let i = start; i < text.length; i++) {
+    const char = text[i];
+    if (char === '{') depth++;
+    if (char === '}') {
+      depth--;
+      if (depth === 0) {
+        return text.slice(start, i + 1);
+      }
+    }
+  }
+  return null;
+}
+
+function summarizeChoice(choice: OpenRouterResponse['choices'][number] | undefined): string {
+  if (!choice) return 'No choices returned by provider';
+  const parts = [
+    `finish_reason=${choice.finish_reason ?? 'unknown'}`,
+    `content_present=${Boolean(choice.message?.content)}`,
+    `reasoning_present=${Boolean(choice.message?.reasoning)}`,
+    `reasoning_details_count=${choice.message?.reasoning_details?.length ?? 0}`,
+  ];
+  return parts.join(', ');
 }
 
 export async function generateCompletion(
@@ -102,12 +135,32 @@ export async function generateCompletion(
 
     //console.log('OpenRouter Response:', JSON.stringify(data, null, 2));
 
-    if (!data.choices?.[0]?.message?.content) {
-      throw new OpenRouterError(`Invalid response format from OpenRouter API: ${JSON.stringify(data)}`);
+    const choice = data.choices?.[0];
+    const message = choice?.message;
+    let content = message?.content?.trim() || '';
+
+    // Some providers return null content with reasoning text instead.
+    if (!content && message?.reasoning) {
+      content = message.reasoning.trim();
+    }
+    if (!content && message?.reasoning_details?.length) {
+      const reasoningText = message.reasoning_details
+        .map((d) => d?.text || '')
+        .filter(Boolean)
+        .join('\n')
+        .trim();
+      if (reasoningText) content = reasoningText;
+    }
+
+    if (!content) {
+      const summary = summarizeChoice(choice);
+      const baseMessage = `Model returned no usable content (${summary})`;
+      const status = choice?.finish_reason === 'length' ? 502 : 503;
+      throw new OpenRouterError(baseMessage, status, data);
     }
 
     return {
-      content: data.choices[0].message.content,
+      content,
       usage: {
         promptTokens: data.usage?.prompt_tokens ?? 0,
         completionTokens: data.usage?.completion_tokens ?? 0,
@@ -137,7 +190,21 @@ export async function generateStructured<T>(
     const data = JSON.parse(result.content) as T;
     return { data, usage: result.usage };
   } catch {
-    throw new OpenRouterError('Failed to parse JSON response from OpenRouter API');
+    const extracted = extractJsonObjectFromText(result.content);
+    if (extracted) {
+      try {
+        const data = JSON.parse(extracted) as T;
+        return { data, usage: result.usage };
+      } catch {
+        // Fall through to structured error below.
+      }
+    }
+
+    const preview = result.content.slice(0, 300).replace(/\s+/g, ' ').trim();
+    throw new OpenRouterError(
+      `Failed to parse JSON response from OpenRouter API. Preview: ${preview || '[empty response]'}`,
+      502
+    );
   }
 }
 

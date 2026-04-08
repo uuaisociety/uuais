@@ -8,6 +8,15 @@ import type { Course } from '@/lib/courses';
 
 const DEFAULT_PAGE_SIZE = 50;
 const MAX_PAGE_SIZE = 50;
+const COURSE_LIST_CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+type CourseListCacheEntry = {
+    data: PaginatedCourses;
+    expiresAt: number;
+};
+
+const paginatedCoursesCache = new Map<string, CourseListCacheEntry>();
+const individualCourseCache = new Map<string, Course>();
 
 export interface PaginatedCourses {
     courses: Course[];
@@ -44,6 +53,13 @@ export async function fetchCoursesClient(options: FetchCoursesOptions = {}): Pro
     params.set('limit', String(clampedLimit));
     if (search) params.set('search', search);
     if (level && level !== 'all') params.set('level', level);
+    const cacheKey = params.toString();
+    const now = Date.now();
+    const cached = paginatedCoursesCache.get(cacheKey);
+    if (cached && cached.expiresAt > now) {
+        return cached.data;
+    }
+
     const res = await fetch(`/api/courses?${params.toString()}`, {
         // Enable Next.js data caching
         headers: { Authorization: `Bearer ${token}` },
@@ -53,7 +69,16 @@ export async function fetchCoursesClient(options: FetchCoursesOptions = {}): Pro
         throw new Error('Failed to fetch courses');
     }
     
-    return res.json();
+    const data = await res.json();
+    paginatedCoursesCache.set(cacheKey, {
+        data,
+        expiresAt: now + COURSE_LIST_CACHE_TTL_MS,
+    });
+    for (const course of data.courses) {
+        individualCourseCache.set(course.id, course);
+    }
+
+    return data;
 }
 
 /**
@@ -76,4 +101,46 @@ export async function fetchAllCoursesClient(token: string): Promise<Course[]> {
     }
     
     return allCourses;
+}
+
+/**
+ * Fetch specific courses by ID while avoiding duplicate requests.
+ */
+export async function fetchCoursesByIdsClient(ids: string[], token?: string): Promise<Course[]> {
+    const uniqueIds = Array.from(new Set(ids)).filter(Boolean);
+    if (uniqueIds.length === 0) return [];
+
+    const missingIds = uniqueIds.filter((id) => !individualCourseCache.has(id));
+    if (missingIds.length > 0) {
+        const res = await fetch('/api/courses/batch', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+            body: JSON.stringify({ ids: missingIds }),
+        });
+
+        if (!res.ok) {
+            throw new Error('Failed to fetch batch courses');
+        }
+
+        const data = await res.json() as { courses: Course[] };
+        for (const course of data.courses) {
+            individualCourseCache.set(course.id, course);
+        }
+    }
+
+    return uniqueIds
+        .map((id) => individualCourseCache.get(id))
+        .filter((course): course is Course => Boolean(course));
+}
+
+/**
+ * Seed course cache from already loaded UI data.
+ */
+export function primeCourseClientCache(courses: Course[]): void {
+    for (const course of courses) {
+        individualCourseCache.set(course.id, course);
+    }
 }
