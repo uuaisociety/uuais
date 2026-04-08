@@ -150,6 +150,7 @@ export const Header: React.FC = () => {
                           >
                             Course Navigator
                           </Link>
+                          {/*
                           <Link
                             href="/study-plan"
                             onClick={() => setIsProjectsOpen(false)}
@@ -157,6 +158,7 @@ export const Header: React.FC = () => {
                           >
                             Study Plan Graph
                           </Link>
+                          */} 
                         </div>
                       )}
                     </div>

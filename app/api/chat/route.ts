@@ -14,16 +14,17 @@ interface ChatRequest {
 export async function POST(req: NextRequest) {
   try {
     // Debug: Log cookies and auth config
+    /*
     console.log('[chat] Cookies:', req.cookies.getAll().map(c => c.name));
     console.log('[chat] AuthConfig:', {
       apiKey: authConfig.apiKey ? 'set' : 'missing',
       cookieName: authConfig.cookieName,
       hasServiceAccount: !!authConfig.serviceAccount,
     });
-
+    */
     // Verify Firebase auth using next-firebase-auth-edge
     const tokens = await getTokens(req.cookies, authConfig);
-    console.log('[chat] Tokens result:', tokens ? { uid: tokens.decodedToken.uid } : null);
+    //console.log('[chat] Tokens result:', tokens ? { uid: tokens.decodedToken.uid } : null);
     
     if (!tokens) {
       return NextResponse.json(
@@ -117,11 +118,16 @@ export async function POST(req: NextRequest) {
     
     if (error instanceof OpenRouterError) {
       const statusCode = error.statusCode || 503;
+      const type = statusCode === 401 ? 'api_key' : 'server';
+      const userMessage =
+        type === 'api_key'
+          ? 'AI provider authentication failed. Please contact an admin.'
+          : 'The AI service is temporarily unavailable. Please try again in a moment.';
       return NextResponse.json(
         { 
           error: 'AI service error', 
-          message: error.message,
-          type: statusCode === 401 ? 'api_key' : 'server'
+          message: userMessage,
+          type
         },
         { status: statusCode }
       );
