@@ -50,9 +50,13 @@ if (!admin.apps.length) {
       privateKey: cleanKey,
       projectId,
     });
-    //}
 
-    admin.initializeApp({ credential });
+    // Determine storage bucket: explicit env var preferred, otherwise
+    // fall back to the common default <projectId>.appspot.com.
+    const storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || `${projectId}.appspot.com`;
+
+    admin.initializeApp({ credential, storageBucket });
+    console.log('Firebase Admin SDK initialized successfully for project:', projectId, 'storageBucket:', storageBucket);
     console.log('Firebase Admin SDK initialized successfully for project:', projectId);
   } catch (error) {
     console.error('Failed to initialize Firebase Admin SDK:', error);

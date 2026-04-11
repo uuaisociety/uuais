@@ -10,13 +10,13 @@ const buttonVariants = cva(
   "cursor-pointer relative z-0 rounded-[10px] transition-all duration-300 ease-in-out shadow-lg inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium disabled:pointer-events-none disabled:opacity-50 outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
   {
     variants: {
-      variant: {
+      variant: { 
         default: [
-          "bg-gradient-to-r from-gray-200 to-gray-100",   // default light gradient
-          "dark:from-gray-700 dark:to-gray-600",     // default dark gradient
-          "text-gray-800 dark:text-white",
-          "border border-gray-400/60 dark:border-gray-700", // Add a small border in light mode
-        ].join(" "),        
+          "bg-white dark:bg-gray-800 text-red-600 dark:text-white",
+          "border border-red-200 dark:border-gray-700",
+          "hover:bg-red-600 hover:text-white",
+          "focus-visible:ring-red-300",
+        ].join(" "), 
         destructive:
           "bg-destructive/60 hover:bg-destructive/90 text-white shadow-xs focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
         outline:
@@ -27,7 +27,7 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         cta:
-          "glow-on-hover bg-gradient-to-r from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-600 text-black dark:text-white shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.99] transition-transform before:absolute before:inset-0 before:bg-white/10 before:opacity-0 hover:before:opacity-100",
+          "bg-red-600 text-white shadow-lg hover:bg-red-700 active:scale-[0.99] transition-transform",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -70,10 +70,31 @@ function Button({
 }: ButtonProps) {
   const Comp = asChild ? Slot : "button"
 
+  const classes = cn(buttonVariants({ variant, size, fullWidth }), className)
+
+  if (asChild) {
+    // Ensure there's exactly one child element when using `asChild`.
+    const child = React.Children.only(children) as React.ReactElement
+    const childClass = cn((child.props && child.props.className) || '', classes)
+    const mergedProps = { ...props, className: childClass, disabled: disabled || isLoading }
+
+    const inner = (
+      <>
+        {isLoading && (
+          <div className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+        )}
+        {Icon && !isLoading && <Icon className="size-4" />}
+        {child.props && child.props.children}
+      </>
+    )
+
+    return React.cloneElement(child, mergedProps, inner)
+  }
+
   return (
-    <Comp
+    <button
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, fullWidth, className }))}
+      className={classes}
       disabled={disabled || isLoading}
       {...props}
     >
@@ -82,7 +103,7 @@ function Button({
       )}
       {Icon && !isLoading && <Icon className="size-4" />}
       {children}
-    </Comp>
+    </button>
   )
 }
 

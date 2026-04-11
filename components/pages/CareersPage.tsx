@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from 'next/link';
 import DOMPurify from 'dompurify';
 import { useApp } from "@/contexts/AppContext";
 import { Card, CardContent } from "@/components/ui/Card";
@@ -74,6 +75,11 @@ export default function CareersPage() {
             <p>
               To post a role here contact us at <a className="underline" href="mailto:alexander.anderson@uuais.com">alexander.anderson@uuais.com</a>.
             </p>
+          </div>
+          <div className="mt-4">
+            <Link href="/board-apply" className="px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium">
+              <Button variant="cta">Apply for Board Position</Button>
+            </Link>
           </div>
         </header>
 
