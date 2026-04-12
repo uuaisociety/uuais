@@ -9,9 +9,12 @@ import { Button } from '@/components/ui/Button';
 export default function BoardApplicationPage() {
   // Example board roles — replace with dynamic data later
   const roles = [
-    { id: 'chair', title: 'Chair', short: 'Lead the committee and run meetings', description: 'Responsible for overall leadership, meeting facilitation, and representing the committee externally.' },
-    { id: 'tech', title: 'Technical Lead', short: 'Maintain tech infra and events', description: 'Responsible for projects requiring technical coordination, infrastructure, and mentorship for technical initiatives.' },
-    { id: 'events', title: 'Events Coordinator', short: 'Plan and run events', description: 'Organizes workshops, seminars, and community events; manages logistics and partners.' },
+    { id: 'chair', title: 'Chairman of the Board 2026', short: '', description: 'Responsible for overall leadership, meeting facilitation, mentorship, and representing the association to internal and external stakeholders.' },
+    { id: 'vice-chair', title: 'Vice Chairman of the Board 2026', short: '', description: 'Second-highest management role, for technical coordination, decision-making and mentorship.' },
+    { id: 'b4', title: 'Head of Internal IT 2026', short: '', description: 'Management of IT services of UU AI Society, such as the website and technological assets.' },
+    { id: 'b1', title: 'Head of Development 2026', short: '', description: 'Managing development, and a team of driven minds to develop ideas for tech-based projects built at UU AI Society.'},
+    { id: 'b2', title: 'Head of Partnerships & Events 2026', short: '', description: 'Planning and Coordinating Events and Communication with Partner Organizations.' },
+    { id: 'b3', title: 'Head of Growth 2026', short: '', description: 'Organizes workshops, seminars, and community events; manages marketing through social media and other outlets, along with communication with participants and visitors.' },
   ];
 
   type FormState = {
@@ -136,7 +139,13 @@ export default function BoardApplicationPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12">
-      <div className="max-w-3xl mx-auto px-4">
+      <div className="max-w-3xl mx-auto px-4 space-y-2">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Open Positions</h2>
+        <div className="text-gray-700 dark:text-gray-300 space-y-2 mt-2">
+            <p>
+              Apply now!
+            </p>
+          </div>
         <div className="space-y-4">
           {roles.map((r) => {
             const f = forms[r.id];
