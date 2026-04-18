@@ -11,8 +11,8 @@ async function saveFileToStorage(file: File, destPath: string) {
   const bucket = admin.storage().bucket();
   const gfile = bucket.file(destPath);
   await gfile.save(buffer, { metadata: { contentType: file.type || 'application/octet-stream' } });
-  // Generate a signed read URL valid for 30 days
-  const expires = Date.now() + 30 * 24 * 60 * 60 * 1000;
+  // Generate a signed read URL valid for 40 days
+  const expires = Date.now() + 40 * 24 * 60 * 60 * 1000;
   const [url] = await gfile.getSignedUrl({ action: 'read', expires });
   return { path: destPath, url };
 }
@@ -27,9 +27,13 @@ export async function POST(req: Request) {
     const agree = form.get('agree') === 'true' || form.get('agree') === 'on';
     const coverOption = (form.get('coverOption') as string) || 'text';
     const coverText = (form.get('coverText') as string) || '';
+    const role = (form.get('role') as string) || '';
 
     if (!name || !email) {
       return NextResponse.json({ error: 'Missing name or email' }, { status: 400 });
+    }
+    if (!role) {
+      return NextResponse.json({ error: 'Role is required' }, { status: 400 });
     }
     if (!agree) {
       return NextResponse.json({ error: 'Agreement required' }, { status: 400 });
@@ -73,6 +77,7 @@ export async function POST(req: Request) {
     const doc = {
       name,
       email,
+      role,
       phone,
       agree: true,
       cv: savedCv,
@@ -90,6 +95,7 @@ export async function POST(req: Request) {
       id: ref.id,
       name,
       email,
+      role,
       phone,
       agree: true,
       cv: savedCv,

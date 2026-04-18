@@ -7,14 +7,37 @@ import { Textarea } from '@/components/ui/Textarea';
 import { Button } from '@/components/ui/Button';
 
 export default function BoardApplicationPage() {
-  // Example board roles — replace with dynamic data later
   const roles = [
-    { id: 'chair', title: 'Chairman of the Board 2026', short: '', description: 'Responsible for overall leadership, meeting facilitation, mentorship, and representing the association to internal and external stakeholders.' },
-    { id: 'vice-chair', title: 'Vice Chairman of the Board 2026', short: '', description: 'Second-highest management role, for technical coordination, decision-making and mentorship.' },
-    { id: 'b4', title: 'Head of Internal IT 2026', short: '', description: 'Management of IT services of UU AI Society, such as the website and technological assets.' },
-    { id: 'b1', title: 'Head of Development 2026', short: '', description: 'Managing development, and a team of driven minds to develop ideas for tech-based projects built at UU AI Society.'},
-    { id: 'b2', title: 'Head of Partnerships & Events 2026', short: '', description: 'Planning and Coordinating Events and Communication with Partner Organizations.' },
-    { id: 'b3', title: 'Head of Growth 2026', short: '', description: 'Organizes workshops, seminars, and community events; manages marketing through social media and other outlets, along with communication with participants and visitors.' },
+    { 
+      id: 'chairman2026', 
+      title: 'Chairman of the Board 2026', 
+      short: 'Deadline: 2026-05-10', 
+      description: 'Responsible for overall leadership, meeting facilitation, mentorship, and representing UU AI Society to internal and external stakeholders.' },
+    { 
+      id: 'vice-chairman2026', 
+      title: 'Vice Chairman of the Board 2026', 
+      short: 'Deadline: 2026-05-10', 
+      description: 'Second-highest management role, for technical coordination, decision-making and mentorship of the board members and members in UU AI Society.' },
+    { 
+      id: 'head-of-internal-it2026', 
+      title: 'Head of Internal IT 2026', 
+      short: 'Deadline: 2026-05-10', 
+      description: 'Management of IT services of UU AI Society, such as the website and technological assets.' },
+    { 
+      id: 'head-of-dev2026', 
+      title: 'Head of Development 2026', 
+      short: 'Deadline: 2026-05-10', 
+      description: 'Managing development, and a team of driven minds to develop ideas for tech-based projects built at UU AI Society.'},
+    { 
+      id: 'head-of-partnerships-and-events2026', 
+      title: 'Head of Partnerships & Events 2026', 
+      short: 'Deadline: 2026-05-10', 
+      description: 'As a Head of Partnerships & Events, you are in-charge of planning and coordinating events, along with fostering communication and collaborating with partner organizations.' },
+    { 
+      id: 'head-of-growth2026', 
+      title: 'Head of Growth 2026', 
+      short: 'Deadline: 2026-05-10', 
+      description: 'Organizing workshops, seminars, talks and community events by UU AI Society. In this role, you shall also manage marketing through social media and other outlets, along with communication with participants and visitors.' },
   ];
 
   type FormState = {
@@ -55,15 +78,26 @@ export default function BoardApplicationPage() {
   const [openRole, setOpenRole] = useState<string | null>(null);
 
   useEffect(() => {
-    const u = auth.currentUser;
-    if (!u) return;
-    setForms(prev => {
-      const next = { ...prev };
-      Object.keys(next).forEach(k => {
-        next[k] = { ...next[k], name: u.displayName || next[k].name, email: u.email || next[k].email, phone: (u as any).phoneNumber || next[k].phone };
+    // Listen for auth state changes and prefill name/email/phone when available.
+    // Only set fields if they're empty so we don't overwrite user-typed values.
+    const unsubscribe = auth.onAuthStateChanged((u) => {
+      if (!u) return;
+      setForms((prev) => {
+        const next: Record<string, FormState> = { ...prev };
+        Object.keys(next).forEach((k) => {
+          const cur = next[k];
+          next[k] = {
+            ...cur,
+            name: cur.name && cur.name.trim() ? cur.name : (u.displayName || cur.name),
+            email: cur.email && cur.email.trim() ? cur.email : (u.email || cur.email),
+            phone: cur.phone && String(cur.phone).trim() ? cur.phone : ((u as any).phoneNumber || cur.phone),
+          };
+        });
+        return next;
       });
-      return next;
     });
+
+    return () => unsubscribe();
   }, []);
  
 
@@ -141,11 +175,11 @@ export default function BoardApplicationPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12">
       <div className="max-w-3xl mx-auto px-4 space-y-2">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Open Positions</h2>
-        <div className="text-gray-700 dark:text-gray-300 space-y-2 mt-2">
-            <p>
-              Apply now!
-            </p>
-          </div>
+        <div className="text-gray-700 dark:text-gray-300 space-y-5 mt-2 mb-10">
+          <p>
+            Apply now for our board positions ahead of the Spring General Assembly 2026! For specific clarifications or queries regarding our roles, drop us a mail at <a className="underline" href="mailto:contact@uuais.com">contact@uuais.com</a>.
+          </p>
+        </div>
         <div className="space-y-4">
           {roles.map((r) => {
             const f = forms[r.id];
