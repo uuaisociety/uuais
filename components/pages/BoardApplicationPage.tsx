@@ -196,9 +196,9 @@ export default function BoardApplicationPage() {
                 <div>
                   <button
                     onClick={() => setOpenRole(openRole === r.id ? null : r.id)}
-                    className="text-sm text-red-600 hover:underline"
+                    className="text-sm text-red-600 hover:underline cursor-pointer transition-all duration-200"
                   >
-                    {openRole === r.id ? 'Collapse' : 'Apply'}
+                    {openRole === r.id ? 'Close' : 'Apply'}
                   </button>
                 </div>
               </div>
