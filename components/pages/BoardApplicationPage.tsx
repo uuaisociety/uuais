@@ -203,79 +203,83 @@ export default function BoardApplicationPage() {
                 </div>
               </div>
 
-              {openRole === r.id && (
-                <div className="mt-4 border-t pt-4">
-                  <div className="prose prose-sm dark:prose-invert text-gray-700 dark:text-gray-300 mb-4">{r.description}</div>
+              <div
+                className={`grid overflow-hidden transition-all duration-700 ease-in-out ${openRole === r.id ? 'mt-4 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+              >
+                <div className="min-h-0">
+                  <div className="border-t pt-4">
+                    <div className="prose prose-sm dark:prose-invert text-gray-700 dark:text-gray-300 mb-4">{r.description}</div>
 
-                  {f?.submitted ? (
-                    <div className="rounded-md bg-green-50 border border-green-200 p-4">
-                      <div className="text-green-800">Your application for this role has been submitted. Thank you!</div>
-                    </div>
-                  ) : (
-                    <form onSubmit={(e) => onSubmit(e, r.title, r.id)} className="space-y-4">
-                      <div className="grid grid-cols-1 gap-4">
-                        <Input label="Name" value={f?.name || ''} onChange={e => setField(r.id, 'name', e.target.value)} error={f?.errors?.name} fullWidth />
-                        <Input label="Email" type="email" value={f?.email || ''} onChange={e => setField(r.id, 'email', e.target.value)} error={f?.errors?.email} fullWidth />
-                        <Input label="Phone" value={f?.phone || ''} onChange={e => setField(r.id, 'phone', e.target.value)} fullWidth />
+                    {f?.submitted ? (
+                      <div className="rounded-md bg-green-50 border border-green-200 p-4">
+                        <div className="text-green-800">Your application for this role has been submitted. Thank you!</div>
                       </div>
+                    ) : (
+                      <form onSubmit={(e) => onSubmit(e, r.title, r.id)} className="space-y-4">
+                        <div className="grid grid-cols-1 gap-4">
+                          <Input label="Name" value={f?.name || ''} onChange={e => setField(r.id, 'name', e.target.value)} error={f?.errors?.name} fullWidth />
+                          <Input label="Email" type="email" value={f?.email || ''} onChange={e => setField(r.id, 'email', e.target.value)} error={f?.errors?.email} fullWidth />
+                          <Input label="Phone" value={f?.phone || ''} onChange={e => setField(r.id, 'phone', e.target.value)} fullWidth />
+                        </div>
 
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">CV (PDF, max 3MB)</label>
-                        <div className="flex items-center gap-3">
-                          <label htmlFor={`cv-input-${r.id}`} className="m-0">
-                            <input id={`cv-input-${r.id}`} accept="application/pdf" type="file" className="hidden" onChange={(e) => setField(r.id, 'cvFile', e.target.files?.[0] || null)} />
-                            <Button asChild>
-                              <span>Upload CV</span>
-                            </Button>
-                          </label>
-                          <div className="text-sm text-gray-600 dark:text-gray-300">{f?.cvFile ? f.cvFile.name : 'No file chosen'}{f?.errors?.cv && <p className="mt-1 text-sm text-red-600">{f.errors.cv}</p>}</div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className="flex items-center gap-4 mb-2">
-                          <label className="text-sm font-medium">Cover letter</label>
-                          <div className="text-sm text-gray-500">(upload PDF or write concise text)</div>
-                        </div>
-                        <div className="flex items-center gap-4 mb-2">
-                          <label className="inline-flex items-center gap-2">
-                            <input type="radio" checked={f?.coverOption === 'text'} onChange={() => { setField(r.id, 'coverOption', 'text'); setField(r.id, 'coverFile', null); }} /> Write text
-                          </label>
-                          <label className="inline-flex items-center gap-2">
-                            <input type="radio" checked={f?.coverOption === 'file'} onChange={() => { setField(r.id, 'coverOption', 'file'); setField(r.id, 'coverText', ''); }} /> Upload PDF
-                          </label>
-                        </div>
-                        {f?.coverOption === 'text' ? (
-                          <Textarea label="Concise cover letter" value={f?.coverText || ''} onChange={(e) => setField(r.id, 'coverText', e.target.value)} />
-                        ) : (
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">CV (PDF, max 3MB)</label>
                           <div className="flex items-center gap-3">
-                            <label htmlFor={`cover-input-${r.id}`} className="m-0">
-                              <input id={`cover-input-${r.id}`} accept="application/pdf" type="file" className="hidden" onChange={(e) => setField(r.id, 'coverFile', e.target.files?.[0] || null)} />
+                            <label htmlFor={`cv-input-${r.id}`} className="m-0">
+                              <input id={`cv-input-${r.id}`} accept="application/pdf" type="file" className="hidden" onChange={(e) => setField(r.id, 'cvFile', e.target.files?.[0] || null)} />
                               <Button asChild>
-                                <span>Upload cover (PDF)</span>
+                                <span>Upload CV</span>
                               </Button>
                             </label>
-                            <div className="text-sm text-gray-600 dark:text-gray-300">{f?.coverFile ? f.coverFile.name : 'No file chosen'}</div>
-                            {//f?.errors?.cover && <p className="mt-1 text-sm text-red-600">{f.errors.cover}</p>
-                            }
+                            <div className="text-sm text-gray-600 dark:text-gray-300">{f?.cvFile ? f.cvFile.name : 'No file chosen'}{f?.errors?.cv && <p className="mt-1 text-sm text-red-600">{f.errors.cv}</p>}</div>
                           </div>
-                        )}
-                      </div>
+                        </div>
 
-                      <div className="flex items-start gap-3">
-                        <input id={`agree-${r.id}`} type="checkbox" checked={f?.agree || false} onChange={(e) => setField(r.id, 'agree', e.target.checked)} />
-                        <label htmlFor={`agree-${r.id}`} className="text-sm">I agree to the terms (see our <a href="/privacy" className="underline">Privacy Policy</a>).</label>
-                      </div>
-                      {f?.errors?.agree && <p className="mt-1 text-sm text-red-600">{f.errors.agree}</p>}
+                        <div>
+                          <div className="flex items-center gap-4 mb-2">
+                            <label className="text-sm font-medium">Cover letter</label>
+                            <div className="text-sm text-gray-500">(upload PDF or write concise text)</div>
+                          </div>
+                          <div className="flex items-center gap-4 mb-2">
+                            <label className="inline-flex items-center gap-2">
+                              <input type="radio" checked={f?.coverOption === 'text'} onChange={() => { setField(r.id, 'coverOption', 'text'); setField(r.id, 'coverFile', null); }} /> Write text
+                            </label>
+                            <label className="inline-flex items-center gap-2">
+                              <input type="radio" checked={f?.coverOption === 'file'} onChange={() => { setField(r.id, 'coverOption', 'file'); setField(r.id, 'coverText', ''); }} /> Upload PDF
+                            </label>
+                          </div>
+                          {f?.coverOption === 'text' ? (
+                            <Textarea label="Concise cover letter" value={f?.coverText || ''} onChange={(e) => setField(r.id, 'coverText', e.target.value)} />
+                          ) : (
+                            <div className="flex items-center gap-3">
+                              <label htmlFor={`cover-input-${r.id}`} className="m-0">
+                                <input id={`cover-input-${r.id}`} accept="application/pdf" type="file" className="hidden" onChange={(e) => setField(r.id, 'coverFile', e.target.files?.[0] || null)} />
+                                <Button asChild>
+                                  <span>Upload cover (PDF)</span>
+                                </Button>
+                              </label>
+                              <div className="text-sm text-gray-600 dark:text-gray-300">{f?.coverFile ? f.coverFile.name : 'No file chosen'}</div>
+                              {//f?.errors?.cover && <p className="mt-1 text-sm text-red-600">{f.errors.cover}</p>
+                              }
+                            </div>
+                          )}
+                        </div>
 
-                      {f?.errors?.form && <p className="text-sm text-red-600">{f.errors.form}</p>}
-                      <div className="pt-2">
-                        <Button type="submit" variant="cta" disabled={f?.isSubmitting || isSubmitting}>{(f?.isSubmitting || isSubmitting) ? 'Submitting…' : 'Submit application'}</Button>
-                      </div>
-                    </form>
-                  )}
+                        <div className="flex items-start gap-3">
+                          <input id={`agree-${r.id}`} type="checkbox" checked={f?.agree || false} onChange={(e) => setField(r.id, 'agree', e.target.checked)} />
+                          <label htmlFor={`agree-${r.id}`} className="text-sm">I agree to the terms (see our <a href="/privacy" className="underline">Privacy Policy</a>).</label>
+                        </div>
+                        {f?.errors?.agree && <p className="mt-1 text-sm text-red-600">{f.errors.agree}</p>}
+
+                        {f?.errors?.form && <p className="text-sm text-red-600">{f.errors.form}</p>}
+                        <div className="pt-2">
+                          <Button type="submit" variant="cta" disabled={f?.isSubmitting || isSubmitting}>{(f?.isSubmitting || isSubmitting) ? 'Submitting…' : 'Submit application'}</Button>
+                        </div>
+                      </form>
+                    )}
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
           )})}
         </div>
