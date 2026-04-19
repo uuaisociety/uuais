@@ -113,6 +113,18 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    // BOARD POSITIONS (public listing on apply page; admins manage)
+    match /board-positions/{positionId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // BOARD APPLICATIONS (submissions; API may write via Admin SDK — client read/list admin-only)
+    match /boardApplications/{applicationId} {
+      allow read: if isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
     // REGISTRATION QUESTIONS (global)
     match /registrationQuestions/{rqId} {
       allow read: if true;

@@ -17,14 +17,16 @@ import EventsTab from '@/components/pages/admin/tabs/EventsTab';
 import TeamTab from '@/components/pages/admin/tabs/TeamTab';
 import BlogTab from '@/components/pages/admin/tabs/BlogTab';
 import FAQTab from '@/components/pages/admin/tabs/FAQTab';
+import BoardTab from '@/components/pages/admin/tabs/BoardTab'
 import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import FAQModal from '@/components/pages/admin/modals/FAQModal';
 import BlogModal from '@/components/pages/admin/modals/BlogModal';
+import BoardPositionModal, { type BPositionFormState } from './modals/BoardPositionModal';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 //import { useAdmin } from '@/hooks/useAdmin';
 // format imported where needed in tab components
-import { BlogPost, Event, TeamMember, FAQ } from '@/types';
+import { BlogPost, Event, TeamMember, FAQ, BoardPosition } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
 import AISettingsTab from '@/components/pages/admin/tabs/AISettingsTab';
@@ -34,15 +36,16 @@ const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
   const [nrUsers, setNrUsers] = useState<number>(0);
   //const { user, logout } = useAdmin();
-  const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members' | 'jobs' | 'ai-settings'>('events');
+  const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members' | 'jobs' | 'ai-settings' | 'board-applications'>('board-applications');
   const placeholderImage = '/images/logo-highdef.png';
 
   // Modal states
   const [showBlogModal, setShowBlogModal] = useState(false);
   const [showFaqModal, setShowFaqModal] = useState(false);
+  const [showBoardPositionModal, setShowBoardPositionModal] = useState(false);
   const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | null>(null);
   const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
-
+  const [editingBoardPosition, setEditingBoardPosition] = useState<BoardPosition | null>(null);
   const [blogForm, setBlogForm] = useState({
     title: '',
     excerpt: '',
@@ -60,6 +63,12 @@ const AdminDashboard: React.FC = () => {
     category: 'General',
     order: state.faqs.length + 1,
     published: true,
+  });
+
+  const [boardPositionForm, setBoardPositionForm] = useState<BPositionFormState>({
+    title: '',
+    short: '',
+    description: ''
   });
 
   useEffect(() => {
@@ -112,6 +121,11 @@ const AdminDashboard: React.FC = () => {
       tags: [],
       published: false
     });
+    setBoardPositionForm({
+      title: '',
+      short: '',
+      description: ''
+    });
     setEditingItem(null);
   };
 
@@ -147,6 +161,33 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
+  const handleAddBoardPosition = () => {
+    dispatch({ firestoreAction: 'ADD_BOARDPOS', payload: { ...boardPositionForm } });
+    setShowBoardPositionModal(false);
+    setBoardPositionForm({ title: '', short: '', description: '' });
+  };
+
+  const handleUpdateBoardPosition = () => {
+    if (!editingBoardPosition) return;
+    dispatch({
+      firestoreAction: 'UPDATE_BOARDPOS',
+      payload: { id: editingBoardPosition.id, ...boardPositionForm } as BoardPosition,
+    });
+    setShowBoardPositionModal(false);
+    setEditingBoardPosition(null);
+  };
+
+  const handleDeleteBoardPosition = (id: string) => {
+    if (window.confirm('Delete this Board Position?')) {
+      dispatch({ firestoreAction: 'DELETE_BOARDPOS', payload: id });
+    }
+  };
+
+  const handleDeleteBoardApplication = (id: string) => {
+    if (window.confirm('Delete this application record?')) {
+      dispatch({ firestoreAction: 'DELETE_BOARD_APPLICATION', payload: id });
+    }
+  };
 
   const handleEditBlogPost = (post: BlogPost) => {
     setEditingItem(post);
@@ -225,6 +266,7 @@ const AdminDashboard: React.FC = () => {
                 { key: 'blog', label: 'Newsletter', icon: FileText },
                 { key: 'faq', label: 'FAQ', icon: FileText },
                 { key: 'analytics', label: 'Analytics', icon: TrendingUp },
+                { key: 'board-applications', label: "GA'26 Board Applications", icon: Users},
                 { key: 'members', label: 'Members', icon: Users },
                 { key: 'jobs', label: 'Jobs', icon: BriefcaseBusiness },
                 { key: 'ai-settings', label: 'AI Settings', icon: Bot },
@@ -298,6 +340,16 @@ const AdminDashboard: React.FC = () => {
               onDelete={(id) => handleDeleteFaq(id)}
             />
           )}
+          {activeTab === 'board-applications' && (
+            <BoardTab
+              applicants={state.applicants} 
+              boardPositions={state.boardPositions}
+              onAddClick={() => { setEditingBoardPosition(null); setBoardPositionForm({ title: '', short: '', description: '' }); setShowBoardPositionModal(true); }}
+              onEdit={(position) => { setEditingBoardPosition(position); setBoardPositionForm({ title: position.title, short: position.short, description: position.description }); setShowBoardPositionModal(true); }}
+              onDeletePosition={handleDeleteBoardPosition}
+              onDeleteApplicant={handleDeleteBoardApplication}
+            />
+          )}
           {activeTab === 'members' && (
             <MembersTab onChanged={() => { /* could trigger toast */ }} />
           )}
@@ -327,6 +379,16 @@ const AdminDashboard: React.FC = () => {
             editing={!!editingFaq}
             onAdd={handleAddFaq}
             onUpdate={handleUpdateFaq}
+          />
+
+          <BoardPositionModal
+            open={showBoardPositionModal}
+            onClose={() => { setShowBoardPositionModal(false); setEditingBoardPosition(null); }}
+            form={boardPositionForm}
+            setForm={setBoardPositionForm}
+            editing={!!editingBoardPosition}
+            onAdd={handleAddBoardPosition}
+            onUpdate={handleUpdateBoardPosition}
           />
 
         </div>

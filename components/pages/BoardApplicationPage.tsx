@@ -5,40 +5,43 @@ import { auth } from '@/lib/firebase-client';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Button } from '@/components/ui/Button';
+import { useApp } from "@/contexts/AppContext";
 
 export default function BoardApplicationPage() {
-  const roles = [
-    { 
-      id: 'chairman2026', 
-      title: 'Chairman of the Board 2026', 
-      short: 'Deadline: 2026-05-10', 
-      description: 'Responsible for overall leadership, meeting facilitation, mentorship, and representing UU AI Society to internal and external stakeholders.' },
-    { 
-      id: 'vice-chairman2026', 
-      title: 'Vice Chairman of the Board 2026', 
-      short: 'Deadline: 2026-05-10', 
-      description: 'Second-highest management role, for technical coordination, decision-making and mentorship of the board members and members in UU AI Society.' },
-    { 
-      id: 'head-of-internal-it2026', 
-      title: 'Head of Internal IT 2026', 
-      short: 'Deadline: 2026-05-10', 
-      description: 'Management of IT services of UU AI Society, such as the website and technological assets.' },
-    { 
-      id: 'head-of-dev2026', 
-      title: 'Head of Development 2026', 
-      short: 'Deadline: 2026-05-10', 
-      description: 'Managing development, and a team of driven minds to develop ideas for tech-based projects built at UU AI Society.'},
-    { 
-      id: 'head-of-partnerships-and-events2026', 
-      title: 'Head of Partnerships & Events 2026', 
-      short: 'Deadline: 2026-05-10', 
-      description: 'As a Head of Partnerships & Events, you are in-charge of planning and coordinating events, along with fostering communication and collaborating with partner organizations.' },
-    { 
-      id: 'head-of-growth2026', 
-      title: 'Head of Growth 2026', 
-      short: 'Deadline: 2026-05-10', 
-      description: 'Organizing workshops, seminars, talks and community events by UU AI Society. In this role, you shall also manage marketing through social media and other outlets, along with communication with participants and visitors.' },
-  ];
+  const { state } = useApp();
+  const roles = state.boardPositions;
+  // const roles = [
+  //   { 
+  //     id: 'chairman2026', 
+  //     title: 'Chairman of the Board 2026', 
+  //     short: 'Deadline: 2026-05-10', 
+  //     description: 'Responsible for overall leadership, meeting facilitation, mentorship, and representing UU AI Society to internal and external stakeholders.' },
+  //   { 
+  //     id: 'vice-chairman2026', 
+  //     title: 'Vice Chairman of the Board 2026', 
+  //     short: 'Deadline: 2026-05-10', 
+  //     description: 'Second-highest management role, for technical coordination, decision-making and mentorship of the board members and members in UU AI Society.' },
+  //   { 
+  //     id: 'head-of-internal-it2026', 
+  //     title: 'Head of Internal IT 2026', 
+  //     short: 'Deadline: 2026-05-10', 
+  //     description: 'Management of IT services of UU AI Society, such as the website and technological assets.' },
+  //   { 
+  //     id: 'head-of-dev2026', 
+  //     title: 'Head of Development 2026', 
+  //     short: 'Deadline: 2026-05-10', 
+  //     description: 'Managing development, and a team of driven minds to develop ideas for tech-based projects built at UU AI Society.'},
+  //   { 
+  //     id: 'head-of-partnerships-and-events2026', 
+  //     title: 'Head of Partnerships & Events 2026', 
+  //     short: 'Deadline: 2026-05-10', 
+  //     description: 'As a Head of Partnerships & Events, you are in-charge of planning and coordinating events, along with fostering communication and collaborating with partner organizations.' },
+  //   { 
+  //     id: 'head-of-growth2026', 
+  //     title: 'Head of Growth 2026', 
+  //     short: 'Deadline: 2026-05-10', 
+  //     description: 'Organizing workshops, seminars, talks and community events by UU AI Society. In this role, you shall also manage marketing through social media and other outlets, along with communication with participants and visitors.' },
+  // ];
 
   type FormState = {
     name: string;
@@ -127,7 +130,7 @@ export default function BoardApplicationPage() {
   };
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = async (ev: React.FormEvent, roleId?: string) => {
+  const onSubmit = async (ev: React.FormEvent, roleTitle: string, roleId?: string) => {
     ev.preventDefault();
     if (!roleId) return;
     if (!validateFor(roleId)) return;
@@ -145,7 +148,7 @@ export default function BoardApplicationPage() {
       if (f.cvFile) form.append('cv', f.cvFile, f.cvFile.name);
       if (f.coverOption === 'file' && f.coverFile) form.append('coverFile', f.coverFile, f.coverFile.name);
       if (f.coverOption === 'text') form.append('coverText', f.coverText);
-      form.append('role', roleId);
+      form.append('role', roleTitle);
       const res = await fetch('/api/board-apply', { method: 'POST', body: form });
       const json = await res.json();
       if (!res.ok) {
@@ -209,7 +212,7 @@ export default function BoardApplicationPage() {
                       <div className="text-green-800">Your application for this role has been submitted. Thank you!</div>
                     </div>
                   ) : (
-                    <form onSubmit={(e) => onSubmit(e, r.id)} className="space-y-4">
+                    <form onSubmit={(e) => onSubmit(e, r.title, r.id)} className="space-y-4">
                       <div className="grid grid-cols-1 gap-4">
                         <Input label="Name" value={f?.name || ''} onChange={e => setField(r.id, 'name', e.target.value)} error={f?.errors?.name} fullWidth />
                         <Input label="Email" type="email" value={f?.email || ''} onChange={e => setField(r.id, 'email', e.target.value)} error={f?.errors?.email} fullWidth />
@@ -261,7 +264,7 @@ export default function BoardApplicationPage() {
 
                       <div className="flex items-start gap-3">
                         <input id={`agree-${r.id}`} type="checkbox" checked={f?.agree || false} onChange={(e) => setField(r.id, 'agree', e.target.checked)} />
-                        <label htmlFor={`agree-${r.id}`} className="text-sm">I agree to terms (<a href="/privacy" className="underline">privacy policy</a>)</label>
+                        <label htmlFor={`agree-${r.id}`} className="text-sm">I agree to the terms (see our <a href="/privacy" className="underline">Privacy Policy</a>).</label>
                       </div>
                       {f?.errors?.agree && <p className="mt-1 text-sm text-red-600">{f.errors.agree}</p>}
 
