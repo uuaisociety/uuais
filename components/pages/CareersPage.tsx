@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import Link from 'next/link';
 import DOMPurify from 'dompurify';
 import { useApp } from "@/contexts/AppContext";
 import { Card, CardContent } from "@/components/ui/Card";
