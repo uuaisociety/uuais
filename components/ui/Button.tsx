@@ -28,6 +28,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         cta:
           "glow-on-hover bg-gradient-to-r from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-600 text-black dark:text-white shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.99] transition-transform before:absolute before:inset-0 before:bg-white/10 before:opacity-0 hover:before:opacity-100",
+        ctaSoft:
+          "glow-hover-only bg-gradient-to-r from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-600 text-black dark:text-white shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.99] transition-transform before:absolute before:inset-0 before:opacity-0 hover:before:opacity-100",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

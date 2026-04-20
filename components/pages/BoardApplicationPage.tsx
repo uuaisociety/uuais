@@ -214,7 +214,7 @@ export default function BoardApplicationPage() {
                 className={`grid overflow-hidden transition-all duration-700 ease-in-out ${openRole === r.id ? 'mt-4 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
               >
                 <div className="min-h-0">
-                  <div className="border-t pt-4">
+                  <div className="border-t pt-4 pl-4">
                     <div className="prose prose-sm dark:prose-invert text-gray-700 dark:text-gray-300 mb-4 whitespace-pre-wrap">{r.description}</div>
 
                     {f?.submitted ? (
@@ -290,8 +290,8 @@ export default function BoardApplicationPage() {
                         {f?.errors?.agree && <p className="mt-1 text-sm text-red-600">{f.errors.agree}</p>}
 
                         {f?.errors?.form && <p className="text-sm text-red-600">{f.errors.form}</p>}
-                        <div className="pt-2 pl-4 pb-4">
-                          <Button type="submit" variant="cta" disabled={f?.isSubmitting || isSubmitting}>{(f?.isSubmitting || isSubmitting) ? 'Submitting…' : 'Submit application'}</Button>
+                        <div className="pt-2  pb-4">
+                          <Button type="submit" variant="ctaSoft" disabled={f?.isSubmitting || isSubmitting}>{(f?.isSubmitting || isSubmitting) ? 'Submitting…' : 'Submit application'}</Button>
                         </div>
                       </form>
                     )}
