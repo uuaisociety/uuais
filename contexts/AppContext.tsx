@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { Event, TeamMember, BlogPost, FAQ, Job } from '../types';
+import { Event, TeamMember, BlogPost, FAQ, Job, BoardPosition, Application } from '../types';
 import { subscribeToEvents, addEvent as addEventToFirestore, updateEvent as updateEventInFirestore, deleteEvent as deleteEventFromFirestore } from '@/lib/firestore/events';
 import { auth } from '@/lib/firebase-client';
 import { onIdTokenChanged } from 'firebase/auth';
@@ -9,6 +9,8 @@ import { subscribeToTeamMembers, addTeamMember as addTeamMemberToFirestore, upda
 import { subscribeToBlogPosts, addBlogPost as addBlogPostToFirestore, updateBlogPost as updateBlogPostInFirestore, deleteBlogPost as deleteBlogPostFromFirestore } from '@/lib/firestore/blog';
 import { subscribeToFaqs, addFaq as addFaqToFirestore, updateFaq as updateFaqInFirestore, deleteFaq as deleteFaqFromFirestore } from '@/lib/firestore/faqs';
 import { subscribeToJobs, addJob as addJobToFirestore, updateJob as updateJobInFirestore, deleteJob as deleteJobFromFirestore } from '@/lib/firestore/jobs';
+import { deleteBoardApplication, subscribeToBoardApplications } from '@/lib/firestore/boardApplications';
+import { subscribeToPositions, addPosition as addPositionToFirestore, updatePosition as updatePositionInFirestore, deletePosition as deletePositionFromFirestore} from '@/lib/firestore/board-positions'
 
 interface AppState {
   events: Event[];
@@ -16,6 +18,8 @@ interface AppState {
   blogPosts: BlogPost[];
   faqs: FAQ[];
   jobs: Job[];
+  boardPositions: BoardPosition[];
+  applicants: Application[];
   isLoading: boolean;
   error: string | null;
 }
@@ -39,10 +43,15 @@ type AppAction =
   | { type: 'ADD_FAQS'; payload: FAQ }
   | { type: 'UPDATE_FAQS'; payload: FAQ }
   | { type: 'DELETE_FAQS'; payload: string }
+  | { type: 'SET_BOARDPOS'; payload: BoardPosition[] }
+  | { type: 'ADD_BOARDPOS'; payload: BoardPosition }
+  | { type: 'UPDATE_BOARDPOS'; payload: BoardPosition }
+  | { type: 'DELETE_BOARDPOS'; payload: string }
   | { type: 'SET_JOBS'; payload: Job[] }
   | { type: 'ADD_JOB'; payload: Job }
   | { type: 'UPDATE_JOB'; payload: Job }
-  | { type: 'DELETE_JOB'; payload: string };
+  | { type: 'DELETE_JOB'; payload: string }
+  | { type: 'SET_APPLICANTS'; payload: Application[] };
 
 type FirestoreAction = 
   | { firestoreAction: 'ADD_EVENT'; payload: Omit<Event, 'id'> }
@@ -57,9 +66,13 @@ type FirestoreAction =
   | { firestoreAction: 'ADD_FAQS'; payload: Omit<FAQ, 'id'> }
   | { firestoreAction: 'UPDATE_FAQS'; payload: FAQ }
   | { firestoreAction: 'DELETE_FAQS'; payload: string }
+  | { firestoreAction: 'ADD_BOARDPOS'; payload: Omit<BoardPosition, 'id'> }
+  | { firestoreAction: 'UPDATE_BOARDPOS'; payload: BoardPosition }
+  | { firestoreAction: 'DELETE_BOARDPOS'; payload: string }
   | { firestoreAction: 'ADD_JOB'; payload: Omit<Job, 'id' | 'createdAt'> }
   | { firestoreAction: 'UPDATE_JOB'; payload: Job }
-  | { firestoreAction: 'DELETE_JOB'; payload: string };
+  | { firestoreAction: 'DELETE_JOB'; payload: string }
+  | { firestoreAction: 'DELETE_BOARD_APPLICATION'; payload: string };
 
 const initialState: AppState = {
   events: [],
@@ -67,6 +80,8 @@ const initialState: AppState = {
   blogPosts: [],
   faqs: [],
   jobs: [],
+  boardPositions: [],
+  applicants: [],
   isLoading: false,
   error: null
 };
@@ -153,6 +168,22 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         jobs: state.jobs.filter(j => j.id !== action.payload)
       };
+    case 'SET_BOARDPOS':
+      return { ...state, boardPositions: action.payload };
+    case 'ADD_BOARDPOS':
+      return { ...state, boardPositions: [...state.boardPositions, action.payload] };
+    case 'UPDATE_BOARDPOS':
+      return {
+        ...state,
+        boardPositions: state.boardPositions.map(j => j.id === action.payload.id ? action.payload : j)
+      };
+    case 'DELETE_BOARDPOS':
+      return {
+        ...state,
+        boardPositions: state.boardPositions.filter(j => j.id !== action.payload)
+      };
+    case 'SET_APPLICANTS':
+      return { ...state, applicants: action.payload };
     default:
       return state;
   }
@@ -171,6 +202,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     // Track the unsubscribe function for events so we can re-subscribe when admin status changes
     let unsubscribeEvents: (() => void) | null = null;
     let unsubscribeJobs: (() => void) | null = null;
+    let unsubscribeBoardPositions: (() => void) | null = null;
+    let unsubscribeBoardApplications: (() => void) | null = null;
 
     const subscribe = (includeUnpublished = false) => {
       // includeUnpublished: boolean indicates admin status
@@ -192,6 +225,25 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         dispatch({ type: 'SET_JOBS', payload: jobs });
       }, { includeUnpublished });
 
+      if (unsubscribeBoardPositions) {
+        try { unsubscribeBoardPositions(); } catch { /* ignore */ }
+        unsubscribeBoardPositions = null;
+      }
+      unsubscribeBoardPositions = subscribeToPositions((positions) => {
+        dispatch({ type: 'SET_BOARDPOS', payload: positions });
+      });
+
+      if (unsubscribeBoardApplications) {
+        try { unsubscribeBoardApplications(); } catch { /* ignore */ }
+        unsubscribeBoardApplications = null;
+      }
+      if (includeUnpublished) {
+        unsubscribeBoardApplications = subscribeToBoardApplications((applications) => {
+          dispatch({ type: 'SET_APPLICANTS', payload: applications as Application[] });
+        });
+      } else {
+        dispatch({ type: 'SET_APPLICANTS', payload: [] });
+      }
     };
 
     // Initial subscription: assume not admin (public)
@@ -229,6 +281,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     return () => {
       if (unsubscribeEvents) {
         try { unsubscribeEvents(); } catch { /* ignore */ }
+      }
+      if (unsubscribeJobs) {
+        try { unsubscribeJobs(); } catch { /* ignore */ }
+      }
+      if (unsubscribeBoardPositions) {
+        try { unsubscribeBoardPositions(); } catch { /* ignore */ }
+      }
+      if (unsubscribeBoardApplications) {
+        try { unsubscribeBoardApplications(); } catch { /* ignore */ }
       }
       unsubscribeTeamMembers();
       unsubscribeBlogPosts();
@@ -283,6 +344,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
           case 'DELETE_FAQS':
             await deleteFaqFromFirestore(action.payload);
             break;
+          case 'ADD_BOARDPOS':
+            await addPositionToFirestore(action.payload);
+            break;
+          case 'UPDATE_BOARDPOS':
+            await updatePositionInFirestore(action.payload.id, action.payload);
+            break;
+          case 'DELETE_BOARDPOS':
+            await deletePositionFromFirestore(action.payload);
+            break;
           case 'ADD_JOB':
             await addJobToFirestore(action.payload);
             break;
@@ -291,6 +361,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             break;
           case 'DELETE_JOB':
             await deleteJobFromFirestore(action.payload);
+            break;
+          case 'DELETE_BOARD_APPLICATION':
+            await deleteBoardApplication(action.payload);
             break;
         }
       } else {

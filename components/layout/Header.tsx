@@ -120,6 +120,15 @@ export const Header: React.FC = () => {
                       {item.name}
                     </Link>
                   ))}
+                  <Link
+                    href="/board-apply"
+                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/board-apply')
+                      ? 'text-gray-700 dark:text-gray-300 bg-red-600/20'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                      }`}
+                  >
+                    Join the Board!
+                  </Link>
                   {isAdmin && (
                     <div key="Projects" className="relative" ref={projectsRef}>
                       <button
@@ -213,6 +222,16 @@ export const Header: React.FC = () => {
                     {item.name}
                   </Link>
                 ))}
+                <Link
+                  href="/board-apply"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${isActive('/board-apply')
+                    ? 'text-gray-700 dark:text-gray-300 bg-red-600/20'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                    }`}
+                >
+                  Join the Board!
+                </Link>
                 {isAdmin && (
                   <>
                     <Link

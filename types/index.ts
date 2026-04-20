@@ -179,3 +179,28 @@ export interface Job {
   published: boolean;
   createdAt?: Timestamp; // ISO string for client convenience
 }
+
+export interface BoardPosition {
+  id: string;
+  title: string;
+  short: string;
+  description: string;
+}
+
+export interface Application {
+  id: string;
+  name: string;
+  email: string;
+  /** normalized lowercased email used for server-side limits */
+  emailNormalized?: string;
+  phone?: string;
+  role: string;
+  /** stable role id (matches `BoardPosition.id`) when available */
+  roleId?: string;
+  cv?: { path?: string; url?: string } | null;
+  coverOption?: 'text' | 'file';
+  coverText?: string | null;
+  coverFile?: { path?: string; url?: string } | null;
+  /** ISO string from some writes; Firestore Timestamp from server / API */
+  createdAt?: string | Timestamp;
+};
