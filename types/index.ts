@@ -185,6 +185,7 @@ export interface BoardPosition {
   title: string;
   short: string;
   description: string;
+  order: number;
 }
 
 export interface Application {

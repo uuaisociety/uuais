@@ -13,7 +13,7 @@ function formatApplicationDate(createdAt: Application["createdAt"]): string {
   return createdAt.toDate().toDateString();
 }
 import { Card, CardContent } from "@/components/ui/Card";
-import { Edit3, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
+import { Edit3, Plus, Trash2, ChevronDown, ChevronUp, ArrowUp, ArrowDown } from "lucide-react";
 import Link from "next/link";
 
 export interface ApplicationProps {
@@ -23,6 +23,7 @@ export interface ApplicationProps {
   onEdit: (position: BoardPosition) => void;
   onDeletePosition: (id: string) => void;
   onDeleteApplicant: (id: string) => void;
+  onMovePosition: (positionId: string, direction: 'up' | 'down') => void;
 }
 
 const BoardTab: React.FC<ApplicationProps> = ({
@@ -32,6 +33,7 @@ const BoardTab: React.FC<ApplicationProps> = ({
   onEdit,
   onDeletePosition,
   onDeleteApplicant,
+  onMovePosition,
 }) => {
   const [expandedDescriptions, setExpandedDescriptions] = useState<Set<string>>(new Set());
   const [expandedCoverLetters, setExpandedCoverLetters] = useState<Set<string>>(new Set());
@@ -61,7 +63,7 @@ const BoardTab: React.FC<ApplicationProps> = ({
         <Button icon={Plus} onClick={onAddClick}>Add new position</Button>
       </div>
       <div className="grid gap-4 mb-6">
-        {boardPositions.length > 0 ? boardPositions.map((position) => (
+        {boardPositions.length > 0 ? boardPositions.map((position, index) => (
           <Card key={position.id} className='bg-white dark:bg-gray-800 text-black dark:text-white'>
             <CardContent className="p-6">
               <div className="flex justify-between">
@@ -79,7 +81,29 @@ const BoardTab: React.FC<ApplicationProps> = ({
                     <div className="text-sm text-gray-500 dark:text-gray-400 mt-2 whitespace-pre-wrap">{position.description}</div>
                   )}
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 items-start">
+                  <div className="flex flex-col gap-1">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      icon={ArrowUp}
+                      onClick={() => onMovePosition(position.id, 'up')}
+                      disabled={index === 0}
+                      title="Move up"
+                    >
+                      <span className="sr-only">Move up</span>
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      icon={ArrowDown}
+                      onClick={() => onMovePosition(position.id, 'down')}
+                      disabled={index === boardPositions.length - 1}
+                      title="Move down"
+                    >
+                      <span className="sr-only">Move down</span>
+                    </Button>
+                  </div>
                   <Button size="sm" variant="outline" icon={Edit3} onClick={() => onEdit(position)}>Edit</Button>
                   <Button size="sm" variant="destructive" icon={Trash2} onClick={() => onDeletePosition(position.id)}>
                     Delete

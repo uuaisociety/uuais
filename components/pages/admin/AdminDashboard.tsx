@@ -189,6 +189,10 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
+  const handleMoveBoardPosition = (positionId: string, direction: 'up' | 'down') => {
+    dispatch({ firestoreAction: 'MOVE_BOARDPOS', payload: { positionId, direction } });
+  };
+
   const handleEditBlogPost = (post: BlogPost) => {
     setEditingItem(post);
     setBlogForm({
@@ -348,6 +352,7 @@ const AdminDashboard: React.FC = () => {
               onEdit={(position) => { setEditingBoardPosition(position); setBoardPositionForm({ title: position.title, short: position.short, description: position.description }); setShowBoardPositionModal(true); }}
               onDeletePosition={handleDeleteBoardPosition}
               onDeleteApplicant={handleDeleteBoardApplication}
+              onMovePosition={handleMoveBoardPosition}
             />
           )}
           {activeTab === 'members' && (

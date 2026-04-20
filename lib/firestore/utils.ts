@@ -33,6 +33,10 @@ export function ensureString(value: unknown): string {
   return typeof value === 'string' ? value : '';
 }
 
+export function ensureNumber(value: unknown, fallback = 0): number {
+  return typeof value === 'number' && !Number.isNaN(value) ? value : fallback;
+}
+
 export function ensureTimestampIso(ts: unknown): string {
   if (!ts) return '';
   if (typeof ts === 'string') return ts;

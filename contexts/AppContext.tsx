@@ -10,7 +10,7 @@ import { subscribeToBlogPosts, addBlogPost as addBlogPostToFirestore, updateBlog
 import { subscribeToFaqs, addFaq as addFaqToFirestore, updateFaq as updateFaqInFirestore, deleteFaq as deleteFaqFromFirestore } from '@/lib/firestore/faqs';
 import { subscribeToJobs, addJob as addJobToFirestore, updateJob as updateJobInFirestore, deleteJob as deleteJobFromFirestore } from '@/lib/firestore/jobs';
 import { deleteBoardApplication, subscribeToBoardApplications } from '@/lib/firestore/boardApplications';
-import { subscribeToPositions, addPosition as addPositionToFirestore, updatePosition as updatePositionInFirestore, deletePosition as deletePositionFromFirestore} from '@/lib/firestore/board-positions'
+import { subscribeToPositions, addPosition as addPositionToFirestore, updatePosition as updatePositionInFirestore, deletePosition as deletePositionFromFirestore, movePosition as movePositionInFirestore } from '@/lib/firestore/board-positions'
 
 interface AppState {
   events: Event[];
@@ -66,9 +66,10 @@ type FirestoreAction =
   | { firestoreAction: 'ADD_FAQS'; payload: Omit<FAQ, 'id'> }
   | { firestoreAction: 'UPDATE_FAQS'; payload: FAQ }
   | { firestoreAction: 'DELETE_FAQS'; payload: string }
-  | { firestoreAction: 'ADD_BOARDPOS'; payload: Omit<BoardPosition, 'id'> }
+  | { firestoreAction: 'ADD_BOARDPOS'; payload: Omit<BoardPosition, 'id' | 'order'> }
   | { firestoreAction: 'UPDATE_BOARDPOS'; payload: BoardPosition }
   | { firestoreAction: 'DELETE_BOARDPOS'; payload: string }
+  | { firestoreAction: 'MOVE_BOARDPOS'; payload: { positionId: string; direction: 'up' | 'down' } }
   | { firestoreAction: 'ADD_JOB'; payload: Omit<Job, 'id' | 'createdAt'> }
   | { firestoreAction: 'UPDATE_JOB'; payload: Job }
   | { firestoreAction: 'DELETE_JOB'; payload: string }
@@ -352,6 +353,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             break;
           case 'DELETE_BOARDPOS':
             await deletePositionFromFirestore(action.payload);
+            break;
+          case 'MOVE_BOARDPOS':
+            await movePositionInFirestore(state.boardPositions, action.payload.positionId, action.payload.direction);
             break;
           case 'ADD_JOB':
             await addJobToFirestore(action.payload);
