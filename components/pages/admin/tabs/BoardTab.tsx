@@ -47,7 +47,7 @@ const BoardTab: React.FC<ApplicationProps> = ({
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{position.title}</h3>
                   <p className="text-gray-600 dark:text-gray-400">{position.short}</p>
-                  <div className="text-sm text-gray-500 mt-2">{position.description}</div>
+                  <div className="text-sm text-gray-500 mt-2 whitespace-pre-wrap">{position.description}</div>
                 </div>
                 <div className="flex gap-2">
                   <Button size="sm" variant="outline" icon={Edit3} onClick={() => onEdit(position)}>Edit</Button>
@@ -72,14 +72,14 @@ const BoardTab: React.FC<ApplicationProps> = ({
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Applying for Role: {applicant.role}</h3>
                   <p className="text-gray-600 dark:text-gray-400">{applicant.name}</p>
                   <div className="text-sm text-gray-500 mt-2">Applied on: {formatApplicationDate(applicant.createdAt)}</div>
-                  <div className="text-sm text-gray-500 mt-2">{applicant.email}</div>
-                  <div className="text-sm text-gray-500 mt-2">{!applicant.coverFile && !applicant.coverText ? "Applicant has not provided a cover letter." : ""}</div>
+                  <div className="text-sm text-gray-500 mt-2 whitespace-pre-wrap">{applicant.email}</div>
+                  <div className="text-sm text-gray-500 mt-2 whitespace-pre-wrap">{!applicant.coverFile && !applicant.coverText ? "Applicant has not provided a cover letter." : ""}</div>
                   {applicant.cv?.url ? (
                     <div className="text-sm text-blue-500 mt-2">
                       <Link href={applicant.cv.url}>View CV (PDF)</Link>
                     </div>
                   ) : null}
-                  {applicant.coverOption === 'text' && <div className="text-sm text-gray-500 mt-2">Cover Letter: {applicant.coverText}</div>}
+                  {applicant.coverOption === 'text' && <div className="text-sm text-gray-500 mt-2 whitespace-pre-wrap">Cover Letter: {applicant.coverText}</div>}
                   {applicant.coverOption === 'file' && applicant.coverFile?.url ? (
                     <div className="text-sm text-blue-500 mt-2">
                       <Link href={applicant.coverFile.url}>View Cover Letter (PDF)</Link>

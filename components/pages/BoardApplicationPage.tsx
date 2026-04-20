@@ -209,7 +209,7 @@ export default function BoardApplicationPage() {
               >
                 <div className="min-h-0">
                   <div className="border-t pt-4">
-                    <div className="prose prose-sm dark:prose-invert text-gray-700 dark:text-gray-300 mb-4">{r.description}</div>
+                    <div className="prose prose-sm dark:prose-invert text-gray-700 dark:text-gray-300 mb-4 whitespace-pre-wrap">{r.description}</div>
 
                     {f?.submitted ? (
                       <div className="rounded-md bg-green-50 border border-green-200 p-4">
