@@ -4,6 +4,7 @@ import React from "react";
 import { Button } from "@/components/ui/Button";
 import { X } from "lucide-react";
 import { BoardPosition } from "@/types";
+import { Textarea } from "@/components/ui/Textarea";
 
 export type BPositionFormState = Pick<BoardPosition, "title" | "short" | "description">;
 
@@ -47,8 +48,10 @@ const BoardPositionModal: React.FC<BPositionModalProps> = ({ open, onClose, form
             <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Short</label>
             <input className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" value={form.short} onChange={(e) => setForm(prev => ({ ...prev, short: e.target.value }))} required />
           </div>
+          <div>
             <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Description</label>
-            <input className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" value={form.description} onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))} required />
+            <Textarea rows={6} value={form.description} onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))} />
+          </div>
           <div className="flex justify-end gap-2 pt-2">
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
             <Button type="submit">{editing ? 'Update' : 'Add'} Board Position</Button>
