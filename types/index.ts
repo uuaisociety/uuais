@@ -191,8 +191,12 @@ export interface Application {
   id: string;
   name: string;
   email: string;
+  /** normalized lowercased email used for server-side limits */
+  emailNormalized?: string;
   phone?: string;
   role: string;
+  /** stable role id (matches `BoardPosition.id`) when available */
+  roleId?: string;
   cv?: { path?: string; url?: string } | null;
   coverOption?: 'text' | 'file';
   coverText?: string | null;

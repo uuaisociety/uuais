@@ -6,8 +6,10 @@ export type BoardApplication = {
   id?: string;
   name: string;
   email: string;
+  emailNormalized?: string;
   phone?: string;
   role: string;
+  roleId?: string;
   cv?: { path?: string; url?: string } | null;
   coverOption?: 'text' | 'file';
   coverText?: string | null;
@@ -25,6 +27,9 @@ function applicationSortKey(createdAt: BoardApplication['createdAt']): number {
 export const addBoardApplication = async (app: Omit<BoardApplication, 'id' | 'createdAt'>): Promise<string> => {
   const ref = collection(db, 'boardApplications');
   const safe = stripUndefined(app as Record<string, unknown>) as DocumentData;
+  if (typeof safe.email === 'string' && !safe.emailNormalized) {
+    safe.emailNormalized = safe.email.trim().toLowerCase();
+  }
   const docRef = await addDoc(ref, { ...safe, createdAt: new Date().toISOString() } as DocumentData);
   return docRef.id;
 };

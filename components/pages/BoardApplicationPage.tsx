@@ -149,6 +149,7 @@ export default function BoardApplicationPage() {
       if (f.coverOption === 'file' && f.coverFile) form.append('coverFile', f.coverFile, f.coverFile.name);
       if (f.coverOption === 'text') form.append('coverText', f.coverText);
       form.append('role', roleTitle);
+      form.append('roleId', roleId);
       const res = await fetch('/api/board-apply', { method: 'POST', body: form });
       const json = await res.json();
       if (!res.ok) {
