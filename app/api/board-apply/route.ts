@@ -4,8 +4,8 @@ import admin from 'firebase-admin';
 
 export const runtime = 'nodejs';
 
-const DEFAULT_COOLDOWN_SECONDS = 5 * 60; // 5 minutes
-const DEFAULT_MAX_TOTAL_APPLICATIONS = 3;
+const DEFAULT_COOLDOWN_SECONDS = 1 * 60; // 1 minute
+const DEFAULT_MAX_TOTAL_APPLICATIONS = 10;
 
 function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
