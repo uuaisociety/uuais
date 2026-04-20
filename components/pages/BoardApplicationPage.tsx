@@ -230,7 +230,7 @@ export default function BoardApplicationPage() {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">CV (PDF, max 3MB)</label>
+                          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">CV (PDF, max 3MB)</label>
                           <div className="flex items-center gap-3">
                             <label htmlFor={`cv-input-${r.id}`} className="m-0">
                               <input id={`cv-input-${r.id}`} accept="application/pdf" type="file" className="hidden" onChange={(e) => setField(r.id, 'cvFile', e.target.files?.[0] || null)} />
@@ -244,7 +244,7 @@ export default function BoardApplicationPage() {
 
                         <div>
                           <div className="flex items-center gap-4 mb-2">
-                            <label className="text-sm font-medium">Cover letter</label>
+                            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Cover letter</label>
                             <div className="text-sm text-gray-500">(upload PDF or write concise text)</div>
                           </div>
                           <div className="flex items-center gap-4 mb-2">
@@ -285,7 +285,7 @@ export default function BoardApplicationPage() {
 
                         <div className="flex items-start gap-3">
                           <input id={`agree-${r.id}`} type="checkbox" checked={f?.agree || false} onChange={(e) => setField(r.id, 'agree', e.target.checked)} />
-                          <label htmlFor={`agree-${r.id}`} className="text-sm">I agree to the terms (see our <a href="/privacy" className="underline">Privacy Policy</a>).</label>
+                          <label htmlFor={`agree-${r.id}`} className="text-sm text-gray-700 dark:text-gray-300">I agree to the terms (see our <a href="/privacy" className="underline">Privacy Policy</a>).</label>
                         </div>
                         {f?.errors?.agree && <p className="mt-1 text-sm text-red-600">{f.errors.agree}</p>}
 
