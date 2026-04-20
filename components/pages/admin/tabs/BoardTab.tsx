@@ -120,7 +120,7 @@ const BoardTab: React.FC<ApplicationProps> = ({
                         {expandedCoverLetters.has(applicant.id) ? 'Hide cover letter' : 'Show cover letter'}
                       </button>
                       {expandedCoverLetters.has(applicant.id) && (
-                        <div className="text-sm text-gray-500 dark:text-gray-400 mt-2 whitespace-pre-wrap border-l-2 border-gray-300 dark:border-gray-600 pl-3">{applicant.coverText}</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400 mt-2 whitespace-pre-wrap border-l-2 border-gray-300 dark:border-gray-600 pl-3 whitespace-pre-wrap">{applicant.coverText}</div>
                       )}
                     </div>
                   )}
