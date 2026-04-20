@@ -7,6 +7,8 @@ import { Textarea } from '@/components/ui/Textarea';
 import { Button } from '@/components/ui/Button';
 import { useApp } from "@/contexts/AppContext";
 
+const COVER_LETTER_MAX_CHARS = 3500;
+
 export default function BoardApplicationPage() {
   const { state } = useApp();
   const roles = state.boardPositions;
@@ -122,6 +124,9 @@ export default function BoardApplicationPage() {
       }
     } else {
       if (!f.coverText || !f.coverText.trim()) e.cover = 'Cover letter text is required';
+      if ((f.coverText || '').length > COVER_LETTER_MAX_CHARS) {
+        e.cover = `Cover letter must be at most ${COVER_LETTER_MAX_CHARS} characters (about one A4 page).`;
+      }
     }
     if (!f.agree) e.agree = 'You must agree to the terms';
     if (e.cover) e.form = e.cover;
@@ -195,12 +200,13 @@ export default function BoardApplicationPage() {
                   <p className="text-sm text-gray-600 dark:text-gray-300">{r.short}</p>
                 </div>
                 <div>
-                  <button
+                  <Button
                     onClick={() => setOpenRole(openRole === r.id ? null : r.id)}
-                    className="text-sm text-red-600 hover:underline cursor-pointer transition-all duration-200"
+                    variant="outline"
+                    size="sm"
                   >
-                    {openRole === r.id ? 'Close' : 'Apply'}
-                  </button>
+                    {openRole === r.id ? 'Hide details' : 'Show details'}
+                  </Button>
                 </div>
               </div>
 
@@ -250,7 +256,18 @@ export default function BoardApplicationPage() {
                             </label>
                           </div>
                           {f?.coverOption === 'text' ? (
-                            <Textarea label="Concise cover letter" value={f?.coverText || ''} onChange={(e) => setField(r.id, 'coverText', e.target.value)} />
+                            <div>
+                              <Textarea
+                                label={`Concise cover letter (max ${COVER_LETTER_MAX_CHARS} characters)`}
+                                value={f?.coverText || ''}
+                                maxLength={COVER_LETTER_MAX_CHARS}
+                                error={f?.errors?.cover}
+                                onChange={(e) => setField(r.id, 'coverText', e.target.value)}
+                              />
+                              <p className={`mt-1 text-xs ${(f?.coverText?.length || 0) > COVER_LETTER_MAX_CHARS ? 'text-red-600' : 'text-gray-500'}`}>
+                                {(f?.coverText?.length || 0)}/{COVER_LETTER_MAX_CHARS} characters (about one A4 page)
+                              </p>
+                            </div>
                           ) : (
                             <div className="flex items-center gap-3">
                               <label htmlFor={`cover-input-${r.id}`} className="m-0">
@@ -273,7 +290,7 @@ export default function BoardApplicationPage() {
                         {f?.errors?.agree && <p className="mt-1 text-sm text-red-600">{f.errors.agree}</p>}
 
                         {f?.errors?.form && <p className="text-sm text-red-600">{f.errors.form}</p>}
-                        <div className="pt-2">
+                        <div className="pt-2 pl-4 pb-4">
                           <Button type="submit" variant="cta" disabled={f?.isSubmitting || isSubmitting}>{(f?.isSubmitting || isSubmitting) ? 'Submitting…' : 'Submit application'}</Button>
                         </div>
                       </form>

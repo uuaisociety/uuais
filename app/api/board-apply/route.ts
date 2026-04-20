@@ -6,6 +6,7 @@ export const runtime = 'nodejs';
 
 const DEFAULT_COOLDOWN_SECONDS = 1 * 60; // 1 minute
 const DEFAULT_MAX_TOTAL_APPLICATIONS = 10;
+const COVER_LETTER_MAX_CHARS = 3500;
 
 function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
@@ -74,6 +75,12 @@ export async function POST(req: Request) {
     } else {
       if (!coverText || !(coverText as string).trim()) {
         return NextResponse.json({ error: 'Cover letter text is required when choosing text option' }, { status: 400 });
+      }
+      if (coverText.length > COVER_LETTER_MAX_CHARS) {
+        return NextResponse.json(
+          { error: `Cover letter text is too long. Maximum is ${COVER_LETTER_MAX_CHARS} characters (about one A4 page).` },
+          { status: 400 }
+        );
       }
     }
 
