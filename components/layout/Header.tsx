@@ -122,8 +122,8 @@ export const Header: React.FC = () => {
                   ))}
                   <Link
                     href="/board-apply"
-                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/board-apply')
-                      ? 'text-gray-700 dark:text-gray-300 bg-red-600/20'
+                    className={`px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 ${isActive('/board-apply')
+                      ? 'bg-red-600/20'
                       : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
                       }`}
                   >
@@ -176,8 +176,8 @@ export const Header: React.FC = () => {
                     <>
                       <Link
                         href="/admin"
-                        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/admin')
-                          ? 'bg-red-600/20 text-red-600 dark:text-red-400'
+                        className={`px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 ${isActive('/admin')
+                          ? 'bg-red-600/20'
                           : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
                           }`}
                       >
@@ -214,8 +214,8 @@ export const Header: React.FC = () => {
                     key={item.name}
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${isActive(item.href)
-                      ? 'text-gray-700 dark:text-gray-300 bg-red-600/20'
+                    className={`block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200  ${isActive(item.href)
+                      ? 'bg-red-600/20'
                       : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
                       }`}
                   >
@@ -225,9 +225,9 @@ export const Header: React.FC = () => {
                 <Link
                   href="/board-apply"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${isActive('/board-apply')
-                    ? 'text-gray-700 dark:text-gray-300 bg-red-600/20'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                  className={`block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200  ${isActive('/board-apply')
+                    ? 'bg-red-600/20'
+                    : 'hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
                     }`}
                 >
                   Join the Board!
@@ -237,9 +237,9 @@ export const Header: React.FC = () => {
                     <Link
                       href="/projects"
                       onClick={() => setIsMenuOpen(false)}
-                      className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 cursor-pointer ${isActive('/projects')
-                        ? 'text-gray-700 dark:text-gray-300 bg-red-600/20'
-                        : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                      className={`block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 cursor-pointer ${isActive('/projects')
+                        ? ' bg-red-600/20'
+                        : ' hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
                         }`}
                     >
                       Projects
@@ -248,21 +248,21 @@ export const Header: React.FC = () => {
                       <Link
                         href="/projects"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
+                        className="block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200"
                       >
                         All Projects
                       </Link>
                       <Link
                         href="/projects/course-navigator"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
+                        className="block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200"
                       >
                         Course Navigator
                       </Link>
                       <Link
                         href="/study-plan"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block px-3 py-2 text-base font-medium text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
+                        className="block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200"
                       >
                         Study Plan Graph
                       </Link>
@@ -273,9 +273,9 @@ export const Header: React.FC = () => {
                   <Link
                     href="/admin"
                     onClick={() => setIsMenuOpen(false)}
-                    className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${isActive('/admin')
-                      ? 'text-gray-700 dark:text-gray-300 bg-red-600/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                    className={`block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 ${isActive('/admin')
+                      ? 'bg-red-600/20'
+                      : 'hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
                       }`}
                   >
                     Admin
