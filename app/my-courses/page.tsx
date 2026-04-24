@@ -279,7 +279,7 @@ export default function MyCoursesPage() {
                 ))}
               </div>
               </div>
-              <Button onClick={() => setShowNewCategoryModal(true)} className="bg-[#990000] hover:bg-[#7f0000] text-white">
+              <Button onClick={() => setShowNewCategoryModal(true)} className="bg-blue-600/80 hover:bg-blue-700/80 dark:bg-blue-600/60 dark:hover:bg-blue-800/80 text-white">
                 <Plus className="h-4 w-4 mr-2" /> New Category
               </Button>
           </div>
@@ -311,9 +311,9 @@ export default function MyCoursesPage() {
                   </Link>
                 </div>
               ) : (
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-12">
                   {displayedCourses.map((course) => (
-                    <div key={course.id} className="space-y-3">
+                    <div key={course.id} className="space-y-3 grid relative gap-2">
                       <CourseCard
                         course={course}
                         hrefBase="/explore"
@@ -321,45 +321,42 @@ export default function MyCoursesPage() {
                         onFavoriteChange={(isFavorited) => handleFavoriteChange(course.id, isFavorited)}
                       />
                       {categories.length > 0 && (
-                        // FIXME: These ui elements are hidden when hovering over the course card, likely due to z-index issues. Need to refactor how these controls are displayed.
-                        <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/40 p-4">
-                          <div className="flex flex-col sm:flex-row gap-3">
-                            <Select
-                              value={groupSelectionByCourse[course.id] || (activeTab !== "favorites" ? activeTab : categories[0]?.id || "")}
-                              onChange={(e) => handleGroupSelectionChange(course.id, e.target.value)}
-                              options={categories.map((category) => ({
-                                value: category.id,
-                                label: `${category.name} (${(categoryCourses[category.id] || []).length}/${MAX_COURSES_PER_GROUP})`,
-                              }))}
-                              fullWidth
-                            />
-                            {activeTab === "favorites" ? (
+                        <div className="flex flex-col xl:flex-row gap-3 items-center rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/40 p-4 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 items-center">
+                          <Select
+                            value={groupSelectionByCourse[course.id] || (activeTab !== "favorites" ? activeTab : categories[0]?.id || "")}
+                            onChange={(e) => handleGroupSelectionChange(course.id, e.target.value)}
+                            options={categories.map((category) => ({
+                              value: category.id,
+                              label: `${category.name}`,
+                            }))}
+                            fullWidth
+                          />
+                          {activeTab === "favorites" ? (
+                            <Button
+                              variant="outline"
+                              onClick={() => handleAddCourseToGroup(course.id)}
+                              disabled={groupActionCourseId === course.id}
+                            >
+                              Add to Group
+                            </Button>
+                          ) : (
+                            <>
                               <Button
                                 variant="outline"
-                                onClick={() => handleAddCourseToGroup(course.id)}
+                                onClick={() => handleMoveCourseToGroup(course.id)}
+                                disabled={groupActionCourseId === course.id || (groupSelectionByCourse[course.id] || activeTab) === activeTab}
+                              >
+                                Move
+                              </Button>
+                              <Button
+                                variant="outline"
+                                onClick={() => handleRemoveCourseFromGroup(course.id)}
                                 disabled={groupActionCourseId === course.id}
                               >
-                                Add to Group
+                                Remove
                               </Button>
-                            ) : (
-                              <>
-                                <Button
-                                  variant="outline"
-                                  onClick={() => handleMoveCourseToGroup(course.id)}
-                                  disabled={groupActionCourseId === course.id || (groupSelectionByCourse[course.id] || activeTab) === activeTab}
-                                >
-                                  Move to Group
-                                </Button>
-                                <Button
-                                  variant="ghost"
-                                  onClick={() => handleRemoveCourseFromGroup(course.id)}
-                                  disabled={groupActionCourseId === course.id}
-                                >
-                                  Remove from Group
-                                </Button>
-                              </>
-                            )}
-                          </div>
+                            </>
+                          )}
                         </div>
                       )}
                     </div>
@@ -392,7 +389,6 @@ export default function MyCoursesPage() {
               <Button
                 onClick={handleCreateCategory}
                 disabled={!newCategoryName.trim() || categories.length >= MAX_GROUPS}
-                className="bg-[#990000] hover:bg-[#7f0000] text-white"
               >
                 Create
               </Button>
