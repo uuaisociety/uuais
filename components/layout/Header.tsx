@@ -161,7 +161,7 @@ export const Header: React.FC = () => {
                           </Link>
                           {user && (
                             <Link
-                              href="/favorites"
+                              href="/my-courses"
                               onClick={() => setIsProjectsOpen(false)}
                               className="block px-4 py-2 pl-6 rounded-md text-sm text-gray-500 dark:text-gray-400 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
                             >
