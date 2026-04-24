@@ -1,26 +1,33 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-//import { fetchCoursesClient } from "@/lib/firestore/courses";
+import { fetchCoursesByIdsClient } from "@/lib/firestore/courses";
 import type { Course } from "@/lib/courses";
 import CourseCard from "@/components/courses/CourseCard";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { Select } from "@/components/ui/Select";
 import { auth } from "@/lib/firebase-client";
 import { onAuthStateChanged } from "firebase/auth";
 import { getUserFavorites } from "@/lib/firestore/favorites";
-import { getUserCategories, createCategory, deleteCategory, getCategoryCourses } from "@/lib/firestore/course-categories";
+import {
+  getUserCategories,
+  createCategory,
+  deleteCategory,
+  getCategoryCourses,
+  addCourseToCategory,
+  removeCourseFromCategory,
+} from "@/lib/firestore/course-categories";
 import { CourseCategory } from "@/types";
-import { Heart, Plus, Trash2, Folder, X } from "lucide-react";
+import { Heart, Plus, Trash2, Folder, X, Search} from "lucide-react";
 import Link from "next/link";
 import { updatePageMeta } from "@/utils/seo";
-import { useAdmin } from "@/hooks/useAdmin";
-import { notFound } from "next/navigation";
 
+const MAX_GROUPS = 10;
+const MAX_COURSES_PER_GROUP = 50;
 
 export default function MyCoursesPage() {
   const [user, setUser] = useState<{ uid: string } | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [courses, setCourses] = useState<Course[]>([]);
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
   const [categories, setCategories] = useState<CourseCategory[]>([]);
@@ -28,12 +35,12 @@ export default function MyCoursesPage() {
   const [showNewCategoryModal, setShowNewCategoryModal] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
   const [activeTab, setActiveTab] = useState<"favorites" | string>("favorites");
+  const [groupSelectionByCourse, setGroupSelectionByCourse] = useState<Record<string, string>>({});
+  const [groupActionCourseId, setGroupActionCourseId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const { isAdmin, loading: pageLoading } = useAdmin();
 
   useEffect(() => {
     updatePageMeta("My Courses", "View your favorite courses and custom categories");
-    //fetchCoursesClient().then(setCourses);
     const unsub = onAuthStateChanged(auth, (u) => setUser(u ? { uid: u.uid } : null));
     return () => unsub();
   }, []);
@@ -46,7 +53,8 @@ export default function MyCoursesPage() {
     setLoading(true);
     try {
       const favorites = await getUserFavorites(user.uid);
-      setFavoriteIds(favorites.map(f => f.courseId));
+      const favIds = favorites.map(f => f.courseId);
+      setFavoriteIds(favIds);
 
       const cats = await getUserCategories(user.uid);
       setCategories(cats);
@@ -56,6 +64,15 @@ export default function MyCoursesPage() {
         catCourses[cat.id] = await getCategoryCourses(cat.id);
       }
       setCategoryCourses(catCourses);
+
+      // Fetch all course IDs we need
+      const allCourseIds = [...new Set([...favIds, ...Object.values(catCourses).flat()])];
+      if (allCourseIds.length > 0) {
+        const fetchedCourses = await fetchCoursesByIdsClient(allCourseIds);
+        setCourses(fetchedCourses);
+      } else {
+        setCourses([]);
+      }
     } catch (e) {
       console.error("Failed to load user data:", e);
     } finally {
@@ -64,11 +81,17 @@ export default function MyCoursesPage() {
   }, [user]);
 
   useEffect(() => {
-    loadUserData();
+    queueMicrotask(() => {
+      void loadUserData();
+    });
   }, [user, loadUserData]);
 
   const handleCreateCategory = async () => {
     if (!user || !newCategoryName.trim()) return;
+    if (categories.length >= MAX_GROUPS) {
+      alert(`You can create up to ${MAX_GROUPS} groups.`);
+      return;
+    }
     try {
       await createCategory(user.uid, newCategoryName.trim());
       setNewCategoryName("");
@@ -98,14 +121,83 @@ export default function MyCoursesPage() {
     ? favoriteCourses
     : courses.filter(c => activeCategoryCourseIds.includes(c.id));
 
-  if (pageLoading) {
-    return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
-  }
+  const handleFavoriteChange = useCallback((courseId: string, isFavorited: boolean) => {
+    if (isFavorited) {
+      return;
+    }
 
-  // Return 404-page for non-admin users
-  if (!loading && !isAdmin) {
-    return notFound();
-  }
+    setFavoriteIds((prev) => prev.filter((id) => id !== courseId));
+  }, []);
+
+  const handleGroupSelectionChange = useCallback((courseId: string, categoryId: string) => {
+    setGroupSelectionByCourse((prev) => ({ ...prev, [courseId]: categoryId }));
+  }, []);
+
+  const handleAddCourseToGroup = useCallback(async (courseId: string) => {
+    const targetCategoryId = groupSelectionByCourse[courseId] || categories[0]?.id;
+    if (!targetCategoryId) return;
+
+    const currentGroupCourses = categoryCourses[targetCategoryId] || [];
+    if (currentGroupCourses.includes(courseId)) {
+      return;
+    }
+    if (currentGroupCourses.length >= MAX_COURSES_PER_GROUP) {
+      alert(`Each group can contain up to ${MAX_COURSES_PER_GROUP} courses.`);
+      return;
+    }
+
+    setGroupActionCourseId(courseId);
+    try {
+      await addCourseToCategory(targetCategoryId, courseId);
+      await loadUserData();
+    } catch (error) {
+      console.error("Failed to add course to group:", error);
+    } finally {
+      setGroupActionCourseId(null);
+    }
+  }, [groupSelectionByCourse, categories, categoryCourses, loadUserData]);
+
+  const handleMoveCourseToGroup = useCallback(async (courseId: string) => {
+    if (activeTab === "favorites") return;
+
+    const targetCategoryId = groupSelectionByCourse[courseId];
+    if (!targetCategoryId || targetCategoryId === activeTab) {
+      return;
+    }
+
+    const targetGroupCourses = categoryCourses[targetCategoryId] || [];
+    if (!targetGroupCourses.includes(courseId) && targetGroupCourses.length >= MAX_COURSES_PER_GROUP) {
+      alert(`Each group can contain up to ${MAX_COURSES_PER_GROUP} courses.`);
+      return;
+    }
+
+    setGroupActionCourseId(courseId);
+    try {
+      if (!targetGroupCourses.includes(courseId)) {
+        await addCourseToCategory(targetCategoryId, courseId);
+      }
+      await removeCourseFromCategory(activeTab, courseId);
+      await loadUserData();
+    } catch (error) {
+      console.error("Failed to move course between groups:", error);
+    } finally {
+      setGroupActionCourseId(null);
+    }
+  }, [activeTab, categoryCourses, groupSelectionByCourse, loadUserData]);
+
+  const handleRemoveCourseFromGroup = useCallback(async (courseId: string) => {
+    if (activeTab === "favorites") return;
+
+    setGroupActionCourseId(courseId);
+    try {
+      await removeCourseFromCategory(activeTab, courseId);
+      await loadUserData();
+    } catch (error) {
+      console.error("Failed to remove course from group:", error);
+    } finally {
+      setGroupActionCourseId(null);
+    }
+  }, [activeTab, loadUserData]);
 
   if (!user) {
     return (
@@ -125,13 +217,23 @@ export default function MyCoursesPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">My Courses</h1>
-          <Button onClick={() => setShowNewCategoryModal(true)} className="bg-[#990000] hover:bg-[#7f0000] text-white">
-            <Plus className="h-4 w-4 mr-2" /> New Category
-          </Button>
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">My Courses</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              Create up to {MAX_GROUPS} groups with up to {MAX_COURSES_PER_GROUP} courses in each.
+            </p>
+          </div>
+          <div className="flex right gap-2">
+
+            <Link href="/explore">
+              <Button icon={Search} className="bg-[#990000] hover:bg-[#7f0000] text-white">
+                Explore More Courses
+              </Button>
+            </Link>
+          </div>
         </div>
         <div className="grid md:grid-cols-4 gap-6">
-          <div className="md:col-span-1">
+          <div className="md:col-span-1 flex flex-col gap-4">
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
               <button
                 onClick={() => setActiveTab("favorites")}
@@ -176,7 +278,10 @@ export default function MyCoursesPage() {
                   </div>
                 ))}
               </div>
-            </div>
+              </div>
+              <Button onClick={() => setShowNewCategoryModal(true)} className="bg-[#990000] hover:bg-[#7f0000] text-white">
+                <Plus className="h-4 w-4 mr-2" /> New Category
+              </Button>
           </div>
 
           <div className="md:col-span-3">
@@ -187,11 +292,10 @@ export default function MyCoursesPage() {
                 ) : (
                   <Folder className="h-6 w-6 text-gray-600" />
                 )}
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                   {activeTab === "favorites" ? "Favorites" : activeCategory?.name}
                 </h2>
               </div>
-              <h2 className="text-red-500 text-center">UNDER DEVELOPMENT</h2>
 
               {loading ? (
                 <div className="text-center py-12 text-gray-600 dark:text-gray-300">Loading...</div>
@@ -209,7 +313,56 @@ export default function MyCoursesPage() {
               ) : (
                 <div className="grid md:grid-cols-2 gap-6">
                   {displayedCourses.map((course) => (
-                    <CourseCard key={course.id} course={course} hrefBase="/explore" />
+                    <div key={course.id} className="space-y-3">
+                      <CourseCard
+                        course={course}
+                        hrefBase="/explore"
+                        initialFavorited={favoriteIds.includes(course.id)}
+                        onFavoriteChange={(isFavorited) => handleFavoriteChange(course.id, isFavorited)}
+                      />
+                      {categories.length > 0 && (
+                        // FIXME: These ui elements are hidden when hovering over the course card, likely due to z-index issues. Need to refactor how these controls are displayed.
+                        <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/40 p-4">
+                          <div className="flex flex-col sm:flex-row gap-3">
+                            <Select
+                              value={groupSelectionByCourse[course.id] || (activeTab !== "favorites" ? activeTab : categories[0]?.id || "")}
+                              onChange={(e) => handleGroupSelectionChange(course.id, e.target.value)}
+                              options={categories.map((category) => ({
+                                value: category.id,
+                                label: `${category.name} (${(categoryCourses[category.id] || []).length}/${MAX_COURSES_PER_GROUP})`,
+                              }))}
+                              fullWidth
+                            />
+                            {activeTab === "favorites" ? (
+                              <Button
+                                variant="outline"
+                                onClick={() => handleAddCourseToGroup(course.id)}
+                                disabled={groupActionCourseId === course.id}
+                              >
+                                Add to Group
+                              </Button>
+                            ) : (
+                              <>
+                                <Button
+                                  variant="outline"
+                                  onClick={() => handleMoveCourseToGroup(course.id)}
+                                  disabled={groupActionCourseId === course.id || (groupSelectionByCourse[course.id] || activeTab) === activeTab}
+                                >
+                                  Move to Group
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  onClick={() => handleRemoveCourseFromGroup(course.id)}
+                                  disabled={groupActionCourseId === course.id}
+                                >
+                                  Remove from Group
+                                </Button>
+                              </>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               )}
@@ -238,7 +391,7 @@ export default function MyCoursesPage() {
               <Button variant="outline" onClick={() => setShowNewCategoryModal(false)}>Cancel</Button>
               <Button
                 onClick={handleCreateCategory}
-                disabled={!newCategoryName.trim()}
+                disabled={!newCategoryName.trim() || categories.length >= MAX_GROUPS}
                 className="bg-[#990000] hover:bg-[#7f0000] text-white"
               >
                 Create
