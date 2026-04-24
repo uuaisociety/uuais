@@ -180,7 +180,7 @@ export async function generateCompletion(
 export async function generateStructured<T>(
   messages: Message[],
   options: GenerateOptions = {}
-): Promise<{ data: T; usage: { promptTokens: number; completionTokens: number; totalTokens: number } }> {
+): Promise<{ data: T; rawContent: string; usage: { promptTokens: number; completionTokens: number; totalTokens: number } }> {
   const result = await generateCompletion(messages, {
     ...options,
     responseFormat: { type: 'json_object' },
@@ -188,13 +188,13 @@ export async function generateStructured<T>(
 
   try {
     const data = JSON.parse(result.content) as T;
-    return { data, usage: result.usage };
+    return { data, rawContent: result.content, usage: result.usage };
   } catch {
     const extracted = extractJsonObjectFromText(result.content);
     if (extracted) {
       try {
         const data = JSON.parse(extracted) as T;
-        return { data, usage: result.usage };
+        return { data, rawContent: result.content, usage: result.usage };
       } catch {
         // Fall through to structured error below.
       }

@@ -11,20 +11,32 @@ interface ChatRequest {
   conversationHistory?: { role: 'user' | 'assistant'; content: string }[];
 }
 
+function normalizeConversationHistory(
+  conversationHistory: ChatRequest['conversationHistory']
+): { role: 'user' | 'assistant'; content: string }[] {
+  if (!Array.isArray(conversationHistory)) {
+    return [];
+  }
+
+  return conversationHistory
+    .filter((message): message is { role: 'user' | 'assistant'; content: string } => {
+      return (
+        Boolean(message) &&
+        (message.role === 'user' || message.role === 'assistant') &&
+        typeof message.content === 'string' &&
+        message.content.trim().length > 0
+      );
+    })
+    .map((message) => ({
+      role: message.role,
+      content: message.content.trim(),
+    }));
+}
+
 export async function POST(req: NextRequest) {
   try {
-    // Debug: Log cookies and auth config
-    /*
-    console.log('[chat] Cookies:', req.cookies.getAll().map(c => c.name));
-    console.log('[chat] AuthConfig:', {
-      apiKey: authConfig.apiKey ? 'set' : 'missing',
-      cookieName: authConfig.cookieName,
-      hasServiceAccount: !!authConfig.serviceAccount,
-    });
-    */
     // Verify Firebase auth using next-firebase-auth-edge
     const tokens = await getTokens(req.cookies, authConfig);
-    //console.log('[chat] Tokens result:', tokens ? { uid: tokens.decodedToken.uid } : null);
     
     if (!tokens) {
       return NextResponse.json(
@@ -34,6 +46,7 @@ export async function POST(req: NextRequest) {
     }
 
     const uid = tokens.decodedToken.uid;
+    const isAdmin = Boolean(tokens.decodedToken.admin || tokens.decodedToken.superAdmin);
     if (!uid) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Invalid token: missing user ID' },
@@ -53,7 +66,7 @@ export async function POST(req: NextRequest) {
     }
     
     const { query, conversationHistory } = body;
-    
+    const normalizedConversationHistory = normalizeConversationHistory(conversationHistory);
     if (!query || typeof query !== 'string' || query.trim().length === 0) {
       return NextResponse.json(
         { error: 'Bad request', message: 'Query is required' },
@@ -76,10 +89,11 @@ export async function POST(req: NextRequest) {
     }
     
     // Process RAG request
-    const { result, usage } = await processRAGRequest({
+    const { result, usage, debug } = await processRAGRequest({
       query: query.trim(),
       userId: uid,
-      conversationHistory,
+      conversationHistory: normalizedConversationHistory,
+      includeDebug: isAdmin,
     });
     
     // Increment usage
@@ -94,6 +108,7 @@ export async function POST(req: NextRequest) {
         completionTokens: usage.completionTokens,
         totalTokens: usage.totalTokens,
       },
+      ...(isAdmin && debug ? { debug } : {}),
       rateLimit: {
         remaining: newStatus.remaining,
         total: newStatus.totalRequests,
