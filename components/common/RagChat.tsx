@@ -661,7 +661,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
               )}
             </div>
           </div>
-          <div className="p-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">LLM RAG Prototype{rateLimit && rateLimit.remaining <= 3 && ` • ${rateLimit.remaining} requests remaining today`}</div>
+          <div className="p-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">RAG Prototype{rateLimit && rateLimit.remaining <= 3 && ` • ${rateLimit.remaining} requests remaining today`}</div>
         </div>
       </div>
 

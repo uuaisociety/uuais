@@ -200,7 +200,7 @@ export default function ExplorePage() {
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">UUAIS Course Navigator</h1>
           <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">Search all Uppsala University courses with natural language and explore their connections. Remember AI can and will make mistakes, double check information!</p>
-           <div className="text-sm text-gray-600 dark:text-gray-300 italic pt-2">This is a very early prototype, expect some inaccuracies.</div>
+           <div className="text-sm text-gray-600 dark:text-gray-300 italic pt-2">This is an early prototype, expect some inaccuracies.</div>
         </div>
 
         <div className="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-10">

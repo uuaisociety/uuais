@@ -30,7 +30,8 @@ export default function CourseNavigatorPage() {
           <Link href="/explore" className="inline-block">
             <Button
               size="lg"
-              className="bg-white text-red-700 hover:bg-gray-100 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+              className="bg-white hover:bg-gray-100 dark:text-black px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+              variant="cta"
             >
               Launch Course Navigator
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -177,9 +178,12 @@ export default function CourseNavigatorPage() {
               <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <Link
                   href="mailto:dev@uuais.com"
-                  className="block w-full text-center px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors"
+                  className="block w-full text-center px-4 py-2 text-white font-medium rounded-lg transition-colors"
+
                 >
-                  Contact the Team
+                  <Button className="h-fill w-full">
+                    Contact the Team
+                  </Button>
                 </Link>
               </div>
             </div>
