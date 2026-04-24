@@ -1,17 +1,16 @@
 "use client";
 
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useMemo, useState, useCallback, useRef } from "react";
+import Link from "next/link";
 import { fetchCoursesClient, fetchCoursesByIdsClient, primeCourseClientCache } from "@/lib/firestore/courses";
 import type { Course } from "@/lib/courses";
 import RagChat from "@/components/common/RagChat";
 import CourseCard from "@/components/courses/CourseCard";
-import EmbeddingMap from "@/components/courses/EmbeddingMap";
 import { updatePageMeta } from "@/utils/seo";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
-import { useAdmin } from "@/hooks/useAdmin";
-import { useRouter } from "next/navigation";
+import { Heart } from "lucide-react";
 
 export default function ExplorePage() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -24,45 +23,38 @@ export default function ExplorePage() {
   const [showAllCourses, setShowAllCourses] = useState(false);
   const [search, setSearch] = useState("");
   const [levelFilter, setLevelFilter] = useState<string>("all");
-  const [sortBy, setSortBy] = useState<string>("relevance");
-  const [groupBy, setGroupBy] = useState<string>("none");
 
   // Pagination state
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState<number>(50);
-  
-  const [viewMode, setViewMode] = useState<"grid" | "embedding">("grid");
-  const { user, isAdmin, loading: adminLoading } = useAdmin();
-  const router = useRouter();
-
-  // Load initial courses on mount
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+  const latestRequestId = useRef(0);
+  const pageCourseLimit = 50;
   useEffect(() => {
     updatePageMeta(
       "Explore Courses",
       "Discover, search, and compare all Uppsala University courses"
     );
-    loadCourses(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Load courses function
   const loadCourses = useCallback(async (pageNum: number, searchQuery?: string, level?: string) => {
-    if (adminLoading) return;
+    const requestId = ++latestRequestId.current;
     setIsLoading(true);
     try {
-      // Force refresh token to ensure fresh admin claims
-      const token = await user?.getIdToken(true);
-
       const result = await fetchCoursesClient({ 
         page: pageNum, 
-        limit: 50,
+        limit: pageCourseLimit,
         search: searchQuery || '',
         level: level || 'all',
-        token: token || '',
       });
+
+      if (requestId !== latestRequestId.current) {
+        return;
+      }
       
       if (pageNum === 1) {
         setCourses(result.courses);
@@ -77,13 +69,15 @@ export default function ExplorePage() {
     } catch (error) {
       console.error('Failed to load courses:', error);
     } finally {
-      setIsLoading(false);
+      if (requestId === latestRequestId.current) {
+        setIsLoading(false);
+        setInitialLoadComplete(true);
+      }
     }
-  }, [user, adminLoading]);
+  }, []);
 
   // Fetch full course details for recommendations
   const loadRecommendedCourses = useCallback(async (ids: string[]) => {
-    if (adminLoading) return;
     if (ids.length === 0) {
       setRecommendedCourses([]);
       return;
@@ -91,9 +85,7 @@ export default function ExplorePage() {
     
     setIsLoadingRecommendations(true);
     try {
-      // Force refresh token to ensure fresh admin claims
-      const token = await user?.getIdToken(true);
-      const matched = await fetchCoursesByIdsClient(ids, token || '');
+      const matched = await fetchCoursesByIdsClient(ids);
       setRecommendedCourses(matched);
       setHasLoadedRecommendations(true);
     } catch (error) {
@@ -102,20 +94,26 @@ export default function ExplorePage() {
     } finally {
       setIsLoadingRecommendations(false);
     }
-  }, [user, adminLoading]);
+  }, []);
+
+  useEffect(() => {
+    queueMicrotask(() => {
+      void loadCourses(1, search, levelFilter);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadCourses]);
 
   // Handle AI recommendations
   useEffect(() => {
-    if (recommendedIds.length > 0) {
-      setShowAllCourses(false);
-      setSortBy("relevance");
-      setHasLoadedRecommendations(false);
-      setIsWaitingForAI(false);
-      loadRecommendedCourses(recommendedIds);
-    } else {
+    queueMicrotask(() => {
+      if (recommendedIds.length > 0) {
+        void loadRecommendedCourses(recommendedIds);
+        return;
+      }
+
       setRecommendedCourses([]);
       setHasLoadedRecommendations(false);
-    }
+    });
   }, [recommendedIds, loadRecommendedCourses]);
 
   const baseResults = useMemo(() => {
@@ -146,64 +144,55 @@ export default function ExplorePage() {
       next = next.filter((c) => (c.level || "Unknown") === levelFilter);
     }
 
-    const sorted = [...next];
-    if (sortBy === "title") {
-      sorted.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (sortBy === "code") {
-      sorted.sort((a, b) => (a.code || "").localeCompare(b.code || ""));
-    } else if (sortBy === "level") {
-      const order: Record<string, number> = { Preparatory: 1, "Bachelor's": 2, "Master's": 3, Unknown: 4 };
-      sorted.sort((a, b) => (order[a.level || "Unknown"] ?? 99) - (order[b.level || "Unknown"] ?? 99));
-    } else if (sortBy === "random") {
-      sorted.sort(() => Math.random() - 0.5);
-    }
-
-    return sorted;
-  }, [baseResults, search, levelFilter, sortBy]);
-
-  // Reset pagination when filters change
-  useEffect(() => {
-    setVisibleCount(50);
-    // Reload courses with new filters
-    if (showAllCourses) {
-      loadCourses(1, search, levelFilter);
-    }
-  }, [search, levelFilter, showAllCourses, loadCourses]);
+    return [...next];
+  }, [baseResults, search, levelFilter]);
 
   const visibleResults = useMemo(() => {
     return results.slice(0, Math.min(visibleCount, results.length));
   }, [results, visibleCount]);
 
-  const groupedResults = useMemo(() => {
-    if (groupBy !== "level") return null;
-    const groups: Record<string, Course[]> = {};
-    for (const c of visibleResults) {
-      const key = c.level || "Unknown";
-      groups[key] = groups[key] || [];
-      groups[key].push(c);
-    }
-    const order = ["Preparatory", "Bachelor's", "Master's", "Unknown"];
-    return order
-      .filter((k) => (groups[k] || []).length > 0)
-      .map((k) => ({ key: k, courses: groups[k] }));
-  }, [groupBy, visibleResults]);
+  const showInitialCourseSkeleton =
+    !isWaitingForAI &&
+    !isLoadingRecommendations &&
+    !hasLoadedRecommendations &&
+    recommendedIds.length === 0 &&
+    (!initialLoadComplete || (isLoading && courses.length === 0));
+
+  const canShowClientMore = visibleResults.length < results.length;
+  const canLoadMoreFromServer = !canShowClientMore && hasNextPage && !isLoading;
+  const showServerLoadMoreLoading = !canShowClientMore && hasNextPage && isLoading && initialLoadComplete;
 
   const handleLoadMore = useCallback(() => {
-    if (hasNextPage && !isLoading) {
+    if ((showAllCourses || recommendedIds.length === 0) && hasNextPage && !isLoading) {
       loadCourses(page + 1, search, levelFilter);
-    } else {
-      // Client-side pagination for already loaded courses
-      setVisibleCount(prev => Math.min(results.length, prev + 10));
-    }
-  }, [hasNextPage, isLoading, page, search, levelFilter, loadCourses, results.length]);
+    } 
+    setVisibleCount(prev => Math.min(results.length, prev + 10));
+  }, [showAllCourses, recommendedIds.length, hasNextPage, isLoading, page, search, levelFilter, loadCourses, results.length]);
 
-  // Admin auth check
-  if (adminLoading) {
-    return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
-  }
-  if (!isAdmin) {
-    return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Not authorized</div>;
-  }
+  const handleSearchChange = useCallback((value: string) => {
+    setSearch(value);
+    setVisibleCount(50);
+    if (showAllCourses || recommendedIds.length === 0) {
+      loadCourses(1, value, levelFilter);
+    }
+  }, [showAllCourses, recommendedIds.length, levelFilter, loadCourses]);
+
+  const handleLevelFilterChange = useCallback((value: string) => {
+    setLevelFilter(value);
+    setVisibleCount(50);
+    if (showAllCourses || recommendedIds.length === 0) {
+      loadCourses(1, search, value);
+    }
+  }, [showAllCourses, recommendedIds.length, search, loadCourses]);
+
+  const handleClearRecommendations = useCallback(() => {
+    setRecommendedIds([]);
+    setRecommendedCourses([]);
+    setHasLoadedRecommendations(false);
+    setIsWaitingForAI(false);
+    setShowAllCourses(true);
+    setVisibleCount(50);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300">
@@ -217,6 +206,8 @@ export default function ExplorePage() {
         <div className="bg-white dark:bg-gray-800 p-4 md:p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-10">
           <RagChat 
             onRecommendations={(ids) => {
+              setShowAllCourses(false);
+              setHasLoadedRecommendations(false);
               setIsWaitingForAI(false);
               setRecommendedIds(ids);
             }} 
@@ -243,80 +234,38 @@ export default function ExplorePage() {
                   : "Browse all courses without AI intervention."}
               </div>
             </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              {/* View mode toggle */}
-              <div className="flex rounded-lg border border-gray-200 dark:border-gray-600 overflow-hidden">
-                <button
-                  onClick={() => setViewMode("grid")}
-                  className={`px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${viewMode === "grid"
-                    ? "bg-[#990000] text-white"
-                    : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
-                    }`}
-                >
-                  Grid
-                </button>
-                <button
-                  onClick={() => setViewMode("embedding")}
-                  className={`px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${viewMode === "embedding"
-                    ? "bg-[#990000] text-white"
-                    : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
-                    }`}
-                >
-                  Embedding Space
-                </button>
-              </div>
-
-              {/* {recommendedIds.length > 0 && (
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    setRecommendedIds([]);
-                    setShowAllCourses(true);
-                  }}
-                >
-                  Clear AI results
+            <div className="flex flex-wrap gap-3">
+              {recommendedIds.length > 0 && (
+                <Button variant="outline" onClick={handleClearRecommendations}>
+                  Clear recommendations
                 </Button>
-              )} */}
+              )}
+              <Button asChild variant="outline">
+                <Link href="/my-courses" className="flex items-center gap-1">
+                  <Heart className="text-[#990000] h-4 w-4" />
+                  Saved courses
+                </Link>
+              </Button>
             </div>
           </div>
 
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder="Filter by title, code, tag…"
                 fullWidth
               />
               <Select
                 value={levelFilter}
-                onChange={(e) => setLevelFilter(e.target.value)}
+                onChange={(e) => handleLevelFilterChange(e.target.value)}
                 options={[
                   { value: "all", label: "All levels" },
                   { value: "Preparatory", label: "Preparatory" },
                   { value: "Bachelor's", label: "Bachelor's" },
                   { value: "Master's", label: "Master's" },
                   { value: "Unknown", label: "Unknown" },
-                ]}
-              />
-              <Select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                options={[
-                  { value: "relevance", label: "Sort: relevance" },
-                  { value: "title", label: "Sort: title" },
-                  { value: "code", label: "Sort: code" },
-                  { value: "level", label: "Sort: level" },
-                  { value: "random", label: "Sort: random" },
-                ]}
-              />
-              <Select
-                value={groupBy}
-                onChange={(e) => setGroupBy(e.target.value)}
-                options={[
-                  { value: "none", label: "Group: none" },
-                  { value: "level", label: "Group: level" },
                 ]}
               />
             </div>
@@ -328,21 +277,7 @@ export default function ExplorePage() {
             </div>
           </div>
 
-          {viewMode === "embedding" ? (
-            <div className="mt-6">
-              {/* <p>Temporarily disabled</p> */}
-              {!adminLoading && user && (
-                <EmbeddingMap
-                  recommendedIds={recommendedIds}
-                  onCourseClick={(id) => router.push(`/explore/${id}`)}
-                  height={560}
-                />
-              )}
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                Each dot represents a course, projected from its 768-dimensional embedding. Similar courses appear closer together. Recommended courses are highlighted.
-              </p>
-            </div>
-          ) : isWaitingForAI || (!hasLoadedRecommendations && recommendedIds.length > 0) || isLoadingRecommendations ? (
+          {isWaitingForAI || (!hasLoadedRecommendations && recommendedIds.length > 0) || isLoadingRecommendations ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 animate-pulse">
@@ -360,27 +295,30 @@ export default function ExplorePage() {
                 </div>
               ))}
             </div>
-          ) : results.length === 0 ? (
-            <div className="text-center py-12 text-gray-600 dark:text-gray-300">No courses found, please try again.</div>
-          ) : groupedResults ? (
-            <div className="space-y-10">
-              {groupedResults.map((g) => (
-                <div key={g.key}>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">{g.key}</h3>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {g.courses.map((c) => (
-                      <CourseCard key={c.id} course={c} hrefBase="/explore" />
-                    ))}
+          ) : showInitialCourseSkeleton ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6 animate-pulse">
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-3"></div>
+                  <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-2"></div>
+                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
+                  <div className="space-y-2 mb-6">
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-4/6"></div>
                   </div>
+                  <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
                 </div>
               ))}
             </div>
+          ) : results.length === 0 ? (
+            <div className="text-center py-12 text-gray-600 dark:text-gray-300">No courses found, please try again.</div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {visibleResults.map((c) => (
                 <CourseCard key={c.id} course={c} hrefBase="/explore" />
               ))}
-              {hasNextPage && !isLoading && (
+              {canLoadMoreFromServer && (
                 <Button
                   variant="outline"
                   className="col-span-1 self-center md:col-span-2 lg:col-span-3"
@@ -389,7 +327,7 @@ export default function ExplorePage() {
                   Load more from server
                 </Button>
               )}
-              {visibleResults.length < results.length && (
+              {canShowClientMore && (
                 <Button
                   variant="outline"
                   className="col-span-1 self-center md:col-span-2 lg:col-span-3"
@@ -399,6 +337,11 @@ export default function ExplorePage() {
                 >
                   Show more
                 </Button>
+              )}
+              {showServerLoadMoreLoading && (
+                <div className="col-span-1 self-center md:col-span-2 lg:col-span-3 text-center text-sm text-gray-500 dark:text-gray-400">
+                  Loading more courses...
+                </div>
               )}
             </div>
           )}
