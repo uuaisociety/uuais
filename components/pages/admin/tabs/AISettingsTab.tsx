@@ -43,14 +43,6 @@ const AISettingsTab: React.FC = () => {
 
   const { isSuperAdmin } = useAdmin();
 
-  useEffect(() => {
-    loadSettings();
-    loadUsage();
-    if (isSuperAdmin) {
-      loadOpenRouterModels();
-    }
-  }, [isSuperAdmin]);
-
   const loadSettings = async () => {
     try {
       setLoading(true);
@@ -193,6 +185,13 @@ Always base your recommendations on the provided course context.`,
       });
     }
   };
+  useEffect(() => {
+    loadSettings();
+    loadUsage();
+    if (isSuperAdmin) {
+      loadOpenRouterModels();
+    }
+  }, [isSuperAdmin]);
 
   if (loading) {
     return (

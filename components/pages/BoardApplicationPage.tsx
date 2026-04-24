@@ -165,7 +165,6 @@ export default function BoardApplicationPage() {
 
       setForms(prev => ({ ...prev, [roleId]: { ...prev[roleId], submitted: true } }));
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error('Submit error', err);
       if (roleId) {
         setForms(prev => ({ ...prev, [roleId]: { ...prev[roleId], errors: { ...(prev[roleId].errors || {}), form: 'Submission failed' } } }));
