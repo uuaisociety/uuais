@@ -70,8 +70,6 @@ function Button({
   disabled,
   ...props
 }: ButtonProps) {
-  const Comp = asChild ? Slot : "button"
-
   const classes = cn(buttonVariants({ variant, size, fullWidth }), className)
 
   if (asChild) {
