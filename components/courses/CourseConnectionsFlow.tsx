@@ -22,7 +22,7 @@ const MAX_CONNECTIONS_DEFAULT = 15; // Default cap on connections
 
 export default function CourseConnectionsFlow({ 
   focus, 
-  height = 360, 
+  height = 460, 
   hrefBase = "/explore",
   maxConnections = MAX_CONNECTIONS_DEFAULT 
 }: Props) {
@@ -32,16 +32,19 @@ export default function CourseConnectionsFlow({
   const [prereqOfCourses, setPrereqOfCourses] = useState<Map<string, CourseConnection>>(new Map());
   const [relatedCourses, setRelatedCourses] = useState<CourseConnection[]>([]);
   const [loading, setLoading] = useState(true);
+  const [graphUnavailable, setGraphUnavailable] = useState(false);
 
   // Fetch prerequisite and dependent course details with caps
   useEffect(() => {
     const loadRelatedCourses = async () => {
       setLoading(true);
+      setGraphUnavailable(false);
       try {
         // Fetch focus course connection data
         const focusConn = await fetchCourseConnections(focus.id, maxConnections);
         
         if (!focusConn) {
+          setGraphUnavailable(true);
           setLoading(false);
           return;
         }
@@ -62,6 +65,7 @@ export default function CourseConnectionsFlow({
         setRelatedCourses(Array.from(relatedMap.values()));
       } catch (error) {
         console.error("Failed to load related courses:", error);
+        setGraphUnavailable(true);
       } finally {
         setLoading(false);
       }
@@ -205,8 +209,8 @@ export default function CourseConnectionsFlow({
           style: {
             borderRadius: 8,
             padding: 8,
-            border: node.kind === 'focus' ? "2px solid #990000" : "1px solid #e5e7eb",
-            background: node.kind === 'focus' ? "#fff5f5" : "white",
+            border: node.kind === 'focus' ? "2px solid #990000" : "2px solid #3b82f6",
+            background: node.kind === 'focus' ? "#fff5f5" : "#eff6ff",
             width: nodeWidth,
           },
         });
@@ -278,7 +282,7 @@ export default function CourseConnectionsFlow({
         source: e.v,
         target: e.w,
         type: 'smoothstep',
-        style: { stroke: "#94a3b8", strokeWidth: 1.5 },
+        style: { stroke: "#3b82f6", strokeWidth: 1.75 },
       });
     });
 
@@ -299,8 +303,8 @@ export default function CourseConnectionsFlow({
         style: {
           borderRadius: 8,
           padding: 8,
-          border: "1px solid #e5e7eb",
-          background: "white",
+          border: "2px solid #94a3b8",
+          background: "#f8fafc",
           width: nodeWidth,
         },
       });
@@ -357,6 +361,13 @@ export default function CourseConnectionsFlow({
 
     return { nodes, edges };
   }, [focus, prereqCourses, relatedCourses, prereqOfCourses]);
+  const hasVisibleConnections =
+    edges.length > 0 ||
+    prereqCourses.size > 0 ||
+    prereqOfCourses.size > 0 ||
+    relatedCourses.length > 0 ||
+    Boolean(focus.structured_requirements) ||
+    Boolean(focus.entry_requirements);
 
   const edgeTypes = {
     targetLabel: TargetLabelEdge,
@@ -383,8 +394,28 @@ export default function CourseConnectionsFlow({
             <span className="text-sm text-gray-500">Loading course connections...</span>
           </div>
         )}
+        {!loading && (graphUnavailable || !hasVisibleConnections) && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-50/90 dark:bg-gray-900/85 z-10 px-6 text-center">
+            <div className="max-w-md">
+              <div className="text-sm font-medium text-gray-700 dark:text-gray-200">No detailed connection graph available yet</div>
+              <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                We could not build a full prerequisite graph for this course. The raw prerequisite information and linked course IDs below still provide the best available context.
+              </div>
+            </div>
+          </div>
+        )}
         <div style={{ width: "100%", height: isFull ? "100%" : height }}>
-          <ReactFlow nodes={nodes} edges={edges} edgeTypes={edgeTypes} fitView onNodeClick={onNodeClick} attributionPosition="bottom-right">
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            edgeTypes={edgeTypes}
+            fitView
+            fitViewOptions={{ padding: isFull ? 0.3 : 0.6, minZoom: 0.15, maxZoom: 0.95 }}
+            onNodeClick={onNodeClick}
+            attributionPosition="bottom-right"
+            minZoom={0.1}
+            maxZoom={1.2}
+          >
             <Background gap={16} color="#cbd5e1" />
             <Controls showInteractive={false} />
           </ReactFlow>
