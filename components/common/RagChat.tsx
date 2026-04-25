@@ -418,7 +418,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
       </div>
     );
   }
-  console.log("chats", chats);
+
   return (
     <div ref={containerRef} className="relative">
       {/* Chat grows upwards above the input only when focused and the user has sent at least one query  */}
@@ -513,39 +513,41 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                     {m.role === "assistant" && m.recommendations && m.recommendations.length > 0 && (
                       <div className="ml-12 space-y-2">
                         <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">Recommended courses:</div>
-                        {m.recommendations.map((courseId) => {
-                          const course = courseCache.get(courseId);
-                          if (!course) return null;
-                          return (
-                            <Link
-                              key={`${m.id}-${courseId}`}
-                              href={`/explore/${courseId}`}
-                              className="block group"
-                            >
-                              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 hover:border-[#990000] dark:hover:border-[#990000] transition-all cursor-pointer shadow-sm hover:shadow-md">
-                                <div className="flex items-start justify-between gap-2">
-                                  <div className="flex-1 min-w-0">
-                                    <div className="flex items-center gap-2 mb-1">
-                                      {course.level && (
-                                        <span className="text-xs text-gray-500 dark:text-gray-400">{course.level}</span>
-                                      )}
-                                      {course.credits && (
-                                        <span className="text-xs text-gray-500 dark:text-gray-400">{course.credits} credits</span>
-                                      )}
+                        <div className="flex flex-col gap-2 max-w-xl mr-8">
+                          {m.recommendations.map((courseId) => {
+                            const course = courseCache.get(courseId);
+                            if (!course) return null;
+                            return (
+                              <Link
+                                key={`${m.id}-${courseId}`}
+                                href={`/explore/${courseId}`}
+                                className="block group max-w-xl"
+                              >
+                                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 hover:border-[#990000] dark:hover:border-[#990000] transition-all cursor-pointer shadow-sm hover:shadow-md">
+                                  <div className="flex items-start justify-between gap-2">
+                                    <div className="flex-1 min-w-0">
+                                      <div className="flex items-center gap-2 mb-1">
+                                        {course.level && (
+                                          <span className="text-xs text-gray-500 dark:text-gray-400">{course.level}</span>
+                                        )}
+                                        {course.credits && (
+                                          <span className="text-xs text-gray-500 dark:text-gray-400">{course.credits} credits</span>
+                                        )}
+                                      </div>
+                                      <div className="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-[#990000] transition-colors">
+                                        {course.title} - {course.code || course.id}
+                                      </div>
+                                      <div className="text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
+                                        {course.description}
+                                      </div>
                                     </div>
-                                    <div className="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-[#990000] transition-colors">
-                                      {course.title} - {course.code || course.id}
-                                    </div>
-                                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
-                                      {course.description}
-                                    </div>
+                                    <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-[#990000] transition-colors shrink-0 mt-1" />
                                   </div>
-                                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-[#990000] transition-colors shrink-0 mt-1" />
                                 </div>
-                              </div>
-                            </Link>
-                          );
-                        })}
+                              </Link>
+                            );
+                          })}
+                        </div>
                       </div>
                     )}
                   </div>
