@@ -399,7 +399,7 @@ export default function CourseConnectionsFlow({
             <div className="max-w-md">
               <div className="text-sm font-medium text-gray-700 dark:text-gray-200">No detailed connection graph available yet</div>
               <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                We could not build a full prerequisite graph for this course. The raw prerequisite information and linked course IDs below still provide the best available context.
+                We could not build a full prerequisite graph for this course. The raw prerequisite information and linked course IDs above still provide the best available context.
               </div>
             </div>
           </div>
