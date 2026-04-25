@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import type { LucideIcon } from "lucide-react"
 
@@ -70,8 +69,6 @@ function Button({
   disabled,
   ...props
 }: ButtonProps) {
-  const Comp = asChild ? Slot : "button"
-
   const classes = cn(buttonVariants({ variant, size, fullWidth }), className)
 
   if (asChild) {

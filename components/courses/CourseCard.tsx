@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -11,33 +11,54 @@ import { auth } from "@/lib/firebase-client";
 import { onAuthStateChanged } from "firebase/auth";
 import { isCourseFavorited, toggleFavorite } from "@/lib/firestore/favorites";
 
-type Props = { course: Course; hrefBase?: string };
+type Props = {
+  course: Course;
+  hrefBase?: string;
+  initialFavorited?: boolean;
+  onFavoriteChange?: (isFavorited: boolean) => void;
+};
 
-export default function CourseCard({ course, hrefBase = "/course" }: Props) {
-  const [isFavorited, setIsFavorited] = useState(false);
+export default function CourseCard({
+  course,
+  hrefBase = "/course",
+  initialFavorited = false,
+  onFavoriteChange,
+}: Props) {
+  const [isFavorited, setIsFavorited] = useState(initialFavorited);
   const [user, setUser] = useState<{ uid: string } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (u) => setUser(u ? { uid: u.uid } : null));
-    return () => unsub();
-  }, []);
+    let isMounted = true;
 
-  const checkFavoriteStatus = useCallback(async () => {
-    if (!user) return;
-    try {
-      const favorited = await isCourseFavorited(user.uid, course.id);
-      setIsFavorited(favorited);
-    } catch (e) {
-      console.error("Failed to check favorite status:", e);
-    }
-  }, [user, course.id]);
+    const unsub = onAuthStateChanged(auth, async (u) => {
+      if (!isMounted) {
+        return;
+      }
 
-  useEffect(() => {
-    if (user) {
-      checkFavoriteStatus();
-    }
-  }, [user, course.id, checkFavoriteStatus]);
+      const nextUser = u ? { uid: u.uid } : null;
+      setUser(nextUser);
+
+      if (!nextUser) {
+        setIsFavorited(initialFavorited);
+        return;
+      }
+
+      try {
+        const favorited = await isCourseFavorited(nextUser.uid, course.id);
+        if (isMounted) {
+          setIsFavorited(favorited);
+        }
+      } catch (e) {
+        console.error("Failed to check favorite status:", e);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+      unsub();
+    };
+  }, [course.id, initialFavorited]);
 
   const handleToggleFavorite = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -48,6 +69,7 @@ export default function CourseCard({ course, hrefBase = "/course" }: Props) {
     try {
       const newStatus = await toggleFavorite(user.uid, course.id);
       setIsFavorited(newStatus);
+      onFavoriteChange?.(newStatus);
     } catch (e) {
       console.error("Failed to toggle favorite:", e);
     } finally {
@@ -67,7 +89,7 @@ export default function CourseCard({ course, hrefBase = "/course" }: Props) {
                 </span>
               )}
               <div className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">{course.code}</div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mt-1">{course.title}</h3>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mt-1">{course.title} - {course.id}</h3>
             </div>
             {user && (
               <Button

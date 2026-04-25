@@ -4,7 +4,7 @@ export interface AIChat {
   id: string;
   userId: string;
   title: string;
-  messages: { role: 'user' | 'assistant'; content: string; timestamp: string }[];
+  messages: { role: 'user' | 'assistant'; content: string; timestamp: string; recommendations?: string[] }[];
   recommendedCourseIds: string[];
   createdAt: string;
   updatedAt: string;

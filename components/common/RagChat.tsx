@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { Send, Loader2, History, Trash2, Plus, MessageSquare, ChevronLeft, ExternalLink } from "lucide-react";
+import { Send, Loader2, Trash2, Plus, MessageSquare, ExternalLink, Bug, History } from "lucide-react";
 import Image from "next/image";
 import { auth } from "@/lib/firebase-client";
 import Link from "next/link";
@@ -21,6 +21,23 @@ type ChatError = {
   details?: string;
 };
 
+type ChatDebugInfo = {
+  model: string;
+  retrievalQuery: string;
+  keywords: string[];
+  allowedCourseIds: string[];
+  candidateCourses: Array<{ id: string; code: string; title: string }>;
+  promptMessages: Array<{ role: "system" | "user" | "assistant"; content: string }>;
+  rawModelContent: string;
+  parsedResponse: { message: string; recommendations: string[] };
+  parsedRecommendations: string[];
+  normalizedRecommendations: string[];
+};
+
+function createMessageTimestamp() {
+  return Date.now();
+}
+
 interface Props {
   onRecommendations?: (courseIds: string[]) => void;
   onThinkingStart?: () => void;
@@ -28,22 +45,24 @@ interface Props {
 }
 
 export default function RagChat({ onRecommendations, onThinkingStart, placeholder = "Ask about courses..." }: Props) {
-  const [focused, setFocused] = useState(false);
+  const [focused, setFocused] = useState(true);
   const [value, setValue] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [rateLimit, setRateLimit] = useState<RateLimitInfo | null>(null);
   const [error, setError] = useState<ChatError | null>(null);
+  const [debugInfo, setDebugInfo] = useState<ChatDebugInfo | null>(null);
   const [chats, setChats] = useState<AIChat[]>([]);
   const [showSidebar, setShowSidebar] = useState(true);
   const [currentChatId, setCurrentChatId] = useState<string | null>(null);
   const [chatsCursor, setChatsCursor] = useState<QueryDocumentSnapshot<DocumentData> | null>(null);
-  const [chatsHasMore, setChatsHasMore] = useState(true);
+  const [chatsHasMore, setChatsHasMore] = useState(false);
   const [chatsLoading, setChatsLoading] = useState(false);
   const chatsLoadingRef = useRef(false);
+  const hasRestoredLatestChatRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const { user, loading: userLoading } = useAdmin();
+  const { user, isAdmin, loading: userLoading } = useAdmin();
   const [courseCache, setCourseCache] = useState<Map<string, Course>>(new Map());
   //const lastAssistant = useMemo(() => [...messages].reverse().find(m => m.role === "assistant"), [messages]);
 
@@ -62,6 +81,9 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
       setChats(page.chats);
       setChatsCursor(page.nextCursor);
       setChatsHasMore(Boolean(page.nextCursor) && page.chats.length > 0 && page.chats.length < 50);
+      if (page.chats.length === 0) {
+        hasRestoredLatestChatRef.current = true;
+      }
     } catch (e) {
       console.error("Failed to load chats:", e);
     } finally {
@@ -134,6 +156,38 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
     init();
   }, [user,userLoading, loadInitialChats]);
 
+  const fetchRecommendedCourses = useCallback(async (courseIds: string[]) => {
+    if (!user) return;
+    
+    // Filter out courses we already have in cache
+    const uncachedIds = courseIds.filter(id => !courseCache.has(id));
+    if (uncachedIds.length === 0) return;
+    
+    try {
+      // Auth is handled via cookies by next-firebase-auth-edge middleware
+      const res = await fetch('/api/courses/batch', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ids: uncachedIds }),
+      });
+      
+      if (res.ok) {
+        const { courses } = await res.json();
+        setCourseCache(prev => {
+          const newCache = new Map(prev);
+          courses.forEach((course: Course) => {
+            newCache.set(course.id, course);
+          });
+          return newCache;
+        });
+      }
+    } catch (e) {
+      console.error('Failed to fetch recommended courses:', e);
+    }
+  }, [user, courseCache]);
+
   async function send() {
     const q = value.trim();
     if (!q || !user || loading) return;
@@ -149,20 +203,26 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
     setLoading(true);
     setError(null);
     onThinkingStart?.();
-    const userMsg: Message = { id: crypto.randomUUID(), role: "user", content: q, ts: Date.now() };
+    const userMsg: Message = { id: crypto.randomUUID(), role: "user", content: q, ts: createMessageTimestamp() };
     const newMessages = [...messages, userMsg];
     setMessages(newMessages);
     setValue("");
 
     try {
       // Auth is handled via cookies by next-firebase-auth-edge middleware
+      // Include conversation history for context
+      const conversationHistory = messages.map(m => ({
+        role: m.role as 'user' | 'assistant',
+        content: m.content
+      }));
+      
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ query: q }),
+        body: JSON.stringify({ query: q, conversationHistory }),
       });
 
       const data = await res.json();
@@ -188,11 +248,12 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
         throw { message: errorMessage, type: errorType, details: errorDetails } as ChatError;
       }
 
+      setDebugInfo(data.debug ?? null);
       const assistantMsg: Message = {
         id: crypto.randomUUID(),
         role: "assistant",
         content: data.data.message,
-        ts: Date.now(),
+        ts: createMessageTimestamp(),
         recommendations: data.data.recommendations,
       };
       const finalMessages = [...newMessages, assistantMsg];
@@ -233,9 +294,10 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
         role: m.role,
         content: m.content,
         timestamp: new Date(m.ts).toISOString(),
+        recommendations: m.recommendations,
       })),
-      recommendedCourseIds: recommendations,
-    };
+      recommendedCourseIds: Array.from(new Set(chatMessages.flatMap((message) => message.recommendations || recommendations))),
+    } as AIChat;
 
     try {
       const chatId = await saveChat(user.uid, { ...chatData, id: currentChatId || undefined });
@@ -260,25 +322,27 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
     }
   }
 
-  async function loadChat(chat: AIChat) {
+  const loadChat = useCallback(async (chat: AIChat) => {
     setCurrentChatId(chat.id);
+    setDebugInfo(null);
     const loadedMessages: Message[] = chat.messages.map((m, idx) => ({
       id: `${chat.id}-${idx}`,
       role: m.role,
       content: m.content,
       ts: new Date(m.timestamp).getTime(),
-      // Only assistant messages have recommendations
-      recommendations: m.role === 'assistant' && idx > 0 ? chat.recommendedCourseIds : undefined,
+      recommendations: m.recommendations || (m.role === 'assistant' && idx > 0 ? chat.recommendedCourseIds : undefined),
     }));
     setMessages(loadedMessages);
-    if (chat.recommendedCourseIds?.length && onRecommendations) {
-      onRecommendations(chat.recommendedCourseIds);
+    const latestRecommendations =
+      [...loadedMessages].reverse().find((message) => message.role === "assistant" && message.recommendations?.length)?.recommendations ||
+      chat.recommendedCourseIds;
+    if (latestRecommendations?.length && onRecommendations) {
+      onRecommendations(latestRecommendations);
       // Fetch course details for loaded chat
-      await fetchRecommendedCourses(chat.recommendedCourseIds);
+      await fetchRecommendedCourses(latestRecommendations);
     }
-    setShowSidebar(true);
     setFocused(true);
-  }
+  }, [fetchRecommendedCourses, onRecommendations]);
 
   async function handleDeleteChat(chatId: string, e: React.MouseEvent) {
     e.stopPropagation();
@@ -299,45 +363,23 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
   function startNewChat() {
     setCurrentChatId(null);
     setMessages([]);
-    setShowSidebar(true);
+    setDebugInfo(null);
+    hasRestoredLatestChatRef.current = true;
     setFocused(true);
   }
+
+  const handleCopyDebug = useCallback(async () => {
+    if (!debugInfo) return;
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(debugInfo, null, 2));
+    } catch (error) {
+      console.error("Failed to copy debug info:", error);
+    }
+  }, [debugInfo]);
 
   const handleLoadMoreChats = useCallback(async () => {
     await loadMoreChats();
   }, [loadMoreChats]);
-
-  const fetchRecommendedCourses = useCallback(async (courseIds: string[]) => {
-    if (!user) return;
-    
-    // Filter out courses we already have in cache
-    const uncachedIds = courseIds.filter(id => !courseCache.has(id));
-    if (uncachedIds.length === 0) return;
-    
-    try {
-      // Auth is handled via cookies by next-firebase-auth-edge middleware
-      const res = await fetch('/api/courses/batch', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ids: uncachedIds }),
-      });
-      
-      if (res.ok) {
-        const { courses } = await res.json();
-        setCourseCache(prev => {
-          const newCache = new Map(prev);
-          courses.forEach((course: Course) => {
-            newCache.set(course.id, course);
-          });
-          return newCache;
-        });
-      }
-    } catch (e) {
-      console.error('Failed to fetch recommended courses:', e);
-    }
-  }, [user, courseCache]);
 
   useEffect(() => {
     if (focused) {
@@ -345,6 +387,24 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
       (el as HTMLInputElement | undefined)?.focus();
     }
   }, [focused]);
+
+  useEffect(() => {
+    hasRestoredLatestChatRef.current = false;
+  }, [user?.uid]);
+
+  useEffect(() => {
+    if (hasRestoredLatestChatRef.current) {
+      return;
+    }
+    if (chats.length === 0 || currentChatId || messages.length > 0) {
+      return;
+    }
+
+    hasRestoredLatestChatRef.current = true;
+    queueMicrotask(() => {
+      void loadChat(chats[0]);
+    });
+  }, [chats, currentChatId, loadChat, messages.length]);
 
   if(userLoading){
     return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
@@ -366,20 +426,24 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
         <div className="rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
           <div className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center gap-2">
-              <Button size="sm" variant="ghost" onClick={() => setShowSidebar(!showSidebar)} className="p-1">
-                <History className="h-4 w-4" />
-              </Button>
               <div className="text-sm text-gray-600 dark:text-gray-300">AI Course Advisor</div>
+              <button
+                type="button"
+                onClick={() => setShowSidebar((prev) => !prev)}
+                className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+                title={showSidebar ? "Hide chat history" : "Show chat history"}
+                aria-label={showSidebar ? "Hide chat history" : "Show chat history"}
+              >
+                <History className="h-4 w-4 text-gray-500" />
+              </button>
             </div>
             <div className="flex items-center gap-2">
-              {rateLimit && <span className="text-xs text-gray-500">{rateLimit.remaining} left today</span>}
-              <Button size="sm" onClick={() => setFocused(false)}>Close</Button>
+              {rateLimit && rateLimit.remaining <= 3 && <span className="text-xs text-gray-500">{rateLimit.remaining} left today</span>}
             </div>
           </div>
-          <div className="max-h-[600px] min-h-[400px] flex">
-            {/* Allow transition on sidebar */}
+          <div className="max-h-[600px] min-h-[400px] flex flex-col md:flex-row">
             {showSidebar && (
-              <div className="w-64 border-r border-gray-200 dark:border-gray-700 flex flex-col bg-gray-50 dark:bg-gray-800 transition-all duration-450 ease-out">
+              <div className="md:w-64 md:min-w-64 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 flex flex-col bg-gray-50 dark:bg-gray-800">
                 <div className="p-3 border-b border-gray-200 dark:border-gray-700">
                   <Button size="sm" onClick={startNewChat} className="w-full">
                     <Plus className="h-4 w-4 mr-1" /> New Chat
@@ -390,11 +454,10 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                     <div className="text-xs text-gray-500 text-center py-4">No chat history</div>
                   )}
                   {chats.map((chat) => (
-                    /* Pop on hover */
                     <div
                       key={chat.id}
                       onClick={() => loadChat(chat)}
-                      className={`w-full cursor-pointer group text-left p-2 transition-colors rounded text-sm hover:bg-gray-300 dark:hover:bg-gray-700  ${
+                      className={`w-full cursor-pointer group text-left p-2 transition-colors rounded text-sm hover:bg-gray-300 dark:hover:bg-gray-700 ${
                         currentChatId === chat.id ? 'bg-gray-200 dark:bg-gray-700' : ''
                       }`}
                     >
@@ -434,12 +497,6 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
             )}
             
             <div className="flex-1 flex flex-col p-3">
-              {showSidebar && (
-                
-                <Button size="sm" variant="ghost" onClick={() => setShowSidebar(false)} className="self-start mb-2">
-                  <ChevronLeft className="h-4 w-4 mr-1" /> Hide History
-                </Button>
-              )}
               <div ref={listRef} className="space-y-3 overflow-auto pt-5 pb-5 max-h-[500px]">
                 {messages.length === 0 && (<div className="flex flex-col items-center">
                   <div className="text-sm text-gray-600 dark:text-gray-300 italic">Ask about anything related to course selection, e.g "Find me courses covering machine learning and LLMs"</div>
@@ -456,40 +513,41 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                     {m.role === "assistant" && m.recommendations && m.recommendations.length > 0 && (
                       <div className="ml-12 space-y-2">
                         <div className="text-xs text-gray-500 dark:text-gray-400 font-medium">Recommended courses:</div>
-                        {m.recommendations.map((courseId) => {
-                          const course = courseCache.get(courseId);
-                          if (!course) return null;
-                          return (
-                            <Link
-                              key={`${m.id}-${courseId}`}
-                              href={`/explore/${courseId}`}
-                              className="block group"
-                            >
-                              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 hover:border-[#990000] dark:hover:border-[#990000] transition-all cursor-pointer shadow-sm hover:shadow-md">
-                                <div className="flex items-start justify-between gap-2">
-                                  <div className="flex-1 min-w-0">
-                                    <div className="flex items-center gap-2 mb-1">
-                                      <span className="text-xs font-medium text-[#990000] bg-red-50 dark:bg-red-900/20 px-2 py-0.5 rounded">{course.code}</span>
-                                      {course.level && (
-                                        <span className="text-xs text-gray-500 dark:text-gray-400">{course.level}</span>
-                                      )}
-                                      {course.credits && (
-                                        <span className="text-xs text-gray-500 dark:text-gray-400">{course.credits} credits</span>
-                                      )}
+                        <div className="flex flex-col gap-2 max-w-xl mr-8">
+                          {m.recommendations.map((courseId) => {
+                            const course = courseCache.get(courseId);
+                            if (!course) return null;
+                            return (
+                              <Link
+                                key={`${m.id}-${courseId}`}
+                                href={`/explore/${courseId}`}
+                                className="block group max-w-xl"
+                              >
+                                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 hover:border-[#990000] dark:hover:border-[#990000] transition-all cursor-pointer shadow-sm hover:shadow-md">
+                                  <div className="flex items-start justify-between gap-2">
+                                    <div className="flex-1 min-w-0">
+                                      <div className="flex items-center gap-2 mb-1">
+                                        {course.level && (
+                                          <span className="text-xs text-gray-500 dark:text-gray-400">{course.level}</span>
+                                        )}
+                                        {course.credits && (
+                                          <span className="text-xs text-gray-500 dark:text-gray-400">{course.credits} credits</span>
+                                        )}
+                                      </div>
+                                      <div className="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-[#990000] transition-colors">
+                                        {course.title} - {course.code || course.id}
+                                      </div>
+                                      <div className="text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
+                                        {course.description}
+                                      </div>
                                     </div>
-                                    <div className="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-[#990000] transition-colors">
-                                      {course.title}
-                                    </div>
-                                    <div className="text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
-                                      {course.description}
-                                    </div>
+                                    <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-[#990000] transition-colors shrink-0 mt-1" />
                                   </div>
-                                  <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-[#990000] transition-colors shrink-0 mt-1" />
                                 </div>
-                              </div>
-                            </Link>
-                          );
-                        })}
+                              </Link>
+                            );
+                          })}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -553,9 +611,59 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                   {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                 </Button>
               </form>
+              {isAdmin && debugInfo && (
+                <details className="mt-4 rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 text-sm font-medium text-amber-900 dark:text-amber-200">
+                    <span className="inline-flex items-center gap-2">
+                      <Bug className="h-4 w-4" />
+                      Admin Debug
+                    </span>
+                    <span className="text-xs text-amber-700 dark:text-amber-300">
+                      {debugInfo.model} • {debugInfo.normalizedRecommendations.length} normalized IDs
+                    </span>
+                  </summary>
+                  <div className="border-t border-amber-200 dark:border-amber-800 px-4 py-3 space-y-3">
+                    <div className="flex justify-end">
+                      <Button size="sm" variant="outline" onClick={handleCopyDebug}>
+                        Copy Debug JSON
+                      </Button>
+                    </div>
+                    <div className="grid gap-3 md:grid-cols-2 text-xs text-gray-700 dark:text-gray-200">
+                      <div>
+                        <div className="font-semibold mb-1">Parsed response</div>
+                        <pre className="whitespace-pre-wrap rounded bg-white/70 dark:bg-gray-950/40 p-2">{JSON.stringify(debugInfo.parsedResponse, null, 2)}</pre>
+                      </div>
+                      <div>
+                        <div className="font-semibold mb-1">Normalized recommendations</div>
+                        <pre className="whitespace-pre-wrap rounded bg-white/70 dark:bg-gray-950/40 p-2">{JSON.stringify(debugInfo.normalizedRecommendations, null, 2)}</pre>
+                      </div>
+                      <div>
+                        <div className="font-semibold mb-1">Retrieval query</div>
+                        <pre className="whitespace-pre-wrap rounded bg-white/70 dark:bg-gray-950/40 p-2">{debugInfo.retrievalQuery}</pre>
+                      </div>
+                      <div>
+                        <div className="font-semibold mb-1">Keywords</div>
+                        <pre className="whitespace-pre-wrap rounded bg-white/70 dark:bg-gray-950/40 p-2">{JSON.stringify(debugInfo.keywords, null, 2)}</pre>
+                      </div>
+                    </div>
+                    <div className="text-xs text-gray-700 dark:text-gray-200">
+                      <div className="font-semibold mb-1">Candidate courses</div>
+                      <pre className="whitespace-pre-wrap rounded bg-white/70 dark:bg-gray-950/40 p-2 max-h-40 overflow-auto">{JSON.stringify(debugInfo.candidateCourses, null, 2)}</pre>
+                    </div>
+                    <div className="text-xs text-gray-700 dark:text-gray-200">
+                      <div className="font-semibold mb-1">Prompt messages</div>
+                      <pre className="whitespace-pre-wrap rounded bg-white/70 dark:bg-gray-950/40 p-2 max-h-56 overflow-auto">{JSON.stringify(debugInfo.promptMessages, null, 2)}</pre>
+                    </div>
+                    <div className="text-xs text-gray-700 dark:text-gray-200">
+                      <div className="font-semibold mb-1">Raw model content</div>
+                      <pre className="whitespace-pre-wrap rounded bg-white/70 dark:bg-gray-950/40 p-2 max-h-56 overflow-auto">{debugInfo.rawModelContent || "[empty]"}</pre>
+                    </div>
+                  </div>
+                </details>
+              )}
             </div>
           </div>
-          <div className="p-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">LLM RAG Prototype • {rateLimit?.remaining ?? '?'} requests remaining today</div>
+          <div className="p-2 text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">RAG Prototype{rateLimit && rateLimit.remaining <= 3 && ` • ${rateLimit.remaining} requests remaining today`}</div>
         </div>
       </div>
 
@@ -574,16 +682,6 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
         <Button type="submit" className="bg-[#990000] hover:bg-[#7f0000] text-white transition-colors duration-100">Ask</Button>
       </form>
 
-      {/* Docked mini-preview when closed */}
-      {chats && chats.length > 0 && (
-        <Button
-          variant="default"
-          onClick={() => { setFocused((prev) => !prev); const el = containerRef.current?.querySelector('input'); (el as HTMLInputElement | undefined)?.focus(); }}
-          className="mt-3 w-full text-left px-3 pt-2 pb-1 rounded-lg transition-all duration-100 cursor-pointer  "
-        >
-          <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">Recent chat • {rateLimit?.remaining ?? '?'} left today</div>
-        </Button>
-      )}
     </div>
   );
 }

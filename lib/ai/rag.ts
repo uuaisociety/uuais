@@ -52,7 +52,10 @@ Your task:
 
 Rules:
 - ONLY recommend from the provided course list
-- Use the exact "ID" field (e.g., "teaching-spanish-culture...") in your recommendations array, NOT the course code
+- The recommendations array must contain ONLY exact course IDs copied from the provided "ID" fields
+- NEVER return course codes, titles, labels, explanations, or strings like "CODE - Title"
+- NEVER return numbered strings or objects inside recommendations
+- If you are unsure about an ID, leave it out instead of guessing
 - Be specific about why a course matches (level, credits, content, prerequisites)
 - If no courses match well, say so clearly
 - Keep explanations concise but informative
@@ -72,6 +75,19 @@ export type ChatRecommendation = {
 export type RAGResult = {
   message: string;
   recommendations: string[];
+};
+
+export type RAGDebugInfo = {
+  model: string;
+  retrievalQuery: string;
+  keywords: string[];
+  allowedCourseIds: string[];
+  candidateCourses: Array<{ id: string; code: string; title: string }>;
+  promptMessages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>;
+  rawModelContent: string;
+  parsedResponse: { message: string; recommendations: string[] };
+  parsedRecommendations: string[];
+  normalizedRecommendations: string[];
 };
 
 // Simple keyword extraction and scoring for initial retrieval
@@ -194,8 +210,12 @@ async function retrieveRelevantCourses(query: string, maxCourses = 30): Promise<
 
 function buildContext(courses: Course[], keywords: string[]): string {
   const keywordList = keywords.join(', ');
+  const allowedIds = courses.map((course) => course.id).join(', ');
   
   return `Query Keywords: ${keywordList || 'N/A'}
+
+Allowed Recommendation IDs:
+${allowedIds || 'N/A'}
 
 Available Courses (${courses.length}):
 
@@ -211,25 +231,107 @@ ${courses.map((c, i) => {
   }).join('\n\n')}`;
 }
 
+function buildRetrievalQuery(query: string, conversationHistory: { role: 'user' | 'assistant'; content: string }[], maxHistory: number): string {
+  const recentUserTurns = conversationHistory
+    .slice(-maxHistory)
+    .filter((message) => message.role === 'user')
+    .map((message) => message.content.trim())
+    .filter(Boolean);
 
+  return [...recentUserTurns, query].join('\n');
+}
+
+function formatConversationHistory(conversationHistory: { role: 'user' | 'assistant'; content: string }[], maxHistory: number): string {
+  const recentMessages = conversationHistory.slice(-maxHistory);
+  if (recentMessages.length === 0) {
+    return "";
+  }
+
+  return recentMessages
+    .map((message) => {
+      const speaker = message.role === 'user' ? 'User' : 'Assistant';
+      const content = message.content.trim().replace(/\s+/g, ' ');
+      return `${speaker}: ${content.slice(0, 400)}${content.length > 400 ? '…' : ''}`;
+    })
+    .join('\n');
+}
+
+function normalizeRecommendationId(rec: unknown, relevantCourses: Course[]): string | null {
+  const recStr = String(rec ?? '').trim();
+  if (!recStr) {
+    return null;
+  }
+
+  const recLower = recStr.toLowerCase();
+  const byId = new Map(relevantCourses.map((course) => [course.id.toLowerCase(), course.id]));
+  const byCode = new Map(
+    relevantCourses
+      .filter((course) => Boolean(course.code))
+      .map((course) => [course.code.toLowerCase(), course.id])
+  );
+  const byTitle = new Map(
+    relevantCourses
+      .filter((course) => Boolean(course.title))
+      .map((course) => [course.title.toLowerCase(), course.id])
+  );
+
+  const directIdMatch = byId.get(recLower);
+  if (directIdMatch) {
+    return directIdMatch;
+  }
+
+  const directCodeMatch = byCode.get(recLower);
+  if (directCodeMatch) {
+    return directCodeMatch;
+  }
+
+  const directTitleMatch = byTitle.get(recLower);
+  if (directTitleMatch) {
+    return directTitleMatch;
+  }
+
+  const ordinalIndex = Number.parseInt(recStr, 10);
+  if (!Number.isNaN(ordinalIndex) && String(ordinalIndex) === recStr) {
+    return relevantCourses[ordinalIndex - 1]?.id || null;
+  }
+
+  const idSubstringMatch = relevantCourses.find((course) => recLower.includes(course.id.toLowerCase()));
+  if (idSubstringMatch) {
+    return idSubstringMatch.id;
+  }
+
+  const codeSubstringMatch = relevantCourses.find((course) => {
+    if (!course.code) return false;
+    return recLower.includes(course.code.toLowerCase());
+  });
+  if (codeSubstringMatch) {
+    return codeSubstringMatch.id;
+  }
+
+  return null;
+}
 
 export async function processRAGRequest({
   query,
   conversationHistory = [],
+  includeDebug = false,
 }: {
   query: string;
   userId?: string;
   conversationHistory?: { role: 'user' | 'assistant'; content: string }[];
-}): Promise<{ result: RAGResult; usage: { promptTokens: number; completionTokens: number; totalTokens: number } }> {
+  includeDebug?: boolean;
+}): Promise<{ result: RAGResult; usage: { promptTokens: number; completionTokens: number; totalTokens: number }; debug?: RAGDebugInfo }> {
   // Load AI settings from Firestore
   const settings = await getAISettings();
   const systemPrompt = settings.systemPrompt || DEFAULT_SYSTEM_PROMPT;
   const model = settings.model || 'mistralai/mistral-nemo';
   const maxTokens = settings.maxTokensPerRequest || DEFAULT_MAX_TOKENS;
   const maxHistory = settings.maxConversationHistory || DEFAULT_MAX_HISTORY;
+  const retrievalQuery = buildRetrievalQuery(query, conversationHistory, maxHistory);
+  const historyContext = formatConversationHistory(conversationHistory, maxHistory);
 
   // Retrieve relevant courses using hybrid search (vector + keyword)
-  const { courses: relevantCourses, keywords } = await retrieveRelevantCourses(query);
+  const { courses: relevantCourses, keywords } = await retrieveRelevantCourses(retrievalQuery);
   //console.log("Courses sent to LLM: ", relevantCourses);
   if (relevantCourses.length === 0) {
     return {
@@ -238,6 +340,18 @@ export async function processRAGRequest({
         recommendations: [],
       },
       usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
+      debug: includeDebug ? {
+        model,
+        retrievalQuery,
+        keywords,
+        allowedCourseIds: [],
+        candidateCourses: [],
+        promptMessages: [],
+        rawModelContent: '',
+        parsedResponse: { message: '', recommendations: [] },
+        parsedRecommendations: [],
+        normalizedRecommendations: [],
+      } : undefined,
     };
   }
 
@@ -250,17 +364,27 @@ export async function processRAGRequest({
     ...conversationHistory.slice(-maxHistory),
     {
       role: 'user' as const,
-      content: `${context}
+      content: `${historyContext ? `Recent conversation:\n${historyContext}\n\n` : ''}${context}
 
 User query: ${query}
 
-Respond with JSON containing "message" (string) and "recommendations" (array of courseId from the list above).`,
+Return JSON with:
+- "message": a short helpful answer
+- "recommendations": an array containing ONLY exact course IDs from "Allowed Recommendation IDs"
+
+Bad recommendation examples:
+- "1TE750 - Electromechanical Project"
+- "1TE750"
+- {"courseId":"abc"}
+
+Good recommendation example:
+["exact-course-id-from-allowed-list"]`,
     },
   ];
 
   // Call AI. If the model returns malformed output, fall back gracefully
   // to vector-ranked recommendations instead of failing the whole request.
-  let response: { data: { message: string; recommendations: string[] }; usage: { promptTokens: number; completionTokens: number; totalTokens: number } };
+  let response: { data: { message: string; recommendations: string[] }; rawContent: string; usage: { promptTokens: number; completionTokens: number; totalTokens: number } };
   try {
     response = await generateStructured<{ message: string; recommendations: string[] }>(
       messages,
@@ -275,41 +399,57 @@ Respond with JSON containing "message" (string) and "recommendations" (array of 
           recommendations: fallbackRecommendations,
         },
         usage: { promptTokens: 0, completionTokens: 0, totalTokens: 0 },
+        debug: includeDebug ? {
+          model,
+          retrievalQuery,
+          keywords,
+          allowedCourseIds: relevantCourses.map((course) => course.id),
+          candidateCourses: relevantCourses.map((course) => ({ id: course.id, code: course.code, title: course.title })),
+          promptMessages: messages,
+          rawModelContent: '',
+          parsedResponse: { message: '', recommendations: [] },
+          parsedRecommendations: [],
+          normalizedRecommendations: fallbackRecommendations,
+        } : undefined,
       };
     }
     throw error;
   }
 
   const resultData = response.data as { message: string; recommendations: string[] };
-
-  // Convert ordinal IDs (1, 2, 3...) to actual course IDs ('1BL800', etc.)
-  const normalizedRecommendations = (resultData.recommendations || []).map(rec => {
-    const recStr = String(rec).trim();
-    
-    // 1. Check if the recommendation is already a valid ID in our list
-    const directMatch = relevantCourses.find(c => c.id === recStr);
-    if (directMatch) return directMatch.id;
-
-    // 2. If it's a number, treat it as a 1-based index (Ordinal)
-    const index = parseInt(recStr, 10);
-    if (!isNaN(index)) {
-      // LLMs use 1-based indexing (1 = index 0)
-      const courseByIndex = relevantCourses[index - 1];
-      if (courseByIndex) return courseByIndex.id;
-    }
-
-    // 3. Fallback: If it's not a number and doesn't match, return as is (or null to filter)
-    return recStr;
-  }).filter(id => {
-    // Final safety check: Ensure the ID actually exists in the retrieved set
-    return relevantCourses.some(c => c.id === id);
-  });
+  const parsedRecommendations = Array.isArray(resultData.recommendations) ? resultData.recommendations.map((rec) => String(rec)) : [];
+  const normalizedRecommendations = Array.from(
+    new Set(
+      parsedRecommendations
+        .map((recommendation) => normalizeRecommendationId(recommendation, relevantCourses))
+        .filter((recommendation): recommendation is string => Boolean(recommendation))
+    )
+  );
+  const finalRecommendations =
+    parsedRecommendations.length > 0 && normalizedRecommendations.length === 0
+      ? relevantCourses.slice(0, 5).map((course) => course.id)
+      : normalizedRecommendations;
 
   return {
     result: {
       message: resultData.message,
-      recommendations: normalizedRecommendations || [],
+      recommendations: finalRecommendations,
     },
     usage: response.usage,
+    debug: includeDebug ? {
+      model,
+      retrievalQuery,
+      keywords,
+      allowedCourseIds: relevantCourses.map((course) => course.id),
+      candidateCourses: relevantCourses.map((course) => ({ id: course.id, code: course.code, title: course.title })),
+      promptMessages: messages,
+      rawModelContent: response.rawContent,
+      parsedResponse: {
+        message: resultData.message,
+        recommendations: parsedRecommendations,
+      },
+      parsedRecommendations,
+      normalizedRecommendations: finalRecommendations,
+    } : undefined,
   };
 }

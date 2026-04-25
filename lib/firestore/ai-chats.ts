@@ -12,12 +12,34 @@ import {
   startAfter,
   type QueryDocumentSnapshot,
   type DocumentData,
+  FieldValue,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase-client";
 import { AIChat } from "@/types";
 
 const CHATS_PER_USER_LIMIT = 50;
 const DEFAULT_PAGE_SIZE = 15;
+
+function removeUndefined<T>(obj: T): T {
+  if (obj instanceof FieldValue) {
+    return obj; // preserve serverTimestamp, increment, etc.
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.map(removeUndefined) as T;
+  }
+
+  if (obj !== null && typeof obj === "object") {
+    return Object.fromEntries(
+      Object.entries(obj)
+        .filter(([, v]) => v !== undefined)
+        .map(([k, v]) => [k, removeUndefined(v)])
+    ) as T;
+  }
+
+  return obj;
+}
+
 
 export type ChatsPage = {
   chats: AIChat[];
@@ -103,7 +125,7 @@ export const saveChat = async (
     ...(chat.id ? {} : { createdAt: serverTimestamp() }),
   };
 
-  await setDoc(chatRef, chatData, { merge: true });
+  await setDoc(chatRef, removeUndefined(chatData), { merge: true });
   return chatId;
 };
 

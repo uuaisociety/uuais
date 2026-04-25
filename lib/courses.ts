@@ -151,6 +151,11 @@ export type Course = {
   about_blurb?: string;
   application_code?: string;
   application_deadline?: string;
+  instructional_time?: string;
+  reading_list_link?: string;
+  selection?: string;
+  syllabus_link?: string;
+  teaching_form?: string;
   instruction?: string;
   assessment?: string;
   syllabus?: string;
@@ -254,6 +259,7 @@ function docToCourse(id: string, data: Record<string, unknown>): Course {
     ...(creditsTag ? [creditsTag] : []),
     ...(data.language_of_instruction ? [data.language_of_instruction as string] : (data.language ? [data.language as string] : [])),
     ...(data.location ? [data.location as string] : []),
+    ...(data.pace_of_study ? [`Pace: ${data.pace_of_study as string}`] : []),
     ...(level ? [level] : []),
     ...((data.tags as string[]) || []),
   ];
@@ -285,6 +291,11 @@ function docToCourse(id: string, data: Record<string, unknown>): Course {
     about_blurb: (data.about_blurb as string) || undefined,
     application_code: (data.application_code as string) || undefined,
     application_deadline: (data.application_deadline as string) || undefined,
+    instructional_time: (data.instructional_time as string) || undefined,
+    reading_list_link: (data.reading_list_link as string) || undefined,
+    selection: (data.selection as string) || undefined,
+    syllabus_link: (data.syllabus_link as string) || undefined,
+    teaching_form: (data.teaching_form as string) || undefined,
     instruction: (data.Instruction as string) || (data.instruction as string) || undefined,
     assessment: (data.Assessment as string) || (data.assessment as string) || undefined,
     syllabus: (data.Syllabus as string) || (data.syllabus as string) || undefined,

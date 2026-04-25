@@ -2,13 +2,10 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useAdmin } from "@/hooks/useAdmin";
-import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { ArrowRight } from 'lucide-react';
 
 export default function CourseNavigatorPage() {
-
-  const { isAdmin } = useAdmin();
-
   return (
     <div className="min-h-screen pt-18 pb-8 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,40 +19,30 @@ export default function CourseNavigatorPage() {
           Back to Projects
         </Link>
 
+        {/* Hero CTA Section */}
+        <div className="bg-gradient-to-br from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 rounded-lg p-8 mb-8 text-white text-center">
+          <h1 className="text-4xl font-bold mb-4">
+            Course Navigator
+          </h1>
+          <p className="text-xl text-red-100 dark:text-red-200 mb-6 max-w-2xl mx-auto">
+            Discover courses at Uppsala University using AI-powered recommendations. Search with natural language and explore course connections.
+          </p>
+          <Link href="/explore" className="inline-block">
+            <Button
+              size="lg"
+              className="bg-white hover:bg-gray-100 dark:text-black px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+              variant="cta"
+            >
+              Launch Course Navigator
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Course Navigator
-            </h1>
-            <div className="flex items-center gap-4 mb-6">
-              <span className="bg-red-600 text-white text-sm px-3 py-1 rounded-full">
-                In Development
-              </span>
-              <span className="text-gray-500 dark:text-gray-400">
-                Last updated: February 2026
-              </span>
-            </div>  
-            {/* Add box around admin link */}
-            {isAdmin && (
-              <Link
-                href="/explore"
-                className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 mb-8"
-              >
-                <Card 
-                  variant="outline"
-                  hover={true}
-                >
-                  <div className="flex items-center p-2 pr-4">
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                    Explore Courses
-                  </div>
-                </Card>
-              </Link>
-            )}
 
-            <div className="relative h-64 md:h-96 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mb-8">
+            <div className="relative h-64 md:h-80 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden mb-8">
               <Image
                 src="/images/campus.png"
                 alt="Course Navigator Preview"
@@ -75,7 +62,7 @@ export default function CourseNavigatorPage() {
                 combination can be overwhelming.
               </p>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Our goal is to create a personalized recommendation system that takes into account 
+                Our goal is to create a recommendation system that takes into account 
                 your interests, career goals, and academic background to suggest the most suitable 
                 courses and pathways.
               </p>
@@ -157,11 +144,10 @@ export default function CourseNavigatorPage() {
               </div>
               */}
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Coming Soon Features
+                Features Coming Soon
               </h2>
               <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
                 <li>Integration with UU course catalog</li>
-                <li>Embedding similarity search</li>
                 <li>Course visualization</li>
                 <li>Peer recommendations based on similar backgrounds</li>
                 {/* <li>Export study plans to calendar apps</li> */}
@@ -192,9 +178,12 @@ export default function CourseNavigatorPage() {
               <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
                 <Link
                   href="mailto:dev@uuais.com"
-                  className="block w-full text-center px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors"
+                  className="block w-full text-center px-4 py-2 text-white font-medium rounded-lg transition-colors"
+
                 >
-                  Contact the Team
+                  <Button className="h-fill w-full">
+                    Contact the Team
+                  </Button>
                 </Link>
               </div>
             </div>
