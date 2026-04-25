@@ -297,7 +297,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
         recommendations: m.recommendations,
       })),
       recommendedCourseIds: Array.from(new Set(chatMessages.flatMap((message) => message.recommendations || recommendations))),
-    };
+    } as AIChat;
 
     try {
       const chatId = await saveChat(user.uid, { ...chatData, id: currentChatId || undefined });
@@ -418,7 +418,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
       </div>
     );
   }
-
+  console.log("chats", chats);
   return (
     <div ref={containerRef} className="relative">
       {/* Chat grows upwards above the input only when focused and the user has sent at least one query  */}

@@ -19,6 +19,22 @@ import { AIChat } from "@/types";
 const CHATS_PER_USER_LIMIT = 50;
 const DEFAULT_PAGE_SIZE = 15;
 
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+function removeUndefined(obj: any): any {
+  if (Array.isArray(obj)) {
+    return obj.map(removeUndefined);
+  }
+  if (obj && typeof obj === "object") {
+    return Object.fromEntries(
+      Object.entries(obj)
+        .filter(([_, v]) => v !== undefined)
+        .map(([k, v]) => [k, removeUndefined(v)])
+    );
+  }
+  return obj;
+}
+
+
 export type ChatsPage = {
   chats: AIChat[];
   nextCursor: QueryDocumentSnapshot<DocumentData> | null;
@@ -103,7 +119,7 @@ export const saveChat = async (
     ...(chat.id ? {} : { createdAt: serverTimestamp() }),
   };
 
-  await setDoc(chatRef, chatData, { merge: true });
+  await setDoc(chatRef, removeUndefined(chatData), { merge: true });
   return chatId;
 };
 
