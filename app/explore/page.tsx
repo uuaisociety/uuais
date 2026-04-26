@@ -10,7 +10,7 @@ import { updatePageMeta } from "@/utils/seo";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
-import { Heart } from "lucide-react";
+import { Heart, GraduationCap } from "lucide-react";
 
 export default function ExplorePage() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -241,9 +241,15 @@ export default function ExplorePage() {
                 </Button>
               )}
               <Button asChild variant="outline">
-                <Link href="/my-courses" className="flex items-center gap-1">
-                  <Heart className="text-[#990000] h-4 w-4" />
+                <Link href="/my-courses" className="no-underline flex items-center gap-1 text-gray-700 dark:text-gray-300">
+                  <Heart className="h-4 w-4" />
                   Saved courses
+                </Link>
+              </Button>
+              <Button asChild variant="outline" className="border-blue-200 hover:border-blue-300 dark:border-blue-800 dark:hover:border-blue-700">
+                <Link href="/explore/program" className="no-underline flex items-center gap-1 text-gray-700 dark:text-gray-300">
+                  <GraduationCap className="h-4 w-4" />
+                  Programs
                 </Link>
               </Button>
             </div>
