@@ -17,7 +17,6 @@ import ReactFlow, {
   Panel,
 } from "reactflow";
 import "reactflow/dist/style.css";
-//import dagre from "dagre";
 import { Network, AlertCircle, Maximize2, Minimize2, Info, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import ELK from "elkjs/lib/elk.bundled.js";
@@ -50,7 +49,7 @@ const GHOST_NODE_STYLE = {
 // Course node styling (matching CourseConnectionsFlow course style)
 const COURSE_NODE_STYLE = {
   background: "#eff6ff",
-  border: "2px solid #3b82f6",
+  border: "2px solid #155dfc",
   borderRadius: "8px",
   color: "#1e40af",
 };
@@ -63,53 +62,53 @@ const MANDATORY_NODE_STYLE = {
   color: "#7f1d1d",
 };
 
-function computeNodeDepths(
-  nodes: Node<NodeData>[],
-  edges: Edge[]
-): Map<string, number> {
-  const incoming = new Map<string, number>();
-  const adj = new Map<string, string[]>();
+// function computeNodeDepths(
+//   nodes: Node<NodeData>[],
+//   edges: Edge[]
+// ): Map<string, number> {
+//   const incoming = new Map<string, number>();
+//   const adj = new Map<string, string[]>();
 
-  for (const node of nodes) {
-    incoming.set(node.id, 0);
-    adj.set(node.id, []);
-  }
+//   for (const node of nodes) {
+//     incoming.set(node.id, 0);
+//     adj.set(node.id, []);
+//   }
 
-  for (const edge of edges) {
-    incoming.set(edge.target, (incoming.get(edge.target) || 0) + 1);
-    adj.get(edge.source)?.push(edge.target);
-  }
+//   for (const edge of edges) {
+//     incoming.set(edge.target, (incoming.get(edge.target) || 0) + 1);
+//     adj.get(edge.source)?.push(edge.target);
+//   }
 
-  const queue: string[] = [];
-  const depth = new Map<string, number>();
+//   const queue: string[] = [];
+//   const depth = new Map<string, number>();
 
-  // roots = no prerequisites
-  for (const [id, count] of incoming) {
-    if (count === 0) {
-      queue.push(id);
-      depth.set(id, 0);
-    }
-  }
+//   // roots = no prerequisites
+//   for (const [id, count] of incoming) {
+//     if (count === 0) {
+//       queue.push(id);
+//       depth.set(id, 0);
+//     }
+//   }
 
-  while (queue.length > 0) {
-    const node = queue.shift()!;
-    const d = depth.get(node)!;
+//   while (queue.length > 0) {
+//     const node = queue.shift()!;
+//     const d = depth.get(node)!;
 
-    for (const neighbor of adj.get(node) || []) {
-      incoming.set(neighbor, incoming.get(neighbor)! - 1);
+//     for (const neighbor of adj.get(node) || []) {
+//       incoming.set(neighbor, incoming.get(neighbor)! - 1);
 
-      if (incoming.get(neighbor) === 0) {
-        depth.set(neighbor, d + 1);
-        queue.push(neighbor);
-      } else {
-        // take max depth (important for multiple prereqs)
-        depth.set(neighbor, Math.max(depth.get(neighbor) || 0, d + 1));
-      }
-    }
-  }
+//       if (incoming.get(neighbor) === 0) {
+//         depth.set(neighbor, d + 1);
+//         queue.push(neighbor);
+//       } else {
+//         // take max depth (important for multiple prereqs)
+//         depth.set(neighbor, Math.max(depth.get(neighbor) || 0, d + 1));
+//       }
+//     }
+//   }
 
-  return depth;
-}
+//   return depth;
+// }
 
 
 
@@ -152,7 +151,119 @@ interface GraphCourse {
 }
 
 
-async function layoutWithElk(
+// async function layoutWithElk(
+//   nodes: Node<NodeData>[],
+//   edges: Edge[]
+// ): Promise<Node<NodeData>[]> {
+//   const elk = new ELK({
+//     defaultLayoutOptions: {
+//       connectionLineType: "smoothstep",
+//       defaultEdgeOptions: {
+//         type: "smoothstep",
+//         style: { opacity: 0.7 },
+//       },
+//     },
+//   });
+
+//   const elkGraph = {
+//     id: "root",
+//     layoutOptions: {
+//       "elk.algorithm": "layered",
+//       "elk.direction": "DOWN",
+
+//       // spacing
+//       "elk.layered.spacing.nodeNodeBetweenLayers": "120",
+//       "elk.spacing.nodeNode": "80",
+
+//       // THIS is critical for readable trees
+//       "elk.layered.crossingMinimization.strategy": "LAYER_SWEEP",
+//       "elk.layered.nodePlacement.strategy": "NETWORK_SIMPLEX",
+
+//       // keeps branches tighter
+//       "elk.layered.considerModelOrder": "true",
+
+//       // edge routing
+//       "elk.edgeRouting": "ORTHOGONAL",
+//     },
+//     children: nodes.map((node) => ({
+//       id: node.id,
+//       width:
+//         node.data.kind === "ghost-course"
+//           ? GHOST_NODE_WIDTH
+//           : NODE_WIDTH,
+//       height:
+//         node.data.kind === "ghost-course"
+//           ? GHOST_NODE_HEIGHT
+//           : NODE_HEIGHT,
+//     })),
+//     edges: edges.map((edge) => ({
+//       id: edge.id,
+//       sources: [edge.source],
+//       targets: [edge.target],
+//     })),
+//   };
+
+//   const layout = await elk.layout(elkGraph);
+
+//   const positionMap = new Map<string, { x: number; y: number }>();
+
+//   layout.children?.forEach((n: any) => {
+//     positionMap.set(n.id, { x: n.x, y: n.y });
+//   });
+
+//   return nodes.map((node) => {
+//     const pos = positionMap.get(node.id);
+//     if (!pos) return node;
+
+//     return {
+//       ...node,
+//       position: {
+//         x: pos.x,
+//         y: pos.y,
+//       },
+//     };
+//   });
+// }
+
+function getConnectedComponents(nodes: Node[], edges: Edge[]) {
+  const adj = new Map<string, Set<string>>();
+
+  nodes.forEach(n => adj.set(n.id, new Set()));
+
+  edges.forEach(e => {
+    adj.get(e.source)?.add(e.target);
+    adj.get(e.target)?.add(e.source);
+  });
+
+  const visited = new Set<string>();
+  const components: string[][] = [];
+
+  for (const node of nodes) {
+    if (visited.has(node.id)) continue;
+
+    const stack = [node.id];
+    const component: string[] = [];
+
+    while (stack.length) {
+      const cur = stack.pop()!;
+      if (visited.has(cur)) continue;
+
+      visited.add(cur);
+      component.push(cur);
+
+      for (const neigh of adj.get(cur) || []) {
+        if (!visited.has(neigh)) stack.push(neigh);
+      }
+    }
+
+    components.push(component);
+  }
+
+  return components;
+}
+
+
+async function layoutWithElkGrouped(
   nodes: Node<NodeData>[],
   edges: Edge[]
 ): Promise<Node<NodeData>[]> {
@@ -166,65 +277,72 @@ async function layoutWithElk(
     },
   });
 
-  const elkGraph = {
-    id: "root",
-    layoutOptions: {
-      "elk.algorithm": "layered",
-      "elk.direction": "DOWN",
+  const components = getConnectedComponents(nodes, edges);
 
-      // spacing
-      "elk.layered.spacing.nodeNodeBetweenLayers": "120",
-      "elk.spacing.nodeNode": "80",
+  const nodeMap = new Map(nodes.map(n => [n.id, n]));
 
-      // THIS is critical for readable trees
-      "elk.layered.crossingMinimization.strategy": "LAYER_SWEEP",
-      "elk.layered.nodePlacement.strategy": "NETWORK_SIMPLEX",
+  let offsetX = 0;
+  const GAP_X = 300;
 
-      // keeps branches tighter
-      "elk.layered.considerModelOrder": "true",
+  const resultNodes: Node<NodeData>[] = [];
 
-      // edge routing
-      "elk.edgeRouting": "ORTHOGONAL",
-    },
-    children: nodes.map((node) => ({
-      id: node.id,
-      width:
-        node.data.kind === "ghost-course"
-          ? GHOST_NODE_WIDTH
-          : NODE_WIDTH,
-      height:
-        node.data.kind === "ghost-course"
-          ? GHOST_NODE_HEIGHT
-          : NODE_HEIGHT,
-    })),
-    edges: edges.map((edge) => ({
-      id: edge.id,
-      sources: [edge.source],
-      targets: [edge.target],
-    })),
-  };
+  for (const comp of components) {
+    const compNodes = comp.map(id => nodeMap.get(id)!);
+    const compEdges = edges.filter(
+      e => comp.includes(e.source) && comp.includes(e.target)
+    );
 
-  const layout = await elk.layout(elkGraph);
+    const elkGraph = {
+      id: "root",
+      layoutOptions: {
+        "elk.algorithm": "layered",
+        "elk.direction": "DOWN",
 
-  const positionMap = new Map<string, { x: number; y: number }>();
+        "elk.layered.spacing.nodeNodeBetweenLayers": "120",
+        "elk.spacing.nodeNode": "80",
 
-  layout.children?.forEach((n: any) => {
-    positionMap.set(n.id, { x: n.x, y: n.y });
-  });
+        "elk.layered.crossingMinimization.strategy": "LAYER_SWEEP",
+        "elk.layered.nodePlacement.strategy": "NETWORK_SIMPLEX",
 
-  return nodes.map((node) => {
-    const pos = positionMap.get(node.id);
-    if (!pos) return node;
-
-    return {
-      ...node,
-      position: {
-        x: pos.x,
-        y: pos.y,
+        "elk.edgeRouting": "ORTHOGONAL",
       },
+      children: compNodes.map(n => ({
+        id: n.id,
+        width: n.data.kind === "ghost-course" ? GHOST_NODE_WIDTH : NODE_WIDTH,
+        height: n.data.kind === "ghost-course" ? GHOST_NODE_HEIGHT : NODE_HEIGHT,
+      })),
+      edges: compEdges.map(e => ({
+        id: e.id,
+        sources: [e.source],
+        targets: [e.target],
+      })),
     };
-  });
+
+    const layout = await elk.layout(elkGraph);
+
+    let maxX = 0;
+
+    layout.children?.forEach((n: any) => {
+      const original = nodeMap.get(n.id)!;
+
+      const positioned = {
+        ...original,
+        position: {
+          x: n.x + offsetX,
+          y: n.y,
+        },
+      };
+
+      resultNodes.push(positioned);
+      maxX = Math.max(maxX, n.x);
+    });
+
+    offsetX += maxX + GAP_X;
+  }
+
+  return resultNodes;
 }
+
 
 async function buildProgramGraph(
   program: Program,
@@ -388,7 +506,7 @@ async function buildProgramGraph(
       });
     }
   }
-  return layoutWithElk(nodes, edges).then((layoutedNodes) => ({
+  return layoutWithElkGrouped(nodes, edges).then((layoutedNodes) => ({
     nodes: layoutedNodes,
     edges,
     hasGhostNodes: ghostNodeMap.size > 0,
@@ -466,13 +584,13 @@ const nodeTypes = {
         <div 
           onMouseEnter={() => data.onHover?.(id)}
           onMouseLeave={() => data.onHover?.(null)}
-          className="h-full flex flex-col justify-center text-left"
+          className="h-full flex flex-col justify-center text-left text-gray-700"
         >
           {/* TARGET (incoming edges) */}
           <Handle type="target" position={Position.Top} />
           <div className="flex items-center gap-1 mb-0.5">
             <span className="font-mono text-[10px] opacity-70 truncate">{data.code}</span>
-            <span className="text-[8px] px-1 py-0 bg-red-100 text-red-700 rounded font-medium shrink-0">External</span>
+            <span className="text-[8px] px-1 py-0 bg-gray-100rounded font-medium shrink-0">External</span>
           </div>
           <div className="font-medium text-xs leading-tight line-clamp-2 opacity-80">
             {data.title || "External prerequisite"}
@@ -488,7 +606,7 @@ const nodeTypes = {
         <div 
           onMouseEnter={() => data.onHover?.(id)}
           onMouseLeave={() => data.onHover?.(null)}
-          className="h-full flex flex-col justify-center text-left"
+          className={`h-full flex flex-col justify-center text-left ${data.isMandatory ? "text-red-500 dark:text-red-600"  : "text-blue-500 dark:text-blue-600"}`}
         >
           {/* TARGET (incoming edges) */}
           <Handle type="target" position={Position.Top} />
@@ -593,7 +711,7 @@ export default function GraphPage() {
           code: c.code,
           title: c.title,
           credits: c.credits || 0,
-          isMandatory: false, // Will be determined by track matching in buildProgramGraph
+          isMandatory: c.isMandatory,
           courseId: c.id,
         })));
         
@@ -791,7 +909,7 @@ export default function GraphPage() {
               maxZoom={1.5}
               defaultEdgeOptions={{
                 type: "smoothstep",
-                style: { stroke: "#3b82f6", strokeWidth: 2 },
+                style: { strokeWidth: 2 },
               }}
             >
               <Background color="#e5e7eb" gap={20} />

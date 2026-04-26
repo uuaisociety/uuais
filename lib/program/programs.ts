@@ -974,6 +974,7 @@ interface CourseWithPrereqs {
   code: string;
   title: string;
   credits?: number;
+  isMandatory: boolean;
   prerequisites?: string[] | null;
 }
 
@@ -1015,6 +1016,7 @@ export async function getProgramCoursesWithPrereqs(program: Program): Promise<{
         code: pc.code,
         title: fullCourse.title || pc.title,
         credits: pc.credits,
+        isMandatory: pc.isMandatory,
         prerequisites: fullCourse.prerequisites,
       });
       courseIdSet.add(fullCourse.id);
