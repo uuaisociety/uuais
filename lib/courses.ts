@@ -108,9 +108,9 @@ async function refreshCourseCache(): Promise<Course[]> {
 }
 
 /**
- * Direct fetch from Firestore source - expensive operation, use sparingly.
+ * Direct fetch from Firestore source - bypasses cache. Use when fresh data is critical.
  */
-async function fetchCoursesFromSource(): Promise<Course[]> {
+export async function fetchCoursesFromSource(): Promise<Course[]> {
   const snapshot = await adminDb.collection('courses').get();
   return snapshot.docs.map(doc => docToCourse(doc.id, doc.data() as Record<string, unknown>));
 }
@@ -315,6 +315,33 @@ export async function fetchCourseById(id: string): Promise<Course | undefined> {
   return docToCourse(doc.id, doc.data() as Record<string, unknown>);
 }
 
+/**
+ * Fetch multiple courses by their Firestore document IDs.
+ * Efficiently batch fetches only the requested courses.
+ */
+export async function fetchCoursesByIds(ids: string[]): Promise<{ courses: Course[]; byId: Map<string, Course> }> {
+  if (ids.length === 0) return { courses: [], byId: new Map() };
+  
+  // Remove duplicates
+  const uniqueIds = [...new Set(ids)];
+  
+  // Firestore 'in' query supports up to 30 values, so batch if needed
+  const BATCH_SIZE = 30;
+  const courses: Course[] = [];
+  
+  for (let i = 0; i < uniqueIds.length; i += BATCH_SIZE) {
+    const batch = uniqueIds.slice(i, i + BATCH_SIZE);
+    const snapshot = await adminDb.collection('courses').where('__name__', 'in', batch).get();
+    snapshot.docs.forEach(doc => {
+      courses.push(docToCourse(doc.id, doc.data() as Record<string, unknown>));
+    });
+  }
+  
+  const byId = new Map<string, Course>();
+  courses.forEach(c => byId.set(c.id, c));
+  return { courses, byId };
+}
+
 // ---- Lightweight course connection data for graphs ----
 
 export type CourseConnection = {
@@ -402,4 +429,21 @@ export async function searchCourses(query: string): Promise<Course[]> {
     c.tags.some((t) => t.toLowerCase().includes(q)) ||
     c.code.toLowerCase().includes(q)
   );
+}
+
+/**
+ * Fetch courses by their course codes. Efficiently filters from cache.
+ * Also returns a lookup map for convenience.
+ */
+export async function fetchCoursesByCodes(codes: string[]): Promise<{ courses: Course[]; byCode: Map<string, Course>; byId: Map<string, Course> }> {
+  const allCourses = await fetchCourses();
+  const upperCodes = new Set(codes.map(c => c.toUpperCase()));
+  const matched = allCourses.filter(c => upperCodes.has(c.code.toUpperCase()));
+  const byCode = new Map<string, Course>();
+  const byId = new Map<string, Course>();
+  matched.forEach(c => {
+    byCode.set(c.code.toUpperCase(), c);
+    byId.set(c.id, c);
+  });
+  return { courses: matched, byCode, byId };
 }
