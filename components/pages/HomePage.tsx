@@ -15,6 +15,7 @@ import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
 import campus from '@/public/images/campus.png';
+import HeroAnimation from '@/components/HeroAnimation';
 
 const categoryOptions = [
   { value: 'all', label: 'All Categories' },
@@ -39,6 +40,8 @@ const HomePage: React.FC = () => {
       durationSeed: Math.random(),
     })), []
   );
+
+  const floatingLogosMap = floatingLogos.map((logo: { seed: number; top: number; delaySeed: number; durationSeed: number }, i: number) => ({ logo, i }));
 
   const now = new Date();
   const upcomingEvents = state.events
@@ -84,17 +87,17 @@ const HomePage: React.FC = () => {
         {/* Hero Section */}
         <section className="relative bg-gradient-to-br pt-16 from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white py-20 overflow-hidden">
           <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
-          {/* Floating Logo Background - Only in Hero Section */}
+          {/* Floating Logo Background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {floatingLogos.map((_, i) => (
+            {floatingLogosMap.map(({ logo, i }) => (
               <div
                 key={i}
                 className="absolute animate-float"
                 style={{
-                  left: `${floatingLogos[i].seed * 100}%`,
-                  top: `${floatingLogos[i].top * 100}%`,
-                  animationDelay: `${floatingLogos[i].delaySeed * 2}s`,
-                  animationDuration: `${15 + floatingLogos[i].durationSeed * 10}s`
+                  left: `${logo.seed * 100}%`,
+                  top: `${logo.top * 100}%`,
+                  animationDelay: `${logo.delaySeed * 2}s`,
+                  animationDuration: `${15 + logo.durationSeed * 10}s`
                 }}
               >
                 <Image
@@ -112,30 +115,41 @@ const HomePage: React.FC = () => {
             <div className="absolute top-32 right-20 w-16 h-16 bg-white/5 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-white/5 rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
           </div>
-          <div className="relative pt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Welcome to
-              <span className="block">UU AI Society</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-red-100 dark:text-red-50 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Join the next generation of AI innovators. Learn, create, and shape the future of artificial intelligence.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/events" className="">
-                <Button variant="cta" className="px-12 py-4 text-lg h-full font-semibold hover:shadow-xl">
-                  <span className="ml-4">View Events</span>
-                  <ArrowRight className="ml-2 mr-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  variant="cta"
-                  className="px-8 py-4 text-lg h-full font-semibold hover:shadow-xl"
-                >
-                  Contact us
-                </Button>
-              </Link>
+          
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[500px]">
+              {/* Animation Canvas */}
+              <div className="relative flex justify-center items-center h-[400px] lg:h-[500px] order-2 lg:order-1">
+                <HeroAnimation />
+              </div>
+              
+              {/* Text Content */}
+              <div className="order-1 lg:order-2 text-center lg:text-left">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
+                  Where students
+                  <span className="block">shape the</span>
+                  <span className="block">future of AI</span>
+                </h1>
+                <p className="text-lg md:text-xl text-red-100 dark:text-red-50 mb-8 max-w-xl leading-relaxed">
+                  Uppsala&apos;s student society for artificial intelligence — bridging academia, industry, and ambition.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <Link href="/events">
+                    <Button variant="cta" className="px-8 py-4 text-lg font-semibold hover:shadow-xl bg-white text-red-700 hover:bg-red-50">
+                      Join the society
+                    </Button>
+                  </Link>
+                  <Link href="/about">
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="px-8 py-4 text-lg font-semibold border-white text-white hover:bg-white/10"
+                    >
+                      Learn more <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
