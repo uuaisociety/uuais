@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import { getProgramById, getProgramCoursesWithPrereqs } from "@/lib/program/programs";
 import { Program, ProgramCourse, ProgramTrack } from "@/lib/types/program";
 import { fetchCoursesByIds } from "@/lib/courses";
+import { Button } from "@/components/ui/Button";
 import ReactFlow, {
   Handle,
   Background,
@@ -122,6 +123,7 @@ interface NodeData {
   isMandatory?: boolean;
   trackId?: string;
   isExternal?: boolean;
+  onHover?: (id: string | null) => void;
 }
 
 function getCourseTrack(course: ProgramCourse, tracks: ProgramTrack[]): string {
@@ -267,15 +269,7 @@ async function layoutWithElkGrouped(
   nodes: Node<NodeData>[],
   edges: Edge[]
 ): Promise<Node<NodeData>[]> {
-  const elk = new ELK({
-    defaultLayoutOptions: {
-      connectionLineType: "smoothstep",
-      defaultEdgeOptions: {
-        type: "smoothstep",
-        style: { opacity: 0.7 },
-      },
-    },
-  });
+  const elk = new ELK();
 
   const components = getConnectedComponents(nodes, edges);
 
@@ -322,19 +316,20 @@ async function layoutWithElkGrouped(
 
     let maxX = 0;
 
-    layout.children?.forEach((n: any) => {
-      const original = nodeMap.get(n.id)!;
+    layout.children?.forEach((n: unknown) => {
+      const node = n as { id: string; x: number; y: number };
+      const original = nodeMap.get(node.id)!;
 
       const positioned = {
         ...original,
         position: {
-          x: n.x + offsetX,
-          y: n.y,
+          x: node.x + offsetX,
+          y: node.y,
         },
       };
 
       resultNodes.push(positioned);
-      maxX = Math.max(maxX, n.x);
+      maxX = Math.max(maxX, node.x);
     });
 
     offsetX += maxX + GAP_X;
@@ -344,10 +339,16 @@ async function layoutWithElkGrouped(
 }
 
 
+interface GraphFilters {
+  showNonMandatory: boolean;
+  showExternal: boolean;
+}
+
 async function buildProgramGraph(
   program: Program,
   programCourses: ProgramCourse[],
-  coursesById: Map<string, GraphCourse>
+  coursesById: Map<string, GraphCourse>,
+  filters: GraphFilters = { showNonMandatory: true, showExternal: true }
 ): Promise<{ nodes: Node<NodeData>[]; edges: Edge[]; hasGhostNodes: boolean }> {
   const nodes: Node<NodeData>[] = [];
   const edges: Edge[] = [];
@@ -368,7 +369,14 @@ async function buildProgramGraph(
   // Create program course nodes
   const idToNodeId = new Map<string, string>(); // firestore ID -> graph node ID
   
-  for (const pc of programCourses) {
+  // Filter program courses based on filters
+  const filteredProgramCourses = programCourses.filter(pc => {
+    // If non-mandatory filter is off, only show mandatory courses
+    if (!filters.showNonMandatory && !pc.isMandatory) return false;
+    return true;
+  });
+  
+  for (const pc of filteredProgramCourses) {
     const normCode = pc.code.trim().toUpperCase();
     const firestoreId = programCodeToId.get(normCode);
     if (!firestoreId) continue; // Skip if not found in Firestore
@@ -412,7 +420,7 @@ async function buildProgramGraph(
   
   // First pass: identify all external prerequisites and create ghost nodes
   const externalPrereqIds = new Set<string>();
-  for (const pc of programCourses) {
+  for (const pc of filteredProgramCourses) {
     const normCode = pc.code.trim().toUpperCase();
     const firestoreId = programCodeToId.get(normCode);
     if (!firestoreId) continue;
@@ -428,8 +436,11 @@ async function buildProgramGraph(
     }
   }
   
-  // Create ghost nodes for all external prerequisites
-  for (const prereqId of externalPrereqIds) {
+  // Skip external courses if filter is off
+  const ghostNodesToCreate = filters.showExternal ? externalPrereqIds : new Set<string>();
+  
+  // Create ghost nodes for external prerequisites
+  for (const prereqId of ghostNodesToCreate) {
     const sourceNodeId = `ghost-${prereqId}`;
     ghostNodeMap.set(prereqId, sourceNodeId);
     
@@ -460,7 +471,7 @@ async function buildProgramGraph(
   }
   
   // Second pass: build edges from prerequisites
-  for (const pc of programCourses) {
+  for (const pc of filteredProgramCourses) {
     const normCode = pc.code.trim().toUpperCase();
     const firestoreId = programCodeToId.get(normCode);
     if (!firestoreId) continue;
@@ -786,11 +797,17 @@ export default function GraphPage() {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [hasGhostNodes, setHasGhostNodes] = useState(false);
+  
+  // Filter states
+  const [showNonMandatory, setShowNonMandatory] = useState(true);
+  const [showExternal, setShowExternal] = useState(true);
+  
   useEffect(() => {
     if (!program || progCourses.length === 0 || coursesById.size === 0) {
       return;
     }
-    buildProgramGraph(program, progCourses, coursesById).then((result) => {
+    const filters: GraphFilters = { showNonMandatory, showExternal };
+    buildProgramGraph(program, progCourses, coursesById, filters).then((result) => {
       const nodesWithHandlers = result.nodes.map((node) => ({
         ...node,
         data: {
@@ -802,7 +819,7 @@ export default function GraphPage() {
       setEdges(result.edges);
       setHasGhostNodes(result.hasGhostNodes);
     });
-  }, [program, progCourses, coursesById, setNodes, setEdges, setHasGhostNodes]);  
+  }, [program, progCourses, coursesById, setNodes, setEdges, setHasGhostNodes, showNonMandatory, showExternal]);  
 
 
   useEffect(() => {
@@ -915,19 +932,35 @@ export default function GraphPage() {
               <Background color="#e5e7eb" gap={20} />
               <Controls />
               
-              {/* Fullscreen Toggle Panel */}
+              {/* Filter and Fullscreen Toggle Panel */}
               <Panel position="top-right">
-                <button
-                  onClick={toggleFullscreen}
-                  className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-                  title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
-                >
-                  {isFullscreen ? (
-                    <Minimize2 className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-                  ) : (
-                    <Maximize2 className="h-5 w-5 text-gray-600 dark:text-gray-300" />
-                  )}
-                </button>
+                <div className="flex flex-col gap-2">
+                  <Button
+                    onClick={() => setShowNonMandatory(!showNonMandatory)}
+                    className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-all text-xs font-medium ${showNonMandatory ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}`}
+                    title={showNonMandatory ? "Hide non-mandatory courses" : "Show non-mandatory courses"}
+                  >
+                    {showNonMandatory ? "Hide Elective" : "Show Elective"}
+                  </Button>
+                  <Button
+                    onClick={() => setShowExternal(!showExternal)}
+                    className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-all text-xs font-medium ${showExternal ? 'text-red-600 dark:text-red-400' : 'text-gray-500 dark:text-gray-400'}`}
+                    title={showExternal ? "Hide external prerequisites" : "Show external prerequisites"}
+                  >
+                    {showExternal ? "Hide External" : "Show External"}
+                  </Button>
+                  <Button
+                    onClick={toggleFullscreen}
+                    className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-2 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+                    title={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                  >
+                    {isFullscreen ? (
+                      <Minimize2 className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                    ) : (
+                      <Maximize2 className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                    )}
+                  </Button>
+                </div>
               </Panel>
             </ReactFlow>
           )}
