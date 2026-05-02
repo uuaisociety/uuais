@@ -194,7 +194,6 @@ button:hover {
 }
 
 
-/* Floating animation for background logos */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
@@ -212,6 +211,21 @@ button:hover {
 
 .animate-float {
   animation: float 20s ease-in-out infinite;
+}
+
+@keyframes ripple-expand {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(100);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple-expand 0.8s ease-out forwards;
 }
 
 @keyframes gradientMove {

@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Lock, LockOpen } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAdmin } from '@/hooks/useAdmin';
 import { useEffect, useState, useRef } from 'react';
 import { getUserProfile, type UserProfile } from '@/lib/firestore/users';
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +17,22 @@ export const Header: React.FC = () => {
   const pathname = usePathname();
   const { user, isAdmin, loading, logout } = useAdmin();
   const [profile, setProfile] = useState<UserProfile | null>(null);
+
+  // Read lock state from cookie on mount
+  useEffect(() => {
+    const cookies = document.cookie.split(';').map(c => c.trim());
+    const lockCookie = cookies.find(c => c.startsWith('headerLocked='));
+    if (lockCookie) {
+      setIsLocked(lockCookie.split('=')[1] === 'true');
+    }
+  }, []);
+
+  // Hide header on homepage, show on hover
+  const isHomePage = pathname === '/';
+  const [isHovered, setIsHovered] = useState(!isHomePage);
+  const [isLocked, setIsLocked] = useState(false);
+
+  const shouldShow = !isHomePage || isLocked || isHovered;
 
   useEffect(() => {
     let mounted = true;
@@ -52,7 +69,6 @@ export const Header: React.FC = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    // { name: 'Explore', href: '/explore' },
     { name: 'Events', href: '/events' },
     { name: 'Job board', href: '/careers' },
     { name: 'About', href: '/about' },
@@ -64,10 +80,28 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      <header className="fixed top-0 w-full z-50">
+      {/* Hover trigger area - only on homepage when header is hidden & not locked */}
+      {isHomePage && !isHovered && !isLocked && (
+        <div
+          className="fixed top-0 left-0 w-full h-16 z-40"
+          onMouseEnter={() => setIsHovered(true)}
+        >
+          {/* Subtle hint: pulsing dot */}
+          <div className="absolute top-2 left-1/2 -translate-x-1/2">
+            <div className="w-2 h-2 bg-white/30 rounded-full animate-pulse" />
+          </div>
+        </div>
+      )}
+
+      <header
+        className={`fixed top-0 w-full z-50 transition-transform duration-300 ${
+          shouldShow ? 'translate-y-0' : '-translate-y-full'
+        }`}
+        onMouseLeave={() => isHomePage && !isLocked && setIsHovered(false)}
+      >
         {/* Top auth bar */}
         <div className="w-full bg-gray-100 dark:bg-gray-800 text-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-end h-9">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-end h-9">            
             <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
               {!loading && !user && (
                 <>
@@ -115,7 +149,7 @@ export const Header: React.FC = () => {
                       className={`px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 ${isActive(item.href)
                         ? 'bg-red-600/20'
                         : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                        }`}
+                      }`}
                     >
                       {item.name}
                     </Link>
@@ -125,7 +159,7 @@ export const Header: React.FC = () => {
                     className={`px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 ${isActive('/board-apply')
                       ? 'bg-red-600/20'
                       : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                      }`}
+                    }`}
                   >
                     Join the Board!
                   </Link>
@@ -136,7 +170,7 @@ export const Header: React.FC = () => {
                         className={`px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 flex items-center gap-1 cursor-pointer ${isActive('/projects')
                           ? 'bg-red-600/20'
                           : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                          }`}
+                        }`}
                       >
                         Projects
                         <svg className={`w-4 h-4 transition-transform ${isProjectsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -168,15 +202,6 @@ export const Header: React.FC = () => {
                               My Favorites
                             </Link>
                           )}
-                          {/*
-                          <Link
-                            href="/study-plan"
-                            onClick={() => setIsProjectsOpen(false)}
-                            className="block px-4 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
-                          >
-                            Study Plan Graph
-                          </Link>
-                          */} 
                         </div>
                       )}
                     </div>
@@ -188,13 +213,38 @@ export const Header: React.FC = () => {
                         className={`px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 ${isActive('/admin')
                           ? 'bg-red-600/20'
                           : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                          }`}
+                        }`}
                       >
                         Admin
                       </Link>
                     </>
                   )}
-                  <ThemeToggle />
+                  {/* Lock + Theme toggle group */}
+                  <div className="flex items-center gap-4">
+                    <ThemeToggle />
+                    {/* Lock toggle - only on homepage */}
+                    {isHomePage && (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button
+                              onClick={() => {
+                                const newVal = !isLocked;
+                                setIsLocked(newVal);
+                                document.cookie = "headerLocked=" + newVal + "; path='/'; max-age=31536000";
+                              }}
+                              className="cursor-pointer text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                            >
+                              {isLocked ? <Lock className="h-4 w-4" /> : <LockOpen className="h-4 w-4" />}
+                            </button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>{isLocked ? 'Unlock header' : 'Lock header'}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
+                  </div>
                 </nav>
               </div>
 
@@ -226,7 +276,7 @@ export const Header: React.FC = () => {
                     className={`block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200  ${isActive(item.href)
                       ? 'bg-red-600/20'
                       : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                      }`}
+                    }`}
                   >
                     {item.name}
                   </Link>
@@ -237,10 +287,51 @@ export const Header: React.FC = () => {
                   className={`block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200  ${isActive('/board-apply')
                     ? 'bg-red-600/20'
                     : 'hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                    }`}
+                  }`}
                 >
                   Join the Board!
                 </Link>
+                {isAdmin && (
+                  <div key="Projects" className="relative">
+                    <button
+                      onClick={() => setIsProjectsOpen(!isProjectsOpen)}
+                      className={`px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 flex items-center gap-1 cursor-pointer ${isActive('/projects')
+                        ? 'bg-red-600/20'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                      }`}
+                    >
+                      Projects
+                      <svg className={`w-4 h-4 transition-transform ${isProjectsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    {isProjectsOpen && (
+                      <div className="pl-4 space-y-1">
+                        <Link
+                          href="/projects"
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block px-4 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200"
+                        >
+                          All Projects
+                        </Link>
+                        <Link
+                          href="/explore"
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block px-4 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200"
+                        >
+                          Course Navigator
+                        </Link>
+                        <Link
+                          href="/study-plan"
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block px-4 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200"
+                        >
+                          Study Plan Graph
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                )}
                 {isAdmin && (
                   <>
                     <Link
@@ -249,46 +340,21 @@ export const Header: React.FC = () => {
                       className={`block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 cursor-pointer ${isActive('/projects')
                         ? ' bg-red-600/20'
                         : ' hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                        }`}
+                      }`}
                     >
                       Projects
                     </Link>
-                    <div className="pl-4 space-y-1">
-                      <Link
-                        href="/projects"
-                        onClick={() => setIsMenuOpen(false)}
-                        className="block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200"
-                      >
-                        All Projects
-                      </Link>
-                      <Link
-                        href="/projects/course-navigator"
-                        onClick={() => setIsMenuOpen(false)}
-                        className="block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200"
-                      >
-                        Course Navigator
-                      </Link>
-                      <Link
-                        href="/study-plan"
-                        onClick={() => setIsMenuOpen(false)}
-                        className="block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200"
-                      >
-                        Study Plan Graph
-                      </Link>
-                    </div>
-                  </>
-                )}
-                {isAdmin && (
-                  <Link
-                    href="/admin"
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200 ${isActive('/admin')
-                      ? 'bg-red-600/20'
-                      : 'hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                    <Link
+                      href="/admin"
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block px-3 py-2 rounded-md text-sm text-gray-900 dark:text-white font-medium transition-colors duration-200  ${isActive('/admin')
+                        ? 'bg-red-600/20'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
                       }`}
-                  >
-                    Admin
-                  </Link>
+                    >
+                      Admin
+                    </Link>
+                  </>
                 )}
                 <ThemeToggle />
               </div>
@@ -296,8 +362,8 @@ export const Header: React.FC = () => {
           </div>
         </div>
       </header>
-      {/* Automatic spacer under fixed header: ~24px to avoid cramped content */}
-      <div aria-hidden className="h-12" />
+      {/* Spacer only for non-homepage pages */}
+      {!isHomePage && <div aria-hidden className="h-12" />}
     </>
   );
 };
