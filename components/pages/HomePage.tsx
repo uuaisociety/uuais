@@ -84,75 +84,55 @@ const HomePage: React.FC = () => {
     <div className="relative min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
 
       <div className="relative z-10 space-y-16">
-        {/* Hero Section */}
-        <section className="relative bg-gradient-to-br pt-16 from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white py-20 overflow-hidden">
-          <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
-          {/* Floating Logo Background */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {floatingLogosMap.map(({ logo, i }) => (
-              <div
-                key={i}
-                className="absolute animate-float"
-                style={{
-                  left: `${logo.seed * 100}%`,
-                  top: `${logo.top * 100}%`,
-                  animationDelay: `${logo.delaySeed * 2}s`,
-                  animationDuration: `${15 + logo.durationSeed * 10}s`
-                }}
-              >
-                <Image
-                  src="/images/logo.png"
-                  alt="UU AI Society Logo"
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 md:w-12 md:h-12 opacity-10 filter brightness-0 invert"
-                  priority={false}
-                  unoptimized
-                />
-              </div>
-            ))}
-            <div className="absolute top-10 left-10 w-20 h-20 bg-white/5 rounded-full animate-pulse"></div>
-            <div className="absolute top-32 right-20 w-16 h-16 bg-white/5 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-white/5 rounded-full animate-pulse" style={{ animationDelay: '2s' }}></div>
-          </div>
-          
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[500px]">
-              {/* Animation Canvas */}
-              <div className="relative flex justify-center items-center h-[400px] lg:h-[500px] order-2 lg:order-1">
-                <HeroAnimation />
-              </div>
-              
-              {/* Text Content */}
-              <div className="order-1 lg:order-2 text-center lg:text-left">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
-                  Where students
-                  <span className="block">shape the</span>
-                  <span className="block">future of AI</span>
-                </h1>
-                <p className="text-lg md:text-xl text-red-100 dark:text-red-50 mb-8 max-w-xl leading-relaxed">
-                  Uppsala&apos;s student society for artificial intelligence — bridging academia, industry, and ambition.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                  <Link href="/events">
-                    <Button variant="cta" className="px-8 py-4 text-lg font-semibold hover:shadow-xl bg-white text-red-700 hover:bg-red-50">
-                      Join the society
-                    </Button>
-                  </Link>
-                  <Link href="/about">
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="px-8 py-4 text-lg font-semibold border-white text-white hover:bg-white/10"
-                    >
-                      Learn more <ArrowRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  </Link>
+         {/* Hero Section */}
+         <section className="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white min-h-screen flex items-center">
+           <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
+           
+           {/* Full-screen canvas for nabla + floating symbols */}
+           <div className="absolute inset-0 pointer-events-none">
+             <HeroAnimation />
+           </div>
+
+           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+               <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen">
+               {/* Animation area (left side) */}
+               <div className="hidden lg:block order-2 lg:order-1">
+                 {/* This is just a spacer for the grid */}
+               </div>
+               
+               {/* Text Content */}
+               <div className="flex items-center min-h-screen order-1 lg:order-2 text-center lg:text-left">
+                 <div className="w-full">
+                   <p className="text-lg font-semibold text-red-200 dark:text-red-300 tracking-widest uppercase mb-4">Welcome to UU AI Society</p>
+                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
+                   Where students
+                   <span className="block">shape the</span>
+                   <span className="block">future of AI</span>
+                 </h1>
+                  <p className="text-lg md:text-xl text-red-100 dark:text-red-50 mb-8 max-w-xl leading-relaxed">
+                     Uppsala&apos;s student society for artificial intelligence — meet peers, learn, and build together.
+                   </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <Link href="/events">
+                       <Button variant="cta" size="xl" className="px-8 py-4 text-lg font-semibold hover:shadow-xl bg-white text-black dark:text-black hover:bg-red-50">
+                         Our Events
+                       </Button>
+                     </Link>
+                     <Link href="/about">
+                         <Button
+                           size="xl"
+                           variant="outline"
+                           className="px-8 py-4 text-lg font-semibold "
+                         >
+                         Learn more <ArrowRight className="ml-2 h-5 w-5" />
+                       </Button>
+                     </Link>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
+               </div>
+             </div>
+           </div>
+         </section>
 
         {/* Stats Section */}
         {/* <section className="py-16 bg-gray-50 dark:bg-gray-800/50 transition-colors duration-300">
