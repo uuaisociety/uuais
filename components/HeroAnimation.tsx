@@ -59,13 +59,14 @@ const HeroAnimation: React.FC = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Tracks mouse position for proximity effects
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const now = Date.now();
 
-      // Track velocity with history (last 5 positions)
+      // Track velocity with history to detect mouse speed
       mouseHistoryRef.current.push({ x, y, time: now });
       if (mouseHistoryRef.current.length > 5) mouseHistoryRef.current.shift();
 
@@ -90,6 +91,7 @@ const HeroAnimation: React.FC = () => {
       }
     };
 
+    // Spawn floating math symbols on click for interactive engagement
     const handleClick = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -178,7 +180,6 @@ const HeroAnimation: React.FC = () => {
     }));
 
     // Responsive size - smaller on mobile
-    //const size = W < 500 ? 100 : 150;
     const leftLineExtraWidth = size * 0.05 * 0.8;
 
     const getTrianglePoints = (glitchOffset: Point = { x: 0, y: 0 }, forLeftLine = false): [Point, Point, Point] => {
@@ -409,24 +410,31 @@ const HeroAnimation: React.FC = () => {
 
       animationRef.current = requestAnimationFrame(animate);
     };
-    // const resizeCanvas = () => {
-    //   const rect = canvas.getBoundingClientRect();
-    //   canvas.width = rect.width * dpr;
-    //   canvas.height = rect.height * dpr;
-    //   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    // };
 
-    // document.addEventListener('resize', resizeCanvas);
+    // Resize handler to maintain high DPI rendering
+    const resizeCanvas = () => {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    // Handle window resize events
+    document.addEventListener('resize', resizeCanvas);
+
+    // Track mouse movement velocity for interactive effects
     document.addEventListener('mousemove', handleMouseMove);
+
+    // Spawn math symbols on click for interactive engagement
     document.addEventListener('click', handleClick);
 
     animationRef.current = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(animationRef.current);
+      document.removeEventListener('resize', resizeCanvas);
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('click', handleClick);
-      // document.removeEventListener('resize', resizeCanvas);
     };
   }, []);
 

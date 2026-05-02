@@ -30,17 +30,6 @@ const HomePage: React.FC = () => {
     updatePageMeta('Home', 'UU AI Society - Connecting students passionate about Artificial Intelligence');
   }, []);
 
-  // const floatingLogos = useMemo(() => 
-  //   [...Array(8)].map(() => ({
-  //     seed: Math.random(),
-  //     top: Math.random(),
-  //     delaySeed: Math.random(),
-  //     durationSeed: Math.random(),
-  //   })), []
-  // );
-
-  //const floatingLogosMap = floatingLogos.map((logo: { seed: number; top: number; delaySeed: number; durationSeed: number }, i: number) => ({ logo, i }));
-
   const now = new Date();
   const upcomingEvents = state.events
     .filter(event => event.published === true)
