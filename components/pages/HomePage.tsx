@@ -105,12 +105,11 @@ const HomePage: React.FC = () => {
                  <div className="w-full">
                    <p className="text-lg font-semibold text-red-200 dark:text-red-300 tracking-widest uppercase mb-4">Welcome to UU AI Society</p>
                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
-                   Where students
-                   <span className="block">shape the</span>
-                   <span className="block">future of AI</span>
+                   Build the future.
+                   <span className="block">Start here.</span>
                  </h1>
                   <p className="text-lg md:text-xl text-red-100 dark:text-red-50 mb-8 max-w-xl leading-relaxed">
-                     Uppsala&apos;s student society for artificial intelligence — meet peers, learn, and build together.
+                     Uniting Uppsala students driven by AI, innovation, and meaningful collaboration.
                    </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                     <Link href="/events">
