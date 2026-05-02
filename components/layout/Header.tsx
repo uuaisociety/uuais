@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Lock, LockOpen, ChevronDown, ChevronUp } from 'lucide-react';
+import { Menu, X, Lock, LockOpen, ChevronDown } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAdmin } from '@/hooks/useAdmin';
 import { useEffect, useState, useRef } from 'react';
@@ -18,21 +18,22 @@ export const Header: React.FC = () => {
   const { user, isAdmin, loading, logout } = useAdmin();
   const [profile, setProfile] = useState<UserProfile | null>(null);
 
-  // Read lock state from cookie on mount
-  useEffect(() => {
-    const cookies = document.cookie.split(';').map(c => c.trim());
-    const lockCookie = cookies.find(c => c.startsWith('headerLocked='));
-    if (lockCookie) {
-      setIsLocked(lockCookie.split('=')[1] === 'true');
-    }
-  }, []);
-
   // Hide header on homepage, show on hover
   const isHomePage = pathname === '/';
   const [isHovered, setIsHovered] = useState(!isHomePage);
   const [isLocked, setIsLocked] = useState(false);
 
   const shouldShow = !isHomePage || isLocked || isHovered;
+
+  // Read lock state from cookie on mount
+  useEffect(() => {
+    const cookies = document.cookie.split(';').map(c => c.trim());
+    const lockCookie = cookies.find(c => c.startsWith('headerLocked='));
+    if (lockCookie) {
+      //eslint-disable-next-line
+      setIsLocked(lockCookie.split('=')[1] === 'true');
+    }
+  }, []);
 
   useEffect(() => {
     let mounted = true;

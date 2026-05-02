@@ -141,13 +141,27 @@ const HeroAnimation: React.FC = () => {
 
     const W = rect.width;
     const H = rect.height;
-    // Nabla position: center of left column
-    const center = { x: W * 0.25, y: H / 2 };
+    // On small screens, use virtual width to make content more square
+    const isSmall = W < 500;
+    const virtualW = isSmall ? Math.min(W, H * 0.9) : W;
+    const offsetX = isSmall ? (W - virtualW) / 2 : 0;
+    
+    // Nabla position: responsive - centered on mobile, left column on desktop
+    const size = W < 500 ? 100 : 150;
+
+    const safeBottomPadding = size * 0.35;
+
+    const center = {
+      x: offsetX + virtualW * 0.5,
+      y: Math.min(H / 2, H - size - safeBottomPadding),
+    };
+    // Responsive scale factor for smaller screens
+    const scale = W < 500 ? 0.5 : 1;
 
     // Initialize particles
     const particles: Particle[] = Array.from({ length: 100 }, () => ({
       angle: Math.random() * Math.PI * 2,
-      radius: 120 + Math.random() * 150,
+      radius: (120 + Math.random() * 150) * scale,
       speed: 0.0002 + Math.random() * 0.0004,
       size: 1 + Math.random() * 2,
       drift: Math.random() * 20,
@@ -158,13 +172,13 @@ const HeroAnimation: React.FC = () => {
     const orbitSymbols: OrbitSymbol[] = symbols.map((s) => ({
       text: s,
       angle: Math.random() * Math.PI * 2,
-      radius: 170 + Math.random() * 60,
+      radius: (170 + Math.random() * 60) * scale,
       opacity: 0,
       fadeDelay: Math.random() * 2000,
     }));
 
-    // Fixed size for consistent aspect ratio
-    const size = 150;
+    // Responsive size - smaller on mobile
+    //const size = W < 500 ? 100 : 150;
     const leftLineExtraWidth = size * 0.05 * 0.8;
 
     const getTrianglePoints = (glitchOffset: Point = { x: 0, y: 0 }, forLeftLine = false): [Point, Point, Point] => {
@@ -225,7 +239,7 @@ const HeroAnimation: React.FC = () => {
 
     const drawPulse = (progress: number) => {
       for (let i = 0; i < 7; i++) {
-        const r = 100 + progress * 240 + i * 22;
+        const r = (100 + progress * 240 + i * 22) * scale;
         ctx.beginPath();
         ctx.arc(center.x, center.y, r, 0, Math.PI * 2);
         ctx.strokeStyle = `rgba(255, 255, 255, ${0.14 - i * 0.015})`;
@@ -276,7 +290,7 @@ const HeroAnimation: React.FC = () => {
         const dx = mousePosRef.current.x - center.x;
         const dy = mousePosRef.current.y - center.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const maxDist = 300;
+        const maxDist = 300 * scale;
         if (dist < maxDist && dist > 0) {
           const influence = (1 - dist / maxDist) * 3;
           mouseWobbleX = Math.sin(t * 0.015) * influence * (dx / dist);
@@ -395,7 +409,14 @@ const HeroAnimation: React.FC = () => {
 
       animationRef.current = requestAnimationFrame(animate);
     };
+    // const resizeCanvas = () => {
+    //   const rect = canvas.getBoundingClientRect();
+    //   canvas.width = rect.width * dpr;
+    //   canvas.height = rect.height * dpr;
+    //   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // };
 
+    // document.addEventListener('resize', resizeCanvas);
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('click', handleClick);
 
@@ -405,6 +426,7 @@ const HeroAnimation: React.FC = () => {
       cancelAnimationFrame(animationRef.current);
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('click', handleClick);
+      // document.removeEventListener('resize', resizeCanvas);
     };
   }, []);
 
@@ -412,7 +434,7 @@ const HeroAnimation: React.FC = () => {
     <canvas
       ref={canvasRef}
       className="w-full h-full"
-      style={{ width: '100%', height: '100%' }}
+      style={{ width: '100%', height: '100%', minHeight: '200px' }}
     />
   );
 };

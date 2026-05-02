@@ -1,11 +1,9 @@
-// Math.random in useMemo is intentional - need random positions for floating logo animation
-/* eslint-disable react-hooks/purity */
 'use client'
 
 // Disable static generation for this page
 export const dynamic = 'force-dynamic';
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Calendar, Users, Zap, Globe, BookOpen } from 'lucide-react';
@@ -32,16 +30,16 @@ const HomePage: React.FC = () => {
     updatePageMeta('Home', 'UU AI Society - Connecting students passionate about Artificial Intelligence');
   }, []);
 
-  const floatingLogos = useMemo(() => 
-    [...Array(8)].map(() => ({
-      seed: Math.random(),
-      top: Math.random(),
-      delaySeed: Math.random(),
-      durationSeed: Math.random(),
-    })), []
-  );
+  // const floatingLogos = useMemo(() => 
+  //   [...Array(8)].map(() => ({
+  //     seed: Math.random(),
+  //     top: Math.random(),
+  //     delaySeed: Math.random(),
+  //     durationSeed: Math.random(),
+  //   })), []
+  // );
 
-  const floatingLogosMap = floatingLogos.map((logo: { seed: number; top: number; delaySeed: number; durationSeed: number }, i: number) => ({ logo, i }));
+  //const floatingLogosMap = floatingLogos.map((logo: { seed: number; top: number; delaySeed: number; durationSeed: number }, i: number) => ({ logo, i }));
 
   const now = new Date();
   const upcomingEvents = state.events
@@ -73,83 +71,53 @@ const HomePage: React.FC = () => {
     }
   ];
 
-  // const stats = [
-  //   { number: '500+', label: 'Active Members' },
-  //   { number: '50+', label: 'Events Hosted' },
-  //   { number: '25+', label: 'Industry Partners' },
-  //   { number: '3', label: 'Years of Excellence' }
-  // ];
-
   return (
-    <div className="relative min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+    <div className="relative min-h-screen flex bg-white dark:bg-gray-900 transition-colors duration-300">
 
-      <div className="relative z-10 space-y-16">
+      <div className="relative z-10 flex-1 grow">
          {/* Hero Section */}
-         <section className="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white min-h-screen flex items-center">
-           <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
-           
-           {/* Full-screen canvas for nabla + floating symbols */}
-           <div className="absolute inset-0 pointer-events-none">
-             <HeroAnimation />
-           </div>
+          <section className="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white min-h-screen">
+            <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
 
-           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-               <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen">
-               {/* Animation area (left side) */}
-               <div className="hidden lg:block order-2 lg:order-1">
-                 {/* This is just a spacer for the grid */}
-               </div>
-               
-               {/* Text Content */}
-               <div className="flex items-center min-h-screen order-1 lg:order-2 text-center lg:text-left">
-                 <div className="w-full">
-                   <p className="text-lg font-semibold text-red-200 dark:text-red-300 tracking-widest uppercase mb-4">Welcome to UU AI Society</p>
-                   <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
-                   Build the future.
-                   <span className="block">Start here.</span>
-                 </h1>
-                  <p className="text-lg md:text-xl text-red-100 dark:text-red-50 mb-8 max-w-xl leading-relaxed">
-                     Uniting Uppsala students driven by AI, innovation, and meaningful collaboration.
-                   </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <Link href="/events">
-                       <Button variant="cta" size="xl" className="px-8 py-4 text-lg font-semibold hover:shadow-xl bg-white text-black dark:text-black hover:bg-red-50">
-                         Our Events
-                       </Button>
-                     </Link>
-                     <Link href="/about">
-                         <Button
-                           size="xl"
-                           variant="outline"
-                           className="px-8 py-4 text-lg font-semibold "
-                         >
-                         Learn more <ArrowRight className="ml-2 h-5 w-5" />
-                       </Button>
-                     </Link>
-                  </div>
-                </div>
-               </div>
-             </div>
-           </div>
-         </section>
+            <div className="relative z-10 flex flex-col flex-1 lg:grid lg:grid-cols-2 min-h-screen">
 
-        {/* Stats Section */}
-        {/* <section className="py-16 bg-gray-50 dark:bg-gray-800/50 transition-colors duration-300">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center group hover:transform hover:scale-105 transition-all duration-300">
-                  <div className="text-3xl md:text-4xl font-bold text-red-600 dark:text-red-400 mb-2 group-hover:text-red-700 dark:group-hover:text-red-300 transition-colors duration-300">
-                    {stat.number}
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-300 font-medium">
-                    {stat.label}
-                  </div>
+                {/* Text Content - above animation on mobile, right side on desktop */}
+                <div className="order-1 lg:order-2 flex items-center pt-16 pb-2 lg:py-0 lg:min-h-screen md:min-h-0 text-center lg:text-left">
+                  <div className="w-full">
+                    <p className="text-lg font-semibold text-red-200 dark:text-red-300 tracking-widest uppercase mb-4">Welcome to UU AI Society</p>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
+                      Build the future.
+                      <span className="block">Start here.</span>
+                    </h1>
+                   <p className="text-lg md:text-xl text-red-100 dark:text-red-50 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                      Uniting Uppsala students driven by AI, innovation, and meaningful collaboration.
+                    </p>
+                   <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                     <Link href="/events">
+                        <Button variant="cta" size="xl" className="px-8 py-4 text-lg font-semibold hover:shadow-xl bg-white text-black dark:text-black hover:bg-red-50">
+                          Our Events
+                        </Button>
+                      </Link>
+                      <Link href="/about">
+                          <Button
+                            size="xl"
+                            variant="outline"
+                            className="px-8 py-4 text-lg font-semibold "
+                          >
+                          Learn more <ArrowRight className="ml-2 h-5 w-5" />
+                        </Button>
+                      </Link>
+                   </div>
                 </div>
-              ))}
+                </div>
+
+                {/* Animation area - below text on mobile, left side on desktop */}
+                <div className="order-2 lg:order-1 flex items-center justify-center mx-auto lg:mx-0 flex-1 min-h-[250px] lg:min-h-screen w-full">
+                    <HeroAnimation />
+                </div>
+
             </div>
-          </div>
-        </section> */}
+          </section>
 
         {/* Features Section */}
         <section className="py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -252,37 +220,6 @@ const HomePage: React.FC = () => {
             }
           </div>
         </section>
-
-        {/* CTA Section */}
-        {/* <section className="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white py-20 overflow-hidden">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
-            <Award className="h-16 w-16 mx-auto mb-6 text-yellow-300 dark:text-yellow-400 animate-bounce" />
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 ">
-              Ready to Start Your AI Journey?
-            </h2>
-            <p className="text-xl text-red-100 dark:text-red-75 mb-8 max-w-2xl mx-auto">
-              Join hundreds of students who are already exploring the exciting world of artificial intelligence with us.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="glow-on-hover px-8 py-4 text-lg font-semibold">
-                <Link href="/join" className="flex items-center">
-                  Become a Member
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </button>
-              <Button 
-                size="lg"
-                variant="outline"
-                className="px-8 py-4 text-lg h-full border-white text-white hover:bg-white text-black transform hover:scale-105 transition-all duration-300 hover:shadow-xl"
-              >
-                <Link href="/contact">
-                  Get in Touch
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section> */}
       </div>
     </div>
   );
