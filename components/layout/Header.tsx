@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Lock, LockOpen } from 'lucide-react';
+import { Menu, X, Lock, LockOpen, ChevronDown, ChevronUp } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAdmin } from '@/hooks/useAdmin';
 import { useEffect, useState, useRef } from 'react';
@@ -86,9 +86,10 @@ export const Header: React.FC = () => {
           className="fixed top-0 left-0 w-full h-16 z-40"
           onMouseEnter={() => setIsHovered(true)}
         >
-          {/* Subtle hint: pulsing dot */}
-          <div className="absolute top-2 left-1/2 -translate-x-1/2">
-            <div className="w-2 h-2 bg-white/30 rounded-full animate-pulse" />
+          {/* Gradient hint bar with shimmer */}
+          <div className="absolute top-0 left-0 w-full h-[4px] bg-gradient-to-r from-transparent via-white/30 to-transparent dark:bg-linear-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 flex items-center gap-2">
+            <ChevronDown className="w-4 h-4 text-white/70 animate-pulse" />
           </div>
         </div>
       )}
