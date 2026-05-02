@@ -39,3 +39,4 @@ See CLAUDE.md for coding behavior guidelines: think before coding, simplicity fi
 - `jest.config.ts` and `jest.setup.ts` are fully commented out; Jest uses default config
 - Branch naming: `feature/*`, `fix/*`, `docs/*`, `refactor/*` (see README)
 - Before PR: Run `npm run lint`, test changes, verify TypeScript types
+- Always run `npm run lint` before finishing any coding task
