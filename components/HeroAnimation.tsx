@@ -111,7 +111,7 @@ const HeroAnimation: React.FC = () => {
       ctx.save();
       ctx.strokeStyle = `rgba(255, 255, 255, ${0.95 * glow})`;
       ctx.shadowColor = 'rgba(255, 255, 255, 0.9)';
-      ctx.shadowBlur = 35 * glow;
+      ctx.shadowBlur = 15 * glow;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
 
