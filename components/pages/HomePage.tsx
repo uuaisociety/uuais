@@ -79,7 +79,7 @@ const HomePage: React.FC = () => {
                       <span className="block">Start here.</span>
                     </h1>
                    <p className="text-lg md:text-xl text-red-100 dark:text-red-50 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                      Uniting Uppsala students driven by AI, innovation, and meaningful collaboration.
+                      Uniting Uppsala students driven by AI, tech, and meaningful collaboration.
                     </p>
                    <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                      <Link href="/events">

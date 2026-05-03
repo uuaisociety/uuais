@@ -196,7 +196,8 @@ const HeroAnimation: React.FC = () => {
       const [tlThin, tr, bThin] = getTrianglePoints(glitch, false);
       const [tlThick, , bThick] = getTrianglePoints(glitch, true);
       const baseWidth = 24;
-      const leftWidth = baseWidth * 1.8;
+      const topWidth = baseWidth * 1.5;
+      const leftWidth = baseWidth * 2.2;
 
       ctx.save();
       ctx.strokeStyle = `rgba(255, 255, 255, ${0.95 * glow})`;
@@ -205,21 +206,21 @@ const HeroAnimation: React.FC = () => {
       ctx.lineCap = 'round';
 
       ctx.beginPath();
-      ctx.lineWidth = baseWidth;
+      ctx.lineWidth = topWidth;
       ctx.moveTo(tlThin.x, tlThin.y);
-      ctx.lineTo(tr.x, tr.y);
+      ctx.lineTo(tr.x-7, tr.y);
       ctx.stroke();
 
       ctx.beginPath();
       ctx.lineWidth = baseWidth;
       ctx.moveTo(tr.x, tr.y);
-      ctx.lineTo(bThin.x+3, bThin.y + 5);
+      ctx.lineTo(bThin.x+7, bThin.y + 7);
       ctx.stroke();
 
       ctx.beginPath();
       ctx.lineWidth = leftWidth;
       ctx.moveTo(bThick.x, bThick.y);
-      ctx.lineTo(tlThick.x + 10, tlThick.y + 10);
+      ctx.lineTo(tlThick.x + 10, tlThick.y + 9);
       ctx.stroke();
 
       ctx.restore();
