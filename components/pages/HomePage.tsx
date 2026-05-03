@@ -14,6 +14,7 @@ import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
 import campus from '@/public/images/campus.png';
 import HeroAnimation from '@/components/HeroAnimation';
+import FloatingSymbolsCanvas from '@/components/FloatingSymbolsCanvas';
 
 const categoryOptions = [
   { value: 'all', label: 'All Categories' },
@@ -66,9 +67,10 @@ const HomePage: React.FC = () => {
       <div className="relative z-10 flex-1 grow">
          {/* Hero Section */}
           <section className="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white min-h-screen">
-            <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
+             <div className="absolute inset-0 bg-black/20 dark:bg-black/40"></div>
+             <FloatingSymbolsCanvas />
 
-            <div className="relative z-10 flex flex-col flex-1 lg:grid lg:grid-cols-2 min-h-screen">
+             <div className="relative z-10 flex flex-col flex-1 lg:grid lg:grid-cols-2 min-h-screen">
 
                 {/* Text Content - above animation on mobile, right side on desktop */}
                 <div className="order-1 lg:order-2 flex items-center pt-16 pb-2 lg:py-0 lg:min-h-screen md:min-h-0 text-center lg:text-left">
