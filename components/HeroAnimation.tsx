@@ -37,32 +37,42 @@ const HeroAnimation: React.FC = () => {
 
   const introDuration = 3000;
   const glitchRef = useRef({ offset: { x: 0, y: 0 }, intensity: 0 });
+  const layoutRef = useRef({ W: 0, H: 0, center: { x: 0, y: 0 }, size: 0, scale: 1, isSmall: false, virtualW: 0, offsetX: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // === Canvas Setup ===
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    ctx.scale(dpr, dpr);
 
-    const W = rect.width;
-    const H = rect.height;
-    const isSmall = W < 500;
-    const virtualW = isSmall ? Math.min(W, H * 0.9) : W;
-    const offsetX = isSmall ? (W - virtualW) / 2 : 0;
-    const size = W < 500 ? 100 : 150;
-    const scale = W < 500 ? 0.5 : 1;
-    const center = {
-      x: offsetX + virtualW * 0.5,
-      y: Math.min(H / 2, H - size * 1.35),
+    const updateLayout = () => {
+      const rect = canvas.getBoundingClientRect();
+      const W = rect.width;
+      const H = rect.height;
+      const isSmall = W < 500;
+      const virtualW = isSmall ? Math.min(W, H * 0.9) : W;
+      const offsetX = isSmall ? (W - virtualW) / 2 : 0;
+      const size = W < 500 ? 100 : 150;
+      const scale = W < 500 ? 0.5 : 1;
+      const center = {
+        x: offsetX + virtualW * 0.5,
+        y: Math.min(H / 2, H - size * 1.35),
+      };
+      layoutRef.current = { W, H, center, size, scale, isSmall, virtualW, offsetX };
     };
+        // === Event Listeners ===
+    const resize = () => {
+      const r = canvas.getBoundingClientRect();
+      canvas.width = r.width * dpr;
+      canvas.height = r.height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      updateLayout();
+    };
+    resize();
+    const { scale } = layoutRef.current;
 
     // === Mouse Tracking ===
     const handleMouseMove = (e: MouseEvent) => {
@@ -95,6 +105,7 @@ const HeroAnimation: React.FC = () => {
     // === Drawing Functions ===
 
     const drawNabla = (glow: number, glitch: Point) => {
+      const { center, size } = layoutRef.current;
       const gx = glitch.x;
       const gy = glitch.y;
       const cx = center.x;
@@ -140,6 +151,7 @@ const HeroAnimation: React.FC = () => {
     };
 
     const drawParticles = (t: number) => {
+      const { center } = layoutRef.current;
       particles.forEach((p) => {
         const angle = p.angle + t * p.speed;
         const r = p.radius + Math.sin(t * 0.001 + p.drift) * 8;
@@ -151,6 +163,7 @@ const HeroAnimation: React.FC = () => {
     };
 
     const drawPulse = (progress: number, fade = 1) => {
+      const { center, scale } = layoutRef.current;
       for (let i = 0; i < 7; i++) {
         const r = (100 + progress * 120 + i * 22) * scale;
         ctx.beginPath();
@@ -162,6 +175,7 @@ const HeroAnimation: React.FC = () => {
     };
 
     const drawMathSymbols = (t: number, phaseTime: number) => {
+      const { center } = layoutRef.current;
       orbitSymbols.forEach((sym, i) => {
         const fade = Math.max(0, Math.min(1, (phaseTime - sym.fadeDelay) / 1200));
         if (fade <= 0) return;
@@ -177,6 +191,7 @@ const HeroAnimation: React.FC = () => {
     };
 
     const updateGlitch = (t: number, intensity: number) => {
+      const { center, scale } = layoutRef.current;
       const speed = 0.005;
       const base = 0.3;
 
@@ -205,6 +220,7 @@ const HeroAnimation: React.FC = () => {
 
     // === Animation Loop ===
     const animate = (ts: number) => {
+      const { W, H } = layoutRef.current;
       const dt = ts - lastTimeRef.current;
       lastTimeRef.current = ts;
       totalTimeRef.current += dt;
@@ -234,21 +250,14 @@ const HeroAnimation: React.FC = () => {
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    // === Event Listeners ===
-    const resize = () => {
-      const r = canvas.getBoundingClientRect();
-      canvas.width = r.width * dpr;
-      canvas.height = r.height * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
 
-    document.addEventListener('resize', resize);
+    window.addEventListener('resize', resize);
     document.addEventListener('mousemove', handleMouseMove);
     animationRef.current = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(animationRef.current);
-      document.removeEventListener('resize', resize);
+      window.removeEventListener('resize', resize);
       document.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
