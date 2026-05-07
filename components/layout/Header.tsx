@@ -13,6 +13,7 @@ export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const projectsRef = useRef<HTMLDivElement>(null);
+  const mobileProjectsRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const { user, isAdmin, loading, logout } = useAdmin();
   const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -38,7 +39,10 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (projectsRef.current && !projectsRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      const isInsideDesktop = projectsRef.current?.contains(target) ?? false;
+      const isInsideMobile = mobileProjectsRef.current?.contains(target) ?? false;
+      if (!isInsideDesktop && !isInsideMobile) {
         setIsProjectsOpen(false);
       }
     };
@@ -152,73 +156,88 @@ export const Header: React.FC = () => {
                    >
                      Join the Board!
                    </Link>
-                  {isAdmin && (
-                     <div key="Projects" className="relative" ref={projectsRef}>
-                       <button
-                         onClick={() => setIsProjectsOpen(!isProjectsOpen)}
-                         className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center gap-1 cursor-pointer ${
-                           isHomePage
-                             ? isActive('/projects')
-                               ? 'bg-white/20 text-white'
-                               : 'text-white/90 hover:text-white hover:bg-white/20'
-                             : isActive('/projects')
-                               ? 'bg-red-600/20 text-gray-900 dark:text-white'
-                               : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                         }`}
-                       >
-                         Projects
-                         <svg className={`w-4 h-4 transition-transform ${isProjectsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                         </svg>
-                       </button>
-                       {isProjectsOpen && (
-                         <div className="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 border border-gray-100 dark:border-gray-700">
-                           <Link
-                             href="/projects"
-                             onClick={() => setIsProjectsOpen(false)}
-                             className="block px-4 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
-                           >
-                             All Projects
-                           </Link>
-                           <Link
-                             href="/explore"
-                             onClick={() => setIsProjectsOpen(false)}
-                             className="block px-4 py-2 rounded-md text-sm text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
-                           >
-                             Course Navigator
-                           </Link>
-                           {user && (
-                             <Link
-                               href="/my-courses"
-                               onClick={() => setIsProjectsOpen(false)}
-                               className="block px-4 py-2 pl-6 rounded-md text-sm text-gray-500 dark:text-gray-400 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400 cursor-pointer"
-                             >
-                               My Favorites
-                             </Link>
-                           )}
-                         </div>
-                       )}
-                     </div>
-                   )}
-                   {isAdmin && (
-                     <Link
-                       href="/admin"
-                       className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                         isHomePage
-                           ? isActive('/admin')
-                             ? 'bg-white/20 text-white'
-                             : 'text-white/90 hover:text-white hover:bg-white/20'
-                           : isActive('/admin')
-                             ? 'bg-red-600/20 text-gray-900 dark:text-white'
-                             : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                       }`}
-                     >
-                       Admin
-                     </Link>
-                   )}
-                   {/* Theme toggle */}
-                    <ThemeToggle isHomePage={isHomePage} />
-                </nav>
+                  {isAdmin && (<>
+                    <div key="Projects" className="relative" ref={projectsRef}>
+                      <button
+                        onClick={() => setIsProjectsOpen(!isProjectsOpen)}
+                        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center gap-1 cursor-pointer ${
+                          isHomePage
+                            ? isActive('/projects')
+                              ? 'bg-white/20 text-white'
+                              : 'text-white/90 hover:text-white hover:bg-white/20'
+                            : isActive('/projects')
+                              ? 'bg-red-600/20 text-gray-900 dark:text-white'
+                              : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                        }`}
+                      >
+                        Projects
+                        <svg className={`w-4 h-4 transition-transform ${isProjectsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                      {isProjectsOpen && (
+                        <div className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 border transition-all duration-200 overflow-hidden animate-in fade-in slide-in-from-top-2 ${
+                          isHomePage
+                            ? 'bg-black/40 backdrop-blur-lg border-gray-700/50'
+                            : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'
+                        }`}>
+                          <Link
+                            href="/projects"
+                            onClick={() => setIsProjectsOpen(false)}
+                            className={`block px-4 py-2 rounded-md text-sm transition-colors duration-200 ${
+                              isHomePage
+                                ? 'text-white/90 hover:text-white hover:bg-white/20'
+                                : 'text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400'
+                            } cursor-pointer`}
+                          >
+                            All Projects
+                          </Link>
+                          <Link
+                            href="/explore"
+                            onClick={() => setIsProjectsOpen(false)}
+                            className={`block px-4 py-2 rounded-md text-sm transition-colors duration-200 ${
+                              isHomePage
+                                ? 'text-white/90 hover:text-white hover:bg-white/20'
+                                : 'text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400'
+                            } cursor-pointer`}
+                          >
+                            Course Navigator
+                          </Link>
+                          {user && (
+                            <Link
+                              href="/my-courses"
+                              onClick={() => setIsProjectsOpen(false)}
+                              className={`block px-4 py-2 pl-6 rounded-md text-sm transition-colors duration-200 ${
+                                isHomePage
+                                  ? 'text-white/70 hover:text-white hover:bg-white/20'
+                                  : 'text-gray-500 dark:text-gray-400 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400'
+                            } cursor-pointer`}
+                            >
+                              My Favorites
+                            </Link>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    <Link
+                        href="/admin"
+                        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                          isHomePage
+                            ? isActive('/admin')
+                              ? 'bg-white/20 text-white'
+                              : 'text-white/90 hover:text-white hover:bg-white/20'
+                            : isActive('/admin')
+                              ? 'bg-red-600/20 text-gray-900 dark:text-white'
+                              : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                        }`}
+                      >
+                        Admin
+                      </Link>
+                    </>
+                  )}
+                    {/* Theme toggle */}
+                     <ThemeToggle isHomePage={isHomePage} />
+                 </nav>
               </div>
 
                {/* Mobile menu button */}
@@ -242,9 +261,13 @@ export const Header: React.FC = () => {
                </div>
              </div>
 
-              {/* Mobile Navigation */}
-              <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} ${isHomePage ? 'bg-black/20 backdrop-blur-lg rounded-b-xl' : 'bg-white dark:bg-gray-900'}`}>
-               <div className={`px-2 pt-2 pb-3 space-y-1 ${isHomePage? '' :'border-t'}' border-gray-100 dark:border-gray-800'`}>
+{/* Mobile Navigation */}
+              <div className={`md:hidden transition-all duration-300 overflow-hidden ${
+                isMenuOpen 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 -translate-y-2 pointer-events-none'
+              } ${isHomePage ? 'bg-black/20 backdrop-blur-lg rounded-b-xl' : 'bg-white dark:bg-gray-900'}`}>
+                <div className={`px-2 pt-2 pb-3 space-y-1 ${isHomePage ? '' : 'border-t border-gray-100 dark:border-gray-800'}`}>
                  {navigation.map((item) => (
                    <Link
                      key={item.name}
@@ -279,26 +302,27 @@ export const Header: React.FC = () => {
                    Join the Board!
                  </Link>
                  {isAdmin && (
-                   <div key="Projects" className="relative">
-                     <button
-                       onClick={() => setIsProjectsOpen(!isProjectsOpen)}
-                       className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center gap-1 cursor-pointer ${
-                         isHomePage
-                           ? isActive('/projects')
-                             ? 'bg-white/20 text-white'
-                             : 'text-white/90 hover:text-white hover:bg-white/20'
-                           : isActive('/projects')
-                             ? 'bg-red-600/20 text-gray-900 dark:text-white'
-                             : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                       }`}
-                     >
-                       Projects
-                       <svg className={`w-4 h-4 transition-transform ${isProjectsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                       </svg>
-                     </button>
-                     {isProjectsOpen && (
-                       <div className="pl-4 space-y-1">
+                    <div key="Projects" className="relative" ref={mobileProjectsRef}>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); setIsProjectsOpen(!isProjectsOpen); }}
+                        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center gap-1 cursor-pointer ${
+                          isHomePage
+                            ? isActive('/projects')
+                              ? 'bg-white/20 text-white'
+                              : 'text-white/90 hover:text-white hover:bg-white/20'
+                            : isActive('/projects')
+                              ? 'bg-red-600/20 text-gray-900 dark:text-white'
+                              : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                        }`}
+                      >
+                        Projects
+                        <svg className={`w-4 h-4 transition-transform ${isProjectsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      <div className={`pl-4 space-y-1 transition-all duration-200 overflow-hidden ${
+                        isProjectsOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                      }`}>
                          {['/projects', '/explore', '/study-plan'].map((href) => (
                            <Link
                              key={href}
@@ -314,7 +338,6 @@ export const Header: React.FC = () => {
                            </Link>
                          ))}
                        </div>
-                     )}
                    </div>
                  )}
                  {isAdmin && (
