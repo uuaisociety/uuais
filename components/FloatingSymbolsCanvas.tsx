@@ -67,6 +67,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
           case 'bottom': sx = Math.random() * r.width; sy = r.height + 30; break;
           case 'left': sx = -30; sy = Math.random() * r.height; break;
           case 'right': sx = r.width + 30; sy = Math.random() * r.height; break;
+          default: sx = Math.random() * r.width; sy = -30; break;
         }
 
         symbolsRef.current.push({
