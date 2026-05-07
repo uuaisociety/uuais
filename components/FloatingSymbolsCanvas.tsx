@@ -23,6 +23,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
   const animationRef = useRef<number>(0);
   const symbolsRef = useRef<FloatingSymbol[]>([]);
   const mousePosRef = useRef({ x: 0, y: 0 });
+  const prevTsRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -85,7 +86,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
     };
 
     // === Draw Symbols ===
-    const draw = () => {
+    const draw = (dt: number) => {
       const symbols = symbolsRef.current;
       if (symbols.length === 0) return;
 
@@ -94,7 +95,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
 
       for (let i = symbols.length - 1; i >= 0; i--) {
         const sym = symbols[i];
-        sym.life += 16;
+        sym.life += dt;
         const life = sym.life / sym.maxLife;
 
         // Remove dead symbols
@@ -144,10 +145,14 @@ const FloatingSymbolsCanvas: React.FC = () => {
     };
 
     // === Animation Loop ===
-    const animate = () => {
+    const animate = (ts: number) => {
+      if (!prevTsRef.current) prevTsRef.current = ts;
+      const dt = ts - prevTsRef.current;
+      prevTsRef.current = ts;
+
       const r = canvas.getBoundingClientRect();
       ctx.clearRect(0, 0, r.width, r.height);
-      draw();
+      draw(dt);
       animationRef.current = requestAnimationFrame(animate);
     };
 

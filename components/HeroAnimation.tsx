@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 // === Types ===
 
@@ -32,7 +32,7 @@ const HeroAnimation: React.FC = () => {
   const animationRef = useRef<number>(0);
   const lastTimeRef = useRef<number>(0);
   const totalTimeRef = useRef<number>(0);
-  const [isHovering, setIsHovering] = useState(false);
+  const isHoveringRef = useRef(false);
   const mousePosRef = useRef({ x: 0, y: 0 });
 
   const introDuration = 3000;
@@ -80,7 +80,7 @@ const HeroAnimation: React.FC = () => {
       const x = e.clientX - rc.left;
       const y = e.clientY - rc.top;
       mousePosRef.current = { x, y };
-      setIsHovering(x >= 0 && x <= rc.width && y >= 0 && y <= rc.height);
+      isHoveringRef.current = x >= 0 && x <= rc.width && y >= 0 && y <= rc.height;
     };
 
     // === Initialize Particles ===
@@ -137,13 +137,13 @@ const HeroAnimation: React.FC = () => {
       ctx.beginPath();
       ctx.lineWidth = size * 0.24;
       ctx.moveTo(trX, trY);
-      ctx.lineTo(bX + size * 0.05, bY+ size*0.15);
+      ctx.lineTo(bX + size * 0.05, bY + size * 0.15);
       ctx.stroke();
 
       // Left line (thicker, from bottom to top-left)
       ctx.beginPath();
       ctx.lineWidth = size * 0.50;
-      ctx.moveTo(bX - size * 0.05, bY + size*0.06);
+      ctx.moveTo(bX - size * 0.05, bY + size * 0.06);
       ctx.lineTo(tlX + size * 0.05, tlY + size*0.06);
       ctx.stroke();
 
@@ -201,12 +201,12 @@ const HeroAnimation: React.FC = () => {
 
       // Mouse proximity effect
       let mouseX = 0, mouseY = 0;
-      if (isHovering) {
+      if (isHoveringRef.current) {
         const dx = mousePosRef.current.x - center.x;
         const dy = mousePosRef.current.y - center.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 300 * scale && dist > 0) {
-          const influence = (1 - dist / (300 * scale)) * 3;
+          const influence = (1 - dist / (300 * scale)) * 0.5;
           mouseX = Math.sin(t * 0.015) * influence * (dx / dist);
           mouseY = Math.cos(t * 0.012) * influence * (dy / dist);
         }
