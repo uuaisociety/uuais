@@ -1,8 +1,21 @@
 import { doc, getDoc, setDoc, serverTimestamp, increment, DocumentData } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 
+function hasAnalyticsConsent(): boolean {
+  if (typeof document === 'undefined') return false;
+  const match = document.cookie.match(/(?:^|;\s*)cc_cookie=([^;]+)/);
+  if (!match) return false;
+  try {
+    const data = JSON.parse(decodeURIComponent(match[1]));
+    return Array.isArray(data.categories) && data.categories.includes('analytics');
+  } catch {
+    return false;
+  }
+}
+
 export async function incrementEventUniqueClick(eventId: string): Promise<void> {
   if (typeof window === 'undefined') return;
+  if (!hasAnalyticsConsent()) return;
   const key = `clicked_event_${eventId}`;
   try {
     if (window?.localStorage?.getItem(key) === '1') return;
@@ -28,6 +41,7 @@ export const getEventClicksCounts = async (ids: string[]): Promise<Record<string
 
 export async function incrementBlogRead(blogId: string): Promise<void> {
   if (typeof window === 'undefined') return;
+  if (!hasAnalyticsConsent()) return;
   const key = `read_blog_${blogId}`;
   try {
     if (window?.localStorage?.getItem(key) === '1') return;

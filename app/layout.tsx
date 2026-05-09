@@ -6,7 +6,7 @@ import { Providers } from './providers';
 import { AppProvider } from '@/contexts/AppContext';
 import { NotificationsProvider } from '@/components/ui/Notifications';
 import RegistrationGate from '@/components/auth/RegistrationGate';
-import { Analytics } from "@vercel/analytics/next"
+import { AnalyticsWithConsent } from '@/components/common/AnalyticsWithConsent';
 // import UpcomingEventsBanner from '@/components/common/UpcomingEventsBanner';
 
 // import { metadata, viewport } from "./metadata";
@@ -41,7 +41,7 @@ export default function RootLayout({
             </AppProvider>
           </NotificationsProvider>
         </Providers>
-        <Analytics />
+        <AnalyticsWithConsent />
       </body>
     </html>
   );
