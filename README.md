@@ -82,6 +82,16 @@ The page will automatically reload when you make changes to the code.
    npm run set:admin -- <email> true
    ```
 
+If updating firestore.rules or storage.rules, these need to be updated manually (development or prod)
+
+```bash
+cd lib/
+firebase login # your uuais account
+firebase use dev
+firebase deploy --only firestore:rules
+firebase deploy --only storage:rules
+```
+
 
 ### Available Scripts
 
