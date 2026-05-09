@@ -21,7 +21,7 @@ export const PrivacyPage: React.FC = () => {
             Your privacy is important to us. This policy explains how we collect, use, and protect your information.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            Last updated: September 19, 2025
+            Last updated: May 9, 2026
           </p>
         </div>
 
@@ -60,7 +60,7 @@ export const PrivacyPage: React.FC = () => {
                 <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
                   <li>IP address and browser information</li>
                   <li>Website usage patterns and preferences</li>
-                  <li>Cookies and similar tracking technologies</li>
+                  <li>Cookies and similar tracking technologies (you can manage your preferences via our cookie consent banner)</li>
                 </ul>
               </div>
             </div>
@@ -144,7 +144,7 @@ export const PrivacyPage: React.FC = () => {
                 {/* <li>Membership data: Duration of membership plus 2 years</li> */}
                 <li>Newsletter subscriptions: Until you unsubscribe</li>
                 <li>Event participation: 3 years for historical records</li>
-                <li>Website analytics: 26 months (Google Analytics default)</li>
+                <li>Website analytics: 26 months (Vercel Analytics default)</li>
               </ul>
             </div>
           </section>
@@ -170,7 +170,7 @@ export const PrivacyPage: React.FC = () => {
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Analytics</h3>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
-                  We use Google Analytics to understand website usage. You can opt out using Google&apos;s opt-out tools.
+                  We use Vercel Analytics to understand website usage. Analytics are only activated after you provide consent via our cookie banner. You can change your preference at any time.
                 </p>
               </div>
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
