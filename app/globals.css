@@ -396,3 +396,66 @@ select.input {
 
 @import "tailwindcss";
 @import "tw-animate-css";
+
+#cc-main {
+  --cc-bg: #fff;
+  --cc-primary-color: #2c2f31;
+  --cc-secondary-color: #5e6266;
+  --cc-btn-primary-bg: #dc2626;
+  --cc-btn-primary-color: #fff;
+  --cc-btn-primary-border-color: #dc2626;
+  --cc-btn-primary-hover-bg: #b91c1c;
+  --cc-btn-primary-hover-color: #fff;
+  --cc-btn-primary-hover-border-color: #b91c1c;
+  --cc-btn-secondary-bg: #eaeff2;
+  --cc-btn-secondary-color: #2c2f31;
+  --cc-btn-secondary-border-color: #eaeff2;
+  --cc-btn-secondary-hover-bg: #d4dae0;
+  --cc-btn-secondary-hover-color: #000;
+  --cc-btn-secondary-hover-border-color: #d4dae0;
+  --cc-separator-border-color: #f0f4f7;
+  --cc-toggle-on-bg: #dc2626;
+  --cc-toggle-off-bg: #667481;
+  --cc-toggle-on-knob-bg: #fff;
+  --cc-toggle-off-knob-bg: #fff;
+  --cc-toggle-active-icon-color: #fff;
+  --cc-link-color: #dc2626;
+  --cc-modal-border-radius: 0.5rem;
+  --cc-btn-border-radius: 0.4rem;
+  --cc-footer-bg: #fff;
+  --cc-footer-border-color: #f0f4f7;
+}
+
+.dark #cc-main {
+  --cc-bg: #1f2937;
+  --cc-primary-color: #f3f4f6;
+  --cc-secondary-color: #9ca3af;
+  --cc-btn-primary-bg: #dc2626;
+  --cc-btn-primary-color: #fff;
+  --cc-btn-primary-border-color: #dc2626;
+  --cc-btn-primary-hover-bg: #b91c1c;
+  --cc-btn-primary-hover-color: #fff;
+  --cc-btn-primary-hover-border-color: #b91c1c;
+  --cc-btn-secondary-bg: #374151;
+  --cc-btn-secondary-color: #f3f4f6;
+  --cc-btn-secondary-border-color: #374151;
+  --cc-btn-secondary-hover-bg: #4b5563;
+  --cc-btn-secondary-hover-color: #fff;
+  --cc-btn-secondary-hover-border-color: #4b5563;
+  --cc-separator-border-color: #374151;
+  --cc-toggle-on-bg: #dc2626;
+  --cc-toggle-off-bg: #4b5563;
+  --cc-toggle-on-knob-bg: #fff;
+  --cc-toggle-off-knob-bg: #9ca3af;
+  --cc-toggle-active-icon-color: #fff;
+  --cc-link-color: #ef4444;
+  --cc-modal-border-radius: 0.5rem;
+  --cc-btn-border-radius: 0.4rem;
+  --cc-cookie-category-block-bg: #374151;
+  --cc-cookie-category-block-border: #4b5563;
+  --cc-cookie-category-block-hover-bg: #4b5563;
+  --cc-cookie-category-expanded-block-hover-bg: #4b5563;
+  --cc-toggle-readonly-bg: #5a5f68;
+  --cc-footer-bg: #1a1d23;
+  --cc-footer-border-color: #2d3139;
+}
