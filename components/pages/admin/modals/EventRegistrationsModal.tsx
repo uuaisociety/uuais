@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { X, Users, Send, ChevronDown, Check } from "lucide-react";
 import { subscribeToEventRegistrations, inviteRegistrant } from "@/lib/firestore/registrations";
 import { subscribeToEventAttendance, setAttendanceForUser, type EventAttendanceEntry } from "@/lib/firestore/attendance";
+import { getUserProfile } from "@/lib/firestore/users";
 import { EventRegistration } from "@/types";
 import { Button } from "@/components/ui/Button";
 import { useNotify } from "@/components/ui/Notifications";
@@ -30,6 +31,7 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
   const { notify } = useNotify();
   const [attendanceByUser, setAttendanceByUser] = useState<Record<string, EventAttendanceEntry>>({});
+  const [userProfiles, setUserProfiles] = useState<Record<string, { program?: string; expectedGraduationYear?: number }>>({});
 
   useEffect(() => {
     if (!open || !eventId) return;
@@ -49,6 +51,27 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
     });
     return () => { if (typeof unsub === 'function') unsub(); };
   }, [open, eventId]);
+
+  useEffect(() => {
+    const uniqueIds = [...new Set(registrations.map(r => r.userId).filter(Boolean))];
+    if (uniqueIds.length === 0) return;
+    let cancelled = false;
+    (async () => {
+      const map: Record<string, { program?: string; expectedGraduationYear?: number }> = {};
+      await Promise.allSettled(
+        uniqueIds.map(async (uid) => {
+          try {
+            const profile = await getUserProfile(uid);
+            if (profile) map[uid] = { program: profile.program, expectedGraduationYear: profile.expectedGraduationYear };
+          } catch {
+            // skip failed profile fetch
+          }
+        })
+      );
+      if (!cancelled) setUserProfiles(map);
+    })();
+    return () => { cancelled = true; };
+  }, [registrations]);
 
   const totalRegistered = registrations.filter((r) => r.status !== 'cancelled' && r.status !== 'declined').length;
   const attendedCount = registrations.filter((r) => {
@@ -385,6 +408,19 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                           {expanded[r.id] && (
                             <TableRow className="bg-gray-50/60 dark:bg-gray-900/50">
                               <TableCell colSpan={6} className="p-3">
+                                {(() => {
+                                  const profile = r.userId ? userProfiles[r.userId] : undefined;
+                                  if (profile?.program || profile?.expectedGraduationYear) {
+                                    return (
+                                      <div className="mb-3 pb-3 border-b border-gray-200 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300">
+                                        <span className="font-medium">Program:</span> {profile.program || <span className="text-gray-400 italic">Not provided</span>}
+                                        <span className="mx-2">|</span>
+                                        <span className="font-medium">Graduation Year:</span> {profile.expectedGraduationYear || <span className="text-gray-400 italic">Not provided</span>}
+                                      </div>
+                                    );
+                                  }
+                                  return null;
+                                })()}
                                 {questions && questions.length > 0 ? (
                                   <Table className="w-full">
                                     <TableHeader>
