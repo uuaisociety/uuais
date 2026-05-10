@@ -67,11 +67,33 @@ export interface Event {
   }[];
 }
 
+export type TeamCategory = 'board' | 'development' | 'it' | 'growth' | 'partnerships_events' | 'founders' | 'alumni';
+
+export const TEAM_CATEGORIES: TeamCategory[] = [
+  'board',
+  'development',
+  'it',
+  'growth',
+  'partnerships_events',
+  'founders',
+  'alumni',
+];
+
+export const TEAM_CATEGORY_LABELS: Record<TeamCategory, string> = {
+  board: 'Board',
+  development: 'Development',
+  it: 'IT',
+  growth: 'Growth',
+  partnerships_events: 'Partnerships & Events',
+  founders: 'Founders',
+  alumni: 'Alumni',
+};
+
 export interface TeamMember {
   id: string;
   name: string;
   position: string;
-  bio: string;
+  bio?: string;
   image?: string;
   linkedin?: string;
   twitter?: string;
@@ -81,6 +103,11 @@ export interface TeamMember {
   companyEmail?: string;
   website?: string;
   published?: boolean;
+  teams?: TeamCategory[];
+  order?: number;
+  years?: number[];
+  badge?: string;
+  notes?: string;
 }
 
 export interface BlogPost {

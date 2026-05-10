@@ -5,7 +5,7 @@ import { Event, TeamMember, BlogPost, FAQ, Job, BoardPosition, Application } fro
 import { subscribeToEvents, addEvent as addEventToFirestore, updateEvent as updateEventInFirestore, deleteEvent as deleteEventFromFirestore } from '@/lib/firestore/events';
 import { auth } from '@/lib/firebase-client';
 import { onIdTokenChanged } from 'firebase/auth';
-import { subscribeToTeamMembers, addTeamMember as addTeamMemberToFirestore, updateTeamMember as updateTeamMemberInFirestore, deleteTeamMember as deleteTeamMemberFromFirestore } from '@/lib/firestore/team';
+import { subscribeToTeamMembers, addTeamMember as addTeamMemberToFirestore, updateTeamMember as updateTeamMemberInFirestore, deleteTeamMember as deleteTeamMemberFromFirestore, moveTeamMember as moveTeamMemberInFirestore } from '@/lib/firestore/team';
 import { subscribeToBlogPosts, addBlogPost as addBlogPostToFirestore, updateBlogPost as updateBlogPostInFirestore, deleteBlogPost as deleteBlogPostFromFirestore } from '@/lib/firestore/blog';
 import { subscribeToFaqs, addFaq as addFaqToFirestore, updateFaq as updateFaqInFirestore, deleteFaq as deleteFaqFromFirestore } from '@/lib/firestore/faqs';
 import { subscribeToJobs, addJob as addJobToFirestore, updateJob as updateJobInFirestore, deleteJob as deleteJobFromFirestore } from '@/lib/firestore/jobs';
@@ -60,6 +60,7 @@ type FirestoreAction =
   | { firestoreAction: 'ADD_TEAM_MEMBER'; payload: Omit<TeamMember, 'id'> }
   | { firestoreAction: 'UPDATE_TEAM_MEMBER'; payload: TeamMember }
   | { firestoreAction: 'DELETE_TEAM_MEMBER'; payload: string }
+  | { firestoreAction: 'MOVE_TEAM_MEMBER'; payload: { memberId: string; direction: 'up' | 'down' } }
   | { firestoreAction: 'ADD_BLOG_POST'; payload: Omit<BlogPost, 'id'> }
   | { firestoreAction: 'UPDATE_BLOG_POST'; payload: BlogPost }
   | { firestoreAction: 'DELETE_BLOG_POST'; payload: string }
@@ -326,6 +327,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             break;
           case 'DELETE_TEAM_MEMBER':
             await deleteTeamMemberFromFirestore(action.payload);
+            break;
+          case 'MOVE_TEAM_MEMBER':
+            await moveTeamMemberInFirestore(state.teamMembers, action.payload.memberId, action.payload.direction);
             break;
           case 'ADD_BLOG_POST':
             await addBlogPostToFirestore(action.payload);
