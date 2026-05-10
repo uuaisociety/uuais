@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { auth, linkGoogleToCurrentUser, linkGithubToCurrentUser, linkMicrosoftToCurrentUser } from "@/lib/firebase-client";
 import { getUserProfile, upsertUserProfile, updateUserProfile, getMyRegistrations, getAllEvents, type UserProfile } from "@/lib/firestore";
@@ -12,10 +12,11 @@ import { FieldGroup, InputBase, SelectBase, TextareaBase } from "@/components/ui
 import { useNotify } from "@/components/ui/Notifications";
 import ConfirmModal from "@/components/ui/ConfirmModal";
 import LoginModal from '@/components/ui/LoginModal'
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function AccountPage() {
   const { notify } = useNotify();
+  const router = useRouter();
   const [uid, setUid] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState<Partial<UserProfile>>({});
@@ -23,6 +24,8 @@ export default function AccountPage() {
   const [eventMeta, setEventMeta] = useState<Record<string, { title: string; startAt?: string; date?: string; time?: string }>>({});
   const [providers, setProviders] = useState<string[]>([]);
   const [confirmRegId, setConfirmRegId] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [confirmCancel, setConfirmCancel] = useState(false);
 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(async (u) => {
@@ -102,6 +105,7 @@ export default function AccountPage() {
       // Optionally refetch to reflect saved changes in UI
       const refreshed = await getUserProfile(uid);
       setForm(refreshed || form);
+      setIsEditing(false);
       notify({ type: 'success', title: 'Saved', message: 'Account updated successfully.' });
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : 'Could not save your account.';
@@ -109,6 +113,13 @@ export default function AccountPage() {
     }
   };
 
+  const handleCancelEdit = async () => {
+    if (!uid) return;
+    setConfirmCancel(false);
+    const p = await getUserProfile(uid);
+    setForm(p || {});
+    setIsEditing(false);
+  };
   if (loading) {
     return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
   }
@@ -198,8 +209,99 @@ export default function AccountPage() {
           <Card className="md:col-span-2">
             <CardHeader>
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Profile</h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">Update your membership details.</p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">{isEditing ? 'Update your membership details.' : 'View your membership details.'}</p>
             </CardHeader>
+            {!isEditing ? (
+            <CardContent className="space-y-6">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Display name</p>
+                  <p className="text-gray-900 dark:text-white">{form.displayName || <span className="text-gray-400 italic">Not set</span>}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Full name</p>
+                  <p className="text-gray-900 dark:text-white">{form.name || <span className="text-gray-400 italic">Not set</span>}</p>
+                </div>
+              </div>
+
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Contact & Social</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Student status</p>
+                  <p className="text-gray-900 dark:text-white capitalize">{form.studentStatus ?? 'Student'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Campus</p>
+                  <p className="text-gray-900 dark:text-white">{form.campus ?? 'Uppsala'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">LinkedIn URL</p>
+                  <p className="text-gray-900 dark:text-white">{form.linkedin ? <a href={form.linkedin} className="underline" target="_blank" rel="noreferrer">{form.linkedin}</a> : <span className="text-gray-400 italic">Not set</span>}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">GitHub URL</p>
+                  <p className="text-gray-900 dark:text-white">{form.github ? <a href={form.github} className="underline" target="_blank" rel="noreferrer">{form.github}</a> : <span className="text-gray-400 italic">Not set</span>}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Website</p>
+                  <p className="text-gray-900 dark:text-white">{form.website ? <a href={form.website} className="underline" target="_blank" rel="noreferrer">{form.website}</a> : <span className="text-gray-400 italic">Not set</span>}</p>
+                </div>
+              </div>
+
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Academic Information</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">University</p>
+                  <p className="text-gray-900 dark:text-white capitalize">{form.university ?? 'Uppsala'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Program/Major</p>
+                  <p className="text-gray-900 dark:text-white">{form.program || <span className="text-gray-400 italic">Not set</span>}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Expected Graduation Year</p>
+                  <p className="text-gray-900 dark:text-white">{form.expectedGraduationYear ?? <span className="text-gray-400 italic">Not set</span>}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Gender</p>
+                  <p className="text-gray-900 dark:text-white capitalize">{form.gender === 'prefer_not' ? 'Prefer not to say' : form.gender === 'nonbinary' ? 'Non-binary' : (form.gender ?? 'Other')}</p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">How did you hear of us?</p>
+                  <p className="text-gray-900 dark:text-white">{form.heardOfUs || <span className="text-gray-400 italic">Not set</span>}</p>
+                </div>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Bio</p>
+                <p className="text-gray-900 dark:text-white">{form.bio || <span className="text-gray-400 italic">Not set</span>}</p>
+              </div>
+
+              <div className="flex items-center gap-6">
+                <span className="text-gray-800 dark:text-gray-200">
+                  Newsletter: {form.newsletter ? 'Subscribed' : 'Not subscribed'}
+                </span>
+                <span className="text-gray-800 dark:text-gray-200">
+                  Looking for job: {form.lookingForJob ? 'Yes' : 'No'}
+                </span>
+              </div>
+
+              <div className="space-y-2">
+                <p className="text-sm text-gray-500 dark:text-gray-400">Privacy: {form.privacyAcceptedAt ? `accepted at ${new Date(form.privacyAcceptedAt).toLocaleString()}` : 'not accepted yet'}</p>
+                <p className="text-gray-800 dark:text-gray-200">Marketing: {form.marketingOptIn ? 'Opted in' : 'Opted out'}</p>
+                <p className="text-gray-800 dark:text-gray-200">Analytics: {form.analyticsOptIn ? 'Opted in' : 'Opted out'}</p>
+                <p className="text-gray-800 dark:text-gray-200">Partner contact: {form.partnerContactOptIn ? 'Opted in' : 'Opted out'}</p>
+              </div>
+
+              <div className="flex justify-end">
+                <Button onClick={() => setIsEditing(true)}>Edit</Button>
+              </div>
+            </CardContent>
+            ) : (
             <CardContent className="space-y-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h3>
               <div className="grid md:grid-cols-2 gap-4">
@@ -263,7 +365,6 @@ export default function AccountPage() {
                   </SelectBase>
                 </FieldGroup>
               </div>
-              {/* Heard of us */}
               <div className="grid md:grid-cols-2 gap-4">
                 <FieldGroup label="How did you hear of us?" requiredHint="Optional">
                   <SelectBase
@@ -326,10 +427,12 @@ export default function AccountPage() {
                   View our <a href="/privacy" className="underline" target="_blank" rel="noreferrer">Privacy Policy</a>
                 </div>
               </div>
-              <div className="flex justify-end">
+              <div className="flex justify-end gap-3">
+                <Button variant="outline" onClick={() => setConfirmCancel(true)}>Cancel</Button>
                 <Button onClick={handleSave}>Save</Button>
               </div>
             </CardContent>
+            )}
           </Card>
 
           <Card>
@@ -397,6 +500,16 @@ export default function AccountPage() {
             setConfirmRegId(null);
           }
         }}
+      />
+      {/* Confirm discard changes modal */}
+      <ConfirmModal
+        open={confirmCancel}
+        title="Discard changes"
+        description="Are you sure you want to discard all unsaved changes?"
+        confirmText="Yes, discard"
+        cancelText="Keep editing"
+        onClose={() => setConfirmCancel(false)}
+        onConfirm={handleCancelEdit}
       />
     </div>
   );
