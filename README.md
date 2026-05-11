@@ -35,7 +35,7 @@ This is a [Next.js](https://nextjs.org) project for the Uppsala University AI So
   - Go to https://console.firebase.google.com/u/2/project/uuais-dev/settings/general/web:OTg4MTQwOTYtNDI4NS00Zjk1LThkOWEtZTE2YmFkYmUwN2Yx
   - Go to Service Accounts
   - Click on "Create new private key"
-  - Save the file in the root of your project
+  - **Save the file outside your project directory** (e.g., `~/.config/firebase/uuais-dev-service-account.json`). This prevents accidental commits to version control.
 
 4. **Copy SDK setup and configuration**
   - Go to https://console.firebase.google.com/u/2/project/uuais-dev/settings/general/web:OTg4MTQwOTYtNDI4NS00Zjk1LThkOWEtZTE2YmFkYmUwN2Yx
@@ -45,7 +45,9 @@ This is a [Next.js](https://nextjs.org) project for the Uppsala University AI So
 
 5. **Environment Variables**
   - Create a .env file in the root of your project and add the Firebase config values from .env.example
-   
+
+  > **Security note:** The `.env` file and any Firebase service account JSON files are private. Never commit them to git. The `.gitignore` already excludes `.env` and `*firebase-adminsdk*.json`, but be careful not to rename or relocate them into tracked paths.
+
       ```bash
       NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
       NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
@@ -53,8 +55,10 @@ This is a [Next.js](https://nextjs.org) project for the Uppsala University AI So
       NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project_id.appspot.com
       NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
       NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
-      
-      GOOGLE_APPLICATION_CREDENTIALS=./path/to/serviceAccountKey.json
+
+      # Path to service account key — use a location OUTSIDE the project directory
+      # to avoid accidentally committing it. Example: ~/.config/firebase/...
+      GOOGLE_APPLICATION_CREDENTIALS=/home/you/.config/firebase/uuais-dev-service-account.json
       ```
 
 6. **Run the App in the development server**
