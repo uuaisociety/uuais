@@ -19,8 +19,11 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
 
   const [showTeamModal, setShowTeamModal] = useState(false);
   const [editingItem, setEditingItem] = useState<TeamMember | null>(null);
+  const [activeYear, setActiveYear] = useState<number | null>(null);
 
-const [teamForm, setTeamForm] = useState<TeamFormState>({
+  const allYears = [...new Set(members.flatMap(m => m.years ?? []))].sort((a, b) => b - a);
+
+  const [teamForm, setTeamForm] = useState<TeamFormState>({
     id: undefined,
     name: '',
     position: '',
@@ -64,7 +67,7 @@ const [teamForm, setTeamForm] = useState<TeamFormState>({
     setShowTeamModal(true);
   };
 
-const handleEdit = (member: TeamMember) => {
+  const handleEdit = (member: TeamMember) => {
     setEditingItem(member);
     const ip = (member as unknown as { imagePath?: string }).imagePath;
     setTeamForm({
@@ -87,13 +90,13 @@ const handleEdit = (member: TeamMember) => {
     setShowTeamModal(true);
   };
 
-  const handleAddTeamMember = () => {
+const handleAddTeamMember = () => {
     const newMember = {
       ...teamForm,
       image: teamForm.image || placeholderImage,
       imagePath: teamForm.imagePath,
       teams: teamForm.teams.length > 0 ? teamForm.teams : undefined,
-      years: teamForm.years.length > 0 ? teamForm.years : undefined,
+      years: teamForm.years,
       bio: teamForm.bio || undefined,
       badge: teamForm.badge || undefined,
       notes: teamForm.notes || undefined,
@@ -105,11 +108,11 @@ const handleEdit = (member: TeamMember) => {
 
   const handleUpdateTeamMember = () => {
     if (editingItem) {
-      const updatedMember = {
+const updatedMember = {
         ...editingItem,
         ...teamForm,
         teams: teamForm.teams.length > 0 ? teamForm.teams : undefined,
-        years: teamForm.years.length > 0 ? teamForm.years : undefined,
+        years: teamForm.years,
         bio: teamForm.bio || undefined,
         badge: teamForm.badge || undefined,
         notes: teamForm.notes || undefined,
@@ -137,6 +140,10 @@ const handleEdit = (member: TeamMember) => {
 
   const sortedMembers = [...members].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
+  const filteredMembers = activeYear
+    ? sortedMembers.filter(m => m.years?.includes(activeYear))
+    : sortedMembers;
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
@@ -144,8 +151,36 @@ const handleEdit = (member: TeamMember) => {
         <Button icon={Plus} onClick={handleAddClick}>Add Team Member</Button>
       </div>
 
+      {allYears.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-6">
+          <button
+            onClick={() => setActiveYear(null)}
+            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+              activeYear === null
+                ? 'bg-red-600 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+            }`}
+          >
+            All ({sortedMembers.length})
+          </button>
+          {allYears.map(year => (
+            <button
+              key={year}
+              onClick={() => setActiveYear(year)}
+              className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                activeYear === year
+                  ? 'bg-red-600 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+              }`}
+            >
+              {year} ({sortedMembers.filter(m => m.years?.includes(year)).length})
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="grid md:grid-cols-2 gap-6">
-        {sortedMembers.map((member, index) => (
+        {filteredMembers.map((member, index) => (
           <Card key={member.id} className="bg-gray-50 dark:bg-gray-800 text-black dark:text-white">
             <CardContent className="p-6">
               <div className="flex items-start space-x-4">

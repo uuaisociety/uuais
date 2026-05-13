@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Button } from "@/components/ui/Button";
 import { X } from "lucide-react";
 import FileDropzone from '@/components/ui/FileDropzone';
@@ -39,9 +39,21 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
   const { notify } = useNotify();
   const [uploading, setUploading] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [yearsInput, setYearsInput] = useState('');
+
+  useEffect(() => {
+    if (open) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setYearsInput(form.years.join(', '));
+    }
+  }, [open, form.years]);
 
   const handleYearsChange = (text: string) => {
-    const parsed = text.split(',').map(s => parseInt(s.trim())).filter(n => !Number.isNaN(n));
+    setYearsInput(text);
+  };
+
+  const handleYearsBlur = () => {
+    const parsed = yearsInput.split(',').map(s => parseInt(s.trim())).filter(n => !Number.isNaN(n));
     setForm(prev => ({ ...prev, years: parsed }));
   };
 
@@ -185,8 +197,9 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
               <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Years</label>
               <input
                 type="text"
-                value={form.years.join(', ')}
+                value={yearsInput}
                 onChange={(e) => handleYearsChange(e.target.value)}
+                onBlur={handleYearsBlur}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                 placeholder="e.g. 2025, 2026, 2027"
               />
