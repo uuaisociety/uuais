@@ -88,6 +88,8 @@ service cloud.firestore {
     }
 
     // TEAM MEMBERS
+    // NOTE: `notes` field is admin-only per UI convention but publicly readable
+    // via client SDK since the whole collection is world-readable. Treat accordingly.
     match /teamMembers/{id} {
       allow read: if true;
       allow create, update, delete: if isAdmin();

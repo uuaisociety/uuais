@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import FileDropzone from '@/components/ui/FileDropzone';
 import { uploadFileToServer, deleteFileFromServer } from '@/utils/fileUploader';
 import { useNotify } from '@/components/ui/Notifications';
+import { TEAM_CATEGORIES, TEAM_CATEGORY_LABELS } from '@/types';
 
 export interface TeamFormState {
   id?: string;
@@ -13,12 +14,16 @@ export interface TeamFormState {
   position: string;
   bio: string;
   image: string;
-  imagePath?: string; // optional storage path for cleanup
+  imagePath?: string;
   linkedin: string;
   github: string;
   personalEmail: string;
   companyEmail: string;
   website: string;
+  teams: string[];
+  badge: string;
+  notes: string;
+  years: number[];
 }
 
 interface TeamModalProps {
@@ -34,6 +39,20 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
   const { notify } = useNotify();
   const [uploading, setUploading] = useState(false);
   const [deleting, setDeleting] = useState(false);
+
+  const handleYearsChange = (text: string) => {
+    const parsed = text.split(',').map(s => parseInt(s.trim())).filter(n => !Number.isNaN(n));
+    setForm(prev => ({ ...prev, years: parsed }));
+  };
+
+  const toggleTeam = (cat: string) => {
+    setForm(prev => ({
+      ...prev,
+      teams: prev.teams.includes(cat)
+        ? prev.teams.filter(t => t !== cat)
+        : [...prev.teams, cat],
+    }));
+  };
 
   const uploadToServer = useCallback(async (file: File) => {
     setUploading(true);
@@ -67,7 +86,9 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
       setDeleting(false);
     }
   }, [setForm, notify, setDeleting]);
+
   if (!open) return null;
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -85,13 +106,46 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
             <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Name</label>
             <input type="text" value={form.name} onChange={(e) => setForm(prev => ({ ...prev, name: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Position</label>
-            <input type="text" value={form.position} onChange={(e) => setForm(prev => ({ ...prev, position: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Position</label>
+              <input type="text" value={form.position} onChange={(e) => setForm(prev => ({ ...prev, position: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Teams</label>
+              <div className="grid grid-cols-2 gap-1.5 p-2 border border-gray-300 rounded-md bg-white dark:bg-gray-700">
+                {TEAM_CATEGORIES.map(cat => (
+                  <label key={cat} className="flex items-center gap-2 text-sm text-gray-900 dark:text-white cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-600 rounded px-1 py-0.5">
+                    <input
+                      type="checkbox"
+                      checked={form.teams.includes(cat)}
+                      onChange={() => toggleTeam(cat)}
+                      className="accent-red-600"
+                    />
+                    {TEAM_CATEGORY_LABELS[cat]}
+                  </label>
+                ))}
+              </div>
+              <p className="text-xs text-gray-500 mt-1">Select all teams this member belongs to</p>
+            </div>
           </div>
+
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Bio</label>
-            <textarea value={form.bio} onChange={(e) => setForm(prev => ({ ...prev, bio: e.target.value }))} rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Badge (optional)</label>
+            <input
+              type="text"
+              value={form.badge}
+              onChange={(e) => setForm(prev => ({ ...prev, badge: e.target.value }))}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              placeholder="e.g. Head of, Lead, Chairman"
+            />
+            <p className="text-xs text-gray-500 mt-1">Shown as a small colored chip on the public card</p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Bio (optional)</label>
+            <textarea value={form.bio} onChange={(e) => setForm(prev => ({ ...prev, bio: e.target.value }))} rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Profile Image</label>
@@ -123,14 +177,32 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Personal Email (optional)</label>
-              <input type="email" value={form.personalEmail} onChange={(e) => setForm(prev => ({ ...prev, personalEmail: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="name@example.com" />
-            </div> */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Organization Email (optional)</label>
               <input type="email" value={form.companyEmail} onChange={(e) => setForm(prev => ({ ...prev, companyEmail: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="name@uu.se" />
             </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Years</label>
+              <input
+                type="text"
+                value={form.years.join(', ')}
+                onChange={(e) => handleYearsChange(e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                placeholder="e.g. 2025, 2026, 2027"
+              />
+              <p className="text-xs text-gray-500 mt-1">Comma-separated years. Leave empty for "always visible".</p>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Internal notes (admin only)</label>
+            <textarea
+              value={form.notes}
+              onChange={(e) => setForm(prev => ({ ...prev, notes: e.target.value }))}
+              rows={2}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+              placeholder="Not visible to the public"
+            />
           </div>
 
           <div className="flex justify-end space-x-3 pt-4">

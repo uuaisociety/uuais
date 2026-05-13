@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
-import { Edit3, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
-import { TeamMember } from "@/types";
+import { Edit3, Eye, EyeOff, Plus, Trash2, ArrowUp, ArrowDown } from "lucide-react";
+import { TeamMember, TEAM_CATEGORY_LABELS } from "@/types";
 import TeamModal, { TeamFormState } from '@/components/pages/admin/modals/TeamModal';
 import { useApp } from '@/contexts/AppContext';
 
@@ -17,11 +17,10 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
   const { dispatch } = useApp();
   const placeholderImage = '/images/logo-highdef.png';
 
-
   const [showTeamModal, setShowTeamModal] = useState(false);
   const [editingItem, setEditingItem] = useState<TeamMember | null>(null);
 
-  const [teamForm, setTeamForm] = useState<TeamFormState>({
+const [teamForm, setTeamForm] = useState<TeamFormState>({
     id: undefined,
     name: '',
     position: '',
@@ -32,7 +31,11 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
     github: '',
     personalEmail: '',
     companyEmail: '',
-    website: ''
+    website: '',
+    teams: [],
+    badge: '',
+    notes: '',
+    years: [],
   });
 
   const resetForms = () => {
@@ -47,7 +50,11 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
       github: '',
       personalEmail: '',
       companyEmail: '',
-      website: ''
+      website: '',
+      teams: [],
+      badge: '',
+      notes: '',
+      years: [],
     });
     setEditingItem(null);
   };
@@ -57,21 +64,25 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
     setShowTeamModal(true);
   };
 
-  const handleEdit = (member: TeamMember) => {
+const handleEdit = (member: TeamMember) => {
     setEditingItem(member);
     const ip = (member as unknown as { imagePath?: string }).imagePath;
     setTeamForm({
       id: member.id,
       name: member.name,
       position: member.position,
-      bio: member.bio,
+      bio: member.bio || '',
       image: member.image || placeholderImage,
       imagePath: ip,
       linkedin: member.linkedin || '',
       github: member.github || '',
       personalEmail: member.personalEmail || member.email || '',
       companyEmail: member.companyEmail || '',
-      website: member.website || ''
+      website: member.website || '',
+      teams: member.teams || [],
+      badge: member.badge || '',
+      notes: member.notes || '',
+      years: member.years || [],
     });
     setShowTeamModal(true);
   };
@@ -81,6 +92,11 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
       ...teamForm,
       image: teamForm.image || placeholderImage,
       imagePath: teamForm.imagePath,
+      teams: teamForm.teams.length > 0 ? teamForm.teams : undefined,
+      years: teamForm.years.length > 0 ? teamForm.years : undefined,
+      bio: teamForm.bio || undefined,
+      badge: teamForm.badge || undefined,
+      notes: teamForm.notes || undefined,
     } as TeamMember;
     dispatch({ firestoreAction: 'ADD_TEAM_MEMBER', payload: newMember });
     setShowTeamModal(false);
@@ -89,7 +105,15 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
 
   const handleUpdateTeamMember = () => {
     if (editingItem) {
-      const updatedMember = { ...editingItem, ...teamForm } as TeamMember;
+      const updatedMember = {
+        ...editingItem,
+        ...teamForm,
+        teams: teamForm.teams.length > 0 ? teamForm.teams : undefined,
+        years: teamForm.years.length > 0 ? teamForm.years : undefined,
+        bio: teamForm.bio || undefined,
+        badge: teamForm.badge || undefined,
+        notes: teamForm.notes || undefined,
+      } as TeamMember;
       dispatch({ firestoreAction: 'UPDATE_TEAM_MEMBER', payload: updatedMember });
       setShowTeamModal(false);
       resetForms();
@@ -107,6 +131,12 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
     dispatch({ firestoreAction: 'UPDATE_TEAM_MEMBER', payload: patched });
   };
 
+  const handleMove = (memberId: string, direction: 'up' | 'down') => {
+    dispatch({ firestoreAction: 'MOVE_TEAM_MEMBER', payload: { memberId, direction } });
+  };
+
+  const sortedMembers = [...members].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
@@ -115,7 +145,7 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        {members.map((member) => (
+        {sortedMembers.map((member, index) => (
           <Card key={member.id} className="bg-gray-50 dark:bg-gray-800 text-black dark:text-white">
             <CardContent className="p-6">
               <div className="flex items-start space-x-4">
@@ -126,11 +156,47 @@ const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
                   height={100}
                   className="w-16 h-16 rounded-full object-cover"
                 />
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{member.name}</h3>
-                  <p className="text-red-600 font-medium mb-2">{member.position}</p>
-                  <p className="text-gray-600 text-sm line-clamp-3 dark:text-gray-400">{member.bio}</p>
-                  <div className="flex space-x-2 mt-4">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{member.name}</h3>
+                    {member.badge && (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300">
+                        {member.badge}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-red-600 font-medium mb-1">{member.position}</p>
+                  {member.teams && member.teams.length > 0 && (
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                      Teams: {member.teams.map(t => TEAM_CATEGORY_LABELS[t as keyof typeof TEAM_CATEGORY_LABELS] || t).join(', ')}
+                      {member.years && member.years.length > 0 && ` · ${member.years.join(', ')}`}
+                    </p>
+                  )}
+                  {member.bio && (
+                    <p className="text-gray-600 text-sm line-clamp-2 dark:text-gray-400">{member.bio}</p>
+                  )}
+                  {member.notes && (
+                    <p className="text-xs text-gray-400 italic mt-1 truncate">Note: {member.notes}</p>
+                  )}
+                  <div className="flex flex-wrap items-center gap-2 mt-3">
+                    <div className="flex items-center gap-1">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        icon={ArrowUp}
+                        onClick={() => handleMove(member.id, 'up')}
+                        disabled={index === 0}
+                        aria-label="Move up"
+                      />
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        icon={ArrowDown}
+                        onClick={() => handleMove(member.id, 'down')}
+                        disabled={index === sortedMembers.length - 1}
+                        aria-label="Move down"
+                      />
+                    </div>
                     <Button
                       size="sm"
                       variant="outline"
