@@ -73,7 +73,7 @@ const HomePage: React.FC = () => {
              <div className="relative z-10 flex flex-col flex-1 lg:grid lg:grid-cols-2 min-h-screen">
 
                 {/* Text Content - above animation on mobile, right side on desktop */}
-                <div className="order-1 lg:order-2 flex items-center pt-16 pb-2 lg:py-0 lg:min-h-screen md:min-h-0 text-center lg:text-left">
+                <div className="order-1 lg:order-2 flex lg:items-center pt-36 sm:pt-40 md:pt-40 pb-4 lg:py-0 lg:min-h-screen text-center lg:text-left">
                   <div className="w-full">
                     <p className="text-lg font-semibold text-red-200 dark:text-red-300 tracking-widest uppercase mb-4">Welcome to UU AI Society</p>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">

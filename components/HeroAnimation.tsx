@@ -55,7 +55,7 @@ const HeroAnimation: React.FC = () => {
       const isSmall = W < 500;
       const virtualW = isSmall ? Math.min(W, H * 0.9) : W;
       const offsetX = isSmall ? (W - virtualW) / 2 : 0;
-      const size = W < 500 ? 100 : 150;
+      const size = Math.min(W < 500 ? 100 : 150, Math.max(50, (H - 40) * 0.42));
       const scale = W < 500 ? 0.5 : 1;
       const center = {
         x: offsetX + virtualW * 0.5,
