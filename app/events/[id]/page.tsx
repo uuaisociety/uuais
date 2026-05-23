@@ -145,7 +145,11 @@ const EventDetailPage: React.FC = () => {
             {event.category && (
               <div className="flex items-center gap-2">
                 <Tag className="w-5 h-5" />
-                <span className="capitalize">{event.category}</span>
+                <span>
+                  {categoryOptions.find(
+                    (option) => option.value === event.category?.toLowerCase()
+                  )?.label || event.category.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+                </span>
               </div>
             )}
           </div>
@@ -303,10 +307,10 @@ const EventDetailPage: React.FC = () => {
                     <span className="text-gray-600 dark:text-gray-300">
                       Category:
                     </span>
-                    <span className="text-gray-900 dark:text-white font-medium capitalize">
+                    <span className="text-gray-900 dark:text-white font-medium">
                       {categoryOptions.find(
-                        (option) => option.value === event.category
-                      )?.label || event.category}
+                        (option) => option.value === event.category?.toLowerCase()
+                      )?.label || event.category.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
                     </span>
                   </div>
                 )}

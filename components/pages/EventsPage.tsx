@@ -69,15 +69,22 @@ const EventsPage: React.FC = () => {
 
 
   const getCategoryColor = (category: string) => {
-    const colors = {
+    const colors: Record<string, string> = {
       workshop: "bg-blue-100 text-blue-800",
       guest_lecture: "bg-green-100 text-green-800",
       other: "bg-purple-100 text-purple-800",
       hackathon: "bg-yellow-100 text-yellow-800",
     };
     return (
-      colors[category as keyof typeof colors] || "bg-gray-100 text-gray-800"
+      colors[category.toLowerCase()] || "bg-gray-100 text-gray-800"
     );
+  };
+
+  const formatCategoryLabel = (category: string) => {
+    const option = categoryOptions.find(
+      (o) => o.value === category.toLowerCase()
+    );
+    return option?.label || category.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   };
 
   useEffect(() => {
@@ -184,9 +191,7 @@ const EventsPage: React.FC = () => {
                         event.category
                       )}`}
                     >
-                      {categoryOptions.find(
-                        (option) => option.value === event.category
-                      )?.label || event.category}
+                      {formatCategoryLabel(event.category)}
                     </span>
                   </div>
                   {event.registrationRequired && activeTab === "upcoming" && (
@@ -228,7 +233,7 @@ const EventsPage: React.FC = () => {
                       </span>
                     </div>
 
-                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center justify-end text-sm text-gray-600 dark:text-gray-400">
                       <MapPin className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
                       <span>{event.location}</span>
                     </div>
