@@ -12,28 +12,30 @@ function JobItem({ job }: { job: Job }) {
   return (
     <Card>
       <CardContent className="p-6">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
+        <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mb-2">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{job.title}</h3>
-              <Tag variant="red" size="sm">{job.company}</Tag>
-              {job.location && <Tag variant="green" size="sm">{job.location}</Tag>}
-              {Array.isArray(job.tags) && job.tags.map((t, i) => (
-                <Tag key={i} variant="yellow" size="sm">{t}</Tag>
-              ))}
+              <div className="flex flex-wrap items-center gap-2">
+                <Tag variant="red" size="sm">{job.company}</Tag>
+                {job.location && <Tag variant="green" size="sm">{job.location}</Tag>}
+                {Array.isArray(job.tags) && job.tags.map((t, i) => (
+                  <Tag key={i} variant="yellow" size="sm">{t}</Tag>
+                ))}
+              </div>
             </div>
             {/<\/?[a-z][\s\S]*>/i.test(job.description || '') ? (
               <div
-                className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300"
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(job.description || '') }}
-              />
-            ) : (
-              <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 whitespace-pre-wrap">
+          className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 break-words"
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(job.description || '') }}
+        />
+      ) : (
+        <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 whitespace-pre-wrap break-words">
                 {job.description}
               </div>
             )}
           </div>
-          <div className="ml-4 flex flex-col gap-2 items-end">
+          <div className="flex flex-row sm:flex-col gap-2 items-start sm:items-end shrink-0">
             {job.applyUrl && (
               <a href={job.applyUrl} target="_blank" rel="noreferrer">
                 <Button size="sm" variant="default">Read more</Button>
