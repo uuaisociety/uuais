@@ -37,9 +37,9 @@ export const Header: React.FC = () => {
   // Helper function for mobile menu button classes
   const getMobileButtonClass = () => {
     if (isHomePage) {
-      return 'text-white/90 hover:text-white hover:bg-white/20';
+      return 'text-white/90';
     }
-    return 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-900/20';
+    return 'text-gray-700 dark:text-gray-300';
   };
 
   // Helper functions for header styling
@@ -154,9 +154,9 @@ export const Header: React.FC = () => {
 
   return (
     <>
-<header
-         className={`fixed top-0 w-full z-50 transition-all duration-300 ${getHeaderBgClass()}`}
-       >
+      <header
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${getHeaderBgClass()}`}
+      >
         {/* Top auth bar */}
         <div className={`w-full text-sm ${getHeaderTopBarBgClass()}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-end h-9">
@@ -179,7 +179,7 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Main nav bar */}
-<div className={`transition-colors duration-300 ${getHeaderNavBgClass()}`}>
+        <div className={`transition-colors duration-300 ${getHeaderNavBgClass()}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className={`flex ${getLogoJustifyClass()} items-center h-16`}>
               {/* Logo - hidden on homepage */}
@@ -200,28 +200,28 @@ export const Header: React.FC = () => {
               )}
 
               {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center space-x-4">
-                <nav className="flex space-x-4">
-{navigation.map((item) => (
+              <div className="hidden md:flex items-center md:gap-1 lg:gap-4">
+                <nav className="flex md:gap-1 lg:gap-4">
+                  {navigation.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
-                        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${getNavClass(isActive(item.href))}`}
+                        className={`px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium whitespace-nowrap transition-colors duration-200 ${getNavClass(isActive(item.href))}`}
                       >
                         {item.name}
                       </Link>
                     ))}
-<Link
+                    <Link
                       href="/board-apply"
-                      className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${getNavClass(isActive('/board-apply'))}`}
+                      className={`px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium whitespace-nowrap transition-colors duration-200 ${getNavClass(isActive('/board-apply'))}`}
                     >
                       Join the Board!
                     </Link>
-{isAdmin && (<>
+                    {isAdmin && (<>
                      <div key="Projects" className="relative" ref={projectsRef}>
                        <button
-                         onClick={() => setIsProjectsOpen(!isProjectsOpen)}
-                         className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center gap-1 cursor-pointer ${getNavClass(isActive('/projects'))}`}
+                          onClick={() => setIsProjectsOpen(!isProjectsOpen)}
+                          className={`px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium whitespace-nowrap transition-colors duration-200 flex items-center gap-1 cursor-pointer ${getNavClass(isActive('/projects'))}`}
                        >
                          Projects
                          <svg className={`w-4 h-4 transition-transform ${isProjectsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -272,9 +272,9 @@ export const Header: React.FC = () => {
                         </div>
                       )}
                     </div>
-<Link
+                    <Link
                       href="/admin"
-                      className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${getNavClass(isActive('/admin'))}`}
+                      className={`px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium whitespace-nowrap transition-colors duration-200 ${getNavClass(isActive('/admin'))}`}
                     >
                       Admin
                     </Link>
@@ -287,10 +287,10 @@ export const Header: React.FC = () => {
 
                {/* Mobile menu button */}
                <div className="md:hidden">
-<button
+                <button
                     ref={mobileButtonRef}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className={`p-2 rounded-md transition-colors ${getMobileButtonClass()}`}
+                    className={`p-2 rounded-md transition-all hover:scale-110 ${getMobileButtonClass()}`}
                     aria-expanded="false"
                   >
                    <span className="sr-only">Open main menu</span>
@@ -303,8 +303,8 @@ export const Header: React.FC = () => {
                </div>
              </div>
 
-{/* Mobile Navigation */}
-<div
+                {/* Mobile Navigation */}
+                <div
                   ref={mobileMenuRef}
                   className={`md:hidden absolute top-full left-0 right-0 z-50 transition-all duration-300 overflow-hidden ${
                     isMenuOpen 
@@ -314,7 +314,7 @@ export const Header: React.FC = () => {
                   inert={!isMenuOpen}
                 >
                 <div className={`px-2 pt-2 pb-3 space-y-1 ${isHomePage ? '' : 'border-t border-gray-100 dark:border-gray-800'}`}>
-{navigation.map((item) => (
+                  {navigation.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
@@ -324,14 +324,14 @@ export const Header: React.FC = () => {
                       {item.name}
                     </Link>
                   ))}
-<Link
+                  <Link
                     href="/board-apply"
                     onClick={() => setIsMenuOpen(false)}
                     className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${getNavClass(isActive('/board-apply'))}`}
                   >
                     Join the Board!
                   </Link>
-{isAdmin && (
+                    {isAdmin && (
                      <div key="Projects" className="relative" ref={mobileProjectsRef}>
                        <button
                          onClick={(e) => { e.stopPropagation(); setIsProjectsOpen(!isProjectsOpen); }}
@@ -362,7 +362,7 @@ export const Header: React.FC = () => {
                        </div>
                    </div>
                  )}
-{isAdmin && (
+                    {isAdmin && (
                       <Link
                         href="/admin"
                         onClick={() => setIsMenuOpen(false)}
