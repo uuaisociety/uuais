@@ -35,7 +35,17 @@ const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
   const [nrUsers, setNrUsers] = useState<number>(0);
   //const { user, logout } = useAdmin();
-  const [activeTab, setActiveTab] = useState<'events' | 'team' | 'blog' | 'faq' | 'analytics' | 'members' | 'jobs' | 'ai-settings' | 'board-applications'>('board-applications');
+  const tabValues = ['events', 'team', 'blog', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'board-applications'] as const;
+  type Tab = typeof tabValues[number];
+  const [activeTab, setActiveTab] = useState<Tab>(() => {
+    if (typeof window !== 'undefined') {
+      const fromUrl = new URL(window.location.href).searchParams.get('tab');
+      if (tabValues.includes(fromUrl as Tab)) return fromUrl as Tab;
+      const saved = localStorage.getItem('adminDashboardTab');
+      if (tabValues.includes(saved as Tab)) return saved as Tab;
+    }
+    return 'events';
+  });
   const placeholderImage = '/images/logo-highdef.png';
 
   // Modal states
@@ -76,6 +86,13 @@ const AdminDashboard: React.FC = () => {
       setNrUsers((await listUsers()).length);
     })();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('adminDashboardTab', activeTab);
+    const url = new URL(window.location.href);
+    url.searchParams.set('tab', activeTab);
+    window.history.replaceState(null, '', url.toString());
+  }, [activeTab]);
 
   const stats = [
     {
@@ -269,10 +286,10 @@ const AdminDashboard: React.FC = () => {
                 { key: 'blog', label: 'Newsletter', icon: FileText },
                 { key: 'faq', label: 'FAQ', icon: FileText },
                 { key: 'analytics', label: 'Analytics', icon: TrendingUp },
-                { key: 'board-applications', label: "GA'26 Board Applications", icon: Users},
                 { key: 'members', label: 'Members', icon: Users },
                 { key: 'jobs', label: 'Jobs', icon: BriefcaseBusiness },
                 { key: 'ai-settings', label: 'AI Settings', icon: Bot },
+                { key: 'board-applications', label: "GA'26 Board Applications", icon: Users},
               ] as const).map(({ key, label, icon: Icon }) => (
                 <button
                   key={key}
