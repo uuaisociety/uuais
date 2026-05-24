@@ -1,4 +1,5 @@
 import CareersPage from '@/components/pages/CareersPage';
+import { ErrorBoundaryWrapper } from '@/components/ui/ErrorBoundaryWrapper';
 
 export const metadata = {
   title: 'Job board',
@@ -6,5 +7,9 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <CareersPage />;
+  return (
+    <ErrorBoundaryWrapper>
+      <CareersPage />
+    </ErrorBoundaryWrapper>
+  );
 }

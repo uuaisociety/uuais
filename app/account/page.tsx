@@ -14,6 +14,7 @@ import ConfirmModal from "@/components/ui/ConfirmModal";
 import LoginModal from '@/components/ui/LoginModal'
 import { useRouter } from "next/navigation";
 import * as CookieConsent from "vanilla-cookieconsent";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 export default function AccountPage() {
   const { notify } = useNotify();
@@ -130,6 +131,7 @@ export default function AccountPage() {
   }
 
   return (
+    <ErrorBoundary>
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12">
       <div className="max-w-5xl mx-auto px-4 space-y-8">
         <div className="flex items-center justify-between">
@@ -525,5 +527,6 @@ export default function AccountPage() {
         onConfirm={handleCancelEdit}
       />
     </div>
+    </ErrorBoundary>
   );
 }

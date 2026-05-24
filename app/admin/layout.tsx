@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ErrorBoundaryWrapper } from '@/components/ui/ErrorBoundaryWrapper';
 
 export const metadata: Metadata = {
   title: 'Admin Dashboard - Event Management',
@@ -11,8 +12,8 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <ErrorBoundaryWrapper>
       {children}
-    </>
+    </ErrorBoundaryWrapper>
   );
 } 

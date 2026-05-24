@@ -24,13 +24,12 @@ import BlogModal from '@/components/pages/admin/modals/BlogModal';
 import BoardPositionModal, { type BPositionFormState } from './modals/BoardPositionModal';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
-//import { useAdmin } from '@/hooks/useAdmin';
-// format imported where needed in tab components
 import { BlogPost, Event, TeamMember, FAQ, BoardPosition } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
 import AISettingsTab from '@/components/pages/admin/tabs/AISettingsTab';
 import { listUsers } from '@/lib/firestore/users';
+import { TabErrorBoundary } from '@/components/ui/TabErrorBoundary';
 
 const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
@@ -294,53 +293,75 @@ const AdminDashboard: React.FC = () => {
         {/* Tab Content */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
           {activeTab === 'events' && (
-            <EventsTab
-              events={state.events}
-              onManageQuestions={() => { }}
-              onViewRegistrations={() => { }}
-            />
+            <TabErrorBoundary name="Events">
+              <EventsTab
+                events={state.events}
+                onManageQuestions={() => { }}
+                onViewRegistrations={() => { }}
+              />
+            </TabErrorBoundary>
           )}
           {activeTab === 'jobs' && (
-            <JobsTab />
+            <TabErrorBoundary name="Jobs">
+              <JobsTab />
+            </TabErrorBoundary>
           )}
           {activeTab === 'team' && (
-            <TeamTab
-              members={state.teamMembers}
-            />
+            <TabErrorBoundary name="Team">
+              <TeamTab
+                members={state.teamMembers}
+              />
+            </TabErrorBoundary>
           )}
           {activeTab === 'blog' && (
-            <BlogTab
-              posts={state.blogPosts}
-              onAddClick={() => setShowBlogModal(true)}
-              onEdit={(post) => handleEditBlogPost(post)}
-              onDelete={(id) => handleDeleteBlogPost(id)}
-              onTogglePublish={(post) => toggleBlogPostVisibility(post)}
-            />
+            <TabErrorBoundary name="Newsletter">
+              <BlogTab
+                posts={state.blogPosts}
+                onAddClick={() => setShowBlogModal(true)}
+                onEdit={(post) => handleEditBlogPost(post)}
+                onDelete={(id) => handleDeleteBlogPost(id)}
+                onTogglePublish={(post) => toggleBlogPostVisibility(post)}
+              />
+            </TabErrorBoundary>
           )}
-          {activeTab === 'analytics' && <AnalyticsTab />}
+          {activeTab === 'analytics' && (
+            <TabErrorBoundary name="Analytics">
+              <AnalyticsTab />
+            </TabErrorBoundary>
+          )}
           {activeTab === 'faq' && (
-            <FAQTab
-              faqs={state.faqs}
-              onAddClick={() => { setEditingFaq(null); setFaqForm({ question: '', answer: '', category: 'General', order: state.faqs.length + 1, published: true }); setShowFaqModal(true); }}
-              onEdit={(faq) => { setEditingFaq(faq); setFaqForm({ question: faq.question, answer: faq.answer, category: faq.category, order: faq.order, published: faq.published }); setShowFaqModal(true); }}
-              onDelete={(id) => handleDeleteFaq(id)}
-            />
+            <TabErrorBoundary name="FAQ">
+              <FAQTab
+                faqs={state.faqs}
+                onAddClick={() => { setEditingFaq(null); setFaqForm({ question: '', answer: '', category: 'General', order: state.faqs.length + 1, published: true }); setShowFaqModal(true); }}
+                onEdit={(faq) => { setEditingFaq(faq); setFaqForm({ question: faq.question, answer: faq.answer, category: faq.category, order: faq.order, published: faq.published }); setShowFaqModal(true); }}
+                onDelete={(id) => handleDeleteFaq(id)}
+              />
+            </TabErrorBoundary>
           )}
           {activeTab === 'board-applications' && (
-            <BoardTab
-              applicants={state.applicants} 
-              boardPositions={state.boardPositions}
-              onAddClick={() => { setEditingBoardPosition(null); setBoardPositionForm({ title: '', short: '', description: '' }); setShowBoardPositionModal(true); }}
-              onEdit={(position) => { setEditingBoardPosition(position); setBoardPositionForm({ title: position.title, short: position.short, description: position.description }); setShowBoardPositionModal(true); }}
-              onDeletePosition={handleDeleteBoardPosition}
-              onDeleteApplicant={handleDeleteBoardApplication}
-              onMovePosition={handleMoveBoardPosition}
-            />
+            <TabErrorBoundary name="Board Applications">
+              <BoardTab
+                applicants={state.applicants} 
+                boardPositions={state.boardPositions}
+                onAddClick={() => { setEditingBoardPosition(null); setBoardPositionForm({ title: '', short: '', description: '' }); setShowBoardPositionModal(true); }}
+                onEdit={(position) => { setEditingBoardPosition(position); setBoardPositionForm({ title: position.title, short: position.short, description: position.description }); setShowBoardPositionModal(true); }}
+                onDeletePosition={handleDeleteBoardPosition}
+                onDeleteApplicant={handleDeleteBoardApplication}
+                onMovePosition={handleMoveBoardPosition}
+              />
+            </TabErrorBoundary>
           )}
           {activeTab === 'members' && (
-            <MembersTab onChanged={() => { /* could trigger toast */ }} />
+            <TabErrorBoundary name="Members">
+              <MembersTab onChanged={() => { /* could trigger toast */ }} />
+            </TabErrorBoundary>
           )}
-          {activeTab === 'ai-settings' && <AISettingsTab />}
+          {activeTab === 'ai-settings' && (
+            <TabErrorBoundary name="AI Settings">
+              <AISettingsTab />
+            </TabErrorBoundary>
+          )}
 
           {/* Blog Modal */}
           <BlogModal

@@ -1,4 +1,5 @@
 import BoardApplicationPage from '@/components/pages/BoardApplicationPage';
+import { ErrorBoundaryWrapper } from '@/components/ui/ErrorBoundaryWrapper';
 
 export const metadata = {
   title: 'Apply for Board Position',
@@ -6,5 +7,9 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <BoardApplicationPage />;
+  return (
+    <ErrorBoundaryWrapper>
+      <BoardApplicationPage />
+    </ErrorBoundaryWrapper>
+  );
 }

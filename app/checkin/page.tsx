@@ -9,6 +9,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { setAttendanceForUser } from "@/lib/firestore/attendance";
 import AdminGate from "@/components/auth/AdminGate";
 import { getUserProfile } from "@/lib/firestore/users";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 const CheckinPage: React.FC = () => {
   const searchParams = useSearchParams();
@@ -64,6 +65,7 @@ const CheckinPage: React.FC = () => {
 
   return (
     <AdminGate>
+      <ErrorBoundary>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 pt-24">
         <div className="max-w-md mx-auto px-4">
           <Card className="dark:bg-gray-800">
@@ -82,6 +84,7 @@ const CheckinPage: React.FC = () => {
           </Card>
         </div>
       </div>
+      </ErrorBoundary>
     </AdminGate>
   );
 };
