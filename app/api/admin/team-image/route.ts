@@ -2,32 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getTokens } from 'next-firebase-auth-edge';
 import { authConfig } from '@/lib/auth-config';
+import '@/lib/firebase-admin';
 import admin from 'firebase-admin';
 
-if (!admin.apps.length) {
-  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
-  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
-  const storageBucket = process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || process.env.FIREBASE_STORAGE_BUCKET;
-
-  if (!projectId || !clientEmail || !privateKey) {
-    console.error('Missing Firebase admin credentials.');
-  }
-
-  admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId,
-      clientEmail,
-      privateKey,
-    }),
-    storageBucket,
-  });
-}
-
-//   const tokenRes = await getIdTokenResult(u, true);
-//   const tokenClaims = (tokenRes.claims || {}) as Record<string, unknown>;
-//   setClaims(tokenClaims);
-//   setIsAdmin(Boolean(tokenClaims.admin));
 async function authorizeRequest(req: NextRequest) {
   try {
     const tokens = await getTokens(req.cookies, authConfig);
