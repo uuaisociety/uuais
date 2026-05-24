@@ -40,6 +40,12 @@ export async function GET(req: NextRequest) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
+        // Admin-only: embedding projection is expensive (t-SNE on 1000+ vectors)
+        const isAdmin = tokens.decodedToken.admin === true || tokens.decodedToken.superAdmin === true;
+        if (!isAdmin) {
+            return NextResponse.json({ error: 'Forbidden: Admin access required' }, { status: 403 });
+        }
+
         const url = new URL(req.url);
         const dims = (parseInt(url.searchParams.get('dimensions') || '2') === 3 ? 3 : 2) as 2 | 3;
         const algorithm = (url.searchParams.get('algorithm') || 'tsne') as ProjectionAlgorithm;
