@@ -5,6 +5,7 @@ import { type UserProfile, listUsers, updateUserProfile, deleteUser } from "@/li
 import { Button } from "@/components/ui/Button";
 import TableControls, { TablePagination } from '@/components/ui/TableControls';
 import { useNotify } from "@/components/ui/Notifications";
+import { Download } from 'lucide-react';
 
 type EditableUser = UserProfile & Record<string, unknown>;
 
@@ -37,6 +38,21 @@ const fieldOrder: string[] = [
   "createdAt",
   "updatedAt",
 ];
+
+function downloadCsv(users: EditableUser[]) {
+  const rows = [
+    ['Name', 'Email'],
+    ...users.map(u => [u.name || u.displayName || '', u.email || '']),
+  ];
+  const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `members-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
 export default function MembersTab({ onChanged }: MembersTabProps) {
   const { notify } = useNotify();
@@ -316,14 +332,19 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-2">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Members</h2>
-        <TableControls
-          filter={filter}
-          setFilter={setFilter}
-          loading={loading}
-          onRefresh={refresh}
-        />
+        <div className="flex items-center gap-2">
+          <Button size="sm" variant="outline" icon={Download} onClick={() => downloadCsv(users)}>
+            CSV
+          </Button>
+          <TableControls
+            filter={filter}
+            setFilter={setFilter}
+            loading={loading}
+            onRefresh={refresh}
+          />
+        </div>
       </div>
 
       <div className="overflow-x-auto">

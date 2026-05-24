@@ -317,25 +317,7 @@ const AdminDashboard: React.FC = () => {
               onTogglePublish={(post) => toggleBlogPostVisibility(post)}
             />
           )}
-          {activeTab === 'analytics' && (
-            <AnalyticsTab
-              stats={{
-                upcomingEvents: state.events.filter(e => e.status === 'upcoming').length,
-                pastEvents: state.events.filter(e => e.status === 'past').length,
-                totalRegistrations: state.events.reduce((sum, e) => sum + (e.currentRegistrations || 0), 0),
-                publishedArticles: state.blogPosts.filter(p => p.published).length,
-                draftArticles: state.blogPosts.filter(p => !p.published).length,
-                teamMembers: state.teamMembers.length,
-              }}
-              events={state.events.map(e => ({
-                id: e.id,
-                title: e.title,
-                date: e.eventStartAt,
-                currentRegistrations: e.currentRegistrations || 0,
-              }))}
-              blogs={state.blogPosts.map(b => ({ id: b.id, title: b.title, date: b.date }))}
-            />
-          )}
+          {activeTab === 'analytics' && <AnalyticsTab />}
           {activeTab === 'faq' && (
             <FAQTab
               faqs={state.faqs}

@@ -1,4 +1,4 @@
-import { collection, query, orderBy, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, DocumentData, onSnapshot, Timestamp, where } from 'firebase/firestore';
+import { collection, query, orderBy, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc, serverTimestamp, DocumentData, onSnapshot, Timestamp, where } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 import { Job } from '@/types';
 import { stripUndefined } from './utils';
@@ -22,9 +22,20 @@ export const getJobs = async (): Promise<Job[]> => {
 };
 
 export const addJob = async (job: Omit<Job, 'id' | 'createdAt'> & { createdAt?: never }): Promise<string> => {
-  const payload = stripUndefined(job) as DocumentData; // serverTimestamp will be destroyed if mutated̈́
+  const payload = stripUndefined(job) as DocumentData;
   const docRef = await addDoc(collection(db, 'jobs'), {...payload, createdAt: serverTimestamp() });
   return docRef.id;
+};
+
+/** Initialize analytics tracking for a job. Call separately so callers can handle failures. */
+export const initJobAnalytics = async (jobId: string): Promise<void> => {
+  try {
+    const analyticsRef = doc(db, 'analyticsJobs', jobId);
+    await setDoc(analyticsRef, { clicks: 0, updatedAt: serverTimestamp() }, { merge: true });
+  } catch (err) {
+    console.error(`[analytics] Failed to create analyticsJobs document for ${jobId}:`, err);
+    throw err;
+  }
 };
 
 export const updateJob = async (id: string, patch: Partial<Job>): Promise<void> => {
@@ -36,6 +47,7 @@ export const updateJob = async (id: string, patch: Partial<Job>): Promise<void> 
 export const deleteJob = async (id: string): Promise<void> => {
   const jobRef = doc(db, 'jobs', id);
   await deleteDoc(jobRef);
+  await deleteDoc(doc(db, 'analyticsJobs', id)).catch(() => {});
 };
 
 export const subscribeToJobs = (

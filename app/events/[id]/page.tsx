@@ -17,6 +17,7 @@ import { useApp } from "@/contexts/AppContext";
 
 import campus from "@/public/images/campus.png";
 import { incrementEventUniqueClick } from "@/lib/firestore/analytics";
+import { incrementExternalRegistrationClick } from "@/lib/firestore/analytics";
 import { auth } from "@/lib/firebase-client";
 import { getMyRegistrationForEvent } from "@/lib/firestore/registrations";
 import QRCode from "react-qr-code";
@@ -206,7 +207,8 @@ const EventDetailPage: React.FC = () => {
                 <a
                   href={event.externalRegistrationUrl.trim()}
                   target="_blank"
-                  rel="noopener noreferrer" 
+                  rel="noopener noreferrer"
+                  onClick={() => incrementExternalRegistrationClick(eventId).catch(() => {})}
                   className={cn(
                     buttonVariants({ variant: "outline", size: "default" }),
                     "inline-flex no-underline text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline"
