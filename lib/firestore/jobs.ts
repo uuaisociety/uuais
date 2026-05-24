@@ -1,4 +1,4 @@
-import { collection, query, orderBy, getDocs, addDoc, updateDoc, deleteDoc, doc, serverTimestamp, DocumentData, onSnapshot, Timestamp, where } from 'firebase/firestore';
+import { collection, query, orderBy, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc, serverTimestamp, DocumentData, onSnapshot, Timestamp, where } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 import { Job } from '@/types';
 import { stripUndefined } from './utils';
@@ -24,6 +24,12 @@ export const getJobs = async (): Promise<Job[]> => {
 export const addJob = async (job: Omit<Job, 'id' | 'createdAt'> & { createdAt?: never }): Promise<string> => {
   const payload = stripUndefined(job) as DocumentData; // serverTimestamp will be destroyed if mutated̈́
   const docRef = await addDoc(collection(db, 'jobs'), {...payload, createdAt: serverTimestamp() });
+  try {
+    const analyticsRef = doc(db, 'analyticsJobs', docRef.id);
+    await setDoc(analyticsRef, { clicks: 0, updatedAt: serverTimestamp() }, { merge: true });
+  } catch (err) {
+    console.warn('Failed to create analyticsJobs document:', err);
+  }
   return docRef.id;
 };
 
@@ -36,6 +42,7 @@ export const updateJob = async (id: string, patch: Partial<Job>): Promise<void> 
 export const deleteJob = async (id: string): Promise<void> => {
   const jobRef = doc(db, 'jobs', id);
   await deleteDoc(jobRef);
+  await deleteDoc(doc(db, 'analyticsJobs', id)).catch(() => {});
 };
 
 export const subscribeToJobs = (

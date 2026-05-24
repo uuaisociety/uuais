@@ -60,6 +60,8 @@ export interface Event {
   externalRegistrationUrl?: string;
   /** If true, only signed-in users can open the external registration link; others see a disabled control. */
   externalRegistrationMembersOnly?: boolean;
+  /** Optional Google Form (or other) URL for post-event feedback collection. */
+  feedbackFormUrl?: string;
   attendees?: {
     userId: string;
     attended: boolean | null;

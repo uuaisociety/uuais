@@ -7,8 +7,13 @@ import { Card, CardContent } from "@/components/ui/Card";
 import Tag from "@/components/ui/Tag";
 import { Button } from "@/components/ui/Button";
 import { Job } from "@/types";
+import { incrementJobClick } from "@/lib/firestore/analytics";
 
 function JobItem({ job }: { job: Job }) {
+  const handleApply = () => {
+    incrementJobClick(job.id).catch(() => {});
+  };
+
   return (
     <Card>
       <CardContent className="p-6">
@@ -37,12 +42,12 @@ function JobItem({ job }: { job: Job }) {
           </div>
           <div className="flex flex-row sm:flex-col gap-2 items-start sm:items-end shrink-0">
             {job.applyUrl && (
-              <a href={job.applyUrl} target="_blank" rel="noreferrer">
+              <a href={job.applyUrl} target="_blank" rel="noreferrer" onClick={handleApply}>
                 <Button size="sm" variant="default">Read more</Button>
               </a>
             )}
             {job.applyEmail && (
-              <a href={`mailto:${job.applyEmail}`}>
+              <a href={`mailto:${job.applyEmail}`} onClick={handleApply}>
                 {job.applyEmail}
               </a>
             )}
