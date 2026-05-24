@@ -43,8 +43,8 @@ async function getAccessToken(): Promise<string> {
   if (!token?.token) throw new Error('Failed to obtain access token');
 
   // Cache until 5 minutes before expiry to avoid edge races
-  const expiresAt = token.expiry_date
-    ? token.expiry_date - 300_000
+  const expiresAt = client.credentials.expiry_date
+    ? client.credentials.expiry_date - 300_000
     : Date.now() + 3_600_000;
   cachedToken = { token: token.token, expiresAt };
   return token.token;

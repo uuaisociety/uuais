@@ -94,7 +94,7 @@ const JobsTab: React.FC = () => {
       } else {
         const jobId = await dispatch({ firestoreAction: "ADD_JOB", payload });
         notify({ type: "success", message: "Job created." });
-        initJobAnalytics(jobId as string).catch(() => {
+        if (jobId) initJobAnalytics(jobId).catch(() => {
           notify({ type: "warning", title: "Analytics unavailable", message: "Job created but analytics tracking could not be initialized. Check Firestore rules for analyticsJobs." });
         });
       }

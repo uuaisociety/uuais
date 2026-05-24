@@ -191,9 +191,11 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
   }
 };
 
+type AppDispatch = (action: AppAction | FirestoreAction) => Promise<string | void>;
+
 const AppContext = createContext<{
   state: AppState;
-  dispatch: React.Dispatch<AppAction | FirestoreAction>;
+  dispatch: AppDispatch;
 } | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -362,8 +364,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             await movePositionInFirestore(state.boardPositions, action.payload.positionId, action.payload.direction);
             break;
           case 'ADD_JOB':
-            await addJobToFirestore(action.payload);
-            break;
+            return await addJobToFirestore(action.payload);
           case 'UPDATE_JOB':
             await updateJobInFirestore(action.payload.id, action.payload);
             break;
