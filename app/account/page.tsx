@@ -13,6 +13,7 @@ import { useNotify } from "@/components/ui/Notifications";
 import ConfirmModal from "@/components/ui/ConfirmModal";
 import LoginModal from '@/components/ui/LoginModal'
 import { useRouter } from "next/navigation";
+import * as CookieConsent from "vanilla-cookieconsent";
 
 export default function AccountPage() {
   const { notify } = useNotify();
@@ -465,6 +466,18 @@ export default function AccountPage() {
                   <Button onClick={() => handleLink("microsoft")}>Link</Button>
                 )}
               </div> */}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Cookie Settings</h2>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">Manage your cookie preferences.</p>
+            </CardHeader>
+            <CardContent>
+              <Button onClick={() => CookieConsent.showPreferences()}>
+                Change cookie settings
+              </Button>
             </CardContent>
           </Card>
         </div>
