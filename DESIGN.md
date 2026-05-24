@@ -157,6 +157,24 @@ const { notify } = useNotify();
 notify({ type: 'success', title: 'Saved', message: 'Done.' });  // type: success|error|info|warning
 ```
 
+## ErrorBoundary
+
+```tsx
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
+
+// Wrap any section that fetches or renders dynamic content:
+<ErrorBoundary>
+  <EventsList />
+</ErrorBoundary>
+
+// Custom fallback:
+<ErrorBoundary fallback={<p className="text-gray-500">Failed to load.</p>}>
+  <EventsList />
+</ErrorBoundary>
+```
+
+Default fallback renders a `Card` with red error text. The component catches rendering errors in its children to prevent the entire page from crashing.
+
 ## Links
 
 ```tsx

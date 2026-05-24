@@ -1,5 +1,11 @@
 # AGENTS.md
 
+## Identity
+OpenCode agent for the UUAIS project — a Next.js/TypeScript/Firebase web platform for Uppsala University AI Society.
+
+## Memory
+See [MEMORY.md](./MEMORY.md) for the full guide on when to use AGENTS.md vs the `memory` tool, best practices, and how the memory injection works.
+
 ## Behavioral Guidelines
 See CLAUDE.md for coding behavior guidelines: think before coding, simplicity first, surgical changes, goal-driven execution.
 
@@ -38,6 +44,7 @@ If doing frontend work, start by reading through DESIGN.md for Tailwind patterns
 - Firebase project: `uuais-dev`, emulators untested (see README)
 
 ## Notes
+- `[MEMORY]` block from `memory search` is automatically injected into every prompt — no manual fetch needed
 - No `typecheck` script: run `npx tsc --noEmit` for TypeScript checks
 - `jest.config.ts` and `jest.setup.ts` are fully commented out; Jest uses default config
 - Branch naming: `feature/*`, `fix/*`, `docs/*`, `refactor/*` (see README)
