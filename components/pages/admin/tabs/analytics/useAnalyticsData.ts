@@ -96,8 +96,11 @@ export function useAnalyticsData(): AnalyticsData {
   }, [eventIdsKey]);
 
   useEffect(() => {
+    if (activeSubtab !== "overview" && activeSubtab !== "ai") return;
+    if (aiAnalytics) return;
     getAIAnalytics().then(setAIAnalytics).catch(() => {});
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeSubtab]);
 
   useEffect(() => {
     if (activeSubtab !== "firebase") return;

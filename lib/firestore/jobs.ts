@@ -22,15 +22,20 @@ export const getJobs = async (): Promise<Job[]> => {
 };
 
 export const addJob = async (job: Omit<Job, 'id' | 'createdAt'> & { createdAt?: never }): Promise<string> => {
-  const payload = stripUndefined(job) as DocumentData; // serverTimestamp will be destroyed if mutated̈́
+  const payload = stripUndefined(job) as DocumentData;
   const docRef = await addDoc(collection(db, 'jobs'), {...payload, createdAt: serverTimestamp() });
+  return docRef.id;
+};
+
+/** Initialize analytics tracking for a job. Call separately so callers can handle failures. */
+export const initJobAnalytics = async (jobId: string): Promise<void> => {
   try {
-    const analyticsRef = doc(db, 'analyticsJobs', docRef.id);
+    const analyticsRef = doc(db, 'analyticsJobs', jobId);
     await setDoc(analyticsRef, { clicks: 0, updatedAt: serverTimestamp() }, { merge: true });
   } catch (err) {
-    console.warn('Failed to create analyticsJobs document:', err);
+    console.error(`[analytics] Failed to create analyticsJobs document for ${jobId}:`, err);
+    throw err;
   }
-  return docRef.id;
 };
 
 export const updateJob = async (id: string, patch: Partial<Job>): Promise<void> => {

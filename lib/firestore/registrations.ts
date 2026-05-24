@@ -16,8 +16,56 @@ import {
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 import { Event, EventRegistration } from '@/types';
-// no shared utils required here for now
 import { sendTemplatedEmail } from '@/lib/email';
+
+// ---------------------------------------------------------------------------
+// Batch helper for analytics (avoids N+1 queries over event IDs)
+// ---------------------------------------------------------------------------
+
+const BATCH_SIZE = 30;
+
+export interface RegistrationDoc {
+  id: string;
+  eventId: string;
+  status: string;
+  registeredAt: unknown;
+  userId?: string;
+  registrationData?: Record<string, unknown>;
+}
+
+function parseRegDoc(d: { id: string; data(): DocumentData }): RegistrationDoc {
+  const data = d.data();
+  return {
+    id: d.id,
+    eventId: data.eventId || '',
+    status: data.status || 'registered',
+    registeredAt: data.registeredAt,
+    userId: data.userId,
+    registrationData: data.registrationData as Record<string, unknown> | undefined,
+  };
+}
+
+export async function fetchRegistrationsByEventIds(eventIds: string[]): Promise<Map<string, RegistrationDoc[]>> {
+  const grouped = new Map<string, RegistrationDoc[]>();
+  if (!eventIds.length) return grouped;
+
+  for (let i = 0; i < eventIds.length; i += BATCH_SIZE) {
+    const batch = eventIds.slice(i, i + BATCH_SIZE);
+    const snap = await getDocs(query(collection(db, 'registrations'), where('eventId', 'in', batch)));
+    snap.docs.forEach((d) => {
+      const r = parseRegDoc(d);
+      const list = grouped.get(r.eventId);
+      if (list) list.push(r);
+      else grouped.set(r.eventId, [r]);
+    });
+  }
+
+  return grouped;
+}
+
+// ---------------------------------------------------------------------------
+// CRUD operations
+// ---------------------------------------------------------------------------
 
 export const getMyRegistrations = async (userId: string): Promise<EventRegistration[]> => {
   const regRef = collection(db, 'registrations');
@@ -122,7 +170,6 @@ export const registerForEvent = async (
         try {
           await deleteDoc(doc(db, 'registrations', d.id));
         } catch (err) {
-          // Silently ignore - cancelled registration deletion failure is non-critical
           console.warn('Failed to delete cancelled registration:', err);
         }
       } else {
@@ -138,7 +185,6 @@ export const registerForEvent = async (
     const eventSnap = await getDoc(eventRef);
     eventData = eventSnap.exists() ? (eventSnap.data() as Partial<Event>) : {};
   } catch (err: unknown) {
-    // Likely permission-denied (unpublished event). Surface a friendly error.
     if (err && typeof err === 'object' && 'code' in err && (err as { code?: string }).code === 'permission-denied') {
       throw new Error('You do not have permission to register for this event.');
     }
@@ -169,12 +215,6 @@ export const registerForEvent = async (
     userId: payload.userId,
   };
 
-  // Create the registration document first. Then attempt to increment the
-  // event's currentRegistrations as a best-effort operation. We avoid using
-  // a transaction here because transaction commits were triggering
-  // permission-denied in some client environments. If the increment fails
-  // due to permissions, we still return the registration id — admins or a
-  // server-side worker can reconcile counts later.
   const docRef = await addDoc(regRef, regDoc as DocumentData);
   const newRegId = docRef.id;
 
@@ -182,9 +222,6 @@ export const registerForEvent = async (
     try {
       await updateDoc(eventRef, { currentRegistrations: increment(1) });
     } catch (err: unknown) {
-      // Do not block registration on event update failures. Surface a
-      // warning for server-side monitoring; client callers get the
-      // registration id and can be informed that counts may be stale.
       console.warn('Failed to increment event.currentRegistrations', err);
     }
   }
@@ -193,7 +230,7 @@ export const registerForEvent = async (
 };
 
 // ----------------------------
-// Selection & Confirmation Workflow (admin-only operations)
+// Selection & Confirmation Workflow
 // ----------------------------
 
 function randomToken(length = 32): string {
@@ -213,7 +250,6 @@ export async function inviteRegistrant(
   regId: string,
   options?: { baseUrl?: string; expiresInDays?: number }
 ): Promise<void> {
-  // admin-only client should call this
   const regRef = doc(db, 'registrations', regId);
   const regSnap = await getDoc(regRef);
   if (!regSnap.exists()) throw new Error('Registration not found');
@@ -229,9 +265,8 @@ export async function inviteRegistrant(
 
   const to = (reg.userEmail as string | null) || null;
   const name = (reg.userName as string | null) || null;
-  if (!to) return; // cannot email without address
+  if (!to) return;
 
-  // Optional: Check unsubscribe flag on user profile
   let unsub = false;
   try {
     const userId = String(reg.userId || '');
@@ -241,7 +276,6 @@ export async function inviteRegistrant(
       unsub = !!u?.unsubscribedFromEmails;
     }
   } catch (err) {
-    // Silently ignore - user profile fetch failure shouldn't block email sending
     console.warn('Failed to check unsubscribe status:', err);
   }
   if (unsub) return;
@@ -257,7 +291,6 @@ export async function inviteRegistrant(
       if (e?.title) subject = `Invitation to ${e.title}`;
     }
   } catch (err) {
-    // Silently ignore - event fetch failure shouldn't block email sending
     console.warn('Failed to fetch event title for email:', err);
   }
   await sendTemplatedEmail({
@@ -287,7 +320,6 @@ export async function confirmRegistrationByToken(token: string): Promise<{ ok: b
   const eventSnap = await getDoc(eventRef);
   const eventData = eventSnap.exists() ? (eventSnap.data() as Partial<Event>) : {};
 
-  // Optionally enforce capacity here
   const maxCapacity = typeof eventData.maxCapacity === 'number' ? eventData.maxCapacity : undefined;
   const currentRegistrations = typeof eventData.currentRegistrations === 'number' ? eventData.currentRegistrations : 0;
   if (typeof maxCapacity === 'number' && currentRegistrations >= maxCapacity) {
@@ -300,7 +332,6 @@ export async function confirmRegistrationByToken(token: string): Promise<{ ok: b
     confirmationToken: null,
   } as DocumentData);
 
-  // Increment event count
   await updateDoc(eventRef, { currentRegistrations: increment(1) });
   return { ok: true, message: 'Registration confirmed' };
 }

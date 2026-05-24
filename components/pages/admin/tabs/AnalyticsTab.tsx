@@ -3,6 +3,7 @@
 import React from "react";
 import { TrendingUp, Users, Calendar, FileText, BriefcaseBusiness, Bot, Flame } from "lucide-react";
 import { useAnalyticsData, type AnalyticsTabKey } from "./analytics/useAnalyticsData";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import AnalyticsOverviewTab from "./analytics/AnalyticsOverviewTab";
 import AnalyticsEventsTab from "./analytics/AnalyticsEventsTab";
 import AnalyticsMembersTab from "./analytics/AnalyticsMembersTab";
@@ -46,39 +47,55 @@ const AnalyticsTab: React.FC = () => {
 
       <div className="flex-1 min-w-0">
         {d.activeSubtab === "overview" && (
-          <AnalyticsOverviewTab
-            events={d.events}
-            blogs={d.blogs}
-            jobs={d.jobs}
-            teamMembers={d.teamMembers}
-            boardPositions={d.boardPositions}
-            applicants={d.applicants}
-            eventClicks={d.eventClicks}
-            blogReads={d.blogReads}
-            jobClicks={d.jobClicks}
-            memberAnalytics={d.memberAnalytics}
-            funnelData={d.funnelData}
-            aiAnalytics={d.aiAnalytics}
-            totalClicks={d.totalClicks}
-            totalBlogReads={d.totalBlogReads}
-            totalJobClicks={d.totalJobClicks}
-          />
+          <ErrorBoundary>
+            <AnalyticsOverviewTab
+              events={d.events}
+              blogs={d.blogs}
+              jobs={d.jobs}
+              teamMembers={d.teamMembers}
+              boardPositions={d.boardPositions}
+              applicants={d.applicants}
+              eventClicks={d.eventClicks}
+              blogReads={d.blogReads}
+              jobClicks={d.jobClicks}
+              memberAnalytics={d.memberAnalytics}
+              funnelData={d.funnelData}
+              aiAnalytics={d.aiAnalytics}
+              totalClicks={d.totalClicks}
+              totalBlogReads={d.totalBlogReads}
+              totalJobClicks={d.totalJobClicks}
+            />
+          </ErrorBoundary>
         )}
         {d.activeSubtab === "events" && (
-          <AnalyticsEventsTab funnelData={d.funnelData} events={d.events} regAnalytics={d.regAnalytics} />
+          <ErrorBoundary>
+            <AnalyticsEventsTab funnelData={d.funnelData} events={d.events} regAnalytics={d.regAnalytics} />
+          </ErrorBoundary>
         )}
         {d.activeSubtab === "members" && (
-          <AnalyticsMembersTab memberAnalytics={d.memberAnalytics} chartData={d.chartData} eventMarkers={d.eventMarkers} />
+          <ErrorBoundary>
+            <AnalyticsMembersTab memberAnalytics={d.memberAnalytics} chartData={d.chartData} eventMarkers={d.eventMarkers} />
+          </ErrorBoundary>
         )}
         {d.activeSubtab === "newsletter" && (
-          <AnalyticsNewsletterTab blogs={d.blogs} blogReads={d.blogReads} />
+          <ErrorBoundary>
+            <AnalyticsNewsletterTab blogs={d.blogs} blogReads={d.blogReads} />
+          </ErrorBoundary>
         )}
         {d.activeSubtab === "jobs" && (
-          <AnalyticsJobsTab jobs={d.jobs} jobClicks={d.jobClicks} />
+          <ErrorBoundary>
+            <AnalyticsJobsTab jobs={d.jobs} jobClicks={d.jobClicks} />
+          </ErrorBoundary>
         )}
-        {d.activeSubtab === "ai" && <AnalyticsAITab aiAnalytics={d.aiAnalytics} />}
+        {d.activeSubtab === "ai" && (
+          <ErrorBoundary>
+            <AnalyticsAITab aiAnalytics={d.aiAnalytics} />
+          </ErrorBoundary>
+        )}
         {d.activeSubtab === "firebase" && (
-          <AnalyticsFirebaseTab firebaseData={d.firebaseData} firebaseLoading={d.firebaseLoading} />
+          <ErrorBoundary>
+            <AnalyticsFirebaseTab firebaseData={d.firebaseData} firebaseLoading={d.firebaseLoading} />
+          </ErrorBoundary>
         )}
       </div>
     </div>

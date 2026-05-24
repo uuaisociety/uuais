@@ -8,9 +8,12 @@ import { Job } from "@/types";
 import { Edit3, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
 import { useApp } from "@/contexts/AppContext";
 import JobModal, { JobFormState } from "@/components/pages/admin/modals/JobModal";
+import { useNotify } from "@/components/ui/Notifications";
+import { initJobAnalytics } from "@/lib/firestore/jobs";
 
 const JobsTab: React.FC = () => {
   const { state, dispatch } = useApp();
+  const { notify } = useNotify();
 
   const emptyForm: JobFormState = useMemo(
     () => ({
@@ -55,12 +58,14 @@ const JobsTab: React.FC = () => {
   const handleDelete = (id: string) => {
     if (window.confirm("Are you sure you want to delete this job?")) {
       dispatch({ firestoreAction: "DELETE_JOB", payload: id });
+      notify({ type: "success", message: "Job deleted." });
     }
   };
 
   const handleTogglePublish = (job: Job) => {
     const updated = { ...job, published: !job.published } as Job;
     dispatch({ firestoreAction: "UPDATE_JOB", payload: updated });
+    notify({ type: "success", message: `Job ${updated.published ? "published" : "unpublished"}.` });
   };
 
   const normalizeForm = (f: JobFormState): JobFormState => {
@@ -75,17 +80,26 @@ const JobsTab: React.FC = () => {
 
   const handleSubmit = async () => {
     const payload = normalizeForm(form);
-    if (editingJob && editingJob.id) {
-      const updated: Job = {
-        ...editingJob,
-        ...payload,
-        location: payload.location || undefined,
-        applyUrl: payload.applyUrl || undefined,
-        applyEmail: payload.applyEmail || undefined,
-      } as Job;
-      await dispatch({ firestoreAction: "UPDATE_JOB", payload: updated });
-    } else {
-      await dispatch({ firestoreAction: "ADD_JOB", payload });
+    try {
+      if (editingJob && editingJob.id) {
+        const updated: Job = {
+          ...editingJob,
+          ...payload,
+          location: payload.location || undefined,
+          applyUrl: payload.applyUrl || undefined,
+          applyEmail: payload.applyEmail || undefined,
+        } as Job;
+        await dispatch({ firestoreAction: "UPDATE_JOB", payload: updated });
+        notify({ type: "success", message: "Job updated." });
+      } else {
+        const jobId = await dispatch({ firestoreAction: "ADD_JOB", payload });
+        notify({ type: "success", message: "Job created." });
+        initJobAnalytics(jobId as string).catch(() => {
+          notify({ type: "warning", title: "Analytics unavailable", message: "Job created but analytics tracking could not be initialized. Check Firestore rules for analyticsJobs." });
+        });
+      }
+    } catch {
+      notify({ type: "error", message: "Failed to save job." });
     }
     setOpen(false);
   };

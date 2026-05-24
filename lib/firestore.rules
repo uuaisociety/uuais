@@ -227,6 +227,18 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // Jobs: unique clicks (increment-only)
+    match /analyticsJobs/{jobId} {
+      allow read: if isAdmin();
+
+      allow create: if request.resource.data.keys().hasOnly(['clicks', 'updatedAt'])
+        && request.resource.data.clicks == 0;
+      allow update: if changedOnly(['clicks', 'updatedAt'])
+        && request.resource.data.clicks == resource.data.clicks + 1;
+
+      allow delete: if isAdmin();
+    }
+
     // Blogs: unique reads (increment-only)
     match /analyticsBlogs/{blogId} {
       allow read: if isAdmin();

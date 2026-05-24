@@ -28,13 +28,25 @@ import { GoogleAuth } from 'google-auth-library';
 
 const GA4_API = 'https://analyticsdata.googleapis.com/v1beta';
 
+let cachedToken: { token: string; expiresAt: number } | null = null;
+
 async function getAccessToken(): Promise<string> {
+  if (cachedToken && Date.now() < cachedToken.expiresAt) {
+    return cachedToken.token;
+  }
+
   const auth = new GoogleAuth({
     scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
   });
   const client = await auth.getClient();
   const token = await client.getAccessToken();
   if (!token?.token) throw new Error('Failed to obtain access token');
+
+  // Cache until 5 minutes before expiry to avoid edge races
+  const expiresAt = token.expiry_date
+    ? token.expiry_date - 300_000
+    : Date.now() + 3_600_000;
+  cachedToken = { token: token.token, expiresAt };
   return token.token;
 }
 

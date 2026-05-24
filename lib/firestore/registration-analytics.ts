@@ -2,6 +2,7 @@ import { collection, query, where, getDocs, DocumentData, Timestamp } from 'fire
 import { db } from '@/lib/firebase-client';
 import { getEventCustomQuestions } from './questions';
 import { getUserProfile } from './users';
+import { fetchRegistrationsByEventIds } from './registrations';
 import type { EventCustomQuestion } from '@/types';
 
 export interface RegistrationAnalytics {
@@ -57,20 +58,18 @@ export async function getRegistrationAnalytics(eventIds: string[]): Promise<Regi
     return { registrationsPerDay: [], statusBreakdownPerEvent: {}, aggregatedCustomAnswers: {} };
   }
 
-  for (const eventId of eventIds) {
-    const regSnap = await getDocs(query(collection(db, 'registrations'), where('eventId', '==', eventId)));
+  const regByEvent = await fetchRegistrationsByEventIds(eventIds);
 
+  for (const [eventId, docs] of regByEvent) {
     const statuses = { registered: 0, waitlist: 0, invited: 0, confirmed: 0, declined: 0, cancelled: 0 };
 
-    regSnap.docs.forEach((d) => {
-      const data = d.data() as DocumentData;
-      const status: string = data?.status || 'registered';
-      if (status in statuses) statuses[status as keyof typeof statuses]++;
+    docs.forEach((r) => {
+      if (r.status in statuses) statuses[r.status as keyof typeof statuses]++;
 
-      const dateKey = toDateKey(data?.registeredAt);
+      const dateKey = toDateKey(r.registeredAt);
       if (dateKey) perDay[dateKey] = (perDay[dateKey] ?? 0) + 1;
 
-      const regData = data?.registrationData;
+      const regData = r.registrationData;
       if (regData && typeof regData === 'object') {
         Object.entries(regData).forEach(([question, answer]) => {
           const strAnswer = String(answer ?? '').trim();

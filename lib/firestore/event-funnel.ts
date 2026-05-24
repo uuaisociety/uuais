@@ -1,6 +1,7 @@
-import { doc, getDoc, getDocs, collection, query, where, DocumentData } from 'firebase/firestore';
+import { doc, getDoc, DocumentData } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 import { getEventClicksCounts } from './analytics';
+import { fetchRegistrationsByEventIds } from './registrations';
 
 export interface EventFunnel {
   eventId: string;
@@ -25,6 +26,7 @@ export async function getEventFunnel(eventIds: string[], clicksMap?: Record<stri
   if (!eventIds.length) return [];
 
   clicksMap ??= await getEventClicksCounts(eventIds);
+  const regByEvent = await fetchRegistrationsByEventIds(eventIds);
 
   const results = await Promise.all(
     eventIds.map(async (eventId) => {
@@ -36,12 +38,9 @@ export async function getEventFunnel(eventIds: string[], clicksMap?: Record<stri
       const attendees: Array<{ attended: boolean | null }> = Array.isArray(evt.attendees) ? evt.attendees : [];
       const attended = attendees.filter((a) => a.attended === true).length;
 
-      // Status breakdown from registrations collection
-      const regSnap = await getDocs(query(collection(db, 'registrations'), where('eventId', '==', eventId)));
       const breakdown = { registered: 0, waitlist: 0, invited: 0, confirmed: 0, declined: 0, cancelled: 0 };
-      regSnap.docs.forEach((d) => {
-        const status = (d.data() as DocumentData)?.status || 'registered';
-        if (status in breakdown) breakdown[status as keyof typeof breakdown]++;
+      (regByEvent.get(eventId) ?? []).forEach((r) => {
+        if (r.status in breakdown) breakdown[r.status as keyof typeof breakdown]++;
       });
 
       const clicks = clicksMap[eventId] ?? 0;
