@@ -3,6 +3,9 @@
 ## Behavioral Guidelines
 See CLAUDE.md for coding behavior guidelines: think before coding, simplicity first, surgical changes, goal-driven execution.
 
+## Frontend Work
+If doing frontend work, start by reading through DESIGN.md for Tailwind patterns, component usage, and dark mode conventions.
+
 ## Structure
 - Core app: Next.js 16 + TypeScript + Firebase, Turbopack dev server
 - `course_scraper/`: Separate Python subproject (UV package manager), scrapes UU courses. Requires API keys in `course_scraper/api_keys/`
