@@ -3,9 +3,7 @@ import type { NextRequest } from 'next/server';
 import { authMiddleware } from 'next-firebase-auth-edge';
 import { authConfig } from '@/lib/auth-config';
 
-export const runtime = 'nodejs';
-
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Only protect admin routes except the main admin login page
