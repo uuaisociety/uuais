@@ -2,8 +2,8 @@ export const authConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
   cookieName: 'AuthToken',
   cookieSignatureKeys: [
-    process.env.AUTH_COOKIE_SIGNATURE_KEY_CURRENT || 'Key-Should-Be-at-least-32-bytes-in-length-1234567890',
-    process.env.AUTH_COOKIE_SIGNATURE_KEY_PREVIOUS || 'Previous-Key-Should-Be-at-least-32-bytes-in-length',
+    process.env.AUTH_COOKIE_SIGNATURE_KEY_CURRENT ?? (() => { if (process.env.NODE_ENV === 'production') throw new Error('Missing AUTH_COOKIE_SIGNATURE_KEY_CURRENT'); return 'dev-key-not-secure-123456789012345678901234567890'; })(),
+    process.env.AUTH_COOKIE_SIGNATURE_KEY_PREVIOUS ?? (() => { if (process.env.NODE_ENV === 'production') throw new Error('Missing AUTH_COOKIE_SIGNATURE_KEY_PREVIOUS'); return 'dev-key-not-secure-123456789012345678901234567890'; })(),
   ],
   cookieSerializeOptions: {
     path: '/',
