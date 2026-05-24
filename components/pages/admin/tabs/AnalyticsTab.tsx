@@ -26,6 +26,7 @@ const AnalyticsTab: React.FC = () => {
   const d = useAnalyticsData();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const isMounted = useRef(false);
 
   const selectTab = useCallback((key: AnalyticsTabKey) => {
     d.setActiveSubtab(key);
@@ -34,6 +35,10 @@ const AnalyticsTab: React.FC = () => {
   }, [d]);
 
   useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
     if (!sidebarOpen) {
       menuButtonRef.current?.focus();
       return;
@@ -69,7 +74,7 @@ const AnalyticsTab: React.FC = () => {
       <div className="relative">
         {/* Mobile overlay */}
         {sidebarOpen && (
-          <div className="absolute inset-0 z-40 bg-black/50 md:hidden rounded-lg" onClick={() => { setSidebarOpen(false); menuButtonRef.current?.focus(); }} />
+          <div className="absolute inset-0 z-40 bg-black/50 md:hidden rounded-lg" onClick={() => setSidebarOpen(false)} />
         )}
 
         <div className="flex gap-6">
