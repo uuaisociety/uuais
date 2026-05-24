@@ -45,6 +45,7 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
     const [isFullscreen, setIsFullscreen] = useState(false);
     const animFrameRef = useRef<number>(0);
     const recommendedSet = useMemo(() => new Set(recommendedIds), [recommendedIds]);
+    const renderRef = useRef<() => void>(() => {});
 
     const getCanvasRect = useCallback(() => {
         if (!canvasRef.current) return { width: 800, height: height, left: 0, top: 0 };
@@ -76,7 +77,7 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
         const canvas = canvasRef.current;
         if (!canvas) return;
 
-        const observer = new ResizeObserver(() => render());
+        const observer = new ResizeObserver(() => renderRef.current());
         observer.observe(canvas);
         return () => observer.disconnect();
     });
@@ -259,6 +260,10 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
         }
     }, [points, recommendedSet, hoveredPoint, getCanvasRect, toCanvas, transform]);
 
+    useEffect(() => {
+        renderRef.current = render;
+    });
+
     // Animation loop for pulsing recommended points
     useEffect(() => {
         if (points.length === 0) return;
@@ -266,13 +271,13 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
         let running = true;
         const animate = () => {
             if (!running) return;
-            render();
+            renderRef.current();
             if (recommendedSet.size > 0) {
                 animFrameRef.current = requestAnimationFrame(animate);
             }
         };
 
-        render();
+        renderRef.current();
         if (recommendedSet.size > 0) {
             animFrameRef.current = requestAnimationFrame(animate);
         }
@@ -281,7 +286,7 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
             running = false;
             cancelAnimationFrame(animFrameRef.current);
         };
-    }, [render, points, recommendedSet]);
+    }, [points, recommendedSet]);
 
     // Mouse events
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLCanvasElement>) => {

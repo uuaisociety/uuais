@@ -186,11 +186,13 @@ Always base your recommendations on the provided course context.`,
     }
   };
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     loadSettings();
     loadUsage();
     if (isSuperAdmin) {
       loadOpenRouterModels();
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [isSuperAdmin]);
 
   if (loading) {

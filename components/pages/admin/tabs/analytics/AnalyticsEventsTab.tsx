@@ -278,14 +278,14 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
             <table className="min-w-full text-sm">
               <thead>
                 <tr className="text-left text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
-                  <th className="py-2 pr-4">Event</th>
-                  <th className="py-2 pr-4">Date</th>
-                  <th className="py-2 pr-4">Clicks</th>
-                  <th className="py-2 pr-4">Reg.</th>
-                  <th className="py-2 pr-4">Att.</th>
-                  <th className="py-2 pr-4">View→Reg</th>
-                  <th className="py-2 pr-4">Reg→Att</th>
-                  <th className="py-2 pr-4">Feedback</th>
+                  <th className="py-2 pr-4 whitespace-nowrap">Event</th>
+                  <th className="py-2 pr-4 whitespace-nowrap">Date</th>
+                  <th className="py-2 pr-4 whitespace-nowrap">Clicks</th>
+                  <th className="py-2 pr-4 whitespace-nowrap">Reg.</th>
+                  <th className="py-2 pr-4 whitespace-nowrap">Att.</th>
+                  <th className="py-2 pr-4 whitespace-nowrap">View→Reg</th>
+                  <th className="py-2 pr-4 whitespace-nowrap">Reg→Att</th>
+                  <th className="py-2 pr-4 whitespace-nowrap">Feedback</th>
                 </tr>
               </thead>
               <tbody>
@@ -295,24 +295,24 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                     onClick={() => openEvent(f.eventId)}
                     className="border-b border-gray-100 dark:border-gray-700/50 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
                   >
-                    <td className="py-2 pr-4 font-medium text-blue-600 dark:text-blue-400 hover:underline">
+                    <td className="py-2 pr-4 font-medium text-blue-600 dark:text-blue-400 hover:underline whitespace-nowrap">
                       {f.title}
                     </td>
-                    <td className="py-2 pr-4 text-gray-700 dark:text-gray-300">{shortDate(f.date)}</td>
-                    <td className="py-2 pr-4">{f.clicks}</td>
-                    <td className="py-2 pr-4">{f.registrations}</td>
-                    <td className="py-2 pr-4">{f.attended}</td>
-                    <td className="py-2 pr-4">
+                    <td className="py-2 pr-4 text-gray-700 dark:text-gray-300 whitespace-nowrap">{shortDate(f.date)}</td>
+                    <td className="py-2 pr-4 whitespace-nowrap">{f.clicks}</td>
+                    <td className="py-2 pr-4 whitespace-nowrap">{f.registrations}</td>
+                    <td className="py-2 pr-4 whitespace-nowrap">{f.attended}</td>
+                    <td className="py-2 pr-4 whitespace-nowrap">
                       <span className={f.viewToRegPct > 30 ? "text-green-600" : "text-amber-600"}>
                         {f.viewToRegPct}%
                       </span>
                     </td>
-                    <td className="py-2 pr-4">
+                    <td className="py-2 pr-4 whitespace-nowrap">
                       <span className={f.regToAttendPct > 50 ? "text-green-600" : "text-amber-600"}>
                         {f.regToAttendPct}%
                       </span>
                     </td>
-                    <td className="py-2 pr-4">
+                    <td className="py-2 pr-4 whitespace-nowrap">
                       {(() => {
                         const evt = events.find((e) => e.id === f.eventId);
                         return evt?.feedbackFormUrl ? (
@@ -349,13 +349,13 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                 <table className="min-w-full text-sm">
                   <thead>
                     <tr className="text-left text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
-                      <th className="py-2 pr-4">Event</th>
-                      <th className="py-2 pr-4">Reg.</th>
-                      <th className="py-2 pr-4">Wait.</th>
-                      <th className="py-2 pr-4">Inv.</th>
-                      <th className="py-2 pr-4">Conf.</th>
-                      <th className="py-2 pr-4">Dec.</th>
-                      <th className="py-2 pr-4">Canc.</th>
+                      <th className="py-2 pr-4 whitespace-nowrap">Event</th>
+                      <th className="py-2 pr-4 whitespace-nowrap">Reg.</th>
+                      <th className="py-2 pr-4 whitespace-nowrap">Wait.</th>
+                      <th className="py-2 pr-4 whitespace-nowrap">Inv.</th>
+                      <th className="py-2 pr-4 whitespace-nowrap">Conf.</th>
+                      <th className="py-2 pr-4 whitespace-nowrap">Dec.</th>
+                      <th className="py-2 pr-4 whitespace-nowrap">Canc.</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -363,13 +363,13 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                       const evt = events.find((e) => e.id === eid);
                       return (
                         <tr key={eid} className="border-b border-gray-100 dark:border-gray-700/50">
-                          <td className="py-2 pr-4 font-medium text-gray-900 dark:text-white">{evt?.title || eid.slice(0, 8)}</td>
-                          <td className="py-2 pr-4">{s.registered}</td>
-                          <td className="py-2 pr-4">{s.waitlist}</td>
-                          <td className="py-2 pr-4">{s.invited}</td>
-                          <td className="py-2 pr-4">{s.confirmed}</td>
-                          <td className="py-2 pr-4">{s.declined}</td>
-                          <td className="py-2 pr-4">{s.cancelled}</td>
+                          <td className="py-2 pr-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{evt?.title || eid.slice(0, 8)}</td>
+                          <td className="py-2 pr-4 whitespace-nowrap">{s.registered}</td>
+                          <td className="py-2 pr-4 whitespace-nowrap">{s.waitlist}</td>
+                          <td className="py-2 pr-4 whitespace-nowrap">{s.invited}</td>
+                          <td className="py-2 pr-4 whitespace-nowrap">{s.confirmed}</td>
+                          <td className="py-2 pr-4 whitespace-nowrap">{s.declined}</td>
+                          <td className="py-2 pr-4 whitespace-nowrap">{s.cancelled}</td>
                         </tr>
                       );
                     })}

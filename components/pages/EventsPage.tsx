@@ -233,7 +233,7 @@ const EventsPage: React.FC = () => {
                       </span>
                     </div>
 
-                    <div className="flex items-center justify-end text-sm text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                       <MapPin className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
                       <span>{event.location}</span>
                     </div>

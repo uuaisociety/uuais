@@ -31,7 +31,6 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [canApply, SetCanApply] = useState(false);
   const [customQuestions, setCustomQuestions] = useState<EventCustomQuestion[]>(
     []
   );
@@ -90,13 +89,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
     return () => unsub();
   }, [event.id]);
 
-  useEffect(() => {
-    if (!uid || !profile?.isMember) {
-      SetCanApply(false);
-      return;
-    }
-    SetCanApply(true);
-  }, [uid, profile]);
+  const canApply = Boolean(uid && profile?.isMember);
 
   const handleCustomAnswerChange = (
     q: EventCustomQuestion,

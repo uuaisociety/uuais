@@ -95,7 +95,7 @@ export default function BoardApplicationPage() {
             ...cur,
             name: cur.name && cur.name.trim() ? cur.name : (u.displayName || cur.name),
             email: cur.email && cur.email.trim() ? cur.email : (u.email || cur.email),
-            phone: cur.phone && String(cur.phone).trim() ? cur.phone : ((u as any).phoneNumber || cur.phone),
+            phone: cur.phone && String(cur.phone).trim() ? cur.phone : (u.phoneNumber || cur.phone),
           };
         });
         return next;
@@ -175,7 +175,7 @@ export default function BoardApplicationPage() {
   };
 
   // per-role helpers
-  const setField = (roleId: string, field: keyof FormState, value: any) => {
+  const setField = <K extends keyof FormState>(roleId: string, field: K, value: FormState[K]) => {
     setForms(prev => ({ ...prev, [roleId]: { ...prev[roleId], [field]: value } }));
   };
 

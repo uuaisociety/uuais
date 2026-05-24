@@ -247,10 +247,10 @@ const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 pt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-4 pt-20 md:py-8 md:pt-24">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8 flex justify-between items-start gap-4">
+        <div className="mb-4 md:mb-8 flex justify-between items-start gap-4">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Admin Dashboard</h1>
             <p className="text-gray-600 dark:text-gray-300">Manage your UU AI Society content and events</p>
@@ -258,7 +258,7 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-6 mb-4 md:mb-8 items-center">
           {stats.map((stat, index) => (
             <Card key={index} className="h-full">
               <CardContent className="pl-6 pr-6 pt-6 h-full">
@@ -277,7 +277,7 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="overflow-x-auto mb-8">
+        <div className="overflow-x-auto mb-4 md:mb-8">
           <div className="pb-4 border-b border-gray-200 dark:border-gray-700">
             <nav className="-mb-px flex space-x-8 md:space-x-12">
               {([
@@ -308,7 +308,7 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Tab Content */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 md:p-6">
           {activeTab === 'events' && (
             <TabErrorBoundary name="Events">
               <EventsTab

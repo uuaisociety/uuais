@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/Button";
 import { X } from "lucide-react";
 import { Job, JobType } from "@/types";
@@ -16,13 +16,10 @@ interface JobModalProps {
   onSubmit: () => void;
 }
 
-const JobModal: React.FC<JobModalProps> = ({ open, editing, form, setForm, onClose, onSubmit }) => {
-  const [tagsText, setTagsText] = useState((form.tags || []).join(', '));
-  useEffect(() => {
-    setTagsText((form.tags || []).join(', '));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editing]);
+const parseTags = (value: string): string[] =>
+  value.split(',').map((t) => t.trim()).filter((t) => t.length > 0);
 
+const JobModal: React.FC<JobModalProps> = ({ open, editing, form, setForm, onClose, onSubmit }) => {
   if (!open) return null;
 
   return (
@@ -84,16 +81,8 @@ const JobModal: React.FC<JobModalProps> = ({ open, editing, form, setForm, onClo
             <label className="block text-sm font-medium text-gray-700 dark:text-white mb-1">Tags (comma separated)</label>
             <input
               type="text"
-              value={tagsText}
-              onChange={(e) => {
-                const value = e.target.value;
-                setTagsText(value);
-                const tags = value
-                  .split(',')
-                  .map((t) => t.trim())
-                  .filter((t) => t.length > 0);
-                setForm((prev) => ({ ...prev, tags }));
-              }}
+              defaultValue={(form.tags || []).join(', ')}
+              onChange={(e) => setForm((prev) => ({ ...prev, tags: parseTags(e.target.value) }))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
               placeholder="e.g. AI, Full-time, Remote"
             />

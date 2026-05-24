@@ -81,7 +81,9 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
   }, [notify]);
 
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     refresh();
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [refresh]);
 
   const filtered = useMemo(() => {
@@ -110,8 +112,11 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
   }, [filtered, sortKey, sortDir]);
 
   const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize));
+
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     if (page > totalPages) setPage(totalPages);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [totalPages, page]);
 
   const paginated = useMemo(() => {
