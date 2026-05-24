@@ -211,12 +211,6 @@ export const Header: React.FC = () => {
                         {item.name}
                       </Link>
                     ))}
-                    <Link
-                      href="/board-apply"
-                      className={`px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium whitespace-nowrap transition-colors duration-200 ${getNavClass(isActive('/board-apply'))}`}
-                    >
-                      Join the Board!
-                    </Link>
                     {isAdmin && (<>
                      <div key="Projects" className="relative" ref={projectsRef}>
                        <button
@@ -324,13 +318,6 @@ export const Header: React.FC = () => {
                       {item.name}
                     </Link>
                   ))}
-                  <Link
-                    href="/board-apply"
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${getNavClass(isActive('/board-apply'))}`}
-                  >
-                    Join the Board!
-                  </Link>
                     {isAdmin && (
                      <div key="Projects" className="relative" ref={mobileProjectsRef}>
                        <button

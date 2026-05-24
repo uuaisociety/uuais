@@ -1,15 +1,15 @@
-import BoardApplicationPage from '@/components/pages/BoardApplicationPage';
-import { ErrorBoundaryWrapper } from '@/components/ui/ErrorBoundaryWrapper';
+'use client'
 
-export const metadata = {
-  title: 'Apply for Board Position',
-  description: 'Internal board/committee position application form.'
-};
+import BoardApplicationPage from '@/components/pages/BoardApplicationPage';
+import AdminGate from '@/components/auth/AdminGate';
+import { ErrorBoundaryWrapper } from '@/components/ui/ErrorBoundaryWrapper';
 
 export default function Page() {
   return (
     <ErrorBoundaryWrapper>
-      <BoardApplicationPage />
+      <AdminGate>
+        <BoardApplicationPage />
+      </AdminGate>
     </ErrorBoundaryWrapper>
   );
 }
