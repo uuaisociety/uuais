@@ -81,7 +81,9 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
   }, [notify]);
 
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
     refresh();
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [refresh]);
 
   const filtered = useMemo(() => {
@@ -110,14 +112,12 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
   }, [filtered, sortKey, sortDir]);
 
   const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize));
-  useEffect(() => {
-    if (page > totalPages) setPage(totalPages);
-  }, [totalPages, page]);
+  const clampedPage = Math.min(page, totalPages);
 
   const paginated = useMemo(() => {
-    const start = (page - 1) * pageSize;
+    const start = (clampedPage - 1) * pageSize;
     return sorted.slice(start, start + pageSize);
-  }, [sorted, page, pageSize]);
+  }, [sorted, clampedPage, pageSize]);
 
   const open = (u: EditableUser) => {
     setSelected(u);
@@ -400,7 +400,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
       </div>
 
       <TablePagination
-        page={page}
+        page={clampedPage}
         setPage={setPage}
         pageSize={pageSize}
         setPageSize={setPageSize}

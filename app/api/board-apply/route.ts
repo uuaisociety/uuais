@@ -7,6 +7,12 @@ import admin from 'firebase-admin';
 
 export const runtime = 'nodejs';
 
+interface AppError extends Error {
+  status?: number;
+  code?: string;
+  retryAfterSeconds?: number;
+}
+
 async function authorizeRequest(req: NextRequest) {
   try {
     const tokens = await getTokens(req.cookies, authConfig);
@@ -119,7 +125,6 @@ export async function POST(req: NextRequest) {
       const existingCountSnap = await adminDb
         .collection('boardApplications')
         .where('emailNormalized', '==', emailNormalized)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .count()
         .get();
       existingCount = existingCountSnap.data().count || 0;
@@ -138,19 +143,15 @@ export async function POST(req: NextRequest) {
       const [limitsDoc, roleLockDoc] = await Promise.all([tx.get(limitsRef), tx.get(roleLockRef)]);
 
       if (roleLockDoc.exists) {
-        const existingAppId = (roleLockDoc.data() as any)?.applicationId;
-        const msg = existingAppId
-          ? 'You have already applied for this position.'
-          : 'You have already applied for this position.';
-        const err: any = new Error(msg);
+        const msg = 'You have already applied for this position.';
+        const err = new Error(msg) as AppError;
         err.status = 409;
         err.code = 'DUPLICATE_ROLE';
         throw err;
       }
 
-      const limits = (limitsDoc.exists ? (limitsDoc.data() as any) : null) as
-        | { lastAppliedAtMs?: number; totalApplications?: number }
-        | null;
+      const limitsData = limitsDoc.exists ? limitsDoc.data() : null;
+      const limits = limitsData as { lastAppliedAtMs?: number; totalApplications?: number } | null;
       const lastAppliedAtMs = typeof limits?.lastAppliedAtMs === 'number' ? limits.lastAppliedAtMs : 0;
       const totalApplications =
         typeof limits?.totalApplications === 'number' ? limits.totalApplications : (limitsDoc.exists ? 0 : existingCount);
@@ -159,7 +160,7 @@ export async function POST(req: NextRequest) {
       if (cooldownMs > 0 && lastAppliedAtMs && nowMs - lastAppliedAtMs < cooldownMs) {
         const retryAfterMs = cooldownMs - (nowMs - lastAppliedAtMs);
         const retryAfterSeconds = Math.max(1, Math.ceil(retryAfterMs / 1000));
-        const err: any = new Error('Too many applications submitted. Please try again in a few moments.');
+        const err = new Error('Too many applications submitted. Please try again in a few moments.') as AppError;
         err.status = 429;
         err.code = 'RATE_LIMITED';
         err.retryAfterSeconds = retryAfterSeconds;
@@ -167,7 +168,7 @@ export async function POST(req: NextRequest) {
       }
 
       if (Number.isFinite(maxTotalApplications) && maxTotalApplications > 0 && totalApplications >= maxTotalApplications) {
-        const err: any = new Error(`You have reached the maximum number of applications (${maxTotalApplications}).`);
+        const err = new Error(`You have reached the maximum number of applications (${maxTotalApplications}).`) as AppError;
         err.status = 403;
         err.code = 'MAX_TOTAL_REACHED';
         throw err;
@@ -196,7 +197,7 @@ export async function POST(req: NextRequest) {
         coverFile: null,
         cv: null,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      } as any);
+      });
     });
 
     let savedCv: { path?: string; url?: string } | null = null;
@@ -226,7 +227,8 @@ export async function POST(req: NextRequest) {
       try {
         await adminDb.runTransaction(async (tx) => {
           const limitsDoc = await tx.get(limitsRef);
-          const currentTotal = typeof (limitsDoc.data() as any)?.totalApplications === 'number' ? (limitsDoc.data() as any).totalApplications : null;
+          const rollbackData = limitsDoc.data() as { totalApplications?: number } | undefined;
+          const currentTotal = typeof rollbackData?.totalApplications === 'number' ? rollbackData.totalApplications : null;
           if (typeof currentTotal === 'number' && currentTotal > 0) {
             tx.set(limitsRef, { totalApplications: currentTotal - 1, updatedAt: admin.firestore.FieldValue.serverTimestamp() }, { merge: true });
           }
@@ -258,7 +260,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(responseDoc);
   } catch (err) {
-    const anyErr = err as any;
+    const anyErr = err as { status?: number; message?: string; code?: string; retryAfterSeconds?: number };
     const status = typeof anyErr?.status === 'number' ? anyErr.status : 500;
     if (status >= 500) console.error('board-apply POST error', err);
     return NextResponse.json(
