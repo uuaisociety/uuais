@@ -1,26 +1,18 @@
-// import type { Config } from 'jest'
- 
-// const config: Config = {
-//   testEnvironment: 'jest-environment-jsdom',
-//   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-//   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
-//   verbose: false,
-//   silent: false,
-//   testFailureExitCode: 1,  
-//   testLocationInResults: true,
-//   reporters: [
-//     ['default', {
-//       errorOnDeprecated: false,
-//       showMarks: false,
-//       verbose: false
-//     }]
-//   ],
-//   moduleNameMapper: {
-//     '^@/(.*)$': '<rootDir>/$1'
-//   },
-//   transform: {
-//     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }]
-//   }
-// }
+import type { Config } from 'jest'
+import nextJest from 'next/jest.js'
 
-// export default config
+const createJestConfig = nextJest({
+  dir: './',
+})
+
+const config: Config = {
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  verbose: false,
+  silent: false,
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1',
+  },
+}
+
+export default createJestConfig(config)
