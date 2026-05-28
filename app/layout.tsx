@@ -40,8 +40,8 @@ export default function RootLayout({
               </div>
             </AppProvider>
           </NotificationsProvider>
+          <AnalyticsWithConsent />
         </Providers>
-        <AnalyticsWithConsent />
       </body>
     </html>
   );

@@ -28,11 +28,11 @@ function initCookieConsent(
       consentModal: {
         layout: 'box',
         position: 'bottom right',
-        equalWeightButtons: true,
+        equalWeightButtons: false,
       },
       preferencesModal: {
         layout: 'box',
-        equalWeightButtons: true,
+        equalWeightButtons: false,
       },
     },
     categories: {
