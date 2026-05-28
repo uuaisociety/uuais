@@ -87,7 +87,7 @@ const JoinPage: React.FC = () => {
         {uid && (
           (profile?.isMember && profile?.privacyAcceptedAt) ? (
             <div className="p-4 rounded-md border border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950 text-blue-900 dark:text-blue-200">
-              You are logged in {form.displayName ? `as ${form.displayName}` : ''}. You are already a member. Manage your details anytime at <Link href="/account">/account</Link>.
+              You are logged in {form.displayName ? `as ${form.displayName}` : ''}. You are already a member. Manage your details anytime in <Link href="/account">your account settings</Link>.
             </div>
           ) : (
             <div className="p-4 rounded-md border border-yellow-200 dark:border-yellow-900 bg-yellow-50 dark:bg-yellow-950 text-yellow-900 dark:text-yellow-200">
@@ -121,7 +121,7 @@ const JoinPage: React.FC = () => {
           <Card>
             <CardHeader>
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Complete your profile</h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">These details help us serve members better. You can edit them anytime in <Link href="/account" className="underline">/account</Link>.</p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">These details help us serve members better. You can edit them anytime in <Link href="/account" className="underline">your account settings</Link>.</p>
             </CardHeader>
             <CardContent className="space-y-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h3>
@@ -259,7 +259,7 @@ const JoinPage: React.FC = () => {
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Already a member?</h2>
           </CardHeader>
           <CardContent>
-            <p className="text-gray-600 dark:text-gray-300">Manage your profile and linked accounts at <Link href="/account">/account</Link>. Your event applications appear there as well.</p>
+            <p className="text-gray-600 dark:text-gray-300">Manage your profile and linked accounts in <Link href="/account">your account settings</Link>. Your event applications appear there as well.</p>
           </CardContent>
         </Card>
       </div>
