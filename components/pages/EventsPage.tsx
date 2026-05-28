@@ -176,15 +176,13 @@ const EventsPage: React.FC = () => {
                 className="h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
               >
                 <div className="aspect-video relative overflow-hidden rounded-t-lg">
-                  <Link href={`/events/${event.id}`}>
-                    <Image
-                      src={event.image || campus}
-                      alt={event.title}
-                      width={500}
-                      height={500}
-                      className="w-full h-full object-cover"
-                    />
-                  </Link>
+                  <Image
+                    src={event.image || campus}
+                    alt={event.title}
+                    width={500}
+                    height={500}
+                    className="w-full h-full object-cover"
+                  />
                   <div className="absolute top-4 left-4">
                     <span
                       className={`px-3 py-1 text-sm font-medium rounded-full ${getCategoryColor(
@@ -205,12 +203,7 @@ const EventsPage: React.FC = () => {
 
                 <CardContent className="p-6">
                   <h3 className="text-xl pt-2 font-semibold text-gray-900 dark:text-white mb-3">
-                    <Link
-                      href={`/events/${event.id}`}
-                      className="hover:text-red-600 dark:hover:text-red-400 transition-colors"
-                    >
-                      {event.title}
-                    </Link>
+                    {event.title}
                   </h3>
 
                   <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 whitespace-pre-wrap">
