@@ -28,6 +28,9 @@
 /build
 
 # misc
+
+# browser-use virtual environment
+.venv-browser-use/
 .DS_Store
 *.pem
 

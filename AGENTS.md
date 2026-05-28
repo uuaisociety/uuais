@@ -50,3 +50,11 @@ If doing frontend work, start by reading through DESIGN.md for Tailwind patterns
 - Branch naming: `feature/*`, `fix/*`, `docs/*`, `refactor/*` (see README)
 - Before PR: Run `npm run lint`, test changes, verify TypeScript types
 - Always run `npm run lint` before finishing any coding task
+
+## Tools & Environment
+See `.opencode/instructions/tools-and-environment.md` for:
+- Browser automation (browser-use) setup and workflow
+- Dev server lifecycle management
+- Project skills (code-security-auditor, staff-engineer-review, etc.)
+- Plugins (cc-safety-net, opencode-snip, opencode-mem)
+- Custom commands (/deep-review)
