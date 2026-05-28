@@ -10,6 +10,7 @@ import { setAttendanceForUser } from "@/lib/firestore/attendance";
 import AdminGate from "@/components/auth/AdminGate";
 import { getUserProfile } from "@/lib/firestore/users";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
+import { updatePageMeta } from "@/utils/seo";
 
 const CheckinPage: React.FC = () => {
   const searchParams = useSearchParams();
@@ -19,6 +20,10 @@ const CheckinPage: React.FC = () => {
   const [status, setStatus] = useState<"idle" | "working" | "done" | "error">("idle");
   const [message, setMessage] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
+
+  useEffect(() => {
+    updatePageMeta("Event Check-in", "Admin event check-in page");
+  }, []);
 
   useEffect(() => {
     if (!eventId || !scannedUserId) {
@@ -73,9 +78,11 @@ const CheckinPage: React.FC = () => {
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 Event Check-in
               </h1>
-              <h1 className="text-gray-700 dark:text-gray-300 mb-6 text-xl font-bold">
-                {userName}
-              </h1>
+              {userName && (
+                <h1 className="text-gray-700 dark:text-gray-300 mb-6 text-xl font-bold">
+                  {userName}
+                </h1>
+              )}
               <p className={`mb-6 ${status === "error" ? "text-red-600" : status === "done" ? "text-green-600 dark:text-green-400/80" : "text-gray-700 dark:text-gray-300"}`}>
                 {message || "Processing your check-in..."}
               </p>

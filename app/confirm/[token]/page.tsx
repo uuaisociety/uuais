@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { confirmRegistrationByToken } from '@/lib/firestore/registrations';
+import { updatePageMeta } from '@/utils/seo';
 
 const ConfirmPage: React.FC = () => {
   const params = useParams();
@@ -13,6 +14,10 @@ const ConfirmPage: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'loading' | 'done'>('idle');
   const [ok, setOk] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
+
+  useEffect(() => {
+    updatePageMeta('Event Confirmation', 'Confirm your event registration');
+  }, []);
 
   useEffect(() => {
     let mounted = true;

@@ -4,6 +4,22 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  if (!id) return { title: "Course Detail" };
+  try {
+    const course = await fetchCourseById(id);
+    if (!course) return { title: "Course Detail" };
+    return {
+      title: course.title || course.code || "Course Detail",
+      description: course.description?.slice(0, 160) || "",
+    };
+  } catch {
+    return { title: "Course Detail" };
+  }
+}
 
 export default async function ExploreDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

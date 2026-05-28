@@ -205,7 +205,7 @@ export default function MyCoursesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">My Courses</h1>
           <p className="text-gray-600 dark:text-gray-300 mb-6">Sign in to view your favorite courses and custom categories</p>
-          <Link href="/account">
+          <Link href="/account?returnTo=/my-courses">
             <Button className="bg-[#990000] hover:bg-[#7f0000] text-white">Sign In</Button>
           </Link>
         </div>

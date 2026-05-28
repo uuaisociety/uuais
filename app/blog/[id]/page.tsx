@@ -12,6 +12,7 @@ import { format } from 'date-fns';
 import { incrementBlogRead } from '@/lib/firestore/analytics';
 import Tag from '@/components/ui/Tag';
 import { useApp } from '@/contexts/AppContext';
+import { updatePageMeta } from '@/utils/seo';
 
 import campus from '@/public/images/campus.png';
 
@@ -19,6 +20,16 @@ const BlogDetailPage: React.FC = () => {
   const params = useParams();
   const blogId = params.id as string;
   const { state } = useApp();
+
+  // Set dynamic page title based on blog post
+  useEffect(() => {
+    if (blogId) {
+      const post = state.blogPosts.find(p => p.id === blogId);
+      if (post) {
+        updatePageMeta(post.title, post.excerpt || '');
+      }
+    }
+  }, [state.blogPosts, blogId]);
 
   // Increment unique blog read on mount 
   useEffect(() => {

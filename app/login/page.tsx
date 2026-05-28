@@ -1,14 +1,18 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import LoginModal from '@/components/ui/LoginModal'
+import { updatePageMeta } from '@/utils/seo'
 
 export default function LoginPage() {
   const router = useRouter()
 
+  useEffect(() => {
+    updatePageMeta('Sign In', 'Sign in to your UU AI Society account');
+  }, []);
+
   const after = () => {
-    // Redirect to previous or default
     router.push('/account')
   }
 
