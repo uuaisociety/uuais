@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
 import React from "react";
-//import { fetchCourses } from "@/lib/courses";
-import { updatePageMeta } from "@/utils/seo";
+
+export const metadata: Metadata = {
+  title: "Study Plan Explorer",
+  description: "Visualize your entire degree pathway",
+};
 
 export default async function StudyPlanPage() {
-    updatePageMeta("Study Plan Explorer", "Visualize your entire degree pathway");
 
     // Server-side fetch
     //const courses = await fetchCourses();

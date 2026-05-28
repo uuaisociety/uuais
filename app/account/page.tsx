@@ -15,6 +15,7 @@ import LoginModal from '@/components/ui/LoginModal'
 import { useRouter } from "next/navigation";
 import * as CookieConsent from "vanilla-cookieconsent";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
+import { updatePageMeta } from "@/utils/seo";
 
 export default function AccountPage() {
   const { notify } = useNotify();
@@ -28,6 +29,10 @@ export default function AccountPage() {
   const [confirmRegId, setConfirmRegId] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [confirmCancel, setConfirmCancel] = useState(false);
+
+  useEffect(() => {
+    updatePageMeta('My Account', 'Manage your UU AI Society account and event registrations');
+  }, []);
 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(async (u) => {

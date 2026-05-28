@@ -1,11 +1,16 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
+import { updatePageMeta } from '@/utils/seo';
 
 export default function CourseNavigatorPage() {
+  useEffect(() => {
+    updatePageMeta('Course Navigator', 'AI-powered course recommendations for Uppsala University students');
+  }, []);
   return (
     <div className="min-h-screen pt-18 pb-8 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

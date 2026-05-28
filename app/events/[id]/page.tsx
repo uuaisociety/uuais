@@ -21,6 +21,7 @@ import { incrementExternalRegistrationClick } from "@/lib/firestore/analytics";
 import { auth } from "@/lib/firebase-client";
 import { getMyRegistrationForEvent } from "@/lib/firestore/registrations";
 import QRCode from "react-qr-code";
+import { updatePageMeta } from "@/utils/seo";
 
 const categoryOptions = [
   { value: "all", label: "All Categories" },
@@ -35,6 +36,16 @@ const EventDetailPage: React.FC = () => {
   const { state } = useApp();
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [hasEligibleRegistration, setHasEligibleRegistration] = useState(false);
+
+  // Set dynamic page title based on event
+  useEffect(() => {
+    if (eventId) {
+      const ev = state.events.find(e => e.id === eventId);
+      if (ev) {
+        updatePageMeta(ev.title, ev.description?.slice(0, 160) || '');
+      }
+    }
+  }, [state.events, eventId]);
 
   // Increment unique event click on mount
   useEffect(() => {
