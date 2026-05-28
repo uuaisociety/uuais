@@ -9,6 +9,17 @@ See [MEMORY.md](./MEMORY.md) for the full guide on when to use AGENTS.md vs the 
 ## Behavioral Guidelines
 See CLAUDE.md for coding behavior guidelines: think before coding, simplicity first, surgical changes, goal-driven execution.
 
+## Permission Boundaries
+**Never autonomously perform destructive or state-changing git/GitHub operations without asking first.** This includes:
+- Committing, amending, or pushing changes
+- Creating issues, PRs, or branches
+- Merging or rebasing branches
+- Switching branches (unless part of a read-only exploration)
+- Deleting files or routes (always confirm)
+- Any operation that writes to the remote repository
+
+Always state what you intend to do, ask for permission, and wait for explicit approval before proceeding.
+
 ## Frontend Work
 If doing frontend work, start by reading through DESIGN.md for Tailwind patterns, component usage, and dark mode conventions.
 

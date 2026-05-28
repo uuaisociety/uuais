@@ -60,6 +60,14 @@ For multi-step tasks, state a brief plan:
 
 Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
 
+## 5. Ask Before Destructive Actions
+
+**Never commit, push, create issues/PRs/branches, merge, or delete files without explicit user approval first.**
+
+- Always state what you intend to do and wait for a "yes" before executing.
+- Read-only operations (exploring code, reading files, searching) are always fine.
+- If unsure whether an action needs permission, ask.
+
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
