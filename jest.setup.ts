@@ -1,8 +1,25 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 
+beforeEach(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
+
+if (typeof window !== 'undefined') {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation((query: string) => ({
+      matches: false,
+      media: query,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+    })),
+  });
+}
+
 global.__mockPathname = '';
 
+const mockParams: Record<string, string> = {};
 jest.mock('next/navigation', () => ({
   useRouter() {
     return {
@@ -14,7 +31,16 @@ jest.mock('next/navigation', () => ({
   usePathname() {
     return global.__mockPathname || '';
   },
+  useParams() {
+    return mockParams;
+  },
+  notFound: jest.fn(() => {
+    throw new Error('NEXT_NOT_FOUND');
+  }),
 }));
+global.__setMockParams = (params: Record<string, string>) => {
+  Object.assign(mockParams, params);
+};
 
 jest.mock('@/hooks/useAdmin', () => ({
   useAdmin: () => ({
@@ -34,24 +60,26 @@ jest.mock('next/image', () => {
   };
 });
 
-jest.mock('@/contexts/AppContext', () => {
-  const defaultState = {
-    events: [],
-    teamMembers: [],
-    blogPosts: [],
-    faqs: [],
-    jobs: [],
-    boardPositions: [],
-    applicants: [],
-    registrationQuestions: [],
-    isLoading: false,
-    error: null,
-  };
-  return {
-    useApp: () => ({ state: defaultState, dispatch: jest.fn() }),
-    AppProvider: ({ children }: { children: React.ReactNode }) => children,
-  };
-});
+let __mockAppState: Record<string, unknown> | null = null;
+const __defaultAppState = {
+  events: [],
+  teamMembers: [],
+  blogPosts: [],
+  faqs: [],
+  jobs: [],
+  boardPositions: [],
+  applicants: [],
+  registrationQuestions: [],
+  isLoading: false,
+  error: null,
+};
+global.__setAppState = (state: Record<string, unknown> | null) => {
+  __mockAppState = state;
+};
+jest.mock('@/contexts/AppContext', () => ({
+  useApp: () => ({ state: __mockAppState || __defaultAppState, dispatch: jest.fn() }),
+  AppProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
 
 jest.mock("@/utils/seo", () => ({
   updatePageMeta: jest.fn(),

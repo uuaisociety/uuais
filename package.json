@@ -12,7 +12,8 @@
     "set:superadmin": "ts-node tools/setSuperAdminClaim.ts",
     "test": "jest --silent",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --config jest.config.ts --coverage"
+    "test:coverage": "jest --config jest.config.ts --coverage",
+    "test:integration": "jest --config jest.integration.config.ts --silent"
   },
   "dependencies": {
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",

@@ -42,6 +42,7 @@ If doing frontend work, start by reading through DESIGN.md for Tailwind patterns
 - `npm test`: Jest (silent mode)
 - `npm run test:watch`: Jest watch mode
 - `npm run test:coverage`: Jest with coverage report
+- `npm run test:integration`: API route tests (`__tests__/app/api/`, mocked Firebase, tests all 13 API endpoints)
 - Admin scripts (use `ts-node`, require `GOOGLE_APPLICATION_CREDENTIALS`):
   - `npm run set:admin -- <email> <true|false>`
   - `npm run set:superadmin -- <email> <true|false>`
@@ -59,6 +60,9 @@ If doing frontend work, start by reading through DESIGN.md for Tailwind patterns
 ## Notes
 - `[MEMORY]` block from `memory search` is automatically injected into every prompt — no manual fetch needed
 - No `typecheck` script: run `npx tsc --noEmit` for TypeScript checks
+- Unit tests: `__tests__/` (jest.config.ts, `testEnvironment: 'jsdom'`)
+- Integration/API tests: `__tests__/app/api/` (jest.integration.config.ts, `testEnvironment: 'node'`) — tests API route logic with mocked Firestore
+- Real Firebase tests: Create `*.firebase.test.ts` files; run separately with `FIREBASE_ENV=ci`
 - `jest.config.ts` uses `next/jest` transformer; mocks for AppContext, Firestore, router, and images are in `jest.setup.ts`
 - Branch naming: `feature/*`, `fix/*`, `docs/*`, `refactor/*` (see README)
 - Before PR: Run `npm run lint`, `npm test`, verify TypeScript types
