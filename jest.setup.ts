@@ -1,6 +1,12 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 
+declare global {
+  var __mockPathname: string | undefined;
+  var __setMockParams: ((params: Record<string, string>) => void) | undefined;
+  var __setAppState: ((state: Record<string, unknown> | null) => void) | undefined;
+}
+
 beforeEach(() => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
 });
