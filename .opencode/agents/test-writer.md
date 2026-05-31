@@ -1,6 +1,6 @@
 ---
 description: >-
-  Write unit tests, integration tests, and E2E tests for the UUAIS project.
+  Write unit tests, integration tests, and API tests for the UUAIS project.
   Generates test files with proper mocking, edge case coverage, and meaningful
   assertions. Use when writing new tests, debugging flaky tests, analyzing
   coverage gaps, or designing test strategies.
@@ -17,30 +17,28 @@ Load this skill before starting: `testing`
 
 Then load relevant reference(s) from `.agents/skills/testing/references/` based on the task:
 - `unit-testing.md` — Jest patterns, mocking, organization
-- `integration-testing.md` — API/Supertest patterns
-- `e2e-testing.md` — Playwright user flows
-- `tdd-iron-laws.md` — Test-first development
-- `testing-anti-patterns.md` — What to avoid
-- `test-reports.md` — Report templates
+- `integration-testing.md` — API route testing with NextRequest/Response
+- `testing-anti-patterns.md` — Test review, mock quality
 
 ## Project Test Setup
-- **Framework:** Jest (fully commented-out config in `jest.config.ts`, `jest.setup.ts`)
-- **Run:** `npm test`
-- **Coverage:** zero test files currently exist
+- **Framework:** Jest (see `jest.config.ts`, `jest.setup.ts`)
+- **Run:** `npm test` (54 suites, 529 tests)
+- **Integration tests:** `npm run test:integration`
+- **Coverage:** `npm run test:coverage`
 - **Stack:** Next.js 16 + TypeScript + Tailwind + Firebase (Firestore)
 - **Routing:** App Router (`app/` directory for pages, `components/` for React components)
 - **State:** AppContext (`contexts/AppContext.tsx`) — single source of truth
 - **Data:** `lib/firestore.ts` — all Firestore CRUD helpers
 
-## Commented-Out Mocks Available (in `jest.setup.ts`)
-The setup file already has commented-out mocks for:
+## Available Mocks (in `jest.setup.ts`)
+The setup file has mocks for:
 - `next/navigation` (useRouter, usePathname)
 - `next/image`
 - `@/contexts/AppContext` (default state with empty arrays)
 - `@/utils/seo`
 - `@/lib/firestore` (all CRUD functions return empty/null)
 
-**When writing tests: first uncomment `jest.setup.ts` and restore the relevant mocks.** Add any new mocks needed.
+Add any additional mocks per test as needed.
 
 ## Guidelines
 
@@ -104,6 +102,7 @@ it('fetches events on mount', async () => {
 
 ## Verification
 - Run `npm test` — all tests pass
+- Run `npm run test:integration` — API route tests pass
 - Run `npm run lint` — no new errors
 - Run `npx tsc --noEmit` — TypeScript compiles cleanly
 - No test file is order-dependent — each runs independently

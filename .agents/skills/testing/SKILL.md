@@ -1,9 +1,9 @@
 ---
 name: testing
 description: >-
-  Comprehensive testing specialist — write unit/integration/E2E tests, create
-  mocking strategies, analyze coverage, and produce test plans/reports. Covers
-  Jest (Vitest), pytest, Playwright, and k6. Use when writing any tests,
+  Comprehensive testing specialist — write unit/integration/API tests, create
+  mocking strategies, analyze coverage, and produce test plans/reports. Uses
+  Jest with Next.js + TypeScript + Firebase. Use when writing any tests,
   debugging flaky tests, analyzing coverage gaps, or designing test strategies.
 license: MIT
 user-invocable: true
@@ -25,7 +25,7 @@ Comprehensive testing specialist for the UUAIS project (Jest + Next.js + TypeScr
 
 - **Framework:** Jest (see `jest.config.ts`, `jest.setup.ts` in root — fully default config)
 - **Stack:** Next.js 16 + TypeScript + Firebase
-- **Run:** `npm test` (silent mode, currently no test files)
+- **Run:** `npm test` (54 test suites, 529+ tests)
 - **Admin scripts:** ts-node, require `GOOGLE_APPLICATION_CREDENTIALS`
 
 ## Quick-Start Example (Jest)
@@ -53,11 +53,8 @@ Load detailed guidance from `references/` based on context:
 | Topic | File | When to Load |
 |-------|------|-------------|
 | Unit Testing | `references/unit-testing.md` | Jest patterns, mocking, organization |
-| Integration Testing | `references/integration-testing.md` | API testing with Supertest |
-| E2E Testing | `references/e2e-testing.md` | Playwright, user flows |
-| TDD Iron Laws | `references/tdd-iron-laws.md` | Test-first development |
+| Integration Testing | `references/integration-testing.md` | API route testing with NextRequest/Response |
 | Testing Anti-Patterns | `references/testing-anti-patterns.md` | Test review, mock quality |
-| Test Reports | `references/test-reports.md` | Report templates |
 
 ## Constraints
 

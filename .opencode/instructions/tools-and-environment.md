@@ -70,6 +70,7 @@ Skills are auto-discovered from multiple locations. No config needed.
 | `audit-review` | audit, critique | Comprehensive quality audit (read-only) |
 | `next-vercel` | next-best-practices, vercel-composition-patterns, vercel-react-best-practices | Next.js conventions, React composition, performance optimization |
 | `review-pr` | staff-engineer-review, react-doctor, next-best-practices, vercel-react-best-practices, code-security-auditor | Structured PR and branch code review (read-only) |
+| `test-writer` | testing | Write unit/integration tests with proper mocking, edge cases, and assertions |
 
 Invoke with `@agent-name describe your request` in chat.
 
