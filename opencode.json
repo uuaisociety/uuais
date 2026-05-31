@@ -11,7 +11,40 @@
   ],
   "skills": {
     "paths": [
-      "skills"
+      "skills",
+      ".agents/skills"
     ]
+  },
+  "agent": {
+    "polish-ui": {
+      "description": "Fix dead code, normalize to design system, and polish copy across all pages. Use for UI polish, consistency fixes, or code cleanup.",
+      "mode": "subagent"
+    },
+    "animate-ux": {
+      "description": "Add purposeful animations, micro-interactions, and delight moments across the site. Use for animation, motion, or delight improvements.",
+      "mode": "subagent"
+    },
+    "typeset-layout": {
+      "description": "Improve typography hierarchy, spacing consistency, and color strategy across the site. Use for typography, layout, or color improvements.",
+      "mode": "subagent"
+    },
+    "harden-ux": {
+      "description": "Production-harden all UIs with proper empty states, loading states, error handling, mobile responsiveness, and edge case management.",
+      "mode": "subagent"
+    },
+    "audit-review": {
+      "description": "Run a comprehensive quality audit across accessibility, performance, theming, and responsive design. Diagnostic only (no edits).",
+      "mode": "subagent",
+      "permission": { "edit": "deny", "bash": "ask" }
+    },
+    "next-vercel": {
+      "description": "Apply Next.js best practices, React composition patterns, and Vercel performance optimizations across the codebase.",
+      "mode": "subagent"
+    },
+    "review-pr": {
+      "description": "Review pull requests and branches with structured Staff+ evaluation. Checks code quality, architecture, performance, security, and Next.js conventions.",
+      "mode": "subagent",
+      "permission": { "edit": "deny", "bash": "ask" }
+    }
   }
 }

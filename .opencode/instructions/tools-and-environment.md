@@ -39,7 +39,7 @@ Kill with: `kill $(lsof -t -i:3000) 2>/dev/null`
 
 Skills are auto-discovered from multiple locations. No config needed.
 
-### Project skills (`skills/`)
+### Project skills (`.agents/skills/`)
 | Skill | Trigger | What it does |
 |-------|---------|-------------|
 | `code-security-auditor` | Security audit, pre-execution review | Static analysis for malicious code, supply chain risks, obfuscation |
@@ -58,6 +58,20 @@ Skills are auto-discovered from multiple locations. No config needed.
 | `opencode-mem` | Enhanced memory/persistence support |
 
 ---
+
+## Subagents (`.opencode/agents/`)
+
+| Agent | Skills | Purpose |
+|-------|--------|---------|
+| `polish-ui` | normalize, polish, clarify | Fix dead code, normalize design system, polish copy |
+| `animate-ux` | animate, delight, bolder | Micro-interactions, entrance animations, delight moments |
+| `typeset-layout` | typeset, arrange, colorize | Typography hierarchy, spacing, color strategy |
+| `harden-ux` | harden, onboard, adapt | Empty/loading/error states, mobile responsiveness, edge cases |
+| `audit-review` | audit, critique | Comprehensive quality audit (read-only) |
+| `next-vercel` | next-best-practices, vercel-composition-patterns, vercel-react-best-practices | Next.js conventions, React composition, performance optimization |
+| `review-pr` | staff-engineer-review, react-doctor, next-best-practices, vercel-react-best-practices, code-security-auditor | Structured PR and branch code review (read-only) |
+
+Invoke with `@agent-name describe your request` in chat.
 
 ## Custom Commands
 
