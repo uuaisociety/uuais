@@ -479,7 +479,6 @@ describe('ExplorePage', () => {
   })
 
   it('handles fetchCoursesClient error gracefully', async () => {
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
     mockFetchCoursesClient.mockRejectedValue(new Error('Network error'))
     render(<ExplorePage />)
     await waitFor(() => {
@@ -487,11 +486,9 @@ describe('ExplorePage', () => {
         screen.getByText('No courses found, please try again.')
       ).toBeInTheDocument()
     })
-    consoleSpy.mockRestore()
   })
 
   it('handles fetchCoursesByIdsClient error gracefully', async () => {
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
     mockFetchCoursesByIdsClient.mockRejectedValue(new Error('Rec fetch error'))
     render(<ExplorePage />)
     await waitFor(() => {
@@ -501,7 +498,6 @@ describe('ExplorePage', () => {
     await waitFor(() => {
       expect(screen.getByText('AI Recommendations')).toBeInTheDocument()
     })
-    consoleSpy.mockRestore()
   })
 
   it('shows pagination info with page numbers', async () => {

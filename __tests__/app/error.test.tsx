@@ -38,7 +38,7 @@ describe('ErrorPage', () => {
   })
 
   it('logs error to console on mount', () => {
-    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    const consoleSpy = jest.spyOn(console, 'error')
     render(<ErrorPage error={mockError} reset={mockReset} />)
     expect(consoleSpy).toHaveBeenCalledWith(mockError)
   })

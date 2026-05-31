@@ -20,7 +20,6 @@ jest.mock('@/lib/ai/openrouter', () => ({ OpenRouterError: class extends Error {
 
 describe('POST /api/chat', () => {
   beforeEach(() => { jest.clearAllMocks() })
-  jest.spyOn(console, 'error').mockImplementation(() => {})
 
   it('returns 401 when not authenticated', async () => {
     mockGetTokens.mockResolvedValue(null)

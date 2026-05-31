@@ -1,12 +1,20 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import LoginCard from '@/components/ui/LoginModal'
 
+const mockSignInWithGooglePopup = jest.fn()
+const mockSignInWithGithubPopup = jest.fn()
+
 jest.mock('@/lib/firebase-client', () => ({
-  signInWithGooglePopup: jest.fn(),
-  signInWithGithubPopup: jest.fn(),
+  signInWithGooglePopup: (...args: unknown[]) => mockSignInWithGooglePopup(...args),
+  signInWithGithubPopup: (...args: unknown[]) => mockSignInWithGithubPopup(...args),
 }))
 
 describe('LoginCard', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('renders login heading and description', () => {
     render(<LoginCard after={jest.fn()} />)
     expect(screen.getByText('Login')).toBeInTheDocument()
@@ -27,5 +35,23 @@ describe('LoginCard', () => {
   it('renders privacy link', () => {
     render(<LoginCard after={jest.fn()} />)
     expect(screen.getByText('Privacy Policy')).toBeInTheDocument()
+  })
+
+  it('calls signInWithGooglePopup and after when Google button is clicked', async () => {
+    mockSignInWithGooglePopup.mockResolvedValue(undefined)
+    const after = jest.fn()
+    render(<LoginCard after={after} />)
+    await userEvent.click(screen.getByText(/Continue with Google/))
+    expect(mockSignInWithGooglePopup).toHaveBeenCalledTimes(1)
+    expect(after).toHaveBeenCalledTimes(1)
+  })
+
+  it('calls signInWithGithubPopup and after when GitHub button is clicked', async () => {
+    mockSignInWithGithubPopup.mockResolvedValue(undefined)
+    const after = jest.fn()
+    render(<LoginCard after={after} />)
+    await userEvent.click(screen.getByText(/Continue with GitHub/))
+    expect(mockSignInWithGithubPopup).toHaveBeenCalledTimes(1)
+    expect(after).toHaveBeenCalledTimes(1)
   })
 })

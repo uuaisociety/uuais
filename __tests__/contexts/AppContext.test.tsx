@@ -248,13 +248,16 @@ describe('AppContext', () => {
       expect(result.current.state.boardPositions).toEqual([mockBoardPosition]);
     });
 
-    it('SET_LOADING and SET_ERROR', async () => {
+    it('resets loading to false after dispatch completes via finally block', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_LOADING', payload: true });
+        await result.current.dispatch({ type: 'SET_EVENTS', payload: [] });
       });
       expect(result.current.state.isLoading).toBe(false);
+    });
 
+    it('SET_ERROR sets error state', async () => {
+      const { result } = renderApp();
       await act(async () => {
         await result.current.dispatch({ type: 'SET_ERROR', payload: 'oops' });
       });
