@@ -1,30 +1,12 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import BoardApplicationPage from '@/components/pages/BoardApplicationPage'
+import { defaultAppState } from '@/__tests__/helpers/fixtures'
 
 const mockUseApp = jest.fn()
 jest.mock('@/contexts/AppContext', () => ({
   useApp: () => mockUseApp(),
   AppProvider: ({ children }: { children: React.ReactNode }) => children,
 }))
-
-jest.mock('@/lib/firebase-client', () => ({
-  auth: {
-    onAuthStateChanged: jest.fn(() => jest.fn()),
-  },
-}))
-
-const defaultState = {
-  events: [],
-  teamMembers: [],
-  blogPosts: [],
-  faqs: [],
-  jobs: [],
-  boardPositions: [],
-  applicants: [],
-  registrationQuestions: [],
-  isLoading: false,
-  error: null,
-}
 
 const samplePosition = {
   id: 'chair',
@@ -41,20 +23,20 @@ describe('BoardApplicationPage', () => {
   })
 
   it('renders page heading', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<BoardApplicationPage />)
     expect(screen.getByText('Open Positions')).toBeInTheDocument()
   })
 
   it('renders empty state when no board positions', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<BoardApplicationPage />)
     expect(screen.getByText('Open Positions')).toBeInTheDocument()
   })
 
   it('renders board position listing', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, boardPositions: [samplePosition] },
+      state: { ...defaultAppState, boardPositions: [samplePosition] },
       dispatch: jest.fn(),
     })
     render(<BoardApplicationPage />)
@@ -64,7 +46,7 @@ describe('BoardApplicationPage', () => {
 
   it('reveals application form on clicking Show details', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, boardPositions: [samplePosition] },
+      state: { ...defaultAppState, boardPositions: [samplePosition] },
       dispatch: jest.fn(),
     })
     render(<BoardApplicationPage />)
@@ -75,7 +57,7 @@ describe('BoardApplicationPage', () => {
 
   it('hides application form on clicking Hide details', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, boardPositions: [samplePosition] },
+      state: { ...defaultAppState, boardPositions: [samplePosition] },
       dispatch: jest.fn(),
     })
     render(<BoardApplicationPage />)
@@ -94,7 +76,7 @@ describe('BoardApplicationPage', () => {
     }
 
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, boardPositions: [positionWithSubmitted] },
+      state: { ...defaultAppState, boardPositions: [positionWithSubmitted] },
       dispatch: jest.fn(),
     })
     render(<BoardApplicationPage />)

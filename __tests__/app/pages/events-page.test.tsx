@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import EventsPage from '@/components/pages/EventsPage'
 import { updatePageMeta } from '@/utils/seo'
-
+import { defaultAppState } from '@/__tests__/helpers/fixtures'
 const mockUseApp = jest.fn()
 jest.mock('@/contexts/AppContext', () => ({
   useApp: () => mockUseApp(),
@@ -36,26 +36,13 @@ const basePast = {
   eventStartAt: '2020-03-10T10:00:00Z',
 }
 
-const defaultState = {
-  events: [],
-  teamMembers: [],
-  blogPosts: [],
-  faqs: [],
-  jobs: [],
-  boardPositions: [],
-  applicants: [],
-  registrationQuestions: [],
-  isLoading: false,
-  error: null,
-}
-
 describe('EventsPage', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
 
   it('shows empty state when no events', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<EventsPage />)
     expect(screen.getByText('No events found')).toBeInTheDocument()
     expect(screen.getByText('No upcoming events match your search criteria.')).toBeInTheDocument()
@@ -63,7 +50,7 @@ describe('EventsPage', () => {
 
   it('renders upcoming events', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [baseUpcoming, basePast] },
+      state: { ...defaultAppState, events: [baseUpcoming, basePast] },
       dispatch: jest.fn(),
     })
     render(<EventsPage />)
@@ -73,7 +60,7 @@ describe('EventsPage', () => {
 
   it('switches to past events tab', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [baseUpcoming, basePast] },
+      state: { ...defaultAppState, events: [baseUpcoming, basePast] },
       dispatch: jest.fn(),
     })
     render(<EventsPage />)
@@ -85,7 +72,7 @@ describe('EventsPage', () => {
   it('shows registration badge for upcoming events with registrationRequired', () => {
     const regEvent = { ...baseUpcoming, registrationRequired: true, id: 'event-3' }
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [regEvent] },
+      state: { ...defaultAppState, events: [regEvent] },
       dispatch: jest.fn(),
     })
     render(<EventsPage />)
@@ -94,7 +81,7 @@ describe('EventsPage', () => {
 
   it('filters events by search term', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [baseUpcoming, basePast] },
+      state: { ...defaultAppState, events: [baseUpcoming, basePast] },
       dispatch: jest.fn(),
     })
     render(<EventsPage />)
@@ -107,7 +94,7 @@ describe('EventsPage', () => {
   it('filters events by category', () => {
     const lecture = { ...baseUpcoming, category: 'guest_lecture' as const, id: 'event-3', title: 'Guest Lecture' }
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [baseUpcoming, lecture] },
+      state: { ...defaultAppState, events: [baseUpcoming, lecture] },
       dispatch: jest.fn(),
     })
     render(<EventsPage />)
@@ -119,7 +106,7 @@ describe('EventsPage', () => {
 
   it('shows empty state when search matches nothing', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [baseUpcoming] },
+      state: { ...defaultAppState, events: [baseUpcoming] },
       dispatch: jest.fn(),
     })
     render(<EventsPage />)
@@ -130,7 +117,7 @@ describe('EventsPage', () => {
 
   it('renders event metadata (date, time, location)', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [baseUpcoming] },
+      state: { ...defaultAppState, events: [baseUpcoming] },
       dispatch: jest.fn(),
     })
     render(<EventsPage />)
@@ -143,7 +130,7 @@ describe('EventsPage', () => {
   it('renders capacity for events with maxCapacity', () => {
     const capEvent = { ...baseUpcoming, maxCapacity: 100 }
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [capEvent] },
+      state: { ...defaultAppState, events: [capEvent] },
       dispatch: jest.fn(),
     })
     render(<EventsPage />)
@@ -154,7 +141,7 @@ describe('EventsPage', () => {
     const longDesc = 'A'.repeat(150)
     const longEvent = { ...baseUpcoming, description: longDesc }
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [longEvent] },
+      state: { ...defaultAppState, events: [longEvent] },
       dispatch: jest.fn(),
     })
     render(<EventsPage />)
@@ -163,7 +150,7 @@ describe('EventsPage', () => {
   })
 
   it('setPageMeta is called on mount', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<EventsPage />)
     expect(updatePageMeta).toHaveBeenCalledWith(
       'Events',

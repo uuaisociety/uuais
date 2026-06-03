@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import ContactPage from '@/components/pages/ContactPage'
+import { defaultAppState } from '@/__tests__/helpers/fixtures'
 
 jest.mock('@/utils/seo', () => ({
   updatePageMeta: jest.fn(),
@@ -11,33 +12,20 @@ jest.mock('@/contexts/AppContext', () => ({
   AppProvider: ({ children }: { children: React.ReactNode }) => children,
 }))
 
-const defaultState = {
-  events: [],
-  teamMembers: [],
-  blogPosts: [],
-  faqs: [],
-  jobs: [],
-  boardPositions: [],
-  applicants: [],
-  registrationQuestions: [],
-  isLoading: false,
-  error: null,
-}
-
 describe('ContactPage', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
 
   it('renders page heading', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<ContactPage />)
     expect(screen.getByText('Contact Us')).toBeInTheDocument()
   })
 
   it('calls updatePageMeta on mount', () => {
     const { updatePageMeta } = jest.requireMock('@/utils/seo')
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<ContactPage />)
     expect(updatePageMeta).toHaveBeenCalledWith(
       'Contact Us',
@@ -46,7 +34,7 @@ describe('ContactPage', () => {
   })
 
   it('renders contact info cards', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<ContactPage />)
     expect(screen.getByText('General')).toBeInTheDocument()
     expect(screen.getByText('Partnership')).toBeInTheDocument()
@@ -57,13 +45,13 @@ describe('ContactPage', () => {
   })
 
   it('renders get in touch section', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<ContactPage />)
     expect(screen.getByText('Get in Touch')).toBeInTheDocument()
   })
 
   it('renders FAQ section heading even without FAQs', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<ContactPage />)
     expect(screen.getByText('Frequently Asked Questions')).toBeInTheDocument()
   })
@@ -75,7 +63,7 @@ describe('ContactPage', () => {
       { id: '3', question: 'Third?', answer: 'Third answer.', category: 'general', order: 3, published: true },
     ]
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, faqs },
+      state: { ...defaultAppState, faqs },
       dispatch: jest.fn(),
     })
     render(<ContactPage />)
@@ -91,7 +79,7 @@ describe('ContactPage', () => {
       { id: '2', question: 'Hidden?', answer: 'No.', category: 'general', order: 2, published: false },
     ]
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, faqs },
+      state: { ...defaultAppState, faqs },
       dispatch: jest.fn(),
     })
     render(<ContactPage />)
@@ -104,7 +92,7 @@ describe('ContactPage', () => {
       { id: '1', question: 'Contact?', answer: 'Email us at hello@uuais.com for help.', category: 'general', order: 1, published: true },
     ]
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, faqs },
+      state: { ...defaultAppState, faqs },
       dispatch: jest.fn(),
     })
     render(<ContactPage />)
@@ -119,7 +107,7 @@ describe('ContactPage', () => {
       { id: '1', question: 'General?', answer: 'Plain text answer.', category: 'general', order: 1, published: true },
     ]
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, faqs },
+      state: { ...defaultAppState, faqs },
       dispatch: jest.fn(),
     })
     render(<ContactPage />)

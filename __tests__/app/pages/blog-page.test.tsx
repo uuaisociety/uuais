@@ -1,24 +1,12 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import BlogPage from '@/components/pages/BlogPage'
+import { defaultAppState } from '@/__tests__/helpers/fixtures'
 
 const mockUseApp = jest.fn()
 jest.mock('@/contexts/AppContext', () => ({
   useApp: () => mockUseApp(),
   AppProvider: ({ children }: { children: React.ReactNode }) => children,
 }))
-
-const defaultState = {
-  events: [],
-  teamMembers: [],
-  blogPosts: [],
-  faqs: [],
-  jobs: [],
-  boardPositions: [],
-  applicants: [],
-  registrationQuestions: [],
-  isLoading: false,
-  error: null,
-}
 
 const samplePost = {
   id: 'p1',
@@ -52,21 +40,21 @@ describe('BlogPage', () => {
   })
 
   it('renders page heading and description', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<BlogPage />)
     expect(screen.getByText('Newsletter')).toBeInTheDocument()
     expect(screen.getByText(/Insights, tutorials/)).toBeInTheDocument()
   })
 
   it('shows empty state when no blog posts', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<BlogPage />)
     expect(screen.getByText('No articles found')).toBeInTheDocument()
   })
 
   it('renders featured article', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, blogPosts: [samplePost] },
+      state: { ...defaultAppState, blogPosts: [samplePost] },
       dispatch: jest.fn(),
     })
     render(<BlogPage />)
@@ -77,7 +65,7 @@ describe('BlogPage', () => {
 
   it('renders latest articles grid', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, blogPosts: [samplePost, samplePost2] },
+      state: { ...defaultAppState, blogPosts: [samplePost, samplePost2] },
       dispatch: jest.fn(),
     })
     render(<BlogPage />)
@@ -87,7 +75,7 @@ describe('BlogPage', () => {
 
   it('filters posts by search term', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, blogPosts: [samplePost, samplePost2] },
+      state: { ...defaultAppState, blogPosts: [samplePost, samplePost2] },
       dispatch: jest.fn(),
     })
     render(<BlogPage />)
@@ -99,7 +87,7 @@ describe('BlogPage', () => {
 
   it('shows no results message when search has no matches', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, blogPosts: [samplePost] },
+      state: { ...defaultAppState, blogPosts: [samplePost] },
       dispatch: jest.fn(),
     })
     render(<BlogPage />)
@@ -110,7 +98,7 @@ describe('BlogPage', () => {
 
   it('hides unpublished posts', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, blogPosts: [{ ...samplePost, published: false }] },
+      state: { ...defaultAppState, blogPosts: [{ ...samplePost, published: false }] },
       dispatch: jest.fn(),
     })
     render(<BlogPage />)

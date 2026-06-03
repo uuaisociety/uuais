@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import HomePage from '@/components/pages/HomePage'
+import { defaultAppState } from '@/__tests__/helpers/fixtures'
 
 const mockUseApp = jest.fn()
 jest.mock('@/contexts/AppContext', () => ({
@@ -7,33 +8,20 @@ jest.mock('@/contexts/AppContext', () => ({
   AppProvider: ({ children }: { children: React.ReactNode }) => children,
 }))
 
-const defaultState = {
-  events: [],
-  teamMembers: [],
-  blogPosts: [],
-  faqs: [],
-  jobs: [],
-  boardPositions: [],
-  applicants: [],
-  registrationQuestions: [],
-  isLoading: false,
-  error: null,
-}
-
 describe('HomePage', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
 
   it('renders hero section', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<HomePage />)
     expect(screen.getByText('Welcome to UU AI Society')).toBeInTheDocument()
     expect(screen.getByText('Build the future.')).toBeInTheDocument()
   })
 
   it('renders feature cards section', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<HomePage />)
     expect(screen.getByText('Why Join UU AI Society?')).toBeInTheDocument()
     expect(screen.getByText('AI Knowledge')).toBeInTheDocument()
@@ -43,20 +31,20 @@ describe('HomePage', () => {
   })
 
   it('renders CTA buttons', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<HomePage />)
     expect(screen.getByText('Our Events')).toBeInTheDocument()
     expect(screen.getByText('Learn more')).toBeInTheDocument()
   })
 
   it('renders upcoming events section heading', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<HomePage />)
     expect(screen.getByText('Upcoming Events')).toBeInTheDocument()
   })
 
   it('shows empty events message when no upcoming events', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<HomePage />)
     expect(screen.getByText('No events found. Please check back later.')).toBeInTheDocument()
   })
@@ -75,7 +63,7 @@ describe('HomePage', () => {
       eventStartAt: new Date(Date.now() + 86400000 * 7).toISOString(),
     }
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [event] },
+      state: { ...defaultAppState, events: [event] },
       dispatch: jest.fn(),
     })
     render(<HomePage />)

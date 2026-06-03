@@ -1,9 +1,11 @@
-const mockGetTokens = jest.fn()
+import { createAuthMocks } from '@/__tests__/helpers/mocks'
+
 const mockBucketFile = { save: jest.fn().mockResolvedValue(undefined), makePublic: jest.fn().mockResolvedValue(undefined), getSignedUrl: jest.fn().mockResolvedValue(['http://signed.url']), exists: jest.fn().mockResolvedValue([true]), delete: jest.fn().mockResolvedValue(undefined) }
 const mockDocRef = { update: jest.fn().mockResolvedValue(undefined) }
 
-jest.mock('next-firebase-auth-edge', () => ({ getTokens: (...args: unknown[]) => mockGetTokens(...args) }))
-jest.mock('@/lib/auth-config', () => ({ authConfig: {} }))
+const { mockGetTokens, authEdgeFactory, authConfigFactory } = createAuthMocks()
+jest.mock('next-firebase-auth-edge', () => authEdgeFactory)
+jest.mock('@/lib/auth-config', () => authConfigFactory)
 
 jest.mock('firebase-admin', () => ({
   apps: ['pretend-initialized'],

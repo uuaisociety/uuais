@@ -1,7 +1,8 @@
 import { NextRequest } from 'next/server'
+import { createFetchCoursesMocks } from '@/__tests__/helpers/mocks'
 
-const mockFetchCourses = jest.fn<Promise<Course[]>, []>()
-jest.mock('@/lib/courses', () => ({ fetchCourses: () => mockFetchCourses() }))
+const { mockFetchCourses, coursesFactory } = createFetchCoursesMocks()
+jest.mock('@/lib/courses', () => coursesFactory)
 
 type Course = { id: string; title: string; description: string; tags: string[]; code: string; level: string }
 

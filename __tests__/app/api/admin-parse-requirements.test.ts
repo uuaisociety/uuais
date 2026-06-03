@@ -1,11 +1,13 @@
-const mockGetTokens = jest.fn()
-const mockFetchCourses = jest.fn()
+import { createAuthMocks, createFetchCoursesMocks } from '@/__tests__/helpers/mocks'
+
 const mockParseRequirements = jest.fn()
 const mockCollection = jest.fn()
 
-jest.mock('next-firebase-auth-edge', () => ({ getTokens: (...args: unknown[]) => mockGetTokens(...args) }))
-jest.mock('@/lib/auth-config', () => ({ authConfig: {} }))
-jest.mock('@/lib/courses', () => ({ fetchCourses: () => mockFetchCourses() }))
+const { mockGetTokens, authEdgeFactory, authConfigFactory } = createAuthMocks()
+const { mockFetchCourses, coursesFactory } = createFetchCoursesMocks()
+jest.mock('next-firebase-auth-edge', () => authEdgeFactory)
+jest.mock('@/lib/auth-config', () => authConfigFactory)
+jest.mock('@/lib/courses', () => coursesFactory)
 jest.mock('@/lib/prerequisites/parser', () => ({ parseRequirements: (...args: unknown[]) => mockParseRequirements(...args) }))
 
 jest.mock('firebase-admin', () => ({

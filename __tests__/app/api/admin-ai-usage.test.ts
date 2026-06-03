@@ -1,9 +1,11 @@
-const mockGetTokens = jest.fn()
+import { createAuthMocks } from '@/__tests__/helpers/mocks'
+
 const mockCollection = jest.fn()
 const mockRunTransaction = jest.fn()
 
-jest.mock('next-firebase-auth-edge', () => ({ getTokens: (...args: unknown[]) => mockGetTokens(...args) }))
-jest.mock('@/lib/auth-config', () => ({ authConfig: {} }))
+const { mockGetTokens, authEdgeFactory, authConfigFactory } = createAuthMocks()
+jest.mock('next-firebase-auth-edge', () => authEdgeFactory)
+jest.mock('@/lib/auth-config', () => authConfigFactory)
 
 jest.mock('firebase-admin', () => {
   const FieldValue = { serverTimestamp: () => ({ _method: 'serverTimestamp' }) }

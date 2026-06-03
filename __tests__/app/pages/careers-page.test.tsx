@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import CareersPage from '@/components/pages/CareersPage'
+import { defaultAppState } from '@/__tests__/helpers/fixtures'
 
 jest.mock('@/lib/firestore/analytics', () => ({
   incrementJobClick: jest.fn(),
@@ -14,19 +15,6 @@ jest.mock('@/contexts/AppContext', () => ({
   useApp: () => mockUseApp(),
   AppProvider: ({ children }: { children: React.ReactNode }) => children,
 }))
-
-const defaultState = {
-  events: [],
-  teamMembers: [],
-  blogPosts: [],
-  faqs: [],
-  jobs: [],
-  boardPositions: [],
-  applicants: [],
-  registrationQuestions: [],
-  isLoading: false,
-  error: null,
-}
 
 const sampleJob = {
   id: 'j1',
@@ -79,20 +67,20 @@ describe('CareersPage', () => {
   })
 
   it('renders page heading', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<CareersPage />)
     expect(screen.getByText('Job board')).toBeInTheDocument()
   })
 
   it('shows empty state when no jobs', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<CareersPage />)
     expect(screen.getByText(/No jobs available/)).toBeInTheDocument()
   })
 
   it('renders job listings from context', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, jobs: [sampleJob] },
+      state: { ...defaultAppState, jobs: [sampleJob] },
       dispatch: jest.fn(),
     })
     render(<CareersPage />)
@@ -103,7 +91,7 @@ describe('CareersPage', () => {
 
   it('renders tags for jobs', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, jobs: [sampleJob] },
+      state: { ...defaultAppState, jobs: [sampleJob] },
       dispatch: jest.fn(),
     })
     render(<CareersPage />)
@@ -119,7 +107,7 @@ describe('CareersPage', () => {
       description: '<p>Build <strong>cool</strong> stuff</p>',
     }
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, jobs: [htmlJob] },
+      state: { ...defaultAppState, jobs: [htmlJob] },
       dispatch: jest.fn(),
     })
     const { container } = render(<CareersPage />)
@@ -130,7 +118,7 @@ describe('CareersPage', () => {
 
   it('filters out unpublished jobs', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, jobs: [sampleJob, sampleUnpublished] },
+      state: { ...defaultAppState, jobs: [sampleJob, sampleUnpublished] },
       dispatch: jest.fn(),
     })
     render(<CareersPage />)
@@ -139,7 +127,7 @@ describe('CareersPage', () => {
   })
 
   it('renders filter buttons', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<CareersPage />)
     expect(screen.getByText('Show all')).toBeInTheDocument()
     expect(screen.getByText('Internships & Master thesis')).toBeInTheDocument()
@@ -150,7 +138,7 @@ describe('CareersPage', () => {
 
   it('filters jobs by type', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, jobs: [sampleJob, sampleStartup, sampleInternship] },
+      state: { ...defaultAppState, jobs: [sampleJob, sampleStartup, sampleInternship] },
       dispatch: jest.fn(),
     })
     render(<CareersPage />)
@@ -161,7 +149,7 @@ describe('CareersPage', () => {
 
   it('filters by internships type', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, jobs: [sampleJob, sampleStartup, sampleInternship] },
+      state: { ...defaultAppState, jobs: [sampleJob, sampleStartup, sampleInternship] },
       dispatch: jest.fn(),
     })
     render(<CareersPage />)
@@ -173,7 +161,7 @@ describe('CareersPage', () => {
   it('filters by other type', () => {
     const otherJob = { id: 'j5', title: 'Other Role', company: 'OtherCo', description: 'desc', type: 'other' as const, published: true, tags: [] }
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, jobs: [sampleJob, otherJob] },
+      state: { ...defaultAppState, jobs: [sampleJob, otherJob] },
       dispatch: jest.fn(),
     })
     render(<CareersPage />)
@@ -184,7 +172,7 @@ describe('CareersPage', () => {
 
   it('updates aria-pressed on filter click', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, jobs: [sampleJob] },
+      state: { ...defaultAppState, jobs: [sampleJob] },
       dispatch: jest.fn(),
     })
     render(<CareersPage />)
@@ -199,7 +187,7 @@ describe('CareersPage', () => {
 
   it('renders apply email link', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, jobs: [sampleInternship] },
+      state: { ...defaultAppState, jobs: [sampleInternship] },
       dispatch: jest.fn(),
     })
     render(<CareersPage />)
@@ -210,7 +198,7 @@ describe('CareersPage', () => {
     const analytics = jest.requireMock('@/lib/firestore/analytics')
     analytics.incrementJobClick.mockResolvedValue(undefined)
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, jobs: [sampleJob] },
+      state: { ...defaultAppState, jobs: [sampleJob] },
       dispatch: jest.fn(),
     })
     render(<CareersPage />)
@@ -223,7 +211,7 @@ describe('CareersPage', () => {
     const analytics = jest.requireMock('@/lib/firestore/analytics')
     analytics.incrementJobClick.mockResolvedValue(undefined)
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, jobs: [sampleInternship] },
+      state: { ...defaultAppState, jobs: [sampleInternship] },
       dispatch: jest.fn(),
     })
     render(<CareersPage />)

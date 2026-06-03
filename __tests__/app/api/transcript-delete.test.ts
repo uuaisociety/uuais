@@ -1,6 +1,8 @@
-const mockGetTokens = jest.fn()
-jest.mock('next-firebase-auth-edge', () => ({ getTokens: (...args: unknown[]) => mockGetTokens(...args) }))
-jest.mock('@/lib/auth-config', () => ({ authConfig: {} }))
+import { createAuthMocks } from '@/__tests__/helpers/mocks'
+
+const { mockGetTokens, authEdgeFactory, authConfigFactory } = createAuthMocks()
+jest.mock('next-firebase-auth-edge', () => authEdgeFactory)
+jest.mock('@/lib/auth-config', () => authConfigFactory)
 
 describe('DELETE /api/transcript/delete', () => {
   beforeEach(() => { jest.clearAllMocks() })

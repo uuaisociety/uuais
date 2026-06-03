@@ -6,12 +6,13 @@
  * without jest.mock() calls — those only run when FIREBASE_ENV=ci.
  */
 
-const mockGetTokens = jest.fn()
+import { createAuthMocks } from '@/__tests__/helpers/mocks'
+
 const mockRunTransaction = jest.fn()
 
-jest.mock('next-firebase-auth-edge', () => ({
-  getTokens: (...args: unknown[]) => mockGetTokens(...args),
-}))
+const { mockGetTokens, authEdgeFactory } = createAuthMocks()
+
+jest.mock('next-firebase-auth-edge', () => authEdgeFactory)
 
 jest.mock('firebase-admin', () => {
   const FieldValue = { serverTimestamp: () => ({ _method: 'serverTimestamp' }) }

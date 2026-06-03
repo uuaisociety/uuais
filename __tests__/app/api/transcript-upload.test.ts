@@ -1,13 +1,14 @@
 import { NextRequest } from 'next/server'
+import { createAuthMocks, createFetchCoursesMocks } from '@/__tests__/helpers/mocks'
 
-const mockGetTokens = jest.fn()
+const { mockGetTokens, authEdgeFactory, authConfigFactory } = createAuthMocks()
+const { coursesFactory } = createFetchCoursesMocks()
 const mockGenerateStructured = jest.fn()
-const mockFetchCourses = jest.fn()
 
-jest.mock('next-firebase-auth-edge', () => ({ getTokens: (...args: unknown[]) => mockGetTokens(...args) }))
-jest.mock('@/lib/auth-config', () => ({ authConfig: {} }))
+jest.mock('next-firebase-auth-edge', () => authEdgeFactory)
+jest.mock('@/lib/auth-config', () => authConfigFactory)
 jest.mock('@/lib/ai/openrouter', () => ({ generateStructured: (...args: unknown[]) => mockGenerateStructured(...args) }))
-jest.mock('@/lib/courses', () => ({ fetchCourses: () => mockFetchCourses() }))
+jest.mock('@/lib/courses', () => coursesFactory)
 
 describe('POST /api/transcript/upload', () => {
   beforeEach(() => { jest.clearAllMocks() })
