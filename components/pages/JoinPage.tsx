@@ -70,6 +70,8 @@ const JoinPage: React.FC = () => {
       setProfile(refreshed);
       notify({ type: 'success', title: 'Saved', message: 'Profile saved successfully.' });
       router.push('/account');
+    } catch {
+      // Error silently handled
     } finally {
       setSaving(false);
     }
