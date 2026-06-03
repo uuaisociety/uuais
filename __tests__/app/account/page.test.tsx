@@ -376,6 +376,31 @@ describe('AccountPage', () => {
         expect(cancelRegistration).toHaveBeenCalledWith('reg-1')
       })
     })
+
+    it('handles confirm registration error gracefully', async () => {
+      defaults()
+      ;(confirmRegistration as jest.Mock).mockRejectedValue(new Error('Confirm failed'))
+      ;(getMyRegistrations as jest.Mock)
+        .mockResolvedValueOnce([{ id: 'reg-inv', eventId: 'evt-future', status: 'invited', confirmationToken: 'tok-123', ...baseReg }])
+      render(<AccountPage />)
+      fireEvent.click(await screen.findByText('Confirm spot'))
+      await waitFor(() => {
+        expect(screen.getByText('My Account')).toBeInTheDocument()
+      })
+    })
+
+    it('handles cancel registration error gracefully', async () => {
+      defaults()
+      ;(cancelRegistration as jest.Mock).mockRejectedValue(new Error('Cancel failed'))
+      ;(getMyRegistrations as jest.Mock)
+        .mockResolvedValueOnce([{ id: 'reg-1', eventId: 'evt-future', status: 'registered', ...baseReg }])
+      render(<AccountPage />)
+      fireEvent.click(await screen.findByText('Cancel'))
+      fireEvent.click(screen.getByTestId('modal-confirm'))
+      await waitFor(() => {
+        expect(screen.getByText('My Account')).toBeInTheDocument()
+      })
+    })
   })
 
   describe('edit mode', () => {
@@ -471,6 +496,82 @@ describe('AccountPage', () => {
       expect(screen.queryByTestId('confirm-modal')).not.toBeInTheDocument()
       expect(screen.getByText('Save')).toBeInTheDocument()
     })
+
+    it('handles save error gracefully', async () => {
+      defaults()
+      ;(updateUserProfile as jest.Mock).mockRejectedValue(new Error('Save failed'))
+      ;(getUserProfile as jest.Mock).mockResolvedValue(fullProfile)
+      render(<AccountPage />)
+      fireEvent.click(await screen.findByText('Edit'))
+      fireEvent.click(screen.getByText('Save'))
+      await waitFor(() => {
+        // Should remain in edit mode after save error
+        expect(screen.getByText('Save')).toBeInTheDocument()
+      })
+    })
+
+    it('toggles newsletter checkbox in edit mode', async () => {
+      defaults()
+      render(<AccountPage />)
+      fireEvent.click(await screen.findByText('Edit'))
+      const newsletterCheckbox = screen.getByRole('checkbox', { name: /subscribe to newsletter/i })
+      expect(newsletterCheckbox).toBeChecked()
+      fireEvent.click(newsletterCheckbox)
+      expect(newsletterCheckbox).not.toBeChecked()
+    })
+
+    it('toggles looking for job checkbox in edit mode', async () => {
+      defaults()
+      render(<AccountPage />)
+      fireEvent.click(await screen.findByText('Edit'))
+      const lookingForJobCheckbox = screen.getByRole('checkbox', { name: /looking for job opportunities/i })
+      expect(lookingForJobCheckbox).not.toBeChecked()
+      fireEvent.click(lookingForJobCheckbox)
+      expect(lookingForJobCheckbox).toBeChecked()
+    })
+
+    it('toggles marketing, analytics, and partner contact checkboxes in edit mode', async () => {
+      defaults()
+      render(<AccountPage />)
+      fireEvent.click(await screen.findByText('Edit'))
+
+      const marketingCheckbox = screen.getByRole('checkbox', { name: /allow marketing communications/i })
+      expect(marketingCheckbox).toBeChecked()
+      fireEvent.click(marketingCheckbox)
+      expect(marketingCheckbox).not.toBeChecked()
+
+      const analyticsCheckbox = screen.getByRole('checkbox', { name: /allow anonymous analytics/i })
+      expect(analyticsCheckbox).not.toBeChecked()
+      fireEvent.click(analyticsCheckbox)
+      expect(analyticsCheckbox).toBeChecked()
+
+      const partnerCheckbox = screen.getByRole('checkbox', { name: /allow contact from partner companies/i })
+      expect(partnerCheckbox).toBeChecked()
+      fireEvent.click(partnerCheckbox)
+      expect(partnerCheckbox).not.toBeChecked()
+    })
+
+    it('shows "If other, please specify" when Other is selected for heardOfUs', async () => {
+      defaults()
+      render(<AccountPage />)
+      fireEvent.click(await screen.findByText('Edit'))
+
+      // Initially "If other, please specify" should not be visible (heardOfUs is 'friends')
+      expect(screen.queryByPlaceholderText('Type here')).not.toBeInTheDocument()
+
+      // Select "Other" from the "How did you hear of us?" select
+      // getByDisplayValue matches the displayed option text (capitalized "Friends")
+      const hearOfUsSelect = screen.getByDisplayValue('Friends')
+      fireEvent.change(hearOfUsSelect, { target: { value: 'other' } })
+
+      // Now "If other, please specify" should be visible
+      const specifyInput = screen.getByPlaceholderText('Type here')
+      expect(specifyInput).toBeInTheDocument()
+
+      // Type something in it
+      fireEvent.change(specifyInput, { target: { value: 'From a conference' } })
+      expect(specifyInput).toHaveValue('From a conference')
+    })
   })
 
   describe('account linking', () => {
@@ -505,6 +606,68 @@ describe('AccountPage', () => {
       render(<AccountPage />)
       const links = await screen.findAllByText('Link')
       expect(links.length).toBe(2)
+    })
+
+    it('links GitHub account on Link button click', async () => {
+      const userWithGoogleOnly = {
+        ...mockUser,
+        providerData: [{ providerId: 'google.com' }],
+        reload: jest.fn(),
+      }
+      auth.onAuthStateChanged.mockImplementation((cb: (u: unknown) => void) => {
+        cb(userWithGoogleOnly)
+        return jest.fn()
+      })
+      ;(getUserProfile as jest.Mock).mockResolvedValue(fullProfile)
+      ;(getMyRegistrations as jest.Mock).mockResolvedValue([])
+      ;(getAllEvents as jest.Mock).mockResolvedValue(allEvents)
+      auth.currentUser = userWithGoogleOnly
+      render(<AccountPage />)
+      // Only GitHub shows "Link" since Google is already linked
+      const linkBtn = await screen.findByText('Link')
+      fireEvent.click(linkBtn)
+      await waitFor(() => {
+        expect(firebaseClient.linkGithubToCurrentUser).toHaveBeenCalled()
+      })
+    })
+
+    it('does not crash when linkGoogleToCurrentUser rejects', async () => {
+      const userWithNoProviders = {
+        ...mockUser, providerData: [], reload: jest.fn(),
+      }
+      auth.onAuthStateChanged.mockImplementation((cb: (u: unknown) => void) => {
+        cb(userWithNoProviders); return jest.fn()
+      })
+      ;(getUserProfile as jest.Mock).mockResolvedValue(fullProfile)
+      ;(getMyRegistrations as jest.Mock).mockResolvedValue([])
+      ;(getAllEvents as jest.Mock).mockResolvedValue(allEvents)
+      auth.currentUser = { ...userWithNoProviders, reload: jest.fn() }
+      ;(firebaseClient.linkGoogleToCurrentUser as jest.Mock).mockRejectedValue(new Error('Auth error'))
+      render(<AccountPage />)
+      const links = await screen.findAllByText('Link')
+      fireEvent.click(links[0])
+      await waitFor(() => {
+        expect(screen.getByText('My Account')).toBeInTheDocument()
+      })
+    })
+
+    it('does not crash when linking a provider', async () => {
+      const userWithNoProviders = {
+        ...mockUser, providerData: [], reload: jest.fn(),
+      }
+      auth.onAuthStateChanged.mockImplementation((cb: (u: unknown) => void) => {
+        cb(userWithNoProviders); return jest.fn()
+      })
+      ;(getUserProfile as jest.Mock).mockResolvedValue(fullProfile)
+      ;(getMyRegistrations as jest.Mock).mockResolvedValue([])
+      ;(getAllEvents as jest.Mock).mockResolvedValue(allEvents)
+      auth.currentUser = userWithNoProviders
+      render(<AccountPage />)
+      const links = await screen.findAllByText('Link')
+      fireEvent.click(links[0])
+      await waitFor(() => {
+        expect(screen.getByText('My Account')).toBeInTheDocument()
+      })
     })
   })
 })
