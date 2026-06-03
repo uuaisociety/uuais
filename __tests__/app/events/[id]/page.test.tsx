@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import EventDetailPage from '@/app/events/[id]/page'
 import { updatePageMeta } from '@/utils/seo'
+import { defaultAppState } from '@/__tests__/helpers/fixtures'
 
 jest.mock('@/lib/firebase-client', () => ({
   auth: {
@@ -42,19 +43,6 @@ jest.mock('@/contexts/AppContext', () => ({
 
 const g = global as { __setMockParams?: (params: Record<string, string>) => void }
 
-const defaultState = {
-  events: [],
-  teamMembers: [],
-  blogPosts: [],
-  faqs: [],
-  jobs: [],
-  boardPositions: [],
-  applicants: [],
-  registrationQuestions: [],
-  isLoading: false,
-  error: null,
-}
-
 const mockEvent = {
   id: 'event-1',
   title: 'AI Workshop',
@@ -88,7 +76,7 @@ describe('EventDetailPage', () => {
   })
 
   it('shows loading skeleton when events array is empty', () => {
-    mockUseApp.mockReturnValue({ state: defaultState, dispatch: jest.fn() })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     const { container } = render(<EventDetailPage />)
     expect(container.querySelector('.animate-pulse')).toBeInTheDocument()
     expect(screen.queryByText('AI Workshop')).not.toBeInTheDocument()
@@ -96,7 +84,7 @@ describe('EventDetailPage', () => {
 
   it('renders event title and description when found', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [mockEvent] },
+      state: { ...defaultAppState, events: [mockEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -106,7 +94,7 @@ describe('EventDetailPage', () => {
 
   it('shows upcoming status badge', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [mockEvent] },
+      state: { ...defaultAppState, events: [mockEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -116,7 +104,7 @@ describe('EventDetailPage', () => {
   it('shows past event status badge for past events', () => {
     const pastEvent = { ...mockEvent, eventStartAt: '2020-03-10T10:00:00Z' }
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [pastEvent] },
+      state: { ...defaultAppState, events: [pastEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -125,7 +113,7 @@ describe('EventDetailPage', () => {
 
   it('shows back button linking to /events', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [mockEvent] },
+      state: { ...defaultAppState, events: [mockEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -134,7 +122,7 @@ describe('EventDetailPage', () => {
 
   it('renders event metadata (date, location, category)', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [mockEvent] },
+      state: { ...defaultAppState, events: [mockEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -147,7 +135,7 @@ describe('EventDetailPage', () => {
 
   it('renders "About This Event" section', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [mockEvent] },
+      state: { ...defaultAppState, events: [mockEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -157,7 +145,7 @@ describe('EventDetailPage', () => {
   it('shows registration required block when registrationRequired is true', () => {
     const regEvent = { ...mockEvent, registrationRequired: true, maxCapacity: 50 }
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [regEvent] },
+      state: { ...defaultAppState, events: [regEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -172,7 +160,7 @@ describe('EventDetailPage', () => {
       externalRegistrationMembersOnly: false,
     }
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [extEvent] },
+      state: { ...defaultAppState, events: [extEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -187,7 +175,7 @@ describe('EventDetailPage', () => {
       externalRegistrationMembersOnly: true,
     }
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [extEvent] },
+      state: { ...defaultAppState, events: [extEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -196,7 +184,7 @@ describe('EventDetailPage', () => {
 
   it('renders related events section', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [mockEvent, mockRelated] },
+      state: { ...defaultAppState, events: [mockEvent, mockRelated] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -206,7 +194,7 @@ describe('EventDetailPage', () => {
 
   it('shows Event Details card with date, time, location', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [mockEvent] },
+      state: { ...defaultAppState, events: [mockEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -215,7 +203,7 @@ describe('EventDetailPage', () => {
 
   it('renders featured image when event has image', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [mockEvent] },
+      state: { ...defaultAppState, events: [mockEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
@@ -226,10 +214,126 @@ describe('EventDetailPage', () => {
 
   it('calls updatePageMeta on mount when event is found', () => {
     mockUseApp.mockReturnValue({
-      state: { ...defaultState, events: [mockEvent] },
+      state: { ...defaultAppState, events: [mockEvent] },
       dispatch: jest.fn(),
     })
     render(<EventDetailPage />)
     expect(updatePageMeta).toHaveBeenCalledWith('AI Workshop', expect.any(String))
+  })
+
+  it('throws notFound when event does not exist', () => {
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, events: [mockEvent] },
+      dispatch: jest.fn(),
+    })
+    g.__setMockParams?.({ id: 'nonexistent' })
+    expect(() => render(<EventDetailPage />)).toThrow('NEXT_NOT_FOUND')
+  })
+
+  it('renders HTML description safely with DOMPurify', () => {
+    const htmlEvent = {
+      ...mockEvent,
+      description: '<p>Hello <strong>World</strong></p>',
+    }
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, events: [htmlEvent] },
+      dispatch: jest.fn(),
+    })
+    render(<EventDetailPage />)
+    expect(screen.getByText('Hello')).toBeInTheDocument()
+    expect(screen.getByText('World')).toBeInTheDocument()
+  })
+
+  it('shows TBA for registration capacity when maxCapacity is not set', () => {
+    const regEvent = { ...mockEvent, registrationRequired: true }
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, events: [regEvent] },
+      dispatch: jest.fn(),
+    })
+    render(<EventDetailPage />)
+    expect(screen.getByText('Registration Required')).toBeInTheDocument()
+    expect(screen.getByText('TBA')).toBeInTheDocument()
+  })
+
+  it('formats non-standard category as human-readable', () => {
+    const catEvent = {
+      ...mockEvent,
+      category: 'networking_event',
+    }
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, events: [catEvent] },
+      dispatch: jest.fn(),
+    })
+    render(<EventDetailPage />)
+    const matches = screen.getAllByText('Networking Event')
+    expect(matches.length).toBe(2)
+  })
+
+  it('shows external registration link when user is logged in for members-only external', () => {
+    const mockFirebase = jest.requireMock('@/lib/firebase-client') as {
+      auth: { onAuthStateChanged: jest.Mock }
+    }
+    mockFirebase.auth.onAuthStateChanged.mockImplementation((cb: (u: unknown) => void) => {
+      cb({ uid: 'user-1' })
+      return jest.fn()
+    })
+    const extEvent = {
+      ...mockEvent,
+      externalRegistrationUrl: 'https://example.com/member-register',
+      externalRegistrationMembersOnly: true,
+    }
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, events: [extEvent] },
+      dispatch: jest.fn(),
+    })
+    render(<EventDetailPage />)
+    expect(screen.getByText('External registration')).toBeInTheDocument()
+    expect(screen.getByText('Register externally')).toBeInTheDocument()
+    const link = screen.getByText('Register externally').closest('a')
+    expect(link).toHaveAttribute('href', 'https://example.com/member-register')
+  })
+
+  it('shows QR code when user has eligible registration within 48h of event', async () => {
+    const mockFirebase = jest.requireMock('@/lib/firebase-client') as {
+      auth: { onAuthStateChanged: jest.Mock }
+    }
+    mockFirebase.auth.onAuthStateChanged.mockImplementation((cb: (u: unknown) => void) => {
+      cb({ uid: 'user-1' })
+      return jest.fn()
+    })
+    const mockRegs = jest.requireMock('@/lib/firestore/registrations') as {
+      getMyRegistrationForEvent: jest.Mock
+    }
+    mockRegs.getMyRegistrationForEvent.mockResolvedValue({
+      id: 'reg-1',
+      status: 'registered',
+    })
+    const nearFuture = new Date(Date.now() + 60 * 60 * 1000).toISOString()
+    const qrEvent = { ...mockEvent, eventStartAt: nearFuture }
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, events: [qrEvent] },
+      dispatch: jest.fn(),
+    })
+    render(<EventDetailPage />)
+    const qr = await screen.findByTestId('qr-code')
+    expect(qr).toBeInTheDocument()
+  })
+
+  it('calls incrementExternalRegistrationClick when external link is clicked', () => {
+    const mockAnalytics = jest.requireMock('@/lib/firestore/analytics') as {
+      incrementExternalRegistrationClick: jest.Mock
+    }
+    const extEvent = {
+      ...mockEvent,
+      externalRegistrationUrl: 'https://example.com/register',
+    }
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, events: [extEvent] },
+      dispatch: jest.fn(),
+    })
+    render(<EventDetailPage />)
+    const link = screen.getByText('Register externally')
+    link.click()
+    expect(mockAnalytics.incrementExternalRegistrationClick).toHaveBeenCalledWith('event-1')
   })
 })
