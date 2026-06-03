@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act } from '@testing-library/react'
+import { render, screen, fireEvent, act, waitFor } from '@testing-library/react'
 import JoinPage from '@/components/pages/JoinPage'
 
 jest.mock('@/lib/firebase-client', () => {
@@ -261,6 +261,240 @@ describe('JoinPage', () => {
       fireEvent.change(select, { target: { value: 'other' } })
 
       expect(screen.getByPlaceholderText('Type here')).toBeInTheDocument()
+    })
+  })
+
+  describe('error handling', () => {
+    it('resets saving state when upsertUserProfile fails (new member)', async () => {
+      mockedUsers().getUserProfile.mockResolvedValue(null)
+      mockedUsers().upsertUserProfile.mockRejectedValue(new Error('API error'))
+
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+      fireEvent.click(screen.getByLabelText(/I accept the/))
+      fireEvent.click(screen.getByText('Save & Become Member'))
+
+      // Saving state appears immediately
+      expect(screen.getByText('Saving...')).toBeInTheDocument()
+
+      // Wait for finally block to reset saving state
+      await waitFor(() => {
+        expect(screen.queryByText('Saving...')).not.toBeInTheDocument()
+      })
+
+      // Form remains visible — no navigation
+      expect(screen.getByText('Save & Become Member')).toBeInTheDocument()
+      expect(screen.getByLabelText(/I accept the/)).toBeInTheDocument()
+      expect(mockedNav().useRouter().push).not.toHaveBeenCalled()
+    })
+
+    it('resets saving state when updateUserProfile fails (existing member)', async () => {
+      mockedUsers().updateUserProfile.mockRejectedValue(new Error('API error'))
+      mockedUsers().getUserProfile.mockResolvedValue({
+        id: 'u2', displayName: 'Member', isMember: true, privacyAcceptedAt: '2024-01-01T00:00:00Z',
+      })
+
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u2', displayName: 'Member', email: 'm@uu.se' })
+      fireEvent.click(screen.getByLabelText(/I accept the/))
+      fireEvent.click(screen.getByText('Save & Become Member'))
+
+      expect(screen.getByText('Saving...')).toBeInTheDocument()
+
+      await waitFor(() => {
+        expect(screen.queryByText('Saving...')).not.toBeInTheDocument()
+      })
+
+      expect(screen.getByText('Save & Become Member')).toBeInTheDocument()
+      expect(mockedNav().useRouter().push).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('auth null callback', () => {
+    it('hides profile form when auth callback fires with null', async () => {
+      mockedUsers().getUserProfile.mockResolvedValue(null)
+      render(<JoinPage />)
+
+      // Initially logged out — no form
+      expect(screen.queryByText('Complete your profile')).not.toBeInTheDocument()
+
+      // Log in — form appears
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+      expect(screen.getByText('Complete your profile')).toBeInTheDocument()
+
+      // Auth callback fires with null (user signs out) — form disappears
+      await triggerAuthCallback(null)
+      expect(screen.queryByText('Complete your profile')).not.toBeInTheDocument()
+    })
+  })
+
+  describe('form field interactions', () => {
+    beforeEach(() => {
+      mockedUsers().getUserProfile.mockResolvedValue(null)
+    })
+
+    it('changes student status select', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const select = screen.getByDisplayValue('Student')
+      fireEvent.change(select, { target: { value: 'alumni' } })
+      expect(screen.getByDisplayValue('Alumni')).toBeInTheDocument()
+
+      fireEvent.change(select, { target: { value: 'other' } })
+      // "Other" now matches both student status and gender selects
+      const others = screen.getAllByDisplayValue('Other')
+      expect(others.length).toBe(2)
+    })
+
+    it('changes gender select', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const select = screen.getByDisplayValue('Other')
+      fireEvent.change(select, { target: { value: 'male' } })
+      expect(screen.getByDisplayValue('Male')).toBeInTheDocument()
+
+      fireEvent.change(select, { target: { value: 'female' } })
+      expect(screen.getByDisplayValue('Female')).toBeInTheDocument()
+
+      fireEvent.change(select, { target: { value: 'nonbinary' } })
+      expect(screen.getByDisplayValue('Non-binary')).toBeInTheDocument()
+
+      fireEvent.change(select, { target: { value: 'prefer_not' } })
+      expect(screen.getByDisplayValue('Prefer not to say')).toBeInTheDocument()
+    })
+
+    it('changes program input', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const input = screen.getByPlaceholderText('e.g. Computer Science')
+      fireEvent.change(input, { target: { value: 'Data Science' } })
+      expect(screen.getByDisplayValue('Data Science')).toBeInTheDocument()
+    })
+
+    it('changes expected graduation year', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const input = screen.getByPlaceholderText('e.g. 2026')
+      fireEvent.change(input, { target: { value: '2027' } })
+      expect(screen.getByDisplayValue('2027')).toBeInTheDocument()
+    })
+
+    it('changes university select', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      // University and campus selects both default to "Uppsala"; pick the second one
+      const universitySelect = screen.getAllByDisplayValue('Uppsala')[1]
+      fireEvent.change(universitySelect, { target: { value: 'none' } })
+      expect(screen.getByDisplayValue('None')).toBeInTheDocument()
+    })
+
+    it('changes bio textarea', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const textarea = screen.getByPlaceholderText('Write a short bio')
+      fireEvent.change(textarea, { target: { value: 'AI enthusiast' } })
+      expect(screen.getByDisplayValue('AI enthusiast')).toBeInTheDocument()
+    })
+
+    it('toggles newsletter checkbox', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const checkbox = screen.getByLabelText('Subscribe to newsletter')
+      expect(checkbox).not.toBeChecked()
+      fireEvent.click(checkbox)
+      expect(checkbox).toBeChecked()
+      fireEvent.click(checkbox)
+      expect(checkbox).not.toBeChecked()
+    })
+
+    it('toggles looking for job checkbox', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const checkbox = screen.getByLabelText('Looking for job opportunities')
+      expect(checkbox).not.toBeChecked()
+      fireEvent.click(checkbox)
+      expect(checkbox).toBeChecked()
+      fireEvent.click(checkbox)
+      expect(checkbox).not.toBeChecked()
+    })
+  })
+
+  describe('marketing/analytics/partner opt-in checkboxes', () => {
+    beforeEach(() => {
+      mockedUsers().getUserProfile.mockResolvedValue(null)
+    })
+
+    it('toggles marketing opt-in checkbox', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const checkbox = screen.getByLabelText('Allow marketing communications')
+      expect(checkbox).not.toBeChecked()
+      fireEvent.click(checkbox)
+      expect(checkbox).toBeChecked()
+      fireEvent.click(checkbox)
+      expect(checkbox).not.toBeChecked()
+    })
+
+    it('toggles analytics opt-in checkbox', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const checkbox = screen.getByLabelText('Allow anonymous analytics')
+      expect(checkbox).not.toBeChecked()
+      fireEvent.click(checkbox)
+      expect(checkbox).toBeChecked()
+      fireEvent.click(checkbox)
+      expect(checkbox).not.toBeChecked()
+    })
+
+    it('toggles partner contact opt-in checkbox', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const checkbox = screen.getByLabelText('Allow contact from partner companies')
+      expect(checkbox).not.toBeChecked()
+      fireEvent.click(checkbox)
+      expect(checkbox).toBeChecked()
+      fireEvent.click(checkbox)
+      expect(checkbox).not.toBeChecked()
+    })
+  })
+
+  describe('logged in - existing member pre-fills', () => {
+    it('pre-fills fields from existing profile data (displayName, name, program, bio)', async () => {
+      const mockProfile = {
+        id: 'u4',
+        displayName: 'ProfileName',
+        name: 'John Doe',
+        email: 'john@uu.se',
+        isMember: true,
+        privacyAcceptedAt: '2024-01-01T00:00:00Z',
+        program: 'Computer Science',
+        bio: 'AI researcher',
+      }
+      mockedUsers().getUserProfile.mockResolvedValue(mockProfile)
+
+      render(<JoinPage />)
+      // Auth displayName is "AuthName" but profile's displayName should take precedence
+      await triggerAuthCallback({ uid: 'u4', displayName: 'AuthName', email: 'auth@uu.se' })
+
+      // displayName from profile (not auth)
+      expect(screen.getByDisplayValue('ProfileName')).toBeInTheDocument()
+      // name from profile (spread from profile object)
+      expect(screen.getByDisplayValue('John Doe')).toBeInTheDocument()
+      // program from profile
+      expect(screen.getByDisplayValue('Computer Science')).toBeInTheDocument()
+      // bio from profile
+      expect(screen.getByDisplayValue('AI researcher')).toBeInTheDocument()
     })
   })
 })

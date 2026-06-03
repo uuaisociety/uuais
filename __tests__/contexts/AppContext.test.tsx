@@ -67,7 +67,7 @@ import {
   subscribeToEvents, addEvent, updateEvent, deleteEvent,
 } from '@/lib/firestore/events';
 import {
-  subscribeToTeamMembers, addTeamMember, moveTeamMember,
+  subscribeToTeamMembers, addTeamMember, updateTeamMember, deleteTeamMember, moveTeamMember,
 } from '@/lib/firestore/team';
 import {
   subscribeToBlogPosts, addBlogPost, updateBlogPost, deleteBlogPost,
@@ -79,7 +79,7 @@ import {
   subscribeToJobs, addJob, updateJob, deleteJob,
 } from '@/lib/firestore/jobs';
 import {
-  subscribeToPositions, addPosition, deletePosition, movePosition,
+  subscribeToPositions, addPosition, updatePosition, deletePosition, movePosition,
 } from '@/lib/firestore/board-positions';
 import { deleteBoardApplication } from '@/lib/firestore/boardApplications';
 import { onIdTokenChanged } from 'firebase/auth';
@@ -90,6 +90,7 @@ const mockBlogPost = { id: 'bp-1', title: 'Post', excerpt: 'Excerpt', content: '
 const mockFaq = { id: 'faq-1', question: 'Q?', answer: 'A!', category: 'general', order: 0, published: true };
 const mockJob = { id: 'job-1', type: 'job' as const, title: 'Engineer', company: 'Co', description: 'desc', published: true };
 const mockBoardPosition = { id: 'bp-1', title: 'Chair', short: 'CH', description: 'Lead', order: 1 };
+const mockApplication = { id: 'app-1', name: 'Alice', email: 'alice@example.com', role: 'Chair', status: 'pending' as const, submittedAt: '2026-01-01' };
 
 function renderApp() {
   return renderHook(() => useApp(), { wrapper: AppProvider as React.FC<{ children: React.ReactNode }> });
@@ -246,6 +247,138 @@ describe('AppContext', () => {
         await result.current.dispatch({ type: 'SET_BOARDPOS', payload: [mockBoardPosition] });
       });
       expect(result.current.state.boardPositions).toEqual([mockBoardPosition]);
+    });
+
+    it('ADD_BLOG_POST regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'ADD_BLOG_POST', payload: mockBlogPost });
+      });
+      expect(result.current.state.blogPosts).toEqual([mockBlogPost]);
+    });
+
+    it('UPDATE_BLOG_POST regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_BLOG_POSTS', payload: [mockBlogPost] });
+      });
+      const updated = { ...mockBlogPost, title: 'Updated Post' };
+      await act(async () => {
+        await result.current.dispatch({ type: 'UPDATE_BLOG_POST', payload: updated });
+      });
+      expect(result.current.state.blogPosts).toEqual([updated]);
+    });
+
+    it('DELETE_BLOG_POST regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_BLOG_POSTS', payload: [mockBlogPost] });
+      });
+      await act(async () => {
+        await result.current.dispatch({ type: 'DELETE_BLOG_POST', payload: mockBlogPost.id });
+      });
+      expect(result.current.state.blogPosts).toEqual([]);
+    });
+
+    it('ADD_FAQS regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'ADD_FAQS', payload: mockFaq });
+      });
+      expect(result.current.state.faqs).toEqual([mockFaq]);
+    });
+
+    it('UPDATE_FAQS regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_FAQS', payload: [mockFaq] });
+      });
+      const updated = { ...mockFaq, question: 'Updated Q?' };
+      await act(async () => {
+        await result.current.dispatch({ type: 'UPDATE_FAQS', payload: updated });
+      });
+      expect(result.current.state.faqs).toEqual([updated]);
+    });
+
+    it('DELETE_FAQS regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_FAQS', payload: [mockFaq] });
+      });
+      await act(async () => {
+        await result.current.dispatch({ type: 'DELETE_FAQS', payload: mockFaq.id });
+      });
+      expect(result.current.state.faqs).toEqual([]);
+    });
+
+    it('ADD_JOB regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'ADD_JOB', payload: mockJob });
+      });
+      expect(result.current.state.jobs).toEqual([mockJob]);
+    });
+
+    it('UPDATE_JOB regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_JOBS', payload: [mockJob] });
+      });
+      const updated = { ...mockJob, title: 'Updated Engineer' };
+      await act(async () => {
+        await result.current.dispatch({ type: 'UPDATE_JOB', payload: updated });
+      });
+      expect(result.current.state.jobs).toEqual([updated]);
+    });
+
+    it('DELETE_JOB regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_JOBS', payload: [mockJob] });
+      });
+      await act(async () => {
+        await result.current.dispatch({ type: 'DELETE_JOB', payload: mockJob.id });
+      });
+      expect(result.current.state.jobs).toEqual([]);
+    });
+
+    it('ADD_BOARDPOS regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'ADD_BOARDPOS', payload: mockBoardPosition });
+      });
+      expect(result.current.state.boardPositions).toEqual([mockBoardPosition]);
+    });
+
+    it('UPDATE_BOARDPOS regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_BOARDPOS', payload: [mockBoardPosition] });
+      });
+      const updated = { ...mockBoardPosition, title: 'Updated Chair' };
+      await act(async () => {
+        await result.current.dispatch({ type: 'UPDATE_BOARDPOS', payload: updated });
+      });
+      expect(result.current.state.boardPositions).toEqual([updated]);
+    });
+
+    it('DELETE_BOARDPOS regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_BOARDPOS', payload: [mockBoardPosition] });
+      });
+      await act(async () => {
+        await result.current.dispatch({ type: 'DELETE_BOARDPOS', payload: mockBoardPosition.id });
+      });
+      expect(result.current.state.boardPositions).toEqual([]);
+    });
+
+    it('SET_APPLICANTS regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_APPLICANTS', payload: [mockApplication] });
+      });
+      expect(result.current.state.applicants).toEqual([mockApplication]);
     });
 
     it('resets loading to false after dispatch completes via finally block', async () => {
@@ -421,6 +554,30 @@ describe('AppContext', () => {
       });
       expect(deleteBoardApplication).toHaveBeenCalledWith('app-1');
     });
+
+    it('UPDATE_TEAM_MEMBER firestore calls updateTeamMember', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ firestoreAction: 'UPDATE_TEAM_MEMBER', payload: mockTeamMember });
+      });
+      expect(updateTeamMember).toHaveBeenCalledWith(mockTeamMember.id, mockTeamMember);
+    });
+
+    it('DELETE_TEAM_MEMBER firestore calls deleteTeamMember', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ firestoreAction: 'DELETE_TEAM_MEMBER', payload: 'tm-1' });
+      });
+      expect(deleteTeamMember).toHaveBeenCalledWith('tm-1');
+    });
+
+    it('UPDATE_BOARDPOS firestore calls updatePosition', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ firestoreAction: 'UPDATE_BOARDPOS', payload: mockBoardPosition });
+      });
+      expect(updatePosition).toHaveBeenCalledWith(mockBoardPosition.id, mockBoardPosition);
+    });
   });
 
   it('sets error when firestore action throws', async () => {
@@ -430,5 +587,15 @@ describe('AppContext', () => {
       await result.current.dispatch({ firestoreAction: 'ADD_EVENT', payload: { title: 'X', description: 'Desc', location: 'L', image: '', category: 'workshop' as const, status: 'upcoming' as const, registrationRequired: false, eventStartAt: '2026-01-01T00:00:00Z' } });
     });
     expect(result.current.state.error).toBe('Failed to sync with database');
+  });
+
+  it('default case in reducer returns state unchanged for unknown action type', async () => {
+    const { result } = renderApp();
+    const initialState = { ...result.current.state };
+    await act(async () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await result.current.dispatch({ type: 'UNKNOWN_ACTION' as any, payload: null });
+    });
+    expect(result.current.state).toEqual(initialState);
   });
 });

@@ -1,5 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { Header } from '@/components/layout/Header'
+import { getUserProfile } from '@/lib/firestore/users'
+
+const mockGetUserProfile = getUserProfile as jest.Mock
 
 jest.mock('@/components/ui/ThemeToggle', () => ({
   ThemeToggle: () => <div data-testid="theme-toggle" />,
@@ -125,6 +128,34 @@ describe('Header', () => {
       fireEvent.click(button)
       expect(button.querySelector('.lucide-x')).toBeInTheDocument()
     })
+
+    it('closes mobile menu when clicking outside', () => {
+      const { container } = render(<Header />)
+      const button = screen.getByRole('button', { name: 'Open main menu' })
+
+      fireEvent.click(button)
+      const nav = getMobileNav(container)
+      expect(nav?.className).not.toContain('pointer-events-none')
+
+      // Click outside menu (on document) triggers click outside handler
+      fireEvent.mouseDown(document)
+      expect(nav?.className).toContain('pointer-events-none')
+    })
+
+    it('closes mobile menu when a nav link is clicked', () => {
+      const { container } = render(<Header />)
+      const button = screen.getByRole('button', { name: 'Open main menu' })
+
+      fireEvent.click(button)
+      const nav = getMobileNav(container)
+      expect(nav?.className).not.toContain('pointer-events-none')
+
+      // Click a mobile nav link triggers onClick={() => setIsMenuOpen(false)}
+      const eventsLinks = screen.getAllByText('Events')
+      fireEvent.click(eventsLinks[1])
+
+      expect(nav?.className).toContain('pointer-events-none')
+    })
   })
 
   describe('authenticated state', () => {
@@ -204,6 +235,193 @@ describe('Header', () => {
       expect(screen.queryByText('Register')).not.toBeInTheDocument()
       expect(screen.queryByText('Login')).not.toBeInTheDocument()
       expect(screen.queryByText('Account')).not.toBeInTheDocument()
+    })
+
+    it('hides auth links while loading even when user is set', () => {
+      mockAdminState({ loading: true, user: { uid: 'u1', displayName: 'Test' } })
+      render(<Header />)
+      expect(screen.queryByText('Register')).not.toBeInTheDocument()
+      expect(screen.queryByText('Login')).not.toBeInTheDocument()
+      expect(screen.queryByText('Account')).not.toBeInTheDocument()
+    })
+  })
+
+  describe('projects dropdown (admin)', () => {
+    const mockLogout = jest.fn()
+
+    beforeEach(() => {
+      jest.clearAllMocks()
+      mockAdminState({
+        user: { uid: 'admin1', displayName: 'Alice', email: 'admin@test.com' },
+        loading: false,
+        isAdmin: true,
+        logout: mockLogout,
+      })
+    })
+
+    it('opens and shows project links on desktop', () => {
+      render(<Header />)
+      // Desktop Projects button is first in DOM
+      const desktopProjectsBtn = screen.getAllByText('Projects')[0]
+
+      // Before click: only mobile "All Projects" exists (CSS-hidden in DOM)
+      expect(screen.getAllByText('All Projects').length).toBe(1)
+
+      fireEvent.click(desktopProjectsBtn)
+
+      // After click: desktop dropdown renders, so "All Projects" now appears twice
+      expect(screen.getAllByText('All Projects').length).toBe(2)
+      // "My Favorites" is desktop-dropdown-only (appears when user is logged in)
+      expect(screen.getByText('My Favorites')).toBeInTheDocument()
+    })
+
+    it('hides My Favorites when user is not logged in', () => {
+      mockAdminState({
+        user: null,
+        loading: false,
+        isAdmin: true,
+      })
+      render(<Header />)
+
+      const desktopProjectsBtn = screen.getAllByText('Projects')[0]
+      fireEvent.click(desktopProjectsBtn)
+
+      // Desktop dropdown still opens (All Projects count goes to 2)
+      expect(screen.getAllByText('All Projects').length).toBe(2)
+      // But My Favorites is conditional on user being logged in
+      expect(screen.queryByText('My Favorites')).not.toBeInTheDocument()
+    })
+
+    it('closes dropdown when clicking a link', () => {
+      render(<Header />)
+
+      const desktopProjectsBtn = screen.getAllByText('Projects')[0]
+      fireEvent.click(desktopProjectsBtn)
+      expect(screen.getAllByText('All Projects').length).toBe(2)
+
+      // Click the desktop "All Projects" link (first one in DOM)
+      const allProjectsLinks = screen.getAllByText('All Projects')
+      fireEvent.click(allProjectsLinks[0])
+
+      // Dropdown closes: desktop links removed, only mobile remains
+      expect(screen.getAllByText('All Projects').length).toBe(1)
+      expect(screen.queryByText('My Favorites')).not.toBeInTheDocument()
+    })
+
+    it('closes dropdown when clicking outside', () => {
+      render(<Header />)
+
+      const desktopProjectsBtn = screen.getAllByText('Projects')[0]
+      fireEvent.click(desktopProjectsBtn)
+      expect(screen.getAllByText('All Projects').length).toBe(2)
+
+      // Click outside triggers the mousedown handler
+      fireEvent.mouseDown(document)
+
+      // Desktop dropdown removed, only mobile remains
+      expect(screen.getAllByText('All Projects').length).toBe(1)
+      expect(screen.queryByText('My Favorites')).not.toBeInTheDocument()
+    })
+  })
+
+  describe('projects mobile section for admin', () => {
+    beforeEach(() => {
+      mockAdminState({
+        user: { uid: 'admin1', displayName: 'Alice', email: 'admin@test.com' },
+        loading: false,
+        isAdmin: true,
+      })
+    })
+
+    it('opens mobile projects submenu and shows links', () => {
+      render(<Header />)
+      // Open mobile menu first
+      const hamburger = screen.getByRole('button', { name: 'Open main menu' })
+      fireEvent.click(hamburger)
+
+      // Mobile Projects button is second in DOM
+      const mobileProjectsBtn = screen.getAllByText('Projects')[1]
+      fireEvent.click(mobileProjectsBtn)
+
+      // "Study Plan Graph" is unique to the mobile projects submenu
+      expect(screen.getByText('Study Plan Graph')).toBeInTheDocument()
+      // All Projects and Course Navigator appear in both desktop and mobile, so they exist
+      expect(screen.getAllByText('All Projects').length).toBeGreaterThanOrEqual(1)
+      expect(screen.getAllByText('Course Navigator').length).toBeGreaterThanOrEqual(1)
+    })
+  })
+
+  describe('getUserProfile fetch', () => {
+    beforeEach(() => {
+      mockAdminState({
+        user: { uid: 'u1', displayName: 'AuthName', email: 'user@test.com' },
+        loading: false,
+        isAdmin: false,
+      })
+      mockGetUserProfile.mockReset()
+    })
+
+    it('calls getUserProfile with user uid', () => {
+      mockGetUserProfile.mockResolvedValue(null)
+      render(<Header />)
+      expect(mockGetUserProfile).toHaveBeenCalledWith('u1')
+    })
+
+    it('shows profile displayName when available', async () => {
+      mockGetUserProfile.mockResolvedValue({
+        id: 'u1',
+        displayName: 'ProfileName',
+        name: 'RealName',
+      })
+      render(<Header />)
+      // profile.displayName takes highest precedence
+      // Use findByText because getUserProfile is async (effect runs after render)
+      await expect(screen.findByText('ProfileName')).resolves.toBeInTheDocument()
+    })
+
+    it('shows profile name when no displayName', async () => {
+      mockGetUserProfile.mockResolvedValue({
+        id: 'u1',
+        name: 'RealName',
+      })
+      render(<Header />)
+      // Falls through to profile.name
+      await expect(screen.findByText('RealName')).resolves.toBeInTheDocument()
+    })
+
+    it('falls back to auth displayName when no profile is found', () => {
+      mockGetUserProfile.mockResolvedValue(null)
+      render(<Header />)
+      // Falls through to user.displayName ('AuthName')
+      expect(screen.getByText('AuthName')).toBeInTheDocument()
+    })
+
+    it('handles getUserProfile error gracefully', () => {
+      mockGetUserProfile.mockRejectedValue(new Error('network error'))
+      render(<Header />)
+      // Catch block sets profile to null, falls back to user.displayName
+      expect(screen.getByText('AuthName')).toBeInTheDocument()
+    })
+  })
+
+  describe('logout', () => {
+    const mockLogout = jest.fn()
+
+    beforeEach(() => {
+      jest.clearAllMocks()
+      mockAdminState({
+        user: { uid: 'u1', displayName: 'TestUser', email: 'u@test.com' },
+        loading: false,
+        isAdmin: false,
+        logout: mockLogout,
+      })
+    })
+
+    it('calls logout function when Logout link is clicked', () => {
+      render(<Header />)
+      const logoutLink = screen.getByText('Logout')
+      fireEvent.click(logoutLink)
+      expect(mockLogout).toHaveBeenCalledTimes(1)
     })
   })
 })
