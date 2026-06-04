@@ -38,6 +38,6 @@ export default defineConfig(ts.config(
   },
   globalIgnores(["**/*.js", "**/*.cjs", "**/*.mjs", "**/*.py"]),
   {
-    ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts", ".venv/**"],
+    ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts", ".venv-browser-use/**"],
   }
 ));

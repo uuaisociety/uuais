@@ -45,6 +45,10 @@
       "description": "Review pull requests and branches with structured Staff+ evaluation. Checks code quality, architecture, performance, security, and Next.js conventions.",
       "mode": "subagent",
       "permission": { "edit": "deny", "bash": "ask" }
+    },
+    "test-writer": {
+      "description": "Write unit tests, integration tests, and API tests for the UUAIS project. Generates test files with proper mocking, edge case coverage, and meaningful assertions. Use when writing new tests, debugging flaky tests, analyzing coverage gaps, or designing test strategies.",
+      "mode": "subagent"
     }
   }
 }

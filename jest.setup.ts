@@ -1,102 +1,164 @@
-// import '@testing-library/jest-dom';
-// import React from 'react';
+import '@testing-library/jest-dom';
+import React from 'react';
 
-// // Mock Next.js router
-// jest.mock('next/navigation', () => ({
-//   useRouter() {
-//     return {
-//       push: jest.fn(),
-//       replace: jest.fn(),
-//       prefetch: jest.fn(),
-//     };
-//   },
-//   usePathname() {
-//     return '';
-//   },
-// }));
+declare global {
+  var __mockPathname: string | undefined;
+  var __setMockParams: ((params: Record<string, string>) => void) | undefined;
+  var __setAppState: ((state: Record<string, unknown> | null) => void) | undefined;
+}
 
-// // Mock next/image to a plain img for JSDOM
-// jest.mock('next/image', () => {
-//   return function NextImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
-//     return React.createElement('img', props);
-//   };
-// });
+beforeEach(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {});
+});
 
-// // Mock App Context to avoid Firestore subscriptions in tests
-// jest.mock('@/contexts/AppContext', () => {
-//   const defaultState = {
-//     events: [],
-//     teamMembers: [],
-//     blogPosts: [],
-//     faqs: [],
-//     registrationQuestions: [],
-//     isLoading: false,
-//     error: null,
-//   };
-//   return {
-//     useApp: () => ({ state: defaultState, dispatch: jest.fn() }),
-//     AppProvider: ({ children }: { children: React.ReactNode }) => children,
-//   };
-// });
+if (typeof window !== 'undefined') {
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation((query: string) => ({
+      matches: false,
+      media: query,
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+    })),
+  });
+}
 
-// // Mock SEO utilities
-// jest.mock("@/utils/seo", () => ({
-//   updatePageMeta: jest.fn(),
-// }));
+global.__mockPathname = '';
 
-// // Mock Firestore module to avoid real network and side effects in unit tests
-// // Tests can override per-file using jest.mock("@/lib/firestore", ...) with specific behaviors.
-// jest.mock("@/lib/firestore", () => {
-//   return {
-//     // Events
-//     getEvents: jest.fn(async () => []),
-//     getAllEvents: jest.fn(async () => []),
-//     getEventById: jest.fn(async () => null),
-//     addEvent: jest.fn(async () => 'test-id'),
-//     updateEvent: jest.fn(async () => undefined),
-//     patchEvent: jest.fn(async () => undefined),
-//     deleteEvent: jest.fn(async () => undefined),
-//     subscribeToEvents: jest.fn(() => () => {}),
+const mockParams: Record<string, string> = {};
+jest.mock('next/navigation', () => ({
+  useRouter() {
+    return {
+      push: jest.fn(),
+      replace: jest.fn(),
+      prefetch: jest.fn(),
+    };
+  },
+  usePathname() {
+    return global.__mockPathname || '';
+  },
+  useParams() {
+    return mockParams;
+  },
+  notFound: jest.fn(() => {
+    throw new Error('NEXT_NOT_FOUND');
+  }),
+}));
+global.__setMockParams = (params: Record<string, string>) => {
+  Object.assign(mockParams, params);
+};
 
-//     // Team
-//     getTeamMembers: jest.fn(async () => []),
-//     addTeamMember: jest.fn(async () => 'member-id'),
-//     updateTeamMember: jest.fn(async () => undefined),
-//     deleteTeamMember: jest.fn(async () => undefined),
-//     subscribeToTeamMembers: jest.fn(() => () => {}),
+jest.mock('@/hooks/useAdmin', () => ({
+  useAdmin: () => ({
+    user: null,
+    loading: false,
+    isAdmin: false,
+    isSuperAdmin: false,
+    claims: null,
+    signInWithGoogle: jest.fn(),
+    logout: jest.fn(),
+  }),
+}));
 
-//     // Blog
-//     getBlogPosts: jest.fn(async () => []),
-//     getBlogPostById: jest.fn(async () => null),
-//     addBlogPost: jest.fn(async () => 'post-id'),
-//     updateBlogPost: jest.fn(async () => undefined),
-//     deleteBlogPost: jest.fn(async () => undefined),
-//     subscribeToBlogPosts: jest.fn(() => () => {}),
+jest.mock('next/image', () => {
+  return function NextImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
+    return React.createElement('img', props);
+  };
+});
 
-//     // FAQs
-//     getFaqs: jest.fn(async () => []),
-//     addFaq: jest.fn(async () => 'faq-id'),
-//     updateFaq: jest.fn(async () => undefined),
-//     deleteFaq: jest.fn(async () => undefined),
-//     subscribeToFaqs: jest.fn(() => () => {}),
+let __mockAppState: Record<string, unknown> | null = null;
+const __defaultAppState = {
+  events: [],
+  teamMembers: [],
+  blogPosts: [],
+  faqs: [],
+  jobs: [],
+  boardPositions: [],
+  applicants: [],
+  registrationQuestions: [],
+  isLoading: false,
+  error: null,
+};
+global.__setAppState = (state: Record<string, unknown> | null) => {
+  __mockAppState = state;
+};
+jest.mock('@/contexts/AppContext', () => ({
+  useApp: () => ({ state: __mockAppState || __defaultAppState, dispatch: jest.fn() }),
+  AppProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
 
-//     // Registrations
-//     registerForEvent: jest.fn(async () => 'reg-id'),
-//     getMyRegistrations: jest.fn(async () => []),
-//     getEventRegistrations: jest.fn(async () => []),
-//     subscribeToEventRegistrations: jest.fn(() => () => {}),
+jest.mock("@/utils/seo", () => ({
+  updatePageMeta: jest.fn(),
+}));
 
-//     // Custom Questions
-//     getEventCustomQuestions: jest.fn(async () => []),
-//     subscribeToEventCustomQuestions: jest.fn(() => () => {}),
-//     addEventCustomQuestion: jest.fn(async () => 'cq-id'),
-//     updateEventCustomQuestion: jest.fn(async () => undefined),
-//     deleteEventCustomQuestion: jest.fn(async () => undefined),
-
-//     // Analytics
-//     incrementEventUniqueClick: jest.fn(async () => undefined),
-//     getEventClicksCounts: jest.fn(async () => ({})),
-//     incrementBlogRead: jest.fn(async () => undefined),
-//     getBlogReadsCounts: jest.fn(async () => ({})),
-//   };
-// });
+jest.mock("@/lib/firestore", () => {
+  const stub = jest.fn();
+  return {
+    getEvents: stub,
+    getAllEvents: stub,
+    getEventById: stub,
+    addEvent: stub,
+    updateEvent: stub,
+    patchEvent: stub,
+    deleteEvent: stub,
+    subscribeToEvents: jest.fn(() => () => {}),
+    getTeamMembers: stub,
+    addTeamMember: stub,
+    updateTeamMember: stub,
+    deleteTeamMember: stub,
+    subscribeToTeamMembers: jest.fn(() => () => {}),
+    getBlogPosts: stub,
+    getBlogPostById: stub,
+    addBlogPost: stub,
+    updateBlogPost: stub,
+    deleteBlogPost: stub,
+    subscribeToBlogPosts: jest.fn(() => () => {}),
+    getFaqs: stub,
+    addFaq: stub,
+    updateFaq: stub,
+    deleteFaq: stub,
+    subscribeToFaqs: jest.fn(() => () => {}),
+    registerForEvent: stub,
+    getMyRegistrations: stub,
+    getEventRegistrations: stub,
+    subscribeToEventRegistrations: jest.fn(() => () => {}),
+    getEventCustomQuestions: stub,
+    subscribeToEventCustomQuestions: jest.fn(() => () => {}),
+    addEventCustomQuestion: stub,
+    updateEventCustomQuestion: stub,
+    deleteEventCustomQuestion: stub,
+    incrementEventUniqueClick: stub,
+    getEventClicksCounts: stub,
+    incrementBlogRead: stub,
+    getBlogReadsCounts: stub,
+    getJobs: stub,
+    addJob: stub,
+    updateJob: stub,
+    deleteJob: stub,
+    subscribeToJobs: jest.fn(() => () => {}),
+    getAttendance: stub,
+    recordAttendance: stub,
+    getUsers: stub,
+    getUserById: stub,
+    updateUser: stub,
+    subscribeToAiChats: jest.fn(() => () => {}),
+    addAiChat: stub,
+    getFavorites: stub,
+    addFavorite: stub,
+    removeFavorite: stub,
+    getCourseCategories: stub,
+    getAiSettings: stub,
+    updateAiSetting: stub,
+    getCourses: stub,
+    moveTeamMember: stub,
+    getBoardPositions: stub,
+    addPosition: stub,
+    updatePosition: stub,
+    deletePosition: stub,
+    movePosition: stub,
+    subscribeToPositions: jest.fn(() => () => {}),
+    getBoardApplications: stub,
+    subscribeToBoardApplications: jest.fn(() => () => {}),
+    deleteBoardApplication: stub,
+  };
+});

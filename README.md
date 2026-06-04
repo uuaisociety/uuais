@@ -103,8 +103,48 @@ firebase deploy --only storage:rules
 - `npm run build` - Builds the application for production
 - `npm run start` - Starts the production server
 - `npm run lint` - Runs ESLint to check for code issues
+- `npm test` - Runs Jest test suite (silent mode)
+- `npm run test:watch` - Runs Jest in watch mode (auto-rerun on changes)
+- `npm run test:coverage` - Runs Jest with coverage report
 - `npm run set:admin -- <email> true` - Sets an admin user
 - `npm run set:admin -- <email> false` - Removes an admin user
+
+## Testing
+
+The project uses **Jest** + **React Testing Library** for unit and integration tests.
+
+### Running Tests
+
+```bash
+npm test            # Run all tests (silent)
+npm run test:watch  # Watch mode — re-runs on file changes
+npm run test:coverage  # Run with coverage report
+```
+
+### Writing Tests
+
+Create test files anywhere in the project with `.test.ts` or `.test.tsx` suffixes, or in a `__tests__/` directory:
+
+```tsx
+import { render, screen } from '@testing-library/react'
+import NotFound from '../app/not-found'
+
+describe('NotFound', () => {
+  it('renders the 404 heading', () => {
+    render(<NotFound />)
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('404')
+  })
+})
+```
+
+### What's Pre-Configured
+
+- **`next/jest` transformer** — handles JSX, TypeScript, CSS/font/image mocks, `.env` loading
+- **Module aliases** — `@/` imports resolve correctly
+- **Auto-mocked dependencies** — `next/navigation`, `next/image`, `@/contexts/AppContext`, `@/lib/firestore`, `@/utils/seo`
+- **`@testing-library/jest-dom`** — custom matchers like `.toBeInTheDocument()`, `.toHaveTextContent()`
+
+**Note:** `async` Server Components aren't supported by Jest. Test those with E2E tools (Playwright) later.
 
 ## Contributing Workflow
 
@@ -117,7 +157,8 @@ firebase deploy --only storage:rules
 
 ### Before Submitting a PR
 
-- [ ] Test your changes locally
+- [ ] Run `npm test` to ensure existing tests pass
+- [ ] Add or update tests for new/changed functionality
 - [ ] Run `npm run lint` to check for code issues
 - [ ] Ensure all new components are properly typed
 - [ ] Update documentation if needed

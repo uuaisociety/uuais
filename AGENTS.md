@@ -39,7 +39,10 @@ If doing frontend work, start by reading through DESIGN.md for Tailwind patterns
 ### Root (main app)
 - `npm run dev`: Dev server with Turbopack
 - `npm run lint`: ESLint 9 (Next.js, React, TypeScript plugins), ignores `.py`, `.next/`, `node_modules/`
-- `npm test`: Jest (silent mode, no test files found yet)
+- `npm test`: Jest (silent mode)
+- `npm run test:watch`: Jest watch mode
+- `npm run test:coverage`: Jest with coverage report
+- `npm run test:integration`: API route tests (`__tests__/app/api/`, mocked Firebase, tests all 13 API endpoints)
 - Admin scripts (use `ts-node`, require `GOOGLE_APPLICATION_CREDENTIALS`):
   - `npm run set:admin -- <email> <true|false>`
   - `npm run set:superadmin -- <email> <true|false>`
@@ -57,10 +60,14 @@ If doing frontend work, start by reading through DESIGN.md for Tailwind patterns
 ## Notes
 - `[MEMORY]` block from `memory search` is automatically injected into every prompt — no manual fetch needed
 - No `typecheck` script: run `npx tsc --noEmit` for TypeScript checks
-- `jest.config.ts` and `jest.setup.ts` are fully commented out; Jest uses default config
+- Unit tests: `__tests__/` (jest.config.ts, `testEnvironment: 'jsdom'`)
+- Integration/API tests: `__tests__/app/api/` (jest.integration.config.ts, `testEnvironment: 'node'`) — tests API route logic with mocked Firestore
+- Real Firebase tests: Create `*.firebase.test.ts` files; run separately with `FIREBASE_ENV=ci`
+- `jest.config.ts` uses `next/jest` transformer; mocks for AppContext, Firestore, router, and images are in `jest.setup.ts`
 - Branch naming: `feature/*`, `fix/*`, `docs/*`, `refactor/*` (see README)
-- Before PR: Run `npm run lint`, test changes, verify TypeScript types
-- Always run `npm run lint` before finishing any coding task
+- Before PR: Run `npm run lint`, `npm test`, verify TypeScript types
+- Always run `npm test` and `npm run lint` before finishing any coding task
+- **Add or update tests when making non-trivial changes** — new components, bug fixes, refactors. Follow the pattern in `__tests__/not-found.test.tsx`
 
 ## Tools & Environment
 See `.opencode/instructions/tools-and-environment.md` for:
