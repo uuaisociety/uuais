@@ -67,7 +67,7 @@ describe('Header', () => {
 
     it('shows spacer on non-homepage', () => {
       const { container } = render(<Header />)
-      expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument()
+      expect(container.querySelector('div.h-\\[100px\\]')).toBeInTheDocument()
     })
   })
 
@@ -83,7 +83,9 @@ describe('Header', () => {
 
     it('hides spacer', () => {
       const { container } = render(<Header />)
-      expect(container.querySelector('[aria-hidden="true"]')).not.toBeInTheDocument()
+      const spacer = container.querySelector('[aria-hidden="true"]')
+      expect(spacer).toBeInTheDocument()
+      expect(spacer).toHaveClass('h-0')
     })
   })
 

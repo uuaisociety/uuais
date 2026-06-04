@@ -144,8 +144,16 @@ export const Header: React.FC = () => {
   }, [isMenuOpen]);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > window.innerHeight * 0.85);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrolled = window.scrollY > window.innerHeight * 0.85;
+          setIsScrolled(prev => (prev !== scrolled ? scrolled : prev));
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
@@ -376,7 +384,13 @@ export const Header: React.FC = () => {
         </div>
       </header>
       {/* Spacer for fixed header */}
-      {(!isHomePage || isScrolled) && <div aria-hidden className="h-[100px]" />}
+      {!isHomePage && <div className="h-[100px]" />}
+      {isHomePage && (
+        <div
+          aria-hidden={!isScrolled}
+          className={`overflow-hidden transition-[height] duration-200 ease-out ${isScrolled ? 'h-[100px]' : 'h-0'}`}
+        />
+      )}
     </>
   );
 };
