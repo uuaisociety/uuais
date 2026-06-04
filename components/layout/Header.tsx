@@ -12,6 +12,7 @@ import { getUserProfile, type UserProfile } from '@/lib/firestore/users';
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const projectsRef = useRef<HTMLDivElement>(null);
   const mobileProjectsRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
@@ -21,10 +22,11 @@ export const Header: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
 
   const isHomePage = pathname === '/';
+  const isTransparent = isHomePage && !isScrolled;
 
   // Helper function to get nav/link classes based on state
   const getNavClass = (isActive: boolean) => {
-    if (isHomePage) {
+    if (isTransparent) {
       return isActive 
         ? 'bg-white/20 text-white' 
         : 'text-white/90 hover:text-white hover:bg-white/20';
@@ -36,7 +38,7 @@ export const Header: React.FC = () => {
 
   // Helper function for mobile menu button classes
   const getMobileButtonClass = () => {
-    if (isHomePage) {
+    if (isTransparent) {
       return 'text-white/90';
     }
     return 'text-gray-700 dark:text-gray-300';
@@ -44,31 +46,31 @@ export const Header: React.FC = () => {
 
   // Helper functions for header styling
   const getHeaderBgClass = () => {
-    return isHomePage 
+    return isTransparent 
       ? 'bg-transparent border-none shadow-none' 
       : 'bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 shadow-sm';
   };
 
   const getHeaderTopBarBgClass = () => {
-    return isHomePage ? 'bg-transparent' : 'bg-gray-100 dark:bg-gray-800';
+    return isTransparent ? 'bg-transparent' : 'bg-gray-100 dark:bg-gray-800';
   };
 
   const getHeaderTopBarTextClass = () => {
-    return isHomePage ? 'text-white/90' : 'text-gray-700 dark:text-gray-300';
+    return isTransparent ? 'text-white/90' : 'text-gray-700 dark:text-gray-300';
   };
 
   const getHeaderNavBgClass = () => {
-    return isHomePage 
+    return isTransparent 
       ? 'bg-transparent border-none shadow-none' 
       : 'bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 shadow-sm backdrop-blur-sm';
   };
 
   const getLogoJustifyClass = () => {
-    return isHomePage ? 'justify-end' : 'justify-between';
+    return isTransparent ? 'justify-end' : 'justify-between';
   };
 
   const getMobileNavClass = () => {
-    return isHomePage ? 'bg-black/20 backdrop-blur-lg rounded-b-xl' : 'bg-white dark:bg-gray-900';
+    return isTransparent ? 'bg-black/20 backdrop-blur-lg rounded-b-xl' : 'bg-white dark:bg-gray-900';
   };
 
   useEffect(() => {
@@ -141,6 +143,15 @@ export const Header: React.FC = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > window.innerHeight * 0.85);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const navigation = [
     { name: 'Home', href: '/' },
     { name: 'Events', href: '/events' },
@@ -163,15 +174,15 @@ export const Header: React.FC = () => {
             <div className={`flex items-center gap-3 ${getHeaderTopBarTextClass()}`}>
               {!loading && !user && (
                 <>
-                  <Link href="/join" className={`${isHomePage ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'}`}>Register</Link>
-                  <Link href="/login" className={`${isHomePage ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'}`}>Login</Link>
+                  <Link href="/join" className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'}`}>Register</Link>
+                  <Link href="/login" className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'}`}>Login</Link>
                 </>
               )}
               {!loading && user && (
                 <>
                   <span className="truncate max-w-[200px]">{profile?.displayName || profile?.name || user.displayName || (user as unknown as { name?: string }).name || user.email}</span>
-                  <Link href="/account" className={`${isHomePage ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'}`}>Account</Link>
-                  <a onClick={() => logout()} className={`${isHomePage ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'} no-underline hover:underline cursor-pointer`}>Logout</a>
+                  <Link href="/account" className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'}`}>Account</Link>
+                  <a onClick={() => logout()} className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'} no-underline hover:underline cursor-pointer`}>Logout</a>
                 </>
               )}
             </div>
@@ -182,8 +193,8 @@ export const Header: React.FC = () => {
         <div className={`transition-colors duration-300 ${getHeaderNavBgClass()}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className={`flex ${getLogoJustifyClass()} items-center h-16`}>
-              {/* Logo - hidden on homepage */}
-              {!isHomePage && (
+              {/* Logo - hidden on homepage when transparent */}
+              {!isTransparent && (
                 <Link href="/" className="flex items-center space-x-2 group no-underline">
                   <div className="pl-2 pb-2 rounded-lg">
                     <Image
@@ -223,47 +234,47 @@ export const Header: React.FC = () => {
                          </svg>
                        </button>
                       {isProjectsOpen && (
-                        <div className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 border transition-all duration-200 overflow-hidden animate-in fade-in slide-in-from-top-2 ${
-                          isHomePage
-                            ? 'bg-black/40 backdrop-blur-lg border-gray-700/50'
-                            : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'
-                        }`}>
-                          <Link
-                            href="/projects"
-                            onClick={() => setIsProjectsOpen(false)}
-                            className={`block px-4 py-2 rounded-md text-sm transition-colors duration-200 ${
-                              isHomePage
-                                ? 'text-white/90 hover:text-white hover:bg-white/20'
-                                : 'text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400'
-                            } cursor-pointer`}
-                          >
-                            All Projects
-                          </Link>
-                          <Link
-                            href="/explore"
-                            onClick={() => setIsProjectsOpen(false)}
-                            className={`block px-4 py-2 rounded-md text-sm transition-colors duration-200 ${
-                              isHomePage
-                                ? 'text-white/90 hover:text-white hover:bg-white/20'
-                                : 'text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400'
-                            } cursor-pointer`}
-                          >
-                            Course Navigator
-                          </Link>
-                          {user && (
-                            <Link
-                              href="/my-courses"
-                              onClick={() => setIsProjectsOpen(false)}
-                              className={`block px-4 py-2 pl-6 rounded-md text-sm transition-colors duration-200 ${
-                                isHomePage
-                                  ? 'text-white/70 hover:text-white hover:bg-white/20'
-                                  : 'text-gray-500 dark:text-gray-400 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400'
-                            } cursor-pointer`}
-                            >
-                              My Favorites
-                            </Link>
-                          )}
-                        </div>
+                         <div className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 border transition-all duration-200 overflow-hidden animate-in fade-in slide-in-from-top-2 ${
+                           isTransparent
+                             ? 'bg-black/40 backdrop-blur-lg border-gray-700/50'
+                             : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'
+                         }`}>
+                           <Link
+                             href="/projects"
+                             onClick={() => setIsProjectsOpen(false)}
+                             className={`block px-4 py-2 rounded-md text-sm transition-colors duration-200 ${
+                               isTransparent
+                                 ? 'text-white/90 hover:text-white hover:bg-white/20'
+                                 : 'text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400'
+                             } cursor-pointer`}
+                           >
+                             All Projects
+                           </Link>
+                           <Link
+                             href="/explore"
+                             onClick={() => setIsProjectsOpen(false)}
+                             className={`block px-4 py-2 rounded-md text-sm transition-colors duration-200 ${
+                               isTransparent
+                                 ? 'text-white/90 hover:text-white hover:bg-white/20'
+                                 : 'text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400'
+                             } cursor-pointer`}
+                           >
+                             Course Navigator
+                           </Link>
+                           {user && (
+                             <Link
+                               href="/my-courses"
+                               onClick={() => setIsProjectsOpen(false)}
+                               className={`block px-4 py-2 pl-6 rounded-md text-sm transition-colors duration-200 ${
+                                 isTransparent
+                                   ? 'text-white/70 hover:text-white hover:bg-white/20'
+                                   : 'text-gray-500 dark:text-gray-400 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400'
+                             } cursor-pointer`}
+                             >
+                               My Favorites
+                             </Link>
+                           )}
+                         </div>
                       )}
                     </div>
                     <Link
@@ -275,7 +286,7 @@ export const Header: React.FC = () => {
                     </>
                   )}
                     {/* Theme toggle */}
-                     <ThemeToggle isHomePage={isHomePage} />
+                     <ThemeToggle isHomePage={isTransparent} />
                  </nav>
               </div>
 
@@ -307,7 +318,7 @@ export const Header: React.FC = () => {
                   } ${getMobileNavClass()}`}
                   inert={!isMenuOpen}
                 >
-                <div className={`px-2 pt-2 pb-3 space-y-1 ${isHomePage ? '' : 'border-t border-gray-100 dark:border-gray-800'}`}>
+                <div className={`px-2 pt-2 pb-3 space-y-1 ${isTransparent ? '' : 'border-t border-gray-100 dark:border-gray-800'}`}>
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
@@ -337,13 +348,13 @@ export const Header: React.FC = () => {
                              key={href}
                              href={href}
                              onClick={() => { setIsMenuOpen(false); setIsProjectsOpen(false); }}
-                             className={`block px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                               isHomePage
-                                 ? 'text-white/90 hover:text-white hover:bg-white/20'
-                                 : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
-                             }`}
-                           >
-                             {href === '/projects' ? 'All Projects' : href === '/explore' ? 'Course Navigator' : 'Study Plan Graph'}
+                              className={`block px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                                isTransparent
+                                  ? 'text-white/90 hover:text-white hover:bg-white/20'
+                                  : 'text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20'
+                              }`}
+                            >
+                              {href === '/projects' ? 'All Projects' : href === '/explore' ? 'Course Navigator' : 'Study Plan Graph'}
                            </Link>
                          ))}
                        </div>
@@ -358,14 +369,14 @@ export const Header: React.FC = () => {
                         Admin
                       </Link>
                     )}
-                 <ThemeToggle isHomePage={isHomePage} />
+                 <ThemeToggle isHomePage={isTransparent} />
                </div>
             </div>
           </div>
         </div>
       </header>
       {/* Spacer for fixed header */}
-      {!isHomePage && <div aria-hidden className="h-[100px]" />}
+      {(!isHomePage || isScrolled) && <div aria-hidden className="h-[100px]" />}
     </>
   );
 };
