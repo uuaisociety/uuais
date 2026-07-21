@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { Event, TeamMember, BlogPost, FAQ, Job, BoardPosition, Application } from '../types';
+import { Event, TeamMember, BlogPost, FAQ, Job, BoardPosition, Application, ApplicationCampaign, TeamApplication } from '../types';
 import { subscribeToEvents, addEvent as addEventToFirestore, updateEvent as updateEventInFirestore, deleteEvent as deleteEventFromFirestore } from '@/lib/firestore/events';
 import { auth } from '@/lib/firebase-client';
 import { onIdTokenChanged } from 'firebase/auth';
@@ -11,6 +11,9 @@ import { subscribeToFaqs, addFaq as addFaqToFirestore, updateFaq as updateFaqInF
 import { subscribeToJobs, addJob as addJobToFirestore, updateJob as updateJobInFirestore, deleteJob as deleteJobFromFirestore } from '@/lib/firestore/jobs';
 import { deleteBoardApplication, subscribeToBoardApplications } from '@/lib/firestore/boardApplications';
 import { subscribeToPositions, addPosition as addPositionToFirestore, updatePosition as updatePositionInFirestore, deletePosition as deletePositionFromFirestore, movePosition as movePositionInFirestore } from '@/lib/firestore/board-positions'
+import { subscribeToCampaigns, addCampaign as addCampaignToFirestore, updateCampaign as updateCampaignInFirestore, deleteCampaign as deleteCampaignFromFirestore, type CampaignInput } from '@/lib/firestore/applicationCampaigns';
+import { deleteCampaignQuestionsByCampaign } from '@/lib/firestore/campaignQuestions';
+import { deleteTeamApplication, subscribeToTeamApplications } from '@/lib/firestore/teamApplications';
 
 interface AppState {
   events: Event[];
@@ -20,6 +23,8 @@ interface AppState {
   jobs: Job[];
   boardPositions: BoardPosition[];
   applicants: Application[];
+  campaigns: ApplicationCampaign[];
+  teamApplications: TeamApplication[];
   isLoading: boolean;
   error: string | null;
 }
@@ -51,7 +56,9 @@ type AppAction =
   | { type: 'ADD_JOB'; payload: Job }
   | { type: 'UPDATE_JOB'; payload: Job }
   | { type: 'DELETE_JOB'; payload: string }
-  | { type: 'SET_APPLICANTS'; payload: Application[] };
+  | { type: 'SET_APPLICANTS'; payload: Application[] }
+  | { type: 'SET_CAMPAIGNS'; payload: ApplicationCampaign[] }
+  | { type: 'SET_TEAM_APPLICATIONS'; payload: TeamApplication[] };
 
 type FirestoreAction = 
   | { firestoreAction: 'ADD_EVENT'; payload: Omit<Event, 'id'> }
@@ -74,7 +81,11 @@ type FirestoreAction =
   | { firestoreAction: 'ADD_JOB'; payload: Omit<Job, 'id' | 'createdAt'> }
   | { firestoreAction: 'UPDATE_JOB'; payload: Job }
   | { firestoreAction: 'DELETE_JOB'; payload: string }
-  | { firestoreAction: 'DELETE_BOARD_APPLICATION'; payload: string };
+  | { firestoreAction: 'DELETE_BOARD_APPLICATION'; payload: string }
+  | { firestoreAction: 'ADD_CAMPAIGN'; payload: CampaignInput }
+  | { firestoreAction: 'UPDATE_CAMPAIGN'; payload: ApplicationCampaign }
+  | { firestoreAction: 'DELETE_CAMPAIGN'; payload: string }
+  | { firestoreAction: 'DELETE_TEAM_APPLICATION'; payload: string };
 
 const initialState: AppState = {
   events: [],
@@ -84,6 +95,8 @@ const initialState: AppState = {
   jobs: [],
   boardPositions: [],
   applicants: [],
+  campaigns: [],
+  teamApplications: [],
   isLoading: false,
   error: null
 };
@@ -186,6 +199,10 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
       };
     case 'SET_APPLICANTS':
       return { ...state, applicants: action.payload };
+    case 'SET_CAMPAIGNS':
+      return { ...state, campaigns: action.payload };
+    case 'SET_TEAM_APPLICATIONS':
+      return { ...state, teamApplications: action.payload };
     default:
       return state;
   }
@@ -208,6 +225,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     let unsubscribeJobs: (() => void) | null = null;
     let unsubscribeBoardPositions: (() => void) | null = null;
     let unsubscribeBoardApplications: (() => void) | null = null;
+    let unsubscribeCampaigns: (() => void) | null = null;
+    let unsubscribeTeamApplications: (() => void) | null = null;
 
     const subscribe = (includeUnpublished = false) => {
       // includeUnpublished: boolean indicates admin status
@@ -248,6 +267,19 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       } else {
         dispatch({ type: 'SET_APPLICANTS', payload: [] });
       }
+
+      // Team applications: admin-only subscription (campaigns are public, subscribed separately)
+      if (unsubscribeTeamApplications) {
+        try { unsubscribeTeamApplications(); } catch { /* ignore */ }
+        unsubscribeTeamApplications = null;
+      }
+      if (includeUnpublished) {
+        unsubscribeTeamApplications = subscribeToTeamApplications((applications) => {
+          dispatch({ type: 'SET_TEAM_APPLICATIONS', payload: applications as TeamApplication[] });
+        });
+      } else {
+        dispatch({ type: 'SET_TEAM_APPLICATIONS', payload: [] });
+      }
     };
 
     // Initial subscription: assume not admin (public)
@@ -263,6 +295,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     });
     const unsubscribeFaqs = subscribeToFaqs((faqs) => {
       dispatch({ type: 'SET_FAQS', payload: faqs });
+    });
+
+    // Public campaign subscription (visible to all visitors; drafts included since admin-only toggle is enforced by status)
+    unsubscribeCampaigns = subscribeToCampaigns((campaigns) => {
+      dispatch({ type: 'SET_CAMPAIGNS', payload: campaigns });
     });
     
 
@@ -294,6 +331,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       }
       if (unsubscribeBoardApplications) {
         try { unsubscribeBoardApplications(); } catch { /* ignore */ }
+      }
+      if (unsubscribeCampaigns) {
+        try { unsubscribeCampaigns(); } catch { /* ignore */ }
+      }
+      if (unsubscribeTeamApplications) {
+        try { unsubscribeTeamApplications(); } catch { /* ignore */ }
       }
       unsubscribeTeamMembers();
       unsubscribeBlogPosts();
@@ -373,6 +416,20 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             break;
           case 'DELETE_BOARD_APPLICATION':
             await deleteBoardApplication(action.payload);
+            break;
+          case 'ADD_CAMPAIGN':
+            await addCampaignToFirestore(action.payload);
+            break;
+          case 'UPDATE_CAMPAIGN':
+            await updateCampaignInFirestore(action.payload.id, action.payload);
+            break;
+          case 'DELETE_CAMPAIGN':
+            await deleteCampaignFromFirestore(action.payload);
+            // Also clean up campaign questions
+            try { await deleteCampaignQuestionsByCampaign(action.payload); } catch { /* ignore */ }
+            break;
+          case 'DELETE_TEAM_APPLICATION':
+            await deleteTeamApplication(action.payload);
             break;
         }
       } else {

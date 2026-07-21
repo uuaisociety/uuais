@@ -62,6 +62,22 @@ jest.mock('@/lib/firestore/boardApplications', () => ({
   deleteBoardApplication: jest.fn(),
 }));
 
+jest.mock('@/lib/firestore/applicationCampaigns', () => ({
+  subscribeToCampaigns: jest.fn(() => mockUnsubscribe),
+  addCampaign: jest.fn(),
+  updateCampaign: jest.fn(),
+  deleteCampaign: jest.fn(),
+}));
+
+jest.mock('@/lib/firestore/campaignQuestions', () => ({
+  deleteCampaignQuestionsByCampaign: jest.fn(),
+}));
+
+jest.mock('@/lib/firestore/teamApplications', () => ({
+  subscribeToTeamApplications: jest.fn(() => mockUnsubscribe),
+  deleteTeamApplication: jest.fn(),
+}));
+
 import { AppProvider, useApp } from '@/contexts/AppContext';
 import {
   subscribeToEvents, addEvent, updateEvent, deleteEvent,

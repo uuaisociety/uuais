@@ -13,3 +13,6 @@ export * from './firestore/favorites';
 export * from './firestore/course-categories';
 export * from './firestore/ai-settings';
 export * from './firestore/courses';
+export * from './firestore/applicationCampaigns';
+export * from './firestore/campaignQuestions';
+export * from './firestore/teamApplications';
