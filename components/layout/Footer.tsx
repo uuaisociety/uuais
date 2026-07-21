@@ -65,12 +65,14 @@ export const Footer: React.FC = () => {
             <div className="flex space-x-4">
               <a
                 href="https://linkedin.com/company/uu-ai-society"
+                aria-label="LinkedIn"
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 <HugeiconsIcon icon={LinkedinIcon} className="h-5 w-5" />
               </a>
               <a
                 href="https://instagram.com/uuaisociety"
+                aria-label="Instagram"
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 <HugeiconsIcon icon={InstagramIcon} className="h-5 w-5" />
@@ -80,7 +82,7 @@ export const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
             <ul className="space-y-2">
               <li><Link href="/" className="text-gray-300 hover:text-white transition-colors">Home</Link></li>
               <li><Link href="/events" className="text-gray-300 hover:text-white transition-colors">Events</Link></li>
@@ -93,7 +95,7 @@ export const Footer: React.FC = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+            <h2 className="text-lg font-semibold mb-4">Contact</h2>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-gray-400" />
@@ -157,9 +159,9 @@ export const Footer: React.FC = () => {
 
         {/* Partners strip */}
         <div className="py-8 border-t border-gray-900">
-          <h3 className="text-center text-lg font-semibold mb-6 text-gray-100">
+          <h2 className="text-center text-lg font-semibold mb-6 text-gray-100">
             Our partners
-          </h3>
+          </h2>
           <div className="grid grid-cols-2 [@media(max-width:350px)]:grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  gap-6 items-center">
             {/* Fill out grid */}
             {Array.from({ length: 0 }).map((_, idx) => (
