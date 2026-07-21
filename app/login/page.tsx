@@ -13,7 +13,9 @@ export default function LoginPage() {
   }, []);
 
   const after = () => {
-    router.push('/account')
+    const params = new URLSearchParams(window.location.search)
+    const redirect = params.get('redirect')
+    router.push(redirect || '/account')
   }
 
   return (
