@@ -1,6 +1,11 @@
 import { render, screen } from '@testing-library/react'
 import AdminGate from '@/components/auth/AdminGate'
 
+jest.mock('@/lib/firebase-client', () => ({
+  signInWithGooglePopup: jest.fn(),
+  signInWithGithubPopup: jest.fn(),
+}))
+
 jest.mock('@/hooks/useAdmin', () => ({
   useAdmin: jest.fn(),
 }))

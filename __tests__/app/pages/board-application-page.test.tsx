@@ -2,6 +2,10 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import BoardApplicationPage from '@/components/pages/BoardApplicationPage'
 import { defaultAppState } from '@/__tests__/helpers/fixtures'
 
+jest.mock('@/lib/firebase-client', () => ({
+  auth: { onAuthStateChanged: jest.fn(() => jest.fn()) },
+}))
+
 const mockUseApp = jest.fn()
 jest.mock('@/contexts/AppContext', () => ({
   useApp: () => mockUseApp(),
