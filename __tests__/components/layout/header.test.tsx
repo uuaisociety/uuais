@@ -36,6 +36,7 @@ describe('Header', () => {
   beforeEach(() => {
     g.__mockPathname = '/events'
     mockAdminState()
+    global.__setAppState?.(null)
   })
 
   describe('navigation links', () => {
@@ -46,6 +47,15 @@ describe('Header', () => {
       expect(screen.getAllByText('Job board').length).toBe(2)
       expect(screen.getAllByText('About').length).toBe(2)
       expect(screen.getAllByText('Contact').length).toBe(2)
+    })
+
+    it('renders Apply as a distinct CTA in desktop and mobile nav', () => {
+      render(<Header />)
+      const applyLinks = screen.getAllByRole('link', { name: 'Apply' })
+      expect(applyLinks.length).toBe(2)
+      applyLinks.forEach((link) => expect(link).toHaveAttribute('href', '/apply/team'))
+      // CTA uses a solid background to stand out from regular nav links
+      expect(applyLinks[0].className).toMatch(/bg-red-600|bg-white/)
     })
 
     it('renders register and login links when not authenticated', () => {
@@ -68,6 +78,32 @@ describe('Header', () => {
     it('shows spacer on non-homepage', () => {
       const { container } = render(<Header />)
       expect(container.querySelector('div.h-\\[100px\\]')).toBeInTheDocument()
+    })
+  })
+
+  describe('Apply CTA visibility', () => {
+    it('hides Apply when campaigns are loaded and none are open', () => {
+      global.__setAppState?.({
+        campaigns: [{ id: 'c1', status: 'closed', title: 'Closed', subtitle: '', description: '', deadline: '', teams: [], enabledStandardFields: [] }],
+        campaignsLoaded: true,
+      })
+      render(<Header />)
+      expect(screen.queryByRole('link', { name: 'Apply' })).not.toBeInTheDocument()
+    })
+
+    it('shows Apply when an open campaign exists', () => {
+      global.__setAppState?.({
+        campaigns: [{ id: 'c1', status: 'open', title: 'Open', subtitle: '', description: '', deadline: '', teams: [], enabledStandardFields: [] }],
+        campaignsLoaded: true,
+      })
+      render(<Header />)
+      expect(screen.getAllByRole('link', { name: 'Apply' }).length).toBe(2)
+    })
+
+    it('shows Apply while campaigns are still loading', () => {
+      global.__setAppState?.(null)
+      render(<Header />)
+      expect(screen.getAllByRole('link', { name: 'Apply' }).length).toBe(2)
     })
   })
 
