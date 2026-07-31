@@ -127,9 +127,9 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
-    // APPLICATION CAMPAIGNS — public read (so applicants see open campaigns); admin write
+    // APPLICATION CAMPAIGNS — public read only for open campaigns (so applicants see them); admin read/write
     match /applicationCampaigns/{campaignId} {
-      allow read: if true;
+      allow read: if isAdmin() || resource.data.status == 'open';
       allow create, update, delete: if isAdmin();
     }
 

@@ -1,4 +1,4 @@
-import { collection, query, getDocs, addDoc, updateDoc, deleteDoc, onSnapshot, DocumentData, doc, Timestamp } from 'firebase/firestore';
+import { collection, query, getDocs, addDoc, updateDoc, deleteDoc, onSnapshot, DocumentData, doc, Timestamp, where } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 import { ApplicationCampaign } from '@/types';
 import { ensureString, stripUndefined } from './utils';
@@ -66,6 +66,7 @@ export async function addCampaign(campaign: CampaignInput): Promise<string> {
     deadline: campaign.deadline,
     status: campaign.status,
     teams: campaign.teams,
+    teamInfo: campaign.teamInfo,
     enabledStandardFields: campaign.enabledStandardFields,
   } as Record<string, unknown>);
   const ref = await addDoc(collection(db, COLLECTION), { ...payload, createdAt: new Date().toISOString() });
@@ -83,8 +84,11 @@ export async function deleteCampaign(id: string): Promise<void> {
   await deleteDoc(doc(db, COLLECTION, id));
 }
 
-export function subscribeToCampaigns(callback: (campaigns: ApplicationCampaign[]) => void) {
-  const q = query(collection(db, COLLECTION));
+export function subscribeToCampaigns(callback: (campaigns: ApplicationCampaign[]) => void, opts?: { includeAll?: boolean }) {
+  // Public visitors only see open campaigns; admins pass includeAll to see drafts too
+  const q = opts?.includeAll
+    ? query(collection(db, COLLECTION))
+    : query(collection(db, COLLECTION), where('status', '==', 'open'));
   return onSnapshot(q, (snapshot) => {
     const list = snapshot.docs.map((d) => docToCampaign(d.id, d.data() as Record<string, unknown>));
     callback(list);

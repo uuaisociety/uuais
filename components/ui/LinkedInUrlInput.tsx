@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { InputBase } from "./Form";
 
-const LINKEDIN_PREFIX = "https://www.linkedin.com/in/";
+export const LINKEDIN_PREFIX = "https://www.linkedin.com/in/";
 const LINKEDIN_REGEX = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\//i;
 
 export function LinkedInUrlInput({
