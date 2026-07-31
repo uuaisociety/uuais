@@ -5,6 +5,7 @@ import type { ApplicationCampaign } from '@/types'
 
 const mockUseApp = jest.fn()
 const mockNotify = jest.fn()
+const mockSubscribeToCampaignQuestions = jest.fn(() => jest.fn())
 
 jest.mock('@/contexts/AppContext', () => ({
   useApp: () => mockUseApp(),
@@ -24,7 +25,7 @@ jest.mock('@/lib/firestore/users', () => ({
 }))
 
 jest.mock('@/lib/firestore/campaignQuestions', () => ({
-  subscribeToCampaignQuestions: jest.fn(() => jest.fn()),
+  subscribeToCampaignQuestions: (...args: unknown[]) => mockSubscribeToCampaignQuestions(...args),
 }))
 
 const sampleCampaign: ApplicationCampaign = {
@@ -32,15 +33,19 @@ const sampleCampaign: ApplicationCampaign = {
   title: 'Spring 2026 Recruitment',
   subtitle: 'UU AI Society — Spring 2026',
   description: 'Main yearly recruitment drive for all society teams.',
-  deadline: '2026-05-10',
+  deadline: '2099-05-10',
   status: 'open',
   teams: ['it', 'development', 'growth'],
-  enabledStandardFields: ['name', 'email', 'gender', 'university', 'program'],
+  enabledStandardFields: [
+    'name', 'email', 'gender', 'university', 'program', 'graduationYear',
+    'linkedin', 'resume', 'interests', 'teamRanking', 'weeklyHours', 'motivation',
+  ],
 }
 
 describe('TeamApplicationPage', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    mockSubscribeToCampaignQuestions.mockImplementation(() => jest.fn())
   })
 
   it('shows loading state when no campaigns', () => {
@@ -53,6 +58,7 @@ describe('TeamApplicationPage', () => {
     mockUseApp.mockReturnValue({
       state: {
         ...defaultAppState,
+        campaignsLoaded: true,
         campaigns: [{ ...sampleCampaign, status: 'closed' }],
       },
       dispatch: jest.fn(),
@@ -137,5 +143,64 @@ describe('TeamApplicationPage', () => {
     fireEvent.change(screen.getByPlaceholderText(/Tell us why you want to join/), { target: { value: 'I am excited to contribute to AI.' } })
     fireEvent.click(screen.getByText('Continue'))
     expect(screen.getByRole('heading', { name: /Review & Submit/i, level: 2 })).toBeInTheDocument()
+  })
+
+  it('hides standard fields that the campaign has disabled', () => {
+    const limitedCampaign: ApplicationCampaign = {
+      ...sampleCampaign,
+      enabledStandardFields: ['name', 'email'],
+    }
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [limitedCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    fireEvent.click(screen.getByText('Continue'))
+    // Name/email still render, but disabled fields (LinkedIn, etc.) do not
+    expect(screen.getByLabelText(/Full name/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/^Email/i)).toBeInTheDocument()
+    expect(screen.queryByLabelText(/LinkedIn URL/i)).not.toBeInTheDocument()
+    expect(screen.queryByText('Areas of Interest')).not.toBeInTheDocument()
+    // Continue is enabled without filling the disabled LinkedIn/interests fields
+    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
+    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
+    fireEvent.click(screen.getByText('Continue'))
+    fireEvent.click(screen.getByText('Continue'))
+    expect(screen.getByRole('heading', { name: /Team Selection/i, level: 2 })).toBeInTheDocument()
+  })
+
+  it('shows applications closed when the campaign deadline has passed', () => {
+    mockUseApp.mockReturnValue({
+      state: {
+        ...defaultAppState,
+        campaignsLoaded: true,
+        campaigns: [{ ...sampleCampaign, deadline: '2020-01-01' }],
+      },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    expect(screen.getByText('Applications Closed')).toBeInTheDocument()
+    expect(screen.queryByText('Continue')).not.toBeInTheDocument()
+  })
+
+  it('blocks advancing when a required custom question is unanswered', () => {
+    mockSubscribeToCampaignQuestions.mockImplementation((_id: string, cb: (qs: unknown[]) => void) => {
+      cb([{ id: 'q1', question: 'Why do you want to join?', required: true, type: 'textarea' }])
+      return jest.fn()
+    })
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [sampleCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    fireEvent.click(screen.getByText('Continue'))
+    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
+    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
+    fireEvent.click(screen.getByText('Continue'))
+    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), { target: { value: 'https://linkedin.com/in/alice' } })
+    fireEvent.click(screen.getByLabelText('Robotics'))
+    expect(screen.getByRole('button', { name: /Continue/i })).toBeDisabled()
+    fireEvent.change(screen.getByLabelText(/Why do you want to join/), { target: { value: 'I love AI.' } })
+    expect(screen.getByRole('button', { name: /Continue/i })).toBeEnabled()
   })
 })

@@ -8,14 +8,14 @@ import {
   GraduationCap, Briefcase, Tag, Lock, Loader2,
 } from "lucide-react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { FieldGroup, InputBase, SelectBase, TextareaBase } from "@/components/ui/Form";
-import FloatingSymbolsCanvas from "@/components/FloatingSymbolsCanvas";
 import MultiStepWizard, { WizardStep } from "@/components/ui/MultiStepWizard";
 import TeamRanker, { type TeamRankEntry } from "@/components/ui/TeamRanker";
-import { LinkedInUrlInput } from "@/components/ui/LinkedInUrlInput";
+import { LinkedInUrlInput, LINKEDIN_PREFIX } from "@/components/ui/LinkedInUrlInput";
 import TagComponent from "@/components/ui/Tag";
 import PDFDropzone from "@/components/ui/PDFDropzone";
 import { useApp } from "@/contexts/AppContext";
@@ -30,6 +30,11 @@ import {
   AREAS_OF_INTEREST,
   MOTIVATION_MAX_CHARS,
 } from "./apply/sampleData";
+
+const FloatingSymbolsCanvas = dynamic(
+  () => import("@/components/FloatingSymbolsCanvas"),
+  { ssr: false }
+);
 
 const TEAM_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   it: Server,
@@ -58,6 +63,11 @@ const TEAM_NAMES: Record<string, string> = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const DEFAULT_STANDARD_FIELDS = [
+  "name", "email", "gender", "university", "program", "graduationYear",
+  "linkedin", "resume", "interests", "teamRanking", "weeklyHours", "motivation",
+];
 
 interface TeamFormData {
   name: string;
@@ -95,7 +105,28 @@ export default function TeamApplicationPage() {
   // Find the first open campaign
   const campaign: ApplicationCampaign | null = state.campaigns.find((c) => c.status === "open") || null;
 
+  // Which standard fields this campaign actually wants shown/required
+  const enabledFields = campaign?.enabledStandardFields?.length
+    ? campaign.enabledStandardFields
+    : DEFAULT_STANDARD_FIELDS;
+  const fieldEnabled = (id: string) => enabledFields.includes(id);
+
   const [step, setStep] = useState(0);
+
+  // Campaign deadline passed — lock the form
+  const [deadlinePassed, setDeadlinePassed] = useState(false);
+  useEffect(() => {
+    if (!campaign?.deadline) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setDeadlinePassed(false);
+      return;
+    }
+    const ms = Date.parse(campaign.deadline);
+    // eslint-disable-next-line react-hooks/purity -- reading the clock inside an effect is intentional
+    const passed = !Number.isNaN(ms) && ms <= Date.now();
+    setDeadlinePassed(passed);
+  }, [campaign]);
+  const isPastDeadline = deadlinePassed;
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState<TeamFormData>(emptyForm);
@@ -104,6 +135,8 @@ export default function TeamApplicationPage() {
   const [customQuestions, setCustomQuestions] = useState<CampaignQuestion[]>([]);
 
   // Check if the current user has already applied to this campaign
+  // Best-effort: only reliable for admins (state is populated) or when the
+  // direct query succeeds; the server 409 is the authoritative enforcement.
   const [hasApplied, setHasApplied] = useState(false);
   useEffect(() => {
     if (!campaign?.id || !form.email) {
@@ -111,20 +144,21 @@ export default function TeamApplicationPage() {
       setHasApplied(false);
       return;
     }
-    let cancelled = false;
     const emailNorm = form.email.trim().toLowerCase();
-    // First check from reactive state if available (fast path)
+    // First check from reactive state if available (fast path, admin only)
     if (state.teamApplications.some(
       (a) => a.emailNormalized === emailNorm && a.campaignId === campaign.id
     )) {
       setHasApplied(true);
       return;
     }
-    // Fallback: direct Firestore query for non-admin users
-    getTeamApplicationByEmail(emailNorm, campaign.id).then((app) => {
-      if (!cancelled) setHasApplied(!!app);
-    });
-    return () => { cancelled = true; };
+    // Debounce so typing an email doesn't swap the page mid-entry
+    const t = setTimeout(() => {
+      getTeamApplicationByEmail(emailNorm, campaign.id)
+        .then((app) => setHasApplied(!!app))
+        .catch(() => setHasApplied(false));
+    }, 600);
+    return () => clearTimeout(t);
   }, [campaign?.id, form.email, state.teamApplications]);
 
 
@@ -213,6 +247,10 @@ export default function TeamApplicationPage() {
   const handleSubmit = async () => {
     if (!form.agree) return;
     if (!campaign) return;
+    if (hasApplied) {
+      notify({ type: "error", title: "Already applied", message: "You have already submitted an application for this campaign." });
+      return;
+    }
     if (!auth.currentUser) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { resume: _resume, ...rest } = form;
@@ -226,26 +264,29 @@ export default function TeamApplicationPage() {
       fd.append("campaignId", campaign.id);
       fd.append("name", form.name);
       fd.append("email", form.email);
-      fd.append("gender", form.gender);
-      fd.append("university", form.university);
-      fd.append("program", form.program);
-      fd.append("graduationYear", form.expectedGraduationYear);
-      fd.append("linkedin", form.linkedin);
-      fd.append("customTeam", form.customTeam);
-      fd.append("weeklyHours", String(form.weeklyHours));
-      fd.append("motivation", form.motivation);
+      if (fieldEnabled("gender")) fd.append("gender", form.gender);
+      if (fieldEnabled("university")) fd.append("university", form.university);
+      if (fieldEnabled("program")) fd.append("program", form.program);
+      if (fieldEnabled("graduationYear")) fd.append("graduationYear", form.expectedGraduationYear);
+      if (fieldEnabled("linkedin")) fd.append("linkedin", form.linkedin);
+      if (fieldEnabled("teamRanking")) fd.append("customTeam", form.customTeam);
+      if (fieldEnabled("weeklyHours")) fd.append("weeklyHours", String(form.weeklyHours));
+      if (fieldEnabled("motivation")) fd.append("motivation", form.motivation);
       fd.append("agree", String(form.agree));
       fd.append("newsletter", String(form.newsletter));
-      fd.append("interests", JSON.stringify(form.interests));
-      fd.append("customInterest", form.customInterest);
-      fd.append("teamRanking", JSON.stringify(form.teamRanking.map((t) => t.id)));
+      if (fieldEnabled("interests")) {
+        fd.append("interests", JSON.stringify(form.interests));
+        fd.append("customInterest", form.customInterest);
+      }
+      if (fieldEnabled("teamRanking")) fd.append("teamRanking", JSON.stringify(form.teamRanking.map((t) => t.id)));
       fd.append("customAnswers", JSON.stringify(form.customAnswers));
-      if (form.resume) fd.append("resume", form.resume, form.resume.name);
+      if (fieldEnabled("resume") && form.resume) fd.append("resume", form.resume, form.resume.name);
 
       const res = await fetch("/api/applications", { method: "POST", body: fd });
       const json = await res.json();
       if (!res.ok) {
         notify({ type: "error", title: "Submission failed", message: json?.error || "Unknown error" });
+        if (json?.code === "DUPLICATE_CAMPAIGN") setHasApplied(true);
         return;
       }
       setSubmitted(true);
@@ -258,8 +299,8 @@ export default function TeamApplicationPage() {
     }
   };
 
-  // No open campaigns
-  if (state.campaigns.length > 0 && !campaign) {
+  // No open campaigns (loaded, but none are currently open)
+  if (state.campaignsLoaded && !campaign) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300 flex items-center">
         <div className="max-w-md mx-auto px-4 text-center">
@@ -329,17 +370,43 @@ export default function TeamApplicationPage() {
     );
   }
 
-  // If not signed in, show login prompt (the form requires auth to POST)
-  if (!authLoading && !profile && !form.email) {
-    // Continue rendering — they can fill it but submission will require sign-in
-    // We'll show a small note reminding them to sign in
+  // Campaign deadline has passed
+  if (isPastDeadline) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300 flex items-center">
+        <div className="max-w-md mx-auto px-4 text-center">
+          <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-950/30 flex items-center justify-center mx-auto mb-6">
+            <Clock className="h-8 w-8 text-red-600 dark:text-red-400" />
+          </div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Applications Closed</h1>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">
+            The application deadline for{" "}
+            <strong className="text-red-600 dark:text-red-400">{campaign.title}</strong>&nbsp;has passed
+            ({campaign.deadline}). We&apos;re no longer accepting submissions.
+          </p>
+          <Link href="/">
+            <Button variant="outline">Back to home</Button>
+          </Link>
+        </div>
+      </div>
+    );
   }
+
+  // If not signed in, the form still renders but submission will require
+  // sign-in (redirect handled in handleSubmit).
+  const requiredCustomAnswered = customQuestions
+    .filter((q) => q.required)
+    .every((q) => {
+      const ans = form.customAnswers[q.id];
+      if (Array.isArray(ans)) return ans.length > 0;
+      return typeof ans === "string" && ans.trim().length > 0;
+    });
 
   const canNext =
     step === 0 ? true :
     step === 1 ? !!form.name.trim() && EMAIL_RE.test(form.email.trim()) :
-    step === 2 ? !!form.linkedin.trim() && form.linkedin !== "https://" && (form.interests.length > 0 || !!form.customInterest.trim()) :
-    step === 3 ? form.motivation.trim().length >= 25 && form.teamRanking.length >= 1 :
+    step === 2 ? (!fieldEnabled("linkedin") || form.linkedin.trim().length > LINKEDIN_PREFIX.length) && (!fieldEnabled("interests") || form.interests.length > 0 || !!form.customInterest.trim()) && requiredCustomAnswered :
+    step === 3 ? (!fieldEnabled("motivation") || form.motivation.trim().length >= 25) && (!fieldEnabled("teamRanking") || form.teamRanking.length >= 1) :
     true;
 
   return (
@@ -379,7 +446,7 @@ export default function TeamApplicationPage() {
       )}
 
       {/* Wizard */}
-      <div ref={wizardRef} className="scroll-mt-24 py-12 bg-gray-50 dark:bg-gray-900 min-h-screen">
+      <div id="wizard" ref={wizardRef} className="scroll-mt-24 py-12 bg-gray-50 dark:bg-gray-900 min-h-screen">
         <MultiStepWizard
           steps={WIZARD_STEPS}
           currentStep={step}
@@ -462,46 +529,56 @@ export default function TeamApplicationPage() {
                       <InputBase type="email" maxLength={254} value={form.email} onChange={(e) => set("email", e.target.value)} />
                     </FieldGroup>
                   </div>
-                  <FieldGroup label="Gender" requiredHint="Optional.">
-                    <SelectBase value={form.gender} onChange={(e) => set("gender", e.target.value)}>
-                      <option value="">Prefer not to say</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="nonbinary">Non-binary</option>
-                      <option value="other">Other</option>
-                    </SelectBase>
-                  </FieldGroup>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <FieldGroup label="University" requiredHint="Required if student.">
-                      <SelectBase value={form.university} onChange={(e) => set("university", e.target.value)}>
-                        <option value="Uppsala">Uppsala University</option>
-                        <option value="none">None</option>
+                  {fieldEnabled("gender") && (
+                    <FieldGroup label="Gender" requiredHint="Optional.">
+                      <SelectBase value={form.gender} onChange={(e) => set("gender", e.target.value)}>
+                        <option value="">Prefer not to say</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="nonbinary">Non-binary</option>
                         <option value="other">Other</option>
                       </SelectBase>
                     </FieldGroup>
-                    <FieldGroup label="Programme" requiredHint="Required if student.">
-                      <SelectBase value={form.program} onChange={(e) => set("program", e.target.value)}>
-                        <option value="">Select a programme</option>
-                        {UU_PROGRAMMES.map((prog) => (
-                          <option key={prog} value={prog}>{prog}</option>
-                        ))}
-                      </SelectBase>
+                  )}
+                  {(fieldEnabled("university") || fieldEnabled("program")) && (
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {fieldEnabled("university") && (
+                        <FieldGroup label="University" requiredHint="Required if student.">
+                          <SelectBase value={form.university} onChange={(e) => set("university", e.target.value)}>
+                            <option value="Uppsala">Uppsala University</option>
+                            <option value="none">None</option>
+                            <option value="other">Other</option>
+                          </SelectBase>
+                        </FieldGroup>
+                      )}
+                      {fieldEnabled("program") && (
+                        <FieldGroup label="Programme" requiredHint="Required if student.">
+                          <SelectBase value={form.program} onChange={(e) => set("program", e.target.value)}>
+                            <option value="">Select a programme</option>
+                            {UU_PROGRAMMES.map((prog) => (
+                              <option key={prog} value={prog}>{prog}</option>
+                            ))}
+                          </SelectBase>
+                        </FieldGroup>
+                      )}
+                    </div>
+                  )}
+                  {fieldEnabled("graduationYear") && (
+                    <FieldGroup label="Expected graduation year" requiredHint="Optional">
+                      <InputBase
+                        type="number"
+                        min={1900}
+                        max={2100}
+                        maxLength={4}
+                        placeholder="e.g. 2027"
+                        value={form.expectedGraduationYear}
+                        onChange={(e) => {
+                          const v = e.target.value;
+                          if (v.length <= 4) set("expectedGraduationYear", v);
+                        }}
+                      />
                     </FieldGroup>
-                  </div>
-                  <FieldGroup label="Expected graduation year" requiredHint="Optional">
-                    <InputBase
-                      type="number"
-                      min={1900}
-                      max={2100}
-                      maxLength={4}
-                      placeholder="e.g. 2027"
-                      value={form.expectedGraduationYear}
-                      onChange={(e) => {
-                        const v = e.target.value;
-                        if (v.length <= 4) set("expectedGraduationYear", v);
-                      }}
-                    />
-                  </FieldGroup>
+                  )}
                 </div>
               </Card>
             </div>
@@ -518,20 +595,25 @@ export default function TeamApplicationPage() {
               </div>
               <Card>
                 <div className="p-6 space-y-5">
-                  <FieldGroup label="LinkedIn URL" requiredHint="Required.">
-                    <LinkedInUrlInput value={form.linkedin} onChange={(v) => set("linkedin", v)} />
-                  </FieldGroup>
-                  <div>
-                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Resume / CV (PDF, max 3MB) <span className="text-[11px] font-normal text-gray-500">Optional.</span>
-                    </label>
-                    <PDFDropzone
-                      file={form.resume}
-                      onChange={(f) => set("resume", f)}
-                      onError={(msg) => notify({ type: "error", title: "Resume upload", message: msg })}
-                    />
-                  </div>
-                  <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+                  {fieldEnabled("linkedin") && (
+                    <FieldGroup label="LinkedIn URL" requiredHint="Required.">
+                      <LinkedInUrlInput value={form.linkedin} onChange={(v) => set("linkedin", v)} />
+                    </FieldGroup>
+                  )}
+                  {fieldEnabled("resume") && (
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Resume / CV (PDF, max 3MB) <span className="text-[11px] font-normal text-gray-500">Optional.</span>
+                      </label>
+                      <PDFDropzone
+                        file={form.resume}
+                        onChange={(f) => set("resume", f)}
+                        onError={(msg) => notify({ type: "error", title: "Resume upload", message: msg })}
+                      />
+                    </div>
+                  )}
+                  {fieldEnabled("interests") && (
+                    <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
                     <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-1 mt-4">
                       Areas of Interest
                     </h3>
@@ -590,6 +672,7 @@ export default function TeamApplicationPage() {
                       {form.interests.length} area{form.interests.length !== 1 ? "s" : ""} selected
                     </p>
                   </div>
+                  )}
 
                   {/* Custom questions */}
                   {customQuestions.length > 0 && (
@@ -685,70 +768,76 @@ export default function TeamApplicationPage() {
               </div>
               <Card>
                 <div className="p-6 space-y-6">
-                  <TeamRanker
-                    ranking={form.teamRanking}
-                    onChange={(ranking) => set("teamRanking", ranking)}
-                    availableTeamIds={campaign.teams}
-                    teamName={(id) => (campaign.teamInfo?.[id]?.name || TEAM_NAMES[id] || id)}
-                    iconMap={TEAM_ICONS}
-                    customTeam={form.customTeam}
-                    onCustomTeamChange={(val) => set("customTeam", val)}
-                  />
-                  <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
-                      Weekly Availability
-                    </h3>
-                    <div className="flex items-start gap-4">
-                      <div className="flex-1 min-w-0">
-                        <input
-                          type="range"
-                          min={0}
-                          max={12}
-                          step={1}
-                          value={form.weeklyHours}
-                          onChange={(e) => set("weeklyHours", Number(e.target.value))}
-                          className="w-full accent-red-600 dark:accent-red-500"
-                        />
-                        {/* Labels aligned under the slider (this column only) */}
-                        <div className="flex justify-between text-xs text-gray-400 dark:text-gray-500 mt-1">
-                          <span>Casual</span>
-                          <span>Few hrs</span>
-                          <span>Committed</span>
-                          <span>Very active</span>
+                  {fieldEnabled("teamRanking") && (
+                    <TeamRanker
+                      ranking={form.teamRanking}
+                      onChange={(ranking) => set("teamRanking", ranking)}
+                      availableTeamIds={campaign.teams}
+                      teamName={(id) => (campaign.teamInfo?.[id]?.name || TEAM_NAMES[id] || id)}
+                      iconMap={TEAM_ICONS}
+                      customTeam={form.customTeam}
+                      onCustomTeamChange={(val) => set("customTeam", val)}
+                    />
+                  )}
+                  {fieldEnabled("weeklyHours") && (
+                    <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+                        Weekly Availability
+                      </h3>
+                      <div className="flex items-start gap-4">
+                        <div className="flex-1 min-w-0">
+                          <input
+                            type="range"
+                            min={0}
+                            max={12}
+                            step={1}
+                            value={form.weeklyHours}
+                            onChange={(e) => set("weeklyHours", Number(e.target.value))}
+                            className="w-full accent-red-600 dark:accent-red-500"
+                          />
+                          {/* Labels aligned under the slider (this column only) */}
+                          <div className="flex justify-between text-xs text-gray-400 dark:text-gray-500 mt-1">
+                            <span>Casual</span>
+                            <span>Few hrs</span>
+                            <span>Committed</span>
+                            <span>Very active</span>
+                          </div>
+                        </div>
+                        <div className="shrink-0 min-w-[8rem] text-right pt-1">
+                          <span className="text-lg font-bold text-red-600 dark:text-red-400">
+                            {form.weeklyHours}
+                          </span>
+                          <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">
+                            hour{form.weeklyHours !== 1 ? "s" : ""}/week
+                          </span>
                         </div>
                       </div>
-                      <div className="shrink-0 min-w-[8rem] text-right pt-1">
-                        <span className="text-lg font-bold text-red-600 dark:text-red-400">
-                          {form.weeklyHours}
-                        </span>
-                        <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">
-                          hour{form.weeklyHours !== 1 ? "s" : ""}/week
-                        </span>
-                      </div>
                     </div>
-                  </div>
-                  <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <FieldGroup label="Personal motivation" requiredHint="Required.">
-                      <TextareaBase
-                        placeholder="Tell us why you want to join UU AI Society and what you hope to contribute."
-                        value={form.motivation}
-                        onChange={(e) => set("motivation", e.target.value)}
-                        maxLength={MOTIVATION_MAX_CHARS}
-                        rows={5}
-                      />
-                    </FieldGroup>
-                    <p className={`text-xs mt-1 ${
-                      (form.motivation || "").length > MOTIVATION_MAX_CHARS ? "text-red-600" :
-                      (form.motivation || "").trim().length < 25 && (form.motivation || "").length > 0 ? "text-amber-600" :
-                      "text-gray-500"
-                    }`}>
-                      {(form.motivation || "").trim().length < 25 && (form.motivation || "").length > 0
-                        ? `Need ${25 - form.motivation.trim().length} more characters — `
-                        : ""
-                      }
-                      {(form.motivation || "").length} / {MOTIVATION_MAX_CHARS} characters
-                    </p>
-                  </div>
+                  )}
+                  {fieldEnabled("motivation") && (
+                    <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                      <FieldGroup label="Personal motivation" requiredHint="Required.">
+                        <TextareaBase
+                          placeholder="Tell us why you want to join UU AI Society and what you hope to contribute."
+                          value={form.motivation}
+                          onChange={(e) => set("motivation", e.target.value)}
+                          maxLength={MOTIVATION_MAX_CHARS}
+                          rows={5}
+                        />
+                      </FieldGroup>
+                      <p className={`text-xs mt-1 ${
+                        (form.motivation || "").length > MOTIVATION_MAX_CHARS ? "text-red-600" :
+                        (form.motivation || "").trim().length < 25 && (form.motivation || "").length > 0 ? "text-amber-600" :
+                        "text-gray-500"
+                      }`}>
+                        {(form.motivation || "").trim().length < 25 && (form.motivation || "").length > 0
+                          ? `Need ${25 - form.motivation.trim().length} more characters — `
+                          : ""
+                        }
+                        {(form.motivation || "").length} / {MOTIVATION_MAX_CHARS} characters
+                      </p>
+                    </div>
+                  )}
                 </div>
               </Card>
             </div>
@@ -768,14 +857,15 @@ export default function TeamApplicationPage() {
                   <SummarySection icon={GraduationCap} title="Profile">
                     <SummaryRow label="Name" value={form.name} />
                     <SummaryRow label="Email" value={form.email} />
-                    <SummaryRow label="Gender" value={form.gender || "Prefer not to say"} />
-                    <SummaryRow label="University" value={form.university === "Uppsala" ? "Uppsala University" : form.university} />
-                    <SummaryRow label="Programme" value={form.program || "—"} />
-                    <SummaryRow label="Graduation year" value={form.expectedGraduationYear || "—"} />
+                    {fieldEnabled("gender") && <SummaryRow label="Gender" value={form.gender || "Prefer not to say"} />}
+                    {fieldEnabled("university") && <SummaryRow label="University" value={form.university === "Uppsala" ? "Uppsala University" : form.university} />}
+                    {fieldEnabled("program") && <SummaryRow label="Programme" value={form.program || "—"} />}
+                    {fieldEnabled("graduationYear") && <SummaryRow label="Graduation year" value={form.expectedGraduationYear || "—"} />}
                   </SummarySection>
                   <SummarySection icon={Briefcase} title="Experience & Interests">
-                    <SummaryRow label="LinkedIn" value={form.linkedin} />
-                    <SummaryRow label="Resume" value={form.resume?.name || "Not uploaded"} />
+                    {fieldEnabled("linkedin") && <SummaryRow label="LinkedIn" value={form.linkedin} />}
+                    {fieldEnabled("resume") && <SummaryRow label="Resume" value={form.resume?.name || "Not uploaded"} />}
+                    {fieldEnabled("interests") && (
                     <div className="flex flex-wrap gap-2 pt-1">
                       {form.interests.map((id) => {
                         const area = AREAS_OF_INTEREST.find((a) => a.id === id);
@@ -784,6 +874,7 @@ export default function TeamApplicationPage() {
                       {form.customInterest.trim() && <TagComponent key="custom-interest" variant="red" size="sm">{form.customInterest}</TagComponent>}
                       {form.interests.length === 0 && !form.customInterest.trim() && <span className="text-sm text-gray-400">No areas selected</span>}
                     </div>
+                    )}
                     {customQuestions.length > 0 && (
                       <div className="pt-2">
                         <span className="text-xs font-medium text-gray-500 uppercase">Additional answers</span>
@@ -801,7 +892,7 @@ export default function TeamApplicationPage() {
                     )}
                   </SummarySection>
                   <SummarySection icon={User} title="Team Selection">
-                    {form.teamRanking.map((team, idx) => (
+                    {fieldEnabled("teamRanking") && form.teamRanking.map((team, idx) => (
                       <div key={team.id} className="flex items-center gap-3 py-1">
                         <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold ${
                           idx === 0 ? "bg-red-600 text-white" : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
@@ -811,13 +902,15 @@ export default function TeamApplicationPage() {
                         <span className="text-sm text-gray-900 dark:text-white">{team.custom ? `${team.name}${form.customTeam ? `: ${form.customTeam}` : ""}` : team.name}</span>
                       </div>
                     ))}
-                    <SummaryRow label="Availability" value={`${form.weeklyHours} hour${form.weeklyHours !== 1 ? "s" : ""} per week`} />
+                    {fieldEnabled("weeklyHours") && <SummaryRow label="Availability" value={`${form.weeklyHours} hour${form.weeklyHours !== 1 ? "s" : ""} per week`} />}
+                    {fieldEnabled("motivation") && (
                     <div className="pt-2">
                       <span className="text-xs font-medium text-gray-500 uppercase">Motivation</span>
                       <p className="text-sm text-gray-900 dark:text-white whitespace-pre-wrap mt-1">
                         {form.motivation || "—"}
                       </p>
                     </div>
+                    )}
                   </SummarySection>
                   <label className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300 pt-2 border-t border-gray-200 dark:border-gray-700">
                     <input type="checkbox" checked={form.agree} onChange={(e) => set("agree", e.target.checked)} className="mt-0.5 accent-red-600" />
@@ -834,8 +927,7 @@ export default function TeamApplicationPage() {
                       className="mt-0.5 accent-red-600"
                     />
                     <span>
-                      Also sign me up for the{" "}
-                      <Link href="/" className="text-blue-600 dark:text-blue-400 hover:underline">UU AI Society newsletter</Link>&nbsp;
+                      Also sign me up for the UU AI Society newsletter{" "}
                       <span className="text-gray-500 dark:text-gray-400">(optional)</span>
                     </span>
                   </label>
