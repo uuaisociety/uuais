@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   Plus, Edit3, Trash2, Eye, ChevronDown, ChevronUp, Calendar,
   Users, FileQuestion, Search, ArrowLeft,
@@ -9,8 +9,9 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import Tag from "@/components/ui/Tag";
-import { InputBase } from "@/components/ui/Form";
+import { InputBase, SelectBase } from "@/components/ui/Form";
 import ConfirmModal from "@/components/ui/ConfirmModal";
+import { subscribeToCampaignQuestions } from "@/lib/firestore/campaignQuestions";
 import {
   ApplicationCampaign, TeamApplication, CampaignStatus,
 } from "@/types";
@@ -27,6 +28,14 @@ const STATUS_STYLES: Record<CampaignStatus, { label: string; tagVariant: "green"
   open: { label: "Open", tagVariant: "green" },
   closed: { label: "Closed", tagVariant: "red" },
   draft: { label: "Draft", tagVariant: "yellow" },
+};
+
+const STATUS_ORDER: CampaignStatus[] = ["open", "draft", "closed"];
+
+const STATUS_TOGGLE_ACTIVE: Record<CampaignStatus, string> = {
+  open: "bg-green-600 text-white border-green-600",
+  draft: "bg-yellow-500 text-white border-yellow-500",
+  closed: "bg-gray-600 text-white border-gray-600",
 };
 
 const formatDate = (createdAt: TeamApplication["createdAt"]): string => {
@@ -54,11 +63,12 @@ interface ApplicationsTabProps {
   onAddCampaign: () => void;
   onEditCampaign: (campaign: ApplicationCampaign) => void;
   onDeleteCampaign: (id: string) => void;
+  onUpdateCampaignStatus: (id: string, status: CampaignStatus) => void;
   onDeleteApplication: (id: string, emailNormalized: string, campaignId: string) => void;
 }
 
 const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
-  campaigns, applications, onAddCampaign, onEditCampaign, onDeleteCampaign, onDeleteApplication,
+  campaigns, applications, onAddCampaign, onEditCampaign, onDeleteCampaign, onUpdateCampaignStatus, onDeleteApplication,
 }) => {
   const [filter, setFilter] = useState<"all" | CampaignStatus>("all");
   const [view, setView] = useState<"campaigns" | "submissions">("campaigns");
@@ -68,6 +78,23 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
   const [teamFilter, setTeamFilter] = useState<string>("all");
   const [confirmDeleteCampaign, setConfirmDeleteCampaign] = useState<ApplicationCampaign | null>(null);
   const [confirmDeleteApp, setConfirmDeleteApp] = useState<TeamApplication | null>(null);
+
+  // Load the selected campaign's questions so admins see readable labels for
+  // custom answers (falls back to the raw question id while loading).
+  const [questionsByCampaign, setQuestionsByCampaign] = useState<{ campaignId: string; questions: { id: string; question: string }[] } | null>(null);
+  useEffect(() => {
+    if (!selectedCampaign) return;
+    let active = true;
+    const unsub = subscribeToCampaignQuestions(selectedCampaign.id, (questions) => {
+      if (active) setQuestionsByCampaign({ campaignId: selectedCampaign.id, questions });
+    });
+    return () => { active = false; unsub(); };
+  }, [selectedCampaign]);
+
+  const questionMap = useMemo(() => {
+    if (!selectedCampaign || questionsByCampaign?.campaignId !== selectedCampaign.id) return null;
+    return new Map(questionsByCampaign.questions.map((q) => [q.id, q.question]));
+  }, [questionsByCampaign, selectedCampaign]);
 
   const filtered = filter === "all" ? campaigns : campaigns.filter((c) => c.status === filter);
   const counts = {
@@ -103,7 +130,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
 
   if (view === "submissions") {
     return (
-      <div>
+      <div key="submissions" className="animate-in fade-in slide-in-from-right-4 duration-300 ease-out">
         <div className="flex items-center gap-3 mb-6">
           <Button size="sm" icon={ArrowLeft} onClick={() => { setView("campaigns"); setSelectedCampaign(null); }}>Back to campaigns</Button>
           <div>
@@ -124,16 +151,16 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">Filter by team:</span>
-            <select
+            <SelectBase
               value={teamFilter}
               onChange={(e) => setTeamFilter(e.target.value)}
-              className="rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-auto min-w-[140px]"
             >
               <option value="all">All teams</option>
               {Object.entries(TEAM_NAMES).map(([id, name]) => (
                 <option key={id} value={id}>{name}</option>
               ))}
-            </select>
+            </SelectBase>
           </div>
         </div>
 
@@ -201,9 +228,10 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
                               <div className="space-y-2">
                                 {Object.entries(submission.customAnswers).map(([k, v]) => {
                                   const display = Array.isArray(v) ? v.join(", ") : v;
+                                  const label = questionMap?.get(k) || k;
                                   return (
                                     <div key={k}>
-                                      <span className="text-xs font-medium text-gray-600 dark:text-gray-400">{k}</span>
+                                      <span className="text-xs font-medium text-gray-600 dark:text-gray-400">{label}</span>
                                       <p className="text-sm text-gray-700 dark:text-gray-300 mt-0.5">{display || <span className="italic text-gray-400">No answer</span>}</p>
                                     </div>
                                   );
@@ -235,7 +263,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
 
   // Campaigns list view
   return (
-    <div>
+    <div key="campaigns" className="animate-in fade-in slide-in-from-right-4 duration-300 ease-out">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Application Campaigns</h1>
@@ -254,7 +282,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors duration-200 ${
+              className={`px-4 py-2 text-sm font-medium border-b-2 transition-all duration-200 ${
                 isActive ? "border-red-600 text-red-600 dark:text-red-400" : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
               }`}
             >
@@ -274,7 +302,6 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
           </div>
         ) : (
           filtered.map((c) => {
-            const status = STATUS_STYLES[c.status];
             const subCount = applications.filter((s) => s.campaignId === c.id).length;
             return (
               <Card key={c.id} className="bg-white dark:bg-gray-800">
@@ -283,7 +310,32 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
                     <div className="flex-1 min-w-0">
                       <div className="flex flex-wrap items-center gap-2 mb-2">
                         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{c.title}</h2>
-                        <Tag variant={status.tagVariant} size="sm">{status.label}</Tag>
+                        <div
+                          role="group"
+                          aria-label={`Status for ${c.title}`}
+                          className="relative inline-flex items-center rounded-full border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-0.5"
+                        >
+                          <span
+                            aria-hidden
+                            className={`absolute inset-y-0.5 left-0.5 w-[calc((100%_-_4px)/3)] rounded-full shadow-sm transition-all duration-300 ease-out ${STATUS_TOGGLE_ACTIVE[c.status]}`}
+                            style={{ transform: `translateX(${STATUS_ORDER.indexOf(c.status) * 100}%)` }}
+                          />
+                          {STATUS_ORDER.map((s) => (
+                            <button
+                              key={s}
+                              type="button"
+                              onClick={() => onUpdateCampaignStatus(c.id, s)}
+                              aria-pressed={c.status === s}
+                              className={`relative z-10 flex-1 px-2.5 py-1 text-xs font-medium rounded-full transition-all duration-300 cursor-pointer ${
+                                c.status === s
+                                  ? "text-white"
+                                  : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+                              }`}
+                            >
+                              {STATUS_STYLES[s].label}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">{c.subtitle} · {c.description}</p>
                       <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 dark:text-gray-400">

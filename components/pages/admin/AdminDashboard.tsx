@@ -48,6 +48,15 @@ const AdminDashboard: React.FC = () => {
     }
     return 'events';
   });
+  // Slide direction for the tab-content transition: content enters from the
+  // side the clicked tab is on relative to the currently active tab.
+  const [slideFrom, setSlideFrom] = useState<'right' | 'left'>('right');
+  const changeTab = (next: Tab) => {
+    const curIdx = tabValues.indexOf(activeTab);
+    const nextIdx = tabValues.indexOf(next);
+    setSlideFrom(nextIdx >= curIdx ? 'right' : 'left');
+    setActiveTab(next);
+  };
   const placeholderImage = '/images/logo-highdef.png';
 
   // Modal states
@@ -320,11 +329,11 @@ const AdminDashboard: React.FC = () => {
                 { key: 'jobs', label: 'Jobs', icon: BriefcaseBusiness },
                 { key: 'ai-settings', label: 'AI Settings', icon: Bot },
                 { key: 'applications', label: 'Applications', icon: Users },
-                { key: 'board-applications', label: "GA'26 Board Applications", icon: Users},
+                // { key: 'board-applications', label: "GA'26 Board Applications", icon: Users},
               ] as const).map(({ key, label, icon: Icon }) => (
                 <button
                   key={key}
-                  onClick={() => setActiveTab(key)}
+                  onClick={() => changeTab(key)}
                   className={`cursor-pointer flex items-center py-2 px-3 border-b-2 font-medium text-sm transition-all duration-200 ease-in-out ${activeTab === key
                     ? 'border-red-500 text-red-600 dark:text-red-400'
                     : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
@@ -340,6 +349,10 @@ const AdminDashboard: React.FC = () => {
 
         {/* Tab Content */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 md:p-6">
+          <div
+            key={activeTab}
+            className={`animate-in fade-in duration-300 ease-out ${slideFrom === 'right' ? 'slide-in-from-right-4' : 'slide-in-from-left-4'}`}
+          >
           {activeTab === 'events' && (
             <TabErrorBoundary name="Events">
               <EventsTab
@@ -418,10 +431,12 @@ const AdminDashboard: React.FC = () => {
                 onAddCampaign={() => { setEditingCampaign(null); setShowCampaignModal(true); }}
                 onEditCampaign={(c) => { setEditingCampaign(c); setShowCampaignModal(true); }}
                 onDeleteCampaign={handleDeleteCampaign}
+                onUpdateCampaignStatus={(id, status) => dispatch({ firestoreAction: 'UPDATE_CAMPAIGN', payload: { id, status } })}
                 onDeleteApplication={handleDeleteTeamApplication}
               />
             </TabErrorBoundary>
           )}
+          </div>
 
           {/* Blog Modal */}
           <BlogModal

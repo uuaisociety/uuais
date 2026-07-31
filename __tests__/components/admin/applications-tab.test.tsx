@@ -2,6 +2,10 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import ApplicationsTab from '@/components/pages/admin/tabs/ApplicationsTab'
 import type { ApplicationCampaign, TeamApplication } from '@/types'
 
+jest.mock('@/lib/firestore/campaignQuestions', () => ({
+  subscribeToCampaignQuestions: jest.fn(() => jest.fn()),
+}))
+
 const sampleCampaign: ApplicationCampaign = {
   id: 'spring2026',
   title: 'Spring 2026 Recruitment',
@@ -36,6 +40,7 @@ const baseProps = (overrides: Partial<React.ComponentProps<typeof ApplicationsTa
   onAddCampaign: jest.fn(),
   onEditCampaign: jest.fn(),
   onDeleteCampaign: jest.fn(),
+  onUpdateCampaignStatus: jest.fn(),
   onDeleteApplication: jest.fn(),
   ...overrides,
 })
@@ -109,6 +114,14 @@ describe('ApplicationsTab', () => {
     expect(screen.getByText('Delete campaign?')).toBeInTheDocument()
     fireEvent.click(screen.getByText('Delete'))
     expect(onDeleteCampaign).toHaveBeenCalledWith('spring2026')
+  })
+
+  it('toggles campaign status via the segmented control', () => {
+    const onUpdateCampaignStatus = jest.fn()
+    render(<ApplicationsTab {...baseProps({ campaigns: [sampleCampaign], onUpdateCampaignStatus })} />)
+    // The card's status toggle has a "Draft" button (the filter tab says "Draft 0")
+    fireEvent.click(screen.getByRole('button', { name: 'Draft' }))
+    expect(onUpdateCampaignStatus).toHaveBeenCalledWith('spring2026', 'draft')
   })
 
   it('expands a submission to show motivation on click', () => {

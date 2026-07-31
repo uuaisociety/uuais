@@ -156,6 +156,13 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
       return next;
     });
 
+  const addOption = (id: string) =>
+    setQuestions((prev) => prev.map((q) => (q.id === id ? { ...q, options: [...q.options, ""] } : q)));
+  const updateOption = (id: string, idx: number, value: string) =>
+    setQuestions((prev) => prev.map((q) => (q.id === id ? { ...q, options: q.options.map((o, i) => (i === idx ? value : o)) } : q)));
+  const removeOption = (id: string, idx: number) =>
+    setQuestions((prev) => prev.map((q) => (q.id === id ? { ...q, options: q.options.filter((_, i) => i !== idx) } : q)));
+
   const hasOptions = (t: CustomQuestionType) => t === "select" || t === "radio" || t === "checkbox";
   const STANDARD_FIELDS = [
     { id: "name", label: "Full name" },
@@ -195,30 +202,25 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
         // Delete removed questions
         await Promise.all(removedQuestionIds.map((qid) => deleteCampaignQuestion(qid).catch(() => {})));
 
-        // Upsert remaining questions with fresh order
-        for (let i = 0; i < questions.length; i++) {
-          const q = questions[i];
-          if (!q.question.trim()) continue;
-          const isNewQuestion = q.id.startsWith("new_");
-          if (isNewQuestion) {
-            await addCampaignQuestion({
-              campaignId: targetCampaignId,
-              question: q.question.trim(),
-              type: q.type,
-              options: hasOptions(q.type) ? q.options : [],
-              required: q.required,
-              order: i,
-            });
-          } else {
-            await updateCampaignQuestion(q.id, {
-              question: q.question.trim(),
-              type: q.type,
-              options: hasOptions(q.type) ? q.options : [],
-              required: q.required,
-              order: i,
-            });
-          }
-        }
+        // Upsert remaining questions with fresh order (each write sets its own
+        // order explicitly, so they can be issued in parallel).
+        const upserts: Promise<string | void>[] = [];
+        questions.forEach((q, i) => {
+          if (!q.question.trim()) return;
+          const payload = {
+            question: q.question.trim(),
+            type: q.type,
+            options: hasOptions(q.type) ? q.options.filter((o) => o.trim() !== "") : [],
+            required: q.required,
+            order: i,
+          };
+          upserts.push(
+            q.id.startsWith("new_")
+              ? addCampaignQuestion({ campaignId: targetCampaignId, ...payload })
+              : updateCampaignQuestion(q.id, payload)
+          );
+        });
+        await Promise.all(upserts);
       }
 
       notify({ type: "success", title: isNew ? "Campaign created" : "Campaign updated", message: isNew ? "The campaign is now available." : "Changes saved." });
@@ -233,11 +235,11 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/50 dark:bg-black/70" onClick={onClose} aria-hidden />
+      <div className="absolute inset-0 bg-black/50 dark:bg-black/70 animate-in fade-in duration-300" onClick={onClose} aria-hidden />
       <div
         role="dialog"
         aria-modal="true"
-        className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-lg bg-white dark:bg-gray-800 shadow-2xl"
+        className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-lg bg-white dark:bg-gray-800 shadow-2xl animate-in fade-in zoom-in-95 duration-300 ease-out"
       >
         {/* Header */}
         <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
@@ -316,7 +318,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
               {enabledTeams.length > 0 && (
                 <div className="mt-4 space-y-3">
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Customise the team name and description shown to applicants in step 1. Leave blank to use the default.
+                    Customize the team name and description shown to applicants in step 1. Leave blank to use the default.
                   </p>
                   {enabledTeams.map((id) => {
                     const info = teamInfo[id] || {};
@@ -431,21 +433,40 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                           </label>
                           {hasOptions(q.type) && (
                             <button type="button" onClick={() => toggleOptionsExpanded(q.id)} className="text-xs text-blue-600 dark:text-blue-400 hover:underline">
-                              {expanded ? "Hide options" : `Options (${q.options.length})`}
+                              {expanded ? "Hide options" : `Options (${q.options.filter((o) => o.trim() !== "").length})`}
                             </button>
                           )}
                         </div>
                         {hasOptions(q.type) && expanded && (
-                          <div className="pl-7 mt-3">
-                            <textarea
-                              maxLength={2000}
-                              placeholder="One option per line (e.g. Yes&#10;No&#10;Maybe)"
-                              value={q.options.join("\n")}
-                              onChange={(e) => updateQuestion(q.id, { options: e.target.value.split("\n").filter((o) => o.trim() !== "") })}
-                              rows={4}
-                              className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                            />
-                            <p className="text-xs text-gray-400 mt-1">Type one option per line. These will appear as {q.type === "checkbox" ? "checkboxes" : q.type === "radio" ? "radio buttons" : "dropdown options"}.</p>
+                          <div className="pl-7 mt-3 space-y-2">
+                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                              Each option appears as a {q.type === "checkbox" ? "checkbox" : q.type === "radio" ? "single choice" : "dropdown option"} in the applicant form.
+                            </p>
+                            <ul className="space-y-2">
+                              {q.options.map((opt, oi) => (
+                                <li key={oi} className="flex items-center gap-2">
+                                  <InputBase
+                                    maxLength={200}
+                                    placeholder={`Option ${oi + 1}`}
+                                    value={opt}
+                                    onChange={(e) => updateOption(q.id, oi, e.target.value)}
+                                    ref={(el) => { if (el && oi === q.options.length - 1 && opt === "") el.focus(); }}
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => removeOption(q.id, oi)}
+                                    title="Remove option"
+                                    aria-label={`Remove option ${oi + 1}`}
+                                    className="p-1.5 text-red-500 hover:text-red-600 transition-colors cursor-pointer"
+                                  >
+                                    <X className="h-4 w-4" />
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                            <Button type="button" size="sm" variant="outline" icon={Plus} onClick={() => addOption(q.id)}>
+                              Create new option
+                            </Button>
                           </div>
                         )}
                       </div>
