@@ -1,5 +1,8 @@
 import Link from 'next/link';
 import { ArrowRight, Users, Landmark } from 'lucide-react';
+import { Card } from '@/components/ui/Card';
+import { Tag, type TagVariant } from '@/components/ui/Tag';
+import { Button } from '@/components/ui/Button';
 
 const APPLY_TYPES = [
   {
@@ -25,18 +28,11 @@ const APPLY_TYPES = [
   // },
 ];
 
-function StatusBadge({ status }: { status: string }) {
-  const styles: Record<string, string> = {
-    open: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
-    closed: 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400',
-    'coming soon': 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400',
-  };
-  return (
-    <span className={`inline-block text-xs font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${styles[status] || styles.closed}`}>
-      {status}
-    </span>
-  );
-}
+const STATUS_VARIANT: Record<string, TagVariant> = {
+  open: 'green',
+  closed: 'gray',
+  'coming soon': 'yellow',
+};
 
 export default function ApplyLandingPage() {
   return (
@@ -55,10 +51,13 @@ export default function ApplyLandingPage() {
         <div className="grid gap-6">
           {APPLY_TYPES.map((type) => {
             const Icon = type.icon;
+            const isOpen = type.status === 'open';
             return (
-              <div
+              <Card
                 key={type.slug}
-                className="group relative rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 transition-all duration-200 hover:shadow-lg hover:border-red-300 dark:hover:border-red-700"
+                hover
+                padding="md"
+                className="group relative border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-700"
               >
                 <div className="flex items-start gap-4">
                   <div className="shrink-0 w-12 h-12 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
@@ -67,18 +66,19 @@ export default function ApplyLandingPage() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-1">
                       <h2 className="text-xl font-bold text-gray-900 dark:text-white">{type.title}</h2>
-                      <StatusBadge status={type.status} />
+                      <Tag variant={STATUS_VARIANT[type.status] || 'gray'} size="sm">
+                        {type.status}
+                      </Tag>
                     </div>
                     <p className="text-sm text-gray-500 dark:text-gray-400">{type.description}</p>
                   </div>
                   <div className="shrink-0 pt-1">
-                    {type.status === 'open' ? (
-                      <Link
-                        href={`/apply/${type.slug}`}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition-colors"
-                      >
-                        Apply now <ArrowRight className="h-4 w-4" />
-                      </Link>
+                    {isOpen ? (
+                      <Button asChild size="sm" className="bg-red-600 hover:bg-red-700 text-white">
+                        <Link href={`/apply/${type.slug}`}>
+                          Apply now <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      </Button>
                     ) : (
                       <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 text-sm font-medium cursor-not-allowed">
                         Unavailable
@@ -86,7 +86,7 @@ export default function ApplyLandingPage() {
                     )}
                   </div>
                 </div>
-              </div>
+              </Card>
             );
           })}
         </div>
