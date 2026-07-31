@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowUp, ArrowDown, GripVertical, Server, Code2, Megaphone, CalendarDays, FlaskConical, Rocket } from "lucide-react";
+import { ArrowUp, ArrowDown, GripVertical, Server, Code2, Megaphone, CalendarDays, FlaskConical, Rocket, X } from "lucide-react";
 
 export interface TeamRankEntry {
   id: string;
@@ -75,9 +75,14 @@ const TeamRanker: React.FC<TeamRankerProps> = ({
   };
 
   // Reorder within preferences
-  const handlePrefDragOver = (e: React.DragEvent, idx: number) => { e.preventDefault(); setDragOverIdx(idx); };
+  const handlePrefDragOver = (e: React.DragEvent, idx: number) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    setDragOverIdx(idx);
+  };
   const handlePrefDrop = (e: React.DragEvent, idx: number) => {
     e.preventDefault();
+    e.stopPropagation(); // don't let the container's drop handler also fire
     if (draggedId && available.includes(draggedId)) {
       // Dropped from Available zone into Preferences list at a specific position
       const newEntry = { id: draggedId, name: teamName(draggedId) };
@@ -112,7 +117,7 @@ const TeamRanker: React.FC<TeamRankerProps> = ({
     setDragOverIdx(null);
   };
 
-  const handleDragOver = (e: React.DragEvent) => { e.preventDefault(); setDropZoneOver(true); };
+  const handleDragOver = (e: React.DragEvent) => { e.preventDefault(); e.dataTransfer.dropEffect = "move"; setDropZoneOver(true); };
   const handleDragLeave = () => setDropZoneOver(false);
 
   return (
@@ -121,8 +126,7 @@ const TeamRanker: React.FC<TeamRankerProps> = ({
         Draggable Team Selection
       </h3>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-5">
-        Drag teams between the two zones, or click to quickly add/remove. Order within &ldquo;Your Preferences&rdquo;
-        determines your ranking — #1 = first choice.
+        Click teams to add or remove them, then drag to put them in order — #1 is your first choice.
       </p>
 
       {/* ── Your Preferences zone ── */}
@@ -160,7 +164,7 @@ const TeamRanker: React.FC<TeamRankerProps> = ({
                 <div
                   key={entry.id}
                   draggable
-                  onDragStart={() => setDraggedId(entry.id)}
+                  onDragStart={(e) => { e.dataTransfer.setData("text/plain", entry.id); e.dataTransfer.effectAllowed = "move"; setDraggedId(entry.id); }}
                   onDragOver={(e) => handlePrefDragOver(e, idx)}
                   onDrop={(e) => handlePrefDrop(e, idx)}
                   onDragEnd={() => { setDraggedId(null); setDragOverIdx(null); }}
@@ -191,15 +195,14 @@ const TeamRanker: React.FC<TeamRankerProps> = ({
                     <span className="flex-1 text-sm font-medium text-gray-900 dark:text-white">{entry.name}</span>
                   )}
                   <div className="shrink-0 flex items-center gap-1">
-                    <button type="button" onClick={() => move(idx, idx - 1)} disabled={idx === 0} className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move up">
+                    <button type="button" onClick={() => move(idx, idx - 1)} disabled={idx === 0} className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move up" aria-label={`Move ${entry.name} up`}>
                       <ArrowUp className="h-4 w-4" />
                     </button>
-                    <button type="button" onClick={() => move(idx, idx + 1)} disabled={idx === ranking.length - 1} className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move down">
+                    <button type="button" onClick={() => move(idx, idx + 1)} disabled={idx === ranking.length - 1} className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move down" aria-label={`Move ${entry.name} down`}>
                       <ArrowDown className="h-4 w-4" />
                     </button>
-                    <button type="button" onClick={() => removeTeam(entry.id)} className="p-1 text-red-500 hover:text-red-600 transition-colors" title="Remove from preferences">
-                      <span className="sr-only">Remove {entry.name}</span>
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                    <button type="button" onClick={() => removeTeam(entry.id)} className="p-2 text-red-500 hover:text-red-600 transition-colors" title="Remove from preferences" aria-label={`Remove ${entry.name}`}>
+                      <X className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
@@ -243,7 +246,7 @@ const TeamRanker: React.FC<TeamRankerProps> = ({
                     key={id}
                     type="button"
                     draggable
-                    onDragStart={() => setDraggedId(id)}
+                    onDragStart={(e) => { e.dataTransfer.setData("text/plain", id); e.dataTransfer.effectAllowed = "move"; setDraggedId(id); }}
                     onClick={() => addTeam(id)}
                     title="Drag to Your Preferences, or click to add"
                     className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-red-300 dark:hover:border-red-700 hover:bg-red-50 dark:hover:bg-red-950/20 transition-all duration-200 cursor-grab active:cursor-grabbing"
