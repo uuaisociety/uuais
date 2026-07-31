@@ -98,6 +98,7 @@ import {
   subscribeToPositions, addPosition, updatePosition, deletePosition, movePosition,
 } from '@/lib/firestore/board-positions';
 import { deleteBoardApplication } from '@/lib/firestore/boardApplications';
+import { addCampaign } from '@/lib/firestore/applicationCampaigns';
 import { onIdTokenChanged } from 'firebase/auth';
 
 const mockEvent = { id: 'evt-1', title: 'Test Event', description: 'Desc', location: 'Loc', image: '', category: 'workshop' as const, status: 'upcoming' as const, registrationRequired: false, eventStartAt: '2026-01-01T00:00:00Z' };
@@ -517,6 +518,20 @@ describe('AppContext', () => {
       const returned = await act(async () => result.current.dispatch({ firestoreAction: 'ADD_JOB', payload }));
       expect(addJob).toHaveBeenCalledWith(payload);
       expect(returned).toBe('new-job-id');
+    });
+
+    it('ADD_CAMPAIGN calls addCampaign and returns the id (so custom questions can be saved)', async () => {
+      (addCampaign as jest.Mock).mockResolvedValue('new-campaign-id');
+      const { result } = renderApp();
+      const payload = {
+        title: 'Spring 2026', subtitle: 'Sub', description: 'Desc', deadline: '2026-03-01',
+        status: 'draft' as const, teams: ['it', 'development'],
+        teamInfo: { it: { name: 'IT' } },
+        enabledStandardFields: ['name', 'email', 'motivation'],
+      };
+      const returned = await act(async () => result.current.dispatch({ firestoreAction: 'ADD_CAMPAIGN', payload }));
+      expect(addCampaign).toHaveBeenCalledWith(payload);
+      expect(returned).toBe('new-campaign-id');
     });
 
     it('UPDATE_JOB calls updateJob', async () => {

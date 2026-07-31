@@ -7,6 +7,7 @@ export const defaultAppState = {
   boardPositions: [],
   applicants: [],
   campaigns: [],
+  campaignsLoaded: false,
   teamApplications: [],
   registrationQuestions: [],
   isLoading: false,

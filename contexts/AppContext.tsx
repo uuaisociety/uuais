@@ -24,6 +24,7 @@ interface AppState {
   boardPositions: BoardPosition[];
   applicants: Application[];
   campaigns: ApplicationCampaign[];
+  campaignsLoaded: boolean;
   teamApplications: TeamApplication[];
   isLoading: boolean;
   error: string | null;
@@ -58,6 +59,7 @@ type AppAction =
   | { type: 'DELETE_JOB'; payload: string }
   | { type: 'SET_APPLICANTS'; payload: Application[] }
   | { type: 'SET_CAMPAIGNS'; payload: ApplicationCampaign[] }
+  | { type: 'SET_CAMPAIGNS_LOADED'; payload: boolean }
   | { type: 'SET_TEAM_APPLICATIONS'; payload: TeamApplication[] };
 
 type FirestoreAction = 
@@ -83,7 +85,7 @@ type FirestoreAction =
   | { firestoreAction: 'DELETE_JOB'; payload: string }
   | { firestoreAction: 'DELETE_BOARD_APPLICATION'; payload: string }
   | { firestoreAction: 'ADD_CAMPAIGN'; payload: CampaignInput }
-  | { firestoreAction: 'UPDATE_CAMPAIGN'; payload: ApplicationCampaign }
+  | { firestoreAction: 'UPDATE_CAMPAIGN'; payload: Partial<ApplicationCampaign> }
   | { firestoreAction: 'DELETE_CAMPAIGN'; payload: string }
   | { firestoreAction: 'DELETE_TEAM_APPLICATION'; payload: string };
 
@@ -96,6 +98,7 @@ const initialState: AppState = {
   boardPositions: [],
   applicants: [],
   campaigns: [],
+  campaignsLoaded: false,
   teamApplications: [],
   isLoading: false,
   error: null
@@ -201,6 +204,8 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
       return { ...state, applicants: action.payload };
     case 'SET_CAMPAIGNS':
       return { ...state, campaigns: action.payload };
+    case 'SET_CAMPAIGNS_LOADED':
+      return { ...state, campaignsLoaded: action.payload };
     case 'SET_TEAM_APPLICATIONS':
       return { ...state, teamApplications: action.payload };
     default:
@@ -268,7 +273,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         dispatch({ type: 'SET_APPLICANTS', payload: [] });
       }
 
-      // Team applications: admin-only subscription (campaigns are public, subscribed separately)
+      // Team applications: admin-only subscription
       if (unsubscribeTeamApplications) {
         try { unsubscribeTeamApplications(); } catch { /* ignore */ }
         unsubscribeTeamApplications = null;
@@ -280,6 +285,16 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       } else {
         dispatch({ type: 'SET_TEAM_APPLICATIONS', payload: [] });
       }
+
+      // Campaigns: public visitors only see open campaigns; admins see all (incl. drafts)
+      if (unsubscribeCampaigns) {
+        try { unsubscribeCampaigns(); } catch { /* ignore */ }
+        unsubscribeCampaigns = null;
+      }
+      unsubscribeCampaigns = subscribeToCampaigns((campaigns) => {
+        dispatch({ type: 'SET_CAMPAIGNS', payload: campaigns });
+        dispatch({ type: 'SET_CAMPAIGNS_LOADED', payload: true });
+      }, { includeAll: includeUnpublished });
     };
 
     // Initial subscription: assume not admin (public)
@@ -297,23 +312,27 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       dispatch({ type: 'SET_FAQS', payload: faqs });
     });
 
-    // Public campaign subscription (visible to all visitors; drafts included since admin-only toggle is enforced by status)
-    unsubscribeCampaigns = subscribeToCampaigns((campaigns) => {
-      dispatch({ type: 'SET_CAMPAIGNS', payload: campaigns });
-    });
-    
-
     // Listen for ID token changes to detect admin claim changes.
+    let currentAdminClaim: boolean | null = null;
+    let authGeneration = 0;
     const idTokenUnsub = onIdTokenChanged(auth, async (user) => {
-      if (!user) {
-        // Not signed in — ensure public subscription
-        subscribe(false);
-        return;
+      const gen = ++authGeneration;
+      let adminClaim = false;
+      if (user) {
+        // Refresh token to ensure custom claims are present
+        try {
+          const tokenResult = await user.getIdTokenResult(true);
+          adminClaim = !!tokenResult.claims.admin;
+        } catch (err) {
+          console.warn('Failed to refresh ID token', err);
+          return;
+        }
       }
-
-      // Refresh token to ensure custom claims are present
-      const tokenResult = await user.getIdTokenResult(true);
-      const adminClaim = !!tokenResult.claims.admin;
+      // Ignore stale auth events that resolved after a newer one applied.
+      if (gen !== authGeneration) return;
+      // Avoid re-subscribing when the admin claim did not change.
+      if (currentAdminClaim === adminClaim) return;
+      currentAdminClaim = adminClaim;
       // Re-subscribe with adminClaim (true/false)
       subscribe(adminClaim);
     });
@@ -418,10 +437,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             await deleteBoardApplication(action.payload);
             break;
           case 'ADD_CAMPAIGN':
-            await addCampaignToFirestore(action.payload);
-            break;
+            return await addCampaignToFirestore(action.payload);
           case 'UPDATE_CAMPAIGN':
-            await updateCampaignInFirestore(action.payload.id, action.payload);
+            if (action.payload.id) {
+              await updateCampaignInFirestore(action.payload.id, action.payload);
+            }
             break;
           case 'DELETE_CAMPAIGN':
             await deleteCampaignFromFirestore(action.payload);
