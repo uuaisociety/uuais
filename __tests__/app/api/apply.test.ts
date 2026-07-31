@@ -33,10 +33,11 @@ jest.mock('@/lib/auth-config', () => ({
 }))
 
 // Build adminDb mocks for two collections: applicationCampaigns (doc lookup) and others (collections)
+let campaignData: Record<string, unknown> = { status: 'open', teams: ['it', 'development'] }
 const campaignDocRef = createDocRef('spring2026')
 campaignDocRef.get = jest.fn().mockResolvedValue({
   exists: true,
-  data: () => ({ status: 'open', teams: ['it', 'development'] }),
+  data: () => campaignData,
 })
 
 const teamAppsCollection = createCollectionMock()
@@ -46,6 +47,17 @@ const teamAppDocRef = createDocRef('team-app-doc')
 teamAppsCollection.doc = jest.fn(() => teamAppDocRef)
 limitsCollection.doc = jest.fn(() => createDocRef())
 locksCollection.doc = jest.fn(() => createDocRef())
+
+// campaignQuestions: queryable by campaignId; docs configurable per test
+let questionsData: { id: string; question: string; required?: boolean }[] = []
+const questionsCollection = createCollectionMock()
+questionsCollection.get = jest.fn().mockImplementation(() =>
+  Promise.resolve({
+    empty: questionsData.length === 0,
+    docs: questionsData.map((q) => ({ id: q.id, data: () => q })),
+    size: questionsData.length,
+  }),
+)
 
 jest.mock('@/lib/firebase-admin', () => ({
   adminDb: {
@@ -58,6 +70,7 @@ jest.mock('@/lib/firebase-admin', () => ({
       if (name === 'teamApplications') return teamAppsCollection
       if (name === 'applicationUserLimits') return limitsCollection
       if (name === 'applicationCampaignLocks') return locksCollection
+      if (name === 'campaignQuestions') return questionsCollection
       return createCollectionMock()
     }),
     runTransaction: (...args: unknown[]) => mockRunTransaction(...args),
@@ -66,14 +79,31 @@ jest.mock('@/lib/firebase-admin', () => ({
 
 type MockTx = { get: jest.Mock; set: jest.Mock; delete: jest.Mock }
 
+let lastTx: MockTx | null = null
+
+function lastApplicationPayload(): Record<string, unknown> | null {
+  if (!lastTx) return null
+  for (const call of lastTx.set.mock.calls) {
+    const arg = call[1] as Record<string, unknown> | undefined
+    if (arg && typeof arg === 'object' && 'applicationType' in arg) {
+      return arg
+    }
+  }
+  return null
+}
+
 beforeEach(() => {
   jest.clearAllMocks()
+  campaignData = { status: 'open', teams: ['it', 'development'] }
+  questionsData = []
+  lastTx = null
   mockRunTransaction.mockImplementation(async (cb: (tx: MockTx) => Promise<void>) => {
     const tx: MockTx = {
       get: jest.fn().mockResolvedValue({ exists: false, data: () => null }),
       set: jest.fn().mockResolvedValue(undefined),
       delete: jest.fn().mockResolvedValue(undefined),
     }
+    lastTx = tx
     await cb(tx)
   })
 })
@@ -216,7 +246,7 @@ describe('POST /api/apply', () => {
       const body = await res.json()
 
       expect(res.status).toBe(400)
-      expect(body.error).toMatch(/scheme|invalid/i)
+      expect(body.error).toMatch(/linkedin/i)
     })
 
     it('returns 400 when weekly hours exceeds max', async () => {
@@ -265,6 +295,213 @@ describe('POST /api/apply', () => {
       expect(body.name).toBe('Alice')
       expect(body.campaignId).toBe('spring2026')
       expect(body.id).toBeDefined()
+    })
+  })
+
+  describe('security hardening', () => {
+    it('stores the verified uid on the application', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('linkedin', 'https://linkedin.com/in/alice')
+      formData.set('motivation', 'I want to contribute to the AI community.')
+      formData.set('agree', 'true')
+      formData.set('teamRanking', JSON.stringify(['it']))
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+
+      expect(res.status).toBe(200)
+      expect(lastApplicationPayload()?.uid).toBe('user1')
+    })
+
+    it('drops disabled standard fields from the stored application', async () => {
+      campaignData = { status: 'open', teams: ['it', 'development'], enabledStandardFields: ['name', 'email'] }
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('agree', 'true')
+      formData.set('teamRanking', JSON.stringify(['it']))
+      formData.set('weeklyHours', '5')
+      formData.set('interests', JSON.stringify(['robotics']))
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+
+      expect(res.status).toBe(200)
+      const payload = lastApplicationPayload()
+      expect(payload?.teamRanking).toEqual([])
+      expect(payload?.weeklyHours).toBe(0)
+      expect(payload?.interests).toEqual([])
+    })
+
+    it('rejects a submission missing a required custom question', async () => {
+      campaignData = { status: 'open', teams: ['it', 'development'], enabledStandardFields: ['name', 'email'] }
+      questionsData = [{ id: 'q1', question: 'What is your favourite project?', required: true }]
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('agree', 'true')
+      formData.set('customAnswers', JSON.stringify({}))
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/favourite project.*required|required.*favourite project/i)
+    })
+
+    it('accepts a submission when all required custom questions are answered', async () => {
+      campaignData = { status: 'open', teams: ['it', 'development'], enabledStandardFields: ['name', 'email'] }
+      questionsData = [{ id: 'q1', question: 'What is your favourite project?', required: true }]
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('agree', 'true')
+      formData.set('customAnswers', JSON.stringify({ q1: 'My capstone project' }))
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+
+      expect(res.status).toBe(200)
+    })
+
+    it('rejects a submission when the campaign deadline has passed', async () => {
+      campaignData = { status: 'open', teams: ['it', 'development'], deadline: '2020-01-01' }
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('agree', 'true')
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/no longer/i)
+    })
+
+    it('accepts a submission when the campaign deadline is in the future', async () => {
+      campaignData = { status: 'open', teams: ['it', 'development'], deadline: '2099-01-01' }
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('linkedin', 'https://linkedin.com/in/alice')
+      formData.set('motivation', 'I want to contribute to the AI community.')
+      formData.set('agree', 'true')
+      formData.set('teamRanking', JSON.stringify(['it']))
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+
+      expect(res.status).toBe(200)
+    })
+  })
+
+  describe('enabledStandardFields', () => {
+    it('accepts a submission without motivation/linkedin when those fields are disabled', async () => {
+      campaignData = { status: 'open', teams: ['it', 'development'], enabledStandardFields: ['name', 'email'] }
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('agree', 'true')
+      formData.set('weeklyHours', '5')
+      formData.set('interests', JSON.stringify(['robotics']))
+      formData.set('teamRanking', JSON.stringify(['it']))
+      formData.set('customAnswers', JSON.stringify({}))
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+
+      expect(res.status).toBe(200)
+    })
+
+    it('rejects a submission missing motivation when motivation is enabled', async () => {
+      campaignData = { status: 'open', teams: ['it', 'development'], enabledStandardFields: ['name', 'email', 'motivation'] }
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('agree', 'true')
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/motivation/i)
+    })
+
+    it('rejects a submission with teamRanking enabled but empty ranking', async () => {
+      campaignData = { status: 'open', teams: ['it', 'development'], enabledStandardFields: ['name', 'email', 'teamRanking'] }
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('agree', 'true')
+      formData.set('teamRanking', JSON.stringify([]))
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/team|preference/i)
+    })
+
+    it('still enforces max length on a disabled motivation field', async () => {
+      campaignData = { status: 'open', teams: ['it', 'development'], enabledStandardFields: ['name', 'email'] }
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('agree', 'true')
+      formData.set('motivation', 'x'.repeat(2001))
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/motivation/i)
     })
   })
 })

@@ -30,6 +30,21 @@ function safeKeyPart(s: string): string {
   return encodeURIComponent(s);
 }
 
+const ANSWER_KEY_RE = /^[A-Za-z0-9_-]{1,64}$/;
+const MAX_CUSTOM_ANSWER_KEYS = 100;
+
+function deadlineMs(value: unknown): number | null {
+  if (typeof value === 'number') return value;
+  if (typeof value === 'string') {
+    const ms = Date.parse(value);
+    return Number.isNaN(ms) ? null : ms;
+  }
+  if (value && typeof value === 'object' && typeof (value as { toMillis?: unknown }).toMillis === 'function') {
+    return (value as { toMillis: () => number }).toMillis();
+  }
+  return null;
+}
+
 async function saveFileToStorage(file: File, destPath: string) {
   const arrayBuffer = await file.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
@@ -58,6 +73,11 @@ const MAX_CUSTOM_INTEREST_CHARS = 200;
 const MAX_INTERESTS_ITEMS = 50;
 const MAX_TEAM_RANKING_ITEMS = 20;
 const MAX_WEEKLY_HOURS = 12;
+
+const DEFAULT_STANDARD_FIELDS = [
+  "name", "email", "gender", "university", "program", "graduationYear",
+  "linkedin", "resume", "interests", "teamRanking", "weeklyHours", "motivation",
+];
 
 export async function handleApplicationPost(req: NextRequest, applicationType: string) {
   const authResult = await authorizeRequest(req);
@@ -101,13 +121,8 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
     if (university && university.length > MAX_UNIVERSITY_CHARS) return NextResponse.json({ error: `University must be at most ${MAX_UNIVERSITY_CHARS} characters` }, { status: 400 });
     if (program && program.length > MAX_PROGRAM_CHARS) return NextResponse.json({ error: `Programme must be at most ${MAX_PROGRAM_CHARS} characters` }, { status: 400 });
     if (graduationYear && graduationYear.length > MAX_GRADUATION_YEAR_CHARS) return NextResponse.json({ error: `Graduation year must be at most ${MAX_GRADUATION_YEAR_CHARS} characters` }, { status: 400 });
+    if (graduationYear && !/^\d{4}$/.test(graduationYear.trim())) return NextResponse.json({ error: 'Graduation year must be a 4-digit year' }, { status: 400 });
     if (!agree) return NextResponse.json({ error: 'Agreement required' }, { status: 400 });
-    if (!motivation || !motivation.trim()) return NextResponse.json({ error: 'Motivation is required' }, { status: 400 });
-    if (motivation.trim().length < MIN_MOTIVATION_CHARS) return NextResponse.json({ error: `Motivation must be at least ${MIN_MOTIVATION_CHARS} characters` }, { status: 400 });
-    if (motivation.length > MAX_MOTIVATION_CHARS) return NextResponse.json({ error: `Motivation must be at most ${MAX_MOTIVATION_CHARS} characters` }, { status: 400 });
-    if (!linkedin || !linkedin.trim()) return NextResponse.json({ error: 'LinkedIn URL is required' }, { status: 400 });
-    if (linkedin.length > MAX_LINKEDIN_CHARS) return NextResponse.json({ error: `LinkedIn URL must be at most ${MAX_LINKEDIN_CHARS} characters` }, { status: 400 });
-    if (/^javascript:/i.test(linkedin.trim())) return NextResponse.json({ error: 'LinkedIn URL contains an invalid scheme' }, { status: 400 });
     if (customTeam && customTeam.length > MAX_CUSTOM_TEAM_CHARS) return NextResponse.json({ error: `Custom team must be at most ${MAX_CUSTOM_TEAM_CHARS} characters` }, { status: 400 });
     if (customInterest && customInterest.length > MAX_CUSTOM_INTEREST_CHARS) return NextResponse.json({ error: `Custom interest must be at most ${MAX_CUSTOM_INTEREST_CHARS} characters` }, { status: 400 });
     if (!Array.isArray(interests) || interests.length > MAX_INTERESTS_ITEMS) return NextResponse.json({ error: `Interests must be an array with at most ${MAX_INTERESTS_ITEMS} items` }, { status: 400 });
@@ -116,8 +131,39 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
 
     const campaignSnap = await adminDb.collection('applicationCampaigns').doc(campaignId).get();
     if (!campaignSnap.exists) return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
-    const campaignData = campaignSnap.data() as { status?: string; teams?: string[] };
+    const campaignData = campaignSnap.data() as { status?: string; teams?: string[]; enabledStandardFields?: string[]; deadline?: unknown };
     if (campaignData.status !== 'open') return NextResponse.json({ error: 'This campaign is not currently accepting submissions.' }, { status: 400 });
+
+    const dlMs = deadlineMs(campaignData.deadline);
+    if (dlMs !== null && Date.now() > dlMs) {
+      return NextResponse.json({ error: 'This campaign is no longer accepting applications.' }, { status: 400 });
+    }
+
+    const enabledFields = Array.isArray(campaignData.enabledStandardFields) && campaignData.enabledStandardFields.length > 0
+      ? campaignData.enabledStandardFields
+      : DEFAULT_STANDARD_FIELDS;
+
+    // Only require fields the campaign has enabled
+    if (enabledFields.includes('motivation')) {
+      if (!motivation || !motivation.trim()) return NextResponse.json({ error: 'Motivation is required' }, { status: 400 });
+      if (motivation.trim().length < MIN_MOTIVATION_CHARS) return NextResponse.json({ error: `Motivation must be at least ${MIN_MOTIVATION_CHARS} characters` }, { status: 400 });
+      if (motivation.length > MAX_MOTIVATION_CHARS) return NextResponse.json({ error: `Motivation must be at most ${MAX_MOTIVATION_CHARS} characters` }, { status: 400 });
+    } else if (motivation && motivation.length > MAX_MOTIVATION_CHARS) {
+      return NextResponse.json({ error: `Motivation must be at most ${MAX_MOTIVATION_CHARS} characters` }, { status: 400 });
+    }
+    if (enabledFields.includes('linkedin')) {
+      if (!linkedin || !linkedin.trim()) return NextResponse.json({ error: 'LinkedIn URL is required' }, { status: 400 });
+      if (linkedin.length > MAX_LINKEDIN_CHARS) return NextResponse.json({ error: `LinkedIn URL must be at most ${MAX_LINKEDIN_CHARS} characters` }, { status: 400 });
+      const linkedinNormalized = linkedin.trim().replace(/^https?:\/\//i, '').replace(/^www\./i, '');
+      if (!/^linkedin\.com\/in\/.+$/i.test(linkedinNormalized)) {
+        return NextResponse.json({ error: 'LinkedIn URL must point to a linkedin.com/in/ profile' }, { status: 400 });
+      }
+    } else if (linkedin && linkedin.length > MAX_LINKEDIN_CHARS) {
+      return NextResponse.json({ error: `LinkedIn URL must be at most ${MAX_LINKEDIN_CHARS} characters` }, { status: 400 });
+    }
+    if (enabledFields.includes('teamRanking') && teamRanking.length === 0) {
+      return NextResponse.json({ error: 'At least one team preference is required' }, { status: 400 });
+    }
 
     const campaignTeams = Array.isArray(campaignData.teams) ? campaignData.teams : [];
     for (const tid of teamRanking) {
@@ -128,7 +174,7 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
 
     let resumeFile = form.get('resume') as File | null;
     let savedResume: { path?: string; url?: string } | null = null;
-    if (resumeFile && resumeFile.size > 0) {
+    if (enabledFields.includes('resume') && resumeFile && resumeFile.size > 0) {
       if (resumeFile.type !== 'application/pdf' && resumeFile.type !== '') return NextResponse.json({ error: 'Resume must be a PDF' }, { status: 400 });
       if (resumeFile.size > 3 * 1024 * 1024) return NextResponse.json({ error: 'Resume must be <= 3MB' }, { status: 400 });
       const header = await resumeFile.slice(0, 5).text();
@@ -138,6 +184,14 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
       resumeFile = new File([await resumeFile.arrayBuffer()], safeName, { type: resumeFile.type });
     }
 
+    if (Object.keys(customAnswers).length > MAX_CUSTOM_ANSWER_KEYS) {
+      return NextResponse.json({ error: 'Too many custom answers' }, { status: 400 });
+    }
+    for (const key of Object.keys(customAnswers)) {
+      if (!ANSWER_KEY_RE.test(key)) {
+        return NextResponse.json({ error: 'Invalid answer key' }, { status: 400 });
+      }
+    }
     for (const [key, val] of Object.entries(customAnswers)) {
       const s = Array.isArray(val) ? val.join(', ') : val;
       if (typeof s === 'string' && s.length > MAX_CUSTOM_ANSWER_CHARS) {
@@ -145,13 +199,31 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
       }
     }
 
+    // Enforce required custom questions defined for the campaign
+    const questionsSnap = await adminDb.collection('campaignQuestions').where('campaignId', '==', campaignId).get();
+    for (const doc of questionsSnap.docs) {
+      const q = doc.data() as { question?: string; required?: boolean };
+      if (!q.required) continue;
+      const ans = customAnswers[doc.id];
+      const isEmpty = Array.isArray(ans) ? ans.length === 0 : typeof ans !== 'string' || !ans.trim();
+      if (isEmpty) {
+        return NextResponse.json(
+          { error: `"${q.question || 'This question'}" is required.` },
+          { status: 400 },
+        );
+      }
+    }
+
     const emailNormalized = normalizeEmail(email);
+    // The verified Firebase uid is the authoritative identity for dedup and
+    // rate limiting; email is only a fallback if a uid is somehow unavailable.
+    const identity = authResult.uid || emailNormalized;
     const cooldownSeconds = Number(process.env.APPLY_COOLDOWN_SECONDS || DEFAULT_COOLDOWN_SECONDS);
     const maxPerCampaign = Number(process.env.APPLY_MAX_SUBMISSIONS_PER_CAMPAIGN || DEFAULT_MAX_SUBMISSIONS_PER_CAMPAIGN);
     const nowMs = Date.now();
 
-    const lockKey = `${safeKeyPart(emailNormalized)}__${safeKeyPart(campaignId)}`;
-    const limitsRef = adminDb.collection('applicationUserLimits').doc(safeKeyPart(emailNormalized));
+    const lockKey = `${safeKeyPart(identity)}__${safeKeyPart(campaignId)}`;
+    const limitsRef = adminDb.collection('applicationUserLimits').doc(safeKeyPart(identity));
     const lockRef = adminDb.collection('applicationCampaignLocks').doc(lockKey);
     const appRef = adminDb.collection('teamApplications').doc();
 
@@ -199,20 +271,21 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
       tx.set(appRef, {
         applicationType,
         campaignId,
+        uid: authResult.uid || null,
         name,
         email,
         emailNormalized,
-        gender: gender || null,
-        university: university || null,
-        program: program || null,
-        graduationYear: graduationYear || null,
-        linkedin: linkedin || null,
-        interests: interests || [],
-        customInterest: customInterest || null,
-        teamRanking: teamRanking || [],
-        customTeam: customTeam || null,
-        weeklyHours: Number.isFinite(weeklyHours) ? weeklyHours : 0,
-        motivation,
+        gender: enabledFields.includes('gender') ? gender || null : null,
+        university: enabledFields.includes('university') ? university || null : null,
+        program: enabledFields.includes('program') ? program || null : null,
+        graduationYear: enabledFields.includes('graduationYear') ? graduationYear || null : null,
+        linkedin: enabledFields.includes('linkedin') ? linkedin || null : null,
+        interests: enabledFields.includes('interests') ? (interests || []) : [],
+        customInterest: enabledFields.includes('interests') ? (customInterest || null) : null,
+        teamRanking: enabledFields.includes('teamRanking') ? (teamRanking || []) : [],
+        customTeam: enabledFields.includes('teamRanking') ? (customTeam || null) : null,
+        weeklyHours: enabledFields.includes('weeklyHours') && Number.isFinite(weeklyHours) ? weeklyHours : 0,
+        motivation: enabledFields.includes('motivation') ? motivation : '',
         customAnswers: customAnswers || {},
         agree: true,
         newsletter: !!newsletter,
@@ -228,13 +301,23 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
         savedResume = await saveFileToStorage(resumeFile, resumePath);
         await appRef.set({ resume: savedResume }, { merge: true });
       } catch (uploadErr) {
+        // Roll back the partial application AND the cooldown/limit so the
+        // applicant can retry immediately after a failed upload.
+        if (savedResume?.path) {
+          try {
+            await admin.storage().bucket().file(savedResume.path).delete();
+          } catch (storageCleanupErr) {
+            console.error('apply storage cleanup failed after upload error', storageCleanupErr);
+          }
+        }
         try {
           await adminDb.runTransaction(async (tx) => {
             tx.delete(lockRef);
+            tx.delete(limitsRef);
             tx.delete(appRef);
           });
-        } catch {
-          // rollback failure ignored
+        } catch (rollbackErr) {
+          console.error('apply rollback failed after upload error', rollbackErr);
         }
         throw uploadErr;
       }
