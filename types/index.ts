@@ -234,3 +234,59 @@ export interface Application {
   /** ISO string from some writes; Firestore Timestamp from server / API */
   createdAt?: string | Timestamp;
 };
+
+// ---------------------------------------------------------------------------
+// Application campaigns (team applications) — replaces board-apply
+// ---------------------------------------------------------------------------
+
+export type CampaignStatus = 'open' | 'closed' | 'draft';
+
+export type CustomQuestionType = 'text' | 'textarea' | 'select' | 'radio' | 'checkbox';
+
+export interface CampaignQuestion {
+  id: string;
+  campaignId: string;
+  question: string;
+  type: CustomQuestionType;
+  options?: string[];
+  required: boolean;
+  order: number;
+}
+
+export interface ApplicationCampaign {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  deadline: string;
+  status: CampaignStatus;
+  teams: string[];
+  /** Optional per-team overrides keyed by team id. Use this to customise the team name or
+   *  description shown to applicants in step 1 instead of the generic fallback text. */
+  teamInfo?: Record<string, { name?: string; description?: string }>;
+  enabledStandardFields: string[];
+  createdAt?: string | Timestamp;
+}
+
+export interface TeamApplication {
+  id: string;
+  campaignId: string;
+  name: string;
+  email: string;
+  emailNormalized?: string;
+  gender?: string;
+  university?: string;
+  program?: string;
+  graduationYear?: string;
+  linkedin?: string;
+  resume?: { path?: string; url?: string } | null;
+  interests?: string[];
+  teamRanking?: string[];
+  customTeam?: string;
+  weeklyHours?: number;
+  motivation?: string;
+  customAnswers?: Record<string, string | string[]>;
+  agree?: boolean;
+  newsletter?: boolean;
+  createdAt?: string | Timestamp;
+}

@@ -129,10 +129,10 @@ const JoinPage: React.FC = () => {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <FieldGroup label="Display name" requiredHint="Required. Shown publicly.">
-                  <InputBase placeholder="e.g. Alex" value={form.displayName || ''} onChange={(e) => setForm(f => ({ ...f, displayName: e.target.value }))} />
+                  <InputBase maxLength={100} placeholder="e.g. Alex" value={form.displayName || ''} onChange={(e) => setForm(f => ({ ...f, displayName: e.target.value }))} />
                 </FieldGroup>
-                <FieldGroup label="Full name" requiredHint="Required. Your legal name or preferred full name.">
-                  <InputBase placeholder="e.g. Alex Doe" value={form.name || ''} onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))} />
+                <FieldGroup label="Full name" requiredHint="Required">
+                  <InputBase maxLength={100} placeholder="e.g. Alex Doe" value={form.name || ''} onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))} />
                 </FieldGroup>
               </div>
 
@@ -153,13 +153,13 @@ const JoinPage: React.FC = () => {
                   </SelectBase>
                 </FieldGroup>
                 <FieldGroup label="LinkedIn URL" requiredHint="Optional">
-                  <InputBase placeholder="https://linkedin.com/in/..." value={form.linkedin || ''} onChange={(e) => setForm(f => ({ ...f, linkedin: e.target.value }))} />
+                  <InputBase maxLength={200} placeholder="https://linkedin.com/in/..." value={form.linkedin || ''} onChange={(e) => setForm(f => ({ ...f, linkedin: e.target.value }))} />
                 </FieldGroup>
                 <FieldGroup label="GitHub URL" requiredHint="Optional">
-                  <InputBase placeholder="https://github.com/username" value={form.github || ''} onChange={(e) => setForm(f => ({ ...f, github: e.target.value }))} />
+                  <InputBase maxLength={200} placeholder="https://github.com/username" value={form.github || ''} onChange={(e) => setForm(f => ({ ...f, github: e.target.value }))} />
                 </FieldGroup>
                 <FieldGroup label="Website" requiredHint="Optional">
-                  <InputBase placeholder="https://example.com" value={form.website || ''} onChange={(e) => setForm(f => ({ ...f, website: e.target.value }))} />
+                  <InputBase maxLength={500} placeholder="https://example.com" value={form.website || ''} onChange={(e) => setForm(f => ({ ...f, website: e.target.value }))} />
                 </FieldGroup>
               </div>
 
@@ -173,10 +173,10 @@ const JoinPage: React.FC = () => {
                   </SelectBase>
                 </FieldGroup>
                 <FieldGroup label="Program / Major" requiredHint="Required if student.">
-                  <InputBase placeholder="e.g. Computer Science" value={form.program || ''} onChange={(e) => setForm(f => ({ ...f, program: e.target.value }))} />
+                  <InputBase maxLength={200} placeholder="e.g. Computer Science" value={form.program || ''} onChange={(e) => setForm(f => ({ ...f, program: e.target.value }))} />
                 </FieldGroup>
                 <FieldGroup label="Expected Graduation Year" requiredHint="Optional">
-                  <InputBase placeholder="e.g. 2026" type="number" value={form.expectedGraduationYear ?? ''} onChange={(e) => setForm(f => ({ ...f, expectedGraduationYear: e.target.value ? Number(e.target.value) : undefined }))} />
+                  <InputBase placeholder="e.g. 2026" type="number" min={1900} max={2100} value={form.expectedGraduationYear ?? ''} onChange={(e) => setForm(f => ({ ...f, expectedGraduationYear: e.target.value ? Number(e.target.value) : undefined }))} />
                 </FieldGroup>
                 <FieldGroup label="Gender" requiredHint="Optional">
                   <SelectBase value={form.gender || 'other'} onChange={(e) => setForm(f => ({ ...f, gender: e.target.value }))}>
@@ -214,12 +214,12 @@ const JoinPage: React.FC = () => {
                 </FieldGroup>
                 {(form.heardOfUs === '' || (form.heardOfUs && !['posters','instagram','linkedin','friends','events','lecture'].includes(form.heardOfUs))) && (
                   <FieldGroup label="If other, please specify" requiredHint="Optional">
-                    <InputBase placeholder="Type here" value={form.heardOfUs || ''} onChange={(e)=>setForm(f=>({...f, heardOfUs: e.target.value}))} />
+                    <InputBase maxLength={200} placeholder="Type here" value={form.heardOfUs || ''} onChange={(e)=>setForm(f=>({...f, heardOfUs: e.target.value}))} />
                   </FieldGroup>
                 )}
               </div>
               <FieldGroup label="Bio" requiredHint="Optional">
-                <TextareaBase placeholder="Write a short bio" value={form.bio || ''} onChange={(e) => setForm(f => ({ ...f, bio: e.target.value }))} />
+                <TextareaBase maxLength={500} placeholder="Write a short bio" value={form.bio || ''} onChange={(e) => setForm(f => ({ ...f, bio: e.target.value }))} />
               </FieldGroup>
               <div className="flex items-center gap-6">
                 <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">

@@ -13,7 +13,11 @@ export default function LoginPage() {
   }, []);
 
   const after = () => {
-    router.push('/account')
+    const params = new URLSearchParams(window.location.search)
+    const redirect = params.get('redirect')
+    // Only allow local paths to prevent open redirects to external sites
+    // (including protocol-relative URLs like //evil.com)
+    router.push(redirect && redirect.startsWith('/') && !redirect.startsWith('//') ? redirect : '/account')
   }
 
   return (

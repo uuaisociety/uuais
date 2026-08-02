@@ -18,13 +18,15 @@ import TeamTab from '@/components/pages/admin/tabs/TeamTab';
 import BlogTab from '@/components/pages/admin/tabs/BlogTab';
 import FAQTab from '@/components/pages/admin/tabs/FAQTab';
 import BoardTab from '@/components/pages/admin/tabs/BoardTab'
+import ApplicationsTab from '@/components/pages/admin/tabs/ApplicationsTab';
 import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import FAQModal from '@/components/pages/admin/modals/FAQModal';
 import BlogModal from '@/components/pages/admin/modals/BlogModal';
 import BoardPositionModal, { type BPositionFormState } from './modals/BoardPositionModal';
+import CampaignBuilderModal from '@/components/pages/admin/modals/CampaignBuilderModal';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
-import { BlogPost, Event, TeamMember, FAQ, BoardPosition } from '@/types';
+import { BlogPost, Event, TeamMember, FAQ, BoardPosition, ApplicationCampaign } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
 import AISettingsTab from '@/components/pages/admin/tabs/AISettingsTab';
@@ -35,7 +37,7 @@ const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
   const [nrUsers, setNrUsers] = useState<number>(0);
   //const { user, logout } = useAdmin();
-  const tabValues = ['events', 'team', 'blog', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'board-applications'] as const;
+  const tabValues = ['events', 'team', 'blog', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
   type Tab = typeof tabValues[number];
   const [activeTab, setActiveTab] = useState<Tab>(() => {
     if (typeof window !== 'undefined') {
@@ -46,6 +48,15 @@ const AdminDashboard: React.FC = () => {
     }
     return 'events';
   });
+  // Slide direction for the tab-content transition: content enters from the
+  // side the clicked tab is on relative to the currently active tab.
+  const [slideFrom, setSlideFrom] = useState<'right' | 'left'>('right');
+  const changeTab = (next: Tab) => {
+    const curIdx = tabValues.indexOf(activeTab);
+    const nextIdx = tabValues.indexOf(next);
+    setSlideFrom(nextIdx >= curIdx ? 'right' : 'left');
+    setActiveTab(next);
+  };
   const placeholderImage = '/images/logo-highdef.png';
 
   // Modal states
@@ -55,6 +66,8 @@ const AdminDashboard: React.FC = () => {
   const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | null>(null);
   const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
   const [editingBoardPosition, setEditingBoardPosition] = useState<BoardPosition | null>(null);
+  const [showCampaignModal, setShowCampaignModal] = useState(false);
+  const [editingCampaign, setEditingCampaign] = useState<ApplicationCampaign | null>(null);
   const [blogForm, setBlogForm] = useState({
     title: '',
     excerpt: '',
@@ -209,6 +222,32 @@ const AdminDashboard: React.FC = () => {
     dispatch({ firestoreAction: 'MOVE_BOARDPOS', payload: { positionId, direction } });
   };
 
+  const handleSaveCampaign = async (data: { id?: string; title: string; subtitle: string; description: string; deadline: string; status: 'open' | 'closed' | 'draft'; teams: string[]; teamInfo?: Record<string, { name?: string; description?: string }>; enabledStandardFields: string[] }): Promise<string | undefined> => {
+    if (data.id) {
+      // Update existing
+      dispatch({ firestoreAction: 'UPDATE_CAMPAIGN', payload: { id: data.id, title: data.title, subtitle: data.subtitle, description: data.description, deadline: data.deadline, status: data.status, teams: data.teams, teamInfo: data.teamInfo, enabledStandardFields: data.enabledStandardFields } as ApplicationCampaign });
+      return data.id;
+    } else {
+      // Add new — dispatch returns the doc id
+      const id = await dispatch({ firestoreAction: 'ADD_CAMPAIGN', payload: { title: data.title, subtitle: data.subtitle, description: data.description, deadline: data.deadline, status: data.status, teams: data.teams, teamInfo: data.teamInfo, enabledStandardFields: data.enabledStandardFields } });
+      return typeof id === 'string' ? id : undefined;
+    }
+  };
+
+  const handleDeleteCampaign = (id: string) => {
+    if (window.confirm('Delete this campaign and all its custom questions? Submissions will remain in Firestore.')) {
+      dispatch({ firestoreAction: 'DELETE_CAMPAIGN', payload: id });
+    }
+  };
+
+  const handleDeleteTeamApplication = (id: string, emailNormalized: string, campaignId: string) => {
+    if (window.confirm('Delete this submission?')) {
+      import('@/lib/firestore/teamApplications').then((mod) =>
+        mod.deleteTeamApplicationWithLimits(id, emailNormalized, campaignId)
+      ).catch(console.error);
+    }
+  };
+
   const handleEditBlogPost = (post: BlogPost) => {
     setEditingItem(post);
     setBlogForm({
@@ -289,11 +328,12 @@ const AdminDashboard: React.FC = () => {
                 { key: 'members', label: 'Members', icon: Users },
                 { key: 'jobs', label: 'Jobs', icon: BriefcaseBusiness },
                 { key: 'ai-settings', label: 'AI Settings', icon: Bot },
-                { key: 'board-applications', label: "GA'26 Board Applications", icon: Users},
+                { key: 'applications', label: 'Applications', icon: Users },
+                // { key: 'board-applications', label: "GA'26 Board Applications", icon: Users},
               ] as const).map(({ key, label, icon: Icon }) => (
                 <button
                   key={key}
-                  onClick={() => setActiveTab(key)}
+                  onClick={() => changeTab(key)}
                   className={`cursor-pointer flex items-center py-2 px-3 border-b-2 font-medium text-sm transition-all duration-200 ease-in-out ${activeTab === key
                     ? 'border-red-500 text-red-600 dark:text-red-400'
                     : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
@@ -309,6 +349,10 @@ const AdminDashboard: React.FC = () => {
 
         {/* Tab Content */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 md:p-6">
+          <div
+            key={activeTab}
+            className={`animate-in fade-in duration-300 ease-out ${slideFrom === 'right' ? 'slide-in-from-right-4' : 'slide-in-from-left-4'}`}
+          >
           {activeTab === 'events' && (
             <TabErrorBoundary name="Events">
               <EventsTab
@@ -379,6 +423,20 @@ const AdminDashboard: React.FC = () => {
               <AISettingsTab />
             </TabErrorBoundary>
           )}
+          {activeTab === 'applications' && (
+            <TabErrorBoundary name="Applications">
+              <ApplicationsTab
+                campaigns={state.campaigns}
+                applications={state.teamApplications}
+                onAddCampaign={() => { setEditingCampaign(null); setShowCampaignModal(true); }}
+                onEditCampaign={(c) => { setEditingCampaign(c); setShowCampaignModal(true); }}
+                onDeleteCampaign={handleDeleteCampaign}
+                onUpdateCampaignStatus={(id, status) => dispatch({ firestoreAction: 'UPDATE_CAMPAIGN', payload: { id, status } })}
+                onDeleteApplication={handleDeleteTeamApplication}
+              />
+            </TabErrorBoundary>
+          )}
+          </div>
 
           {/* Blog Modal */}
           <BlogModal
@@ -414,6 +472,14 @@ const AdminDashboard: React.FC = () => {
             editing={!!editingBoardPosition}
             onAdd={handleAddBoardPosition}
             onUpdate={handleUpdateBoardPosition}
+          />
+
+          <CampaignBuilderModal
+            open={showCampaignModal}
+            campaign={editingCampaign}
+            isNew={!editingCampaign}
+            onClose={() => { setShowCampaignModal(false); setEditingCampaign(null); }}
+            onSaveCampaign={handleSaveCampaign}
           />
 
         </div>

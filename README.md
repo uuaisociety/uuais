@@ -123,7 +123,7 @@ npm run test:coverage  # Run with coverage report
 
 ### Writing Tests
 
-Create test files anywhere in the project with `.test.ts` or `.test.tsx` suffixes, or in a `__tests__/` directory:
+Create test files in the `__tests__/` directory:
 
 ```tsx
 import { render, screen } from '@testing-library/react'

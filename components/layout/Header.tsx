@@ -3,13 +3,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAdmin } from '@/hooks/useAdmin';
+import { useApp } from '@/contexts/AppContext';
 import { useEffect, useState, useRef } from 'react';
 import { getUserProfile, type UserProfile } from '@/lib/firestore/users';
 
 export const Header: React.FC = () => {
+  const { state } = useApp();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,6 +22,10 @@ export const Header: React.FC = () => {
   const pathname = usePathname();
   const { user, isAdmin, loading, logout } = useAdmin();
   const [profile, setProfile] = useState<UserProfile | null>(null);
+
+  // Hide the Apply CTA when no open application campaign exists (show it while
+  // campaigns are still loading to avoid a flicker on first paint).
+  const showApply = isAdmin; //!state.campaignsLoaded || state.campaigns.some((c) => c.status === "open");
 
   const isHomePage = pathname === '/';
   const isTransparent = isHomePage && !isScrolled;
@@ -127,23 +133,6 @@ export const Header: React.FC = () => {
   }, [isMenuOpen]);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!isMenuOpen) return;
-      const target = event.target as Node;
-      const isButton = mobileButtonRef.current?.contains(target) ?? false;
-      const isMenu = mobileMenuRef.current?.contains(target) ?? false;
-      if (!isButton && !isMenu) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isMenuOpen]);
-
-  useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
       if (!ticking) {
@@ -190,7 +179,7 @@ export const Header: React.FC = () => {
                 <>
                   <span className="truncate max-w-[200px]">{profile?.displayName || profile?.name || user.displayName || (user as unknown as { name?: string }).name || user.email}</span>
                   <Link href="/account" className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'}`}>Account</Link>
-                  <a onClick={() => logout()} className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'} no-underline hover:underline cursor-pointer`}>Logout</a>
+                  <button onClick={() => logout()} className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'} hover:underline bg-transparent border-none p-0 cursor-pointer text-sm`}>Logout</button>
                 </>
               )}
             </div>
@@ -234,6 +223,8 @@ export const Header: React.FC = () => {
                      <div key="Projects" className="relative" ref={projectsRef}>
                        <button
                           onClick={() => setIsProjectsOpen(!isProjectsOpen)}
+                          aria-expanded={isProjectsOpen}
+                          aria-haspopup="true"
                           className={`px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium whitespace-nowrap transition-colors duration-200 flex items-center gap-1 cursor-pointer ${getNavClass(isActive('/projects'))}`}
                        >
                          Projects
@@ -295,16 +286,30 @@ export const Header: React.FC = () => {
                   )}
                     {/* Theme toggle */}
                      <ThemeToggle isHomePage={isTransparent} />
+                     {showApply && (
+                       <Link
+                         href="/apply/team"
+                         className={`group inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs border border-white/10 hover:border-white/0 lg:text-sm font-semibold whitespace-nowrap transition-colors duration-200 shadow-sm ${
+                           isTransparent
+                             ? 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'
+                             : 'bg-red-600 dark:bg-red-700 text-white hover:bg-red-700'
+                         }`}
+                       >
+                         Apply
+                         <ArrowRight className={`h-3.5 w-3.5 transition-transform duration-200 ${isTransparent ? 'group-hover:translate-x-0.5' : ''}`} />
+                       </Link>
+                     )}
                  </nav>
               </div>
 
                {/* Mobile menu button */}
                <div className="md:hidden">
-                <button
+                 <button
                     ref={mobileButtonRef}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     className={`p-2 rounded-md transition-all hover:scale-110 ${getMobileButtonClass()}`}
-                    aria-expanded="false"
+                    aria-expanded={isMenuOpen}
+                    aria-controls="mobile-menu"
                   >
                    <span className="sr-only">Open main menu</span>
                    {isMenuOpen ? (
@@ -319,6 +324,7 @@ export const Header: React.FC = () => {
                 {/* Mobile Navigation */}
                 <div
                   ref={mobileMenuRef}
+                  id="mobile-menu"
                   className={`md:hidden absolute top-full left-0 right-0 z-50 transition-all duration-300 overflow-hidden ${
                     isMenuOpen 
                       ? 'opacity-100 translate-y-0' 
@@ -337,10 +343,25 @@ export const Header: React.FC = () => {
                       {item.name}
                     </Link>
                   ))}
+                    {showApply && (
+                      <Link
+                        href="/apply/team"
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`block px-3 py-2 rounded-lg text-sm font-semibold text-center transition-colors duration-200 ${
+                          isTransparent
+                            ? 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'
+                            : 'bg-red-600 text-white hover:bg-red-700'
+                        }`}
+                      >
+                        Apply
+                      </Link>
+                    )}
                     {isAdmin && (
                      <div key="Projects" className="relative" ref={mobileProjectsRef}>
                        <button
                          onClick={(e) => { e.stopPropagation(); setIsProjectsOpen(!isProjectsOpen); }}
+                         aria-expanded={isProjectsOpen}
+                         aria-haspopup="true"
                          className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center gap-1 cursor-pointer ${getNavClass(isActive('/projects'))}`}
                        >
                          Projects
