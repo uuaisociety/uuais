@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
 
   // Hide the Apply CTA when no open application campaign exists (show it while
   // campaigns are still loading to avoid a flicker on first paint).
-  const showApply = !state.campaignsLoaded || state.campaigns.some((c) => c.status === "open");
+  const showApply = isAdmin; //!state.campaignsLoaded || state.campaigns.some((c) => c.status === "open");
 
   const isHomePage = pathname === '/';
   const isTransparent = isHomePage && !isScrolled;
