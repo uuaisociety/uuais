@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Calendar, Users, Zap, Globe, BookOpen } from 'lucide-react';
+import { ArrowRight, Calendar, Users, Zap, Globe, BookOpen, Star } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { useApp } from '@/contexts/AppContext';
@@ -15,6 +15,8 @@ import { format } from 'date-fns';
 import campus from '@/public/images/campus.png';
 import HeroAnimation from '@/components/HeroAnimation';
 import FloatingSymbolsCanvas from '@/components/FloatingSymbolsCanvas';
+import ShowcaseCover from '@/components/showcase/ShowcaseCover';
+import { SHOWCASE_CATEGORY_LABELS } from '@/types';
 
 const categoryOptions = [
   { value: 'all', label: 'All Categories' },
@@ -209,6 +211,72 @@ const HomePage: React.FC = () => {
             </div>
             : <i className="text-gray-600 dark:text-gray-300">No events found. Please check back later.</i>
             }
+          </div>
+        </section>
+
+        {/* Community Showcase */}
+        <section className="py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between mb-12">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                  What members are building
+                </h2>
+                <p className="text-xl text-gray-600 dark:text-gray-300">
+                  A peek at the projects our community is working on.
+                </p>
+              </div>
+              <Link href="/showcase">
+                <Button variant="default">
+                  View Showcase
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
+
+            {state.showcaseProjects.filter((p) => p.published).length > 0 ? (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {state.showcaseProjects.filter((p) => p.published).map((project) => (
+                  <Link key={project.id} href={`/showcase/${project.id}`}>
+                    <Card className="h-full group hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 overflow-hidden">
+                      <ShowcaseCover
+                        category={project.category}
+                        title={project.title}
+                        image={project.coverImage}
+                        className="aspect-video group-hover:scale-105 transition-transform duration-300"
+                        scanlines={false}
+                      />
+                      <CardContent className="p-6">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                            {SHOWCASE_CATEGORY_LABELS[project.category]}
+                          </span>
+                          {project.featured && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-medium">
+                              <Star className="h-3 w-3" />
+                              Featured
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                          {project.title}
+                        </h3>
+                        <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                          {project.description}
+                        </p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          By {project.creatorName} · ⭐ {project.votes}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <i className="text-gray-600 dark:text-gray-300">
+                No showcase projects yet. Be the first to share what you&apos;re building.
+              </i>
+            )}
           </div>
         </section>
       </div>

@@ -71,4 +71,45 @@ describe('HomePage', () => {
     expect(screen.getByText('Workshop')).toBeInTheDocument()
     expect(screen.getByText('View All Events')).toBeInTheDocument()
   })
+
+  it('renders community showcase section heading', () => {
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
+    render(<HomePage />)
+    expect(screen.getByText('What members are building')).toBeInTheDocument()
+    expect(screen.getByText('View Showcase')).toBeInTheDocument()
+  })
+
+  it('shows empty showcase message when no projects', () => {
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
+    render(<HomePage />)
+    expect(
+      screen.getByText("No showcase projects yet. Be the first to share what you're building.")
+    ).toBeInTheDocument()
+  })
+
+  it('renders showcase project cards', () => {
+    const project = {
+      id: 'p1',
+      title: 'Course Navigator',
+      description: 'Explore UU courses.',
+      category: 'app',
+      creatorUserId: 'u1',
+      creatorName: 'Ada',
+      links: {},
+      tags: [],
+      votes: 5,
+      published: true,
+      featured: false,
+      createdAt: '2026-07-01T00:00:00Z',
+      updatedAt: '2026-07-01T00:00:00Z',
+    }
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, showcaseProjects: [project] },
+      dispatch: jest.fn(),
+    })
+    render(<HomePage />)
+    expect(screen.getByText('Course Navigator')).toBeInTheDocument()
+    expect(screen.getByText('Apps')).toBeInTheDocument()
+    expect(screen.getByText(/By Ada/)).toBeInTheDocument()
+  })
 })

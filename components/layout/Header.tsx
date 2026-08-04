@@ -11,11 +11,12 @@ import { useEffect, useState, useRef } from 'react';
 import { getUserProfile, type UserProfile } from '@/lib/firestore/users';
 
 export const Header: React.FC = () => {
-  const { state } = useApp();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  useApp();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [isCommunityOpen, setIsCommunityOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const projectsRef = useRef<HTMLDivElement>(null);
+  const communityRef = useRef<HTMLDivElement>(null);
   const mobileProjectsRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileButtonRef = useRef<HTMLButtonElement>(null);
@@ -101,19 +102,35 @@ export const Header: React.FC = () => {
       const target = event.target as Node;
       const isInsideDesktop = projectsRef.current?.contains(target) ?? false;
       const isInsideMobile = mobileProjectsRef.current?.contains(target) ?? false;
+      const isInsideCommunity = communityRef.current?.contains(target) ?? false;
       if (!isInsideDesktop && !isInsideMobile) {
         setIsProjectsOpen(false);
       }
+      if (!isInsideCommunity) {
+        setIsCommunityOpen(false);
+      }
     };
 
-    if (isProjectsOpen) {
+    if (isProjectsOpen || isCommunityOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isProjectsOpen]);
+  }, [isProjectsOpen, isCommunityOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsCommunityOpen(false);
+        setIsProjectsOpen(false);
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -219,6 +236,38 @@ export const Header: React.FC = () => {
                         {item.name}
                       </Link>
                     ))}
+                    <div key="Community" className="relative" ref={communityRef}>
+                      <button
+                        onClick={() => setIsCommunityOpen(!isCommunityOpen)}
+                        aria-expanded={isCommunityOpen}
+                        aria-haspopup="true"
+                        className={`px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium whitespace-nowrap transition-colors duration-200 flex items-center gap-1 cursor-pointer ${getNavClass(isActive('/showcase'))}`}
+                      >
+                        Community
+                        <svg className={`w-4 h-4 transition-transform ${isCommunityOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      {isCommunityOpen && (
+                        <div className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg py-1 border transition-all duration-200 overflow-hidden animate-in fade-in slide-in-from-top-2 ${
+                          isTransparent
+                            ? 'bg-black/40 backdrop-blur-lg border-gray-700/50'
+                            : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'
+                        }`}>
+                          <Link
+                            href="/showcase"
+                            onClick={() => setIsCommunityOpen(false)}
+                            className={`block px-4 py-2 rounded-md text-sm transition-colors duration-200 ${
+                              isTransparent
+                                ? 'text-white/90 hover:text-white hover:bg-white/20'
+                                : 'text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400'
+                            } cursor-pointer`}
+                          >
+                            Member Showcase
+                          </Link>
+                        </div>
+                      )}
+                    </div>
                     {isAdmin && (<>
                      <div key="Projects" className="relative" ref={projectsRef}>
                        <button
@@ -343,6 +392,13 @@ export const Header: React.FC = () => {
                       {item.name}
                     </Link>
                   ))}
+                    <Link
+                      href="/showcase"
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${getNavClass(isActive('/showcase'))}`}
+                    >
+                      Community
+                    </Link>
                     {showApply && (
                       <Link
                         href="/apply/team"

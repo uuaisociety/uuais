@@ -462,4 +462,55 @@ describe('Header', () => {
       expect(mockLogout).toHaveBeenCalledTimes(1)
     })
   })
+
+  describe('community dropdown (public)', () => {
+    it('renders Community in desktop nav and mobile menu', () => {
+      render(<Header />)
+      expect(screen.getByRole('button', { name: 'Community' })).toBeInTheDocument()
+      expect(screen.getAllByText('Community').length).toBe(2)
+    })
+
+    it('opens and shows the Member Showcase link on desktop', () => {
+      render(<Header />)
+      const communityBtn = screen.getByRole('button', { name: 'Community' })
+      fireEvent.click(communityBtn)
+      expect(screen.getByText('Member Showcase')).toBeInTheDocument()
+    })
+
+    it('closes dropdown when clicking outside', () => {
+      render(<Header />)
+      const communityBtn = screen.getByRole('button', { name: 'Community' })
+      fireEvent.click(communityBtn)
+      expect(screen.getByText('Member Showcase')).toBeInTheDocument()
+      fireEvent.mouseDown(document)
+      expect(screen.queryByText('Member Showcase')).not.toBeInTheDocument()
+    })
+
+    it('closes dropdown when pressing Escape', () => {
+      render(<Header />)
+      const communityBtn = screen.getByRole('button', { name: 'Community' })
+      fireEvent.click(communityBtn)
+      expect(screen.getByText('Member Showcase')).toBeInTheDocument()
+      fireEvent.keyDown(document, { key: 'Escape' })
+      expect(screen.queryByText('Member Showcase')).not.toBeInTheDocument()
+    })
+
+    it('Escape closes the mobile menu', () => {
+      const { container } = render(<Header />)
+      const hamburger = screen.getByRole('button', { name: 'Open main menu' })
+      fireEvent.click(hamburger)
+      const nav = container.querySelector('[class*="md:hidden"][class*="top-full"]')
+      expect(nav?.className).not.toContain('pointer-events-none')
+      fireEvent.keyDown(document, { key: 'Escape' })
+      expect(nav?.className).toContain('pointer-events-none')
+    })
+
+    it('links to the showcase page', () => {
+      render(<Header />)
+      const communityBtn = screen.getByRole('button', { name: 'Community' })
+      fireEvent.click(communityBtn)
+      const showcaseLink = screen.getByText('Member Showcase')
+      expect(showcaseLink).toHaveAttribute('href', '/showcase')
+    })
+  })
 })
