@@ -101,6 +101,35 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    // SHOWCASE PROJECTS — community gallery of member AI work
+    match /showcaseProjects/{projectId} {
+      // Public only sees published projects; admins see all (incl. drafts)
+      allow read: if resource.data.published == true || isAdmin();
+
+      // Members may submit their own work, but only as an unpublished,
+      // non-featured draft — they cannot self-publish or self-feature.
+      allow create: if isMember()
+        && request.resource.data.creatorUserId == request.auth.uid
+        && request.resource.data.published == false
+        && request.resource.data.featured == false
+        && request.resource.data.keys().hasOnly([
+          'title','description','category','creatorUserId','creatorName',
+          'links','coverImage','coverImagePath','tags','votes','published',
+          'featured','createdAt','updatedAt'
+        ]);
+
+      // Publish/feature/edit/delete is admin-only
+      allow update, delete: if isAdmin();
+    }
+
+    // SHOWCASE VOTES — per-member vote records (idempotency for the vote API).
+    // The server writes via the Admin SDK; clients only ever call the API route,
+    // so all direct client writes are denied (defense-in-depth against vote
+    // doc-ID/forgery abuse).
+    match /showcaseVotes/{voteId} {
+      allow read, create, update, delete: if isAdmin();
+    }
+
     // JOBS
     match /jobs/{jobId} {
       // Read if published or admin

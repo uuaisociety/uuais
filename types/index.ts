@@ -124,6 +124,48 @@ export interface BlogPost {
   published: boolean;
 }
 
+export type ShowcaseCategory = 'app' | 'website' | 'github' | 'model' | 'video' | 'research' | 'demo' | 'other';
+
+export const SHOWCASE_CATEGORIES: ShowcaseCategory[] = [
+  'app',
+  'website',
+  'github',
+  'model',
+  'video',
+  'research',
+  'demo',
+  'other',
+];
+
+export const SHOWCASE_CATEGORY_LABELS: Record<ShowcaseCategory, string> = {
+  app: 'Apps',
+  website: 'Websites',
+  github: 'Open Source',
+  model: 'Models',
+  video: 'Videos',
+  research: 'Research',
+  demo: 'Demos',
+  other: 'Other',
+};
+
+export interface ShowcaseProject {
+  id: string;
+  title: string;
+  description: string;
+  category: ShowcaseCategory;
+  creatorUserId: string;
+  creatorName: string;
+  links: { github?: string; website?: string; demo?: string; video?: string };
+  coverImage?: string;
+  coverImagePath?: string;
+  tags: string[];
+  votes: number;
+  published: boolean;
+  featured: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface JoinFormData {
   firstName: string;
   lastName: string;
