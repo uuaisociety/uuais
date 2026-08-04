@@ -16,17 +16,19 @@ import { Card, CardContent } from '@/components/ui/Card';
 import EventsTab from '@/components/pages/admin/tabs/EventsTab';
 import TeamTab from '@/components/pages/admin/tabs/TeamTab';
 import BlogTab from '@/components/pages/admin/tabs/BlogTab';
+import ShowcaseTab from '@/components/pages/admin/tabs/ShowcaseTab';
 import FAQTab from '@/components/pages/admin/tabs/FAQTab';
 import BoardTab from '@/components/pages/admin/tabs/BoardTab'
 import ApplicationsTab from '@/components/pages/admin/tabs/ApplicationsTab';
 import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import FAQModal from '@/components/pages/admin/modals/FAQModal';
 import BlogModal from '@/components/pages/admin/modals/BlogModal';
+import ShowcaseModal, { type ShowcaseFormState } from '@/components/pages/admin/modals/ShowcaseModal';
 import BoardPositionModal, { type BPositionFormState } from './modals/BoardPositionModal';
 import CampaignBuilderModal from '@/components/pages/admin/modals/CampaignBuilderModal';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
-import { BlogPost, Event, TeamMember, FAQ, BoardPosition, ApplicationCampaign } from '@/types';
+import { BlogPost, Event, TeamMember, FAQ, BoardPosition, ApplicationCampaign, ShowcaseProject } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
 import AISettingsTab from '@/components/pages/admin/tabs/AISettingsTab';
@@ -37,7 +39,7 @@ const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
   const [nrUsers, setNrUsers] = useState<number>(0);
   //const { user, logout } = useAdmin();
-  const tabValues = ['events', 'team', 'blog', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
+  const tabValues = ['events', 'team', 'blog', 'showcase', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
   type Tab = typeof tabValues[number];
   const [activeTab, setActiveTab] = useState<Tab>(() => {
     if (typeof window !== 'undefined') {
@@ -61,9 +63,11 @@ const AdminDashboard: React.FC = () => {
 
   // Modal states
   const [showBlogModal, setShowBlogModal] = useState(false);
+  const [showShowcaseModal, setShowShowcaseModal] = useState(false);
   const [showFaqModal, setShowFaqModal] = useState(false);
   const [showBoardPositionModal, setShowBoardPositionModal] = useState(false);
   const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | null>(null);
+  const [editingShowcase, setEditingShowcase] = useState<ShowcaseProject | null>(null);
   const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
   const [editingBoardPosition, setEditingBoardPosition] = useState<BoardPosition | null>(null);
   const [showCampaignModal, setShowCampaignModal] = useState(false);
@@ -77,6 +81,17 @@ const AdminDashboard: React.FC = () => {
     tags: [] as string[],
     published: false
   });
+
+  const emptyShowcaseForm: ShowcaseFormState = {
+    title: '',
+    description: '',
+    category: 'app',
+    links: {},
+    tags: [],
+    coverImage: '',
+    coverImagePath: '',
+  };
+  const [showcaseForm, setShowcaseForm] = useState<ShowcaseFormState>(emptyShowcaseForm);
 
 
   const [faqForm, setFaqForm] = useState<Pick<FAQ, 'question' | 'answer' | 'category' | 'order' | 'published'>>({
@@ -285,6 +300,92 @@ const AdminDashboard: React.FC = () => {
     });
   };
 
+  const openShowcaseCreate = () => {
+    setEditingShowcase(null);
+    setShowcaseForm(emptyShowcaseForm);
+    setShowShowcaseModal(true);
+  };
+
+  const openShowcaseEdit = (project: ShowcaseProject) => {
+    setEditingShowcase(project);
+    setShowcaseForm({
+      title: project.title,
+      description: project.description,
+      category: project.category,
+      links: project.links,
+      tags: project.tags,
+      coverImage: project.coverImage ?? '',
+      coverImagePath: project.coverImagePath ?? '',
+    });
+    setShowShowcaseModal(true);
+  };
+
+  const closeShowcaseModal = () => {
+    setShowShowcaseModal(false);
+    setEditingShowcase(null);
+  };
+
+  const handleAddShowcase = () => {
+    const now = new Date().toISOString();
+    dispatch({
+      firestoreAction: 'ADD_SHOWCASE_PROJECT',
+      payload: {
+        title: showcaseForm.title,
+        description: showcaseForm.description,
+        category: showcaseForm.category,
+        creatorUserId: 'admin',
+        creatorName: 'Admin',
+        links: showcaseForm.links,
+        coverImage: showcaseForm.coverImage || undefined,
+        coverImagePath: showcaseForm.coverImagePath || undefined,
+        tags: showcaseForm.tags,
+        votes: 0,
+        published: true,
+        featured: false,
+        createdAt: now,
+        updatedAt: now,
+      },
+    });
+    closeShowcaseModal();
+  };
+
+  const handleUpdateShowcase = () => {
+    if (!editingShowcase) return;
+    const updated = {
+      ...editingShowcase,
+      title: showcaseForm.title,
+      description: showcaseForm.description,
+      category: showcaseForm.category,
+      links: showcaseForm.links,
+      coverImage: showcaseForm.coverImage || undefined,
+      coverImagePath: showcaseForm.coverImagePath || undefined,
+      tags: showcaseForm.tags,
+      updatedAt: new Date().toISOString(),
+    };
+    dispatch({ firestoreAction: 'UPDATE_SHOWCASE_PROJECT', payload: updated });
+    closeShowcaseModal();
+  };
+
+  const handleDeleteShowcase = (id: string) => {
+    if (window.confirm('Delete this showcase project?')) {
+      dispatch({ firestoreAction: 'DELETE_SHOWCASE_PROJECT', payload: id });
+    }
+  };
+
+  const toggleShowcasePublish = (project: ShowcaseProject) => {
+    dispatch({
+      firestoreAction: 'UPDATE_SHOWCASE_PROJECT',
+      payload: { ...project, published: !project.published, updatedAt: new Date().toISOString() },
+    });
+  };
+
+  const toggleShowcaseFeature = (project: ShowcaseProject) => {
+    dispatch({
+      firestoreAction: 'UPDATE_SHOWCASE_PROJECT',
+      payload: { ...project, featured: !project.featured, updatedAt: new Date().toISOString() },
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-4 pt-20 md:py-8 md:pt-24">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
@@ -323,6 +424,7 @@ const AdminDashboard: React.FC = () => {
                 { key: 'events', label: 'Events', icon: Calendar },
                 { key: 'team', label: 'Team', icon: Users },
                 { key: 'blog', label: 'Newsletter', icon: FileText },
+                { key: 'showcase', label: 'Showcase', icon: FileText },
                 { key: 'faq', label: 'FAQ', icon: FileText },
                 { key: 'analytics', label: 'Analytics', icon: TrendingUp },
                 { key: 'members', label: 'Members', icon: Users },
@@ -382,6 +484,18 @@ const AdminDashboard: React.FC = () => {
                 onEdit={(post) => handleEditBlogPost(post)}
                 onDelete={(id) => handleDeleteBlogPost(id)}
                 onTogglePublish={(post) => toggleBlogPostVisibility(post)}
+              />
+            </TabErrorBoundary>
+          )}
+          {activeTab === 'showcase' && (
+            <TabErrorBoundary name="Showcase">
+              <ShowcaseTab
+                projects={state.showcaseProjects}
+                onAddClick={openShowcaseCreate}
+                onEdit={openShowcaseEdit}
+                onDelete={handleDeleteShowcase}
+                onTogglePublish={toggleShowcasePublish}
+                onToggleFeature={toggleShowcaseFeature}
               />
             </TabErrorBoundary>
           )}
@@ -450,6 +564,21 @@ const AdminDashboard: React.FC = () => {
                 handleUpdateBlogPost();
               } else {
                 handleAddBlogPost();
+              }
+            }}
+          />
+
+          <ShowcaseModal
+            open={showShowcaseModal}
+            editing={!!editingShowcase}
+            form={showcaseForm}
+            setForm={setShowcaseForm}
+            onClose={closeShowcaseModal}
+            onSubmit={() => {
+              if (editingShowcase) {
+                handleUpdateShowcase();
+              } else {
+                handleAddShowcase();
               }
             }}
           />
