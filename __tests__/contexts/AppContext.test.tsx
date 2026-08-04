@@ -78,6 +78,13 @@ jest.mock('@/lib/firestore/teamApplications', () => ({
   deleteTeamApplication: jest.fn(),
 }));
 
+jest.mock('@/lib/firestore/showcase', () => ({
+  subscribeToShowcaseProjects: jest.fn(() => mockUnsubscribe),
+  addShowcaseProject: jest.fn(),
+  updateShowcaseProject: jest.fn(),
+  deleteShowcaseProject: jest.fn(),
+}));
+
 import { AppProvider, useApp } from '@/contexts/AppContext';
 import {
   subscribeToEvents, addEvent, updateEvent, deleteEvent,
@@ -99,6 +106,7 @@ import {
 } from '@/lib/firestore/board-positions';
 import { deleteBoardApplication } from '@/lib/firestore/boardApplications';
 import { addCampaign } from '@/lib/firestore/applicationCampaigns';
+import { subscribeToShowcaseProjects, addShowcaseProject, updateShowcaseProject, deleteShowcaseProject } from '@/lib/firestore/showcase';
 import { onIdTokenChanged } from 'firebase/auth';
 
 const mockEvent = { id: 'evt-1', title: 'Test Event', description: 'Desc', location: 'Loc', image: '', category: 'workshop' as const, status: 'upcoming' as const, registrationRequired: false, eventStartAt: '2026-01-01T00:00:00Z' };
@@ -134,6 +142,7 @@ describe('AppContext', () => {
     expect(result.current.state.jobs).toEqual([]);
     expect(result.current.state.boardPositions).toEqual([]);
     expect(result.current.state.applicants).toEqual([]);
+    expect(result.current.state.showcaseProjects).toEqual([]);
     expect(result.current.state.isLoading).toBe(false);
     expect(result.current.state.error).toBeNull();
   });
@@ -146,6 +155,7 @@ describe('AppContext', () => {
     expect(subscribeToFaqs).toHaveBeenCalledTimes(1);
     expect(subscribeToJobs).toHaveBeenCalledTimes(1);
     expect(subscribeToPositions).toHaveBeenCalledTimes(1);
+    expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1);
     expect(onIdTokenChanged).toHaveBeenCalledTimes(1);
     expect(idTokenCallback).not.toBeNull();
   });
@@ -264,6 +274,61 @@ describe('AppContext', () => {
         await result.current.dispatch({ type: 'SET_BOARDPOS', payload: [mockBoardPosition] });
       });
       expect(result.current.state.boardPositions).toEqual([mockBoardPosition]);
+    });
+
+    const mockShowcaseProject = {
+      id: 'sp-1',
+      title: 'Course Navigator',
+      description: 'Explore courses',
+      category: 'app' as const,
+      creatorUserId: 'u1',
+      creatorName: 'Ada',
+      links: {},
+      tags: [],
+      votes: 0,
+      published: true,
+      featured: false,
+      createdAt: '2026-01-01T00:00:00Z',
+      updatedAt: '2026-01-01T00:00:00Z',
+    };
+
+    it('SET_SHOWCASE_PROJECTS', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [mockShowcaseProject] });
+      });
+      expect(result.current.state.showcaseProjects).toEqual([mockShowcaseProject]);
+    });
+
+    it('ADD_SHOWCASE_PROJECT regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'ADD_SHOWCASE_PROJECT', payload: mockShowcaseProject });
+      });
+      expect(result.current.state.showcaseProjects).toEqual([mockShowcaseProject]);
+    });
+
+    it('UPDATE_SHOWCASE_PROJECT regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [mockShowcaseProject] });
+      });
+      const updated = { ...mockShowcaseProject, title: 'Updated' };
+      await act(async () => {
+        await result.current.dispatch({ type: 'UPDATE_SHOWCASE_PROJECT', payload: updated });
+      });
+      expect(result.current.state.showcaseProjects).toEqual([updated]);
+    });
+
+    it('DELETE_SHOWCASE_PROJECT regular action', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [mockShowcaseProject] });
+      });
+      await act(async () => {
+        await result.current.dispatch({ type: 'DELETE_SHOWCASE_PROJECT', payload: mockShowcaseProject.id });
+      });
+      expect(result.current.state.showcaseProjects).toEqual([]);
     });
 
     it('ADD_BLOG_POST regular action', async () => {
@@ -576,6 +641,41 @@ describe('AppContext', () => {
         await result.current.dispatch({ firestoreAction: 'DELETE_BOARDPOS', payload: 'bp-1' });
       });
       expect(deletePosition).toHaveBeenCalledWith('bp-1');
+    });
+
+    it('ADD_SHOWCASE_PROJECT calls addShowcaseProject and returns the id', async () => {
+      (addShowcaseProject as jest.Mock).mockResolvedValue('sp-1');
+      const { result } = renderApp();
+      const payload = {
+        title: 'Course Navigator', description: 'Explore courses',
+        category: 'app' as const, creatorUserId: 'u1', creatorName: 'Ada',
+        links: {}, tags: [], votes: 0, published: false, featured: false,
+        createdAt: '2026-01-01T00:00:00Z', updatedAt: '2026-01-01T00:00:00Z',
+      };
+      const returned = await act(async () => result.current.dispatch({ firestoreAction: 'ADD_SHOWCASE_PROJECT', payload }));
+      expect(addShowcaseProject).toHaveBeenCalledWith(payload);
+      expect(returned).toBe('sp-1');
+    });
+
+    it('UPDATE_SHOWCASE_PROJECT calls updateShowcaseProject', async () => {
+      const { result } = renderApp();
+      const project = {
+        id: 'sp-1', title: 'Updated', description: 'Desc', category: 'app' as const,
+        creatorUserId: 'u1', creatorName: 'Ada', links: {}, tags: [], votes: 0,
+        published: true, featured: false, createdAt: '2026-01-01T00:00:00Z', updatedAt: '2026-01-01T00:00:00Z',
+      };
+      await act(async () => {
+        await result.current.dispatch({ firestoreAction: 'UPDATE_SHOWCASE_PROJECT', payload: project });
+      });
+      expect(updateShowcaseProject).toHaveBeenCalledWith('sp-1', project);
+    });
+
+    it('DELETE_SHOWCASE_PROJECT calls deleteShowcaseProject', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ firestoreAction: 'DELETE_SHOWCASE_PROJECT', payload: 'sp-1' });
+      });
+      expect(deleteShowcaseProject).toHaveBeenCalledWith('sp-1');
     });
 
     it('DELETE_BOARD_APPLICATION calls deleteBoardApplication', async () => {

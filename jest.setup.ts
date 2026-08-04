@@ -78,6 +78,7 @@ const __defaultAppState = {
   campaigns: [],
   teamApplications: [],
   registrationQuestions: [],
+  showcaseProjects: [],
   isLoading: false,
   error: null,
 };

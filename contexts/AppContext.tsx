@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { Event, TeamMember, BlogPost, FAQ, Job, BoardPosition, Application, ApplicationCampaign, TeamApplication } from '../types';
+import { Event, TeamMember, BlogPost, FAQ, Job, BoardPosition, Application, ApplicationCampaign, TeamApplication, ShowcaseProject } from '../types';
 import { subscribeToEvents, addEvent as addEventToFirestore, updateEvent as updateEventInFirestore, deleteEvent as deleteEventFromFirestore } from '@/lib/firestore/events';
 import { auth } from '@/lib/firebase-client';
 import { onIdTokenChanged } from 'firebase/auth';
@@ -14,6 +14,7 @@ import { subscribeToPositions, addPosition as addPositionToFirestore, updatePosi
 import { subscribeToCampaigns, addCampaign as addCampaignToFirestore, updateCampaign as updateCampaignInFirestore, deleteCampaign as deleteCampaignFromFirestore, type CampaignInput } from '@/lib/firestore/applicationCampaigns';
 import { deleteCampaignQuestionsByCampaign } from '@/lib/firestore/campaignQuestions';
 import { deleteTeamApplication, subscribeToTeamApplications } from '@/lib/firestore/teamApplications';
+import { subscribeToShowcaseProjects, addShowcaseProject as addShowcaseProjectToFirestore, updateShowcaseProject as updateShowcaseProjectInFirestore, deleteShowcaseProject as deleteShowcaseProjectFromFirestore } from '@/lib/firestore/showcase';
 
 interface AppState {
   events: Event[];
@@ -26,6 +27,7 @@ interface AppState {
   campaigns: ApplicationCampaign[];
   campaignsLoaded: boolean;
   teamApplications: TeamApplication[];
+  showcaseProjects: ShowcaseProject[];
   isLoading: boolean;
   error: string | null;
 }
@@ -60,7 +62,11 @@ type AppAction =
   | { type: 'SET_APPLICANTS'; payload: Application[] }
   | { type: 'SET_CAMPAIGNS'; payload: ApplicationCampaign[] }
   | { type: 'SET_CAMPAIGNS_LOADED'; payload: boolean }
-  | { type: 'SET_TEAM_APPLICATIONS'; payload: TeamApplication[] };
+  | { type: 'SET_TEAM_APPLICATIONS'; payload: TeamApplication[] }
+  | { type: 'SET_SHOWCASE_PROJECTS'; payload: ShowcaseProject[] }
+  | { type: 'ADD_SHOWCASE_PROJECT'; payload: ShowcaseProject }
+  | { type: 'UPDATE_SHOWCASE_PROJECT'; payload: ShowcaseProject }
+  | { type: 'DELETE_SHOWCASE_PROJECT'; payload: string };
 
 type FirestoreAction = 
   | { firestoreAction: 'ADD_EVENT'; payload: Omit<Event, 'id'> }
@@ -87,7 +93,10 @@ type FirestoreAction =
   | { firestoreAction: 'ADD_CAMPAIGN'; payload: CampaignInput }
   | { firestoreAction: 'UPDATE_CAMPAIGN'; payload: Partial<ApplicationCampaign> }
   | { firestoreAction: 'DELETE_CAMPAIGN'; payload: string }
-  | { firestoreAction: 'DELETE_TEAM_APPLICATION'; payload: string };
+  | { firestoreAction: 'DELETE_TEAM_APPLICATION'; payload: string }
+  | { firestoreAction: 'ADD_SHOWCASE_PROJECT'; payload: Omit<ShowcaseProject, 'id'> }
+  | { firestoreAction: 'UPDATE_SHOWCASE_PROJECT'; payload: ShowcaseProject }
+  | { firestoreAction: 'DELETE_SHOWCASE_PROJECT'; payload: string };
 
 const initialState: AppState = {
   events: [],
@@ -100,6 +109,7 @@ const initialState: AppState = {
   campaigns: [],
   campaignsLoaded: false,
   teamApplications: [],
+  showcaseProjects: [],
   isLoading: false,
   error: null
 };
@@ -208,6 +218,22 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
       return { ...state, campaignsLoaded: action.payload };
     case 'SET_TEAM_APPLICATIONS':
       return { ...state, teamApplications: action.payload };
+    case 'SET_SHOWCASE_PROJECTS':
+      return { ...state, showcaseProjects: action.payload };
+    case 'ADD_SHOWCASE_PROJECT':
+      return { ...state, showcaseProjects: [...state.showcaseProjects, action.payload] };
+    case 'UPDATE_SHOWCASE_PROJECT':
+      return {
+        ...state,
+        showcaseProjects: state.showcaseProjects.map((p) =>
+          p.id === action.payload.id ? action.payload : p
+        ),
+      };
+    case 'DELETE_SHOWCASE_PROJECT':
+      return {
+        ...state,
+        showcaseProjects: state.showcaseProjects.filter((p) => p.id !== action.payload),
+      };
     default:
       return state;
   }
@@ -232,6 +258,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     let unsubscribeBoardApplications: (() => void) | null = null;
     let unsubscribeCampaigns: (() => void) | null = null;
     let unsubscribeTeamApplications: (() => void) | null = null;
+    let unsubscribeShowcase: (() => void) | null = null;
 
     const subscribe = (includeUnpublished = false) => {
       // includeUnpublished: boolean indicates admin status
@@ -295,6 +322,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         dispatch({ type: 'SET_CAMPAIGNS', payload: campaigns });
         dispatch({ type: 'SET_CAMPAIGNS_LOADED', payload: true });
       }, { includeAll: includeUnpublished });
+
+      // Showcase: public visitors only see published projects; admins see all (incl. drafts)
+      if (unsubscribeShowcase) {
+        try { unsubscribeShowcase(); } catch { /* ignore */ }
+        unsubscribeShowcase = null;
+      }
+      unsubscribeShowcase = subscribeToShowcaseProjects((projects) => {
+        dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: projects });
+      }, { includeUnpublished });
     };
 
     // Initial subscription: assume not admin (public)
@@ -356,6 +392,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       }
       if (unsubscribeTeamApplications) {
         try { unsubscribeTeamApplications(); } catch { /* ignore */ }
+      }
+      if (unsubscribeShowcase) {
+        try { unsubscribeShowcase(); } catch { /* ignore */ }
       }
       unsubscribeTeamMembers();
       unsubscribeBlogPosts();
@@ -450,6 +489,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             break;
           case 'DELETE_TEAM_APPLICATION':
             await deleteTeamApplication(action.payload);
+            break;
+          case 'ADD_SHOWCASE_PROJECT':
+            return await addShowcaseProjectToFirestore(action.payload);
+          case 'UPDATE_SHOWCASE_PROJECT':
+            await updateShowcaseProjectInFirestore(action.payload.id, action.payload);
+            break;
+          case 'DELETE_SHOWCASE_PROJECT':
+            await deleteShowcaseProjectFromFirestore(action.payload);
             break;
         }
       } else {

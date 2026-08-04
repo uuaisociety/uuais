@@ -10,6 +10,7 @@ export const defaultAppState = {
   campaignsLoaded: false,
   teamApplications: [],
   registrationQuestions: [],
+  showcaseProjects: [],
   isLoading: false,
   error: null,
 }
