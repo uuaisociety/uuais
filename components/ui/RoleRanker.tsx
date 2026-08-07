@@ -182,7 +182,7 @@ const RoleRanker: React.FC<RoleRankerProps> = ({
         Role Selection
       </h3>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-5">
-        Rank up to {maxRanking} roles by preference — #1 is your first choice. Click a role to read its
+        Rank up to {maxRanking}&nbsp;roles by preference, #1 is your first choice. Click a role to read its
         description, then add the ones you&apos;re interested in.
       </p>
 
