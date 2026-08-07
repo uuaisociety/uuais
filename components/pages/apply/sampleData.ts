@@ -376,14 +376,16 @@ export const UU_PROGRAMMES: string[] = [
 
 
 export const AREAS_OF_INTEREST: AreaOfInterest[] = [
-  { id: 'robotics', label: 'Robotics' },
-  { id: 'data_science', label: 'Data Science' },
-  { id: 'nlp', label: 'Natural Language Processing' },
-  { id: 'computer_vision', label: 'Computer Vision' },
-  { id: 'reinforcement_learning', label: 'Reinforcement Learning' },
+  { id: 'data_science', label: 'Data Science & Big Data' },
+  { id: 'nlp', label: 'Natural Language Processing & LLMs' },
+  { id: 'computer_vision', label: 'Computer Vision & VLM' },
   { id: 'ai_ethics', label: 'AI Ethics & Fairness' },
-  { id: 'generative_ai', label: 'Generative AI' },
+  { id: 'robotics', label: 'AI Research & Theoretical ML' },
   { id: 'ml_engineering', label: 'Machine Learning Engineering' },
+  { id: 'agent_orch', label: 'Agent Orchestration'},
+  { id: 'creative', label: 'Creative AI usage'},
+  { id: 'startups', label: 'Startups'},
+  { id: 'cyber', label: 'Cybersecurity & AI Safety'}
 ];
 
 // Mock profile — simulates a logged-in user with profile data to prefill.
