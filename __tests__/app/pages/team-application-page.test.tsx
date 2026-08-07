@@ -140,6 +140,29 @@ describe('TeamApplicationPage', () => {
     expect(screen.getByRole('link', { name: 'it@uuais.com' })).toHaveAttribute('href', 'mailto:it@uuais.com')
   })
 
+  it('separates multiple roles in the same team with a markdown-style --- delimiter', () => {
+    const multiRoleCampaign: ApplicationCampaign = {
+      ...sampleCampaign,
+      teams: ['it', 'growth'],
+      roles: [
+        { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 },
+        { id: 'it_lead', teamId: 'it', title: 'IT Lead', status: 'open', order: 1 },
+        { id: 'growth_member', teamId: 'growth', title: 'Growth Member', status: 'open', order: 2 },
+      ],
+    }
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [multiRoleCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+
+    expect(screen.getByText('IT Member')).toBeInTheDocument()
+    expect(screen.getByText('IT Lead')).toBeInTheDocument()
+    expect(screen.getByText('Growth Member')).toBeInTheDocument()
+    // One --- delimiter between the two IT roles; none between different teams
+    expect(screen.getAllByText('---').length).toBe(1)
+  })
+
   it('clamps overflowing descriptions and expands/collapses them on toggle', () => {
     Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, get: () => 200 })
     Object.defineProperty(HTMLElement.prototype, 'clientHeight', { configurable: true, get: () => 50 })

@@ -123,7 +123,7 @@ const CollapsibleDescription: React.FC<{ text: string; className?: string }> = (
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline"
+          className="mt-1 transform-all ease-in-out duration-200 inline-flex items-center gap-1 text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline"
           aria-expanded={expanded}
         >
           {expanded ? "Show less" : "Show more"}
@@ -598,22 +598,31 @@ export default function TeamApplicationPage() {
                                 <CollapsibleDescription text={teamDescription} className="text-sm text-gray-600 dark:text-gray-300 mt-1" />
                               </div>
                             </div>
-                            <div className="mt-5 divide-y divide-gray-100 dark:divide-gray-800">
-                              {roles.map((role) => (
-                                <div key={role.id} className="py-4 first:pt-0 last:pb-0">
-                                  <div className="flex flex-wrap items-center gap-2">
-                                    <span className="text-sm font-semibold text-gray-900 dark:text-white">{role.title}</span>
-                                    <TagComponent variant="green" size="sm">Open</TagComponent>
+                            <div className="mt-5">
+                              {roles.map((role, idx) => (
+                                <React.Fragment key={role.id}>
+                                  {idx > 0 && (
+                                    <div className="flex items-center gap-2" aria-hidden>
+                                      <div className="flex-1 border-t border-gray-200 dark:border-gray-700" />
+                                      <span className="text-gray-300 dark:text-gray-600 text-xs">---</span>
+                                      <div className="flex-1 border-t border-gray-200 dark:border-gray-700" />
+                                    </div>
+                                  )}
+                                  <div className="py-4 first:pt-0 last:pb-0">
+                                    <div className="flex flex-wrap items-center gap-2">
+                                      <span className="text-sm font-semibold text-gray-900 dark:text-white">{role.title}</span>
+                                      <TagComponent variant="green" size="sm">Open</TagComponent>
+                                    </div>
+                                    {role.description && (
+                                      <CollapsibleDescription text={role.description} className="text-sm text-gray-600 dark:text-gray-300 mt-1.5" />
+                                    )}
+                                    {role.deadline && (
+                                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 flex items-center gap-1">
+                                        <Clock className="h-3 w-3" /> Deadline: {role.deadline}
+                                      </p>
+                                    )}
                                   </div>
-                                  {role.description && (
-                                    <CollapsibleDescription text={role.description} className="text-sm text-gray-600 dark:text-gray-300 mt-1.5" />
-                                  )}
-                                  {role.deadline && (
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 flex items-center gap-1">
-                                      <Clock className="h-3 w-3" /> Deadline: {role.deadline}
-                                    </p>
-                                  )}
-                                </div>
+                                </React.Fragment>
                               ))}
                             </div>
                           </div>
