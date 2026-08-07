@@ -140,6 +140,26 @@ describe('TeamApplicationPage', () => {
     expect(screen.getByRole('link', { name: 'it@uuais.com' })).toHaveAttribute('href', 'mailto:it@uuais.com')
   })
 
+  it('clamps overflowing descriptions and expands/collapses them on toggle', () => {
+    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, get: () => 200 })
+    Object.defineProperty(HTMLElement.prototype, 'clientHeight', { configurable: true, get: () => 50 })
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [sampleCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+
+    const showMore = screen.getAllByRole('button', { name: /Show more/i })
+    expect(showMore.length).toBeGreaterThan(0)
+    fireEvent.click(showMore[0])
+    expect(screen.getAllByRole('button', { name: /Show less/i }).length).toBeGreaterThan(0)
+    fireEvent.click(screen.getAllByRole('button', { name: /Show less/i })[0])
+    expect(screen.getAllByRole('button', { name: /Show more/i }).length).toBeGreaterThan(0)
+
+    delete (HTMLElement.prototype as { scrollHeight?: unknown }).scrollHeight
+    delete (HTMLElement.prototype as { clientHeight?: unknown }).clientHeight
+  })
+
   it('navigates to profile step on Continue click', () => {
     mockUseApp.mockReturnValue({
       state: { ...defaultAppState, campaigns: [sampleCampaign] },
