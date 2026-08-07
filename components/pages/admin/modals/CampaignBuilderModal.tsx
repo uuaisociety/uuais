@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { X, Plus, Trash2, GripVertical, ArrowUp, ArrowDown, FileQuestion } from "lucide-react";
+import { X, Plus, Trash2, GripVertical, ArrowUp, ArrowDown, FileQuestion, Server, Code2, Megaphone, CalendarDays, FlaskConical } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { FieldGroup, InputBase, TextareaBase, SelectBase } from "@/components/ui/Form";
 import {
@@ -26,6 +26,10 @@ const TEAM_NAME: Record<string, string> = {
   it: "IT", development: "Development", growth: "Growth",
   partnerships_events: "Partnerships & Events", research: "Research",
 };
+const TEAM_ICON: Record<string, React.ComponentType<{ className?: string }>> = {
+  it: Server, development: Code2, growth: Megaphone,
+  partnerships_events: CalendarDays, research: FlaskConical,
+};
 
 interface QDraft {
   id: string;
@@ -35,8 +39,20 @@ interface QDraft {
   required: boolean;
 }
 
+interface RDraft {
+  id: string;
+  teamId: string;
+  title: string;
+  description: string;
+  headcount: string;
+  status: "open" | "closed";
+  deadline: string;
+}
+
 let qSeq = 1;
 const newQId = () => `new_${Date.now()}_${qSeq++}`;
+let rSeq = 1;
+const newRoleId = () => `new_role_${Date.now()}_${rSeq++}`;
 
 function toDrafts(qs: CampaignQuestion[]): QDraft[] {
   return [...qs]
@@ -44,12 +60,36 @@ function toDrafts(qs: CampaignQuestion[]): QDraft[] {
     .map((q) => ({ id: q.id, question: q.question, type: q.type, options: q.options || [], required: q.required }));
 }
 
+function toRoleDrafts(campaign?: ApplicationCampaign | null): RDraft[] {
+  if (!campaign?.roles?.length) return [];
+  return campaign.roles.map((r) => ({
+    id: r.id,
+    teamId: r.teamId,
+    title: r.title,
+    description: r.description || "",
+    headcount: typeof r.headcount === "number" ? String(r.headcount) : "",
+    status: r.status,
+    deadline: r.deadline || "",
+  }));
+}
+
 interface Props {
   open: boolean;
   campaign?: ApplicationCampaign | null;
   isNew?: boolean;
   onClose: () => void;
-  onSaveCampaign: (data: { id?: string; title: string; subtitle: string; description: string; deadline: string; status: CampaignStatus; teams: string[]; teamInfo?: Record<string, { name?: string; description?: string }>; enabledStandardFields: string[] }) => Promise<string | undefined | void>;
+  onSaveCampaign: (data: {
+    id?: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    deadline: string;
+    status: CampaignStatus;
+    teams: string[];
+    roles: ApplicationCampaign["roles"];
+    teamInfo?: Record<string, { name?: string; description?: string }>;
+    enabledStandardFields: string[];
+  }) => Promise<string | undefined | void>;
 }
 
 const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose, onSaveCampaign }) => {
@@ -61,6 +101,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
   const [status, setStatus] = useState<CampaignStatus>("draft");
   const [enabledTeams, setEnabledTeams] = useState<string[]>([]);
   const [teamInfo, setTeamInfo] = useState<Record<string, { name?: string; description?: string }>>({});
+  const [roles, setRoles] = useState<RDraft[]>([]);
   const [enabledStandardFields, setEnabledStandardFields] = useState<string[]>([
     "name", "email", "gender", "university", "program", "graduationYear",
     "linkedin", "resume", "interests", "teamRanking", "weeklyHours", "motivation",
@@ -76,26 +117,28 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
     if (!open) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setTitle(campaign?.title ?? "");
-     
+
     setSubtitle(campaign?.subtitle ?? "");
-     
+
     setDescription(campaign?.description ?? "");
-     
+
     setDeadline(campaign?.deadline ?? "");
-     
+
     setStatus(campaign?.status ?? "draft");
-     
+
     setEnabledTeams(campaign?.teams ?? []);
 
     setTeamInfo(campaign?.teamInfo ? { ...campaign.teamInfo } : {});
-     
+
+    setRoles(toRoleDrafts(campaign));
+
     setEnabledStandardFields(campaign?.enabledStandardFields?.length ? campaign.enabledStandardFields : [
       "name", "email", "gender", "university", "program", "graduationYear",
       "linkedin", "resume", "interests", "teamRanking", "weeklyHours", "motivation",
     ]);
-     
+
     setRemovedQuestionIds([]);
-     
+
     setOptionsExpanded(new Set());
 
     if (campaign?.id && !isNew) {
@@ -105,7 +148,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
         .catch((e) => { console.error("Failed to load campaign questions", e); setQuestions([]); })
         .finally(() => setLoading(false));
     } else {
-       
+
       setQuestions([]);
     }
   }, [open, campaign, isNew]);
@@ -126,6 +169,15 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
       ...prev,
       [id]: { ...prev[id], description: value || undefined },
     }));
+
+  const addRole = (teamId: string) =>
+    setRoles((prev) => [...prev, { id: newRoleId(), teamId, title: "", description: "", headcount: "", status: "open", deadline: "" }]);
+  const removeRole = (id: string) =>
+    setRoles((prev) => prev.filter((r) => r.id !== id));
+  const updateRole = (id: string, patch: Partial<RDraft>) =>
+    setRoles((prev) => prev.map((r) => (r.id === id ? { ...r, ...patch } : r)));
+  const toggleRoleStatus = (id: string) =>
+    setRoles((prev) => prev.map((r) => (r.id === id ? { ...r, status: r.status === "open" ? "closed" : "open" } : r)));
 
   const addQuestion = () =>
     setQuestions((prev) => [...prev, { id: newQId(), question: "", type: "text", options: [], required: false }]);
@@ -169,21 +221,39 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
     { id: "email", label: "Email" },
     { id: "gender", label: "Gender" },
     { id: "university", label: "University" },
-    { id: "program", label: "Programme" },
+    { id: "program", label: "Program" },
     { id: "graduationYear", label: "Expected graduation year" },
     { id: "linkedin", label: "LinkedIn URL" },
     { id: "resume", label: "Resume / CV upload" },
     { id: "interests", label: "Areas of interest" },
-    { id: "teamRanking", label: "Team preference ranking" },
+    { id: "teamRanking", label: "Role preference ranking" },
     { id: "weeklyHours", label: "Weekly availability" },
     { id: "motivation", label: "Personal motivation" },
   ];
 
+  const hasValidRoles = roles.some((r) => r.title.trim() && enabledTeams.includes(r.teamId));
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim() || enabledTeams.length === 0) return;
+    if (!title.trim() || enabledTeams.length === 0 || !hasValidRoles) return;
     setSaving(true);
     try {
+      const serializedRoles = roles
+        .filter((r) => r.title.trim() && enabledTeams.includes(r.teamId))
+        .map((r, i) => {
+          const headcount = parseInt(r.headcount, 10);
+          return {
+            id: r.id,
+            teamId: r.teamId,
+            title: r.title.trim(),
+            description: r.description.trim() || undefined,
+            headcount: Number.isFinite(headcount) && headcount > 0 ? headcount : undefined,
+            status: r.status,
+            deadline: r.deadline || undefined,
+            order: i,
+          };
+        });
+
       const campaignId = await onSaveCampaign({
         id: campaign?.id,
         title: title.trim(),
@@ -192,6 +262,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
         deadline,
         status,
         teams: enabledTeams,
+        roles: serializedRoles,
         teamInfo,
         enabledStandardFields,
       });
@@ -289,10 +360,18 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
               </div>
             </section>
 
-            {/* Team selection */}
+            {/* Teams + roles */}
             <section className="pt-2 border-t border-gray-200 dark:border-gray-700">
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-1 mt-4">Teams available in this campaign</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Applicants will rank the selected teams in step 4.</p>
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-1 mt-4">Teams &amp; Roles</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+                Choose the teams in this campaign, then define the roles each team is recruiting for.
+                Applicants rank roles (up to 3) in step 4. Roles have their own status and optional deadline,
+                so you can open new ones mid-campaign.
+              </p>
+              <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
+                Team and role descriptions support paragraphs (blank line), &ldquo;- &rdquo; bullet lists, &ldquo;# &rdquo; headings,
+                and clickable links/emails (paste a URL or email address). Up to 10 000 characters.
+              </p>
               <div className="flex flex-wrap gap-2">
                 {TEAM_IDS.map((id) => {
                   const enabled = enabledTeams.includes(id);
@@ -314,39 +393,108 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                 <p className="text-xs text-amber-600 dark:text-amber-500 mt-2">Select at least one team.</p>
               )}
 
-              {/* Per-team flavor text overrides (shown only when teams are selected) */}
-              {enabledTeams.length > 0 && (
-                <div className="mt-4 space-y-3">
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    Customize the team name and description shown to applicants in step 1. Leave blank to use the default.
-                  </p>
-                  {enabledTeams.map((id) => {
-                    const info = teamInfo[id] || {};
-                    return (
-                      <div key={id} className="border border-gray-200 dark:border-gray-700 rounded-md p-3 bg-gray-50/50 dark:bg-gray-900/30">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">{TEAM_NAME[id]} (override)</span>
-                        </div>
-                        <div className="grid gap-2">
-                          <InputBase
-                            maxLength={100}
-                            placeholder={`Custom name (default: ${TEAM_NAME[id]})`}
-                            value={info.name || ""}
-                            onChange={(e) => setTeamNameByUser(id, e.target.value)}
-                          />
-                          <TextareaBase
-                            maxLength={500}
-                            placeholder="Custom description shown under the team name in step 1"
-                            rows={2}
-                            value={info.description || ""}
-                            onChange={(e) => setTeamDescription(id, e.target.value)}
-                          />
-                        </div>
+              {enabledTeams.map((teamId) => {
+                const teamRoles = roles.filter((r) => r.teamId === teamId);
+                const info = teamInfo[teamId] || {};
+                const Icon = TEAM_ICON[teamId] || Server;
+                return (
+                  <div key={teamId} className="mt-5 border border-gray-200 dark:border-gray-700 rounded-md p-4 bg-gray-50/50 dark:bg-gray-900/30">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="inline-flex items-center gap-2 text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">
+                        <Icon className="h-3.5 w-3.5 text-red-600 dark:text-red-400" />
+                        {TEAM_NAME[teamId]}
+                      </span>
+                      <Button type="button" size="sm" variant="outline" icon={Plus} onClick={() => addRole(teamId)}>Add role</Button>
+                    </div>
+
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                      Optional: customize how this team appears on the applicant overview.
+                    </p>
+                    <div className="grid gap-2 mb-4">
+                      <InputBase
+                        maxLength={100}
+                        placeholder={`Custom team name (default: ${TEAM_NAME[teamId]})`}
+                        value={info.name || ""}
+                        onChange={(e) => setTeamNameByUser(teamId, e.target.value)}
+                      />
+                      <TextareaBase
+                        autoResize
+                        maxLength={10000}
+                        placeholder="Custom team description shown in the overview"
+                        value={info.description || ""}
+                        onChange={(e) => setTeamDescription(teamId, e.target.value)}
+                      />
+                    </div>
+
+                    {teamRoles.length === 0 ? (
+                      <p className="text-xs text-gray-400 dark:text-gray-500 italic">
+                        No roles defined yet — add at least one role so applicants can apply to this team.
+                      </p>
+                    ) : (
+                      <div className="space-y-3">
+                        {teamRoles.map((role) => (
+                          <div key={role.id} className="border border-gray-200 dark:border-gray-700 rounded-md p-3 bg-white dark:bg-gray-800 space-y-2">
+                            <div className="flex items-center gap-2">
+                              <InputBase
+                                maxLength={150}
+                                placeholder="Role title (required)"
+                                value={role.title}
+                                onChange={(e) => updateRole(role.id, { title: e.target.value })}
+                                className="flex-1"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => removeRole(role.id)}
+                                className="p-1.5 text-red-500 hover:text-red-600 transition-colors"
+                                title="Delete role"
+                                aria-label={`Delete ${role.title || "role"}`}
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </button>
+                            </div>
+                            <TextareaBase
+                              autoResize
+                              maxLength={10000}
+                              placeholder="Role description shown to applicants"
+                              value={role.description}
+                              onChange={(e) => updateRole(role.id, { description: e.target.value })}
+                            />
+                            <div className="grid sm:grid-cols-2 gap-2">
+                              <InputBase
+                                type="number"
+                                min={1}
+                                placeholder="Headcount (optional)"
+                                value={role.headcount}
+                                onChange={(e) => updateRole(role.id, { headcount: e.target.value })}
+                              />
+                              <InputBase
+                                type="date"
+                                title="Optional role-specific deadline (defaults to campaign deadline)"
+                                value={role.deadline}
+                                onChange={(e) => updateRole(role.id, { deadline: e.target.value })}
+                              />
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Status:</span>
+                              <button
+                                type="button"
+                                onClick={() => toggleRoleStatus(role.id)}
+                                className={`px-2.5 py-1 text-xs font-medium rounded-full border transition-all duration-200 ${
+                                  role.status === "open"
+                                    ? "bg-green-600 text-white border-green-600"
+                                    : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600"
+                                }`}
+                              >
+                                {role.status === "open" ? "Open" : "Closed"}
+                              </button>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    );
-                  })}
-                </div>
-              )}
+                    )}
+                  </div>
+                );
+              })}
             </section>
 
             {/* Standard fields */}
@@ -450,7 +598,6 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                                     placeholder={`Option ${oi + 1}`}
                                     value={opt}
                                     onChange={(e) => updateOption(q.id, oi, e.target.value)}
-                                    ref={(el) => { if (el && oi === q.options.length - 1 && opt === "") el.focus(); }}
                                   />
                                   <button
                                     type="button"
@@ -479,7 +626,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
             {/* Footer */}
             <div className="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
               <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-              <Button type="submit" disabled={!title.trim() || enabledTeams.length === 0 || saving}>
+              <Button type="submit" disabled={!title.trim() || enabledTeams.length === 0 || !hasValidRoles || saving}>
                 {saving ? "Saving…" : isNew ? "Create campaign" : "Save changes"}
               </Button>
             </div>
