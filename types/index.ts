@@ -253,6 +253,21 @@ export interface CampaignQuestion {
   order: number;
 }
 
+/** A role applicants can apply to within a campaign. Belongs to a team.
+ *  Roles have their own lifecycle so a role can open (or close) after the
+ *  main campaign window has started. */
+export interface CampaignRole {
+  id: string;
+  teamId: string;
+  title: string;
+  description?: string;
+  headcount?: number;
+  status: 'open' | 'closed';
+  /** Optional per-role deadline; falls back to the campaign deadline when unset. */
+  deadline?: string;
+  order: number;
+}
+
 export interface ApplicationCampaign {
   id: string;
   title: string;
@@ -261,11 +276,21 @@ export interface ApplicationCampaign {
   deadline: string;
   status: CampaignStatus;
   teams: string[];
+  /** Roles up for application, grouped by teamId. Campaigns created before roles
+   *  existed have an empty array and fall back to team-level selection. */
+  roles: CampaignRole[];
   /** Optional per-team overrides keyed by team id. Use this to customise the team name or
    *  description shown to applicants in step 1 instead of the generic fallback text. */
   teamInfo?: Record<string, { name?: string; description?: string }>;
   enabledStandardFields: string[];
   createdAt?: string | Timestamp;
+}
+
+/** One ranked role choice inside an application. Ordered (index 0 = first choice). */
+export interface RoleChoice {
+  roleId: string;
+  teamId: string;
+  justification: string;
 }
 
 export interface TeamApplication {
@@ -274,6 +299,8 @@ export interface TeamApplication {
   name: string;
   email: string;
   emailNormalized?: string;
+  /** Verified Firebase uid of the applicant (server-set). */
+  uid?: string;
   gender?: string;
   university?: string;
   program?: string;
@@ -281,12 +308,18 @@ export interface TeamApplication {
   linkedin?: string;
   resume?: { path?: string; url?: string } | null;
   interests?: string[];
+  /** Ordered ranked roles (index 0 = first choice). Replaces teamRanking for new submissions. */
+  roleRanking?: RoleChoice[];
+  /** Legacy field — ranked team ids from before role-level applications existed. */
   teamRanking?: string[];
   customTeam?: string;
+  /** "Propose your own role" free-text from the role selection step. */
+  customRole?: string;
   weeklyHours?: number;
   motivation?: string;
   customAnswers?: Record<string, string | string[]>;
   agree?: boolean;
   newsletter?: boolean;
+  updatedAt?: string | Timestamp;
   createdAt?: string | Timestamp;
 }
