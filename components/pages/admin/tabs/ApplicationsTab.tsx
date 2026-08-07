@@ -22,6 +22,7 @@ const TEAM_NAMES: Record<string, string> = {
   growth: "Growth",
   partnerships_events: "Partnerships & Events",
   research: "Research",
+  vp: "Vice President",
 };
 
 const STATUS_STYLES: Record<CampaignStatus, { label: string; tagVariant: "green" | "red" | "yellow" }> = {

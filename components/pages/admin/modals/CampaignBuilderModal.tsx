@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { X, Plus, Trash2, GripVertical, ArrowUp, ArrowDown, FileQuestion, Server, Code2, Megaphone, CalendarDays, FlaskConical } from "lucide-react";
+import { X, Plus, Trash2, GripVertical, ArrowUp, ArrowDown, FileQuestion, Server, Code2, Megaphone, CalendarDays, FlaskConical, Award } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { FieldGroup, InputBase, TextareaBase, SelectBase } from "@/components/ui/Form";
 import {
@@ -21,14 +21,14 @@ const QUESTION_TYPES: { value: CustomQuestionType; label: string }[] = [
   { value: "checkbox", label: "Multiple choice" },
 ];
 
-const TEAM_IDS = ["it", "development", "growth", "partnerships_events", "research"];
+const TEAM_IDS = ["it", "development", "growth", "partnerships_events", "research", "vp"];
 const TEAM_NAME: Record<string, string> = {
   it: "IT", development: "Development", growth: "Growth",
-  partnerships_events: "Partnerships & Events", research: "Research",
+  partnerships_events: "Partnerships & Events", research: "Research", vp: "Vice President",
 };
 const TEAM_ICON: Record<string, React.ComponentType<{ className?: string }>> = {
   it: Server, development: Code2, growth: Megaphone,
-  partnerships_events: CalendarDays, research: FlaskConical,
+  partnerships_events: CalendarDays, research: FlaskConical, vp: Award,
 };
 
 interface QDraft {

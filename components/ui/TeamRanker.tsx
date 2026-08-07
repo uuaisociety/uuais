@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowUp, ArrowDown, GripVertical, Server, Code2, Megaphone, CalendarDays, FlaskConical, Rocket, X } from "lucide-react";
+import { ArrowUp, ArrowDown, GripVertical, Server, Code2, Megaphone, CalendarDays, FlaskConical, Rocket, X, Award } from "lucide-react";
 
 export interface TeamRankEntry {
   id: string;
@@ -27,6 +27,7 @@ const DEFAULT_ICONS: Record<string, React.ComponentType<{ className?: string }>>
   growth: Megaphone,
   partnerships_events: CalendarDays,
   research: FlaskConical,
+  vp: Award,
   other: Rocket,
 };
 

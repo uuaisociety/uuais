@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import {
   ArrowUp, ArrowDown, ChevronDown, GripVertical,
-  Server, Code2, Megaphone, CalendarDays, FlaskConical, Rocket, X,
+  Server, Code2, Megaphone, CalendarDays, FlaskConical, Rocket, X, Award,
 } from "lucide-react";
 import type { CampaignRole } from "@/types";
 import FormattedText from "@/components/ui/FormattedText";
@@ -39,6 +39,7 @@ const DEFAULT_ICONS: Record<string, React.ComponentType<{ className?: string }>>
   growth: Megaphone,
   partnerships_events: CalendarDays,
   research: FlaskConical,
+  vp: Award,
   other: Rocket,
 };
 
