@@ -1059,7 +1059,7 @@ export default function TeamApplicationPage() {
                     {fieldEnabled("motivation") && (
                     <div className="pt-2">
                       <span className="text-xs font-medium text-gray-500 uppercase">Motivation</span>
-                      <p className="text-sm text-gray-900 dark:text-white whitespace-pre-wrap mt-1">
+                      <p className="text-sm text-gray-900 dark:text-white whitespace-pre-wrap break-words mt-1">
                         {form.motivation || "—"}
                       </p>
                     </div>
