@@ -14,17 +14,19 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { FieldGroup, InputBase, SelectBase, TextareaBase } from "@/components/ui/Form";
 import MultiStepWizard, { WizardStep } from "@/components/ui/MultiStepWizard";
-import TeamRanker, { type TeamRankEntry } from "@/components/ui/TeamRanker";
+import RoleRanker, { RoleRankEntry } from "@/components/ui/RoleRanker";
+import FormattedText from "@/components/ui/FormattedText";
 import { LinkedInUrlInput, LINKEDIN_PREFIX } from "@/components/ui/LinkedInUrlInput";
 import TagComponent from "@/components/ui/Tag";
 import PDFDropzone from "@/components/ui/PDFDropzone";
 import { useApp } from "@/contexts/AppContext";
 import { useNotify } from "@/components/ui/Notifications";
-import { auth } from "@/lib/firebase-client";
+import { auth, refreshSessionCookie } from "@/lib/firebase-client";
 import { getUserProfile, type UserProfile } from "@/lib/firestore/users";
 import { subscribeToCampaignQuestions } from "@/lib/firestore/campaignQuestions";
-import { getTeamApplicationByEmail } from "@/lib/firestore/teamApplications";
-import { ApplicationCampaign, CampaignQuestion } from "@/types";
+import { getTeamApplicationByUid } from "@/lib/firestore/teamApplications";
+import { MAX_ROLE_RANKING } from "@/lib/constants";
+import { ApplicationCampaign, CampaignQuestion, CampaignRole } from "@/types";
 import {
   UU_PROGRAMMES,
   AREAS_OF_INTEREST,
@@ -49,7 +51,7 @@ const WIZARD_STEPS: WizardStep[] = [
   { key: "overview", title: "Overview" },
   { key: "profile", title: "Your Profile" },
   { key: "experience", title: "Experience" },
-  { key: "teams", title: "Team Selection" },
+  { key: "roles", title: "Role Selection" },
   { key: "review", title: "Review" },
 ];
 
@@ -80,8 +82,8 @@ interface TeamFormData {
   resume: File | null;
   interests: string[];
   customInterest: string;
-  teamRanking: TeamRankEntry[];
-  customTeam: string;
+  roleRanking: RoleRankEntry[];
+  customRole: string;
   weeklyHours: number;
   motivation: string;
   customAnswers: Record<string, string | string[]>;
@@ -92,7 +94,7 @@ interface TeamFormData {
 const emptyForm: TeamFormData = {
   name: "", email: "", gender: "", university: "Uppsala", program: "",
   expectedGraduationYear: "", linkedin: "", resume: null,
-  interests: [], customInterest: "", teamRanking: [], customTeam: "", weeklyHours: 5,
+  interests: [], customInterest: "", roleRanking: [], customRole: "", weeklyHours: 5,
   motivation: "", customAnswers: {}, agree: false, newsletter: false,
 };
 
@@ -110,6 +112,7 @@ export default function TeamApplicationPage() {
     ? campaign.enabledStandardFields
     : DEFAULT_STANDARD_FIELDS;
   const fieldEnabled = (id: string) => enabledFields.includes(id);
+  const roleSelectionEnabled = fieldEnabled("teamRanking");
 
   const [step, setStep] = useState(0);
 
@@ -134,33 +137,46 @@ export default function TeamApplicationPage() {
   const [authLoading, setAuthLoading] = useState(true);
   const [customQuestions, setCustomQuestions] = useState<CampaignQuestion[]>([]);
 
-  // Check if the current user has already applied to this campaign
-  // Best-effort: only reliable for admins (state is populated) or when the
-  // direct query succeeds; the server 409 is the authoritative enforcement.
+  // Roles currently open in this campaign (respects per-role status + deadline)
+  const [openRoles, setOpenRoles] = useState<CampaignRole[]>([]);
+  useEffect(() => {
+    if (!campaign) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setOpenRoles([]);
+      return;
+    }
+    const now = Date.now();
+    const open = (campaign.roles || []).filter(
+      (r) => r.status === "open" && (!r.deadline || Date.parse(r.deadline) >= now)
+    );
+    setOpenRoles(open);
+  }, [campaign]);
+
+  // Check if the current user has already applied (via verified uid; rules allow self-read).
   const [hasApplied, setHasApplied] = useState(false);
   useEffect(() => {
-    if (!campaign?.id || !form.email) {
+    // Once submitted, freeze hasApplied so the app-created subscription can't flash "Already Applied!".
+    if (submitted || submitting) return;
+    const uid = auth.currentUser?.uid;
+    if (!campaign?.id || !uid || authLoading) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setHasApplied(false);
       return;
     }
-    const emailNorm = form.email.trim().toLowerCase();
     // First check from reactive state if available (fast path, admin only)
     if (state.teamApplications.some(
-      (a) => a.emailNormalized === emailNorm && a.campaignId === campaign.id
+      (a) => a.uid === uid && a.campaignId === campaign.id
     )) {
       setHasApplied(true);
       return;
     }
-    // Debounce so typing an email doesn't swap the page mid-entry
     const t = setTimeout(() => {
-      getTeamApplicationByEmail(emailNorm, campaign.id)
+      getTeamApplicationByUid(uid, campaign.id)
         .then((app) => setHasApplied(!!app))
         .catch(() => setHasApplied(false));
     }, 600);
     return () => clearTimeout(t);
-  }, [campaign?.id, form.email, state.teamApplications]);
-
+  }, [campaign?.id, authLoading, state.teamApplications, submitted, submitting]);
 
   // Subscribe to custom questions for the active campaign
   useEffect(() => {
@@ -217,11 +233,10 @@ export default function TeamApplicationPage() {
     }
   }, [authLoading, notify]);
 
-  // Reset preferences whenever the campaign changes so stale rankings from a
-  // different campaign don't bleed in. The user will drag teams in step 4.
+  // Reset preferences when the campaign changes so stale rankings from another campaign don't bleed in.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setForm((prev) => ({ ...prev, teamRanking: [], customTeam: "" }));
+    setForm((prev) => ({ ...prev, roleRanking: [], customRole: "" }));
   }, [campaign?.id]);
 
   const set = <K extends keyof TeamFormData>(field: K, val: TeamFormData[K]) =>
@@ -234,6 +249,9 @@ export default function TeamApplicationPage() {
       ...p,
       interests: p.interests.includes(id) ? p.interests.filter((i) => i !== id) : [...p.interests, id],
     }));
+
+  const teamNameFor = (teamId: string) =>
+    campaign?.teamInfo?.[teamId]?.name || TEAM_NAMES[teamId] || teamId;
 
   const handleNext = () => {
     setStep((s) => Math.min(s + 1, WIZARD_STEPS.length - 1));
@@ -258,6 +276,10 @@ export default function TeamApplicationPage() {
       router.push("/login?redirect=/apply/team");
       return;
     }
+    // Refresh the httpOnly session cookie (only set at /api/login) so a prior account doesn't 409 the dedup lock.
+    try {
+      await refreshSessionCookie();
+    } catch { /* best-effort; the apply call surfaces auth errors */ }
     setSubmitting(true);
     try {
       const fd = new FormData();
@@ -269,7 +291,16 @@ export default function TeamApplicationPage() {
       if (fieldEnabled("program")) fd.append("program", form.program);
       if (fieldEnabled("graduationYear")) fd.append("graduationYear", form.expectedGraduationYear);
       if (fieldEnabled("linkedin")) fd.append("linkedin", form.linkedin);
-      if (fieldEnabled("teamRanking")) fd.append("customTeam", form.customTeam);
+      if (roleSelectionEnabled) {
+        fd.append("roleRanking", JSON.stringify(
+          form.roleRanking.filter((r) => !r.custom).map((r) => ({
+            roleId: r.roleId,
+            teamId: r.teamId,
+            justification: r.justification,
+          }))
+        ));
+        fd.append("customRole", form.customRole);
+      }
       if (fieldEnabled("weeklyHours")) fd.append("weeklyHours", String(form.weeklyHours));
       if (fieldEnabled("motivation")) fd.append("motivation", form.motivation);
       fd.append("agree", String(form.agree));
@@ -278,7 +309,6 @@ export default function TeamApplicationPage() {
         fd.append("interests", JSON.stringify(form.interests));
         fd.append("customInterest", form.customInterest);
       }
-      if (fieldEnabled("teamRanking")) fd.append("teamRanking", JSON.stringify(form.teamRanking.map((t) => t.id)));
       fd.append("customAnswers", JSON.stringify(form.customAnswers));
       if (fieldEnabled("resume") && form.resume) fd.append("resume", form.resume, form.resume.name);
 
@@ -335,7 +365,7 @@ export default function TeamApplicationPage() {
           </div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Application Submitted!</h1>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Thank you, {form.name.split(" ")[0] || "applicant"}. Your team application for{" "}
+            Thank you, {form.name.split(" ")[0] || "applicant"}. Your application for{" "}
             <strong className="text-red-600 dark:text-red-400">{campaign.title}</strong>&nbsp;has been received.
             We&apos;ll contact you at {form.email || "your email"}.
           </p>
@@ -347,11 +377,11 @@ export default function TeamApplicationPage() {
     );
   }
 
-  // Already applied to this campaign
+  // Already applied — no further actions available
   if (hasApplied) {
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300 flex items-center">
-        <div className="max-w-md mx-auto px-4 text-center">
+      <div className="min-h-screen bg-white dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300">
+        <div className="max-w-md mx-auto px-4 text-center mt-16">
           <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-950/30 flex items-center justify-center mx-auto mb-6">
             <Check className="h-10 w-10 text-blue-600 dark:text-blue-400" />
           </div>
@@ -359,12 +389,12 @@ export default function TeamApplicationPage() {
           <p className="text-gray-600 dark:text-gray-300 mb-6">
             You have already submitted an application for{" "}
             <strong className="text-red-600 dark:text-red-400">{campaign.title}</strong>.
-            If you experienced any issues or need to update your submission, please email{" "}
-            <a href="mailto:dev@uuais.com" className="text-blue-600 dark:text-blue-400 hover:underline">dev@uuais.com</a>.
           </p>
-          <Link href="/">
-            <Button variant="outline">Back to home</Button>
-          </Link>
+          <div className="flex flex-col items-center gap-3">
+            <Link href="/">
+              <Button>Back to home</Button>
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -402,12 +432,21 @@ export default function TeamApplicationPage() {
       return typeof ans === "string" && ans.trim().length > 0;
     });
 
+  const realRoleRanking = form.roleRanking.filter((r) => !r.custom);
+  const roleSelectionValid = !roleSelectionEnabled || realRoleRanking.length > 0;
+
   const canNext =
     step === 0 ? true :
     step === 1 ? !!form.name.trim() && EMAIL_RE.test(form.email.trim()) :
     step === 2 ? (!fieldEnabled("linkedin") || form.linkedin.trim().length > LINKEDIN_PREFIX.length) && (!fieldEnabled("interests") || form.interests.length > 0 || !!form.customInterest.trim()) && requiredCustomAnswered :
-    step === 3 ? (!fieldEnabled("motivation") || form.motivation.trim().length >= 25) && (!fieldEnabled("teamRanking") || form.teamRanking.length >= 1) :
+    step === 3 ? (!fieldEnabled("motivation") || form.motivation.trim().length >= 25) && roleSelectionValid :
     true;
+
+  const campaignRoles = campaign.roles && campaign.roles.length > 0 ? campaign.roles : [];
+  const teamsWithRoles = campaign.teams.map((teamId) => ({
+    teamId,
+    roles: campaignRoles.filter((r) => r.teamId === teamId && r.status === "open"),
+  })).filter((t) => t.roles.length > 0);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
@@ -470,31 +509,60 @@ export default function TeamApplicationPage() {
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Our Teams</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Open Roles</h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                  Explore the teams you can join. You&apos;ll rank your preferences in a later step.
+                  Explore the roles you can apply for. You&apos;ll rank your preferences in a later step
+                  (up to {MAX_ROLE_RANKING}).
                 </p>
-                <div className="grid gap-4">
-                  {campaign.teams.map((teamId) => {
-                    const teamOverride = campaign.teamInfo?.[teamId];
-                    const teamName = teamOverride?.name || TEAM_NAMES[teamId] || teamId;
-                    const teamDescription = teamOverride?.description || `Join the ${teamName} team and contribute to the society.`;
-                    const Icon = TEAM_ICONS[teamId] || Rocket;
-                    return (
-                      <Card key={teamId} className="group hover:shadow-lg transition-shadow duration-300">
-                        <div className="p-5 flex items-start gap-4">
-                          <div className="shrink-0 w-11 h-11 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
-                            <Icon className="h-5 w-5 text-red-600 dark:text-red-400" />
+                {teamsWithRoles.length === 0 ? (
+                  <Card>
+                    <div className="p-5 text-sm text-gray-500 dark:text-gray-400">
+                      No roles are open right now. Please check back later.
+                    </div>
+                  </Card>
+                ) : (
+                  <div className="grid gap-4">
+                    {teamsWithRoles.map(({ teamId, roles }) => {
+                      const teamOverride = campaign.teamInfo?.[teamId];
+                      const teamName = teamOverride?.name || TEAM_NAMES[teamId] || teamId;
+                      const teamDescription = teamOverride?.description || `Join the ${teamName} team and contribute to the society.`;
+                      const Icon = TEAM_ICONS[teamId] || Rocket;
+                      return (
+                        <Card key={teamId} className="group hover:shadow-lg transition-shadow duration-300">
+                          <div className="p-5 sm:p-6">
+                            <div className="flex items-start gap-4">
+                              <div className="shrink-0 w-11 h-11 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+                                <Icon className="h-5 w-5 text-red-600 dark:text-red-400" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <h4 className="font-semibold text-gray-900 dark:text-white">{teamName}</h4>
+                                <FormattedText text={teamDescription} className="text-sm text-gray-600 dark:text-gray-300 mt-1" />
+                              </div>
+                            </div>
+                            <div className="mt-5 divide-y divide-gray-100 dark:divide-gray-800">
+                              {roles.map((role) => (
+                                <div key={role.id} className="py-4 first:pt-0 last:pb-0">
+                                  <div className="flex flex-wrap items-center gap-2">
+                                    <span className="text-sm font-semibold text-gray-900 dark:text-white">{role.title}</span>
+                                    <TagComponent variant="green" size="sm">Open</TagComponent>
+                                  </div>
+                                  {role.description && (
+                                    <FormattedText text={role.description} className="text-sm text-gray-600 dark:text-gray-300 mt-1.5" />
+                                  )}
+                                  {role.deadline && (
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 flex items-center gap-1">
+                                      <Clock className="h-3 w-3" /> Deadline: {role.deadline}
+                                    </p>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
                           </div>
-                          <div>
-                            <h4 className="font-semibold text-gray-900 dark:text-white mb-1">{teamName}</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-300">{teamDescription}</p>
-                          </div>
-                        </div>
-                      </Card>
-                    );
-                  })}
-                </div>
+                        </Card>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
               {!form.email && (
                 <div className="flex items-center gap-2 text-sm text-amber-700 dark:text-amber-500 bg-amber-50 dark:bg-amber-950/20 rounded-md p-3 border border-amber-200 dark:border-amber-800">
@@ -552,9 +620,9 @@ export default function TeamApplicationPage() {
                         </FieldGroup>
                       )}
                       {fieldEnabled("program") && (
-                        <FieldGroup label="Programme" requiredHint="Required if student.">
+                        <FieldGroup label="Program" requiredHint="Required if student.">
                           <SelectBase value={form.program} onChange={(e) => set("program", e.target.value)}>
-                            <option value="">Select a programme</option>
+                            <option value="">Select a program</option>
                             {UU_PROGRAMMES.map((prog) => (
                               <option key={prog} value={prog}>{prog}</option>
                             ))}
@@ -757,26 +825,28 @@ export default function TeamApplicationPage() {
             </div>
           )}
 
-          {/* Step 3: Team Selection */}
+          {/* Step 3: Role Selection */}
           {step === 3 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Team Selection</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Role Selection</h2>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                  Drag to rank teams by preference, set your availability, and tell us why you want to join.
+                  Rank the roles you&apos;d like to join by preference, set your availability, and tell us
+                  why you want to contribute.
                 </p>
               </div>
               <Card>
                 <div className="p-6 space-y-6">
-                  {fieldEnabled("teamRanking") && (
-                    <TeamRanker
-                      ranking={form.teamRanking}
-                      onChange={(ranking) => set("teamRanking", ranking)}
-                      availableTeamIds={campaign.teams}
-                      teamName={(id) => (campaign.teamInfo?.[id]?.name || TEAM_NAMES[id] || id)}
+                  {roleSelectionEnabled && (
+                    <RoleRanker
+                      ranking={form.roleRanking}
+                      onChange={(ranking) => set("roleRanking", ranking)}
+                      availableRoles={openRoles}
+                      teamName={teamNameFor}
                       iconMap={TEAM_ICONS}
-                      customTeam={form.customTeam}
-                      onCustomTeamChange={(val) => set("customTeam", val)}
+                      maxRanking={MAX_ROLE_RANKING}
+                      customRole={form.customRole}
+                      onCustomRoleChange={(val) => set("customRole", val)}
                     />
                   )}
                   {fieldEnabled("weeklyHours") && (
@@ -859,7 +929,7 @@ export default function TeamApplicationPage() {
                     <SummaryRow label="Email" value={form.email} />
                     {fieldEnabled("gender") && <SummaryRow label="Gender" value={form.gender || "Prefer not to say"} />}
                     {fieldEnabled("university") && <SummaryRow label="University" value={form.university === "Uppsala" ? "Uppsala University" : form.university} />}
-                    {fieldEnabled("program") && <SummaryRow label="Programme" value={form.program || "—"} />}
+                    {fieldEnabled("program") && <SummaryRow label="Program" value={form.program || "—"} />}
                     {fieldEnabled("graduationYear") && <SummaryRow label="Graduation year" value={form.expectedGraduationYear || "—"} />}
                   </SummarySection>
                   <SummarySection icon={Briefcase} title="Experience & Interests">
@@ -891,17 +961,33 @@ export default function TeamApplicationPage() {
                       </div>
                     )}
                   </SummarySection>
-                  <SummarySection icon={User} title="Team Selection">
-                    {fieldEnabled("teamRanking") && form.teamRanking.map((team, idx) => (
-                      <div key={team.id} className="flex items-center gap-3 py-1">
-                        <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold ${
-                          idx === 0 ? "bg-red-600 text-white" : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
-                        }`}>
-                          {idx + 1}
-                        </span>
-                        <span className="text-sm text-gray-900 dark:text-white">{team.custom ? `${team.name}${form.customTeam ? `: ${form.customTeam}` : ""}` : team.name}</span>
-                      </div>
-                    ))}
+                  <SummarySection icon={User} title="Role Selection">
+                    {roleSelectionEnabled && form.roleRanking.map((entry, idx) => {
+                      if (!entry.custom) {
+                        return (
+                          <div key={entry.roleId}>
+                            <div className="flex items-center gap-3 py-1">
+                              <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold ${
+                                idx === 0 ? "bg-red-600 text-white" : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
+                              }`}>
+                                {idx + 1}
+                              </span>
+                              <span className="text-sm text-gray-900 dark:text-white">{entry.title} <span className="text-gray-500 dark:text-gray-400">· {entry.teamName}</span></span>
+                            </div>
+                          </div>
+                        );
+                      }
+                      return (
+                        <div key="custom-role" className="flex items-center gap-3 py-1">
+                          <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs font-bold">
+                            {idx + 1}
+                          </span>
+                          <span className="text-sm text-gray-900 dark:text-white">
+                            Other{form.customRole ? `: ${form.customRole}` : ""}
+                          </span>
+                        </div>
+                      );
+                    })}
                     {fieldEnabled("weeklyHours") && <SummaryRow label="Availability" value={`${form.weeklyHours} hour${form.weeklyHours !== 1 ? "s" : ""} per week`} />}
                     {fieldEnabled("motivation") && (
                     <div className="pt-2">

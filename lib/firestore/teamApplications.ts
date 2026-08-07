@@ -1,6 +1,6 @@
 import { collection, onSnapshot, deleteDoc, doc, Timestamp } from 'firebase/firestore';
-import { db } from '@/lib/firebase-client';
-import { TeamApplication } from '@/types';
+import { db, refreshSessionCookie } from '@/lib/firebase-client';
+import { TeamApplication, RoleChoice } from '@/types';
 import { ensureString, ensureNumber } from './utils';
 
 const COLLECTION = 'teamApplications';
@@ -24,6 +24,21 @@ function ensureStringRecord(v: unknown): Record<string, string | string[]> {
   return {};
 }
 
+function ensureRoleChoices(v: unknown): RoleChoice[] | undefined {
+  if (!Array.isArray(v)) return undefined;
+  const out: RoleChoice[] = [];
+  v.forEach((entry) => {
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return;
+    const e = entry as Record<string, unknown>;
+    const roleId = ensureString(e.roleId);
+    const teamId = ensureString(e.teamId);
+    const justification = ensureString(e.justification);
+    if (!roleId || !teamId) return;
+    out.push({ roleId, teamId, justification });
+  });
+  return out.length > 0 ? out : undefined;
+}
+
 function docToApplication(id: string, data: Record<string, unknown>): TeamApplication {
   return {
     id,
@@ -31,6 +46,7 @@ function docToApplication(id: string, data: Record<string, unknown>): TeamApplic
     name: ensureString(data.name),
     email: ensureString(data.email),
     emailNormalized: ensureString(data.emailNormalized) || undefined,
+    uid: typeof data.uid === 'string' ? data.uid : undefined,
     gender: typeof data.gender === 'string' ? data.gender : undefined,
     university: typeof data.university === 'string' ? data.university : undefined,
     program: typeof data.program === 'string' ? data.program : undefined,
@@ -38,13 +54,16 @@ function docToApplication(id: string, data: Record<string, unknown>): TeamApplic
     linkedin: typeof data.linkedin === 'string' ? data.linkedin : undefined,
     resume: typeof data.resume === 'object' ? (data.resume as { path?: string; url?: string } | null) : null,
     interests: ensureStringArray(data.interests),
+    roleRanking: ensureRoleChoices(data.roleRanking),
     teamRanking: ensureStringArray(data.teamRanking),
     customTeam: typeof data.customTeam === 'string' ? data.customTeam : undefined,
+    customRole: typeof data.customRole === 'string' ? data.customRole : undefined,
     weeklyHours: typeof data.weeklyHours === 'number' ? data.weeklyHours : ensureNumber(data.weeklyHours, 0),
     motivation: typeof data.motivation === 'string' ? data.motivation : undefined,
     customAnswers: ensureStringRecord(data.customAnswers),
     agree: typeof data.agree === 'boolean' ? data.agree : undefined,
     newsletter: typeof data.newsletter === 'boolean' ? data.newsletter : undefined,
+    updatedAt: data.updatedAt as string | Timestamp | undefined,
     createdAt: data.createdAt as string | Timestamp | undefined,
   };
 }
@@ -63,23 +82,25 @@ export async function deleteTeamApplication(id: string): Promise<void> {
   await deleteDoc(doc(db, COLLECTION, id));
 }
 
-/**
- * Delete an application together with its campaign lock and cooldown limit docs.
- * Call this instead of deleteTeamApplication when the admin deletes a submission.
- */
+// Admin deletion: also removes lock/limits docs + resume via the API route (Storage).
 export async function deleteTeamApplicationWithLimits(
   id: string,
   emailNormalized: string,
   campaignId: string,
 ): Promise<void> {
-  const { deleteDoc: del, doc: d } = await import('firebase/firestore');
-  const sanitize = (s: string) => encodeURIComponent(s);
-  const lockKey = `${sanitize(emailNormalized)}__${sanitize(campaignId)}`;
-  await Promise.all([
-    deleteDoc(doc(db, COLLECTION, id)),
-    del(d(db, 'applicationCampaignLocks', lockKey)),
-    del(d(db, 'applicationUserLimits', sanitize(emailNormalized))),
-  ]);
+  // Refresh the httpOnly session cookie so the admin claim stays current (cookie minted pre-grant returns 403).
+  try {
+    await refreshSessionCookie();
+  } catch { /* best-effort; the delete call surfaces auth errors */ }
+  const res = await fetch('/api/admin/team-applications', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, emailNormalized, campaignId }),
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw new Error(body?.error || `Failed to delete application (${res.status})`);
+  }
 }
 
 export function subscribeToTeamApplications(callback: (applications: TeamApplication[]) => void) {
@@ -97,6 +118,19 @@ export async function listTeamApplicationsByCampaign(campaignId: string): Promis
   const list = snapshot.docs.map((d) => docToApplication(d.id, d.data() as Record<string, unknown>));
   list.sort((a, b) => applicationSortKey(b.createdAt) - applicationSortKey(a.createdAt));
   return list;
+}
+
+export async function getTeamApplicationByUid(uid: string, campaignId: string): Promise<TeamApplication | null> {
+  const { getDocs, query, where } = await import('firebase/firestore');
+  const q = query(
+    collection(db, COLLECTION),
+    where('uid', '==', uid),
+    where('campaignId', '==', campaignId),
+  );
+  const snapshot = await getDocs(q);
+  if (snapshot.empty) return null;
+  const doc = snapshot.docs[0];
+  return docToApplication(doc.id, doc.data() as Record<string, unknown>);
 }
 
 export async function getTeamApplicationByEmail(email: string, campaignId: string): Promise<TeamApplication | null> {

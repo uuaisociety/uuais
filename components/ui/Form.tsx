@@ -68,12 +68,28 @@ export const SelectBase = React.forwardRef<HTMLSelectElement, React.SelectHTMLAt
   }
 );
 
-export const TextareaBase = React.forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttributes<HTMLTextAreaElement>>(
-  function TextareaBase(props, ref) {
-    const { className, ...rest } = props;
+export const TextareaBase = React.forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttributes<HTMLTextAreaElement> & { autoResize?: boolean }>(
+  function TextareaBase({ autoResize, className, ...rest }, ref) {
+    const innerRef = React.useRef<HTMLTextAreaElement>(null);
+    const setRefs = (el: HTMLTextAreaElement | null) => {
+      (innerRef as React.MutableRefObject<HTMLTextAreaElement | null>).current = el;
+      if (typeof ref === "function") ref(el);
+      else if (ref) (ref as React.MutableRefObject<HTMLTextAreaElement | null>).current = el;
+    };
+
+    React.useEffect(() => {
+      const el = innerRef.current;
+      if (!autoResize || !el) return;
+      const resize = () => {
+        el.style.height = "auto";
+        el.style.height = `${el.scrollHeight}px`;
+      };
+      resize();
+    }, [autoResize, rest.value]);
+
     return (
       <textarea
-        ref={ref}
+        ref={setRefs}
         className={`
           w-full rounded-md border border-gray-300 dark:border-gray-700
           bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
@@ -82,6 +98,7 @@ export const TextareaBase = React.forwardRef<HTMLTextAreaElement, React.Textarea
           transition-colors
           disabled:border-0 disabled:bg-transparent disabled:shadow-none
           disabled:focus:ring-0 disabled:focus:border-transparent disabled:cursor-default disabled:opacity-100
+          ${autoResize ? "overflow-y-hidden" : ""}
           ${className || ""}
         `}
         {...rest}

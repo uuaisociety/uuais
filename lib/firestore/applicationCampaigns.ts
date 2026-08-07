@@ -1,7 +1,7 @@
 import { collection, query, getDocs, addDoc, updateDoc, deleteDoc, onSnapshot, DocumentData, doc, Timestamp, where } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
-import { ApplicationCampaign } from '@/types';
-import { ensureString, stripUndefined } from './utils';
+import { ApplicationCampaign, CampaignRole } from '@/types';
+import { ensureNumber, ensureString, stripUndefined } from './utils';
 
 const COLLECTION = 'applicationCampaigns';
 
@@ -29,6 +29,30 @@ function ensureTeamInfo(v: unknown): ApplicationCampaign['teamInfo'] | undefined
   return hasAny ? out : undefined;
 }
 
+function ensureRoles(v: unknown): CampaignRole[] {
+  if (!Array.isArray(v)) return [];
+  const out: CampaignRole[] = [];
+  v.forEach((entry) => {
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return;
+    const e = entry as Record<string, unknown>;
+    const teamId = ensureString(e.teamId);
+    const title = ensureString(e.title);
+    if (!teamId || !title) return;
+    const status = ensureString(e.status) === 'closed' ? 'closed' : 'open';
+    out.push({
+      id: ensureString(e.id) || `${teamId}_${title}`,
+      teamId,
+      title,
+      description: typeof e.description === 'string' && e.description ? e.description : undefined,
+      headcount: ensureNumber(e.headcount, 0) > 0 ? ensureNumber(e.headcount, 0) : undefined,
+      status,
+      deadline: typeof e.deadline === 'string' && e.deadline ? e.deadline : undefined,
+      order: ensureNumber(e.order, 0),
+    });
+  });
+  return out.sort((a, b) => a.order - b.order);
+}
+
 function docToCampaign(id: string, data: Record<string, unknown>): ApplicationCampaign {
   return {
     id,
@@ -42,6 +66,7 @@ function docToCampaign(id: string, data: Record<string, unknown>): ApplicationCa
       return 'draft';
     })(),
     teams: ensureStringArray(data.teams),
+    roles: ensureRoles(data.roles),
     teamInfo: ensureTeamInfo(data.teamInfo),
     enabledStandardFields: ensureStringArray(data.enabledStandardFields),
     createdAt: data.createdAt as string | Timestamp | undefined,
@@ -66,6 +91,7 @@ export async function addCampaign(campaign: CampaignInput): Promise<string> {
     deadline: campaign.deadline,
     status: campaign.status,
     teams: campaign.teams,
+    roles: campaign.roles,
     teamInfo: campaign.teamInfo,
     enabledStandardFields: campaign.enabledStandardFields,
   } as Record<string, unknown>);
