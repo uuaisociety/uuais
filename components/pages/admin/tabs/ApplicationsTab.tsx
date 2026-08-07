@@ -279,7 +279,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
                           {submission.motivation && (
                             <div>
                               <span className="block text-xs font-medium text-gray-500 uppercase mb-1">Motivation</span>
-                              <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap border-l-2 border-gray-300 dark:border-gray-600 pl-3">{submission.motivation}</p>
+                              <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap break-words border-l-2 border-gray-300 dark:border-gray-600 pl-3">{submission.motivation}</p>
                             </div>
                           )}
                           {submission.customAnswers && Object.keys(submission.customAnswers).length > 0 && (
