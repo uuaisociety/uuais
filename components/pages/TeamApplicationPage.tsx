@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import {
   Sparkles, Clock, ChevronDown, Check,
   Server, Code2,
-  Megaphone, CalendarDays, FlaskConical, Rocket, User,
+  Megaphone, CalendarDays, FlaskConical, Rocket, User, Award,
   GraduationCap, Briefcase, Tag, Lock, Loader2,
 } from "lucide-react";
 import Link from "next/link";
@@ -44,6 +44,7 @@ const TEAM_ICONS: Record<string, React.ComponentType<{ className?: string }>> = 
   growth: Megaphone,
   partnerships_events: CalendarDays,
   research: FlaskConical,
+  vp: Award,
   other: Rocket,
 };
 
@@ -61,6 +62,7 @@ const TEAM_NAMES: Record<string, string> = {
   growth: "Growth",
   partnerships_events: "Partnerships & Events",
   research: "Research",
+  vp: "Vice President",
   other: "Other",
 };
 
@@ -96,6 +98,40 @@ const emptyForm: TeamFormData = {
   expectedGraduationYear: "", linkedin: "", resume: null,
   interests: [], customInterest: "", roleRanking: [], customRole: "", weeklyHours: 5,
   motivation: "", customAnswers: {}, agree: false, newsletter: false,
+};
+
+// Collapsible rich-text description: starts clamped to 3 lines with an ellipsis,
+// with a Show more/Show less toggle once it overflows.
+const CollapsibleDescription: React.FC<{ text: string; className?: string }> = ({ text, className }) => {
+  const [expanded, setExpanded] = useState(false);
+  const [needsToggle, setNeedsToggle] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (expanded) return;
+    const el = contentRef.current;
+    if (!el) return;
+    setNeedsToggle(el.scrollHeight > el.clientHeight + 1);
+  }, [text, expanded]);
+
+  return (
+    <div>
+      <div ref={contentRef} className={`${className} ${expanded ? "" : "line-clamp-3"}`}>
+        <FormattedText text={text} />
+      </div>
+      {needsToggle && (
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline"
+          aria-expanded={expanded}
+        >
+          {expanded ? "Show less" : "Show more"}
+          <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
+        </button>
+      )}
+    </div>
+  );
 };
 
 export default function TeamApplicationPage() {
@@ -559,7 +595,7 @@ export default function TeamApplicationPage() {
                               </div>
                               <div className="flex-1 min-w-0">
                                 <h4 className="font-semibold text-gray-900 dark:text-white">{teamName}</h4>
-                                <FormattedText text={teamDescription} className="text-sm text-gray-600 dark:text-gray-300 mt-1" />
+                                <CollapsibleDescription text={teamDescription} className="text-sm text-gray-600 dark:text-gray-300 mt-1" />
                               </div>
                             </div>
                             <div className="mt-5 divide-y divide-gray-100 dark:divide-gray-800">
@@ -570,7 +606,7 @@ export default function TeamApplicationPage() {
                                     <TagComponent variant="green" size="sm">Open</TagComponent>
                                   </div>
                                   {role.description && (
-                                    <FormattedText text={role.description} className="text-sm text-gray-600 dark:text-gray-300 mt-1.5" />
+                                    <CollapsibleDescription text={role.description} className="text-sm text-gray-600 dark:text-gray-300 mt-1.5" />
                                   )}
                                   {role.deadline && (
                                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 flex items-center gap-1">
