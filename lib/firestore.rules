@@ -23,6 +23,13 @@ service cloud.firestore {
       return isSignedIn() && callerProfile().data.isMember == true;
     }
 
+    // Helper: users may only write their email when it matches the verified auth email (or omit it); allow if unverifiable
+    function emailMatchesAuth() {
+      return !('email' in request.resource.data)
+        || request.auth.token.email == null
+        || request.resource.data.email == request.auth.token.email;
+    }
+
     // Helper: limit updates to only specific keys
     function changedOnly(allowed) {
       return request.resource.data.diff(resource.data).changedKeys().hasOnly(allowed);
@@ -55,6 +62,7 @@ service cloud.firestore {
 
       // Create own document at first sign-in or profile completion
       allow create: if isSignedIn() && request.auth.uid == uid
+        && emailMatchesAuth()
         // Limit client-writable fields; prevent role escalation
         && request.resource.data.keys().hasOnly([
           'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails','eventHistory'
@@ -62,6 +70,7 @@ service cloud.firestore {
 
       // Update own doc but cannot alter privileged fields except allowed ones
       allow update: if isSignedIn() && request.auth.uid == uid
+        && emailMatchesAuth()
         && request.resource.data.keys().hasOnly([
           'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails','eventHistory'
         ]);
@@ -88,8 +97,7 @@ service cloud.firestore {
     }
 
     // TEAM MEMBERS
-    // NOTE: `notes` field is admin-only per UI convention but publicly readable
-    // via client SDK since the whole collection is world-readable. Treat accordingly.
+    // NOTE: `notes` field is admin-only per UI convention but publicly readable via client SDK (collection is world-readable)
     match /teamMembers/{id} {
       allow read: if true;
       allow create, update, delete: if isAdmin();
@@ -139,11 +147,11 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
-    // TEAM APPLICATIONS (submissions; API writes via Admin SDK — client read/delete admin-only)
-    match /teamApplications/{applicationId} {
-      allow read: if isAdmin();
+    // TEAM APPLICATIONS (API writes via Admin SDK — admins read/delete all, applicants read their own)
+   match /teamApplications/{applicationId} {
+      allow read: if isAdmin() || (isSignedIn() && resource.data.uid == request.auth.uid);
       allow create, update, delete: if isAdmin();
-    }
+   }
 
     // REGISTRATION QUESTIONS (global)
     match /registrationQuestions/{rqId} {
