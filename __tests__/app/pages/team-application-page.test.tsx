@@ -232,6 +232,38 @@ describe('TeamApplicationPage', () => {
     expect(screen.queryByText('Continue')).not.toBeInTheDocument()
   })
 
+  it('shows "no roles open" screen when role selection is enabled but no roles are open', () => {
+    mockUseApp.mockReturnValue({
+      state: {
+        ...defaultAppState,
+        campaignsLoaded: true,
+        campaigns: [{ ...sampleCampaign, roles: [] }],
+      },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    expect(screen.getByText('No roles are open right now')).toBeInTheDocument()
+    expect(screen.queryByText('Continue')).not.toBeInTheDocument()
+  })
+
+  it('does not block the form when role selection is disabled even without roles', () => {
+    mockUseApp.mockReturnValue({
+      state: {
+        ...defaultAppState,
+        campaignsLoaded: true,
+        campaigns: [{
+          ...sampleCampaign,
+          roles: [],
+          enabledStandardFields: ['name', 'email', 'motivation', 'linkedin'],
+        }],
+      },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    expect(screen.queryByText('No roles are open right now')).not.toBeInTheDocument()
+    expect(screen.getByText('Continue')).toBeInTheDocument()
+  })
+
   it('blocks advancing when a required custom question is unanswered', () => {
     mockSubscribeToCampaignQuestions.mockImplementation((_id: string, cb: (qs: unknown[]) => void) => {
       cb([{ id: 'q1', question: 'Why do you want to join?', required: true, type: 'textarea' }])

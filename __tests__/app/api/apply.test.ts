@@ -4,6 +4,15 @@ import { createAuthMocks, createCollectionMock, createDocRef } from '@/__tests__
 const mockRunTransaction = jest.fn()
 const { mockGetTokens, authEdgeFactory } = createAuthMocks()
 
+const mockStorageSave = jest.fn().mockResolvedValue(undefined)
+const mockStorageGetSignedUrl = jest.fn().mockResolvedValue(['http://signed.url'])
+const mockStorageFileDelete = jest.fn().mockResolvedValue(undefined)
+const mockStorageFile = jest.fn(() => ({
+  save: mockStorageSave,
+  getSignedUrl: mockStorageGetSignedUrl,
+  delete: mockStorageFileDelete,
+}))
+
 jest.mock('next-firebase-auth-edge', () => authEdgeFactory)
 
 jest.mock('firebase-admin', () => {
@@ -14,10 +23,7 @@ jest.mock('firebase-admin', () => {
     firestore: firestoreFn as typeof import('firebase-admin').firestore & { FieldValue: typeof FieldValue },
     storage: () => ({
       bucket: () => ({
-        file: () => ({
-          save: jest.fn().mockResolvedValue(undefined),
-          getSignedUrl: jest.fn().mockResolvedValue(['http://signed.url']),
-        }),
+        file: mockStorageFile,
       }),
     }),
   }
@@ -504,11 +510,11 @@ describe('POST /api/apply', () => {
       expect(res.status).toBe(200)
     })
 
-    it('accepts a role whose per-role deadline extends past the campaign deadline (create mode)', async () => {
+    it('rejects a role whose per-role deadline extends past the campaign deadline (create mode)', async () => {
       campaignData = {
         status: 'open',
         teams: ['it', 'development'],
-        deadline: '2020-01-01', // campaign-wide deadline passed
+        deadline: '2020-01-01', // campaign-wide deadline passed — authoritative
         roles: [
           { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0, deadline: '2099-01-01' },
         ],
@@ -527,8 +533,10 @@ describe('POST /api/apply', () => {
 
       const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
       const res = await POST(req as unknown as Request)
+      const body = await res.json()
 
-      expect(res.status).toBe(200)
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/no longer/i)
     })
 
     it('rejects a role whose per-role deadline has also passed (create mode)', async () => {
@@ -557,7 +565,7 @@ describe('POST /api/apply', () => {
       const body = await res.json()
 
       expect(res.status).toBe(400)
-      expect(body.error).toMatch(/not currently accepting/i)
+      expect(body.error).toMatch(/no longer/i)
     })
   })
 
@@ -798,6 +806,77 @@ describe('POST /api/apply', () => {
       const txSet = lastTx?.set.mock.calls || []
       const limitWrite = txSet.find((call) => call[0].id === 'limits-user1')
       expect(limitWrite?.[1]).toEqual({ lastRoleUpdateAtMs: expect.any(Number) })
+    })
+  })
+
+  describe('resume upload', () => {
+    function uploadFormData() {
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('linkedin', 'https://linkedin.com/in/alice')
+      formData.set('motivation', 'I want to contribute to the AI community.')
+      formData.set('agree', 'true')
+      formData.set('roleRanking', VALID_ROLE_RANKING)
+      formData.set('resume', new File(['%PDF-1.4 test resume content'], 'resume.pdf', { type: 'application/pdf' }))
+      return formData
+    }
+
+    it('saves the PDF to storage and maps the signed URL onto the application doc', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: uploadFormData() })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(200)
+      // Uploaded to storage with a sanitized, timestamped path
+      expect(mockStorageFile).toHaveBeenCalledWith(expect.stringMatching(/^team-applications\/\d+_resume\.pdf$/))
+      expect(mockStorageSave).toHaveBeenCalledWith(expect.any(Buffer), { metadata: { contentType: 'application/pdf' } })
+      expect(mockStorageGetSignedUrl).toHaveBeenCalledWith({ action: 'read', expires: expect.any(Number) })
+      // Signed URL merged onto the application doc
+      expect(teamAppDocRef.set).toHaveBeenCalledWith(
+        { resume: { path: expect.stringMatching(/^team-applications\//), url: 'http://signed.url' } },
+        { merge: true },
+      )
+      expect(body.resume.url).toBe('http://signed.url')
+    })
+
+    it('rolls back the application, lock, and limits when the storage upload fails', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+      mockStorageSave.mockRejectedValueOnce(new Error('storage down'))
+
+      const { POST } = await import('@/app/api/apply/route')
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: uploadFormData() })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(500)
+      // Second transaction deleted the lock, limits, and application docs
+      const deletes = lastTx?.delete.mock.calls || []
+      expect(deletes).toHaveLength(3)
+      expect(deletes.map((c) => c[0])).toContain(teamAppDocRef)
+      // No storage cleanup: the file never reached storage (save rejected)
+      expect(mockStorageFileDelete).not.toHaveBeenCalled()
+      expect(body.error).toBeTruthy()
+    })
+
+    it('cleans up the stored file and rolls back when the resume doc write fails', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+      teamAppDocRef.set.mockRejectedValueOnce(new Error('doc write failed'))
+
+      const { POST } = await import('@/app/api/apply/route')
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: uploadFormData() })
+      const res = await POST(req as unknown as Request)
+
+      expect(res.status).toBe(500)
+      // Storage file was saved, so it gets cleaned up on rollback
+      expect(mockStorageFileDelete).toHaveBeenCalled()
+      const deletes = lastTx?.delete.mock.calls || []
+      expect(deletes).toHaveLength(3)
+      expect(deletes.map((c) => c[0])).toContain(teamAppDocRef)
     })
   })
 })

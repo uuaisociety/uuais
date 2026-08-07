@@ -10,15 +10,23 @@ const mockAppRef = {
 }
 const mockLockRef = { delete: jest.fn().mockResolvedValue(undefined) }
 const mockLimitsRef = { delete: jest.fn().mockResolvedValue(undefined) }
+const mockLockDoc = jest.fn(() => mockLockRef)
+const mockLimitsDoc = jest.fn(() => mockLimitsRef)
+const mockFileExists = jest.fn().mockResolvedValue([true])
+const mockFileDelete = jest.fn().mockResolvedValue(undefined)
+const mockStorageFile = jest.fn(() => ({
+  exists: mockFileExists,
+  delete: mockFileDelete,
+}))
 const mockCollection = jest.fn((name: string) => {
   if (name === 'teamApplications') {
     return { doc: jest.fn(() => mockAppRef) }
   }
   if (name === 'applicationCampaignLocks') {
-    return { doc: jest.fn(() => mockLockRef) }
+    return { doc: mockLockDoc }
   }
   if (name === 'applicationUserLimits') {
-    return { doc: jest.fn(() => mockLimitsRef) }
+    return { doc: mockLimitsDoc }
   }
   return { doc: jest.fn() }
 })
@@ -30,10 +38,7 @@ jest.mock('@/lib/firebase-admin', () => ({
 jest.mock('firebase-admin', () => ({
   storage: () => ({
     bucket: () => ({
-      file: () => ({
-        exists: jest.fn().mockResolvedValue([true]),
-        delete: jest.fn().mockResolvedValue(undefined),
-      }),
+      file: mockStorageFile,
     }),
   }),
 }))
@@ -90,10 +95,17 @@ describe('DELETE /api/admin/team-applications', () => {
     const res = await DELETE(req as unknown as Request)
 
     expect(res.status).toBe(200)
+    // App doc deleted
     expect(mockAppRef.delete).toHaveBeenCalled()
-    // Lock/limits keyed by stored uid (via the collection mocks)
-    expect(mockCollection).toHaveBeenCalledWith('applicationCampaignLocks')
-    expect(mockCollection).toHaveBeenCalledWith('applicationUserLimits')
+    // Resume deleted from storage: file path derived from the stored doc's resume.path
+    expect(mockStorageFile).toHaveBeenCalledWith('team-applications/123_resume.pdf')
+    expect(mockFileExists).toHaveBeenCalled()
+    expect(mockFileDelete).toHaveBeenCalled()
+    // Lock/limits keyed by stored uid (from appSnap.data().uid), not the request body
+    expect(mockLockDoc).toHaveBeenCalledWith('auth-uid-1__spring2026')
+    expect(mockLimitsDoc).toHaveBeenCalledWith('auth-uid-1')
+    expect(mockLockRef.delete).toHaveBeenCalled()
+    expect(mockLimitsRef.delete).toHaveBeenCalled()
   })
 
   it('falls back to emailNormalized identity when the doc has no uid', async () => {
@@ -109,6 +121,10 @@ describe('DELETE /api/admin/team-applications', () => {
     })
     const res = await DELETE(req as unknown as Request)
     expect(res.status).toBe(200)
+    expect(mockLockDoc).toHaveBeenCalledWith('bob%40test.com__spring2026')
+    expect(mockLimitsDoc).toHaveBeenCalledWith('bob%40test.com')
+    expect(mockLockRef.delete).toHaveBeenCalled()
+    expect(mockLimitsRef.delete).toHaveBeenCalled()
   })
 
   it('still deletes the application when the doc is missing', async () => {
