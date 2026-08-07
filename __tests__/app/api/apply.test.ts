@@ -1,9 +1,4 @@
-/**
- * Integration test for POST /api/apply
- *
- * Tests request/response logic with mocked Firebase dependencies.
- */
-
+// Integration test for POST /api/apply with mocked Firebase dependencies.
 import { createAuthMocks, createCollectionMock, createDocRef } from '@/__tests__/helpers/mocks'
 
 const mockRunTransaction = jest.fn()
@@ -33,7 +28,17 @@ jest.mock('@/lib/auth-config', () => ({
 }))
 
 // Build adminDb mocks for two collections: applicationCampaigns (doc lookup) and others (collections)
-let campaignData: Record<string, unknown> = { status: 'open', teams: ['it', 'development'] }
+let campaignData: Record<string, unknown> = {
+  status: 'open',
+  teams: ['it', 'development'],
+  roles: [
+    { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 },
+    { id: 'dev_member', teamId: 'development', title: 'Development Member', status: 'open', order: 1 },
+  ],
+}
+const VALID_ROLE_RANKING = JSON.stringify([
+  { roleId: 'it_member', teamId: 'it', justification: 'I am passionate about systems administration and automation.' },
+])
 const campaignDocRef = createDocRef('spring2026')
 campaignDocRef.get = jest.fn().mockResolvedValue({
   exists: true,
@@ -94,7 +99,14 @@ function lastApplicationPayload(): Record<string, unknown> | null {
 
 beforeEach(() => {
   jest.clearAllMocks()
-  campaignData = { status: 'open', teams: ['it', 'development'] }
+  campaignData = {
+    status: 'open',
+    teams: ['it', 'development'],
+    roles: [
+      { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 },
+      { id: 'dev_member', teamId: 'development', title: 'Development Member', status: 'open', order: 1 },
+    ],
+  }
   questionsData = []
   lastTx = null
   mockRunTransaction.mockImplementation(async (cb: (tx: MockTx) => Promise<void>) => {
@@ -166,6 +178,7 @@ describe('POST /api/apply', () => {
       formData.set('name', 'Alice')
       formData.set('email', 'a@b.com')
       formData.set('linkedin', 'https://linkedin.com/in/x')
+      formData.set('roleRanking', VALID_ROLE_RANKING)
       formData.set('agree', 'true')
       const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
       const res = await POST(req as unknown as Request)
@@ -202,6 +215,7 @@ describe('POST /api/apply', () => {
       formData.set('name', 'Alice')
       formData.set('email', 'a@b.com')
       formData.set('motivation', 'I want to contribute to the AI community very actively.')
+      formData.set('roleRanking', VALID_ROLE_RANKING)
       formData.set('agree', 'true')
       const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
       const res = await POST(req as unknown as Request)
@@ -240,6 +254,7 @@ describe('POST /api/apply', () => {
       formData.set('email', 'a@b.com')
       formData.set('linkedin', 'javascript:alert(1)')
       formData.set('motivation', 'I want to contribute to the AI community very actively.')
+      formData.set('roleRanking', VALID_ROLE_RANKING)
       formData.set('agree', 'true')
       const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
       const res = await POST(req as unknown as Request)
@@ -268,6 +283,66 @@ describe('POST /api/apply', () => {
       expect(res.status).toBe(400)
       expect(body.error).toMatch(/hours|between/i)
     })
+
+    it('returns 400 when roleRanking payload exceeds the raw size bound', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'a@b.com')
+      formData.set('linkedin', 'https://linkedin.com/in/x')
+      formData.set('motivation', 'I want to contribute to the AI community very actively.')
+      formData.set('agree', 'true')
+      formData.set('roleRanking', JSON.stringify([{ roleId: 'it_member', teamId: 'it', justification: 'x'.repeat(6000) }]))
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/roleRanking must be a JSON array/i)
+    })
+
+    it('returns 400 when customAnswers payload exceeds the raw size bound', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'a@b.com')
+      formData.set('linkedin', 'https://linkedin.com/in/x')
+      formData.set('motivation', 'I want to contribute to the AI community very actively.')
+      formData.set('agree', 'true')
+      formData.set('customAnswers', JSON.stringify({ huge: 'x'.repeat(500000) }))
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/too large/i)
+    })
+
+    it('returns 400 when interests payload exceeds the raw size bound', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'a@b.com')
+      formData.set('linkedin', 'https://linkedin.com/in/x')
+      formData.set('motivation', 'I want to contribute to the AI community very actively.')
+      formData.set('agree', 'true')
+      formData.set('interests', JSON.stringify(['x'.repeat(21000)]))
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/too large/i)
+    })
   })
 
   describe('successful submission', () => {
@@ -284,7 +359,7 @@ describe('POST /api/apply', () => {
       formData.set('agree', 'true')
       formData.set('weeklyHours', '5')
       formData.set('interests', JSON.stringify(['robotics', 'nlp']))
-      formData.set('teamRanking', JSON.stringify(['it', 'development']))
+      formData.set('roleRanking', VALID_ROLE_RANKING)
       formData.set('customAnswers', JSON.stringify({}))
 
       const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
@@ -310,7 +385,7 @@ describe('POST /api/apply', () => {
       formData.set('linkedin', 'https://linkedin.com/in/alice')
       formData.set('motivation', 'I want to contribute to the AI community.')
       formData.set('agree', 'true')
-      formData.set('teamRanking', JSON.stringify(['it']))
+      formData.set('roleRanking', VALID_ROLE_RANKING)
 
       const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
       const res = await POST(req as unknown as Request)
@@ -403,7 +478,14 @@ describe('POST /api/apply', () => {
     })
 
     it('accepts a submission when the campaign deadline is in the future', async () => {
-      campaignData = { status: 'open', teams: ['it', 'development'], deadline: '2099-01-01' }
+      campaignData = {
+        status: 'open',
+        teams: ['it', 'development'],
+        deadline: '2099-01-01',
+        roles: [
+          { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 },
+        ],
+      }
       mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
 
       const { POST } = await import('@/app/api/apply/route')
@@ -414,12 +496,68 @@ describe('POST /api/apply', () => {
       formData.set('linkedin', 'https://linkedin.com/in/alice')
       formData.set('motivation', 'I want to contribute to the AI community.')
       formData.set('agree', 'true')
-      formData.set('teamRanking', JSON.stringify(['it']))
+      formData.set('roleRanking', VALID_ROLE_RANKING)
 
       const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
       const res = await POST(req as unknown as Request)
 
       expect(res.status).toBe(200)
+    })
+
+    it('accepts a role whose per-role deadline extends past the campaign deadline (create mode)', async () => {
+      campaignData = {
+        status: 'open',
+        teams: ['it', 'development'],
+        deadline: '2020-01-01', // campaign-wide deadline passed
+        roles: [
+          { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0, deadline: '2099-01-01' },
+        ],
+      }
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('linkedin', 'https://linkedin.com/in/alice')
+      formData.set('motivation', 'I want to contribute to the AI community.')
+      formData.set('agree', 'true')
+      formData.set('roleRanking', VALID_ROLE_RANKING)
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+
+      expect(res.status).toBe(200)
+    })
+
+    it('rejects a role whose per-role deadline has also passed (create mode)', async () => {
+      campaignData = {
+        status: 'open',
+        teams: ['it', 'development'],
+        deadline: '2020-01-01',
+        roles: [
+          { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0, deadline: '2021-01-01' },
+        ],
+      }
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('campaignId', 'spring2026')
+      formData.set('name', 'Alice')
+      formData.set('email', 'alice@test.com')
+      formData.set('linkedin', 'https://linkedin.com/in/alice')
+      formData.set('motivation', 'I want to contribute to the AI community.')
+      formData.set('agree', 'true')
+      formData.set('roleRanking', VALID_ROLE_RANKING)
+
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/not currently accepting/i)
     })
   })
 
@@ -502,6 +640,164 @@ describe('POST /api/apply', () => {
 
       expect(res.status).toBe(400)
       expect(body.error).toMatch(/motivation/i)
+    })
+  })
+
+  describe('add-role mode (late-opening roles)', () => {
+    const existingAppRef = createDocRef('team-app-doc')
+    const existingRanking = [
+      { roleId: 'it_member', teamId: 'it', justification: 'I am passionate about systems administration and automation.' },
+    ]
+
+    function mockExistingApplication(roleRanking: unknown[] = existingRanking) {
+      teamAppsCollection.get.mockResolvedValue({
+        empty: false,
+        docs: [{ ref: existingAppRef }],
+        size: 1,
+      })
+      mockRunTransaction.mockImplementation(async (cb: (tx: MockTx) => Promise<void>) => {
+        const tx: MockTx = {
+          get: jest.fn().mockResolvedValue({ exists: true, data: () => ({ roleRanking }) }),
+          set: jest.fn().mockResolvedValue(undefined),
+          update: jest.fn().mockResolvedValue(undefined),
+          delete: jest.fn().mockResolvedValue(undefined),
+        }
+        lastTx = tx
+        await cb(tx)
+      })
+    }
+
+    it('adds a new role to an existing application without re-entering the profile', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+      mockExistingApplication()
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('mode', 'addRole')
+      formData.set('campaignId', 'spring2026')
+      formData.set('email', 'alice@test.com')
+      formData.set('roleRanking', JSON.stringify([
+        { roleId: 'dev_member', teamId: 'development', justification: 'I want to build AI products that people actually use.' },
+      ]))
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(200)
+      expect(body.roleRanking).toEqual([
+        { roleId: 'dev_member', teamId: 'development', justification: 'I want to build AI products that people actually use.' },
+      ])
+      const updateCall = lastTx?.update.mock.calls[0]
+      expect(updateCall?.[0].id).toBe('team-app-doc')
+      expect(updateCall?.[1].roleRanking).toHaveLength(2)
+      expect(updateCall?.[1].roleRanking[1].roleId).toBe('dev_member')
+    })
+
+    it('returns 404 when no existing application matches', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+      teamAppsCollection.get.mockResolvedValue({ empty: true, docs: [], size: 0 })
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('mode', 'addRole')
+      formData.set('campaignId', 'spring2026')
+      formData.set('email', 'nobody@test.com')
+      formData.set('roleRanking', VALID_ROLE_RANKING)
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(404)
+      expect(body.error).toMatch(/no existing application/i)
+    })
+
+    it('returns 400 when adding a role would exceed the total cap', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+      mockExistingApplication([
+        { roleId: 'it_member', teamId: 'it', justification: 'a'.repeat(25) },
+        { roleId: 'dev_member', teamId: 'development', justification: 'b'.repeat(25) },
+        { roleId: 'growth_member', teamId: 'growth', justification: 'c'.repeat(25) },
+        { roleId: 'research_member', teamId: 'research', justification: 'd'.repeat(25) },
+        { roleId: 'media_member', teamId: 'media', justification: 'e'.repeat(25) },
+      ])
+      campaignData = {
+        status: 'open',
+        teams: ['it', 'development', 'growth', 'research', 'media'],
+        roles: [
+          { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 },
+          { id: 'dev_member', teamId: 'development', title: 'Development Member', status: 'open', order: 1 },
+          { id: 'growth_member', teamId: 'growth', title: 'Growth Member', status: 'open', order: 2 },
+          { id: 'research_member', teamId: 'research', title: 'Research Member', status: 'open', order: 3 },
+          { id: 'media_member', teamId: 'media', title: 'Media Member', status: 'open', order: 4 },
+          { id: 'design_member', teamId: 'design', title: 'Design Member', status: 'open', order: 5 },
+        ],
+      }
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('mode', 'addRole')
+      formData.set('campaignId', 'spring2026')
+      formData.set('email', 'alice@test.com')
+      formData.set('roleRanking', JSON.stringify([
+        { roleId: 'design_member', teamId: 'design', justification: 'I enjoy crafting clean interfaces for AI products.' },
+      ]))
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/at most 5 roles/i)
+    })
+
+    it('returns 400 when a role in the add-role request is closed', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+      mockExistingApplication()
+      campaignData = {
+        status: 'open',
+        teams: ['it', 'development'],
+        roles: [
+          { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 },
+          { id: 'dev_member', teamId: 'development', title: 'Development Member', status: 'closed', order: 1 },
+        ],
+      }
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('mode', 'addRole')
+      formData.set('campaignId', 'spring2026')
+      formData.set('email', 'alice@test.com')
+      formData.set('roleRanking', JSON.stringify([
+        { roleId: 'dev_member', teamId: 'development', justification: 'I would love to join development this cycle.' },
+      ]))
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+      const body = await res.json()
+
+      expect(res.status).toBe(400)
+      expect(body.error).toMatch(/not currently accepting/i)
+    })
+
+    it('bumps the dedicated update-cooldown marker so add-role bursts are rate limited', async () => {
+      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
+      mockExistingApplication()
+      const limitsDocRef = createDocRef('limits-user1')
+      limitsCollection.doc.mockReturnValue(limitsDocRef)
+
+      const { POST } = await import('@/app/api/apply/route')
+      const formData = new FormData()
+      formData.set('mode', 'addRole')
+      formData.set('campaignId', 'spring2026')
+      formData.set('email', 'alice@test.com')
+      formData.set('roleRanking', JSON.stringify([
+        { roleId: 'dev_member', teamId: 'development', justification: 'I want to build AI products that people actually use.' },
+      ]))
+      const req = new Request('http://localhost/api/apply', { method: 'POST', body: formData })
+      const res = await POST(req as unknown as Request)
+
+      expect(res.status).toBe(200)
+      const txSet = lastTx?.set.mock.calls || []
+      const limitWrite = txSet.find((call) => call[0].id === 'limits-user1')
+      expect(limitWrite?.[1]).toEqual({ lastRoleUpdateAtMs: expect.any(Number) })
     })
   })
 })

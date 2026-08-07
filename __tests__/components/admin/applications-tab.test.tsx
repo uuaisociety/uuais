@@ -22,7 +22,7 @@ const sampleSubmission: TeamApplication = {
   campaignId: 'spring2026',
   name: 'Alice Doe',
   email: 'alice@test.com',
-  program: 'Data Science (MSc)',
+  program: 'MSc in Data Science – Machine Learning and Statistics',
   graduationYear: '2027',
   linkedin: 'https://linkedin.com/in/alice',
   interests: ['robotics'],
@@ -142,5 +142,94 @@ describe('ApplicationsTab', () => {
     fireEvent.click(screen.getByText('View submissions'))
     fireEvent.click(screen.getByText('Back to campaigns'))
     expect(screen.getByText('Application Campaigns')).toBeInTheDocument()
+  })
+
+  describe('role-based applications', () => {
+    const roleCampaign: ApplicationCampaign = {
+      ...sampleCampaign,
+      roles: [
+        { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 },
+        { id: 'dev_member', teamId: 'development', title: 'Development Member', status: 'open', order: 1 },
+      ],
+    }
+
+    const roleSubmission: TeamApplication = {
+      ...sampleSubmission,
+      id: 'sub-2',
+      roleRanking: [
+        { roleId: 'it_member', teamId: 'it', justification: 'I have 2 years of systems administration experience.' },
+        { roleId: 'dev_member', teamId: 'development', justification: 'I enjoy building web apps.' },
+      ],
+      customRole: 'Event Photographer',
+    }
+
+    it('renders ranked role tags for a roleRanking submission', () => {
+      render(<ApplicationsTab {...baseProps({
+        campaigns: [roleCampaign],
+        applications: [roleSubmission],
+      })} />)
+      fireEvent.click(screen.getByText('View submissions'))
+      // The hidden expanded detail also contains the ranked labels, so scope via getAllByText
+      expect(screen.getAllByText('#1 IT Member').length).toBeGreaterThan(0)
+      expect(screen.getAllByText('#2 Development Member').length).toBeGreaterThan(0)
+    })
+
+    it('falls back to team tags for a legacy teamRanking submission', () => {
+      render(<ApplicationsTab {...baseProps({
+        campaigns: [roleCampaign],
+        applications: [sampleSubmission],
+      })} />)
+      fireEvent.click(screen.getByText('View submissions'))
+      expect(screen.getByText('#1 IT')).toBeInTheDocument()
+      expect(screen.getByText('#2 Development')).toBeInTheDocument()
+    })
+
+    it('shows the role count on the campaign card', () => {
+      render(<ApplicationsTab {...baseProps({ campaigns: [roleCampaign] })} />)
+      expect(screen.getByText('2 roles')).toBeInTheDocument()
+    })
+
+    it('filters submissions by a specific role', () => {
+      render(<ApplicationsTab {...baseProps({
+        campaigns: [roleCampaign],
+        applications: [
+          roleSubmission,
+          { ...sampleSubmission, id: 'sub-legacy', teamRanking: ['it', 'development'] },
+        ],
+      })} />)
+      fireEvent.click(screen.getByText('View submissions'))
+
+      // Role options are labelled "<Team> · <Role>"
+      fireEvent.change(screen.getByRole('combobox'), { target: { value: 'role:it_member' } })
+      expect(screen.getByText('Alice Doe')).toBeInTheDocument()
+      expect(screen.queryByText('No submissions match your filters.')).not.toBeInTheDocument()
+    })
+
+    it('filters submissions by legacy team id when campaign has no roles', () => {
+      const legacySubmission = { ...sampleSubmission, id: 'sub-legacy', teamRanking: ['it', 'development'] }
+      render(<ApplicationsTab {...baseProps({
+        campaigns: [sampleCampaign],
+        applications: [roleSubmission, legacySubmission],
+      })} />)
+      fireEvent.click(screen.getByText('View submissions'))
+
+      // No roles -> dropdown lists teams; both roleRanking and legacy submissions match "development"
+      fireEvent.change(screen.getByRole('combobox'), { target: { value: 'team:development' } })
+      expect(screen.getAllByText('Alice Doe')).toHaveLength(2)
+      expect(screen.queryByText('No submissions match your filters.')).not.toBeInTheDocument()
+    })
+
+    it('expands a submission to show role preferences and proposed role', () => {
+      render(<ApplicationsTab {...baseProps({
+        campaigns: [roleCampaign],
+        applications: [roleSubmission],
+      })} />)
+      fireEvent.click(screen.getByText('View submissions'))
+      fireEvent.click(screen.getByText('Alice Doe'))
+
+      expect(screen.queryByText(/I have 2 years of systems administration/)).not.toBeInTheDocument()
+      expect(screen.queryByText('I enjoy building web apps.')).not.toBeInTheDocument()
+      expect(screen.getByText('Event Photographer')).toBeInTheDocument()
+    })
   })
 })
