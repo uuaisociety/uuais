@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/Button';
 const APPLY_TYPES = [
   {
     slug: 'team',
-    title: 'Join a Team',
-    description: 'Apply to join one of our active teams — Development, IT, Growth, Partnerships & Events, or Research.',
+    title: 'Apply for a Role',
+    description: 'Rank the roles you\'d like — across Development, IT, Growth, Partnerships & Events — and tell us why you\'re a good fit.',
     icon: Users,
     status: 'open' as const,
   },
