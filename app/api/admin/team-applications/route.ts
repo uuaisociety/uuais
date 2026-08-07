@@ -22,15 +22,7 @@ function safeKeyPart(s: string): string {
   return encodeURIComponent(s);
 }
 
-/**
- * DELETE /api/admin/team-applications
- *
- * Body: { id, campaignId, emailNormalized? }
- *
- * Permanently deletes an application together with its campaign lock and
- * cooldown limit docs (keyed by the stored uid, falling back to email) and its
- * uploaded resume from Cloud Storage.
- */
+// DELETE body: { id, campaignId, emailNormalized? } — deletes app + lock/limits docs (uid, fallback email) + resume from Storage.
 export async function DELETE(req: NextRequest) {
   try {
     const auth = await authorizeRequest(req);
