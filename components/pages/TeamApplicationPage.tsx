@@ -580,7 +580,7 @@ export default function TeamApplicationPage() {
                     </div>
                   </Card>
                 ) : (
-                  <div className="grid gap-4">
+                  <div className="grid gap-4 grid-cols-1">
                     {teamsWithRoles.map(({ teamId, roles }) => {
                       const teamOverride = campaign.teamInfo?.[teamId];
                       const teamName = teamOverride?.name || TEAM_NAMES[teamId] || teamId;
@@ -594,7 +594,7 @@ export default function TeamApplicationPage() {
                                 <Icon className="h-5 w-5 text-red-600 dark:text-red-400" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <h4 className="font-semibold text-gray-900 dark:text-white">{teamName}</h4>
+                                <h4 className="font-semibold text-gray-900 dark:text-white break-words">{teamName}</h4>
                                 <CollapsibleDescription text={teamDescription} className="text-sm text-gray-600 dark:text-gray-300 mt-1" />
                               </div>
                             </div>
@@ -610,7 +610,7 @@ export default function TeamApplicationPage() {
                                   )}
                                   <div className="py-4 first:pt-0 last:pb-0">
                                     <div className="flex flex-wrap items-center gap-2">
-                                      <span className="text-sm font-semibold text-gray-900 dark:text-white">{role.title}</span>
+                                      <span className="text-sm font-semibold text-gray-900 dark:text-white break-words">{role.title}</span>
                                       <TagComponent variant="green" size="sm">Open</TagComponent>
                                     </div>
                                     {role.description && (

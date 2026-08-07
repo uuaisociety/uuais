@@ -48,7 +48,7 @@ export default function ApplyLandingPage() {
       </section>
 
       <section className="max-w-4xl mx-auto px-6 py-16">
-        <div className="grid gap-6">
+        <div className="grid gap-6 grid-cols-1">
           {APPLY_TYPES.map((type) => {
             const Icon = type.icon;
             const isOpen = type.status === 'open';

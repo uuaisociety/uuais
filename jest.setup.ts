@@ -23,6 +23,11 @@ if (typeof window !== 'undefined') {
   });
 }
 
+// jsdom lacks Element#scrollIntoView; timer-based calls (e.g. wizard step navigation) would throw.
+if (typeof Element !== 'undefined' && !Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = jest.fn();
+}
+
 global.__mockPathname = '';
 
 const mockParams: Record<string, string> = {};

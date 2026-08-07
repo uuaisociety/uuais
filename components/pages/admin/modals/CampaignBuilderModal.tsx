@@ -157,6 +157,15 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
 
   const toggleTeam = (id: string) =>
     setEnabledTeams((prev) => prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id]);
+  const moveTeam = (id: string, dir: -1 | 1) =>
+    setEnabledTeams((prev) => {
+      const idx = prev.indexOf(id);
+      const to = idx + dir;
+      if (idx < 0 || to < 0 || to >= prev.length) return prev;
+      const next = [...prev];
+      [next[idx], next[to]] = [next[to], next[idx]];
+      return next;
+    });
   const toggleField = (id: string) =>
     setEnabledStandardFields((prev) => prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]);
   const setTeamNameByUser = (id: string, value: string) =>
@@ -393,18 +402,38 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                 <p className="text-xs text-amber-600 dark:text-amber-500 mt-2">Select at least one team.</p>
               )}
 
-              {enabledTeams.map((teamId) => {
+              {enabledTeams.map((teamId, teamIdx) => {
                 const teamRoles = roles.filter((r) => r.teamId === teamId);
                 const info = teamInfo[teamId] || {};
                 const Icon = TEAM_ICON[teamId] || Server;
                 return (
                   <div key={teamId} className="mt-5 border border-gray-200 dark:border-gray-700 rounded-md p-4 bg-gray-50/50 dark:bg-gray-900/30">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="inline-flex items-center gap-2 text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase">
-                        <Icon className="h-3.5 w-3.5 text-red-600 dark:text-red-400" />
-                        {TEAM_NAME[teamId]}
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="inline-flex items-center gap-2 text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase min-w-0">
+                        <Icon className="h-3.5 w-3.5 text-red-600 dark:text-red-400 shrink-0" />
+                        <span className="truncate">{TEAM_NAME[teamId]}</span>
                       </span>
-                      <Button type="button" size="sm" variant="outline" icon={Plus} onClick={() => addRole(teamId)}>Add role</Button>
+                      <span className="inline-flex items-center gap-1 shrink-0">
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="ghost"
+                          icon={ArrowUp}
+                          onClick={() => moveTeam(teamId, -1)}
+                          disabled={teamIdx === 0}
+                          aria-label={`Move ${TEAM_NAME[teamId]} earlier`}
+                        />
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="ghost"
+                          icon={ArrowDown}
+                          onClick={() => moveTeam(teamId, 1)}
+                          disabled={teamIdx === enabledTeams.length - 1}
+                          aria-label={`Move ${TEAM_NAME[teamId]} later`}
+                        />
+                        <Button type="button" size="sm" variant="outline" icon={Plus} onClick={() => addRole(teamId)}>Add role</Button>
+                      </span>
                     </div>
 
                     <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">

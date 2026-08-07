@@ -129,4 +129,37 @@ describe('CampaignBuilderModal options editor', () => {
       expect(screen.queryByDisplayValue('IT Member')).not.toBeInTheDocument()
     })
   })
+
+  describe('team reorder', () => {
+    const reorderCampaign: ApplicationCampaign = {
+      ...campaign,
+      roles: [
+        { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 },
+        { id: 'dev_member', teamId: 'development', title: 'Dev Member', status: 'open', order: 1 },
+      ],
+    }
+
+    it('moves a team earlier and later, then saves the new order', async () => {
+      const onSaveCampaign = jest.fn().mockResolvedValue(undefined)
+      render(<CampaignBuilderModal {...baseProps({ campaign: reorderCampaign, onSaveCampaign })} />)
+      await screen.findAllByRole('button', { name: /Add role/i })
+
+      // Development is second; move it first
+      fireEvent.click(screen.getByRole('button', { name: 'Move Development earlier' }))
+
+      fireEvent.click(screen.getByRole('button', { name: 'Save changes' }))
+      expect(onSaveCampaign).toHaveBeenCalled()
+      expect(onSaveCampaign.mock.calls[0][0].teams).toEqual(['development', 'it'])
+    })
+
+    it('disables the up control on the first team and the down control on the last', async () => {
+      render(<CampaignBuilderModal {...baseProps({ campaign: reorderCampaign })} />)
+      await screen.findAllByRole('button', { name: /Add role/i })
+
+      expect(screen.getByRole('button', { name: 'Move IT earlier' })).toBeDisabled()
+      expect(screen.getByRole('button', { name: 'Move IT later' })).toBeEnabled()
+      expect(screen.getByRole('button', { name: 'Move Development earlier' })).toBeEnabled()
+      expect(screen.getByRole('button', { name: 'Move Development later' })).toBeDisabled()
+    })
+  })
 })
