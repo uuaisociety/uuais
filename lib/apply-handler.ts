@@ -226,11 +226,10 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
       : DEFAULT_STANDARD_FIELDS;
     const roleSelectionEnabled = enabledFields.includes('teamRanking');
     const campaignRoles = Array.isArray(campaignData.roles) ? campaignData.roles : [];
-    // Per-role deadlines can extend past the campaign-wide one, so enforce them per role.
-    const usesPerRoleDeadlines = roleSelectionEnabled && campaignRoles.length > 0;
 
+    // Campaign deadline is authoritative; per-role deadlines only tighten it.
     const dlMs = deadlineMs(campaignData.deadline);
-    if (dlMs !== null && Date.now() > dlMs && !usesPerRoleDeadlines) {
+    if (dlMs !== null && Date.now() > dlMs) {
       return NextResponse.json({ error: 'This campaign is no longer accepting applications.' }, { status: 400 });
     }
 
