@@ -562,16 +562,15 @@ export default function TeamApplicationPage() {
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Who we&apos;re looking for</h2>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                  We are looking for passionate students who are curious about AI, keen to learn, and
-                  excited to contribute to a vibrant community. No prior experience is required —
-                  enthusiasm and a willingness to grow are what matter most.
+                  We are looking for passionate students curious about AI, willing to learn, and
+                  excited to contribute to the community to join us. No prior experience is required your
+                  enthusiasm and willingness to grow are what matter most.
                 </p>
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Open Roles</h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                  Explore the roles you can apply for. You&apos;ll rank your preferences in a later step
-                  (up to {MAX_ROLE_RANKING}).
+                  Explore the roles you can apply for.
                 </p>
                 {teamsWithRoles.length === 0 ? (
                   <Card>
