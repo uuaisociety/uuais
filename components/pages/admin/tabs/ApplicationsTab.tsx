@@ -75,7 +75,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
   const [selectedCampaign, setSelectedCampaign] = useState<ApplicationCampaign | null>(null);
   const [expandApp, setExpandApp] = useState<Set<string>>(new Set());
   const [search, setSearch] = useState("");
-  const [teamFilter, setTeamFilter] = useState<string>("all");
+  const [subFilter, setSubFilter] = useState("all");
   const [confirmDeleteCampaign, setConfirmDeleteCampaign] = useState<ApplicationCampaign | null>(null);
   const [confirmDeleteApp, setConfirmDeleteApp] = useState<TeamApplication | null>(null);
 
@@ -96,6 +96,23 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
     return new Map(questionsByCampaign.questions.map((q) => [q.id, q.question]));
   }, [questionsByCampaign, selectedCampaign]);
 
+  const roleOptions = useMemo(() => {
+    if (!selectedCampaign?.roles?.length) return [];
+    return selectedCampaign.roles
+      .slice()
+      .sort((a, b) => a.order - b.order)
+      .map((r) => ({ id: r.id, title: r.title, teamId: r.teamId }));
+  }, [selectedCampaign]);
+
+  const roleById = useMemo(() => {
+    const m = new Map<string, { title: string; teamId: string }>();
+    roleOptions.forEach((r) => m.set(r.id, { title: r.title, teamId: r.teamId }));
+    return m;
+  }, [roleOptions]);
+
+  const roleTitle = (roleId: string): string => roleById.get(roleId)?.title || roleId;
+  const teamName = (teamId: string): string => TEAM_NAMES[teamId] || teamId;
+
   const filtered = filter === "all" ? campaigns : campaigns.filter((c) => c.status === filter);
   const counts = {
     all: campaigns.length,
@@ -115,10 +132,20 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
         const q = search.toLowerCase();
         if (!s.name.toLowerCase().includes(q) && !s.email.toLowerCase().includes(q) && !(s.program || "").toLowerCase().includes(q)) return false;
       }
-      if (teamFilter !== "all" && !(s.teamRanking || []).includes(teamFilter)) return false;
+      if (subFilter !== "all") {
+        if (subFilter.startsWith("role:")) {
+          const roleId = subFilter.slice(5);
+          if (!(s.roleRanking || []).some((c) => c.roleId === roleId)) return false;
+        } else if (subFilter.startsWith("team:")) {
+          const teamId = subFilter.slice(5);
+          const inRole = (s.roleRanking || []).some((c) => c.teamId === teamId);
+          const inLegacy = (s.teamRanking || []).includes(teamId);
+          if (!inRole && !inLegacy) return false;
+        }
+      }
       return true;
     });
-  }, [campaignSubs, search, teamFilter]);
+  }, [campaignSubs, search, subFilter]);
 
   const toggleApp = (id: string) =>
     setExpandApp((prev) => {
@@ -127,6 +154,17 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
       else next.add(id);
       return next;
     });
+
+  const renderRoleTags = (submission: TeamApplication) => {
+    if (submission.roleRanking && submission.roleRanking.length > 0) {
+      return submission.roleRanking.slice(0, 3).map((c, idx) => (
+        <Tag key={c.roleId} variant={idx === 0 ? "red" : "green"} size="sm">#{idx + 1} {roleTitle(c.roleId)}</Tag>
+      ));
+    }
+    return (submission.teamRanking || []).slice(0, 3).map((tid, idx) => (
+      <Tag key={tid} variant={idx === 0 ? "red" : "green"} size="sm">#{idx + 1} {teamName(tid)}</Tag>
+    ));
+  };
 
   if (view === "submissions") {
     return (
@@ -147,19 +185,23 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <div className="relative flex-1 max-w-md">
             <Search className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            <InputBase placeholder="Search by name, email, or programme..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+            <InputBase placeholder="Search by name, email, or program..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">Filter by team:</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">Filter by role:</span>
             <SelectBase
-              value={teamFilter}
-              onChange={(e) => setTeamFilter(e.target.value)}
+              value={subFilter}
+              onChange={(e) => setSubFilter(e.target.value)}
               className="w-auto min-w-[140px]"
             >
-              <option value="all">All teams</option>
-              {Object.entries(TEAM_NAMES).map(([id, name]) => (
-                <option key={id} value={id}>{name}</option>
-              ))}
+              <option value="all">All roles</option>
+              {roleOptions.length > 0
+                ? roleOptions.map((r) => (
+                  <option key={r.id} value={`role:${r.id}`}>{teamName(r.teamId)} · {r.title}</option>
+                ))
+                : Object.entries(TEAM_NAMES).map(([id, name]) => (
+                  <option key={id} value={`team:${id}`}>{name}</option>
+                ))}
             </SelectBase>
           </div>
         </div>
@@ -175,7 +217,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
                   <div className="p-5">
                     <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                       <div className="flex-1 min-w-0">
-                        <button onClick={() => toggleApp(submission.id)} className="flex items-center gap-2 text-left group transition-all duration-300 ease-in-out cursor-pointer">
+                        <button onClick={() => toggleApp(submission.id)} aria-expanded={isOpen} aria-controls={`submission-details-${submission.id}`} className="flex items-center gap-2 text-left group transition-all duration-300 ease-in-out cursor-pointer">
                           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{submission.name}</h3>
                           {isOpen
                             ? <ChevronUp className="h-4 w-4 text-gray-400 group-hover:text-gray-600 transition-colors" />
@@ -194,12 +236,9 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
                       {submission.program && <Tag variant="red" size="sm">{submission.program}</Tag>}
                       {submission.graduationYear && <Tag variant="green" size="sm">Class of {submission.graduationYear}</Tag>}
                       {typeof submission.weeklyHours === "number" && <Tag variant="yellow" size="sm">{submission.weeklyHours} hr/wk</Tag>}
-                      {(submission.teamRanking || []).slice(0, 3).map((tid, idx) => {
-                        const name = TEAM_NAMES[tid] || tid;
-                        return <Tag key={tid} variant={idx === 0 ? "red" : "green"} size="sm">#{idx + 1} {name}</Tag>;
-                      })}
+                      {renderRoleTags(submission)}
                     </div>
-                    <div className={`grid overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "mt-4 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                    <div id={`submission-details-${submission.id}`} inert={!isOpen} className={`grid overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? "mt-4 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                       <div className="min-h-0">
                         <div className="border-t border-gray-200 dark:border-gray-700 pt-4 space-y-3">
                           {submission.linkedin && (
@@ -214,6 +253,26 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
                             <div className="text-sm">
                               <span className="text-xs font-medium text-gray-500 uppercase mr-2">Resume</span>
                               <a href={safeUrl(submission.resume.url) || "#"} target="_blank" rel="noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">View PDF</a>
+                            </div>
+                          )}
+                          {(submission.roleRanking && submission.roleRanking.length > 0) && (
+                            <div>
+                              <span className="block text-xs font-medium text-gray-500 uppercase mb-2">Role preferences</span>
+                              <div className="space-y-3">
+                                {submission.roleRanking.map((c, idx) => (
+                                  <div key={c.roleId}>
+                                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                      #{idx + 1} {roleTitle(c.roleId)} <span className="text-gray-400">· {teamName(c.teamId)}</span>
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {submission.customRole && (
+                            <div className="text-sm">
+                              <span className="text-xs font-medium text-gray-500 uppercase mr-2">Proposed role</span>
+                              <span className="text-gray-700 dark:text-gray-300">{submission.customRole}</span>
                             </div>
                           )}
                           {submission.motivation && (
@@ -268,7 +327,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Application Campaigns</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Create and manage recruitment campaigns. Each campaign has its own form, deadline, and submissions.
+            Create and manage recruitment campaigns. Each campaign has its own roles, form, deadline, and submissions.
           </p>
         </div>
         <Button icon={Plus} onClick={onAddCampaign}>New campaign</Button>
@@ -303,6 +362,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
         ) : (
           filtered.map((c) => {
             const subCount = applications.filter((s) => s.campaignId === c.id).length;
+            const roleCount = c.roles?.length || 0;
             return (
               <Card key={c.id} className="bg-white dark:bg-gray-800">
                 <div className="p-5">
@@ -341,7 +401,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
                       <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
                         <span className="flex items-center gap-1"><Calendar className="h-3.5 w-3.5" /> Deadline {c.deadline}</span>
                         <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" /> {subCount} submission{subCount !== 1 ? "s" : ""}</span>
-                        <span className="flex items-center gap-1"><FileQuestion className="h-3.5 w-3.5" /> {c.teams.length} team{c.teams.length !== 1 ? "s" : ""}</span>
+                        <span className="flex items-center gap-1"><FileQuestion className="h-3.5 w-3.5" /> {roleCount} role{roleCount !== 1 ? "s" : ""}</span>
                       </div>
                     </div>
                     <div className="flex flex-wrap items-center gap-2 shrink-0">
