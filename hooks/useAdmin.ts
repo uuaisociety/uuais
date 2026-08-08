@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from 'react';
-import { auth } from '@/lib/firebase-client';
+import { auth, refreshSessionCookie } from '@/lib/firebase-client';
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, getIdTokenResult, User } from 'firebase/auth';
 
 export type AdminState = {
@@ -52,11 +52,18 @@ export function useAdmin(): AdminState {
   const signInWithGoogle = useCallback(async () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
-    // Claims are set server-side; the next onAuthStateChanged + getIdTokenResult will refresh state
+    // Mint the httpOnly cookie so server APIs authenticate as this user (logout clears it, so re-login re-mints).
+    await refreshSessionCookie();
   }, []);
 
   const logout = useCallback(async () => {
     await signOut(auth);
+    try {
+      // Clear the httpOnly AuthToken cookie via the proxy (logoutPath handler), or server APIs keep accepting it for 12h.
+      await fetch('/api/logout', { method: 'POST' });
+    } catch (e) {
+      console.error('Failed to clear auth cookie', e);
+    }
   }, []);
 
   return { user, loading, isAdmin, isSuperAdmin, claims, signInWithGoogle, logout };

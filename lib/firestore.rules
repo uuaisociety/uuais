@@ -7,7 +7,7 @@ service cloud.firestore {
     }
 
     function isAdmin() {
-      return isSignedIn() && request.auth.token.admin == true;
+      return isSignedIn() && (request.auth.token.admin == true || request.auth.token.superAdmin == true);
     }
 
     function isSuperAdmin() {
@@ -68,11 +68,12 @@ service cloud.firestore {
           'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails','eventHistory'
         ]);
 
-      // Update own doc but cannot alter privileged fields except allowed ones
+      // Update own doc but cannot alter privileged fields except allowed ones.
+      // isMember is admin-managed: users set it once at create, then only admins may change it.
       allow update: if isSignedIn() && request.auth.uid == uid
         && emailMatchesAuth()
         && request.resource.data.keys().hasOnly([
-          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails','eventHistory'
+          'displayName','email','photoURL','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails','eventHistory'
         ]);
 
       // Admin full control
@@ -336,8 +337,9 @@ service cloud.firestore {
 
     // CONFIG - application configuration (embedding projections, prerequisite graph, etc.)
     match /config/{configId} {
+      // ai_settings is intentionally superadmin-only (see its own rule above)
       allow read: if true;
-      allow write: if isAdmin();
+      allow write: if isAdmin() && configId != 'ai_settings';
     }
 
     // TRANSCRIPT DATA - user-uploaded academic records (privacy-first)

@@ -31,16 +31,19 @@ export const microsoftProvider = new OAuthProvider('microsoft.com');
 
 export const signInWithGooglePopup = async () => {
   const result = await signInWithPopup(auth, googleProvider);
+  await refreshSessionCookie();
   return result.user;
 };
 
 export const signInWithGithubPopup = async () => {
   const result = await signInWithPopup(auth, githubProvider);
+  await refreshSessionCookie();
   return result.user;
 };
 
 export const signInWithMicrosoftPopup = async () => {
   const result = await signInWithPopup(auth, microsoftProvider);
+  await refreshSessionCookie();
   return result.user;
 };
 

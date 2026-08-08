@@ -99,15 +99,13 @@ export default function AccountPage() {
   const handleSave = async () => {
     if (!uid) return;
     try {
-      const payload: Partial<UserProfile> = {
-        ...form,
-        isMember: form.isMember ?? true,
-      };
+      // isMember is admin-managed; only set it when creating the profile.
+      const { isMember, ...rest } = form;
       const existing = await getUserProfile(uid);
       if (!existing) {
-        await upsertUserProfile(uid, payload);
+        await upsertUserProfile(uid, { ...rest, isMember: isMember ?? true });
       } else {
-        await updateUserProfile(uid, payload);
+        await updateUserProfile(uid, rest);
       }
       // Optionally refetch to reflect saved changes in UI
       const refreshed = await getUserProfile(uid);
