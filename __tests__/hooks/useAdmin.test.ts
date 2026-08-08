@@ -17,9 +17,11 @@ jest.mock('firebase/auth', () => ({
 
 jest.mock('@/lib/firebase-client', () => ({
   auth: {},
+  refreshSessionCookie: jest.fn(),
 }));
 
 import { onAuthStateChanged, getIdTokenResult, signInWithPopup, signOut } from 'firebase/auth';
+import { refreshSessionCookie } from '@/lib/firebase-client';
 
 const mockUser = { uid: 'test-uid', email: 'test@example.com' } as User;
 
@@ -102,22 +104,26 @@ describe('useAdmin', () => {
     expect(result.current.claims).toBeNull();
   });
 
-  it('calls signInWithPopup on signInWithGoogle', async () => {
+  it('calls signInWithPopup and mints the session cookie on signInWithGoogle', async () => {
     const { result } = renderHook(() => useAdmin());
     await act(async () => {
       await result.current.signInWithGoogle();
     });
     expect(signInWithPopup).toHaveBeenCalledTimes(1);
     expect(signInWithPopup).toHaveBeenCalledWith({}, expect.any(Object));
+    expect(refreshSessionCookie).toHaveBeenCalledTimes(1);
   });
 
-  it('calls signOut on logout', async () => {
+  it('calls signOut and clears the auth cookie on logout', async () => {
+    const mockFetch = jest.fn().mockResolvedValue({ ok: true })
+    global.fetch = mockFetch as unknown as typeof fetch
     const { result } = renderHook(() => useAdmin());
     await act(async () => {
       await result.current.logout();
     });
     expect(signOut).toHaveBeenCalledTimes(1);
     expect(signOut).toHaveBeenCalledWith({});
+    expect(mockFetch).toHaveBeenCalledWith('/api/logout', { method: 'POST' });
   });
 
   it('cleans up on unmount', () => {

@@ -1,4 +1,5 @@
 import { createAuthMocks } from '@/__tests__/helpers/mocks'
+import { resetRateLimits } from '@/lib/rate-limit-in-memory'
 
 const { mockGetTokens, authEdgeFactory, authConfigFactory } = createAuthMocks()
 jest.mock('next-firebase-auth-edge', () => authEdgeFactory)
@@ -25,6 +26,7 @@ jest.mock('firebase-admin', () => ({
 describe('GET /api/admin/team-applications/resume', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    resetRateLimits()
   })
 
   it('returns 401 when not authenticated', async () => {
@@ -77,5 +79,21 @@ describe('GET /api/admin/team-applications/resume', () => {
     const req = new Request('http://localhost/api/admin/team-applications/resume?path=team-applications/123_cv.pdf')
     const res = await GET(req as unknown as Request)
     expect(res.status).toBe(404)
+  })
+
+  it('returns 429 when the per-admin rate limit is exceeded', async () => {
+    mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'admin', admin: true } })
+    mockFileExists.mockResolvedValue([true])
+    mockGetMetadata.mockResolvedValue([{ contentType: 'application/pdf' }])
+    mockDownload.mockResolvedValue([Buffer.from('%PDF-1.4 test')])
+    const { GET } = await import('@/app/api/admin/team-applications/resume/route')
+    const req = new Request('http://localhost/api/admin/team-applications/resume?path=team-applications/123_cv.pdf')
+
+    for (let i = 0; i < 120; i++) {
+      await GET(req as unknown as Request)
+    }
+    const res = await GET(req as unknown as Request)
+    expect(res.status).toBe(429)
+    expect(await res.json()).toMatchObject({ error: 'rate limit exceeded' })
   })
 })
