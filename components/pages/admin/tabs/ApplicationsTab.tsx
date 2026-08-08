@@ -4,7 +4,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import {
   Plus, Edit3, Trash2, Eye, ChevronDown, ChevronUp, Calendar,
   Users, FileQuestion, Search, ArrowLeft,
-  Mail, ExternalLink,
+  Mail, ExternalLink, Download,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -12,6 +12,7 @@ import Tag from "@/components/ui/Tag";
 import { InputBase, SelectBase } from "@/components/ui/Form";
 import ConfirmModal from "@/components/ui/ConfirmModal";
 import { subscribeToCampaignQuestions } from "@/lib/firestore/campaignQuestions";
+import { exportApplicationsZip } from "@/lib/exportApplications";
 import {
   ApplicationCampaign, TeamApplication, CampaignStatus,
 } from "@/types";
@@ -79,6 +80,8 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
   const [subFilter, setSubFilter] = useState("all");
   const [confirmDeleteCampaign, setConfirmDeleteCampaign] = useState<ApplicationCampaign | null>(null);
   const [confirmDeleteApp, setConfirmDeleteApp] = useState<TeamApplication | null>(null);
+  const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
 
   // Load the selected campaign's questions so admins see readable labels for
   // custom answers (falls back to the raw question id while loading).
@@ -156,6 +159,26 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
       return next;
     });
 
+  const handleExportZip = async () => {
+    if (filteredSubs.length === 0 || exporting) return;
+    setExporting(true);
+    setExportError(null);
+    try {
+      await exportApplicationsZip({
+        applications: filteredSubs,
+        campaignTitle: selectedCampaign?.title || "All Submissions",
+        roleById,
+        teamName,
+        questionMap,
+      });
+    } catch (err) {
+      console.error("export zip failed", err);
+      setExportError("Export failed. Please try again.");
+    } finally {
+      setExporting(false);
+    }
+  };
+
   const renderRoleTags = (submission: TeamApplication) => {
     if (submission.roleRanking && submission.roleRanking.length > 0) {
       return submission.roleRanking.slice(0, 3).map((c, idx) => (
@@ -172,7 +195,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
       <div key="submissions" className="animate-in fade-in slide-in-from-right-4 duration-300 ease-out">
         <div className="flex items-center gap-3 mb-6">
           <Button size="sm" icon={ArrowLeft} onClick={() => { setView("campaigns"); setSelectedCampaign(null); }}>Back to campaigns</Button>
-          <div>
+          <div className="flex-1 min-w-0">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               {selectedCampaign ? `Submissions: ${selectedCampaign.title}` : "All Submissions"}
             </h1>
@@ -180,6 +203,12 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
               <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" /> {filteredSubs.length} of {campaignSubs.length}</span>
               {selectedCampaign && <span>· Deadline {selectedCampaign.deadline}</span>}
             </p>
+          </div>
+          <div className="flex flex-col items-end gap-1 shrink-0">
+            <Button size="sm" variant="outline" icon={Download} isLoading={exporting} disabled={filteredSubs.length === 0} onClick={handleExportZip}>
+              Export .zip
+            </Button>
+            {exportError && <span className="text-xs text-red-600 dark:text-red-400">{exportError}</span>}
           </div>
         </div>
 

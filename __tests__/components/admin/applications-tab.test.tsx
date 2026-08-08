@@ -6,6 +6,11 @@ jest.mock('@/lib/firestore/campaignQuestions', () => ({
   subscribeToCampaignQuestions: jest.fn(() => jest.fn()),
 }))
 
+const mockExportZip = jest.fn()
+jest.mock('@/lib/exportApplications', () => ({
+  exportApplicationsZip: (...args: unknown[]) => mockExportZip(...args),
+}))
+
 const sampleCampaign: ApplicationCampaign = {
   id: 'spring2026',
   title: 'Spring 2026 Recruitment',
@@ -142,6 +147,29 @@ describe('ApplicationsTab', () => {
     fireEvent.click(screen.getByText('View submissions'))
     fireEvent.click(screen.getByText('Back to campaigns'))
     expect(screen.getByText('Application Campaigns')).toBeInTheDocument()
+  })
+
+  it('renders an Export .zip button in the submissions view', () => {
+    render(<ApplicationsTab {...baseProps({
+      campaigns: [sampleCampaign],
+      applications: [sampleSubmission],
+    })} />)
+    fireEvent.click(screen.getByText('View submissions'))
+    expect(screen.getByText('Export .zip')).toBeInTheDocument()
+  })
+
+  it('exports filtered submissions when Export .zip is clicked', async () => {
+    mockExportZip.mockResolvedValue(undefined)
+    render(<ApplicationsTab {...baseProps({
+      campaigns: [sampleCampaign],
+      applications: [sampleSubmission],
+    })} />)
+    fireEvent.click(screen.getByText('View submissions'))
+    fireEvent.click(screen.getByText('Export .zip'))
+    expect(mockExportZip).toHaveBeenCalledWith(expect.objectContaining({
+      campaignTitle: 'Spring 2026 Recruitment',
+      applications: [expect.objectContaining({ id: 'sub-1', name: 'Alice Doe' })],
+    }))
   })
 
   describe('role-based applications', () => {
