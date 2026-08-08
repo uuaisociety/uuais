@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getTokens } from 'next-firebase-auth-edge';
-import { authConfig } from '@/lib/auth-config';
+import { requireAuth, type ServerSession } from '@/lib/server-auth';
 import { adminDb } from '@/lib/firebase-admin';
 import admin from 'firebase-admin';
 import { MAX_ROLE_RANKING } from '@/lib/constants';
@@ -11,17 +10,6 @@ interface AppError extends Error {
   status?: number;
   code?: string;
   retryAfterSeconds?: number;
-}
-
-async function authorizeRequest(req: NextRequest): Promise<{ ok: false; reason: string } | { ok: true; uid: string }> {
-  try {
-    const tokens = await getTokens(req.cookies, authConfig);
-    if (!tokens) return { ok: false, reason: 'no-auth' };
-    return { ok: true, uid: tokens.decodedToken.uid };
-  } catch (err) {
-    console.warn('getTokens failed', err);
-    return { ok: false, reason: 'invalid-token' };
-  }
 }
 
 function normalizeEmail(email: string): string {
@@ -149,10 +137,11 @@ interface CampaignSnapshot {
 }
 
 export async function handleApplicationPost(req: NextRequest, applicationType: string) {
-  const authResult = await authorizeRequest(req);
+  const authResult = await requireAuth(req);
   if (!authResult.ok) {
     return NextResponse.json({ error: 'Unauthorized — please sign in to apply.' }, { status: 401 });
   }
+  const session = authResult.session;
 
   try {
     const form = await req.formData();
@@ -170,7 +159,7 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
     const mode = (form.get('mode') as string) || 'create';
     if (mode === 'addRole') {
       // Await so transaction errors become proper responses instead of unhandled rejections.
-      return await handleAddRole(form, campaignData, campaignId, authResult, applicationType);
+      return await handleAddRole(form, campaignData, campaignId, session, applicationType);
     }
 
     const name = (form.get('name') as string) || '';
@@ -334,7 +323,7 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
     const emailNormalized = normalizeEmail(email);
     // The verified Firebase uid is the authoritative identity for dedup and
     // rate limiting; email is only a fallback if a uid is somehow unavailable.
-    const identity = authResult.uid || emailNormalized;
+    const identity = session.uid || emailNormalized;
     const cooldownSeconds = Number(process.env.APPLY_COOLDOWN_SECONDS || DEFAULT_COOLDOWN_SECONDS);
     const maxPerCampaign = Number(process.env.APPLY_MAX_SUBMISSIONS_PER_CAMPAIGN || DEFAULT_MAX_SUBMISSIONS_PER_CAMPAIGN);
     const nowMsTx = Date.now();
@@ -388,7 +377,7 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
       tx.set(appRef, {
         applicationType,
         campaignId,
-        uid: authResult.uid || null,
+        uid: session.uid || null,
         name,
         email,
         emailNormalized,
@@ -463,15 +452,11 @@ export async function handleApplicationPost(req: NextRequest, applicationType: s
   }
 }
 
-interface AddRoleAuth {
-  uid: string | null;
-}
-
 async function handleAddRole(
   form: FormData,
   campaignData: CampaignSnapshot,
   campaignId: string,
-  authResult: AddRoleAuth,
+  session: ServerSession,
   applicationType: string,
 ) {
   const email = (form.get('email') as string) || '';
@@ -479,7 +464,7 @@ async function handleAddRole(
 
   // Cooldown as a soft rate limit for updates (dedicated lastRoleUpdateAtMs marker so fresh apps aren't blocked).
   const cooldownSeconds = Number(process.env.APPLY_COOLDOWN_SECONDS || DEFAULT_COOLDOWN_SECONDS);
-  const identity = authResult.uid || emailNormalized;
+  const identity = session.uid || emailNormalized;
   const limitsRef = adminDb.collection('applicationUserLimits').doc(safeKeyPart(identity));
   const nowMs = Date.now();
   if (cooldownSeconds > 0 && identity) {
@@ -498,8 +483,8 @@ async function handleAddRole(
 
   // Locate the applicant's existing application for this campaign.
   let query = adminDb.collection('teamApplications') as FirebaseFirestore.Query;
-  if (authResult.uid) {
-    query = query.where('uid', '==', authResult.uid);
+  if (session.uid) {
+    query = query.where('uid', '==', session.uid);
   } else {
     query = query.where('emailNormalized', '==', emailNormalized);
   }

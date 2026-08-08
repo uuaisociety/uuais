@@ -1,22 +1,13 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getTokens } from 'next-firebase-auth-edge';
-import { authConfig } from '@/lib/auth-config';
+import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { fetchCourses } from '@/lib/courses';
 import { generateAndStoreCourseEmbedding, getEmbeddingCount } from '@/lib/ai/vector-store';
 
-async function verifyAdmin(req: NextRequest) {
-  const tokens = await getTokens(req.cookies, authConfig);
-  if (!tokens) return { ok: false };
-  const isAdmin = tokens.decodedToken.admin === true || tokens.decodedToken.superAdmin === true;
-  if (!isAdmin) return { ok: false };
-  return { ok: true, uid: tokens.decodedToken.uid };
-}
-
 export async function GET(req: NextRequest) {
   try {
-    const auth = await verifyAdmin(req);
-    if (!auth.ok) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const auth = await requireAdmin(req);
+    if (!auth.ok) return authFailureResponse(auth.reason);
 
     const count = await getEmbeddingCount();
     const courses = await fetchCourses();
@@ -34,8 +25,8 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const auth = await verifyAdmin(req);
-    if (!auth.ok) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const auth = await requireAdmin(req);
+    if (!auth.ok) return authFailureResponse(auth.reason);
 
     const body = await req.json();
     const { courseId } = body;
@@ -62,8 +53,8 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
-    const auth = await verifyAdmin(req);
-    if (!auth.ok) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const auth = await requireAdmin(req);
+    if (!auth.ok) return authFailureResponse(auth.reason);
 
     const courses = await fetchCourses();
     let generated = 0;

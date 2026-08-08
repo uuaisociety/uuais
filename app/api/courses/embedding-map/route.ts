@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getTokens } from 'next-firebase-auth-edge';
-import { authConfig } from '@/lib/auth-config';
+import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { adminDb } from '@/lib/firebase-admin';
 import { projectEmbeddings, type ProjectionAlgorithm } from '@/lib/ai/projection';
 
@@ -34,16 +33,9 @@ function normalizeLevel(lvl: unknown): string {
 
 export async function GET(req: NextRequest) {
     try {
-        // Verify Firebase auth using next-firebase-auth-edge
-        const tokens = await getTokens(req.cookies, authConfig);
-        if (!tokens) {
-            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-        }
-
-        // Admin-only: embedding projection is expensive (t-SNE on 1000+ vectors)
-        const isAdmin = tokens.decodedToken.admin === true || tokens.decodedToken.superAdmin === true;
-        if (!isAdmin) {
-            return NextResponse.json({ error: 'Forbidden: Admin access required' }, { status: 403 });
+        const auth = await requireAdmin(req);
+        if (!auth.ok) {
+            return authFailureResponse(auth.reason);
         }
 
         const url = new URL(req.url);

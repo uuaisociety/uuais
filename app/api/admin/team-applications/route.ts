@@ -1,22 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getTokens } from 'next-firebase-auth-edge';
-import { authConfig } from '@/lib/auth-config';
+import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { adminDb } from '@/lib/firebase-admin';
 import admin from 'firebase-admin';
-
-async function authorizeRequest(req: NextRequest) {
-  try {
-    const tokens = await getTokens(req.cookies, authConfig);
-    if (!tokens) return { ok: false, reason: 'no-auth' };
-    const isAdmin = tokens.decodedToken.admin === true || tokens.decodedToken.superAdmin === true;
-    if (!isAdmin) return { ok: false, reason: 'not-admin' };
-    return { ok: true };
-  } catch (err) {
-    console.warn('getTokens failed', err);
-    return { ok: false, reason: 'invalid-token' };
-  }
-}
 
 function safeKeyPart(s: string): string {
   return encodeURIComponent(s);
@@ -25,8 +11,8 @@ function safeKeyPart(s: string): string {
 // DELETE body: { id, campaignId, emailNormalized? } — deletes app + lock/limits docs (uid, fallback email) + resume from Storage.
 export async function DELETE(req: NextRequest) {
   try {
-    const auth = await authorizeRequest(req);
-    if (!auth.ok) return NextResponse.json({ error: 'unauthorized', reason: auth.reason }, { status: auth.reason === 'not-admin' ? 403 : 401 });
+    const auth = await requireAdmin(req);
+    if (!auth.ok) return authFailureResponse(auth.reason);
 
     const body = await req.json();
     const { id, campaignId, emailNormalized } = body as { id?: string; campaignId?: string; emailNormalized?: string };
@@ -65,6 +51,6 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error('team-applications delete error', err);
-    return NextResponse.json({ error: 'internal error', detail: err instanceof Error ? err.message : 'unknown' }, { status: 500 });
+    return NextResponse.json({ error: 'internal error' }, { status: 500 });
   }
 }

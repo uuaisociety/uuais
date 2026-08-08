@@ -121,8 +121,7 @@ export async function exportApplicationsZip(opts: ExportOptions): Promise<void> 
     const resumePath = app.resume?.path;
     if (resumePath || app.resume?.url) {
       try {
-        // Prefer streaming through our admin API (same-origin, no CORS and no
-        // signed-URL expiry); fall back to the stored signed URL if no path exists.
+        // Prefer our admin API (same-origin, no CORS, no signed-URL expiry); fall back to the stored signed URL.
         const url = resumePath
           ? `/api/admin/team-applications/resume?path=${encodeURIComponent(resumePath)}`
           : app.resume!.url!;

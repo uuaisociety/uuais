@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getTokens } from 'next-firebase-auth-edge';
-import { authConfig } from '@/lib/auth-config';
+import { requireAuth } from '@/lib/server-auth';
 
 /**
  * DELETE /api/transcript/delete
@@ -12,12 +11,11 @@ import { authConfig } from '@/lib/auth-config';
  */
 export async function DELETE(req: NextRequest) {
     try {
-        // Verify Firebase auth using next-firebase-auth-edge
-        const tokens = await getTokens(req.cookies, authConfig);
-        if (!tokens) {
+        const auth = await requireAuth(req);
+        if (!auth.ok) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
-        const uid = tokens.decodedToken.uid;
+        const uid = auth.session.uid;
 
         // Client should handle deletion using Firebase client SDK
         // Firebase Security Rules will enforce authentication
