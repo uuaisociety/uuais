@@ -214,6 +214,7 @@ export const Header: React.FC = () => {
                       <Link
                         key={item.name}
                         href={item.href}
+                        prefetch
                         className={`px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium whitespace-nowrap transition-colors duration-200 ${getNavClass(isActive(item.href))}`}
                       >
                         {item.name}
@@ -337,6 +338,7 @@ export const Header: React.FC = () => {
                     <Link
                       key={item.name}
                       href={item.href}
+                      prefetch
                       onClick={() => setIsMenuOpen(false)}
                       className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${getNavClass(isActive(item.href))}`}
                     >
