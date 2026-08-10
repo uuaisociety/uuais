@@ -20,7 +20,6 @@ const JoinPage: React.FC = () => {
   const router = useRouter();
   const [uid, setUid] = useState<string | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  // const [captchaOk, setCaptchaOk] = useState(false); // CAPTCHA temporarily disabled
   const [form, setForm] = useState<Partial<UserProfile>>({});
   const [saving, setSaving] = useState(false);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
@@ -98,24 +97,18 @@ const JoinPage: React.FC = () => {
           )
         )}
 
-        {/* CAPTCHA disabled for now per request */}
-
         <Card>
           <CardHeader>
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Sign in or Create Account</h2>
             <p className="text-gray-600 dark:text-gray-300 text-sm">Use one of the providers below. You can link more providers later in your account.</p>
           </CardHeader>
           <CardContent className="space-y-3 flex flex-col md:flex-col justify-center gap-2 pt-4 items-center max-w-md mx-auto">
-            {/* TODO: Add colors to icons */}
             <Button onClick={() => signInWithGooglePopup()} variant="default">
               <span className="flex items-center gap-2"><HugeiconsIcon icon={GoogleIcon} className="h-4 w-4"/> Continue with Google</span>
             </Button>
             <Button onClick={() => signInWithGithubPopup()} variant="default">
               <span className="flex items-center gap-2"><HugeiconsIcon icon={GithubIcon} className="h-4 w-4"/> Continue with GitHub</span>
             </Button>
-            {/* <Button onClick={() => signInWithMicrosoftPopup()} variant="default">
-              <span className="flex items-center gap-2"><MicrosoftIcon className="h-4 w-4"/> Continue with Microsoft</span>
-            </Button> */}
           </CardContent>
         </Card>
 
@@ -265,10 +258,6 @@ const JoinPage: React.FC = () => {
           </CardContent>
         </Card>
       </div>
-
-      <style jsx global>{`
-        .input { @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white; }
-      `}</style>
     </div>
   );
 };

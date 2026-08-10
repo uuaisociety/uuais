@@ -321,7 +321,7 @@ export default function MyCoursesPage() {
                         onFavoriteChange={(isFavorited) => handleFavoriteChange(course.id, isFavorited)}
                       />
                       {categories.length > 0 && (
-                        <div className="flex flex-col xl:flex-row gap-3 items-center rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/40 p-4 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 items-center">
+                        <div className="flex flex-col xl:flex-row gap-3 items-center rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/40 p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                           <Select
                             value={groupSelectionByCourse[course.id] || (activeTab !== "favorites" ? activeTab : categories[0]?.id || "")}
                             onChange={(e) => handleGroupSelectionChange(course.id, e.target.value)}

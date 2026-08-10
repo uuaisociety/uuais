@@ -120,7 +120,7 @@ const EventsPage: React.FC = () => {
             </Button>
             <Button
               onClick={() => setActiveTab("past")}
-              className={`px-6 py-2 rounded-md font-medium transition-all duration-500 ease-in-out animate-gradientMove text-gray-700 dark:text-gray-300 ${
+              className={`px-6 py-2 rounded-md font-medium transition-all duration-500 ease-in-out text-gray-700 dark:text-gray-300 ${
                 activeTab === "past"
                   ? "bg-red-600 dark:bg-red-700 text-white"
                   : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
@@ -173,7 +173,7 @@ const EventsPage: React.FC = () => {
             {activeEvents.map((event) => (
               <Card
                 key={event.id}
-                className="h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+                className="h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
               >
                 <div className="aspect-video relative overflow-hidden rounded-t-lg">
                   <Link href={`/events/${event.id}`}>

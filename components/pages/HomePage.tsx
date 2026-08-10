@@ -124,7 +124,7 @@ const HomePage: React.FC = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               {features.map((feature, index) => (
-                <Card key={index} className="text-center h-full group hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <Card key={index} className="text-center h-full group hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <CardHeader>
                     <div className="mx-auto w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-200 dark:group-hover:bg-red-800/50 transition-colors duration-300">
                       <feature.icon className="h-6 w-6 text-red-600 dark:text-red-400 group-hover:scale-110 transition-transform duration-300" />
@@ -166,7 +166,7 @@ const HomePage: React.FC = () => {
 
             {upcomingEvents.length > 0 ? <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {upcomingEvents.map((event) => (
-                <Card key={event.id} className="h-full group hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <Card key={event.id} className="h-full group hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <div className="aspect-video relative overflow-hidden rounded-t-lg">
                     <Link href={`/events/${event.id}`} className="relative block w-full h-full">
 
@@ -200,7 +200,7 @@ const HomePage: React.FC = () => {
                         })()}
                       </span>
                     </div>
-                    <Button variant="outline" size="sm" className="hover:scale-105 transition-all duration-300 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <Button variant="outline" size="sm" className="border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
                       Learn More
                     </Button>
                   </CardContent>

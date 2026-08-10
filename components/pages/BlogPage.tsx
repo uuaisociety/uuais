@@ -78,7 +78,7 @@ const BlogPage: React.FC = () => {
             {featuredPost && (
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Featured Article</h2>
-                <Card className="overflow-hidden hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <Card className="overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                   <div className="md:flex">
                     <div className="md:w-1/2">
                     <Link href={`/blog/${featuredPost.id}`}>
@@ -129,7 +129,7 @@ const BlogPage: React.FC = () => {
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">Latest Articles</h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {otherPosts.map((post) => (
-                    <Card key={post.id} className="h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                    <Card key={post.id} className="h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
                       <CardMedia
                         src={post.image || campus}
                         alt={post.title}
@@ -176,30 +176,6 @@ const BlogPage: React.FC = () => {
           </div>
         )}
 
-        {/* CTA Section */}
-        {/* <div className="mt-16 bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 rounded-2xl p-8 text-center text-white">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            Want to Contribute?
-          </h2>
-          <p className="text-red-100 mb-6 max-w-2xl mx-auto">
-            Share your AI knowledge and insights with our community. 
-            We&apos;re always looking for quality content from our members.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 bg-white text-red-600 font-medium rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              Submit an Article
-            </Link>
-            <Link
-              href="/join"
-              className="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-red-600 transition-colors"
-            >
-              Join Our Community
-            </Link>
-          </div>
-        </div> */}
       </div>
     </div>
   );

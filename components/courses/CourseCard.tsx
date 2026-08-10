@@ -78,7 +78,7 @@ export default function CourseCard({
   };
 
   return (
-    <Card className="h-full hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+    <Card className="h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
       <CardContent className="p-6 flex flex-col h-full">
         <div className="mb-3">
           <div className="flex items-start justify-between gap-2">
