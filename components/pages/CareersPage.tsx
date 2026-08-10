@@ -43,7 +43,7 @@ function JobItem({ job }: { job: Job }) {
           <div className="flex flex-row sm:flex-col gap-2 items-start sm:items-end shrink-0">
             {job.applyUrl && (
               <a href={job.applyUrl} target="_blank" rel="noreferrer" onClick={handleApply}>
-                <Button size="sm" variant="default">Read more</Button>
+                <Button size="sm" variant="outline">Read more</Button>
               </a>
             )}
             {job.applyEmail && (
@@ -89,35 +89,35 @@ export default function CareersPage() {
           <div className="text-gray-800 dark:text-gray-200 font-medium">Filter</div>
           <div className="flex flex-wrap gap-2" role="group" aria-label="Job filters">
             <Button
-              variant={filter === 'all' ? 'default' : 'outline'}
+              variant={filter === 'all' ? 'secondary' : 'outline'}
               onClick={() => setFilter('all')}
               aria-pressed={filter === 'all'}
             >
               Show all
             </Button>
             <Button
-              variant={filter === 'internships' ? 'default' : 'outline'}
+              variant={filter === 'internships' ? 'secondary' : 'outline'}
               onClick={() => setFilter('internships')}
               aria-pressed={filter === 'internships'}
             >
               Internships & Master thesis
             </Button>
             <Button
-              variant={filter === 'startup' ? 'default' : 'outline'}
+              variant={filter === 'startup' ? 'secondary' : 'outline'}
               onClick={() => setFilter('startup')}
               aria-pressed={filter === 'startup'}
             >
               Startups
             </Button>
             <Button
-              variant={filter === 'jobs' ? 'default' : 'outline'}
+              variant={filter === 'jobs' ? 'secondary' : 'outline'}
               onClick={() => setFilter('jobs')}
               aria-pressed={filter === 'jobs'}
             >
               Jobs
             </Button>
             <Button
-              variant={filter === 'other' ? 'default' : 'outline'}
+              variant={filter === 'other' ? 'secondary' : 'outline'}
               onClick={() => setFilter('other')}
               aria-pressed={filter === 'other'}
             >
