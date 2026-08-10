@@ -398,7 +398,7 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                                 onClick={async () => {
                                   try { setInvitingId(r.id); const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : ''); await inviteRegistrant(r.id, { baseUrl }); notify({ type: 'success', message: 'Invitation sent' }); } catch (e) { notify({ type: 'error', message: e instanceof Error ? e.message : 'Failed to send invitation' }); } finally { setInvitingId(null); }
                                 }} title="Send invitation"><Send className="h-4 w-4" /> Invite</Button>
-                                <Button size="sm" onClick={toggle}>
+                                <Button size="sm" variant="outline" onClick={toggle}>
                                   <ChevronDown className={`h-4 w-4 mr-1 transition-transform ${expanded[r.id] ? 'rotate-180' : ''}`} />
                                   {expanded[r.id] ? 'Hide details' : 'View details'}
                                 </Button>

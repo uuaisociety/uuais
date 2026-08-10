@@ -60,7 +60,7 @@ const FAQModal: React.FC<FAQModalProps> = ({ open, onClose, form, setForm, editi
           <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={form.published} onChange={(e) => setForm(prev => ({ ...prev, published: e.target.checked }))} /> Published</label>
           <div className="flex justify-end gap-2 pt-2">
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-            <Button type="submit">{editing ? 'Update' : 'Add'} FAQ</Button>
+            <Button type="submit" variant="outline">{editing ? 'Update' : 'Add'} FAQ</Button>
           </div>
         </form>
       </div>

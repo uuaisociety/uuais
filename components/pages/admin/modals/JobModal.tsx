@@ -100,7 +100,7 @@ const JobModal: React.FC<JobModalProps> = ({ open, editing, form, setForm, onClo
 
           <div className="flex justify-end space-x-3 pt-4">
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-            <Button type="submit">{editing ? 'Update Job' : 'Add Job'}</Button>
+            <Button type="submit" variant="outline">{editing ? 'Update Job' : 'Add Job'}</Button>
           </div>
         </form>
       </div>

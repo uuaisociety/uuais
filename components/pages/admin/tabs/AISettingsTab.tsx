@@ -230,6 +230,7 @@ Always base your recommendations on the provided course context.`,
             Reset to Defaults
           </Button>
           <Button
+            variant="outline"
             onClick={handleSave}
             disabled={saving || !isSuperAdmin}
             title={!isSuperAdmin ? 'Only super admins can update AI settings' : undefined}

@@ -213,7 +213,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Edit User: {selected.displayName || selected.name || selected.email}
             </h3>
-            <Button onClick={close}>Close</Button>
+            <Button variant="outline" onClick={close}>Close</Button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -340,13 +340,13 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
       <div className="flex items-center justify-between flex-wrap gap-2">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Members</h2>
         <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline" icon={Download} onClick={() => downloadCsv(users)}>
+          <Button variant="outline" icon={Download} onClick={() => downloadCsv(users)}>
             CSV
           </Button>
           <TableControls
             filter={filter}
             setFilter={setFilter}
-            loading={loading}
+            loading={loading} 
             onRefresh={refresh}
           />
         </div>
@@ -393,7 +393,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
                   <td className="py-2 pr-4">{m.university || "-"}</td>
                   <td className="py-2 pr-4">{m.updatedAt ? new Date(m.updatedAt).toLocaleDateString() : "-"}</td>
                   <td className="py-2 pr-4">
-                    <Button onClick={() => open(m)}>
+                    <Button variant="outline" onClick={() => open(m)}>
                       Edit
                     </Button>
                   </td>

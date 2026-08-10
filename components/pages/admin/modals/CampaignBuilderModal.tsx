@@ -655,7 +655,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
             {/* Footer */}
             <div className="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
               <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-              <Button type="submit" disabled={!title.trim() || enabledTeams.length === 0 || !hasValidRoles || saving}>
+              <Button type="submit" variant="outline" disabled={!title.trim() || enabledTeams.length === 0 || !hasValidRoles || saving}>
                 {saving ? "Saving…" : isNew ? "Create campaign" : "Save changes"}
               </Button>
             </div>

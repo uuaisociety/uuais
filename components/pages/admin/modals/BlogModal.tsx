@@ -95,7 +95,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ open, editing, form, setForm, onC
 
           <div className="flex justify-end space-x-3 pt-4">
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-            <Button type="submit">{editing ? 'Update Blog Post' : 'Create Blog Post'}</Button>
+            <Button type="submit" variant="outline">{editing ? 'Update Blog Post' : 'Create Blog Post'}</Button>
           </div>
         </form>
       </div>

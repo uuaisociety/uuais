@@ -220,7 +220,7 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
 
           <div className="flex justify-end space-x-3 pt-4">
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-            <Button type="submit" disabled={uploading || deleting}>{editing ? 'Update Member' : 'Add Member'}</Button>
+            <Button type="submit" variant="outline" disabled={uploading || deleting}>{editing ? 'Update Member' : 'Add Member'}</Button>
           </div>
         </form>
       </div>

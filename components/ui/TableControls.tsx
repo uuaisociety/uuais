@@ -28,7 +28,7 @@ export const TableControls: React.FC<TopProps> = ({ filter, setFilter, loading, 
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
       />
-      <Button onClick={() => onRefresh?.()} disabled={loading} aria-label="Refresh">
+      <Button variant="outline" onClick={() => onRefresh?.()} disabled={loading} aria-label="Refresh">
         <RefreshCw className="h-4 w-4" />
       </Button>
     </div>

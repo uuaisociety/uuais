@@ -190,7 +190,7 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
           Events Management
         </h2>
-        <Button icon={Plus} onClick={handleAddClick}>
+        <Button variant="outline" icon={Plus} onClick={handleAddClick}>
           Add New Event
         </Button>
       </div>

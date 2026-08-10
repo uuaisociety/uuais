@@ -109,6 +109,7 @@ const EventsPage: React.FC = () => {
         <div className="flex justify-center mb-8 ">
           <div className="flex bg-white dark:bg-gray-900 transition-colors p-1 rounded-lg gap-2">
             <Button
+              variant="ghost"
               onClick={() => setActiveTab("upcoming")}
               className={`px-6 py-2 font-medium transition-all duration-500 ease-in-out text-gray-700 dark:text-gray-300 ${
                 activeTab === "upcoming"
@@ -119,6 +120,7 @@ const EventsPage: React.FC = () => {
               Upcoming Events
             </Button>
             <Button
+              variant="ghost"
               onClick={() => setActiveTab("past")}
               className={`px-6 py-2 rounded-md font-medium transition-all duration-500 ease-in-out text-gray-700 dark:text-gray-300 ${
                 activeTab === "past"

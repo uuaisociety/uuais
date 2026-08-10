@@ -180,7 +180,7 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
             ) : (
               <Button type="button" variant="outline" onClick={() => { stopEdit(); onClose(); }}>Close</Button>
             )}
-            <Button type="submit">{mode === 'edit' ? 'Update Question' : 'Add Question'}</Button>
+            <Button type="submit" variant="outline">{mode === 'edit' ? 'Update Question' : 'Add Question'}</Button>
           </div>
         </form>
       </div>

@@ -21,7 +21,7 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onEdit, onDelete, 
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Newsletter Management</h2>
-        <Button icon={Plus} onClick={onAddClick}>New Article</Button>
+        <Button variant="outline" icon={Plus} onClick={onAddClick}>New Article</Button>
       </div>
 
       <div className="grid gap-4">
@@ -60,7 +60,7 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onEdit, onDelete, 
                     icon={Trash2} 
                     onClick={() => onDelete(post.id)} 
                   >
-                    <span className="text-black dark:text-white">Delete</span>
+                    Delete
                   </Button>
                 </div>
               </div>

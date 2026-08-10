@@ -54,7 +54,7 @@ const BoardPositionModal: React.FC<BPositionModalProps> = ({ open, onClose, form
           </div>
           <div className="flex justify-end gap-2 pt-2">
             <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-            <Button type="submit">{editing ? 'Update' : 'Add'} Board Position</Button>
+            <Button type="submit" variant="outline">{editing ? 'Update' : 'Add'} Board Position</Button>
           </div>
         </form>
       </div>

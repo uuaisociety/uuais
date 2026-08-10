@@ -148,7 +148,7 @@ const updatedMember = {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Team Management</h2>
-        <Button icon={Plus} onClick={handleAddClick}>Add Team Member</Button>
+        <Button variant="outline" icon={Plus} onClick={handleAddClick}>Add Team Member</Button>
       </div>
 
       {allYears.length > 0 && (

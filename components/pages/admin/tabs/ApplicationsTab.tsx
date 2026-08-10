@@ -194,7 +194,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
     return (
       <div key="submissions" className="animate-in fade-in slide-in-from-right-4 duration-300 ease-out">
         <div className="flex items-center gap-3 mb-6">
-          <Button size="sm" icon={ArrowLeft} onClick={() => { setView("campaigns"); setSelectedCampaign(null); }}>Back to campaigns</Button>
+          <Button size="sm" variant="outline" icon={ArrowLeft} onClick={() => { setView("campaigns"); setSelectedCampaign(null); }}>Back to campaigns</Button>
           <div className="flex-1 min-w-0">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               {selectedCampaign ? `Submissions: ${selectedCampaign.title}` : "All Submissions"}
@@ -360,7 +360,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
             Create and manage recruitment campaigns. Each campaign has its own roles, form, deadline, and submissions.
           </p>
         </div>
-        <Button icon={Plus} onClick={onAddCampaign}>New campaign</Button>
+        <Button variant="outline" icon={Plus} onClick={onAddCampaign}>New campaign</Button>
       </div>
 
       <div className="flex items-center gap-1 mb-6 border-b border-gray-200 dark:border-gray-700">
