@@ -6,6 +6,7 @@ import type { Course } from "@/lib/courses";
 import CourseCard from "@/components/courses/CourseCard";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { Modal } from "@/components/ui/Modal";
 import { Select } from "@/components/ui/Select";
 import { auth } from "@/lib/firebase-client";
 import { onAuthStateChanged } from "firebase/auth";
@@ -19,7 +20,7 @@ import {
   removeCourseFromCategory,
 } from "@/lib/firestore/course-categories";
 import { CourseCategory } from "@/types";
-import { Heart, Plus, Trash2, Folder, X, Search} from "lucide-react";
+import { Heart, Plus, Trash2, Folder, Search} from "lucide-react";
 import Link from "next/link";
 import { updatePageMeta } from "@/utils/seo";
 
@@ -369,32 +370,29 @@ export default function MyCoursesPage() {
       </div>
 
       {showNewCategoryModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-md w-full p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Create New Category</h3>
-              <button onClick={() => setShowNewCategoryModal(false)} className="text-gray-400 hover:text-gray-600">
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            <Input
-              value={newCategoryName}
-              onChange={(e) => setNewCategoryName(e.target.value)}
-              placeholder="Category name (e.g., Fall 2025, ML Prerequisites)"
-              fullWidth
-              className="mb-4"
-            />
-            <div className="flex gap-3 justify-end">
-              <Button variant="outline" onClick={() => setShowNewCategoryModal(false)}>Cancel</Button>
-              <Button
-                onClick={handleCreateCategory}
-                disabled={!newCategoryName.trim() || categories.length >= MAX_GROUPS}
-              >
-                Create
-              </Button>
-            </div>
+        <Modal
+          open={showNewCategoryModal}
+          onClose={() => setShowNewCategoryModal(false)}
+          title="Create New Category"
+          size="sm"
+        >
+          <Input
+            value={newCategoryName}
+            onChange={(e) => setNewCategoryName(e.target.value)}
+            placeholder="Category name (e.g., Fall 2025, ML Prerequisites)"
+            fullWidth
+            className="mb-4"
+          />
+          <div className="flex gap-3 justify-end">
+            <Button variant="outline" onClick={() => setShowNewCategoryModal(false)}>Cancel</Button>
+            <Button
+              onClick={handleCreateCategory}
+              disabled={!newCategoryName.trim() || categories.length >= MAX_GROUPS}
+            >
+              Create
+            </Button>
           </div>
-        </div>
+        </Modal>
       )}
     </div>
   );

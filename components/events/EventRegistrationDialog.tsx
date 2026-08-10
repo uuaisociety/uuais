@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader } from "@/components/ui/Card";
-import { X } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/Card";
+import { Modal } from "@/components/ui/Modal";
 import { Event, EventCustomQuestion } from "@/types";
 import {
   registerForEvent,
@@ -277,30 +277,16 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
       )}
 
       {isOpen && !alreadyRegistered && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <Card className="border-0 shadow-none dark:bg-gray-800">
-              <CardHeader className="pb-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {isCapacityFull ? "Join Waitlist" : "Register for Event"}
-                    </h2>
-                    <p className="text-gray-600 dark:text-gray-300 mt-1">
-                      {event.title}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                  >
-                    <X className="h-6 w-6" />
-                  </button>
-                </div>
-              </CardHeader>
-
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+        <Modal
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          title={isCapacityFull ? "Join Waitlist" : "Register for Event"}
+          description={event.title}
+          size="md"
+        >
+          <Card className="border-0 shadow-none dark:bg-gray-800">
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Event-specific Custom Questions */}
                   {customQuestions.length > 0 && (
                     <div>
@@ -429,8 +415,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                 </form>
               </CardContent>
             </Card>
-          </div>
-        </div>
+        </Modal>
       )}
 
       {/* Confirm unregister modal */}

@@ -21,7 +21,7 @@ describe('ConfirmModal', () => {
 
   it('renders default title and description', () => {
     render(<ConfirmModal {...defaultProps} />)
-    expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent('Confirm')
+    expect(screen.getByRole('heading', { level: 2 })).toHaveTextContent('Confirm')
     expect(screen.getByText('Are you sure?')).toBeInTheDocument()
   })
 
