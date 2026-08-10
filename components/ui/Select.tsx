@@ -28,7 +28,7 @@ export const Select: React.FC<SelectProps> = ({
       )}
       <select
         id={selectId}
-        className={`block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm ${error ? 'border-red-300' : ''} ${className} dark:bg-gray-700 dark:border-gray-600`}
+        className={`block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm ${error ? 'border-red-300' : ''} ${className} dark:bg-gray-800 dark:border-gray-600 dark:text-gray-100`}
         {...props}
       >
         {options.map((option) => (

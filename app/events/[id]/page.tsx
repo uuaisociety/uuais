@@ -115,7 +115,7 @@ const EventDetailPage: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <Link href="/events">
-          <Button className="mb-8" icon={ArrowLeft}>
+          <Button variant="outline" className="mb-8" icon={ArrowLeft}>
             Back to Events
           </Button>
         </Link>
