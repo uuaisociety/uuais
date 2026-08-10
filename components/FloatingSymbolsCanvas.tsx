@@ -167,7 +167,13 @@ const FloatingSymbolsCanvas: React.FC = () => {
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('click', handleClick);
-    animationRef.current = requestAnimationFrame(animate);
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!prefersReduced.matches) {
+      animationRef.current = requestAnimationFrame(animate);
+    } else {
+      draw(0);
+    }
 
     return () => {
       cancelAnimationFrame(animationRef.current);
@@ -181,6 +187,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="absolute inset-0 w-full h-full pointer-events-none"
       style={{ width: '100%', height: '100%' }}
     />

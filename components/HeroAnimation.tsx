@@ -256,7 +256,15 @@ const HeroAnimation: React.FC = () => {
 
     window.addEventListener('resize', resize);
     document.addEventListener('mousemove', handleMouseMove);
-    animationRef.current = requestAnimationFrame(animate);
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!prefersReduced.matches) {
+      animationRef.current = requestAnimationFrame(animate);
+    } else {
+      // Render a single static frame of the glyph so the hero still has form.
+      ctx.clearRect(0, 0, layoutRef.current.W, layoutRef.current.H);
+      drawNabla(1.25, { x: 0, y: 0 });
+    }
 
     return () => {
       cancelAnimationFrame(animationRef.current);
@@ -268,6 +276,7 @@ const HeroAnimation: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="w-full h-full"
       style={{ width: '100%', height: '100%', minHeight: '200px' }}
     />

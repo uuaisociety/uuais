@@ -529,8 +529,8 @@ export default function TeamApplicationPage() {
               <Clock className="h-5 w-5" />
               <span>Application deadline: {campaign.deadline}</span>
             </div>
-            <a href="#wizard" className="inline-block mt-10 animate-bounce">
-              <ChevronDown className="h-7 w-7 text-red-200 dark:text-red-300" />
+            <a href="#wizard" className="inline-block mt-10 motion-safe:animate-bounce" aria-label="Skip to application form">
+              <ChevronDown className="h-7 w-7 text-red-200 dark:text-red-300" aria-hidden />
             </a>
           </div>
         </section>
