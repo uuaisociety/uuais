@@ -36,10 +36,19 @@ const FloatingSymbolsCanvas: React.FC = () => {
 
     const resize = () => {
       const r = canvas.getBoundingClientRect();
-      canvas.width = r.width * dpr;
-      canvas.height = r.height * dpr;
+      const w = Math.round(r.width * dpr);
+      const h = Math.round(r.height * dpr);
+      if (w === canvas.width && h === canvas.height) return;
+      canvas.width = w;
+      canvas.height = h;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
+
+    // Sync the backing store with the element whenever it resizes for any
+    // reason (font/image load, media-query reflow, mobile URL-bar, zoom) —
+    // window.resize alone misses those and leaves the drawing clipped.
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
     resize();
 
     // === Mouse Tracking ===
@@ -150,8 +159,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
       const dt = ts - prevTsRef.current;
       prevTsRef.current = ts;
 
-      const r = canvas.getBoundingClientRect();
-      ctx.clearRect(0, 0, r.width, r.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       draw(dt);
       animationRef.current = requestAnimationFrame(animate);
     };
@@ -163,6 +171,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
 
     return () => {
       cancelAnimationFrame(animationRef.current);
+      ro.disconnect();
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('click', handleClick);

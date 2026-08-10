@@ -37,7 +37,7 @@ const HeroAnimation: React.FC = () => {
 
   const introDuration = 3000;
   const glitchRef = useRef({ offset: { x: 0, y: 0 }, intensity: 0 });
-  const layoutRef = useRef({ W: 0, H: 0, center: { x: 0, y: 0 }, size: 0, scale: 1, isSmall: false, virtualW: 0, offsetX: 0 });
+  const layoutRef = useRef({ W: 0, H: 0, center: { x: 0, y: 0 }, size: 0, scale: 1, isSmall: false, virtualW: 0, offsetX: 0, maxR: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -59,9 +59,11 @@ const HeroAnimation: React.FC = () => {
       const scale = W < 500 ? 0.5 : 1;
       const center = {
         x: offsetX + virtualW * 0.5,
-        y: Math.min(H / 2, H - size * 1.35),
+        y: isSmall ? Math.min(H * 0.42, H - size * 1.35) : Math.min(H / 2, H - size * 1.35),
       };
-      layoutRef.current = { W, H, center, size, scale, isSmall, virtualW, offsetX };
+      // Largest orbit the canvas can hold below the center point.
+      const maxR = Math.max(0, H - center.y - 12);
+      layoutRef.current = { W, H, center, size, scale, isSmall, virtualW, offsetX, maxR };
     };
         // === Event Listeners ===
     const resize = () => {
@@ -151,10 +153,10 @@ const HeroAnimation: React.FC = () => {
     };
 
     const drawParticles = (t: number) => {
-      const { center } = layoutRef.current;
+      const { center, maxR } = layoutRef.current;
       particles.forEach((p) => {
         const angle = p.angle + t * p.speed;
-        const r = p.radius + Math.sin(t * 0.001 + p.drift) * 8;
+        const r = Math.min(p.radius + Math.sin(t * 0.001 + p.drift) * 8, maxR);
         ctx.beginPath();
         ctx.arc(center.x + Math.cos(angle) * r, center.y + Math.sin(angle) * r, p.size, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
@@ -175,17 +177,18 @@ const HeroAnimation: React.FC = () => {
     };
 
     const drawMathSymbols = (t: number, phaseTime: number) => {
-      const { center } = layoutRef.current;
+      const { center, maxR } = layoutRef.current;
       orbitSymbols.forEach((sym, i) => {
         const fade = Math.max(0, Math.min(1, (phaseTime - sym.fadeDelay) / 1200));
         if (fade <= 0) return;
 
         const angle = sym.angle + t * 0.00012 + Math.sin(i + t * 0.00008) * 0.2;
+        const radius = Math.min(sym.radius, maxR);
         ctx.save();
         ctx.globalAlpha = fade * 0.32;
         ctx.fillStyle = 'rgba(255, 255, 255, 1)';
         ctx.font = `${14 + Math.sin(i + t * 0.0002) * 2}px monospace`;
-        ctx.fillText(sym.text, center.x + Math.cos(angle) * sym.radius, center.y + Math.sin(angle) * sym.radius);
+        ctx.fillText(sym.text, center.x + Math.cos(angle) * radius, center.y + Math.sin(angle) * radius);
         ctx.restore();
       });
     };
