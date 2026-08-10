@@ -9,12 +9,12 @@ describe('Card', () => {
 
   it('renders with default variant classes', () => {
     const { container } = render(<Card />)
-    expect(container.firstChild).toHaveClass('shadow-sm')
+    expect(container.firstChild).toHaveClass('border-border')
   })
 
   it('renders with elevated variant', () => {
     const { container } = render(<Card variant="elevated" />)
-    expect(container.firstChild).toHaveClass('shadow-md')
+    expect(container.firstChild).toHaveClass('shadow-[var(--glass-shadow)]')
   })
 
   it('applies custom className', () => {
