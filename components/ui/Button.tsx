@@ -4,38 +4,42 @@ import type { LucideIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+// Pill geometry, one accent, no gradients. Press feedback is a small scale on
+// :active — the iOS cue — rather than a hover glow.
 const buttonVariants = cva(
-
-  "cursor-pointer relative z-0 rounded-[10px] transition-all duration-300 ease-in-out shadow-lg inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium disabled:pointer-events-none disabled:opacity-50 outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+  [
+    "cursor-pointer relative z-0 isolate inline-flex items-center justify-center gap-2",
+    "rounded-md whitespace-nowrap font-medium tracking-[-0.01em]",
+    "transition-[background-color,color,box-shadow,transform,border-color] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]",
+    "active:scale-[0.97] active:duration-100",
+    "disabled:pointer-events-none disabled:opacity-45",
+    "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+  ].join(" "),
   {
     variants: {
       variant: {
-        default: [
-          "bg-gradient-to-r from-gray-200 to-gray-100",   // default light gradient
-          "dark:from-gray-700 dark:to-gray-600",     // default dark gradient
-          "text-gray-800 dark:text-white",
-          "border border-gray-400/60 dark:border-gray-700", // Add a small border in light mode
-        ].join(" "),        
+        default:
+          "bg-primary text-primary-foreground shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110",
         destructive:
-          "bg-destructive/60 hover:bg-destructive/90 text-white shadow-xs focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40",
+          "bg-destructive text-primary-foreground shadow-[inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110",
         outline:
-          "border-input bg-background bg-input/30 hover:bg-input/40 shadow-xs dark:bg-input/70 dark:text-accent-foreground dark:border-input dark:hover:bg-input/70",
+          "border border-border bg-transparent text-foreground hover:bg-foreground/[0.045] hover:border-foreground/25",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
+          "bg-secondary text-secondary-foreground hover:bg-foreground/[0.08]",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
-        cta:
-          "glow-on-hover bg-gradient-to-r from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-600 text-black dark:text-white shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.99] transition-transform before:absolute before:inset-0 before:bg-white/10 before:opacity-0 hover:before:opacity-100",
+          "text-foreground/75 hover:text-foreground hover:bg-foreground/[0.055]",
+        link: "rounded-none text-primary underline-offset-4 hover:underline active:scale-100",
+        // Liquid glass — the surface picks up whatever sits behind it.
+        cta: "glass glass-sheen glass-interactive rounded-md text-foreground",
         ctaSoft:
-          "glow-hover-only bg-gradient-to-r from-gray-200 to-gray-100 dark:from-gray-700 dark:to-gray-600 text-black dark:text-white shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.99] transition-transform before:absolute before:inset-0 before:opacity-0 hover:before:opacity-100",
+          "glass rounded-md text-foreground hover:bg-[var(--glass-bg-strong)]",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        xl: "h-12 rounded-md px-8 has-[>svg]:px-6",
-        icon: "size-9",
+        default: "h-10 px-5 text-sm has-[>svg]:pr-4",
+        sm: "h-8 px-3.5 text-[0.8125rem] gap-1.5",
+        lg: "h-11 px-6 text-[0.9375rem]",
+        xl: "h-13 px-7 text-base",
+        icon: "size-10 px-0",
       },
       fullWidth: {
         true: "w-full",
