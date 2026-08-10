@@ -445,7 +445,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
             {showSidebar && (
               <div className="md:w-64 md:min-w-64 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 flex flex-col bg-gray-50 dark:bg-gray-800">
                 <div className="p-3 border-b border-gray-200 dark:border-gray-700">
-                  <Button size="sm" onClick={startNewChat} className="w-full">
+                  <Button variant="outline" size="sm" onClick={startNewChat} className="w-full">
                     <Plus className="h-4 w-4 mr-1" /> New Chat
                   </Button>
                 </div>
@@ -454,34 +454,45 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                     <div className="text-xs text-gray-500 text-center py-4">No chat history</div>
                   )}
                   {chats.map((chat) => (
-                    <div
+                    <button
                       key={chat.id}
+                      type="button"
                       onClick={() => loadChat(chat)}
                       className={`w-full cursor-pointer group text-left p-2 transition-colors rounded text-sm hover:bg-gray-300 dark:hover:bg-gray-700 ${
                         currentChatId === chat.id ? 'bg-gray-200 dark:bg-gray-700' : ''
                       }`}
                     >
                       <div className="flex items-center gap-2">
-                        <MessageSquare className="h-3 w-3 text-gray-400" />
+                        <MessageSquare className="h-3 w-3 text-gray-400" aria-hidden />
                         <div className="flex-1 truncate">{chat.title}</div>
-                        <Button
-                          variant="ghost"
+                        <span
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`Delete chat: ${chat.title}`}
                           onClick={(e) => handleDeleteChat(chat.id, e)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              handleDeleteChat(chat.id, e as unknown as React.MouseEvent);
+                            }
+                          }}
                           className="opacity-0 group-hover:opacity-100 p-1 cursor-pointer hover:text-red-500 transition-opacity"
                         >
                           <Trash2 className="h-3 w-3" />
-                        </Button>
+                        </span>
                       </div>
                       <div className="text-xs text-gray-400 mt-1">
                         {new Date(chat.updatedAt).toLocaleDateString()}
                       </div>
-                    </div>
+                    </button>
                   ))}
                   {chatsLoading && (
                     <div className="text-xs text-gray-500 text-center py-2">Loading…</div>
                   )}
                   {chatsHasMore && !chatsLoading && (
                     <Button
+                      variant="outline"
                       size="sm"
                       onClick={handleLoadMoreChats}
                       className="w-full mt-2"
@@ -595,6 +606,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                     </div>
                     <button 
                       onClick={clearError}
+                      aria-label="Dismiss error"
                       className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                     >
                       ✕
@@ -607,7 +619,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                 className="mt-3 flex gap-2"
               >
                 <Input value={value} onChange={(e)=>setValue(e.target.value)} placeholder={rateLimit?.remaining === 0 ? "Daily limit reached" : "Ask about courses, credits, level..."} fullWidth disabled={loading || rateLimit?.remaining === 0} />
-                <Button type="submit" className="bg-[#990000] hover:bg-[#7f0000] text-white" disabled={loading}>
+                <Button type="submit" className="bg-[#990000] hover:bg-[#7f0000] text-white" disabled={loading} aria-label={loading ? "Sending" : "Send message"}>
                   {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                 </Button>
               </form>
