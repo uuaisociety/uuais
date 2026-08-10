@@ -208,11 +208,11 @@ describe('Header', () => {
       })
     })
 
-    it('shows Account and Logout instead of Register and Login', () => {
+    it('shows username as account link and Logout instead of Register and Login', () => {
       render(<Header />)
       expect(screen.queryByText('Register')).not.toBeInTheDocument()
       expect(screen.queryByText('Login')).not.toBeInTheDocument()
-      expect(screen.getByText('Account')).toBeInTheDocument()
+      expect(screen.getByRole('link', { name: 'TestUser' })).toHaveAttribute('href', '/account')
       expect(screen.getByText('Logout')).toBeInTheDocument()
     })
 
@@ -256,9 +256,9 @@ describe('Header', () => {
       expect(projectsButtons.length).toBe(2)
     })
 
-    it('shows Account and Logout', () => {
+    it('shows username as account link and Logout', () => {
       render(<Header />)
-      expect(screen.getByText('Account')).toBeInTheDocument()
+      expect(screen.getByRole('link', { name: 'Alice' })).toHaveAttribute('href', '/account')
       expect(screen.getByText('Logout')).toBeInTheDocument()
     })
   })
@@ -272,7 +272,7 @@ describe('Header', () => {
       render(<Header />)
       expect(screen.queryByText('Register')).not.toBeInTheDocument()
       expect(screen.queryByText('Login')).not.toBeInTheDocument()
-      expect(screen.queryByText('Account')).not.toBeInTheDocument()
+      expect(screen.queryByText('TestUser')).not.toBeInTheDocument()
     })
 
     it('hides auth links while loading even when user is set', () => {
@@ -280,7 +280,7 @@ describe('Header', () => {
       render(<Header />)
       expect(screen.queryByText('Register')).not.toBeInTheDocument()
       expect(screen.queryByText('Login')).not.toBeInTheDocument()
-      expect(screen.queryByText('Account')).not.toBeInTheDocument()
+      expect(screen.queryByText('Test')).not.toBeInTheDocument()
     })
   })
 

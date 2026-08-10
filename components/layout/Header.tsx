@@ -171,14 +171,13 @@ export const Header: React.FC = () => {
             <div className={`flex items-center gap-3 ${getHeaderTopBarTextClass()}`}>
               {!loading && !user && (
                 <>
-                  <Link href="/join" className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'}`}>Register</Link>
-                  <Link href="/login" className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'}`}>Login</Link>
+                  <Link href="/join" className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'} font-normal transition-none!`}>Register</Link>
+                  <Link href="/login" className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'} font-normal transition-none!`}>Login</Link>
                 </>
               )}
               {!loading && user && (
                 <>
-                  <span className="truncate max-w-[200px]">{profile?.displayName || profile?.name || user.displayName || (user as unknown as { name?: string }).name || user.email}</span>
-                  <Link href="/account" className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'}`}>Account</Link>
+                  <Link href="/account" title="Account" className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'} font-normal transition-none! truncate max-w-[200px]`}>{profile?.displayName || profile?.name || user.displayName || (user as unknown as { name?: string }).name || user.email}</Link>
                   <button onClick={() => logout()} className={`${isTransparent ? 'text-white/90 hover:text-white' : 'text-gray-700 dark:text-gray-300'} hover:underline bg-transparent border-none p-0 cursor-pointer text-sm`}>Logout</button>
                 </>
               )}
@@ -308,7 +307,7 @@ export const Header: React.FC = () => {
                  <button
                     ref={mobileButtonRef}
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className={`p-2 rounded-md transition-all hover:scale-110 ${getMobileButtonClass()}`}
+                    className={`p-2 rounded-md transition-colors ${getMobileButtonClass()}`}
                     aria-expanded={isMenuOpen}
                     aria-controls="mobile-menu"
                   >
