@@ -16,6 +16,7 @@ type Props = {
   hrefBase?: string;
   initialFavorited?: boolean;
   onFavoriteChange?: (isFavorited: boolean) => void;
+  children?: React.ReactNode;
 };
 
 export default function CourseCard({
@@ -23,6 +24,7 @@ export default function CourseCard({
   hrefBase = "/course",
   initialFavorited = false,
   onFavoriteChange,
+  children,
 }: Props) {
   const [isFavorited, setIsFavorited] = useState(initialFavorited);
   const [user, setUser] = useState<{ uid: string } | null>(null);
@@ -120,9 +122,12 @@ export default function CourseCard({
         </div>
         <div className="mt-auto flex items-center gap-2">
           <Link href={`${hrefBase}/${course.id}`} className="flex-1">
-            <Button className="bg-[#990000] hover:bg-[#7f0000] text-white w-full">View Details</Button>
+            <Button variant="outline" className="w-full">
+              View Details
+            </Button>
           </Link>
         </div>
+        {children}
       </CardContent>
     </Card>
   );
