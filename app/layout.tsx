@@ -13,6 +13,10 @@ import { AnalyticsWithConsent } from '@/components/common/AnalyticsWithConsent';
 export { metadata, viewport } from "./metadata";;
 
 
+// Background texture layer — flip between "grain", "vignette", or "none" to compare.
+const bgTexture: "grain" | "vignette" | "none" = "grain";
+
+
 // Display grotesque for everything editorial; mono reserved for metadata,
 // labels and tags so data reads differently from prose.
 const display = Instrument_Sans({
@@ -47,6 +51,8 @@ export default function RootLayout({
             <AppProvider>
               {/* Ambient colour fields the glass surfaces refract */}
               <div className="ambient" aria-hidden />
+              {bgTexture === "grain" && <div className="grain" aria-hidden />}
+              {bgTexture === "vignette" && <div className="vignette" aria-hidden />}
               <div className="min-h-screen flex flex-col">
                 <Header />
                 <RegistrationGate />
