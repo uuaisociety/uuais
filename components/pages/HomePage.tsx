@@ -11,6 +11,7 @@ import { format } from 'date-fns';
 import campus from '@/public/images/campus.png';
 import HeroAnimation from '@/components/HeroAnimation';
 import FloatingSymbolsCanvas from '@/components/FloatingSymbolsCanvas';
+import HeroSplash from '@/components/HeroSplash';
 
 const categoryOptions = [
   { value: 'all', label: 'All Categories' },
@@ -82,61 +83,48 @@ const HomePage: React.FC = () => {
     <div className="pb-24">
 
       {/* ---------------------------------------------------------------- Hero
-          An inset dark slab rather than a full-bleed gradient: it reads as an
-          object on the page, and gives the glass controls something to sit on. */}
-      {/* Pulled up behind the fixed header so the nav's glass blurs the hero
-          itself — otherwise it frosts the light page background and reads as a
-          bright band above a near-black hero. */}
-      <section className="-mt-14">
-        <div className="relative overflow-hidden bg-ink text-white">
-          {/* Interior light */}
-          <div
-            aria-hidden
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                'radial-gradient(45rem 30rem at 78% 18%, oklch(from var(--primary) l c h / 55%), transparent 62%),' +
-                'radial-gradient(38rem 28rem at 10% 92%, oklch(from var(--ink) l c h / 45%), transparent 60%)',
-            }}
-          />
-          <FloatingSymbolsCanvas />
+          A theme-aware slab — dark ink in dark mode, white paper in light —
+          with interior radial light. Reads as an object on the page and gives
+          the glass controls something to sit on. Pulled up behind the fixed
+          header so the nav's glass blurs the hero itself. */}
+      <HeroSplash className="-mt-14">
+        <FloatingSymbolsCanvas />
 
-          <div className="relative z-10 max-w-7xl mx-auto pt-14 grid grid-rows-[auto_1fr] lg:grid-rows-none lg:grid-cols-[1.05fr_0.95fr] items-center lg:content-stretch min-h-[calc(100dvh+3.5rem)]">
-            <div className="order-2 lg:order-1 px-6 sm:px-8 lg:px-8 pb-14 lg:py-14">
-              <p className="mono-label text-white/45 mb-6">Uppsala University · AI Society</p>
+        <div className="relative z-10 max-w-7xl mx-auto pt-14 grid grid-rows-[auto_1fr] lg:grid-rows-none lg:grid-cols-[1.05fr_0.95fr] items-center lg:content-stretch min-h-[calc(100dvh+3.5rem)]">
+          <div className="order-2 lg:order-1 px-6 sm:px-8 lg:px-8 pb-14 lg:py-14">
+            <p className="mono-label text-current/45 mb-6">Uppsala University · AI Society</p>
 
-              <h1 className="display-xl mb-7">
-                Build the future.
-                <span className="block text-white/40">(Start here.)</span>
-              </h1>
+            <h1 className="display-xl mb-7">
+              Build the future.
+              <span className="block text-current/40">(Start here.)</span>
+            </h1>
 
-              <p className="text-base sm:text-lg text-white/60 max-w-md leading-relaxed mb-9">
-                Uniting Uppsala students driven by AI, tech, and meaningful collaboration.
-              </p>
+            <p className="text-base sm:text-lg text-current/60 max-w-md leading-relaxed mb-9">
+              Uniting Uppsala students driven by AI, tech, and meaningful collaboration.
+            </p>
 
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/events"
-                  className="inline-flex items-center h-12 px-7 rounded-md bg-white text-ink text-[0.9375rem] font-medium tracking-[-0.01em] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  Our events
-                </Link>
-                <Link
-                  href="/about"
-                  className="group inline-flex items-center gap-2 h-12 px-7 rounded-md border border-white/20 bg-white/[0.06] backdrop-blur-xl text-[0.9375rem] font-medium tracking-[-0.01em] text-white/90 transition-colors duration-300 hover:bg-white/[0.13] hover:border-white/30"
-                >
-                  Learn more
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="order-1 lg:order-2 flex items-center justify-center w-full min-h-[10rem] pt-8 lg:pt-0 lg:h-full">
-              <HeroAnimation />
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/events"
+                className="inline-flex items-center h-12 px-7 rounded-md bg-primary text-primary-foreground dark:bg-white dark:text-ink text-[0.9375rem] font-medium tracking-[-0.01em] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Our events
+              </Link>
+              <Link
+                href="/about"
+                className="group inline-flex items-center gap-2 h-12 px-7 rounded-md border border-current/20 bg-current/[0.06] backdrop-blur-xl text-[0.9375rem] font-medium tracking-[-0.01em] text-current/90 transition-colors duration-300 hover:bg-current/[0.13] hover:border-current/30"
+              >
+                Learn more
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Link>
             </div>
           </div>
+
+          <div className="order-1 lg:order-2 flex items-center justify-center w-full min-h-[10rem] pt-8 lg:pt-0 lg:h-full">
+            <HeroAnimation />
+          </div>
         </div>
-      </section>
+      </HeroSplash>
 
       {/* ------------------------------------------------------------- Pillars
           A numbered editorial list on hairlines — deliberately not four cards
@@ -171,9 +159,26 @@ const HomePage: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <SectionHead paren="Upcoming" title="Events" action={{ href: '/events', label: 'See all events' }} />
 
-          {upcomingEvents.length > 0 ? (
+          {state.eventsLoaded && upcomingEvents.length === 0 ? (
+            <div className="border-t border-border py-16 text-center">
+              <p className="mono-meta text-muted-foreground">
+                No events scheduled — check back soon.
+              </p>
+            </div>
+          ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {upcomingEvents.map((event) => (
+              {!state.eventsLoaded
+                ? Array.from({ length: 3 }).map((_, i) => (
+                    <div key={i} className="glass rounded-md overflow-hidden">
+                      <div className="aspect-[16/10] bg-foreground/5 animate-pulse" />
+                      <div className="p-5 space-y-3">
+                        <div className="h-4 w-3/4 rounded bg-foreground/10 animate-pulse" />
+                        <div className="h-3 w-full rounded bg-foreground/5 animate-pulse" />
+                        <div className="h-3 w-2/3 rounded bg-foreground/5 animate-pulse" />
+                      </div>
+                    </div>
+                  ))
+                : upcomingEvents.map((event) => (
                 <Link
                   key={event.id}
                   href={`/events/${event.id}`}
@@ -211,12 +216,6 @@ const HomePage: React.FC = () => {
                   </div>
                 </Link>
               ))}
-            </div>
-          ) : (
-            <div className="border-t border-border py-16 text-center">
-              <p className="mono-meta text-muted-foreground">
-                No events scheduled — check back soon.
-              </p>
             </div>
           )}
         </div>

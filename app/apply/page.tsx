@@ -3,6 +3,7 @@ import { ArrowRight, Users, Landmark } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { Tag, type TagVariant } from '@/components/ui/Tag';
 import { Button } from '@/components/ui/Button';
+import HeroSplash from '@/components/HeroSplash';
 
 const APPLY_TYPES = [
   {
@@ -37,26 +38,17 @@ const STATUS_VARIANT: Record<string, TagVariant> = {
 export default function ApplyLandingPage() {
   return (
     <main className="min-h-screen bg-background transition-colors">
-      <section className="relative overflow-hidden bg-ink text-white">
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(46rem 28rem at 82% 10%, oklch(from var(--primary) l c h / 45%), transparent 62%),' +
-              'radial-gradient(36rem 24rem at 8% 96%, oklch(from var(--ink) l c h / 45%), transparent 60%)',
-          }}
-        />
+      <HeroSplash>
         <div className="relative z-10 max-w-4xl mx-auto px-6 py-20 text-center">
-          <p className="mono-label text-white/45 mb-6">UU AI Society · Join</p>
+          <p className="mono-label text-current/45 mb-6">UU AI Society · Join</p>
           <h1 className="display-lg mb-4">
-            Apply <span className="text-white/40">(contribute)</span>
+            Apply <span className="text-current/40">(contribute)</span>
           </h1>
-          <p className="text-base sm:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-current/60 max-w-2xl mx-auto leading-relaxed">
             Choose how you want to contribute to UU AI Society.
           </p>
         </div>
-      </section>
+      </HeroSplash>
 
       <section className="max-w-4xl mx-auto px-6 py-16">
         <div className="grid gap-5 grid-cols-1">
