@@ -343,19 +343,6 @@
     .glass-nav { backdrop-filter: var(--glass-bf-nav); }
   }
 
-  /* Home page variant: the hero behind the nav is a dark ink slab in both
-     themes, so the nav + mobile menu + popovers stay dark ink there too —
-     one continuous surface instead of a light bar over a dark landing. */
-  .glass-nav-invert {
-    --glass-nav-bg: oklch(from var(--ink) l c h / 72%);
-    --glass-nav-edge: oklch(1 0 0 / 8%);
-    --glass-nav-fg: oklch(0.97 0.002 95);
-    --glass-pop-bg: oklch(from var(--ink) l c h / 88%);
-    --glass-pop-edge: oklch(1 0 0 / 14%);
-    --glass-pop-shadow: 0 2px 4px oklch(0 0 0 / 40%),
-                        0 24px 56px -12px oklch(0 0 0 / 60%);
-  }
-
   /* Floating panel (dropdowns / popovers) that sits over page content — a
      clearly frosted, distinct surface with its own shadow so it reads as
      floating above the bar. */
@@ -529,6 +516,16 @@
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-rise { animation: rise 0.7s var(--ease-ios) both; }
+
+/* Route transition — new page content fades in on navigation. Runs on the
+   keyed page wrapper so it re-triggers on every route change. Deliberately
+   opacity-only: moving the page under the fixed blurred header forces the
+   backdrop-filter to recomposite every frame, which reads as a header stutter. */
+@keyframes page-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-page-in { animation: page-in 0.25s var(--ease-ios) backwards; }
 
 @layer components {
   .thinking-dot {
