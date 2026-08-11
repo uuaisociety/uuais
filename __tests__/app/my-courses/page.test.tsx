@@ -240,7 +240,7 @@ describe('MyCoursesPage', () => {
     fireEvent.click(screen.getByText('New Category'))
 
     expect(screen.getByText('Create New Category')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText(/category name/i)).toBeInTheDocument()
+    expect(screen.getByPlaceholderText(/e.g., fall 2025/i)).toBeInTheDocument()
   })
 
   it('closes create category modal on cancel', async () => {
@@ -276,7 +276,7 @@ describe('MyCoursesPage', () => {
     })
 
     fireEvent.click(screen.getByText('New Category'))
-    fireEvent.change(screen.getByPlaceholderText(/category name/i), {
+    fireEvent.change(screen.getByPlaceholderText(/e.g., fall 2025/i), {
       target: { value: 'My New Category' },
     })
     fireEvent.click(screen.getByText('Create'))
@@ -487,10 +487,10 @@ describe('MyCoursesPage', () => {
     render(<MyCoursesPage />)
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: /ml courses/i })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /^ml courses/i })).toBeInTheDocument()
     })
 
-    fireEvent.click(screen.getByRole('button', { name: /ml courses/i }))
+    fireEvent.click(screen.getByRole('button', { name: /^ml courses/i }))
 
     await waitFor(() => {
       expect(screen.getByText('Move')).toBeInTheDocument()
@@ -643,16 +643,16 @@ describe('MyCoursesPage', () => {
     render(<MyCoursesPage />)
 
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: /ml courses/i })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /^ml courses/i })).toBeInTheDocument()
     })
 
-    fireEvent.click(screen.getByRole('button', { name: /ml courses/i }))
+    fireEvent.click(screen.getByRole('button', { name: /^ml courses/i }))
 
     await waitFor(() => {
       expect(screen.getByText('This category is empty')).toBeInTheDocument()
     })
 
-    const tabBtn = screen.getByRole('button', { name: /ml courses/i })
+    const tabBtn = screen.getByRole('button', { name: /^ml courses/i })
     const container = tabBtn.parentElement!
     const deleteBtn = container.querySelectorAll('button')[1]
     fireEvent.click(deleteBtn)
@@ -683,7 +683,7 @@ describe('MyCoursesPage', () => {
     })
     expect(screen.queryByText('Category Course')).not.toBeInTheDocument()
 
-    fireEvent.click(screen.getByRole('button', { name: /ml courses/i }))
+    fireEvent.click(screen.getByRole('button', { name: /^ml courses/i }))
 
     await waitFor(() => {
       expect(screen.getByText('Category Course')).toBeInTheDocument()
