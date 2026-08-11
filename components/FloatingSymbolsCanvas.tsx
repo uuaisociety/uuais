@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react';
+import { useTheme } from '@/providers/ThemeProvider';
 
 // === Types ===
 
@@ -24,6 +25,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
   const symbolsRef = useRef<FloatingSymbol[]>([]);
   const mousePosRef = useRef({ x: 0, y: 0 });
   const prevTsRef = useRef(0);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -31,6 +33,9 @@ const FloatingSymbolsCanvas: React.FC = () => {
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    // White glyphs on the ink slab, near-ink on the paper slab.
+    const glyphColor = theme === 'dark' ? 'rgba(255, 255, 255, 1)' : 'rgba(30, 28, 27, 1)';
 
     const dpr = window.devicePixelRatio || 1;
 
@@ -144,7 +149,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
         ctx.translate(Math.round(sym.x + sym.offsetX), Math.round(sym.y + sym.offsetY));
         ctx.rotate((sym.rotation * Math.PI) / 180);
         ctx.globalAlpha = Math.max(0, Math.min(1, opacity));
-        ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        ctx.fillStyle = glyphColor;
         ctx.font = '16px monospace';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -182,7 +187,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [theme]);
 
   return (
     <canvas

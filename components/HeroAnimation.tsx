@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react';
+import { useTheme } from '@/providers/ThemeProvider';
 
 // === Types ===
 
@@ -38,6 +39,7 @@ const HeroAnimation: React.FC = () => {
   const introDuration = 3000;
   const glitchRef = useRef({ offset: { x: 0, y: 0 }, intensity: 0 });
   const layoutRef = useRef({ W: 0, H: 0, center: { x: 0, y: 0 }, size: 0, scale: 1, isSmall: false, virtualW: 0, offsetX: 0, maxR: 0 });
+  const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -46,7 +48,16 @@ const HeroAnimation: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // White strokes on the ink slab; on the paper slab the nabla is the brand
+    // red while the supporting particles and symbols stay near-ink.
+    const rgb = theme === 'dark' ? '255, 255, 255' : '30, 28, 27';
+    const nablaRgb = theme === 'dark' ? '255, 255, 255' : '213, 39, 38';
+
     const dpr = window.devicePixelRatio || 1;
+
+    // Restart the intro timeline if the theme changed so colours stay in sync.
+    totalTimeRef.current = 0;
+    lastTimeRef.current = 0;
 
     const updateLayout = () => {
       const rect = canvas.getBoundingClientRect();
@@ -122,8 +133,8 @@ const HeroAnimation: React.FC = () => {
       const bY = cy + size + gy;
 
       ctx.save();
-      ctx.strokeStyle = `rgba(255, 255, 255, ${0.95 * glow})`;
-      ctx.shadowColor = 'rgba(255, 255, 255, 0.9)';
+      ctx.strokeStyle = `rgba(${nablaRgb}, ${0.95 * glow})`;
+      ctx.shadowColor = `rgba(${nablaRgb}, 0.9)`;
       ctx.shadowBlur = 15 * glow;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
@@ -159,7 +170,7 @@ const HeroAnimation: React.FC = () => {
         const r = Math.min(p.radius + Math.sin(t * 0.001 + p.drift) * 8, maxR);
         ctx.beginPath();
         ctx.arc(center.x + Math.cos(angle) * r, center.y + Math.sin(angle) * r, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+        ctx.fillStyle = `rgba(${rgb}, 0.08)`;
         ctx.fill();
       });
     };
@@ -170,7 +181,7 @@ const HeroAnimation: React.FC = () => {
         const r = (100 + progress * 120 + i * 22) * scale;
         ctx.beginPath();
         ctx.arc(center.x, center.y, r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255, 255, 255, ${(0.14 - i * 0.015) * fade})`;
+        ctx.strokeStyle = `rgba(${rgb}, ${(0.14 - i * 0.015) * fade})`;
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -186,7 +197,7 @@ const HeroAnimation: React.FC = () => {
         const radius = Math.min(sym.radius, maxR);
         ctx.save();
         ctx.globalAlpha = fade * 0.32;
-        ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        ctx.fillStyle = `rgba(${rgb}, 1)`;
         ctx.font = `${14 + Math.sin(i + t * 0.0002) * 2}px monospace`;
         ctx.fillText(sym.text, center.x + Math.cos(angle) * radius, center.y + Math.sin(angle) * radius);
         ctx.restore();
@@ -271,7 +282,7 @@ const HeroAnimation: React.FC = () => {
       window.removeEventListener('resize', resize);
       document.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [theme]);
 
   return (
     <canvas
