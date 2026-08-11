@@ -111,7 +111,7 @@ const MultiStepWizard: React.FC<MultiStepWizardProps> = ({
                     />
                   </div>
                   <span
-                    className={`text-xs mt-2 font-medium text-center whitespace-nowrap transition-colors duration-300 ${
+                    className={`text-xs mt-2 font-medium text-center whitespace-nowrap ${
                       i === currentStep
                         ? "text-primary"
                         : i < currentStep

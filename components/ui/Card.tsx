@@ -11,10 +11,10 @@ const cardVariants = cva(
         // Hairline over the ambient background — the quiet editorial default.
         // Opaque consumers override bg; keep the surface light so no stray
         // backdrop-filter layer lingers behind a solid fill (use `glass` for blur).
-        default: 'border border-border bg-card/70',
+        default: 'border border-border bg-card/70 transition-colors duration-300',
         glass: 'glass',
-        elevated: 'border border-border bg-card shadow-[var(--glass-shadow)]',
-        outline: 'border border-foreground/20 bg-transparent',
+        elevated: 'border border-border bg-card shadow-[var(--glass-shadow)] transition-colors duration-300',
+        outline: 'border border-foreground/20 bg-transparent transition-colors duration-300',
         ghost: 'border-transparent bg-transparent',
       },
       hover: {

@@ -11,8 +11,8 @@ type BaseProps = {
 
 export const FieldGroup: React.FC<BaseProps> = ({ label, requiredHint, className, children }) => {
   return (
-    <label className={`flex flex-col gap-1 ${className || ""}`}>
-      <span className="text-xs font-medium text-foreground transition-colors duration-300">
+    <label className={`flex flex-col gap-1 transition-none ${className || ""}`}>
+      <span className="text-xs font-medium text-foreground ">
         {label}
         {requiredHint && (
           <span className="ml-1 text-[11px] font-normal text-muted-foreground">{requiredHint}</span>
