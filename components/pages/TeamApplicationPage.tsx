@@ -8,7 +8,6 @@ import {
   GraduationCap, Briefcase, Tag, Lock, Loader2,
 } from "lucide-react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -32,11 +31,6 @@ import {
   AREAS_OF_INTEREST,
   MOTIVATION_MAX_CHARS,
 } from "./apply/sampleData";
-
-const FloatingSymbolsCanvas = dynamic(
-  () => import("@/components/FloatingSymbolsCanvas"),
-  { ssr: false }
-);
 
 const TEAM_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   it: Server,
@@ -511,40 +505,47 @@ export default function TeamApplicationPage() {
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Hero header — full on step 0, compact on steps 1+ */}
       {step === 0 ? (
-        <section className="relative bg-gradient-to-br from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 text-white min-h-[50vh] overflow-hidden">
-          <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
-          <FloatingSymbolsCanvas />
+        <section className="relative bg-ink text-white min-h-[50vh] overflow-hidden">
+          <div
+            aria-hidden
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(46rem 30rem at 80% 16%, oklch(from var(--primary) l c h / 45%), transparent 62%),' +
+                'radial-gradient(38rem 26rem at 10% 94%, oklch(from var(--ink) l c h / 45%), transparent 60%)',
+            }}
+          />
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
-            <p className="inline-flex items-center gap-2 text-red-200 dark:text-red-300 tracking-widest uppercase mb-6 font-semibold text-sm">
+            <p className="mono-label text-white/45 mb-6 flex items-center gap-2">
               <Sparkles className="h-4 w-4" />
               {campaign.subtitle}
             </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
+            <h1 className="display-lg mb-6">
               {campaign.title}
             </h1>
-            <p className="text-lg md:text-xl text-red-100 dark:text-red-50 mb-6 max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg text-white/60 mb-6 max-w-2xl leading-relaxed">
               {campaign.description}
             </p>
-            <div className="flex items-center gap-2 text-red-100 dark:text-red-50">
+            <div className="flex items-center gap-2 text-white/60">
               <Clock className="h-5 w-5" />
               <span>Application deadline: {campaign.deadline}</span>
             </div>
             <a href="#wizard" className="inline-block mt-10 motion-safe:animate-bounce" aria-label="Skip to application form">
-              <ChevronDown className="h-7 w-7 text-red-200 dark:text-red-300" aria-hidden />
+              <ChevronDown className="h-7 w-7 text-white/30" aria-hidden />
             </a>
           </div>
         </section>
       ) : (
-        <section className="bg-gradient-to-r from-red-600 to-red-700 dark:from-red-700 dark:to-red-800 text-white">
+        <section className="bg-ink text-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-5 pt-28">
             <h1 className="text-xl font-bold">{campaign.title}</h1>
-            <p className="text-sm text-red-100 dark:text-red-50">{campaign.subtitle}</p>
+            <p className="text-sm text-white/60">{campaign.subtitle}</p>
           </div>
         </section>
       )}
 
       {/* Wizard */}
-      <div id="wizard" ref={wizardRef} className="scroll-mt-24 py-12 bg-gray-50 dark:bg-gray-900 min-h-screen">
+      <div id="wizard" ref={wizardRef} className="scroll-mt-24 py-12 bg-background min-h-screen">
         <MultiStepWizard
           steps={WIZARD_STEPS}
           currentStep={step}
@@ -1035,7 +1036,7 @@ export default function TeamApplicationPage() {
                           <div key={entry.roleId}>
                             <div className="flex items-center gap-3 py-1">
                               <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold ${
-                                idx === 0 ? "bg-red-600 text-white" : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
+                                idx === 0 ? "bg-primary text-primary-foreground" : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
                               }`}>
                                 {idx + 1}
                               </span>
