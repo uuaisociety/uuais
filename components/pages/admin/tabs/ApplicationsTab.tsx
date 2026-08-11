@@ -196,9 +196,9 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
         <div className="flex items-center gap-3 mb-6">
           <Button size="sm" variant="outline" icon={ArrowLeft} onClick={() => { setView("campaigns"); setSelectedCampaign(null); }}>Back to campaigns</Button>
           <div className="flex-1 min-w-0">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
               {selectedCampaign ? `Submissions: ${selectedCampaign.title}` : "All Submissions"}
-            </h1>
+            </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 flex items-center gap-3">
               <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" /> {filteredSubs.length} of {campaignSubs.length}</span>
               {selectedCampaign && <span>· Deadline {selectedCampaign.deadline}</span>}
@@ -215,11 +215,12 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
         <div className="flex flex-col sm:flex-row gap-3 mb-6">
           <div className="relative flex-1 max-w-md">
             <Search className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            <InputBase placeholder="Search by name, email, or program..." value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
+            <InputBase placeholder="Search by name, email, or program..." aria-label="Search submissions" value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9" />
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">Filter by role:</span>
+            <label htmlFor="applications-role-filter" className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap">Filter by role:</label>
             <SelectBase
+              id="applications-role-filter"
               value={subFilter}
               onChange={(e) => setSubFilter(e.target.value)}
               className="w-auto min-w-[140px]"
@@ -355,7 +356,7 @@ const ApplicationsTab: React.FC<ApplicationsTabProps> = ({
     <div key="campaigns" className="animate-in fade-in slide-in-from-right-4 duration-300 ease-out">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Application Campaigns</h1>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Application Campaigns</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             Create and manage recruitment campaigns. Each campaign has its own roles, form, deadline, and submissions.
           </p>

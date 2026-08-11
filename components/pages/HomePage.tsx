@@ -1,7 +1,5 @@
 'use client'
 
-// Disable static generation for this page
-export const dynamic = 'force-dynamic';
 
 import React, { useEffect } from 'react';
 import Link from 'next/link';
@@ -90,15 +88,15 @@ const HomePage: React.FC = () => {
           itself — otherwise it frosts the light page background and reads as a
           bright band above a near-black hero. */}
       <section className="-mt-14">
-        <div className="relative overflow-hidden bg-[oklch(0.16_0.02_20)] text-white">
+        <div className="relative overflow-hidden bg-ink text-white">
           {/* Interior light */}
           <div
             aria-hidden
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                'radial-gradient(45rem 30rem at 78% 18%, oklch(0.55 0.21 27.5 / 55%), transparent 62%),' +
-                'radial-gradient(38rem 28rem at 10% 92%, oklch(0.45 0.16 20 / 45%), transparent 60%)',
+                'radial-gradient(45rem 30rem at 78% 18%, oklch(from var(--primary) l c h / 55%), transparent 62%),' +
+                'radial-gradient(38rem 28rem at 10% 92%, oklch(from var(--ink) l c h / 45%), transparent 60%)',
             }}
           />
           <FloatingSymbolsCanvas />
@@ -119,7 +117,7 @@ const HomePage: React.FC = () => {
               <div className="flex flex-wrap gap-3">
                 <Link
                   href="/events"
-                  className="inline-flex items-center h-12 px-7 rounded-md bg-white text-[oklch(0.16_0.02_20)] text-[0.9375rem] font-medium tracking-[-0.01em] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.02] active:scale-[0.98]"
+                  className="inline-flex items-center h-12 px-7 rounded-md bg-white text-ink text-[0.9375rem] font-medium tracking-[-0.01em] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.02] active:scale-[0.98]"
                 >
                   Our events
                 </Link>

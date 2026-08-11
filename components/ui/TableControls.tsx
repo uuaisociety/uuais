@@ -25,6 +25,7 @@ export const TableControls: React.FC<TopProps> = ({ filter, setFilter, loading, 
       <input
         className="input"
         placeholder="Search..."
+        aria-label="Search"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
       />
@@ -52,17 +53,17 @@ export const TablePagination: React.FC<PaginationProps> = ({ page, setPage, page
       </div>
 
       <div className="flex items-center gap-2">
-        <button className="p-2 border rounded" onClick={() => setPage(1)} disabled={page === 1} aria-label="First">
+        <button className="size-10 grid place-items-center border rounded" onClick={() => setPage(1)} disabled={page === 1} aria-label="First">
           <ChevronsLeft className="h-4 w-4" />
         </button>
-        <button className="p-2 border rounded" onClick={() => setPage((p) => Math.max(1, (p as number) - 1))} disabled={page === 1} aria-label="Prev">
+        <button className="size-10 grid place-items-center border rounded" onClick={() => setPage((p) => Math.max(1, (p as number) - 1))} disabled={page === 1} aria-label="Prev">
           <ChevronLeft className="h-4 w-4" />
         </button>
         <span className="text-sm">Page {page} / {totalPages}</span>
-        <button className="p-2 border rounded" onClick={() => setPage((p) => Math.min(totalPages, (p as number) + 1))} disabled={page === totalPages} aria-label="Next">
+        <button className="size-10 grid place-items-center border rounded" onClick={() => setPage((p) => Math.min(totalPages, (p as number) + 1))} disabled={page === totalPages} aria-label="Next">
           <ChevronRight className="h-4 w-4" />
         </button>
-        <button className="p-2 border rounded" onClick={() => setPage(totalPages)} disabled={page === totalPages} aria-label="Last">
+        <button className="size-10 grid place-items-center border rounded" onClick={() => setPage(totalPages)} disabled={page === totalPages} aria-label="Last">
           <ChevronsRight className="h-4 w-4" />
         </button>
       </div>

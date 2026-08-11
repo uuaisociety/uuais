@@ -158,7 +158,7 @@ export default function TranscriptUpload({ onDataLoaded, onDataDeleted }: Props)
                         {/* Header */}
                         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
                             <div className="flex items-center gap-2">
-                                <FileText className="h-5 w-5 text-[#990000]" />
+                                <FileText className="h-5 w-5 text-primary" />
                                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                                     Transcript Upload
                                 </h3>
@@ -259,7 +259,7 @@ export default function TranscriptUpload({ onDataLoaded, onDataDeleted }: Props)
                                             type="checkbox"
                                             checked={consentGiven}
                                             onChange={(e) => setConsentGiven(e.target.checked)}
-                                            className="mt-1 h-4 w-4 rounded border-gray-300 text-[#990000] focus:ring-[#990000]"
+                                            className="mt-1 h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
                                         />
                                         <span className="text-sm text-gray-700 dark:text-gray-300">
                                             I consent to having my transcript processed to extract course information.
@@ -271,7 +271,7 @@ export default function TranscriptUpload({ onDataLoaded, onDataDeleted }: Props)
                                     <div
                                         onClick={() => consentGiven && fileInputRef.current?.click()}
                                         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${consentGiven
-                                                ? 'border-gray-300 dark:border-gray-600 hover:border-[#990000] cursor-pointer'
+                                                ? 'border-gray-300 dark:border-gray-600 hover:border-primary cursor-pointer'
                                                 : 'border-gray-200 dark:border-gray-700 opacity-50 cursor-not-allowed'
                                             }`}
                                     >
@@ -308,7 +308,7 @@ export default function TranscriptUpload({ onDataLoaded, onDataDeleted }: Props)
                                     <Button
                                         onClick={handleUpload}
                                         disabled={!file || !consentGiven || uploading}
-                                        className="w-full bg-[#990000] hover:bg-[#7f0000] text-white"
+                                        className="w-full"
                                     >
                                         {uploading ? (
                                             <>

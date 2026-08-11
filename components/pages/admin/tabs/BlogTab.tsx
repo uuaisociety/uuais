@@ -30,7 +30,7 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onEdit, onDelete, 
             <CardContent className="p-6">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <div className="flex items-center space-x-3 mb-2">
+                  <div className="flex items-center space-x-3 mb-2 flex-wrap">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{post.title}</h3>
                     <Tag variant={post.published ? 'green' : 'yellow'} size="sm">
                       {post.published ? 'Published' : 'Draft'}

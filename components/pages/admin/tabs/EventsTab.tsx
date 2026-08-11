@@ -204,7 +204,7 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
             <CardContent className="p-6">
               <div className="flex items-start justify-between flex-col lg:flex-row">
                 <div className="flex-1">
-                  <div className="flex items-center space-x-3 mb-2">
+                  <div className="flex items-center space-x-3 mb-2 flex-wrap">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       {event.title}
                     </h3>

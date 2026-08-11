@@ -244,7 +244,7 @@ export default function ExplorePage() {
               )}
               <Button asChild variant="outline">
                 <Link href="/my-courses" className="flex items-center gap-1">
-                  <Heart className="text-[#990000] h-4 w-4" />
+                  <Heart className="text-primary h-4 w-4" />
                   Saved courses
                 </Link>
               </Button>
@@ -256,12 +256,14 @@ export default function ExplorePage() {
               <Input
                 value={search}
                 onChange={(e) => handleSearchChange(e.target.value)}
+                label="Filter courses"
                 placeholder="Filter by title, code, tag…"
                 fullWidth
               />
               <Select
                 value={levelFilter}
                 onChange={(e) => handleLevelFilterChange(e.target.value)}
+                label="Filter by level"
                 options={[
                   { value: "all", label: "All levels" },
                   { value: "Preparatory", label: "Preparatory" },

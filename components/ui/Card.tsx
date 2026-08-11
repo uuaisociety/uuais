@@ -9,7 +9,9 @@ const cardVariants = cva(
     variants: {
       variant: {
         // Hairline over the ambient background — the quiet editorial default.
-        default: 'border border-border bg-card/70 backdrop-blur-[2px]',
+        // Opaque consumers override bg; keep the surface light so no stray
+        // backdrop-filter layer lingers behind a solid fill (use `glass` for blur).
+        default: 'border border-border bg-card/70',
         glass: 'glass',
         elevated: 'border border-border bg-card shadow-[var(--glass-shadow)]',
         outline: 'border border-foreground/20 bg-transparent',

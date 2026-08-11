@@ -243,15 +243,15 @@ const RoleRanker: React.FC<RoleRankerProps> = ({
                       <div className="text-xs text-gray-500 dark:text-gray-400">{entry.teamName}</div>
                     </div>
                     <div className="shrink-0 flex items-center gap-1">
-                      <button type="button" onClick={() => move(idx, idx - 1)} disabled={idx === 0} className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move up" aria-label={`Move ${entry.title} up`}>
-                        <ArrowUp className="h-4 w-4" />
-                      </button>
-                      <button type="button" onClick={() => move(idx, idx + 1)} disabled={idx === ranking.length - 1} className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move down" aria-label={`Move ${entry.title} down`}>
-                        <ArrowDown className="h-4 w-4" />
-                      </button>
-                      <button type="button" onClick={() => entry.custom ? removeOther() : removeRole(entry.roleId)} className="p-2 text-red-500 hover:text-red-600 transition-colors" title="Remove from preferences" aria-label={`Remove ${entry.title}`}>
-                        <X className="h-4 w-4" />
-                      </button>
+                      <button type="button" onClick={() => move(idx, idx - 1)} disabled={idx === 0} className="p-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move up" aria-label={`Move ${entry.title} up`}>
+                      <ArrowUp className="h-4 w-4" />
+                    </button>
+                    <button type="button" onClick={() => move(idx, idx + 1)} disabled={idx === ranking.length - 1} className="p-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move down" aria-label={`Move ${entry.title} down`}>
+                      <ArrowDown className="h-4 w-4" />
+                    </button>
+                    <button type="button" onClick={() => entry.custom ? removeOther() : removeRole(entry.roleId)} className="p-2.5 text-red-500 hover:text-red-600 transition-colors" title="Remove from preferences" aria-label={`Remove ${entry.title}`}>
+                      <X className="h-4 w-4" />
+                    </button>
                     </div>
                   </div>
                   {entry.custom ? (

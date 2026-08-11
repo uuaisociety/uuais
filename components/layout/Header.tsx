@@ -56,6 +56,10 @@ export const Header: React.FC = () => {
 
   const isActive = (path: string) => pathname === path;
 
+  // The home hero is a dark ink slab in both themes, so the nav + mobile menu
+  // stay dark ink there too — otherwise a light frosted bar floats over it.
+  const isHome = pathname === '/';
+
   useEffect(() => {
     if (!isProjectsOpen) return;
     const handleClickOutside = (event: MouseEvent) => {
@@ -79,13 +83,13 @@ export const Header: React.FC = () => {
   const navLinkClass = (active: boolean) =>
     `relative px-3 py-1.5 rounded-sm text-[0.8125rem] font-medium tracking-[-0.01em] transition-colors duration-300 ${
       active
-        ? 'text-white bg-white/[0.12]'
-        : 'text-white/60 hover:text-white hover:bg-white/[0.07]'
+        ? 'text-current bg-current/[0.12]'
+        : 'text-current/60 hover:text-current hover:bg-current/[0.07]'
     }`;
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 glass-nav">
+      <header className={`fixed top-0 left-0 right-0 z-50 glass-nav ${isHome ? 'glass-nav-invert' : ''}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="h-14 flex items-center justify-between gap-2">
 
@@ -124,12 +128,12 @@ export const Header: React.FC = () => {
                     <ChevronDown className={`h-3 w-3 transition-transform duration-300 ${isProjectsOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {isProjectsOpen && (
-                    <div className="glass-nav absolute left-0 mt-2 w-52 rounded-md p-1.5 animate-rise">
+                    <div className="glass-pop absolute left-0 mt-2 w-52 rounded-md p-1.5 animate-rise">
                       {projectLinks.map((link) => (
                         <Link
                           key={link.href}
                           href={link.href}
-                          className="block px-3 py-2 rounded-sm text-[0.8125rem] text-white/70 hover:text-white hover:bg-white/[0.09] transition-colors"
+                          className="block px-3 py-2 rounded-sm text-[0.8125rem] text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors"
                         >
                           {link.label}
                         </Link>
@@ -151,31 +155,31 @@ export const Header: React.FC = () => {
                   <>
                     <Link
                       href="/account"
-                      className="max-w-[140px] truncate px-3 py-1.5 rounded-sm mono-meta text-white/70 hover:text-white hover:bg-white/[0.07] transition-colors"
+                      className={`max-w-[140px] truncate px-3 py-1.5 rounded-sm mono-meta text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors ${isActive('/account') ? 'bg-current/[0.12]' : ''}`}
                       title={identity.name ?? undefined}
                     >
                       {identity.name}
                     </Link>
                     <button
                       onClick={() => logout()}
-                      className="px-3 py-1.5 rounded-sm mono-label text-white/45 hover:text-white transition-colors cursor-pointer"
+                      className="px-3 py-1.5 rounded-sm mono-label text-current/60 hover:text-current transition-colors cursor-pointer"
                     >
                       Logout
                     </button>
                   </>
                 ) : (
                   <>
-                    <Link href="/join" className="px-3 py-1.5 rounded-sm mono-label text-white/55 hover:text-white hover:bg-white/[0.07] transition-colors">
+                    <Link href="/join" className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors">
                       Register
                     </Link>
-                    <Link href="/login" className="px-3 py-1.5 rounded-sm mono-label text-white/55 hover:text-white hover:bg-white/[0.07] transition-colors">
+                    <Link href="/login" className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors">
                       Login
                     </Link>
                   </>
                 )}
               </div>
 
-              <ThemeToggle className="text-white/60 hover:text-white hover:bg-white/[0.09]" />
+              <ThemeToggle className="text-current/60 hover:text-current hover:bg-current/[0.09]" />
 
               {showApply && (
                 <Link
@@ -189,7 +193,7 @@ export const Header: React.FC = () => {
               <button
                 ref={mobileButtonRef}
                 onClick={() => setIsMenuOpen((v) => !v)}
-                className="lg:hidden size-9 grid place-items-center rounded-sm text-white/70 hover:text-white hover:bg-white/[0.09] transition-colors cursor-pointer"
+                className="lg:hidden size-9 grid place-items-center rounded-sm text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors cursor-pointer"
                 aria-expanded={isMenuOpen}
                 aria-controls="mobile-menu"
               >
@@ -208,14 +212,14 @@ export const Header: React.FC = () => {
               isMenuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
             }`}
           >
-            <div className="py-2 border-t border-white/10">
+            <div className="py-2 border-t border-current/10">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
                   prefetch
                   className={`block px-3.5 py-2.5 rounded-sm text-sm font-medium transition-colors ${
-                    isActive(item.href) ? 'text-white bg-white/[0.12]' : 'text-white/65 hover:text-white hover:bg-white/[0.07]'
+                    isActive(item.href) ? 'text-current bg-current/[0.12]' : 'text-current/65 hover:text-current hover:bg-current/[0.07]'
                   }`}
                 >
                   {item.name}
@@ -224,34 +228,34 @@ export const Header: React.FC = () => {
 
               {identity?.showAdmin && (
                 <>
-                  <div className="my-1.5 h-px bg-white/10" />
+                  <div className="my-1.5 h-px bg-current/10" />
                   {projectLinks.map((link) => (
-                    <Link key={link.href} href={link.href} className="block px-3.5 py-2.5 rounded-sm text-sm text-white/65 hover:text-white hover:bg-white/[0.07] transition-colors">
+                    <Link key={link.href} href={link.href} className="block px-3.5 py-2.5 rounded-sm text-sm text-current/65 hover:text-current hover:bg-current/[0.07] transition-colors">
                       {link.label}
                     </Link>
                   ))}
-                  <Link href="/admin" className="block px-3.5 py-2.5 rounded-sm text-sm text-white/65 hover:text-white hover:bg-white/[0.07] transition-colors">
+                  <Link href="/admin" className="block px-3.5 py-2.5 rounded-sm text-sm text-current/65 hover:text-current hover:bg-current/[0.07] transition-colors">
                     Admin
                   </Link>
                 </>
               )}
 
-              <div className="my-1.5 h-px bg-white/10" />
+              <div className="my-1.5 h-px bg-current/10" />
               {identity ? (
                 <>
-                  <Link href="/account" className="block px-3.5 py-2.5 rounded-sm mono-meta text-white/65 hover:text-white transition-colors">
+                  <Link href="/account" className="block px-3.5 py-2.5 rounded-sm mono-meta text-current/65 hover:text-current transition-colors">
                     {identity.name}
                   </Link>
-                  <button onClick={() => logout()} className="w-full text-left px-3.5 py-2.5 rounded-sm mono-label text-white/45 hover:text-white transition-colors cursor-pointer">
+                  <button onClick={() => logout()} className="w-full text-left px-3.5 py-2.5 rounded-sm mono-label text-current/60 hover:text-current transition-colors cursor-pointer">
                     Logout
                   </button>
                 </>
               ) : (
                 <div className="flex gap-2 px-1.5 py-1.5">
-                  <Link href="/login" className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-white/65 border border-white/10 hover:bg-white/[0.07] transition-colors">
+                  <Link href="/login" className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-current/65 border border-current/10 hover:bg-current/[0.07] transition-colors">
                     Login
                   </Link>
-                  <Link href="/join" className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-white/65 border border-white/10 hover:bg-white/[0.07] transition-colors">
+                  <Link href="/join" className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-current/65 border border-current/10 hover:bg-current/[0.07] transition-colors">
                     Register
                   </Link>
                 </div>

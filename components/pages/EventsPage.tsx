@@ -1,9 +1,5 @@
 "use client";
-// setState in useEffect is intentional - need to filter events based on activeTab
-/* eslint-disable react-hooks/set-state-in-effect */
 
-// Disable static generation for this page
-export const dynamic = "force-dynamic";
 
 import React, { useEffect, useMemo, useState } from "react";
 import { Calendar, Clock, MapPin, Users } from "lucide-react";
@@ -21,7 +17,6 @@ import campus from "@/public/images/campus.png";
 const EventsPage: React.FC = () => {
   const { state } = useApp();
   const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
-  const [activeEvents, setActiveEvents] = useState(state.events);
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
 
@@ -87,9 +82,7 @@ const EventsPage: React.FC = () => {
     return option?.label || category.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   };
 
-  useEffect(() => {
-    setActiveEvents(activeTab === "upcoming" ? futureEvents : pastEvents);
-  }, [activeTab, futureEvents, pastEvents]);
+  const activeEvents = activeTab === "upcoming" ? futureEvents : pastEvents;
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-8 transition-colors duration-300">
@@ -138,6 +131,7 @@ const EventsPage: React.FC = () => {
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-1">
               <Input
+                label="Search events"
                 placeholder="Search events..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -147,6 +141,7 @@ const EventsPage: React.FC = () => {
             </div>
             <div className="md:w-64">
               <Select
+                label="Filter by category"
                 options={categoryOptions}
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
@@ -250,11 +245,11 @@ const EventsPage: React.FC = () => {
 
                   <Link href={`/events/${event.id}`}>
                     {activeTab === "upcoming" ? (
-                      <Button size="sm">
+                      <Button>
                         View Details & Register
                       </Button>
                     ) : (
-                      <Button size="sm">
+                      <Button>
                         View Details
                       </Button>
                     )}

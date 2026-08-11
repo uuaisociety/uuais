@@ -79,9 +79,9 @@ const CheckinPage: React.FC = () => {
                 Event Check-in
               </h1>
               {userName && (
-                <h1 className="text-gray-700 dark:text-gray-300 mb-6 text-xl font-bold">
+                <p className="text-gray-700 dark:text-gray-300 mb-6 text-xl font-bold">
                   {userName}
-                </h1>
+                </p>
               )}
               <p className={`mb-6 ${status === "error" ? "text-red-600" : status === "done" ? "text-green-600 dark:text-green-400/80" : "text-gray-700 dark:text-gray-300"}`}>
                 {message || "Processing your check-in..."}

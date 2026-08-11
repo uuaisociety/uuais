@@ -42,7 +42,7 @@ export const Footer: React.FC = () => {
 
         {/* Partners */}
         <div className="pt-16 border-t border-border">
-          <p className="mono-label text-foreground/35 mb-8">Our partners</p>
+          <p className="mono-label text-muted-foreground mb-8">Our partners</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
             {partners.map((p) => (
               <a
@@ -101,7 +101,7 @@ export const Footer: React.FC = () => {
           </div>
 
           <nav>
-            <p className="mono-label text-foreground/35 mb-5">Navigation</p>
+            <p className="mono-label text-muted-foreground mb-5">Navigation</p>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.href}>
@@ -112,12 +112,12 @@ export const Footer: React.FC = () => {
           </nav>
 
           <div>
-            <p className="mono-label text-foreground/35 mb-5">Contact</p>
+            <p className="mono-label text-muted-foreground mb-5">Contact</p>
             <ul className="space-y-3">
               {contacts.map((c) => (
                 <li key={c.address}>
                   <a href={`mailto:${c.address}`} className={linkClass}>{c.address}</a>
-                  <span className="block mono-label text-foreground/30 mt-0.5">{c.label}</span>
+                  <span className="block mono-label text-muted-foreground/70 mt-0.5">{c.label}</span>
                 </li>
               ))}
             </ul>
@@ -126,11 +126,11 @@ export const Footer: React.FC = () => {
 
         {/* Bottom bar */}
         <div className="py-7 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="mono-meta text-foreground/40 text-center sm:text-left">
+          <p className="mono-meta text-muted-foreground text-center sm:text-left">
             © {new Date().getFullYear()} UU AI Society · Org. 802551-8930
           </p>
           <div className="flex items-center gap-2">
-            <Link href="/privacy" className="px-3 py-1.5 rounded-full mono-label text-foreground/40 hover:text-foreground hover:bg-foreground/[0.05] transition-colors duration-300">
+            <Link href="/privacy" className="px-3 py-1.5 rounded-full mono-label text-muted-foreground hover:text-foreground hover:bg-foreground/[0.05] transition-colors duration-300">
               Privacy policy
             </Link>
             <button

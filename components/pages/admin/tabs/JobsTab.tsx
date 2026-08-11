@@ -119,7 +119,7 @@ const JobsTab: React.FC = () => {
             <CardContent className="p-6">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-3 mb-2 flex-wrap">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{job.title}</h3>
                     <Tag variant="red" size="sm">{job.company}</Tag>
                     <Tag variant="yellow" size="sm">{job.type.replace('_', ' ')}</Tag>
