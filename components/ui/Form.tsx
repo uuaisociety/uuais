@@ -12,10 +12,10 @@ type BaseProps = {
 export const FieldGroup: React.FC<BaseProps> = ({ label, requiredHint, className, children }) => {
   return (
     <label className={`flex flex-col gap-1 ${className || ""}`}>
-      <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+      <span className="text-xs font-medium text-foreground">
         {label}
         {requiredHint && (
-          <span className="ml-1 text-[11px] font-normal text-gray-500 dark:text-gray-400">{requiredHint}</span>
+          <span className="ml-1 text-[11px] font-normal text-muted-foreground">{requiredHint}</span>
         )}
       </span>
       {children}
@@ -30,11 +30,11 @@ export const InputBase = React.forwardRef<HTMLInputElement, React.InputHTMLAttri
       <input
         ref={ref}
         className={`
-          w-full rounded-md border border-gray-300 dark:border-gray-700
-          bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-          placeholder-gray-500 dark:placeholder-gray-400
-          px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500
-          transition-colors
+          w-full rounded-md border border-border
+          bg-card text-foreground
+          placeholder:text-muted-foreground
+          px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring
+          transition-colors duration-300
           disabled:border-0 disabled:bg-transparent disabled:shadow-none
           disabled:focus:ring-0 disabled:focus:border-transparent disabled:cursor-default disabled:opacity-100
           ${className || ""}
@@ -52,10 +52,10 @@ export const SelectBase = React.forwardRef<HTMLSelectElement, React.SelectHTMLAt
       <select
         ref={ref}
         className={`
-          w-full rounded-md border border-gray-300 dark:border-gray-700
-          bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-          px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500
-          transition-colors appearance-none
+          w-full rounded-md border border-border
+          bg-card text-foreground
+          px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring
+          transition-colors duration-300 appearance-none
           disabled:border-0 disabled:bg-transparent disabled:shadow-none
           disabled:focus:ring-0 disabled:focus:border-transparent disabled:cursor-default disabled:opacity-100
           ${className || ""}
@@ -91,11 +91,11 @@ export const TextareaBase = React.forwardRef<HTMLTextAreaElement, React.Textarea
       <textarea
         ref={setRefs}
         className={`
-          w-full rounded-md border border-gray-300 dark:border-gray-700
-          bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-          placeholder-gray-500 dark:placeholder-gray-400
-          px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500
-          transition-colors
+          w-full rounded-md border border-border
+          bg-card text-foreground
+          placeholder:text-muted-foreground
+          px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring
+          transition-colors duration-300
           disabled:border-0 disabled:bg-transparent disabled:shadow-none
           disabled:focus:ring-0 disabled:focus:border-transparent disabled:cursor-default disabled:opacity-100
           ${autoResize ? "overflow-y-hidden" : ""}

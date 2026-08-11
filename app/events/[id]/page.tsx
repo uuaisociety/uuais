@@ -89,13 +89,13 @@ const EventDetailPage: React.FC = () => {
   // Show loading state while events are being fetched the first time
   if (state.events.length === 0) {
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-900 py-12 pt-24">
+      <div className="min-h-screen bg-background py-12 pt-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse space-y-6">
-            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
-            <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded" />
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
+            <div className="h-8 bg-foreground/10 rounded w-1/2" />
+            <div className="h-64 bg-foreground/10 rounded" />
+            <div className="h-4 bg-foreground/10 rounded w-3/4" />
+            <div className="h-4 bg-foreground/10 rounded w-2/3" />
           </div>
         </div>
       </div>
@@ -111,7 +111,7 @@ const EventDetailPage: React.FC = () => {
   const isUpcoming = eventStart > now;
   const isPastEvent = eventStart < now;
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 py-12 pt-24">
+    <div className="min-h-screen bg-background py-12 pt-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <Link href="/events">
@@ -123,23 +123,23 @@ const EventDetailPage: React.FC = () => {
         {/* Event Header */}
         <div className="mb-8">
           <div className="flex items-start justify-between mb-4">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-4xl font-bold text-foreground">
               {event.title}
             </h1>
             <span
-              className={`px-3 py-1 rounded-full text-sm font-medium ${
+              className={`pill ${
                 isUpcoming
-                  ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                  ? "bg-primary/10 text-primary"
                   : isPastEvent
-                  ? "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200"
-                  : "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+                  ? "bg-foreground/8 text-muted-foreground"
+                  : "bg-primary/10 text-primary"
               }`}
             >
               {isUpcoming ? "Upcoming" : isPastEvent ? "Past Event" : "Today"}
             </span>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4 text-gray-600 dark:text-gray-300 mb-6">
+          <div className="grid md:grid-cols-2 gap-4 text-muted-foreground mb-6">
             <div className="flex items-center gap-2">
               <Calendar className="w-5 h-5" />
               <span>
@@ -168,16 +168,16 @@ const EventDetailPage: React.FC = () => {
 
           {/* Registration Info */}
           {event.registrationRequired && isUpcoming && (
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
+            <div className="border-border bg-primary/10 rounded-lg p-4 mb-6">
               <div className="flex items-center justify-between pb-2">
                 <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                  <span className="text-blue-800 dark:text-blue-200 font-medium">
+                  <Users className="w-5 h-5 text-primary" />
+                  <span className="text-foreground font-medium">
                     Registration Required
                   </span>
                 </div>
                 {typeof event.maxCapacity === "number" && (
-                  <div className="text-blue-600 dark:text-blue-400">
+                  <div className="text-primary">
                     Capacity: {event.maxCapacity}
                   </div>
                 )}
@@ -187,8 +187,8 @@ const EventDetailPage: React.FC = () => {
           )}
 
           {isUpcoming && event.externalRegistrationUrl?.trim() && (
-            <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-6 bg-white dark:bg-gray-800/50">
-              <p className="text-sm font-medium text-gray-900 dark:text-white mb-3">
+            <div className="border border-border rounded-lg p-4 mb-6 bg-card/50">
+              <p className="text-sm font-medium text-foreground mb-3">
                 External registration
               </p>
               {event.externalRegistrationMembersOnly && !currentUserId ? (
@@ -199,15 +199,15 @@ const EventDetailPage: React.FC = () => {
                     aria-disabled="true"
                     className={cn(
                       buttonVariants({ variant: "outline", size: "default" }),
-                      "w-full sm:w-auto opacity-70 cursor-not-allowed border-gray-400 text-gray-500 bg-gray-50 dark:bg-gray-900/40 dark:border-gray-600 dark:text-gray-400"
+                      "w-full sm:w-auto opacity-70 cursor-not-allowed"
                     )}
                   >
                     Login to register
                   </button>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">
+                  <p className="text-xs text-muted-foreground">
                     <Link
                       href="/login"
-                      className="text-red-600 dark:text-red-400 font-medium underline hover:no-underline"
+                      className="text-primary font-medium underline hover:no-underline"
                     >
                       Sign in
                     </Link>{" "}
@@ -222,7 +222,7 @@ const EventDetailPage: React.FC = () => {
                   onClick={() => incrementExternalRegistrationClick(eventId).catch(() => {})}
                   className={cn(
                     buttonVariants({ variant: "outline", size: "default" }),
-                    "inline-flex no-underline text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline"
+                    "inline-flex no-underline text-primary hover:text-primary hover:underline"
                   )}
                 > 
                   <span className="mr-2">Register externally</span>
@@ -234,8 +234,8 @@ const EventDetailPage: React.FC = () => {
 
           {currentUserId && hasEligibleRegistration && (
             <div className="mt-4 flex justify-center">
-              <div className="mt-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg inline-block bg-white dark:bg-gray-800">
-                <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+              <div className="mt-4 p-4 border border-border rounded-lg inline-block bg-card">
+                <p className="text-sm text-foreground mb-3">
                   Show this QR code to the event organizer. They will scan it to record your attendance.
                 </p>
                 <div className="p-3 rounded-md justify-center items-center text-center m-0 ml-auto mr-auto">
@@ -265,18 +265,18 @@ const EventDetailPage: React.FC = () => {
         )}
 
         {/* Event Description */}
-        <Card className="h-full dark:bg-gray-800 pt-4">
+        <Card className="h-full bg-card pt-4">
           <CardContent className="pt-4 pb-6 pl-6 pr-6">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-2xl font-bold text-foreground mb-4">
               About This Event
             </h2>
             {/<\/?[a-z][\s\S]*>/i.test(event.description || '') ? (
               <div
-                className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300"
+                className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground"
                 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(event.description || '') }}
               />
             ) : (
-              <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 whitespace-pre-wrap">
+              <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground whitespace-pre-wrap">
                 {event.description}
               </div>
             )}
@@ -285,42 +285,42 @@ const EventDetailPage: React.FC = () => {
 
         {/* Event Details */}
         <div className="grid md:grid-cols-2 gap-8 mt-8">
-          <Card className="h-full dark:bg-gray-800 pt-4">
+          <Card className="h-full bg-card pt-4">
             <CardContent className="pt-4">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+              <h3 className="text-xl font-bold text-foreground mb-4">
                 Event Details
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">
+                  <span className="text-muted-foreground">
                     Date:
                   </span>
-                  <span className="text-gray-900 dark:text-white font-medium">
+                  <span className="text-foreground font-medium">
                     {format(new Date(event.eventStartAt), "MMM dd, yyyy")}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">
+                  <span className="text-muted-foreground">
                     Time:
                   </span>
-                  <span className="text-gray-900 dark:text-white font-medium">
+                  <span className="text-foreground font-medium">
                     {format(new Date(event.eventStartAt), "HH:mm")}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-300">
+                  <span className="text-muted-foreground">
                     Location:
                   </span>
-                  <span className="text-gray-900 dark:text-white font-medium">
+                  <span className="text-foreground font-medium">
                     {event.location}
                   </span>
                 </div>
                 {event.category && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-300">
+                    <span className="text-muted-foreground">
                       Category:
                     </span>
-                    <span className="text-gray-900 dark:text-white font-medium">
+                    <span className="text-foreground font-medium">
                       {categoryOptions.find(
                         (option) => option.value === event.category?.toLowerCase()
                       )?.label || event.category.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
@@ -332,17 +332,17 @@ const EventDetailPage: React.FC = () => {
           </Card>
 
           {event.registrationRequired && (
-            <Card className="h-full dark:bg-gray-800 pt-4">
+            <Card className="h-full bg-card pt-4">
               <CardContent className="pt-4">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                <h3 className="text-xl font-bold text-foreground mb-4">
                   Registration
                 </h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-gray-600 dark:text-gray-300">
+                    <span className="text-muted-foreground">
                       Capacity:
                     </span>
-                    <span className="text-gray-900 dark:text-white font-medium">
+                    <span className="text-foreground font-medium">
                       {event.maxCapacity || "TBA"}
                     </span>
                   </div>
@@ -354,7 +354,7 @@ const EventDetailPage: React.FC = () => {
 
         {/* Related Events */}
         <div className="mt-12 ">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+          <h3 className="text-2xl font-bold text-foreground mb-6">
             Other Upcoming Events
           </h3>
           <div className="grid md:grid-cols-2 gap-6 ">
@@ -366,7 +366,9 @@ const EventDetailPage: React.FC = () => {
               .map((relatedEvent) => (
                 <Card
                   key={relatedEvent.id}
-                  className="hover:shadow-lg transition-shadow dark:bg-gray-800 pt-4"
+                  variant="default"
+                  hover
+                  className="bg-card pt-4"
                 >
                   <CardContent className="pt-4">
                     {relatedEvent.image && (
@@ -378,10 +380,10 @@ const EventDetailPage: React.FC = () => {
                         className="w-full h-32 object-cover rounded-lg mb-4"
                       />
                     )}
-                    <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    <h4 className="text-lg font-semibold text-foreground mb-2">
                       {relatedEvent.title}
                     </h4>
-                    <div className="text-gray-600 dark:text-gray-300 text-sm mb-4 space-y-1">
+                    <div className="text-muted-foreground text-sm mb-4 space-y-1">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         <span>

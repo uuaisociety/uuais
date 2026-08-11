@@ -130,7 +130,7 @@ const CollapsibleDescription: React.FC<{ text: string; className?: string }> = (
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="mt-1 transform-all ease-in-out duration-200 inline-flex items-center gap-1 text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline"
+          className="mt-1 transform-all ease-in-out duration-200 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
           aria-expanded={expanded}
         >
           {expanded ? "Show less" : "Show more"}
@@ -439,13 +439,13 @@ export default function TeamApplicationPage() {
   // No open campaigns (loaded, but none are currently open)
   if (state.campaignsLoaded && !campaign) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300 flex items-center">
+      <div className="min-h-screen bg-background pt-24 pb-12 transition-colors duration-300 flex items-center">
         <div className="max-w-md mx-auto px-4 text-center">
-          <div className="w-16 h-16 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center mx-auto mb-6">
-            <Clock className="h-8 w-8 text-gray-400" />
+          <div className="w-16 h-16 rounded-full bg-foreground/10 flex items-center justify-center mx-auto mb-6">
+            <Clock className="h-8 w-8 text-muted-foreground" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">No active campaigns</h1>
-          <p className="text-gray-600 dark:text-gray-300">There are no open application campaigns right now. Please check back later.</p>
+          <h1 className="text-2xl font-bold text-foreground mb-3">No active campaigns</h1>
+          <p className="text-muted-foreground">There are no open application campaigns right now. Please check back later.</p>
         </div>
       </div>
     );
@@ -454,10 +454,10 @@ export default function TeamApplicationPage() {
   // No campaigns at all (loading or not configured)
   if (!campaign) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300 flex items-center">
+      <div className="min-h-screen bg-background pt-24 pb-12 transition-colors duration-300 flex items-center">
         <div className="max-w-md mx-auto px-4 text-center">
-          <Loader2 className="h-8 w-8 text-red-600 dark:text-red-400 animate-spin mx-auto mb-4" />
-          <p className="text-gray-500 dark:text-gray-400">Loading campaigns…</p>
+          <Loader2 className="h-8 w-8 text-primary animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading campaigns…</p>
         </div>
       </div>
     );
@@ -465,15 +465,15 @@ export default function TeamApplicationPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300 flex items-center">
+      <div className="min-h-screen bg-background pt-24 pb-12 transition-colors duration-300 flex items-center">
         <div className="max-w-md mx-auto px-4 text-center">
-          <div className="w-20 h-20 rounded-full bg-green-100 dark:bg-green-950/30 flex items-center justify-center mx-auto mb-6">
-            <Check className="h-10 w-10 text-green-600 dark:text-green-400" />
+          <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+            <Check className="h-10 w-10 text-primary" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Application Submitted!</h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
+          <h1 className="text-3xl font-bold text-foreground mb-3">Application Submitted!</h1>
+          <p className="text-muted-foreground mb-6">
             Thank you, {form.name.split(" ")[0] || "applicant"}. Your application for{" "}
-            <strong className="text-red-600 dark:text-red-400">{campaign.title}</strong>&nbsp;has been received.
+            <strong className="text-primary">{campaign.title}</strong>&nbsp;has been received.
             We&apos;ll contact you at {form.email || "your email"}.
           </p>
           <Link href="/">
@@ -487,15 +487,15 @@ export default function TeamApplicationPage() {
   // Already applied — no further actions available
   if (hasApplied) {
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300">
+      <div className="min-h-screen bg-background pt-24 pb-12 transition-colors duration-300">
         <div className="max-w-md mx-auto px-4 text-center mt-16">
-          <div className="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-950/30 flex items-center justify-center mx-auto mb-6">
-            <Check className="h-10 w-10 text-blue-600 dark:text-blue-400" />
+          <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+            <Check className="h-10 w-10 text-primary" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Already Applied!</h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
+          <h1 className="text-3xl font-bold text-foreground mb-3">Already Applied!</h1>
+          <p className="text-muted-foreground mb-6">
             You have already submitted an application for{" "}
-            <strong className="text-red-600 dark:text-red-400">{campaign.title}</strong>.
+            <strong className="text-primary">{campaign.title}</strong>.
           </p>
           <div className="flex flex-col items-center gap-3">
             <Link href="/">
@@ -510,15 +510,15 @@ export default function TeamApplicationPage() {
   // Campaign deadline has passed
   if (isPastDeadline) {
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300 flex items-center">
+      <div className="min-h-screen bg-background pt-24 pb-12 transition-colors duration-300 flex items-center">
         <div className="max-w-md mx-auto px-4 text-center">
-          <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-950/30 flex items-center justify-center mx-auto mb-6">
-            <Clock className="h-8 w-8 text-red-600 dark:text-red-400" />
+          <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+            <Clock className="h-8 w-8 text-primary" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">Applications Closed</h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
+          <h1 className="text-3xl font-bold text-foreground mb-3">Applications Closed</h1>
+          <p className="text-muted-foreground mb-6">
             The application deadline for{" "}
-            <strong className="text-red-600 dark:text-red-400">{campaign.title}</strong>&nbsp;has passed
+            <strong className="text-primary">{campaign.title}</strong>&nbsp;has passed
             ({campaign.deadline}). We&apos;re no longer accepting submissions.
           </p>
           <Link href="/">
@@ -532,13 +532,13 @@ export default function TeamApplicationPage() {
   // Role selection is enabled but no roles are currently open — nothing to apply for.
   if (roleSelectionEnabled && rolesLoaded && openRoles.length === 0) {
     return (
-      <div className="min-h-screen bg-white dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300 flex items-center">
+      <div className="min-h-screen bg-background pt-24 pb-12 transition-colors duration-300 flex items-center">
         <div className="max-w-md mx-auto px-4 text-center">
-          <div className="w-16 h-16 rounded-full bg-amber-100 dark:bg-amber-950/30 flex items-center justify-center mx-auto mb-6">
-            <Briefcase className="h-8 w-8 text-amber-600 dark:text-amber-400" />
+          <div className="w-16 h-16 rounded-full bg-chart-3/15 flex items-center justify-center mx-auto mb-6">
+            <Briefcase className="h-8 w-8 text-chart-3" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">No roles are open right now</h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
+          <h1 className="text-3xl font-bold text-foreground mb-3">No roles are open right now</h1>
+          <p className="text-muted-foreground mb-6">
             {campaign.title} is not currently accepting role applications. Please check back later.
           </p>
           <Link href="/">
@@ -601,7 +601,7 @@ export default function TeamApplicationPage() {
   })).filter((t) => t.roles.length > 0);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-background transition-colors duration-300">
       {/* Hero header — full on step 0, compact on steps 1+ */}
       {step === 0 ? (
         <HeroSplash className="min-h-[50vh]">
@@ -653,21 +653,21 @@ export default function TeamApplicationPage() {
           {step === 0 && (
             <div className="space-y-6">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Who we&apos;re looking for</h2>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                <h2 className="text-2xl font-bold text-foreground mb-3">Who we&apos;re looking for</h2>
+                <p className="text-muted-foreground leading-relaxed">
                   We are looking for passionate students curious about AI, willing to learn, and
                   excited to contribute to the community to join us. No prior experience is required your
                   enthusiasm and willingness to grow are what matter most.
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Open Roles</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                <h3 className="text-lg font-semibold text-foreground mb-4">Open Roles</h3>
+                <p className="text-sm text-muted-foreground mb-4">
                   Explore the roles you can apply for.
                 </p>
                 {teamsWithRoles.length === 0 ? (
                   <Card>
-                    <div className="p-5 text-sm text-gray-500 dark:text-gray-400">
+                    <div className="p-5 text-sm text-muted-foreground">
                       No roles are open right now. Please check back later.
                     </div>
                   </Card>
@@ -679,15 +679,15 @@ export default function TeamApplicationPage() {
                       const teamDescription = teamOverride?.description || `Join the ${teamName} team and contribute to the society.`;
                       const Icon = TEAM_ICONS[teamId] || Rocket;
                       return (
-                        <Card key={teamId} className="group hover:shadow-lg transition-shadow duration-300">
+                        <Card key={teamId} variant="default" hover className="group">
                           <div className="p-5 sm:p-6">
                             <div className="flex items-start gap-4">
-                              <div className="shrink-0 w-11 h-11 rounded-lg bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
-                                <Icon className="h-5 w-5 text-red-600 dark:text-red-400" />
+                              <div className="shrink-0 w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center">
+                                <Icon className="h-5 w-5 text-primary" />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <h4 className="font-semibold text-gray-900 dark:text-white break-words">{teamName}</h4>
-                                <CollapsibleDescription text={teamDescription} className="text-sm text-gray-600 dark:text-gray-300 mt-1" />
+                                <h4 className="font-semibold text-foreground break-words">{teamName}</h4>
+                                <CollapsibleDescription text={teamDescription} className="text-sm text-muted-foreground mt-1" />
                               </div>
                             </div>
                             <div className="mt-5">
@@ -695,21 +695,21 @@ export default function TeamApplicationPage() {
                                 <React.Fragment key={role.id}>
                                   {idx > 0 && (
                                     <div className="flex items-center gap-2" aria-hidden>
-                                      <div className="flex-1 border-t border-gray-200 dark:border-gray-700" />
-                                      <span className="text-gray-300 dark:text-gray-600 text-xs">---</span>
-                                      <div className="flex-1 border-t border-gray-200 dark:border-gray-700" />
+                                      <div className="flex-1 border-t border-border" />
+                                      <span className="text-foreground/40 text-xs">---</span>
+                                      <div className="flex-1 border-t border-border" />
                                     </div>
                                   )}
                                   <div className="py-4 first:pt-0 last:pb-0">
                                     <div className="flex flex-wrap items-center gap-2">
-                                      <span className="text-sm font-semibold text-gray-900 dark:text-white break-words">{role.title}</span>
+                                      <span className="text-sm font-semibold text-foreground break-words">{role.title}</span>
                                       <TagComponent variant="green" size="sm">Open</TagComponent>
                                     </div>
                                     {role.description && (
-                                      <CollapsibleDescription text={role.description} className="text-sm text-gray-600 dark:text-gray-300 mt-1.5" />
+                                      <CollapsibleDescription text={role.description} className="text-sm text-muted-foreground mt-1.5" />
                                     )}
                                     {role.deadline && (
-                                      <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 flex items-center gap-1">
+                                      <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1">
                                         <Clock className="h-3 w-3" /> Deadline: {role.deadline}
                                       </p>
                                     )}
@@ -725,7 +725,7 @@ export default function TeamApplicationPage() {
                 )}
               </div>
               {!form.email && (
-                <div className="flex items-center gap-2 text-sm text-amber-700 dark:text-amber-500 bg-amber-50 dark:bg-amber-950/20 rounded-md p-3 border border-amber-200 dark:border-amber-800">
+                <div className="flex items-center gap-2 text-sm text-chart-3 bg-chart-3/10 rounded-md p-3 border border-chart-3/40">
                   <Lock className="h-4 w-4 shrink-0" />
                   <span>
                     You need to <Link href="/login" className="underline font-medium">sign in</Link> or{" "}
@@ -741,8 +741,8 @@ export default function TeamApplicationPage() {
           {step === 1 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Your Profile</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2 flex items-center gap-1.5">
+                <h2 className="text-2xl font-bold text-foreground mb-1">Your Profile</h2>
+                <p className="text-sm text-muted-foreground mb-2 flex items-center gap-1.5">
                   <User className="h-4 w-4" />
                   {profile ? "We've prefilled your details from your account." : "Please fill in your details."}
                 </p>
@@ -816,8 +816,8 @@ export default function TeamApplicationPage() {
           {step === 2 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Experience &amp; Interests</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                <h2 className="text-2xl font-bold text-foreground mb-1">Experience &amp; Interests</h2>
+                <p className="text-sm text-muted-foreground mb-2">
                   Tell us about your professional presence and what areas of AI excite you.
                 </p>
               </div>
@@ -830,8 +830,8 @@ export default function TeamApplicationPage() {
                   )}
                   {fieldEnabled("resume") && (
                     <div>
-                      <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Resume / CV (PDF, max 3MB) <span className="text-[11px] font-normal text-gray-500">Optional.</span>
+                      <label className="block text-xs font-medium text-foreground mb-2">
+                        Resume / CV (PDF, max 3MB) <span className="text-[11px] font-normal text-muted-foreground">Optional.</span>
                       </label>
                       <PDFDropzone
                         file={form.resume}
@@ -841,11 +841,11 @@ export default function TeamApplicationPage() {
                     </div>
                   )}
                   {fieldEnabled("interests") && (
-                    <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-                    <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-1 mt-4">
+                    <div className="pt-2 border-t border-border">
+                    <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-1 mt-4">
                       Areas of Interest
                     </h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 flex items-center gap-1.5">
+                    <p className="text-xs text-muted-foreground mb-3 flex items-center gap-1.5">
                       <Tag className="h-3.5 w-3.5" /> Select at least one area that excites you.
                     </p>
                     <div className="space-y-2">
@@ -856,17 +856,17 @@ export default function TeamApplicationPage() {
                             key={area.id}
                             className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border cursor-pointer transition-all duration-200 ${
                               checked
-                                ? "border-red-600 bg-red-50 dark:bg-red-950/20"
-                                : "border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-700"
+                                ? "border-primary bg-primary/10"
+                                : "border-border hover:border-primary/50"
                             }`}
                           >
                             <input
                               type="checkbox"
                               checked={checked}
                               onChange={() => toggleInterest(area.id)}
-                              className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-red-600 focus:ring-red-500"
+                              className="h-4 w-4 rounded border-border text-primary focus:ring-ring"
                             />
-                            <span className={`text-sm font-medium ${checked ? "text-red-700 dark:text-red-400" : "text-gray-700 dark:text-gray-300"}`}>
+                            <span className={`text-sm font-medium ${checked ? "text-primary" : "text-foreground"}`}>
                               {area.label}
                             </span>
                           </label>
@@ -874,21 +874,21 @@ export default function TeamApplicationPage() {
                       })}
                       <label className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border transition-all duration-200 ${
                         form.customInterest.trim()
-                          ? "border-red-600 bg-red-50 dark:bg-red-950/20"
-                          : "border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-700"
+                          ? "border-primary bg-primary/10"
+                          : "border-border hover:border-primary/50"
                       }`}>
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300 shrink-0">Other:</span>
+                        <span className="text-sm font-medium text-foreground shrink-0">Other:</span>
                         <input
                           type="text"
                           placeholder="Describe your area of interest"
                           maxLength={200}
                           value={form.customInterest}
                           onChange={(e) => set("customInterest", e.target.value)}
-                          className="flex-1 px-2 py-1 text-sm rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                          className="flex-1 px-2 py-1 text-sm rounded-md border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring"
                         />
                       </label>
                     </div>
-                    <p className="text-xs text-gray-400 mt-3">
+                    <p className="text-xs text-muted-foreground mt-3">
                       {form.interests.length} area{form.interests.length !== 1 ? "s" : ""} selected
                     </p>
                   </div>
@@ -896,8 +896,8 @@ export default function TeamApplicationPage() {
 
                   {/* Custom questions */}
                   {customQuestions.length > 0 && (
-                    <div className="pt-4 border-t border-gray-200 dark:border-gray-700 space-y-4">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
+                    <div className="pt-4 border-t border-border space-y-4">
+                      <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">
                         Additional Questions
                       </h3>
                       {customQuestions.map((q) => (
@@ -934,12 +934,12 @@ export default function TeamApplicationPage() {
                           )}
                           {q.type === "radio" && (
                             <div className="flex flex-col gap-2">
-                              <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
-                                {q.question} <span className="ml-1 text-[11px] font-normal text-gray-500">{q.required ? "Required." : "Optional."}</span>
+                              <span className="text-xs font-medium text-foreground">
+                                {q.question} <span className="ml-1 text-[11px] font-normal text-muted-foreground">{q.required ? "Required." : "Optional."}</span>
                               </span>
                               {q.options?.map((o) => (
-                                <label key={o} className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer">
-                                  <input type="radio" name={q.id} checked={form.customAnswers[q.id] === o} onChange={() => setCustom(q.id, o)} className="accent-red-600" />
+                                <label key={o} className="flex items-center gap-2 text-sm text-foreground cursor-pointer">
+                                  <input type="radio" name={q.id} checked={form.customAnswers[q.id] === o} onChange={() => setCustom(q.id, o)} className="accent-primary" />
                                   {o}
                                 </label>
                               ))}
@@ -947,19 +947,19 @@ export default function TeamApplicationPage() {
                           )}
                           {q.type === "checkbox" && (
                             <div className="flex flex-col gap-2">
-                              <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
-                                {q.question} <span className="ml-1 text-[11px] font-normal text-gray-500">{q.required ? "Required." : "Optional."}</span>
+                              <span className="text-xs font-medium text-foreground">
+                                {q.question} <span className="ml-1 text-[11px] font-normal text-muted-foreground">{q.required ? "Required." : "Optional."}</span>
                               </span>
                               <div className="flex flex-wrap gap-3">
                                 {q.options?.map((o) => {
                                   const arr = (form.customAnswers[q.id] as string[]) || [];
                                   return (
-                                    <label key={o} className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer">
+                                    <label key={o} className="flex items-center gap-2 text-sm text-foreground cursor-pointer">
                                       <input
                                         type="checkbox"
                                         checked={arr.includes(o)}
                                         onChange={(e) => { if (e.target.checked) setCustom(q.id, [...arr, o]); else setCustom(q.id, arr.filter((a) => a !== o)); }}
-                                        className="accent-red-600"
+                                        className="accent-primary"
                                       />
                                       {o}
                                     </label>
@@ -981,8 +981,8 @@ export default function TeamApplicationPage() {
           {step === 3 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Role Selection</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                <h2 className="text-2xl font-bold text-foreground mb-1">Role Selection</h2>
+                <p className="text-sm text-muted-foreground mb-2">
                   Rank the roles you&apos;d like to join by preference, set your availability, and tell us
                   why you want to contribute.
                 </p>
@@ -1002,8 +1002,8 @@ export default function TeamApplicationPage() {
                     />
                   )}
                   {fieldEnabled("weeklyHours") && (
-                    <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                      <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+                    <div className="pt-4 border-t border-border">
+                      <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
                         Weekly Availability
                       </h3>
                       <div className="flex items-start gap-4">
@@ -1015,10 +1015,10 @@ export default function TeamApplicationPage() {
                             step={1}
                             value={form.weeklyHours}
                             onChange={(e) => set("weeklyHours", Number(e.target.value))}
-                            className="w-full accent-red-600 dark:accent-red-500"
+                            className="w-full accent-primary"
                           />
                           {/* Labels aligned under the slider (this column only) */}
-                          <div className="flex justify-between text-xs text-gray-400 dark:text-gray-500 mt-1">
+                          <div className="flex justify-between text-xs text-muted-foreground mt-1">
                             <span>Casual</span>
                             <span>Few hrs</span>
                             <span>Committed</span>
@@ -1026,10 +1026,10 @@ export default function TeamApplicationPage() {
                           </div>
                         </div>
                         <div className="shrink-0 min-w-[8rem] text-right pt-1">
-                          <span className="text-lg font-bold text-red-600 dark:text-red-400">
+                          <span className="text-lg font-bold text-primary">
                             {form.weeklyHours}
                           </span>
-                          <span className="text-sm text-gray-500 dark:text-gray-400 ml-1">
+                          <span className="text-sm text-muted-foreground ml-1">
                             hour{form.weeklyHours !== 1 ? "s" : ""}/week
                           </span>
                         </div>
@@ -1037,7 +1037,7 @@ export default function TeamApplicationPage() {
                     </div>
                   )}
                   {fieldEnabled("motivation") && (
-                    <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <div className="pt-4 border-t border-border">
                       <FieldGroup label="Personal motivation" requiredHint="Required.">
                         <TextareaBase
                           placeholder="Tell us why you want to join UU AI Society and what you hope to contribute."
@@ -1048,9 +1048,9 @@ export default function TeamApplicationPage() {
                         />
                       </FieldGroup>
                       <p className={`text-xs mt-1 ${
-                        (form.motivation || "").length > MOTIVATION_MAX_CHARS ? "text-red-600" :
-                        (form.motivation || "").trim().length < 25 && (form.motivation || "").length > 0 ? "text-amber-600" :
-                        "text-gray-500"
+                        (form.motivation || "").length > MOTIVATION_MAX_CHARS ? "text-primary" :
+                        (form.motivation || "").trim().length < 25 && (form.motivation || "").length > 0 ? "text-chart-3" :
+                        "text-muted-foreground"
                       }`}>
                         {(form.motivation || "").trim().length < 25 && (form.motivation || "").length > 0
                           ? `Need ${25 - form.motivation.trim().length} more characters — `
@@ -1069,8 +1069,8 @@ export default function TeamApplicationPage() {
           {step === 4 && (
             <div className="space-y-5">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Review &amp; Submit</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                <h2 className="text-2xl font-bold text-foreground mb-1">Review &amp; Submit</h2>
+                <p className="text-sm text-muted-foreground mb-4">
                   Please review your application before submitting.
                 </p>
               </div>
@@ -1094,19 +1094,19 @@ export default function TeamApplicationPage() {
                         return area ? <TagComponent key={id} variant="red" size="sm">{area.label}</TagComponent> : null;
                       })}
                       {form.customInterest.trim() && <TagComponent key="custom-interest" variant="red" size="sm">{form.customInterest}</TagComponent>}
-                      {form.interests.length === 0 && !form.customInterest.trim() && <span className="text-sm text-gray-400">No areas selected</span>}
+                      {form.interests.length === 0 && !form.customInterest.trim() && <span className="text-sm text-muted-foreground">No areas selected</span>}
                     </div>
                     )}
                     {customQuestions.length > 0 && (
                       <div className="pt-2">
-                        <span className="text-xs font-medium text-gray-500 uppercase">Additional answers</span>
+                        <span className="text-xs font-medium text-muted-foreground uppercase">Additional answers</span>
                         {customQuestions.map((q) => {
                           const ans = form.customAnswers[q.id];
                           const displayAns = Array.isArray(ans) ? ans.join(", ") : ans;
                           return (
                             <div key={q.id} className="mt-1">
-                              <span className="text-xs font-medium text-gray-500">{q.question}</span>
-                              <p className="text-sm text-gray-900 dark:text-white break-words">{displayAns || "—"}</p>
+                              <span className="text-xs font-medium text-muted-foreground">{q.question}</span>
+                              <p className="text-sm text-foreground break-words">{displayAns || "—"}</p>
                             </div>
                           );
                         })}
@@ -1120,21 +1120,21 @@ export default function TeamApplicationPage() {
                           <div key={entry.roleId}>
                             <div className="flex items-center gap-3 py-1">
                               <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold ${
-                                idx === 0 ? "bg-primary text-primary-foreground" : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400"
+                                idx === 0 ? "bg-primary text-primary-foreground" : "bg-foreground/8 text-muted-foreground"
                               }`}>
                                 {idx + 1}
                               </span>
-                              <span className="flex-1 min-w-0 text-sm text-gray-900 dark:text-white break-words">{entry.title} <span className="text-gray-500 dark:text-gray-400">· {entry.teamName}</span></span>
+                              <span className="flex-1 min-w-0 text-sm text-foreground break-words">{entry.title} <span className="text-muted-foreground">· {entry.teamName}</span></span>
                             </div>
                           </div>
                         );
                       }
                       return (
                         <div key="custom-role" className="flex items-center gap-3 py-1">
-                          <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs font-bold">
+                          <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-foreground/8 text-muted-foreground text-xs font-bold">
                             {idx + 1}
                           </span>
-                          <span className="flex-1 min-w-0 text-sm text-gray-900 dark:text-white break-words">
+                          <span className="flex-1 min-w-0 text-sm text-foreground break-words">
                             Other{form.customRole ? `: ${form.customRole}` : ""}
                           </span>
                         </div>
@@ -1143,34 +1143,34 @@ export default function TeamApplicationPage() {
                     {fieldEnabled("weeklyHours") && <SummaryRow label="Availability" value={`${form.weeklyHours} hour${form.weeklyHours !== 1 ? "s" : ""} per week`} />}
                     {fieldEnabled("motivation") && (
                     <div className="pt-2">
-                      <span className="text-xs font-medium text-gray-500 uppercase">Motivation</span>
-                      <p className="text-sm text-gray-900 dark:text-white whitespace-pre-wrap break-words mt-1">
+                      <span className="text-xs font-medium text-muted-foreground uppercase">Motivation</span>
+                      <p className="text-sm text-foreground whitespace-pre-wrap break-words mt-1">
                         {form.motivation || "—"}
                       </p>
                     </div>
                     )}
                   </SummarySection>
-                  <label className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300 pt-2 border-t border-gray-200 dark:border-gray-700">
-                    <input type="checkbox" checked={form.agree} onChange={(e) => set("agree", e.target.checked)} className="mt-0.5 accent-red-600" />
+                  <label className="flex items-start gap-3 text-sm text-foreground pt-2 border-t border-border">
+                    <input type="checkbox" checked={form.agree} onChange={(e) => set("agree", e.target.checked)} className="mt-0.5 accent-primary" />
                     <span>
                       I confirm the information above is accurate and agree to the{" "}
-                      <Link href="/privacy" className="text-blue-600 dark:text-blue-400 hover:underline">Privacy Policy</Link>.
+                      <Link href="/privacy" className="text-primary hover:underline">Privacy Policy</Link>.
                     </span>
                   </label>
-                  <label className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-300">
+                  <label className="flex items-start gap-3 text-sm text-foreground">
                     <input
                       type="checkbox"
                       checked={form.newsletter}
                       onChange={(e) => set("newsletter", e.target.checked)}
-                      className="mt-0.5 accent-red-600"
+                      className="mt-0.5 accent-primary"
                     />
                     <span>
                       Also sign me up for the UU AI Society newsletter{" "}
-                      <span className="text-gray-500 dark:text-gray-400">(optional)</span>
+                      <span className="text-muted-foreground">(optional)</span>
                     </span>
                   </label>
                   {submitting && (
-                    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Loader2 className="h-4 w-4 animate-spin" /> Submitting…
                     </div>
                   )}
@@ -1188,9 +1188,9 @@ export default function TeamApplicationPage() {
 
 function SummarySection({ icon: Icon, title, children }: { icon: React.ComponentType<{ className?: string }>; title: string; children: React.ReactNode }) {
   return (
-    <div className="pb-4 border-b border-gray-200 dark:border-gray-700 last:border-0 last:pb-0">
-      <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-3 flex items-center gap-2">
-        <Icon className="h-4 w-4 text-red-600 dark:text-red-400" />
+    <div className="pb-4 border-b border-border last:border-0 last:pb-0">
+      <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-3 flex items-center gap-2">
+        <Icon className="h-4 w-4 text-primary" />
         {title}
       </h3>
       {children}
@@ -1201,8 +1201,8 @@ function SummarySection({ icon: Icon, title, children }: { icon: React.Component
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-3 py-1">
-      <span className="text-xs font-medium text-gray-500 uppercase">{label}</span>
-      <span className="sm:col-span-2 text-sm text-gray-900 dark:text-white break-words min-w-0">{value || "—"}</span>
+      <span className="text-xs font-medium text-muted-foreground uppercase">{label}</span>
+      <span className="sm:col-span-2 text-sm text-foreground break-words min-w-0">{value || "—"}</span>
     </div>
   );
 }

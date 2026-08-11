@@ -199,7 +199,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
   if (isPastEvent) {
     return (
       <>
-        <p className="text-red-500">This event has already passed.</p>
+        <p className="text-primary">This event has already passed.</p>
       </>
     );
   }
@@ -216,7 +216,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
   return (
     <>
       {alreadyRegistered ? (
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 rounded px-3 py-2">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-foreground bg-card/70 border border-border rounded px-3 py-2">
           <div>
             {alreadyRegistered.status == "invited" &&
               "You have been invited to this event."}
@@ -237,7 +237,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
             )}
             {alreadyRegistered.status === 'invited' && (
               <Button
-                className="bg-green-600/80 hover:bg-green-600 text-white"
+                className="bg-primary hover:brightness-110"
                 onClick={async () => {
                   try {
                     if (!alreadyRegistered.token) throw new Error('Missing confirmation token. Please contact us if you have problems confirming your spot.');
@@ -260,17 +260,17 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
         <Button
           className={`${
             isWaitlistOnly
-              ? "bg-orange-600/80 hover:bg-orange-600"
-              : "bg-blue-600/80 hover:bg-blue-600"
+              ? "bg-chart-3 hover:brightness-110"
+              : "bg-primary hover:brightness-110"
           } text-white`}
           onClick={() => setIsOpen(true)}
         >
           {isWaitlistOnly ? "Join Waitlist" : "Register Now"}
         </Button>
       ) : (
-        <div className="text-sm text-gray-700 dark:text-gray-300">
+        <div className="text-sm text-foreground">
           Please sign in and become a member to register for this event.
-          <Link href="/account" className="text-blue-600 dark:text-blue-400 underline ml-1">
+          <Link href="/account" className="text-primary underline ml-1">
             Login / Create account
           </Link>
         </div>
@@ -284,22 +284,22 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
           description={event.title}
           size="md"
         >
-          <Card className="border-0 shadow-none dark:bg-gray-800">
+          <Card className="border-0 shadow-none bg-card">
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Event-specific Custom Questions */}
                   {customQuestions.length > 0 && (
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">
                         Event Questions
                       </h3>
                       <div className="space-y-4">
                         {customQuestions.map((q) => (
                           <div key={q.id}>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            <label className="block text-sm font-medium text-foreground mb-1">
                               {q.question}{" "}
                               {q.required && (
-                                <span className="text-red-500">*</span>
+                                <span className="text-primary">*</span>
                               )}
                             </label>
                             {q.type === "text" && (
@@ -307,7 +307,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                                 type="text"
                                 value={(customAnswers[q.id] as string) || ""}
                                 onChange={(e) => handleCustomAnswerChange(q, e)}
-                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                                className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-card text-foreground"
                               />
                             )}
                             {q.type === "textarea" && (
@@ -315,14 +315,14 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                                 value={(customAnswers[q.id] as string) || ""}
                                 onChange={(e) => handleCustomAnswerChange(q, e)}
                                 rows={3}
-                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                                className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-card text-foreground"
                               />
                             )}
                             {q.type === "select" && (
                               <select
                                 value={(customAnswers[q.id] as string) || ""}
                                 onChange={(e) => handleCustomAnswerChange(q, e)}
-                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                                className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-card text-foreground"
                               >
                                 <option value="">Select an option</option>
                                 {(q.options || []).map((opt) => (
@@ -337,7 +337,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                                 {(q.options || []).map((opt) => (
                                   <label
                                     key={opt}
-                                    className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300"
+                                    className="flex items-center gap-2 text-sm text-foreground"
                                   >
                                     <input
                                       type="radio"
@@ -369,7 +369,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                                   return (
                                     <label
                                       key={opt}
-                                      className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300"
+                                      className="flex items-center gap-2 text-sm text-foreground"
                                     >
                                       <input
                                         type="checkbox"
@@ -391,7 +391,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                     </div>
                   )}
                   {/* Submit Button */}
-                  <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-600">
+                  <div className="flex justify-end space-x-3 pt-4 border-t border-border">
                     <Button
                       type="button"
                       variant="outline"
@@ -403,7 +403,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="bg-blue-600 hover:bg-blue-700 text-white"
+                      className="bg-primary text-primary-foreground hover:brightness-110"
                     >
                       {isSubmitting
                         ? "Submitting..."

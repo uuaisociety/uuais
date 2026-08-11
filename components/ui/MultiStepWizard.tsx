@@ -89,16 +89,16 @@ const MultiStepWizard: React.FC<MultiStepWizardProps> = ({
                     {/* Left line: takes flex-1; invisible spacer on step 0 so circle stays centered */}
                     <div
                       className={`h-0.5 flex-1 transition-colors duration-500 ${
-                        isFirst ? "opacity-0" : leftFilled ? "bg-red-600 dark:bg-red-500" : "bg-gray-200 dark:bg-gray-700"
+                        isFirst ? "opacity-0" : leftFilled ? "bg-primary" : "bg-foreground/10"
                       }`}
                     />
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm shrink-0 transition-all duration-300 ${
                         i < currentStep
-                          ? "bg-green-600 text-white"
+                          ? "bg-primary text-primary-foreground"
                           : i === currentStep
-                            ? "bg-red-600 dark:bg-red-500 text-white ring-4 ring-red-600/20 dark:ring-red-500/30"
-                            : "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 border border-gray-200 dark:border-gray-700"
+                            ? "bg-primary text-primary-foreground ring-4 ring-primary/20"
+                            : "bg-foreground/8 text-muted-foreground border border-border"
                       }`}
                     >
                       {i < currentStep ? <Check className="h-5 w-5" /> : i + 1}
@@ -106,17 +106,17 @@ const MultiStepWizard: React.FC<MultiStepWizardProps> = ({
                     {/* Right line: takes flex-1; invisible spacer on the last step */}
                     <div
                       className={`h-0.5 flex-1 transition-colors duration-500 ${
-                        isLast ? "opacity-0" : rightFilled ? "bg-red-600 dark:bg-red-500" : "bg-gray-200 dark:bg-gray-700"
+                        isLast ? "opacity-0" : rightFilled ? "bg-primary" : "bg-foreground/10"
                       }`}
                     />
                   </div>
                   <span
                     className={`text-xs mt-2 font-medium text-center whitespace-nowrap transition-colors duration-300 ${
                       i === currentStep
-                        ? "text-red-600 dark:text-red-400"
+                        ? "text-primary"
                         : i < currentStep
-                          ? "text-gray-700 dark:text-gray-300"
-                          : "text-gray-400 dark:text-gray-500"
+                          ? "text-foreground"
+                          : "text-muted-foreground"
                     }`}
                   >
                     {step.title}
@@ -134,7 +134,7 @@ const MultiStepWizard: React.FC<MultiStepWizardProps> = ({
       </div>
 
       {/* Navigation */}
-      <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+      <div className="flex justify-between items-center mt-8 pt-6 border-t border-border">
         <Button
           type="button"
           variant="outline"
@@ -165,12 +165,12 @@ const MultiStepWizard: React.FC<MultiStepWizardProps> = ({
       </div>
       {/* Why is the action blocked? A disabled button without a reason is a wall. */}
       {!isLast && !canNext && nextDisabledHint && (
-        <p className="text-sm text-gray-500 dark:text-gray-400 text-right mt-3" role="status">
+        <p className="text-sm text-muted-foreground text-right mt-3" role="status">
           {nextDisabledHint}
         </p>
       )}
       {isLast && submitDisabled && submitDisabledHint && (
-        <p className="text-sm text-gray-500 dark:text-gray-400 text-right mt-3" role="status">
+        <p className="text-sm text-muted-foreground text-right mt-3" role="status">
           {submitDisabledHint}
         </p>
       )}
