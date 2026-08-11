@@ -3,6 +3,8 @@ import React from 'react';
 
 declare global {
   var __mockPathname: string | undefined;
+  var __mockTheme: string | undefined;
+  var __setMockTheme: ((theme: 'light' | 'dark') => void) | undefined;
   var __setMockParams: ((params: Record<string, string>) => void) | undefined;
   var __setAppState: ((state: Record<string, unknown> | null) => void) | undefined;
 }
@@ -28,6 +30,11 @@ if (typeof Element !== 'undefined' && !Element.prototype.scrollIntoView) {
   Element.prototype.scrollIntoView = jest.fn();
 }
 
+// jsdom lacks Element#scrollTo; the wizard's step header scrolls the active step into view.
+if (typeof Element !== 'undefined' && !Element.prototype.scrollTo) {
+  Element.prototype.scrollTo = jest.fn();
+}
+
 // Radix Dialog (used by the shared Modal primitive) requires ResizeObserver
 // and PointerEvent capture in jsdom to mount its portal content.
 if (typeof globalThis.ResizeObserver === 'undefined') {
@@ -49,6 +56,14 @@ if (typeof Element !== 'undefined' && !Element.prototype.releasePointerCapture) 
 }
 
 global.__mockPathname = '';
+
+global.__mockTheme = 'dark';
+global.__setMockTheme = (theme: 'light' | 'dark') => {
+  global.__mockTheme = theme;
+};
+jest.mock('@/providers/ThemeProvider', () => ({
+  useTheme: () => ({ theme: global.__mockTheme || 'dark', toggleTheme: jest.fn() }),
+}));
 
 const mockParams: Record<string, string> = {};
 jest.mock('next/navigation', () => ({
