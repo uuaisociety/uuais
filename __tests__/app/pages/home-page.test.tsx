@@ -37,6 +37,25 @@ describe('HomePage', () => {
     expect(screen.getByText('Learn more')).toBeInTheDocument()
   })
 
+  it('hero text and CTAs are theme-aware (inverted on the paper slab)', () => {
+    global.__setMockTheme?.('light')
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
+    const { container } = render(<HomePage />)
+
+    // Primary CTA: brand red on the light slab, white button on the dark slab
+    const primaryCta = screen.getByText('Our events').closest('a')
+    expect(primaryCta?.className).toContain('bg-primary')
+    expect(primaryCta?.className).toContain('dark:bg-white')
+    expect(primaryCta?.className).toContain('dark:text-ink')
+
+    // Muted hero text follows the slab tone via currentColor
+    const eyebrow = screen.getByText('Uppsala University · AI Society')
+    expect(eyebrow.className).toContain('text-current/45')
+
+    // The hero slab itself is the shared, theme-aware HeroSplash
+    expect(container.querySelector('section')?.className).toContain('bg-card')
+  })
+
   it('renders upcoming events section heading', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<HomePage />)
@@ -47,6 +66,16 @@ describe('HomePage', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<HomePage />)
     expect(screen.getByText(/No events scheduled/)).toBeInTheDocument()
+  })
+
+  it('does not flash the empty events message while events are still loading', () => {
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, eventsLoaded: false, events: [] },
+      dispatch: jest.fn(),
+    })
+    render(<HomePage />)
+    expect(screen.queryByText(/No events scheduled/)).not.toBeInTheDocument()
+    expect(screen.getByText('Events')).toBeInTheDocument()
   })
 
   it('renders upcoming event cards', () => {

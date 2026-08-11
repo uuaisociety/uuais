@@ -107,6 +107,7 @@ describe('Header', () => {
   describe('on homepage', () => {
     beforeEach(() => {
       g.__mockPathname = '/'
+      global.__setMockTheme?.('dark')
     })
 
     it('still shows the logo and wordmark', () => {
@@ -119,6 +120,17 @@ describe('Header', () => {
       const spacer = container.querySelector('[aria-hidden="true"]')
       expect(spacer).toBeInTheDocument()
       expect(spacer).toHaveClass('h-14')
+    })
+
+    it('uses the theme-aware glass nav on the homepage in dark mode', () => {
+      const { container } = render(<Header />)
+      expect(container.querySelector('header')?.className).toContain('glass-nav')
+    })
+
+    it('uses the theme-aware glass nav on the homepage in light mode', () => {
+      global.__setMockTheme?.('light')
+      const { container } = render(<Header />)
+      expect(container.querySelector('header')?.className).toContain('glass-nav')
     })
   })
 
