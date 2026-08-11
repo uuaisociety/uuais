@@ -209,7 +209,7 @@ export default function CourseConnectionsFlow({
           style: {
             borderRadius: 8,
             padding: 8,
-            border: node.kind === 'focus' ? "2px solid #990000" : "2px solid #3b82f6",
+            border: node.kind === 'focus' ? "2px solid var(--primary)" : "2px solid #3b82f6",
             background: node.kind === 'focus' ? "#fff5f5" : "#eff6ff",
             width: nodeWidth,
           },

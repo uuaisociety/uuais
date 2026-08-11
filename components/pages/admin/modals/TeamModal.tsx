@@ -2,7 +2,8 @@
 
 import React, { useCallback, useState, useEffect } from "react";
 import { Button } from "@/components/ui/Button";
-import { X } from "lucide-react";
+import { Modal } from "@/components/ui/Modal";
+import { FieldGroup, InputBase, TextareaBase } from "@/components/ui/Form";
 import FileDropzone from '@/components/ui/FileDropzone';
 import { uploadFileToServer, deleteFileFromServer } from '@/utils/fileUploader';
 import { useNotify } from '@/components/ui/Notifications';
@@ -102,129 +103,107 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-            {editing ? 'Edit Team Member' : 'Add New Team Member'}
-          </h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
-            <X className="h-6 w-6" />
-          </button>
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={editing ? 'Edit Team Member' : 'Add New Team Member'}
+    >
+      <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }} className="space-y-4">
+        <FieldGroup label="Name" requiredHint="Required.">
+          <InputBase type="text" value={form.name} onChange={(e) => setForm(prev => ({ ...prev, name: e.target.value }))} required />
+        </FieldGroup>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FieldGroup label="Position" requiredHint="Required.">
+            <InputBase type="text" value={form.position} onChange={(e) => setForm(prev => ({ ...prev, position: e.target.value }))} required />
+          </FieldGroup>
+          <FieldGroup label="Teams">
+            <div className="grid grid-cols-2 gap-1.5 p-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-700">
+              {TEAM_CATEGORIES.map(cat => (
+                <label key={cat} className="flex items-center gap-2 text-sm text-gray-900 dark:text-white cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-600 rounded px-1 py-0.5">
+                  <input
+                    type="checkbox"
+                    checked={form.teams.includes(cat)}
+                    onChange={() => toggleTeam(cat)}
+                    className="accent-red-600"
+                  />
+                  {TEAM_CATEGORY_LABELS[cat]}
+                </label>
+              ))}
+            </div>
+            <p className="text-xs text-gray-500 mt-1">Select all teams this member belongs to</p>
+          </FieldGroup>
         </div>
 
-        <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Name</label>
-            <input type="text" value={form.name} onChange={(e) => setForm(prev => ({ ...prev, name: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
-          </div>
+        <FieldGroup label="Badge (optional)">
+          <InputBase
+            type="text"
+            value={form.badge}
+            onChange={(e) => setForm(prev => ({ ...prev, badge: e.target.value }))}
+            placeholder="e.g. Head of, Lead, Chairman"
+          />
+          <p className="text-xs text-gray-500 mt-1">Shown as a small colored chip on the public card</p>
+        </FieldGroup>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Position</label>
-              <input type="text" value={form.position} onChange={(e) => setForm(prev => ({ ...prev, position: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Teams</label>
-              <div className="grid grid-cols-2 gap-1.5 p-2 border border-gray-300 rounded-md bg-white dark:bg-gray-700">
-                {TEAM_CATEGORIES.map(cat => (
-                  <label key={cat} className="flex items-center gap-2 text-sm text-gray-900 dark:text-white cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-600 rounded px-1 py-0.5">
-                    <input
-                      type="checkbox"
-                      checked={form.teams.includes(cat)}
-                      onChange={() => toggleTeam(cat)}
-                      className="accent-red-600"
-                    />
-                    {TEAM_CATEGORY_LABELS[cat]}
-                  </label>
-                ))}
-              </div>
-              <p className="text-xs text-gray-500 mt-1">Select all teams this member belongs to</p>
-            </div>
-          </div>
+        <FieldGroup label="Bio (optional)">
+          <TextareaBase value={form.bio} onChange={(e) => setForm(prev => ({ ...prev, bio: e.target.value }))} rows={4} />
+        </FieldGroup>
+        <FieldGroup label="Profile Image">
+          <FileDropzone
+            initialUrl={form.image}
+            initialPath={form.imagePath}
+            onFileSelected={uploadToServer}
+            onDelete={async () => deleteFromServer(form.imagePath)}
+            onError={(e) => notify({ type: 'error', message: 'Team image upload failed: ' + e })}
+            uploading={uploading}
+            deleting={deleting}
+          />
+          <p className="text-xs text-gray-500">Optional; a placeholder will be used if empty</p>
+        </FieldGroup>
+        <FieldGroup label="LinkedIn URL (optional)">
+          <InputBase type="url" value={form.linkedin} onChange={(e) => setForm(prev => ({ ...prev, linkedin: e.target.value }))} />
+        </FieldGroup>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Badge (optional)</label>
-            <input
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FieldGroup label="GitHub URL (optional)">
+            <InputBase type="url" value={form.github} onChange={(e) => setForm(prev => ({ ...prev, github: e.target.value }))} placeholder="https://github.com/username" />
+          </FieldGroup>
+          <FieldGroup label="Website (optional)">
+            <InputBase type="url" value={form.website} onChange={(e) => setForm(prev => ({ ...prev, website: e.target.value }))} placeholder="https://example.com" />
+          </FieldGroup>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FieldGroup label="Organization Email (optional)">
+            <InputBase type="email" value={form.companyEmail} onChange={(e) => setForm(prev => ({ ...prev, companyEmail: e.target.value }))} placeholder="name@uu.se" />
+          </FieldGroup>
+          <FieldGroup label="Years">
+            <InputBase
               type="text"
-              value={form.badge}
-              onChange={(e) => setForm(prev => ({ ...prev, badge: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-              placeholder="e.g. Head of, Lead, Chairman"
+              value={yearsInput}
+              onChange={(e) => handleYearsChange(e.target.value)}
+              onBlur={handleYearsBlur}
+              placeholder="e.g. 2025, 2026, 2027"
             />
-            <p className="text-xs text-gray-500 mt-1">Shown as a small colored chip on the public card</p>
-          </div>
+            <p className="text-xs text-gray-500 mt-1">Comma-separated years. Leave empty for "always visible".</p>
+          </FieldGroup>
+        </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Bio (optional)</label>
-            <textarea value={form.bio} onChange={(e) => setForm(prev => ({ ...prev, bio: e.target.value }))} rows={4} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Profile Image</label>
-            <FileDropzone
-              initialUrl={form.image}
-              initialPath={form.imagePath}
-              onFileSelected={uploadToServer}
-              onDelete={async () => deleteFromServer(form.imagePath)}
-              onError={(e) => notify({ type: 'error', message: 'Team image upload failed: ' + e })}
-              uploading={uploading}
-              deleting={deleting}
-            />
-            <p className="text-xs text-gray-500">Optional; a placeholder will be used if empty</p>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">LinkedIn URL (optional)</label>
-            <input type="url" value={form.linkedin} onChange={(e) => setForm(prev => ({ ...prev, linkedin: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
-          </div>
+        <FieldGroup label="Internal notes (admin only)">
+          <TextareaBase
+            value={form.notes}
+            onChange={(e) => setForm(prev => ({ ...prev, notes: e.target.value }))}
+            rows={2}
+            placeholder="Not visible to the public"
+          />
+        </FieldGroup>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">GitHub URL (optional)</label>
-              <input type="url" value={form.github} onChange={(e) => setForm(prev => ({ ...prev, github: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="https://github.com/username" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Website (optional)</label>
-              <input type="url" value={form.website} onChange={(e) => setForm(prev => ({ ...prev, website: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="https://example.com" />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Organization Email (optional)</label>
-              <input type="email" value={form.companyEmail} onChange={(e) => setForm(prev => ({ ...prev, companyEmail: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="name@uu.se" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Years</label>
-              <input
-                type="text"
-                value={yearsInput}
-                onChange={(e) => handleYearsChange(e.target.value)}
-                onBlur={handleYearsBlur}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                placeholder="e.g. 2025, 2026, 2027"
-              />
-              <p className="text-xs text-gray-500 mt-1">Comma-separated years. Leave empty for "always visible".</p>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Internal notes (admin only)</label>
-            <textarea
-              value={form.notes}
-              onChange={(e) => setForm(prev => ({ ...prev, notes: e.target.value }))}
-              rows={2}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-              placeholder="Not visible to the public"
-            />
-          </div>
-
-          <div className="flex justify-end space-x-3 pt-4">
-            <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-            <Button type="submit" disabled={uploading || deleting}>{editing ? 'Update Member' : 'Add Member'}</Button>
-          </div>
-        </form>
-      </div>
-    </div>
+        <div className="flex justify-end space-x-3 pt-4">
+          <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
+          <Button type="submit" variant="outline" disabled={uploading || deleting}>{editing ? 'Update Member' : 'Add Member'}</Button>
+        </div>
+      </form>
+    </Modal>
   );
 };
 

@@ -4,17 +4,21 @@ import { cn } from '@/lib/utils';
 import Image, { type ImageProps } from 'next/image';
 
 const cardVariants = cva(
-  'rounded-lg transition-all duration-200 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white',
+  'relative rounded-xl text-card-foreground overflow-hidden',
   {
     variants: {
       variant: {
-        default: 'shadow-sm',
-        elevated: 'shadow-md',
-        outline: 'border-2',
-        ghost: 'border-transparent shadow-none',
+        // Hairline over the ambient background — the quiet editorial default.
+        // Opaque consumers override bg; keep the surface light so no stray
+        // backdrop-filter layer lingers behind a solid fill (use `glass` for blur).
+        default: 'border border-border bg-card/70 transition-colors duration-300',
+        glass: 'glass',
+        elevated: 'border border-border bg-card shadow-[var(--glass-shadow)] transition-colors duration-300',
+        outline: 'border border-foreground/20 bg-transparent transition-colors duration-300',
+        ghost: 'border-transparent bg-transparent',
       },
       hover: {
-        true: 'hover:shadow-lg hover:-translate-y-0.5',
+        true: 'glass-interactive',
         false: '',
       },
       padding: {
@@ -60,7 +64,7 @@ export const CardMedia: React.FC<CardMediaProps> = ({ className = '', alt = '', 
 
   if (fill) {
     return (
-      <div className={cn('relative w-full h-48 rounded-t-lg overflow-hidden', className)}>
+      <div className={cn('relative w-full h-48 overflow-hidden', className)}>
         <Image alt={alt} fill sizes={sz} priority={priority} className="object-cover" {...rest} />
       </div>
     );
@@ -73,7 +77,7 @@ export const CardMedia: React.FC<CardMediaProps> = ({ className = '', alt = '', 
       height={h as number}
       sizes={sz}
       priority={priority}
-      className={cn('w-full rounded-t-lg object-cover', className)}
+      className={cn('w-full object-cover', className)}
       {...rest}
     />
   );

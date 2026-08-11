@@ -216,7 +216,7 @@ Always base your recommendations on the provided course context.`,
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <Bot className="h-6 w-6 text-[#990000]" />
+          <Bot className="h-6 w-6 text-primary" />
           <div>
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white">AI Settings</h2>
             <p className="text-sm text-gray-500 dark:text-gray-400">Configure the AI course advisor behavior and limits</p>
@@ -230,6 +230,7 @@ Always base your recommendations on the provided course context.`,
             Reset to Defaults
           </Button>
           <Button
+            variant="outline"
             onClick={handleSave}
             disabled={saving || !isSuperAdmin}
             title={!isSuperAdmin ? 'Only super admins can update AI settings' : undefined}
@@ -264,7 +265,7 @@ Always base your recommendations on the provided course context.`,
             value={settings.systemPrompt}
             onChange={(e) => setSettings({ ...settings, systemPrompt: e.target.value })}
             rows={10}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[#990000] focus:border-transparent font-mono text-sm"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent font-mono text-sm transition-colors duration-300"
           />
         </CardContent>
       </Card>

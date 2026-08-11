@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { X, Plus, Trash2, GripVertical, ArrowUp, ArrowDown, FileQuestion, Server, Code2, Megaphone, CalendarDays, FlaskConical, Award } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Modal } from "@/components/ui/Modal";
 import { FieldGroup, InputBase, TextareaBase, SelectBase } from "@/components/ui/Form";
 import {
   ApplicationCampaign, CampaignStatus, CustomQuestionType, CampaignQuestion,
@@ -314,32 +315,36 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/50 dark:bg-black/70 animate-in fade-in duration-300" onClick={onClose} aria-hidden />
-      <div
-        role="dialog"
-        aria-modal="true"
-        className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto rounded-lg bg-white dark:bg-gray-800 shadow-2xl animate-in fade-in zoom-in-95 duration-300 ease-out"
-      >
-        {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={isNew ? "New campaign" : `Edit: ${campaign?.title}`}
+      size="lg"
+      header={
+        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 -mx-6 -mt-6 mb-0 rounded-t-lg">
           <div className="flex items-center gap-2">
-            <FileQuestion className="h-5 w-5 text-red-600 dark:text-red-400" />
+            <FileQuestion className="h-5 w-5 text-red-600 dark:text-red-400" aria-hidden />
             <h2 className="text-lg font-bold text-gray-900 dark:text-white">
               {isNew ? "New campaign" : `Edit: ${campaign?.title}`}
             </h2>
           </div>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
-            <X className="h-6 w-6" />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close dialog"
+            className="size-9 grid place-items-center rounded-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700/60 transition-colors cursor-pointer"
+          >
+            <X className="h-5 w-5" />
           </button>
         </div>
-
-        {loading ? (
-          <div className="p-12 text-center text-gray-500 dark:text-gray-400">
-            <div className="h-6 w-6 border-2 border-red-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-            Loading campaign…
-          </div>
-        ) : (
+      }
+    >
+      {loading ? (
+        <div className="p-12 text-center text-gray-500 dark:text-gray-400">
+          <div className="h-6 w-6 border-2 border-red-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          Loading campaign…
+        </div>
+      ) : (
           <form onSubmit={handleSubmit} className="space-y-6 p-6">
             {/* Metadata */}
             <section>
@@ -655,14 +660,13 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
             {/* Footer */}
             <div className="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
               <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-              <Button type="submit" disabled={!title.trim() || enabledTeams.length === 0 || !hasValidRoles || saving}>
+              <Button type="submit" variant="outline" disabled={!title.trim() || enabledTeams.length === 0 || !hasValidRoles || saving}>
                 {saving ? "Saving…" : isNew ? "Create campaign" : "Save changes"}
               </Button>
             </div>
           </form>
         )}
-      </div>
-    </div>
+    </Modal>
   );
 };
 

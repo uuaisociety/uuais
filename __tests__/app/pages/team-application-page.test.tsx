@@ -1,6 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react'
 import TeamApplicationPage from '@/components/pages/TeamApplicationPage'
 import { defaultAppState } from '@/__tests__/helpers/fixtures'
+import { UU_PROGRAMMES } from '@/components/pages/apply/sampleData'
 import type { ApplicationCampaign } from '@/types'
 
 const mockUseApp = jest.fn()
@@ -68,6 +69,9 @@ const sampleCampaign: ApplicationCampaign = {
 describe('TeamApplicationPage', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    localStorage.clear()
+    mockAuthUser = null
+    mockGetTeamApplicationByUid.mockResolvedValue(null)
     mockSubscribeToCampaignQuestions.mockImplementation(() => jest.fn())
   })
 
@@ -237,6 +241,67 @@ describe('TeamApplicationPage', () => {
     expect(screen.getByRole('heading', { name: /Review & Submit/i, level: 2 })).toBeInTheDocument()
   })
 
+  it('renders the custom-interest row as a text field without a dead checkbox', () => {
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [sampleCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    fireEvent.click(screen.getByText('Continue'))
+    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
+    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
+    fireEvent.click(screen.getByText('Continue'))
+
+    const customInput = screen.getByPlaceholderText('Describe your area of interest')
+    expect(customInput).toBeInTheDocument()
+    // No non-functional checkbox masquerading as a selector
+    expect(customInput.closest('label')?.querySelector('input[type="checkbox"]')).toBeNull()
+    // Typing in the field counts toward the "at least one area" requirement
+    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), { target: { value: 'https://linkedin.com/in/alice' } })
+    fireEvent.change(customInput, { target: { value: 'AI Ethics' } })
+    expect(screen.getByRole('button', { name: /Continue/i })).toBeEnabled()
+  })
+
+  it('filters the programme list as you type and selects with Enter', () => {
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [sampleCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    fireEvent.click(screen.getByText('Continue'))
+
+    const combobox = screen.getByRole('combobox', { name: /Program/ })
+    fireEvent.focus(combobox)
+    fireEvent.change(combobox, { target: { value: 'computer sci' } })
+
+    // Filtered matches appear in the listbox (subset of the 300+ programmes)
+    const listbox = screen.getByRole('listbox')
+    const matches = within(listbox).getAllByRole('option').map((o) => o.textContent)
+    expect(matches.some((m) => m?.includes('Computer Science'))).toBe(true)
+    expect(matches.length).toBeLessThan(UU_PROGRAMMES.length)
+
+    // Enter commits the first (highlighted) match
+    fireEvent.keyDown(combobox, { key: 'Enter' })
+    expect(combobox).toHaveValue(matches[0])
+  })
+
+  it('commits free text when no programme matches', () => {
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [sampleCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    fireEvent.click(screen.getByText('Continue'))
+
+    const combobox = screen.getByRole('combobox', { name: /Program/ })
+    fireEvent.focus(combobox)
+    fireEvent.change(combobox, { target: { value: 'AI Ethics' } })
+    expect(screen.getByText(/No programmes match/)).toBeInTheDocument()
+
+    fireEvent.blur(combobox)
+    expect(combobox).toHaveValue('AI Ethics')
+  })
+
   it('hides standard fields that the campaign has disabled', () => {
     const limitedCampaign: ApplicationCampaign = {
       ...sampleCampaign,
@@ -326,6 +391,44 @@ describe('TeamApplicationPage', () => {
     expect(screen.getByRole('button', { name: /Continue/i })).toBeDisabled()
     fireEvent.change(screen.getByLabelText(/Why do you want to join/), { target: { value: 'I love AI.' } })
     expect(screen.getByRole('button', { name: /Continue/i })).toBeEnabled()
+  })
+
+  it('explains why Continue is blocked with an actionable hint', () => {
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [sampleCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    fireEvent.click(screen.getByText('Continue'))
+    // No name yet — the hint names the missing field
+    expect(screen.getByText('Enter your full name to continue.')).toBeInTheDocument()
+    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
+    // Now the email is the blocker — the hint updates
+    expect(screen.getByText('Enter a valid email address to continue.')).toBeInTheDocument()
+  })
+
+  it('explains why Submit is blocked until the confirmation is ticked', () => {
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [sampleCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    fireEvent.click(screen.getByText('Continue'))
+    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
+    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
+    fireEvent.click(screen.getByText('Continue'))
+    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), { target: { value: 'https://linkedin.com/in/alice' } })
+    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'))
+    fireEvent.click(screen.getByText('Continue'))
+    fireEvent.click(screen.getByRole('button', { name: /Add IT Member/i }))
+    fireEvent.change(screen.getByPlaceholderText(/Tell us why you want to join/), { target: { value: 'I am excited to contribute to AI.' } })
+    fireEvent.click(screen.getByText('Continue'))
+    // Review step: Submit is disabled until the agreement is confirmed
+    const submit = screen.getByRole('button', { name: /Submit application/i })
+    expect(submit).toBeDisabled()
+    expect(screen.getByText('Confirm that your information is accurate to submit.')).toBeInTheDocument()
+    fireEvent.click(screen.getByLabelText(/I confirm the information above is accurate/i))
+    expect(screen.getByRole('button', { name: /Submit application/i })).toBeEnabled()
   })
 
   it('shows "Already Applied!" instead of the form for a signed-in user who already applied', async () => {
@@ -420,6 +523,85 @@ describe('TeamApplicationPage', () => {
       '/api/login',
       expect.objectContaining({ headers: { Authorization: 'Bearer id-token-1' } }),
     )
+
+    global.fetch = originalFetch
+  })
+
+  it('persists a draft to localStorage as the user fills the form', async () => {
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [sampleCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    fireEvent.click(screen.getByText('Continue'))
+    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
+    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
+
+    // Debounced save (400ms) — wait for it to land.
+    await new Promise((r) => setTimeout(r, 450))
+
+    const keys = Object.keys(localStorage).filter((k) => k.startsWith('teamApplicationDraft'))
+    expect(keys.length).toBe(1)
+    const saved = JSON.parse(localStorage.getItem(keys[0])!)
+    expect(saved.name).toBe('Alex')
+    expect(saved.email).toBe('alex@test.com')
+    expect(saved.step).toBe(1)
+  })
+
+  it('does not create a draft on a fresh page visit', async () => {
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [sampleCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+    await new Promise((r) => setTimeout(r, 450))
+    const keys = Object.keys(localStorage).filter((k) => k.startsWith('teamApplicationDraft'))
+    expect(keys.length).toBe(0)
+  })
+
+  it('restores the saved draft and notifies the user on a fresh mount', async () => {
+    localStorage.setItem('teamApplicationDraft:spring2026:anon', JSON.stringify({
+      name: 'Alex', email: 'alex@test.com', step: 1, interests: [], roleRanking: [],
+    }))
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [sampleCampaign] },
+      dispatch: jest.fn(),
+    })
+    render(<TeamApplicationPage />)
+
+    await waitFor(() => expect(mockNotify).toHaveBeenCalledWith(expect.objectContaining({ title: 'Draft restored' })))
+    expect(screen.getByRole('heading', { name: 'Your Profile', level: 2 })).toBeInTheDocument()
+    expect(screen.getByLabelText(/Full name/i)).toHaveValue('Alex')
+  })
+
+  it('clears the draft after a successful submission', async () => {
+    mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
+    localStorage.setItem('teamApplicationDraft:spring2026:user-1', JSON.stringify({
+      name: 'Alex', email: 'alex@test.com', step: 4, interests: [], roleRanking: [],
+    }))
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, campaigns: [sampleCampaign] },
+      dispatch: jest.fn(),
+    })
+
+    const fetchMock = jest.fn((url: string) =>
+      url === '/api/login'
+        ? Promise.resolve({ ok: true, json: async () => ({}) })
+        : Promise.resolve({ ok: true, json: async () => ({}) })
+    )
+    const originalFetch = global.fetch
+    global.fetch = fetchMock as unknown as typeof fetch
+
+    render(<TeamApplicationPage />)
+    await waitFor(() => expect(mockNotify).toHaveBeenCalledWith(expect.objectContaining({ title: 'Draft restored' })))
+
+    // Land on the review step (restored step 4) and submit.
+    fireEvent.click(screen.getByLabelText(/I confirm the information above is accurate/i))
+    fireEvent.click(screen.getByRole('button', { name: /Submit application/i }))
+
+    expect(await screen.findByText('Application Submitted!')).toBeInTheDocument()
+    await new Promise((r) => setTimeout(r, 100))
+    expect(localStorage.getItem('teamApplicationDraft:spring2026:user-1')).toBeNull()
 
     global.fetch = originalFetch
   })

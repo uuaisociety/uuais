@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { type UserProfile, listUsers, updateUserProfile, deleteUser } from "@/lib/firestore";
 import { Button } from "@/components/ui/Button";
+import { Modal } from "@/components/ui/Modal";
 import TableControls, { TablePagination } from '@/components/ui/TableControls';
 import { useNotify } from "@/components/ui/Notifications";
 import { Download } from 'lucide-react';
@@ -201,22 +202,13 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
     };
 
     return (
-      <div
-        className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
-        onClick={close}
+      <Modal
+        open={!!selected}
+        onClose={close}
+        title={`Edit User: ${selected.displayName || selected.name || selected.email}`}
+        size="lg"
       >
-        <div
-          className="bg-white dark:bg-gray-900 rounded-lg w-full max-w-3xl p-6 max-h-[90vh] overflow-y-auto"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Edit User: {selected.displayName || selected.name || selected.email}
-            </h3>
-            <Button onClick={close}>Close</Button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {keys.map((k) => {
               const val = getValue(k);
               // Show booleans using checkbox regardless of draft presence
@@ -320,8 +312,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
               </Button>
             </div>
           </div>
-        </div>
-      </div>
+      </Modal>
     );
   };
 
@@ -340,13 +331,13 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
       <div className="flex items-center justify-between flex-wrap gap-2">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Members</h2>
         <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline" icon={Download} onClick={() => downloadCsv(users)}>
+          <Button variant="outline" icon={Download} onClick={() => downloadCsv(users)}>
             CSV
           </Button>
           <TableControls
             filter={filter}
             setFilter={setFilter}
-            loading={loading}
+            loading={loading} 
             onRefresh={refresh}
           />
         </div>
@@ -393,7 +384,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
                   <td className="py-2 pr-4">{m.university || "-"}</td>
                   <td className="py-2 pr-4">{m.updatedAt ? new Date(m.updatedAt).toLocaleDateString() : "-"}</td>
                   <td className="py-2 pr-4">
-                    <Button onClick={() => open(m)}>
+                    <Button variant="outline" onClick={() => open(m)}>
                       Edit
                     </Button>
                   </td>

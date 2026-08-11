@@ -1,7 +1,5 @@
 'use client'
 
-// Disable static generation for this page
-export const dynamic = 'force-dynamic';
 
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
@@ -103,10 +101,10 @@ const JoinPage: React.FC = () => {
             <p className="text-gray-600 dark:text-gray-300 text-sm">Use one of the providers below. You can link more providers later in your account.</p>
           </CardHeader>
           <CardContent className="space-y-3 flex flex-col md:flex-col justify-center gap-2 pt-4 items-center max-w-md mx-auto">
-            <Button onClick={() => signInWithGooglePopup()} variant="default">
+            <Button onClick={() => signInWithGooglePopup()} variant="outline">
               <span className="flex items-center gap-2"><HugeiconsIcon icon={GoogleIcon} className="h-4 w-4"/> Continue with Google</span>
             </Button>
-            <Button onClick={() => signInWithGithubPopup()} variant="default">
+            <Button onClick={() => signInWithGithubPopup()} variant="outline">
               <span className="flex items-center gap-2"><HugeiconsIcon icon={GithubIcon} className="h-4 w-4"/> Continue with GitHub</span>
             </Button>
           </CardContent>
@@ -243,7 +241,7 @@ const JoinPage: React.FC = () => {
                 </label>
               </div>
               <div className="flex justify-end">
-                <Button disabled={saving || !privacyAccepted} onClick={handleSave}>{saving ? 'Saving...' : 'Save & Become Member'}</Button>
+                <Button variant="outline" disabled={saving || !privacyAccepted} onClick={handleSave}>{saving ? 'Saving...' : 'Save & Become Member'}</Button>
               </div>
             </CardContent>
           </Card>

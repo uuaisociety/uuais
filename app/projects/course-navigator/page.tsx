@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
+import HeroSplash from '@/components/HeroSplash';
 import { updatePageMeta } from '@/utils/seo';
 
 export default function CourseNavigatorPage() {
@@ -12,11 +13,11 @@ export default function CourseNavigatorPage() {
     updatePageMeta('Course Navigator', 'AI-powered course recommendations for Uppsala University students');
   }, []);
   return (
-    <div className="min-h-screen pt-18 pb-8 bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background pt-24 pb-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           href="/projects"
-          className="inline-flex items-center text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 mb-8"
+          className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors"
         >
           <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -24,25 +25,27 @@ export default function CourseNavigatorPage() {
           Back to Projects
         </Link>
 
-        {/* Hero CTA Section */}
-        <div className="bg-gradient-to-br from-red-600 via-red-700 to-red-800 dark:from-red-700 dark:via-red-800 dark:to-red-900 rounded-lg p-8 mb-8 text-white text-center">
-          <h1 className="text-4xl font-bold mb-4">
-            Course Navigator
-          </h1>
-          <p className="text-xl text-red-100 dark:text-red-200 mb-6 max-w-2xl mx-auto">
-            Discover courses at Uppsala University using AI-powered recommendations. Search with natural language and explore course connections.
-          </p>
-          <Link href="/explore" className="inline-block">
-            <Button
-              size="lg"
-              className="bg-white hover:bg-gray-100 dark:text-black px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
-              variant="cta"
-            >
-              Launch Course Navigator
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
-        </div>
+        {/* Hero CTA Section — theme-aware slab matching the landing page */}
+        <HeroSplash className="rounded-lg py-4 mb-4">
+          <div className="relative z-10 px-6 sm:px-10 py-16 text-center">
+            <p className="mono-label text-current/45 mb-6">UU AI Society · Project</p>
+            <h1 className="display-lg mb-5">
+              Course Navigator
+            </h1>
+            <p className="text-base sm:text-lg text-current/60 max-w-2xl mx-auto leading-relaxed mb-8">
+              Discover courses at Uppsala University using AI-powered recommendations. Search with natural language and explore course connections.
+            </p>
+            <Link href="/explore" className="inline-block">
+              <Button
+                size="lg"
+                className="dark:bg-white dark:text-ink dark:hover:brightness-95 shadow-lg hover:shadow-xl transition-all"
+              >
+                Launch Course Navigator
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          </div>
+        </HeroSplash>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
@@ -52,21 +55,22 @@ export default function CourseNavigatorPage() {
                 src="/images/campus.png"
                 alt="Course Navigator Preview"
                 fill
+                sizes="(max-width: 1024px) 100vw, 66vw"
                 className="object-cover"
               />
             </div>
 
             <div className="prose dark:prose-invert max-w-none">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-xl font-semibold text-foreground mb-4">
                 About This Project
               </h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 Course Navigator is an AI-powered tool designed to help students at Uppsala University
                 navigate their course options and make informed decisions about their academic path. 
                 With the increasing number of courses and specializations available, finding the right 
                 combination can be overwhelming.
               </p>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 Our goal is to create a recommendation system that takes into account 
                 your interests, career goals, and academic background to suggest the most suitable 
                 courses and pathways.
@@ -148,10 +152,10 @@ export default function CourseNavigatorPage() {
                 </div>
               </div>
               */}
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              <h2 className="text-xl font-semibold text-foreground mb-4">
                 Features Coming Soon
               </h2>
-              <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
+              <ul className="list-disc list-inside text-muted-foreground space-y-2 leading-relaxed">
                 <li>Integration with UU course catalog</li>
                 <li>Course visualization</li>
                 <li>Peer recommendations based on similar backgrounds</li>
@@ -161,35 +165,31 @@ export default function CourseNavigatorPage() {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 sticky top-24">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+            <div className="glass rounded-lg p-6 sticky top-24">
+              <h3 className="text-lg font-semibold text-foreground mb-4">
                 Project Details
               </h3>
               <dl className="space-y-4">
                 <div>
-                  <dt className="text-sm text-gray-500 dark:text-gray-400">Status</dt>
-                  <dd className="text-gray-900 dark:text-white font-medium">In Development</dd>
+                  <dt className="mono-label text-muted-foreground">Status</dt>
+                  <dd className="text-foreground font-medium">In Development</dd>
                 </div>
                 <div>
-                  <dt className="text-sm text-gray-500 dark:text-gray-400">Team</dt>
-                  <dd className="text-gray-900 dark:text-white font-medium">UU AI Society Dev Team</dd>
+                  <dt className="mono-label text-muted-foreground">Team</dt>
+                  <dd className="text-foreground font-medium">UU AI Society Dev Team</dd>
                 </div>
                 <div>
-                  <dt className="text-sm text-gray-500 dark:text-gray-400">Tech Stack</dt>
-                  <dd className="text-gray-900 dark:text-white font-medium">Next.js, TypeScript, AI/LLM</dd>
+                  <dt className="mono-label text-muted-foreground">Tech Stack</dt>
+                  <dd className="text-foreground font-medium">Next.js, TypeScript, AI/LLM</dd>
                 </div>
               </dl>
 
-              <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <Link
-                  href="mailto:dev@uuais.com"
-                  className="block w-full text-center px-4 py-2 text-white font-medium rounded-lg transition-colors"
-
-                >
-                  <Button className="h-fill w-full">
+              <div className="mt-6 pt-6 border-t border-border">
+                <Button asChild variant="secondary" className="w-full">
+                  <Link href="mailto:dev@uuais.com">
                     Contact the Team
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>

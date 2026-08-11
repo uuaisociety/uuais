@@ -13,12 +13,12 @@ describe('Footer', () => {
 
   it('renders description', () => {
     render(<Footer />)
-    expect(screen.getByText(/Connecting students passionate about Artificial Intelligence/)).toBeInTheDocument()
+    expect(screen.getByText(/Connecting students passionate about artificial intelligence/)).toBeInTheDocument()
   })
 
   it('renders quick links', () => {
     render(<Footer />)
-    expect(screen.getByText('Quick Links')).toBeInTheDocument()
+    expect(screen.getByText('Navigation')).toBeInTheDocument()
     expect(screen.getAllByText('Home')[0]).toBeInTheDocument()
     expect(screen.getByText('Events')).toBeInTheDocument()
     expect(screen.getByText('Job board')).toBeInTheDocument()
@@ -40,7 +40,7 @@ describe('Footer', () => {
 
   it('renders privacy policy link', () => {
     render(<Footer />)
-    expect(screen.getByText('Privacy Policy')).toBeInTheDocument()
+    expect(screen.getByText('Privacy policy')).toBeInTheDocument()
   })
 
   it('renders organization number', () => {

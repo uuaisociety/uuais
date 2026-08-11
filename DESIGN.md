@@ -1,305 +1,219 @@
-# DESIGN.md — UI/UX Style Guide for LLM Agents
-
-If doing frontend work, start by reading this file first.
-
+---
+name: UU AI Society
+description: Editorial liquid-glass site for Uppsala University AI Society
+colors:
+  primary: "oklch(0.565 0.208 27.5)"
+  primary-foreground: "oklch(0.99 0.002 95)"
+  warm-paper: "oklch(0.983 0.004 95)"
+  cool-ink: "oklch(0.18 0.012 265)"
+  muted-ink: "oklch(0.505 0.014 265)"
+  warm-ink: "oklch(0.16 0.02 20)"
+  surface-white: "oklch(1 0 0)"
+  destructive: "oklch(0.565 0.208 27.5)"
+typography:
+  display:
+    fontFamily: "Instrument Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2.75rem, 7vw, 5.5rem)"
+    fontWeight: 600
+    lineHeight: 0.96
+    letterSpacing: "-0.038em"
+  headline:
+    fontFamily: "Instrument Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2rem, 4.4vw, 3.25rem)"
+    fontWeight: 600
+    lineHeight: 1.02
+    letterSpacing: "-0.032em"
+  title:
+    fontFamily: "Instrument Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "1.0625rem"
+    fontWeight: 600
+    lineHeight: 1.3
+    letterSpacing: "-0.028em"
+  body:
+    fontFamily: "Instrument Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.9375rem"
+    fontWeight: 400
+    lineHeight: 1.6
+  label:
+    fontFamily: "Martian Mono, ui-monospace, monospace"
+    fontSize: "0.6875rem"
+    fontWeight: 500
+    letterSpacing: "0.12em"
+rounded:
+  sm: "3px"
+  md: "4px"
+  lg: "6px"
+  xl: "8px"
+  pill: "9999px"
+spacing:
+  xs: "4px"
+  sm: "8px"
+  md: "16px"
+  lg: "24px"
+  xl: "32px"
+components:
+  button-primary:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.primary-foreground}"
+    rounded: "{rounded.md}"
+    padding: "20px 16px"
+  button-outline:
+    backgroundColor: "transparent"
+    textColor: "{colors.cool-ink}"
+    rounded: "{rounded.md}"
+    padding: "20px 16px"
+  button-ghost:
+    backgroundColor: "transparent"
+    textColor: "{colors.cool-ink}"
+    rounded: "{rounded.md}"
+    padding: "20px 16px"
+  glass-card:
+    backgroundColor: "oklch(1 0 0 / 0.62)"
+    textColor: "{colors.cool-ink}"
+    rounded: "{rounded.xl}"
+  input-field:
+    backgroundColor: "{colors.surface-white}"
+    textColor: "{colors.cool-ink}"
+    rounded: "{rounded.md}"
+    padding: "8px 12px"
+  nav-link:
+    backgroundColor: "transparent"
+    textColor: "{colors.cool-ink}"
+    rounded: "{rounded.sm}"
 ---
 
-## Page Layout
+# Design System: UU AI Society
 
-```
-min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 transition-colors duration-300
-  max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
-```
+## Overview
 
-- `max-w-7xl` = standard, `max-w-4xl` = detail pages, `max-w-5xl` = account
-- `pt-24` for fixed navbar offset
-- Dark mode transition on root: `transition-colors duration-300`
+**Creative North Star: "The Frosted Society Notebook"**
 
-## Typography
+The site reads as a student society's editorial notebook pressed under frosted glass — tight display headings and mono metadata floating above soft ambient colour, with every surface a translucent pane that picks up the light behind it. It is warm, precise, and quietly confident: the paper is never pure white, the red is never a hard alert, and the ink is slightly cool where it types and slightly warm where it slabs.
 
-| Element | Classes |
-|---|---|
-| Page title (`h1`) | `text-3xl font-bold text-gray-900 dark:text-white` |
-| Section heading (`h2`) | `text-xl font-semibold text-gray-900 dark:text-white` |
-| Card heading (`h3`/`h4`) | `text-lg font-semibold text-gray-900 dark:text-white` |
-| Body text | `text-gray-700 dark:text-gray-300` |
-| Muted text | `text-gray-500 dark:text-gray-400` |
-| Label | `text-sm font-medium text-gray-500 dark:text-gray-400` |
-| Form label | `text-xs font-medium text-gray-700 dark:text-gray-300` |
-| Form hint | `text-[11px] font-normal text-gray-500` |
+Light mode is a warm paper page with near-white glass cards; dark mode is a cool ink page with darker glass. The hero and navigation stay a deep warm ink in both themes so the landing reads as one continuous slab. Density is editorial — generous section spacing (`pt-24`/`sm:pt-32`), hairline borders, and one accent colour used sparingly (on hover, on the `(paren)` accent word, and on primary actions only). The system deliberately avoids gradients, glows, and card-bloat: depth comes from blur, specular hairlines, and soft lifted shadows, not from filling surfaces with colour.
+
+**Key Characteristics:**
+- Warm paper / cool ink neutrals, one deepened brand red
+- Liquid-glass surfaces: translucent fill + `backdrop-filter` blur + specular top edge + soft shadow
+- Editorial typography: tight `Instrument Sans` display, `Martian Mono` for metadata/pills
+- The `(parenthetical)` accent word — red, inline, the signature flourish
+- Dark ink hero + nav slab in both themes
+- No gradients, no glow, motion is springy-but-not-bouncy (`--ease-ios`)
 
 ## Colors
 
-- **Brand accent:** `red-600` (light) / `red-400` (dark)
-- **Links:** `text-blue-600 dark:text-blue-400 hover:underline`
-- **Success:** `text-green-600` / `bg-green-600`
-- **Warning:** `text-amber-600`
-- **Destructive:** `red` (for delete/danger actions)
-- **Dark mode bg:** page `gray-900`, cards `gray-800`, inputs `gray-700`
-- **Dark mode text:** body `gray-300`, muted `gray-400`
-
-## Dark Mode Pattern
-
-Every color class needs its `dark:` counterpart:
-- `text-gray-700 dark:text-gray-300`
-- `text-gray-500 dark:text-gray-400`
-- `bg-white dark:bg-gray-800`
-- `border-gray-200 dark:border-gray-700`
-- `hover:bg-gray-100 dark:hover:bg-gray-800`
-
-## Card Component
-
-```tsx
-import { Card, CardContent, CardHeader } from "@/components/ui/Card";
-// Card already has: bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-sm rounded-lg
-
-// List page card (clickable, hover effect):
-<Card className="h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 ...">
-
-// Admin/static card (no hover):
-<Card>...</Card>
-```
-
-## Button Component
-
-```tsx
-import { Button } from "@/components/ui/Button";
-
-// Common variants:
-<Button>Default</Button>
-<Button variant="outline">Outline</Button>
-<Button variant="destructive" icon={Trash2}>Delete</Button>
-<Button variant="ghost">Ghost</Button>
-<Button size="sm">Small</Button>
-<Button size="lg" icon={Download}>CSV</Button>
-
-// Button already has: transition-all duration-300 ease-in-out shadow-lg
-```
-
-## Form Fields
+The palette is a warm/cool neutral pair (paper + ink) with a single deepened brand red. Glass surfaces derive their tone by overlaying these over the ambient field at low opacity.
 
-```tsx
-import { FieldGroup, InputBase, SelectBase, TextareaBase } from "@/components/ui/Form";
+### Primary
+- **Society Red** (`oklch(0.565 0.208 27.5)`): the only accent. Used for primary buttons, the `(paren)` accent word, hover tints on card titles/links, active nav underline states, focus rings, and the rank-#1 badge. Deliberately deepened so it reads as ink rather than alarm.
 
-<FieldGroup label="Name" requiredHint="Required.">
-  <InputBase placeholder="e.g. Alex" value={val} onChange={fn} />
-</FieldGroup>
-
-<FieldGroup label="Status" requiredHint="Optional">
-  <SelectBase value={val} onChange={fn}>
-    <option value="student">Student</option>
-    <option value="alumni">Alumni</option>
-  </SelectBase>
-</FieldGroup>
-
-<FieldGroup label="Bio" requiredHint="Optional">
-  <TextareaBase placeholder="Write a short bio" value={val} onChange={fn} />
-</FieldGroup>
-```
-
-- Form grid: `grid md:grid-cols-2 gap-4`
-- Checkbox: `<label className="flex items-center gap-2 text-gray-800 dark:text-gray-200"><input type="checkbox" ... />Label</label>`
-
-## Grid Layouts
-
-| Grid | Use case |
-|---|---|
-| `grid md:grid-cols-2 lg:grid-cols-3 gap-8` | Card listings (events, blogs, courses) |
-| `grid md:grid-cols-2 lg:grid-cols-4 gap-8` | Feature cards (homepage) |
-| `grid md:grid-cols-2 gap-6` | Two-column admin charts/forms |
-| `grid md:grid-cols-3 gap-6` | Account page sidebar layout |
-| `grid sm:grid-cols-2 lg:grid-cols-4 gap-4` | Stat cards |
-
-## Icons
-
-```tsx
-import { Calendar, Download, ArrowLeft, Edit3 } from "lucide-react";
-
-// Sizes: h-4 w-4 (inline/button), h-5 w-5 (medium), h-6 w-6 (section)
-<Calendar className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
-
-// Button icon prop automatically renders size-4
-<Button icon={Download}>CSV</Button>
-```
-
-## Tables
-
-Admin tables (raw, no shadcn Table component needed for simple cases):
-
-```tsx
-<table className="min-w-full text-sm">
-  <thead>
-    <tr className="text-left text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
-      <th className="py-2 pr-4">Column</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr className="border-b border-gray-100 dark:border-gray-700/50 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
-      <td className="py-2 pr-4">Value</td>
-    </tr>
-  </tbody>
-</table>
-```
-
-- Clickable rows: add `cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors`
-
-## Loading States
-
-- **Skeleton:** `<div className="animate-pulse bg-gray-200 dark:bg-gray-700 rounded h-8 w-1/2" />`
-- **Button loading:** Button already supports `isLoading` prop (spinner built-in)
-- **Text:** "Loading…" in `text-gray-500 dark:text-gray-400`
-
-## Notifications
-
-```tsx
-import { useNotify } from "@/components/ui/Notifications";
-const { notify } = useNotify();
-notify({ type: 'success', title: 'Saved', message: 'Done.' });  // type: success|error|info|warning
-```
-
-## ErrorBoundary
-
-```tsx
-import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
-
-// Wrap any section that fetches or renders dynamic content:
-<ErrorBoundary>
-  <EventsList />
-</ErrorBoundary>
-
-// Custom fallback:
-<ErrorBoundary fallback={<p className="text-gray-500">Failed to load.</p>}>
-  <EventsList />
-</ErrorBoundary>
-```
-
-Default fallback renders a `Card` with red error text. The component catches rendering errors in its children to prevent the entire page from crashing.
-
-## Links
-
-```tsx
-import Link from "next/link";
-
-// Navigation: text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400
-// Content in text: text-blue-600 dark:text-blue-400 hover:underline
-// Card title: hover:text-red-600 dark:hover:text-red-400 transition-colors
-```
-
-## Transitions, Hover Effects & Animations
-
-### Page-Level Transitions
-
-| Element | Classes | File Pattern |
-|---|---|---|
-| Dark mode body | `transition-colors duration-300` | `app/layout.tsx:body` |
-| Page container | `transition-colors duration-300` | Every page wrapper |
-| Header bg swap | `transition-all duration-300` | `components/layout/Header.tsx` |
-| Header nav items | `transition-colors duration-200` | `Header.tsx` nav links |
-
-Page-level pages do NOT use framer-motion or any page-transition library — rely on Next.js built-in navigation with CSS transitions on elements.
-
-### Card Hover Effects
-
-```tsx
-// Major card (listing pages — events, blogs, team, courses):
-className="h-full hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
-
-// Minor card (related content, sidebars):
-className="hover:shadow-lg transition-shadow"
-
-// Card with group-hover for child elements:
-<Card className="group hover:shadow-2xl hover:scale-105 transition-all duration-300">
-  <Icon className="group-hover:scale-110 transition-transform duration-300" />
-  <h3 className="group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors" />
-</Card>
-```
-
-### Link & Text Hover Effects
-
-| Context | Hover classes | Example file |
-|---|---|---|
-| Content links | `text-blue-600 dark:text-blue-400 hover:underline` | `events/[id]/page.tsx` |
-| Card titles | `hover:text-red-600 dark:hover:text-red-400 transition-colors` | `BlogPage.tsx` |
-| Navigation | `hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20` | `Header.tsx` |
-| Footer links | `hover:text-white transition-colors` | `Footer.tsx` |
-| Analytics table rows | `hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors` | `EventsTab.tsx` |
-
-### Button Animations
-
-Built into `Button` component:
-- Base: `transition-all duration-300 ease-in-out`
-- CTA variant: `hover:shadow-xl hover:scale-[1.02] active:scale-[0.99]`
-- Loading: `<div className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />`
-- All variants have `disabled:pointer-events-none disabled:opacity-50`
-
-### Dropdown & Panel Animations
-
-```tsx
-// Standard dropdown (Header, StyledSelect):
-className="transition-all duration-200 overflow-hidden animate-in fade-in slide-in-from-top-2 z-50"
-
-// Accordion icon rotation:
-[&[data-state=open]>svg]:rotate-180  // accordion.tsx
-[data-state=open].rotate-180         // StyledSelect.tsx
-```
-
-### Loading & Skeleton Animations
-
-```tsx
-// Skeleton placeholder — animate-pulse:
-<div className="animate-pulse space-y-6">
-  <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
-  <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded" />
-  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
-</div>
-
-// Button spinner (built-in Button isLoading prop):
-<div className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-
-// Loading spinner standalone:
-import LoadingSpinner from "@/components/common/LoadingSpinner";
-<LoadingSpinner size="md" />  // sizes: sm(h-4), md(h-8), lg(h-12)
-```
-
-### Recharts Chart Transitions
-
-Charts use `recharts` which animates on mount by default. No custom animation config needed. When data updates, charts re-animate their series.
-
-### Transition Cheat Sheet
-
-| Purpose | Classes |
-|---|---|
-| Card hover (major) | `hover:shadow-2xl hover:scale-105 transition-all duration-300` |
-| Card hover (mild) | `hover:shadow-lg transition-shadow` |
-| Group icon scale | `group-hover:scale-110 transition-transform duration-300` |
-| Group title color | `group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors` |
-| Color change | `transition-colors duration-300` |
-| General transform | `transition-all duration-300` |
-| Fast color | `transition-colors duration-200` |
-| Button | Built into Button component |
-| Header | `transition-all duration-300` |
-| Dropdown open | `transition-all duration-200 animate-in fade-in slide-in-from-top-2` |
-| Accordion icon | `[&[data-state=open]>svg]:rotate-180 transition-transform` |
-| Loading pulse | `animate-pulse` |
-| Loading spin | `animate-spin` |
-| Disabled fade | `disabled:pointer-events-none disabled:opacity-50` |
-
-## Confirm Modal
-
-```tsx
-<ConfirmModal
-  open={boolean}
-  title="Confirm action"
-  description="Are you sure?"
-  confirmText="Yes"
-  cancelText="Cancel"
-  onClose={() => setState(false)}
-  onConfirm={async () => { ... }}
-/>
-```
-
-## Mobile Responsiveness
-
-- Always: `px-4 sm:px-6 lg:px-8` on containers
-- Use `hidden md:flex` / `md:hidden` for responsive nav
-- Use `grid md:grid-cols-2 lg:grid-cols-3 gap-8` for responsive card grids
+### Neutral
+- **Warm Paper** (`oklch(0.983 0.004 95)`): the light-mode page background. Never pure white — it gives glass something warm to tint against.
+- **Cool Ink** (`oklch(0.18 0.012 265)`): light-mode foreground text. Slightly cool to contrast the warm paper.
+- **Muted Ink** (`oklch(0.505 0.014 265)`): secondary text, labels, metadata, placeholders.
+- **Surface White** (`oklch(1 0 0)`): opaque cards and inputs on light mode.
+- **Warm Ink** (`oklch(0.16 0.02 20)`): the dark slab colour for the hero and glass-nav in both themes. Warmer than the type ink so dark surfaces feel substantial, not sterile.
+- **Dark Paper** (`oklch(0.155 0.012 265)`): dark-mode page background.
+- **Dark Card** (`oklch(0.205 0.014 265)`): dark-mode card surface.
+- **Hairline** (`oklch(0.18 0.012 265 / 10%)` light, `oklch(1 0 0 / 11%)` dark): the default border — a translucent hairline, never a solid grey line.
+
+### Named Rules
+**The Rarity Rule.** The brand red appears on a small fraction of any screen: the accent word, one hover, one primary action. Its scarcity is what makes it read as accent.
+**The One-Ink Rule.** Text is either the ink (`cool-ink` / light-on-dark) or a translucent version of it. Never introduce a second text colour — blue links, purple links, and rainbow emphasis are rejected.
+
+## Typography
+
+**Display Font:** Instrument Sans (with system-ui, sans-serif fallback)
+**Body Font:** Instrument Sans (same family — the scale does the work)
+**Label/Mono Font:** Martian Mono (with ui-monospace, monospace fallback)
+
+**Character:** A grotesque display face set tight and large for editorial confidence, paired with a technical monospace for anything that is *data* rather than prose — eyebrows, metadata, pills, timestamps. The pairing says "society newsletter" not "corporate SaaS".
+
+### Hierarchy
+- **Display** (semibold, `clamp(2.75rem, 7vw, 5.5rem)`, 0.96 lh, `-0.038em`): hero headlines only, on the dark ink slab. The `display-xl` class.
+- **Headline** (semibold, `clamp(2rem, 4.4vw, 3.25rem)`, 1.02 lh, `-0.032em`): section opens, page titles on light surfaces. `display-lg`.
+- **Title** (semibold, `1.0625rem`, ~1.3 lh, `-0.028em`): card titles, list headings. Tight tracking on all headings (`-0.028em` base for h2–h4).
+- **Body** (regular, `0.9375rem`, 1.6 lh): reading text, `text-muted-foreground` on light or `text-white/60` on ink slabs. Measure ~65ch.
+- **Label** (mono, 500, `0.6875rem`, `0.12em`, uppercase): eyebrows ("UPPSALA UNIVERSITY · AI SOCIETY"), section kickers, pills, form hints, table metadata. The `mono-label` class.
+
+### Named Rules
+**The Data-Versus-Prose Rule.** If it's a number, timestamp, tag, or eyebrow, set it in mono. If it's a sentence, set it in sans. Mixed usage is the signal that separates metadata from content.
+**The Parenthetical Rule.** Emphasise the second word of a title by wrapping it in parentheses and setting it in the brand red (`(Start here.)`, `(Upcoming) Events`). The paren is the signature accent — use it on headings, not body copy.
+
+## Layout
+
+The layout is a centered editorial column with generous vertical rhythm. Containers are `max-w-7xl` for full pages, `max-w-6xl` for content sections, `max-w-4xl`/`max-w-3xl` for focused flows (apply, check-in), `max-w-2xl` for dialogs, and `max-w-md` for small modals. Page padding is `px-4 sm:px-6 lg:px-8`; sections sit `pt-24`/`sm:pt-32` apart. The fixed header is `h-14` (56px) with a constant spacer so page chrome never shifts on scroll.
+
+Card grids follow the content: events/blogs/courses use `grid sm:grid-cols-2 lg:grid-cols-3 gap-5`; feature/pillar layouts use hairlines and numbered mono rows rather than card grids. Responsive behavior is mobile-first — single column, `md:`/`lg:` add columns. Dark mode is a class on `<html>` (`.dark`) with `transition-colors duration-300` on the body and page wrappers.
+
+## Elevation & Depth
+
+The system is **layered, not shadowy**. Depth comes from translucent glass over an ambient colour field: panels blur and saturate what's behind them (`backdrop-filter: blur(20px) saturate(180%)`), carry a brighter specular hairline along the top edge, and cast a soft, diffuse shadow. Flat surfaces stay flat; shadows are a response to *surface*, not a decoration applied to everything.
+
+### Shadow Vocabulary
+- **glass-shadow** (`0 1px 2px oklch(0.18 0.012 265 / 5%), 0 12px 32px -8px oklch(0.18 0.012 265 / 12%)`): the resting glass surface.
+- **glass-shadow-lifted** (`0 2px 4px … / 6%, 0 24px 56px -12px … / 18%`): hover/lifted glass — used by `.glass-interactive` on hover and `glass-pop` popovers.
+- **glass-pop-shadow** (dark, deeper): floating dropdowns/popovers.
+
+### Named Rules
+**The Layered-Not-Lifted Rule.** Elevation is expressed with backdrop blur + a specular hairline + a soft shadow together. Never a hard offset block shadow, never a glow.
+**The Springy-Never-Bouncy Rule.** All motion uses `--ease-ios` (`cubic-bezier(0.32, 0.72, 0, 1)`) — a fast, natural deceleration. Hover lifts `-3px`, press scales to `0.995`.
+
+## Shapes
+
+The form language is tight and near-square — a quiet, editorial corner scale rather than heavy pill radii. The scale runs `--radius-sm: 3px`, `md: 4px`, `lg: 6px`, `xl: 8px`, `2xl: 12px`. Buttons are `rounded-md` (4px); glass cards and surfaces are `rounded-xl` (8px); pills/tags are `rounded-sm` (3px) with mono uppercase type (the `.pill` class) — only real chips like status tags use a fuller radius. Borders are 1px translucent hairlines (`--border`). The one deliberate exception is the hero: a full-bleed ink slab with no corner radius, so it reads as the page's foundation rather than a card.
+
+## Components
+
+### Buttons
+- **Shape:** Pill geometry, `rounded-md` (4px), medium weight, `-0.01em` tracking. Press feedback is a small `active:scale-[0.97]` — the iOS cue — not a glow.
+- **Primary:** brand red fill (`--primary`) with near-white text, an inset top highlight and a faint drop shadow. Hover brightens (`hover:brightness-110`). Used for the one main action per screen.
+- **Outline:** transparent fill, hairline border, ink text; hover fills `foreground/[0.045]`. Secondary actions (Read more, Cancel, Back).
+- **Ghost:** bare text at 75% ink, hover to full ink with a faint fill.
+- **Glass (`cta`):** the liquid-glass button — `glass glass-sheen glass-interactive`. Reserved for hero/on-ink CTA moments.
+- **States:** focus-visible ring (`ring-ring`), disabled at `opacity-45` with pointer-events off, `isLoading` shows a built-in spinner. Sizes: `sm` h-8, default h-10, `lg` h-11, `xl` h-13.
+
+### Cards / Containers
+- **Corner Style:** `rounded-xl` (8px).
+- **Background:** translucent `bg-card/70` by default (no blur unless `glass`), or opaque `bg-card` where content needs a solid base. The `glass` variant is the full frosted treatment.
+- **Shadow Strategy:** glass-shadow at rest; `glass-interactive` lifts to the lifted shadow on hover with a `-3px` translate.
+- **Border:** 1px hairline (`--border`).
+- **Internal Padding:** `p-4`/`p-6`/`p-8` scale.
+
+### Chips & Tags
+- **Style:** `rounded-sm` (3px), mono uppercase 0.6875rem, letter-spacing 0.12em, weight 500.
+- **Variants:** `red` (primary/10 tint + primary text), `blue`/`green`/`yellow` (chart-token tints), `gray` (foreground/6–8% tint). The `pill` class is the dark glass chip used over imagery (event category, project status) — `bg-black/45 backdrop-blur-md text-white`.
+
+### Inputs / Fields
+- **Style:** hairline border, warm-white fill, `rounded-md` (4px), `px-3 py-2`.
+- **Focus:** `focus:ring-2 focus:ring-ring` (brand red at 45%), border shifts to the ring colour. `FieldGroup` wraps a control in a real `<label>` for accessible naming; `requiredHint` renders the small mono hint.
+- **Error / Disabled:** error border tints red; disabled renders borderless, transparent, and non-interactive.
+
+### Navigation
+- **The header** is a fixed, theme-aware glass bar (`glass-nav`): light frosted in light mode, dark ink in dark mode, `h-14` with a 24px blur. It follows the theme on every page.
+- **Type:** mono-label for Register/Login/Logout, sans medium for nav links, `text-current/60` resting → full on hover.
+- **Active:** a translucent current-colour fill (`bg-current/[0.12]`) with full-strength text.
+- **Mobile:** hamburger opens a menu that inherits the header's glass surface (no separate opaque panel), `lg:` reveals the full desktop nav. The dropdown/popover (`glass-pop`) is a stronger frosted panel — `blur(40px)`, more opaque, own shadow.
+
+### Modals
+- **Shell:** `rounded-lg`, `bg-white dark:bg-gray-800`, `p-6`, `max-h-[90vh] overflow-y-auto`, `shadow-xl`, sized `sm`–`xl` (max-w-md → max-w-6xl).
+- **Overlay:** `bg-black/50`. Built on Radix Dialog for focus trap, Escape-to-close, and focus restore.
+- **Close:** a 36px icon button (`size-9`) with `aria-label="Close dialog"`.
+
+## Do's and Don'ts
+
+### Do:
+- **Do** set page and section backgrounds with the tokens (`bg-background`, `bg-card`, `text-foreground`, `text-muted-foreground`, `border-border`) — the oklch token system is the single source of truth.
+- **Do** use `glass` + `glass-interactive` for major listing cards, and the hairline+ambient treatment for quieter surfaces.
+- **Do** keep the brand red rare — one accent per screen, at most.
+- **Do** lead section and page titles with a `mono-label` eyebrow and use the `(paren)` accent word for the second term of a display heading.
+- **Do** let the header and mobile menu adopt the theme: light frosted in light mode, dark ink in dark mode — on every page, including the home hero.
+- **Do** set small metadata (dates, tags, counts, labels) in `Martian Mono`.
+
+### Don't:
+- **Don't** reintroduce hard-coded `#990000`-style reds, raw `oklch(...)` literals, or the legacy `bg-gray-50 dark:bg-gray-900` page wrappers — remap them to tokens.
+- **Don't** use red/gradient hero backgrounds (`from-red-600 via-red-700 to-red-800`). Heroes are dark ink slabs with an interior radial glow, or nothing.
+- **Don't** use `border-l-4` side-tab accents, bounce/elastic easing, or gradient text — all rejected.
+- **Don't** add a second text colour (blue links etc.) or place grey text on the red accent; on colour, use the surface's own ink or near-white.
+- **Don't** paint a solid opaque panel for the mobile menu — it inherits the header's glass so it blurs what's behind it.
+- **Don't** ship an unlabeled icon button or an unlabeled form control; use `aria-label` or a wrapping `FieldGroup`.

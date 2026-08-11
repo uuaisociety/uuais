@@ -190,19 +190,19 @@ const TeamRanker: React.FC<TeamRankerProps> = ({
                       placeholder="Describe your proposed team / interest"
                       value={customTeam}
                       onChange={(e) => onCustomTeamChange(e.target.value)}
-                      className="flex-1 px-2 py-1 text-sm rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                      className="flex-1 px-2 py-1 text-sm rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-300"
                     />
                   ) : (
                     <span className="flex-1 text-sm font-medium text-gray-900 dark:text-white">{entry.name}</span>
                   )}
                   <div className="shrink-0 flex items-center gap-1">
-                    <button type="button" onClick={() => move(idx, idx - 1)} disabled={idx === 0} className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move up" aria-label={`Move ${entry.name} up`}>
+                    <button type="button" onClick={() => move(idx, idx - 1)} disabled={idx === 0} className="p-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move up" aria-label={`Move ${entry.name} up`}>
                       <ArrowUp className="h-4 w-4" />
                     </button>
-                    <button type="button" onClick={() => move(idx, idx + 1)} disabled={idx === ranking.length - 1} className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move down" aria-label={`Move ${entry.name} down`}>
+                    <button type="button" onClick={() => move(idx, idx + 1)} disabled={idx === ranking.length - 1} className="p-2.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-30 transition-colors" title="Move down" aria-label={`Move ${entry.name} down`}>
                       <ArrowDown className="h-4 w-4" />
                     </button>
-                    <button type="button" onClick={() => removeTeam(entry.id)} className="p-2 text-red-500 hover:text-red-600 transition-colors" title="Remove from preferences" aria-label={`Remove ${entry.name}`}>
+                    <button type="button" onClick={() => removeTeam(entry.id)} className="p-2.5 text-red-500 hover:text-red-600 transition-colors" title="Remove from preferences" aria-label={`Remove ${entry.name}`}>
                       <X className="h-4 w-4" />
                     </button>
                   </div>

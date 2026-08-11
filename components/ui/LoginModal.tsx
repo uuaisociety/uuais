@@ -20,10 +20,10 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
                     <p className="text-gray-600 dark:text-gray-300 text-sm text-center">Please login using one of the providers below to continue.</p>
                 </div>
                 <div className="space-y-3 gap-1 flex flex-col justify-center">
-                    <Button onClick={() => signInWithGooglePopup().then(after)}>
+                    <Button variant="outline" onClick={() => signInWithGooglePopup().then(after)}>
                         <span className="flex items-center gap-2"><HugeiconsIcon icon={GoogleIcon} className="h-4 w-4" /> Continue with Google</span>
                     </Button>
-                    <Button onClick={() => signInWithGithubPopup().then(after)}>
+                    <Button variant="outline" onClick={() => signInWithGithubPopup().then(after)}>
                         <span className="flex items-center gap-2"><HugeiconsIcon icon={GithubIcon} className="h-4 w-4" /> Continue with GitHub</span>
                     </Button>
                     {/* <Button onClick={() => signInWithMicrosoftPopup().then(after)}>

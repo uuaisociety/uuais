@@ -23,10 +23,11 @@ export default function SearchBar({ placeholder = "Search courses...", onSearch,
       <Input
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        label="Search courses"
         placeholder={placeholder}
         fullWidth
       />
-      <Button type="submit" className="bg-[#990000] hover:bg-[#7f0000] text-white">Search</Button>
+      <Button type="submit">Search</Button>
     </form>
   );
 }

@@ -198,7 +198,7 @@ export default function AccountPage() {
                       {(r.status === 'registered' || r.status === 'waitlist' || r.status === 'invited') && (
                         <Button
                           size="sm"
-                          className="bg-red-600/80 hover:bg-red-600 text-white"
+                          variant="outline"
                           onClick={() => setConfirmRegId(r.id)}
                         >
                           Cancel
@@ -304,7 +304,7 @@ export default function AccountPage() {
               </div>
 
               <div className="flex justify-end">
-                <Button onClick={() => setIsEditing(true)}>Edit</Button>
+                <Button variant="outline" onClick={() => setIsEditing(true)}>Edit</Button>
               </div>
             </CardContent>
             ) : (
@@ -435,7 +435,7 @@ export default function AccountPage() {
               </div>
               <div className="flex justify-end gap-3">
                 <Button variant="outline" onClick={() => setConfirmCancel(true)}>Cancel</Button>
-                <Button onClick={handleSave}>Save</Button>
+                <Button variant="outline" onClick={handleSave}>Save</Button>
               </div>
             </CardContent>
             )}
@@ -452,7 +452,7 @@ export default function AccountPage() {
                 {isLinked.google ? (
                   <span className="text-green-600">Linked</span>
                 ) : (
-                  <Button onClick={() => handleLink("google")}>Link</Button>
+                  <Button variant="outline" onClick={() => handleLink("google")}>Link</Button>
                 )}
               </div>
               <div className="flex items-center justify-between">
@@ -460,7 +460,7 @@ export default function AccountPage() {
                 {isLinked.github ? (
                   <span className="text-green-600">Linked</span>
                 ) : (
-                  <Button onClick={() => handleLink("github")}>Link</Button>
+                  <Button variant="outline" onClick={() => handleLink("github")}>Link</Button>
                 )}
               </div>
               {/* <div className="flex items-center justify-between">
@@ -480,7 +480,7 @@ export default function AccountPage() {
               <p className="text-gray-600 dark:text-gray-300 text-sm">Manage your cookie preferences.</p>
             </CardHeader>
             <CardContent>
-              <Button onClick={() => CookieConsent.showPreferences()}>
+              <Button variant="outline" onClick={() => CookieConsent.showPreferences()}>
                 Change cookie settings
               </Button>
             </CardContent>

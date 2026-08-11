@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react';
+import { useTheme } from '@/providers/ThemeProvider';
 
 // === Types ===
 
@@ -24,6 +25,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
   const symbolsRef = useRef<FloatingSymbol[]>([]);
   const mousePosRef = useRef({ x: 0, y: 0 });
   const prevTsRef = useRef(0);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,14 +34,26 @@ const FloatingSymbolsCanvas: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // White glyphs on the ink slab, near-ink on the paper slab.
+    const glyphColor = theme === 'dark' ? 'rgba(255, 255, 255, 1)' : 'rgba(30, 28, 27, 1)';
+
     const dpr = window.devicePixelRatio || 1;
 
     const resize = () => {
       const r = canvas.getBoundingClientRect();
-      canvas.width = r.width * dpr;
-      canvas.height = r.height * dpr;
+      const w = Math.round(r.width * dpr);
+      const h = Math.round(r.height * dpr);
+      if (w === canvas.width && h === canvas.height) return;
+      canvas.width = w;
+      canvas.height = h;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
+
+    // Sync the backing store with the element whenever it resizes for any
+    // reason (font/image load, media-query reflow, mobile URL-bar, zoom) —
+    // window.resize alone misses those and leaves the drawing clipped.
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
     resize();
 
     // === Mouse Tracking ===
@@ -135,7 +149,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
         ctx.translate(Math.round(sym.x + sym.offsetX), Math.round(sym.y + sym.offsetY));
         ctx.rotate((sym.rotation * Math.PI) / 180);
         ctx.globalAlpha = Math.max(0, Math.min(1, opacity));
-        ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        ctx.fillStyle = glyphColor;
         ctx.font = '16px monospace';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -150,8 +164,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
       const dt = ts - prevTsRef.current;
       prevTsRef.current = ts;
 
-      const r = canvas.getBoundingClientRect();
-      ctx.clearRect(0, 0, r.width, r.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       draw(dt);
       animationRef.current = requestAnimationFrame(animate);
     };
@@ -159,19 +172,27 @@ const FloatingSymbolsCanvas: React.FC = () => {
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('click', handleClick);
-    animationRef.current = requestAnimationFrame(animate);
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!prefersReduced.matches) {
+      animationRef.current = requestAnimationFrame(animate);
+    } else {
+      draw(0);
+    }
 
     return () => {
       cancelAnimationFrame(animationRef.current);
+      ro.disconnect();
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [theme]);
 
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="absolute inset-0 w-full h-full pointer-events-none"
       style={{ width: '100%', height: '100%' }}
     />

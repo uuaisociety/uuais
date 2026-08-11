@@ -1,7 +1,5 @@
 'use client'
 
-// Disable static generation for this page
-export const dynamic = 'force-dynamic';
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -52,6 +50,7 @@ const BlogPage: React.FC = () => {
         {/* Search */}
         <div className="max-w-md mx-auto mb-12">
           <Input
+            label="Search articles"
             placeholder="Search articles..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}

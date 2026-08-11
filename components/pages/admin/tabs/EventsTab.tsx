@@ -190,7 +190,7 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
           Events Management
         </h2>
-        <Button icon={Plus} onClick={handleAddClick}>
+        <Button variant="outline" icon={Plus} onClick={handleAddClick}>
           Add New Event
         </Button>
       </div>
@@ -204,7 +204,7 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
             <CardContent className="p-6">
               <div className="flex items-start justify-between flex-col lg:flex-row">
                 <div className="flex-1">
-                  <div className="flex items-center space-x-3 mb-2">
+                  <div className="flex items-center space-x-3 mb-2 flex-wrap">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       {event.title}
                     </h3>

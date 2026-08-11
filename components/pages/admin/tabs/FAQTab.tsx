@@ -18,7 +18,7 @@ const FAQTab: React.FC<FAQTabProps> = ({ faqs, onAddClick, onEdit, onDelete }) =
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">FAQ Management</h2>
-        <Button icon={Plus} onClick={onAddClick}>Add FAQ</Button>
+        <Button variant="outline" icon={Plus} onClick={onAddClick}>Add FAQ</Button>
       </div>
       <div className="grid gap-4">
         {faqs.map((faq) => (

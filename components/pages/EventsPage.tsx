@@ -1,16 +1,13 @@
 "use client";
-// setState in useEffect is intentional - need to filter events based on activeTab
-/* eslint-disable react-hooks/set-state-in-effect */
 
-// Disable static generation for this page
-export const dynamic = "force-dynamic";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { Calendar, Clock, MapPin, Users } from "lucide-react";
+import { Calendar, MapPin, Users } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Card, CardContent } from "@/components/ui/Card";
+import HeroSplash from "@/components/HeroSplash";
 import { useApp } from "@/contexts/AppContext";
 import { updatePageMeta } from "@/utils/seo";
 import { format } from "date-fns";
@@ -21,7 +18,6 @@ import campus from "@/public/images/campus.png";
 const EventsPage: React.FC = () => {
   const { state } = useApp();
   const [activeTab, setActiveTab] = useState<"upcoming" | "past">("upcoming");
-  const [activeEvents, setActiveEvents] = useState(state.events);
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("all");
 
@@ -67,19 +63,6 @@ const EventsPage: React.FC = () => {
       return matchesSearch && matchesCategory;
     }), [state.events, searchTerm, categoryFilter, now]);
 
-
-  const getCategoryColor = (category: string) => {
-    const colors: Record<string, string> = {
-      workshop: "bg-blue-100 text-blue-800",
-      guest_lecture: "bg-green-100 text-green-800",
-      other: "bg-purple-100 text-purple-800",
-      hackathon: "bg-yellow-100 text-yellow-800",
-    };
-    return (
-      colors[category.toLowerCase()] || "bg-gray-100 text-gray-800"
-    );
-  };
-
   const formatCategoryLabel = (category: string) => {
     const option = categoryOptions.find(
       (o) => o.value === category.toLowerCase()
@@ -87,160 +70,172 @@ const EventsPage: React.FC = () => {
     return option?.label || category.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
   };
 
-  useEffect(() => {
-    setActiveEvents(activeTab === "upcoming" ? futureEvents : pastEvents);
-  }, [activeTab, futureEvents, pastEvents]);
+  const activeEvents = activeTab === "upcoming" ? futureEvents : pastEvents;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-8 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+    <div className="min-h-screen bg-background transition-colors pb-24">
+      {/* Hero */}
+      <HeroSplash>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 pt-32 pb-20">
+          <p className="mono-label text-current/45 mb-6">UU AI Society · What&apos;s on</p>
+          <h1 className="display-lg mb-4">
             Events
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Join our community events and expand your knowledge in artificial
-            intelligence
+          <p className="text-base sm:text-lg text-current/60 max-w-2xl leading-relaxed">
+            Workshops, guest lectures, and hackathons from the UU AI Society.
           </p>
         </div>
+      </HeroSplash>
 
-        {/* Tabs */}
-        <div className="flex justify-center mb-8 ">
-          <div className="flex bg-white dark:bg-gray-900 transition-colors p-1 rounded-lg gap-2">
-            <Button
-              onClick={() => setActiveTab("upcoming")}
-              className={`px-6 py-2 font-medium transition-all duration-500 ease-in-out text-gray-700 dark:text-gray-300 ${
-                activeTab === "upcoming"
-                  ? "bg-red-600 dark:bg-red-700 text-white"
-                  : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-              }`}
-            >
-              Upcoming Events
-            </Button>
-            <Button
-              onClick={() => setActiveTab("past")}
-              className={`px-6 py-2 rounded-md font-medium transition-all duration-500 ease-in-out text-gray-700 dark:text-gray-300 ${
-                activeTab === "past"
-                  ? "bg-red-600 dark:bg-red-700 text-white"
-                  : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-              }`}
-            >
-              Past Events
-            </Button>
-          </div>
-        </div>
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 -mt-8">
+        {/* Tabs + filters */}
+        <div className="glass rounded-lg p-5 sm:p-6 space-y-5">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex bg-foreground/[0.05] rounded-md p-1 gap-1" role="tablist" aria-label="Event timeframe">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeTab === "upcoming"}
+                onClick={() => setActiveTab("upcoming")}
+                className={`px-4 py-2 rounded text-sm font-medium transition-colors duration-300 ${
+                  activeTab === "upcoming"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-foreground/60 hover:text-foreground"
+                }`}
+              >
+                Upcoming Events
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeTab === "past"}
+                onClick={() => setActiveTab("past")}
+                className={`px-4 py-2 rounded text-sm font-medium transition-colors duration-300 ${
+                  activeTab === "past"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-foreground/60 hover:text-foreground"
+                }`}
+              >
+                Past Events
+              </button>
+            </div>
 
-        {/* Filters */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-8">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1">
-              <Input
-                placeholder="Search events..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                // icon={Search}
-                fullWidth
-              />
-            </div>
-            <div className="md:w-64">
-              <Select
-                options={categoryOptions}
-                value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
-                fullWidth
-                className="dark:bg-gray-800"
-              />
+            <div className="flex flex-col sm:flex-row gap-3 sm:items-center w-full sm:w-auto">
+              <div className="sm:w-64">
+                <Input
+                  type="search"
+                  placeholder="Search events..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  aria-label="Search events"
+                />
+              </div>
+              <div className="sm:w-52">
+                <Select
+                  id="category-filter"
+                  aria-label="Filter by category"
+                  options={categoryOptions}
+                  value={categoryFilter}
+                  onChange={(e) => setCategoryFilter(e.target.value)}
+                  fullWidth
+                />
+              </div>
             </div>
           </div>
+
+          {state.eventsLoaded && activeEvents.length > 0 && (
+            <p className="mono-meta text-muted-foreground">
+              {activeEvents.length} event{activeEvents.length !== 1 ? "s" : ""}
+            </p>
+          )}
         </div>
 
         {/* Events Grid */}
-        {activeEvents.length === 0 ? (
-          <div className="text-center py-12">
-            <Calendar className="h-16 w-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+        {!state.eventsLoaded ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 pt-10">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <Card key={i} variant="glass" className="overflow-hidden">
+                <div className="aspect-[16/10] bg-foreground/5 animate-pulse" />
+                <div className="p-5 space-y-3">
+                  <div className="h-4 w-3/4 rounded bg-foreground/10 animate-pulse" />
+                  <div className="h-3 w-full rounded bg-foreground/5 animate-pulse" />
+                  <div className="h-3 w-2/3 rounded bg-foreground/5 animate-pulse" />
+                </div>
+              </Card>
+            ))}
+          </div>
+        ) : activeEvents.length === 0 ? (
+          <div className="border-t border-border py-16 text-center mt-10">
+            <Calendar className="h-12 w-12 text-foreground/20 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-foreground mb-2">
               No events found
             </h3>
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-muted-foreground">
               {activeTab === "upcoming"
                 ? "No upcoming events match your search criteria."
                 : "No past events match your search criteria."}
             </p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 pt-10">
             {activeEvents.map((event) => (
               <Card
                 key={event.id}
-                className="h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+                variant="glass"
+                hover
+                className="h-full flex flex-col overflow-hidden group"
               >
-                <div className="aspect-video relative overflow-hidden rounded-t-lg">
-                  <Link href={`/events/${event.id}`}>
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <Link href={`/events/${event.id}`} aria-label={event.title}>
                     <Image
                       src={event.image || campus}
-                      alt={event.title}
-                      width={500}
-                      height={500}
-                      className="w-full h-full object-cover"
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
                     />
                   </Link>
-                  <div className="absolute top-4 left-4">
-                    <span
-                      className={`px-3 py-1 text-sm font-medium rounded-full ${getCategoryColor(
-                        event.category
-                      )}`}
-                    >
-                      {formatCategoryLabel(event.category)}
-                    </span>
-                  </div>
+                  <span className="absolute top-3 left-3 pill bg-black/45 text-white backdrop-blur-md">
+                    {formatCategoryLabel(event.category)}
+                  </span>
                   {event.registrationRequired && activeTab === "upcoming" && (
-                    <div className="absolute top-4 right-4">
-                      <span className="px-2 py-1 bg-red-600 text-white text-xs font-medium rounded-full">
-                        Registration Required
-                      </span>
-                    </div>
+                    <span className="absolute top-3 right-3 pill bg-black/45 text-white backdrop-blur-md">
+                      Registration Required
+                    </span>
                   )}
                 </div>
 
-                <CardContent className="p-6">
-                  <h3 className="text-xl pt-2 font-semibold text-gray-900 dark:text-white mb-3">
+                <CardContent className="p-5 flex flex-col flex-1">
+                  <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] leading-snug mb-2">
                     <Link
                       href={`/events/${event.id}`}
-                      className="hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                      className="text-foreground hover:text-primary transition-colors duration-300"
                     >
                       {event.title}
                     </Link>
                   </h3>
 
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 whitespace-pre-wrap">
+                  <p className="text-[0.9375rem] leading-relaxed text-muted-foreground line-clamp-3 whitespace-pre-wrap mb-5">
                     {event.description.slice(0, 100) +
                       (event.description.length > 100 ? "..." : "")}
                   </p>
 
-                  <div className="space-y-2 mb-6">
-                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                      <Calendar className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
-                      <span>
-                        {format(new Date(event.eventStartAt), "MMM d, yyyy")}
+                  <div className="mt-auto space-y-2 mb-6">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="h-4 w-4 shrink-0 text-foreground/40" />
+                      <span className="mono-meta">
+                        {format(new Date(event.eventStartAt), "MMM d, yyyy")} · {format(new Date(event.eventStartAt), "HH:mm")}
                       </span>
                     </div>
 
-                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                      <Clock className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
-                      <span>
-                        {format(new Date(event.eventStartAt), "HH:mm")}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                      <MapPin className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <MapPin className="h-4 w-4 shrink-0 text-foreground/40" />
                       <span>{event.location}</span>
                     </div>
 
                     {typeof event.maxCapacity === "number" && (
-                      <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
-                        <Users className="h-4 w-4 mr-2 text-red-600 dark:text-red-400" />
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Users className="h-4 w-4 shrink-0 text-foreground/40" />
                         <span>Capacity: {event.maxCapacity}</span>
                       </div>
                     )}
@@ -248,13 +243,9 @@ const EventsPage: React.FC = () => {
 
                   <Link href={`/events/${event.id}`}>
                     {activeTab === "upcoming" ? (
-                      <Button size="sm">
-                        View Details & Register
-                      </Button>
+                      <Button variant="cta">View Details & Register</Button>
                     ) : (
-                      <Button size="sm">
-                        View Details
-                      </Button>
+                      <Button variant="outline">View Details</Button>
                     )}
                   </Link>
                 </CardContent>

@@ -37,7 +37,7 @@ export default function CourseGraph({ courses, focusId }: Props) {
           const isFocus = n.id === focusId;
           return (
             <g key={n.id}>
-              <circle cx={n.x} cy={n.y} r={isFocus ? 12 : 8} fill={isFocus ? "#990000" : "#ef4444"} opacity={isFocus ? 0.9 : 0.8} />
+              <circle cx={n.x} cy={n.y} r={isFocus ? 12 : 8} fill={isFocus ? "var(--primary)" : "#ef4444"} opacity={isFocus ? 0.9 : 0.8} />
               <title>{n.label}</title>
             </g>
           );

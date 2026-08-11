@@ -10,8 +10,8 @@ describe('Tag', () => {
   it('renders with default variant (red) and size (md)', () => {
     const { container } = render(<Tag>Default</Tag>)
     const span = container.firstChild as HTMLElement
-    expect(span.className).toContain('bg-red-100')
-    expect(span.className).toContain('text-sm')
+    expect(span.className).toContain('bg-primary/10')
+    expect(span.className).toContain('text-[0.6875rem]')
   })
 
   it('renders all color variants without error', () => {

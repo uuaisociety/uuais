@@ -21,7 +21,7 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onEdit, onDelete, 
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Newsletter Management</h2>
-        <Button icon={Plus} onClick={onAddClick}>New Article</Button>
+        <Button variant="outline" icon={Plus} onClick={onAddClick}>New Article</Button>
       </div>
 
       <div className="grid gap-4">
@@ -30,7 +30,7 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onEdit, onDelete, 
             <CardContent className="p-6">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <div className="flex items-center space-x-3 mb-2">
+                  <div className="flex items-center space-x-3 mb-2 flex-wrap">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{post.title}</h3>
                     <Tag variant={post.published ? 'green' : 'yellow'} size="sm">
                       {post.published ? 'Published' : 'Draft'}
@@ -60,7 +60,7 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onEdit, onDelete, 
                     icon={Trash2} 
                     onClick={() => onDelete(post.id)} 
                   >
-                    <span className="text-black dark:text-white">Delete</span>
+                    Delete
                   </Button>
                 </div>
               </div>

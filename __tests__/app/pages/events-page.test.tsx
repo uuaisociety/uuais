@@ -48,6 +48,16 @@ describe('EventsPage', () => {
     expect(screen.getByText('No upcoming events match your search criteria.')).toBeInTheDocument()
   })
 
+  it('does not flash the empty state while events are still loading', () => {
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, eventsLoaded: false, events: [] },
+      dispatch: jest.fn(),
+    })
+    render(<EventsPage />)
+    expect(screen.queryByText('No events found')).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Events', level: 1 })).toBeInTheDocument()
+  })
+
   it('renders upcoming events', () => {
     mockUseApp.mockReturnValue({
       state: { ...defaultAppState, events: [baseUpcoming, basePast] },

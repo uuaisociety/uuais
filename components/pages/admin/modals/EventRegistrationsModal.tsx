@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { X, Users, Send, ChevronDown, Check } from "lucide-react";
+import { Users, Send, ChevronDown, Check, X } from "lucide-react";
+import { Modal } from "@/components/ui/Modal";
 import { subscribeToEventRegistrations, inviteRegistrant } from "@/lib/firestore/registrations";
 import { subscribeToEventAttendance, setAttendanceForUser, type EventAttendanceEntry } from "@/lib/firestore/attendance";
 import { getUserProfile } from "@/lib/firestore/users";
@@ -208,19 +209,32 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg w-full max-w-6xl max-h-screen overflow-y-auto">
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={`Registrations — ${eventTitle}`}
+      size="xl"
+      className="p-0"
+      header={
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-2">
-            <Users className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+            <Users className="h-5 w-5 text-gray-700 dark:text-gray-300" aria-hidden />
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Registrations — {eventTitle}</h2>
           </div>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
-            <X className="h-6 w-6" />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close dialog"
+            className="size-9 grid place-items-center rounded-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700/60 transition-colors cursor-pointer"
+          >
+            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+            </svg>
           </button>
         </div>
-
-        <div className="p-4">
+      }
+    >
+      <div className="p-4">
           {registrations.length === 0 ? (
             <p className="text-sm text-gray-600 dark:text-gray-300">No registrations yet.</p>
           ) : (
@@ -398,7 +412,7 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                                 onClick={async () => {
                                   try { setInvitingId(r.id); const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : ''); await inviteRegistrant(r.id, { baseUrl }); notify({ type: 'success', message: 'Invitation sent' }); } catch (e) { notify({ type: 'error', message: e instanceof Error ? e.message : 'Failed to send invitation' }); } finally { setInvitingId(null); }
                                 }} title="Send invitation"><Send className="h-4 w-4" /> Invite</Button>
-                                <Button size="sm" onClick={toggle}>
+                                <Button size="sm" variant="outline" onClick={toggle}>
                                   <ChevronDown className={`h-4 w-4 mr-1 transition-transform ${expanded[r.id] ? 'rotate-180' : ''}`} />
                                   {expanded[r.id] ? 'Hide details' : 'View details'}
                                 </Button>
@@ -471,8 +485,7 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
             </>
           )}
         </div>
-      </div>
-    </div>
+    </Modal>
   );
 };
 
