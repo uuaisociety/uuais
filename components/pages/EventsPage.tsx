@@ -153,7 +153,20 @@ const EventsPage: React.FC = () => {
         </div>
 
         {/* Events Grid */}
-        {activeEvents.length === 0 ? (
+        {!state.eventsLoaded ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800">
+                <div className="aspect-[16/9] bg-gray-100 dark:bg-gray-700 animate-pulse" />
+                <div className="p-5 space-y-3">
+                  <div className="h-4 w-3/4 rounded bg-gray-100 dark:bg-gray-700 animate-pulse" />
+                  <div className="h-3 w-full rounded bg-gray-100 dark:bg-gray-700 animate-pulse" />
+                  <div className="h-3 w-2/3 rounded bg-gray-100 dark:bg-gray-700 animate-pulse" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : activeEvents.length === 0 ? (
           <div className="text-center py-12">
             <Calendar className="h-16 w-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
             <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
