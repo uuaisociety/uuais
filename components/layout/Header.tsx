@@ -8,6 +8,7 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAdmin } from '@/hooks/useAdmin';
 import { useApp } from '@/contexts/AppContext';
 import { useEffect, useState, useRef } from 'react';
+import { Button } from '@/components/ui/Button';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -56,10 +57,6 @@ export const Header: React.FC = () => {
 
   const isActive = (path: string) => pathname === path;
 
-  // The home hero is a dark ink slab in both themes, so the nav + mobile menu
-  // stay dark ink there too — otherwise a light frosted bar floats over it.
-  const isHome = pathname === '/';
-
   useEffect(() => {
     if (!isProjectsOpen) return;
     const handleClickOutside = (event: MouseEvent) => {
@@ -89,7 +86,7 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 glass-nav ${isHome ? 'glass-nav-invert' : ''}`}>
+      <header className="fixed top-0 left-0 right-0 z-50 glass-nav">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="h-14 flex items-center justify-between gap-2">
 
@@ -182,12 +179,9 @@ export const Header: React.FC = () => {
               <ThemeToggle className="text-current/60 hover:text-current hover:bg-current/[0.09]" />
 
               {showApply && (
-                <Link
-                  href="/apply/team"
-                  className="hidden sm:inline-flex items-center h-9 px-4 rounded-md bg-primary text-primary-foreground text-[0.8125rem] font-medium tracking-[-0.01em] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.22)] transition-[filter,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:brightness-110 active:scale-[0.97]"
-                >
-                  Apply
-                </Link>
+                <Button asChild variant="cta" size="sm" className="hidden sm:inline-flex">
+                  <Link href="/apply/team">Apply</Link>
+                </Button>
               )}
 
               <button
@@ -262,12 +256,9 @@ export const Header: React.FC = () => {
               )}
 
               {showApply && (
-                <Link
-                  href="/apply/team"
-                  className="sm:hidden mt-1.5 block text-center px-3.5 py-2.5 rounded-sm bg-primary text-primary-foreground text-sm font-medium"
-                >
-                  Apply
-                </Link>
+                <Button asChild variant="cta" fullWidth className="sm:hidden mt-1.5">
+                  <Link href="/apply/team">Apply</Link>
+                </Button>
               )}
             </div>
           </div>
