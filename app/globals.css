@@ -47,6 +47,9 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  /* Warm ink used for the hero slab and glass-nav — one source of truth */
+  --color-ink: var(--ink);
+
   /* Tight, near-square corner scale */
   --radius-sm: 0.1875rem;
   --radius-md: 0.25rem;
@@ -105,21 +108,40 @@
     --sidebar-ring: oklch(0.565 0.208 27.5 / 45%);
 
     /* --- Liquid glass --- */
-    --glass-bg: oklch(1 0 0 / 62%);
-    --glass-bg-strong: oklch(1 0 0 / 78%);
-    --glass-border: oklch(1 0 0 / 70%);
-    --glass-edge: oklch(0.18 0.012 265 / 8%);
-    --glass-specular: oklch(1 0 0 / 85%);
-    --glass-shadow: 0 1px 2px oklch(0.18 0.012 265 / 5%),
-                    0 12px 32px -8px oklch(0.18 0.012 265 / 12%);
-    --glass-shadow-lifted: 0 2px 4px oklch(0.18 0.012 265 / 6%),
-                           0 24px 56px -12px oklch(0.18 0.012 265 / 18%);
-    --glass-blur: 20px;
+  --glass-bg: oklch(1 0 0 / 62%);
+  --glass-bg-strong: oklch(1 0 0 / 78%);
+  --glass-border: oklch(1 0 0 / 70%);
+  --glass-edge: oklch(0.18 0.012 265 / 8%);
+  --glass-specular: oklch(1 0 0 / 85%);
+  --glass-shadow: 0 1px 2px oklch(0.18 0.012 265 / 5%),
+                  0 12px 32px -8px oklch(0.18 0.012 265 / 12%);
+  --glass-shadow-lifted: 0 2px 4px oklch(0.18 0.012 265 / 6%),
+                         0 24px 56px -12px oklch(0.18 0.012 265 / 18%);
+  --glass-blur: 24px;
+  --glass-bf: blur(var(--glass-blur)) saturate(180%);
+  --glass-bf-strong: blur(28px) saturate(200%);
+  --glass-bf-nav: blur(24px) saturate(180%);
+  --glass-bf-pop: blur(40px) saturate(200%);
 
-    /* Ambient light blobs sitting behind the glass */
+  /* Nav + popover surfaces flip with the theme: light frosted glass in light
+     mode, dark ink glass in dark mode, so the header/menus always mesh with
+     the page they sit on. */
+  --glass-nav-bg: oklch(1 0 0 / 62%);
+  --glass-nav-edge: oklch(0.18 0.012 265 / 10%);
+  --glass-nav-fg: oklch(0.2 0.012 265);
+  --glass-pop-bg: oklch(1 0 0 / 82%);
+  --glass-pop-edge: oklch(0.18 0.012 265 / 14%);
+  --glass-pop-shadow: 0 2px 4px oklch(0.18 0.012 265 / 8%),
+                      0 24px 56px -12px oklch(0.18 0.012 265 / 22%);
+
+  /* Ambient light blobs sitting behind the glass */
     --ambient-1: oklch(0.565 0.208 27.5 / 14%);
     --ambient-2: oklch(0.62 0.13 245 / 10%);
     --ambient-3: oklch(0.7 0.14 85 / 9%);
+
+    --vignette: oklch(0.18 0.012 265 / 12%);
+
+    --ink: oklch(0.16 0.02 20);
   }
 
   .dark {
@@ -170,10 +192,53 @@
                     0 12px 32px -8px oklch(0 0 0 / 45%);
     --glass-shadow-lifted: 0 2px 4px oklch(0 0 0 / 35%),
                            0 24px 56px -12px oklch(0 0 0 / 55%);
+    --glass-bf: blur(var(--glass-blur)) saturate(180%);
+    --glass-bf-strong: blur(28px) saturate(200%);
+    --glass-bf-nav: blur(24px) saturate(180%);
+    --glass-bf-pop: blur(40px) saturate(200%);
+
+    --glass-nav-bg: oklch(from var(--ink) l c h / 72%);
+    --glass-nav-edge: oklch(1 0 0 / 8%);
+    --glass-nav-fg: oklch(0.97 0.002 95);
+    --glass-pop-bg: oklch(from var(--ink) l c h / 88%);
+    --glass-pop-edge: oklch(1 0 0 / 14%);
+    --glass-pop-shadow: 0 2px 4px oklch(0 0 0 / 40%),
+                        0 24px 56px -12px oklch(0 0 0 / 60%);
 
     --ambient-1: oklch(0.635 0.212 27.5 / 20%);
     --ambient-2: oklch(0.62 0.16 245 / 16%);
     --ambient-3: oklch(0.7 0.14 85 / 10%);
+
+    --vignette: oklch(0 0 0 / 32%);
+
+    /* ── Harmonized legacy grays ────────────────────────────────
+       Pages that predate the token system use Tailwind's gray scale
+       (bg-gray-800, text-gray-400, border-gray-700, …). Remap those
+       variables here so every surface, text, and border resolves to the
+       same oklch ink as the home page — one dark palette everywhere. */
+    --color-gray-50:  oklch(0.98 0.003 95);
+    --color-gray-100: oklch(0.96 0.003 95);
+    --color-gray-200: oklch(0.9 0.004 95);
+    --color-gray-300: oklch(0.8 0.006 95);
+    --color-gray-400: oklch(0.665 0.016 265);
+    --color-gray-500: oklch(0.5 0.014 265);
+    --color-gray-600: oklch(0.36 0.014 265);
+    --color-gray-700: oklch(0.255 0.016 265);
+    --color-gray-800: oklch(0.205 0.014 265);
+    --color-gray-900: oklch(0.155 0.012 265);
+    --color-gray-950: oklch(0.12 0.012 265);
+
+    --color-neutral-50:  oklch(0.98 0.003 95);
+    --color-neutral-100: oklch(0.96 0.003 95);
+    --color-neutral-200: oklch(0.9 0.004 95);
+    --color-neutral-300: oklch(0.8 0.006 95);
+    --color-neutral-400: oklch(0.665 0.016 265);
+    --color-neutral-500: oklch(0.5 0.014 265);
+    --color-neutral-600: oklch(0.36 0.014 265);
+    --color-neutral-700: oklch(0.255 0.016 265);
+    --color-neutral-800: oklch(0.205 0.014 265);
+    --color-neutral-900: oklch(0.155 0.012 265);
+    --color-neutral-950: oklch(0.12 0.012 265);
   }
 }
 
@@ -240,32 +305,69 @@
   /* --- Liquid glass ------------------------------------------------------
      Three stacked cues make glass believable: a blurred+saturated backdrop,
      a hairline that is brighter along the top edge (specular), and a soft
-     ambient shadow. Blur alone just looks foggy. */
+     ambient shadow. Blur alone just looks foggy.
+
+     backdrop-filter is written via a custom property inside @supports so the
+     production CSS minifier cannot collapse the standard + -webkit- pair into
+     one prefixed declaration (Chromium does not honour -webkit-backdrop-filter). */
 
   .glass {
     position: relative;
     background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    -webkit-backdrop-filter: var(--glass-bf);
     border: 1px solid var(--glass-edge);
     box-shadow: var(--glass-shadow), inset 0 1px 0 0 var(--glass-specular);
     border-radius: var(--radius-xl);
   }
+  @supports (backdrop-filter: blur(1px)) {
+    .glass { backdrop-filter: var(--glass-bf); }
+  }
 
   .glass-strong {
     background: var(--glass-bg-strong);
-    backdrop-filter: blur(28px) saturate(200%);
-    -webkit-backdrop-filter: blur(28px) saturate(200%);
+    -webkit-backdrop-filter: var(--glass-bf-strong);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .glass-strong { backdrop-filter: var(--glass-bf-strong); }
   }
 
-  /* The nav is dark ink in both themes so it reads as one piece with the hero
-     instead of a bright bar sitting on top of it. */
+  /* Fixed header bar. Theme-aware: light frosted glass in light mode, dark
+     ink glass in dark mode, so it always reads as one piece with the page. */
   .glass-nav {
-    background: oklch(0.16 0.02 20 / 72%);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border-bottom: 1px solid oklch(1 0 0 / 8%);
-    color: oklch(0.97 0.002 95);
+    background: var(--glass-nav-bg);
+    -webkit-backdrop-filter: var(--glass-bf-nav);
+    border-bottom: 1px solid var(--glass-nav-edge);
+    color: var(--glass-nav-fg);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .glass-nav { backdrop-filter: var(--glass-bf-nav); }
+  }
+
+  /* Home page variant: the hero behind the nav is a dark ink slab in both
+     themes, so the nav + mobile menu + popovers stay dark ink there too —
+     one continuous surface instead of a light bar over a dark landing. */
+  .glass-nav-invert {
+    --glass-nav-bg: oklch(from var(--ink) l c h / 72%);
+    --glass-nav-edge: oklch(1 0 0 / 8%);
+    --glass-nav-fg: oklch(0.97 0.002 95);
+    --glass-pop-bg: oklch(from var(--ink) l c h / 88%);
+    --glass-pop-edge: oklch(1 0 0 / 14%);
+    --glass-pop-shadow: 0 2px 4px oklch(0 0 0 / 40%),
+                        0 24px 56px -12px oklch(0 0 0 / 60%);
+  }
+
+  /* Floating panel (dropdowns / popovers) that sits over page content — a
+     clearly frosted, distinct surface with its own shadow so it reads as
+     floating above the bar. */
+  .glass-pop {
+    background: var(--glass-pop-bg);
+    -webkit-backdrop-filter: var(--glass-bf-pop);
+    border: 1px solid var(--glass-pop-edge);
+    box-shadow: var(--glass-pop-shadow);
+    color: var(--glass-nav-fg);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .glass-pop { backdrop-filter: var(--glass-bf-pop); }
   }
 
   /* Lifts on hover the way an iOS card does — springy, never bouncy. */
@@ -317,6 +419,34 @@
       radial-gradient(60rem 40rem at 12% -8%, var(--ambient-1), transparent 60%),
       radial-gradient(50rem 38rem at 92% 8%, var(--ambient-2), transparent 62%),
       radial-gradient(46rem 34rem at 68% 92%, var(--ambient-3), transparent 60%);
+  }
+
+  /* Barely-there film grain over the ambient field — breaks up banding in
+     the large gradients and gives the glass a tactile substrate. Uses the
+     raw noise at low opacity rather than a blend mode, so it reads on both
+     light and dark backgrounds. */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.22;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+  .dark .grain { opacity: 0.09; }
+
+  /* Gentle edge falloff that pulls the eye toward the content column. */
+  .vignette {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 100% 80% at 50% 45%,
+      transparent 58%,
+      var(--vignette) 100%
+    );
   }
 
   /* --- Typography helpers ----------------------------------------------- */
