@@ -100,7 +100,7 @@ export const Header: React.FC = () => {
                 className="h-8 w-auto"
                 priority
               />
-              <span className="hidden sm:block text-[0.9375rem] font-semibold tracking-[-0.03em]">
+              <span className="hidden sm:block text-[0.9375rem] font-semibold tracking-[-0.03em] transition-colors duration-300">
                 UU AI Society
               </span>
             </Link>

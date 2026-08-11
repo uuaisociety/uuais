@@ -30,7 +30,7 @@ const buttonVariants = cva(
           "text-foreground/75 hover:text-foreground hover:bg-foreground/[0.055]",
         link: "rounded-none text-primary underline-offset-4 hover:underline active:scale-100",
         // Liquid glass — the surface picks up whatever sits behind it.
-        cta: "bg-primary text-primary-foreground glass glass-sheen glass-interactive hover:transform-none rounded-md shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110 ",
+        cta: "bg-primary text-primary-foreground glass glass-sheen glass-interactive glass-no-lift rounded-md shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110 ",
         ctaSoft:
           "glass rounded-md text-foreground shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110 hover:bg-[var(--glass-bg-strong)]",
       },

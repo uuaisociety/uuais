@@ -30,7 +30,7 @@ export const HeroSplash: React.FC<HeroSplashProps> = ({ className = '', children
 
   return (
     <section
-      className={`relative overflow-hidden ${isDark ? 'bg-ink text-white' : 'bg-card text-foreground'} ${className}`}
+      className={`relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-ink text-white' : 'bg-card text-foreground'} ${className}`}
     >
       <div
         aria-hidden
