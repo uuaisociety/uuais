@@ -12,6 +12,7 @@ import campus from '@/public/images/campus.png';
 import HeroAnimation from '@/components/HeroAnimation';
 import FloatingSymbolsCanvas from '@/components/FloatingSymbolsCanvas';
 import HeroSplash from '@/components/HeroSplash';
+import { Button } from '@/components/ui/Button';
 
 const categoryOptions = [
   { value: 'all', label: 'All Categories' },
@@ -104,19 +105,20 @@ const HomePage: React.FC = () => {
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <Link
-                href="/events"
-                className="inline-flex items-center h-12 px-7 rounded-md bg-primary text-primary-foreground dark:bg-white dark:text-ink text-[0.9375rem] font-medium tracking-[-0.01em] transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:scale-[1.02] active:scale-[0.98]"
-              >
-                Our events
-              </Link>
-              <Link
-                href="/about"
-                className="group inline-flex items-center gap-2 h-12 px-7 rounded-md border border-current/20 bg-current/[0.06] backdrop-blur-xl text-[0.9375rem] font-medium tracking-[-0.01em] text-current/90 transition-colors duration-300 hover:bg-current/[0.13] hover:border-current/30"
-              >
-                Learn more
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-              </Link>
+              <Button asChild variant="cta" size="lg">
+                <Link
+                  href="/events"
+                  className="dark:bg-white dark:text-ink"
+                >
+                  Our events
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/about">
+                  Learn more
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                </Link>
+              </Button>
             </div>
           </div>
 
