@@ -563,62 +563,54 @@
    ========================================================================== */
 
 #cc-main {
-  --cc-bg: #fff;
-  --cc-primary-color: #2c2f31;
-  --cc-secondary-color: #5e6266;
-  --cc-btn-primary-bg: #dc2626;
-  --cc-btn-primary-color: #fff;
-  --cc-btn-primary-border-color: #dc2626;
-  --cc-btn-primary-hover-bg: #b91c1c;
-  --cc-btn-primary-hover-color: #fff;
-  --cc-btn-primary-hover-border-color: #b91c1c;
-  --cc-btn-secondary-bg: #f1f5f9;
-  --cc-btn-secondary-color: #2c2f31;
-  --cc-btn-secondary-border-color: #f1f5f9;
-  --cc-btn-secondary-hover-bg: #e2e8f0;
-  --cc-btn-secondary-hover-color: #000;
-  --cc-btn-secondary-hover-border-color: #e2e8f0;
-  --cc-separator-border-color: #f0f4f7;
-  --cc-toggle-on-bg: #dc2626;
-  --cc-toggle-off-bg: #667481;
-  --cc-toggle-on-knob-bg: #fff;
-  --cc-toggle-off-knob-bg: #fff;
-  --cc-toggle-active-icon-color: #fff;
-  --cc-link-color: #dc2626;
-  --cc-modal-border-radius: 1.125rem;
+  --cc-bg: var(--card);
+  --cc-primary-color: var(--foreground);
+  --cc-secondary-color: var(--muted-foreground);
+  --cc-btn-primary-bg: var(--primary);
+  --cc-btn-primary-color: var(--primary-foreground);
+  --cc-btn-primary-border-color: var(--primary);
+  --cc-btn-primary-hover-bg: var(--primary);
+  --cc-btn-primary-hover-color: var(--primary-foreground);
+  --cc-btn-primary-hover-border-color: var(--primary);
+  --cc-btn-secondary-bg: var(--secondary);
+  --cc-btn-secondary-color: var(--secondary-foreground);
+  --cc-btn-secondary-border-color: var(--secondary);
+  --cc-btn-secondary-hover-bg: var(--secondary);
+  --cc-btn-secondary-hover-color: var(--secondary-foreground);
+  --cc-btn-secondary-hover-border-color: var(--secondary);
+  --cc-separator-border-color: var(--border);
+  --cc-toggle-on-bg: var(--primary);
+  --cc-toggle-on-knob-bg: var(--primary-foreground);
+  --cc-toggle-off-bg: var(--muted-foreground);
+  --cc-toggle-off-knob-bg: var(--background);
+  --cc-toggle-active-icon-color: var(--primary-foreground);
+  --cc-link-color: var(--primary);
+  --cc-modal-border-radius: var(--radius-2xl);
   --cc-btn-border-radius: 999px;
-  --cc-footer-bg: #fff;
-  --cc-footer-border-color: #f0f4f7;
+  --cc-cookie-category-block-bg: var(--muted);
+  --cc-cookie-category-block-border: var(--border);
+  --cc-cookie-category-block-hover-bg: var(--accent);
+  --cc-cookie-category-expanded-block-hover-bg: var(--accent);
+  --cc-toggle-readonly-bg: var(--secondary);
+  --cc-overlay-bg: oklch(0.16 0.02 20 / 60%);
+  --cc-footer-bg: var(--card);
+  --cc-footer-color: var(--muted-foreground);
+  --cc-footer-border-color: var(--border);
 }
 
-.dark #cc-main {
-  --cc-bg: #1f2937;
-  --cc-primary-color: #f3f4f6;
-  --cc-secondary-color: #9ca3af;
-  --cc-btn-primary-bg: #dc2626;
-  --cc-btn-primary-color: #fff;
-  --cc-btn-primary-border-color: #dc2626;
-  --cc-btn-primary-hover-bg: #b91c1c;
-  --cc-btn-primary-hover-color: #fff;
-  --cc-btn-primary-hover-border-color: #b91c1c;
-  --cc-btn-secondary-bg: #374151;
-  --cc-btn-secondary-color: #f3f4f6;
-  --cc-btn-secondary-border-color: #374151;
-  --cc-btn-secondary-hover-bg: #4b5563;
-  --cc-btn-secondary-hover-color: #fff;
-  --cc-btn-secondary-hover-border-color: #4b5563;
-  --cc-separator-border-color: #374151;
-  --cc-toggle-on-bg: #dc2626;
-  --cc-toggle-off-bg: #4b5563;
-  --cc-toggle-on-knob-bg: #fff;
-  --cc-toggle-off-knob-bg: #9ca3af;
-  --cc-toggle-active-icon-color: #fff;
-  --cc-link-color: #ef4444;
-  --cc-cookie-category-block-bg: #374151;
-  --cc-cookie-category-block-border: #4b5563;
-  --cc-cookie-category-block-hover-bg: #4b5563;
-  --cc-cookie-category-expanded-block-hover-bg: #4b5563;
-  --cc-toggle-readonly-bg: #5a5f68;
-  --cc-footer-bg: #1a1d23;
-  --cc-footer-border-color: #2d3139;
+/* The library reuses --cc-btn-border-radius (pill) for the expandable
+   category blocks — give them the site's subtle radius instead. Scoped to
+   .pm-wrapper so the override outranks the library's own #cc-main rules. */
+#cc-main .pm-wrapper .pm__section,
+#cc-main .pm-wrapper .pm__section--toggle,
+#cc-main .pm-wrapper .pm__section-title,
+#cc-main .pm-wrapper .pm__section--toggle .pm__section-desc-wrapper,
+#cc-main .pm-wrapper .pm__section-desc-wrapper {
+  border-radius: var(--radius-lg);
+}
+
+/* Keep the expanded category title and its description one continuous block */
+#cc-main .pm-wrapper .pm__section--toggle.is-expanded .pm__section-title {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
