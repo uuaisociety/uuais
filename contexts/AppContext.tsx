@@ -17,6 +17,7 @@ import { deleteTeamApplication, subscribeToTeamApplications } from '@/lib/firest
 
 interface AppState {
   events: Event[];
+  eventsLoaded: boolean;
   teamMembers: TeamMember[];
   blogPosts: BlogPost[];
   faqs: FAQ[];
@@ -91,6 +92,7 @@ type FirestoreAction =
 
 const initialState: AppState = {
   events: [],
+  eventsLoaded: false,
   teamMembers: [],
   blogPosts: [],
   faqs: [],
@@ -111,7 +113,7 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
     case 'SET_ERROR':
       return { ...state, error: action.payload };
     case 'SET_EVENTS':
-      return { ...state, events: action.payload };
+      return { ...state, events: action.payload, eventsLoaded: true };
     case 'ADD_EVENT':
       return { ...state, events: [...state.events, action.payload] };
     case 'UPDATE_EVENT':
