@@ -2,6 +2,7 @@ import { Instrument_Sans, Martian_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { Providers } from './providers';
 import { AppProvider } from '@/contexts/AppContext';
 import { NotificationsProvider } from '@/components/ui/Notifications';
@@ -57,7 +58,7 @@ export default function RootLayout({
                 <Header />
                 <RegistrationGate />
                 <main id="main" className="flex-grow">
-                  {children}
+                  <PageTransition>{children}</PageTransition>
                 </main>
                 <Footer />
                 {/* <UpcomingEventsBanner /> */}
