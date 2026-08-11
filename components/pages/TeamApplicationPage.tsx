@@ -884,7 +884,7 @@ export default function TeamApplicationPage() {
                           maxLength={200}
                           value={form.customInterest}
                           onChange={(e) => set("customInterest", e.target.value)}
-                          className="flex-1 px-2 py-1 text-sm rounded-md border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring"
+                          className="flex-1 px-2 py-1 text-sm rounded-md border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-colors duration-300"
                         />
                       </label>
                     </div>

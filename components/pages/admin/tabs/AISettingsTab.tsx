@@ -265,7 +265,7 @@ Always base your recommendations on the provided course context.`,
             value={settings.systemPrompt}
             onChange={(e) => setSettings({ ...settings, systemPrompt: e.target.value })}
             rows={10}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent font-mono text-sm"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent font-mono text-sm transition-colors duration-300"
           />
         </CardContent>
       </Card>

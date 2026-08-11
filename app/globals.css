@@ -493,7 +493,7 @@
   .input {
     @apply w-full px-3.5 py-2 rounded-lg border bg-card text-foreground
            placeholder:text-muted-foreground
-           focus:outline-none focus:ring-2 focus:ring-ring transition-colors;
+           focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-300;
     border-color: var(--input);
   }
   select.input { appearance: none; }

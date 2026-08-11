@@ -102,7 +102,7 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
         onBlur={handleBlur}
         placeholder={placeholder}
         autoComplete="off"
-        className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors"
+        className="w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-300"
       />
 
       {open && (
@@ -110,7 +110,7 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
           id={listboxId}
           role="listbox"
           aria-label="Programme options"
-          className="absolute z-20 mt-1 w-full max-h-64 overflow-y-auto rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg"
+          className="absolute z-20 mt-1 w-full max-h-64 overflow-y-auto rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg transition-colors duration-300"
         >
           {filtered.length === 0 ? (
             <li role="option" aria-selected="false" className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400 cursor-default">
@@ -131,7 +131,7 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
                     commit(option);
                   }}
                   onMouseEnter={() => setActiveIndex(i)}
-                  className={`px-3 py-2 text-sm cursor-pointer ${
+                  className={`px-3 py-2 text-sm cursor-pointer transition-colors duration-300 ${
                     isActive
                       ? "bg-red-50 dark:bg-red-950/30 text-red-700 dark:text-red-400"
                       : "text-gray-900 dark:text-gray-100"

@@ -262,7 +262,7 @@ const RoleRanker: React.FC<RoleRankerProps> = ({
                         placeholder="Describe your proposed role / interest"
                         value={customRole}
                         onChange={(e) => onCustomRoleChange(e.target.value)}
-                        className="w-full px-2 py-1 text-sm rounded-md border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary"
+                        className="w-full px-2 py-1 text-sm rounded-md border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-colors duration-300"
                       />
                     </div>
                   ) : null}

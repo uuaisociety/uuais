@@ -307,7 +307,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                                 type="text"
                                 value={(customAnswers[q.id] as string) || ""}
                                 onChange={(e) => handleCustomAnswerChange(q, e)}
-                                className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-card text-foreground"
+                                className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-card text-foreground transition-colors duration-300"
                               />
                             )}
                             {q.type === "textarea" && (
@@ -315,14 +315,14 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                                 value={(customAnswers[q.id] as string) || ""}
                                 onChange={(e) => handleCustomAnswerChange(q, e)}
                                 rows={3}
-                                className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-card text-foreground"
+                                className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-card text-foreground transition-colors duration-300"
                               />
                             )}
                             {q.type === "select" && (
                               <select
                                 value={(customAnswers[q.id] as string) || ""}
                                 onChange={(e) => handleCustomAnswerChange(q, e)}
-                                className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-card text-foreground"
+                                className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-card text-foreground transition-colors duration-300"
                               >
                                 <option value="">Select an option</option>
                                 {(q.options || []).map((opt) => (

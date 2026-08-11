@@ -190,7 +190,7 @@ const TeamRanker: React.FC<TeamRankerProps> = ({
                       placeholder="Describe your proposed team / interest"
                       value={customTeam}
                       onChange={(e) => onCustomTeamChange(e.target.value)}
-                      className="flex-1 px-2 py-1 text-sm rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                      className="flex-1 px-2 py-1 text-sm rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-300"
                     />
                   ) : (
                     <span className="flex-1 text-sm font-medium text-gray-900 dark:text-white">{entry.name}</span>
