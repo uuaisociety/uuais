@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
+import HeroSplash from '@/components/HeroSplash';
 import { updatePageMeta } from '@/utils/seo';
 
 export default function CourseNavigatorPage() {
@@ -24,36 +25,27 @@ export default function CourseNavigatorPage() {
           Back to Projects
         </Link>
 
-        {/* Hero CTA Section — ink slab matching the landing page */}
-        <section className="relative overflow-hidden rounded-lg bg-ink text-white py-4 mb-4">
-          <div
-            aria-hidden
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                'radial-gradient(42rem 26rem at 82% 12%, oklch(from var(--primary) l c h / 50%), transparent 60%),' +
-                'radial-gradient(34rem 24rem at 8% 96%, oklch(from var(--ink) l c h / 40%), transparent 60%)',
-            }}
-          />
+        {/* Hero CTA Section — theme-aware slab matching the landing page */}
+        <HeroSplash className="rounded-lg py-4 mb-4">
           <div className="relative z-10 px-6 sm:px-10 py-16 text-center">
-            <p className="mono-label text-white/45 mb-6">UU AI Society · Project</p>
+            <p className="mono-label text-current/45 mb-6">UU AI Society · Project</p>
             <h1 className="display-lg mb-5">
               Course Navigator
             </h1>
-            <p className="text-base sm:text-lg text-white/60 max-w-2xl mx-auto leading-relaxed mb-8">
+            <p className="text-base sm:text-lg text-current/60 max-w-2xl mx-auto leading-relaxed mb-8">
               Discover courses at Uppsala University using AI-powered recommendations. Search with natural language and explore course connections.
             </p>
             <Link href="/explore" className="inline-block">
               <Button
                 size="lg"
-                className="bg-white text-ink hover:brightness-95 shadow-lg hover:shadow-xl transition-all"
+                className="dark:bg-white dark:text-ink dark:hover:brightness-95 shadow-lg hover:shadow-xl transition-all"
               >
                 Launch Course Navigator
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
           </div>
-        </section>
+        </HeroSplash>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
