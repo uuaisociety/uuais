@@ -17,8 +17,17 @@ jest.mock('@/lib/firebase-client', () => ({
 
 jest.mock('@/components/courses/CourseCard', () => ({
   __esModule: true,
-  default: ({ course }: { course: { id: string; title: string } }) => (
-    <div data-testid="course-card">{course.title}</div>
+  default: ({
+    course,
+    children,
+  }: {
+    course: { id: string; title: string }
+    children?: React.ReactNode
+  }) => (
+    <div data-testid="course-card">
+      <div>{course.title}</div>
+      {children}
+    </div>
   ),
 }))
 
