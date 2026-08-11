@@ -190,7 +190,7 @@ The form language is tight and near-square — a quiet, editorial corner scale r
 - **Error / Disabled:** error border tints red; disabled renders borderless, transparent, and non-interactive.
 
 ### Navigation
-- **The header** is a fixed, theme-aware glass bar (`glass-nav`): light frosted in light mode, dark ink in dark mode, `h-14` with a 24px blur. On the home page it inverts to the dark ink slab (`glass-nav-invert`) so it reads as one piece with the hero.
+- **The header** is a fixed, theme-aware glass bar (`glass-nav`): light frosted in light mode, dark ink in dark mode, `h-14` with a 24px blur. It follows the theme on every page.
 - **Type:** mono-label for Register/Login/Logout, sans medium for nav links, `text-current/60` resting → full on hover.
 - **Active:** a translucent current-colour fill (`bg-current/[0.12]`) with full-strength text.
 - **Mobile:** hamburger opens a menu that inherits the header's glass surface (no separate opaque panel), `lg:` reveals the full desktop nav. The dropdown/popover (`glass-pop`) is a stronger frosted panel — `blur(40px)`, more opaque, own shadow.
@@ -207,7 +207,7 @@ The form language is tight and near-square — a quiet, editorial corner scale r
 - **Do** use `glass` + `glass-interactive` for major listing cards, and the hairline+ambient treatment for quieter surfaces.
 - **Do** keep the brand red rare — one accent per screen, at most.
 - **Do** lead section and page titles with a `mono-label` eyebrow and use the `(paren)` accent word for the second term of a display heading.
-- **Do** let the header and mobile menu adopt the theme: light frosted in light mode, dark ink in dark mode, dark ink on the home hero.
+- **Do** let the header and mobile menu adopt the theme: light frosted in light mode, dark ink in dark mode — on every page, including the home hero.
 - **Do** set small metadata (dates, tags, counts, labels) in `Martian Mono`.
 
 ### Don't:
