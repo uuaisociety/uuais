@@ -12,9 +12,11 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { FieldGroup, InputBase, SelectBase, TextareaBase } from "@/components/ui/Form";
+import SearchableSelect from "@/components/ui/SearchableSelect";
 import MultiStepWizard, { WizardStep } from "@/components/ui/MultiStepWizard";
 import RoleRanker, { RoleRankEntry } from "@/components/ui/RoleRanker";
 import FormattedText from "@/components/ui/FormattedText";
+import HeroSplash from "@/components/HeroSplash";
 import { LinkedInUrlInput, LINKEDIN_PREFIX } from "@/components/ui/LinkedInUrlInput";
 import TagComponent from "@/components/ui/Tag";
 import PDFDropzone from "@/components/ui/PDFDropzone";
@@ -93,6 +95,17 @@ const emptyForm: TeamFormData = {
   interests: [], customInterest: "", roleRanking: [], customRole: "", weeklyHours: 5,
   motivation: "", customAnswers: {}, agree: false, newsletter: false,
 };
+
+const DRAFT_PREFIX = "teamApplicationDraft";
+
+// Does the form hold anything worth persisting? An untouched form is skipped
+// so we never create a draft the moment someone opens the page.
+const hasDraftContent = (f: TeamFormData): boolean =>
+  f.name !== "" || f.email !== "" || f.gender !== "" || f.university !== "Uppsala" ||
+  f.program !== "" || f.expectedGraduationYear !== "" || f.linkedin !== "" ||
+  f.resume !== null || f.interests.length > 0 || f.customInterest !== "" ||
+  f.roleRanking.length > 0 || f.customRole !== "" || f.weeklyHours !== 5 ||
+  f.motivation !== "" || f.agree || f.newsletter || Object.keys(f.customAnswers).length > 0;
 
 // Collapsible rich-text description: starts clamped to 3 lines with an ellipsis,
 // with a Show more/Show less toggle once it overflows.
@@ -272,6 +285,66 @@ export default function TeamApplicationPage() {
     setForm((prev) => ({ ...prev, roleRanking: [], customRole: "" }));
   }, [campaign?.id]);
 
+  // --- Draft persistence -----------------------------------------------------
+  // A draft survives reloads, tab switches, and interruptions. Keyed by
+  // campaign + user so sessions never bleed into each other. The resume File
+  // can't be serialized — we remember it was attached and ask again on restore.
+  const draftKey = campaign ? `${DRAFT_PREFIX}:${campaign.id}:${auth.currentUser?.uid || "anon"}` : null;
+  const draftRestoredRef = useRef(false);
+
+  // Restore the saved draft once, after auth and the campaign have settled.
+  useEffect(() => {
+    if (authLoading || !draftKey || submitted || submitting || hasApplied) return;
+    if (draftRestoredRef.current) return;
+    draftRestoredRef.current = true;
+    try {
+      const raw = localStorage.getItem(draftKey);
+      if (!raw) return;
+      const saved = JSON.parse(raw) as Partial<TeamFormData> & { resumeAttached?: boolean; step?: number };
+      const { resumeAttached, ...fields } = saved;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setForm((prev) => ({ ...prev, ...fields, resume: null }));
+      if (typeof saved.step === "number" && saved.step > 0 && saved.step < WIZARD_STEPS.length) {
+        setStep(saved.step);
+      }
+      notify({
+        type: "info",
+        title: resumeAttached ? "Draft restored — resume needed" : "Draft restored",
+        message: resumeAttached
+          ? "We saved your application. Please re-attach your resume before submitting."
+          : "We saved your application so you can pick up where you left off.",
+      });
+    } catch {
+      localStorage.removeItem(draftKey);
+    }
+  }, [authLoading, draftKey, submitted, submitting, hasApplied, notify]);
+
+  // Auto-save once the user has engaged (step > 0) and holds real content.
+  useEffect(() => {
+    if (!draftKey || submitted || submitting || authLoading) return;
+    if (step === 0 || !hasDraftContent(form)) return;
+    const t = setTimeout(() => {
+      try {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { resume: _resume, ...rest } = form;
+        localStorage.setItem(draftKey, JSON.stringify({ ...rest, step, resumeAttached: !!form.resume }));
+      } catch { /* quota or private mode — persistence is best-effort */ }
+    }, 400);
+    return () => clearTimeout(t);
+  }, [form, step, draftKey, submitted, submitting, authLoading]);
+
+  // Warn before closing/reloading once a draft exists past the overview step.
+  useEffect(() => {
+    if (step === 0 || !hasDraftContent(form) || submitted) return;
+    const handler = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, [form, step, submitted]);
+
+
   const set = <K extends keyof TeamFormData>(field: K, val: TeamFormData[K]) =>
     setForm((p) => ({ ...p, [field]: val }));
   const setCustom = (qId: string, val: string | string[]) =>
@@ -354,6 +427,7 @@ export default function TeamApplicationPage() {
       }
       setSubmitted(true);
       notify({ type: "success", title: "Application submitted!", message: "We'll be in touch soon." });
+      try { if (draftKey) localStorage.removeItem(draftKey); } catch { /* best-effort */ }
     } catch (err) {
       console.error("Submit error", err);
       notify({ type: "error", title: "Submission failed", message: "Network error. Please try again." });
@@ -495,6 +569,31 @@ export default function TeamApplicationPage() {
     step === 3 ? (!fieldEnabled("motivation") || form.motivation.trim().length >= 25) && roleSelectionValid :
     true;
 
+  // Tells the user exactly what's still missing when Continue is blocked —
+  // a disabled button without a reason reads as a wall.
+  const nextDisabledHint =
+    step === 1
+      ? !form.name.trim()
+        ? "Enter your full name to continue."
+        : "Enter a valid email address to continue."
+      : step === 2
+        ? fieldEnabled("linkedin") && form.linkedin.trim().length <= LINKEDIN_PREFIX.length
+          ? "Add your full LinkedIn URL to continue."
+          : fieldEnabled("interests") && form.interests.length === 0 && !form.customInterest.trim()
+            ? "Select at least one area of interest to continue."
+            : "Answer the required additional questions to continue."
+        : step === 3
+          ? fieldEnabled("motivation") && form.motivation.trim().length < 25
+            ? `Write at least 25 characters of motivation (${form.motivation.trim().length} so far).`
+            : "Rank at least one role to continue."
+          : undefined;
+
+  const submitDisabled = !form.agree || submitting;
+  const submitDisabledHint =
+    !form.agree && !submitting
+      ? "Confirm that your information is accurate to submit."
+      : undefined;
+
   const campaignRoles = campaign.roles && campaign.roles.length > 0 ? campaign.roles : [];
   const teamsWithRoles = campaign.teams.map((teamId) => ({
     teamId,
@@ -505,43 +604,34 @@ export default function TeamApplicationPage() {
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Hero header — full on step 0, compact on steps 1+ */}
       {step === 0 ? (
-        <section className="relative bg-ink text-white min-h-[50vh] overflow-hidden">
-          <div
-            aria-hidden
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                'radial-gradient(46rem 30rem at 80% 16%, oklch(from var(--primary) l c h / 45%), transparent 62%),' +
-                'radial-gradient(38rem 26rem at 10% 94%, oklch(from var(--ink) l c h / 45%), transparent 60%)',
-            }}
-          />
+        <HeroSplash className="min-h-[50vh]">
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
-            <p className="mono-label text-white/45 mb-6 flex items-center gap-2">
+            <p className="mono-label text-current/45 mb-6 flex items-center gap-2">
               <Sparkles className="h-4 w-4" />
               {campaign.subtitle}
             </p>
             <h1 className="display-lg mb-6">
               {campaign.title}
             </h1>
-            <p className="text-base sm:text-lg text-white/60 mb-6 max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg text-current/60 mb-6 max-w-2xl leading-relaxed">
               {campaign.description}
             </p>
-            <div className="flex items-center gap-2 text-white/60">
+            <div className="flex items-center gap-2 text-current/60">
               <Clock className="h-5 w-5" />
               <span>Application deadline: {campaign.deadline}</span>
             </div>
             <a href="#wizard" className="inline-block mt-10 motion-safe:animate-bounce" aria-label="Skip to application form">
-              <ChevronDown className="h-7 w-7 text-white/30" aria-hidden />
+              <ChevronDown className="h-7 w-7 text-current/30" aria-hidden />
             </a>
           </div>
-        </section>
+        </HeroSplash>
       ) : (
-        <section className="bg-ink text-white">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-5 pt-28">
+        <HeroSplash className="py-5 pt-28">
+          <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-xl font-bold">{campaign.title}</h1>
-            <p className="text-sm text-white/60">{campaign.subtitle}</p>
+            <p className="text-sm text-current/60">{campaign.subtitle}</p>
           </div>
-        </section>
+        </HeroSplash>
       )}
 
       {/* Wizard */}
@@ -555,7 +645,9 @@ export default function TeamApplicationPage() {
           canNext={canNext}
           canBack={true}
           submitLabel="Submit application"
-          submitDisabled={!form.agree || submitting}
+          submitDisabled={submitDisabled}
+          nextDisabledHint={nextDisabledHint}
+          submitDisabledHint={submitDisabledHint}
         >
           {/* Step 0: Overview */}
           {step === 0 && (
@@ -689,12 +781,12 @@ export default function TeamApplicationPage() {
                       )}
                       {fieldEnabled("program") && (
                         <FieldGroup label="Program" requiredHint="Required if student.">
-                          <SelectBase value={form.program} onChange={(e) => set("program", e.target.value)}>
-                            <option value="">Select a program</option>
-                            {UU_PROGRAMMES.map((prog) => (
-                              <option key={prog} value={prog}>{prog}</option>
-                            ))}
-                          </SelectBase>
+                          <SearchableSelect
+                            value={form.program}
+                            onChange={(v) => set("program", v)}
+                            options={UU_PROGRAMMES}
+                            placeholder="Type to search your programme"
+                          />
                         </FieldGroup>
                       )}
                     </div>
@@ -780,28 +872,20 @@ export default function TeamApplicationPage() {
                           </label>
                         );
                       })}
-                      <label className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border cursor-pointer transition-all duration-200 ${
+                      <label className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border transition-all duration-200 ${
                         form.customInterest.trim()
                           ? "border-red-600 bg-red-50 dark:bg-red-950/20"
                           : "border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-700"
                       }`}>
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300 shrink-0">Other:</span>
                         <input
-                          type="checkbox"
-                          checked={!!form.customInterest.trim()}
-                          onChange={() => {}}
-                          className="h-4 w-4 rounded border-gray-300 dark:border-gray-600 text-red-600 focus:ring-red-500"
+                          type="text"
+                          placeholder="Describe your area of interest"
+                          maxLength={200}
+                          value={form.customInterest}
+                          onChange={(e) => set("customInterest", e.target.value)}
+                          className="flex-1 px-2 py-1 text-sm rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
                         />
-                        <div className="flex-1 flex items-center gap-2">
-                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300 shrink-0">Other:</span>
-                          <input
-                            type="text"
-                            placeholder="Describe your area of interest"
-                            maxLength={200}
-                            value={form.customInterest}
-                            onChange={(e) => set("customInterest", e.target.value)}
-                            className="flex-1 px-2 py-1 text-sm rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
-                          />
-                        </div>
                       </label>
                     </div>
                     <p className="text-xs text-gray-400 mt-3">
@@ -1022,7 +1106,7 @@ export default function TeamApplicationPage() {
                           return (
                             <div key={q.id} className="mt-1">
                               <span className="text-xs font-medium text-gray-500">{q.question}</span>
-                              <p className="text-sm text-gray-900 dark:text-white">{displayAns || "—"}</p>
+                              <p className="text-sm text-gray-900 dark:text-white break-words">{displayAns || "—"}</p>
                             </div>
                           );
                         })}
@@ -1040,7 +1124,7 @@ export default function TeamApplicationPage() {
                               }`}>
                                 {idx + 1}
                               </span>
-                              <span className="text-sm text-gray-900 dark:text-white">{entry.title} <span className="text-gray-500 dark:text-gray-400">· {entry.teamName}</span></span>
+                              <span className="flex-1 min-w-0 text-sm text-gray-900 dark:text-white break-words">{entry.title} <span className="text-gray-500 dark:text-gray-400">· {entry.teamName}</span></span>
                             </div>
                           </div>
                         );
@@ -1050,7 +1134,7 @@ export default function TeamApplicationPage() {
                           <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-xs font-bold">
                             {idx + 1}
                           </span>
-                          <span className="text-sm text-gray-900 dark:text-white">
+                          <span className="flex-1 min-w-0 text-sm text-gray-900 dark:text-white break-words">
                             Other{form.customRole ? `: ${form.customRole}` : ""}
                           </span>
                         </div>
@@ -1116,9 +1200,9 @@ function SummarySection({ icon: Icon, title, children }: { icon: React.Component
 
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="grid grid-cols-3 gap-3 py-1">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-3 py-1">
       <span className="text-xs font-medium text-gray-500 uppercase">{label}</span>
-      <span className="col-span-2 text-sm text-gray-900 dark:text-white">{value || "—"}</span>
+      <span className="sm:col-span-2 text-sm text-gray-900 dark:text-white break-words min-w-0">{value || "—"}</span>
     </div>
   );
 }
