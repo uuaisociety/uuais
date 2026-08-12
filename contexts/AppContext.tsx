@@ -222,8 +222,19 @@ const AppContext = createContext<{
   dispatch: AppDispatch;
 } | undefined>(undefined);
 
-export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [state, dispatch] = useReducer(appReducer, initialState);
+export const AppProvider: React.FC<{
+  children: ReactNode;
+  seed?: Partial<
+    Pick<AppState, 'events' | 'jobs' | 'faqs' | 'teamMembers' | 'boardPositions' | 'campaigns'>
+  >;
+}> = ({ children, seed }) => {
+  const initState: AppState = {
+    ...initialState,
+    ...(seed || {}),
+    eventsLoaded: !!seed?.events,
+    campaignsLoaded: !!seed?.campaigns,
+  };
+  const [state, dispatch] = useReducer(appReducer, initState);
 
   // Set up real-time listeners for Firestore
   useEffect(() => {
@@ -234,6 +245,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     let unsubscribeBoardApplications: (() => void) | null = null;
     let unsubscribeCampaigns: (() => void) | null = null;
     let unsubscribeTeamApplications: (() => void) | null = null;
+    let unsubscribeBlogPosts: (() => void) | null = null;
 
     const subscribe = (includeUnpublished = false) => {
       // includeUnpublished: boolean indicates admin status
@@ -297,6 +309,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         dispatch({ type: 'SET_CAMPAIGNS', payload: campaigns });
         dispatch({ type: 'SET_CAMPAIGNS_LOADED', payload: true });
       }, { includeAll: includeUnpublished });
+
+      // Blog posts: public visitors see published posts; admins see all (incl. drafts)
+      if (unsubscribeBlogPosts) {
+        try { unsubscribeBlogPosts(); } catch { /* ignore */ }
+        unsubscribeBlogPosts = null;
+      }
+      unsubscribeBlogPosts = subscribeToBlogPosts((posts) => {
+        dispatch({ type: 'SET_BLOG_POSTS', payload: posts });
+      }, { includeUnpublished });
     };
 
     // Initial subscription: assume not admin (public)
@@ -307,9 +328,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       dispatch({ type: 'SET_TEAM_MEMBERS', payload: members });
     });
 
-    const unsubscribeBlogPosts = subscribeToBlogPosts((posts) => {
-      dispatch({ type: 'SET_BLOG_POSTS', payload: posts });
-    });
     const unsubscribeFaqs = subscribeToFaqs((faqs) => {
       dispatch({ type: 'SET_FAQS', payload: faqs });
     });
@@ -321,9 +339,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       const gen = ++authGeneration;
       let adminClaim = false;
       if (user) {
-        // Refresh token to ensure custom claims are present
+        // Read cached claims without forcing a network refresh; onIdTokenChanged fires on token refresh.
         try {
-          const tokenResult = await user.getIdTokenResult(true);
+          const tokenResult = await user.getIdTokenResult();
           adminClaim = !!tokenResult.claims.admin;
         } catch (err) {
           console.warn('Failed to refresh ID token', err);
@@ -359,8 +377,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       if (unsubscribeTeamApplications) {
         try { unsubscribeTeamApplications(); } catch { /* ignore */ }
       }
+      if (unsubscribeBlogPosts) {
+        try { unsubscribeBlogPosts(); } catch { /* ignore */ }
+      }
       unsubscribeTeamMembers();
-      unsubscribeBlogPosts();
       unsubscribeFaqs();
       idTokenUnsub();
     };
