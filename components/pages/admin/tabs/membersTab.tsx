@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import TableControls, { TablePagination } from '@/components/ui/TableControls';
 import { useNotify } from "@/components/ui/Notifications";
-import { Download } from 'lucide-react';
+import { Download, Trash2} from 'lucide-react';
 
 type EditableUser = UserProfile & Record<string, unknown>;
 
@@ -321,11 +321,11 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
 
           <div className="mt-4 flex justify-between">
             <Button
-              className="px-3 py-2 text-red-600 border border-red-600 rounded-md"
+              variant="destructive"
               onClick={onDelete}
               disabled={deleting || saving}
             >
-              {deleting ? 'Deleting...' : 'Delete'}
+              <Trash2 className="h-4 w-4" aria-hidden /> {deleting ? 'Deleting...' : 'Delete'}
             </Button>
             <div className="flex gap-2">
               <Button className="px-3 py-2 border rounded-md" onClick={close} disabled={saving || deleting}>
