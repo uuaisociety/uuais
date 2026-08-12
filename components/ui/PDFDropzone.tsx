@@ -62,11 +62,20 @@ export default function PDFDropzone({ file, onChange, onError }: PDFDropzoneProp
 
   return (
     <div
+      role="button"
+      tabIndex={0}
+      aria-label="Upload resume"
       onDrop={handleDrop}
       onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
       onDragLeave={() => setDragging(false)}
       onClick={() => inputRef.current?.click()}
-      className={`w-full border-2 border-dashed rounded-md p-5 flex items-center justify-center gap-3 cursor-pointer transition-colors duration-200 ${
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          inputRef.current?.click();
+        }
+      }}
+      className={`w-full border-2 border-dashed rounded-md p-5 flex items-center justify-center gap-3 cursor-pointer transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
         dragging
           ? "border-primary bg-primary/10"
           : "border-border hover:border-border hover:border-foreground/30"
