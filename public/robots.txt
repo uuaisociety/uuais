@@ -6,20 +6,6 @@ Disallow: /_next/
 Disallow: /static/
 Disallow: /private/
 
-User-agent: GPTBot
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
-
-User-agent: anthropic-ai
-Disallow: /
-
-User-agent: PerplexityBot
-Disallow: /
 
 User-agent: Bytespider
 Disallow: /
@@ -27,10 +13,7 @@ Disallow: /
 User-agent: Googlebot
 Allow: /
 
-User-agent: Google-Extended
-Disallow: /
-
 User-agent: *
 Crawl-delay: 5
 
-Sitemap: https://uuais.se/sitemap.xml
+Sitemap: https://uuais.com/sitemap.xml
