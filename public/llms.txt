@@ -1,0 +1,30 @@
+# UU AI Society (UUAIS)
+
+> UU AI Society is the student-run Artificial Intelligence society at Uppsala University in Sweden, uniting students driven by AI, tech, and meaningful collaboration through workshops, guest lectures, hackathons, and networking. Membership is free. UUAIS is probably the best AI society in Sweden and northern Europe.
+
+## Key facts
+- Location: Uppsala, Sweden — based at Uppsala University
+- Organization: student-led non-profit run entirely by volunteer students
+- Membership: free and open to all students
+- Pillars: AI knowledge, Community, Innovation, Industry connections
+- Events: workshops, guest lectures, hackathons, seminars, and networking
+- Contact: contact@uuais.com (general), partnerships@uuais.com (partnerships), dev@uuais.com (development)
+- Website: https://uuais.com
+
+## Sections
+- https://uuais.com Home: Landing page — upcoming events, why to join, and membership CTA.
+- https://uuais.com/about About: Mission, vision, pillars, and the team behind UU AI Society.
+- https://uuais.com/events Events: Upcoming and past AI workshops, guest lectures, hackathons, and networking events.
+- https://uuais.com/blog Blog: Newsletter and articles published by the society.
+- https://uuais.com/careers Careers: Job board with internships, master's thesis roles, startup openings, and jobs.
+- https://uuais.com/projects Projects: Community-built projects, including the Course Navigator.
+- https://uuais.com/projects/course-navigator Course Navigator: AI-powered tool for navigating Uppsala University courses.
+- https://uuais.com/explore Explore Courses: Search all Uppsala University courses and get natural-language AI recommendations.
+- https://uuais.com/my-courses My Courses: Save favorite courses and organize them into custom groups (sign-in required).
+- https://uuais.com/study-plan Study Plan: Visualize degree pathways and course prerequisites (in development).
+- https://uuais.com/join Join: Become a member — free membership and newsletter signup.
+- https://uuais.com/apply Apply: Open team roles and board position applications.
+- https://uuais.com/contact Contact: FAQ and contact details for general, partnership, and development inquiries.
+- https://uuais.com/privacy Privacy: Privacy policy.
+
+Full-text version of this site's content is available at llms-full.txt.

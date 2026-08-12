@@ -1,0 +1,66 @@
+# UU AI Society (UUAIS) — Full site content
+
+> Full text of uuais.com for AI agents. The index version is available at llms.txt.
+
+## About
+
+UU AI Society (UUAIS) is the student-run Artificial Intelligence society at Uppsala University in Sweden. We unite Uppsala students driven by AI, tech, and meaningful collaboration — and we're probably the best AI society in Sweden and northern Europe.
+
+We are a community of students passionate about artificial intelligence, dedicated to learning, innovation, and shaping the future of technology.
+
+**Mission:** To democratize AI education and create an inclusive environment where students can explore, learn, and contribute to the advancement of artificial intelligence outside the classroom. We believe in hands-on learning, collaborative innovation, and building bridges between academic knowledge and real-world applications.
+
+**Vision:** A student-led non-profit that cultivates the next generation of AI builders and leaders at UU by connecting students with the forefront of AI innovation.
+
+### Why join UU AI Society
+
+- **AI knowledge** — Workshops and guest lectures from industry professionals working on the latest in artificial intelligence and machine learning.
+- **Community** — Find like-minded students and connect with the AI community at large.
+- **Innovation** — Build projects and enter hackathons to push your knowledge of AI and discover new opportunities.
+- **Industry connections** — Network with professionals and get a read on AI careers, from early-stage startups to international giants.
+
+Membership is free, and everything starts with showing up: join the society, get the newsletter, and hear about events before anyone else.
+
+## Events
+
+We run AI workshops, guest lectures, hackathons, and networking events throughout the year. Event categories: Workshop, Guest Lecture, Hackathon, Other. Browse upcoming and past events at /events, and view details at /events/[id].
+
+## Course Navigator
+
+An AI-powered tool that helps students search all Uppsala University courses with natural language and explore their connections. Ask for recommendations (e.g. "beginner statistics with labs") and get course suggestions, or browse and filter the full course catalog by title, code, tag, and level (Preparatory, Bachelor's, Master's). This is an early prototype — AI can make mistakes, so double-check information.
+
+- Explore courses: /explore
+- Save favorite courses and organize them into up to 10 custom groups of up to 50 courses each: /my-courses (sign-in required)
+- Degree pathway visualization and prerequisite planning (under construction): /study-plan
+
+## Projects
+
+Community-built projects include:
+
+- **Course Navigator** — An AI-powered tool to help students navigate their course options and make informed decisions about their academic path (in development).
+
+Have an idea? The dev team is always looking for new project ideas and contributors — email dev@uuais.com.
+
+## Blog & Newsletter
+
+Articles and updates published by the society at /blog, with individual posts at /blog/[id].
+
+## Careers / Job board
+
+A job board for startups, internships, master's thesis opportunities, and jobs, filterable by Internships & Master thesis, Startups, Jobs, and Other. To post a role, contact alexander.anderson@uuais.com.
+
+## Join & Apply
+
+- Become a member (free) at /join.
+- Apply for open team roles (Development, IT, Growth, Partnerships & Events) at /apply/team.
+- Board positions open during the annual election period at /apply/board.
+
+## Contact
+
+- General inquiries: contact@uuais.com
+- Partnerships, sponsorships, or collaborations: partnerships@uuais.com
+- Development (projects or website): dev@uuais.com
+
+## Privacy
+
+See /privacy for the privacy policy.
