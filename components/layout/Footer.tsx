@@ -17,8 +17,8 @@ const quickLinks = [
 
 const contacts = [
   { address: "contact@uuais.com", label: "General" },
-  { address: "dev@uuais.com", label: "Development" },
-  { address: "partnerships@uuais.com", label: "Partnerships" },
+  { address: "alexander.andersson@uuais.com", label: "Development" },
+  { address: "william.eklund@uuais.com", label: "Partnerships" },
 ];
 
 const partners = [

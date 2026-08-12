@@ -26,7 +26,7 @@ describe('PrivacyPage', () => {
 
   it('renders contact emails', () => {
     render(<PrivacyPage />)
-    expect(screen.getByText('dev@uuais.com')).toBeInTheDocument()
+    expect(screen.getByText('alexander.andersson@uuais.com')).toBeInTheDocument()
     expect(screen.getByText('contact@uuais.com')).toBeInTheDocument()
   })
 })

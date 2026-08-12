@@ -45,13 +45,13 @@ const ContactPage: React.FC = () => {
     {
       icon: Handshake,
       title: 'Partnership',
-      details: <a href="mailto:partnerships@uuais.com">partnerships@uuais.com</a>,
+      details: <a href="mailto:william.eklund@uuais.com">william.eklund@uuais.com</a>,
       description: 'For partnerships, sponsorships, or collaborations.'
     },
     {
       icon: MessageSquareCode,
       title: 'Development',
-      details: <a href="mailto:dev@uuais.com">dev@uuais.com</a>,
+      details: <a href="mailto:alexander.andersson@uuais.com">alexander.andersson@uuais.com</a>,
       description: 'For inquiries related to our projects or website.'
     }
   ];

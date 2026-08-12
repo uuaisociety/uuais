@@ -8,7 +8,7 @@
 - Membership: free and open to all students
 - Pillars: AI knowledge, Community, Innovation, Industry connections
 - Events: workshops, guest lectures, hackathons, seminars, and networking
-- Contact: contact@uuais.com (general), partnerships@uuais.com (partnerships), dev@uuais.com (development)
+- Contact: contact@uuais.com (general), william.eklund@uuais.com (partnerships), alexander.andersson@uuais.com (development)
 - Website: https://uuais.com
 
 ## Sections

@@ -79,7 +79,7 @@ export default function CareersPage() {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Job board</h1>
           <div className="text-gray-700 dark:text-gray-300 space-y-2 mt-2">
             <p>
-              To post a role here contact us at <a className="underline" href="mailto:alexander.anderson@uuais.com">alexander.anderson@uuais.com</a>.
+              To post a role here contact us at <a className="underline" href="mailto:alexander.andersson@uuais.com">alexander.andersson@uuais.com</a>.
             </p>
           </div>
         </header>

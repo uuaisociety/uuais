@@ -15,6 +15,6 @@ describe('NotFound', () => {
 
   it('renders contact email', () => {
     render(<NotFound />)
-    expect(screen.getByText('dev@uuais.com')).toBeInTheDocument()
+    expect(screen.getByText('alexander.andersson@uuais.com')).toBeInTheDocument()
   })
 })

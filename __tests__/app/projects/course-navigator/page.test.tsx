@@ -76,7 +76,7 @@ describe('CourseNavigatorPage', () => {
   it('renders the Contact the Team button with correct mailto href', () => {
     render(<CourseNavigatorPage />)
     const link = screen.getByText('Contact the Team').closest('a')
-    expect(link).toHaveAttribute('href', 'mailto:dev@uuais.com')
+    expect(link).toHaveAttribute('href', 'mailto:alexander.andersson@uuais.com')
   })
 
   it('calls updatePageMeta on mount with correct arguments', () => {

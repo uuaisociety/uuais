@@ -27,7 +27,7 @@ export default function Error({
         </p>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-8">
           If this keeps happening, send us an email at{' '}
-          <a href="mailto:dev@uuais.com" className="text-red-600 hover:underline">dev@uuais.com</a>
+          <a href="mailto:alexander.andersson@uuais.com" className="text-red-600 hover:underline">alexander.andersson@uuais.com</a>
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <button
