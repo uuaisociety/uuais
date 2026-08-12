@@ -17,8 +17,8 @@ const quickLinks = [
 
 const contacts = [
   { address: "contact@uuais.com", label: "General" },
-  { address: "alexander.andersson@uuais.com", label: "Development" },
-  { address: "william.eklund@uuais.com", label: "Partnerships" },
+  { address: "partnerships@uuais.com", label: "Partnerships" },
+  { address: "it@uuais.com", label: "Website" },
 ];
 
 const partners = [
@@ -72,9 +72,9 @@ export const Footer: React.FC = () => {
               <Image
                 src="/images/logo-highdef.png"
                 alt=""
-                width={240}
+                width={40}
                 height={40}
-                className="h-9 w-auto"
+                className="h-9 w-9"
               />
               <span className="text-base font-semibold tracking-[-0.03em]">UU AI Society</span>
             </div>
@@ -117,7 +117,7 @@ export const Footer: React.FC = () => {
               {contacts.map((c) => (
                 <li key={c.address}>
                   <a href={`mailto:${c.address}`} className={linkClass}>{c.address}</a>
-                  <span className="block mono-label text-muted-foreground/70 mt-0.5">{c.label}</span>
+                  <span className="block mono-label text-muted-foreground mt-0.5">{c.label}</span>
                 </li>
               ))}
             </ul>
