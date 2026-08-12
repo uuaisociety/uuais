@@ -69,10 +69,17 @@ export const deletePosition = async (id: string): Promise<void> => {
 export const subscribeToPositions = (callback: (positions: BoardPosition[]) => void) => {
   const boardPositionsRef = collection(db, 'board-positions');
   const q = query(boardPositionsRef, orderBy('order', 'asc'));
-  return onSnapshot(q, (snapshot) => {
-    const list = snapshot.docs.map((d, i) => docToBoardPosition(d, i));
-    callback(list);
-  });
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const list = snapshot.docs.map((d, i) => docToBoardPosition(d, i));
+      callback(list);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 };
 
 /** Reorder positions by swapping the order values of two positions */

@@ -60,13 +60,20 @@ export const subscribeToJobs = (
     ? query(jobsRef, orderBy("createdAt", "desc"))
     : query(jobsRef, where("published", "==", true), orderBy("createdAt", "desc"));
 
-  return onSnapshot(qy, (snapshot) => {
-    const jobs = snapshot.docs.map((d) => {
-      const data = d.data() as DocumentData;
-      const ts = data?.createdAt;
-      const createdAt = ts instanceof Timestamp ? ts.toDate().toISOString() : undefined;
-      return { id: d.id, ...data, createdAt } as Job;
-    });
-    callback(jobs);
-  });
+  return onSnapshot(
+    qy,
+    (snapshot) => {
+      const jobs = snapshot.docs.map((d) => {
+        const data = d.data() as DocumentData;
+        const ts = data?.createdAt;
+        const createdAt = ts instanceof Timestamp ? ts.toDate().toISOString() : undefined;
+        return { id: d.id, ...data, createdAt } as Job;
+      });
+      callback(jobs);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 };

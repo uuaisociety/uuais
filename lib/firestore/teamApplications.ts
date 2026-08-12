@@ -104,11 +104,18 @@ export async function deleteTeamApplicationWithLimits(
 }
 
 export function subscribeToTeamApplications(callback: (applications: TeamApplication[]) => void) {
-  return onSnapshot(collection(db, COLLECTION), (snapshot) => {
-    const list = snapshot.docs.map((d) => docToApplication(d.id, d.data() as Record<string, unknown>));
-    list.sort((a, b) => applicationSortKey(b.createdAt) - applicationSortKey(a.createdAt));
-    callback(list);
-  });
+  return onSnapshot(
+    collection(db, COLLECTION),
+    (snapshot) => {
+      const list = snapshot.docs.map((d) => docToApplication(d.id, d.data() as Record<string, unknown>));
+      list.sort((a, b) => applicationSortKey(b.createdAt) - applicationSortKey(a.createdAt));
+      callback(list);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 }
 
 export async function listTeamApplicationsByCampaign(campaignId: string): Promise<TeamApplication[]> {

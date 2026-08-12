@@ -115,8 +115,15 @@ export function subscribeToCampaigns(callback: (campaigns: ApplicationCampaign[]
   const q = opts?.includeAll
     ? query(collection(db, COLLECTION))
     : query(collection(db, COLLECTION), where('status', '==', 'open'));
-  return onSnapshot(q, (snapshot) => {
-    const list = snapshot.docs.map((d) => docToCampaign(d.id, d.data() as Record<string, unknown>));
-    callback(list);
-  });
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const list = snapshot.docs.map((d) => docToCampaign(d.id, d.data() as Record<string, unknown>));
+      callback(list);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 }

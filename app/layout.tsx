@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageTransition } from "@/components/layout/PageTransition";
 import { Providers } from './providers';
 import { AppProvider } from '@/contexts/AppContext';
+import { getPublicSeed } from '@/lib/server-data';
 import { NotificationsProvider } from '@/components/ui/Notifications';
 import RegistrationGate from '@/components/auth/RegistrationGate';
 import { AnalyticsWithConsent } from '@/components/common/AnalyticsWithConsent';
@@ -33,14 +34,19 @@ const mono = Martian_Mono({
   display: "swap",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const seed = await getPublicSeed();
+
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className={`${display.variable} ${mono.variable} font-sans bg-background text-foreground min-h-screen`}>
+        <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://storage.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.gstatic.com" crossOrigin="anonymous" />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
@@ -49,7 +55,7 @@ export default function RootLayout({
         </a>
         <Providers>
           <NotificationsProvider>
-            <AppProvider>
+            <AppProvider seed={seed}>
               {/* Ambient colour fields the glass surfaces refract */}
               <div className="ambient" aria-hidden />
               {bgTexture === "grain" && <div className="grain" aria-hidden />}
@@ -57,7 +63,7 @@ export default function RootLayout({
               <div className="min-h-screen flex flex-col">
                 <Header />
                 <RegistrationGate />
-                <main id="main" className="flex-grow">
+                <main id="main" className="flex-grow min-h-screen">
                   <PageTransition>{children}</PageTransition>
                 </main>
                 <Footer />

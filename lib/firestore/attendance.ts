@@ -34,15 +34,22 @@ export const subscribeToEventAttendance = (
 ) => {
   if (!eventId) return () => {};
   const ref = doc(db, 'events', eventId);
-  return onSnapshot(ref, (snap) => {
-    if (!snap.exists()) {
+  return onSnapshot(
+    ref,
+    (snap) => {
+      if (!snap.exists()) {
+        callback([]);
+        return;
+      }
+      const data = snap.data() as DocumentData;
+      const attendees = Array.isArray(data.attendees) ? (data.attendees as EventAttendanceEntry[]) : [];
+      callback(attendees);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
       callback([]);
-      return;
     }
-    const data = snap.data() as DocumentData;
-    const attendees = Array.isArray(data.attendees) ? (data.attendees as EventAttendanceEntry[]) : [];
-    callback(attendees);
-  });
+  );
 };
 
 export async function setAttendanceForUser(

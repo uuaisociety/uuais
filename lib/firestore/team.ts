@@ -53,8 +53,15 @@ export const moveTeamMember = async (members: TeamMember[], memberId: string, di
 export const subscribeToTeamMembers = (callback: (members: TeamMember[]) => void) => {
   const membersRef = collection(db, 'teamMembers');
   const q = query(membersRef, orderBy('order', 'asc'));
-  return onSnapshot(q, (snapshot) => {
-    const members = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as TeamMember));
-    callback(members);
-  });
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const members = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as TeamMember));
+      callback(members);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 };

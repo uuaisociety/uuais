@@ -28,6 +28,7 @@ export type CachedIdentity = {
 type Store = {
   user: User | null;
   loading: boolean;
+  profileLoading: boolean;
   isAdmin: boolean;
   isSuperAdmin: boolean;
   claims: Record<string, unknown> | null;
@@ -61,6 +62,7 @@ const writeCache = (identity: CachedIdentity | null) => {
 let store: Store = {
   user: null,
   loading: true,
+  profileLoading: false,
   isAdmin: false,
   isSuperAdmin: false,
   claims: null,
@@ -101,7 +103,7 @@ const start = () => {
     if (!u) {
       profileRequests.clear();
       writeCache(null);
-      setStore({ user: null, loading: false, isAdmin: false, isSuperAdmin: false, claims: null, profile: null, cached: null });
+      setStore({ user: null, loading: false, profileLoading: false, isAdmin: false, isSuperAdmin: false, claims: null, profile: null, cached: null });
       return;
     }
 
@@ -122,6 +124,7 @@ const start = () => {
     setStore({
       user: u,
       loading: false,
+      profileLoading: true,
       isAdmin,
       isSuperAdmin,
       claims: tokenClaims,
@@ -134,7 +137,7 @@ const start = () => {
     const name = profile?.displayName || profile?.name || u.displayName || null;
     const identity: CachedIdentity = { uid: u.uid, name, email: u.email, photoURL: u.photoURL, isAdmin };
     writeCache(identity);
-    setStore({ profile, cached: identity });
+    setStore({ profile, profileLoading: false, cached: identity });
   });
 };
 
@@ -152,6 +155,7 @@ const getServerSnapshot = () => serverStore;
 export type AdminState = {
   user: User | null;
   loading: boolean;
+  profileLoading: boolean;
   isAdmin: boolean;
   isSuperAdmin: boolean;
   claims: Record<string, unknown> | null;

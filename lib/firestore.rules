@@ -251,12 +251,24 @@ service cloud.firestore {
       allow read: if isAdmin();
 
       // Create initial doc with clicks:1
-      allow create: if request.resource.data.keys().hasOnly(['clicks', 'updatedAt'])
+      allow create: if request.resource.data.keys().hasOnly(['clicks', 'externalRegistrationClicks', 'updatedAt'])
         && request.resource.data.clicks == 1;
 
-      // Update: only clicks (+1) and updatedAt allowed
-      allow update: if changedOnly(['clicks', 'updatedAt'])
-        && request.resource.data.clicks == resource.data.clicks + 1;
+      // Update: only clicks (+1) or externalRegistrationClicks (+1) and updatedAt allowed
+      allow update: if changedOnly(['clicks', 'externalRegistrationClicks', 'updatedAt'])
+        && (
+          (
+            request.resource.data.clicks == resource.data.clicks + 1
+            && request.resource.data.externalRegistrationClicks == resource.data.externalRegistrationClicks
+          )
+          || (
+            // Allow increment when externalRegistrationClicks was previously missing/null
+            // (treat as 0) or when it's explicitly incremented by +1.
+            (resource.data.externalRegistrationClicks == null && request.resource.data.externalRegistrationClicks == 1)
+            || request.resource.data.externalRegistrationClicks == resource.data.externalRegistrationClicks + 1
+          )
+          && request.resource.data.clicks == resource.data.clicks
+        );
 
       // No deletes from clients
       allow delete: if isAdmin();
