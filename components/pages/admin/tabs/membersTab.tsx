@@ -55,6 +55,34 @@ function downloadCsv(users: EditableUser[]) {
   URL.revokeObjectURL(url);
 }
 
+type SortableThProps = {
+  column: string;
+  sortKey: string | null;
+  sortDir: 'asc' | 'desc';
+  onToggle: (key: string) => void;
+  children: React.ReactNode;
+};
+
+const SortableTh: React.FC<SortableThProps> = ({ column, sortKey, sortDir, onToggle, children }) => (
+  <th
+    className="py-2 pr-4"
+    aria-sort={sortKey === column ? (sortDir === 'asc' ? 'ascending' : 'descending') : undefined}
+  >
+    <button
+      type="button"
+      onClick={() => onToggle(column)}
+      className="inline-flex items-center gap-1 cursor-pointer"
+    >
+      {children}
+      {sortKey === column && (
+        <span aria-hidden="true" className="text-xs text-gray-400 dark:text-gray-500">
+          {sortDir === 'asc' ? '▲' : '▼'}
+        </span>
+      )}
+    </button>
+  </th>
+);
+
 export default function MembersTab({ onChanged }: MembersTabProps) {
   const { notify } = useNotify();
   const [loading, setLoading] = useState(false);
@@ -347,13 +375,13 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
         <table className="min-w-full text-left text-sm">
           <thead className="text-gray-600 dark:text-gray-300">
             <tr>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('name')}>Name</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('email')}>Email</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('isMember')}>Member</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('campus')}>Campus</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('program')}>Program</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('university')}>University</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('updatedAt')}>Updated</th>
+              <SortableTh column="name" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Name</SortableTh>
+              <SortableTh column="email" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Email</SortableTh>
+              <SortableTh column="isMember" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Member</SortableTh>
+              <SortableTh column="campus" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Campus</SortableTh>
+              <SortableTh column="program" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Program</SortableTh>
+              <SortableTh column="university" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>University</SortableTh>
+              <SortableTh column="updatedAt" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Updated</SortableTh>
               <th className="py-2 pr-4"></th>
             </tr>
           </thead>
