@@ -1,9 +1,9 @@
 # UU AI Society (UUAIS)
 
-> UU AI Society is the student-run Artificial Intelligence society at Uppsala University in Sweden, uniting students driven by AI, tech, and meaningful collaboration through workshops, guest lectures, hackathons, and networking. Membership is free.
+> UU AI Society is the student-run Artificial Intelligence society in Uppsala, Sweden, uniting students driven by AI, tech, and meaningful collaboration through workshops, guest lectures, hackathons, and networking. Membership is free.
 
 Key facts:
-- Location: Uppsala, Sweden — based at Uppsala University
+- Location: Uppsala, Sweden
 - Organization: student-led non-profit run entirely by volunteer students
 - Membership: free and open to all students
 - Pillars: AI knowledge, Community, Innovation, Industry connections

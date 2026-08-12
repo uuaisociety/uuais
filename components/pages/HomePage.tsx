@@ -93,7 +93,7 @@ const HomePage: React.FC = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto pt-14 grid grid-rows-[auto_1fr] lg:grid-rows-none lg:grid-cols-[1.05fr_0.95fr] items-center lg:content-stretch min-h-[calc(100dvh+3.5rem)]">
           <div className="order-2 lg:order-1 px-6 sm:px-8 lg:px-8 pb-14 lg:py-14">
-            <p className="mono-label text-foreground/65 mb-6">Uppsala University · AI Society</p>
+            <p className="mono-label text-foreground/65 mb-6">Uppsala · AI Society</p>
 
             <h1 className="display-xl mb-7">
               Build the future.

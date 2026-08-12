@@ -5,7 +5,7 @@ import { SITE_URL } from '@/app/metadata';
 
 export const metadata: Metadata = {
   title: 'Events',
-  description: 'Discover upcoming events, workshops, seminars, and hackathons organized by UU AI Society at Uppsala University.',
+  description: 'Discover upcoming events, workshops, seminars, and hackathons organized by UU AI Society in Uppsala.',
   alternates: { canonical: `${SITE_URL}/events` },
 };
 

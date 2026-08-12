@@ -4,7 +4,7 @@ import { SITE_URL } from '@/app/metadata';
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Contact UU AI Society - reach out with questions, partnership ideas, or interest in joining our AI community at Uppsala University.',
+  description: 'Contact UU AI Society - reach out with questions, partnership ideas, or interest in joining our AI community in Uppsala.',
   alternates: { canonical: `${SITE_URL}/contact` },
 };
 
