@@ -186,7 +186,7 @@ export default function CourseNavigatorPage() {
 
               <div className="mt-6 pt-6 border-t border-border">
                 <Button asChild variant="secondary" className="w-full">
-                  <Link href="mailto:alexander.andersson@uuais.com">
+                  <Link href="mailto:dev@uuais.com">
                     Contact the Team
                   </Link>
                 </Button>

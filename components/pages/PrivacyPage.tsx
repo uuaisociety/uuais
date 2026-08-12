@@ -193,7 +193,7 @@ export const PrivacyPage: React.FC = () => {
                 If you have questions about this Privacy Policy or wish to exercise your rights, please contact us:
               </p>
               <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                <p><strong>Email:</strong> <a href="mailto:alexander.andersson@uuais.com" className="text-blue-600 dark:text-blue-400">alexander.andersson@uuais.com</a></p>
+                <p><strong>Email:</strong> <a href="mailto:it@uuais.com" className="text-blue-600 dark:text-blue-400">it@uuais.com</a></p>
                 <p><strong>General Contact:</strong> <a href="mailto:contact@uuais.com" className="text-blue-600 dark:text-blue-400">contact@uuais.com</a></p>
                 <p><strong>Organization Number:</strong> 802551-8930</p>
                 <p><strong>Response Time:</strong> We will respond to your request within 30 days as required by GDPR</p>

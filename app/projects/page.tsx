@@ -74,8 +74,8 @@ export default function ProjectsPage() {
             If you have a suggestion or want to get involved, we'd love to hear from you.
           </p>
           <Button asChild>
-            <Link href="mailto:alexander.andersson@uuais.com">
-              Contact the Dev Team
+            <Link href="mailto:dev@uuais.com">
+              Contact the Development Team
             </Link>
           </Button>
         </div>
