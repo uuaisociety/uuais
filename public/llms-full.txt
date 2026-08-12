@@ -39,7 +39,7 @@ Community-built projects include:
 
 - **Course Navigator** — An AI-powered tool to help students navigate their course options and make informed decisions about their academic path (in development).
 
-Have an idea? The dev team is always looking for new project ideas and contributors — email alexander.andersson@uuais.com.
+Have an idea? The dev team is always looking for new project ideas and contributors — email dev@uuais.com.
 
 ## Blog & Newsletter
 
@@ -47,7 +47,7 @@ Articles and updates published by the society at /blog, with individual posts at
 
 ## Careers / Job board
 
-A job board for startups, internships, master's thesis opportunities, and jobs, filterable by Internships & Master thesis, Startups, Jobs, and Other. To post a role, contact alexander.andersson@uuais.com.
+A job board for startups, internships, master's thesis opportunities, and jobs, filterable by Internships & Master thesis, Startups, Jobs, and Other. To post a role, contact partnerships@uuais.com.
 
 ## Join & Apply
 
@@ -58,8 +58,10 @@ A job board for startups, internships, master's thesis opportunities, and jobs, 
 ## Contact
 
 - General inquiries: contact@uuais.com
-- Partnerships, sponsorships, or collaborations: william.eklund@uuais.com
-- Development (projects or website): alexander.andersson@uuais.com
+- Website questions: it@uuais.com
+- Partnerships, sponsorships, or collaborations: partnerships@uuais.com
+- Development (projects): dev@uuais.com
+- Research collaborations: research@uuais.com
 
 ## Privacy
 
