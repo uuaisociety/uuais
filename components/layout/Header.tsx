@@ -9,6 +9,7 @@ import { useAdmin } from '@/hooks/useAdmin';
 import { useApp } from '@/contexts/AppContext';
 import { useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
+import { loginUrl } from '@/lib/login-redirect';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -169,7 +170,7 @@ export const Header: React.FC = () => {
                     <Link href="/join" className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors">
                       Register
                     </Link>
-                    <Link href="/login" className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors">
+                    <Link href={loginUrl(pathname)} className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors">
                       Login
                     </Link>
                   </>
@@ -247,7 +248,7 @@ export const Header: React.FC = () => {
                 </>
               ) : (
                 <div className="flex gap-2 px-1.5 py-1.5">
-                  <Link href="/login" className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-current/65 border border-current/10 hover:bg-current/[0.07] transition-colors">
+                  <Link href={loginUrl(pathname)} className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-current/65 border border-current/10 hover:bg-current/[0.07] transition-colors">
                     Login
                   </Link>
                   <Link href="/join" className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-current/65 border border-current/10 hover:bg-current/[0.07] transition-colors">
