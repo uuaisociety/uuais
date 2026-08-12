@@ -8,7 +8,7 @@ import {
   GraduationCap, Briefcase, Tag, Lock, Loader2,
 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { FieldGroup, InputBase, SelectBase, TextareaBase } from "@/components/ui/Form";
@@ -23,6 +23,7 @@ import PDFDropzone from "@/components/ui/PDFDropzone";
 import { useApp } from "@/contexts/AppContext";
 import { useNotify } from "@/components/ui/Notifications";
 import { auth, refreshSessionCookie } from "@/lib/firebase-client";
+import { loginUrl } from "@/lib/login-redirect";
 import { getUserProfile, type UserProfile } from "@/lib/firestore/users";
 import { subscribeToCampaignQuestions } from "@/lib/firestore/campaignQuestions";
 import { getTeamApplicationByUid } from "@/lib/firestore/teamApplications";
@@ -145,6 +146,7 @@ export default function TeamApplicationPage() {
   const { state } = useApp();
   const { notify } = useNotify();
   const router = useRouter();
+  const pathname = usePathname();
   const wizardRef = useRef<HTMLDivElement>(null);
 
   // Find the first open campaign
@@ -728,7 +730,7 @@ export default function TeamApplicationPage() {
                 <div className="flex items-center gap-2 text-sm text-chart-3 bg-chart-3/10 rounded-md p-3 border border-chart-3/40">
                   <Lock className="h-4 w-4 shrink-0" />
                   <span>
-                    You need to <Link href="/login" className="underline font-medium">sign in</Link> or{" "}
+                    You need to <Link href={loginUrl(pathname)} className="underline font-medium">sign in</Link> or{" "}
                     <Link href="/join" className="underline font-medium">register</Link> to submit your application.
                     You can still fill the form now and sign in before submitting.
                   </span>
