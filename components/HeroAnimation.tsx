@@ -233,13 +233,19 @@ const HeroAnimation: React.FC = () => {
     };
 
     // === Animation Loop ===
+    // Runs only while on-screen, tab visible, and no reduced motion.
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let running = false;
+
     const animate = (ts: number) => {
-      const { W, H } = layoutRef.current;
-      const dt = ts - lastTimeRef.current;
+      if (!running) return;
+      if (!lastTimeRef.current) lastTimeRef.current = ts;
+      const dt = Math.min(ts - lastTimeRef.current, 50);
       lastTimeRef.current = ts;
       totalTimeRef.current += dt;
       const t = totalTimeRef.current;
 
+      const { W, H } = layoutRef.current;
       ctx.clearRect(0, 0, W, H);
       drawParticles(t);
 
@@ -264,13 +270,39 @@ const HeroAnimation: React.FC = () => {
       animationRef.current = requestAnimationFrame(animate);
     };
 
+    const startLoop = () => {
+      if (running || reducedMotion.matches) return;
+      running = true;
+      lastTimeRef.current = 0;
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    const stopLoop = () => {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(animationRef.current);
+    };
+
+    // Stop animating when the canvas scrolls out of view or the tab is hidden.
+    let isIntersecting = true;
+    const onIntersect = (entries: IntersectionObserverEntry[]) => {
+      isIntersecting = entries[entries.length - 1].isIntersecting;
+      if (isIntersecting && !document.hidden) startLoop();
+      else stopLoop();
+    };
+    const onVisibilityChange = () => {
+      if (document.hidden) stopLoop();
+      else if (isIntersecting) startLoop();
+    };
+    const io = new IntersectionObserver(onIntersect);
+    io.observe(canvas);
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     window.addEventListener('resize', resize);
     document.addEventListener('mousemove', handleMouseMove);
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!prefersReduced.matches) {
-      animationRef.current = requestAnimationFrame(animate);
+    if (!reducedMotion.matches) {
+      startLoop();
     } else {
       // Render a single static frame of the glyph so the hero still has form.
       ctx.clearRect(0, 0, layoutRef.current.W, layoutRef.current.H);
@@ -278,7 +310,9 @@ const HeroAnimation: React.FC = () => {
     }
 
     return () => {
-      cancelAnimationFrame(animationRef.current);
+      stopLoop();
+      io.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('resize', resize);
       document.removeEventListener('mousemove', handleMouseMove);
     };

@@ -159,30 +159,67 @@ const FloatingSymbolsCanvas: React.FC = () => {
     };
 
     // === Animation Loop ===
+    // Runs only while on-screen, tab visible, and no reduced motion; paints at half cadence.
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let running = false;
+    let frame = 0;
+
     const animate = (ts: number) => {
+      if (!running) return;
       if (!prevTsRef.current) prevTsRef.current = ts;
-      const dt = ts - prevTsRef.current;
+      const dt = Math.min(ts - prevTsRef.current, 50);
       prevTsRef.current = ts;
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      draw(dt);
+      frame++;
+      if (frame % 2 === 0 && symbolsRef.current.length > 0) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        draw(dt);
+      }
       animationRef.current = requestAnimationFrame(animate);
     };
+
+    const startLoop = () => {
+      if (running || reducedMotion.matches) return;
+      running = true;
+      prevTsRef.current = 0;
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    const stopLoop = () => {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(animationRef.current);
+    };
+
+    // Stop animating when the canvas scrolls out of view or the tab is hidden.
+    let isIntersecting = true;
+    const onIntersect = (entries: IntersectionObserverEntry[]) => {
+      isIntersecting = entries[entries.length - 1].isIntersecting;
+      if (isIntersecting && !document.hidden) startLoop();
+      else stopLoop();
+    };
+    const onVisibilityChange = () => {
+      if (document.hidden) stopLoop();
+      else if (isIntersecting) startLoop();
+    };
+    const io = new IntersectionObserver(onIntersect);
+    io.observe(canvas);
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('click', handleClick);
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!prefersReduced.matches) {
-      animationRef.current = requestAnimationFrame(animate);
+    if (!reducedMotion.matches) {
+      startLoop();
     } else {
       draw(0);
     }
 
     return () => {
-      cancelAnimationFrame(animationRef.current);
-      ro.disconnect();
+      stopLoop();
+      io.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('click', handleClick);
