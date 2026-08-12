@@ -37,11 +37,15 @@ describe('ContactPage', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<ContactPage />)
     expect(screen.getByText('General')).toBeInTheDocument()
+    expect(screen.getByText('Website')).toBeInTheDocument()
     expect(screen.getByText('Partnership')).toBeInTheDocument()
     expect(screen.getByText('Development')).toBeInTheDocument()
+    expect(screen.getByText('Research')).toBeInTheDocument()
     expect(screen.getByText('contact@uuais.com')).toBeInTheDocument()
-    expect(screen.getByText('william.eklund@uuais.com')).toBeInTheDocument()
-    expect(screen.getByText('alexander.andersson@uuais.com')).toBeInTheDocument()
+    expect(screen.getByText('it@uuais.com')).toBeInTheDocument()
+    expect(screen.getByText('partnerships@uuais.com')).toBeInTheDocument()
+    expect(screen.getByText('dev@uuais.com')).toBeInTheDocument()
+    expect(screen.getByText('research@uuais.com')).toBeInTheDocument()
   })
 
   it('renders get in touch section', () => {

@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 import React from 'react';
 
 const mockUnsubscribe = jest.fn();
@@ -142,12 +142,28 @@ describe('AppContext', () => {
     renderApp();
     expect(subscribeToEvents).toHaveBeenCalledTimes(1);
     expect(subscribeToTeamMembers).toHaveBeenCalledTimes(1);
+    // Blog posts are subscribed for all users (public sees published only)
     expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
     expect(subscribeToFaqs).toHaveBeenCalledTimes(1);
     expect(subscribeToJobs).toHaveBeenCalledTimes(1);
     expect(subscribeToPositions).toHaveBeenCalledTimes(1);
     expect(onIdTokenChanged).toHaveBeenCalledTimes(1);
     expect(idTokenCallback).not.toBeNull();
+  });
+
+  it('subscribes to blog posts with includeUnpublished false for public users', () => {
+    renderApp();
+    expect(subscribeToBlogPosts).toHaveBeenCalledWith(expect.any(Function), { includeUnpublished: false });
+  });
+
+  it('re-subscribes to blog posts with includeUnpublished true once admin id token resolves', async () => {
+    renderApp();
+    expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
+    act(() => {
+      idTokenCallback!({ uid: 'admin-1', getIdTokenResult: () => Promise.resolve({ claims: { admin: true } }) });
+    });
+    await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledTimes(2));
+    expect(subscribeToBlogPosts).toHaveBeenLastCalledWith(expect.any(Function), { includeUnpublished: true });
   });
 
   it('throws useApp outside provider', () => {

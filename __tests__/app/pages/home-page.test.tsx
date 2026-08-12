@@ -34,7 +34,7 @@ describe('HomePage', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<HomePage />)
     expect(screen.getByText('Our events')).toBeInTheDocument()
-    expect(screen.getByText('Learn more')).toBeInTheDocument()
+    expect(screen.getByText('Learn about UU AI Society')).toBeInTheDocument()
   })
 
   it('hero text and CTAs are theme-aware (inverted on the paper slab)', () => {
@@ -50,7 +50,7 @@ describe('HomePage', () => {
 
     // Muted hero text follows the slab tone via currentColor
     const eyebrow = screen.getByText('Uppsala University · AI Society')
-    expect(eyebrow.className).toContain('text-current/45')
+    expect(eyebrow.className).toContain('text-foreground/65')
 
     // The hero slab itself is the shared, theme-aware HeroSplash
     expect(container.querySelector('section')?.className).toContain('bg-card')

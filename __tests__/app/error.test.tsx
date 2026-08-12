@@ -33,8 +33,8 @@ describe('ErrorPage', () => {
 
   it('renders contact email link', () => {
     render(<ErrorPage error={mockError} reset={mockReset} />)
-    const emailLink = screen.getByText('alexander.andersson@uuais.com')
-    expect(emailLink.closest('a')).toHaveAttribute('href', 'mailto:alexander.andersson@uuais.com')
+    const emailLink = screen.getByText('it@uuais.com')
+    expect(emailLink.closest('a')).toHaveAttribute('href', 'mailto:it@uuais.com')
   })
 
   it('logs error to console on mount', () => {

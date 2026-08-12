@@ -29,8 +29,8 @@ describe('Footer', () => {
     const headings = screen.getAllByText('Contact')
     expect(headings.length).toBe(2)
     expect(screen.getByText('contact@uuais.com')).toBeInTheDocument()
-    expect(screen.getByText('alexander.andersson@uuais.com')).toBeInTheDocument()
-    expect(screen.getByText('william.eklund@uuais.com')).toBeInTheDocument()
+    expect(screen.getByText('partnerships@uuais.com')).toBeInTheDocument()
+    expect(screen.getByText('it@uuais.com')).toBeInTheDocument()
   })
 
   it('renders partner section', () => {
