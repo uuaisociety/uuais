@@ -15,10 +15,12 @@ export type TagSize = "sm" | "md" | "lg";
 // Tags are metadata, so they are set in mono and uppercased — the same signal
 // the rest of the system uses to separate data from prose.
 const variantClasses: Record<TagVariant, { light: string; dark: string; text: string; darkText: string }> = {
-  red:    { light: "bg-primary/10",    dark: "dark:bg-primary/15",    text: "text-primary",    darkText: "dark:text-primary" },
-  blue:   { light: "bg-chart-2/12",    dark: "dark:bg-chart-2/18",    text: "text-chart-2",    darkText: "dark:text-chart-2" },
-  green:  { light: "bg-chart-4/12",    dark: "dark:bg-chart-4/18",    text: "text-chart-4",    darkText: "dark:text-chart-4" },
-  yellow: { light: "bg-chart-3/15",    dark: "dark:bg-chart-3/20",    text: "text-chart-3",    darkText: "dark:text-chart-3" },
+  // Light-mode text shades are darkened so mono labels meet WCAG 4.5:1 on the
+  // tinted chip backgrounds; dark mode keeps the full-strength brand colors.
+  red:    { light: "bg-primary/10",    dark: "dark:bg-primary/15",    text: "text-[#c41d1d]",       darkText: "dark:text-primary" },
+  blue:   { light: "bg-chart-2/12",    dark: "dark:bg-chart-2/18",    text: "text-[#1d4ed8]",       darkText: "dark:text-chart-2" },
+  green:  { light: "bg-chart-4/12",    dark: "dark:bg-chart-4/18",    text: "text-[#0f7a55]",       darkText: "dark:text-chart-4" },
+  yellow: { light: "bg-chart-3/15",    dark: "dark:bg-chart-3/20",    text: "text-[#854d0e]",       darkText: "dark:text-chart-3" },
   gray:   { light: "bg-foreground/[0.06]", dark: "dark:bg-foreground/[0.08]", text: "text-foreground/65", darkText: "dark:text-foreground/65" },
 };
 
