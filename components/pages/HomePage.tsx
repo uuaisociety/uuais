@@ -93,11 +93,11 @@ const HomePage: React.FC = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto pt-14 grid grid-rows-[auto_1fr] lg:grid-rows-none lg:grid-cols-[1.05fr_0.95fr] items-center lg:content-stretch min-h-[calc(100dvh+3.5rem)]">
           <div className="order-2 lg:order-1 px-6 sm:px-8 lg:px-8 pb-14 lg:py-14">
-            <p className="mono-label text-current/45 mb-6">Uppsala University · AI Society</p>
+            <p className="mono-label text-foreground/65 mb-6">Uppsala University · AI Society</p>
 
             <h1 className="display-xl mb-7">
               Build the future.
-              <span className="block text-current/40">(Start here.)</span>
+              <span className="block text-foreground/65">(Start here.)</span>
             </h1>
 
             <p className="text-base sm:text-lg text-current/60 max-w-md leading-relaxed mb-9">
@@ -115,7 +115,7 @@ const HomePage: React.FC = () => {
               </Button>
               <Button asChild variant="outline" size="lg">
                 <Link href="/about">
-                  Learn more
+                  Learn about UU AI Society
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                 </Link>
               </Button>
@@ -141,7 +141,7 @@ const HomePage: React.FC = () => {
                 key={pillar.title}
                 className="group flex gap-6 py-8 border-b border-border"
               >
-                <span className="mono-label text-foreground/30 pt-1.5 tabular-nums shrink-0 transition-colors duration-500 group-hover:text-primary">
+                <span className="mono-label text-muted-foreground pt-1.5 tabular-nums shrink-0 transition-colors duration-500 group-hover:text-primary">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>
@@ -180,7 +180,7 @@ const HomePage: React.FC = () => {
                       </div>
                     </div>
                   ))
-                : upcomingEvents.map((event) => (
+                : upcomingEvents.map((event, i) => (
                 <Link
                   key={event.id}
                   href={`/events/${event.id}`}
@@ -193,6 +193,8 @@ const HomePage: React.FC = () => {
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
+                      loading={i === 0 ? "eager" : "lazy"}
+                      fetchPriority={i === 0 ? "high" : "auto"}
                     />
                     <span className="absolute top-3 left-3 pill bg-black/45 text-white backdrop-blur-md">
                       {categoryOptions.find(o => o.value === event.category)?.label || event.category}
@@ -207,13 +209,13 @@ const HomePage: React.FC = () => {
                       {event.description}
                     </p>
                     <div className="mt-auto flex items-center justify-between pt-4 border-t border-border">
-                      <span className="mono-meta text-foreground/50">
+                      <span className="mono-meta text-foreground/65">
                         {(() => {
                           const d = new Date(event.eventStartAt);
                           return `${format(d, 'd MMM yyyy')} · ${format(d, 'HH:mm')}`;
                         })()}
                       </span>
-                      <ArrowUpRight className="h-4 w-4 text-foreground/30 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <ArrowUpRight className="h-4 w-4 text-foreground/60 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>
                   </div>
                 </Link>
@@ -227,7 +229,7 @@ const HomePage: React.FC = () => {
       <section className="px-5 sm:px-8 pt-24 sm:pt-32">
         <div className="max-w-6xl mx-auto">
           <div className="glass rounded-lg px-8 sm:px-14 py-14 sm:py-20 text-center">
-            <p className="mono-label text-foreground/40 mb-6">Membership is free</p>
+            <p className="mono-label text-foreground/65 mb-6">Membership is free</p>
             <h2 className="display-lg mb-5 max-w-2xl mx-auto">
               Everything starts with <span className="paren">(showing up)</span>
             </h2>

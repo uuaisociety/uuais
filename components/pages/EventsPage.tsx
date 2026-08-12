@@ -91,11 +91,10 @@ const EventsPage: React.FC = () => {
         {/* Tabs + filters */}
         <div className="glass rounded-lg p-5 sm:p-6 space-y-5">
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex bg-foreground/[0.05] rounded-md p-1 gap-1" role="tablist" aria-label="Event timeframe">
+            <div className="flex bg-foreground/[0.05] rounded-md p-1 gap-1">
               <button
                 type="button"
-                role="tab"
-                aria-selected={activeTab === "upcoming"}
+                aria-pressed={activeTab === "upcoming"}
                 onClick={() => setActiveTab("upcoming")}
                 className={`px-4 py-2 rounded text-sm font-medium transition-colors duration-300 ${
                   activeTab === "upcoming"
@@ -107,8 +106,7 @@ const EventsPage: React.FC = () => {
               </button>
               <button
                 type="button"
-                role="tab"
-                aria-selected={activeTab === "past"}
+                aria-pressed={activeTab === "past"}
                 onClick={() => setActiveTab("past")}
                 className={`px-4 py-2 rounded text-sm font-medium transition-colors duration-300 ${
                   activeTab === "past"
@@ -166,10 +164,10 @@ const EventsPage: React.FC = () => {
           </div>
         ) : activeEvents.length === 0 ? (
           <div className="border-t border-border py-16 text-center mt-10">
-            <Calendar className="h-12 w-12 text-foreground/20 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-foreground mb-2">
+            <Calendar className="h-12 w-12 text-foreground/60 mx-auto mb-4" />
+            <h2 className="text-lg font-semibold text-foreground mb-2">
               No events found
-            </h3>
+            </h2>
             <p className="text-muted-foreground">
               {activeTab === "upcoming"
                 ? "No upcoming events match your search criteria."
@@ -193,6 +191,8 @@ const EventsPage: React.FC = () => {
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
+                      loading={activeEvents[0] === event ? "eager" : "lazy"}
+                      fetchPriority={activeEvents[0] === event ? "high" : "auto"}
                     />
                   </Link>
                   <span className="absolute top-3 left-3 pill bg-black/45 text-white backdrop-blur-md">
@@ -206,14 +206,14 @@ const EventsPage: React.FC = () => {
                 </div>
 
                 <CardContent className="p-5 flex flex-col flex-1">
-                  <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] leading-snug mb-2">
+                  <h2 className="text-[1.0625rem] font-semibold tracking-[-0.02em] leading-snug mb-2">
                     <Link
                       href={`/events/${event.id}`}
                       className="text-foreground hover:text-primary transition-colors duration-300"
                     >
                       {event.title}
                     </Link>
-                  </h3>
+                  </h2>
 
                   <p className="text-[0.9375rem] leading-relaxed text-muted-foreground line-clamp-3 whitespace-pre-wrap mb-5">
                     {event.description.slice(0, 100) +
@@ -241,13 +241,11 @@ const EventsPage: React.FC = () => {
                     )}
                   </div>
 
-                  <Link href={`/events/${event.id}`}>
-                    {activeTab === "upcoming" ? (
-                      <Button variant="cta">View Details & Register</Button>
-                    ) : (
-                      <Button variant="outline">View Details</Button>
-                    )}
-                  </Link>
+                  <Button asChild variant={activeTab === "upcoming" ? "cta" : "outline"}>
+                    <Link href={`/events/${event.id}`}>
+                      {activeTab === "upcoming" ? "View Details & Register" : "View Details"}
+                    </Link>
+                  </Button>
                 </CardContent>
               </Card>
             ))}

@@ -476,9 +476,9 @@ export default function TeamApplicationPage() {
             <strong className="text-primary">{campaign.title}</strong>&nbsp;has been received.
             We&apos;ll contact you at {form.email || "your email"}.
           </p>
-          <Link href="/">
-            <Button>Back to home</Button>
-          </Link>
+          <Button asChild>
+            <Link href="/">Back to home</Link>
+          </Button>
         </div>
       </div>
     );
@@ -498,9 +498,9 @@ export default function TeamApplicationPage() {
             <strong className="text-primary">{campaign.title}</strong>.
           </p>
           <div className="flex flex-col items-center gap-3">
-            <Link href="/">
-              <Button>Back to home</Button>
-            </Link>
+            <Button asChild>
+              <Link href="/">Back to home</Link>
+            </Button>
           </div>
         </div>
       </div>
@@ -521,9 +521,9 @@ export default function TeamApplicationPage() {
             <strong className="text-primary">{campaign.title}</strong>&nbsp;has passed
             ({campaign.deadline}). We&apos;re no longer accepting submissions.
           </p>
-          <Link href="/">
-            <Button variant="outline">Back to home</Button>
-          </Link>
+          <Button asChild variant="outline">
+            <Link href="/">Back to home</Link>
+          </Button>
         </div>
       </div>
     );
@@ -541,9 +541,9 @@ export default function TeamApplicationPage() {
           <p className="text-muted-foreground mb-6">
             {campaign.title} is not currently accepting role applications. Please check back later.
           </p>
-          <Link href="/">
-            <Button variant="outline">Back to home</Button>
-          </Link>
+          <Button asChild variant="outline">
+            <Link href="/">Back to home</Link>
+          </Button>
         </div>
       </div>
     );
@@ -606,7 +606,7 @@ export default function TeamApplicationPage() {
       {step === 0 ? (
         <HeroSplash className="min-h-[50vh]">
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
-            <p className="mono-label text-current/45 mb-6 flex items-center gap-2">
+            <p className="mono-label text-current/65 mb-6 flex items-center gap-2">
               <Sparkles className="h-4 w-4" />
               {campaign.subtitle}
             </p>
@@ -616,7 +616,7 @@ export default function TeamApplicationPage() {
             <p className="text-base sm:text-lg text-current/60 mb-6 max-w-2xl leading-relaxed">
               {campaign.description}
             </p>
-            <div className="flex items-center gap-2 text-current/60">
+            <div className="flex items-center gap-2 text-current/65">
               <Clock className="h-5 w-5" />
               <span>Application deadline: {campaign.deadline}</span>
             </div>
@@ -1015,6 +1015,8 @@ export default function TeamApplicationPage() {
                             step={1}
                             value={form.weeklyHours}
                             onChange={(e) => set("weeklyHours", Number(e.target.value))}
+                            aria-label="Weekly availability (hours)"
+                            aria-valuetext={`${form.weeklyHours} hours per week`}
                             className="w-full accent-primary"
                           />
                           {/* Labels aligned under the slider (this column only) */}

@@ -53,6 +53,7 @@ const MultiStepWizard: React.FC<MultiStepWizardProps> = ({
   // The step header scrolls horizontally on narrow screens; keep the active step in view.
   const stepBarRef = useRef<HTMLDivElement>(null);
   const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     const bar = stepBarRef.current;
@@ -60,6 +61,12 @@ const MultiStepWizard: React.FC<MultiStepWizardProps> = ({
     if (!bar || !el) return;
     const left = el.offsetLeft - (bar.clientWidth - el.offsetWidth) / 2;
     bar.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+    // Move focus to the active step on change so screen readers hear the new step.
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    } else {
+      el.focus({ preventScroll: true });
+    }
   }, [currentStep]);
 
   return (
@@ -70,7 +77,7 @@ const MultiStepWizard: React.FC<MultiStepWizardProps> = ({
           ref={stepBarRef}
           className="relative overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          <div className="flex items-center w-max min-w-full pt-2">
+          <div className="flex items-center w-max min-w-full pt-2" role="list">
             {steps.map((step, i) => {
               const isLast = i === steps.length - 1;
               const isFirst = i === 0;
@@ -82,6 +89,9 @@ const MultiStepWizard: React.FC<MultiStepWizardProps> = ({
                 <div
                   key={step.key}
                   ref={(el) => { stepRefs.current[i] = el; }}
+                  role="listitem"
+                  aria-current={i === currentStep ? "step" : undefined}
+                  tabIndex={-1}
                   className="flex flex-col items-center flex-1 min-w-20"
                 >
                   {/* Row: [left-line | circle | right-line] — keeps the circle centered above the label */}

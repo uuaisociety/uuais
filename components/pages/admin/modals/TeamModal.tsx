@@ -131,7 +131,7 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
                 </label>
               ))}
             </div>
-            <p className="text-xs text-gray-500 mt-1">Select all teams this member belongs to</p>
+            <p className="text-xs text-muted-foreground mt-1">Select all teams this member belongs to</p>
           </FieldGroup>
         </div>
 

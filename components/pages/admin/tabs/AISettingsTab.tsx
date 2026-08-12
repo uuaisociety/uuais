@@ -288,7 +288,7 @@ Always base your recommendations on the provided course context.`,
                   { value: 'moonshot', label: 'Moonshot' },
                 ]}
               />
-              <p className="text-xs text-gray-500 mt-1">OpenRouter supports many models including GPT-4, Claude, Gemini</p>
+              <p className="text-xs text-muted-foreground mt-1">OpenRouter supports many models including GPT-4, Claude, Gemini</p>
             </div>
           </CardContent>
         </Card>

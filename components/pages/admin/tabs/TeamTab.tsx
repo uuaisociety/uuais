@@ -211,7 +211,7 @@ const updatedMember = {
                     <p className="text-gray-600 text-sm line-clamp-2 dark:text-gray-400">{member.bio}</p>
                   )}
                   {member.notes && (
-                    <p className="text-xs text-gray-400 italic mt-1 truncate">Note: {member.notes}</p>
+                    <p className="text-xs text-muted-foreground italic mt-1 truncate">Note: {member.notes}</p>
                   )}
                   <div className="flex flex-wrap items-center gap-2 mt-3">
                     <div className="flex items-center gap-1">

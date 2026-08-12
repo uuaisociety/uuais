@@ -91,13 +91,13 @@ export const Header: React.FC = () => {
           <div className="h-14 flex items-center justify-between gap-2">
 
             {/* Wordmark */}
-            <Link href="/" className="flex items-center gap-2 pl-1 shrink-0 group">
+            <Link href="/" aria-label="UU AI Society" className="flex items-center gap-2 pl-1 shrink-0 group">
               <Image
                 src="/images/logo-highdef.png"
                 alt=""
-                width={240}
+                width={40}
                 height={40}
-                className="h-8 w-auto"
+                className="h-8 w-8"
                 priority
               />
               <span className="hidden sm:block text-[0.9375rem] font-semibold tracking-[-0.03em] transition-colors duration-300">
@@ -108,7 +108,7 @@ export const Header: React.FC = () => {
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center gap-0.5">
               {navigation.map((item) => (
-                <Link key={item.name} href={item.href} prefetch className={navLinkClass(isActive(item.href))}>
+                <Link key={item.name} href={item.href} prefetch className={navLinkClass(isActive(item.href))} aria-current={isActive(item.href) ? "page" : undefined}>
                   {item.name}
                 </Link>
               ))}
@@ -212,6 +212,7 @@ export const Header: React.FC = () => {
                   key={item.name}
                   href={item.href}
                   prefetch
+                  aria-current={isActive(item.href) ? "page" : undefined}
                   className={`block px-3.5 py-2.5 rounded-sm text-sm font-medium transition-colors ${
                     isActive(item.href) ? 'text-current bg-current/[0.12]' : 'text-current/65 hover:text-current hover:bg-current/[0.07]'
                   }`}

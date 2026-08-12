@@ -195,7 +195,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
                   min="1"
                   placeholder="Leave empty for unlimited"
                 />
-                <p className="text-xs text-gray-500 mt-1">Leave empty when you want registration required but no capacity limit.</p>
+                <p className="text-xs text-muted-foreground mt-1">Leave empty when you want registration required but no capacity limit.</p>
               </FieldGroup>
             </div>
           )}

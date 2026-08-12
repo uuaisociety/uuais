@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
 import DOMPurify from 'dompurify';
 import { useApp } from "@/contexts/AppContext";
 import { Card, CardContent } from "@/components/ui/Card";
@@ -42,9 +43,11 @@ function JobItem({ job }: { job: Job }) {
           </div>
           <div className="flex flex-row sm:flex-col gap-2 items-start sm:items-end shrink-0">
             {job.applyUrl && (
-              <a href={job.applyUrl} target="_blank" rel="noreferrer" onClick={handleApply}>
-                <Button size="sm" variant="outline">Read more</Button>
-              </a>
+              <Button asChild size="sm" variant="outline">
+                <Link href={job.applyUrl} target="_blank" rel="noreferrer" onClick={handleApply}>
+                  Read more about this job
+                </Link>
+              </Button>
             )}
             {job.applyEmail && (
               <a href={`mailto:${job.applyEmail}`} onClick={handleApply}>
@@ -127,7 +130,8 @@ export default function CareersPage() {
         </div>
 
         {/* Results */}
-        <section className="space-y-4">
+        <section className="space-y-4" aria-labelledby="open-roles-heading">
+          <h2 id="open-roles-heading" className="sr-only">Open roles</h2>
           <div className="grid gap-4">
             {filteredJobs.length === 0 ? (
               <div className="text-gray-600 dark:text-gray-300 text-center italic">No jobs available right now but stay tuned, new opportunities are on the way!</div>
