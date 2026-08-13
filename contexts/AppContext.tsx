@@ -70,7 +70,7 @@ type FirestoreAction =
   | { firestoreAction: 'ADD_TEAM_MEMBER'; payload: Omit<TeamMember, 'id'> }
   | { firestoreAction: 'UPDATE_TEAM_MEMBER'; payload: TeamMember }
   | { firestoreAction: 'DELETE_TEAM_MEMBER'; payload: string }
-  | { firestoreAction: 'MOVE_TEAM_MEMBER'; payload: { memberId: string; direction: 'up' | 'down' } }
+  | { firestoreAction: 'MOVE_TEAM_MEMBER'; payload: { memberId: string; direction: 'up' | 'down'; year?: number } }
   | { firestoreAction: 'ADD_BLOG_POST'; payload: Omit<BlogPost, 'id'> }
   | { firestoreAction: 'UPDATE_BLOG_POST'; payload: BlogPost }
   | { firestoreAction: 'DELETE_BLOG_POST'; payload: string }
@@ -415,7 +415,7 @@ export const AppProvider: React.FC<{
             await deleteTeamMemberFromFirestore(action.payload);
             break;
           case 'MOVE_TEAM_MEMBER':
-            await moveTeamMemberInFirestore(state.teamMembers, action.payload.memberId, action.payload.direction);
+            await moveTeamMemberInFirestore(state.teamMembers, action.payload.memberId, action.payload.direction, action.payload.year);
             break;
           case 'ADD_BLOG_POST':
             await addBlogPostToFirestore(action.payload);

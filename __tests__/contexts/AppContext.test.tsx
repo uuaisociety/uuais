@@ -474,7 +474,18 @@ describe('AppContext', () => {
       await act(async () => {
         await result.current.dispatch({ firestoreAction: 'MOVE_TEAM_MEMBER', payload: { memberId: 'tm-1', direction: 'up' } });
       });
-      expect(moveTeamMember).toHaveBeenCalledWith([mockTeamMember], 'tm-1', 'up');
+      expect(moveTeamMember).toHaveBeenCalledWith([mockTeamMember], 'tm-1', 'up', undefined);
+    });
+
+    it('MOVE_TEAM_MEMBER forwards the active year', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_TEAM_MEMBERS', payload: [mockTeamMember] });
+      });
+      await act(async () => {
+        await result.current.dispatch({ firestoreAction: 'MOVE_TEAM_MEMBER', payload: { memberId: 'tm-1', direction: 'down', year: 2026 } });
+      });
+      expect(moveTeamMember).toHaveBeenCalledWith([mockTeamMember], 'tm-1', 'down', 2026);
     });
 
     it('ADD_BLOG_POST calls addBlogPost', async () => {

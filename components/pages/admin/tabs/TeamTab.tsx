@@ -135,7 +135,7 @@ const updatedMember = {
   };
 
   const handleMove = (memberId: string, direction: 'up' | 'down') => {
-    dispatch({ firestoreAction: 'MOVE_TEAM_MEMBER', payload: { memberId, direction } });
+    dispatch({ firestoreAction: 'MOVE_TEAM_MEMBER', payload: { memberId, direction, year: activeYear ?? undefined } });
   };
 
   const sortedMembers = [...members].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
@@ -228,7 +228,7 @@ const updatedMember = {
                         variant="outline"
                         icon={ArrowDown}
                         onClick={() => handleMove(member.id, 'down')}
-                        disabled={index === sortedMembers.length - 1}
+                        disabled={index === filteredMembers.length - 1}
                         aria-label="Move down"
                       />
                     </div>
