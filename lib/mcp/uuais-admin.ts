@@ -1,7 +1,8 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js';
 import { z } from 'zod';
-import { getPublicSeed } from '@/lib/server-data';
+import type { PublicSeed } from '@/lib/server-data';
+import type { TeamCategory } from '@/types';
 import {
   analyzeCourse,
   getBlogPostById,
@@ -9,6 +10,7 @@ import {
   getCourses,
   getEngagementStats,
   getPublishedBlogPosts,
+  getPublicSeedForMcp,
   getSiteStats,
   searchSiteContent,
 } from '@/lib/mcp/uuais-data';
@@ -26,6 +28,21 @@ const READ_ONLY_ANNOTATIONS = { readOnlyHint: true, destructiveHint: false };
 
 function jsonText(data: unknown) {
   return { content: [{ type: 'text' as const, text: JSON.stringify(data) }] };
+}
+
+/**
+ * Fetch the MCP-safe seed (published content only, PII stripped) and build the
+ * tool result. On a data-source failure returns `{ available: false }` so the
+ * agent can report the data as unavailable instead of hallucinating empty data.
+ */
+async function withSeed<T>(build: (seed: PublicSeed) => T) {
+  try {
+    const seed = await getPublicSeedForMcp();
+    return jsonText(build(seed));
+  } catch (error) {
+    console.error('[mcp] getPublicSeedForMcp failed:', error);
+    return jsonText({ available: false });
+  }
 }
 
 export function createUuaisMcpServer(): McpServer {
@@ -49,15 +66,15 @@ export function createUuaisMcpServer(): McpServer {
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
-    async ({ limit, upcomingOnly }) => {
-      const seed = await getPublicSeed();
-      let events = seed.events;
-      if (upcomingOnly) {
-        const now = new Date().toISOString();
-        events = events.filter((e) => e.eventStartAt >= now);
-      }
-      return jsonText({ events: events.slice(0, limit) });
-    },
+    async ({ limit, upcomingOnly }) =>
+      withSeed((seed) => {
+        let events = seed.events;
+        if (upcomingOnly) {
+          const now = new Date().toISOString();
+          events = events.filter((e) => e.eventStartAt >= now);
+        }
+        return { events: events.slice(0, limit) };
+      }),
   );
 
   server.registerTool(
@@ -74,11 +91,11 @@ export function createUuaisMcpServer(): McpServer {
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
-    async ({ category }) => {
-      const seed = await getPublicSeed();
-      const faqs = category ? seed.faqs.filter((f) => f.category === category) : seed.faqs;
-      return jsonText({ faqs });
-    },
+    async ({ category }) =>
+      withSeed((seed) => {
+        const faqs = category ? seed.faqs.filter((f) => f.category === category) : seed.faqs;
+        return { faqs };
+      }),
   );
 
   server.registerTool(
@@ -98,13 +115,13 @@ export function createUuaisMcpServer(): McpServer {
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
-    async ({ category }) => {
-      const seed = await getPublicSeed();
-      const team = category
-        ? seed.teamMembers.filter((m) => m.teams?.includes(category as never))
-        : seed.teamMembers;
-      return jsonText({ team });
-    },
+    async ({ category }) =>
+      withSeed((seed) => {
+        const team = category
+          ? seed.teamMembers.filter((m) => m.teams?.includes(category as TeamCategory))
+          : seed.teamMembers;
+        return { team };
+      }),
   );
 
   server.registerTool(
@@ -118,10 +135,8 @@ export function createUuaisMcpServer(): McpServer {
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
-    async ({ limit }) => {
-      const seed = await getPublicSeed();
-      return jsonText({ jobs: seed.jobs.slice(0, limit) });
-    },
+    async ({ limit }) =>
+      withSeed((seed) => ({ jobs: seed.jobs.slice(0, limit) })),
   );
 
   server.registerTool(
@@ -133,10 +148,8 @@ export function createUuaisMcpServer(): McpServer {
       inputSchema: z.object({}),
       annotations: READ_ONLY_ANNOTATIONS,
     },
-    async () => {
-      const seed = await getPublicSeed();
-      return jsonText({ positions: seed.boardPositions, campaigns: seed.campaigns });
-    },
+    async () =>
+      withSeed((seed) => ({ positions: seed.boardPositions, campaigns: seed.campaigns })),
   );
 
   server.registerTool(
@@ -151,21 +164,21 @@ export function createUuaisMcpServer(): McpServer {
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
-    async ({ eventLimit }) => {
-      const seed = await getPublicSeed();
-      const now = new Date().toISOString();
-      return jsonText({
-        overview: {
-          available: true,
-          upcomingEvents: seed.events.filter((e) => e.eventStartAt >= now).slice(0, eventLimit),
-          boardPositions: seed.boardPositions,
-          openCampaigns: seed.campaigns,
-          openJobs: seed.jobs.length,
-          faqCount: seed.faqs.length,
-          teamCount: seed.teamMembers.length,
-        },
-      });
-    },
+    async ({ eventLimit }) =>
+      withSeed((seed) => {
+        const now = new Date().toISOString();
+        return {
+          overview: {
+            available: true,
+            upcomingEvents: seed.events.filter((e) => e.eventStartAt >= now).slice(0, eventLimit),
+            boardPositions: seed.boardPositions,
+            openCampaigns: seed.campaigns,
+            openJobs: seed.jobs.length,
+            faqCount: seed.faqs.length,
+            teamCount: seed.teamMembers.length,
+          },
+        };
+      }),
   );
 
   server.registerTool(
@@ -312,7 +325,7 @@ export function createUuaisMcpServer(): McpServer {
         'team members, and courses. Returns grouped hits with type, title, and a short snippet. ' +
         'Use when you are not sure which tool to call or the answer could be in several places.',
       inputSchema: z.object({
-        query: z.string().min(1).describe('Search terms to look for across all site content'),
+        query: z.string().min(1).max(200).describe('Search terms to look for across all site content'),
         limit: z.number().int().min(1).max(25).default(10).describe('Maximum number of hits to return (default 10)'),
       }),
       annotations: READ_ONLY_ANNOTATIONS,

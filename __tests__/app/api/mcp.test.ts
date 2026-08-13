@@ -4,11 +4,14 @@ jest.mock('@/lib/mcp/uuais-admin', () => ({
   handleMcpRequest: (...args: unknown[]) => mockHandleMcpRequest(...args),
 }))
 
+import { resetRateLimits } from '@/lib/rate-limit-in-memory'
+
 describe('POST /api/mcp', () => {
   const originalToken = process.env.MCP_ADMIN_TOKEN
 
   beforeEach(() => {
     jest.clearAllMocks()
+    resetRateLimits()
     process.env.MCP_ADMIN_TOKEN = 'test-secret-token'
   })
 
@@ -56,6 +59,19 @@ describe('POST /api/mcp', () => {
     const res = await POST(req as never)
     expect(mockHandleMcpRequest).toHaveBeenCalledTimes(1)
     expect(res.status).toBe(200)
+  })
+
+  it('returns 429 after the per-IP burst limit is exceeded', async () => {
+    mockHandleMcpRequest.mockResolvedValue(new Response('ok', { status: 200 }))
+    const { POST } = await import('@/app/api/mcp/route')
+    const headers = { Authorization: 'Bearer test-secret-token', 'x-forwarded-for': '10.0.0.9' }
+    let last = 0
+    for (let i = 0; i < 61; i++) {
+      const res = await POST(new Request('http://localhost/api/mcp', { method: 'POST', headers }) as never)
+      last = res.status
+    }
+    expect(last).toBe(429)
+    expect(mockHandleMcpRequest).toHaveBeenCalledTimes(60)
   })
 
   it('returns 405 for GET and DELETE', async () => {

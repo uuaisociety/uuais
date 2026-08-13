@@ -1,5 +1,7 @@
 import { getPublicSeed } from '@/lib/server-data';
+import type { PublicSeed } from '@/lib/server-data';
 import type { Course } from '@/lib/courses';
+import type { Event, TeamMember } from '@/types';
 
 /**
  * Server-side read helpers for the MCP tools (read-only, no writes).
@@ -8,6 +10,46 @@ import type { Course } from '@/lib/courses';
  * Conventions: list helpers return `null` when unavailable (else an array);
  * lookups return `{ status: 'ok' | 'unavailable', item: T | null }`.
  */
+
+/** Project an event to its public fields, dropping the `attendees` PII array. */
+export function projectEvent(event: Event): Event {
+  const { attendees, ...rest } = event;
+  void attendees;
+  return rest as Event;
+}
+
+/** Project a team member to the public profile fields, dropping private contact info and admin notes. */
+export function projectTeamMember(member: TeamMember): TeamMember {
+  return {
+    id: member.id,
+    name: member.name,
+    position: member.position,
+    bio: member.bio,
+    image: member.image,
+    linkedin: member.linkedin,
+    github: member.github,
+    email: member.email,
+    teams: member.teams,
+    years: member.years,
+    badge: member.badge,
+  };
+}
+
+/**
+ * Seed for the MCP surface: throws on data-source failure (so tools can report
+ * `available: false` instead of empty arrays) and only returns what the public
+ * site shows — published events (no `attendees`), published FAQs, and
+ * published team members (no private emails / notes).
+ */
+export async function getPublicSeedForMcp(): Promise<PublicSeed> {
+  const seed = await getPublicSeed({ throwOnError: true });
+  return {
+    ...seed,
+    events: seed.events.map(projectEvent),
+    faqs: seed.faqs.filter((f) => f.published === true),
+    teamMembers: seed.teamMembers.filter((m) => m.published !== false).map(projectTeamMember),
+  };
+}
 
 function isTimestampLike(value: unknown): value is { toDate: () => Date } {
   return (
@@ -126,7 +168,7 @@ export async function getEngagementStats(limit: number): Promise<EngagementStats
       adminDb.collection('analyticsJobs').orderBy('clicks', 'desc').limit(n).get(),
       adminDb.collection('analyticsBlogs').orderBy('reads', 'desc').limit(n).get(),
     ]);
-    const seed = await getPublicSeed();
+    const seed = await getPublicSeed({ throwOnError: true });
     const eventTitles = new Map(seed.events.map((e) => [e.id, e.title]));
     const jobTitles = new Map(seed.jobs.map((j) => [j.id, j.title]));
 
@@ -141,12 +183,13 @@ export async function getEngagementStats(limit: number): Promise<EngagementStats
       clicks: Number((d.data() as { clicks?: unknown })?.clicks ?? 0),
     }));
     const topBlogs: { id: string; title: string; reads: number }[] = [];
-    for (const d of blogsSnap.docs) {
+    const blogPosts = await Promise.all(blogsSnap.docs.map((d) => getBlogPostById(d.id)));
+    blogsSnap.docs.forEach((d, i) => {
       const reads = Number((d.data() as { reads?: unknown })?.reads ?? 0);
-      const post = await getBlogPostById(d.id);
-      const title = post.status === 'ok' && post.item ? String(post.item.title ?? d.id) : d.id;
+      const post = blogPosts[i];
+      const title = post && post.status === 'ok' && post.item ? String(post.item.title ?? d.id) : d.id;
       topBlogs.push({ id: d.id, title, reads });
-    }
+    });
     return { topEvents, topJobs, topBlogs };
   } catch (error) {
     console.error('[mcp-data] getEngagementStats failed:', error);
@@ -162,49 +205,54 @@ export interface SearchHit {
 }
 
 export async function searchSiteContent(query: string, limit: number): Promise<{ hits: SearchHit[] } | null> {
-  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean).slice(0, 6);
   if (terms.length === 0) return { hits: [] };
   const includesAll = (...fields: (string | undefined)[]) => {
     const haystack = fields.filter(Boolean).join(' ').toLowerCase();
     return terms.every((t) => haystack.includes(t));
   };
 
-  const seed = await getPublicSeed();
-  const [blog, courses] = await Promise.all([getPublishedBlogPosts(50), getCourses()]);
-  const hits: SearchHit[] = [];
+  try {
+    const seed = await getPublicSeedForMcp();
+    const [blog, courses] = await Promise.all([getPublishedBlogPosts(50), getCourses()]);
+    const hits: SearchHit[] = [];
 
-  for (const e of seed.events) {
-    if (includesAll(e.title, e.description, e.location)) {
-      hits.push({ type: 'event', id: e.id, title: e.title, snippet: snippet(e.description) });
+    for (const e of seed.events) {
+      if (includesAll(e.title, e.description, e.location)) {
+        hits.push({ type: 'event', id: e.id, title: e.title, snippet: snippet(e.description) });
+      }
     }
-  }
-  for (const p of blog ?? []) {
-    const title = String(p.title ?? '');
-    if (includesAll(title, String(p.excerpt ?? ''), String(p.content ?? ''), String(p.author ?? ''))) {
-      hits.push({ type: 'blog', id: String(p.id ?? ''), title, snippet: snippet(String(p.excerpt ?? '')) });
+    for (const p of blog ?? []) {
+      const title = String(p.title ?? '');
+      if (includesAll(title, String(p.excerpt ?? ''), String(p.content ?? ''), String(p.author ?? ''))) {
+        hits.push({ type: 'blog', id: String(p.id ?? ''), title, snippet: snippet(String(p.excerpt ?? '')) });
+      }
     }
-  }
-  for (const f of seed.faqs) {
-    if (includesAll(f.question, f.answer)) {
-      hits.push({ type: 'faq', id: f.id, title: f.question, snippet: snippet(f.answer) });
+    for (const f of seed.faqs) {
+      if (includesAll(f.question, f.answer)) {
+        hits.push({ type: 'faq', id: f.id, title: f.question, snippet: snippet(f.answer) });
+      }
     }
-  }
-  for (const j of seed.jobs) {
-    if (includesAll(j.title, j.company, j.description)) {
-      hits.push({ type: 'job', id: j.id, title: `${j.title} — ${j.company}`, snippet: snippet(j.description) });
+    for (const j of seed.jobs) {
+      if (includesAll(j.title, j.company, j.description)) {
+        hits.push({ type: 'job', id: j.id, title: `${j.title} — ${j.company}`, snippet: snippet(j.description) });
+      }
     }
-  }
-  for (const t of seed.teamMembers) {
-    if (includesAll(t.name, t.position)) {
-      hits.push({ type: 'team', id: t.id, title: t.name, snippet: snippet(String(t.position ?? '')) });
+    for (const t of seed.teamMembers) {
+      if (includesAll(t.name, t.position)) {
+        hits.push({ type: 'team', id: t.id, title: t.name, snippet: snippet(String(t.position ?? '')) });
+      }
     }
-  }
-  for (const c of courses ?? []) {
-    if (includesAll(c.title, c.code, c.description, c.tags?.join(' '), c.Learning_outcomes)) {
-      hits.push({ type: 'course', id: c.id, title: `${c.code || c.id} — ${c.title}`, snippet: snippet(c.description) });
+    for (const c of courses ?? []) {
+      if (includesAll(c.title, c.code, c.description, c.tags?.join(' '), c.Learning_outcomes)) {
+        hits.push({ type: 'course', id: c.id, title: `${c.code || c.id} — ${c.title}`, snippet: snippet(c.description) });
+      }
     }
+    return { hits: hits.slice(0, Math.max(1, Math.min(limit, 25))) };
+  } catch (error) {
+    console.error('[mcp-data] searchSiteContent failed:', error);
+    return null;
   }
-  return { hits: hits.slice(0, Math.max(1, Math.min(limit, 25))) };
 }
 
 export interface SiteStats {
@@ -213,23 +261,28 @@ export interface SiteStats {
 }
 
 export async function getSiteStats(): Promise<SiteStats> {
-  const seed = await getPublicSeed();
-  const [blog, courses] = await Promise.all([getPublishedBlogPosts(50), getCourses()]);
-  const now = new Date().toISOString();
-  return {
-    available: true,
-    counts: {
-      events: seed.events.length,
-      upcomingEvents: seed.events.filter((e) => e.eventStartAt >= now).length,
-      jobs: seed.jobs.length,
-      faqs: seed.faqs.length,
-      teamMembers: seed.teamMembers.length,
-      boardPositions: seed.boardPositions.length,
-      openCampaigns: seed.campaigns.length,
-      blogPosts: blog?.length ?? null,
-      courses: courses?.length ?? null,
-    },
-  };
+  try {
+    const seed = await getPublicSeedForMcp();
+    const [blog, courses] = await Promise.all([getPublishedBlogPosts(50), getCourses()]);
+    const now = new Date().toISOString();
+    return {
+      available: true,
+      counts: {
+        events: seed.events.length,
+        upcomingEvents: seed.events.filter((e) => e.eventStartAt >= now).length,
+        jobs: seed.jobs.length,
+        faqs: seed.faqs.length,
+        teamMembers: seed.teamMembers.length,
+        boardPositions: seed.boardPositions.length,
+        openCampaigns: seed.campaigns.length,
+        blogPosts: blog?.length ?? null,
+        courses: courses?.length ?? null,
+      },
+    };
+  } catch (error) {
+    console.error('[mcp-data] getSiteStats failed:', error);
+    return { available: false, counts: {} };
+  }
 }
 
 export interface CourseAnalysis {
