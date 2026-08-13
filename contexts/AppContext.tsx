@@ -2,18 +2,9 @@
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { Event, TeamMember, BlogPost, FAQ, Job, BoardPosition, Application, ApplicationCampaign, TeamApplication } from '../types';
-import { subscribeToEvents, addEvent as addEventToFirestore, updateEvent as updateEventInFirestore, deleteEvent as deleteEventFromFirestore } from '@/lib/firestore/events';
-import { auth } from '@/lib/firebase-client';
-import { onIdTokenChanged } from 'firebase/auth';
-import { subscribeToTeamMembers, addTeamMember as addTeamMemberToFirestore, updateTeamMember as updateTeamMemberInFirestore, deleteTeamMember as deleteTeamMemberFromFirestore, moveTeamMember as moveTeamMemberInFirestore } from '@/lib/firestore/team';
-import { subscribeToBlogPosts, addBlogPost as addBlogPostToFirestore, updateBlogPost as updateBlogPostInFirestore, deleteBlogPost as deleteBlogPostFromFirestore } from '@/lib/firestore/blog';
-import { subscribeToFaqs, addFaq as addFaqToFirestore, updateFaq as updateFaqInFirestore, deleteFaq as deleteFaqFromFirestore } from '@/lib/firestore/faqs';
-import { subscribeToJobs, addJob as addJobToFirestore, updateJob as updateJobInFirestore, deleteJob as deleteJobFromFirestore } from '@/lib/firestore/jobs';
-import { deleteBoardApplication, subscribeToBoardApplications } from '@/lib/firestore/boardApplications';
-import { subscribeToPositions, addPosition as addPositionToFirestore, updatePosition as updatePositionInFirestore, deletePosition as deletePositionFromFirestore, movePosition as movePositionInFirestore } from '@/lib/firestore/board-positions'
-import { subscribeToCampaigns, addCampaign as addCampaignToFirestore, updateCampaign as updateCampaignInFirestore, deleteCampaign as deleteCampaignFromFirestore, type CampaignInput } from '@/lib/firestore/applicationCampaigns';
-import { deleteCampaignQuestionsByCampaign } from '@/lib/firestore/campaignQuestions';
-import { deleteTeamApplication, subscribeToTeamApplications } from '@/lib/firestore/teamApplications';
+import type { CampaignInput } from '@/lib/firestore/applicationCampaigns';
+import { scheduleIdle } from '@/lib/idle';
+import { hasCachedIdentity } from '@/lib/identity-cache';
 
 interface AppState {
   events: Event[];
@@ -236,7 +227,7 @@ export const AppProvider: React.FC<{
   };
   const [state, dispatch] = useReducer(appReducer, initState);
 
-  // Set up real-time listeners for Firestore
+  // Realtime Firestore listeners start after the main thread goes idle so they stay out of the critical network chain (LCP); SSR-seeded data already paints the content.
   useEffect(() => {
     // Track the unsubscribe function for events so we can re-subscribe when admin status changes
     let unsubscribeEvents: (() => void) | null = null;
@@ -246,6 +237,10 @@ export const AppProvider: React.FC<{
     let unsubscribeCampaigns: (() => void) | null = null;
     let unsubscribeTeamApplications: (() => void) | null = null;
     let unsubscribeBlogPosts: (() => void) | null = null;
+    let unsubscribeTeamMembers: (() => void) | null = null;
+    let unsubscribeFaqs: (() => void) | null = null;
+    let idTokenUnsub: (() => void) | null = null;
+    let disposed = false;
 
     const subscribe = (includeUnpublished = false) => {
       // includeUnpublished: boolean indicates admin status
@@ -255,24 +250,33 @@ export const AppProvider: React.FC<{
         try { unsubscribeEvents(); } catch { /* ignore */ }
         unsubscribeEvents = null;
       }
-      unsubscribeEvents = subscribeToEvents((events) => {
-        dispatch({ type: 'SET_EVENTS', payload: events });
-      }, { includeUnpublished });
+      void import('@/lib/firestore/events').then(({ subscribeToEvents }) => {
+        if (disposed) return;
+        unsubscribeEvents = subscribeToEvents((events) => {
+          dispatch({ type: 'SET_EVENTS', payload: events });
+        }, { includeUnpublished });
+      });
 
       if (unsubscribeJobs)  {
         try { unsubscribeJobs(); } catch { /* ignore */ }
         unsubscribeJobs = null;
       }
-      unsubscribeJobs = subscribeToJobs((jobs) => {
-        dispatch({ type: 'SET_JOBS', payload: jobs });
-      }, { includeUnpublished });
+      void import('@/lib/firestore/jobs').then(({ subscribeToJobs }) => {
+        if (disposed) return;
+        unsubscribeJobs = subscribeToJobs((jobs) => {
+          dispatch({ type: 'SET_JOBS', payload: jobs });
+        }, { includeUnpublished });
+      });
 
       if (unsubscribeBoardPositions) {
         try { unsubscribeBoardPositions(); } catch { /* ignore */ }
         unsubscribeBoardPositions = null;
       }
-      unsubscribeBoardPositions = subscribeToPositions((positions) => {
-        dispatch({ type: 'SET_BOARDPOS', payload: positions });
+      void import('@/lib/firestore/board-positions').then(({ subscribeToPositions }) => {
+        if (disposed) return;
+        unsubscribeBoardPositions = subscribeToPositions((positions) => {
+          dispatch({ type: 'SET_BOARDPOS', payload: positions });
+        });
       });
 
       if (unsubscribeBoardApplications) {
@@ -280,8 +284,11 @@ export const AppProvider: React.FC<{
         unsubscribeBoardApplications = null;
       }
       if (includeUnpublished) {
-        unsubscribeBoardApplications = subscribeToBoardApplications((applications) => {
-          dispatch({ type: 'SET_APPLICANTS', payload: applications as Application[] });
+        void import('@/lib/firestore/boardApplications').then(({ subscribeToBoardApplications }) => {
+          if (disposed) return;
+          unsubscribeBoardApplications = subscribeToBoardApplications((applications) => {
+            dispatch({ type: 'SET_APPLICANTS', payload: applications as Application[] });
+          });
         });
       } else {
         dispatch({ type: 'SET_APPLICANTS', payload: [] });
@@ -293,8 +300,11 @@ export const AppProvider: React.FC<{
         unsubscribeTeamApplications = null;
       }
       if (includeUnpublished) {
-        unsubscribeTeamApplications = subscribeToTeamApplications((applications) => {
-          dispatch({ type: 'SET_TEAM_APPLICATIONS', payload: applications as TeamApplication[] });
+        void import('@/lib/firestore/teamApplications').then(({ subscribeToTeamApplications }) => {
+          if (disposed) return;
+          unsubscribeTeamApplications = subscribeToTeamApplications((applications) => {
+            dispatch({ type: 'SET_TEAM_APPLICATIONS', payload: applications as TeamApplication[] });
+          });
         });
       } else {
         dispatch({ type: 'SET_TEAM_APPLICATIONS', payload: [] });
@@ -305,60 +315,82 @@ export const AppProvider: React.FC<{
         try { unsubscribeCampaigns(); } catch { /* ignore */ }
         unsubscribeCampaigns = null;
       }
-      unsubscribeCampaigns = subscribeToCampaigns((campaigns) => {
-        dispatch({ type: 'SET_CAMPAIGNS', payload: campaigns });
-        dispatch({ type: 'SET_CAMPAIGNS_LOADED', payload: true });
-      }, { includeAll: includeUnpublished });
+      void import('@/lib/firestore/applicationCampaigns').then(({ subscribeToCampaigns }) => {
+        if (disposed) return;
+        unsubscribeCampaigns = subscribeToCampaigns((campaigns) => {
+          dispatch({ type: 'SET_CAMPAIGNS', payload: campaigns });
+          dispatch({ type: 'SET_CAMPAIGNS_LOADED', payload: true });
+        }, { includeAll: includeUnpublished });
+      });
 
       // Blog posts: public visitors see published posts; admins see all (incl. drafts)
       if (unsubscribeBlogPosts) {
         try { unsubscribeBlogPosts(); } catch { /* ignore */ }
         unsubscribeBlogPosts = null;
       }
-      unsubscribeBlogPosts = subscribeToBlogPosts((posts) => {
-        dispatch({ type: 'SET_BLOG_POSTS', payload: posts });
-      }, { includeUnpublished });
+      void import('@/lib/firestore/blog').then(({ subscribeToBlogPosts }) => {
+        if (disposed) return;
+        unsubscribeBlogPosts = subscribeToBlogPosts((posts) => {
+          dispatch({ type: 'SET_BLOG_POSTS', payload: posts });
+        }, { includeUnpublished });
+      });
     };
 
-    // Initial subscription: assume not admin (public)
-    subscribe(false);
+    // Returning visitors (cached identity) get realtime data immediately; anonymous visitors defer the firestore streams until after LCP / first interaction.
+    scheduleIdle(
+      () => {
+        // Initial subscription: assume not admin (public)
+        subscribe(false);
 
-    // Other static subscriptions that don't depend on auth
-    const unsubscribeTeamMembers = subscribeToTeamMembers((members) => {
-      dispatch({ type: 'SET_TEAM_MEMBERS', payload: members });
-    });
+        // Other static subscriptions that don't depend on auth
+        void import('@/lib/firestore/team').then(({ subscribeToTeamMembers }) => {
+          if (disposed) return;
+          unsubscribeTeamMembers = subscribeToTeamMembers((members) => {
+            dispatch({ type: 'SET_TEAM_MEMBERS', payload: members });
+          });
+        });
 
-    const unsubscribeFaqs = subscribeToFaqs((faqs) => {
-      dispatch({ type: 'SET_FAQS', payload: faqs });
-    });
+        void import('@/lib/firestore/faqs').then(({ subscribeToFaqs }) => {
+          if (disposed) return;
+          unsubscribeFaqs = subscribeToFaqs((faqs) => {
+            dispatch({ type: 'SET_FAQS', payload: faqs });
+          });
+        });
 
-    // Listen for ID token changes to detect admin claim changes.
-    let currentAdminClaim: boolean | null = null;
-    let authGeneration = 0;
-    const idTokenUnsub = onIdTokenChanged(auth, async (user) => {
-      const gen = ++authGeneration;
-      let adminClaim = false;
-      if (user) {
-        // Read cached claims without forcing a network refresh; onIdTokenChanged fires on token refresh.
-        try {
-          const tokenResult = await user.getIdTokenResult();
-          adminClaim = !!tokenResult.claims.admin;
-        } catch (err) {
-          console.warn('Failed to refresh ID token', err);
-          return;
-        }
-      }
-      // Ignore stale auth events that resolved after a newer one applied.
-      if (gen !== authGeneration) return;
-      // Avoid re-subscribing when the admin claim did not change.
-      if (currentAdminClaim === adminClaim) return;
-      currentAdminClaim = adminClaim;
-      // Re-subscribe with adminClaim (true/false)
-      subscribe(adminClaim);
-    });
+        // Listen for ID token changes to detect admin claim changes.
+        let currentAdminClaim: boolean | null = null;
+        let authGeneration = 0;
+        void Promise.all([import('firebase/auth'), import('@/lib/firebase-client')]).then(([{ onIdTokenChanged }, { auth }]) => {
+          if (disposed) return;
+          idTokenUnsub = onIdTokenChanged(auth, async (user) => {
+            const gen = ++authGeneration;
+            let adminClaim = false;
+            if (user) {
+              // Read cached claims without forcing a network refresh; onIdTokenChanged fires on token refresh.
+              try {
+                const tokenResult = await user.getIdTokenResult();
+                adminClaim = !!tokenResult.claims.admin;
+              } catch (err) {
+                console.warn('Failed to refresh ID token', err);
+                return;
+              }
+            }
+            // Ignore stale auth events that resolved after a newer one applied.
+            if (gen !== authGeneration) return;
+            // Avoid re-subscribing when the admin claim did not change.
+            if (currentAdminClaim === adminClaim) return;
+            currentAdminClaim = adminClaim;
+            // Re-subscribe with adminClaim (true/false)
+            subscribe(adminClaim);
+          });
+        });
+      },
+      hasCachedIdentity() ? 0 : 3500
+    );
 
     // Cleanup subscriptions on unmount
     return () => {
+      disposed = true;
       if (unsubscribeEvents) {
         try { unsubscribeEvents(); } catch { /* ignore */ }
       }
@@ -380,9 +412,15 @@ export const AppProvider: React.FC<{
       if (unsubscribeBlogPosts) {
         try { unsubscribeBlogPosts(); } catch { /* ignore */ }
       }
-      unsubscribeTeamMembers();
-      unsubscribeFaqs();
-      idTokenUnsub();
+      if (unsubscribeTeamMembers) {
+        try { unsubscribeTeamMembers(); } catch { /* ignore */ }
+      }
+      if (unsubscribeFaqs) {
+        try { unsubscribeFaqs(); } catch { /* ignore */ }
+      }
+      if (idTokenUnsub) {
+        try { idTokenUnsub(); } catch { /* ignore */ }
+      }
     };
   }, []);
 
@@ -396,82 +434,82 @@ export const AppProvider: React.FC<{
         // Handle Firestore actions
         switch (action.firestoreAction) {
           case 'ADD_EVENT':
-            await addEventToFirestore(action.payload);
+            await (await import('@/lib/firestore/events')).addEvent(action.payload);
             // Real-time listener will update the state
             break;
           case 'UPDATE_EVENT':
-            await updateEventInFirestore(action.payload.id, action.payload);
+            await (await import('@/lib/firestore/events')).updateEvent(action.payload.id, action.payload);
             break;
           case 'DELETE_EVENT':
-            await deleteEventFromFirestore(action.payload);
+            await (await import('@/lib/firestore/events')).deleteEvent(action.payload);
             break;
           case 'ADD_TEAM_MEMBER':
-            await addTeamMemberToFirestore(action.payload);
+            await (await import('@/lib/firestore/team')).addTeamMember(action.payload);
             break;
           case 'UPDATE_TEAM_MEMBER':
-            await updateTeamMemberInFirestore(action.payload.id, action.payload);
+            await (await import('@/lib/firestore/team')).updateTeamMember(action.payload.id, action.payload);
             break;
           case 'DELETE_TEAM_MEMBER':
-            await deleteTeamMemberFromFirestore(action.payload);
+            await (await import('@/lib/firestore/team')).deleteTeamMember(action.payload);
             break;
           case 'MOVE_TEAM_MEMBER':
-            await moveTeamMemberInFirestore(state.teamMembers, action.payload.memberId, action.payload.direction, action.payload.year);
+            await (await import('@/lib/firestore/team')).moveTeamMember(state.teamMembers, action.payload.memberId, action.payload.direction, action.payload.year);
             break;
           case 'ADD_BLOG_POST':
-            await addBlogPostToFirestore(action.payload);
+            await (await import('@/lib/firestore/blog')).addBlogPost(action.payload);
             break;
           case 'UPDATE_BLOG_POST':
-            await updateBlogPostInFirestore(action.payload.id, action.payload);
+            await (await import('@/lib/firestore/blog')).updateBlogPost(action.payload.id, action.payload);
             break;
           case 'DELETE_BLOG_POST':
-            await deleteBlogPostFromFirestore(action.payload);
+            await (await import('@/lib/firestore/blog')).deleteBlogPost(action.payload);
             break;
           case 'ADD_FAQS':
-            await addFaqToFirestore(action.payload);
+            await (await import('@/lib/firestore/faqs')).addFaq(action.payload);
             break;
           case 'UPDATE_FAQS':
-            await updateFaqInFirestore(action.payload.id, action.payload);
+            await (await import('@/lib/firestore/faqs')).updateFaq(action.payload.id, action.payload);
             break;
           case 'DELETE_FAQS':
-            await deleteFaqFromFirestore(action.payload);
+            await (await import('@/lib/firestore/faqs')).deleteFaq(action.payload);
             break;
           case 'ADD_BOARDPOS':
-            await addPositionToFirestore(action.payload);
+            await (await import('@/lib/firestore/board-positions')).addPosition(action.payload);
             break;
           case 'UPDATE_BOARDPOS':
-            await updatePositionInFirestore(action.payload.id, action.payload);
+            await (await import('@/lib/firestore/board-positions')).updatePosition(action.payload.id, action.payload);
             break;
           case 'DELETE_BOARDPOS':
-            await deletePositionFromFirestore(action.payload);
+            await (await import('@/lib/firestore/board-positions')).deletePosition(action.payload);
             break;
           case 'MOVE_BOARDPOS':
-            await movePositionInFirestore(state.boardPositions, action.payload.positionId, action.payload.direction);
+            await (await import('@/lib/firestore/board-positions')).movePosition(state.boardPositions, action.payload.positionId, action.payload.direction);
             break;
           case 'ADD_JOB':
-            return await addJobToFirestore(action.payload);
+            return await (await import('@/lib/firestore/jobs')).addJob(action.payload);
           case 'UPDATE_JOB':
-            await updateJobInFirestore(action.payload.id, action.payload);
+            await (await import('@/lib/firestore/jobs')).updateJob(action.payload.id, action.payload);
             break;
           case 'DELETE_JOB':
-            await deleteJobFromFirestore(action.payload);
+            await (await import('@/lib/firestore/jobs')).deleteJob(action.payload);
             break;
           case 'DELETE_BOARD_APPLICATION':
-            await deleteBoardApplication(action.payload);
+            await (await import('@/lib/firestore/boardApplications')).deleteBoardApplication(action.payload);
             break;
           case 'ADD_CAMPAIGN':
-            return await addCampaignToFirestore(action.payload);
+            return await (await import('@/lib/firestore/applicationCampaigns')).addCampaign(action.payload);
           case 'UPDATE_CAMPAIGN':
             if (action.payload.id) {
-              await updateCampaignInFirestore(action.payload.id, action.payload);
+              await (await import('@/lib/firestore/applicationCampaigns')).updateCampaign(action.payload.id, action.payload);
             }
             break;
           case 'DELETE_CAMPAIGN':
-            await deleteCampaignFromFirestore(action.payload);
+            await (await import('@/lib/firestore/applicationCampaigns')).deleteCampaign(action.payload);
             // Also clean up campaign questions
-            try { await deleteCampaignQuestionsByCampaign(action.payload); } catch { /* ignore */ }
+            try { await (await import('@/lib/firestore/campaignQuestions')).deleteCampaignQuestionsByCampaign(action.payload); } catch { /* ignore */ }
             break;
           case 'DELETE_TEAM_APPLICATION':
-            await deleteTeamApplication(action.payload);
+            await (await import('@/lib/firestore/teamApplications')).deleteTeamApplication(action.payload);
             break;
         }
       } else {

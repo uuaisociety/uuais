@@ -138,27 +138,27 @@ describe('AppContext', () => {
     expect(result.current.state.error).toBeNull();
   });
 
-  it('subscribes to firestore collections and id token changes on mount', () => {
+  it('subscribes to firestore collections and id token changes on mount', async () => {
     renderApp();
-    expect(subscribeToEvents).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(subscribeToEvents).toHaveBeenCalledTimes(1));
     expect(subscribeToTeamMembers).toHaveBeenCalledTimes(1);
     // Blog posts are subscribed for all users (public sees published only)
     expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
     expect(subscribeToFaqs).toHaveBeenCalledTimes(1);
     expect(subscribeToJobs).toHaveBeenCalledTimes(1);
     expect(subscribeToPositions).toHaveBeenCalledTimes(1);
-    expect(onIdTokenChanged).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
     expect(idTokenCallback).not.toBeNull();
   });
 
-  it('subscribes to blog posts with includeUnpublished false for public users', () => {
+  it('subscribes to blog posts with includeUnpublished false for public users', async () => {
     renderApp();
-    expect(subscribeToBlogPosts).toHaveBeenCalledWith(expect.any(Function), { includeUnpublished: false });
+    await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledWith(expect.any(Function), { includeUnpublished: false }));
   });
 
   it('re-subscribes to blog posts with includeUnpublished true once admin id token resolves', async () => {
     renderApp();
-    expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1));
     act(() => {
       idTokenCallback!({ uid: 'admin-1', getIdTokenResult: () => Promise.resolve({ claims: { admin: true } }) });
     });
