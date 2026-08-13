@@ -97,6 +97,9 @@ const FloatingSymbolsCanvas: React.FC = () => {
           rotation: Math.random() * 360,
         });
       }
+
+      // The loop is started on demand — kick it off now that there's something to draw.
+      startLoop();
     };
 
     // === Draw Symbols ===
@@ -160,6 +163,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
 
     // === Animation Loop ===
     // Runs only while on-screen, tab visible, and no reduced motion; paints at half cadence.
+    // The loop stays stopped until the first click spawns symbols — an empty canvas has nothing to animate, so a rAF loop would just burn main-thread frames.
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let running = false;
     let frame = 0;
@@ -174,12 +178,17 @@ const FloatingSymbolsCanvas: React.FC = () => {
       if (frame % 2 === 0 && symbolsRef.current.length > 0) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         draw(dt);
+        // Stop once the last symbol has faded out — the canvas is static again.
+        if (symbolsRef.current.length === 0) {
+          stopLoop();
+          return;
+        }
       }
       animationRef.current = requestAnimationFrame(animate);
     };
 
     const startLoop = () => {
-      if (running || reducedMotion.matches) return;
+      if (running || reducedMotion.matches || symbolsRef.current.length === 0) return;
       running = true;
       prevTsRef.current = 0;
       animationRef.current = requestAnimationFrame(animate);
@@ -210,7 +219,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('click', handleClick);
 
-    if (!reducedMotion.matches) {
+    if (!reducedMotion.matches && symbolsRef.current.length > 0) {
       startLoop();
     } else {
       draw(0);
