@@ -1,13 +1,13 @@
 import argparse
-import numpy as np
 
 import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+import numpy as np
+from firebase_admin import credentials, firestore
+from google import genai
 from google.cloud.firestore_v1.base_vector_query import DistanceMeasure
 from google.cloud.firestore_v1.vector import Vector
-from google import genai
 from google.genai import types
+
 
 def get_embedding(client, text, model='gemini-embedding-001', dimensions=768):
     """
@@ -32,7 +32,7 @@ def main():
     parser.add_argument('--limit', type=int, default=5, help="Number of results to return.")
     args = parser.parse_args()
 
-    print(f"Initializing Firebase...")
+    print("Initializing Firebase...")
     try:
         cred = credentials.Certificate('api_keys/uuais-dev-firebase-adminsdk-fbsvc-8dcd10358a.json')
         if not firebase_admin._apps:
