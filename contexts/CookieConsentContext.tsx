@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext, useContext, useEffect, useRef, useState, ReactNode } from 'react';
-import 'vanilla-cookieconsent/dist/cookieconsent.css';
 import * as CookieConsent from 'vanilla-cookieconsent';
 
 export interface CookieConsentState {
@@ -145,8 +144,13 @@ export function CookieConsentProvider({
     if (initialized.current) return;
     initialized.current = true;
 
-    initCookieConsent((newState) => {
-      setState(newState);
+    // The consent stylesheet is loaded here rather than statically imported so
+    // it is not a render-blocking resource on the critical path — the banner
+    // itself is below the fold until the user's first session.
+    void import('vanilla-cookieconsent/dist/cookieconsent.css').then(() => {
+      initCookieConsent((newState) => {
+        setState(newState);
+      });
     });
   }, []);
 

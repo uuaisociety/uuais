@@ -1,4 +1,4 @@
-import { renderHook, act, render, screen } from '@testing-library/react';
+import { renderHook, act, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 
 jest.mock('vanilla-cookieconsent', () => ({
@@ -37,26 +37,27 @@ describe('CookieConsentContext', () => {
     });
   });
 
-  it('calls CookieConsent.run once on mount', () => {
+  it('calls CookieConsent.run once on mount', async () => {
     renderHook(() => useCookieConsent(), {
       wrapper: CookieConsentProvider,
     });
-    expect(mockRun).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(mockRun).toHaveBeenCalledTimes(1));
   });
 
-  it('does not call CookieConsent.run twice on re-render', () => {
+  it('does not call CookieConsent.run twice on re-render', async () => {
     const { rerender } = renderHook(() => useCookieConsent(), {
       wrapper: CookieConsentProvider,
     });
     rerender();
     rerender();
-    expect(mockRun).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(mockRun).toHaveBeenCalledTimes(1));
   });
 
-  it('passes correct config to CookieConsent.run', () => {
+  it('passes correct config to CookieConsent.run', async () => {
     renderHook(() => useCookieConsent(), {
       wrapper: CookieConsentProvider,
     });
+    await waitFor(() => expect(mockRun).toHaveBeenCalledTimes(1));
     const config = mockRun.mock.calls[0][0] as CookieConfig;
     expect(config.mode).toBe('opt-in');
     expect(config.categories.necessary).toEqual({ enabled: true, readOnly: true });
@@ -65,10 +66,11 @@ describe('CookieConsentContext', () => {
     expect(typeof config.onConsent).toBe('function');
   });
 
-  it('updates state when onChange fires with analytics consent', () => {
+  it('updates state when onChange fires with analytics consent', async () => {
     const { result } = renderHook(() => useCookieConsent(), {
       wrapper: CookieConsentProvider,
     });
+    await waitFor(() => expect(mockRun).toHaveBeenCalledTimes(1));
     const config = mockRun.mock.calls[0][0] as CookieConfig;
     act(() => {
       config.onChange!({ cookie: { categories: ['analytics', 'necessary'] } });
@@ -80,10 +82,11 @@ describe('CookieConsentContext', () => {
     });
   });
 
-  it('updates state when onChange fires without analytics consent', () => {
+  it('updates state when onChange fires without analytics consent', async () => {
     const { result } = renderHook(() => useCookieConsent(), {
       wrapper: CookieConsentProvider,
     });
+    await waitFor(() => expect(mockRun).toHaveBeenCalledTimes(1));
     const config = mockRun.mock.calls[0][0] as CookieConfig;
     act(() => {
       config.onChange!({ cookie: { categories: ['necessary'] } });
@@ -95,10 +98,11 @@ describe('CookieConsentContext', () => {
     });
   });
 
-  it('updates state when onConsent fires with analytics consent', () => {
+  it('updates state when onConsent fires with analytics consent', async () => {
     const { result } = renderHook(() => useCookieConsent(), {
       wrapper: CookieConsentProvider,
     });
+    await waitFor(() => expect(mockRun).toHaveBeenCalledTimes(1));
     const config = mockRun.mock.calls[0][0] as CookieConfig;
     act(() => {
       config.onConsent!({ cookie: { categories: ['analytics', 'necessary'] } });
@@ -110,10 +114,11 @@ describe('CookieConsentContext', () => {
     });
   });
 
-  it('updates state when onConsent fires without analytics consent', () => {
+  it('updates state when onConsent fires without analytics consent', async () => {
     const { result } = renderHook(() => useCookieConsent(), {
       wrapper: CookieConsentProvider,
     });
+    await waitFor(() => expect(mockRun).toHaveBeenCalledTimes(1));
     const config = mockRun.mock.calls[0][0] as CookieConfig;
     act(() => {
       config.onConsent!({ cookie: { categories: [] } });
@@ -134,10 +139,11 @@ describe('CookieConsentContext', () => {
     expect(screen.getByTestId('child')).toHaveTextContent('Hello');
   });
 
-  it('exposes callbacks from the mock for external testing', () => {
+  it('exposes callbacks from the mock for external testing', async () => {
     renderHook(() => useCookieConsent(), {
       wrapper: CookieConsentProvider,
     });
+    await waitFor(() => expect(mockRun).toHaveBeenCalledTimes(1));
     const config = mockRun.mock.calls[0][0] as CookieConfig;
     expect(config.onChange).toBeDefined();
     expect(config.onConsent).toBeDefined();
