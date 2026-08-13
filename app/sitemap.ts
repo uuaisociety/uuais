@@ -1,10 +1,11 @@
 import { MetadataRoute } from 'next'
 import { SITE_URL } from './metadata'
+import { getPublicSeed } from '@/lib/server-data'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL
 
-  const routes = [
+  const routes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -97,5 +98,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  return routes
+  // Dynamic published event URLs, reusing the public seed (degrades to empty if Firestore is unreachable).
+  let eventRoutes: MetadataRoute.Sitemap = []
+  try {
+    const seed = await getPublicSeed()
+    eventRoutes = seed.events
+      .filter((e) => e.published && e.eventStartAt && new Date(e.eventStartAt) > new Date())
+      .map((e) => ({
+        url: `${baseUrl}/events/${e.id}`,
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: 0.7,
+      }))
+  } catch {
+    // sitemap still serves the static routes
+  }
+
+  return [...routes, ...eventRoutes]
 }
