@@ -1,25 +1,16 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getTokens } from 'next-firebase-auth-edge';
-import { authConfig } from '@/lib/auth-config';
+import { requireAdmin } from '@/lib/server-auth';
 import '@/lib/firebase-admin';
 import admin from 'firebase-admin';
 
-async function authorizeRequest(req: NextRequest) {
-  try {
-    const tokens = await getTokens(req.cookies, authConfig);
-    if (!tokens) return { ok: false, reason: 'no-auth' };
-    const isAdmin = tokens.decodedToken.admin === true || tokens.decodedToken.superAdmin === true;
-    if (!isAdmin) return { ok: false, reason: 'not-admin' };
-    return { ok: true, uid: tokens.decodedToken.uid };
-  } catch (err) {
-    console.warn('getTokens failed', err);
-    return { ok: false, reason: 'invalid-token', detail: String(err instanceof Error ? err.message : err) };
-  }
-}
-
 function sanitizeFilename(name: string) {
   return name.replace(/[^a-zA-Z0-9_.-]/g, '_');
+}
+
+// Only allow storage paths under team-images/, mirroring the storage rules' public folder.
+function isSafeImagePath(path: string): boolean {
+  return path.startsWith('team-images/') && !path.includes('..') && !path.includes('\\');
 }
 
 function isLikelyImage(buf: Buffer, contentType?: string) {
@@ -42,8 +33,8 @@ function isLikelyImage(buf: Buffer, contentType?: string) {
 
 export async function POST(req: NextRequest) {
   try {
-    const auth = await authorizeRequest(req);
-    if (!auth.ok) return NextResponse.json({ error: 'unauthorized', reason: auth.reason, detail: auth.detail }, { status: 401 });
+    const auth = await requireAdmin(req);
+    if (!auth.ok) return NextResponse.json({ error: 'unauthorized', reason: auth.reason }, { status: 401 });
 
     const form = await req.formData();
     const file = form.get('file') as File | null;
@@ -62,6 +53,9 @@ export async function POST(req: NextRequest) {
 
     const key = `${Date.now()}-${sanitizeFilename(((file as File).name) || 'upload')}`;
     const path = `${folder}/${key}`;
+    if (!isSafeImagePath(path)) {
+      return NextResponse.json({ error: 'invalid-folder' }, { status: 400 });
+    }
 
     // Determine storage bucket name. Prefer explicit env var, then admin app config.
     const appOptions = admin.app().options as { storageBucket?: string } | undefined;
@@ -95,6 +89,9 @@ export async function POST(req: NextRequest) {
 
     // Attempt to delete previous file if provided and different
     if (previous && previous !== path) {
+      if (!isSafeImagePath(previous)) {
+        return NextResponse.json({ error: 'invalid-previous-path' }, { status: 400 });
+      }
       try {
         const prevRef = bucket.file(previous);
         const [exists] = await prevRef.exists();
@@ -131,12 +128,15 @@ export async function POST(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
-    const auth = await authorizeRequest(req);
+    const auth = await requireAdmin(req);
     if (!auth.ok) return NextResponse.json({ error: 'unauthorized', reason: auth.reason }, { status: 401 });
 
     const body = await req.json();
     const { path } = body as { path?: string };
     if (!path) return NextResponse.json({ error: 'missing path' }, { status: 400 });
+    if (!isSafeImagePath(path)) {
+      return NextResponse.json({ error: 'invalid path' }, { status: 400 });
+    }
 
     const bucket = admin.storage().bucket();
     const file = bucket.file(path);

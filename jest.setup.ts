@@ -3,6 +3,8 @@ import React from 'react';
 
 declare global {
   var __mockPathname: string | undefined;
+  var __mockTheme: string | undefined;
+  var __setMockTheme: ((theme: 'light' | 'dark') => void) | undefined;
   var __setMockParams: ((params: Record<string, string>) => void) | undefined;
   var __setAppState: ((state: Record<string, unknown> | null) => void) | undefined;
 }
@@ -23,7 +25,45 @@ if (typeof window !== 'undefined') {
   });
 }
 
+// jsdom lacks Element#scrollIntoView; timer-based calls (e.g. wizard step navigation) would throw.
+if (typeof Element !== 'undefined' && !Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = jest.fn();
+}
+
+// jsdom lacks Element#scrollTo; the wizard's step header scrolls the active step into view.
+if (typeof Element !== 'undefined' && !Element.prototype.scrollTo) {
+  Element.prototype.scrollTo = jest.fn();
+}
+
+// Radix Dialog (used by the shared Modal primitive) requires ResizeObserver
+// and PointerEvent capture in jsdom to mount its portal content.
+if (typeof globalThis.ResizeObserver === 'undefined') {
+  globalThis.ResizeObserver = class ResizeObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  } as unknown as typeof ResizeObserver;
+}
+
+if (typeof Element !== 'undefined' && !Element.prototype.hasPointerCapture) {
+  Element.prototype.hasPointerCapture = () => false;
+}
+if (typeof Element !== 'undefined' && !Element.prototype.setPointerCapture) {
+  Element.prototype.setPointerCapture = () => {};
+}
+if (typeof Element !== 'undefined' && !Element.prototype.releasePointerCapture) {
+  Element.prototype.releasePointerCapture = () => {};
+}
+
 global.__mockPathname = '';
+
+global.__mockTheme = 'dark';
+global.__setMockTheme = (theme: 'light' | 'dark') => {
+  global.__mockTheme = theme;
+};
+jest.mock('@/providers/ThemeProvider', () => ({
+  useTheme: () => ({ theme: global.__mockTheme || 'dark', toggleTheme: jest.fn() }),
+}));
 
 const mockParams: Record<string, string> = {};
 jest.mock('next/navigation', () => ({

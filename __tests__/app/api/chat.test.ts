@@ -31,6 +31,14 @@ describe('POST /api/chat', () => {
     expect(res.status).toBe(401)
   })
 
+  it('returns 401 when the token has no uid', async () => {
+    mockGetTokens.mockResolvedValue({ decodedToken: {} })
+    const { POST } = await import('@/app/api/chat/route')
+    const req = new Request('http://localhost/api/chat', { method: 'POST', body: JSON.stringify({ query: 'hello' }) })
+    const res = await POST(req as unknown as Request)
+    expect(res.status).toBe(401)
+  })
+
   it('returns 400 when query is empty', async () => {
     mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } })
     const { POST } = await import('@/app/api/chat/route')

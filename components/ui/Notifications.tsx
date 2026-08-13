@@ -40,7 +40,7 @@ export const NotificationsProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <NotifyContext.Provider value={value}>
       {children}
-      <div className="fixed bottom-4 right-4 z-50 space-y-2">
+      <div className="fixed bottom-4 right-4 z-50 space-y-2" role="status" aria-live="polite" aria-label="Notifications">
         {items.map((n) => (
           <div
             key={n.id}

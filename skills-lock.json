@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "skills": {
+    "api-security-review": {
+      "source": "owasp/secure-agent-playbook",
+      "sourceType": "github",
+      "skillPath": "plugins/code-security-skills/skills/api-security-review/SKILL.md",
+      "computedHash": "d5010d2bd84c804111fe86b066507e742c1b4dd56eb350ad8b538226de9c9399"
+    },
+    "browser-use": {
+      "source": "./.agents/skills/browser-use",
+      "sourceType": "local",
+      "computedHash": "d201df5079809a249cf970732af3207ebab69861331cb2324b3ea2b6069293a7"
+    },
+    "code-security-auditor": {
+      "source": "./.agents/skills/code-security-auditor",
+      "sourceType": "local",
+      "computedHash": "43d77a4a989df77a6b3155a6550dcde4d711a227adfad4ed117db1e28cebeafa"
+    },
+    "firebase-security-rules-auditor": {
+      "source": "firebase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/firebase-security-rules-auditor/SKILL.md",
+      "computedHash": "69927a1fca3467543feb4eafaa1ff376a9b642db1095b29bfc2160c9a555ca61"
+    },
+    "next-best-practices": {
+      "source": "./.agents/skills/next-best-practices",
+      "sourceType": "local",
+      "computedHash": "515ba75178bd44875812d9a560bdf14651f86709f89cf1d4f209638e879807f3"
+    },
+    "react-doctor": {
+      "source": "./.agents/skills/react-doctor",
+      "sourceType": "local",
+      "computedHash": "efa8db174b3c60e27b34d76842e3a9a7c0e5e602fd4d66eec897372d0ce3f30b"
+    },
+    "shadcn": {
+      "source": "./.agents/skills/shadcn",
+      "sourceType": "local",
+      "computedHash": "507f011a70e8b3ae242bdc0bb5b39fd91a1d4049a0f3c281991ccf84973d591c"
+    },
+    "staff-engineer-review": {
+      "source": "./.agents/skills/staff-engineer-review",
+      "sourceType": "local",
+      "computedHash": "634514508555523e8968056e81ef0b73d08a341b207eeb113ba7e9737d4d7aca"
+    },
+    "testing": {
+      "source": "./.agents/skills/testing",
+      "sourceType": "local",
+      "computedHash": "a137f531228a9124b721940a12ce27cc3f376a02a26c476d71562fbc8bde8add"
+    },
+    "vercel-composition-patterns": {
+      "source": "./.agents/skills/vercel-composition-patterns",
+      "sourceType": "local",
+      "computedHash": "94614590eb8d755279d38baf53f9fb48df06cb260e77e8fb626d24090f2a8c77"
+    },
+    "vercel-react-best-practices": {
+      "source": "./.agents/skills/vercel-react-best-practices",
+      "sourceType": "local",
+      "computedHash": "a29962685c2bcf6d6b2e93aa944544d738cb139943e96563a98c24077a55ad34"
+    },
+    "web-design-guidelines": {
+      "source": "./.agents/skills/web-design-guidelines",
+      "sourceType": "local",
+      "computedHash": "a6a44d5498f7e8f68289902f3dedfc6f38ae0cee1e96527c80724cf27f727c2a"
+    }
+  }
+}

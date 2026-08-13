@@ -1,380 +1,549 @@
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+/* ==========================================================================
+   Design tokens
+   Editorial typography (mono metadata, tight display headings) over
+   translucent "liquid glass" surfaces. Ambient light behind glass is what
+   makes it read as glass — see .ambient below.
+   ========================================================================== */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
+
+  --font-sans: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-ui), ui-monospace, SFMono-Regular, monospace;
+
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Warm ink used for the hero slab and glass-nav — one source of truth */
+  --color-ink: var(--ink);
+
+  /* Tight, near-square corner scale */
+  --radius-sm: 0.1875rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.75rem;
+
+  --ease-ios: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --animate-accordion-down: accordion-down 0.24s var(--ease-ios);
+  --animate-accordion-up: accordion-up 0.24s var(--ease-ios);
 }
+
 @layer base {
   :root {
-    --radius: 0.625rem;
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.13 0.028 261.692);
+    --radius: 0.375rem;
+
+    /* Warm paper, not pure white — gives glass something to tint against */
+    --background: oklch(0.983 0.004 95);
+    --foreground: oklch(0.18 0.012 265);
+
     --card: oklch(1 0 0);
-    --card-foreground: oklch(0.13 0.028 261.692);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.13 0.028 261.692);
-    --primary: oklch(0.623 0.257 29.233); /* red-600 */
-    --primary-foreground: oklch(0.985 0.002 247.839);
-    --secondary: oklch(0.967 0.003 264.542);
-    --secondary-foreground: oklch(0.21 0.034 264.665);
-    --muted: oklch(0.967 0.003 264.542);
-    --muted-foreground: oklch(0.551 0.027 264.364);
-    --accent: oklch(0.967 0.003 264.542);
-    --accent-foreground: oklch(0.21 0.034 264.665);
-    --destructive: oklch(56.59% 0.22889 28.685);
-    --border: oklch(0.928 0.006 264.531);
-    --input: oklch(0.928 0.006 264.531);
-    --ring: oklch(0.707 0.022 261.325);
-    --chart-1: oklch(0.646 0.222 41.116);
-    --chart-2: oklch(0.6 0.118 184.704);
-    --chart-3: oklch(0.398 0.07 227.392);
-    --chart-4: oklch(0.828 0.189 84.429);
-    --chart-5: oklch(0.769 0.188 70.08);
-    --sidebar: oklch(0.985 0.002 247.839);
-    --sidebar-foreground: oklch(0.13 0.028 261.692);
-    --sidebar-primary: oklch(0.21 0.034 264.665);
-    --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
-    --sidebar-accent: oklch(0.967 0.003 264.542);
-    --sidebar-accent-foreground: oklch(0.21 0.034 264.665);
-    --sidebar-border: oklch(0.928 0.006 264.531);
-    --sidebar-ring: oklch(0.707 0.022 261.325);
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 26, 26, 26;
-    --background-end-rgb: 26, 26, 26;
+    --card-foreground: oklch(0.18 0.012 265);
+    --popover: oklch(0.995 0.002 95);
+    --popover-foreground: oklch(0.18 0.012 265);
+
+    /* Brand red, deepened slightly so it reads as ink rather than alert */
+    --primary: oklch(0.565 0.208 27.5);
+    --primary-foreground: oklch(0.99 0.002 95);
+
+    --secondary: oklch(0.955 0.004 95);
+    --secondary-foreground: oklch(0.25 0.012 265);
+    --muted: oklch(0.955 0.004 95);
+    --muted-foreground: oklch(0.505 0.014 265);
+    --accent: oklch(0.955 0.004 95);
+    --accent-foreground: oklch(0.25 0.012 265);
+    --destructive: oklch(0.565 0.208 27.5);
+
+    --border: oklch(0.18 0.012 265 / 10%);
+    --input: oklch(0.18 0.012 265 / 12%);
+    --ring: oklch(0.565 0.208 27.5 / 45%);
+
+    --chart-1: oklch(0.565 0.208 27.5);
+    --chart-2: oklch(0.62 0.13 245);
+    --chart-3: oklch(0.7 0.14 85);
+    --chart-4: oklch(0.6 0.12 165);
+    --chart-5: oklch(0.55 0.16 305);
+
+    --sidebar: oklch(0.975 0.004 95);
+    --sidebar-foreground: oklch(0.18 0.012 265);
+    --sidebar-primary: oklch(0.565 0.208 27.5);
+    --sidebar-primary-foreground: oklch(0.99 0.002 95);
+    --sidebar-accent: oklch(0.955 0.004 95);
+    --sidebar-accent-foreground: oklch(0.25 0.012 265);
+    --sidebar-border: oklch(0.18 0.012 265 / 10%);
+    --sidebar-ring: oklch(0.565 0.208 27.5 / 45%);
+
+    /* --- Liquid glass --- */
+  --glass-bg: oklch(1 0 0 / 62%);
+  --glass-bg-strong: oklch(1 0 0 / 78%);
+  --glass-border: oklch(1 0 0 / 70%);
+  --glass-edge: oklch(0.18 0.012 265 / 8%);
+  --glass-specular: oklch(1 0 0 / 85%);
+  --glass-shadow: 0 1px 2px oklch(0.18 0.012 265 / 5%),
+                  0 12px 32px -8px oklch(0.18 0.012 265 / 12%);
+  --glass-shadow-lifted: 0 2px 4px oklch(0.18 0.012 265 / 6%),
+                         0 24px 56px -12px oklch(0.18 0.012 265 / 18%);
+  --glass-blur: 24px;
+  --glass-bf: blur(var(--glass-blur)) saturate(180%);
+  --glass-bf-strong: blur(28px) saturate(200%);
+  --glass-bf-nav: blur(12px) saturate(160%);
+  --glass-bf-pop: blur(40px) saturate(200%);
+
+  /* Nav + popover surfaces flip with the theme: light frosted glass in light
+     mode, dark ink glass in dark mode, so the header/menus always mesh with
+     the page they sit on. */
+  --glass-nav-bg: oklch(1 0 0 / 62%);
+  --glass-nav-edge: oklch(0.18 0.012 265 / 10%);
+  --glass-nav-fg: oklch(0.2 0.012 265);
+  --glass-pop-bg: oklch(1 0 0 / 82%);
+  --glass-pop-edge: oklch(0.18 0.012 265 / 14%);
+  --glass-pop-shadow: 0 2px 4px oklch(0.18 0.012 265 / 8%),
+                      0 24px 56px -12px oklch(0.18 0.012 265 / 22%);
+
+  /* Ambient light blobs sitting behind the glass */
+    --ambient-1: oklch(0.565 0.208 27.5 / 14%);
+    --ambient-2: oklch(0.62 0.13 245 / 10%);
+    --ambient-3: oklch(0.7 0.14 85 / 9%);
+
+    --vignette: oklch(0.18 0.012 265 / 12%);
+
+    --ink: oklch(0.16 0.02 20);
   }
 
   .dark {
-    --background: oklch(0.15 0.02 270); /* ~ neutral gray */
-    --foreground: oklch(0.95 0 0);       /* near white */
-    --card: oklch(0.21 0.034 264.665);
-    --card-foreground: oklch(0.985 0.002 247.839);
-    --popover: oklch(0.21 0.034 264.665);
-    --popover-foreground: oklch(0.985 0.002 247.839);
-    --primary: oklch(0.623 0.257 29.233); /* red-600 */
-    --primary-foreground: oklch(0.985 0.002 247.839);
-    --secondary: oklch(0.278 0.033 256.848);
-    --secondary-foreground: oklch(0.985 0.002 247.839);
-    --muted: oklch(0.278 0.033 256.848);
-    --muted-foreground: oklch(0.707 0.022 261.325);
-    --accent: oklch(0.278 0.033 256.848);
-    --accent-foreground: oklch(0.985 0.002 247.839);
-    --destructive: oklch(56.59% 0.22889 28.685);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.551 0.027 264.364);
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.21 0.034 264.665);
-    --sidebar-foreground: oklch(0.985 0.002 247.839);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
-    --sidebar-accent: oklch(0.278 0.033 256.848);
-    --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.551 0.027 264.364);
+    --background: oklch(0.155 0.012 265);
+    --foreground: oklch(0.96 0.003 95);
+
+    --card: oklch(0.205 0.014 265);
+    --card-foreground: oklch(0.96 0.003 95);
+    --popover: oklch(0.205 0.014 265);
+    --popover-foreground: oklch(0.96 0.003 95);
+
+    --primary: oklch(0.635 0.212 27.5);
+    --primary-foreground: oklch(0.99 0.002 95);
+
+    --secondary: oklch(0.255 0.016 265);
+    --secondary-foreground: oklch(0.96 0.003 95);
+    --muted: oklch(0.255 0.016 265);
+    --muted-foreground: oklch(0.665 0.016 265);
+    --accent: oklch(0.255 0.016 265);
+    --accent-foreground: oklch(0.96 0.003 95);
+    --destructive: oklch(0.635 0.212 27.5);
+
+    --border: oklch(1 0 0 / 11%);
+    --input: oklch(1 0 0 / 14%);
+    --ring: oklch(0.635 0.212 27.5 / 50%);
+
+    --chart-1: oklch(0.635 0.212 27.5);
+    --chart-2: oklch(0.68 0.14 245);
+    --chart-3: oklch(0.78 0.15 85);
+    --chart-4: oklch(0.7 0.13 165);
+    --chart-5: oklch(0.66 0.18 305);
+
+    --sidebar: oklch(0.185 0.013 265);
+    --sidebar-foreground: oklch(0.96 0.003 95);
+    --sidebar-primary: oklch(0.635 0.212 27.5);
+    --sidebar-primary-foreground: oklch(0.99 0.002 95);
+    --sidebar-accent: oklch(0.255 0.016 265);
+    --sidebar-accent-foreground: oklch(0.96 0.003 95);
+    --sidebar-border: oklch(1 0 0 / 11%);
+    --sidebar-ring: oklch(0.635 0.212 27.5 / 50%);
+
+    --glass-bg: oklch(0.28 0.014 265 / 55%);
+    --glass-bg-strong: oklch(0.24 0.014 265 / 76%);
+    --glass-border: oklch(1 0 0 / 14%);
+    --glass-edge: oklch(1 0 0 / 8%);
+    --glass-specular: oklch(1 0 0 / 22%);
+    --glass-shadow: 0 1px 2px oklch(0 0 0 / 30%),
+                    0 12px 32px -8px oklch(0 0 0 / 45%);
+    --glass-shadow-lifted: 0 2px 4px oklch(0 0 0 / 35%),
+                           0 24px 56px -12px oklch(0 0 0 / 55%);
+    --glass-bf: blur(var(--glass-blur)) saturate(180%);
+    --glass-bf-strong: blur(28px) saturate(200%);
+    --glass-bf-nav: blur(12px) saturate(160%);
+    --glass-bf-pop: blur(40px) saturate(200%);
+
+    --glass-nav-bg: oklch(from var(--ink) l c h / 72%);
+    --glass-nav-edge: oklch(1 0 0 / 8%);
+    --glass-nav-fg: oklch(0.97 0.002 95);
+    --glass-pop-bg: oklch(from var(--ink) l c h / 88%);
+    --glass-pop-edge: oklch(1 0 0 / 14%);
+    --glass-pop-shadow: 0 2px 4px oklch(0 0 0 / 40%),
+                        0 24px 56px -12px oklch(0 0 0 / 60%);
+
+    --ambient-1: oklch(0.635 0.212 27.5 / 20%);
+    --ambient-2: oklch(0.62 0.16 245 / 16%);
+    --ambient-3: oklch(0.7 0.14 85 / 10%);
+
+    --vignette: oklch(0 0 0 / 32%);
+
+    /* ── Harmonized legacy grays ────────────────────────────────
+       Pages that predate the token system use Tailwind's gray scale
+       (bg-gray-800, text-gray-400, border-gray-700, …). Remap those
+       variables here so every surface, text, and border resolves to the
+       same oklch ink as the home page — one dark palette everywhere. */
+    --color-gray-50:  oklch(0.98 0.003 95);
+    --color-gray-100: oklch(0.96 0.003 95);
+    --color-gray-200: oklch(0.9 0.004 95);
+    --color-gray-300: oklch(0.8 0.006 95);
+    --color-gray-400: oklch(0.665 0.016 265);
+    --color-gray-500: oklch(0.5 0.014 265);
+    --color-gray-600: oklch(0.36 0.014 265);
+    --color-gray-700: oklch(0.255 0.016 265);
+    --color-gray-800: oklch(0.205 0.014 265);
+    --color-gray-900: oklch(0.155 0.012 265);
+    --color-gray-950: oklch(0.12 0.012 265);
+
+    --color-neutral-50:  oklch(0.98 0.003 95);
+    --color-neutral-100: oklch(0.96 0.003 95);
+    --color-neutral-200: oklch(0.9 0.004 95);
+    --color-neutral-300: oklch(0.8 0.006 95);
+    --color-neutral-400: oklch(0.665 0.016 265);
+    --color-neutral-500: oklch(0.5 0.014 265);
+    --color-neutral-600: oklch(0.36 0.014 265);
+    --color-neutral-700: oklch(0.255 0.016 265);
+    --color-neutral-800: oklch(0.205 0.014 265);
+    --color-neutral-900: oklch(0.155 0.012 265);
+    --color-neutral-950: oklch(0.12 0.012 265);
   }
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased transition-colors duration-300;
+    font-feature-settings: "ss01", "cv01";
   }
+
+  /* Display headings: tight tracking, optical sizing — the KTH-style
+     72px/-1.8px feel, scaled fluidly. */
+  h1, h2, h3, h4 {
+    @apply font-sans font-semibold;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+  }
+
+  h1 { letter-spacing: -0.034em; }
+
+  p { text-wrap: pretty; }
+
+  /* Links are inherited-colour by default; components opt into accent.
+     (The old global blue-and-bold rule fought every layout it appeared in.) */
   a {
-    @apply text-blue-600 dark:text-blue-400 hover:underline font-semibold;
+    color: inherit;
+    text-decoration: none;
   }
-}
 
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #444;
-}
-
-/* Link styles */
-a {
-  transition: all 0.2s ease-in-out;
-}
-
-a:hover {
-  transform: translateY(-1px);
-}
-
-/* Mail link specific styling */
-
-/* a[href^="mailto:"] {
-  color: #60a5fa;
-  font-weight: 500;
-} */
-
-button:hover {
-    transform: scale(1.05);
-    transition: all 300ms ease-in-out;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.dark button:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
-  25% {
-    transform: translateY(-20px) rotate(5deg);
+
+  ::selection {
+    background: oklch(0.565 0.208 27.5 / 22%);
   }
-  50% {
-    transform: translateY(-10px) rotate(-3deg);
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 999px;
+    border: 3px solid transparent;
+    background-clip: content-box;
   }
-  75% {
-    transform: translateY(-15px) rotate(2deg);
-  }
+  ::-webkit-scrollbar-thumb:hover { background-color: var(--muted-foreground); background-clip: content-box; }
 }
 
-.animate-float {
-  animation: float 20s ease-in-out infinite;
+/* ==========================================================================
+   Components
+   ========================================================================== */
+
+@layer components {
+
+  /* --- Liquid glass ------------------------------------------------------
+     Three stacked cues make glass believable: a blurred+saturated backdrop,
+     a hairline that is brighter along the top edge (specular), and a soft
+     ambient shadow. Blur alone just looks foggy.
+
+     backdrop-filter is written via a custom property inside @supports so the
+     production CSS minifier cannot collapse the standard + -webkit- pair into
+     one prefixed declaration (Chromium does not honour -webkit-backdrop-filter). */
+
+  .glass {
+    position: relative;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: var(--glass-bf);
+    border: 1px solid var(--glass-edge);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 0 var(--glass-specular);
+    border-radius: var(--radius-xl);
+    transition: background-color 0.3s var(--ease-ios),
+                border-color 0.3s var(--ease-ios);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .glass { backdrop-filter: var(--glass-bf); }
+  }
+
+  .glass-strong {
+    background: var(--glass-bg-strong);
+    -webkit-backdrop-filter: var(--glass-bf-strong);
+    transition: background-color 0.3s var(--ease-ios);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .glass-strong { backdrop-filter: var(--glass-bf-strong); }
+  }
+
+  /* Fixed header bar. Theme-aware: light frosted glass in light mode, dark
+     ink glass in dark mode, so it always reads as one piece with the page. */
+  .glass-nav {
+    background: var(--glass-nav-bg);
+    -webkit-backdrop-filter: var(--glass-bf-nav);
+    border-bottom: 1px solid var(--glass-nav-edge);
+    color: var(--glass-nav-fg);
+    transition: background-color 0.3s var(--ease-ios),
+                border-color 0.3s var(--ease-ios);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .glass-nav { backdrop-filter: var(--glass-bf-nav); }
+  }
+
+  /* Floating panel (dropdowns / popovers) that sits over page content — a
+     clearly frosted, distinct surface with its own shadow so it reads as
+     floating above the bar. */
+  .glass-pop {
+    background: var(--glass-pop-bg);
+    -webkit-backdrop-filter: var(--glass-bf-pop);
+    border: 1px solid var(--glass-pop-edge);
+    box-shadow: var(--glass-pop-shadow);
+    color: var(--glass-nav-fg);
+  }
+  @supports (backdrop-filter: blur(1px)) {
+    .glass-pop { backdrop-filter: var(--glass-bf-pop); }
+  }
+
+  /* Lifts on hover the way an iOS card does — springy, never bouncy. */
+  .glass-interactive {
+    transition: transform 0.45s var(--ease-ios),
+                box-shadow 0.45s var(--ease-ios),
+                background-color 0.45s var(--ease-ios);
+  }
+  .glass-interactive:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--glass-shadow-lifted), inset 0 1px 0 0 var(--glass-specular);
+  }
+  .glass-interactive:active {
+    transform: translateY(-1px) scale(0.995);
+    transition-duration: 0.12s;
+  }
+
+  /* CTA buttons: keep the glass hover shadow but no y-lift on hover. */
+  .glass-no-lift:hover {
+    transform: none;
+  }
+
+  /* Specular sheen that travels across the surface on hover. */
+  .glass-sheen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 30%,
+      var(--glass-specular) 48%,
+      transparent 62%
+    );
+    opacity: 0;
+    transform: translateX(-30%);
+    transition: opacity 0.5s var(--ease-ios), transform 0.7s var(--ease-ios);
+  }
+  .glass-sheen:hover::after {
+    opacity: 0.5;
+    transform: translateX(30%);
+  }
+
+  /* --- Ambient background ------------------------------------------------
+     Soft colour fields that the glass picks up. Fixed, so panels shift tint
+     as the page scrolls past them. */
+  .ambient {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    contain: layout paint;
+    background:
+      radial-gradient(60rem 40rem at 12% -8%, var(--ambient-1), transparent 60%),
+      radial-gradient(50rem 38rem at 92% 8%, var(--ambient-2), transparent 62%),
+      radial-gradient(46rem 34rem at 68% 92%, var(--ambient-3), transparent 60%);
+  }
+
+  /* Barely-there film grain over the ambient field — breaks up banding in
+     the large gradients and gives the glass a tactile substrate. Uses the
+     raw noise at low opacity rather than a blend mode, so it reads on both
+     light and dark backgrounds. */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    contain: layout paint;
+    opacity: 0.05;
+    background-image: url("data:image/png;base64,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");
+    background-size: 64px 64px;
+  }
+  .dark .grain { opacity: 0.09; }
+
+  /* Gentle edge falloff that pulls the eye toward the content column. */
+  .vignette {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 100% 80% at 50% 45%,
+      transparent 58%,
+      var(--vignette) 100%
+    );
+  }
+
+  /* --- Typography helpers ----------------------------------------------- */
+
+  /* Mono eyebrow / metadata / tag text — the KTH-ish signal that a string is
+     data rather than prose. */
+  .mono-label {
+    @apply font-mono uppercase;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+  }
+
+  .mono-meta {
+    @apply font-mono;
+    font-size: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* Fluid display sizes */
+  .display-xl { font-size: clamp(2.75rem, 7vw, 5.5rem); line-height: 0.96; letter-spacing: -0.038em; }
+  .display-lg { font-size: clamp(2rem, 4.4vw, 3.25rem); line-height: 1.02; letter-spacing: -0.032em; }
+  .display-md { font-size: clamp(1.5rem, 2.6vw, 2rem);  line-height: 1.1;  letter-spacing: -0.026em; }
+
+  /* Parenthesised accent word: "(Upcoming) Events" */
+  .paren { color: var(--primary); font-weight: 400; }
+
+  /* Skip rendering below-fold sections until they near the viewport (intrinsic size reserves space). */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 480px;
+  }
+
+  /* --- Surfaces & chrome ------------------------------------------------- */
+
+  .hairline { border-color: var(--border); }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-mono-ui), ui-monospace, monospace;
+    text-transform: uppercase;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    padding: 0.3125rem 0.5rem;
+    border-radius: var(--radius-sm);
+    line-height: 1;
+  }
+
+  /* Legacy global input class, kept for the admin tables that use it */
+  .input {
+    @apply w-full px-3.5 py-2 rounded-lg border bg-card text-foreground
+           placeholder:text-muted-foreground
+           focus:outline-none focus:ring-2 focus:ring-ring transition-colors duration-300;
+    border-color: var(--input);
+  }
+  select.input { appearance: none; }
 }
+
+/* ==========================================================================
+   Keyframes
+   ========================================================================== */
 
 @keyframes accordion-down {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-  }
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
 }
 
 @keyframes accordion-up {
-  from {
-    height: var(--radix-accordion-content-height);
-  }
-  to {
-    height: 0;
-  }
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-20px) rotate(5deg); }
+  50% { transform: translateY(-10px) rotate(-3deg); }
+  75% { transform: translateY(-15px) rotate(2deg); }
 }
+.animate-float { animation: float 20s ease-in-out infinite; }
 
-.animate-shimmer {
-  animation: shimmer 2s linear infinite;
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-@keyframes ripple-expand {
-  0% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 0.6;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(100);
-    opacity: 0;
-  }
-}
+.animate-rise { animation: rise 0.7s var(--ease-ios) both; }
 
-.animate-ripple {
-  animation: ripple-expand 0.8s ease-out forwards;
+/* Route transition — new page content fades in on navigation. Runs on the
+   keyed page wrapper so it re-triggers on every route change. Deliberately
+   opacity-only: moving the page under the fixed blurred header forces the
+   backdrop-filter to recomposite every frame, which reads as a header stutter. */
+@keyframes page-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
-
-@keyframes gradientMove {
-  0% {
-    background-position-x: left;
-  }
-  100% {
-    background-position-x: right;
-  }
-}
-
-/* Hover Glow Effect for CTA Button */
-@keyframes glowing {
-  0% { 
-    background-position: 0 0; 
-  }
-  50% { 
-    background-position: 400% 0; 
-  }
-  100% { 
-    background-position: 0 0; 
-  }
-}
-
-.glow-on-hover {
-  border: none;
-  outline: none;
-  cursor: pointer;
-  position: relative;
-  z-index: 0;
-  border-radius: 10px;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
-}
-.dark .glow-on-hover{
-  box-shadow: 0 8px 25px rgba(185, 28, 28, 0.4);
-}   
-
-.glow-on-hover:before {
-  content: '';
-  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background-size: 400%;
-  z-index: -1;
-  filter: blur(5px);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  animation: glowing 20s linear infinite;
-  opacity: 0;
-  transition: opacity .3s ease-in-out;
-  border-radius: 10px;
-}
-
-.glow-on-hover:active {
-  color: #000;
-}
-
-.glow-on-hover:active{
-  color: #000;
-}
-
-.glow-on-hover:hover:before {
-  opacity: 0.85;
-}
-
-.glow-on-hover:after {
-  z-index: -1;
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: inherit;
-  left: 0;
-  top: 0;
-  border-radius: 10px;
-}
-.glow-hover-only {
-  position: relative;
-  z-index: 0;
-  border-radius: 10px;
-  transition: all 0.3s ease-in-out;
-}
-
-/* NO base glow */
-.dark .glow-hover-only {
-  box-shadow: none;
-}
-
-/* Same animated glow as before */
-.glow-hover-only:before {
-  content: '';
-  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  background-size: 400%;
-  z-index: -1;
-  filter: blur(5px);
-  width: calc(100% + 4px);
-  height: calc(100% + 4px);
-  animation: glowing 20s linear infinite;
-  opacity: 0;
-  transition: opacity .3s ease-in-out;
-  border-radius: 10px;
-}
-
-.glow-hover-only:hover:before {
-  opacity: 0.85;
-}
-
-.glow-hover-only:after {
-  z-index: -1;
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: inherit;
-  left: 0;
-  top: 0;
-  border-radius: 10px;
-}
-
-/* Global input style for consistent light/dark behavior */
-.input {
-  @apply w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-700 shadow-sm
-         bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100
-         placeholder-gray-500 dark:placeholder-gray-400
-         focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors;
-}
-
-/* Improve native select look */
-select.input {
-  appearance: none;
-}
+.animate-page-in { animation: page-in 0.25s var(--ease-ios) backwards; }
 
 @layer components {
   .thinking-dot {
@@ -383,79 +552,73 @@ select.input {
   }
 
   @keyframes faded-bounce {
-    0%, 100% {
-      opacity: 0;
-      transform: translateY(0);
-    }
-    50% {
-      opacity: 1;
-      transform: translateY(-4px);
-    }
+    0%, 100% { opacity: 0; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-4px); }
   }
 }
 
-@import "tailwindcss";
-@import "tw-animate-css";
-
-#cc-main {
-  --cc-bg: #fff;
-  --cc-primary-color: #2c2f31;
-  --cc-secondary-color: #5e6266;
-  --cc-btn-primary-bg: #dc2626;
-  --cc-btn-primary-color: #fff;
-  --cc-btn-primary-border-color: #dc2626;
-  --cc-btn-primary-hover-bg: #b91c1c;
-  --cc-btn-primary-hover-color: #fff;
-  --cc-btn-primary-hover-border-color: #b91c1c;
-  --cc-btn-secondary-bg: #f1f5f9; 
-  --cc-btn-secondary-color: #2c2f31;
-  --cc-btn-secondary-border-color: #f1f5f9;
-  --cc-btn-secondary-hover-bg: #e2e8f0;
-  --cc-btn-secondary-hover-color: #000;
-  --cc-btn-secondary-hover-border-color: #e2e8f0;
-  --cc-separator-border-color: #f0f4f7;
-  --cc-toggle-on-bg: #dc2626;
-  --cc-toggle-off-bg: #667481;
-  --cc-toggle-on-knob-bg: #fff;
-  --cc-toggle-off-knob-bg: #fff;
-  --cc-toggle-active-icon-color: #fff;
-  --cc-link-color: #dc2626;
-  --cc-modal-border-radius: 0.5rem;
-  --cc-btn-border-radius: 0.4rem;
-  --cc-footer-bg: #fff;
-  --cc-footer-border-color: #f0f4f7;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-.dark #cc-main {
-  --cc-bg: #1f2937;
-  --cc-primary-color: #f3f4f6;
-  --cc-secondary-color: #9ca3af;
-  --cc-btn-primary-bg: #dc2626;
-  --cc-btn-primary-color: #fff;
-  --cc-btn-primary-border-color: #dc2626;
-  --cc-btn-primary-hover-bg: #b91c1c;
-  --cc-btn-primary-hover-color: #fff;
-  --cc-btn-primary-hover-border-color: #b91c1c;
-  --cc-btn-secondary-bg: #374151;
-  --cc-btn-secondary-color: #f3f4f6;
-  --cc-btn-secondary-border-color: #374151;
-  --cc-btn-secondary-hover-bg: #4b5563;
-  --cc-btn-secondary-hover-color: #fff;
-  --cc-btn-secondary-hover-border-color: #4b5563;
-  --cc-separator-border-color: #374151;
-  --cc-toggle-on-bg: #dc2626;
-  --cc-toggle-off-bg: #4b5563;
-  --cc-toggle-on-knob-bg: #fff;
-  --cc-toggle-off-knob-bg: #9ca3af;
-  --cc-toggle-active-icon-color: #fff;
-  --cc-link-color: #ef4444;
-  --cc-modal-border-radius: 0.5rem;
-  --cc-btn-border-radius: 0.4rem;
-  --cc-cookie-category-block-bg: #374151;
-  --cc-cookie-category-block-border: #4b5563;
-  --cc-cookie-category-block-hover-bg: #4b5563;
-  --cc-cookie-category-expanded-block-hover-bg: #4b5563;
-  --cc-toggle-readonly-bg: #5a5f68;
-  --cc-footer-bg: #1a1d23;
-  --cc-footer-border-color: #2d3139;
+/* ==========================================================================
+   Cookie consent (vanilla-cookieconsent)
+   ========================================================================== */
+
+#cc-main {
+  --cc-bg: var(--card);
+  --cc-primary-color: var(--foreground);
+  --cc-secondary-color: var(--muted-foreground);
+  --cc-btn-primary-bg: var(--primary);
+  --cc-btn-primary-color: var(--primary-foreground);
+  --cc-btn-primary-border-color: var(--primary);
+  --cc-btn-primary-hover-bg: var(--primary);
+  --cc-btn-primary-hover-color: var(--primary-foreground);
+  --cc-btn-primary-hover-border-color: var(--primary);
+  --cc-btn-secondary-bg: var(--secondary);
+  --cc-btn-secondary-color: var(--secondary-foreground);
+  --cc-btn-secondary-border-color: var(--secondary);
+  --cc-btn-secondary-hover-bg: var(--secondary);
+  --cc-btn-secondary-hover-color: var(--secondary-foreground);
+  --cc-btn-secondary-hover-border-color: var(--secondary);
+  --cc-separator-border-color: var(--border);
+  --cc-toggle-on-bg: var(--primary);
+  --cc-toggle-on-knob-bg: var(--primary-foreground);
+  --cc-toggle-off-bg: var(--muted-foreground);
+  --cc-toggle-off-knob-bg: var(--background);
+  --cc-toggle-active-icon-color: var(--primary-foreground);
+  --cc-link-color: var(--primary);
+  --cc-modal-border-radius: var(--radius-2xl);
+  --cc-btn-border-radius: 999px;
+  --cc-cookie-category-block-bg: var(--muted);
+  --cc-cookie-category-block-border: var(--border);
+  --cc-cookie-category-block-hover-bg: var(--accent);
+  --cc-cookie-category-expanded-block-hover-bg: var(--accent);
+  --cc-toggle-readonly-bg: var(--secondary);
+  --cc-overlay-bg: oklch(0.16 0.02 20 / 60%);
+  --cc-footer-bg: var(--card);
+  --cc-footer-color: var(--muted-foreground);
+  --cc-footer-border-color: var(--border);
+}
+
+/* The library reuses --cc-btn-border-radius (pill) for the expandable
+   category blocks — give them the site's subtle radius instead. Scoped to
+   .pm-wrapper so the override outranks the library's own #cc-main rules. */
+#cc-main .pm-wrapper .pm__section,
+#cc-main .pm-wrapper .pm__section--toggle,
+#cc-main .pm-wrapper .pm__section-title,
+#cc-main .pm-wrapper .pm__section--toggle .pm__section-desc-wrapper,
+#cc-main .pm-wrapper .pm__section-desc-wrapper {
+  border-radius: var(--radius-lg);
+}
+
+/* Keep the expanded category title and its description one continuous block */
+#cc-main .pm-wrapper .pm__section--toggle.is-expanded .pm__section-title {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }

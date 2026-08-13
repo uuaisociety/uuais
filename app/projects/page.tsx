@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Button } from '@/components/ui/Button';
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -19,42 +20,44 @@ const projects = [
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen pt-24 pb-8 bg-gray-50 dark:bg-gray-900 ">
+    <div className="min-h-screen bg-background pt-24 pb-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <p className="mono-label text-muted-foreground mb-6">UU AI Society · Build</p>
+          <h1 className="display-lg text-foreground mb-4">
             Our Projects
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Explore the innovative projects we're working on at UU AI Society. 
             From educational tools to community resources, we're building solutions 
             to help our community thrive.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
           {projects.map((project) => (
             <Link
               key={project.slug}
               href={`/projects/${project.slug}`}
-              className="group bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+              className="group glass glass-interactive flex flex-col overflow-hidden rounded-md"
             >
-              <div className="relative h-48 bg-gray-200 dark:bg-gray-700">
+              <div className="relative aspect-[16/10] overflow-hidden bg-gray-200 dark:bg-gray-700">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
                 />
-                <div className="absolute top-4 right-4 bg-red-600 text-white text-xs px-3 py-1 rounded-full">
+                <span className="absolute top-3 right-3 pill bg-black/45 text-white backdrop-blur-md">
                   {project.status}
-                </div>
+                </span>
               </div>
-              <div className="p-6">
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+              <div className="flex flex-col flex-1 p-5">
+                <h2 className="text-[1.0625rem] font-semibold tracking-[-0.02em] leading-snug mb-2 group-hover:text-primary transition-colors">
                   {project.title}
                 </h2>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   {project.description}
                 </p>
               </div>
@@ -62,20 +65,19 @@ export default function ProjectsPage() {
           ))}
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        <div className="glass rounded-lg p-8">
+          <h2 className="text-xl font-semibold text-foreground mb-4">
             Have an idea?
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
+          <p className="text-muted-foreground mb-6 leading-relaxed">
             We're always looking for new project ideas and contributors. 
             If you have a suggestion or want to get involved, we'd love to hear from you.
           </p>
-          <Link
-            href="mailto:dev@uuais.com"
-            className="inline-flex items-center px-6 py-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors"
-          >
-            Contact the Dev Team
-          </Link>
+          <Button asChild>
+            <Link href="mailto:dev@uuais.com">
+              Contact the Development Team
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

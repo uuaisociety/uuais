@@ -1,20 +1,18 @@
-import requests
-import xml.etree.ElementTree as ET
+import asyncio
+import html
 import json
 import re
-import sys
-from urllib.parse import urlparse, parse_qs
-import html
-import asyncio
-import aiohttp
+import xml.etree.ElementTree as ET
+from urllib.parse import parse_qs, urlparse
 
+import aiohttp
 import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
-from google.cloud.firestore_v1.vector import Vector
-from google import genai
-from google.genai import types
 import numpy as np
+import requests
+from firebase_admin import credentials, firestore
+from google import genai
+from google.cloud.firestore_v1.vector import Vector
+from google.genai import types
 
 # Configuration
 SITEMAP_INDEX_URL = 'https://www.uu.se/download/18.7f7c20f41984f683c7d7d9/1771216449846/index.xml'
@@ -87,7 +85,8 @@ def parse_course_page(html_content, url):
             # Check for Main Course Data
             if 'semesters' in blob:
                 semesters = blob.get('semesters', [])
-                if not semesters: continue
+                if not semesters:
+                    continue
                 
                 # Flatten instances
                 all_instances = []
@@ -96,7 +95,8 @@ def parse_course_page(html_content, url):
                         inst['semester_name'] = sem.get('name')
                         all_instances.append(inst)
                 
-                if not all_instances: continue
+                if not all_instances:
+                    continue
                     
                 # Sort by startDate descending
                 all_instances.sort(key=lambda x: x.get('startDate', ''), reverse=True)
@@ -203,7 +203,8 @@ def parse_prerequisites(db):
         
         # 2. Check for titles
         for t_str, t_key in title_to_key.items():
-            if len(t_str) < 5: continue
+            if len(t_str) < 5:
+                continue
             if t_str in req_lower:
                 found_keys.add(t_key)
         

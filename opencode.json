@@ -4,6 +4,13 @@
     "AGENTS.md",
     "CLAUDE.md"
   ],
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "@playwright/mcp@latest"],
+      "enabled": true
+    }
+  },
   "plugin": [
     "cc-safety-net",
     "opencode-snip@latest",
@@ -48,6 +55,19 @@
     },
     "test-writer": {
       "description": "Write unit tests, integration tests, and API tests for the UUAIS project. Generates test files with proper mocking, edge case coverage, and meaningful assertions. Use when writing new tests, debugging flaky tests, analyzing coverage gaps, or designing test strategies.",
+      "mode": "subagent"
+    },
+    "security-review": {
+      "description": "Security review of Firebase rules and API routes: Firestore/Storage rules hardening, auth checks, input validation, privilege escalation. Diagnostic only (no edits).",
+      "mode": "subagent",
+      "permission": { "edit": "deny", "bash": "ask" }
+    },
+    "backend-data": {
+      "description": "Backend/data layer work: Firestore schemas and security rules, Firestore CRUD helpers in lib/, AppContext wiring, API routes. Use for data modeling, Firestore queries, server auth, or API route changes.",
+      "mode": "subagent"
+    },
+    "e2e-browser-tester": {
+      "description": "End-to-end browser testing and manual browser verification. Runs the Playwright E2E suite and/or drives the browser interactively via browser-use. Use for verifying UI flows, taking screenshots, checking pages after changes.",
       "mode": "subagent"
     }
   }

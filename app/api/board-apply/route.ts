@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getTokens } from 'next-firebase-auth-edge';
-import { authConfig } from '@/lib/auth-config';
+import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { adminDb } from '@/lib/firebase-admin';
 import admin from 'firebase-admin';
 
@@ -11,19 +10,6 @@ interface AppError extends Error {
   status?: number;
   code?: string;
   retryAfterSeconds?: number;
-}
-
-async function authorizeRequest(req: NextRequest) {
-  try {
-    const tokens = await getTokens(req.cookies, authConfig);
-    if (!tokens) return { ok: false, reason: 'no-auth' };
-    const isAdmin = tokens.decodedToken.admin === true || tokens.decodedToken.superAdmin === true;
-    if (!isAdmin) return { ok: false, reason: 'not-admin' };
-    return { ok: true, uid: tokens.decodedToken.uid };
-  } catch (err) {
-    console.warn('getTokens failed', err);
-    return { ok: false, reason: 'invalid-token' };
-  }
 }
 
 const DEFAULT_COOLDOWN_SECONDS = 1 * 60; // 1 minute
@@ -52,9 +38,9 @@ async function saveFileToStorage(file: File, destPath: string) {
 }
 
 export async function POST(req: NextRequest) {
-  const auth = await authorizeRequest(req);
+  const auth = await requireAdmin(req);
   if (!auth.ok) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return authFailureResponse(auth.reason);
   }
 
   try {

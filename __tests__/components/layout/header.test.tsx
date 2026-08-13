@@ -1,15 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { Header } from '@/components/layout/Header'
-import { getUserProfile } from '@/lib/firestore/users'
-
-const mockGetUserProfile = getUserProfile as jest.Mock
 
 jest.mock('@/components/ui/ThemeToggle', () => ({
   ThemeToggle: () => <div data-testid="theme-toggle" />,
-}))
-
-jest.mock('@/lib/firestore/users', () => ({
-  getUserProfile: jest.fn(),
 }))
 
 const mockUseAdmin = jest.fn()
@@ -26,6 +19,8 @@ function mockAdminState(overrides: Record<string, unknown> = {}) {
     isAdmin: false,
     isSuperAdmin: false,
     claims: null,
+    profile: null,
+    cached: null,
     signInWithGoogle: jest.fn(),
     logout: jest.fn(),
     ...overrides,
@@ -55,29 +50,31 @@ describe('Header', () => {
       expect(applyLinks.length).toBe(2)
       applyLinks.forEach((link) => expect(link).toHaveAttribute('href', '/apply/team'))
       // CTA uses a solid background to stand out from regular nav links
-      expect(applyLinks[0].className).toMatch(/bg-red-600|bg-white/)
+      expect(applyLinks[0].className).toMatch(/bg-primary/)
     })
 
     it('renders register and login links when not authenticated', () => {
       render(<Header />)
-      expect(screen.getByText('Register')).toBeInTheDocument()
-      expect(screen.getByText('Login')).toBeInTheDocument()
+      expect(screen.getAllByText('Register').length).toBe(2)
+      expect(screen.getAllByText('Login').length).toBe(2)
     })
 
-    it('renders logo when not on homepage', () => {
-      render(<Header />)
-      expect(screen.getByText('UU AI Society')).toBeInTheDocument()
-      expect(screen.getByAltText('UU AI Society Logo')).toBeInTheDocument()
-    })
-
-    it('renders theme toggle in desktop and mobile nav', () => {
-      render(<Header />)
-      expect(screen.getAllByTestId('theme-toggle').length).toBe(2)
-    })
-
-    it('shows spacer on non-homepage', () => {
+    it('always renders the logo and wordmark', () => {
       const { container } = render(<Header />)
-      expect(container.querySelector('div.h-\\[100px\\]')).toBeInTheDocument()
+      expect(screen.getByText('UU AI Society')).toBeInTheDocument()
+      expect(container.querySelector('img')).toHaveAttribute('src', '/images/logo-highdef.png')
+    })
+
+    it('renders a single theme toggle in the nav', () => {
+      render(<Header />)
+      expect(screen.getAllByTestId('theme-toggle').length).toBe(1)
+    })
+
+    it('shows a constant spacer for the fixed header', () => {
+      const { container } = render(<Header />)
+      const spacer = container.querySelector('[aria-hidden="true"]')
+      expect(spacer).toBeInTheDocument()
+      expect(spacer).toHaveClass('h-14')
     })
   })
 
@@ -110,24 +107,36 @@ describe('Header', () => {
   describe('on homepage', () => {
     beforeEach(() => {
       g.__mockPathname = '/'
+      global.__setMockTheme?.('dark')
     })
 
-    it('hides logo', () => {
+    it('still shows the logo and wordmark', () => {
       render(<Header />)
-      expect(screen.queryByText('UU AI Society')).not.toBeInTheDocument()
+      expect(screen.getByText('UU AI Society')).toBeInTheDocument()
     })
 
-    it('hides spacer', () => {
+    it('still shows the spacer', () => {
       const { container } = render(<Header />)
       const spacer = container.querySelector('[aria-hidden="true"]')
       expect(spacer).toBeInTheDocument()
-      expect(spacer).toHaveClass('h-0')
+      expect(spacer).toHaveClass('h-14')
+    })
+
+    it('uses the theme-aware glass nav on the homepage in dark mode', () => {
+      const { container } = render(<Header />)
+      expect(container.querySelector('header')?.className).toContain('glass-nav')
+    })
+
+    it('uses the theme-aware glass nav on the homepage in light mode', () => {
+      global.__setMockTheme?.('light')
+      const { container } = render(<Header />)
+      expect(container.querySelector('header')?.className).toContain('glass-nav')
     })
   })
 
   describe('mobile menu', () => {
     function getMobileNav(container: HTMLElement) {
-      return container.querySelector('[class*="md:hidden"][class*="top-full"]')
+      return container.querySelector('#mobile-menu')
     }
 
     it('mobile nav starts hidden (pointer-events-none class)', () => {
@@ -179,21 +188,6 @@ describe('Header', () => {
       fireEvent.mouseDown(document)
       expect(nav?.className).toContain('pointer-events-none')
     })
-
-    it('closes mobile menu when a nav link is clicked', () => {
-      const { container } = render(<Header />)
-      const button = screen.getByRole('button', { name: 'Open main menu' })
-
-      fireEvent.click(button)
-      const nav = getMobileNav(container)
-      expect(nav?.className).not.toContain('pointer-events-none')
-
-      // Click a mobile nav link triggers onClick={() => setIsMenuOpen(false)}
-      const eventsLinks = screen.getAllByText('Events')
-      fireEvent.click(eventsLinks[1])
-
-      expect(nav?.className).toContain('pointer-events-none')
-    })
   })
 
   describe('authenticated state', () => {
@@ -208,17 +202,14 @@ describe('Header', () => {
       })
     })
 
-    it('shows Account and Logout instead of Register and Login', () => {
+    it('shows username as account link and Logout instead of Register and Login', () => {
       render(<Header />)
       expect(screen.queryByText('Register')).not.toBeInTheDocument()
       expect(screen.queryByText('Login')).not.toBeInTheDocument()
-      expect(screen.getByText('Account')).toBeInTheDocument()
-      expect(screen.getByText('Logout')).toBeInTheDocument()
-    })
-
-    it('shows displayName in the top bar', () => {
-      render(<Header />)
-      expect(screen.getByText('TestUser')).toBeInTheDocument()
+      const accountLinks = screen.getAllByRole('link', { name: 'TestUser' })
+      expect(accountLinks.length).toBe(2)
+      accountLinks.forEach((link) => expect(link).toHaveAttribute('href', '/account'))
+      expect(screen.getAllByText('Logout').length).toBe(2)
     })
 
     it('does not show Admin link for non-admin users', () => {
@@ -244,56 +235,34 @@ describe('Header', () => {
       })
     })
 
-    it('shows Admin link in desktop and mobile nav (not counting profile name)', () => {
+    it('shows Admin link in desktop and mobile nav', () => {
       render(<Header />)
       const adminLinks = screen.getAllByRole('link', { name: 'Admin' })
       expect(adminLinks.length).toBe(2)
     })
 
-    it('shows Projects in both desktop and mobile nav', () => {
+    it('shows a Projects dropdown trigger in desktop nav', () => {
       render(<Header />)
       const projectsButtons = screen.getAllByText('Projects')
-      expect(projectsButtons.length).toBe(2)
+      expect(projectsButtons.length).toBe(1)
     })
 
-    it('shows Account and Logout', () => {
+    it('shows username as account link and Logout', () => {
       render(<Header />)
-      expect(screen.getByText('Account')).toBeInTheDocument()
-      expect(screen.getByText('Logout')).toBeInTheDocument()
-    })
-  })
-
-  describe('loading state', () => {
-    beforeEach(() => {
-      mockAdminState({ loading: true, user: null })
-    })
-
-    it('hides auth links while loading', () => {
-      render(<Header />)
-      expect(screen.queryByText('Register')).not.toBeInTheDocument()
-      expect(screen.queryByText('Login')).not.toBeInTheDocument()
-      expect(screen.queryByText('Account')).not.toBeInTheDocument()
-    })
-
-    it('hides auth links while loading even when user is set', () => {
-      mockAdminState({ loading: true, user: { uid: 'u1', displayName: 'Test' } })
-      render(<Header />)
-      expect(screen.queryByText('Register')).not.toBeInTheDocument()
-      expect(screen.queryByText('Login')).not.toBeInTheDocument()
-      expect(screen.queryByText('Account')).not.toBeInTheDocument()
+      const accountLinks = screen.getAllByRole('link', { name: 'Alice' })
+      expect(accountLinks.length).toBe(2)
+      accountLinks.forEach((link) => expect(link).toHaveAttribute('href', '/account'))
+      expect(screen.getAllByText('Logout').length).toBe(2)
     })
   })
 
   describe('projects dropdown (admin)', () => {
-    const mockLogout = jest.fn()
-
     beforeEach(() => {
       jest.clearAllMocks()
       mockAdminState({
         user: { uid: 'admin1', displayName: 'Alice', email: 'admin@test.com' },
         loading: false,
         isAdmin: true,
-        logout: mockLogout,
       })
     })
 
@@ -302,48 +271,16 @@ describe('Header', () => {
       // Desktop Projects button is first in DOM
       const desktopProjectsBtn = screen.getAllByText('Projects')[0]
 
-      // Before click: only mobile "All Projects" exists (CSS-hidden in DOM)
-      expect(screen.getAllByText('All Projects').length).toBe(1)
+      // Before click: mobile menu always lists the project links
+      expect(screen.getAllByText('All projects').length).toBe(1)
 
       fireEvent.click(desktopProjectsBtn)
 
-      // After click: desktop dropdown renders, so "All Projects" now appears twice
-      expect(screen.getAllByText('All Projects').length).toBe(2)
-      // "My Favorites" is desktop-dropdown-only (appears when user is logged in)
-      expect(screen.getByText('My Favorites')).toBeInTheDocument()
-    })
-
-    it('hides My Favorites when user is not logged in', () => {
-      mockAdminState({
-        user: null,
-        loading: false,
-        isAdmin: true,
-      })
-      render(<Header />)
-
-      const desktopProjectsBtn = screen.getAllByText('Projects')[0]
-      fireEvent.click(desktopProjectsBtn)
-
-      // Desktop dropdown still opens (All Projects count goes to 2)
-      expect(screen.getAllByText('All Projects').length).toBe(2)
-      // But My Favorites is conditional on user being logged in
-      expect(screen.queryByText('My Favorites')).not.toBeInTheDocument()
-    })
-
-    it('closes dropdown when clicking a link', () => {
-      render(<Header />)
-
-      const desktopProjectsBtn = screen.getAllByText('Projects')[0]
-      fireEvent.click(desktopProjectsBtn)
-      expect(screen.getAllByText('All Projects').length).toBe(2)
-
-      // Click the desktop "All Projects" link (first one in DOM)
-      const allProjectsLinks = screen.getAllByText('All Projects')
-      fireEvent.click(allProjectsLinks[0])
-
-      // Dropdown closes: desktop links removed, only mobile remains
-      expect(screen.getAllByText('All Projects').length).toBe(1)
-      expect(screen.queryByText('My Favorites')).not.toBeInTheDocument()
+      // After click: desktop dropdown renders, so the links now appear twice
+      // (desktop dropdown + mobile menu)
+      expect(screen.getAllByText('All projects').length).toBe(2)
+      expect(screen.getAllByText('Course navigator').length).toBe(2)
+      expect(screen.getAllByText('My favourites').length).toBe(2)
     })
 
     it('closes dropdown when clicking outside', () => {
@@ -351,94 +288,13 @@ describe('Header', () => {
 
       const desktopProjectsBtn = screen.getAllByText('Projects')[0]
       fireEvent.click(desktopProjectsBtn)
-      expect(screen.getAllByText('All Projects').length).toBe(2)
+      expect(screen.getAllByText('All projects').length).toBe(2)
 
       // Click outside triggers the mousedown handler
       fireEvent.mouseDown(document)
 
-      // Desktop dropdown removed, only mobile remains
-      expect(screen.getAllByText('All Projects').length).toBe(1)
-      expect(screen.queryByText('My Favorites')).not.toBeInTheDocument()
-    })
-  })
-
-  describe('projects mobile section for admin', () => {
-    beforeEach(() => {
-      mockAdminState({
-        user: { uid: 'admin1', displayName: 'Alice', email: 'admin@test.com' },
-        loading: false,
-        isAdmin: true,
-      })
-    })
-
-    it('opens mobile projects submenu and shows links', () => {
-      render(<Header />)
-      // Open mobile menu first
-      const hamburger = screen.getByRole('button', { name: 'Open main menu' })
-      fireEvent.click(hamburger)
-
-      // Mobile Projects button is second in DOM
-      const mobileProjectsBtn = screen.getAllByText('Projects')[1]
-      fireEvent.click(mobileProjectsBtn)
-
-      // "Study Plan Graph" is unique to the mobile projects submenu
-      expect(screen.getByText('Study Plan Graph')).toBeInTheDocument()
-      // All Projects and Course Navigator appear in both desktop and mobile, so they exist
-      expect(screen.getAllByText('All Projects').length).toBeGreaterThanOrEqual(1)
-      expect(screen.getAllByText('Course Navigator').length).toBeGreaterThanOrEqual(1)
-    })
-  })
-
-  describe('getUserProfile fetch', () => {
-    beforeEach(() => {
-      mockAdminState({
-        user: { uid: 'u1', displayName: 'AuthName', email: 'user@test.com' },
-        loading: false,
-        isAdmin: false,
-      })
-      mockGetUserProfile.mockReset()
-    })
-
-    it('calls getUserProfile with user uid', () => {
-      mockGetUserProfile.mockResolvedValue(null)
-      render(<Header />)
-      expect(mockGetUserProfile).toHaveBeenCalledWith('u1')
-    })
-
-    it('shows profile displayName when available', async () => {
-      mockGetUserProfile.mockResolvedValue({
-        id: 'u1',
-        displayName: 'ProfileName',
-        name: 'RealName',
-      })
-      render(<Header />)
-      // profile.displayName takes highest precedence
-      // Use findByText because getUserProfile is async (effect runs after render)
-      await expect(screen.findByText('ProfileName')).resolves.toBeInTheDocument()
-    })
-
-    it('shows profile name when no displayName', async () => {
-      mockGetUserProfile.mockResolvedValue({
-        id: 'u1',
-        name: 'RealName',
-      })
-      render(<Header />)
-      // Falls through to profile.name
-      await expect(screen.findByText('RealName')).resolves.toBeInTheDocument()
-    })
-
-    it('falls back to auth displayName when no profile is found', () => {
-      mockGetUserProfile.mockResolvedValue(null)
-      render(<Header />)
-      // Falls through to user.displayName ('AuthName')
-      expect(screen.getByText('AuthName')).toBeInTheDocument()
-    })
-
-    it('handles getUserProfile error gracefully', () => {
-      mockGetUserProfile.mockRejectedValue(new Error('network error'))
-      render(<Header />)
-      // Catch block sets profile to null, falls back to user.displayName
-      expect(screen.getByText('AuthName')).toBeInTheDocument()
+      // Desktop dropdown removed, only the mobile link remains
+      expect(screen.getAllByText('All projects').length).toBe(1)
     })
   })
 
@@ -455,10 +311,10 @@ describe('Header', () => {
       })
     })
 
-    it('calls logout function when Logout link is clicked', () => {
+    it('calls logout function when Logout button is clicked', () => {
       render(<Header />)
-      const logoutLink = screen.getByText('Logout')
-      fireEvent.click(logoutLink)
+      const logoutButton = screen.getAllByText('Logout')[0]
+      fireEvent.click(logoutButton)
       expect(mockLogout).toHaveBeenCalledTimes(1)
     })
   })
@@ -499,7 +355,7 @@ describe('Header', () => {
       const { container } = render(<Header />)
       const hamburger = screen.getByRole('button', { name: 'Open main menu' })
       fireEvent.click(hamburger)
-      const nav = container.querySelector('[class*="md:hidden"][class*="top-full"]')
+      const nav = container.querySelector('#mobile-menu')
       expect(nav?.className).not.toContain('pointer-events-none')
       fireEvent.keyDown(document, { key: 'Escape' })
       expect(nav?.className).toContain('pointer-events-none')

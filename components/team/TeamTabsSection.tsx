@@ -138,7 +138,7 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
       {activeMembers.length > 0 ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 py-4">
           {activeMembers.map((member) => (
-            <Card key={member.id} className="text-center hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 overflow-visible">
+            <Card key={member.id} className="text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 overflow-visible">
               <CardHeader>
                 <div className="mx-auto mb-4 relative">
                   {isLead(member) && (
@@ -174,11 +174,11 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
                     {member.bio}
                   </p>
                 )}
-                <div className="flex justify-center space-x-3">
+                <div className="flex justify-center gap-2">
                   {member.companyEmail && (
                     <a
                       href={`mailto:${member.companyEmail}`}
-                      className="p-2 text-gray-400 dark:text-gray-600 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="p-3.5 text-gray-400 dark:text-gray-600 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       aria-label={`Email ${member.name}`}
                     >
                       <Mail className="h-4 w-4" />
@@ -187,7 +187,7 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
                   {!member.personalEmail && !member.companyEmail && member.email && (
                     <a
                       href={`mailto:${member.email}`}
-                      className="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="p-3.5 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       aria-label={`Email ${member.name}`}
                     >
                       <Mail className="h-4 w-4" />
@@ -198,7 +198,7 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
                       href={member.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="p-3.5 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       aria-label={`LinkedIn profile of ${member.name}`}
                     >
                       <HugeiconsIcon icon={LinkedinIcon} className="h-4 w-4" />
@@ -209,7 +209,7 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
                       href={member.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="p-3.5 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       aria-label={`GitHub profile of ${member.name}`}
                     >
                       <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />
@@ -220,7 +220,7 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
                       href={member.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="p-3.5 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                       aria-label={`Website of ${member.name}`}
                     >
                       <Globe className="h-4 w-4" />

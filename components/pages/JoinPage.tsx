@@ -1,7 +1,5 @@
 'use client'
 
-// Disable static generation for this page
-export const dynamic = 'force-dynamic';
 
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
@@ -9,8 +7,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { GithubIcon, GoogleIcon } from '@hugeicons/core-free-icons';
 import { updatePageMeta } from '@/utils/seo';
-import { auth, signInWithGooglePopup, signInWithGithubPopup } from '@/lib/firebase-client';
-import { getUserProfile, upsertUserProfile, updateUserProfile, type UserProfile } from '@/lib/firestore/users';
+import type { UserProfile } from '@/lib/firestore/users';
 import Link from 'next/link';
 import { FieldGroup, InputBase, SelectBase, TextareaBase } from '@/components/ui/Form';
 import { useNotify } from '@/components/ui/Notifications';
@@ -20,7 +17,6 @@ const JoinPage: React.FC = () => {
   const router = useRouter();
   const [uid, setUid] = useState<string | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  // const [captchaOk, setCaptchaOk] = useState(false); // CAPTCHA temporarily disabled
   const [form, setForm] = useState<Partial<UserProfile>>({});
   const [saving, setSaving] = useState(false);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
@@ -31,25 +27,35 @@ const JoinPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const unsub = auth.onAuthStateChanged(async (u) => {
-      if (!u) {
-        setUid(null);
-        setProfile(null);
-        setForm({});
-        return;
-      }
-      setUid(u.uid);
-      const p = await getUserProfile(u.uid);
-      setProfile(p);
-      setForm((prev) => ({
-        ...prev,
-        ...(p || { isMember: true }),
-        // default fallbacks from auth
-        displayName: p?.displayName ?? u.displayName ?? (u.email ? u.email.split('@')[0] : prev.displayName),
-        email: p?.email ?? u.email ?? prev.email,
-      }));
-    });
-    return () => unsub();
+    let unsub: (() => void) | null = null;
+    let cancelled = false;
+    (async () => {
+      const { auth } = await import('@/lib/firebase-client');
+      if (cancelled) return;
+      unsub = auth.onAuthStateChanged(async (u) => {
+        if (!u) {
+          setUid(null);
+          setProfile(null);
+          setForm({});
+          return;
+        }
+        setUid(u.uid);
+        const { getUserProfile } = await import('@/lib/firestore/users');
+        const p = await getUserProfile(u.uid);
+        setProfile(p);
+        setForm((prev) => ({
+          ...prev,
+          ...(p || { isMember: true }),
+          // default fallbacks from auth
+          displayName: p?.displayName ?? u.displayName ?? (u.email ? u.email.split('@')[0] : prev.displayName),
+          email: p?.email ?? u.email ?? prev.email,
+        }));
+      });
+    })();
+    return () => {
+      cancelled = true;
+      if (unsub) unsub();
+    };
   }, []);
 
   const handleSave = async () => {
@@ -61,6 +67,7 @@ const JoinPage: React.FC = () => {
         isMember: true,
         privacyAcceptedAt: privacyAccepted ? new Date().toISOString() : undefined,
       };
+      const { upsertUserProfile, updateUserProfile, getUserProfile } = await import('@/lib/firestore/users');
       if (!profile) {
         await upsertUserProfile(uid, data);
       } else {
@@ -98,24 +105,18 @@ const JoinPage: React.FC = () => {
           )
         )}
 
-        {/* CAPTCHA disabled for now per request */}
-
         <Card>
           <CardHeader>
             <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Sign in or Create Account</h2>
             <p className="text-gray-600 dark:text-gray-300 text-sm">Use one of the providers below. You can link more providers later in your account.</p>
           </CardHeader>
           <CardContent className="space-y-3 flex flex-col md:flex-col justify-center gap-2 pt-4 items-center max-w-md mx-auto">
-            {/* TODO: Add colors to icons */}
-            <Button onClick={() => signInWithGooglePopup()} variant="default">
+            <Button onClick={() => { void import('@/lib/firebase-client').then((m) => m.signInWithGooglePopup()); }} variant="outline">
               <span className="flex items-center gap-2"><HugeiconsIcon icon={GoogleIcon} className="h-4 w-4"/> Continue with Google</span>
             </Button>
-            <Button onClick={() => signInWithGithubPopup()} variant="default">
+            <Button onClick={() => { void import('@/lib/firebase-client').then((m) => m.signInWithGithubPopup()); }} variant="outline">
               <span className="flex items-center gap-2"><HugeiconsIcon icon={GithubIcon} className="h-4 w-4"/> Continue with GitHub</span>
             </Button>
-            {/* <Button onClick={() => signInWithMicrosoftPopup()} variant="default">
-              <span className="flex items-center gap-2"><MicrosoftIcon className="h-4 w-4"/> Continue with Microsoft</span>
-            </Button> */}
           </CardContent>
         </Card>
 
@@ -250,7 +251,7 @@ const JoinPage: React.FC = () => {
                 </label>
               </div>
               <div className="flex justify-end">
-                <Button disabled={saving || !privacyAccepted} onClick={handleSave}>{saving ? 'Saving...' : 'Save & Become Member'}</Button>
+                <Button variant="outline" disabled={saving || !privacyAccepted} onClick={handleSave}>{saving ? 'Saving...' : 'Save & Become Member'}</Button>
               </div>
             </CardContent>
           </Card>
@@ -265,10 +266,6 @@ const JoinPage: React.FC = () => {
           </CardContent>
         </Card>
       </div>
-
-      <style jsx global>{`
-        .input { @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white; }
-      `}</style>
     </div>
   );
 };

@@ -202,7 +202,7 @@ describe('CareersPage', () => {
       dispatch: jest.fn(),
     })
     render(<CareersPage />)
-    const readMore = screen.getByText('Read more')
+    const readMore = screen.getByText('Read more about this job')
     fireEvent.click(readMore)
     expect(analytics.incrementJobClick).toHaveBeenCalledWith('j1')
   })

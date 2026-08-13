@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { auth } from '@/lib/firebase-client';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
@@ -81,6 +81,9 @@ export default function BoardApplicationPage() {
   });
 
   const [openRole, setOpenRole] = useState<string | null>(null);
+
+  const cvInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
+  const coverInputRefs = useRef<Record<string, HTMLInputElement | null>>({});
 
   useEffect(() => {
     // Listen for auth state changes and prefill name/email/phone when available.
@@ -203,6 +206,7 @@ export default function BoardApplicationPage() {
                     onClick={() => setOpenRole(openRole === r.id ? null : r.id)}
                     variant="outline"
                     size="sm"
+                    aria-expanded={openRole === r.id}
                   >
                     {openRole === r.id ? 'Hide details' : 'Show details'}
                   </Button>
@@ -210,6 +214,12 @@ export default function BoardApplicationPage() {
               </div>
 
               <div
+                aria-hidden={openRole !== r.id}
+                ref={(el) => {
+                  if (!el) return;
+                  if (openRole === r.id) el.removeAttribute('inert');
+                  else el.setAttribute('inert', '');
+                }}
                 className={`grid overflow-hidden transition-all duration-700 ease-in-out ${openRole === r.id ? 'mt-4 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
               >
                 <div className="min-h-0">
@@ -231,12 +241,17 @@ export default function BoardApplicationPage() {
                         <div>
                           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">CV (PDF, max 3MB)</label>
                           <div className="flex items-center gap-3">
-                            <label htmlFor={`cv-input-${r.id}`} className="m-0">
-                              <input id={`cv-input-${r.id}`} accept="application/pdf" type="file" className="hidden" onChange={(e) => setField(r.id, 'cvFile', e.target.files?.[0] || null)} />
-                              <Button asChild>
-                                <span>Upload CV</span>
-                              </Button>
-                            </label>
+                            <input
+                              ref={(el) => { cvInputRefs.current[r.id] = el; }}
+                              id={`cv-input-${r.id}`}
+                              accept="application/pdf"
+                              type="file"
+                              className="hidden"
+                              onChange={(e) => setField(r.id, 'cvFile', e.target.files?.[0] || null)}
+                            />
+                            <Button type="button" onClick={() => cvInputRefs.current[r.id]?.click()}>
+                              Upload CV
+                            </Button>
                             <div className="text-sm text-gray-600 dark:text-gray-300">{f?.cvFile ? f.cvFile.name : 'No file chosen'}{f?.errors?.cv && <p className="mt-1 text-sm text-red-600">{f.errors.cv}</p>}</div>
                           </div>
                         </div>
@@ -269,12 +284,17 @@ export default function BoardApplicationPage() {
                             </div>
                           ) : (
                             <div className="flex items-center gap-3">
-                              <label htmlFor={`cover-input-${r.id}`} className="m-0">
-                                <input id={`cover-input-${r.id}`} accept="application/pdf" type="file" className="hidden" onChange={(e) => setField(r.id, 'coverFile', e.target.files?.[0] || null)} />
-                                <Button asChild>
-                                  <span>Upload cover (PDF)</span>
-                                </Button>
-                              </label>
+                              <input
+                                ref={(el) => { coverInputRefs.current[r.id] = el; }}
+                                id={`cover-input-${r.id}`}
+                                accept="application/pdf"
+                                type="file"
+                                className="hidden"
+                                onChange={(e) => setField(r.id, 'coverFile', e.target.files?.[0] || null)}
+                              />
+                              <Button type="button" onClick={() => coverInputRefs.current[r.id]?.click()}>
+                                Upload cover (PDF)
+                              </Button>
                               <div className="text-sm text-gray-600 dark:text-gray-300">{f?.coverFile ? f.coverFile.name : 'No file chosen'}</div>
                               {//f?.errors?.cover && <p className="mt-1 text-sm text-red-600">{f.errors.cover}</p>
                               }

@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 import React from 'react';
 
 const mockUnsubscribe = jest.fn();
@@ -147,17 +147,33 @@ describe('AppContext', () => {
     expect(result.current.state.error).toBeNull();
   });
 
-  it('subscribes to firestore collections and id token changes on mount', () => {
+  it('subscribes to firestore collections and id token changes on mount', async () => {
     renderApp();
-    expect(subscribeToEvents).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(subscribeToEvents).toHaveBeenCalledTimes(1));
     expect(subscribeToTeamMembers).toHaveBeenCalledTimes(1);
+    // Blog posts are subscribed for all users (public sees published only)
     expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
     expect(subscribeToFaqs).toHaveBeenCalledTimes(1);
     expect(subscribeToJobs).toHaveBeenCalledTimes(1);
     expect(subscribeToPositions).toHaveBeenCalledTimes(1);
-    expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1);
-    expect(onIdTokenChanged).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
     expect(idTokenCallback).not.toBeNull();
+  });
+
+  it('subscribes to blog posts with includeUnpublished false for public users', async () => {
+    renderApp();
+    await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledWith(expect.any(Function), { includeUnpublished: false }));
+  });
+
+  it('re-subscribes to blog posts with includeUnpublished true once admin id token resolves', async () => {
+    renderApp();
+    await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1));
+    act(() => {
+      idTokenCallback!({ uid: 'admin-1', getIdTokenResult: () => Promise.resolve({ claims: { admin: true } }) });
+    });
+    await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledTimes(2));
+    expect(subscribeToBlogPosts).toHaveBeenLastCalledWith(expect.any(Function), { includeUnpublished: true });
   });
 
   it('throws useApp outside provider', () => {
@@ -523,7 +539,18 @@ describe('AppContext', () => {
       await act(async () => {
         await result.current.dispatch({ firestoreAction: 'MOVE_TEAM_MEMBER', payload: { memberId: 'tm-1', direction: 'up' } });
       });
-      expect(moveTeamMember).toHaveBeenCalledWith([mockTeamMember], 'tm-1', 'up');
+      expect(moveTeamMember).toHaveBeenCalledWith([mockTeamMember], 'tm-1', 'up', undefined);
+    });
+
+    it('MOVE_TEAM_MEMBER forwards the active year', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_TEAM_MEMBERS', payload: [mockTeamMember] });
+      });
+      await act(async () => {
+        await result.current.dispatch({ firestoreAction: 'MOVE_TEAM_MEMBER', payload: { memberId: 'tm-1', direction: 'down', year: 2026 } });
+      });
+      expect(moveTeamMember).toHaveBeenCalledWith([mockTeamMember], 'tm-1', 'down', 2026);
     });
 
     it('ADD_BLOG_POST calls addBlogPost', async () => {

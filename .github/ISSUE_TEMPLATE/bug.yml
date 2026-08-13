@@ -1,0 +1,67 @@
+name: Bug report
+description: Report a bug or unexpected behavior in the UUAIS website
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear and concise description of the bug. Include what you expected to happen.
+      placeholder: "When I click X on the events page, Y happens instead of Z..."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Where did this happen?
+      description: Which URL/page (e.g. /events, /admin/events, /blog/[id]).
+      placeholder: "/events"
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      description: Where did you see the bug?
+      options:
+        - Production (uuais website)
+        - Local development
+        - Both / unsure
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or console output
+      description: If applicable, add screenshots or paste browser console errors.
+    validations:
+      required: false
+  - type: input
+    id: device
+    attributes:
+      label: Browser / device
+      description: e.g. Chrome 126, Safari on iPhone, Firefox on Linux.
+      placeholder: "Chrome 126 on macOS"
+  - type: checkboxes
+    id: security
+    attributes:
+      label: Is this a security issue?
+      options:
+        - label: This is a security vulnerability (do not include sensitive details here — see SECURITY.md for private reporting)
+    validations:
+      required: false

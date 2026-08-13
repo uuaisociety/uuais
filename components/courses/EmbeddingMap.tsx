@@ -294,7 +294,6 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
         if (!rect) return;
         const mx = e.clientX - rect.left;
         const my = e.clientY - rect.top;
-        setMousePos({ x: e.clientX, y: e.clientY });
 
         if (isDragging) {
             setTransform(prev => ({
@@ -310,6 +309,11 @@ export default function EmbeddingMap({ recommendedIds = [], onCourseClick, heigh
         setHoveredPoint(nearest);
         if (canvasRef.current) {
             canvasRef.current.style.cursor = nearest ? 'pointer' : 'grab';
+        }
+        // Only sync the tooltip position while a point is actually hovered,
+        // so idle mousemoves don't trigger React state updates.
+        if (nearest) {
+            setMousePos({ x: e.clientX, y: e.clientY });
         }
     }, [isDragging, dragStart, findNearest]);
 

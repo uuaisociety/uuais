@@ -22,8 +22,9 @@ Then load relevant reference(s) from `.agents/skills/testing/references/` based 
 
 ## Project Test Setup
 - **Framework:** Jest (see `jest.config.ts`, `jest.setup.ts`)
-- **Run:** `npm test` (54 suites, 529 tests)
-- **Integration tests:** `npm run test:integration`
+- **Run:** `npm test` (74 unit suites, 874 tests)
+- **Integration tests:** `npm run test:integration` (122 tests)
+- **E2E tests:** `npm run test:e2e` (8 Playwright smoke tests)
 - **Coverage:** `npm run test:coverage`
 - **Stack:** Next.js 16 + TypeScript + Tailwind + Firebase (Firestore)
 - **Routing:** App Router (`app/` directory for pages, `components/` for React components)

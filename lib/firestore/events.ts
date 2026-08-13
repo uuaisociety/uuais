@@ -141,12 +141,19 @@ export const subscribeToEvents = (
     ? query(eventsRef, orderBy("eventStartAt", "desc"))
     : query(eventsRef, where("published", "==", true), orderBy("eventStartAt", "desc"));
 
-  return onSnapshot(qy, (snapshot) => {
-    const events = snapshot.docs.map((docSnap) => ({
-      // @ts-expect-error id is not returned from docSnap.data()
-      id: docSnap.id,
-      ...(docSnap.data() as Event),
-    }));
-    callback(events);
-  });
+  return onSnapshot(
+    qy,
+    (snapshot) => {
+      const events = snapshot.docs.map((docSnap) => ({
+        // @ts-expect-error id is not returned from docSnap.data()
+        id: docSnap.id,
+        ...(docSnap.data() as Event),
+      }));
+      callback(events);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 };

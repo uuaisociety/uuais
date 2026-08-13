@@ -4,7 +4,7 @@
 OpenCode agent for the UUAIS project — a Next.js/TypeScript/Firebase web platform for Uppsala University AI Society.
 
 ## Memory
-See [MEMORY.md](./MEMORY.md) for the full guide on when to use AGENTS.md vs the `memory` tool, best practices, and how the memory injection works.
+See [MEMORY.md](./MEMORY.md) for the full guide on when to use the `memory` tool, best practices, and how the memory injection works.
 
 ## Behavioral Guidelines
 See CLAUDE.md for coding behavior guidelines: think before coding, simplicity first, surgical changes, goal-driven execution.
@@ -52,10 +52,6 @@ If doing frontend work, start by reading through DESIGN.md for Tailwind patterns
 - `uv sync`: Install Python dependencies
 - `python3 scraper_pipeline.py`: Run scraper
 
-## Setup
-- Copy `.env.example` to `.env`, fill Firebase config vars and `GOOGLE_APPLICATION_CREDENTIALS`
-- `tsconfig.json` maps `@/*` imports to root `./`
-- Firebase project: `uuais-dev`, emulators untested (see README)
 
 ## Notes
 - `[MEMORY]` block from `memory search` is automatically injected into every prompt — no manual fetch needed
@@ -68,11 +64,10 @@ If doing frontend work, start by reading through DESIGN.md for Tailwind patterns
 - Before PR: Run `npm run lint`, `npm test`, verify TypeScript types
 - Always run `npm test` and `npm run lint` before finishing any coding task
 - **Add or update tests when making non-trivial changes** — new components, bug fixes, refactors. Follow the pattern in `__tests__/not-found.test.tsx`
+- If adding comments write at most one line, unless absolutely necessary.
 
 ## Tools & Environment
 See `.opencode/instructions/tools-and-environment.md` for:
 - Browser automation (browser-use) setup and workflow
-- Dev server lifecycle management
-- Project skills (code-security-auditor, staff-engineer-review, etc.)
-- Plugins (cc-safety-net, opencode-snip, opencode-mem)
-- Custom commands (/deep-review)
+- Project skills
+- Plugins 

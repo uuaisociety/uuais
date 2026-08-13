@@ -58,7 +58,7 @@ describe('ProjectsPage', () => {
 
   it('renders the contact dev team link with correct mailto href', () => {
     render(<ProjectsPage />)
-    const contactLink = screen.getByText('Contact the Dev Team').closest('a')
+    const contactLink = screen.getByText('Contact the Development Team').closest('a')
     expect(contactLink).toHaveAttribute('href', 'mailto:dev@uuais.com')
   })
 })

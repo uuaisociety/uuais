@@ -414,7 +414,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
     return (
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 text-center">
         <p className="text-gray-600 dark:text-gray-300 mb-4">Sign in to use AI course recommendations</p>
-        <Link href="/account" className="bg-[#990000] hover:bg-[#7f0000] text-white px-4 py-2 rounded-lg inline-block">Sign In</Link>
+        <Link href="/account" className="bg-primary hover:brightness-110 text-primary-foreground px-4 py-2 rounded-lg inline-block">Sign In</Link>
       </div>
     );
   }
@@ -430,7 +430,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
               <button
                 type="button"
                 onClick={() => setShowSidebar((prev) => !prev)}
-                className="p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+                className="-m-1.5 p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer"
                 title={showSidebar ? "Hide chat history" : "Show chat history"}
                 aria-label={showSidebar ? "Hide chat history" : "Show chat history"}
               >
@@ -445,7 +445,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
             {showSidebar && (
               <div className="md:w-64 md:min-w-64 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 flex flex-col bg-gray-50 dark:bg-gray-800">
                 <div className="p-3 border-b border-gray-200 dark:border-gray-700">
-                  <Button size="sm" onClick={startNewChat} className="w-full">
+                  <Button variant="outline" size="sm" onClick={startNewChat} className="w-full">
                     <Plus className="h-4 w-4 mr-1" /> New Chat
                   </Button>
                 </div>
@@ -454,34 +454,45 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                     <div className="text-xs text-gray-500 text-center py-4">No chat history</div>
                   )}
                   {chats.map((chat) => (
-                    <div
+                    <button
                       key={chat.id}
+                      type="button"
                       onClick={() => loadChat(chat)}
                       className={`w-full cursor-pointer group text-left p-2 transition-colors rounded text-sm hover:bg-gray-300 dark:hover:bg-gray-700 ${
                         currentChatId === chat.id ? 'bg-gray-200 dark:bg-gray-700' : ''
                       }`}
                     >
                       <div className="flex items-center gap-2">
-                        <MessageSquare className="h-3 w-3 text-gray-400" />
+                        <MessageSquare className="h-3 w-3 text-gray-400" aria-hidden />
                         <div className="flex-1 truncate">{chat.title}</div>
-                        <Button
-                          variant="ghost"
+                        <span
+                          role="button"
+                          tabIndex={0}
+                          aria-label={`Delete chat: ${chat.title}`}
                           onClick={(e) => handleDeleteChat(chat.id, e)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              handleDeleteChat(chat.id, e as unknown as React.MouseEvent);
+                            }
+                          }}
                           className="opacity-0 group-hover:opacity-100 p-1 cursor-pointer hover:text-red-500 transition-opacity"
                         >
                           <Trash2 className="h-3 w-3" />
-                        </Button>
+                        </span>
                       </div>
                       <div className="text-xs text-gray-400 mt-1">
                         {new Date(chat.updatedAt).toLocaleDateString()}
                       </div>
-                    </div>
+                    </button>
                   ))}
                   {chatsLoading && (
                     <div className="text-xs text-gray-500 text-center py-2">Loading…</div>
                   )}
                   {chatsHasMore && !chatsLoading && (
                     <Button
+                      variant="outline"
                       size="sm"
                       onClick={handleLoadMoreChats}
                       className="w-full mt-2"
@@ -523,7 +534,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                                 href={`/explore/${courseId}`}
                                 className="block group max-w-xl"
                               >
-                                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 hover:border-[#990000] dark:hover:border-[#990000] transition-all cursor-pointer shadow-sm hover:shadow-md">
+                                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 hover:border-primary dark:hover:border-primary transition-all cursor-pointer shadow-sm hover:shadow-md">
                                   <div className="flex items-start justify-between gap-2">
                                     <div className="flex-1 min-w-0">
                                       <div className="flex items-center gap-2 mb-1">
@@ -534,14 +545,14 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                                           <span className="text-xs text-gray-500 dark:text-gray-400">{course.credits} credits</span>
                                         )}
                                       </div>
-                                      <div className="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-[#990000] transition-colors">
+                                      <div className="text-sm font-medium text-gray-900 dark:text-white truncate group-hover:text-primary transition-colors">
                                         {course.title} - {course.code || course.id}
                                       </div>
                                       <div className="text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-2">
                                         {course.description}
                                       </div>
                                     </div>
-                                    <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-[#990000] transition-colors shrink-0 mt-1" />
+                                    <ExternalLink className="h-4 w-4 text-gray-400 group-hover:text-primary transition-colors shrink-0 mt-1" />
                                   </div>
                                 </div>
                               </Link>
@@ -595,6 +606,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                     </div>
                     <button 
                       onClick={clearError}
+                      aria-label="Dismiss error"
                       className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                     >
                       ✕
@@ -606,8 +618,8 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                 onSubmit={(e) => { e.preventDefault(); send(); }}
                 className="mt-3 flex gap-2"
               >
-                <Input value={value} onChange={(e)=>setValue(e.target.value)} placeholder={rateLimit?.remaining === 0 ? "Daily limit reached" : "Ask about courses, credits, level..."} fullWidth disabled={loading || rateLimit?.remaining === 0} />
-                <Button type="submit" className="bg-[#990000] hover:bg-[#7f0000] text-white" disabled={loading}>
+                <Input value={value} onChange={(e)=>setValue(e.target.value)} aria-label="Ask about courses" placeholder={rateLimit?.remaining === 0 ? "Daily limit reached" : "Ask about courses, credits, level..."} fullWidth disabled={loading || rateLimit?.remaining === 0} />
+                <Button type="submit" disabled={loading} aria-label={loading ? "Sending" : "Send message"}>
                   {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                 </Button>
               </form>
@@ -679,7 +691,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
           placeholder={placeholder}
           fullWidth
         />
-        <Button type="submit" className="bg-[#990000] hover:bg-[#7f0000] text-white transition-colors duration-100">Ask</Button>
+        <Button type="submit" className="transition-colors duration-100">Ask</Button>
       </form>
 
     </div>

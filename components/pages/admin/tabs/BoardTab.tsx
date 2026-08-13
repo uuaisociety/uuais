@@ -60,7 +60,7 @@ const BoardTab: React.FC<ApplicationProps> = ({
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Board Positions</h2>
-        <Button icon={Plus} onClick={onAddClick}>Add new position</Button>
+        <Button variant="outline" icon={Plus} onClick={onAddClick}>Add new position</Button>
       </div>
       <div className="grid gap-4 mb-6">
         {boardPositions.length > 0 ? boardPositions.map((position, index) => (

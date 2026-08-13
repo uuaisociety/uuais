@@ -1,7 +1,5 @@
 'use client'
 
-// Disable static generation for this page
-export const dynamic = 'force-dynamic';
 
 import React, { useEffect, useState } from 'react';
 import {
@@ -35,21 +33,29 @@ import AISettingsTab from '@/components/pages/admin/tabs/AISettingsTab';
 import { listUsers } from '@/lib/firestore/users';
 import { TabErrorBoundary } from '@/components/ui/TabErrorBoundary';
 
+const ADMIN_TABS = ['events', 'team', 'blog', 'showcase', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
+type AdminTab = typeof ADMIN_TABS[number];
+
 const AdminDashboard: React.FC = () => {
   const { state, dispatch } = useApp();
   const [nrUsers, setNrUsers] = useState<number>(0);
   //const { user, logout } = useAdmin();
-  const tabValues = ['events', 'team', 'blog', 'showcase', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
-  type Tab = typeof tabValues[number];
-  const [activeTab, setActiveTab] = useState<Tab>(() => {
-    if (typeof window !== 'undefined') {
-      const fromUrl = new URL(window.location.href).searchParams.get('tab');
-      if (tabValues.includes(fromUrl as Tab)) return fromUrl as Tab;
-      const saved = localStorage.getItem('adminDashboardTab');
-      if (tabValues.includes(saved as Tab)) return saved as Tab;
+  const tabValues = ADMIN_TABS;
+  type Tab = AdminTab;
+  const [activeTab, setActiveTab] = useState<Tab>('events');
+  // Restore the tab from the URL (?tab=...) or last-saved preference. Runs in
+  // an effect so the initial render matches the server (avoids hydration mismatch
+  // on /admin deep links) before syncing to the stored/URL tab.
+  useEffect(() => {
+    const fromUrl = new URL(window.location.href).searchParams.get('tab');
+    if (tabValues.includes(fromUrl as Tab)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setActiveTab(fromUrl as Tab);
+      return;
     }
-    return 'events';
-  });
+    const saved = localStorage.getItem('adminDashboardTab');
+    if (tabValues.includes(saved as Tab)) setActiveTab(saved as Tab);
+  }, [tabValues]);
   // Slide direction for the tab-content transition: content enters from the
   // side the clicked tab is on relative to the currently active tab.
   const [slideFrom, setSlideFrom] = useState<'right' | 'left'>('right');
@@ -237,14 +243,14 @@ const AdminDashboard: React.FC = () => {
     dispatch({ firestoreAction: 'MOVE_BOARDPOS', payload: { positionId, direction } });
   };
 
-  const handleSaveCampaign = async (data: { id?: string; title: string; subtitle: string; description: string; deadline: string; status: 'open' | 'closed' | 'draft'; teams: string[]; teamInfo?: Record<string, { name?: string; description?: string }>; enabledStandardFields: string[] }): Promise<string | undefined> => {
+  const handleSaveCampaign = async (data: { id?: string; title: string; subtitle: string; description: string; deadline: string; status: 'open' | 'closed' | 'draft'; teams: string[]; roles: ApplicationCampaign['roles']; teamInfo?: Record<string, { name?: string; description?: string }>; enabledStandardFields: string[] }): Promise<string | undefined> => {
     if (data.id) {
       // Update existing
-      dispatch({ firestoreAction: 'UPDATE_CAMPAIGN', payload: { id: data.id, title: data.title, subtitle: data.subtitle, description: data.description, deadline: data.deadline, status: data.status, teams: data.teams, teamInfo: data.teamInfo, enabledStandardFields: data.enabledStandardFields } as ApplicationCampaign });
+      dispatch({ firestoreAction: 'UPDATE_CAMPAIGN', payload: { id: data.id, title: data.title, subtitle: data.subtitle, description: data.description, deadline: data.deadline, status: data.status, teams: data.teams, roles: data.roles, teamInfo: data.teamInfo, enabledStandardFields: data.enabledStandardFields } as ApplicationCampaign });
       return data.id;
     } else {
       // Add new — dispatch returns the doc id
-      const id = await dispatch({ firestoreAction: 'ADD_CAMPAIGN', payload: { title: data.title, subtitle: data.subtitle, description: data.description, deadline: data.deadline, status: data.status, teams: data.teams, teamInfo: data.teamInfo, enabledStandardFields: data.enabledStandardFields } });
+      const id = await dispatch({ firestoreAction: 'ADD_CAMPAIGN', payload: { title: data.title, subtitle: data.subtitle, description: data.description, deadline: data.deadline, status: data.status, teams: data.teams, roles: data.roles, teamInfo: data.teamInfo, enabledStandardFields: data.enabledStandardFields } });
       return typeof id === 'string' ? id : undefined;
     }
   };

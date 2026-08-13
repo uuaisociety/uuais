@@ -1,5 +1,6 @@
 export const defaultAppState = {
   events: [],
+  eventsLoaded: true,
   teamMembers: [],
   blogPosts: [],
   faqs: [],

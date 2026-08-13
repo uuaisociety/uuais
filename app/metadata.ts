@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
 
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://uuais.com';
+
+const description = 'UU AI Society - Connecting students passionate about Artificial Intelligence in Uppsala';
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -11,7 +15,7 @@ export const metadata: Metadata = {
     default: 'UU AI Society',
     template: '%s | UU AI Society'
   },
-  description: 'UU AI Society - Connecting students passionate about Artificial Intelligence in Uppsala',
+  description,
   keywords: [
     'AI',
     'Artificial Intelligence',
@@ -62,6 +66,33 @@ export const metadata: Metadata = {
     },
   },
   applicationName: 'UU AI Society',
+  openGraph: {
+    title: {
+      default: 'UU AI Society',
+      template: '%s | UU AI Society'
+    },
+    description,
+    type: 'website',
+    url: SITE_URL,
+    images: [
+      {
+        url: '/images/logo-highdef.png',
+        width: 1200,
+        height: 630,
+        alt: 'UU AI Society',
+      }
+    ],
+    siteName: 'UU AI Society',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'UU AI Society',
+    description,
+    images: ['/images/logo-highdef.png'],
+  },
+  alternates: {
+    canonical: SITE_URL,
+  },
   other: {
     'msapplication-TileColor': '#c8102e',
   }

@@ -69,9 +69,16 @@ export async function deleteCampaignQuestionsByCampaign(campaignId: string): Pro
 
 export function subscribeToCampaignQuestions(campaignId: string, callback: (questions: CampaignQuestion[]) => void) {
   const q = query(collection(db, COLLECTION), where('campaignId', '==', campaignId));
-  return onSnapshot(q, (snapshot) => {
-    const list = snapshot.docs.map((d) => docToQuestion(d.id, d.data() as Record<string, unknown>));
-    list.sort((a, b) => a.order - b.order);
-    callback(list);
-  });
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const list = snapshot.docs.map((d) => docToQuestion(d.id, d.data() as Record<string, unknown>));
+      list.sort((a, b) => a.order - b.order);
+      callback(list);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 }

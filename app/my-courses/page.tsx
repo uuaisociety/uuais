@@ -6,6 +6,7 @@ import type { Course } from "@/lib/courses";
 import CourseCard from "@/components/courses/CourseCard";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { Modal } from "@/components/ui/Modal";
 import { Select } from "@/components/ui/Select";
 import { auth } from "@/lib/firebase-client";
 import { onAuthStateChanged } from "firebase/auth";
@@ -19,7 +20,7 @@ import {
   removeCourseFromCategory,
 } from "@/lib/firestore/course-categories";
 import { CourseCategory } from "@/types";
-import { Heart, Plus, Trash2, Folder, X, Search} from "lucide-react";
+import { Heart, Plus, Trash2, Folder, Search} from "lucide-react";
 import Link from "next/link";
 import { updatePageMeta } from "@/utils/seo";
 
@@ -206,7 +207,7 @@ export default function MyCoursesPage() {
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">My Courses</h1>
           <p className="text-gray-600 dark:text-gray-300 mb-6">Sign in to view your favorite courses and custom categories</p>
           <Link href="/account?returnTo=/my-courses">
-            <Button className="bg-[#990000] hover:bg-[#7f0000] text-white">Sign In</Button>
+            <Button>Sign In</Button>
           </Link>
         </div>
       </div>
@@ -226,7 +227,7 @@ export default function MyCoursesPage() {
           <div className="flex right gap-2">
 
             <Link href="/explore">
-              <Button icon={Search} className="bg-[#990000] hover:bg-[#7f0000] text-white">
+              <Button variant="secondary" icon={Search}>
                 Explore More Courses
               </Button>
             </Link>
@@ -237,12 +238,13 @@ export default function MyCoursesPage() {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
               <button
                 onClick={() => setActiveTab("favorites")}
-                className={`w-full flex items-center gap-3 px-4 py-3 text-left transition cursor-pointer ${activeTab === "favorites"
-                    ? "bg-red-50 dark:bg-red-900/20 border-l-4 border-[#990000]"
-                    : "hover:bg-gray-50 dark:hover:bg-gray-700 border-l-4 border-transparent"
-                  }`}
+                className={`w-full flex items-center gap-3 px-4 py-3 text-left transition cursor-pointer ${
+                  activeTab === "favorites"
+                    ? "bg-red-50 dark:bg-red-900/20 text-gray-900 dark:text-white"
+                    : "hover:bg-gray-50 dark:hover:bg-gray-700"
+                }`}
               >
-                <Heart className={`h-5 w-5 ${activeTab === "favorites" ? "text-[#990000] fill-current" : "text-gray-400"}`} />
+                <Heart className={`h-5 w-5 ${activeTab === "favorites" ? "text-primary fill-current" : "text-gray-400"}`} />
                 <div className="flex-1">
                   <div className="font-medium text-gray-900 dark:text-white">Favorites</div>
                   <div className="text-xs text-gray-500">{favoriteIds.length} courses</div>
@@ -258,10 +260,11 @@ export default function MyCoursesPage() {
                   <div key={cat.id} className="group relative">
                     <button
                       onClick={() => setActiveTab(cat.id)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 text-left transition cursor-pointer ${activeTab === cat.id
-                          ? "bg-gray-50 dark:bg-gray-700 border-l-4 border-gray-400"
-                          : "hover:bg-gray-50 dark:hover:bg-gray-700 border-l-4 border-transparent"
-                        }`}
+                      className={`w-full flex items-center gap-3 px-4 py-3 pr-12 text-left transition cursor-pointer ${
+                        activeTab === cat.id
+                          ? "bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
+                          : "hover:bg-gray-50 dark:hover:bg-gray-700"
+                      }`}
                     >
                       <Folder className={`h-5 w-5 hover:text-blue-500 transition-colors ${activeTab === cat.id ? "text-blue-500" : "text-gray-400"}`} />
                       <div className="flex-1 min-w-0">
@@ -271,15 +274,16 @@ export default function MyCoursesPage() {
                     </button>
                     <button
                       onClick={() => handleDeleteCategory(cat.id)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 p-1 text-gray-400 hover:text-red-500 transition-opacity cursor-pointer"
+                      aria-label={`Delete category ${cat.name}`}
+                      className="absolute right-1 top-1/2 -translate-y-1/2 size-11 grid place-items-center rounded-md text-gray-400 hover:text-red-500 hover:bg-gray-100 dark:hover:bg-gray-600/60 focus-visible:text-red-500 focus-visible:ring-2 focus-visible:ring-ring transition-colors cursor-pointer"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="h-4 w-4" aria-hidden />
                     </button>
                   </div>
                 ))}
               </div>
               </div>
-              <Button onClick={() => setShowNewCategoryModal(true)} className="bg-blue-600/80 hover:bg-blue-700/80 dark:bg-blue-600/60 dark:hover:bg-blue-800/80 text-white">
+              <Button onClick={() => setShowNewCategoryModal(true)} variant="outline" className="">
                 <Plus className="h-4 w-4 mr-2" /> New Category
               </Button>
           </div>
@@ -288,7 +292,7 @@ export default function MyCoursesPage() {
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
               <div className="flex items-center gap-3 mb-6">
                 {activeTab === "favorites" ? (
-                  <Heart className="h-6 w-6 text-[#990000] fill-current" />
+                  <Heart className="h-6 w-6 text-primary fill-current" />
                 ) : (
                   <Folder className="h-6 w-6 text-gray-600" />
                 )}
@@ -319,12 +323,13 @@ export default function MyCoursesPage() {
                         hrefBase="/explore"
                         initialFavorited={favoriteIds.includes(course.id)}
                         onFavoriteChange={(isFavorited) => handleFavoriteChange(course.id, isFavorited)}
-                      />
+                      >
                       {categories.length > 0 && (
-                        <div className="flex flex-col xl:flex-row gap-3 items-center rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/40 p-4 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 items-center">
+                        <div className="flex flex-col xl:flex-row gap-2 items-center rounded-lg py-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
                           <Select
                             value={groupSelectionByCourse[course.id] || (activeTab !== "favorites" ? activeTab : categories[0]?.id || "")}
                             onChange={(e) => handleGroupSelectionChange(course.id, e.target.value)}
+                            aria-label={`Move ${course.title} to category`}
                             options={categories.map((category) => ({
                               value: category.id,
                               label: `${category.name}`,
@@ -359,6 +364,7 @@ export default function MyCoursesPage() {
                           )}
                         </div>
                       )}
+                      </CourseCard>
                     </div>
                   ))}
                 </div>
@@ -369,32 +375,30 @@ export default function MyCoursesPage() {
       </div>
 
       {showNewCategoryModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-md w-full p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Create New Category</h3>
-              <button onClick={() => setShowNewCategoryModal(false)} className="text-gray-400 hover:text-gray-600">
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            <Input
-              value={newCategoryName}
-              onChange={(e) => setNewCategoryName(e.target.value)}
-              placeholder="Category name (e.g., Fall 2025, ML Prerequisites)"
-              fullWidth
-              className="mb-4"
-            />
-            <div className="flex gap-3 justify-end">
-              <Button variant="outline" onClick={() => setShowNewCategoryModal(false)}>Cancel</Button>
-              <Button
-                onClick={handleCreateCategory}
-                disabled={!newCategoryName.trim() || categories.length >= MAX_GROUPS}
-              >
-                Create
-              </Button>
-            </div>
+        <Modal
+          open={showNewCategoryModal}
+          onClose={() => setShowNewCategoryModal(false)}
+          title="Create New Category"
+          size="sm"
+        >
+          <Input
+            value={newCategoryName}
+            onChange={(e) => setNewCategoryName(e.target.value)}
+            label="Category name"
+            placeholder="e.g., Fall 2025, ML Prerequisites"
+            fullWidth
+            className="mb-4"
+          />
+          <div className="flex gap-3 justify-end">
+            <Button variant="outline" onClick={() => setShowNewCategoryModal(false)}>Cancel</Button>
+            <Button
+              onClick={handleCreateCategory}
+              disabled={!newCategoryName.trim() || categories.length >= MAX_GROUPS}
+            >
+              Create
+            </Button>
           </div>
-        </div>
+        </Modal>
       )}
     </div>
   );

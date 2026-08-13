@@ -57,6 +57,10 @@ Skills are auto-discovered from multiple locations. No config needed.
 | `opencode-snip` | Code snippet management and insertion |
 | `opencode-mem` | Enhanced memory/persistence support |
 
+## MCP (from `opencode.json`)
+
+- `playwright` — a11y-tree-first browser control (browser_navigate, browser_click by ref, browser_type, browser_take_screenshot opt-in). Enabled via the `mcp` block.
+
 ---
 
 ## Subagents (`.opencode/agents/`)
@@ -69,8 +73,11 @@ Skills are auto-discovered from multiple locations. No config needed.
 | `harden-ux` | harden, onboard, adapt | Empty/loading/error states, mobile responsiveness, edge cases |
 | `audit-review` | audit, critique | Comprehensive quality audit (read-only) |
 | `next-vercel` | next-best-practices, vercel-composition-patterns, vercel-react-best-practices | Next.js conventions, React composition, performance optimization |
-| `review-pr` | staff-engineer-review, react-doctor, next-best-practices, vercel-react-best-practices, code-security-auditor | Structured PR and branch code review (read-only) |
+| `review-pr` | staff-engineer-review, react-doctor, next-best-practices, vercel-react-best-practices, code-security-auditor, firebase-security-rules-auditor, api-security-review | Structured PR and branch code review (read-only) |
 | `test-writer` | testing | Write unit/integration tests with proper mocking, edge cases, and assertions |
+| `security-review` | firebase-security-rules-auditor, api-security-review, code-security-auditor | Security review of Firebase rules and API routes (read-only) |
+| `backend-data` | firebase-security-rules-auditor, testing | Backend/data layer: Firestore schemas, rules, helpers, AppContext, API routes |
+| `e2e-browser-tester` | browser-use, testing | Playwright E2E suite + interactive browser verification |
 
 Invoke with `@agent-name describe your request` in chat.
 

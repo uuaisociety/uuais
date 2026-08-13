@@ -29,8 +29,15 @@ export const deleteFaq = async (id: string): Promise<void> => {
 export const subscribeToFaqs = (callback: (faqs: FAQ[]) => void) => {
   const faqsRef = collection(db, 'faqs');
   const q = query(faqsRef, orderBy('order', 'asc'));
-  return onSnapshot(q, (snapshot) => {
-    const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as FAQ));
-    callback(list);
-  });
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as FAQ));
+      callback(list);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 };

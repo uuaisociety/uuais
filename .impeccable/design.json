@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-11T00:00:00.000Z",
+  "title": "Design System: UU AI Society",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Society Red", "canonical": "oklch(0.565 0.208 27.5)", "tonalRamp": ["oklch(0.16 0.12 27.5)", "oklch(0.25 0.15 27.5)", "oklch(0.34 0.18 27.5)", "oklch(0.43 0.19 27.5)", "oklch(0.565 0.208 27.5)", "oklch(0.66 0.17 27.5)", "oklch(0.78 0.12 27.5)", "oklch(0.92 0.05 27.5)"] },
+      "warm-paper": { "role": "neutral", "displayName": "Warm Paper", "canonical": "oklch(0.983 0.004 95)", "tonalRamp": ["oklch(0.80 0.006 95)", "oklch(0.85 0.005 95)", "oklch(0.90 0.005 95)", "oklch(0.94 0.004 95)", "oklch(0.983 0.004 95)", "oklch(0.99 0.002 95)", "oklch(0.995 0.002 95)", "oklch(1 0 0)"] },
+      "cool-ink": { "role": "neutral", "displayName": "Cool Ink", "canonical": "oklch(0.18 0.012 265)", "tonalRamp": ["oklch(0.12 0.012 265)", "oklch(0.18 0.012 265)", "oklch(0.30 0.013 265)", "oklch(0.42 0.013 265)", "oklch(0.505 0.014 265)", "oklch(0.60 0.015 265)", "oklch(0.72 0.015 265)", "oklch(0.88 0.01 265)"] },
+      "warm-ink": { "role": "neutral", "displayName": "Warm Ink", "canonical": "oklch(0.16 0.02 20)", "tonalRamp": ["oklch(0.10 0.015 20)", "oklch(0.16 0.02 20)", "oklch(0.26 0.02 20)", "oklch(0.38 0.025 20)", "oklch(0.50 0.03 20)", "oklch(0.64 0.035 20)", "oklch(0.78 0.035 20)", "oklch(0.92 0.02 20)"] },
+      "muted-ink": { "role": "neutral", "displayName": "Muted Ink", "canonical": "oklch(0.505 0.014 265)", "tonalRamp": ["oklch(0.35 0.012 265)", "oklch(0.505 0.014 265)", "oklch(0.60 0.014 265)", "oklch(0.70 0.014 265)", "oklch(0.78 0.012 265)", "oklch(0.86 0.008 265)", "oklch(0.93 0.005 265)", "oklch(0.98 0.002 265)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines only, on the dark ink slab." },
+      "headline": { "displayName": "Headline", "purpose": "Section opens and page titles on light surfaces." },
+      "title": { "displayName": "Title", "purpose": "Card titles and list headings." },
+      "body": { "displayName": "Body", "purpose": "Reading text; muted ink on light, white/60 on ink slabs." },
+      "label": { "displayName": "Label / Mono", "purpose": "Eyebrows, metadata, pills, timestamps, form hints — anything that is data, not prose." }
+    },
+    "shadows": [
+      { "name": "glass-shadow", "value": "0 1px 2px oklch(0.18 0.012 265 / 5%), 0 12px 32px -8px oklch(0.18 0.012 265 / 12%)", "purpose": "Resting glass surface." },
+      { "name": "glass-shadow-lifted", "value": "0 2px 4px oklch(0.18 0.012 265 / 6%), 0 24px 56px -12px oklch(0.18 0.012 265 / 18%)", "purpose": "Hover / lifted glass and popovers." },
+      { "name": "glass-pop-shadow-dark", "value": "0 2px 4px oklch(0 0 0 / 40%), 0 24px 56px -12px oklch(0 0 0 / 60%)", "purpose": "Dark-mode floating dropdowns." }
+    ],
+    "motion": [
+      { "name": "ease-ios", "value": "cubic-bezier(0.32, 0.72, 0, 1)", "purpose": "Default easing for all state transitions — fast natural deceleration." },
+      { "name": "glass-interactive-hover", "value": "transform 0.45s var(--ease-ios), box-shadow 0.45s var(--ease-ios), background-color 0.45s var(--ease-ios)", "purpose": "Card hover lift: translateY(-3px) + lifted shadow." },
+      { "name": "button-press", "value": "active:scale(0.97) 100ms", "purpose": "Button press feedback — the iOS cue." },
+      { "name": "accordion", "value": "0.24s var(--ease-ios)", "purpose": "Accordion open/close." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one main action per screen — brand red fill with a subtle inset highlight.",
+      "html": "<button class=\"ds-btn-primary\">Become a member</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: oklch(0.565 0.208 27.5); color: oklch(0.99 0.002 95); font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: -0.01em; padding: 10px 20px; border: none; border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,0.12), inset 0 1px 0 0 rgba(255,255,255,0.22); transition: background-color 0.3s cubic-bezier(0.32,0.72,0,1), transform 0.3s cubic-bezier(0.32,0.72,0,1); } .ds-btn-primary:hover { filter: brightness(1.1); } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid oklch(0.565 0.208 27.5 / 0.45); outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary action — hairline border, ink text, faint fill on hover.",
+      "html": "<button class=\"ds-btn-outline\">Read more</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: transparent; color: oklch(0.18 0.012 265); font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: -0.01em; padding: 10px 20px; border: 1px solid oklch(0.18 0.012 265 / 0.10); border-radius: 4px; transition: background-color 0.3s cubic-bezier(0.32,0.72,0,1), border-color 0.3s cubic-bezier(0.32,0.72,0,1); } .ds-btn-outline:hover { background: oklch(0.18 0.012 265 / 0.045); border-color: oklch(0.18 0.012 265 / 0.25); } .ds-btn-outline:active { transform: scale(0.97); } .ds-btn-outline:focus-visible { outline: 2px solid oklch(0.565 0.208 27.5 / 0.45); outline-offset: 2px; }"
+    },
+    {
+      "name": "Glass Button (CTA)",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "The liquid-glass CTA for hero / on-ink moments — frosted, sheen sweep, springy lift.",
+      "html": "<button class=\"ds-btn-cta\">Apply</button>",
+      "css": ".ds-btn-cta { position: relative; display: inline-flex; align-items: center; justify-content: center; background: oklch(1 0 0 / 0.62); color: oklch(0.18 0.012 265); font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; padding: 10px 20px; border: 1px solid oklch(0.18 0.012 265 / 0.08); border-radius: 4px; box-shadow: 0 1px 2px oklch(0.18 0.012 265 / 5%), 0 12px 32px -8px oklch(0.18 0.012 265 / 12%), inset 0 1px 0 0 oklch(1 0 0 / 0.85); backdrop-filter: blur(20px) saturate(180%); transition: transform 0.45s cubic-bezier(0.32,0.72,0,1), box-shadow 0.45s cubic-bezier(0.32,0.72,0,1); } .ds-btn-cta:hover { transform: translateY(-3px); box-shadow: 0 2px 4px oklch(0.18 0.012 265 / 6%), 0 24px 56px -12px oklch(0.18 0.012 265 / 18%), inset 0 1px 0 0 oklch(1 0 0 / 0.85); } .ds-btn-cta:active { transform: translateY(-1px) scale(0.995); } .ds-btn-cta:focus-visible { outline: 2px solid oklch(0.565 0.208 27.5 / 0.45); outline-offset: 2px; }"
+    },
+    {
+      "name": "Glass Card",
+      "kind": "card",
+      "refersTo": "glass-card",
+      "description": "The listing surface — frosted glass over the ambient field, springy hover lift.",
+      "html": "<div class=\"ds-glass-card\"><div class=\"ds-glass-card-media\"></div><h3>Event title</h3><p>Short description of the event.</p></div>",
+      "css": ".ds-glass-card { background: oklch(1 0 0 / 0.62); border: 1px solid oklch(0.18 0.012 265 / 0.08); border-radius: 8px; box-shadow: 0 1px 2px oklch(0.18 0.012 265 / 5%), 0 12px 32px -8px oklch(0.18 0.012 265 / 12%), inset 0 1px 0 0 oklch(1 0 0 / 0.85); backdrop-filter: blur(20px) saturate(180%); overflow: hidden; transition: transform 0.45s cubic-bezier(0.32,0.72,0,1), box-shadow 0.45s cubic-bezier(0.32,0.72,0,1); } .ds-glass-card:hover { transform: translateY(-3px); box-shadow: 0 2px 4px oklch(0.18 0.012 265 / 6%), 0 24px 56px -12px oklch(0.18 0.012 265 / 18%), inset 0 1px 0 0 oklch(1 0 0 / 0.85); } .ds-glass-card-media { height: 160px; background: #e5e5e0; } .ds-glass-card h3 { font-family: 'Instrument Sans', sans-serif; font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.02em; margin: 16px 20px 4px; } .ds-glass-card p { font-family: 'Instrument Sans', sans-serif; font-size: 0.875rem; color: oklch(0.505 0.014 265); margin: 0 20px 20px; line-height: 1.5; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Hairline-bordered field with a warm-white fill; focus ring in brand red.",
+      "html": "<label class=\"ds-input\"><span>Name</span><input placeholder=\"e.g. Alex\" /></label>",
+      "css": ".ds-input { display: flex; flex-direction: column; gap: 4px; font-family: 'Instrument Sans', sans-serif; font-size: 0.75rem; font-weight: 500; color: oklch(0.18 0.012 265); } .ds-input input { font-family: 'Instrument Sans', sans-serif; font-size: 0.875rem; color: oklch(0.18 0.012 265); background: oklch(1 0 0); border: 1px solid oklch(0.18 0.012 265 / 0.12); border-radius: 4px; padding: 8px 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); transition: border-color 0.2s, box-shadow 0.2s; } .ds-input input::placeholder { color: oklch(0.505 0.014 265); } .ds-input input:focus { outline: none; border-color: oklch(0.565 0.208 27.5); box-shadow: 0 0 0 2px oklch(0.565 0.208 27.5 / 0.45); } .ds-input input:focus-visible { outline: none; }"
+    },
+    {
+      "name": "Mono Pill / Tag",
+      "kind": "chip",
+      "refersTo": "glass-card",
+      "description": "Small uppercase mono chip for metadata and status — the data signal.",
+      "html": "<span class=\"ds-pill\">Workshop</span>",
+      "css": ".ds-pill { display: inline-flex; align-items: center; gap: 6px; font-family: 'Martian Mono', ui-monospace, monospace; text-transform: uppercase; font-size: 0.6875rem; letter-spacing: 0.12em; font-weight: 500; padding: 5px 8px; border-radius: 3px; line-height: 1; background: oklch(0.565 0.208 27.5 / 0.10); color: oklch(0.565 0.208 27.5); }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Theme-aware glass bar; links are current-colour translucent text that fills on hover/active.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link\">Events</a><a class=\"ds-nav-link\">About</a><a class=\"ds-nav-link ds-nav-link-active\">Contact</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 2px; background: oklch(1 0 0 / 0.62); backdrop-filter: blur(24px) saturate(180%); border-bottom: 1px solid oklch(0.18 0.012 265 / 0.10); padding: 0 16px; } .ds-nav-link { font-family: 'Instrument Sans', sans-serif; font-size: 0.8125rem; font-weight: 500; letter-spacing: -0.01em; color: oklch(0.2 0.012 265 / 0.6); padding: 6px 12px; border-radius: 3px; transition: color 0.3s, background-color 0.3s; } .ds-nav-link:hover { color: oklch(0.2 0.012 265); background: oklch(0.2 0.012 265 / 0.07); } .ds-nav-link-active { color: oklch(0.2 0.012 265); background: oklch(0.2 0.012 265 / 0.12); } .ds-nav-link:focus-visible { outline: 2px solid oklch(0.565 0.208 27.5 / 0.45); outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Frosted Society Notebook",
+    "overview": "The site reads as a student society's editorial notebook pressed under frosted glass — tight display headings and mono metadata floating above soft ambient colour, with every surface a translucent pane that picks up the light behind it. It is warm, precise, and quietly confident: the paper is never pure white, the red is never a hard alert, and the ink is slightly cool where it types and slightly warm where it slabs. Light mode is a warm paper page with near-white glass cards; dark mode is a cool ink page with darker glass. The hero and navigation stay a deep warm ink in both themes so the landing reads as one continuous slab. Density is editorial — generous section spacing, hairline borders, and one accent colour used sparingly. The system deliberately avoids gradients, glows, and card-bloat: depth comes from blur, specular hairlines, and soft lifted shadows, not from filling surfaces with colour.",
+    "keyCharacteristics": [
+      "Warm paper / cool ink neutrals, one deepened brand red",
+      "Liquid-glass surfaces: translucent fill + backdrop-filter blur + specular top edge + soft shadow",
+      "Editorial typography: tight Instrument Sans display, Martian Mono for metadata/pills",
+      "The (parenthetical) accent word — red, inline, the signature flourish",
+      "Dark ink hero + nav slab in both themes",
+      "No gradients, no glow, motion is springy-but-not-bouncy (--ease-ios)"
+    ],
+    "rules": [
+      { "name": "The Rarity Rule", "body": "The brand red appears on a small fraction of any screen: the accent word, one hover, one primary action. Its scarcity is what makes it read as accent.", "section": "colors" },
+      { "name": "The One-Ink Rule", "body": "Text is either the ink (cool-ink / light-on-dark) or a translucent version of it. Never introduce a second text colour — blue links, purple links, and rainbow emphasis are rejected.", "section": "colors" },
+      { "name": "The Data-Versus-Prose Rule", "body": "If it's a number, timestamp, tag, or eyebrow, set it in mono. If it's a sentence, set it in sans. Mixed usage is the signal that separates metadata from content.", "section": "typography" },
+      { "name": "The Parenthetical Rule", "body": "Emphasise the second word of a title by wrapping it in parentheses and setting it in the brand red ((Start here.), (Upcoming) Events). The paren is the signature accent — use it on headings, not body copy.", "section": "typography" },
+      { "name": "The Layered-Not-Lifted Rule", "body": "Elevation is expressed with backdrop blur + a specular hairline + a soft shadow together. Never a hard offset block shadow, never a glow.", "section": "elevation" },
+      { "name": "The Springy-Never-Bouncy Rule", "body": "All motion uses --ease-ios (cubic-bezier(0.32, 0.72, 0, 1)) — a fast, natural deceleration. Hover lifts -3px, press scales to 0.995.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do set page and section backgrounds with the tokens (bg-background, bg-card, text-foreground, text-muted-foreground, border-border) — the oklch token system is the single source of truth.",
+      "Do use glass + glass-interactive for major listing cards, and the hairline+ambient treatment for quieter surfaces.",
+      "Do keep the brand red rare — one accent per screen, at most.",
+      "Do lead section and page titles with a mono-label eyebrow and use the (paren) accent word for the second term of a display heading.",
+      "Do let the header and mobile menu adopt the theme: light frosted in light mode, dark ink in dark mode, dark ink on the home hero.",
+      "Do set small metadata (dates, tags, counts, labels) in Martian Mono."
+    ],
+    "donts": [
+      "Don't reintroduce hard-coded #990000-style reds, raw oklch(...) literals, or the legacy bg-gray-50 dark:bg-gray-900 page wrappers — remap them to tokens.",
+      "Don't use red/gradient hero backgrounds (from-red-600 via-red-700 to-red-800). Heroes are dark ink slabs with an interior radial glow, or nothing.",
+      "Don't use border-l-4 side-tab accents, bounce/elastic easing, or gradient text — all rejected.",
+      "Don't add a second text colour (blue links etc.) or place grey text on the red accent; on colour, use the surface's own ink or near-white.",
+      "Don't paint a solid opaque panel for the mobile menu — it inherits the header's glass so it blurs what's behind it.",
+      "Don't ship an unlabeled icon button or an unlabeled form control; use aria-label or a wrapping FieldGroup."
+    ]
+  }
+}

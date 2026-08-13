@@ -135,7 +135,7 @@ const updatedMember = {
   };
 
   const handleMove = (memberId: string, direction: 'up' | 'down') => {
-    dispatch({ firestoreAction: 'MOVE_TEAM_MEMBER', payload: { memberId, direction } });
+    dispatch({ firestoreAction: 'MOVE_TEAM_MEMBER', payload: { memberId, direction, year: activeYear ?? undefined } });
   };
 
   const sortedMembers = [...members].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
@@ -148,7 +148,7 @@ const updatedMember = {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Team Management</h2>
-        <Button icon={Plus} onClick={handleAddClick}>Add Team Member</Button>
+        <Button variant="outline" icon={Plus} onClick={handleAddClick}>Add Team Member</Button>
       </div>
 
       {allYears.length > 0 && (
@@ -211,7 +211,7 @@ const updatedMember = {
                     <p className="text-gray-600 text-sm line-clamp-2 dark:text-gray-400">{member.bio}</p>
                   )}
                   {member.notes && (
-                    <p className="text-xs text-gray-400 italic mt-1 truncate">Note: {member.notes}</p>
+                    <p className="text-xs text-muted-foreground italic mt-1 truncate">Note: {member.notes}</p>
                   )}
                   <div className="flex flex-wrap items-center gap-2 mt-3">
                     <div className="flex items-center gap-1">
@@ -228,7 +228,7 @@ const updatedMember = {
                         variant="outline"
                         icon={ArrowDown}
                         onClick={() => handleMove(member.id, 'down')}
-                        disabled={index === sortedMembers.length - 1}
+                        disabled={index === filteredMembers.length - 1}
                         aria-label="Move down"
                       />
                     </div>

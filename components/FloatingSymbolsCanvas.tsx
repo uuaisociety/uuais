@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react';
+import { useTheme } from '@/providers/ThemeProvider';
 
 // === Types ===
 
@@ -24,6 +25,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
   const symbolsRef = useRef<FloatingSymbol[]>([]);
   const mousePosRef = useRef({ x: 0, y: 0 });
   const prevTsRef = useRef(0);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,14 +34,26 @@ const FloatingSymbolsCanvas: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // White glyphs on the ink slab, near-ink on the paper slab.
+    const glyphColor = theme === 'dark' ? 'rgba(255, 255, 255, 1)' : 'rgba(30, 28, 27, 1)';
+
     const dpr = window.devicePixelRatio || 1;
 
     const resize = () => {
       const r = canvas.getBoundingClientRect();
-      canvas.width = r.width * dpr;
-      canvas.height = r.height * dpr;
+      const w = Math.round(r.width * dpr);
+      const h = Math.round(r.height * dpr);
+      if (w === canvas.width && h === canvas.height) return;
+      canvas.width = w;
+      canvas.height = h;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
+
+    // Sync the backing store with the element whenever it resizes for any
+    // reason (font/image load, media-query reflow, mobile URL-bar, zoom) —
+    // window.resize alone misses those and leaves the drawing clipped.
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
     resize();
 
     // === Mouse Tracking ===
@@ -83,6 +97,9 @@ const FloatingSymbolsCanvas: React.FC = () => {
           rotation: Math.random() * 360,
         });
       }
+
+      // The loop is started on demand — kick it off now that there's something to draw.
+      startLoop();
     };
 
     // === Draw Symbols ===
@@ -135,7 +152,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
         ctx.translate(Math.round(sym.x + sym.offsetX), Math.round(sym.y + sym.offsetY));
         ctx.rotate((sym.rotation * Math.PI) / 180);
         ctx.globalAlpha = Math.max(0, Math.min(1, opacity));
-        ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        ctx.fillStyle = glyphColor;
         ctx.font = '16px monospace';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -145,33 +162,83 @@ const FloatingSymbolsCanvas: React.FC = () => {
     };
 
     // === Animation Loop ===
+    // Runs only while on-screen, tab visible, and no reduced motion; paints at half cadence.
+    // The loop stays stopped until the first click spawns symbols — an empty canvas has nothing to animate, so a rAF loop would just burn main-thread frames.
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let running = false;
+    let frame = 0;
+
     const animate = (ts: number) => {
+      if (!running) return;
       if (!prevTsRef.current) prevTsRef.current = ts;
-      const dt = ts - prevTsRef.current;
+      const dt = Math.min(ts - prevTsRef.current, 50);
       prevTsRef.current = ts;
 
-      const r = canvas.getBoundingClientRect();
-      ctx.clearRect(0, 0, r.width, r.height);
-      draw(dt);
+      frame++;
+      if (frame % 2 === 0 && symbolsRef.current.length > 0) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        draw(dt);
+        // Stop once the last symbol has faded out — the canvas is static again.
+        if (symbolsRef.current.length === 0) {
+          stopLoop();
+          return;
+        }
+      }
       animationRef.current = requestAnimationFrame(animate);
     };
+
+    const startLoop = () => {
+      if (running || reducedMotion.matches || symbolsRef.current.length === 0) return;
+      running = true;
+      prevTsRef.current = 0;
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    const stopLoop = () => {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(animationRef.current);
+    };
+
+    // Stop animating when the canvas scrolls out of view or the tab is hidden.
+    let isIntersecting = true;
+    const onIntersect = (entries: IntersectionObserverEntry[]) => {
+      isIntersecting = entries[entries.length - 1].isIntersecting;
+      if (isIntersecting && !document.hidden) startLoop();
+      else stopLoop();
+    };
+    const onVisibilityChange = () => {
+      if (document.hidden) stopLoop();
+      else if (isIntersecting) startLoop();
+    };
+    const io = new IntersectionObserver(onIntersect);
+    io.observe(canvas);
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('click', handleClick);
-    animationRef.current = requestAnimationFrame(animate);
+
+    if (!reducedMotion.matches && symbolsRef.current.length > 0) {
+      startLoop();
+    } else {
+      draw(0);
+    }
 
     return () => {
-      cancelAnimationFrame(animationRef.current);
+      stopLoop();
+      io.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [theme]);
 
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="absolute inset-0 w-full h-full pointer-events-none"
       style={{ width: '100%', height: '100%' }}
     />

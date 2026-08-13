@@ -113,7 +113,7 @@ export default function EligibilityBadge({ result, showDetails = true, compact =
                 {status === "unknown" && onUploadClick && (
                     <button
                         onClick={onUploadClick}
-                        className="text-sm text-[#990000] hover:text-[#7f0000] font-medium"
+                        className="text-sm text-primary hover:text-primary/80 font-medium"
                     >
                         Upload transcript →
                     </button>

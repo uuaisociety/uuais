@@ -31,16 +31,19 @@ export const microsoftProvider = new OAuthProvider('microsoft.com');
 
 export const signInWithGooglePopup = async () => {
   const result = await signInWithPopup(auth, googleProvider);
+  await refreshSessionCookie();
   return result.user;
 };
 
 export const signInWithGithubPopup = async () => {
   const result = await signInWithPopup(auth, githubProvider);
+  await refreshSessionCookie();
   return result.user;
 };
 
 export const signInWithMicrosoftPopup = async () => {
   const result = await signInWithPopup(auth, microsoftProvider);
+  await refreshSessionCookie();
   return result.user;
 };
 
@@ -63,3 +66,19 @@ export const linkMicrosoftToCurrentUser = async (user: User) => {
 export const firebaseSignOut = async () => {
   await signOut(auth);
 };
+
+/**
+ * Refresh the httpOnly session cookie (used by API routes) to the currently
+ * signed-in Firebase user. The cookie is only (re)set at /api/login, and the
+ * client-side signIn/signOut do not touch it, so after an account switch or a
+ * custom-claim (e.g. admin) change the cookie can be stale. Call before any
+ * server API request that must authenticate as the current user.
+ */
+export async function refreshSessionCookie(): Promise<void> {
+  const token = await auth.currentUser?.getIdToken(true);
+  if (!token) return;
+  await fetch('/api/login', {
+    headers: { Authorization: `Bearer ${token}` },
+    credentials: 'include',
+  });
+}

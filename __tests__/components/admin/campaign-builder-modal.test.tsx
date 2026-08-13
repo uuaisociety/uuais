@@ -78,4 +78,88 @@ describe('CampaignBuilderModal options editor', () => {
     fireEvent.click(screen.getByRole('button', { name: /Hide options/i }))
     expect(screen.getByRole('button', { name: /Options \(2\)/ })).toBeInTheDocument()
   })
+
+  describe('role builder', () => {
+    const roleCampaign: ApplicationCampaign = {
+      ...campaign,
+      roles: [{ id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 }],
+    }
+
+    it('shows the no-roles hint and keeps Save disabled when no roles exist', async () => {
+      render(<CampaignBuilderModal {...baseProps()} />)
+      // Loading completes async via getCampaignQuestions, then role sections render
+      const addRoleButtons = await screen.findAllByRole('button', { name: /Add role/i })
+      expect(addRoleButtons.length).toBeGreaterThan(0)
+      expect(screen.getAllByText(/No roles defined yet/).length).toBe(2)
+      expect(screen.getByRole('button', { name: 'Save changes' })).toBeDisabled()
+    })
+
+    it('adds a role and serializes it with order on submit', async () => {
+      const onSaveCampaign = jest.fn().mockResolvedValue(undefined)
+      render(<CampaignBuilderModal {...baseProps({ campaign: roleCampaign, onSaveCampaign })} />)
+      const addRoleButtons = await screen.findAllByRole('button', { name: /Add role/i })
+      // Add a second role to the IT team; the existing "IT Member" input comes first
+      fireEvent.click(addRoleButtons[0])
+      const titleInputs = screen.getAllByPlaceholderText('Role title (required)')
+      fireEvent.change(titleInputs[titleInputs.length - 1], { target: { value: 'IT Auditor' } })
+
+      fireEvent.click(screen.getByRole('button', { name: 'Save changes' }))
+      expect(onSaveCampaign).toHaveBeenCalled()
+      const payload = onSaveCampaign.mock.calls[0][0]
+      expect(payload.roles).toEqual([
+        { id: 'it_member', teamId: 'it', title: 'IT Member', description: undefined, headcount: undefined, status: 'open', deadline: undefined, order: 0 },
+        { id: expect.stringMatching(/^new_role_/), teamId: 'it', title: 'IT Auditor', description: undefined, headcount: undefined, status: 'open', deadline: undefined, order: 1 },
+      ])
+    })
+
+    it('toggles a role status from Open to Closed', async () => {
+      const onSaveCampaign = jest.fn().mockResolvedValue(undefined)
+      render(<CampaignBuilderModal {...baseProps({ campaign: roleCampaign, onSaveCampaign })} />)
+      const openPill = await screen.findByRole('button', { name: 'Open' })
+      fireEvent.click(openPill)
+
+      fireEvent.click(screen.getByRole('button', { name: 'Save changes' }))
+      expect(onSaveCampaign.mock.calls[0][0].roles[0].status).toBe('closed')
+    })
+
+    it('deletes a role', async () => {
+      render(<CampaignBuilderModal {...baseProps({ campaign: roleCampaign })} />)
+      await screen.findAllByRole('button', { name: /Add role/i })
+      fireEvent.click(screen.getByRole('button', { name: 'Delete IT Member' }))
+      expect(screen.queryByDisplayValue('IT Member')).not.toBeInTheDocument()
+    })
+  })
+
+  describe('team reorder', () => {
+    const reorderCampaign: ApplicationCampaign = {
+      ...campaign,
+      roles: [
+        { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 },
+        { id: 'dev_member', teamId: 'development', title: 'Dev Member', status: 'open', order: 1 },
+      ],
+    }
+
+    it('moves a team earlier and later, then saves the new order', async () => {
+      const onSaveCampaign = jest.fn().mockResolvedValue(undefined)
+      render(<CampaignBuilderModal {...baseProps({ campaign: reorderCampaign, onSaveCampaign })} />)
+      await screen.findAllByRole('button', { name: /Add role/i })
+
+      // Development is second; move it first
+      fireEvent.click(screen.getByRole('button', { name: 'Move Development earlier' }))
+
+      fireEvent.click(screen.getByRole('button', { name: 'Save changes' }))
+      expect(onSaveCampaign).toHaveBeenCalled()
+      expect(onSaveCampaign.mock.calls[0][0].teams).toEqual(['development', 'it'])
+    })
+
+    it('disables the up control on the first team and the down control on the last', async () => {
+      render(<CampaignBuilderModal {...baseProps({ campaign: reorderCampaign })} />)
+      await screen.findAllByRole('button', { name: /Add role/i })
+
+      expect(screen.getByRole('button', { name: 'Move IT earlier' })).toBeDisabled()
+      expect(screen.getByRole('button', { name: 'Move IT later' })).toBeEnabled()
+      expect(screen.getByRole('button', { name: 'Move Development earlier' })).toBeEnabled()
+      expect(screen.getByRole('button', { name: 'Move Development later' })).toBeDisabled()
+    })
+  })
 })

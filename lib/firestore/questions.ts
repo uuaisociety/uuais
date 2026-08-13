@@ -38,10 +38,17 @@ export const deleteRegistrationQuestion = async (id: string): Promise<void> => {
 
 export const subscribeToRegistrationQuestions = (callback: (qs: RegistrationQuestion[]) => void) => {
   const rqRef = collection(db, 'registrationQuestions');
-  return onSnapshot(rqRef, (snapshot) => {
-    const questions = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as RegistrationQuestion));
-    callback(questions);
-  });
+  return onSnapshot(
+    rqRef,
+    (snapshot) => {
+      const questions = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as RegistrationQuestion));
+      callback(questions);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 };
 
 // Event-specific Custom Questions
@@ -60,12 +67,19 @@ export const subscribeToEventCustomQuestions = (
 ) => {
   const cqRef = collection(db, 'eventCustomQuestions');
   const qy = query(cqRef, where('eventId', '==', eventId));
-  return onSnapshot(qy, (snapshot) => {
-    const qs = snapshot.docs
-      .map(d => ({ id: d.id, ...d.data() } as EventCustomQuestion))
-      .sort((a, b) => (a.order || 0) - (b.order || 0));
-    callback(qs);
-  });
+  return onSnapshot(
+    qy,
+    (snapshot) => {
+      const qs = snapshot.docs
+        .map(d => ({ id: d.id, ...d.data() } as EventCustomQuestion))
+        .sort((a, b) => (a.order || 0) - (b.order || 0));
+      callback(qs);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 };
 
 export const addEventCustomQuestion = async (

@@ -4,13 +4,15 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { TrendingUp, Users, Calendar, FileText, BriefcaseBusiness, Bot, Flame, Menu, X } from "lucide-react";
 import { useAnalyticsData, type AnalyticsTabKey } from "./analytics/useAnalyticsData";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
+import dynamic from "next/dynamic";
 import AnalyticsOverviewTab from "./analytics/AnalyticsOverviewTab";
-import AnalyticsEventsTab from "./analytics/AnalyticsEventsTab";
-import AnalyticsMembersTab from "./analytics/AnalyticsMembersTab";
 import AnalyticsNewsletterTab from "./analytics/AnalyticsNewsletterTab";
 import AnalyticsJobsTab from "./analytics/AnalyticsJobsTab";
-import AnalyticsAITab from "./analytics/AnalyticsAITab";
-import AnalyticsFirebaseTab from "./analytics/AnalyticsFirebaseTab";
+
+const AnalyticsEventsTab = dynamic(() => import("./analytics/AnalyticsEventsTab"), { ssr: false });
+const AnalyticsMembersTab = dynamic(() => import("./analytics/AnalyticsMembersTab"), { ssr: false });
+const AnalyticsAITab = dynamic(() => import("./analytics/AnalyticsAITab"), { ssr: false });
+const AnalyticsFirebaseTab = dynamic(() => import("./analytics/AnalyticsFirebaseTab"), { ssr: false });
 
 const tabs: { key: AnalyticsTabKey; label: string; icon: React.FC<{ className?: string }> }[] = [
   { key: "overview", label: "Summary", icon: TrendingUp },

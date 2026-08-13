@@ -110,7 +110,7 @@ const JobsTab: React.FC = () => {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Jobs Management</h2>
-        <Button icon={Plus} onClick={handleOpenNew}>New Job</Button>
+        <Button variant="outline" icon={Plus} onClick={handleOpenNew}>New Job</Button>
       </div>
 
       <div className="grid gap-4">
@@ -119,7 +119,7 @@ const JobsTab: React.FC = () => {
             <CardContent className="p-6">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-3 mb-2 flex-wrap">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{job.title}</h3>
                     <Tag variant="red" size="sm">{job.company}</Tag>
                     <Tag variant="yellow" size="sm">{job.type.replace('_', ' ')}</Tag>
@@ -144,7 +144,7 @@ const JobsTab: React.FC = () => {
                   <Button size="sm" variant="outline" icon={Edit3} onClick={() => handleEdit(job)}>
                     Edit
                   </Button>
-                  <Button size="sm" variant="outline" icon={Trash2} onClick={() => handleDelete(job.id)} className="text-red-600 hover:text-red-700">
+                  <Button size="sm" variant="destructive" icon={Trash2} onClick={() => handleDelete(job.id)}>
                     Delete
                   </Button>
                 </div>

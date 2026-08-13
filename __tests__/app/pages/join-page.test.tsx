@@ -49,6 +49,9 @@ async function triggerAuthCallback(user: Record<string, unknown> | null) {
   const firebase = jest.requireMock('@/lib/firebase-client') as {
     auth: { _callbackHolder: { current: ((u: unknown) => Promise<void> | void) | null } }
   }
+  await waitFor(() => {
+    expect(firebase.auth._callbackHolder.current).not.toBeNull()
+  })
   const cb = firebase.auth._callbackHolder.current
   if (cb) await act(async () => { await cb(user) })
 }
@@ -101,16 +104,16 @@ describe('JoinPage', () => {
       expect(screen.getByText(/Continue with GitHub/)).toBeInTheDocument()
     })
 
-    it('calls signInWithGooglePopup on Google button click', () => {
+    it('calls signInWithGooglePopup on Google button click', async () => {
       render(<JoinPage />)
       fireEvent.click(screen.getByText(/Continue with Google/))
-      expect(mockedFirebase().signInWithGooglePopup).toHaveBeenCalled()
+      await waitFor(() => expect(mockedFirebase().signInWithGooglePopup).toHaveBeenCalled())
     })
 
-    it('calls signInWithGithubPopup on GitHub button click', () => {
+    it('calls signInWithGithubPopup on GitHub button click', async () => {
       render(<JoinPage />)
       fireEvent.click(screen.getByText(/Continue with GitHub/))
-      expect(mockedFirebase().signInWithGithubPopup).toHaveBeenCalled()
+      await waitFor(() => expect(mockedFirebase().signInWithGithubPopup).toHaveBeenCalled())
     })
 
     it('renders already-a-member section', () => {
@@ -179,7 +182,9 @@ describe('JoinPage', () => {
       fireEvent.click(screen.getByLabelText(/I accept the/))
       fireEvent.click(screen.getByText('Save & Become Member'))
 
-      expect(mockedUsers().upsertUserProfile).toHaveBeenCalledWith('u1', expect.objectContaining({ isMember: true }))
+      await waitFor(() =>
+        expect(mockedUsers().upsertUserProfile).toHaveBeenCalledWith('u1', expect.objectContaining({ isMember: true }))
+      )
     })
 
     it('shows saving state while submitting', async () => {
@@ -242,7 +247,9 @@ describe('JoinPage', () => {
       fireEvent.click(screen.getByLabelText(/I accept the/))
       fireEvent.click(screen.getByText('Save & Become Member'))
 
-      expect(mockedUsers().updateUserProfile).toHaveBeenCalledWith('u2', expect.any(Object))
+      await waitFor(() =>
+        expect(mockedUsers().updateUserProfile).toHaveBeenCalledWith('u2', expect.any(Object))
+      )
     })
   })
 

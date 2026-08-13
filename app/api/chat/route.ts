@@ -3,8 +3,7 @@ import type { NextRequest } from 'next/server';
 import { checkRateLimit, incrementUsage, RateLimitError } from '@/lib/ai/rate-limit';
 import { processRAGRequest } from '@/lib/ai/rag';
 import { OpenRouterError } from '@/lib/ai/openrouter';
-import { getTokens } from 'next-firebase-auth-edge';
-import { authConfig } from '@/lib/auth-config';
+import { requireAuth } from '@/lib/server-auth';
 
 interface ChatRequest {
   query: string;
@@ -35,18 +34,15 @@ function normalizeConversationHistory(
 
 export async function POST(req: NextRequest) {
   try {
-    // Verify Firebase auth using next-firebase-auth-edge
-    const tokens = await getTokens(req.cookies, authConfig);
-    
-    if (!tokens) {
+    const auth = await requireAuth(req);
+    if (!auth.ok) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Authentication required' },
         { status: 401 }
       );
     }
 
-    const uid = tokens.decodedToken.uid;
-    const isAdmin = Boolean(tokens.decodedToken.admin || tokens.decodedToken.superAdmin);
+    const { uid, isAdmin } = auth.session;
     if (!uid) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Invalid token: missing user ID' },
@@ -151,7 +147,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { 
         error: 'Internal server error', 
-        message: error instanceof Error ? error.message : 'Unknown error' 
+        message: 'An unexpected error occurred. Please try again.' 
       },
       { status: 500 }
     );
@@ -160,17 +156,15 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    // Verify Firebase auth using next-firebase-auth-edge
-    const tokens = await getTokens(req.cookies, authConfig);
-    
-    if (!tokens) {
+    const auth = await requireAuth(req);
+    if (!auth.ok) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Authentication required' },
         { status: 401 }
       );
     }
 
-    const uid = tokens.decodedToken.uid;
+    const uid = auth.session.uid;
     if (!uid) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Invalid token: missing user ID' },

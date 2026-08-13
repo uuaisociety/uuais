@@ -3,252 +3,146 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, MessageSquareCode, ArrowUp, Handshake } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { HugeiconsIcon } from '@hugeicons/react';
 import { LinkedinIcon, InstagramIcon } from '@hugeicons/core-free-icons';
-// import { SiInstagram } from '@icons-pack/react-simple-icons';
-import { Button } from "@/components/ui/Button";
-//import { Input } from "@/components/ui/input_old";
+
+const quickLinks = [
+  { href: "/", label: "Home" },
+  { href: "/events", label: "Events" },
+  { href: "/careers", label: "Job board" },
+  { href: "/about", label: "About us" },
+  { href: "/contact", label: "Contact" },
+];
+
+const contacts = [
+  { address: "contact@uuais.com", label: "General" },
+  { address: "partnerships@uuais.com", label: "Partnerships" },
+  { address: "it@uuais.com", label: "Website" },
+];
+
+const partners = [
+  { src: "/images/partners/Uppsala_kommun_Logo_Bl_Yellow_RGB.png", alt: "Uppsala Kommun", link: "https://www.uppsala.se/" },
+  { src: "/images/partners/thalamind_logo.png", alt: "Thalamind", link: "https://www.thalamind.com/" },
+  { src: "/images/partners/vantel_logo.png", alt: "Vantel", link: "https://www.vantel.com/" },
+  { src: "/images/partners/voi_logo.png", alt: "Voi", link: "https://www.voi.com/" },
+  { src: "/images/partners/arkyv-black.svg", alt: "Arkyv", link: "https://www.arkyv.ai/" },
+  { src: "/images/partners/fyris-logga.svg", alt: "Fyris", link: "https://www.fyris.ai/" },
+];
 
 export const Footer: React.FC = () => {
-  // const [email, setEmail] = useState("");
-  // //   const [loading, setLoading] = useState(false);
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-  // const handleNewsletterSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   // setLoading(true);
-
-  //   // Simulate API call
-  //   await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  //   //console.log("Newsletter subscription:", email);
-  //   setEmail("");
-  //   // setLoading(false);
-  //   alert("Thank you for subscribing to our newsletter!");
-  // };
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const linkClass =
+    "text-[0.9375rem] text-muted-foreground hover:text-foreground transition-colors duration-300";
 
   return (
-    <footer className="bg-gray-800 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 text-white transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main footer content */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Brand and Description */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="p-2 rounded-lg">
-                <div className="pl-2 pb-2 rounded-lg">
-                  <div className="flex items-center space-x-2">
-                    <Image
-                      src="/images/logo-highdef.png"
-                      alt="UU AI Society Logo"
-                      width={240}
-                      height={40}
-                      className="mb-1 h-12 w-auto"
-                      priority
-                    />
-                    <span className="font-bold text-xl text-gray-100 dark:text-white">
-                      UU AI Society
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p className="text-gray-300 text-sm">
-              Connecting students passionate about Artificial Intelligence. Join
-              us in exploring the future of technology through hands-on learning
-              and innovation.
-            </p>
-            <div className="flex space-x-4">
-              <a
-                href="https://linkedin.com/company/uu-ai-society"
-                aria-label="LinkedIn"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <HugeiconsIcon icon={LinkedinIcon} className="h-5 w-5" />
-              </a>
-              <a
-                href="https://instagram.com/uuaisociety"
-                aria-label="Instagram"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <HugeiconsIcon icon={InstagramIcon} className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
+    <footer className="mt-24 px-5 sm:px-8">
+      <div className="max-w-6xl mx-auto">
 
-          {/* Quick Links */}
-          <div>
-            <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
-            <ul className="space-y-2">
-              <li><Link href="/" className="text-gray-300 hover:text-white transition-colors">Home</Link></li>
-              <li><Link href="/events" className="text-gray-300 hover:text-white transition-colors">Events</Link></li>
-              {/* <li><Link href="/blog" className="text-gray-300 hover:text-white transition-colors">Newsletter</Link></li> */}
-              <li><Link href="/careers" className="text-gray-300 hover:text-white transition-colors">Job board</Link></li>
-              <li><Link href="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link href="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h2 className="text-lg font-semibold mb-4">Contact</h2>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <Mail className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300 text-sm">
-                  <a href="mailto:contact@uuais.com">contact@uuais.com</a>
-                </span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <MessageSquareCode className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300 text-sm">
-                  <a href="mailto:dev@uuais.com">dev@uuais.com</a>
-                </span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Handshake className="h-4 w-4 text-gray-400" />
-                <span className="text-gray-300 text-sm">
-                  <a href="mailto:partnerships@uuais.com">
-                    partnerships@uuais.com
-                  </a>
-                </span>
-              </div>
-              {/* <div className="flex items-start space-x-3">
-                <MapPin className="h-4 w-4 text-gray-400 mt-0.5" />
-                <span className="text-gray-300 text-sm">
-                  Computer Science Building<br />
-                  University Campus<br />
-                  City, State 12345
-                </span>
-              </div> */}
-            </div>
-          </div>
-
-          {/* Newsletter */}
-          {/* <div>
-            <h3 className="text-lg font-semibold mb-4">Newsletter</h3>
-            <p className="text-gray-300 text-sm mb-4">
-              Stay updated with our latest events and AI insights.
-            </p>
-            <form onSubmit={handleNewsletterSubmit} className="space-y-3">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="bg-gray-800 border-gray-700 text-white placeholder-gray-400"
-              />
-              <Button
-                type="submit"
-                variant="default"
-                size="sm"
-                className="cursor-pointer p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-color sw-full text-white"
-                fullWidth
-                // loading={loading}
-              >
-                Subscribe
-              </Button>
-            </form>
-          </div> */}
-        </div>
-
-        {/* Partners strip */}
-        <div className="py-8 border-t border-gray-900">
-          <h2 className="text-center text-lg font-semibold mb-6 text-gray-100">
-            Our partners
-          </h2>
-          <div className="grid grid-cols-2 [@media(max-width:350px)]:grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  gap-6 items-center">
-            {/* Fill out grid */}
-            {Array.from({ length: 0 }).map((_, idx) => (
-              <div
-                key={idx}
-                className="flex items-center justify-center rounded-lg border border-gray-800 dark:border-gray-900 p-4 h-24"
-              >
-                <div className="w-full h-full bg-gray-800 dark:bg-gray-900 rounded-lg"></div>
-              </div>
-            ))}
-            {[
-              {
-                src: "/images/partners/Uppsala_kommun_Logo_Bl_Yellow_RGB.png",
-                alt: "Uppsala Kommun",
-                link: "https://www.uppsala.se/",
-              },
-              {
-                src: "/images/partners/thalamind_logo.png",
-                alt: "Thalamind",
-                link: "https://www.thalamind.com/",
-              },
-              {
-                src: "/images/partners/vantel_logo.png",
-                alt: "Vantel logo",
-                link: "https://www.vantel.com/",
-              },
-              {
-                src: "/images/partners/voi_logo.png",
-                alt: "Voi logo",
-                link: "https://www.voi.com/",
-              },
-              {
-                src: "/images/partners/arkyv-black.svg",
-                alt: "Arkyv",
-                link: "https://www.arkyv.ai/",
-              },
-              {
-                src: "/images/partners/fyris-logga.svg",
-                alt: "Fyris",
-                link: "https://www.fyris.ai/",
-              },
-            ].map((p) => (
+        {/* Partners */}
+        <div className="pt-16 border-t border-border">
+          <p className="mono-label text-muted-foreground mb-8">Our partners</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {partners.map((p) => (
               <a
                 key={p.alt}
                 href={p.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative flex items-center justify-center bg-gray-300 rounded-lg border border-gray-800 h-24 hover:bg-gray-200 transition-colors"
+                className="glass glass-interactive rounded-md h-20 flex items-center justify-center px-4"
               >
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <Image
-                    src={p.src}
-                    alt={p.alt}
-                    loading="lazy"
-                    width={190}
-                    height={80}
-                    className="object-contain max-h-[80px] md:max-h-[100px] p-2 opacity-80 hover:opacity-100 transition-opacity"
-                  />
-                </div>
+                <Image
+                  src={p.src}
+                  alt={p.alt}
+                  loading="lazy"
+                  width={190}
+                  height={80}
+                  className="object-contain max-h-[44px] w-auto opacity-60 hover:opacity-100 transition-opacity duration-300 dark:invert dark:brightness-0 dark:opacity-70"
+                />
               </a>
             ))}
           </div>
         </div>
 
+        {/* Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr] gap-12 py-16 mt-16 border-t border-border">
+          <div>
+            <div className="flex items-center gap-2 mb-5">
+              <Image
+                src="/images/logo-highdef.png"
+                alt=""
+                width={40}
+                height={40}
+                className="h-9 w-9"
+              />
+              <span className="text-base font-semibold tracking-[-0.03em]">UU AI Society</span>
+            </div>
+            <p className="text-[0.9375rem] leading-relaxed text-muted-foreground max-w-xs mb-7">
+              Connecting students passionate about artificial intelligence — through hands-on
+              learning, events, and the people building it.
+            </p>
+            <div className="flex gap-2">
+              <a
+                href="https://linkedin.com/company/uu-ai-society"
+                aria-label="LinkedIn"
+                className="size-10 grid place-items-center rounded-full border border-border text-foreground/55 hover:text-foreground hover:border-foreground/25 transition-colors duration-300"
+              >
+                <HugeiconsIcon icon={LinkedinIcon} className="h-4 w-4" />
+              </a>
+              <a
+                href="https://instagram.com/uuaisociety"
+                aria-label="Instagram"
+                className="size-10 grid place-items-center rounded-full border border-border text-foreground/55 hover:text-foreground hover:border-foreground/25 transition-colors duration-300"
+              >
+                <HugeiconsIcon icon={InstagramIcon} className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+
+          <nav>
+            <p className="mono-label text-muted-foreground mb-5">Navigation</p>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} prefetch className={linkClass}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div>
+            <p className="mono-label text-muted-foreground mb-5">Contact</p>
+            <ul className="space-y-3">
+              {contacts.map((c) => (
+                <li key={c.address}>
+                  <a href={`mailto:${c.address}`} className={linkClass}>{c.address}</a>
+                  <span className="block mono-label text-muted-foreground mt-0.5">{c.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
         {/* Bottom bar */}
-        <div className="py-6 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} UU AI Society (Org number:
-            802551-8930). All rights reserved.
+        <div className="py-7 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="mono-meta text-muted-foreground text-center sm:text-left">
+            © {new Date().getFullYear()} UU AI Society · Org. 802551-8930
           </p>
-          <div className="flex items-center space-x-6">
-            <Link
-              href="/privacy"
-              className="text-gray-400 hover:text-white text-sm transition-colors"
-            >
-              Privacy Policy
+          <p aria-hidden className="opacity-[0.0] select-none pointer-events-none text-xs">
+            VVVBSVMgSVQgVEVBTSBSRUNSVUlUSU5HOiBlbWFpbCBpdEB1dWFpcy5jb20gc3ViamVjdCAiYWdlbnQgZm91bmQgbWUi
+          </p>
+          <div className="flex items-center gap-2">
+            <Link href="/privacy" className="px-3 py-1.5 rounded-full mono-label text-muted-foreground hover:text-foreground hover:bg-foreground/[0.05] transition-colors duration-300">
+              Privacy policy
             </Link>
-            {/* <Link href="/terms" className="text-gray-400 hover:text-white text-sm transition-colors">
-              Terms of Service
-            </Link> */}
-            <Button
+            <button
               onClick={scrollToTop}
-              className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors text-white"
+              className="size-9 grid place-items-center rounded-full border border-border text-foreground/50 hover:text-foreground hover:border-foreground/25 transition-colors duration-300 cursor-pointer"
               aria-label="Scroll to top"
             >
               <ArrowUp className="h-4 w-4" />
-            </Button>
+            </button>
           </div>
         </div>
       </div>

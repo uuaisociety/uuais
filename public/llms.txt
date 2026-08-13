@@ -1,0 +1,31 @@
+# UU AI Society (UUAIS)
+
+> UU AI Society is the student-run Artificial Intelligence society in Uppsala, Sweden, uniting students driven by AI, tech, and meaningful collaboration through workshops, guest lectures, hackathons, and networking. Membership is free.
+
+Key facts:
+- Location: Uppsala, Sweden
+- Organization: student-led non-profit run entirely by volunteer students
+- Membership: free and open to all students
+- Pillars: AI knowledge, Community, Innovation, Industry connections
+- Events: workshops, guest lectures, hackathons, seminars, and networking
+- Contact: contact@uuais.com (general), it@uuais.com (website), dev@uuais.com (development), partnerships@uuais.com (partnerships), research@uuais.com (research)
+- Website: https://uuais.com
+
+## Sections
+- [Home](https://uuais.com): Landing page — upcoming events, why to join, and membership CTA.
+- [About](https://uuais.com/about): Mission, vision, pillars, and the team behind UU AI Society.
+- [Events](https://uuais.com/events): Upcoming and past AI workshops, guest lectures, hackathons, and networking events.
+- [Blog](https://uuais.com/blog): Newsletter and articles published by the society.
+- [Careers](https://uuais.com/careers): Job board with internships, master's thesis roles, startup openings, and jobs.
+- [Projects](https://uuais.com/projects): Community-built projects, including the Course Navigator.
+- [Course Navigator](https://uuais.com/projects/course-navigator): AI-powered tool for navigating Uppsala University courses.
+- [Explore Courses](https://uuais.com/explore): Search all Uppsala University courses and get natural-language AI recommendations.
+- [My Courses](https://uuais.com/my-courses): Save favorite courses and organize them into custom groups (sign-in required).
+- [Study Plan](https://uuais.com/study-plan): Visualize degree pathways and course prerequisites (in development).
+- [Join](https://uuais.com/join): Become a member — free membership and newsletter signup.
+- [Apply](https://uuais.com/apply): Open team roles and board position applications.
+- [Contact](https://uuais.com/contact): FAQ and contact details for general, website, partnership, development, and research inquiries.
+- [Privacy](https://uuais.com/privacy): Privacy policy.
+
+## Optional
+- [Full site content](https://uuais.com/llms-full.txt): Full-text version of this site's content for agents needing more detail.

@@ -397,7 +397,7 @@ describe('EventRegistrationDialog', () => {
     });
 
     it('renders all question types in the dialog', async () => {
-      const { container } = render(<EventRegistrationDialog event={createEvent()} />);
+      render(<EventRegistrationDialog event={createEvent()} />);
       await simulateAuth(mockUser);
 
       const questions: EventCustomQuestion[] = [
@@ -458,13 +458,14 @@ describe('EventRegistrationDialog', () => {
       expect(screen.getByText('Choose radio')).toBeInTheDocument();
       expect(screen.getByText('Check all')).toBeInTheDocument();
 
-      // Check input types via container queries (labels lack htmlFor, so
-      // inputs have no accessible name — role queries won't work here)
-      expect(container.querySelector('input[type="text"]')).toBeInTheDocument();
-      expect(container.querySelector('textarea')).toBeInTheDocument();
-      expect(container.querySelector('select')).toBeInTheDocument();
-      expect(container.querySelector('input[type="radio"]')).toBeInTheDocument();
-      expect(container.querySelector('input[type="checkbox"]')).toBeInTheDocument();
+      // Check input types via document queries (labels lack htmlFor, so inputs
+      // have no accessible name — role queries won't work here; the dialog is
+      // portaled to document.body so container.querySelector cannot see it)
+      expect(document.querySelector('input[type="text"]')).toBeInTheDocument();
+      expect(document.querySelector('textarea')).toBeInTheDocument();
+      expect(document.querySelector('select')).toBeInTheDocument();
+      expect(document.querySelector('input[type="radio"]')).toBeInTheDocument();
+      expect(document.querySelector('input[type="checkbox"]')).toBeInTheDocument();
     });
 
     it('shows required indicator on required questions', async () => {

@@ -3,9 +3,10 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { type UserProfile, listUsers, updateUserProfile, deleteUser } from "@/lib/firestore";
 import { Button } from "@/components/ui/Button";
+import { Modal } from "@/components/ui/Modal";
 import TableControls, { TablePagination } from '@/components/ui/TableControls';
 import { useNotify } from "@/components/ui/Notifications";
-import { Download } from 'lucide-react';
+import { Download, Trash2} from 'lucide-react';
 
 type EditableUser = UserProfile & Record<string, unknown>;
 
@@ -53,6 +54,34 @@ function downloadCsv(users: EditableUser[]) {
   a.click();
   URL.revokeObjectURL(url);
 }
+
+type SortableThProps = {
+  column: string;
+  sortKey: string | null;
+  sortDir: 'asc' | 'desc';
+  onToggle: (key: string) => void;
+  children: React.ReactNode;
+};
+
+const SortableTh: React.FC<SortableThProps> = ({ column, sortKey, sortDir, onToggle, children }) => (
+  <th
+    className="py-2 pr-4"
+    aria-sort={sortKey === column ? (sortDir === 'asc' ? 'ascending' : 'descending') : undefined}
+  >
+    <button
+      type="button"
+      onClick={() => onToggle(column)}
+      className="inline-flex items-center gap-1 cursor-pointer"
+    >
+      {children}
+      {sortKey === column && (
+        <span aria-hidden="true" className="text-xs text-gray-400 dark:text-gray-500">
+          {sortDir === 'asc' ? '▲' : '▼'}
+        </span>
+      )}
+    </button>
+  </th>
+);
 
 export default function MembersTab({ onChanged }: MembersTabProps) {
   const { notify } = useNotify();
@@ -201,22 +230,13 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
     };
 
     return (
-      <div
-        className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
-        onClick={close}
+      <Modal
+        open={!!selected}
+        onClose={close}
+        title={`Edit User: ${selected.displayName || selected.name || selected.email}`}
+        size="lg"
       >
-        <div
-          className="bg-white dark:bg-gray-900 rounded-lg w-full max-w-3xl p-6 max-h-[90vh] overflow-y-auto"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Edit User: {selected.displayName || selected.name || selected.email}
-            </h3>
-            <Button onClick={close}>Close</Button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {keys.map((k) => {
               const val = getValue(k);
               // Show booleans using checkbox regardless of draft presence
@@ -301,11 +321,11 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
 
           <div className="mt-4 flex justify-between">
             <Button
-              className="px-3 py-2 text-red-600 border border-red-600 rounded-md"
+              variant="destructive"
               onClick={onDelete}
               disabled={deleting || saving}
             >
-              {deleting ? 'Deleting...' : 'Delete'}
+              <Trash2 className="h-4 w-4" aria-hidden /> {deleting ? 'Deleting...' : 'Delete'}
             </Button>
             <div className="flex gap-2">
               <Button className="px-3 py-2 border rounded-md" onClick={close} disabled={saving || deleting}>
@@ -320,8 +340,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
               </Button>
             </div>
           </div>
-        </div>
-      </div>
+      </Modal>
     );
   };
 
@@ -340,13 +359,13 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
       <div className="flex items-center justify-between flex-wrap gap-2">
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Members</h2>
         <div className="flex items-center gap-2">
-          <Button size="sm" variant="outline" icon={Download} onClick={() => downloadCsv(users)}>
+          <Button variant="outline" icon={Download} onClick={() => downloadCsv(users)}>
             CSV
           </Button>
           <TableControls
             filter={filter}
             setFilter={setFilter}
-            loading={loading}
+            loading={loading} 
             onRefresh={refresh}
           />
         </div>
@@ -356,13 +375,13 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
         <table className="min-w-full text-left text-sm">
           <thead className="text-gray-600 dark:text-gray-300">
             <tr>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('name')}>Name</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('email')}>Email</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('isMember')}>Member</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('campus')}>Campus</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('program')}>Program</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('university')}>University</th>
-              <th className="py-2 pr-4 cursor-pointer" onClick={() => toggleSort('updatedAt')}>Updated</th>
+              <SortableTh column="name" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Name</SortableTh>
+              <SortableTh column="email" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Email</SortableTh>
+              <SortableTh column="isMember" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Member</SortableTh>
+              <SortableTh column="campus" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Campus</SortableTh>
+              <SortableTh column="program" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Program</SortableTh>
+              <SortableTh column="university" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>University</SortableTh>
+              <SortableTh column="updatedAt" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Updated</SortableTh>
               <th className="py-2 pr-4"></th>
             </tr>
           </thead>
@@ -393,7 +412,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
                   <td className="py-2 pr-4">{m.university || "-"}</td>
                   <td className="py-2 pr-4">{m.updatedAt ? new Date(m.updatedAt).toLocaleDateString() : "-"}</td>
                   <td className="py-2 pr-4">
-                    <Button onClick={() => open(m)}>
+                    <Button variant="outline" onClick={() => open(m)}>
                       Edit
                     </Button>
                   </td>

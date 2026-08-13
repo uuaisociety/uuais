@@ -41,18 +41,18 @@ export default function PDFDropzone({ file, onChange, onError }: PDFDropzoneProp
 
   if (file) {
     return (
-      <div className="flex items-center gap-3 p-3 rounded-md border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
-        <FileText className="h-5 w-5 text-red-600 dark:text-red-400 shrink-0" />
+      <div className="flex items-center gap-3 p-3 rounded-md border border-border bg-card/70">
+        <FileText className="h-5 w-5 text-primary shrink-0" />
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{file.name}</p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-sm font-medium text-foreground truncate">{file.name}</p>
+          <p className="text-xs text-muted-foreground">
             {(file.size / 1024 / 1024).toFixed(2)} MB · PDF
           </p>
         </div>
         <button
           type="button"
           onClick={() => onChange(null)}
-          className="text-sm text-red-600 dark:text-red-400 hover:underline shrink-0"
+          className="text-sm text-primary hover:underline shrink-0"
         >
           Remove
         </button>
@@ -62,14 +62,23 @@ export default function PDFDropzone({ file, onChange, onError }: PDFDropzoneProp
 
   return (
     <div
+      role="button"
+      tabIndex={0}
+      aria-label="Upload resume"
       onDrop={handleDrop}
       onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
       onDragLeave={() => setDragging(false)}
       onClick={() => inputRef.current?.click()}
-      className={`w-full border-2 border-dashed rounded-md p-5 flex items-center justify-center gap-3 cursor-pointer transition-colors duration-200 ${
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          inputRef.current?.click();
+        }
+      }}
+      className={`w-full border-2 border-dashed rounded-md p-5 flex items-center justify-center gap-3 cursor-pointer transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
         dragging
-          ? "border-red-500 bg-red-50/50 dark:bg-red-950/20"
-          : "border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600"
+          ? "border-primary bg-primary/10"
+          : "border-border hover:border-border hover:border-foreground/30"
       }`}
     >
       <input
@@ -79,11 +88,11 @@ export default function PDFDropzone({ file, onChange, onError }: PDFDropzoneProp
         className="hidden"
         onChange={handleChange}
       />
-      <Upload className="h-5 w-5 text-gray-500 dark:text-gray-400" />
-      <div className="text-sm text-gray-600 dark:text-gray-300">
+      <Upload className="h-5 w-5 text-muted-foreground" />
+      <div className="text-sm text-muted-foreground">
         Drag & drop your resume here, or{" "}
-        <span className="text-blue-600 dark:text-blue-400 underline">browse</span>
-        <span className="block text-xs text-gray-400 dark:text-gray-500 mt-0.5">PDF, max 3MB</span>
+        <span className="text-primary underline">browse</span>
+        <span className="block text-xs text-muted-foreground mt-0.5">PDF, max 3MB</span>
       </div>
     </div>
   );

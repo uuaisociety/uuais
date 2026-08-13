@@ -123,28 +123,35 @@ export const subscribeToEventRegistrations = (
 ) => {
   const regRef = collection(db, 'registrations');
   const qy = query(regRef, where('eventId', '==', eventId));
-  return onSnapshot(qy, (snapshot) => {
-    const regs: EventRegistration[] = snapshot.docs.map((d) => {
-      const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
-      const ts = data?.registeredAt;
-      const registeredAt = ts instanceof Timestamp ? ts.toDate().toISOString() : '';
-      const registrationData = (data?.registrationData ?? {}) as EventRegistration['registrationData'];
-      return {
-        id: d.id,
-        eventId: data?.eventId ?? '',
-        userId: data?.userId ?? '',
-        registrationData,
-        registeredAt,
-        status: (data?.status ?? 'registered') as EventRegistration['status'],
-        userName: (data?.userName ?? null) as EventRegistration['userName'],
-        userEmail: (data?.userEmail ?? null) as EventRegistration['userEmail'],
-        selectedAt: (data?.selectedAt ?? null) as EventRegistration['selectedAt'],
-        confirmedAt: (data?.confirmedAt ?? null) as EventRegistration['confirmedAt'],
-        confirmationToken: (data?.confirmationToken ?? null) as EventRegistration['confirmationToken'],
-      } as EventRegistration;
-    });
-    callback(regs);
-  });
+  return onSnapshot(
+    qy,
+    (snapshot) => {
+      const regs: EventRegistration[] = snapshot.docs.map((d) => {
+        const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
+        const ts = data?.registeredAt;
+        const registeredAt = ts instanceof Timestamp ? ts.toDate().toISOString() : '';
+        const registrationData = (data?.registrationData ?? {}) as EventRegistration['registrationData'];
+        return {
+          id: d.id,
+          eventId: data?.eventId ?? '',
+          userId: data?.userId ?? '',
+          registrationData,
+          registeredAt,
+          status: (data?.status ?? 'registered') as EventRegistration['status'],
+          userName: (data?.userName ?? null) as EventRegistration['userName'],
+          userEmail: (data?.userEmail ?? null) as EventRegistration['userEmail'],
+          selectedAt: (data?.selectedAt ?? null) as EventRegistration['selectedAt'],
+          confirmedAt: (data?.confirmedAt ?? null) as EventRegistration['confirmedAt'],
+          confirmationToken: (data?.confirmationToken ?? null) as EventRegistration['confirmationToken'],
+        } as EventRegistration;
+      });
+      callback(regs);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 };
 
 export const registerForEvent = async (

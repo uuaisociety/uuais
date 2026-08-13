@@ -30,17 +30,22 @@ export const deleteTeamMember = async (id: string): Promise<void> => {
   await deleteDoc(memberRef);
 };
 
-/** Move a team member up or down in the order */
-export const moveTeamMember = async (members: TeamMember[], memberId: string, direction: 'up' | 'down'): Promise<void> => {
+/** Move a team member up or down in the order, optionally scoped to a single year */
+export const moveTeamMember = async (members: TeamMember[], memberId: string, direction: 'up' | 'down', year?: number): Promise<void> => {
   const sorted = [...members].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-  const currentIndex = sorted.findIndex(m => m.id === memberId);
+  const scoped = year ? sorted.filter(m => m.years?.includes(year)) : sorted;
+  const currentIndex = scoped.findIndex(m => m.id === memberId);
   if (currentIndex === -1) return;
 
   const newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
-  if (newIndex < 0 || newIndex >= sorted.length) return;
+  if (newIndex < 0 || newIndex >= scoped.length) return;
+
+  const other = scoped[newIndex];
 
   const reordered = [...sorted];
-  [reordered[currentIndex], reordered[newIndex]] = [reordered[newIndex], reordered[currentIndex]];
+  const i1 = reordered.findIndex(m => m.id === memberId);
+  const i2 = reordered.findIndex(m => m.id === other.id);
+  [reordered[i1], reordered[i2]] = [reordered[i2], reordered[i1]];
 
   const batch = writeBatch(db);
   reordered.forEach((member, index) => {
@@ -53,8 +58,15 @@ export const moveTeamMember = async (members: TeamMember[], memberId: string, di
 export const subscribeToTeamMembers = (callback: (members: TeamMember[]) => void) => {
   const membersRef = collection(db, 'teamMembers');
   const q = query(membersRef, orderBy('order', 'asc'));
-  return onSnapshot(q, (snapshot) => {
-    const members = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as TeamMember));
-    callback(members);
-  });
+  return onSnapshot(
+    q,
+    (snapshot) => {
+      const members = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as TeamMember));
+      callback(members);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 };

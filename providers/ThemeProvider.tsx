@@ -1,8 +1,6 @@
 'use client'
-// setState in useEffect is intentional - need to set mounted flag after hydration
-/* eslint-disable react-hooks/set-state-in-effect */
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { useIsomorphicLayoutEffect } from '@/hooks/use-isomorphic-layout-effect'
 
 type Theme = 'light' | 'dark'
@@ -14,37 +12,30 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('dark') // Set default theme
-  const [mounted, setMounted] = useState(false)
+function getInitialTheme(): Theme {
+  if (typeof window === 'undefined') return 'dark'
+  const saved = window.localStorage.getItem('theme')
+  if (saved === 'light' || saved === 'dark') return saved
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
 
-  // Initialize theme on mount
-  useEffect(() => {
-    setMounted(true)
-    if (typeof window !== 'undefined') {
-      const savedTheme = window?.localStorage?.getItem('theme') as Theme
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-      setTheme(savedTheme || systemTheme)
-    }
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<Theme>('dark') // deterministic default, matches SSR render
+
+  // Resolve saved/system theme after hydration, before the browser paints
+  useIsomorphicLayoutEffect(() => {
+    setTheme(getInitialTheme())
   }, [])
 
+  // Apply the theme class on <html> before paint and on every toggle
   useIsomorphicLayoutEffect(() => {
-    if (!mounted) return
-    
-    if (typeof document !== 'undefined') {
-      document.documentElement.classList.remove('light', 'dark')
-      document.documentElement.classList.add(theme)
-      window?.localStorage?.setItem('theme', theme)
-    }
-  }, [theme, mounted])
+    document.documentElement.classList.remove('light', 'dark')
+    document.documentElement.classList.add(theme)
+    window.localStorage.setItem('theme', theme)
+  }, [theme])
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark')
-  }
-
-  // Prevent flash of incorrect theme
-  if (!mounted) {
-    return null
   }
 
   return (

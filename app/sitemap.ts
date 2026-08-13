@@ -1,9 +1,11 @@
 import { MetadataRoute } from 'next'
+import { SITE_URL } from './metadata'
+import { getPublicSeed } from '@/lib/server-data'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://uuais.com'
+  const baseUrl = SITE_URL
 
-  const routes = [
+  const routes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -53,6 +55,42 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.4,
     },
     {
+      url: `${baseUrl}/explore`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/projects`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/projects/course-navigator`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/apply`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/apply/team`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/board-apply`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    },
+    {
       url: `${baseUrl}/privacy`,
       lastModified: new Date(),
       changeFrequency: 'yearly' as const,
@@ -60,5 +98,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  return routes
+  // Dynamic published event URLs, reusing the public seed (degrades to empty if Firestore is unreachable).
+  let eventRoutes: MetadataRoute.Sitemap = []
+  try {
+    const seed = await getPublicSeed()
+    eventRoutes = seed.events
+      .filter((e) => e.published && e.eventStartAt && new Date(e.eventStartAt) > new Date())
+      .map((e) => ({
+        url: `${baseUrl}/events/${e.id}`,
+        lastModified: new Date(),
+        changeFrequency: 'daily' as const,
+        priority: 0.7,
+      }))
+  } catch {
+    // sitemap still serves the static routes
+  }
+
+  return [...routes, ...eventRoutes]
 }

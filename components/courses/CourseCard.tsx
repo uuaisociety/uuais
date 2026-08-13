@@ -16,6 +16,7 @@ type Props = {
   hrefBase?: string;
   initialFavorited?: boolean;
   onFavoriteChange?: (isFavorited: boolean) => void;
+  children?: React.ReactNode;
 };
 
 export default function CourseCard({
@@ -23,6 +24,7 @@ export default function CourseCard({
   hrefBase = "/course",
   initialFavorited = false,
   onFavoriteChange,
+  children,
 }: Props) {
   const [isFavorited, setIsFavorited] = useState(initialFavorited);
   const [user, setUser] = useState<{ uid: string } | null>(null);
@@ -78,7 +80,7 @@ export default function CourseCard({
   };
 
   return (
-    <Card className="h-full hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+    <Card className="h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
       <CardContent className="p-6 flex flex-col h-full">
         <div className="mb-3">
           <div className="flex items-start justify-between gap-2">
@@ -120,9 +122,12 @@ export default function CourseCard({
         </div>
         <div className="mt-auto flex items-center gap-2">
           <Link href={`${hrefBase}/${course.id}`} className="flex-1">
-            <Button className="bg-[#990000] hover:bg-[#7f0000] text-white w-full">View Details</Button>
+            <Button variant="outline" className="w-full">
+              View Details
+            </Button>
           </Link>
         </div>
+        {children}
       </CardContent>
     </Card>
   );

@@ -5,6 +5,10 @@ jest.mock('@vercel/analytics/next', () => ({
   Analytics: () => <div data-testid="analytics">Analytics</div>,
 }))
 
+jest.mock('@vercel/speed-insights/next', () => ({
+  SpeedInsights: () => <div data-testid="speed-insights">SpeedInsights</div>,
+}))
+
 const mockUseCookieConsent = jest.fn()
 jest.mock('@/contexts/CookieConsentContext', () => ({
   useCookieConsent: () => mockUseCookieConsent(),

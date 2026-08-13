@@ -1,11 +1,11 @@
-import { collection, query, orderBy, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, setDoc, serverTimestamp, DocumentData, onSnapshot } from 'firebase/firestore';
+import { collection, query, orderBy, where, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, setDoc, serverTimestamp, DocumentData, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 import { BlogPost } from '@/types';
 import { stripUndefined } from './utils';
 
 export const getBlogPosts = async (): Promise<BlogPost[]> => {
   const postsRef = collection(db, 'blogPosts');
-  const q = query(postsRef, orderBy('date', 'desc'));
+  const q = query(postsRef, where('published', '==', true), orderBy('date', 'desc'));
   const snapshot = await getDocs(q);
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as BlogPost));
 };
@@ -39,12 +39,23 @@ export const deleteBlogPost = async (id: string): Promise<void> => {
   await deleteDoc(postRef);
 };
 
-export const subscribeToBlogPosts = (callback: (posts: BlogPost[]) => void) => {
+export const subscribeToBlogPosts = (
+  callback: (posts: BlogPost[]) => void,
+  options?: { includeUnpublished?: boolean }
+) => {
   const postsRef = collection(db, 'blogPosts');
-  const q = query(postsRef, orderBy('date', 'desc'));
+  // If includeUnpublished is true (admin), query without the published filter.
+  // Otherwise, restrict to published == true so public listeners don't request
+  // forbidden documents and trigger permission-denied errors.
+  const q = options && options.includeUnpublished
+    ? query(postsRef, orderBy('date', 'desc'))
+    : query(postsRef, where('published', '==', true), orderBy('date', 'desc'));
   return onSnapshot(q, (snapshot) => {
     const posts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as BlogPost));
     callback(posts);
+  }, (error) => {
+    console.error('Firestore subscription failed:', error);
+    callback([]);
   });
 };
 

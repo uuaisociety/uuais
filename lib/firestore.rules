@@ -7,7 +7,7 @@ service cloud.firestore {
     }
 
     function isAdmin() {
-      return isSignedIn() && request.auth.token.admin == true;
+      return isSignedIn() && (request.auth.token.admin == true || request.auth.token.superAdmin == true);
     }
 
     function isSuperAdmin() {
@@ -21,6 +21,13 @@ service cloud.firestore {
 
     function isMember() {
       return isSignedIn() && callerProfile().data.isMember == true;
+    }
+
+    // Helper: users may only write their email when it matches the verified auth email (or omit it); allow if unverifiable
+    function emailMatchesAuth() {
+      return !('email' in request.resource.data)
+        || request.auth.token.email == null
+        || request.resource.data.email == request.auth.token.email;
     }
 
     // Helper: limit updates to only specific keys
@@ -55,15 +62,18 @@ service cloud.firestore {
 
       // Create own document at first sign-in or profile completion
       allow create: if isSignedIn() && request.auth.uid == uid
+        && emailMatchesAuth()
         // Limit client-writable fields; prevent role escalation
         && request.resource.data.keys().hasOnly([
           'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails','eventHistory'
         ]);
 
-      // Update own doc but cannot alter privileged fields except allowed ones
+      // Update own doc but cannot alter privileged fields except allowed ones.
+      // isMember is admin-managed: users set it once at create, then only admins may change it.
       allow update: if isSignedIn() && request.auth.uid == uid
+        && emailMatchesAuth()
         && request.resource.data.keys().hasOnly([
-          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails','eventHistory'
+          'displayName','email','photoURL','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails','eventHistory'
         ]);
 
       // Admin full control
@@ -88,8 +98,7 @@ service cloud.firestore {
     }
 
     // TEAM MEMBERS
-    // NOTE: `notes` field is admin-only per UI convention but publicly readable
-    // via client SDK since the whole collection is world-readable. Treat accordingly.
+    // NOTE: `notes` field is admin-only per UI convention but publicly readable via client SDK (collection is world-readable)
     match /teamMembers/{id} {
       allow read: if true;
       allow create, update, delete: if isAdmin();
@@ -168,11 +177,11 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
-    // TEAM APPLICATIONS (submissions; API writes via Admin SDK — client read/delete admin-only)
-    match /teamApplications/{applicationId} {
-      allow read: if isAdmin();
+    // TEAM APPLICATIONS (API writes via Admin SDK — admins read/delete all, applicants read their own)
+   match /teamApplications/{applicationId} {
+      allow read: if isAdmin() || (isSignedIn() && resource.data.uid == request.auth.uid);
       allow create, update, delete: if isAdmin();
-    }
+   }
 
     // REGISTRATION QUESTIONS (global)
     match /registrationQuestions/{rqId} {
@@ -271,12 +280,24 @@ service cloud.firestore {
       allow read: if isAdmin();
 
       // Create initial doc with clicks:1
-      allow create: if request.resource.data.keys().hasOnly(['clicks', 'updatedAt'])
+      allow create: if request.resource.data.keys().hasOnly(['clicks', 'externalRegistrationClicks', 'updatedAt'])
         && request.resource.data.clicks == 1;
 
-      // Update: only clicks (+1) and updatedAt allowed
-      allow update: if changedOnly(['clicks', 'updatedAt'])
-        && request.resource.data.clicks == resource.data.clicks + 1;
+      // Update: only clicks (+1) or externalRegistrationClicks (+1) and updatedAt allowed
+      allow update: if changedOnly(['clicks', 'externalRegistrationClicks', 'updatedAt'])
+        && (
+          (
+            request.resource.data.clicks == resource.data.clicks + 1
+            && request.resource.data.externalRegistrationClicks == resource.data.externalRegistrationClicks
+          )
+          || (
+            // Allow increment when externalRegistrationClicks was previously missing/null
+            // (treat as 0) or when it's explicitly incremented by +1.
+            (resource.data.externalRegistrationClicks == null && request.resource.data.externalRegistrationClicks == 1)
+            || request.resource.data.externalRegistrationClicks == resource.data.externalRegistrationClicks + 1
+          )
+          && request.resource.data.clicks == resource.data.clicks
+        );
 
       // No deletes from clients
       allow delete: if isAdmin();
@@ -357,8 +378,9 @@ service cloud.firestore {
 
     // CONFIG - application configuration (embedding projections, prerequisite graph, etc.)
     match /config/{configId} {
+      // ai_settings is intentionally superadmin-only (see its own rule above)
       allow read: if true;
-      allow write: if isAdmin();
+      allow write: if isAdmin() && configId != 'ai_settings';
     }
 
     // TRANSCRIPT DATA - user-uploaded academic records (privacy-first)

@@ -46,9 +46,16 @@ export const deleteBoardApplication = async (id: string): Promise<void> => {
 
 export const subscribeToBoardApplications = (callback: (applications: BoardApplication[]) => void) => {
   const ref = collection(db, 'boardApplications');
-  return onSnapshot(ref, (snapshot) => {
-    const list = snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as BoardApplication));
-    list.sort((a, b) => applicationSortKey(b.createdAt) - applicationSortKey(a.createdAt));
-    callback(list);
-  });
+  return onSnapshot(
+    ref,
+    (snapshot) => {
+      const list = snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as BoardApplication));
+      list.sort((a, b) => applicationSortKey(b.createdAt) - applicationSortKey(a.createdAt));
+      callback(list);
+    },
+    (error) => {
+      console.error('Firestore subscription failed:', error);
+      callback([]);
+    }
+  );
 };

@@ -13,7 +13,7 @@ permission:
 # review-pr — Structured PR & Branch Review
 
 ## Skills to Load
-Load these skills before starting: `staff-engineer-review`, `react-doctor`, `next-best-practices`, `vercel-react-best-practices`, `code-security-auditor`
+Load these skills before starting: `staff-engineer-review`, `react-doctor`, `next-best-practices`, `vercel-react-best-practices`, `code-security-auditor`, `firebase-security-rules-auditor`, `api-security-review`
 
 ## Workflow
 
@@ -40,6 +40,8 @@ Compare the PR/commits description against actual changes using the `staff-engin
 ### 5. Code Quality & Correctness
 - Naming, readability, complexity, edge cases, error handling
 - Security vulnerabilities (injection, auth, data exposure) using `code-security-auditor` patterns
+- Audit `lib/firestore.rules` and `lib/storage.rules` with `firebase-security-rules-auditor` (privilege escalation, role bypasses, create vs update inconsistencies)
+- Audit `app/api/*` route handlers with `api-security-review` (BOLA/IDOR, broken auth, input validation, mass assignment)
 - React/Next.js specific: RSC boundaries, `'use client'` correctness, hydration errors
 
 ### 6. Performance Review

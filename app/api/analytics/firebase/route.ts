@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { GoogleAuth } from 'google-auth-library';
+import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 
 /**
  * GET /api/analytics/firebase
@@ -63,7 +65,10 @@ const METRICS = [
 
 const DIMENSIONS = ['date'];
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
+  const auth = await requireAdmin(request);
+  if (!auth.ok) return authFailureResponse(auth.reason);
+
   const { searchParams } = new URL(request.url);
   const debug = searchParams.get('debug') === 'true';
 
