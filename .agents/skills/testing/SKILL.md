@@ -25,7 +25,7 @@ Comprehensive testing specialist for the UUAIS project (Jest + Next.js + TypeScr
 
 - **Framework:** Jest (see `jest.config.ts`, `jest.setup.ts` in root — fully default config)
 - **Stack:** Next.js 16 + TypeScript + Firebase
-- **Run:** `npm test` (54 test suites, 529+ tests)
+- **Run:** `npm test` `npm run test:integration` `npm run test:e2e`
 - **Admin scripts:** ts-node, require `GOOGLE_APPLICATION_CREDENTIALS`
 
 ## Quick-Start Example (Jest)
