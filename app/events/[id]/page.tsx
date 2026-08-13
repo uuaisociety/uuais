@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { Tag as UiTag } from "@/components/ui/Tag";
 import { ArrowLeft, Calendar, Clock, MapPin, Tag } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -87,17 +88,11 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
             <h1 className="text-4xl font-bold text-foreground">
               {event.title}
             </h1>
-            <span
-              className={`pill ${
-                isUpcoming
-                  ? "bg-primary/10 text-[#c41d1d]"
-                  : isPastEvent
-                  ? "bg-foreground/8 text-muted-foreground"
-                  : "bg-primary/10 text-[#c41d1d]"
-              }`}
-            >
-              {isUpcoming ? "Upcoming" : isPastEvent ? "Past Event" : "Today"}
-            </span>
+            {isUpcoming || !isPastEvent ? (
+              <UiTag variant="red">{isUpcoming ? "Upcoming" : "Today"}</UiTag>
+            ) : (
+              <UiTag variant="gray">Past Event</UiTag>
+            )}
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 text-muted-foreground mb-6">
