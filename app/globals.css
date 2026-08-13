@@ -473,6 +473,12 @@
   /* Parenthesised accent word: "(Upcoming) Events" */
   .paren { color: var(--primary); font-weight: 400; }
 
+  /* Skip rendering below-fold sections until they near the viewport (intrinsic size reserves space). */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 480px;
+  }
+
   /* --- Surfaces & chrome ------------------------------------------------- */
 
   .hairline { border-color: var(--border); }
