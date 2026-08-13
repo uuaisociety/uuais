@@ -12,7 +12,8 @@ import { AnalyticsWithConsent } from '@/components/common/AnalyticsWithConsent';
 // import UpcomingEventsBanner from '@/components/common/UpcomingEventsBanner';
 
 // import { metadata, viewport } from "./metadata";
-export { metadata, viewport } from "./metadata";;
+export { metadata, viewport } from "./metadata";
+import { SITE_URL } from "./metadata";
 
 
 // Background texture layer — flip between "grain", "vignette", or "none" to compare.
@@ -44,15 +45,30 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body className={`${display.variable} ${mono.variable} font-sans bg-background text-foreground min-h-screen`}>
-        <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://storage.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://www.gstatic.com" crossOrigin="anonymous" />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground"
         >
           Skip to content
         </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'UU AI Society',
+              url: SITE_URL,
+              logo: `${SITE_URL}/images/logo-highdef.png`,
+              description: 'UU AI Society - Connecting students passionate about Artificial Intelligence in Uppsala',
+              email: 'contact@uuais.com',
+              sameAs: [
+                'https://linkedin.com/company/uu-ai-society',
+                'https://instagram.com/uuaisociety',
+              ],
+            }),
+          }}
+        />
         <Providers>
           <NotificationsProvider>
             <AppProvider seed={seed}>
