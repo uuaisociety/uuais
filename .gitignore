@@ -20,6 +20,12 @@
 /dataconnect-generated/js*
 *.log
 
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
 # next.js
 /.next/
 /out/
@@ -96,3 +102,8 @@ next-env.d.ts
 
 # API Keys used in scraper
 /course_scraper/api_keys
+
+# Python
+__pycache__/
+*.pyc
+.venv/

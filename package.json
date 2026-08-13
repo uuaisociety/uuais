@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "postbuild": "node scripts/inline-critical-css.mjs",
     "start": "next start",
     "lint": "eslint .",
     "set:admin": "ts-node tools/setAdminClaim.ts",
@@ -13,7 +14,10 @@
     "test": "jest --silent",
     "test:watch": "jest --watch",
     "test:coverage": "jest --config jest.config.ts --coverage",
-    "test:integration": "jest --config jest.integration.config.ts --silent"
+    "test:integration": "jest --config jest.integration.config.ts --silent",
+    "test:e2e": "playwright test",
+    "security": "snyk test",
+    "prepare": "husky"
   },
   "dependencies": {
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
@@ -64,6 +68,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@next/eslint-plugin-next": "^16.1.6",
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
@@ -81,10 +86,13 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-security": "^3.0.1",
+    "husky": "^9.1.7",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "lint-staged": "^17.3.0",
     "postcss": "^8.5.25",
+    "puppeteer-core": "^25.6.0",
     "snyk": "^1.1300.0",
     "tailwindcss": "^4.1.18",
     "ts-node": "^10.9.2",
@@ -98,5 +106,8 @@
     "uuid": "^11.1.1",
     "brace-expansion": "^5.0.9",
     "js-yaml": "^4.3.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": "eslint --fix"
   }
 }
