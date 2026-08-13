@@ -13,7 +13,7 @@ permission:
 # audit-review — Comprehensive Quality Audit
 
 ## Skills to Load
-Load these skills before starting: `audit`, `critique`, `web-design-guidelines`
+Load these skills before starting: `audit`, `critique`, `web-design-guidelines`, `accessibility`
 
 ## Mission
 Perform a systematic, comprehensive quality audit of the entire UUAIS website. This is diagnostic only — you identify and report issues but do NOT fix them (edit: deny). Output a structured report the user can use to prioritize fixes.
@@ -47,6 +47,7 @@ Audit ALL of the following pages and components:
 Evaluate each page/component across these 5 dimensions:
 
 ### 1. Accessibility
+Audit against WCAG 2.2 using the `accessibility` skill.
 - Color contrast ratios (WCAG AA: 4.5:1 text, 3:1 large text)
 - ARIA labels and semantic HTML
 - Keyboard navigation (tab order, focus indicators, skip links)
