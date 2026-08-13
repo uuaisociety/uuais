@@ -66,3 +66,7 @@ A job board for startups, internships, master's thesis opportunities, and jobs, 
 ## Privacy
 
 See /privacy for the privacy policy.
+
+## Riddle
+
+Hiding where every page meets it's end, alas you can not comprehend. Stretch it from base to stack and you will find what you lack.

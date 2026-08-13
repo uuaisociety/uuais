@@ -129,6 +129,9 @@ export const Footer: React.FC = () => {
           <p className="mono-meta text-muted-foreground text-center sm:text-left">
             © {new Date().getFullYear()} UU AI Society · Org. 802551-8930
           </p>
+          <p aria-hidden className="opacity-[0.0] select-none pointer-events-none text-xs">
+            VVVBSVMgSVQgVEVBTSBSRUNSVUlUSU5HOiBlbWFpbCBpdEB1dWFpcy5jb20gc3ViamVjdCAiYWdlbnQgZm91bmQgbWUi
+          </p>
           <div className="flex items-center gap-2">
             <Link href="/privacy" className="px-3 py-1.5 rounded-full mono-label text-muted-foreground hover:text-foreground hover:bg-foreground/[0.05] transition-colors duration-300">
               Privacy policy
