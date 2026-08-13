@@ -10,6 +10,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Secrets aren't allowed in `if:` conditions, so hoist it to workflow env
+# and gate the snyk job on `env` instead.
+env:
+  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
 jobs:
   test:
     name: Lint, typecheck, tests
@@ -58,7 +63,7 @@ jobs:
     name: Snyk security scan
     runs-on: ubuntu-latest
     # Only run when a token is configured; never fail CI because of it.
-    if: ${{ secrets.SNYK_TOKEN != '' }}
+    if: env.SNYK_TOKEN != ''
     steps:
       - uses: actions/checkout@v4
 
@@ -72,8 +77,6 @@ jobs:
         run: npm ci
 
       - name: Run Snyk test
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         run: npx snyk test
         # Report findings without blocking merges.
         continue-on-error: true
