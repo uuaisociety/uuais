@@ -56,8 +56,11 @@ function normalizeDoc<T>(doc: { id: string; data: () => Record<string, unknown> 
  * Server-side fetch of all public data so SSR HTML ships real content instead
  * of empty arrays + pulse skeletons. Degrades to empty arrays on any error
  * (including the admin SDK failing to init) so the app never breaks.
+ *
+ * Pass `{ throwOnError: true }` (used by the MCP layer) to rethrow instead so
+ * callers can distinguish "empty site" from "data source unavailable".
  */
-export async function getPublicSeed(): Promise<PublicSeed> {
+export async function getPublicSeed(options?: { throwOnError?: boolean }): Promise<PublicSeed> {
   try {
     // Dynamic import so a failed admin SDK init degrades gracefully instead of
     // throwing during module evaluation.
@@ -81,6 +84,7 @@ export async function getPublicSeed(): Promise<PublicSeed> {
       campaigns: campaignsSnap.docs.map((d) => normalizeDoc<ApplicationCampaign>(d)),
     };
   } catch (error) {
+    if (options?.throwOnError) throw error;
     console.error('getPublicSeed failed, falling back to empty seed:', error);
     return { ...EMPTY_SEED };
   }
