@@ -98,7 +98,8 @@ describe('EventDetailPage', () => {
   it('renders event metadata (date, location, category)', async () => {
     await renderPage('event-1')
     expect(screen.getByText('Saturday, June 15, 2030')).toBeInTheDocument()
-    const times = screen.getAllByText('16:00')
+    // Time is rendered in UTC (TZ pinned in jest.config.ts); 14:00Z renders as 14:00.
+    const times = screen.getAllByText('14:00')
     expect(times.length).toBeGreaterThanOrEqual(1)
     const rooms = screen.getAllByText('Room 101')
     expect(rooms.length).toBeGreaterThanOrEqual(1)
