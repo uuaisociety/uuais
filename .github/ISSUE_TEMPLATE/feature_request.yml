@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest an idea or enhancement for the UUAIS website
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement!
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+      description: What problem does this solve, or what need does it address?
+      placeholder: "As a ..., I want to ... so that ..."
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe the feature or enhancement you'd like.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any alternative solutions or workarounds you considered.
+    validations:
+      required: false
+  - type: textarea
+    id: scope
+    attributes:
+      label: Suggested scope (optional)
+      description: Rough idea of the areas involved (e.g. new page, admin tab, data model, API route).
+    validations:
+      required: false
