@@ -19,6 +19,7 @@ interface AppState {
   campaignsLoaded: boolean;
   teamApplications: TeamApplication[];
   showcaseProjects: ShowcaseProject[];
+  showcaseLoaded: boolean;
   isLoading: boolean;
   error: string | null;
 }
@@ -55,6 +56,7 @@ type AppAction =
   | { type: 'SET_CAMPAIGNS_LOADED'; payload: boolean }
   | { type: 'SET_TEAM_APPLICATIONS'; payload: TeamApplication[] }
   | { type: 'SET_SHOWCASE_PROJECTS'; payload: ShowcaseProject[] }
+  | { type: 'SET_SHOWCASE_LOADED'; payload: boolean }
   | { type: 'ADD_SHOWCASE_PROJECT'; payload: ShowcaseProject }
   | { type: 'UPDATE_SHOWCASE_PROJECT'; payload: ShowcaseProject }
   | { type: 'DELETE_SHOWCASE_PROJECT'; payload: string };
@@ -102,6 +104,7 @@ const initialState: AppState = {
   campaignsLoaded: false,
   teamApplications: [],
   showcaseProjects: [],
+  showcaseLoaded: false,
   isLoading: false,
   error: null
 };
@@ -211,7 +214,9 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
     case 'SET_TEAM_APPLICATIONS':
       return { ...state, teamApplications: action.payload };
     case 'SET_SHOWCASE_PROJECTS':
-      return { ...state, showcaseProjects: action.payload };
+      return { ...state, showcaseProjects: action.payload, showcaseLoaded: true };
+    case 'SET_SHOWCASE_LOADED':
+      return { ...state, showcaseLoaded: action.payload };
     case 'ADD_SHOWCASE_PROJECT':
       return { ...state, showcaseProjects: [...state.showcaseProjects, action.payload] };
     case 'UPDATE_SHOWCASE_PROJECT':
@@ -358,6 +363,7 @@ export const AppProvider: React.FC<{
         if (disposed) return;
         unsubscribeShowcase = subscribeToShowcaseProjects((projects) => {
           dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: projects });
+          dispatch({ type: 'SET_SHOWCASE_LOADED', payload: true });
         }, { includeUnpublished });
       });
 

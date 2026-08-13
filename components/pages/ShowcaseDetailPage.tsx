@@ -10,7 +10,9 @@ import { updatePageMeta } from '@/utils/seo';
 import type { ShowcaseProject } from '@/types';
 import ShowcaseCover from '@/components/showcase/ShowcaseCover';
 import ShowcaseTag from '@/components/showcase/ShowcaseTag';
+import { safeExternalUrl } from '@/components/showcase/showcaseLinks';
 import { useShowcaseVote } from '@/components/showcase/useShowcaseVote';
+import { Button } from '@/components/ui/Button';
 
 const linkActions: { key: keyof ShowcaseProject['links']; icon: React.ElementType; label: string }[] = [
   { key: 'github', icon: Github, label: 'View repository on GitHub' },
@@ -35,20 +37,25 @@ const ShowcaseDetailPage: React.FC = () => {
     updatePageMeta(project ? `${project.title} — Showcase` : 'Showcase', project?.description || '');
   }, [project]);
 
+  const formatDate = (iso?: string) => {
+    const d = iso ? new Date(iso) : new Date(0);
+    return Number.isNaN(d.getTime()) ? '—' : d.toLocaleDateString();
+  };
+
   if (!project) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-12 pb-16 transition-colors duration-300 dark:bg-gray-900">
+      <div className="min-h-screen bg-background pt-12 pb-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-lg border border-dashed border-gray-300 bg-white/50 px-6 py-16 text-center dark:border-gray-700 dark:bg-gray-800/40">
-            <p className="font-mono text-sm text-gray-600 dark:text-gray-300">
-              <span className="text-red-600 dark:text-red-400">$</span> ls: cannot access &apos;{id || '…'}
+          <div className="rounded-xl border border-dashed border-border bg-card/50 px-6 py-16 text-center">
+            <p className="font-mono text-sm text-muted-foreground">
+              <span className="text-primary" aria-hidden>$</span> ls: cannot access &apos;{id || '…'}
               &apos;: no such project
             </p>
             <Link
               href="/showcase"
-              className="mt-6 inline-flex items-center gap-2 font-mono text-sm text-red-600 transition-colors hover:text-red-700 dark:text-red-400"
+              className="mt-6 inline-flex min-h-10 items-center gap-2 font-mono text-sm text-primary transition-colors hover:text-primary/80"
             >
-              <ArrowLeft className="size-4" /> back to showcase
+              <ArrowLeft className="size-4" aria-hidden /> back to showcase
             </Link>
           </div>
         </div>
@@ -57,20 +64,20 @@ const ShowcaseDetailPage: React.FC = () => {
   }
 
   return (
-    <div className="relative min-h-screen bg-gray-50 pt-12 pb-16 transition-colors duration-300 [background-image:linear-gradient(to_right,rgba(0,0,0,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.04)_1px,transparent_1px)] [background-size:36px_36px] dark:bg-gray-900 dark:[background-image:linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)]">
+    <div className="relative min-h-screen bg-background pt-12 pb-16 [background-image:linear-gradient(to_right,color-mix(in_oklch,var(--foreground)_4%,transparent)_1px,transparent_1px),linear-gradient(to_bottom,color-mix(in_oklch,var(--foreground)_4%,transparent)_1px,transparent_1px)] [background-size:36px_36px]">
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <Link
           href="/showcase"
-          className="mb-6 inline-flex items-center gap-2 font-mono text-sm text-gray-500 transition-colors hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400"
+          className="mb-6 inline-flex min-h-10 items-center gap-2 font-mono text-sm text-muted-foreground transition-colors hover:text-primary"
         >
-          <ArrowLeft className="size-4" /> cd ../showcase
+          <ArrowLeft className="size-4" aria-hidden /> cd ../showcase
         </Link>
 
-        <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-800/60">
-          <div className="flex items-center gap-2 border-b border-gray-200 bg-gray-100 px-4 py-2 dark:border-gray-700/70 dark:bg-gray-800">
-            <span className="font-mono text-xs text-gray-500 dark:text-gray-400">
-              <span className="text-red-600 dark:text-red-400">❯</span> ~/uuais/showcase/
-              <span className="text-red-600 dark:text-red-400">{project.id}</span>
+        <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+          <div className="flex items-center gap-2 border-b border-border bg-muted px-4 py-2">
+            <span className="mono-meta text-muted-foreground">
+              <span className="text-primary" aria-hidden>❯</span> ~/uuais/showcase/
+              <span className="text-primary">{project.id}</span>
             </span>
           </div>
 
@@ -82,62 +89,64 @@ const ShowcaseDetailPage: React.FC = () => {
           />
 
           <div className="px-6 py-8 sm:px-10">
-            <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-gray-500 dark:text-gray-400">
-              <span className="rounded-md border border-gray-200 bg-gray-100 px-2 py-1 dark:border-gray-700 dark:bg-gray-800">
-                <span className="text-red-600 dark:text-red-400">{project.category}/</span>
+            <div className="flex flex-wrap items-center gap-2 mono-meta text-muted-foreground">
+              <span className="rounded-md border border-border bg-muted px-2 py-1">
+                <span className="text-primary">{project.category}/</span>
                 {project.id}
               </span>
               <span className="flex items-center gap-1">
-                <Star className="size-3 text-amber-500 dark:text-amber-400" />
+                <Star className="size-3 text-amber-500 dark:text-amber-400" aria-hidden />
                 {votesFor(project)} votes
               </span>
-              <span>·</span>
-              <span>@{project.creatorName}</span>
-              <span>·</span>
-              <span>{new Date(project.createdAt).toLocaleDateString()}</span>
+              <span aria-hidden>·</span>
+              <span>@{project.creatorName || 'member'}</span>
+              <span aria-hidden>·</span>
+              <span>{formatDate(project.createdAt)}</span>
             </div>
 
-            <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-              <span className="font-mono text-red-600 dark:text-red-400">#</span> {project.title}
+            <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              <span className="font-mono text-primary" aria-hidden>#</span> {project.title}
             </h1>
 
-            <p className="mt-4 text-base leading-relaxed text-gray-700 dark:text-gray-300">
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
               {project.description}
             </p>
 
-            {project.tags.length > 0 && (
+            {(project.tags || []).length > 0 && (
               <div className="mt-5 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
+                {(project.tags || []).map((tag) => (
                   <ShowcaseTag key={tag} tag={tag} />
                 ))}
               </div>
             )}
 
-            <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-gray-100 pt-6 dark:border-gray-700/60">
-              <button
+            <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-border pt-6">
+              <Button
                 type="button"
                 onClick={() => handleVote(project)}
                 aria-pressed={voted.includes(project.id)}
                 disabled={voted.includes(project.id)}
-                className="inline-flex cursor-pointer items-center gap-2 rounded-md bg-red-600 px-4 py-2 font-mono text-sm text-white transition-colors hover:bg-red-700 disabled:cursor-default disabled:opacity-60"
+                className="font-mono disabled:cursor-default disabled:opacity-60"
               >
-                <Star className={`size-4 ${voted.includes(project.id) ? 'fill-amber-400 text-amber-400' : ''}`} />
+                <Star className={`size-4 ${voted.includes(project.id) ? 'fill-amber-500 text-amber-500 dark:fill-amber-400 dark:text-amber-400' : ''}`} aria-hidden />
                 {voted.includes(project.id) ? 'voted ✓' : `star this (${votesFor(project)})`}
-              </button>
+              </Button>
 
-              {linkActions.map(({ key, icon: Icon, label }) =>
-                project.links[key] ? (
+              {linkActions.map(({ key, icon: Icon, label }) => {
+                const href = safeExternalUrl(project.links[key]);
+                if (!href) return null;
+                return (
                   <a
                     key={key}
-                    href={project.links[key]}
+                    href={href}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-700 transition-colors hover:border-red-600/50 hover:text-red-600 dark:border-gray-700 dark:text-gray-300 dark:hover:border-red-400/50 dark:hover:text-red-400"
+                    className="inline-flex min-h-10 items-center gap-2 rounded-md border border-border px-4 text-sm text-foreground transition-colors hover:border-primary/50 hover:text-primary"
                   >
-                    <Icon className="size-4" /> {label}
+                    <Icon className="size-4" aria-hidden /> {label}
                   </a>
-                ) : null,
-              )}
+                );
+              })}
             </div>
           </div>
         </div>

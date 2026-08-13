@@ -270,8 +270,8 @@ const HomePage: React.FC = () => {
                       {project.description}
                     </p>
                     <div className="mt-auto flex items-center justify-between pt-4 border-t border-border">
-                      <span className="mono-meta text-foreground/65">
-                        By {project.creatorName} · {project.votes} votes
+                      <span className="mono-meta text-foreground/65 truncate">
+                        By {project.creatorName || 'member'} · {(project.votes || 0)} votes
                       </span>
                       <ArrowUpRight className="h-4 w-4 text-foreground/60 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>

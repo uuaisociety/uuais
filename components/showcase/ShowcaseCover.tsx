@@ -13,19 +13,19 @@ const GRADIENTS: Record<ShowcaseCategory, [string, string]> = {
 
 export default function ShowcaseCover({
   category,
-  title,
+  title = '',
   image,
   className,
   scanlines = true,
 }: {
   category: ShowcaseCategory;
-  title: string;
+  title?: string;
   image?: string;
   className?: string;
   scanlines?: boolean;
 }) {
   const [from, to] = GRADIENTS[category] ?? GRADIENTS.other;
-  const glyph = title.trim().slice(0, 2).toUpperCase();
+  const glyph = (title || '').trim().slice(0, 2).toUpperCase() || '·';
   const bg = image
     ? `url(${image}) center/cover no-repeat`
     : `linear-gradient(135deg, ${from}, ${to})`;

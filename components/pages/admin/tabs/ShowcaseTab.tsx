@@ -25,9 +25,11 @@ const ShowcaseTab: React.FC<ShowcaseTabProps> = ({
   onTogglePublish,
   onToggleFeature,
 }) => {
-  const sorted = [...projects].sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
+  const sorted = [...(projects || [])].sort((a, b) => {
+    const ta = new Date(a.createdAt).getTime();
+    const tb = new Date(b.createdAt).getTime();
+    return (Number.isNaN(tb) ? 0 : tb) - (Number.isNaN(ta) ? 0 : ta);
+  });
 
   return (
     <div>
@@ -53,14 +55,14 @@ const ShowcaseTab: React.FC<ShowcaseTabProps> = ({
                   </div>
                   <p className="text-gray-600 mb-2 dark:text-gray-400 line-clamp-2">{project.description}</p>
                   <div className="text-sm text-gray-500 mb-2 dark:text-gray-400">
-                    <span className="mr-4">👤 {project.creatorName}</span>
+                    <span className="mr-4">👤 {project.creatorName || 'member'}</span>
                     <span className="mr-4">🏷 {project.category}</span>
-                    <span>⭐ {project.votes}</span>
+                    <span>⭐ {project.votes || 0}</span>
                     <span className="ml-4">📅 {format(new Date(project.createdAt), "MMM d, yyyy")}</span>
                   </div>
-                  {project.tags.length > 0 && (
+                  {(project.tags || []).length > 0 && (
                     <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, index) => (
+                      {(project.tags || []).map((tag, index) => (
                         <Tag key={index} variant="gray" size="sm">{tag}</Tag>
                       ))}
                     </div>

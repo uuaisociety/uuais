@@ -12,6 +12,7 @@ export const defaultAppState = {
   teamApplications: [],
   registrationQuestions: [],
   showcaseProjects: [],
+  showcaseLoaded: true,
   isLoading: false,
   error: null,
 }

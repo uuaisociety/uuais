@@ -7,7 +7,10 @@ import { useApp } from '@/contexts/AppContext';
 import { useAdmin } from '@/hooks/useAdmin';
 import { useNotify } from '@/components/ui/Notifications';
 import { FieldGroup, InputBase, SelectBase, TextareaBase } from '@/components/ui/Form';
+import { Modal } from '@/components/ui/Modal';
+import { Button } from '@/components/ui/Button';
 import ShowcaseCover from '@/components/showcase/ShowcaseCover';
+import { safeExternalUrl } from '@/components/showcase/showcaseLinks';
 import { SHOWCASE_CATEGORIES, SHOWCASE_CATEGORY_LABELS, type ShowcaseCategory } from '@/types';
 import { getUserProfile } from '@/lib/firestore/users';
 
@@ -45,8 +48,6 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
       setUploading(false);
     }
   }
-
-  if (!open) return null;
 
   const handleUpload = async (file: File) => {
     if (!file.type.startsWith('image/')) {
@@ -112,10 +113,23 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
 
   const doSubmit = async () => {
     if (!user) return;
+    const invalidLink = linkKeys.find((k) => {
+      const value = links[k];
+      return !!value?.trim() && safeExternalUrl(value) === null;
+    });
+    if (invalidLink) {
+      notify({ type: 'error', title: 'Invalid link', message: `${invalidLink.charAt(0).toUpperCase() + invalidLink.slice(1)} must be a valid http(s) URL.` });
+      return;
+    }
+    const sanitizedLinks = Object.fromEntries(
+      linkKeys
+        .filter((k) => links[k]?.trim())
+        .map((k) => [k, safeExternalUrl(links[k] as string) as string]),
+    ) as typeof links;
     setSubmitting(true);
     try {
       const tags = Array.from(
-        new Set(tagsText.split(',').map((t) => t.trim().toLowerCase()).filter(Boolean)),
+        new Set(tagsText.split(',').map((t) => t.trim().toLowerCase().slice(0, 30)).filter(Boolean)),
       ).slice(0, 5);
       const name = user.displayName || (user as unknown as { name?: string }).name || user.email || 'Member';
       await dispatch({
@@ -126,7 +140,7 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
           category,
           creatorUserId: user.uid,
           creatorName: name,
-          links: Object.fromEntries(linkKeys.filter((k) => links[k]?.trim()).map((k) => [k, links[k]!.trim()])) as typeof links,
+          links: sanitizedLinks,
           coverImage: cover?.url,
           coverImagePath: cover?.path,
           tags,
@@ -147,159 +161,157 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/50" onClick={onClose} aria-hidden />
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label="Share your project"
-        className="relative w-full max-w-2xl overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800"
-      >
-        <div className="flex items-center gap-2 border-b border-gray-200 bg-gray-100 px-4 py-3 dark:border-gray-700 dark:bg-gray-800">
-          <span className="font-mono text-xs text-gray-600 dark:text-gray-300">
-            <span className="text-red-600 dark:text-red-400">❯</span> ~/uuais/show-and-tell --add-yours
+    <Modal
+      open={open}
+      onClose={onClose}
+      title="Share your project"
+      size="md"
+      header={
+        <div className="flex items-center gap-2 border-b border-border bg-muted px-4 py-3">
+          <span className="mono-meta text-muted-foreground">
+            <span className="text-primary" aria-hidden>❯</span> ~/uuais/show-and-tell --add-yours
           </span>
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close"
-            className="ml-auto grid size-7 cursor-pointer place-items-center rounded text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+            aria-label="Close dialog"
+            className="ml-auto grid size-9 cursor-pointer place-items-center rounded text-muted-foreground transition-colors hover:bg-foreground/[0.07] hover:text-foreground"
           >
-            <X className="size-4" />
+            <X className="size-4" aria-hidden />
           </button>
         </div>
-
-        {!user ? (
-          <div className="px-6 py-12 text-center">
-            <p className="font-mono text-sm text-gray-700 dark:text-gray-300">
-              <span className="text-red-600 dark:text-red-400">$</span> auth required
-            </p>
-            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
-              Log in to share what you&apos;re building with the society.
-            </p>
-            <Link
-              href="/login?redirect=/showcase"
-              className="mt-6 inline-flex items-center gap-2 rounded-md bg-red-600 px-4 py-2 font-mono text-sm text-white transition-colors hover:bg-red-700"
-            >
-              <span className="opacity-80">❯</span> log in
+      }
+      className="p-0"
+    >
+      {!user ? (
+        <div className="px-6 py-12 text-center">
+          <p className="font-mono text-sm text-foreground/80">
+            <span className="text-primary" aria-hidden>$</span> auth required
+          </p>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Log in to share what you&apos;re building with the society.
+          </p>
+          <Button asChild className="mt-6 font-mono">
+            <Link href="/login?redirect=/showcase">
+              <span className="opacity-80" aria-hidden>❯</span> log in
             </Link>
+          </Button>
+        </div>
+      ) : (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            void handleSubmit();
+          }}
+          className="max-h-[75vh] overflow-y-auto px-6 py-6"
+        >
+          <div className="grid gap-4 md:grid-cols-2">
+            <FieldGroup label="Title" requiredHint="Required.">
+              <InputBase value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g. HackUppsala Slackbot" maxLength={80} />
+            </FieldGroup>
+            <FieldGroup label="Category" requiredHint="Required.">
+              <SelectBase value={category} onChange={(e) => setCategory(e.target.value as ShowcaseCategory)}>
+                {SHOWCASE_CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {SHOWCASE_CATEGORY_LABELS[c]}
+                  </option>
+                ))}
+              </SelectBase>
+            </FieldGroup>
           </div>
-        ) : (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              void handleSubmit();
-            }}
-            className="max-h-[75vh] overflow-y-auto px-6 py-6"
-          >
-            <div className="grid gap-4 md:grid-cols-2">
-              <FieldGroup label="Title" requiredHint="Required.">
-                <InputBase value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g. HackUppsala Slackbot" maxLength={80} />
-              </FieldGroup>
-              <FieldGroup label="Category" requiredHint="Required.">
-                <SelectBase value={category} onChange={(e) => setCategory(e.target.value as ShowcaseCategory)}>
-                  {SHOWCASE_CATEGORIES.map((c) => (
-                    <option key={c} value={c}>
-                      {SHOWCASE_CATEGORY_LABELS[c]}
-                    </option>
-                  ))}
-                </SelectBase>
-              </FieldGroup>
-            </div>
 
-            <div className="mt-4">
-              <FieldGroup label="Description" requiredHint="Required.">
-                <TextareaBase
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="What did you build? What problem does it solve? What AI did you use?"
-                  rows={3}
-                  maxLength={600}
-                />
-              </FieldGroup>
-            </div>
+          <div className="mt-4">
+            <FieldGroup label="Description" requiredHint="Required.">
+              <TextareaBase
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="What did you build? What problem does it solve? What AI did you use?"
+                rows={3}
+                maxLength={600}
+              />
+            </FieldGroup>
+          </div>
 
-            <div className="mt-4 grid gap-4 md:grid-cols-2">
-              {linkKeys.map((k) => (
-                <FieldGroup key={k} label={k.charAt(0).toUpperCase() + k.slice(1)} requiredHint="Optional">
-                  <InputBase
-                    value={links[k] || ''}
-                    onChange={(e) => setLinks((l) => ({ ...l, [k]: e.target.value }))}
-                    placeholder={`https://${k === 'github' ? 'github.com/...' : k === 'website' ? 'your-site.example' : k === 'demo' ? 'demo.example' : 'youtube.com/...'}`}
-                  />
-                </FieldGroup>
-              ))}
-            </div>
-
-            <div className="mt-4">
-              <FieldGroup label="Tags" requiredHint="Comma-separated, max 5">
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {linkKeys.map((k) => (
+              <FieldGroup key={k} label={k.charAt(0).toUpperCase() + k.slice(1)} requiredHint="Optional">
                 <InputBase
-                  value={tagsText}
-                  onChange={(e) => setTagsText(e.target.value)}
-                  placeholder="llm, hackathon, next.js"
+                  value={links[k] || ''}
+                  onChange={(e) => setLinks((l) => ({ ...l, [k]: e.target.value }))}
+                  placeholder={`https://${k === 'github' ? 'github.com/...' : k === 'website' ? 'your-site.example' : k === 'demo' ? 'demo.example' : 'youtube.com/...'}`}
                 />
               </FieldGroup>
-            </div>
+            ))}
+          </div>
 
-            <div className="mt-4">
-              <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
-                Cover image<span className="ml-1 text-[11px] font-normal text-gray-500 dark:text-gray-400">Optional</span>
-              </span>
-              {cover ? (
-                <div className="mt-2 flex items-center gap-3">
-                  <ShowcaseCover category={category} title={title || 'cover'} image={cover.url} className="h-20 w-32 rounded-md" scanlines={false} />
-                  <button
-                    type="button"
-                    onClick={() => void handleRemoveCover()}
-                    className="inline-flex cursor-pointer items-center gap-1 rounded-md border border-gray-300 px-2.5 py-1.5 text-xs text-gray-600 transition-colors hover:border-red-600/50 hover:text-red-600 dark:border-gray-700 dark:text-gray-400 dark:hover:border-red-400/50 dark:hover:text-red-400"
-                  >
-                    <Trash2 className="size-3" /> remove
-                  </button>
-                </div>
-              ) : (
+          <div className="mt-4">
+            <FieldGroup label="Tags" requiredHint="Comma-separated, max 5">
+              <InputBase
+                value={tagsText}
+                onChange={(e) => setTagsText(e.target.value)}
+                placeholder="llm, hackathon, next.js"
+              />
+            </FieldGroup>
+          </div>
+
+          <div className="mt-4">
+            <span className="text-xs font-medium text-foreground">
+              Cover image<span className="ml-1 text-[11px] font-normal text-muted-foreground">Optional</span>
+            </span>
+            {cover ? (
+              <div className="mt-2 flex items-center gap-3">
+                <ShowcaseCover category={category} title={title || 'cover'} image={cover.url} className="h-20 w-32 rounded-md" scanlines={false} />
                 <button
                   type="button"
-                  onClick={() => fileRef.current?.click()}
-                  disabled={uploading}
-                  className="mt-2 flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-dashed border-gray-300 px-4 py-6 text-sm text-gray-500 transition-colors hover:border-red-600/50 hover:text-red-600 disabled:opacity-50 dark:border-gray-700 dark:text-gray-400 dark:hover:border-red-400/50 dark:hover:text-red-400"
+                  onClick={() => void handleRemoveCover()}
+                  className="inline-flex min-h-10 cursor-pointer items-center gap-1 rounded-md border border-border px-2.5 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
                 >
-                  {uploading ? <Loader2 className="size-4 animate-spin" /> : <ImagePlus className="size-4" />}
-                  {uploading ? 'uploading…' : 'upload a cover image'}
+                  <Trash2 className="size-3" aria-hidden /> remove
                 </button>
-              )}
-              <input
-                ref={fileRef}
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={(e) => {
-                  const f = e.target.files?.[0];
-                  if (f) void handleUpload(f);
-                  e.target.value = '';
-                }}
-              />
-            </div>
-
-            <div className="mt-6 flex items-center justify-end gap-2 border-t border-gray-100 pt-4 dark:border-gray-700/60">
+              </div>
+            ) : (
               <button
                 type="button"
-                onClick={onClose}
-                className="cursor-pointer rounded-md border border-gray-300 px-4 py-2 text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700"
+                onClick={() => fileRef.current?.click()}
+                disabled={uploading}
+                className="mt-2 flex w-full min-h-10 cursor-pointer items-center justify-center gap-2 rounded-md border border-dashed border-border px-4 py-6 text-sm text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary disabled:opacity-50"
               >
-                cancel
+                {uploading ? <Loader2 className="size-4 animate-spin" aria-hidden /> : <ImagePlus className="size-4" aria-hidden />}
+                {uploading ? 'uploading…' : 'upload a cover image'}
               </button>
-              <button
-                type="submit"
-                disabled={submitting}
-                className="inline-flex cursor-pointer items-center gap-2 rounded-md bg-red-600 px-4 py-2 font-mono text-sm text-white transition-colors hover:bg-red-700 disabled:opacity-50"
-              >
-                {submitting ? <Loader2 className="size-4 animate-spin" /> : <span className="opacity-80">❯</span>} submit
-                for review
-              </button>
-            </div>
-          </form>
-        )}
-      </div>
-    </div>
+            )}
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                const f = e.target.files?.[0];
+                if (f) void handleUpload(f);
+                e.target.value = '';
+              }}
+            />
+          </div>
+
+          <div className="mt-6 flex items-center justify-end gap-2 border-t border-border pt-4">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={onClose}
+            >
+              cancel
+            </Button>
+            <Button
+              type="submit"
+              disabled={submitting}
+              className="font-mono disabled:opacity-50"
+            >
+              {submitting ? <Loader2 className="size-4 animate-spin" aria-hidden /> : <span className="opacity-80" aria-hidden>❯</span>} submit
+              for review
+            </Button>
+          </div>
+        </form>
+      )}
+    </Modal>
   );
 }
