@@ -36,6 +36,7 @@ describe('useAdmin', () => {
   let useAdmin: typeof import('@/hooks/useAdmin').useAdmin;
   let renderHook: typeof import('@testing-library/react').renderHook;
   let act: typeof import('@testing-library/react').act;
+  let waitFor: typeof import('@testing-library/react').waitFor;
 
   beforeEach(() => {
     // useAdmin is a module-level singleton (start() runs once and the store is
@@ -52,7 +53,7 @@ describe('useAdmin', () => {
     mockAuth.currentUser = null;
     authCallback = null;
 
-    ({ renderHook, act } = jest.requireActual('@testing-library/react'));
+    ({ renderHook, act, waitFor } = jest.requireActual('@testing-library/react'));
     const auth = jest.requireMock('firebase/auth') as Record<string, jest.Mock>;
     onAuthStateChanged = auth.onAuthStateChanged;
     getIdTokenResult = auth.getIdTokenResult;
@@ -88,6 +89,7 @@ describe('useAdmin', () => {
 
   it('handles null user (not logged in)', async () => {
     const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
     await act(async () => {
       await authCallback!(null);
     });
@@ -103,6 +105,7 @@ describe('useAdmin', () => {
   it('handles logged-in regular user (no admin claims)', async () => {
     getIdTokenResult.mockResolvedValue({ claims: {} });
     const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
     await act(async () => {
       await authCallback!(mockUser);
     });
@@ -116,6 +119,7 @@ describe('useAdmin', () => {
   it('handles admin user', async () => {
     getIdTokenResult.mockResolvedValue({ claims: { admin: true } });
     const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
     await act(async () => {
       await authCallback!(mockUser);
     });
@@ -128,6 +132,7 @@ describe('useAdmin', () => {
   it('handles super admin user', async () => {
     getIdTokenResult.mockResolvedValue({ claims: { admin: true, superAdmin: true } });
     const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
     await act(async () => {
       await authCallback!(mockUser);
     });
@@ -139,6 +144,7 @@ describe('useAdmin', () => {
   it('sets isAdmin to false when getIdTokenResult fails', async () => {
     getIdTokenResult.mockRejectedValue(new Error('token error'));
     const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
     await act(async () => {
       await authCallback!(mockUser);
     });
@@ -153,6 +159,7 @@ describe('useAdmin', () => {
     getUserProfile.mockResolvedValue({ id: 'test-uid', displayName: 'ProfileName' });
     mockAuth.currentUser = mockUser;
     const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
     await act(async () => {
       await authCallback!(mockUser);
     });
@@ -167,6 +174,7 @@ describe('useAdmin', () => {
     mockAuth.currentUser = mockUser;
     const user = { uid: 'test-uid', email: 'test@example.com', displayName: 'AuthName' } as User;
     const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
     await act(async () => {
       await authCallback!(user);
     });
@@ -211,9 +219,9 @@ describe('useAdmin', () => {
     expect(mockFetch).toHaveBeenCalledWith('/api/logout', { method: 'POST' });
   });
 
-  it('unsubscribes the local listener on unmount', () => {
+  it('unsubscribes the local listener on unmount', async () => {
     const { unmount } = loadHook();
-    expect(authCallback).not.toBeNull();
+    await waitFor(() => expect(authCallback).not.toBeNull());
     unmount();
     // The module keeps a single Firebase listener alive; unmount only removes
     // this consumer from the local listener set, so mockUnsubscribe stays unused.

@@ -1,29 +1,12 @@
 "use client";
 
 import { useCallback, useSyncExternalStore } from 'react';
-import { auth, refreshSessionCookie } from '@/lib/firebase-client';
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, getIdTokenResult, User } from 'firebase/auth';
-import { getUserProfile, type UserProfile } from '@/lib/firestore/users';
+import type { User } from 'firebase/auth';
+import { scheduleIdle } from '@/lib/idle';
+import { readCache, writeCache, hasCachedIdentity, type CachedIdentity } from '@/lib/identity-cache';
+import type { UserProfile } from '@/lib/firestore/users';
 
-/**
- * A single auth subscription shared by every consumer.
- *
- * Previously each `useAdmin()` call opened its own `onAuthStateChanged`
- * listener and started at `loading: true`, then force-refreshed the ID token
- * over the network. Any component that mounted — including the header on every
- * navigation — replayed that round trip, so the signed-in name blanked out and
- * popped back. With a module-level store the second and later readers get the
- * resolved state synchronously.
- */
-
-/** Chrome-only identity, persisted so a hard refresh paints the name immediately. */
-export type CachedIdentity = {
-  uid: string;
-  name: string | null;
-  email: string | null;
-  photoURL: string | null;
-  isAdmin: boolean;
-};
+/** A single module-level auth subscription shared by every consumer (so readers get the resolved state synchronously); auth is lazy-loaded and registered once idle, keeping the iframe fetch out of the critical network chain (LCP). */
 
 type Store = {
   user: User | null;
@@ -35,28 +18,6 @@ type Store = {
   profile: UserProfile | null;
   /** Last known identity from localStorage. Display only — never a permission gate. */
   cached: CachedIdentity | null;
-};
-
-const CACHE_KEY = 'uuais.identity';
-
-const readCache = (): CachedIdentity | null => {
-  if (typeof window === 'undefined') return null;
-  try {
-    const raw = window.localStorage.getItem(CACHE_KEY);
-    return raw ? (JSON.parse(raw) as CachedIdentity) : null;
-  } catch {
-    return null;
-  }
-};
-
-const writeCache = (identity: CachedIdentity | null) => {
-  if (typeof window === 'undefined') return;
-  try {
-    if (identity) window.localStorage.setItem(CACHE_KEY, JSON.stringify(identity));
-    else window.localStorage.removeItem(CACHE_KEY);
-  } catch {
-    /* private mode / quota — the cache is an optimisation, not a requirement */
-  }
 };
 
 let store: Store = {
@@ -85,7 +46,7 @@ const profileRequests = new Map<string, Promise<UserProfile | null>>();
 const loadProfile = (uid: string): Promise<UserProfile | null> => {
   let request = profileRequests.get(uid);
   if (!request) {
-    request = getUserProfile(uid).catch(() => null);
+    request = import('@/lib/firestore/users').then(({ getUserProfile }) => getUserProfile(uid)).catch(() => null);
     profileRequests.set(uid, request);
   }
   return request;
@@ -99,46 +60,54 @@ const start = () => {
 
   setStore({ cached: readCache() });
 
-  onAuthStateChanged(auth, async (u) => {
-    if (!u) {
-      profileRequests.clear();
-      writeCache(null);
-      setStore({ user: null, loading: false, profileLoading: false, isAdmin: false, isSuperAdmin: false, claims: null, profile: null, cached: null });
-      return;
-    }
+  // Returning visitors (cached identity) start auth immediately; anonymous visitors defer the auth SDK until after LCP / first interaction.
+  scheduleIdle(
+    () => {
+      void Promise.all([import('firebase/auth'), import('@/lib/firebase-client')]).then(
+        ([{ onAuthStateChanged, getIdTokenResult }, { auth }]) => {
+          onAuthStateChanged(auth, async (u) => {
+            if (!u) {
+              profileRequests.clear();
+              writeCache(null);
+              setStore({ user: null, loading: false, profileLoading: false, isAdmin: false, isSuperAdmin: false, claims: null, profile: null, cached: null });
+              return;
+            }
 
-    // The cached token already carries custom claims, so read it without
-    // forcing a refresh. A stale admin claim only affects which chrome renders;
-    // the proxy and Firestore rules re-check server side on every request.
-    let tokenClaims: Record<string, unknown> = {};
-    try {
-      const tokenRes = await getIdTokenResult(u);
-      tokenClaims = (tokenRes.claims || {}) as Record<string, unknown>;
-    } catch (e) {
-      console.error('Failed to get ID token claims', e);
-    }
+            // Read cached claims without forcing a network refresh; a stale admin claim only affects chrome, the proxy and Firestore rules re-check server side.
+            let tokenClaims: Record<string, unknown> = {};
+            try {
+              const tokenRes = await getIdTokenResult(u);
+              tokenClaims = (tokenRes.claims || {}) as Record<string, unknown>;
+            } catch (e) {
+              console.error('Failed to get ID token claims', e);
+            }
 
-    const isAdmin = Boolean(tokenClaims.admin);
-    const isSuperAdmin = Boolean(tokenClaims.superAdmin);
+            const isAdmin = Boolean(tokenClaims.admin);
+            const isSuperAdmin = Boolean(tokenClaims.superAdmin);
 
-    setStore({
-      user: u,
-      loading: false,
-      profileLoading: true,
-      isAdmin,
-      isSuperAdmin,
-      claims: tokenClaims,
-      cached: { uid: u.uid, name: u.displayName, email: u.email, photoURL: u.photoURL, isAdmin },
-    });
+            setStore({
+              user: u,
+              loading: false,
+              profileLoading: true,
+              isAdmin,
+              isSuperAdmin,
+              claims: tokenClaims,
+              cached: { uid: u.uid, name: u.displayName, email: u.email, photoURL: u.photoURL, isAdmin },
+            });
 
-    const profile = await loadProfile(u.uid);
-    if (auth.currentUser?.uid !== u.uid) return;
+            const profile = await loadProfile(u.uid);
+            if (auth.currentUser?.uid !== u.uid) return;
 
-    const name = profile?.displayName || profile?.name || u.displayName || null;
-    const identity: CachedIdentity = { uid: u.uid, name, email: u.email, photoURL: u.photoURL, isAdmin };
-    writeCache(identity);
-    setStore({ profile, profileLoading: false, cached: identity });
-  });
+            const name = profile?.displayName || profile?.name || u.displayName || null;
+            const identity: CachedIdentity = { uid: u.uid, name, email: u.email, photoURL: u.photoURL, isAdmin };
+            writeCache(identity);
+            setStore({ profile, profileLoading: false, cached: identity });
+          });
+        }
+      );
+    },
+    hasCachedIdentity() ? 0 : 3500
+  );
 };
 
 const subscribe = (listener: () => void) => {
@@ -169,6 +138,10 @@ export function useAdmin(): AdminState {
   const snapshot = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const signInWithGoogle = useCallback(async () => {
+    const [{ GoogleAuthProvider, signInWithPopup }, { auth, refreshSessionCookie }] = await Promise.all([
+      import('firebase/auth'),
+      import('@/lib/firebase-client'),
+    ]);
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
     // Mint the httpOnly cookie so server APIs authenticate as this user (logout clears it, so re-login re-mints).
@@ -176,6 +149,8 @@ export function useAdmin(): AdminState {
   }, []);
 
   const logout = useCallback(async () => {
+    const { signOut } = await import('firebase/auth');
+    const { auth } = await import('@/lib/firebase-client');
     await signOut(auth);
     try {
       // Clear the httpOnly AuthToken cookie via the proxy (logoutPath handler), or server APIs keep accepting it for 12h.
