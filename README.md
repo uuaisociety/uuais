@@ -1,11 +1,13 @@
 # UUAIS - Uppsala University AI Society
 
+[![CI](https://github.com/uuaisociety/uuais/actions/workflows/ci.yml/badge.svg)](https://github.com/uuaisociety/uuais/actions/workflows/ci.yml)
+
 This is a [Next.js](https://nextjs.org) project for the Uppsala University AI Society website, built with TypeScript, Tailwind CSS, and Firebase.
 
 ## How to Run Locally
 
 ### Prerequisites
-- Node.js (version 18 or higher)
+- Node.js (version 20.9 or higher; `.nvmrc` pins Node 22 to match CI)
 - npm, yarn, pnpm, or bun package manager
 
 ### Installation and Setup
@@ -106,20 +108,27 @@ firebase deploy --only storage:rules
 - `npm test` - Runs Jest test suite (silent mode)
 - `npm run test:watch` - Runs Jest in watch mode (auto-rerun on changes)
 - `npm run test:coverage` - Runs Jest with coverage report
+- `npm run test:integration` - Runs API route tests (Jest integration config)
+- `npm run test:e2e` - Runs Playwright E2E smoke tests (starts dev server automatically)
+- `npm run security` - Runs a Snyk dependency scan (requires `snyk auth`)
 - `npm run set:admin -- <email> true` - Sets an admin user
 - `npm run set:admin -- <email> false` - Removes an admin user
 
 ## Testing
 
-The project uses **Jest** + **React Testing Library** for unit and integration tests.
+The project uses **Jest** + **React Testing Library** for unit and integration tests, and **Playwright** for E2E smoke tests.
 
 ### Running Tests
 
 ```bash
-npm test            # Run all tests (silent)
+npm test            # Run all unit tests (silent)
 npm run test:watch  # Watch mode — re-runs on file changes
 npm run test:coverage  # Run with coverage report
+npm run test:integration  # API route tests (mocked Firebase)
+npm run test:e2e    # Playwright E2E smoke tests (auto-starts dev server)
 ```
+
+CI (`.github/workflows/ci.yml`) runs lint, type checking, and all three test suites on every push/PR.
 
 ### Writing Tests
 
