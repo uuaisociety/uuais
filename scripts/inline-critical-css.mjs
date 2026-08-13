@@ -22,11 +22,34 @@ import postcss from 'postcss';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
 const htmlPath = path.join(root, '.next', 'server', 'app', 'index.html');
-const chunkDir = path.join(root, '.next', 'static', 'chunks');
 
 if (!fs.existsSync(htmlPath)) {
   console.error('index.html not found — run `next build` first.');
   process.exit(1);
+}
+
+/**
+ * Find the compiled CSS files. The output location varies by bundler and
+ * build environment (Turbopack: `.next/static/chunks/*.css`; webpack/Vercel:
+ * `.next/static/css/*.css`), so scan `.next/static` recursively instead of
+ * assuming one hardcoded path.
+ */
+function findCssFiles() {
+  const staticDir = path.join(root, '.next', 'static');
+  if (!fs.existsSync(staticDir)) return [];
+  const out = [];
+  const stack = [staticDir];
+  while (stack.length) {
+    const dir = stack.pop();
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) stack.push(full);
+      else if (entry.isFile() && entry.name.endsWith('.css') && entry.name !== 'critical-home.css') {
+        out.push(full);
+      }
+    }
+  }
+  return out;
 }
 
 /** Unescape a CSS-escaped class name: `.hover\:bg-ink` -> `hover:bg-ink`. */
@@ -231,11 +254,15 @@ async function main() {
   const aboveClasses = aboveFoldClasses(html);
   console.log('Above-fold classes:', aboveClasses.size);
 
-  // The main Tailwind sheet is the largest .css in the chunks dir (font css is
-  // the only other render-blocking sheet; we include it too).
-  const cssFiles = fs.readdirSync(chunkDir).filter((f) => f.endsWith('.css') && f !== 'critical-home.css');
+  // The main Tailwind sheet is the largest .css produced by the build (font css
+  // is the only other render-blocking sheet; we include it too). Location
+  // differs by bundler/environment, so scan .next/static recursively.
+  const cssFiles = findCssFiles();
+  if (cssFiles.length === 0) {
+    console.warn('No compiled CSS found — skipping critical-CSS inlining.');
+    return;
+  }
   const cssPaths = cssFiles
-    .map((f) => path.join(chunkDir, f))
     .sort((a, b) => fs.statSync(b).size - fs.statSync(a).size)
     .slice(0, 2); // main + font-face sheet
 
@@ -247,7 +274,9 @@ async function main() {
   const patched = patchHtml(html, criticalCss);
   fs.writeFileSync(htmlPath, patched);
 
-  const criticalPath = path.join(chunkDir, 'critical-home.css');
+  // Write alongside the largest source CSS so the artifact lives in the same
+  // dir regardless of bundler layout.
+  const criticalPath = path.join(path.dirname(cssPaths[0]), 'critical-home.css');
   fs.writeFileSync(criticalPath, criticalCss);
 
   console.log('Critical CSS bytes:', criticalCss.length);
