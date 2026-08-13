@@ -131,7 +131,7 @@ const HomePage: React.FC = () => {
       {/* ------------------------------------------------------------- Pillars
           A numbered editorial list on hairlines — deliberately not four cards
           with an icon in a tinted rounded square. */}
-      <section className="px-5 sm:px-8 pt-24 sm:pt-32">
+      <section className="px-5 sm:px-8 pt-24 sm:pt-32 cv-auto">
         <div className="max-w-6xl mx-auto">
           <SectionHead paren="Why" title="Join UU AI Society" />
 
@@ -157,7 +157,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* -------------------------------------------------------------- Events */}
-      <section className="px-5 sm:px-8 pt-24 sm:pt-32">
+      <section className="px-5 sm:px-8 pt-24 sm:pt-32 cv-auto">
         <div className="max-w-6xl mx-auto">
           <SectionHead paren="Upcoming" title="Events" action={{ href: '/events', label: 'See all events' }} />
 
@@ -226,7 +226,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* ---------------------------------------------------------------- CTA */}
-      <section className="px-5 sm:px-8 pt-24 sm:pt-32">
+      <section className="px-5 sm:px-8 pt-24 sm:pt-32 cv-auto">
         <div className="max-w-6xl mx-auto">
           <div className="glass rounded-lg px-8 sm:px-14 py-14 sm:py-20 text-center">
             <p className="mono-label text-foreground/65 mb-6">Membership is free</p>
