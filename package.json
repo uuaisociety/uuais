@@ -27,6 +27,7 @@
     "@hookform/resolvers": "^5.2.1",
     "@hugeicons/core-free-icons": "^3.1.1",
     "@hugeicons/react": "^1.1.5",
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dialog": "^1.1.6",
@@ -108,7 +109,11 @@
     "sharp": "^0.35.0",
     "uuid": "^11.1.1",
     "brace-expansion": "^5.0.9",
-    "js-yaml": "^4.3.0"
+    "js-yaml": "^4.3.0",
+    "@modelcontextprotocol/sdk": {
+      "ajv": "^8.17.1",
+      "ajv-formats": "^3.0.1"
+    }
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": "eslint --fix"
