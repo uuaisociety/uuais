@@ -32,7 +32,11 @@ jobs:
         run: npm run lint
 
       - name: Typecheck
-        run: npx tsc --noEmit
+        # Generate route types + next-env.d.ts first (next-env.d.ts is
+        # gitignored, so image/module declarations are missing on fresh clones).
+        run: |
+          npx next typegen
+          npx tsc --noEmit
 
       - name: Unit tests
         run: npm test
