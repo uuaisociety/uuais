@@ -48,6 +48,17 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: E2E tests
+        # The E2E smoke tests assert on page chrome only (header/footer/main),
+        # so dummy Firebase client config is enough to boot the app without a
+        # real .env. Server-side Admin SDK init fails safely via getPublicSeed's
+        # fallback; don't add real credentials to CI.
+        env:
+          NEXT_PUBLIC_FIREBASE_API_KEY: dummy
+          NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: dummy.firebaseapp.com
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: dummy-project
+          NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: dummy-project.appspot.com
+          NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: "000000000000"
+          NEXT_PUBLIC_FIREBASE_APP_ID: 1:000000000000:web:0000000000000000000000
         run: npm run test:e2e
 
       - name: Upload Playwright report
