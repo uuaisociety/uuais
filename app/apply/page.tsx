@@ -40,9 +40,9 @@ export default function ApplyLandingPage() {
     <main className="min-h-screen bg-background transition-colors">
       <HeroSplash>
         <div className="relative z-10 max-w-4xl mx-auto px-6 py-20 text-center">
-          <p className="mono-label text-current/45 mb-6">UU AI Society · Join</p>
+          <p className="mono-label text-current/65 mb-6">UU AI Society · Join</p>
           <h1 className="display-lg mb-4">
-            Apply <span className="text-current/40">(contribute)</span>
+            Apply <span className="text-current/65">(contribute)</span>
           </h1>
           <p className="text-base sm:text-lg text-current/60 max-w-2xl mx-auto leading-relaxed">
             Choose how you want to contribute to UU AI Society.

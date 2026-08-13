@@ -18,7 +18,7 @@ function safeHref(href: string): string | null {
 }
 
 function linkClass(): string {
-  return "text-blue-600 dark:text-blue-400 hover:underline break-words";
+  return "text-primary hover:underline break-words";
 }
 
 function renderInline(text: string): React.ReactNode[] {

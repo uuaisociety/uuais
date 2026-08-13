@@ -351,7 +351,7 @@ const RoleRanker: React.FC<RoleRankerProps> = ({
                             </div>
                             {expanded && role.description && (
                               <div className="px-3 pb-3">
-                                <FormattedText text={role.description} className="text-sm text-muted-foreground" />
+                                <FormattedText text={role.description} className="text-sm text-muted-foreground max-w-[65ch]" />
                               </div>
                             )}
                           </div>

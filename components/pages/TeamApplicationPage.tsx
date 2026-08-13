@@ -124,7 +124,7 @@ const CollapsibleDescription: React.FC<{ text: string; className?: string }> = (
 
   return (
     <div>
-      <div ref={contentRef} className={`${className} ${expanded ? "" : "line-clamp-3"}`}>
+      <div ref={contentRef} className={`${className} ${expanded ? "" : "line-clamp-3"} max-w-[65ch]`}>
         <FormattedText text={text} />
       </div>
       {needsToggle && (

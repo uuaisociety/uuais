@@ -321,10 +321,10 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
       title={isNew ? "New campaign" : `Edit: ${campaign?.title}`}
       size="lg"
       header={
-        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 -mx-6 -mt-6 mb-0 rounded-t-lg">
+        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-border bg-card -mx-6 -mt-6 mb-0 rounded-t-lg">
           <div className="flex items-center gap-2">
-            <FileQuestion className="h-5 w-5 text-red-600 dark:text-red-400" aria-hidden />
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white">
+            <FileQuestion className="h-5 w-5 text-primary" aria-hidden />
+            <h2 className="text-lg font-bold text-foreground">
               {isNew ? "New campaign" : `Edit: ${campaign?.title}`}
             </h2>
           </div>
@@ -332,7 +332,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
             type="button"
             onClick={onClose}
             aria-label="Close dialog"
-            className="size-9 grid place-items-center rounded-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700/60 transition-colors cursor-pointer"
+            className="size-9 grid place-items-center rounded-sm text-muted-foreground hover:text-foreground hover:bg-foreground/[0.06] transition-colors cursor-pointer"
           >
             <X className="h-5 w-5" />
           </button>
@@ -340,15 +340,15 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
       }
     >
       {loading ? (
-        <div className="p-12 text-center text-gray-500 dark:text-gray-400">
-          <div className="h-6 w-6 border-2 border-red-600 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+        <div className="p-12 text-center text-muted-foreground">
+          <div className="h-6 w-6 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-3" />
           Loading campaign…
         </div>
       ) : (
           <form onSubmit={handleSubmit} className="space-y-6 p-6">
             {/* Metadata */}
             <section>
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">Campaign details</h3>
+              <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">Campaign details</h3>
               <div className="grid gap-4">
                 <FieldGroup label="Campaign title" requiredHint="Required.">
                   <InputBase maxLength={150} placeholder="e.g. Spring 2026 Recruitment" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -375,14 +375,14 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
             </section>
 
             {/* Teams + roles */}
-            <section className="pt-2 border-t border-gray-200 dark:border-gray-700">
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-1 mt-4">Teams &amp; Roles</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+            <section className="pt-2 border-t border-border">
+              <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-1 mt-4">Teams &amp; Roles</h3>
+              <p className="text-xs text-muted-foreground mb-4">
                 Choose the teams in this campaign, then define the roles each team is recruiting for.
                 Applicants rank roles (up to 3) in step 4. Roles have their own status and optional deadline,
                 so you can open new ones mid-campaign.
               </p>
-              <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
+              <p className="text-xs text-muted-foreground/70 mb-4">
                 Team and role descriptions support paragraphs (blank line), &ldquo;- &rdquo; bullet lists, &ldquo;# &rdquo; headings,
                 and clickable links/emails (paste a URL or email address). Up to 10 000 characters.
               </p>
@@ -395,7 +395,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                       type="button"
                       onClick={() => toggleTeam(id)}
                       className={`px-3 py-2 rounded-lg border text-sm font-medium transition-all duration-200 ${
-                        enabled ? "border-red-600 bg-red-600 text-white shadow-sm" : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600"
+                        enabled ? "border-primary bg-primary text-primary-foreground shadow-sm" : "border-border text-muted-foreground hover:border-foreground/25 hover:text-foreground"
                       }`}
                     >
                       {TEAM_NAME[id]}
@@ -404,7 +404,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                 })}
               </div>
               {enabledTeams.length === 0 && (
-                <p className="text-xs text-amber-600 dark:text-amber-500 mt-2">Select at least one team.</p>
+                <p className="text-xs text-chart-3 mt-2">Select at least one team.</p>
               )}
 
               {enabledTeams.map((teamId, teamIdx) => {
@@ -412,10 +412,10 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                 const info = teamInfo[teamId] || {};
                 const Icon = TEAM_ICON[teamId] || Server;
                 return (
-                  <div key={teamId} className="mt-5 border border-gray-200 dark:border-gray-700 rounded-md p-4 bg-gray-50/50 dark:bg-gray-900/30">
+                  <div key={teamId} className="mt-5 border border-border rounded-md p-4 bg-foreground/[0.02]">
                     <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="inline-flex items-center gap-2 text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase min-w-0">
-                        <Icon className="h-3.5 w-3.5 text-red-600 dark:text-red-400 shrink-0" />
+                      <span className="inline-flex items-center gap-2 text-xs font-semibold text-foreground uppercase min-w-0">
+                        <Icon className="h-3.5 w-3.5 text-primary shrink-0" />
                         <span className="truncate">{TEAM_NAME[teamId]}</span>
                       </span>
                       <span className="inline-flex items-center gap-1 shrink-0">
@@ -441,7 +441,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                       </span>
                     </div>
 
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                    <p className="text-xs text-muted-foreground mb-2">
                       Optional: customize how this team appears on the applicant overview.
                     </p>
                     <div className="grid gap-2 mb-4">
@@ -461,13 +461,13 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                     </div>
 
                     {teamRoles.length === 0 ? (
-                      <p className="text-xs text-gray-400 dark:text-gray-500 italic">
+                      <p className="text-xs text-muted-foreground/70 italic">
                         No roles defined yet — add at least one role so applicants can apply to this team.
                       </p>
                     ) : (
                       <div className="space-y-3">
                         {teamRoles.map((role) => (
-                          <div key={role.id} className="border border-gray-200 dark:border-gray-700 rounded-md p-3 bg-white dark:bg-gray-800 space-y-2">
+                          <div key={role.id} className="border border-border rounded-md p-3 bg-card space-y-2">
                             <div className="flex items-center gap-2">
                               <InputBase
                                 maxLength={150}
@@ -479,7 +479,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                               <button
                                 type="button"
                                 onClick={() => removeRole(role.id)}
-                                className="p-1.5 text-red-500 hover:text-red-600 transition-colors"
+                                className="p-1.5 text-primary hover:text-primary/80 transition-colors"
                                 title="Delete role"
                                 aria-label={`Delete ${role.title || "role"}`}
                               >
@@ -509,14 +509,14 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                               />
                             </div>
                             <div className="flex items-center gap-3">
-                              <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Status:</span>
+                              <span className="text-xs font-medium text-muted-foreground">Status:</span>
                               <button
                                 type="button"
                                 onClick={() => toggleRoleStatus(role.id)}
                                 className={`px-2.5 py-1 text-xs font-medium rounded-full border transition-all duration-200 ${
                                   role.status === "open"
-                                    ? "bg-green-600 text-white border-green-600"
-                                    : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600"
+                                    ? "bg-chart-4/15 text-chart-4 border-chart-4/30"
+                                    : "bg-foreground/[0.06] text-muted-foreground border-border"
                                 }`}
                               >
                                 {role.status === "open" ? "Open" : "Closed"}
@@ -532,9 +532,9 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
             </section>
 
             {/* Standard fields */}
-            <section className="pt-2 border-t border-gray-200 dark:border-gray-700">
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-1 mt-4">Standard applicant fields</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Toggle which fields appear in the applicant form.</p>
+            <section className="pt-2 border-t border-border">
+              <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-1 mt-4">Standard applicant fields</h3>
+              <p className="text-xs text-muted-foreground mb-4">Toggle which fields appear in the applicant form.</p>
               <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-2">
                 {STANDARD_FIELDS.map((field) => {
                   const enabled = enabledStandardFields.includes(field.id);
@@ -542,11 +542,11 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                     <label
                       key={field.id}
                       className={`flex items-center gap-2 p-2.5 rounded-md border text-sm cursor-pointer transition-colors ${
-                        enabled ? "border-red-200 dark:border-red-900 bg-red-50 dark:bg-red-950/20" : "border-gray-200 dark:border-gray-700"
+                        enabled ? "border-primary/30 bg-primary/10" : "border-border"
                       }`}
                     >
-                      <input type="checkbox" checked={enabled} onChange={() => toggleField(field.id)} className="accent-red-600" />
-                      <span className="text-gray-700 dark:text-gray-300">{field.label}</span>
+                      <input type="checkbox" checked={enabled} onChange={() => toggleField(field.id)} className="accent-primary" />
+                      <span className="text-foreground">{field.label}</span>
                     </label>
                   );
                 })}
@@ -554,15 +554,15 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
             </section>
 
             {/* Custom questions builder */}
-            <section className="pt-2 border-t border-gray-200 dark:border-gray-700">
+            <section className="pt-2 border-t border-border">
               <div className="flex items-center justify-between mb-1 mt-4">
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">Custom questions</h3>
+                <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">Custom questions</h3>
                 <Button type="button" size="sm" variant="outline" icon={Plus} onClick={addQuestion}>Add question</Button>
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Add custom questions unique to this campaign. They appear in the applicant form after the standard fields.</p>
+              <p className="text-xs text-muted-foreground mb-4">Add custom questions unique to this campaign. They appear in the applicant form after the standard fields.</p>
 
               {questions.length === 0 ? (
-                <div className="text-center py-8 text-sm text-gray-400 dark:text-gray-500 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-md">
+                <div className="text-center py-8 text-sm text-muted-foreground/70 border-2 border-dashed border-border rounded-md">
                   No custom questions yet. Click &ldquo;Add question&rdquo; to create one.
                 </div>
               ) : (
@@ -570,11 +570,11 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                   {questions.map((q, idx) => {
                     const expanded = optionsExpanded.has(q.id);
                     return (
-                      <div key={q.id} className="border border-gray-200 dark:border-gray-700 rounded-md p-4 bg-gray-50/50 dark:bg-gray-900/30">
+                      <div key={q.id} className="border border-border rounded-md p-4 bg-foreground/[0.02]">
                         <div className="flex items-start gap-2 mb-3">
                           <div className="shrink-0 flex flex-col items-center pt-1">
-                            <GripVertical className="h-4 w-4 text-gray-300 dark:text-gray-600" />
-                            <span className="text-xs font-bold text-gray-400 mt-0.5">{idx + 1}</span>
+                            <GripVertical className="h-4 w-4 text-muted-foreground/50" />
+                            <span className="text-xs font-bold text-muted-foreground/70 mt-0.5">{idx + 1}</span>
                           </div>
                           <div className="flex-1 min-w-0">
                             <InputBase
@@ -585,20 +585,20 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                             />
                           </div>
                           <div className="shrink-0 flex items-center gap-0.5">
-                            <button type="button" onClick={() => moveQuestion(q.id, -1)} disabled={idx === 0} className="p-1.5 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30 transition-colors" title="Move up">
+                            <button type="button" onClick={() => moveQuestion(q.id, -1)} disabled={idx === 0} className="p-1.5 text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors" title="Move up">
                               <ArrowUp className="h-4 w-4" />
                             </button>
-                            <button type="button" onClick={() => moveQuestion(q.id, 1)} disabled={idx === questions.length - 1} className="p-1.5 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30 transition-colors" title="Move down">
+                            <button type="button" onClick={() => moveQuestion(q.id, 1)} disabled={idx === questions.length - 1} className="p-1.5 text-muted-foreground hover:text-foreground disabled:opacity-30 transition-colors" title="Move down">
                               <ArrowDown className="h-4 w-4" />
                             </button>
-                            <button type="button" onClick={() => removeQuestion(q.id)} className="p-1.5 text-red-500 hover:text-red-600 transition-colors" title="Delete question">
+                            <button type="button" onClick={() => removeQuestion(q.id)} className="p-1.5 text-primary hover:text-primary/80 transition-colors" title="Delete question">
                               <Trash2 className="h-4 w-4" />
                             </button>
                           </div>
                         </div>
                         <div className="flex flex-wrap items-center gap-3 pl-7">
                           <div className="flex items-center gap-2">
-                            <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Type:</span>
+                            <span className="text-xs font-medium text-muted-foreground">Type:</span>
                             <SelectBase
                               value={q.type}
                               onChange={(e) => updateQuestion(q.id, { type: e.target.value as CustomQuestionType })}
@@ -609,19 +609,19 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                               ))}
                             </SelectBase>
                           </div>
-                          <label className="flex items-center gap-1.5 text-sm text-gray-600 dark:text-gray-400 cursor-pointer">
-                            <input type="checkbox" checked={q.required} onChange={(e) => updateQuestion(q.id, { required: e.target.checked })} className="accent-red-600" />
+                          <label className="flex items-center gap-1.5 text-sm text-muted-foreground cursor-pointer">
+                            <input type="checkbox" checked={q.required} onChange={(e) => updateQuestion(q.id, { required: e.target.checked })} className="accent-primary" />
                             Required
                           </label>
                           {hasOptions(q.type) && (
-                            <button type="button" onClick={() => toggleOptionsExpanded(q.id)} className="text-xs text-blue-600 dark:text-blue-400 hover:underline">
+                            <button type="button" onClick={() => toggleOptionsExpanded(q.id)} className="text-xs text-primary hover:underline">
                               {expanded ? "Hide options" : `Options (${q.options.filter((o) => o.trim() !== "").length})`}
                             </button>
                           )}
                         </div>
                         {hasOptions(q.type) && expanded && (
                           <div className="pl-7 mt-3 space-y-2">
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                            <p className="text-xs text-muted-foreground">
                               Each option appears as a {q.type === "checkbox" ? "checkbox" : q.type === "radio" ? "single choice" : "dropdown option"} in the applicant form.
                             </p>
                             <ul className="space-y-2">
@@ -638,7 +638,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
                                     onClick={() => removeOption(q.id, oi)}
                                     title="Remove option"
                                     aria-label={`Remove option ${oi + 1}`}
-                                    className="p-1.5 text-red-500 hover:text-red-600 transition-colors cursor-pointer"
+                                    className="p-1.5 text-primary hover:text-primary/80 transition-colors cursor-pointer"
                                   >
                                     <X className="h-4 w-4" />
                                   </button>
@@ -658,7 +658,7 @@ const CampaignBuilderModal: React.FC<Props> = ({ open, campaign, isNew, onClose,
             </section>
 
             {/* Footer */}
-            <div className="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="flex justify-between items-center pt-4 border-t border-border">
               <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
               <Button type="submit" variant="outline" disabled={!title.trim() || enabledTeams.length === 0 || !hasValidRoles || saving}>
                 {saving ? "Saving…" : isNew ? "Create campaign" : "Save changes"}

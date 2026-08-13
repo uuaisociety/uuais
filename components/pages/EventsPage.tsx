@@ -77,7 +77,7 @@ const EventsPage: React.FC = () => {
       {/* Hero */}
       <HeroSplash>
         <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 pt-32 pb-20">
-          <p className="mono-label text-current/45 mb-6">UU AI Society · What&apos;s on</p>
+          <p className="mono-label text-current/65 mb-6">UU AI Society · What&apos;s on</p>
           <h1 className="display-lg mb-4">
             Events
           </h1>

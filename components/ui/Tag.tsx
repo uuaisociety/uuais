@@ -25,7 +25,7 @@ const variantClasses: Record<TagVariant, { light: string; dark: string; text: st
 };
 
 const sizeClasses: Record<TagSize, string> = {
-  sm: "px-2 py-1 text-[0.625rem]",
+  sm: "px-2 py-1 text-[0.6875rem]",
   md: "px-2.5 py-1 text-[0.6875rem]",
   lg: "px-3 py-1.5 text-xs",
 };
@@ -42,7 +42,7 @@ export const Tag: React.FC<TagProps> = ({ children, variant = "red", size = "md"
   return (
     <span
       className={clsx(
-        "inline-flex items-center font-mono uppercase tracking-[0.1em] font-medium rounded-sm leading-none",
+        "inline-flex items-center font-mono uppercase tracking-[0.1em] font-medium rounded-sm border border-border leading-none",
         v.light,
         v.dark,
         v.text,

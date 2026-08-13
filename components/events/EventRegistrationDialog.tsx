@@ -270,7 +270,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
       ) : (
         <div className="text-sm text-foreground">
           Please sign in and become a member to register for this event.
-          <Link href="/account" className="text-[#c41d1d] underline ml-1">
+          <Link href="/account" className="text-primary underline ml-1">
             Login / Create account
           </Link>
         </div>
