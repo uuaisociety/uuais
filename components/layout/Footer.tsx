@@ -129,7 +129,7 @@ export const Footer: React.FC = () => {
           <p className="mono-meta text-muted-foreground text-center sm:text-left">
             © {new Date().getFullYear()} UU AI Society · Org. 802551-8930
           </p>
-          <p aria-hidden className="opacity-[0.0] select-none pointer-events-none text-xs">
+          <p aria-hidden className="max-w-full overflow-hidden opacity-[0.0] select-none pointer-events-none text-xs break-words">
             VVVBSVMgSVQgVEVBTSBSRUNSVUlUSU5HOiBlbWFpbCBpdEB1dWFpcy5jb20gc3ViamVjdCAiYWdlbnQgZm91bmQgbWUi
           </p>
           <div className="flex items-center gap-2">
