@@ -45,6 +45,7 @@ declare global {
   var __setMockTheme: ((theme: 'light' | 'dark') => void) | undefined;
   var __setMockParams: ((params: Record<string, string>) => void) | undefined;
   var __setAppState: ((state: Record<string, unknown> | null) => void) | undefined;
+  var __setAdminState: ((state: Record<string, unknown> | null) => void) | undefined;
 }
 
 beforeEach(() => {
@@ -129,16 +130,24 @@ global.__setMockParams = (params: Record<string, string>) => {
   Object.assign(mockParams, params);
 };
 
+let __mockAdminState: Record<string, unknown> | null = null;
+const __defaultAdminState = {
+  user: null,
+  loading: false,
+  profileLoading: false,
+  profile: null,
+  isAdmin: false,
+  isSuperAdmin: false,
+  claims: null,
+  signInWithGoogle: jest.fn(),
+  logout: jest.fn(),
+};
+global.__setAdminState = (state: Record<string, unknown> | null) => {
+  __mockAdminState = state;
+};
 jest.mock('@/hooks/useAdmin', () => ({
-  useAdmin: () => ({
-    user: null,
-    loading: false,
-    isAdmin: false,
-    isSuperAdmin: false,
-    claims: null,
-    signInWithGoogle: jest.fn(),
-    logout: jest.fn(),
-  }),
+  useAdmin: () => __mockAdminState || __defaultAdminState,
+  refreshProfile: jest.fn().mockResolvedValue(undefined),
 }));
 
 jest.mock('next/image', () => {
@@ -223,6 +232,7 @@ jest.mock("@/lib/firestore", () => {
     recordAttendance: stub,
     getUsers: stub,
     getUserById: stub,
+    getUserProfile: stub,
     updateUser: stub,
     subscribeToAiChats: jest.fn(() => () => {}),
     addAiChat: stub,

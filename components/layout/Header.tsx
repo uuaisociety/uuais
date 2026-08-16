@@ -196,7 +196,7 @@ export const Header: React.FC = () => {
               <button
                 ref={mobileButtonRef}
                 onClick={() => setIsMenuOpen((v) => !v)}
-                className="lg:hidden size-9 grid place-items-center rounded-sm text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors cursor-pointer"
+                className="lg:hidden size-11 grid place-items-center rounded-sm text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors cursor-pointer"
                 aria-expanded={isMenuOpen}
                 aria-controls="mobile-menu"
               >
@@ -211,7 +211,7 @@ export const Header: React.FC = () => {
             ref={mobileMenuRef}
             id="mobile-menu"
             inert={!isMenuOpen}
-            className={`lg:hidden overflow-hidden origin-top transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+            className={`lg:hidden overflow-x-hidden overflow-y-auto origin-top transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
               isMenuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
             }`}
           >

@@ -385,7 +385,7 @@ export default function CourseConnectionsFlow({
       <div className={"border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-900 relative " + (isFull ? "w-full h-full" : "")}>
         <button
           onClick={() => setIsFull(f => !f)}
-          className="absolute top-2 right-2 z-10 px-2 py-1 text-xs rounded bg-gray-800 text-white hover:bg-gray-700 hover:shadow-lg transition-all"
+          className="absolute top-2 right-2 z-10 px-2 py-1 text-xs rounded bg-gray-800 text-white hover:bg-gray-700 hover:shadow-lg transition-all min-h-10 min-w-11"
         >
           {isFull ? "Exit Fullscreen" : "Fullscreen"}
         </button>

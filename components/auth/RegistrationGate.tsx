@@ -1,38 +1,29 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useAdmin } from "@/hooks/useAdmin";
 
-// Client-side gate: if user is signed in but has not completed registration,
-// redirect them to /join except for public pages.
+// Client-side gate: a signed-in user who hasn't completed registration is only
+// allowed on /join (and the login/privacy pages). Navigating anywhere else signs them out.
 export default function RegistrationGate() {
-  const router = useRouter();
   const pathname = usePathname();
-  const { user, profile, profileLoading } = useAdmin();
+  const { user, profile, profileLoading, logout } = useAdmin();
 
   useEffect(() => {
-    // Allow public pages & auth pages without checks
-    const publicPaths = [
-      "/",
-      "/about",
-      "/contact",
-      "/events",
-      "/blog",
-      "/privacy",
-      "/login",
-      "/join",
-    ];
-    if (publicPaths.some((p) => pathname === p || pathname?.startsWith(p + "/"))) return;
-
-    if (!user) return; // anonymous visitors are allowed to public pages; private pages should also check auth separately
+    if (!user) return; // anonymous visitors browse freely
     if (profileLoading) return; // wait for the shared profile lookup so a complete profile isn't read as incomplete
 
     const completed = Boolean(profile?.isMember) && Boolean(profile?.privacyAcceptedAt);
-    if (!completed) {
-      router.push("/join");
-    }
-  }, [user, profile, profileLoading, pathname, router]);
+    if (completed) return;
+
+    // Half-registered: allow only the pages needed to finish or re-authenticate.
+    const allowedPaths = ["/join", "/login", "/privacy"];
+    if (allowedPaths.some((p) => pathname === p || pathname?.startsWith(p + "/"))) return;
+
+    // Navigated off /join without a complete account — sign them out.
+    logout();
+  }, [user, profile, profileLoading, pathname, logout]);
 
   return null;
 }

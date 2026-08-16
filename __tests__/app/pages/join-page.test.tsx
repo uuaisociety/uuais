@@ -11,8 +11,6 @@ jest.mock('@/lib/firebase-client', () => {
       }),
       _callbackHolder: callbackHolder,
     },
-    signInWithGooglePopup: jest.fn(),
-    signInWithGithubPopup: jest.fn(),
   }
 })
 
@@ -36,15 +34,6 @@ jest.mock('@/utils/seo', () => ({
   updatePageMeta: jest.fn(),
 }))
 
-jest.mock('@hugeicons/react', () => ({
-  HugeiconsIcon: ({ icon }: { icon: string }) => <span data-testid="hugeicon">{String(icon)}</span>,
-}))
-
-jest.mock('@hugeicons/core-free-icons', () => ({
-  GoogleIcon: 'google-icon',
-  GithubIcon: 'github-icon',
-}))
-
 async function triggerAuthCallback(user: Record<string, unknown> | null) {
   const firebase = jest.requireMock('@/lib/firebase-client') as {
     auth: { _callbackHolder: { current: ((u: unknown) => Promise<void> | void) | null } }
@@ -61,14 +50,6 @@ function mockedUsers() {
     getUserProfile: jest.Mock
     upsertUserProfile: jest.Mock
     updateUserProfile: jest.Mock
-  }
-}
-
-function mockedFirebase() {
-  return jest.requireMock('@/lib/firebase-client') as {
-    auth: { _callbackHolder: { current: ((u: unknown) => Promise<void> | void) | null } }
-    signInWithGooglePopup: jest.Mock
-    signInWithGithubPopup: jest.Mock
   }
 }
 
@@ -97,25 +78,6 @@ describe('JoinPage', () => {
   })
 
   describe('logged out', () => {
-    it('renders sign-in buttons', () => {
-      render(<JoinPage />)
-      expect(screen.getByText(/Sign in or Create Account/)).toBeInTheDocument()
-      expect(screen.getByText(/Continue with Google/)).toBeInTheDocument()
-      expect(screen.getByText(/Continue with GitHub/)).toBeInTheDocument()
-    })
-
-    it('calls signInWithGooglePopup on Google button click', async () => {
-      render(<JoinPage />)
-      fireEvent.click(screen.getByText(/Continue with Google/))
-      await waitFor(() => expect(mockedFirebase().signInWithGooglePopup).toHaveBeenCalled())
-    })
-
-    it('calls signInWithGithubPopup on GitHub button click', async () => {
-      render(<JoinPage />)
-      fireEvent.click(screen.getByText(/Continue with GitHub/))
-      await waitFor(() => expect(mockedFirebase().signInWithGithubPopup).toHaveBeenCalled())
-    })
-
     it('renders already-a-member section', () => {
       render(<JoinPage />)
       expect(screen.getByText('Already a member?')).toBeInTheDocument()

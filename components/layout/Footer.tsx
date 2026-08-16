@@ -138,7 +138,7 @@ export const Footer: React.FC = () => {
             </Link>
             <button
               onClick={scrollToTop}
-              className="size-9 grid place-items-center rounded-full border border-border text-foreground/50 hover:text-foreground hover:border-foreground/25 transition-colors duration-300 cursor-pointer"
+              className="size-11 grid place-items-center rounded-full border border-border text-foreground/50 hover:text-foreground hover:border-foreground/25 transition-colors duration-300 cursor-pointer"
               aria-label="Scroll to top"
             >
               <ArrowUp className="h-4 w-4" />
