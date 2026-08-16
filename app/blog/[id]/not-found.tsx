@@ -10,13 +10,13 @@ export default function BlogNotFound() {
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
           href="/blog"
-          className="px-6 py-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors"
+          className="px-6 py-3 bg-primary text-primary-foreground font-medium rounded-md hover:opacity-90 transition-colors"
         >
           Back to Blog
         </Link>
         <Link
           href="/"
-          className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+          className="px-6 py-3 border border-border text-foreground font-medium rounded-md hover:bg-foreground/[0.05] transition-colors"
         >
           Go Home
         </Link>

@@ -37,9 +37,9 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onGenerateClick, o
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Blog Management</h2>
-        <div className="flex gap-3">
+      <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
+        <h2 className="text-2xl font-bold text-foreground">Blog Management</h2>
+        <div className="flex flex-wrap gap-3">
           {onGenerateClick && (
             <Button variant="outline" icon={Sparkles} onClick={onGenerateClick}>Generate AI Draft</Button>
           )}
@@ -66,13 +66,20 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onGenerateClick, o
       </div>
 
       <div className="grid gap-4">
+        {filteredPosts.length === 0 && (
+          <p className="text-sm text-muted-foreground py-8 text-center">
+            {section === "ai"
+              ? "No AI News Desk drafts yet — generate one to get started."
+              : "No articles here yet."}
+          </p>
+        )}
         {filteredPosts.map((post) => (
           <Card key={post.id}>
             <CardContent className="p-6">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center space-x-3 mb-2 flex-wrap">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{post.title}</h3>
+                    <h3 className="text-lg font-semibold text-foreground">{post.title}</h3>
                     {post.authorType === "ai" && (
                       <Tag variant="blue" size="sm" className="inline-flex items-center gap-1">
                         <Sparkles className="h-3 w-3" />
@@ -83,8 +90,8 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onGenerateClick, o
                       {post.published ? 'Published' : 'Draft'}
                     </Tag>
                   </div>
-                  <p className="text-gray-600 mb-2 dark:text-gray-400">{post.excerpt}</p>
-                  <div className="text-sm text-gray-500 mb-2 dark:text-gray-400 flex items-center gap-4">
+                  <p className="text-muted-foreground mb-2">{post.excerpt}</p>
+                  <div className="text-sm text-muted-foreground mb-2 flex items-center gap-4">
                     <span className="inline-flex items-center gap-1.5">
                       <User className="h-3.5 w-3.5" aria-hidden />
                       {post.author}
@@ -100,7 +107,7 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onGenerateClick, o
                     ))}
                   </div>
                 </div>
-                <div className="flex space-x-2 ml-4">
+                <div className="flex flex-wrap gap-2 ml-4">
                   {onToggleFeatured && (
                     <Button
                       size="sm"

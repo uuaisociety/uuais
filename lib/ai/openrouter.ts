@@ -152,7 +152,7 @@ export async function generateCompletion(
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
         'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-        'X-Title': 'UUAIS Course Advisor',
+        'X-Title': 'UU AI Society',
       },
       body: JSON.stringify({
         model,
@@ -264,7 +264,7 @@ export async function streamCompletion(
       'Authorization': `Bearer ${apiKey}`,
       'Content-Type': 'application/json',
       'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-      'X-Title': 'UUAIS Course Advisor',
+      'X-Title': 'UU AI Society',
     },
     body: JSON.stringify({
       model,

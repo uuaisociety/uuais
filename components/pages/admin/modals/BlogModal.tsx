@@ -69,9 +69,9 @@ const BlogModal: React.FC<BlogModalProps> = ({ open, editing, form, setForm, onC
           </div>
           <div className="flex flex-wrap gap-2 mt-2">
             {form.tags.map((tag) => (
-              <span key={tag} className="inline-flex items-center gap-2 px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 text-sm">
+              <span key={tag} className="inline-flex items-center gap-2 px-2 py-1 rounded bg-foreground/[0.08] text-sm">
                 {tag}
-                <button type="button" onClick={() => removeTag(tag)} aria-label={`Remove tag ${tag}`} className="text-gray-600 dark:text-gray-300">×</button>
+                <button type="button" onClick={() => removeTag(tag)} aria-label={`Remove tag ${tag}`} className="text-muted-foreground hover:text-foreground">×</button>
               </span>
             ))}
           </div>

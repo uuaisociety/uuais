@@ -196,14 +196,14 @@ const BlogAISettingsTab: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
       </div>
     );
   }
 
   if (!settings) {
     return (
-      <div className="text-center py-12 text-gray-600 dark:text-gray-300">
+      <div className="text-center py-12 text-muted-foreground">
         Failed to load blog AI settings
       </div>
     );
@@ -212,12 +212,12 @@ const BlogAISettingsTab: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <Bot className="h-6 w-6 text-primary" />
           <div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">AI News Desk Settings</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Configure the blog generation model, prompts, and news sources</p>
+            <h2 className="text-xl font-semibold text-foreground">AI News Desk Settings</h2>
+            <p className="text-sm text-muted-foreground">Configure the blog generation model, prompts, and news sources</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -231,7 +231,7 @@ const BlogAISettingsTab: React.FC = () => {
       </div>
 
       {error && (
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg">
+        <div className="bg-destructive/10 border border-destructive/30 text-destructive px-4 py-3 rounded-lg">
           {error}
         </div>
       )}
@@ -247,7 +247,7 @@ const BlogAISettingsTab: React.FC = () => {
                 disabled={!isSuperAdmin}
                 options={openRouterModels.length > 0 ? openRouterModels : [{ value: settings.model, label: settings.model }]}
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 {isSuperAdmin
                   ? `Model used to generate AI News Desk drafts (${openRouterModels.length > 0 ? `${openRouterModels.length} models loaded` : 'default only'})`
                   : 'Only super admins can change the model'}
@@ -264,7 +264,7 @@ const BlogAISettingsTab: React.FC = () => {
                   disabled={!isSuperAdmin}
                   onChange={(e) => setSettings({ ...settings, maxOutputTokens: Math.max(MIN_OUTPUT_TOKENS, Number(e.target.value) || MIN_OUTPUT_TOKENS) })}
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-muted-foreground mt-1">
                   Reasoning tokens count against this budget. Raise it if a long-thinking model truncates the JSON.
                 </p>
               </FieldGroup>
@@ -303,7 +303,7 @@ const BlogAISettingsTab: React.FC = () => {
               placeholder={'Watch items (prioritize when they hit):\n- \n\nReader feedback (what landed well — keep doing):\n- '}
             />
           </FieldGroup>
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-muted-foreground mt-2">
             Example: specific releases to watch for, or feedback like "model releases with benchmark tables land well; include internship and student-program stories."
           </p>
         </CardContent>
@@ -322,7 +322,7 @@ const BlogAISettingsTab: React.FC = () => {
                 placeholder={'OpenAI News|https://openai.com/news/rss.xml\nAnthropic News|SCRAPE|https://www.anthropic.com/news|/news/\nBreakit|https://www.breakit.se/feed/artiklar'}
               />
             </FieldGroup>
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-muted-foreground mt-2">
               Scrape sources pull article links from the page HTML (for outlets without a feed). Together with an Exa search, candidates are deduped and only genuinely new stories surface.
             </p>
           </CardContent>
@@ -337,7 +337,7 @@ const BlogAISettingsTab: React.FC = () => {
                 placeholder="major AI news this week"
               />
             </FieldGroup>
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-muted-foreground mt-2">
               Candidates are gathered from these curated feeds plus an Exa search, deduped, and presented in the Generate AI Draft modal.
             </p>
           </CardContent>
@@ -348,12 +348,12 @@ const BlogAISettingsTab: React.FC = () => {
       <Card>
         <CardContent className="p-6">
           <div className="flex items-center gap-2 mb-2">
-            <EyeOff className="h-5 w-5 text-gray-500" />
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white">
-              Used articles <span className="text-sm font-normal text-gray-500 dark:text-gray-400">({coveredUrls.length})</span>
+            <EyeOff className="h-5 w-5 text-muted-foreground" />
+            <h3 className="text-lg font-medium text-foreground">
+              Used articles <span className="text-sm font-normal text-muted-foreground">({coveredUrls.length})</span>
             </h3>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+          <p className="text-sm text-muted-foreground mb-4">
             URLs shown here are skipped when the agent researches candidates. They include URLs marked used manually plus URLs cited by existing AI News Desk posts. Deleting a post releases its cited URLs.
           </p>
 
@@ -372,10 +372,10 @@ const BlogAISettingsTab: React.FC = () => {
 
           {usedLoading ? (
             <div className="flex items-center justify-center py-8">
-              <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
+              <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
             </div>
           ) : coveredUrls.length === 0 ? (
-            <p className="text-sm text-gray-500 dark:text-gray-400">No articles are currently marked as used or cited.</p>
+            <p className="text-sm text-muted-foreground">No articles are currently marked as used or cited.</p>
           ) : (
             <ul className="space-y-2 max-h-80 overflow-y-auto pr-1">
               {coveredUrls.map((item) => (
@@ -423,7 +423,7 @@ const BlogAISettingsTab: React.FC = () => {
       </Card>
 
       {/* Last Updated */}
-      <div className="text-sm text-gray-500 dark:text-gray-400">
+      <div className="text-sm text-muted-foreground">
         Last updated: {settings.updatedAt ? new Date(settings.updatedAt).toLocaleString() : 'Never'}
       </div>
     </div>

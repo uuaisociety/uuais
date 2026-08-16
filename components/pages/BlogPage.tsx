@@ -86,7 +86,7 @@ const BlogPage: React.FC = () => {
   );
 
   const renderPostGrid = (posts: BlogPost[]) => (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {posts.map((post) => (
         <Card key={post.id} variant="glass" className="h-full flex flex-col">
           <Link href={`/blog/${postPath(post)}`} aria-label={`Open ${post.title}`} className="block">
@@ -94,11 +94,11 @@ const BlogPage: React.FC = () => {
               src={post.image || previewImageFor(post.id)}
               alt={post.title}
               fill
-              className="aspect-video"
+              className="aspect-[16/10]"
             />
           </Link>
 
-          <CardContent className="p-6 flex flex-col flex-1">
+          <CardContent className="p-5 flex flex-col flex-1">
             <div className="flex flex-wrap gap-2 mb-3">
               {post.featured && (
                 <Tag variant="yellow" size="sm">Featured</Tag>
@@ -173,7 +173,7 @@ const BlogPage: React.FC = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 pt-32 pb-20">
           <p className="mono-label text-current/65 mb-6">UU AI Society · What&apos;s new</p>
           <h1 className="display-lg mb-4">Blog</h1>
-          <p className="text-base sm:text-lg text-current/60 max-w-2xl leading-relaxed">
+          <p className="text-base sm:text-lg text-current/65 max-w-2xl leading-relaxed">
             News and insights from the UU AI Society — editorials from our team and AI-generated digests from the AI News Desk.
           </p>
         </div>
@@ -188,7 +188,7 @@ const BlogPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setSearchTerm('')}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-9 rounded-full border border-border bg-card text-sm text-foreground hover:bg-foreground/[0.05] transition-colors cursor-pointer truncate max-w-56"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-9 rounded-md border border-border bg-card text-sm text-foreground hover:bg-foreground/[0.05] transition-colors cursor-pointer truncate max-w-56"
               >
                 <span className="truncate">{searchTerm}</span>
                 <X className="h-3.5 w-3.5 shrink-0" aria-hidden />
@@ -213,7 +213,7 @@ const BlogPage: React.FC = () => {
                   type="button"
                   onClick={() => setSearchOpen(false)}
                   aria-label="Close search"
-                  className="grid place-items-center size-9 rounded-full text-current/60 hover:text-current hover:bg-current/[0.06] transition-colors duration-300 cursor-pointer"
+                  className="grid place-items-center size-9 rounded-md text-current/60 hover:text-current hover:bg-current/[0.06] transition-colors duration-300 cursor-pointer"
                 >
                   <X className="h-4 w-4" aria-hidden />
                 </button>
@@ -225,7 +225,7 @@ const BlogPage: React.FC = () => {
                     type="button"
                     onClick={() => setSearchOpen(true)}
                     aria-label="Search articles"
-                    className="inline-flex items-center gap-1.5 h-9 px-2.5 rounded-full text-current/60 hover:text-current hover:bg-current/[0.06] transition-colors duration-300 cursor-pointer"
+                    className="inline-flex items-center gap-1.5 h-9 px-2.5 rounded-md text-current/60 hover:text-current hover:bg-current/[0.06] transition-colors duration-300 cursor-pointer"
                   >
                     <Search className="h-4 w-4" aria-hidden />
                     <span className="text-xs font-medium">Search</span>
@@ -265,7 +265,8 @@ const BlogPage: React.FC = () => {
             {/* Featured Post */}
             {featuredPost && (
               <div>
-                <h2 className="text-2xl font-bold text-foreground mb-8">Featured Article</h2>
+                <p className="mono-label text-muted-foreground mb-2">Editor&apos;s pick</p>
+                <h2 className="display-md text-foreground mb-8">Featured Article</h2>
                 <Card variant="glass" className="overflow-hidden">
                   <div className="md:flex">
                     <div className="md:w-1/2">
@@ -319,7 +320,8 @@ const BlogPage: React.FC = () => {
 
             {/* From the Team */}
             <div>
-              <h2 className="text-2xl font-bold text-foreground mb-8">From the Team</h2>
+              <p className="mono-label text-muted-foreground mb-2">The team</p>
+              <h2 className="display-md text-foreground mb-8">From the Team</h2>
               {teamPosts.length > 0 ? (
                 renderPostGrid(teamPosts)
               ) : (
@@ -331,7 +333,8 @@ const BlogPage: React.FC = () => {
 
             {/* AI News Desk */}
             <div>
-              <h2 className="text-2xl font-bold text-foreground mb-8">AI News Desk</h2>
+              <p className="mono-label text-muted-foreground mb-2">Automated coverage</p>
+              <h2 className="display-md text-foreground mb-8">AI News Desk</h2>
               {aiPostsVisible.length > 0 ? (
                 <>
                   {renderPostGrid(aiPostsVisible)}
