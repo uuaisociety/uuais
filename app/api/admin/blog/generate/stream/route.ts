@@ -4,12 +4,13 @@ import { generateBlogDraftStream, type DraftStreamEvent } from '@/lib/ai/blog/ge
 import { fetchNewsCandidates } from '@/lib/ai/blog/news';
 import { incrementUsage } from '@/lib/ai/rate-limit';
 import { parseGenerateRequest } from '@/lib/ai/blog/request';
-import { MAX_CANDIDATES_FOR_AUTO, MAX_REASONING_TRACE, BLOG_GENERATION_MAX_DURATION } from '@/lib/ai/blog/defaults';
+import { MAX_CANDIDATES_FOR_AUTO, MAX_REASONING_TRACE } from '@/lib/ai/blog/defaults';
 import type { NewsItem } from '@/lib/ai/blog/types';
 
 export const runtime = 'nodejs';
 // Streaming drafts can run several minutes end to end (reasoning + JSON body).
-export const maxDuration = BLOG_GENERATION_MAX_DURATION;
+// Keep in sync with BLOG_GENERATION_MAX_DURATION in lib/ai/blog/defaults.ts.
+export const maxDuration = 300;
 
 const encoder = new TextEncoder();
 

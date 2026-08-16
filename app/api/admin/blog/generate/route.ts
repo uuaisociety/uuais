@@ -6,12 +6,13 @@ import { fetchNewsCandidates } from '@/lib/ai/blog/news';
 import { incrementUsage } from '@/lib/ai/rate-limit';
 import { OpenRouterError } from '@/lib/ai/openrouter';
 import { parseGenerateRequest } from '@/lib/ai/blog/request';
-import { MAX_CANDIDATES_FOR_AUTO, BLOG_GENERATION_MAX_DURATION } from '@/lib/ai/blog/defaults';
+import { MAX_CANDIDATES_FOR_AUTO } from '@/lib/ai/blog/defaults';
 import type { NewsItem } from '@/lib/ai/blog/types';
 
 export const runtime = 'nodejs';
 // Non-streamed generation (feed fetch + single OpenRouter call) can exceed a minute.
-export const maxDuration = BLOG_GENERATION_MAX_DURATION;
+// Keep in sync with BLOG_GENERATION_MAX_DURATION in lib/ai/blog/defaults.ts.
+export const maxDuration = 300;
 
 export async function POST(req: NextRequest) {
   try {

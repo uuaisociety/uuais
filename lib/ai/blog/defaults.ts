@@ -19,7 +19,7 @@ export const ALLOWED_IMAGE_HOSTS = ['firebasestorage.googleapis.com', 'drive.goo
 /** Cap on the reasoning trace persisted with a draft and forwarded to the admin console. */
 export const MAX_REASONING_TRACE = 20000;
 
-/** Vercel `maxDuration` (seconds) for blog generation routes. */
+/** Vercel `maxDuration` (seconds) for blog generation routes. Next.js requires route segment config as a literal in each route file — keep the three route values in sync with this. */
 export const BLOG_GENERATION_MAX_DURATION = 300;
 
 export const AI_DESK_AUTHOR = 'UU AI Society AI Desk';

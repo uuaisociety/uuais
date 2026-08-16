@@ -3,11 +3,11 @@ import type { NextRequest } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { generateBlogDraft } from '@/lib/ai/blog/generate';
 import { fetchNewsCandidates } from '@/lib/ai/blog/news';
-import { BLOG_GENERATION_MAX_DURATION } from '@/lib/ai/blog/defaults';
 
 export const runtime = 'nodejs';
 // Non-streamed generation (feed fetch + single OpenRouter call) can exceed a minute.
-export const maxDuration = BLOG_GENERATION_MAX_DURATION;
+// Keep in sync with BLOG_GENERATION_MAX_DURATION in lib/ai/blog/defaults.ts.
+export const maxDuration = 300;
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
