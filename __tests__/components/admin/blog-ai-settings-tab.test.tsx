@@ -14,6 +14,12 @@ jest.mock('@/lib/firestore/blog-seen', () => ({
   removeUsedNewsUrl: jest.fn(),
 }))
 
+// BlogAISettingsTab reads auth.currentUser for the updatedBy stamp; mock the
+// client so tests run without Firebase env vars (CI has none).
+jest.mock('@/lib/firebase-client', () => ({
+  auth: { currentUser: { uid: 'test-admin', displayName: 'Test Admin' } },
+}))
+
 const mockUseAdmin = jest.fn()
 jest.mock('@/hooks/useAdmin', () => ({ useAdmin: () => mockUseAdmin() }))
 

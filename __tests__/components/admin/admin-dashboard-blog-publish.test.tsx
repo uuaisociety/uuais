@@ -16,6 +16,12 @@ jest.mock('@/components/ui/Notifications', () => ({
   useNotify: () => ({ notify: jest.fn() }),
 }))
 
+// AdminDashboard stamps reviewedBy from auth.currentUser; mock the client so
+// tests run without Firebase env vars (CI has none).
+jest.mock('@/lib/firebase-client', () => ({
+  auth: { currentUser: { uid: 'test-admin', displayName: 'Test Admin', email: 'test@uuais.com' } },
+}))
+
 const mockAddUsed = jest.fn().mockResolvedValue([])
 const mockRemoveUsed = jest.fn().mockResolvedValue([])
 jest.mock('@/lib/firestore/blog-seen', () => ({

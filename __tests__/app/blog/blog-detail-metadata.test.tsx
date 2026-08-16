@@ -6,6 +6,12 @@ jest.mock('@/lib/blog-server', () => ({
   getPublishedBlogPosts: jest.fn(),
 }))
 
+// The page imports BlogDetailPage, which pulls in firebase-client at module
+// scope; mock it so tests run without Firebase env vars (CI has none).
+jest.mock('@/lib/firebase-client', () => ({
+  auth: { currentUser: null },
+}))
+
 const mockFind = findPublishedBlogPost as jest.Mock
 
 const basePost = {

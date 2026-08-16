@@ -17,6 +17,12 @@ jest.mock('@/components/ui/Notifications', () => ({
   useNotify: () => ({ notify: jest.fn() }),
 }))
 
+// AdminDashboard reads auth.currentUser; mock the client so tests run without
+// Firebase env vars (CI has none).
+jest.mock('@/lib/firebase-client', () => ({
+  auth: { currentUser: { uid: 'test-admin', displayName: 'Test Admin' } },
+}))
+
 describe('AdminDashboard tab restore', () => {
   beforeEach(() => {
     jest.clearAllMocks()
