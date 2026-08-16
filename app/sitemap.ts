@@ -114,5 +114,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // sitemap still serves the static routes
   }
 
-  return [...routes, ...eventRoutes]
+  // Dynamic published blog post URLs.
+  let blogRoutes: MetadataRoute.Sitemap = []
+  try {
+    const { getPublishedBlogPosts } = await import('@/lib/blog-server')
+    const posts = await getPublishedBlogPosts()
+    blogRoutes = posts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug || post.id}`,
+      lastModified: post.date ? new Date(post.date) : new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }))
+  } catch {
+    // sitemap still serves the static + event routes
+  }
+
+  return [...routes, ...eventRoutes, ...blogRoutes]
 }
