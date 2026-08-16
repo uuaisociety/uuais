@@ -227,4 +227,61 @@ describe('useAdmin', () => {
     // this consumer from the local listener set, so mockUnsubscribe stays unused.
     expect(mockUnsubscribe).not.toHaveBeenCalled();
   });
+
+  it('ignores a stale auth event that resolves after a newer one (prevents user flicker)', async () => {
+    let resolveClaims!: (v: { claims: Record<string, boolean> }) => void;
+    getIdTokenResult.mockReturnValue(new Promise((res) => { resolveClaims = res; }));
+    const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    const staleUser = { uid: 'test-uid', email: 'a@example.com' } as User;
+    const pending = authCallback!(staleUser);
+    // A sign-out event fires while the stale user's token resolution is still in flight.
+    await act(async () => {
+      await authCallback!(null);
+    });
+    expect(result.current.user).toBeNull();
+    // The stale resolution must not re-assert the old user after sign-out.
+    await act(async () => {
+      resolveClaims({ claims: { admin: true } });
+      await pending;
+    });
+    expect(result.current.user).toBeNull();
+    expect(result.current.isAdmin).toBe(false);
+    expect(result.current.loading).toBe(false);
+  });
+
+  it('refreshProfile refetches the profile and publishes it to the store', async () => {
+    getIdTokenResult.mockResolvedValue({ claims: {} });
+    getUserProfile
+      .mockResolvedValueOnce({ id: 'test-uid', name: 'OldName' })
+      .mockResolvedValue({ id: 'test-uid', name: 'NewName', isMember: true, privacyAcceptedAt: '2026-01-01T00:00:00Z' });
+    mockAuth.currentUser = mockUser;
+    const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    await act(async () => {
+      await authCallback!(mockUser);
+    });
+    expect(result.current.profile).toEqual({ id: 'test-uid', name: 'OldName' });
+
+    const { refreshProfile } = jest.requireMock('@/hooks/useAdmin') as typeof import('@/hooks/useAdmin');
+    await act(async () => {
+      await refreshProfile();
+    });
+    expect(getUserProfile).toHaveBeenLastCalledWith('test-uid');
+    expect(result.current.profile).toEqual({ id: 'test-uid', name: 'NewName', isMember: true, privacyAcceptedAt: '2026-01-01T00:00:00Z' });
+  });
+
+  it('refreshProfile is a no-op when signed out', async () => {
+    const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    await act(async () => {
+      await authCallback!(null);
+    });
+    const { refreshProfile } = jest.requireMock('@/hooks/useAdmin') as typeof import('@/hooks/useAdmin');
+    await act(async () => {
+      await refreshProfile();
+    });
+    expect(getUserProfile).not.toHaveBeenCalled();
+    expect(result.current.user).toBeNull();
+  });
 });

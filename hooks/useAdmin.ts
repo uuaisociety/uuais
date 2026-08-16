@@ -52,6 +52,19 @@ const loadProfile = (uid: string): Promise<UserProfile | null> => {
   return request;
 };
 
+/** Re-read the signed-in user's profile and publish it to the store so dependent UI sees fresh data after a save. */
+export const refreshProfile = async (): Promise<void> => {
+  const uid = store.user?.uid;
+  if (!uid) return;
+  profileRequests.delete(uid);
+  const profile = await loadProfile(uid);
+  if (store.user?.uid !== uid) return;
+  const cached = store.cached
+    ? { ...store.cached, name: profile?.displayName || profile?.name || store.cached.name }
+    : null;
+  setStore({ profile, profileLoading: false, cached });
+};
+
 let started = false;
 
 const start = () => {
@@ -65,10 +78,15 @@ const start = () => {
     () => {
       void Promise.all([import('firebase/auth'), import('@/lib/firebase-client')]).then(
         ([{ onAuthStateChanged, getIdTokenResult }, { auth }]) => {
+          // Guard the async callback so a stale auth event can't clobber newer state (auth fires repeatedly on mobile).
+          let authGeneration = 0;
           onAuthStateChanged(auth, async (u) => {
+            const gen = ++authGeneration;
+
             if (!u) {
               profileRequests.clear();
               writeCache(null);
+              if (gen !== authGeneration) return;
               setStore({ user: null, loading: false, profileLoading: false, isAdmin: false, isSuperAdmin: false, claims: null, profile: null, cached: null });
               return;
             }
@@ -85,6 +103,8 @@ const start = () => {
             const isAdmin = Boolean(tokenClaims.admin);
             const isSuperAdmin = Boolean(tokenClaims.superAdmin);
 
+            if (gen !== authGeneration) return;
+
             setStore({
               user: u,
               loading: false,
@@ -96,7 +116,7 @@ const start = () => {
             });
 
             const profile = await loadProfile(u.uid);
-            if (auth.currentUser?.uid !== u.uid) return;
+            if (gen !== authGeneration) return;
 
             const name = profile?.displayName || profile?.name || u.displayName || null;
             const identity: CachedIdentity = { uid: u.uid, name, email: u.email, photoURL: u.photoURL, isAdmin };

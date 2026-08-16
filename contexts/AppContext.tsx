@@ -232,111 +232,124 @@ export const AppProvider: React.FC<{
 
   // Realtime Firestore listeners start after the main thread goes idle so they stay out of the critical network chain (LCP); SSR-seeded data already paints the content.
   useEffect(() => {
-    // Track the unsubscribe function for events so we can re-subscribe when admin status changes
-    let unsubscribeEvents: (() => void) | null = null;
-    let unsubscribeJobs: (() => void) | null = null;
-    let unsubscribeBoardPositions: (() => void) | null = null;
-    let unsubscribeBoardApplications: (() => void) | null = null;
-    let unsubscribeCampaigns: (() => void) | null = null;
-    let unsubscribeTeamApplications: (() => void) | null = null;
-    let unsubscribeBlogPosts: (() => void) | null = null;
-    let unsubscribeTeamMembers: (() => void) | null = null;
-    let unsubscribeFaqs: (() => void) | null = null;
+    // Listener refs are mutated async (dynamic import) so a late chunk from a superseded subscribe() can't clobber the active one.
+    const unsubscribeEvents: { current: (() => void) | null } = { current: null };
+    const unsubscribeJobs: { current: (() => void) | null } = { current: null };
+    const unsubscribeBoardPositions: { current: (() => void) | null } = { current: null };
+    const unsubscribeBoardApplications: { current: (() => void) | null } = { current: null };
+    const unsubscribeCampaigns: { current: (() => void) | null } = { current: null };
+    const unsubscribeTeamApplications: { current: (() => void) | null } = { current: null };
+    const unsubscribeBlogPosts: { current: (() => void) | null } = { current: null };
+    const unsubscribeTeamMembers: { current: (() => void) | null } = { current: null };
+    const unsubscribeFaqs: { current: (() => void) | null } = { current: null };
     let idTokenUnsub: (() => void) | null = null;
     let disposed = false;
+    // Bumped on every subscribe() so a listener from an older call drops itself instead of replacing the current one.
+    let subscriptionGeneration = 0;
 
     const subscribe = (includeUnpublished = false) => {
       // includeUnpublished: boolean indicates admin status
+      const gen = ++subscriptionGeneration;
+
+      // Subscribe once the chunk loads, dropping the listener if a newer subscribe() superseded us.
+      const attach = <T,>(
+        importPromise: Promise<T>,
+        ref: { current: (() => void) | null },
+        make: (mod: T) => () => void,
+      ) => {
+        void importPromise.then((mod) => {
+          if (disposed) return;
+          const unsub = make(mod);
+          if (gen !== subscriptionGeneration) {
+            try { unsub(); } catch { /* ignore */ }
+            return;
+          }
+          ref.current = unsub;
+        });
+      };
 
       // Unsubscribe previous
-      if (unsubscribeEvents) {
-        try { unsubscribeEvents(); } catch { /* ignore */ }
-        unsubscribeEvents = null;
+      if (unsubscribeEvents.current) {
+        try { unsubscribeEvents.current(); } catch { /* ignore */ }
+        unsubscribeEvents.current = null;
       }
-      void import('@/lib/firestore/events').then(({ subscribeToEvents }) => {
-        if (disposed) return;
-        unsubscribeEvents = subscribeToEvents((events) => {
+      attach(import('@/lib/firestore/events'), unsubscribeEvents, ({ subscribeToEvents }) =>
+        subscribeToEvents((events) => {
           dispatch({ type: 'SET_EVENTS', payload: events });
-        }, { includeUnpublished });
-      });
+        }, { includeUnpublished }),
+      );
 
-      if (unsubscribeJobs)  {
-        try { unsubscribeJobs(); } catch { /* ignore */ }
-        unsubscribeJobs = null;
+      if (unsubscribeJobs.current) {
+        try { unsubscribeJobs.current(); } catch { /* ignore */ }
+        unsubscribeJobs.current = null;
       }
-      void import('@/lib/firestore/jobs').then(({ subscribeToJobs }) => {
-        if (disposed) return;
-        unsubscribeJobs = subscribeToJobs((jobs) => {
+      attach(import('@/lib/firestore/jobs'), unsubscribeJobs, ({ subscribeToJobs }) =>
+        subscribeToJobs((jobs) => {
           dispatch({ type: 'SET_JOBS', payload: jobs });
-        }, { includeUnpublished });
-      });
+        }, { includeUnpublished }),
+      );
 
-      if (unsubscribeBoardPositions) {
-        try { unsubscribeBoardPositions(); } catch { /* ignore */ }
-        unsubscribeBoardPositions = null;
+      if (unsubscribeBoardPositions.current) {
+        try { unsubscribeBoardPositions.current(); } catch { /* ignore */ }
+        unsubscribeBoardPositions.current = null;
       }
-      void import('@/lib/firestore/board-positions').then(({ subscribeToPositions }) => {
-        if (disposed) return;
-        unsubscribeBoardPositions = subscribeToPositions((positions) => {
+      attach(import('@/lib/firestore/board-positions'), unsubscribeBoardPositions, ({ subscribeToPositions }) =>
+        subscribeToPositions((positions) => {
           dispatch({ type: 'SET_BOARDPOS', payload: positions });
-        });
-      });
+        }),
+      );
 
-      if (unsubscribeBoardApplications) {
-        try { unsubscribeBoardApplications(); } catch { /* ignore */ }
-        unsubscribeBoardApplications = null;
+      if (unsubscribeBoardApplications.current) {
+        try { unsubscribeBoardApplications.current(); } catch { /* ignore */ }
+        unsubscribeBoardApplications.current = null;
       }
       if (includeUnpublished) {
-        void import('@/lib/firestore/boardApplications').then(({ subscribeToBoardApplications }) => {
-          if (disposed) return;
-          unsubscribeBoardApplications = subscribeToBoardApplications((applications) => {
+        attach(import('@/lib/firestore/boardApplications'), unsubscribeBoardApplications, ({ subscribeToBoardApplications }) =>
+          subscribeToBoardApplications((applications) => {
             dispatch({ type: 'SET_APPLICANTS', payload: applications as Application[] });
-          });
-        });
+          }),
+        );
       } else {
         dispatch({ type: 'SET_APPLICANTS', payload: [] });
       }
 
       // Team applications: admin-only subscription
-      if (unsubscribeTeamApplications) {
-        try { unsubscribeTeamApplications(); } catch { /* ignore */ }
-        unsubscribeTeamApplications = null;
+      if (unsubscribeTeamApplications.current) {
+        try { unsubscribeTeamApplications.current(); } catch { /* ignore */ }
+        unsubscribeTeamApplications.current = null;
       }
       if (includeUnpublished) {
-        void import('@/lib/firestore/teamApplications').then(({ subscribeToTeamApplications }) => {
-          if (disposed) return;
-          unsubscribeTeamApplications = subscribeToTeamApplications((applications) => {
+        attach(import('@/lib/firestore/teamApplications'), unsubscribeTeamApplications, ({ subscribeToTeamApplications }) =>
+          subscribeToTeamApplications((applications) => {
             dispatch({ type: 'SET_TEAM_APPLICATIONS', payload: applications as TeamApplication[] });
-          });
-        });
+          }),
+        );
       } else {
         dispatch({ type: 'SET_TEAM_APPLICATIONS', payload: [] });
       }
 
       // Campaigns: public visitors only see open campaigns; admins see all (incl. drafts)
-      if (unsubscribeCampaigns) {
-        try { unsubscribeCampaigns(); } catch { /* ignore */ }
-        unsubscribeCampaigns = null;
+      if (unsubscribeCampaigns.current) {
+        try { unsubscribeCampaigns.current(); } catch { /* ignore */ }
+        unsubscribeCampaigns.current = null;
       }
-      void import('@/lib/firestore/applicationCampaigns').then(({ subscribeToCampaigns }) => {
-        if (disposed) return;
-        unsubscribeCampaigns = subscribeToCampaigns((campaigns) => {
+      attach(import('@/lib/firestore/applicationCampaigns'), unsubscribeCampaigns, ({ subscribeToCampaigns }) =>
+        subscribeToCampaigns((campaigns) => {
           dispatch({ type: 'SET_CAMPAIGNS', payload: campaigns });
           dispatch({ type: 'SET_CAMPAIGNS_LOADED', payload: true });
-        }, { includeAll: includeUnpublished });
-      });
+        }, { includeAll: includeUnpublished }),
+      );
 
       // Blog posts: public visitors see published posts; admins see all (incl. drafts)
-      if (unsubscribeBlogPosts) {
-        try { unsubscribeBlogPosts(); } catch { /* ignore */ }
-        unsubscribeBlogPosts = null;
+      if (unsubscribeBlogPosts.current) {
+        try { unsubscribeBlogPosts.current(); } catch { /* ignore */ }
+        unsubscribeBlogPosts.current = null;
       }
-      void import('@/lib/firestore/blog').then(({ subscribeToBlogPosts }) => {
-        if (disposed) return;
-        unsubscribeBlogPosts = subscribeToBlogPosts((posts) => {
+      attach(import('@/lib/firestore/blog'), unsubscribeBlogPosts, ({ subscribeToBlogPosts }) =>
+        subscribeToBlogPosts((posts) => {
           dispatch({ type: 'SET_BLOG_POSTS', payload: posts });
-        }, { includeUnpublished });
-      });
+        }, { includeUnpublished }),
+      );
     };
 
     // Returning visitors (cached identity) get realtime data immediately; anonymous visitors defer the firestore streams until after LCP / first interaction.
@@ -348,20 +361,20 @@ export const AppProvider: React.FC<{
         // Other static subscriptions that don't depend on auth
         void import('@/lib/firestore/team').then(({ subscribeToTeamMembers }) => {
           if (disposed) return;
-          unsubscribeTeamMembers = subscribeToTeamMembers((members) => {
+          unsubscribeTeamMembers.current = subscribeToTeamMembers((members) => {
             dispatch({ type: 'SET_TEAM_MEMBERS', payload: members });
           });
         });
 
         void import('@/lib/firestore/faqs').then(({ subscribeToFaqs }) => {
           if (disposed) return;
-          unsubscribeFaqs = subscribeToFaqs((faqs) => {
+          unsubscribeFaqs.current = subscribeToFaqs((faqs) => {
             dispatch({ type: 'SET_FAQS', payload: faqs });
           });
         });
 
-        // Listen for ID token changes to detect admin claim changes.
-        let currentAdminClaim: boolean | null = null;
+        // Listen for ID token changes; starts false so the first fire is a no-op for non-admins.
+        let currentAdminClaim: boolean | null = false;
         let authGeneration = 0;
         void Promise.all([import('firebase/auth'), import('@/lib/firebase-client')]).then(([{ onIdTokenChanged }, { auth }]) => {
           if (disposed) return;
@@ -394,32 +407,32 @@ export const AppProvider: React.FC<{
     // Cleanup subscriptions on unmount
     return () => {
       disposed = true;
-      if (unsubscribeEvents) {
-        try { unsubscribeEvents(); } catch { /* ignore */ }
+      if (unsubscribeEvents.current) {
+        try { unsubscribeEvents.current(); } catch { /* ignore */ }
       }
-      if (unsubscribeJobs) {
-        try { unsubscribeJobs(); } catch { /* ignore */ }
+      if (unsubscribeJobs.current) {
+        try { unsubscribeJobs.current(); } catch { /* ignore */ }
       }
-      if (unsubscribeBoardPositions) {
-        try { unsubscribeBoardPositions(); } catch { /* ignore */ }
+      if (unsubscribeBoardPositions.current) {
+        try { unsubscribeBoardPositions.current(); } catch { /* ignore */ }
       }
-      if (unsubscribeBoardApplications) {
-        try { unsubscribeBoardApplications(); } catch { /* ignore */ }
+      if (unsubscribeBoardApplications.current) {
+        try { unsubscribeBoardApplications.current(); } catch { /* ignore */ }
       }
-      if (unsubscribeCampaigns) {
-        try { unsubscribeCampaigns(); } catch { /* ignore */ }
+      if (unsubscribeCampaigns.current) {
+        try { unsubscribeCampaigns.current(); } catch { /* ignore */ }
       }
-      if (unsubscribeTeamApplications) {
-        try { unsubscribeTeamApplications(); } catch { /* ignore */ }
+      if (unsubscribeTeamApplications.current) {
+        try { unsubscribeTeamApplications.current(); } catch { /* ignore */ }
       }
-      if (unsubscribeBlogPosts) {
-        try { unsubscribeBlogPosts(); } catch { /* ignore */ }
+      if (unsubscribeBlogPosts.current) {
+        try { unsubscribeBlogPosts.current(); } catch { /* ignore */ }
       }
-      if (unsubscribeTeamMembers) {
-        try { unsubscribeTeamMembers(); } catch { /* ignore */ }
+      if (unsubscribeTeamMembers.current) {
+        try { unsubscribeTeamMembers.current(); } catch { /* ignore */ }
       }
-      if (unsubscribeFaqs) {
-        try { unsubscribeFaqs(); } catch { /* ignore */ }
+      if (unsubscribeFaqs.current) {
+        try { unsubscribeFaqs.current(); } catch { /* ignore */ }
       }
       if (idTokenUnsub) {
         try { idTokenUnsub(); } catch { /* ignore */ }

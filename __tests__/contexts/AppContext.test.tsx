@@ -166,6 +166,20 @@ describe('AppContext', () => {
     expect(subscribeToBlogPosts).toHaveBeenLastCalledWith(expect.any(Function), { includeUnpublished: true });
   });
 
+  it('does not tear down and re-create listeners when the id token resolves with the same (non-admin) claim', async () => {
+    // Regression: the initial subscribe() is already public, so a non-admin first fire must be a no-op (no listener churn).
+    renderApp();
+    await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1));
+    act(() => {
+      idTokenCallback!({ uid: 'user-1', getIdTokenResult: () => Promise.resolve({ claims: {} }) });
+    });
+    await act(async () => {
+      await Promise.resolve();
+    });
+    expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
+    expect(subscribeToEvents).toHaveBeenCalledTimes(1);
+  });
+
   it('throws useApp outside provider', () => {
     expect(() => renderHook(() => useApp())).toThrow('useApp must be used within an AppProvider');
   });
