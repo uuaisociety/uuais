@@ -109,6 +109,9 @@ const BlogPage: React.FC = () => {
                   AI News Desk
                 </Tag>
               )}
+              {post.authorType === 'ai' && (
+                <Tag variant="green" size="sm">Beta</Tag>
+              )}
               {renderTags(post, 'sm')}
             </div>
 
@@ -288,6 +291,9 @@ const BlogPage: React.FC = () => {
                             <Sparkles className="h-3 w-3 mr-1" />
                             AI News Desk
                           </Tag>
+                        )}
+                        {featuredPost.authorType === 'ai' && (
+                          <Tag variant="green" size="md">Beta</Tag>
                         )}
                         {renderTags(featuredPost, 'md')}
                       </div>
