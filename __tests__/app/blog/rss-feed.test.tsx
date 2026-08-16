@@ -63,4 +63,10 @@ describe('GET /blog/rss.xml', () => {
     const xml = await (await GET()).text()
     expect(xml).toContain('A &amp; B &lt;C&gt;')
   })
+
+  it('splits CDATA-closing sequences in excerpts', async () => {
+    mockGetPosts.mockResolvedValue([{ ...posts[0], excerpt: 'before ]]> after' }])
+    const xml = await (await GET()).text()
+    expect(xml).toContain('<![CDATA[before ]]]]><![CDATA[> after]]>')
+  })
 })

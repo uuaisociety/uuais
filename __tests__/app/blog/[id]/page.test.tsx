@@ -2,9 +2,23 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import BlogDetailPage from '@/components/pages/BlogDetailPage'
 import { updatePageMeta } from '@/utils/seo'
 import { incrementBlogRead } from '@/lib/firestore/analytics'
+import { previewImageFor } from '@/lib/blog-preview'
 
 jest.mock('@/lib/firestore/analytics', () => ({
   incrementBlogRead: jest.fn(() => Promise.resolve()),
+}))
+
+// The reasoning trace is admin-only — render as an admin for this suite.
+jest.mock('@/hooks/useAdmin', () => ({
+  useAdmin: () => ({
+    user: null,
+    loading: false,
+    isAdmin: true,
+    isSuperAdmin: true,
+    claims: null,
+    signInWithGoogle: jest.fn(),
+    logout: jest.fn(),
+  }),
 }))
 
 jest.mock('@/components/blog/BlogReactions', () => () => (
@@ -125,11 +139,12 @@ describe('BlogDetailPage', () => {
     expect(img).toHaveAttribute('src', '/images/ai-healthcare.jpg')
   })
 
-  it('does not render image when post has no image', () => {
+  it('falls back to a curated preview image when the post has no image', () => {
     g.__setAppState?.({ ...defaultState, blogPosts: [mockPostNoImage] })
     g.__setMockParams?.({ id: 'post-3' })
     render(<BlogDetailPage />)
-    expect(screen.queryByAltText('AI in Healthcare')).not.toBeInTheDocument()
+    const img = screen.getByAltText('AI in Healthcare')
+    expect(img).toHaveAttribute('src', previewImageFor('post-3'))
   })
 
   it('renders HTML content sanitized via DOMPurify', () => {

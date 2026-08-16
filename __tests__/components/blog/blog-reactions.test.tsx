@@ -5,6 +5,7 @@ const mockGet = jest.fn()
 const mockApply = jest.fn()
 const mockShare = jest.fn()
 const mockStored = jest.fn()
+const mockUseAdmin = jest.fn()
 
 jest.mock('@/lib/firestore/blog-reactions', () => ({
   getBlogReactions: (...args: unknown[]) => mockGet(...args),
@@ -13,9 +14,12 @@ jest.mock('@/lib/firestore/blog-reactions', () => ({
   getStoredReaction: (...args: unknown[]) => mockStored(...args),
 }))
 
+jest.mock('@/hooks/useAdmin', () => ({ useAdmin: () => mockUseAdmin() }))
+
 describe('BlogReactions', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    mockUseAdmin.mockReturnValue({ user: { uid: 'u1' } })
     mockStored.mockReturnValue(null)
     mockGet.mockResolvedValue({ likes: 5, dislikes: 2, shares: 3 })
     Object.defineProperty(window, 'open', { value: jest.fn(), writable: true })
@@ -73,5 +77,14 @@ describe('BlogReactions', () => {
     await waitFor(() => expect(mockShare).toHaveBeenCalledWith('p1'))
     const shareButton = screen.getByRole('button', { name: 'Share this article' })
     expect(shareButton.textContent).toContain('3')
+  })
+
+  it('shows a sign-in hint and skips the API for anonymous visitors', async () => {
+    mockUseAdmin.mockReturnValue({ user: null })
+    render(<BlogReactions postId="p1" />)
+    await screen.findByText('5')
+    fireEvent.click(screen.getByLabelText('Like this article'))
+    expect(screen.getByText('Sign in to like or dislike articles.')).toBeInTheDocument()
+    expect(mockApply).not.toHaveBeenCalled()
   })
 })

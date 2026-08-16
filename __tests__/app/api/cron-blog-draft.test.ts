@@ -14,16 +14,16 @@ jest.mock('@/lib/ai/blog/news', () => ({
   fetchNewsCandidates: (...args: unknown[]) => mockFetchNews(...args),
 }))
 
-function makeQueryChain(docs: unknown[] = []) {
+function makeQueryChain(docs: unknown[] = [], filter?: (d: { data: () => Record<string, unknown> }) => boolean) {
   const chain: Record<string, jest.Mock> = {} as Record<string, jest.Mock>
   chain.where = jest.fn(() => chain)
   chain.limit = jest.fn(() => chain)
-  chain.get = jest.fn().mockResolvedValue({ docs })
+  chain.get = jest.fn().mockResolvedValue({ docs: filter ? docs.filter(filter) : docs })
   return chain
 }
 
-function makeDoc(date: string) {
-  return { data: () => ({ date }) }
+function makeDoc(date: string, published = true) {
+  return { data: () => ({ date, published }) }
 }
 
 const CANDIDATES = [
@@ -62,13 +62,32 @@ describe('GET /api/cron/blog-draft', () => {
     expect(res.status).toBe(401)
   })
 
-  it('skips when an AI digest already exists within the last 7 days', async () => {
+  it('skips when a published AI digest already exists within the last 7 days', async () => {
     mockCollection.mockReturnValue(makeQueryChain([makeDoc(new Date().toISOString().slice(0, 10))]))
     const res = await call('test-secret')
     const body = await res.json()
     expect(res.status).toBe(200)
     expect(body.skipped).toBe(true)
     expect(mockFetchNews).not.toHaveBeenCalled()
+  })
+
+  it('does not let an unpublished draft block the next digest', async () => {
+    const today = new Date().toISOString().slice(0, 10)
+    // The where('published','==',true) clause is enforced by the query mock, mirroring Firestore.
+    mockCollection.mockReturnValue(
+      makeQueryChain([makeDoc(today, false), makeDoc('2026-01-01')], (d) => d.data().published === true)
+    )
+    mockFetchNews.mockResolvedValue({
+      candidates: CANDIDATES,
+      sources: { feeds: ['x.com'], exa: false },
+      warnings: [],
+    })
+    mockGenerate.mockResolvedValue({ draftId: 'draft-2', usage: { promptTokens: 1, completionTokens: 1, totalTokens: 2 } })
+
+    const res = await call('test-secret')
+    const body = await res.json()
+    expect(res.status).toBe(200)
+    expect(body.draftId).toBe('draft-2')
   })
 
   it('creates a weekly digest draft from the top candidates', async () => {

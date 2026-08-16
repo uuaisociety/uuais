@@ -16,6 +16,13 @@ jest.mock('@/components/ui/Notifications', () => ({
   useNotify: () => ({ notify: jest.fn() }),
 }))
 
+const mockAddUsed = jest.fn().mockResolvedValue([])
+const mockRemoveUsed = jest.fn().mockResolvedValue([])
+jest.mock('@/lib/firestore/blog-seen', () => ({
+  addUsedNewsUrls: (...args: unknown[]) => mockAddUsed(...args),
+  removeUsedNewsUrls: (...args: unknown[]) => mockRemoveUsed(...args),
+}))
+
 describe('AdminDashboard blog publishing', () => {
   beforeEach(() => {
     jest.clearAllMocks()
@@ -86,5 +93,57 @@ describe('AdminDashboard blog publishing', () => {
       firestoreAction: 'UPDATE_BLOG_POST',
       payload: expect.objectContaining({ id: 'b3', featured: true }),
     })
+  })
+
+  it('marks cited sources as used when publishing an AI post', () => {
+    const dispatch = jest.fn()
+    const urls = ['https://openai.com/story', 'https://deepmind.google/blog/x']
+    mockUseApp.mockReturnValue({
+      state: {
+        ...defaultAppState,
+        blogPosts: [
+          createMockBlogPost({
+            id: 'b4',
+            title: 'AI Draft',
+            published: false,
+            authorType: 'ai',
+            sources: [{ title: 'A', url: urls[0] }, { title: 'B', url: urls[1] }],
+          }),
+        ],
+      },
+      dispatch,
+    })
+
+    render(<AdminDashboard />)
+    fireEvent.click(screen.getByRole('button', { name: 'Blog' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Publish' }))
+
+    expect(mockAddUsed).toHaveBeenCalledWith(urls)
+  })
+
+  it('releases cited sources when unpublishing an AI post', () => {
+    const dispatch = jest.fn()
+    const urls = ['https://openai.com/story']
+    mockUseApp.mockReturnValue({
+      state: {
+        ...defaultAppState,
+        blogPosts: [
+          createMockBlogPost({
+            id: 'b5',
+            title: 'Live AI Post',
+            published: true,
+            authorType: 'ai',
+            sources: [{ title: 'A', url: urls[0] }],
+          }),
+        ],
+      },
+      dispatch,
+    })
+
+    render(<AdminDashboard />)
+    fireEvent.click(screen.getByRole('button', { name: 'Blog' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Unpublish' }))
+
+    expect(mockRemoveUsed).toHaveBeenCalledWith(urls)
   })
 })

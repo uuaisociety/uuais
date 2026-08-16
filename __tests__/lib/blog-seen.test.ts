@@ -58,6 +58,19 @@ describe('used news URLs (blog-seen)', () => {
     expect(mockSetDoc).not.toHaveBeenCalled()
   })
 
+  it('adds multiple URLs at once (publish-time bulk mark)', async () => {
+    const { addUsedNewsUrls } = await import('@/lib/firestore/blog-seen')
+    const next = await addUsedNewsUrls(['https://openai.com/story-one', 'https://deepmind.google/blog/atom-1', '  '])
+    expect(next).toEqual(['https://openai.com/story-one', 'https://deepmind.google/blog/atom-1'])
+    expect(mockSetDoc).toHaveBeenCalledWith(
+      'mock-doc-ref',
+      expect.objectContaining({
+        urls: ['https://openai.com/story-one', 'https://deepmind.google/blog/atom-1'],
+      }),
+      { merge: true }
+    )
+  })
+
   it('removes a used URL and persists the list', async () => {
     const { removeUsedNewsUrl } = await import('@/lib/firestore/blog-seen')
     const next = await removeUsedNewsUrl('https://openai.com/story-one')

@@ -33,6 +33,25 @@ function sseResponse(events: Record<string, unknown>[]) {
   return { ok: true, body, json: async () => ({}) }
 }
 
+/** SSE response that stays open until the request is aborted — exercises Stop. */
+function abortableSseResponse() {
+  return (_url: string, opts: RequestInit) => {
+    const encoder = new TextEncoder()
+    let controller!: ReadableStreamDefaultController<Uint8Array>
+    const body = new ReadableStream<Uint8Array>({
+      start(c) {
+        controller = c
+        c.enqueue(encoder.encode('data: {"type":"status","text":"Drafting…"}\n\n'))
+      },
+      cancel() {},
+    })
+    opts.signal?.addEventListener('abort', () => {
+      controller.error(new DOMException('Aborted', 'AbortError'))
+    })
+    return { ok: true, body, json: async () => ({}) }
+  }
+}
+
 describe('GenerateBlogModal', () => {
   beforeEach(() => {
     jest.clearAllMocks()
@@ -134,5 +153,21 @@ describe('GenerateBlogModal', () => {
     expect(await screen.findByText(/did not return valid JSON/)).toBeInTheDocument()
     expect(screen.getByText(/Raw model output/)).toBeInTheDocument()
     expect(screen.getByText('{"title{ "title":')).toBeInTheDocument()
+  })
+
+  it('stops a running generation via the Stop button and does not open the editor', async () => {
+    const onDraftCreated = jest.fn()
+    ;(global.fetch as jest.Mock)
+      .mockResolvedValueOnce({ ok: true, json: async () => candidatesResponse })
+      .mockImplementationOnce(abortableSseResponse())
+    render(<GenerateBlogModal open onClose={jest.fn()} onDraftCreated={onDraftCreated} />)
+    await screen.findByText('GPT-5 released')
+    fireEvent.click(screen.getByRole('button', { name: /Generate Draft/i }))
+
+    const stop = await screen.findByRole('button', { name: 'Stop' })
+    fireEvent.click(stop)
+
+    expect(await screen.findByText('Generation stopped')).toBeInTheDocument()
+    expect(onDraftCreated).not.toHaveBeenCalled()
   })
 })

@@ -11,15 +11,17 @@ const mockCollection = jest.fn()
 jest.mock('@/lib/firebase-admin', () => ({
   adminDb: { collection: (name: string) => mockCollection(name) },
 }))
+// Chainable query mock (getPreviouslyCoveredUrls chains two .where() calls).
+const makeQuery = () => ({
+  where: () => makeQuery(),
+  limit: () => ({ get: mockQueryGet }),
+  get: mockQueryGet,
+})
 mockCollection.mockImplementation((name: string) => {
   if (name === 'config') {
     return { doc: () => ({ get: mockConfigGet }) }
   }
-  return {
-    where: () => ({ get: mockQueryGet }),
-    limit: () => ({ get: mockQueryGet }),
-    get: mockQueryGet,
-  }
+  return makeQuery()
 })
 
 function makeSnapshot(docs: { data: () => Record<string, unknown> }[]) {
@@ -96,7 +98,7 @@ describe('fetchNewsCandidates (hermes-style research pipeline)', () => {
 
   it('excludes URLs already cited by previous AI posts', async () => {
     mockQueryGet.mockResolvedValue(
-      makeSnapshot([{ data: () => ({ sources: [{ url: 'https://openai.com/story-one' }] }) }])
+      makeSnapshot([{ data: () => ({ published: true, sources: [{ url: 'https://openai.com/story-one' }] }) }])
     )
     const result = await fetchNewsCandidates({})
     expect(result.candidates.find((c) => c.title === 'Story One')).toBeUndefined()
