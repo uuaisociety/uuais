@@ -184,7 +184,7 @@ const BlogPage: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         {/* Articles toolbar: quiet expanding search + active filter */}
-        <div className="flex items-center justify-between gap-4 pt-5">
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-5">
           {searchTerm && (
             <div className="flex items-center gap-2 min-w-0" aria-live="polite">
               <span className="text-sm text-muted-foreground whitespace-nowrap">Filtered by</span>

@@ -381,7 +381,14 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
     await loadMoreChats();
   }, [loadMoreChats]);
 
+  const skipInitialFocusRef = useRef(true);
+
   useEffect(() => {
+    // Don't auto-focus on mount (pops the mobile keyboard); focus only after a user gesture flips `focused`.
+    if (skipInitialFocusRef.current) {
+      skipInitialFocusRef.current = false;
+      return;
+    }
     if (focused) {
       const el = containerRef.current?.querySelector('input');
       (el as HTMLInputElement | undefined)?.focus();
@@ -477,7 +484,7 @@ export default function RagChat({ onRecommendations, onThinkingStart, placeholde
                               handleDeleteChat(chat.id, e as unknown as React.MouseEvent);
                             }
                           }}
-                          className="opacity-0 group-hover:opacity-100 p-1 cursor-pointer hover:text-red-500 transition-opacity"
+                          className="opacity-60 sm:opacity-0 sm:group-hover:opacity-100 p-1 cursor-pointer hover:text-red-500 transition-opacity"
                         >
                           <Trash2 className="h-3 w-3" />
                         </span>

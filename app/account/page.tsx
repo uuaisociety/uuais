@@ -110,6 +110,9 @@ export default function AccountPage() {
       // Optionally refetch to reflect saved changes in UI
       const refreshed = await getUserProfile(uid);
       setForm(refreshed || form);
+      // Refresh the shared useAdmin store so RegistrationGate doesn't bounce back to /join.
+      const { refreshProfile } = await import('@/hooks/useAdmin');
+      await refreshProfile();
       setIsEditing(false);
       notify({ type: 'success', title: 'Saved', message: 'Account updated successfully.' });
     } catch (e: unknown) {
@@ -336,13 +339,13 @@ export default function AccountPage() {
                   </SelectBase>
                 </FieldGroup>
                 <FieldGroup label="LinkedIn URL" requiredHint="Optional">
-                  <InputBase placeholder="https://linkedin.com/in/..." value={form.linkedin || ""} onChange={(e) => setForm(f => ({ ...f, linkedin: e.target.value }))} />
+                  <InputBase placeholder="https://linkedin.com/in/..." inputMode="url" autoComplete="url" value={form.linkedin || ""} onChange={(e) => setForm(f => ({ ...f, linkedin: e.target.value }))} />
                 </FieldGroup>
                 <FieldGroup label="GitHub URL" requiredHint="Optional">
-                  <InputBase placeholder="https://github.com/username" value={form.github || ""} onChange={(e) => setForm(f => ({ ...f, github: e.target.value }))} />
+                  <InputBase placeholder="https://github.com/username" inputMode="url" autoComplete="url" value={form.github || ""} onChange={(e) => setForm(f => ({ ...f, github: e.target.value }))} />
                 </FieldGroup>
                 <FieldGroup label="Website" requiredHint="Optional">
-                  <InputBase placeholder="https://example.com" value={form.website || ""} onChange={(e) => setForm(f => ({ ...f, website: e.target.value }))} />
+                  <InputBase placeholder="https://example.com" inputMode="url" autoComplete="url" value={form.website || ""} onChange={(e) => setForm(f => ({ ...f, website: e.target.value }))} />
                 </FieldGroup>
               </div>
 

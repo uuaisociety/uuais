@@ -235,7 +235,7 @@ export default function BoardApplicationPage() {
                         <div className="grid grid-cols-1 gap-4">
                           <Input label="Name" value={f?.name || ''} onChange={e => setField(r.id, 'name', e.target.value)} error={f?.errors?.name} fullWidth />
                           <Input label="Email" type="email" value={f?.email || ''} onChange={e => setField(r.id, 'email', e.target.value)} error={f?.errors?.email} fullWidth />
-                          <Input label="Phone" value={f?.phone || ''} onChange={e => setField(r.id, 'phone', e.target.value)} fullWidth />
+                          <Input label="Phone" type="tel" autoComplete="tel" value={f?.phone || ''} onChange={e => setField(r.id, 'phone', e.target.value)} fullWidth />
                         </div>
 
                         <div>
