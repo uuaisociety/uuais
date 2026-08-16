@@ -13,6 +13,11 @@ function escapeXml(value: string): string {
     .replace(/'/g, '&apos;');
 }
 
+/** Make arbitrary text safe inside a CDATA section (split any `]]>` sequence). */
+function cdataSafe(value: string): string {
+  return value.replace(/]]>/g, ']]]]><![CDATA[>');
+}
+
 function formatRfc822(iso: string): string {
   const date = new Date(iso);
   return Number.isNaN(date.getTime()) ? new Date().toUTCString() : date.toUTCString();
@@ -29,8 +34,8 @@ export async function GET() {
       <link>${link}</link>
       <guid isPermaLink="true">${link}</guid>
       <pubDate>${formatRfc822(post.date)}</pubDate>
-      <description><![CDATA[${post.excerpt || ''}]]></description>
-      <category>${post.authorType === 'ai' ? 'AI News Desk' : 'From the Team'}</category>
+      <description><![CDATA[${cdataSafe(post.excerpt || '')}]]></description>
+      <category>${escapeXml(post.authorType === 'ai' ? 'AI News Desk' : 'From the Team')}</category>
     </item>`;
     })
     .join('\n');
