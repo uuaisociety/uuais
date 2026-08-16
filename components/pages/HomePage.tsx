@@ -255,9 +255,12 @@ const HomePage: React.FC = () => {
                       loading="lazy"
                     />
                     {post.authorType === 'ai' && (
-                      <span className="absolute top-3 left-3 pill bg-black/45 text-white backdrop-blur-md inline-flex items-center gap-1">
-                        <Sparkles className="h-3 w-3" />
-                        AI News Desk
+                      <span className="absolute top-3 left-3 flex items-center gap-1.5">
+                        <span className="pill bg-black/45 text-white backdrop-blur-md inline-flex items-center gap-1">
+                          <Sparkles className="h-3 w-3" />
+                          AI News Desk
+                        </span>
+                        <span className="pill bg-black/45 text-white backdrop-blur-md">Beta</span>
                       </span>
                     )}
                   </div>
