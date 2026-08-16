@@ -112,6 +112,7 @@
     "uuid": "^11.1.1",
     "brace-expansion": "^5.0.9",
     "js-yaml": "^4.3.0",
+    "postcss-selector-parser": "^6.1.4",
     "@modelcontextprotocol/sdk": {
       "ajv": "^8.17.1",
       "ajv-formats": "^3.0.1"
