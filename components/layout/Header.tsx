@@ -15,6 +15,7 @@ const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Events', href: '/events' },
   { name: 'Job board', href: '/careers' },
+  { name: 'Blog', href: '/blog', badge: 'Beta' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -24,6 +25,12 @@ const projectLinks = [
   { href: '/explore', label: 'Course navigator' },
   { href: '/my-courses', label: 'My favourites' },
 ];
+
+const BetaBadge: React.FC = () => (
+  <span className="ml-1.5 inline-flex items-center font-mono uppercase tracking-[0.1em] text-[0.625rem] leading-none rounded-sm px-1.5 py-[3px] border border-border bg-chart-4/15 text-[#0f7a55] dark:bg-chart-4/20 dark:text-chart-4">
+    Beta
+  </span>
+);
 
 export const Header: React.FC = () => {
   const { state } = useApp();
@@ -111,6 +118,7 @@ export const Header: React.FC = () => {
               {navigation.map((item) => (
                 <Link key={item.name} href={item.href} prefetch className={navLinkClass(isActive(item.href))} aria-current={isActive(item.href) ? "page" : undefined}>
                   {item.name}
+                  {item.badge && <BetaBadge />}
                 </Link>
               ))}
 
@@ -219,6 +227,7 @@ export const Header: React.FC = () => {
                   }`}
                 >
                   {item.name}
+                  {item.badge && <BetaBadge />}
                 </Link>
               ))}
 
