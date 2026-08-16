@@ -749,10 +749,10 @@ export default function TeamApplicationPage() {
                   {profile ? "We've prefilled your details from your account." : "Please fill in your details."}
                 </p>
               </div>
-              <Card>
-                <div className="p-6 space-y-5">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <FieldGroup label="Full name" requiredHint="Required.">
+              <Card className="overflow-visible">
+                 <div className="p-6 space-y-5">
+                   <div className="grid md:grid-cols-2 gap-4">
+                     <FieldGroup label="Full name" requiredHint="Required.">
                       <InputBase maxLength={100} value={form.name} onChange={(e) => set("name", e.target.value)} />
                     </FieldGroup>
                     <FieldGroup label="Email" requiredHint="Required.">
