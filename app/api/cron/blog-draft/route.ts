@@ -3,16 +3,23 @@ import type { NextRequest } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { generateBlogDraft } from '@/lib/ai/blog/generate';
 import { fetchNewsCandidates } from '@/lib/ai/blog/news';
+import { BLOG_GENERATION_MAX_DURATION } from '@/lib/ai/blog/defaults';
 
 export const runtime = 'nodejs';
+// Non-streamed generation (feed fetch + single OpenRouter call) can exceed a minute.
+export const maxDuration = BLOG_GENERATION_MAX_DURATION;
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-/** True if an AI News Desk post already exists from the last 7 days (avoids duplicate weekly digests). */
+/** True if a PUBLISHED AI post exists from the last 7 days (unpublished drafts never block the cron). */
 async function hasRecentAiDigest(): Promise<boolean> {
   const weekAgo = new Date(Date.now() - WEEK_MS).toISOString().split('T')[0];
   try {
-    const snapshot = await adminDb.collection('blogPosts').where('authorType', '==', 'ai').get();
+    const snapshot = await adminDb
+      .collection('blogPosts')
+      .where('authorType', '==', 'ai')
+      .where('published', '==', true)
+      .get();
     for (const docSnap of snapshot.docs) {
       const date = docSnap.data()?.date;
       if (typeof date === 'string' && date >= weekAgo) return true;

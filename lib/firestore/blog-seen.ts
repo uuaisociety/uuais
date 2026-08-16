@@ -1,23 +1,9 @@
 import { doc, getDoc, setDoc, getDocs, collection, query, where, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
-
-const SEEN_DOC = 'blog_news_seen';
+import { normalizeNewsUrl as normalizeUrl } from '@/lib/ai/blog/url';
+import { SEEN_DOC } from '@/lib/ai/blog/defaults';
 
 const seenRef = () => doc(db, 'config', SEEN_DOC);
-
-/** Normalise a URL for deduping against the covered set. */
-function normalizeUrl(raw: string): string {
-  try {
-    const url = new URL(raw);
-    url.hash = '';
-    for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']) {
-      url.searchParams.delete(key);
-    }
-    return `${url.hostname.toLowerCase()}${url.pathname.replace(/\/+$/, '') || '/'}`;
-  } catch {
-    return raw.trim().toLowerCase().replace(/\/+$/, '');
-  }
-}
 
 export const getUsedNewsUrls = async (): Promise<string[]> => {
   const snapshot = await getDoc(seenRef());
@@ -37,6 +23,24 @@ export const addUsedNewsUrl = async (url: string): Promise<string[]> => {
   const key = normalizeUrl(clean);
   if (current.some((u) => normalizeUrl(u) === key)) return current;
   const next = [...current, clean];
+  await writeSeen(next);
+  return next;
+};
+
+/** Bulk mark (used when a post is published — its cited URLs become covered). Returns the new list. */
+export const addUsedNewsUrls = async (urls: string[]): Promise<string[]> => {
+  const clean = urls.filter((u): u is string => typeof u === 'string' && u.trim().length > 0).map((u) => u.trim());
+  if (clean.length === 0) return getUsedNewsUrls();
+  const current = await getUsedNewsUrls();
+  const keys = new Set(current.map(normalizeUrl));
+  const next = [...current];
+  for (const url of clean) {
+    if (!keys.has(normalizeUrl(url))) {
+      keys.add(normalizeUrl(url));
+      next.push(url);
+    }
+  }
+  if (next.length === current.length) return current;
   await writeSeen(next);
   return next;
 };
@@ -70,14 +74,11 @@ export interface CoveredNewsUrl {
   citedBy: string[];
 }
 
-/**
- * Every URL the agent currently skips: the admin-marked used store plus URLs
- * cited by existing AI posts (so superadmins can see and toggle them all).
- */
+/** Every URL the agent currently skips: the admin-marked used store plus URLs cited by PUBLISHED AI posts (drafts excluded). */
 export const getCoveredNewsUrls = async (): Promise<CoveredNewsUrl[]> => {
   const [seen, postsSnap] = await Promise.all([
     getUsedNewsUrls(),
-    getDocs(query(collection(db, 'blogPosts'), where('authorType', '==', 'ai'))),
+    getDocs(query(collection(db, 'blogPosts'), where('authorType', '==', 'ai'), where('published', '==', true))),
   ]);
 
   const map = new Map<string, CoveredNewsUrl>();

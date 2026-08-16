@@ -11,8 +11,7 @@ import DOMPurify from "dompurify";
 import { useApp } from "@/contexts/AppContext";
 import type { NewsItem, BlogPostType } from "@/lib/ai/blog/types";
 
-/** Extract the current (possibly partial) value of a string field from the model's
- *  streaming JSON. Returns the raw escaped value or undefined when not present yet. */
+/** Extract the current (possibly partial) value of a string field from the streaming JSON. */
 function extractJsonStringValue(raw: string, key: string): string | undefined {
   const re = new RegExp(`"${key}"\\s*:\\s*"`);
   const match = re.exec(raw);
@@ -77,6 +76,7 @@ const GenerateBlogModal: React.FC<GenerateBlogModalProps> = ({ open, onClose, on
   const [notes, setNotes] = useState("");
   const [generating, setGenerating] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
   // Live streaming state
   const [streaming, setStreaming] = useState(false);
@@ -199,13 +199,16 @@ const GenerateBlogModal: React.FC<GenerateBlogModalProps> = ({ open, onClose, on
     setStreamRaw("");
     setElapsed(0);
 
+    abortRef.current = new AbortController();
     const start = Date.now();
     const timer = window.setInterval(() => setElapsed(Math.floor((Date.now() - start) / 1000)), 1000);
+    let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
 
     try {
       const res = await fetch("/api/admin/blog/generate/stream", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: abortRef.current.signal,
         body: JSON.stringify({
           type,
           autoPick: type === "weekly-digest" ? autoPick : false,
@@ -215,12 +218,13 @@ const GenerateBlogModal: React.FC<GenerateBlogModalProps> = ({ open, onClose, on
         }),
       });
       if (!res.ok || !res.body) {
+        if (abortRef.current?.signal.aborted) return;
         const data = await res.json().catch(() => ({}));
         setSubmitError(data.message || "Failed to start generation");
         return;
       }
 
-      const reader = res.body.getReader();
+      reader = res.body.getReader();
       const decoder = new TextDecoder();
       let buffer = "";
 
@@ -262,18 +266,32 @@ const GenerateBlogModal: React.FC<GenerateBlogModalProps> = ({ open, onClose, on
         }
       }
     } catch {
-      setSubmitError("Failed to generate draft");
+      if (!abortRef.current?.signal.aborted) {
+        setSubmitError("Failed to generate draft");
+      }
     } finally {
       window.clearInterval(timer);
+      reader?.cancel().catch(() => {});
+      abortRef.current = null;
       setStreaming(false);
       setGenerating(false);
     }
   };
 
+  const stopGeneration = () => {
+    abortRef.current?.abort();
+    setStreamStatus("Stopped by admin.");
+  };
+
   const showConsole = streaming || streamContent || streamReasoning || streamStatus || streamRaw;
 
   return (
-    <Modal open={open} onClose={onClose} title="Generate AI Draft" size="lg">
+    <Modal
+      open={open}
+      onClose={() => { abortRef.current?.abort(); onClose(); }}
+      title="Generate AI Draft"
+      size="lg"
+    >
       <form onSubmit={(e) => { e.preventDefault(); handleGenerate(); }} className="space-y-4">
         <p className="text-xs text-muted-foreground">
           Drafts are created unpublished and must be reviewed before publishing.
@@ -315,67 +333,78 @@ const GenerateBlogModal: React.FC<GenerateBlogModalProps> = ({ open, onClose, on
           </FieldGroup>
         )}
 
-        <div>
-          <div className="flex gap-2 mb-3">
-            <InputBase
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Custom search (optional)"
-            />
-            <Button type="button" variant="outline" icon={RefreshCw} onClick={() => fetchCandidates(query)} disabled={loading}>
-              Search
-            </Button>
-          </div>
+        {type === "weekly-digest" && (
+          <div>
+            <div className="flex gap-2 mb-3">
+              <InputBase
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Custom search (optional)"
+              />
+              <Button type="button" variant="outline" icon={RefreshCw} onClick={() => fetchCandidates(query)} disabled={loading}>
+                Search
+              </Button>
+            </div>
 
-          {loading ? (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
-            </div>
-          ) : fetchError ? (
-            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg flex items-center justify-between gap-3">
-              <span>{fetchError}</span>
-              <Button size="sm" variant="outline" icon={RefreshCw} onClick={() => fetchCandidates(query)}>Retry</Button>
-            </div>
-          ) : candidates.length === 0 ? (
-            <div className="text-center py-10 text-sm text-muted-foreground">No news candidates found.</div>
-          ) : (
-            <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
-              {candidates.map((c) => {
-                const selected = !!selectedIds[c.id];
-                return (
-                  <label key={c.id} className="flex items-start gap-3 p-3 rounded-md border border-border cursor-pointer hover:bg-foreground/[0.03] transition-colors">
-                    <input type="checkbox" checked={selected} onChange={() => toggleSelect(c.id)} className="mt-1 accent-primary" />
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <Tag variant="gray" size="sm">{c.source}</Tag>
-                        {formatDate(c.publishedAt) && (
-                          <span className="text-xs text-muted-foreground">{formatDate(c.publishedAt)}</span>
-                        )}
-                      </div>
+            {loading ? (
+              <div className="flex items-center justify-center py-12">
+                <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
+              </div>
+            ) : fetchError ? (
+              <div className="bg-destructive/10 border border-destructive/30 text-destructive px-4 py-3 rounded-lg flex items-center justify-between gap-3">
+                <span>{fetchError}</span>
+                <Button size="sm" variant="outline" icon={RefreshCw} onClick={() => fetchCandidates(query)}>Retry</Button>
+              </div>
+            ) : candidates.length === 0 ? (
+              <div className="text-center py-10 text-sm text-muted-foreground">No news candidates found.</div>
+            ) : (
+              <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+                {candidates.map((c) => {
+                  const selected = !!selectedIds[c.id];
+                  return (
+                    <div key={c.id} className="flex items-start gap-3 p-3 rounded-md border border-border hover:bg-foreground/[0.03] transition-colors">
+                      <input
+                        type="checkbox"
+                        id={`cand-${c.id}`}
+                        checked={selected}
+                        onChange={() => toggleSelect(c.id)}
+                        className="mt-1 accent-primary"
+                      />
+                      <label htmlFor={`cand-${c.id}`} className="flex-1 min-w-0 cursor-pointer">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <Tag variant="gray" size="sm">{c.source}</Tag>
+                          {formatDate(c.publishedAt) && (
+                            <span className="text-xs text-muted-foreground">{formatDate(c.publishedAt)}</span>
+                          )}
+                        </div>
+                        <span className="mt-1 flex items-start gap-1 text-sm font-medium text-foreground">
+                          {c.title}
+                        </span>
+                        {c.snippet && <p className="mt-1 text-xs text-muted-foreground line-clamp-2">{c.snippet}</p>}
+                      </label>
                       <a
                         href={c.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-1 flex items-start gap-1 text-sm font-medium text-foreground hover:text-primary hover:underline"
+                        aria-label={`Open article: ${c.title}`}
+                        className="mt-1 shrink-0 text-muted-foreground hover:text-primary transition-colors"
                       >
-                        {c.title}
-                        <ExternalLink className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                        <ExternalLink className="h-3.5 w-3.5" aria-hidden />
                       </a>
-                      {c.snippet && <p className="mt-1 text-xs text-muted-foreground line-clamp-2">{c.snippet}</p>}
                     </div>
-                  </label>
-                );
-              })}
-            </div>
-          )}
+                  );
+                })}
+              </div>
+            )}
 
-          {warnings.length > 0 && (
-            <ul className="mt-3 text-xs text-muted-foreground list-disc pl-4 space-y-1">
-              {warnings.map((w, i) => <li key={i}>{w}</li>)}
-            </ul>
-          )}
-        </div>
+            {warnings.length > 0 && (
+              <ul className="mt-3 text-xs text-muted-foreground list-disc pl-4 space-y-1">
+                {warnings.map((w, i) => <li key={i}>{w}</li>)}
+              </ul>
+            )}
+          </div>
+        )}
 
         <FieldGroup label="Admin notes / what happened" requiredHint={type === "event-recap" ? "Required." : "Optional."}>
           <TextareaBase
@@ -393,35 +422,50 @@ const GenerateBlogModal: React.FC<GenerateBlogModalProps> = ({ open, onClose, on
               <span className="text-xs font-medium text-muted-foreground flex items-center gap-2">
                 <Loader2 className={`h-3.5 w-3.5 animate-spin ${streaming ? "" : "opacity-0"}`} />
                 <span>
-                  {streaming ? `AI News Desk drafting… ${elapsed}s` : "Generation finished"}
+                  {streaming
+                    ? `AI News Desk drafting… ${elapsed}s`
+                    : streamStatus === "Stopped by admin."
+                      ? "Generation stopped"
+                      : "Generation finished"}
                 </span>
                 {streamStatus && <span className="text-primary">· {streamStatus}</span>}
               </span>
-              {(streamContent || streamRaw) && (
-                <button
-                  type="button"
-                  onClick={() => setShowRaw((v) => !v)}
-                  className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer underline underline-offset-2"
-                >
-                  {showRaw ? "Show preview" : "Show raw output"}
-                </button>
-              )}
+              <span className="flex items-center gap-3">
+                {(streamContent || streamRaw) && (
+                  <button
+                    type="button"
+                    onClick={() => setShowRaw((v) => !v)}
+                    className="text-xs font-medium text-muted-foreground hover:text-foreground transition-colors cursor-pointer underline underline-offset-2"
+                  >
+                    {showRaw ? "Show preview" : "Show raw output"}
+                  </button>
+                )}
+                {streaming && (
+                  <button
+                    type="button"
+                    onClick={stopGeneration}
+                    className="text-xs font-medium text-destructive hover:text-destructive/80 transition-colors cursor-pointer"
+                  >
+                    Stop
+                  </button>
+                )}
+              </span>
             </div>
 
             {showRaw ? (
               <div
                 ref={consoleRef}
-                className="bg-gray-950 text-gray-100 rounded-md p-4 font-mono text-xs leading-relaxed max-h-80 overflow-y-auto whitespace-pre-wrap"
+                className="bg-foreground/[0.05] text-foreground/90 rounded-md p-4 font-mono text-xs leading-relaxed max-h-80 overflow-y-auto whitespace-pre-wrap"
               >
                 {streamReasoning && (
-                  <div className="text-gray-500 italic mb-2 whitespace-pre-wrap">{streamReasoning}</div>
+                  <div className="text-muted-foreground italic mb-2 whitespace-pre-wrap">{streamReasoning}</div>
                 )}
-                {streamContent ? streamContent : <span className="text-gray-600">Waiting for the model…</span>}
-                {streaming && <span className="inline-block w-2 h-4 bg-gray-400 align-middle animate-pulse ml-0.5" />}
+                {streamContent ? streamContent : <span className="text-muted-foreground">Waiting for the model…</span>}
+                {streaming && <span className="inline-block w-2 h-4 bg-foreground/40 align-middle animate-pulse ml-0.5" />}
                 {streamRaw && (
-                  <div className="mt-3 border-t border-gray-800 pt-3">
-                    <div className="text-red-400 mb-1">Raw model output (what the model actually returned):</div>
-                    <div className="text-gray-400 line-clamp-6">{streamRaw.slice(0, 2000)}</div>
+                  <div className="mt-3 border-t border-border pt-3">
+                    <div className="text-destructive mb-1">Raw model output (what the model actually returned):</div>
+                    <div className="text-muted-foreground line-clamp-6">{streamRaw.slice(0, 2000)}</div>
                   </div>
                 )}
               </div>
@@ -462,14 +506,14 @@ const GenerateBlogModal: React.FC<GenerateBlogModalProps> = ({ open, onClose, on
         )}
 
         {submitError && (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg">
+          <div className="bg-destructive/10 border border-destructive/30 text-destructive px-4 py-3 rounded-lg">
             {submitError}
           </div>
         )}
 
         <div className="flex justify-end space-x-3 pt-4">
-          <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-          <Button type="submit" variant="outline" disabled={generating}>
+          <Button type="button" variant="outline" onClick={() => { abortRef.current?.abort(); onClose(); }}>Cancel</Button>
+          <Button type="submit" variant="default" disabled={generating}>
             {generating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
             {generating ? "Drafting…" : "Generate Draft"}
           </Button>

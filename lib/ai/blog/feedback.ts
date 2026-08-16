@@ -9,19 +9,16 @@ interface EngagementRow {
   shares: number;
 }
 
-/**
- * Gather engagement metrics (reads, likes, dislikes, shares) for the most recent
- * AI News Desk posts and format them as feedback the model can learn from when
- * picking topics and framing. Best-effort: degrades to a short message on any
- * error so generation never blocks on analytics.
- */
+/** Gather reads/likes/dislikes/shares for the newest AI News Desk posts as prompt feedback (best-effort). */
 export async function fetchEngagementFeedback(limit = 6): Promise<string> {
   try {
-    const snapshot = await adminDb.collection('blogPosts').where('authorType', '==', 'ai').get();
-    const posts = snapshot.docs
-      .map((d) => ({ id: d.id, title: d.data().title || 'Untitled', date: d.data().date || '' }))
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      .slice(0, limit);
+    const snapshot = await adminDb
+      .collection('blogPosts')
+      .where('authorType', '==', 'ai')
+      .orderBy('date', 'desc')
+      .limit(limit)
+      .get();
+    const posts = snapshot.docs.map((d) => ({ id: d.id, title: d.data().title || 'Untitled', date: d.data().date || '' }));
 
     if (posts.length === 0) return '(no published AI News Desk posts yet — no engagement data)';
 

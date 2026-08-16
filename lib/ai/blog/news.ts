@@ -2,11 +2,12 @@ import { XMLParser } from 'fast-xml-parser';
 import { adminDb } from '@/lib/firebase-admin';
 import { getBlogAISettings } from './settings';
 import { getSeenNewsUrls } from './seen';
+import { normalizeNewsUrl } from './url';
+import { EXA_SEARCH_URL, DEFAULT_PER_FEED_LIMIT, DEFAULT_MAX_CANDIDATES } from './defaults';
 import type { BlogFeed, NewsFetchResult, NewsItem } from './types';
 
-const EXA_SEARCH_URL = 'https://api.exa.ai/search';
-const DEFAULT_PER_FEED_LIMIT = 6;
-const DEFAULT_MAX_CANDIDATES = 30;
+// Re-exported for callers that imported the normalizer from the news module.
+export { normalizeNewsUrl } from './url';
 
 /** Fetch with a hard timeout so a slow upstream feed never hangs the route. */
 async function fetchWithTimeout(url: string, init?: RequestInit, timeoutMs = 8000): Promise<Response> {
@@ -36,21 +37,6 @@ function clampSnippet(text: string, maxChars = 220): string {
   const clean = stripHtml(text);
   if (clean.length <= maxChars) return clean;
   return `${clean.slice(0, maxChars - 1).trim()}…`;
-}
-
-/** Normalise a URL so the same story surfacing from different sources dedupes. */
-export function normalizeNewsUrl(rawUrl: string): string {
-  try {
-    const url = new URL(rawUrl);
-    url.hash = '';
-    for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']) {
-      url.searchParams.delete(key);
-    }
-    const path = url.pathname.replace(/\/+$/, '') || '/';
-    return `${url.hostname.toLowerCase()}${path.toLowerCase()}`;
-  } catch {
-    return rawUrl.trim().toLowerCase().replace(/\/+$/, '');
-  }
 }
 
 function hostnameOf(url: string): string {
@@ -273,8 +259,7 @@ async function searchExa(query: string, numResults: number): Promise<NewsItem[]>
 // Combined pipeline
 // -----------------------------------------
 
-/** Load URLs the agent should skip: admin-marked "used" URLs plus URLs already
- *  cited by past AI posts. */
+/** Load URLs the agent should skip: admin-marked "used" URLs plus URLs cited by past PUBLISHED AI posts (drafts don't consume URLs). */
 async function getPreviouslyCoveredUrls(): Promise<Set<string>> {
   const covered = new Set<string>();
   try {
@@ -282,7 +267,11 @@ async function getPreviouslyCoveredUrls(): Promise<Set<string>> {
     for (const url of seenUrls) {
       if (typeof url === 'string' && url.trim()) covered.add(normalizeNewsUrl(url));
     }
-    const snapshot = await adminDb.collection('blogPosts').where('authorType', '==', 'ai').get();
+    const snapshot = await adminDb
+      .collection('blogPosts')
+      .where('authorType', '==', 'ai')
+      .where('published', '==', true)
+      .get();
     snapshot.forEach((docSnap) => {
       const sources = docSnap.data()?.sources;
       if (Array.isArray(sources)) {

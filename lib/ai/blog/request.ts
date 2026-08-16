@@ -1,7 +1,5 @@
+import { VALID_TYPES } from './defaults';
 import type { BlogPostType, NewsItem } from './types';
-
-export const VALID_TYPES: BlogPostType[] = ['weekly-digest', 'event-preview', 'event-recap'];
-export const MAX_CANDIDATES_FOR_AUTO = 40;
 
 export interface GenerateRequestInput {
   type: BlogPostType;

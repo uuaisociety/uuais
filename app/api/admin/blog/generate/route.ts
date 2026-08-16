@@ -5,10 +5,13 @@ import { generateBlogDraft } from '@/lib/ai/blog/generate';
 import { fetchNewsCandidates } from '@/lib/ai/blog/news';
 import { incrementUsage } from '@/lib/ai/rate-limit';
 import { OpenRouterError } from '@/lib/ai/openrouter';
-import { parseGenerateRequest, MAX_CANDIDATES_FOR_AUTO } from '@/lib/ai/blog/request';
+import { parseGenerateRequest } from '@/lib/ai/blog/request';
+import { MAX_CANDIDATES_FOR_AUTO, BLOG_GENERATION_MAX_DURATION } from '@/lib/ai/blog/defaults';
 import type { NewsItem } from '@/lib/ai/blog/types';
 
 export const runtime = 'nodejs';
+// Non-streamed generation (feed fetch + single OpenRouter call) can exceed a minute.
+export const maxDuration = BLOG_GENERATION_MAX_DURATION;
 
 export async function POST(req: NextRequest) {
   try {
@@ -28,8 +31,7 @@ export async function POST(req: NextRequest) {
     }
     const { input } = parsed;
 
-    // Auto mode: the agent researches for itself — gather candidates server-side
-    // and let the model choose the most significant stories.
+    // Auto mode: gather candidates server-side and let the model pick the most significant stories.
     let allCandidates: NewsItem[] | undefined;
     if (input.autoPick) {
       const result = await fetchNewsCandidates({ limit: MAX_CANDIDATES_FOR_AUTO });

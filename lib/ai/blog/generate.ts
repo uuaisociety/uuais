@@ -3,24 +3,21 @@ import { adminDb } from '@/lib/firebase-admin';
 import { generateStructured, generateCompletion, streamCompletion, tryParseJson, type Message } from '@/lib/ai/openrouter';
 import { slugify } from '@/lib/slugify';
 import { previewImageFor } from '@/lib/blog-preview';
-import { AI_DESK_AUTHOR, WEEKLY_DIGEST_AUTOPICK_INSTRUCTIONS, WEEKLY_DIGEST_SELECTED_INSTRUCTIONS, EVENT_PREVIEW_INSTRUCTIONS, EVENT_RECAP_INSTRUCTIONS, OUTPUT_FORMAT_RULES, REPAIR_INSTRUCTION, MIN_OUTPUT_TOKENS, MAX_OUTPUT_TOKENS, DEFAULT_TEMPERATURE, REPAIR_TEMPERATURE, DEFAULT_BLOG_AI_SETTINGS } from './defaults';
+import { isHttpUrl, isAllowedImageUrl } from './url';
+import { AI_DESK_AUTHOR, WEEKLY_DIGEST_AUTOPICK_INSTRUCTIONS, WEEKLY_DIGEST_SELECTED_INSTRUCTIONS, EVENT_PREVIEW_INSTRUCTIONS, EVENT_RECAP_INSTRUCTIONS, OUTPUT_FORMAT_RULES, REPAIR_INSTRUCTION, MIN_OUTPUT_TOKENS, MAX_OUTPUT_TOKENS, DEFAULT_TEMPERATURE, REPAIR_TEMPERATURE, DEFAULT_BLOG_AI_SETTINGS, MAX_EVENTS_IN_CONTEXT, MAX_REASONING_TRACE } from './defaults';
 import { normalizeContentHtml } from './html';
-import { addSeenNewsUrls } from './seen';
 import { getBlogAISettings } from './settings';
 import { normalizeNewsUrl } from './news';
 import { fetchEngagementFeedback } from './feedback';
 import type { BlogAISettings, BlogPostType, GeneratedBlogResult, NewsItem } from './types';
 
-/** Resolve the output token budget from settings, clamped to the shared bounds so
- *  a low setting can't truncate articles and an extreme one can't blow up cost. */
+/** Resolve the output token budget from settings, clamped to the shared bounds. */
 function resolveMaxTokens(maxOutputTokens?: number): number {
   const budget = maxOutputTokens && Number.isFinite(maxOutputTokens)
     ? maxOutputTokens
     : DEFAULT_BLOG_AI_SETTINGS.maxOutputTokens;
   return Math.max(MIN_OUTPUT_TOKENS, Math.min(MAX_OUTPUT_TOKENS, budget));
 }
-const MAX_EVENTS_IN_CONTEXT = 3;
-
 interface ServerEvent {
   id: string;
   title: string;
@@ -210,7 +207,8 @@ function normalizeSources(sources: unknown): { title: string; url: string }[] {
     if (!s || typeof s !== 'object') continue;
     const title = String((s as { title?: unknown }).title ?? '').trim().slice(0, 200);
     const url = String((s as { url?: unknown }).url ?? '').trim();
-    if (!title || !url) continue;
+    // Only absolute http(s) URLs may be cited — a prompt-injected source must never yield a javascript:/data: href.
+    if (!title || !url || !isHttpUrl(url)) continue;
     if (seen.has(url)) continue;
     seen.add(url);
     out.push({ title, url });
@@ -261,8 +259,6 @@ function buildMessages(
   ];
 }
 
-const MAX_REASONING_TRACE = 20000;
-
 async function persistDraft(
   input: GenerateBlogDraftInput,
   settings: BlogAISettings,
@@ -275,7 +271,7 @@ async function persistDraft(
   const excerpt = String(result.excerpt ?? '').trim().slice(0, 300) || 'Read the latest from the UU AI Society AI News Desk.';
   const contentHtml = normalizeContentHtml(String(result.contentHtml ?? '').trim());
   const rawImage = String(result.image ?? '').trim().slice(0, 500);
-  const image = /^https?:\/\/\S+$/i.test(rawImage) ? rawImage : previewImageFor(title);
+  const image = isAllowedImageUrl(rawImage) ? rawImage : previewImageFor(title);
   const autoPick = Boolean(input.autoPick && input.allCandidates && input.allCandidates.length > 0);
   let sources = normalizeSources(result.sources);
   if (autoPick && input.allCandidates) {
@@ -304,13 +300,7 @@ async function persistDraft(
   };
 
   const draftRef = await adminDb.collection('blogPosts').add(draft);
-  // The cited URLs are now "used" — the agent skips them, and they show up in the
-  // admin's toggleable used-articles list. Releasing them happens on post delete.
-  try {
-    await addSeenNewsUrls(sources.map((s) => s.url));
-  } catch (e) {
-    console.warn('Failed to mark draft sources as seen:', e);
-  }
+  // Sources are marked "seen" at publish time (AdminDashboard), never at draft time, so abandoned drafts don't consume URLs.
   try {
     await adminDb
       .collection('analyticsBlogs')
@@ -367,13 +357,7 @@ export type DraftStreamResult =
   | { ok: true; draftId: string; usage: { promptTokens: number; completionTokens: number; totalTokens: number } }
   | { ok: false; message: string; raw: string };
 
-/**
- * Streaming draft generation for the admin UI. Each model delta is forwarded via
- * `emit` so the admin can watch the AI News Desk work in real time (reasoning is
- * surfaced separately for immersion). If the model returns malformed JSON, the
- * first attempt is kept for visibility, a repair retry runs, and the error (with
- * the raw model output) is reported so the admin can see exactly what happened.
- */
+/** Streaming draft generation for the admin UI: forwards model deltas live; repairs malformed JSON and reports failures with raw output. */
 export async function generateBlogDraftStream(
   input: GenerateBlogDraftInput,
   authorUid: string,

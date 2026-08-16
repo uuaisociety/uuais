@@ -3,10 +3,13 @@ import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { generateBlogDraftStream, type DraftStreamEvent } from '@/lib/ai/blog/generate';
 import { fetchNewsCandidates } from '@/lib/ai/blog/news';
 import { incrementUsage } from '@/lib/ai/rate-limit';
-import { parseGenerateRequest, MAX_CANDIDATES_FOR_AUTO } from '@/lib/ai/blog/request';
+import { parseGenerateRequest } from '@/lib/ai/blog/request';
+import { MAX_CANDIDATES_FOR_AUTO, MAX_REASONING_TRACE, BLOG_GENERATION_MAX_DURATION } from '@/lib/ai/blog/defaults';
 import type { NewsItem } from '@/lib/ai/blog/types';
 
 export const runtime = 'nodejs';
+// Streaming drafts can run several minutes end to end (reasoning + JSON body).
+export const maxDuration = BLOG_GENERATION_MAX_DURATION;
 
 const encoder = new TextEncoder();
 
@@ -42,7 +45,14 @@ export async function POST(req: NextRequest) {
 
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
-      const emit = (event: DraftStreamEvent) => controller.enqueue(sse(event));
+      let reasoningForwarded = 0;
+      const emit = (event: DraftStreamEvent) => {
+        if (event.type === 'reasoning') {
+          reasoningForwarded += event.text.length;
+          if (reasoningForwarded > MAX_REASONING_TRACE) return;
+        }
+        controller.enqueue(sse(event));
+      };
       try {
         const result = await generateBlogDraftStream({ ...input, allCandidates }, auth.session.uid, emit);
         if (result.ok) {

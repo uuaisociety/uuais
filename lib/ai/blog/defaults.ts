@@ -1,13 +1,33 @@
-import type { BlogAISettings, BlogFeed } from './types';
+import type { BlogAISettings, BlogFeed, BlogPostType } from './types';
+
+/** Firestore document id for the "used articles" store (shared by server + client). */
+export const SEEN_DOC = 'blog_news_seen';
+
+/** Candidate pool and context limits used by generation + news discovery. */
+export const MAX_EVENTS_IN_CONTEXT = 3;
+export const DEFAULT_PER_FEED_LIMIT = 6;
+export const DEFAULT_MAX_CANDIDATES = 30;
+export const MAX_CANDIDATES_FOR_AUTO = 40;
+export const VALID_TYPES: BlogPostType[] = ['weekly-digest', 'event-preview', 'event-recap'];
+
+/** Exa news search endpoint. */
+export const EXA_SEARCH_URL = 'https://api.exa.ai/search';
+
+/** Hosts next/image is configured to serve (next.config.ts `images.remotePatterns`). */
+export const ALLOWED_IMAGE_HOSTS = ['firebasestorage.googleapis.com', 'drive.google.com', 'storage.googleapis.com'];
+
+/** Cap on the reasoning trace persisted with a draft and forwarded to the admin console. */
+export const MAX_REASONING_TRACE = 20000;
+
+/** Vercel `maxDuration` (seconds) for blog generation routes. */
+export const BLOG_GENERATION_MAX_DURATION = 300;
 
 export const AI_DESK_AUTHOR = 'UU AI Society AI Desk';
 
 /** Default hero image for AI News Desk posts when the model can't supply one. */
 export const DEFAULT_BLOG_IMAGE = '/images/campus.png';
 
-/** Curated AI news sources — mirroring the feed library of a personal AI-news digest.
- *  `rss` feeds are parsed directly; `scrape` feeds pull article links from the page
- *  HTML for outlets that don't publish a feed. */
+/** Curated AI news sources (`rss` parses feeds; `scrape` pulls article links from page HTML for outlets without feeds). */
 export const DEFAULT_BLOG_FEEDS: BlogFeed[] = [
   { name: 'OpenAI News', type: 'rss', url: 'https://openai.com/news/rss.xml' },
   { name: 'Google DeepMind', type: 'rss', url: 'https://deepmind.google/blog/rss.xml' },
@@ -84,13 +104,13 @@ export const OUTPUT_FORMAT_RULES = `OUTPUT FORMAT: Return JSON only, matching th
   "contentHtml": "The full article as HTML. Use <h2> or <h3> for section headings, <p> for paragraphs, <ul>/<li> for lists, and <a href="..."> for story and event links. Do NOT wrap in <html>/<body>.",
   "tags": ["2 to 5 lowercase tags, e.g. "ai news", "events""],
   "sources": [{"title": "Story title", "url": "exact url from the news items list"}],
-  "image": "An absolute https:// hero image URL derived from the source material if one is available, otherwise an empty string. Never invent an image URL."
+  "image": "always an empty string — the platform selects a suitable hero image. Never invent an image URL."
 }
 
 RULES:
 - contentHtml must be between 400 and 700 words.
 - sources are required — list every story you reference, with the exact title and url from the news items list above.
-- image must be an absolute https:// URL if provided; leave it as an empty string if none is reliably available.
+- image must be an empty string. Never provide or invent an image URL.
 - Be strictly factual; never invent details, quotes, or numbers.
 - Your ENTIRE response is the JSON object above. Do not include reasoning, commentary, markdown code fences, or any text before or after the JSON.`;
 

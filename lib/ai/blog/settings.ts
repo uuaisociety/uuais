@@ -2,10 +2,6 @@ import { adminDb } from '@/lib/firebase-admin';
 import { DEFAULT_BLOG_AI_SETTINGS } from './defaults';
 import type { BlogAISettings, BlogFeed } from './types';
 
-let cached: BlogAISettings | null = null;
-let lastFetch = 0;
-const CACHE_TTL = 60 * 60 * 1000; // 1 hour
-
 function normalizeFeeds(feeds: unknown): BlogFeed[] {
   if (!Array.isArray(feeds)) return DEFAULT_BLOG_AI_SETTINGS.feeds;
   const out: BlogFeed[] = [];
@@ -22,16 +18,13 @@ function normalizeFeeds(feeds: unknown): BlogFeed[] {
   return out.length > 0 ? out : DEFAULT_BLOG_AI_SETTINGS.feeds;
 }
 
+/** Read the current AI News Desk settings from Firestore (no cache — saves must apply on the next generation). */
 export async function getBlogAISettings(): Promise<BlogAISettings> {
-  const now = Date.now();
-  if (cached && now - lastFetch < CACHE_TTL) {
-    return cached;
-  }
   try {
     const settingsDoc = await adminDb.collection('config').doc('blog_ai_settings').get();
     if (settingsDoc.exists) {
       const data = settingsDoc.data();
-      cached = {
+      return {
         systemPrompt: typeof data?.systemPrompt === 'string' ? data.systemPrompt : DEFAULT_BLOG_AI_SETTINGS.systemPrompt,
         model: typeof data?.model === 'string' ? data.model : DEFAULT_BLOG_AI_SETTINGS.model,
         feeds: normalizeFeeds(data?.feeds),
@@ -41,8 +34,6 @@ export async function getBlogAISettings(): Promise<BlogAISettings> {
         updatedAt: data?.updatedAt?.toDate?.() ? data.updatedAt.toDate().toISOString() : data?.updatedAt ?? null,
         updatedBy: data?.updatedBy ?? null,
       };
-      lastFetch = now;
-      return cached;
     }
   } catch (e) {
     console.warn('Failed to load blog AI settings from Firestore, using defaults:', e);
