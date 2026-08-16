@@ -159,18 +159,16 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
         </div>
 
         {/* Featured Image */}
-        {blogPost.image && (
-          <div className="mb-8">
-            <Image
-              src={blogPost.image || previewImageFor(blogPost.id)}
-              alt={blogPost.title}
-              width={800}
-              height={400}
-              priority
-              className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-xl shadow-lg"
-            />
-          </div>
-        )}
+        <div className="mb-8">
+          <Image
+            src={blogPost.image || previewImageFor(blogPost.id)}
+            alt={blogPost.title}
+            width={800}
+            height={400}
+            priority
+            className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-xl shadow-lg"
+          />
+        </div>
 
         {/* Blog Content */}
         <Card className="h-full pt-4">
@@ -193,9 +191,9 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
         {/* Sources */}
         {blogPost.sources && blogPost.sources.length > 0 && (
           <div className="mt-12">
-            <h3 className="text-2xl font-bold text-foreground mb-6">
+            <h2 className="display-md text-foreground mb-6">
               Sources
-            </h3>
+            </h2>
             <ul className="space-y-3">
               {blogPost.sources.map((source, index) => (
                 <li key={index}>
@@ -205,7 +203,7 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-primary hover:underline"
                   >
-                    <ExternalLink className="h-4 w-4 shrink-0" />
+                    <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
                     {source.title}
                   </a>
                 </li>
@@ -241,9 +239,9 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
         {/* Related Events */}
         {relatedEvents.length > 0 && (
           <div className="mt-12">
-            <h3 className="text-2xl font-bold text-foreground mb-6">
+            <h2 className="display-md text-foreground mb-6">
               Related Events
-            </h3>
+            </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {relatedEvents.map((event) => (
                 <Link key={event.id} href={`/events/${event.id}`}>
@@ -271,9 +269,9 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <div className="mt-12">
-          <h3 className="text-2xl font-bold text-foreground mb-6">
+          <h2 className="display-md text-foreground mb-6">
             Related Posts
-          </h3>
+          </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {relatedPosts.map((post) => (
                 <Card key={post.id} variant="glass" className="h-full">

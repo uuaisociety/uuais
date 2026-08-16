@@ -1,7 +1,7 @@
 'use client'
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Calendar,
   Users,
@@ -25,6 +25,7 @@ import BoardPositionModal, { type BPositionFormState } from './modals/BoardPosit
 import CampaignBuilderModal from '@/components/pages/admin/modals/CampaignBuilderModal';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
+import { addUsedNewsUrls, removeUsedNewsUrls } from '@/lib/firestore/blog-seen';
 import { BlogPost, Event, TeamMember, FAQ, BoardPosition, ApplicationCampaign } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
@@ -43,15 +44,24 @@ const AdminDashboard: React.FC = () => {
   //const { user, logout } = useAdmin();
   const tabValues = ADMIN_TABS;
   type Tab = AdminTab;
-  // Initial tab from the URL (?tab=...) or last-saved preference. 
-  const [activeTab, setActiveTab] = useState<Tab>(() => {
-    if (typeof window === 'undefined') return 'events';
+  // Restore the tab from the URL (?tab=...) or last-saved preference. Runs in
+  // an effect so the initial render matches the server (avoids hydration
+  // mismatch on /admin deep links) before syncing to the stored/URL tab.
+  const [activeTab, setActiveTab] = useState<Tab>('events');
+  useEffect(() => {
     const fromUrl = new URL(window.location.href).searchParams.get('tab');
-    if (tabValues.includes(fromUrl as Tab)) return fromUrl as Tab;
+    if (tabValues.includes(fromUrl as Tab)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setActiveTab(fromUrl as Tab);
+      return;
+    }
     const saved = localStorage.getItem('adminDashboardTab');
-    if (tabValues.includes(saved as Tab)) return saved as Tab;
-    return 'events';
-  });
+    if (tabValues.includes(saved as Tab)) {
+      setActiveTab(saved as Tab);
+    }
+  }, [tabValues]);
+  // The URL is owned by the restore effect until the user clicks a tab (avoids clobbering ?tab= before restore lands).
+  const tabClicked = useRef(false);
   const [blogSubtab, setBlogSubtab] = useState<'posts' | 'ai-settings'>('posts');
   // Slide direction for the tab-content transition: content enters from the
   // side the clicked tab is on relative to the currently active tab.
@@ -60,6 +70,7 @@ const AdminDashboard: React.FC = () => {
     const curIdx = tabValues.indexOf(activeTab);
     const nextIdx = tabValues.indexOf(next);
     setSlideFrom(nextIdx >= curIdx ? 'right' : 'left');
+    tabClicked.current = true;
     setActiveTab(next);
   };
   const placeholderImage = '/images/logo-highdef.png';
@@ -108,6 +119,7 @@ const AdminDashboard: React.FC = () => {
 
   useEffect(() => {
     localStorage.setItem('adminDashboardTab', activeTab);
+    if (!tabClicked.current) return;
     const url = new URL(window.location.href);
     const current = url.searchParams.get('tab');
     if (current !== activeTab) {
@@ -170,6 +182,17 @@ const AdminDashboard: React.FC = () => {
 
   const reviewerName = () => auth.currentUser?.displayName || auth.currentUser?.email || '';
 
+  // Seen-URL lifecycle: cited sources become "covered" at publish and are released on unpublish/delete.
+  const syncSeenUrlsForPost = (post: BlogPost) => {
+    const urls = (post.sources ?? []).map((s) => s.url).filter(Boolean);
+    if (urls.length === 0) return;
+    if (post.published) {
+      addUsedNewsUrls(urls).catch((e) => console.warn('Failed to mark post sources as used:', e));
+    } else {
+      removeUsedNewsUrls(urls).catch((e) => console.warn('Failed to release post sources:', e));
+    }
+  };
+
   const handleAddBlogPost = () => {
     const newPost = {
       ...blogForm,
@@ -180,6 +203,7 @@ const AdminDashboard: React.FC = () => {
       newPost.reviewedBy = reviewerName();
     }
     dispatch({ firestoreAction: 'ADD_BLOG_POST', payload: newPost });
+    syncSeenUrlsForPost(newPost);
     setShowBlogModal(false);
     resetForms();
   };
@@ -283,6 +307,7 @@ const AdminDashboard: React.FC = () => {
         updatedPost.reviewedBy = reviewerName();
       }
       dispatch({ firestoreAction: 'UPDATE_BLOG_POST', payload: updatedPost });
+      syncSeenUrlsForPost(updatedPost);
       setShowBlogModal(false);
       resetForms();
     }
@@ -301,6 +326,7 @@ const AdminDashboard: React.FC = () => {
       payload.reviewedBy = reviewerName();
     }
     dispatch({ firestoreAction: 'UPDATE_BLOG_POST', payload });
+    syncSeenUrlsForPost(payload);
   };
 
   const toggleBlogPostFeatured = (post: BlogPost) => {
@@ -370,8 +396,8 @@ const AdminDashboard: React.FC = () => {
                   key={key}
                   onClick={() => changeTab(key)}
                   className={`cursor-pointer flex items-center py-2 px-3 border-b-2 font-medium text-sm transition-all duration-200 ease-in-out ${activeTab === key
-                    ? 'border-red-500 text-red-600 dark:text-red-400'
-                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                    ? 'border-primary text-primary'
+                    : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
                     }`}
                 >
                   <Icon className="h-4 w-4 mr-2" />
