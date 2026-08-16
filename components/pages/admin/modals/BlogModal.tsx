@@ -58,7 +58,7 @@ const BlogModal: React.FC<BlogModalProps> = ({ open, editing, form, setForm, onC
             <InputBase type="text" value={form.author} onChange={(e) => setForm(prev => ({ ...prev, author: e.target.value }))} required />
           </FieldGroup>
           <FieldGroup label="Image URL">
-            <InputBase type="url" value={form.image} onChange={(e) => setForm(prev => ({ ...prev, image: e.target.value }))} placeholder="Optional; a placeholder will be used if empty" />
+            <InputBase type="text" value={form.image} onChange={(e) => setForm(prev => ({ ...prev, image: e.target.value }))} placeholder="Optional; a placeholder will be used if empty" />
           </FieldGroup>
         </div>
 

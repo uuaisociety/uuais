@@ -20,6 +20,7 @@ import ApplicationsTab from '@/components/pages/admin/tabs/ApplicationsTab';
 import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import FAQModal from '@/components/pages/admin/modals/FAQModal';
 import BlogModal from '@/components/pages/admin/modals/BlogModal';
+import GenerateBlogModal from '@/components/pages/admin/modals/GenerateBlogModal';
 import BoardPositionModal, { type BPositionFormState } from './modals/BoardPositionModal';
 import CampaignBuilderModal from '@/components/pages/admin/modals/CampaignBuilderModal';
 import { useApp } from '@/contexts/AppContext';
@@ -28,7 +29,9 @@ import { BlogPost, Event, TeamMember, FAQ, BoardPosition, ApplicationCampaign } 
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
 import AISettingsTab from '@/components/pages/admin/tabs/AISettingsTab';
+import BlogAISettingsTab from '@/components/pages/admin/tabs/BlogAISettingsTab';
 import { listUsers } from '@/lib/firestore/users';
+import { auth } from '@/lib/firebase-client';
 import { TabErrorBoundary } from '@/components/ui/TabErrorBoundary';
 
 const ADMIN_TABS = ['events', 'team', 'blog', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
@@ -40,20 +43,16 @@ const AdminDashboard: React.FC = () => {
   //const { user, logout } = useAdmin();
   const tabValues = ADMIN_TABS;
   type Tab = AdminTab;
-  const [activeTab, setActiveTab] = useState<Tab>('events');
-  // Restore the tab from the URL (?tab=...) or last-saved preference. Runs in
-  // an effect so the initial render matches the server (avoids hydration mismatch
-  // on /admin deep links) before syncing to the stored/URL tab.
-  useEffect(() => {
+  // Initial tab from the URL (?tab=...) or last-saved preference. 
+  const [activeTab, setActiveTab] = useState<Tab>(() => {
+    if (typeof window === 'undefined') return 'events';
     const fromUrl = new URL(window.location.href).searchParams.get('tab');
-    if (tabValues.includes(fromUrl as Tab)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setActiveTab(fromUrl as Tab);
-      return;
-    }
+    if (tabValues.includes(fromUrl as Tab)) return fromUrl as Tab;
     const saved = localStorage.getItem('adminDashboardTab');
-    if (tabValues.includes(saved as Tab)) setActiveTab(saved as Tab);
-  }, [tabValues]);
+    if (tabValues.includes(saved as Tab)) return saved as Tab;
+    return 'events';
+  });
+  const [blogSubtab, setBlogSubtab] = useState<'posts' | 'ai-settings'>('posts');
   // Slide direction for the tab-content transition: content enters from the
   // side the clicked tab is on relative to the currently active tab.
   const [slideFrom, setSlideFrom] = useState<'right' | 'left'>('right');
@@ -67,6 +66,7 @@ const AdminDashboard: React.FC = () => {
 
   // Modal states
   const [showBlogModal, setShowBlogModal] = useState(false);
+  const [showGenerateBlogModal, setShowGenerateBlogModal] = useState(false);
   const [showFaqModal, setShowFaqModal] = useState(false);
   const [showBoardPositionModal, setShowBoardPositionModal] = useState(false);
   const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | null>(null);
@@ -109,8 +109,11 @@ const AdminDashboard: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('adminDashboardTab', activeTab);
     const url = new URL(window.location.href);
-    url.searchParams.set('tab', activeTab);
-    window.history.replaceState(null, '', url.toString());
+    const current = url.searchParams.get('tab');
+    if (current !== activeTab) {
+      url.searchParams.set('tab', activeTab);
+      window.history.replaceState(null, '', url.toString());
+    }
   }, [activeTab]);
 
   const stats = [
@@ -127,7 +130,7 @@ const AdminDashboard: React.FC = () => {
       color: 'bg-green-500'
     },
     {
-      title: 'Newsletter Posts',
+      title: 'Blog Posts',
       value: state.blogPosts.length,
       icon: FileText,
       color: 'bg-purple-500'
@@ -165,12 +168,17 @@ const AdminDashboard: React.FC = () => {
   };
 
 
+  const reviewerName = () => auth.currentUser?.displayName || auth.currentUser?.email || '';
+
   const handleAddBlogPost = () => {
     const newPost = {
       ...blogForm,
       image: blogForm.image || placeholderImage,
       date: new Date().toISOString().split('T')[0]
-    };
+    } as BlogPost;
+    if (newPost.published && newPost.authorType === 'ai' && !newPost.reviewedBy) {
+      newPost.reviewedBy = reviewerName();
+    }
     dispatch({ firestoreAction: 'ADD_BLOG_POST', payload: newPost });
     setShowBlogModal(false);
     resetForms();
@@ -271,6 +279,9 @@ const AdminDashboard: React.FC = () => {
   const handleUpdateBlogPost = () => {
     if (editingItem) {
       const updatedPost = { ...editingItem, ...blogForm } as BlogPost;
+      if (updatedPost.published && updatedPost.authorType === 'ai' && !updatedPost.reviewedBy) {
+        updatedPost.reviewedBy = reviewerName();
+      }
       dispatch({ firestoreAction: 'UPDATE_BLOG_POST', payload: updatedPost });
       setShowBlogModal(false);
       resetForms();
@@ -285,10 +296,28 @@ const AdminDashboard: React.FC = () => {
   };
 
   const toggleBlogPostVisibility = (post: BlogPost) => {
-    dispatch({
-      type: 'UPDATE_BLOG_POST',
-      payload: { ...post, published: !post.published }
-    });
+    const payload: BlogPost = { ...post, published: !post.published };
+    if (payload.published && post.authorType === 'ai' && !post.reviewedBy) {
+      payload.reviewedBy = reviewerName();
+    }
+    dispatch({ firestoreAction: 'UPDATE_BLOG_POST', payload });
+  };
+
+  const toggleBlogPostFeatured = (post: BlogPost) => {
+    dispatch({ firestoreAction: 'UPDATE_BLOG_POST', payload: { ...post, featured: !post.featured } });
+  };
+
+  const handleDraftCreated = async (draftId: string) => {
+    setShowGenerateBlogModal(false);
+    try {
+      const mod = await import('@/lib/firestore/blog');
+      const post = await mod.getBlogPostById(draftId);
+      if (post) {
+        handleEditBlogPost(post);
+      }
+    } catch (e) {
+      console.error('Failed to load generated draft:', e);
+    }
   };
 
   return (
@@ -328,7 +357,7 @@ const AdminDashboard: React.FC = () => {
               {([
                 { key: 'events', label: 'Events', icon: Calendar },
                 { key: 'team', label: 'Team', icon: Users },
-                { key: 'blog', label: 'Newsletter', icon: FileText },
+                { key: 'blog', label: 'Blog', icon: FileText },
                 { key: 'faq', label: 'FAQ', icon: FileText },
                 { key: 'analytics', label: 'Analytics', icon: TrendingUp },
                 { key: 'members', label: 'Members', icon: Users },
@@ -381,14 +410,40 @@ const AdminDashboard: React.FC = () => {
             </TabErrorBoundary>
           )}
           {activeTab === 'blog' && (
-            <TabErrorBoundary name="Newsletter">
-              <BlogTab
-                posts={state.blogPosts}
-                onAddClick={() => setShowBlogModal(true)}
-                onEdit={(post) => handleEditBlogPost(post)}
-                onDelete={(id) => handleDeleteBlogPost(id)}
-                onTogglePublish={(post) => toggleBlogPostVisibility(post)}
-              />
+            <TabErrorBoundary name="Blog">
+              <div className="flex bg-foreground/[0.05] rounded-md p-1 gap-1 mb-6 w-fit">
+                {([
+                  ['posts', 'Posts'],
+                  ['ai-settings', 'AI News Desk'],
+                ] as const).map(([key, label]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    aria-pressed={blogSubtab === key}
+                    onClick={() => setBlogSubtab(key)}
+                    className={`px-4 py-2 rounded text-sm font-medium transition-colors duration-300 ${
+                      blogSubtab === key
+                        ? 'bg-primary text-primary-foreground'
+                        : 'text-foreground/60 hover:text-foreground'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              {blogSubtab === 'posts' ? (
+                <BlogTab
+                  posts={state.blogPosts}
+                  onAddClick={() => setShowBlogModal(true)}
+                  onGenerateClick={() => setShowGenerateBlogModal(true)}
+                  onEdit={(post) => handleEditBlogPost(post)}
+                  onDelete={(id) => handleDeleteBlogPost(id)}
+                  onTogglePublish={(post) => toggleBlogPostVisibility(post)}
+                  onToggleFeatured={toggleBlogPostFeatured}
+                />
+              ) : (
+                <BlogAISettingsTab />
+              )}
             </TabErrorBoundary>
           )}
           {activeTab === 'analytics' && (
@@ -458,6 +513,12 @@ const AdminDashboard: React.FC = () => {
                 handleAddBlogPost();
               }
             }}
+          />
+
+          <GenerateBlogModal
+            open={showGenerateBlogModal}
+            onClose={() => setShowGenerateBlogModal(false)}
+            onDraftCreated={handleDraftCreated}
           />
 
           <FAQModal

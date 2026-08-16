@@ -298,6 +298,40 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // BLOG REACTIONS - public engagement counters (likes / dislikes / shares)
+    match /blogReactions/{postId} {
+      allow read: if true;
+
+      allow create: if request.resource.data.keys().hasOnly(['likes', 'dislikes', 'shares', 'updatedAt'])
+        && request.resource.data.likes >= 0 && request.resource.data.likes <= 1
+        && request.resource.data.dislikes >= 0 && request.resource.data.dislikes <= 1
+        && request.resource.data.shares >= 0 && request.resource.data.shares <= 1;
+
+      allow update: if changedOnly(['likes', 'dislikes', 'shares', 'updatedAt'])
+        && request.resource.data.likes >= 0
+        && request.resource.data.dislikes >= 0
+        && request.resource.data.shares >= 0
+        && (
+          (resource.data.likes == null && request.resource.data.likes <= 1)
+          || request.resource.data.likes == resource.data.likes
+          || request.resource.data.likes == resource.data.likes + 1
+          || request.resource.data.likes == resource.data.likes - 1
+        )
+        && (
+          (resource.data.dislikes == null && request.resource.data.dislikes <= 1)
+          || request.resource.data.dislikes == resource.data.dislikes
+          || request.resource.data.dislikes == resource.data.dislikes + 1
+          || request.resource.data.dislikes == resource.data.dislikes - 1
+        )
+        && (
+          (resource.data.shares == null && request.resource.data.shares <= 1)
+          || request.resource.data.shares == resource.data.shares
+          || request.resource.data.shares == resource.data.shares + 1
+        );
+
+      allow delete: if isAdmin();
+    }
+
     // MAIL QUEUE for Firebase Trigger Email extension
     match /mail/{messageId} {
       // Only admins can enqueue outgoing emails from the client
