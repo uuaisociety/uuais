@@ -1,4 +1,4 @@
-import { Instrument_Sans, Martian_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -22,16 +22,20 @@ const bgTexture: "grain" | "vignette" | "none" = "grain";
 
 // Display grotesque for everything editorial; mono reserved for metadata,
 // labels and tags so data reads differently from prose.
-const display = Instrument_Sans({
-  subsets: ["latin"],
+// Self-hosted (next/font/local): Google Fonts CDN fetches are non-deterministic
+// in CI (intermittent gstatic 404s broke the e2e dev server), so the woff2
+// files live in /public/fonts.
+const display = localFont({
+  src: "./fonts/instrument-sans.woff2",
   variable: "--font-display",
+  weight: "400 700",
   display: "swap",
 });
 
-const mono = Martian_Mono({
-  subsets: ["latin"],
+const mono = localFont({
+  src: "./fonts/martian-mono.woff2",
   variable: "--font-mono-ui",
-  weight: ["400", "500", "600"],
+  weight: "100 800",
   display: "swap",
 });
 

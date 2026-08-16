@@ -1,21 +1,13 @@
-import { doc, getDoc, setDoc, serverTimestamp, increment, DocumentData } from 'firebase/firestore';
+import { doc, getDoc, setDoc, serverTimestamp, increment, onSnapshot, DocumentData } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 
-function hasAnalyticsConsent(): boolean {
-  if (typeof document === 'undefined') return false;
-  const match = document.cookie.match(/(?:^|;\s*)cc_cookie=([^;]+)/);
-  if (!match) return false;
-  try {
-    const data = JSON.parse(decodeURIComponent(match[1]));
-    return Array.isArray(data.categories) && data.categories.includes('analytics');
-  } catch {
-    return false;
-  }
-}
+// First-party aggregate metrics (reads/clicks). No personal data, no user
+// identity, no cookies — only per-device localStorage dedup and a Firestore
+// counter per content ID. Counted for all visitors (legitimate interest);
+// third-party analytics (e.g. Vercel) remain consent-gated separately.
 
 export async function incrementEventUniqueClick(eventId: string): Promise<void> {
   if (typeof window === 'undefined') return;
-  if (!hasAnalyticsConsent()) return;
   const key = `clicked_event_${eventId}`;
   try {
     if (window?.localStorage?.getItem(key) === '1') return;
@@ -39,9 +31,42 @@ export const getEventClicksCounts = async (ids: string[]): Promise<Record<string
   return counts;
 };
 
+function subscribeCounter(
+  collectionName: 'analyticsEvents' | 'analyticsJobs',
+  ids: string[],
+  cb: (counts: Record<string, number>) => void,
+): () => void {
+  const counts: Record<string, number> = {};
+  if (!ids.length) {
+    cb({});
+    return () => {};
+  }
+  const unsubs = ids.map((id) =>
+    onSnapshot(
+      doc(db, collectionName, id),
+      (snap) => {
+        const data = snap.data();
+        counts[id] = typeof data?.clicks === 'number' ? data.clicks : 0;
+        cb({ ...counts });
+      },
+      () => { /* ignore permission/network errors — keep last known counts */ },
+    ),
+  );
+  return () => unsubs.forEach((unsub) => unsub());
+}
+
+export const subscribeEventClicks = (
+  ids: string[],
+  cb: (counts: Record<string, number>) => void,
+): (() => void) => subscribeCounter('analyticsEvents', ids, cb);
+
+export const subscribeJobClicks = (
+  ids: string[],
+  cb: (counts: Record<string, number>) => void,
+): (() => void) => subscribeCounter('analyticsJobs', ids, cb);
+
 export async function incrementJobClick(jobId: string): Promise<void> {
   if (typeof window === 'undefined') return;
-  if (!hasAnalyticsConsent()) return;
   const key = `clicked_job_${jobId}`;
   try {
     if (window?.localStorage?.getItem(key) === '1') return;
@@ -65,7 +90,6 @@ export const getJobClicksCounts = async (ids: string[]): Promise<Record<string, 
 
 export async function incrementExternalRegistrationClick(eventId: string): Promise<void> {
   if (typeof window === 'undefined') return;
-  if (!hasAnalyticsConsent()) return;
   const key = `external_reg_${eventId}`;
   try {
     if (window?.localStorage?.getItem(key) === '1') return;
@@ -79,7 +103,6 @@ export async function incrementExternalRegistrationClick(eventId: string): Promi
 
 export async function incrementBlogRead(blogId: string): Promise<void> {
   if (typeof window === 'undefined') return;
-  if (!hasAnalyticsConsent()) return;
   const key = `read_blog_${blogId}`;
   try {
     if (window?.localStorage?.getItem(key) === '1') return;

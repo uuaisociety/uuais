@@ -40,8 +40,19 @@ describe('Header', () => {
       expect(screen.getAllByText('Home').length).toBe(2)
       expect(screen.getAllByText('Events').length).toBe(2)
       expect(screen.getAllByText('Job board').length).toBe(2)
+      expect(screen.getAllByText('Blog').length).toBe(2)
       expect(screen.getAllByText('About').length).toBe(2)
       expect(screen.getAllByText('Contact').length).toBe(2)
+    })
+
+    it('marks the Blog link with a Beta badge', () => {
+      render(<Header />)
+      const blogLinks = screen.getAllByRole('link', { name: /Blog/i })
+      expect(blogLinks.length).toBe(2)
+      blogLinks.forEach((link) => {
+        expect(link).toHaveAttribute('href', '/blog')
+        expect(link.textContent).toContain('Beta')
+      })
     })
 
     it('renders Apply as a distinct CTA in desktop and mobile nav', () => {

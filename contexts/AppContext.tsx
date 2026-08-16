@@ -11,6 +11,7 @@ interface AppState {
   eventsLoaded: boolean;
   teamMembers: TeamMember[];
   blogPosts: BlogPost[];
+  blogPostsLoaded: boolean;
   faqs: FAQ[];
   jobs: Job[];
   boardPositions: BoardPosition[];
@@ -86,6 +87,7 @@ const initialState: AppState = {
   eventsLoaded: false,
   teamMembers: [],
   blogPosts: [],
+  blogPostsLoaded: false,
   faqs: [],
   jobs: [],
   boardPositions: [],
@@ -136,7 +138,7 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         teamMembers: state.teamMembers.filter(member => member.id !== action.payload) 
       };
     case 'SET_BLOG_POSTS':
-      return { ...state, blogPosts: action.payload };
+      return { ...state, blogPosts: action.payload, blogPostsLoaded: true };
     case 'ADD_BLOG_POST':
       return { ...state, blogPosts: [...state.blogPosts, action.payload] };
     case 'UPDATE_BLOG_POST':
@@ -216,7 +218,7 @@ const AppContext = createContext<{
 export const AppProvider: React.FC<{
   children: ReactNode;
   seed?: Partial<
-    Pick<AppState, 'events' | 'jobs' | 'faqs' | 'teamMembers' | 'boardPositions' | 'campaigns'>
+    Pick<AppState, 'events' | 'jobs' | 'faqs' | 'teamMembers' | 'boardPositions' | 'campaigns' | 'blogPosts'>
   >;
 }> = ({ children, seed }) => {
   const initState: AppState = {
@@ -224,6 +226,7 @@ export const AppProvider: React.FC<{
     ...(seed || {}),
     eventsLoaded: !!seed?.events,
     campaignsLoaded: !!seed?.campaigns,
+    blogPostsLoaded: seed ? seed.blogPosts !== undefined : false,
   };
   const [state, dispatch] = useReducer(appReducer, initState);
 

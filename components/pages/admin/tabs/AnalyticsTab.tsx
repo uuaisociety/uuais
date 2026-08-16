@@ -18,7 +18,7 @@ const tabs: { key: AnalyticsTabKey; label: string; icon: React.FC<{ className?: 
   { key: "overview", label: "Summary", icon: TrendingUp },
   { key: "events", label: "Events", icon: Calendar },
   { key: "members", label: "Members", icon: Users },
-  { key: "newsletter", label: "Newsletter", icon: FileText },
+  { key: "newsletter", label: "Blog", icon: FileText },
   { key: "jobs", label: "Jobs", icon: BriefcaseBusiness },
   { key: "ai", label: "AI Assistant", icon: Bot },
   { key: "firebase", label: "Firebase", icon: Flame },

@@ -65,6 +65,8 @@ If doing frontend work, start by reading through DESIGN.md for Tailwind patterns
 - Always run `npm test` and `npm run lint` before finishing any coding task
 - **Add or update tests when making non-trivial changes** — new components, bug fixes, refactors. Follow the pattern in `__tests__/not-found.test.tsx`
 - If adding comments write at most one line, unless absolutely necessary.
+- Don't repeat yourself (DRY): prefer a general abstraction specified to the goal over copy-pasted code.
+- Centralize global constants into a few files when a constant is user-facing, expose it in the admin menu instead of hardcoding it.
 
 ## Tools & Environment
 See `.opencode/instructions/tools-and-environment.md` for:

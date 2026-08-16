@@ -16,34 +16,23 @@ const mockDoc = doc as jest.Mock
 const mockGetDoc = getDoc as jest.Mock
 const mockSetDoc = setDoc as jest.Mock
 
-function setCookie(consented: boolean) {
-  if (consented) {
-    Object.defineProperty(document, 'cookie', {
-      writable: true,
-      value: 'cc_cookie=' + encodeURIComponent(JSON.stringify({ categories: ['analytics'] })),
-    })
-  } else {
-    Object.defineProperty(document, 'cookie', {
-      writable: true,
-      value: '',
-    })
-  }
-}
-
 describe('analytics', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     mockDoc.mockReturnValue('mock-doc-ref')
     localStorage.clear()
-    setCookie(true)
+    Object.defineProperty(document, 'cookie', {
+      writable: true,
+      value: '',
+    })
   })
 
   describe('incrementEventUniqueClick', () => {
-    it('does nothing when no analytics consent', async () => {
-      setCookie(false)
+    it('counts clicks without analytics consent', async () => {
       const { incrementEventUniqueClick } = await import('@/lib/firestore/analytics')
       await incrementEventUniqueClick('event1')
-      expect(mockSetDoc).not.toHaveBeenCalled()
+      expect(localStorage.getItem('clicked_event_event1')).toBe('1')
+      expect(mockSetDoc).toHaveBeenCalledWith('mock-doc-ref', { clicks: 1, updatedAt: { _method: 'serverTimestamp' } }, { merge: true })
     })
 
     it('sets localStorage key and increments firestore', async () => {
@@ -88,18 +77,17 @@ describe('analytics', () => {
   })
 
   describe('incrementJobClick', () => {
-    it('increments job click with consent', async () => {
+    it('increments job click', async () => {
       const { incrementJobClick } = await import('@/lib/firestore/analytics')
       await incrementJobClick('job1')
       expect(localStorage.getItem('clicked_job_job1')).toBe('1')
       expect(mockSetDoc).toHaveBeenCalledWith('mock-doc-ref', expect.any(Object), { merge: true })
     })
 
-    it('does nothing without consent', async () => {
-      setCookie(false)
+    it('still counts when no consent cookie is present', async () => {
       const { incrementJobClick } = await import('@/lib/firestore/analytics')
       await incrementJobClick('job1')
-      expect(mockSetDoc).not.toHaveBeenCalled()
+      expect(mockSetDoc).toHaveBeenCalled()
     })
   })
 
@@ -129,11 +117,10 @@ describe('analytics', () => {
       expect(mockSetDoc).toHaveBeenCalledWith('mock-doc-ref', expect.objectContaining({ reads: 1 }), { merge: true })
     })
 
-    it('does nothing without consent', async () => {
-      setCookie(false)
+    it('still counts when no consent cookie is present', async () => {
       const { incrementBlogRead } = await import('@/lib/firestore/analytics')
       await incrementBlogRead('blog1')
-      expect(mockSetDoc).not.toHaveBeenCalled()
+      expect(mockSetDoc).toHaveBeenCalledWith('mock-doc-ref', expect.objectContaining({ reads: 1 }), { merge: true })
     })
   })
 })
