@@ -4,11 +4,13 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
 import campus from '@/public/images/campus.png';
+import { postPath } from '@/lib/slugify';
+import { previewImageFor } from '@/lib/blog-preview';
 import HeroAnimation from '@/components/HeroAnimation';
 import FloatingSymbolsCanvas from '@/components/FloatingSymbolsCanvas';
 import HeroSplash from '@/components/HeroSplash';
@@ -78,6 +80,11 @@ const HomePage: React.FC = () => {
     .filter(event => event.published === true)
     .filter(event => !event.publishAt || new Date(event.publishAt) <= now)
     .filter(event => event.eventStartAt && new Date(event.eventStartAt) > now)
+    .slice(0, 3);
+
+  const latestPosts = state.blogPosts
+    .filter(post => post.published)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
 
   return (
@@ -224,6 +231,57 @@ const HomePage: React.FC = () => {
           )}
         </div>
       </section>
+
+      {/* -------------------------------------------------------------- Blog */}
+      {latestPosts.length > 0 && (
+        <section className="px-5 sm:px-8 pt-24 sm:pt-32 cv-auto">
+          <div className="max-w-6xl mx-auto">
+            <SectionHead paren="From the blog" title="Articles" action={{ href: '/blog', label: 'Read the blog' }} />
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {latestPosts.map((post) => (
+                <Link
+                  key={post.id}
+                  href={`/blog/${postPath(post)}`}
+                  className="glass glass-interactive group flex flex-col overflow-hidden rounded-md"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <Image
+                      src={post.image || previewImageFor(post.id)}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
+                      loading="lazy"
+                    />
+                    {post.authorType === 'ai' && (
+                      <span className="absolute top-3 left-3 pill bg-black/45 text-white backdrop-blur-md inline-flex items-center gap-1">
+                        <Sparkles className="h-3 w-3" />
+                        AI News Desk
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col flex-1 p-5">
+                    <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] leading-snug mb-2 line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground line-clamp-2 mb-5">
+                      {post.excerpt}
+                    </p>
+                    <div className="mt-auto flex items-center justify-between pt-4 border-t border-border">
+                      <span className="mono-meta text-foreground/65">
+                        {post.author} · {format(new Date(post.date), 'd MMM yyyy')}
+                      </span>
+                      <ArrowUpRight className="h-4 w-4 text-foreground/60 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ---------------------------------------------------------------- CTA */}
       <section className="px-5 sm:px-8 pt-24 sm:pt-32 cv-auto">
