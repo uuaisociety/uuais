@@ -21,7 +21,7 @@ export const PrivacyPage: React.FC = () => {
             Your privacy is important to us. This policy explains how we collect, use, and protect your information.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            Last updated: May 9, 2026
+            Last updated: August 16, 2026
           </p>
         </div>
 
@@ -171,6 +171,9 @@ export const PrivacyPage: React.FC = () => {
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Analytics</h3>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
                   We use Vercel Analytics to understand website usage. Analytics are only activated after you provide consent via our cookie banner. You can change your preference at any time.
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm mt-2">
+                  We also collect first-party aggregate metrics — such as unique reads and clicks on our events, jobs, and blog posts — to understand engagement. These are anonymous counts (no personal data, no user identity, no cross-site tracking) stored on the basis of legitimate interest, and are not linked to your consent preferences.
                 </p>
               </div>
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
