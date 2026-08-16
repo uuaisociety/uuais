@@ -80,7 +80,7 @@ describe('BlogAISettingsTab', () => {
     render(<BlogAISettingsTab />)
     await screen.findByText('AI News Desk Settings')
     fireEvent.click(screen.getByText('Reset to Defaults'))
-    expect(screen.getByDisplayValue('openai/gpt-4o-mini')).toBeInTheDocument()
+    expect(screen.getByDisplayValue('deepseek/deepseek-v4-flash-0731')).toBeInTheDocument()
     expect(screen.getByDisplayValue(/DeepMind\|https:\/\/deepmind\.google\/blog\/rss\.xml/)).toBeInTheDocument()
     confirmSpy.mockRestore()
   })

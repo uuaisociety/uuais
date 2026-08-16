@@ -126,7 +126,7 @@ export const REPAIR_TEMPERATURE = 0;
 
 export const DEFAULT_BLOG_AI_SETTINGS: BlogAISettings = {
   systemPrompt: DEFAULT_BLOG_SYSTEM_PROMPT,
-  model: 'openai/gpt-4o-mini',
+  model: 'deepseek/deepseek-v4-flash-0731',
   feeds: DEFAULT_BLOG_FEEDS,
   exaQuery: 'major AI news, model releases, and AI research breakthroughs this week',
   editorialNotes: DEFAULT_EDITORIAL_NOTES,

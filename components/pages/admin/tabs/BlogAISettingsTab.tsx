@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { Select } from '@/components/ui/Select';
+import SearchableSelect from '@/components/ui/SearchableSelect';
 import { FieldGroup, TextareaBase } from '@/components/ui/Form';
 import Tag from '@/components/ui/Tag';
 import { Loader2, Save, Bot, RefreshCw, EyeOff, Undo2, Plus } from 'lucide-react';
@@ -237,15 +237,18 @@ const BlogAISettingsTab: React.FC = () => {
       )}
 
       {/* Model */}
-      <Card>
+      <Card className="overflow-visible">
         <CardContent className="p-6">
           <div className="grid md:grid-cols-2 gap-6">
             <FieldGroup label="Generation model">
-              <Select
+              <SearchableSelect
                 value={settings.model}
-                onChange={(e) => setSettings({ ...settings, model: e.target.value })}
+                onChange={(v) => setSettings({ ...settings, model: v })}
+                options={openRouterModels.length > 0 ? openRouterModels.map((m) => m.value) : [settings.model]}
+                placeholder="Type to search a model"
+                ariaLabel="Generation model options"
+                emptyText='No models match "{query}" — you can still use this text.'
                 disabled={!isSuperAdmin}
-                options={openRouterModels.length > 0 ? openRouterModels : [{ value: settings.model, label: settings.model }]}
               />
               <p className="text-xs text-muted-foreground mt-1">
                 {isSuperAdmin
