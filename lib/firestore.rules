@@ -290,24 +290,27 @@ service cloud.firestore {
     match /analyticsBlogs/{blogId} {
       allow read: if isAdmin();
 
+      // reads == 0 (admin post-creation seed) or 1 (first visitor read) allowed.
       allow create: if request.resource.data.keys().hasOnly(['reads', 'updatedAt'])
-        && request.resource.data.reads == 1;
+        && (request.resource.data.reads == 0 || request.resource.data.reads == 1);
       allow update: if changedOnly(['reads', 'updatedAt'])
         && request.resource.data.reads == resource.data.reads + 1;
 
       allow delete: if isAdmin();
     }
 
-    // BLOG REACTIONS - public engagement counters (likes / dislikes / shares)
+    // BLOG REACTIONS - public engagement counters. ABUSE NOTE: writes require a signed-in user — client localStorage dedup is not a security boundary (future: App Check, per-user docs).
     match /blogReactions/{postId} {
       allow read: if true;
 
-      allow create: if request.resource.data.keys().hasOnly(['likes', 'dislikes', 'shares', 'updatedAt'])
+      allow create: if isSignedIn()
+        && request.resource.data.keys().hasOnly(['likes', 'dislikes', 'shares', 'updatedAt'])
         && request.resource.data.likes >= 0 && request.resource.data.likes <= 1
         && request.resource.data.dislikes >= 0 && request.resource.data.dislikes <= 1
         && request.resource.data.shares >= 0 && request.resource.data.shares <= 1;
 
-      allow update: if changedOnly(['likes', 'dislikes', 'shares', 'updatedAt'])
+      allow update: if isSignedIn()
+        && changedOnly(['likes', 'dislikes', 'shares', 'updatedAt'])
         && request.resource.data.likes >= 0
         && request.resource.data.dislikes >= 0
         && request.resource.data.shares >= 0
@@ -373,6 +376,16 @@ service cloud.firestore {
       allow read: if true;
       // Only super admins can write
       allow write: if isSuperAdmin();
+    }
+
+    // AI NEWS DESK - internal settings and the used-articles store are only read from the admin dashboard.
+    match /config/blog_ai_settings {
+      allow read: if isAdmin();
+      allow write: if isAdmin();
+    }
+    match /config/blog_news_seen {
+      allow read: if isAdmin();
+      allow write: if isAdmin();
     }
 
     // COURSES - course catalog
