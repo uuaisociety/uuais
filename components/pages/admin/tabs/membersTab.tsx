@@ -30,6 +30,7 @@ const fieldOrder: string[] = [
   "github",
   "website",
   "bio",
+  "heardOfUs",
   "newsletter",
   "lookingForJob",
   "privacyAcceptedAt",
@@ -38,12 +39,14 @@ const fieldOrder: string[] = [
   "partnerContactOptIn",
   "createdAt",
   "updatedAt",
+  "unsubscribedFromEmails",
 ];
 
 function downloadCsv(users: EditableUser[]) {
+  const headers = ['id', ...fieldOrder];
   const rows = [
-    ['Name', 'Email'],
-    ...users.map(u => [u.name || u.displayName || '', u.email || '']),
+    headers,
+    ...users.map((u) => headers.map((h) => (u as Record<string, unknown>)[h] ?? '')),
   ];
   const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
