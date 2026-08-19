@@ -46,10 +46,12 @@ declare global {
   var __setMockParams: ((params: Record<string, string>) => void) | undefined;
   var __setAppState: ((state: Record<string, unknown> | null) => void) | undefined;
   var __setAdminState: ((state: Record<string, unknown> | null) => void) | undefined;
+  var __setCollectionData: ((entries: Record<string, unknown> | null) => void) | undefined;
 }
 
 beforeEach(() => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
+  global.__setCollectionData?.(null);
 });
 
 if (typeof window !== 'undefined') {
@@ -177,6 +179,20 @@ global.__setAppState = (state: Record<string, unknown> | null) => {
 jest.mock('@/contexts/AppContext', () => ({
   useApp: () => ({ state: __mockAppState || __defaultAppState, dispatch: jest.fn() }),
   AppProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+let __mockCollectionData: Record<string, unknown> = {};
+const __defaultCollectionData = { data: [], loaded: false };
+// Keyed by the subscribe function's name so re-renders (filters, expands) get the same data; 'default' covers anonymous/inline subscribe functions.
+global.__setCollectionData = (entries: Record<string, unknown> | null) => {
+  __mockCollectionData = entries || {};
+};
+jest.mock('@/lib/firestore/useCollectionData', () => ({
+  useCollectionData: (subscribe: unknown) => {
+    const name = typeof subscribe === 'function' && subscribe.name ? subscribe.name : 'default';
+    const entry = __mockCollectionData[name];
+    return entry !== undefined ? entry : __defaultCollectionData;
+  },
 }));
 
 jest.mock("@/utils/seo", () => ({

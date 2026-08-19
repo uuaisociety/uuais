@@ -91,25 +91,29 @@ describe('Header', () => {
 
   describe('Apply CTA visibility', () => {
     it('hides Apply when campaigns are loaded and none are open', () => {
-      global.__setAppState?.({
-        campaigns: [{ id: 'c1', status: 'closed', title: 'Closed', subtitle: '', description: '', deadline: '', teams: [], enabledStandardFields: [] }],
-        campaignsLoaded: true,
+      global.__setCollectionData?.({
+        subscribeOpenCampaigns: {
+          data: [{ id: 'c1', status: 'closed', title: 'Closed', subtitle: '', description: '', deadline: '', teams: [], enabledStandardFields: [] }],
+          loaded: true,
+        },
       })
       render(<Header />)
       expect(screen.queryByRole('link', { name: 'Apply' })).not.toBeInTheDocument()
     })
 
     it('shows Apply when an open campaign exists', () => {
-      global.__setAppState?.({
-        campaigns: [{ id: 'c1', status: 'open', title: 'Open', subtitle: '', description: '', deadline: '', teams: [], enabledStandardFields: [] }],
-        campaignsLoaded: true,
+      global.__setCollectionData?.({
+        subscribeOpenCampaigns: {
+          data: [{ id: 'c1', status: 'open', title: 'Open', subtitle: '', description: '', deadline: '', teams: [], enabledStandardFields: [] }],
+          loaded: true,
+        },
       })
       render(<Header />)
       expect(screen.getAllByRole('link', { name: 'Apply' }).length).toBe(2)
     })
 
     it('shows Apply while campaigns are still loading', () => {
-      global.__setAppState?.(null)
+      global.__setCollectionData?.({ subscribeOpenCampaigns: { data: [], loaded: false } })
       render(<Header />)
       expect(screen.getAllByRole('link', { name: 'Apply' }).length).toBe(2)
     })

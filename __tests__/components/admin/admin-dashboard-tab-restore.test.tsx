@@ -38,16 +38,16 @@ describe('AdminDashboard tab restore', () => {
     window.history.replaceState(null, '', '/admin?tab=blog')
     render(<AdminDashboard />)
 
-    expect(screen.getByText('Blog Management')).toBeInTheDocument()
-    expect(screen.queryByText('Events Management')).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Blog' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { level: 2, name: 'Events' })).not.toBeInTheDocument()
   })
 
   it('restores the tab from ?tab= on a non-default tab', () => {
     window.history.replaceState(null, '', '/admin?tab=analytics')
     render(<AdminDashboard />)
 
-    expect(screen.getAllByText('Analytics').length).toBeGreaterThan(0)
-    expect(screen.queryByText('Events Management')).not.toBeInTheDocument()
+    expect(screen.getAllByRole('heading', { level: 2, name: 'Analytics' }).length).toBeGreaterThan(0)
+    expect(screen.queryAllByRole('heading', { level: 2, name: 'Events' }).length).toBe(0)
   })
 
   it('falls back to localStorage when no ?tab= is present', () => {
@@ -55,7 +55,7 @@ describe('AdminDashboard tab restore', () => {
     window.history.replaceState(null, '', '/admin')
     render(<AdminDashboard />)
 
-    expect(screen.getByText('Jobs Management')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Jobs' })).toBeInTheDocument()
   })
 
   it('keeps the ?tab= param across a StrictMode double-mount (dev refresh)', () => {
@@ -66,7 +66,7 @@ describe('AdminDashboard tab restore', () => {
       </StrictMode>
     )
 
-    expect(screen.getByText('Blog Management')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Blog' })).toBeInTheDocument()
     expect(new URL(window.location.href).searchParams.get('tab')).toBe('blog')
     expect(localStorage.getItem('adminDashboardTab')).toBe('blog')
 
@@ -82,7 +82,7 @@ describe('AdminDashboard tab restore', () => {
       </StrictMode>
     )
 
-    expect(screen.getByText('Blog Management')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Blog' })).toBeInTheDocument()
     expect(new URL(window.location.href).searchParams.get('tab')).toBe('blog')
   })
 })

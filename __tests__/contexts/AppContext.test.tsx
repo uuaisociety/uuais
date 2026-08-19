@@ -49,33 +49,8 @@ jest.mock('@/lib/firestore/jobs', () => ({
   deleteJob: jest.fn(),
 }));
 
-jest.mock('@/lib/firestore/board-positions', () => ({
-  subscribeToPositions: jest.fn(() => mockUnsubscribe),
-  addPosition: jest.fn(),
-  updatePosition: jest.fn(),
-  deletePosition: jest.fn(),
-  movePosition: jest.fn(),
-}));
-
-jest.mock('@/lib/firestore/boardApplications', () => ({
-  subscribeToBoardApplications: jest.fn(() => mockUnsubscribe),
-  deleteBoardApplication: jest.fn(),
-}));
-
-jest.mock('@/lib/firestore/applicationCampaigns', () => ({
-  subscribeToCampaigns: jest.fn(() => mockUnsubscribe),
-  addCampaign: jest.fn(),
-  updateCampaign: jest.fn(),
-  deleteCampaign: jest.fn(),
-}));
-
 jest.mock('@/lib/firestore/campaignQuestions', () => ({
   deleteCampaignQuestionsByCampaign: jest.fn(),
-}));
-
-jest.mock('@/lib/firestore/teamApplications', () => ({
-  subscribeToTeamApplications: jest.fn(() => mockUnsubscribe),
-  deleteTeamApplication: jest.fn(),
 }));
 
 import { AppProvider, useApp } from '@/contexts/AppContext';
@@ -94,11 +69,6 @@ import {
 import {
   subscribeToJobs, addJob, updateJob, deleteJob,
 } from '@/lib/firestore/jobs';
-import {
-  subscribeToPositions, addPosition, updatePosition, deletePosition, movePosition,
-} from '@/lib/firestore/board-positions';
-import { deleteBoardApplication } from '@/lib/firestore/boardApplications';
-import { addCampaign } from '@/lib/firestore/applicationCampaigns';
 import { onIdTokenChanged } from 'firebase/auth';
 
 const mockEvent = { id: 'evt-1', title: 'Test Event', description: 'Desc', location: 'Loc', image: '', category: 'workshop' as const, status: 'upcoming' as const, registrationRequired: false, eventStartAt: '2026-01-01T00:00:00Z' };
@@ -106,8 +76,6 @@ const mockTeamMember = { id: 'tm-1', name: 'Alice', position: 'Dev' };
 const mockBlogPost = { id: 'bp-1', title: 'Post', excerpt: 'Excerpt', content: 'Content', author: 'Bob', date: '2026-01-01', image: '', tags: [], published: true };
 const mockFaq = { id: 'faq-1', question: 'Q?', answer: 'A!', category: 'general', order: 0, published: true };
 const mockJob = { id: 'job-1', type: 'job' as const, title: 'Engineer', company: 'Co', description: 'desc', published: true };
-const mockBoardPosition = { id: 'bp-1', title: 'Chair', short: 'CH', description: 'Lead', order: 1 };
-const mockApplication = { id: 'app-1', name: 'Alice', email: 'alice@example.com', role: 'Chair', status: 'pending' as const, submittedAt: '2026-01-01' };
 
 function renderApp() {
   return renderHook(() => useApp(), { wrapper: AppProvider as React.FC<{ children: React.ReactNode }> });
@@ -132,8 +100,6 @@ describe('AppContext', () => {
     expect(result.current.state.blogPosts).toEqual([]);
     expect(result.current.state.faqs).toEqual([]);
     expect(result.current.state.jobs).toEqual([]);
-    expect(result.current.state.boardPositions).toEqual([]);
-    expect(result.current.state.applicants).toEqual([]);
     expect(result.current.state.isLoading).toBe(false);
     expect(result.current.state.error).toBeNull();
   });
@@ -146,7 +112,6 @@ describe('AppContext', () => {
     expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
     expect(subscribeToFaqs).toHaveBeenCalledTimes(1);
     expect(subscribeToJobs).toHaveBeenCalledTimes(1);
-    expect(subscribeToPositions).toHaveBeenCalledTimes(1);
     await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
     expect(idTokenCallback).not.toBeNull();
   });
@@ -288,14 +253,6 @@ describe('AppContext', () => {
       expect(result.current.state.jobs).toEqual([mockJob]);
     });
 
-    it('SET_BOARDPOS', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ type: 'SET_BOARDPOS', payload: [mockBoardPosition] });
-      });
-      expect(result.current.state.boardPositions).toEqual([mockBoardPosition]);
-    });
-
     it('ADD_BLOG_POST regular action', async () => {
       const { result } = renderApp();
       await act(async () => {
@@ -387,45 +344,6 @@ describe('AppContext', () => {
         await result.current.dispatch({ type: 'DELETE_JOB', payload: mockJob.id });
       });
       expect(result.current.state.jobs).toEqual([]);
-    });
-
-    it('ADD_BOARDPOS regular action', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ type: 'ADD_BOARDPOS', payload: mockBoardPosition });
-      });
-      expect(result.current.state.boardPositions).toEqual([mockBoardPosition]);
-    });
-
-    it('UPDATE_BOARDPOS regular action', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ type: 'SET_BOARDPOS', payload: [mockBoardPosition] });
-      });
-      const updated = { ...mockBoardPosition, title: 'Updated Chair' };
-      await act(async () => {
-        await result.current.dispatch({ type: 'UPDATE_BOARDPOS', payload: updated });
-      });
-      expect(result.current.state.boardPositions).toEqual([updated]);
-    });
-
-    it('DELETE_BOARDPOS regular action', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ type: 'SET_BOARDPOS', payload: [mockBoardPosition] });
-      });
-      await act(async () => {
-        await result.current.dispatch({ type: 'DELETE_BOARDPOS', payload: mockBoardPosition.id });
-      });
-      expect(result.current.state.boardPositions).toEqual([]);
-    });
-
-    it('SET_APPLICANTS regular action', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ type: 'SET_APPLICANTS', payload: [mockApplication] });
-      });
-      expect(result.current.state.applicants).toEqual([mockApplication]);
     });
 
     it('resets loading to false after dispatch completes via finally block', async () => {
@@ -561,20 +479,6 @@ describe('AppContext', () => {
       expect(returned).toBe('new-job-id');
     });
 
-    it('ADD_CAMPAIGN calls addCampaign and returns the id (so custom questions can be saved)', async () => {
-      (addCampaign as jest.Mock).mockResolvedValue('new-campaign-id');
-      const { result } = renderApp();
-      const payload = {
-        title: 'Spring 2026', subtitle: 'Sub', description: 'Desc', deadline: '2026-03-01',
-        status: 'draft' as const, teams: ['it', 'development'],
-        teamInfo: { it: { name: 'IT' } },
-        enabledStandardFields: ['name', 'email', 'motivation'],
-      };
-      const returned = await act(async () => result.current.dispatch({ firestoreAction: 'ADD_CAMPAIGN', payload }));
-      expect(addCampaign).toHaveBeenCalledWith(payload);
-      expect(returned).toBe('new-campaign-id');
-    });
-
     it('UPDATE_JOB calls updateJob', async () => {
       const { result } = renderApp();
       await act(async () => {
@@ -591,42 +495,6 @@ describe('AppContext', () => {
       expect(deleteJob).toHaveBeenCalledWith('job-1');
     });
 
-    it('ADD_BOARDPOS calls addPosition', async () => {
-      const { result } = renderApp();
-      const payload = { title: 'Chair', short: 'CH', description: 'Lead' };
-      await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'ADD_BOARDPOS', payload });
-      });
-      expect(addPosition).toHaveBeenCalledWith(payload);
-    });
-
-    it('MOVE_BOARDPOS calls movePosition with current state', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ type: 'SET_BOARDPOS', payload: [mockBoardPosition] });
-      });
-      await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'MOVE_BOARDPOS', payload: { positionId: 'bp-1', direction: 'down' } });
-      });
-      expect(movePosition).toHaveBeenCalledWith([mockBoardPosition], 'bp-1', 'down');
-    });
-
-    it('DELETE_BOARDPOS calls deletePosition', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'DELETE_BOARDPOS', payload: 'bp-1' });
-      });
-      expect(deletePosition).toHaveBeenCalledWith('bp-1');
-    });
-
-    it('DELETE_BOARD_APPLICATION calls deleteBoardApplication', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'DELETE_BOARD_APPLICATION', payload: 'app-1' });
-      });
-      expect(deleteBoardApplication).toHaveBeenCalledWith('app-1');
-    });
-
     it('UPDATE_TEAM_MEMBER firestore calls updateTeamMember', async () => {
       const { result } = renderApp();
       await act(async () => {
@@ -641,14 +509,6 @@ describe('AppContext', () => {
         await result.current.dispatch({ firestoreAction: 'DELETE_TEAM_MEMBER', payload: 'tm-1' });
       });
       expect(deleteTeamMember).toHaveBeenCalledWith('tm-1');
-    });
-
-    it('UPDATE_BOARDPOS firestore calls updatePosition', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'UPDATE_BOARDPOS', payload: mockBoardPosition });
-      });
-      expect(updatePosition).toHaveBeenCalledWith(mockBoardPosition.id, mockBoardPosition);
     });
   });
 
