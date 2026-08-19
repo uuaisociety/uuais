@@ -10,6 +10,11 @@ jest.mock('@/hooks/useAdmin', () => ({
   useAdmin: () => mockUseAdmin(),
 }))
 
+const mockUseOpenCampaigns = jest.fn()
+jest.mock('@/lib/firestore/useOpenCampaigns', () => ({
+  useOpenCampaigns: () => mockUseOpenCampaigns(),
+}))
+
 const g = global as { __mockPathname?: string }
 
 function mockAdminState(overrides: Record<string, unknown> = {}) {
@@ -32,6 +37,7 @@ describe('Header', () => {
     g.__mockPathname = '/events'
     mockAdminState()
     global.__setAppState?.(null)
+    mockUseOpenCampaigns.mockReturnValue({ campaigns: [], loaded: false })
   })
 
   describe('navigation links', () => {
@@ -91,29 +97,25 @@ describe('Header', () => {
 
   describe('Apply CTA visibility', () => {
     it('hides Apply when campaigns are loaded and none are open', () => {
-      global.__setCollectionData?.({
-        subscribeOpenCampaigns: {
-          data: [{ id: 'c1', status: 'closed', title: 'Closed', subtitle: '', description: '', deadline: '', teams: [], enabledStandardFields: [] }],
-          loaded: true,
-        },
+      mockUseOpenCampaigns.mockReturnValue({
+        campaigns: [{ id: 'c1', status: 'closed', title: 'Closed', subtitle: '', description: '', deadline: '', teams: [], enabledStandardFields: [] }],
+        loaded: true,
       })
       render(<Header />)
       expect(screen.queryByRole('link', { name: 'Apply' })).not.toBeInTheDocument()
     })
 
     it('shows Apply when an open campaign exists', () => {
-      global.__setCollectionData?.({
-        subscribeOpenCampaigns: {
-          data: [{ id: 'c1', status: 'open', title: 'Open', subtitle: '', description: '', deadline: '', teams: [], enabledStandardFields: [] }],
-          loaded: true,
-        },
+      mockUseOpenCampaigns.mockReturnValue({
+        campaigns: [{ id: 'c1', status: 'open', title: 'Open', subtitle: '', description: '', deadline: '', teams: [], enabledStandardFields: [] }],
+        loaded: true,
       })
       render(<Header />)
       expect(screen.getAllByRole('link', { name: 'Apply' }).length).toBe(2)
     })
 
     it('shows Apply while campaigns are still loading', () => {
-      global.__setCollectionData?.({ subscribeOpenCampaigns: { data: [], loaded: false } })
+      mockUseOpenCampaigns.mockReturnValue({ campaigns: [], loaded: false })
       render(<Header />)
       expect(screen.getAllByRole('link', { name: 'Apply' }).length).toBe(2)
     })
