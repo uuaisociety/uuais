@@ -58,6 +58,47 @@ const JoinPage: React.FC = () => {
     };
   }, []);
 
+  // Warn before leaving with an unfinished registration (the RegistrationGate signs the user out off /join).
+  useEffect(() => {
+    const incomplete = Boolean(uid) && !(Boolean(profile?.isMember) && Boolean(profile?.privacyAcceptedAt));
+    if (!incomplete) return;
+
+    const beforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", beforeUnload);
+
+    const confirmLeave = () =>
+      window.confirm("Are you sure you want to leave? Your registration is not complete yet.");
+
+    // Client-side navigation (header links, cards) doesn't fire beforeunload, so intercept it here.
+    // Capture phase fires BEFORE Next.js Link's own onClick, otherwise Link navigates first and the guard never runs.
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const anchor = (e.target as Element | null)?.closest?.("a");
+      if (!anchor) return;
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+      if (anchor.target && anchor.target !== "_self") return;
+      if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("javascript:")) return;
+      const url = new URL(href, window.location.href);
+      if (url.origin !== window.location.origin || url.pathname === "/join") return;
+
+      e.preventDefault();
+      e.stopPropagation();
+      if (confirmLeave()) {
+        router.push(url.pathname + url.search + url.hash);
+      }
+    };
+    document.addEventListener("click", onClick, true);
+
+    return () => {
+      window.removeEventListener("beforeunload", beforeUnload);
+      document.removeEventListener("click", onClick, true);
+    };
+  }, [uid, profile, router]);
+
   const handleSave = async () => {
     if (!uid) return;
     setSaving(true);
