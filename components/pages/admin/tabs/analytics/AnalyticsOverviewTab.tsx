@@ -3,7 +3,8 @@
 import React from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Row } from "./AnalyticsShared";
-import type { Event, BlogPost, Job, TeamMember, BoardPosition, Application } from "@/types";
+import type { Event, BlogPost, Job, TeamMember, BoardPosition } from "@/types";
+import type { BoardApplication } from "@/lib/firestore/boardApplications";
 import type { MemberAnalytics } from "@/lib/firestore/member-analytics";
 import type { EventFunnel } from "@/lib/firestore/event-funnel";
 import type { AIAnalytics } from "@/lib/firestore/ai-analytics";
@@ -14,7 +15,7 @@ interface Props {
   jobs: Job[];
   teamMembers: TeamMember[];
   boardPositions: BoardPosition[];
-  applicants: Application[];
+  applicants: BoardApplication[];
   eventClicks: Record<string, number>;
   blogReads: Record<string, number>;
   jobClicks: Record<string, number>;
@@ -33,7 +34,7 @@ const OverviewTab: React.FC<Props> = ({
 }) => (
   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-gray-900 dark:text-white">Events</h3></CardHeader>
+      <CardHeader><h3 className="text-lg font-semibold text-foreground">Events</h3></CardHeader>
       <CardContent className="space-y-3">
         <Row label="Total events" value={events.length} />
         <Row label="Unique clicks" value={totalClicks} />
@@ -42,7 +43,7 @@ const OverviewTab: React.FC<Props> = ({
       </CardContent>
     </Card>
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-gray-900 dark:text-white">Newsletter</h3></CardHeader>
+      <CardHeader><h3 className="text-lg font-semibold text-foreground">Newsletter</h3></CardHeader>
       <CardContent className="space-y-3">
         <Row label="Total posts" value={blogs.length} />
         <Row label="Unique reads" value={totalBlogReads} />
@@ -50,7 +51,7 @@ const OverviewTab: React.FC<Props> = ({
       </CardContent>
     </Card>
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-gray-900 dark:text-white">Members</h3></CardHeader>
+      <CardHeader><h3 className="text-lg font-semibold text-foreground">Members</h3></CardHeader>
       <CardContent className="space-y-3">
         <Row label="Total users" value={memberAnalytics?.totalUsers ?? "—"} />
         <Row label="Marketing opt-in" value={memberAnalytics?.marketingOptIn ?? "—"} />
@@ -58,14 +59,14 @@ const OverviewTab: React.FC<Props> = ({
       </CardContent>
     </Card>
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-gray-900 dark:text-white">Jobs</h3></CardHeader>
+      <CardHeader><h3 className="text-lg font-semibold text-foreground">Jobs</h3></CardHeader>
       <CardContent className="space-y-3">
         <Row label="Total postings" value={jobs.length} />
         <Row label="Apply clicks" value={totalJobClicks} />
       </CardContent>
     </Card>
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-gray-900 dark:text-white">AI Assistant</h3></CardHeader>
+      <CardHeader><h3 className="text-lg font-semibold text-foreground">AI Assistant</h3></CardHeader>
       <CardContent className="space-y-3">
         <Row label="Total chats" value={aiAnalytics?.totalChats ?? "—"} />
         <Row label="Unique users" value={aiAnalytics?.uniqueUsers ?? "—"} />
@@ -73,7 +74,7 @@ const OverviewTab: React.FC<Props> = ({
       </CardContent>
     </Card>
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-gray-900 dark:text-white">Team</h3></CardHeader>
+      <CardHeader><h3 className="text-lg font-semibold text-foreground">Team</h3></CardHeader>
       <CardContent className="space-y-3">
         <Row label="Team members" value={teamMembers.length} />
         <Row label="Board positions" value={boardPositions.length} />

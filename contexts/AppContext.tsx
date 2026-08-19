@@ -1,8 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { Event, TeamMember, BlogPost, FAQ, Job, BoardPosition, Application, ApplicationCampaign, TeamApplication } from '../types';
-import type { CampaignInput } from '@/lib/firestore/applicationCampaigns';
+import { Event, TeamMember, BlogPost, FAQ, Job } from '../types';
 import { scheduleIdle } from '@/lib/idle';
 import { hasCachedIdentity } from '@/lib/identity-cache';
 
@@ -14,11 +13,6 @@ interface AppState {
   blogPostsLoaded: boolean;
   faqs: FAQ[];
   jobs: Job[];
-  boardPositions: BoardPosition[];
-  applicants: Application[];
-  campaigns: ApplicationCampaign[];
-  campaignsLoaded: boolean;
-  teamApplications: TeamApplication[];
   isLoading: boolean;
   error: string | null;
 }
@@ -42,18 +36,10 @@ type AppAction =
   | { type: 'ADD_FAQS'; payload: FAQ }
   | { type: 'UPDATE_FAQS'; payload: FAQ }
   | { type: 'DELETE_FAQS'; payload: string }
-  | { type: 'SET_BOARDPOS'; payload: BoardPosition[] }
-  | { type: 'ADD_BOARDPOS'; payload: BoardPosition }
-  | { type: 'UPDATE_BOARDPOS'; payload: BoardPosition }
-  | { type: 'DELETE_BOARDPOS'; payload: string }
   | { type: 'SET_JOBS'; payload: Job[] }
   | { type: 'ADD_JOB'; payload: Job }
   | { type: 'UPDATE_JOB'; payload: Job }
-  | { type: 'DELETE_JOB'; payload: string }
-  | { type: 'SET_APPLICANTS'; payload: Application[] }
-  | { type: 'SET_CAMPAIGNS'; payload: ApplicationCampaign[] }
-  | { type: 'SET_CAMPAIGNS_LOADED'; payload: boolean }
-  | { type: 'SET_TEAM_APPLICATIONS'; payload: TeamApplication[] };
+  | { type: 'DELETE_JOB'; payload: string };
 
 type FirestoreAction = 
   | { firestoreAction: 'ADD_EVENT'; payload: Omit<Event, 'id'> }
@@ -69,18 +55,9 @@ type FirestoreAction =
   | { firestoreAction: 'ADD_FAQS'; payload: Omit<FAQ, 'id'> }
   | { firestoreAction: 'UPDATE_FAQS'; payload: FAQ }
   | { firestoreAction: 'DELETE_FAQS'; payload: string }
-  | { firestoreAction: 'ADD_BOARDPOS'; payload: Omit<BoardPosition, 'id' | 'order'> }
-  | { firestoreAction: 'UPDATE_BOARDPOS'; payload: BoardPosition }
-  | { firestoreAction: 'DELETE_BOARDPOS'; payload: string }
-  | { firestoreAction: 'MOVE_BOARDPOS'; payload: { positionId: string; direction: 'up' | 'down' } }
   | { firestoreAction: 'ADD_JOB'; payload: Omit<Job, 'id' | 'createdAt'> }
   | { firestoreAction: 'UPDATE_JOB'; payload: Job }
-  | { firestoreAction: 'DELETE_JOB'; payload: string }
-  | { firestoreAction: 'DELETE_BOARD_APPLICATION'; payload: string }
-  | { firestoreAction: 'ADD_CAMPAIGN'; payload: CampaignInput }
-  | { firestoreAction: 'UPDATE_CAMPAIGN'; payload: Partial<ApplicationCampaign> }
-  | { firestoreAction: 'DELETE_CAMPAIGN'; payload: string }
-  | { firestoreAction: 'DELETE_TEAM_APPLICATION'; payload: string };
+  | { firestoreAction: 'DELETE_JOB'; payload: string };
 
 const initialState: AppState = {
   events: [],
@@ -90,11 +67,6 @@ const initialState: AppState = {
   blogPostsLoaded: false,
   faqs: [],
   jobs: [],
-  boardPositions: [],
-  applicants: [],
-  campaigns: [],
-  campaignsLoaded: false,
-  teamApplications: [],
   isLoading: false,
   error: null
 };
@@ -181,28 +153,6 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         jobs: state.jobs.filter(j => j.id !== action.payload)
       };
-    case 'SET_BOARDPOS':
-      return { ...state, boardPositions: action.payload };
-    case 'ADD_BOARDPOS':
-      return { ...state, boardPositions: [...state.boardPositions, action.payload] };
-    case 'UPDATE_BOARDPOS':
-      return {
-        ...state,
-        boardPositions: state.boardPositions.map(j => j.id === action.payload.id ? action.payload : j)
-      };
-    case 'DELETE_BOARDPOS':
-      return {
-        ...state,
-        boardPositions: state.boardPositions.filter(j => j.id !== action.payload)
-      };
-    case 'SET_APPLICANTS':
-      return { ...state, applicants: action.payload };
-    case 'SET_CAMPAIGNS':
-      return { ...state, campaigns: action.payload };
-    case 'SET_CAMPAIGNS_LOADED':
-      return { ...state, campaignsLoaded: action.payload };
-    case 'SET_TEAM_APPLICATIONS':
-      return { ...state, teamApplications: action.payload };
     default:
       return state;
   }
@@ -218,27 +168,44 @@ const AppContext = createContext<{
 export const AppProvider: React.FC<{
   children: ReactNode;
   seed?: Partial<
-    Pick<AppState, 'events' | 'jobs' | 'faqs' | 'teamMembers' | 'boardPositions' | 'campaigns' | 'blogPosts'>
+    Pick<AppState, 'events' | 'jobs' | 'faqs' | 'teamMembers' | 'blogPosts'>
   >;
 }> = ({ children, seed }) => {
   const initState: AppState = {
     ...initialState,
     ...(seed || {}),
     eventsLoaded: !!seed?.events,
-    campaignsLoaded: !!seed?.campaigns,
     blogPostsLoaded: seed ? seed.blogPosts !== undefined : false,
   };
   const [state, dispatch] = useReducer(appReducer, initState);
+
+  // Swallow only the Firestore SDK's unhandled internal assertions (thrown when a denied watch stream is torn down) so they can't brick a screen via an error boundary.
+  useEffect(() => {
+    const isFirestoreInternal = (msg: string) =>
+      msg.includes("INTERNAL ASSERTION FAILED") || msg.includes("INTERNAL UNHANDLED ERROR");
+    const onError = (event: ErrorEvent) => {
+      if (isFirestoreInternal(event.message || "")) {
+        event.preventDefault();
+      }
+    };
+    const onRejection = (event: PromiseRejectionEvent) => {
+      if (isFirestoreInternal(String((event.reason as { message?: string })?.message || ""))) {
+        event.preventDefault();
+      }
+    };
+    window.addEventListener("error", onError, true);
+    window.addEventListener("unhandledrejection", onRejection, true);
+    return () => {
+      window.removeEventListener("error", onError, true);
+      window.removeEventListener("unhandledrejection", onRejection, true);
+    };
+  }, []);
 
   // Realtime Firestore listeners start after the main thread goes idle so they stay out of the critical network chain (LCP); SSR-seeded data already paints the content.
   useEffect(() => {
     // Listener refs are mutated async (dynamic import) so a late chunk from a superseded subscribe() can't clobber the active one.
     const unsubscribeEvents: { current: (() => void) | null } = { current: null };
     const unsubscribeJobs: { current: (() => void) | null } = { current: null };
-    const unsubscribeBoardPositions: { current: (() => void) | null } = { current: null };
-    const unsubscribeBoardApplications: { current: (() => void) | null } = { current: null };
-    const unsubscribeCampaigns: { current: (() => void) | null } = { current: null };
-    const unsubscribeTeamApplications: { current: (() => void) | null } = { current: null };
     const unsubscribeBlogPosts: { current: (() => void) | null } = { current: null };
     const unsubscribeTeamMembers: { current: (() => void) | null } = { current: null };
     const unsubscribeFaqs: { current: (() => void) | null } = { current: null };
@@ -287,57 +254,6 @@ export const AppProvider: React.FC<{
         subscribeToJobs((jobs) => {
           dispatch({ type: 'SET_JOBS', payload: jobs });
         }, { includeUnpublished }),
-      );
-
-      if (unsubscribeBoardPositions.current) {
-        try { unsubscribeBoardPositions.current(); } catch { /* ignore */ }
-        unsubscribeBoardPositions.current = null;
-      }
-      attach(import('@/lib/firestore/board-positions'), unsubscribeBoardPositions, ({ subscribeToPositions }) =>
-        subscribeToPositions((positions) => {
-          dispatch({ type: 'SET_BOARDPOS', payload: positions });
-        }),
-      );
-
-      if (unsubscribeBoardApplications.current) {
-        try { unsubscribeBoardApplications.current(); } catch { /* ignore */ }
-        unsubscribeBoardApplications.current = null;
-      }
-      if (includeUnpublished) {
-        attach(import('@/lib/firestore/boardApplications'), unsubscribeBoardApplications, ({ subscribeToBoardApplications }) =>
-          subscribeToBoardApplications((applications) => {
-            dispatch({ type: 'SET_APPLICANTS', payload: applications as Application[] });
-          }),
-        );
-      } else {
-        dispatch({ type: 'SET_APPLICANTS', payload: [] });
-      }
-
-      // Team applications: admin-only subscription
-      if (unsubscribeTeamApplications.current) {
-        try { unsubscribeTeamApplications.current(); } catch { /* ignore */ }
-        unsubscribeTeamApplications.current = null;
-      }
-      if (includeUnpublished) {
-        attach(import('@/lib/firestore/teamApplications'), unsubscribeTeamApplications, ({ subscribeToTeamApplications }) =>
-          subscribeToTeamApplications((applications) => {
-            dispatch({ type: 'SET_TEAM_APPLICATIONS', payload: applications as TeamApplication[] });
-          }),
-        );
-      } else {
-        dispatch({ type: 'SET_TEAM_APPLICATIONS', payload: [] });
-      }
-
-      // Campaigns: public visitors only see open campaigns; admins see all (incl. drafts)
-      if (unsubscribeCampaigns.current) {
-        try { unsubscribeCampaigns.current(); } catch { /* ignore */ }
-        unsubscribeCampaigns.current = null;
-      }
-      attach(import('@/lib/firestore/applicationCampaigns'), unsubscribeCampaigns, ({ subscribeToCampaigns }) =>
-        subscribeToCampaigns((campaigns) => {
-          dispatch({ type: 'SET_CAMPAIGNS', payload: campaigns });
-          dispatch({ type: 'SET_CAMPAIGNS_LOADED', payload: true });
-        }, { includeAll: includeUnpublished }),
       );
 
       // Blog posts: public visitors see published posts; admins see all (incl. drafts)
@@ -413,18 +329,6 @@ export const AppProvider: React.FC<{
       if (unsubscribeJobs.current) {
         try { unsubscribeJobs.current(); } catch { /* ignore */ }
       }
-      if (unsubscribeBoardPositions.current) {
-        try { unsubscribeBoardPositions.current(); } catch { /* ignore */ }
-      }
-      if (unsubscribeBoardApplications.current) {
-        try { unsubscribeBoardApplications.current(); } catch { /* ignore */ }
-      }
-      if (unsubscribeCampaigns.current) {
-        try { unsubscribeCampaigns.current(); } catch { /* ignore */ }
-      }
-      if (unsubscribeTeamApplications.current) {
-        try { unsubscribeTeamApplications.current(); } catch { /* ignore */ }
-      }
       if (unsubscribeBlogPosts.current) {
         try { unsubscribeBlogPosts.current(); } catch { /* ignore */ }
       }
@@ -489,18 +393,6 @@ export const AppProvider: React.FC<{
           case 'DELETE_FAQS':
             await (await import('@/lib/firestore/faqs')).deleteFaq(action.payload);
             break;
-          case 'ADD_BOARDPOS':
-            await (await import('@/lib/firestore/board-positions')).addPosition(action.payload);
-            break;
-          case 'UPDATE_BOARDPOS':
-            await (await import('@/lib/firestore/board-positions')).updatePosition(action.payload.id, action.payload);
-            break;
-          case 'DELETE_BOARDPOS':
-            await (await import('@/lib/firestore/board-positions')).deletePosition(action.payload);
-            break;
-          case 'MOVE_BOARDPOS':
-            await (await import('@/lib/firestore/board-positions')).movePosition(state.boardPositions, action.payload.positionId, action.payload.direction);
-            break;
           case 'ADD_JOB':
             return await (await import('@/lib/firestore/jobs')).addJob(action.payload);
           case 'UPDATE_JOB':
@@ -508,24 +400,6 @@ export const AppProvider: React.FC<{
             break;
           case 'DELETE_JOB':
             await (await import('@/lib/firestore/jobs')).deleteJob(action.payload);
-            break;
-          case 'DELETE_BOARD_APPLICATION':
-            await (await import('@/lib/firestore/boardApplications')).deleteBoardApplication(action.payload);
-            break;
-          case 'ADD_CAMPAIGN':
-            return await (await import('@/lib/firestore/applicationCampaigns')).addCampaign(action.payload);
-          case 'UPDATE_CAMPAIGN':
-            if (action.payload.id) {
-              await (await import('@/lib/firestore/applicationCampaigns')).updateCampaign(action.payload.id, action.payload);
-            }
-            break;
-          case 'DELETE_CAMPAIGN':
-            await (await import('@/lib/firestore/applicationCampaigns')).deleteCampaign(action.payload);
-            // Also clean up campaign questions
-            try { await (await import('@/lib/firestore/campaignQuestions')).deleteCampaignQuestionsByCampaign(action.payload); } catch { /* ignore */ }
-            break;
-          case 'DELETE_TEAM_APPLICATION':
-            await (await import('@/lib/firestore/teamApplications')).deleteTeamApplication(action.payload);
             break;
         }
       } else {

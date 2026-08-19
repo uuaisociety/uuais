@@ -51,7 +51,7 @@ export function Modal({
         >
           <div
             className={cn(
-              "bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-h-[90vh] overflow-y-auto shadow-xl",
+              "bg-card rounded-lg p-6 w-full max-h-[90vh] overflow-y-auto shadow-xl",
               sizes[size],
               className,
             )}
@@ -67,10 +67,10 @@ export function Modal({
                 <div className="flex justify-between items-start mb-4 gap-4">
                   <div>
                     <Dialog.Title asChild>
-                      <h2 className="text-xl font-bold text-gray-900 dark:text-white">{title}</h2>
+                      <h2 className="text-xl font-bold text-foreground">{title}</h2>
                     </Dialog.Title>
                     {description && (
-                      <Dialog.Description className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                      <Dialog.Description className="mt-1 text-sm text-muted-foreground">
                         {description}
                       </Dialog.Description>
                     )}
@@ -79,7 +79,7 @@ export function Modal({
                     <button
                       type="button"
                       aria-label="Close dialog"
-                      className="size-9 grid place-items-center rounded-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700/60 transition-colors cursor-pointer"
+                      className="size-9 grid place-items-center rounded-sm text-muted-foreground hover:text-foreground hover:bg-foreground/[0.05] transition-colors cursor-pointer"
                     >
                       <X className="h-5 w-5" />
                     </button>
