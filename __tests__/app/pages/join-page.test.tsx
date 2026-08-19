@@ -83,6 +83,12 @@ describe('JoinPage', () => {
       expect(screen.getByText('Already a member?')).toBeInTheDocument()
     })
 
+    it('renders sign-in buttons for registration', () => {
+      render(<JoinPage />)
+      expect(screen.getByRole('button', { name: /Continue with Google/ })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /Continue with GitHub/ })).toBeInTheDocument()
+    })
+
     it('does not show profile form when logged out', () => {
       render(<JoinPage />)
       expect(screen.queryByText('Complete your profile')).not.toBeInTheDocument()
@@ -100,6 +106,12 @@ describe('JoinPage', () => {
       render(<JoinPage />)
       await triggerAuthCallback(mockUser)
       expect(screen.getByText('Complete your profile')).toBeInTheDocument()
+    })
+
+    it('hides sign-in card when logged in', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback(mockUser)
+      expect(screen.queryByRole('button', { name: /Continue with Google/ })).not.toBeInTheDocument()
     })
 
     it('shows yellow banner for incomplete profile', async () => {

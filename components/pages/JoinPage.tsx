@@ -4,6 +4,8 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { HugeiconsIcon } from '@hugeicons/react';
+import { GithubIcon, GoogleIcon } from '@hugeicons/core-free-icons';
 import { updatePageMeta } from '@/utils/seo';
 import type { UserProfile } from '@/lib/firestore/users';
 import Link from 'next/link';
@@ -104,6 +106,23 @@ const JoinPage: React.FC = () => {
               To access this resource, please complete your profile below and accept the privacy policy.
             </div>
           )
+        )}
+
+        {!uid && (
+          <Card>
+            <CardHeader>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Create Account</h2>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">Use one of the providers below.</p>
+            </CardHeader>
+            <CardContent className="space-y-3 flex flex-col md:flex-col justify-center gap-2 pt-4 items-center max-w-md mx-auto">
+              <Button onClick={() => { void import('@/lib/firebase-client').then((m) => m.signInWithGooglePopup()); }} variant="outline">
+                <span className="flex items-center gap-2"><HugeiconsIcon icon={GoogleIcon} className="h-4 w-4"/> Continue with Google</span>
+              </Button>
+              <Button onClick={() => { void import('@/lib/firebase-client').then((m) => m.signInWithGithubPopup()); }} variant="outline">
+                <span className="flex items-center gap-2"><HugeiconsIcon icon={GithubIcon} className="h-4 w-4"/> Continue with GitHub</span>
+              </Button>
+            </CardContent>
+          </Card>
         )}
 
         {uid && (
