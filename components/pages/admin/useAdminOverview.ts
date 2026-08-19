@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { useApp } from "@/contexts/AppContext";
 import { useCollectionData } from "@/lib/firestore/useCollectionData";
-import { subscribeAllCampaigns } from "@/lib/firestore/applicationCampaigns";
+import { subscribeOpenCampaigns } from "@/lib/firestore/applicationCampaigns";
 import { subscribeToTeamApplications } from "@/lib/firestore/teamApplications";
 import type { ApplicationCampaign, TeamApplication } from "@/types";
 
@@ -28,7 +28,7 @@ export interface AdminActionItem {
 /** Live "what needs attention" signals for the admin shell; subscribes to the admin-only collections while the dashboard is mounted. */
 export function useAdminOverview(): { items: AdminActionItem[]; loaded: boolean } {
   const { state } = useApp();
-  const { data: campaigns, loaded: campaignsLoaded } = useCollectionData<ApplicationCampaign>(subscribeAllCampaigns, []);
+  const { data: campaigns, loaded: campaignsLoaded } = useCollectionData<ApplicationCampaign>(subscribeOpenCampaigns, []);
   const { data: teamApplications, loaded: teamApplicationsLoaded } = useCollectionData<TeamApplication>(subscribeToTeamApplications, []);
 
   return useMemo(() => {

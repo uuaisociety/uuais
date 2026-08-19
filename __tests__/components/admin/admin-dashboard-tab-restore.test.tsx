@@ -50,6 +50,33 @@ describe('AdminDashboard tab restore', () => {
     expect(screen.queryAllByRole('heading', { level: 2, name: 'Events' }).length).toBe(0)
   })
 
+  it('restores the analytics sub-tab from ?tab=&sub= deep link', () => {
+    window.history.replaceState(null, '', '/admin?tab=analytics&sub=firebase')
+    render(<AdminDashboard />)
+
+    const firebaseSub = screen.getByRole('button', { name: 'Firebase' })
+    expect(firebaseSub).toHaveAttribute('aria-current', 'page')
+    expect(screen.getByRole('heading', { level: 2, name: 'Analytics' })).toBeInTheDocument()
+  })
+
+  it('restores the blog sub-tab from ?tab=&sub= deep link', () => {
+    window.history.replaceState(null, '', '/admin?tab=blog&sub=ai-settings')
+    render(<AdminDashboard />)
+
+    const aiSub = screen.getByRole('button', { name: 'AI News Desk' })
+    expect(aiSub).toHaveAttribute('aria-current', 'page')
+    // The top-level Blog tab is active (not the Posts default).
+    expect(screen.queryByRole('button', { name: 'Posts' })).not.toHaveAttribute('aria-current', 'page')
+  })
+
+  it('defaults an unknown ?sub= value to the first sub-tab', () => {
+    window.history.replaceState(null, '', '/admin?tab=analytics&sub=nonsense')
+    render(<AdminDashboard />)
+
+    const summarySub = screen.getByRole('button', { name: 'Summary' })
+    expect(summarySub).toHaveAttribute('aria-current', 'page')
+  })
+
   it('falls back to localStorage when no ?tab= is present', () => {
     localStorage.setItem('adminDashboardTab', 'jobs')
     window.history.replaceState(null, '', '/admin')

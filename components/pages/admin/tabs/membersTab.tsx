@@ -10,10 +10,6 @@ import { Download, Trash2} from 'lucide-react';
 
 type EditableUser = UserProfile & Record<string, unknown>;
 
-type MembersTabProps = {
-  onChanged?: () => void;
-};
-
 const fieldOrder: string[] = [
   "displayName",
   "name",
@@ -86,7 +82,7 @@ const SortableTh: React.FC<SortableThProps> = ({ column, sortKey, sortDir, onTog
   </th>
 );
 
-export default function MembersTab({ onChanged }: MembersTabProps) {
+export default function MembersTab() {
   const { notify } = useNotify();
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState<EditableUser[]>([]);
@@ -179,7 +175,6 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
       update.updatedAt = new Date().toISOString();
       await updateUserProfile(selected.id, update);
       await refresh();
-      onChanged?.();
       close();
       notify({ type: 'success', title: 'Saved', message: 'Member updated.' });
     } finally {
@@ -193,7 +188,6 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
     try {
       await deleteUser(selected.id);
       await refresh();
-      onChanged?.();
       close();
       notify({ type: 'success', title: 'Deleted', message: 'Member deleted.' });
     } finally {

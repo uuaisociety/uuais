@@ -112,7 +112,13 @@ const BlogAISettingsTab: React.FC = () => {
   const loadSettings = async () => {
     try {
       setLoading(true);
-      const data = await getBlogAISettings();
+      // A degraded Firestore client can make getDoc never settle; bound it so the tab can't hang in a spinner.
+      const data = await Promise.race([
+        getBlogAISettings(),
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error('Timed out loading blog AI settings')), 8000)
+        ),
+      ]);
       setSettings(data);
       setFeedsText(serializeFeeds(data.feeds));
     } catch (e) {

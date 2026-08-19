@@ -52,10 +52,6 @@ const EventsTab: React.FC<EventsTabProps> = ({ events }) => {
     externalRegistrationMembersOnly: false,
   });
 
-  useEffect(() => {
-    // keep form defaults when opening modal to add
-  }, []);
-
   const resetForms = () => {
     setEventForm({
       title: '',

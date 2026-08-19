@@ -81,4 +81,13 @@ describe('BoardApplicationPage', () => {
     expect(screen.getByText(/Lead the board/)).toBeInTheDocument()
     expect(screen.getByText('Submit application')).toBeInTheDocument()
   })
+
+  it('does not crash when submitting an untouched form after positions load async', () => {
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
+    global.__setCollectionData?.({ subscribeToPositions: { data: [samplePosition], loaded: true } })
+    render(<BoardApplicationPage />)
+    fireEvent.click(screen.getByText('Show details'))
+    // Submit immediately without touching any field — must not throw a TypeError.
+    expect(() => fireEvent.click(screen.getByText('Submit application'))).not.toThrow()
+  })
 })

@@ -45,8 +45,6 @@ const seed: PublicSeed = {
     { id: 't1', name: 'Ada', position: 'Board', email: 'ada@uuais.com', personalEmail: 'ada@personal.com', notes: 'internal' } as never,
     { id: 't2', name: 'Drafty', position: 'Member', published: false } as never,
   ],
-  boardPositions: [{ id: 'b1', title: 'Treasurer' } as never],
-  campaigns: [{ id: 'c1', title: 'Fall 2026' } as never],
 }
 
 async function mcpPost(message: Record<string, unknown>): Promise<Response> {

@@ -273,8 +273,6 @@ export async function getSiteStats(): Promise<SiteStats> {
         jobs: seed.jobs.length,
         faqs: seed.faqs.length,
         teamMembers: seed.teamMembers.length,
-        boardPositions: seed.boardPositions.length,
-        openCampaigns: seed.campaigns.length,
         blogPosts: blog?.length ?? null,
         courses: courses?.length ?? null,
       },

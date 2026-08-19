@@ -54,8 +54,6 @@ const seed: PublicSeed = {
   jobs: [],
   faqs: [{ id: 'f1', question: 'How do I join?', answer: 'Sign up on the site', category: 'general', order: 1, published: true } as never],
   teamMembers: [{ id: 't1', name: 'Ada Lovelace', position: 'Board member', teams: ['board'] } as never],
-  boardPositions: [],
-  campaigns: [],
 }
 
 const blogPosts: FakeDoc[] = [

@@ -197,6 +197,7 @@ const AdminDashboard: React.FC = () => {
                           <button
                             key={child.key}
                             onClick={() => { setSub(key, child.key); changeTab(key); }}
+                            aria-current={subActive ? "page" : undefined}
                             className={`flex items-center w-full px-3 py-2 rounded-md text-sm transition-colors duration-200 cursor-pointer ${
                               subActive
                                 ? 'bg-primary/10 text-primary font-medium'
@@ -262,7 +263,7 @@ const AdminDashboard: React.FC = () => {
                   )}
                   {activeTab === 'members' && (
                     <TabErrorBoundary name="Members">
-                      <MembersTab onChanged={() => { /* could trigger toast */ }} />
+                      <MembersTab />
                     </TabErrorBoundary>
                   )}
                   {activeTab === 'ai-settings' && (

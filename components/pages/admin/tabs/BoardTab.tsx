@@ -2,8 +2,15 @@
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { Card, CardContent } from "@/components/ui/Card";
 import { BoardPosition } from "@/types";
+import { Edit3, Plus, Trash2, ChevronDown, ChevronUp, ArrowUp, ArrowDown } from "lucide-react";
+import Link from "next/link";
+import BoardPositionModal, { type BPositionFormState } from "@/components/pages/admin/modals/BoardPositionModal";
+import { useCollectionData } from "@/lib/firestore/useCollectionData";
+import { subscribeToPositions, addPosition, updatePosition, deletePosition, movePosition } from "@/lib/firestore/board-positions";
 import { subscribeToBoardApplications, deleteBoardApplication, type BoardApplication } from "@/lib/firestore/boardApplications";
+import { useNotify } from "@/components/ui/Notifications";
 
 function formatApplicationDate(createdAt: BoardApplication["createdAt"]): string {
   if (createdAt == null) return "—";
@@ -13,13 +20,16 @@ function formatApplicationDate(createdAt: BoardApplication["createdAt"]): string
   }
   return createdAt.toDate().toDateString();
 }
-import { Card, CardContent } from "@/components/ui/Card";
-import { Edit3, Plus, Trash2, ChevronDown, ChevronUp, ArrowUp, ArrowDown } from "lucide-react";
-import Link from "next/link";
-import BoardPositionModal, { type BPositionFormState } from "@/components/pages/admin/modals/BoardPositionModal";
-import { useCollectionData } from "@/lib/firestore/useCollectionData";
-import { subscribeToPositions, addPosition, updatePosition, deletePosition, movePosition } from "@/lib/firestore/board-positions";
-import { useNotify } from "@/components/ui/Notifications";
+
+/** Only allow http/https URLs to prevent javascript: XSS in href attributes. */
+function safeUrl(url: string | null | undefined): string | undefined {
+  if (!url) return undefined;
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol === "http:" || parsed.protocol === "https:") return url;
+  } catch { /* invalid URL */ }
+  return undefined;
+}
 
 const BoardTab: React.FC = () => {
   const { data: boardPositions, loaded: positionsLoaded } = useCollectionData<BoardPosition>(subscribeToPositions, []);
@@ -182,7 +192,7 @@ const BoardTab: React.FC = () => {
                   <div className="text-sm text-muted-foreground mt-2 whitespace-pre-wrap">{!applicant.coverFile && !applicant.coverText ? "Applicant has not provided a cover letter." : ""}</div>
                   {applicant.cv?.url ? (
                     <div className="text-sm text-primary mt-2">
-                      <Link href={applicant.cv.url}>View CV (PDF)</Link>
+                      <Link href={safeUrl(applicant.cv.url) || "#"}>View CV (PDF)</Link>
                     </div>
                   ) : null}
                   {applicant.coverOption === "text" && applicant.coverText && applicant.id && (
@@ -201,7 +211,7 @@ const BoardTab: React.FC = () => {
                   )}
                   {applicant.coverOption === "file" && applicant.coverFile?.url ? (
                     <div className="text-sm text-primary mt-2">
-                      <Link href={applicant.coverFile.url}>View Cover Letter (PDF)</Link>
+                      <Link href={safeUrl(applicant.coverFile.url) || "#"}>View Cover Letter (PDF)</Link>
                     </div>
                   ) : null}
                 </div>
