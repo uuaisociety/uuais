@@ -103,12 +103,12 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
     >
       <div className="space-y-3 mb-6">
         {sortedQuestions.map((q) => (
-          <div key={q.id} className="border border-gray-200 dark:border-gray-700 rounded p-3 flex items-start justify-between">
+          <div key={q.id} className="border border-border rounded p-3 flex items-start justify-between">
             <div>
               <div className="font-medium">{q.question}{q.id?.startsWith('default:') ? ' (default)' : ''}</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400">{q.type} • Order {q.order} • {q.required ? 'Required' : 'Optional'}</div>
+              <div className="text-xs text-muted-foreground">{q.type} • Order {q.order} • {q.required ? 'Required' : 'Optional'}</div>
               {q.options && q.options.length > 0 && (
-                <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Options: {q.options.join(', ')}</div>
+                <div className="text-xs text-muted-foreground mt-1">Options: {q.options.join(', ')}</div>
               )}
             </div>
             <div className="flex gap-2">
@@ -122,11 +122,11 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({ open, eventTi
           </div>
         ))}
         {sortedQuestions.length === 0 && (
-          <div className="text-sm text-gray-500 dark:text-gray-400">No questions yet.</div>
+          <div className="text-sm text-muted-foreground">No questions yet.</div>
         )}
       </div>
 
-      <form onSubmit={submit} className="space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4" data-event-id={eventId}>
+      <form onSubmit={submit} className="space-y-4 border-t border-border pt-4" data-event-id={eventId}>
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">{mode === 'edit' ? 'Edit Question' : 'Add New Question'}</h3>
           {mode === 'add' && (

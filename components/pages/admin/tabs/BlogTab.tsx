@@ -7,16 +7,11 @@ import { Card, CardContent } from "@/components/ui/Card";
 import { BlogPost } from "@/types";
 import { Edit3, Eye, EyeOff, Plus, Sparkles, Trash2, User, Calendar, Star } from "lucide-react";
 import Tag from "@/components/ui/Tag";
-
-export interface BlogTabProps {
-  posts: BlogPost[];
-  onAddClick: () => void;
-  onGenerateClick?: () => void;
-  onEdit: (post: BlogPost) => void;
-  onDelete: (id: string) => void;
-  onTogglePublish: (post: BlogPost) => void;
-  onToggleFeatured?: (post: BlogPost) => void;
-}
+import BlogModal, { type BlogFormState } from "@/components/pages/admin/modals/BlogModal";
+import GenerateBlogModal from "@/components/pages/admin/modals/GenerateBlogModal";
+import { useApp } from "@/contexts/AppContext";
+import { addUsedNewsUrls, removeUsedNewsUrls } from "@/lib/firestore/blog-seen";
+import { auth } from "@/lib/firebase-client";
 
 type BlogSection = "all" | "team" | "ai";
 
@@ -26,8 +21,26 @@ const SECTIONS: { key: BlogSection; label: string }[] = [
   { key: "ai", label: "AI News Desk" },
 ];
 
-const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onGenerateClick, onEdit, onDelete, onTogglePublish, onToggleFeatured }) => {
+const emptyForm: BlogFormState = {
+  title: "",
+  excerpt: "",
+  content: "",
+  author: "",
+  image: "",
+  tags: [],
+  published: false,
+};
+
+const BlogTab: React.FC = () => {
+  const { state, dispatch } = useApp();
+  const posts = state.blogPosts;
   const [section, setSection] = useState<BlogSection>("all");
+  const [showBlogModal, setShowBlogModal] = useState(false);
+  const [showGenerateBlogModal, setShowGenerateBlogModal] = useState(false);
+  const [editingItem, setEditingItem] = useState<BlogPost | null>(null);
+  const [blogForm, setBlogForm] = useState<BlogFormState>(emptyForm);
+
+  const placeholderImage = "/images/logo-highdef.png";
 
   const filteredPosts = section === "all"
     ? posts
@@ -35,15 +48,105 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onGenerateClick, o
       ? posts.filter((p) => p.authorType !== "ai")
       : posts.filter((p) => p.authorType === "ai");
 
+  const resetForms = () => {
+    setBlogForm(emptyForm);
+    setEditingItem(null);
+  };
+
+  const reviewerName = () => auth.currentUser?.displayName || auth.currentUser?.email || "";
+
+  // Seen-URL lifecycle: cited sources become "covered" at publish and are released on unpublish/delete.
+  const syncSeenUrlsForPost = (post: BlogPost) => {
+    const urls = (post.sources ?? []).map((s) => s.url).filter(Boolean);
+    if (urls.length === 0) return;
+    if (post.published) {
+      addUsedNewsUrls(urls).catch((e) => console.warn("Failed to mark post sources as used:", e));
+    } else {
+      removeUsedNewsUrls(urls).catch((e) => console.warn("Failed to release post sources:", e));
+    }
+  };
+
+  const handleAddBlogPost = () => {
+    const newPost = {
+      ...blogForm,
+      image: blogForm.image || placeholderImage,
+      date: new Date().toISOString().split("T")[0]
+    } as BlogPost;
+    if (newPost.published && newPost.authorType === "ai" && !newPost.reviewedBy) {
+      newPost.reviewedBy = reviewerName();
+    }
+    dispatch({ firestoreAction: "ADD_BLOG_POST", payload: newPost });
+    syncSeenUrlsForPost(newPost);
+    setShowBlogModal(false);
+    resetForms();
+  };
+
+  const handleEditBlogPost = (post: BlogPost) => {
+    setEditingItem(post);
+    setBlogForm({
+      title: post.title,
+      excerpt: post.excerpt,
+      content: post.content,
+      author: post.author,
+      image: post.image,
+      tags: post.tags,
+      published: post.published
+    });
+    setShowBlogModal(true);
+  };
+
+  const handleUpdateBlogPost = () => {
+    if (editingItem) {
+      const updatedPost = { ...editingItem, ...blogForm } as BlogPost;
+      if (updatedPost.published && updatedPost.authorType === "ai" && !updatedPost.reviewedBy) {
+        updatedPost.reviewedBy = reviewerName();
+      }
+      dispatch({ firestoreAction: "UPDATE_BLOG_POST", payload: updatedPost });
+      syncSeenUrlsForPost(updatedPost);
+      setShowBlogModal(false);
+      resetForms();
+    }
+  };
+
+  const handleDeleteBlogPost = (postId: string) => {
+    if (window.confirm("Are you sure you want to delete this blog post?")) {
+      dispatch({ firestoreAction: "DELETE_BLOG_POST", payload: postId });
+    }
+  };
+
+  const toggleBlogPostVisibility = (post: BlogPost) => {
+    const payload: BlogPost = { ...post, published: !post.published };
+    if (payload.published && post.authorType === "ai" && !post.reviewedBy) {
+      payload.reviewedBy = reviewerName();
+    }
+    dispatch({ firestoreAction: "UPDATE_BLOG_POST", payload });
+    syncSeenUrlsForPost(payload);
+  };
+
+  const toggleBlogPostFeatured = (post: BlogPost) => {
+    dispatch({ firestoreAction: "UPDATE_BLOG_POST", payload: { ...post, featured: !post.featured } });
+  };
+
+  const handleDraftCreated = async (draftId: string) => {
+    setShowGenerateBlogModal(false);
+    try {
+      const mod = await import("@/lib/firestore/blog");
+      const post = await mod.getBlogPostById(draftId);
+      if (post) {
+        handleEditBlogPost(post);
+      }
+    } catch (e) {
+      console.error("Failed to load generated draft:", e);
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
-        <h2 className="text-2xl font-bold text-foreground">Blog Management</h2>
+        <h2 className="text-xl font-semibold tracking-[-0.028em] text-foreground">Blog</h2>
         <div className="flex flex-wrap gap-3">
-          {onGenerateClick && (
-            <Button variant="outline" icon={Sparkles} onClick={onGenerateClick}>Generate AI Draft</Button>
-          )}
-          <Button variant="outline" icon={Plus} onClick={onAddClick}>New Article</Button>
+          <Button variant="outline" icon={Sparkles} onClick={() => setShowGenerateBlogModal(true)}>Generate AI Draft</Button>
+          <Button variant="outline" icon={Plus} onClick={() => { resetForms(); setShowBlogModal(true); }}>New Article</Button>
         </div>
       </div>
 
@@ -108,31 +211,29 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onGenerateClick, o
                   </div>
                 </div>
                 <div className="flex flex-wrap gap-2 ml-4">
-                  {onToggleFeatured && (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      icon={Star}
-                      className={post.featured ? "text-primary [&>svg]:fill-primary" : ""}
-                      onClick={() => onToggleFeatured(post)}
-                      aria-label={post.featured ? 'Unset featured' : 'Set featured'}
-                      aria-pressed={post.featured}
-                      title={post.featured ? 'Remove from featured' : 'Feature this article'}
-                    >
-                      {post.featured ? 'Featured' : 'Feature'}
-                    </Button>
-                  )}
-                  <Button size="sm" variant="outline" icon={post.published ? EyeOff : Eye} onClick={() => onTogglePublish(post)}>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    icon={Star}
+                    className={post.featured ? "text-primary [&>svg]:fill-primary" : ""}
+                    onClick={() => toggleBlogPostFeatured(post)}
+                    aria-label={post.featured ? 'Unset featured' : 'Set featured'}
+                    aria-pressed={post.featured}
+                    title={post.featured ? 'Remove from featured' : 'Feature this article'}
+                  >
+                    {post.featured ? 'Featured' : 'Feature'}
+                  </Button>
+                  <Button size="sm" variant="outline" icon={post.published ? EyeOff : Eye} onClick={() => toggleBlogPostVisibility(post)}>
                     {post.published ? 'Unpublish' : 'Publish'}
                   </Button>
-                  <Button size="sm" variant="outline" icon={Edit3} onClick={() => onEdit(post)}>
+                  <Button size="sm" variant="outline" icon={Edit3} onClick={() => handleEditBlogPost(post)}>
                     Edit
                   </Button>
-                  <Button 
-                    size="sm" 
-                    variant="destructive" 
-                    icon={Trash2} 
-                    onClick={() => onDelete(post.id)} 
+                  <Button
+                    size="sm"
+                    variant="destructive"
+                    icon={Trash2}
+                    onClick={() => handleDeleteBlogPost(post.id)}
                   >
                     Delete
                   </Button>
@@ -142,6 +243,27 @@ const BlogTab: React.FC<BlogTabProps> = ({ posts, onAddClick, onGenerateClick, o
           </Card>
         ))}
       </div>
+
+      <BlogModal
+        open={showBlogModal}
+        editing={!!editingItem}
+        form={blogForm}
+        setForm={setBlogForm}
+        onClose={() => { setShowBlogModal(false); resetForms(); }}
+        onSubmit={() => {
+          if (editingItem) {
+            handleUpdateBlogPost();
+          } else {
+            handleAddBlogPost();
+          }
+        }}
+      />
+
+      <GenerateBlogModal
+        open={showGenerateBlogModal}
+        onClose={() => setShowGenerateBlogModal(false)}
+        onDraftCreated={handleDraftCreated}
+      />
     </div>
   );
 };

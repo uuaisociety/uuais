@@ -4,6 +4,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useApp } from "@/contexts/AppContext";
+import { useCollectionData } from "@/lib/firestore/useCollectionData";
+import { subscribeToPositions } from "@/lib/firestore/board-positions";
+import { subscribeToBoardApplications, type BoardApplication } from "@/lib/firestore/boardApplications";
 import { subscribeJobClicks, subscribeEventClicks } from "@/lib/firestore/analytics";
 import { subscribeBlogReads } from "@/lib/firestore/blog";
 import { getMemberAnalytics, type MemberAnalytics } from "@/lib/firestore/member-analytics";
@@ -12,9 +15,19 @@ import { getRegistrationAnalytics, type RegistrationAnalytics } from "@/lib/fire
 import { getAIAnalytics, type AIAnalytics } from "@/lib/firestore/ai-analytics";
 import { fetchFirebaseAnalytics, type FirebaseAnalyticsResponse } from "@/lib/firestore/firebase-analytics";
 import { cumulativeSignups, eventMonthKey } from "./AnalyticsShared";
-import type { Event, BlogPost, Job, TeamMember, BoardPosition, Application } from "@/types";
+import type { Event, BlogPost, Job, TeamMember, BoardPosition } from "@/types";
 
 export type AnalyticsTabKey = "overview" | "events" | "members" | "newsletter" | "jobs" | "ai" | "firebase";
+
+export const ANALYTICS_SUBTABS: { key: AnalyticsTabKey; label: string }[] = [
+  { key: "overview", label: "Summary" },
+  { key: "events", label: "Events" },
+  { key: "members", label: "Members" },
+  { key: "newsletter", label: "Blog" },
+  { key: "jobs", label: "Jobs" },
+  { key: "ai", label: "AI Assistant" },
+  { key: "firebase", label: "Firebase" },
+];
 
 export interface AnalyticsData {
   activeSubtab: AnalyticsTabKey;
@@ -38,13 +51,17 @@ export interface AnalyticsData {
   jobs: Job[];
   teamMembers: TeamMember[];
   boardPositions: BoardPosition[];
-  applicants: Application[];
+  applicants: BoardApplication[];
 }
 
-export function useAnalyticsData(): AnalyticsData {
+export function useAnalyticsData(
+  activeSubtab: AnalyticsTabKey,
+  setActiveSubtab: (key: AnalyticsTabKey) => void
+): AnalyticsData {
   const { state } = useApp();
+  const { data: boardPositions } = useCollectionData<BoardPosition>(subscribeToPositions, []);
+  const { data: applicants } = useCollectionData<BoardApplication>(subscribeToBoardApplications, []);
 
-  const [activeSubtab, setActiveSubtab] = useState<AnalyticsTabKey>("overview");
   const [blogReads, setBlogReads] = useState<Record<string, number>>({});
   const [jobClicks, setJobClicks] = useState<Record<string, number>>({});
   const [eventClicks, setEventClicks] = useState<Record<string, number>>({});
@@ -65,7 +82,13 @@ export function useAnalyticsData(): AnalyticsData {
 
   useEffect(() => {
     if (blogIds.length) {
-      return subscribeBlogReads(blogIds, setBlogReads);
+      try {
+        return subscribeBlogReads(blogIds, setBlogReads);
+      } catch (e) {
+        console.warn("Blog-reads subscription failed:", e);
+        setBlogReads({});
+        return undefined;
+      }
     }
     setBlogReads({});
     return undefined;
@@ -74,7 +97,13 @@ export function useAnalyticsData(): AnalyticsData {
 
   useEffect(() => {
     if (jobIds.length) {
-      return subscribeJobClicks(jobIds, setJobClicks);
+      try {
+        return subscribeJobClicks(jobIds, setJobClicks);
+      } catch (e) {
+        console.warn("Job-clicks subscription failed:", e);
+        setJobClicks({});
+        return undefined;
+      }
     }
     setJobClicks({});
     return undefined;
@@ -83,7 +112,13 @@ export function useAnalyticsData(): AnalyticsData {
 
   useEffect(() => {
     if (eventIds.length) {
-      return subscribeEventClicks(eventIds, setEventClicks);
+      try {
+        return subscribeEventClicks(eventIds, setEventClicks);
+      } catch (e) {
+        console.warn("Event-clicks subscription failed:", e);
+        setEventClicks({});
+        return undefined;
+      }
     }
     setEventClicks({});
     return undefined;
@@ -167,7 +202,7 @@ export function useAnalyticsData(): AnalyticsData {
     blogs: state.blogPosts,
     jobs: state.jobs,
     teamMembers: state.teamMembers,
-    boardPositions: state.boardPositions,
-    applicants: state.applicants,
+    boardPositions,
+    applicants,
   };
 }

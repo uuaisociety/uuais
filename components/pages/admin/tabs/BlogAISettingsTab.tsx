@@ -112,7 +112,13 @@ const BlogAISettingsTab: React.FC = () => {
   const loadSettings = async () => {
     try {
       setLoading(true);
-      const data = await getBlogAISettings();
+      // A degraded Firestore client can make getDoc never settle; bound it so the tab can't hang in a spinner.
+      const data = await Promise.race([
+        getBlogAISettings(),
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error('Timed out loading blog AI settings')), 8000)
+        ),
+      ]);
       setSettings(data);
       setFeedsText(serializeFeeds(data.feeds));
     } catch (e) {
@@ -216,7 +222,7 @@ const BlogAISettingsTab: React.FC = () => {
         <div className="flex items-center gap-3">
           <Bot className="h-6 w-6 text-primary" />
           <div>
-            <h2 className="text-xl font-semibold text-foreground">AI News Desk Settings</h2>
+            <h2 className="text-xl font-semibold tracking-[-0.028em] text-foreground">AI News Desk</h2>
             <p className="text-sm text-muted-foreground">Configure the blog generation model, prompts, and news sources</p>
           </div>
         </div>

@@ -1,15 +1,38 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import ApplicationsTab from '@/components/pages/admin/tabs/ApplicationsTab'
 import type { ApplicationCampaign, TeamApplication } from '@/types'
 
+jest.mock('@/lib/firestore/applicationCampaigns', () => ({
+  // Method shorthand keeps fn.name stable so the useCollectionData mock can key its responses by subscription.
+  subscribeAllCampaigns() { return jest.fn(); },
+  subscribeToCampaigns() { return jest.fn(); },
+  addCampaign: jest.fn().mockResolvedValue('new-id'),
+  updateCampaign: jest.fn().mockResolvedValue(undefined),
+  deleteCampaign: jest.fn().mockResolvedValue(undefined),
+}))
+
+jest.mock('@/lib/firestore/teamApplications', () => ({
+  subscribeToTeamApplications() { return jest.fn(); },
+  deleteTeamApplicationWithLimits: jest.fn().mockResolvedValue(undefined),
+}))
+
+jest.mock('@/components/ui/Notifications', () => ({
+  useNotify: () => ({ notify: jest.fn() }),
+}))
+
 jest.mock('@/lib/firestore/campaignQuestions', () => ({
   subscribeToCampaignQuestions: jest.fn(() => jest.fn()),
+  getCampaignQuestions: jest.fn().mockResolvedValue([]),
+  deleteCampaignQuestionsByCampaign: jest.fn().mockResolvedValue(undefined),
 }))
 
 const mockExportZip = jest.fn()
 jest.mock('@/lib/exportApplications', () => ({
   exportApplicationsZip: (...args: unknown[]) => mockExportZip(...args),
 }))
+
+import { updateCampaign, deleteCampaign } from '@/lib/firestore/applicationCampaigns'
+import { deleteCampaignQuestionsByCampaign } from '@/lib/firestore/campaignQuestions'
 
 const sampleCampaign: ApplicationCampaign = {
   id: 'spring2026',
@@ -39,16 +62,13 @@ const sampleSubmission: TeamApplication = {
   createdAt: '2026-04-01',
 }
 
-const baseProps = (overrides: Partial<React.ComponentProps<typeof ApplicationsTab>> = {}) => ({
-  campaigns: [] as ApplicationCampaign[],
-  applications: [] as TeamApplication[],
-  onAddCampaign: jest.fn(),
-  onEditCampaign: jest.fn(),
-  onDeleteCampaign: jest.fn(),
-  onUpdateCampaignStatus: jest.fn(),
-  onDeleteApplication: jest.fn(),
-  ...overrides,
-})
+// Campaigns and applications are fetched by the tab itself; key the responses by subscription name so re-renders keep their data.
+function mockData(campaigns: ApplicationCampaign[], applications: TeamApplication[] = []) {
+  global.__setCollectionData?.({
+    subscribeAllCampaigns: { data: campaigns, loaded: true },
+    subscribeToTeamApplications: { data: applications, loaded: true },
+  })
+}
 
 describe('ApplicationsTab', () => {
   beforeEach(() => {
@@ -56,18 +76,21 @@ describe('ApplicationsTab', () => {
   })
 
   it('renders header and New campaign button', () => {
-    render(<ApplicationsTab {...baseProps()} />)
-    expect(screen.getByText('Application Campaigns')).toBeInTheDocument()
+    mockData([])
+    render(<ApplicationsTab />)
+    expect(screen.getByText('Applications')).toBeInTheDocument()
     expect(screen.getByText('New campaign')).toBeInTheDocument()
   })
 
   it('shows empty state when no campaigns match filter', () => {
-    render(<ApplicationsTab {...baseProps({ campaigns: [] })} />)
+    mockData([])
+    render(<ApplicationsTab />)
     expect(screen.getByText(/No campaigns with status/i)).toBeInTheDocument()
   })
 
   it('renders campaign cards with status badges and actions', () => {
-    render(<ApplicationsTab {...baseProps({ campaigns: [sampleCampaign] })} />)
+    mockData([sampleCampaign])
+    render(<ApplicationsTab />)
     expect(screen.getByText('Spring 2026 Recruitment')).toBeInTheDocument()
     // Status badge appears as Tag; filter tab button also says "Open" — match the badge (text-sm size on Tag).
     const openMatches = screen.getAllByText('Open')
@@ -76,10 +99,11 @@ describe('ApplicationsTab', () => {
   })
 
   it('filters by Open tab', () => {
-    render(<ApplicationsTab {...baseProps({ campaigns: [
+    mockData([
       sampleCampaign,
       { ...sampleCampaign, id: 'closed-one', status: 'closed', title: 'Closed Campaign' },
-    ] })} />)
+    ])
+    render(<ApplicationsTab />)
     // Click the "Open" filter tab (filter buttons have border-b-2 class inline)
     const openButtons = screen.getAllByRole('button', { name: /^Open/i })
     fireEvent.click(openButtons.find(b => b.tagName === 'BUTTON')!)
@@ -88,82 +112,76 @@ describe('ApplicationsTab', () => {
   })
 
   it('switches to submissions view on View submissions click', () => {
-    render(<ApplicationsTab {...baseProps({
-      campaigns: [sampleCampaign],
-      applications: [sampleSubmission],
-    })} />)
+    mockData([sampleCampaign], [sampleSubmission])
+    render(<ApplicationsTab />)
     fireEvent.click(screen.getByText('View submissions'))
     expect(screen.getByText('Submissions: Spring 2026 Recruitment')).toBeInTheDocument()
     expect(screen.getByText('Alice Doe')).toBeInTheDocument()
   })
 
-  it('calls onAddCampaign when New campaign is clicked', () => {
-    const onAddCampaign = jest.fn()
-    render(<ApplicationsTab {...baseProps({ onAddCampaign })} />)
+  it('opens the campaign builder when New campaign is clicked', () => {
+    mockData([])
+    render(<ApplicationsTab />)
     fireEvent.click(screen.getByText('New campaign'))
-    expect(onAddCampaign).toHaveBeenCalled()
+    // The builder modal renders with a campaign title field
+    expect(screen.getByLabelText(/Campaign title/)).toBeInTheDocument()
   })
 
-  it('calls onEditCampaign when Edit is clicked', () => {
-    const onEditCampaign = jest.fn()
-    render(<ApplicationsTab {...baseProps({ campaigns: [sampleCampaign], onEditCampaign })} />)
+  it('opens the campaign builder pre-filled when Edit is clicked', async () => {
+    mockData([sampleCampaign])
+    render(<ApplicationsTab />)
     fireEvent.click(screen.getByText('Edit'))
-    expect(onEditCampaign).toHaveBeenCalledWith(sampleCampaign)
+    // Questions load async before the form renders
+    expect(await screen.findByLabelText(/Campaign title/)).toHaveValue('Spring 2026 Recruitment')
   })
 
-  it('opens confirm modal when delete campaign clicked and confirms delete', () => {
-    const onDeleteCampaign = jest.fn()
-    render(<ApplicationsTab {...baseProps({ campaigns: [sampleCampaign], onDeleteCampaign })} />)
+  it('opens confirm modal when delete campaign clicked and confirms delete', async () => {
+    jest.spyOn(window, 'confirm').mockReturnValue(true)
+    mockData([sampleCampaign])
+    render(<ApplicationsTab />)
     // Click the destructive delete button (Trash2 icon-only button)
     fireEvent.click(screen.getByRole('button', { name: /delete campaign/i }))
     expect(screen.getByText('Delete campaign?')).toBeInTheDocument()
     fireEvent.click(screen.getByText('Delete'))
-    expect(onDeleteCampaign).toHaveBeenCalledWith('spring2026')
+    await waitFor(() => expect(deleteCampaign).toHaveBeenCalledWith('spring2026'))
+    await waitFor(() => expect(deleteCampaignQuestionsByCampaign).toHaveBeenCalledWith('spring2026'))
   })
 
   it('toggles campaign status via the segmented control', () => {
-    const onUpdateCampaignStatus = jest.fn()
-    render(<ApplicationsTab {...baseProps({ campaigns: [sampleCampaign], onUpdateCampaignStatus })} />)
+    mockData([sampleCampaign])
+    render(<ApplicationsTab />)
     // The card's status toggle has a "Draft" button (the filter tab says "Draft 0")
     fireEvent.click(screen.getByRole('button', { name: 'Draft' }))
-    expect(onUpdateCampaignStatus).toHaveBeenCalledWith('spring2026', 'draft')
+    expect(updateCampaign).toHaveBeenCalledWith('spring2026', { status: 'draft' })
   })
 
   it('expands a submission to show motivation on click', () => {
-    render(<ApplicationsTab {...baseProps({
-      campaigns: [sampleCampaign],
-      applications: [sampleSubmission],
-    })} />)
+    mockData([sampleCampaign], [sampleSubmission])
+    render(<ApplicationsTab />)
     fireEvent.click(screen.getByText('View submissions'))
     fireEvent.click(screen.getByText('Alice Doe'))
     expect(screen.getByText('I want to contribute.')).toBeInTheDocument()
   })
 
   it('Back button returns to campaigns view', () => {
-    render(<ApplicationsTab {...baseProps({
-      campaigns: [sampleCampaign],
-      applications: [sampleSubmission],
-    })} />)
+    mockData([sampleCampaign], [sampleSubmission])
+    render(<ApplicationsTab />)
     fireEvent.click(screen.getByText('View submissions'))
     fireEvent.click(screen.getByText('Back to campaigns'))
-    expect(screen.getByText('Application Campaigns')).toBeInTheDocument()
+    expect(screen.getByText('Applications')).toBeInTheDocument()
   })
 
   it('renders an Export .zip button in the submissions view', () => {
-    render(<ApplicationsTab {...baseProps({
-      campaigns: [sampleCampaign],
-      applications: [sampleSubmission],
-    })} />)
+    mockData([sampleCampaign], [sampleSubmission])
+    render(<ApplicationsTab />)
     fireEvent.click(screen.getByText('View submissions'))
     expect(screen.getByText('Export .zip')).toBeInTheDocument()
   })
 
   it('exports filtered submissions when Export .zip is clicked', async () => {
     mockExportZip.mockResolvedValue(undefined)
-    render(<ApplicationsTab {...baseProps({
-      campaigns: [sampleCampaign],
-      applications: [sampleSubmission],
-    })} />)
+    mockData([sampleCampaign], [sampleSubmission])
+    render(<ApplicationsTab />)
     fireEvent.click(screen.getByText('View submissions'))
     fireEvent.click(screen.getByText('Export .zip'))
     expect(mockExportZip).toHaveBeenCalledWith(expect.objectContaining({
@@ -192,10 +210,8 @@ describe('ApplicationsTab', () => {
     }
 
     it('renders ranked role tags for a roleRanking submission', () => {
-      render(<ApplicationsTab {...baseProps({
-        campaigns: [roleCampaign],
-        applications: [roleSubmission],
-      })} />)
+      mockData([roleCampaign], [roleSubmission])
+      render(<ApplicationsTab />)
       fireEvent.click(screen.getByText('View submissions'))
       // The hidden expanded detail also contains the ranked labels, so scope via getAllByText
       expect(screen.getAllByText('#1 IT Member').length).toBeGreaterThan(0)
@@ -203,28 +219,25 @@ describe('ApplicationsTab', () => {
     })
 
     it('falls back to team tags for a legacy teamRanking submission', () => {
-      render(<ApplicationsTab {...baseProps({
-        campaigns: [roleCampaign],
-        applications: [sampleSubmission],
-      })} />)
+      mockData([roleCampaign], [sampleSubmission])
+      render(<ApplicationsTab />)
       fireEvent.click(screen.getByText('View submissions'))
       expect(screen.getByText('#1 IT')).toBeInTheDocument()
       expect(screen.getByText('#2 Development')).toBeInTheDocument()
     })
 
     it('shows the role count on the campaign card', () => {
-      render(<ApplicationsTab {...baseProps({ campaigns: [roleCampaign] })} />)
+      mockData([roleCampaign])
+      render(<ApplicationsTab />)
       expect(screen.getByText('2 roles')).toBeInTheDocument()
     })
 
     it('filters submissions by a specific role', () => {
-      render(<ApplicationsTab {...baseProps({
-        campaigns: [roleCampaign],
-        applications: [
-          roleSubmission,
-          { ...sampleSubmission, id: 'sub-legacy', teamRanking: ['it', 'development'] },
-        ],
-      })} />)
+      mockData([roleCampaign], [
+        roleSubmission,
+        { ...sampleSubmission, id: 'sub-legacy', teamRanking: ['it', 'development'] },
+      ])
+      render(<ApplicationsTab />)
       fireEvent.click(screen.getByText('View submissions'))
 
       // Role options are labelled "<Team> · <Role>"
@@ -235,10 +248,8 @@ describe('ApplicationsTab', () => {
 
     it('filters submissions by legacy team id when campaign has no roles', () => {
       const legacySubmission = { ...sampleSubmission, id: 'sub-legacy', teamRanking: ['it', 'development'] }
-      render(<ApplicationsTab {...baseProps({
-        campaigns: [sampleCampaign],
-        applications: [roleSubmission, legacySubmission],
-      })} />)
+      mockData([sampleCampaign], [roleSubmission, legacySubmission])
+      render(<ApplicationsTab />)
       fireEvent.click(screen.getByText('View submissions'))
 
       // No roles -> dropdown lists teams; both roleRanking and legacy submissions match "development"
@@ -248,10 +259,8 @@ describe('ApplicationsTab', () => {
     })
 
     it('expands a submission to show role preferences and proposed role', () => {
-      render(<ApplicationsTab {...baseProps({
-        campaigns: [roleCampaign],
-        applications: [roleSubmission],
-      })} />)
+      mockData([roleCampaign], [roleSubmission])
+      render(<ApplicationsTab />)
       fireEvent.click(screen.getByText('View submissions'))
       fireEvent.click(screen.getByText('Alice Doe'))
 

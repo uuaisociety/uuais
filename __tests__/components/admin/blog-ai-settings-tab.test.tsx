@@ -66,7 +66,7 @@ describe('BlogAISettingsTab', () => {
   it('loads and renders the saved settings', async () => {
     mockGet.mockResolvedValue(settings)
     render(<BlogAISettingsTab />)
-    expect(await screen.findByText('AI News Desk Settings')).toBeInTheDocument()
+    expect(await screen.findByText('AI News Desk')).toBeInTheDocument()
     expect(screen.getByDisplayValue('openai/gpt-4o-mini')).toBeInTheDocument()
     expect(screen.getByDisplayValue('You write for students.')).toBeInTheDocument()
     expect(screen.getByDisplayValue(/OpenAI News\|https:\/\/openai\.com\/news\/rss\.xml/)).toBeInTheDocument()
@@ -78,7 +78,7 @@ describe('BlogAISettingsTab', () => {
     mockGet.mockResolvedValue(settings)
     const confirmSpy = jest.spyOn(window, 'confirm').mockReturnValue(true)
     render(<BlogAISettingsTab />)
-    await screen.findByText('AI News Desk Settings')
+    await screen.findByText('AI News Desk')
     fireEvent.click(screen.getByText('Reset to Defaults'))
     expect(screen.getByDisplayValue('deepseek/deepseek-v4-flash-0731')).toBeInTheDocument()
     expect(screen.getByDisplayValue(/DeepMind\|https:\/\/deepmind\.google\/blog\/rss\.xml/)).toBeInTheDocument()
@@ -90,7 +90,7 @@ describe('BlogAISettingsTab', () => {
     mockGet.mockResolvedValue(settings)
     mockUpdate.mockResolvedValue(undefined)
     render(<BlogAISettingsTab />)
-    await screen.findByText('AI News Desk Settings')
+    await screen.findByText('AI News Desk')
     fireEvent.click(screen.getByText('Save Changes'))
     await waitFor(() => {
       expect(mockUpdate).toHaveBeenCalledWith(
@@ -103,7 +103,7 @@ describe('BlogAISettingsTab', () => {
   it('disables save for non-super-admins', async () => {
     mockGet.mockResolvedValue(settings)
     render(<BlogAISettingsTab />)
-    await screen.findByText('AI News Desk Settings')
+    await screen.findByText('AI News Desk')
     expect(screen.getByText('Save Changes')).toBeDisabled()
   })
 
@@ -156,7 +156,7 @@ describe('BlogAISettingsTab', () => {
     mockGetCovered.mockResolvedValue([])
     mockAddUsed.mockResolvedValue([])
     render(<BlogAISettingsTab />)
-    await screen.findByText('AI News Desk Settings')
+    await screen.findByText('AI News Desk')
 
     fireEvent.change(screen.getByLabelText('URL to mark as used'), { target: { value: 'https://example.com/ai' } })
     fireEvent.click(screen.getByRole('button', { name: 'Mark URL as used' }))

@@ -5,80 +5,61 @@ import { auth } from '@/lib/firebase-client';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Button } from '@/components/ui/Button';
-import { useApp } from "@/contexts/AppContext";
+import { useCollectionData } from "@/lib/firestore/useCollectionData";
+import { subscribeToPositions } from "@/lib/firestore/board-positions";
 
 const COVER_LETTER_MAX_CHARS = 3500;
 
+type FormState = {
+  name: string;
+  email: string;
+  phone: string;
+  cvFile: File | null;
+  coverOption: 'text' | 'file';
+  coverText: string;
+  coverFile: File | null;
+  agree: boolean;
+  errors: Record<string,string>;
+  isSubmitting: boolean;
+  submitted: boolean;
+};
+
+const emptyForm = (overrides?: Partial<FormState>): FormState => ({
+  name: '',
+  email: '',
+  phone: '',
+  cvFile: null,
+  coverOption: 'text',
+  coverText: '',
+  coverFile: null,
+  agree: false,
+  errors: {},
+  isSubmitting: false,
+  submitted: false,
+  ...overrides,
+});
+
 export default function BoardApplicationPage() {
-  const { state } = useApp();
-  const roles = state.boardPositions;
-  // const roles = [
-  //   { 
-  //     id: 'chairman2026', 
-  //     title: 'Chairman of the Board 2026', 
-  //     short: 'Deadline: 2026-05-10', 
-  //     description: 'Responsible for overall leadership, meeting facilitation, mentorship, and representing UU AI Society to internal and external stakeholders.' },
-  //   { 
-  //     id: 'vice-chairman2026', 
-  //     title: 'Vice Chairman of the Board 2026', 
-  //     short: 'Deadline: 2026-05-10', 
-  //     description: 'Second-highest management role, for technical coordination, decision-making and mentorship of the board members and members in UU AI Society.' },
-  //   { 
-  //     id: 'head-of-internal-it2026', 
-  //     title: 'Head of Internal IT 2026', 
-  //     short: 'Deadline: 2026-05-10', 
-  //     description: 'Management of IT services of UU AI Society, such as the website and technological assets.' },
-  //   { 
-  //     id: 'head-of-dev2026', 
-  //     title: 'Head of Development 2026', 
-  //     short: 'Deadline: 2026-05-10', 
-  //     description: 'Managing development, and a team of driven minds to develop ideas for tech-based projects built at UU AI Society.'},
-  //   { 
-  //     id: 'head-of-partnerships-and-events2026', 
-  //     title: 'Head of Partnerships & Events 2026', 
-  //     short: 'Deadline: 2026-05-10', 
-  //     description: 'As a Head of Partnerships & Events, you are in-charge of planning and coordinating events, along with fostering communication and collaborating with partner organizations.' },
-  //   { 
-  //     id: 'head-of-growth2026', 
-  //     title: 'Head of Growth 2026', 
-  //     short: 'Deadline: 2026-05-10', 
-  //     description: 'Organizing workshops, seminars, talks and community events by UU AI Society. In this role, you shall also manage marketing through social media and other outlets, along with communication with participants and visitors.' },
-  // ];
-
-  type FormState = {
-    name: string;
-    email: string;
-    phone: string;
-    cvFile: File | null;
-    coverOption: 'text' | 'file';
-    coverText: string;
-    coverFile: File | null;
-    agree: boolean;
-    errors: Record<string,string>;
-    isSubmitting: boolean;
-    submitted: boolean;
-  };
-
-  const emptyForm = (overrides?: Partial<FormState>): FormState => ({
-    name: '',
-    email: '',
-    phone: '',
-    cvFile: null,
-    coverOption: 'text',
-    coverText: '',
-    coverFile: null,
-    agree: false,
-    errors: {},
-    isSubmitting: false,
-    submitted: false,
-    ...overrides,
-  });
+  const { data: roles } = useCollectionData(subscribeToPositions, []);
 
   const [forms, setForms] = useState<Record<string,FormState>>(() => {
     const map: Record<string,FormState> = {};
     roles.forEach(r => { map[r.id] = emptyForm(); });
     return map;
   });
+
+  // Roles arrive via a client subscription, so seed a form for each role once
+  // they load (and for any role added later) instead of only at first render.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setForms((prev) => {
+      const missing = roles.filter((r) => !prev[r.id]);
+      if (missing.length === 0) return prev;
+      const next: Record<string, FormState> = { ...prev };
+      missing.forEach((r) => { next[r.id] = emptyForm(); });
+      return next;
+    });
+  }, [roles]);
 
   const [openRole, setOpenRole] = useState<string | null>(null);
 
@@ -110,7 +91,7 @@ export default function BoardApplicationPage() {
  
 
   const validateFor = (roleId: string) => {
-    const f = forms[roleId];
+    const f = forms[roleId] ?? emptyForm();
     const e: Record<string,string> = {};
     if (!f.name.trim()) e.name = 'Name is required';
     if (!f.email.trim() || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email)) e.email = 'Valid email required';

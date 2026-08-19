@@ -9,6 +9,11 @@ const mockNotify = jest.fn()
 const mockSubscribeToCampaignQuestions = jest.fn(() => jest.fn())
 let mockAuthUser: unknown = null
 
+function mockCampaigns(campaigns: unknown[], loaded = true) {
+  mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
+  global.__setCollectionData?.({ subscribeOpenCampaigns: { data: campaigns, loaded } })
+}
+
 const mockRefreshSessionCookie = jest.fn(async () => {
   const token = mockAuthUser && typeof (mockAuthUser as { getIdToken?: unknown }).getIdToken === 'function'
     ? await (mockAuthUser as { getIdToken: (f: boolean) => Promise<string> }).getIdToken(true)
@@ -76,29 +81,20 @@ describe('TeamApplicationPage', () => {
   })
 
   it('shows loading state when no campaigns', () => {
-    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
+    mockCampaigns([], false)
     render(<TeamApplicationPage />)
     expect(screen.getByText('Loading campaigns…')).toBeInTheDocument()
   })
 
   it('shows no active campaigns message when only closed/draft campaigns exist', () => {
-    mockUseApp.mockReturnValue({
-      state: {
-        ...defaultAppState,
-        campaignsLoaded: true,
-        campaigns: [{ ...sampleCampaign, status: 'closed' }],
-      },
-      dispatch: jest.fn(),
-    })
+    mockCampaigns([{ ...sampleCampaign, status: 'closed' }], true)
     render(<TeamApplicationPage />)
     expect(screen.getByText('No active campaigns')).toBeInTheDocument()
   })
 
   it('renders hero with campaign title and overview', () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     expect(screen.getByText('Spring 2026 Recruitment')).toBeInTheDocument()
     expect(screen.getByText(/We are looking for passionate students/)).toBeInTheDocument()
@@ -106,10 +102,8 @@ describe('TeamApplicationPage', () => {
   })
 
   it('shows team cards from campaign teams', () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     expect(screen.getByText('IT')).toBeInTheDocument()
     expect(screen.getByText('Development')).toBeInTheDocument()
@@ -130,10 +124,7 @@ describe('TeamApplicationPage', () => {
         ...sampleCampaign.roles.slice(1),
       ],
     }
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [richCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockCampaigns([richCampaign])
     render(<TeamApplicationPage />)
     // Team description renders paragraphs and bullet points
     expect(screen.getByText('We keep the infra running.')).toBeInTheDocument()
@@ -154,10 +145,7 @@ describe('TeamApplicationPage', () => {
         { id: 'growth_member', teamId: 'growth', title: 'Growth Member', status: 'open', order: 2 },
       ],
     }
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [multiRoleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockCampaigns([multiRoleCampaign])
     render(<TeamApplicationPage />)
 
     expect(screen.getByText('IT Member')).toBeInTheDocument()
@@ -170,10 +158,8 @@ describe('TeamApplicationPage', () => {
   it('clamps overflowing descriptions and expands/collapses them on toggle', () => {
     Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, get: () => 200 })
     Object.defineProperty(HTMLElement.prototype, 'clientHeight', { configurable: true, get: () => 50 })
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
 
     const showMore = screen.getAllByRole('button', { name: /Show more/i })
@@ -188,10 +174,8 @@ describe('TeamApplicationPage', () => {
   })
 
   it('navigates to profile step on Continue click', () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     fireEvent.click(screen.getByText('Continue'))
     // "Your Profile" appears in step-nav as well as h2; match the h2 heading specifically
@@ -199,10 +183,8 @@ describe('TeamApplicationPage', () => {
   })
 
   it('shows team selection step heading after navigating to step 4', () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     // Step 0 -> 1 (Overview -> Profile)
     fireEvent.click(screen.getByText('Continue'))
@@ -222,10 +204,8 @@ describe('TeamApplicationPage', () => {
   })
 
   it('renders review step after completing all steps', () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     fireEvent.click(screen.getByText('Continue'))
     fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
@@ -242,10 +222,8 @@ describe('TeamApplicationPage', () => {
   })
 
   it('renders the custom-interest row as a text field without a dead checkbox', () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     fireEvent.click(screen.getByText('Continue'))
     fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
@@ -263,10 +241,8 @@ describe('TeamApplicationPage', () => {
   })
 
   it('filters the programme list as you type and selects with Enter', () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     fireEvent.click(screen.getByText('Continue'))
 
@@ -286,10 +262,8 @@ describe('TeamApplicationPage', () => {
   })
 
   it('commits free text when no programme matches', () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     fireEvent.click(screen.getByText('Continue'))
 
@@ -307,10 +281,7 @@ describe('TeamApplicationPage', () => {
       ...sampleCampaign,
       enabledStandardFields: ['name', 'email'],
     }
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [limitedCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockCampaigns([limitedCampaign])
     render(<TeamApplicationPage />)
     fireEvent.click(screen.getByText('Continue'))
     // Name/email still render, but disabled fields (LinkedIn, etc.) do not
@@ -327,46 +298,25 @@ describe('TeamApplicationPage', () => {
   })
 
   it('shows applications closed when the campaign deadline has passed', () => {
-    mockUseApp.mockReturnValue({
-      state: {
-        ...defaultAppState,
-        campaignsLoaded: true,
-        campaigns: [{ ...sampleCampaign, deadline: '2020-01-01' }],
-      },
-      dispatch: jest.fn(),
-    })
+    mockCampaigns([{ ...sampleCampaign, deadline: '2020-01-01' }], true)
     render(<TeamApplicationPage />)
     expect(screen.getByText('Applications Closed')).toBeInTheDocument()
     expect(screen.queryByText('Continue')).not.toBeInTheDocument()
   })
 
   it('shows "no roles open" screen when role selection is enabled but no roles are open', () => {
-    mockUseApp.mockReturnValue({
-      state: {
-        ...defaultAppState,
-        campaignsLoaded: true,
-        campaigns: [{ ...sampleCampaign, roles: [] }],
-      },
-      dispatch: jest.fn(),
-    })
+    mockCampaigns([{ ...sampleCampaign, roles: [] }], true)
     render(<TeamApplicationPage />)
     expect(screen.getByText('No roles are open right now')).toBeInTheDocument()
     expect(screen.queryByText('Continue')).not.toBeInTheDocument()
   })
 
   it('does not block the form when role selection is disabled even without roles', () => {
-    mockUseApp.mockReturnValue({
-      state: {
-        ...defaultAppState,
-        campaignsLoaded: true,
-        campaigns: [{
-          ...sampleCampaign,
-          roles: [],
-          enabledStandardFields: ['name', 'email', 'motivation', 'linkedin'],
-        }],
-      },
-      dispatch: jest.fn(),
-    })
+    mockCampaigns([{
+      ...sampleCampaign,
+      roles: [],
+      enabledStandardFields: ['name', 'email', 'motivation', 'linkedin'],
+    }], true)
     render(<TeamApplicationPage />)
     expect(screen.queryByText('No roles are open right now')).not.toBeInTheDocument()
     expect(screen.getByText('Continue')).toBeInTheDocument()
@@ -377,10 +327,8 @@ describe('TeamApplicationPage', () => {
       cb([{ id: 'q1', question: 'Why do you want to join?', required: true, type: 'textarea' }])
       return jest.fn()
     })
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     fireEvent.click(screen.getByText('Continue'))
     fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
@@ -394,10 +342,8 @@ describe('TeamApplicationPage', () => {
   })
 
   it('explains why Continue is blocked with an actionable hint', () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     fireEvent.click(screen.getByText('Continue'))
     // No name yet — the hint names the missing field
@@ -408,10 +354,8 @@ describe('TeamApplicationPage', () => {
   })
 
   it('explains why Submit is blocked until the confirmation is ticked', () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     fireEvent.click(screen.getByText('Continue'))
     fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
@@ -442,10 +386,8 @@ describe('TeamApplicationPage', () => {
       uid: 'user-1',
       roleRanking: [{ roleId: 'it_member', teamId: 'it' }],
     })
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
 
     expect(await screen.findByText('Already Applied!')).toBeInTheDocument()
@@ -464,13 +406,7 @@ describe('TeamApplicationPage', () => {
     }
     mockGetTeamApplicationByUid.mockResolvedValue(null)
 
-    // Mutable so we can simulate the Firestore subscription reporting the new app mid-submit.
-    const stateRef = {
-      ...defaultAppState,
-      campaigns: [sampleCampaign],
-      teamApplications: [],
-    }
-    mockUseApp.mockReturnValue({ state: stateRef, dispatch: jest.fn() })
+    mockCampaigns([sampleCampaign])
 
     // Deferred fetch so we control when the submit response arrives
     let resolveFetch: (v: { ok: boolean; json: () => Promise<unknown> }) => void
@@ -500,15 +436,6 @@ describe('TeamApplicationPage', () => {
     fireEvent.click(screen.getByLabelText(/I confirm the information above is accurate/i))
     fireEvent.click(screen.getByRole('button', { name: /Submit application/i }))
 
-    // Firestore subscription reports the new application mid-flight
-    stateRef.teamApplications = [{
-      id: 'app-1',
-      campaignId: 'spring2026',
-      name: 'Alex',
-      email: 'alex@test.com',
-      emailNormalized: 'alex@test.com',
-      uid: 'user-1',
-    }]
     rerender(<TeamApplicationPage />)
 
     expect(screen.queryByText('Already Applied!')).not.toBeInTheDocument()
@@ -528,10 +455,8 @@ describe('TeamApplicationPage', () => {
   })
 
   it('persists a draft to localStorage as the user fills the form', async () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     fireEvent.click(screen.getByText('Continue'))
     fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
@@ -549,10 +474,8 @@ describe('TeamApplicationPage', () => {
   })
 
   it('does not create a draft on a fresh page visit', async () => {
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
     await new Promise((r) => setTimeout(r, 450))
     const keys = Object.keys(localStorage).filter((k) => k.startsWith('teamApplicationDraft'))
@@ -563,10 +486,8 @@ describe('TeamApplicationPage', () => {
     localStorage.setItem('teamApplicationDraft:spring2026:anon', JSON.stringify({
       name: 'Alex', email: 'alex@test.com', step: 1, interests: [], roleRanking: [],
     }))
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
 
     await waitFor(() => expect(mockNotify).toHaveBeenCalledWith(expect.objectContaining({ title: 'Draft restored' })))
@@ -579,10 +500,8 @@ describe('TeamApplicationPage', () => {
     localStorage.setItem('teamApplicationDraft:spring2026:user-1', JSON.stringify({
       name: 'Alex', email: 'alex@test.com', step: 4, interests: [], roleRanking: [],
     }))
-    mockUseApp.mockReturnValue({
-      state: { ...defaultAppState, campaigns: [sampleCampaign] },
-      dispatch: jest.fn(),
-    })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+mockCampaigns([sampleCampaign])
 
     const fetchMock = jest.fn((url: string) =>
       url === '/api/login'

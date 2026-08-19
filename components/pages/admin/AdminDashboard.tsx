@@ -1,14 +1,17 @@
 'use client'
 
-
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Calendar,
   Users,
   FileText,
+  HelpCircle,
   TrendingUp,
+  UserRound,
   BriefcaseBusiness,
   Bot,
+  Inbox,
+  ChevronRight,
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/Card';
 import EventsTab from '@/components/pages/admin/tabs/EventsTab';
@@ -18,51 +21,87 @@ import FAQTab from '@/components/pages/admin/tabs/FAQTab';
 import BoardTab from '@/components/pages/admin/tabs/BoardTab'
 import ApplicationsTab from '@/components/pages/admin/tabs/ApplicationsTab';
 import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
-import FAQModal from '@/components/pages/admin/modals/FAQModal';
-import BlogModal from '@/components/pages/admin/modals/BlogModal';
-import GenerateBlogModal from '@/components/pages/admin/modals/GenerateBlogModal';
-import BoardPositionModal, { type BPositionFormState } from './modals/BoardPositionModal';
-import CampaignBuilderModal from '@/components/pages/admin/modals/CampaignBuilderModal';
-import { useApp } from '@/contexts/AppContext';
-import { updatePageMeta } from '@/utils/seo';
-import { addUsedNewsUrls, removeUsedNewsUrls } from '@/lib/firestore/blog-seen';
-import { BlogPost, Event, TeamMember, FAQ, BoardPosition, ApplicationCampaign } from '@/types';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
 import AISettingsTab from '@/components/pages/admin/tabs/AISettingsTab';
 import BlogAISettingsTab from '@/components/pages/admin/tabs/BlogAISettingsTab';
-import { listUsers } from '@/lib/firestore/users';
-import { auth } from '@/lib/firebase-client';
+import { useApp } from '@/contexts/AppContext';
+import { updatePageMeta } from '@/utils/seo';
 import { TabErrorBoundary } from '@/components/ui/TabErrorBoundary';
+import AdminStatusStrip from '@/components/pages/admin/AdminStatusStrip';
+import { useAdminOverview, type AdminTabKey } from '@/components/pages/admin/useAdminOverview';
+import { ANALYTICS_SUBTABS, type AnalyticsTabKey } from '@/components/pages/admin/tabs/analytics/useAnalyticsData';
 
 const ADMIN_TABS = ['events', 'team', 'blog', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
-type AdminTab = typeof ADMIN_TABS[number];
+
+type NavChild = { key: string; label: string };
+type NavItem = {
+  key: AdminTabKey;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+  children?: NavChild[];
+};
+
+const NAV_ITEMS: NavItem[] = [
+  { key: 'events', label: 'Events', icon: Calendar },
+  { key: 'team', label: 'Team', icon: Users },
+  {
+    key: 'blog', label: 'Blog', icon: FileText, children: [
+      { key: 'posts', label: 'Posts' },
+      { key: 'ai-settings', label: 'AI News Desk' },
+    ],
+  },
+  { key: 'faq', label: 'FAQ', icon: HelpCircle },
+  { key: 'analytics', label: 'Analytics', icon: TrendingUp, children: ANALYTICS_SUBTABS },
+  { key: 'members', label: 'Members', icon: UserRound },
+  { key: 'jobs', label: 'Jobs', icon: BriefcaseBusiness },
+  { key: 'ai-settings', label: 'AI Settings', icon: Bot },
+  { key: 'applications', label: 'Applications', icon: Inbox },
+];
 
 const AdminDashboard: React.FC = () => {
-  const { state, dispatch } = useApp();
-  const [nrUsers, setNrUsers] = useState<number>(0);
-  //const { user, logout } = useAdmin();
+  const { state } = useApp();
   const tabValues = ADMIN_TABS;
-  type Tab = AdminTab;
+  type Tab = AdminTabKey;
   // Restore the tab from the URL (?tab=...) or last-saved preference. Runs in
   // an effect so the initial render matches the server (avoids hydration
   // mismatch on /admin deep links) before syncing to the stored/URL tab.
   const [activeTab, setActiveTab] = useState<Tab>('events');
+  const [blogSubtab, setBlogSubtab] = useState<'posts' | 'ai-settings'>('posts');
+  const [analyticsSubtab, setAnalyticsSubtab] = useState<AnalyticsTabKey>('overview');
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
   useEffect(() => {
-    const fromUrl = new URL(window.location.href).searchParams.get('tab');
+    const params = new URL(window.location.href).searchParams;
+    const fromUrl = params.get('tab');
     if (tabValues.includes(fromUrl as Tab)) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveTab(fromUrl as Tab);
+      const sub = params.get('sub');
+      if (fromUrl === 'blog' && (sub === 'posts' || sub === 'ai-settings')) {
+         
+        setBlogSubtab(sub);
+      }
+      if (fromUrl === 'analytics' && ANALYTICS_SUBTABS.some((s) => s.key === sub)) {
+         
+        setAnalyticsSubtab(sub as AnalyticsTabKey);
+      }
       return;
     }
     const saved = localStorage.getItem('adminDashboardTab');
     if (tabValues.includes(saved as Tab)) {
+       
       setActiveTab(saved as Tab);
     }
+    try {
+      const savedExpanded = localStorage.getItem('adminDashboardExpanded');
+      if (savedExpanded) {
+         
+        setExpandedGroups(JSON.parse(savedExpanded));
+      }
+    } catch { /* ignore */ }
   }, [tabValues]);
   // The URL is owned by the restore effect until the user clicks a tab (avoids clobbering ?tab= before restore lands).
   const tabClicked = useRef(false);
-  const [blogSubtab, setBlogSubtab] = useState<'posts' | 'ai-settings'>('posts');
   // Slide direction for the tab-content transition: content enters from the
   // side the clicked tab is on relative to the currently active tab.
   const [slideFrom, setSlideFrom] = useState<'right' | 'left'>('right');
@@ -72,509 +111,175 @@ const AdminDashboard: React.FC = () => {
     setSlideFrom(nextIdx >= curIdx ? 'right' : 'left');
     tabClicked.current = true;
     setActiveTab(next);
+    if (NAV_ITEMS.some((i) => i.key === next && i.children)) {
+      setExpandedGroups((prev) => ({ ...prev, [next]: true }));
+    }
   };
-  const placeholderImage = '/images/logo-highdef.png';
-
-  // Modal states
-  const [showBlogModal, setShowBlogModal] = useState(false);
-  const [showGenerateBlogModal, setShowGenerateBlogModal] = useState(false);
-  const [showFaqModal, setShowFaqModal] = useState(false);
-  const [showBoardPositionModal, setShowBoardPositionModal] = useState(false);
-  const [editingItem, setEditingItem] = useState<Event | TeamMember | BlogPost | null>(null);
-  const [editingFaq, setEditingFaq] = useState<FAQ | null>(null);
-  const [editingBoardPosition, setEditingBoardPosition] = useState<BoardPosition | null>(null);
-  const [showCampaignModal, setShowCampaignModal] = useState(false);
-  const [editingCampaign, setEditingCampaign] = useState<ApplicationCampaign | null>(null);
-  const [blogForm, setBlogForm] = useState({
-    title: '',
-    excerpt: '',
-    content: '',
-    author: '',
-    image: '',
-    tags: [] as string[],
-    published: false
-  });
-
-
-  const [faqForm, setFaqForm] = useState<Pick<FAQ, 'question' | 'answer' | 'category' | 'order' | 'published'>>({
-    question: '',
-    answer: '',
-    category: 'General',
-    order: state.faqs.length + 1,
-    published: true,
-  });
-
-  const [boardPositionForm, setBoardPositionForm] = useState<BPositionFormState>({
-    title: '',
-    short: '',
-    description: ''
-  });
+  const setSub = (tab: Tab, sub: string) => {
+    if (tab === 'blog') setBlogSubtab(sub as 'posts' | 'ai-settings');
+    else if (tab === 'analytics') setAnalyticsSubtab(sub as AnalyticsTabKey);
+  };
+  const toggleGroup = (key: AdminTabKey) => {
+    setExpandedGroups((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+  const { items, loaded } = useAdminOverview();
 
   useEffect(() => {
     updatePageMeta('Admin Dashboard', 'Manage UU AI Society content and events');
-    (async () => {
-      setNrUsers((await listUsers()).length);
-    })();
   }, []);
 
   useEffect(() => {
     localStorage.setItem('adminDashboardTab', activeTab);
+    localStorage.setItem('adminDashboardExpanded', JSON.stringify(expandedGroups));
     if (!tabClicked.current) return;
     const url = new URL(window.location.href);
-    const current = url.searchParams.get('tab');
-    if (current !== activeTab) {
+    if (url.searchParams.get('tab') !== activeTab) {
       url.searchParams.set('tab', activeTab);
-      window.history.replaceState(null, '', url.toString());
     }
-  }, [activeTab]);
+    const sub = activeTab === 'blog' ? blogSubtab : activeTab === 'analytics' ? analyticsSubtab : null;
+    if (sub) url.searchParams.set('sub', sub);
+    else url.searchParams.delete('sub');
+    window.history.replaceState(null, '', url.toString());
+  }, [activeTab, blogSubtab, analyticsSubtab, expandedGroups]);
 
-  const stats = [
-    {
-      title: 'Total Events',
-      value: state.events.length,
-      icon: Calendar,
-      color: 'bg-blue-500'
-    },
-    {
-      title: 'Team Members',
-      value: state.teamMembers.length,
-      icon: Users,
-      color: 'bg-green-500'
-    },
-    {
-      title: 'Blog Posts',
-      value: state.blogPosts.length,
-      icon: FileText,
-      color: 'bg-purple-500'
-    },
-    {
-      title: 'Users registered',
-      value: nrUsers || 'N/A',
-      icon: TrendingUp,
-      color: 'bg-red-500'
-    },
-    {
-      title: 'Job Postings',
-      value: state.jobs.length,
-      icon: BriefcaseBusiness,
-      color: 'bg-yellow-500'
-    }
-  ];
-
-  const resetForms = () => {
-    setBlogForm({
-      title: '',
-      excerpt: '',
-      content: '',
-      author: '',
-      image: '',
-      tags: [],
-      published: false
-    });
-    setBoardPositionForm({
-      title: '',
-      short: '',
-      description: ''
-    });
-    setEditingItem(null);
-  };
-
-
-  const reviewerName = () => auth.currentUser?.displayName || auth.currentUser?.email || '';
-
-  // Seen-URL lifecycle: cited sources become "covered" at publish and are released on unpublish/delete.
-  const syncSeenUrlsForPost = (post: BlogPost) => {
-    const urls = (post.sources ?? []).map((s) => s.url).filter(Boolean);
-    if (urls.length === 0) return;
-    if (post.published) {
-      addUsedNewsUrls(urls).catch((e) => console.warn('Failed to mark post sources as used:', e));
-    } else {
-      removeUsedNewsUrls(urls).catch((e) => console.warn('Failed to release post sources:', e));
-    }
-  };
-
-  const handleAddBlogPost = () => {
-    const newPost = {
-      ...blogForm,
-      image: blogForm.image || placeholderImage,
-      date: new Date().toISOString().split('T')[0]
-    } as BlogPost;
-    if (newPost.published && newPost.authorType === 'ai' && !newPost.reviewedBy) {
-      newPost.reviewedBy = reviewerName();
-    }
-    dispatch({ firestoreAction: 'ADD_BLOG_POST', payload: newPost });
-    syncSeenUrlsForPost(newPost);
-    setShowBlogModal(false);
-    resetForms();
-  };
-
-  const handleAddFaq = () => {
-    const payload = { ...faqForm };
-    dispatch({ firestoreAction: 'ADD_FAQS', payload });
-    setShowFaqModal(false);
-    setFaqForm({ question: '', answer: '', category: 'General', order: state.faqs.length + 1, published: true });
-  };
-
-  const handleUpdateFaq = () => {
-    if (!editingFaq) return;
-    dispatch({ firestoreAction: 'UPDATE_FAQS', payload: { ...editingFaq, ...faqForm } as FAQ });
-    setShowFaqModal(false);
-    setEditingFaq(null);
-  };
-
-  const handleDeleteFaq = (id: string) => {
-    if (window.confirm('Delete this FAQ?')) {
-      dispatch({ firestoreAction: 'DELETE_FAQS', payload: id });
-    }
-  };
-
-  const handleAddBoardPosition = () => {
-    dispatch({ firestoreAction: 'ADD_BOARDPOS', payload: { ...boardPositionForm } });
-    setShowBoardPositionModal(false);
-    setBoardPositionForm({ title: '', short: '', description: '' });
-  };
-
-  const handleUpdateBoardPosition = () => {
-    if (!editingBoardPosition) return;
-    dispatch({
-      firestoreAction: 'UPDATE_BOARDPOS',
-      payload: { id: editingBoardPosition.id, ...boardPositionForm } as BoardPosition,
-    });
-    setShowBoardPositionModal(false);
-    setEditingBoardPosition(null);
-  };
-
-  const handleDeleteBoardPosition = (id: string) => {
-    if (window.confirm('Delete this Board Position?')) {
-      dispatch({ firestoreAction: 'DELETE_BOARDPOS', payload: id });
-    }
-  };
-
-  const handleDeleteBoardApplication = (id: string) => {
-    if (window.confirm('Delete this application record?')) {
-      dispatch({ firestoreAction: 'DELETE_BOARD_APPLICATION', payload: id });
-    }
-  };
-
-  const handleMoveBoardPosition = (positionId: string, direction: 'up' | 'down') => {
-    dispatch({ firestoreAction: 'MOVE_BOARDPOS', payload: { positionId, direction } });
-  };
-
-  const handleSaveCampaign = async (data: { id?: string; title: string; subtitle: string; description: string; deadline: string; status: 'open' | 'closed' | 'draft'; teams: string[]; roles: ApplicationCampaign['roles']; teamInfo?: Record<string, { name?: string; description?: string }>; enabledStandardFields: string[] }): Promise<string | undefined> => {
-    if (data.id) {
-      // Update existing
-      dispatch({ firestoreAction: 'UPDATE_CAMPAIGN', payload: { id: data.id, title: data.title, subtitle: data.subtitle, description: data.description, deadline: data.deadline, status: data.status, teams: data.teams, roles: data.roles, teamInfo: data.teamInfo, enabledStandardFields: data.enabledStandardFields } as ApplicationCampaign });
-      return data.id;
-    } else {
-      // Add new — dispatch returns the doc id
-      const id = await dispatch({ firestoreAction: 'ADD_CAMPAIGN', payload: { title: data.title, subtitle: data.subtitle, description: data.description, deadline: data.deadline, status: data.status, teams: data.teams, roles: data.roles, teamInfo: data.teamInfo, enabledStandardFields: data.enabledStandardFields } });
-      return typeof id === 'string' ? id : undefined;
-    }
-  };
-
-  const handleDeleteCampaign = (id: string) => {
-    if (window.confirm('Delete this campaign and all its custom questions? Submissions will remain in Firestore.')) {
-      dispatch({ firestoreAction: 'DELETE_CAMPAIGN', payload: id });
-    }
-  };
-
-  const handleDeleteTeamApplication = (id: string, emailNormalized: string, campaignId: string) => {
-    if (window.confirm('Delete this submission?')) {
-      import('@/lib/firestore/teamApplications').then((mod) =>
-        mod.deleteTeamApplicationWithLimits(id, emailNormalized, campaignId)
-      ).catch(console.error);
-    }
-  };
-
-  const handleEditBlogPost = (post: BlogPost) => {
-    setEditingItem(post);
-    setBlogForm({
-      title: post.title,
-      excerpt: post.excerpt,
-      content: post.content,
-      author: post.author,
-      image: post.image,
-      tags: post.tags,
-      published: post.published
-    });
-    setShowBlogModal(true);
-  };
-
-  const handleUpdateBlogPost = () => {
-    if (editingItem) {
-      const updatedPost = { ...editingItem, ...blogForm } as BlogPost;
-      if (updatedPost.published && updatedPost.authorType === 'ai' && !updatedPost.reviewedBy) {
-        updatedPost.reviewedBy = reviewerName();
-      }
-      dispatch({ firestoreAction: 'UPDATE_BLOG_POST', payload: updatedPost });
-      syncSeenUrlsForPost(updatedPost);
-      setShowBlogModal(false);
-      resetForms();
-    }
-  };
-
-
-  const handleDeleteBlogPost = (postId: string) => {
-    if (window.confirm('Are you sure you want to delete this blog post?')) {
-      dispatch({ firestoreAction: 'DELETE_BLOG_POST', payload: postId });
-    }
-  };
-
-  const toggleBlogPostVisibility = (post: BlogPost) => {
-    const payload: BlogPost = { ...post, published: !post.published };
-    if (payload.published && post.authorType === 'ai' && !post.reviewedBy) {
-      payload.reviewedBy = reviewerName();
-    }
-    dispatch({ firestoreAction: 'UPDATE_BLOG_POST', payload });
-    syncSeenUrlsForPost(payload);
-  };
-
-  const toggleBlogPostFeatured = (post: BlogPost) => {
-    dispatch({ firestoreAction: 'UPDATE_BLOG_POST', payload: { ...post, featured: !post.featured } });
-  };
-
-  const handleDraftCreated = async (draftId: string) => {
-    setShowGenerateBlogModal(false);
-    try {
-      const mod = await import('@/lib/firestore/blog');
-      const post = await mod.getBlogPostById(draftId);
-      if (post) {
-        handleEditBlogPost(post);
-      }
-    } catch (e) {
-      console.error('Failed to load generated draft:', e);
-    }
-  };
+  const isSubActive = (parent: NavItem, childKey: string) =>
+    activeTab === parent.key &&
+    (parent.key === 'blog' ? blogSubtab === childKey : analyticsSubtab === childKey);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-4 pt-20 md:py-8 md:pt-24">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background transition-colors pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="mb-4 md:mb-8 flex justify-between items-start gap-4">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Admin Dashboard</h1>
-            <p className="text-gray-600 dark:text-gray-300">Manage your UU AI Society content and events</p>
-          </div>
+        <div className="mb-6">
+          <h1 className="text-2xl md:text-3xl font-semibold tracking-[-0.032em] text-foreground">Admin Dashboard</h1>
+          <p className="text-muted-foreground text-sm mt-1">Manage your UU AI Society content and events</p>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-6 mb-4 md:mb-8 items-center">
-          {stats.map((stat, index) => (
-            <Card key={index} className="h-full">
-              <CardContent className="pl-6 pr-6 pt-6 h-full">
-                <div className="flex items-center h-full">
-                  <div className={`p-3 rounded-lg ${stat.color} text-white mr-4`}>
-                    <stat.icon className="h-6 w-6" />
+        {/* What needs attention */}
+        <AdminStatusStrip items={items} loaded={loaded} onNavigate={changeTab} />
+
+        {/* Sidebar + content */}
+        <div className="mt-8 lg:grid lg:grid-cols-[13rem_1fr] lg:gap-8 lg:items-start">
+          <nav aria-label="Admin sections" className="flex lg:flex-col gap-1 overflow-x-auto pb-2 mb-6 lg:mb-0 lg:pb-0 lg:sticky lg:top-20 [mask-image:linear-gradient(to_right,black_88%,transparent)] lg:[mask-image:none]">
+            {NAV_ITEMS.map((item) => {
+              const { key, label, icon: Icon, children } = item;
+              const isOpen = expandedGroups[key] !== false && (activeTab === key || expandedGroups[key] === true);
+              const isActive = activeTab === key;
+              return (
+                <div key={key} className="shrink-0">
+                  <div className={`flex items-center rounded-md transition-colors duration-200 ${isActive ? 'bg-primary/10' : 'hover:bg-foreground/[0.04]'}`}>
+                    <button
+                      onClick={() => changeTab(key)}
+                      className={`flex items-center gap-2.5 flex-1 px-3 py-3 rounded-md text-sm transition-colors duration-200 cursor-pointer ${
+                        isActive ? 'text-primary font-medium' : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      <Icon className="h-4 w-4 shrink-0" aria-hidden />
+                      {label}
+                    </button>
+                    {children && (
+                      <button
+                        type="button"
+                        onClick={() => toggleGroup(key)}
+                        aria-label={`${isOpen ? 'Collapse' : 'Expand'} ${label}`}
+                        aria-expanded={isOpen}
+                        className="p-2 mr-1 rounded-md text-muted-foreground hover:text-foreground cursor-pointer"
+                      >
+                        <ChevronRight className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`} />
+                      </button>
+                    )}
                   </div>
-                  <div>
-                    <p className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">{stat.title}</p>
-                  </div>
+                  {children && isOpen && (
+                    <div className="ml-4 lg:ml-3 border-l border-border pl-2 lg:pl-3 space-y-0.5 my-1">
+                      {children.map((child) => {
+                        const subActive = isSubActive(item, child.key);
+                        return (
+                          <button
+                            key={child.key}
+                            onClick={() => { setSub(key, child.key); changeTab(key); }}
+                            aria-current={subActive ? "page" : undefined}
+                            className={`flex items-center w-full px-3 py-2 rounded-md text-sm transition-colors duration-200 cursor-pointer ${
+                              subActive
+                                ? 'bg-primary/10 text-primary font-medium'
+                                : 'text-muted-foreground hover:text-foreground hover:bg-foreground/[0.04]'
+                            }`}
+                          >
+                            {child.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
+
+          <div className="min-w-0">
+            <Card variant="elevated" className="p-4 md:p-6">
+              <CardContent className="p-0">
+                <div
+                  key={`${activeTab}-${activeTab === 'blog' ? blogSubtab : activeTab === 'analytics' ? analyticsSubtab : ''}`}
+                  className={`animate-in fade-in duration-300 ease-out ${slideFrom === 'right' ? 'slide-in-from-right-4' : 'slide-in-from-left-4'}`}
+                >
+                  {activeTab === 'events' && (
+                    <TabErrorBoundary name="Events">
+                      <EventsTab events={state.events} />
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'jobs' && (
+                    <TabErrorBoundary name="Jobs">
+                      <JobsTab />
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'team' && (
+                    <TabErrorBoundary name="Team">
+                      <TeamTab members={state.teamMembers} />
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'blog' && (
+                    <TabErrorBoundary name="Blog">
+                      {blogSubtab === 'posts' ? (
+                        <BlogTab />
+                      ) : (
+                        <BlogAISettingsTab />
+                      )}
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'analytics' && (
+                    <TabErrorBoundary name="Analytics">
+                      <AnalyticsTab activeSubtab={analyticsSubtab} onSelectSubtab={(k) => setAnalyticsSubtab(k)} />
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'faq' && (
+                    <TabErrorBoundary name="FAQ">
+                      <FAQTab />
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'board-applications' && (
+                    <TabErrorBoundary name="Board Applications">
+                      <BoardTab />
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'members' && (
+                    <TabErrorBoundary name="Members">
+                      <MembersTab />
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'ai-settings' && (
+                    <TabErrorBoundary name="AI Settings">
+                      <AISettingsTab />
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'applications' && (
+                    <TabErrorBoundary name="Applications">
+                      <ApplicationsTab />
+                    </TabErrorBoundary>
+                  )}
                 </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
-
-        {/* Navigation Tabs */}
-        <div className="overflow-x-auto mb-4 md:mb-8">
-          <div className="pb-4 border-b border-gray-200 dark:border-gray-700">
-            <nav className="-mb-px flex space-x-8 md:space-x-12">
-              {([
-                { key: 'events', label: 'Events', icon: Calendar },
-                { key: 'team', label: 'Team', icon: Users },
-                { key: 'blog', label: 'Blog', icon: FileText },
-                { key: 'faq', label: 'FAQ', icon: FileText },
-                { key: 'analytics', label: 'Analytics', icon: TrendingUp },
-                { key: 'members', label: 'Members', icon: Users },
-                { key: 'jobs', label: 'Jobs', icon: BriefcaseBusiness },
-                { key: 'ai-settings', label: 'AI Settings', icon: Bot },
-                { key: 'applications', label: 'Applications', icon: Users },
-                // { key: 'board-applications', label: "GA'26 Board Applications", icon: Users},
-              ] as const).map(({ key, label, icon: Icon }) => (
-                <button
-                  key={key}
-                  onClick={() => changeTab(key)}
-                  className={`cursor-pointer flex items-center py-2 px-3 border-b-2 font-medium text-sm transition-all duration-200 ease-in-out ${activeTab === key
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'
-                    }`}
-                >
-                  <Icon className="h-4 w-4 mr-2" />
-                  {label}
-                </button>
-              ))}
-            </nav>
           </div>
-        </div>
-
-        {/* Tab Content */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 md:p-6">
-          <div
-            key={activeTab}
-            className={`animate-in fade-in duration-300 ease-out ${slideFrom === 'right' ? 'slide-in-from-right-4' : 'slide-in-from-left-4'}`}
-          >
-          {activeTab === 'events' && (
-            <TabErrorBoundary name="Events">
-              <EventsTab
-                events={state.events}
-                onManageQuestions={() => { }}
-                onViewRegistrations={() => { }}
-              />
-            </TabErrorBoundary>
-          )}
-          {activeTab === 'jobs' && (
-            <TabErrorBoundary name="Jobs">
-              <JobsTab />
-            </TabErrorBoundary>
-          )}
-          {activeTab === 'team' && (
-            <TabErrorBoundary name="Team">
-              <TeamTab
-                members={state.teamMembers}
-              />
-            </TabErrorBoundary>
-          )}
-          {activeTab === 'blog' && (
-            <TabErrorBoundary name="Blog">
-              <div className="flex bg-foreground/[0.05] rounded-md p-1 gap-1 mb-6 w-fit">
-                {([
-                  ['posts', 'Posts'],
-                  ['ai-settings', 'AI News Desk'],
-                ] as const).map(([key, label]) => (
-                  <button
-                    key={key}
-                    type="button"
-                    aria-pressed={blogSubtab === key}
-                    onClick={() => setBlogSubtab(key)}
-                    className={`px-4 py-2 rounded text-sm font-medium transition-colors duration-300 ${
-                      blogSubtab === key
-                        ? 'bg-primary text-primary-foreground'
-                        : 'text-foreground/60 hover:text-foreground'
-                    }`}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-              {blogSubtab === 'posts' ? (
-                <BlogTab
-                  posts={state.blogPosts}
-                  onAddClick={() => setShowBlogModal(true)}
-                  onGenerateClick={() => setShowGenerateBlogModal(true)}
-                  onEdit={(post) => handleEditBlogPost(post)}
-                  onDelete={(id) => handleDeleteBlogPost(id)}
-                  onTogglePublish={(post) => toggleBlogPostVisibility(post)}
-                  onToggleFeatured={toggleBlogPostFeatured}
-                />
-              ) : (
-                <BlogAISettingsTab />
-              )}
-            </TabErrorBoundary>
-          )}
-          {activeTab === 'analytics' && (
-            <TabErrorBoundary name="Analytics">
-              <AnalyticsTab />
-            </TabErrorBoundary>
-          )}
-          {activeTab === 'faq' && (
-            <TabErrorBoundary name="FAQ">
-              <FAQTab
-                faqs={state.faqs}
-                onAddClick={() => { setEditingFaq(null); setFaqForm({ question: '', answer: '', category: 'General', order: state.faqs.length + 1, published: true }); setShowFaqModal(true); }}
-                onEdit={(faq) => { setEditingFaq(faq); setFaqForm({ question: faq.question, answer: faq.answer, category: faq.category, order: faq.order, published: faq.published }); setShowFaqModal(true); }}
-                onDelete={(id) => handleDeleteFaq(id)}
-              />
-            </TabErrorBoundary>
-          )}
-          {activeTab === 'board-applications' && (
-            <TabErrorBoundary name="Board Applications">
-              <BoardTab
-                applicants={state.applicants} 
-                boardPositions={state.boardPositions}
-                onAddClick={() => { setEditingBoardPosition(null); setBoardPositionForm({ title: '', short: '', description: '' }); setShowBoardPositionModal(true); }}
-                onEdit={(position) => { setEditingBoardPosition(position); setBoardPositionForm({ title: position.title, short: position.short, description: position.description }); setShowBoardPositionModal(true); }}
-                onDeletePosition={handleDeleteBoardPosition}
-                onDeleteApplicant={handleDeleteBoardApplication}
-                onMovePosition={handleMoveBoardPosition}
-              />
-            </TabErrorBoundary>
-          )}
-          {activeTab === 'members' && (
-            <TabErrorBoundary name="Members">
-              <MembersTab onChanged={() => { /* could trigger toast */ }} />
-            </TabErrorBoundary>
-          )}
-          {activeTab === 'ai-settings' && (
-            <TabErrorBoundary name="AI Settings">
-              <AISettingsTab />
-            </TabErrorBoundary>
-          )}
-          {activeTab === 'applications' && (
-            <TabErrorBoundary name="Applications">
-              <ApplicationsTab
-                campaigns={state.campaigns}
-                applications={state.teamApplications}
-                onAddCampaign={() => { setEditingCampaign(null); setShowCampaignModal(true); }}
-                onEditCampaign={(c) => { setEditingCampaign(c); setShowCampaignModal(true); }}
-                onDeleteCampaign={handleDeleteCampaign}
-                onUpdateCampaignStatus={(id, status) => dispatch({ firestoreAction: 'UPDATE_CAMPAIGN', payload: { id, status } })}
-                onDeleteApplication={handleDeleteTeamApplication}
-              />
-            </TabErrorBoundary>
-          )}
-          </div>
-
-          {/* Blog Modal */}
-          <BlogModal
-            open={showBlogModal}
-            editing={!!editingItem}
-            form={blogForm}
-            setForm={setBlogForm}
-            onClose={() => { setShowBlogModal(false); resetForms(); }}
-            onSubmit={() => {
-              if (editingItem) {
-                handleUpdateBlogPost();
-              } else {
-                handleAddBlogPost();
-              }
-            }}
-          />
-
-          <GenerateBlogModal
-            open={showGenerateBlogModal}
-            onClose={() => setShowGenerateBlogModal(false)}
-            onDraftCreated={handleDraftCreated}
-          />
-
-          <FAQModal
-            open={showFaqModal}
-            onClose={() => { setShowFaqModal(false); setEditingFaq(null); }}
-            form={faqForm}
-            setForm={setFaqForm}
-            editing={!!editingFaq}
-            onAdd={handleAddFaq}
-            onUpdate={handleUpdateFaq}
-          />
-
-          <BoardPositionModal
-            open={showBoardPositionModal}
-            onClose={() => { setShowBoardPositionModal(false); setEditingBoardPosition(null); }}
-            form={boardPositionForm}
-            setForm={setBoardPositionForm}
-            editing={!!editingBoardPosition}
-            onAdd={handleAddBoardPosition}
-            onUpdate={handleUpdateBoardPosition}
-          />
-
-          <CampaignBuilderModal
-            open={showCampaignModal}
-            campaign={editingCampaign}
-            isNew={!editingCampaign}
-            onClose={() => { setShowCampaignModal(false); setEditingCampaign(null); }}
-            onSaveCampaign={handleSaveCampaign}
-          />
-
         </div>
       </div>
     </div>

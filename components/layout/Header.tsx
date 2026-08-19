@@ -6,10 +6,10 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAdmin } from '@/hooks/useAdmin';
-import { useApp } from '@/contexts/AppContext';
 import { useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { loginUrl } from '@/lib/login-redirect';
+import { useOpenCampaigns } from '@/lib/firestore/useOpenCampaigns';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -33,7 +33,6 @@ const BetaBadge: React.FC = () => (
 );
 
 export const Header: React.FC = () => {
-  const { state } = useApp();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
@@ -53,7 +52,8 @@ export const Header: React.FC = () => {
 
   // Hide the Apply CTA when no open application campaign exists (show it while
   // campaigns are still loading to avoid a flicker on first paint).
-  const showApply = !state.campaignsLoaded || state.campaigns.some((c) => c.status === 'open');
+  const { campaigns, loaded: campaignsLoaded } = useOpenCampaigns();
+  const showApply = !campaignsLoaded || campaigns.some((c) => c.status === 'open');
 
   // Rendered from the persisted identity so the name survives a reload instead
   // of blanking while Firebase re-resolves the session.

@@ -147,7 +147,7 @@ const updatedMember = {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Team Management</h2>
+        <h2 className="text-xl font-semibold tracking-[-0.028em] text-foreground">Team</h2>
         <Button variant="outline" icon={Plus} onClick={handleAddClick}>Add Team Member</Button>
       </div>
 
@@ -157,8 +157,8 @@ const updatedMember = {
             onClick={() => setActiveYear(null)}
             className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
               activeYear === null
-                ? 'bg-red-600 text-white'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                ? 'bg-primary text-primary-foreground'
+                : 'bg-foreground/[0.06] text-muted-foreground hover:bg-foreground/[0.1] hover:text-foreground'
             }`}
           >
             All ({sortedMembers.length})
@@ -169,8 +169,8 @@ const updatedMember = {
               onClick={() => setActiveYear(year)}
               className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 activeYear === year
-                  ? 'bg-red-600 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-foreground/[0.06] text-muted-foreground hover:bg-foreground/[0.1] hover:text-foreground'
               }`}
             >
               {year} ({sortedMembers.filter(m => m.years?.includes(year)).length})
@@ -180,8 +180,11 @@ const updatedMember = {
       )}
 
       <div className="grid md:grid-cols-2 gap-6">
+        {filteredMembers.length === 0 && (
+          <p className="text-sm text-muted-foreground py-8 text-center md:col-span-2">No team members here yet — add one to get started.</p>
+        )}
         {filteredMembers.map((member, index) => (
-          <Card key={member.id} className="bg-gray-50 dark:bg-gray-800 text-black dark:text-white">
+          <Card key={member.id}>
             <CardContent className="p-6">
               <div className="flex items-start space-x-4">
                 <Image
@@ -193,22 +196,22 @@ const updatedMember = {
                 />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{member.name}</h3>
+                    <h3 className="text-lg font-semibold text-foreground">{member.name}</h3>
                     {member.badge && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
                         {member.badge}
                       </span>
                     )}
                   </div>
-                  <p className="text-red-600 font-medium mb-1">{member.position}</p>
+                  <p className="text-primary font-medium mb-1">{member.position}</p>
                   {member.teams && member.teams.length > 0 && (
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                    <p className="text-xs text-muted-foreground mb-1">
                       Teams: {member.teams.map(t => TEAM_CATEGORY_LABELS[t as keyof typeof TEAM_CATEGORY_LABELS] || t).join(', ')}
                       {member.years && member.years.length > 0 && ` · ${member.years.join(', ')}`}
                     </p>
                   )}
                   {member.bio && (
-                    <p className="text-gray-600 text-sm line-clamp-2 dark:text-gray-400">{member.bio}</p>
+                    <p className="text-muted-foreground text-sm line-clamp-2">{member.bio}</p>
                   )}
                   {member.notes && (
                     <p className="text-xs text-muted-foreground italic mt-1 truncate">Note: {member.notes}</p>

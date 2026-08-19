@@ -45,6 +45,19 @@ async function withSeed<T>(build: (seed: PublicSeed) => T) {
   }
 }
 
+/** Board positions + open campaigns are admin-facing data, fetched directly (not via the public SSR seed). */
+async function getPositionsAndCampaigns() {
+  const { adminDb } = await import('@/lib/firebase-admin');
+  const [positionsSnap, campaignsSnap] = await Promise.all([
+    adminDb.collection('board-positions').orderBy('order', 'asc').get(),
+    adminDb.collection('applicationCampaigns').where('status', '==', 'open').get(),
+  ]);
+  return {
+    positions: positionsSnap.docs.map((d) => ({ id: d.id, ...d.data() })),
+    campaigns: campaignsSnap.docs.map((d) => ({ id: d.id, ...d.data() })),
+  };
+}
+
 export function createUuaisMcpServer(): McpServer {
   const server = new McpServer(
     { name: 'uuais-admin', version: '0.1.0' },
@@ -148,8 +161,15 @@ export function createUuaisMcpServer(): McpServer {
       inputSchema: z.object({}),
       annotations: READ_ONLY_ANNOTATIONS,
     },
-    async () =>
-      withSeed((seed) => ({ positions: seed.boardPositions, campaigns: seed.campaigns })),
+    async () => {
+      try {
+        const { positions, campaigns } = await getPositionsAndCampaigns();
+        return jsonText({ positions, campaigns });
+      } catch (error) {
+        console.error('[mcp] getPositionsAndCampaigns failed:', error);
+        return jsonText({ available: false });
+      }
+    },
   );
 
   server.registerTool(
@@ -164,21 +184,26 @@ export function createUuaisMcpServer(): McpServer {
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
-    async ({ eventLimit }) =>
-      withSeed((seed) => {
+    async ({ eventLimit }) => {
+      try {
+        const [seed, { positions, campaigns }] = await Promise.all([getPublicSeedForMcp(), getPositionsAndCampaigns()]);
         const now = new Date().toISOString();
-        return {
+        return jsonText({
           overview: {
             available: true,
             upcomingEvents: seed.events.filter((e) => e.eventStartAt >= now).slice(0, eventLimit),
-            boardPositions: seed.boardPositions,
-            openCampaigns: seed.campaigns,
+            boardPositions: positions,
+            openCampaigns: campaigns,
             openJobs: seed.jobs.length,
             faqCount: seed.faqs.length,
             teamCount: seed.teamMembers.length,
           },
-        };
-      }),
+        });
+      } catch (error) {
+        console.error('[mcp] getUuaisOverview failed:', error);
+        return jsonText({ available: false });
+      }
+    },
   );
 
   server.registerTool(
