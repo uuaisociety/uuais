@@ -58,7 +58,7 @@ const MembersTab: React.FC<Props> = ({ memberAnalytics, chartData, eventMarkers 
       {memberAnalytics && (
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
-            <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">How users heard of us</h4></CardHeader>
+            <CardHeader><h4 className="font-semibold text-foreground">How users heard of us</h4></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={topN(memberAnalytics.heardOfUs, 6)} layout="vertical" margin={{ left: 20, right: 20 }}>
@@ -72,7 +72,7 @@ const MembersTab: React.FC<Props> = ({ memberAnalytics, chartData, eventMarkers 
             </CardContent>
           </Card>
           <Card>
-            <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Gender balance</h4></CardHeader>
+            <CardHeader><h4 className="font-semibold text-foreground">Gender balance</h4></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={topN(memberAnalytics.gender, 8)} margin={{ left: 20, right: 20 }}>
@@ -86,7 +86,7 @@ const MembersTab: React.FC<Props> = ({ memberAnalytics, chartData, eventMarkers 
             </CardContent>
           </Card>
           <Card>
-            <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Student status</h4></CardHeader>
+            <CardHeader><h4 className="font-semibold text-foreground">Student status</h4></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
                 <BarChart data={topN(memberAnalytics.studentStatus, 8)} margin={{ left: 20, right: 20 }}>
@@ -100,7 +100,7 @@ const MembersTab: React.FC<Props> = ({ memberAnalytics, chartData, eventMarkers 
             </CardContent>
           </Card>
           <Card>
-            <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Users over time</h4></CardHeader>
+            <CardHeader><h4 className="font-semibold text-foreground">Users over time</h4></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={chartData} margin={{ left: 10, right: 10 }}>
@@ -117,7 +117,7 @@ const MembersTab: React.FC<Props> = ({ memberAnalytics, chartData, eventMarkers 
                 </LineChart>
               </ResponsiveContainer>
               {eventMarkers.length > 0 && (
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Orange dashed lines mark months with events.</p>
+                <p className="text-xs text-muted-foreground mt-1">Orange dashed lines mark months with events.</p>
               )}
             </CardContent>
           </Card>

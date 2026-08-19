@@ -118,9 +118,9 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
             <InputBase type="text" value={form.position} onChange={(e) => setForm(prev => ({ ...prev, position: e.target.value }))} required />
           </FieldGroup>
           <FieldGroup label="Teams">
-            <div className="grid grid-cols-2 gap-1.5 p-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-700">
+            <div className="grid grid-cols-2 gap-1.5 p-2 border border-border rounded-md bg-card">
               {TEAM_CATEGORIES.map(cat => (
-                <label key={cat} className="flex items-center gap-2 text-sm text-gray-900 dark:text-white cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-600 rounded px-1 py-0.5">
+                <label key={cat} className="flex items-center gap-2 text-sm text-foreground cursor-pointer hover:bg-foreground/[0.05] rounded px-1 py-0.5">
                   <input
                     type="checkbox"
                     checked={form.teams.includes(cat)}
@@ -142,7 +142,7 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
             onChange={(e) => setForm(prev => ({ ...prev, badge: e.target.value }))}
             placeholder="e.g. Head of, Lead, Chairman"
           />
-          <p className="text-xs text-gray-500 mt-1">Shown as a small colored chip on the public card</p>
+          <p className="text-xs text-muted-foreground mt-1">Shown as a small colored chip on the public card</p>
         </FieldGroup>
 
         <FieldGroup label="Bio (optional)">
@@ -158,7 +158,7 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
             uploading={uploading}
             deleting={deleting}
           />
-          <p className="text-xs text-gray-500">Optional; a placeholder will be used if empty</p>
+          <p className="text-xs text-muted-foreground">Optional; a placeholder will be used if empty</p>
         </FieldGroup>
         <FieldGroup label="LinkedIn URL (optional)">
           <InputBase type="url" value={form.linkedin} onChange={(e) => setForm(prev => ({ ...prev, linkedin: e.target.value }))} />
@@ -185,7 +185,7 @@ const TeamModal: React.FC<TeamModalProps> = ({ open, editing, form, setForm, onC
               onBlur={handleYearsBlur}
               placeholder="e.g. 2025, 2026, 2027"
             />
-            <p className="text-xs text-gray-500 mt-1">Comma-separated years. Leave empty for "always visible".</p>
+            <p className="text-xs text-muted-foreground mt-1">Comma-separated years. Leave empty for "always visible".</p>
           </FieldGroup>
         </div>
 

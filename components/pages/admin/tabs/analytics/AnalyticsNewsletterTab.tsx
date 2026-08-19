@@ -39,7 +39,7 @@ const NewsletterTab: React.FC<Props> = ({ blogs, blogReads }) => {
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Blog Engagement</h3>
+          <h3 className="text-lg font-semibold text-foreground">Blog Engagement</h3>
           <Button size="sm" variant="outline" icon={Download} onClick={downloadNewsletterCsv}>CSV</Button>
         </div>
       </CardHeader>
@@ -47,7 +47,7 @@ const NewsletterTab: React.FC<Props> = ({ blogs, blogReads }) => {
         <div className="overflow-x-auto">
           <table className="min-w-full text-sm">
             <thead>
-              <tr className="text-left text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
+              <tr className="text-left text-muted-foreground border-b border-border">
                 <th className="py-2 pr-4">Title</th>
                 <th className="py-2 pr-4">Date</th>
                 <th className="py-2 pr-4">Reads</th>
@@ -58,9 +58,9 @@ const NewsletterTab: React.FC<Props> = ({ blogs, blogReads }) => {
             </thead>
             <tbody>
               {blogs.map((b) => (
-                <tr key={b.id} className="border-b border-gray-100 dark:border-gray-700/50">
-                  <td className="py-2 pr-4 font-medium text-gray-900 dark:text-white">{b.title}</td>
-                  <td className="py-2 pr-4 text-gray-700 dark:text-gray-300">{b.date}</td>
+                <tr key={b.id} className="border-b border-border">
+                  <td className="py-2 pr-4 font-medium text-foreground">{b.title}</td>
+                  <td className="py-2 pr-4 text-foreground/80">{b.date}</td>
                   <td className="py-2 pr-4">{blogReads[b.id] ?? 0}</td>
                   <td className="py-2 pr-4">{reactions[b.id]?.likes ?? 0}</td>
                   <td className="py-2 pr-4">{reactions[b.id]?.dislikes ?? 0}</td>
@@ -68,12 +68,12 @@ const NewsletterTab: React.FC<Props> = ({ blogs, blogReads }) => {
                 </tr>
               ))}
               {blogs.length === 0 && (
-                <tr><td colSpan={6} className="py-4 text-gray-500 dark:text-gray-400 text-center">No posts found</td></tr>
+                <tr><td colSpan={6} className="py-4 text-muted-foreground text-center">No posts found</td></tr>
               )}
             </tbody>
           </table>
         </div>
-        <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+        <p className="mt-3 text-xs text-muted-foreground">
           Reads are deduped per device. Likes, dislikes and shares feed the AI News Desk&apos;s generation feedback.
         </p>
       </CardContent>

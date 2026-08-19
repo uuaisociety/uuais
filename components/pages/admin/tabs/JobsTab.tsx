@@ -109,7 +109,7 @@ const JobsTab: React.FC = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Jobs Management</h2>
+        <h2 className="text-xl font-semibold tracking-[-0.028em] text-foreground">Jobs</h2>
         <Button variant="outline" icon={Plus} onClick={handleOpenNew}>New Job</Button>
       </div>
 
@@ -120,7 +120,7 @@ const JobsTab: React.FC = () => {
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2 flex-wrap">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{job.title}</h3>
+                    <h3 className="text-lg font-semibold text-foreground">{job.title}</h3>
                     <Tag variant="red" size="sm">{job.company}</Tag>
                     <Tag variant="yellow" size="sm">{job.type.replace('_', ' ')}</Tag>
                     {job.location && <Tag variant="green" size="sm">{job.location}</Tag>}
@@ -128,7 +128,7 @@ const JobsTab: React.FC = () => {
                       {job.published ? 'Published' : 'Draft'}
                     </Tag>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400 mb-2 line-clamp-3">{job.description}</p>
+                  <p className="text-muted-foreground mb-2 line-clamp-3">{job.description}</p>
                   {Array.isArray(job.tags) && job.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {job.tags.map((t, i) => (
@@ -153,7 +153,7 @@ const JobsTab: React.FC = () => {
           </Card>
         ))}
         {jobs.length === 0 && (
-          <div className="text-gray-600 dark:text-gray-300">No jobs yet. Click &quot;New Job&quot; to add one.</div>
+          <div className="text-muted-foreground py-8 text-center">No jobs yet. Click &quot;New Job&quot; to add one.</div>
         )}
       </div>
 

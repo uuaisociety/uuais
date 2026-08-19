@@ -51,8 +51,8 @@ export const Row: React.FC<{
   value: string | number;
 }> = ({ label, value }) => (
   <div className="flex justify-between text-sm">
-    <span className="text-gray-600 dark:text-gray-400">{label}</span>
-    <span className="font-semibold text-gray-900 dark:text-white">{value}</span>
+    <span className="text-muted-foreground">{label}</span>
+    <span className="font-semibold text-foreground">{value}</span>
   </div>
 );
 
@@ -62,8 +62,8 @@ export const StatCard: React.FC<{ title: string; value: number }> = ({
 }) => (
   <Card>
     <CardContent className="p-4 flex items-center justify-between">
-      <span className="text-sm text-gray-600 dark:text-gray-400">{title}</span>
-      <span className="text-xl font-bold text-gray-900 dark:text-white">
+      <span className="text-sm text-muted-foreground">{title}</span>
+      <span className="text-xl font-bold text-foreground">
         {value}
       </span>
     </CardContent>

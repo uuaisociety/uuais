@@ -80,7 +80,7 @@ const JobModal: React.FC<JobModalProps> = ({ open, editing, form, setForm, onClo
 
         <div className="flex items-center gap-2">
           <input id="job-published" type="checkbox" checked={!!form.published} onChange={(e) => setForm(prev => ({ ...prev, published: e.target.checked }))} />
-          <label htmlFor="job-published" className="text-gray-700 dark:text-white">Published</label>
+          <label htmlFor="job-published" className="text-foreground/80">Published</label>
         </div>
 
         <div className="flex justify-end space-x-3 pt-4">

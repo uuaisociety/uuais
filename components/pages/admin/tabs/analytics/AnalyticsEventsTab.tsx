@@ -29,12 +29,12 @@ const statusLabel: Record<string, string> = {
 };
 
 const statusColor: Record<string, string> = {
-  registered: "text-blue-600",
+  registered: "text-primary",
   waitlist: "text-amber-600",
   invited: "text-purple-600",
   confirmed: "text-green-600",
   declined: "text-red-600",
-  cancelled: "text-gray-500",
+  cancelled: "text-muted-foreground",
 };
 
 const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
@@ -87,22 +87,22 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
           onClick={closeDetail}
           variant="outline"
           size="sm"
-          className="cursor-pointer inline-flex items-center gap-1.5 text-sm bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition-all duration-200"
+          className="cursor-pointer inline-flex items-center gap-1.5 text-sm bg-foreground/[0.08] hover:bg-foreground/[0.12] text-muted-foreground hover:text-foreground transition-all duration-200"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to all events
         </Button>
 
-        <h3 className="text-xl font-bold text-gray-900 dark:text-white">{selectedEvent.title}</h3>
+        <h3 className="text-xl font-bold text-foreground">{selectedEvent.title}</h3>
 
         {detailLoading && (
           <div className="animate-pulse space-y-6">
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
               {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="bg-gray-200 dark:bg-gray-700 rounded-lg h-20" />
+                <div key={i} className="bg-foreground/[0.06] rounded-lg h-20" />
               ))}
             </div>
-            <div className="bg-gray-200 dark:bg-gray-700 rounded-lg h-64" />
+            <div className="bg-foreground/[0.06] rounded-lg h-64" />
           </div>
         )}
 
@@ -113,10 +113,10 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
               {Object.entries(detailData.statusCounts).map(([status, count]) => (
                 <Card key={status}>
                   <CardContent className="p-4 text-center">
-                    <p className={`text-lg font-bold ${statusColor[status] || "text-gray-900 dark:text-white"}`}>
+                    <p className={`text-lg font-bold ${statusColor[status] || "text-foreground"}`}>
                       {count}
                     </p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                    <p className="text-xs text-muted-foreground mt-0.5">
                       {statusLabel[status] || status}
                     </p>
                   </CardContent>
@@ -127,7 +127,7 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
             {/* Registrations per day */}
             {detailData.registrationsPerDay.length > 0 && (
               <Card>
-                <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Registrations Per Day</h4></CardHeader>
+                <CardHeader><h4 className="font-semibold text-foreground">Registrations Per Day</h4></CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={200}>
                     <LineChart data={detailData.registrationsPerDay} margin={{ left: 10, right: 10 }}>
@@ -148,7 +148,7 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
               <div className="grid md:grid-cols-2 gap-6">
                 {Object.keys(detailData.memberDemographics.gender).length > 0 && (
                   <Card>
-                    <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Gender</h4></CardHeader>
+                    <CardHeader><h4 className="font-semibold text-foreground">Gender</h4></CardHeader>
                     <CardContent>
                       <div className="space-y-1.5">
                         {Object.entries(detailData.memberDemographics.gender)
@@ -158,12 +158,12 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                             const pct = total > 0 ? Math.round((count / total) * 100) : 0;
                             return (
                               <div key={label} className="flex items-center gap-3 text-sm">
-                                <span className="flex-1 text-gray-700 dark:text-gray-300 capitalize">{label}</span>
-                                <span className="font-semibold text-gray-900 dark:text-white w-8 text-right">{count}</span>
-                                <div className="w-20 h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden shrink-0">
+                                <span className="flex-1 text-foreground/80 capitalize">{label}</span>
+                                <span className="font-semibold text-foreground w-8 text-right">{count}</span>
+                                <div className="w-20 h-2 bg-foreground/[0.06] rounded-full overflow-hidden shrink-0">
                                   <div className="h-full bg-blue-500 rounded-full transition-all" style={{ width: `${pct}%` }} />
                                 </div>
-                                <span className="text-xs text-gray-400 w-10 text-right">{pct}%</span>
+                                <span className="text-xs text-muted-foreground w-10 text-right">{pct}%</span>
                               </div>
                             );
                           })}
@@ -173,7 +173,7 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                 )}
                 {Object.keys(detailData.memberDemographics.studentStatus).length > 0 && (
                   <Card>
-                    <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Student Status</h4></CardHeader>
+                    <CardHeader><h4 className="font-semibold text-foreground">Student Status</h4></CardHeader>
                     <CardContent>
                       <div className="space-y-1.5">
                         {Object.entries(detailData.memberDemographics.studentStatus)
@@ -183,12 +183,12 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                             const pct = total > 0 ? Math.round((count / total) * 100) : 0;
                             return (
                               <div key={label} className="flex items-center gap-3 text-sm">
-                                <span className="flex-1 text-gray-700 dark:text-gray-300 capitalize">{label}</span>
-                                <span className="font-semibold text-gray-900 dark:text-white w-8 text-right">{count}</span>
-                                <div className="w-20 h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden shrink-0">
+                                <span className="flex-1 text-foreground/80 capitalize">{label}</span>
+                                <span className="font-semibold text-foreground w-8 text-right">{count}</span>
+                                <div className="w-20 h-2 bg-foreground/[0.06] rounded-full overflow-hidden shrink-0">
                                   <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${pct}%` }} />
                                 </div>
-                                <span className="text-xs text-gray-400 w-10 text-right">{pct}%</span>
+                                <span className="text-xs text-muted-foreground w-10 text-right">{pct}%</span>
                               </div>
                             );
                           })}
@@ -208,14 +208,14 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                   return (
                     <Card key={q.questionId}>
                       <CardHeader>
-                        <h4 className="font-semibold text-gray-900 dark:text-white text-sm">
+                        <h4 className="font-semibold text-foreground text-sm">
                           {q.questionText}
                         </h4>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 capitalize">{q.type} · {detailData.total} responses</p>
+                        <p className="text-xs text-muted-foreground capitalize">{q.type} · {detailData.total} responses</p>
                       </CardHeader>
                       <CardContent>
                         {entries.length === 0 && (
-                          <p className="text-sm text-gray-400 italic">No answers</p>
+                          <p className="text-sm text-muted-foreground italic">No answers</p>
                         )}
                         {entries.length > 0 && (
                           <div className="space-y-1.5">
@@ -223,15 +223,15 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                               const pct = total > 0 ? Math.round((count / total) * 100) : 0;
                               return (
                                 <div key={answer} className="flex items-center gap-3 text-sm">
-                                  <span className="flex-1 text-gray-700 dark:text-gray-300 truncate">{answer}</span>
-                                  <span className="font-semibold text-gray-900 dark:text-white w-8 text-right">{count}</span>
-                                  <div className="w-20 h-2 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden shrink-0">
+                                  <span className="flex-1 text-foreground/80 truncate">{answer}</span>
+                                  <span className="font-semibold text-foreground w-8 text-right">{count}</span>
+                                  <div className="w-20 h-2 bg-foreground/[0.06] rounded-full overflow-hidden shrink-0">
                                     <div
                                       className="h-full bg-red-500 rounded-full transition-all"
                                       style={{ width: `${pct}%` }}
                                     />
                                   </div>
-                                  <span className="text-xs text-gray-400 w-10 text-right">{pct}%</span>
+                                  <span className="text-xs text-muted-foreground w-10 text-right">{pct}%</span>
                                 </div>
                               );
                             })}
@@ -245,7 +245,7 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
             )}
 
             {detailData.questions.length === 0 && (
-              <p className="text-sm text-gray-500 dark:text-gray-400 italic">
+              <p className="text-sm text-muted-foreground italic">
                 No select/radio/checkbox questions for this event.
               </p>
             )}
@@ -253,7 +253,7 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
         )}
 
         {!detailLoading && !detailData && (
-          <p className="text-sm text-gray-500 dark:text-gray-400 italic">Failed to load event details.</p>
+          <p className="text-sm text-muted-foreground italic">Failed to load event details.</p>
         )}
       </div>
     );
@@ -265,7 +265,7 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+            <h3 className="text-lg font-semibold text-foreground">
               Event Funnel — Click → Registration → Attendance
             </h3>
             <Button size="sm" variant="outline" icon={Download} onClick={downloadFunnelCsv}>
@@ -277,7 +277,7 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead>
-                <tr className="text-left text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
+                <tr className="text-left text-muted-foreground border-b border-border">
                   <th className="py-2 pr-4 whitespace-nowrap">Event</th>
                   <th className="py-2 pr-4 whitespace-nowrap">Date</th>
                   <th className="py-2 pr-4 whitespace-nowrap">Clicks</th>
@@ -293,12 +293,12 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                   <tr
                     key={f.eventId}
                     onClick={() => openEvent(f.eventId)}
-                    className="border-b border-gray-100 dark:border-gray-700/50 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+                    className="border-b border-border cursor-pointer hover:bg-foreground/[0.04] transition-colors"
                   >
-                    <td className="py-2 pr-4 font-medium text-blue-600 dark:text-blue-400 hover:underline whitespace-nowrap">
+                    <td className="py-2 pr-4 font-medium text-primary hover:brightness-110 hover:underline whitespace-nowrap">
                       {f.title}
                     </td>
-                    <td className="py-2 pr-4 text-gray-700 dark:text-gray-300 whitespace-nowrap">{shortDate(f.date)}</td>
+                    <td className="py-2 pr-4 text-foreground/80 whitespace-nowrap">{shortDate(f.date)}</td>
                     <td className="py-2 pr-4 whitespace-nowrap">{f.clicks}</td>
                     <td className="py-2 pr-4 whitespace-nowrap">{f.registrations}</td>
                     <td className="py-2 pr-4 whitespace-nowrap">{f.attended}</td>
@@ -317,13 +317,13 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                         const evt = events.find((e) => e.id === f.eventId);
                         return evt?.feedbackFormUrl ? (
                           <a href={evt.feedbackFormUrl} target="_blank" rel="noreferrer"
-                            className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline"
+                            className="inline-flex items-center gap-1 text-primary hover:brightness-110 hover:underline"
                             onClick={(e) => e.stopPropagation()}
                           >
                             Form <ExternalLink className="h-3 w-3" />
                           </a>
                         ) : (
-                          <span className="text-gray-400">—</span>
+                          <span className="text-muted-foreground">—</span>
                         );
                       })()}
                     </td>
@@ -331,7 +331,7 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                 ))}
                 {funnelData.length === 0 && (
                   <tr>
-                    <td colSpan={8} className="py-4 text-gray-500 dark:text-gray-400 text-center">No events found</td>
+                    <td colSpan={8} className="py-4 text-muted-foreground text-center">No events found</td>
                   </tr>
                 )}
               </tbody>
@@ -343,12 +343,12 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
       {regAnalytics && (
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
-            <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Registration Status Across Events</h4></CardHeader>
+            <CardHeader><h4 className="font-semibold text-foreground">Registration Status Across Events</h4></CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <table className="min-w-full text-sm">
                   <thead>
-                    <tr className="text-left text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
+                    <tr className="text-left text-muted-foreground border-b border-border">
                       <th className="py-2 pr-4 whitespace-nowrap">Event</th>
                       <th className="py-2 pr-4 whitespace-nowrap">Reg.</th>
                       <th className="py-2 pr-4 whitespace-nowrap">Wait.</th>
@@ -362,8 +362,8 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                     {Object.entries(regAnalytics.statusBreakdownPerEvent).map(([eid, s]) => {
                       const evt = events.find((e) => e.id === eid);
                       return (
-                        <tr key={eid} className="border-b border-gray-100 dark:border-gray-700/50">
-                          <td className="py-2 pr-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">{evt?.title || eid.slice(0, 8)}</td>
+                        <tr key={eid} className="border-b border-border">
+                          <td className="py-2 pr-4 font-medium text-foreground whitespace-nowrap">{evt?.title || eid.slice(0, 8)}</td>
                           <td className="py-2 pr-4 whitespace-nowrap">{s.registered}</td>
                           <td className="py-2 pr-4 whitespace-nowrap">{s.waitlist}</td>
                           <td className="py-2 pr-4 whitespace-nowrap">{s.invited}</td>
@@ -380,7 +380,7 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
           </Card>
 
           <Card>
-            <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Registrations Per Day</h4></CardHeader>
+            <CardHeader><h4 className="font-semibold text-foreground">Registrations Per Day</h4></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
                 <LineChart data={regAnalytics.registrationsPerDay} margin={{ left: 10, right: 10 }}>
@@ -396,7 +396,7 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
         </div>
       )}
 
-      <p className="text-xs text-gray-500 dark:text-gray-400">
+      <p className="text-xs text-muted-foreground">
         Clicks are deduped client-side per browser (cookie-consent gated). Click an event to see detailed registration answers.
       </p>
     </div>

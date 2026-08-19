@@ -46,7 +46,14 @@ const AISettingsTab: React.FC = () => {
   const loadSettings = async () => {
     try {
       setLoading(true);
-      const data = await getAISettings();
+      // A degraded Firestore client (e.g. after a revoked permission) can make
+      // getDoc never settle — bound it so the tab can't hang in a spinner.
+      const data = await Promise.race([
+        getAISettings(),
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error('Timed out loading AI settings')), 8000)
+        ),
+      ]);
       setSettings(data);
     } catch (e) {
       console.error('Failed to load AI settings:', e);
@@ -198,14 +205,14 @@ Always base your recommendations on the provided course context.`,
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
       </div>
     );
   }
 
   if (!settings) {
     return (
-      <div className="text-center py-12 text-gray-600 dark:text-gray-300">
+      <div className="text-center py-12 text-muted-foreground">
         Failed to load AI settings
       </div>
     );
@@ -218,8 +225,8 @@ Always base your recommendations on the provided course context.`,
         <div className="flex items-center gap-3">
           <Bot className="h-6 w-6 text-primary" />
           <div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">AI Settings</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Configure the AI course advisor behavior and limits</p>
+            <h2 className="text-xl font-semibold tracking-[-0.028em] text-foreground">AI Settings</h2>
+            <p className="text-sm text-muted-foreground">Configure the AI course advisor behavior and limits</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
@@ -255,17 +262,17 @@ Always base your recommendations on the provided course context.`,
       <Card>
         <CardContent className="p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Settings2 className="h-5 w-5 text-gray-500" />
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white">System Prompt</h3>
+            <Settings2 className="h-5 w-5 text-muted-foreground" />
+            <h3 className="text-lg font-medium text-foreground">System Prompt</h3>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+          <p className="text-sm text-muted-foreground mb-4">
             This prompt guides the AI&apos;s behavior when responding to course queries. Changes apply immediately.
           </p>
           <textarea
             value={settings.systemPrompt}
             onChange={(e) => setSettings({ ...settings, systemPrompt: e.target.value })}
             rows={10}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent font-mono text-sm transition-colors duration-300"
+            className="w-full px-3 py-2 border border-border rounded-md bg-card text-foreground focus:ring-2 focus:ring-primary focus:border-transparent font-mono text-sm transition-colors duration-300"
           />
         </CardContent>
       </Card>
@@ -274,9 +281,9 @@ Always base your recommendations on the provided course context.`,
       <div className="grid md:grid-cols-2 gap-6">
         <Card>
           <CardContent className="p-6">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">API Provider</h3>
+            <h3 className="text-lg font-medium text-foreground mb-4">API Provider</h3>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-foreground/80 mb-1">
                 AI API Provider
               </label>
               <Select
@@ -296,7 +303,7 @@ Always base your recommendations on the provided course context.`,
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white">Model</h3>
+              <h3 className="text-lg font-medium text-foreground">Model</h3>
               {isSuperAdmin && settings.apiProvider === 'openrouter' && (
                 <Button
                   size="sm"
@@ -313,7 +320,7 @@ Always base your recommendations on the provided course context.`,
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-foreground/80 mb-1">
                 AI model (USD per 1M tokens)
               </label>
               <Select
@@ -327,7 +334,7 @@ Always base your recommendations on the provided course context.`,
                       { value: 'moonshot-v1-32k', label: 'moonshot-v1-32k' },
                     ]}
               />
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 {settings.apiProvider === 'openrouter' && openRouterModels.length > 0
                   ? `Loaded ${openRouterModels.length} models from OpenRouter`
                   : 'Only super admins can change the model'}
@@ -341,9 +348,9 @@ Always base your recommendations on the provided course context.`,
       <div className="grid md:grid-cols-2 gap-6">
         <Card>
           <CardContent className="p-6">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Cost</h3>
+            <h3 className="text-lg font-medium text-foreground mb-4">Cost</h3>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-foreground/80 mb-1">
                 Cost per 1k tokens (USD)
               </label>
               <Input
@@ -354,7 +361,7 @@ Always base your recommendations on the provided course context.`,
                 disabled={!isSuperAdmin}
                 onChange={(e) => setSettings({ ...settings, costPer1kTokensUsd: Number(e.target.value) || 0 })}
               />
-              <p className="text-xs text-gray-500 mt-1">Used for cost estimates in usage statistics</p>
+              <p className="text-xs text-muted-foreground mt-1">Used for cost estimates in usage statistics</p>
             </div>
           </CardContent>
         </Card>
@@ -364,10 +371,10 @@ Always base your recommendations on the provided course context.`,
       <div className="grid md:grid-cols-2 gap-6">
         <Card>
           <CardContent className="p-6">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Rate Limiting</h3>
+            <h3 className="text-lg font-medium text-foreground mb-4">Rate Limiting</h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-foreground/80 mb-1">
                   Requests per day
                 </label>
                 <Input
@@ -377,10 +384,10 @@ Always base your recommendations on the provided course context.`,
                   value={settings.rateLimitRequestsPerDay}
                   onChange={(e) => setSettings({ ...settings, rateLimitRequestsPerDay: parseInt(e.target.value) || 10 })}
                 />
-                <p className="text-xs text-gray-500 mt-1">Maximum AI requests per user per day</p>
+                <p className="text-xs text-muted-foreground mt-1">Maximum AI requests per user per day</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-foreground/80 mb-1">
                   Max tokens per request
                 </label>
                 <Input
@@ -391,7 +398,7 @@ Always base your recommendations on the provided course context.`,
                   value={settings.maxTokensPerRequest}
                   onChange={(e) => setSettings({ ...settings, maxTokensPerRequest: parseInt(e.target.value) || 1024 })}
                 />
-                <p className="text-xs text-gray-500 mt-1">Maximum tokens in AI response</p>
+                <p className="text-xs text-muted-foreground mt-1">Maximum tokens in AI response</p>
               </div>
             </div>
           </CardContent>
@@ -399,10 +406,10 @@ Always base your recommendations on the provided course context.`,
 
         <Card>
           <CardContent className="p-6">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-4">History Limits</h3>
+            <h3 className="text-lg font-medium text-foreground mb-4">History Limits</h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-foreground/80 mb-1">
                   Max conversation history
                 </label>
                 <Input
@@ -412,10 +419,10 @@ Always base your recommendations on the provided course context.`,
                   value={settings.maxConversationHistory}
                   onChange={(e) => setSettings({ ...settings, maxConversationHistory: parseInt(e.target.value) || 4 })}
                 />
-                <p className="text-xs text-gray-500 mt-1">Messages to include in context for AI responses</p>
+                <p className="text-xs text-muted-foreground mt-1">Messages to include in context for AI responses</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-sm font-medium text-foreground/80 mb-1">
                   Max stored chats per user
                 </label>
                 <Input
@@ -425,7 +432,7 @@ Always base your recommendations on the provided course context.`,
                   value={settings.maxStoredChatsPerUser}
                   onChange={(e) => setSettings({ ...settings, maxStoredChatsPerUser: parseInt(e.target.value) || 50 })}
                 />
-                <p className="text-xs text-gray-500 mt-1">Maximum chat history stored per user</p>
+                <p className="text-xs text-muted-foreground mt-1">Maximum chat history stored per user</p>
               </div>
             </div>
           </CardContent>
@@ -436,45 +443,45 @@ Always base your recommendations on the provided course context.`,
       <Card>
         <CardContent className="p-6">
           <div className="flex items-center gap-2 mb-4">
-            <BarChart3 className="h-5 w-5 text-gray-500" />
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white">Usage Statistics</h3>
+            <BarChart3 className="h-5 w-5 text-muted-foreground" />
+            <h3 className="text-lg font-medium text-foreground">Usage Statistics</h3>
           </div>
           <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">
+            <div className="bg-foreground/[0.04] rounded-lg p-4">
+              <div className="text-2xl font-bold text-foreground">
                 {usageLoading ? '…' : (usage ? usage.totalRequests : '--')}
               </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">Total AI requests today</div>
+              <div className="text-sm text-muted-foreground">Total AI requests today</div>
             </div>
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">
+            <div className="bg-foreground/[0.04] rounded-lg p-4">
+              <div className="text-2xl font-bold text-foreground">
                 {usageLoading ? '…' : (usage ? usage.activeUsers : '--')}
               </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">Active users today</div>
+              <div className="text-sm text-muted-foreground">Active users today</div>
             </div>
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">
+            <div className="bg-foreground/[0.04] rounded-lg p-4">
+              <div className="text-2xl font-bold text-foreground">
                 {usageLoading ? '…' : (usage ? usage.averageTokensPerRequest : '--')}
               </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">Average tokens per request</div>
+              <div className="text-sm text-muted-foreground">Average tokens per request</div>
             </div>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4 mt-4">
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">
+            <div className="bg-foreground/[0.04] rounded-lg p-4">
+              <div className="text-2xl font-bold text-foreground">
                 {usageLoading ? '…' : (usage ? usage.totalTokens : '--')}
               </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">Total tokens today</div>
+              <div className="text-sm text-muted-foreground">Total tokens today</div>
             </div>
-            <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">
+            <div className="bg-foreground/[0.04] rounded-lg p-4">
+              <div className="text-2xl font-bold text-foreground">
                 {usageLoading ? '…' : (usage ? `$${usage.estimatedCostUsd.toFixed(4)}` : '--')}
               </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">Estimated cost today (USD)</div>
+              <div className="text-sm text-muted-foreground">Estimated cost today (USD)</div>
             </div>
           </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400 mt-3">
+          <div className="text-xs text-muted-foreground mt-3">
             Using cost per 1k tokens: ${settings.costPer1kTokensUsd.toFixed(4)}
           </div>
           <div className="flex items-center gap-2 mt-4">
@@ -482,7 +489,7 @@ Always base your recommendations on the provided course context.`,
               Refresh
             </Button>
             {usage?.date && (
-              <div className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="text-sm text-muted-foreground">
                 Date: {usage.date}
               </div>
             )}
@@ -491,7 +498,7 @@ Always base your recommendations on the provided course context.`,
       </Card>
 
       {/* Last Updated */}
-      <div className="text-sm text-gray-500 dark:text-gray-400">
+      <div className="text-sm text-muted-foreground">
         Last updated: {settings.updatedAt ? new Date(settings.updatedAt).toLocaleString() : 'Never'}
         {settings.updatedBy && ` by ${settings.updatedBy}`}
       </div>
