@@ -96,13 +96,14 @@ export default function MembersTab() {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const refresh = useCallback(async () => {
+  const refresh = useCallback(async (opts?: { notify?: boolean }) => {
     setLoading(true);
     try {
       const u = await listUsers();
       u.sort((a, b) => (b.updatedAt || "").localeCompare(a.updatedAt || ""));
       setUsers(u);
-      notify({ type: 'success', message: 'Members refreshed.' });
+      // Notify only on an explicit user-triggered refresh — silent on mount/save/delete.
+      if (opts?.notify) notify({ type: 'success', message: 'Members refreshed.' });
     } finally {
       setLoading(false);
     }
@@ -325,14 +326,10 @@ export default function MembersTab() {
               <Trash2 className="h-4 w-4" aria-hidden /> {deleting ? 'Deleting...' : 'Delete'}
             </Button>
             <div className="flex gap-2">
-              <Button className="px-3 py-2 border border-border rounded-md" onClick={close} disabled={saving || deleting}>
+              <Button variant="secondary" onClick={close} disabled={saving || deleting}>
                 Cancel
               </Button>
-              <Button
-                className="px-3 py-2 bg-primary text-primary-foreground rounded-md"
-                onClick={onSave}
-                disabled={saving || deleting}
-              >
+              <Button variant="outline" onClick={onSave} disabled={saving || deleting}>
                 {saving ? 'Saving...' : 'Save'}
               </Button>
             </div>
@@ -363,7 +360,7 @@ export default function MembersTab() {
             filter={filter}
             setFilter={setFilter}
             loading={loading} 
-            onRefresh={refresh}
+            onRefresh={() => refresh({ notify: true })}
           />
         </div>
       </div>

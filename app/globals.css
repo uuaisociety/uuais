@@ -84,6 +84,7 @@
 
 @layer base {
   :root {
+    color-scheme: light;
     --radius: 0.375rem;
 
     /* Warm paper, not pure white — gives glass something to tint against */
@@ -164,6 +165,7 @@
   }
 
   .dark {
+    color-scheme: dark;
     --background: oklch(0.155 0.012 265);
     --foreground: oklch(0.96 0.003 95);
 
