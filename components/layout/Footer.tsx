@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowUp } from "lucide-react";
 import { HugeiconsIcon } from '@hugeicons/react';
 import { LinkedinIcon, InstagramIcon } from '@hugeicons/core-free-icons';
+import { DiscordCta } from '@/components/common/DiscordCta';
 
 const quickLinks = [
   { href: "/", label: "Home" },
@@ -82,7 +83,8 @@ export const Footer: React.FC = () => {
               Connecting students passionate about artificial intelligence — through hands-on
               learning, events, and the people building it.
             </p>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <DiscordCta />
               <a
                 href="https://linkedin.com/company/uu-ai-society"
                 aria-label="LinkedIn"

@@ -11,6 +11,7 @@ import type { UserProfile } from '@/lib/firestore/users';
 import Link from 'next/link';
 import { FieldGroup, InputBase, SelectBase, TextareaBase } from '@/components/ui/Form';
 import { useNotify } from '@/components/ui/Notifications';
+import { DiscordCta } from '@/components/common/DiscordCta';
 import { useRouter } from 'next/navigation';
 
 const JoinPage: React.FC = () => {
@@ -302,6 +303,8 @@ const JoinPage: React.FC = () => {
             </CardContent>
           </Card>
         )}
+
+        <DiscordCta variant="panel" />
 
         <Card>
           <CardHeader>

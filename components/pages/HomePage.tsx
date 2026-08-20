@@ -15,6 +15,7 @@ import HeroAnimation from '@/components/HeroAnimation';
 import FloatingSymbolsCanvas from '@/components/FloatingSymbolsCanvas';
 import HeroSplash from '@/components/HeroSplash';
 import { Button } from '@/components/ui/Button';
+import { DiscordCta } from '@/components/common/DiscordCta';
 
 const categoryOptions = [
   { value: 'all', label: 'All Categories' },
@@ -297,13 +298,16 @@ const HomePage: React.FC = () => {
             <p className="text-muted-foreground max-w-md mx-auto mb-9 leading-relaxed">
               Join the society, get the newsletter, and hear about events before anyone else.
             </p>
-            <Link
-              href="/join"
-              className="inline-flex items-center gap-2 h-12 px-8 rounded-md bg-primary text-primary-foreground font-medium tracking-[-0.01em] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.22)] transition-[filter,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:brightness-110 active:scale-[0.97]"
-            >
-              Become a member
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link
+                href="/join"
+                className="inline-flex items-center gap-2 h-12 px-8 rounded-md bg-primary text-primary-foreground font-medium tracking-[-0.01em] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.22)] transition-[filter,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:brightness-110 active:scale-[0.97]"
+              >
+                Become a member
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <DiscordCta className="h-12 px-6" />
+            </div>
           </div>
         </div>
       </section>
