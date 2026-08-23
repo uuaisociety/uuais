@@ -11,6 +11,7 @@
     "postbuild": "node scripts/inline-critical-css.mjs",
     "start": "next start",
     "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
     "set:admin": "ts-node tools/setAdminClaim.ts",
     "remove:admin": "ts-node tools/removeAdminClaim.ts",
     "set:superadmin": "ts-node tools/setSuperAdminClaim.ts",
