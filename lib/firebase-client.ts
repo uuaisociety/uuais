@@ -1,7 +1,8 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 import {
   getAuth,
+  connectAuthEmulator,
   GoogleAuthProvider,
   GithubAuthProvider,
   OAuthProvider,
@@ -24,6 +25,23 @@ const firebaseConfig = {
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+
+// Connect to local emulators in development when explicitly enabled
+// (NEXT_PUBLIC_USE_FIREBASE_EMULATORS="true"). No-op otherwise.
+declare global {
+  var FIREBASE_CLIENT_EMULATORS_CONNECTED: boolean | undefined;
+}
+
+if (
+  process.env.NODE_ENV === 'development' &&
+  process.env.NEXT_PUBLIC_USE_FIREBASE_EMULATORS === 'true' &&
+  !globalThis.FIREBASE_CLIENT_EMULATORS_CONNECTED
+) {
+  connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
+  connectFirestoreEmulator(db, '127.0.0.1', 8080);
+  globalThis.FIREBASE_CLIENT_EMULATORS_CONNECTED = true;
+  console.info('Connected to Firebase emulators (auth:9099, firestore:8080)');
+}
 export const googleProvider = new GoogleAuthProvider();
 export const githubProvider = new GithubAuthProvider();
 // Microsoft uses a generic OAuthProvider with providerId 'microsoft.com'

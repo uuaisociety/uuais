@@ -25,13 +25,11 @@ This is a [Next.js](https://nextjs.org) project for the Uppsala University AI So
 2. **Login and setup dev project**
 
    ```bash 
-   npm install -g firebase-tools
-   cd lib/
-   firebase login # Use uuais account
-   firebase use dev
-   ```
-
-#TODO: Setup emulators
+    npm install -g firebase-tools
+    cd lib/
+    firebase login # Use uuais account
+    firebase use dev
+    ```
 
 3. **Create service account**
   - Go to https://console.firebase.google.com/u/2/project/uuais-dev/settings/general/web:OTg4MTQwOTYtNDI4NS00Zjk1LThkOWEtZTE2YmFkYmUwN2Yx
@@ -187,50 +185,34 @@ To learn more about the technologies used in this project:
 
 
 ## Local Firebase Setup (Emulators)
-BEWARE THIS IS NOT TESTED!
 
-You can run against Firebase emulators during development.
+You can run the app fully against local Firebase emulators (Auth + Firestore) instead of the shared dev project. Emulator mode is **opt-in**: unless explicitly enabled, the app talks to the project configured in your `.env` as usual.
 
-1. Install the Firebase CLI (if not already):
+### 1. Start the emulators
 
-   ```bash
-   npm install -g firebase-tools
-   ```
+```bash
+npm run emulators
+```
 
-2. Log in and initialize (if needed):
+This starts Auth (port 9099), Firestore (port 8080), Storage (port 9199), and the Emulator UI at http://127.0.0.1:4000, using `lib/firebase.json`. The `demo-uuais` project id guarantees nothing touches real Firebase projects.
 
-   ```bash
-   firebase login
-   firebase init emulators
-   ```
+### 2. Point the app at the emulators
 
-3. Review `firebase.json` (ports can be adjusted as needed):
+Add these to your `.env` (keep them commented out when you want to use the real dev project again):
 
-   ```json
-   {
-     "emulators": {
-       "auth": { "port": 9099 },
-       "database": { "port": 9000 },
-       "ui": { "enabled": true },
-       "singleProjectMode": true
-     }
-   }
-   ```
+```bash
+NEXT_PUBLIC_USE_FIREBASE_EMULATORS=true
+FIREBASE_AUTH_EMULATOR_HOST=127.0.0.1:9099
+FIRESTORE_EMULATOR_HOST=127.0.0.1:8080
+```
 
-4. Start the emulators:
+- `NEXT_PUBLIC_USE_FIREBASE_EMULATORS=true` connects the client SDK (Auth + Firestore) and redirects the Admin SDK in API routes to the emulators.
+- The two host vars let the auth middleware and Admin SDK verify emulator-issued tokens server-side.
+- Then restart `npm run dev`.
 
-   ```bash
-   firebase emulators:start
-   ```
+### Notes
 
-5. Point your app to the emulators in `lib/firebase.ts` if desired (or rely on production services):
-   - Example (pseudo):
-
-     ```ts
-     // import { connectAuthEmulator } from 'firebase/auth';
-     // import { connectFirestoreEmulator } from 'firebase/firestore';
-     // if (process.env.NEXT_PUBLIC_USE_EMULATORS === 'true') {
-     //   connectAuthEmulator(auth, 'http://localhost:9099');
-     //   connectFirestoreEmulator(db, 'localhost', 8080);
-     // }
-     ```
+- The emulator suite requires Java (a JRE). Install e.g. `default-jre` or download from https://adoptium.net if `npm run emulators` fails with a Java error.
+- The emulators start empty. Create test users via the Emulator UI (Authentication → Start adding users) or just sign up through the app's login page.
+- Data is ephemeral by default: it disappears when you stop the emulators. To persist across restarts, start with `npx firebase emulators:start --config lib/firebase.json --project demo-uuais --import ./emulator-data --export-on-exit ./emulator-data`.
+- Storage uploads via the Admin SDK still target the real bucket; only Auth and Firestore traffic is redirected.

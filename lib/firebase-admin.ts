@@ -16,6 +16,17 @@ import admin from 'firebase-admin';
 //   return cleaned;
 // }
 
+// Route Admin SDK traffic to local emulators when explicitly enabled in
+// development. Runs before initializeApp/getFirestore so the SDK picks up
+// the hosts; explicit env vars (if set) always win.
+if (
+  process.env.NODE_ENV !== 'production' &&
+  process.env.NEXT_PUBLIC_USE_FIREBASE_EMULATORS === 'true'
+) {
+  process.env.FIRESTORE_EMULATOR_HOST ??= '127.0.0.1:8080';
+  process.env.FIREBASE_AUTH_EMULATOR_HOST ??= '127.0.0.1:9099';
+}
+
 if (!admin.apps.length) {
   try {
     //let credential;

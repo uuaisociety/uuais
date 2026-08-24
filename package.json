@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "next dev --turbopack",
+    "emulators": "firebase emulators:start --config lib/firebase.json --project demo-uuais",
     "build": "next build",
     "postbuild": "node scripts/inline-critical-css.mjs",
     "start": "next start",
