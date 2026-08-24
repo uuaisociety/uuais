@@ -11,6 +11,7 @@ export type AdminTabKey =
   | "events"
   | "team"
   | "blog"
+  | "showcase"
   | "faq"
   | "analytics"
   | "members"

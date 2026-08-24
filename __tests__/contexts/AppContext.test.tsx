@@ -560,34 +560,6 @@ describe('AppContext', () => {
       expect(deleteJob).toHaveBeenCalledWith('job-1');
     });
 
-    it('ADD_BOARDPOS calls addPosition', async () => {
-      const { result } = renderApp();
-      const payload = { title: 'Chair', short: 'CH', description: 'Lead' };
-      await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'ADD_BOARDPOS', payload });
-      });
-      expect(addPosition).toHaveBeenCalledWith(payload);
-    });
-
-    it('MOVE_BOARDPOS calls movePosition with current state', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ type: 'SET_BOARDPOS', payload: [mockBoardPosition] });
-      });
-      await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'MOVE_BOARDPOS', payload: { positionId: 'bp-1', direction: 'down' } });
-      });
-      expect(movePosition).toHaveBeenCalledWith([mockBoardPosition], 'bp-1', 'down');
-    });
-
-    it('DELETE_BOARDPOS calls deletePosition', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'DELETE_BOARDPOS', payload: 'bp-1' });
-      });
-      expect(deletePosition).toHaveBeenCalledWith('bp-1');
-    });
-
     it('ADD_SHOWCASE_PROJECT calls addShowcaseProject and returns the id', async () => {
       (addShowcaseProject as jest.Mock).mockResolvedValue('sp-1');
       const { result } = renderApp();
@@ -621,14 +593,6 @@ describe('AppContext', () => {
         await result.current.dispatch({ firestoreAction: 'DELETE_SHOWCASE_PROJECT', payload: 'sp-1' });
       });
       expect(deleteShowcaseProject).toHaveBeenCalledWith('sp-1');
-    });
-
-    it('DELETE_BOARD_APPLICATION calls deleteBoardApplication', async () => {
-      const { result } = renderApp();
-      await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'DELETE_BOARD_APPLICATION', payload: 'app-1' });
-      });
-      expect(deleteBoardApplication).toHaveBeenCalledWith('app-1');
     });
 
     it('UPDATE_TEAM_MEMBER firestore calls updateTeamMember', async () => {

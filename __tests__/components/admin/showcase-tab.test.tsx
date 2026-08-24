@@ -1,5 +1,11 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import ShowcaseTab from '@/components/pages/admin/tabs/ShowcaseTab'
+import { defaultAppState } from '@/__tests__/helpers/fixtures'
+
+const mockUseApp = jest.fn()
+jest.mock('@/contexts/AppContext', () => ({
+  useApp: () => mockUseApp(),
+}))
 
 function createProject(overrides: Record<string, unknown> = {}) {
   return {
@@ -20,76 +26,73 @@ function createProject(overrides: Record<string, unknown> = {}) {
   }
 }
 
+function renderTab(projects: ReturnType<typeof createProject>[] = []) {
+  const dispatch = jest.fn()
+  mockUseApp.mockReturnValue({ state: { ...defaultAppState, showcaseProjects: projects }, dispatch })
+  render(<ShowcaseTab />)
+  return dispatch
+}
+
 describe('ShowcaseTab', () => {
-  const onAddClick = jest.fn()
-  const onEdit = jest.fn()
-  const onDelete = jest.fn()
-  const onTogglePublish = jest.fn()
-  const onToggleFeature = jest.fn()
-
-  const props = {
-    projects: [] as ReturnType<typeof createProject>[],
-    onAddClick,
-    onEdit,
-    onDelete,
-    onTogglePublish,
-    onToggleFeature,
-  }
-
   beforeEach(() => jest.clearAllMocks())
 
   it('shows empty state when no projects exist', () => {
-    render(<ShowcaseTab {...props} />)
+    renderTab()
     expect(screen.getByText('No showcase submissions yet.')).toBeInTheDocument()
   })
 
   it('renders projects with status tags', () => {
-    render(<ShowcaseTab {...props} projects={[createProject()]} />)
+    renderTab([createProject()])
     expect(screen.getByText('Course Navigator')).toBeInTheDocument()
     expect(screen.getByText('Published')).toBeInTheDocument()
     expect(screen.getByText(/Ada/)).toBeInTheDocument()
   })
 
   it('shows Draft tag for unpublished projects', () => {
-    render(<ShowcaseTab {...props} projects={[createProject({ published: false })]} />)
+    renderTab([createProject({ published: false })])
     expect(screen.getByText('Draft')).toBeInTheDocument()
   })
 
   it('shows Featured tag for featured projects', () => {
-    render(<ShowcaseTab {...props} projects={[createProject({ featured: true })]} />)
+    renderTab([createProject({ featured: true })])
     expect(screen.getByText('Featured')).toBeInTheDocument()
   })
 
-  it('calls onAddClick when New Project is clicked', () => {
-    render(<ShowcaseTab {...props} />)
+  it('opens the create modal from New Project', () => {
+    renderTab()
     fireEvent.click(screen.getByText('New Project'))
-    expect(onAddClick).toHaveBeenCalledTimes(1)
+    expect(screen.getByRole('heading', { name: 'Create New Showcase Project' })).toBeInTheDocument()
   })
 
-  it('calls onEdit with the project', () => {
-    const project = createProject()
-    render(<ShowcaseTab {...props} projects={[project]} />)
+  it('opens the edit modal prefilled with the project', () => {
+    renderTab([createProject()])
     fireEvent.click(screen.getByText('Edit'))
-    expect(onEdit).toHaveBeenCalledWith(project)
+    expect(screen.getByDisplayValue('Course Navigator')).toBeInTheDocument()
   })
 
-  it('calls onDelete with the project id', () => {
-    render(<ShowcaseTab {...props} projects={[createProject()]} />)
+  it('deletes a project after confirmation', () => {
+    const confirmSpy = jest.spyOn(window, 'confirm').mockReturnValue(true)
+    const dispatch = renderTab([createProject()])
     fireEvent.click(screen.getByText('Delete'))
-    expect(onDelete).toHaveBeenCalledWith('proj-1')
+    expect(dispatch).toHaveBeenCalledWith({ firestoreAction: 'DELETE_SHOWCASE_PROJECT', payload: 'proj-1' })
+    confirmSpy.mockRestore()
   })
 
-  it('calls onTogglePublish with the project', () => {
-    const project = createProject()
-    render(<ShowcaseTab {...props} projects={[project]} />)
+  it('toggles publish state via the Firestore action', () => {
+    const dispatch = renderTab([createProject()])
     fireEvent.click(screen.getByText('Unpublish'))
-    expect(onTogglePublish).toHaveBeenCalledWith(project)
+    expect(dispatch).toHaveBeenCalledWith({
+      firestoreAction: 'UPDATE_SHOWCASE_PROJECT',
+      payload: expect.objectContaining({ id: 'proj-1', published: false }),
+    })
   })
 
-  it('calls onToggleFeature with the project', () => {
-    const project = createProject()
-    render(<ShowcaseTab {...props} projects={[project]} />)
+  it('toggles featured state via the Firestore action', () => {
+    const dispatch = renderTab([createProject()])
     fireEvent.click(screen.getByText('Feature'))
-    expect(onToggleFeature).toHaveBeenCalledWith(project)
+    expect(dispatch).toHaveBeenCalledWith({
+      firestoreAction: 'UPDATE_SHOWCASE_PROJECT',
+      payload: expect.objectContaining({ id: 'proj-1', featured: true }),
+    })
   })
 })
