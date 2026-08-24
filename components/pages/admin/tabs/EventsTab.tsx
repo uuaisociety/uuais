@@ -26,11 +26,9 @@ const categoryOptions = [
 
 export interface EventsTabProps {
   events: Event[];
-  onManageQuestions: (event: Event) => void;
-  onViewRegistrations: (event: Event) => void;
 }
 
-const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onViewRegistrations }) => {
+const EventsTab: React.FC<EventsTabProps> = ({ events }) => {
   const { dispatch } = useApp();
   const [showEventQModal, setShowEventQModal] = useState(false);
   const [activeEventForQuestions, setActiveEventForQuestions] = useState<Event | null>(null);
@@ -53,10 +51,6 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
     externalRegistrationUrl: '',
     externalRegistrationMembersOnly: false,
   });
-
-  useEffect(() => {
-    // keep form defaults when opening modal to add
-  }, []);
 
   const resetForms = () => {
     setEventForm({
@@ -186,26 +180,27 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Events Management
-        </h2>
+      <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
+        <h2 className="text-xl font-semibold tracking-[-0.028em] text-foreground">Events</h2>
         <Button variant="outline" icon={Plus} onClick={handleAddClick}>
           Add New Event
         </Button>
       </div>
 
       <div className="grid gap-4">
+        {events.length === 0 && (
+          <p className="text-sm text-muted-foreground py-8 text-center">No events yet — add one to get started.</p>
+        )}
         {events.map((event) => ( 
           <Card
             key={event.id}
-            className="bg-white dark:bg-gray-800 text-black dark:text-white overflow-x-auto"
+            className="overflow-x-auto"
           >
             <CardContent className="p-6">
               <div className="flex items-start justify-between flex-col lg:flex-row">
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center space-x-3 mb-2 flex-wrap">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    <h3 className="text-lg font-semibold text-foreground">
                       {event.title}
                     </h3>
                     <Tag
@@ -220,11 +215,11 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
                       )?.label || event.category}
                     </Tag>
                   </div>
-                  <p className="text-gray-600 mb-2 dark:text-gray-400 whitespace-pre-wrap">
+                  <p className="text-muted-foreground mb-2 whitespace-pre-wrap">
                     {event.description.slice(0, 100) +
                       (event.description.length > 100 ? "..." : "")}
                   </p>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                  <div className="text-sm text-muted-foreground">
                     <span className="mr-4">
                       📅{" "}
                       {event.eventStartAt
@@ -240,7 +235,7 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
                     <span>📍 {event.location}</span>
                   </div>
                   {event.registrationRequired && (
-                    <div className="text-sm text-gray-500 mt-1">
+                    <div className="text-sm text-muted-foreground mt-1">
                       👥 {event.currentRegistrations || 0} / {event.maxCapacity}{" "}
                       registered
                     </div>
@@ -258,14 +253,14 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
                   <Button
                     size="sm"
                     variant="outline"
-                    onClick={() => { setActiveEventForQuestions(event); setShowEventQModal(true); onManageQuestions(event); }}
+                    onClick={() => { setActiveEventForQuestions(event); setShowEventQModal(true); }}
                   >
                     Manage Questions
                   </Button>
                   <Button
                     size="sm"
                     variant="outline"
-                    onClick={() => { setActiveEventForRegs(event); setShowEventRegsModal(true); onViewRegistrations(event); }}
+                    onClick={() => { setActiveEventForRegs(event); setShowEventRegsModal(true); }}
                   >
                     Registrations
                   </Button>
@@ -302,7 +297,7 @@ const EventsTab: React.FC<EventsTabProps> = ({ events, onManageQuestions, onView
           if (editingItem) handleUpdateEvent(); else handleAddEvent();
         }}
       />
-      {/* Questions modal — moved from AdminDashboard: parent still may call onManageQuestions to toggle */}
+      {/* Questions modal — co-located with the events tab */}
       <EventQuestionsModal
         open={showEventQModal && !!activeEventForQuestions}
         eventTitle={activeEventForQuestions?.title || ''}

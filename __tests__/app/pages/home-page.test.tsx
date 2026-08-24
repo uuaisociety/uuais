@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import HomePage from '@/components/pages/HomePage'
-import { defaultAppState } from '@/__tests__/helpers/fixtures'
+import { defaultAppState, createMockBlogPost } from '@/__tests__/helpers/fixtures'
 
 const mockUseApp = jest.fn()
 jest.mock('@/contexts/AppContext', () => ({
@@ -99,6 +99,26 @@ describe('HomePage', () => {
     expect(screen.getByText('Test Workshop')).toBeInTheDocument()
     expect(screen.getByText('Workshop')).toBeInTheDocument()
     expect(screen.getByText('See all events')).toBeInTheDocument()
+  })
+
+  it('renders latest articles when blog posts exist', () => {
+    mockUseApp.mockReturnValue({
+      state: {
+        ...defaultAppState,
+        blogPosts: [createMockBlogPost({ id: 'b1', title: 'Weekly AI Digest', authorType: 'ai' })],
+      },
+      dispatch: jest.fn(),
+    })
+    render(<HomePage />)
+    expect(screen.getByText('Articles')).toBeInTheDocument()
+    expect(screen.getByText('Weekly AI Digest')).toBeInTheDocument()
+    expect(screen.getByText('Read the blog')).toBeInTheDocument()
+  })
+
+  it('hides the articles section when there are no published posts', () => {
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
+    render(<HomePage />)
+    expect(screen.queryByText('Articles')).not.toBeInTheDocument()
   })
 
   it('renders community showcase section heading', () => {

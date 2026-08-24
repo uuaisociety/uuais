@@ -1,6 +1,25 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Typography plugin: powers `.prose` for article body content. */
+@plugin "@tailwindcss/typography";
+
+/* Editorial rhythm: more space above a heading than below it, so a heading
+   travels with the paragraph it introduces instead of floating away from it. */
+.prose h2,
+.prose h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+.prose h2 + p,
+.prose h3 + p,
+.prose h2 + ul,
+.prose h3 + ul,
+.prose h2 + ol,
+.prose h3 + ol {
+  margin-top: 0.75em;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /* ==========================================================================
@@ -65,6 +84,7 @@
 
 @layer base {
   :root {
+    color-scheme: light;
     --radius: 0.375rem;
 
     /* Warm paper, not pure white — gives glass something to tint against */
@@ -145,6 +165,7 @@
   }
 
   .dark {
+    color-scheme: dark;
     --background: oklch(0.155 0.012 265);
     --foreground: oklch(0.96 0.003 95);
 

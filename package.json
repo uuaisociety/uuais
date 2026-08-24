@@ -7,10 +7,12 @@
   },
   "scripts": {
     "dev": "next dev --turbopack",
+    "emulators": "firebase emulators:start --config lib/firebase.json --project demo-uuais",
     "build": "next build",
     "postbuild": "node scripts/inline-critical-css.mjs",
     "start": "next start",
     "lint": "eslint .",
+    "typecheck": "next typegen && tsc --noEmit",
     "set:admin": "ts-node tools/setAdminClaim.ts",
     "remove:admin": "ts-node tools/removeAdminClaim.ts",
     "set:superadmin": "ts-node tools/setSuperAdminClaim.ts",
@@ -27,6 +29,7 @@
     "@hookform/resolvers": "^5.2.1",
     "@hugeicons/core-free-icons": "^3.1.1",
     "@hugeicons/react": "^1.1.5",
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dialog": "^1.1.6",
@@ -39,6 +42,7 @@
     "@radix-ui/react-slot": "^1.1.2",
     "@radix-ui/react-tooltip": "^1.1.8",
     "@saehrimnir/druidjs": "^0.7.3",
+    "@tailwindcss/typography": "^0.5.20",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^2.0.0",
     "babel-plugin-react-compiler": "^1.0.0",
@@ -48,6 +52,7 @@
     "date-fns": "^3.6.0",
     "dompurify": "^3.4.12",
     "embla-carousel-react": "^8.5.2",
+    "fast-xml-parser": "^5.10.1",
     "firebase": "^11.10.0",
     "firebase-admin": "^13.5.0",
     "input-otp": "^1.4.2",
@@ -102,13 +107,18 @@
     "typescript": "^5.9.2"
   },
   "overrides": {
-    "fast-xml-parser": "^5.3.4",
+    "fast-xml-parser": "^5.10.1",
     "ajv": "^6.12.6",
     "protobufjs": "^7.6.5",
     "sharp": "^0.35.0",
     "uuid": "^11.1.1",
     "brace-expansion": "^5.0.9",
-    "js-yaml": "^4.3.0"
+    "js-yaml": "^4.3.0",
+    "postcss-selector-parser": "^6.1.4",
+    "@modelcontextprotocol/sdk": {
+      "ajv": "^8.17.1",
+      "ajv-formats": "^3.0.1"
+    }
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": "eslint --fix"

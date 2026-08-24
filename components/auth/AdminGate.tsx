@@ -25,7 +25,7 @@ const AdminGate: React.FC<AdminGateProps> = ({ children }) => {
   }
 
   if (!user) {
-    return (<LoginModal after={() => router.push('/admin')} />);
+    return (<LoginModal after={() => router.push('/admin' + window.location.search)} />);
   }
 
   if (!isAdmin) {

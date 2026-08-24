@@ -40,7 +40,7 @@ const useEmulators = isLocalDevelopment && process.env.NEXT_PUBLIC_USE_FIREBASE_
 if (useEmulators && !globalThis.FIREBASE_EMULATORS_STARTED) {
   try {
     connectAuthEmulator(auth, 'http://127.0.0.1:9099', { disableWarnings: true });
-    connectFirestoreEmulator(db, '127.0.0.1', 8082);
+    connectFirestoreEmulator(db, '127.0.0.1', 8080);
     connectStorageEmulator(storage, '127.0.0.1', 9199);
     globalThis.FIREBASE_EMULATORS_STARTED = true;
     console.info('Connected to Firebase emulators (auth:9099, firestore:8080, storage:9199)');

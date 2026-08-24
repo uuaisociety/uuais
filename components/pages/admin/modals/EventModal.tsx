@@ -201,8 +201,8 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
           )}
         </div>
 
-        <div className="rounded-lg border border-gray-200 dark:border-gray-600 p-4 space-y-3 bg-gray-50/50 dark:bg-gray-900/30">
-          <p className="text-sm font-medium text-gray-900 dark:text-white">External registration</p>
+        <div className="rounded-lg border border-border p-4 space-y-3 bg-foreground/[0.03]">
+          <p className="text-sm font-medium text-foreground">External registration</p>
           <FieldGroup label="Registration link (optional)">
             <InputBase
               id="external-registration-url"
@@ -212,7 +212,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
               className={fieldClasses}
               placeholder="https://…"
             />
-            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
+            <p className="text-xs text-muted-foreground mt-1">
               If set, the event detail page shows a button that opens this URL in a new tab.
             </p>
           </FieldGroup>
@@ -220,7 +220,7 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
             <input
               id="external-registration-members-only"
               type="checkbox"
-              className="mt-1 rounded border-gray-300 shrink-0"
+              className="mt-1 rounded border-border shrink-0"
               checked={form.externalRegistrationMembersOnly}
               onChange={(e) =>
                 setForm((prev) => ({
@@ -232,11 +232,11 @@ const EventModal: React.FC<EventModalProps> = ({ open, editing, form, setForm, o
             <div>
               <label
                 htmlFor="external-registration-members-only"
-                className="text-sm font-medium text-gray-900 dark:text-white cursor-pointer"
+                className="text-sm font-medium text-foreground cursor-pointer"
               >
                 Require sign-in to view the link
               </label>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5">
+              <p className="text-xs text-muted-foreground mt-0.5">
                 When checked, visitors who are not logged in see a disabled control and must sign in before they can open the external registration page.
               </p>
             </div>

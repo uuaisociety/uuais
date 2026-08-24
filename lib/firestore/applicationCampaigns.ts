@@ -127,3 +127,11 @@ export function subscribeToCampaigns(callback: (campaigns: ApplicationCampaign[]
     }
   );
 }
+
+/** Public view — open campaigns only (used by the header and apply flows). */
+export const subscribeOpenCampaigns = (callback: (campaigns: ApplicationCampaign[]) => void) =>
+  subscribeToCampaigns(callback, { includeAll: false });
+
+/** Admin view — all campaigns including drafts. */
+export const subscribeAllCampaigns = (callback: (campaigns: ApplicationCampaign[]) => void) =>
+  subscribeToCampaigns(callback, { includeAll: true });

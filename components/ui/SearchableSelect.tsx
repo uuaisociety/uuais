@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useId, useMemo, useRef, useState } from "react";
+import React, { useEffect, useId, useMemo, useRef, useState } from "react";
 
 interface SearchableSelectProps {
   value: string;
@@ -9,6 +9,9 @@ interface SearchableSelectProps {
   placeholder?: string;
   className?: string;
   id?: string;
+  disabled?: boolean;
+  ariaLabel?: string;
+  emptyText?: string;
 }
 
 /**
@@ -25,6 +28,9 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
   placeholder,
   className = "",
   id,
+  disabled = false,
+  ariaLabel = "Program options",
+  emptyText = 'No programmes match "{query}" — you can still use this text.',
 }) => {
   const autoId = useId();
   const listboxId = `${id || autoId}-listbox`;
@@ -33,6 +39,14 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Keep the visible text in sync when the committed value changes elsewhere
+  // (e.g. a "reset to defaults" action in the parent).
+  useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
+    setQuery(value);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, [value]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -101,6 +115,7 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
         onFocus={() => setOpen(true)}
         onBlur={handleBlur}
         placeholder={placeholder}
+        disabled={disabled}
         autoComplete="off"
         className="w-full rounded-md border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors duration-300"
       />
@@ -109,12 +124,12 @@ export const SearchableSelect: React.FC<SearchableSelectProps> = ({
         <ul
           id={listboxId}
           role="listbox"
-          aria-label="Program options"
+          aria-label={ariaLabel}
           className="absolute z-20 mt-1 w-full max-h-64 overflow-y-auto rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg transition-colors duration-300"
         >
           {filtered.length === 0 ? (
             <li role="option" aria-selected="false" className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400 cursor-default">
-              No programmes match "{query.trim()}" — you can still use this text.
+              {emptyText.replace("{query}", query.trim())}
             </li>
           ) : (
             filtered.slice(0, 100).map((option, i) => {

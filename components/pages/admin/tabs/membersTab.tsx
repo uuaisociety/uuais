@@ -10,10 +10,6 @@ import { Download, Trash2} from 'lucide-react';
 
 type EditableUser = UserProfile & Record<string, unknown>;
 
-type MembersTabProps = {
-  onChanged?: () => void;
-};
-
 const fieldOrder: string[] = [
   "displayName",
   "name",
@@ -30,6 +26,7 @@ const fieldOrder: string[] = [
   "github",
   "website",
   "bio",
+  "heardOfUs",
   "newsletter",
   "lookingForJob",
   "privacyAcceptedAt",
@@ -38,12 +35,14 @@ const fieldOrder: string[] = [
   "partnerContactOptIn",
   "createdAt",
   "updatedAt",
+  "unsubscribedFromEmails",
 ];
 
 function downloadCsv(users: EditableUser[]) {
+  const headers = ['id', ...fieldOrder];
   const rows = [
-    ['Name', 'Email'],
-    ...users.map(u => [u.name || u.displayName || '', u.email || '']),
+    headers,
+    ...users.map((u) => headers.map((h) => (u as Record<string, unknown>)[h] ?? '')),
   ];
   const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -75,7 +74,7 @@ const SortableTh: React.FC<SortableThProps> = ({ column, sortKey, sortDir, onTog
     >
       {children}
       {sortKey === column && (
-        <span aria-hidden="true" className="text-xs text-gray-400 dark:text-gray-500">
+        <span aria-hidden="true" className="text-xs text-muted-foreground">
           {sortDir === 'asc' ? '▲' : '▼'}
         </span>
       )}
@@ -83,7 +82,7 @@ const SortableTh: React.FC<SortableThProps> = ({ column, sortKey, sortDir, onTog
   </th>
 );
 
-export default function MembersTab({ onChanged }: MembersTabProps) {
+export default function MembersTab() {
   const { notify } = useNotify();
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState<EditableUser[]>([]);
@@ -97,13 +96,14 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const refresh = useCallback(async () => {
+  const refresh = useCallback(async (opts?: { notify?: boolean }) => {
     setLoading(true);
     try {
       const u = await listUsers();
       u.sort((a, b) => (b.updatedAt || "").localeCompare(a.updatedAt || ""));
       setUsers(u);
-      notify({ type: 'success', message: 'Members refreshed.' });
+      // Notify only on an explicit user-triggered refresh — silent on mount/save/delete.
+      if (opts?.notify) notify({ type: 'success', message: 'Members refreshed.' });
     } finally {
       setLoading(false);
     }
@@ -176,7 +176,6 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
       update.updatedAt = new Date().toISOString();
       await updateUserProfile(selected.id, update);
       await refresh();
-      onChanged?.();
       close();
       notify({ type: 'success', title: 'Saved', message: 'Member updated.' });
     } finally {
@@ -190,7 +189,6 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
     try {
       await deleteUser(selected.id);
       await refresh();
-      onChanged?.();
       close();
       notify({ type: 'success', title: 'Deleted', message: 'Member deleted.' });
     } finally {
@@ -243,13 +241,13 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
               if (booleanFields.has(k)) {
                 return (
                   <div key={k} className="flex items-center gap-2">
-                    <label className="inline-flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                    <label className="inline-flex items-center gap-2 text-foreground">
                       <input
                         type="checkbox"
                         checked={Boolean(val)}
                         onChange={(e) => onChangeField(k, e.target.checked)}
                       />
-                      <span className="text-xs text-gray-600 dark:text-gray-400">{k}</span>
+                      <span className="text-xs text-muted-foreground">{k}</span>
                     </label>
                   </div>
                 );
@@ -258,7 +256,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
               if (enumOptions[k]) {
                 return (
                   <div key={k} className="flex flex-col gap-1">
-                    <label className="text-xs text-gray-600 dark:text-gray-400">{k}</label>
+                    <label className="text-xs text-muted-foreground">{k}</label>
                     <select
                       className="input"
                       value={val === undefined ? '' : String(val)}
@@ -278,7 +276,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
               if (k === 'expectedGraduationYear') {
                 return (
                   <div key={k} className="flex flex-col gap-1">
-                    <label className="text-xs text-gray-600 dark:text-gray-400">{k}</label>
+                    <label className="text-xs text-muted-foreground">{k}</label>
                     <input
                       className="input"
                       type="number"
@@ -295,7 +293,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
                 const dateVal = iso ? new Date(iso).toISOString().slice(0, 16) : '';
                 return (
                   <div key={k} className="flex flex-col gap-1">
-                    <label className="text-xs text-gray-600 dark:text-gray-400">{k}</label>
+                    <label className="text-xs text-muted-foreground">{k}</label>
                     <input
                       className="input"
                       type="datetime-local"
@@ -308,7 +306,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
 
               return (
                 <div key={k} className="flex flex-col gap-1">
-                  <label className="text-xs text-gray-600 dark:text-gray-400">{k}</label>
+                  <label className="text-xs text-muted-foreground">{k}</label>
                   <input
                     className="input"
                     value={String(val ?? '')}
@@ -328,14 +326,10 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
               <Trash2 className="h-4 w-4" aria-hidden /> {deleting ? 'Deleting...' : 'Delete'}
             </Button>
             <div className="flex gap-2">
-              <Button className="px-3 py-2 border rounded-md" onClick={close} disabled={saving || deleting}>
+              <Button variant="secondary" onClick={close} disabled={saving || deleting}>
                 Cancel
               </Button>
-              <Button
-                className="px-3 py-2 bg-blue-600 text-white rounded-md"
-                onClick={onSave}
-                disabled={saving || deleting}
-              >
+              <Button variant="outline" onClick={onSave} disabled={saving || deleting}>
                 {saving ? 'Saving...' : 'Save'}
               </Button>
             </div>
@@ -357,7 +351,7 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between flex-wrap gap-2">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Members</h2>
+        <h2 className="text-xl font-semibold tracking-[-0.028em] text-foreground">Members</h2>
         <div className="flex items-center gap-2">
           <Button variant="outline" icon={Download} onClick={() => downloadCsv(users)}>
             CSV
@@ -366,14 +360,14 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
             filter={filter}
             setFilter={setFilter}
             loading={loading} 
-            onRefresh={refresh}
+            onRefresh={() => refresh({ notify: true })}
           />
         </div>
       </div>
 
       <div className="overflow-x-auto">
         <table className="min-w-full text-left text-sm">
-          <thead className="text-gray-600 dark:text-gray-300">
+          <thead className="text-muted-foreground">
             <tr>
               <SortableTh column="name" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Name</SortableTh>
               <SortableTh column="email" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Email</SortableTh>
@@ -385,24 +379,24 @@ export default function MembersTab({ onChanged }: MembersTabProps) {
               <th className="py-2 pr-4"></th>
             </tr>
           </thead>
-          <tbody className="text-gray-800 dark:text-gray-200">
+          <tbody className="text-foreground">
             {loading ? (
               <tr>
-                <td className="py-3" colSpan={6}>
+                <td className="py-3 text-center text-muted-foreground" colSpan={8}>
                   Loading...
                 </td>
               </tr>
             ) : filtered.length === 0 ? (
               <tr>
-                <td className="py-3" colSpan={6}>
-                  No users
+                <td className="py-8 text-center text-muted-foreground" colSpan={8}>
+                  No users match your search.
                 </td>
               </tr>
             ) : (
               paginated.map((m) => (
                 <tr
                   key={m.id}
-                  className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50/50 dark:hover:bg-gray-800/50"
+                  className="border-t border-border hover:bg-foreground/[0.03]"
                 >
                   <td className="py-2 pr-4">{m.name || m.displayName || "-"}</td>
                   <td className="py-2 pr-4">{m.email || "-"}</td>

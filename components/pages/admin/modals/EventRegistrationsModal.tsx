@@ -216,16 +216,16 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
       size="xl"
       className="p-0"
       header={
-        <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between p-4 border-b border-border">
           <div className="flex items-center gap-2">
-            <Users className="h-5 w-5 text-gray-700 dark:text-gray-300" aria-hidden />
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Registrations — {eventTitle}</h2>
+            <Users className="h-5 w-5 text-foreground/80" aria-hidden />
+            <h2 className="text-lg font-semibold text-foreground">Registrations — {eventTitle}</h2>
           </div>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close dialog"
-            className="size-9 grid place-items-center rounded-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-gray-300 dark:hover:bg-gray-700/60 transition-colors cursor-pointer"
+            className="size-9 grid place-items-center rounded-sm text-muted-foreground hover:text-foreground hover:bg-foreground/[0.05] transition-colors cursor-pointer"
           >
             <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <path d="M18 6 6 18" /><path d="m6 6 12 12" />
@@ -236,13 +236,13 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
     >
       <div className="p-4">
           {registrations.length === 0 ? (
-            <p className="text-sm text-gray-600 dark:text-gray-300">No registrations yet.</p>
+            <p className="text-sm text-foreground/80">No registrations yet.</p>
           ) : (
             <>
               {/* Top controls: count + bulk actions */}
               <div className="flex items-center justify-between mb-2 gap-2 flex-wrap">
-                <div className="text-sm text-gray-700 dark:text-gray-300">Total registrations: <span className="font-medium text-gray-900 dark:text-white">{registrations.length}</span></div>
-                <div className="text-xs text-gray-700 dark:text-gray-300 flex flex-col sm:flex-row sm:items-center gap-1">
+                <div className="text-sm text-foreground/80">Total registrations: <span className="font-medium text-foreground">{registrations.length}</span></div>
+                <div className="text-xs text-foreground/80 flex flex-col sm:flex-row sm:items-center gap-1">
                   <span>Present: <span className="font-semibold">{attendedCount || 0}</span></span>
                   <span className="sm:ml-3">Attendance: <span className="font-semibold">{attendancePct}%</span></span>
                 </div>
@@ -259,7 +259,7 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                     return (
                   <Button
                     size="sm"
-                    className="bg-blue-600 text-white"
+                    className="bg-primary text-primary-foreground"
                     disabled={true} //bulkInviting || registrations.every(r => !(selected[r.id] && (r.status === 'registered' || r.status === 'waitlist')))}
                     onClick={async () => {
                       setBulkInviting(true);
@@ -368,7 +368,7 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
 
                       return (
                         <React.Fragment key={r.id}>
-                          <TableRow className={`border-t border-gray-200 dark:border-gray-700 hover:bg-gray-200/40 dark:hover:bg-gray-900/20
+                          <TableRow className={`border-t border-border hover:bg-foreground/[0.04]
                             ${isPresent ? 'bg-green-200/80 dark:bg-green-900/20 hover:bg-green-200/90 dark:hover:bg-green-900/40' : ''}`}>
                             <TableCell className="py-2 pr-2">
                               <input
@@ -420,16 +420,16 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                             </TableCell>
                           </TableRow>
                           {expanded[r.id] && (
-                            <TableRow className="bg-gray-50/60 dark:bg-gray-900/50">
+                            <TableRow className="bg-foreground/[0.03]">
                               <TableCell colSpan={6} className="p-3">
                                 {(() => {
                                   const profile = r.userId ? userProfiles[r.userId] : undefined;
                                   if (profile?.program || profile?.expectedGraduationYear) {
                                     return (
-                                      <div className="mb-3 pb-3 border-b border-gray-200 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300">
-                                        <span className="font-medium">Program:</span> {profile.program || <span className="text-gray-400 italic">Not provided</span>}
+                                      <div className="mb-3 pb-3 border-b border-border text-sm text-foreground/80">
+                                        <span className="font-medium">Program:</span> {profile.program || <span className="text-muted-foreground italic">Not provided</span>}
                                         <span className="mx-2">|</span>
-                                        <span className="font-medium">Graduation Year:</span> {profile.expectedGraduationYear || <span className="text-gray-400 italic">Not provided</span>}
+                                        <span className="font-medium">Graduation Year:</span> {profile.expectedGraduationYear || <span className="text-muted-foreground italic">Not provided</span>}
                                       </div>
                                     );
                                   }
@@ -446,8 +446,8 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                                     <TableBody>
                                       {questions.map((q) => (
                                         <TableRow key={q.id}>
-                                          <TableCell className="align-top text-gray-600 dark:text-gray-300">{q.question}</TableCell>
-                                          <TableCell className="align-top text-gray-900 dark:text-white whitespace-pre-wrap wrap-break-word">
+                                          <TableCell className="align-top text-foreground/80">{q.question}</TableCell>
+                                          <TableCell className="align-top text-foreground whitespace-pre-wrap wrap-break-word">
                                             {getAnswer(q) || '—'}
                                           </TableCell>
                                         </TableRow>
@@ -465,8 +465,8 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({ open,
                                     <TableBody>
                                       {Object.entries(r.registrationData || {}).map(([k, v]) => (
                                         <TableRow key={k}>
-                                          <TableCell className="align-top text-gray-600 dark:text-gray-300">{k}</TableCell>
-                                          <TableCell className="align-top text-gray-900 dark:text-white whitespace-pre-wrap wrap-break-word">
+                                          <TableCell className="align-top text-foreground/80">{k}</TableCell>
+                                          <TableCell className="align-top text-foreground whitespace-pre-wrap wrap-break-word">
                                             {Array.isArray(v) ? v.join(', ') : typeof v === 'boolean' ? (v ? 'Yes' : 'No') : String(v ?? '')}
                                           </TableCell>
                                         </TableRow>

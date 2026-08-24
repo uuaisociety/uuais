@@ -20,12 +20,13 @@ import HeroSplash from "@/components/HeroSplash";
 import { LinkedInUrlInput, LINKEDIN_PREFIX } from "@/components/ui/LinkedInUrlInput";
 import TagComponent from "@/components/ui/Tag";
 import PDFDropzone from "@/components/ui/PDFDropzone";
-import { useApp } from "@/contexts/AppContext";
 import { useNotify } from "@/components/ui/Notifications";
 import { auth, refreshSessionCookie } from "@/lib/firebase-client";
 import { loginUrl } from "@/lib/login-redirect";
 import { getUserProfile, type UserProfile } from "@/lib/firestore/users";
 import { subscribeToCampaignQuestions } from "@/lib/firestore/campaignQuestions";
+import { subscribeOpenCampaigns } from "@/lib/firestore/applicationCampaigns";
+import { useCollectionData } from "@/lib/firestore/useCollectionData";
 import { getTeamApplicationByUid } from "@/lib/firestore/teamApplications";
 import { MAX_ROLE_RANKING } from "@/lib/constants";
 import { ApplicationCampaign, CampaignQuestion, CampaignRole } from "@/types";
@@ -143,14 +144,14 @@ const CollapsibleDescription: React.FC<{ text: string; className?: string }> = (
 };
 
 export default function TeamApplicationPage() {
-  const { state } = useApp();
   const { notify } = useNotify();
   const router = useRouter();
   const pathname = usePathname();
   const wizardRef = useRef<HTMLDivElement>(null);
 
-  // Find the first open campaign
-  const campaign: ApplicationCampaign | null = state.campaigns.find((c) => c.status === "open") || null;
+  // Find the first open campaign (public view — open campaigns only)
+  const { data: campaigns, loaded: campaignsLoaded } = useCollectionData<ApplicationCampaign>(subscribeOpenCampaigns, []);
+  const campaign: ApplicationCampaign | null = campaigns.find((c) => c.status === "open") || null;
 
   // Which standard fields this campaign actually wants shown/required
   const enabledFields = campaign?.enabledStandardFields?.length
@@ -211,20 +212,14 @@ export default function TeamApplicationPage() {
       setHasApplied(false);
       return;
     }
-    // First check from reactive state if available (fast path, admin only)
-    if (state.teamApplications.some(
-      (a) => a.uid === uid && a.campaignId === campaign.id
-    )) {
-      setHasApplied(true);
-      return;
-    }
+    // Check via the server-side-safe query (rules allow self-read)
     const t = setTimeout(() => {
       getTeamApplicationByUid(uid, campaign.id)
         .then((app) => setHasApplied(!!app))
         .catch(() => setHasApplied(false));
     }, 600);
     return () => clearTimeout(t);
-  }, [campaign?.id, authLoading, state.teamApplications, submitted, submitting]);
+  }, [campaign?.id, authLoading, submitted, submitting]);
 
   // Subscribe to custom questions for the active campaign
   useEffect(() => {
@@ -439,7 +434,7 @@ export default function TeamApplicationPage() {
   };
 
   // No open campaigns (loaded, but none are currently open)
-  if (state.campaignsLoaded && !campaign) {
+  if (campaignsLoaded && !campaign) {
     return (
       <div className="min-h-screen bg-background pt-24 pb-12 transition-colors duration-300 flex items-center">
         <div className="max-w-md mx-auto px-4 text-center">
@@ -749,10 +744,10 @@ export default function TeamApplicationPage() {
                   {profile ? "We've prefilled your details from your account." : "Please fill in your details."}
                 </p>
               </div>
-              <Card>
-                <div className="p-6 space-y-5">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <FieldGroup label="Full name" requiredHint="Required.">
+              <Card className="overflow-visible">
+                 <div className="p-6 space-y-5">
+                   <div className="grid md:grid-cols-2 gap-4">
+                     <FieldGroup label="Full name" requiredHint="Required.">
                       <InputBase maxLength={100} value={form.name} onChange={(e) => set("name", e.target.value)} />
                     </FieldGroup>
                     <FieldGroup label="Email" requiredHint="Required.">

@@ -17,7 +17,7 @@ interface Props {
 const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
   <div className="space-y-4">
     {firebaseLoading && (
-      <p className="text-gray-500 dark:text-gray-400">Loading Firebase Analytics…</p>
+      <p className="text-muted-foreground">Loading Firebase Analytics…</p>
     )}
 
     {!firebaseLoading && firebaseData && !firebaseData.configured && (
@@ -27,17 +27,17 @@ const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
             <Flame className="h-6 w-6" />
             <h3 className="text-lg font-semibold">Firebase Analytics — Not Configured</h3>
           </div>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">{firebaseData.message}</p>
-          <div className="text-sm text-gray-500 dark:text-gray-400 space-y-1 border-t border-gray-200 dark:border-gray-700 pt-3">
-            <p className="font-medium text-gray-700 dark:text-gray-300">Setup steps:</p>
+          <p className="text-muted-foreground text-sm">{firebaseData.message}</p>
+          <div className="text-sm text-muted-foreground space-y-1 border-t border-border pt-3">
+            <p className="font-medium text-foreground/80">Setup steps:</p>
             <ol className="list-decimal list-inside space-y-1">
               <li>Find your GA4 property ID: Google Analytics → <strong>Admin → Property Settings</strong> (numeric ID)</li>
-              <li>Add <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">GA4_PROPERTY_ID</code> to your <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">.env.local</code></li>
-              <li>Enable the <strong>Google Analytics Data API</strong> at <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">console.cloud.google.com/apis/library/analyticsdata.googleapis.com</code></li>
+              <li>Add <code className="bg-foreground/[0.06] px-1 rounded">GA4_PROPERTY_ID</code> to your <code className="bg-foreground/[0.06] px-1 rounded">.env.local</code></li>
+              <li>Enable the <strong>Google Analytics Data API</strong> at <code className="bg-foreground/[0.06] px-1 rounded">console.cloud.google.com/apis/library/analyticsdata.googleapis.com</code></li>
               <li>In GA4 Admin → <strong>Property Access Management</strong>, add your Firebase service account email as a <strong>Viewer</strong></li>
             </ol>
             <p className="mt-2 text-xs">
-              Your Firebase service account email is the value of <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">client_email</code> in your service account JSON file.
+              Your Firebase service account email is the value of <code className="bg-foreground/[0.06] px-1 rounded">client_email</code> in your service account JSON file.
             </p>
           </div>
         </CardContent>
@@ -55,7 +55,7 @@ const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
 
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
-            <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Daily Active Users & Page Views</h4></CardHeader>
+            <CardHeader><h4 className="font-semibold text-foreground">Daily Active Users & Page Views</h4></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
                 <LineChart data={firebaseData.rows} margin={{ left: 10, right: 10 }}>
@@ -72,7 +72,7 @@ const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
           </Card>
 
           <Card>
-            <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Sessions & Events</h4></CardHeader>
+            <CardHeader><h4 className="font-semibold text-foreground">Sessions & Events</h4></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
                 <LineChart data={firebaseData.rows} margin={{ left: 10, right: 10 }}>
@@ -89,7 +89,7 @@ const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
           </Card>
 
           <Card>
-            <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">New vs Returning Users</h4></CardHeader>
+            <CardHeader><h4 className="font-semibold text-foreground">New vs Returning Users</h4></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
                 <LineChart data={firebaseData.rows} margin={{ left: 10, right: 10 }}>
@@ -106,7 +106,7 @@ const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
           </Card>
 
           <Card>
-            <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Avg Session Duration & Bounce Rate</h4></CardHeader>
+            <CardHeader><h4 className="font-semibold text-foreground">Avg Session Duration & Bounce Rate</h4></CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
                 <LineChart data={firebaseData.rows} margin={{ left: 10, right: 10 }}>
@@ -125,12 +125,12 @@ const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
         </div>
 
         <Card>
-          <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Daily Breakdown</h4></CardHeader>
+          <CardHeader><h4 className="font-semibold text-foreground">Daily Breakdown</h4></CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
                 <thead>
-                  <tr className="text-left text-gray-600 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
+                  <tr className="text-left text-muted-foreground border-b border-border">
                     <th className="py-2 pr-4">Date</th>
                     <th className="py-2 pr-4">Active Users</th>
                     <th className="py-2 pr-4">Page Views</th>
@@ -143,8 +143,8 @@ const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
                 </thead>
                 <tbody>
                   {firebaseData.rows.map((row) => (
-                    <tr key={row.date} className="border-b border-gray-100 dark:border-gray-700/50">
-                      <td className="py-2 pr-4 font-medium text-gray-900 dark:text-white">{row.date}</td>
+                    <tr key={row.date} className="border-b border-border">
+                      <td className="py-2 pr-4 font-medium text-foreground">{row.date}</td>
                       <td className="py-2 pr-4">{row.activeUsers}</td>
                       <td className="py-2 pr-4">{row.screenPageViews}</td>
                       <td className="py-2 pr-4">{row.sessions}</td>
@@ -163,7 +163,7 @@ const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
     )}
 
     {!firebaseLoading && !firebaseData && (
-      <p className="text-gray-500 dark:text-gray-400 text-sm italic">No data available.</p>
+      <p className="text-muted-foreground text-sm italic">No data available.</p>
     )}
   </div>
 );

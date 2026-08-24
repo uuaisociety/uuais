@@ -112,6 +112,11 @@ export interface TeamMember {
   notes?: string;
 }
 
+export interface BlogSourceItem {
+  title: string;
+  url: string;
+}
+
 export interface BlogPost {
   id: string;
   title: string;
@@ -122,6 +127,22 @@ export interface BlogPost {
   image: string;
   tags: string[];
   published: boolean;
+  /** Which stream this post belongs to. Missing/undefined = human-written editorial from the growth team. */
+  authorType?: 'human' | 'ai';
+  /** Source links cited in AI-generated posts (shown at the bottom of the article). */
+  sources?: BlogSourceItem[];
+  /** Events referenced by the post (recaps/previews) — enables event <-> blog cross-linking. */
+  relatedEventIds?: string[];
+  /** Model used to generate an AI post (transparency). */
+  aiModel?: string;
+  /** Display name of the admin who reviewed/published an AI post. */
+  reviewedBy?: string;
+  /** URL-safe identifier for /blog/[slug]. Fallback to `id` when absent. */
+  slug?: string;
+  /** Full model reasoning captured during generation (AI posts only). */
+  reasoningTrace?: string;
+  /** Admin-pinned hero article. When unset, the newest post is featured. */
+  featured?: boolean;
 }
 
 export type ShowcaseCategory = 'app' | 'website' | 'github' | 'model' | 'video' | 'research' | 'demo' | 'other';

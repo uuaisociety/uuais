@@ -6,15 +6,16 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAdmin } from '@/hooks/useAdmin';
-import { useApp } from '@/contexts/AppContext';
 import { useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { loginUrl } from '@/lib/login-redirect';
+import { useOpenCampaigns } from '@/lib/firestore/useOpenCampaigns';
 
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Events', href: '/events' },
   { name: 'Job board', href: '/careers' },
+  { name: 'Blog', href: '/blog', badge: 'Beta' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -25,8 +26,13 @@ const projectLinks = [
   { href: '/my-courses', label: 'My favourites' },
 ];
 
+const BetaBadge: React.FC = () => (
+  <span className="ml-1.5 inline-flex items-center font-mono uppercase tracking-[0.1em] text-[0.625rem] leading-none rounded-sm px-1.5 py-[3px] border border-border bg-chart-4/15 text-[#0f7a55] dark:bg-chart-4/20 dark:text-chart-4">
+    Beta
+  </span>
+);
+
 export const Header: React.FC = () => {
-  const { state } = useApp();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
@@ -49,7 +55,8 @@ export const Header: React.FC = () => {
 
   // Hide the Apply CTA when no open application campaign exists (show it while
   // campaigns are still loading to avoid a flicker on first paint).
-  const showApply = !state.campaignsLoaded || state.campaigns.some((c) => c.status === 'open');
+  const { campaigns, loaded: campaignsLoaded } = useOpenCampaigns();
+  const showApply = !campaignsLoaded || campaigns.some((c) => c.status === 'open');
 
   // Rendered from the persisted identity so the name survives a reload instead
   // of blanking while Firebase re-resolves the session.
@@ -127,6 +134,7 @@ export const Header: React.FC = () => {
               {navigation.map((item) => (
                 <Link key={item.name} href={item.href} prefetch className={navLinkClass(isActive(item.href))} aria-current={isActive(item.href) ? "page" : undefined}>
                   {item.name}
+                  {item.badge && <BetaBadge />}
                 </Link>
               ))}
 
@@ -227,7 +235,7 @@ export const Header: React.FC = () => {
               <button
                 ref={mobileButtonRef}
                 onClick={() => setIsMenuOpen((v) => !v)}
-                className="lg:hidden size-9 grid place-items-center rounded-sm text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors cursor-pointer"
+                className="lg:hidden size-11 grid place-items-center rounded-sm text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors cursor-pointer"
                 aria-expanded={isMenuOpen}
                 aria-controls="mobile-menu"
               >
@@ -242,7 +250,7 @@ export const Header: React.FC = () => {
             ref={mobileMenuRef}
             id="mobile-menu"
             inert={!isMenuOpen}
-            className={`lg:hidden overflow-hidden origin-top transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+            className={`lg:hidden overflow-x-hidden overflow-y-auto origin-top transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
               isMenuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
             }`}
           >
@@ -258,6 +266,7 @@ export const Header: React.FC = () => {
                   }`}
                 >
                   {item.name}
+                  {item.badge && <BetaBadge />}
                 </Link>
               ))}
 

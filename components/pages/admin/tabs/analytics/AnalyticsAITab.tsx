@@ -24,7 +24,7 @@ const AITab: React.FC<Props> = ({ aiAnalytics }) => (
     {aiAnalytics && (
       <div className="grid md:grid-cols-2 gap-6">
         <Card>
-          <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Chats Per Day</h4></CardHeader>
+          <CardHeader><h4 className="font-semibold text-foreground">Chats Per Day</h4></CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={aiAnalytics.chatsPerDay} margin={{ left: 10, right: 10 }}>
@@ -39,7 +39,7 @@ const AITab: React.FC<Props> = ({ aiAnalytics }) => (
         </Card>
 
         <Card>
-          <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Messages Per Day</h4></CardHeader>
+          <CardHeader><h4 className="font-semibold text-foreground">Messages Per Day</h4></CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={aiAnalytics.messagesPerDay} margin={{ left: 10, right: 10 }}>
@@ -54,7 +54,7 @@ const AITab: React.FC<Props> = ({ aiAnalytics }) => (
         </Card>
 
         <Card className="md:col-span-2">
-          <CardHeader><h4 className="font-semibold text-gray-900 dark:text-white">Top Recommended Courses</h4></CardHeader>
+          <CardHeader><h4 className="font-semibold text-foreground">Top Recommended Courses</h4></CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={aiAnalytics.topRecommendedCourses} layout="vertical" margin={{ left: 20, right: 20 }}>
@@ -71,7 +71,7 @@ const AITab: React.FC<Props> = ({ aiAnalytics }) => (
     )}
 
     {!aiAnalytics && (
-      <p className="text-gray-500 dark:text-gray-400 text-sm italic">
+      <p className="text-muted-foreground text-sm italic">
         No AI chat data available yet.
       </p>
     )}

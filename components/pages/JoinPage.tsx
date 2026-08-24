@@ -11,6 +11,7 @@ import type { UserProfile } from '@/lib/firestore/users';
 import Link from 'next/link';
 import { FieldGroup, InputBase, SelectBase, TextareaBase } from '@/components/ui/Form';
 import { useNotify } from '@/components/ui/Notifications';
+import { DiscordCta } from '@/components/common/DiscordCta';
 import { useRouter } from 'next/navigation';
 
 const JoinPage: React.FC = () => {
@@ -58,6 +59,47 @@ const JoinPage: React.FC = () => {
     };
   }, []);
 
+  // Warn before leaving with an unfinished registration (the RegistrationGate signs the user out off /join).
+  useEffect(() => {
+    const incomplete = Boolean(uid) && !(Boolean(profile?.isMember) && Boolean(profile?.privacyAcceptedAt));
+    if (!incomplete) return;
+
+    const beforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", beforeUnload);
+
+    const confirmLeave = () =>
+      window.confirm("Are you sure you want to leave? Your registration is not complete yet.");
+
+    // Client-side navigation (header links, cards) doesn't fire beforeunload, so intercept it here.
+    // Capture phase fires BEFORE Next.js Link's own onClick, otherwise Link navigates first and the guard never runs.
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const anchor = (e.target as Element | null)?.closest?.("a");
+      if (!anchor) return;
+      const href = anchor.getAttribute("href");
+      if (!href) return;
+      if (anchor.target && anchor.target !== "_self") return;
+      if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("javascript:")) return;
+      const url = new URL(href, window.location.href);
+      if (url.origin !== window.location.origin || url.pathname === "/join") return;
+
+      e.preventDefault();
+      e.stopPropagation();
+      if (confirmLeave()) {
+        router.push(url.pathname + url.search + url.hash);
+      }
+    };
+    document.addEventListener("click", onClick, true);
+
+    return () => {
+      window.removeEventListener("beforeunload", beforeUnload);
+      document.removeEventListener("click", onClick, true);
+    };
+  }, [uid, profile, router]);
+
   const handleSave = async () => {
     if (!uid) return;
     setSaving(true);
@@ -75,6 +117,9 @@ const JoinPage: React.FC = () => {
       }
       const refreshed = await getUserProfile(uid);
       setProfile(refreshed);
+      // Refresh the shared useAdmin store so RegistrationGate doesn't bounce the user back to /join.
+      const { refreshProfile } = await import('@/hooks/useAdmin');
+      await refreshProfile();
       notify({ type: 'success', title: 'Saved', message: 'Profile saved successfully.' });
       router.push('/account');
     } catch {
@@ -105,20 +150,22 @@ const JoinPage: React.FC = () => {
           )
         )}
 
-        <Card>
-          <CardHeader>
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Sign in or Create Account</h2>
-            <p className="text-gray-600 dark:text-gray-300 text-sm">Use one of the providers below. You can link more providers later in your account.</p>
-          </CardHeader>
-          <CardContent className="space-y-3 flex flex-col md:flex-col justify-center gap-2 pt-4 items-center max-w-md mx-auto">
-            <Button onClick={() => { void import('@/lib/firebase-client').then((m) => m.signInWithGooglePopup()); }} variant="outline">
-              <span className="flex items-center gap-2"><HugeiconsIcon icon={GoogleIcon} className="h-4 w-4"/> Continue with Google</span>
-            </Button>
-            <Button onClick={() => { void import('@/lib/firebase-client').then((m) => m.signInWithGithubPopup()); }} variant="outline">
-              <span className="flex items-center gap-2"><HugeiconsIcon icon={GithubIcon} className="h-4 w-4"/> Continue with GitHub</span>
-            </Button>
-          </CardContent>
-        </Card>
+        {!uid && (
+          <Card>
+            <CardHeader>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Create Account</h2>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">Use one of the providers below.</p>
+            </CardHeader>
+            <CardContent className="space-y-3 flex flex-col md:flex-col justify-center gap-2 pt-4 items-center max-w-md mx-auto">
+              <Button onClick={() => { void import('@/lib/firebase-client').then((m) => m.signInWithGooglePopup()); }} variant="outline">
+                <span className="flex items-center gap-2"><HugeiconsIcon icon={GoogleIcon} className="h-4 w-4"/> Continue with Google</span>
+              </Button>
+              <Button onClick={() => { void import('@/lib/firebase-client').then((m) => m.signInWithGithubPopup()); }} variant="outline">
+                <span className="flex items-center gap-2"><HugeiconsIcon icon={GithubIcon} className="h-4 w-4"/> Continue with GitHub</span>
+              </Button>
+            </CardContent>
+          </Card>
+        )}
 
         {uid && (
           <Card>
@@ -154,13 +201,13 @@ const JoinPage: React.FC = () => {
                   </SelectBase>
                 </FieldGroup>
                 <FieldGroup label="LinkedIn URL" requiredHint="Optional">
-                  <InputBase maxLength={200} placeholder="https://linkedin.com/in/..." value={form.linkedin || ''} onChange={(e) => setForm(f => ({ ...f, linkedin: e.target.value }))} />
+                  <InputBase maxLength={200} placeholder="https://linkedin.com/in/..." inputMode="url" autoComplete="url" value={form.linkedin || ''} onChange={(e) => setForm(f => ({ ...f, linkedin: e.target.value }))} />
                 </FieldGroup>
                 <FieldGroup label="GitHub URL" requiredHint="Optional">
-                  <InputBase maxLength={200} placeholder="https://github.com/username" value={form.github || ''} onChange={(e) => setForm(f => ({ ...f, github: e.target.value }))} />
+                  <InputBase maxLength={200} placeholder="https://github.com/username" inputMode="url" autoComplete="url" value={form.github || ''} onChange={(e) => setForm(f => ({ ...f, github: e.target.value }))} />
                 </FieldGroup>
                 <FieldGroup label="Website" requiredHint="Optional">
-                  <InputBase maxLength={500} placeholder="https://example.com" value={form.website || ''} onChange={(e) => setForm(f => ({ ...f, website: e.target.value }))} />
+                  <InputBase maxLength={500} placeholder="https://example.com" inputMode="url" autoComplete="url" value={form.website || ''} onChange={(e) => setForm(f => ({ ...f, website: e.target.value }))} />
                 </FieldGroup>
               </div>
 
@@ -256,6 +303,8 @@ const JoinPage: React.FC = () => {
             </CardContent>
           </Card>
         )}
+
+        <DiscordCta variant="panel" />
 
         <Card>
           <CardHeader>

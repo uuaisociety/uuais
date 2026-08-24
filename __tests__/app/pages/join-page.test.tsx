@@ -11,8 +11,6 @@ jest.mock('@/lib/firebase-client', () => {
       }),
       _callbackHolder: callbackHolder,
     },
-    signInWithGooglePopup: jest.fn(),
-    signInWithGithubPopup: jest.fn(),
   }
 })
 
@@ -36,15 +34,6 @@ jest.mock('@/utils/seo', () => ({
   updatePageMeta: jest.fn(),
 }))
 
-jest.mock('@hugeicons/react', () => ({
-  HugeiconsIcon: ({ icon }: { icon: string }) => <span data-testid="hugeicon">{String(icon)}</span>,
-}))
-
-jest.mock('@hugeicons/core-free-icons', () => ({
-  GoogleIcon: 'google-icon',
-  GithubIcon: 'github-icon',
-}))
-
 async function triggerAuthCallback(user: Record<string, unknown> | null) {
   const firebase = jest.requireMock('@/lib/firebase-client') as {
     auth: { _callbackHolder: { current: ((u: unknown) => Promise<void> | void) | null } }
@@ -61,14 +50,6 @@ function mockedUsers() {
     getUserProfile: jest.Mock
     upsertUserProfile: jest.Mock
     updateUserProfile: jest.Mock
-  }
-}
-
-function mockedFirebase() {
-  return jest.requireMock('@/lib/firebase-client') as {
-    auth: { _callbackHolder: { current: ((u: unknown) => Promise<void> | void) | null } }
-    signInWithGooglePopup: jest.Mock
-    signInWithGithubPopup: jest.Mock
   }
 }
 
@@ -97,28 +78,15 @@ describe('JoinPage', () => {
   })
 
   describe('logged out', () => {
-    it('renders sign-in buttons', () => {
-      render(<JoinPage />)
-      expect(screen.getByText(/Sign in or Create Account/)).toBeInTheDocument()
-      expect(screen.getByText(/Continue with Google/)).toBeInTheDocument()
-      expect(screen.getByText(/Continue with GitHub/)).toBeInTheDocument()
-    })
-
-    it('calls signInWithGooglePopup on Google button click', async () => {
-      render(<JoinPage />)
-      fireEvent.click(screen.getByText(/Continue with Google/))
-      await waitFor(() => expect(mockedFirebase().signInWithGooglePopup).toHaveBeenCalled())
-    })
-
-    it('calls signInWithGithubPopup on GitHub button click', async () => {
-      render(<JoinPage />)
-      fireEvent.click(screen.getByText(/Continue with GitHub/))
-      await waitFor(() => expect(mockedFirebase().signInWithGithubPopup).toHaveBeenCalled())
-    })
-
     it('renders already-a-member section', () => {
       render(<JoinPage />)
       expect(screen.getByText('Already a member?')).toBeInTheDocument()
+    })
+
+    it('renders sign-in buttons for registration', () => {
+      render(<JoinPage />)
+      expect(screen.getByRole('button', { name: /Continue with Google/ })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /Continue with GitHub/ })).toBeInTheDocument()
     })
 
     it('does not show profile form when logged out', () => {
@@ -138,6 +106,12 @@ describe('JoinPage', () => {
       render(<JoinPage />)
       await triggerAuthCallback(mockUser)
       expect(screen.getByText('Complete your profile')).toBeInTheDocument()
+    })
+
+    it('hides sign-in card when logged in', async () => {
+      render(<JoinPage />)
+      await triggerAuthCallback(mockUser)
+      expect(screen.queryByRole('button', { name: /Continue with Google/ })).not.toBeInTheDocument()
     })
 
     it('shows yellow banner for incomplete profile', async () => {
@@ -502,6 +476,124 @@ describe('JoinPage', () => {
       expect(screen.getByDisplayValue('Computer Science')).toBeInTheDocument()
       // bio from profile
       expect(screen.getByDisplayValue('AI researcher')).toBeInTheDocument()
+    })
+  })
+
+  describe('leave guard', () => {
+    let confirmSpy: jest.SpyInstance
+
+    beforeEach(() => {
+      confirmSpy = jest.spyOn(window, 'confirm').mockReturnValue(true)
+    })
+
+    afterEach(() => {
+      confirmSpy.mockRestore()
+    })
+
+    const clickLink = (href: string) => {
+      const link = document.createElement('a')
+      link.setAttribute('href', href)
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+    }
+
+    it('registers beforeunload while profile incomplete', async () => {
+      const addSpy = jest.spyOn(window, 'addEventListener')
+      mockedUsers().getUserProfile.mockResolvedValue(null)
+
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      expect(addSpy).toHaveBeenCalledWith('beforeunload', expect.any(Function))
+      addSpy.mockRestore()
+    })
+
+    it('does not register beforeunload when profile is complete', async () => {
+      const addSpy = jest.spyOn(window, 'addEventListener')
+      mockedUsers().getUserProfile.mockResolvedValue({
+        id: 'u2', displayName: 'Member', isMember: true, privacyAcceptedAt: '2024-01-01T00:00:00Z',
+      })
+
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u2', displayName: 'Member', email: 'm@uu.se' })
+
+      const calls = addSpy.mock.calls.filter(([name]) => name === 'beforeunload')
+      expect(calls).toHaveLength(0)
+      addSpy.mockRestore()
+    })
+
+    it('warns and navigates when leaving via an in-app link', async () => {
+      mockedUsers().getUserProfile.mockResolvedValue(null)
+
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      clickLink('/events')
+      expect(confirmSpy).toHaveBeenCalledWith(expect.stringMatching(/sure you want to leave/))
+      expect(mockedNav().useRouter().push).toHaveBeenCalledWith('/events')
+    })
+
+    it('intercepts before a Link handler navigates', async () => {
+      mockedUsers().getUserProfile.mockResolvedValue(null)
+      const linkHandler = jest.fn()
+
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const link = document.createElement('a')
+      link.setAttribute('href', '/events')
+      link.addEventListener('click', (e) => {
+        e.preventDefault()
+        linkHandler()
+      })
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+
+      expect(confirmSpy).toHaveBeenCalled()
+      expect(linkHandler).not.toHaveBeenCalled()
+      expect(mockedNav().useRouter().push).toHaveBeenCalledWith('/events')
+    })
+
+    it('blocks navigation when the user cancels', async () => {
+      confirmSpy.mockReturnValue(false)
+      mockedUsers().getUserProfile.mockResolvedValue(null)
+
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      clickLink('/events')
+      expect(confirmSpy).toHaveBeenCalled()
+      expect(mockedNav().useRouter().push).not.toHaveBeenCalled()
+    })
+
+    it('does not warn for links that stay on /join', async () => {
+      mockedUsers().getUserProfile.mockResolvedValue(null)
+
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      clickLink('/join')
+      expect(confirmSpy).not.toHaveBeenCalled()
+      expect(mockedNav().useRouter().push).not.toHaveBeenCalled()
+    })
+
+    it('does not warn for links opened in a new tab', async () => {
+      mockedUsers().getUserProfile.mockResolvedValue(null)
+
+      render(<JoinPage />)
+      await triggerAuthCallback({ uid: 'u1', displayName: 'Test', email: 't@uu.se' })
+
+      const link = document.createElement('a')
+      link.setAttribute('href', '/privacy')
+      link.setAttribute('target', '_blank')
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+
+      expect(confirmSpy).not.toHaveBeenCalled()
+      expect(mockedNav().useRouter().push).not.toHaveBeenCalled()
     })
   })
 })

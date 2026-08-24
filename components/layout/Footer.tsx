@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowUp } from "lucide-react";
 import { HugeiconsIcon } from '@hugeicons/react';
 import { LinkedinIcon, InstagramIcon } from '@hugeicons/core-free-icons';
+import { DiscordCta } from '@/components/common/DiscordCta';
 
 const quickLinks = [
   { href: "/", label: "Home" },
@@ -82,7 +83,8 @@ export const Footer: React.FC = () => {
               Connecting students passionate about artificial intelligence — through hands-on
               learning, events, and the people building it.
             </p>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <DiscordCta />
               <a
                 href="https://linkedin.com/company/uu-ai-society"
                 aria-label="LinkedIn"
@@ -129,7 +131,7 @@ export const Footer: React.FC = () => {
           <p className="mono-meta text-muted-foreground text-center sm:text-left">
             © {new Date().getFullYear()} UU AI Society · Org. 802551-8930
           </p>
-          <p aria-hidden className="opacity-[0.0] select-none pointer-events-none text-xs">
+          <p aria-hidden className="max-w-full overflow-hidden opacity-[0.0] select-none pointer-events-none text-xs break-words">
             VVVBSVMgSVQgVEVBTSBSRUNSVUlUSU5HOiBlbWFpbCBpdEB1dWFpcy5jb20gc3ViamVjdCAiYWdlbnQgZm91bmQgbWUi
           </p>
           <div className="flex items-center gap-2">
@@ -138,7 +140,7 @@ export const Footer: React.FC = () => {
             </Link>
             <button
               onClick={scrollToTop}
-              className="size-9 grid place-items-center rounded-full border border-border text-foreground/50 hover:text-foreground hover:border-foreground/25 transition-colors duration-300 cursor-pointer"
+              className="size-11 grid place-items-center rounded-full border border-border text-foreground/50 hover:text-foreground hover:border-foreground/25 transition-colors duration-300 cursor-pointer"
               aria-label="Scroll to top"
             >
               <ArrowUp className="h-4 w-4" />

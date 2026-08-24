@@ -3,6 +3,7 @@ export const defaultAppState = {
   eventsLoaded: true,
   teamMembers: [],
   blogPosts: [],
+  blogPostsLoaded: true,
   faqs: [],
   jobs: [],
   boardPositions: [],

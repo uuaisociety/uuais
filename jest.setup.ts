@@ -1,5 +1,43 @@
 import '@testing-library/jest-dom';
 import React from 'react';
+import { TextEncoder, TextDecoder } from 'util';
+import { ReadableStream } from 'stream/web';
+
+// jsdom doesn't expose these Node web globals (confirmed via bare probe).
+if (typeof globalThis.TextEncoder === 'undefined') globalThis.TextEncoder = TextEncoder as unknown as typeof globalThis.TextEncoder;
+if (typeof globalThis.TextDecoder === 'undefined') globalThis.TextDecoder = TextDecoder as unknown as typeof globalThis.TextDecoder;
+if (typeof globalThis.ReadableStream === 'undefined') globalThis.ReadableStream = ReadableStream as unknown as typeof globalThis.ReadableStream;
+
+// jsdom lacks Response (Headers is provided). Minimal Response used by route tests.
+if (typeof globalThis.Response === 'undefined') {
+  class HeadersMock {
+    private map = new Map<string, string>();
+    constructor(init?: Record<string, string> | [string, string][]) {
+      if (init) {
+        if (Array.isArray(init)) for (const [k, v] of init) this.set(k, v);
+        else for (const [k, v] of Object.entries(init)) this.set(k, String(v));
+      }
+    }
+    get(name: string) { return this.map.get(name.toLowerCase()) ?? null; }
+    has(name: string) { return this.map.has(name.toLowerCase()); }
+    set(name: string, value: string) { this.map.set(name.toLowerCase(), value); }
+  }
+  class ResponseMock {
+    status: number;
+    ok: boolean;
+    headers: HeadersMock;
+    private bodyText: string;
+    constructor(body?: unknown, init?: { status?: number; headers?: Record<string, string> | [string, string][] }) {
+      this.bodyText = typeof body === 'string' ? body : '';
+      this.status = init?.status ?? 200;
+      this.ok = this.status >= 200 && this.status < 300;
+      this.headers = new HeadersMock(init?.headers);
+    }
+    async text() { return this.bodyText; }
+    async json() { return JSON.parse(this.bodyText); }
+  }
+  globalThis.Response = ResponseMock as unknown as typeof globalThis.Response;
+}
 
 declare global {
   var __mockPathname: string | undefined;
@@ -7,10 +45,13 @@ declare global {
   var __setMockTheme: ((theme: 'light' | 'dark') => void) | undefined;
   var __setMockParams: ((params: Record<string, string>) => void) | undefined;
   var __setAppState: ((state: Record<string, unknown> | null) => void) | undefined;
+  var __setAdminState: ((state: Record<string, unknown> | null) => void) | undefined;
+  var __setCollectionData: ((entries: Record<string, unknown> | null) => void) | undefined;
 }
 
 beforeEach(() => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
+  global.__setCollectionData?.(null);
 });
 
 if (typeof window !== 'undefined') {
@@ -80,6 +121,9 @@ jest.mock('next/navigation', () => ({
   useParams() {
     return mockParams;
   },
+  useSearchParams() {
+    return new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+  },
   notFound: jest.fn(() => {
     throw new Error('NEXT_NOT_FOUND');
   }),
@@ -88,16 +132,24 @@ global.__setMockParams = (params: Record<string, string>) => {
   Object.assign(mockParams, params);
 };
 
+let __mockAdminState: Record<string, unknown> | null = null;
+const __defaultAdminState = {
+  user: null,
+  loading: false,
+  profileLoading: false,
+  profile: null,
+  isAdmin: false,
+  isSuperAdmin: false,
+  claims: null,
+  signInWithGoogle: jest.fn(),
+  logout: jest.fn(),
+};
+global.__setAdminState = (state: Record<string, unknown> | null) => {
+  __mockAdminState = state;
+};
 jest.mock('@/hooks/useAdmin', () => ({
-  useAdmin: () => ({
-    user: null,
-    loading: false,
-    isAdmin: false,
-    isSuperAdmin: false,
-    claims: null,
-    signInWithGoogle: jest.fn(),
-    logout: jest.fn(),
-  }),
+  useAdmin: () => __mockAdminState || __defaultAdminState,
+  refreshProfile: jest.fn().mockResolvedValue(undefined),
 }));
 
 jest.mock('next/image', () => {
@@ -128,6 +180,20 @@ global.__setAppState = (state: Record<string, unknown> | null) => {
 jest.mock('@/contexts/AppContext', () => ({
   useApp: () => ({ state: __mockAppState || __defaultAppState, dispatch: jest.fn() }),
   AppProvider: ({ children }: { children: React.ReactNode }) => children,
+}));
+
+let __mockCollectionData: Record<string, unknown> = {};
+const __defaultCollectionData = { data: [], loaded: false };
+// Keyed by the subscribe function's name so re-renders (filters, expands) get the same data; 'default' covers anonymous/inline subscribe functions.
+global.__setCollectionData = (entries: Record<string, unknown> | null) => {
+  __mockCollectionData = entries || {};
+};
+jest.mock('@/lib/firestore/useCollectionData', () => ({
+  useCollectionData: (subscribe: unknown) => {
+    const name = typeof subscribe === 'function' && subscribe.name ? subscribe.name : 'default';
+    const entry = __mockCollectionData[name];
+    return entry !== undefined ? entry : __defaultCollectionData;
+  },
 }));
 
 jest.mock("@/utils/seo", () => ({
@@ -183,6 +249,7 @@ jest.mock("@/lib/firestore", () => {
     recordAttendance: stub,
     getUsers: stub,
     getUserById: stub,
+    getUserProfile: stub,
     updateUser: stub,
     subscribeToAiChats: jest.fn(() => () => {}),
     addAiChat: stub,

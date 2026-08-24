@@ -1,12 +1,10 @@
-import type { ApplicationCampaign, BoardPosition, Event, FAQ, Job, TeamMember } from '@/types';
+import type { Event, FAQ, Job, TeamMember } from '@/types';
 
 export interface PublicSeed {
   events: Event[];
   jobs: Job[];
   faqs: FAQ[];
   teamMembers: TeamMember[];
-  boardPositions: BoardPosition[];
-  campaigns: ApplicationCampaign[];
 }
 
 const EMPTY_SEED: PublicSeed = {
@@ -14,8 +12,6 @@ const EMPTY_SEED: PublicSeed = {
   jobs: [],
   faqs: [],
   teamMembers: [],
-  boardPositions: [],
-  campaigns: [],
 };
 
 function isTimestampLike(value: unknown): value is { toDate: () => Date } {
@@ -56,20 +52,21 @@ function normalizeDoc<T>(doc: { id: string; data: () => Record<string, unknown> 
  * Server-side fetch of all public data so SSR HTML ships real content instead
  * of empty arrays + pulse skeletons. Degrades to empty arrays on any error
  * (including the admin SDK failing to init) so the app never breaks.
+ *
+ * Pass `{ throwOnError: true }` (used by the MCP layer) to rethrow instead so
+ * callers can distinguish "empty site" from "data source unavailable".
  */
-export async function getPublicSeed(): Promise<PublicSeed> {
+export async function getPublicSeed(options?: { throwOnError?: boolean }): Promise<PublicSeed> {
   try {
     // Dynamic import so a failed admin SDK init degrades gracefully instead of
     // throwing during module evaluation.
     const { adminDb } = await import('@/lib/firebase-admin');
 
-    const [eventsSnap, jobsSnap, faqsSnap, teamSnap, positionsSnap, campaignsSnap] = await Promise.all([
+    const [eventsSnap, jobsSnap, faqsSnap, teamSnap] = await Promise.all([
       adminDb.collection('events').where('published', '==', true).orderBy('eventStartAt', 'desc').get(),
       adminDb.collection('jobs').where('published', '==', true).orderBy('createdAt', 'desc').get(),
       adminDb.collection('faqs').orderBy('order', 'asc').get(),
       adminDb.collection('teamMembers').orderBy('order', 'asc').get(),
-      adminDb.collection('board-positions').orderBy('order', 'asc').get(),
-      adminDb.collection('applicationCampaigns').where('status', '==', 'open').get(),
     ]);
 
     return {
@@ -77,10 +74,9 @@ export async function getPublicSeed(): Promise<PublicSeed> {
       jobs: jobsSnap.docs.map((d) => normalizeDoc<Job>(d)),
       faqs: faqsSnap.docs.map((d) => normalizeDoc<FAQ>(d)),
       teamMembers: teamSnap.docs.map((d) => normalizeDoc<TeamMember>(d)),
-      boardPositions: positionsSnap.docs.map((d) => normalizeDoc<BoardPosition>(d)),
-      campaigns: campaignsSnap.docs.map((d) => normalizeDoc<ApplicationCampaign>(d)),
     };
   } catch (error) {
+    if (options?.throwOnError) throw error;
     console.error('getPublicSeed failed, falling back to empty seed:', error);
     return { ...EMPTY_SEED };
   }
