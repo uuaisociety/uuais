@@ -15,6 +15,8 @@ interface AppState {
   jobs: Job[];
   showcaseProjects: ShowcaseProject[];
   showcaseLoaded: boolean;
+  /** The showcase could not be read from the server — an empty list here means "unknown", not "none". */
+  showcaseUnavailable: boolean;
   isLoading: boolean;
   error: string | null;
 }
@@ -42,7 +44,8 @@ type AppAction =
   | { type: 'ADD_JOB'; payload: Job }
   | { type: 'UPDATE_JOB'; payload: Job }
   | { type: 'DELETE_JOB'; payload: string }
-  | { type: 'SET_SHOWCASE_PROJECTS'; payload: ShowcaseProject[] }
+  | { type: 'SET_SHOWCASE_PROJECTS'; payload: ShowcaseProject[]; fromCache?: boolean }
+  | { type: 'SET_SHOWCASE_UNAVAILABLE' }
   | { type: 'SET_SHOWCASE_LOADED'; payload: boolean }
   | { type: 'ADD_SHOWCASE_PROJECT'; payload: ShowcaseProject }
   | { type: 'UPDATE_SHOWCASE_PROJECT'; payload: ShowcaseProject }
@@ -79,6 +82,7 @@ const initialState: AppState = {
   jobs: [],
   showcaseProjects: [],
   showcaseLoaded: false,
+  showcaseUnavailable: false,
   isLoading: false,
   error: null
 };
@@ -166,7 +170,15 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         jobs: state.jobs.filter(j => j.id !== action.payload)
       };
     case 'SET_SHOWCASE_PROJECTS':
-      return { ...state, showcaseProjects: action.payload, showcaseLoaded: true };
+      return {
+        ...state,
+        showcaseProjects: action.payload,
+        showcaseLoaded: true,
+        // Only an empty cache-served result is unknown; anything the server answered is truth.
+        showcaseUnavailable: action.fromCache === true && action.payload.length === 0,
+      };
+    case 'SET_SHOWCASE_UNAVAILABLE':
+      return { ...state, showcaseLoaded: true, showcaseUnavailable: true };
     case 'SET_SHOWCASE_LOADED':
       return { ...state, showcaseLoaded: action.payload };
     case 'ADD_SHOWCASE_PROJECT':
@@ -293,9 +305,15 @@ export const AppProvider: React.FC<{
         unsubscribeShowcase.current = null;
       }
       attach(import('@/lib/firestore/showcase'), unsubscribeShowcase, ({ subscribeToShowcaseProjects }) =>
-        subscribeToShowcaseProjects((projects) => {
-          dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: projects });
-        }, { includeUnpublished }),
+        subscribeToShowcaseProjects(
+          (projects, meta) => {
+            dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: projects, fromCache: meta.fromCache });
+          },
+          {
+            includeUnpublished,
+            onError: () => dispatch({ type: 'SET_SHOWCASE_UNAVAILABLE' }),
+          },
+        ),
       );
 
       // Blog posts: public visitors see published posts; admins see all (incl. drafts)
