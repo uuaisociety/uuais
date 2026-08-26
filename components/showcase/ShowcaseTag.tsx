@@ -1,10 +1,15 @@
+import Link from 'next/link';
+import Tag from '@/components/ui/Tag';
+
+/** A project tag, linked to the showcase filtered by that tag — tags are the cheapest discovery path on the page. */
 export default function ShowcaseTag({ tag }: { tag: string }) {
   return (
-    <span
-      className="mono-meta max-w-[16rem] truncate rounded border border-border bg-muted px-1.5 py-0.5 text-muted-foreground"
-      title={tag}
+    <Link
+      href={`/showcase?q=${encodeURIComponent(tag)}`}
+      aria-label={`Filter projects by tag ${tag}`}
+      className="inline-block rounded-sm transition-all duration-150 hover:opacity-75 active:scale-95"
     >
-      #{tag}
-    </span>
+      <Tag variant="gray" size="sm">{tag}</Tag>
+    </Link>
   );
 }
