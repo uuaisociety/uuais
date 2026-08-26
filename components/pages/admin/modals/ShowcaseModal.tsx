@@ -12,6 +12,7 @@ import {
 export interface ShowcaseFormState {
   title: string;
   description: string;
+  details: string;
   category: ShowcaseCategory;
   links: { github?: string; website?: string; demo?: string; video?: string };
   tags: string[];
@@ -65,6 +66,14 @@ const ShowcaseModal: React.FC<ShowcaseModalProps> = ({ open, editing, form, setF
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Description</label>
             <textarea value={form.description} onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))} rows={3} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">
+              About this project
+              <span className="ml-1 text-xs font-normal text-gray-500 dark:text-gray-400">Optional — shown as paragraphs on the project page</span>
+            </label>
+            <textarea value={form.details} onChange={(e) => setForm(prev => ({ ...prev, details: e.target.value }))} rows={6} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
           </div>
 
           <div>
