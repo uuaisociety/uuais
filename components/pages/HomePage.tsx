@@ -85,7 +85,13 @@ const HomePage: React.FC = () => {
     .filter(event => event.eventStartAt && new Date(event.eventStartAt) > now)
     .slice(0, 3);
 
-  const showcaseProjects = state.showcaseProjects.filter((p) => p.published);
+  // Featured first, then newest — and capped like the events and blog sections.
+  const showcaseProjects = state.showcaseProjects
+    .filter(p => p.published)
+    .sort((a, b) =>
+      Number(b.featured) - Number(a.featured) ||
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, 3);
 
   const latestPosts = state.blogPosts
     .filter(post => post.published)
@@ -248,16 +254,15 @@ const HomePage: React.FC = () => {
               {showcaseProjects.map((project) => (
                 <Link
                   key={project.id}
-                  href={`/showcase/${project.id}`}
+                  href={`/showcase/${project.slug || project.id}`}
                   className="glass glass-interactive group flex flex-col overflow-hidden rounded-md"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <ShowcaseCover
-                      category={project.category}
                       title={project.title}
                       image={project.coverImage}
-                      className="absolute inset-0 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
-                      scanlines={false}
+                      className="h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
+                      sizes="(min-width: 1024px) 384px, (min-width: 640px) 50vw, 100vw"
                     />
                     {project.featured && (
                       <span className="absolute top-3 left-3 pill bg-black/45 text-white backdrop-blur-md">
@@ -290,7 +295,9 @@ const HomePage: React.FC = () => {
           ) : (
             <div className="border-t border-border py-16 text-center">
               <p className="mono-meta text-muted-foreground">
-                No showcase projects yet. Be the first to share what you&apos;re building.
+                {state.showcaseUnavailable
+                  ? 'Could not load member projects right now.'
+                  : "No showcase projects yet. Be the first to share what you're building."}
               </p>
             </div>
           )}
