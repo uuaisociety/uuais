@@ -13,6 +13,12 @@ interface State {
   error: Error | null;
 }
 
+/** Next tags its routing throws (NEXT_NOT_FOUND, NEXT_REDIRECT, NEXT_HTTP_ERROR_FALLBACK) on `digest`. */
+function isRouterControlFlow(error: unknown): boolean {
+  const digest = (error as { digest?: unknown } | null)?.digest;
+  return typeof digest === 'string' && digest.startsWith('NEXT_');
+}
+
 export class ErrorBoundary extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -20,6 +26,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
   }
 
   static getDerivedStateFromError(error: Error): State {
+    if (isRouterControlFlow(error)) throw error;
     return { hasError: true, error };
   }
 
