@@ -169,10 +169,24 @@ export const SHOWCASE_CATEGORY_LABELS: Record<ShowcaseCategory, string> = {
   other: 'Other',
 };
 
+/** Showcase submission limits, shared by the form, the submit validation, and (by hand) the Firestore rules. */
+export const SHOWCASE_LIMITS = {
+  title: 80,
+  description: 600,
+  details: 4000,
+  link: 500,
+  tag: 30,
+  tagCount: 5,
+} as const;
+
 export interface ShowcaseProject {
   id: string;
+  /** URL-safe segment derived from the title; falls back to `id` on older records. */
+  slug?: string;
   title: string;
   description: string;
+  /** Optional long-form write-up shown on the project page, as plain paragraphs. */
+  details?: string;
   category: ShowcaseCategory;
   creatorUserId: string;
   creatorName: string;
