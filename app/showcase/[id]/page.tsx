@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 import ShowcaseDetailPage from '@/components/pages/ShowcaseDetailPage';
 import { ErrorBoundaryWrapper } from '@/components/ui/ErrorBoundaryWrapper';
 import { findPublishedShowcaseProject } from '@/lib/showcase-server';
@@ -50,6 +51,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
+
+  // The readable URL is the canonical one.
+  const project = await findPublishedShowcaseProject(id);
+  if (project?.slug && project.slug !== id) {
+    redirect(`/showcase/${project.slug}`);
+  }
+
   return (
     <ErrorBoundaryWrapper>
       <ShowcaseDetailPage projectId={id} />
