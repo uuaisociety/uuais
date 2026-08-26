@@ -61,6 +61,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     },
     {
+      url: `${baseUrl}/showcase`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/projects`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
@@ -129,5 +135,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // sitemap still serves the static + event routes
   }
 
-  return [...routes, ...eventRoutes, ...blogRoutes]
+  // Dynamic published showcase project URLs.
+  let showcaseRoutes: MetadataRoute.Sitemap = []
+  try {
+    const { getPublishedShowcaseProjects } = await import('@/lib/showcase-server')
+    const projects = await getPublishedShowcaseProjects()
+    showcaseRoutes = projects.map((project) => ({
+      url: `${baseUrl}/showcase/${project.slug || project.id}`,
+      lastModified: project.updatedAt ? new Date(project.updatedAt) : new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    }))
+  } catch {
+    // sitemap still serves the static + event + blog routes
+  }
+
+  return [...routes, ...eventRoutes, ...blogRoutes, ...showcaseRoutes]
 }
