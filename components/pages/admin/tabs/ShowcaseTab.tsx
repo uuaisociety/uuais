@@ -9,10 +9,21 @@ import { ShowcaseProject } from "@/types";
 import { Edit3, Eye, EyeOff, Plus, Star, Trash2 } from "lucide-react";
 import ShowcaseModal, { type ShowcaseFormState } from "@/components/pages/admin/modals/ShowcaseModal";
 import { useApp } from "@/contexts/AppContext";
+import { slugify } from "@/lib/slugify";
+import { ensureUniqueShowcaseSlug, notifyShowcaseApproved } from "@/lib/firestore/showcase";
+
+type Section = "pending" | "published" | "all";
+
+const SECTIONS: { key: Section; label: string }[] = [
+  { key: "pending", label: "Needs review" },
+  { key: "published", label: "Published" },
+  { key: "all", label: "All" },
+];
 
 const emptyForm: ShowcaseFormState = {
   title: "",
   description: "",
+  details: "",
   category: "app",
   links: {},
   tags: [],
@@ -25,12 +36,17 @@ const ShowcaseTab: React.FC = () => {
   const [showShowcaseModal, setShowShowcaseModal] = useState(false);
   const [editingShowcase, setEditingShowcase] = useState<ShowcaseProject | null>(null);
   const [showcaseForm, setShowcaseForm] = useState<ShowcaseFormState>(emptyForm);
+  // Member submissions arrive unpublished, so review is the default view.
+  const pendingCount = state.showcaseProjects.filter((p) => !p.published).length;
+  const [section, setSection] = useState<Section>(pendingCount > 0 ? "pending" : "all");
 
-  const sorted = [...state.showcaseProjects].sort((a, b) => {
-    const ta = new Date(a.createdAt).getTime();
-    const tb = new Date(b.createdAt).getTime();
-    return (Number.isNaN(tb) ? 0 : tb) - (Number.isNaN(ta) ? 0 : ta);
-  });
+  const sorted = [...state.showcaseProjects]
+    .filter((p) => (section === "all" ? true : section === "pending" ? !p.published : p.published))
+    .sort((a, b) => {
+      const ta = new Date(a.createdAt).getTime();
+      const tb = new Date(b.createdAt).getTime();
+      return (Number.isNaN(tb) ? 0 : tb) - (Number.isNaN(ta) ? 0 : ta);
+    });
 
   const openCreate = () => {
     setEditingShowcase(null);
@@ -43,6 +59,7 @@ const ShowcaseTab: React.FC = () => {
     setShowcaseForm({
       title: project.title,
       description: project.description,
+      details: project.details ?? "",
       category: project.category,
       links: project.links,
       tags: project.tags,
@@ -57,13 +74,15 @@ const ShowcaseTab: React.FC = () => {
     setEditingShowcase(null);
   };
 
-  const handleAdd = () => {
+  const handleAdd = async () => {
     const now = new Date().toISOString();
     dispatch({
       firestoreAction: "ADD_SHOWCASE_PROJECT",
       payload: {
         title: showcaseForm.title,
+        slug: await ensureUniqueShowcaseSlug(slugify(showcaseForm.title)),
         description: showcaseForm.description,
+        details: showcaseForm.details || undefined,
         category: showcaseForm.category,
         creatorUserId: "admin",
         creatorName: "Admin",
@@ -81,14 +100,20 @@ const ShowcaseTab: React.FC = () => {
     closeModal();
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     if (!editingShowcase) return;
+    // An existing slug is kept: renaming a project must not break links already shared.
+    const slug =
+      editingShowcase.slug ||
+      (await ensureUniqueShowcaseSlug(slugify(showcaseForm.title), editingShowcase.id));
     dispatch({
       firestoreAction: "UPDATE_SHOWCASE_PROJECT",
       payload: {
         ...editingShowcase,
         title: showcaseForm.title,
+        slug,
         description: showcaseForm.description,
+        details: showcaseForm.details || undefined,
         category: showcaseForm.category,
         links: showcaseForm.links,
         coverImage: showcaseForm.coverImage || undefined,
@@ -106,11 +131,16 @@ const ShowcaseTab: React.FC = () => {
     }
   };
 
-  const togglePublish = (project: ShowcaseProject) => {
-    dispatch({
-      firestoreAction: "UPDATE_SHOWCASE_PROJECT",
-      payload: { ...project, published: !project.published, updatedAt: new Date().toISOString() },
-    });
+  const togglePublish = async (project: ShowcaseProject) => {
+    const publishing = !project.published;
+    // Publishing is the first moment a slug can be reached, so it is where it is settled.
+    const slug = publishing
+      ? await ensureUniqueShowcaseSlug(project.slug || slugify(project.title), project.id)
+      : project.slug;
+    const updated = { ...project, slug, published: publishing, updatedAt: new Date().toISOString() };
+    dispatch({ firestoreAction: "UPDATE_SHOWCASE_PROJECT", payload: updated });
+    // Only on approval, and only once — unpublishing is not news worth an email.
+    if (publishing) void notifyShowcaseApproved(updated);
   };
 
   const toggleFeature = (project: ShowcaseProject) => {
@@ -127,9 +157,36 @@ const ShowcaseTab: React.FC = () => {
         <Button variant="outline" icon={Plus} onClick={openCreate}>New Project</Button>
       </div>
 
+      <div className="flex flex-wrap gap-2 mb-6">
+        {SECTIONS.map((s) => (
+          <button
+            key={s.key}
+            type="button"
+            onClick={() => setSection(s.key)}
+            aria-pressed={section === s.key}
+            className={`inline-flex min-h-9 cursor-pointer items-center gap-1.5 rounded-md border px-3 mono-label transition-colors duration-300 ${
+              section === s.key
+                ? "border-primary/30 bg-primary/[0.07] text-primary"
+                : "border-border text-muted-foreground hover:border-foreground/25 hover:text-foreground"
+            }`}
+          >
+            {s.label}
+            {s.key === "pending" && pendingCount > 0 && (
+              <span className="tabular-nums opacity-60">{pendingCount}</span>
+            )}
+          </button>
+        ))}
+      </div>
+
       <div className="grid gap-4">
         {sorted.length === 0 && (
-          <p className="text-sm text-muted-foreground py-8 text-center">No showcase submissions yet.</p>
+          <p className="text-sm text-muted-foreground py-8 text-center">
+            {section === "pending"
+              ? "Nothing waiting for review."
+              : section === "published"
+                ? "No published projects yet."
+                : "No showcase submissions yet."}
+          </p>
         )}
         {sorted.map((project) => (
           <Card key={project.id}>
@@ -158,7 +215,7 @@ const ShowcaseTab: React.FC = () => {
                   )}
                 </div>
                 <div className="flex flex-col gap-2 ml-4 shrink-0">
-                  <Button size="sm" variant="outline" icon={project.published ? EyeOff : Eye} onClick={() => togglePublish(project)}>
+                  <Button size="sm" variant="outline" icon={project.published ? EyeOff : Eye} onClick={() => void togglePublish(project)}>
                     {project.published ? "Unpublish" : "Publish"}
                   </Button>
                   <Button size="sm" variant="outline" icon={Star} onClick={() => toggleFeature(project)}>
@@ -185,9 +242,9 @@ const ShowcaseTab: React.FC = () => {
         onClose={closeModal}
         onSubmit={() => {
           if (editingShowcase) {
-            handleUpdate();
+            void handleUpdate();
           } else {
-            handleAdd();
+            void handleAdd();
           }
         }}
       />
