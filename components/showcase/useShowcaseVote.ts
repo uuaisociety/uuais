@@ -32,58 +32,86 @@ export function useShowcaseVote(userId?: string | null) {
   const { notify } = useNotify();
   const key = storageKeyFor(userId);
   const [voted, setVoted] = useState<string[]>(() => readVotedIds(key));
-  const [localAdditions, setLocalAdditions] = useState<Record<string, number>>({});
+  // Server truth for counts this session, so a vote and an unvote both land immediately.
+  const [localCounts, setLocalCounts] = useState<Record<string, number>>({});
   const [lastUserId, setLastUserId] = useState(userId);
-  // In-flight guard so rapid taps can't double-vote while the request is out.
+  // In-flight guard so rapid taps can't double-submit while the request is out.
   const pendingRef = useRef<Set<string>>(new Set());
+  const [pending, setPending] = useState<string[]>([]);
 
   if (userId !== lastUserId) {
     setLastUserId(userId);
     setVoted(readVotedIds(storageKeyFor(userId)));
-    setLocalAdditions({});
+    setLocalCounts({});
+    // A request still out belongs to the previous user; its `finally` clears the ref.
+    setPending([]);
   }
 
-  // Clear any in-flight guard when the active user changes.
+  const votesFor = (p: ShowcaseProject) =>
+    p.id in localCounts ? localCounts[p.id] : p.votes || 0;
+
+  const markPending = (id: string, on: boolean) => {
+    if (on) pendingRef.current.add(id);
+    else pendingRef.current.delete(id);
+    setPending(Array.from(pendingRef.current));
+  };
+
+  // Functional, so two concurrent votes cannot each write from the same stale snapshot.
+  const applyVote = (id: string, add: boolean) =>
+    setVoted((prev) =>
+      add ? (prev.includes(id) ? prev : [...prev, id]) : prev.filter((v) => v !== id),
+    );
+
+  // Persisted here rather than inside the updater, which must stay pure.
   useEffect(() => {
-    pendingRef.current = new Set();
-  }, [userId]);
+    writeVotedIds(key, voted);
+  }, [key, voted]);
 
-  const votesFor = (p: ShowcaseProject) => (p.votes || 0) + (localAdditions[p.id] || 0);
-
+  /** Toggle this member's vote — casting and withdrawing share one control. */
   const handleVote = async (p: ShowcaseProject) => {
-    if (voted.includes(p.id) || pendingRef.current.has(p.id)) return;
-    pendingRef.current.add(p.id);
+    if (pendingRef.current.has(p.id)) return;
+    const removing = voted.includes(p.id);
+    markPending(p.id, true);
     try {
       const res = await fetch('/api/showcase/vote', {
-        method: 'POST',
+        method: removing ? 'DELETE' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ projectId: p.id }),
       });
+
       if (res.status === 401) {
         notify({ type: 'error', title: 'Members only', message: 'Sign in as a member to vote for projects.' });
         return;
       }
+
+      // 409 means the server already agrees with where we were heading; adopt its view.
       if (res.status === 409) {
-        const next = [...voted, p.id];
-        setVoted(next);
-        writeVotedIds(key, next);
+        applyVote(p.id, !removing);
         return;
       }
+
       if (!res.ok) {
-        notify({ type: 'error', title: 'Vote failed', message: 'Something went wrong. Please try again.' });
+        notify({
+          type: 'error',
+          title: removing ? 'Could not remove vote' : 'Vote failed',
+          message: 'Something went wrong. Please try again.',
+        });
         return;
       }
+
       const data = (await res.json()) as { votes: number };
-      const next = [...voted, p.id];
-      setVoted(next);
-      writeVotedIds(key, next);
-      setLocalAdditions((a) => ({ ...a, [p.id]: (data.votes || 0) - (p.votes || 0) }));
+      applyVote(p.id, !removing);
+      setLocalCounts((c) => ({ ...c, [p.id]: data.votes ?? 0 }));
     } catch {
-      notify({ type: 'error', title: 'Vote failed', message: 'Something went wrong. Please try again.' });
+      notify({
+        type: 'error',
+        title: removing ? 'Could not remove vote' : 'Vote failed',
+        message: 'Something went wrong. Please try again.',
+      });
     } finally {
-      pendingRef.current.delete(p.id);
+      markPending(p.id, false);
     }
   };
 
-  return { voted, votesFor, handleVote };
+  return { voted, pending, votesFor, handleVote };
 }
