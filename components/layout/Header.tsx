@@ -11,13 +11,21 @@ import { Button } from '@/components/ui/Button';
 import { loginUrl } from '@/lib/login-redirect';
 import { useOpenCampaigns } from '@/lib/firestore/useOpenCampaigns';
 
+// Desktop top level. The wordmark already goes home, so Home only earns a slot
+// in the mobile list, where a vertical menu has room for it.
 const navigation = [
-  { name: 'Home', href: '/' },
   { name: 'Events', href: '/events' },
-  { name: 'Job board', href: '/careers' },
   { name: 'Blog', href: '/blog', badge: 'Beta' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
+];
+
+const mobileNavigation = [{ name: 'Home', href: '/' }, ...navigation];
+
+// What members do here, grouped: their work and their opportunities.
+const communityLinks = [
+  { href: '/showcase', label: 'Member Showcase' },
+  { href: '/careers', label: 'Job board' },
 ];
 
 const projectLinks = [
@@ -143,20 +151,28 @@ export const Header: React.FC = () => {
                   onClick={() => setIsCommunityOpen((v) => !v)}
                   aria-expanded={isCommunityOpen}
                   aria-haspopup="true"
-                  className={`${navLinkClass(isActive('/showcase'))} inline-flex items-center gap-1 cursor-pointer`}
+                  className={`${navLinkClass(communityLinks.some((l) => isActive(l.href)))} inline-flex items-center gap-1 cursor-pointer`}
                 >
                   Community
                   <ChevronDown className={`h-3 w-3 transition-transform duration-300 ${isCommunityOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {isCommunityOpen && (
                   <div className="glass-pop absolute left-0 mt-2 w-52 rounded-md p-1.5 animate-rise">
-                    <Link
-                      href="/showcase"
-                      onClick={() => setIsCommunityOpen(false)}
-                      className="block px-3 py-2 rounded-sm text-[0.8125rem] text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors"
-                    >
-                      Member Showcase
-                    </Link>
+                    {communityLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setIsCommunityOpen(false)}
+                        aria-current={isActive(link.href) ? 'page' : undefined}
+                        className={`block px-3 py-2 rounded-sm text-[0.8125rem] transition-colors ${
+                          isActive(link.href)
+                            ? 'text-current bg-current/[0.12]'
+                            : 'text-current/70 hover:text-current hover:bg-current/[0.09]'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
                   </div>
                 )}
               </div>
@@ -255,7 +271,7 @@ export const Header: React.FC = () => {
             }`}
           >
             <div className="py-2 border-t border-current/10">
-              {navigation.map((item) => (
+              {mobileNavigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -270,16 +286,20 @@ export const Header: React.FC = () => {
                 </Link>
               ))}
 
-              <Link
-                href="/showcase"
-                onClick={() => setIsMenuOpen(false)}
-                aria-current={isActive('/showcase') ? "page" : undefined}
-                className={`block px-3.5 py-2.5 rounded-sm text-sm font-medium transition-colors ${
-                  isActive('/showcase') ? 'text-current bg-current/[0.12]' : 'text-current/65 hover:text-current hover:bg-current/[0.07]'
-                }`}
-              >
-                Community
-              </Link>
+              <p className="px-3.5 pt-3 pb-1 mono-label text-current/45">Community</p>
+              {communityLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  className={`block px-3.5 py-2.5 rounded-sm text-sm font-medium transition-colors ${
+                    isActive(link.href) ? 'text-current bg-current/[0.12]' : 'text-current/65 hover:text-current hover:bg-current/[0.07]'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
 
               {identity?.showAdmin && (
                 <>
