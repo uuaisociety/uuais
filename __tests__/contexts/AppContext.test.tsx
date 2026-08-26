@@ -287,6 +287,48 @@ describe('AppContext', () => {
       expect(result.current.state.showcaseProjects).toEqual([mockShowcaseProject]);
     });
 
+    // An empty result served from cache means "could not ask", not "nothing there".
+    it('marks the showcase unavailable when an empty result came from cache', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [], fromCache: true });
+      });
+      expect(result.current.state.showcaseUnavailable).toBe(true);
+      expect(result.current.state.showcaseLoaded).toBe(true);
+    });
+
+    it('trusts an empty result the server actually answered', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [], fromCache: false });
+      });
+      expect(result.current.state.showcaseUnavailable).toBe(false);
+    });
+
+    it('clears the unavailable flag once cached projects do arrive', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [], fromCache: true });
+      });
+      await act(async () => {
+        await result.current.dispatch({
+          type: 'SET_SHOWCASE_PROJECTS',
+          payload: [mockShowcaseProject],
+          fromCache: true,
+        });
+      });
+      expect(result.current.state.showcaseUnavailable).toBe(false);
+    });
+
+    it('SET_SHOWCASE_UNAVAILABLE marks the stream as failed', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_UNAVAILABLE' });
+      });
+      expect(result.current.state.showcaseUnavailable).toBe(true);
+      expect(result.current.state.showcaseLoaded).toBe(true);
+    });
+
     it('ADD_SHOWCASE_PROJECT regular action', async () => {
       const { result } = renderApp();
       await act(async () => {

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your project is live</title>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color:#111827; }
+    .container { max-width: 640px; margin: 0 auto; padding: 24px; }
+    .card { background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:24px; }
+    .btn { display:inline-block; padding:10px 16px; background:#ef4444; color:#fff; text-decoration:none; border-radius:8px; }
+    .muted { color:#6b7280; font-size:14px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>{{project_title}} is live, {{name}}</h1>
+      <p>The board reviewed your submission and it is now on the UU AI Society showcase for everyone to see.</p>
+      <p>
+        <a class="btn" href="{{project_url}}" target="_blank" rel="noopener noreferrer">View your project</a>
+      </p>
+      <p class="muted">If the button doesn't work, copy and paste this link into your browser:</p>
+      <p class="muted"><a href="{{project_url}}" target="_blank" rel="noopener noreferrer">{{project_url}}</a></p>
+      <p class="muted">Members can vote for projects they like. Share the link with anyone who should see what you built.</p>
+    </div>
+    {{footer}}
+  </div>
+</body>
+</html>
