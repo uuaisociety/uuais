@@ -2,9 +2,7 @@ import { MetadataRoute } from 'next'
 import { SITE_URL } from './metadata'
 import { getPublicSeed } from '@/lib/server-data'
 
-// The data helpers below only touch the Admin SDK (no headers()/cookies()/fetch),
-// so without a revalidation window the sitemap would be baked once at build time
-// and newly published events/blog posts/showcase projects would never appear.
+// The data helpers below only touch the Admin SDK (no headers()/cookies()/fetch), so without a revalidation window the sitemap would be baked once at build time and newly published content would never appear.
 export const revalidate = 86400
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -161,8 +159,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // Each section is one Firestore query; running them concurrently cuts the
-  // on-demand (revalidated) generation time from three round-trips to one.
+  // Each section is one Firestore query; running them concurrently cuts the on-demand (revalidated) generation time from three round-trips to one.
   const [eventRoutes, blogRoutes, showcaseRoutes] = await Promise.all([
     loadEventRoutes(),
     loadBlogRoutes(),

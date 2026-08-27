@@ -13,8 +13,7 @@ class VoteError extends Error {
   }
 }
 
-// Firestore doc ids cannot contain '/' or control chars; cap length to keep
-// the vote doc path `showcaseVotes/${projectId}_${uid}` well-formed.
+// Firestore doc ids cannot contain '/' or control chars; cap length to keep the vote doc path `showcaseVotes/${projectId}_${uid}` well-formed.
 function isValidProjectId(id: unknown): id is string {
   if (typeof id !== 'string' || id.length === 0 || id.length > 128) return false;
   for (let i = 0; i < id.length; i++) {
@@ -110,8 +109,7 @@ export async function DELETE(req: NextRequest) {
     try {
       await db.runTransaction(async (tx) => {
         const voteSnap = await tx.get(voteRef);
-        // 409 rather than 200: the client uses it to resync a stale local vote
-        // state, which a silent success would leave wrong.
+        // 409 rather than 200: the client uses it to resync a stale local vote state, which a silent success would leave wrong.
         if (!voteSnap.exists) throw new VoteError('not-voted', 409);
 
         const projectSnap = await tx.get(projectRef);

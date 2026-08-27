@@ -10,8 +10,7 @@ function sanitizeFilename(name: string) {
   return name.replace(/[^a-zA-Z0-9_.-]/g, '_');
 }
 
-// Detect the image type from magic bytes only; the client-supplied MIME type
-// is never trusted.
+// Detect the image type from magic bytes only; the client-supplied MIME type is never trusted.
 function detectImageType(buf: Buffer): string | null {
   if (!buf || buf.length < 12) return null;
   // PNG: 89 50 4E 47 0D 0A 1A 0A
@@ -44,9 +43,7 @@ function getBucket() {
   return admin.storage().bucket(bucketName);
 }
 
-// Covers are namespaced per uploader (showcase/<uid>/<file>), so a member can
-// only ever touch files they uploaded — including in-flight uploads not yet
-// referenced by a project document. Admins may touch any showcase path.
+// Covers are namespaced per uploader (showcase/<uid>/<file>), so a member can only ever touch files they uploaded — including in-flight uploads not yet referenced by a project doc; admins may touch any showcase path.
 function memberOwnsPath(uid: string, path: string) {
   return path.startsWith(`${SHOWCASE_PREFIX}${uid}/`);
 }
@@ -84,8 +81,7 @@ export async function POST(req: NextRequest) {
     const key = `${Date.now()}-${sanitizeFilename((file as File).name || 'upload')}`;
     const path = `${SHOWCASE_PREFIX}${uid}/${key}`;
 
-    // A non-admin may only replace a cover they uploaded themselves; admins
-    // may replace anything under the showcase/ prefix.
+    // A non-admin may only replace a cover they uploaded themselves; admins may replace anything under the showcase/ prefix.
     if (previous && previous !== path && isShowcasePath(previous) && !isAdmin && !memberOwnsPath(uid, previous)) {
       return NextResponse.json({ error: 'forbidden', reason: 'not-owner' }, { status: 403 });
     }

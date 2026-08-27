@@ -71,8 +71,7 @@ service cloud.firestore {
       allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
 
       // Create own document at first sign-in or profile completion.
-      // NOTE: isMember is intentionally self-assertable here (self-declared membership,
-      // a deliberate product decision); afterwards it is admin-managed (update rule below).
+      // NOTE: isMember is intentionally self-assertable here (self-declared membership, a deliberate product decision); afterwards it is admin-managed (update rule below).
       allow create: if isSignedIn() && request.auth.uid == uid
         && emailMatchesAuth()
         // Limit client-writable fields; prevent role escalation

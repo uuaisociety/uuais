@@ -39,8 +39,7 @@ export default function VoteButton({
           }`}
           aria-hidden
         />
-        {/* Keyed on the value so a change remounts the span and replays the lift —
-            no timers, and the motion-reduce variant opts out honestly. */}
+        {/* Keyed on the value so a change remounts the span and replays the lift — no timers, and the motion-reduce variant opts out honestly. */}
         <span
           key={votes}
           className="mono-meta tabular-nums animate-in fade-in slide-in-from-bottom-1 duration-300 motion-reduce:animate-none"
