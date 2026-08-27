@@ -1,11 +1,16 @@
 "use client";
 
 import React from "react";
+import { Modal } from "@/components/ui/Modal";
 import { Button } from "@/components/ui/Button";
-import { X } from "lucide-react";
+import { FieldGroup, InputBase, SelectBase, TextareaBase } from "@/components/ui/Form";
+import Tag from "@/components/ui/Tag";
+import { useNotify } from "@/components/ui/Notifications";
+import { parseTags } from "@/components/showcase/ShowcaseSubmissionModal";
 import {
   SHOWCASE_CATEGORIES,
   SHOWCASE_CATEGORY_LABELS,
+  SHOWCASE_LIMITS,
   ShowcaseCategory,
 } from "@/types";
 
@@ -29,119 +34,185 @@ interface ShowcaseModalProps {
   onSubmit: () => void;
 }
 
-const ShowcaseModal: React.FC<ShowcaseModalProps> = ({ open, editing, form, setForm, onClose, onSubmit }) => {
-  const [tagInput, setTagInput] = React.useState('');
-  if (!open) return null;
+const linkKeys = ['github', 'website', 'demo', 'video'] as const;
 
-  const addTag = () => {
-    const t = tagInput.trim();
-    if (t && !form.tags.includes(t)) {
-      setForm(prev => ({ ...prev, tags: [...prev.tags, t] }));
-      setTagInput('');
-    }
-  };
-  const removeTag = (tag: string) => setForm(prev => ({ ...prev, tags: prev.tags.filter(t => t !== tag) }));
+const linkPlaceholder: Record<(typeof linkKeys)[number], string> = {
+  github: 'https://github.com/you/project',
+  website: 'https://your-project.example',
+  demo: 'https://demo.your-project.example',
+  video: 'https://youtube.com/watch?v=…',
+};
+
+const ShowcaseModal: React.FC<ShowcaseModalProps> = ({ open, editing, form, setForm, onClose, onSubmit }) => {
+  const { notify } = useNotify();
+  // Tags commit live to the parent (which owns the form), so the parse below is also what handleAdd/handleUpdate reads on submit — nothing is trimmed unseen.
+  const [tagText, setTagText] = React.useState(form.tags.join(', '));
+  // The modal returns null while closed but stays mounted, so its local text must resync to the freshly-set form each time it opens.
+  const [lastOpen, setLastOpen] = React.useState(open);
+  if (!open) return null;
+  if (open !== lastOpen) {
+    setLastOpen(open);
+    setTagText(form.tags.join(', '));
+  }
+  const parsedTags = parseTags(tagText);
 
   const setLink = (key: keyof ShowcaseFormState['links'], value: string) =>
     setForm(prev => ({ ...prev, links: { ...prev.links, [key]: value || undefined } }));
 
+  const handleTagText = (value: string) => {
+    setTagText(value);
+    setForm(prev => ({ ...prev, tags: parseTags(value).tags }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (parsedTags.tooLong.length > 0) {
+      notify({
+        type: 'error',
+        title: 'Tag too long',
+        message: `Tags are limited to ${SHOWCASE_LIMITS.tag} characters. Shorten: ${parsedTags.tooLong.join(', ')}`,
+      });
+      return;
+    }
+    if (parsedTags.overflow > 0) {
+      notify({
+        type: 'error',
+        title: 'Too many tags',
+        message: `Pick your best ${SHOWCASE_LIMITS.tagCount} — remove ${parsedTags.overflow} more.`,
+      });
+      return;
+    }
+    onSubmit();
+  };
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-            {editing ? 'Edit Showcase Project' : 'Create New Showcase Project'}
-          </h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300">
-            <X className="h-6 w-6" />
-          </button>
-        </div>
-
-        <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Title</label>
-            <input type="text" value={form.title} onChange={(e) => setForm(prev => ({ ...prev, title: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Description</label>
-            <textarea value={form.description} onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))} rows={3} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" required />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">
-              About this project
-              <span className="ml-1 text-xs font-normal text-gray-500 dark:text-gray-400">Optional — shown as paragraphs on the project page</span>
-            </label>
-            <textarea value={form.details} onChange={(e) => setForm(prev => ({ ...prev, details: e.target.value }))} rows={6} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Category</label>
-            <select
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={editing ? 'Edit Showcase Project' : 'Create New Showcase Project'}
+      size="lg"
+    >
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FieldGroup label="Title" requiredHint="Required.">
+            <InputBase
+              type="text"
+              value={form.title}
+              onChange={(e) => setForm(prev => ({ ...prev, title: e.target.value }))}
+              maxLength={SHOWCASE_LIMITS.title}
+              required
+            />
+          </FieldGroup>
+          <FieldGroup label="Category" requiredHint="Required.">
+            <SelectBase
               value={form.category}
               onChange={(e) => setForm(prev => ({ ...prev, category: e.target.value as ShowcaseCategory }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 dark:bg-gray-800"
             >
               {SHOWCASE_CATEGORIES.map((cat) => (
                 <option key={cat} value={cat}>{SHOWCASE_CATEGORY_LABELS[cat]}</option>
               ))}
-            </select>
-          </div>
+            </SelectBase>
+          </FieldGroup>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">GitHub URL</label>
-              <input type="url" value={form.links.github ?? ''} onChange={(e) => setLink('github', e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Optional" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Website URL</label>
-              <input type="url" value={form.links.website ?? ''} onChange={(e) => setLink('website', e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Optional" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Demo URL</label>
-              <input type="url" value={form.links.demo ?? ''} onChange={(e) => setLink('demo', e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Optional" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Video URL</label>
-              <input type="url" value={form.links.video ?? ''} onChange={(e) => setLink('video', e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Optional" />
-            </div>
-          </div>
+        <FieldGroup label="Description" requiredHint="Required.">
+          <TextareaBase
+            value={form.description}
+            onChange={(e) => setForm(prev => ({ ...prev, description: e.target.value }))}
+            rows={3}
+            maxLength={SHOWCASE_LIMITS.description}
+            required
+          />
+        </FieldGroup>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Tags</label>
-            <div className="flex gap-2">
-              <input type="text" value={tagInput} onChange={(e) => setTagInput(e.target.value)} className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Add tag" />
-              <Button type="button" variant="outline" onClick={addTag}>Add</Button>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-2">
-              {form.tags.map((tag) => (
-                <span key={tag} className="inline-flex items-center gap-2 px-2 py-1 rounded bg-gray-200 dark:bg-gray-700 text-sm">
-                  {tag}
-                  <button type="button" onClick={() => removeTag(tag)} className="text-gray-600 dark:text-gray-300">×</button>
-                </span>
+        <FieldGroup label="About this project" requiredHint="Optional — shown as paragraphs on the project page">
+          <TextareaBase
+            value={form.details}
+            onChange={(e) => setForm(prev => ({ ...prev, details: e.target.value }))}
+            rows={6}
+            maxLength={SHOWCASE_LIMITS.details}
+          />
+        </FieldGroup>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {linkKeys.map((k) => (
+            <FieldGroup key={k} label={k.charAt(0).toUpperCase() + k.slice(1)} requiredHint="Optional">
+              <InputBase
+                type="url"
+                value={form.links[k] || ''}
+                onChange={(e) => setLink(k, e.target.value)}
+                placeholder={linkPlaceholder[k]}
+                maxLength={SHOWCASE_LIMITS.link}
+              />
+            </FieldGroup>
+          ))}
+        </div>
+
+        <FieldGroup
+          label="Tags"
+          requiredHint={`Comma-separated, up to ${SHOWCASE_LIMITS.tagCount} · ${SHOWCASE_LIMITS.tag} characters each`}
+        >
+          <InputBase
+            value={tagText}
+            onChange={(e) => handleTagText(e.target.value)}
+            placeholder="llm, hackathon, next.js"
+            maxLength={(SHOWCASE_LIMITS.tag + 2) * SHOWCASE_LIMITS.tagCount}
+            aria-describedby="showcase-tags-preview"
+          />
+        </FieldGroup>
+        {/* What will actually be saved, shown before the admin commits to it. */}
+        <div id="showcase-tags-preview" aria-live="polite" className="mt-2">
+          {parsedTags.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1.5">
+              {parsedTags.tags.map((tag) => (
+                <Tag key={tag} variant="gray" size="sm">{tag}</Tag>
               ))}
             </div>
-          </div>
+          )}
+          {(parsedTags.overflow > 0 || parsedTags.tooLong.length > 0) && (
+            <p className="mt-2 text-xs leading-relaxed text-primary">
+              {parsedTags.overflow > 0 && (
+                <>
+                  {parsedTags.overflow} tag{parsedTags.overflow === 1 ? '' : 's'} over the limit
+                  of {SHOWCASE_LIMITS.tagCount}
+                  {parsedTags.tooLong.length > 0 && '. '}
+                </>
+              )}
+              {parsedTags.tooLong.length > 0 && (
+                <>
+                  {parsedTags.tooLong.length === 1 ? 'One tag is' : `${parsedTags.tooLong.length} tags are`}{' '}
+                  longer than {SHOWCASE_LIMITS.tag} characters.
+                </>
+              )}
+            </p>
+          )}
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Cover Image URL</label>
-              <input type="url" value={form.coverImage} onChange={(e) => setForm(prev => ({ ...prev, coverImage: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Optional" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1 text-black dark:text-white">Cover Image Path</label>
-              <input type="text" value={form.coverImagePath} onChange={(e) => setForm(prev => ({ ...prev, coverImagePath: e.target.value }))} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Optional; e.g. member-uploads/xxx.png" />
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FieldGroup label="Cover image URL" requiredHint="Optional">
+            <InputBase
+              type="url"
+              value={form.coverImage}
+              onChange={(e) => setForm(prev => ({ ...prev, coverImage: e.target.value }))}
+              placeholder="Optional"
+            />
+          </FieldGroup>
+          <FieldGroup label="Cover image path" requiredHint="Optional">
+            <InputBase
+              type="text"
+              value={form.coverImagePath}
+              onChange={(e) => setForm(prev => ({ ...prev, coverImagePath: e.target.value }))}
+              placeholder="e.g. member-uploads/xxx.png"
+            />
+          </FieldGroup>
+        </div>
 
-          <div className="flex justify-end space-x-3 pt-4">
-            <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
-            <Button type="submit">{editing ? 'Update Project' : 'Create Project'}</Button>
-          </div>
-        </form>
-      </div>
-    </div>
+        <div className="flex justify-end space-x-3 pt-4">
+          <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>
+          <Button type="submit">{editing ? 'Update Project' : 'Create Project'}</Button>
+        </div>
+      </form>
+    </Modal>
   );
 };
 
