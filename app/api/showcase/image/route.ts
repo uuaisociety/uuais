@@ -3,24 +3,28 @@ import type { NextRequest } from 'next/server';
 import '@/lib/firebase-admin';
 import admin from 'firebase-admin';
 import { authorizeMember } from '@/lib/member-auth';
+import { requireAdmin } from '@/lib/server-auth';
+import { checkShowcaseRateLimit } from '@/lib/showcase-rate-limit';
 
 function sanitizeFilename(name: string) {
   return name.replace(/[^a-zA-Z0-9_.-]/g, '_');
 }
 
-function isLikelyImage(buf: Buffer) {
-  if (!buf || buf.length < 4) return false;
-  // JPEG: FF D8 FF
-  if (buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff) return true;
+// Detect the image type from magic bytes only; the client-supplied MIME type
+// is never trusted.
+function detectImageType(buf: Buffer): string | null {
+  if (!buf || buf.length < 12) return null;
   // PNG: 89 50 4E 47 0D 0A 1A 0A
-  if (buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4e && buf[3] === 0x47) return true;
+  if (buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4e && buf[3] === 0x47) return 'image/png';
+  // JPEG: FF D8 FF
+  if (buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff) return 'image/jpeg';
   // GIF: 47 49 46 38
-  if (buf[0] === 0x47 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x38) return true;
+  if (buf[0] === 0x47 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x38) return 'image/gif';
   // WebP: 'RIFF' .... 'WEBP'
   if (buf[0] === 0x52 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x46) {
-    if (buf.length > 12 && buf[8] === 0x57 && buf[9] === 0x45 && buf[10] === 0x42 && buf[11] === 0x50) return true;
+    if (buf[8] === 0x57 && buf[9] === 0x45 && buf[10] === 0x42 && buf[11] === 0x50) return 'image/webp';
   }
-  return false;
+  return null;
 }
 
 const MAX_UPLOAD_BYTES = 4 * 1024 * 1024;
@@ -40,10 +44,24 @@ function getBucket() {
   return admin.storage().bucket(bucketName);
 }
 
+// Covers are namespaced per uploader (showcase/<uid>/<file>), so a member can
+// only ever touch files they uploaded — including in-flight uploads not yet
+// referenced by a project document. Admins may touch any showcase path.
+function memberOwnsPath(uid: string, path: string) {
+  return path.startsWith(`${SHOWCASE_PREFIX}${uid}/`);
+}
+
 export async function POST(req: NextRequest) {
   try {
     const auth = await authorizeMember(req);
     if (!auth.ok) return NextResponse.json({ error: 'unauthorized', reason: auth.reason, detail: auth.detail }, { status: 401 });
+    const uid = auth.uid;
+    const isAdmin = (await requireAdmin(req)).ok;
+
+    const rate = await checkShowcaseRateLimit(uid, 'upload', 20, 60);
+    if (!rate.allowed) {
+      return NextResponse.json({ error: 'rate-limit', retryAfterSeconds: rate.retryAfterSeconds }, { status: 429 });
+    }
 
     const form = await req.formData();
     const file = form.get('file') as File | null;
@@ -53,18 +71,24 @@ export async function POST(req: NextRequest) {
 
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-    const contentType = (file.type as string) || 'application/octet-stream';
 
     if (buffer.length === 0 || buffer.length > MAX_UPLOAD_BYTES) {
       return NextResponse.json({ error: 'invalid-size' }, { status: 400 });
     }
 
-    if (!isLikelyImage(buffer)) {
+    const contentType = detectImageType(buffer);
+    if (!contentType) {
       return NextResponse.json({ error: 'invalid-image' }, { status: 400 });
     }
 
-    const key = `${Date.now()}-${sanitizeFilename(((file as File).name) || 'upload')}`;
-    const path = `${SHOWCASE_PREFIX}${key}`;
+    const key = `${Date.now()}-${sanitizeFilename((file as File).name || 'upload')}`;
+    const path = `${SHOWCASE_PREFIX}${uid}/${key}`;
+
+    // A non-admin may only replace a cover they uploaded themselves; admins
+    // may replace anything under the showcase/ prefix.
+    if (previous && previous !== path && isShowcasePath(previous) && !isAdmin && !memberOwnsPath(uid, previous)) {
+      return NextResponse.json({ error: 'forbidden', reason: 'not-owner' }, { status: 403 });
+    }
 
     const bucket = getBucket();
     const fileRef = bucket.file(path);
@@ -102,7 +126,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true, path, url: signedUrl, urlPublic: publicUrl });
   } catch (err) {
     console.error('showcase image upload error', err);
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return NextResponse.json({ error: 'internal error' }, { status: 500 });
   }
 }
 
@@ -110,11 +134,17 @@ export async function DELETE(req: NextRequest) {
   try {
     const auth = await authorizeMember(req);
     if (!auth.ok) return NextResponse.json({ error: 'unauthorized', reason: auth.reason }, { status: 401 });
+    const uid = auth.uid;
+    const isAdmin = (await requireAdmin(req)).ok;
 
     const body = await req.json();
     const { path } = body as { path?: string };
     if (!path) return NextResponse.json({ error: 'missing path' }, { status: 400 });
     if (!isShowcasePath(path)) return NextResponse.json({ error: 'invalid path' }, { status: 400 });
+
+    if (!isAdmin && !memberOwnsPath(uid, path)) {
+      return NextResponse.json({ error: 'forbidden', reason: 'not-owner' }, { status: 403 });
+    }
 
     const bucket = getBucket();
     const file = bucket.file(path);
@@ -124,6 +154,6 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ ok: true, deleted: true });
   } catch (err) {
     console.error('showcase image delete error', err);
-    return NextResponse.json({ error: String(err) }, { status: 500 });
+    return NextResponse.json({ error: 'internal error' }, { status: 500 });
   }
 }

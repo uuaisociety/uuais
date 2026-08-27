@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 import '@/lib/firebase-admin';
 import admin from 'firebase-admin';
 import { authorizeMember } from '@/lib/member-auth';
+import { checkShowcaseRateLimit } from '@/lib/showcase-rate-limit';
 
 class VoteError extends Error {
   status: number;
@@ -10,6 +11,17 @@ class VoteError extends Error {
     super(message);
     this.status = status;
   }
+}
+
+// Firestore doc ids cannot contain '/' or control chars; cap length to keep
+// the vote doc path `showcaseVotes/${projectId}_${uid}` well-formed.
+function isValidProjectId(id: unknown): id is string {
+  if (typeof id !== 'string' || id.length === 0 || id.length > 128) return false;
+  for (let i = 0; i < id.length; i++) {
+    const code = id.charCodeAt(i);
+    if (code === 0x2f || code <= 0x1f || code === 0x7f) return false;
+  }
+  return true;
 }
 
 export async function POST(req: NextRequest) {
@@ -20,8 +32,13 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
     const { projectId } = body as { projectId?: string };
-    if (!projectId || typeof projectId !== 'string') {
-      return NextResponse.json({ error: 'missing projectId' }, { status: 400 });
+    if (!isValidProjectId(projectId)) {
+      return NextResponse.json({ error: 'invalid projectId' }, { status: 400 });
+    }
+
+    const rate = await checkShowcaseRateLimit(uid, 'vote', 60, 1);
+    if (!rate.allowed) {
+      return NextResponse.json({ error: 'rate-limit', retryAfterSeconds: rate.retryAfterSeconds }, { status: 429 });
     }
 
     const db = admin.firestore();
@@ -35,8 +52,12 @@ export async function POST(req: NextRequest) {
         if (voteSnap.exists) throw new VoteError('already-voted', 409);
 
         const projectSnap = await tx.get(projectRef);
-        if (!projectSnap.exists || projectSnap.data()?.published !== true) {
+        const projectData = projectSnap.exists ? projectSnap.data() : null;
+        if (!projectData || projectData.published !== true) {
           throw new VoteError('not-found', 404);
+        }
+        if (projectData.creatorUserId === uid) {
+          throw new VoteError('cannot-vote-own', 403);
         }
 
         tx.set(voteRef, {
@@ -73,8 +94,13 @@ export async function DELETE(req: NextRequest) {
 
     const body = await req.json();
     const { projectId } = body as { projectId?: string };
-    if (!projectId || typeof projectId !== 'string') {
-      return NextResponse.json({ error: 'missing projectId' }, { status: 400 });
+    if (!isValidProjectId(projectId)) {
+      return NextResponse.json({ error: 'invalid projectId' }, { status: 400 });
+    }
+
+    const rate = await checkShowcaseRateLimit(uid, 'vote', 60, 1);
+    if (!rate.allowed) {
+      return NextResponse.json({ error: 'rate-limit', retryAfterSeconds: rate.retryAfterSeconds }, { status: 429 });
     }
 
     const db = admin.firestore();
