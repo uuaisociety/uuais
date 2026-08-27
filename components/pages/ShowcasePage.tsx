@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
 import { ArrowUpRight, Clock, RefreshCw, Search, Star, WifiOff, X } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
@@ -20,11 +21,16 @@ import {
 import ShowcaseCover from '@/components/showcase/ShowcaseCover';
 import ShowcaseTag from '@/components/showcase/ShowcaseTag';
 import ShowcaseProjectLinks from '@/components/showcase/ShowcaseProjectLinks';
-import ShowcaseSubmissionModal from '@/components/showcase/ShowcaseSubmissionModal';
 import VoteButton from '@/components/showcase/VoteButton';
 import { useShowcaseVote } from '@/components/showcase/useShowcaseVote';
 import { useCollectionData } from '@/lib/firestore/useCollectionData';
 import { subscribeToMyShowcaseProjects } from '@/lib/firestore/showcase';
+
+// Loaded only when someone opens it — keeps Radix Dialog + the form out of the first-visit bundle.
+const ShowcaseSubmissionModal = dynamic(
+  () => import('@/components/showcase/ShowcaseSubmissionModal'),
+  { ssr: false },
+);
 
 type SortKey = 'newest' | 'votes';
 

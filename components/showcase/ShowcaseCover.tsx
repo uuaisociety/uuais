@@ -52,12 +52,9 @@ export default function ShowcaseCover({
     );
   }
 
+  // The initials slab is decorative: on gallery cards it sits inside an already-labelled link, so announcing "no cover image" would be noise.
   return (
-    <div
-      className={`relative overflow-hidden bg-muted ${className ?? ''}`}
-      role="img"
-      aria-label={`${title || 'Project'} — no cover image`}
-    >
+    <div className={`relative overflow-hidden bg-muted ${className ?? ''}`}>
       <span
         aria-hidden
         className="absolute inset-0 grid place-items-center text-[clamp(1.75rem,6vw,3rem)] font-semibold tracking-[-0.04em] text-foreground/20"

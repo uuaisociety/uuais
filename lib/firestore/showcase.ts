@@ -4,7 +4,6 @@ import {
   where,
   orderBy,
   getDocs,
-  getDoc,
   addDoc,
   doc,
   updateDoc,
@@ -15,22 +14,6 @@ import {
 import { db } from '@/lib/firebase-client';
 import { ShowcaseProject } from '@/types';
 import { stripUndefined } from './utils';
-
-export const getShowcaseProjects = async (): Promise<ShowcaseProject[]> => {
-  const ref = collection(db, 'showcaseProjects');
-  const qy = query(ref, where('published', '==', true), orderBy('createdAt', 'desc'));
-  const snapshot = await getDocs(qy);
-  return snapshot.docs.map((docSnap) => ({
-    ...(docSnap.data() as ShowcaseProject),
-    id: docSnap.id,
-  }));
-};
-
-export const getShowcaseProjectById = async (id: string): Promise<ShowcaseProject | null> => {
-  const ref = doc(db, 'showcaseProjects', id);
-  const snap = await getDoc(ref);
-  return snap.exists() ? ({ ...(snap.data() as ShowcaseProject), id: snap.id } as ShowcaseProject) : null;
-};
 
 /** A free slug (`-2`, `-3`…): lookups take the first match, so a duplicate leaves one project unreachable. Admin-only read. */
 export const ensureUniqueShowcaseSlug = async (
@@ -55,7 +38,10 @@ export const addShowcaseProject = async (project: Omit<ShowcaseProject, 'id'>): 
 
 export const updateShowcaseProject = async (id: string, patch: Partial<ShowcaseProject>): Promise<void> => {
   const ref = doc(db, 'showcaseProjects', id);
-  const safePatch = stripUndefined(patch) as DocumentData;
+  // The full project object carries `id`, but the id is the document key — writing it into the doc is noise.
+  const safe: Record<string, unknown> = { ...(patch as Record<string, unknown>) };
+  delete safe.id;
+  const safePatch = stripUndefined(safe) as DocumentData;
   await updateDoc(ref, safePatch);
 };
 
@@ -97,17 +83,26 @@ export const subscribeToShowcaseProjects = (
 export const subscribeToMyShowcaseProjects = (
   userId: string,
   callback: (projects: ShowcaseProject[]) => void,
+  onError?: (error: Error) => void,
 ) => {
   const ref = collection(db, 'showcaseProjects');
   const qy = query(ref, where('creatorUserId', '==', userId));
-  return onSnapshot(qy, (snapshot) => {
-    callback(
-      snapshot.docs.map((docSnap) => ({
-        ...(docSnap.data() as ShowcaseProject),
-        id: docSnap.id,
-      })),
-    );
-  });
+  return onSnapshot(
+    qy,
+    (snapshot) => {
+      callback(
+        snapshot.docs.map((docSnap) => ({
+          ...(docSnap.data() as ShowcaseProject),
+          id: docSnap.id,
+        })),
+      );
+    },
+    (error) => {
+      // A dropped stream is silent otherwise: the last snapshot just stops updating.
+      console.warn('my showcase subscription error:', error);
+      onError?.(error);
+    },
+  );
 };
 
 /** Tell the builder their project went live. Best-effort: a mail failure must never block the publish. */

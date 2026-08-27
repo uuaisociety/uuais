@@ -46,7 +46,6 @@ type AppAction =
   | { type: 'DELETE_JOB'; payload: string }
   | { type: 'SET_SHOWCASE_PROJECTS'; payload: ShowcaseProject[]; fromCache?: boolean }
   | { type: 'SET_SHOWCASE_UNAVAILABLE' }
-  | { type: 'SET_SHOWCASE_LOADED'; payload: boolean }
   | { type: 'ADD_SHOWCASE_PROJECT'; payload: ShowcaseProject }
   | { type: 'UPDATE_SHOWCASE_PROJECT'; payload: ShowcaseProject }
   | { type: 'DELETE_SHOWCASE_PROJECT'; payload: string };
@@ -179,28 +178,12 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
       };
     case 'SET_SHOWCASE_UNAVAILABLE':
       return { ...state, showcaseLoaded: true, showcaseUnavailable: true };
-    case 'SET_SHOWCASE_LOADED':
-      return { ...state, showcaseLoaded: action.payload };
-    case 'ADD_SHOWCASE_PROJECT':
-      return { ...state, showcaseProjects: [...state.showcaseProjects, action.payload] };
-    case 'UPDATE_SHOWCASE_PROJECT':
-      return {
-        ...state,
-        showcaseProjects: state.showcaseProjects.map((p) =>
-          p.id === action.payload.id ? action.payload : p
-        ),
-      };
-    case 'DELETE_SHOWCASE_PROJECT':
-      return {
-        ...state,
-        showcaseProjects: state.showcaseProjects.filter((p) => p.id !== action.payload),
-      };
     default:
       return state;
   }
 };
 
-type AppDispatch = (action: AppAction | FirestoreAction) => Promise<string | void>;
+type AppDispatch = (action: AppAction | FirestoreAction) => Promise<string | boolean | void>;
 
 const AppContext = createContext<{
   state: AppState;
@@ -304,14 +287,25 @@ export const AppProvider: React.FC<{
         try { unsubscribeShowcase.current(); } catch { /* ignore */ }
         unsubscribeShowcase.current = null;
       }
+      // Flips only on a server-answered snapshot: the SDK's first snapshot is often cache-only, so before that an empty cache result is a cold start, not "could not ask" (the flash bug).
+      let hasReceivedServerSnapshot = false;
       attach(import('@/lib/firestore/showcase'), unsubscribeShowcase, ({ subscribeToShowcaseProjects }) =>
         subscribeToShowcaseProjects(
           (projects, meta) => {
-            dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: projects, fromCache: meta.fromCache });
+            if (!meta.fromCache) hasReceivedServerSnapshot = true;
+            dispatch({
+              type: 'SET_SHOWCASE_PROJECTS',
+              payload: projects,
+              fromCache: meta.fromCache && hasReceivedServerSnapshot,
+            });
           },
           {
             includeUnpublished,
-            onError: () => dispatch({ type: 'SET_SHOWCASE_UNAVAILABLE' }),
+            onError: () => {
+              // A stale listener from a superseded subscribe() must not mark the showcase unavailable after a healthy re-subscribe.
+              if (gen !== subscriptionGeneration) return;
+              dispatch({ type: 'SET_SHOWCASE_UNAVAILABLE' });
+            },
           },
         ),
       );
@@ -477,9 +471,11 @@ export const AppProvider: React.FC<{
         // Handle regular state actions
         dispatch(action);
       }
+      return true;
     } catch (error) {
       console.error('Firestore operation failed:', error);
       dispatch({ type: 'SET_ERROR', payload: 'Failed to sync with database' });
+      return false;
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
     }

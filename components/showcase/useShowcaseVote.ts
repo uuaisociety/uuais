@@ -43,9 +43,13 @@ export function useShowcaseVote(userId?: string | null) {
     setLastUserId(userId);
     setVoted(readVotedIds(storageKeyFor(userId)));
     setLocalCounts({});
-    // A request still out belongs to the previous user; its `finally` clears the ref.
     setPending([]);
   }
+
+  // A hung request from the previous user must not wedge the new user's buttons.
+  useEffect(() => {
+    pendingRef.current.clear();
+  }, [userId]);
 
   const votesFor = (p: ShowcaseProject) =>
     p.id in localCounts ? localCounts[p.id] : p.votes || 0;
