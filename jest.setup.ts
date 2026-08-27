@@ -171,6 +171,8 @@ const __defaultAppState = {
   teamApplications: [],
   registrationQuestions: [],
   showcaseProjects: [],
+  showcaseLoaded: true,
+  showcaseUnavailable: false,
   isLoading: false,
   error: null,
 };

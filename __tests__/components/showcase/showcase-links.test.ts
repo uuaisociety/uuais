@@ -1,4 +1,4 @@
-import { safeExternalUrl, validateProjectLink } from '@/components/showcase/showcaseLinks';
+import { linkActions, safeExternalUrl } from '@/components/showcase/showcaseLinks';
 
 describe('safeExternalUrl', () => {
   it('rejects script-capable schemes', () => {
@@ -27,16 +27,13 @@ describe('safeExternalUrl', () => {
   });
 });
 
-describe('validateProjectLink', () => {
-  it('returns ok with normalized value for valid links', () => {
-    const res = validateProjectLink('github.com/uaisociety');
-    expect(res.ok).toBe(true);
-    if (res.ok) expect(res.value).toBe('https://github.com/uaisociety');
-  });
-
-  it('returns a reason for unsafe links', () => {
-    const res = validateProjectLink('javascript:alert(1)');
-    expect(res.ok).toBe(false);
-    if (!res.ok) expect(res.reason).toContain('http(s)');
+describe('linkActions', () => {
+  it('covers every link key once, in display order, with a label and hint', () => {
+    expect(linkActions.map((a) => a.key)).toEqual(['github', 'demo', 'website', 'video']);
+    for (const action of linkActions) {
+      expect(action.icon).toBeDefined();
+      expect(action.label).toBeTruthy();
+      expect(action.hint).toBeTruthy();
+    }
   });
 });

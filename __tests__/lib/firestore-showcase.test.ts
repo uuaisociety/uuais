@@ -4,7 +4,6 @@ jest.mock('firebase/firestore', () => ({
   where: jest.fn((field: string, op: string, value: unknown) => ({ field, op, value })),
   orderBy: jest.fn((field: string, dir: string) => ({ field, dir })),
   getDocs: jest.fn().mockResolvedValue({ docs: [] }),
-  getDoc: jest.fn().mockResolvedValue({ exists: () => false, id: 's1', data: () => null }),
   addDoc: jest.fn().mockResolvedValue({ id: 'new-id' }),
   doc: jest.fn(() => ({ id: 's1' })),
   updateDoc: jest.fn().mockResolvedValue(undefined),
@@ -33,12 +32,11 @@ jest.mock('@/lib/email', () => ({
 
 import * as firestore from 'firebase/firestore'
 import {
-  getShowcaseProjects,
-  getShowcaseProjectById,
   addShowcaseProject,
   updateShowcaseProject,
   deleteShowcaseProject,
   subscribeToShowcaseProjects,
+  subscribeToMyShowcaseProjects,
   notifyShowcaseApproved,
   ensureUniqueShowcaseSlug,
 } from '@/lib/firestore/showcase'
@@ -53,27 +51,10 @@ describe('showcase firestore helpers', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     ;(firestore.getDocs as jest.Mock).mockResolvedValue(snapshotWith([{ id: 's1', data: projectDoc }]))
-    ;(firestore.getDoc as jest.Mock).mockResolvedValue({ exists: () => true, id: 's1', data: () => projectDoc })
     ;(firestore.onSnapshot as jest.Mock).mockImplementation((_qy: unknown, cb: (s: unknown) => void) => {
       cb(snapshotWith([{ id: 's1', data: projectDoc }]))
       return () => {}
     })
-  })
-
-  it('getShowcaseProjects returns docs with ids', async () => {
-    const projects = await getShowcaseProjects()
-    expect(projects).toEqual([{ ...projectDoc, id: 's1' }])
-  })
-
-  it('getShowcaseProjectById returns the doc', async () => {
-    const project = await getShowcaseProjectById('s1')
-    expect(project).toEqual({ ...projectDoc, id: 's1' })
-  })
-
-  it('getShowcaseProjectById returns null when missing', async () => {
-    ;(firestore.getDoc as jest.Mock).mockResolvedValue({ exists: () => false, id: 's1', data: () => null })
-    const project = await getShowcaseProjectById('nope')
-    expect(project).toBeNull()
   })
 
   it('addShowcaseProject returns the new id', async () => {
@@ -81,8 +62,10 @@ describe('showcase firestore helpers', () => {
     expect(id).toBe('new-id')
   })
 
-  it('updateShowcaseProject updates the doc', async () => {
-    await expect(updateShowcaseProject('s1', { title: 'Y' })).resolves.toBeUndefined()
+  // Admin edits pass the full project (id included); the id is the document key, not a field.
+  it('updateShowcaseProject updates the doc and strips the id from the patch', async () => {
+    await updateShowcaseProject('s1', { id: 's1', title: 'Y' } as never)
+    expect(firestore.updateDoc).toHaveBeenCalledWith({ id: 's1' }, { title: 'Y' })
   })
 
   it('deleteShowcaseProject deletes the doc', async () => {
@@ -94,6 +77,35 @@ describe('showcase firestore helpers', () => {
     const unsub = subscribeToShowcaseProjects(cb)
     expect(cb).toHaveBeenCalledWith([{ ...projectDoc, id: 's1' }], { fromCache: false })
     expect(unsub).toBeInstanceOf(Function)
+  })
+})
+
+describe('subscribeToMyShowcaseProjects', () => {
+  beforeEach(() => jest.clearAllMocks())
+
+  it("streams a member's own submissions, filtered by creatorUserId", () => {
+    ;(firestore.onSnapshot as jest.Mock).mockImplementation((_qy: unknown, cb: (s: unknown) => void) => {
+      cb(snapshotWith([{ id: 's1', data: projectDoc }]))
+      return () => {}
+    })
+    const cb = jest.fn()
+    subscribeToMyShowcaseProjects('u1', cb)
+    expect(firestore.where).toHaveBeenCalledWith('creatorUserId', '==', 'u1')
+    expect(cb).toHaveBeenCalledWith([{ ...projectDoc, id: 's1' }])
+  })
+
+  // A dropped stream is otherwise silent — the member would never see their own review queue update.
+  it('surfaces a stream error to the caller', () => {
+    const err = new Error('permission-denied')
+    ;(firestore.onSnapshot as jest.Mock).mockImplementationOnce((_qy, _cb, onError) => {
+      onError(err)
+      return () => {}
+    })
+    const onError = jest.fn()
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    subscribeToMyShowcaseProjects('u1', jest.fn(), onError)
+    expect(onError).toHaveBeenCalledWith(err)
+    warn.mockRestore()
   })
 })
 

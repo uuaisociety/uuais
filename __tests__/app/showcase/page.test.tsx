@@ -251,10 +251,10 @@ describe('ShowcasePage', () => {
       }),
     ])
     render(<ShowcasePage />)
-    expect(screen.getByLabelText('Repository — Many Links')).toBeInTheDocument()
-    expect(screen.getByLabelText('Website — Many Links')).toBeInTheDocument()
-    expect(screen.queryByLabelText('Live demo — Many Links')).not.toBeInTheDocument()
-    expect(screen.queryByLabelText('Video — Many Links')).not.toBeInTheDocument()
+    expect(screen.getByLabelText('Source code — Many Links')).toBeInTheDocument()
+    expect(screen.getByLabelText('Live demo — Many Links')).toBeInTheDocument()
+    expect(screen.queryByLabelText('Website — Many Links')).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('Walkthrough — Many Links')).not.toBeInTheDocument()
   })
 
   it('labels the vote control as a toggle once cast', () => {
@@ -272,10 +272,10 @@ describe('ShowcasePage', () => {
     expect(screen.getByLabelText('Remove your vote for Voted Project')).toBeInTheDocument()
   })
 
-  it('opens the submission modal from the share button', () => {
+  it('opens the submission modal from the share button', async () => {
     setProjects([])
     render(<ShowcasePage />)
     fireEvent.click(screen.getAllByText('Share your project')[0])
-    expect(screen.getByText(/Checking your membership|Members can share projects|Title/)).toBeInTheDocument()
+    expect(await screen.findByText(/Checking your membership|Members can share projects|Title/)).toBeInTheDocument()
   })
 })

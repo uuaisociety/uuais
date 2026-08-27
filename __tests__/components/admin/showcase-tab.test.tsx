@@ -1,10 +1,15 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 import ShowcaseTab from '@/components/pages/admin/tabs/ShowcaseTab'
 import { defaultAppState } from '@/__tests__/helpers/fixtures'
 
 const mockUseApp = jest.fn()
 jest.mock('@/contexts/AppContext', () => ({
   useApp: () => mockUseApp(),
+}))
+
+const mockNotify = jest.fn()
+jest.mock('@/components/ui/Notifications', () => ({
+  useNotify: () => ({ notify: mockNotify }),
 }))
 
 const mockEnsureUniqueSlug = jest.fn(async (base: string) => base)
@@ -33,8 +38,7 @@ function createProject(overrides: Record<string, unknown> = {}) {
   }
 }
 
-function renderTab(projects: ReturnType<typeof createProject>[] = []) {
-  const dispatch = jest.fn()
+function renderTab(projects: ReturnType<typeof createProject>[] = [], dispatch: jest.Mock = jest.fn()) {
   mockUseApp.mockReturnValue({ state: { ...defaultAppState, showcaseProjects: projects }, dispatch })
   render(<ShowcaseTab />)
   return dispatch
@@ -87,6 +91,23 @@ describe('ShowcaseTab', () => {
     fireEvent.click(screen.getByText('Delete'))
     expect(dispatch).toHaveBeenCalledWith({ firestoreAction: 'DELETE_SHOWCASE_PROJECT', payload: 'proj-1' })
     confirmSpy.mockRestore()
+  })
+
+  it('deletes the cover image from storage when deleting a project with one', async () => {
+    const originalFetch = global.fetch
+    const fetchMock = jest.fn().mockResolvedValue({ ok: true })
+    global.fetch = fetchMock as unknown as typeof fetch
+    const confirmSpy = jest.spyOn(window, 'confirm').mockReturnValue(true)
+    const dispatch = renderTab([createProject({ coverImagePath: 'showcase/abc.png' })])
+    fireEvent.click(screen.getByText('Delete'))
+    expect(fetchMock).toHaveBeenCalledWith('/api/showcase/image', expect.objectContaining({
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: 'showcase/abc.png' }),
+    }))
+    expect(dispatch).toHaveBeenCalledWith({ firestoreAction: 'DELETE_SHOWCASE_PROJECT', payload: 'proj-1' })
+    confirmSpy.mockRestore()
+    global.fetch = originalFetch
   })
 
   it('toggles publish state via the Firestore action', () => {
@@ -144,6 +165,42 @@ describe('ShowcaseTab', () => {
     renderTab([createProject({ slug: 'course-navigator' })])
     fireEvent.click(screen.getByText('Unpublish'))
     expect(mockEnsureUniqueSlug).not.toHaveBeenCalled()
+  })
+
+  it('sends the approval email on publish, but only after the write resolves', async () => {
+    let resolveDispatch: (v: unknown) => void = () => {}
+    let dispatchCalled = false
+    const dispatch = jest.fn(() => {
+      dispatchCalled = true
+      return new Promise((resolve) => { resolveDispatch = resolve })
+    })
+    renderTab([createProject({ id: 'proj-1', slug: 'course-navigator', published: false })], dispatch)
+    fireEvent.click(screen.getByText('Publish'))
+    // Let the slug check resolve so the write is actually dispatched.
+    await act(async () => { await Promise.resolve() })
+    await waitFor(() => expect(dispatchCalled).toBe(true))
+    // The write is still out — the email must not have fired yet.
+    expect(mockNotifyApproved).not.toHaveBeenCalled()
+    await act(async () => { resolveDispatch(true) })
+    await waitFor(() =>
+      expect(mockNotifyApproved).toHaveBeenCalledWith(expect.objectContaining({ id: 'proj-1', published: true })),
+    )
+  })
+
+  it('does not email when the publish write fails', async () => {
+    const dispatch = jest.fn().mockResolvedValue(false)
+    renderTab([createProject({ id: 'proj-1', slug: 'course-navigator', published: false })], dispatch)
+    fireEvent.click(screen.getByText('Publish'))
+    await waitFor(() => expect(dispatch).toHaveBeenCalled())
+    await waitFor(() => expect(mockNotifyApproved).not.toHaveBeenCalled())
+  })
+
+  it('does not email when unpublishing', async () => {
+    renderTab([createProject({ published: true })])
+    fireEvent.click(screen.getByText('Unpublish'))
+    await waitFor(() =>
+      expect(mockNotifyApproved).not.toHaveBeenCalled(),
+    )
   })
 
   // A rename must not break links people have already shared.

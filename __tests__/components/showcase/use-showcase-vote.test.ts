@@ -22,10 +22,16 @@ const makeProject = (overrides: Record<string, unknown> = {}) => ({
   ...overrides,
 });
 
+const originalFetch = global.fetch;
+
 describe('useShowcaseVote', () => {
   beforeEach(() => {
     window.localStorage.clear();
     jest.clearAllMocks();
+  });
+
+  afterEach(() => {
+    global.fetch = originalFetch;
   });
 
   it('votesFor does not return NaN for legacy docs missing votes', () => {
@@ -50,6 +56,42 @@ describe('useShowcaseVote', () => {
       await result.current.handleVote(makeProject());
     });
     expect(result.current.voted).toEqual(['proj-1']);
+  });
+
+  it('drops a stale local vote when the server returns 409 on DELETE', async () => {
+    window.localStorage.setItem('showcaseVoted:u1', JSON.stringify(['proj-1']));
+    global.fetch = jest.fn().mockResolvedValue({
+      status: 409,
+      ok: false,
+    }) as unknown as typeof fetch;
+    const { result } = renderHook(() => useShowcaseVote('u1'));
+    expect(result.current.voted).toEqual(['proj-1']);
+    await act(async () => {
+      await result.current.handleVote(makeProject());
+    });
+    // The server already agrees the vote is gone — the client must stop showing it.
+    expect(result.current.voted).toEqual([]);
+  });
+
+  it('clears a hung in-flight guard when the user changes', async () => {
+    let resolveFetch: (v: unknown) => void = () => {};
+    const fetchMock = jest.fn(() => new Promise((resolve) => { resolveFetch = resolve; }));
+    global.fetch = fetchMock as unknown as typeof fetch;
+    const { result, rerender } = renderHook(({ uid }: { uid?: string | null }) => useShowcaseVote(uid), {
+      initialProps: { uid: 'u1' },
+    });
+    let first: Promise<void>;
+    await act(async () => {
+      first = result.current.handleVote(makeProject());
+    });
+    expect(result.current.pending).toEqual(['proj-1']);
+    // A request still out belongs to the previous user; the new user's buttons must not wait on it.
+    rerender({ uid: 'u2' });
+    expect(result.current.pending).toEqual([]);
+    await act(async () => {
+      resolveFetch({ ok: true, status: 200, json: async () => ({ votes: 4 }) });
+      await first;
+    });
   });
 
   it('updates votes and persists after a successful vote', async () => {

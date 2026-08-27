@@ -3,6 +3,11 @@ jest.mock('@/lib/member-auth', () => ({
   authorizeMember: (...args: unknown[]) => mockAuthorizeMember(...args),
 }))
 
+const mockCheckShowcaseRateLimit = jest.fn()
+jest.mock('@/lib/showcase-rate-limit', () => ({
+  checkShowcaseRateLimit: (...args: unknown[]) => mockCheckShowcaseRateLimit(...args),
+}))
+
 jest.mock('@/lib/firebase-admin', () => ({}))
 
 const mockTx = {
@@ -48,12 +53,12 @@ function makeDeleteReq(body: Record<string, unknown> = {}) {
 }
 
 describe('POST /api/showcase/vote', () => {
-  function mockProjectSnap(published: boolean, votes = 3) {
+  function mockProjectSnap(published: boolean, votes = 3, creatorUserId = 'creator1') {
     mockTx.get.mockImplementation((ref: { path: string }) =>
       Promise.resolve(
         ref.path.startsWith('showcaseVotes/')
           ? { exists: false, data: () => null }
-          : { exists: true, data: () => ({ votes, published }) },
+          : { exists: true, data: () => ({ votes, published, creatorUserId }) },
       ),
     )
   }
@@ -61,6 +66,7 @@ describe('POST /api/showcase/vote', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     mockAuthorizeMember.mockResolvedValue({ ok: true, uid: 'u1' })
+    mockCheckShowcaseRateLimit.mockResolvedValue({ allowed: true, retryAfterSeconds: 0 })
     mockProjectSnap(true)
   })
 
@@ -75,12 +81,31 @@ describe('POST /api/showcase/vote', () => {
     expect(res.status).toBe(400)
   })
 
+  it('returns 400 for an invalid projectId', async () => {
+    const res = await POST(makeReq({ projectId: 'p/1' }))
+    expect(res.status).toBe(400)
+    const res2 = await POST(makeReq({ projectId: 'p\u0000' }))
+    expect(res2.status).toBe(400)
+    const res3 = await POST(makeReq({ projectId: 'x'.repeat(200) }))
+    expect(res3.status).toBe(400)
+  })
+
+  it('returns 429 when the vote rate limit is hit', async () => {
+    mockCheckShowcaseRateLimit.mockResolvedValue({ allowed: false, retryAfterSeconds: 30 })
+    const res = await POST(makeReq({ projectId: 'p1' }))
+    expect(res.status).toBe(429)
+    const body = await res.json()
+    expect(body).toEqual({ error: 'rate-limit', retryAfterSeconds: 30 })
+    expect(mockCheckShowcaseRateLimit).toHaveBeenCalledWith('u1', 'vote', 60, 1)
+    expect(mockTx.set).not.toHaveBeenCalled()
+  })
+
   it('returns 409 when the user already voted', async () => {
     mockTx.get.mockImplementation((ref: { path: string }) =>
       Promise.resolve(
         ref.path.startsWith('showcaseVotes/')
           ? { exists: true, data: () => ({ createdAt: 'x' }) }
-          : { exists: true, data: () => ({ votes: 3, published: true }) },
+          : { exists: true, data: () => ({ votes: 3, published: true, creatorUserId: 'creator1' }) },
       ),
     )
     const res = await POST(makeReq({ projectId: 'p1' }))
@@ -93,13 +118,26 @@ describe('POST /api/showcase/vote', () => {
     expect(res.status).toBe(404)
   })
 
+  it('returns 403 when voting on your own project', async () => {
+    mockProjectSnap(true, 3, 'u1')
+    const res = await POST(makeReq({ projectId: 'p1' }))
+    expect(res.status).toBe(403)
+    const body = await res.json()
+    expect(body.error).toBe('cannot-vote-own')
+    expect(mockTx.set).not.toHaveBeenCalled()
+    expect(mockTx.update).not.toHaveBeenCalled()
+  })
+
   it('records the vote and returns the new count', async () => {
     mockDocRef.get = jest.fn().mockResolvedValue({ exists: true, data: () => ({ votes: 4, published: true }) })
     const res = await POST(makeReq({ projectId: 'p1' }))
     expect(res.status).toBe(200)
     const body = await res.json()
     expect(body).toEqual({ ok: true, votes: 4 })
-    expect(mockTx.set).toHaveBeenCalled()
+    expect(mockTx.set).toHaveBeenCalledWith(
+      expect.objectContaining({ path: 'showcaseVotes/p1_u1' }),
+      { projectId: 'p1', userId: 'u1', createdAt: { __ts: true } },
+    )
     expect(mockTx.update).toHaveBeenCalledWith(expect.objectContaining({ path: 'showcaseProjects/p1' }), { votes: { __inc: 1 } })
   })
 })
@@ -118,6 +156,7 @@ describe('DELETE /api/showcase/vote', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     mockAuthorizeMember.mockResolvedValue({ ok: true, uid: 'u1' })
+    mockCheckShowcaseRateLimit.mockResolvedValue({ allowed: true, retryAfterSeconds: 0 })
     mockSnaps({ hasVote: true })
   })
 
@@ -130,6 +169,18 @@ describe('DELETE /api/showcase/vote', () => {
   it('returns 400 when projectId is missing', async () => {
     const res = await DELETE(makeDeleteReq({}))
     expect(res.status).toBe(400)
+  })
+
+  it('returns 400 for an invalid projectId', async () => {
+    const res = await DELETE(makeDeleteReq({ projectId: 'a/b' }))
+    expect(res.status).toBe(400)
+  })
+
+  it('returns 429 when the vote rate limit is hit', async () => {
+    mockCheckShowcaseRateLimit.mockResolvedValue({ allowed: false, retryAfterSeconds: 12 })
+    const res = await DELETE(makeDeleteReq({ projectId: 'p1' }))
+    expect(res.status).toBe(429)
+    expect(await res.json()).toEqual({ error: 'rate-limit', retryAfterSeconds: 12 })
   })
 
   it('returns 409 when there is no vote to withdraw', async () => {
