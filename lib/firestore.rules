@@ -70,7 +70,9 @@ service cloud.firestore {
       // Users may read their own profile; admins may read all; optionally open some fields publicly later.
       allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
 
-      // Create own document at first sign-in or profile completion
+      // Create own document at first sign-in or profile completion.
+      // NOTE: isMember is intentionally self-assertable here (self-declared membership,
+      // a deliberate product decision); afterwards it is admin-managed (update rule below).
       allow create: if isSignedIn() && request.auth.uid == uid
         && emailMatchesAuth()
         // Limit client-writable fields; prevent role escalation
@@ -130,11 +132,13 @@ service cloud.firestore {
         || (isSignedIn() && resource.data.creatorUserId == request.auth.uid);
 
       // Members may submit their own work, but only as an unpublished,
-      // non-featured draft — they cannot self-publish or self-feature.
+      // non-featured, zero-vote draft — they cannot self-publish, self-feature,
+      // or seed votes.
       allow create: if isMember()
         && request.resource.data.creatorUserId == request.auth.uid
         && request.resource.data.published == false
         && request.resource.data.featured == false
+        && request.resource.data.votes == 0
         && request.resource.data.keys().hasOnly([
           'title','slug','description','details','category','creatorUserId','creatorName',
           'links','coverImage','coverImagePath','tags','votes','published',
@@ -152,6 +156,13 @@ service cloud.firestore {
         && strWithin(request.resource.data, 'creatorName', 120)
         && strWithin(request.resource.data, 'coverImage', 1000)
         && strWithin(request.resource.data, 'coverImagePath', 500)
+        && request.resource.data.category is string
+        && request.resource.data.category.size() <= 40
+        && request.resource.data.createdAt is string
+        && request.resource.data.createdAt.size() <= 64
+        && request.resource.data.updatedAt is string
+        && request.resource.data.updatedAt.size() <= 64
+        && request.resource.data.links is map
         && strWithin(request.resource.data.links, 'github', 500)
         && strWithin(request.resource.data.links, 'website', 500)
         && strWithin(request.resource.data.links, 'demo', 500)
@@ -163,6 +174,9 @@ service cloud.firestore {
         && tagWithin(request.resource.data.tags, 2, 30)
         && tagWithin(request.resource.data.tags, 3, 30)
         && tagWithin(request.resource.data.tags, 4, 30);
+
+      // Admins may create projects directly, including published ones ("New Project" in the admin tab).
+      allow create: if isAdmin();
 
       // Publish/feature/edit/delete is admin-only
       allow update, delete: if isAdmin();
