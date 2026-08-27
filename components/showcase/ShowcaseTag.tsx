@@ -7,7 +7,7 @@ export default function ShowcaseTag({ tag }: { tag: string }) {
     <Link
       href={`/showcase?q=${encodeURIComponent(tag)}`}
       aria-label={`Filter projects by tag ${tag}`}
-      className="inline-block rounded-sm transition-all duration-150 hover:opacity-75 active:scale-95"
+      className="inline-block rounded-sm transition-colors duration-300 ease-[var(--ease-ios)] hover:opacity-75 active:scale-95"
     >
       <Tag variant="gray" size="sm">{tag}</Tag>
     </Link>

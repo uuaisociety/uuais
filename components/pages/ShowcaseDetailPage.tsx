@@ -4,7 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { notFound, useParams } from 'next/navigation';
 import { format } from 'date-fns';
-import { ArrowLeft, ArrowUpRight, Check, ExternalLink, Github, Link2, Monitor, Play, RefreshCw, Star, WifiOff } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Check, Link2, RefreshCw, Star, WifiOff } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
 import { useAdmin } from '@/hooks/useAdmin';
 import { updatePageMeta } from '@/utils/seo';
@@ -14,20 +14,8 @@ import Tag from '@/components/ui/Tag';
 import { Button } from '@/components/ui/Button';
 import ShowcaseCover from '@/components/showcase/ShowcaseCover';
 import ShowcaseTag from '@/components/showcase/ShowcaseTag';
-import { safeExternalUrl } from '@/components/showcase/showcaseLinks';
+import { linkActions, safeExternalUrl } from '@/components/showcase/showcaseLinks';
 import { useShowcaseVote } from '@/components/showcase/useShowcaseVote';
-
-const linkActions: {
-  key: keyof ShowcaseProject['links'];
-  icon: React.ElementType;
-  label: string;
-  hint: string;
-}[] = [
-  { key: 'github', icon: Github, label: 'Source code', hint: 'Read the repository' },
-  { key: 'demo', icon: Monitor, label: 'Live demo', hint: 'Try it in the browser' },
-  { key: 'website', icon: ExternalLink, label: 'Website', hint: 'Visit the project site' },
-  { key: 'video', icon: Play, label: 'Walkthrough', hint: 'Watch the demo video' },
-];
 
 const showcaseHref = (p: ShowcaseProject) => `/showcase/${p.slug || p.id}`;
 

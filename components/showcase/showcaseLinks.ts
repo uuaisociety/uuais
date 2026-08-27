@@ -1,3 +1,7 @@
+import type { LucideIcon } from 'lucide-react';
+import { ExternalLink, Github, Monitor, Play } from 'lucide-react';
+import type { ShowcaseProject } from '@/types';
+
 // External-link safety for user-submitted showcase project URLs. Rendered
 // links must never accept script-capable schemes; bare domains get an https
 // prefix so "github.com/user/repo" works as a link instead of a relative path.
@@ -15,10 +19,15 @@ export function safeExternalUrl(url: string | undefined | null): string | null {
   return null;
 }
 
-export function validateProjectLink(url: string): { ok: true; value: string } | { ok: false; reason: string } {
-  const clean = safeExternalUrl(url);
-  if (!clean) {
-    return { ok: false, reason: 'Use a full http(s) link like https://github.com/…' };
-  }
-  return { ok: true, value: clean };
-}
+/** The single shared read of a project's links, in display order — used by the project page and the card icon links. */
+export const linkActions: {
+  key: keyof ShowcaseProject['links'];
+  icon: LucideIcon;
+  label: string;
+  hint: string;
+}[] = [
+  { key: 'github', icon: Github, label: 'Source code', hint: 'Read the repository' },
+  { key: 'demo', icon: Monitor, label: 'Live demo', hint: 'Try it in the browser' },
+  { key: 'website', icon: ExternalLink, label: 'Website', hint: 'Visit the project site' },
+  { key: 'video', icon: Play, label: 'Walkthrough', hint: 'Watch the demo video' },
+];

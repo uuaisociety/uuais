@@ -1,15 +1,5 @@
-import { ExternalLink, Github, Play, Monitor, type LucideIcon } from 'lucide-react';
 import type { ShowcaseProject } from '@/types';
-import { safeExternalUrl } from '@/components/showcase/showcaseLinks';
-
-type LinkKey = 'github' | 'website' | 'demo' | 'video';
-
-const linkActions: { key: LinkKey; icon: LucideIcon; label: string }[] = [
-  { key: 'github', icon: Github, label: 'Repository' },
-  { key: 'website', icon: ExternalLink, label: 'Website' },
-  { key: 'demo', icon: Monitor, label: 'Live demo' },
-  { key: 'video', icon: Play, label: 'Video' },
-];
+import { linkActions, safeExternalUrl } from '@/components/showcase/showcaseLinks';
 
 /** Capped at two: all four squeezed the byline down to "By Bar…", and the project page lists them all anyway. */
 const MAX_ON_CARD = 2;

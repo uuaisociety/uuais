@@ -255,7 +255,7 @@ const HomePage: React.FC = () => {
                 <Link
                   key={project.id}
                   href={`/showcase/${project.slug || project.id}`}
-                  className="glass glass-interactive group flex flex-col overflow-hidden rounded-md"
+                  className="glass glass-interactive group flex flex-col overflow-hidden rounded-xl"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <ShowcaseCover
