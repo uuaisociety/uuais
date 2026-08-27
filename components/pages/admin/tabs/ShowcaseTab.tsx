@@ -125,10 +125,17 @@ const ShowcaseTab: React.FC = () => {
     closeModal();
   };
 
-  const handleDelete = (id: string) => {
-    if (window.confirm("Delete this showcase project?")) {
-      dispatch({ firestoreAction: "DELETE_SHOWCASE_PROJECT", payload: id });
+  const handleDelete = (project: ShowcaseProject) => {
+    if (!window.confirm("Delete this showcase project?")) return;
+    // The cover outlives the document in Storage; best-effort cleanup, never blocking the delete.
+    if (project.coverImagePath) {
+      fetch('/api/showcase/image', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ path: project.coverImagePath }),
+      }).catch((err) => console.error('Failed to delete showcase cover image:', err));
     }
+    dispatch({ firestoreAction: 'DELETE_SHOWCASE_PROJECT', payload: project.id });
   };
 
   const togglePublish = async (project: ShowcaseProject) => {
@@ -138,9 +145,9 @@ const ShowcaseTab: React.FC = () => {
       ? await ensureUniqueShowcaseSlug(project.slug || slugify(project.title), project.id)
       : project.slug;
     const updated = { ...project, slug, published: publishing, updatedAt: new Date().toISOString() };
-    dispatch({ firestoreAction: "UPDATE_SHOWCASE_PROJECT", payload: updated });
-    // Only on approval, and only once — unpublishing is not news worth an email.
-    if (publishing) void notifyShowcaseApproved(updated);
+    // The approval email must only fire when the publish write actually landed.
+    const ok = await dispatch({ firestoreAction: 'UPDATE_SHOWCASE_PROJECT', payload: updated });
+    if (ok && publishing) void notifyShowcaseApproved(updated);
   };
 
   const toggleFeature = (project: ShowcaseProject) => {
@@ -208,8 +215,8 @@ const ShowcaseTab: React.FC = () => {
                   </div>
                   {project.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, index) => (
-                        <Tag key={index} variant="gray" size="sm">{tag}</Tag>
+                      {project.tags.map((tag) => (
+                        <Tag key={tag} variant="gray" size="sm">{tag}</Tag>
                       ))}
                     </div>
                   )}
@@ -224,7 +231,7 @@ const ShowcaseTab: React.FC = () => {
                   <Button size="sm" variant="outline" icon={Edit3} onClick={() => openEdit(project)}>
                     Edit
                   </Button>
-                  <Button size="sm" variant="destructive" icon={Trash2} onClick={() => handleDelete(project.id)}>
+                  <Button size="sm" variant="destructive" icon={Trash2} onClick={() => handleDelete(project)}>
                     Delete
                   </Button>
                 </div>
