@@ -2,6 +2,11 @@ import { MetadataRoute } from 'next'
 import { SITE_URL } from './metadata'
 import { getPublicSeed } from '@/lib/server-data'
 
+// The data helpers below only touch the Admin SDK (no headers()/cookies()/fetch),
+// so without a revalidation window the sitemap would be baked once at build time
+// and newly published events/blog posts/showcase projects would never appear.
+export const revalidate = 86400
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL
 
@@ -105,50 +110,64 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   // Dynamic published event URLs, reusing the public seed (degrades to empty if Firestore is unreachable).
-  let eventRoutes: MetadataRoute.Sitemap = []
-  try {
-    const seed = await getPublicSeed()
-    eventRoutes = seed.events
-      .filter((e) => e.published && e.eventStartAt && new Date(e.eventStartAt) > new Date())
-      .map((e) => ({
-        url: `${baseUrl}/events/${e.id}`,
-        lastModified: new Date(),
-        changeFrequency: 'daily' as const,
-        priority: 0.7,
-      }))
-  } catch {
-    // sitemap still serves the static routes
+  const loadEventRoutes = async (): Promise<MetadataRoute.Sitemap> => {
+    try {
+      const seed = await getPublicSeed()
+      return seed.events
+        .filter((e) => e.published && e.eventStartAt && new Date(e.eventStartAt) > new Date())
+        .map((e) => ({
+          url: `${baseUrl}/events/${e.id}`,
+          lastModified: new Date(),
+          changeFrequency: 'daily' as const,
+          priority: 0.7,
+        }))
+    } catch {
+      // sitemap still serves the static routes
+      return []
+    }
   }
 
   // Dynamic published blog post URLs.
-  let blogRoutes: MetadataRoute.Sitemap = []
-  try {
-    const { getPublishedBlogPosts } = await import('@/lib/blog-server')
-    const posts = await getPublishedBlogPosts()
-    blogRoutes = posts.map((post) => ({
-      url: `${baseUrl}/blog/${post.slug || post.id}`,
-      lastModified: post.date ? new Date(post.date) : new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }))
-  } catch {
-    // sitemap still serves the static + event routes
+  const loadBlogRoutes = async (): Promise<MetadataRoute.Sitemap> => {
+    try {
+      const { getPublishedBlogPosts } = await import('@/lib/blog-server')
+      const posts = await getPublishedBlogPosts()
+      return posts.map((post) => ({
+        url: `${baseUrl}/blog/${post.slug || post.id}`,
+        lastModified: post.date ? new Date(post.date) : new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+      }))
+    } catch {
+      // sitemap still serves the static + event routes
+      return []
+    }
   }
 
   // Dynamic published showcase project URLs.
-  let showcaseRoutes: MetadataRoute.Sitemap = []
-  try {
-    const { getPublishedShowcaseProjects } = await import('@/lib/showcase-server')
-    const projects = await getPublishedShowcaseProjects()
-    showcaseRoutes = projects.map((project) => ({
-      url: `${baseUrl}/showcase/${project.slug || project.id}`,
-      lastModified: project.updatedAt ? new Date(project.updatedAt) : new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.6,
-    }))
-  } catch {
-    // sitemap still serves the static + event + blog routes
+  const loadShowcaseRoutes = async (): Promise<MetadataRoute.Sitemap> => {
+    try {
+      const { getPublishedShowcaseProjects } = await import('@/lib/showcase-server')
+      const projects = await getPublishedShowcaseProjects()
+      return projects.map((project) => ({
+        url: `${baseUrl}/showcase/${project.slug || project.id}`,
+        lastModified: project.updatedAt ? new Date(project.updatedAt) : new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.6,
+      }))
+    } catch {
+      // sitemap still serves the static + event + blog routes
+      return []
+    }
   }
+
+  // Each section is one Firestore query; running them concurrently cuts the
+  // on-demand (revalidated) generation time from three round-trips to one.
+  const [eventRoutes, blogRoutes, showcaseRoutes] = await Promise.all([
+    loadEventRoutes(),
+    loadBlogRoutes(),
+    loadShowcaseRoutes(),
+  ])
 
   return [...routes, ...eventRoutes, ...blogRoutes, ...showcaseRoutes]
 }
