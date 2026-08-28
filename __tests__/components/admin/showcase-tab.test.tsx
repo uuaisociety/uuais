@@ -19,6 +19,11 @@ jest.mock('@/lib/firestore/showcase', () => ({
   notifyShowcaseApproved: (p: unknown) => mockNotifyApproved(p),
 }))
 
+// ShowcaseModal pulls parseTags from ShowcaseSubmissionModal, which imports the users helper; stop the chain before the real Firebase client loads.
+jest.mock('@/lib/firestore/users', () => ({
+  getUserProfile: jest.fn().mockResolvedValue({ isMember: true }),
+}))
+
 function createProject(overrides: Record<string, unknown> = {}) {
   return {
     id: 'proj-1',

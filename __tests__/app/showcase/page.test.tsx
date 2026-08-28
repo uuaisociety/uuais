@@ -25,6 +25,11 @@ jest.mock('@/lib/firestore/showcase', () => ({
   subscribeToMyShowcaseProjects: jest.fn(() => () => {}),
 }))
 
+// The submission modal is dynamically imported; stop the chain before the real Firebase client loads.
+jest.mock('@/lib/firestore/users', () => ({
+  getUserProfile: jest.fn().mockResolvedValue({ isMember: true }),
+}))
+
 const mockUseShowcaseVote = jest.fn()
 jest.mock('@/components/showcase/useShowcaseVote', () => ({
   useShowcaseVote: () => mockUseShowcaseVote(),
@@ -276,6 +281,8 @@ describe('ShowcasePage', () => {
     setProjects([])
     render(<ShowcasePage />)
     fireEvent.click(screen.getAllByText('Share your project')[0])
-    expect(await screen.findByText(/Checking your membership|Members can share projects|Title/)).toBeInTheDocument()
+    // The membership check is transient (replaced by the form once it resolves),
+    // so assert on the stable form field instead.
+    expect(await screen.findByRole('textbox', { name: /Title/ })).toBeInTheDocument()
   })
 })
