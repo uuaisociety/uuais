@@ -41,14 +41,27 @@ describe('Header', () => {
   })
 
   describe('navigation links', () => {
-    it('renders all navigation links in desktop and mobile nav', () => {
+    it('renders the top-level links in desktop and mobile nav', () => {
       render(<Header />)
-      expect(screen.getAllByText('Home').length).toBe(2)
       expect(screen.getAllByText('Events').length).toBe(2)
-      expect(screen.getAllByText('Job board').length).toBe(2)
       expect(screen.getAllByText('Blog').length).toBe(2)
       expect(screen.getAllByText('About').length).toBe(2)
       expect(screen.getAllByText('Contact').length).toBe(2)
+    })
+
+    it('keeps Home in the mobile menu only — the wordmark covers it on desktop', () => {
+      render(<Header />)
+      expect(screen.getAllByText('Home').length).toBe(1)
+      expect(screen.getByRole('link', { name: 'UU AI Society' })).toHaveAttribute('href', '/')
+    })
+
+    it('groups the job board under Community rather than the top level', () => {
+      render(<Header />)
+      // Mobile lists it under the Community group; desktop only after opening.
+      expect(screen.getAllByText('Job board').length).toBe(1)
+      fireEvent.click(screen.getByRole('button', { name: 'Community' }))
+      expect(screen.getAllByText('Job board').length).toBe(2)
+      expect(screen.getAllByRole('link', { name: 'Job board' })[0]).toHaveAttribute('href', '/careers')
     })
 
     it('marks the Blog link with a Beta badge', () => {
@@ -333,6 +346,59 @@ describe('Header', () => {
       const logoutButton = screen.getAllByText('Logout')[0]
       fireEvent.click(logoutButton)
       expect(mockLogout).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('community dropdown (public)', () => {
+    it('renders Community in desktop nav and mobile menu', () => {
+      render(<Header />)
+      expect(screen.getByRole('button', { name: 'Community' })).toBeInTheDocument()
+      expect(screen.getAllByText('Community').length).toBe(2)
+    })
+
+    it('opens and shows both community links on desktop', () => {
+      render(<Header />)
+      const communityBtn = screen.getByRole('button', { name: 'Community' })
+      // Mobile already renders one copy of each; opening adds the desktop pair.
+      expect(screen.getAllByText('Member Showcase').length).toBe(1)
+      fireEvent.click(communityBtn)
+      expect(screen.getAllByText('Member Showcase').length).toBe(2)
+      expect(screen.getAllByText('Job board').length).toBe(2)
+    })
+
+    it('closes dropdown when clicking outside', () => {
+      render(<Header />)
+      fireEvent.click(screen.getByRole('button', { name: 'Community' }))
+      expect(screen.getAllByText('Member Showcase').length).toBe(2)
+      fireEvent.mouseDown(document)
+      expect(screen.getAllByText('Member Showcase').length).toBe(1)
+    })
+
+    it('closes dropdown when pressing Escape', () => {
+      render(<Header />)
+      fireEvent.click(screen.getByRole('button', { name: 'Community' }))
+      expect(screen.getAllByText('Member Showcase').length).toBe(2)
+      fireEvent.keyDown(document, { key: 'Escape' })
+      expect(screen.getAllByText('Member Showcase').length).toBe(1)
+    })
+
+    it('Escape closes the mobile menu', () => {
+      const { container } = render(<Header />)
+      const hamburger = screen.getByRole('button', { name: 'Open main menu' })
+      fireEvent.click(hamburger)
+      const nav = container.querySelector('#mobile-menu')
+      expect(nav?.className).not.toContain('pointer-events-none')
+      fireEvent.keyDown(document, { key: 'Escape' })
+      expect(nav?.className).toContain('pointer-events-none')
+    })
+
+    it('links to the showcase page', () => {
+      render(<Header />)
+      const communityBtn = screen.getByRole('button', { name: 'Community' })
+      fireEvent.click(communityBtn)
+      screen
+        .getAllByRole('link', { name: 'Member Showcase' })
+        .forEach((link) => expect(link).toHaveAttribute('href', '/showcase'))
     })
   })
 })

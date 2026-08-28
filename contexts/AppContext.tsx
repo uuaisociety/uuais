@@ -1,7 +1,7 @@
 'use client'
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
-import { Event, TeamMember, BlogPost, FAQ, Job } from '../types';
+import { Event, TeamMember, BlogPost, FAQ, Job, ShowcaseProject } from '../types';
 import { scheduleIdle } from '@/lib/idle';
 import { hasCachedIdentity } from '@/lib/identity-cache';
 
@@ -13,6 +13,10 @@ interface AppState {
   blogPostsLoaded: boolean;
   faqs: FAQ[];
   jobs: Job[];
+  showcaseProjects: ShowcaseProject[];
+  showcaseLoaded: boolean;
+  /** The showcase could not be read from the server — an empty list here means "unknown", not "none". */
+  showcaseUnavailable: boolean;
   isLoading: boolean;
   error: string | null;
 }
@@ -39,7 +43,12 @@ type AppAction =
   | { type: 'SET_JOBS'; payload: Job[] }
   | { type: 'ADD_JOB'; payload: Job }
   | { type: 'UPDATE_JOB'; payload: Job }
-  | { type: 'DELETE_JOB'; payload: string };
+  | { type: 'DELETE_JOB'; payload: string }
+  | { type: 'SET_SHOWCASE_PROJECTS'; payload: ShowcaseProject[]; fromCache?: boolean }
+  | { type: 'SET_SHOWCASE_UNAVAILABLE' }
+  | { type: 'ADD_SHOWCASE_PROJECT'; payload: ShowcaseProject }
+  | { type: 'UPDATE_SHOWCASE_PROJECT'; payload: ShowcaseProject }
+  | { type: 'DELETE_SHOWCASE_PROJECT'; payload: string };
 
 type FirestoreAction = 
   | { firestoreAction: 'ADD_EVENT'; payload: Omit<Event, 'id'> }
@@ -57,7 +66,10 @@ type FirestoreAction =
   | { firestoreAction: 'DELETE_FAQS'; payload: string }
   | { firestoreAction: 'ADD_JOB'; payload: Omit<Job, 'id' | 'createdAt'> }
   | { firestoreAction: 'UPDATE_JOB'; payload: Job }
-  | { firestoreAction: 'DELETE_JOB'; payload: string };
+  | { firestoreAction: 'DELETE_JOB'; payload: string }
+  | { firestoreAction: 'ADD_SHOWCASE_PROJECT'; payload: Omit<ShowcaseProject, 'id'> }
+  | { firestoreAction: 'UPDATE_SHOWCASE_PROJECT'; payload: ShowcaseProject }
+  | { firestoreAction: 'DELETE_SHOWCASE_PROJECT'; payload: string };
 
 const initialState: AppState = {
   events: [],
@@ -67,6 +79,9 @@ const initialState: AppState = {
   blogPostsLoaded: false,
   faqs: [],
   jobs: [],
+  showcaseProjects: [],
+  showcaseLoaded: false,
+  showcaseUnavailable: false,
   isLoading: false,
   error: null
 };
@@ -153,12 +168,22 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         jobs: state.jobs.filter(j => j.id !== action.payload)
       };
+    case 'SET_SHOWCASE_PROJECTS':
+      return {
+        ...state,
+        showcaseProjects: action.payload,
+        showcaseLoaded: true,
+        // Only an empty cache-served result is unknown; anything the server answered is truth.
+        showcaseUnavailable: action.fromCache === true && action.payload.length === 0,
+      };
+    case 'SET_SHOWCASE_UNAVAILABLE':
+      return { ...state, showcaseLoaded: true, showcaseUnavailable: true };
     default:
       return state;
   }
 };
 
-type AppDispatch = (action: AppAction | FirestoreAction) => Promise<string | void>;
+type AppDispatch = (action: AppAction | FirestoreAction) => Promise<string | boolean | void>;
 
 const AppContext = createContext<{
   state: AppState;
@@ -207,6 +232,7 @@ export const AppProvider: React.FC<{
     const unsubscribeEvents: { current: (() => void) | null } = { current: null };
     const unsubscribeJobs: { current: (() => void) | null } = { current: null };
     const unsubscribeBlogPosts: { current: (() => void) | null } = { current: null };
+    const unsubscribeShowcase: { current: (() => void) | null } = { current: null };
     const unsubscribeTeamMembers: { current: (() => void) | null } = { current: null };
     const unsubscribeFaqs: { current: (() => void) | null } = { current: null };
     let idTokenUnsub: (() => void) | null = null;
@@ -254,6 +280,34 @@ export const AppProvider: React.FC<{
         subscribeToJobs((jobs) => {
           dispatch({ type: 'SET_JOBS', payload: jobs });
         }, { includeUnpublished }),
+      );
+
+      // Showcase: public visitors only see published projects; admins see all (incl. drafts)
+      if (unsubscribeShowcase.current) {
+        try { unsubscribeShowcase.current(); } catch { /* ignore */ }
+        unsubscribeShowcase.current = null;
+      }
+      // Flips only on a server-answered snapshot: the SDK's first snapshot is often cache-only, so before that an empty cache result is a cold start, not "could not ask" (the flash bug).
+      let hasReceivedServerSnapshot = false;
+      attach(import('@/lib/firestore/showcase'), unsubscribeShowcase, ({ subscribeToShowcaseProjects }) =>
+        subscribeToShowcaseProjects(
+          (projects, meta) => {
+            if (!meta.fromCache) hasReceivedServerSnapshot = true;
+            dispatch({
+              type: 'SET_SHOWCASE_PROJECTS',
+              payload: projects,
+              fromCache: meta.fromCache && hasReceivedServerSnapshot,
+            });
+          },
+          {
+            includeUnpublished,
+            onError: () => {
+              // A stale listener from a superseded subscribe() must not mark the showcase unavailable after a healthy re-subscribe.
+              if (gen !== subscriptionGeneration) return;
+              dispatch({ type: 'SET_SHOWCASE_UNAVAILABLE' });
+            },
+          },
+        ),
       );
 
       // Blog posts: public visitors see published posts; admins see all (incl. drafts)
@@ -332,6 +386,9 @@ export const AppProvider: React.FC<{
       if (unsubscribeBlogPosts.current) {
         try { unsubscribeBlogPosts.current(); } catch { /* ignore */ }
       }
+      if (unsubscribeShowcase.current) {
+        try { unsubscribeShowcase.current(); } catch { /* ignore */ }
+      }
       if (unsubscribeTeamMembers.current) {
         try { unsubscribeTeamMembers.current(); } catch { /* ignore */ }
       }
@@ -401,14 +458,24 @@ export const AppProvider: React.FC<{
           case 'DELETE_JOB':
             await (await import('@/lib/firestore/jobs')).deleteJob(action.payload);
             break;
+          case 'ADD_SHOWCASE_PROJECT':
+            return await (await import('@/lib/firestore/showcase')).addShowcaseProject(action.payload);
+          case 'UPDATE_SHOWCASE_PROJECT':
+            await (await import('@/lib/firestore/showcase')).updateShowcaseProject(action.payload.id, action.payload);
+            break;
+          case 'DELETE_SHOWCASE_PROJECT':
+            await (await import('@/lib/firestore/showcase')).deleteShowcaseProject(action.payload);
+            break;
         }
       } else {
         // Handle regular state actions
         dispatch(action);
       }
+      return true;
     } catch (error) {
       console.error('Firestore operation failed:', error);
       dispatch({ type: 'SET_ERROR', payload: 'Failed to sync with database' });
+      return false;
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
     }

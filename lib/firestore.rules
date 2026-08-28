@@ -40,6 +40,16 @@ service cloud.firestore {
       return request.resource.data[field] == resource.data[field];
     }
 
+    // Helper: an optional string field is absent, or a string within `max`
+    function strWithin(data, field, max) {
+      return !(field in data) || (data[field] is string && data[field].size() <= max);
+    }
+
+    // Helper: rules cannot iterate, but the tag list is capped, so each slot is checked by index
+    function tagWithin(tags, i, max) {
+      return tags.size() <= i || (tags[i] is string && tags[i].size() > 0 && tags[i].size() <= max);
+    }
+
     // Validate shape of an eventCustomQuestions document
     function validEventCustomQuestion(d) {
       return d.eventId is string && d.eventId.size() > 0
@@ -60,7 +70,8 @@ service cloud.firestore {
       // Users may read their own profile; admins may read all; optionally open some fields publicly later.
       allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
 
-      // Create own document at first sign-in or profile completion
+      // Create own document at first sign-in or profile completion.
+      // NOTE: isMember is intentionally self-assertable here (self-declared membership, a deliberate product decision); afterwards it is admin-managed (update rule below).
       allow create: if isSignedIn() && request.auth.uid == uid
         && emailMatchesAuth()
         // Limit client-writable fields; prevent role escalation
@@ -108,6 +119,74 @@ service cloud.firestore {
     match /blogPosts/{postId} {
       allow read: if resource.data.published == true || isAdmin();
       allow create, update, delete: if isAdmin();
+    }
+
+    // SHOWCASE PROJECTS — community gallery of member AI work
+    match /showcaseProjects/{projectId} {
+      // Public only sees published projects; admins see all (incl. drafts).
+      // A member may also read their own submission so they can follow it
+      // through review instead of guessing whether it was ever seen.
+      allow read: if resource.data.published == true
+        || isAdmin()
+        || (isSignedIn() && resource.data.creatorUserId == request.auth.uid);
+
+      // Members may submit their own work, but only as an unpublished,
+      // non-featured, zero-vote draft — they cannot self-publish, self-feature,
+      // or seed votes.
+      allow create: if isMember()
+        && request.resource.data.creatorUserId == request.auth.uid
+        && request.resource.data.published == false
+        && request.resource.data.featured == false
+        && request.resource.data.votes == 0
+        && request.resource.data.keys().hasOnly([
+          'title','slug','description','details','category','creatorUserId','creatorName',
+          'links','coverImage','coverImagePath','tags','votes','published',
+          'featured','createdAt','updatedAt'
+        ])
+        // Sizes, so the form is not the only gate. Keep in step with SHOWCASE_LIMITS in types/index.ts.
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0
+        && request.resource.data.title.size() <= 80
+        && request.resource.data.description is string
+        && request.resource.data.description.size() > 0
+        && request.resource.data.description.size() <= 600
+        && strWithin(request.resource.data, 'details', 4000)
+        && strWithin(request.resource.data, 'slug', 100)
+        && strWithin(request.resource.data, 'creatorName', 120)
+        && strWithin(request.resource.data, 'coverImage', 1000)
+        && strWithin(request.resource.data, 'coverImagePath', 500)
+        && request.resource.data.category is string
+        && request.resource.data.category.size() <= 40
+        && request.resource.data.createdAt is string
+        && request.resource.data.createdAt.size() <= 64
+        && request.resource.data.updatedAt is string
+        && request.resource.data.updatedAt.size() <= 64
+        && request.resource.data.links is map
+        && strWithin(request.resource.data.links, 'github', 500)
+        && strWithin(request.resource.data.links, 'website', 500)
+        && strWithin(request.resource.data.links, 'demo', 500)
+        && strWithin(request.resource.data.links, 'video', 500)
+        && request.resource.data.tags is list
+        && request.resource.data.tags.size() <= 5
+        && tagWithin(request.resource.data.tags, 0, 30)
+        && tagWithin(request.resource.data.tags, 1, 30)
+        && tagWithin(request.resource.data.tags, 2, 30)
+        && tagWithin(request.resource.data.tags, 3, 30)
+        && tagWithin(request.resource.data.tags, 4, 30);
+
+      // Admins may create projects directly, including published ones ("New Project" in the admin tab).
+      allow create: if isAdmin();
+
+      // Publish/feature/edit/delete is admin-only
+      allow update, delete: if isAdmin();
+    }
+
+    // SHOWCASE VOTES — per-member vote records (idempotency for the vote API).
+    // The server writes via the Admin SDK; clients only ever call the API route,
+    // so all direct client writes are denied (defense-in-depth against vote
+    // doc-ID/forgery abuse).
+    match /showcaseVotes/{voteId} {
+      allow read, create, update, delete: if isAdmin();
     }
 
     // JOBS

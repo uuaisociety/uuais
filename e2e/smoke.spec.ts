@@ -16,8 +16,10 @@ const PUBLIC_ROUTES: Array<{ path: string; title: RegExp }> = [
   { path: '/login', title: /UU AI Society|Sign In/ },
 ];
 
-// Desktop nav labels from components/layout/Header.tsx (navigation array).
-const NAV_LINKS = ['Home', 'Events', 'Job board', 'About', 'Contact'];
+// Desktop nav labels from components/layout/Header.tsx. The wordmark links home,
+// and member destinations (showcase, jobs) live in the Community dropdown.
+const NAV_LINKS = ['UU AI Society', 'Events', 'Blog', 'About', 'Contact'];
+const COMMUNITY_LINKS = ['Member Showcase', 'Job board'];
 
 for (const route of PUBLIC_ROUTES) {
   test(`renders ${route.path}`, async ({ page }) => {
@@ -30,6 +32,13 @@ for (const route of PUBLIC_ROUTES) {
     await expect(header).toBeVisible();
 
     for (const label of NAV_LINKS) {
+      await expect(header.getByRole('link', { name: label })).toBeVisible();
+    }
+
+    const community = header.getByRole('button', { name: /Community/ });
+    await expect(community).toBeVisible();
+    await community.click();
+    for (const label of COMMUNITY_LINKS) {
       await expect(header.getByRole('link', { name: label })).toBeVisible();
     }
 

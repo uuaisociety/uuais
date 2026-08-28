@@ -11,6 +11,7 @@ export type AdminTabKey =
   | "events"
   | "team"
   | "blog"
+  | "showcase"
   | "faq"
   | "analytics"
   | "members"
@@ -42,6 +43,16 @@ export function useAdminOverview(): { items: AdminActionItem[]; loaded: boolean 
       }
     }
 
+    // Member submissions land unpublished and are invisible until someone reviews them.
+    const pendingProjects = state.showcaseProjects.filter((p) => !p.published).length;
+    if (pendingProjects > 0) {
+      items.push({
+        tab: "showcase",
+        label: `Showcase submission${pendingProjects !== 1 ? "s" : ""} to review`,
+        count: pendingProjects,
+      });
+    }
+
     const drafts = state.blogPosts.filter((p) => !p.published).length;
     if (drafts > 0) {
       items.push({ tab: "blog", label: `Draft post${drafts !== 1 ? "s" : ""} to review`, count: drafts });
@@ -60,8 +71,9 @@ export function useAdminOverview(): { items: AdminActionItem[]; loaded: boolean 
       items.push({ tab: "events", label: `registered for ${latest.title}`, count: latest.currentRegistrations ?? 0 });
     }
 
-    const loaded = campaignsLoaded && teamApplicationsLoaded && state.blogPostsLoaded && state.eventsLoaded;
+    const loaded =
+      campaignsLoaded && teamApplicationsLoaded && state.blogPostsLoaded && state.eventsLoaded && state.showcaseLoaded;
 
     return { items, loaded };
-  }, [campaigns, campaignsLoaded, teamApplications, teamApplicationsLoaded, state.blogPosts, state.blogPostsLoaded, state.events, state.eventsLoaded]);
+  }, [campaigns, campaignsLoaded, teamApplications, teamApplicationsLoaded, state.blogPosts, state.blogPostsLoaded, state.events, state.eventsLoaded, state.showcaseProjects, state.showcaseLoaded]);
 }

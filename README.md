@@ -202,12 +202,14 @@ Add these to your `.env` (keep them commented out when you want to use the real 
 
 ```bash
 NEXT_PUBLIC_USE_FIREBASE_EMULATORS=true
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=demo-uuais
 FIREBASE_AUTH_EMULATOR_HOST=127.0.0.1:9099
 FIRESTORE_EMULATOR_HOST=127.0.0.1:8080
 ```
 
 - `NEXT_PUBLIC_USE_FIREBASE_EMULATORS=true` connects the client SDK (Auth + Firestore) and redirects the Admin SDK in API routes to the emulators.
-- The two host vars let the auth middleware and Admin SDK verify emulator-issued tokens server-side.
+- `NEXT_PUBLIC_FIREBASE_PROJECT_ID=demo-uuais` must match the `--project` the emulators run under. Leave it pointing at the real project and Firestore reads come back empty (the emulator keeps data per project id) and sign-in fails at `/api/login` with `idToken has incorrect "iss" (issuer) claim` — the token is issued for `demo-uuais` and verified against the other project.
+- The two host vars let the auth middleware and Admin SDK verify emulator-issued tokens server-side. They have to be in an env **file** (`.env` or `.env.local`) — the proxy/edge runtime does not see vars exported only in your shell.
 - Then restart `npm run dev`.
 
 ### Notes

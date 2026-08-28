@@ -23,7 +23,7 @@ const BlogPage: React.FC = () => {
   const { state } = useApp();
   const searchParams = useSearchParams();
   const q = searchParams.get('q') ?? '';
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(q);
   const [searchOpen, setSearchOpen] = useState(false);
   const [showAllAi, setShowAllAi] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -32,19 +32,21 @@ const BlogPage: React.FC = () => {
     updatePageMeta('Blog', 'Read the latest articles and insights from UU AI Society members and industry experts');
   }, []);
 
-  // Keep the filter in sync with ?q= — including client-side navigation from tag links.
-  useEffect(() => {
-    /* eslint-disable react-hooks/set-state-in-effect */
+  // Adopt ?q= on navigation, but never sync back in an effect — a two-way sync ping-pongs.
+  const [lastQ, setLastQ] = useState(q);
+  if (q !== lastQ) {
+    setLastQ(q);
     setSearchTerm(q);
-    /* eslint-enable react-hooks/set-state-in-effect */
-  }, [q]);
+  }
 
-  useEffect(() => {
+  // Written only on a real edit, so the URL stays shareable without driving a re-render.
+  const updateSearch = (next: string) => {
+    setSearchTerm(next);
     const url = new URL(window.location.href);
-    if (searchTerm) url.searchParams.set('q', searchTerm);
+    if (next) url.searchParams.set('q', next);
     else url.searchParams.delete('q');
     window.history.replaceState(null, '', url.toString());
-  }, [searchTerm]);
+  };
 
   useEffect(() => {
     if (searchOpen) searchInputRef.current?.focus();
@@ -190,7 +192,7 @@ const BlogPage: React.FC = () => {
               <span className="text-sm text-muted-foreground whitespace-nowrap">Filtered by</span>
               <button
                 type="button"
-                onClick={() => setSearchTerm('')}
+                onClick={() => updateSearch('')}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 min-h-9 rounded-md border border-border bg-card text-sm text-foreground hover:bg-foreground/[0.05] transition-colors cursor-pointer truncate max-w-56"
               >
                 <span className="truncate">{searchTerm}</span>
@@ -204,7 +206,7 @@ const BlogPage: React.FC = () => {
                 <input
                   ref={searchInputRef}
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={(e) => updateSearch(e.target.value)}
                   placeholder="Search titles, authors, content…"
                   aria-label="Search articles"
                   className="w-52 sm:w-72 bg-transparent border-b border-border pb-1 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors duration-300"
@@ -256,7 +258,7 @@ const BlogPage: React.FC = () => {
             {searchTerm && (
               <button
                 type="button"
-                onClick={() => setSearchTerm('')}
+                onClick={() => updateSearch('')}
                 className="mt-4 text-sm text-primary hover:underline cursor-pointer"
               >
                 Clear search

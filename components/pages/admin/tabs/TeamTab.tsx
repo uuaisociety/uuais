@@ -9,12 +9,9 @@ import { TeamMember, TEAM_CATEGORY_LABELS } from "@/types";
 import TeamModal, { TeamFormState } from '@/components/pages/admin/modals/TeamModal';
 import { useApp } from '@/contexts/AppContext';
 
-export interface TeamTabProps {
-  members: TeamMember[];
-}
-
-const TeamTab: React.FC<TeamTabProps> = ({ members }) => {
-  const { dispatch } = useApp();
+const TeamTab: React.FC = () => {
+  const { state, dispatch } = useApp();
+  const members = state.teamMembers;
   const placeholderImage = '/images/logo-highdef.png';
 
   const [showTeamModal, setShowTeamModal] = useState(false);

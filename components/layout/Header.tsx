@@ -11,13 +11,21 @@ import { Button } from '@/components/ui/Button';
 import { loginUrl } from '@/lib/login-redirect';
 import { useOpenCampaigns } from '@/lib/firestore/useOpenCampaigns';
 
+// Desktop top level. The wordmark already goes home, so Home only earns a slot
+// in the mobile list, where a vertical menu has room for it.
 const navigation = [
-  { name: 'Home', href: '/' },
   { name: 'Events', href: '/events' },
-  { name: 'Job board', href: '/careers' },
   { name: 'Blog', href: '/blog', badge: 'Beta' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
+];
+
+const mobileNavigation = [{ name: 'Home', href: '/' }, ...navigation];
+
+// What members do here, grouped: their work and their opportunities.
+const communityLinks = [
+  { href: '/showcase', label: 'Member Showcase' },
+  { href: '/careers', label: 'Job board' },
 ];
 
 const projectLinks = [
@@ -36,8 +44,10 @@ export const Header: React.FC = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [isCommunityOpen, setIsCommunityOpen] = useState(false);
   const [prevPathname, setPrevPathname] = useState(pathname);
   const projectsRef = useRef<HTMLDivElement>(null);
+  const communityRef = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileButtonRef = useRef<HTMLButtonElement>(null);
   const { user, isAdmin, cached, logout } = useAdmin();
@@ -48,6 +58,7 @@ export const Header: React.FC = () => {
     setPrevPathname(pathname);
     setIsMenuOpen(false);
     setIsProjectsOpen(false);
+    setIsCommunityOpen(false);
   }
 
   // Hide the Apply CTA when no open application campaign exists (show it while
@@ -66,13 +77,26 @@ export const Header: React.FC = () => {
   const isActive = (path: string) => pathname === path;
 
   useEffect(() => {
-    if (!isProjectsOpen) return;
+    if (!isProjectsOpen && !isCommunityOpen) return;
     const handleClickOutside = (event: MouseEvent) => {
-      if (!projectsRef.current?.contains(event.target as Node)) setIsProjectsOpen(false);
+      if (isProjectsOpen && !projectsRef.current?.contains(event.target as Node)) setIsProjectsOpen(false);
+      if (isCommunityOpen && !communityRef.current?.contains(event.target as Node)) setIsCommunityOpen(false);
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isProjectsOpen]);
+  }, [isProjectsOpen, isCommunityOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsCommunityOpen(false);
+        setIsProjectsOpen(false);
+        setIsMenuOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -121,6 +145,37 @@ export const Header: React.FC = () => {
                   {item.badge && <BetaBadge />}
                 </Link>
               ))}
+
+              <div className="relative" ref={communityRef}>
+                <button
+                  onClick={() => setIsCommunityOpen((v) => !v)}
+                  aria-expanded={isCommunityOpen}
+                  aria-haspopup="true"
+                  className={`${navLinkClass(communityLinks.some((l) => isActive(l.href)))} inline-flex items-center gap-1 cursor-pointer`}
+                >
+                  Community
+                  <ChevronDown className={`h-3 w-3 transition-transform duration-300 ${isCommunityOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {isCommunityOpen && (
+                  <div className="glass-pop absolute left-0 mt-2 w-52 rounded-md p-1.5 animate-rise">
+                    {communityLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setIsCommunityOpen(false)}
+                        aria-current={isActive(link.href) ? 'page' : undefined}
+                        className={`block px-3 py-2 rounded-sm text-[0.8125rem] transition-colors ${
+                          isActive(link.href)
+                            ? 'text-current bg-current/[0.12]'
+                            : 'text-current/70 hover:text-current hover:bg-current/[0.09]'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
 
               {identity?.showAdmin && (
                 <div className="relative" ref={projectsRef}>
@@ -216,7 +271,7 @@ export const Header: React.FC = () => {
             }`}
           >
             <div className="py-2 border-t border-current/10">
-              {navigation.map((item) => (
+              {mobileNavigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -228,6 +283,21 @@ export const Header: React.FC = () => {
                 >
                   {item.name}
                   {item.badge && <BetaBadge />}
+                </Link>
+              ))}
+
+              <p className="px-3.5 pt-3 pb-1 mono-label text-current/45">Community</p>
+              {communityLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  className={`block px-3.5 py-2.5 rounded-sm text-sm font-medium transition-colors ${
+                    isActive(link.href) ? 'text-current bg-current/[0.12]' : 'text-current/65 hover:text-current hover:bg-current/[0.07]'
+                  }`}
+                >
+                  {link.label}
                 </Link>
               ))}
 

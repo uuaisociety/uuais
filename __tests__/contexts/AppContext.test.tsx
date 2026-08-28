@@ -53,6 +53,13 @@ jest.mock('@/lib/firestore/campaignQuestions', () => ({
   deleteCampaignQuestionsByCampaign: jest.fn(),
 }));
 
+jest.mock('@/lib/firestore/showcase', () => ({
+  subscribeToShowcaseProjects: jest.fn(() => mockUnsubscribe),
+  addShowcaseProject: jest.fn(),
+  updateShowcaseProject: jest.fn(),
+  deleteShowcaseProject: jest.fn(),
+}));
+
 import { AppProvider, useApp } from '@/contexts/AppContext';
 import {
   subscribeToEvents, addEvent, updateEvent, deleteEvent,
@@ -69,6 +76,7 @@ import {
 import {
   subscribeToJobs, addJob, updateJob, deleteJob,
 } from '@/lib/firestore/jobs';
+import { subscribeToShowcaseProjects, addShowcaseProject, updateShowcaseProject, deleteShowcaseProject } from '@/lib/firestore/showcase';
 import { onIdTokenChanged } from 'firebase/auth';
 
 const mockEvent = { id: 'evt-1', title: 'Test Event', description: 'Desc', location: 'Loc', image: '', category: 'workshop' as const, status: 'upcoming' as const, registrationRequired: false, eventStartAt: '2026-01-01T00:00:00Z' };
@@ -100,6 +108,7 @@ describe('AppContext', () => {
     expect(result.current.state.blogPosts).toEqual([]);
     expect(result.current.state.faqs).toEqual([]);
     expect(result.current.state.jobs).toEqual([]);
+    expect(result.current.state.showcaseProjects).toEqual([]);
     expect(result.current.state.isLoading).toBe(false);
     expect(result.current.state.error).toBeNull();
   });
@@ -112,6 +121,7 @@ describe('AppContext', () => {
     expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
     expect(subscribeToFaqs).toHaveBeenCalledTimes(1);
     expect(subscribeToJobs).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
     expect(idTokenCallback).not.toBeNull();
   });
@@ -147,6 +157,47 @@ describe('AppContext', () => {
 
   it('throws useApp outside provider', () => {
     expect(() => renderHook(() => useApp())).toThrow('useApp must be used within an AppProvider');
+  });
+
+  describe('showcase subscription edge cases', () => {
+    it('does not flash showcaseUnavailable for an empty cache snapshot before the server answers', async () => {
+      const { result } = renderApp();
+      await waitFor(() => expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1));
+      const cb = (subscribeToShowcaseProjects as jest.Mock).mock.calls[0][0] as (
+        projects: unknown[],
+        meta: { fromCache: boolean },
+      ) => void;
+
+      // Cold start: the SDK's first snapshot is cache-only and empty — "unknown", not a failure.
+      await act(async () => { cb([], { fromCache: true }); });
+      expect(result.current.state.showcaseUnavailable).toBe(false);
+
+      // The server answers: empty is now truth.
+      await act(async () => { cb([], { fromCache: false }); });
+      expect(result.current.state.showcaseUnavailable).toBe(false);
+
+      // A cache-empty snapshot after a server answer is a real "could not ask".
+      await act(async () => { cb([], { fromCache: true }); });
+      expect(result.current.state.showcaseUnavailable).toBe(true);
+    });
+
+    it('ignores a stale showcase error after an admin re-subscribe', async () => {
+      const { result } = renderApp();
+      await waitFor(() => expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1));
+      const publicSub = (subscribeToShowcaseProjects as jest.Mock).mock.calls[0];
+      act(() => {
+        idTokenCallback!({ uid: 'admin-1', getIdTokenResult: () => Promise.resolve({ claims: { admin: true } }) });
+      });
+      await waitFor(() => expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(2));
+      const adminSub = (subscribeToShowcaseProjects as jest.Mock).mock.calls[1];
+
+      // The superseded public listener fails after the healthy admin stream is up.
+      await act(async () => { publicSub[1].onError(new Error('stale stream')); });
+      expect(result.current.state.showcaseUnavailable).toBe(false);
+
+      await act(async () => { adminSub[1].onError(new Error('stream down')); });
+      expect(result.current.state.showcaseUnavailable).toBe(true);
+    });
   });
 
   describe('dispatch regular actions', () => {
@@ -251,6 +302,72 @@ describe('AppContext', () => {
         await result.current.dispatch({ type: 'SET_JOBS', payload: [mockJob] });
       });
       expect(result.current.state.jobs).toEqual([mockJob]);
+    });
+
+    const mockShowcaseProject = {
+      id: 'sp-1',
+      title: 'Course Navigator',
+      description: 'Explore courses',
+      category: 'app' as const,
+      creatorUserId: 'u1',
+      creatorName: 'Ada',
+      links: {},
+      tags: [],
+      votes: 0,
+      published: true,
+      featured: false,
+      createdAt: '2026-01-01T00:00:00Z',
+      updatedAt: '2026-01-01T00:00:00Z',
+    };
+
+    it('SET_SHOWCASE_PROJECTS', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [mockShowcaseProject] });
+      });
+      expect(result.current.state.showcaseProjects).toEqual([mockShowcaseProject]);
+    });
+
+    // An empty result served from cache means "could not ask", not "nothing there".
+    it('marks the showcase unavailable when an empty result came from cache', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [], fromCache: true });
+      });
+      expect(result.current.state.showcaseUnavailable).toBe(true);
+      expect(result.current.state.showcaseLoaded).toBe(true);
+    });
+
+    it('trusts an empty result the server actually answered', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [], fromCache: false });
+      });
+      expect(result.current.state.showcaseUnavailable).toBe(false);
+    });
+
+    it('clears the unavailable flag once cached projects do arrive', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [], fromCache: true });
+      });
+      await act(async () => {
+        await result.current.dispatch({
+          type: 'SET_SHOWCASE_PROJECTS',
+          payload: [mockShowcaseProject],
+          fromCache: true,
+        });
+      });
+      expect(result.current.state.showcaseUnavailable).toBe(false);
+    });
+
+    it('SET_SHOWCASE_UNAVAILABLE marks the stream as failed', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ type: 'SET_SHOWCASE_UNAVAILABLE' });
+      });
+      expect(result.current.state.showcaseUnavailable).toBe(true);
+      expect(result.current.state.showcaseLoaded).toBe(true);
     });
 
     it('ADD_BLOG_POST regular action', async () => {
@@ -495,6 +612,41 @@ describe('AppContext', () => {
       expect(deleteJob).toHaveBeenCalledWith('job-1');
     });
 
+    it('ADD_SHOWCASE_PROJECT calls addShowcaseProject and returns the id', async () => {
+      (addShowcaseProject as jest.Mock).mockResolvedValue('sp-1');
+      const { result } = renderApp();
+      const payload = {
+        title: 'Course Navigator', description: 'Explore courses',
+        category: 'app' as const, creatorUserId: 'u1', creatorName: 'Ada',
+        links: {}, tags: [], votes: 0, published: false, featured: false,
+        createdAt: '2026-01-01T00:00:00Z', updatedAt: '2026-01-01T00:00:00Z',
+      };
+      const returned = await act(async () => result.current.dispatch({ firestoreAction: 'ADD_SHOWCASE_PROJECT', payload }));
+      expect(addShowcaseProject).toHaveBeenCalledWith(payload);
+      expect(returned).toBe('sp-1');
+    });
+
+    it('UPDATE_SHOWCASE_PROJECT calls updateShowcaseProject', async () => {
+      const { result } = renderApp();
+      const project = {
+        id: 'sp-1', title: 'Updated', description: 'Desc', category: 'app' as const,
+        creatorUserId: 'u1', creatorName: 'Ada', links: {}, tags: [], votes: 0,
+        published: true, featured: false, createdAt: '2026-01-01T00:00:00Z', updatedAt: '2026-01-01T00:00:00Z',
+      };
+      await act(async () => {
+        await result.current.dispatch({ firestoreAction: 'UPDATE_SHOWCASE_PROJECT', payload: project });
+      });
+      expect(updateShowcaseProject).toHaveBeenCalledWith('sp-1', project);
+    });
+
+    it('DELETE_SHOWCASE_PROJECT calls deleteShowcaseProject', async () => {
+      const { result } = renderApp();
+      await act(async () => {
+        await result.current.dispatch({ firestoreAction: 'DELETE_SHOWCASE_PROJECT', payload: 'sp-1' });
+      });
+      expect(deleteShowcaseProject).toHaveBeenCalledWith('sp-1');
+    });
+
     it('UPDATE_TEAM_MEMBER firestore calls updateTeamMember', async () => {
       const { result } = renderApp();
       await act(async () => {
@@ -519,6 +671,25 @@ describe('AppContext', () => {
       await result.current.dispatch({ firestoreAction: 'ADD_EVENT', payload: { title: 'X', description: 'Desc', location: 'L', image: '', category: 'workshop' as const, status: 'upcoming' as const, registrationRequired: false, eventStartAt: '2026-01-01T00:00:00Z' } });
     });
     expect(result.current.state.error).toBe('Failed to sync with database');
+  });
+
+  it('resolves true when the firestore write succeeds', async () => {
+    const { result } = renderApp();
+    let outcome: unknown;
+    await act(async () => {
+      outcome = await result.current.dispatch({ firestoreAction: 'DELETE_EVENT', payload: 'e-1' });
+    });
+    expect(outcome).toBe(true);
+  });
+
+  it('resolves false when the firestore write fails', async () => {
+    (addEvent as jest.Mock).mockRejectedValue(new Error('db error'));
+    const { result } = renderApp();
+    let outcome: unknown = null;
+    await act(async () => {
+      outcome = await result.current.dispatch({ firestoreAction: 'ADD_EVENT', payload: { title: 'X', description: 'Desc', location: 'L', image: '', category: 'workshop' as const, status: 'upcoming' as const, registrationRequired: false, eventStartAt: '2026-01-01T00:00:00Z' } });
+    });
+    expect(outcome).toBe(false);
   });
 
   it('default case in reducer returns state unchanged for unknown action type', async () => {

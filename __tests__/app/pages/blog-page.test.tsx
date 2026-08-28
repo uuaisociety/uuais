@@ -174,4 +174,30 @@ describe('BlogPage', () => {
     render(<BlogPage />)
     expect(screen.getByText('No articles found')).toBeInTheDocument()
   })
+
+  // A tag link lands with ?q= already set; the filter must adopt it on first render.
+  it('adopts ?q= from the URL so tag links land filtered', () => {
+    window.history.replaceState(null, '', '/blog?q=Another')
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, blogPosts: [samplePost, samplePost2] },
+      dispatch: jest.fn(),
+    })
+    render(<BlogPage />)
+    expect(screen.getByText('Another Post')).toBeInTheDocument()
+    expect(screen.queryByText('Test Article')).not.toBeInTheDocument()
+  })
+
+  // A two-way effect sync ping-pongs whenever the URL and the field disagree at mount.
+  it('writes the search term to the URL only when the field is edited', () => {
+    mockUseApp.mockReturnValue({
+      state: { ...defaultAppState, blogPosts: [samplePost, samplePost2] },
+      dispatch: jest.fn(),
+    })
+    render(<BlogPage />)
+    expect(window.location.search).toBe('')
+
+    fireEvent.click(screen.getByLabelText('Search articles'))
+    fireEvent.change(screen.getByPlaceholderText(/Search/i), { target: { value: 'Another' } })
+    expect(new URLSearchParams(window.location.search).get('q')).toBe('Another')
+  })
 })

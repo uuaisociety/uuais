@@ -9,6 +9,7 @@ import {
   TrendingUp,
   UserRound,
   BriefcaseBusiness,
+  Rocket,
   Bot,
   Inbox,
   ChevronRight,
@@ -17,6 +18,7 @@ import { Card, CardContent } from '@/components/ui/Card';
 import EventsTab from '@/components/pages/admin/tabs/EventsTab';
 import TeamTab from '@/components/pages/admin/tabs/TeamTab';
 import BlogTab from '@/components/pages/admin/tabs/BlogTab';
+import ShowcaseTab from '@/components/pages/admin/tabs/ShowcaseTab';
 import FAQTab from '@/components/pages/admin/tabs/FAQTab';
 import BoardTab from '@/components/pages/admin/tabs/BoardTab'
 import ApplicationsTab from '@/components/pages/admin/tabs/ApplicationsTab';
@@ -25,14 +27,13 @@ import MembersTab from '@/components/pages/admin/tabs/membersTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
 import AISettingsTab from '@/components/pages/admin/tabs/AISettingsTab';
 import BlogAISettingsTab from '@/components/pages/admin/tabs/BlogAISettingsTab';
-import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 import { TabErrorBoundary } from '@/components/ui/TabErrorBoundary';
 import AdminStatusStrip from '@/components/pages/admin/AdminStatusStrip';
 import { useAdminOverview, type AdminTabKey } from '@/components/pages/admin/useAdminOverview';
 import { ANALYTICS_SUBTABS, type AnalyticsTabKey } from '@/components/pages/admin/tabs/analytics/useAnalyticsData';
 
-const ADMIN_TABS = ['events', 'team', 'blog', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
+const ADMIN_TABS = ['events', 'team', 'blog', 'showcase', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
 
 type NavChild = { key: string; label: string };
 type NavItem = {
@@ -51,6 +52,7 @@ const NAV_ITEMS: NavItem[] = [
       { key: 'ai-settings', label: 'AI News Desk' },
     ],
   },
+  { key: 'showcase', label: 'Showcase', icon: Rocket },
   { key: 'faq', label: 'FAQ', icon: HelpCircle },
   { key: 'analytics', label: 'Analytics', icon: TrendingUp, children: ANALYTICS_SUBTABS },
   { key: 'members', label: 'Members', icon: UserRound },
@@ -60,7 +62,6 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 const AdminDashboard: React.FC = () => {
-  const { state } = useApp();
   const tabValues = ADMIN_TABS;
   type Tab = AdminTabKey;
   // Restore the tab from the URL (?tab=...) or last-saved preference. Runs in
@@ -224,7 +225,7 @@ const AdminDashboard: React.FC = () => {
                 >
                   {activeTab === 'events' && (
                     <TabErrorBoundary name="Events">
-                      <EventsTab events={state.events} />
+                      <EventsTab />
                     </TabErrorBoundary>
                   )}
                   {activeTab === 'jobs' && (
@@ -234,7 +235,7 @@ const AdminDashboard: React.FC = () => {
                   )}
                   {activeTab === 'team' && (
                     <TabErrorBoundary name="Team">
-                      <TeamTab members={state.teamMembers} />
+                      <TeamTab />
                     </TabErrorBoundary>
                   )}
                   {activeTab === 'blog' && (
@@ -244,6 +245,11 @@ const AdminDashboard: React.FC = () => {
                       ) : (
                         <BlogAISettingsTab />
                       )}
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'showcase' && (
+                    <TabErrorBoundary name="Showcase">
+                      <ShowcaseTab />
                     </TabErrorBoundary>
                   )}
                   {activeTab === 'analytics' && (

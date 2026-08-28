@@ -24,12 +24,9 @@ const categoryOptions = [
   { value: "other", label: "Other" },
 ];
 
-export interface EventsTabProps {
-  events: Event[];
-}
-
-const EventsTab: React.FC<EventsTabProps> = ({ events }) => {
-  const { dispatch } = useApp();
+const EventsTab: React.FC = () => {
+  const { state, dispatch } = useApp();
+  const events = state.events;
   const [showEventQModal, setShowEventQModal] = useState(false);
   const [activeEventForQuestions, setActiveEventForQuestions] = useState<Event | null>(null);
   const [eventQuestions, setEventQuestions] = useState<EventCustomQuestion[]>([]);

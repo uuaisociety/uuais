@@ -4,7 +4,7 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Star, Sparkles } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
 import { updatePageMeta } from '@/utils/seo';
 import { format } from 'date-fns';
@@ -15,6 +15,8 @@ import HeroAnimation from '@/components/HeroAnimation';
 import FloatingSymbolsCanvas from '@/components/FloatingSymbolsCanvas';
 import HeroSplash from '@/components/HeroSplash';
 import { Button } from '@/components/ui/Button';
+import ShowcaseCover from '@/components/showcase/ShowcaseCover';
+import { SHOWCASE_CATEGORY_LABELS } from '@/types';
 import { DiscordCta } from '@/components/common/DiscordCta';
 
 const categoryOptions = [
@@ -81,6 +83,14 @@ const HomePage: React.FC = () => {
     .filter(event => event.published === true)
     .filter(event => !event.publishAt || new Date(event.publishAt) <= now)
     .filter(event => event.eventStartAt && new Date(event.eventStartAt) > now)
+    .slice(0, 3);
+
+  // Featured first, then newest — and capped like the events and blog sections.
+  const showcaseProjects = state.showcaseProjects
+    .filter(p => p.published)
+    .sort((a, b) =>
+      Number(b.featured) - Number(a.featured) ||
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 3);
 
   const latestPosts = state.blogPosts
@@ -228,6 +238,67 @@ const HomePage: React.FC = () => {
                   </div>
                 </Link>
               ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- Showcase
+          A peek at the projects the community is building. */}
+      <section className="px-5 sm:px-8 pt-24 sm:pt-32 cv-auto">
+        <div className="max-w-6xl mx-auto">
+          <SectionHead paren="Community" title="What members are building" action={{ href: '/showcase', label: 'View Showcase' }} />
+
+          {showcaseProjects.length > 0 ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {showcaseProjects.map((project) => (
+                <Link
+                  key={project.id}
+                  href={`/showcase/${project.slug || project.id}`}
+                  className="glass glass-interactive group flex flex-col overflow-hidden rounded-xl"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <ShowcaseCover
+                      title={project.title}
+                      image={project.coverImage}
+                      className="h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
+                      sizes="(min-width: 1024px) 384px, (min-width: 640px) 50vw, 100vw"
+                    />
+                    {project.featured && (
+                      <span className="absolute top-3 left-3 pill bg-black/45 text-white backdrop-blur-md">
+                        <Star className="h-3 w-3 inline-block mr-1 -mt-px" />
+                        Featured
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col flex-1 p-5">
+                    <span className="mono-meta text-primary mb-2">
+                      {SHOWCASE_CATEGORY_LABELS[project.category]}
+                    </span>
+                    <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] leading-snug mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground line-clamp-2 mb-5">
+                      {project.description}
+                    </p>
+                    <div className="mt-auto flex items-center justify-between pt-4 border-t border-border">
+                      <span className="mono-meta text-foreground/65 truncate">
+                        By {project.creatorName || 'member'} · {(project.votes || 0)} votes
+                      </span>
+                      <ArrowUpRight className="h-4 w-4 text-foreground/60 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="border-t border-border py-16 text-center">
+              <p className="mono-meta text-muted-foreground">
+                {state.showcaseUnavailable
+                  ? 'Could not load member projects right now.'
+                  : "No showcase projects yet. Be the first to share what you're building."}
+              </p>
             </div>
           )}
         </div>
