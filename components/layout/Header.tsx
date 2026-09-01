@@ -17,7 +17,6 @@ const navigation = [
   { name: 'Events', href: '/events' },
   { name: 'Blog', href: '/blog', badge: 'Beta' },
   { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' },
 ];
 
 const mobileNavigation = [{ name: 'Home', href: '/' }, ...navigation];

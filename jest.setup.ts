@@ -86,6 +86,16 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
   } as unknown as typeof ResizeObserver;
 }
 
+// Scroll-spy navigation (the About page's section nav) observes its sections.
+if (typeof globalThis.IntersectionObserver === 'undefined') {
+  globalThis.IntersectionObserver = class IntersectionObserver {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+    takeRecords() { return []; }
+  } as unknown as typeof IntersectionObserver;
+}
+
 if (typeof Element !== 'undefined' && !Element.prototype.hasPointerCapture) {
   Element.prototype.hasPointerCapture = () => false;
 }

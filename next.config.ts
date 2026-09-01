@@ -26,6 +26,16 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  async redirects() {
+    return [
+      // Contact was merged into /about.
+      {
+        source: "/contact",
+        destination: "/about#contact",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
