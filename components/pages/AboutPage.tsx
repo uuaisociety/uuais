@@ -62,6 +62,12 @@ const AboutPage: React.FC = () => {
     );
   }, []);
 
+  // The fragment is applied mid-stream and can strand the visitor, so re-apply it.
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (id) document.getElementById(id)?.scrollIntoView({ behavior: 'instant' });
+  }, []);
+
   // Light up the jump link for whichever section is currently under the header.
   useEffect(() => {
     const observer = new IntersectionObserver(
