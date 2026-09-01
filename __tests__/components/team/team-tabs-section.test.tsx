@@ -98,9 +98,10 @@ describe('TeamTabsSection', () => {
 
   // ── Basic rendering ────────────────────────────────────────────────────
 
-  it('renders the section heading "Meet Our Team"', () => {
+  // The heading lives on the About page now — the section renders only its controls.
+  it('renders the empty state when no members match', () => {
     render(<TeamTabsSection members={[]} />);
-    expect(screen.getByText('Meet Our Team')).toBeInTheDocument();
+    expect(screen.getByText(/No team members in this category/)).toBeInTheDocument();
   });
 
   // ── Tab buttons ────────────────────────────────────────────────────────
@@ -158,34 +159,37 @@ describe('TeamTabsSection', () => {
 
   // ── Member cards ───────────────────────────────────────────────────────
 
-  it('renders member cards with name, position, and image', () => {
+  // The portrait sits beside the name, so alt="" avoids announcing it twice.
+  it('renders member cards with name, position, and a decorative image', () => {
     const members = [createMember({ name: 'Alice Smith', position: 'Developer' })];
-    render(<TeamTabsSection members={members} />);
+    const { container } = render(<TeamTabsSection members={members} />);
     expect(screen.getByText('Alice Smith')).toBeInTheDocument();
     expect(screen.getByText('Developer')).toBeInTheDocument();
-    const img = screen.getByRole('img');
-    expect(img).toHaveAttribute('alt', 'Alice Smith');
+    const img = container.querySelector('img');
+    expect(img).toHaveAttribute('alt', '');
     expect(img).toHaveAttribute('src', '/images/logo-highdef.png');
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 
   it('renders member with custom image', () => {
     const members = [
       createMember({ name: 'Alice', image: '/images/alice.jpg' }),
     ];
-    render(<TeamTabsSection members={members} />);
-    const img = screen.getByRole('img');
-    expect(img).toHaveAttribute('src', '/images/alice.jpg');
+    const { container } = render(<TeamTabsSection members={members} />);
+    expect(container.querySelector('img')).toHaveAttribute('src', '/images/alice.jpg');
   });
 
   // ── Empty state ────────────────────────────────────────────────────────
 
-  it('shows empty state message when no members in active tab', () => {
+  // An empty category renders no tab, so the shown tab falls back to a populated one.
+  it('falls back to the first populated category when the default is empty', () => {
     const members = [createMember({ name: 'Alice', teams: ['development'] })];
     render(<TeamTabsSection members={members} />);
-    // Default active tab is 'board' which has 0 matching members
+    expect(screen.getByText('Alice')).toBeInTheDocument();
     expect(
-      screen.getByText('No team members in this category for the selected year.')
-    ).toBeInTheDocument();
+      screen.queryByText('No team members in this category for the selected year.')
+    ).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Development/ })).toHaveAttribute('aria-pressed', 'true');
   });
 
   it('shows empty state when all members are unpublished', () => {

@@ -13,7 +13,7 @@ Key facts:
 
 ## Sections
 - [Home](https://uuais.com): Landing page — upcoming events, why to join, and membership CTA.
-- [About](https://uuais.com/about): Mission, vision, pillars, and the team behind UU AI Society.
+- [About](https://uuais.com/about): Mission, vision, the team behind UU AI Society, contact addresses, and the FAQ.
 - [Events](https://uuais.com/events): Upcoming and past AI workshops, guest lectures, hackathons, and networking events.
 - [Blog](https://uuais.com/blog): Newsletter and articles published by the society.
 - [Careers](https://uuais.com/careers): Job board with internships, master's thesis roles, startup openings, and jobs.
@@ -24,7 +24,6 @@ Key facts:
 - [Study Plan](https://uuais.com/study-plan): Visualize degree pathways and course prerequisites (in development).
 - [Join](https://uuais.com/join): Become a member — free membership and newsletter signup.
 - [Apply](https://uuais.com/apply): Open team roles and board position applications.
-- [Contact](https://uuais.com/contact): FAQ and contact details for general, website, partnership, development, and research inquiries.
 - [Privacy](https://uuais.com/privacy): Privacy policy.
 
 ## Optional

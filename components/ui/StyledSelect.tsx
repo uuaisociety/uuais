@@ -14,11 +14,14 @@ interface StyledSelectProps {
   onChange: (value: string) => void;
   options: StyledSelectOption[];
   className?: string;
+  /** Accessible name — without it the trigger announces only its current value. */
+  label?: string;
 }
 
-const StyledSelect: React.FC<StyledSelectProps> = ({ value, onChange, options, className }) => {
+const StyledSelect: React.FC<StyledSelectProps> = ({ value, onChange, options, className, label }) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   const selected = options.find(o => o.value === value);
 
@@ -34,18 +37,34 @@ const StyledSelect: React.FC<StyledSelectProps> = ({ value, onChange, options, c
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+        triggerRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
   const handleSelect = (val: string) => {
     onChange(val);
     setIsOpen(false);
+    triggerRef.current?.focus();
   };
 
   return (
     <div ref={ref} className={cn('relative', className)}>
       <button
+        ref={triggerRef}
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 cursor-pointer text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-600/20 border border-gray-200 dark:border-gray-700"
+        aria-label={label}
+        className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 cursor-pointer border border-border text-muted-foreground hover:text-foreground hover:bg-foreground/[0.055] hover:border-foreground/25"
       >
         {selected?.label ?? 'Select...'}
         <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
@@ -53,19 +72,20 @@ const StyledSelect: React.FC<StyledSelectProps> = ({ value, onChange, options, c
       {isOpen && (
         <div
           role="listbox"
-          aria-label={selected?.label ?? 'Select an option'}
-          className="absolute left-0 mt-2 w-48 rounded-sm shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors duration-300 overflow-hidden animate-in fade-in slide-in-from-top-2 z-50"
+          aria-label={label}
+          className="glass-pop absolute left-0 mt-2 w-48 rounded-md p-1.5 overflow-hidden animate-rise z-50"
         >
           {options.map((opt) => (
             <button
               key={opt.value}
+              type="button"
               role="option"
               aria-selected={opt.value === value}
               onClick={() => handleSelect(opt.value)}
-              className={`block w-full text-left px-4 py-2 text-sm transition-colors duration-300 cursor-pointer ${
+              className={`block w-full text-left px-3 py-2 rounded-sm text-[0.8125rem] transition-colors duration-300 cursor-pointer ${
                 opt.value === value
-                  ? 'bg-red-600/20 text-red-600 dark:text-red-400'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-red-600/20 hover:text-red-600 dark:hover:text-red-400'
+                  ? 'bg-primary/10 text-primary'
+                  : 'text-current/70 hover:text-current hover:bg-current/[0.09]'
               }`}
             >
               {opt.label}

@@ -46,7 +46,6 @@ describe('Header', () => {
       expect(screen.getAllByText('Events').length).toBe(2)
       expect(screen.getAllByText('Blog').length).toBe(2)
       expect(screen.getAllByText('About').length).toBe(2)
-      expect(screen.getAllByText('Contact').length).toBe(2)
     })
 
     it('keeps Home in the mobile menu only — the wordmark covers it on desktop', () => {

@@ -46,10 +46,15 @@ function makeCollection(docs: FakeDoc[] = [], filter?: (d: FakeDoc) => boolean) 
   return collection
 }
 
+// Relative to now: a fixed date would silently flip e1 from upcoming to past.
+const YEAR = 365 * 24 * 60 * 60 * 1000
+const future = new Date(Date.now() + YEAR).toISOString()
+const past = new Date(Date.now() - YEAR).toISOString()
+
 const seed: PublicSeed = {
   events: [
-    { id: 'e1', title: 'AI Meetup', description: 'A talk about machine learning', location: 'Ångström', eventStartAt: '2026-09-01T10:00:00Z' } as never,
-    { id: 'e2', title: 'Past event', description: 'Happened already', location: '', eventStartAt: '2026-01-01T10:00:00Z' } as never,
+    { id: 'e1', title: 'AI Meetup', description: 'A talk about machine learning', location: 'Ångström', eventStartAt: future } as never,
+    { id: 'e2', title: 'Past event', description: 'Happened already', location: '', eventStartAt: past } as never,
   ],
   jobs: [],
   faqs: [{ id: 'f1', question: 'How do I join?', answer: 'Sign up on the site', category: 'general', order: 1, published: true } as never],

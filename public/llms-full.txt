@@ -57,6 +57,8 @@ A job board for startups, internships, master's thesis opportunities, and jobs, 
 
 ## Contact
 
+All addresses below, plus the FAQ, live on the About page at /about#contact.
+
 - General inquiries: contact@uuais.com
 - Website questions: it@uuais.com
 - Partnerships, sponsorships, or collaborations: partnerships@uuais.com

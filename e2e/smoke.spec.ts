@@ -10,7 +10,6 @@ const PUBLIC_ROUTES: Array<{ path: string; title: RegExp }> = [
   { path: '/events', title: /Events/ },
   { path: '/blog', title: /UU AI Society/ },
   { path: '/about', title: /About/ },
-  { path: '/contact', title: /Contact/ },
   { path: '/careers', title: /Job board/ },
   { path: '/join', title: /Join/ },
   { path: '/login', title: /UU AI Society|Sign In/ },
@@ -18,7 +17,8 @@ const PUBLIC_ROUTES: Array<{ path: string; title: RegExp }> = [
 
 // Desktop nav labels from components/layout/Header.tsx. The wordmark links home,
 // and member destinations (showcase, jobs) live in the Community dropdown.
-const NAV_LINKS = ['UU AI Society', 'Events', 'Blog', 'About', 'Contact'];
+// Contact merged into /about, so it no longer has a nav slot of its own.
+const NAV_LINKS = ['UU AI Society', 'Events', 'Blog', 'About'];
 const COMMUNITY_LINKS = ['Member Showcase', 'Job board'];
 
 for (const route of PUBLIC_ROUTES) {
@@ -46,3 +46,11 @@ for (const route of PUBLIC_ROUTES) {
     await expect(page.getByRole('contentinfo')).toBeVisible();
   });
 }
+
+// Contact merged into /about, so the old route must keep working for old links.
+test('redirects /contact to the contact section of /about', async ({ page }) => {
+  await page.goto('/contact', { waitUntil: 'load' });
+  await expect(page).toHaveURL(/\/about#contact$/);
+  // toBeVisible passes anywhere on the page; the fragment must actually land here.
+  await expect(page.getByRole('region', { name: /touch/i })).toBeInViewport();
+});
