@@ -1,0 +1,513 @@
+{
+ "edges": [
+  {
+   "code": "1FA026",
+   "text": "120 credits in science/engineering with Quantum Physics I/F or Introduction to Materials Science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA027",
+   "text": "120 credits in science/engineering. Participation in Introduction to Materials Science (10 credits), Chemical Bonding in Molecules and Materials and Introduction to Materials Synthesis and Characterisation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA546",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA557",
+   "text": "120 credits in science/engineering. Participation in Quantum Materials I and Spectroscopy of Atoms and Molecules. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA654",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA681",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA560",
+   "text": "120 credits in science/engineering with Quantum Physics I or Introduction to Materials Science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA583",
+   "text": "120 credits in science/engineering. Participation in Density Functional Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA659",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA588",
+   "text": "120 credits in science and engineering. Introduction to Materials Science (10 credits) and Chemical Bonding in Molecules and Materials, alternatively Solid State Physics I/F or Condensed Matter Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA590",
+   "text": "120 credits including basic knowledge in atom and molecular physics or physical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA681",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA652",
+   "text": "120 credits in science/engineering with 75 credits in physics, chemistry, materials engineering and/or materials science. 15 credits in mathematics. Participation in Introduction to Materials Science (10 credits) and Materials Synthesis and Characterisation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB280",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA653",
+   "text": "120 credits and Interdisciplinary Project Course in Materials Science I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA652",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA654",
+   "text": "120 credits in science/engineering. Participation in Chemical Binding in Molecules and Materials and Introduction to Materials Science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA655",
+   "text": "120 credits in science/engineering and Quantum Materials I, alternatively Solid State Physics I/F together with Quantum Physics or Quantum Physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA654",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA656",
+   "text": "120 credits and Chemical Bonding in Molecules and Materials and Introduction to Materials Science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA657",
+   "text": "120 credits and Quantum Materials I. Electromagnetic Field Theory is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA654",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA659",
+   "text": "120 credits in science/engineering. Participation in Introduction to Materials Science and Chemical Binding in Molecules and Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA675",
+   "text": "120 credits in science/engineering with 75 credits in physics, chemistry, materials engineering and/or materials science. Introduction to Materials Science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA680",
+   "text": "120 credits in science/engineering. Participation in Quantum Mechanics or Atomic and Molecular Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA681",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA681",
+   "text": "120 credits in science/engineering. Participation in Quantum Physics, Quantum Physics F, or Introduction to Materials Science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB236",
+   "text": "60 credits in science/engineering and parcipitation in a 5 credits course in materials science or materials chemistry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB263",
+   "text": "120 credits in science/engineering including 20 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB264",
+   "text": "120 credits and participation in Biomaterials I, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB263",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB275",
+   "text": "Alternative 1: 120 credits including 90 credits in chemistry and physics, with 60 credits in chemistry including 10 credits inorganic chemistry and 10 credits physical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits including 75 credits in physics, chemistry, materials science and/or materials engineering, and 30 credits of materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB280",
+   "text": "Alternative 1: 120 credits with 60 credits in chemistry, including 10 credits in inorganic chemistry and 10 credits in physical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics, chemistry, materials science and/or materials engineering, and 30 credits materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB285",
+   "text": "120 credits with 75 credits in physics, chemistry, engineering and/or materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB311",
+   "text": "120 credits with 30 credits in chemistry. 5 credits physical chemistry or Materials chemistry, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB349",
+   "text": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 120 credits in science/engineering. 5 credits at advanced level. Materials chemistry, Electrochemistry and Quantum mechanics and chemical bonding II. Patricipation in Solid State Physics I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA680",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB753",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB360",
+   "text": "120 credits in science/engineering with (1) 60 credits in chemistry or (2) 30 credits in chemistry and 30 credits in physics/biology. Participation in Biomaterials I of which 2 credits completed or participation in Materials synthesis of which 2 credits completed. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB263",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB280",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB566",
+   "text": "120 credits with 100 credits in science/engineering including 15 credits in mathematics and 75 credits in physics, chemistry, materials science and/or materials engineering, and one of the following: 1) Quantum Mechanics and Chemical Bonding I and any of the courses Solid State Physics, 5 credits, and Solid State Chemistry, 5 credits; 2) 30 credits in materials science; 3) Participation in Introduction to Energy storage and Materials for Batteries. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB570",
+   "text": "120 credits in science/engineering including 15 credits in mathematics, and Computer Programming I, or Introduction to energy storage, or Introduction to Materials Science 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB729",
+   "text": "120 credits in science/engineering including 30 credits in chemistry and/or chemical engineering. Either (1) Participation in both Introduction to Energy Storage and Materials Chemistry for Batteries or (2) Materials Chemistry 10 credits and participation in Materials and Manufacturing Processes I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB753",
+   "text": "Alternative 1: 120 credits with 90 credits in chemistry and physics, including at least 60 credits in chemistry. Participation in Spectroscopy. Chemical Bonding and Computational Chemistry is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics, chemistry, materials science and/or materials engineering, and participation in Introduction to Materials Science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA680",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA651",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE015",
+   "text": "120 credits in science/engineering. One of these alternatives: 1) Solid state physics F and attended course in Semiconductor Electronics, 2) Materials chemistry and attended course in Solid state physics I, 3) Introduction to materials engineering or Introduction to material science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA651",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE016",
+   "text": "130 credits in science/engineering. Either materials chemistry and attended course in Surface physics and chemistry or Surface physics. Attended course in surface characterisation or Surface and materials analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA588",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TM109",
+   "text": "120 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6. (A Swedish Bachelor's degree fulfils the requirement in English.)",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TM135",
+   "text": "120 credits in science/engineering. Biomaterials I or Bio-MEMS and organs-on-chip. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB263",
+      "type": "HARD"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Alla studenter:",
+    "semester": 1,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "A heading indicating the following applies to all students.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Spår Kvantmaterial (studenter med fysik- eller materialbakgrund):",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Track Quantum Materials (for students with a physics or materials background):",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Spår Mjuka material (studenter med kemibakgrund):",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1KB311"
+    ],
+    "labelEn": "Track 'Soft Materials' intended for students with a chemistry background."
+   }
+  },
+  {
+   "note": {
+    "textSv": "Spår Energirelaterade material (studenter med fysik-, kemi eller materialbakgrund):",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Track 'Energy-related materials' for students with a physics, chemistry or materials background.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Spår Kvantmaterial (studenter med fysik- eller materialbakgrund):",
+    "semester": 3,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA654",
+     "1FA655"
+    ],
+    "labelEn": "Track Quantum Materials for students with a physics or materials background.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Spår Mjuka material (studenter med kemibakgrund):",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Track: Soft Materials (for students with a chemistry background)."
+   }
+  },
+  {
+   "note": {
+    "textSv": "Spår Energirelaterade material (studenter med fysik-, kemi- eller materialbakgrund):",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Track in energy-related materials for students with a physics, chemistry or materials background.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Alla spår:",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "All tracks:",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

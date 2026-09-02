@@ -1,0 +1,1063 @@
+{
+ "edges": [
+  {
+   "code": "1DL011",
+   "text": "120 credits including (1) Database Design I, 10 credits in programming, Genomics and Bioinformatics, or (2) Introduction to Bioinformatics, Computer Programming I, Computational Methods for Scientific Applications and Database Design I, or (3) 30 credits in mathematics and 30 credits in computer science including 5 credits in database design. Introduction to Bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL301",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB335",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL034",
+   "text": "60 credits of which 15 credits in mathematics and 15 credits in computer science. Probability and Statistics or Probability and Statistics DV. Algebra and Geometry or Linear Algebra and Geometry I. Participation in a second course in programming.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS005",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA090",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD722",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL210",
+   "text": "10 credits in computer programming (Program Design, Programming Techniques II, or the equivalent) and 10 credits in mathematics, including basic algebra. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M).",
+   "result": null
+  },
+  {
+   "code": "1DL231",
+   "text": "60 credits of which 15 credits in mathematics and 25 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology. Participation in Program Design and Data Structures of which 9 credits shall be completed, alternatively participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL210",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL301",
+   "text": "60 credits of which 15 credits in mathematics or statistics. Participation in basic programming.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL360",
+   "text": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL301",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD722",
+      "type": "HARD"
+     },
+     {
+      "from": "1DL210",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL400",
+   "text": "120 credits of which 15 credits in mathematics and 30 credits in computer science or information systems, including a second course in computer programming. Participation in Database Design I or some other first course in databases. Participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD722",
+      "type": "HARD"
+     },
+     {
+      "from": "1DL301",
+      "type": "SOFT"
+     },
+     {
+      "from": "1DL210",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL481",
+   "text": "120 credits including 30 credits in mathematics including an introduction to linear algebra (Linear Algebra and Geometry I or the equivalent) and basic logic (Algebra I, Basic Course in Mathematics, or the equivalent), and 45 credits in computer science. Participation in Algorithms and Data Structures II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL231",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA533",
+   "text": "Introduction to Scientific Computing or Scientific Computing 1. At least 4 credits in Mechanics. Participation in Several Variable Calculus.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD342",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA104",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA016",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB162",
+   "text": "Alt 1. 120 credits within the Master's Programme in Molecular Biotechnology Engineering, including Biotechnical Methodology, Genomics and Bioinformatics, and Scientific Computing for Data Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alt 2. 120 credits including Introduction to Bioinformatics, Computer Programming I, Introduction to Statistics for Life Sciences and Computational Methods for Scientific Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alt 3. 120 credits including Introduction to Bioinformatics, Introduction to Statistics for Life Sciences and Introduction to Molecular Biology, Genetics and Evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MB335",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD352",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB425",
+   "text": "One of the following is required: (1) 120 credits with 60 credits in chemistry, including 20 credits in biochemistry, or (2) 120 credits with 30 credits in chemistry and 30 credits in biology, including 20 credits in biochemistry, or (3) 120 credits within the Master's Programme in Molecular Biotechnology Engineering, including Cell Biology, 15 credits, or (4) 120 credits within the Master's Programme in Chemical Engineering, including Physiology and Molecular Cell Biology and Development of Biologicals. Also required is 10 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MB102",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB429",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB426",
+   "text": "40 credits within the Master's Programme in Molecular Biotechnology Engineering, including 10 credits in Chemistry. Participation in Basic Chemistry. Participation in Introductory Organic Chemistry or Organic Chemistry I, and Cell Biolog, of which 5 credits should be completed.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB018",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MB102",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB447",
+   "text": "120 credits including 20 credits in chemistry. In addition, 10 credits in biochemistry or Cell Biology, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MB102",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB756",
+   "text": "120 credits including Methods in Biotechnology. Participation in Scientific Computing for Data Analysis or Scientific Computing II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB426",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD352",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA013",
+   "text": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA090",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA016",
+   "text": "Participation in Single Variable Calculus or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA090",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA024",
+   "text": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA090",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA034",
+   "text": "5 credits in mathematics. Participation in Single Variable Calculus, Calculus II for Engineers or Calculus in One Variable. Participation in Linear Algebra I, Algebra and Geometry, Linear Algebra for Engineers or Algebra and Vector Geometry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA090",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MB311",
+   "text": "60 credits within the Master's Programme in Molecular Biotechnology Engineering including Cell Biology and 20 credits in chemistry whereof at least 5 credits in organic chemistry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MB102",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MB444",
+   "text": "Alternative 1: 120 credits. Participation in Computer Programming I, Introduction to Statistics for Life Sciences and Introduction to Modern Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.Alternative 2: 120 credits. 5 credits programming and participation in Introduction to Biochemistry and Introduction to Molecular Biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.Alternative 3: 120 credits within the Master's Programme in Molecular Biotechnology Engineering including Cell Biology, Computer Programming I and Applied Physics for Molecular Biotechnology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB102",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA533",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MB447",
+   "text": "120 credits within the Master's Programme in Molecular Biotechnology Engineering including Linear Algebra and Geometry I or Algebra and Geometry, Structural Bioinformatics, and one of the courses Electromagnetism and Wave Physics or Applied Physics for Molecular Biotechnology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA090",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB204",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA533",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MB449",
+   "text": "Alternative 1: 120 credits within the Master's Programme in Molecular Biotechnology Engineering (300 credits) including Probability and Statistics, Chemical Thermodynamics and Cell Biology. Participation in Transform Methods and either Scientific Computing for Data Analysis or Scientific Computing II. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 10 credits within the Master's programme in Biophysics (120 credits) including participation in Computer Programming I, Introduction to Statistics for Life Sciences, Introduction to Modern Physics and Computational Methods for Scientific Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 10 credits within the Master's programme in Biophysics (120 credits) including participation in Introduction to Biochemistry and Introduction to Molecular Biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS005",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB300",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB102",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA034",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TD352",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MB464",
+   "text": "Alternative 1: 120 credits within the Master's Programme in Molecular Biotechnology Engineering including Probability and Statistics, Structural Bioinformatics, Chemical Thermodynamics, and Introductory Organic Chemistry or Organic Chemistry I. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 15 credits within the Master's (120 credits) programme in Biophysics including Introduction to Statistics for Life Sciences and participation in Introduction to Modern Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 15 credits within the Master's (120 credits) programme in Biophysics including Introduction to Biochemistry and participation in Introduction to Molecular Biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS005",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB204",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB300",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MB466",
+   "text": "120 credits within the Master's Programme in Molecular Biotechnology Engineering, including Cell Biology, Microbiology and Structural Bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MB102",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB204",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB311",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MB515",
+   "text": "120 credit and Molecular Evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MB461",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MB517",
+   "text": "Completed courses worth 120 credits and participation in the course Genome Analysis, of which at least 5 credits must have been completed . English 6. (A Swedish Degree of Bachelor satisfies this requirement.)",
+   "result": {
+    "edges": [
+     {
+      "from": "1MB462",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MB518",
+   "text": "Alternative 1: 210 credits within the Master's Programme in Molecular Biotechnology Engineering including 25 credits from completed profile courses: Experimental Methods in Structural Biology, Molecular and Statistical Mechanics, Physical Molecular Biology, Biophotonics, Macromolecular Machines and Microbial Regulatory Mechanisms or Molecular Biology Systems, Computer-Assisted Image Analysis I, and either the course Biosensors or the course Nanobiotechnology and Biosensors. At least two of the following courses must be included: Experimental Methods in Structural Biology, Physical Molecular Biology, Molecular and Statistical Mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: Bachelor's degree and 25 credits in biophysics (from the courses Experimental Methods in Biophysics, Molecular and Statistical Mechanics, Physical Molecular Biology or Biophotonics). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MB447",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB464",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB449",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB444",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB466",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD396",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB447",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MB519",
+   "text": "Alt 1. 210 credits within the Master's Programme in Molecular Biotechnology Engineering (300 credits) including 25 credits from completed profile courses: Proteomics and Metabolomics, Data Mining I, Statistical Inference for Bioinformatics or Statistical Inference for Technological Applications, Molecular Evolution, Information Management Systems, Big Data in Life Sciences, Genome Analysis, Knowledge-Based Systems in Bioinformatics, Automated Predictive Modelling. Alt 2. 30 credits in the Master's Programme in Bioinformatics (120 credits) including 25 credits of the following courses: Script Programming or Programming in Python or Computer Programming I, Statistical Inference for Bioinformatics or Statistical Inference for Technological Applications, Molecular Evolution, Information Management Systems, Big Data in Life Sciences, Genome Analysis, Knowledge-Based Systems in Bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB162",
+      "type": "HARD"
+     },
+     {
+      "from": "1DL360",
+      "type": "HARD"
+     },
+     {
+      "from": "1TS325",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB461",
+      "type": "HARD"
+     },
+     {
+      "from": "1DL011",
+      "type": "HARD"
+     },
+     {
+      "from": "3FB034",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB462",
+      "type": "HARD"
+     },
+     {
+      "from": "1MB416",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS005",
+   "text": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA090",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT002",
+   "text": "120 credits including 60 credits within Science/Technology, whereof 20 credits in Mathematics as well as Automatic Control I or Introduction to Computer Control Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1RT490",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT490",
+   "text": "60 credits in science/engineering including Single Variable Calculus, Linear Algebra II and participation in Transform Methods.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA034",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT495",
+   "text": "120 credits including Automatic Control I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1RT490",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT700",
+   "text": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS005",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA013",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD342",
+   "text": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD352",
+   "text": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in Linear Algebra II/Linear Algebra for Data Analysis/Geometry and Calculus II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA090",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TD342",
+      "type": "SOFT"
+     },
+     {
+      "from": "1RT700",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MS005",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD396",
+   "text": "120 credits including 30 credits in mathematics and 10 credits in computer science, including Scientific Computing I/Introduction to Scientific Computing and Computer Programming I, Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD342",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD433",
+   "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD722",
+   "text": "Computer Programming I",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE743",
+   "text": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS325",
+   "text": "Option 1: 120 credits whereof 60 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Option 2: 120 credits whereof 60 credits in science/engineering. Participation in 25 credits in mathematics/statistics/scientific computing, of which 15 credits should be completed. The 25 credits should include statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MS005",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TV451",
+   "text": "120 credits of which 90 credits in science/engineering, including 20 credits in mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "3FB028",
+   "text": "150 credits, including 90 credits in biomedicine, pharmaceutical science, chemistry, natural science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "För studenter som antogs 2022 eller tidigare ska 1MA090 eller både 1MA010 och 1MA025 ingå i examen.1KB018 och 1KB007 kan inte ingå i samma examen.",
+    "semester": 1,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "COHORT_SUBSTITUTION",
+    "courseCodes": [
+     "1MA090",
+     "1KB018"
+    ],
+    "labelEn": "Students admitted in 2022 or earlier must include 1MA090 (or the pair 1MA010 and 1MA025), and 1KB018 and 1KB007 cannot both count toward the degree.",
+    "cohortBefore": 2022
+   }
+  },
+  {
+   "note": {
+    "textSv": "1KB473, 1KB472 och 1KB410 kan inte ingå i samma examen.",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1KB473"
+    ],
+    "labelEn": "1KB473 (together with 1KB472 and 1KB410, which are not on the roster) cannot all be counted toward the same degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "För studenter som antogs 2021 eller tidigare ska 1TD342 eller 1TD393 ingå i examen.",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "COHORT_SUBSTITUTION",
+    "courseCodes": [
+     "1TD342"
+    ],
+    "labelEn": "Students admitted in 2021 or earlier must include 1TD342 (or the non-roster 1TD393) in their degree.",
+    "cohortBefore": 2021
+   }
+  },
+  {
+   "note": {
+    "textSv": "För studenter som antogs 2017 eller tidigare ska följande kurser ingå i examen:1FA533 eller 1FA5281TE743 eller 1KB5011MB335 eller både 1MB321 och 1MB331För studenter som antogs 2021 eller tidigare ska 1TD352 eller 1TD395 ingå i examen.",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": null
+  },
+  {
+   "note": {
+    "textSv": "För studenter som antogs 2017 eller tidigare ska följande kurser ingå i examen:1FA533 eller 1FA5281TE743 eller 1KB5011MB335 eller både 1MB321 och 1MB331För studenter som antogs 2019 eller tidigare ska 1MB344 eller 1RT700 ingå i examen.För studenter som antogs 2020 eller senare ska 1RT700 eller 1DL034 ingå i examen.",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": null
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MB466, 1MB447, 1DL360, 1RT490, 1DL210, 1KB162, 1RT490, 1KB756, 1DL400, 1TD396, 1DL231",
+    "semester": 7,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MB466",
+     "1MB447",
+     "1DL360",
+     "1RT490",
+     "1DL210",
+     "1KB162",
+     "1RT490",
+     "1KB756",
+     "1DL400",
+     "1TD396",
+     "1DL231"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MB466",
+     "1MB447",
+     "1DL360",
+     "1RT490",
+     "1DL210",
+     "1KB162",
+     "1KB756",
+     "1DL400",
+     "1TD396",
+     "1DL231"
+    ],
+    "labelEn": "One of the listed courses must be chosen in semester 7.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av de obligatoriska slutkurserna i period 52 (termin 9 andra delen) ska ingå i examen. Se respektive kursplan för förkunskapskrav till slutkurserna för respektive profil.Kurserna i period 41 kan även läsas i period 51.1MB466 ersätter 1M436 och 1MB429 och kan inte ingå i samma examen som någon av dessa kurser.I period 41-42 undviks schemakrockar om kurser inom samma grupp nedan väljs:Period 41:A: 1MB466, 1MB447B: 1MB466, 1RT490, 1KB162C: 1DL210, 1DL360, 1KB162Period 42:A: 1MB466, 1RT490, 1TD396B: 1KB756, 1MB466, 1TD396C: 1DL231, 1DL400, 1TD396",
+    "semester": 7,
+    "period": null,
+    "trackId": null
+   },
+   "result": null
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MB449, 1MB433, 1MB444, 1MB461, 1TS325, 1MB416, 3FB028, 1KB429, 1KB770, 1MB464, 3FB034, 1MB462, 1TE769",
+    "semester": 8,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MB449",
+     "1MB433",
+     "1MB444",
+     "1MB461",
+     "1TS325",
+     "1MB416",
+     "3FB028",
+     "1KB429",
+     "1KB770",
+     "1MB464",
+     "3FB034",
+     "1MB462",
+     "1TE769"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MB449",
+     "1MB433",
+     "1MB444",
+     "1MB461",
+     "1TS325",
+     "1MB416",
+     "3FB028",
+     "1KB429",
+     "1KB770",
+     "1MB464",
+     "3FB034",
+     "1MB462",
+     "1TE769"
+    ],
+    "labelEn": "One of these courses must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av de obligatoriska slutkurserna i period 52 (termin 9 andra delen) ska ingå i examen. Se respektive kursplan för förkunskapskrav till slutkurserna för respektive profil.1KB770 och 1KB768 kan inte ingå i samma examen. I period 43-44 undviks schemakrockar om kurser inom samma grupp nedan väljs:Period 43:A: 1MB449, 1MB444B: 1MB449, 1MB433C: 1MB461, 1MB416, 1TS325D: 3FB028, 1KB429Period 44:A: 1MB464, 1TE698B: 1KB770C: 3FB034, 1MB462D: 1TE698, 1TE769",
+    "semester": 8,
+    "period": null,
+    "trackId": null
+   },
+   "result": null
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1KB447, 1MB517, 1MB515, 1DL011",
+    "semester": 9,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1KB447",
+     "1MB517",
+     "1MB515",
+     "1DL011"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1KB447",
+     "1MB517",
+     "1MB515",
+     "1DL011"
+    ],
+    "labelEn": "One of the courses 1KB447, 1MB517, 1MB515, or 1DL011 must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1KB769, 1MB519, 1MB518",
+    "semester": 9,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1KB769",
+     "1MB519",
+     "1MB518"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1KB769",
+     "1MB519",
+     "1MB518"
+    ],
+    "labelEn": "One of the courses 1KB769, 1MB519, or 1MB518 must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av de obligatoriska slutkurserna i period 52 (termin 9 andra delen) ska ingå i examen. Se respektive kursplan för förkunskapskrav till slutkurserna för respektive profil.1KB447 ersätter 1KB457 och 1KB446 och kan inte ingå i examen tillsammans med någon av dessa.1DL011 ersätter 1DL417. Dessa kurser kan inte ingå i samma examen.I period 51 undviks schemakrockar om kurser inom samma grupp nedan väljs:A/B: 1KB447C: 1MB515, 1DL011D: 1MB515, 1MB517",
+    "semester": 9,
+    "period": null,
+    "trackId": null
+   },
+   "result": null
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1TV451, 1RT002, 1RT495",
+    "semester": 10,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1TV451",
+     "1RT002",
+     "1RT495"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1TV451",
+     "1RT002",
+     "1RT495"
+    ],
+    "labelEn": "One of the courses 1TV451, 1RT002, or 1RT495 must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1TE061, 1DL481",
+    "semester": 10,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1TE061",
+     "1DL481"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1TE061",
+     "1DL481"
+    ],
+    "labelEn": "One of the listed courses must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 2FE030, 1KB425, 1TE698",
+    "semester": 10,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "2FE030",
+     "1KB425",
+     "1TE698"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "2FE030",
+     "1KB425",
+     "1TE698"
+    ],
+    "labelEn": "One of the courses 2FE030, 1KB425, or 1TE698 must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MB773, 1MB774, 1MB775",
+    "semester": 10,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MB773",
+     "1MB774",
+     "1MB775"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MB773",
+     "1MB774",
+     "1MB775"
+    ],
+    "labelEn": "One of the courses 1MB773, 1MB774, or 1MB775 (Research Training) must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MB205, 1MB405, 1MB381",
+    "semester": 10,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MB205",
+     "1MB405",
+     "1MB381"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MB205",
+     "1MB405",
+     "1MB381"
+    ],
+    "labelEn": "One of the courses 1MB205, 1MB405, or 1MB381 must be chosen.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

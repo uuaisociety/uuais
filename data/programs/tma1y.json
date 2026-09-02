@@ -1,0 +1,1265 @@
+{
+  "id": "73518e38-e69a-4074-b48f-25bf3fb6a4dc",
+  "code": "TMA1Y",
+  "revisionId": "73518e38-e69a-4074-b48f-25bf3fb6a4dc",
+  "nameSv": "Högskoleingenjörsprogrammet i maskinteknik",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "5 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1TE605",
+      "titleEn": "Introduction to Mechanical Engineering",
+      "titleSv": "Introduktion till maskinteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE604",
+      "titleEn": "Computer Aided Design",
+      "titleSv": "Datorstödd konstruktion",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA352",
+      "titleEn": "Linear Algebra for Engineers",
+      "titleSv": "Linjär algebra för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA353",
+      "titleEn": "Calculus I for Engineers",
+      "titleSv": "Analys I för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE606",
+      "titleEn": "Engineering Materials",
+      "titleSv": "Konstruktionsmaterial",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE607",
+      "titleEn": "Solid Mechanics",
+      "titleSv": "Hållfasthetslära",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA354",
+      "titleEn": "Calculus II for Engineers",
+      "titleSv": "Analys II för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE790",
+      "titleEn": "Machine Elements",
+      "titleSv": "Maskinelement",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA518",
+      "titleEn": "Mechanics HI",
+      "titleSv": "Mekanik HI",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS362",
+      "titleEn": "Manufacturing Methodologies I",
+      "titleSv": "Tillverkningsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TD433",
+      "titleEn": "Computer Programming I",
+      "titleSv": "Programmeringsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D"
+    },
+    {
+      "code": "1TM038",
+      "titleEn": "Manufacturing Methodologies II",
+      "titleSv": "Tillverkningsteknik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "40 credits of approved courses within the Bachelor's Programme in Mechanical Engineering."
+    },
+    {
+      "code": "1TE743",
+      "titleEn": "Industrial Management",
+      "titleSv": "Industriell ekonomi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes."
+    },
+    {
+      "code": "1FA333",
+      "titleEn": "Energy Technology",
+      "titleSv": "Energiteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE633",
+      "titleEn": "Product Design I",
+      "titleSv": "Produktutveckling och design I",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "40 credits within an engineering programme. Computer Aided Design/3D CAD. Participation in Engineering Materials, Machine Elements and Manufacturing Methodologies."
+    },
+    {
+      "code": "1MS008",
+      "titleEn": "Statistics for Engineers",
+      "titleSv": "Statistik för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1EL007",
+      "titleEn": "Virtual Development of Automated Production Systems",
+      "titleSv": "Virtuell utveckling av automatiserade produktionssystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "30 credits from engineering programme. 5 credits first cycle course in programming should have been attended."
+    },
+    {
+      "code": "1TM120",
+      "titleEn": "Additive Manufacturing",
+      "titleSv": "Additiv tillverkning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in engineering programs."
+    },
+    {
+      "code": "1MI170",
+      "titleEn": "Solid Mechanics with Finite Element Methods",
+      "titleSv": "Hållfasthetslära med FEM",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS348",
+      "titleEn": "Production Management I",
+      "titleSv": "Produktionsledning I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS336",
+      "titleEn": "Quality Management",
+      "titleSv": "Kvalitetsteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1EL011",
+      "titleEn": "Internet of Things",
+      "titleSv": "Sakernas internet",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TD342",
+      "titleEn": "Introduction to Scientific Computing",
+      "titleSv": "Introduktion till beräkningsvetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "code": "1TE686",
+      "titleEn": "Automation and Robot Engineering",
+      "titleSv": "Automatiserings- och robotteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits from an engineering programme."
+    },
+    {
+      "code": "1FA014",
+      "titleEn": "Introduction to Nuclear Engineering",
+      "titleSv": "Introduktion till kärnkraftteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "90 credits in Science/Engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers."
+    },
+    {
+      "code": "1FA022",
+      "titleEn": "Reactor Physics with Nuclear Thermohydraulics",
+      "titleSv": "Reaktorfysik med nukleär termohydraulik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers. Introduction to Nuclear Engineering. Participation in Introduction to Nuclear Engineering, or studied simultaneously."
+    },
+    {
+      "code": "1KB704",
+      "titleEn": "Environmental Techniques",
+      "titleSv": "Miljöteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "90 credits within an engineering programme"
+    },
+    {
+      "code": "1EL008",
+      "titleEn": "Power Engineering and Three-Phase Systems",
+      "titleSv": "Elkraft- och trefassystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry."
+    },
+    {
+      "code": "1FA426",
+      "titleEn": "Nuclear Power Safety",
+      "titleSv": "Kärnkraftsäkerhet",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering. Participation in Reactor Physics, Nuclear Thermal Hydraulics and Steam Turbine Technology or Reactor Physics with nuclear thermohydraulics."
+    },
+    {
+      "code": "1TE687",
+      "titleEn": "Engineering Ethics",
+      "titleSv": "Ingenjörsetik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "30 credits in technology"
+    },
+    {
+      "code": "1MA017",
+      "titleEn": "Several Variable Calculus, Limited Version",
+      "titleSv": "Flervariabelanalys, allmän kurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1TS358",
+      "titleEn": "Project with Extended Reality",
+      "titleSv": "Projekt med utökad verklighet",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits within any engineering programme. 15 credits in mathematics. Participation in Computer Programming I, whereof 2 credits should be completed."
+    },
+    {
+      "code": "1TS312",
+      "titleEn": "Project in Production Management",
+      "titleSv": "Projekt i produktionsledning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits within engineering programs. Participation in Production Management I."
+    },
+    {
+      "code": "1TE780",
+      "titleEn": "Investigative Methodologies for Engineers",
+      "titleSv": "Utredningsmetodik för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA013",
+      "titleEn": "Nuclear Waste Management and Decommissioning",
+      "titleSv": "Kärnavfall och avveckling",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA427",
+      "titleEn": "Nuclear Power Operation",
+      "titleSv": "Kärnkraftdrift",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MI077",
+      "titleEn": "Product Design II",
+      "titleSv": "Produktutveckling II",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MI088",
+      "titleEn": "Production Management II",
+      "titleSv": "Produktionsledning II",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE662",
+      "titleEn": "Degree Project, Mechanical Engineering",
+      "titleSv": "Examensarbete i maskinteknik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE693",
+      "titleEn": "Practical Product Realisation",
+      "titleSv": "Praktisk produktframtagning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE695",
+      "titleEn": "Practical Product Realisation",
+      "titleSv": "Praktisk produktframtagning",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TS362"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "1TE631 Tillverkningsteknik och 1TS362 Tillverkningsteknik I kan inte ingå i examen tillsammans.",
+      "labelEn": "1TS362 cannot count toward the degree together with 1TE631 (Manufacturing Technology), which is not in the current roster.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TS336",
+        "1EL011",
+        "1TD342"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TS336, 1EL011, 1TD342",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TS348"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "1MI087 och 1TS348 kan inte ingå i examen tillsammans.",
+      "labelEn": "1MI087 and 1TS348 cannot both count toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE686",
+        "1FA014",
+        "1FA022",
+        "1KB704",
+        "1EL008",
+        "1FA426"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TE686, 1FA014, 1FA022, 1KB704, 1EL008, 1FA426",
+      "labelEn": "Choose one of 6 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-4",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE686",
+        "1TE687",
+        "1MA017",
+        "1TS358",
+        "1KB704",
+        "1EL008",
+        "1TS312"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TE686, 1TE687, 1MA017, 1TS358, 1KB704, 1EL008, 1TS312",
+      "labelEn": "Choose one of 7 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-5",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE687",
+        "1FA014"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "Kurser från olika profiler kan krocka schemamässigt under termin 5. Därför rekommenderas att kurser från EN profil läses.Några valbara kurser i årskurs 3 samt tillvalskurserna söks i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval.En av kurserna 1TE687 och 1FA014 är obligatorisk inom examenskravet.Kurserna 1TE686 och 1KB704 är obligatoriska för samtliga profiler termin 5.",
+      "labelEn": "One of 1TE687 Engineering Ethics or 1FA014 Introduction to Nuclear Engineering must be taken to satisfy the degree requirements.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-6",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE780",
+        "1FA013",
+        "1FA427"
+      ],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TE780, 1FA013, 1FA427",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-7",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE780",
+        "1MI077"
+      ],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TE780, 1MI077",
+      "labelEn": "Choose one of 2 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-8",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE780",
+        "1MI088"
+      ],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TE780, 1MI088",
+      "labelEn": "Choose one of 2 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-9",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE693",
+        "1TE695"
+      ],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TE693, 1TE695",
+      "labelEn": "Choose one of 2 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-10",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1MI088",
+        "1MI077",
+        "1FA013",
+        "1FA427",
+        "1TE780"
+      ],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "En av kurserna 1MI088 eller 1MI077, eller båda kurserna 1FA013 och 1FA427, är obligatoriska inom examenskravet.Kursen 1TE780 är obligatorisk för samtliga profiler termin 6.",
+      "labelEn": "One of 1MI088 or 1MI077, or both 1FA013 and 1FA427, is required for the degree, and 1TE780 is required for all specialisations in semester 6.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "1TE631 Tillverkningsteknik och 1TS362 Tillverkningsteknik I kan inte ingå i examen tillsammans.",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TS336, 1EL011, 1TD342",
+      "semester": 4,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TS336",
+        "1EL011",
+        "1TD342"
+      ]
+    },
+    {
+      "textSv": "1MI087 och 1TS348 kan inte ingå i examen tillsammans.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TE686, 1FA014, 1FA022, 1KB704, 1EL008, 1FA426",
+      "semester": 5,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TE686",
+        "1FA014",
+        "1FA022",
+        "1KB704",
+        "1EL008",
+        "1FA426"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TE686, 1TE687, 1MA017, 1TS358, 1KB704, 1EL008, 1TS312",
+      "semester": 5,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TE686",
+        "1TE687",
+        "1MA017",
+        "1TS358",
+        "1KB704",
+        "1EL008",
+        "1TS312"
+      ]
+    },
+    {
+      "textSv": "Kurser från olika profiler kan krocka schemamässigt under termin 5. Därför rekommenderas att kurser från EN profil läses.Några valbara kurser i årskurs 3 samt tillvalskurserna söks i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval.En av kurserna 1TE687 och 1FA014 är obligatorisk inom examenskravet.Kurserna 1TE686 och 1KB704 är obligatoriska för samtliga profiler termin 5.",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TE780, 1FA013, 1FA427",
+      "semester": 6,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TE780",
+        "1FA013",
+        "1FA427"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TE780, 1MI077",
+      "semester": 6,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TE780",
+        "1MI077"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TE780, 1MI088",
+      "semester": 6,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TE780",
+        "1MI088"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TE693, 1TE695",
+      "semester": 6,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TE693",
+        "1TE695"
+      ]
+    },
+    {
+      "textSv": "En av kurserna 1MI088 eller 1MI077, eller båda kurserna 1FA013 och 1FA427, är obligatoriska inom examenskravet.Kursen 1TE780 är obligatorisk för samtliga profiler termin 6.",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [
+    {
+      "from": "1TD433",
+      "to": "1EL007",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "30 credits from engineering programme. 5 credits first cycle course in programming should have been attended."
+    },
+    {
+      "from": "1MA352",
+      "to": "1EL008",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry."
+    },
+    {
+      "from": "1MA353",
+      "to": "1EL008",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry."
+    },
+    {
+      "from": "1MA354",
+      "to": "1EL008",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry."
+    },
+    {
+      "from": "1MA353",
+      "to": "1FA014",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "90 credits in Science/Engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers."
+    },
+    {
+      "from": "1MA354",
+      "to": "1FA014",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "90 credits in Science/Engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers."
+    },
+    {
+      "from": "1MA352",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA353",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA354",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA353",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1TE604",
+      "to": "1TE633",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "40 credits within an engineering programme. Computer Aided Design/3D CAD. Participation in Engineering Materials, Machine Elements and Manufacturing Methodologies."
+    },
+    {
+      "from": "1TE606",
+      "to": "1TE633",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "40 credits within an engineering programme. Computer Aided Design/3D CAD. Participation in Engineering Materials, Machine Elements and Manufacturing Methodologies."
+    },
+    {
+      "from": "1TE790",
+      "to": "1TE633",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "40 credits within an engineering programme. Computer Aided Design/3D CAD. Participation in Engineering Materials, Machine Elements and Manufacturing Methodologies."
+    },
+    {
+      "from": "1TS362",
+      "to": "1TE633",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "40 credits within an engineering programme. Computer Aided Design/3D CAD. Participation in Engineering Materials, Machine Elements and Manufacturing Methodologies."
+    },
+    {
+      "from": "1TE605",
+      "to": "1TE743",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes."
+    },
+    {
+      "from": "1TS348",
+      "to": "1TS312",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits within engineering programs. Participation in Production Management I."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TS358",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits within any engineering programme. 15 credits in mathematics. Participation in Computer Programming I, whereof 2 credits should be completed."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "73518e38-e69a-4074-b48f-25bf3fb6a4dc",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3681",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;2"
+    },
+    {
+      "id": "3593",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;1"
+    },
+    {
+      "id": "3341",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3035",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2593",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2370",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2216",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1941",
+      "name": "Giltig från och med höstterminen 2019, version&nbsp;2"
+    },
+    {
+      "id": "1915",
+      "name": "Giltig från och med höstterminen 2019, version&nbsp;1"
+    },
+    {
+      "id": "1646",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1271",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1268",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1191",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "1074",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;2"
+    },
+    {
+      "id": "977",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.104361+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=73518e38-e69a-4074-b48f-25bf3fb6a4dc",
+  "programmeTitle": "Högskoleingenjörsprogrammet i maskinteknik, 180 hp (TMA1Y)",
+  "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-maskinteknik",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Bachelor's Programme in Mechanical Engineering, 180 credits (TMA1Y)"
+}

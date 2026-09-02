@@ -1,0 +1,392 @@
+{
+  "id": "4b4cf9fa-76cc-4b59-9370-e6f5b65bc2ab",
+  "code": "TKE2M",
+  "revisionId": "4b4cf9fa-76cc-4b59-9370-e6f5b65bc2ab",
+  "nameSv": "Masterprogram i kemi",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1KB467",
+      "titleEn": "Current Trends in Chemistry",
+      "titleSv": "Aktuella trender i kemin",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB750",
+      "titleEn": "Spectroscopy",
+      "titleSv": "Spektroskopi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB550",
+      "titleEn": "Chemical Bonding and Computational Chemistry",
+      "titleSv": "Kemisk bindning med beräkningskemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry. Physical chemistry, 10 credits, is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB285",
+      "titleEn": "Sustainability, Chemistry and Materials Science",
+      "titleSv": "Hållbarhet, kemi och materialvetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 75 credits in physics, chemistry, engineering and/or materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB753",
+      "titleEn": "Photochemistry",
+      "titleSv": "Fotokemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 120 credits with 90 credits in chemistry and physics, including at least 60 credits in chemistry. Participation in Spectroscopy. Chemical Bonding and Computational Chemistry is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics, chemistry, materials science and/or materials engineering, and participation in Introduction to Materials Science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB275",
+      "titleEn": "Catalysis",
+      "titleSv": "Katalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 120 credits including 90 credits in chemistry and physics, with 60 credits in chemistry including 10 credits inorganic chemistry and 10 credits physical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits including 75 credits in physics, chemistry, materials science and/or materials engineering, and 30 credits of materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB271",
+      "titleEn": "Advanced Electrochemistry",
+      "titleSv": "Avancerad elektrokemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 90 credits in chemistry and physics, with at least 60 credits in chemistry. 5 credits electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB284",
+      "titleEn": "Computational Chemistry for Molecules and Materials",
+      "titleSv": "Beräkningsmetoder för molekyler och material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits of which 60 credits in chemistry, including 4 credits from Chemical Bonding and Computational Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB766",
+      "titleEn": "Laser Spectroscopy",
+      "titleSv": "Laserspektroskopi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 75 credits in chemistry, physics, materials science and/or materials engineering, including 10 credits in spectroscopy. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB349",
+      "titleEn": "Advanced Solar Cell and Battery Technologies",
+      "titleSv": "Avancerad solcells- och batteriteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 120 credits in science/engineering. 5 credits at advanced level. Materials chemistry, Electrochemistry and Quantum mechanics and chemical bonding II. Patricipation in Solid State Physics I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB363",
+      "titleEn": "Statistical Thermodynamics: Theory and Simulation Methods",
+      "titleSv": "Statistisk termodynamik - teori och simuleringsmetoder",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 90 credits in chemistry or physics including Chemical Bonding and Computational Chemistry and 5 credits thermodynamics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB052",
+      "titleEn": "Degree Project E in Chemistry",
+      "titleSv": "Examensarbete E i kemi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1KB467",
+        "1KB750",
+        "1KB550",
+        "1KB285"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1KB467, 1KB750, 1KB550, 1KB285",
+      "labelEn": "Choose one of 4 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-1",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1KB753",
+        "1KB275",
+        "1KB271",
+        "1KB284"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1KB753, 1KB275, 1KB271, 1KB284",
+      "labelEn": "Choose one of 4 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-2",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1KB766",
+        "1KB349",
+        "1KB363"
+      ],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1KB766, 1KB349, 1KB363",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "En av kurserna ska väljas: 1KB467, 1KB750, 1KB550, 1KB285",
+      "semester": 1,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1KB467",
+        "1KB750",
+        "1KB550",
+        "1KB285"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1KB753, 1KB275, 1KB271, 1KB284",
+      "semester": 2,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1KB753",
+        "1KB275",
+        "1KB271",
+        "1KB284"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1KB766, 1KB349, 1KB363",
+      "semester": 3,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1KB766",
+        "1KB349",
+        "1KB363"
+      ]
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [
+    {
+      "from": "1KB550",
+      "to": "1KB284",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits of which 60 credits in chemistry, including 4 credits from Chemical Bonding and Computational Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB271",
+      "to": "1KB349",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1KB750",
+      "to": "1KB349",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1KB753",
+      "to": "1KB349",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1KB550",
+      "to": "1KB363",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 90 credits in chemistry or physics including Chemical Bonding and Computational Chemistry and 5 credits thermodynamics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB550",
+      "to": "1KB753",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry and physics, including at least 60 credits in chemistry. Participation in Spectroscopy. Chemical Bonding and Computational Chemistry is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics, chemistry, materials science and/or materials engineering"
+    },
+    {
+      "from": "1KB750",
+      "to": "1KB753",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry and physics, including at least 60 credits in chemistry. Participation in Spectroscopy. Chemical Bonding and Computational Chemistry is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics, chemistry, materials science and/or materials engineering"
+    },
+    {
+      "from": "1KB750",
+      "to": "1KB766",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 75 credits in chemistry, physics, materials science and/or materials engineering, including 10 credits in spectroscopy. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "4b4cf9fa-76cc-4b59-9370-e6f5b65bc2ab",
+      "name": "Giltig från och med höstterminen 2026"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.194781+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=4b4cf9fa-76cc-4b59-9370-e6f5b65bc2ab",
+  "programmeTitle": "Masterprogram i kemi – Fysikalisk kemi och beräkningskemi, 120 hp (TKE2M)",
+  "programmeUri": "/utbildning/program/masterprogram-kemi-fysikalisk-kemi-och-berakningskemi",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)"
+}

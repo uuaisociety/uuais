@@ -1,0 +1,900 @@
+{
+  "id": "115662fa-76e4-449a-acf1-8c34d8ab843f",
+  "code": "TBY1Y",
+  "revisionId": "115662fa-76e4-449a-acf1-8c34d8ab843f",
+  "nameSv": "Högskoleingenjörsprogrammet i byggteknik",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "5 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1TE439",
+      "titleEn": "Introduction to Construction Engineering",
+      "titleSv": "Introduktion till byggteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA352",
+      "titleEn": "Linear Algebra for Engineers",
+      "titleSv": "Linjär algebra för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS366",
+      "titleEn": "Building Design with Drawing",
+      "titleSv": "Byggnadsprojektering med ritteknik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA353",
+      "titleEn": "Calculus I for Engineers",
+      "titleSv": "Analys I för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS365",
+      "titleEn": "Basic Structural Engineering",
+      "titleSv": "Grundläggande konstruktionsteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE601",
+      "titleEn": "Structural Mechanics",
+      "titleSv": "Byggnadsmekanik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE442",
+      "titleEn": "Construction Materials",
+      "titleSv": "Byggnadsmaterial",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA354",
+      "titleEn": "Calculus II for Engineers",
+      "titleSv": "Analys II för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS367",
+      "titleEn": "Building Envelope",
+      "titleSv": "Byggnadens klimatskärm",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA430",
+      "titleEn": "Fluid and Thermodynamics",
+      "titleSv": "Strömnings- och värmelära",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Algebra and Vector Geometry or Linear algebra for engineers. Participation in Calculus for Engineers or Calculus II for engineers. Participation in Structural Mechanics."
+    },
+    {
+      "code": "1TE443",
+      "titleEn": "Structural Design in Construction Engineering",
+      "titleSv": "Dimensionering av konstruktioner",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Algebra and Vector Geometry or Linear Algebra for Engineers. Participation in Calculus for Engineers and Construction Mechanics."
+    },
+    {
+      "code": "1TE444",
+      "titleEn": "Project 2: Detailed Design of Detached Houses",
+      "titleSv": "Projekt 2: Detaljprojektering av småhus",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Construction Materials and Project 1: Designing of Detached House."
+    },
+    {
+      "code": "1TE431",
+      "titleEn": "Building Physics",
+      "titleSv": "Byggnadsfysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Project 1: Designing of Detached House."
+    },
+    {
+      "code": "1MS008",
+      "titleEn": "Statistics for Engineers",
+      "titleSv": "Statistik för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS357",
+      "titleEn": "Construction Management and Leadership",
+      "titleSv": "Byggproduktion och ledarskap",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS343",
+      "titleEn": "Urban Planning and Housing Design",
+      "titleSv": "Samhällsplanering och bostadsutformning",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV185",
+      "titleEn": "Geotechnical Engineering",
+      "titleSv": "Geoteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE743",
+      "titleEn": "Industrial Management",
+      "titleSv": "Industriell ekonomi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes."
+    },
+    {
+      "code": "1TM117",
+      "titleEn": "Energy Flows and Materials in the Built Environment",
+      "titleSv": "Energiflöden och material i den byggda miljön",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits within the Bachelor's Programme in Construction Engineering including Building Physics and Fluid and Thermodynamics."
+    },
+    {
+      "code": "5KV779",
+      "titleEn": "Management and Maintenance of Buildings",
+      "titleSv": "Förvaltning och underhåll av byggnader",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE403",
+      "titleEn": "Structural Mechanics and Design",
+      "titleSv": "Byggkonstruktion",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in the Bachelor's Programme in Construction Engineering including the courses Structural Design in Construction Engineering and Calculus for Engineers."
+    },
+    {
+      "code": "1TE687",
+      "titleEn": "Engineering Ethics",
+      "titleSv": "Ingenjörsetik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "30 credits in technology"
+    },
+    {
+      "code": "1TE438",
+      "titleEn": "Energy Efficiency in Buildings",
+      "titleSv": "Energieffektivisering i byggnader",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM018",
+      "titleEn": "Finite Element Analysis with Applications",
+      "titleSv": "Finit element-analys med tillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE780",
+      "titleEn": "Investigative Methodologies for Engineers",
+      "titleSv": "Utredningsmetodik för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS329",
+      "titleEn": "Environmentally Efficient Buildings",
+      "titleSv": "Miljöeffektiva byggnader",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE447",
+      "titleEn": "Structural Optimisation",
+      "titleSv": "Strukturoptimering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TG318",
+      "titleEn": "Project Management",
+      "titleSv": "Projektledning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "30 credits in any main field."
+    },
+    {
+      "code": "1TE412",
+      "titleEn": "Degree Project, Construction Engineering",
+      "titleSv": "Examensarbete i byggteknik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TS366"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Byggnadsprojektering med ritteknik 10 hp (1TS366) ersätter kursen Byggnadsprojektering med ritteknik 5 hp (1TE440). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet.",
+      "labelEn": "Building Design with Drawing 10 hp (1TS366) replaces the earlier 5 hp course; the two cannot both count toward the degree, and one of them is required.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TM117",
+        "5KV779",
+        "1TE403",
+        "1TE687",
+        "1TE438",
+        "1TM018"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TM117, 5KV779, 1TE403, 1TE687, 1TE438, 1TM018",
+      "labelEn": "Choose one of 6 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "Kurser som inte är obligatoriska kallas för valbara. Det är obligatoriskt att läsa minst 20 hp av de valbara kurserna i årskurs 3 (hit räknas inte s k tillvalskurser).",
+      "labelEn": "At least 20 credits of elective courses in year 3 are compulsory; so-called optional courses (tillvalskurser) do not count toward this requirement.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TE403",
+        "1TM018",
+        "1TE447",
+        "5KV779",
+        "1TG318",
+        "1TM117",
+        "1TE438",
+        "1TS329"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "1TE403, 1TM018 och 1TE447 passar för en studieinriktning mot konstruktion (kurserna kan kräva behörighetskedja).5KV779 och 1TG318 passar för en studieinriktning mot förvaltning (kurserna kan kräva behörighetskedja).1TM117, 1TE438 och 1TS329 passar för en studieinriktning mot energi och miljö (kurserna kan kräva behörighetskedja).",
+      "labelEn": "The courses are grouped into suggested specialisations: construction (1TE403, 1TM018, 1TE447), management and maintenance (5KV779, 1TG318), and energy and environment (1TM117, 1TE438, 1TS329), each of which may require a prerequisite chain.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TS329",
+        "1TE447",
+        "1TG318"
+      ],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TS329, 1TE447, 1TG318",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Byggnadsprojektering med ritteknik 10 hp (1TS366) ersätter kursen Byggnadsprojektering med ritteknik 5 hp (1TE440). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet.",
+      "semester": 1,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TM117, 5KV779, 1TE403, 1TE687, 1TE438, 1TM018",
+      "semester": 5,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TM117",
+        "5KV779",
+        "1TE403",
+        "1TE687",
+        "1TE438",
+        "1TM018"
+      ]
+    },
+    {
+      "textSv": "Kurser som inte är obligatoriska kallas för valbara. Det är obligatoriskt att läsa minst 20 hp av de valbara kurserna i årskurs 3 (hit räknas inte s k tillvalskurser).",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "1TE403, 1TM018 och 1TE447 passar för en studieinriktning mot konstruktion (kurserna kan kräva behörighetskedja).5KV779 och 1TG318 passar för en studieinriktning mot förvaltning (kurserna kan kräva behörighetskedja).1TM117, 1TE438 och 1TS329 passar för en studieinriktning mot energi och miljö (kurserna kan kräva behörighetskedja).",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TS329, 1TE447, 1TG318",
+      "semester": 6,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TS329",
+        "1TE447",
+        "1TG318"
+      ]
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [
+    {
+      "from": "1MA352",
+      "to": "1FA430",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Vector Geometry or Linear algebra for engineers. Participation in Calculus for Engineers or Calculus II for engineers. Participation in Structural Mechanics."
+    },
+    {
+      "from": "1MA353",
+      "to": "1FA430",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Vector Geometry or Linear algebra for engineers. Participation in Calculus for Engineers or Calculus II for engineers. Participation in Structural Mechanics."
+    },
+    {
+      "from": "1MA354",
+      "to": "1FA430",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Vector Geometry or Linear algebra for engineers. Participation in Calculus for Engineers or Calculus II for engineers. Participation in Structural Mechanics."
+    },
+    {
+      "from": "1TE601",
+      "to": "1FA430",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Vector Geometry or Linear algebra for engineers. Participation in Calculus for Engineers or Calculus II for engineers. Participation in Structural Mechanics."
+    },
+    {
+      "from": "1MA353",
+      "to": "1TE403",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in the Bachelor's Programme in Construction Engineering including the courses Structural Design in Construction Engineering and Calculus for Engineers."
+    },
+    {
+      "from": "1MA354",
+      "to": "1TE403",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in the Bachelor's Programme in Construction Engineering including the courses Structural Design in Construction Engineering and Calculus for Engineers."
+    },
+    {
+      "from": "1TE443",
+      "to": "1TE403",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in the Bachelor's Programme in Construction Engineering including the courses Structural Design in Construction Engineering and Calculus for Engineers."
+    },
+    {
+      "from": "1TE439",
+      "to": "1TE431",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Project 1: Designing of Detached House."
+    },
+    {
+      "from": "1TS366",
+      "to": "1TE431",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Project 1: Designing of Detached House."
+    },
+    {
+      "from": "1MA352",
+      "to": "1TE443",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Algebra and Vector Geometry or Linear Algebra for Engineers. Participation in Calculus for Engineers and Construction Mechanics."
+    },
+    {
+      "from": "1MA353",
+      "to": "1TE443",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Algebra and Vector Geometry or Linear Algebra for Engineers. Participation in Calculus for Engineers and Construction Mechanics."
+    },
+    {
+      "from": "1MA354",
+      "to": "1TE443",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Algebra and Vector Geometry or Linear Algebra for Engineers. Participation in Calculus for Engineers and Construction Mechanics."
+    },
+    {
+      "from": "1TE601",
+      "to": "1TE443",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Algebra and Vector Geometry or Linear Algebra for Engineers. Participation in Calculus for Engineers and Construction Mechanics."
+    },
+    {
+      "from": "1TE439",
+      "to": "1TE444",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Construction Materials and Project 1: Designing of Detached House."
+    },
+    {
+      "from": "1TE442",
+      "to": "1TE444",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Construction Materials and Project 1: Designing of Detached House."
+    },
+    {
+      "from": "1TS366",
+      "to": "1TE444",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Construction Materials and Project 1: Designing of Detached House."
+    },
+    {
+      "from": "1TE439",
+      "to": "1TE743",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes."
+    },
+    {
+      "from": "1FA430",
+      "to": "1TM117",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits within the Bachelor's Programme in Construction Engineering including Building Physics and Fluid and Thermodynamics."
+    },
+    {
+      "from": "1TE431",
+      "to": "1TM117",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits within the Bachelor's Programme in Construction Engineering including Building Physics and Fluid and Thermodynamics."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "115662fa-76e4-449a-acf1-8c34d8ab843f",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3683",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;2"
+    },
+    {
+      "id": "3591",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;1"
+    },
+    {
+      "id": "3339",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3040",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2549",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2366",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2135",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1858",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1644",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1503",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1415",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    },
+    {
+      "id": "1211",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1187",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "965",
+      "name": "Giltig från och med höstterminen 2015"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.099887+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=115662fa-76e4-449a-acf1-8c34d8ab843f",
+  "programmeTitle": "Högskoleingenjörsprogrammet i byggteknik, 180 hp (TBY1Y)",
+  "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-byggteknik",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Bachelor's Programme in Construction Engineering, 180 credits (TBY1Y)"
+}

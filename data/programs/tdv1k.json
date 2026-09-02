@@ -1,0 +1,1178 @@
+{
+  "id": "10056",
+  "code": "TDV1K",
+  "revisionId": "10056",
+  "nameSv": "Kandidatprogram i datavetenskap",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1MA348",
+      "titleEn": "Basic Algebra",
+      "titleSv": "Grundläggande algebra",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics D"
+    },
+    {
+      "code": "1DT051",
+      "titleEn": "Information Technology",
+      "titleSv": "Introduktion till informationsteknologi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1N, Technology",
+      "mainFieldSv": "Datavetenskap G1N, Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA350",
+      "titleEn": "Linear Algebra I",
+      "titleSv": "Linjär algebra I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Basic Course in Mathematics or Basic Algebra."
+    },
+    {
+      "code": "1DL201",
+      "titleEn": "Program Design and Data Structures",
+      "titleSv": "Programkonstruktion och datastrukturer",
+      "credits": 20.0,
+      "creditsInPeriod": 10.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DL201",
+      "titleEn": "Program Design and Data Structures",
+      "titleSv": "Programkonstruktion och datastrukturer",
+      "credits": 20.0,
+      "creditsInPeriod": 10.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA009",
+      "titleEn": "Automata Theory",
+      "titleSv": "Automatateori",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Mathematics",
+      "mainFieldSv": "Datavetenskap G1F, Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DT093",
+      "titleEn": "Computer Architecture",
+      "titleSv": "Datorarkitektur",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA027",
+      "titleEn": "Logic and Proof Techniques I",
+      "titleSv": "Logik och bevisteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA013",
+      "titleEn": "Single Variable Calculus",
+      "titleSv": "Envariabelanalys",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses."
+    },
+    {
+      "code": "1DL221",
+      "titleEn": "Imperative and Object-Oriented Programming Methodology",
+      "titleSv": "Imperativ och objektorienterad programmeringsmetodik",
+      "credits": 20.0,
+      "creditsInPeriod": 10.0,
+      "creditsInSemester": 20.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Program Design and Data Structures, of which 9 credits must have been completed."
+    },
+    {
+      "code": "1MA017",
+      "titleEn": "Several Variable Calculus, Limited Version",
+      "titleSv": "Flervariabelanalys, allmän kurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1DT096",
+      "titleEn": "Operating Systems and Process-Oriented Programming",
+      "titleSv": "Operativsystem och processorienterad programmering",
+      "credits": 15.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MD034",
+      "titleEn": "System Design with a User Perspective",
+      "titleSv": "Systemdesign med ett användarperspektiv",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Human-Computer Interaction G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Människa-datorinteraktion G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MS321",
+      "titleEn": "Probability and Statistics DV",
+      "titleSv": "Sannolikhet och statistik DV",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DL311",
+      "titleEn": "Semantics of Programming Languages",
+      "titleSv": "Semantik för programmeringsspråk",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in mathematics and computer science, including Algebra I, Logic and Proof Techniques I, a second programming course and programming in at least one functional and one imperative language."
+    },
+    {
+      "code": "1DT052",
+      "titleEn": "Computer Networks I",
+      "titleSv": "Datakommunikation I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits in mathematics and 30 credits in computer science, including at least one second course in computer programming and at least 5 credits in computer architecture."
+    },
+    {
+      "code": "1TD403",
+      "titleEn": "Numerical Methods and Simulation",
+      "titleSv": "Numeriska metoder och simulering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Mathematics G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Matematik G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits including Program Design and Data Structures. Linear Algebra and Geometry. Single Variable Calculus. Participation in Probability and Statistics DV."
+    },
+    {
+      "code": "1DL231",
+      "titleEn": "Algorithms and Data Structures II",
+      "titleSv": "Algoritmer och datastrukturer II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits of which 15 credits in mathematics and 25 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology. Participation in Program Design and Data Structures of which 9 credits shall be completed, alternatively participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL305",
+      "titleEn": "Database Design I CS",
+      "titleSv": "Databasteknik I DV",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in mathematics or computer science. Participation in discrete mathematics (for instance Algebra I), algorithms and data structures, and a second course in programming."
+    },
+    {
+      "code": "1DL321",
+      "titleEn": "Compiler Design I",
+      "titleSv": "Kompilatorteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits including 15 credits in mathematics and 30 credits in computer science, including Operating Systems and a second course in computer programming."
+    },
+    {
+      "code": "1DT072",
+      "titleEn": "Secure Computer Systems I",
+      "titleSv": "Säkra datorsystem I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 15 credits in mathematics and 30 credits in computer science or technology. 10 credits in programming. Participation in Distributed Information Systems or Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MA024",
+      "titleEn": "Linear Algebra II",
+      "titleSv": "Linjär algebra II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "code": "1DL481",
+      "titleEn": "Algorithms and Data Structures III",
+      "titleSv": "Algoritmer och datastrukturer III",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 30 credits in mathematics including an introduction to linear algebra (Linear Algebra and Geometry I or the equivalent) and basic logic (Algebra I, Basic Course in Mathematics, or the equivalent), and 45 credits in computer science. Participation in Algorithms and Data Structures II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MD001",
+      "titleEn": "Advanced Interaction Design",
+      "titleSv": "Avancerad interaktionsdesign",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Human-Computer Interaction A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Människa-datorinteraktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 45 credits in IT-related fields of study, including human-computer interaction, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD352",
+      "titleEn": "Scientific Computing for Data Analysis",
+      "titleSv": "Beräkningsvetenskap för dataanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in Linear Algebra II/Linear Algebra for Data Analysis/Geometry and Calculus II."
+    },
+    {
+      "code": "1TD169",
+      "titleEn": "Data Engineering I",
+      "titleSv": "Data engineering I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computational Science A1N, Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik A1N, Tillämpad beräkningsvetenskap",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT117",
+      "titleEn": "Computer Networks II",
+      "titleSv": "Datakommunikation II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 90 credits in computer science and mathematics with participation in Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD388",
+      "titleEn": "Computer Graphics",
+      "titleSv": "Datorgrafik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computational Science A1N, Computer Science",
+      "mainFieldSv": "Datavetenskap A1N, Tillämpad beräkningsvetenskap",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DT066",
+      "titleEn": "Distributed Information Systems",
+      "titleSv": "Distribuerade informationssystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Sociotechnical Systems G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, System i teknik och samhälle G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA017",
+      "titleEn": "Several Variable Calculus, Limited Version",
+      "titleSv": "Flervariabelanalys, allmän kurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1TE743",
+      "titleEn": "Industrial Management",
+      "titleSv": "Industriell ekonomi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes."
+    },
+    {
+      "code": "1DL034",
+      "titleEn": "Introduction to Machine Learning",
+      "titleSv": "Introduktion till maskininlärning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits of which 15 credits in mathematics and 15 credits in computer science. Probability and Statistics or Probability and Statistics DV. Algebra and Geometry or Linear Algebra and Geometry I. Participation in a second course in programming."
+    },
+    {
+      "code": "1MD004",
+      "titleEn": "IT, Ethics and Organisation",
+      "titleSv": "IT, etik och organisation",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Human-Computer Interaction",
+      "mainFieldSv": "Datavetenskap A1N, Människa-datorinteraktion",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MA020",
+      "titleEn": "Combinatorics",
+      "titleSv": "Kombinatorik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "5 credits in mathematics. Participation in Single Variable Calculus or Single Variable Calculus M and in Linear Algebra I or Algebra and Geometry."
+    },
+    {
+      "code": "1DT075",
+      "titleEn": "Cryptology",
+      "titleSv": "Kryptologi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including a second course in programming, Algorithms and Data Structures I, Algebra I and linear algebra. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MA024",
+      "titleEn": "Linear Algebra II",
+      "titleSv": "Linjär algebra II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "code": "1DT116",
+      "titleEn": "Low-Level Parallel Programming",
+      "titleSv": "Lågnivå-parallellprogrammering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 60 credits in computer science, including programming in C and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT340",
+      "titleEn": "Degree Project C in Computer Science",
+      "titleSv": "Examensarbete C i datavetenskap",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "150 credits including 75 credits in computer science, including 15 credits at G2F-level or higher, and 20 credits in mathematics. Admission requires a project plan accepted by the department."
+    },
+    {
+      "code": "1DT078",
+      "titleEn": "Project in Computer Science",
+      "titleSv": "Projektarbete i datavetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DT079",
+      "titleEn": "Project in Computer Science",
+      "titleSv": "Projektarbete i datavetenskap",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "MUTUALLY_EXCLUSIVE",
+      "courseCodes": [
+        "1MA348",
+        "1MA350"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Kursen 1MA348 Grundläggande Algebra ersätter 1MA350 Algebra I inom programmet och kan inte tas med i examen tillsammans med denna.",
+      "labelEn": "1MA348 Basic Algebra replaces 1MA350 Linear Algebra I within the programme, and the two cannot both count toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [
+        "1MA350"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Kursen 1MA350 Linjär Algebra ersätter 1MA025 Linjär Algebra och Geometri I inom programmet och kan inte tas med i examen tillsammans med denna.",
+      "labelEn": "1MA350 Linear Algebra replaces 1MA025 Linear Algebra and Geometry I within the programme and cannot count toward the degree together with it.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "Samt en av följande kurser:",
+      "labelEn": "Additionally, one of the following courses must be taken.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [
+        "1DL305"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "Kursen 1DL305 Databasteknik I DV ersätter 1DL301 Databasteknik I inom programmet och kan inte tas med i examen tillsammans med denna.",
+      "labelEn": "1DL305 Database Design I CS replaces 1DL301 Database Design I within the programme and the two cannot both count toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Rekommenderade valbara kurser period 33.Den studerande kan i period 33 välja en kombination av nedanstående kurser, omfattande sammanlagt 15 hp inom perioden, förutsatt att behörighetskraven är uppfyllda.",
+      "labelEn": "Recommended elective courses for period 3: the student may select a combination of the courses below totalling 15 ECTS credits, provided the entry requirements are met.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Övriga kurser (valbar period).",
+      "labelEn": "Other courses may be selected during an elective period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-6",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Följande beteckningar används ovan:G1N - Grundnivå, kursen kräver inte tidigare högskolestudierG1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hpG2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpG2E - Grundnivå, examensarbete för högskoleingenjörsexamen och kandidatexamenA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp",
+      "labelEn": "Legend explaining the course-level abbreviations (G1N, G1F, G2F, G2E, A1N) used in the study plan.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Kursen 1MA348 Grundläggande Algebra ersätter 1MA350 Algebra I inom programmet och kan inte tas med i examen tillsammans med denna.",
+      "semester": 1,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Kursen 1MA350 Linjär Algebra ersätter 1MA025 Linjär Algebra och Geometri I inom programmet och kan inte tas med i examen tillsammans med denna.",
+      "semester": 1,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Samt en av följande kurser:",
+      "semester": 5,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Kursen 1DL305 Databasteknik I DV ersätter 1DL301 Databasteknik I inom programmet och kan inte tas med i examen tillsammans med denna.",
+      "semester": 5,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade valbara kurser period 33.Den studerande kan i period 33 välja en kombination av nedanstående kurser, omfattande sammanlagt 15 hp inom perioden, förutsatt att behörighetskraven är uppfyllda.",
+      "semester": 6,
+      "period": "Period 3",
+      "trackId": null
+    },
+    {
+      "textSv": "Övriga kurser (valbar period).",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Följande beteckningar används ovan:G1N - Grundnivå, kursen kräver inte tidigare högskolestudierG1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hpG2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpG2E - Grundnivå, examensarbete för högskoleingenjörsexamen och kandidatexamenA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1MS321",
+      "to": "1DL034",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits of which 15 credits in mathematics and 15 credits in computer science. Probability and Statistics or Probability and Statistics DV. Algebra and Geometry or Linear Algebra and Geometry I. Participation in a second course in programming."
+    },
+    {
+      "from": "1DL201",
+      "to": "1DL221",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Participation in Program Design and Data Structures, of which 9 credits must have been completed."
+    },
+    {
+      "from": "1DL201",
+      "to": "1DL231",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits of which 15 credits in mathematics and 25 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology. Participation in Program Design and Data Structures of which 9 credits shall be completed, alternatively participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL221",
+      "to": "1DL321",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including 15 credits in mathematics and 30 credits in computer science, including Operating Systems and a second course in computer programming."
+    },
+    {
+      "from": "1DT096",
+      "to": "1DL321",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including 15 credits in mathematics and 30 credits in computer science, including Operating Systems and a second course in computer programming."
+    },
+    {
+      "from": "1DL231",
+      "to": "1DL481",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics including an introduction to linear algebra (Linear Algebra and Geometry I or the equivalent) and basic logic (Algebra I, Basic Course in Mathematics, or the equivalent), and 45 credits in computer science. Participation in Algorithms and Data Structures II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT093",
+      "to": "1DT052",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "15 credits in mathematics and 30 credits in computer science, including at least one second course in computer programming and at least 5 credits in computer architecture."
+    },
+    {
+      "from": "1DT052",
+      "to": "1DT117",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 90 credits in computer science and mathematics with participation in Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA348",
+      "to": "1MA013",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA350",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA020",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "5 credits in mathematics. Participation in Single Variable Calculus or Single Variable Calculus M and in Linear Algebra I or Algebra and Geometry."
+    },
+    {
+      "from": "1MA350",
+      "to": "1MA020",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "5 credits in mathematics. Participation in Single Variable Calculus or Single Variable Calculus M and in Linear Algebra I or Algebra and Geometry."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "from": "1MA350",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "from": "1MA348",
+      "to": "1MA350",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "Kursen 1MA348 Grundläggande Algebra ersätter 1MA350 Algebra I inom programmet och kan inte tas med i examen tillsammans med denna."
+    },
+    {
+      "from": "1DL305",
+      "to": "1TD169",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
+    },
+    {
+      "from": "1MA350",
+      "to": "1TD169",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
+    },
+    {
+      "from": "1MS321",
+      "to": "1TD169",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
+    },
+    {
+      "from": "1MA024",
+      "to": "1TD352",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    },
+    {
+      "from": "1MA350",
+      "to": "1TD352",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    },
+    {
+      "from": "1MS321",
+      "to": "1TD352",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    },
+    {
+      "from": "1DL201",
+      "to": "1TD403",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including Program Design and Data Structures. Linear Algebra and Geometry. Single Variable Calculus. Participation in Probability and Statistics DV."
+    },
+    {
+      "from": "1MA013",
+      "to": "1TD403",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including Program Design and Data Structures. Linear Algebra and Geometry. Single Variable Calculus. Participation in Probability and Statistics DV."
+    },
+    {
+      "from": "1MS321",
+      "to": "1TD403",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Program Design and Data Structures. Linear Algebra and Geometry. Single Variable Calculus. Participation in Probability and Statistics DV."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10056",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3583",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3337",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3050",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2469",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2363",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2181",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1919",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1672",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1425",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1395",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    },
+    {
+      "id": "1263",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;3"
+    },
+    {
+      "id": "1217",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1141",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "918",
+      "name": "Giltig från och med höstterminen 2015"
+    },
+    {
+      "id": "864",
+      "name": "Giltig från och med höstterminen 2014, version&nbsp;2"
+    },
+    {
+      "id": "780",
+      "name": "Giltig från och med höstterminen 2014, version&nbsp;1"
+    },
+    {
+      "id": "400",
+      "name": "Giltig från och med höstterminen 2013"
+    },
+    {
+      "id": "361",
+      "name": "Giltig från och med höstterminen 2012, version&nbsp;3"
+    },
+    {
+      "id": "343",
+      "name": "Giltig från och med höstterminen 2012, version&nbsp;2"
+    },
+    {
+      "id": "306",
+      "name": "Giltig från och med höstterminen 2012, version&nbsp;1"
+    },
+    {
+      "id": "166",
+      "name": "Giltig från och med höstterminen 2011"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.110402+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10056",
+  "programmeTitle": "Kandidatprogram i datavetenskap, 180 hp (TDV1K)",
+  "programmeUri": "/utbildning/program/kandidatprogram-datavetenskap",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Bachelor's Programme in Computer Science, 180 credits (TDV1K)"
+}

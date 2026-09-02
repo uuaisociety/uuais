@@ -1,0 +1,34 @@
+{
+ "edges": [],
+ "rules": [
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1BA203, 1BA209, 1BA210, 1BA211, 1BA212, 1BA213",
+    "semester": 1,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1BA203",
+     "1BA209",
+     "1BA210",
+     "1BA211",
+     "1BA212",
+     "1BA213"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1BA203",
+     "1BA209",
+     "1BA210",
+     "1BA211",
+     "1BA212",
+     "1BA213"
+    ],
+    "labelEn": "One of the listed courses must be chosen in semester 1.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

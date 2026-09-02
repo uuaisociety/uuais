@@ -1,0 +1,881 @@
+{
+  "id": "10017",
+  "code": "TFE2M",
+  "revisionId": "10017",
+  "nameSv": "Masterprogram i förnybar elgenerering",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "5 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1TE677",
+      "titleEn": "Thematic Studies in Renewable Electricity Production",
+      "titleSv": "Tematisk fördjupning i förnybar elgenerering",
+      "credits": 5.0,
+      "creditsInPeriod": 2.5,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production",
+      "mainFieldSv": "Förnybar elproduktion",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS327",
+      "titleEn": "Industrial Project Management I",
+      "titleSv": "Industriell projektledning I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management A1N, Technology",
+      "mainFieldSv": "Industriell teknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits, including 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE304",
+      "titleEn": "Introduction to Mechanics: Bridging Course",
+      "titleSv": "Introduktion till mekanik - bryggningskurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE305",
+      "titleEn": "Introduction to Electric Power Engineering: Bridging Course",
+      "titleSv": "Introduktion till elkraftteknik - bryggningskurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE765",
+      "titleEn": "Power Electronics I",
+      "titleSv": "Kraftelektronik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Electrical Engineering A1N, Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Elektroteknik A1N, Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering, including basic knowledge in electric circuit theory and electronics. Participation in Transform Methods (spec. Fourier series), or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE029",
+      "titleEn": "Hydroelectric Power - Technology and Systems",
+      "titleSv": "Vattenkraft - teknik och system",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Energy Technology A1N, Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Energiteknik A1N, Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering, including Electric Power Systems. Participation in a basic course in mechanics, or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6. Mechanics (1TE304) can be taken in parallel."
+    },
+    {
+      "code": "1MA269",
+      "titleEn": "Transform Theory with Applications",
+      "titleSv": "Transformteori med tillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS328",
+      "titleEn": "Industrial Project Management II",
+      "titleSv": "Industriell projektledning II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management A1F, Technology",
+      "mainFieldSv": "Industriell teknik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Option 1: 120 credits, including 90 credits in science/engineering. Participation in the course Industrial Project Management I. Option 2: 120 credits, including 90 credits in science/engineering. Industrial Engineering and Management I: The Functions of the Corporation, Industrial Management III: Project in Business and Technology Development. Participation in Strategic Management in Technology-Intensive Firms. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE726",
+      "titleEn": "Analysis of Power Distribution Grids",
+      "titleSv": "Analys av eldistributionsnät",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Power Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE766",
+      "titleEn": "Power Electronics II",
+      "titleSv": "Kraftelektronik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Electrical Engineering A1F, Renewable Electricity Production A1F, Technology",
+      "mainFieldSv": "Elektroteknik A1F, Förnybar elproduktion A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. Participation in 10 credits at Master's level in science/engineering. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS359",
+      "titleEn": "Energy Market Analysis",
+      "titleSv": "Energimarknadsanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Option 1: 120 credits in science/engineering. Introduction to Energy Systems or Energy System Physics. System Analysis with Energy Applications or Systems Analysis and Operations Research. Participation in Power Engineering. Option 2: A Bachelor's degree with 90 credits in electrical engineering. 15 credits within power systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1EL021",
+      "titleEn": "High Voltage Engineering",
+      "titleSv": "Högspänningsteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE038",
+      "titleEn": "Wind Power - Technology and Systems",
+      "titleSv": "Vindkraft - teknik och system",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including Multivariable Calculus, Electromagnetism, Automatic Control and a basic course in statistics. Participation in Mechanics Basic Course, or it could be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE043",
+      "titleEn": "Wave Power: Technology and Systems",
+      "titleSv": "Vågkraft - teknik och system",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including Scientific Computing I, Power Engineering and a basic course in mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE737",
+      "titleEn": "Grid Connection of Variable Energy Sources",
+      "titleSv": "Nätanslutning av variabla källor",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1F, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including Automatic Control I. In addition, participation in 10 credits in science/engineering at advanced level. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE078",
+      "titleEn": "Modern Physics",
+      "titleSv": "Modern fysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE692",
+      "titleEn": "Electric Propulsion Systems",
+      "titleSv": "Elektriska framdrivningssystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Electrical Engineering A1F, Renewable Electricity Production A1F, Technology",
+      "mainFieldSv": "Elektroteknik A1F, Förnybar elproduktion A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "130 credits in science/engineering including Power Engineering and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1EL843",
+      "titleEn": "High Voltage AC and DC Cable Systems",
+      "titleSv": "HVAC- och HVDC-kabelsystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1F, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE840",
+      "titleEn": "Degree Project in Renewable Electricity Production",
+      "titleSv": "Examensarbete i förnybar elproduktion",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production",
+      "mainFieldSv": "Förnybar elproduktion",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE678",
+      "titleEn": "Solar Energy Technologies for Electricity Production",
+      "titleSv": "Solenergitekniker för elgenerering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Energy Technology A1N, Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Energiteknik A1N, Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering including Electromagnetism, Power Engineering, Energy System Physics/Modern Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE029",
+      "titleEn": "Hydroelectric Power - Technology and Systems",
+      "titleSv": "Vattenkraft - teknik och system",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Energy Technology A1N, Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Energiteknik A1N, Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering, including Electric Power Systems. Participation in a basic course in mechanics, or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6. Mechanics (1TE304) can be taken in parallel."
+    },
+    {
+      "code": "1TE754",
+      "titleEn": "Analysis of Electric Power Systems",
+      "titleSv": "Elektriska nätet som system",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including Automatic Control I. Participation in a basic course in Power Engineering, such as Power Engineering, or Electromagnetism and Power Engineering, or Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE028",
+      "titleEn": "Solar Energy - Technology and Systems",
+      "titleSv": "Solenergi - teknik och system",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Energy Technology A1N, Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Energiteknik A1N, Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including Modern Physics, Quantum Physics or Quantum Physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE616",
+      "titleEn": "Project Work in Science of Electricity",
+      "titleSv": "Projektarbete i elektricitetslära",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Electrical Engineering A1N, Technology",
+      "mainFieldSv": "Elektroteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB274",
+      "titleEn": "Batteries and Storage",
+      "titleSv": "Batterier och lagring",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Energy Technology A1N, Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Energiteknik A1N, Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 120 credits in science and technology, including 5 credits power engineering, 5 credits automatic control, and 5 credits scientific computing. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 130 credits in science and technology, including 10 credits in Energy Technology at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 120 credits in science and technology, including 15 credits in power engineering. Ability to use computer-based calculation tools, such as MATLAB Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE690",
+      "titleEn": "Electric Power Measurement Technique",
+      "titleSv": "Elkraftteknisk mätteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Energy Technology A1N, Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Energiteknik A1N, Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including Electronics, Electromagnetism and Electrical Power Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1EL019",
+      "titleEn": "Transformers in the Transmission System",
+      "titleSv": "Transformatorer i transmissionssystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1F, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE065",
+      "titleEn": "Generator Design",
+      "titleSv": "Generatordesign",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1F, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "150 credits in science/engineering, including Electromagnetism, Basic Mechanics and Electrical Power Systems. 10 credits at Master's level. In addition, participation in one of the courses Wind Power: Technology and Systems, Hydroelectric Power: Technology and Systems, Wave Power: Technology and Systems, Analysis of Electric Power Systems or Power System Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE615",
+      "titleEn": "Project Work in Science of Electricity",
+      "titleSv": "Projektarbete i elektricitetslära",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Electrical Engineering A1N, Technology",
+      "mainFieldSv": "Elektroteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE724",
+      "titleEn": "Advanced Solar Cell Design",
+      "titleSv": "Avancerad solcellsdesign",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1F, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "180 credits in science/engineering including 10 credits at Master's level. Modern Physics, Quantum Physics or Quantum Physics F. Participation in Solar Energy - Technology and Systems or Solar Energy Technologies for Electricity Production (may be taken in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1EL017",
+      "titleEn": "Battery Systems Engineering",
+      "titleSv": "Batterisystemteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Battery Technology A1F, Electrical Engineering A1F, Renewable Electricity Production A1F, Technology",
+      "mainFieldSv": "Batteriteknik A1F, Elektroteknik A1F, Förnybar elproduktion A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1EL018",
+      "titleEn": "Power Electronics in the Transmission System",
+      "titleSv": "Kraftelektronik i transmissionssystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1F, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE841",
+      "titleEn": "Degree Project in Renewable Electricity Production",
+      "titleSv": "Examensarbete i förnybar elproduktion",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production",
+      "mainFieldSv": "Förnybar elproduktion",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TE029"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Vattenkraft - teknik och system, 10 hp (1TE029) erbjuds även under termin 3.",
+      "labelEn": "Hydroelectric Power - Technology and Systems (1TE029) is also offered in semester 3.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "RECOMMENDED",
+      "courseCodes": [
+        "1TE028",
+        "1TE724",
+        "1TE678"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "1TE028 är behörighetskrav för 1TE724 (kan läsas parallellt).1TE678 är den rekommenderade kursen inom solenergi i programmet.",
+      "labelEn": "1TE028 is a prerequisite for 1TE724 (they may be taken in parallel), and 1TE678 is the recommended solar energy course in the programme.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TE840"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "1TE840 Examensarbete i förnybar elproduktion 15 hp endast för studenter som önskar avsluta med en magisterexamen. Ges period 13-14.",
+      "labelEn": "1TE840 (15 hp) is only for students who wish to finish with a magister's degree and is given in periods 3-4 of year 1.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "MUTUALLY_EXCLUSIVE",
+      "courseCodes": [
+        "1TE678",
+        "1TE028"
+      ],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Endast en av följande kurser i solenergi kan tas med i en examen: 1TE678 och 1TE028.",
+      "labelEn": "Only one of the solar energy courses 1TE678 and 1TE028 may count toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Vattenkraft - teknik och system, 10 hp (1TE029) erbjuds även under termin 3.",
+      "semester": 1,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "1TE028 är behörighetskrav för 1TE724 (kan läsas parallellt).1TE678 är den rekommenderade kursen inom solenergi i programmet.",
+      "semester": 2,
+      "period": "Period 3",
+      "trackId": null
+    },
+    {
+      "textSv": "1TE840 Examensarbete i förnybar elproduktion 15 hp endast för studenter som önskar avsluta med en magisterexamen. Ges period 13-14.",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Endast en av följande kurser i solenergi kan tas med i en examen: 1TE678 och 1TE028.",
+      "semester": 3,
+      "period": "Period 1",
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1TE078",
+      "to": "1TE028",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Modern Physics, Quantum Physics or Quantum Physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE678",
+      "to": "1TE028",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "Endast en av följande kurser i solenergi kan tas med i en examen: 1TE678 och 1TE028."
+    },
+    {
+      "from": "1TE304",
+      "to": "1TE038",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Multivariable Calculus, Electromagnetism, Automatic Control and a basic course in statistics. Participation in Mechanics Basic Course, or it could be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE304",
+      "to": "1TE043",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Scientific Computing I, Power Engineering and a basic course in mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE305",
+      "to": "1TE043",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Scientific Computing I, Power Engineering and a basic course in mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE029",
+      "to": "1TE065",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "150 credits in science/engineering, including Electromagnetism, Basic Mechanics and Electrical Power Systems. 10 credits at Master's level. In addition, participation in one of the courses Wind Power: Technology and Systems, Hydroelectric Power: Technology and Systems, Wave Power: Technology and Systems, Analysis of Electric Power Systems or Power System Analysis. Proficiency in English equivalent"
+    },
+    {
+      "from": "1TE038",
+      "to": "1TE065",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "150 credits in science/engineering, including Electromagnetism, Basic Mechanics and Electrical Power Systems. 10 credits at Master's level. In addition, participation in one of the courses Wind Power: Technology and Systems, Hydroelectric Power: Technology and Systems, Wave Power: Technology and Systems, Analysis of Electric Power Systems or Power System Analysis. Proficiency in English equivalent"
+    },
+    {
+      "from": "1TE043",
+      "to": "1TE065",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "150 credits in science/engineering, including Electromagnetism, Basic Mechanics and Electrical Power Systems. 10 credits at Master's level. In addition, participation in one of the courses Wind Power: Technology and Systems, Hydroelectric Power: Technology and Systems, Wave Power: Technology and Systems, Analysis of Electric Power Systems or Power System Analysis. Proficiency in English equivalent"
+    },
+    {
+      "from": "1TE078",
+      "to": "1TE678",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Electromagnetism, Power Engineering, Energy System Physics/Modern Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE765",
+      "to": "1TE692",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering including Power Engineering and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE078",
+      "to": "1TE724",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "180 credits in science/engineering including 10 credits at Master's level. Modern Physics, Quantum Physics or Quantum Physics F. Participation in Solar Energy - Technology and Systems or Solar Energy Technologies for Electricity Production (may be taken in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE765",
+      "to": "1TE737",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Automatic Control I. In addition, participation in 10 credits in science/engineering at advanced level. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10017",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3708",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;2"
+    },
+    {
+      "id": "3548",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;1"
+    },
+    {
+      "id": "3287",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2979",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2679",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2356",
+      "name": "Giltig från och med höstterminen 2020, version&nbsp;2"
+    },
+    {
+      "id": "2202",
+      "name": "Giltig från och med höstterminen 2020, version&nbsp;1"
+    },
+    {
+      "id": "1859",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1641",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1400",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1208",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1033",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "988",
+      "name": "Giltig från och med höstterminen 2015"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.173685+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10017",
+  "programmeTitle": "Masterprogram i förnybar elgenerering, 120 hp (TFE2M)",
+  "programmeUri": "/utbildning/program/masterprogram-fornybar-elgenerering",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Master's Programme in Renewable Electricity Production, 120 credits (TFE2M)"
+}

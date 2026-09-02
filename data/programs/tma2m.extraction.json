@@ -1,0 +1,767 @@
+{
+ "edges": [
+  {
+   "code": "1MA007",
+   "text": "60 credits in mathematics. Linear Algebra II. Participation in Basic Ring Theory or participation in Introduction to specialization mathematical physics (can be read in parallel).",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA036",
+   "text": "120 credits including 90 credits in mathematics or 60 credits in mathematics and 60 credits in physics. Participation in Algebraic Structures or Mathematical Methods of Physics II. Participation in Linear Algebra III or Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA007",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA053",
+   "text": "120 credits including 60 credits in mathematics. Several Variable Calculus, Several Variable Calculus M or Geometry and Analysis III. Linear Algebra II. Participation in Transform Methods or Fourier Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA148",
+   "text": "120 credits including 45 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus or Several Variable Calculus M and in Ordinary Differential Equations I or Transform Methods. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA196",
+   "text": "120 credits including 90 credits in mathematics. Real Analysis or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA362",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA209",
+   "text": "120 credits including 40 credits in mathematics. Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis II. Probability and Statistics or Mathematical statistics KF. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA215",
+   "text": "120 credits including 90 credits in mathematics. Participation in Real Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA362",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA216",
+   "text": "120 credits including 90 credits in mathematics. Participation in Real Analysis. Participation in Integration Theory or read in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA362",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA215",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA255",
+   "text": "120 credits including 90 credits in mathematics. Financial Derivatives. Participation in Probability Theory II or Integration Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA209",
+      "type": "HARD"
+     },
+     {
+      "from": "1MS036",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA215",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA256",
+   "text": "120 credits including 40 credits in mathematics. One of the courses Scientific Computing KF and Introduction to Scientific Computing. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA259",
+   "text": "120 credits including 90 credits in mathematics. Participation in Real Analysis. Basic Topology is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA362",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA325",
+   "text": "120 credits including 90 credits in mathematics. Participation in Modules and Homological Algebra. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA036",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA331",
+   "text": "120 credits including 90 credits in mathematics. Linear Algebra II. Participation in Real Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA362",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA332",
+   "text": "120 credits including 90 credits Mathematic. Linear Algebra II. Modules and homological algebra taken. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA036",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA333",
+   "text": "120 credits including 90 credits in mathematics. Linear Algebra II. Participation in Algebraic Structures and Differential Topology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA007",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA259",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA337",
+   "text": "120 credits including 90 credits Mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA338",
+   "text": "120 credits including 90 credits in mathematics. Participation in Partial Differential Equations. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA216",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA362",
+   "text": "25 credits in mathematics. Participation in Linear Algebra II. Participation in one of the courses Calculus in Several Variables, Several Variable Calculus, or Several Variable Calculus M.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA531",
+   "text": "120 credits including 90 credits in mathematics. Participation in Real Analysis and Complex Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA362",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS012",
+   "text": "120 credits. Probability Theory I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MS014",
+   "text": "120 credits in science/engineering. Participation in Inference Theory I or Probability and Statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MS030",
+   "text": "120 credits including 90 credits in mathematics. Participation in Integration Theory and Probability Theory II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA215",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MS036",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS036",
+   "text": "60 credits including 20 credits in mathematics. Participation in Probability Theory I or Probability and Statistics. Participation in Several Variable Calculus M, Several Variable Calculus or Several Variable Calculus Limited Version. Participation in Linear Algebra II.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MS041",
+   "text": "120 credits including 80 credits in computer science and mathematics, of which at least 15 credits in computer science including programming, and at least 30 credits in mathematics including probability and statistics, linear algebra and analysis. Participation in, or taken in parallel with, Several Variable Calculus, Limited Version. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MS045",
+   "text": "120 credits including 90 credits in mathematics. Probability theory II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS036",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS048",
+   "text": "120 credits including 30 credits in mathematics och 10 credits in computer science. Participation in Introduction to Data Science. Participation in Linear Algebra for Data Science or Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS041",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS049",
+   "text": "120 credits including 60 credits mathematics and/or data science with at least 45 credits mathematics. Participation in one of the courses Regression analysis, Introduction to data science or Financial Derivatives. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS041",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA209",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS050",
+   "text": "120 credits. Participation in Foundations in Data Science (or the course could be taken in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS048",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS052",
+   "text": "120 credits science/engineering of which 90 credits in mathematics. Regression analysis.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MS369",
+   "text": "120 credits including 90 credits in mathematics. Participation in Regression Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MS900",
+   "text": "120 credits including 60 credits in mathematics and/or data science including at least 45 credits in mathematics. Participation in Introduction to Data Science or participation in both Inference Theory II and Regression Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS041",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT001",
+   "text": "120 credits including Probability and Statistics, Linear Algebra, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1RT700",
+   "text": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD056",
+   "text": "120 credits in science/engineering including 30 credits in mathematics, where 5 credits linear algebra and 5 credits several variable calculus must be covered. Participation in Scientific Computing III or Scientific Computing for Partial Differential Equations. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD354",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD062",
+   "text": "120 credits in science/engineering including 30 credits Mathematics and 10 credits in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD186",
+   "text": "120 credits in science/engineering including one of the courses Scientific Computing II / Scientific Computing, Bridging Course / Introduction to Scientific Computing. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD354",
+   "text": "120 credits in science/engineering. Scientific Computing II or Introduction to Scientific Computing or Scientific Computing, Bridging Course. Several Variable Calculus. Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "2NE831",
+   "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 60 credits in economics and 15 credits in statistics (or a closely related subject).",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MS369, 1MA148, 1MA215, 1MS041, 1MA216, 1MS045, 1TD354, 1MS370",
+    "semester": 1,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MS369",
+     "1MA148",
+     "1MA215",
+     "1MS041",
+     "1MA216",
+     "1MS045",
+     "1TD354",
+     "1MS370"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MS369",
+     "1MA148",
+     "1MA215",
+     "1MS041",
+     "1MA216",
+     "1MS045",
+     "1TD354",
+     "1MS370"
+    ],
+    "labelEn": "One of the listed courses must be chosen in semester 1.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 2NE831, 1MS045, 1MA209, 1TD354",
+    "semester": 1,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "2NE831",
+     "1MS045",
+     "1MA209",
+     "1TD354"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "2NE831",
+     "1MS045",
+     "1MA209",
+     "1TD354"
+    ],
+    "labelEn": "One of these courses must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MA259, 1MA216, 1MA036, 1MA215",
+    "semester": 1,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MA259",
+     "1MA216",
+     "1MA036",
+     "1MA215"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MA259",
+     "1MA216",
+     "1MA036",
+     "1MA215"
+    ],
+    "labelEn": "One of the courses 1MA259, 1MA216, 1MA036, or 1MA215 must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MA007, 1MA362, 1MS036",
+    "semester": 1,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MA007",
+     "1MA362",
+     "1MS036"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MA007",
+     "1MA362",
+     "1MS036"
+    ],
+    "labelEn": "One of Algebraic Structures, Real Analysis, or Probability Theory II must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MA531, 1MS049, 1MA196, 1MS052, 1MA038, 1MA217, 1RT700",
+    "semester": 1,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MA531",
+     "1MS049",
+     "1MA196",
+     "1MS052",
+     "1MA038",
+     "1MA217",
+     "1RT700"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MA531",
+     "1MS049",
+     "1MA196",
+     "1MS052",
+     "1MA038",
+     "1MA217",
+     "1RT700"
+    ],
+    "labelEn": "One of the listed courses must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Studenter väljer 30 hp per termin, valt från spår, bryggningskurser och/eller övriga kurser.",
+    "semester": 1,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Students choose 30 credits per semester from track courses, bridging courses and/or other courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1TD062, 1MS012, 1MS900, 1MS048, 1MA331, 1MA256, 1MS050, 1MS014",
+    "semester": 2,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1TD062",
+     "1MS012",
+     "1MS900",
+     "1MS048",
+     "1MA331",
+     "1MA256",
+     "1MS050",
+     "1MS014"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1TD062",
+     "1MS012",
+     "1MS900",
+     "1MS048",
+     "1MA331",
+     "1MA256",
+     "1MS050",
+     "1MS014"
+    ],
+    "labelEn": "One of the listed courses must be chosen in semester 2.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MS012, 1MA053, 1MA255, 1MS014",
+    "semester": 2,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MS012",
+     "1MA053",
+     "1MA255",
+     "1MS014"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MS012",
+     "1MA053",
+     "1MA255",
+     "1MS014"
+    ],
+    "labelEn": "One of the listed courses must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MA333, 1MA338, 1MA325, 1MS030, 1MA331, 1MA332, 1MA336, 1MA056",
+    "semester": 2,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MA333",
+     "1MA338",
+     "1MA325",
+     "1MS030",
+     "1MA331",
+     "1MA332",
+     "1MA336",
+     "1MA056"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MA333",
+     "1MA338",
+     "1MA325",
+     "1MS030",
+     "1MA331",
+     "1MA332",
+     "1MA336",
+     "1MA056"
+    ],
+    "labelEn": "One of the listed courses must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MA337, 1MA081, 1MA181",
+    "semester": 2,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MA337",
+     "1MA081",
+     "1MA181"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MA337",
+     "1MA081",
+     "1MA181"
+    ],
+    "labelEn": "One of the courses 1MA337, 1MA081, or 1MA181 must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Studenter väljer 30 hp kurser från terminens kurser.",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Students choose 30 credits of courses from those offered in the semester.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MA531, 1MA038, 1MS049, 1MA259, 1MA217, 1MA080, 1TD186, 1MA209, 1MA215, 1MS041, 1RT001, 2NE814, 2NE811, 1MA036, 1MA216, 1MA196, 1TD056, 1MS052",
+    "semester": 3,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MA531",
+     "1MA038",
+     "1MS049",
+     "1MA259",
+     "1MA217",
+     "1MA080",
+     "1TD186",
+     "1MA209",
+     "1MA215",
+     "1MS041",
+     "1RT001",
+     "2NE814",
+     "2NE811",
+     "1MA036",
+     "1MA216",
+     "1MA196",
+     "1TD056",
+     "1MS052"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MA531",
+     "1MA038",
+     "1MS049",
+     "1MA259",
+     "1MA217",
+     "1MA080",
+     "1TD186",
+     "1MA209",
+     "1MA215",
+     "1MS041",
+     "1RT001",
+     "2NE814",
+     "2NE811",
+     "1MA036",
+     "1MA216",
+     "1MA196",
+     "1TD056",
+     "1MS052"
+    ],
+    "labelEn": "One of the listed courses must be chosen in semester 3.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MA344, 1MA342, 1MS051",
+    "semester": 3,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MA344",
+     "1MA342",
+     "1MS051"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MA344",
+     "1MA342",
+     "1MS051"
+    ],
+    "labelEn": "One of the courses 1MA344, 1MA342, or 1MS051 must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1MA080, 1MA182",
+    "semester": 4,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1MA080",
+     "1MA182"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MA080",
+     "1MA182"
+    ],
+    "labelEn": "One of the courses 1MA080 or 1MA182 must be chosen.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

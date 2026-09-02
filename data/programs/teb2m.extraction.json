@@ -1,0 +1,53 @@
+{
+ "edges": [
+  {
+   "code": "1BG306",
+   "text": "Completed courses of 150 credits including (1) 60 credits in biology and 30 credits in chemistry or 30 credits in earth science, or (2) 90 credits in biology. In both cases, participation in the course Evolutionary Processes. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG373",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG373",
+   "text": "Completed courses of 150 credits including (1) 60 credits in biology and 30 credits in chemistry or 30 credits in earth science, or (2) 90 credits in biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Under termin 3 och 4 väljer studenterna vilket universitet de vill genomföra sina studier. Det är också möjligt att göra projekt vid Harvard University eller Université Lausanne. Period Kurskod Kursnamn Hp Nivå/Djup Område 1-2 RuG Research project 30 A1F B 1-2 RuG Thesis project 30 A2E B 1-2 UM2 Research project 30 A1F B 1-2 UM2 Thesis project 30 A2E B 1-2 LMU Research training + Skill course + kurser listade under termin 2 (totalt 30 hp) 30 A1N B 1-2 LMU Thesis project 30 A2E B",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Students choose a partner university (RuG, UM2, or LMU; projects also possible at Harvard or Lausanne) for semesters 3–4, each offering a 30 hp research and/or thesis project.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Under termin 3 och 4 väljer studenterna vilket universitet de vill genomföra sina studier. Det är också möjligt att göra projekt vid Harvard University eller Université Lausanne. Period Kurskod Kursnamn Hp Nivå/Djup Område 3-4 RuG Research project 30 A1F B 3-4 RuG Thesis project 30 A2E B 3-4 UM2 Research project 30 A1F B 3-4 UM2 Thesis project 30 A2E B 3-4 LMU Thesis project 30 A2E B",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "In semesters 3–4 students choose a partner university (RuG, UM2, or LMU; projects also possible at Harvard or Lausanne) for a 30 hp research or thesis project.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

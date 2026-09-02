@@ -1,0 +1,288 @@
+{
+ "edges": [
+  {
+   "code": "1EL202",
+   "text": "120 credits in science/engineering, of which at least 15 credits in Electrical Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1EL204",
+   "text": "120 credits in science/engineering, of which at least 15 credits in electrical engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1EL206",
+   "text": "120 credits in science/engineering. Introduction to Electromobility or participation in Batteries and Storage. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB274",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1EL208",
+   "text": "140 credits in science/engineering, out of which 20 credits in electrical engineering at Master's level. Electric Propulsion Systems and Batteries and Storage. Participation in Power Electronics II and Design of Electric Motors. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE692",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB274",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE766",
+      "type": "SOFT"
+     },
+     {
+      "from": "1EL204",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1EL209",
+   "text": "140 credits in science/engineering, out of which 20 credits in electrical engineering at Master's level. Electric Propulsion Systems, and Batteries and Storage. Participation in Power Electronics II and Design of Electric Motors. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE692",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB274",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE766",
+      "type": "SOFT"
+     },
+     {
+      "from": "1EL204",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1EL211",
+   "text": "120 credits in science/engineering, including 30 credits in electrical engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1EL213",
+   "text": "120 credits in science/engineering, including 30 credits in Electrical Engineering and Scientific Computing I (ability to use computer based calculation aids). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1EL215",
+   "text": "140 credits in science/engineering, out of which 20 credits in electrical engineering at Master's level. Electric Propulsion Systems, and Batteries and Storage. Participation in Power Electronics II and Design of Electric Motors. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE692",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB274",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE766",
+      "type": "SOFT"
+     },
+     {
+      "from": "1EL204",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB274",
+   "text": "Alternative 1: 120 credits in science and technology, including 5 credits power engineering, 5 credits automatic control, and 5 credits scientific computing. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 130 credits in science and technology, including 10 credits in Energy Technology at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 120 credits in science and technology, including 15 credits in power engineering. Ability to use computer-based calculation tools, such as MATLAB Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB714",
+   "text": "120 credits in science/engineering. Participation in Rechargeable batteries or Batteries and storage. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB274",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE692",
+   "text": "130 credits in science/engineering including Power Engineering and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE765",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE766",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE722",
+   "text": "150 credits in science/engineering including 30 credits at Master's level within the specialisation Embedded Systems in the Master Programme in Engineering Physics; or alternatively 30 credits at Master's level within the specialisations Electrical System Control or Renewable Electrical Generation in the Master Programme in Electrical Engineering, and Embedded Systems in the Master Programme in Information Technology, or 30 credits at Master's level in Electrical Engineering within the Master Programme in All-Electric Propulsion Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE765",
+   "text": "120 credits in science/engineering, including basic knowledge in electric circuit theory and electronics. Participation in Transform Methods (spec. Fourier series), or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA269",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE766",
+   "text": "120 credits in science/engineering. Participation in 10 credits at Master's level in science/engineering. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE765",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TS327",
+   "text": "120 credits, including 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS328",
+   "text": "Option 1: 120 credits, including 90 credits in science/engineering. Participation in the course Industrial Project Management I. Option 2: 120 credits, including 90 credits in science/engineering. Industrial Engineering and Management I: The Functions of the Corporation, Industrial Management III: Project in Business and Technology Development. Participation in Strategic Management in Technology-Intensive Firms. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TS327",
+      "type": "SOFT"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Varken 1EL998 eller 1EL997 kan ingå i examen tillsammans med någon av kurserna 1EL223, 1EL205, 1EL208, 1EL209, 1EL215.",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1EL998",
+     "1EL997",
+     "1EL208",
+     "1EL209",
+     "1EL215"
+    ],
+    "labelEn": "Neither 1EL998 nor 1EL997 may count toward the degree together with any of the courses 1EL223, 1EL205, 1EL208, 1EL209 or 1EL215.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "För de som önskar ta ut en magisterexamen:",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "For students who wish to obtain a magister's degree:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna 1EL208 och 1EL209 kan ställas in vid brist på resurser men minst en ges.",
+    "semester": 3,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1EL208",
+     "1EL209"
+    ],
+    "labelEn": "Due to limited resources, one of 1EL208 and 1EL209 may be cancelled, but at least one will be offered.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna 1EL211 och 1EL215 kan ställas in vid brist på resurser men minst en ges.",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1EL211",
+     "1EL215"
+    ],
+    "labelEn": "One of 1EL211 or 1EL215 may be cancelled due to lack of resources, but at least one is offered.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övrigt - under period 1 och 2 kan projektarbete även väljas:",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TE615",
+     "1TE616"
+    ],
+    "labelEn": "During periods 1 and 2, project work courses may also be chosen.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

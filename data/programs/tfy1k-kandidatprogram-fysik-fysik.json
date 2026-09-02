@@ -1,0 +1,1378 @@
+{
+  "id": "10059",
+  "code": "TFY1K",
+  "revisionId": "10059",
+  "nameSv": "Kandidatprogram i fysik",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1FA606",
+      "titleEn": "Introduction to the Bachelor Programme in Physics",
+      "titleSv": "Introduktion till kandidatprogrammet i fysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA187",
+      "titleEn": "Geometry and Calculus I",
+      "titleSv": "Geometri och analys I",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA602",
+      "titleEn": "Mechanics KF",
+      "titleSv": "Mekanik KF",
+      "credits": 15.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TD433",
+      "titleEn": "Computer Programming I",
+      "titleSv": "Programmeringsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1N, Technology",
+      "mainFieldSv": "Datavetenskap G1N, Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D"
+    },
+    {
+      "code": "1MA188",
+      "titleEn": "Geometry and Calculus II",
+      "titleSv": "Geometri och analys II",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA602",
+      "titleEn": "Mechanics KF",
+      "titleSv": "Mekanik KF",
+      "credits": 15.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MS029",
+      "titleEn": "Mathematical Statistics KF",
+      "titleSv": "Matematisk statistik KF",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TD342",
+      "titleEn": "Introduction to Scientific Computing",
+      "titleSv": "Introduktion till beräkningsvetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Mathematics G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Matematik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "code": "1FA608",
+      "titleEn": "Experimental Methods for Physics I",
+      "titleSv": "Experimentell metodik för fysik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA212",
+      "titleEn": "Geometry and Analysis III",
+      "titleSv": "Geometri och analys III",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "3 credits mathematics. Participation in Geometry and Calculus II."
+    },
+    {
+      "code": "1MA024",
+      "titleEn": "Linear Algebra II",
+      "titleSv": "Linjär algebra II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "code": "1FA603",
+      "titleEn": "Electromagnetism",
+      "titleSv": "Elektromagnetism",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "30 credits. Participation in Geometry and Calculus II/Several Variable Calculus M (curve and surface integrals) and Mechanics KF/Mechanics (force, energy, particle in motion) and at least 3 credits from Computer Programming 1."
+    },
+    {
+      "code": "1MA211",
+      "titleEn": "Fourier Analysis",
+      "titleSv": "Fourieranalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits in mathematics. Participation in Several Variable Calculus, Several Variable Calculus M or Geometry and Analysis III. Participation in Linear Algebra II."
+    },
+    {
+      "code": "1FA103",
+      "titleEn": "Mechanics III",
+      "titleSv": "Mekanik III",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics G1F, Technology",
+      "mainFieldSv": "Fysik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "Participation in Geometry and Calculus II/Several Variable Calculus/Several Variable Calculus, Limited Version/Several Variable Calculus M/Calculus in Several Variables. Participation in Linear Algebra II and Mechanics II/Applied Mechanics I/Mechanics/Mechanics KF."
+    },
+    {
+      "code": "1FA521",
+      "titleEn": "Quantum Physics",
+      "titleSv": "Kvantfysik",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits including Mechanics II/KF. Participation in Transform Methods/Fourier Analysis, Electromagnetism I/Electromagnetism, Waves and Optics and Mathematical Methods of Physics that can be taken in parallel. Knowledge in special relativity (from e.g. Mechanics III, which can be taken in parallel, or Astrophysics I)."
+    },
+    {
+      "code": "1FA121",
+      "titleEn": "Mathematical Methods of Physics",
+      "titleSv": "Fysikens matematiska metoder",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics G1F, Physics",
+      "mainFieldSv": "Fysik G1F, Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "code": "1FA522",
+      "titleEn": "Waves and Optics",
+      "titleSv": "Vågor och optik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA517",
+      "titleEn": "Thermodynamics",
+      "titleSv": "Termodynamik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA032",
+      "titleEn": "Ordinary Differential Equations I",
+      "titleSv": "Ordinära differentialekvationer I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course."
+    },
+    {
+      "code": "1FA204",
+      "titleEn": "Astrophysics I",
+      "titleSv": "Astrofysik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "30 credits in mathematics and 30 credits in physics."
+    },
+    {
+      "code": "1TD352",
+      "titleEn": "Scientific Computing for Data Analysis",
+      "titleSv": "Beräkningsvetenskap för dataanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in Linear Algebra II/Linear Algebra for Data Analysis/Geometry and Calculus II."
+    },
+    {
+      "code": "1FA163",
+      "titleEn": "Analytical Mechanics",
+      "titleSv": "Analytisk mekanik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering with Linear Algebra II. Participation in Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA252",
+      "titleEn": "Electromagnetic Field Theory",
+      "titleSv": "Elektromagnetisk fältteori",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including Electromagnetism II/Electromagnetism and Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA516",
+      "titleEn": "Considerations for Effective Physics Teaching",
+      "titleSv": "Fysikundervisning i praktiken",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits including 30 credits in physics. Participation in the courses Mechanics KF and Electromagnetism."
+    },
+    {
+      "code": "1FA612",
+      "titleEn": "Experimental Methods for Physics II",
+      "titleSv": "Experimentell metodik för fysik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits with Experimental methods for Physics I and Introduction to Scientific Computing. Participation in Quantum Physics."
+    },
+    {
+      "code": "1FA404",
+      "titleEn": "Energy Physics I",
+      "titleSv": "Energifysik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics G2F, Technology",
+      "mainFieldSv": "Fysik G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in science/engineering with Thermodynamics/Technical Thermodynamics. Participation in Quantum Physics, Quantum Physics F, Solid State Physics F or Condensed Matter Physics."
+    },
+    {
+      "code": "1TD352",
+      "titleEn": "Scientific Computing for Data Analysis",
+      "titleSv": "Beräkningsvetenskap för dataanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in Linear Algebra II/Linear Algebra for Data Analysis/Geometry and Calculus II."
+    },
+    {
+      "code": "1FA346",
+      "titleEn": "Nuclear Physics",
+      "titleSv": "Kärnfysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including Mechanics III and basic knowledge of quantum physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA204",
+      "titleEn": "Astrophysics I",
+      "titleSv": "Astrofysik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "30 credits in mathematics and 30 credits in physics."
+    },
+    {
+      "code": "1FA140",
+      "titleEn": "Statistical Mechanics",
+      "titleSv": "Statistisk mekanik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits including Mechanics III, Electromagnetism I, Thermodynamics/Technical Thermodynamics, Quantum Physics/Quantum Physics F."
+    },
+    {
+      "code": "1FA156",
+      "titleEn": "Special Relativity",
+      "titleSv": "Speciell relativitetsteori",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with Linear Algebra II. Participation in Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MA032",
+      "titleEn": "Ordinary Differential Equations I",
+      "titleSv": "Ordinära differentialekvationer I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course."
+    },
+    {
+      "code": "1FA370",
+      "titleEn": "Applied Deep Learning in Physics and Engineering",
+      "titleSv": "Tillämpad djupinlärning i fysik och teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. Linear Algebra II. Introduction to Scientific Computing or Introduction to Scientific Computing F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA347",
+      "titleEn": "Elementary Particle Physics",
+      "titleSv": "Partikelfysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with Quantum Physics and Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA526",
+      "titleEn": "Condensed Matter Physics",
+      "titleSv": "Kondenserade materiens fysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits. Quantum Physics, Computer Programming 1."
+    },
+    {
+      "code": "1MA022",
+      "titleEn": "Complex Analysis",
+      "titleSv": "Komplex analys",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in mathematics or physics, including 30 credits in mathematics. Participation in Several Variable Calculus, Several Variable Calculus M or Geometry and Analysis III."
+    },
+    {
+      "code": "1FA599",
+      "titleEn": "Degree Project C in Physics",
+      "titleSv": "Examensarbete C i fysik",
+      "credits": 15.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA152",
+      "titleEn": "Dynamical System and Chaos",
+      "titleSv": "Dynamiska system och kaos",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Matematik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/technology. Participation in Mechanics III or Analytical Mechanics. Computer Programming I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME052",
+      "titleEn": "Introduction to Meteorology and Climatology",
+      "titleSv": "Meteorologi och klimatologi",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1N",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1FA318",
+      "titleEn": "Introduction to Nuclear Physics and Its Applications",
+      "titleSv": "Introduktion till kärnfysik och dess tillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1N",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E"
+    },
+    {
+      "code": "1GE060",
+      "titleEn": "Introduction to the Physics and Dynamics of the Earth",
+      "titleSv": "Introduktion till jordens fysik och dynamik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science G1N, Physics",
+      "mainFieldSv": "Fysik G1N, Geovetenskap",
+      "depthCode": "G1N",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements and Physics level 2, Mathematics Further level 2, or Physics 2, Mathematics 4/Mathematics E"
+    },
+    {
+      "code": "1FA218",
+      "titleEn": "Introduction to Astronomy",
+      "titleSv": "Orienteringskurs i astronomi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1N",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1FA605",
+      "titleEn": "Physics Project with a Research Basis",
+      "titleSv": "Fysikprojekt med forskningsanknytning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA034",
+      "titleEn": "Physics Profession Project",
+      "titleSv": "Yrkesprojekt i fysik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "eller",
+      "labelEn": "The Swedish word 'eller' (meaning 'or') signals a choice between adjacent alternatives without naming any specific course.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "eller",
+      "labelEn": "The word 'or' connecting alternative options in the semester plan.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Övriga kurser:Period 1 och 2",
+      "labelEn": "Other courses are scheduled in periods 1 and 2 of semester 6.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Period 4",
+      "labelEn": "The activity is scheduled in period 4 of the semester.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Valfri period",
+      "labelEn": "The semester 6 slot is an elective period with no specific course required.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "eller",
+      "semester": 4,
+      "period": "Period 4",
+      "trackId": null
+    },
+    {
+      "textSv": "eller",
+      "semester": 4,
+      "period": "Period 4",
+      "trackId": null
+    },
+    {
+      "textSv": "Övriga kurser:Period 1 och 2",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Period 4",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Valfri period",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1FA602",
+      "to": "1FA103",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Geometry and Calculus II/Several Variable Calculus/Several Variable Calculus, Limited Version/Several Variable Calculus M/Calculus in Several Variables. Participation in Linear Algebra II and Mechanics II/Applied Mechanics I/Mechanics/Mechanics KF."
+    },
+    {
+      "from": "1MA188",
+      "to": "1FA103",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Geometry and Calculus II/Several Variable Calculus/Several Variable Calculus, Limited Version/Several Variable Calculus M/Calculus in Several Variables. Participation in Linear Algebra II and Mechanics II/Applied Mechanics I/Mechanics/Mechanics KF."
+    },
+    {
+      "from": "1FA602",
+      "to": "1FA121",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "from": "1MA024",
+      "to": "1FA121",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "from": "1MA188",
+      "to": "1FA121",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "from": "1MA211",
+      "to": "1FA121",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "from": "1FA103",
+      "to": "1FA140",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including Mechanics III, Electromagnetism I, Thermodynamics/Technical Thermodynamics, Quantum Physics/Quantum Physics F."
+    },
+    {
+      "from": "1FA517",
+      "to": "1FA140",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including Mechanics III, Electromagnetism I, Thermodynamics/Technical Thermodynamics, Quantum Physics/Quantum Physics F."
+    },
+    {
+      "from": "1FA521",
+      "to": "1FA140",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including Mechanics III, Electromagnetism I, Thermodynamics/Technical Thermodynamics, Quantum Physics/Quantum Physics F."
+    },
+    {
+      "from": "1FA603",
+      "to": "1FA140",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including Mechanics III, Electromagnetism I, Thermodynamics/Technical Thermodynamics, Quantum Physics/Quantum Physics F."
+    },
+    {
+      "from": "1FA103",
+      "to": "1FA152",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/technology. Participation in Mechanics III or Analytical Mechanics. Computer Programming I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA163",
+      "to": "1FA152",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/technology. Participation in Mechanics III or Analytical Mechanics. Computer Programming I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD433",
+      "to": "1FA152",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/technology. Participation in Mechanics III or Analytical Mechanics. Computer Programming I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA103",
+      "to": "1FA156",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits with Linear Algebra II. Participation in Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA024",
+      "to": "1FA156",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with Linear Algebra II. Participation in Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA103",
+      "to": "1FA163",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering with Linear Algebra II. Participation in Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA024",
+      "to": "1FA163",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering with Linear Algebra II. Participation in Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA121",
+      "to": "1FA252",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Electromagnetism II/Electromagnetism and Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA603",
+      "to": "1FA252",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Electromagnetism II/Electromagnetism and Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA103",
+      "to": "1FA346",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Mechanics III and basic knowledge of quantum physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA521",
+      "to": "1FA346",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Mechanics III and basic knowledge of quantum physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA103",
+      "to": "1FA347",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with Quantum Physics and Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA521",
+      "to": "1FA347",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with Quantum Physics and Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA024",
+      "to": "1FA370",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Linear Algebra II. Introduction to Scientific Computing or Introduction to Scientific Computing F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD342",
+      "to": "1FA370",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Linear Algebra II. Introduction to Scientific Computing or Introduction to Scientific Computing F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA517",
+      "to": "1FA404",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering with Thermodynamics/Technical Thermodynamics. Participation in Quantum Physics, Quantum Physics F, Solid State Physics F or Condensed Matter Physics."
+    },
+    {
+      "from": "1FA521",
+      "to": "1FA404",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering with Thermodynamics/Technical Thermodynamics. Participation in Quantum Physics, Quantum Physics F, Solid State Physics F or Condensed Matter Physics."
+    },
+    {
+      "from": "1FA602",
+      "to": "1FA516",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including 30 credits in physics. Participation in the courses Mechanics KF and Electromagnetism."
+    },
+    {
+      "from": "1FA603",
+      "to": "1FA516",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including 30 credits in physics. Participation in the courses Mechanics KF and Electromagnetism."
+    },
+    {
+      "from": "1FA103",
+      "to": "1FA521",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Mechanics II/KF. Participation in Transform Methods/Fourier Analysis, Electromagnetism I/Electromagnetism, Waves and Optics and Mathematical Methods of Physics that can be taken in parallel. Knowledge in special relativity (from e.g. Mechanics III, which can be taken in parallel, or Astrophysics I)."
+    },
+    {
+      "from": "1FA602",
+      "to": "1FA521",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including Mechanics II/KF. Participation in Transform Methods/Fourier Analysis, Electromagnetism I/Electromagnetism, Waves and Optics and Mathematical Methods of Physics that can be taken in parallel. Knowledge in special relativity (from e.g. Mechanics III, which can be taken in parallel, or Astrophysics I)."
+    },
+    {
+      "from": "1FA603",
+      "to": "1FA521",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Mechanics II/KF. Participation in Transform Methods/Fourier Analysis, Electromagnetism I/Electromagnetism, Waves and Optics and Mathematical Methods of Physics that can be taken in parallel. Knowledge in special relativity (from e.g. Mechanics III, which can be taken in parallel, or Astrophysics I)."
+    },
+    {
+      "from": "1MA211",
+      "to": "1FA521",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Mechanics II/KF. Participation in Transform Methods/Fourier Analysis, Electromagnetism I/Electromagnetism, Waves and Optics and Mathematical Methods of Physics that can be taken in parallel. Knowledge in special relativity (from e.g. Mechanics III, which can be taken in parallel, or Astrophysics I)."
+    },
+    {
+      "from": "1FA521",
+      "to": "1FA526",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits. Quantum Physics, Computer Programming 1."
+    },
+    {
+      "from": "1TD433",
+      "to": "1FA526",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits. Quantum Physics, Computer Programming 1."
+    },
+    {
+      "from": "1FA602",
+      "to": "1FA603",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "30 credits. Participation in Geometry and Calculus II/Several Variable Calculus M (curve and surface integrals) and Mechanics KF/Mechanics (force, energy, particle in motion) and at least 3 credits from Computer Programming 1."
+    },
+    {
+      "from": "1MA188",
+      "to": "1FA603",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "30 credits. Participation in Geometry and Calculus II/Several Variable Calculus M (curve and surface integrals) and Mechanics KF/Mechanics (force, energy, particle in motion) and at least 3 credits from Computer Programming 1."
+    },
+    {
+      "from": "1TD433",
+      "to": "1FA603",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "30 credits. Participation in Geometry and Calculus II/Several Variable Calculus M (curve and surface integrals) and Mechanics KF/Mechanics (force, energy, particle in motion) and at least 3 credits from Computer Programming 1."
+    },
+    {
+      "from": "1FA521",
+      "to": "1FA612",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits with Experimental methods for Physics I and Introduction to Scientific Computing. Participation in Quantum Physics."
+    },
+    {
+      "from": "1FA608",
+      "to": "1FA612",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits with Experimental methods for Physics I and Introduction to Scientific Computing. Participation in Quantum Physics."
+    },
+    {
+      "from": "1TD342",
+      "to": "1FA612",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits with Experimental methods for Physics I and Introduction to Scientific Computing. Participation in Quantum Physics."
+    },
+    {
+      "from": "1MA212",
+      "to": "1MA022",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in mathematics or physics, including 30 credits in mathematics. Participation in Several Variable Calculus, Several Variable Calculus M or Geometry and Analysis III."
+    },
+    {
+      "from": "1MA024",
+      "to": "1MA032",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA212",
+      "to": "1MA032",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA188",
+      "to": "1MA212",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "3 credits mathematics. Participation in Geometry and Calculus II."
+    },
+    {
+      "from": "1MA187",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1MA024",
+      "to": "1TD352",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    },
+    {
+      "from": "1MA188",
+      "to": "1TD352",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    },
+    {
+      "from": "1MS029",
+      "to": "1TD352",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    },
+    {
+      "from": "1TD342",
+      "to": "1TD352",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD352",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10059",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3587",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3183",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3064",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2818",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;2"
+    },
+    {
+      "id": "2460",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;1"
+    },
+    {
+      "id": "2349",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2183",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1784",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1658",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1470",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;3"
+    },
+    {
+      "id": "1420",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1387",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    },
+    {
+      "id": "1275",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;3"
+    },
+    {
+      "id": "1258",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1148",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "919",
+      "name": "Giltig från och med höstterminen 2015"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.116083+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10059",
+  "programmeTitle": "Kandidatprogram i fysik – Fysik, 180 hp (TFY1K)",
+  "programmeUri": "/utbildning/program/kandidatprogram-fysik-fysik",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Bachelor's Programme in Physics – Physics, 180 credits (TFY1K)"
+}

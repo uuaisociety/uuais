@@ -1,0 +1,340 @@
+{
+ "edges": [
+  {
+   "code": "1KB009",
+   "text": "20 credits of chemistry including 5 credits from either General Chemistry, Chemical Principles I, Basic Chemistry or The Basic Principles of Chemistry. Participation in Basic Course in Mathematics and Single Variable Calculus 10 credits.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB016",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA010",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB010",
+   "text": "120 credits from completed courses of which 60 credits in chemistry, including at least 50 credits at G1F-level, and an additional in-depth study through participation in 15 credits in chemistry at G2F level from the following programme courses: Analytical Chemistry II 15 credits, Biochemistry II 15 credits, Organic Chemistry II 15 credits, Solid State Chemistry 5 credits, Material Chemistry 10 credits, Theoretical Chemistry 10 credits, Chemical Physics 10 credits or Colloid and Interface Chemistry 10 credits. Admission requires a project plan accepted by the department.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB101",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB421",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB420",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB211",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB210",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB559",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB700",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB303",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB016",
+   "text": "General entry requirements and Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 2, or Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB101",
+   "text": "60 credits including 40 credits in chemistry and attended course in analytical chemistry, 10 credits, minimum G1F-level.",
+   "result": null
+  },
+  {
+   "code": "1KB103",
+   "text": "15 credits Chemistry including 5 credits from any of the courses Chemical Principles 10 credits, Basic Chemistry 10 credits, General Chemistry, or The Basic Principles of Chemistry, as well as participation in other Chemistry courses for 15 cr.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB016",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB210",
+   "text": "60 credits in science/engineering. Participation in Solid State Chemistry or the course can be taken in parallel.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB211",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB211",
+   "text": "60 credits in science/engineering including Inorganic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or Basic Materials Chemistry, 5 credits.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB208",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB309",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB210",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB302",
+   "text": "Participation in 30 credits in chemistry, of which 15 credits completed including at least 5 credits from General Chemistry, Chemical Principles I, Basic Chemistry or The Basic Principles of Chemistry. In addition, participation in Linear Algebra I.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB016",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA350",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB303",
+   "text": "60 credits chemistry including General Chemistry, Chemical Principles I or Basic Chemistry, as well as Physical Chemistry I, or The Basic Principles of Chemistry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB016",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB309",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB309",
+   "text": "20 credits in chemistry including General Chemistry, Chemical Principles I, Basic Chemistry, or Basic Principles of Chemistry. Participation in Basic Course in Mathematics, Linear Algebra I and Single Variable Analysis, with at least 5 credits completed. Participation in Physics for Chemists.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB016",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA010",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA350",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB302",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB420",
+   "text": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 10 credits in organic chemistry, or (2) 60 credits within the Upper Secondary School Teacher Education Programme of which at least 30 credits in chemistry, including 10 credits in organic chemistry",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB410",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB421",
+   "text": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 10 credits in organic chemistry and 5 credits in biochemistry, or (2) 60 credits of which at least 40 credits in biology, together with 10 credits in organic chemistry and 5 credits in biochemistry, or (3) 60 credits within the Upper Secondary School Teacher Education Programme of which at least 30 credits in chemistry including 10 credits in organic chemistry and 5 credits in biochemistry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB409",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB410",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB433",
+   "text": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 15 credits in biochemistry, or (2) 60 credits of which at least 40 credits in biology, and 15 credits in biochemistry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB409",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB700",
+   "text": "60 credits in chemistry including Physical Chemistry I, 10 credits",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB309",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA013",
+   "text": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA010",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA017",
+   "text": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA350",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA024",
+   "text": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA350",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA032",
+   "text": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA017",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA350",
+   "text": "Participation in Basic Course in Mathematics or Basic Algebra.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA010",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS005",
+   "text": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA010",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD342",
+   "text": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD433",
+   "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": []
+}

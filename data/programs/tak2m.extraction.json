@@ -1,0 +1,80 @@
+{
+ "edges": [
+  {
+   "code": "1KB154",
+   "text": "120 credits with 90 credits in chemistry. Separation and Mass Spectrometry, 15 credits, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB159",
+   "text": "120 credits with 60 credits in chemistry including Separation and Mass Spectrometry, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Tartu universitet Universitet Kursnamn Hp Nivå/Djup Område Tartu Practical Chemical Analysis 6 A1N K Tartu Measurement Data Processing 3 A1N K Tartu Quality Systems 3 A1N K Tartu Master's Seminar in Measurement Science, part 1 3 (6) A1N K Valbara kurser om minst 15hp Tartu Atomic Spectroscopy 3 A1N K Tartu Measurements in Biochemistry 3 A1N K Tartu Chemical Analysis Lab for Beginners 3 A1N K Tartu Chemometrics 6 A1N K Tartu Measuring and Instrumentation 3 A1N K Tartu Structural Analysis I 3 A1N K Tartu Modern Metrology 3 A1N K",
+    "semester": 1,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "List of elective courses at Tartu University for semester 1.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Tartu universitet Universitet Kursnamn Hp Nivå/Djup OmrådeTartu Tartu Master's Seminar in Measurement Science, part 2 3 (6) A1N K Tartu Internship 6 A1N K Tartu Practical Works in Chemical Analysis and Metrology 6 A1N K Tartu Metrology in Chemistry 6 A1N K Tartu Liquid Chromatography and Mass Spectrometry 6 A1N K Valbara kurser om minst 3hp Tartu Measurements and the Law 3 A1N K Tartu Economic Aspects of Measurements 3 A1N K Tartu Practical Works on Physical Measurement and Calibration 3 A1N K Tartu Environment and Measurement 3 A1N K",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1KB049",
+     "1KB154",
+     "1KB159"
+    ],
+    "labelEn": "List of elective courses at Tartu University for semester 2.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Uppsala universitet",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Note indicates the university is Uppsala University.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Uppsala universitet",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Note: Uppsala University",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

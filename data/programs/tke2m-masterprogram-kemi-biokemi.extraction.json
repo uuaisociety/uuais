@@ -1,0 +1,114 @@
+{
+ "edges": [
+  {
+   "code": "1BG320",
+   "text": "Completed courses of 150 credits including (1) 60 credits in biology and 30 credits in chemistry, or (2) 60 credits in chemistry including Biochemistry 15 credits and 30 credits in biology including cell biology, molecular biology and genetics, or (3) admission to the Master's Programme in Chemistry, specialising in Biochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1BG334",
+   "text": "Completed courses worth 150 credits including (1) 60 credits in biology and 30 credits in chemistry, including one of the advanced courses Molecular Cell Biology 15 credits, Functional Genomics 15 credits, Molecular Infection Biology 15 credits, or Genome Biology 5 credits, or (2) 30 credits in the Master's Programme in Applied Biotechnology or the Master's Programme in Chemistry, specialising in Biochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG320",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG349",
+   "text": "Completed courses of 150 credits including (1) 90 credits in biology and chemistry of which at least 30 credits in each subject, or (2) participation in Trends in Molecular Biology and Biotechnology, or (3) Accepted to the Master's Programme in Chemistry – Biochemistry or Chemical Biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB057",
+   "text": "120 credits including 60 credits in chemistry. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB425",
+   "text": "One of the following is required: (1) 120 credits with 60 credits in chemistry, including 20 credits in biochemistry, or (2) 120 credits with 30 credits in chemistry and 30 credits in biology, including 20 credits in biochemistry, or (3) 120 credits within the Master's Programme in Molecular Biotechnology Engineering, including Cell Biology, 15 credits, or (4) 120 credits within the Master's Programme in Chemical Engineering, including Physiology and Molecular Cell Biology and Development of Biologicals. Also required is 10 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG320",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB433",
+   "text": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 15 credits in biochemistry, or (2) 60 credits of which at least 40 credits in biology, and 15 credits in biochemistry.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB434",
+   "text": "120 credits with 60 credits in chemistry, including 15 credits in biochemistry. 5 credits in Chemistry at master’s level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB447",
+   "text": "120 credits including 20 credits in chemistry. In addition, 10 credits in biochemistry or Cell Biology, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG320",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB467",
+   "text": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB468",
+   "text": "120 credits including 60 credits in chemistry including 10 credits in biochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB750",
+   "text": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1KB053"
+    ],
+    "labelEn": "The degree project 1KB053 counts as 30 of its 45 credits.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

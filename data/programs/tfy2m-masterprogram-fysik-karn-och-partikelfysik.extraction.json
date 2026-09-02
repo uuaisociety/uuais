@@ -1,0 +1,622 @@
+{
+ "edges": [
+  {
+   "code": "1FA006",
+   "text": "120 credits in science/engineering. Applied Deep Learning in Physics and Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA370",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA010",
+   "text": "120 credits in science/engineering with Nuclear Physics. Participation in Quantum Mechanics, Advanced Course. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA346",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA352",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA011",
+   "text": "120 credits in science/engineering with Mathematical Methods in Physics. Participation in Quantum Mechanics, Advanced Course. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA352",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA018",
+   "text": "120 credits with basic statistics and 60 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA045",
+   "text": "60 credits in physics, mathematics, and/or chemistry.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA140",
+   "text": "60 credits including Mechanics III, Electromagnetism I, Thermodynamics/Technical Thermodynamics, Quantum Physics/Quantum Physics F.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA156",
+   "text": "120 credits with Linear Algebra II. Participation in Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA163",
+   "text": "120 credits in science/engineering with Linear Algebra II. Participation in Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA166",
+   "text": "120 credits in science/engineering. Participation in Introduction to Quantum Field Theory with Applications or Quantum Field Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA011",
+      "type": "SOFT"
+     },
+     {
+      "from": "1SV037",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA193",
+   "text": "120 credits including 60 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA195",
+   "text": "120 credits including 60 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA209",
+   "text": "120 credits including 30 credits in mathematics and 60 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA227",
+   "text": "120 credits with quantum physics/quantum mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA352",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA252",
+   "text": "120 credits including Electromagnetism II/Electromagnetism and Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA257",
+   "text": "120 credits with Mechanics III. Electromagnetic Field Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA252",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA336",
+   "text": "120 credits in science/engineering. Participation in Advanced Nuclear Physics or The Physics of Stars. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA010",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA346",
+   "text": "120 credits including Mechanics III and basic knowledge of quantum physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA347",
+   "text": "120 credits with Quantum Physics and Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA348",
+   "text": "120 credits. Electromagnetic Field Theory and Nuclear Physics or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA252",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA346",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA350",
+   "text": "120 credits in science/engineering. Participation in the course in particle physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA347",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA352",
+   "text": "120 credits with Mechanics III and Quantum Physics/Quantum Physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA353",
+   "text": "120 credits with Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA355",
+   "text": "120 credits with Particle Physics. Participation in Quantum Field Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA347",
+      "type": "HARD"
+     },
+     {
+      "from": "1SV037",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA360",
+   "text": "120 credits in science/engineering with Quantum Field Theory or Advanced Particle Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1SV037",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA355",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA361",
+   "text": "120 credits in science/engineering including Mechanics III and Quantum physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA370",
+   "text": "120 credits in science/engineering. Linear Algebra II. Introduction to Scientific Computing or Introduction to Scientific Computing F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA451",
+   "text": "120 credits in mathematics, technology and science. Basic knowledge of ionising radiation corresponding to Modern Physics or Nuclear Physics and Particle Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA346",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA347",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA453",
+   "text": "120 credits in science/engineering with Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA565",
+   "text": "120 credits including 75 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA566",
+   "text": "120 credits including 75 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA570",
+   "text": "120 credits with 60 credits in physics and 15 credits in physics education. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA597",
+   "text": "A Bachelor's degree or the equivalent and at least 30 credits in physics at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA598",
+   "text": "A Bachelor's degree or the equivalent and at least 30 credits in physics at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA694",
+   "text": "A Bachelor's degree or the equivalent and at least 30 credits in physics at Master's level. Courses required for each particular degree work must also be finished. Proficiency in English equivalent to the Swedish upper secondary course English 6. Admission requires a project plan accepted by the department.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1SV037",
+   "text": "120 credits in science/engineering including Quantum Mechanics, advanced course. Participation in Analytical mechanics or Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA352",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA163",
+      "type": "SOFT"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Majoriteten av kurserna som erbjuds under termin 1 erbjuds även under termin 3.Studenterna förväntas dela upp belastningen mellan dessa två terminer.",
+    "semester": 1,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Most courses offered in semester 1 are also offered in semester 3, and students are expected to spread their workload across these two semesters.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Antingen",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "\"Antingen\" (\"Either\") is an incomplete choice fragment with no courses specified.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Eller",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "This is just the word 'Or', a connector fragment linking to adjacent text.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Studenter med en preferens för experiment rekommenderas 1FA252; med preferens för teori och om 1FA252 studerats tidigare, rekommenderas 1FA257.Studenter utan tidigare erfarenhet av programmering med Python bör ta 1FA453:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "RECOMMENDED",
+    "courseCodes": [
+     "1FA252",
+     "1FA257",
+     "1FA453"
+    ],
+    "labelEn": "Students preferring experiments are recommended 1FA252, those preferring theory (who have already taken 1FA252) are recommended 1FA257, and students without prior Python experience should take 1FA453.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga valbara kurser denna period:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective courses available this period:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Studenter med en preferens för experiment rekommenderas att välja mellan dessa kurser:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "RECOMMENDED",
+    "courseCodes": [],
+    "labelEn": "Students with a preference for experiments are recommended to choose between these courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Studenter med en preferens för teori rekommenderas att läsa dessa kurser:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "RECOMMENDED",
+    "courseCodes": [],
+    "labelEn": "Students with a preference for theory are recommended to take these courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Studenter som vill studera kärnfysik men inte har någon tidigare erfarenhet, bör ta:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "RECOMMENDED",
+    "courseCodes": [
+     "1FA002"
+    ],
+    "labelEn": "Students who want to study nuclear physics without prior experience are recommended to take the introductory physics course.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga valbara kurser denna period:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective courses available during this period."
+   }
+  },
+  {
+   "note": {
+    "textSv": "Studenter som vill studera partikelfysik men inte har någon tidigare erfarenhet, bör ta:",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "RECOMMENDED",
+    "courseCodes": [
+     "1FA347"
+    ],
+    "labelEn": "Students who want to study particle physics without previous experience should take Elementary Particle Physics.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga valbara kurser denna period:",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective courses available during this period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Studenter med en preferens för experiment rekommenderas att läsa dessa kurser:",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "RECOMMENDED",
+    "courseCodes": [],
+    "labelEn": "Students with a preference for experimental work are recommended to take these courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga valbara kurser denna period:",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective courses available during this period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1FA336 ges endast udda år.",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA336"
+    ],
+    "labelEn": "Course 1FA336 (Nuclear Astrophysics) is only offered in odd-numbered years.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1FA597"
+    ],
+    "labelEn": "Students pursuing a one-year master's degree (magisterexamen) choose 1FA597 as their degree project.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Se Termin 1.Studenter med en preferens för teori rekommenderas att läsa 1FA360 som ges under hela terminen.",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "RECOMMENDED",
+    "courseCodes": [
+     "1FA360"
+    ],
+    "labelEn": "Students with a preference for theory are recommended to take 1FA360, which is offered throughout the semester.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övrig valbar kurs i period 2:",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective course in period 2"
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective courses within the specialisation (any period).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Följande beteckningar används:G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Legend explaining the Swedish course level designations (G2F, A1N, A1F, A1E, A2E) used in the study plan.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

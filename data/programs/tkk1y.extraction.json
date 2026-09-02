@@ -1,0 +1,53 @@
+{
+ "edges": [
+  {
+   "code": "1EL008",
+   "text": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA014",
+   "text": "90 credits in Science/Engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA426",
+   "text": "60 credits in science/engineering. Participation in Reactor Physics, Nuclear Thermal Hydraulics and Steam Turbine Technology or Reactor Physics with nuclear thermohydraulics.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA421",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA422",
+      "type": "SOFT"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "1FA014 kan ersättas i examen av 1FA400, men båda kurserna kan inte samtidigt ingå i examen.1EL008 kan ej ingå i examen tillsammans med 1TE655.",
+    "semester": 1,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA014",
+     "1EL008"
+    ],
+    "labelEn": "1FA014 may be replaced in the degree by 1FA400 (but not both counted), and 1EL008 cannot be included in the degree together with 1TE655.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

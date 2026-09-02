@@ -1,0 +1,335 @@
+{
+  "id": "10039",
+  "code": "TKE2M",
+  "revisionId": "10039",
+  "nameSv": "Masterprogram i kemi",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1KB467",
+      "titleEn": "Current Trends in Chemistry",
+      "titleSv": "Aktuella trender i kemin",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB750",
+      "titleEn": "Spectroscopy",
+      "titleSv": "Spektroskopi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1N, Technology",
+      "mainFieldSv": "Kemi A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB445",
+      "titleEn": "Organic Chemistry III",
+      "titleSv": "Organisk kemi III",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including 15 credits in organic chemistry. Participation in NMR spectroscopy I (which can be taken in parallel to Organic chemistry III). In addition, basic knowledge and skills in laboratory safety, which will be tested via interview. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB469",
+      "titleEn": "NMR Spectroscopy I",
+      "titleSv": "NMR-spektroskopi I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including 15 credits organic chemistry or 15 credits physical chemistry, alternatively 20 credits of organic and physical chemistry together. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB470",
+      "titleEn": "NMR Spectroscopy II",
+      "titleSv": "NMR-spektroskopi II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 5 credits at Master's level. Participation in NMR Spectroscopy I or participation in Spectroscopic Methods for Organic Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB481",
+      "titleEn": "Coordination and Organometallic Chemistry",
+      "titleSv": "Koordinations- och metallorganisk kemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including 15 credits in organic chemistry. 5 credits at Master's level. Participation in Organic Chemistry III or Organic Reaction Principles. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB767",
+      "titleEn": "Physical Organic Chemistry",
+      "titleSv": "Fysikalisk-organisk kemi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including 10 credits in organic chemistry and 10 credits in physical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB481",
+      "titleEn": "Coordination and Organometallic Chemistry",
+      "titleSv": "Koordinations- och metallorganisk kemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including 15 credits in organic chemistry. 5 credits at Master's level. Participation in Organic Chemistry III or Organic Reaction Principles. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB484",
+      "titleEn": "Organic Chemistry IV: Advanced Synthesis",
+      "titleSv": "Organisk kemi IV – avancerad syntes",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in Chemistry, including 30 credits in Organic Chemistry of which 15 credits at Master's level. Organic Chemistry III or Organic Reaction Principles. Participation in Coordination and Organometallic Chemistry which can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB053",
+      "titleEn": "Degree Project E in Chemistry",
+      "titleSv": "Examensarbete E i kemi",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1KB053"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
+      "labelEn": "Only 30 of the 45 credits for the Degree Project E in Chemistry count in semester 4.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1KB469",
+      "to": "1KB470",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits with 5 credits at Master's level. Participation in NMR Spectroscopy I or participation in Spectroscopic Methods for Organic Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB445",
+      "to": "1KB481",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits with 60 credits in chemistry including 15 credits in organic chemistry. 5 credits at Master's level. Participation in Organic Chemistry III or Organic Reaction Principles. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB445",
+      "to": "1KB484",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 60 credits in Chemistry, including 30 credits in Organic Chemistry of which 15 credits at Master's level. Organic Chemistry III or Organic Reaction Principles. Participation in Coordination and Organometallic Chemistry which can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB481",
+      "to": "1KB484",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits with 60 credits in Chemistry, including 30 credits in Organic Chemistry of which 15 credits at Master's level. Organic Chemistry III or Organic Reaction Principles. Participation in Coordination and Organometallic Chemistry which can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10039",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3649",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3312",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2853",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2476",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2318",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2001",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1871",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1635",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1369",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1248",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1112",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "884",
+      "name": "Giltig från och med höstterminen 2015"
+    },
+    {
+      "id": "660",
+      "name": "Giltig från och med höstterminen 2014"
+    },
+    {
+      "id": "395",
+      "name": "Giltig från och med höstterminen 2013"
+    },
+    {
+      "id": "280",
+      "name": "Giltig från och med höstterminen 2012"
+    },
+    {
+      "id": "200",
+      "name": "Giltig från och med höstterminen 2011"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.197947+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10039",
+  "programmeTitle": "Masterprogram i kemi – Organisk kemi, 120 hp (TKE2M)",
+  "programmeUri": "/utbildning/program/masterprogram-kemi-organisk-kemi",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)"
+}

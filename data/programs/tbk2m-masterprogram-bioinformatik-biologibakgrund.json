@@ -1,0 +1,744 @@
+{
+  "id": "10006",
+  "code": "TBK2M",
+  "revisionId": "10006",
+  "nameSv": "Masterprogram i bioinformatik",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "5 november 2024",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1MB438",
+      "titleEn": "Introduction to Bioinformatics",
+      "titleSv": "Introduktion till bioinformatik",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TD433",
+      "titleEn": "Computer Programming I",
+      "titleSv": "Programmeringsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1N, Technology",
+      "mainFieldSv": "Datavetenskap G1N, Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D"
+    },
+    {
+      "code": "1MB465",
+      "titleEn": "Introduction to Statistics for Life Sciences",
+      "titleSv": "Introduktion till statistik för livsvetenskaper",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DL301",
+      "titleEn": "Database Design I",
+      "titleSv": "Databasteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Sociotechnical Systems G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, System i teknik och samhälle G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits of which 15 credits in mathematics or statistics. Participation in basic programming."
+    },
+    {
+      "code": "1TD047",
+      "titleEn": "Computational Methods for Scientific Applications",
+      "titleSv": "Beräkningsvetenskap för naturvetenskapliga tillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computational Science A1N, Computer Science",
+      "mainFieldSv": "Datavetenskap A1N, Tillämpad beräkningsvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB461",
+      "titleEn": "Molecular Evolution",
+      "titleSv": "Molekylär evolution",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics A1N, Technology",
+      "mainFieldSv": "Bioinformatik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB416",
+      "titleEn": "Knowledge-Based Systems in Bioinformatics",
+      "titleSv": "Kunskapsbaserade system inom bioinformatik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics A1N, Technology",
+      "mainFieldSv": "Bioinformatik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS325",
+      "titleEn": "Statistical Inference for Technological Applications",
+      "titleSv": "Statistisk slutledning för tekniska tillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics A1N, Industrial Engineering and Management A1N, Technology",
+      "mainFieldSv": "Bioinformatik A1N, Industriell teknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Option 1: 120 credits whereof 60 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Option 2: 120 credits whereof 60 credits in science/engineering. Participation in 25 credits in mathematics/statistics/scientific computing, of which 15 credits should be completed. The 25 credits should include statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FB034",
+      "titleEn": "Big Data in Life Sciences",
+      "titleSv": "Big data i biovetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics A1N, Computer Science A1N, Technology",
+      "mainFieldSv": "Bioinformatik A1N, Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB462",
+      "titleEn": "Genome Analysis",
+      "titleSv": "Genomanalys",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics A1F, Technology",
+      "mainFieldSv": "Bioinformatik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB515",
+      "titleEn": "Phylogenetic Analysis",
+      "titleSv": "Fylogenianalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics A1F, Technology",
+      "mainFieldSv": "Bioinformatik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credit and Molecular Evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MB517",
+      "titleEn": "Population Genomic Analysis",
+      "titleSv": "Populationsgenomisk analys",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics A1F, Biology",
+      "mainFieldSv": "Bioinformatik A1F, Biologi",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Completed courses worth 120 credits and participation in the course Genome Analysis, of which at least 5 credits must have been completed . English 6. (A Swedish Degree of Bachelor satisfies this requirement.)"
+    },
+    {
+      "code": "1KB162",
+      "titleEn": "Proteomics and Metabolomics",
+      "titleSv": "Proteomik och metabolomik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics A1N, Chemistry A1N, Technology",
+      "mainFieldSv": "Bioinformatik A1N, Kemi A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alt 1. 120 credits within the Master's Programme in Molecular Biotechnology Engineering, including Biotechnical Methodology, Genomics and Bioinformatics, and Scientific Computing for Data Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alt 2. 120 credits including Introduction to Bioinformatics, Computer Programming I, Introduction to Statistics for Life Sciences and Computational Methods for Scientific Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alt 3. 120 credits including Introduction to Bioinformatics, Introduction to Statistics for Life Sciences and Introduction to Molecular Biology, Genetics and Evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL011",
+      "titleEn": "Information Management Systems",
+      "titleSv": "Informationshanteringssystem",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including (1) Database Design I, 10 credits in programming, Genomics and Bioinformatics, or (2) Introduction to Bioinformatics, Computer Programming I, Computational Methods for Scientific Applications and Database Design I, or (3) 30 credits in mathematics and 30 credits in computer science including 5 credits in database design. Introduction to Bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MB519",
+      "titleEn": "Applied Bioinformatics",
+      "titleSv": "Tillämpad bioinformatik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics A1F, Technology",
+      "mainFieldSv": "Bioinformatik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alt 1. 210 credits within the Master's Programme in Molecular Biotechnology Engineering (300 credits) including 25 credits from completed profile courses: Proteomics and Metabolomics, Data Mining I, Statistical Inference for Bioinformatics or Statistical Inference for Technological Applications, Molecular Evolution, Information Management Systems, Big Data in Life Sciences, Genome Analysis, Knowledge-Based Systems in Bioinformatics, Automated Predictive Modelling. Alt 2. 30 credits in the Master's Programme in Bioinformatics (120 credits) including 25 credits of the following courses: Script Programming or Programming in Python or Computer Programming I, Statistical Inference for Bioinformatics or Statistical Inference for Technological Applications, Molecular Evolution, Information Management Systems, Big Data in Life Sciences, Genome Analysis, Knowledge-Based Systems in Bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MB745",
+      "titleEn": "Degree Project E in Bioinformatics",
+      "titleSv": "Examensarbete E i bioinformatik",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB830",
+      "titleEn": "Degree Project E in Bioinformatics",
+      "titleSv": "Examensarbete E i bioinformatik",
+      "credits": 30.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB745",
+      "titleEn": "Degree Project E in Bioinformatics",
+      "titleSv": "Examensarbete E i bioinformatik",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB782",
+      "titleEn": "Literature Project in Bioinformatics",
+      "titleSv": "Bibliografiskt projekt i bioinformatik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB783",
+      "titleEn": "Literature Project in Bioinformatics",
+      "titleSv": "Bibliografiskt projekt i bioinformatik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB840",
+      "titleEn": "Research Training in Bioinformatics",
+      "titleSv": "Forskningspraktik i bioinformatik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB841",
+      "titleEn": "Research Training in Bioinformatics",
+      "titleSv": "Forskningspraktik i bioinformatik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB842",
+      "titleEn": "Research Training in Bioinformatics",
+      "titleSv": "Forskningspraktik i bioinformatik",
+      "credits": 20.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 20.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MB720",
+      "titleEn": "Degree Project D in Bioinformatics",
+      "titleSv": "Examensarbete D i bioinformatik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A1E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TD389",
+      "titleEn": "Scientific Visualisation",
+      "titleSv": "Vetenskaplig visualisering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computational Science A1N, Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik A1N, Tillämpad beräkningsvetenskap",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Computer Programming I and Scientific Computing II. Scientific Computing II may be replaced by Numerical Methods and Simulation, 5 credits, Scientific Computing, Bridging Course, 5 credits, or Scientific Computing and Calculus, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL210",
+      "titleEn": "Algorithms and Data Structures I",
+      "titleSv": "Algoritmer och datastrukturer I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "10 credits in computer programming (Program Design, Programming Techniques II, or the equivalent) and 10 credits in mathematics, including basic algebra. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M)."
+    },
+    {
+      "code": "1TD396",
+      "titleEn": "Computer-Assisted Image Analysis I",
+      "titleSv": "Datoriserad bildanalys I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 30 credits in mathematics and 10 credits in computer science, including Scientific Computing I/Introduction to Scientific Computing and Computer Programming I, Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL340",
+      "titleEn": "Artificial Intelligence",
+      "titleSv": "Artificiell intelligens",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 15 credits in mathematics and 20 credits in computer science, including a second course in programming. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL360",
+      "titleEn": "Data Mining I",
+      "titleSv": "Informationsutvinning I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD722",
+      "titleEn": "Computer Programming II",
+      "titleSv": "Programmeringsteknik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Computer Programming I"
+    },
+    {
+      "code": "1DL231",
+      "titleEn": "Algorithms and Data Structures II",
+      "titleSv": "Algoritmer och datastrukturer II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits of which 15 credits in mathematics and 25 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology. Participation in Program Design and Data Structures of which 9 credits shall be completed, alternatively participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1RT700",
+      "titleEn": "Statistical Machine Learning",
+      "titleSv": "Statistisk maskininlärning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Image Analysis and Machine Learning A1N, Mathematics A1N, Technology",
+      "mainFieldSv": "Bildanalys och maskininlärning A1N, Dataanalys A1N, Datavetenskap A1N, Matematik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "--------------------------------------------------------------------------------TillvalskurserDessa kurser går i olika perioder och kan läsas under programmets gång som alternativ till andra kurser.",
+      "labelEn": "Elective courses offered in different periods can be taken as alternatives to other courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [
+        "1MB720"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "1MB720 är enbart för de studenter som ska ta ut en magisterexamen.",
+      "labelEn": "Course 1MB720 is only for students pursuing a master's degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Endast en av kurserna Forskningspraktik, 1MB803, 1MB804, 1MB805, 1MB840, 1MB841 och 1MB842, kan ingå i examen.Endast en av kurserna Bibliografiskt projekt i bioinformatik, 1MB782 och 1MB783, kan ingå i examen.Endast en av kurserna Projektarbete, 1MB820 och 1MB822, kan ingå i examen.",
+      "labelEn": null,
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "--------------------------------------------------------------------------------TillvalskurserDessa kurser går i olika perioder och kan läsas under programmets gång som alternativ till andra kurser.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "1MB720 är enbart för de studenter som ska ta ut en magisterexamen.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Endast en av kurserna Forskningspraktik, 1MB803, 1MB804, 1MB805, 1MB840, 1MB841 och 1MB842, kan ingå i examen.Endast en av kurserna Bibliografiskt projekt i bioinformatik, 1MB782 och 1MB783, kan ingå i examen.Endast en av kurserna Projektarbete, 1MB820 och 1MB822, kan ingå i examen.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1DL301",
+      "to": "1DL360",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MB461",
+      "to": "1MB515",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credit and Molecular Evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MB462",
+      "to": "1MB517",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Completed courses worth 120 credits and participation in the course Genome Analysis, of which at least 5 credits must have been completed . English 6. (A Swedish Degree of Bachelor satisfies this requirement.)"
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD389",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Computer Programming I and Scientific Computing II. Scientific Computing II may be replaced by Numerical Methods and Simulation, 5 credits, Scientific Computing, Bridging Course, 5 credits, or Scientific Computing and Calculus, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD396",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics and 10 credits in computer science, including Scientific Computing I/Introduction to Scientific Computing and Computer Programming I, Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD722",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Computer Programming I"
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10006",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3545",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3323",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3161",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;2"
+    },
+    {
+      "id": "2980",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;1"
+    },
+    {
+      "id": "2657",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2558",
+      "name": "Giltig från och med höstterminen 2021, version&nbsp;2"
+    },
+    {
+      "id": "2302",
+      "name": "Giltig från och med höstterminen 2021, version&nbsp;1"
+    },
+    {
+      "id": "2200",
+      "name": "Giltig från och med höstterminen 2020"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.140959+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10006",
+  "programmeTitle": "Masterprogram i bioinformatik – Biologibakgrund, 120 hp (TBK2M)",
+  "programmeUri": "/utbildning/program/masterprogram-bioinformatik-biologibakgrund",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Master's Programme in Bioinformatics – Computer Science Background, 120 credits (TBK2M)"
+}

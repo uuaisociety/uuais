@@ -1,0 +1,474 @@
+{
+  "id": "ee5ab186-39c3-4b79-a827-4b2f93496219",
+  "code": "TDA2M",
+  "revisionId": "ee5ab186-39c3-4b79-a827-4b2f93496219",
+  "nameSv": "Masterprogram i dataanalys",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025-139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1MD110",
+      "titleEn": "Introduction to Image Analysis",
+      "titleSv": "Introduktion till bildanalys",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Image Analysis and Machine Learning",
+      "mainFieldSv": "Bildanalys och maskininlärning",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 30 credits mathematics and 30 credits computer science. Basic programming, statistics and probability theory, linear algebra, and calculus. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL002",
+      "titleEn": "Data, Ethics and Law",
+      "titleSv": "Data, etik och rätt",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Data Science",
+      "mainFieldSv": "Dataanalys",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "140 credits including 75 credits in mathematics and computer science of which at least 15 credits in computer science. Alternatively 45hp in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MA330",
+      "titleEn": "Linear Algebra for Data Science",
+      "titleSv": "Linjär algebra för dataanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Data Science",
+      "mainFieldSv": "Dataanalys",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits. 20 credits in mathematics including at least 5 credits linear algebra and 5 credits single variable calculus. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1RT700",
+      "titleEn": "Statistical Machine Learning",
+      "titleSv": "Statistisk maskininlärning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Image Analysis and Machine Learning",
+      "mainFieldSv": "Bildanalys och maskininlärning",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL301",
+      "titleEn": "Database Design I",
+      "titleSv": "Databasteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits of which 15 credits in mathematics or statistics. Participation in basic programming."
+    },
+    {
+      "code": "1DL415",
+      "titleEn": "Visual Communication of Data",
+      "titleSv": "Visuell kommunikation av data",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Data Science",
+      "mainFieldSv": "Dataanalys",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MD016",
+      "titleEn": "Human-Computer Interaction",
+      "titleSv": "Människa-datorinteraktion",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1RT720",
+      "titleEn": "Deep Learning",
+      "titleSv": "Djupinlärning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Image Analysis and Machine Learning",
+      "mainFieldSv": "Bildanalys och maskininlärning",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits. Participation in Statistical Machine Learning and a second programming course. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD388",
+      "titleEn": "Computer Graphics",
+      "titleSv": "Datorgrafik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MD042",
+      "titleEn": "Advanced Deep Learning for Image Processing",
+      "titleSv": "Avancerad djupinlärning för bildbehandling",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Image Analysis and Machine Learning",
+      "mainFieldSv": "Bildanalys och maskininlärning",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits. Participation in Deep Learning and Neural Networks. Participation in on of the courses Introduction to Image Analysis and Computer-Assisted Image Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MD041",
+      "titleEn": "Digital Imaging Systems",
+      "titleSv": "Digitala bildalstrande system",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Image Analysis and Machine Learning",
+      "mainFieldSv": "Bildanalys och maskininlärning",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits. Participation in either Introduction to Image Analysis or Computer-Assisted Image Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1RT745",
+      "titleEn": "Reinforcement Learning",
+      "titleSv": "Förstärkningsinlärning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Embedded Systems",
+      "mainFieldSv": "Inbyggda system",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, a second programming course. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MD043",
+      "titleEn": "Human-Robot Interaction",
+      "titleSv": "Människa-robotinteraktion",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Image Analysis and Machine Learning",
+      "mainFieldSv": "Bildanalys och maskininlärning",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 45 credits in computer science, data science, information systems, applied computational science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL390",
+      "titleEn": "Degree Project D in Data Science",
+      "titleSv": "Examensarbete D i dataanalys",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Data Science",
+      "mainFieldSv": "Dataanalys",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A bachelor's degree and, in addition at least 15 credits in data science at master's level, including Data, Ethics and Law and the necessary courses at master's level for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1MD110",
+        "1DL002",
+        "1MA330",
+        "1RT700",
+        "1DL301"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1MD110, 1DL002, 1MA330, 1RT700, 1DL301",
+      "labelEn": "Choose one of 5 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-1",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1DL415",
+        "1MD016"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1DL415, 1MD016",
+      "labelEn": "Choose one of 2 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-2",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1RT720",
+        "1TD388",
+        "1MD042",
+        "1MD041"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1RT720, 1TD388, 1MD042, 1MD041",
+      "labelEn": "Choose one of 4 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-3",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1RT745",
+        "1MD041",
+        "1MD043",
+        "1DL390"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1RT745, 1MD041, 1MD043, 1DL390",
+      "labelEn": "Choose one of 4 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Period 1Projekt i dataanalys, 10 av 15 hp (1DL507)Valbara kurser:Avancerad probabilistisk maskininlärning, 5 hp (1RT705)Stora språkmodeller och sociala konsekvenser av artificiell intelligens, 5 hp (1RT730)Period 2Projekt i dataanalys, 5 av 15 hp (1DL507)Forskningsmetodik för bildanalys och maskininlärning, 5 hp (1MD048)Samtida metoder inom visuell databehandling, 5 hp (1MD049)Valbara kurser:Intelligenta interaktiva system, 5 hp (1MD032)",
+      "labelEn": "Semester 3 consists of the Project in Data Analysis course (1DL507) spread over both periods, with elective courses listed for each period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Examensarbete E i dataanalys, 30 hp (1DL510)",
+      "labelEn": "The note lists Degree Project E in Data Analysis (1DL510), a course code not present in the roster.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "En av kurserna ska väljas: 1MD110, 1DL002, 1MA330, 1RT700, 1DL301",
+      "semester": 1,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1MD110",
+        "1DL002",
+        "1MA330",
+        "1RT700",
+        "1DL301"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1DL415, 1MD016",
+      "semester": 1,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1DL415",
+        "1MD016"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1RT720, 1TD388, 1MD042, 1MD041",
+      "semester": 2,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1RT720",
+        "1TD388",
+        "1MD042",
+        "1MD041"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1RT745, 1MD041, 1MD043, 1DL390",
+      "semester": 2,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1RT745",
+        "1MD041",
+        "1MD043",
+        "1DL390"
+      ]
+    },
+    {
+      "textSv": "Period 1Projekt i dataanalys, 10 av 15 hp (1DL507)Valbara kurser:Avancerad probabilistisk maskininlärning, 5 hp (1RT705)Stora språkmodeller och sociala konsekvenser av artificiell intelligens, 5 hp (1RT730)Period 2Projekt i dataanalys, 5 av 15 hp (1DL507)Forskningsmetodik för bildanalys och maskininlärning, 5 hp (1MD048)Samtida metoder inom visuell databehandling, 5 hp (1MD049)Valbara kurser:Intelligenta interaktiva system, 5 hp (1MD032)",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Examensarbete E i dataanalys, 30 hp (1DL510)",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [
+    {
+      "from": "1DL002",
+      "to": "1DL390",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A bachelor's degree and, in addition at least 15 credits in data science at master's level, including Data, Ethics and Law and the necessary courses at master's level for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MD110",
+      "to": "1MD041",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits. Participation in either Introduction to Image Analysis or Computer-Assisted Image Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MD110",
+      "to": "1MD042",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits. Participation in Deep Learning and Neural Networks. Participation in on of the courses Introduction to Image Analysis and Computer-Assisted Image Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1RT700",
+      "to": "1RT720",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits. Participation in Statistical Machine Learning and a second programming course. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "ee5ab186-39c3-4b79-a827-4b2f93496219",
+      "name": "Giltig från och med höstterminen 2026"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.143909+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=ee5ab186-39c3-4b79-a827-4b2f93496219",
+  "programmeTitle": "Masterprogram i dataanalys – Bildanalys och maskininlärning, 120 hp (TDA2M)",
+  "programmeUri": "/utbildning/program/masterprogram-dataanalys-bildanalys-och-maskininlarning",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Master's Programme in Data Science – Machine Learning and Statistics, 120 credits (TDA2M)"
+}

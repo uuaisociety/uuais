@@ -1,0 +1,290 @@
+{
+ "edges": [
+  {
+   "code": "1EL104",
+   "text": "60 credits in science/engineering. Power Electronics should have been attended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE300",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA014",
+   "text": "90 credits in Science/Engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers.",
+   "result": null
+  },
+  {
+   "code": "1FA022",
+   "text": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers. Introduction to Nuclear Engineering. Participation in Introduction to Nuclear Engineering, or studied simultaneously.",
+   "result": null
+  },
+  {
+   "code": "1FA426",
+   "text": "60 credits in science/engineering. Participation in Reactor Physics, Nuclear Thermal Hydraulics and Steam Turbine Technology or Reactor Physics with nuclear thermohydraulics.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA022",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA017",
+   "text": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry.",
+   "result": null
+  },
+  {
+   "code": "1MA034",
+   "text": "5 credits in mathematics. Participation in Single Variable Calculus, Calculus II for Engineers or Calculus in One Variable. Participation in Linear Algebra I, Algebra and Geometry, Linear Algebra for Engineers or Algebra and Vector Geometry.",
+   "result": null
+  },
+  {
+   "code": "1TD342",
+   "text": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD433",
+   "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE300",
+   "text": "60 credits in science/engineering including Basics of Electrical Engineering II: Electric Circuit, Single Variable Calculus and Transform Methods.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE667",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA034",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE686",
+   "text": "60 credits from an engineering programme.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE743",
+   "text": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes.",
+   "result": null
+  },
+  {
+   "code": "1TE767",
+   "text": "60 credits, including Introduction to Scientific Computing. Participation in Transform Methods.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD342",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA034",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE770",
+   "text": "30 credits in science/engineering including Electrical Engineering II: Electric Circuit Theory as well as Calculus for Engineers/Single Variable Calculus.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE667",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA353",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE771",
+   "text": "Participation in Analog electronics.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE770",
+      "type": "SOFT"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1TE686, 1TE744",
+    "semester": 4,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1TE686",
+     "1TE744"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1TE686",
+     "1TE744"
+    ],
+    "labelEn": "One of the courses 1TE686 or 1TE744 must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TE661 Signaler och system är obligatorisk inom examenskravet men ges inte läsåret 2026/2027 eftersom den byter årskurs. En av kurserna 1TE744 och 1TE686 är obligatorisk inom examenskravet.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1TE661",
+     "1TE744",
+     "1TE686"
+    ],
+    "labelEn": "1TE661 not offered in 2026/2027; one of 1TE744 or 1TE686 is required",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1TE300, 1TE058, 1MA017, 1EL104, 1TE303",
+    "semester": 5,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1TE300",
+     "1TE058",
+     "1MA017",
+     "1EL104",
+     "1TE303"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1TE300",
+     "1TE058",
+     "1MA017",
+     "1EL104",
+     "1TE303"
+    ],
+    "labelEn": "One of the listed courses must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1FA014, 1FA022, 1FA426",
+    "semester": 5,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1FA014",
+     "1FA022",
+     "1FA426"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1FA014",
+     "1FA022",
+     "1FA426"
+    ],
+    "labelEn": "One of the courses must be chosen: 1FA014, 1FA022, 1FA426",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TE661 Signaler och system är obligatorisk inom examenskravet men ges inte läsåret 2026/2027 eftersom den byter årskurs. Samtliga valbara kurser i årskurs 3 (termin 5 och 6) sökes i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval.1TE058 kan läsas i period 3 istället.",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TE661",
+     "1TE058"
+    ],
+    "labelEn": "1TE661 not offered in 2026/2027; 1TE058 available in period 3.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1TE670, 1FA326, 1TE615, 1TE616, 1FA329, 1MA017",
+    "semester": 6,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1TE670",
+     "1FA326",
+     "1TE615",
+     "1TE616",
+     "1FA329",
+     "1MA017"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1TE670",
+     "1FA326",
+     "1TE615",
+     "1TE616",
+     "1FA329",
+     "1MA017"
+    ],
+    "labelEn": "One of these courses must be chosen",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Samtliga valbara kurser i årskurs 3 (termin 5 och 6) sökes i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval.",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "All elective courses in year 3 are subject to competition with students from other programs, so first choice cannot be guaranteed.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

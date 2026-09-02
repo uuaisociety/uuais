@@ -1,0 +1,268 @@
+{
+ "edges": [
+  {
+   "code": "1GE100",
+   "text": "30 credits in earth science, science/engineering or geography.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE143",
+   "text": "Earth Science - Planet Earth, 30 credits, or the equivalent.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV004",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV004",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV007",
+   "text": "60 credits in earth science including Introduction to Mineralogy and Petrology, 10 credits, and Sedimentology, Stratigraphy and Palaeobiology, 10 credits.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MP044",
+      "type": "HARD"
+     },
+     {
+      "from": "1GV206",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV029",
+   "text": "75 credits in earth science with progressive specialisation",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV064",
+   "text": "Earth Science - Planet Earth, 30 credits, or the equivalent and participation in 10 credits in mathematics.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV004",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV177",
+   "text": "General entry requirements and Biology 2, Physics 1a/1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D. These prerequisites may be replaced by Bioscience, 30 credits, and Earth Science - Planet Earth, 30 credits. Mathematics, 10 credits, is recommended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV004",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV191",
+   "text": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Hydrology and Water Resource Management, 10 credits and Landscape Development, 10 credits, are recommended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV206",
+      "type": "HARD"
+     },
+     {
+      "from": "1HY141",
+      "type": "SOFT"
+     },
+     {
+      "from": "1GE143",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV192",
+   "text": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits and Structural Geology and Ground Stability, 10 credits.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV206",
+      "type": "HARD"
+     },
+     {
+      "from": "1GV007",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV205",
+   "text": "60 credits Earth Science. Participation in Mineralogy and Petrology, 10 credits. 10 credits in mathematics and 10 credits in GIS are recommended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MP044",
+      "type": "SOFT"
+     },
+     {
+      "from": "1GE100",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV206",
+   "text": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4 or Bioscience 30 credits. At least 22 credits from Earth Science - Planet Earth, including The Earth as a Planet (5+3 credits) and all practical components.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV004",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV207",
+   "text": "60 credits earth science. Participations in Mineralogy and Petrology 10 credits. 10 credits in GIS are recommended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MP044",
+      "type": "SOFT"
+     },
+     {
+      "from": "1GE100",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1HY141",
+   "text": "60 credits in earth science or 90 credits within the Bachelor's Programme in Construction Engineering",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA013",
+   "text": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA348",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA348",
+   "text": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP044",
+   "text": "60 credits in Earth Science, including Earth Science - Planet Earth, 30 credits and Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Chemistry is recommended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV004",
+      "type": "HARD"
+     },
+     {
+      "from": "1GV206",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1PA046",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Annat biområde än kemi kan väljas.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1KB013",
+     "1KB200",
+     "1KB208"
+    ],
+    "labelEn": "A minor subject area other than chemistry may be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "alternativt",
+    "semester": 6,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The note simply reads \"alternatively\", indicating an alternative option without specifying any courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "alternativt",
+    "semester": 6,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Alternatives are permitted (unspecified), as noted in the study plan.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga kurser sommartid/terminstid",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other courses may be taken during the summer or during the semester.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

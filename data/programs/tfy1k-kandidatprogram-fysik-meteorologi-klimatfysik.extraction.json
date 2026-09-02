@@ -1,0 +1,282 @@
+{
+ "edges": [
+  {
+   "code": "1FA103",
+   "text": "Participation in Geometry and Calculus II/Several Variable Calculus/Several Variable Calculus, Limited Version/Several Variable Calculus M/Calculus in Several Variables. Participation in Linear Algebra II and Mechanics II/Applied Mechanics I/Mechanics/Mechanics KF.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA188",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA602",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA121",
+   "text": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis.",
+   "result": null
+  },
+  {
+   "code": "1FA204",
+   "text": "30 credits in mathematics and 30 credits in physics.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA218",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA318",
+   "text": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA521",
+   "text": "60 credits including Mechanics II/KF. Participation in Transform Methods/Fourier Analysis, Electromagnetism I/Electromagnetism, Waves and Optics and Mathematical Methods of Physics that can be taken in parallel. Knowledge in special relativity (from e.g. Mechanics III, which can be taken in parallel, or Astrophysics I).",
+   "result": null
+  },
+  {
+   "code": "1FA603",
+   "text": "30 credits. Participation in Geometry and Calculus II/Several Variable Calculus M (curve and surface integrals) and Mechanics KF/Mechanics (force, energy, particle in motion) and at least 3 credits from Computer Programming 1.",
+   "result": null
+  },
+  {
+   "code": "1GE060",
+   "text": "General entry requirements and Physics level 2, Mathematics Further level 2, or Physics 2, Mathematics 4/Mathematics E",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA024",
+   "text": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA032",
+   "text": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course.",
+   "result": null
+  },
+  {
+   "code": "1MA211",
+   "text": "15 credits in mathematics. Participation in Several Variable Calculus, Several Variable Calculus M or Geometry and Analysis III. Participation in Linear Algebra II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA212",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA212",
+   "text": "3 credits mathematics. Participation in Geometry and Calculus II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA188",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1ME038",
+   "text": "120 credits including 35 credits in mathematics and 35 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME052",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME400",
+   "text": "60 credits in science/engineering including Geometry and Calculus II, 10 credits. Participation in Thermodynamics 5 credits.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA188",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA517",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1ME418",
+   "text": "60 credits in science/engineering including The Physics of Waves with Optics.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA522",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1ME419",
+   "text": "60 credits in science/engineering. Participation in Atmospheric Radiation, 5 credits.",
+   "result": {
+    "edges": [
+     {
+      "from": "1ME418",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1ME420",
+   "text": "60 credits in physics including 5 credits in thermodynamics,10 credits in quantum physics and 10 credits in meteorology. Admission requires a project plan accepted by the department.",
+   "result": null
+  },
+  {
+   "code": "1ME428",
+   "text": "120 credits including 35 credits in mathematics and 35 credits in physics. Participation in the course Atmospheric and Climate Physics 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1ME400",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1ME429",
+   "text": "60 credits in science/engineering. Participation in Atmospheric and Climate Physics, 15 credits.",
+   "result": {
+    "edges": [
+     {
+      "from": "1ME400",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD342",
+   "text": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers.",
+   "result": {
+    "from": "1TD433",
+    "type": "SOFT"
+   }
+  },
+  {
+   "code": "1TD352",
+   "text": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in Linear Algebra II/Linear Algebra for Data Analysis/Geometry and Calculus II.",
+   "result": null
+  },
+  {
+   "code": "1TD433",
+   "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "eller",
+    "semester": 4,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [],
+    "labelEn": "Or (choice between courses)",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "eller",
+    "semester": 4,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [],
+    "labelEn": "Alternative courses (or)",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga kurser:Period 1 och 2",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other courses in periods 1 and 2",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Period 4",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Indicates the fourth period of the semester.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valfri period",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective period",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

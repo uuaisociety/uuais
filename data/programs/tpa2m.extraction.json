@@ -1,0 +1,113 @@
+{
+ "edges": [
+  {
+   "code": "1BG397",
+   "text": "Completed courses worth 150 credits including (1) 60 credits in biology and 30 credits in chemistry or 30 credits in earth sciences, or (2) 90 credits in biology, or (3) 60 credits in earth sciences and participation in the course Principles of Palaeobiology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1PA041",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV025",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV085",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1PA002",
+   "text": "120 credits with 90 credits in earth science or biology. Principles of Palaeobiology, 15 credits, is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1PA041",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1PA041",
+   "text": "120 credits with 90 credits in earth science or biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1PA042",
+   "text": "120 credits including 90 credits in earth science or biology. Principles of Palaeobiology, 15 credits, Origin and Early Evolution of Life, 15 credits, or Evolution and development, 15 credits, is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1PA041",
+      "type": "SOFT"
+     },
+     {
+      "from": "1PA002",
+      "type": "SOFT"
+     },
+     {
+      "from": "1BG397",
+      "type": "SOFT"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Under termin 1 läses följande kurser vid Université de Lille, Frankrike:Learning and Evaluation Situation, collaborative projects, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Biostratigraphy, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Introductory Micropalaeontology, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Geobiology, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Carbonate Facies Analysis, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Quantitative Palaeontology, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Phylogenetics, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Geobiosphere Interactions in Deep Time, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Statistics Initiation with R, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Project (Design) Management, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N",
+    "semester": 1,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "In semester 1, students take a set of 3-credit courses (Biostratigraphy, Introductory Micropalaeontology, Geobiology, Carbonate Facies Analysis, Quantitative Palaeontology, Phylogenetics, Geobiosphere Interactions in Deep Time, Statistics Initiation with R, Project Management, and a collaborative project) at Université de Lille in France within the main field of Earth Science.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Uppsala universitet",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Courses in semester 2 are taken at Uppsala University.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Examensarbeteskursen kan alternativt läsas vid: Université de Lille, Frankrike (Learning and Evaluation Situation, Bibliographic project & internship, 30 ECTS)Eller vid de andra partneruniversiteten: University of Minho (Dissertation/Project, 30 ECTS) National and Kapodistrian University of Athens (Postgraduate dissertation in climatic variations and impact on the environment, 30 ECTS) Huvudområde(n) med fördjupning: Geovetenskap A2E för samtliga examensarbeten.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The degree project may alternatively be completed at a partner university (Lille, Minho, or Athens) for 30 ECTS, with main field Earth Science A2E.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

@@ -1,0 +1,3096 @@
+{
+  "id": "f39d9938-4ed2-43b0-9c80-507764827e7f",
+  "code": "TKT2Y",
+  "revisionId": "f39d9938-4ed2-43b0-9c80-507764827e7f",
+  "nameSv": "Civilingenjörsprogrammet i kemiteknik",
+  "totalCredits": 300.0,
+  "semesters": 10,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "5 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1KB016",
+      "titleEn": "General Chemistry",
+      "titleSv": "Allmän kemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements and Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 2, or Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D"
+    },
+    {
+      "code": "1MA010",
+      "titleEn": "Basic Course in Mathematics",
+      "titleSv": "Baskurs i matematik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB410",
+      "titleEn": "Organic Chemistry I",
+      "titleSv": "Organisk kemi I",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA350",
+      "titleEn": "Linear Algebra I",
+      "titleSv": "Linjär algebra I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Basic Course in Mathematics or Basic Algebra."
+    },
+    {
+      "code": "1TD433",
+      "titleEn": "Computer Programming I",
+      "titleSv": "Programmeringsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D"
+    },
+    {
+      "code": "1KB408",
+      "titleEn": "Biochemistry I",
+      "titleSv": "Biokemi I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Biology",
+      "mainFieldSv": "Biologi",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA013",
+      "titleEn": "Single Variable Calculus",
+      "titleSv": "Envariabelanalys",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses."
+    },
+    {
+      "code": "1KB208",
+      "titleEn": "Inorganic Chemistry I",
+      "titleSv": "Oorganisk kemi I",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MS005",
+      "titleEn": "Probability and Statistics",
+      "titleSv": "Sannolikhet och statistik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "code": "1MA016",
+      "titleEn": "Several Variable Calculus",
+      "titleSv": "Flervariabelanalys",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Single Variable Calculus or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry."
+    },
+    {
+      "code": "1KB103",
+      "titleEn": "Analytical Chemistry with Data Analysis and Chemometrics",
+      "titleSv": "Analytisk kemi med mätvärdesbehandling och kemometri",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits Chemistry including 5 credits from any of the courses Chemical Principles 10 credits, Basic Chemistry 10 credits, General Chemistry, or The Basic Principles of Chemistry, as well as participation in other Chemistry courses for 15 cr."
+    },
+    {
+      "code": "1TD342",
+      "titleEn": "Introduction to Scientific Computing",
+      "titleSv": "Introduktion till beräkningsvetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "code": "1KB308",
+      "titleEn": "Physical Chemistry",
+      "titleSv": "Fysikalisk kemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA104",
+      "titleEn": "Mechanics",
+      "titleSv": "Mekanik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB501",
+      "titleEn": "Quantum Mechanics and Chemical Bonding I",
+      "titleSv": "Kvantmekanik och kemisk bindning I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB300",
+      "titleEn": "Chemical Thermodynamics",
+      "titleSv": "Kemisk termodynamik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB203",
+      "titleEn": "Polymer Chemistry",
+      "titleSv": "Polymerkemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB211",
+      "titleEn": "Solid State Chemistry",
+      "titleSv": "Fasta tillståndets kemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering including Inorganic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or Basic Materials Chemistry, 5 credits."
+    },
+    {
+      "code": "1KB502",
+      "titleEn": "Quantum Mechanics and Chemical Bonding II",
+      "titleSv": "Kvantmekanik och kemisk bindning II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Quantum Mechanics and Chemical Bonding I or Theoretical Chemistry 10 credits."
+    },
+    {
+      "code": "1KB210",
+      "titleEn": "Materials Chemistry",
+      "titleSv": "Materialkemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering. Participation in Solid State Chemistry or the course can be taken in parallel."
+    },
+    {
+      "code": "1KB772",
+      "titleEn": "Chemical Engineering and Process Technology",
+      "titleSv": "Kemisk apparat- och processteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB240",
+      "titleEn": "Sustainable Materials Development",
+      "titleSv": "Hållbar materialutveckling",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB444",
+      "titleEn": "Preparative Organic Chemistry",
+      "titleSv": "Preparativ organisk kemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering including 10 credits organic chemistry."
+    },
+    {
+      "code": "3FF218",
+      "titleEn": "Physiology and Molecular Cell Biology",
+      "titleSv": "Fysiologi och molekylär cellbiologi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Biochemistry I"
+    },
+    {
+      "code": "1KB428",
+      "titleEn": "Biochemical Technology",
+      "titleSv": "Biokemisk teknik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM143",
+      "titleEn": "Engineering Materials",
+      "titleSv": "Tekniska material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM144",
+      "titleEn": "Surface Characterisation",
+      "titleSv": "Ytavbildning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB204",
+      "titleEn": "Electrochemistry",
+      "titleSv": "Elektrokemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM001",
+      "titleEn": "Independent Project in Chemical Engineering",
+      "titleSv": "Självständigt arbete i kemiteknik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FF219",
+      "titleEn": "Pharmacology for Engineering Students",
+      "titleSv": "Farmakologi för civilingenjörsstudenter",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FK150",
+      "titleEn": "Medicinal Chemistry",
+      "titleSv": "Läkemedelskemi",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Chemistry",
+      "mainFieldSv": "Farmaceutisk kemi",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM146",
+      "titleEn": "Surface and Materials Analysis",
+      "titleSv": "Yt- och materialanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. At least 3 credits from Materials Chemistry or at least 2 credits from Introduction to Materials Engineering. Surface Characterisation must have been taken. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB260",
+      "titleEn": "Physics and Chemistry of Surfaces",
+      "titleSv": "Ytors fysik och kemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM006",
+      "titleEn": "Surface Engineering and Materials Selection for Function and Design",
+      "titleSv": "Ytteknik och materialval för funktion och design",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "130 credits in science/engineering. Engineering Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB281",
+      "titleEn": "Materials and Manufacturing Processes I",
+      "titleSv": "Materialtillverkning I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. Materials Chemistry 10 credits, and participation in Physics and Chemistry of Surfaces, and Engineering Materials, and Surface Engineering and Materials Selection for Function and Design. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TG300",
+      "titleEn": "Solid State Physics I",
+      "titleSv": "Fasta tillståndets fysik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits within Science/Technology. Participation in Quantum Mechanics and Chemical Bonding II and either Thermodynamics, Chemical Thermodynamics or Principles of Thermodynamics."
+    },
+    {
+      "code": "1TE015",
+      "titleEn": "Micro- and Nanotechnology I",
+      "titleSv": "Mikro- och nanoteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Quantum Technology",
+      "mainFieldSv": "Kvantteknologi",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. One of these alternatives: 1) Solid state physics F and attended course in Semiconductor Electronics, 2) Materials chemistry and attended course in Solid state physics I, 3) Introduction to materials engineering or Introduction to material science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE016",
+      "titleEn": "Thin Film Technology I",
+      "titleSv": "Tunnfilmsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1F",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "130 credits in science/engineering. Either materials chemistry and attended course in Surface physics and chemistry or Surface physics. Attended course in surface characterisation or Surface and materials analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FG202",
+      "titleEn": "Pharmaceutics",
+      "titleSv": "Galenisk farmaci",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "G2F",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB465",
+      "titleEn": "Spectroscopic Methods for Organic Chemistry",
+      "titleSv": "Organisk-kemisk spektroskopi",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including Organic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB479",
+      "titleEn": "Organic Reaction Principles",
+      "titleSv": "Organiska reaktioners principer",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FF216",
+      "titleEn": "Pharmacokinetics",
+      "titleSv": "Farmakokinetik",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "G2F",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in biomedicine, pharmaceutical science, natural sciences and/or engineering. Prior studies must include 15 credits general and organic chemistry, 6 credits physiology and 7.5 credits pharmacology."
+    },
+    {
+      "code": "1KB286",
+      "titleEn": "Materials Synthesis",
+      "titleSv": "Materialsyntes",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE018",
+      "titleEn": "Micro- and Nanotechnology II",
+      "titleSv": "Mikro- och nanoteknik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering",
+      "mainFieldSv": "Materialteknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "130 credits in science/engineering. Micro- and Nanotechnology I should have been attended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE741",
+      "titleEn": "Thin Film Technology II",
+      "titleSv": "Tunnfilmsteknik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering",
+      "mainFieldSv": "Materialteknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB263",
+      "titleEn": "Biomaterials I",
+      "titleSv": "Biomaterial I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including 20 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE022",
+      "titleEn": "Tribological Materials",
+      "titleSv": "Tribomaterial",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM034",
+      "titleEn": "Bio-MEMS and Organs-on-Chip",
+      "titleSv": "Bio-MEMS och organs-on-chip",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering",
+      "mainFieldSv": "Materialteknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. Micro- and Nanotechnology I must have been taken. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB729",
+      "titleEn": "Synthesis of Battery Materials",
+      "titleSv": "Syntes av batterimaterial",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Battery Technology",
+      "mainFieldSv": "Batteriteknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including 30 credits in chemistry and/or chemical engineering. Either (1) Participation in both Introduction to Energy Storage and Materials Chemistry for Batteries or (2) Materials Chemistry 10 credits and participation in Materials and Manufacturing Processes I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB728",
+      "titleEn": "Electrochemistry for Batteries II",
+      "titleSv": "Elektrokemi för batterier II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM009",
+      "titleEn": "Additive Manufacturing",
+      "titleSv": "Additiv tillverkning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM105",
+      "titleEn": "Additive Manufacturing in Polymeric Materials",
+      "titleSv": "Additiv tillverkning i polymera material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering",
+      "mainFieldSv": "Materialteknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering including either (1) Polymer Technology, (2) Polymer materials or (3) Polymer Chemistry and Engineering Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM002",
+      "titleEn": "Magnetic Materials",
+      "titleSv": "Magnetiska material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM003",
+      "titleEn": "Optical Materials",
+      "titleSv": "Optiska material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB264",
+      "titleEn": "Biomaterials II",
+      "titleSv": "Biomaterial II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits and participation in Biomaterials I, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE024",
+      "titleEn": "Materials in Energy Systems I",
+      "titleSv": "Material i energisystem I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB311",
+      "titleEn": "Soft Materials and Colloidal Systems",
+      "titleSv": "Mjuka ytor och kolloidala system",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 30 credits in chemistry. 5 credits physical chemistry or Materials chemistry, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE698",
+      "titleEn": "Nanotechnology for Industrial Applications in Life Science",
+      "titleSv": "Nanoteknik för industriella tillämpningar inom life science",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering",
+      "mainFieldSv": "Materialteknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB566",
+      "titleEn": "Electronic and Atomistic Simulation Methods for Materials",
+      "titleSv": "Elektroniska och atomistiska simuleringsmetoder för material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 100 credits in science/engineering including 15 credits in mathematics and 75 credits in physics, chemistry, materials science and/or materials engineering, and one of the following: 1) Quantum Mechanics and Chemical Bonding I and any of the courses Solid State Physics, 5 credits, and Solid State Chemistry, 5 credits; 2) 30 credits in materials science; 3) Participation in Introduction to Energy storage and Materials for Batteries. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB271",
+      "titleEn": "Advanced Electrochemistry",
+      "titleSv": "Avancerad elektrokemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 90 credits in chemistry and physics, with at least 60 credits in chemistry. 5 credits electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB738",
+      "titleEn": "Rechargeable Batteries",
+      "titleSv": "Återuppladdningsbara batterier",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Battery Technology",
+      "mainFieldSv": "Batteriteknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "At least 120 credits within science and/or engineering. Participation in Electrochemistry for batteries II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM106",
+      "titleEn": "Additive Manufacturing in Metallic and Ceramic Materials",
+      "titleSv": "Additiv tillverkning i metalliska och keramiska material",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering",
+      "mainFieldSv": "Materialteknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FF036",
+      "titleEn": "Artificial Intelligence in Drug Discovery",
+      "titleSv": "Artificiell intelligens inom läkemedelsutveckling",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits including knowledge corresponding to at least 60 credits in the subjects chemistry, biology, biochemistry, pharmaceutical science or medicine. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FF275",
+      "titleEn": "Pharmaceutical Bioinformatics",
+      "titleSv": "Farmaceutisk bioinformatik",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical science, chemistry, pharmaceutical development, natural science and/or engineering."
+    },
+    {
+      "code": "3FF209",
+      "titleEn": "Applied Pharmaceutical Structural Bioinformatics",
+      "titleSv": "Tillämpad farmaceutisk strukturbioinformatik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits in chemistry, biology, biochemistry, pharmacy, medicine or dentistry; or other equivalent education under special review."
+    },
+    {
+      "code": "3FF276",
+      "titleEn": "Pharmaceutical Bioinformatics with Sequence Analysis",
+      "titleSv": "Farmaceutisk bioinformatik med sekvensanalys",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical science, chemistry, drug discovery, natural science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FK219",
+      "titleEn": "Computational Medicinal Chemistry",
+      "titleSv": "Läkemedelskemi med datorbaserad läkemedelsdesign",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FK229",
+      "titleEn": "Drug Discovery and Development",
+      "titleSv": "Läkemedelsutveckling",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits of which 90 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in chemistry and 7.5 credits in pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FB207",
+      "titleEn": "Models for Biological Systems",
+      "titleSv": "Modeller för biologiska system",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits in biomedicine, pharmaceutical science, drug development, natural science and/or technology. Previous studies must contain 5 credits of statistics or probability theory. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FN209",
+      "titleEn": "Drug Discovery Based on Natural Products",
+      "titleSv": "Biologiskt aktiva naturprodukter i läkemedelsutveckling",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 60 credits in chemistry or biology and advanced courses (at level G2F/C or above) in pharmaceutical sciences worth at least 22.5 credits or Pharmacognosy B (15 credits). Alternatively, from the Master of Science Programme in Pharmacy: 150 credits in the programme including a course in pharmacognosy; or from the Master's Programme in Chemical Engineering: 150 credits in the programme including courses in analytical chemistry (10 credits), pharmacology (7.5 credits) and medicinal chemistry (7.5 credits); or admission to the Master's Programme in Drug Discovery and Development. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FG288",
+      "titleEn": "Molecular Biopharmaceutics",
+      "titleSv": "Molekylär biofarmaci",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical sciences and/or natural sciences/engineering. Previous studies must include 3 credits of pharmaceutics and pharmacokinetics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FB028",
+      "titleEn": "Biologicals I",
+      "titleSv": "Biologiska läkemedel I",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 90 credits in biomedicine, pharmaceutical science, chemistry, natural science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB429",
+      "titleEn": "Development of Biologicals",
+      "titleSv": "Utveckling av biologiska läkemedel",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB470",
+      "titleEn": "NMR Spectroscopy II",
+      "titleSv": "NMR-spektroskopi II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 5 credits at Master's level. Participation in NMR Spectroscopy I or participation in Spectroscopic Methods for Organic Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB481",
+      "titleEn": "Coordination and Organometallic Chemistry",
+      "titleSv": "Koordinations- och metallorganisk kemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including 15 credits in organic chemistry. 5 credits at Master's level. Participation in Organic Chemistry III or Organic Reaction Principles. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FK281",
+      "titleEn": "Advanced Molecular Modelling Applied to Drug Discovery",
+      "titleSv": "Avancerad molekylmodellering med inriktning mot läkemedelsdesign",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Participation in the course Computational Medicinal Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FG005",
+      "titleEn": "Computational Pharmaceutics",
+      "titleSv": "Datorbaserad farmaceutisk modellering",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical sciences, drug development and/or natural sciences/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FF208",
+      "titleEn": "Applied Pharmaceutical Bioinformatics",
+      "titleSv": "Tillämpad farmaceutisk bioinformatik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical science, chemistry, pharmaceutical development, natural science and/or technology and 4 credits in Bioinformatics."
+    },
+    {
+      "code": "3FB030",
+      "titleEn": "Clinical Trial Methodology",
+      "titleSv": "Klinisk prövningsmetodik",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits of which 120 credits biomedicine, biology, pharmaceutical sciences, chemistry and/or science/technology. Earlier studies should contain 7.5 credits pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FG240",
+      "titleEn": "Regulatory Requirements and Quality Assurance in Development and Manufacturing of Pharmaceutical Products",
+      "titleSv": "Läkemedel - kvalitetssäkring och regulatoriska krav",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FF502",
+      "titleEn": "Neuropharmacology",
+      "titleSv": "Neurofarmakologi",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FB225",
+      "titleEn": "Clinical Pharmacokinetics and Pharmacodynamics",
+      "titleSv": "Klinisk farmakokinetik och farmakodynamik",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 120 credits in biomedicine, biology, pharmaceutical sciences, chemistry and/or natural sciences/technology. Previous studies should include 5 credits of pharmacokinetics and 7.5 credits of pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FF031",
+      "titleEn": "Proteomics for Drug Discovery",
+      "titleSv": "Proteomik för läkemedelsutveckling",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits in biomedicine, pharmaceutical science, chemistry, drug development, natural science and/or technology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FF206",
+      "titleEn": "Drugs and Dependence",
+      "titleSv": "Läkemedelsmissbruk och beroendelära",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB425",
+      "titleEn": "Molecular Recognition in Biological Systems",
+      "titleSv": "Molekylär igenkänning i biologiska system",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "One of the following is required: (1) 120 credits with 60 credits in chemistry, including 20 credits in biochemistry, or (2) 120 credits with 30 credits in chemistry and 30 credits in biology, including 20 credits in biochemistry, or (3) 120 credits within the Master's Programme in Molecular Biotechnology Engineering, including Cell Biology, 15 credits, or (4) 120 credits within the Master's Programme in Chemical Engineering, including Physiology and Molecular Cell Biology and Development of Biologicals. Also required is 10 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB767",
+      "titleEn": "Physical Organic Chemistry",
+      "titleSv": "Fysikalisk-organisk kemi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including 10 credits in organic chemistry and 10 credits in physical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB268",
+      "titleEn": "Materials and Sustainable Development",
+      "titleSv": "Material för hållbar utveckling",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Materials Chemistry, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB570",
+      "titleEn": "Design of Experiments, Data Handling and Statistical Analysis for Material Scientists",
+      "titleSv": "Försöksplanering, datahantering och statistisk analys för materialvetare",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including 15 credits in mathematics, and Computer Programming I, or Introduction to energy storage, or Introduction to Materials Science 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM109",
+      "titleEn": "Nanoporous Materials with Applications",
+      "titleSv": "Nanoporösa material med tillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering",
+      "mainFieldSv": "Materialteknik",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6. (A Swedish Bachelor's degree fulfils the requirement in English.)"
+    },
+    {
+      "code": "1KB349",
+      "titleEn": "Advanced Solar Cell and Battery Technologies",
+      "titleSv": "Avancerad solcells- och batteriteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 120 credits in science/engineering. 5 credits at advanced level. Materials chemistry, Electrochemistry and Quantum mechanics and chemical bonding II. Patricipation in Solid State Physics I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE074",
+      "titleEn": "Advanced Materials Analysis",
+      "titleSv": "Avancerad materialanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. Either: Solid State Physics I, Surface Characterisation and Surface and Materials Analysis; or: Introduction to Materials Engineering, Surface Characterisation and participation in Materials Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB741",
+      "titleEn": "Future Perspective in Cell Chemistries",
+      "titleSv": "Framtidsperspektiv inom cellkemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Battery Technology",
+      "mainFieldSv": "Batteriteknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. Participation in Rechargeable batteries 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB288",
+      "titleEn": "Materials Analysis at Large-Scale Research Infrastructures",
+      "titleSv": "Materialanalys vid stora forskningsinfrastrukturer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering, including Materials chemistry 10 credits, or Introduction to Materials Science 10 hp, or Introduction to materials engineering 5 credits, or Materials Chemistry 5 hp. Participation in Surface and Materials Analysis 5 credits, or Materials Analysis for Batteries 10 hp, or Material Synthesis and Characterisation 10 hp."
+    },
+    {
+      "code": "1TM104",
+      "titleEn": "Manufacturing of Metal Powders",
+      "titleSv": "Metallpulvertillverkning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering",
+      "mainFieldSv": "Materialteknik",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including either Introduction to Additive Manufacturing or Materials Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE072",
+      "titleEn": "Project Course in Micro- and Nanotechnology",
+      "titleSv": "Projektkurs i mikro/nanoteknik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering including Micro and nanotechnology I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB360",
+      "titleEn": "Molecular Materials",
+      "titleSv": "Molekylära material",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering with (1) 60 credits in chemistry or (2) 30 credits in chemistry and 30 credits in physics/biology. Participation in Biomaterials I of which 2 credits completed or participation in Materials synthesis of which 2 credits completed. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM007",
+      "titleEn": "Project Course in Tribological Materials",
+      "titleSv": "Projektkurs i tribomaterial",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "130 credits in science/engineering. Tribological Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM135",
+      "titleEn": "Project Course in Materials for Biomedical Applications",
+      "titleSv": "Projektkurs i material för medicinska tillämpningar",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering",
+      "mainFieldSv": "Materialteknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. Biomaterials I or Bio-MEMS and organs-on-chip. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FK214",
+      "titleEn": "Analytical Chemistry in Drug Discovery",
+      "titleSv": "Analytisk kemi i läkemedelsutveckling",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "180 credits including Analytical Chemistry with Data Analysis and Chemometrics. Participation in Pharmaceutics with 2.5 credits passed, and in Spectroscopic Methods for Organic Chemistry with 3 credits passed."
+    },
+    {
+      "code": "3FG203",
+      "titleEn": "Drug Formulation and Drug Delivery",
+      "titleSv": "Läkemedelsformulering",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Pharmaceutics"
+    },
+    {
+      "code": "3FX221",
+      "titleEn": "Toxicology for Engineering Students",
+      "titleSv": "Toxikologi för civilingenjörsstudenter",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB290",
+      "titleEn": "Degree Project in Chemical Engineering",
+      "titleSv": "Examensarbete i kemiteknik",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A2E",
+      "semester": 10,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB057",
+      "titleEn": "Research Training in Chemistry",
+      "titleSv": "Forskningspraktik i kemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 10,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 60 credits in chemistry. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB058",
+      "titleEn": "Research Training in Chemistry",
+      "titleSv": "Forskningspraktik i kemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 10,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 60 credits in chemistry. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB710",
+      "titleEn": "Project in Chemical Engineering",
+      "titleSv": "Projektarbete i kemiteknik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 10,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "TS002",
+      "titleEn": "Technology-Based Entrepreneurship and Business Development",
+      "titleSv": "Teknikbaserat entreprenörskap och affärsutveckling",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 10,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "COHORT_SUBSTITUTION",
+      "courseCodes": [
+        "1KB016",
+        "1MA350"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "1KB016 ersätter 1KB000 och dessa kan inte ingå i examen tillsammans. 1MA350 ersätter 1MA025 och dessa kan inte ingå i examen tillsammans.",
+      "labelEn": "1KB016 replaces 1KB000 and 1MA350 replaces 1MA025, and in each pair the replaced course and its replacement cannot both count toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1KB211",
+        "1KB502",
+        "1KB210",
+        "1KB772",
+        "1KB240"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1KB211, 1KB502, 1KB210, 1KB772, 1KB240",
+      "labelEn": "Choose one of 5 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-2",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1KB444",
+        "3FF218",
+        "1KB428"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1KB444, 3FF218, 1KB428",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-3",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TM143",
+        "1TM144",
+        "1KB204",
+        "1TM001"
+      ],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TM143, 1TM144, 1KB204, 1TM001",
+      "labelEn": "Choose one of 4 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-4",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "3FF219",
+        "3FK150",
+        "1TM001"
+      ],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 3FF219, 3FK150, 1TM001",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-5",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TM146",
+        "1KB260",
+        "1TM006",
+        "1KB281",
+        "1TG300",
+        "1TE015",
+        "1TE016"
+      ],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TM146, 1KB260, 1TM006, 1KB281, 1TG300, 1TE015, 1TE016",
+      "labelEn": "Choose one of 7 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-6",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "3FG202",
+        "1KB465",
+        "1KB479",
+        "3FF216"
+      ],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 3FG202, 1KB465, 1KB479, 3FF216",
+      "labelEn": "Choose one of 4 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-7",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1KB286",
+        "1TE018",
+        "1TE741",
+        "1KB263",
+        "1TE022",
+        "1TM034",
+        "1KB729",
+        "1KB728",
+        "1TM009",
+        "1TM105",
+        "1TM002",
+        "1TM003",
+        "1KB264",
+        "1TE024",
+        "1KB311",
+        "1TE698",
+        "1KB566",
+        "1KB271",
+        "1KB738",
+        "1TM106"
+      ],
+      "semester": 8,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1KB286, 1TE018, 1TE741, 1KB263, 1TE022, 1TM034, 1KB729, 1KB728, 1TM009, 1TM105, 1TM002, 1TM003, 1KB264, 1TE024, 1KB311, 1TE698, 1KB566, 1KB271, 1KB738, 1TM106",
+      "labelEn": "Choose one of 20 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-8",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "3FF036",
+        "3FF275",
+        "3FF209",
+        "3FF276",
+        "3FK219",
+        "3FK229",
+        "3FB207",
+        "3FN209",
+        "3FG288",
+        "3FB028",
+        "1KB429",
+        "1KB470",
+        "1KB481",
+        "1KB263",
+        "3FK281",
+        "3FG005",
+        "3FF208",
+        "3FB030",
+        "3FG240",
+        "3FF502",
+        "3FB225",
+        "3FF031",
+        "3FF206",
+        "1KB425",
+        "1KB767",
+        "1KB311",
+        "1TE698",
+        "1KB264"
+      ],
+      "semester": 8,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 3FF036, 3FF275, 3FF209, 3FF276, 3FK219, 3FK229, 3FB207, 3FN209, 3FG288, 3FB028, 1KB429, 1KB470, 1KB481, 1KB263, 3FK281, 3FG005, 3FF208, 3FB030, 3FG240, 3FF502, 3FB225, 3FF031, 3FF206, 1KB425, 1KB767, 1KB311, 1TE698, 1KB264",
+      "labelEn": "Choose one of 28 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-9",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1KB268",
+        "1KB570",
+        "1TM109",
+        "1KB349",
+        "1TE074",
+        "1KB741",
+        "1KB288",
+        "1TM104",
+        "1TE072",
+        "1KB360",
+        "1TM007",
+        "1TM135"
+      ],
+      "semester": 9,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1KB268, 1KB570, 1TM109, 1KB349, 1TE074, 1KB741, 1KB288, 1TM104, 1TE072, 1KB360, 1TM007, 1TM135",
+      "labelEn": "Choose one of 12 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-10",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "3FK214",
+        "3FG203",
+        "3FX221"
+      ],
+      "semester": 9,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 3FK214, 3FG203, 3FX221",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-11",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1KB057",
+        "1KB058",
+        "1KB710"
+      ],
+      "semester": 10,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1KB057, 1KB058, 1KB710",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "1KB016 ersätter 1KB000 och dessa kan inte ingå i examen tillsammans. 1MA350 ersätter 1MA025 och dessa kan inte ingå i examen tillsammans.",
+      "semester": 1,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1KB211, 1KB502, 1KB210, 1KB772, 1KB240",
+      "semester": 5,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1KB211",
+        "1KB502",
+        "1KB210",
+        "1KB772",
+        "1KB240"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1KB444, 3FF218, 1KB428",
+      "semester": 5,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1KB444",
+        "3FF218",
+        "1KB428"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TM143, 1TM144, 1KB204, 1TM001",
+      "semester": 6,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TM143",
+        "1TM144",
+        "1KB204",
+        "1TM001"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 3FF219, 3FK150, 1TM001",
+      "semester": 6,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "3FF219",
+        "3FK150",
+        "1TM001"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TM146, 1KB260, 1TM006, 1KB281, 1TG300, 1TE015, 1TE016",
+      "semester": 7,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TM146",
+        "1KB260",
+        "1TM006",
+        "1KB281",
+        "1TG300",
+        "1TE015",
+        "1TE016"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 3FG202, 1KB465, 1KB479, 3FF216",
+      "semester": 7,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "3FG202",
+        "1KB465",
+        "1KB479",
+        "3FF216"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1KB286, 1TE018, 1TE741, 1KB263, 1TE022, 1TM034, 1KB729, 1KB728, 1TM009, 1TM105, 1TM002, 1TM003, 1KB264, 1TE024, 1KB311, 1TE698, 1KB566, 1KB271, 1KB738, 1TM106",
+      "semester": 8,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1KB286",
+        "1TE018",
+        "1TE741",
+        "1KB263",
+        "1TE022",
+        "1TM034",
+        "1KB729",
+        "1KB728",
+        "1TM009",
+        "1TM105",
+        "1TM002",
+        "1TM003",
+        "1KB264",
+        "1TE024",
+        "1KB311",
+        "1TE698",
+        "1KB566",
+        "1KB271",
+        "1KB738",
+        "1TM106"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 3FF036, 3FF275, 3FF209, 3FF276, 3FK219, 3FK229, 3FB207, 3FN209, 3FG288, 3FB028, 1KB429, 1KB470, 1KB481, 1KB263, 3FK281, 3FG005, 3FF208, 3FB030, 3FG240, 3FF502, 3FB225, 3FF031, 3FF206, 1KB425, 1KB767, 1KB311, 1TE698, 1KB264",
+      "semester": 8,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "3FF036",
+        "3FF275",
+        "3FF209",
+        "3FF276",
+        "3FK219",
+        "3FK229",
+        "3FB207",
+        "3FN209",
+        "3FG288",
+        "3FB028",
+        "1KB429",
+        "1KB470",
+        "1KB481",
+        "1KB263",
+        "3FK281",
+        "3FG005",
+        "3FF208",
+        "3FB030",
+        "3FG240",
+        "3FF502",
+        "3FB225",
+        "3FF031",
+        "3FF206",
+        "1KB425",
+        "1KB767",
+        "1KB311",
+        "1TE698",
+        "1KB264"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1KB268, 1KB570, 1TM109, 1KB349, 1TE074, 1KB741, 1KB288, 1TM104, 1TE072, 1KB360, 1TM007, 1TM135",
+      "semester": 9,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1KB268",
+        "1KB570",
+        "1TM109",
+        "1KB349",
+        "1TE074",
+        "1KB741",
+        "1KB288",
+        "1TM104",
+        "1TE072",
+        "1KB360",
+        "1TM007",
+        "1TM135"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 3FK214, 3FG203, 3FX221",
+      "semester": 9,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "3FK214",
+        "3FG203",
+        "3FX221"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1KB057, 1KB058, 1KB710",
+      "semester": 10,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1KB057",
+        "1KB058",
+        "1KB710"
+      ]
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [
+    {
+      "from": "1KB016",
+      "to": "1KB103",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "15 credits Chemistry including 5 credits from any of the courses Chemical Principles 10 credits, Basic Chemistry 10 credits, General Chemistry, or The Basic Principles of Chemistry, as well as participation in other Chemistry courses for 15 cr."
+    },
+    {
+      "from": "1KB208",
+      "to": "1KB211",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering including Inorganic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or Basic Materials Chemistry, 5 credits."
+    },
+    {
+      "from": "1KB308",
+      "to": "1KB211",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering including Inorganic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or Basic Materials Chemistry, 5 credits."
+    },
+    {
+      "from": "1KB210",
+      "to": "1KB268",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Materials Chemistry, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB204",
+      "to": "1KB271",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 90 credits in chemistry and physics, with at least 60 credits in chemistry. 5 credits electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB210",
+      "to": "1KB281",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Materials Chemistry 10 credits, and participation in Physics and Chemistry of Surfaces, and Engineering Materials, and Surface Engineering and Materials Selection for Function and Design. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM143",
+      "to": "1KB281",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Materials Chemistry 10 credits, and participation in Physics and Chemistry of Surfaces, and Engineering Materials, and Surface Engineering and Materials Selection for Function and Design. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB210",
+      "to": "1KB288",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including Materials chemistry 10 credits, or Introduction to Materials Science 10 hp, or Introduction to materials engineering 5 credits, or Materials Chemistry 5 hp. Participation in Surface and Materials Analysis 5 credits, or Materials Analysis for Batteries 10 hp, or Material Synthesis and Characterisation 10 hp."
+    },
+    {
+      "from": "1TM146",
+      "to": "1KB288",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including Materials chemistry 10 credits, or Introduction to Materials Science 10 hp, or Introduction to materials engineering 5 credits, or Materials Chemistry 5 hp. Participation in Surface and Materials Analysis 5 credits, or Materials Analysis for Batteries 10 hp, or Material Synthesis and Characterisation 10 hp."
+    },
+    {
+      "from": "1KB210",
+      "to": "1KB311",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 30 credits in chemistry. 5 credits physical chemistry or Materials chemistry, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB308",
+      "to": "1KB311",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 30 credits in chemistry. 5 credits physical chemistry or Materials chemistry, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB204",
+      "to": "1KB349",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1KB210",
+      "to": "1KB349",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1KB271",
+      "to": "1KB349",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1KB502",
+      "to": "1KB349",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1TG300",
+      "to": "1KB349",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1KB263",
+      "to": "1KB360",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering with (1) 60 credits in chemistry or (2) 30 credits in chemistry and 30 credits in physics/biology. Participation in Biomaterials I of which 2 credits completed or participation in Materials synthesis of which 2 credits completed. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB286",
+      "to": "1KB360",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering with (1) 60 credits in chemistry or (2) 30 credits in chemistry and 30 credits in physics/biology. Participation in Biomaterials I of which 2 credits completed or participation in Materials synthesis of which 2 credits completed. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB408",
+      "to": "1KB425",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "One of the following is required: (1) 120 credits with 60 credits in chemistry, including 20 credits in biochemistry, or (2) 120 credits with 30 credits in chemistry and 30 credits in biology, including 20 credits in biochemistry, or (3) 120 credits within the Master's Programme in Molecular Biotechnology Engineering, including Cell Biology, 15 credits, or (4) 120 credits within the Master's Progr"
+    },
+    {
+      "from": "3FF218",
+      "to": "1KB425",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "One of the following is required: (1) 120 credits with 60 credits in chemistry, including 20 credits in biochemistry, or (2) 120 credits with 30 credits in chemistry and 30 credits in biology, including 20 credits in biochemistry, or (3) 120 credits within the Master's Programme in Molecular Biotechnology Engineering, including Cell Biology, 15 credits, or (4) 120 credits within the Master's Progr"
+    },
+    {
+      "from": "1KB410",
+      "to": "1KB444",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering including 10 credits organic chemistry."
+    },
+    {
+      "from": "1KB308",
+      "to": "1KB465",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 60 credits in chemistry including Organic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB410",
+      "to": "1KB465",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 60 credits in chemistry including Organic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB465",
+      "to": "1KB470",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits with 5 credits at Master's level. Participation in NMR Spectroscopy I or participation in Spectroscopic Methods for Organic Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB479",
+      "to": "1KB481",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits with 60 credits in chemistry including 15 credits in organic chemistry. 5 credits at Master's level. Participation in Organic Chemistry III or Organic Reaction Principles. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB501",
+      "to": "1KB502",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Quantum Mechanics and Chemical Bonding I or Theoretical Chemistry 10 credits."
+    },
+    {
+      "from": "1KB211",
+      "to": "1KB566",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 100 credits in science/engineering including 15 credits in mathematics and 75 credits in physics, chemistry, materials science and/or materials engineering, and one of the following: 1) Quantum Mechanics and Chemical Bonding I and any of the courses Solid State Physics, 5 credits, and Solid State Chemistry, 5 credits; 2) 30 credits in materials science; 3) Participation in Introdu"
+    },
+    {
+      "from": "1KB501",
+      "to": "1KB566",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 100 credits in science/engineering including 15 credits in mathematics and 75 credits in physics, chemistry, materials science and/or materials engineering, and one of the following: 1) Quantum Mechanics and Chemical Bonding I and any of the courses Solid State Physics, 5 credits, and Solid State Chemistry, 5 credits; 2) 30 credits in materials science; 3) Participation in Introdu"
+    },
+    {
+      "from": "1TG300",
+      "to": "1KB566",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 100 credits in science/engineering including 15 credits in mathematics and 75 credits in physics, chemistry, materials science and/or materials engineering, and one of the following: 1) Quantum Mechanics and Chemical Bonding I and any of the courses Solid State Physics, 5 credits, and Solid State Chemistry, 5 credits; 2) 30 credits in materials science; 3) Participation in Introdu"
+    },
+    {
+      "from": "1TD433",
+      "to": "1KB570",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 15 credits in mathematics, and Computer Programming I, or Introduction to energy storage, or Introduction to Materials Science 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB210",
+      "to": "1KB729",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 30 credits in chemistry and/or chemical engineering. Either (1) Participation in both Introduction to Energy Storage and Materials Chemistry for Batteries or (2) Materials Chemistry 10 credits and participation in Materials and Manufacturing Processes I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB281",
+      "to": "1KB729",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 30 credits in chemistry and/or chemical engineering. Either (1) Participation in both Introduction to Energy Storage and Materials Chemistry for Batteries or (2) Materials Chemistry 10 credits and participation in Materials and Manufacturing Processes I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB738",
+      "to": "1KB741",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Participation in Rechargeable batteries 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB308",
+      "to": "1KB767",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 60 credits in chemistry including 10 credits in organic chemistry and 10 credits in physical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB410",
+      "to": "1KB767",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 60 credits in chemistry including 10 credits in organic chemistry and 10 credits in physical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA010",
+      "to": "1MA013",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA016",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry."
+    },
+    {
+      "from": "1MA350",
+      "to": "1MA016",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry."
+    },
+    {
+      "from": "1MA010",
+      "to": "1MS005",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MS005",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA013",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1KB210",
+      "to": "1TE015",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of these alternatives: 1) Solid state physics F and attended course in Semiconductor Electronics, 2) Materials chemistry and attended course in Solid state physics I, 3) Introduction to materials engineering or Introduction to material science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE015",
+      "to": "1TE018",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering. Micro- and Nanotechnology I should have been attended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE015",
+      "to": "1TE072",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Micro and nanotechnology I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TG300",
+      "to": "1TE074",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Either: Solid State Physics I, Surface Characterisation and Surface and Materials Analysis; or: Introduction to Materials Engineering, Surface Characterisation and participation in Materials Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM144",
+      "to": "1TE074",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Either: Solid State Physics I, Surface Characterisation and Surface and Materials Analysis; or: Introduction to Materials Engineering, Surface Characterisation and participation in Materials Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM146",
+      "to": "1TE074",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Either: Solid State Physics I, Surface Characterisation and Surface and Materials Analysis; or: Introduction to Materials Engineering, Surface Characterisation and participation in Materials Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB300",
+      "to": "1TG300",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits within Science/Technology. Participation in Quantum Mechanics and Chemical Bonding II and either Thermodynamics, Chemical Thermodynamics or Principles of Thermodynamics."
+    },
+    {
+      "from": "1KB502",
+      "to": "1TG300",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits within Science/Technology. Participation in Quantum Mechanics and Chemical Bonding II and either Thermodynamics, Chemical Thermodynamics or Principles of Thermodynamics."
+    },
+    {
+      "from": "1TM143",
+      "to": "1TM006",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering. Engineering Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE022",
+      "to": "1TM007",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering. Tribological Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE015",
+      "to": "1TM034",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Micro- and Nanotechnology I must have been taken. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB210",
+      "to": "1TM104",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including either Introduction to Additive Manufacturing or Materials Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM009",
+      "to": "1TM104",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including either Introduction to Additive Manufacturing or Materials Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB203",
+      "to": "1TM105",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including either (1) Polymer Technology, (2) Polymer materials or (3) Polymer Chemistry and Engineering Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM143",
+      "to": "1TM105",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including either (1) Polymer Technology, (2) Polymer materials or (3) Polymer Chemistry and Engineering Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB263",
+      "to": "1TM135",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Biomaterials I or Bio-MEMS and organs-on-chip. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM034",
+      "to": "1TM135",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Biomaterials I or Bio-MEMS and organs-on-chip. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB210",
+      "to": "1TM146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. At least 3 credits from Materials Chemistry or at least 2 credits from Introduction to Materials Engineering. Surface Characterisation must have been taken. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM144",
+      "to": "1TM146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. At least 3 credits from Materials Chemistry or at least 2 credits from Introduction to Materials Engineering. Surface Characterisation must have been taken. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "3FF219",
+      "to": "3FB030",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits of which 120 credits biomedicine, biology, pharmaceutical sciences, chemistry and/or science/technology. Earlier studies should contain 7.5 credits pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MS005",
+      "to": "3FB207",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits in biomedicine, pharmaceutical science, drug development, natural science and/or technology. Previous studies must contain 5 credits of statistics or probability theory. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "3FF216",
+      "to": "3FB225",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits, including 120 credits in biomedicine, biology, pharmaceutical sciences, chemistry and/or natural sciences/technology. Previous studies should include 5 credits of pharmacokinetics and 7.5 credits of pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "3FF219",
+      "to": "3FB225",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits, including 120 credits in biomedicine, biology, pharmaceutical sciences, chemistry and/or natural sciences/technology. Previous studies should include 5 credits of pharmacokinetics and 7.5 credits of pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB016",
+      "to": "3FF216",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in biomedicine, pharmaceutical science, natural sciences and/or engineering. Prior studies must include 15 credits general and organic chemistry, 6 credits physiology and 7.5 credits pharmacology."
+    },
+    {
+      "from": "1KB410",
+      "to": "3FF216",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in biomedicine, pharmaceutical science, natural sciences and/or engineering. Prior studies must include 15 credits general and organic chemistry, 6 credits physiology and 7.5 credits pharmacology."
+    },
+    {
+      "from": "3FF218",
+      "to": "3FF216",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in biomedicine, pharmaceutical science, natural sciences and/or engineering. Prior studies must include 15 credits general and organic chemistry, 6 credits physiology and 7.5 credits pharmacology."
+    },
+    {
+      "from": "3FF219",
+      "to": "3FF216",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in biomedicine, pharmaceutical science, natural sciences and/or engineering. Prior studies must include 15 credits general and organic chemistry, 6 credits physiology and 7.5 credits pharmacology."
+    },
+    {
+      "from": "1KB408",
+      "to": "3FF218",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Biochemistry I"
+    },
+    {
+      "from": "3FG202",
+      "to": "3FG203",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Pharmaceutics"
+    },
+    {
+      "from": "3FF216",
+      "to": "3FG288",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits, including 120 credits in biomedicine, pharmaceutical sciences and/or natural sciences/engineering. Previous studies must include 3 credits of pharmaceutics and pharmacokinetics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "3FG202",
+      "to": "3FG288",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits, including 120 credits in biomedicine, pharmaceutical sciences and/or natural sciences/engineering. Previous studies must include 3 credits of pharmaceutics and pharmacokinetics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB016",
+      "to": "3FK219",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB410",
+      "to": "3FK219",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB016",
+      "to": "3FK281",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Participation in the course Computational Medicinal Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB410",
+      "to": "3FK281",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Participation in the course Computational Medicinal Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB103",
+      "to": "3FN209",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits, including 60 credits in chemistry or biology and advanced courses (at level G2F/C or above) in pharmaceutical sciences worth at least 22.5 credits or Pharmacognosy B (15 credits). Alternatively, from the Master of Science Programme in Pharmacy: 150 credits in the programme including a course in pharmacognosy; or from the Master's Programme in Chemical Engineering: 150 credits in the p"
+    },
+    {
+      "from": "3FF219",
+      "to": "3FN209",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits, including 60 credits in chemistry or biology and advanced courses (at level G2F/C or above) in pharmaceutical sciences worth at least 22.5 credits or Pharmacognosy B (15 credits). Alternatively, from the Master of Science Programme in Pharmacy: 150 credits in the programme including a course in pharmacognosy; or from the Master's Programme in Chemical Engineering: 150 credits in the p"
+    },
+    {
+      "from": "3FK150",
+      "to": "3FN209",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits, including 60 credits in chemistry or biology and advanced courses (at level G2F/C or above) in pharmaceutical sciences worth at least 22.5 credits or Pharmacognosy B (15 credits). Alternatively, from the Master of Science Programme in Pharmacy: 150 credits in the programme including a course in pharmacognosy; or from the Master's Programme in Chemical Engineering: 150 credits in the p"
+    }
+  ],
+  "revisions": [
+    {
+      "id": "f39d9938-4ed2-43b0-9c80-507764827e7f",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3609",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3384",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;2"
+    },
+    {
+      "id": "3355",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;1"
+    },
+    {
+      "id": "3142",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;3"
+    },
+    {
+      "id": "3109",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;2"
+    },
+    {
+      "id": "3044",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;1"
+    },
+    {
+      "id": "2764",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;2"
+    },
+    {
+      "id": "2591",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;1"
+    },
+    {
+      "id": "2376",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2222",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1897",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1686",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1411",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1181",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "1076",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;3"
+    },
+    {
+      "id": "1044",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;2"
+    },
+    {
+      "id": "963",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.070870+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=f39d9938-4ed2-43b0-9c80-507764827e7f",
+  "programmeTitle": "Civilingenjörsprogrammet i kemiteknik, 300 hp (TKT2Y)",
+  "programmeUri": "/utbildning/program/civilingenjorsprogrammet-kemiteknik",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Master's Programme in Chemical Engineering, 300 credits (TKT2Y)"
+}

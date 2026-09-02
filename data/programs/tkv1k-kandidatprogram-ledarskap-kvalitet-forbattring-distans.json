@@ -1,0 +1,747 @@
+{
+  "id": "10063",
+  "code": "TKV1K",
+  "revisionId": "10063",
+  "nameSv": "Kandidatprogram i ledarskap - kvalitet - förbättring",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "5 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1TG285",
+      "titleEn": "Quality Management",
+      "titleSv": "Kvalitetsteknik",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C"
+    },
+    {
+      "code": "1TG284",
+      "titleEn": "Introduction to Leadership - Quality Management - Improvement",
+      "titleSv": "Introduktion till ledarskap - kvalitet - förbättring",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C"
+    },
+    {
+      "code": "1TG316",
+      "titleEn": "Project Management and Leadership",
+      "titleSv": "Projektledning och ledarskap",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1TG334",
+      "titleEn": "Introduction to Generative AI and its Applications",
+      "titleSv": "Introduktion till generativ AI och dess tillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1TG240",
+      "titleEn": "Sustainable Development, CSR and Life Cycle Analysis",
+      "titleSv": "Hållbar utveckling, CSR och livscykelanalys",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management G1F, Technology",
+      "mainFieldSv": "Industriell teknik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Option 1: Participation in Introduction to Leadership - Quality - Improvement and Quality Management 10 credits. Option 2: Participation in Introduction to Industrial Development, Introduction to Quality Technology for Engineers and Process Management and Management Systems."
+    },
+    {
+      "code": "1TG293",
+      "titleEn": "Leadership and Culture",
+      "titleSv": "Ledarskap och kultur",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed."
+    },
+    {
+      "code": "1TG236",
+      "titleEn": "Management Systems and Leadership",
+      "titleSv": "Verksamhetssystem och ledning",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Quality Management."
+    },
+    {
+      "code": "1TG287",
+      "titleEn": "Project in Quality Management",
+      "titleSv": "Projekt i kvalitetsteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Quality Management, of which 5 credits must be completed, and participation in and 5 credits completed of either Project Management and Leadership or Projects and Leadership."
+    },
+    {
+      "code": "1TE743",
+      "titleEn": "Industrial Management",
+      "titleSv": "Industriell ekonomi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes."
+    },
+    {
+      "code": "1TG340",
+      "titleEn": "Lean Management",
+      "titleSv": "Lean management",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "30 credits in Industrial Engineering and Management"
+    },
+    {
+      "code": "1TG294",
+      "titleEn": "Six Sigma",
+      "titleSv": "Six sigma",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "30 credits in Industrial Engineering and Management. Participation in Statistical Quality Control, Quality Management, of which 5 credits should be completed, and either Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed."
+    },
+    {
+      "code": "1TG314",
+      "titleEn": "Change Management",
+      "titleSv": "Förändringsledning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "45 credits in Industrial Engineering and Management or Engineering programmes. Project Management and Leadership or Projects and Leadership."
+    },
+    {
+      "code": "2KU069",
+      "titleEn": "Urban Life and Sustainable Development",
+      "titleSv": "Stadsliv och hållbar utveckling",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Human Geography",
+      "mainFieldSv": "Samhällsgeografi",
+      "depthCode": "G1N",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1GV195",
+      "titleEn": "Wind Turbine Technology",
+      "titleSv": "Vindkraft - teknik",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "G1N",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1GV215",
+      "titleEn": "Energy System and Environmental Impact",
+      "titleSv": "Energisystem och dess miljöpåverkan",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Sustainable Energy Transition",
+      "mainFieldSv": "Hållbar energiomställning",
+      "depthCode": "G1N",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "2JF068",
+      "titleEn": "Web-Based Introductory Course in Law",
+      "titleSv": "Nätbaserad juridisk översiktskurs",
+      "credits": 15.0,
+      "creditsInPeriod": 7.5,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "2KU063",
+      "titleEn": "Economic Globalisation",
+      "titleSv": "Ekonomisk globalisering",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Human Geography",
+      "mainFieldSv": "Samhällsgeografi",
+      "depthCode": "G1N",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1GV196",
+      "titleEn": "Wind Power Planning",
+      "titleSv": "Vindkraft - planering",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "G1N",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1GV216",
+      "titleEn": "Sustainable Energy Transition",
+      "titleSv": "Hållbar energiomställning",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Sustainable Energy Transition",
+      "mainFieldSv": "Hållbar energiomställning",
+      "depthCode": "G1N",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1TE743",
+      "titleEn": "Industrial Management",
+      "titleSv": "Industriell ekonomi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes."
+    },
+    {
+      "code": "1TG302",
+      "titleEn": "Process Improvement for Sustainable Development",
+      "titleSv": "Processförbättring för hållbar utveckling",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1N",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1TG294",
+      "titleEn": "Six Sigma",
+      "titleSv": "Six sigma",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "30 credits in Industrial Engineering and Management. Participation in Statistical Quality Control, Quality Management, of which 5 credits should be completed, and either Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed."
+    },
+    {
+      "code": "1TG340",
+      "titleEn": "Lean Management",
+      "titleSv": "Lean management",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "30 credits in Industrial Engineering and Management"
+    },
+    {
+      "code": "1TG314",
+      "titleEn": "Change Management",
+      "titleSv": "Förändringsledning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "45 credits in Industrial Engineering and Management or Engineering programmes. Project Management and Leadership or Projects and Leadership."
+    },
+    {
+      "code": "1TG297",
+      "titleEn": "Sustainable Organisational Development",
+      "titleSv": "Hållbar verksamhetsutveckling",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TG339",
+      "titleEn": "Scientific Methods for Industrial Engineering and Management",
+      "titleSv": "Vetenskapliga metoder för industriell teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TG277",
+      "titleEn": "Degree Project in Industrial Engineering and Management",
+      "titleSv": "Examensarbete i industriell teknik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TG340"
+      ],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "1TG340 ersätter 1TG253. Ingen av dessa kan ingå i examen tillsammans.",
+      "labelEn": "1TG340 replaces 1TG253, and the two cannot both count toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TG314"
+      ],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "1TG314 ersätter 1TG295 och 1TG268. Ingen av dessa kan ingå i examen tillsammans.",
+      "labelEn": "1TG314 replaces 1TG295 and 1TG268, and none of these courses may count together toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "VALBAR TERMIN",
+      "labelEn": "Elective semester.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TG314"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "1TG314 ersätter 1TG295 och 1TG268. 1TG314 kan inte ingå i examen tillsammans med vare sig 1TG295 eller 1TG268.",
+      "labelEn": "1TG314 replaces the retired courses 1TG295 and 1TG268 and cannot count toward the degree together with either of them.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TG340"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "1TG340 ersätter 1TG253. Dessa kurser kan inte ingå i examen tillsammans.",
+      "labelEn": "1TG340 replaces 1TG253, and these courses cannot both count toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TG339"
+      ],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "1TG276 och 1TG339 kan inte ingå i examen tillsammans på grund av innehållsmässigt överlapp.",
+      "labelEn": "1TG339 cannot be counted together with 1TG276 in the degree due to content overlap.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "1TG340 ersätter 1TG253. Ingen av dessa kan ingå i examen tillsammans.",
+      "semester": 3,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "1TG314 ersätter 1TG295 och 1TG268. Ingen av dessa kan ingå i examen tillsammans.",
+      "semester": 3,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "VALBAR TERMIN",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "1TG314 ersätter 1TG295 och 1TG268. 1TG314 kan inte ingå i examen tillsammans med vare sig 1TG295 eller 1TG268.",
+      "semester": 5,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "1TG340 ersätter 1TG253. Dessa kurser kan inte ingå i examen tillsammans.",
+      "semester": 5,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "1TG276 och 1TG339 kan inte ingå i examen tillsammans på grund av innehållsmässigt överlapp.",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1TG285",
+      "to": "1TG236",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Quality Management."
+    },
+    {
+      "from": "1TG284",
+      "to": "1TG240",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Option 1: Participation in Introduction to Leadership - Quality - Improvement and Quality Management 10 credits. Option 2: Participation in Introduction to Industrial Development, Introduction to Quality Technology for Engineers and Process Management and Management Systems."
+    },
+    {
+      "from": "1TG285",
+      "to": "1TG240",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Option 1: Participation in Introduction to Leadership - Quality - Improvement and Quality Management 10 credits. Option 2: Participation in Introduction to Industrial Development, Introduction to Quality Technology for Engineers and Process Management and Management Systems."
+    },
+    {
+      "from": "1TG285",
+      "to": "1TG287",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Participation in Quality Management, of which 5 credits must be completed, and participation in and 5 credits completed of either Project Management and Leadership or Projects and Leadership."
+    },
+    {
+      "from": "1TG316",
+      "to": "1TG287",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Participation in Quality Management, of which 5 credits must be completed, and participation in and 5 credits completed of either Project Management and Leadership or Projects and Leadership."
+    },
+    {
+      "from": "1TG316",
+      "to": "1TG293",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed."
+    },
+    {
+      "from": "1TG285",
+      "to": "1TG294",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "30 credits in Industrial Engineering and Management. Participation in Statistical Quality Control, Quality Management, of which 5 credits should be completed, and either Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed."
+    },
+    {
+      "from": "1TG316",
+      "to": "1TG294",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "30 credits in Industrial Engineering and Management. Participation in Statistical Quality Control, Quality Management, of which 5 credits should be completed, and either Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed."
+    },
+    {
+      "from": "1TG316",
+      "to": "1TG314",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "45 credits in Industrial Engineering and Management or Engineering programmes. Project Management and Leadership or Projects and Leadership."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10063",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3686",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3382",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;3"
+    },
+    {
+      "id": "3367",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;2"
+    },
+    {
+      "id": "3322",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.128907+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10063",
+  "programmeTitle": "Kandidatprogram i ledarskap – kvalitet – förbättring (distans), 180 hp (TKV1K)",
+  "programmeUri": "/utbildning/program/kandidatprogram-ledarskap-kvalitet-forbattring-distans",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Bachelor's Programme in Leadership – Quality Management – Improvement, 180 credits (TKV1K)"
+}

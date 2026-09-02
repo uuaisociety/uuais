@@ -1,0 +1,1060 @@
+{
+ "edges": [
+  {
+   "code": "1DL002",
+   "text": "140 credits including 75 credits in mathematics and computer science of which at least 15 credits in computer science. Alternatively 45hp in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL008",
+   "text": "120 credits including 60 credits in computer science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL034",
+   "text": "60 credits of which 15 credits in mathematics and 15 credits in computer science. Probability and Statistics or Probability and Statistics DV. Algebra and Geometry or Linear Algebra and Geometry I. Participation in a second course in programming.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS321",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL073",
+   "text": "120 credits including 15 credits in mathematics and 60 credits in computer science/information systems, including 20 credits in programming/algorithms/data structures. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL221",
+   "text": "Participation in Program Design and Data Structures, of which 9 credits must have been completed.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL201",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL231",
+   "text": "60 credits of which 15 credits in mathematics and 25 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology. Participation in Program Design and Data Structures of which 9 credits shall be completed, alternatively participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL201",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL242",
+   "text": "120 credits including 60 credits in mathematics, computer science or technology, including participation in Software Engineering and Project Management and a second course in programming using an object-oriented language. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL251",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL251",
+   "text": "120 credits including 40 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL305",
+   "text": "60 credits in mathematics or computer science. Participation in discrete mathematics (for instance Algebra I), algorithms and data structures, and a second course in programming.",
+   "result": null
+  },
+  {
+   "code": "1DL321",
+   "text": "60 credits including 15 credits in mathematics and 30 credits in computer science, including Operating Systems and a second course in computer programming.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL340",
+   "text": "120 credits including 15 credits in mathematics and 20 credits in computer science, including a second course in programming. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL360",
+   "text": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL305",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL400",
+   "text": "120 credits of which 15 credits in mathematics and 30 credits in computer science or information systems, including a second course in computer programming. Participation in Database Design I or some other first course in databases. Participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL305",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL451",
+   "text": "120 credits including Basic Course in Mathematics and Algebra I or Basic Algebra, and a second course in computer programming or another combination of courses containing basic concepts in algebra, combinatorics, logic, graph theory, set theory and implementation of basic search algorithms. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA348",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL481",
+   "text": "120 credits including 30 credits in mathematics including an introduction to linear algebra (Linear Algebra and Geometry I or the equivalent) and basic logic (Algebra I, Basic Course in Mathematics, or the equivalent), and 45 credits in computer science. Participation in Algorithms and Data Structures II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL231",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL507",
+   "text": "150 credits including 30 credits in data science at Master's level, and including 75 credits in mathematics and computer science of which at least 15 credits in computer science. Data, Ethics and Law (may be read in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL002",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL530",
+   "text": "120 credits including 20 credits in computer science including a second course in programming using an imperative and object-oriented language and Algorithms and Data Structures I and Computer Architecture I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL221",
+      "type": "HARD"
+     },
+     {
+      "from": "1DT093",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL590",
+   "text": "120 credits with 60 credits in computer science, including participation in Introduction to Parallel Programming. Functional programming is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL530",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL601",
+   "text": "120 credits. 60 credits in computer science/technology/information systems including Software Testing, Algorithms and Data Structures and a second course in object-oriented programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": null
+  },
+  {
+   "code": "1DL610",
+   "text": "120 credits including 15 credits in mathematics and 60 credits in computer science/engineering, including a second course in programming in an imperative language and object-oriented programming. Participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL221",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL630",
+   "text": "120 credits including Software Engineering, Advanced Software Design and Requirements in Agile Development. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL251",
+      "type": "HARD"
+     },
+     {
+      "from": "1DL242",
+      "type": "HARD"
+     },
+     {
+      "from": "1MD200",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL650",
+   "text": "150 credits in computer science/engineering of which at least 30 credits at Master's level in computer science, including Complex IT Systems in Large Organisations, Software Testing, and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL630",
+      "type": "HARD"
+     },
+     {
+      "from": "1DL610",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT004",
+   "text": "120 credits including Computer Architecture. Participation in Operating Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DT093",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT012",
+   "text": "120 credits including 60 credits in computer science/engineering/information systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DT024",
+   "text": "120 credits including 90 credits in computer science and mathematics with Computer Architecture or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DT093",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT059",
+   "text": "120 credits including Computer architecture, Operating systems, and Real-time systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DT093",
+      "type": "HARD"
+     },
+     {
+      "from": "1DT004",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT061",
+   "text": "120 credits including 45 credits in computer science or 45 credits in academic teaching and learning/educational sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DT072",
+   "text": "120 credits including 15 credits in mathematics and 30 credits in computer science or technology. 10 credits in programming. Participation in Distributed Information Systems or Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DT075",
+   "text": "120 credits including a second course in programming, Algorithms and Data Structures I, Algebra I and linear algebra. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": null
+  },
+  {
+   "code": "1DT104",
+   "text": "150 credits in computer science/technology, including at least 30 credits at Master's level in computer science. A second course in programming and a basic course in computer networks must be included. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DT106",
+   "text": "120 credits including Computer Architecture and Operating Systems. Participation in Real Time Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DT093",
+      "type": "HARD"
+     },
+     {
+      "from": "1DT004",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT108",
+   "text": "120 credits including Computer Architecture and Operating Systems. Participation in Real Time Systems and Programming of Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DT093",
+      "type": "HARD"
+     },
+     {
+      "from": "1DT004",
+      "type": "SOFT"
+     },
+     {
+      "from": "1DT106",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT114",
+   "text": "120 credits including a second course in programming. Participation in a course in machine learning. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL034",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT116",
+   "text": "120 credits including 60 credits in computer science, including programming in C and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DT117",
+   "text": "120 credits including 90 credits in computer science and mathematics with participation in Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DT118",
+   "text": "120 credits including algorithms and data structures, database design, and 10 credits in programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": null
+  },
+  {
+   "code": "1DT194",
+   "text": "120 credits whereof 90 credits in computer science, mathematics, and technology, including Computer Networks I and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DT195",
+   "text": "120 credits including 90 credits in computer science, mathematics, and technology, including Computer Networks I and a second course in computer programming. Participation in the course Wireless Communication and Networked Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DT194",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA013",
+   "text": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA348",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA017",
+   "text": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA350",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA024",
+   "text": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA350",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA170",
+   "text": "30 credits in mathematics. Participation in Linear Algebra II. Participation in Probability and Statistics or Probability Theory I.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MS321",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA348",
+   "text": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA350",
+   "text": "Participation in Basic Course in Mathematics or Basic Algebra.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA348",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MD001",
+   "text": "120 credits including 45 credits in IT-related fields of study, including human-computer interaction, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MD004",
+   "text": "120 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MD030",
+   "text": "120 credits with 60 credits in science/engineering including a course at Master's level in computer-assisted image analysis, e.g. Computer-Assisted Image Analysis I, or a course at Master's level in human-computer interaction. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD396",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MD032",
+   "text": "120 credits including 15 credits in mathematics and 60 credits in computer science/information systems, including 20 credits in programming/algorithms/data structures. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MD033",
+   "text": "120 credits including 60 credits in science/engineering/information systems. 15 credits at Master's level in human-computer interaction. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MD043",
+   "text": "120 credits including 45 credits in computer science, data science, information systems, applied computational science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MD044",
+   "text": "120 credits including including 30 credits in computer science, data science, information systems or applied computational science. Human-Computer Interaction or System Design with a User Perspective. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MD034",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MD045",
+   "text": "120 credits including including 30 credits in computer science, data science, information systems or applied computational science. Human-Computer Interaction or System Design with a User Perspective. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MD034",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MD200",
+   "text": "120 credits and (1) 15 credits in human-computer interaction at Master's level, or (2) 30 credits in computer science including Software Engineering and Project Management, or (3) 50 credits in computer science of which 10 credits at Master's level. Interface Programming with a User Perspective and Independent Project in Sociotechnical Systems Engineering - IT Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL251",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS041",
+   "text": "120 credits including 80 credits in computer science and mathematics, of which at least 15 credits in computer science including programming, and at least 30 credits in mathematics including probability and statistics, linear algebra and analysis. Participation in, or taken in parallel with, Several Variable Calculus, Limited Version. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA017",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS048",
+   "text": "120 credits including 30 credits in mathematics och 10 credits in computer science. Participation in Introduction to Data Science. Participation in Linear Algebra for Data Science or Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS041",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT004",
+   "text": "120 credits including 60 credits in science/engineering, whereof 20 credits in mathematics, and one of the courses Automatic Control I or Introduction to Computer Control Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1RT485",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT495",
+   "text": "120 credits including Automatic Control I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1RT700",
+   "text": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS321",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA013",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT730",
+   "text": "120 credits including Probability and Statistics, Linear Algebra, Single Variable Calculus and a course in introductory programming. Statistical Machine Learning. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": null
+  },
+  {
+   "code": "1TD062",
+   "text": "120 credits in science/engineering including 30 credits Mathematics and 10 credits in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD070",
+   "text": "120 credits in science/engineering including Introduction to Scientific Computing or Scientific Computing I. Participation in High Performance Programming or participation in Low-level Parallel Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD062",
+      "type": "SOFT"
+     },
+     {
+      "from": "1DT116",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD076",
+   "text": "120 credits. Participation in Data Engineering I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD169",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD169",
+   "text": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL305",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA350",
+      "type": "HARD"
+     },
+     {
+      "from": "1MS321",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD184",
+   "text": "120 credits including 30 credits in mathematics of which 5 credits mathematics containing several variable calculus that can be taken in parallel. Computer Programming I. Participation in one of the courses Scientific Computing basic course, Scientific Computing I, Scientific Computing Bridging course or Numerical methods and Simulation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA017",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD403",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD307",
+   "text": "200 credits, of which 30 credits at Master's level, including Computer Programming II. Scientific Computing III or Scientific Computing for Partial Differential Equations. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD354",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD354",
+   "text": "120 credits in science/engineering. Scientific Computing II or Introduction to Scientific Computing or Scientific Computing, Bridging Course. Several Variable Calculus. Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA017",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD389",
+   "text": "120 credits including Computer Programming I and Scientific Computing II. Scientific Computing II may be replaced by Numerical Methods and Simulation, 5 credits, Scientific Computing, Bridging Course, 5 credits, or Scientific Computing and Calculus, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD403",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD396",
+   "text": "120 credits including 30 credits in mathematics and 10 credits in computer science, including Scientific Computing I/Introduction to Scientific Computing and Computer Programming I, Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD403",
+   "text": "60 credits including Program Design and Data Structures. Linear Algebra and Geometry. Single Variable Calculus. Participation in Probability and Statistics DV.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL201",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA013",
+      "type": "HARD"
+     },
+     {
+      "from": "1MS321",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE651",
+   "text": "120 credits in science/engineering including Signals and Systems as well as Probability and Statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS321",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE717",
+   "text": "Single Variable Calculus, Linear Algebra and Geometry I. Participation in one of the courses Imperative and Object-Oriented Programming Methodology.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA350",
+      "type": "HARD"
+     },
+     {
+      "from": "1DL221",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE721",
+   "text": "200 credits in science/engineering including 30 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE722",
+   "text": "150 credits in science/engineering including 30 credits at Master's level within the specialisation Embedded Systems in the Master Programme in Engineering Physics; or alternatively 30 credits at Master's level within the specialisations Electrical System Control or Renewable Electrical Generation in the Master Programme in Electrical Engineering, and Embedded Systems in the Master Programme in Information Technology, or 30 credits at Master's level in Electrical Engineering within the Master Programme in All-Electric Propulsion Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE723",
+   "text": "120 credits in science/engineering, including one of the following options: (option 1): Computer Programming I and Electronics I, (option 2): Computer Programming I and Basics of Electrical Engineering II and Digital Electronics, (option 3): Program Design and Data Structures as well as Digital Technology and Electronics, (option 4): 30 credits in computer science, including courses in programming and computer architecture. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL201",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE717",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE743",
+   "text": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE746",
+   "text": "60 credits in science/engineering, including Imperative and Object-Oriented Programming Methodology, Single Variable Calculus as well as Linear Algebra and Geometry. Numerical Methods and Simulations as well as Digital Technology and Electronics should have been attended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL221",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA013",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD403",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE717",
+      "type": "SOFT"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Avklarad kurs 1DL201 räknas även som motsvarande Algoritmer och Datastrukturer I samt Funktionell programmering.",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1DL201"
+    ],
+    "labelEn": "Completed course 1DL201 also counts as equivalent to Algorithms and Data Structures I and Functional Programming.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Avklarad kurs 1DT003 räknas även som motsvarande Datakommunikation I samt Operativsystem I.",
+    "semester": 4,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1DT003"
+    ],
+    "labelEn": "A completed 1DT003 also counts as equivalent to Data Communication I and Operating Systems I.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TD403 kan inte ingå i examen tillsammans med annan grundkurs i beräkningsvetenskap (exempelvis 1TD394, 1TD393 eller 1TD333) eller Beräkningsvetenskap II (1TD395).",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TD403"
+    ],
+    "labelEn": "1TD403 cannot count toward the degree together with another basic computational science course (e.g., 1TD394, 1TD393, or 1TD333) or Computational Science II (1TD395).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna 1DL034 och 1MA017 är obligatorisk inom examenskravet.Kursen Introduktion till Dataanalys (1MS041) som läses under läsperiod 1-2 under år 4 på profilen Dataanalys har Flervariabelanalys som förkunskapskrav. Studenter som har för avsikt att läsa profilen Dataanalys och inte redan har läst flervariabelanalys måste därför välja 1MA017 i denna läsperiod för att bli behörig till den inledande kursen på profilen Dataanalys.",
+    "semester": 6,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1DL034",
+     "1MA017",
+     "1MS041"
+    ],
+    "labelEn": "One of 1DL034 and 1MA017 is required for the degree, and students planning the Data Analysis profile who lack multivariable calculus must choose 1MA017 to become eligible for 1MS041.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Programmet har fem profiler under år 4 och 5: dataanalys (da), datorsystem (ds), inbyggda system (is), människa, maskin och samhälle (mms) samt mjukvaruutveckling (mu). En i studieplanen specificerad profil kan ersättas med en individuell profil i samråd med studievägledare. För närmare information om vilka krav som då gäller, se utbildningsplanen. Samtliga kurser inom en profil krävs för examen.",
+    "semester": 7,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The programme has five profiles in years 4-5, all courses in the chosen profile are required, and a specified profile may be replaced by an individual profile approved with a study counsellor.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Minst tre av nedanstående kurser",
+    "semester": 7,
+    "period": "Period 2",
+    "trackId": "mjukvaruutveckling"
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "At least three of the courses listed below are required.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurserValbara kurser under årskurs 4 termin 1. Nedan redovisas valbara kurser under årskurs 4 termin 1.De i respektive profil rekommenderade kurserna kombineras med kurser från antingen en annan profil eller från nedanstående kurslista. Valbara kurser nedan kan ställas in vid brist på resurser eller vid för få sökande.Kurserna 1DT081 samt 1DT088 går inte att söka på ordinarie väg. Dessa kurskoder används vid projektarbeten som ligger utanför den ordinarie studieplanen. Vid intresse av ett projekt som endera av dessa kurser, kontakta programmets studievägledare.",
+    "semester": 7,
+    "period": null,
+    "trackId": "mjukvaruutveckling"
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1DT081",
+     "1DT088"
+    ],
+    "labelEn": "Courses 1DT081 and 1DT088 cannot be applied for via the ordinary route; contact the programme's study counsellor if interested in such off-plan project courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurserValbara kurser under årskurs 4 termin 2. Nedan redovisas valbara kurser under årskurs 4 termin 2.De i respektive profil rekommenderade kurserna kombineras med kurser från antingen en annan profil eller från nedanstående kurslista. Valbara kurser nedan kan ställas in vid brist på resurser eller vid för få sökande.Kurserna 1DT081 samt 1DT088 används vid projektarbeten som ligger utanför den ordinarie studieplanen och går inte att söka på ordinarie väg.",
+    "semester": 8,
+    "period": null,
+    "trackId": "mjukvaruutveckling"
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1DT081",
+     "1DT088"
+    ],
+    "labelEn": "Elective courses for year 4 semester 2 may be cancelled due to limited resources or too few applicants, and 1DT081 and 1DT088 are reserved for project work outside the regular study plan and cannot be applied for through the normal process.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna 1DT012 och 1MD033 läses under termin 9.",
+    "semester": 9,
+    "period": null,
+    "trackId": "manniska-maskin-och-samhalle"
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1DT012",
+     "1MD033"
+    ],
+    "labelEn": "One of the courses 1DT012 or 1MD033 must be taken during semester 9.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurserValbara kurser under årskurs 5, termin 1. Nedan redovisas valbara kurser under årskurs 5, termin 1.De i respektive profil rekommenderade kurserna kombineras med kurser från antingen en annan profil eller från nedanstående kurslista. Valbara kurser nedan kan ställas in vid brist på resurser eller vid för få sökande.Kurserna 1DT081 samt 1DT088 används vid projektarbeten som ligger utanför den ordinarie studieplanen.",
+    "semester": 9,
+    "period": null,
+    "trackId": "mjukvaruutveckling"
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1DT081",
+     "1DT088"
+    ],
+    "labelEn": "Courses 1DT081 and 1DT088 are used for project work carried out outside the ordinary study plan.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övrig informationKurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\", 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare.",
+    "semester": 9,
+    "period": null,
+    "trackId": "mjukvaruutveckling"
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Optional 30-credit course package 'Technology-based Entrepreneurship and Business Development' in semester 9 with no guaranteed places, counting toward the degree only for students admitted 2025/2026 or earlier.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Vid normal studiegång genomföres examensarbetet med start i period 3, men det går även att genomföra det med start i period 1 eller 2 .",
+    "semester": 10,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The degree project normally starts in period 3, but it may also be taken starting in period 1 or 2.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

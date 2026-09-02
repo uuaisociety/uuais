@@ -1,0 +1,88 @@
+{
+ "edges": [
+  {
+   "code": "1KB153",
+   "text": "120 credits with 60 credits in chemistry including 10 credits in analytical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB154",
+   "text": "120 credits with 90 credits in chemistry. Separation and Mass Spectrometry, 15 credits, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB153",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB155",
+   "text": "120 credits including 30 credits in chemistry/biochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB159",
+   "text": "120 credits with 60 credits in chemistry including Separation and Mass Spectrometry, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB153",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB163",
+   "text": "120 credits with 60 credits in chemistry, including 10 credits in analytical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB467",
+   "text": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB469",
+   "text": "120 credits with 60 credits in chemistry including 15 credits organic chemistry or 15 credits physical chemistry, alternatively 20 credits of organic and physical chemistry together. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB750",
+   "text": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1KB053"
+    ],
+    "labelEn": "Only 30 of the 45 credits of the Degree Project E in Chemistry (1KB053) count toward the programme.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

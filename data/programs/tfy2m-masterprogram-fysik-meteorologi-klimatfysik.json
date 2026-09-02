@@ -1,0 +1,801 @@
+{
+  "id": "10023",
+  "code": "TFY2M",
+  "revisionId": "10023",
+  "nameSv": "Masterprogram i fysik",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1ME400",
+      "titleEn": "Atmospheric and Climate Physics",
+      "titleSv": "Atmosfärens och klimatets fysik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science G2F, Physics",
+      "mainFieldSv": "Fysik G2F, Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in science/engineering including Geometry and Calculus II, 10 credits. Participation in Thermodynamics 5 credits."
+    },
+    {
+      "code": "1ME405",
+      "titleEn": "Turbulence and Micrometeorology",
+      "titleSv": "Turbulens och mikrometeorologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 35 credits in mathematics, 35 credits in physics, and Atmospheric and Climate Physics, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA453",
+      "titleEn": "Scientific Programming in Python with Applications in Physics",
+      "titleSv": "Programmering i Python med tillämpningar inom fysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Physics",
+      "mainFieldSv": "Datavetenskap A1N, Fysik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering with Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME428",
+      "titleEn": "The Structure and Dynamics of Frontal Systems",
+      "titleSv": "Frontsystemens uppbyggnad och dynamik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 35 credits in mathematics and 35 credits in physics. Participation in the course Atmospheric and Climate Physics 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME418",
+      "titleEn": "Atmospheric Radiation",
+      "titleSv": "Strålning i atmosfären",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science G2F, Physics",
+      "mainFieldSv": "Fysik G2F, Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in science/engineering including The Physics of Waves with Optics."
+    },
+    {
+      "code": "1FA370",
+      "titleEn": "Applied Deep Learning in Physics and Engineering",
+      "titleSv": "Tillämpad djupinlärning i fysik och teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. Linear Algebra II. Introduction to Scientific Computing or Introduction to Scientific Computing F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME414",
+      "titleEn": "Meteorology in Practice",
+      "titleSv": "Praktisk meteorologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1F, Physics",
+      "mainFieldSv": "Fysik A1F, Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 75 credits in meteorology including Atmospheric and Climate Physics, 15 credits, and participation in Turbulence and Micro Meteorology, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TV028",
+      "titleEn": "Air Quality and Applied Meteorology",
+      "titleSv": "Luftmiljö och tillämpad meteorologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Geovetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME406",
+      "titleEn": "Numerical Modelling of the Atmosphere",
+      "titleSv": "Numerisk modellering av atmosfären",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computational Science A1N, Earth Science A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Geovetenskap A1N, Tillämpad beräkningsvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 35 credits in mathematics and 35 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME038",
+      "titleEn": "Climatology and Climatological Methods",
+      "titleSv": "Klimatologi och klimatologiska arbetsmetoder",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 35 credits in mathematics and 35 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA152",
+      "titleEn": "Dynamical System and Chaos",
+      "titleSv": "Dynamiska system och kaos",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Matematik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/technology. Participation in Mechanics III or Analytical Mechanics. Computer Programming I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME421",
+      "titleEn": "Degree Project D in Meteorology",
+      "titleSv": "Examensarbete D i meteorologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree or the equivalent and at least 30 credits in meteorology at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME415",
+      "titleEn": "Field Course in Meteorology",
+      "titleSv": "Fältkurs i meteorologi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science G2F, Physics",
+      "mainFieldSv": "Fysik G2F, Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA006",
+      "titleEn": "Advanced Applied Deep Learning in Physics and Engineering",
+      "titleSv": "Avancerad tillämpad djupinlärning inom fysik och teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1F, Technology",
+      "mainFieldSv": "Fysik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. Applied Deep Learning in Physics and Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME405",
+      "titleEn": "Turbulence and Micrometeorology",
+      "titleSv": "Turbulens och mikrometeorologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 35 credits in mathematics, 35 credits in physics, and Atmospheric and Climate Physics, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME408",
+      "titleEn": "Experimental Boundary Layer Meteorology",
+      "titleSv": "Experimentell gränsskiktsmeteorologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1F, Physics",
+      "mainFieldSv": "Fysik A1F, Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits and Turbulence and Micrometeorology, 15 credits. Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits, is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME404",
+      "titleEn": "Climate Variations",
+      "titleSv": "Klimatvariationer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with 90 credits in physics, earth science or biology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME416",
+      "titleEn": "Numerical Modelling of the Atmosphere II",
+      "titleSv": "Numerisk modellering av atmosfären II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1F, Physics",
+      "mainFieldSv": "Fysik A1F, Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits. Numerical Modelling of the Atmosphere, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV006",
+      "titleEn": "Presentation and Publication",
+      "titleSv": "Presentation och publicering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with (1) 90 credits in earth science or biology, or (2) 90 credits in technology or physics and 30 credits in earth science or environmental science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA018",
+      "titleEn": "Statistical Methods in Physics and Engineering",
+      "titleSv": "Statistiska metoder i fysik och teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with basic statistics and 60 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA370",
+      "titleEn": "Applied Deep Learning in Physics and Engineering",
+      "titleSv": "Tillämpad djupinlärning i fysik och teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. Linear Algebra II. Introduction to Scientific Computing or Introduction to Scientific Computing F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME425",
+      "titleEn": "Degree Project E in Meteorology",
+      "titleSv": "Examensarbete E i meteorologi",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree or the equivalent and at least 30 credits in meteorology at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME414",
+      "titleEn": "Meteorology in Practice",
+      "titleSv": "Praktisk meteorologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1F, Physics",
+      "mainFieldSv": "Fysik A1F, Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 75 credits in meteorology including Atmospheric and Climate Physics, 15 credits, and participation in Turbulence and Micro Meteorology, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME422",
+      "titleEn": "Degree Project E in Meteorology",
+      "titleSv": "Examensarbete E i meteorologi",
+      "credits": 30.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree or the equivalent and at least 30 credits in meteorology at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME425",
+      "titleEn": "Degree Project E in Meteorology",
+      "titleSv": "Examensarbete E i meteorologi",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree or the equivalent and at least 30 credits in meteorology at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME446",
+      "titleEn": "Project Work in Meteorology",
+      "titleSv": "Projekt i meteorologi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1F, Physics",
+      "mainFieldSv": "Fysik A1F, Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 30 credits in meteorology at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME436",
+      "titleEn": "Meteorological Project Work",
+      "titleSv": "Projekt i meteorologi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1F, Physics",
+      "mainFieldSv": "Fysik A1F, Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 30 credits in meteorology at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME426",
+      "titleEn": "Meteorological Project Work",
+      "titleSv": "Projekt i meteorologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1F, Physics",
+      "mainFieldSv": "Fysik A1F, Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 30 credits in meteorology at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME411",
+      "titleEn": "Project Work in Meteorology",
+      "titleSv": "Projektarbete i meteorologi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1F, Physics",
+      "mainFieldSv": "Fysik A1F, Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Alternativt:",
+      "labelEn": "Alternatively, other options may be chosen.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Övrig valbar kurs denna period:",
+      "labelEn": "An additional elective course may be chosen during this period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Övrig valbar kurs denna period:",
+      "labelEn": "Other elective courses are available this period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Alternativt:",
+      "labelEn": "Alternatively (unspecified alternative options).",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [
+        "1ME414"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Kursen 1ME414 ges bara på svenska.",
+      "labelEn": "Course 1ME414 is only offered in Swedish.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [
+        "1ME421"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Kursen 1ME421 är för magisterexamen.",
+      "labelEn": "Course 1ME421 is intended for the magister's degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-6",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Övriga kurser:",
+      "labelEn": "Other courses:",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-7",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Alternativt:",
+      "labelEn": "Alternatively: indicates that alternative course options may be chosen.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-8",
+      "type": "NOTE",
+      "courseCodes": [
+        "1ME414"
+      ],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Kursen 1ME414 ges bara på svenska.",
+      "labelEn": "The course 1ME414 is only offered in Swedish.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-9",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
+      "labelEn": "Other elective courses within the specialisation may be taken in any period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-10",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Följande beteckningar används:A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp",
+      "labelEn": "Legend explaining the course level designations (A1N, A1F, A1E, A2E, G2F) used in the plan.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Alternativt:",
+      "semester": 1,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Övrig valbar kurs denna period:",
+      "semester": 1,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Övrig valbar kurs denna period:",
+      "semester": 1,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Alternativt:",
+      "semester": 1,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Kursen 1ME414 ges bara på svenska.",
+      "semester": 1,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Kursen 1ME421 är för magisterexamen.",
+      "semester": 2,
+      "period": "Period 4",
+      "trackId": null
+    },
+    {
+      "textSv": "Övriga kurser:",
+      "semester": 2,
+      "period": "Period 4",
+      "trackId": null
+    },
+    {
+      "textSv": "Alternativt:",
+      "semester": 3,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Kursen 1ME414 ges bara på svenska.",
+      "semester": 3,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Följande beteckningar används:A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1FA370",
+      "to": "1FA006",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Applied Deep Learning in Physics and Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1ME405",
+      "to": "1ME408",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits and Turbulence and Micrometeorology, 15 credits. Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits, is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1ME406",
+      "to": "1ME416",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits. Numerical Modelling of the Atmosphere, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10023",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3507",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3305",
+      "name": "Giltig från och med höstterminen 2024"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.169173+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10023",
+  "programmeTitle": "Masterprogram i fysik – Meteorologi och klimatfysik, 120 hp (TFY2M)",
+  "programmeUri": "/utbildning/program/masterprogram-fysik-meteorologi-klimatfysik",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)"
+}

@@ -1,0 +1,281 @@
+{
+ "edges": [
+  {
+   "code": "1GV195",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV196",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV215",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV216",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE743",
+   "text": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG236",
+   "text": "Participation in Quality Management.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG285",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG240",
+   "text": "Option 1: Participation in Introduction to Leadership - Quality - Improvement and Quality Management 10 credits. Option 2: Participation in Introduction to Industrial Development, Introduction to Quality Technology for Engineers and Process Management and Management Systems.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG284",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TG285",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG284",
+   "text": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG285",
+   "text": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG287",
+   "text": "Participation in Quality Management, of which 5 credits must be completed, and participation in and 5 credits completed of either Project Management and Leadership or Projects and Leadership.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG285",
+      "type": "HARD"
+     },
+     {
+      "from": "1TG316",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG293",
+   "text": "Participation in Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG316",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG294",
+   "text": "30 credits in Industrial Engineering and Management. Participation in Statistical Quality Control, Quality Management, of which 5 credits should be completed, and either Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG285",
+      "type": "HARD"
+     },
+     {
+      "from": "1TG316",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG302",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG314",
+   "text": "45 credits in Industrial Engineering and Management or Engineering programmes. Project Management and Leadership or Projects and Leadership.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG316",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG316",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG334",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG340",
+   "text": "30 credits in Industrial Engineering and Management",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "2JF068",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "2KU063",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "2KU069",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "1TG340 ersätter 1TG253. Ingen av dessa kan ingå i examen tillsammans.",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TG340"
+    ],
+    "labelEn": "1TG340 replaces 1TG253, and the two cannot both count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TG314 ersätter 1TG295 och 1TG268. Ingen av dessa kan ingå i examen tillsammans.",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TG314"
+    ],
+    "labelEn": "1TG314 replaces 1TG295 and 1TG268, and none of these courses may count together toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "VALBAR TERMIN",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective semester.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TG314 ersätter 1TG295 och 1TG268. 1TG314 kan inte ingå i examen tillsammans med vare sig 1TG295 eller 1TG268.",
+    "semester": 5,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TG314"
+    ],
+    "labelEn": "1TG314 replaces the retired courses 1TG295 and 1TG268 and cannot count toward the degree together with either of them.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TG340 ersätter 1TG253. Dessa kurser kan inte ingå i examen tillsammans.",
+    "semester": 5,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TG340"
+    ],
+    "labelEn": "1TG340 replaces 1TG253, and these courses cannot both count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TG276 och 1TG339 kan inte ingå i examen tillsammans på grund av innehållsmässigt överlapp.",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TG339"
+    ],
+    "labelEn": "1TG339 cannot be counted together with 1TG276 in the degree due to content overlap."
+   }
+  }
+ ]
+}

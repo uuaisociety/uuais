@@ -1,0 +1,700 @@
+{
+ "edges": [
+  {
+   "code": "1FA006",
+   "text": "120 credits in science/engineering. Applied Deep Learning in Physics and Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA370",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA018",
+   "text": "120 credits with basic statistics and 60 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA152",
+   "text": "120 credits in science/technology. Participation in Mechanics III or Analytical Mechanics. Computer Programming I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA252",
+   "text": "120 credits including Electromagnetism II/Electromagnetism and Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA253",
+   "text": "120 credits including Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA257",
+   "text": "120 credits with Mechanics III. Electromagnetic Field Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA252",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA370",
+   "text": "120 credits in science/engineering. Linear Algebra II. Introduction to Scientific Computing or Introduction to Scientific Computing F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA453",
+   "text": "120 credits in science/engineering with Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE009",
+   "text": "120 credits including (1) 75 credits in physics and mathematics, or (2) 60 credits in earth science, 15 credits in mathematics and 15 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE016",
+   "text": "180 credits including (1) 80 credits in physics and mathematics or (2) 70 credits in earth science and 45 credits in physics and mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE017",
+   "text": "60 credits in mathematics and physics, or 60 credits in earth science and 15 credits in mathematics.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE029",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in geophysics at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE030",
+   "text": "120 credits including 15 credits in geophysics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE031",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in geophysics at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE032",
+   "text": "120 credits including 15 credits in geophysics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE034",
+   "text": "120 credits including 15 credits in geophysics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE035",
+   "text": "120 credits including (1) 75 credits in physics and mathematics or (2) 60 credits in earth science and 45 credits in physics and mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE038",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in geophysics at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE039",
+   "text": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in technology or physics and 30 credits in earth science or Environmental Science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE048",
+   "text": "120 credits including (1) 75 credits in physics and mathematics or (2) 60 credits in earth science and 45 credits in physics and mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE049",
+   "text": "120 credits including (1) 75 credits in physics and mathematics or (2) 60 credits in earth science and 40 credits in physics and mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE052",
+   "text": "180 credits including (1) 80 credits in physics and mathematics or (2) 70 credits in earth science and 45 credits in physics and mathematics. In both cases, Continuum Mechanics in Geophysics; Global Geophysics or The Physics and Dynamics of the Earth. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GE048",
+      "type": "HARD"
+     },
+     {
+      "from": "1GE009",
+      "type": "HARD"
+     },
+     {
+      "from": "1GE063",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GE053",
+   "text": "120 credits including (1) 75 credits in physics and mathematics or (2) 75 credits in earth science, 15 credits in physics and 15 credits in mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE057",
+   "text": "180 credits including (1) 80 credits in physics and mathematics or (2) 70 credits in earth science and 45 credits in physics and mathematics. In both cases The Earth's Potential Fields, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GE035",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GE063",
+   "text": "120 credits including (1) 80 credits physics and mathematics, or (2) 60 credits earth science, 15 credits mathematics and 15 credits physics. In both cases, participation in course Introduction to the Physics and Dynamics of the Earth, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE068",
+   "text": "120 credits including (1) 80 credits in physics and mathematics or (2) 70 credits in earth science and 45 credits in physics and mathematics. In both cases, participation in course Continuum Mechanics in Geophysics, 5 credits, of which 1 credit was taken, and either Global Geophysics, 10 credits, or The Physics and Dynamics of the Earth, 5 credits, completed. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GE048",
+      "type": "SOFT"
+     },
+     {
+      "from": "1GE009",
+      "type": "HARD"
+     },
+     {
+      "from": "1GE063",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GE069",
+   "text": "180 credits including (1) 80 credits in physics and mathematics or (2) 70 credits in earth science and 45 credits in physics and mathematics. In both cases Continuum Mechanics in Geophysics, 5 credits, and at least 2.5 credits from Introduction to Seismology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GE048",
+      "type": "HARD"
+     },
+     {
+      "from": "1GE068",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GE070",
+   "text": "180 credits including (1) 80 credits in physics and mathematics or (2) 70 credits in earth science and 45 credits in physics and mathematics. In both cases Continuum Mechanics in Geophysics, 5 credits, and at least 2.5 credits from Introduction to Seismology, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GE048",
+      "type": "HARD"
+     },
+     {
+      "from": "1GE068",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GE071",
+   "text": "180 credits including (1) 80 credits in physics and mathematics or (2) 70 credits in earth science and 45 credits in physics and mathematics. In both cases Continuum Mechanics in Geophysics, 5 credits, and Introduction to Seismology, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GE048",
+      "type": "HARD"
+     },
+     {
+      "from": "1GE068",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV006",
+   "text": "120 credits with (1) 90 credits in earth science or biology, or (2) 90 credits in technology or physics and 30 credits in earth science or environmental science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV014",
+   "text": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in technology or physics and 30 credits in earth science or Environmental Science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV219",
+   "text": "45 credits in physics and mathematics.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA148",
+   "text": "120 credits including 45 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus or Several Variable Calculus M and in Ordinary Differential Equations I or Transform Methods. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP022",
+   "text": "120 credits of which 90 credits in science/engineering (physics, chemistry, biology, mathematics, earth sciences, computer science, material science). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP024",
+   "text": "120 credits of which 90 credits in science/engineering (physics, chemistry, biology, mathematics, earth science, computer science, material science), including 15 credits in mathematics or physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP029",
+   "text": "120 credits of which 90 credits within science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP032",
+   "text": "120 credits with 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP034",
+   "text": "120 credits with 90 credits in science/engineering (physics, chemistry, biology, mathematics, earth science, computer science, material science), including 15 credits in mathematics or physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP045",
+   "text": "120 credits with (1) 90 credits in earth science and 15 credits in chemistry, (2) 90 credits in physics and 30 credits in earth science, 3) 90 credits in engineering and 30 credits in earth science, or 4) 90 credits in geology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD056",
+   "text": "120 credits in science/engineering including 30 credits in mathematics, where 5 credits linear algebra and 5 credits several variable calculus must be covered. Participation in Scientific Computing III or Scientific Computing for Partial Differential Equations. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD354",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD062",
+   "text": "120 credits in science/engineering including 30 credits Mathematics and 10 credits in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD184",
+   "text": "120 credits including 30 credits in mathematics of which 5 credits mathematics containing several variable calculus that can be taken in parallel. Computer Programming I. Participation in one of the courses Scientific Computing basic course, Scientific Computing I, Scientific Computing Bridging course or Numerical methods and Simulation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD354",
+   "text": "120 credits in science/engineering. Scientific Computing II or Introduction to Scientific Computing or Scientific Computing, Bridging Course. Several Variable Calculus. Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TV445",
+   "text": "120 credits of which 90 credits in science/engineering including Fluid Mechanics, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA253",
+      "type": "HARD"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Upplägg 1:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Header introducing the first programme track/setup option.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Upplägg 2:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Setup 2 (study plan variant):",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1GV219 ges endast på svenska.",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GV219"
+    ],
+    "labelEn": "1GV219 is only offered in Swedish.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga alternativ:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other alternatives (unspecified additional options follow this heading).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kurserna 1FA252 och 1FA257 kan schemaläggas samtidigt, studenter förväntas inte läsa dem under samma period.",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA252",
+     "1FA257"
+    ],
+    "labelEn": "Courses 1FA252 and 1FA257 may be scheduled in parallel, but students are not expected to take both during the same period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TV445 ges endast på svenska.",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TV445"
+    ],
+    "labelEn": "1TV445 is offered only in Swedish.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Upplägg 1:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Header reading 'Upplägg 1:' (Layout/Option 1:), introducing a track without naming any courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Upplägg 2:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "This indicates study plan setup/track 2, without specifying courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1GV219 ges endast på svenska.",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GV219"
+    ],
+    "labelEn": "1GV219 is taught only in Swedish.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga alternativ:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other alternatives.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1MP022 och 1MP024 är blockkurser som ges med 100% studietakt.",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1MP022",
+     "1MP024"
+    ],
+    "labelEn": "1MP022 and 1MP024 are block courses given at 100% study pace.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Upplägg 1:",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Heading for study option 1.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Upplägg 2:",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Setup/Option 2",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga alternativ:",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other alternatives follow (heading with no specific courses listed).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Från och med denna period kan studenter, som följer upplägg 1 eller 2, läsa samma kurser.",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "From this period onward, students following track 1 or 2 may take the same courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga alternativ:",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other alternatives:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1GE038 är för magisterexamen.",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GE038"
+    ],
+    "labelEn": "Course 1GE038 counts toward the magister's degree (one-year master's).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga alternativ:",
+    "semester": 3,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other alternatives:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga alternativ:",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other alternatives.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga kurser som kan läsas under valfri period:",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other courses that may be taken during any period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Följande beteckningar används:G1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hpG2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The note is a legend explaining the course level designations (G1F, G2F, A1N, A1F, A1E, A2E) used in the study plan.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

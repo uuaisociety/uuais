@@ -1,0 +1,208 @@
+{
+ "edges": [
+  {
+   "code": "1GE073",
+   "text": "120 credits including (1) 60 credits in mathematics and physics or (2) 60 credits in earth science and 15 credits in mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP001",
+   "text": "120 credits in natural science/engineering including participation in Mineral exploration. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MP032",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MP018",
+   "text": "120 credits including 90 credits in science/engineering (physics, chemistry, biology, mathematics, earth science, computer science, material science), including 15 credits in mathematics or physics and 10 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP022",
+   "text": "120 credits of which 90 credits in science/engineering (physics, chemistry, biology, mathematics, earth sciences, computer science, material science). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP024",
+   "text": "120 credits of which 90 credits in science/engineering (physics, chemistry, biology, mathematics, earth science, computer science, material science), including 15 credits in mathematics or physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP029",
+   "text": "120 credits of which 90 credits within science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP032",
+   "text": "120 credits with 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP033",
+   "text": "120 credits in natural science/engineering including 10 credits chemistry or participation in Economic geology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP034",
+   "text": "120 credits with 90 credits in science/engineering (physics, chemistry, biology, mathematics, earth science, computer science, material science), including 15 credits in mathematics or physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE777",
+   "text": "120 credits, of which 90 credits in science/engineering. Participation in Industrial Strategy and Organisation, Industrial Management, Innovation Management and Entrepreneurship or Industrial Engineering and Management I: the Functions of the Corporation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE769",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TS346",
+   "text": "150 credits in science/engineering/pharmacy including 15 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS363",
+   "text": "120 credits including 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Universiteit Gent och TU Bergakademie Freiberg Period Universitet Kursnamn Hp Nivå/Djup Område 1 Gent Introduction to the circular economy, economics and management of natural resources 4 A1N HU 1 Freiberg Problems and innovations in the process chain of mineral resources 4 A1N HU 2 Gent Sustainable systems engineering 5 A1N HU 2 Gent Sustainable development and multicriteria decision-making 3 A1N HU 2 Gent Rational Use of Materials 5 A1N HU 2 Gent Resource recovery and recycling technologies 5 A1N HU",
+    "semester": 1,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Semester 1 is spent at Universiteit Gent and TU Bergakademie Freiberg taking introductory courses on circular economy, mineral resources, sustainable systems, and resource recovery.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Uppsala universitet",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Semester 2 is studied at Uppsala University.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Studenterna läser 1MP032 och väljer en av 1HY042, 1MP034 eller 1MP018, eller 1MP001 i period 4.",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1MP032",
+     "1HY042",
+     "1MP034",
+     "1MP018",
+     "1MP001"
+    ],
+    "labelEn": "Students take 1MP032 and choose one of 1HY042, 1MP034, 1MP018, or 1MP001 in period 4.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1MP001 är valbar kurs.",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1MP001"
+    ],
+    "labelEn": "1MP001 is an elective course.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Sommartermin (TU Bergakademie Freiberg) Period Universitet Kursnamn Hp Nivå/Djup Område Sommar Freiberg Resurskemi 9 A1N HU",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Summer-term course Resource Chemistry (9 hp, A1N) is taken at TU Bergakademie Freiberg.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Alla studenter läser gemensamt kursblock om 15 hp vid TU Bergakademie Freiberg, samt väljer fördjupningsspår under år 2:Gemensamt kursblock (TU Bergakademie Freiberg)* Period Universitet Kursnamn Hp Nivå/Djup Område 1/2 Freiberg SINReM Praktik 10 A1N HU 1-4 (year course) Freiberg Financial and sustainability reporting, financial planning and business valuation 5 A1N HU Kursen Financial and sustainability reporting, financial planning and business valuation ges på distans.",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "All students take a common 15-credit course block at TU Bergakademie Freiberg: a 10-credit SINReM internship (year-long, periods 1-2) plus the distance-taught course Financial and Sustainability Reporting, Financial Planning and Business Valuation (5 credits).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Universitet Gent, TU Bergakademie Freiberg och Uppsala universitetStudenterna gör examensarbetet på samma lärosäte som fördjupningsspåret. Period Universitet Kursnamn Hp Nivå/Djup Område 3&4 Gent Master's dissertation (I002199) 30 A2E HU 3&4 Freiberg Master thesis in sustainable and innovative natural resource management 30 A2E HU",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GV193"
+    ],
+    "labelEn": "The degree project (30 hp, A2E) is taken at the same university as the student's specialisation track, with equivalent thesis courses at Ghent, Freiberg, and Uppsala.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

@@ -1,0 +1,1600 @@
+{
+  "id": "aec2f35d-04f4-4a33-9a54-44d67d940e26",
+  "code": "TIE2Y",
+  "revisionId": "aec2f35d-04f4-4a33-9a54-44d67d940e26",
+  "nameSv": "Civilingenjörsprogrammet i industriell ekonomi",
+  "totalCredits": 300.0,
+  "semesters": 10,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "5 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1MA010",
+      "titleEn": "Basic Course in Mathematics",
+      "titleSv": "Baskurs i matematik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS301",
+      "titleEn": "Industrial Engineering and Management I: The Functions of the Corporation",
+      "titleSv": "Industriell ekonomi I: företagets funktioner",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2",
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS302",
+      "titleEn": "Introduction to Industrial Analytics",
+      "titleSv": "Introduktion till industrial analytics",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA350",
+      "titleEn": "Linear Algebra I",
+      "titleSv": "Linjär algebra I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Basic Course in Mathematics or Basic Algebra."
+    },
+    {
+      "code": "1TS303",
+      "titleEn": "Industrial Production Philosophies",
+      "titleSv": "Industriella produktionsfilosofier",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS301",
+      "titleEn": "Industrial Engineering and Management I: The Functions of the Corporation",
+      "titleSv": "Industriell ekonomi I: företagets funktioner",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [
+        "Period 1",
+        "Period 2",
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA013",
+      "titleEn": "Single Variable Calculus",
+      "titleSv": "Envariabelanalys",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses."
+    },
+    {
+      "code": "1DL042",
+      "titleEn": "Programming",
+      "titleSv": "Programmering",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics D"
+    },
+    {
+      "code": "1FA104",
+      "titleEn": "Mechanics",
+      "titleSv": "Mekanik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA024",
+      "titleEn": "Linear Algebra II",
+      "titleSv": "Linjär algebra II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "code": "1TS318",
+      "titleEn": "Industrial Engineering and Management II: Organising, Production and Markets",
+      "titleSv": "Industriell ekonomi II: organisering, produktion och marknad",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Industrial Engineering and Management I: The Functions of the Corporation, which of 10 credits must be completed."
+    },
+    {
+      "code": "1TD342",
+      "titleEn": "Introduction to Scientific Computing",
+      "titleSv": "Introduktion till beräkningsvetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "code": "1MA034",
+      "titleEn": "Transform Methods",
+      "titleSv": "Transformmetoder",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "5 credits in mathematics. Participation in Single Variable Calculus, Calculus II for Engineers or Calculus in One Variable. Participation in Linear Algebra I, Algebra and Geometry, Linear Algebra for Engineers or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1EL007",
+      "titleEn": "Virtual Development of Automated Production Systems",
+      "titleSv": "Virtuell utveckling av automatiserade produktionssystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "30 credits from engineering programme. 5 credits first cycle course in programming should have been attended."
+    },
+    {
+      "code": "1MA017",
+      "titleEn": "Several Variable Calculus, Limited Version",
+      "titleSv": "Flervariabelanalys, allmän kurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1TE717",
+      "titleEn": "Digital Technology and Electronics",
+      "titleSv": "Digitalteknik och elektronik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Single Variable Calculus, Linear Algebra and Geometry I. Participation in one of the courses Imperative and Object-Oriented Programming Methodology."
+    },
+    {
+      "code": "1RT490",
+      "titleEn": "Automatic Control I",
+      "titleSv": "Reglerteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Sociotechnical Systems",
+      "mainFieldSv": "System i teknik och samhälle",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering including Single Variable Calculus, Linear Algebra II and participation in Transform Methods."
+    },
+    {
+      "code": "1MS005",
+      "titleEn": "Probability and Statistics",
+      "titleSv": "Sannolikhet och statistik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "code": "1TS320",
+      "titleEn": "Industrial Management III: Project in Business and Technology Development",
+      "titleSv": "Industriell ekonomi III: projekt i affärs- och teknikutveckling",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS330",
+      "titleEn": "Industrial Engineering and Management IV: The Company and its Environment",
+      "titleSv": "Industriell ekonomi IV: företaget och omvärlden",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1",
+        "Period 2",
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits within Master's Programme in Industrial Engineering and Management. Industrial Engineering and Management II: Organizing, Production and Markets. Participation in Industrial Management III: Project in Business and Technology Development."
+    },
+    {
+      "code": "1DL210",
+      "titleEn": "Algorithms and Data Structures I",
+      "titleSv": "Algoritmer och datastrukturer I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "10 credits in computer programming (Program Design, Programming Techniques II, or the equivalent) and 10 credits in mathematics, including basic algebra. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M)."
+    },
+    {
+      "code": "1DL301",
+      "titleEn": "Database Design I",
+      "titleSv": "Databasteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits of which 15 credits in mathematics or statistics. Participation in basic programming."
+    },
+    {
+      "code": "1TD184",
+      "titleEn": "Optimisation",
+      "titleSv": "Optimeringsmetoder",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Data Science",
+      "mainFieldSv": "Dataanalys",
+      "depthCode": "A1N",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 30 credits in mathematics of which 5 credits mathematics containing several variable calculus that can be taken in parallel. Computer Programming I. Participation in one of the courses Scientific Computing basic course, Scientific Computing I, Scientific Computing Bridging course or Numerical methods and Simulation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS368",
+      "titleEn": "Entrepreneurship, Technology and Society",
+      "titleSv": "Entreprenörskap, teknik och samhälle",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "80 credits within the Master's Programme in Industrial Engineering and Management. Industrial Engineering and Management II: Organising, Production and Markets."
+    },
+    {
+      "code": "1TS330",
+      "titleEn": "Industrial Engineering and Management IV: The Company and its Environment",
+      "titleSv": "Industriell ekonomi IV: företaget och omvärlden",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 1",
+        "Period 2",
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits within Master's Programme in Industrial Engineering and Management. Industrial Engineering and Management II: Organizing, Production and Markets. Participation in Industrial Management III: Project in Business and Technology Development."
+    },
+    {
+      "code": "1TS325",
+      "titleEn": "Statistical Inference for Technological Applications",
+      "titleSv": "Statistisk slutledning för tekniska tillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Bioinformatics",
+      "mainFieldSv": "Bioinformatik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Option 1: 120 credits whereof 60 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Option 2: 120 credits whereof 60 credits in science/engineering. Participation in 25 credits in mathematics/statistics/scientific computing, of which 15 credits should be completed. The 25 credits should include statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD352",
+      "titleEn": "Scientific Computing for Data Analysis",
+      "titleSv": "Beräkningsvetenskap för dataanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in Linear Algebra II/Linear Algebra for Data Analysis/Geometry and Calculus II."
+    },
+    {
+      "code": "1TS332",
+      "titleEn": "Independent Project in Industrial Engineering and Management",
+      "titleSv": "Självständigt arbete i industriell ekonomi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS340",
+      "titleEn": "Strategic Management in Technology-Intensive Firms",
+      "titleSv": "Strategisk ledning av teknikintensiva företag",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits within Master's Programme in Industrial Engineering and Management."
+    },
+    {
+      "code": "1TS341",
+      "titleEn": "Leadership in a Global World",
+      "titleSv": "Ledarskap i en global värld",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Option 1: 120 credits within the Master's Programme in Industrial Engineering and Management. Option 2: 120 credits within or a Bachelor's Degree within Science in Engineering or Technology. Participation in Industrial Strategy and Organisation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE763",
+      "titleEn": "Innovation: Traditions, Theories, Trends",
+      "titleSv": "Innovation - traditioner, teorier, trender",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "A1F",
+      "semester": 7,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 180 credits, of which 90 credits in Technology. Innovation Management, Marketing for Industrial Companies and also Industrial Strategy and Organisation. Participation in Industrialisation and Engineering Ethics. Participation in 5 credits at Master's level in Industrial Engineering and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 150 credits within Master's Programme in Industrial Engineering and Management, including Industrial Engineering and Management II: Organising, Production and Markets. Participation in 5 credits at Master's level in Technology or Industrial Engineering and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS363",
+      "titleEn": "Organising Technology Intensive Work",
+      "titleSv": "Organisering av teknikintensivt arbete",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS328",
+      "titleEn": "Industrial Project Management II",
+      "titleSv": "Industriell projektledning II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "A1F",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Option 1: 120 credits, including 90 credits in science/engineering. Participation in the course Industrial Project Management I. Option 2: 120 credits, including 90 credits in science/engineering. Industrial Engineering and Management I: The Functions of the Corporation, Industrial Management III: Project in Business and Technology Development. Participation in Strategic Management in Technology-Intensive Firms. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL360",
+      "titleEn": "Data Mining I",
+      "titleSv": "Informationsutvinning I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL400",
+      "titleEn": "Database Design II",
+      "titleSv": "Databasteknik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits of which 15 credits in mathematics and 30 credits in computer science or information systems, including a second course in computer programming. Participation in Database Design I or some other first course in databases. Participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS321",
+      "titleEn": "Artificial Intelligence for Industrial Analytics",
+      "titleSv": "Artificiell intelligens för industriell analys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT118",
+      "titleEn": "Cybersecurity Analysis",
+      "titleSv": "Cybersäkerhetsanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including algorithms and data structures, database design, and 10 credits in programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS342",
+      "titleEn": "Technological Change and Industrial (Re)organisation",
+      "titleSv": "Teknologisk förändring och industriell (om)organisering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Option 1: 150 credits within the Master's Programme in Industrial Engineering and Management, including 10 credits at Master's level in technology. Option 2: 150 credits, including 90 credits in technology. Participation in Industrial Strategy and Organisation, of which 5 credits must be completed, and Innovation Management. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS311",
+      "titleEn": "Designing Health Innovations",
+      "titleSv": "Design av hälsoinnovationer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 60 credits in science/engineering/medicine/pharmacy/business administration. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE742",
+      "titleEn": "Managing Sustainability in Global Industrial Companies",
+      "titleSv": "Ledning för hållbarhet i globala industriföretag",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits, of which 90 credits in technology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE735",
+      "titleEn": "Industrialisation",
+      "titleSv": "Industrialisering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 130 credits, of which 90 credits in technology, 20 credits in mathematics and 5 credits at Master's level in industrial engineering and management. Participation in Industrial Strategy and Organisation, of which 3 credits must be completed, Innovation Management and Marketing for Industrial Companies. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternatiive 2: 150 credits within the Master's Programme in Industrial Engineering and Management, including Industrial Engineering and Management II: Organising, Production and Markets. Participation in 5 credits at Master's level in Technology or Industrial Engineering and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE051",
+      "titleEn": "Project: Product Development/Market Research, In-depth",
+      "titleSv": "Projekt - fördjupning i produktutveckling/marknadsanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1RT700",
+      "titleEn": "Statistical Machine Learning",
+      "titleSv": "Statistisk maskininlärning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Image Analysis and Machine Learning",
+      "mainFieldSv": "Bildanalys och maskininlärning",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD169",
+      "titleEn": "Data Engineering I",
+      "titleSv": "Data engineering I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Data Science",
+      "mainFieldSv": "Dataanalys",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS360",
+      "titleEn": "Production Systems Modelling and Optimisation",
+      "titleSv": "Modellering och optimering av produktionssystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits, of which 90 credits in technology and 20 credits in mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS364",
+      "titleEn": "Technology, Business Development and Management",
+      "titleSv": "Teknik, affärsutveckling och ledning",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "200 credits within the Master's Programme in Industrial Engineering and Management, including an Independent Project in Industrial Engineering and Management, and 15 credits at the second-cycle level in Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS352",
+      "titleEn": "Scientific Methods for Industrial Engineering and Management",
+      "titleSv": "Vetenskapliga metoder för industriell ekonomi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS353",
+      "titleEn": "Ethics in Technology and Organising",
+      "titleSv": "Etik i teknik och organisering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS344",
+      "titleEn": "Creativity and Sustainable Design in Technology-Based Entrepreneurship",
+      "titleSv": "Kreativitet och hållbar design i teknikbaserat entreprenörskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2JS560",
+      "titleEn": "Intellectual Property Rights and Commercial Law",
+      "titleSv": "Immaterialrätt och affärsjuridik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1RT705",
+      "titleEn": "Advanced Probabilistic Machine Learning",
+      "titleSv": "Avancerad probabilistisk maskininlärning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, Statistical Machine Learning, a course in several variable analysis and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS316",
+      "titleEn": "Advanced Simulation and Prescriptive Analytics",
+      "titleSv": "Avancerad simulering och preskriptiv analys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "130 credits in science/engineering, including 5 credits in computer programming, 20 credits in mathematics, 5 credits in statistics and probability theory, and 5 credits at Master's level in Industrial Engineering and Management and/or Computer Science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TS354",
+      "titleEn": "Degree Project in Industrial Engineering and Management",
+      "titleSv": "Examensarbete i industriell ekonomi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A2E",
+      "semester": 10,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS355",
+      "titleEn": "Advanced Workplace Training in Industrial Engineering and Management",
+      "titleSv": "Avancerad praktik i industriell ekonomi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 10,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1MA350"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Kurserna Linjär algebra och geometri I, 5 hp (1MA025) och Linjär algebra I, 5 hp (1MA350) kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet.",
+      "labelEn": "Linear Algebra and Geometry I (1MA025) and Linear Algebra I (1MA350) cannot both count toward the degree; one is mandatory.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Introduktion till beräkningsvetenskap (1TD342) ersätter kursen Beräkningsvetenskap I (1TD393). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet. Virtuell utveckling av automatiserade produktionssystem (1EL007) ersätter kursen Virtuell utveckling av automatiserade produktionssystem (1TS319). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet.",
+      "labelEn": null,
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE763",
+        "1TS363",
+        "1TS328"
+      ],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TE763, 1TS363, 1TS328",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-3",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1DL360",
+        "1DL400",
+        "1TS321",
+        "1DT118"
+      ],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1DL360, 1DL400, 1TS321, 1DT118",
+      "labelEn": "Choose one of 4 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "I examen ska ingå minst 20 hp från den ena profileringen och minst 10 hp från den andra profileringen. Profileringskurser kan även läsas termin 8 och 9.Kurserna (1TE779) Organisering av kunskapsintensivt arbete och Organisering av teknikintensivt arbete (1TS363) kan inte ingå i examen samtidigt.",
+      "labelEn": null,
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TS311",
+        "1TE742",
+        "1TE735",
+        "1TE051"
+      ],
+      "semester": 8,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TS311, 1TE742, 1TE735, 1TE051",
+      "labelEn": "Choose one of 4 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-6",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1RT700",
+        "1TD169",
+        "1TS360"
+      ],
+      "semester": 8,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1RT700, 1TD169, 1TS360",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-7",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TS360"
+      ],
+      "semester": 8,
+      "trackId": null,
+      "textSv": "Kurserna Modellering och optimering av produktionssystem (1TS360) och Modellering och optimering av logistiska system(1TE776) kan inte ingå i examen samtidigt.",
+      "labelEn": "Courses 1TS360 and 1TE776 cannot both count toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-8",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TS344",
+        "2JS560"
+      ],
+      "semester": 9,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TS344, 2JS560",
+      "labelEn": "Choose one of 2 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-9",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1RT705",
+        "1TS316"
+      ],
+      "semester": 9,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1RT705, 1TS316",
+      "labelEn": "Choose one of 2 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-10",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TS353"
+      ],
+      "semester": 9,
+      "trackId": null,
+      "textSv": "Kursen Etik i teknik och organisering (1TS353) kan ingå både i profileringen mot Affärsutveckling och innovation och profileringen mot Industriell analys och digitalisering.",
+      "labelEn": "Course 1TS353 can count toward both the Business Development and Innovation and the Industrial Analysis and Digitalisation profiles.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Kurserna Linjär algebra och geometri I, 5 hp (1MA025) och Linjär algebra I, 5 hp (1MA350) kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet.",
+      "semester": 1,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Introduktion till beräkningsvetenskap (1TD342) ersätter kursen Beräkningsvetenskap I (1TD393). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet. Virtuell utveckling av automatiserade produktionssystem (1EL007) ersätter kursen Virtuell utveckling av automatiserade produktionssystem (1TS319). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TE763, 1TS363, 1TS328",
+      "semester": 7,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TE763",
+        "1TS363",
+        "1TS328"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1DL360, 1DL400, 1TS321, 1DT118",
+      "semester": 7,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1DL360",
+        "1DL400",
+        "1TS321",
+        "1DT118"
+      ]
+    },
+    {
+      "textSv": "I examen ska ingå minst 20 hp från den ena profileringen och minst 10 hp från den andra profileringen. Profileringskurser kan även läsas termin 8 och 9.Kurserna (1TE779) Organisering av kunskapsintensivt arbete och Organisering av teknikintensivt arbete (1TS363) kan inte ingå i examen samtidigt.",
+      "semester": 7,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TS311, 1TE742, 1TE735, 1TE051",
+      "semester": 8,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TS311",
+        "1TE742",
+        "1TE735",
+        "1TE051"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1RT700, 1TD169, 1TS360",
+      "semester": 8,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1RT700",
+        "1TD169",
+        "1TS360"
+      ]
+    },
+    {
+      "textSv": "Kurserna Modellering och optimering av produktionssystem (1TS360) och Modellering och optimering av logistiska system(1TE776) kan inte ingå i examen samtidigt.",
+      "semester": 8,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TS344, 2JS560",
+      "semester": 9,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TS344",
+        "2JS560"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1RT705, 1TS316",
+      "semester": 9,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1RT705",
+        "1TS316"
+      ]
+    },
+    {
+      "textSv": "Kursen Etik i teknik och organisering (1TS353) kan ingå både i profileringen mot Affärsutveckling och innovation och profileringen mot Industriell analys och digitalisering.",
+      "semester": 9,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [
+    {
+      "from": "1DL210",
+      "to": "1DL360",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL301",
+      "to": "1DL360",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL210",
+      "to": "1DL400",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits of which 15 credits in mathematics and 30 credits in computer science or information systems, including a second course in computer programming. Participation in Database Design I or some other first course in databases. Participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL301",
+      "to": "1DL400",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits of which 15 credits in mathematics and 30 credits in computer science or information systems, including a second course in computer programming. Participation in Database Design I or some other first course in databases. Participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL042",
+      "to": "1DT118",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including algorithms and data structures, database design, and 10 credits in programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL210",
+      "to": "1DT118",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including algorithms and data structures, database design, and 10 credits in programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL301",
+      "to": "1DT118",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including algorithms and data structures, database design, and 10 credits in programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL042",
+      "to": "1EL007",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "30 credits from engineering programme. 5 credits first cycle course in programming should have been attended."
+    },
+    {
+      "from": "1MA010",
+      "to": "1MA013",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA350",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA034",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "5 credits in mathematics. Participation in Single Variable Calculus, Calculus II for Engineers or Calculus in One Variable. Participation in Linear Algebra I, Algebra and Geometry, Linear Algebra for Engineers or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA350",
+      "to": "1MA034",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "5 credits in mathematics. Participation in Single Variable Calculus, Calculus II for Engineers or Calculus in One Variable. Participation in Linear Algebra I, Algebra and Geometry, Linear Algebra for Engineers or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA010",
+      "to": "1MS005",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MS005",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA013",
+      "to": "1RT490",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering including Single Variable Calculus, Linear Algebra II and participation in Transform Methods."
+    },
+    {
+      "from": "1MA024",
+      "to": "1RT490",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering including Single Variable Calculus, Linear Algebra II and participation in Transform Methods."
+    },
+    {
+      "from": "1MA034",
+      "to": "1RT490",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering including Single Variable Calculus, Linear Algebra II and participation in Transform Methods."
+    },
+    {
+      "from": "1DL042",
+      "to": "1RT700",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA013",
+      "to": "1RT700",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA024",
+      "to": "1RT700",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MS005",
+      "to": "1RT700",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL042",
+      "to": "1RT705",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, Statistical Machine Learning, a course in several variable analysis and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA013",
+      "to": "1RT705",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, Statistical Machine Learning, a course in several variable analysis and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA017",
+      "to": "1RT705",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, Statistical Machine Learning, a course in several variable analysis and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA024",
+      "to": "1RT705",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, Statistical Machine Learning, a course in several variable analysis and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MS005",
+      "to": "1RT705",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, Statistical Machine Learning, a course in several variable analysis and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1RT700",
+      "to": "1RT705",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, Statistical Machine Learning, a course in several variable analysis and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL042",
+      "to": "1TE717",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Single Variable Calculus, Linear Algebra and Geometry I. Participation in one of the courses Imperative and Object-Oriented Programming Methodology."
+    },
+    {
+      "from": "1MA013",
+      "to": "1TE717",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Single Variable Calculus, Linear Algebra and Geometry I. Participation in one of the courses Imperative and Object-Oriented Programming Methodology."
+    },
+    {
+      "from": "1MA350",
+      "to": "1TE717",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Single Variable Calculus, Linear Algebra and Geometry I. Participation in one of the courses Imperative and Object-Oriented Programming Methodology."
+    },
+    {
+      "from": "1TS318",
+      "to": "1TE763",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Alternative 1: 180 credits, of which 90 credits in Technology. Innovation Management, Marketing for Industrial Companies and also Industrial Strategy and Organisation. Participation in Industrialisation and Engineering Ethics. Participation in 5 credits at Master's level in Industrial Engineering and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alt"
+    },
+    {
+      "from": "1TS301",
+      "to": "1TS318",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Industrial Engineering and Management I: The Functions of the Corporation, which of 10 credits must be completed."
+    },
+    {
+      "from": "1TS318",
+      "to": "1TS330",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits within Master's Programme in Industrial Engineering and Management. Industrial Engineering and Management II: Organizing, Production and Markets. Participation in Industrial Management III: Project in Business and Technology Development."
+    },
+    {
+      "from": "1TS320",
+      "to": "1TS330",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits within Master's Programme in Industrial Engineering and Management. Industrial Engineering and Management II: Organizing, Production and Markets. Participation in Industrial Management III: Project in Business and Technology Development."
+    },
+    {
+      "from": "1TS332",
+      "to": "1TS364",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "200 credits within the Master's Programme in Industrial Engineering and Management, including an Independent Project in Industrial Engineering and Management, and 15 credits at the second-cycle level in Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TS318",
+      "to": "1TS368",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "80 credits within the Master's Programme in Industrial Engineering and Management. Industrial Engineering and Management II: Organising, Production and Markets."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "aec2f35d-04f4-4a33-9a54-44d67d940e26",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3607",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3348",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3047",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2588",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2375",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2156",
+      "name": "Giltig från och med höstterminen 2020"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.061728+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=aec2f35d-04f4-4a33-9a54-44d67d940e26",
+  "programmeTitle": "Civilingenjörsprogrammet i industriell ekonomi, 300 hp (TIE2Y)",
+  "programmeUri": "/utbildning/program/civilingenjorsprogrammet-industriell-ekonomi",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Master's Programme in Industrial Engineering and Management, 300 credits (TIE2Y)"
+}

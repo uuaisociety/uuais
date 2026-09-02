@@ -1,0 +1,636 @@
+{
+  "id": "10011",
+  "code": "TDA2M",
+  "revisionId": "10011",
+  "nameSv": "Masterprogram i dataanalys",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2024",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1MS041",
+      "titleEn": "Introduction to Data Science",
+      "titleSv": "Introduktion till dataanalys",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Mathematics",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Matematik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 80 credits in computer science and mathematics, of which at least 15 credits in computer science including programming, and at least 30 credits in mathematics including probability and statistics, linear algebra and analysis. Participation in, or taken in parallel with, Several Variable Calculus, Limited Version. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL002",
+      "titleEn": "Data, Ethics and Law",
+      "titleSv": "Data, etik och rätt",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Human-Computer Interaction A1N, Image Analysis and Machine Learning",
+      "mainFieldSv": "Bildanalys och maskininlärning A1N, Dataanalys A1N, Datavetenskap A1N, Människa-datorinteraktion",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "140 credits including 75 credits in mathematics and computer science of which at least 15 credits in computer science. Alternatively 45hp in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MA330",
+      "titleEn": "Linear Algebra for Data Science",
+      "titleSv": "Linjär algebra för dataanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Data Science A1N, Mathematics",
+      "mainFieldSv": "Dataanalys A1N, Matematik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits. 20 credits in mathematics including at least 5 credits linear algebra and 5 credits single variable calculus. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL301",
+      "titleEn": "Database Design I",
+      "titleSv": "Databasteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Sociotechnical Systems G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, System i teknik och samhälle G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits of which 15 credits in mathematics or statistics. Participation in basic programming."
+    },
+    {
+      "code": "1DL251",
+      "titleEn": "Software Engineering and Project Management",
+      "titleSv": "Metoder och projektledning för mjukvaruutveckling",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 40 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1RT700",
+      "titleEn": "Statistical Machine Learning",
+      "titleSv": "Statistisk maskininlärning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Image Analysis and Machine Learning A1N, Mathematics A1N, Technology",
+      "mainFieldSv": "Bildanalys och maskininlärning A1N, Dataanalys A1N, Datavetenskap A1N, Matematik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL400",
+      "titleEn": "Database Design II",
+      "titleSv": "Databasteknik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits of which 15 credits in mathematics and 30 credits in computer science or information systems, including a second course in computer programming. Participation in Database Design I or some other first course in databases. Participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD169",
+      "titleEn": "Data Engineering I",
+      "titleSv": "Data engineering I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computational Science A1N, Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik A1N, Tillämpad beräkningsvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD062",
+      "titleEn": "High Performance Programming",
+      "titleSv": "Högprestandaprogrammering",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computational Science A1N, Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik A1N, Tillämpad beräkningsvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including 30 credits Mathematics and 10 credits in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL073",
+      "titleEn": "Natural Computation Methods for Machine Learning",
+      "titleSv": "Naturliga beräkningsmetoder för maskininlärning",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 15 credits in mathematics and 60 credits in computer science/information systems, including 20 credits in programming/algorithms/data structures. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD076",
+      "titleEn": "Data Engineering II",
+      "titleSv": "Data engineering II",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computational Science A1F, Computer Science A1F, Data Science A1F, Technology",
+      "mainFieldSv": "Dataanalys A1F, Datavetenskap A1F, Teknik A1F, Tillämpad beräkningsvetenskap",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits. Participation in Data Engineering I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT114",
+      "titleEn": "Data Security and Privacy",
+      "titleSv": "Datasäkerhet och integritet",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including a second course in programming. Participation in a course in machine learning. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL390",
+      "titleEn": "Degree Project D in Data Science",
+      "titleSv": "Examensarbete D i dataanalys",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Data Science",
+      "mainFieldSv": "Dataanalys",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A bachelor's degree and, in addition at least 15 credits in data science at master's level, including Data, Ethics and Law and the necessary courses at master's level for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL507",
+      "titleEn": "Project in Data Science",
+      "titleSv": "Projekt i dataanalys",
+      "credits": 15.0,
+      "creditsInPeriod": 10.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Data Science A1F, Technology",
+      "mainFieldSv": "Dataanalys A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "150 credits including 30 credits in data science at Master's level, and including 75 credits in mathematics and computer science of which at least 15 credits in computer science. Data, Ethics and Law (may be read in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL360",
+      "titleEn": "Data Mining I",
+      "titleSv": "Informationsutvinning I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD054",
+      "titleEn": "Accelerator-Based Programming",
+      "titleSv": "Acceleratorbaserad programmering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computational Science A1F, Computer Science A1F, Data Science",
+      "mainFieldSv": "Dataanalys A1F, Datavetenskap A1F, Tillämpad beräkningsvetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits. High Performance and Parallel Computing or High Performance Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MD705",
+      "titleEn": "Open Course on Topics in Data Science",
+      "titleSv": "Öppen fördjupningskurs i dataanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Data Science",
+      "mainFieldSv": "Dataanalys",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MD710",
+      "titleEn": "Open Course on Topics in Data Science",
+      "titleSv": "Öppen fördjupningskurs i dataanalys",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 20.0,
+      "compulsory": false,
+      "mainFieldEn": "Data Science",
+      "mainFieldSv": "Dataanalys",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DL465",
+      "titleEn": "Mining of Social Data",
+      "titleSv": "Utvinning av sociala data",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1F, Data Science",
+      "mainFieldSv": "Dataanalys A1F, Datavetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 20 credits in computer science and 25 credits in mathematics or statistics. A second course in computer programming. Introduction to Data Science, alternatively both Data Mining I and an introductory course in machine learning. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL510",
+      "titleEn": "Degree Project E in Data Science",
+      "titleSv": "Examensarbete E i dataanalys",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Data Science",
+      "mainFieldSv": "Dataanalys",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree and, in addition at least 30 credits in data science at Master's level. Data, ethics and law. Participation in course Project in Data Science. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Valbara kurser:",
+      "labelEn": "The following courses are elective.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Valbara kurser:",
+      "labelEn": "Elective courses: this header indicates the courses that follow are electives, without naming any specific course.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Valbara kurser:",
+      "labelEn": "Elective courses:",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Valbara kurser:",
+      "labelEn": "Elective courses:",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Valbara kurser:",
+      "labelEn": "Heading meaning 'Elective courses:'; it introduces a list of electives without naming any specific course.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Valbara kurser:",
+      "labelEn": "Elective courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-6",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Valbara kurser ges i mån av resurser.",
+      "labelEn": "Elective courses are offered subject to available resources.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Valbara kurser:",
+      "semester": 1,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Valbara kurser:",
+      "semester": 1,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Valbara kurser:",
+      "semester": 2,
+      "period": "Period 3",
+      "trackId": null
+    },
+    {
+      "textSv": "Valbara kurser:",
+      "semester": 2,
+      "period": "Period 4",
+      "trackId": null
+    },
+    {
+      "textSv": "Valbara kurser:",
+      "semester": 3,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Valbara kurser:",
+      "semester": 3,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Valbara kurser ges i mån av resurser.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1DL301",
+      "to": "1DL360",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL002",
+      "to": "1DL390",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A bachelor's degree and, in addition at least 15 credits in data science at master's level, including Data, Ethics and Law and the necessary courses at master's level for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MS041",
+      "to": "1DL465",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 20 credits in computer science and 25 credits in mathematics or statistics. A second course in computer programming. Introduction to Data Science, alternatively both Data Mining I and an introductory course in machine learning. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL002",
+      "to": "1DL507",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "150 credits including 30 credits in data science at Master's level, and including 75 credits in mathematics and computer science of which at least 15 credits in computer science. Data, Ethics and Law (may be read in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL002",
+      "to": "1DL510",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree and, in addition at least 30 credits in data science at Master's level. Data, ethics and law. Participation in course Project in Data Science. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL507",
+      "to": "1DL510",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "A Bachelor's degree and, in addition at least 30 credits in data science at Master's level. Data, ethics and law. Participation in course Project in Data Science. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD062",
+      "to": "1TD054",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits. High Performance and Parallel Computing or High Performance Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL301",
+      "to": "1TD169",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
+    },
+    {
+      "from": "1MA330",
+      "to": "1TD169",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10011",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3482",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3186",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3129",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;2"
+    },
+    {
+      "id": "2855",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;1"
+    },
+    {
+      "id": "2770",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;2"
+    },
+    {
+      "id": "2676",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;1"
+    },
+    {
+      "id": "2554",
+      "name": "Giltig från och med höstterminen 2021, version&nbsp;2"
+    },
+    {
+      "id": "2248",
+      "name": "Giltig från och med höstterminen 2021, version&nbsp;1"
+    },
+    {
+      "id": "2138",
+      "name": "Giltig från och med höstterminen 2020"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.145485+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10011",
+  "programmeTitle": "Masterprogram i dataanalys – Data engineering, 120 hp (TDA2M)",
+  "programmeUri": "/utbildning/program/masterprogram-dataanalys-data-engineering",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Master's Programme in Data Science – Machine Learning and Statistics, 120 credits (TDA2M)"
+}

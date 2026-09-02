@@ -1,0 +1,910 @@
+{
+  "id": "10026",
+  "code": "TGV2M",
+  "revisionId": "10026",
+  "nameSv": "Masterprogram i geovetenskap",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1GV014",
+      "titleEn": "Dynamics of Earth Systems: Global Change",
+      "titleSv": "Dynamiska geosystem - global förändring",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in technology or physics and 30 credits in earth science or Environmental Science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GE039",
+      "titleEn": "Applied Geoinformatics for Earth Sciences",
+      "titleSv": "Tillämpad geoinformatik för geovetenskaper",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Geography",
+      "mainFieldSv": "Geografi A1N, Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in technology or physics and 30 credits in earth science or Environmental Science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GE073",
+      "titleEn": "Applied Geophysics and Rock Physics",
+      "titleSv": "Tillämpad geofysik och petrofysik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including (1) 60 credits in mathematics and physics or (2) 60 credits in earth science and 15 credits in mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV006",
+      "titleEn": "Presentation and Publication",
+      "titleSv": "Presentation och publicering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with (1) 90 credits in earth science or biology, or (2) 90 credits in technology or physics and 30 credits in earth science or environmental science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1HY013",
+      "titleEn": "Statistics and Data Analysis Methods",
+      "titleSv": "Statistik och dataanalysmetoder",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with 90 credits in earth science or in technology or physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1HY111",
+      "titleEn": "Hydrochemistry",
+      "titleSv": "Hydrokemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with (1) 90 credits in earth science or biology, or (2) 90 credits in technology or physics and 30 credits in earth science or environmental science. 5 credits in inorganic chemistry are recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1ME404",
+      "titleEn": "Climate Variations",
+      "titleSv": "Klimatvariationer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with 90 credits in physics, earth science or biology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1HY039",
+      "titleEn": "Hydrological Processes",
+      "titleSv": "Hydrologiska processer",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with 90 credits in earth science or in technology or physics. Participation in Statistics and Data Analysis Methods 5 credits. 15 credits in mathematics are recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1HY042",
+      "titleEn": "Environmental Assessment",
+      "titleSv": "Miljöanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Sustainable Development",
+      "mainFieldSv": "Geovetenskap A1N, Hållbar utveckling",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1HY041",
+      "titleEn": "Groundwater and Surface Water Modelling",
+      "titleSv": "Grundvatten- och ytvattenmodellering",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with 90 credits in earth science or in technology or physics. 15 credits mathematics. Participation in course Hydrological Processes, of which 3 credits must be completed. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GE043",
+      "titleEn": "Field Methods in Earth Science",
+      "titleSv": "Geovetenskapliga fältmetoder",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1F, Water Engineering",
+      "mainFieldSv": "Geovetenskap A1F, Vattenteknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with 90 credits in earth science or in technology or physics. Applied Geoinformatics for Earth Sciences, 5 credits, or at least 3 credits from Hydrological Processes. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV013",
+      "titleEn": "Degree Project D in Earth Science",
+      "titleSv": "Examensarbete D i geovetenskap",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TV447",
+      "titleEn": "Distribution and Treatment of Drinking Water",
+      "titleSv": "Dricksvattenberedning och ledningsnät",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Technology A1N, Water Engineering",
+      "mainFieldSv": "Geovetenskap A1N, Teknik A1N, Vattenteknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits, or Hydrological Processes, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1HY043",
+      "titleEn": "Water and Society",
+      "titleSv": "Vatten och samhälle",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1F, Sustainable Development",
+      "mainFieldSv": "Geovetenskap A1F, Hållbar utveckling",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with Dynamics of Earth Systems - Global Change, 10 credits, or Our Natural Resources, 10 credits, or Introduction to Water Engineering, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1HY045",
+      "titleEn": "Research Trends in Physical Geography and Hydrology",
+      "titleSv": "Aktuell forskning i naturgeografi och hydrologi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in technology or physics and 30 credits in earth science or Environmental Science. Geomorphology and Surface Processes, 10 credits, or Glaciology and Glacial Landscape Processes, 15 credits, or Hydrological Processes, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV220",
+      "titleEn": "Degree Project E in Earth Sciences",
+      "titleSv": "Examensarbete E i geovetenskap",
+      "credits": 60.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GE072",
+      "titleEn": "Cold Region Hydrology and Environmental Change",
+      "titleSv": "Hydrologi och miljöförändringar i kalla regioner",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in engineering/physics and 30 credits in earth science/environmental Science. Dynamics of Earth Systems - Global Change. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1HY044",
+      "titleEn": "Natural Hazards and Disasters",
+      "titleSv": "Naturolyckor och naturkatastrofer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with Dynamics of Earth Systems - Global Change, 10 credits, or Our Natural Resources, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV085",
+      "titleEn": "Degree Project E in Earth Science",
+      "titleSv": "Examensarbete E i geovetenskap",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV025",
+      "titleEn": "Degree Project E1 in Earth Science",
+      "titleSv": "Examensarbete E1 i geovetenskap",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV027",
+      "titleEn": "Degree Project E2 in Earth Science",
+      "titleSv": "Examensarbete E2 i geovetenskap",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV085",
+      "titleEn": "Degree Project E in Earth Science",
+      "titleSv": "Examensarbete E i geovetenskap",
+      "credits": 45.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 45.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV220",
+      "titleEn": "Degree Project E in Earth Sciences",
+      "titleSv": "Examensarbete E i geovetenskap",
+      "credits": 60.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 60.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV054",
+      "titleEn": "Exploration and Environmental Geophysics",
+      "titleSv": "Prospekterings- och miljöinriktad geofysik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1BG211",
+      "titleEn": "Environmental and Administration Law",
+      "titleSv": "Miljö- och förvaltningsrätt för naturvetare",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology",
+      "mainFieldSv": "Biologi",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1HY125",
+      "titleEn": "Hydromechanics",
+      "titleSv": "Hydromekanik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV208",
+      "titleEn": "Exploring Space Resources",
+      "titleSv": "Rymdens resurser",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1N, Sustainable Development",
+      "mainFieldSv": "Geovetenskap A1N, Hållbar utveckling",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 30 credits in natural science or engineering or sustainable development. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV163",
+      "titleEn": "Specialised Course in Earth Science I",
+      "titleSv": "Öppen fördjupningskurs i geovetenskap I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV174",
+      "titleEn": "Specialised Course in Earth Science II",
+      "titleSv": "Öppen fördjupningskurs i geovetenskap II",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV048",
+      "titleEn": "Independent Project in Earth Sciences",
+      "titleSv": "Projektarbete i geovetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV049",
+      "titleEn": "Independent Project in Earth Sciences",
+      "titleSv": "Projektarbete i geovetenskap",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV051",
+      "titleEn": "Independent Project in Earth Sciences",
+      "titleSv": "Projektarbete i geovetenskap",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV131",
+      "titleEn": "Professional Training in Earth Sciences",
+      "titleSv": "Yrkesanknuten praktik i geovetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV132",
+      "titleEn": "Professional Training in Earth Sciences",
+      "titleSv": "Yrkesanknuten praktik i geovetenskap",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV133",
+      "titleEn": "Professional Training in Earth Sciences",
+      "titleSv": "Yrkesanknuten praktik i geovetenskap",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "A1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MP029",
+      "titleEn": "Applied 3D Geological Mapping and Modelling",
+      "titleSv": "Tillämpad 3D geologisk kartering och modellering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science A1F, Sustainable Development",
+      "mainFieldSv": "Geovetenskap A1F, Hållbar utveckling",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits of which 90 credits within science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Eller:",
+      "labelEn": "Or:",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "alternativt",
+      "labelEn": "The Swedish word 'alternativt' (alternatively) flags an alternative option but names no specific courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [
+        "1GV085"
+      ],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Examensarbete E i geovetenskap, 15 (av 45) högskolepoäng (1GV085) kan vid behov påbörjas i denna period.",
+      "labelEn": "Degree Project E in Earth Science (15 of 45 credits, 1GV085) may if needed be started in this period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [
+        "1GV085"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "1GV085 Examensarbete E i geovetenskap, 30 (av 45) högskolepoäng.",
+      "labelEn": "Only 30 of the 45 credits for Degree Project E in Earth Science (1GV085) count toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [
+        "1GV220"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "1GV220 Examensarbete E i geovetenskap, 30 (av 60) högskolepoäng.",
+      "labelEn": "Only 30 of the 60 credits for Degree Project E in Earth Sciences (1GV220) count in semester 4.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Övriga kurser (varierade perioder):",
+      "labelEn": "Other courses offered in varying periods.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Eller:",
+      "semester": 1,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "alternativt",
+      "semester": 1,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Examensarbete E i geovetenskap, 15 (av 45) högskolepoäng (1GV085) kan vid behov påbörjas i denna period.",
+      "semester": 3,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "1GV085 Examensarbete E i geovetenskap, 30 (av 45) högskolepoäng.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "1GV220 Examensarbete E i geovetenskap, 30 (av 60) högskolepoäng.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Övriga kurser (varierade perioder):",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1GE039",
+      "to": "1GE043",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 90 credits in earth science or in technology or physics. Applied Geoinformatics for Earth Sciences, 5 credits, or at least 3 credits from Hydrological Processes. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1GV014",
+      "to": "1GE072",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in engineering/physics and 30 credits in earth science/environmental Science. Dynamics of Earth Systems - Global Change. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1HY013",
+      "to": "1HY039",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits with 90 credits in earth science or in technology or physics. Participation in Statistics and Data Analysis Methods 5 credits. 15 credits in mathematics are recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1GV014",
+      "to": "1HY043",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with Dynamics of Earth Systems - Global Change, 10 credits, or Our Natural Resources, 10 credits, or Introduction to Water Engineering, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1GV014",
+      "to": "1HY044",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with Dynamics of Earth Systems - Global Change, 10 credits, or Our Natural Resources, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1HY039",
+      "to": "1HY045",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in technology or physics and 30 credits in earth science or Environmental Science. Geomorphology and Surface Processes, 10 credits, or Glaciology and Glacial Landscape Processes, 15 credits, or Hydrological Processes, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1HY039",
+      "to": "1TV447",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits, or Hydrological Processes, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10026",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3638",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3296",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2844",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2670",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2307",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2175",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1876",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1702",
+      "name": "Giltig från och med höstterminen 2018, version&nbsp;2"
+    },
+    {
+      "id": "1596",
+      "name": "Giltig från och med höstterminen 2018, version&nbsp;1"
+    },
+    {
+      "id": "1456",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1283",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    },
+    {
+      "id": "1235",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1049",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "832",
+      "name": "Giltig från och med höstterminen 2015"
+    },
+    {
+      "id": "746",
+      "name": "Giltig från och med höstterminen 2014"
+    },
+    {
+      "id": "383",
+      "name": "Giltig från och med höstterminen 2013"
+    },
+    {
+      "id": "269",
+      "name": "Giltig från och med höstterminen 2012"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.177309+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10026",
+  "programmeTitle": "Masterprogram i geovetenskap – Hydrologi/hydrogeologi, 120 hp (TGV2M)",
+  "programmeUri": "/utbildning/program/masterprogram-geovetenskap-hydrologi-hydrogeologi",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Master's Programme in Earth Science – Physical Geography, 120 credits (TGV2M)"
+}

@@ -1,0 +1,193 @@
+{
+ "edges": [
+  {
+   "code": "1KB271",
+   "text": "120 credits with 90 credits in chemistry and physics, with at least 60 credits in chemistry. 5 credits electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB275",
+   "text": "Alternative 1: 120 credits including 90 credits in chemistry and physics, with 60 credits in chemistry including 10 credits inorganic chemistry and 10 credits physical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits including 75 credits in physics, chemistry, materials science and/or materials engineering, and 30 credits of materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB284",
+   "text": "120 credits of which 60 credits in chemistry, including 4 credits from Chemical Bonding and Computational Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB550",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB285",
+   "text": "120 credits with 75 credits in physics, chemistry, engineering and/or materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB349",
+   "text": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 120 credits in science/engineering. 5 credits at advanced level. Materials chemistry, Electrochemistry and Quantum mechanics and chemical bonding II. Patricipation in Solid State Physics I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB750",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB753",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB271",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB363",
+   "text": "120 credits with 90 credits in chemistry or physics including Chemical Bonding and Computational Chemistry and 5 credits thermodynamics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB550",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB467",
+   "text": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB550",
+   "text": "120 credits with 60 credits in chemistry. Physical chemistry, 10 credits, is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB750",
+   "text": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB753",
+   "text": "Alternative 1: 120 credits with 90 credits in chemistry and physics, including at least 60 credits in chemistry. Participation in Spectroscopy. Chemical Bonding and Computational Chemistry is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics, chemistry, materials science and/or materials engineering, and participation in Introduction to Materials Science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB750",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB550",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB766",
+   "text": "120 credits with 75 credits in chemistry, physics, materials science and/or materials engineering, including 10 credits in spectroscopy. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB750",
+      "type": "HARD"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1KB467, 1KB750, 1KB550, 1KB285",
+    "semester": 1,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1KB467",
+     "1KB750",
+     "1KB550",
+     "1KB285"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1KB467",
+     "1KB750",
+     "1KB550",
+     "1KB285"
+    ],
+    "labelEn": "One of the courses 1KB467, 1KB750, 1KB550, or 1KB285 must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1KB753, 1KB275, 1KB271, 1KB284",
+    "semester": 2,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1KB753",
+     "1KB275",
+     "1KB271",
+     "1KB284"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1KB753",
+     "1KB275",
+     "1KB271",
+     "1KB284"
+    ],
+    "labelEn": "One of these courses must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1KB766, 1KB349, 1KB363",
+    "semester": 3,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1KB766",
+     "1KB349",
+     "1KB363"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1KB766",
+     "1KB349",
+     "1KB363"
+    ],
+    "labelEn": "One of the courses 1KB766, 1KB349, or 1KB363 must be chosen.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

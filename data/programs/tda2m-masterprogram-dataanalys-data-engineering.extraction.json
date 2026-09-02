@@ -1,0 +1,297 @@
+{
+ "edges": [
+  {
+   "code": "1DL002",
+   "text": "140 credits including 75 credits in mathematics and computer science of which at least 15 credits in computer science. Alternatively 45hp in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL073",
+   "text": "120 credits including 15 credits in mathematics and 60 credits in computer science/information systems, including 20 credits in programming/algorithms/data structures. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL251",
+   "text": "120 credits including 40 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL301",
+   "text": "60 credits of which 15 credits in mathematics or statistics. Participation in basic programming.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL360",
+   "text": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL301",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL390",
+   "text": "A bachelor's degree and, in addition at least 15 credits in data science at master's level, including Data, Ethics and Law and the necessary courses at master's level for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL002",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL400",
+   "text": "120 credits of which 15 credits in mathematics and 30 credits in computer science or information systems, including a second course in computer programming. Participation in Database Design I or some other first course in databases. Participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL301",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL465",
+   "text": "120 credits including 20 credits in computer science and 25 credits in mathematics or statistics. A second course in computer programming. Introduction to Data Science, alternatively both Data Mining I and an introductory course in machine learning. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS041",
+      "type": "HARD"
+     },
+     {
+      "from": "1DL360",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL507",
+   "text": "150 credits including 30 credits in data science at Master's level, and including 75 credits in mathematics and computer science of which at least 15 credits in computer science. Data, Ethics and Law (may be read in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL002",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL510",
+   "text": "A Bachelor's degree and, in addition at least 30 credits in data science at Master's level. Data, ethics and law. Participation in course Project in Data Science. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL002",
+      "type": "HARD"
+     },
+     {
+      "from": "1DL507",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT114",
+   "text": "120 credits including a second course in programming. Participation in a course in machine learning. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA330",
+   "text": "120 credits. 20 credits in mathematics including at least 5 credits linear algebra and 5 credits single variable calculus. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MS041",
+   "text": "120 credits including 80 credits in computer science and mathematics, of which at least 15 credits in computer science including programming, and at least 30 credits in mathematics including probability and statistics, linear algebra and analysis. Participation in, or taken in parallel with, Several Variable Calculus, Limited Version. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA330",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT700",
+   "text": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA330",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD054",
+   "text": "120 credits. High Performance and Parallel Computing or High Performance Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD062",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD062",
+   "text": "120 credits in science/engineering including 30 credits Mathematics and 10 credits in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD076",
+   "text": "120 credits. Participation in Data Engineering I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD169",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD169",
+   "text": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL301",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA330",
+      "type": "HARD"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The following courses are elective.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses: this header indicates the courses that follow are electives, without naming any specific course.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 3,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Heading meaning 'Elective courses:'; it introduces a list of electives without naming any specific course.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser ges i mån av resurser.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses are offered subject to available resources.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

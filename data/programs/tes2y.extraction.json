@@ -1,0 +1,1190 @@
+{
+ "edges": [
+  {
+   "code": "1FA102",
+   "text": "Participation in Mechanics Basic Course and a course in several variable calculus. The latter course may also be taken in parallel.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA105",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA016",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA410",
+   "text": "120 credits in science/engineering including Introduction to Scientific Computing/Programming in Python. Participation in Technical Thermodynamics and Modern Physics. Technical Thermodynamics and Modern Physics can be exchanged for Energy System Physics. Proficiency in Swedish and English equivalent to the general entry requirements for Bachelor's level (first-cycle) studies.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD342",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA527",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE078",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA412",
+   "text": "120 credits in science and technology including Modern Physics. Participation in Nuclear Power - Technology and Systems. Proficiency in Swedish and English equivalent to the general entry requirements for Bachelor's level (first-cycle) studies.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE078",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA410",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA452",
+   "text": "120 credits in science/engineering including 30 credits in mathematics and 35 credits in physics. Nuclear Power Technology or 2 credits from Nuclear Power - Technology and 2 credits from Systems or Energy Physics II with Nuclear Energy. Proficiency in Swedish and English equivalent to the general entry requirements for Bachelor's level (first-cycle) studies.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA410",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA456",
+   "text": "120 credits in science/engineering, including 30 credits in physics and 5 credits programming. Nuclear Physics or Modern Physics is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE078",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA514",
+   "text": "Participation in Algebra and Geometry, or Linear Algebra I. Participation in Single Variable Calculus, or Calculus in One Variable. Participation in Scientific Computing I, Introduction to Scientific Programming, or Computer programming. Participation in Several Variable Calculus, or Calculus in Several Variables, or studied simultaneously. Participation in Mechanics Basic Course, or Technical Mechanics, or studied simultaneously.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA090",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA016",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA105",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA527",
+   "text": "Single Variable Calculus. Participation in Several Variable Calculus, Mechanics Basic Course/Mechanics and one of the courses Scientific Computing I/Scientific Computing F or Computer Programming I.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA016",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA105",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA594",
+   "text": "150 credits in science/engineering including 30 credits at Master's level. 5 credits in basic mathematical statistics. Participation in Nuclear Power - Technology and Systems, Hydroelectric Power - Technology and Systems, Analysis of Electric Power Systems, Energy Physics II with Nuclear Energy, Nuclear Reactor Physics, or Power System Analysis. These courses may also be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA410",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE029",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE700",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV334",
+   "text": "120 credits including courses in computational science I, programming/computational science II, statistics and electrical engineering and at least one of the courses Energy Systems Physics, Technical Thermodynamics, Fluid Mechanics for Energy-Related Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": null
+  },
+  {
+   "code": "1KB274",
+   "text": "Alternative 1: 120 credits in science and technology, including 5 credits power engineering, 5 credits automatic control, and 5 credits scientific computing. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 130 credits in science and technology, including 10 credits in Energy Technology at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 120 credits in science and technology, including 15 credits in power engineering. Ability to use computer-based calculation tools, such as MATLAB Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE655",
+      "type": "HARD"
+     },
+     {
+      "from": "1RT490",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD342",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA013",
+   "text": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA090",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA016",
+   "text": "Participation in Single Variable Calculus or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA090",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA024",
+   "text": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA090",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA034",
+   "text": "5 credits in mathematics. Participation in Single Variable Calculus, Calculus II for Engineers or Calculus in One Variable. Participation in Linear Algebra I, Algebra and Geometry, Linear Algebra for Engineers or Algebra and Vector Geometry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA090",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT490",
+   "text": "60 credits in science/engineering including Single Variable Calculus, Linear Algebra II and participation in Transform Methods.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA034",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT495",
+   "text": "120 credits including Automatic Control I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1RT490",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT700",
+   "text": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT890",
+   "text": "120 credits including Automatic Control I and a course in basic mathematical statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1RT490",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD342",
+   "text": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD352",
+   "text": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in Linear Algebra II/Linear Algebra for Data Analysis/Geometry and Calculus II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA090",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TD342",
+      "type": "SOFT"
+     },
+     {
+      "from": "1RT700",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD354",
+   "text": "120 credits in science/engineering. Scientific Computing II or Introduction to Scientific Computing or Scientific Computing, Bridging Course. Several Variable Calculus. Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD342",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA016",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD433",
+   "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE028",
+   "text": "120 credits in science/engineering including Modern Physics, Quantum Physics or Quantum Physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE078",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE029",
+   "text": "120 credits in science/engineering, including Electric Power Systems. Participation in a basic course in mechanics, or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6. Mechanics (1TE304) can be taken in parallel.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA105",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE035",
+   "text": "120 credits in science/engineering. Technical Thermodynamics. Participation in Automatic Control I, whereof 1 credit should be completed. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA527",
+      "type": "HARD"
+     },
+     {
+      "from": "1RT490",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE038",
+   "text": "120 credits in science/engineering including Multivariable Calculus, Electromagnetism, Automatic Control and a basic course in statistics. Participation in Mechanics Basic Course, or it could be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA016",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA514",
+      "type": "HARD"
+     },
+     {
+      "from": "1RT490",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA105",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE043",
+   "text": "120 credits in science/engineering including Scientific Computing I, Power Engineering and a basic course in mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD342",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE655",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA105",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE065",
+   "text": "150 credits in science/engineering, including Electromagnetism, Basic Mechanics and Electrical Power Systems. 10 credits at Master's level. In addition, participation in one of the courses Wind Power: Technology and Systems, Hydroelectric Power: Technology and Systems, Wave Power: Technology and Systems, Analysis of Electric Power Systems or Power System Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA514",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA105",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE038",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE029",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE043",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE700",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE654",
+   "text": "30 credits in science/engineering. Participation in the courses Single Variable Calculus and Mechanics Basic Course.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA105",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE687",
+   "text": "30 credits in technology",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE700",
+   "text": "130 credits, out of 5 credits at Master's level in science/engineering including Scientific Computing I, Electrical Power Engineering, Automatic Control I and one of the following courses: Wind Power - Technology and Systems, Wave Power - Technology and Systems, Hydroelectric Power - Technology and Systems. Hydroelectric Power - Technology and Systems could be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": null
+  },
+  {
+   "code": "1TE724",
+   "text": "180 credits in science/engineering including 10 credits at Master's level. Modern Physics, Quantum Physics or Quantum Physics F. Participation in Solar Energy - Technology and Systems or Solar Energy Technologies for Electricity Production (may be taken in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE078",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE028",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE737",
+   "text": "120 credits in science/engineering including Automatic Control I. In addition, participation in 10 credits in science/engineering at advanced level. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1RT490",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE765",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE765",
+   "text": "120 credits in science/engineering, including basic knowledge in electric circuit theory and electronics. Participation in Transform Methods (spec. Fourier series), or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1EL004",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA034",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TS359",
+   "text": "Option 1: 120 credits in science/engineering. Introduction to Energy Systems or Energy System Physics. System Analysis with Energy Applications or Systems Analysis and Operations Research. Participation in Power Engineering. Option 2: A Bachelor's degree with 90 credits in electrical engineering. 15 credits within power systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE655",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "5LH654",
+   "text": "120 credits in science/engineering",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Introduktion till energisystem, 5 (av 10) hp (TN0367 SLU)* Huvudområde(n) med fördjupning: Teknik G1N",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "External course TN0367 Introduction to Energy Systems at SLU counts for 5 of 10 credits in the main field of Technology G1N.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Introduktion till energisystem, 5 (av 10) hp (TN0367 SLU)* Huvudområde(n) med fördjupning: Teknik G1N",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Refers to Introduction to Energy Systems (TN0367 at SLU), an external course counting 5 of 10 credits in semester 1.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Allmän kemi och kemiska energikällor, 5 (av 10) hp (KE0049 SLU)* Huvudområde(n) med fördjupning: Kemi G1N",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Refers to external course KE0049 (SLU) General Chemistry and Chemical Energy Sources, 5 of 10 credits, main field Chemistry G1N, which is not on the roster.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Allmän kemi och kemiska energikällor, 5 (av 10) hp (KE0049 SLU)* Huvudområde(n) med fördjupning: Kemi G1N",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "General Chemistry and Chemical Energy Sources, 5 (of 10) credits (KE0049 SLU), main field of study with specialisation: Chemistry G1N",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Energisystemens biogeokemiska förutsättningar, 5 (av 10) hp (BI1360 SLU)* Huvudområde(n) med fördjupning: Biologi G1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) G1N",
+    "semester": 3,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Notes an external SLU course (BI1360, 'Biogeochemical prerequisites of energy systems'), counting 5 of 10 credits at G1N level in Biology/Earth Science, which is not on the roster.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Grundläggande matematisk statistik, 5 hp (MS0073 SLU)* Huvudområde(n) med fördjupning: Matematik (huvudområde vid SLU: Matematisk statistik) G1F",
+    "semester": 3,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The 5-credit SLU course MS0073 Basic Mathematical Statistics is classified under the main field of Mathematics (Mathematical Statistics at SLU), level G1F.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Energisystemens biogeokemiska förutsättningar, 5 (av 10) hp (BI1360 SLU)* Huvudområde(n) med fördjupning: Biologi G1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) G1N",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Notes an external SLU course BI1360 (Energisystemens biogeokemiska förutsättningar), 5 of 10 credits at G1N level in Biology/Geoscience, which is not part of the roster.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Organisk kemi med energitillämpningar, 5 hp (KE0079 SLU)* Huvudområde(n) med fördjupning: Kemi G1F",
+    "semester": 4,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "External SLU course KE0079 Organic Chemistry with Energy Applications (5 credits), classified under main field of study Chemistry G1F.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Systemanalys med energitillämpningar 5 hp (TN0373 SLU)* Huvudområde(n) med fördjupning: Teknik G1F",
+    "semester": 4,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Systems Analysis with Energy Applications (5 credits, TN0373 at SLU) is an external course with main field of study Technology at G1F level, not part of the listed roster.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Ekonomistyrning för ingenjörer, 5 hp (FÖ0498 SLU)* Huvudområde(n) och successiv fördjupning: Företagsekonomi GXX",
+    "semester": 5,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Financial Management for Engineers (FÖ0498, SLU) is an external course credited under the main field of Business Administration at GXX level.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Energi- och livscykelanalys, 5 hp (TN0285 SLU)* Huvudområde(n) med fördjupning: Teknik G2F",
+    "semester": 5,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Energy and Life Cycle Analysis, 5 credits (TN0285, SLU), with main field of study Technology at G2F level.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Energisystemens miljöpåverkan, 5 hp (KE0069 SLU)* Huvudområde(n) med fördjupning: Kemi G1F, Biologi G1F",
+    "semester": 5,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Environmental Impact of Energy Systems (KE0069, external SLU course, not on the roster) with main fields of Chemistry or Biology at G1F level.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Alternativa kurser(Observera att Modern fysik är förkunskapskrav för kurser i ES4 & ES5)",
+    "semester": 6,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TE078"
+    ],
+    "labelEn": "Note that Modern Physics is a prerequisite for courses in ES4 and ES5.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Ingenjörsetik och Miljörätt kan ej räknas in i examen tillsammans med kurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\" (se Utbildningsplanen och Preciserade krav för programmet).",
+    "semester": 6,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TE687",
+     "2JS905"
+    ],
+    "labelEn": "Engineering Ethics and Environmental Law cannot count toward the degree together with the course package 'Technology-Based Entrepreneurship and Business Development'.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av de två nedanstående kurserna i självständigt arbete är obligatorisk. Endast en av de två kan räknas med i examen.",
+    "semester": 6,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1FA311",
+     "1FA392"
+    ],
+    "labelEn": "One of the two independent project courses is compulsory, and only one of them may count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Självständigt arbete i energisystem, 15 hp (EX0946 SLU)* Huvudområde(n) med fördjupning: Teknik G2E",
+    "semester": 6,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The independent project in energy systems (15 hp) may be taken as EX0946 at SLU, with main field of study Technology at level G2E.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "I årskurs 4 och 5 krockar vissa valbara kurser med varandra i schemat.För information kring detta, se programmets hemsida.",
+    "semester": 7,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "In years 4 and 5, some elective courses clash in the timetable; see the programme website for details.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Ekonomistyrning för ingenjörer, 5 hp (FÖ0498 SLU)* Huvudområde(n) och successiv fördjupning: Företagsekonomi GXX",
+    "semester": 7,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "External course Management Accounting for Engineers (FÖ0498, SLU), 5 hp, counted under the main field Business Administration at GXX level; no roster code applies.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Miljökonsekvensbeskrivning, 5 hp (MX0162 SLU) Huvudområde(n) med fördjupning: Miljövetenskap (huvudområde vid SLU) A1N",
+    "semester": 7,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Semester 7 note: Environmental Impact Assessment, 5 hp (MX0162 at SLU), advanced level A1N with main field of study Environmental Science at SLU.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen Industriell ekonomi och hållbar innovation, 5 hp (G1N) kan tillgodoräknas med motsvarande kurs vid UU (Företagsekonomi eller Industriell ekonomi).",
+    "semester": 7,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Industrial Economics and Sustainable Innovation (5 hp, G1N) may be credited with an equivalent UU course in Business Administration or Industrial Economics.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Geografiska informationssystem för ingenjörer, 5 hp (TE0018 SLU) Huvudområde(n) med fördjupning: Teknik Axx",
+    "semester": 7,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Semester 7 includes an external SLU course, Geographic Information Systems for Engineers (TE0018), 5 credits, within the main field of Technology.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "TE0018 kan ej räknas in i examen tillsammans med TE0005, TE0008 eller TE0016.",
+    "semester": 7,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "TE0018",
+     "TE0005",
+     "TE0008",
+     "TE0016"
+    ],
+    "labelEn": "TE0018 cannot be counted toward the degree together with TE0005, TE0008 or TE0016.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "I årskurs 4 och 5 krockar vissa valbara kurser med varandra i schemat.För information kring detta, se programmets hemsida.",
+    "semester": 8,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Some elective courses in years 4–5 clash in the timetable; see the programme website for details.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Bioenergi - teknik och system, 5 (av 10) hp (TN0352 SLU) Huvudområde(n) med fördjupning: Teknik A1N",
+    "semester": 8,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "An external SLU course, Bioenergy - Technology and Systems (TN0352), counts for 5 of 10 credits at A1N level in Technology.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Bioenergi - teknik och system, 5 (av 10) hp (TN0352 SLU) Huvudområde(n) med fördjupning: Teknik A1N",
+    "semester": 8,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Bioenergy - Technology and Systems, 5 of 10 credits (TN0352 at SLU), counted in the main field of Technology at advanced level A1N.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Logistik, 5 hp (TN0365 SLU) Huvudområde(n) med fördjupning: Teknik A1N",
+    "semester": 8,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "External course Logistics, 5 credits (TN0365, SLU), with main field of study Technology at advanced level A1N.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "I årskurs 4 i 5 krockar vissa valbara kurser med varandra i schemat.För information kring detta, se programmets hemsida.",
+    "semester": 9,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Some elective courses in years 4 and 5 clash in the timetable; see the programme website for details.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Energisystemplanering, 5 (av 10) hp (TN0347 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
+    "semester": 9,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Energy Systems Planning (TN0347, SLU), 5 of 10 credits, is credited in the Technology main field at advanced level A1F.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Hållbar utveckling i energibranschen, 5 hp (TN0350 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
+    "semester": 9,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "External SLU course TN0350 Sustainable Development in the Energy Sector (5 credits), main field of study Technology at advanced level A1F.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1TE700 uppfyller ES-programmets krav på teknik- och systemkurser och kan införas i examen som en sådan.",
+    "semester": 9,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TE700"
+    ],
+    "labelEn": "Power System Analysis fulfils the Energy Systems programme's requirement for technology and systems courses and may be counted in the degree as such.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Energisystemplanering, 5 (av 10) hp (TN0347 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
+    "semester": 9,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Energy Systems Planning (TN0347, SLU) contributes 5 of 10 credits with main field of Technology at A1F level; the course is not on this programme's roster.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen MX0147 har huvudområde miljövetenskap som finns vid SLU men inte vid UU.Stora sociotekniska system kan ej räknas in i examen tillsammans med kurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\" (se Utbildningsplanen och Preciserade krav för programmet).",
+    "semester": 9,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "5LH654"
+    ],
+    "labelEn": "Large Sociotechnical Systems cannot count toward the degree together with the course package 'Technology-Based Entrepreneurship and Business Development'.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av de två nedanstående kurserna \"Examensarbete i energisystem\" (1FA392 alternativt EX1032) är obligatorisk. Endast en av kurserna kan räknas med i examen.",
+    "semester": 10,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1FA392"
+    ],
+    "labelEn": "One of the two degree project courses, 1FA392 or EX1032, is mandatory, but only one of them may count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Examensarbete i energisystem, 30 hp (EX1032 SLU) Huvudområde(n) med fördjupning: Teknik A2E",
+    "semester": 10,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The degree project in Energy Systems (30 hp) is taken at SLU as EX1032 with main field of study Technology at level A2E.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Tillvalskurser:",
+    "semester": 10,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Tillvalskurser i valfri period:",
+    "semester": 10,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Optional elective courses may be taken in any period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Projektarbete i energisystem, 15 hp (TE0024 SLU) Huvudområde(n) med fördjupning: Teknik G2F",
+    "semester": 10,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Project Work in Energy Systems (15 hp, TE0024 at SLU) counts with main field of study Technology at level G2F.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Fördjupande projektarbete i energisystem, 15 hp (TE0023 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
+    "semester": 10,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "An external 15 hp advanced project course in energy systems (TE0023, SLU) at A1F level may be credited.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Endast en av kurserna \"Projektarbete i energisystem\" får ingå i examen.Endast en av kurserna \"Fördjupande projektarbete i energisystem\" får ingå i examen.",
+    "semester": 10,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1FA393",
+     "1FA394"
+    ],
+    "labelEn": "Only one of the project work courses in energy systems may count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Sommarkurser",
+    "semester": 10,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Summer courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i examen: 1TD327 /1TD433, 1EL004/1TE637, 1TD354/1TD397, 1TD352/1TD395, 1TD342/1TD393, 1TS309/1GV134, 5LH654/5LH242, 1TE700/1TE754, FÖ0498(SLU)/FÖ0477(SLU), 1KB274/1KB765, 1TS356/1TE792, 1EL016/1FA529, 1TS359/TN0351(SLU).",
+    "semester": 10,
+    "period": null,
+    "trackId": null
+   },
+   "result": null
+  },
+  {
+   "note": {
+    "textSv": "Övrig informationKurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\", 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare. Detta kurspaket ingår inte i programmets studieplanen (se Utbildningsplanen och Preciserade krav för programmet).",
+    "semester": 10,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The optional course package 'Technology-Based Entrepreneurship and Business Development' (30 hp, semester 9) lies outside the programme study plan and counts toward the degree only for students admitted in 2025/2026 or earlier, with no guaranteed placement.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

@@ -1,0 +1,976 @@
+{
+  "id": "10057",
+  "code": "TKE1K",
+  "revisionId": "10057",
+  "nameSv": "Kandidatprogram i kemi",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1KB016",
+      "titleEn": "General Chemistry",
+      "titleSv": "Allmän kemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements and Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 2, or Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D"
+    },
+    {
+      "code": "1MA010",
+      "titleEn": "Basic Course in Mathematics",
+      "titleSv": "Baskurs i matematik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB410",
+      "titleEn": "Organic Chemistry I",
+      "titleSv": "Organisk kemi I",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G1F, Technology",
+      "mainFieldSv": "Kemi G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA350",
+      "titleEn": "Linear Algebra I",
+      "titleSv": "Linjär algebra I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Basic Course in Mathematics or Basic Algebra."
+    },
+    {
+      "code": "1MA013",
+      "titleEn": "Single Variable Calculus",
+      "titleSv": "Envariabelanalys",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses."
+    },
+    {
+      "code": "1KB409",
+      "titleEn": "Biochemistry",
+      "titleSv": "Biokemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology G1F, Chemistry",
+      "mainFieldSv": "Biologi G1F, Kemi",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB208",
+      "titleEn": "Inorganic Chemistry I",
+      "titleSv": "Oorganisk kemi I",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G1F, Technology",
+      "mainFieldSv": "Kemi G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB103",
+      "titleEn": "Analytical Chemistry with Data Analysis and Chemometrics",
+      "titleSv": "Analytisk kemi med mätvärdesbehandling och kemometri",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G1F, Technology",
+      "mainFieldSv": "Kemi G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits Chemistry including 5 credits from any of the courses Chemical Principles 10 credits, Basic Chemistry 10 credits, General Chemistry, or The Basic Principles of Chemistry, as well as participation in other Chemistry courses for 15 cr."
+    },
+    {
+      "code": "1KB302",
+      "titleEn": "Physics for Chemists",
+      "titleSv": "Fysik för kemister",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G1F, Physics",
+      "mainFieldSv": "Fysik G1F, Kemi",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in 30 credits in chemistry, of which 15 credits completed including at least 5 credits from General Chemistry, Chemical Principles I, Basic Chemistry or The Basic Principles of Chemistry. In addition, participation in Linear Algebra I."
+    },
+    {
+      "code": "1KB009",
+      "titleEn": "Principles of Thermodynamics",
+      "titleSv": "Termodynamiska principer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G1F, Technology",
+      "mainFieldSv": "Kemi G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "20 credits of chemistry including 5 credits from either General Chemistry, Chemical Principles I, Basic Chemistry or The Basic Principles of Chemistry. Participation in Basic Course in Mathematics and Single Variable Calculus 10 credits."
+    },
+    {
+      "code": "1KB309",
+      "titleEn": "Physical Chemistry I",
+      "titleSv": "Fysikalisk kemi I",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "20 credits in chemistry including General Chemistry, Chemical Principles I, Basic Chemistry, or Basic Principles of Chemistry. Participation in Basic Course in Mathematics, Linear Algebra I and Single Variable Analysis, with at least 5 credits completed. Participation in Physics for Chemists."
+    },
+    {
+      "code": "1KB420",
+      "titleEn": "Organic Chemistry II",
+      "titleSv": "Organisk kemi II",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 10 credits in organic chemistry, or (2) 60 credits within the Upper Secondary School Teacher Education Programme of which at least 30 credits in chemistry, including 10 credits in organic chemistry"
+    },
+    {
+      "code": "1KB101",
+      "titleEn": "Analytical Chemistry II",
+      "titleSv": "Analytisk kemi II",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits including 40 credits in chemistry and attended course in analytical chemistry, 10 credits, minimum G1F-level."
+    },
+    {
+      "code": "1KB421",
+      "titleEn": "Biochemistry II",
+      "titleSv": "Biokemi II",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology G2F, Chemistry",
+      "mainFieldSv": "Biologi G2F, Kemi",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 10 credits in organic chemistry and 5 credits in biochemistry, or (2) 60 credits of which at least 40 credits in biology, together with 10 credits in organic chemistry and 5 credits in biochemistry, or (3) 60 credits within the Upper Secondary School Teacher Education Programme of which at least 30 credits in chemistry including 10 credits in organic chemistry and 5 credits in biochemistry."
+    },
+    {
+      "code": "1KB559",
+      "titleEn": "Theoretical Chemistry",
+      "titleSv": "Teoretisk kemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G2F, Physics",
+      "mainFieldSv": "Fysik G2F, Kemi",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB203",
+      "titleEn": "Polymer Chemistry",
+      "titleSv": "Polymerkemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G1F, Technology",
+      "mainFieldSv": "Kemi G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TD433",
+      "titleEn": "Computer Programming I",
+      "titleSv": "Programmeringsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1N, Technology",
+      "mainFieldSv": "Datavetenskap G1N, Teknik",
+      "depthCode": "G1N",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D"
+    },
+    {
+      "code": "1MA017",
+      "titleEn": "Several Variable Calculus, Limited Version",
+      "titleSv": "Flervariabelanalys, allmän kurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1KB211",
+      "titleEn": "Solid State Chemistry",
+      "titleSv": "Fasta tillståndets kemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G2F, Technology",
+      "mainFieldSv": "Kemi G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering including Inorganic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or Basic Materials Chemistry, 5 credits."
+    },
+    {
+      "code": "1KB210",
+      "titleEn": "Materials Chemistry",
+      "titleSv": "Materialkemi",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G2F, Technology",
+      "mainFieldSv": "Kemi G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering. Participation in Solid State Chemistry or the course can be taken in parallel."
+    },
+    {
+      "code": "1MS005",
+      "titleEn": "Probability and Statistics",
+      "titleSv": "Sannolikhet och statistik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "code": "1MA024",
+      "titleEn": "Linear Algebra II",
+      "titleSv": "Linjär algebra II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "code": "1TD342",
+      "titleEn": "Introduction to Scientific Computing",
+      "titleSv": "Introduktion till beräkningsvetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Mathematics G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Matematik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "code": "1KB112",
+      "titleEn": "Environmental Chemistry",
+      "titleSv": "Miljökemi",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB303",
+      "titleEn": "Colloid and Interface Chemistry",
+      "titleSv": "Yt- och kolloidkemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G2F, Technology",
+      "mainFieldSv": "Kemi G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits chemistry including General Chemistry, Chemical Principles I or Basic Chemistry, as well as Physical Chemistry I, or The Basic Principles of Chemistry."
+    },
+    {
+      "code": "1KB433",
+      "titleEn": "Protein Science",
+      "titleSv": "Proteinvetenskap",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology G2F, Chemistry",
+      "mainFieldSv": "Biologi G2F, Kemi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 15 credits in biochemistry, or (2) 60 credits of which at least 40 credits in biology, and 15 credits in biochemistry."
+    },
+    {
+      "code": "1MA032",
+      "titleEn": "Ordinary Differential Equations I",
+      "titleSv": "Ordinära differentialekvationer I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course."
+    },
+    {
+      "code": "1KB101",
+      "titleEn": "Analytical Chemistry II",
+      "titleSv": "Analytisk kemi II",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits including 40 credits in chemistry and attended course in analytical chemistry, 10 credits, minimum G1F-level."
+    },
+    {
+      "code": "1KB204",
+      "titleEn": "Electrochemistry",
+      "titleSv": "Elektrokemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G2F, Technology",
+      "mainFieldSv": "Kemi G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB420",
+      "titleEn": "Organic Chemistry II",
+      "titleSv": "Organisk kemi II",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 10 credits in organic chemistry, or (2) 60 credits within the Upper Secondary School Teacher Education Programme of which at least 30 credits in chemistry, including 10 credits in organic chemistry"
+    },
+    {
+      "code": "1MS926",
+      "titleEn": "Applied Statistics",
+      "titleSv": "Tillämpad statistik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics G1F, Sociotechnical Systems G1F, Technology",
+      "mainFieldSv": "Matematik G1F, System i teknik och samhälle G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB700",
+      "titleEn": "Chemical Physics",
+      "titleSv": "Kemisk fysik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G2F, Physics",
+      "mainFieldSv": "Fysik G2F, Kemi",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in chemistry including Physical Chemistry I, 10 credits"
+    },
+    {
+      "code": "1KB010",
+      "titleEn": "Degree Project C in Chemistry",
+      "titleSv": "Examensarbete C i kemi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits from completed courses of which 60 credits in chemistry, including at least 50 credits at G1F-level, and an additional in-depth study through participation in 15 credits in chemistry at G2F level from the following programme courses: Analytical Chemistry II 15 credits, Biochemistry II 15 credits, Organic Chemistry II 15 credits, Solid State Chemistry 5 credits, Material Chemistry 10 credits, Theoretical Chemistry 10 credits, Chemical Physics 10 credits or Colloid and Interface Chemistry 10 credits. Admission requires a project plan accepted by the department."
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1KB016",
+      "to": "1KB009",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "20 credits of chemistry including 5 credits from either General Chemistry, Chemical Principles I, Basic Chemistry or The Basic Principles of Chemistry. Participation in Basic Course in Mathematics and Single Variable Calculus 10 credits."
+    },
+    {
+      "from": "1MA010",
+      "to": "1KB009",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "20 credits of chemistry including 5 credits from either General Chemistry, Chemical Principles I, Basic Chemistry or The Basic Principles of Chemistry. Participation in Basic Course in Mathematics and Single Variable Calculus 10 credits."
+    },
+    {
+      "from": "1MA013",
+      "to": "1KB009",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "20 credits of chemistry including 5 credits from either General Chemistry, Chemical Principles I, Basic Chemistry or The Basic Principles of Chemistry. Participation in Basic Course in Mathematics and Single Variable Calculus 10 credits."
+    },
+    {
+      "from": "1KB101",
+      "to": "1KB010",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits from completed courses of which 60 credits in chemistry, including at least 50 credits at G1F-level, and an additional in-depth study through participation in 15 credits in chemistry at G2F level from the following programme courses: Analytical Chemistry II 15 credits, Biochemistry II 15 credits, Organic Chemistry II 15 credits, Solid State Chemistry 5 credits, Material Chemistry 10 cr"
+    },
+    {
+      "from": "1KB210",
+      "to": "1KB010",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits from completed courses of which 60 credits in chemistry, including at least 50 credits at G1F-level, and an additional in-depth study through participation in 15 credits in chemistry at G2F level from the following programme courses: Analytical Chemistry II 15 credits, Biochemistry II 15 credits, Organic Chemistry II 15 credits, Solid State Chemistry 5 credits, Material Chemistry 10 cr"
+    },
+    {
+      "from": "1KB211",
+      "to": "1KB010",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits from completed courses of which 60 credits in chemistry, including at least 50 credits at G1F-level, and an additional in-depth study through participation in 15 credits in chemistry at G2F level from the following programme courses: Analytical Chemistry II 15 credits, Biochemistry II 15 credits, Organic Chemistry II 15 credits, Solid State Chemistry 5 credits, Material Chemistry 10 cr"
+    },
+    {
+      "from": "1KB303",
+      "to": "1KB010",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits from completed courses of which 60 credits in chemistry, including at least 50 credits at G1F-level, and an additional in-depth study through participation in 15 credits in chemistry at G2F level from the following programme courses: Analytical Chemistry II 15 credits, Biochemistry II 15 credits, Organic Chemistry II 15 credits, Solid State Chemistry 5 credits, Material Chemistry 10 cr"
+    },
+    {
+      "from": "1KB420",
+      "to": "1KB010",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits from completed courses of which 60 credits in chemistry, including at least 50 credits at G1F-level, and an additional in-depth study through participation in 15 credits in chemistry at G2F level from the following programme courses: Analytical Chemistry II 15 credits, Biochemistry II 15 credits, Organic Chemistry II 15 credits, Solid State Chemistry 5 credits, Material Chemistry 10 cr"
+    },
+    {
+      "from": "1KB421",
+      "to": "1KB010",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits from completed courses of which 60 credits in chemistry, including at least 50 credits at G1F-level, and an additional in-depth study through participation in 15 credits in chemistry at G2F level from the following programme courses: Analytical Chemistry II 15 credits, Biochemistry II 15 credits, Organic Chemistry II 15 credits, Solid State Chemistry 5 credits, Material Chemistry 10 cr"
+    },
+    {
+      "from": "1KB559",
+      "to": "1KB010",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits from completed courses of which 60 credits in chemistry, including at least 50 credits at G1F-level, and an additional in-depth study through participation in 15 credits in chemistry at G2F level from the following programme courses: Analytical Chemistry II 15 credits, Biochemistry II 15 credits, Organic Chemistry II 15 credits, Solid State Chemistry 5 credits, Material Chemistry 10 cr"
+    },
+    {
+      "from": "1KB016",
+      "to": "1KB103",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "15 credits Chemistry including 5 credits from any of the courses Chemical Principles 10 credits, Basic Chemistry 10 credits, General Chemistry, or The Basic Principles of Chemistry, as well as participation in other Chemistry courses for 15 cr."
+    },
+    {
+      "from": "1KB208",
+      "to": "1KB211",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering including Inorganic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or Basic Materials Chemistry, 5 credits."
+    },
+    {
+      "from": "1KB309",
+      "to": "1KB211",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering including Inorganic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or Basic Materials Chemistry, 5 credits."
+    },
+    {
+      "from": "1KB016",
+      "to": "1KB302",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Participation in 30 credits in chemistry, of which 15 credits completed including at least 5 credits from General Chemistry, Chemical Principles I, Basic Chemistry or The Basic Principles of Chemistry. In addition, participation in Linear Algebra I."
+    },
+    {
+      "from": "1MA350",
+      "to": "1KB302",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in 30 credits in chemistry, of which 15 credits completed including at least 5 credits from General Chemistry, Chemical Principles I, Basic Chemistry or The Basic Principles of Chemistry. In addition, participation in Linear Algebra I."
+    },
+    {
+      "from": "1KB016",
+      "to": "1KB303",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits chemistry including General Chemistry, Chemical Principles I or Basic Chemistry, as well as Physical Chemistry I, or The Basic Principles of Chemistry."
+    },
+    {
+      "from": "1KB309",
+      "to": "1KB303",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits chemistry including General Chemistry, Chemical Principles I or Basic Chemistry, as well as Physical Chemistry I, or The Basic Principles of Chemistry."
+    },
+    {
+      "from": "1KB016",
+      "to": "1KB309",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "20 credits in chemistry including General Chemistry, Chemical Principles I, Basic Chemistry, or Basic Principles of Chemistry. Participation in Basic Course in Mathematics, Linear Algebra I and Single Variable Analysis, with at least 5 credits completed. Participation in Physics for Chemists."
+    },
+    {
+      "from": "1MA010",
+      "to": "1KB309",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "20 credits in chemistry including General Chemistry, Chemical Principles I, Basic Chemistry, or Basic Principles of Chemistry. Participation in Basic Course in Mathematics, Linear Algebra I and Single Variable Analysis, with at least 5 credits completed. Participation in Physics for Chemists."
+    },
+    {
+      "from": "1MA350",
+      "to": "1KB309",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "20 credits in chemistry including General Chemistry, Chemical Principles I, Basic Chemistry, or Basic Principles of Chemistry. Participation in Basic Course in Mathematics, Linear Algebra I and Single Variable Analysis, with at least 5 credits completed. Participation in Physics for Chemists."
+    },
+    {
+      "from": "1KB410",
+      "to": "1KB420",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 10 credits in organic chemistry, or (2) 60 credits within the Upper Secondary School Teacher Education Programme of which at least 30 credits in chemistry, including 10 credits in organic chemistry"
+    },
+    {
+      "from": "1KB409",
+      "to": "1KB421",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 10 credits in organic chemistry and 5 credits in biochemistry, or (2) 60 credits of which at least 40 credits in biology, together with 10 credits in organic chemistry and 5 credits in biochemistry, or (3) 60 credits within the Upper Secondary School Teacher Education Programme of which at least 30"
+    },
+    {
+      "from": "1KB410",
+      "to": "1KB421",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 10 credits in organic chemistry and 5 credits in biochemistry, or (2) 60 credits of which at least 40 credits in biology, together with 10 credits in organic chemistry and 5 credits in biochemistry, or (3) 60 credits within the Upper Secondary School Teacher Education Programme of which at least 30"
+    },
+    {
+      "from": "1KB409",
+      "to": "1KB433",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 15 credits in biochemistry, or (2) 60 credits of which at least 40 credits in biology, and 15 credits in biochemistry."
+    },
+    {
+      "from": "1KB309",
+      "to": "1KB700",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in chemistry including Physical Chemistry I, 10 credits"
+    },
+    {
+      "from": "1MA010",
+      "to": "1MA013",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA350",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "from": "1MA350",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "from": "1MA017",
+      "to": "1MA032",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA010",
+      "to": "1MS005",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MS005",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA013",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10057",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3588",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3334",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3006",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2466",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2353",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2186",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1906",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1839",
+      "name": "Giltig från och med höstterminen 2018, version&nbsp;2"
+    },
+    {
+      "id": "1656",
+      "name": "Giltig från och med höstterminen 2018, version&nbsp;1"
+    },
+    {
+      "id": "1429",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1394",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    },
+    {
+      "id": "1239",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1139",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "927",
+      "name": "Giltig från och med höstterminen 2015"
+    },
+    {
+      "id": "510",
+      "name": "Giltig från och med höstterminen 2013"
+    },
+    {
+      "id": "304",
+      "name": "Giltig från och med höstterminen 2012"
+    },
+    {
+      "id": "128",
+      "name": "Giltig från och med höstterminen 2011"
+    }
+  ],
+  "scrapedAt": "2026-09-01T19:06:47.127012+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10057",
+  "programmeTitle": "Kandidatprogram i kemi, 180 hp (TKE1K)",
+  "programmeUri": "/utbildning/program/kandidatprogram-kemi",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false,
+  "programmeTitleEn": "Bachelor's Programme in Chemistry, 180 credits (TKE1K)"
+}
