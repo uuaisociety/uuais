@@ -13,6 +13,7 @@ const PUBLIC_ROUTES: Array<{ path: string; title: RegExp }> = [
   { path: '/careers', title: /Job board/ },
   { path: '/join', title: /Join/ },
   { path: '/login', title: /UU AI Society|Sign In/ },
+  { path: '/programs', title: /Programmes/ },
 ];
 
 // Desktop nav labels from components/layout/Header.tsx. The wordmark links home,

@@ -27,14 +27,27 @@
         "./*"
       ]
     },
-    "types": ["jest", "@testing-library/jest-dom"]
+    "types": [
+      "jest",
+      "@testing-library/jest-dom"
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    ".next-prod/types/**/*.ts",
+    ".next-prod/dev/types/**/*.ts",
+    ".next-shot/types/**/*.ts",
+    ".next-shot/dev/types/**/*.ts",
+    ".next-prod2/types/**/*.ts",
+    ".next-prod2/dev/types/**/*.ts",
+    ".next-shot2/types/**/*.ts",
+    ".next-shot2/dev/types/**/*.ts",
+    ".next-shot3/types/**/*.ts",
+    ".next-shot3/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

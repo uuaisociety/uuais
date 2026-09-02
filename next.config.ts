@@ -2,6 +2,17 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  // The programme plans are read from disk at request time, so Next traces
+  // data/programs into the function bundle. It traces the whole directory, including
+  // the extraction audit trail and the requirements cache — inputs to the ingest
+  // scripts that nothing reads at runtime, and about 1.2 MB of cold-start weight.
+  outputFileTracingExcludes: {
+    '/programs/[code]': [
+      './data/programs/*.extraction.json',
+      './data/programs/_requirements.json',
+      './data/programs/README.md',
+    ],
+  },
   agentRules: false,
   devIndicators: false,
   experimental: {
@@ -33,6 +44,12 @@ const nextConfig: NextConfig = {
         source: "/contact",
         destination: "/about#contact",
         permanent: true,
+      },
+      // The study-plan placeholder was superseded by the programme map.
+      {
+        source: "/study-plan",
+        destination: "/programs",
+        permanent: false,
       },
     ];
   },
