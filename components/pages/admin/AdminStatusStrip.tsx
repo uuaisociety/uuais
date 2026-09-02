@@ -6,7 +6,7 @@ import type { AdminActionItem, AdminTabKey } from "./useAdminOverview";
 interface Props {
   items: AdminActionItem[];
   loaded: boolean;
-  onNavigate: (tab: AdminTabKey) => void;
+  onNavigate: (tab: AdminTabKey, sub?: string) => void;
 }
 
 /** The admin "what needs attention" strip — actionable signals in mono counts, not marketing metrics; quiet when everything is handled. */
@@ -22,7 +22,7 @@ const AdminStatusStrip: React.FC<Props> = ({ items, loaded, onNavigate }) => {
           <button
             key={`${item.tab}-${item.label}`}
             type="button"
-            onClick={() => onNavigate(item.tab)}
+            onClick={() => onNavigate(item.tab, item.sub)}
             className="group flex items-baseline gap-2 text-left cursor-pointer rounded-sm"
           >
             <span className="font-mono text-sm font-semibold tabular-nums text-primary">{item.count}</span>

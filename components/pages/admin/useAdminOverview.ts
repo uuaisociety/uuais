@@ -5,9 +5,12 @@ import { useApp } from "@/contexts/AppContext";
 import { useCollectionData } from "@/lib/firestore/useCollectionData";
 import { subscribeOpenCampaigns } from "@/lib/firestore/applicationCampaigns";
 import { subscribeToTeamApplications } from "@/lib/firestore/teamApplications";
+import { subscribeOpenProgramFeedback } from "@/lib/firestore/program-feedback";
+import type { ProgramFeedback } from "@/lib/firestore/program-feedback";
 import type { ApplicationCampaign, TeamApplication } from "@/types";
 
 export type AdminTabKey =
+  | "programs"
   | "events"
   | "team"
   | "blog"
@@ -24,6 +27,8 @@ export interface AdminActionItem {
   tab: AdminTabKey;
   label: string;
   count: number;
+  /** Subtab to open with the tab, where the work actually lives. */
+  sub?: string;
 }
 
 /** Live "what needs attention" signals for the admin shell; subscribes to the admin-only collections while the dashboard is mounted. */
@@ -31,6 +36,7 @@ export function useAdminOverview(): { items: AdminActionItem[]; loaded: boolean 
   const { state } = useApp();
   const { data: campaigns, loaded: campaignsLoaded } = useCollectionData<ApplicationCampaign>(subscribeOpenCampaigns, []);
   const { data: teamApplications, loaded: teamApplicationsLoaded } = useCollectionData<TeamApplication>(subscribeToTeamApplications, []);
+  const { data: openReports, loaded: reportsLoaded } = useCollectionData<ProgramFeedback>(subscribeOpenProgramFeedback, []);
 
   return useMemo(() => {
     const items: AdminActionItem[] = [];
@@ -41,6 +47,17 @@ export function useAdminOverview(): { items: AdminActionItem[]; loaded: boolean 
       if (subs > 0) {
         items.push({ tab: "applications", label: `New submission${subs !== 1 ? "s" : ""} · ${campaign.title}`, count: subs });
       }
+    }
+
+    // Readers report errors in the generated maps; unread, they are the only signal that a
+    // machine-extracted prerequisite is wrong.
+    if (openReports.length > 0) {
+      items.push({
+        tab: "programs",
+        sub: "feedback",
+        label: `Programme error report${openReports.length !== 1 ? "s" : ""} to review`,
+        count: openReports.length,
+      });
     }
 
     // Member submissions land unpublished and are invisible until someone reviews them.
@@ -72,8 +89,8 @@ export function useAdminOverview(): { items: AdminActionItem[]; loaded: boolean 
     }
 
     const loaded =
-      campaignsLoaded && teamApplicationsLoaded && state.blogPostsLoaded && state.eventsLoaded && state.showcaseLoaded;
+      campaignsLoaded && teamApplicationsLoaded && reportsLoaded && state.blogPostsLoaded && state.eventsLoaded && state.showcaseLoaded;
 
     return { items, loaded };
-  }, [campaigns, campaignsLoaded, teamApplications, teamApplicationsLoaded, state.blogPosts, state.blogPostsLoaded, state.events, state.eventsLoaded, state.showcaseProjects, state.showcaseLoaded]);
+  }, [campaigns, campaignsLoaded, teamApplications, teamApplicationsLoaded, openReports, reportsLoaded, state.blogPosts, state.blogPostsLoaded, state.events, state.eventsLoaded, state.showcaseProjects, state.showcaseLoaded]);
 }
