@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "bounce-easing",
+        "value": "faded-bounce",
+        "createdAt": "2026-09-02T11:56:31.073Z",
+        "reason": "Name collision, not easing: faded-bounce uses cubic-bezier(0.45,0,0.55,1) with keyframes 0 to -4px to 0 — no overshoot"
+      }
+    ]
+  }
+}
