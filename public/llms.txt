@@ -21,7 +21,7 @@ Key facts:
 - [Course Navigator](https://uuais.com/projects/course-navigator): AI-powered tool for navigating Uppsala University courses.
 - [Explore Courses](https://uuais.com/explore): Search all Uppsala University courses and get natural-language AI recommendations.
 - [My Courses](https://uuais.com/my-courses): Save favorite courses and organize them into custom groups (sign-in required).
-- [Study Plan](https://uuais.com/study-plan): Visualize degree pathways and course prerequisites (in development).
+- [Programmes](https://uuais.com/programs): Degree programme course maps - semesters, specialisations and how courses connect.
 - [Join](https://uuais.com/join): Become a member — free membership and newsletter signup.
 - [Apply](https://uuais.com/apply): Open team roles and board position applications.
 - [Privacy](https://uuais.com/privacy): Privacy policy.
