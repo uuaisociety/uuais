@@ -93,6 +93,15 @@ function setupAuth(user: unknown) {
 }
 
 describe('MyCoursesPage', () => {
+  // The page sits behind AdminGate while the navigator is unreleased.
+  beforeAll(() => {
+    global.__setAdminState({ user: { uid: 'a' }, loading: false, isAdmin: true })
+  })
+
+  afterAll(() => {
+    global.__setAdminState(null)
+  })
+
   beforeEach(() => {
     jest.clearAllMocks()
     jest.spyOn(window, 'confirm').mockImplementation(() => true)

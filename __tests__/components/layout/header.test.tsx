@@ -246,9 +246,12 @@ describe('Header', () => {
       expect(screen.queryByText('Admin')).not.toBeInTheDocument()
     })
 
-    it('does not show Projects for non-admin users', () => {
+    it('shows Projects to non-admin users, for the programme map', () => {
       render(<Header />)
-      expect(screen.queryByText('Projects')).not.toBeInTheDocument()
+      expect(screen.getAllByText('Projects').length).toBe(1)
+      expect(screen.getAllByRole('link').map((l) => l.getAttribute('href'))).toContain(
+        '/programs'
+      )
     })
   })
 
@@ -399,5 +402,28 @@ describe('Header', () => {
         .getAllByRole('link', { name: 'Member Showcase' })
         .forEach((link) => expect(link).toHaveAttribute('href', '/showcase'))
     })
+  })
+})
+
+describe('the unreleased course navigator', () => {
+  const hrefs = () => screen.getAllByRole('link').map((link) => link.getAttribute('href'))
+
+  it('keeps the navigator and favourites out of a visitor\u2019s menu', () => {
+    mockAdminState()
+    render(<Header />)
+    fireEvent.click(screen.getAllByText('Projects')[0])
+
+    expect(hrefs()).toContain('/programs')
+    expect(hrefs()).not.toContain('/explore')
+    expect(hrefs()).not.toContain('/my-courses')
+  })
+
+  it('shows them to the board', () => {
+    mockAdminState({ user: { uid: 'admin1' }, isAdmin: true })
+    render(<Header />)
+    fireEvent.click(screen.getAllByText('Projects')[0])
+
+    expect(hrefs()).toContain('/explore')
+    expect(hrefs()).toContain('/my-courses')
   })
 })
