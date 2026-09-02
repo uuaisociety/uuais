@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { cookies } from 'next/headers';
 import { getTokens } from 'next-firebase-auth-edge';
 import { authConfig } from '@/lib/auth-config';
 
@@ -42,6 +43,25 @@ export async function requireAdmin(req: NextRequest): Promise<AuthResult> {
   const result = await resolveSession(req);
   if (result.ok && !result.session.isAdmin) return { ok: false, reason: 'not-admin' };
   return result;
+}
+
+/**
+ * Resolves the session inside a server component, where there is no NextRequest to
+ * read cookies from. Returns null when nobody is signed in.
+ */
+export async function getServerSession(): Promise<ServerSession | null> {
+  try {
+    const tokens = await getTokens(await cookies(), authConfig);
+    if (!tokens) return null;
+    const decoded = tokens.decodedToken;
+    return {
+      uid: decoded.uid,
+      isAdmin: decoded.admin === true || decoded.superAdmin === true,
+      isSuperAdmin: decoded.superAdmin === true,
+    };
+  } catch {
+    return null;
+  }
 }
 
 export function authFailureResponse(reason: AuthFailureReason): NextResponse {

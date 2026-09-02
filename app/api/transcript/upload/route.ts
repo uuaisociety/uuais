@@ -3,6 +3,12 @@ import type { NextRequest } from 'next/server';
 import { requireAuth } from '@/lib/server-auth';
 import { generateStructured } from '@/lib/ai/openrouter';
 import { fetchCourses } from '@/lib/courses';
+import {
+    detectCertificateType,
+    parseLadokCertificate,
+    redactPersonalData,
+    splitRegistrations,
+} from '@/lib/programs/ladok';
 
 const TRANSCRIPT_PARSE_PROMPT = `You are a transcript parser for Uppsala University.
 Extract all courses from the given transcript text.
@@ -11,8 +17,9 @@ For each course found, extract:
 - rawCourseName: the course name as written
 - rawCourseCode: the course code if present (e.g., "1MA103")
 - credits: number of credits (ECTS)
-- grade: the grade if present
 - domain: the academic domain/field (e.g., "Mathematics", "Computer Science", "Physics")
+
+Only list courses that are completed. Do NOT extract grades or personal identity numbers.
 
 Return JSON in this format:
 {
@@ -21,7 +28,6 @@ Return JSON in this format:
       "rawCourseName": "Linear Algebra",
       "rawCourseCode": "1MA024",
       "credits": 5,
-      "grade": "A",
       "domain": "Mathematics"
     }
   ]
@@ -76,17 +82,53 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Could not extract text from PDF' }, { status: 400 });
         }
 
-        // Parse transcript via AI
-        const response = await generateStructured(
-            [
-                { role: 'system', content: TRANSCRIPT_PARSE_PROMPT },
-                { role: 'user', content: `Parse this transcript:\n\n${pdfText.slice(0, 8000)}` },
-            ],
-            { maxTokens: 4096 }
-        );
+        // A Ladok certificate has a fixed layout, so it is parsed directly rather than
+        // sent to a model: exact, and the document never leaves the server. Grades and
+        // the personal identity number are never extracted - a course listed under
+        // "Completed courses" is by definition passed, so the grade adds nothing.
+        const certificateType = detectCertificateType(pdfText);
+        let entries: TranscriptEntry[] = [];
+        let programCode: string | null = null;
+        let registrations: { code: string; title: string; credits: number; current: boolean }[] = [];
 
-        const parsed = response.data as { entries: TranscriptEntry[] };
-        const entries = parsed?.entries || [];
+        if (certificateType !== 'UNKNOWN') {
+            const certificate = parseLadokCertificate(pdfText);
+            programCode = certificate.programCode;
+            entries = certificate.completed.map(course => ({
+                rawCourseName: course.title,
+                rawCourseCode: course.code,
+                credits: course.credits,
+            }));
+            const { current } = splitRegistrations(certificate.registered);
+            const currentCodes = new Set(current.map(r => r.code));
+            registrations = certificate.registered.map(r => ({
+                code: r.code,
+                title: r.title,
+                credits: r.credits,
+                current: currentCodes.has(r.code),
+            }));
+        } else {
+            // An unrecognised document still goes through the model, with the personal
+            // identity number stripped before it is sent anywhere.
+            const response = await generateStructured(
+                [
+                    { role: 'system', content: TRANSCRIPT_PARSE_PROMPT },
+                    {
+                        role: 'user',
+                        content: `Parse this transcript:\n\n${redactPersonalData(pdfText).slice(0, 8000)}`,
+                    },
+                ],
+                { maxTokens: 4096 }
+            );
+            // The prompt may still return a grade; drop it rather than store it.
+            const parsed = response.data as { entries: (TranscriptEntry & { grade?: string })[] };
+            entries = (parsed?.entries || []).map((entry) => ({
+                rawCourseName: entry.rawCourseName,
+                rawCourseCode: entry.rawCourseCode,
+                credits: entry.credits,
+                domain: entry.domain,
+            }));
+        }
 
         // Match to known courses
         const allCourses = await fetchCourses();
@@ -115,6 +157,9 @@ export async function POST(req: NextRequest) {
             parsedAt: new Date(),
             consentGivenAt: new Date(),
             sourceFileName: file.name,
+            certificateType,
+            programCode,
+            registrations,
             entries: matchedEntries,
             summary: {
                 totalCredits,
@@ -128,6 +173,8 @@ export async function POST(req: NextRequest) {
             success: true,
             uid,
             transcriptData,
+            certificateType,
+            programCode,
             entries: matchedEntries,
             summary: transcriptData.summary,
             matchedCount: matchedEntries.filter(e => e.matchedCourseId).length,
@@ -148,7 +195,6 @@ interface TranscriptEntry {
     rawCourseName: string;
     rawCourseCode?: string;
     credits: number;
-    grade?: string;
     domain?: string;
 }
 
