@@ -29,6 +29,7 @@ const communityLinks = [
 
 const projectLinks = [
   { href: '/projects', label: 'All projects' },
+  { href: '/programs', label: 'Programme map' },
   { href: '/explore', label: 'Course navigator' },
   { href: '/my-courses', label: 'My favourites' },
 ];
