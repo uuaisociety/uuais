@@ -435,6 +435,12 @@ service cloud.firestore {
       allow read, write: if isSignedIn() && request.auth.uid == userId;
     }
 
+    // PROGRAM PROGRESS - courses a student has marked passed on a programme map
+    match /programProgress/{userId} {
+      // Users can only read/write their own progress
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
+    }
+
     // COURSE CATEGORIES - user-defined categories
     match /course_categories/{userId}/categories/{categoryId} {
       // Users can only read/write their own categories
@@ -468,6 +474,15 @@ service cloud.firestore {
     }
 
     // COURSES - course catalog
+    // PROGRAM FEEDBACK - error reports on the generated course maps.
+    // Anyone may report a mistake
+    match /programFeedback/{reportId} {
+      allow read: if isAdmin();
+      allow create: if false;
+      allow update: if isAdmin() && changedOnly(['status']);
+      allow delete: if isAdmin();
+    }
+
     match /courses/{courseId} {
       allow read: if true;
       allow write: if isAdmin();
