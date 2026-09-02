@@ -566,6 +566,18 @@
 }
 .animate-page-in { animation: page-in 0.25s var(--ease-ios) backwards; }
 
+/* Requirements popover — a soft flow-in from the edge of the card it belongs to, so
+   the panel reads as emerging from that course rather than appearing on top of the
+   map. Short enough not to delay a reader skimming several courses in a row. */
+@keyframes popover-in {
+  from { opacity: 0; transform: translateX(-6px) scale(0.98); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+.animate-popover-in {
+  animation: popover-in 0.18s var(--ease-ios) both;
+  transform-origin: left center;
+}
+
 @layer components {
   .thinking-dot {
     @apply opacity-0 inline-block;
