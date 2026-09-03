@@ -685,6 +685,25 @@ test.describe('full screen', () => {
   });
 });
 
+test('sends a code typed the way it is printed to the map', async ({ page, request }) => {
+  // Every surface shows "TTF2Y"; the slug is the lowercase filename.
+  const redirect = await request.get('/programs/TTF2Y', { maxRedirects: 0 });
+  expect(redirect.status()).toBe(308);
+  expect(redirect.headers()['location']).toContain('/programs/ttf2y');
+
+  // The specialisation on the URL survives the trip.
+  const withTrack = await request.get('/programs/TTF2Y?track=elektrifiering', { maxRedirects: 0 });
+  expect(withTrack.headers()['location']).toContain('?track=elektrifiering');
+
+  await page.goto('/programs/TTF2Y', { waitUntil: 'load' });
+  await expect(page).toHaveURL(/\/programs\/ttf2y$/);
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+
+  // A slug that names no programme is still a plain 404, not a redirect.
+  const missing = await request.get('/programs/nope', { maxRedirects: 0 });
+  expect(missing.status()).toBe(404);
+});
+
 test('offers a way back to the catalogue from a programme', async ({ page }) => {
   await page.goto(PROGRAM, { waitUntil: 'load' });
   const change = page.getByRole('link', { name: /Change/ });
