@@ -655,3 +655,13 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+
+/* reactflow ships `.react-flow__node.selectable:focus-visible { outline: none }`, which zeroes
+   the ring on the wrapper that actually takes focus — so the site's focus style never reached a
+   course card. Outranked here rather than flagged !important, since the map is keyboard
+   navigable and a card that cannot show focus cannot be used. */
+.react-flow .react-flow__node.selectable:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}

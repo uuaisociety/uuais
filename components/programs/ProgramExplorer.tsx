@@ -31,11 +31,12 @@ import { TRACK_PICKER_ID } from "./TrackPicker";
 import { MAP_PANE_HEIGHT } from "./constants";
 import type { SemesterGap } from "./ProgramCanvas";
 
-// reactflow measures the DOM, so the canvas is client-only.
-const ProgramCanvas = dynamic(() => import("./ProgramCanvas"), {
-  // Holds the map's exact chrome and footprint while it loads, so the page does not
-  // reflow around it and the reader can already see what is arriving.
-  loading: () => (
+/**
+ * Holds the map's exact chrome and footprint while it loads, so the page does not reflow
+ * around it and the reader can already see what is arriving.
+ */
+function CanvasSkeleton() {
+  return (
     <div className="rounded-lg border border-border bg-card" aria-busy>
       <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
         <span aria-hidden className="h-3 w-56 max-w-[50%] rounded-sm bg-muted" />
@@ -53,8 +54,11 @@ const ProgramCanvas = dynamic(() => import("./ProgramCanvas"), {
       </div>
       <span className="sr-only">Loading the course map</span>
     </div>
-  ),
-});
+  );
+}
+
+// reactflow measures the DOM, so the canvas is client-only.
+const ProgramCanvas = dynamic(() => import("./ProgramCanvas"), { loading: CanvasSkeleton });
 
 const ELECTIVES_ID = "free-electives";
 
@@ -73,12 +77,15 @@ type ExplorerProps = {
 };
 
 /**
- * `useSearchParams` opts a subtree out of prerendering, so it lives behind its own
- * boundary: the page around it stays static and only the filter waits for the URL.
+ * `useSearchParams` opts a subtree out of prerendering, so it lives behind its own boundary:
+ * the page around it stays static and only the filter waits for the URL. The fallback must not
+ * suspend — React cannot use a fallback that does, and escalates the bailout to the route
+ * boundary, prerendering the whole page as an empty shell. Hence the skeleton in place of the
+ * lazily loaded canvas: everything else here renders, and only the map waits.
  */
 export default function ProgramExplorer(props: ExplorerProps) {
   return (
-    <Suspense fallback={<ExplorerBody {...props} selectedTrack={null} />}>
+    <Suspense fallback={<ExplorerBody {...props} selectedTrack={null} deferCanvas />}>
       <TrackedExplorer {...props} />
     </Suspense>
   );
@@ -100,7 +107,8 @@ function ExplorerBody({
   tracks,
   edges: allEdges,
   rules: allRules,
-}: ExplorerProps & { selectedTrack: string | null }) {
+  deferCanvas = false,
+}: ExplorerProps & { selectedTrack: string | null; deferCanvas?: boolean }) {
   const [selected, setSelected] = useState<string | null>(null);
   const electivesRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -233,6 +241,9 @@ function ExplorerBody({
       />
 
       <div className="min-w-0 space-y-6">
+        {deferCanvas ? (
+          <CanvasSkeleton />
+        ) : (
         <ProgramCanvas
           courses={laidOut}
           pools={pools}
@@ -250,6 +261,7 @@ function ExplorerBody({
           onChooseTrack={focusTrackPicker}
           fromPath={fromPath}
         />
+        )}
 
         {rules.length > 0 ? (
           <ProgramRules

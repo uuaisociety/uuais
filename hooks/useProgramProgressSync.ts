@@ -22,11 +22,14 @@ export function useProgramProgressSync(programCode: string): void {
   const uid = user?.uid ?? null;
   /** What the account is known to hold, so an unchanged set never costs a write. */
   const written = useRef<string | null>(null);
+  /** Whether `written` is known at all; until it is, a write would race the account's own state. */
+  const hydrated = useRef(false);
   const hydratedFor = useRef<string | null>(null);
 
   useEffect(() => {
     if (loading || !uid) {
       written.current = null;
+      hydrated.current = false;
       hydratedFor.current = null;
       return;
     }
@@ -41,16 +44,18 @@ export function useProgramProgressSync(programCode: string): void {
       try {
         const remote = await store.fetchProgramProgress(uid);
         if (cancelled) return;
-        if (remote) {
-          const codes = remote[programCode] ?? [];
-          written.current = [...codes].sort().join(',');
-          saveManualPassed(programCode, new Set(codes));
+        const stored = remote?.[programCode];
+        if (stored) {
+          written.current = [...stored].sort().join(',');
+          saveManualPassed(programCode, new Set(stored));
         } else {
-          // No document yet: on first sign-in the browser's marks become the starting point.
+          // Nothing stored for this programme — whether or not the account holds others — so the
+          // browser's marks become the starting point rather than being wiped by an absent entry.
           const local = getManualPassedSnapshot(programCode);
-          written.current = serialise(local);
           if (local.size > 0) await store.writeProgramPassed(uid, programCode, [...local]);
+          written.current = serialise(local);
         }
+        hydrated.current = true;
       } catch {
         // Offline or rules-denied: the map still works, the marks just stay local.
         hydratedFor.current = null;
@@ -69,15 +74,17 @@ export function useProgramProgressSync(programCode: string): void {
     const flush = () => {
       timer = null;
       const next = serialise(getManualPassedSnapshot(programCode));
-      if (written.current === null || next === written.current) return;
+      if (!hydrated.current || next === written.current) return;
+      // Assume the write lands so a burst collapses, but keep what the account actually held:
+      // restoring it on failure is what lets the next change retry instead of stalling for good.
+      const previous = written.current;
       written.current = next;
       void import('@/lib/firestore/program-progress')
         .then((store) =>
           store.writeProgramPassed(uid, programCode, next ? next.split(',') : [])
         )
         .catch(() => {
-          // Let the next change try again rather than silently diverging.
-          written.current = null;
+          written.current = previous;
         });
     };
 

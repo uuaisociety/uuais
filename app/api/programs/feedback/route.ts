@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
+import { getProgram } from '@/lib/programs';
 import {
     PROGRAM_FEEDBACK_COLLECTION,
     type ProgramFeedbackKind,
@@ -27,7 +28,12 @@ function clean(value: unknown, max: number): string {
  *  stays closed to clients. */
 export async function POST(req: NextRequest) {
     try {
-        const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+        // The platform sets x-vercel-forwarded-for itself, so a client cannot forge it; the
+        // spoofable x-forwarded-for is only a fallback for other hosts.
+        const ip =
+            req.headers.get('x-vercel-forwarded-for')?.trim() ||
+            req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+            'unknown';
         const rate = checkWindow(`program-feedback:${ip}`, LIMIT_PER_HOUR, 60 * 60 * 1000);
         if (!rate.allowed) {
             return NextResponse.json(
@@ -42,9 +48,11 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Please describe the problem.' }, { status: 400 });
         }
 
+        // Checked against the catalogue rather than merely trimmed: the slug becomes a link an
+        // admin follows out of the report queue, and an unknown one only leads them nowhere.
         const programSlug = clean(body.programSlug, 120);
-        if (!programSlug) {
-            return NextResponse.json({ error: 'Missing programme.' }, { status: 400 });
+        if (!programSlug || !getProgram(programSlug)) {
+            return NextResponse.json({ error: 'Unknown programme.' }, { status: 400 });
         }
 
         const kind = KINDS.includes(body.kind) ? (body.kind as ProgramFeedbackKind) : 'other';

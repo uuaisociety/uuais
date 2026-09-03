@@ -1,5 +1,5 @@
 import type { ProgramCourseCategory, ProgramEdgeType } from '@/lib/programs';
-import type { CourseStatus } from '@/lib/programs/progress';
+import type { CourseStatus } from '@/lib/programs/status';
 
 /** Category colours reuse the site's chart tokens, so dark mode comes free from .dark. */
 export const CATEGORY_STYLE: Record<

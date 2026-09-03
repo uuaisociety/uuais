@@ -12,7 +12,6 @@ function course(code: string, extra: Partial<ProgramCourse> = {}): ProgramCourse
     compulsory: true,
     category: 'MANDATORY_CORE',
     mainFieldEn: null,
-    mainFieldSv: null,
     depthCode: null,
     semester: 1,
     periods: [],
@@ -34,6 +33,21 @@ describe('matchTranscript', () => {
     // so no grade needs storing to know it.
     const { passed } = matchTranscript(courses, [{ rawCourseCode: '1MA090' }]);
     expect(passed.has('1MA090')).toBe(true);
+  });
+
+  it('credits nothing when two courses share a title', () => {
+    // A programme can run a 5 hp and a 10 hp "Project work"; a row with no code cannot say
+    // which was passed, and guessing hands the student the wrong one.
+    const ambiguous = [
+      course('1DT081', { titleEn: 'Project Work in IT', titleSv: 'Projektarbete i IT' }),
+      course('1DT088', { titleEn: 'Project Work in IT', titleSv: 'Projektarbete i IT', credits: 10 }),
+    ];
+    const { passed } = matchTranscript(ambiguous, [{ rawCourseName: 'Project Work in IT' }]);
+    expect(passed.size).toBe(0);
+
+    // The code still resolves it outright.
+    const byCode = matchTranscript(ambiguous, [{ rawCourseCode: '1DT088' }]);
+    expect(byCode.passed).toEqual(new Set(['1DT088']));
   });
 
   it('matches case-insensitively on code', () => {

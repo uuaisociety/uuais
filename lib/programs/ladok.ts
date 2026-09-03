@@ -3,8 +3,12 @@
  * model and the document never leaves the server. Grades and the personnummer are not read.
  */
 
-/** UU course codes look like 1MA090, 1TE609, 5MA001. */
-const COURSE_CODE = String.raw`\d[A-Z]{2}\d{3}`;
+/**
+ * UU course codes look like 1MA090, 1TE609, 5MA001 — and occasionally TS002, which carries no
+ * leading digit. Anchored to the start of a column, so the looser shape costs nothing: a code
+ * outside the programme's roster is dropped when it is resolved.
+ */
+const COURSE_CODE = String.raw`[0-9A-Z]{2,3}\d{3}`;
 
 const COMPLETED_ROW = new RegExp(
   String.raw`^\s*(${COURSE_CODE})\s{2,}(.+?)\s{2,}([\d.,]+)\s*hp\b`
@@ -16,7 +20,12 @@ const REGISTERED_ROW = new RegExp(
 const PROGRAMME_LINE = /^\s*([A-Z]{2,4}\d[A-Z])\s+(.+?)\s+\(\d+[.,]?\d*\s*hp\)/;
 
 const CONTINUATION_NOISE = /^(rate of study|studietakt|undervisningsform|instruction:|omfattning)/i;
-const PERSONNUMMER = /\b\d{8}[-\s]?\d{4}\b/g;
+/**
+ * Both printed forms: YYYYMMDD-NNNN and the far commoner YYMMDD-NNNN. `+` replaces the hyphen
+ * once the holder passes 100. Over-matching here costs nothing; under-matching leaks an
+ * identity number to a third-party model.
+ */
+const PERSONNUMMER = /\b(?:\d{2})?\d{6}[-+\s]?\d{4}\b/g;
 
 /**
  * PDF text extraction preserves ligatures, so a certificate arrives with "Certiﬁcate" and no

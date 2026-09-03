@@ -4,6 +4,9 @@ import userEvent from '@testing-library/user-event'
 import { useAdminOverview } from '@/components/pages/admin/useAdminOverview'
 import AdminStatusStrip from '@/components/pages/admin/AdminStatusStrip'
 
+// The overview subscribes through the real Firebase client at import time; CI has no keys.
+jest.mock('@/lib/firebase-client', () => ({ auth: {}, db: {} }))
+
 const appState = {
   events: [],
   blogPosts: [],

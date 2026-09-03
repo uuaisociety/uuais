@@ -26,7 +26,6 @@ function course(
     compulsory: true,
     category: 'MANDATORY_CORE',
     mainFieldEn: null,
-    mainFieldSv: null,
     depthCode: null,
     semester,
     periods,

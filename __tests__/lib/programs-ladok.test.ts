@@ -349,6 +349,19 @@ describe('normaliseLigatures', () => {
   });
 });
 
+describe('course codes without a leading digit', () => {
+  it('reads a completed course whose code is two letters', () => {
+    // TS002 "Teknikbaserat entreprenörskap" is 30 hp and sits on two programmes; the older
+    // pattern could not match it, so it was silently absent from every transcript.
+    const text = [
+      'Completed courses',
+      'TS002  Technology-based Entrepreneurship  30.0 hp',
+    ].join('\n');
+    const { completed } = parseLadokCertificate(text);
+    expect(completed.map((row) => row.code)).toEqual(['TS002']);
+  });
+});
+
 describe('redactPersonalData', () => {
   it('removes a personal identity number', () => {
     expect(redactPersonalData('Pnr 19900101-0000 here')).toBe('Pnr [redacted] here');
@@ -356,6 +369,14 @@ describe('redactPersonalData', () => {
 
   it('removes one written without a hyphen', () => {
     expect(redactPersonalData('199001010000')).toBe('[redacted]');
+  });
+
+  it('removes the ten-digit form printed on most documents', () => {
+    expect(redactPersonalData('Pnr 900101-1234 here')).toBe('Pnr [redacted] here');
+  });
+
+  it('removes one separated by a plus, as used past the age of 100', () => {
+    expect(redactPersonalData('Pnr 200101+1234 here')).toBe('Pnr [redacted] here');
   });
 
   it('leaves ordinary text alone', () => {

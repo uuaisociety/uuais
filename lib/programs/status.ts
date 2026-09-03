@@ -47,11 +47,14 @@ export function matchTranscript(
   registrations: StoredRegistration[] = []
 ): { passed: Set<string>; registered: Set<string> } {
   const byCode = new Map(courses.map((c) => [c.code.toUpperCase(), c.code]));
-  const byTitle = new Map<string, string>();
+  // Titles are not unique 
+  const byTitle = new Map<string, string | null>();
   for (const course of courses) {
     for (const title of [course.titleEn, course.titleSv]) {
       const key = normaliseTitle(title ?? '');
-      if (key && !byTitle.has(key)) byTitle.set(key, course.code);
+      if (!key) continue;
+      if (!byTitle.has(key)) byTitle.set(key, course.code);
+      else if (byTitle.get(key) !== course.code) byTitle.set(key, null);
     }
   }
 

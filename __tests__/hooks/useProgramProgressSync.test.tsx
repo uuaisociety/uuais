@@ -59,6 +59,46 @@ describe('useProgramProgressSync', () => {
     );
   });
 
+  it('retries the next change after a write fails', async () => {
+    fetchProgramProgress.mockResolvedValue({});
+    global.__setAdminState(signedIn);
+    renderHook(() => useProgramProgressSync('TTF2Y'));
+    await waitFor(() => expect(fetchProgramProgress).toHaveBeenCalled());
+
+    writeProgramPassed.mockRejectedValueOnce(new Error('offline'));
+    act(() => {
+      saveManualPassed('TTF2Y', new Set(['1MA360']));
+    });
+    await act(async () => {
+      jest.advanceTimersByTime(2000);
+    });
+    expect(writeProgramPassed).toHaveBeenCalledTimes(1);
+
+    // A failed write must not leave the account permanently out of sync.
+    act(() => {
+      saveManualPassed('TTF2Y', new Set(['1MA360', '1TE609']));
+    });
+    await act(async () => {
+      jest.advanceTimersByTime(2000);
+    });
+    expect(writeProgramPassed).toHaveBeenCalledTimes(2);
+    expect(writeProgramPassed).toHaveBeenLastCalledWith('u1', 'TTF2Y', ['1MA360', '1TE609']);
+  });
+
+  it('keeps this browser\'s marks when the account stores only other programmes', async () => {
+    saveManualPassed('TTF2Y', new Set(['1MA360']));
+    fetchProgramProgress.mockResolvedValue({ TDV1K: ['1DL201'] });
+    global.__setAdminState(signedIn);
+
+    renderHook(() => useProgramProgressSync('TTF2Y'));
+
+    // An absent entry is not an empty one: wiping here loses marks the student made signed out.
+    await waitFor(() =>
+      expect(writeProgramPassed).toHaveBeenCalledWith('u1', 'TTF2Y', ['1MA360'])
+    );
+    expect(getManualPassedSnapshot('TTF2Y')).toEqual(new Set(['1MA360']));
+  });
+
   it('collapses a run of ticks into one write', async () => {
     fetchProgramProgress.mockResolvedValue({});
     global.__setAdminState(signedIn);

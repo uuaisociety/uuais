@@ -30,7 +30,7 @@ import {
   Rows3,
 } from "lucide-react";
 import type { ProgramCourse, ProgramEdge, ProgramRule } from "@/lib/programs";
-import type { CourseStatus } from "@/lib/programs/progress";
+import type { CourseStatus } from "@/lib/programs/status";
 import {
   ROW_GAP,
   layoutProgram,
@@ -90,6 +90,9 @@ const nodeTypes = {
 const PRO_OPTIONS = { hideAttribution: true };
 
 /** Node ids are per-placement; the code lives in the node's data. */
+/** Target for the skip link, so the keyboard can step past every card in one press. */
+const PAST_MAP_ID = "past-course-map";
+
 function courseCodeOf(node: Node): string | null {
   return (node.data as ProgramCourseNodeData | undefined)?.course?.code ?? null;
 }
@@ -837,6 +840,15 @@ export default function ProgramCanvas({
         </div>
       </div>
 
+      {/* Every course card is a tab stop, so a large programme puts a hundred or more of them
+          between the toolbar and whatever follows the map. */}
+      <a
+        href={`#${PAST_MAP_ID}`}
+        className="sr-only rounded-sm px-3 py-2 text-sm focus:not-sr-only focus:absolute focus:z-20 focus:bg-card focus:text-foreground focus:shadow-md"
+      >
+        Skip the course map
+      </a>
+
       {/* The pane sits on the ambient background rather than the card surface, so cards read
           as raised in dark mode too, where a drop shadow alone carries almost nothing. */}
       <div
@@ -891,6 +903,26 @@ export default function ProgramCanvas({
               }
               router.push(courseHref(code, fromPath));
             }}
+            // The pointer can open a course, mark it and narrow the rules to it; the keyboard
+            // could do none of those. reactflow gives focus to the node wrapper and offers no
+            // per-node key handler, so the key is read here and matched back to the card that
+            // holds focus. Enter matches the click, Space matches the right-click.
+            onKeyDown={(event) => {
+              if (event.key !== "Enter" && event.key !== " ") return;
+              const node = event.target as HTMLElement;
+              // Only a course card itself: the bands are focusable too, and Enter on the links
+              // and buttons inside a card belongs to them.
+              if (!node.classList?.contains("react-flow__node-programCourse")) return;
+              const code = node.dataset.id?.split("__")[0];
+              if (!code) return;
+              event.preventDefault();
+              if (event.key === " ") {
+                onSelect?.(selected === code ? null : code);
+                return;
+              }
+              if (markMode) onTogglePassed(code);
+              else router.push(courseHref(code, fromPath));
+            }}
             onNodeContextMenu={(event, node) => {
               if (node.type !== "programCourse") return;
               event.preventDefault();
@@ -925,6 +957,7 @@ export default function ProgramCanvas({
           </ReactFlow>
         </ReactFlowProvider>
       </div>
+      <div id={PAST_MAP_ID} tabIndex={-1} />
     </div>
     </>
   );

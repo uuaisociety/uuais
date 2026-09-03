@@ -36,7 +36,6 @@ export type ProgramCourse = {
   compulsory: boolean;
   category: ProgramCourseCategory;
   mainFieldEn: string | null;
-  mainFieldSv: string | null;
   /** Depth of study, e.g. 'G1N' (basic) or 'A1F' (advanced). */
   depthCode: string | null;
   semester: number;
@@ -85,7 +84,6 @@ export type ProgramEdge = {
   to: string;
   type: ProgramEdgeType;
   source: 'llm' | 'manual';
-  rationale?: string;
 };
 
 export type Program = {
@@ -173,8 +171,14 @@ export function categoriseCourse(
 
 // ---- Loading ----
 
-type RawProgram = Omit<Program, 'courses'> & {
-  courses: Omit<ProgramCourse, 'category'>[];
+/**
+ * Fields the committed JSON keeps as an audit trail but nothing renders: the Swedish main field
+ * of study, and the requirement clause each edge was derived from. Dropped on load rather than
+ * shipped, because together they are roughly a sixth of what a programme page sends the browser.
+ */
+type RawProgram = Omit<Program, 'courses' | 'edges'> & {
+  courses: (Omit<ProgramCourse, 'category'> & { mainFieldSv?: string | null })[];
+  edges: (ProgramEdge & { rationale?: string })[];
 };
 
 const INDEX = index as ProgramIndex;
@@ -186,10 +190,20 @@ const DATA_DIR = path.join(process.cwd(), 'data', 'programs');
  */
 const cache = new Map<string, Program | null>();
 
+function without<T extends object, K extends keyof T>(source: T, key: K): Omit<T, K> {
+  const copy = { ...source };
+  delete copy[key];
+  return copy;
+}
+
 function hydrate(raw: RawProgram): Program {
   return {
     ...raw,
-    courses: raw.courses.map((course) => ({ ...course, category: categoriseCourse(course) })),
+    courses: raw.courses.map((course) => ({
+      ...without(course, 'mainFieldSv'),
+      category: categoriseCourse(course),
+    })),
+    edges: raw.edges.map((edge) => without(edge, 'rationale')),
   };
 }
 

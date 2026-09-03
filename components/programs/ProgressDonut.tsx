@@ -1,6 +1,6 @@
 import React from "react";
 import { STATUS_STYLE } from "./constants";
-import type { CourseStatus } from "@/lib/programs/progress";
+import type { CourseStatus } from "@/lib/programs/status";
 
 const ORDER: CourseStatus[] = ["COMPLETED", "IN_PROGRESS", "UPCOMING", "NOT_STARTED"];
 const LABELS: Record<CourseStatus, string> = {

@@ -2,6 +2,9 @@ import { render, screen } from '@testing-library/react'
 import CourseNavigatorPage from '@/app/projects/course-navigator/page'
 import { updatePageMeta } from '@/utils/seo'
 
+// AdminGate reaches the real Firebase client at import time; CI has no keys.
+jest.mock('@/lib/firebase-client', () => ({ auth: {}, db: {} }))
+
 jest.mock('lucide-react', () => ({
   ArrowRight: () => <svg data-testid="arrow-right" />,
 }))

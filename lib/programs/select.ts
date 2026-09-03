@@ -71,7 +71,15 @@ export function getVisibleCourses(
     }
   }
 
-  return program.courses.filter((c) => visible.has(c.trackId));
+  // A course carried by both a specialisation and one of its profiles is one course
+  const seen = new Set<string>();
+  return program.courses.filter((c) => {
+    if (!visible.has(c.trackId)) return false;
+    const key = `${c.code}@${c.semester}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 /** Groups courses by semester, returning one bucket per semester in order. */

@@ -373,6 +373,49 @@ test('does not put hundreds of edges ahead of the map in the tab order', async (
   await expect(page.locator('.react-flow__edge[tabindex="0"]')).toHaveCount(0);
 });
 
+/** Tabs until the focused element matches, so the count of stops in between can change freely. */
+async function tabTo(page: import('@playwright/test').Page, selector: string, limit = 60) {
+  for (let i = 0; i < limit; i += 1) {
+    await page.keyboard.press('Tab');
+    if (await page.evaluate((s) => !!document.activeElement?.matches(s), selector)) return true;
+  }
+  return false;
+}
+
+test('lets the keyboard do what the pointer can on a course card', async ({ page }) => {
+  await page.goto(PROGRAM, { waitUntil: 'load' });
+  await explorerSettled(page);
+
+  await page.locator('body').click({ position: { x: 5, y: 5 } });
+  expect(await tabTo(page, '.react-flow__node-programCourse')).toBe(true);
+
+  const card = page.locator('.react-flow__node-programCourse:focus');
+  const code = await card.getAttribute('data-id');
+
+  // A card that cannot show focus cannot be navigated: reactflow zeroes the outline on the
+  // wrapper it gives focus to, so the site's own ring never reached it.
+  expect(await card.evaluate((el) => getComputedStyle(el).outlineStyle)).not.toBe('none');
+
+  // Space narrows the study-plan rules, the keyboard's answer to a right-click. The chip that
+  // clears the filter is the only button carrying the code as its own text.
+  await page.keyboard.press(' ');
+  await expect(page.locator('button').filter({ hasText: code! })).toBeVisible();
+
+  // Enter opens the course, as a click does.
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(new RegExp(`/explore/${code}`));
+});
+
+test('offers one press past a map of a hundred tab stops', async ({ page }) => {
+  await page.goto(PROGRAM, { waitUntil: 'load' });
+  await explorerSettled(page);
+
+  await page.locator('body').click({ position: { x: 5, y: 5 } });
+  expect(await tabTo(page, 'a[href="#past-course-map"]')).toBe(true);
+  // Hidden until it has focus, and then it must be seen to be used.
+  await expect(page.getByRole('link', { name: /skip the course map/i })).toBeVisible();
+});
+
 test('lists each programme variant distinctly, not seven identical rows', async ({ page }) => {
   await page.goto('/programs', { waitUntil: 'load' });
 

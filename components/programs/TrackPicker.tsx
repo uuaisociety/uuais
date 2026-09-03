@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { ProgramSpecialisation } from "@/lib/programs";
 
 /** So the map's "choose a specialisation" marker can send the reader straight here. */
@@ -20,10 +20,11 @@ export default function TrackPicker({
 }) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const select = (trackId: string) => {
-    const params = new URLSearchParams(searchParams.toString());
+    // Read from the URL here rather than through useSearchParams: the hook would opt this
+    // subtree out of prerendering, and a handler only ever runs in the browser anyway.
+    const params = new URLSearchParams(window.location.search);
     if (trackId) params.set("track", trackId);
     else params.delete("track");
     router.push(`${pathname}?${params.toString()}`, { scroll: false });

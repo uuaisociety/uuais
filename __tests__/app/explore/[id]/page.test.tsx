@@ -122,6 +122,19 @@ describe('ExploreDetailPage', () => {
       expect(screen.queryByTestId('course-detail-client')).not.toBeInTheDocument()
     })
 
+    // CI runs with no Firebase credentials, so the lookup rejects rather than resolving empty.
+    it('renders the code when the lookup fails outright', async () => {
+      (fetchCourseById as jest.Mock).mockRejectedValue(new Error('Missing Firebase credentials'))
+
+      const element = await ExploreDetailPage({
+        params: Promise.resolve({ id: '1TE609' }),
+      })
+      render(element)
+
+      expect(screen.getByRole('heading', { name: '1TE609' })).toBeInTheDocument()
+      expect(screen.queryByTestId('course-detail-client')).not.toBeInTheDocument()
+    })
+
     it('links out to the university page for the code', async () => {
       (fetchCourseById as jest.Mock).mockResolvedValue(null)
 

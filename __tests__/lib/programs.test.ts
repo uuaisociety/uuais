@@ -127,6 +127,24 @@ describe('getVisibleCourses', () => {
     expect(visible.length).toBeLessThan(program.courses.length);
   });
 
+  it('never lists a course twice in a semester, in any programme or track', () => {
+    // A profile inherits its bare specialisation's courses, so the union carried duplicates:
+    // the map collapsed them but the credit totals and the progress donut counted them twice.
+    const duplicates: string[] = [];
+    for (const entry of listPrograms()) {
+      const current = getProgram(entry.code) as Program;
+      for (const trackId of [null, ...current.tracks.map((t) => t.id)]) {
+        const seen = new Set<string>();
+        for (const course of getVisibleCourses(current, trackId)) {
+          const key = `${course.code}@${course.semester}`;
+          if (seen.has(key)) duplicates.push(`${entry.code}/${trackId ?? 'trunk'}/${key}`);
+          seen.add(key);
+        }
+      }
+    }
+    expect(duplicates).toEqual([]);
+  });
+
   it('adds the selected track to the trunk', () => {
     const visible = getVisibleCourses(program, 'elektrifiering');
     expect(new Set(visible.map((c) => c.trackId))).toEqual(new Set([null, 'elektrifiering']));

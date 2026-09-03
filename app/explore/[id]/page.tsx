@@ -1,4 +1,3 @@
-import { fetchCourseById } from "@/lib/courses";
 import CourseDetailClient from "@/components/courses/CourseDetailClient";
 import CourseUnavailable from "@/components/courses/CourseUnavailable";
 import { notFound } from "next/navigation";
@@ -8,6 +7,15 @@ import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { getProgram } from "@/lib/programs";
 import { programDisplayNames, programReturnPath } from "@/lib/programs/format";
+
+/**
+ * Dynamic import so a failed admin SDK init degrades gracefully instead of throwing during
+ * module evaluation, the same reason lib/server-data.ts loads it this way.
+ */
+async function fetchCourseById(id: string) {
+  const { fetchCourseById: fetch } = await import("@/lib/courses");
+  return fetch(id);
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
@@ -58,7 +66,14 @@ export default async function ExploreDetailPage({
   if (!id) {
     return notFound()
   }
-  const course = await fetchCourseById(id);
+  // A lookup that fails — Firestore unreachable, or no server credentials — leaves the reader in
+  // the same position as a course we never scraped, so it gets the same page rather than a crash.
+  let course;
+  try {
+    course = await fetchCourseById(id);
+  } catch (error) {
+    console.error("Course lookup failed:", error);
+  }
 
   // A course we link to but have never scraped is a gap in our data, not a bad URL:
   // 404ing it strands the reader on ~1 in 5 of the links the programme maps generate.

@@ -53,9 +53,12 @@ export default function ProgramsTab() {
           fetch("/api/admin/programs").then((r) => (r.ok ? r.json() : null)),
           listUsers().catch(() => []),
         ]);
-        if (statsResponse) setData(statsResponse);
+        if (!statsResponse) throw new Error("Programme index unavailable");
+        setData(statsResponse);
         setMembers(users as { program?: string }[]);
         if (opts?.notify) notify({ type: "success", message: "Programmes refreshed." });
+      } catch {
+        notify({ type: "error", message: "Could not load programmes." });
       } finally {
         setLoading(false);
       }

@@ -3,6 +3,9 @@ import ExplorePage from '@/app/explore/page'
 import type { Course } from '@/lib/courses'
 import { updatePageMeta } from '@/utils/seo'
 
+// AdminGate reaches the real Firebase client at import time; CI has no keys.
+jest.mock('@/lib/firebase-client', () => ({ auth: {}, db: {} }))
+
 jest.mock('@/components/common/RagChat', () => ({
   __esModule: true,
   default: ({ onRecommendations, onThinkingStart, placeholder }: unknown) => {
