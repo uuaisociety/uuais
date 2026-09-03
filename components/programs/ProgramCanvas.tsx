@@ -913,9 +913,16 @@ export default function ProgramCanvas({
             onPaneClick={() => {
               setHovered(null);
               setOpenHelp(null);
+              // Touch has no right-click, so tapping off the card is the only way back out of a
+              // selection; on a mouse it matches the escape every other selection here offers.
+              onSelect?.(null);
             }}
             onNodeClick={(_, node) => {
-              if (node.type !== "programCourse") return;
+              // Bands, gaps and pools are outside any card, so they release the selection too.
+              if (node.type !== "programCourse") {
+                onSelect?.(null);
+                return;
+              }
               const code = courseCodeOf(node);
               if (!code) return;
               if (markMode) {

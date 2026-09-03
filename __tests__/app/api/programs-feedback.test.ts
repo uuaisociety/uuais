@@ -4,7 +4,13 @@ jest.mock('@/lib/firebase-admin', () => ({
   adminDb: { collection: jest.fn(() => ({ add: (...args: unknown[]) => mockAdd(...args) })) },
 }))
 
+// Mocked only so the constant below can be read: the module opens the browser SDK, which is
+// exactly why the route names its collection itself rather than importing it.
+jest.mock('@/lib/firebase-client', () => ({ db: {}, auth: {} }))
+
 import { POST } from '@/app/api/programs/feedback/route'
+import { PROGRAM_FEEDBACK_COLLECTION } from '@/lib/firestore/program-feedback'
+import { adminDb } from '@/lib/firebase-admin'
 import { resetRateLimits } from '@/lib/rate-limit-in-memory'
 import type { NextRequest } from 'next/server'
 
@@ -35,6 +41,13 @@ describe('POST /api/programs/feedback', () => {
     expect(mockAdd).toHaveBeenCalledWith(
       expect.objectContaining({ programSlug: 'ttf2y', status: 'open', contact: null })
     )
+  })
+
+  it('writes to the collection the admin dashboard reads', async () => {
+    // The name is duplicated to keep the browser SDK out of the route; drift would leave
+    // reports in a collection nothing lists.
+    await POST(makeReq(valid))
+    expect(adminDb.collection).toHaveBeenCalledWith(PROGRAM_FEEDBACK_COLLECTION)
   })
 
   it('rejects a programme that is not in the catalogue', async () => {

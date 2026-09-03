@@ -3,10 +3,11 @@ import type { NextRequest } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { getProgram } from '@/lib/programs';
-import {
-    PROGRAM_FEEDBACK_COLLECTION,
-    type ProgramFeedbackKind,
-} from '@/lib/firestore/program-feedback';
+// The type erases at build time; the collection is named here rather than imported, because
+// lib/firestore/* opens the browser SDK and a route has no business initialising one.
+import type { ProgramFeedbackKind } from '@/lib/firestore/program-feedback';
+
+const PROGRAM_FEEDBACK_COLLECTION = 'programFeedback';
 
 const KINDS: ProgramFeedbackKind[] = [
     'wrong-prerequisite',

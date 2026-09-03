@@ -575,6 +575,25 @@ test.describe('small screens', () => {
 test.describe('course cards by pointer type', () => {
   test.use({ viewport: { width: 1700, height: 1050 }, hasTouch: true });
 
+  test('lets go of a selection when the reader taps off the card', async ({ page }) => {
+    await page.goto(PROGRAM, { waitUntil: 'load' });
+    const card = page.locator('.react-flow__node-programCourse[data-id="1TE609"]');
+    await expect(card).toBeVisible();
+    const rules = page.locator('section').filter({ hasText: /rules from the study plan/i }).first();
+
+    await card.tap();
+    await expect(rules).toContainText('1TE609');
+
+    // Touch has no right-click, so tapping the background is the only way back out. Tapped
+    // through the locator so it scrolls into view first and the point is measured from the pane.
+    const pane = page.locator('.react-flow__pane');
+    await pane.scrollIntoViewIfNeeded();
+    const box = (await pane.boundingBox())!;
+    await pane.tap({ position: { x: box.width - 8, y: box.height - 8 } });
+    await expect(rules).not.toContainText('1TE609');
+    await expect(page.locator('.react-flow__node-programCourse div.opacity-25')).toHaveCount(0);
+  });
+
   test('selects a course on the first tap and opens it on the second', async ({ page }) => {
     await page.goto(PROGRAM, { waitUntil: 'load' });
     const card = page.locator('.react-flow__node-programCourse[data-id="1TE609"]');
