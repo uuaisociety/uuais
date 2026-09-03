@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 import {
   CheckCheck,
   Columns3,
+  Hand,
   Map as MapIcon,
   Maximize2,
   Minimize2,
@@ -108,6 +109,7 @@ const FIT_VIEW: Record<Orientation, FitViewOptions> = {
   vertical: { minZoom: 0.35, maxZoom: 1, padding: 0.06 },
 };
 
+
 /** Clearance above the first course row for the semester band's header and period strip. */
 const BAND_HEADER = 64;
 /**
@@ -133,6 +135,16 @@ function subscribeSmallScreen(onChange: () => void) {
 }
 
 const smallScreenSnapshot = () => window.matchMedia(SMALL_SCREEN).matches;
+/**
+ * Fitting a whole degree into a phone shrank the cards to a 5px title and 11px controls —
+ * legible to nobody and tappable by nobody. A small screen reads the map by panning instead,
+ * so the fit is floored where a card still says something and the rest is a drag away.
+ */
+function fitOptions(orientation: Orientation): FitViewOptions {
+  const base = FIT_VIEW[orientation];
+  if (orientation !== "vertical" || typeof window === "undefined") return base;
+  return window.matchMedia(SMALL_SCREEN).matches ? { ...base, minZoom: 0.8 } : base;
+}
 /** Rendered on the server, where there is no screen to measure. */
 const wideServerSnapshot = () => false;
 
@@ -150,7 +162,7 @@ function anchorView(
   anchorId?: string,
   animate = false
 ) {
-  instance.fitView(FIT_VIEW[orientation]);
+  instance.fitView(fitOptions(orientation));
   const nodes = instance.getNodes();
   if (nodes.length === 0) return;
   const bounds = getNodesBounds(nodes);
@@ -309,6 +321,11 @@ export default function ProgramCanvas({
   const orientation: Orientation =
     chosenOrientation ?? (smallScreen ? "vertical" : "horizontal");
   const [hovered, setHovered] = useState<string | null>(null);
+  /**
+   * A phone shows a corner of the map and nothing says the rest is there: no scrollbar, no
+   * cropped card at the fold. Shown until the reader moves the map, which answers it.
+   */
+  const [panHintSeen, setPanHintSeen] = useState(false);
   /**
    * Whether the last pointer was a finger: hover and right-click have no touch equivalent,
    * so on touch the first tap selects and traces and the second opens.
@@ -852,10 +869,19 @@ export default function ProgramCanvas({
       {/* The pane sits on the ambient background rather than the card surface, so cards read
           as raised in dark mode too, where a drop shadow alone carries almost nothing. */}
       <div
-        className={`overflow-hidden bg-background ${fullscreen ? "min-h-0 flex-1" : "rounded-b-lg"}`}
+        className={`relative overflow-hidden bg-background ${fullscreen ? "min-h-0 flex-1" : "rounded-b-lg"}`}
         style={fullscreen ? undefined : { height: MAP_PANE_HEIGHT }}
         onPointerDownCapture={notePointer}
       >
+        {smallScreen && !panHintSeen ? (
+          <p
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-3 z-10 mx-auto flex w-fit items-center gap-2 rounded-full border border-border bg-card/95 px-3 py-1.5 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-muted-foreground shadow-sm"
+          >
+            <Hand className="h-3.5 w-3.5" />
+            Drag to see the rest
+          </p>
+        ) : null}
         <ReactFlowProvider>
           <ReactFlow
             key={orientation}
@@ -883,6 +909,7 @@ export default function ProgramCanvas({
               if (node.type === "programCourse") setHovered(courseCodeOf(node));
             }}
             onNodeMouseLeave={() => setHovered(null)}
+            onMoveStart={() => setPanHintSeen(true)}
             onPaneClick={() => {
               setHovered(null);
               setOpenHelp(null);
