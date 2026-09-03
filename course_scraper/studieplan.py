@@ -207,11 +207,13 @@ def flatten_courses(outline):
 
                 existing = courses.get(key)
                 if existing:
-                    # Only a period not already counted adds credits, so a course split over
-                    # two semesters (1FA105 sits in both 1 and 2) adds its share to each.
                     if period_name and period_name not in existing['periods']:
                         existing['periods'].append(period_name)
-                        existing['creditsInSemester'] = (existing['creditsInSemester'] or 0) + (in_period or 0)
+                        # UU restates the whole course's credits on every period row it appears
+                        if in_period is not None and total is not None and in_period != total:
+                            # Capped at the course itself
+                            gained = (existing['creditsInSemester'] or 0) + in_period
+                            existing['creditsInSemester'] = min(gained, total)
                     if total and (existing['credits'] or 0) < total:
                         existing['credits'] = total
                     continue
@@ -333,15 +335,23 @@ def parse_search_hits(html_content):
 
 # ---- The Ladok-backed plan shape ----
 
+#: Periods 1-2 fall in the autumn term, 3-4 in the spring, so a semester's parity picks its own.
+TERM_PERIODS = {1: {'1', '2'}, 0: {'3', '4'}}
+
+
 def parse_ladok_course(education, semester, period_names):
     """A course in the newer Ladok format, where credits are real fields, not display strings."""
     fields = education.get('mainFieldOfStudyNamesEn') or []
     depths = education.get('mainFieldOfStudySpecialisedStudyCodes') or []
     total = float(education.get('creditsNumber') or 0) or None
+    wanted = TERM_PERIODS[semester % 2] if semester else None
     in_semester = 0.0
     for session in education.get('sessionPeriods') or []:
         for part in session.get('periodCredits') or []:
-            period_names.add(f"Period {part.get('period')}")
+            period = str(part.get('period'))
+            if wanted is not None and period not in wanted:
+                continue
+            period_names.add(f"Period {period}")
             in_semester += float(part.get('credits') or 0)
 
     return {

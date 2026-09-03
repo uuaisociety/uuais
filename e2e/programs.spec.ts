@@ -523,7 +523,7 @@ test('moves the map to the semesters a chosen specialisation adds', async ({ pag
 test.describe('small screens', () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test('opens vertical, where the whole degree fits, and never scrolls sideways', async ({
+  test('opens vertical and legible, panned rather than shrunk, and never scrolls sideways', async ({
     page,
   }) => {
     await page.goto(PROGRAM, { waitUntil: 'load' });
@@ -538,6 +538,28 @@ test.describe('small screens', () => {
       document.documentElement.clientWidth,
     ]);
     expect(widths[0]).toBe(widths[1]);
+
+    // Fitting the whole degree onto a phone left 5px titles and 11px controls.
+    const scale = await page.evaluate(() => {
+      const card = document.querySelector('.react-flow__node-programCourse') as HTMLElement;
+      return card.getBoundingClientRect().width / card.offsetWidth;
+    });
+    expect(scale).toBeGreaterThanOrEqual(0.8);
+
+    // Nothing else says the rest of the map is there: no scrollbar, no card cut off at the fold.
+    const hint = page.getByText(/drag to see the rest/i);
+    await expect(hint).toBeVisible();
+
+    await page.locator('.react-flow__pane').scrollIntoViewIfNeeded();
+    const card = (await page.locator('.react-flow__node-programCourse').first().boundingBox())!;
+    const x = card.x + card.width / 2;
+    const y = card.y + card.height / 2;
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    await page.mouse.move(x, y - 120, { steps: 10 });
+    await page.mouse.up();
+    // The hint has been answered, so it goes.
+    await expect(hint).toBeHidden();
 
     // A reader who switches back is not overruled by the screen.
     await page.getByRole('button', { name: 'Horizontal' }).click();

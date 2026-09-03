@@ -188,6 +188,19 @@ describe('summarise', () => {
     expect(summarise(courses, { '1FA105': 'COMPLETED' }).creditsRequired).toBe(10);
   });
 
+  it('counts a course offered in either of two semesters once, not twice', () => {
+    // 1MA017 is listed in semesters 4 and 6 of tdv1k at its full 5 credits in each: the study
+    // plan is offering a choice of when to take it, not asking for it twice.
+    const courses = [
+      course('1MA017', { credits: 5, creditsInSemester: 5, semester: 4 }),
+      course('1MA017', { credits: 5, creditsInSemester: 5, semester: 6 }),
+    ];
+    const result = summarise(courses, { '1MA017': 'COMPLETED' });
+    expect(result.creditsRequired).toBe(5);
+    expect(result.creditsCompleted).toBe(5);
+    expect(result.counts.COMPLETED).toBe(1);
+  });
+
   it('reports zero rather than dividing by zero when nothing is compulsory', () => {
     const result = summarise([course('A', { compulsory: false })], { A: 'NOT_STARTED' });
     expect(result.percentComplete).toBe(0);

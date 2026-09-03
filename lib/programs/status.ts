@@ -129,13 +129,21 @@ export function summarise(
   let creditsCompleted = 0;
   let creditsRequired = 0;
 
+  // One course, however many semesters list it.
+  const byCode = new Map<string, ProgramCourse>();
   for (const course of courses) {
+    const seen = byCode.get(course.code);
+    // Compulsory anywhere is compulsory
+    if (!seen) byCode.set(course.code, course);
+    else if (course.compulsory && !seen.compulsory) byCode.set(course.code, course);
+  }
+
+  for (const course of byCode.values()) {
     const status = statuses[course.code] ?? 'NOT_STARTED';
     counts[status] += 1;
     // Measured against what the degree demands, so the optional pool does not dilute it.
     if (!course.compulsory) continue;
-    // Per-semester share, so a course spanning two semesters is not counted twice.
-    const credits = course.creditsInSemester ?? course.credits ?? 0;
+    const credits = course.credits ?? course.creditsInSemester ?? 0;
     creditsRequired += credits;
     if (status === 'COMPLETED') creditsCompleted += credits;
   }

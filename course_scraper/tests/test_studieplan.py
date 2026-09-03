@@ -2,6 +2,7 @@
 
 from studieplan import (
     build_program,
+    flatten_ladok,
     collect_rule_texts,
     extract_outline,
     flatten_courses,
@@ -211,6 +212,50 @@ class TestFlattenCourses:
         assert courses[0]["creditsInPeriod"] == 5.0
         assert courses[0]["periods"] == ["Period 1", "Period 2"]
 
+    def test_course_repeated_across_periods_is_not_counted_twice(self):
+        """UU prints the whole course's credits on every period row it appears in."""
+        link = "Projektarbete i informationsteknologi, 5 hp (1DT081)"
+        outline = _outline([{
+            "nameSv": "Termin 1",
+            "content": [
+                _period("Period 1", _courses_node(_course("1DT081", link))),
+                _period("Period 2", _courses_node(_course("1DT081", link))),
+            ],
+        }])["outline"]
+        courses, _ = flatten_courses(outline)
+        assert len(courses) == 1
+        assert courses[0]["credits"] == 5.0
+        # The semester counts the course once, however many periods it runs over.
+        assert courses[0]["creditsInSemester"] == 5.0
+        assert courses[0]["periods"] == ["Period 1", "Period 2"]
+
+    def test_split_course_still_sums_its_shares(self):
+        """The "5 av 10 hp" form does carry a share, and both halves belong to the semester."""
+        link = "Analys i en variabel, 5 av 10 hp (1MA360)"
+        outline = _outline([{
+            "nameSv": "Termin 1",
+            "content": [
+                _period("Period 1", _courses_node(_course("1MA360", link))),
+                _period("Period 2", _courses_node(_course("1MA360", link))),
+            ],
+        }])["outline"]
+        courses, _ = flatten_courses(outline)
+        assert courses[0]["creditsInSemester"] == 10.0
+
+    def test_shares_never_sum_past_the_course_itself(self):
+        """TTF2Y lists 1TE058 as "2,5 av 5 hp" under all four periods of one semester."""
+        link = "Kreativ verkstadsteknik, 2,5 av 5 hp (1TE058)"
+        outline = _outline([{
+            "nameSv": "Termin 1",
+            "content": [
+                _period(f"Period {n}", _courses_node(_course("1TE058", link)))
+                for n in (1, 2, 3, 4)
+            ],
+        }])["outline"]
+        courses, _ = flatten_courses(outline)
+        assert courses[0]["credits"] == 5.0
+        assert courses[0]["creditsInSemester"] == 5.0
+
     def test_track_header_assigns_following_periods(self):
         outline = _outline(_pad_to(7, {
             "nameSv": "Termin 7",
@@ -300,3 +345,46 @@ class TestBuildProgram:
         assert program["semesters"] == 1
         assert program["sourceUrl"] == "https://example.test/plan"
         assert program["edges"] == []
+
+
+def _ladok_education(code, credits, session_periods):
+    return {
+        "code": code,
+        "nameSv": f"Kurs {code}",
+        "nameEn": f"Course {code}",
+        "creditsNumber": credits,
+        "sessionPeriods": session_periods,
+    }
+
+
+class TestFlattenLadok:
+    """The blob repeats a straddling course verbatim under every semester it touches."""
+
+    #: 1TS301, 15 hp: 10 hp in the autumn's periods 1-2, 5 hp in the spring's period 3.
+    SESSIONS = [
+        {"credits": 10, "periodCredits": [{"credits": 5, "period": "2"}, {"credits": 5, "period": "1"}]},
+        {"credits": 5, "periodCredits": [{"credits": 5, "period": "3"}]},
+    ]
+
+    def _outline(self):
+        education = _ladok_education("1TS301", 15.0, self.SESSIONS)
+        return {
+            "semesters": [
+                {"number": 1, "courses": [{"education": education}]},
+                {"number": 2, "courses": [{"education": education}]},
+            ]
+        }
+
+    def test_each_semester_counts_only_its_own_periods(self):
+        courses, _ = flatten_ladok(self._outline())
+        by_semester = {c["semester"]: c for c in courses}
+        assert by_semester[1]["creditsInSemester"] == 10.0
+        assert by_semester[2]["creditsInSemester"] == 5.0
+        # The whole course is still 15 hp in both rows; only the semester's share differs.
+        assert {c["credits"] for c in courses} == {15.0}
+
+    def test_a_semester_lists_only_the_periods_it_teaches(self):
+        courses, _ = flatten_ladok(self._outline())
+        by_semester = {c["semester"]: c for c in courses}
+        assert by_semester[1]["periods"] == ["Period 1", "Period 2"]
+        assert by_semester[2]["periods"] == ["Period 3"]
