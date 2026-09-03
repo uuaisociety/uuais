@@ -110,15 +110,14 @@
       "titleSv": "Projektarbete i elektroteknik",
       "credits": 15.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 15.0,
+      "creditsInSemester": 5.0,
       "compulsory": true,
       "mainFieldEn": "Technology",
       "mainFieldSv": "Teknik",
       "depthCode": "G1F",
       "semester": 1,
       "periods": [
-        "Period 2",
-        "Period 3"
+        "Period 2"
       ],
       "trackId": null,
       "onlyProgramme": null,
@@ -130,14 +129,13 @@
       "titleSv": "Projektarbete i elektroteknik",
       "credits": 15.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 15.0,
+      "creditsInSemester": 10.0,
       "compulsory": true,
       "mainFieldEn": "Technology",
       "mainFieldSv": "Teknik",
       "depthCode": "G1F",
       "semester": 2,
       "periods": [
-        "Period 2",
         "Period 3"
       ],
       "trackId": null,
@@ -1117,12 +1115,12 @@
       "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.101317+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.853730+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=46e7621e-6fad-40da-a79a-97366ca2287d",
   "programmeTitle": "Högskoleingenjörsprogrammet i elektroteknik, 180 hp (TEL1Y)",
+  "programmeTitleEn": "Bachelor's Programme in Electrical Engineering, 180 credits (TEL1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-elektroteknik",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Bachelor's Programme in Electrical Engineering, 180 credits (TEL1Y)"
+  "reviewed": false
 }

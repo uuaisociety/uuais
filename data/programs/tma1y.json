@@ -1254,12 +1254,12 @@
       "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.104361+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.856696+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=73518e38-e69a-4074-b48f-25bf3fb6a4dc",
   "programmeTitle": "Högskoleingenjörsprogrammet i maskinteknik, 180 hp (TMA1Y)",
+  "programmeTitleEn": "Bachelor's Programme in Mechanical Engineering, 180 credits (TMA1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-maskinteknik",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Bachelor's Programme in Mechanical Engineering, 180 credits (TMA1Y)"
+  "reviewed": false
 }

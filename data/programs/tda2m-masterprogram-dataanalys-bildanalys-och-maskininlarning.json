@@ -463,12 +463,12 @@
       "name": "Giltig från och med höstterminen 2026"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.143909+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.894527+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=ee5ab186-39c3-4b79-a827-4b2f93496219",
   "programmeTitle": "Masterprogram i dataanalys – Bildanalys och maskininlärning, 120 hp (TDA2M)",
+  "programmeTitleEn": "Master's Programme in Data Science – Machine Learning and Statistics, 120 credits (TDA2M)",
   "programmeUri": "/utbildning/program/masterprogram-dataanalys-bildanalys-och-maskininlarning",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Data Science – Machine Learning and Statistics, 120 credits (TDA2M)"
+  "reviewed": false
 }

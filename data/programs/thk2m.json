@@ -201,12 +201,12 @@
       "name": "Giltig från och med höstterminen 2026"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.183772+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.933775+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=a6b3e610-5227-4812-89ae-9ffc6c8222d5",
   "programmeTitle": "Masterprogram i hållbar utveckling av kustområden, 120 hp (THK2M)",
+  "programmeTitleEn": "Master's Programme in Sustainable Development of Coastal Areas, 120 credits (THK2M)",
   "programmeUri": "/utbildning/program/masterprogram-hallbar-utveckling-av-kustomraden",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Sustainable Development of Coastal Areas, 120 credits (THK2M)"
+  "reviewed": false
 }

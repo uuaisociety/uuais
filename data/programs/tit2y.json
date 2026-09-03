@@ -973,7 +973,7 @@
       "titleSv": "Projektarbete i informationsteknologi",
       "credits": 5.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": false,
       "mainFieldEn": "Computer Science G2F, Technology",
       "mainFieldSv": "Datavetenskap G2F, Teknik",
@@ -993,7 +993,7 @@
       "titleSv": "Projektarbete i informationsteknologi",
       "credits": 10.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 20.0,
+      "creditsInSemester": 10.0,
       "compulsory": false,
       "mainFieldEn": "Computer Science G2F, Technology",
       "mainFieldSv": "Datavetenskap G2F, Teknik",
@@ -1624,7 +1624,7 @@
       "titleSv": "Projektarbete i informationsteknologi",
       "credits": 5.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": false,
       "mainFieldEn": "Computer Science G2F, Technology",
       "mainFieldSv": "Datavetenskap G2F, Teknik",
@@ -1644,7 +1644,7 @@
       "titleSv": "Projektarbete i informationsteknologi",
       "credits": 10.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 20.0,
+      "creditsInSemester": 10.0,
       "compulsory": false,
       "mainFieldEn": "Computer Science G2F, Technology",
       "mainFieldSv": "Datavetenskap G2F, Teknik",
@@ -2840,12 +2840,12 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.066698+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.818243+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10068",
   "programmeTitle": "Civilingenjörsprogrammet i informationsteknologi, 300 hp (TIT2Y)",
+  "programmeTitleEn": "Master's Programme in Computer and Information Engineering, 300 credits (TIT2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-informationsteknologi",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Computer and Information Engineering, 300 credits (TIT2Y)"
+  "reviewed": false
 }

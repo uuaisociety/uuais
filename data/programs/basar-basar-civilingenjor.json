@@ -252,12 +252,12 @@
       "name": "Giltig från och med höstterminen 2026"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.210594+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.960667+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=8887387f-d282-47a8-9060-3ae4324ab493",
   "programmeTitle": "Tekniskt-naturvetenskapligt basår med reserverad plats på ett civilingenjörsprogram, 40 veckor (BASAR)",
+  "programmeTitleEn": "Science and Technology Foundation Year Programme – Reserved Place on the Teacher Education Programme, Mathematics, Technology or Natural Science Subjects, 40 weeks (BASAR)",
   "programmeUri": "/utbildning/program/basar-civilingenjor",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Science and Technology Foundation Year Programme – Reserved Place on the Teacher Education Programme, Mathematics, Technology or Natural Science Subjects, 40 weeks (BASAR)"
+  "reviewed": false
 }

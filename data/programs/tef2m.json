@@ -771,12 +771,12 @@
       "name": "Giltig från och med höstterminen 2022"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.153436+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.904142+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10016",
   "programmeTitle": "Masterprogram i elektriska framdrivningssystem, 120 hp (TEF2M)",
+  "programmeTitleEn": "Master's Programme in All-Electric Propulsion Systems, 120 credits (TEF2M)",
   "programmeUri": "/utbildning/program/masterprogram-elektriska-framdrivningssystem",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in All-Electric Propulsion Systems, 120 credits (TEF2M)"
+  "reviewed": false
 }

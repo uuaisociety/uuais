@@ -266,12 +266,12 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.102844+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.855298+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=69742628-0a52-4a94-8f03-6c80558bae2d",
   "programmeTitle": "Högskoleingenjörsprogrammet i kärnkraftteknik, 60 hp (TKK1Y)",
+  "programmeTitleEn": "Bachelor's Programme in Nuclear Engineering, 60 credits (TKK1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-karnkraftteknik",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Bachelor's Programme in Nuclear Engineering, 60 credits (TKK1Y)"
+  "reviewed": false
 }

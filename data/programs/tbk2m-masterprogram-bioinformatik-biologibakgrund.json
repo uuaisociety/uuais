@@ -733,12 +733,12 @@
       "name": "Giltig från och med höstterminen 2020"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.140959+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.891575+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10006",
   "programmeTitle": "Masterprogram i bioinformatik – Biologibakgrund, 120 hp (TBK2M)",
+  "programmeTitleEn": "Master's Programme in Bioinformatics – Computer Science Background, 120 credits (TBK2M)",
   "programmeUri": "/utbildning/program/masterprogram-bioinformatik-biologibakgrund",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Bioinformatics – Computer Science Background, 120 credits (TBK2M)"
+  "reviewed": false
 }

@@ -3097,7 +3097,7 @@
       "titleSv": "Kreativ verkstadsteknik",
       "credits": 5.0,
       "creditsInPeriod": 2.5,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": false,
       "mainFieldEn": "Technology",
       "mainFieldSv": "Teknik",
@@ -3784,7 +3784,7 @@
       "titleSv": "Astrofysik I",
       "credits": 5.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": false,
       "mainFieldEn": "Physics",
       "mainFieldSv": "Fysik",
@@ -6525,12 +6525,12 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.095112+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.846458+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10072",
   "programmeTitle": "Civilingenjörsprogrammet i teknisk fysik, 300 hp (TTF2Y)",
+  "programmeTitleEn": "Master's Programme in Engineering Physics, 300 credits (TTF2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-teknisk-fysik",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Engineering Physics, 300 credits (TTF2Y)"
+  "reviewed": false
 }

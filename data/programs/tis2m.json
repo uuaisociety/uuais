@@ -148,7 +148,7 @@
       "titleSv": "Människa-datorinteraktion",
       "credits": 5.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": false,
       "mainFieldEn": "Computer Science G1N, Sociotechnical Systems G1N, Technology",
       "mainFieldSv": "Datavetenskap G1N, System i teknik och samhälle G1N, Teknik",
@@ -1643,12 +1643,12 @@
       "name": "Giltig från och med höstterminen 2014"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.187833+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.937515+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10032",
   "programmeTitle": "Masterprogram i inbyggda system, 120 hp (TIS2M)",
+  "programmeTitleEn": "Master's Programme in Embedded Systems, 120 credits (TIS2M)",
   "programmeUri": "/utbildning/program/masterprogram-inbyggda-system",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Embedded Systems, 120 credits (TIS2M)"
+  "reviewed": false
 }

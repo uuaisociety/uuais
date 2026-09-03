@@ -388,12 +388,12 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.193887+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.943632+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10034",
   "programmeTitle": "Masterprogram i kemi – Biokemi, 120 hp (TKE2M)",
+  "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
   "programmeUri": "/utbildning/program/masterprogram-kemi-biokemi",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)"
+  "reviewed": false
 }

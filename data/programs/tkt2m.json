@@ -1203,12 +1203,12 @@
       "name": "Giltig från och med höstterminen 2022"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.199824+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.949547+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10041",
   "programmeTitle": "Masterprogram i kvantteknologi, 120 hp (TKT2M)",
+  "programmeTitleEn": "Master's Programme in Quantum Technology, 120 credits (TKT2M)",
   "programmeUri": "/utbildning/program/masterprogram-kvantteknologi",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Quantum Technology, 120 credits (TKT2M)"
+  "reviewed": false
 }

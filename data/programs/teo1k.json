@@ -452,12 +452,12 @@
       "name": "Giltig från och med höstterminen 2018"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.112084+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.864462+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10049",
   "programmeTitle": "Kandidatprogram i energiomställning – hållbarhet och ledarskap, 180 hp (TEO1K)",
+  "programmeTitleEn": "Bachelor's Programme in Energy Transition – Sustainability and Leadership, 180 credits (TEO1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-energiomstallning-hallbarhet-och-ledarskap",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Bachelor's Programme in Energy Transition – Sustainability and Leadership, 180 credits (TEO1K)"
+  "reviewed": false
 }

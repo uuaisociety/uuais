@@ -958,7 +958,7 @@
       "titleSv": "Databasteknik I",
       "credits": 5.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": false,
       "mainFieldEn": "Computer Science G2F, Sociotechnical Systems G2F, Technology",
       "mainFieldSv": "Datavetenskap G2F, System i teknik och samhälle G2F, Teknik",
@@ -1036,7 +1036,7 @@
       "titleSv": "Reglerteknik I",
       "credits": 5.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": false,
       "mainFieldEn": "Sociotechnical Systems G2F, Technology",
       "mainFieldSv": "System i teknik och samhälle G2F, Teknik",
@@ -2560,12 +2560,12 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.133627+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.885423+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10058",
   "programmeTitle": "Kandidatprogram i matematik, 180 hp (TMA1K)",
+  "programmeTitleEn": "Bachelor's Programme in Mathematics, 180 credits (TMA1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-matematik",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Bachelor's Programme in Mathematics, 180 credits (TMA1K)"
+  "reviewed": false
 }

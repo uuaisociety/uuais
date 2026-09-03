@@ -246,7 +246,7 @@
       "titleSv": "Människa-datorinteraktion",
       "credits": 5.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": false,
       "mainFieldEn": "Computer Science G1N, Sociotechnical Systems G1N, Technology",
       "mainFieldSv": "Datavetenskap G1N, System i teknik och samhälle G1N, Teknik",
@@ -1432,7 +1432,7 @@
       "titleSv": "Öppen fördjupningskurs i datavetenskap",
       "credits": 5.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": false,
       "mainFieldEn": "Computer Science",
       "mainFieldSv": "Datavetenskap",
@@ -1452,7 +1452,7 @@
       "titleSv": "Öppen fördjupningskurs i datavetenskap",
       "credits": 10.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 20.0,
+      "creditsInSemester": 10.0,
       "compulsory": false,
       "mainFieldEn": "Computer Science",
       "mainFieldSv": "Datavetenskap",
@@ -2239,12 +2239,12 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.150662+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.901515+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10013",
   "programmeTitle": "Masterprogram i datavetenskap, 120 hp (TDV2M)",
+  "programmeTitleEn": "Master's Programme in Computer Science, 120 credits (TDV2M)",
   "programmeUri": "/utbildning/program/masterprogram-datavetenskap",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Computer Science, 120 credits (TDV2M)"
+  "reviewed": false
 }

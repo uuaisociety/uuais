@@ -252,12 +252,12 @@
       "name": "Giltig från och med höstterminen 2026"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.211286+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.961386+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=c906cc14-98d2-41a4-87cf-3c8e65431624",
   "programmeTitle": "Tekniskt-naturvetenskapligt basår med reserverad plats på ett högskoleingenjörsprogram, 40 veckor (BASAR)",
+  "programmeTitleEn": "Science and Technology Foundation Year Programme – Reserved Place on the Teacher Education Programme, Mathematics, Technology or Natural Science Subjects, 40 weeks (BASAR)",
   "programmeUri": "/utbildning/program/basar-hogskoleingenjor",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Science and Technology Foundation Year Programme – Reserved Place on the Teacher Education Programme, Mathematics, Technology or Natural Science Subjects, 40 weeks (BASAR)"
+  "reviewed": false
 }

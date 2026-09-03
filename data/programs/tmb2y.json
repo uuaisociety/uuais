@@ -72,15 +72,14 @@
       "titleSv": "Envariabelanalys",
       "credits": 10.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": true,
       "mainFieldEn": "Mathematics",
       "mainFieldSv": "Matematik",
       "depthCode": "G1F",
       "semester": 1,
       "periods": [
-        "Period 2",
-        "Period 3"
+        "Period 2"
       ],
       "trackId": null,
       "onlyProgramme": true,
@@ -130,14 +129,13 @@
       "titleSv": "Envariabelanalys",
       "credits": 10.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": true,
       "mainFieldEn": "Mathematics",
       "mainFieldSv": "Matematik",
       "depthCode": "G1F",
       "semester": 2,
       "periods": [
-        "Period 2",
         "Period 3"
       ],
       "trackId": null,
@@ -2502,12 +2500,12 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.076849+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.828442+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=4bfbfcf7-c6eb-40c5-9124-6730b6ede86c",
   "programmeTitle": "Civilingenjörsprogrammet i molekylär bioteknik, 300 hp (TMB2Y)",
+  "programmeTitleEn": "Master's Programme in Molecular Biotechnology Engineering, 300 credits (TMB2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-molekylar-bioteknik",
   "validFrom": "Studieplan giltig från och med höstterminen 2026, version 2",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Molecular Biotechnology Engineering, 300 credits (TMB2Y)"
+  "reviewed": false
 }

@@ -34,7 +34,7 @@
       "titleSv": "Industriell ekonomi I: företagets funktioner",
       "credits": 15.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 15.0,
+      "creditsInSemester": 10.0,
       "compulsory": true,
       "mainFieldEn": "Technology",
       "mainFieldSv": "Teknik",
@@ -42,8 +42,7 @@
       "semester": 1,
       "periods": [
         "Period 1",
-        "Period 2",
-        "Period 3"
+        "Period 2"
       ],
       "trackId": null,
       "onlyProgramme": null,
@@ -112,15 +111,13 @@
       "titleSv": "Industriell ekonomi I: företagets funktioner",
       "credits": 15.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 15.0,
+      "creditsInSemester": 5.0,
       "compulsory": true,
       "mainFieldEn": "Technology",
       "mainFieldSv": "Teknik",
       "depthCode": "G1N",
       "semester": 2,
       "periods": [
-        "Period 1",
-        "Period 2",
         "Period 3"
       ],
       "trackId": null,
@@ -383,7 +380,7 @@
       "titleSv": "Industriell ekonomi IV: företaget och omvärlden",
       "credits": 15.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 15.0,
+      "creditsInSemester": 10.0,
       "compulsory": true,
       "mainFieldEn": "Technology",
       "mainFieldSv": "Teknik",
@@ -391,8 +388,7 @@
       "semester": 5,
       "periods": [
         "Period 1",
-        "Period 2",
-        "Period 3"
+        "Period 2"
       ],
       "trackId": null,
       "onlyProgramme": true,
@@ -480,15 +476,13 @@
       "titleSv": "Industriell ekonomi IV: företaget och omvärlden",
       "credits": 15.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 15.0,
+      "creditsInSemester": 5.0,
       "compulsory": true,
       "mainFieldEn": "Technology",
       "mainFieldSv": "Teknik",
       "depthCode": "G2F",
       "semester": 6,
       "periods": [
-        "Period 1",
-        "Period 2",
         "Period 3"
       ],
       "trackId": null,
@@ -1589,12 +1583,12 @@
       "name": "Giltig från och med höstterminen 2020"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.061728+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.812934+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=aec2f35d-04f4-4a33-9a54-44d67d940e26",
   "programmeTitle": "Civilingenjörsprogrammet i industriell ekonomi, 300 hp (TIE2Y)",
+  "programmeTitleEn": "Master's Programme in Industrial Engineering and Management, 300 credits (TIE2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-industriell-ekonomi",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Industrial Engineering and Management, 300 credits (TIE2Y)"
+  "reviewed": false
 }

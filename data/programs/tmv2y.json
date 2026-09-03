@@ -1480,12 +1480,12 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.074495+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.825940+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10070",
   "programmeTitle": "Civilingenjörsprogrammet i miljö- och vattenteknik, 300 hp (TMV2Y)",
+  "programmeTitleEn": "Master's Programme in Environmental and Water Engineering, 300 credits (TMV2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-miljo-och-vattenteknik",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Environmental and Water Engineering, 300 credits (TMV2Y)"
+  "reviewed": false
 }

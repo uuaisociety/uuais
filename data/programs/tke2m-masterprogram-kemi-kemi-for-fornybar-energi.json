@@ -386,12 +386,12 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.195794+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.945541+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10038",
   "programmeTitle": "Masterprogram i kemi – Kemi för förnybar energi, 120 hp (TKE2M)",
+  "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
   "programmeUri": "/utbildning/program/masterprogram-kemi-kemi-for-fornybar-energi",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)"
+  "reviewed": false
 }

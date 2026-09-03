@@ -1167,12 +1167,12 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.110402+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.862718+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10056",
   "programmeTitle": "Kandidatprogram i datavetenskap, 180 hp (TDV1K)",
+  "programmeTitleEn": "Bachelor's Programme in Computer Science, 180 credits (TDV1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-datavetenskap",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Bachelor's Programme in Computer Science, 180 credits (TDV1K)"
+  "reviewed": false
 }

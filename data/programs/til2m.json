@@ -955,12 +955,12 @@
       "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.190351+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.940123+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10031",
   "programmeTitle": "Masterprogram i industriell ledning och innovation, 120 hp (TIL2M)",
+  "programmeTitleEn": "Master's Programme in Industrial Management and Innovation, 120 credits (TIL2M)",
   "programmeUri": "/utbildning/program/masterprogram-industriell-ledning-och-innovation",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Industrial Management and Innovation, 120 credits (TIL2M)"
+  "reviewed": false
 }

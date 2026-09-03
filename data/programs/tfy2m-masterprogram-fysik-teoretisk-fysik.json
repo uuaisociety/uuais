@@ -1096,12 +1096,12 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.171538+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.921381+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10024",
   "programmeTitle": "Masterprogram i fysik – Teoretisk fysik – kvantfält- och strängteori, 120 hp (TFY2M)",
+  "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)",
   "programmeUri": "/utbildning/program/masterprogram-fysik-teoretisk-fysik",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)"
+  "reviewed": false
 }

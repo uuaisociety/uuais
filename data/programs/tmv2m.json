@@ -1118,12 +1118,12 @@
       "name": "Giltig från och med höstterminen 2021"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.204617+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.954383+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10046",
   "programmeTitle": "Masterprogram i materialvetenskap, 120 hp (TMV2M)",
+  "programmeTitleEn": "Master's Programme in Materials Science, 120 credits (TMV2M)",
   "programmeUri": "/utbildning/program/masterprogram-materialvetenskap",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Materials Science, 120 credits (TMV2M)"
+  "reviewed": false
 }

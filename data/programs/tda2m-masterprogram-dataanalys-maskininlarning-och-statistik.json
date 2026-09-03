@@ -476,7 +476,7 @@
       "titleSv": "Öppen fördjupningskurs i dataanalys",
       "credits": 5.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": false,
       "mainFieldEn": "Data Science",
       "mainFieldSv": "Dataanalys",
@@ -496,7 +496,7 @@
       "titleSv": "Öppen fördjupningskurs i dataanalys",
       "credits": 10.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 20.0,
+      "creditsInSemester": 10.0,
       "compulsory": false,
       "mainFieldEn": "Data Science",
       "mainFieldSv": "Dataanalys",
@@ -846,12 +846,12 @@
       "name": "Giltig från och med höstterminen 2020"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.147243+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.897857+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10012",
   "programmeTitle": "Masterprogram i dataanalys – Maskininlärning och statistik, 120 hp (TDA2M)",
+  "programmeTitleEn": "Master's Programme in Data Science – Machine Learning and Statistics, 120 credits (TDA2M)",
   "programmeUri": "/utbildning/program/masterprogram-dataanalys-maskininlarning-och-statistik",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Data Science – Machine Learning and Statistics, 120 credits (TDA2M)"
+  "reviewed": false
 }

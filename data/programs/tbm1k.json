@@ -567,7 +567,7 @@
       "titleSv": "Självständigt arbete i biologi",
       "credits": 15.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 30.0,
+      "creditsInSemester": 15.0,
       "compulsory": false,
       "mainFieldEn": "Biology",
       "mainFieldSv": "Biologi",
@@ -1298,12 +1298,12 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.108102+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.860520+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10053",
   "programmeTitle": "Kandidatprogram i biologi/molekylärbiologi, 180 hp (TBM1K)",
+  "programmeTitleEn": "Bachelor's Programme in Biology/Molecular Biology, 180 credits (TBM1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-biologi",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Bachelor's Programme in Biology/Molecular Biology, 180 credits (TBM1K)"
+  "reviewed": false
 }

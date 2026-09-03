@@ -1375,12 +1375,12 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.113970+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.866484+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10060",
   "programmeTitle": "Kandidatprogram i fysik – Astronomi, 180 hp (TFY1K)",
+  "programmeTitleEn": "Bachelor's Programme in Physics – Physics, 180 credits (TFY1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-fysik-astronomi",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Bachelor's Programme in Physics – Physics, 180 credits (TFY1K)"
+  "reviewed": false
 }

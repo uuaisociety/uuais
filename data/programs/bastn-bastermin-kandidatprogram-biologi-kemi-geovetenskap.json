@@ -156,12 +156,12 @@
       "name": "Giltig från och med vårterminen 2027"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.209309+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.959363+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=815500d1-ca9e-45de-b3cb-786bbd852098",
   "programmeTitle": "Teknisk-naturvetenskaplig bastermin med reserverad plats på kandidatprogram i biologi, kemi eller geovetenskap, 20 veckor (BASTN)",
+  "programmeTitleEn": "Science and Technology Foundation Semester Programme – Reserved Place on the Bachelor's Programme in Computer Science, Physics or Mathematics, 20 weeks (BASTN)",
   "programmeUri": "/utbildning/program/bastermin-kandidatprogram-biologi-kemi-geovetenskap",
   "validFrom": "Studieplan giltig från och med vårterminen 2027",
   "validFromYear": 2027,
-  "reviewed": false,
-  "programmeTitleEn": "Science and Technology Foundation Semester Programme – Reserved Place on the Bachelor's Programme in Computer Science, Physics or Mathematics, 20 weeks (BASTN)"
+  "reviewed": false
 }

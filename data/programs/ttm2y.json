@@ -1554,7 +1554,7 @@
       "titleSv": "Ordinära differentialekvationer I",
       "credits": 5.0,
       "creditsInPeriod": null,
-      "creditsInSemester": 10.0,
+      "creditsInSemester": 5.0,
       "compulsory": false,
       "mainFieldEn": "Mathematics",
       "mainFieldSv": "Matematik",
@@ -2604,12 +2604,12 @@
       "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.085739+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.837906+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10073",
   "programmeTitle": "Civilingenjörsprogrammet i teknisk fysik med materialvetenskap, 300 hp (TTM2Y)",
+  "programmeTitleEn": "Master's Programme in Materials Engineering, 300 credits (TTM2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-teknisk-fysik-med-materialvetenskap",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Materials Engineering, 300 credits (TTM2Y)"
+  "reviewed": false
 }

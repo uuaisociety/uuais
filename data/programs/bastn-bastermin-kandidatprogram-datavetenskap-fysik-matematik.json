@@ -156,12 +156,12 @@
       "name": "Giltig från och med vårterminen 2027"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.209936+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.959996+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=ec708bb6-e13a-4b3e-b734-0a38f6dd6e33",
   "programmeTitle": "Teknisk-naturvetenskaplig bastermin med reserverad plats på kandidatprogram i datavetenskap, fysik eller matematik, 20 veckor (BASTN)",
+  "programmeTitleEn": "Science and Technology Foundation Semester Programme – Reserved Place on the Bachelor's Programme in Computer Science, Physics or Mathematics, 20 weeks (BASTN)",
   "programmeUri": "/utbildning/program/bastermin-kandidatprogram-datavetenskap-fysik-matematik",
   "validFrom": "Studieplan giltig från och med vårterminen 2027",
   "validFromYear": 2027,
-  "reviewed": false,
-  "programmeTitleEn": "Science and Technology Foundation Semester Programme – Reserved Place on the Bachelor's Programme in Computer Science, Physics or Mathematics, 20 weeks (BASTN)"
+  "reviewed": false
 }

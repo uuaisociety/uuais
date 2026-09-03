@@ -708,12 +708,12 @@
       "name": "Giltig från och med höstterminen 2012, version&nbsp;1"
     }
   ],
-  "scrapedAt": "2026-09-01T19:06:47.180730+00:00",
+  "scrapedAt": "2026-09-03T05:46:15.930653+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10028",
   "programmeTitle": "Masterprogram i geovetenskap – Paleobiologi, 120 hp (TGV2M)",
+  "programmeTitleEn": "Master's Programme in Earth Science – Physical Geography, 120 credits (TGV2M)",
   "programmeUri": "/utbildning/program/masterprogram-geovetenskap-paleobiologi",
   "validFrom": "Studieplan giltig från och med höstterminen 2026",
   "validFromYear": 2026,
-  "reviewed": false,
-  "programmeTitleEn": "Master's Programme in Earth Science – Physical Geography, 120 credits (TGV2M)"
+  "reviewed": false
 }
