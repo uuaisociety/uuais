@@ -73,6 +73,18 @@ describe('Header', () => {
       })
     })
 
+    it('marks the programme map with a Beta badge', () => {
+      render(<Header />)
+      // The mobile menu always lists the project links; the desktop dropdown needs opening.
+      fireEvent.click(screen.getAllByText('Projects')[0])
+      const mapLinks = screen.getAllByRole('link', { name: /Programme map/i })
+      expect(mapLinks.length).toBe(2)
+      mapLinks.forEach((link) => {
+        expect(link).toHaveAttribute('href', '/programs')
+        expect(link.textContent).toContain('Beta')
+      })
+    })
+
     it('renders Apply as a distinct CTA in desktop and mobile nav', () => {
       render(<Header />)
       const applyLinks = screen.getAllByRole('link', { name: 'Apply' })

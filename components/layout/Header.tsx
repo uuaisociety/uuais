@@ -31,7 +31,7 @@ const communityLinks = [
 // the board until then.
 const projectLinks = [
   { href: '/projects', label: 'All projects' },
-  { href: '/programs', label: 'Programme map' },
+  { href: '/programs', label: 'Programme map', badge: 'Beta' },
   { href: '/explore', label: 'Course navigator', adminOnly: true },
   { href: '/my-courses', label: 'My favourites', adminOnly: true },
 ];
@@ -199,6 +199,7 @@ export const Header: React.FC = () => {
                           className="block px-3 py-2 rounded-sm text-[0.8125rem] text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors"
                         >
                           {link.label}
+                          {link.badge && <BetaBadge />}
                         </Link>
                       ))}
                     </div>
@@ -306,6 +307,7 @@ export const Header: React.FC = () => {
               {visibleProjectLinks.map((link) => (
                 <Link key={link.href} href={link.href} onClick={() => setIsMenuOpen(false)} className="block px-3.5 py-2.5 rounded-sm text-sm text-current/65 hover:text-current hover:bg-current/[0.07] transition-colors">
                   {link.label}
+                  {link.badge && <BetaBadge />}
                 </Link>
               ))}
 
