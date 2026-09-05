@@ -255,12 +255,15 @@ describe('provenance', () => {
   });
 });
 
-describe('the faculty index', () => {
+describe('the programme index', () => {
   const index = getProgramIndex();
 
-  it('covers the whole technical-natural science faculty', () => {
-    expect(index.programmes.length).toBeGreaterThan(70);
-    expect(index.faculty).toMatch(/Teknisk-naturvetenskapliga/);
+  it('covers every faculty the university has', () => {
+    // The nine faculty searches together return the same programmes the unfiltered one does.
+    expect(index.faculties).toHaveLength(9);
+    expect(index.faculties).toContain('Teknisk-naturvetenskapliga fakulteten');
+    expect(index.programmes.length).toBeGreaterThan(250);
+    expect(new Set(index.programmes.map((p) => p.faculty)).size).toBe(9);
   });
 
   it('gives every programme a unique address', () => {
@@ -279,7 +282,26 @@ describe('the faculty index', () => {
     for (const entry of index.programmes) {
       const loaded = getProgram(programSlug(entry));
       expect(loaded).not.toBeNull();
-      expect(loaded?.courses.length).toBeGreaterThan(0);
+      // The index counts distinct codes, which is the promise the finder's row makes.
+      expect(new Set(loaded?.courses.map((c) => c.code)).size).toBe(entry.courses);
+    }
+  });
+
+  it('gives a programme with no study plan its syllabus to show instead', () => {
+    // Well over a third of the university publishes no study plan; an empty map is a dead end.
+    const syllabus = index.programmes.filter((entry) => entry.planFormat === 'syllabus');
+    expect(syllabus.length).toBeGreaterThan(80);
+    const withProse = syllabus.filter(
+      (entry) => (getProgram(programSlug(entry))?.syllabusLayout?.length ?? 0) > 0
+    );
+    // One programme (RRP2M) publishes an empty syllabus; the rest carry their prose.
+    expect(withProse.length).toBeGreaterThanOrEqual(syllabus.length - 1);
+
+    for (const entry of syllabus) {
+      const loaded = getProgram(programSlug(entry));
+      expect(loaded?.courses).toEqual([]);
+      // Even the empty one has somewhere to send the reader.
+      expect(loaded?.sourceUrl).toContain('uu.se');
     }
   });
 

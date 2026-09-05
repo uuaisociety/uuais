@@ -23,11 +23,14 @@ export default function AccuracyNotice({
   sourceUrl,
   reviewed,
   report,
+  /** A syllabus page has no arrows, no rules and no map, so it must not promise them. */
+  kind = "map",
 }: {
   validFrom: string | null;
   scrapedAt: string;
   sourceUrl: string;
   reviewed: boolean;
+  kind?: "map" | "syllabus";
   /** The reporting control, rendered where the caveat is made. */
   report?: React.ReactNode;
 }) {
@@ -49,21 +52,38 @@ export default function AccuracyNotice({
         </span>
         <div className="min-w-0">
           <p className="text-[1.0625rem] font-semibold leading-tight tracking-[-0.028em] text-foreground">
-            {reviewed
-              ? "Generated from Uppsala University's study plan"
-              : "Generated automatically — not reviewed by a human"}
+            {kind === "syllabus"
+              ? "Taken from Uppsala University's programme syllabus"
+              : reviewed
+                ? "Generated from Uppsala University's study plan"
+                : "Generated automatically — not reviewed by a human"}
           </p>
           {/* Capped at a readable measure: the panel is as wide as the map. */}
           <p className="mt-2 max-w-[68ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
-            The prerequisite arrows and the rules below them are extracted by a language
-            model from the university&rsquo;s published study plan and course syllabuses.
-            They can be wrong, incomplete, or out of date.{" "}
-            <span className="font-medium text-foreground">
-              Always confirm against the official pages before choosing or applying for a
-              course.
-            </span>{" "}
-            This map is a study aid, not an authoritative source, and it is not the
-            degree requirements.
+            {kind === "syllabus" ? (
+              <>
+                The course names below are read out of the syllabus&rsquo; own prose, which
+                carries no course codes and may be out of date.{" "}
+                <span className="font-medium text-foreground">
+                  Always confirm against the official pages before choosing or applying for a
+                  course.
+                </span>{" "}
+                This is a study aid, not an authoritative source, and it is not the degree
+                requirements.
+              </>
+            ) : (
+              <>
+                The prerequisite arrows and the rules below them are extracted by a language
+                model from the university&rsquo;s published study plan and course syllabuses.
+                They can be wrong, incomplete, or out of date.{" "}
+                <span className="font-medium text-foreground">
+                  Always confirm against the official pages before choosing or applying for a
+                  course.
+                </span>{" "}
+                This map is a study aid, not an authoritative source, and it is not the
+                degree requirements.
+              </>
+            )}
           </p>
         </div>
       </div>
@@ -91,7 +111,7 @@ export default function AccuracyNotice({
               rel="noopener noreferrer"
               className="inline-flex w-fit items-center gap-1 rounded-sm text-foreground underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              Official study plan
+              {kind === "syllabus" ? "Programme syllabus" : "Official study plan"}
               <ExternalLink className="h-3 w-3" />
             </a>
           </dd>

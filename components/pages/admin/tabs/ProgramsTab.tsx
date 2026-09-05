@@ -26,7 +26,7 @@ type IndexEntry = {
   reviewed: boolean;
 };
 
-type Payload = { scrapedAt: string; faculty: string; programmes: IndexEntry[] };
+type Payload = { scrapedAt: string; faculties: string[]; programmes: IndexEntry[] };
 
 /** Loose match between a member's free-text programme and a catalogue entry. */
 function normalise(value: string): string {
@@ -132,7 +132,7 @@ export default function ProgramsTab() {
           <h2 className="text-xl font-semibold text-foreground">Programmes</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             {data
-              ? `${data.faculty} — retrieved ${new Date(data.scrapedAt).toLocaleDateString("en-GB")}`
+              ? `${data.faculties.length} faculties — retrieved ${new Date(data.scrapedAt).toLocaleDateString("en-GB")}`
               : "Loading the programme catalogue…"}
           </p>
         </div>

@@ -62,9 +62,11 @@ def main():
     codes = set()
     for path in args.program:
         with open(path, encoding='utf-8') as handle:
-            for course in json.load(handle)['courses']:
-                if course.get('code'):
-                    codes.add(course['code'])
+            document = json.load(handle)
+        # A *.json glob here sweeps in index.json, _requirements.json and the extraction files.
+        for course in document.get('courses') or []:
+            if course.get('code'):
+                codes.add(course['code'])
     codes = sorted(codes)
     print(f'Fetching entry requirements for {len(codes)} courses...')
     results = asyncio.run(fetch_all(codes))
