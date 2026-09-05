@@ -1,0 +1,40 @@
+{
+  "id": "3705",
+  "code": "UUV2M",
+  "revisionId": "3705",
+  "nameSv": "Masterprogram i utbildningsvetenskap",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "UTBVET 2015/8",
+  "finalisedDate": "6 februari 2025",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3705",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "696",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "686",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.600780+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3705",
+  "validFrom": "Studieplan giltig från och med höstterminen 2025",
+  "validFromYear": 2025,
+  "programmeTitle": "Masterprogram i utbildningsvetenskap – Pedagogik, 120 hp (UUV2M)",
+  "programmeTitleEn": "Master's Programme in Educational Sciences – Special Education, 120 credits (UUV2M)",
+  "programmeUri": "/utbildning/program/masterprogram-utbildningsvetenskap-pedagogik",
+  "faculty": "Fakulteten för utbildningsvetenskaper",
+  "reviewed": false
+}

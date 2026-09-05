@@ -1619,6 +1619,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1MA209",
@@ -1725,12 +1726,13 @@
       "name": "Giltig från och med höstterminen 2026"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.951458+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.432840+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=53757e7c-b967-4250-83db-911b32fbdfc8",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i matematik, 120 hp (TMA2M)",
   "programmeTitleEn": "Master's Programme in Mathematics, 120 credits (TMA2M)",
   "programmeUri": "/utbildning/program/masterprogram-matematik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

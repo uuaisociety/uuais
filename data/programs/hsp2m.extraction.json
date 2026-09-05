@@ -1,0 +1,66 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:28:17.340134+00:00",
+  "edges": [
+    {
+      "code": "5LN429",
+      "text": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5LN709",
+      "text": "30 credits at Master's level in language technology, including Advanced Programming for Language Technologists and Language Technology: Research and Development.",
+      "result": {
+        "edges": [
+          {
+            "from": "5LN715",
+            "type": "HARD"
+          },
+          {
+            "from": "5LN714",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5LN712",
+      "text": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject, 7.5 credits in computer programming and 7.5 credits in logic/discrete mathematics. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Valbara kurser, 22,5 hp. Fördjupningar i språkteknologi kommer att erbjudas, t.ex.:",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Elective courses worth 22.5 credits, with specializations in language technology to be offered.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Valbara kurser, 15 hp",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A heading indicating 15 credits of elective courses.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

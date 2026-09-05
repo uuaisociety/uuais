@@ -1,0 +1,82 @@
+{
+  "id": "1481",
+  "code": "RHA2N",
+  "revisionId": "1481",
+  "nameSv": "Magisterprogram i humanitärt arbete vid konflikter",
+  "totalCredits": 60.0,
+  "semesters": 0,
+  "registrationNumber": null,
+  "finalisedDate": "27 maj 2020",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Termin 1",
+    "Introduktion till humanitärt arbete, 5 hp",
+    "Antropologi och interkulturella aspekter av humanitärt arbete, 5 hp",
+    "Juridiska dimensioner av humanitärt arbete, 5 hp",
+    "Global politik och humanitärt arbete, 5 hp",
+    "Folkhälsa i humanitärt arbete, 5 hp",
+    "Management, 5 hp",
+    "Termin 2",
+    "Konflikt och fredsbyggande, 15 hp",
+    "Uppsats, 15 hp",
+    "För att kunna antas till kurserna på termin 2, måste studenterna ha klarat minst 15 hp inom programmet under termin 1."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [
+    {
+      "title": "Introduktion till humanitärt arbete",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "Antropologi och interkulturella aspekter av humanitärt arbete",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "Juridiska dimensioner av humanitärt arbete",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "Global politik och humanitärt arbete",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "Folkhälsa i humanitärt arbete",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "Management",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "Konflikt och fredsbyggande",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Uppsats",
+      "credits": 15.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.567111+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1481",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Magisterprogram i humanitärt arbete vid konflikter, 60 hp (RHA2N)",
+  "programmeTitleEn": "Master's Programme in Humanitarian Action and Conflict, 60 credits (RHA2N)",
+  "programmeUri": "/utbildning/program/magisterprogram-humanitart-arbete-vid-konflikter",
+  "faculty": "Teologiska fakulteten",
+  "reviewed": false
+}

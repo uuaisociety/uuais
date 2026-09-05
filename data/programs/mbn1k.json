@@ -1,0 +1,200 @@
+{
+  "id": "3361",
+  "code": "MBN1K",
+  "revisionId": "3361",
+  "nameSv": "Biomedicinprogrammet",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "MEDFARM 2023/926",
+  "finalisedDate": "21 mars 2023",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [
+    {
+      "textSv": "Biomedicinsk introduktion och grundläggande kemi, 15,5 hpBiokemi, 7 hpCell- och molekylärbiologi, (7,5 hp av 15 hp)",
+      "semester": 1,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Cell- och molekylärbiologi, (7,5 hp av 15 hp)Statistik och dataanalys, 5 hpVävnads- och utvecklingsbiologi, 10 hpAnatomi, 7,5 hp",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Metabolism, 5 hpNeurobiologi, 10 hpFysiologi, 15 hp",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Medicinsk genetik, 7,5 hpImmunologi, 7,5 gpBakteriologi, 7,5 hpVirologi, 7,5 hp",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Professionell utveckling, 7,5 hpFörsöksdjursvetenskap och avancerad databearbetning, 8 hpFarmakologi med läkemedelskemi, 14,5 hp",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Sjukdomslära, 15 hpExamensarbete, 15 hp",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [
+    {
+      "title": "Biomedicinsk introduktion och grundläggande kemi",
+      "credits": 15.5,
+      "semester": 1
+    },
+    {
+      "title": "Biokemi",
+      "credits": 7.0,
+      "semester": 1
+    },
+    {
+      "title": "Cell- och molekylärbiologi",
+      "credits": 7.5,
+      "semester": 1
+    },
+    {
+      "title": "Cell- och molekylärbiologi",
+      "credits": 7.5,
+      "semester": 2
+    },
+    {
+      "title": "Statistik och dataanalys",
+      "credits": 5.0,
+      "semester": 2
+    },
+    {
+      "title": "Vävnads- och utvecklingsbiologi",
+      "credits": 10.0,
+      "semester": 2
+    },
+    {
+      "title": "Anatomi",
+      "credits": 7.5,
+      "semester": 2
+    },
+    {
+      "title": "Metabolism",
+      "credits": 5.0,
+      "semester": 3
+    },
+    {
+      "title": "Neurobiologi",
+      "credits": 10.0,
+      "semester": 3
+    },
+    {
+      "title": "Fysiologi",
+      "credits": 15.0,
+      "semester": 3
+    },
+    {
+      "title": "Medicinsk genetik",
+      "credits": 7.5,
+      "semester": 4
+    },
+    {
+      "title": "Bakteriologi",
+      "credits": 7.5,
+      "semester": 4
+    },
+    {
+      "title": "Virologi",
+      "credits": 7.5,
+      "semester": 4
+    },
+    {
+      "title": "Professionell utveckling",
+      "credits": 7.5,
+      "semester": 5
+    },
+    {
+      "title": "Försöksdjursvetenskap och avancerad databearbetning",
+      "credits": 8.0,
+      "semester": 5
+    },
+    {
+      "title": "Farmakologi med läkemedelskemi",
+      "credits": 14.5,
+      "semester": 5
+    },
+    {
+      "title": "Sjukdomslära",
+      "credits": 15.0,
+      "semester": 6
+    },
+    {
+      "title": "Examensarbete",
+      "credits": 15.0,
+      "semester": 6
+    }
+  ],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3361",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2434",
+      "name": "Giltig från och med höstterminen 2020, version&nbsp;2"
+    },
+    {
+      "id": "2060",
+      "name": "Giltig från och med höstterminen 2020, version&nbsp;1"
+    },
+    {
+      "id": "1756",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "956",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;4"
+    },
+    {
+      "id": "949",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;3"
+    },
+    {
+      "id": "724",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "601",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "477",
+      "name": "Giltig från och med höstterminen 2012"
+    },
+    {
+      "id": "302",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;2"
+    },
+    {
+      "id": "220",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.526861+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3361",
+  "validFrom": "Studieplan giltig från och med höstterminen 2024",
+  "validFromYear": 2024,
+  "programmeTitle": "Biomedicinprogrammet, 180 hp (MBN1K)",
+  "programmeTitleEn": "Biomedicine Programme, 180 credits (MBN1K)",
+  "programmeUri": "/utbildning/program/biomedicinprogrammet",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

@@ -1,0 +1,102 @@
+{
+  "id": "1608",
+  "code": "JJU2Y",
+  "revisionId": "1608",
+  "nameSv": "Juristprogrammet",
+  "totalCredits": 270.0,
+  "semesters": 0,
+  "registrationNumber": "JURFAK 2021/31",
+  "finalisedDate": "18 maj 2021",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Juristprogrammet leder till juristexamen, som är en yrkesexamen om 270 högskolepoäng på avancerad nivå.",
+    "Juristprogrammet är fördelat på två nivåer. Den första nivån (grundnivå) består av sex obligatoriska terminskurser omfattande 180 högskolepoäng . Den andra nivån (avancerad nivå) består av valfria fördjupningskurser 45 högskolepoäng, en teoretisk fördjupningskurs 15 högskolepoäng samt ett examensarbete om 30 högskolepoäng (med eller utan praktik).",
+    "Juristexamen utgör behörighetskrav för vissa arbeten inom rättsväsendet. Juristexamen är en lämplig examen också för annat arbete som rör frågor om rättsordningen och rättstillämpningen, och för rättsvetenskapliga forskarstudier. Den utexaminerade med juristexamen har god kompetens också för många andra kvalificerade arbeten.",
+    "Utbildningsplanen för juristprogrammet vid Uppsala universitet utgår från högskolelagen (1992:1434), högskoleförordningen (1993:100), högskoleförordningens examensordning för juristexamen, se bilaga 1 till utbildningsplanen. Utbildningsplanen innehåller vissa preciseringar i förhållande till högskoleförordningens examensbeskrivning.",
+    "Utbildningen på grundnivå",
+    "Kursernas innehåll",
+    "Grundnivån omfattar följande kurser:",
+    "Terminskurs 1: grundläggande juridisk metod, statsrätt och konstitutionell EU-rätt, 30 högskolepoäng,",
+    "Terminskurs 2: civilrätt, 30 högskolepoäng,",
+    "Terminskurs 3: civilrätt, 30 högskolepoäng,",
+    "Terminskurs 4: straffrätt och processrätt, 30 högskolepoäng,",
+    "Terminskurs 5: associationsrätt och skatterätt, 30 högskolepoäng,",
+    "Terminskurs 6: förvaltningsrätt och internationell rätt, 30 högskolepoäng.",
+    "Utbildningen på avancerad nivå",
+    "Kursernas innehåll",
+    "Den avancerade nivån omfattar följande kurser:",
+    "en valfri terminslång fördjupningskurs, 30 högskolepoäng, som inkluderar självständigt arbete motsvarande 15 högskolepoäng,",
+    "en valfri fördjupningskurs om 15 högskolepoäng,",
+    "en obligatorisk kurs i rättshistoria, rättssociologi och allmän rättslära, 15 högskolepoäng,",
+    "examensarbete, 30 högskolepoäng.",
+    "Kurserna på avancerad nivå bygger på grundnivån. De är ämnesintegrerande, fördjupande och/eller breddande. Utbildningen på avancerad nivå ger möjlighet till fördjupning och breddning också utanför det juridiska området. Svensk eller utländsk universitetsutbildning i annat ämne än juridik kan tillgodoräknas i examen. Sådana kurser ska vara ägnade att komplettera den juridiska utbildningen.",
+    "För juristexamen vid Uppsala universitet krävs kurser på avancerad nivå omfattande minst 45 högskolepoäng (varav en valfri terminslång fördjupningskurs, denna kan bytas ut mot juridiska studier utomlands på grundnivå eller avancerad nivå) utöver examensarbetet. Av valbara kurser får alltså högst 15 högskolepoäng utgöras av kurser på grundnivå i Sverige.",
+    "Kursplaner",
+    "I kursplaner ges närmare beskrivning av mål, förväntade läranderesultat, uppläggning och examination för de kurser som ges inom juristprogrammet.",
+    "Kursplanerna utformas så att kurserna innehåller moment av träning av kunskap och förståelse, färdighet och förmåga samt värderingsförmåga och förhållningssätt, i sådan utsträckning och med en sådan utformning att studenten genom att aktivt delta i utbildningen kan uppnå de läranderesultat som stadgas i denna utbildningsplan och examensordningen.",
+    "Kursplaner utformas så att kurserna beaktar den rättsliga betydelsen av det svenska medlemskapet i den Europeiska unionen. Vidare ska kursplanerna utformas så att kurserna beaktar även andra relevanta vetenskapliga och samhälleliga frågor och förhållanden, de mänskliga rättigheterna och etiska aspekter, där så är relevant för utbildningen samt främjar studentens förmåga till ett självständigt och kritiskt förhållningssätt gentemot rättssystemet."
+  ],
+  "syllabusEntryRequirements": "Grundläggande behörighet och Historia 1b eller 1a1+1a2, Samhällskunskap 1b eller 1a1+1a2",
+  "syllabusCourses": [
+    {
+      "title": "grundläggande juridisk metod, statsrätt och konstitutionell EU-rätt",
+      "credits": 30.0,
+      "semester": 1
+    },
+    {
+      "title": "civilrätt",
+      "credits": 30.0,
+      "semester": 2
+    },
+    {
+      "title": "civilrätt",
+      "credits": 30.0,
+      "semester": 3
+    },
+    {
+      "title": "straffrätt och processrätt",
+      "credits": 30.0,
+      "semester": 4
+    },
+    {
+      "title": "associationsrätt och skatterätt",
+      "credits": 30.0,
+      "semester": 5
+    },
+    {
+      "title": "förvaltningsrätt och internationell rätt",
+      "credits": 30.0,
+      "semester": 6
+    },
+    {
+      "title": "en valfri fördjupningskurs",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "en obligatorisk kurs i rättshistoria, rättssociologi och allmän rättslära",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "examensarbete",
+      "credits": 30.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.562663+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1608",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Juristprogrammet, 270 hp (JJU2Y)",
+  "programmeTitleEn": "Law Programme, 270 credits (JJU2Y)",
+  "programmeUri": "/utbildning/program/juristprogrammet",
+  "faculty": "Juridiska fakulteten",
+  "reviewed": false
+}

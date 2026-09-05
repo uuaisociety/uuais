@@ -1,0 +1,115 @@
+{
+  "id": "2524",
+  "code": "HSV1K",
+  "revisionId": "2524",
+  "nameSv": "Språkvetarprogrammet",
+  "totalCredits": 180.0,
+  "semesters": 0,
+  "registrationNumber": "SPRÅKFAK 2023/23",
+  "finalisedDate": "5 september 2024",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet omfattar sex terminers studier som bedrivs på heltid. Utbildningen inleds med en språkvetenskaplig introduktion omfattande en termin som ger en solid grund i lingvistik. Därpå följer mellan två och fyra terminers studier i ett språkligt huvudområde varvat med ytterligare programgemensamma kurser i språkvetenskap, kurser i ett eller flera andra ämnen och upp till en termins praktik.",
+    "Programstruktur:",
+    "Termin 1 obligatorisk, programgemensam termin (kan räknas som biområde lingvistik och ger behörighet till Lingvistik B)",
+    "Förslag till upplägg för termin 2-6 varierar beroende på vilken inriktning studenten väljer under den första terminen. Maximalt 30 hp under termin 2-6 kan bestå av praktik.",
+    "Om studenten väljer inriktning mot engelska, franska, spanska, svenska, svenska som andraspråk eller tyska:",
+    "Termin 2: Huvudområde A-kurs, 30 hp",
+    "Termin 3: Huvudområde B-kurs, 30 hp",
+    "Termin 4: Gemensam termin, 30 hp alt. gemensamma kurser 15 hp samt Praktik 15 hp",
+    "Termin 5: Biområde A-kurs alt. Praktik, 30 hp",
+    "Termin 6: Huvudområde C-kurs, 30 hp",
+    "Om studenten väljer inriktning mot ryska:",
+    "Termin 2: Huvudområde A-kurs, 30 hp",
+    "Termin 3: Huvudområde B-kurs, 30 hp",
+    "Termin 4: Gemensam termin, 30 hp alt. gemensamma kurser 15 hp samt Praktik 15 hp",
+    "Termin 5: Huvudområde C-kurs, 30 hp",
+    "Termin 6: Huvudområde D-kurs, 30 hp",
+    "Om studenten väljer inriktning mot lingvistik:",
+    "Termin 2: Huvudområde B-kurs, 30 hp",
+    "Termin 3: Biområde A-kurs, 30 hp",
+    "Termin 4: Gemensam termin, 30 hp alt. gemensamma kurser 15 hp samt Praktik 15 hp",
+    "Termin 5: Praktik alt. annat ämne, 30 hp",
+    "Termin 6: Huvudområde C-kurs, 30 hp",
+    "Programmets arbetslivsinriktade profil kommer fram genom programgemensamma seminarier som bland annat syftar till att ge inblick i arbetsmarknaden och de tillämpningsområden som finns för språkvetare, samt programspecifika kurser som innehåller praktiska moment och inslag av tillämpad språkvetenskap. Arbetslivsanknytning erbjuds genom möjligheten att göra praktik i Sverige eller utomlands.",
+    "För att få diplom över genomgånget program krävs att samtliga kurser på termin 1 samt att kurserna AI som verktyg för språkvetare och Projektledning för språkvetare på termin 4 är avslutade."
+  ],
+  "syllabusEntryRequirements": "Grundläggande behörighet och Engelska 6",
+  "syllabusCourses": [
+    {
+      "title": "Huvudområde A-kurs",
+      "credits": 30.0,
+      "semester": 2
+    },
+    {
+      "title": "Huvudområde B-kurs",
+      "credits": 30.0,
+      "semester": 3
+    },
+    {
+      "title": "Biområde A-kurs alt. Praktik",
+      "credits": 30.0,
+      "semester": 5
+    },
+    {
+      "title": "Huvudområde C-kurs",
+      "credits": 30.0,
+      "semester": 6
+    },
+    {
+      "title": "Huvudområde A-kurs",
+      "credits": 30.0,
+      "semester": 2
+    },
+    {
+      "title": "Huvudområde B-kurs",
+      "credits": 30.0,
+      "semester": 3
+    },
+    {
+      "title": "Huvudområde C-kurs",
+      "credits": 30.0,
+      "semester": 5
+    },
+    {
+      "title": "Huvudområde D-kurs",
+      "credits": 30.0,
+      "semester": 6
+    },
+    {
+      "title": "Huvudområde B-kurs",
+      "credits": 30.0,
+      "semester": 2
+    },
+    {
+      "title": "Biområde A-kurs",
+      "credits": 30.0,
+      "semester": 3
+    },
+    {
+      "title": "Praktik alt. annat ämne",
+      "credits": 30.0,
+      "semester": 5
+    },
+    {
+      "title": "Huvudområde C-kurs",
+      "credits": 30.0,
+      "semester": 6
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.492044+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2524",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Språkvetarprogrammet, 180 hp (HSV1K)",
+  "programmeTitleEn": "Bachelor's Programme in Languages, 180 credits (HSV1K)",
+  "programmeUri": "/utbildning/program/sprakvetarprogrammet",
+  "faculty": "Språkvetenskapliga fakulteten",
+  "reviewed": false
+}

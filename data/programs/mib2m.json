@@ -1,0 +1,251 @@
+{
+  "id": "1781",
+  "code": "MIB2M",
+  "revisionId": "1781",
+  "nameSv": "Masterprogram i infektionsbiologi",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "MEDFARM 2018/705",
+  "finalisedDate": "28 maj 2019",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3MK000",
+      "titleEn": "Microbiology and Immunology",
+      "titleSv": "Mikrobiologi och immunologi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Infection Biology A1F, Medical Science",
+      "mainFieldSv": "Infektionsbiologi A1F, Medicinsk vetenskap",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmacy, pharmaceutical bioscience, (pharmaceutical)chemistry, medical science, agriculture, animal science, veterinary medicine or international education giving relevant knowledge in cell biology, genetics (bio)chemistry, immunology and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3MK012",
+      "titleEn": "Parasitology, Mycology and Clinical Infection Biology",
+      "titleSv": "Parasitologi, mykologi och klinisk infektionsbiologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Infection Biology A1F, Medical Science",
+      "mainFieldSv": "Infektionsbiologi A1F, Medicinsk vetenskap",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmacy, pharmaceutical bioscience, (pharmaceutical) chemistry, medical science, agriculture, animal science, veterinary medicine or education giving knowledge in cell biology, genetics, (bio)chemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3MK013",
+      "titleEn": "Antimicrobials, Resistance, Epidemiology and Evolution",
+      "titleSv": "Antimikrobiotika, resistens, epidemiologi och evolution",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Infection Biology A1F, Medical Science",
+      "mainFieldSv": "Infektionsbiologi A1F, Medicinsk vetenskap",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmacy, pharmaceutical bioscience, (pharmaceutical) chemistry, medical science, agriculture, animal science, veterinary medicine or education giving knowledge in cell biology, genetics (bio)chemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3MK014",
+      "titleEn": "Infection Biology in a Global Perspective",
+      "titleSv": "Infektionsbiologi i ett globalt perspektiv",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Infection Biology A1F, Medical Science",
+      "mainFieldSv": "Infektionsbiologi A1F, Medicinsk vetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MK015",
+      "titleEn": "Advanced Scientific Research and Methodology",
+      "titleSv": "Avancerad vetenskaplig forskning och metodologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Infection Biology A1F, Medical Science",
+      "mainFieldSv": "Infektionsbiologi A1F, Medicinsk vetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MK011",
+      "titleEn": "Master's Degree Project in Infection Biology",
+      "titleSv": "Masterprojekt i infektionsbiologi",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Infection Biology A2E, Medical Science",
+      "mainFieldSv": "Infektionsbiologi A2E, Medicinsk vetenskap",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MK007",
+      "titleEn": "Master's Degree Project in Infection Biology",
+      "titleSv": "Masterprojekt i infektionsbiologi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Infection Biology A2E, Medical Science",
+      "mainFieldSv": "Infektionsbiologi A2E, Medicinsk vetenskap",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MK011",
+      "titleEn": "Master's Degree Project in Infection Biology",
+      "titleSv": "Masterprojekt i infektionsbiologi",
+      "credits": 45.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 45.0,
+      "compulsory": false,
+      "mainFieldEn": "Infection Biology A2E, Medical Science",
+      "mainFieldSv": "Infektionsbiologi A2E, Medicinsk vetenskap",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Under termin 2 och/eller 3 kan kurs/kurser bytas ut mot forskningsprojektkurs inom infektionsbiologi om 15 eller 30 Hp.",
+      "labelEn": "During semesters 2 and/or 3, course(s) may be replaced by a 15 or 30 credit research project course in infection biology.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Under termin 2 och/eller 3 kan kurs/kurser bytas ut mot forskningsprojektkurs inom infektionsbiologi om 15 eller 30 Hp.",
+      "labelEn": "Courses in semesters 2 and/or 3 may be replaced by a 15 or 30 credit research project course in infection biology.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "EITHER_OR",
+      "courseCodes": [
+        "3MK011",
+        "3MK007"
+      ],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Under termin 3 finns möjlighet att påbörja ett examensarbete om 45 hp i infektionsbiologi, denna kurs ersätter i så fall den obligatoriska 30 hp masterprojektkursen.",
+      "labelEn": "A 45 hp degree project started in semester 3 may replace the compulsory 30 hp master's thesis course.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Under termin 2 och/eller 3 kan kurs/kurser bytas ut mot forskningsprojektkurs inom infektionsbiologi om 15 eller 30 Hp.",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Under termin 2 och/eller 3 kan kurs/kurser bytas ut mot forskningsprojektkurs inom infektionsbiologi om 15 eller 30 Hp.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Under termin 3 finns möjlighet att påbörja ett examensarbete om 45 hp i infektionsbiologi, denna kurs ersätter i så fall den obligatoriska 30 hp masterprojektkursen.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "1781",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1348",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "690",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "497",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;2"
+    },
+    {
+      "id": "461",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.538842+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=1781",
+  "validFrom": "Studieplan giltig från och med höstterminen 2019",
+  "validFromYear": 2019,
+  "programmeTitle": "Masterprogram i infektionsbiologi, 120 hp (MIB2M)",
+  "programmeTitleEn": "Master's Programme in Infection Biology, 120 credits (MIB2M)",
+  "programmeUri": "/utbildning/program/masterprogram-infektionsbiologi",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

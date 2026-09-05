@@ -1,0 +1,187 @@
+{
+  "id": "3404",
+  "code": "SBV1K",
+  "revisionId": "3404",
+  "nameSv": "Beteendevetenskapligt kandidatprogram",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "SAMFAK 2021/42 Doss:3:2:1, UFV 2021/1091",
+  "finalisedDate": "27 mars 2024",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "2PS162",
+      "titleEn": "Psychology A for the Bachelor's Programme in Behavioural Sciences",
+      "titleSv": "Psykologi A för beteendevetenskapligt kandidatprogram",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Psychology",
+      "mainFieldSv": "Psykologi",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2SC107",
+      "titleEn": "Sociology and Social Psychology A",
+      "titleSv": "Sociologi och socialpsykologi A",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Social Psychology G1N, Sociology",
+      "mainFieldSv": "Socialpsykologi G1N, Sociologi",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "4PE301",
+      "titleEn": "Education A",
+      "titleSv": "Pedagogik A",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Education",
+      "mainFieldSv": "Pedagogik",
+      "depthCode": "G1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "2PS171",
+      "titleEn": "Psychological Perspectives on Assessment",
+      "titleSv": "Psykologisk utredningsmetod",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Psychology",
+      "mainFieldSv": "Psykologi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2SC078",
+      "titleEn": "Sociological Evaluation Methods",
+      "titleSv": "Sociologisk utvärderingsmetod",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Sociology",
+      "mainFieldSv": "Sociologi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2PE174",
+      "titleEn": "Perspectives and Models of Evaluation",
+      "titleSv": "Utvärderingsteori och utvärderingsmodeller",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Education",
+      "mainFieldSv": "Pedagogik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Fördjupning, B-nivå.",
+      "labelEn": "This is a bare heading indicating the advanced (B-level) specialization section.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Fortsatt fördjupning, C-nivå.",
+      "labelEn": "This is a heading indicating continued specialization at the advanced (C) level.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Fördjupning, B-nivå.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Fortsatt fördjupning, C-nivå.",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3404",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;3"
+    },
+    {
+      "id": "2921",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;2"
+    },
+    {
+      "id": "2503",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;1"
+    },
+    {
+      "id": "1746",
+      "name": "Giltig från och med höstterminen 2007, version&nbsp;2"
+    },
+    {
+      "id": "455",
+      "name": "Giltig från och med höstterminen 2007, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.492800+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3404",
+  "validFrom": "Studieplan giltig från och med höstterminen 2022, version 3",
+  "validFromYear": 2022,
+  "programmeTitle": "Beteendevetenskapligt kandidatprogram, 180 hp (SBV1K)",
+  "programmeTitleEn": "Bachelor's Programme in Behavioural Sciences, 180 credits (SBV1K)",
+  "programmeUri": "/utbildning/program/beteendevetenskapligt-kandidatprogram",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

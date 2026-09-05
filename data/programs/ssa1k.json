@@ -1,0 +1,32 @@
+{
+  "id": "2644",
+  "code": "SSA1K",
+  "revisionId": "2644",
+  "nameSv": "Samhällsvetarprogram",
+  "totalCredits": 180.0,
+  "semesters": 0,
+  "registrationNumber": "SAMFAK 2025/25 Doss: 3.2.1",
+  "finalisedDate": "6 mars 2025",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Samhällsvetarprogrammet inleds med en samhällsvetenskaplig grundkurs om 30 högskolepoäng. I kursen ges träning i samhällsvetenskapligt arbetssätt och analys/metodik samt orientering inom samhällsvetenskapliga ämnen. Efter den samhällsvetenskapliga grundkursen är studierna förhållandevis fria. Studenten bygger själv upp en utbildning som passar egna intressen och mål. Examenskravet är att fördjupning till 90 högskolepoäng skall ske i minst ett av nedanstående ämnen inom samhällsvetenskaplig fakultet: Ekonomisk historia, Freds- och konfliktkunskap, Företagsekonomi, Geografi, Informationssystem, Kostvetenskap, Medie- och kommunikationsvetenskap, Nationalekonomi, Psykologi, Sociologi, Socialpsykologi, Sociologi med inriktning mot arbetsliv, organisation och personalarbete, Samhällsgeografi, Statskunskap, Statistik eller Utvecklingsstudier. Förutom grundkursen och 90 hp i fördjupningsämnet skall i programmet ingå kurser omfattande 60-90 hp* från andra samhällsvetenskapliga ämnen eller kurser från andra fakulteter. Arbetsförlagda studier, praktik, kan ingå. Det är frivilligt och görs antingen inom ramen för valt huvudämne eller som en kurs med samhällsvetenskaplig inriktning. Praktik kan genomföras tidigast efter avslutad C-kurs. Studenten bör själv kontakta institutionen för att planera eventuell praktik. Även om institutionerna kan vara behjälpliga förväntas studenten aktivt medverka i anordnandet av praktikplats.",
+    "*Samhällsvetenskaplig grundkurs ger behörighet till studier på B-nivå i Ekonomisk historia, Samhällsgeografi, Sociologi eller Statsvetenskap. Om ett av dessa ämnen väljs som fördjupningsämne betyder det att 90 hp återstår till kurser inom andra ämnen. Inom ramen för programmet finns således utrymme för två fördjupningsämnen beroende på val av ämne. Om något annat ämne än de fyra nämnda blir huvudområde betyder det att efter grundkurs (30 hp) och fördjupning (90 hp) återstår 60 hp till ytterligare studier."
+  ],
+  "syllabusEntryRequirements": "Grundläggande behörighet och Matematik 3b eller 3c/Matematik C, Samhällskunskap 1b eller 1a1+1a2, Engelska 6",
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.521614+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2644",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Samhällsvetarprogram, 180 hp (SSA1K)",
+  "programmeTitleEn": "Bachelor's Programme in Social Sciences, 180 credits (SSA1K)",
+  "programmeUri": "/utbildning/program/samhallsvetarprogram",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

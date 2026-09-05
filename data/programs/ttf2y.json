@@ -4922,6 +4922,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1TD433",
@@ -6525,12 +6526,13 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.846458+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.319998+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10072",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Civilingenjörsprogrammet i teknisk fysik, 300 hp (TTF2Y)",
   "programmeTitleEn": "Master's Programme in Engineering Physics, 300 credits (TTF2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-teknisk-fysik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

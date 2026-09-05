@@ -1,0 +1,170 @@
+{
+  "id": "3091",
+  "code": "MSJ2Y",
+  "revisionId": "3091",
+  "nameSv": "Specialistsjuksköterskeprogrammet",
+  "totalCredits": 60.0,
+  "semesters": 2,
+  "registrationNumber": "MEDFARM 2022/2169",
+  "finalisedDate": "17 januari 2023",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3KR238",
+      "titleEn": "Theory and Methodology in Caring Sciences",
+      "titleSv": "Vårdvetenskaplig teori och metod",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR044",
+      "titleEn": "Nursing, Anatomy, Physiology and Pharmacology",
+      "titleSv": "Omvårdnad, anatomi, fysiologi och farmakologi",
+      "credits": 6.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 6.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR047",
+      "titleEn": "Nursing in Intensive Care 1",
+      "titleSv": "Omvårdnad inom intensivvård 1",
+      "credits": 16.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 16.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR180",
+      "titleEn": "Nursing in Intensive Care 2",
+      "titleSv": "Omvårdnad inom intensivvård 2",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR038",
+      "titleEn": "Degree Project with Focus on Intensive Care",
+      "titleSv": "Examensarbete med inriktning mot intensivvård",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3091",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;2"
+    },
+    {
+      "id": "2829",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;1"
+    },
+    {
+      "id": "2532",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2422",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2080",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "2016",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1734",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1511",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    },
+    {
+      "id": "1199",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "938",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "633",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "571",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;3"
+    },
+    {
+      "id": "226",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;2"
+    },
+    {
+      "id": "143",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.550646+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3091",
+  "validFrom": "Studieplan giltig från och med höstterminen 2023, version 2",
+  "validFromYear": 2023,
+  "programmeTitle": "Specialistsjuksköterskeprogrammet – Intensivvård, 60 hp (MSJ2Y)",
+  "programmeTitleEn": "Specialist Nursing Programme – Theatre Care, 60 credits (MSJ2Y)",
+  "programmeUri": "/utbildning/program/specialistsjukskoterskeprogrammet-intensivvard",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

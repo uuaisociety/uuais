@@ -1,0 +1,125 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:23:12.183686+00:00",
+  "edges": [
+    {
+      "code": "3FB028",
+      "text": "150 credits, including 90 credits in biomedicine, pharmaceutical science, chemistry, natural science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FB030",
+      "text": "150 credits of which 120 credits biomedicine, biology, pharmaceutical sciences, chemistry and/or science/technology. Earlier studies should contain 7.5 credits pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FB225",
+      "text": "150 credits, including 120 credits in biomedicine, biology, pharmaceutical sciences, chemistry and/or natural sciences/technology. Previous studies should include 5 credits of pharmacokinetics and 7.5 credits of pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "3FF216",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3FF042",
+      "text": "150 credits, including 120 credits in biomedicine, pharmaceutical science, chemistry, drug discovery, science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FF216",
+      "text": "120 credits in biomedicine, pharmaceutical science, natural sciences and/or engineering. Prior studies must include 15 credits general and organic chemistry, 6 credits physiology and 7.5 credits pharmacology.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FG288",
+      "text": "150 credits, including 120 credits in biomedicine, pharmaceutical sciences and/or natural sciences/engineering. Previous studies must include 3 credits of pharmaceutics and pharmacokinetics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FK229",
+      "text": "150 credits of which 90 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in chemistry and 7.5 credits in pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FK285",
+      "text": "150 credits of which 120 credits are in biomedicine, pharmaceutical science, and/or natural science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Det första året består av obligatoriska kurser med syfte att ge studenten en bred kunskap inom läkemedelsutveckling. För studenter som läst motsvarande kurs i sin grundutbildning finns alternativa kurser.",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "The first year consists of mandatory courses providing broad knowledge in drug development, with alternative courses available for students who already covered equivalent material.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Under det andra året väljer studenten kurser.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "During the second year, the student chooses courses.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Valbara fördjupningskurser 15 hp och del av masterprojekt 45 hp eller valbara fördjupningskurser 30 hp.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [],
+        "labelEn": "Students can either take 15 credits of elective advanced courses plus 45 credits within the master project, or 30 credits of elective advanced courses.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Masterprojekt 30 hp eller del av masterprojekt 45 hp.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Concerns the master's thesis project of 30 credits or a 45-credit thesis taken in part.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

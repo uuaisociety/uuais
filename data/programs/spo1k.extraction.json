@@ -1,0 +1,85 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:38:08.826948+00:00",
+  "edges": [
+    {
+      "code": "2HR112",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2NE474",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2NE475",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2SK009",
+      "text": "General entry requirements and Social Studies level 1b or level 1a2, or Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST135",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Fördjupningsdelen består av a) B- och C-kurser i något av huvudämnena Nationalekonomi och Statskunskap samt en termin som kan användas för valfria kurser eller praktik och därmed fördjupning eller breddning av utbildningen eller b) A-, B- och C-kurser i Freds- och konfliktkunskap, Utvecklingsstudier och Statistik.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [],
+        "labelEn": "The advanced part consists of either B- and C-level courses in one main subject (economics or political science) plus an elective semester, or full A-, B- and C-level studies in peace and conflict studies, development studies, and statistics.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Se Termin 4.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Refers the reader to Semester 4 for further information.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Se Termin 4.",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A pointer referring the reader to Term 4 for details.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

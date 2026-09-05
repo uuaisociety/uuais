@@ -1,0 +1,78 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:29:06.979631+00:00",
+  "edges": [
+    {
+      "code": "1BG313",
+      "text": "Completed courses of 120 credits including 60 credits in biology and 30 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FK219",
+      "text": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FK229",
+      "text": "150 credits of which 90 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in chemistry and 7.5 credits in pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3KK005",
+      "text": "180 credits in medicine/pharmacy",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3NR382",
+      "text": "180 credits from a biomedicine, pharmacy or biology programme or equivalent education providing knowledge within cell and molecular biology, chemistry and biochemistry, pharmacology, physiology and neurobiology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3NR600",
+      "text": "180 credits from a Bachelor's programme in biomedicine, pharmacy or biology or equivalent education providing knowledge of cell and molecular biology, chemistry and biochemistry, pharmacology, physiology and neurobiology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Period 1 och 2 utgörs av valbara kurser. Studenten läser totalt 15 hp under den första halvan av terminen.",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Periods 1 and 2 consist of elective courses, with 15 credits taken during the first half of the term.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Fritt val av kurser. Detta är några vanliga exempel.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Courses are freely chosen; the listed courses are just common examples.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

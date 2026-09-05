@@ -1,0 +1,31 @@
+{
+  "id": "1910",
+  "code": "HAK2M",
+  "revisionId": "1910",
+  "nameSv": "Masterprogram i antikens kultur och samhällsliv",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2022/37",
+  "finalisedDate": "30 augusti 2022",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Under de första tre terminerna läser studenterna obligatoriska kurser inom huvudområdet motsvarande 30 hp (inklusive 15 hp examensarbetet), samt ämnesfördjupande eller valbara kurser motsvarande 60 hp. Den fjärde terminen ägnas helt åt examensarbetet."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.461830+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1910",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i antikens kultur och samhällsliv, 120 hp (HAK2M)",
+  "programmeTitleEn": "Master's Programme in Classical Archaeology and Ancient History, 120 credits (HAK2M)",
+  "programmeUri": "/utbildning/program/masterprogram-antikens-kultur-och-samhallsliv",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

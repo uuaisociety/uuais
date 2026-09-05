@@ -1,0 +1,65 @@
+{
+  "id": "1039",
+  "code": "HDK2M",
+  "revisionId": "1039",
+  "nameSv": "Masterprogram i digital konstvetenskap",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "2016/57",
+  "finalisedDate": "9 juni 2016",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet omfattar två år. Första årets studier kan leda till en magisterexamen. Andra årets studier leder till en masterexamen.",
+    "Programmets första år innehåller de obligatoriska kurserna:",
+    "- Avancerad kurs i konstvetenskaplig teori och metod, 7,5 hp",
+    "- Digital Art History I, 7,5 hp",
+    "- Examensarbete för magister-/masterexamen, 30/45 hp",
+    "Programmets andra år innehåller de obligatoriska kurserna:",
+    "- Digital Art History II, 7,5 hp",
+    "- Examensarbete för masterexamen, 15/45 hp",
+    "Utöver de obligatoriska kurserna läses valbara tematiska kurser om vardera 7,5 hp alternativt 15 hp. Inom det valbara utbudet av tematiska kurser kan praktik/verksamhetsförlagd utbildning ingå under termin 3."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [
+    {
+      "title": "- Avancerad kurs i konstvetenskaplig teori och metod",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "- Digital Art History I",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "- Examensarbete för magister-/masterexamen, 30/",
+      "credits": 45.0,
+      "semester": null
+    },
+    {
+      "title": "- Digital Art History II",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "- Examensarbete för masterexamen, 15/",
+      "credits": 45.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.463770+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1039",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i digital konstvetenskap, 120 hp (HDK2M)",
+  "programmeTitleEn": "Master's Programme in Digital Art History, 120 credits (HDK2M)",
+  "programmeUri": "/utbildning/program/masterprogram-digital-konstvetenskap",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

@@ -1,0 +1,170 @@
+{
+  "id": "3086",
+  "code": "MSJ2Y",
+  "revisionId": "3086",
+  "nameSv": "Specialistsjuksköterskeprogrammet",
+  "totalCredits": 60.0,
+  "semesters": 2,
+  "registrationNumber": "MEDFARM 2022/2169",
+  "finalisedDate": "17 januari 2023",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3KR238",
+      "titleEn": "Theory and Methodology in Caring Sciences",
+      "titleSv": "Vårdvetenskaplig teori och metod",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR044",
+      "titleEn": "Nursing, Anatomy, Physiology and Pharmacology",
+      "titleSv": "Omvårdnad, anatomi, fysiologi och farmakologi",
+      "credits": 6.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 6.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR045",
+      "titleEn": "Nursing in Anaesthesia Care 1",
+      "titleSv": "Omvårdnad inom anestesisjukvård 1",
+      "credits": 16.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 16.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR178",
+      "titleEn": "Nursing in Anaesthesia Care 2",
+      "titleSv": "Omvårdnad inom anestesisjukvård 2",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR037",
+      "titleEn": "Degree Project with Focus on Anaesthesia Care",
+      "titleSv": "Examensarbete med inriktning mot anestesisjukvård",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3086",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;2"
+    },
+    {
+      "id": "2824",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;1"
+    },
+    {
+      "id": "2527",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2416",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2076",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "2009",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1730",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1506",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    },
+    {
+      "id": "1195",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "935",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "630",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "568",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;3"
+    },
+    {
+      "id": "223",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;2"
+    },
+    {
+      "id": "147",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.547228+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3086",
+  "validFrom": "Studieplan giltig från och med höstterminen 2023, version 2",
+  "validFromYear": 2023,
+  "programmeTitle": "Specialistsjuksköterskeprogrammet – Anestesisjukvård, 60 hp (MSJ2Y)",
+  "programmeTitleEn": "Specialist Nursing Programme – Theatre Care, 60 credits (MSJ2Y)",
+  "programmeUri": "/utbildning/program/specialistsjukskoterskeprogrammet-anestesisjukvard",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

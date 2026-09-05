@@ -1,0 +1,228 @@
+{
+  "id": "3244",
+  "code": "MMN2M",
+  "revisionId": "3244",
+  "nameSv": "Masterprogram i medicinsk nuklidteknik",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "MEDFARM 2021/566",
+  "finalisedDate": "19 september 2023",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3DR401",
+      "titleEn": "Radiation Protection and Medical Effects",
+      "titleSv": "Strålskydd och medicinska effekter av strålning",
+      "credits": 6.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 6.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Nuclide Techniques",
+      "mainFieldSv": "Medicinsk nuklidteknik",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education."
+    },
+    {
+      "code": "3DR402",
+      "titleEn": "Nuclide Production and Radiochemistry",
+      "titleSv": "Nuklidproduktion och radiokemi",
+      "credits": 9.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 9.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Nuclide Techniques",
+      "mainFieldSv": "Medicinsk nuklidteknik",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits."
+    },
+    {
+      "code": "3DR403",
+      "titleEn": "Detection Techniques and Dosimetry",
+      "titleSv": "Detektorteknik och dosimetri",
+      "credits": 12.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 12.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Nuclide Techniques",
+      "mainFieldSv": "Medicinsk nuklidteknik",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits."
+    },
+    {
+      "code": "3DR409",
+      "titleEn": "Good Manufacturing Practice",
+      "titleSv": "God tillverkningssed",
+      "credits": 6.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 6.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Nuclide Techniques",
+      "mainFieldSv": "Medicinsk nuklidteknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. All applicants need to verify English language proficiency equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3DR405",
+      "titleEn": "Nuclide Diagnostics and Therapy",
+      "titleSv": "Nukliddiagnostik och nuklidterapi",
+      "credits": 12.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 12.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Nuclide Techniques",
+      "mainFieldSv": "Medicinsk nuklidteknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits, Nuclide Production and Radiochemistry, 9 credits, and Detection Techniques and Dosimetry, 12 credits."
+    },
+    {
+      "code": "3DR406",
+      "titleEn": "Project Work",
+      "titleSv": "Projektarbete",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Nuclide Techniques",
+      "mainFieldSv": "Medicinsk nuklidteknik",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3DR407",
+      "titleEn": "Labelling Chemistry and Compound Development",
+      "titleSv": "Märkningskemi och substansutveckling",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Nuclide Techniques",
+      "mainFieldSv": "Medicinsk nuklidteknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3DR408",
+      "titleEn": "Project Work",
+      "titleSv": "Examensarbete",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Nuclide Techniques",
+      "mainFieldSv": "Medicinsk nuklidteknik",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "3DR409"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Kursen 3DR409 börjar i slutet på höstterminen (3 Hp) och fortsätter på vårterminen (3 Hp).",
+      "labelEn": "The course 3DR409 starts at the end of the autumn semester (3 credits) and continues into the spring semester (3 credits).",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Kursen 3DR409 börjar i slutet på höstterminen (3 Hp) och fortsätter på vårterminen (3 Hp).",
+      "semester": 1,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [
+    {
+      "from": "3DR401",
+      "to": "3DR405",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits, Nuclide Production and Radiochemistry, 9 credits, and Detection Techniques and Dosimetry, 12 credits."
+    },
+    {
+      "from": "3DR402",
+      "to": "3DR405",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits, Nuclide Production and Radiochemistry, 9 credits, and Detection Techniques and Dosimetry, 12 credits."
+    },
+    {
+      "from": "3DR403",
+      "to": "3DR405",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits, Nuclide Production and Radiochemistry, 9 credits, and Detection Techniques and Dosimetry, 12 credits."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "3244",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2441",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "503",
+      "name": "Giltig från och med höstterminen 2007"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.541178+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3244",
+  "validFrom": "Studieplan giltig från och med höstterminen 2024",
+  "validFromYear": 2024,
+  "programmeTitle": "Masterprogram i medicinsk nuklidteknik, 120 hp (MMN2M)",
+  "programmeTitleEn": "Master's Programme in Medical Nuclide Techniques, 120 credits (MMN2M)",
+  "programmeUri": "/utbildning/program/masterprogram-medicinsk-nuklidteknik",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

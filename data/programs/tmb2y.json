@@ -1802,6 +1802,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1DL301",
@@ -2500,12 +2501,13 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.828442+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.303072+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=4bfbfcf7-c6eb-40c5-9124-6730b6ede86c",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026, version 2",
+  "validFromYear": 2026,
   "programmeTitle": "Civilingenjörsprogrammet i molekylär bioteknik, 300 hp (TMB2Y)",
   "programmeTitleEn": "Master's Programme in Molecular Biotechnology Engineering, 300 credits (TMB2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-molekylar-bioteknik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026, version 2",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

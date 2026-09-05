@@ -1,0 +1,31 @@
+{
+  "id": "1270",
+  "code": "FKF2N",
+  "revisionId": "1270",
+  "nameSv": "Magisterprogram i klinisk farmaci",
+  "totalCredits": 60.0,
+  "semesters": 0,
+  "registrationNumber": "MEDFARM 2018/876",
+  "finalisedDate": "29 augusti 2018",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Utbildningen ges på distans där vissa moment läses gemensamt i Uppsala, medan andra delar av undervisningen är nätbaserade. Ett antal obligatoriska träffar i Uppsala ordnas under programmet. Dessa omfattar 3-4 veckor per tillfälle och ges på heltid, dagtid. Vissa träffar kan komma att förläggas till andra orter. Utbildningen ges antingen på hel- eller halvfart. Programmet består av: Evidensbaserade kliniska farmaceutiska metoder 12 hp Tillämpad farmakoterapi, farmakokinetik och sjukdomslära 15 hp Klinisk tjänstgöring och tjänsteutveckling 18 hp Fördjupningsprojekt 15 hp."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.556440+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1270",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Magisterprogram i klinisk farmaci, 60 hp (FKF2N)",
+  "programmeTitleEn": "Master's Programme in Clinical Pharmacy, 60 credits (FKF2N)",
+  "programmeUri": "/utbildning/program/magisterprogram-klinisk-farmaci",
+  "faculty": "Farmaceutiska fakulteten",
+  "reviewed": false
+}

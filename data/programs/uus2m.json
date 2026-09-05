@@ -1,0 +1,36 @@
+{
+  "id": "897",
+  "code": "UUS2M",
+  "revisionId": "897",
+  "nameSv": "Masterprogram i utbildningssociologi",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "UTBVET 2014/147",
+  "finalisedDate": "13 november 2014",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "897",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;2"
+    },
+    {
+      "id": "895",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.599139+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=897",
+  "validFrom": "Studieplan giltig från och med höstterminen 2015, version 2",
+  "validFromYear": 2015,
+  "programmeTitle": "Masterprogram i utbildningssociologi, 120 hp (UUS2M)",
+  "programmeTitleEn": "Master's Programme in Sociology of Education, 120 credits (UUS2M)",
+  "programmeUri": "/utbildning/program/masterprogram-utbildningssociologi",
+  "faculty": "Fakulteten för utbildningsvetenskaper",
+  "reviewed": false
+}

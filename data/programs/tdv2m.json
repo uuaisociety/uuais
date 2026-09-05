@@ -1788,6 +1788,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1DL451",
@@ -2239,12 +2240,13 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.901515+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.381199+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10013",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i datavetenskap, 120 hp (TDV2M)",
   "programmeTitleEn": "Master's Programme in Computer Science, 120 credits (TDV2M)",
   "programmeUri": "/utbildning/program/masterprogram-datavetenskap",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

@@ -1,0 +1,50 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:32:15.186624+00:00",
+  "edges": [
+    {
+      "code": "2SC107",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE301",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Fördjupning, B-nivå.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This is a bare heading indicating the advanced (B-level) specialization section.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Fortsatt fördjupning, C-nivå.",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This is a heading indicating continued specialization at the advanced (C) level.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

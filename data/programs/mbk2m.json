@@ -1,0 +1,166 @@
+{
+  "id": "3424",
+  "code": "MBK2M",
+  "revisionId": "3424",
+  "nameSv": "Masterprogram i molekylär medicin",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "MEDFARM 2024/1511",
+  "finalisedDate": "6 juni 2024",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3MG322",
+      "titleEn": "Medical Genetics and Cancer: Molecular Mechanisms",
+      "titleSv": "Medicinsk genetik och cancer - molekylära mekanismer",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Science A1N, Molecular Medicine",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Molekylär medicin",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "180 credits from a programme in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, cell/molecular biology, genetics, life science, medical sciences or a similar field of study. Also required are courses in biochemistry, cell biology, chemistry, genetics, and molecular biology/genetics totalling at least 30 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3MG323",
+      "titleEn": "Advanced Techniques in Molecular Medicine",
+      "titleSv": "Molekylärmedicinsk teknik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Science A1N, Molecular Medicine",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Molekylär medicin",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MG325",
+      "titleEn": "Genomic and Epigenomic Medicine",
+      "titleSv": "Genomisk och epigenomisk medicin",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Science A1N, Molecular Medicine",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Molekylär medicin",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmaceutical biosciences, medical science or equivalent education giving relevant knowledge in cell biology, genetics biochemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3MG326",
+      "titleEn": "Molecular Tools for Proteome Analysis",
+      "titleSv": "Molekylära verktyg för proteomanalys",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Medical Science A1N, Molecular Medicine",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Molekylär medicin",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmaceutical biosciences, medical science or equivalent education giving relevant knowledge in cell biology, genetics biochemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3MG328",
+      "titleEn": "Biomarkers: Discovery and Validation",
+      "titleSv": "Biomarkörer - identifiering och validering",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Medical Science A1N, Molecular Medicine",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Molekylär medicin",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmaceutical biosciences, medical science or equivalent education giving relevant knowledge in cell biology, genetics biochemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Bioimaging och cellanalys, 7.5 hp, Avancerad nivåRegenerativ medicin, 7.5 hp, Avancerad nivåValbar period, 15 hpPeriod med valbara kurser motsvarande 15.0 hpellerStart av ett 45.0 hp MasterprojektMasterprojekt i molekylär medicin, 45.0 hp, Avancerad nivåMasterprojekt i molekylär medicin inklusive försöksdjursvetenskap, 45.0 hp, Avancerad nivå",
+      "labelEn": "Semester with elective courses (15 hp) or the start of a 45 hp master project in molecular medicine.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Fortsättning på 45,0 hp masterprojektellerMasterprojekt i molekylär medicin, 30,0 hp, Avancerad nivå",
+      "labelEn": "Continuation of a 45.0 hp master project or a Master project in Molecular Medicine, 30.0 hp, advanced level.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Bioimaging och cellanalys, 7.5 hp, Avancerad nivåRegenerativ medicin, 7.5 hp, Avancerad nivåValbar period, 15 hpPeriod med valbara kurser motsvarande 15.0 hpellerStart av ett 45.0 hp MasterprojektMasterprojekt i molekylär medicin, 45.0 hp, Avancerad nivåMasterprojekt i molekylär medicin inklusive försöksdjursvetenskap, 45.0 hp, Avancerad nivå",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Fortsättning på 45,0 hp masterprojektellerMasterprojekt i molekylär medicin, 30,0 hp, Avancerad nivå",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3424",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "1930",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "641",
+      "name": "Giltig från och med höstterminen 2012"
+    },
+    {
+      "id": "502",
+      "name": "Giltig från och med vårterminen 2011"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.542055+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3424",
+  "validFrom": "Studieplan giltig från och med höstterminen 2025",
+  "validFromYear": 2025,
+  "programmeTitle": "Masterprogram i molekylär medicin, 120 hp (MBK2M)",
+  "programmeTitleEn": "Master's Programme in Molecular Medicine, 120 credits (MBK2M)",
+  "programmeUri": "/utbildning/program/masterprogram-molekylar-medicin",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

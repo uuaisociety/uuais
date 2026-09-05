@@ -20,6 +20,8 @@ import requests
 from scraper_pipeline import clean_html_text
 
 STUDIEPLAN_URL = 'https://www.uu.se/utbildning/studieplan?query={query}'
+# Most programmes outside the technical faculty publish no study plan, only a syllabus in prose.
+SYLLABUS_URL = 'https://www.uu.se/utbildning/utbildningsplan?query={query}'
 PROGRAMME_SEARCH_URL = (
     'https://www.uu.se/utbildning/sok?type=Program&faculty={faculty}&start={start}'
 )
@@ -282,8 +284,129 @@ def build_program(blob, source_url):
         'rules': [],
         'ruleTexts': rule_texts,
         'planFormat': 'ladok' if outline.get('isLadokOutline') else 'legacy',
+        # Only where the plan lists no courses at all: otherwise the prose repeats the rows.
+        'syllabusCourses': [] if courses else courses_from_semester_texts(outline),
         'edges': [],
         'revisions': blob.get('revisions') or [],
+        'scrapedAt': datetime.now(timezone.utc).isoformat(),
+        'sourceUrl': source_url,
+    }
+
+
+#: A credit figure closing a line, e.g. "civilrätt, 30 högskolepoäng,".
+SYLLABUS_CREDITS = re.compile(r'(\d+(?:[.,]\d+)?)\s*(?:högskolepoäng|hp)\b', re.IGNORECASE)
+#: "Terminskurs 4: straffrätt och processrätt" places a course in a semester.
+SYLLABUS_SEMESTER = re.compile(r'^(?:Terminskurs|Termin)\s+(\d+)\s*[:.]?\s*', re.IGNORECASE)
+#: A sentence about the programme rather than the name of a course.
+SYLLABUS_PROSE = re.compile(
+    r'\b(är|som|kan|ska|skall|läser|omfattar|består|innebär|väljer|ingår|ges|utgör'
+    r'|inkluderar|motsvarande|följande)\b',
+    re.IGNORECASE,
+)
+#: Past this a line is a paragraph, not a course title.
+SYLLABUS_TITLE_LIMIT = 80
+
+
+def parse_syllabus_id(html_content):
+    """The utbildningsplan a programme page links to, for programmes with no study plan."""
+    match = re.search(r'href="/utbildning/utbildningsplan\?query=(\d+)"', html_content or '')
+    return match.group(1) if match else None
+
+
+def extract_syllabus(html_content):
+    """Returns the programmeSyllabus blob from an utbildningsplan page, or None."""
+    for match in re.finditer(r"AppRegistry\.registerInitialState\('[^']+',\s*(\{.*?\})\);", html_content or '', re.DOTALL):
+        try:
+            blob = json.loads(match.group(1))
+        except json.JSONDecodeError:
+            continue
+        if isinstance(blob, dict) and isinstance(blob.get('programmeSyllabus'), dict):
+            return blob['programmeSyllabus']
+    return None
+
+
+def syllabus_blocks(raw_html):
+    """Block-level text of a syllabus field. UU writes each course on its own <p> or <li>."""
+    for part in re.split(r'</(?:p|li|h\d|div)>|<br\s*/?>', raw_html or ''):
+        text = (clean_html_text(part) or '').strip()
+        if text:
+            yield text
+
+
+def parse_syllabus_courses(raw_html, total_credits=None):
+    """Courses a syllabus names in prose: no codes, so a reading list rather than a graph. A line
+    counts only when the credits close it and what precedes reads like a title, not a sentence."""
+    courses = []
+    for text in syllabus_blocks(raw_html):
+        match = SYLLABUS_CREDITS.search(text)
+        if not match or len(text) - match.end() > 25:
+            continue
+        credits = float(match.group(1).replace(',', '.'))
+        # The programme's own credit total is the programme, not a course within it.
+        if total_credits and credits >= total_credits:
+            continue
+        semester = SYLLABUS_SEMESTER.match(text)
+        # The credits above are the first figure, which is the share this semester counts;
+        # the bracket they sometimes sit in ("7,5 hp av 15 hp") is not part of the title.
+        title = re.sub(r'\([^)]*\)', '', SYLLABUS_SEMESTER.sub('', text))
+        title = SYLLABUS_CREDITS.sub('', title).strip(' ,.;:()')
+        # "en valfri fördjupningskurs om 15 hp" leaves the preposition dangling once hp is cut.
+        title = re.sub(r'\s+(?:om|på|à)$', '', title).strip(' ,.;:()')
+        if not title or len(title) > SYLLABUS_TITLE_LIMIT or SYLLABUS_PROSE.search(title):
+            continue
+        courses.append({
+            'title': title,
+            'credits': credits,
+            'semester': int(semester.group(1)) if semester else None,
+        })
+    return courses
+
+
+def courses_from_semester_texts(outline):
+    """Courses from a plan whose semesters carry prose ("Biokemi, 7 hp") instead of rows: the
+    semester is known from its position even though the course code never is."""
+    found = []
+    for index, semester in enumerate(outline.get('semesters') or [], start=1):
+        for node in semester.get('content') or []:
+            if node.get('type') != 'text':
+                continue
+            for course in parse_syllabus_courses(node.get('textSv')):
+                found.append({**course, 'semester': index})
+    return found
+
+
+def build_syllabus_program(syllabus, source_url):
+    """Same shape as build_program's, with the course-level fields empty: there is no course
+    data in a syllabus, and inventing some from prose would be worse than saying so."""
+    total_credits, _ = parse_credits(f", {clean_html_text(syllabus.get('credits')) or ''}")
+    entry = syllabus.get('entryRequirements')
+    if isinstance(entry, list):
+        entry = ' '.join(clean_html_text(item.get('designation')) or '' for item in entry).strip()
+    else:
+        entry = clean_html_text(entry)
+
+    return {
+        'id': syllabus.get('id'),
+        'code': syllabus.get('code'),
+        'revisionId': syllabus.get('id'),
+        'nameSv': syllabus.get('name'),
+        'totalCredits': total_credits,
+        'semesters': 0,
+        'registrationNumber': syllabus.get('registrationNumber'),
+        'finalisedDate': clean_html_text(syllabus.get('finalisedDate')),
+        'tracks': [],
+        'courses': [],
+        'rules': [],
+        'ruleTexts': [],
+        'planFormat': 'syllabus',
+        'edges': [],
+        'revisions': [],
+        # Block by block: flattened, paragraphs run together ("...examensbeskrivning.Utbildningen").
+        'syllabusLayout': list(syllabus_blocks(syllabus.get('layoutOfTheProgramme'))),
+        'syllabusEntryRequirements': entry or None,
+        'syllabusCourses': parse_syllabus_courses(
+            syllabus.get('layoutOfTheProgramme'), total_credits
+        ),
         'scrapedAt': datetime.now(timezone.utc).isoformat(),
         'sourceUrl': source_url,
     }
@@ -323,7 +446,8 @@ def parse_search_hits(html_content):
             hits = []
             for hit in result['hits']:
                 title = clean_html_text(hit.get('title')) or ''
-                code = re.search(r'\(([A-Z0-9]{4,6})\)\s*$', title)
+                # Å/Ä/Ö appear in codes (UFÖ1Y); without them it drops from the English catalogue.
+                code = re.search(r'\(([A-ZÅÄÖ0-9]{4,6})\)\s*$', title)
                 hits.append({
                     'title': title,
                     'uri': hit.get('uri'),

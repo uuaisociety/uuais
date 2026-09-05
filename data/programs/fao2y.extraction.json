@@ -1,0 +1,109 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:21:41.303830+00:00",
+  "edges": [],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Det första året omfattar en kort introduktion till professionen samt grundläggande kurser i farmaceutisk vetenskap, cellbiologi och farmaceutisk kemi.Kursen 3AP002 läses under termin 1 (1 hp) och termin 2 (3 hp).",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3AP002"
+        ],
+        "labelEn": "Describes the first year's basic courses and notes that 3AP002 is taken across semesters 1 and 2.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Kursen 3AP002 läses under termin 1 (1 hp) och termin 2 (3 hp).",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3AP002"
+        ],
+        "labelEn": "Course 3AP002 is taught in semester 1 (1.5 credits) and semester 2 (3 credits).",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "År 2Kurserna under det andra året behandlar anatomi och organfunktion, hur läkemedel verkar och omsätts i kroppen samt statistisk metodik inom läkemedelsområdet.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A descriptive heading noting that year 2 covers anatomy and organ function, drug action and metabolism, and statistical methodology.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "År 3Under år 3 förmedlas en integrerad kunskap om läkemedelsutveckling och läkemedelsanvändning, inklusive kvalitetssäkring. Halva termin 6 omfattar verksamhetsförlagd utbildning på apotek.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Describes year 3 content, including that half of semester 6 consists of workplace-based training at a pharmacy.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Termin 7 omfattar kurser på avancerad nivå med fördjupning i farmaceutisk vetenskap, inom framför allt läkemedelsutveckling.",
+        "semester": 7,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Semester 7 consists of advanced-level courses specialising in pharmaceutical science, mainly in drug development.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Termin 8 omfattar valbara fördjupningskurser om totalt 30 hp inom läkemedelsutveckling, läkemedelsanvändning och klinisk farmaci.",
+        "semester": 8,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Semester 8 consists of elective advanced courses totalling 30 hp in drug development, drug use and clinical pharmacy.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "År 5Det sista året på avancerad nivå ägnas åt fortsatt fördjupning i farmaceutisk vetenskap med fokus på läkemedelsanvändning, ett valbart självständigt arbete (fördjupningsprojekt, 30 hp) samt verksamhetsförlagd utbildning på apotek.Fördjupningsprojekt",
+        "semester": 9,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Year 5 description: advanced-level deepening in pharmaceutical science, an optional 30 hp degree project, and pharmacy work-based training.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

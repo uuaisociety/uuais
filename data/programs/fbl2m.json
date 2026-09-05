@@ -1,0 +1,213 @@
+{
+  "id": "2782",
+  "code": "FBL2M",
+  "revisionId": "2782",
+  "nameSv": "Masterprogram i biologiska läkemedel",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "MEDFARM 2020/1079",
+  "finalisedDate": "9 juni 2022",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3FB059",
+      "titleEn": "Biopharmaceuticals: Orientation Course for Master's Students",
+      "titleSv": "Biologiska läkemedel - orienteringskurs för masterstudenter",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Drug Discovery and Development",
+      "mainFieldSv": "Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FB028",
+      "titleEn": "Biologicals I",
+      "titleSv": "Biologiska läkemedel I",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 90 credits in biomedicine, pharmaceutical science, chemistry, natural science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FS010",
+      "titleEn": "Life Cycle Analysis of Biologicals",
+      "titleSv": "Livscykelanalys av biologiska läkemedel",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FB037",
+      "titleEn": "Pharmacokinetics and Pharmacodynamics of Biological Drugs",
+      "titleSv": "Farmakokinetik och farmakodynamik för biologiska läkemedel",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits which of 120 credits in biomedicine, biology, pharmaceutical science, chemistry and/or science/engineering. Prior studies should contain 5 credits in pharmacokinetics and 7.5 credits in pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FB031",
+      "titleEn": "Pharmaceutical Protein Drug Development",
+      "titleSv": "Farmaceutisk proteinläkemedelsutveckling",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Drug Discovery and Development A1F, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1F, Läkemedelsutveckling",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 90 credits in biomedicine, pharmaceutical science, chemistry, natural science and/or engineering, and Biological Drugs, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB429",
+      "titleEn": "Development of Biologicals",
+      "titleSv": "Utveckling av biologiska läkemedel",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1F, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1F, Kemi",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FF031",
+      "titleEn": "Proteomics for Drug Discovery",
+      "titleSv": "Proteomik för läkemedelsutveckling",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits in biomedicine, pharmaceutical science, chemistry, drug development, natural science and/or technology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FG005",
+      "titleEn": "Computational Pharmaceutics",
+      "titleSv": "Datorbaserad farmaceutisk modellering",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical sciences, drug development and/or natural sciences/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Under det andra året väljer studenten kurser.Valbara fördjupningskurser 15 hp och del av masterprojekt 45 hp eller valbara fördjupningskurser 30 hp.",
+      "labelEn": "In the second year the student chooses either elective advanced courses of 15 credits plus part of the master project (45 credits) or elective advanced courses of 30 credits.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Masterprojekt 30 hp eller resterande del av 45 hp-projekt.",
+      "labelEn": "Refers to the master's degree project of 30 credits or the remaining part of a 45-credit project.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Under det andra året väljer studenten kurser.Valbara fördjupningskurser 15 hp och del av masterprojekt 45 hp eller valbara fördjupningskurser 30 hp.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Masterprojekt 30 hp eller resterande del av 45 hp-projekt.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [
+    {
+      "from": "3FB028",
+      "to": "3FB031",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits, including 90 credits in biomedicine, pharmaceutical science, chemistry, natural science and/or engineering, and Biological Drugs, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "2782",
+      "name": "Giltig från och med höstterminen 2022"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.557199+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=2782",
+  "validFrom": "Studieplan giltig från och med höstterminen 2022",
+  "validFromYear": 2022,
+  "programmeTitle": "Masterprogram i biologiska läkemedel, 120 hp (FBL2M)",
+  "programmeTitleEn": "Master's Programme in Biopharmaceuticals, 120 credits (FBL2M)",
+  "programmeUri": "/utbildning/program/masterprogram-biologiska-lakemedel",
+  "faculty": "Farmaceutiska fakulteten",
+  "reviewed": false
+}

@@ -1,0 +1,49 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:29:33.965252+00:00",
+  "edges": [
+    {
+      "code": "3FV172",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV186",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV371",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV372",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV377",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV378",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": []
+}

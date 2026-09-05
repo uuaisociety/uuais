@@ -1,0 +1,134 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:42:16.513978+00:00",
+  "edges": [
+    {
+      "code": "2IS064",
+      "text": "60 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS068",
+      "text": "60 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS219",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS220",
+      "text": "Programming, 7.5 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS221",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS222",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS223",
+      "text": "7.5 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS227",
+      "text": "30 credits in information systems or the equivalent including 7.5 credits in databases",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS231",
+      "text": "30 credits in information systems including 7.5 credits in programming.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS232",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS233",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS239",
+      "text": "60 credits in information systems including 15 credits in databases",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS240",
+      "text": "45 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS241",
+      "text": "30 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Speldesign och spelutveckling 1, 15 hpSpeldesign och spelutveckling 2, 15 hp",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Lists Game Design and Game Development 1 and 2, 15 credits each, without stating a requirement.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Valbara kurser 30 hp eller utbytesstudier. Studenterna har platsgaranti på:",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Elective courses of 30 credits or exchange studies are allowed, and students have guaranteed placement on the courses listed below.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

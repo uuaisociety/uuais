@@ -1,0 +1,104 @@
+{
+  "id": "2643",
+  "code": "HRE1K",
+  "revisionId": "2643",
+  "nameSv": "Retorikprogrammet",
+  "totalCredits": 180.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2025/18",
+  "finalisedDate": "5 mars 2025",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "I programmet, som omfattar tre års heltidsstudier, ingår kurser, projektarbeten, examensarbete och praktik. De två första terminerna utgörs av Retorik A och B, som innebär grundläggande studier i retorik och retorikvetenskaplig teori och metod, inklusive retorikens historia. Kurserna innehåller också praktiska inslag som skriv- och talövningar.",
+    "Termin 1:",
+    "Retorik A",
+    "Termin 2:",
+    "Retorik B",
+    "Termin 3:",
+    "Under programmets tredje termin är tre grundläggande profilkurser (dubbelklassade som litteraturvetenskap och retorik), inriktade på bokmarknad, kommunikation respektive kulturteori, obligatoriska. Den fjärde delkursen utgörs av ett fördjupningsarbete inom det av dessa tre profilområden som studenten väljer.",
+    "Profilkurs inom inriktningen Kommunikation, 7,5 hp.",
+    "Profilkurs inom inriktningen Bokmarknad, 7,5 hp.",
+    "Profilkurs inom inriktningen Kulturteori, 7,5 hp.",
+    "Fördjupningsarbete inom valbart profilområde, 7,5 hp.",
+    "Termin 4:",
+    "Fördjupningskurs inom vald profil (dubbelklassad som litteraturvetenskap och retorik), 7,5 hp.",
+    "Praktik, 15 hp.",
+    "Projektarbete, 7,5 hp.",
+    "Termin 4 kan ersättas av en A-kurs inom ett valfritt biområde, till exempel Litteraturvetenskap A, ett annat ämne från fakultetens utbud, eller ett språkämne.",
+    "Termin 5:",
+    "Termin 5 är en breddningstermin, då studenten antingen läser en A-kurs inom ett valfritt biområde eller, om A-kursen i biämnet lästes redan under termin 4, fortsätter med B-kursen inom biämnet. Det finns också möjlighet att under termin 5 studera utomlands.",
+    "Termin 6:",
+    "Valbar kurs, 7,5 hp.",
+    "Fördjupningskurs i retorikvetenskaplig teori och metod, 7,5 hp.",
+    "Examensarbete, 15 hp.",
+    "Examensarbetet skrivs i anslutning till den valda profilen."
+  ],
+  "syllabusEntryRequirements": "Grundläggande behörighet",
+  "syllabusCourses": [
+    {
+      "title": "Profilkurs inom inriktningen Kommunikation",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Profilkurs inom inriktningen Bokmarknad",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Profilkurs inom inriktningen Kulturteori",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningsarbete inom valbart profilområde",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningskurs inom vald profil",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Praktik",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Projektarbete",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Valbar kurs",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningskurs i retorikvetenskaplig teori och metod",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Examensarbete",
+      "credits": 15.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.475555+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2643",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Retorikprogrammet, 180 hp (HRE1K)",
+  "programmeTitleEn": "Bachelor's Programme in Rhetoric, 180 credits (HRE1K)",
+  "programmeUri": "/utbildning/program/retorikprogrammet",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

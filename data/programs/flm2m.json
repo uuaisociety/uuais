@@ -1,0 +1,132 @@
+{
+  "id": "1788",
+  "code": "FLM2M",
+  "revisionId": "1788",
+  "nameSv": "Masterprogram i läkemedelsanvändning",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "MEDFARM 2018/877",
+  "finalisedDate": "29 augusti 2018",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3FF475",
+      "titleEn": "Drug Management",
+      "titleSv": "Läkemedelsanvändning",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Drug Management",
+      "mainFieldSv": "Läkemedelsanvändning",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FF224",
+      "titleEn": "Degree Project in Drug Management",
+      "titleSv": "Masterprojekt i läkemedelsanvändning",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Drug Management",
+      "mainFieldSv": "Läkemedelsanvändning",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "samt ett av nedanstående alternativ:a) Valbara kurser om 22,5 hpb) Valbar kurs 7,5 hp och magisterprojekt i läkemedelsanvändning, 3FB009, 15 hp",
+      "labelEn": "Students choose one of two alternatives: elective courses worth 22.5 credits, or a 7.5-credit elective course combined with a 15-credit master's project in drug management.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Ett av nedanstående alternativ kan väljas:a) Valbara kurser b) Valbara kurser och magisterprojekt i läkemedelsanvändning 15 hp (3FB009) ellerc) Magisterprojekt i läkemedelsanvändning 30 hp (3FB008).",
+      "labelEn": "One of three alternatives—elective courses, elective courses plus a 15 hp master's thesis, or a 30 hp master's thesis in drug management—must be chosen.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Valbara kurser.",
+      "labelEn": "This is a heading for elective courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "samt ett av nedanstående alternativ:a) Valbara kurser om 22,5 hpb) Valbar kurs 7,5 hp och magisterprojekt i läkemedelsanvändning, 3FB009, 15 hp",
+      "semester": 1,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Ett av nedanstående alternativ kan väljas:a) Valbara kurser b) Valbara kurser och magisterprojekt i läkemedelsanvändning 15 hp (3FB009) ellerc) Magisterprojekt i läkemedelsanvändning 30 hp (3FB008).",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Valbara kurser.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "1788",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1545",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    },
+    {
+      "id": "603",
+      "name": "Giltig från och med vårterminen 2013"
+    },
+    {
+      "id": "483",
+      "name": "Giltig från och med höstterminen 2012"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.557940+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=1788",
+  "validFrom": "Studieplan giltig från och med höstterminen 2017, version 2",
+  "validFromYear": 2017,
+  "programmeTitle": "Masterprogram i läkemedelsanvändning, 120 hp (FLM2M)",
+  "programmeTitleEn": "Master's Programme in Drug Management, 120 credits (FLM2M)",
+  "programmeUri": "/utbildning/program/masterprogram-lakemedelsanvandning",
+  "faculty": "Farmaceutiska fakulteten",
+  "reviewed": false
+}

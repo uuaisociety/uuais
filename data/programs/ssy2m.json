@@ -1,0 +1,233 @@
+{
+  "id": "c227703c-f581-4f0a-ace1-7a8c9071831e",
+  "code": "SSY2M",
+  "revisionId": "c227703c-f581-4f0a-ace1-7a8c9071831e",
+  "nameSv": "Masterprogram i systemvetenskap",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "SAMFAK 2026/20",
+  "finalisedDate": "12 februari 2026",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "2IS071",
+      "titleEn": "Contemporary Software Development",
+      "titleSv": "Modern mjukvaruutveckling",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "90 credits in information systems or the equivalent"
+    },
+    {
+      "code": "2IS085",
+      "titleEn": "Designing for Digital Innovation",
+      "titleSv": "Design för digital innovation",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "90 credits in information systems or the equivalent."
+    },
+    {
+      "code": "2IS089",
+      "titleEn": "Governance of Digital Transformation",
+      "titleSv": "Styrning av digital transformation",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "90 credits in information systems or equivalent"
+    },
+    {
+      "code": "2IS072",
+      "titleEn": "Agile Methods",
+      "titleSv": "Agila metoder",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "90 credits in information systems or the equivalent"
+    },
+    {
+      "code": "2IS075",
+      "titleEn": "Economics of Digital Technologies in Organisations",
+      "titleSv": "Ekonomiskt värdeskapande från digitala tekniker i organisationer",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "2IS076",
+      "titleEn": "Artificial Intelligence Systems",
+      "titleSv": "System för artificiell intelligens",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "90 credits in information systems or the equivalent"
+    },
+    {
+      "code": "2IS090",
+      "titleEn": "Social Science Research Methods for Studying the Digital Society",
+      "titleSv": "Samhällsvetenskapliga metoder för studier av det digitala samhället",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree (180 credits). Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
+    },
+    {
+      "code": "2IS082",
+      "titleEn": "Information Systems: Master's Degree Project",
+      "titleSv": "Informationssystem: Examensarbete, master",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "ladok",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "c227703c-f581-4f0a-ace1-7a8c9071831e",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3765",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;2"
+    },
+    {
+      "id": "3521",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;1"
+    },
+    {
+      "id": "3200",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2762",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;2"
+    },
+    {
+      "id": "2748",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;1"
+    },
+    {
+      "id": "2480",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2098",
+      "name": "Giltig från och med höstterminen 2019, version&nbsp;2"
+    },
+    {
+      "id": "1753",
+      "name": "Giltig från och med höstterminen 2019, version&nbsp;1"
+    },
+    {
+      "id": "1679",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1678",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1267",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "1100",
+      "name": "Giltig från och med höstterminen 2015"
+    },
+    {
+      "id": "814",
+      "name": "Giltig från och med höstterminen 2014"
+    },
+    {
+      "id": "681",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "441",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "328",
+      "name": "Giltig från och med höstterminen 2011"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.515223+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=c227703c-f581-4f0a-ace1-7a8c9071831e",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "programmeTitle": "Masterprogram i systemvetenskap, 120 hp (SSY2M)",
+  "programmeTitleEn": "Master's Programme in Information Systems, 120 credits (SSY2M)",
+  "programmeUri": "/utbildning/program/masterprogram-systemvetenskap",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

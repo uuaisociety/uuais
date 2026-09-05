@@ -1,0 +1,33 @@
+{
+  "id": "1888",
+  "code": "SRF2M",
+  "revisionId": "1888",
+  "nameSv": "Masterprogram i redovisning och finansiering",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "SAMFAK 2022/39 DOSS:3.2.1",
+  "finalisedDate": "28 april 2022",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Samtliga studenter inom masterprogrammet läser kurser om 120 högskolepoäng (inklusive ett examensarbete om 30 högskolepoäng). Studenten läser kurser inom vald specialisering om 52,5 hp (inklusive examensarbete om 30 hp) samt kurser som läses gemensamt av alla (37,5 hp). Därtill har studenterna en valfri termin om 30 hp. De programgemensamma kurserna är relevanta för progressionen i programmet som helhet, men även för specialiseringarna då delar av innehållet i kurserna är programgemensamt emedan andra delar är inriktade mot de två enskilda specialiseringarna.",
+    "Under den första och andra terminen läser studenterna kurser som är gemensamma för alla och kurser som är specifika för respektive vald specialisering. Under den tredje valfria terminen ges studenterna möjlighet till utlandsstudier, en termins praktik eller valbara kurser. Den avslutande, fjärde terminen ägnas åt examensarbete, samt åt seminarier i anslutning till detta.",
+    "Utbildningen följer en bunden studiegång, vilket innebär att kurserna och terminerna skall läsas i en fastställd ordning."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.512230+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1888",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i redovisning och finansiering – Redovisning, bolagsstyrning och finansiell analys, 120 hp (SRF2M)",
+  "programmeTitleEn": "Master's Programme in Accounting and Financial Management – Strategic Management Control, 120 credits (SRF2M)",
+  "programmeUri": "/utbildning/program/masterprogram-redovisning-och-finansiering-redovisning-bolagsstyrning-och-finansiell-analys",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

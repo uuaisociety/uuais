@@ -1,0 +1,278 @@
+{
+  "id": "035b1acb-0775-40fa-919d-48a701a3eaf6",
+  "code": "SMK2M",
+  "revisionId": "035b1acb-0775-40fa-919d-48a701a3eaf6",
+  "nameSv": "Masterprogram i management, kommunikation och IT",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "SAMFAK 2026/20",
+  "finalisedDate": "12 februari 2026",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "2IS086",
+      "titleEn": "Introduction to Digitalisation and Society",
+      "titleSv": "Introduktion till digitalisering och samhälle",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Business Studies",
+      "mainFieldSv": "Företagsekonomi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2IS087",
+      "titleEn": "Perspectives on Organisational Communication",
+      "titleSv": "Perspektiv på organisationskommunikation",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Business Studies",
+      "mainFieldSv": "Företagsekonomi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2IS090",
+      "titleEn": "Social Science Research Methods for Studying the Digital Society",
+      "titleSv": "Samhällsvetenskapliga metoder för studier av det digitala samhället",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree (180 credits). Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
+    },
+    {
+      "code": "2IS017",
+      "titleEn": "Information Systems and Management",
+      "titleSv": "Informationssystem och management",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Business Studies",
+      "mainFieldSv": "Företagsekonomi",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2IS080",
+      "titleEn": "Information Analysis and Decision Support",
+      "titleSv": "Informationsanalys och beslutsstöd",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Business Studies",
+      "mainFieldSv": "Företagsekonomi",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2IS088",
+      "titleEn": "The Role of Technology Interaction for the Individual, Organisation and Society",
+      "titleSv": "Teknikinteraktionens roll för individ, organisation och samhälle",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Business Studies",
+      "mainFieldSv": "Företagsekonomi",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
+    },
+    {
+      "code": "2IS018",
+      "titleEn": "IT and Strategy",
+      "titleSv": "IT och strategi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Business Studies",
+      "mainFieldSv": "Företagsekonomi",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 45 credits from semesters 1 and 2 of the Master's Programme in Management, Communication and IT. Proficiency in Swedish and English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
+    },
+    {
+      "code": "2FE880",
+      "titleEn": "Master's Thesis (Business Studies), Master Course MKIT",
+      "titleSv": "Master MKIT examensarbete, inriktning företagsekonomi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Business Studies",
+      "mainFieldSv": "Företagsekonomi",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2IV115",
+      "titleEn": "Master's Thesis (Media and Communication studies), Master Course MKIT",
+      "titleSv": "Master MKIT examensarbete, inriktning medie- och kommunikationsvetenskap",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2IV116",
+      "titleEn": "Master's Thesis (Human-Computer Interaction), Master Course MKIT",
+      "titleSv": "Master MKIT examensarbete, inriktning människa-datorinteraktion",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Human-Computer Interaction",
+      "mainFieldSv": "Människa-datorinteraktion",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2IS037",
+      "titleEn": "Master's Thesis (Information Science), Master Course MKIT",
+      "titleSv": "Master MKIT examensarbete, inriktning informationssystem",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "2FE880",
+        "2IV115",
+        "2IV116",
+        "2IS037"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 2FE880, 2IV115, 2IV116, 2IS037",
+      "labelEn": "Choose one of 4 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "En av kurserna ska väljas: 2FE880, 2IV115, 2IV116, 2IS037",
+      "semester": 4,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "2FE880",
+        "2IV115",
+        "2IV116",
+        "2IS037"
+      ]
+    }
+  ],
+  "planFormat": "ladok",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "035b1acb-0775-40fa-919d-48a701a3eaf6",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3469",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;2"
+    },
+    {
+      "id": "3201",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;1"
+    },
+    {
+      "id": "2259",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "2100",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "785",
+      "name": "Giltig från och med höstterminen 2014"
+    },
+    {
+      "id": "492",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;2"
+    },
+    {
+      "id": "330",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.508526+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=035b1acb-0775-40fa-919d-48a701a3eaf6",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "programmeTitle": "Masterprogram i management, kommunikation och IT, 120 hp (SMK2M)",
+  "programmeTitleEn": "Master's Programme in Management, Communication and IT, 120 credits (SMK2M)",
+  "programmeUri": "/utbildning/program/masterprogram-management-kommunikation-och-it",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

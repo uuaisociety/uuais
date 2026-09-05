@@ -1,0 +1,32 @@
+{
+  "id": "1975",
+  "code": "HMV2M",
+  "revisionId": "1975",
+  "nameSv": "Masterprogram i musikvetenskap",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2022/49",
+  "finalisedDate": "30 augusti 2022",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet omfattar två år och leder till masterexamen. Första årets studier kan leda till en magisterexamen. Möjlighet finns även att komplettera en tidigare magisterexamen för att erhålla en masterexamen.",
+    "I programmet ingår obligatoriska kurser, valbara kurser, samt ett examensarbete. Inom ramen för de valbara kurserna finns även möjlighet att göra praktik eller delta i internationellt studentutbyte genom universitetets och institutionens utbytesavtal."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.472329+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1975",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i musikvetenskap, 120 hp (HMV2M)",
+  "programmeTitleEn": "Master's Programme in Musicology, 120 credits (HMV2M)",
+  "programmeUri": "/utbildning/program/masterprogram-musikvetenskap",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

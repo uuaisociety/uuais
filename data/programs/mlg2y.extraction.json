@@ -1,0 +1,199 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:31:13.753876+00:00",
+  "edges": [],
+  "rules": [
+    {
+      "note": {
+        "textSv": "OBS: Under termin 1 läses delkurs LY1 (4,5 hp) som är en del av kursen Logopedens yrkesroll. Kursen omfattar totalt 30 hp.",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG888"
+        ],
+        "labelEn": "During semester 1, the 4.5 hp sub-course LY1, part of the 30 hp course Professional Development, is taken.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "OBS: Under termin 2 läses delkurs LY2 (5 hp) som är en del av kursen Logopedens yrkesroll. Kursen omfattar totalt 30 hp.",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG888"
+        ],
+        "labelEn": "During semester 2, the 5-credit sub-course LY2 is taken as part of the 30-credit Professional Development course.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "OBS: Under termin 3 läses delkurs LY3 (1,5 hp) som är en del av kursen Logopedens yrkesroll. Kursen omfattar totalt 30 hp.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG888"
+        ],
+        "labelEn": "During semester 3, the sub-course LY3 (1.5 credits), part of Professional Development (30 credits in total), is taken.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "OBS: Under termin 4 läses delkurs LY4 (5,5 hp) som är en del av kursen Logopedens yrkesroll. Kursen omfattar totalt 30 hp.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG888"
+        ],
+        "labelEn": "Semester 4 includes the sub-course LY4 (5.5 credits), which is part of the 30-credit Professional Development course.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "OBS: Under termin 5 läses delkurs LY5 (3 hp) som är en del av kursen Logopedens yrkesroll. Kursen omfattar totalt 30 hp.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG888"
+        ],
+        "labelEn": "In semester 5, the 3-credit sub-course LY5 is taken as part of the Professional Development course, which totals 30 credits.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "OBS: Under termin 6 läses delkurs LY6 (4,5 hp) som är en del av kursen Logopedens yrkesroll. Kursen omfattar totalt 30 hp.",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG888"
+        ],
+        "labelEn": "Sub-course LY6 (4.5 credits) is taken during semester 6 as part of the 30-credit course Professional Development.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "OBS: Under termin 6 läses delkurs 1 (3 hp) del av kursen Forskningsmetodik och statistik. Kursen omfattar totalt 7,5 hp.",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG566"
+        ],
+        "labelEn": "During semester 6, sub-course 1 (3 credits) of Research Methodology and Statistics is taken; the course totals 7.5 credits.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "OBS: Under termin 7 läses del 1 (6,5 hp) av kursen Examensarbete i logopedi. Kursen omfattar totalt 30 hp.",
+        "semester": 7,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG577"
+        ],
+        "labelEn": "Part 1 (6.5 credits) of the Degree Project in Speech-Language Pathology is taken during semester 7, and the course totals 30 credits.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "OBS: Under termin 7 läses delkurs LY7 (4 hp) som är en del av kursen Logopedens yrkesroll. Kursen omfattar totalt 30 hp.",
+        "semester": 7,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG888"
+        ],
+        "labelEn": "In semester 7, the 4-credit sub-course LY7, part of the 30-credit Professional Development course, is taken.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "OBS: Under termin 8 läses delkurs 2 (4,5 hp) del av kursen Forskningsmetodik och statistik. Kursen omfattar totalt 7,5 hp.",
+        "semester": 8,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG566"
+        ],
+        "labelEn": "During term 8, subcourse 2 (4.5 credits) of Research Methodology and Statistics is taken; the course totals 7.5 credits.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "OBS: Under termin 8 läses delkurs LY8 (2 hp) som är en del av kursen Logopedens yrkesroll. Kursen omfattar totalt 30 hp.",
+        "semester": 8,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG888"
+        ],
+        "labelEn": "In semester 8, the 2-credit sub-course LY8 is taken as part of the Professional Development course, which totals 30 credits.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "OBS: Under termin 8 läses del 2 (23,5 hp) av kursen Examensarbete i logopedi. Kursen omfattar totalt 30 hp.",
+        "semester": 8,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3LG577"
+        ],
+        "labelEn": "Semester 8 includes part 2 (23.5 credits) of the Degree Project in Speech-Language Pathology, which totals 30 credits.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "id": "3486",
+  "code": "MPM2M",
+  "revisionId": "3486",
+  "nameSv": "Masterprogram i precisionsmedicin",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "MEDFARM 2023/858",
+  "finalisedDate": "27 augusti 2024",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3MG322",
+      "titleEn": "Medical Genetics and Cancer: Molecular Mechanisms",
+      "titleSv": "Medicinsk genetik och cancer - molekylära mekanismer",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Science A1N, Molecular Medicine",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Molekylär medicin",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "180 credits from a programme in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, cell/molecular biology, genetics, life science, medical sciences or a similar field of study. Also required are courses in biochemistry, cell biology, chemistry, genetics, and molecular biology/genetics totalling at least 30 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "2ST133",
+      "titleEn": "Introduction to Programming in R",
+      "titleSv": "Introduktion till programmering i R",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Statistics",
+      "mainFieldSv": "Statistik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2ST134",
+      "titleEn": "Biostatistics",
+      "titleSv": "Biostatistik",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Statistics",
+      "mainFieldSv": "Statistik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MG038",
+      "titleEn": "Molecular Techniques and Data Analysis in Precision Medicine I",
+      "titleSv": "Molekylära tekniker och dataanalys inom precisionsmedicin I",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Precision Medicine",
+      "mainFieldSv": "Precisionsmedicin",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FF041",
+      "titleEn": "Introduction to Machine Learning and Artificial Intelligence in Life Science",
+      "titleSv": "Introduktion till maskininlärning och artificiell intelligens inom livsvetenskaperna",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Precision Medicine",
+      "mainFieldSv": "Precisionsmedicin",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MG047",
+      "titleEn": "Molecular Techniques and Data Analysis in Precision Medicine II",
+      "titleSv": "Molekylära tekniker och dataanalys inom precisionsmedicin II",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Precision Medicine",
+      "mainFieldSv": "Precisionsmedicin",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MG065",
+      "titleEn": "Applied Precision Medicine",
+      "titleSv": "Tillämpad precisionsmedicin",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Medical Science A1F, Precision Medicine",
+      "mainFieldSv": "Medicinsk vetenskap A1F, Precisionsmedicin",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MG055",
+      "titleEn": "Master's Project in Precision Medicine",
+      "titleSv": "Masterprojekt i precisionsmedicin",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Precision Medicine",
+      "mainFieldSv": "Precisionsmedicin",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MG056",
+      "titleEn": "Master's Project in Precision Medicine",
+      "titleSv": "Masterprojekt i precisionsmedicin",
+      "credits": 45.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 45.0,
+      "compulsory": false,
+      "mainFieldEn": "Precision Medicine",
+      "mainFieldSv": "Precisionsmedicin",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "3MG056"
+      ],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Start av examensarbete: Masterprojekt i Precisionsmedicin, 45 hp (3MG056)alternativtPeriod med valbar(a) kurs(er) motsvarande 15.0 hp",
+      "labelEn": "Students may either start the 45 hp Master's Project in Precision Medicine (3MG056) or take elective courses totalling 15 hp.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "EITHER_OR",
+      "courseCodes": [
+        "3MG055",
+        "3MG056"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Examensarbete 30 hp, alternativt fortsättning på examensarbete 45 hp.",
+      "labelEn": "Students may complete a 30-credit master's thesis or alternatively continue to a 45-credit thesis.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Start av examensarbete: Masterprojekt i Precisionsmedicin, 45 hp (3MG056)alternativtPeriod med valbar(a) kurs(er) motsvarande 15.0 hp",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Examensarbete 30 hp, alternativt fortsättning på examensarbete 45 hp.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3486",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3164",
+      "name": "Giltig från och med höstterminen 2024"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.542892+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3486",
+  "validFrom": "Studieplan giltig från och med höstterminen 2025",
+  "validFromYear": 2025,
+  "programmeTitle": "Masterprogram i precisionsmedicin, 120 hp (MPM2M)",
+  "programmeTitleEn": "Master's Programme in Precision Medicine, 120 credits (MPM2M)",
+  "programmeUri": "/utbildning/program/masterprogram-precisionsmedicin",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

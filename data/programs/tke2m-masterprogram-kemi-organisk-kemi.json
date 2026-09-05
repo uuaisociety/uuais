@@ -224,6 +224,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1KB469",
@@ -324,12 +325,13 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.947666+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.428716+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10039",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i kemi – Organisk kemi, 120 hp (TKE2M)",
   "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
   "programmeUri": "/utbildning/program/masterprogram-kemi-organisk-kemi",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

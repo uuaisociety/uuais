@@ -1,0 +1,60 @@
+{
+  "id": "2448",
+  "code": "MIL2M",
+  "revisionId": "2448",
+  "nameSv": "Masterprogram i implementering, transformativt lärande och hållbarhet",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "MEDFARM 2024/1511",
+  "finalisedDate": "17 september 2024",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Detta distansprogram omfattar fyra terminer (120 hp). Programmet kan läsas på halv- eller helfart. Läses programmet på helfart tar det 2 år, och läses programmet på halvfart tar det 4 år.",
+    "Vid programmets start tillbringar studenterna en vecka på campus i Uppsala. Detta gäller både studenter som studerar på hel- och halvfart. Under denna vecka kommer studenter och lärare att lära känna varandra på plats genom att delta i gemensamma aktiviteter innan de återvänder hem för att fortsätta med termin ett via distansundervisning.",
+    "De första 60 hp examineras studenterna genom olika former av muntliga och skriftliga uppgifter, individuellt och i grupp. Studenterna tar aktivt ansvar för sitt lärande, och är medskapare både i uppgifter och examination (t ex i form av peer-review som examinationens första steg).",
+    "I början av andra halvan av programmet tillbringar studenter och lärare igen sin första vecka på campus i Uppsala. Detta gäller både studenter som studerar på hel- och halvfart.",
+    "Programmets kurser och inbördes ordning:",
+    "Planetär hälsa, 15 hp (termin 1)",
+    "Denna kurs utforskar planetär hälsa, som är ett nytt ämne för forskning och praktiskt arbete, och som fokuserar på att främja hälsa för människor och allt annat liv på jorden, inom ramen för de gränser planeten sätter för rättvisa och hållbarhet.",
+    "Makt, jämlikhet och transformation, 15 hp (termin 1 vid helfartsstudier, termin 3 vid halvfartsstudier)",
+    "Denna kurs undersöker vilken roll makt och aktörskap har, liksom deras potential att förvränga eller påskynda rättvis implementering av hållbar utveckling och global hälsa.",
+    "Metod och design för implementering, 15 hp (termin 2 vid helfartsstudier, termin 4 vid halvfartsstudier)",
+    "Inom ramen för denna kurs analyseras och jämförs explorativa metoder som tillåter gemensamma efterforskningar, samdesign och att testning av olika hållbarhetshandlingar utan att dessa får konsekvenser i verkligheten.",
+    "Ledarskap för hållbar utveckling, 15 hp (termin 2)",
+    "Denna kurs analyserar lämpliga institutionella förutsättningar för möjliggörande av ledarskap som kan stödja implementeringen av metoder som främjar hållbar utveckling och global hälsa.",
+    "Forskningsmetod, 15 hp (termin 3 vid helfartsstudier, termin 5 vid halvfartsstudier)",
+    "Intervjumetodik, statistik, diskursanalys m.fl. forskningsmetoder.",
+    "Valbar period, 15 hp (termin 3 för vid helfartsstudier, termin 6 vid halvfartsstudier)",
+    "Studenten kan välja mellan två alternativ, praktikplats eller fristående kurser.",
+    "Masteruppsats i lärande för hållbar utveckling och global hälsa, 30 hp (termin 4 vid helfartsstudier, termin 7 och 8 vid halvfartsstudier)",
+    "Uppsatsen ger studenterna möjlighet att applicera den kunskap de tillskansat sig under programmet."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [
+    {
+      "title": "Planetär hälsa",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Ledarskap för hållbar utveckling",
+      "credits": 15.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.538006+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2448",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i implementering, transformativt lärande och hållbarhet, 120 hp (MIL2M)",
+  "programmeTitleEn": "Master's Programme in Implementation, Transformative Learning and Sustainability, 120 credits (MIL2M)",
+  "programmeUri": "/utbildning/program/masterprogram-implementering-transformativt-larande-och-hallbarhet",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

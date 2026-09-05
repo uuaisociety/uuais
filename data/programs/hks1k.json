@@ -1,0 +1,227 @@
+{
+  "id": "3401",
+  "code": "HKS1K",
+  "revisionId": "3401",
+  "nameSv": "Kandidatprogram i kultur- och samhällsanalys",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "UFV 2021/2748",
+  "finalisedDate": "24 februari 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "5FP006",
+      "titleEn": "Practical Philosophy A",
+      "titleSv": "Praktisk filosofi A",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Practical Philosophy",
+      "mainFieldSv": "Praktisk filosofi",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "5FP003",
+      "titleEn": "Practical Philosophy B",
+      "titleSv": "Praktisk filosofi B",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Practical Philosophy",
+      "mainFieldSv": "Praktisk filosofi",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5FP004",
+      "titleEn": "Practical Philosophy C",
+      "titleSv": "Praktisk filosofi C",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Practical Philosophy",
+      "mainFieldSv": "Praktisk filosofi",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "52.5 credits from Practical Philosophy A, incl. the sub-course Critical Thinking, and Practical Philosophy B, including the B essay sub-course"
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "5FP006"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "KOSA-studenter läser en anpassad version av Praktisk filosofi A (30 hp): Kritiskt tänkande (7,5 hp) Etik (7,5 hp) En kurs i tillämpad etik (7,5 hp). Kursen ersätter Metaetik och värdeteori och är en tematisk kurs med innehåll som kan variera från termin till termin. Politisk filosofi (7,5 hp). Kursen är obligatorisk för KOSA-studenter (kursen Metafysik (7,5 hp) kan inte väljas).",
+      "labelEn": "KOSA students must take an adapted, mandatory version of Practical Philosophy A.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [
+        "5FP003"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "KOSA-studenter läser en anpassad version av Praktisk filosofi B (30 hp): Fördjupad kurs i etik (7,5 hp) Fördjupad kurs i samhällsfilosofi (7,5 hp) En fördjupad kurs i tillämpad etik (7,5 hp). Kursen ersätter Fördjupad kurs i metaetik och värdeteori (7,5 hp) och är en tematisk kurs med innehåll som kan variera från termin till termin. B-uppsats (7,5 hp)Studenten söker till kursen på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+      "labelEn": "KOSA students take an adapted version of Practical Philosophy B in which a thematic course replaces the advanced course in metaethics and value theory.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "En kurs om eller i statistik (7,5 hp) Beslutsteori (7,5 hp) Metoder och verktyg för besluts- och riskanalys (7,5 hp) Massmedia i samhälle (7,5 hp)Kursordningen kan variera.Studenten söker till kurserna på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+      "labelEn": "General information: course order may vary and students must apply via antagning.se during the announced application periods, with no guaranteed seats for late applicants.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Terminen 4 läses ett biämne: Statskunskap A eller Kulturantropologi A.Studenten söker till kursen på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+      "labelEn": "In term 4 students take either Political Science A or Cultural Anthropology A as a subsidiary subject.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "Termin 5 läses valfria kurser om totalt 30 hp på Historisk-filosofiska fakulteten eller Samhällsvetenskapliga fakulteten (observera att endast kurser vid Filosofiska institutionen har platsgaranti). Även praktik eller utlandsstudier i humanistiska eller samhällsvetenskapliga ämnen kan väljas.",
+      "labelEn": "Term 5 consists of 30 credits of elective courses from the historical-philosophical or social sciences faculties, with guaranteed places only for philosophy department courses; internships or study abroad may also be chosen.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Studenten söker till kursen på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+      "labelEn": "Students must apply for the course via antagning.se during the announced application periods; a place is not guaranteed for late applicants.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "KOSA-studenter läser en anpassad version av Praktisk filosofi A (30 hp): Kritiskt tänkande (7,5 hp) Etik (7,5 hp) En kurs i tillämpad etik (7,5 hp). Kursen ersätter Metaetik och värdeteori och är en tematisk kurs med innehåll som kan variera från termin till termin. Politisk filosofi (7,5 hp). Kursen är obligatorisk för KOSA-studenter (kursen Metafysik (7,5 hp) kan inte väljas).",
+      "semester": 1,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "KOSA-studenter läser en anpassad version av Praktisk filosofi B (30 hp): Fördjupad kurs i etik (7,5 hp) Fördjupad kurs i samhällsfilosofi (7,5 hp) En fördjupad kurs i tillämpad etik (7,5 hp). Kursen ersätter Fördjupad kurs i metaetik och värdeteori (7,5 hp) och är en tematisk kurs med innehåll som kan variera från termin till termin. B-uppsats (7,5 hp)Studenten söker till kursen på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En kurs om eller i statistik (7,5 hp) Beslutsteori (7,5 hp) Metoder och verktyg för besluts- och riskanalys (7,5 hp) Massmedia i samhälle (7,5 hp)Kursordningen kan variera.Studenten söker till kurserna på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Terminen 4 läses ett biämne: Statskunskap A eller Kulturantropologi A.Studenten söker till kursen på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Termin 5 läses valfria kurser om totalt 30 hp på Historisk-filosofiska fakulteten eller Samhällsvetenskapliga fakulteten (observera att endast kurser vid Filosofiska institutionen har platsgaranti). Även praktik eller utlandsstudier i humanistiska eller samhällsvetenskapliga ämnen kan väljas.",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Studenten söker till kursen på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [
+    {
+      "from": "5FP003",
+      "to": "5FP004",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "52.5 credits from Practical Philosophy A, incl. the sub-course Critical Thinking, and Practical Philosophy B, including the B essay sub-course"
+    },
+    {
+      "from": "5FP006",
+      "to": "5FP004",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "52.5 credits from Practical Philosophy A, incl. the sub-course Critical Thinking, and Practical Philosophy B, including the B essay sub-course"
+    }
+  ],
+  "revisions": [
+    {
+      "id": "3401",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "2706",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;3"
+    },
+    {
+      "id": "2581",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;2"
+    },
+    {
+      "id": "2443",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;1"
+    },
+    {
+      "id": "2387",
+      "name": "Giltig från och med höstterminen 2021, version&nbsp;2"
+    },
+    {
+      "id": "2245",
+      "name": "Giltig från och med höstterminen 2021, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.451918+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3401",
+  "validFrom": "Studieplan giltig från och med höstterminen 2025",
+  "validFromYear": 2025,
+  "programmeTitle": "Kandidatprogram i kultur- och samhällsanalys, 180 hp (HKS1K)",
+  "programmeTitleEn": "The Uppsala Culture and Society Programme, 180 credits (HKS1K)",
+  "programmeUri": "/utbildning/program/kandidatprogram-kultur-och-samhallsanalys",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

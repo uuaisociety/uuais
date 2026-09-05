@@ -1,0 +1,28 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:32:02.913818+00:00",
+  "edges": [
+    {
+      "code": "3FV351",
+      "text": "A Bachelor of Science in Nursing, a Bachelor of Science in Occupational Therapy, a Bachelor of Science in Physiotherapy or a Master of Science in Medicine.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV352",
+      "text": "A Bachelor of Science in Nursing, a Bachelor of Science in Occupational Therapy, a Bachelor of Science in Physiotherapy or a Master of Science in Medicine.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV353",
+      "text": "A Bachelor of Science in Nursing",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": []
+}

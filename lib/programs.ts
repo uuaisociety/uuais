@@ -112,8 +112,25 @@ export type Program = {
   /** The same programme in the university's English catalogue, matched by code. */
   programmeTitleEn: string | null;
   programmeUri: string;
-  planFormat: 'legacy' | 'ladok';
+  planFormat: PlanFormat;
+  /** Which faculty's catalogue lists the programme. */
+  faculty: string;
+  /** Set only when planFormat is 'syllabus': prose that names courses but never their codes. */
+  /** One entry per paragraph of the syllabus, so the page can set them as paragraphs. */
+  syllabusLayout?: string[];
+  syllabusEntryRequirements?: string | null;
+  syllabusCourses?: SyllabusCourse[];
 };
+
+/** A course a syllabus names in prose: no code, and a semester only where it says so. */
+export type SyllabusCourse = {
+  title: string;
+  credits: number | null;
+  semester: number | null;
+};
+
+/** 'syllabus' means UU publishes no study plan for the programme, so there is no map. */
+export type PlanFormat = 'legacy' | 'ladok' | 'syllabus';
 
 export type ProgramIndexEntry = {
   file: string;
@@ -126,13 +143,15 @@ export type ProgramIndexEntry = {
   semesters: number;
   courses: number;
   tracks: number;
-  planFormat: 'legacy' | 'ladok';
+  planFormat: PlanFormat;
+  faculty: string;
   validFrom: string | null;
   validFromYear: number | null;
 };
 
 export type ProgramIndex = {
-  faculty: string;
+  /** Every faculty the run covered, so a partial ingest is visible as one. */
+  faculties: string[];
   scrapedAt: string;
   programmes: ProgramIndexEntry[];
 };

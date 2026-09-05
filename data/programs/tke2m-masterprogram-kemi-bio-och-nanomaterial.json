@@ -258,6 +258,7 @@
   "rules": [],
   "ruleTexts": [],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1KB264",
@@ -346,12 +347,13 @@
       "name": "Giltig från och med höstterminen 2014"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.942552+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.423296+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10035",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i kemi – Bio- och nanomaterial, 120 hp (TKE2M)",
   "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
   "programmeUri": "/utbildning/program/masterprogram-kemi-bio-och-nanomaterial",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

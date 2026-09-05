@@ -732,6 +732,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1FA518",
@@ -885,12 +886,13 @@
       "name": "Giltig från och med höstterminen 2018"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.858488+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.330755+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=e8377ecb-5725-4b57-b995-06eb250f2173",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Högskoleingenjörsprogrammet i medicinsk teknik, 180 hp (TME1Y)",
   "programmeTitleEn": "Bachelor's Programme in Biomedical Engineering, 180 credits (TME1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-medicinsk-teknik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

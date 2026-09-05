@@ -2,13 +2,19 @@
 
 from studieplan import (
     build_program,
+    build_syllabus_program,
+    courses_from_semester_texts,
+    extract_syllabus,
     flatten_ladok,
+    parse_syllabus_courses,
+    parse_syllabus_id,
     collect_rule_texts,
     extract_outline,
     flatten_courses,
     parse_credits,
     parse_main_field,
     parse_title,
+    parse_search_hits,
     parse_track_header,
     slugify,
 )
@@ -388,3 +394,139 @@ class TestFlattenLadok:
         by_semester = {c["semester"]: c for c in courses}
         assert by_semester[1]["periods"] == ["Period 1", "Period 2"]
         assert by_semester[2]["periods"] == ["Period 3"]
+
+
+#: How UU actually serves it: entity-encoded, one course per <p class="linebreak">.
+JURIST_LAYOUT = (
+    '<p><strong>Utbildningen p&aring; grundniv&aring;</p>'
+    '<p>Kursernas inneh&aring;ll</strong></p>'
+    '<p class="linebreak">Grundniv&aring;n omfattar f&ouml;ljande kurser:</p>'
+    '<p class="linebreak">Terminskurs 1: grundl&auml;ggande juridisk metod, 30 h&ouml;gskolepo&auml;ng,</p>'
+    '<p class="linebreak">Terminskurs 2: civilr&auml;tt, 30 h&ouml;gskolepo&auml;ng,</p>'
+    '<ol><li>en valfri f&ouml;rdjupningskurs om 15 h&ouml;gskolepo&auml;ng</li></ol>'
+)
+
+
+class TestParseSyllabusCourses:
+    def test_reads_a_semester_numbered_course(self):
+        courses = parse_syllabus_courses(JURIST_LAYOUT, total_credits=270.0)
+        assert {'title': 'grundläggande juridisk metod', 'credits': 30.0, 'semester': 1} in courses
+        assert {'title': 'civilrätt', 'credits': 30.0, 'semester': 2} in courses
+
+    def test_skips_the_sentence_introducing_the_list(self):
+        """"Grundnivån omfattar följande kurser" names no course and carries no credits."""
+        titles = [c['title'] for c in parse_syllabus_courses(JURIST_LAYOUT, 270.0)]
+        assert not any('omfattar' in t for t in titles)
+
+    def test_skips_a_sentence_that_merely_mentions_credits(self):
+        prose = '<p>Programmet &auml;r tv&aring;&aring;rigt och omfattar 120 h&ouml;gskolepo&auml;ng.</p>'
+        assert parse_syllabus_courses(prose) == []
+
+    def test_skips_the_programmes_own_total(self):
+        whole = '<p class="linebreak">Juristexamen, 270 h&ouml;gskolepo&auml;ng</p>'
+        assert parse_syllabus_courses(whole, total_credits=270.0) == []
+        # Without the total to compare against, it cannot know, and keeps it.
+        assert len(parse_syllabus_courses(whole)) == 1
+
+    def test_ignores_a_credit_figure_mid_sentence(self):
+        mid = ('<p class="linebreak">Kurser om 15 h&ouml;gskolepo&auml;ng kan ers&auml;ttas '
+               'av studier utomlands vid n&aring;got av v&aring;ra partneruniversitet.</p>')
+        assert parse_syllabus_courses(mid) == []
+
+    def test_drops_the_preposition_that_introduced_the_credits(self):
+        block = '<li>en valfri f&ouml;rdjupningskurs om 15 h&ouml;gskolepo&auml;ng</li>'
+        assert parse_syllabus_courses(block) == [
+            {'title': 'en valfri fördjupningskurs', 'credits': 15.0, 'semester': None}
+        ]
+
+    def test_no_layout_at_all(self):
+        assert parse_syllabus_courses(None) == []
+        assert parse_syllabus_courses('') == []
+
+
+class TestBuildSyllabusProgram:
+    SYLLABUS = {
+        'id': '1608',
+        'code': 'JJU2Y',
+        'name': 'Juristprogrammet',
+        'credits': '270 hp',
+        'finalisedDate': '18 maj 2021',
+        'registrationNumber': 'JURFAK 2021/31',
+        'layoutOfTheProgramme': JURIST_LAYOUT,
+        'entryRequirements': [{'designation': '<p>Grundl&auml;ggande beh&ouml;righet och Historia 1b</p>'}],
+    }
+
+    def test_carries_the_named_courses_and_the_prose_they_came_from(self):
+        record = build_syllabus_program(self.SYLLABUS, 'https://example.test/1608')
+        assert record['planFormat'] == 'syllabus'
+        assert record['code'] == 'JJU2Y'
+        assert record['totalCredits'] == 270.0
+        assert len(record['syllabusCourses']) == 3
+        assert any('Kursernas innehåll' in block for block in record['syllabusLayout'])
+        # One block per paragraph, so the page can set them as paragraphs.
+        assert record['syllabusLayout'][0] == 'Utbildningen på grundnivå'
+        assert record['syllabusEntryRequirements'].startswith('Grundläggande behörighet')
+
+    def test_leaves_the_course_level_fields_empty(self):
+        """There is no course data in a syllabus, and inventing some would be worse."""
+        record = build_syllabus_program(self.SYLLABUS, '')
+        assert record['courses'] == []
+        assert record['edges'] == []
+        assert record['tracks'] == []
+        assert record['semesters'] == 0
+
+
+class TestSyllabusDiscovery:
+    def test_finds_the_syllabus_a_programme_page_links_to(self):
+        html = '<a href="/utbildning/utbildningsplan?query=1608">Utbildningsplan</a>'
+        assert parse_syllabus_id(html) == '1608'
+
+    def test_no_link_means_no_syllabus(self):
+        assert parse_syllabus_id('<a href="/utbildning/studieplan?query=10072">x</a>') is None
+
+    def test_extracts_the_syllabus_blob(self):
+        page = ("AppRegistry.registerInitialState('x', "
+                '{"programmeSyllabus": {"code": "JJU2Y"}});')
+        assert extract_syllabus(page) == {'code': 'JJU2Y'}
+
+    def test_ignores_a_page_without_one(self):
+        assert extract_syllabus("AppRegistry.registerInitialState('x', {\"other\": 1});") is None
+
+
+class TestCoursesFromSemesterTexts:
+    """A few plans describe each semester in prose and list no course rows at all."""
+
+    OUTLINE = {
+        'semesters': [
+            {'content': [{'type': 'text', 'textSv':
+                'Biomedicinsk introduktion, 15,5 hp<br>Biokemi, 7 hp'}]},
+            {'content': [{'type': 'text', 'textSv':
+                'Cell- och molekylärbiologi, (7,5 hp av 15 hp)<br>Anatomi, 7,5 hp'}]},
+        ],
+    }
+
+    def test_takes_the_semester_from_its_position(self):
+        found = courses_from_semester_texts(self.OUTLINE)
+        assert {'title': 'Biokemi', 'credits': 7.0, 'semester': 1} in found
+        assert {'title': 'Anatomi', 'credits': 7.5, 'semester': 2} in found
+
+    def test_keeps_the_share_and_drops_the_bracket_around_it(self):
+        """"(7,5 hp av 15 hp)" is this semester's share of a course split across two."""
+        found = courses_from_semester_texts(self.OUTLINE)
+        assert {'title': 'Cell- och molekylärbiologi', 'credits': 7.5, 'semester': 2} in found
+
+    def test_a_plan_with_course_rows_is_left_alone(self):
+        assert courses_from_semester_texts({'semesters': []}) == []
+
+
+class TestParseSearchHits:
+    def test_reads_a_code_containing_a_swedish_letter(self):
+        """UFÖ1Y is a real programme code; [A-Z0-9] dropped it from the English catalogue."""
+        html = (
+            "AppRegistry.registerInitialState('x', "
+            '{"result": {"hits": [{"title": "Preschool Teacher Education Programme, '
+            '210 credits (UFÖ1Y)", "uri": "/a"}], "count": 1}});'
+        )
+        hits, count = parse_search_hits(html)
+        assert hits[0]["code"] == "UFÖ1Y"
+        assert count == 1

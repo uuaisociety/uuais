@@ -590,6 +590,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1EL003",
@@ -688,12 +689,13 @@
       "name": "Giltig från och med höstterminen 2022"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.889817+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.361441+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10010",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i batteriteknik och energilagring, 120 hp (TBT2M)",
   "programmeTitleEn": "Master's Programme in Battery Technology and Energy Storage, 120 credits (TBT2M)",
   "programmeUri": "/utbildning/program/masterprogram-batteriteknik-och-energilagring",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

@@ -2349,6 +2349,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1MS321",
@@ -2840,12 +2841,13 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.818243+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.293463+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10068",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Civilingenjörsprogrammet i informationsteknologi, 300 hp (TIT2Y)",
   "programmeTitleEn": "Master's Programme in Computer and Information Engineering, 300 credits (TIT2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-informationsteknologi",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

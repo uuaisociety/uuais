@@ -1,0 +1,292 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:36:21.557979+00:00",
+  "edges": [
+    {
+      "code": "2IV095",
+      "text": "15 credits in media and communication studies",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV143",
+      "text": "15 credits in media and communication studies",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV146",
+      "text": "Media and Communication Studies A and B or the equivalent",
+      "result": {
+        "edges": [
+          {
+            "from": "2IV160",
+            "type": "HARD"
+          },
+          {
+            "from": "2IV161",
+            "type": "HARD"
+          },
+          {
+            "from": "2IV162",
+            "type": "HARD"
+          },
+          {
+            "from": "2IV095",
+            "type": "HARD"
+          },
+          {
+            "from": "2IV167",
+            "type": "HARD"
+          },
+          {
+            "from": "2IV143",
+            "type": "HARD"
+          },
+          {
+            "from": "2IV165",
+            "type": "HARD"
+          },
+          {
+            "from": "2IV166",
+            "type": "HARD"
+          },
+          {
+            "from": "2IV177",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2IV160",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV161",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV162",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV165",
+      "text": "15 credits in media and communication studies",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV166",
+      "text": "15 credits in media and communication studies",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV167",
+      "text": "15 credits in media and communication studies",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV169",
+      "text": "60 credits in media and communication studies including 7.5 credits in communication studies",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV170",
+      "text": "60 credits in media and communication studies including 7.5 credits in journalism studies",
+      "result": {
+        "edges": [
+          {
+            "from": "2IV165",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2IV171",
+      "text": "60 credits in media and communication studies",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV177",
+      "text": "15 credits in media and communication studies",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV180",
+      "text": "60 credits in media and communication studies including 7.5 credits in digital media studies.",
+      "result": {
+        "edges": [
+          {
+            "from": "2IV095",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Kurspaketet Informationssystem och digital kommunikation 30 hp söks. Där ingår följande kurser:",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Heading introducing the 30 hp course package Information Systems and Digital Communication and the courses it contains.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Valfri termin.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This is an elective semester.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Välj ett av följande kurspaket:Medie- och kommunikationsvetenskap B, digitala mediestudier 30 hp, med delkurserna",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2IV095"
+        ],
+        "labelEn": "Choose one of the listed course packages; this one is Media and Communication Studies B: Digital Media Studies (30 hp) with its sub-courses.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "ellerMedie- och kommunikationsvetenskap B, journalistikstudier 30 hp, med delkurserna",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [
+          "2IV165",
+          "2IV166"
+        ],
+        "labelEn": "Alternatively, Media and Communication Studies B: Journalism Studies, 30 credits, with its sub-courses may be taken.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "ellerMedie- och kommunikationsvetenskap B, studier i organisationskommunikation 30 hp, med delkurserna",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [
+          "2IV177"
+        ],
+        "labelEn": "Alternatively, Media and Communication Studies B: Organisational Communication Studies (30 hp) may be taken with its sub-courses.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Välj C-nivå inom samma spår som under termin 4:Medie- och kommunikationsvetenskap C, digitala mediestudier 30 hp, med delkurserna",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "2IV180"
+        ],
+        "labelEn": "Students must take C-level courses in the same track as chosen in semester 4, here the digital media studies track.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "ellerMedie- och kommunikationsvetenskap C, journalistikstudier 30 hp med delkurserna",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [
+          "2IV170"
+        ],
+        "labelEn": "Alternatively, the 30 hp Media and Communication Studies C journalism studies package with its sub-courses may be taken.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "ellerMedie- och kommunikationsvetenskap C, studier i organisationskommunikation 30 hp, med delkurserna",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [
+          "2IV169"
+        ],
+        "labelEn": "Alternatively, Media and Communication Studies C in organisational communication (30 hp) may be taken with its sub-courses.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Valfri termin.",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "The semester is optional/free choice.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

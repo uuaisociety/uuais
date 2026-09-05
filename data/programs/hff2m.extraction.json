@@ -1,0 +1,91 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:24:31.974135+00:00",
+  "edges": [
+    {
+      "code": "5HG015",
+      "text": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5HG016",
+      "text": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5HG017",
+      "text": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5HG019",
+      "text": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5HG021",
+      "text": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "7,5 hp av examensarbetet hör till denna termin.",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "5CM013"
+        ],
+        "labelEn": "7.5 credits of the master's thesis are counted within this term.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "7,5 hp av examensarbetet hör till denna termin.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "5CM013"
+        ],
+        "labelEn": "7.5 credits of the master's thesis are counted within this semester.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "30 hp av examensarbetet hör till denna termin.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "5CM013"
+        ],
+        "labelEn": "30 credits of the master's thesis are counted within this semester.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

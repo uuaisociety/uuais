@@ -1,0 +1,33 @@
+{
+  "id": "777",
+  "code": "SPO2M",
+  "revisionId": "777",
+  "nameSv": "Politices masterprogram",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "SAMFAK 2014/23 Doss 3:2:1",
+  "finalisedDate": "6 mars 2014",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Första terminen ger en gemensam bas i metodfärdigheter och fördjupade substantiella kunskaper i statskunskap eller utvecklingsstudier.",
+    "Studenter som vill avsluta sina studier med magisterexamen väljer en läskurs i statskunskap eller utvecklingsstudier den första halvan av termin två, och skriver uppsats under andra delen av terminen (15 hp eller 30 hp).",
+    "Studenter som läser den tvååriga masterutbildningen har under den andra och fjärde terminen stor frihet till egna val både inom och utanför institutionens kursutbud. Studenter har en möjlighet till praktik under termin fyra (alternativt termin tre). Bland kurserna kan nämnas en färdighetskurs som ägnas åt träning i att skriva en forskningsöversikt. Den tredje terminen ägnas helt åt examensarbetet (alternativt under fjärde terminen)."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.516772+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=777",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Politices masterprogram, 120 hp (SPO2M)",
+  "programmeTitleEn": "Master's Programme in Political Science, 120 credits (SPO2M)",
+  "programmeUri": "/utbildning/program/politices-masterprogram",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

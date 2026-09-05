@@ -1,0 +1,21 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:48:02.613833+00:00",
+  "edges": [],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Ett självständigt arbete genomförs inom ramen för studierna inom den utbildningsvetenskapliga kärnan.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "The independent degree project is carried out within the educational science core studies.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

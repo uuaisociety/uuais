@@ -1,0 +1,64 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:28:41.943948+00:00",
+  "edges": [
+    {
+      "code": "3MG322",
+      "text": "180 credits from a programme in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, cell/molecular biology, genetics, life science, medical sciences or a similar field of study. Also required are courses in biochemistry, cell biology, chemistry, genetics, and molecular biology/genetics totalling at least 30 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MG325",
+      "text": "180 credits in biology, bio-/medicine, biotechnology, pharmaceutical biosciences, medical science or equivalent education giving relevant knowledge in cell biology, genetics biochemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MG326",
+      "text": "180 credits in biology, bio-/medicine, biotechnology, pharmaceutical biosciences, medical science or equivalent education giving relevant knowledge in cell biology, genetics biochemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MG328",
+      "text": "180 credits in biology, bio-/medicine, biotechnology, pharmaceutical biosciences, medical science or equivalent education giving relevant knowledge in cell biology, genetics biochemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Bioimaging och cellanalys, 7.5 hp, Avancerad nivåRegenerativ medicin, 7.5 hp, Avancerad nivåValbar period, 15 hpPeriod med valbara kurser motsvarande 15.0 hpellerStart av ett 45.0 hp MasterprojektMasterprojekt i molekylär medicin, 45.0 hp, Avancerad nivåMasterprojekt i molekylär medicin inklusive försöksdjursvetenskap, 45.0 hp, Avancerad nivå",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Semester with elective courses (15 hp) or the start of a 45 hp master project in molecular medicine.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Fortsättning på 45,0 hp masterprojektellerMasterprojekt i molekylär medicin, 30,0 hp, Avancerad nivå",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Continuation of a 45.0 hp master project or a Master project in Molecular Medicine, 30.0 hp, advanced level.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

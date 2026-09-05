@@ -1,0 +1,33 @@
+{
+  "id": "2641",
+  "code": "SEK1K",
+  "revisionId": "2641",
+  "nameSv": "Ekonomie kandidatprogram",
+  "totalCredits": 180.0,
+  "semesters": 0,
+  "registrationNumber": "SAMFAK 2025/15 Doss: 3.2.1",
+  "finalisedDate": "20 februari 2025",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet inleds med en termin i företagsekonomi, som ger en första inblick i ämnets olika kunskapsområden organisation, ledning och marknadsföring samt redovisning, ekonomistyrning och finansiering. Andra terminen ägnas åt nationalekonomi som ger grundläggande kunskaper i mikro- och makroekonomisk teori. Under den tredje terminen studeras 15 högskolepoäng (hp) statistik med ekonomisk inriktning samt 15 hp valfritt ämne. De inledande tre terminerna syftar således till att ge en bred kunskapsgrund inom ekonomiområdet och hjälper studenten att placera ekonomistudierna i ett samhälleligt och globalt sammanhang. De avslutande tre terminerna ägnas åt en successiv fördjupning i valt huvudområde och så kallade breddande studier. Under den sista terminen skriver studenten sitt examensarbete.",
+    "Bland huvudområden kan väljas mellan ekonomisk historia, företagsekonomi, nationalekonomi och statistik. Obligatoriska studier inom programmet är Företagsekonomi A (30 hp), Nationalekonomi A (30 hp) och Statistik för ekonomer (15 hp).",
+    "Studieordningen varierar beroende på valt huvudområde. Med företagsekonomi eller nationalekonomi som huvudområde är det möjligt att läsa valfria kurser under halva termin tre (15 hp) och hela termin fem (30 hp). Med något av de andra ämnena som valt huvudområde har man utrymme för 15-30 hp valfria kurser, vilka läses antingen termin 2 eller termin 5, beroende på valt huvudområde. Under termin 5 är det möjligt att läsa en valfri breddning antingen i Uppsala eller vid något av de utländska universitet som Uppsala universitet samarbetar med."
+  ],
+  "syllabusEntryRequirements": "Grundläggande behörighet och Matematik 3b eller 3c/Matematik C, Samhällskunskap 1b eller 1a1+1a2, Engelska 6",
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.494476+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2641",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Ekonomie kandidatprogram, 180 hp (SEK1K)",
+  "programmeTitleEn": "Bachelor's Programme in Business and Economics, 180 credits (SEK1K)",
+  "programmeUri": "/utbildning/program/ekonomie-kandidatprogram",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

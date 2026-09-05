@@ -1,0 +1,31 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:46:02.786975+00:00",
+  "edges": [
+    {
+      "code": "4PE089",
+      "text": "Within the Preschool Teacher Education Programme: Swedish as a Second Language and Multilingualism in Preschool; Curriculum Theory and Didactical Perspectives on Education for Preschool Teachers; Follow-up and Analysis of Learning and Development, Preschool Teachers; Epistemology and Research Methodology.",
+      "result": {
+        "edges": [
+          {
+            "from": "4PE241",
+            "type": "HARD"
+          },
+          {
+            "from": "4PE135",
+            "type": "HARD"
+          },
+          {
+            "from": "4PE252",
+            "type": "HARD"
+          },
+          {
+            "from": "4PE142",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": []
+}

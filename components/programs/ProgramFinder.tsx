@@ -24,30 +24,42 @@ type Row = ProgramIndexEntry & { slug: string };
 
 export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
   const [query, setQuery] = useState("");
+  const [faculty, setFaculty] = useState("");
+
+  const faculties = useMemo(
+    () => [...new Set(programmes.map((p) => p.faculty))].sort((a, b) => a.localeCompare(b, "sv")),
+    [programmes]
+  );
+
+  /** The search runs within the chosen faculty, so the count beneath it means what it says. */
+  const scoped = useMemo(
+    () => (faculty ? programmes.filter((p) => p.faculty === faculty) : programmes),
+    [programmes, faculty]
+  );
 
   // Folded once per list rather than per keystroke: the search runs over the Swedish
   // title, UU's English one and the code, so a reader may type either language.
   const haystacks = useMemo(
     () =>
-      programmes.map((p) =>
+      scoped.map((p) =>
         foldForSearch(
           `${p.programmeTitle} ${p.programmeTitleEn ?? ""} ${p.nameSv} ${p.code}`
         )
       ),
-    [programmes]
+    [scoped]
   );
 
   const matches = useMemo(() => {
     const needle = foldForSearch(query);
-    if (!needle) return programmes;
-    const exact = programmes.filter((_, index) => haystacks[index].includes(needle));
+    if (!needle) return scoped;
+    const exact = scoped.filter((_, index) => haystacks[index].includes(needle));
     // A typo otherwise empties the page, so a one-edit pass runs only when nothing matched
     // outright; short needles are left alone, where one edit is most of the word.
     if (exact.length > 0 || needle.length < 4) return exact;
-    return programmes.filter((_, index) =>
+    return scoped.filter((_, index) =>
       includesWithinOneEdit(haystacks[index], needle)
     );
-  }, [programmes, haystacks, query]);
+  }, [scoped, haystacks, query]);
 
   const grouped = useMemo(() => {
     const groups = GROUPS.map((group) => ({
@@ -76,11 +88,27 @@ export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
         />
       </label>
 
+      <label className="mt-3 block max-w-md">
+        <span className="sr-only">Filter by faculty</span>
+        <select
+          value={faculty}
+          onChange={(event) => setFaculty(event.target.value)}
+          className="w-full rounded-md border border-border bg-card px-3 py-2 text-[0.9375rem] text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+        >
+          <option value="">Every faculty</option>
+          {faculties.map((name) => (
+            <option key={name} value={name}>
+              {name}
+            </option>
+          ))}
+        </select>
+      </label>
+
       <p
         aria-live="polite"
         className="mt-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-muted-foreground"
       >
-        {matches.length} of {programmes.length} programmes
+        {matches.length} of {scoped.length} programmes
       </p>
 
       {matches.length === 0 ? (
@@ -141,7 +169,7 @@ export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
                           <span className="mx-1.5 opacity-40">•</span>
                           {program.totalCredits} hp
                           <span className="mx-1.5 opacity-40">•</span>
-                          {program.courses} courses
+                          {program.courses > 0 ? `${program.courses} courses` : "no course list"}
                           {program.tracks > 0 ? (
                             <>
                               <span className="mx-1.5 opacity-40">•</span>

@@ -1,0 +1,218 @@
+{
+  "id": "2705",
+  "code": "RTE1K",
+  "revisionId": "2705",
+  "nameSv": "Teologprogrammet",
+  "totalCredits": 180.0,
+  "semesters": 0,
+  "registrationNumber": null,
+  "finalisedDate": "27 maj 2025",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Inriktning Kristendom i historia och nutid",
+    "Den första terminen ger en grundläggande introduktion till teologi och religionsvetenskap som bas att stå på inför kommande terminer.",
+    "Termin 2-5 studeras religion utifrån bibelvetenskapliga, religionsfilosofiska, etiska, kyrkohistoriska, systematiskt teologiska och praktiskt teologiska perspektiv.",
+    "Den sista terminen ägnas åt teori, metod och fördjupning samt författande av kandidatuppsats.",
+    "Några av kurserna under termin 3 och 4 är periodiserade och ges endast en gång om året, på höstterminen eller på vårterminen. Beroende på om studenten börjar programmet under höst- eller vårtermin och beroende på vilket kursval som studenten gör, läses kurserna därför antingen under studentens tredje eller fjärde termin.",
+    "Termin 1",
+    "Introduktionskurs i religionsvetenskap, 30 hp",
+    "Termin 2",
+    "Bibelvetenskap I, 15 hp",
+    "Filosofi, livsåskådning och teologi, 7,5 hp",
+    "Etik, livsåskådning och religion, 7,5 hp",
+    "Termin 3 och 4",
+    "Bibelvetenskap II Nya testamentet med studier i grekiska (ht), 30 hp eller",
+    "Bibelvetenskap II Hebreiska bibeln med studier i hebreiska (vt), 30 hp eller",
+    "Kyrkohistoria, 15 hp (ht/vt) och",
+    "Modern kristen teologi, 15 hp (ht/vt) eller",
+    "Kurser inom inriktningen Kristendom i historia och nutid, 30 hp (ht/vt)",
+    "Termin 5",
+    "Bibelvetenskap III, 15 hp eller",
+    "Bibelvetenskap III ickespråklig, 15 hp",
+    "Praktisk teologi, 15 hp",
+    "Termin 6",
+    "Fördjupningskurs i religionsvetenskap, 30 hp",
+    "Inriktning Islam i historia och nutid",
+    "Den första terminen ger en grundläggande introduktion till teologi och religionsvetenskap som bas att stå på inför kommande terminer.",
+    "Termin 2-4 studeras religion utifrån religionshistoriska, religionsfilosofiska och etiska perspektiv.",
+    "Termin 3 och 4 läser studenten kurs i islamisk teologi och filosofi samt kursen Koranen med studier i arabiska. Kurserna läses parallellt på halvfart över båda terminerna.",
+    "Under termin 5 finns möjlighet att läsa relevanta kurser i religionsvetenskap och islamisk teologi och filosofi, ytterligare språk, göra arbetsplatsförlagd praktik eller studera utomlands.",
+    "Den sista terminen ägnas åt teori, metod och fördjupning samt författande av kandidatuppsats.",
+    "Termin 1",
+    "Introduktionskurs i religionsvetenskap, 30 hp",
+    "Termin 2",
+    "Religioner i världen I, 15 hp",
+    "Filosofi, livsåskådning och teologi, 7,5 hp",
+    "Etik, livsåskådning och religion, 7,5 hp",
+    "Termin 3",
+    "Islamisk teologi och filosofi, 30 hp, halvfart",
+    "Koranen med studier i arabiska 30 hp, halvfart",
+    "Termin 4",
+    "Islamisk teologi och filosofi, 30 hp, halvfart",
+    "Koranen med studier i arabiska 30 hp, halvfart",
+    "Termin 5",
+    "Filosofiska perspektiv på religion, pluralism och politik, 7,5 hp, Religion i mediesamhället, 7,5 hp, Religion i fred och konflikt, 7,5 hp samt Historiska perspektiv på religioner och samhällen, 7,5 hp eller",
+    "​Två fristående kurser i islamisk teologi och filosofi om 7,5 hp vardera, Religion i fred och konflikt 7,5 hp samt Religion, individ och samhälle 7,5 hp eller",
+    "Arabiska A, 30 hp eller",
+    "Persiska A, 30 hp eller",
+    "Turkiska språk 1, 30 hp eller",
+    "Praktik, 30 hp eller",
+    "Praktik, 15 hp samt två fristående kurser i islamisk teologi och filosofi om 7,5 hp vardera eller Religion i fred och konflikt 7,5 hp samt Religion, individ och samhälle 7,5 hp eller",
+    "Utbytesstudier, 30 hp",
+    "Termin 6",
+    "Fördjupningskurs i religionsvetenskap, 30 hp"
+  ],
+  "syllabusEntryRequirements": "Grundläggande behörighet",
+  "syllabusCourses": [
+    {
+      "title": "Introduktionskurs i religionsvetenskap",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Bibelvetenskap I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Filosofi, livsåskådning och teologi",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Etik, livsåskådning och religion",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Bibelvetenskap II Nya testamentet med studier i grekiska ,  eller",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Bibelvetenskap II Hebreiska bibeln med studier i hebreiska ,  eller",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Kyrkohistoria,   och",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Modern kristen teologi,   eller",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Kurser inom inriktningen Kristendom i historia och nutid",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Bibelvetenskap III,  eller",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Bibelvetenskap III ickespråklig",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Praktisk teologi",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningskurs i religionsvetenskap",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Introduktionskurs i religionsvetenskap",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Religioner i världen I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Filosofi, livsåskådning och teologi",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Etik, livsåskådning och religion",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Islamisk teologi och filosofi, , halvfart",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Koranen med studier i arabiska , halvfart",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Islamisk teologi och filosofi, , halvfart",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Koranen med studier i arabiska , halvfart",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Arabiska A,  eller",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Persiska A,  eller",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Turkiska språk 1,  eller",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Praktik,  eller",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Utbytesstudier",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningskurs i religionsvetenskap",
+      "credits": 30.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.586991+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2705",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Teologprogrammet – Islam i historia och nutid, 180 hp (RTE1K)",
+  "programmeTitleEn": "Bachelor's Programme in Theology – Islam: Past and Present, 180 credits (RTE1K)",
+  "programmeUri": "/utbildning/program/teologprogrammet-islam-i-historia-och-nutid",
+  "faculty": "Teologiska fakulteten",
+  "reviewed": false
+}

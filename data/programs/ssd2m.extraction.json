@@ -1,0 +1,183 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:40:28.083094+00:00",
+  "edges": [
+    {
+      "code": "2ST072",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST075",
+      "text": "120 credits including 90 credits in statistics.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST080",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST105",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST111",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST114",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST120",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST123",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST124",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST125",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science. 7.5 credits linear algebra.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST128",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST129",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science. 7.5 credits programming in R, Python or Julia.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST138",
+      "text": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Period 1-2",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Timing note: the course runs during periods 1 and 2.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Period 3-4",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "The courses are scheduled for study periods 3 and 4.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Period 1-2",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "The relevant course(s) run during periods 1 and 2.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Period 3-4",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This refers to study periods 3-4.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Välj två av följande tre kurser för period 1-2:",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Choose two of the following three courses during periods 1-2.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Period 3-4:",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A heading indicating courses scheduled in periods 3-4.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

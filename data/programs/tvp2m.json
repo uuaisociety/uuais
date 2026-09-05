@@ -372,6 +372,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1GV149",
@@ -440,12 +441,13 @@
       "name": "Giltig från och med höstterminen 2018"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.957150+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.438546+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10051",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i vindkraftsprojektering, 120 hp (TVP2M)",
   "programmeTitleEn": "Master's Programme in Wind Power Project Management, 120 credits (TVP2M)",
   "programmeUri": "/utbildning/program/masterprogram-vindkraftsprojektering",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

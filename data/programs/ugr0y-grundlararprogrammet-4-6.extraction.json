@@ -1,0 +1,85 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:46:46.763408+00:00",
+  "edges": [
+    {
+      "code": "1BG049",
+      "text": "7.5 credits Leadership in Primary School, and 7.5 credits School Placement in Primary School.",
+      "result": {
+        "edges": [
+          {
+            "from": "4PE197",
+            "type": "HARD"
+          },
+          {
+            "from": "4PE199",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5EN209",
+      "text": "15 credits, including Swedish 1, from the Primary School Teacher Education Programme, Grades 4-6 of the Compulsory School.",
+      "result": {
+        "edges": [
+          {
+            "from": "4PE013",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "15 hp av kursen Engelska 30 hp läses termin 2",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "5EN209"
+        ],
+        "labelEn": "15 of the 30 credits of the English course are taken in semester 2.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Fortsättning på kursen Engelska 30 hp (15 hp läses termin 3)",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "5EN209"
+        ],
+        "labelEn": "The English course continues with 15 credits studied in semester 3 as part of its 30 credits.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Termin 7 består av studier i ett fördjupningsområde inom samhällsorienterade ämnen eller naturorienterande ämnen och teknik. Valbarheten varierar mellan höst- och vårtermin, där minst ett av alternativen ges varje termin för studenter i Uppsala. Endast ett av alternativen erbjuds för studenter på Campus Gotland. Ytterligare fördjupningsområde kan komma att erbjudas för studenter i Uppsala. Fördjupningsområde om 30 hp är obligatoriskt.",
+        "semester": 7,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1BG049",
+          "2KU119"
+        ],
+        "labelEn": "A mandatory 30-credit specialization must be taken in either social studies or science and technology, subject to availability.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

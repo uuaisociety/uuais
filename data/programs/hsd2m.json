@@ -1,0 +1,195 @@
+{
+  "id": "0c2fad61-9f04-4da8-bcdb-9cf643127591",
+  "code": "HSD2M",
+  "revisionId": "0c2fad61-9f04-4da8-bcdb-9cf643127591",
+  "nameSv": "Masterprogram i speldesign",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "SPEL 2026/7",
+  "finalisedDate": "18 februari 2026",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "5SD300",
+      "titleEn": "Introduction to Games Research",
+      "titleSv": "Introduktion till spelforskning",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Game Design",
+      "mainFieldSv": "Speldesign",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5SD311",
+      "titleEn": "Game Design Studio",
+      "titleSv": "Speldesignstudio",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Game Design",
+      "mainFieldSv": "Speldesign",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5SD303",
+      "titleEn": "Games and Society",
+      "titleSv": "Spel och samhälle",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Game Design",
+      "mainFieldSv": "Speldesign",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5SD312",
+      "titleEn": "Critical Making",
+      "titleSv": "Kritiskt skapande",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Game Design",
+      "mainFieldSv": "Speldesign",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5SD314",
+      "titleEn": "Advanced Game Design Research Methods",
+      "titleSv": "Avancerade metoder för speldesignforskning",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Game Design",
+      "mainFieldSv": "Speldesign",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5SD305",
+      "titleEn": "Game Research Prototypes and Game Testing",
+      "titleSv": "Spelforskningsprototyper och speltestning",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Game Design",
+      "mainFieldSv": "Speldesign",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5SD306",
+      "titleEn": "Master's Degree Project in Game Design",
+      "titleSv": "Examensarbete för masterexamen i speldesign",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Game Design",
+      "mainFieldSv": "Speldesign",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Denna termin väljer du kurser på totalt 30hp. Du kan även ansöka om utlandsstudier eller praktik. Institutionen erbjuder varje hösttermin ett varierande utbud av valbara kurser.",
+      "labelEn": "This term you choose elective courses totalling 30 credits, and may also apply for studies abroad or an internship.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Denna termin väljer du kurser på totalt 30hp. Du kan även ansöka om utlandsstudier eller praktik. Institutionen erbjuder varje hösttermin ett varierande utbud av valbara kurser.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "ladok",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "0c2fad61-9f04-4da8-bcdb-9cf643127591",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3266",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3123",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2625",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2298",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2064",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1961",
+      "name": "Giltig från och med höstterminen 2019"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.473593+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=0c2fad61-9f04-4da8-bcdb-9cf643127591",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "programmeTitle": "Masterprogram i speldesign, 120 hp (HSD2M)",
+  "programmeTitleEn": "Master's Programme in Game Design, 120 credits (HSD2M)",
+  "programmeUri": "/utbildning/program/masterprogram-speldesign",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

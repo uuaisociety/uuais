@@ -39,6 +39,14 @@
     "entryRequirements": null,
     "onlyProgramme": null
   },
+  "1BG028": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "1BG049": {
+    "entryRequirements": "7.5 credits Leadership in Primary School, and 7.5 credits School Placement in Primary School.",
+    "onlyProgramme": null
+  },
   "1BG100": {
     "entryRequirements": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D or participation in Bioscience 30 credits of which 20 credits must have been completed.",
     "onlyProgramme": true
@@ -1479,6 +1487,14 @@
     "entryRequirements": "Earth Science - Planet Earth, 30 credits, or the equivalent.",
     "onlyProgramme": null
   },
+  "1GE301": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "1GE302": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "1GV004": {
     "entryRequirements": "General entry requirements",
     "onlyProgramme": null
@@ -2404,6 +2420,10 @@
     "onlyProgramme": null
   },
   "1MA090": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "1MA098": {
     "entryRequirements": null,
     "onlyProgramme": null
   },
@@ -4343,6 +4363,18 @@
     "entryRequirements": null,
     "onlyProgramme": null
   },
+  "2EH310": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2EH326": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2EH421": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university",
+    "onlyProgramme": null
+  },
   "2EH501": {
     "entryRequirements": null,
     "onlyProgramme": null
@@ -4353,6 +4385,54 @@
   },
   "2EH503": {
     "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2EU007": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2EU008": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2EU011": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2EU012": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2EU013": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2EU014": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2EU015": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2EU016": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2EU017": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2EU018": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including at least 90 credits in the social sciences or humanities. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "2EU020": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including at least 90 credits in the social sciences or humanities. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "2EU021": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including at least 90 credits in the social sciences or humanities. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2FE021": {
@@ -4375,6 +4455,482 @@
     "entryRequirements": "120 credits within the Master's Programme in Sociotechnical Systems Engineering. Independent Project within Sociotechnical Systems Engineering.",
     "onlyProgramme": true
   },
+  "2FE038": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2FE159": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2FE160": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2FE161": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2FE880": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2FE944": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2FE945": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2FE946": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2FE947": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2FE968": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2FE970": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2FE971": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2FE972": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2FE981": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2FE991": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2FE995": {
+    "entryRequirements": "Completed 15 credits from basic courses (A-level) in business studies, and registered for another 15 credits at the same level.",
+    "onlyProgramme": null
+  },
+  "2FE996": {
+    "entryRequirements": "Completed 15 credits from basic courses (A-level) in business studies, and registered for another 15 credits at the same level.",
+    "onlyProgramme": null
+  },
+  "2FE997": {
+    "entryRequirements": "Completed 15 credits from basic courses (A-level) in business studies, and registered for another 15 credits at the same level.",
+    "onlyProgramme": null
+  },
+  "2FE998": {
+    "entryRequirements": "Completed 15 credits from basic courses (A-level) in business studies, and registered for another 15 credits at the same level.",
+    "onlyProgramme": null
+  },
+  "2HK025": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK082": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK084": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK094": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2HK095": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK096": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK097": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK098": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK099": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK100": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK137": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK138": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK143": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK144": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HK145": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HR111": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": true
+  },
+  "2HR112": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": true
+  },
+  "2HR118": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2HR121": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS006": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "2IS007": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "2IS012": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS013": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS014": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS017": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS018": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 45 credits from semesters 1 and 2 of the Master's Programme in Management, Communication and IT. Proficiency in Swedish and English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+    "onlyProgramme": true
+  },
+  "2IS024": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "2IS037": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS048": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "2IS052": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS053": {
+    "entryRequirements": "60 credits in information systems or the equivalent including 7.5 credits in databases and 7.5 credits in object-oriented programming.",
+    "onlyProgramme": null
+  },
+  "2IS059": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS060": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS061": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS062": {
+    "entryRequirements": "52.5 credits in information systems or the equivalent, including 7.5 credits object-oriented programming.",
+    "onlyProgramme": null
+  },
+  "2IS064": {
+    "entryRequirements": "60 credits in information systems or the equivalent",
+    "onlyProgramme": null
+  },
+  "2IS065": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS066": {
+    "entryRequirements": "60 credits in information systems",
+    "onlyProgramme": null
+  },
+  "2IS068": {
+    "entryRequirements": "60 credits in information systems or the equivalent",
+    "onlyProgramme": null
+  },
+  "2IS071": {
+    "entryRequirements": "90 credits in information systems or the equivalent",
+    "onlyProgramme": null
+  },
+  "2IS072": {
+    "entryRequirements": "90 credits in information systems or the equivalent",
+    "onlyProgramme": true
+  },
+  "2IS075": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": true
+  },
+  "2IS076": {
+    "entryRequirements": "90 credits in information systems or the equivalent",
+    "onlyProgramme": true
+  },
+  "2IS078": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS079": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS080": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS081": {
+    "entryRequirements": "60 credits information systems or equivalent including 7.5 credits in databases",
+    "onlyProgramme": null
+  },
+  "2IS082": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS085": {
+    "entryRequirements": "90 credits in information systems or the equivalent.",
+    "onlyProgramme": null
+  },
+  "2IS086": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS087": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS088": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+    "onlyProgramme": true
+  },
+  "2IS089": {
+    "entryRequirements": "90 credits in information systems or equivalent",
+    "onlyProgramme": true
+  },
+  "2IS090": {
+    "entryRequirements": "A Bachelor's degree (180 credits). Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+    "onlyProgramme": true
+  },
+  "2IS206": {
+    "entryRequirements": "Programming, 7.5 credits",
+    "onlyProgramme": null
+  },
+  "2IS213": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IS219": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "2IS220": {
+    "entryRequirements": "Programming, 7.5 credits",
+    "onlyProgramme": null
+  },
+  "2IS221": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "2IS222": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "2IS223": {
+    "entryRequirements": "7.5 credits in information systems or the equivalent",
+    "onlyProgramme": null
+  },
+  "2IS224": {
+    "entryRequirements": "30 credits in information systems including 7.5 credits in programming.",
+    "onlyProgramme": null
+  },
+  "2IS225": {
+    "entryRequirements": "30 credits in software engineering, of which 7.5 credits are programming.",
+    "onlyProgramme": null
+  },
+  "2IS226": {
+    "entryRequirements": "30 credits in software engineering, of which 15 credits are programming.",
+    "onlyProgramme": null
+  },
+  "2IS227": {
+    "entryRequirements": "30 credits in information systems or the equivalent including 7.5 credits in databases",
+    "onlyProgramme": null
+  },
+  "2IS229": {
+    "entryRequirements": "30 credits in information systems, of which 7.5 credits are programming.",
+    "onlyProgramme": null
+  },
+  "2IS231": {
+    "entryRequirements": "30 credits in information systems including 7.5 credits in programming.",
+    "onlyProgramme": null
+  },
+  "2IS232": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "2IS233": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "2IS238": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "2IS239": {
+    "entryRequirements": "60 credits in information systems including 15 credits in databases",
+    "onlyProgramme": null
+  },
+  "2IS240": {
+    "entryRequirements": "45 credits in information systems or the equivalent",
+    "onlyProgramme": null
+  },
+  "2IS241": {
+    "entryRequirements": "30 credits in information systems or the equivalent",
+    "onlyProgramme": null
+  },
+  "2IS246": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IV061": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IV095": {
+    "entryRequirements": "15 credits in media and communication studies",
+    "onlyProgramme": null
+  },
+  "2IV115": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IV116": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IV125": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IV126": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IV143": {
+    "entryRequirements": "15 credits in media and communication studies",
+    "onlyProgramme": null
+  },
+  "2IV146": {
+    "entryRequirements": "Media and Communication Studies A and B or the equivalent",
+    "onlyProgramme": null
+  },
+  "2IV152": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IV157": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IV158": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IV159": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2IV160": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2IV161": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2IV162": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2IV165": {
+    "entryRequirements": "15 credits in media and communication studies",
+    "onlyProgramme": null
+  },
+  "2IV166": {
+    "entryRequirements": "15 credits in media and communication studies",
+    "onlyProgramme": null
+  },
+  "2IV167": {
+    "entryRequirements": "15 credits in media and communication studies",
+    "onlyProgramme": null
+  },
+  "2IV169": {
+    "entryRequirements": "60 credits in media and communication studies including 7.5 credits in communication studies",
+    "onlyProgramme": null
+  },
+  "2IV170": {
+    "entryRequirements": "60 credits in media and communication studies including 7.5 credits in journalism studies",
+    "onlyProgramme": true
+  },
+  "2IV171": {
+    "entryRequirements": "60 credits in media and communication studies",
+    "onlyProgramme": null
+  },
+  "2IV176": {
+    "entryRequirements": "A Bachelor's degree and 7.5 credits in human-computer interaction. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+    "onlyProgramme": true
+  },
+  "2IV177": {
+    "entryRequirements": "15 credits in media and communication studies",
+    "onlyProgramme": null
+  },
+  "2IV180": {
+    "entryRequirements": "60 credits in media and communication studies including 7.5 credits in digital media studies.",
+    "onlyProgramme": true
+  },
+  "2IV181": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2IV182": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "2JF068": {
     "entryRequirements": "General entry requirements",
     "onlyProgramme": null
@@ -4383,7 +4939,23 @@
     "entryRequirements": null,
     "onlyProgramme": null
   },
+  "2JS570": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2JS903": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": true
+  },
+  "2JS904": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "2JS905": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2JS907": {
     "entryRequirements": null,
     "onlyProgramme": null
   },
@@ -4403,12 +4975,76 @@
     "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
+  "2KU074": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "2KU091": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2KU103": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2KU111": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2KU114": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2KU119": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2LJ004": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2LJ005": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2LJ007": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2LJ010": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2LJ101": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2LJ106": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2LJ108": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2NE466": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2NE467": {
     "entryRequirements": null,
     "onlyProgramme": null
   },
   "2NE470": {
     "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2NE474": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "2NE475": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
     "onlyProgramme": null
   },
   "2NE811": {
@@ -4423,6 +5059,678 @@
     "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 60 credits in economics and 15 credits in statistics (or a closely related subject).",
     "onlyProgramme": true
   },
+  "2PE172": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PE174": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PE381": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PE382": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP401": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP402": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP403": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP404": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP405": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP406": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP407": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP408": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP409": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP410": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP411": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP412": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP413": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP414": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP415": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP416": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP417": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP418": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP419": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP420": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP421": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP422": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP423": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP424": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP425": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP426": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP427": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP428": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP429": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP430": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP431": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP432": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP433": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP434": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP521": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP522": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP523": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP524": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP525": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP526": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP527": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP528": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP529": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP530": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP533": {
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": true
+  },
+  "2PP536": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP537": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP540": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP541": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP542": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP543": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PP544": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS098": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS099": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS101": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS103": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS104": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS105": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS106": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS107": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS109": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS111": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS112": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": true
+  },
+  "2PS113": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required are 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": true
+  },
+  "2PS114": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS115": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS116": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": true
+  },
+  "2PS117": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS118": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required are 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": true
+  },
+  "2PS162": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS171": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS305": {
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": true
+  },
+  "2PS608": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS609": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS612": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2PS904": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SA001": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SA121": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SA193": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SA211": {
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": true
+  },
+  "2SA221": {
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": true
+  },
+  "2SC018": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC078": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC107": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "2SC108": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC111": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC117": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC125": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC141": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC143": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC144": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC145": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC146": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": true
+  },
+  "2SC162": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC163": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC164": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC181": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC183": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC184": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC188": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC189": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC193": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2SC211": {
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": true
+  },
+  "2SC212": {
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": true
+  },
+  "2SK009": {
+    "entryRequirements": "General entry requirements and Social Studies level 1b or level 1a2, or Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": null
+  },
+  "2ST072": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+    "onlyProgramme": null
+  },
+  "2ST075": {
+    "entryRequirements": "120 credits including 90 credits in statistics.",
+    "onlyProgramme": null
+  },
+  "2ST080": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+    "onlyProgramme": null
+  },
+  "2ST105": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science",
+    "onlyProgramme": null
+  },
+  "2ST111": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+    "onlyProgramme": null
+  },
+  "2ST114": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+    "onlyProgramme": null
+  },
+  "2ST116": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2ST120": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science",
+    "onlyProgramme": null
+  },
+  "2ST123": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+    "onlyProgramme": null
+  },
+  "2ST124": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+    "onlyProgramme": null
+  },
+  "2ST125": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science. 7.5 credits linear algebra.",
+    "onlyProgramme": null
+  },
+  "2ST128": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+    "onlyProgramme": null
+  },
+  "2ST129": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science. 7.5 credits programming in R, Python or Julia.",
+    "onlyProgramme": null
+  },
+  "2ST133": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2ST134": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "2ST135": {
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C",
+    "onlyProgramme": true
+  },
+  "2ST138": {
+    "entryRequirements": "120 credits including 90 credits in statistics, or 120 credits including 60 credits in statistics and 30 credits in mathematics and/or computer science.",
+    "onlyProgramme": null
+  },
+  "3AM030": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AM041": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AM042": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AM043": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AM044": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP001": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP002": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP003": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP004": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP005": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP006": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP007": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP008": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP101": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP102": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP103": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP104": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3AP105": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3BL106": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR041": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR044": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR115": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR221": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR222": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR234": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR245": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR315": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR340": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR401": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education.",
+    "onlyProgramme": null
+  },
+  "3DR402": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits.",
+    "onlyProgramme": null
+  },
+  "3DR403": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits.",
+    "onlyProgramme": null
+  },
+  "3DR405": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits, Nuclide Production and Radiochemistry, 9 credits, and Detection Techniques and Dosimetry, 12 credits.",
+    "onlyProgramme": null
+  },
+  "3DR406": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR407": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR408": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR409": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. All applicants need to verify English language proficiency equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3DR415": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR511": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR512": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR580": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3DR618": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FB014": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "3FB028": {
     "entryRequirements": "150 credits, including 90 credits in biomedicine, pharmaceutical science, chemistry, natural science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
@@ -4431,7 +5739,43 @@
     "entryRequirements": "150 credits of which 120 credits biomedicine, biology, pharmaceutical sciences, chemistry and/or science/technology. Earlier studies should contain 7.5 credits pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
+  "3FB031": {
+    "entryRequirements": "150 credits, including 90 credits in biomedicine, pharmaceutical science, chemistry, natural science and/or engineering, and Biological Drugs, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
   "3FB034": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FB037": {
+    "entryRequirements": "150 credits which of 120 credits in biomedicine, biology, pharmaceutical science, chemistry and/or science/engineering. Prior studies should contain 5 credits in pharmacokinetics and 7.5 credits in pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3FB059": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FB101": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FB102": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FB103": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FB104": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FB107": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FB112": {
     "entryRequirements": null,
     "onlyProgramme": null
   },
@@ -4439,8 +5783,48 @@
     "entryRequirements": "150 credits in biomedicine, pharmaceutical science, drug development, natural science and/or technology. Previous studies must contain 5 credits of statistics or probability theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
+  "3FB221": {
+    "entryRequirements": "120 credits in biomedicine, pharmaceutical science, natural science and/or technology.",
+    "onlyProgramme": null
+  },
   "3FB225": {
     "entryRequirements": "150 credits, including 120 credits in biomedicine, biology, pharmaceutical sciences, chemistry and/or natural sciences/technology. Previous studies should include 5 credits of pharmacokinetics and 7.5 credits of pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3FB406": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FB431": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FB606": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FB607": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FC002": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FC003": {
+    "entryRequirements": "150 credits in biomedicine, pharmaceutical science, drug discovery and development, natural science, and/or technology. Prior studies should include 15 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3FC065": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FF023": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FF024": {
+    "entryRequirements": null,
     "onlyProgramme": null
   },
   "3FF031": {
@@ -4449,6 +5833,22 @@
   },
   "3FF036": {
     "entryRequirements": "150 credits including knowledge corresponding to at least 60 credits in the subjects chemistry, biology, biochemistry, pharmaceutical science or medicine. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3FF041": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FF042": {
+    "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical science, chemistry, drug discovery, science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3FF101": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FF103": {
+    "entryRequirements": null,
     "onlyProgramme": null
   },
   "3FF206": {
@@ -4475,6 +5875,10 @@
     "entryRequirements": null,
     "onlyProgramme": null
   },
+  "3FF224": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "3FF275": {
     "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical science, chemistry, pharmaceutical development, natural science and/or engineering.",
     "onlyProgramme": null
@@ -4483,7 +5887,23 @@
     "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical science, chemistry, drug discovery, natural science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
+  "3FF312": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FF475": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "3FF502": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FG002": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FG003": {
     "entryRequirements": null,
     "onlyProgramme": null
   },
@@ -4507,7 +5927,43 @@
     "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical sciences and/or natural sciences/engineering. Previous studies must include 3 credits of pharmaceutics and pharmacokinetics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
+  "3FG289": {
+    "entryRequirements": "150 credits, including 120 credits from courses in biomedicine, pharmaceutical sciences and/or natural sciences/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3FG601": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FG607": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FG770": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FI000": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FK034": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FK036": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FK111": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "3FK150": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FK206": {
     "entryRequirements": null,
     "onlyProgramme": null
   },
@@ -4519,6 +5975,14 @@
     "entryRequirements": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": true
   },
+  "3FK222": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FK224": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "3FK229": {
     "entryRequirements": "150 credits of which 90 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in chemistry and 7.5 credits in pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
@@ -4527,11 +5991,391 @@
     "entryRequirements": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Participation in the course Computational Medicinal Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": true
   },
+  "3FK285": {
+    "entryRequirements": "150 credits of which 120 credits are in biomedicine, pharmaceutical science, and/or natural science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3FK400": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FK407": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FM009": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FM017": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FM100": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "3FN209": {
     "entryRequirements": "150 credits, including 60 credits in chemistry or biology and advanced courses (at level G2F/C or above) in pharmaceutical sciences worth at least 22.5 credits or Pharmacognosy B (15 credits). Alternatively, from the Master of Science Programme in Pharmacy: 150 credits in the programme including a course in pharmacognosy; or from the Master's Programme in Chemical Engineering: 150 credits in the programme including courses in analytical chemistry (10 credits), pharmacology (7.5 credits) and medicinal chemistry (7.5 credits); or admission to the Master's Programme in Drug Discovery and Development. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
+  "3FN400": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FN401": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FN404": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FS001": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FS002": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FS007": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FS008": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FS009": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FS010": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FS075": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV172": {
+    "entryRequirements": "180 credits",
+    "onlyProgramme": null
+  },
+  "3FV186": {
+    "entryRequirements": "180 credits",
+    "onlyProgramme": null
+  },
+  "3FV318": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV319": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV323": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV327": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV329": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV340": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV351": {
+    "entryRequirements": "A Bachelor of Science in Nursing, a Bachelor of Science in Occupational Therapy, a Bachelor of Science in Physiotherapy or a Master of Science in Medicine.",
+    "onlyProgramme": null
+  },
+  "3FV352": {
+    "entryRequirements": "A Bachelor of Science in Nursing, a Bachelor of Science in Occupational Therapy, a Bachelor of Science in Physiotherapy or a Master of Science in Medicine.",
+    "onlyProgramme": null
+  },
+  "3FV353": {
+    "entryRequirements": "A Bachelor of Science in Nursing",
+    "onlyProgramme": null
+  },
+  "3FV361": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV366": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV371": {
+    "entryRequirements": "180 credits",
+    "onlyProgramme": null
+  },
+  "3FV372": {
+    "entryRequirements": "180 credits",
+    "onlyProgramme": null
+  },
+  "3FV377": {
+    "entryRequirements": "180 credits",
+    "onlyProgramme": null
+  },
+  "3FV378": {
+    "entryRequirements": "180 credits",
+    "onlyProgramme": null
+  },
+  "3FV379": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV382": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV383": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV384": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV386": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FV387": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FX017": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3FX102": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "3FX221": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KK005": {
+    "entryRequirements": "180 credits in medicine/pharmacy",
+    "onlyProgramme": null
+  },
+  "3KK014": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KK015": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KK016": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KK019": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KK020": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KK021": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KK022": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KK023": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KK024": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR035": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR036": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR037": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR038": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR039": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR044": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR045": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR046": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR047": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR049": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR052": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR053": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR084": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR085": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR161": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR175": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR178": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR180": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR182": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR188": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3KR238": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG504": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG505": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG522": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG530": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG531": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG532": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG540": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG541": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG542": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG550": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG551": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG555": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG559": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG560": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG561": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG566": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG569": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG570": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG577": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG579": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3LG888": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MC006": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MC125": {
     "entryRequirements": null,
     "onlyProgramme": null
   },
@@ -4539,8 +6383,1032 @@
     "entryRequirements": null,
     "onlyProgramme": null
   },
+  "3MC127": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MC160": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MC161": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MC162": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MC163": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MC322": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MC323": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MC324": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MC555": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MC881": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME027": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME053": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME055": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME056": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME071": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME075": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME076": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME077": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME081": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME083": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME085": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME086": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME088": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME093": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME094": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME104": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME105": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME106": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ME107": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG011": {
+    "entryRequirements": "180 credits from educational programmes in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, cell/molecular biology, genetics, life science, medical sciences or a similar field of study. Also required is:courses in biochemistry, cell biology, chemistry, genetics, and molecular biology/-genetics totalling at least 30 credits;Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3MG023": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG038": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG042": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG047": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG051": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG055": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG056": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG065": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG103": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG106": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG110": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG322": {
+    "entryRequirements": "180 credits from a programme in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, cell/molecular biology, genetics, life science, medical sciences or a similar field of study. Also required are courses in biochemistry, cell biology, chemistry, genetics, and molecular biology/genetics totalling at least 30 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3MG323": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MG325": {
+    "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmaceutical biosciences, medical science or equivalent education giving relevant knowledge in cell biology, genetics biochemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3MG326": {
+    "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmaceutical biosciences, medical science or equivalent education giving relevant knowledge in cell biology, genetics biochemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3MG328": {
+    "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmaceutical biosciences, medical science or equivalent education giving relevant knowledge in cell biology, genetics biochemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3MK000": {
+    "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmacy, pharmaceutical bioscience, (pharmaceutical)chemistry, medical science, agriculture, animal science, veterinary medicine or international education giving relevant knowledge in cell biology, genetics (bio)chemistry, immunology and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3MK007": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MK011": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MK012": {
+    "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmacy, pharmaceutical bioscience, (pharmaceutical) chemistry, medical science, agriculture, animal science, veterinary medicine or education giving knowledge in cell biology, genetics, (bio)chemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3MK013": {
+    "entryRequirements": "180 credits in biology, bio-/medicine, biotechnology, pharmacy, pharmaceutical bioscience, (pharmaceutical) chemistry, medical science, agriculture, animal science, veterinary medicine or education giving knowledge in cell biology, genetics (bio)chemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3MK014": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MK015": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MR001": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MR010": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MR100": {
+    "entryRequirements": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology, biochemistry and genetics. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+    "onlyProgramme": null
+  },
+  "3MR101": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MR102": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MR103": {
+    "entryRequirements": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology and biochemistry. In addition, 7.5 credits in genetics at Master's level are required. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+    "onlyProgramme": null
+  },
+  "3MR104": {
+    "entryRequirements": "Undergraduate education worth 180 credits within Life Sciences (e.g. Biomedicine, Biotechnology, Medicine, Veterinary Medicine) including at least 10 credits each of Cell Biology, Biochemistry and Genetics, alternatively 180 credits within Pharmaceutical Sciences (e.g. Pharmacy Programme). Students admitted to Master's Programmes in Medical Research, Biomedicine and Drug Management fulfil the eligibility requirements.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+    "onlyProgramme": true
+  },
+  "3MU015": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MU130": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MU315": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MU330": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MU430": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MU445": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MU745": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3MX009": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3NR021": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3NR382": {
+    "entryRequirements": "180 credits from a biomedicine, pharmacy or biology programme or equivalent education providing knowledge within cell and molecular biology, chemistry and biochemistry, pharmacology, physiology and neurobiology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3NR600": {
+    "entryRequirements": "180 credits from a Bachelor's programme in biomedicine, pharmacy or biology or equivalent education providing knowledge of cell and molecular biology, chemistry and biochemistry, pharmacology, physiology and neurobiology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "3NR613": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3NR637": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3NR731": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3OG039": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3OG040": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3OG071": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3OG072": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3OG083": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3OG084": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3OG087": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3OG088": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3OG089": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3OG091": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PA020": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PA025": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PA200": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE048": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
   "3PE051": {
     "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE138": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE139": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE141": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE144": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE145": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE146": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE147": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE148": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE150": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE151": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PE159": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PS055": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PS058": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PS315": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PS316": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PS317": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PS318": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PS321": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PS322": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT012": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT013": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT023": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT025": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT031": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT032": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT041": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT042": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT043": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT051": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT052": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT061": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3PT062": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3SG069": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3SJ160": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3SJ260": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3SJ370": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3SJ460": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3SJ550": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3SJ580": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3SJ650": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "3ÖN003": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE010": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE011": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE012": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE013": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE024": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE038": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE040": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE041": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE042": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE044": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE045": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE073": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE089": {
+    "entryRequirements": "Within the Preschool Teacher Education Programme: Swedish as a Second Language and Multilingualism in Preschool; Curriculum Theory and Didactical Perspectives on Education for Preschool Teachers; Follow-up and Analysis of Learning and Development, Preschool Teachers; Epistemology and Research Methodology.",
+    "onlyProgramme": true
+  },
+  "4PE090": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE096": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE112": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE113": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE114": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE131": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE135": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE136": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE138": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE142": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE149": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE153": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE155": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE156": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE161": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE162": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE165": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE169": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE170": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE178": {
+    "entryRequirements": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": null
+  },
+  "4PE179": {
+    "entryRequirements": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": null
+  },
+  "4PE180": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE181": {
+    "entryRequirements": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": null
+  },
+  "4PE182": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE183": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE185": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE186": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE187": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE188": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE193": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE196": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE197": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE198": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE199": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE200": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE206": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE207": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE209": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE210": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE211": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE213": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE214": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE215": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE216": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE217": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE218": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE219": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE220": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE221": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE222": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE223": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE231": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE232": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE234": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE235": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE236": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE237": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE238": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE239": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE240": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE241": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE242": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE243": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE244": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE245": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE246": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE247": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE248": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE249": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE252": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE258": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE259": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE260": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE261": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE262": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE263": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE273": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE290": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE291": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE292": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE297": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE298": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE299": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "4PE300": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE301": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "4PE302": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE305": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE306": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE307": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE308": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4PE310": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "4UK063": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5AR025": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5AR026": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5AR027": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5AR260": {
+    "entryRequirements": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "5AR640": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5AR660": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5AR686": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5AR720": {
+    "entryRequirements": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
+    "onlyProgramme": null
+  },
+  "5AR721": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5AR724": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5AR764": {
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university",
+    "onlyProgramme": null
+  },
+  "5AR810": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5AR815": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5CM012": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5CM013": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5CM019": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5EE105": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "5EN209": {
+    "entryRequirements": "15 credits, including Swedish 1, from the Primary School Teacher Education Programme, Grades 4-6 of the Compulsory School.",
+    "onlyProgramme": true
+  },
+  "5EN218": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5FP003": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5FP004": {
+    "entryRequirements": "52.5 credits from Practical Philosophy A, incl. the sub-course Critical Thinking, and Practical Philosophy B, including the B essay sub-course",
+    "onlyProgramme": null
+  },
+  "5FP006": {
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "5FT056": {
@@ -4555,7 +7423,51 @@
     "entryRequirements": null,
     "onlyProgramme": null
   },
+  "5GN004": {
+    "entryRequirements": "General entry requirements and Social Studies level 1b or level 1a2, or Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": null
+  },
+  "5HA302": {
+    "entryRequirements": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+    "onlyProgramme": null
+  },
+  "5HG009": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5HG015": {
+    "entryRequirements": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "5HG016": {
+    "entryRequirements": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "5HG017": {
+    "entryRequirements": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "5HG018": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5HG019": {
+    "entryRequirements": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "5HG021": {
+    "entryRequirements": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "5KA106": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
   "5KV779": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5LH150": {
     "entryRequirements": null,
     "onlyProgramme": null
   },
@@ -4578,6 +7490,270 @@
   "5LH654": {
     "entryRequirements": "120 credits in science/engineering",
     "onlyProgramme": true
+  },
+  "5LN152": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5LN321": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5LN323": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5LN429": {
+    "entryRequirements": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
+    "onlyProgramme": true
+  },
+  "5LN445": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5LN708": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5LN709": {
+    "entryRequirements": "30 credits at Master's level in language technology, including Advanced Programming for Language Technologists and Language Technology: Research and Development.",
+    "onlyProgramme": null
+  },
+  "5LN710": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5LN712": {
+    "entryRequirements": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject, 7.5 credits in computer programming and 7.5 credits in logic/discrete mathematics. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
+    "onlyProgramme": null
+  },
+  "5LN713": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5LN714": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5LN715": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5LV211": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "5LV310": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "5RT000": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
+  },
+  "5RT614": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5RY066": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5RY067": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5RY068": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5RY069": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD034": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD064": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD065": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD066": {
+    "entryRequirements": "30 credits, including 15 credits in game design and 15 credits in either game design, software engineering, expression in convergent media or industrial engineering and management.",
+    "onlyProgramme": true
+  },
+  "5SD069": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD071": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD075": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD080": {
+    "entryRequirements": "5 credits in game design",
+    "onlyProgramme": null
+  },
+  "5SD090": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD300": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD303": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD305": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD306": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD307": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD308": {
+    "entryRequirements": "120 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+    "onlyProgramme": null
+  },
+  "5SD311": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD312": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD314": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD319": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD320": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD321": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD322": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD324": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD325": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD326": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD327": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD509": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD510": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD511": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD515": {
+    "entryRequirements": "Expression and 2D Graphics for Games 2, 7.5 credits",
+    "onlyProgramme": true
+  },
+  "5SD516": {
+    "entryRequirements": "At least 4 credits from Expression, 3D Modelling and Texturing for Games",
+    "onlyProgramme": true
+  },
+  "5SD517": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD533": {
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
+    "onlyProgramme": true
+  },
+  "5SD550": {
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
+    "onlyProgramme": true
+  },
+  "5SD551": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD816": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD817": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD820": {
+    "entryRequirements": "2D Game Programming with C++, 7.5 credits (5SD817), and Linear Algebra, Trigonometry and Geometry, 7.5 credits (5SD901)",
+    "onlyProgramme": true
+  },
+  "5SD821": {
+    "entryRequirements": "2D Game Programming with C++, 7.5 credits (5SD817), and Linear Algebra, Trigonometry and Geometry, 7.5 credits (5SD901)",
+    "onlyProgramme": true
+  },
+  "5SD822": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD901": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD951": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD952": {
+    "entryRequirements": "Project Management with Agile Methods, 7.5 credits",
+    "onlyProgramme": true
+  },
+  "5SD953": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SD954": {
+    "entryRequirements": null,
+    "onlyProgramme": null
+  },
+  "5SV228": {
+    "entryRequirements": "General entry requirements",
+    "onlyProgramme": null
   },
   "TS002": {
     "entryRequirements": null,

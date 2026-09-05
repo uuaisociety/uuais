@@ -1,0 +1,56 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:45:45.161639+00:00",
+  "edges": [
+    {
+      "code": "2IS071",
+      "text": "90 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS072",
+      "text": "90 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS075",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS076",
+      "text": "90 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS085",
+      "text": "90 credits in information systems or the equivalent.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS089",
+      "text": "90 credits in information systems or equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS090",
+      "text": "A Bachelor's degree (180 credits). Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": []
+}

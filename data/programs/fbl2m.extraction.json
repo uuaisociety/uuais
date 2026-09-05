@@ -1,0 +1,76 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:22:10.860800+00:00",
+  "edges": [
+    {
+      "code": "3FB028",
+      "text": "150 credits, including 90 credits in biomedicine, pharmaceutical science, chemistry, natural science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FB031",
+      "text": "150 credits, including 90 credits in biomedicine, pharmaceutical science, chemistry, natural science and/or engineering, and Biological Drugs, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "3FB028",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3FB037",
+      "text": "150 credits which of 120 credits in biomedicine, biology, pharmaceutical science, chemistry and/or science/engineering. Prior studies should contain 5 credits in pharmacokinetics and 7.5 credits in pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FF031",
+      "text": "150 credits in biomedicine, pharmaceutical science, chemistry, drug development, natural science and/or technology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FG005",
+      "text": "150 credits, including 120 credits in biomedicine, pharmaceutical sciences, drug development and/or natural sciences/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Under det andra året väljer studenten kurser.Valbara fördjupningskurser 15 hp och del av masterprojekt 45 hp eller valbara fördjupningskurser 30 hp.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "In the second year the student chooses either elective advanced courses of 15 credits plus part of the master project (45 credits) or elective advanced courses of 30 credits.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Masterprojekt 30 hp eller resterande del av 45 hp-projekt.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Refers to the master's degree project of 30 credits or the remaining part of a 45-credit project.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

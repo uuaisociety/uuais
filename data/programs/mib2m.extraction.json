@@ -1,0 +1,74 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:30:54.987695+00:00",
+  "edges": [
+    {
+      "code": "3MK000",
+      "text": "180 credits in biology, bio-/medicine, biotechnology, pharmacy, pharmaceutical bioscience, (pharmaceutical)chemistry, medical science, agriculture, animal science, veterinary medicine or international education giving relevant knowledge in cell biology, genetics (bio)chemistry, immunology and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MK012",
+      "text": "180 credits in biology, bio-/medicine, biotechnology, pharmacy, pharmaceutical bioscience, (pharmaceutical) chemistry, medical science, agriculture, animal science, veterinary medicine or education giving knowledge in cell biology, genetics, (bio)chemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MK013",
+      "text": "180 credits in biology, bio-/medicine, biotechnology, pharmacy, pharmaceutical bioscience, (pharmaceutical) chemistry, medical science, agriculture, animal science, veterinary medicine or education giving knowledge in cell biology, genetics (bio)chemistry and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Under termin 2 och/eller 3 kan kurs/kurser bytas ut mot forskningsprojektkurs inom infektionsbiologi om 15 eller 30 Hp.",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "During semesters 2 and/or 3, course(s) may be replaced by a 15 or 30 credit research project course in infection biology.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Under termin 2 och/eller 3 kan kurs/kurser bytas ut mot forskningsprojektkurs inom infektionsbiologi om 15 eller 30 Hp.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Courses in semesters 2 and/or 3 may be replaced by a 15 or 30 credit research project course in infection biology.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Under termin 3 finns möjlighet att påbörja ett examensarbete om 45 hp i infektionsbiologi, denna kurs ersätter i så fall den obligatoriska 30 hp masterprojektkursen.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [
+          "3MK011",
+          "3MK007"
+        ],
+        "labelEn": "A 45 hp degree project started in semester 3 may replace the compulsory 30 hp master's thesis course.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

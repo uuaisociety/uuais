@@ -444,6 +444,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1TE769",
@@ -495,12 +496,13 @@
       "name": "Giltig från och med höstterminen 2020"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.932853+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.413651+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10048",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i hållbar och innovativ hantering av naturresurser – SINReM, 120 hp (THH2M)",
   "programmeTitleEn": "Master's Programme in Sustainable and Innovative Natural Resource Management – SINReM, 120 credits (THH2M)",
   "programmeUri": "/utbildning/program/masterprogram-hallbar-och-innovativ-hantering-av-naturresurser-sinrem",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }
