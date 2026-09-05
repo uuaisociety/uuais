@@ -2449,6 +2449,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1KB016",
@@ -3085,12 +3086,13 @@
       "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.822108+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.297074+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=f39d9938-4ed2-43b0-9c80-507764827e7f",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Civilingenjörsprogrammet i kemiteknik, 300 hp (TKT2Y)",
   "programmeTitleEn": "Master's Programme in Chemical Engineering, 300 credits (TKT2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-kemiteknik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

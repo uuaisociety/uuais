@@ -1,0 +1,57 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:29:27.612788+00:00",
+  "edges": [
+    {
+      "code": "3FV371",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "alternativt3DR715 Datortomografi, 15 hpalternativtValbara kurser motsvarande 15 hp",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [],
+        "labelEn": "Either take 3DR715 Computed Tomography (15 credits) or elective courses corresponding to 15 credits.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "alternativt3DR915 Nuklearmedicin och PET, 15 hpalternativtValbara kurser motsvarande 15 hp",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [],
+        "labelEn": "Alternatively, Nuclear Medicine and PET (15 hp) may be taken, or elective courses corresponding to 15 hp.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "alternativt3DR815 Magnetisk resonanstomografi, 15 hpalternativtValbara kurser motsvarande 15 hp",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [],
+        "labelEn": "Students may choose either 3DR815 Magnetic Resonance Tomography or elective courses totalling 15 hp.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

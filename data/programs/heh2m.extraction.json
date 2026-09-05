@@ -1,0 +1,92 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:24:19.505682+00:00",
+  "edges": [
+    {
+      "code": "2EH421",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5AR764",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "LU0085 Forskningsprocessens kontext och process I: teorier och metoder. (SLU - Sveriges Lantbruksuniversitet)",
+        "semester": 1,
+        "period": "Period 1",
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This note names an external SLU course, LU0085, which is not on the programme roster.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Valbar kurs om 7,5 hp.",
+        "semester": 1,
+        "period": "Period 2",
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "The course is an elective worth 7.5 credits.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+        "semester": 2,
+        "period": "Period 3",
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Elective courses may be taken within or outside the department, with options for internships and individual in-depth or method courses.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+        "semester": 3,
+        "period": "Period 1",
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Elective courses may be taken within or outside the department, including possible internships and individual specialization or method courses.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+        "semester": 4,
+        "period": "Period 3",
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Elective courses may be taken within or outside the department, including internships and individual in-depth or method courses.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

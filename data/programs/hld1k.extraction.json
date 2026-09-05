@@ -1,0 +1,50 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:25:59.884228+00:00",
+  "edges": [
+    {
+      "code": "5SD066",
+      "text": "30 credits, including 15 credits in game design and 15 credits in either game design, software engineering, expression in convergent media or industrial engineering and management.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD080",
+      "text": "5 credits in game design",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD533",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD550",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Denna termin kan du välja att läsa 30 hp valbara kurser, göra praktik (max 30 hp) eller ägna dig åt utlandsstudier.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This semester can be spent on 30 credits of elective courses, an internship (max 30 credits), or studies abroad.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

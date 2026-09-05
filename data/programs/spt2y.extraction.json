@@ -1,0 +1,39 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:39:12.632747+00:00",
+  "edges": [],
+  "rules": [
+    {
+      "note": {
+        "textSv": "2PP540 Vetenskapligt arbete/specialistarbete (15 hp) - 5 poäng termin 4, resterande 10 poäng termin 6",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "2PP540"
+        ],
+        "labelEn": "The degree project is spread over terms: 5 credits in term 4 and the remaining 10 credits in term 6.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "2PP540 Vetenskapligt arbete/specialistarbete (15 hp) - 5 poäng termin 4, resterande 10 poäng termin 6",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "2PP540"
+        ],
+        "labelEn": "The degree project 2PP540 is split across terms, with 5 credits in term 4 and the remaining 10 credits in term 6.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

@@ -604,6 +604,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1GV004",
@@ -780,12 +781,13 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.876730+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.348511+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10064",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Kandidatprogram i geovetenskap, 180 hp (TGE1K)",
   "programmeTitleEn": "Bachelor's Programme in Earth Science, 180 credits (TGE1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-geovetenskap",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

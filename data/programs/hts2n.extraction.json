@@ -1,0 +1,14 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:28:20.995012+00:00",
+  "edges": [
+    {
+      "code": "5SD308",
+      "text": "120 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": []
+}

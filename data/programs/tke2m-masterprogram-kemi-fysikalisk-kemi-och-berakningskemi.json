@@ -317,6 +317,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1KB550",
@@ -381,12 +382,13 @@
       "name": "Giltig från och med höstterminen 2026"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.944526+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.425298+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=4b4cf9fa-76cc-4b59-9370-e6f5b65bc2ab",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i kemi – Fysikalisk kemi och beräkningskemi, 120 hp (TKE2M)",
   "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
   "programmeUri": "/utbildning/program/masterprogram-kemi-fysikalisk-kemi-och-berakningskemi",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

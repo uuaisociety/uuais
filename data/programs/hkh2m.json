@@ -1,0 +1,32 @@
+{
+  "id": "1981",
+  "code": "HKH2M",
+  "revisionId": "1981",
+  "nameSv": "Masterprogram i kulturarv och hållbarhet",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2022/47",
+  "finalisedDate": "30 augusti 2022",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet omfattar två år. Första årets studier kan leda till en magisterexamen. Andra årets studier leder till en masterexamen. Möjlighet finns även att komplettera en tidigare magisterexamen för att erhålla en masterexamen.",
+    "I programmet ingår obligatoriska kurser (15 hp), valbara kurser (60 hp) samt ett examensarbete om 45 hp. Under termin två och tre finns möjlighet att inom ramen för de valbara kurserna göra praktik eller delta i internationellt studentutbyte genom universitetets och institutionens utbytesavtal."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.471057+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1981",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i kulturarv och hållbarhet, 120 hp (HKH2M)",
+  "programmeTitleEn": "Master's Programme in Cultural Heritage and Sustainability, 120 credits (HKH2M)",
+  "programmeUri": "/utbildning/program/masterprogram-kulturarv-och-hallbarhet",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

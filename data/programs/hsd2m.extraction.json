@@ -1,0 +1,21 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:26:05.472536+00:00",
+  "edges": [],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Denna termin väljer du kurser på totalt 30hp. Du kan även ansöka om utlandsstudier eller praktik. Institutionen erbjuder varje hösttermin ett varierande utbud av valbara kurser.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This term you choose elective courses totalling 30 credits, and may also apply for studies abroad or an internship.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

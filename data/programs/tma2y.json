@@ -376,6 +376,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1MA350",
@@ -398,12 +399,13 @@
       "name": "Giltig från och med höstterminen 2026"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.850637+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.323926+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=12fb1388-7c5c-4c8b-9b4f-ac17e43b31d6",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Civilingenjörsprogrammet i teknisk matematik, 300 hp (TMA2Y)",
   "programmeTitleEn": "Master's Programme in Engineering Mathematics, 300 credits (TMA2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-teknisk-matematik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

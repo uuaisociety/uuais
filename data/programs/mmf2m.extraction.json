@@ -1,0 +1,33 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:31:25.279771+00:00",
+  "edges": [
+    {
+      "code": "3MR100",
+      "text": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology, biochemistry and genetics. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MR103",
+      "text": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology and biochemistry. In addition, 7.5 credits in genetics at Master's level are required. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": [
+          {
+            "from": "3MR104",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3MR104",
+      "text": "Undergraduate education worth 180 credits within Life Sciences (e.g. Biomedicine, Biotechnology, Medicine, Veterinary Medicine) including at least 10 credits each of Cell Biology, Biochemistry and Genetics, alternatively 180 credits within Pharmaceutical Sciences (e.g. Pharmacy Programme). Students admitted to Master's Programmes in Medical Research, Biomedicine and Drug Management fulfil the eligibility requirements.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": []
+}

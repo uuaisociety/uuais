@@ -1,0 +1,36 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:30:11.916465+00:00",
+  "edges": [
+    {
+      "code": "1KB155",
+      "text": "120 credits including 30 credits in chemistry/biochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MG011",
+      "text": "180 credits from educational programmes in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, cell/molecular biology, genetics, life science, medical sciences or a similar field of study. Also required is:courses in biochemistry, cell biology, chemistry, genetics, and molecular biology/-genetics totalling at least 30 credits;Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Valbar period 15 hp3MG024 Litteraturprojekt i forensisk biologi 15 hpalternativt​3MG105 Examensarbete 45 hp",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [],
+        "labelEn": "Students choose between a 15 hp literature project in forensic biology or a 45 hp degree project.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

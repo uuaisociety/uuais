@@ -164,6 +164,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [],
   "revisions": [
     {
@@ -191,12 +192,13 @@
       "name": "Giltig från och med höstterminen 2021"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.906107+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.385699+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10045",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i evolutionsbiologi – MEME, 120 hp (TEB2M)",
   "programmeTitleEn": "Master's Programme in Evolutionary Biology – MEME, 120 credits (TEB2M)",
   "programmeUri": "/utbildning/program/masterprogram-evolutionsbiologi-meme",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

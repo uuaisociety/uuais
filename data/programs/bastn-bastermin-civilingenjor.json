@@ -149,6 +149,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [],
   "revisions": [
     {
@@ -156,12 +157,13 @@
       "name": "Giltig från och med vårterminen 2027"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.958050+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.439375+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=26dd7bc9-fbcd-4b6f-b2d5-7648b26bcd17",
+  "validFrom": "Studieplan giltig från och med vårterminen 2027",
+  "validFromYear": 2027,
   "programmeTitle": "Teknisk-naturvetenskaplig bastermin med reserverad plats på ett civilingenjörsprogram, 20 veckor (BASTN)",
   "programmeTitleEn": "Science and Technology Foundation Semester Programme – Reserved Place on the Bachelor's Programme in Computer Science, Physics or Mathematics, 20 weeks (BASTN)",
   "programmeUri": "/utbildning/program/bastermin-civilingenjor",
-  "validFrom": "Studieplan giltig från och med vårterminen 2027",
-  "validFromYear": 2027,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

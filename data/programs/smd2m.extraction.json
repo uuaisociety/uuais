@@ -1,0 +1,183 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:34:30.217213+00:00",
+  "edges": [
+    {
+      "code": "1MD001",
+      "text": "120 credits including 45 credits in IT-related fields of study, including human-computer interaction, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MD004",
+      "text": "120 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MD033",
+      "text": "120 credits including 60 credits in science/engineering/information systems. 15 credits at Master's level in human-computer interaction. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MD043",
+      "text": "120 credits including 45 credits in computer science, data science, information systems, applied computational science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MD044",
+      "text": "120 credits including including 30 credits in computer science, data science, information systems or applied computational science. Human-Computer Interaction or System Design with a User Perspective. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "2IV125",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MD045",
+      "text": "120 credits including including 30 credits in computer science, data science, information systems or applied computational science. Human-Computer Interaction or System Design with a User Perspective. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "2IV125",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MD200",
+      "text": "120 credits and (1) 15 credits in human-computer interaction at Master's level, or (2) 30 credits in computer science including Software Engineering and Project Management, or (3) 50 credits in computer science of which 10 credits at Master's level. Interface Programming with a User Perspective and Independent Project in Sociotechnical Systems Engineering - IT Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS090",
+      "text": "A Bachelor's degree (180 credits). Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV159",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV176",
+      "text": "A Bachelor's degree and 7.5 credits in human-computer interaction. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 2IV182, 2IV181, 2IV126, 1MD001, 1MD046, 1MD004, 1MD200, 1MD043, 1MD044, 1MD045",
+        "semester": 2,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "2IV182",
+          "2IV181",
+          "2IV126",
+          "1MD001",
+          "1MD046",
+          "1MD004",
+          "1MD200",
+          "1MD043",
+          "1MD044",
+          "1MD045"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2IV182",
+          "2IV181",
+          "2IV126",
+          "1MD001",
+          "1MD046",
+          "1MD004",
+          "1MD200",
+          "1MD043",
+          "1MD044",
+          "1MD045"
+        ],
+        "labelEn": "One of these courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "För vissa av dessa kurser krävs att studenten möter speciella förkunskapskrav, se behörighetskraven i kursplanen för respektive kurs.Kurserna Informations och tjänstedesign,7,5 hp (2IV182 ) och Etiska perspektiv på IT-system och design i MDI,7,5 hp (2IV181) ges inom kurspaketet Att designa för människan, 15 hp",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "2IV182",
+          "2IV181"
+        ],
+        "labelEn": "Courses 2IV182 and 2IV181 are offered within the 15 hp course package 'Designing for humans', and some courses have specific prerequisites.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 2IV176, 2IV157, 2IV158, 2IV159, 1MD033",
+        "semester": 3,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "2IV176",
+          "2IV157",
+          "2IV158",
+          "2IV159",
+          "1MD033"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2IV176",
+          "2IV157",
+          "2IV158",
+          "2IV159",
+          "1MD033"
+        ],
+        "labelEn": "One of the listed courses must be selected.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "För vissa av dessa kurser krävs att studenten möter speciella förkunskapskrav, se behörighetskraven i kursplanen för respektive kurs.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Some of these courses have specific prerequisite requirements; see the eligibility criteria in each course syllabus.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

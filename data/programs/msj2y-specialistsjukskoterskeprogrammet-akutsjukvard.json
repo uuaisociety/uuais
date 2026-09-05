@@ -1,0 +1,184 @@
+{
+  "id": "3084",
+  "code": "MSJ2Y",
+  "revisionId": "3084",
+  "nameSv": "Specialistsjuksköterskeprogrammet",
+  "totalCredits": 60.0,
+  "semesters": 4,
+  "registrationNumber": "MEDFARM 2022/2169",
+  "finalisedDate": "17 januari 2023",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3ME083",
+      "titleEn": "Basic Course in Emergency Care",
+      "titleSv": "Baskurs i akutsjukvård",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME085",
+      "titleEn": "Emergency Nursing I",
+      "titleSv": "Omvårdnad med inriktning mot akutsjukvård I",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME086",
+      "titleEn": "Emergency Nursing II",
+      "titleSv": "Omvårdnad med inriktning mot akutsjukvård II",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME081",
+      "titleEn": "Leadership and Quality Improvement in Emergency Care",
+      "titleSv": "Ledarskap och förbättringskunskap i akutsjukvård",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME077",
+      "titleEn": "Theory and Methodology in Caring Sciences",
+      "titleSv": "Vårdvetenskaplig teori och metod",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME088",
+      "titleEn": "Emergency Nursing: Clinical Placement",
+      "titleSv": "Verksamhetsförlagd utbildning inom specialistområdet akutsjukvård",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME094",
+      "titleEn": "Degree Project with Focus on Emergency Care",
+      "titleSv": "Examensarbete med inriktning mot akutsjukvård",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3084",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;2"
+    },
+    {
+      "id": "2822",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;1"
+    },
+    {
+      "id": "2525",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2414",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2232",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "2005",
+      "name": "Giltig från och med höstterminen 2018, version&nbsp;2"
+    },
+    {
+      "id": "1727",
+      "name": "Giltig från och med höstterminen 2018, version&nbsp;1"
+    },
+    {
+      "id": "1192",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "943",
+      "name": "Giltig från och med höstterminen 2015"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.545688+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3084",
+  "validFrom": "Studieplan giltig från och med höstterminen 2023, version 2",
+  "validFromYear": 2023,
+  "programmeTitle": "Specialistsjuksköterskeprogrammet – Akutsjukvård, 60 hp (MSJ2Y)",
+  "programmeTitleEn": "Specialist Nursing Programme – Theatre Care, 60 credits (MSJ2Y)",
+  "programmeUri": "/utbildning/program/specialistsjukskoterskeprogrammet-akutsjukvard",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

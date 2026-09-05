@@ -1,0 +1,53 @@
+{
+  "id": "2449",
+  "code": "HSH1K",
+  "revisionId": "2449",
+  "nameSv": "Kandidatprogram i social hållbarhet",
+  "totalCredits": 180.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2024/23",
+  "finalisedDate": "4 juni 2024",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet omfattar tre år heltidsstudier. I programmet ingår kurser på 180 hp varav ett självständigt arbete på 15 hp.",
+    "Termin 1 består av den obligatoriska introduktionskursen Social hållbarhet i praktik och teori (30 hp), där praktiknära kursmoment ingår.",
+    "Termin 2 består av kursen Genusvetenskap med inriktning mot social hållbarhet A (30 hp).",
+    "Termin 3 består av kursen Hållbar utveckling A (30 hp) vid CEMUS.",
+    "Termin 4 väljer studenterna ett av följande alternativ:",
+    "Hållbar utveckling B (30 hp)",
+    "valbara kurser om sammanlagt 30 hp",
+    "praktik (7,5 hp eller 15 hp), i kombination med valbara kurser",
+    "internationellt studentutbyte inom ramen för universitetets eller fakultetens utbytesavtal.",
+    "Utbudet av valbara kurser fastställs av Centrum för genusvetenskaps styrelse inför varje termin och ska föreligga i god tid innan anmälan till dessa öppnar.",
+    "Termin 5 läser studenterna kursen Genusvetenskap med inriktning mot social hållbarhet B (30 hp).",
+    "Termin 6 läser studenterna kursen Genusvetenskap med inriktning mot social hållbarhet C (30 hp). Under denna termin skriver studenterna även sitt examensarbete (15 hp)."
+  ],
+  "syllabusEntryRequirements": "Grundläggande behörighet och Samhällskunskap 1b eller 1a1+1a2",
+  "syllabusCourses": [
+    {
+      "title": "Hållbar utveckling B",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "valbara kurser om sammanlagt",
+      "credits": 30.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.453521+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2449",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Kandidatprogram i social hållbarhet, 180 hp (HSH1K)",
+  "programmeTitleEn": "Bachelor's Programme in Social Sustainability, 180 credits (HSH1K)",
+  "programmeUri": "/utbildning/program/kandidatprogram-social-hallbarhet",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

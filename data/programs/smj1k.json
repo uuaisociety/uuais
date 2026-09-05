@@ -1,0 +1,601 @@
+{
+  "id": "3242",
+  "code": "SMJ1K",
+  "revisionId": "3242",
+  "nameSv": "Kandidatprogram i medie- och kommunikationsvetenskap och journalistik",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "SAMFAK 2023/72 Doss: 3.2.1",
+  "finalisedDate": "21 september 2023",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "2IV160",
+      "titleEn": "Media and Communication Studies A: Introduction to Media and Communication Studies",
+      "titleSv": "Medie- och kommunikationsvetenskap A: Introduktion till medie- och kommunikationsvetenskap",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "2IV161",
+      "titleEn": "Media and Communication Studies A: Key Concepts in Media, Communication and Journalism",
+      "titleSv": "Medie- och kommunikationsvetenskap A: Centrala begrepp i medier, kommunikation och journalistik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "2IV162",
+      "titleEn": "Media and Communication Studies A: Methodology and Media and Communications Studies",
+      "titleSv": "Medie- och kommunikationsvetenskap A: Metodologi och medie- och kommunikationsvetenskap",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "2IS078",
+      "titleEn": "Fundamentals of Information Systems",
+      "titleSv": "Grundläggande informationssystem",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2IS059",
+      "titleEn": "Interaction Design",
+      "titleSv": "Interaktionsdesign",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2IS079",
+      "titleEn": "Web Production",
+      "titleSv": "Webbproduktion",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2IS060",
+      "titleEn": "Social Media and Digital Methods",
+      "titleSv": "Sociala medier och digitala metoder",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Information Systems",
+      "mainFieldSv": "Informationssystem",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "2IV095",
+      "titleEn": "Media and Communication Studies B: Digital Media Studies",
+      "titleSv": "Medie- och kommunikationsvetenskap B: Digitala mediestudier",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "15 credits in media and communication studies"
+    },
+    {
+      "code": "2IV167",
+      "titleEn": "Media and Communication Studies B: Methods in Media and Communication Studies I",
+      "titleSv": "Medie- och kommunikationsvetenskap B: Medie- och kommunikationsvetenskaplig metod I",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "15 credits in media and communication studies"
+    },
+    {
+      "code": "2IV143",
+      "titleEn": "Media and Communication Studies B: Thesis",
+      "titleSv": "Medie- och kommunikationsvetenskap B: Uppsats",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "15 credits in media and communication studies"
+    },
+    {
+      "code": "2IV165",
+      "titleEn": "Media and Communication Studies B: Journalism Studies",
+      "titleSv": "Medie- och kommunikationsvetenskap B: Journalistikstudier",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "15 credits in media and communication studies"
+    },
+    {
+      "code": "2IV166",
+      "titleEn": "Media and Communication Studies B: Journalism in the Field",
+      "titleSv": "Medie- och kommunikationsvetenskap B: Journalistik i fält",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "15 credits in media and communication studies"
+    },
+    {
+      "code": "2IV177",
+      "titleEn": "Media and Communication Studies B: Organisational Communication Studies",
+      "titleSv": "Medie- och kommunikationsvetenskap B: Studier i organisationskommunikation",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "15 credits in media and communication studies"
+    },
+    {
+      "code": "2IV180",
+      "titleEn": "Media and Communication Studies C: Theory in Digital Media Studies",
+      "titleSv": "Medie- och kommunikationsvetenskap C: Teori i digitala mediestudier",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in media and communication studies including 7.5 credits in digital media studies."
+    },
+    {
+      "code": "2IV171",
+      "titleEn": "Media and Communication Studies C: Methods in Media and Communication Studies II",
+      "titleSv": "Medie- och kommunikationsvetenskap C: Medie- och kommunikationsvetenskaplig metod II",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in media and communication studies"
+    },
+    {
+      "code": "2IV146",
+      "titleEn": "Media and Communication Studies C: Thesis",
+      "titleSv": "Medie- och kommunikationsvetenskap C: Uppsats",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G2E",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "Media and Communication Studies A and B or the equivalent"
+    },
+    {
+      "code": "2IV170",
+      "titleEn": "Media and Communication Studies C: Theory in Journalism Studies",
+      "titleSv": "Medie- och kommunikationsvetenskap C: Teori i journalistikstudier",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in media and communication studies including 7.5 credits in journalism studies"
+    },
+    {
+      "code": "2IV169",
+      "titleEn": "Media and Communication Studies C: Communication Theory and Organisations",
+      "titleSv": "Medie- och kommunikationsvetenskap C: Kommunikationsteori och organisationer",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Media and Communication Studies",
+      "mainFieldSv": "Medie- och kommunikationsvetenskap",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in media and communication studies including 7.5 credits in communication studies"
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Kurspaketet Informationssystem och digital kommunikation 30 hp söks. Där ingår följande kurser:",
+      "labelEn": "Heading introducing the 30 hp course package Information Systems and Digital Communication and the courses it contains.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Valfri termin.",
+      "labelEn": "This is an elective semester.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [
+        "2IV095"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Välj ett av följande kurspaket:Medie- och kommunikationsvetenskap B, digitala mediestudier 30 hp, med delkurserna",
+      "labelEn": "Choose one of the listed course packages; this one is Media and Communication Studies B: Digital Media Studies (30 hp) with its sub-courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "EITHER_OR",
+      "courseCodes": [
+        "2IV165",
+        "2IV166"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "ellerMedie- och kommunikationsvetenskap B, journalistikstudier 30 hp, med delkurserna",
+      "labelEn": "Alternatively, Media and Communication Studies B: Journalism Studies, 30 credits, with its sub-courses may be taken.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [
+        "2IV177"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "ellerMedie- och kommunikationsvetenskap B, studier i organisationskommunikation 30 hp, med delkurserna",
+      "labelEn": "Alternatively, Media and Communication Studies B: Organisational Communication Studies (30 hp) may be taken with its sub-courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [
+        "2IV180"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "Välj C-nivå inom samma spår som under termin 4:Medie- och kommunikationsvetenskap C, digitala mediestudier 30 hp, med delkurserna",
+      "labelEn": "Students must take C-level courses in the same track as chosen in semester 4, here the digital media studies track.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-6",
+      "type": "NOTE",
+      "courseCodes": [
+        "2IV170"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "ellerMedie- och kommunikationsvetenskap C, journalistikstudier 30 hp med delkurserna",
+      "labelEn": "Alternatively, the 30 hp Media and Communication Studies C journalism studies package with its sub-courses may be taken.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-7",
+      "type": "NOTE",
+      "courseCodes": [
+        "2IV169"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "ellerMedie- och kommunikationsvetenskap C, studier i organisationskommunikation 30 hp, med delkurserna",
+      "labelEn": "Alternatively, Media and Communication Studies C in organisational communication (30 hp) may be taken with its sub-courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-8",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Valfri termin.",
+      "labelEn": "The semester is optional/free choice.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Kurspaketet Informationssystem och digital kommunikation 30 hp söks. Där ingår följande kurser:",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Valfri termin.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Välj ett av följande kurspaket:Medie- och kommunikationsvetenskap B, digitala mediestudier 30 hp, med delkurserna",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "ellerMedie- och kommunikationsvetenskap B, journalistikstudier 30 hp, med delkurserna",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "ellerMedie- och kommunikationsvetenskap B, studier i organisationskommunikation 30 hp, med delkurserna",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Välj C-nivå inom samma spår som under termin 4:Medie- och kommunikationsvetenskap C, digitala mediestudier 30 hp, med delkurserna",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "ellerMedie- och kommunikationsvetenskap C, journalistikstudier 30 hp med delkurserna",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "ellerMedie- och kommunikationsvetenskap C, studier i organisationskommunikation 30 hp, med delkurserna",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Valfri termin.",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [
+    {
+      "from": "2IV095",
+      "to": "2IV146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Media and Communication Studies A and B or the equivalent"
+    },
+    {
+      "from": "2IV143",
+      "to": "2IV146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Media and Communication Studies A and B or the equivalent"
+    },
+    {
+      "from": "2IV160",
+      "to": "2IV146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Media and Communication Studies A and B or the equivalent"
+    },
+    {
+      "from": "2IV161",
+      "to": "2IV146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Media and Communication Studies A and B or the equivalent"
+    },
+    {
+      "from": "2IV162",
+      "to": "2IV146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Media and Communication Studies A and B or the equivalent"
+    },
+    {
+      "from": "2IV165",
+      "to": "2IV146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Media and Communication Studies A and B or the equivalent"
+    },
+    {
+      "from": "2IV166",
+      "to": "2IV146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Media and Communication Studies A and B or the equivalent"
+    },
+    {
+      "from": "2IV167",
+      "to": "2IV146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Media and Communication Studies A and B or the equivalent"
+    },
+    {
+      "from": "2IV177",
+      "to": "2IV146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Media and Communication Studies A and B or the equivalent"
+    },
+    {
+      "from": "2IV165",
+      "to": "2IV170",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in media and communication studies including 7.5 credits in journalism studies"
+    },
+    {
+      "from": "2IV095",
+      "to": "2IV180",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in media and communication studies including 7.5 credits in digital media studies."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "3242",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2517",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2244",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1725",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1397",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.497463+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3242",
+  "validFrom": "Studieplan giltig från och med höstterminen 2024",
+  "validFromYear": 2024,
+  "programmeTitle": "Kandidatprogram i medie- och kommunikationsvetenskap och journalistik, 180 hp (SMJ1K)",
+  "programmeTitleEn": "Bachelor's Programme in Media, Communication and Journalism Studies, 180 credits (SMJ1K)",
+  "programmeUri": "/utbildning/program/kandidatprogram-medie-och-kommunikationsvetenskap-och-journalistik",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

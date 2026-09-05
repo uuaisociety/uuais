@@ -1,0 +1,276 @@
+{
+  "id": "3529",
+  "code": "HEH2M",
+  "revisionId": "3529",
+  "nameSv": "Masterprogram i global miljöhistoria",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "HISTFILFAK 2024/57",
+  "finalisedDate": "1 oktober 2024",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "5AR764",
+      "titleEn": "Historical Ecology",
+      "titleSv": "Historisk ekologi",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Archaeology A1N, Global Environmental History",
+      "mainFieldSv": "Arkeologi A1N, Global miljöhistoria",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university"
+    },
+    {
+      "code": "2EH421",
+      "titleEn": "Modern Natures: Conflicts and Transformation",
+      "titleSv": "Modern natur: konflikter och omvandlingar",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Archaeology A1N, Economic History A1N, Global Environmental History",
+      "mainFieldSv": "Arkeologi A1N, Ekonomisk historia A1N, Global miljöhistoria",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university"
+    },
+    {
+      "code": "5AR810",
+      "titleEn": "Master's Thesis in Global Environmental History",
+      "titleSv": "Examensarbete på avancerad nivå i global miljöhistoria (masterexamen)",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Global Environmental History",
+      "mainFieldSv": "Global miljöhistoria",
+      "depthCode": "A2E",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR815",
+      "titleEn": "Master's Thesis in Global Environmental History",
+      "titleSv": "Examensarbete på avancerad nivå i global miljöhistoria (masterexamen)",
+      "credits": 60.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Global Environmental History",
+      "mainFieldSv": "Global miljöhistoria",
+      "depthCode": "A2E",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR810",
+      "titleEn": "Master's Thesis in Global Environmental History",
+      "titleSv": "Examensarbete på avancerad nivå i global miljöhistoria (masterexamen)",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Global Environmental History",
+      "mainFieldSv": "Global miljöhistoria",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR815",
+      "titleEn": "Master's Thesis in Global Environmental History",
+      "titleSv": "Examensarbete på avancerad nivå i global miljöhistoria (masterexamen)",
+      "credits": 60.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Global Environmental History",
+      "mainFieldSv": "Global miljöhistoria",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR810",
+      "titleEn": "Master's Thesis in Global Environmental History",
+      "titleSv": "Examensarbete på avancerad nivå i global miljöhistoria (masterexamen)",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Global Environmental History",
+      "mainFieldSv": "Global miljöhistoria",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR815",
+      "titleEn": "Master's Thesis in Global Environmental History",
+      "titleSv": "Examensarbete på avancerad nivå i global miljöhistoria (masterexamen)",
+      "credits": 60.0,
+      "creditsInPeriod": 30.0,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Global Environmental History",
+      "mainFieldSv": "Global miljöhistoria",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "LU0085 Forskningsprocessens kontext och process I: teorier och metoder. (SLU - Sveriges Lantbruksuniversitet)",
+      "labelEn": "This note names an external SLU course, LU0085, which is not on the programme roster.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Valbar kurs om 7,5 hp.",
+      "labelEn": "The course is an elective worth 7.5 credits.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+      "labelEn": "Elective courses may be taken within or outside the department, with options for internships and individual in-depth or method courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+      "labelEn": "Elective courses may be taken within or outside the department, including possible internships and individual specialization or method courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+      "labelEn": "Elective courses may be taken within or outside the department, including internships and individual in-depth or method courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "LU0085 Forskningsprocessens kontext och process I: teorier och metoder. (SLU - Sveriges Lantbruksuniversitet)",
+      "semester": 1,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Valbar kurs om 7,5 hp.",
+      "semester": 1,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+      "semester": 2,
+      "period": "Period 3",
+      "trackId": null
+    },
+    {
+      "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+      "semester": 3,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+      "semester": 4,
+      "period": "Period 3",
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3529",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "2680",
+      "name": "Giltig från och med höstterminen 2021"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.468137+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3529",
+  "validFrom": "Studieplan giltig från och med höstterminen 2025",
+  "validFromYear": 2025,
+  "programmeTitle": "Masterprogram i global miljöhistoria, 120 hp (HEH2M)",
+  "programmeTitleEn": "Master's Programme in Global Environmental History, 120 credits (HEH2M)",
+  "programmeUri": "/utbildning/program/masterprogram-global-miljohistoria",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

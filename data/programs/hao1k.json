@@ -1,0 +1,234 @@
+{
+  "id": "2544",
+  "code": "HAO1K",
+  "revisionId": "2544",
+  "nameSv": "Kandidatprogram i arkeologi och osteologi",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "UFV 2021/1097",
+  "finalisedDate": "19 oktober 2021",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "5AR260",
+      "titleEn": "Archaeology A",
+      "titleSv": "Arkeologi A",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Archaeology",
+      "mainFieldSv": "Arkeologi",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6"
+    },
+    {
+      "code": "5AR640",
+      "titleEn": "Archaeology B",
+      "titleSv": "Arkeologi B",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Archaeology",
+      "mainFieldSv": "Arkeologi",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR720",
+      "titleEn": "Osteology A",
+      "titleSv": "Osteologi A",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Archaeology with focus on Osteology",
+      "mainFieldSv": "Arkeologi med inriktning mot osteologi",
+      "depthCode": "G1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6"
+    },
+    {
+      "code": "5AR721",
+      "titleEn": "Osteology B",
+      "titleSv": "Osteologi B",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Archaeology with focus on Osteology",
+      "mainFieldSv": "Arkeologi med inriktning mot osteologi",
+      "depthCode": "G1E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR025",
+      "titleEn": "Landscape Archaeology: Ancient Remains and How to Map Historical Landscapes",
+      "titleSv": "Landskapsarkeologi: Fornlämningar och kartering av historiska landskap",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Archaeology",
+      "mainFieldSv": "Arkeologi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR026",
+      "titleEn": "Landscape Archaeology: Interpretation of Historical Landscapes",
+      "titleSv": "Landskapsarkeologi: Att tolka historiska landskap",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Archaeology",
+      "mainFieldSv": "Arkeologi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR724",
+      "titleEn": "Palaeopathology and Human Osteological Analysis",
+      "titleSv": "Paleopatologi och humanosteologisk analys",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Archaeology with focus on Osteology",
+      "mainFieldSv": "Arkeologi med inriktning mot osteologi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR027",
+      "titleEn": "Archaeology and Society",
+      "titleSv": "Arkeologi och samhälle",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Archaeology",
+      "mainFieldSv": "Arkeologi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR660",
+      "titleEn": "Archaeology C",
+      "titleSv": "Arkeologi C",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Archaeology",
+      "mainFieldSv": "Arkeologi",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5AR686",
+      "titleEn": "Archaeology with focus on Osteology C",
+      "titleSv": "Arkeologi med inriktning mot osteologi C",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Archaeology with focus on Osteology",
+      "mainFieldSv": "Arkeologi med inriktning mot osteologi",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Studenten väljer en av kurserna och skriver examensarbete.",
+      "labelEn": "The student chooses one of the courses and writes a degree project.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Studenten väljer en av kurserna och skriver examensarbete.",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "2544",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2020",
+      "name": "Giltig från och med höstterminen 2020"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.449689+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=2544",
+  "validFrom": "Studieplan giltig från och med höstterminen 2022",
+  "validFromYear": 2022,
+  "programmeTitle": "Kandidatprogram i arkeologi och osteologi, 180 hp (HAO1K)",
+  "programmeTitleEn": "Bachelor's Programme in Archaeology and Osteology, 180 credits (HAO1K)",
+  "programmeUri": "/utbildning/program/kandidatprogram-arkeologi-och-osteologi",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

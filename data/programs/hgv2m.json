@@ -1,0 +1,122 @@
+{
+  "id": "1964",
+  "code": "HGV2M",
+  "revisionId": "1964",
+  "nameSv": "Masterprogram i genusvetenskap",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2022/43",
+  "finalisedDate": "30 augusti 2022",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet omfattar två års heltidsstudier och innehåller kurser omfattande 75 hp och ett examensarbete om 45 hp. Studenterna ges även möjlighet att göra praktik (VFU). Terminerna 1 och 4 innehåller obligatoriska kurser i genusvetenskap på avancerad nivå. Termin 2 består av en obligatorisk kurs samt att studenten väljer tre av de fyra kurser som ges vid Centrum för genusvetenskap. Termin 3 består av valbara kurser och här finns möjlighet att göra VFU om 7,5 hp eller 15 hp eller delta i internationellt studentutbyte inom ramen för universitetets utbytesavtal. Grunden för examensarbetet läggs termin 1 genom teori- och metodkurser. Därefter skrivs examensarbetet över tre terminer, där tyngdpunkten ligger på termin 4.",
+    "Studenter som vill ta ut en magisterexamen läser de obligatoriska kurserna under termin 1 och skriver ett examensarbete om 30 hp under termin 2. Det finns även möjlighet för studenter med en tidigare magisterexamen att komplettera sina studier för att erhålla en masterexamen.",
+    "Termin 1 (höst)",
+    "Genusteori, 7,5 hp",
+    "Genus, natur och vetenskap, 7,5 hp",
+    "Intersektionalitet och makt, 7,5 hp",
+    "Feministisk metodologi och metoder, 7,5 hp",
+    "Termin 2 (vår)",
+    "Examensarbete (del 1), 7,5 hp",
+    "Välj tre av följande:",
+    "Feministiska kulturstudier, 7,5 hp",
+    "Människa, djur och miljö, 7,5 hp",
+    "Globalisering, ras och privilegier, 7,5 hp",
+    "Familj, släktskap och reproduktion, 7,5 hp",
+    "Termin 3 (höst)",
+    "Examensarbete (del 2), 7,5 hp",
+    "Valbar kurs (vid annan institution eller universitet), 7,5 hp",
+    "Valbar kurs eller VFU, 7,5 hp",
+    "Valbar kurs eller VFU, 7,5 hp",
+    "Termin 4 (vår)",
+    "Examensarbete (del 3), 30 hp"
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [
+    {
+      "title": "Genusteori",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Genus, natur och vetenskap",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Intersektionalitet och makt",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Feministisk metodologi och metoder",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Examensarbete",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Feministiska kulturstudier",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Människa, djur och miljö",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Globalisering, ras och privilegier",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Familj, släktskap och reproduktion",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Examensarbete",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Valbar kurs",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Valbar kurs eller VFU",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Valbar kurs eller VFU",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Examensarbete",
+      "credits": 30.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.467191+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1964",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i genusvetenskap, 120 hp (HGV2M)",
+  "programmeTitleEn": "Master's Programme in Gender Studies, 120 credits (HGV2M)",
+  "programmeUri": "/utbildning/program/masterprogram-genusvetenskap",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

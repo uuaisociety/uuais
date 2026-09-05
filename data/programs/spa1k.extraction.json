@@ -1,0 +1,103 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:37:10.188117+00:00",
+  "edges": [
+    {
+      "code": "2FE159",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2FE160",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2FE161",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2HR111",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PP533",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2SC146",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2SC211",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 2PE381, 2SC018, 2PP536",
+        "semester": 5,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "2PE381",
+          "2SC018",
+          "2PP536"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2PE381",
+          "2SC018",
+          "2PP536"
+        ],
+        "labelEn": "One of the courses 2PE381, 2SC018, or 2PP536 must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 2PE382, 2SC111, 2PP537",
+        "semester": 6,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "2PE382",
+          "2SC111",
+          "2PP537"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2PE382",
+          "2SC111",
+          "2PP537"
+        ],
+        "labelEn": "One of these three courses must be chosen.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

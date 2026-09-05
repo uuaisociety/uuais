@@ -1,0 +1,31 @@
+{
+  "id": "1978",
+  "code": "HKV2M",
+  "revisionId": "1978",
+  "nameSv": "Masterprogram i konstvetenskap",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2022/45",
+  "finalisedDate": "30 augusti 2022",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet omfattar två år. Första årets studier kan leda till en magisterexamen. Andra årets studier leder till en masterexamen. I programmet ingår kurser, däribland examensarbete och möjlighet till verksamhetsförlagd utbildning. Kurserna varierar i omfattning och ges på halvfart. Möjlighet finns att komplettera en tidigare magisterexamen för att erhålla en masterexamen."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.469807+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1978",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i konstvetenskap, 120 hp (HKV2M)",
+  "programmeTitleEn": "Master's Programme in Art History, 120 credits (HKV2M)",
+  "programmeUri": "/utbildning/program/masterprogram-konstvetenskap",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

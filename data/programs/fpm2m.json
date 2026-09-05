@@ -1,0 +1,279 @@
+{
+  "id": "3102",
+  "code": "FPM2M",
+  "revisionId": "3102",
+  "nameSv": "Masterprogram i läkemedelsmodellering",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "2021/962",
+  "finalisedDate": "8 mars 2019",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3FK229",
+      "titleEn": "Drug Discovery and Development",
+      "titleSv": "Läkemedelsutveckling",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits of which 90 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in chemistry and 7.5 credits in pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FG288",
+      "titleEn": "Molecular Biopharmaceutics",
+      "titleSv": "Molekylär biofarmaci",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical sciences and/or natural sciences/engineering. Previous studies must include 3 credits of pharmaceutics and pharmacokinetics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FB221",
+      "titleEn": "Introduction to Programming in Python and R for Bioscience",
+      "titleSv": "Introduktionskurs i programmering i Python och R inom biovetenskap",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in biomedicine, pharmaceutical science, natural science and/or technology."
+    },
+    {
+      "code": "3FG289",
+      "titleEn": "Preclinical and Clinical Data Analysis in Predictive Drug Discovery/Development",
+      "titleSv": "Preklinisk och klinisk dataanalys i prediktiv läkemedelsutveckling",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 120 credits from courses in biomedicine, pharmaceutical sciences and/or natural sciences/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FF276",
+      "titleEn": "Pharmaceutical Bioinformatics with Sequence Analysis",
+      "titleSv": "Farmaceutisk bioinformatik med sekvensanalys",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 120 credits in biomedicine, pharmaceutical science, chemistry, drug discovery, natural science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FK219",
+      "titleEn": "Computational Medicinal Chemistry",
+      "titleSv": "Läkemedelskemi med datorbaserad läkemedelsdesign",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FK281",
+      "titleEn": "Advanced Molecular Modelling Applied to Drug Discovery",
+      "titleSv": "Avancerad molekylmodellering med inriktning mot läkemedelsdesign",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Drug Discovery and Development A1F, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1F, Läkemedelsutveckling",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Participation in the course Computational Medicinal Chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FB225",
+      "titleEn": "Clinical Pharmacokinetics and Pharmacodynamics",
+      "titleSv": "Klinisk farmakokinetik och farmakodynamik",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits, including 120 credits in biomedicine, biology, pharmaceutical sciences, chemistry and/or natural sciences/technology. Previous studies should include 5 credits of pharmacokinetics and 7.5 credits of pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FC003",
+      "titleEn": "Molecular Physical Pharmacy",
+      "titleSv": "Molekylär fysikalisk farmaci",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits in biomedicine, pharmaceutical science, drug discovery and development, natural science, and/or technology. Prior studies should include 15 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FB207",
+      "titleEn": "Models for Biological Systems",
+      "titleSv": "Modeller för biologiska system",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Drug Discovery and Development A1N, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1N, Läkemedelsutveckling",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "150 credits in biomedicine, pharmaceutical science, drug development, natural science and/or technology. Previous studies must contain 5 credits of statistics or probability theory. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Valbara kurser omfattande totalt 15 hp eller del av masterprojekt 15 hp (av 45 hp-projekt).",
+      "labelEn": "Elective courses totalling 15 credits may be taken, or 15 credits as part of the 45-credit master's project.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Masterprojekt 30 hp eller resterande del av 45 hp-projekt.",
+      "labelEn": "The master thesis is taken as 30 credits, or as the remaining part of a 45 credit project.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Valbara kurser omfattande totalt 15 hp eller del av masterprojekt 15 hp (av 45 hp-projekt).",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Masterprojekt 30 hp eller resterande del av 45 hp-projekt.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3102",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "1942",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1396",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1204",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;3"
+    },
+    {
+      "id": "1099",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1056",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.558826+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3102",
+  "validFrom": "Studieplan giltig från och med höstterminen 2023",
+  "validFromYear": 2023,
+  "programmeTitle": "Masterprogram i läkemedelsmodellering, 120 hp (FPM2M)",
+  "programmeTitleEn": "Master's Programme in Pharmaceutical Modelling, 120 credits (FPM2M)",
+  "programmeUri": "/utbildning/program/masterprogram-lakemedelsmodellering",
+  "faculty": "Farmaceutiska fakulteten",
+  "reviewed": false
+}

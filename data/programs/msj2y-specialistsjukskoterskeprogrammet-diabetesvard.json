@@ -1,0 +1,192 @@
+{
+  "id": "3087",
+  "code": "MSJ2Y",
+  "revisionId": "3087",
+  "nameSv": "Specialistsjuksköterskeprogrammet",
+  "totalCredits": 60.0,
+  "semesters": 4,
+  "registrationNumber": "MEDFARM 2022/2169",
+  "finalisedDate": "17 januari 2023",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3ME076",
+      "titleEn": "Diabetes Care I",
+      "titleSv": "Diabetesvård I",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME071",
+      "titleEn": "Person-Centred Care Related to Continuous Subcutaneous Insulin Infusion (CSII) and Continuous Glucose Monitoring (CGM)",
+      "titleSv": "Personcentrerad vård vid insulinpumpbehandling och kontinuerlig blodsockermätning",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1F, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1F, Vårdvetenskap",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME104",
+      "titleEn": "Diabetes Self-Management Education",
+      "titleSv": "Diabetes - med inriktning mot lärande",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME105",
+      "titleEn": "Diabetes in Children, Youth and Elderly People",
+      "titleSv": "Diabetes hos barn, ungdomar och äldre",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME077",
+      "titleEn": "Theory and Methodology in Caring Sciences",
+      "titleSv": "Vårdvetenskaplig teori och metod",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME075",
+      "titleEn": "Diabetes mellitus - Pharmacology",
+      "titleSv": "Diabetes mellitus - farmakologi",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1F, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1F, Vårdvetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3ME093",
+      "titleEn": "Degree Project with Focus on Diabetes Care",
+      "titleSv": "Examensarbete med inriktning mot diabetesvård",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3087",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;2"
+    },
+    {
+      "id": "2825",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;1"
+    },
+    {
+      "id": "2528",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2420",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2077",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "2011",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1731",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1509",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    },
+    {
+      "id": "1196",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "1055",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;2"
+    },
+    {
+      "id": "944",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.548130+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3087",
+  "validFrom": "Studieplan giltig från och med höstterminen 2023, version 2",
+  "validFromYear": 2023,
+  "programmeTitle": "Specialistsjuksköterskeprogrammet – Diabetesvård, 60 hp (MSJ2Y)",
+  "programmeTitleEn": "Specialist Nursing Programme – Theatre Care, 60 credits (MSJ2Y)",
+  "programmeUri": "/utbildning/program/specialistsjukskoterskeprogrammet-diabetesvard",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

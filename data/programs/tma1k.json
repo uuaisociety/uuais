@@ -1867,6 +1867,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1MA348",
@@ -2560,12 +2561,13 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.885423+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.357047+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10058",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Kandidatprogram i matematik, 180 hp (TMA1K)",
   "programmeTitleEn": "Bachelor's Programme in Mathematics, 180 credits (TMA1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-matematik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

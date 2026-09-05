@@ -738,6 +738,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1GV014",
@@ -891,12 +892,13 @@
       "name": "Giltig från och med höstterminen 2012"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.928965+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.409794+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10027",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i geovetenskap – Naturgeografi, 120 hp (TGV2M)",
   "programmeTitleEn": "Master's Programme in Earth Science – Physical Geography, 120 credits (TGV2M)",
   "programmeUri": "/utbildning/program/masterprogram-geovetenskap-naturgeografi",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

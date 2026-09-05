@@ -1,0 +1,41 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:27:36.913638+00:00",
+  "edges": [
+    {
+      "code": "5SD066",
+      "text": "30 credits, including 15 credits in game design and 15 credits in either game design, software engineering, expression in convergent media or industrial engineering and management.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD952",
+      "text": "Project Management with Agile Methods, 7.5 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD951",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Denna termin kan du välja att läsa 30 hp valbara kurser, göra praktik (max 30 hp) eller ägna dig åt utlandsstudier.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "In this semester you may take 30 hp of elective courses, do an internship (max 30 hp), or study abroad.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:26:59.070393+00:00",
+  "edges": [
+    {
+      "code": "5SD066",
+      "text": "30 credits, including 15 credits in game design and 15 credits in either game design, software engineering, expression in convergent media or industrial engineering and management.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD515",
+      "text": "Expression and 2D Graphics for Games 2, 7.5 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD511",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD516",
+      "text": "At least 4 credits from Expression, 3D Modelling and Texturing for Games",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD515",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Denna termin kan du välja att läsa 30 hp valbara kurser, göra praktik (max 30 hp) eller ägna dig åt utlandsstudier.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This semester offers a choice between 30 credits of elective courses, an internship (max 30 credits), or studies abroad.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

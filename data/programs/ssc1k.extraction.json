@@ -1,0 +1,238 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:39:55.077826+00:00",
+  "edges": [
+    {
+      "code": "2EH310",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2EH326",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2SC107",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2SC146",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE178",
+      "text": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE179",
+      "text": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE181",
+      "text": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5EE105",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5GN004",
+      "text": "General entry requirements and Social Studies level 1b or level 1a2, or Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5HA302",
+      "text": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5KA106",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5LV211",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5LV310",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5RT000",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SV228",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Utbildningssociologi A 30 hp är ett kurspaket som består av kurserna Introduktion till utbildningssociologi 15 hp och Sociala skillnader i utbildning och samhälle 15 hp.",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "4PE297",
+          "4PE298"
+        ],
+        "labelEn": "Education Sociology A (30 hp) is a course package consisting of Introduction to Sociology of Education and Social Differences in Education and Society.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 5HA302, 5LH150, 5KA106, 5EE105, 5LV310, 5LV211, 5RT000, 5GN004, 5SV228, 2EH310, 2EH326",
+        "semester": 4,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "5HA302",
+          "5LH150",
+          "5KA106",
+          "5EE105",
+          "5LV310",
+          "5LV211",
+          "5RT000",
+          "5GN004",
+          "5SV228",
+          "2EH310",
+          "2EH326"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "5HA302",
+          "5LH150",
+          "5KA106",
+          "5EE105",
+          "5LV310",
+          "5LV211",
+          "5RT000",
+          "5GN004",
+          "5SV228",
+          "2EH310",
+          "2EH326"
+        ],
+        "labelEn": "One of the listed courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Kurserna Ekonomisk historia A: Ekonomi och samhälle 15 hp samt Ekonomisk historia A: Global omvandling och globalisering 1700-2000 15 hp utgör tillsammans kurspaketet Ekonomisk historia A 30 hp.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "2EH310",
+          "2EH326"
+        ],
+        "labelEn": "The two 15 hp Economic History A courses together form the 30 hp course package Economic History A.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 2SC188, 2SC189, 2SC193, 2SC146, 4PE178, 4PE179, 4PE181",
+        "semester": 5,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "2SC188",
+          "2SC189",
+          "2SC193",
+          "2SC146",
+          "4PE178",
+          "4PE179",
+          "4PE181"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2SC188",
+          "2SC189",
+          "2SC193",
+          "2SC146",
+          "4PE178",
+          "4PE179",
+          "4PE181"
+        ],
+        "labelEn": "One of these courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 4UK063, 2SC108",
+        "semester": 6,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "4UK063",
+          "2SC108"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "4UK063",
+          "2SC108"
+        ],
+        "labelEn": "One of the courses 4UK063 or 2SC108 must be chosen.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

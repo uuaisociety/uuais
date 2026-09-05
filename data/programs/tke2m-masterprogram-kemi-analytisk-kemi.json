@@ -222,6 +222,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1KB153",
@@ -308,12 +309,13 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.941477+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.422238+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10033",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i kemi – Analytisk kemi, 120 hp (TKE2M)",
   "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
   "programmeUri": "/utbildning/program/masterprogram-kemi-analytisk-kemi",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

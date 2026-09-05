@@ -1238,6 +1238,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1FA370",
@@ -1408,12 +1409,13 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.912374+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.392352+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10019",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i fysik – Geofysik, 120 hp (TFY2M)",
   "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)",
   "programmeUri": "/utbildning/program/masterprogram-fysik-geofysik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

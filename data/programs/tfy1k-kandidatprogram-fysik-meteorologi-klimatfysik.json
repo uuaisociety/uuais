@@ -759,6 +759,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1FA602",
@@ -831,12 +832,13 @@
       "name": "Giltig från och med höstterminen 2024"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.873350+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.345263+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10062",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Kandidatprogram i fysik – Meteorologi och klimatfysik, 180 hp (TFY1K)",
   "programmeTitleEn": "Bachelor's Programme in Physics – Physics, 180 credits (TFY1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-fysik-meteorologi-klimatfysik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

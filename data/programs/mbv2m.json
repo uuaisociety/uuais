@@ -1,0 +1,264 @@
+{
+  "id": "2601",
+  "code": "MBV2M",
+  "revisionId": "2601",
+  "nameSv": "Masterprogram i biomedicinsk laboratorievetenskap",
+  "totalCredits": 120.0,
+  "semesters": 8,
+  "registrationNumber": "MEDFARM 2021/753",
+  "finalisedDate": "19 oktober 2021",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3KK020",
+      "titleEn": "Scientific Methodology, Advanced Course",
+      "titleSv": "Vetenskaplig metodik på avancerad nivå",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Biomedical Laboratory Science",
+      "mainFieldSv": "Biomedicinsk laboratorievetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KK021",
+      "titleEn": "Flow Cytometry in Clinic and Research",
+      "titleSv": "Flödescytometri inom klinik och forskning",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Biomedical Laboratory Science A1N, Medical Science",
+      "mainFieldSv": "Biomedicinsk laboratorievetenskap A1N, Medicinsk vetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KK022",
+      "titleEn": "Clinical Mass Spectrometry",
+      "titleSv": "Klinisk masspektrometri",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Biomedical Laboratory Science A1N, Medical Science",
+      "mainFieldSv": "Biomedicinsk laboratorievetenskap A1N, Medicinsk vetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FV371",
+      "titleEn": "Health Promoting Management",
+      "titleSv": "Hälsofrämjande ledarskap",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Public Health",
+      "mainFieldSv": "Folkhälsovetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "180 credits"
+    },
+    {
+      "code": "3OG072",
+      "titleEn": "Management and Quality Assurance in Laboratory Environment 1",
+      "titleSv": "Ledarskap och kvalitetssäkring i laboratoriemiljö I",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Biomedical Laboratory Science",
+      "mainFieldSv": "Biomedicinsk laboratorievetenskap",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3OG091",
+      "titleEn": "Management and Quality Assurance in Laboratory Environment 2",
+      "titleSv": "Ledarskap och kvalitetssäkring i laboratoriemiljö II",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Biomedical Laboratory Science",
+      "mainFieldSv": "Biomedicinsk laboratorievetenskap",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KK023",
+      "titleEn": "Work-Based Improvement Work",
+      "titleSv": "Verksamhetsförlagt förbättringsarbete",
+      "credits": 30.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Biomedical Laboratory Science",
+      "mainFieldSv": "Biomedicinsk laboratorievetenskap",
+      "depthCode": "A1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KK023",
+      "titleEn": "Work-Based Improvement Work",
+      "titleSv": "Verksamhetsförlagt förbättringsarbete",
+      "credits": 30.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Biomedical Laboratory Science",
+      "mainFieldSv": "Biomedicinsk laboratorievetenskap",
+      "depthCode": "A1F",
+      "semester": 6,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KK024",
+      "titleEn": "Master's Thesis in Biomedical Laboratory Science",
+      "titleSv": "Examensarbete för masterexamen i biomedicinsk laboratorievetenskap",
+      "credits": 30.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Biomedical Laboratory Science",
+      "mainFieldSv": "Biomedicinsk laboratorievetenskap",
+      "depthCode": "A2E",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KK024",
+      "titleEn": "Master's Thesis in Biomedical Laboratory Science",
+      "titleSv": "Examensarbete för masterexamen i biomedicinsk laboratorievetenskap",
+      "credits": 30.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Biomedical Laboratory Science",
+      "mainFieldSv": "Biomedicinsk laboratorievetenskap",
+      "depthCode": "A2E",
+      "semester": 8,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "alternativt3DR715 Datortomografi, 15 hpalternativtValbara kurser motsvarande 15 hp",
+      "labelEn": "Either take 3DR715 Computed Tomography (15 credits) or elective courses corresponding to 15 credits.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "alternativt3DR915 Nuklearmedicin och PET, 15 hpalternativtValbara kurser motsvarande 15 hp",
+      "labelEn": "Alternatively, Nuclear Medicine and PET (15 hp) may be taken, or elective courses corresponding to 15 hp.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "alternativt3DR815 Magnetisk resonanstomografi, 15 hpalternativtValbara kurser motsvarande 15 hp",
+      "labelEn": "Students may choose either 3DR815 Magnetic Resonance Tomography or elective courses totalling 15 hp.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "alternativt3DR715 Datortomografi, 15 hpalternativtValbara kurser motsvarande 15 hp",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "alternativt3DR915 Nuklearmedicin och PET, 15 hpalternativtValbara kurser motsvarande 15 hp",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "alternativt3DR815 Magnetisk resonanstomografi, 15 hpalternativtValbara kurser motsvarande 15 hp",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "2601",
+      "name": "Giltig från och med höstterminen 2022"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.534295+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=2601",
+  "validFrom": "Studieplan giltig från och med höstterminen 2022",
+  "validFromYear": 2022,
+  "programmeTitle": "Masterprogram i biomedicinsk laboratorievetenskap, 120 hp (MBV2M)",
+  "programmeTitleEn": "Master's Programme in Biomedical Laboratory Science, 120 credits (MBV2M)",
+  "programmeUri": "/utbildning/program/masterprogram-biomedicinsk-laboratorievetenskap",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

@@ -1,0 +1,566 @@
+{
+  "id": "3471",
+  "code": "UGR0Y",
+  "revisionId": "3471",
+  "nameSv": "Grundlärarprogrammet",
+  "totalCredits": 240.0,
+  "semesters": 8,
+  "registrationNumber": "UTBVET 2024/64",
+  "finalisedDate": "2 juli 2024",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "4PE182",
+      "titleEn": "Learning and Development for Primary School, Years 4-6",
+      "titleSv": "Lärande och utveckling, grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies G1N, Education",
+      "mainFieldSv": "Didaktik G1N, Pedagogik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE013",
+      "titleEn": "Swedish I for the Teacher Education Programme, Primary School, Years 4-6",
+      "titleSv": "Svenska I för grundlärarprogrammet med inriktning mot årskurs 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies",
+      "mainFieldSv": "Didaktik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE218",
+      "titleEn": "Development and Conditions of Education for Primary School, Years 4-6",
+      "titleSv": "Utbildningens framväxt och villkor, grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Education G1N, Sociology of Education",
+      "mainFieldSv": "Pedagogik G1N, Utbildningssociologi",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE010",
+      "titleEn": "Mathematics I for the Teacher Education Programme, Primary School, Years 4-6",
+      "titleSv": "Matematik I för grundlärarprogrammet med inriktning mot årskurs 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies",
+      "mainFieldSv": "Didaktik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE197",
+      "titleEn": "Leadership in Primary School, Years 4-6",
+      "titleSv": "Ledarskap, grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies G1N, Education",
+      "mainFieldSv": "Didaktik G1N, Pedagogik",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE199",
+      "titleEn": "School Placement 1: Primary School, Years 4-6",
+      "titleSv": "VFU I, grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies G1N, Education",
+      "mainFieldSv": "Didaktik G1N, Pedagogik",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "5EN209",
+      "titleEn": "English for Primary School Teachers 4-6",
+      "titleSv": "Engelska för grundlärare, årskurs 4-6",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits, including Swedish 1, from the Primary School Teacher Education Programme, Grades 4-6 of the Compulsory School."
+    },
+    {
+      "code": "5EN209",
+      "titleEn": "English for Primary School Teachers 4-6",
+      "titleSv": "Engelska för grundlärare, årskurs 4-6",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits, including Swedish 1, from the Primary School Teacher Education Programme, Grades 4-6 of the Compulsory School."
+    },
+    {
+      "code": "4PE041",
+      "titleEn": "Swedish II for the Teacher Education Programme, Primary School, Years 4-6",
+      "titleSv": "Svenska II i grundskolans årskurser 4-6",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies",
+      "mainFieldSv": "Didaktik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE044",
+      "titleEn": "Mathematics II for the Teacher Education Programme, Primary School, Years 4-6",
+      "titleSv": "Matematik II för grundlärarprogrammet årskurs 4-6",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies",
+      "mainFieldSv": "Didaktik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE216",
+      "titleEn": "Special Needs Education for Primary School, Years 4-6",
+      "titleSv": "Specialpedagogik, grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies G1F, Education",
+      "mainFieldSv": "Didaktik G1F, Pedagogik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE214",
+      "titleEn": "School Placement 2: Primary School Years 4-6",
+      "titleSv": "VFU II, grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies G1F, Education",
+      "mainFieldSv": "Didaktik G1F, Pedagogik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE245",
+      "titleEn": "Curriculum Theory and Teaching Methods, Primary School, Years 4-6",
+      "titleSv": "Läroplansteori och didaktik, grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies G1F, Education",
+      "mainFieldSv": "Didaktik G1F, Pedagogik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE242",
+      "titleEn": "Assessment and Marking, Primary School, Years 4-6",
+      "titleSv": "Bedömning och betygssättning, grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies G1F, Education",
+      "mainFieldSv": "Didaktik G1F, Pedagogik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE247",
+      "titleEn": "Development and Evaluation Routines for Primary School, Years 4-6",
+      "titleSv": "Utvecklings- och utvärderingsarbete för grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies G1F, Education",
+      "mainFieldSv": "Didaktik G1F, Pedagogik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE249",
+      "titleEn": "Epistemology and Research Methodology, Primary School, Years 4-6",
+      "titleSv": "Vetenskapsteori och forskningsmetodik, grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies G1F, Education G1F, Sociology of Education",
+      "mainFieldSv": "Didaktik G1F, Pedagogik G1F, Utbildningssociologi",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE024",
+      "titleEn": "Independent Project 1 for Preschool Class and Primary School, Years 1-3 and 4-6",
+      "titleSv": "Självständigt arbete 1 för grundlärare F-3 och 4-6",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies",
+      "mainFieldSv": "Didaktik",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE263",
+      "titleEn": "Mathematics III for Primary School, Years 4-6",
+      "titleSv": "Matematik III, grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies",
+      "mainFieldSv": "Didaktik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE113",
+      "titleEn": "Swedish III for Primary School, Years 4-6",
+      "titleSv": "Svenska III för grundlärare 4-6",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies",
+      "mainFieldSv": "Didaktik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1BG049",
+      "titleEn": "Science and Technology for Primary School, Years 4-6",
+      "titleSv": "Naturvetenskap och teknik för grundlärare 4-6",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 7,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "7.5 credits Leadership in Primary School, and 7.5 credits School Placement in Primary School."
+    },
+    {
+      "code": "2KU119",
+      "titleEn": "Social Studies för Primary School, Years 4-6",
+      "titleSv": "Samhällsorienterade ämnen för grundlärare 4-6",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 7,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE261",
+      "titleEn": "School Placement 3: Primary School Years 4-6",
+      "titleSv": "VFU III, grundlärare 4-6",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies",
+      "mainFieldSv": "Didaktik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "4PE112",
+      "titleEn": "Independent Project 2 for Preschool Class and Primary School, Years 1-3 and 4-6",
+      "titleSv": "Självständigt arbete 2 för grundlärare Fk-3 och 4-6",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Curriculum Studies",
+      "mainFieldSv": "Didaktik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "5EN209"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "15 hp av kursen Engelska 30 hp läses termin 2",
+      "labelEn": "15 of the 30 credits of the English course are taken in semester 2.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [
+        "5EN209"
+      ],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Fortsättning på kursen Engelska 30 hp (15 hp läses termin 3)",
+      "labelEn": "The English course continues with 15 credits studied in semester 3 as part of its 30 credits.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1BG049",
+        "2KU119"
+      ],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "Termin 7 består av studier i ett fördjupningsområde inom samhällsorienterade ämnen eller naturorienterande ämnen och teknik. Valbarheten varierar mellan höst- och vårtermin, där minst ett av alternativen ges varje termin för studenter i Uppsala. Endast ett av alternativen erbjuds för studenter på Campus Gotland. Ytterligare fördjupningsområde kan komma att erbjudas för studenter i Uppsala. Fördjupningsområde om 30 hp är obligatoriskt.",
+      "labelEn": "A mandatory 30-credit specialization must be taken in either social studies or science and technology, subject to availability.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "15 hp av kursen Engelska 30 hp läses termin 2",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Fortsättning på kursen Engelska 30 hp (15 hp läses termin 3)",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Termin 7 består av studier i ett fördjupningsområde inom samhällsorienterade ämnen eller naturorienterande ämnen och teknik. Valbarheten varierar mellan höst- och vårtermin, där minst ett av alternativen ges varje termin för studenter i Uppsala. Endast ett av alternativen erbjuds för studenter på Campus Gotland. Ytterligare fördjupningsområde kan komma att erbjudas för studenter i Uppsala. Fördjupningsområde om 30 hp är obligatoriskt.",
+      "semester": 7,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [
+    {
+      "from": "4PE197",
+      "to": "1BG049",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "7.5 credits Leadership in Primary School, and 7.5 credits School Placement in Primary School."
+    },
+    {
+      "from": "4PE199",
+      "to": "1BG049",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "7.5 credits Leadership in Primary School, and 7.5 credits School Placement in Primary School."
+    },
+    {
+      "from": "4PE013",
+      "to": "5EN209",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "15 credits, including Swedish 1, from the Primary School Teacher Education Programme, Grades 4-6 of the Compulsory School."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "3471",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;2"
+    },
+    {
+      "id": "3375",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;1"
+    },
+    {
+      "id": "2584",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2390",
+      "name": "Giltig från och med höstterminen 2020, version&nbsp;2"
+    },
+    {
+      "id": "2240",
+      "name": "Giltig från och med höstterminen 2020, version&nbsp;1"
+    },
+    {
+      "id": "2091",
+      "name": "Giltig från och med vårterminen 2020"
+    },
+    {
+      "id": "1946",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1600",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1465",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;8"
+    },
+    {
+      "id": "1314",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;7"
+    },
+    {
+      "id": "1005",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;6"
+    },
+    {
+      "id": "837",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;5"
+    },
+    {
+      "id": "771",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;4"
+    },
+    {
+      "id": "616",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;3"
+    },
+    {
+      "id": "490",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;2"
+    },
+    {
+      "id": "345",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.592956+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3471",
+  "validFrom": "Studieplan giltig från och med höstterminen 2024, version 2",
+  "validFromYear": 2024,
+  "programmeTitle": "Grundlärarprogrammet med inriktning mot arbete i grundskolans årskurs 4–6, 240 hp (UGR0Y)",
+  "programmeTitleEn": "Primary School Teacher Education Programme – Primary Education – School Years 4-6, 240 credits (UGR0Y)",
+  "programmeUri": "/utbildning/program/grundlararprogrammet-4-6",
+  "faculty": "Fakulteten för utbildningsvetenskaper",
+  "reviewed": false
+}

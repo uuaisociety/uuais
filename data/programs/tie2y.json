@@ -1292,6 +1292,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1DL210",
@@ -1583,12 +1584,13 @@
       "name": "Giltig från och med höstterminen 2020"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.812934+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.288283+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=aec2f35d-04f4-4a33-9a54-44d67d940e26",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Civilingenjörsprogrammet i industriell ekonomi, 300 hp (TIE2Y)",
   "programmeTitleEn": "Master's Programme in Industrial Engineering and Management, 300 credits (TIE2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-industriell-ekonomi",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

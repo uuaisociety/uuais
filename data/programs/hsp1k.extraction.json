@@ -1,0 +1,61 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:27:59.033211+00:00",
+  "edges": [
+    {
+      "code": "5SD066",
+      "text": "30 credits, including 15 credits in game design and 15 credits in either game design, software engineering, expression in convergent media or industrial engineering and management.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD820",
+      "text": "2D Game Programming with C++, 7.5 credits (5SD817), and Linear Algebra, Trigonometry and Geometry, 7.5 credits (5SD901)",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD817",
+            "type": "HARD"
+          },
+          {
+            "from": "5SD901",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD821",
+      "text": "2D Game Programming with C++, 7.5 credits (5SD817), and Linear Algebra, Trigonometry and Geometry, 7.5 credits (5SD901)",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD817",
+            "type": "HARD"
+          },
+          {
+            "from": "5SD901",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Denna termin kan du välja att läsa 30 hp valbara kurser, göra praktik (max 30 hp) eller ägna dig åt utlandsstudier.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [],
+        "labelEn": "This semester you may choose between elective courses, an internship, or studies abroad.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:45:31.936206+00:00",
+  "edges": [
+    {
+      "code": "2IS006",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS007",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS024",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS048",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS053",
+      "text": "60 credits in information systems or the equivalent including 7.5 credits in databases and 7.5 credits in object-oriented programming.",
+      "result": {
+        "edges": [
+          {
+            "from": "2IS007",
+            "type": "HARD"
+          },
+          {
+            "from": "2IS006",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2IS062",
+      "text": "52.5 credits in information systems or the equivalent, including 7.5 credits object-oriented programming.",
+      "result": {
+        "edges": [
+          {
+            "from": "2IS006",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2IS064",
+      "text": "60 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS066",
+      "text": "60 credits in information systems",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS068",
+      "text": "60 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS081",
+      "text": "60 credits information systems or equivalent including 7.5 credits in databases",
+      "result": {
+        "edges": [
+          {
+            "from": "2IS007",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Valfri A-kurs, 30 hp",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This line is a heading for a free-choice slot of 30 credits at A-level, without naming any specific courses.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "KurspaketetSystemutveckling termin 5 30 hp, med delkurserna:",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Heading introducing a 30-credit course package in system development for semester 5 with its sub-courses to follow.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "KurspaketetSystemutveckling termin 6 30 hp, med delkurserna:",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Heading introducing a 30-credit course package in systems development for semester 6.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

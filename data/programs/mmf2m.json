@@ -1,0 +1,166 @@
+{
+  "id": "3108",
+  "code": "MMF2M",
+  "revisionId": "3108",
+  "nameSv": "Masterprogram i medicinsk forskning",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "MEDFARM 2023/858",
+  "finalisedDate": "28 februari 2023",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3MR100",
+      "titleEn": "Comparative Genomics for Biomedicine",
+      "titleSv": "Jämförande genomik för biomedicin",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology, biochemistry and genetics. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
+    },
+    {
+      "code": "3MR101",
+      "titleEn": "Biomedical Research Methodology",
+      "titleSv": "Biomedicinsk forskningsmetodik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MR102",
+      "titleEn": "Cell Communication",
+      "titleSv": "Cellulär kommunikation",
+      "credits": 7.5,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MR104",
+      "titleEn": "Cell and Tumour Biology",
+      "titleSv": "Cell- och tumörbiologi",
+      "credits": 7.5,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Drug Management A1F, Medical Science A1F, Pharmaceutical Sciences",
+      "mainFieldSv": "Farmaceutisk vetenskap A1F, Läkemedelsanvändning A1F, Medicinsk vetenskap",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Undergraduate education worth 180 credits within Life Sciences (e.g. Biomedicine, Biotechnology, Medicine, Veterinary Medicine) including at least 10 credits each of Cell Biology, Biochemistry and Genetics, alternatively 180 credits within Pharmaceutical Sciences (e.g. Pharmacy Programme). Students admitted to Master's Programmes in Medical Research, Biomedicine and Drug Management fulfil the eligibility requirements.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
+    },
+    {
+      "code": "3MR103",
+      "titleEn": "Bioinformatics",
+      "titleSv": "Bioinformatik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology and biochemistry. In addition, 7.5 credits in genetics at Master's level are required. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
+    },
+    {
+      "code": "3MR001",
+      "titleEn": "Advanced Research Training",
+      "titleSv": "Avancerad forskningspraktik",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MR010",
+      "titleEn": "Degree Project",
+      "titleSv": "Examensarbete",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3108",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2429",
+      "name": "Giltig från och med höstterminen 2022"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.540376+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3108",
+  "validFrom": "Studieplan giltig från och med höstterminen 2023",
+  "validFromYear": 2023,
+  "programmeTitle": "Masterprogram i medicinsk forskning, 120 hp (MMF2M)",
+  "programmeTitleEn": "Master's Programme in Medical Research, 120 credits (MMF2M)",
+  "programmeUri": "/utbildning/program/masterprogram-medicinsk-forskning",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

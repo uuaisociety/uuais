@@ -1,0 +1,195 @@
+{
+  "id": "3423",
+  "code": "MFV2M",
+  "revisionId": "3423",
+  "nameSv": "Masterprogram i forensisk vetenskap",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "MEDFARM 2024/1511",
+  "finalisedDate": "4 juni 2024",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3MG011",
+      "titleEn": "Medical Genetics",
+      "titleSv": "Medicinsk genetik",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "180 credits from educational programmes in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, cell/molecular biology, genetics, life science, medical sciences or a similar field of study. Also required is:courses in biochemistry, cell biology, chemistry, genetics, and molecular biology/-genetics totalling at least 30 credits;Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3MG110",
+      "titleEn": "Forensic Science and Criminalistics",
+      "titleSv": "Forensisk vetenskap och kriminalteknik",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MG023",
+      "titleEn": "Forensic Genetics and Medicine",
+      "titleSv": "Forensisk genetik och medicin",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Forensic Science A1N, Medical Science",
+      "mainFieldSv": "Forensisk vetenskap A1N, Medicinsk vetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MG106",
+      "titleEn": "Forensic Expertise in Criminal Cases",
+      "titleSv": "Forensisk expertis i brottmål",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Forensic Science A1N, Medical Science",
+      "mainFieldSv": "Forensisk vetenskap A1N, Medicinsk vetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB155",
+      "titleEn": "Forensic Chemistry",
+      "titleSv": "Kriminalteknisk kemi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 30 credits in chemistry/biochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "3FK111",
+      "titleEn": "Analytical Methods in Forensic Science",
+      "titleSv": "Analytiska metoder för forensisk vetenskap",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Biomedicine A1N, Forensic Science",
+      "mainFieldSv": "Biomedicin A1N, Forensisk vetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MG103",
+      "titleEn": "Master's Degree Project",
+      "titleSv": "Examensarbete",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Forensic Science",
+      "mainFieldSv": "Forensisk vetenskap",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Valbar period 15 hp3MG024 Litteraturprojekt i forensisk biologi 15 hpalternativt​3MG105 Examensarbete 45 hp",
+      "labelEn": "Students choose between a 15 hp literature project in forensic biology or a 45 hp degree project.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Valbar period 15 hp3MG024 Litteraturprojekt i forensisk biologi 15 hpalternativt​3MG105 Examensarbete 45 hp",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3423",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2430",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "1749",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "687",
+      "name": "Giltig från och med höstterminen 2009, version&nbsp;4"
+    },
+    {
+      "id": "515",
+      "name": "Giltig från och med höstterminen 2009, version&nbsp;3"
+    },
+    {
+      "id": "471",
+      "name": "Giltig från och med höstterminen 2009, version&nbsp;2"
+    },
+    {
+      "id": "118",
+      "name": "Giltig från och med höstterminen 2009, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.536266+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3423",
+  "validFrom": "Studieplan giltig från och med höstterminen 2024",
+  "validFromYear": 2024,
+  "programmeTitle": "Masterprogram i forensisk vetenskap, 120 hp (MFV2M)",
+  "programmeTitleEn": "Master's Programme in Forensic Science, 120 credits (MFV2M)",
+  "programmeUri": "/utbildning/program/masterprogram-forensisk-vetenskap",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

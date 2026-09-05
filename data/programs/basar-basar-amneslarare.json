@@ -245,6 +245,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [],
   "revisions": [
     {
@@ -252,12 +253,13 @@
       "name": "Giltig från och med höstterminen 2026"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.962839+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.444251+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=c12c86df-17d2-4ca8-beb2-a053aff0315c",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Tekniskt-naturvetenskapligt basår med reserverad plats på ämneslärarprogrammet, matematik, teknik och naturvetenskapliga ämnen, 40 veckor (BASAR)",
   "programmeTitleEn": "Science and Technology Foundation Year Programme – Reserved Place on the Teacher Education Programme, Mathematics, Technology or Natural Science Subjects, 40 weeks (BASAR)",
   "programmeUri": "/utbildning/program/basar-amneslarare",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

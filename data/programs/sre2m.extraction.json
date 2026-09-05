@@ -1,0 +1,100 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:39:23.016916+00:00",
+  "edges": [
+    {
+      "code": "2EU018",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including at least 90 credits in the social sciences or humanities. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2EU020",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including at least 90 credits in the social sciences or humanities. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2EU021",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including at least 90 credits in the social sciences or humanities. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 5RY066, 5RY067, 2EU015",
+        "semester": 1,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "5RY066",
+          "5RY067",
+          "2EU015"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "5RY066",
+          "5RY067",
+          "2EU015"
+        ],
+        "labelEn": "One of the courses 5RY066, 5RY067, or 2EU015 must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 5RY068, 5RY069, 2EU017",
+        "semester": 2,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "5RY068",
+          "5RY069",
+          "2EU017"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "5RY068",
+          "5RY069",
+          "2EU017"
+        ],
+        "labelEn": "One of these three courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 2EU018, 2EU021, 2EU020, 2EU016",
+        "semester": 3,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "2EU018",
+          "2EU021",
+          "2EU020",
+          "2EU016"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2EU018",
+          "2EU021",
+          "2EU020",
+          "2EU016"
+        ],
+        "labelEn": "One of these four courses must be chosen.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

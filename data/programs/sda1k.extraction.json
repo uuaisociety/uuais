@@ -1,0 +1,176 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:21:12.191034+00:00",
+  "edges": [
+    {
+      "code": "2FE944",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2FE945",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2FE946",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2FE947",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2FE995",
+      "text": "Completed 15 credits from basic courses (A-level) in business studies, and registered for another 15 credits at the same level.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2FE996",
+      "text": "Completed 15 credits from basic courses (A-level) in business studies, and registered for another 15 credits at the same level.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2FE997",
+      "text": "Completed 15 credits from basic courses (A-level) in business studies, and registered for another 15 credits at the same level.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2FE998",
+      "text": "Completed 15 credits from basic courses (A-level) in business studies, and registered for another 15 credits at the same level.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS064",
+      "text": "60 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS068",
+      "text": "60 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS221",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS222",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS223",
+      "text": "7.5 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS227",
+      "text": "30 credits in information systems or the equivalent including 7.5 credits in databases",
+      "result": {
+        "edges": [
+          {
+            "from": "2IS222",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2IS232",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS233",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS238",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS239",
+      "text": "60 credits in information systems including 15 credits in databases",
+      "result": {
+        "edges": [
+          {
+            "from": "2IS222",
+            "type": "HARD"
+          },
+          {
+            "from": "2IS227",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2IS240",
+      "text": "45 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS241",
+      "text": "30 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Valbara kurser 30 hp eller utbytesstudier. Studenterna har platsgaranti på:",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Heading stating that 30 credits of elective courses or exchange studies apply, followed by a list of courses where students have guaranteed placement.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

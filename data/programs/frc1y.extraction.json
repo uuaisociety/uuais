@@ -1,0 +1,77 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:20:08.495403+00:00",
+  "edges": [],
+  "rules": [
+    {
+      "note": {
+        "textSv": "År 1Det första året omfattar en introduktion till professionen samt grundläggande kurser i cellbiologi och farmaceutisk kemi. Under första året behandlas även organfunktion kopplat till hur läkemedel verkar.",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A general overview of the first year, covering the profession introduction, basic courses in cell biology and pharmaceutical chemistry, and organ function in relation to drug action.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "År 2Kurserna under det andra året behandlar läkemedelseffekter, hur läkemedel omsätts i kroppen samt olika beredningsformer. Vidare ingår kurser om läkemedelsanvändning på både samhälls- och individnivå.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A heading for Year 2 describing that its courses cover drug effects, drug metabolism, dosage forms, and drug use at societal and individual levels.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "År 3År 3 fokuserar på receptariens yrkesroll med kurser som behandlar rådgivning kring receptfria läkemedel och lagar och föreskrifter inom hälso- och sjukvård. Vidare ingår en specialiseringsperiod på 5 veckor och ett fördjupningsprojekt på 10 veckor. Programmet avslutas med 10 veckors verksamhetsförlagd utbildning på apotek.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Describes Year 3's focus on the prescriptionist professional role, plus a 5-week specialization, a 10-week project, and a final 10-week pharmacy placement.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Specialiseringskurs 7,5 hp",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Specialization course worth 7.5 credits",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Fördjupningsprojekt 15 hp",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This is a heading for an in-depth/specialisation project worth 15 credits, not matching any rostered course.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

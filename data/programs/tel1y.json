@@ -998,6 +998,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1TD433",
@@ -1115,12 +1116,13 @@
       "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.853730+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.326606+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=46e7621e-6fad-40da-a79a-97366ca2287d",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Högskoleingenjörsprogrammet i elektroteknik, 180 hp (TEL1Y)",
   "programmeTitleEn": "Bachelor's Programme in Electrical Engineering, 180 credits (TEL1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-elektroteknik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

@@ -692,6 +692,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1MA352",
@@ -889,12 +890,13 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.851979+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.325101+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=115662fa-76e4-449a-acf1-8c34d8ab843f",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Högskoleingenjörsprogrammet i byggteknik, 180 hp (TBY1Y)",
   "programmeTitleEn": "Bachelor's Programme in Construction Engineering, 180 credits (TBY1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-byggteknik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

@@ -1,0 +1,36 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:24:10.283556+00:00",
+  "edges": [
+    {
+      "code": "5AR260",
+      "text": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5AR720",
+      "text": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Studenten väljer en av kurserna och skriver examensarbete.",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "The student chooses one of the courses and writes a degree project.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

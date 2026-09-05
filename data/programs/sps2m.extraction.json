@@ -1,0 +1,66 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:38:31.437152+00:00",
+  "edges": [
+    {
+      "code": "2PS112",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS113",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required are 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS116",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS118",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required are 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Valbara kurser i psykologi, 15 hp",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Elective courses in psychology, 15 credits",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Möjlighet att välja vetenskaplig praktik (15 hp) samt valbara kurser i psykologi eller inom andra närliggande ämnen (15 hp).Alternativt att välja valbara kurser i psykologi eller närliggande ämnen (30 hp, dvs hela terminen).",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [
+          "2PS112"
+        ],
+        "labelEn": "Students may take the 15 hp scientific internship plus 15 hp of electives, or alternatively 30 hp of electives for the whole semester.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "1665",
+  "code": "SSP1K",
+  "revisionId": "1665",
+  "nameSv": "Samhällsplaneringsprogram",
+  "totalCredits": 180.0,
+  "semesters": 0,
+  "registrationNumber": "SAMFAK 2021/42 Doss:3:2:1, UFV 2021/1091",
+  "finalisedDate": "22 april 2021",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Samhällsplaneringsprogrammet inleds med en introduktionstermin där studenterna ges en orientering om samhällsplaneringens förutsättningar och dess roll i samhällsbygget. Studenter som med godkänt resultat genomgått introduktionskursen kan räkna den som en A-kurs i ämnena samhällsgeografi, statskunskap och sociologi.",
+    "Efter den första terminens studier vidtar ytterligare tre terminer med obligatoriska programkurser. De obligatoriska kurserna är inriktade mot studier i statistik, GIS (Geografiska informationssystem), regionala och lokala utvecklingsstrategier, metod och planeringsteori och juridik. Inom de obligatoriska första 120 högskolepoängen ingår också en ett examensarbete i samhällsgeografi (C-uppsats). Studenter på programmet bedöms alltså ha tillgodogjorts sig 75 hp i samhällsgeografi fram till period två i termin fyra.",
+    "De återstående två terminernas studier på programmet är förhållandevis fria. Studenten kan välja att t.ex. fortsätta sina studier i statskunskap eller sociologi upp till och med C-nivå, göra praktik, fördjupa kunskaperna i statistik eller ekonomiämnena eller studera andra ämnen relevanta för ett arbete inom samhällsplaneringsfältet, som t.ex. juridik och konstvetenskap."
+  ],
+  "syllabusEntryRequirements": "Grundläggande behörighet och Matematik 3b eller 3c/Matematik C, Samhällskunskap 1b eller 1a1+1a2, Engelska 6",
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.520797+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1665",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Samhällsplaneringsprogram, 180 hp (SSP1K)",
+  "programmeTitleEn": "Bachelor's Programme in Urban and Regional Planning, 180 credits (SSP1K)",
+  "programmeUri": "/utbildning/program/samhallsplaneringsprogram",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

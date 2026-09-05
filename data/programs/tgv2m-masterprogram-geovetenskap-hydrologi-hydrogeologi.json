@@ -774,6 +774,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1GE039",
@@ -899,12 +900,13 @@
       "name": "Giltig från och med höstterminen 2012"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.927184+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.407963+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10026",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i geovetenskap – Hydrologi/hydrogeologi, 120 hp (TGV2M)",
   "programmeTitleEn": "Master's Programme in Earth Science – Physical Geography, 120 credits (TGV2M)",
   "programmeUri": "/utbildning/program/masterprogram-geovetenskap-hydrologi-hydrogeologi",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

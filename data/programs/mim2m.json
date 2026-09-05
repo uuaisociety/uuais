@@ -1,0 +1,48 @@
+{
+  "id": "3692",
+  "code": "MIM2M",
+  "revisionId": "3692",
+  "nameSv": "Masterprogram i innovativ medicin",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "MEDFARM 2024/1511",
+  "finalisedDate": "22 april 2025",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3692",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;2"
+    },
+    {
+      "id": "3485",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;1"
+    },
+    {
+      "id": "3165",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2413",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "1965",
+      "name": "Giltig från och med höstterminen 2019"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.539658+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3692",
+  "validFrom": "Studieplan giltig från och med höstterminen 2025, version 2",
+  "validFromYear": 2025,
+  "programmeTitle": "Masterprogram i innovativ medicin, 120 hp (MIM2M)",
+  "programmeTitleEn": "International Master's Programme in Innovative Medicine, 120 credits (MIM2M)",
+  "programmeUri": "/utbildning/program/masterprogram-innovativ-medicin",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

@@ -1,0 +1,170 @@
+{
+  "id": "3085",
+  "code": "MSJ2Y",
+  "revisionId": "3085",
+  "nameSv": "Specialistsjuksköterskeprogrammet",
+  "totalCredits": 60.0,
+  "semesters": 2,
+  "registrationNumber": "MEDFARM 2022/2169",
+  "finalisedDate": "17 januari 2023",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3KR238",
+      "titleEn": "Theory and Methodology in Caring Sciences",
+      "titleSv": "Vårdvetenskaplig teori och metod",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR044",
+      "titleEn": "Nursing, Anatomy, Physiology and Pharmacology",
+      "titleSv": "Omvårdnad, anatomi, fysiologi och farmakologi",
+      "credits": 6.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 6.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR052",
+      "titleEn": "Nursing in Prehospital Care 1",
+      "titleSv": "Omvårdnad inom ambulanssjukvård 1",
+      "credits": 16.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 16.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR053",
+      "titleEn": "Nursing in Prehospital Care 2",
+      "titleSv": "Omvårdnad inom ambulanssjukvård 2",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3KR035",
+      "titleEn": "Degree Project with Focus on Prehospital Emergency Care",
+      "titleSv": "Examensarbete med inriktning mot ambulanssjukvård",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3085",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;2"
+    },
+    {
+      "id": "2823",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;1"
+    },
+    {
+      "id": "2526",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2415",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2075",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "2008",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1729",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1505",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    },
+    {
+      "id": "1194",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "934",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "629",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "567",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;3"
+    },
+    {
+      "id": "222",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;2"
+    },
+    {
+      "id": "146",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.546467+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3085",
+  "validFrom": "Studieplan giltig från och med höstterminen 2023, version 2",
+  "validFromYear": 2023,
+  "programmeTitle": "Specialistsjuksköterskeprogrammet – Ambulanssjukvård, 60 hp (MSJ2Y)",
+  "programmeTitleEn": "Specialist Nursing Programme – Theatre Care, 60 credits (MSJ2Y)",
+  "programmeUri": "/utbildning/program/specialistsjukskoterskeprogrammet-ambulanssjukvard",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

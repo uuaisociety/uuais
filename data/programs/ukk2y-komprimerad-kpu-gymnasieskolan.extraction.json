@@ -1,0 +1,63 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:47:17.914774+00:00",
+  "edges": [],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Sommartermin 1:",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Bare heading indicating Summer term 1.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Hösttermin:",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This is a heading indicating the autumn term.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Vårtermin:",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This is a heading indicating the spring semester.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Sommartermin 2:",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This is a heading for the second summer term.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

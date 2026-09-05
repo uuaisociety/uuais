@@ -1,0 +1,66 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:39:07.832679+00:00",
+  "edges": [],
+  "rules": [
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 2PP430, 2PP432, 2PP431, 2PP433, 2PP434",
+        "semester": 9,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "2PP430",
+          "2PP432",
+          "2PP431",
+          "2PP433",
+          "2PP434"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2PP430",
+          "2PP432",
+          "2PP431",
+          "2PP433",
+          "2PP434"
+        ],
+        "labelEn": "One of these courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "- Externa valbara kurser kan tillgodoräknas inom programmet enligt programansvarigs beslut.- Denna termin läses 7,5 hp av kursen Examensarbete (30 hp).",
+        "semester": 9,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "2PP429"
+        ],
+        "labelEn": "External elective courses may be credited with the programme director's approval, and 7.5 credits of the Master's Thesis (30 credits) are taken this term.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Examensarbete, 30 hp (22,5 hp)*Psykoterapeutisk fördjupning III, 7,5 hp** Obligatorisk",
+        "semester": 10,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "2PP429"
+        ],
+        "labelEn": "The Master's Thesis (30 hp) and Psychotherapeutic Deepening III (7.5 hp) are obligatory courses.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

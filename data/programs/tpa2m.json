@@ -195,6 +195,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1PA041",
@@ -248,12 +249,13 @@
       "name": "Giltig från och med höstterminen 2020"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.955970+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.437382+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10047",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i paleobiologi – PANGEA, 120 hp (TPA2M)",
   "programmeTitleEn": "Master's Programme in Palaeobiology – PANGEA, 120 credits (TPA2M)",
   "programmeUri": "/utbildning/program/masterprogram-paleobiologi-pangea",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

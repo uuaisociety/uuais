@@ -1,0 +1,43 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:48:08.961682+00:00",
+  "edges": [
+    {
+      "code": "4PE299",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE301",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 2PE172, 4PE096",
+        "semester": 6,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "2PE172",
+          "4PE096"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2PE172",
+          "4PE096"
+        ],
+        "labelEn": "One of the courses 2PE172 or 4PE096 must be chosen.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

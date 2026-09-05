@@ -1,0 +1,187 @@
+{
+  "id": "3088",
+  "code": "MSJ2Y",
+  "revisionId": "3088",
+  "nameSv": "Specialistsjuksköterskeprogrammet",
+  "totalCredits": 75.0,
+  "semesters": 3,
+  "registrationNumber": "MEDFARM 2022/2169",
+  "finalisedDate": "17 januari 2023",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3FV382",
+      "titleEn": "Child Health Care and School Health Medical Interventions within the District Nurse's Area of Competence",
+      "titleSv": "Barnhälsovård och elevhälsans medicinska insatser inom distriktssköterskans kompetensområde",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FV384",
+      "titleEn": "Public Health and Public Health Work within the District Nurse's Area of Competence",
+      "titleSv": "Folkhälsa och folkhälsoarbete inom distriktssköterskans kompetensområde",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Public Health",
+      "mainFieldSv": "Folkhälsovetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FV329",
+      "titleEn": "Theory and Methodology in Caring Sciences",
+      "titleSv": "Vårdvetenskaplig teori och metod",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FV323",
+      "titleEn": "Pharmacology Related to Diseases and the Extended Role of the District Nurse",
+      "titleSv": "Farmakologi och sjukdomslära/förskrivningsrätt",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FV383",
+      "titleEn": "Nursing and Public Health with a Focus on Adults and the Elderly within the District Nurse's Area of Competence",
+      "titleSv": "Omvårdnad och folkhälsa med inriktning mot vuxna och äldre inom distriktssköterskans kompetensområde",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FV340",
+      "titleEn": "Degree Project with Focus on Primary Health Care",
+      "titleSv": "Examensarbete med inriktning mot distriktssköterska",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1E",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3088",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;2"
+    },
+    {
+      "id": "2826",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;1"
+    },
+    {
+      "id": "2529",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2424",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2078",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "2014",
+      "name": "Giltig från och med höstterminen 2018, version&nbsp;2"
+    },
+    {
+      "id": "1732",
+      "name": "Giltig från och med höstterminen 2018, version&nbsp;1"
+    },
+    {
+      "id": "1507",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1197",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "936",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "631",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "569",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;3"
+    },
+    {
+      "id": "224",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;2"
+    },
+    {
+      "id": "140",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.548992+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3088",
+  "validFrom": "Studieplan giltig från och med höstterminen 2023, version 2",
+  "validFromYear": 2023,
+  "programmeTitle": "Specialistsjuksköterskeprogrammet – Distriktssköterska, 75 hp (MSJ2Y)",
+  "programmeTitleEn": "Specialist Nursing Programme – Theatre Care, 60 credits (MSJ2Y)",
+  "programmeUri": "/utbildning/program/specialistsjukskoterskeprogrammet-distriktsskoterska",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

@@ -1,0 +1,48 @@
+{
+  "id": "3707",
+  "code": "UUV2M",
+  "revisionId": "3707",
+  "nameSv": "Masterprogram i utbildningsvetenskap",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "UTBVET 2015/8",
+  "finalisedDate": "6 februari 2025",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3707",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "698",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;3"
+    },
+    {
+      "id": "685",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "448",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "204",
+      "name": "Giltig från och med höstterminen 2010"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.601908+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3707",
+  "validFrom": "Studieplan giltig från och med höstterminen 2025",
+  "validFromYear": 2025,
+  "programmeTitle": "Masterprogram i utbildningsvetenskap – Utbildningssociologi, 120 hp (UUV2M)",
+  "programmeTitleEn": "Master's Programme in Educational Sciences – Special Education, 120 credits (UUV2M)",
+  "programmeUri": "/utbildning/program/masterprogram-utbildningsvetenskap-utbildningssociologi",
+  "faculty": "Fakulteten för utbildningsvetenskaper",
+  "reviewed": false
+}

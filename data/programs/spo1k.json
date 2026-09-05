@@ -1,0 +1,183 @@
+{
+  "id": "2521",
+  "code": "SPO1K",
+  "revisionId": "2521",
+  "nameSv": "Politices kandidatprogram",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "SAMFAK 2021/42 Doss:3:2:1, UFV 2021/1091",
+  "finalisedDate": "28 maj 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "2SK009",
+      "titleEn": "Political Science A",
+      "titleSv": "Statskunskap A",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Political Science",
+      "mainFieldSv": "Statskunskap",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements and Social Studies level 1b or level 1a2, or Social Studies 1b or 1a1+1a2"
+    },
+    {
+      "code": "2NE474",
+      "titleEn": "Microeconomics: Individuals, Firms and Markets",
+      "titleSv": "Mikroekonomi - individer, företag och marknader",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Economics",
+      "mainFieldSv": "Nationalekonomi",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6"
+    },
+    {
+      "code": "2NE475",
+      "titleEn": "Macroeconomics: Growth, Business Cycles and Economic Policy",
+      "titleSv": "Makroekonomi - tillväxt, konjunkturer och ekonomisk politik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Economics",
+      "mainFieldSv": "Nationalekonomi",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6"
+    },
+    {
+      "code": "2HR112",
+      "titleEn": "Basic Course on Administrative Law",
+      "titleSv": "Förvaltningsrättslig översiktskurs",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Commercial Law",
+      "mainFieldSv": "Handelsrätt",
+      "depthCode": "G1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "2ST135",
+      "titleEn": "Introductory Statistics and Data Science 1",
+      "titleSv": "Grundläggande statistik och dataanalys 1",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Statistics",
+      "mainFieldSv": "Statistik",
+      "depthCode": "G1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C"
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Fördjupningsdelen består av a) B- och C-kurser i något av huvudämnena Nationalekonomi och Statskunskap samt en termin som kan användas för valfria kurser eller praktik och därmed fördjupning eller breddning av utbildningen eller b) A-, B- och C-kurser i Freds- och konfliktkunskap, Utvecklingsstudier och Statistik.",
+      "labelEn": "The advanced part consists of either B- and C-level courses in one main subject (economics or political science) plus an elective semester, or full A-, B- and C-level studies in peace and conflict studies, development studies, and statistics.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "Se Termin 4.",
+      "labelEn": "Refers the reader to Semester 4 for further information.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Se Termin 4.",
+      "labelEn": "A pointer referring the reader to Term 4 for details.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Fördjupningsdelen består av a) B- och C-kurser i något av huvudämnena Nationalekonomi och Statskunskap samt en termin som kan användas för valfria kurser eller praktik och därmed fördjupning eller breddning av utbildningen eller b) A-, B- och C-kurser i Freds- och konfliktkunskap, Utvecklingsstudier och Statistik.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Se Termin 4.",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Se Termin 4.",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "2521",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2069",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1002",
+      "name": "Giltig från och med höstterminen 2015"
+    },
+    {
+      "id": "453",
+      "name": "Giltig från och med höstterminen 2007"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.516033+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=2521",
+  "validFrom": "Studieplan giltig från och med höstterminen 2024",
+  "validFromYear": 2024,
+  "programmeTitle": "Politices kandidatprogram, 180 hp (SPO1K)",
+  "programmeTitleEn": "Bachelor's Programme in Political Science, 180 credits (SPO1K)",
+  "programmeUri": "/utbildning/program/politices-kandidatprogram",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

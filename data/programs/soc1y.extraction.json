@@ -1,0 +1,50 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:36:56.681262+00:00",
+  "edges": [
+    {
+      "code": "2JS903",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2SA211",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2SA221",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2SC212",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Valbara kurser på avancerad nivå inom ämnet socialt arbete om totalt 30 hp.",
+        "semester": 7,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Elective advanced-level courses in the subject of social work totalling 30 credits may be chosen.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

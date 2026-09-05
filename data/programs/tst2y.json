@@ -1803,6 +1803,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1DL042",
@@ -2389,12 +2390,13 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.833467+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.307010+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10071",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Civilingenjörsprogrammet i system i teknik och samhälle, 300 hp (TST2Y)",
   "programmeTitleEn": "Master's Programme in Sociotechnical Systems Engineering, 300 credits (TST2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-system-teknik-och-samhalle",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

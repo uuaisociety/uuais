@@ -1,7 +1,7 @@
 # Programme data
 
-One JSON file per study plan for the technical-natural science faculty, read by
-`lib/programs.ts` and rendered at `/programs/<slug>`. The data is committed rather
+One JSON file per programme across all nine faculties, read by `lib/programs.ts` and
+rendered at `/programs/<slug>`. The data is committed rather
 than stored in Firestore so that a re-scrape lands as a reviewable diff instead of a
 silent write, and so the pages need no cache layer. Course *detail* still comes from
 Firestore, joined on the course code.
@@ -13,6 +13,7 @@ programme page carries a notice saying so.
 |---|---|---|
 | `index.json` | `ingest_faculty.py` | The catalogue: one row per plan, plus the scrape date |
 | `<slug>.json` | `ingest_faculty.py` → `merge_extraction.py` | The plan the app reads |
+| `<slug>.json` with `"planFormat": "syllabus"` | `ingest_faculty.py` | A programme UU publishes no study plan for: named courses and prose, no graph |
 | `_requirements.json` | `fetch_requirements.py` | Raw entry requirements for every course, shared across programmes |
 | `<slug>.extraction.json` | the LLM pass | **The audit trail** — every generated edge with the sentence it came from |
 | `<slug>.edges.json` | a human | Optional corrections layered over the generated edges |
@@ -52,11 +53,15 @@ Step 1 rewrites `edges` and `rules` as empty, so step 4 must always follow it.
 `merge_all.py` skips programmes whose extraction has not been produced yet, so it is
 safe to run while step 3 is still going.
 
-### Scale and cost, measured
+### Scale, measured
 
-- 84 programmes listed in the faculty, **77 with a study plan**
-- **2,474 course rows**, 1,146 unique courses, ~1.5 MB of committed plan JSON
-- The LLM pass is roughly **2.1M input / 0.3M output tokens** across ~2,500 calls
+- **279 programmes** listed across the nine faculties; 270 yield a record
+- **166 have a study plan** and become a course map; **104 publish only a syllabus**
+- The technical-natural science faculty alone is 84 programmes and 77 maps — the whole of
+  the original ingest, and still the only part with prerequisite edges
+- **2,474 course rows** and 1,146 unique courses in that faculty; the LLM pass over it was
+  roughly **2.1M input / 0.3M output tokens** across ~2,500 calls. The other 89 maps have
+  no extraction yet, so they carry no edges or rules.
 
 ## Correcting an edge
 
@@ -82,12 +87,23 @@ UU is migrating from a legacy shape to a Ladok-backed one, and both are live:
 
 - **legacy** (56 plans) — credits are embedded in display strings, specialisations are
   bold headers in prose, either/or rules are prose.
-- **ladok** (21 plans) — credits are numeric, per-period credits are explicit, and
+- **ladok** (45 plans) — credits are numeric, per-period credits are explicit, and
   `choices` are structured. Those choice groups become `CHOOSE_ONE` rules with no
   model involved at all, marked `"source": "plan"`.
 
+A third of the university uses neither, publishing only an **utbildningsplan**. Those
+become `"planFormat": "syllabus"`: `courses` is empty, and `syllabusCourses` holds the
+courses its prose names, which never carry a course code. A handful of study plans
+describe their semesters in prose too, and are read the same way — `syllabusCourses` is
+filled from the semester texts, so the semester is known even though the code is not.
+
 ## Known limitations
 
+- **Only the technical-natural science faculty has prerequisite edges.** The other 89
+  maps are laid out from their plans but have had no extraction pass, so they show
+  semesters and courses with no arrows between them.
+- **A syllabus programme is a reading list, not a map.** Its courses are named in prose
+  and carry no codes, so they cannot be linked to a syllabus or connected to each other.
 - **Edges are machine-extracted and unreviewed.** Requirements name courses by title,
   and some titles are ambiguous (`"Applied mechanics I/Mechanics II"` resolves to one
   of two plausible courses). Treat the graph as a strong draft.

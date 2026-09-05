@@ -1,0 +1,21 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:29:35.764451+00:00",
+  "edges": [],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Valbar kurs alternativt valbar VFU, 7,5 hp",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "An elective course or an elective clinical placement (VFU) worth 7.5 credits may be taken.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "1626",
+  "code": "HTU2M",
+  "revisionId": "1626",
+  "nameSv": "Masterprogram i turkiska studier",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "SPRÅKFAK 2021/15",
+  "finalisedDate": "8 april 2021",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Under det första året läser studenten vid Uppsala universitet, Sverige, och under det andra vid Johannes Gutenberg-Universität Mainz, Tyskland.",
+    "Programmet omfattar följande kurser:",
+    "Termin 1",
+    "Fornturkisk filologi 7,5 hp",
+    "Turkisk språkhistoria 7,5 hp",
+    "Jämförande turkologi: sibiriska turkiska språk 7,5 hp",
+    "Aktuella forskningsområden i turkisk lingvistik 7,5 hp",
+    "Termin 2",
+    "Medelturkisk filologi 7,5 hp",
+    "Turkiska språkens typologi 7,5 hp",
+    "Jämförande turkologi: kiptjakiska och ogusiska språk 7,5 hp",
+    "Aktuella forskningsområden i lingvistik 7,5 hp",
+    "Termin 3",
+    "Valt turkiskt språk 4 hp",
+    "Forskningsseminarier 6 hp",
+    "Språkvetenskaplig turkologi 6 hp",
+    "Turkisk litteratur och kultur (föreläsningar) 4 hp",
+    "Turkisk litteratur och kultur (seminarier) 6 hp",
+    "Termin 4",
+    "Examensarbete 34 hp",
+    "Examensarbetet består av akademiska seminarier, en uppsats, samt ett muntligt prov."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [
+    {
+      "title": "Fornturkisk filologi",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Turkisk språkhistoria",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Jämförande turkologi: sibiriska turkiska språk",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Aktuella forskningsområden i turkisk lingvistik",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Medelturkisk filologi",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Turkiska språkens typologi",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Jämförande turkologi: kiptjakiska och ogusiska språk",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Aktuella forskningsområden i lingvistik",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Valt turkiskt språk",
+      "credits": 4.0,
+      "semester": null
+    },
+    {
+      "title": "Forskningsseminarier",
+      "credits": 6.0,
+      "semester": null
+    },
+    {
+      "title": "Språkvetenskaplig turkologi",
+      "credits": 6.0,
+      "semester": null
+    },
+    {
+      "title": "Turkisk litteratur och kultur",
+      "credits": 4.0,
+      "semester": null
+    },
+    {
+      "title": "Turkisk litteratur och kultur",
+      "credits": 6.0,
+      "semester": null
+    },
+    {
+      "title": "Examensarbete",
+      "credits": 34.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.491073+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1626",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i turkiska studier, 120 hp (HTU2M)",
+  "programmeTitleEn": "Master's Programme in Turkic Studies, 120 credits (HTU2M)",
+  "programmeUri": "/utbildning/program/masterprogram-turkiska-studier",
+  "faculty": "Språkvetenskapliga fakulteten",
+  "reviewed": false
+}

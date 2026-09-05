@@ -1,0 +1,115 @@
+{
+  "id": "2522",
+  "code": "HEC2M",
+  "revisionId": "2522",
+  "nameSv": "Masterprogram i Euroculture",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": null,
+  "finalisedDate": "13 september 2024",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet består av följande kurser:",
+    "Första terminen, 30 hp",
+    "1. Euroculture: Legal and Political perspective, 12 hp",
+    "2. Euroculture: Historical and Religious Perspectives, 13 hp",
+    "3. Eurocompetence I, 5 hp",
+    "Andra terminen, 30 hp",
+    "Under andra terminen måste Uppsalastudenter åka på mobilitet och läsa 30 godkända studiepoäng vid ett annat Euroculture-universitet i Europa.",
+    "Uppsala erbjuder i sin tur följande kurser till inkommande utbytesstudenter från Euroculture-partneruniversitet:",
+    "4. Research Seminar, 10 hp",
+    "5. Intensive Programme with Methodology Seminar, 10 hp",
+    "6. Eurocompetence II, 5 hp",
+    "7. Intensive Programme II, 5 hp",
+    "Vid slutet av andra terminen deltar alla studenterna i Euroculture-nätverket i ett veckolångt \"intensivprogram\", som består av seminarier, diskussioner och presentation av ett kortare forskningsarbete. Godkänt deltagande ger 5 högskolepoäng.",
+    "Tredje terminen, 30 hp",
+    "8. Internship, 25 hp eller Research Track, 25 hp.",
+    "Inom programmet kan två spår urskiljas: ett professionellt spår som innehåller yrkesutbildning och ett forskningsorienterat spår förberedande för doktorandstudier. Praktik kan genomföras på en organisation / institution i Sverige eller utomlands. Forskningsbanan kan bedrivas vid Uppsala, ett Euroculture-partneruniversitet i Europa, eller i vissa fall vid ett Euroculture-partneruniversitet utanför Europa. Antalet platser vid Uppsala är begränsat.",
+    "9. Thesis, Stage 1: förberedelse för masteruppsats motsvarande 5 hp.",
+    "Fjärde terminen, 30 hp",
+    "10. Eurocompetence III, 5 hp",
+    "11. Thesis, Stage 2: slutförandet av masteruppsatsen motsvarar 25 högskolepoäng. Studenter får inte börja med steg 2 tills steg 1 har godkänts (se tredje terminen).",
+    "För tillträde till andra terminen måste studenten ha klarat minst 20 hp från programmets första termin.",
+    "För tillträde till tredje terminen måste studenten ha klarat alla 30 hp från programmets första termin och minst 20 hp från programmets andra termin.",
+    "För tillträde till fjärde terminen måste studenten ha klarat 30 hp från programmets första termin och 30 hp från programmets andra termin.",
+    "Avvikelser från den föreskrivna obligatoriska kursordningen ska endast ges i undantagsfall och måste godkännas av alla berörda universitet."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [
+    {
+      "title": "Första terminen",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "1. Euroculture: Legal and Political perspective",
+      "credits": 12.0,
+      "semester": null
+    },
+    {
+      "title": "2. Euroculture: Historical and Religious Perspectives",
+      "credits": 13.0,
+      "semester": null
+    },
+    {
+      "title": "3. Eurocompetence I",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "Andra terminen",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "4. Research Seminar",
+      "credits": 10.0,
+      "semester": null
+    },
+    {
+      "title": "5. Intensive Programme with Methodology Seminar",
+      "credits": 10.0,
+      "semester": null
+    },
+    {
+      "title": "6. Eurocompetence II",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "7. Intensive Programme II",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "Tredje terminen",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Fjärde terminen",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "10. Eurocompetence III",
+      "credits": 5.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.568185+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2522",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i Euroculture, 120 hp (HEC2M)",
+  "programmeTitleEn": "Master's Programme in Euroculture, 120 credits (HEC2M)",
+  "programmeUri": "/utbildning/program/masterprogram-euroculture",
+  "faculty": "Teologiska fakulteten",
+  "reviewed": false
+}

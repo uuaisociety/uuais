@@ -1,0 +1,119 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-05T12:25:21.184288+00:00",
+  "edges": [
+    {
+      "code": "5FP004",
+      "text": "52.5 credits from Practical Philosophy A, incl. the sub-course Critical Thinking, and Practical Philosophy B, including the B essay sub-course",
+      "result": {
+        "edges": [
+          {
+            "from": "5FP006",
+            "type": "HARD"
+          },
+          {
+            "from": "5FP003",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5FP006",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "KOSA-studenter läser en anpassad version av Praktisk filosofi A (30 hp): Kritiskt tänkande (7,5 hp) Etik (7,5 hp) En kurs i tillämpad etik (7,5 hp). Kursen ersätter Metaetik och värdeteori och är en tematisk kurs med innehåll som kan variera från termin till termin. Politisk filosofi (7,5 hp). Kursen är obligatorisk för KOSA-studenter (kursen Metafysik (7,5 hp) kan inte väljas).",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "5FP006"
+        ],
+        "labelEn": "KOSA students must take an adapted, mandatory version of Practical Philosophy A.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "KOSA-studenter läser en anpassad version av Praktisk filosofi B (30 hp): Fördjupad kurs i etik (7,5 hp) Fördjupad kurs i samhällsfilosofi (7,5 hp) En fördjupad kurs i tillämpad etik (7,5 hp). Kursen ersätter Fördjupad kurs i metaetik och värdeteori (7,5 hp) och är en tematisk kurs med innehåll som kan variera från termin till termin. B-uppsats (7,5 hp)Studenten söker till kursen på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "5FP003"
+        ],
+        "labelEn": "KOSA students take an adapted version of Practical Philosophy B in which a thematic course replaces the advanced course in metaethics and value theory.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En kurs om eller i statistik (7,5 hp) Beslutsteori (7,5 hp) Metoder och verktyg för besluts- och riskanalys (7,5 hp) Massmedia i samhälle (7,5 hp)Kursordningen kan variera.Studenten söker till kurserna på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "General information: course order may vary and students must apply via antagning.se during the announced application periods, with no guaranteed seats for late applicants.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Terminen 4 läses ett biämne: Statskunskap A eller Kulturantropologi A.Studenten söker till kursen på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [],
+        "labelEn": "In term 4 students take either Political Science A or Cultural Anthropology A as a subsidiary subject.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Termin 5 läses valfria kurser om totalt 30 hp på Historisk-filosofiska fakulteten eller Samhällsvetenskapliga fakulteten (observera att endast kurser vid Filosofiska institutionen har platsgaranti). Även praktik eller utlandsstudier i humanistiska eller samhällsvetenskapliga ämnen kan väljas.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Term 5 consists of 30 credits of elective courses from the historical-philosophical or social sciences faculties, with guaranteed places only for philosophy department courses; internships or study abroad may also be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Studenten söker till kursen på antagning.se under utlysta ansökningsperioder. Plats kan ej garanteras för studenter som inte har sökt i tid.",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Students must apply for the course via antagning.se during the announced application periods; a place is not guaranteed for late applicants.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

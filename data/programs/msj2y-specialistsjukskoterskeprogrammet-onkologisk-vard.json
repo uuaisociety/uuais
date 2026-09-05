@@ -1,0 +1,196 @@
+{
+  "id": "3093",
+  "code": "MSJ2Y",
+  "revisionId": "3093",
+  "nameSv": "Specialistsjuksköterskeprogrammet",
+  "totalCredits": 60.0,
+  "semesters": 4,
+  "registrationNumber": "MEDFARM 2022/2169",
+  "finalisedDate": "17 januari 2023",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3FV319",
+      "titleEn": "Oncology Nursing and Oncology I",
+      "titleSv": "Onkologi och omvårdnad vid cancersjukdomar I",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FV327",
+      "titleEn": "Oncology Nursing and Oncology II",
+      "titleSv": "Onkologi och omvårdnad vid cancersjukdomar II",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1F, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1F, Vårdvetenskap",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FV352",
+      "titleEn": "Psychosocial Cancer Care",
+      "titleSv": "Specifik omvårdnad med inriktning mot psykosocial cancervård",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor of Science in Nursing, a Bachelor of Science in Occupational Therapy, a Bachelor of Science in Physiotherapy or a Master of Science in Medicine."
+    },
+    {
+      "code": "3FV351",
+      "titleEn": "Palliative Care",
+      "titleSv": "Specifik omvårdnad med inriktning mot palliativ vård",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor of Science in Nursing, a Bachelor of Science in Occupational Therapy, a Bachelor of Science in Physiotherapy or a Master of Science in Medicine."
+    },
+    {
+      "code": "3FV353",
+      "titleEn": "Contact Nurse in Cancer Care",
+      "titleSv": "Kontaktsjuksköterska i cancervård",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor of Science in Nursing"
+    },
+    {
+      "code": "3FV329",
+      "titleEn": "Theory and Methodology in Caring Sciences",
+      "titleSv": "Vårdvetenskaplig teori och metod",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3FV361",
+      "titleEn": "Degree Project with Focus on Cancer Care",
+      "titleSv": "Examensarbete med inriktning mot cancervård",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3093",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;2"
+    },
+    {
+      "id": "2831",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;1"
+    },
+    {
+      "id": "2534",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2423",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2082",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1736",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1201",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "940",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "635",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "573",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;3"
+    },
+    {
+      "id": "228",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;2"
+    },
+    {
+      "id": "142",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.552253+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3093",
+  "validFrom": "Studieplan giltig från och med höstterminen 2023, version 2",
+  "validFromYear": 2023,
+  "programmeTitle": "Specialistsjuksköterskeprogrammet – Onkologisk vård, 60 hp (MSJ2Y)",
+  "programmeTitleEn": "Specialist Nursing Programme – Theatre Care, 60 credits (MSJ2Y)",
+  "programmeUri": "/utbildning/program/specialistsjukskoterskeprogrammet-onkologisk-vard",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}
