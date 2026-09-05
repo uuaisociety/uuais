@@ -1,0 +1,2615 @@
+{
+  "id": "10073",
+  "code": "TTM2Y",
+  "revisionId": "10073",
+  "nameSv": "Civilingenjörsprogrammet i teknisk fysik med materialvetenskap",
+  "totalCredits": 300.0,
+  "semesters": 10,
+  "registrationNumber": "TEK-NAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [
+    {
+      "id": "mikro-och-nanoteknik",
+      "specialisationId": "mikro-och-nanoteknik",
+      "specialisationSv": "mikro- och nanoteknik",
+      "profileSv": null,
+      "descriptionSv": null,
+      "fromSemester": 8
+    },
+    {
+      "id": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "specialisationId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "specialisationSv": "1 i mikro- och nanoteknik med inriktning biomaterial",
+      "profileSv": null,
+      "descriptionSv": null,
+      "fromSemester": 8
+    },
+    {
+      "id": "2-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "specialisationId": "2-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "specialisationSv": "2 i mikro- och nanoteknik med inriktning biomaterial",
+      "profileSv": null,
+      "descriptionSv": null,
+      "fromSemester": 8
+    },
+    {
+      "id": "material-for-energitillampningar",
+      "specialisationId": "material-for-energitillampningar",
+      "specialisationSv": "material för energitillämpningar",
+      "profileSv": null,
+      "descriptionSv": null,
+      "fromSemester": 9
+    },
+    {
+      "id": "mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "specialisationId": "mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "specialisationSv": "mikro- och nanoteknik med inriktning biomaterial",
+      "profileSv": null,
+      "descriptionSv": null,
+      "fromSemester": 9
+    },
+    {
+      "id": "fasta-tillstandets-fysik",
+      "specialisationId": "fasta-tillstandets-fysik",
+      "specialisationSv": "fasta tillståndets fysik",
+      "profileSv": null,
+      "descriptionSv": null,
+      "fromSemester": 9
+    },
+    {
+      "id": "materialtillverkning",
+      "specialisationId": "materialtillverkning",
+      "specialisationSv": "materialtillverkning",
+      "profileSv": null,
+      "descriptionSv": null,
+      "fromSemester": 9
+    }
+  ],
+  "courses": [
+    {
+      "code": "1TE610",
+      "titleEn": "Introduction to Materials Engineering",
+      "titleSv": "Introduktion till materialvetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA090",
+      "titleEn": "Algebra and Geometry",
+      "titleSv": "Algebra och geometri",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA013",
+      "titleEn": "Single Variable Calculus",
+      "titleSv": "Envariabelanalys",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses."
+    },
+    {
+      "code": "1FA105",
+      "titleEn": "Mechanics Basic Course",
+      "titleSv": "Mekanik baskurs",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics G1F, Technology",
+      "mainFieldSv": "Fysik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TD433",
+      "titleEn": "Computer Programming I",
+      "titleSv": "Programmeringsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science G1N, Technology",
+      "mainFieldSv": "Datavetenskap G1N, Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D"
+    },
+    {
+      "code": "1MA017",
+      "titleEn": "Several Variable Calculus, Limited Version",
+      "titleSv": "Flervariabelanalys, allmän kurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1FA105",
+      "titleEn": "Mechanics Basic Course",
+      "titleSv": "Mekanik baskurs",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics G1F, Technology",
+      "mainFieldSv": "Fysik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA513",
+      "titleEn": "Measuring Techniques",
+      "titleSv": "Mätteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics G1F, Technology",
+      "mainFieldSv": "Fysik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB201",
+      "titleEn": "Basic Materials Chemistry",
+      "titleSv": "Grundläggande materialkemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry G1F, Technology",
+      "mainFieldSv": "Kemi G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA514",
+      "titleEn": "Electromagnetism I",
+      "titleSv": "Elektromagnetism I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics G1F, Technology",
+      "mainFieldSv": "Fysik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Algebra and Geometry, or Linear Algebra I. Participation in Single Variable Calculus, or Calculus in One Variable. Participation in Scientific Computing I, Introduction to Scientific Programming, or Computer programming. Participation in Several Variable Calculus, or Calculus in Several Variables, or studied simultaneously. Participation in Mechanics Basic Course, or Technical Mechanics, or studied simultaneously."
+    },
+    {
+      "code": "1FA102",
+      "titleEn": "Mechanics II",
+      "titleSv": "Mekanik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics G1F, Technology",
+      "mainFieldSv": "Fysik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Mechanics Basic Course and a course in several variable calculus. The latter course may also be taken in parallel."
+    },
+    {
+      "code": "1MA024",
+      "titleEn": "Linear Algebra II",
+      "titleSv": "Linjär algebra II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "code": "1TE635",
+      "titleEn": "Solid Mechanics",
+      "titleSv": "Hållfasthetslära",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "30 credits in science/engineering. Participation in Single Variable Calculus and participation one of the courses Mechanics I and Mechanics Basic Course."
+    },
+    {
+      "code": "1TD342",
+      "titleEn": "Introduction to Scientific Computing",
+      "titleSv": "Introduktion till beräkningsvetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science G1F, Mathematics G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Matematik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "code": "1TM141",
+      "titleEn": "Materials Development",
+      "titleSv": "Materialutveckling",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry G1F, Technology",
+      "mainFieldSv": "Kemi G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Attended the course Introduction to materials engineering."
+    },
+    {
+      "code": "1MA034",
+      "titleEn": "Transform Methods",
+      "titleSv": "Transformmetoder",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "5 credits in mathematics. Participation in Single Variable Calculus, Calculus II for Engineers or Calculus in One Variable. Participation in Linear Algebra I, Algebra and Geometry, Linear Algebra for Engineers or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1KB282",
+      "titleEn": "Sustainable Development from a Materials Perspective",
+      "titleSv": "Hållbar utveckling ur ett materialperspektiv",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA121",
+      "titleEn": "Mathematical Methods of Physics",
+      "titleSv": "Fysikens matematiska metoder",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics G1F, Physics",
+      "mainFieldSv": "Fysik G1F, Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "code": "1FA522",
+      "titleEn": "Waves and Optics",
+      "titleSv": "Vågor och optik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB300",
+      "titleEn": "Chemical Thermodynamics",
+      "titleSv": "Kemisk termodynamik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry G1F, Technology",
+      "mainFieldSv": "Kemi G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MS005",
+      "titleEn": "Probability and Statistics",
+      "titleSv": "Sannolikhet och statistik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "code": "1KB501",
+      "titleEn": "Quantum Mechanics and Chemical Bonding I",
+      "titleSv": "Kvantmekanik och kemisk bindning I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry G1F, Technology",
+      "mainFieldSv": "Kemi G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB211",
+      "titleEn": "Solid State Chemistry",
+      "titleSv": "Fasta tillståndets kemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry G2F, Technology",
+      "mainFieldSv": "Kemi G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering including Inorganic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or Basic Materials Chemistry, 5 credits."
+    },
+    {
+      "code": "1KB502",
+      "titleEn": "Quantum Mechanics and Chemical Bonding II",
+      "titleSv": "Kvantmekanik och kemisk bindning II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Quantum Mechanics and Chemical Bonding I or Theoretical Chemistry 10 credits."
+    },
+    {
+      "code": "1KB210",
+      "titleEn": "Materials Chemistry",
+      "titleSv": "Materialkemi",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry G2F, Technology",
+      "mainFieldSv": "Kemi G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering. Participation in Solid State Chemistry or the course can be taken in parallel."
+    },
+    {
+      "code": "1TG300",
+      "titleEn": "Solid State Physics I",
+      "titleSv": "Fasta tillståndets fysik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics G2F, Technology",
+      "mainFieldSv": "Fysik G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits within Science/Technology. Participation in Quantum Mechanics and Chemical Bonding II and either Thermodynamics, Chemical Thermodynamics or Principles of Thermodynamics."
+    },
+    {
+      "code": "1TM142",
+      "titleEn": "Physics and Chemistry of Nanomaterials",
+      "titleSv": "Nanomaterialens fysik och kemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry G2F, Physics G2F, Technology",
+      "mainFieldSv": "Fysik G2F, Kemi G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits within science/engineering. Participation in Quantum chemistry or in Quantum mechanics and Chemical bonding II. Materials chemistry and Solid state physics can be read at the same time."
+    },
+    {
+      "code": "1TM143",
+      "titleEn": "Engineering Materials",
+      "titleSv": "Tekniska material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry G2F, Technology",
+      "mainFieldSv": "Kemi G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM144",
+      "titleEn": "Surface Characterisation",
+      "titleSv": "Ytavbildning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry G2F, Technology",
+      "mainFieldSv": "Kemi G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB204",
+      "titleEn": "Electrochemistry",
+      "titleSv": "Elektrokemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G2F, Technology",
+      "mainFieldSv": "Kemi G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB207",
+      "titleEn": "Polymer Materials",
+      "titleSv": "Polymera material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G2F, Technology",
+      "mainFieldSv": "Kemi G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM000",
+      "titleEn": "Independent Project in Materials Engineering",
+      "titleSv": "Självständigt arbete i teknisk fysik med materialvetenskap",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM146",
+      "titleEn": "Surface and Materials Analysis",
+      "titleSv": "Yt- och materialanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry A1N, Technology",
+      "mainFieldSv": "Kemi A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. At least 3 credits from Materials Chemistry or at least 2 credits from Introduction to Materials Engineering. Surface Characterisation must have been taken. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM006",
+      "titleEn": "Surface Engineering and Materials Selection for Function and Design",
+      "titleSv": "Ytteknik och materialval för funktion och design",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "130 credits in science/engineering. Engineering Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB260",
+      "titleEn": "Physics and Chemistry of Surfaces",
+      "titleSv": "Ytors fysik och kemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Chemistry A1N, Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Kemi A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE016",
+      "titleEn": "Thin Film Technology I",
+      "titleSv": "Tunnfilmsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1F, Materials Engineering A1F, Physics A1F, Technology",
+      "mainFieldSv": "Fysik A1F, Kemi A1F, Materialteknik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "130 credits in science/engineering. Either materials chemistry and attended course in Surface physics and chemistry or Surface physics. Attended course in surface characterisation or Surface and materials analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE015",
+      "titleEn": "Micro- and Nanotechnology I",
+      "titleSv": "Mikro- och nanoteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1N, Quantum Technology A1N, Technology",
+      "mainFieldSv": "Kvantteknologi A1N, Materialteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. One of these alternatives: 1) Solid state physics F and attended course in Semiconductor Electronics, 2) Materials chemistry and attended course in Solid state physics I, 3) Introduction to materials engineering or Introduction to material science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM548",
+      "titleEn": "Nanomaterials in Energy and Environmental Applications",
+      "titleSv": "Nanomaterial för energi- och miljötillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1N, Technology",
+      "mainFieldSv": "Materialteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 40 credits in technology/engineering/physics/chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB281",
+      "titleEn": "Materials and Manufacturing Processes I",
+      "titleSv": "Materialtillverkning I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1F, Technology",
+      "mainFieldSv": "Kemi A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. Materials Chemistry 10 credits, and participation in Physics and Chemistry of Surfaces, and Engineering Materials, and Surface Engineering and Materials Selection for Function and Design. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM112",
+      "titleEn": "Computational Mechanics of Materials I",
+      "titleSv": "Datorbaserad materialmekanik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1N, Technology",
+      "mainFieldSv": "Materialteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. Either 1) Participation in the courses Solid Mechanics and Introduction to Additive Manufacturing, or 2) Participation in the courses Solid Mechanics and Introduction to Materials Engineering, or 3) Solid Mechanics, Numerical Analysis and Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD396",
+      "titleEn": "Computer-Assisted Image Analysis I",
+      "titleSv": "Datoriserad bildanalys I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 7,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 30 credits in mathematics and 10 credits in computer science, including Scientific Computing I/Introduction to Scientific Computing and Computer Programming I, Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM009",
+      "titleEn": "Additive Manufacturing",
+      "titleSv": "Additiv tillverkning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1N, Materials Engineering A1F, Technology",
+      "mainFieldSv": "Kemi A1N, Materialteknik A1F, Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE022",
+      "titleEn": "Tribological Materials",
+      "titleSv": "Tribomaterial",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TG310",
+      "titleEn": "Solid State Physics II",
+      "titleSv": "Fasta tillståndets fysik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Quantum Technology A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Kvantteknologi A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE018",
+      "titleEn": "Micro- and Nanotechnology II",
+      "titleSv": "Mikro- och nanoteknik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1F, Technology",
+      "mainFieldSv": "Materialteknik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": "mikro-och-nanoteknik",
+      "onlyProgramme": null,
+      "entryRequirements": "130 credits in science/engineering. Micro- and Nanotechnology I should have been attended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE741",
+      "titleEn": "Thin Film Technology II",
+      "titleSv": "Tunnfilmsteknik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1F, Technology",
+      "mainFieldSv": "Materialteknik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": "mikro-och-nanoteknik",
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TG310",
+      "titleEn": "Solid State Physics II",
+      "titleSv": "Fasta tillståndets fysik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Quantum Technology A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Kvantteknologi A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": "mikro-och-nanoteknik",
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB263",
+      "titleEn": "Biomaterials I",
+      "titleSv": "Biomaterial I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1N, Materials Engineering A1N, Materials Science A1N, Technology",
+      "mainFieldSv": "Kemi A1N, Materialteknik A1N, Materialvetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including 20 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM034",
+      "titleEn": "Bio-MEMS and Organs-on-Chip",
+      "titleSv": "Bio-MEMS och organs-on-chip",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1F, Technology",
+      "mainFieldSv": "Materialteknik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. Micro- and Nanotechnology I must have been taken. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TG310",
+      "titleEn": "Solid State Physics II",
+      "titleSv": "Fasta tillståndets fysik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Quantum Technology A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Kvantteknologi A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM003",
+      "titleEn": "Optical Materials",
+      "titleSv": "Optiska material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1N, Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Materialteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM002",
+      "titleEn": "Magnetic Materials",
+      "titleSv": "Magnetiska material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1N, Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Materialteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE024",
+      "titleEn": "Materials in Energy Systems I",
+      "titleSv": "Material i energisystem I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1N, Materials Engineering A1N, Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Kemi A1N, Materialteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB566",
+      "titleEn": "Electronic and Atomistic Simulation Methods for Materials",
+      "titleSv": "Elektroniska och atomistiska simuleringsmetoder för material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1N, Materials Science A1N, Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Kemi A1N, Materialvetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 100 credits in science/engineering including 15 credits in mathematics and 75 credits in physics, chemistry, materials science and/or materials engineering, and one of the following: 1) Quantum Mechanics and Chemical Bonding I and any of the courses Solid State Physics, 5 credits, and Solid State Chemistry, 5 credits; 2) 30 credits in materials science; 3) Participation in Introduction to Energy storage and Materials for Batteries. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE649",
+      "titleEn": "CAD with FEM",
+      "titleSv": "CAD med FEM",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB264",
+      "titleEn": "Biomaterials II",
+      "titleSv": "Biomaterial II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1F, Materials Engineering A1F, Materials Science A1F, Technology",
+      "mainFieldSv": "Kemi A1F, Materialteknik A1F, Materialvetenskap A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": "2-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits and participation in Biomaterials I, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE698",
+      "titleEn": "Nanotechnology for Industrial Applications in Life Science",
+      "titleSv": "Nanoteknik för industriella tillämpningar inom life science",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1N, Technology",
+      "mainFieldSv": "Materialteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": "2-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB311",
+      "titleEn": "Soft Materials and Colloidal Systems",
+      "titleSv": "Mjuka ytor och kolloidala system",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1N, Materials Science A1N, Technology",
+      "mainFieldSv": "Kemi A1N, Materialvetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 8,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": "2-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 30 credits in chemistry. 5 credits physical chemistry or Materials chemistry, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE074",
+      "titleEn": "Advanced Materials Analysis",
+      "titleSv": "Avancerad materialanalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1F, Materials Engineering A1F, Physics A1F, Technology",
+      "mainFieldSv": "Fysik A1F, Kemi A1F, Materialteknik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. Either: Solid State Physics I, Surface Characterisation and Surface and Materials Analysis; or: Introduction to Materials Engineering, Surface Characterisation and participation in Materials Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA457",
+      "titleEn": "Life Cycle Analysis for Energy and Materials",
+      "titleSv": "Livscykelanalyser för energi och material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering with Sustainable Development from a Materials Perspective/Energy and Environmental Technology, Chemical Thermodynamics/Technical Thermodynamics and Probability and Statistics"
+    },
+    {
+      "code": "1KB570",
+      "titleEn": "Design of Experiments, Data Handling and Statistical Analysis for Material Scientists",
+      "titleSv": "Försöksplanering, datahantering och statistisk analys för materialvetare",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1N, Technology",
+      "mainFieldSv": "Kemi A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including 15 credits in mathematics, and Computer Programming I, or Introduction to energy storage, or Introduction to Materials Science 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE071",
+      "titleEn": "Materials in Energy Systems II",
+      "titleSv": "Material i energisystem II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1F, Materials Engineering A1F, Physics A1F, Technology",
+      "mainFieldSv": "Fysik A1F, Kemi A1F, Materialteknik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": "material-for-energitillampningar",
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering, including Engineering Materials, Surface Engineering and Materials Selection for Function and Design, and participation in Materials in Energy Systems I, or Introduction to Materials Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA457",
+      "titleEn": "Life Cycle Analysis for Energy and Materials",
+      "titleSv": "Livscykelanalyser för energi och material",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": "material-for-energitillampningar",
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering with Sustainable Development from a Materials Perspective/Energy and Environmental Technology, Chemical Thermodynamics/Technical Thermodynamics and Probability and Statistics"
+    },
+    {
+      "code": "1KB349",
+      "titleEn": "Advanced Solar Cell and Battery Technologies",
+      "titleSv": "Avancerad solcells- och batteriteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1F, Materials Science A1F, Technology",
+      "mainFieldSv": "Kemi A1F, Materialvetenskap A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": "material-for-energitillampningar",
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 120 credits in science/engineering. 5 credits at advanced level. Materials chemistry, Electrochemistry and Quantum mechanics and chemical bonding II. Patricipation in Solid State Physics I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE072",
+      "titleEn": "Project Course in Micro- and Nanotechnology",
+      "titleSv": "Projektkurs i mikro/nanoteknik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1F, Technology",
+      "mainFieldSv": "Materialteknik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "mikro-och-nanoteknik",
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering including Micro and nanotechnology I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM135",
+      "titleEn": "Project Course in Materials for Biomedical Applications",
+      "titleSv": "Projektkurs i material för medicinska tillämpningar",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering",
+      "mainFieldSv": "Materialteknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. Biomaterials I or Bio-MEMS and organs-on-chip. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM004",
+      "titleEn": "Project Course in Solid State Physics",
+      "titleSv": "Projektkurs i fasta tillståndets fysik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1F, Physics A1F, Technology",
+      "mainFieldSv": "Fysik A1F, Materialteknik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "fasta-tillstandets-fysik",
+      "onlyProgramme": null,
+      "entryRequirements": "130 credits in science/engineering including Solid State Physics I and Solid State Physics II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM007",
+      "titleEn": "Project Course in Tribological Materials",
+      "titleSv": "Projektkurs i tribomaterial",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "materialtillverkning",
+      "onlyProgramme": null,
+      "entryRequirements": "130 credits in science/engineering. Tribological Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE016",
+      "titleEn": "Thin Film Technology I",
+      "titleSv": "Tunnfilmsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1F, Materials Engineering A1F, Physics A1F, Technology",
+      "mainFieldSv": "Fysik A1F, Kemi A1F, Materialteknik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "materialtillverkning",
+      "onlyProgramme": true,
+      "entryRequirements": "130 credits in science/engineering. Either materials chemistry and attended course in Surface physics and chemistry or Surface physics. Attended course in surface characterisation or Surface and materials analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE015",
+      "titleEn": "Micro- and Nanotechnology I",
+      "titleSv": "Mikro- och nanoteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1N, Quantum Technology A1N, Technology",
+      "mainFieldSv": "Kvantteknologi A1N, Materialteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "materialtillverkning",
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. One of these alternatives: 1) Solid state physics F and attended course in Semiconductor Electronics, 2) Materials chemistry and attended course in Solid state physics I, 3) Introduction to materials engineering or Introduction to material science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM548",
+      "titleEn": "Nanomaterials in Energy and Environmental Applications",
+      "titleSv": "Nanomaterial för energi- och miljötillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1N, Technology",
+      "mainFieldSv": "Materialteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "materialtillverkning",
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 40 credits in technology/engineering/physics/chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB281",
+      "titleEn": "Materials and Manufacturing Processes I",
+      "titleSv": "Materialtillverkning I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1F, Technology",
+      "mainFieldSv": "Kemi A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "materialtillverkning",
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. Materials Chemistry 10 credits, and participation in Physics and Chemistry of Surfaces, and Engineering Materials, and Surface Engineering and Materials Selection for Function and Design. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM112",
+      "titleEn": "Computational Mechanics of Materials I",
+      "titleSv": "Datorbaserad materialmekanik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering A1N, Technology",
+      "mainFieldSv": "Materialteknik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "materialtillverkning",
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering. Either 1) Participation in the courses Solid Mechanics and Introduction to Additive Manufacturing, or 2) Participation in the courses Solid Mechanics and Introduction to Materials Engineering, or 3) Solid Mechanics, Numerical Analysis and Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TD396",
+      "titleEn": "Computer-Assisted Image Analysis I",
+      "titleSv": "Datoriserad bildanalys I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "materialtillverkning",
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 30 credits in mathematics and 10 credits in computer science, including Scientific Computing I/Introduction to Scientific Computing and Computer Programming I, Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM128",
+      "titleEn": "Additive Manufacturing in Medicine",
+      "titleSv": "Additiv tillverkning i medicinska tillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Engineering",
+      "mainFieldSv": "Materialteknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "materialtillverkning",
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 90 credits in science/engineering. Additive Manufacturing or participation in Additive Manufacturing in Polymeric Materials with 2 credits completed and participation in Additive Manufacturing of Metallic and Ceramic Materials with 2 credits completed. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB288",
+      "titleEn": "Materials Analysis at Large-Scale Research Infrastructures",
+      "titleSv": "Materialanalys vid stora forskningsinfrastrukturer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1F, Materials Engineering A1F, Technology",
+      "mainFieldSv": "Kemi A1F, Materialteknik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 9,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "materialtillverkning",
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering, including Materials chemistry 10 credits, or Introduction to Materials Science 10 hp, or Introduction to materials engineering 5 credits, or Materials Chemistry 5 hp. Participation in Surface and Materials Analysis 5 credits, or Materials Analysis for Batteries 10 hp, or Material Synthesis and Characterisation 10 hp."
+    },
+    {
+      "code": "1TE860",
+      "titleEn": "Degree Project in Materials Engineering",
+      "titleSv": "Examensarbete i teknisk fysik med materialvetenskap",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A2E",
+      "semester": 10,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE626",
+      "titleEn": "Electromagnetism II",
+      "titleSv": "Elektromagnetism II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics G1F, Technology",
+      "mainFieldSv": "Fysik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 10,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA032",
+      "titleEn": "Ordinary Differential Equations I",
+      "titleSv": "Ordinära differentialekvationer I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 10,
+      "periods": [
+        "Period 2",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course."
+    },
+    {
+      "code": "1FA103",
+      "titleEn": "Mechanics III",
+      "titleSv": "Mekanik III",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics G1F, Technology",
+      "mainFieldSv": "Fysik G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 10,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "Participation in Geometry and Calculus II/Several Variable Calculus/Several Variable Calculus, Limited Version/Several Variable Calculus M/Calculus in Several Variables. Participation in Linear Algebra II and Mechanics II/Applied Mechanics I/Mechanics/Mechanics KF."
+    },
+    {
+      "code": "1TE703",
+      "titleEn": "Research Training in Materials Science",
+      "titleSv": "Forskningspraktik i materialvetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 10,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE738",
+      "titleEn": "Research Training in Materials Science",
+      "titleSv": "Forskningspraktik i materialvetenskap",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 10,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE740",
+      "titleEn": "Research Training in Materials Science",
+      "titleSv": "Forskningspraktik i materialvetenskap",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 10,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TD342"
+      ],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "En av kurserna Beräkningsvetenskap I (1TD393) och Introduktion till beräkningsvetenskap (1TD342) är obligatorisk inom examenskravet. Dessa kurser kan inte ingå i examen tillsammans.",
+      "labelEn": "One of Computational Science I (1TD393) and Introduction to Computational Science (1TD342) is required for the degree, and they cannot both be included.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [
+        "1KB282"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "1KB282, Hållbar utveckling ur ett materialperspektiv kan inte ingå i examen tillsammans med 1KB268 Material för hållbar utveckling.",
+      "labelEn": "1KB282 Sustainable Development from a Materials Perspective cannot count toward the degree together with 1KB268 Materials for Sustainable Development.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "Minst tre av de valbara kursblocken (15 hp per block) år 4 och och år 5 krävs för examen. Ett av de tre blocken ska väljas från period 2, årskurs 5 som innehåller en projektkurs (10 hp).",
+      "labelEn": "At least three elective course blocks (15 hp each) in years 4-5 are required for the degree, and one must be taken in period 2 of year 5 and include a project course (10 hp).",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TE015",
+        "1TE018",
+        "1TE072"
+      ],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "Basblock i mikro- och nanoteknik",
+      "labelEn": "A basic block (module) in micro- and nanotechnology, a grouping heading rather than a specific course requirement.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "Basblock i materialtillverkning och modellering",
+      "labelEn": "Basic block in materials manufacturing and modelling.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TM112"
+      ],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "1TM112 Datorbaserad materialmekanik I ersätter 1TE026 Hållfasthetsanalys med finita element. Dessa två kurser kan inte ingå i examen tillsammans.",
+      "labelEn": "1TM112 Computational Mechanics of Materials I replaces 1TE026 Strength Analysis with Finite Elements, and the two courses cannot both count toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-6",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 8,
+      "trackId": null,
+      "textSv": "Basblock i tillverkning och tillämpning",
+      "labelEn": "Basic block in manufacturing and application",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-7",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 8,
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "textSv": "Basblock i material för energitillämpningar",
+      "labelEn": "This names the basic block in materials for energy applications rather than a specific course choice.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-8",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 8,
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial",
+      "textSv": "Basblock i materialmodellering",
+      "labelEn": "Basic block in materials modelling.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-9",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 9,
+      "trackId": null,
+      "textSv": "Minst tre av de valbara kursblocken (15 hp per block) år 4 och och år 5 krävs för examen. Ett av de tre blocken ska väljas från period 2, årskurs 5 som innehåller en projektkurs (10 hp).",
+      "labelEn": "At least three elective course blocks (15 hp each) in years 4 and 5 are required for the degree, and one of the three must be chosen from period 2 of year 5 and contain a project course (10 hp).",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-10",
+      "type": "NOTE",
+      "courseCodes": [
+        "1KB288",
+        "1TE074",
+        "1TM144",
+        "1TM146"
+      ],
+      "semester": 9,
+      "trackId": null,
+      "textSv": "Basblock i materialanalys",
+      "labelEn": "Basic block in materials analysis.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-11",
+      "type": "NOTE",
+      "courseCodes": [
+        "1FA457"
+      ],
+      "semester": 9,
+      "trackId": null,
+      "textSv": "1FA457, Livscykelanalyser för energi och material kan inte ingå i examen tillsammans med 1KB268 Material för hållbar utveckling.",
+      "labelEn": "1FA457 cannot count toward the degree together with 1KB268 (not in roster).",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-12",
+      "type": "NOTE",
+      "courseCodes": [
+        "1FA457"
+      ],
+      "semester": 9,
+      "trackId": "material-for-energitillampningar",
+      "textSv": "1FA457, Livscykelanalyser för energi och material kan inte ingå i examen tillsammans med 1KB268 Material för hållbar utveckling.",
+      "labelEn": "1FA457 Life Cycle Analysis for Energy and Materials cannot count toward the degree together with 1KB268 Materials for Sustainable Development.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-13",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 9,
+      "trackId": "material-for-energitillampningar",
+      "textSv": "AlternativEntreprenörskolan i Uppsala 60 hp (ej platsgaranti).",
+      "labelEn": "Alternative option: the Entrepreneur School (Entreprenörskolan) in Uppsala, 60 hp, with no guarantee of placement.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-14",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 9,
+      "trackId": "material-for-energitillampningar",
+      "textSv": "Ett av de tre blocken ska väljas från period 2, årskurs 5 som innehåller en projektkurs (10 hp).",
+      "labelEn": "One of the three blocks must be chosen from period 2 in year 5 and contain a 10 hp project course.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-15",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 9,
+      "trackId": "materialtillverkning",
+      "textSv": "Valbara kurser",
+      "labelEn": "Elective courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-16",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 10,
+      "trackId": null,
+      "textSv": "Kurspaketet Teknikbaserat entreprenörskap och affärsutveckling, 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare.",
+      "labelEn": "The 30 hp course package Technology-Based Entrepreneurship and Business Development (semester 9) has no guaranteed placement and may only count toward the degree for students admitted in 2025/2026 or earlier.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-17",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 10,
+      "trackId": null,
+      "textSv": "Tillvalskurser:",
+      "labelEn": "Elective courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-18",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 10,
+      "trackId": null,
+      "textSv": "Kan förläggas till valfri period",
+      "labelEn": "The course can be scheduled in any period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-19",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TE738",
+        "1TE740"
+      ],
+      "semester": 10,
+      "trackId": null,
+      "textSv": "Maximalt 15 högskolepoäng Forskningspraktik i materialvetenskap får ingå i examen.1TE738 och 1TE740 kan ersätta valbar projektkurs i fördjupningsblocket i årskurs 5 period 2.",
+      "labelEn": "A maximum of 15 credits of Research Training in Materials Science may count toward the degree, and 1TE738 and 1TE740 may replace the elective project course in the specialization block in year 5 period 2.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-20",
+      "type": "COHORT_SUBSTITUTION",
+      "courseCodes": [
+        "1TM143",
+        "1TM006",
+        "1TM146",
+        "1TM144",
+        "1KB282",
+        "1FA457",
+        "1TD433",
+        "1TD342",
+        "1TM112"
+      ],
+      "semester": 10,
+      "trackId": null,
+      "textSv": "Övergångsregler för studenter antagna före 2019.För studenter som ansöker om examen enligt de preciserade examenskrav som gällde före ht 2022 kan valbara kurser i de nya kursblocken år 4 och 5 räknas till de minst 40 hp ickeobligatoriska kurser som måste ingå i examen.1TM143 Tekniska material 5 hp tillsammans med 1TM006 Ytteknik och materialval för funktion och design 5 hp ersätter 1TM663 Material i tekniska system 10 hp.1TM146 Yt och materialanalys 5 hp tillsammans med 1TM144 Ytavbildning 5 hp ersätter 1TE013 Materialanalys 10 hp.1KB282 Hållbar utveckling ur ett materialperspektiv 5 hp tillsammans med 1FA457 Livscykelanalyser för energi och material 5 hp ersätter 1KB268 Material för hållbar utveckling 10 hp.Övergångsregler1TD433 Programmeringsteknik I, 5 hp tillsammans med 1TD342 Introduktion till beräkningsvetenskap, 5 hp ersätter 1TD393 Beräkningsvetenskap I, 5 hp tillsammans med 1TD395 Beräkningsvetenskap II, 5 hp. Studenterna måste alltså ha med antingen kombinationen 1TD433 och 1TD342 eller kombinationen 1TD393 och 1TD395 i examen.1TM112 Datorbaserad materialmekanik I, 5 hp ersätter 1TE026 Hållfasthetsanalys med finita element, 5 hp.",
+      "labelEn": "Students admitted before 2019 may replace discontinued older courses with specified new course pairs or substitutions when applying for their degree.",
+      "cohortBefore": 2019,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "En av kurserna Beräkningsvetenskap I (1TD393) och Introduktion till beräkningsvetenskap (1TD342) är obligatorisk inom examenskravet. Dessa kurser kan inte ingå i examen tillsammans.",
+      "semester": 3,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "1KB282, Hållbar utveckling ur ett materialperspektiv kan inte ingå i examen tillsammans med 1KB268 Material för hållbar utveckling.",
+      "semester": 4,
+      "period": "Period 3",
+      "trackId": null
+    },
+    {
+      "textSv": "Minst tre av de valbara kursblocken (15 hp per block) år 4 och och år 5 krävs för examen. Ett av de tre blocken ska väljas från period 2, årskurs 5 som innehåller en projektkurs (10 hp).",
+      "semester": 7,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Basblock i mikro- och nanoteknik",
+      "semester": 7,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Basblock i materialtillverkning och modellering",
+      "semester": 7,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "1TM112 Datorbaserad materialmekanik I ersätter 1TE026 Hållfasthetsanalys med finita element. Dessa två kurser kan inte ingå i examen tillsammans.",
+      "semester": 7,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Basblock i tillverkning och tillämpning",
+      "semester": 8,
+      "period": "Period 3",
+      "trackId": null
+    },
+    {
+      "textSv": "Basblock i material för energitillämpningar",
+      "semester": 8,
+      "period": "Period 4",
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial"
+    },
+    {
+      "textSv": "Basblock i materialmodellering",
+      "semester": 8,
+      "period": "Period 4",
+      "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial"
+    },
+    {
+      "textSv": "Minst tre av de valbara kursblocken (15 hp per block) år 4 och och år 5 krävs för examen. Ett av de tre blocken ska väljas från period 2, årskurs 5 som innehåller en projektkurs (10 hp).",
+      "semester": 9,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Basblock i materialanalys",
+      "semester": 9,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "1FA457, Livscykelanalyser för energi och material kan inte ingå i examen tillsammans med 1KB268 Material för hållbar utveckling.",
+      "semester": 9,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "1FA457, Livscykelanalyser för energi och material kan inte ingå i examen tillsammans med 1KB268 Material för hållbar utveckling.",
+      "semester": 9,
+      "period": "Period 1",
+      "trackId": "material-for-energitillampningar"
+    },
+    {
+      "textSv": "AlternativEntreprenörskolan i Uppsala 60 hp (ej platsgaranti).",
+      "semester": 9,
+      "period": "Period 1",
+      "trackId": "material-for-energitillampningar"
+    },
+    {
+      "textSv": "Ett av de tre blocken ska väljas från period 2, årskurs 5 som innehåller en projektkurs (10 hp).",
+      "semester": 9,
+      "period": "Period 2",
+      "trackId": "material-for-energitillampningar"
+    },
+    {
+      "textSv": "Valbara kurser",
+      "semester": 9,
+      "period": "Period 2",
+      "trackId": "materialtillverkning"
+    },
+    {
+      "textSv": "Kurspaketet Teknikbaserat entreprenörskap och affärsutveckling, 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare.",
+      "semester": 10,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Tillvalskurser:",
+      "semester": 10,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Kan förläggas till valfri period",
+      "semester": 10,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Maximalt 15 högskolepoäng Forskningspraktik i materialvetenskap får ingå i examen.1TE738 och 1TE740 kan ersätta valbar projektkurs i fördjupningsblocket i årskurs 5 period 2.",
+      "semester": 10,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Övergångsregler för studenter antagna före 2019.För studenter som ansöker om examen enligt de preciserade examenskrav som gällde före ht 2022 kan valbara kurser i de nya kursblocken år 4 och 5 räknas till de minst 40 hp ickeobligatoriska kurser som måste ingå i examen.1TM143 Tekniska material 5 hp tillsammans med 1TM006 Ytteknik och materialval för funktion och design 5 hp ersätter 1TM663 Material i tekniska system 10 hp.1TM146 Yt och materialanalys 5 hp tillsammans med 1TM144 Ytavbildning 5 hp ersätter 1TE013 Materialanalys 10 hp.1KB282 Hållbar utveckling ur ett materialperspektiv 5 hp tillsammans med 1FA457 Livscykelanalyser för energi och material 5 hp ersätter 1KB268 Material för hållbar utveckling 10 hp.Övergångsregler1TD433 Programmeringsteknik I, 5 hp tillsammans med 1TD342 Introduktion till beräkningsvetenskap, 5 hp ersätter 1TD393 Beräkningsvetenskap I, 5 hp tillsammans med 1TD395 Beräkningsvetenskap II, 5 hp. Studenterna måste alltså ha med antingen kombinationen 1TD433 och 1TD342 eller kombinationen 1TD393 och 1TD395 i examen.1TM112 Datorbaserad materialmekanik I, 5 hp ersätter 1TE026 Hållfasthetsanalys med finita element, 5 hp.",
+      "semester": 10,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1FA105",
+      "to": "1FA102",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Mechanics Basic Course and a course in several variable calculus. The latter course may also be taken in parallel."
+    },
+    {
+      "from": "1FA102",
+      "to": "1FA103",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Geometry and Calculus II/Several Variable Calculus/Several Variable Calculus, Limited Version/Several Variable Calculus M/Calculus in Several Variables. Participation in Linear Algebra II and Mechanics II/Applied Mechanics I/Mechanics/Mechanics KF."
+    },
+    {
+      "from": "1MA017",
+      "to": "1FA103",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Geometry and Calculus II/Several Variable Calculus/Several Variable Calculus, Limited Version/Several Variable Calculus M/Calculus in Several Variables. Participation in Linear Algebra II and Mechanics II/Applied Mechanics I/Mechanics/Mechanics KF."
+    },
+    {
+      "from": "1MA024",
+      "to": "1FA103",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Geometry and Calculus II/Several Variable Calculus/Several Variable Calculus, Limited Version/Several Variable Calculus M/Calculus in Several Variables. Participation in Linear Algebra II and Mechanics II/Applied Mechanics I/Mechanics/Mechanics KF."
+    },
+    {
+      "from": "1FA102",
+      "to": "1FA121",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "from": "1MA017",
+      "to": "1FA121",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "from": "1MA024",
+      "to": "1FA121",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "from": "1MA034",
+      "to": "1FA121",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "from": "1KB282",
+      "to": "1FA457",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering with Sustainable Development from a Materials Perspective/Energy and Environmental Technology, Chemical Thermodynamics/Technical Thermodynamics and Probability and Statistics"
+    },
+    {
+      "from": "1KB300",
+      "to": "1FA457",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering with Sustainable Development from a Materials Perspective/Energy and Environmental Technology, Chemical Thermodynamics/Technical Thermodynamics and Probability and Statistics"
+    },
+    {
+      "from": "1MS005",
+      "to": "1FA457",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering with Sustainable Development from a Materials Perspective/Energy and Environmental Technology, Chemical Thermodynamics/Technical Thermodynamics and Probability and Statistics"
+    },
+    {
+      "from": "1FA105",
+      "to": "1FA514",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, or Linear Algebra I. Participation in Single Variable Calculus, or Calculus in One Variable. Participation in Scientific Computing I, Introduction to Scientific Programming, or Computer programming. Participation in Several Variable Calculus, or Calculus in Several Variables, or studied simultaneously. Participation in Mechanics Basic Course, or Technical Mec"
+    },
+    {
+      "from": "1MA013",
+      "to": "1FA514",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, or Linear Algebra I. Participation in Single Variable Calculus, or Calculus in One Variable. Participation in Scientific Computing I, Introduction to Scientific Programming, or Computer programming. Participation in Several Variable Calculus, or Calculus in Several Variables, or studied simultaneously. Participation in Mechanics Basic Course, or Technical Mec"
+    },
+    {
+      "from": "1MA090",
+      "to": "1FA514",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, or Linear Algebra I. Participation in Single Variable Calculus, or Calculus in One Variable. Participation in Scientific Computing I, Introduction to Scientific Programming, or Computer programming. Participation in Several Variable Calculus, or Calculus in Several Variables, or studied simultaneously. Participation in Mechanics Basic Course, or Technical Mec"
+    },
+    {
+      "from": "1TD433",
+      "to": "1FA514",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, or Linear Algebra I. Participation in Single Variable Calculus, or Calculus in One Variable. Participation in Scientific Computing I, Introduction to Scientific Programming, or Computer programming. Participation in Several Variable Calculus, or Calculus in Several Variables, or studied simultaneously. Participation in Mechanics Basic Course, or Technical Mec"
+    },
+    {
+      "from": "1KB201",
+      "to": "1KB211",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering including Inorganic Chemistry I, 10 credits, or Physical Chemistry, 10 credits, or Basic Materials Chemistry, 5 credits."
+    },
+    {
+      "from": "1KB210",
+      "to": "1KB281",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Materials Chemistry 10 credits, and participation in Physics and Chemistry of Surfaces, and Engineering Materials, and Surface Engineering and Materials Selection for Function and Design. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM143",
+      "to": "1KB281",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Materials Chemistry 10 credits, and participation in Physics and Chemistry of Surfaces, and Engineering Materials, and Surface Engineering and Materials Selection for Function and Design. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB210",
+      "to": "1KB288",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including Materials chemistry 10 credits, or Introduction to Materials Science 10 hp, or Introduction to materials engineering 5 credits, or Materials Chemistry 5 hp. Participation in Surface and Materials Analysis 5 credits, or Materials Analysis for Batteries 10 hp, or Material Synthesis and Characterisation 10 hp."
+    },
+    {
+      "from": "1TE610",
+      "to": "1KB288",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including Materials chemistry 10 credits, or Introduction to Materials Science 10 hp, or Introduction to materials engineering 5 credits, or Materials Chemistry 5 hp. Participation in Surface and Materials Analysis 5 credits, or Materials Analysis for Batteries 10 hp, or Material Synthesis and Characterisation 10 hp."
+    },
+    {
+      "from": "1TM146",
+      "to": "1KB288",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including Materials chemistry 10 credits, or Introduction to Materials Science 10 hp, or Introduction to materials engineering 5 credits, or Materials Chemistry 5 hp. Participation in Surface and Materials Analysis 5 credits, or Materials Analysis for Batteries 10 hp, or Material Synthesis and Characterisation 10 hp."
+    },
+    {
+      "from": "1KB210",
+      "to": "1KB311",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 30 credits in chemistry. 5 credits physical chemistry or Materials chemistry, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB204",
+      "to": "1KB349",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1KB210",
+      "to": "1KB349",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1KB502",
+      "to": "1KB349",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1TG300",
+      "to": "1KB349",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry, including Spectroscopy or Photochemistry. Participation in Advanced Electrochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics or chemistry, and 30 credits materials science. Participation in Photochemistry. Proficiency in English equivalent to th"
+    },
+    {
+      "from": "1KB501",
+      "to": "1KB502",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Quantum Mechanics and Chemical Bonding I or Theoretical Chemistry 10 credits."
+    },
+    {
+      "from": "1TD433",
+      "to": "1KB570",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 15 credits in mathematics, and Computer Programming I, or Introduction to energy storage, or Introduction to Materials Science 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA090",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "from": "1MA090",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "from": "1MA017",
+      "to": "1MA032",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA024",
+      "to": "1MA032",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA034",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "5 credits in mathematics. Participation in Single Variable Calculus, Calculus II for Engineers or Calculus in One Variable. Participation in Linear Algebra I, Algebra and Geometry, Linear Algebra for Engineers or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA090",
+      "to": "1MA034",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "5 credits in mathematics. Participation in Single Variable Calculus, Calculus II for Engineers or Calculus in One Variable. Participation in Linear Algebra I, Algebra and Geometry, Linear Algebra for Engineers or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MS005",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA090",
+      "to": "1MS005",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry, Basic Course in Mathematics or Basic Algebra. Participation in Single Variable Calculus which may also be taken in parallel with this course."
+    },
+    {
+      "from": "1MA013",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1TD342",
+      "to": "1TD396",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics and 10 credits in computer science, including Scientific Computing I/Introduction to Scientific Computing and Computer Programming I, Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD396",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics and 10 credits in computer science, including Scientific Computing I/Introduction to Scientific Computing and Computer Programming I, Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB210",
+      "to": "1TE015",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of these alternatives: 1) Solid state physics F and attended course in Semiconductor Electronics, 2) Materials chemistry and attended course in Solid state physics I, 3) Introduction to materials engineering or Introduction to material science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE610",
+      "to": "1TE015",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of these alternatives: 1) Solid state physics F and attended course in Semiconductor Electronics, 2) Materials chemistry and attended course in Solid state physics I, 3) Introduction to materials engineering or Introduction to material science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TG300",
+      "to": "1TE015",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of these alternatives: 1) Solid state physics F and attended course in Semiconductor Electronics, 2) Materials chemistry and attended course in Solid state physics I, 3) Introduction to materials engineering or Introduction to material science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE015",
+      "to": "1TE018",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering. Micro- and Nanotechnology I should have been attended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE024",
+      "to": "1TE071",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including Engineering Materials, Surface Engineering and Materials Selection for Function and Design, and participation in Materials in Energy Systems I, or Introduction to Materials Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE610",
+      "to": "1TE071",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including Engineering Materials, Surface Engineering and Materials Selection for Function and Design, and participation in Materials in Energy Systems I, or Introduction to Materials Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM006",
+      "to": "1TE071",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including Engineering Materials, Surface Engineering and Materials Selection for Function and Design, and participation in Materials in Energy Systems I, or Introduction to Materials Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM143",
+      "to": "1TE071",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including Engineering Materials, Surface Engineering and Materials Selection for Function and Design, and participation in Materials in Energy Systems I, or Introduction to Materials Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE015",
+      "to": "1TE072",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Micro and nanotechnology I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE610",
+      "to": "1TE074",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Either: Solid State Physics I, Surface Characterisation and Surface and Materials Analysis; or: Introduction to Materials Engineering, Surface Characterisation and participation in Materials Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TG300",
+      "to": "1TE074",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Either: Solid State Physics I, Surface Characterisation and Surface and Materials Analysis; or: Introduction to Materials Engineering, Surface Characterisation and participation in Materials Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM144",
+      "to": "1TE074",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Either: Solid State Physics I, Surface Characterisation and Surface and Materials Analysis; or: Introduction to Materials Engineering, Surface Characterisation and participation in Materials Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM146",
+      "to": "1TE074",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Either: Solid State Physics I, Surface Characterisation and Surface and Materials Analysis; or: Introduction to Materials Engineering, Surface Characterisation and participation in Materials Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA105",
+      "to": "1TE635",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "30 credits in science/engineering. Participation in Single Variable Calculus and participation one of the courses Mechanics I and Mechanics Basic Course."
+    },
+    {
+      "from": "1MA013",
+      "to": "1TE635",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "30 credits in science/engineering. Participation in Single Variable Calculus and participation one of the courses Mechanics I and Mechanics Basic Course."
+    },
+    {
+      "from": "1KB300",
+      "to": "1TG300",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits within Science/Technology. Participation in Quantum Mechanics and Chemical Bonding II and either Thermodynamics, Chemical Thermodynamics or Principles of Thermodynamics."
+    },
+    {
+      "from": "1TG300",
+      "to": "1TM004",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering including Solid State Physics I and Solid State Physics II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TG310",
+      "to": "1TM004",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering including Solid State Physics I and Solid State Physics II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM143",
+      "to": "1TM006",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering. Engineering Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE022",
+      "to": "1TM007",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering. Tribological Materials. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE015",
+      "to": "1TM034",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Micro- and Nanotechnology I must have been taken. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA024",
+      "to": "1TM112",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Either 1) Participation in the courses Solid Mechanics and Introduction to Additive Manufacturing, or 2) Participation in the courses Solid Mechanics and Introduction to Materials Engineering, or 3) Solid Mechanics, Numerical Analysis and Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE610",
+      "to": "1TM112",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Either 1) Participation in the courses Solid Mechanics and Introduction to Additive Manufacturing, or 2) Participation in the courses Solid Mechanics and Introduction to Materials Engineering, or 3) Solid Mechanics, Numerical Analysis and Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE635",
+      "to": "1TM112",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Either 1) Participation in the courses Solid Mechanics and Introduction to Additive Manufacturing, or 2) Participation in the courses Solid Mechanics and Introduction to Materials Engineering, or 3) Solid Mechanics, Numerical Analysis and Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM009",
+      "to": "1TM128",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 90 credits in science/engineering. Additive Manufacturing or participation in Additive Manufacturing in Polymeric Materials with 2 credits completed and participation in Additive Manufacturing of Metallic and Ceramic Materials with 2 credits completed. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB263",
+      "to": "1TM135",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Biomaterials I or Bio-MEMS and organs-on-chip. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM034",
+      "to": "1TM135",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Biomaterials I or Bio-MEMS and organs-on-chip. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE610",
+      "to": "1TM141",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Attended the course Introduction to materials engineering."
+    },
+    {
+      "from": "1KB210",
+      "to": "1TM146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. At least 3 credits from Materials Chemistry or at least 2 credits from Introduction to Materials Engineering. Surface Characterisation must have been taken. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE610",
+      "to": "1TM146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. At least 3 credits from Materials Chemistry or at least 2 credits from Introduction to Materials Engineering. Surface Characterisation must have been taken. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM144",
+      "to": "1TM146",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. At least 3 credits from Materials Chemistry or at least 2 credits from Introduction to Materials Engineering. Surface Characterisation must have been taken. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10073",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3614",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3373",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;2"
+    },
+    {
+      "id": "3349",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;1"
+    },
+    {
+      "id": "3024",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2599",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2380",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2218",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1904",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1691",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1410",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1185",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "1027",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;2"
+    },
+    {
+      "id": "962",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.837906+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10073",
+  "programmeTitle": "Civilingenjörsprogrammet i teknisk fysik med materialvetenskap, 300 hp (TTM2Y)",
+  "programmeTitleEn": "Master's Programme in Materials Engineering, 300 credits (TTM2Y)",
+  "programmeUri": "/utbildning/program/civilingenjorsprogrammet-teknisk-fysik-med-materialvetenskap",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

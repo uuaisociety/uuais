@@ -1,0 +1,1654 @@
+{
+  "id": "10032",
+  "code": "TIS2M",
+  "revisionId": "10032",
+  "nameSv": "Masterprogram i inbyggda system",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "15 januari 2026",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1DT086",
+      "titleEn": "Introduction to Studies in Embedded Systems",
+      "titleSv": "Introduktion till studier i inbyggda system",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DT044",
+      "titleEn": "Operating Systems I",
+      "titleSv": "Operativsystem I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "Computer Programming I and II, or participation in Imperative and Object-Oriented Programming Methodology, Computer Architecture I."
+    },
+    {
+      "code": "1TD722",
+      "titleEn": "Computer Programming II",
+      "titleSv": "Programmeringsteknik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Computer Programming I"
+    },
+    {
+      "code": "1DL530",
+      "titleEn": "Introduction to Parallel Programming",
+      "titleSv": "Introduktion till parallellprogrammering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 20 credits in computer science including a second course in programming using an imperative and object-oriented language and Algorithms and Data Structures I and Computer Architecture I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT052",
+      "titleEn": "Computer Networks I",
+      "titleSv": "Datakommunikation I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits in mathematics and 30 credits in computer science, including at least one second course in computer programming and at least 5 credits in computer architecture."
+    },
+    {
+      "code": "1DL330",
+      "titleEn": "Functional Programming I",
+      "titleSv": "Funktionell programmering I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with a second course in computer programming. 15 credits in mathematics, including Basic algebra. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL251",
+      "titleEn": "Software Engineering and Project Management",
+      "titleSv": "Metoder och projektledning för mjukvaruutveckling",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 40 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MD016",
+      "titleEn": "Human-Computer Interaction",
+      "titleSv": "Människa-datorinteraktion",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1N, Sociotechnical Systems G1N, Technology",
+      "mainFieldSv": "Datavetenskap G1N, System i teknik och samhälle G1N, Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1DL210",
+      "titleEn": "Algorithms and Data Structures I",
+      "titleSv": "Algoritmer och datastrukturer I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "10 credits in computer programming (Program Design, Programming Techniques II, or the equivalent) and 10 credits in mathematics, including basic algebra. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M)."
+    },
+    {
+      "code": "1DT004",
+      "titleEn": "Real Time Systems",
+      "titleSv": "Realtidssystem",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Computer Architecture. Participation in Operating Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE723",
+      "titleEn": "Microcontroller Programming",
+      "titleSv": "Programmering av enkapseldatorer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering, including one of the following options: (option 1): Computer Programming I and Electronics I, (option 2): Computer Programming I and Basics of Electrical Engineering II and Digital Electronics, (option 3): Program Design and Data Structures as well as Digital Technology and Electronics, (option 4): 30 credits in computer science, including courses in programming and computer architecture. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE663",
+      "titleEn": "Microcontroller Programming",
+      "titleSv": "Programmering av enkapseldatorer",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering, including one of the following options: (option 1): Computer Programming I and Electronics I, (option 2): Computer Programming I and Basics of Electrical Engineering II and Digital Electronics, (option 3): Program Design and Data Structures as well as Digital Technology and Electronics, (option 4): 30 credits in computer science, including courses in programming and computer architecture. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL321",
+      "titleEn": "Compiler Design I",
+      "titleSv": "Kompilatorteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits including 15 credits in mathematics and 30 credits in computer science, including Operating Systems and a second course in computer programming."
+    },
+    {
+      "code": "1DL610",
+      "titleEn": "Software Testing",
+      "titleSv": "Mjukvarutestning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 15 credits in mathematics and 60 credits in computer science/engineering, including a second course in programming in an imperative language and object-oriented programming. Participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT072",
+      "titleEn": "Secure Computer Systems I",
+      "titleSv": "Säkra datorsystem I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 15 credits in mathematics and 30 credits in computer science or technology. 10 credits in programming. Participation in Distributed Information Systems or Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MD032",
+      "titleEn": "Intelligent Interactive Systems",
+      "titleSv": "Intelligenta interaktiva system",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Human-Computer Interaction A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Människa-datorinteraktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 15 credits in mathematics and 60 credits in computer science/information systems, including 20 credits in programming/algorithms/data structures. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT063",
+      "titleEn": "Real Time Systems I",
+      "titleSv": "Realtidssystem I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Computer Architecture. Participation in Operating Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT194",
+      "titleEn": "Wireless Communication and Networked Embedded Systems",
+      "titleSv": "Trådlös kommunikation och nätverksbaserade inbyggda system",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits whereof 90 credits in computer science, mathematics, and technology, including Computer Networks I and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT024",
+      "titleEn": "Advanced Computer Architecture",
+      "titleSv": "Avancerad datorarkitektur",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 90 credits in computer science and mathematics with Computer Architecture or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT106",
+      "titleEn": "Programming Embedded Systems",
+      "titleSv": "Programmering av inbyggda system",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1F, Embedded Systems A1F, Technology",
+      "mainFieldSv": "Datavetenskap A1F, Inbyggda system A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Computer Architecture and Operating Systems. Participation in Real Time Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA326",
+      "titleEn": "Digital Electronics Design with VHDL",
+      "titleSv": "Digital elektronikkonstruktion med VHDL",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Embedded Systems A1N, Technology",
+      "mainFieldSv": "Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE663",
+      "titleEn": "Microcontroller Programming",
+      "titleSv": "Programmering av enkapseldatorer",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering, including one of the following options: (option 1): Computer Programming I and Electronics I, (option 2): Computer Programming I and Basics of Electrical Engineering II and Digital Electronics, (option 3): Program Design and Data Structures as well as Digital Technology and Electronics, (option 4): 30 credits in computer science, including courses in programming and computer architecture. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1RT485",
+      "titleEn": "Introduction to Computer Control Systems",
+      "titleSv": "Introduktion till datorbaserade reglersystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DL073",
+      "titleEn": "Natural Computation Methods for Machine Learning",
+      "titleSv": "Naturliga beräkningsmetoder för maskininlärning",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 15 credits in mathematics and 60 credits in computer science/information systems, including 20 credits in programming/algorithms/data structures. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT116",
+      "titleEn": "Low-Level Parallel Programming",
+      "titleSv": "Lågnivå-parallellprogrammering",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 60 credits in computer science, including programming in C and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT115",
+      "titleEn": "Information Technology and Energy Storage",
+      "titleSv": "Informationsteknik och energilagring",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 90 credits in computer science, technology, mathematics, chemistry, physics, or materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT117",
+      "titleEn": "Computer Networks II",
+      "titleSv": "Datakommunikation II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 90 credits in computer science and mathematics with participation in Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT195",
+      "titleEn": "Wireless Communication and Networked Embedded Systems, Project",
+      "titleSv": "Trådlös kommunikation och inbyggda system, projekt",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1F, Embedded Systems A1F, Technology",
+      "mainFieldSv": "Datavetenskap A1F, Inbyggda system A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 90 credits in computer science, mathematics, and technology, including Computer Networks I and a second course in computer programming. Participation in the course Wireless Communication and Networked Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT108",
+      "titleEn": "Programming Embedded Systems, Project",
+      "titleSv": "Programmering av inbyggda system, projekt",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1F, Embedded Systems A1F, Technology",
+      "mainFieldSv": "Datavetenskap A1F, Inbyggda system A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Computer Architecture and Operating Systems. Participation in Real Time Systems and Programming of Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MD016",
+      "titleEn": "Human-Computer Interaction",
+      "titleSv": "Människa-datorinteraktion",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1N, Sociotechnical Systems G1N, Technology",
+      "mainFieldSv": "Datavetenskap G1N, System i teknik och samhälle G1N, Teknik",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1RT495",
+      "titleEn": "Automatic Control II",
+      "titleSv": "Reglerteknik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Embedded Systems A1N, Technology",
+      "mainFieldSv": "Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Automatic Control I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1RT004",
+      "titleEn": "Safety and Security in Control Systems",
+      "titleSv": "Säkerhet i reglersystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 60 credits in science/engineering, whereof 20 credits in mathematics, and one of the courses Automatic Control I or Introduction to Computer Control Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MD043",
+      "titleEn": "Human-Robot Interaction",
+      "titleSv": "Människa-robotinteraktion",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Human-Computer Interaction A1N, Image Analysis and Machine Learning A1N, Technology",
+      "mainFieldSv": "Bildanalys och maskininlärning A1N, Datavetenskap A1N, Människa-datorinteraktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 45 credits in computer science, data science, information systems, applied computational science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT100",
+      "titleEn": "Advanced Course on Topics in Embedded Systems",
+      "titleSv": "Öppen fördjupningskurs i inbyggda system",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1F, Embedded Systems A1F, Technology",
+      "mainFieldSv": "Datavetenskap A1F, Inbyggda system A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DT101",
+      "titleEn": "Advanced Course on Topics in Embedded Systems",
+      "titleSv": "Öppen fördjupningskurs i inbyggda system",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1F, Embedded Systems A1F, Technology",
+      "mainFieldSv": "Datavetenskap A1F, Inbyggda system A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DT087",
+      "titleEn": "Degree Project in Embedded Systems",
+      "titleSv": "Examensarbete i inbyggda system",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Embedded Systems",
+      "mainFieldSv": "Inbyggda system",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 15 credits in embedded systems at Master's level, including courses at Master's level that are necessary for the project. One out of two options: (Option 1): one out of three of the courses Programming of Embedded Systems, Wireless Communication and Networked Embedded Systems and Model-based Development of Embedded Software or (Option 2): one of: IT, Sustainability and Social Responsibility or IT, Ethics and Organisation. Participation in Introduction to Studies in Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6. Admission requires a project plan accepted by the department."
+    },
+    {
+      "code": "1DT059",
+      "titleEn": "Model-Based Design of Embedded Software",
+      "titleSv": "Modellbaserad utveckling av inbyggd programvara",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1F, Embedded Systems A1F, Technology",
+      "mainFieldSv": "Datavetenskap A1F, Inbyggda system A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Computer architecture, Operating systems, and Real-time systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT109",
+      "titleEn": "Accelerating Systems with Programmable Logic Components",
+      "titleSv": "Accelerering av system med programmerbara logikenheter",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Embedded Systems A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Computer Architecture, a basic course in digital circuits (especially state machines) and a basic course in programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1RT495",
+      "titleEn": "Automatic Control II",
+      "titleSv": "Reglerteknik II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Embedded Systems A1N, Technology",
+      "mainFieldSv": "Inbyggda system A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including Automatic Control I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MD016",
+      "titleEn": "Human-Computer Interaction",
+      "titleSv": "Människa-datorinteraktion",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1N, Sociotechnical Systems G1N, Technology",
+      "mainFieldSv": "Datavetenskap G1N, System i teknik och samhälle G1N, Teknik",
+      "depthCode": "G1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1DL330",
+      "titleEn": "Functional Programming I",
+      "titleSv": "Funktionell programmering I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with a second course in computer programming. 15 credits in mathematics, including Basic algebra. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL251",
+      "titleEn": "Software Engineering and Project Management",
+      "titleSv": "Metoder och projektledning för mjukvaruutveckling",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 40 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL340",
+      "titleEn": "Artificial Intelligence",
+      "titleSv": "Artificiell intelligens",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Data Science A1N, Technology",
+      "mainFieldSv": "Dataanalys A1N, Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 15 credits in mathematics and 20 credits in computer science, including a second course in programming. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL210",
+      "titleEn": "Algorithms and Data Structures I",
+      "titleSv": "Algoritmer och datastrukturer I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G1F, Technology",
+      "mainFieldSv": "Datavetenskap G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "10 credits in computer programming (Program Design, Programming Techniques II, or the equivalent) and 10 credits in mathematics, including basic algebra. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M)."
+    },
+    {
+      "code": "1EL014",
+      "titleEn": "Machine Learning for the Internet of Things",
+      "titleSv": "Maskininlärning för sakernas internet",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Embedded Systems A1F, Technology",
+      "mainFieldSv": "Inbyggda system A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits whereof 90 credits in science/engineering including 5 credits in programming with python or C. Participation in Computer Networks or Internet of Things or in Distributed Information Systems or Digital Communication. Participation in Probability and Statistics or Statistics for Engineers. Participation in Natural Computation Methods for Machine Learning or Statistical Machine Learning or Artificial Intelligence for Industrial Analytics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT072",
+      "titleEn": "Secure Computer Systems I",
+      "titleSv": "Säkra datorsystem I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 15 credits in mathematics and 30 credits in computer science or technology. 10 credits in programming. Participation in Distributed Information Systems or Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL321",
+      "titleEn": "Compiler Design I",
+      "titleSv": "Kompilatorteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science G2F, Technology",
+      "mainFieldSv": "Datavetenskap G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits including 15 credits in mathematics and 30 credits in computer science, including Operating Systems and a second course in computer programming."
+    },
+    {
+      "code": "1DL610",
+      "titleEn": "Software Testing",
+      "titleSv": "Mjukvarutestning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 15 credits in mathematics and 60 credits in computer science/engineering, including a second course in programming in an imperative language and object-oriented programming. Participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DL590",
+      "titleEn": "Concurrent Algorithms and Data Structures",
+      "titleSv": "Parallella algoritmer och datastrukturer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in computer science, including participation in Introduction to Parallel Programming. Functional programming is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MD032",
+      "titleEn": "Intelligent Interactive Systems",
+      "titleSv": "Intelligenta interaktiva system",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Human-Computer Interaction A1N, Technology",
+      "mainFieldSv": "Datavetenskap A1N, Människa-datorinteraktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 15 credits in mathematics and 60 credits in computer science/information systems, including 20 credits in programming/algorithms/data structures. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1DT090",
+      "titleEn": "Degree Project E in Embedded Systems",
+      "titleSv": "Examensarbete E i inbyggda system",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Embedded Systems",
+      "mainFieldSv": "Inbyggda system",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in embedded systems at Master's level, including Introduction to Studies in Embedded Systems and courses at Master's level that are necessary for the project. One out of two options: (Option 1): Two out of three of the courses Programming of Embedded Systems, Wireless Communication and Networked Embedded Systems and Model-based Development of Embedded Software, or (Option 2): IT, Sustainability and Social Responsibility or IT, Ethics and Organisation. Proficiency in English equivalent to the Swedish upper secondary course English 6. Admission requires a project plan accepted by the department."
+    },
+    {
+      "code": "1DT100",
+      "titleEn": "Advanced Course on Topics in Embedded Systems",
+      "titleSv": "Öppen fördjupningskurs i inbyggda system",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1F, Embedded Systems A1F, Technology",
+      "mainFieldSv": "Datavetenskap A1F, Inbyggda system A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DT101",
+      "titleEn": "Advanced Course on Topics in Embedded Systems",
+      "titleSv": "Öppen fördjupningskurs i inbyggda system",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1F, Embedded Systems A1F, Technology",
+      "mainFieldSv": "Datavetenskap A1F, Inbyggda system A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1DT068",
+      "titleEn": "Degree Project in Embedded Systems",
+      "titleSv": "Examensarbete i inbyggda system",
+      "credits": 30.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Embedded Systems",
+      "mainFieldSv": "Inbyggda system",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in embedded systems at Master's level, including Introduction to Studies in Embedded Systems and courses at Master's level that are necessary for the project. One out of two options given below: (Option 1): at least two of the courses Programming of Embedded Systems (1DT106), Wireless Communication and Networked Embedded Systems (1DT194) and Model-based Development of Embedded Software (1DT059), or (Option 2): one course of IT, Sustainability and Social Responsibility (1DL008) or IT, Ethics and Organisation (1MD004). Proficiency in English equivalent to the Swedish upper secondary course English 6. Admission requires a project plan accepted by the department."
+    },
+    {
+      "code": "1DT090",
+      "titleEn": "Degree Project E in Embedded Systems",
+      "titleSv": "Examensarbete E i inbyggda system",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Embedded Systems",
+      "mainFieldSv": "Inbyggda system",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in embedded systems at Master's level, including Introduction to Studies in Embedded Systems and courses at Master's level that are necessary for the project. One out of two options: (Option 1): Two out of three of the courses Programming of Embedded Systems, Wireless Communication and Networked Embedded Systems and Model-based Development of Embedded Software, or (Option 2): IT, Sustainability and Social Responsibility or IT, Ethics and Organisation. Proficiency in English equivalent to the Swedish upper secondary course English 6. Admission requires a project plan accepted by the department."
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser:",
+      "labelEn": "Recommended courses:",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Alternativ:",
+      "labelEn": "Alternatives:",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [
+        "1DL530"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "För 1DL530 krävs en andra kurs i programmering utöver behörigheten för programmet.",
+      "labelEn": "1DL530 requires a second course in programming in addition to the programme's admission requirements.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser:",
+      "labelEn": "Recommended courses follow below.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Alternativ:",
+      "labelEn": "Alternatives (options) follow.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TE723",
+        "1TE663",
+        "1DT063",
+        "1DT004"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "1TE723 är föreläsningsdelen av 1TE663.1DT063 är ett alternativ till 1DT004.",
+      "labelEn": "1TE723 is the lecture part of 1TE663, and 1DT063 is an alternative to 1DT004.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-6",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser:",
+      "labelEn": "Recommended courses:",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-7",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Alternativ:",
+      "labelEn": "Alternatives follow.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-8",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Antalet platser i kursen 1FA326 är begränsade, urval kan komma att göras.1TE723 är föreläsningsdelen av 1TE6631DT095 är föreläsningsdelen av 1DT1031DL550 och 1DT116 kan inte ingå i samma examen. 1DT107 och 1DT115 kan inte ingå i samma examen.",
+      "labelEn": null,
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-9",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser:",
+      "labelEn": "Recommended courses:",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-10",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Alternativ:",
+      "labelEn": "Alternatives follow below.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-11",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Alternativa kurser:",
+      "labelEn": "Alternative (elective) courses are listed under this heading.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-12",
+      "type": "NOTE",
+      "courseCodes": [
+        "1DT100",
+        "1DT101",
+        "1DT087"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "1DT100, 1DT101 och 1DT087 ges i period 13-14.1DT087 Examensarbete i inbyggda system 15 hp ges endast för studenter som önskar avsluta programmet med magisterexamen.",
+      "labelEn": "1DT100, 1DT101 and 1DT087 are offered in period 13–14; 1DT087 (15 hp Degree Project in Embedded Systems) is intended only for students who wish to complete the programme with a magister's degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-13",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser:",
+      "labelEn": "Recommended courses.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-14",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Alternativ:",
+      "labelEn": "A heading indicating that alternatives follow.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-15",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser:",
+      "labelEn": "Recommended courses:",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-16",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Alternativ:",
+      "labelEn": "Alternatives are offered.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-17",
+      "type": "NOTE",
+      "courseCodes": [
+        "1DT100",
+        "1DT101"
+      ],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "1DT100 och 1DT101 ges i period 21-22.",
+      "labelEn": "1DT100 and 1DT101 are offered in period 21-22.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-18",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Alternativ:",
+      "labelEn": "Heading meaning 'Alternatives:', indicating that a list of alternative courses follows.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-19",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Alternativ:",
+      "labelEn": "Choose one of the alternative courses listed.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Rekommenderade kurser:",
+      "semester": 1,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Alternativ:",
+      "semester": 1,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "För 1DL530 krävs en andra kurs i programmering utöver behörigheten för programmet.",
+      "semester": 1,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade kurser:",
+      "semester": 1,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Alternativ:",
+      "semester": 1,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "1TE723 är föreläsningsdelen av 1TE663.1DT063 är ett alternativ till 1DT004.",
+      "semester": 1,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade kurser:",
+      "semester": 2,
+      "period": "Period 3",
+      "trackId": null
+    },
+    {
+      "textSv": "Alternativ:",
+      "semester": 2,
+      "period": "Period 3",
+      "trackId": null
+    },
+    {
+      "textSv": "Antalet platser i kursen 1FA326 är begränsade, urval kan komma att göras.1TE723 är föreläsningsdelen av 1TE6631DT095 är föreläsningsdelen av 1DT1031DL550 och 1DT116 kan inte ingå i samma examen. 1DT107 och 1DT115 kan inte ingå i samma examen.",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade kurser:",
+      "semester": 2,
+      "period": "Period 4",
+      "trackId": null
+    },
+    {
+      "textSv": "Alternativ:",
+      "semester": 2,
+      "period": "Period 4",
+      "trackId": null
+    },
+    {
+      "textSv": "Alternativa kurser:",
+      "semester": 2,
+      "period": "Period 4",
+      "trackId": null
+    },
+    {
+      "textSv": "1DT100, 1DT101 och 1DT087 ges i period 13-14.1DT087 Examensarbete i inbyggda system 15 hp ges endast för studenter som önskar avsluta programmet med magisterexamen.",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade kurser:",
+      "semester": 3,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Alternativ:",
+      "semester": 3,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade kurser:",
+      "semester": 3,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Alternativ:",
+      "semester": 3,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "1DT100 och 1DT101 ges i period 21-22.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Alternativ:",
+      "semester": 4,
+      "period": "Period 3",
+      "trackId": null
+    },
+    {
+      "textSv": "Alternativ:",
+      "semester": 4,
+      "period": "Period 4",
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1TD722",
+      "to": "1DL340",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 15 credits in mathematics and 20 credits in computer science, including a second course in programming. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL330",
+      "to": "1DL590",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits with 60 credits in computer science, including participation in Introduction to Parallel Programming. Functional programming is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL530",
+      "to": "1DL590",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits with 60 credits in computer science, including participation in Introduction to Parallel Programming. Functional programming is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT004",
+      "to": "1DT059",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Computer architecture, Operating systems, and Real-time systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT024",
+      "to": "1DT059",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Computer architecture, Operating systems, and Real-time systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT044",
+      "to": "1DT059",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Computer architecture, Operating systems, and Real-time systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT059",
+      "to": "1DT068",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree and, in addition, at least 30 credits in embedded systems at Master's level, including Introduction to Studies in Embedded Systems and courses at Master's level that are necessary for the project. One out of two options given below: (Option 1): at least two of the courses Programming of Embedded Systems (1DT106), Wireless Communication and Networked Embedded Systems (1DT194) an"
+    },
+    {
+      "from": "1DT086",
+      "to": "1DT068",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree and, in addition, at least 30 credits in embedded systems at Master's level, including Introduction to Studies in Embedded Systems and courses at Master's level that are necessary for the project. One out of two options given below: (Option 1): at least two of the courses Programming of Embedded Systems (1DT106), Wireless Communication and Networked Embedded Systems (1DT194) an"
+    },
+    {
+      "from": "1DT106",
+      "to": "1DT068",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree and, in addition, at least 30 credits in embedded systems at Master's level, including Introduction to Studies in Embedded Systems and courses at Master's level that are necessary for the project. One out of two options given below: (Option 1): at least two of the courses Programming of Embedded Systems (1DT106), Wireless Communication and Networked Embedded Systems (1DT194) an"
+    },
+    {
+      "from": "1DT194",
+      "to": "1DT068",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree and, in addition, at least 30 credits in embedded systems at Master's level, including Introduction to Studies in Embedded Systems and courses at Master's level that are necessary for the project. One out of two options given below: (Option 1): at least two of the courses Programming of Embedded Systems (1DT106), Wireless Communication and Networked Embedded Systems (1DT194) an"
+    },
+    {
+      "from": "1DT086",
+      "to": "1DT087",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "A Bachelor's degree and, in addition, at least 15 credits in embedded systems at Master's level, including courses at Master's level that are necessary for the project. One out of two options: (Option 1): one out of three of the courses Programming of Embedded Systems, Wireless Communication and Networked Embedded Systems and Model-based Development of Embedded Software or (Option 2): one of: IT, "
+    },
+    {
+      "from": "1DT086",
+      "to": "1DT090",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree and, in addition, at least 30 credits in embedded systems at Master's level, including Introduction to Studies in Embedded Systems and courses at Master's level that are necessary for the project. One out of two options: (Option 1): Two out of three of the courses Programming of Embedded Systems, Wireless Communication and Networked Embedded Systems and Model-based Development "
+    },
+    {
+      "from": "1DT106",
+      "to": "1DT090",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree and, in addition, at least 30 credits in embedded systems at Master's level, including Introduction to Studies in Embedded Systems and courses at Master's level that are necessary for the project. One out of two options: (Option 1): Two out of three of the courses Programming of Embedded Systems, Wireless Communication and Networked Embedded Systems and Model-based Development "
+    },
+    {
+      "from": "1DT194",
+      "to": "1DT090",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree and, in addition, at least 30 credits in embedded systems at Master's level, including Introduction to Studies in Embedded Systems and courses at Master's level that are necessary for the project. One out of two options: (Option 1): Two out of three of the courses Programming of Embedded Systems, Wireless Communication and Networked Embedded Systems and Model-based Development "
+    },
+    {
+      "from": "1DT004",
+      "to": "1DT106",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including Computer Architecture and Operating Systems. Participation in Real Time Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT044",
+      "to": "1DT106",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Computer Architecture and Operating Systems. Participation in Real Time Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT004",
+      "to": "1DT108",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including Computer Architecture and Operating Systems. Participation in Real Time Systems and Programming of Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT044",
+      "to": "1DT108",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Computer Architecture and Operating Systems. Participation in Real Time Systems and Programming of Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD722",
+      "to": "1DT116",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 60 credits in computer science, including programming in C and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT052",
+      "to": "1DT117",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 90 credits in computer science and mathematics with participation in Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT052",
+      "to": "1DT194",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits whereof 90 credits in computer science, mathematics, and technology, including Computer Networks I and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD722",
+      "to": "1DT194",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits whereof 90 credits in computer science, mathematics, and technology, including Computer Networks I and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT052",
+      "to": "1DT195",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 90 credits in computer science, mathematics, and technology, including Computer Networks I and a second course in computer programming. Participation in the course Wireless Communication and Networked Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL073",
+      "to": "1EL014",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits whereof 90 credits in science/engineering including 5 credits in programming with python or C. Participation in Computer Networks or Internet of Things or in Distributed Information Systems or Digital Communication. Participation in Probability and Statistics or Statistics for Engineers. Participation in Natural Computation Methods for Machine Learning or Statistical Machine Learning o"
+    },
+    {
+      "from": "1DT052",
+      "to": "1EL014",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits whereof 90 credits in science/engineering including 5 credits in programming with python or C. Participation in Computer Networks or Internet of Things or in Distributed Information Systems or Digital Communication. Participation in Probability and Statistics or Statistics for Engineers. Participation in Natural Computation Methods for Machine Learning or Statistical Machine Learning o"
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10032",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3561",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3289",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2977",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2681",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2346",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "1966",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1861",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1642",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1375",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1121",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "925",
+      "name": "Giltig från och med höstterminen 2015"
+    },
+    {
+      "id": "742",
+      "name": "Giltig från och med höstterminen 2014"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.937515+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10032",
+  "programmeTitle": "Masterprogram i inbyggda system, 120 hp (TIS2M)",
+  "programmeTitleEn": "Master's Programme in Embedded Systems, 120 credits (TIS2M)",
+  "programmeUri": "/utbildning/program/masterprogram-inbyggda-system",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

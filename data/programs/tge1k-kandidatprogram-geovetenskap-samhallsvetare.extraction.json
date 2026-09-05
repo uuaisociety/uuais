@@ -1,0 +1,235 @@
+{
+ "edges": [
+  {
+   "code": "1GE100",
+   "text": "30 credits in earth science, science/engineering or geography.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV004",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV007",
+   "text": "60 credits in earth science including Introduction to Mineralogy and Petrology, 10 credits, and Sedimentology, Stratigraphy and Palaeobiology, 10 credits.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MP044",
+      "type": "HARD"
+     },
+     {
+      "from": "1GV206",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV029",
+   "text": "75 credits in earth science with progressive specialisation",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV177",
+   "text": "General entry requirements and Biology 2, Physics 1a/1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D. These prerequisites may be replaced by Bioscience, 30 credits, and Earth Science - Planet Earth, 30 credits. Mathematics, 10 credits, is recommended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG107",
+      "type": "HARD"
+     },
+     {
+      "from": "1GV004",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV191",
+   "text": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Hydrology and Water Resource Management, 10 credits and Landscape Development, 10 credits, are recommended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV206",
+      "type": "HARD"
+     },
+     {
+      "from": "1HY141",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV192",
+   "text": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits and Structural Geology and Ground Stability, 10 credits.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV206",
+      "type": "HARD"
+     },
+     {
+      "from": "1GV007",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV205",
+   "text": "60 credits Earth Science. Participation in Mineralogy and Petrology, 10 credits. 10 credits in mathematics and 10 credits in GIS are recommended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MP044",
+      "type": "SOFT"
+     },
+     {
+      "from": "1GE100",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV206",
+   "text": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4 or Bioscience 30 credits. At least 22 credits from Earth Science - Planet Earth, including The Earth as a Planet (5+3 credits) and all practical components.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG107",
+      "type": "HARD"
+     },
+     {
+      "from": "1GV004",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV207",
+   "text": "60 credits earth science. Participations in Mineralogy and Petrology 10 credits. 10 credits in GIS are recommended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MP044",
+      "type": "SOFT"
+     },
+     {
+      "from": "1GE100",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1HY141",
+   "text": "60 credits in earth science or 90 credits within the Bachelor's Programme in Construction Engineering",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP044",
+   "text": "60 credits in Earth Science, including Earth Science - Planet Earth, 30 credits and Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Chemistry is recommended.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV004",
+      "type": "HARD"
+     },
+     {
+      "from": "1GV206",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB013",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1PA046",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "För studenter inom sökalternativ för samhällsvetare som inte har Ma D från gymnasiet krävs Biovetenskap 30 hp för tillträde till 1MA010 Baskurs i matematik 5 hp.",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1BG107"
+    ],
+    "labelEn": "Students in the social-science admission track without upper-secondary Ma D must complete Bioscience 30 hp (1BG107) before admission to 1MA010 Basic Course in Mathematics 5 hp.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Annat biområde än kemi kan väljas.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1KB013",
+     "1KB200",
+     "1KB208"
+    ],
+    "labelEn": "A bio-area other than chemistry may be chosen instead.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "alternativt",
+    "semester": 6,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Alternatively.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga kurser sommartid/terminstid.",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other courses may be taken during the summer term or during the regular semester.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

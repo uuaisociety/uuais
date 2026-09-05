@@ -1,0 +1,102 @@
+{
+ "edges": [
+  {
+   "code": "1GV108",
+   "text": "30 credits in environmental science, biology, earth science, geography, social geography, national economics, sustainable energy transition or business.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV129",
+   "text": "Wind Power Basics, 7.5 credits, or Energy System and Environmental Impact, 7.5 credits, or Wind Power Planning and Permission, 7.5 credits, or Energy Production and Usage, 10 credits.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV166",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV164",
+   "text": "General entry requirements and Mathematics Further level 1b or level 1c, Science Studies level 2, Social Studies level 1b or level 1a2, or Mathematics 3b or 3c/Mathematics C, Science Studies 2, Social Studies 1b or 1a1+1a2",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV172",
+   "text": "15 credits in environmental science, earth science or biology alternatively participation in 15 credits in sustainable energy transition.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV169",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV181",
+   "text": "60 credits in sustainable energy transition",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV184",
+   "text": "60 credits in sustainable energy transition",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV187",
+   "text": "60 credits in sustainable energy transition",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV204",
+   "text": "30 credits in sustainable energy transition including Introduction to Sustainable Energy Transition, 15 credits. Participation in Planning and Environmental Justice, 10 credits.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV169",
+      "type": "HARD"
+     },
+     {
+      "from": "2KU091",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG316",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Valfria kurser 30 hpTillvalskurser (valfria under period 1 och 2):",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses totalling 30 credits, taken as optional courses during periods 1 and 2.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

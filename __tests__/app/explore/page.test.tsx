@@ -3,6 +3,9 @@ import ExplorePage from '@/app/explore/page'
 import type { Course } from '@/lib/courses'
 import { updatePageMeta } from '@/utils/seo'
 
+// AdminGate reaches the real Firebase client at import time; CI has no keys.
+jest.mock('@/lib/firebase-client', () => ({ auth: {}, db: {} }))
+
 jest.mock('@/components/common/RagChat', () => ({
   __esModule: true,
   default: ({ onRecommendations, onThinkingStart, placeholder }: unknown) => {
@@ -120,6 +123,15 @@ beforeEach(() => {
 })
 
 describe('ExplorePage', () => {
+  // The page sits behind AdminGate while the navigator is unreleased.
+  beforeAll(() => {
+    global.__setAdminState({ user: { uid: 'a' }, loading: false, isAdmin: true })
+  })
+
+  afterAll(() => {
+    global.__setAdminState(null)
+  })
+
   it('renders hero section with title and description', async () => {
     render(<ExplorePage />)
     expect(screen.getByText('UUAIS Course Navigator')).toBeInTheDocument()

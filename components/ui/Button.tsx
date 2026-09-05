@@ -33,6 +33,9 @@ const buttonVariants = cva(
         cta: "bg-primary text-primary-foreground glass glass-sheen glass-interactive glass-no-lift rounded-md shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110 ",
         ctaSoft:
           "glass rounded-md text-foreground shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110 hover:bg-[var(--glass-bg-strong)]",
+        // A control whose surface is something else — a whole card, a strip along a band.
+        // It keeps the system's focus ring and press feedback but brings its own geometry.
+        bare: "bg-transparent text-inherit font-normal",
       },
       size: {
         default: "h-10 px-5 text-sm has-[>svg]:pr-4",
@@ -40,6 +43,12 @@ const buttonVariants = cva(
         lg: "h-11 px-6 text-[0.9375rem]",
         xl: "h-13 px-7 text-base",
         icon: "size-10 px-0",
+        // Brings no geometry: for a control whose own surface sets the padding.
+        none: "h-auto p-0",
+        // Icon controls inside dense furniture: a course card's row of actions, and the
+        // help affordance that sits inline with a line of text.
+        iconSm: "size-8 px-0",
+        iconXs: "size-5 px-0",
       },
       fullWidth: {
         true: "w-full",

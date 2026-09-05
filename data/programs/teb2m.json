@@ -1,0 +1,202 @@
+{
+  "id": "10045",
+  "code": "TEB2M",
+  "revisionId": "10045",
+  "nameSv": "Masterprogram i evolutionsbiologi - MEME",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [
+    {
+      "id": "uppsala-universitet",
+      "specialisationId": "uppsala-universitet",
+      "specialisationSv": "Uppsala universitet",
+      "profileSv": null,
+      "descriptionSv": null,
+      "fromSemester": 1
+    }
+  ],
+  "courses": [
+    {
+      "code": "1BG373",
+      "titleEn": "Evolutionary Processes",
+      "titleSv": "Evolutionära processer",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology",
+      "mainFieldSv": "Biologi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": "uppsala-universitet",
+      "onlyProgramme": true,
+      "entryRequirements": "Completed courses of 150 credits including (1) 60 credits in biology and 30 credits in chemistry or 30 credits in earth science, or (2) 90 credits in biology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1BG306",
+      "titleEn": "Evolutionary Patterns",
+      "titleSv": "Evolutionära mönster",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology",
+      "mainFieldSv": "Biologi",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": "uppsala-universitet",
+      "onlyProgramme": null,
+      "entryRequirements": "Completed courses of 150 credits including (1) 60 credits in biology and 30 credits in chemistry or 30 credits in earth science, or (2) 90 credits in biology. In both cases, participation in the course Evolutionary Processes. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1BG362",
+      "titleEn": "Degree Project in Biology",
+      "titleSv": "Examensarbete E2 i biologi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology",
+      "mainFieldSv": "Biologi",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1BG368",
+      "titleEn": "Project Work in Biology",
+      "titleSv": "Projektarbete i biologi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology",
+      "mainFieldSv": "Biologi",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1BG368",
+      "titleEn": "Project Work in Biology",
+      "titleSv": "Projektarbete i biologi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology",
+      "mainFieldSv": "Biologi",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1BG362",
+      "titleEn": "Degree Project in Biology",
+      "titleSv": "Examensarbete E2 i biologi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology",
+      "mainFieldSv": "Biologi",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Under termin 3 och 4 väljer studenterna vilket universitet de vill genomföra sina studier. Det är också möjligt att göra projekt vid Harvard University eller Université Lausanne. Period Kurskod Kursnamn Hp Nivå/Djup Område 1-2 RuG Research project 30 A1F B 1-2 RuG Thesis project 30 A2E B 1-2 UM2 Research project 30 A1F B 1-2 UM2 Thesis project 30 A2E B 1-2 LMU Research training + Skill course + kurser listade under termin 2 (totalt 30 hp) 30 A1N B 1-2 LMU Thesis project 30 A2E B",
+      "labelEn": "Students choose a partner university (RuG, UM2, or LMU; projects also possible at Harvard or Lausanne) for semesters 3–4, each offering a 30 hp research and/or thesis project.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Under termin 3 och 4 väljer studenterna vilket universitet de vill genomföra sina studier. Det är också möjligt att göra projekt vid Harvard University eller Université Lausanne. Period Kurskod Kursnamn Hp Nivå/Djup Område 3-4 RuG Research project 30 A1F B 3-4 RuG Thesis project 30 A2E B 3-4 UM2 Research project 30 A1F B 3-4 UM2 Thesis project 30 A2E B 3-4 LMU Thesis project 30 A2E B",
+      "labelEn": "In semesters 3–4 students choose a partner university (RuG, UM2, or LMU; projects also possible at Harvard or Lausanne) for a 30 hp research or thesis project.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Under termin 3 och 4 väljer studenterna vilket universitet de vill genomföra sina studier. Det är också möjligt att göra projekt vid Harvard University eller Université Lausanne. Period Kurskod Kursnamn Hp Nivå/Djup Område 1-2 RuG Research project 30 A1F B 1-2 RuG Thesis project 30 A2E B 1-2 UM2 Research project 30 A1F B 1-2 UM2 Thesis project 30 A2E B 1-2 LMU Research training + Skill course + kurser listade under termin 2 (totalt 30 hp) 30 A1N B 1-2 LMU Thesis project 30 A2E B",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Under termin 3 och 4 väljer studenterna vilket universitet de vill genomföra sina studier. Det är också möjligt att göra projekt vid Harvard University eller Université Lausanne. Period Kurskod Kursnamn Hp Nivå/Djup Område 3-4 RuG Research project 30 A1F B 3-4 RuG Thesis project 30 A2E B 3-4 UM2 Research project 30 A1F B 3-4 UM2 Thesis project 30 A2E B 3-4 LMU Thesis project 30 A2E B",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [],
+  "revisions": [
+    {
+      "id": "10045",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3566",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3325",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2984",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2642",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2265",
+      "name": "Giltig från och med höstterminen 2021"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.906107+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10045",
+  "programmeTitle": "Masterprogram i evolutionsbiologi – MEME, 120 hp (TEB2M)",
+  "programmeTitleEn": "Master's Programme in Evolutionary Biology – MEME, 120 credits (TEB2M)",
+  "programmeUri": "/utbildning/program/masterprogram-evolutionsbiologi-meme",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

@@ -1,0 +1,361 @@
+{
+ "edges": [
+  {
+   "code": "1FA006",
+   "text": "120 credits in science/engineering. Applied Deep Learning in Physics and Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA370",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA018",
+   "text": "120 credits with basic statistics and 60 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA152",
+   "text": "120 credits in science/technology. Participation in Mechanics III or Analytical Mechanics. Computer Programming I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA370",
+   "text": "120 credits in science/engineering. Linear Algebra II. Introduction to Scientific Computing or Introduction to Scientific Computing F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA453",
+   "text": "120 credits in science/engineering with Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV006",
+   "text": "120 credits with (1) 90 credits in earth science or biology, or (2) 90 credits in technology or physics and 30 credits in earth science or environmental science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME038",
+   "text": "120 credits including 35 credits in mathematics and 35 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME400",
+   "text": "60 credits in science/engineering including Geometry and Calculus II, 10 credits. Participation in Thermodynamics 5 credits.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME404",
+   "text": "120 credits with 90 credits in physics, earth science or biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME405",
+   "text": "120 credits including 35 credits in mathematics, 35 credits in physics, and Atmospheric and Climate Physics, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1ME400",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1ME406",
+   "text": "120 credits including 35 credits in mathematics and 35 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME408",
+   "text": "120 credits and Turbulence and Micrometeorology, 15 credits. Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits, is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1ME405",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1ME414",
+   "text": "120 credits including 75 credits in meteorology including Atmospheric and Climate Physics, 15 credits, and participation in Turbulence and Micro Meteorology, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1ME400",
+      "type": "HARD"
+     },
+     {
+      "from": "1ME405",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1ME416",
+   "text": "120 credits. Numerical Modelling of the Atmosphere, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1ME406",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1ME418",
+   "text": "60 credits in science/engineering including The Physics of Waves with Optics.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME421",
+   "text": "A Bachelor's degree or the equivalent and at least 30 credits in meteorology at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME422",
+   "text": "A Bachelor's degree or the equivalent and at least 30 credits in meteorology at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME425",
+   "text": "A Bachelor's degree or the equivalent and at least 30 credits in meteorology at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME426",
+   "text": "120 credits including 30 credits in meteorology at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME428",
+   "text": "120 credits including 35 credits in mathematics and 35 credits in physics. Participation in the course Atmospheric and Climate Physics 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1ME400",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1ME436",
+   "text": "120 credits including 30 credits in meteorology at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME446",
+   "text": "120 credits including 30 credits in meteorology at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TV028",
+   "text": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Alternativt:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Alternatively, other options may be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övrig valbar kurs denna period:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "An additional elective course may be chosen during this period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övrig valbar kurs denna period:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective courses are available this period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Alternativt:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Alternatively (unspecified alternative options).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1ME414 ges bara på svenska.",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1ME414"
+    ],
+    "labelEn": "Course 1ME414 is only offered in Swedish.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1ME421 är för magisterexamen.",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1ME421"
+    ],
+    "labelEn": "Course 1ME421 is intended for the magister's degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga kurser:",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other courses:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Alternativt:",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Alternatively: indicates that alternative course options may be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1ME414 ges bara på svenska.",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1ME414"
+    ],
+    "labelEn": "The course 1ME414 is only offered in Swedish.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective courses within the specialisation may be taken in any period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Följande beteckningar används:A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Legend explaining the course level designations (A1N, A1F, A1E, A2E, G2F) used in the plan.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

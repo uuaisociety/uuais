@@ -1,0 +1,106 @@
+{
+ "edges": [
+  {
+   "code": "1KB259",
+   "text": "120 credits with 60 credits in chemistry including Biomaterials II; or 180 credits in biology, pharmaceutical chemistry or medical science including Regenerative Medicine, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB264",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB263",
+   "text": "120 credits in science/engineering including 20 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB264",
+   "text": "120 credits and participation in Biomaterials I, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB263",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB285",
+   "text": "120 credits with 75 credits in physics, chemistry, engineering and/or materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB311",
+   "text": "120 credits with 30 credits in chemistry. 5 credits physical chemistry or Materials chemistry, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB360",
+   "text": "120 credits in science/engineering with (1) 60 credits in chemistry or (2) 30 credits in chemistry and 30 credits in physics/biology. Participation in Biomaterials I of which 2 credits completed or participation in Materials synthesis of which 2 credits completed. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB263",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB447",
+   "text": "120 credits including 20 credits in chemistry. In addition, 10 credits in biochemistry or Cell Biology, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB467",
+   "text": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB550",
+   "text": "120 credits with 60 credits in chemistry. Physical chemistry, 10 credits, is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB750",
+   "text": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB753",
+   "text": "Alternative 1: 120 credits with 90 credits in chemistry and physics, including at least 60 credits in chemistry. Participation in Spectroscopy. Chemical Bonding and Computational Chemistry is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics, chemistry, materials science and/or materials engineering, and participation in Introduction to Materials Science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB750",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB550",
+      "type": "SOFT"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": []
+}

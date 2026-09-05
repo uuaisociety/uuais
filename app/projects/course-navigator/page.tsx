@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import AdminGate from '@/components/auth/AdminGate';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
@@ -8,7 +9,7 @@ import { ArrowRight } from 'lucide-react';
 import HeroSplash from '@/components/HeroSplash';
 import { updatePageMeta } from '@/utils/seo';
 
-export default function CourseNavigatorPage() {
+function CourseNavigatorPageContent() {
   useEffect(() => {
     updatePageMeta('Course Navigator', 'AI-powered course recommendations for Uppsala University students');
   }, []);
@@ -196,5 +197,17 @@ export default function CourseNavigatorPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * Held back while the programme map launches first: the navigator and its favourites are
+ * the board's to look at until the course data behind them is ready to be public.
+ */
+export default function CourseNavigatorPage() {
+  return (
+    <AdminGate>
+      <CourseNavigatorPageContent />
+    </AdminGate>
   );
 }

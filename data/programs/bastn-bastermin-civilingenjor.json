@@ -1,0 +1,167 @@
+{
+  "id": "26dd7bc9-fbcd-4b6f-b2d5-7648b26bcd17",
+  "code": "BASTN",
+  "revisionId": "26dd7bc9-fbcd-4b6f-b2d5-7648b26bcd17",
+  "nameSv": "Teknisk-naturvetenskaplig bastermin",
+  "totalCredits": null,
+  "semesters": 1,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "14 januari 2026",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1BA203",
+      "titleEn": "Introductory Course for Foundation Year",
+      "titleSv": "Introduktionskurs för basår",
+      "credits": 2.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 2.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1BA209",
+      "titleEn": "Biology Foundation Course, Level 2",
+      "titleSv": "Biologi baskurs nivå 2",
+      "credits": 6.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 6.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1BA210",
+      "titleEn": "Physics Foundation Course, Level 1a2",
+      "titleSv": "Fysik baskurs nivå 1a2",
+      "credits": 4.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 4.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1BA211",
+      "titleEn": "Physics Foundation Course, Level 2",
+      "titleSv": "Fysik baskurs nivå 2",
+      "credits": 6.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 6.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1BA212",
+      "titleEn": "Chemistry Foundation Course, Level 2",
+      "titleSv": "Kemi baskurs nivå 2",
+      "credits": 6.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 6.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1BA213",
+      "titleEn": "Mathematics Foundation Course, Further Level 2",
+      "titleSv": "Matematik baskurs fortsättning nivå 2",
+      "credits": 6.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 6.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1BA203",
+        "1BA209",
+        "1BA210",
+        "1BA211",
+        "1BA212",
+        "1BA213"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1BA203, 1BA209, 1BA210, 1BA211, 1BA212, 1BA213",
+      "labelEn": "Choose one of 6 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "En av kurserna ska väljas: 1BA203, 1BA209, 1BA210, 1BA211, 1BA212, 1BA213",
+      "semester": 1,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1BA203",
+        "1BA209",
+        "1BA210",
+        "1BA211",
+        "1BA212",
+        "1BA213"
+      ]
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [],
+  "revisions": [
+    {
+      "id": "26dd7bc9-fbcd-4b6f-b2d5-7648b26bcd17",
+      "name": "Giltig från och med vårterminen 2027"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.958050+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=26dd7bc9-fbcd-4b6f-b2d5-7648b26bcd17",
+  "programmeTitle": "Teknisk-naturvetenskaplig bastermin med reserverad plats på ett civilingenjörsprogram, 20 veckor (BASTN)",
+  "programmeTitleEn": "Science and Technology Foundation Semester Programme – Reserved Place on the Bachelor's Programme in Computer Science, Physics or Mathematics, 20 weeks (BASTN)",
+  "programmeUri": "/utbildning/program/bastermin-civilingenjor",
+  "validFrom": "Studieplan giltig från och med vårterminen 2027",
+  "validFromYear": 2027,
+  "reviewed": false
+}

@@ -1,0 +1,295 @@
+{
+ "edges": [
+  {
+   "code": "1DT115",
+   "text": "120 credits including 90 credits in computer science, technology, mathematics, chemistry, physics, or materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1EL033",
+   "text": "120 credits in science/engineering. Introduction to Electromobility. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1EL003",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1EL206",
+   "text": "120 credits in science/engineering. Introduction to Electromobility or participation in Batteries and Storage. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1EL003",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB230",
+   "text": "150 credits within science and/or engineering.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB236",
+   "text": "60 credits in science/engineering and parcipitation in a 5 credits course in materials science or materials chemistry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB230",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB285",
+   "text": "120 credits with 75 credits in physics, chemistry, engineering and/or materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB288",
+   "text": "120 credits in science/engineering, including Materials chemistry 10 credits, or Introduction to Materials Science 10 hp, or Introduction to materials engineering 5 credits, or Materials Chemistry 5 hp. Participation in Surface and Materials Analysis 5 credits, or Materials Analysis for Batteries 10 hp, or Material Synthesis and Characterisation 10 hp.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB230",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB732",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB566",
+   "text": "120 credits with 100 credits in science/engineering including 15 credits in mathematics and 75 credits in physics, chemistry, materials science and/or materials engineering, and one of the following: 1) Quantum Mechanics and Chemical Bonding I and any of the courses Solid State Physics, 5 credits, and Solid State Chemistry, 5 credits; 2) 30 credits in materials science; 3) Participation in Introduction to Energy storage and Materials for Batteries. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB744",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB570",
+   "text": "120 credits in science/engineering including 15 credits in mathematics, and Computer Programming I, or Introduction to energy storage, or Introduction to Materials Science 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB744",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB714",
+   "text": "120 credits in science/engineering. Participation in Rechargeable batteries or Batteries and storage. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB738",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB719",
+   "text": "A Bachelor's degree including 75 credits in chemistry, materials science and/or technology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB720",
+   "text": "180 credits, including 100 credits in science/engineering. Participation in Electrochemistry for batteries II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB728",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB729",
+   "text": "120 credits in science/engineering including 30 credits in chemistry and/or chemical engineering. Either (1) Participation in both Introduction to Energy Storage and Materials Chemistry for Batteries or (2) Materials Chemistry 10 credits and participation in Materials and Manufacturing Processes I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB230",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB744",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB732",
+   "text": "A Bachelor's degree corresponding to at least 180 credits, with 75 credits within chemistry, physics, materials science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB738",
+   "text": "At least 120 credits within science and/or engineering. Participation in Electrochemistry for batteries II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB728",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB741",
+   "text": "120 credits in science/engineering. Participation in Rechargeable batteries 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB738",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB744",
+   "text": "Degree at the basic level corresponding to at least 180 credits, including 75 credits within chemistry, physics, materials science and/or engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS327",
+   "text": "120 credits, including 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "För alla studenter:",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "This note applies to all students, but no specific requirement is stated.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "För studenter som följer spår batterimaterial:",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Applies to students following the battery materials track.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "För studenter som följer spår battericeller och system:",
+    "semester": 2,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "For students following the track in battery cells and systems:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "För alla studenter:",
+    "semester": 3,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "For all students:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "För studenter som följer spår batterimaterial:",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Applies to students following the battery materials track.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "För studenter som följer spår battericeller och system:",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "For students following the battery cells and systems track.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1EL033 ges i mån av resurser.",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1EL033"
+    ],
+    "labelEn": "1EL033 is offered subject to available resources.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

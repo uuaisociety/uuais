@@ -1,0 +1,961 @@
+{
+  "id": "10020",
+  "code": "TFY2M",
+  "revisionId": "10020",
+  "nameSv": "Masterprogram i fysik",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1FA002",
+      "titleEn": "Introductory Course for the Master Programme in Physics",
+      "titleSv": "Introduktionskurs masterprogram i fysik",
+      "credits": 5.0,
+      "creditsInPeriod": 2.0,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA404",
+      "titleEn": "Energy Physics I",
+      "titleSv": "Energifysik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics G2F, Technology",
+      "mainFieldSv": "Fysik G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in science/engineering with Thermodynamics/Technical Thermodynamics. Participation in Quantum Physics, Quantum Physics F, Solid State Physics F or Condensed Matter Physics."
+    },
+    {
+      "code": "1FA453",
+      "titleEn": "Scientific Programming in Python with Applications in Physics",
+      "titleSv": "Programmering i Python med tillämpningar inom fysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Computer Science A1N, Physics",
+      "mainFieldSv": "Datavetenskap A1N, Fysik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering with Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA252",
+      "titleEn": "Electromagnetic Field Theory",
+      "titleSv": "Elektromagnetisk fältteori",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including Electromagnetism II/Electromagnetism and Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA352",
+      "titleEn": "Quantum Mechanics, Advanced Course",
+      "titleSv": "Kvantmekanik",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Quantum Technology",
+      "mainFieldSv": "Fysik A1N, Kvantteknologi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with Mechanics III and Quantum Physics/Quantum Physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA346",
+      "titleEn": "Nuclear Physics",
+      "titleSv": "Kärnfysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including Mechanics III and basic knowledge of quantum physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA370",
+      "titleEn": "Applied Deep Learning in Physics and Engineering",
+      "titleSv": "Tillämpad djupinlärning i fysik och teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. Linear Algebra II. Introduction to Scientific Computing or Introduction to Scientific Computing F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA140",
+      "titleEn": "Statistical Mechanics",
+      "titleSv": "Statistisk mekanik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits including Mechanics III, Electromagnetism I, Thermodynamics/Technical Thermodynamics, Quantum Physics/Quantum Physics F."
+    },
+    {
+      "code": "1FA571",
+      "titleEn": "Physics of Energy Related Materials",
+      "titleSv": "Energirelaterade materials fysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Science A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Materialvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with either Quantum Physics and Solid State Physics or Physical Chemistry and Solid State Chemistry or 30 credits materials science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA045",
+      "titleEn": "Fails in Physics",
+      "titleSv": "Fysikens fadäser",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in physics, mathematics, and/or chemistry."
+    },
+    {
+      "code": "1FA032",
+      "titleEn": "Nuclear Reactor Physics",
+      "titleSv": "Kärnreaktorfysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science and technology. Computer Programming I. Participation in Nuclear Physics or Energy Physics I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA258",
+      "titleEn": "Plasma Physics",
+      "titleSv": "Plasmafysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with Mechanics II/Mechanics KF. Electromagnetic field theory. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA566",
+      "titleEn": "Advanced Physics - Project Course",
+      "titleSv": "Fördjupningskurs i fysik - projektkurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 75 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA010",
+      "titleEn": "Advanced Nuclear Physics with Modern Data Analysis",
+      "titleSv": "Avancerad kärnfysik med modern dataanalys",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering with Nuclear Physics. Participation in Quantum Mechanics, Advanced Course. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE043",
+      "titleEn": "Wave Power: Technology and Systems",
+      "titleSv": "Vågkraft - teknik och system",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including Scientific Computing I, Power Engineering and a basic course in mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA451",
+      "titleEn": "Modelling and Simulation Methods of Particle Transport",
+      "titleSv": "Modellering och simuleringsmetoder för partikeltransport",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in mathematics, technology and science. Basic knowledge of ionising radiation corresponding to Modern Physics or Nuclear Physics and Particle Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE655",
+      "titleEn": "Power Engineering",
+      "titleSv": "Elkraftteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Sociotechnical Systems G2F, Technology",
+      "mainFieldSv": "System i teknik och samhälle G2F, Teknik",
+      "depthCode": "G2F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA570",
+      "titleEn": "Learning and Teaching Awareness in Physics",
+      "titleSv": "Om lärande och undervisning i fysik",
+      "credits": 15.0,
+      "creditsInPeriod": 7.5,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with 60 credits in physics and 15 credits in physics education. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA152",
+      "titleEn": "Dynamical System and Chaos",
+      "titleSv": "Dynamiska system och kaos",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Matematik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/technology. Participation in Mechanics III or Analytical Mechanics. Computer Programming I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1MA256",
+      "titleEn": "Modelling Complex Systems",
+      "titleSv": "Modellering av komplexa system",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Computational Science A1N, Mathematics",
+      "mainFieldSv": "Matematik A1N, Tillämpad beräkningsvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 40 credits in mathematics. One of the courses Scientific Computing KF and Introduction to Scientific Computing. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA006",
+      "titleEn": "Advanced Applied Deep Learning in Physics and Engineering",
+      "titleSv": "Avancerad tillämpad djupinlärning inom fysik och teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1F, Technology",
+      "mainFieldSv": "Fysik A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering. Applied Deep Learning in Physics and Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA590",
+      "titleEn": "Semiconductor Electrochemistry: Solar Cells and Photocatalysis",
+      "titleSv": "Halvledarelektrokemi - solceller och fotokatalys",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Materials Science A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Materialvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including basic knowledge in atom and molecular physics or physical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA361",
+      "titleEn": "Physics and Finance",
+      "titleSv": "Fysik och finans",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics A1N, Physics",
+      "mainFieldSv": "Fysik A1N, Matematik",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science/engineering including Mechanics III and Quantum physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA597",
+      "titleEn": "Degree Project D in Physics",
+      "titleSv": "Examensarbete D i fysik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree or the equivalent and at least 30 credits in physics at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA033",
+      "titleEn": "Fusion Energy and Plasma Technology",
+      "titleSv": "Fusionsenergi och plasmateknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits in science and technology including Electromagnetic Field Theory and Nuclear Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA253",
+      "titleEn": "Fluid Mechanics",
+      "titleSv": "Fluidmekanik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1N, Technology",
+      "mainFieldSv": "Fysik A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE028",
+      "titleEn": "Solar Energy - Technology and Systems",
+      "titleSv": "Solenergi - teknik och system",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Energy Technology A1N, Renewable Electricity Production A1N, Technology",
+      "mainFieldSv": "Energiteknik A1N, Förnybar elproduktion A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits in science/engineering including Modern Physics, Quantum Physics or Quantum Physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA018",
+      "titleEn": "Statistical Methods in Physics and Engineering",
+      "titleSv": "Statistiska metoder i fysik och teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits with basic statistics and 60 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TE724",
+      "titleEn": "Advanced Solar Cell Design",
+      "titleSv": "Avancerad solcellsdesign",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Renewable Electricity Production A1F, Technology",
+      "mainFieldSv": "Förnybar elproduktion A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "180 credits in science/engineering including 10 credits at Master's level. Modern Physics, Quantum Physics or Quantum Physics F. Participation in Solar Energy - Technology and Systems or Solar Energy Technologies for Electricity Production (may be taken in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA694",
+      "titleEn": "Degree Project E in Physics",
+      "titleSv": "Examensarbete E i fysik",
+      "credits": 45.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 45.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree or the equivalent and at least 30 credits in physics at Master's level. Courses required for each particular degree work must also be finished. Proficiency in English equivalent to the Swedish upper secondary course English 6. Admission requires a project plan accepted by the department."
+    },
+    {
+      "code": "1FA598",
+      "titleEn": "Degree Project E in Physics",
+      "titleSv": "Examensarbete E i fysik",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree or the equivalent and at least 30 credits in physics at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA694",
+      "titleEn": "Degree Project E in Physics",
+      "titleSv": "Examensarbete E i fysik",
+      "credits": 45.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 45.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree or the equivalent and at least 30 credits in physics at Master's level. Courses required for each particular degree work must also be finished. Proficiency in English equivalent to the Swedish upper secondary course English 6. Admission requires a project plan accepted by the department."
+    },
+    {
+      "code": "1FA566",
+      "titleEn": "Advanced Physics - Project Course",
+      "titleSv": "Fördjupningskurs i fysik - projektkurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 75 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA565",
+      "titleEn": "Advanced Physics - Project Course",
+      "titleSv": "Fördjupningskurs i fysik - projektkurs",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 75 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA195",
+      "titleEn": "Project in Physics and Astronomy",
+      "titleSv": "Projekt i fysik och astronomi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 60 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1FA193",
+      "titleEn": "Project in Physics and Astronomy",
+      "titleSv": "Projekt i fysik och astronomi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 60 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Det är möjligt att byta ut vissa kurser mellan termin 1 och termin 3.",
+      "labelEn": "Certain courses may be swapped between semester 1 and semester 3.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Övriga valbara kurser denna period:",
+      "labelEn": "Other elective courses available during this period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Övriga valbara kurser denna period:",
+      "labelEn": "Other elective courses available during this period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Övriga valbara kurser denna period:",
+      "labelEn": "Other elective courses available during this period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TE043",
+        "1TE655"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "1TE043 kräver 1TE655 eller motsvarande. 1TE655 ges bara på svenska.",
+      "labelEn": "1TE043 requires 1TE655 or equivalent, and 1TE655 is taught only in Swedish.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Övriga valbara kurser denna period:",
+      "labelEn": "Other elective courses available during this period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-6",
+      "type": "NOTE",
+      "courseCodes": [
+        "1FA597"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
+      "labelEn": "1FA597 is chosen by students aiming for a magister's degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-7",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Se termin 1.",
+      "labelEn": "See semester 1.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-8",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
+      "labelEn": "Other elective courses within the specialisation, any period.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-9",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Följande beteckningar används:G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp",
+      "labelEn": "Legend defining the level abbreviations G2F, A1N, A1F, A1E and A2E used in the study plan.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Det är möjligt att byta ut vissa kurser mellan termin 1 och termin 3.",
+      "semester": 1,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Övriga valbara kurser denna period:",
+      "semester": 1,
+      "period": "Period 1",
+      "trackId": null
+    },
+    {
+      "textSv": "Övriga valbara kurser denna period:",
+      "semester": 1,
+      "period": "Period 2",
+      "trackId": null
+    },
+    {
+      "textSv": "Övriga valbara kurser denna period:",
+      "semester": 2,
+      "period": "Period 3",
+      "trackId": null
+    },
+    {
+      "textSv": "1TE043 kräver 1TE655 eller motsvarande. 1TE655 ges bara på svenska.",
+      "semester": 2,
+      "period": "Period 3",
+      "trackId": null
+    },
+    {
+      "textSv": "Övriga valbara kurser denna period:",
+      "semester": 2,
+      "period": "Period 4",
+      "trackId": null
+    },
+    {
+      "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
+      "semester": 2,
+      "period": "Period 4",
+      "trackId": null
+    },
+    {
+      "textSv": "Se termin 1.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Följande beteckningar används:G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1FA370",
+      "to": "1FA006",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Applied Deep Learning in Physics and Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA346",
+      "to": "1FA010",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering with Nuclear Physics. Participation in Quantum Mechanics, Advanced Course. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA352",
+      "to": "1FA010",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering with Nuclear Physics. Participation in Quantum Mechanics, Advanced Course. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA346",
+      "to": "1FA032",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science and technology. Computer Programming I. Participation in Nuclear Physics or Energy Physics I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA404",
+      "to": "1FA032",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science and technology. Computer Programming I. Participation in Nuclear Physics or Energy Physics I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA252",
+      "to": "1FA033",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science and technology including Electromagnetic Field Theory and Nuclear Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA346",
+      "to": "1FA033",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science and technology including Electromagnetic Field Theory and Nuclear Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA252",
+      "to": "1FA258",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with Mechanics II/Mechanics KF. Electromagnetic field theory. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA352",
+      "to": "1FA361",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Mechanics III and Quantum physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA346",
+      "to": "1FA451",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in mathematics, technology and science. Basic knowledge of ionising radiation corresponding to Modern Physics or Nuclear Physics and Particle Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10020",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3616",
+      "name": "Giltig från och med höstterminen 2025"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.910000+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10020",
+  "programmeTitle": "Masterprogram i fysik – Fysik för hållbar energi och komplexa system, 120 hp (TFY2M)",
+  "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)",
+  "programmeUri": "/utbildning/program/masterprogram-fysik-hallbar-energi",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

@@ -1,0 +1,184 @@
+{
+  "id": "10015",
+  "code": "TAK2M",
+  "revisionId": "10015",
+  "nameSv": "Masterprogram i analytisk kemi - EACH",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1KB154",
+      "titleEn": "Applied Analysis of Complex Samples",
+      "titleSv": "Tillämpad analys av komplexa prover",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 90 credits in chemistry. Separation and Mass Spectrometry, 15 credits, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB159",
+      "titleEn": "Advanced Mass Spectrometry",
+      "titleSv": "Avancerad masspektrometri",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including Separation and Mass Spectrometry, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB049",
+      "titleEn": "Degree Project in Chemistry - EACH",
+      "titleSv": "Examensarbete i kemi - EACH",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "Tartu universitet Universitet Kursnamn Hp Nivå/Djup Område Tartu Practical Chemical Analysis 6 A1N K Tartu Measurement Data Processing 3 A1N K Tartu Quality Systems 3 A1N K Tartu Master's Seminar in Measurement Science, part 1 3 (6) A1N K Valbara kurser om minst 15hp Tartu Atomic Spectroscopy 3 A1N K Tartu Measurements in Biochemistry 3 A1N K Tartu Chemical Analysis Lab for Beginners 3 A1N K Tartu Chemometrics 6 A1N K Tartu Measuring and Instrumentation 3 A1N K Tartu Structural Analysis I 3 A1N K Tartu Modern Metrology 3 A1N K",
+      "labelEn": "List of elective courses at Tartu University for semester 1.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [
+        "1KB049",
+        "1KB154",
+        "1KB159"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "Tartu universitet Universitet Kursnamn Hp Nivå/Djup OmrådeTartu Tartu Master's Seminar in Measurement Science, part 2 3 (6) A1N K Tartu Internship 6 A1N K Tartu Practical Works in Chemical Analysis and Metrology 6 A1N K Tartu Metrology in Chemistry 6 A1N K Tartu Liquid Chromatography and Mass Spectrometry 6 A1N K Valbara kurser om minst 3hp Tartu Measurements and the Law 3 A1N K Tartu Economic Aspects of Measurements 3 A1N K Tartu Practical Works on Physical Measurement and Calibration 3 A1N K Tartu Environment and Measurement 3 A1N K",
+      "labelEn": "List of elective courses at Tartu University for semester 2.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Uppsala universitet",
+      "labelEn": "Note indicates the university is Uppsala University.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Uppsala universitet",
+      "labelEn": "Note: Uppsala University",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Tartu universitet Universitet Kursnamn Hp Nivå/Djup Område Tartu Practical Chemical Analysis 6 A1N K Tartu Measurement Data Processing 3 A1N K Tartu Quality Systems 3 A1N K Tartu Master's Seminar in Measurement Science, part 1 3 (6) A1N K Valbara kurser om minst 15hp Tartu Atomic Spectroscopy 3 A1N K Tartu Measurements in Biochemistry 3 A1N K Tartu Chemical Analysis Lab for Beginners 3 A1N K Tartu Chemometrics 6 A1N K Tartu Measuring and Instrumentation 3 A1N K Tartu Structural Analysis I 3 A1N K Tartu Modern Metrology 3 A1N K",
+      "semester": 1,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Tartu universitet Universitet Kursnamn Hp Nivå/Djup OmrådeTartu Tartu Master's Seminar in Measurement Science, part 2 3 (6) A1N K Tartu Internship 6 A1N K Tartu Practical Works in Chemical Analysis and Metrology 6 A1N K Tartu Metrology in Chemistry 6 A1N K Tartu Liquid Chromatography and Mass Spectrometry 6 A1N K Valbara kurser om minst 3hp Tartu Measurements and the Law 3 A1N K Tartu Economic Aspects of Measurements 3 A1N K Tartu Practical Works on Physical Measurement and Calibration 3 A1N K Tartu Environment and Measurement 3 A1N K",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Uppsala universitet",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Uppsala universitet",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [],
+  "revisions": [
+    {
+      "id": "10015",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3569",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3329",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2985",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2644",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2322",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2264",
+      "name": "Giltig från och med höstterminen 2020"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.888392+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10015",
+  "programmeTitle": "Masterprogram i analytisk kemi – EACH, 120 hp (TAK2M)",
+  "programmeTitleEn": "Master's Programme in Analytical Chemistry – EACH, 120 credits (TAK2M)",
+  "programmeUri": "/utbildning/program/masterprogram-analytisk-kemi-each",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

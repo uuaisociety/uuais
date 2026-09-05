@@ -1,0 +1,319 @@
+{
+  "id": "10033",
+  "code": "TKE2M",
+  "revisionId": "10033",
+  "nameSv": "Masterprogram i kemi",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1KB467",
+      "titleEn": "Current Trends in Chemistry",
+      "titleSv": "Aktuella trender i kemin",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB750",
+      "titleEn": "Spectroscopy",
+      "titleSv": "Spektroskopi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1N, Technology",
+      "mainFieldSv": "Kemi A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB469",
+      "titleEn": "NMR Spectroscopy I",
+      "titleSv": "NMR-spektroskopi I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including 15 credits organic chemistry or 15 credits physical chemistry, alternatively 20 credits of organic and physical chemistry together. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB163",
+      "titleEn": "Data Handling and Visualisation in Analytical Chemistry",
+      "titleSv": "Databehandling och visualisering i analytisk kemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry, including 10 credits in analytical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB153",
+      "titleEn": "Separation and Mass Spectrometry",
+      "titleSv": "Separation och masspektrometri",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including 10 credits in analytical chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB155",
+      "titleEn": "Forensic Chemistry",
+      "titleSv": "Kriminalteknisk kemi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 30 credits in chemistry/biochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB154",
+      "titleEn": "Applied Analysis of Complex Samples",
+      "titleSv": "Tillämpad analys av komplexa prover",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 90 credits in chemistry. Separation and Mass Spectrometry, 15 credits, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB159",
+      "titleEn": "Advanced Mass Spectrometry",
+      "titleSv": "Avancerad masspektrometri",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry including Separation and Mass Spectrometry, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB053",
+      "titleEn": "Degree Project E in Chemistry",
+      "titleSv": "Examensarbete E i kemi",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB052",
+      "titleEn": "Degree Project E in Chemistry",
+      "titleSv": "Examensarbete E i kemi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1KB053"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
+      "labelEn": "Only 30 of the 45 credits of the Degree Project E in Chemistry (1KB053) count toward the programme.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1KB153",
+      "to": "1KB154",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 90 credits in chemistry. Separation and Mass Spectrometry, 15 credits, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB153",
+      "to": "1KB159",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with 60 credits in chemistry including Separation and Mass Spectrometry, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10033",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3644",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3306",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2847",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2470",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2311",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "1994",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1864",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1628",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1362",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1241",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1105",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "878",
+      "name": "Giltig från och med höstterminen 2015"
+    },
+    {
+      "id": "654",
+      "name": "Giltig från och med höstterminen 2014"
+    },
+    {
+      "id": "389",
+      "name": "Giltig från och med höstterminen 2013"
+    },
+    {
+      "id": "274",
+      "name": "Giltig från och med höstterminen 2012"
+    },
+    {
+      "id": "193",
+      "name": "Giltig från och med höstterminen 2011"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.941477+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10033",
+  "programmeTitle": "Masterprogram i kemi – Analytisk kemi, 120 hp (TKE2M)",
+  "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
+  "programmeUri": "/utbildning/program/masterprogram-kemi-analytisk-kemi",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

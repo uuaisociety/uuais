@@ -1,0 +1,382 @@
+{
+ "edges": [
+  {
+   "code": "1DL002",
+   "text": "140 credits including 75 credits in mathematics and computer science of which at least 15 credits in computer science. Alternatively 45hp in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL301",
+   "text": "60 credits of which 15 credits in mathematics or statistics. Participation in basic programming.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL340",
+   "text": "120 credits including 15 credits in mathematics and 20 credits in computer science, including a second course in programming. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL390",
+   "text": "A bachelor's degree and, in addition at least 15 credits in data science at master's level, including Data, Ethics and Law and the necessary courses at master's level for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL002",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL415",
+   "text": "120 credits with a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL451",
+   "text": "120 credits including Basic Course in Mathematics and Algebra I or Basic Algebra, and a second course in computer programming or another combination of courses containing basic concepts in algebra, combinatorics, logic, graph theory, set theory and implementation of basic search algorithms. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DL507",
+   "text": "150 credits including 30 credits in data science at Master's level, and including 75 credits in mathematics and computer science of which at least 15 credits in computer science. Data, Ethics and Law (may be read in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL002",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL510",
+   "text": "A Bachelor's degree and, in addition at least 30 credits in data science at Master's level. Data, ethics and law. Participation in course Project in Data Science. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL002",
+      "type": "HARD"
+     },
+     {
+      "from": "1DL507",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA330",
+   "text": "120 credits. 20 credits in mathematics including at least 5 credits linear algebra and 5 credits single variable calculus. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MS014",
+   "text": "120 credits in science/engineering. Participation in Inference Theory I or Probability and Statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MS041",
+   "text": "120 credits including 80 credits in computer science and mathematics, of which at least 15 credits in computer science including programming, and at least 30 credits in mathematics including probability and statistics, linear algebra and analysis. Participation in, or taken in parallel with, Several Variable Calculus, Limited Version. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA330",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS048",
+   "text": "120 credits including 30 credits in mathematics och 10 credits in computer science. Participation in Introduction to Data Science. Participation in Linear Algebra for Data Science or Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS041",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA330",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS049",
+   "text": "120 credits including 60 credits mathematics and/or data science with at least 45 credits mathematics. Participation in one of the courses Regression analysis, Introduction to data science or Financial Derivatives. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS041",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS050",
+   "text": "120 credits. Participation in Foundations in Data Science (or the course could be taken in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS048",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS900",
+   "text": "120 credits including 60 credits in mathematics and/or data science including at least 45 credits in mathematics. Participation in Introduction to Data Science or participation in both Inference Theory II and Regression Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS041",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT001",
+   "text": "120 credits including Probability and Statistics, Linear Algebra, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA330",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT700",
+   "text": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1RT705",
+   "text": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, Statistical Machine Learning, a course in several variable analysis and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1RT700",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT720",
+   "text": "120 credits. Participation in Statistical Machine Learning and a second programming course. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1RT700",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT730",
+   "text": "120 credits including Probability and Statistics, Linear Algebra, Single Variable Calculus and a course in introductory programming. Statistical Machine Learning. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA330",
+      "type": "HARD"
+     },
+     {
+      "from": "1RT700",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT745",
+   "text": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, a second programming course. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD169",
+   "text": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL301",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD179",
+   "text": "120 credits in engineering/science including Computer Programming I, Probability and Statistics, Linear Algebra II, Several Variable Calculus/Analysis in Several Variables. Participation in Statistical Machine Learning. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1RT700",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD184",
+   "text": "120 credits including 30 credits in mathematics of which 5 credits mathematics containing several variable calculus that can be taken in parallel. Computer Programming I. Participation in one of the courses Scientific Computing basic course, Scientific Computing I, Scientific Computing Bridging course or Numerical methods and Simulation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD352",
+   "text": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in Linear Algebra II/Linear Algebra for Data Analysis/Geometry and Calculus II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1RT700",
+      "type": "SOFT"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses follow.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1MS900 ges udda år.",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1MS900"
+    ],
+    "labelEn": "1MS900 is offered in odd-numbered years.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Heading indicating the following courses are elective.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 3,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser:",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses (heading preceding the list of elective courses).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser ges i mån av resurser.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses are offered subject to available resources.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

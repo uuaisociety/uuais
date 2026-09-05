@@ -1,0 +1,896 @@
+{
+  "id": "e8377ecb-5725-4b57-b995-06eb250f2173",
+  "code": "TME1Y",
+  "revisionId": "e8377ecb-5725-4b57-b995-06eb250f2173",
+  "nameSv": "Högskoleingenjörsprogrammet i medicinsk teknik",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "5 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1MA352",
+      "titleEn": "Linear Algebra for Engineers",
+      "titleSv": "Linjär algebra för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM036",
+      "titleEn": "Introduction to Biomedical Engineering",
+      "titleSv": "Introduktion till medicinsk teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3MC126",
+      "titleEn": "Anatomy and Physiology",
+      "titleSv": "Anatomi och fysiologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA353",
+      "titleEn": "Calculus I for Engineers",
+      "titleSv": "Analys I för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE758",
+      "titleEn": "Materials Science for Biomedical Engineering",
+      "titleSv": "Materialvetenskap för medicinsk teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA354",
+      "titleEn": "Calculus II for Engineers",
+      "titleSv": "Analys II för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TD433",
+      "titleEn": "Computer Programming I",
+      "titleSv": "Programmeringsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D"
+    },
+    {
+      "code": "1FA518",
+      "titleEn": "Mechanics HI",
+      "titleSv": "Mekanik HI",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE759",
+      "titleEn": "Electrical Measurement Methods",
+      "titleSv": "Elektriska mätmetoder",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM039",
+      "titleEn": "Project Course in Biomedical Engineering",
+      "titleSv": "Projektkurs i medicinsk teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE786",
+      "titleEn": "Medical Instrumentation",
+      "titleSv": "Medicinsk mätteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Introduction to Biomedical Engineering and one credit in Electrical Measurement Methods."
+    },
+    {
+      "code": "1TM024",
+      "titleEn": "Electronics",
+      "titleSv": "Elektronik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Electric Measurement Techniques."
+    },
+    {
+      "code": "1TD342",
+      "titleEn": "Introduction to Scientific Computing",
+      "titleSv": "Introduktion till beräkningsvetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "code": "1FA607",
+      "titleEn": "Medical Physics and Engineering",
+      "titleSv": "Medicinsk fysik och teknik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Electrical Measurement Methods and Mechanics HI with at least 1 credit passed from each course. Participation in Medical Measurement Methods and Electronics."
+    },
+    {
+      "code": "1MD016",
+      "titleEn": "Human-Computer Interaction",
+      "titleSv": "Människa-datorinteraktion",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1TE683",
+      "titleEn": "Logic and Automatic Control",
+      "titleSv": "Styr- och reglerteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MS008",
+      "titleEn": "Statistics for Engineers",
+      "titleSv": "Statistik för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE788",
+      "titleEn": "Regulatory Systems, Patient Safety and Ethics",
+      "titleSv": "Regelverk, patientsäkerhet och etik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE686",
+      "titleEn": "Automation and Robot Engineering",
+      "titleSv": "Automatiserings- och robotteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits from an engineering programme."
+    },
+    {
+      "code": "1EL402",
+      "titleEn": "Biomedical Sensor Technology",
+      "titleSv": "Medicinsk sensorteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TS336",
+      "titleEn": "Quality Management",
+      "titleSv": "Kvalitetsteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MD026",
+      "titleEn": "Medical Informatics",
+      "titleSv": "Medicinsk informatik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering. Introduction to Biomedical Engineering. Human-Computer Interaction. Scientific Computing. Computer Programming. At least 2 credits from each of the courses Regulatory Systems, Patient Safety and Ethics and Biomedical Sensor Technology."
+    },
+    {
+      "code": "1TE743",
+      "titleEn": "Industrial Management",
+      "titleSv": "Industriell ekonomi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes."
+    },
+    {
+      "code": "3PE051",
+      "titleEn": "Implementation of Medical Technology",
+      "titleSv": "Implementering av medicinsk teknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM118",
+      "titleEn": "Workplace Training in Biomedical Engineering",
+      "titleSv": "Verksamhetsförlagd utbildning i medicinsk teknik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB704",
+      "titleEn": "Environmental Techniques",
+      "titleSv": "Miljöteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "90 credits within an engineering programme"
+    },
+    {
+      "code": "1EL066",
+      "titleEn": "Electromagnetic Disturbance and Protection",
+      "titleSv": "Elektromagnetisk störning och skydd",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE780",
+      "titleEn": "Investigative Methodologies for Engineers",
+      "titleSv": "Utredningsmetodik för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM121",
+      "titleEn": "Basic Programming of Embedded Systems",
+      "titleSv": "Grundläggande programmering av inbyggda system",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA017",
+      "titleEn": "Several Variable Calculus, Limited Version",
+      "titleSv": "Flervariabelanalys, allmän kurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1TE061",
+      "titleEn": "Industrial Project Management",
+      "titleSv": "Industriell projektledning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TM120",
+      "titleEn": "Additive Manufacturing",
+      "titleSv": "Additiv tillverkning",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in engineering programs."
+    },
+    {
+      "code": "1TS311",
+      "titleEn": "Designing Health Innovations",
+      "titleSv": "Design av hälsoinnovationer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 60 credits in science/engineering/medicine/pharmacy/business administration. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1TM119",
+      "titleEn": "Degree Project in Biomedical Engineering",
+      "titleSv": "Examensarbete i medicinsk teknik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TS336"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "1TE785 Kvalitetsteknik och 1TS336 Kvalitetsteknik kan inte ingå i examen tillsammans.",
+      "labelEn": "1TE785 Quality Engineering and 1TS336 Quality Management (Quality Engineering) cannot both count toward the degree.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [
+        "1MD026",
+        "1TM118",
+        "1TE743",
+        "3PE051",
+        "1KB704"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "Under period 1 läses 1MD026 Medicinsk informatik och antingen 1TM118 Verksamhetsförlagd utbildning eller 1TE743 Industriell ekonomi tillsammans med 3PE051 Implementering av medicinsk teknik.Under period 2 läses 1KB704 Miljöteknik och antingen 1TM118 Verksamhetsförlagd utbildning eller 1TE743 Industriell ekonomi tillsammans med 3PE051 Implementering av medicinsk teknik, dvs. den kombination som inte lästes under period 1.",
+      "labelEn": "In semester 5, students take 1MD026 with 3PE051 in period 1 and 1KB704 with 3PE051 in period 2, taking both 1TM118 and 1TE743 in either order across the two periods.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TM121",
+        "1MA017",
+        "1TE061",
+        "1TM120",
+        "1TS311"
+      ],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TM121, 1MA017, 1TE061, 1TM120, 1TS311",
+      "labelEn": "Choose one of 5 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "1TE785 Kvalitetsteknik och 1TS336 Kvalitetsteknik kan inte ingå i examen tillsammans.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Under period 1 läses 1MD026 Medicinsk informatik och antingen 1TM118 Verksamhetsförlagd utbildning eller 1TE743 Industriell ekonomi tillsammans med 3PE051 Implementering av medicinsk teknik.Under period 2 läses 1KB704 Miljöteknik och antingen 1TM118 Verksamhetsförlagd utbildning eller 1TE743 Industriell ekonomi tillsammans med 3PE051 Implementering av medicinsk teknik, dvs. den kombination som inte lästes under period 1.",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TM121, 1MA017, 1TE061, 1TM120, 1TS311",
+      "semester": 6,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TM121",
+        "1MA017",
+        "1TE061",
+        "1TM120",
+        "1TS311"
+      ]
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [
+    {
+      "from": "1FA518",
+      "to": "1FA607",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Participation in Electrical Measurement Methods and Mechanics HI with at least 1 credit passed from each course. Participation in Medical Measurement Methods and Electronics."
+    },
+    {
+      "from": "1TE759",
+      "to": "1FA607",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Participation in Electrical Measurement Methods and Mechanics HI with at least 1 credit passed from each course. Participation in Medical Measurement Methods and Electronics."
+    },
+    {
+      "from": "1MA352",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA353",
+      "to": "1MA017",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1EL402",
+      "to": "1MD026",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Introduction to Biomedical Engineering. Human-Computer Interaction. Scientific Computing. Computer Programming. At least 2 credits from each of the courses Regulatory Systems, Patient Safety and Ethics and Biomedical Sensor Technology."
+    },
+    {
+      "from": "1MD016",
+      "to": "1MD026",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Introduction to Biomedical Engineering. Human-Computer Interaction. Scientific Computing. Computer Programming. At least 2 credits from each of the courses Regulatory Systems, Patient Safety and Ethics and Biomedical Sensor Technology."
+    },
+    {
+      "from": "1TD342",
+      "to": "1MD026",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Introduction to Biomedical Engineering. Human-Computer Interaction. Scientific Computing. Computer Programming. At least 2 credits from each of the courses Regulatory Systems, Patient Safety and Ethics and Biomedical Sensor Technology."
+    },
+    {
+      "from": "1TD433",
+      "to": "1MD026",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Introduction to Biomedical Engineering. Human-Computer Interaction. Scientific Computing. Computer Programming. At least 2 credits from each of the courses Regulatory Systems, Patient Safety and Ethics and Biomedical Sensor Technology."
+    },
+    {
+      "from": "1TE786",
+      "to": "1MD026",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Introduction to Biomedical Engineering. Human-Computer Interaction. Scientific Computing. Computer Programming. At least 2 credits from each of the courses Regulatory Systems, Patient Safety and Ethics and Biomedical Sensor Technology."
+    },
+    {
+      "from": "1TM036",
+      "to": "1MD026",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Introduction to Biomedical Engineering. Human-Computer Interaction. Scientific Computing. Computer Programming. At least 2 credits from each of the courses Regulatory Systems, Patient Safety and Ethics and Biomedical Sensor Technology."
+    },
+    {
+      "from": "1MA353",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1TE759",
+      "to": "1TE786",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Introduction to Biomedical Engineering and one credit in Electrical Measurement Methods."
+    },
+    {
+      "from": "1TM036",
+      "to": "1TE786",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Introduction to Biomedical Engineering and one credit in Electrical Measurement Methods."
+    },
+    {
+      "from": "1TE759",
+      "to": "1TM024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Electric Measurement Techniques."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "e8377ecb-5725-4b57-b995-06eb250f2173",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "10001",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3342",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3034",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2765",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;2"
+    },
+    {
+      "id": "2595",
+      "name": "Giltig från och med höstterminen 2022, version&nbsp;1"
+    },
+    {
+      "id": "2453",
+      "name": "Giltig från och med höstterminen 2021, version&nbsp;2"
+    },
+    {
+      "id": "2371",
+      "name": "Giltig från och med höstterminen 2021, version&nbsp;1"
+    },
+    {
+      "id": "2226",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1916",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1682",
+      "name": "Giltig från och med höstterminen 2018"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.858488+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=e8377ecb-5725-4b57-b995-06eb250f2173",
+  "programmeTitle": "Högskoleingenjörsprogrammet i medicinsk teknik, 180 hp (TME1Y)",
+  "programmeTitleEn": "Bachelor's Programme in Biomedical Engineering, 180 credits (TME1Y)",
+  "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-medicinsk-teknik",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

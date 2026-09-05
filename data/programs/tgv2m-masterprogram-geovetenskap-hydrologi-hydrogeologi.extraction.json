@@ -1,0 +1,287 @@
+{
+ "edges": [
+  {
+   "code": "1GE039",
+   "text": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in technology or physics and 30 credits in earth science or Environmental Science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE043",
+   "text": "120 credits with 90 credits in earth science or in technology or physics. Applied Geoinformatics for Earth Sciences, 5 credits, or at least 3 credits from Hydrological Processes. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GE039",
+      "type": "HARD"
+     },
+     {
+      "from": "1HY039",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GE072",
+   "text": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in engineering/physics and 30 credits in earth science/environmental Science. Dynamics of Earth Systems - Global Change. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV014",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GE073",
+   "text": "120 credits including (1) 60 credits in mathematics and physics or (2) 60 credits in earth science and 15 credits in mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV006",
+   "text": "120 credits with (1) 90 credits in earth science or biology, or (2) 90 credits in technology or physics and 30 credits in earth science or environmental science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV013",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV014",
+   "text": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in technology or physics and 30 credits in earth science or Environmental Science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV025",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV027",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV085",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV208",
+   "text": "120 credits including 30 credits in natural science or engineering or sustainable development. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1HY013",
+   "text": "120 credits with 90 credits in earth science or in technology or physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1HY039",
+   "text": "120 credits with 90 credits in earth science or in technology or physics. Participation in Statistics and Data Analysis Methods 5 credits. 15 credits in mathematics are recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1HY013",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1HY041",
+   "text": "120 credits with 90 credits in earth science or in technology or physics. 15 credits mathematics. Participation in course Hydrological Processes, of which 3 credits must be completed. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1HY039",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1HY043",
+   "text": "120 credits with Dynamics of Earth Systems - Global Change, 10 credits, or Our Natural Resources, 10 credits, or Introduction to Water Engineering, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV014",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1HY044",
+   "text": "120 credits with Dynamics of Earth Systems - Global Change, 10 credits, or Our Natural Resources, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV014",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1HY045",
+   "text": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in technology or physics and 30 credits in earth science or Environmental Science. Geomorphology and Surface Processes, 10 credits, or Glaciology and Glacial Landscape Processes, 15 credits, or Hydrological Processes, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1HY039",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1HY111",
+   "text": "120 credits with (1) 90 credits in earth science or biology, or (2) 90 credits in technology or physics and 30 credits in earth science or environmental science. 5 credits in inorganic chemistry are recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1ME404",
+   "text": "120 credits with 90 credits in physics, earth science or biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MP029",
+   "text": "120 credits of which 90 credits within science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TV447",
+   "text": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits, or Hydrological Processes, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1HY039",
+      "type": "HARD"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Eller:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Or:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "alternativt",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The Swedish word 'alternativt' (alternatively) flags an alternative option but names no specific courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Examensarbete E i geovetenskap, 15 (av 45) högskolepoäng (1GV085) kan vid behov påbörjas i denna period.",
+    "semester": 3,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GV085"
+    ],
+    "labelEn": "Degree Project E in Earth Science (15 of 45 credits, 1GV085) may if needed be started in this period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1GV085 Examensarbete E i geovetenskap, 30 (av 45) högskolepoäng.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GV085"
+    ],
+    "labelEn": "Only 30 of the 45 credits for Degree Project E in Earth Science (1GV085) count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1GV220 Examensarbete E i geovetenskap, 30 (av 60) högskolepoäng.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GV220"
+    ],
+    "labelEn": "Only 30 of the 60 credits for Degree Project E in Earth Sciences (1GV220) count in semester 4.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga kurser (varierade perioder):",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other courses offered in varying periods.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

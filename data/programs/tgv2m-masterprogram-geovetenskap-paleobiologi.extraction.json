@@ -1,0 +1,212 @@
+{
+ "edges": [
+  {
+   "code": "1BG397",
+   "text": "Completed courses worth 150 credits including (1) 60 credits in biology and 30 credits in chemistry or 30 credits in earth sciences, or (2) 90 credits in biology, or (3) 60 credits in earth sciences and participation in the course Principles of Palaeobiology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1PA041",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GE039",
+   "text": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in technology or physics and 30 credits in earth science or Environmental Science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GE073",
+   "text": "120 credits including (1) 60 credits in mathematics and physics or (2) 60 credits in earth science and 15 credits in mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV006",
+   "text": "120 credits with (1) 90 credits in earth science or biology, or (2) 90 credits in technology or physics and 30 credits in earth science or environmental science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV013",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV014",
+   "text": "120 credits with (1) 90 credits in earth science, or (2) 90 credits in technology or physics and 30 credits in earth science or Environmental Science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV015",
+   "text": "120 credits with (1) 90 credits in earth science or biology, or (2) 90 credits in physics and 30 credits in earth science (geophysics). Dynamics of Earth Systems - Global Change, 10 credits, or Exploration and Environmental Geophysics, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV014",
+      "type": "HARD"
+     },
+     {
+      "from": "1GV054",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV025",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV027",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV085",
+   "text": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1GV208",
+   "text": "120 credits including 30 credits in natural science or engineering or sustainable development. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1PA002",
+   "text": "120 credits with 90 credits in earth science or biology. Principles of Palaeobiology, 15 credits, is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1PA041",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1PA041",
+   "text": "120 credits with 90 credits in earth science or biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1PA042",
+   "text": "120 credits including 90 credits in earth science or biology. Principles of Palaeobiology, 15 credits, Origin and Early Evolution of Life, 15 credits, or Evolution and development, 15 credits, is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1PA041",
+      "type": "SOFT"
+     },
+     {
+      "from": "1PA002",
+      "type": "SOFT"
+     },
+     {
+      "from": "1BG397",
+      "type": "SOFT"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Eller:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The note 'Eller:' means 'Or:' and introduces an alternative option without naming specific courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Examensarbete E i geovetenskap, 15 (av 45) högskolepoäng (1GV085) kan vid behov påbörjas i denna period.",
+    "semester": 3,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GV085"
+    ],
+    "labelEn": "The Degree Project E in Earth Science (1GV085), 15 of 45 credits, may if needed be started in this period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1GV085 Examensarbete E i geovetenskap, 30 (av 45) högskolepoäng.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GV085"
+    ],
+    "labelEn": "Degree Project E in Earth Science counts for 30 of its 45 credits.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1GV220 Examensarbete E i geovetenskap, 30 (av 60) högskolepoäng.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GV220"
+    ],
+    "labelEn": "Degree Project E in Earth Sciences counts for only 30 of its 60 credits in this semester.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga kurser (varierade perioder):",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other courses (offered in varying periods).",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

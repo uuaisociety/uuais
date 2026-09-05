@@ -1,0 +1,1126 @@
+{
+  "id": "46e7621e-6fad-40da-a79a-97366ca2287d",
+  "code": "TEL1Y",
+  "revisionId": "46e7621e-6fad-40da-a79a-97366ca2287d",
+  "nameSv": "Högskoleingenjörsprogrammet i elektroteknik",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 februari 2026",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1TE705",
+      "titleEn": "Introduction to Electrical Engineering",
+      "titleSv": "Introduktion till elektroteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE704",
+      "titleEn": "Basics of Electrical Engineering I: Components and Circuits",
+      "titleSv": "Elektroteknikens grunder I: Komponenter och kretsar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA352",
+      "titleEn": "Linear Algebra for Engineers",
+      "titleSv": "Linjär algebra för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA353",
+      "titleEn": "Calculus I for Engineers",
+      "titleSv": "Analys I för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE667",
+      "titleEn": "Basics of Electrical Engineering II: Electric Circuit Theory",
+      "titleSv": "Elektroteknikens grunder II: Kretsteori",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE668",
+      "titleEn": "Project Work in Electrical Engineering",
+      "titleSv": "Projektarbete i elektroteknik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE668",
+      "titleEn": "Project Work in Electrical Engineering",
+      "titleSv": "Projektarbete i elektroteknik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA354",
+      "titleEn": "Calculus II for Engineers",
+      "titleSv": "Analys II för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE669",
+      "titleEn": "Basics of Electrical Engineering III: Field Theory",
+      "titleSv": "Elektroteknikens grunder III: Fältteori",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA518",
+      "titleEn": "Mechanics HI",
+      "titleSv": "Mekanik HI",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE770",
+      "titleEn": "Analogue Electronics",
+      "titleSv": "Analog elektronik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "30 credits in science/engineering including Electrical Engineering II: Electric Circuit Theory as well as Calculus for Engineers/Single Variable Calculus."
+    },
+    {
+      "code": "1TD433",
+      "titleEn": "Computer Programming I",
+      "titleSv": "Programmeringsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D"
+    },
+    {
+      "code": "1TE771",
+      "titleEn": "Digital Electronics",
+      "titleSv": "Digital elektronik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Analog electronics."
+    },
+    {
+      "code": "1MA034",
+      "titleEn": "Transform Methods",
+      "titleSv": "Transformmetoder",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "5 credits in mathematics. Participation in Single Variable Calculus, Calculus II for Engineers or Calculus in One Variable. Participation in Linear Algebra I, Algebra and Geometry, Linear Algebra for Engineers or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1EL995",
+      "titleEn": "Project in Electronics",
+      "titleSv": "Elektronikprojekt",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE791",
+      "titleEn": "Electrical Power Engineering with Experiments",
+      "titleSv": "Elkraftteknik med laborationer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MS008",
+      "titleEn": "Statistics for Engineers",
+      "titleSv": "Statistik för ingenjörer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TD342",
+      "titleEn": "Introduction to Scientific Computing",
+      "titleSv": "Introduktion till beräkningsvetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "code": "1TE649",
+      "titleEn": "CAD with FEM",
+      "titleSv": "CAD med FEM",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE301",
+      "titleEn": "Sensors and Measurement Technology",
+      "titleSv": "Mätteknik och sensorer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE686",
+      "titleEn": "Automation and Robot Engineering",
+      "titleSv": "Automatiserings- och robotteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits from an engineering programme."
+    },
+    {
+      "code": "1TE744",
+      "titleEn": "Electrical Power Transmission Systems",
+      "titleSv": "Elektriska transmissionssystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE767",
+      "titleEn": "Automatic Control for Electrical Engineers",
+      "titleSv": "Reglerteknik EI",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits, including Introduction to Scientific Computing. Participation in Transform Methods."
+    },
+    {
+      "code": "1TE689",
+      "titleEn": "Graphical Programming in LabVIEW",
+      "titleSv": "Grafisk programmering i LabVIEW",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE743",
+      "titleEn": "Industrial Management",
+      "titleSv": "Industriell ekonomi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Industrial Engineering and Management",
+      "mainFieldSv": "Industriell teknik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes."
+    },
+    {
+      "code": "1TE300",
+      "titleEn": "Power Electronics",
+      "titleSv": "Kraftelektronik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering including Basics of Electrical Engineering II: Electric Circuit, Single Variable Calculus and Transform Methods."
+    },
+    {
+      "code": "1TE058",
+      "titleEn": "Creative Workshop Practice",
+      "titleSv": "Kreativ verkstadsteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA017",
+      "titleEn": "Several Variable Calculus, Limited Version",
+      "titleSv": "Flervariabelanalys, allmän kurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1EL104",
+      "titleEn": "All-Electric Powertrains",
+      "titleSv": "Elektriska drivlinor",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering. Power Electronics should have been attended."
+    },
+    {
+      "code": "1TE303",
+      "titleEn": "Power Distribution Grids",
+      "titleSv": "Elektriska distributionsnät",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA014",
+      "titleEn": "Introduction to Nuclear Engineering",
+      "titleSv": "Introduktion till kärnkraftteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "90 credits in Science/Engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers."
+    },
+    {
+      "code": "1FA022",
+      "titleEn": "Reactor Physics with Nuclear Thermohydraulics",
+      "titleSv": "Reaktorfysik med nukleär termohydraulik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers. Introduction to Nuclear Engineering. Participation in Introduction to Nuclear Engineering, or studied simultaneously."
+    },
+    {
+      "code": "1FA426",
+      "titleEn": "Nuclear Power Safety",
+      "titleSv": "Kärnkraftsäkerhet",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering. Participation in Reactor Physics, Nuclear Thermal Hydraulics and Steam Turbine Technology or Reactor Physics with nuclear thermohydraulics."
+    },
+    {
+      "code": "1TE768",
+      "titleEn": "Project in Measurement and Control Systems",
+      "titleSv": "Projekt i mät- och styrsystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE301",
+      "titleEn": "Sensors and Measurement Technology",
+      "titleSv": "Mätteknik och sensorer",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE670",
+      "titleEn": "Rotating Electrical Machines",
+      "titleSv": "Roterande elektriska maskiner",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA326",
+      "titleEn": "Digital Electronics Design with VHDL",
+      "titleSv": "Digital elektronikkonstruktion med VHDL",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Embedded Systems",
+      "mainFieldSv": "Inbyggda system",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE615",
+      "titleEn": "Project Work in Science of Electricity",
+      "titleSv": "Projektarbete i elektricitetslära",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE616",
+      "titleEn": "Project Work in Science of Electricity",
+      "titleSv": "Projektarbete i elektricitetslära",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA329",
+      "titleEn": "PC-Board Construction with ECAD Tools",
+      "titleSv": "Kretskortkonstruktion med ECAD-verktyg",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "A1N",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA017",
+      "titleEn": "Several Variable Calculus, Limited Version",
+      "titleSv": "Flervariabelanalys, allmän kurs",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "code": "1FA427",
+      "titleEn": "Nuclear Power Operation",
+      "titleSv": "Kärnkraftdrift",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1TE660",
+      "titleEn": "Degree Project, Electrical Engineering",
+      "titleSv": "Examensarbete i elektroteknik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE686",
+        "1TE744"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TE686, 1TE744",
+      "labelEn": "Choose one of 2 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-1",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE744",
+        "1TE686"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "1TE661 Signaler och system är obligatorisk inom examenskravet men ges inte läsåret 2026/2027 eftersom den byter årskurs. En av kurserna 1TE744 och 1TE686 är obligatorisk inom examenskravet.",
+      "labelEn": "1TE661 not offered in 2026/2027; one of 1TE744 or 1TE686 is required",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE300",
+        "1TE058",
+        "1MA017",
+        "1EL104",
+        "1TE303"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TE300, 1TE058, 1MA017, 1EL104, 1TE303",
+      "labelEn": "Choose one of 5 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-3",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1FA014",
+        "1FA022",
+        "1FA426"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1FA014, 1FA022, 1FA426",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-4",
+      "type": "NOTE",
+      "courseCodes": [
+        "1TE058"
+      ],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "1TE661 Signaler och system är obligatorisk inom examenskravet men ges inte läsåret 2026/2027 eftersom den byter årskurs. Samtliga valbara kurser i årskurs 3 (termin 5 och 6) sökes i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval.1TE058 kan läsas i period 3 istället.",
+      "labelEn": "1TE661 not offered in 2026/2027; 1TE058 available in period 3.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1TE670",
+        "1FA326",
+        "1TE615",
+        "1TE616",
+        "1FA329",
+        "1MA017"
+      ],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1TE670, 1FA326, 1TE615, 1TE616, 1FA329, 1MA017",
+      "labelEn": "Choose one of 6 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-6",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Samtliga valbara kurser i årskurs 3 (termin 5 och 6) sökes i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval.",
+      "labelEn": "All elective courses in year 3 are subject to competition with students from other programs, so first choice cannot be guaranteed.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "En av kurserna ska väljas: 1TE686, 1TE744",
+      "semester": 4,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TE686",
+        "1TE744"
+      ]
+    },
+    {
+      "textSv": "1TE661 Signaler och system är obligatorisk inom examenskravet men ges inte läsåret 2026/2027 eftersom den byter årskurs. En av kurserna 1TE744 och 1TE686 är obligatorisk inom examenskravet.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TE300, 1TE058, 1MA017, 1EL104, 1TE303",
+      "semester": 5,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TE300",
+        "1TE058",
+        "1MA017",
+        "1EL104",
+        "1TE303"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1FA014, 1FA022, 1FA426",
+      "semester": 5,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1FA014",
+        "1FA022",
+        "1FA426"
+      ]
+    },
+    {
+      "textSv": "1TE661 Signaler och system är obligatorisk inom examenskravet men ges inte läsåret 2026/2027 eftersom den byter årskurs. Samtliga valbara kurser i årskurs 3 (termin 5 och 6) sökes i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval.1TE058 kan läsas i period 3 istället.",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1TE670, 1FA326, 1TE615, 1TE616, 1FA329, 1MA017",
+      "semester": 6,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1TE670",
+        "1FA326",
+        "1TE615",
+        "1TE616",
+        "1FA329",
+        "1MA017"
+      ]
+    },
+    {
+      "textSv": "Samtliga valbara kurser i årskurs 3 (termin 5 och 6) sökes i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval.",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [
+    {
+      "from": "1TD433",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1MA034",
+      "to": "1TE300",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering including Basics of Electrical Engineering II: Electric Circuit, Single Variable Calculus and Transform Methods."
+    },
+    {
+      "from": "1TE667",
+      "to": "1TE300",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering including Basics of Electrical Engineering II: Electric Circuit, Single Variable Calculus and Transform Methods."
+    },
+    {
+      "from": "1MA034",
+      "to": "1TE767",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits, including Introduction to Scientific Computing. Participation in Transform Methods."
+    },
+    {
+      "from": "1TD342",
+      "to": "1TE767",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits, including Introduction to Scientific Computing. Participation in Transform Methods."
+    },
+    {
+      "from": "1MA353",
+      "to": "1TE770",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "30 credits in science/engineering including Electrical Engineering II: Electric Circuit Theory as well as Calculus for Engineers/Single Variable Calculus."
+    },
+    {
+      "from": "1TE667",
+      "to": "1TE770",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "30 credits in science/engineering including Electrical Engineering II: Electric Circuit Theory as well as Calculus for Engineers/Single Variable Calculus."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "46e7621e-6fad-40da-a79a-97366ca2287d",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3682",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;2"
+    },
+    {
+      "id": "3594",
+      "name": "Giltig från och med höstterminen 2025, version&nbsp;1"
+    },
+    {
+      "id": "3444",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;2"
+    },
+    {
+      "id": "3343",
+      "name": "Giltig från och med höstterminen 2024, version&nbsp;1"
+    },
+    {
+      "id": "3039",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2586",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2367",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2215",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1913",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1742",
+      "name": "Giltig från och med höstterminen 2018, version&nbsp;2"
+    },
+    {
+      "id": "1645",
+      "name": "Giltig från och med höstterminen 2018, version&nbsp;1"
+    },
+    {
+      "id": "1426",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1188",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "1075",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;2"
+    },
+    {
+      "id": "975",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.853730+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=46e7621e-6fad-40da-a79a-97366ca2287d",
+  "programmeTitle": "Högskoleingenjörsprogrammet i elektroteknik, 180 hp (TEL1Y)",
+  "programmeTitleEn": "Bachelor's Programme in Electrical Engineering, 180 credits (TEL1Y)",
+  "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-elektroteknik",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

@@ -1,0 +1,403 @@
+{
+ "edges": [
+  {
+   "code": "1DL034",
+   "text": "60 credits of which 15 credits in mathematics and 15 credits in computer science. Probability and Statistics or Probability and Statistics DV. Algebra and Geometry or Linear Algebra and Geometry I. Participation in a second course in programming.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS321",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL221",
+   "text": "Participation in Program Design and Data Structures, of which 9 credits must have been completed.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL201",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL231",
+   "text": "60 credits of which 15 credits in mathematics and 25 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology. Participation in Program Design and Data Structures of which 9 credits shall be completed, alternatively participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL201",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL305",
+   "text": "60 credits in mathematics or computer science. Participation in discrete mathematics (for instance Algebra I), algorithms and data structures, and a second course in programming.",
+   "result": null
+  },
+  {
+   "code": "1DL311",
+   "text": "60 credits in mathematics and computer science, including Algebra I, Logic and Proof Techniques I, a second programming course and programming in at least one functional and one imperative language.",
+   "result": null
+  },
+  {
+   "code": "1DL321",
+   "text": "60 credits including 15 credits in mathematics and 30 credits in computer science, including Operating Systems and a second course in computer programming.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DT096",
+      "type": "HARD"
+     },
+     {
+      "from": "1DL221",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL481",
+   "text": "120 credits including 30 credits in mathematics including an introduction to linear algebra (Linear Algebra and Geometry I or the equivalent) and basic logic (Algebra I, Basic Course in Mathematics, or the equivalent), and 45 credits in computer science. Participation in Algorithms and Data Structures II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL231",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT052",
+   "text": "15 credits in mathematics and 30 credits in computer science, including at least one second course in computer programming and at least 5 credits in computer architecture.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DT093",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT072",
+   "text": "120 credits including 15 credits in mathematics and 30 credits in computer science or technology. 10 credits in programming. Participation in Distributed Information Systems or Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DT066",
+      "type": "SOFT"
+     },
+     {
+      "from": "1DT052",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT075",
+   "text": "120 credits including a second course in programming, Algorithms and Data Structures I, Algebra I and linear algebra. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": null
+  },
+  {
+   "code": "1DT116",
+   "text": "120 credits including 60 credits in computer science, including programming in C and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DT117",
+   "text": "120 credits including 90 credits in computer science and mathematics with participation in Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DT052",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT340",
+   "text": "150 credits including 75 credits in computer science, including 15 credits at G2F-level or higher, and 20 credits in mathematics. Admission requires a project plan accepted by the department.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA013",
+   "text": "Participation in one of the courses Basic Course in Mathematics, Basic Algebra, Algebra and Vector Geometry, Basic Algebra or Algebra and Geometry. The course can be taken in parallel with one of these courses.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA348",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA017",
+   "text": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA350",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA020",
+   "text": "5 credits in mathematics. Participation in Single Variable Calculus or Single Variable Calculus M and in Linear Algebra I or Algebra and Geometry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA350",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA024",
+   "text": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA350",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA348",
+   "text": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA350",
+   "text": "Participation in Basic Course in Mathematics or Basic Algebra.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA348",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MD001",
+   "text": "120 credits including 45 credits in IT-related fields of study, including human-computer interaction, or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MD004",
+   "text": "120 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD169",
+   "text": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL305",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA350",
+      "type": "HARD"
+     },
+     {
+      "from": "1MS321",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD352",
+   "text": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in Linear Algebra II/Linear Algebra for Data Analysis/Geometry and Calculus II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA350",
+      "type": "HARD"
+     },
+     {
+      "from": "1MS321",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD403",
+   "text": "60 credits including Program Design and Data Structures. Linear Algebra and Geometry. Single Variable Calculus. Participation in Probability and Statistics DV.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL201",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA013",
+      "type": "HARD"
+     },
+     {
+      "from": "1MS321",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE743",
+   "text": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Kursen 1MA348 Grundläggande Algebra ersätter 1MA350 Algebra I inom programmet och kan inte tas med i examen tillsammans med denna.",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1MA348",
+     "1MA350"
+    ],
+    "labelEn": "1MA348 Basic Algebra replaces 1MA350 Linear Algebra I within the programme, and the two cannot both count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1MA350 Linjär Algebra ersätter 1MA025 Linjär Algebra och Geometri I inom programmet och kan inte tas med i examen tillsammans med denna.",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1MA350"
+    ],
+    "labelEn": "1MA350 Linear Algebra replaces 1MA025 Linear Algebra and Geometry I within the programme and cannot count toward the degree together with it.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Samt en av följande kurser:",
+    "semester": 5,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [],
+    "labelEn": "Additionally, one of the following courses must be taken.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1DL305 Databasteknik I DV ersätter 1DL301 Databasteknik I inom programmet och kan inte tas med i examen tillsammans med denna.",
+    "semester": 5,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1DL305"
+    ],
+    "labelEn": "1DL305 Database Design I CS replaces 1DL301 Database Design I within the programme and the two cannot both count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Rekommenderade valbara kurser period 33.Den studerande kan i period 33 välja en kombination av nedanstående kurser, omfattande sammanlagt 15 hp inom perioden, förutsatt att behörighetskraven är uppfyllda.",
+    "semester": 6,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "RECOMMENDED",
+    "courseCodes": [],
+    "labelEn": "Recommended elective courses for period 3: the student may select a combination of the courses below totalling 15 ECTS credits, provided the entry requirements are met.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga kurser (valbar period).",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other courses may be selected during an elective period."
+   }
+  },
+  {
+   "note": {
+    "textSv": "Följande beteckningar används ovan:G1N - Grundnivå, kursen kräver inte tidigare högskolestudierG1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hpG2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpG2E - Grundnivå, examensarbete för högskoleingenjörsexamen och kandidatexamenA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Legend explaining the course-level abbreviations (G1N, G1F, G2F, G2E, A1N) used in the study plan.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

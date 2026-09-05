@@ -1,0 +1,752 @@
+{
+  "id": "10065",
+  "code": "TGE1K",
+  "revisionId": "10065",
+  "nameSv": "Kandidatprogram i geovetenskap",
+  "totalCredits": 180.0,
+  "semesters": 6,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1BG107",
+      "titleEn": "Bioscience",
+      "titleSv": "Biovetenskap",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": null,
+      "mainFieldSv": null,
+      "depthCode": null,
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV004",
+      "titleEn": "Earth Science - Planet Earth",
+      "titleSv": "Geovetenskap - planeten jorden",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1GV206",
+      "titleEn": "Sedimentology, Stratigraphy and Palaeobiology",
+      "titleSv": "Sedimentologi, stratigrafi och paleobiologi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4 or Bioscience 30 credits. At least 22 credits from Earth Science - Planet Earth, including The Earth as a Planet (5+3 credits) and all practical components."
+    },
+    {
+      "code": "1GV177",
+      "titleEn": "Geophysical Methods with Applications",
+      "titleSv": "Geofysiska metoder med tillämpningar",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science G1F, Physics",
+      "mainFieldSv": "Fysik G1F, Geovetenskap",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements and Biology 2, Physics 1a/1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D. These prerequisites may be replaced by Bioscience, 30 credits, and Earth Science - Planet Earth, 30 credits. Mathematics, 10 credits, is recommended."
+    },
+    {
+      "code": "1GE100",
+      "titleEn": "GIS and Remote Sensing",
+      "titleSv": "GIS och fjärranalys",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "30 credits in earth science, science/engineering or geography."
+    },
+    {
+      "code": "1KB013",
+      "titleEn": "The Basic Principles of Chemistry",
+      "titleSv": "Kemins grunder och principer",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "G1N",
+      "semester": 4,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB208",
+      "titleEn": "Inorganic Chemistry I",
+      "titleSv": "Oorganisk kemi I",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G1F, Technology",
+      "mainFieldSv": "Kemi G1F, Teknik",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1KB200",
+      "titleEn": "Geochemistry",
+      "titleSv": "Geokemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G1F, Earth Science",
+      "mainFieldSv": "Geovetenskap G1F, Kemi",
+      "depthCode": "G1F",
+      "semester": 4,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MP044",
+      "titleEn": "Mineralogy and Petrology",
+      "titleSv": "Mineralogi och petrologi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry G2F, Earth Science",
+      "mainFieldSv": "Geovetenskap G2F, Kemi",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in Earth Science, including Earth Science - Planet Earth, 30 credits and Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Chemistry is recommended."
+    },
+    {
+      "code": "1HY141",
+      "titleEn": "Hydrology and Water Resource Management",
+      "titleSv": "Hydrologi och vattenresursförvaltning",
+      "credits": 10.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in earth science or 90 credits within the Bachelor's Programme in Construction Engineering"
+    },
+    {
+      "code": "1GV007",
+      "titleEn": "Structural Geology and Ground Stability",
+      "titleSv": "Strukturgeologi och markstabilitet",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 5,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits in earth science including Introduction to Mineralogy and Petrology, 10 credits, and Sedimentology, Stratigraphy and Palaeobiology, 10 credits."
+    },
+    {
+      "code": "1GV205",
+      "titleEn": "Soil Mechanics and Engineering Geology",
+      "titleSv": "Geoteknik och byggnadsgeologi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits Earth Science. Participation in Mineralogy and Petrology, 10 credits. 10 credits in mathematics and 10 credits in GIS are recommended."
+    },
+    {
+      "code": "1GV207",
+      "titleEn": "Resources and Environment",
+      "titleSv": "Naturresurser och miljö",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "60 credits earth science. Participations in Mineralogy and Petrology 10 credits. 10 credits in GIS are recommended."
+    },
+    {
+      "code": "1GV029",
+      "titleEn": "Independent Project in Earth Science",
+      "titleSv": "Självständigt arbete i geovetenskap",
+      "credits": 15.0,
+      "creditsInPeriod": 5.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2E",
+      "semester": 6,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "75 credits in earth science with progressive specialisation"
+    },
+    {
+      "code": "1GV192",
+      "titleEn": "Field Course in Bedrock Geology",
+      "titleSv": "Fältkurs i berggrundsgeologi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits and Structural Geology and Ground Stability, 10 credits."
+    },
+    {
+      "code": "1GV191",
+      "titleEn": "Field Course in Stratigraphy and Hydrology",
+      "titleSv": "Fältkurs i stratigrafi och hydrologi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Hydrology and Water Resource Management, 10 credits and Landscape Development, 10 credits, are recommended."
+    },
+    {
+      "code": "1PA046",
+      "titleEn": "The Life and Times of the Dinosaurs",
+      "titleSv": "Dinosauriernas tidsålder",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G1N",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "General entry requirements"
+    },
+    {
+      "code": "1GV042",
+      "titleEn": "Earth Sciences Didactics and Communication",
+      "titleSv": "Geovetenskaplig didaktik och kommunikation",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV109",
+      "titleEn": "Internship in Earth Science",
+      "titleSv": "Geovetenskaplig praktik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV111",
+      "titleEn": "Internship in Earth Science",
+      "titleSv": "Geovetenskaplig praktik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV112",
+      "titleEn": "Internship in Earth Science",
+      "titleSv": "Geovetenskaplig praktik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV173",
+      "titleEn": "The End of the World",
+      "titleSv": "Jordens undergång",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G1N",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV103",
+      "titleEn": "Specialised Course in Earth Science",
+      "titleSv": "Öppen fördjupningskurs i geovetenskap",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G1F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV034",
+      "titleEn": "Specialised Course in Earth Science",
+      "titleSv": "Öppen fördjupningskurs i geovetenskap",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV102",
+      "titleEn": "Specialised Course in Earth Science",
+      "titleSv": "Öppen fördjupningskurs i geovetenskap",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Earth Science",
+      "mainFieldSv": "Geovetenskap",
+      "depthCode": "G2F",
+      "semester": 6,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1BG107"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "För studenter inom sökalternativ för samhällsvetare som inte har Ma D från gymnasiet krävs Biovetenskap 30 hp för tillträde till 1MA010 Baskurs i matematik 5 hp.",
+      "labelEn": "Students in the social-science admission track without upper-secondary Ma D must complete Bioscience 30 hp (1BG107) before admission to 1MA010 Basic Course in Mathematics 5 hp.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [
+        "1KB013",
+        "1KB200",
+        "1KB208"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Annat biområde än kemi kan väljas.",
+      "labelEn": "A bio-area other than chemistry may be chosen instead.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "alternativt",
+      "labelEn": "Alternatively.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Övriga kurser sommartid/terminstid.",
+      "labelEn": "Other courses may be taken during the summer term or during the regular semester.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "För studenter inom sökalternativ för samhällsvetare som inte har Ma D från gymnasiet krävs Biovetenskap 30 hp för tillträde till 1MA010 Baskurs i matematik 5 hp.",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Annat biområde än kemi kan väljas.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "alternativt",
+      "semester": 6,
+      "period": "Period 4",
+      "trackId": null
+    },
+    {
+      "textSv": "Övriga kurser sommartid/terminstid.",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1GV206",
+      "to": "1GV007",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in earth science including Introduction to Mineralogy and Petrology, 10 credits, and Sedimentology, Stratigraphy and Palaeobiology, 10 credits."
+    },
+    {
+      "from": "1BG107",
+      "to": "1GV177",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "General entry requirements and Biology 2, Physics 1a/1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D. These prerequisites may be replaced by Bioscience, 30 credits, and Earth Science - Planet Earth, 30 credits. Mathematics, 10 credits, is recommended."
+    },
+    {
+      "from": "1GV004",
+      "to": "1GV177",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "General entry requirements and Biology 2, Physics 1a/1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D. These prerequisites may be replaced by Bioscience, 30 credits, and Earth Science - Planet Earth, 30 credits. Mathematics, 10 credits, is recommended."
+    },
+    {
+      "from": "1GV206",
+      "to": "1GV191",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Hydrology and Water Resource Management, 10 credits and Landscape Development, 10 credits, are recommended."
+    },
+    {
+      "from": "1HY141",
+      "to": "1GV191",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Hydrology and Water Resource Management, 10 credits and Landscape Development, 10 credits, are recommended."
+    },
+    {
+      "from": "1GV007",
+      "to": "1GV192",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits and Structural Geology and Ground Stability, 10 credits."
+    },
+    {
+      "from": "1GV206",
+      "to": "1GV192",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits and Structural Geology and Ground Stability, 10 credits."
+    },
+    {
+      "from": "1GE100",
+      "to": "1GV205",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits Earth Science. Participation in Mineralogy and Petrology, 10 credits. 10 credits in mathematics and 10 credits in GIS are recommended."
+    },
+    {
+      "from": "1MP044",
+      "to": "1GV205",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits Earth Science. Participation in Mineralogy and Petrology, 10 credits. 10 credits in mathematics and 10 credits in GIS are recommended."
+    },
+    {
+      "from": "1BG107",
+      "to": "1GV206",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4 or Bioscience 30 credits. At least 22 credits from Earth Science - Planet Earth, including The Earth as a Planet (5+3 credits) and all practical components."
+    },
+    {
+      "from": "1GV004",
+      "to": "1GV206",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4 or Bioscience 30 credits. At least 22 credits from Earth Science - Planet Earth, including The Earth as a Planet (5+3 credits) and all practical components."
+    },
+    {
+      "from": "1GE100",
+      "to": "1GV207",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits earth science. Participations in Mineralogy and Petrology 10 credits. 10 credits in GIS are recommended."
+    },
+    {
+      "from": "1MP044",
+      "to": "1GV207",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits earth science. Participations in Mineralogy and Petrology 10 credits. 10 credits in GIS are recommended."
+    },
+    {
+      "from": "1GV004",
+      "to": "1MP044",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in Earth Science, including Earth Science - Planet Earth, 30 credits and Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Chemistry is recommended."
+    },
+    {
+      "from": "1GV206",
+      "to": "1MP044",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in Earth Science, including Earth Science - Planet Earth, 30 credits and Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Chemistry is recommended."
+    },
+    {
+      "from": "1KB013",
+      "to": "1MP044",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in Earth Science, including Earth Science - Planet Earth, 30 credits and Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Chemistry is recommended."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10065",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3581",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3262",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3060",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2464",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2360",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2191",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1910",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1649",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1543",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;3"
+    },
+    {
+      "id": "1423",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;2"
+    },
+    {
+      "id": "1391",
+      "name": "Giltig från och med höstterminen 2017, version&nbsp;1"
+    },
+    {
+      "id": "1261",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1142",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "841",
+      "name": "Giltig från och med höstterminen 2015"
+    },
+    {
+      "id": "809",
+      "name": "Giltig från och med höstterminen 2014, version&nbsp;2"
+    },
+    {
+      "id": "779",
+      "name": "Giltig från och med höstterminen 2014, version&nbsp;1"
+    },
+    {
+      "id": "405",
+      "name": "Giltig från och med höstterminen 2013"
+    },
+    {
+      "id": "314",
+      "name": "Giltig från och med höstterminen 2012"
+    },
+    {
+      "id": "190",
+      "name": "Giltig från och med höstterminen 2011"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.875047+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10065",
+  "programmeTitle": "Kandidatprogram i geovetenskap (ingång för samhällsvetare), 180 hp (TGE1K)",
+  "programmeTitleEn": "Bachelor's Programme in Earth Science, 180 credits (TGE1K)",
+  "programmeUri": "/utbildning/program/kandidatprogram-geovetenskap-samhallsvetare",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

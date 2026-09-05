@@ -1,0 +1,212 @@
+{
+  "id": "a6b3e610-5227-4812-89ae-9ffc6c8222d5",
+  "code": "THK2M",
+  "revisionId": "a6b3e610-5227-4812-89ae-9ffc6c8222d5",
+  "nameSv": "Masterprogram i hållbar utveckling av kustområden ",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025-139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1GV500",
+      "titleEn": "Introduction to Sustainable Development of Coastal Areas",
+      "titleSv": "Introduktion till hållbar utveckling av kustområden",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Sustainable Development",
+      "mainFieldSv": "Hållbar utveckling",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV501",
+      "titleEn": "Scientific Methods for Interdisciplinary Studies",
+      "titleSv": "Tvärvetenskaplig metod",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Sustainable Development",
+      "mainFieldSv": "Hållbar utveckling",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV502",
+      "titleEn": "Coastal Resources, Values and Challenges",
+      "titleSv": "Kustens resurser, värden och utmaningar",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Sustainable Development",
+      "mainFieldSv": "Hållbar utveckling",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV503",
+      "titleEn": "Coastal Management and Governance",
+      "titleSv": "Förvaltning av kustområden",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Sustainable Development",
+      "mainFieldSv": "Hållbar utveckling",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV504",
+      "titleEn": "Coastal Futures - Transdisciplinary Practices",
+      "titleSv": "Kustens framtid - transdiciplinära tillämpningar",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Sustainable Development",
+      "mainFieldSv": "Hållbar utveckling",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1GV500",
+        "1GV501",
+        "1GV502"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1GV500, 1GV501, 1GV502",
+      "labelEn": "Choose one of 3 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-1",
+      "type": "CHOOSE_ONE",
+      "courseCodes": [
+        "1GV503",
+        "1GV504"
+      ],
+      "semester": 2,
+      "trackId": null,
+      "textSv": "En av kurserna ska väljas: 1GV503, 1GV504",
+      "labelEn": "Choose one of 2 courses.",
+      "cohortBefore": null,
+      "source": "plan"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Antingen: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Examensarbete i Hållbar utveckling 20 av 45 hpEller: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Praktik i hållbar utveckling 15 hp Examensarbete i hållbar utveckling 5 av 30 hp.",
+      "labelEn": null,
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Workshop serie 2: Tvärvetenskaplig metod och tillämpning en fördjupnings kurs 5 hp Antingen:Examensarbete i hållbar utveckling av kustområden 25 av 45 hp.Eller: Examensarbete i hållbar utveckling av kustområden 25 av 30 hp.",
+      "labelEn": "Either the 45-credit or the 30-credit thesis in sustainable development of coastal areas may count, but not both.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "En av kurserna ska väljas: 1GV500, 1GV501, 1GV502",
+      "semester": 1,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1GV500",
+        "1GV501",
+        "1GV502"
+      ]
+    },
+    {
+      "textSv": "En av kurserna ska väljas: 1GV503, 1GV504",
+      "semester": 2,
+      "period": null,
+      "trackId": null,
+      "choiceCodes": [
+        "1GV503",
+        "1GV504"
+      ]
+    },
+    {
+      "textSv": "Antingen: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Examensarbete i Hållbar utveckling 20 av 45 hpEller: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Praktik i hållbar utveckling 15 hp Examensarbete i hållbar utveckling 5 av 30 hp.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Workshop serie 2: Tvärvetenskaplig metod och tillämpning en fördjupnings kurs 5 hp Antingen:Examensarbete i hållbar utveckling av kustområden 25 av 45 hp.Eller: Examensarbete i hållbar utveckling av kustområden 25 av 30 hp.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [],
+  "revisions": [
+    {
+      "id": "a6b3e610-5227-4812-89ae-9ffc6c8222d5",
+      "name": "Giltig från och med höstterminen 2026"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.933775+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=a6b3e610-5227-4812-89ae-9ffc6c8222d5",
+  "programmeTitle": "Masterprogram i hållbar utveckling av kustområden, 120 hp (THK2M)",
+  "programmeTitleEn": "Master's Programme in Sustainable Development of Coastal Areas, 120 credits (THK2M)",
+  "programmeUri": "/utbildning/program/masterprogram-hallbar-utveckling-av-kustomraden",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

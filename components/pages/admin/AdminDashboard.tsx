@@ -12,8 +12,7 @@ import {
   Rocket,
   Bot,
   Inbox,
-  ChevronRight,
-} from 'lucide-react';
+  ChevronRight, GraduationCap } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/Card';
 import EventsTab from '@/components/pages/admin/tabs/EventsTab';
 import TeamTab from '@/components/pages/admin/tabs/TeamTab';
@@ -24,6 +23,8 @@ import BoardTab from '@/components/pages/admin/tabs/BoardTab'
 import ApplicationsTab from '@/components/pages/admin/tabs/ApplicationsTab';
 import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
+import ProgramsTab from '@/components/pages/admin/tabs/ProgramsTab';
+import ProgramFeedbackTab from '@/components/pages/admin/tabs/ProgramFeedbackTab';
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
 import AISettingsTab from '@/components/pages/admin/tabs/AISettingsTab';
 import BlogAISettingsTab from '@/components/pages/admin/tabs/BlogAISettingsTab';
@@ -33,7 +34,7 @@ import AdminStatusStrip from '@/components/pages/admin/AdminStatusStrip';
 import { useAdminOverview, type AdminTabKey } from '@/components/pages/admin/useAdminOverview';
 import { ANALYTICS_SUBTABS, type AnalyticsTabKey } from '@/components/pages/admin/tabs/analytics/useAnalyticsData';
 
-const ADMIN_TABS = ['events', 'team', 'blog', 'showcase', 'faq', 'analytics', 'members', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
+const ADMIN_TABS = ['events', 'team', 'blog', 'showcase', 'faq', 'analytics', 'members', 'programs', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
 
 type NavChild = { key: string; label: string };
 type NavItem = {
@@ -56,6 +57,12 @@ const NAV_ITEMS: NavItem[] = [
   { key: 'faq', label: 'FAQ', icon: HelpCircle },
   { key: 'analytics', label: 'Analytics', icon: TrendingUp, children: ANALYTICS_SUBTABS },
   { key: 'members', label: 'Members', icon: UserRound },
+  {
+    key: 'programs', label: 'Programmes', icon: GraduationCap, children: [
+      { key: 'overview', label: 'Overview' },
+      { key: 'feedback', label: 'Feedback' },
+    ],
+  },
   { key: 'jobs', label: 'Jobs', icon: BriefcaseBusiness },
   { key: 'ai-settings', label: 'AI Settings', icon: Bot },
   { key: 'applications', label: 'Applications', icon: Inbox },
@@ -69,6 +76,7 @@ const AdminDashboard: React.FC = () => {
   // mismatch on /admin deep links) before syncing to the stored/URL tab.
   const [activeTab, setActiveTab] = useState<Tab>('events');
   const [blogSubtab, setBlogSubtab] = useState<'posts' | 'ai-settings'>('posts');
+  const [programsSubtab, setProgramsSubtab] = useState<'overview' | 'feedback'>('overview');
   const [analyticsSubtab, setAnalyticsSubtab] = useState<AnalyticsTabKey>('overview');
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
   useEffect(() => {
@@ -85,6 +93,10 @@ const AdminDashboard: React.FC = () => {
       if (fromUrl === 'analytics' && ANALYTICS_SUBTABS.some((s) => s.key === sub)) {
          
         setAnalyticsSubtab(sub as AnalyticsTabKey);
+      }
+      if (fromUrl === 'programs' && (sub === 'overview' || sub === 'feedback')) {
+         
+        setProgramsSubtab(sub);
       }
       return;
     }
@@ -119,6 +131,7 @@ const AdminDashboard: React.FC = () => {
   const setSub = (tab: Tab, sub: string) => {
     if (tab === 'blog') setBlogSubtab(sub as 'posts' | 'ai-settings');
     else if (tab === 'analytics') setAnalyticsSubtab(sub as AnalyticsTabKey);
+    else if (tab === 'programs') setProgramsSubtab(sub as 'overview' | 'feedback');
   };
   const toggleGroup = (key: AdminTabKey) => {
     setExpandedGroups((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -137,15 +150,26 @@ const AdminDashboard: React.FC = () => {
     if (url.searchParams.get('tab') !== activeTab) {
       url.searchParams.set('tab', activeTab);
     }
-    const sub = activeTab === 'blog' ? blogSubtab : activeTab === 'analytics' ? analyticsSubtab : null;
+    const sub =
+      activeTab === 'blog'
+        ? blogSubtab
+        : activeTab === 'analytics'
+          ? analyticsSubtab
+          : activeTab === 'programs'
+            ? programsSubtab
+            : null;
     if (sub) url.searchParams.set('sub', sub);
     else url.searchParams.delete('sub');
     window.history.replaceState(null, '', url.toString());
-  }, [activeTab, blogSubtab, analyticsSubtab, expandedGroups]);
+  }, [activeTab, blogSubtab, analyticsSubtab, programsSubtab, expandedGroups]);
 
   const isSubActive = (parent: NavItem, childKey: string) =>
     activeTab === parent.key &&
-    (parent.key === 'blog' ? blogSubtab === childKey : analyticsSubtab === childKey);
+    (parent.key === 'blog'
+      ? blogSubtab === childKey
+      : parent.key === 'programs'
+        ? programsSubtab === childKey
+        : analyticsSubtab === childKey);
 
   return (
     <div className="min-h-screen bg-background transition-colors pb-24">
@@ -157,7 +181,15 @@ const AdminDashboard: React.FC = () => {
         </div>
 
         {/* What needs attention */}
-        <AdminStatusStrip items={items} loaded={loaded} onNavigate={changeTab} />
+        <AdminStatusStrip
+          items={items}
+          loaded={loaded}
+          // A signal lands on the subtab that holds the work, not the section's front page.
+          onNavigate={(tab, sub) => {
+            if (sub) setSub(tab, sub);
+            changeTab(tab);
+          }}
+        />
 
         {/* Sidebar + content */}
         <div className="mt-8 lg:grid lg:grid-cols-[13rem_1fr] lg:gap-8 lg:items-start">
@@ -220,7 +252,7 @@ const AdminDashboard: React.FC = () => {
             <Card variant="elevated" className="p-4 md:p-6">
               <CardContent className="p-0">
                 <div
-                  key={`${activeTab}-${activeTab === 'blog' ? blogSubtab : activeTab === 'analytics' ? analyticsSubtab : ''}`}
+                  key={`${activeTab}-${activeTab === 'blog' ? blogSubtab : activeTab === 'analytics' ? analyticsSubtab : activeTab === 'programs' ? programsSubtab : ''}`}
                   className={`animate-in fade-in duration-300 ease-out ${slideFrom === 'right' ? 'slide-in-from-right-4' : 'slide-in-from-left-4'}`}
                 >
                   {activeTab === 'events' && (
@@ -270,6 +302,11 @@ const AdminDashboard: React.FC = () => {
                   {activeTab === 'members' && (
                     <TabErrorBoundary name="Members">
                       <MembersTab />
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'programs' && (
+                    <TabErrorBoundary name="Programmes">
+                      {programsSubtab === 'overview' ? <ProgramsTab /> : <ProgramFeedbackTab />}
                     </TabErrorBoundary>
                   )}
                   {activeTab === 'ai-settings' && (

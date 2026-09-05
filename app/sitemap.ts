@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { SITE_URL } from './metadata'
 import { getPublicSeed } from '@/lib/server-data'
+import { listPrograms, programSlug } from '@/lib/programs'
 
 // The data helpers below only touch the Admin SDK (no headers()/cookies()/fetch), so without a revalidation window the sitemap would be baked once at build time and newly published content would never appear.
 export const revalidate = 86400
@@ -51,10 +52,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.4,
     },
+    // /explore and /projects/course-navigator are omitted while the navigator is
+    // admin-only; they go back in when it launches.
     {
-      url: `${baseUrl}/explore`,
+      url: `${baseUrl}/programs`,
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
     {
@@ -68,12 +71,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/projects/course-navigator`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
     },
     {
       url: `${baseUrl}/apply`,
@@ -100,6 +97,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.3,
     },
   ]
+
+  // Every programme map. Read from the committed index rather than Firestore, so unlike the
+  // routes below this cannot fail or come back empty.
+  const programRoutes: MetadataRoute.Sitemap = listPrograms().map((entry) => ({
+    url: `${baseUrl}/programs/${programSlug(entry)}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }))
 
   // Dynamic published event URLs, reusing the public seed (degrades to empty if Firestore is unreachable).
   const loadEventRoutes = async (): Promise<MetadataRoute.Sitemap> => {
@@ -160,5 +166,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     loadShowcaseRoutes(),
   ])
 
-  return [...routes, ...eventRoutes, ...blogRoutes, ...showcaseRoutes]
+  return [...routes, ...programRoutes, ...eventRoutes, ...blogRoutes, ...showcaseRoutes]
 }

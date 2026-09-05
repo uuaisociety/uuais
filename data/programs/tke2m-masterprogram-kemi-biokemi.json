@@ -1,0 +1,399 @@
+{
+  "id": "10034",
+  "code": "TKE2M",
+  "revisionId": "10034",
+  "nameSv": "Masterprogram i kemi",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1KB467",
+      "titleEn": "Current Trends in Chemistry",
+      "titleSv": "Aktuella trender i kemin",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB468",
+      "titleEn": "Biophysical Chemistry",
+      "titleSv": "Biofysikalisk kemi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 60 credits in chemistry including 10 credits in biochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB750",
+      "titleEn": "Spectroscopy",
+      "titleSv": "Spektroskopi",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1N, Technology",
+      "mainFieldSv": "Kemi A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB433",
+      "titleEn": "Protein Science",
+      "titleSv": "Proteinvetenskap",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology G2F, Chemistry",
+      "mainFieldSv": "Biologi G2F, Kemi",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 15 credits in biochemistry, or (2) 60 credits of which at least 40 credits in biology, and 15 credits in biochemistry."
+    },
+    {
+      "code": "1BG349",
+      "titleEn": "Structure and Function of Macromolecules",
+      "titleSv": "Makromolekylers struktur och funktion",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Applied Biotechnology A1N, Biology",
+      "mainFieldSv": "Biologi A1N, Tillämpad bioteknik",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Completed courses of 150 credits including (1) 90 credits in biology and chemistry of which at least 30 credits in each subject, or (2) participation in Trends in Molecular Biology and Biotechnology, or (3) Accepted to the Master's Programme in Chemistry – Biochemistry or Chemical Biology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1BG320",
+      "titleEn": "Molecular Cell Biology",
+      "titleSv": "Molekylär cellbiologi",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology",
+      "mainFieldSv": "Biologi",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "Completed courses of 150 credits including (1) 60 credits in biology and 30 credits in chemistry, or (2) 60 credits in chemistry including Biochemistry 15 credits and 30 credits in biology including cell biology, molecular biology and genetics, or (3) admission to the Master's Programme in Chemistry, specialising in Biochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB057",
+      "titleEn": "Research Training in Chemistry",
+      "titleSv": "Forskningspraktik i kemi",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "120 credits including 60 credits in chemistry. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB434",
+      "titleEn": "Biologics: Mechanisms of Action, Development, and Production",
+      "titleSv": "Biologiska läkemedel: verkningsmekanismer, utveckling och produktion",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits with 60 credits in chemistry, including 15 credits in biochemistry. 5 credits in Chemistry at master’s level. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB425",
+      "titleEn": "Molecular Recognition in Biological Systems",
+      "titleSv": "Molekylär igenkänning i biologiska system",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "One of the following is required: (1) 120 credits with 60 credits in chemistry, including 20 credits in biochemistry, or (2) 120 credits with 30 credits in chemistry and 30 credits in biology, including 20 credits in biochemistry, or (3) 120 credits within the Master's Programme in Molecular Biotechnology Engineering, including Cell Biology, 15 credits, or (4) 120 credits within the Master's Programme in Chemical Engineering, including Physiology and Molecular Cell Biology and Development of Biologicals. Also required is 10 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1BG334",
+      "titleEn": "Protein and Nucleic Acid Engineering",
+      "titleSv": "Protein- och nukleinsyreteknik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Biology A1F, Chemistry A1F, Technology",
+      "mainFieldSv": "Biologi A1F, Kemi A1F, Teknik",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Completed courses worth 150 credits including (1) 60 credits in biology and 30 credits in chemistry, including one of the advanced courses Molecular Cell Biology 15 credits, Functional Genomics 15 credits, Molecular Infection Biology 15 credits, or Genome Biology 5 credits, or (2) 30 credits in the Master's Programme in Applied Biotechnology or the Master's Programme in Chemistry, specialising in Biochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB447",
+      "titleEn": "Nanobiotechnology and Biosensors",
+      "titleSv": "Nanobioteknik och biosensorer",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry A1N, Technology",
+      "mainFieldSv": "Kemi A1N, Teknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credits including 20 credits in chemistry. In addition, 10 credits in biochemistry or Cell Biology, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB053",
+      "titleEn": "Degree Project E in Chemistry",
+      "titleSv": "Examensarbete E i kemi",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1BG349",
+      "titleEn": "Structure and Function of Macromolecules",
+      "titleSv": "Makromolekylers struktur och funktion",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Applied Biotechnology A1N, Biology",
+      "mainFieldSv": "Biologi A1N, Tillämpad bioteknik",
+      "depthCode": "A1N",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Completed courses of 150 credits including (1) 90 credits in biology and chemistry of which at least 30 credits in each subject, or (2) participation in Trends in Molecular Biology and Biotechnology, or (3) Accepted to the Master's Programme in Chemistry – Biochemistry or Chemical Biology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1KB052",
+      "titleEn": "Degree Project E in Chemistry",
+      "titleSv": "Examensarbete E i kemi",
+      "credits": 30.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Chemistry",
+      "mainFieldSv": "Kemi",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1KB053"
+      ],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
+      "labelEn": "The degree project 1KB053 counts as 30 of its 45 credits.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1BG320",
+      "to": "1BG334",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Completed courses worth 150 credits including (1) 60 credits in biology and 30 credits in chemistry, including one of the advanced courses Molecular Cell Biology 15 credits, Functional Genomics 15 credits, Molecular Infection Biology 15 credits, or Genome Biology 5 credits, or (2) 30 credits in the Master's Programme in Applied Biotechnology or the Master's Programme in Chemistry, specialising in "
+    },
+    {
+      "from": "1BG320",
+      "to": "1KB447",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 20 credits in chemistry. In addition, 10 credits in biochemistry or Cell Biology, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10034",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3576",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3307",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2848",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2471",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2312",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "1995",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1865",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1629",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1363",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1242",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;2"
+    },
+    {
+      "id": "1106",
+      "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
+    },
+    {
+      "id": "951",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;2"
+    },
+    {
+      "id": "879",
+      "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
+    },
+    {
+      "id": "655",
+      "name": "Giltig från och med höstterminen 2014"
+    },
+    {
+      "id": "390",
+      "name": "Giltig från och med höstterminen 2013"
+    },
+    {
+      "id": "275",
+      "name": "Giltig från och med höstterminen 2012"
+    },
+    {
+      "id": "195",
+      "name": "Giltig från och med höstterminen 2011"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.943632+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10034",
+  "programmeTitle": "Masterprogram i kemi – Biokemi, 120 hp (TKE2M)",
+  "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
+  "programmeUri": "/utbildning/program/masterprogram-kemi-biokemi",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

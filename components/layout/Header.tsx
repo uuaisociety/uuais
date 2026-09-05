@@ -27,10 +27,13 @@ const communityLinks = [
   { href: '/careers', label: 'Job board' },
 ];
 
+// The course navigator ships after the programme map, so its entry points stay with
+// the board until then.
 const projectLinks = [
   { href: '/projects', label: 'All projects' },
-  { href: '/explore', label: 'Course navigator' },
-  { href: '/my-courses', label: 'My favourites' },
+  { href: '/programs', label: 'Programme map', badge: 'Beta' },
+  { href: '/explore', label: 'Course navigator', adminOnly: true },
+  { href: '/my-courses', label: 'My favourites', adminOnly: true },
 ];
 
 const BetaBadge: React.FC = () => (
@@ -50,6 +53,7 @@ export const Header: React.FC = () => {
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileButtonRef = useRef<HTMLButtonElement>(null);
   const { user, isAdmin, cached, logout } = useAdmin();
+  const visibleProjectLinks = projectLinks.filter((link) => !link.adminOnly || isAdmin);
 
   // Close the menus on navigation rather than letting them hang over the new page.
   // Done during render (state adjustment when a prop changes) instead of an effect.
@@ -176,8 +180,7 @@ export const Header: React.FC = () => {
                 )}
               </div>
 
-              {identity?.showAdmin && (
-                <div className="relative" ref={projectsRef}>
+              <div className="relative" ref={projectsRef}>
                   <button
                     onClick={() => setIsProjectsOpen((v) => !v)}
                     aria-expanded={isProjectsOpen}
@@ -189,19 +192,19 @@ export const Header: React.FC = () => {
                   </button>
                   {isProjectsOpen && (
                     <div className="glass-pop absolute left-0 mt-2 w-52 rounded-md p-1.5 animate-rise">
-                      {projectLinks.map((link) => (
+                      {visibleProjectLinks.map((link) => (
                         <Link
                           key={link.href}
                           href={link.href}
                           className="block px-3 py-2 rounded-sm text-[0.8125rem] text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors"
                         >
                           {link.label}
+                          {link.badge && <BetaBadge />}
                         </Link>
                       ))}
                     </div>
                   )}
-                </div>
-              )}
+              </div>
 
               {identity?.showAdmin && (
                 <Link href="/admin" className={navLinkClass(isActive('/admin'))}>Admin</Link>
@@ -300,18 +303,18 @@ export const Header: React.FC = () => {
                 </Link>
               ))}
 
+              <div className="my-1.5 h-px bg-current/10" />
+              {visibleProjectLinks.map((link) => (
+                <Link key={link.href} href={link.href} onClick={() => setIsMenuOpen(false)} className="block px-3.5 py-2.5 rounded-sm text-sm text-current/65 hover:text-current hover:bg-current/[0.07] transition-colors">
+                  {link.label}
+                  {link.badge && <BetaBadge />}
+                </Link>
+              ))}
+
               {identity?.showAdmin && (
-                <>
-                  <div className="my-1.5 h-px bg-current/10" />
-                  {projectLinks.map((link) => (
-                    <Link key={link.href} href={link.href} className="block px-3.5 py-2.5 rounded-sm text-sm text-current/65 hover:text-current hover:bg-current/[0.07] transition-colors">
-                      {link.label}
-                    </Link>
-                  ))}
-                  <Link href="/admin" className="block px-3.5 py-2.5 rounded-sm text-sm text-current/65 hover:text-current hover:bg-current/[0.07] transition-colors">
-                    Admin
-                  </Link>
-                </>
+                <Link href="/admin" className="block px-3.5 py-2.5 rounded-sm text-sm text-current/65 hover:text-current hover:bg-current/[0.07] transition-colors">
+                  Admin
+                </Link>
               )}
 
               <div className="my-1.5 h-px bg-current/10" />

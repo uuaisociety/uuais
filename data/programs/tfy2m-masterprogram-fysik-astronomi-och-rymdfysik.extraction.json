@@ -1,0 +1,568 @@
+{
+ "edges": [
+  {
+   "code": "1FA006",
+   "text": "120 credits in science/engineering. Applied Deep Learning in Physics and Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA370",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA045",
+   "text": "60 credits in physics, mathematics, and/or chemistry.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA157",
+   "text": "120 credits in science/engineering with Quantum Physics (or Quantum Physics F), Mechanics III and Special Relativity. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA193",
+   "text": "120 credits including 60 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA195",
+   "text": "120 credits including 60 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA203",
+   "text": "30 credits in mathematics and 60 credits in physics, Astrophysics I.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA204",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA204",
+   "text": "30 credits in mathematics and 30 credits in physics.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA209",
+   "text": "120 credits including 30 credits in mathematics and 60 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA223",
+   "text": "120 credits in science/engineering including Astrophysics 1. Astrophysics 1 may be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA204",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA225",
+   "text": "120 credits including 30 credits in mathematics and 60 credits in physics, including Astrophysics I and knowledge of basic classical mechanics, quantum mechanics, statistical mechanics and programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA204",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA226",
+   "text": "120 credits including 30 credits in mathematics and 60 credits in physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA227",
+   "text": "120 credits with quantum physics/quantum mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA352",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA252",
+   "text": "120 credits including Electromagnetism II/Electromagnetism and Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA253",
+   "text": "120 credits including Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA255",
+   "text": "120 credits with Electromagnetism/Electromagnetism II. Participation in Mechanics III and Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA256",
+   "text": "180 credits in physics, mathematics and technology.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA257",
+   "text": "120 credits with Mechanics III. Electromagnetic Field Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA252",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA258",
+   "text": "120 credits with Mechanics II/Mechanics KF. Electromagnetic field theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA252",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA260",
+   "text": "120 credits including 30 credits in mathematics and 60 credits in physics, including Astrophysics I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA204",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA336",
+   "text": "120 credits in science/engineering. Participation in Advanced Nuclear Physics or The Physics of Stars. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA223",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA350",
+   "text": "120 credits in science/engineering. Participation in the course in particle physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA355",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA352",
+   "text": "120 credits with Mechanics III and Quantum Physics/Quantum Physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA355",
+   "text": "120 credits with Particle Physics. Participation in Quantum Field Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA370",
+   "text": "120 credits in science/engineering. Linear Algebra II. Introduction to Scientific Computing or Introduction to Scientific Computing F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA453",
+   "text": "120 credits in science/engineering with Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1FA352",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA565",
+   "text": "120 credits including 75 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA566",
+   "text": "120 credits including 75 credits in physics. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA570",
+   "text": "120 credits with 60 credits in physics and 15 credits in physics education. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA597",
+   "text": "A Bachelor's degree or the equivalent and at least 30 credits in physics at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA598",
+   "text": "A Bachelor's degree or the equivalent and at least 30 credits in physics at Master's level. Courses required for each particular degree work must also be finished. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1FA694",
+   "text": "A Bachelor's degree or the equivalent and at least 30 credits in physics at Master's level. Courses required for each particular degree work must also be finished. Proficiency in English equivalent to the Swedish upper secondary course English 6. Admission requires a project plan accepted by the department.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Majoriteten av kurserna som erbjuds under termin 1 erbjuds även under termin 3. Studenterna förväntas dela upp belastningen mellan dessa två terminer.",
+    "semester": 1,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Most semester 1 courses are also offered in semester 3, and students are expected to spread their workload across these two semesters.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1FA225 Teoretisk astrofysik ges bara jämna år.",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA225"
+    ],
+    "labelEn": "The course 1FA225 Theoretical Astrophysics is offered only in even-numbered years.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1FA211 Observationell astrofysik II ges bara udda år.",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA211"
+    ],
+    "labelEn": "The course Observational Astrophysics II (1FA211) is only offered in odd-numbered years.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga valbara kurser denna period:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective courses available this period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1FA262 Astrokemi ges bara udda år.",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA262"
+    ],
+    "labelEn": "The course 1FA262 Astrochemistry is only offered in odd years.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kurserna 1FA252 och 1FA257 kan schemaläggas samtidigt, studenter förväntas inte läsa dem under samma period.",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA252",
+     "1FA257"
+    ],
+    "labelEn": "Courses 1FA252 and 1FA257 may be scheduled at the same time, but students are not expected to take them in the same period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1FA211 Observationell astrofysik II ges bara udda år.",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA211"
+    ],
+    "labelEn": "The course 1FA211 Observational Astrophysics II is only offered in odd-numbered years.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga valbara kurser denna period:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective courses available in this period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Studenter som inte hade någon astronomi eller astrofysik i sina kandidatstudier väljer 1FA204. De rekommenderas även att ta 1FA203 under period 4",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA204",
+     "1FA203"
+    ],
+    "labelEn": "Students without astronomy or astrophysics in their bachelor studies choose 1FA204 and are also recommended to take 1FA203 in period 4.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1FA256 Rymdprojekt ges bara jämna år.",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA256"
+    ],
+    "labelEn": "The course 1FA256 Space Mission Design Project is only offered in even-numbered years.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga valbara kurser denna period:",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective courses available during this period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1FA336 ges endast udda år.",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA336"
+    ],
+    "labelEn": "The course 1FA336 is offered only in odd-numbered years.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga valbara kurser denna period:",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other elective courses available this period.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA597"
+    ],
+    "labelEn": "Students aiming for a magister's degree choose 1FA597.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Se termin 1.",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Refers to semester 1 for the applicable course requirements.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1FA694 Examensarbete E i fysik, 15 (av 45) högskolepoäng",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA694"
+    ],
+    "labelEn": "Only 15 of the 45 credits for Degree Project E in Physics (1FA694) are counted in this semester.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1FA694 Examensarbete E i fysik, 30 (av 45) högskolepoäng",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA694"
+    ],
+    "labelEn": "Only 30 of the 45 credits for Degree Project E in Physics (1FA694) count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga kurser inom inriktningen (valfri period):",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other courses within the specialisation (any period).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Följande beteckningar används:G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The note defines the abbreviations used for course levels (G2F, A1N, A1F, A1E, A2E) describing prerequisite requirements and thesis types.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

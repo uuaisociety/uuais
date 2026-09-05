@@ -6,6 +6,16 @@ import { authConfig } from '@/lib/auth-config';
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Programme slugs should be case insensitive
+  if (pathname.startsWith('/programs/')) {
+    const lowercased = pathname.toLowerCase();
+    if (lowercased === pathname) return NextResponse.next();
+
+    const url = request.nextUrl.clone();
+    url.pathname = lowercased;
+    return NextResponse.redirect(url, 308);
+  }
+
   // Only protect admin routes except the main admin login page
   if (pathname.startsWith('/admin') && pathname !== '/admin') {
     return authMiddleware(request, {
@@ -56,5 +66,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/api/:path*'],
+  matcher: ['/admin/:path*', '/api/:path*', '/programs/:code+'],
 };

@@ -1,0 +1,263 @@
+{
+ "edges": [
+  {
+   "code": "1GV108",
+   "text": "30 credits in environmental science, biology, earth science, geography, social geography, national economics, sustainable energy transition or business.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG338",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE743",
+   "text": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG236",
+   "text": "Participation in Quality Management.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG285",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG240",
+   "text": "Option 1: Participation in Introduction to Leadership - Quality - Improvement and Quality Management 10 credits. Option 2: Participation in Introduction to Industrial Development, Introduction to Quality Technology for Engineers and Process Management and Management Systems.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG284",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TG285",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG284",
+   "text": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG285",
+   "text": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG287",
+   "text": "Participation in Quality Management, of which 5 credits must be completed, and participation in and 5 credits completed of either Project Management and Leadership or Projects and Leadership.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG285",
+      "type": "HARD"
+     },
+     {
+      "from": "1TG316",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG293",
+   "text": "Participation in Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG316",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG294",
+   "text": "30 credits in Industrial Engineering and Management. Participation in Statistical Quality Control, Quality Management, of which 5 credits should be completed, and either Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed.",
+   "result": null
+  },
+  {
+   "code": "1TG302",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG314",
+   "text": "45 credits in Industrial Engineering and Management or Engineering programmes. Project Management and Leadership or Projects and Leadership.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TG316",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG316",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG334",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TG340",
+   "text": "30 credits in Industrial Engineering and Management",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "1TG314 ersätter 1TG295 och 1TG268. 1TG314 kan inte ingå i examen tillsammans med vare sig 1TG295 eller 1TG268.",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TG314",
+     "1TG295",
+     "1TG268"
+    ],
+    "labelEn": "1TG314 replaces 1TG295 and 1TG268 and cannot count toward the degree together with either of them.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TG340 ersätter 1TG253. Dessa kurser kan inte ingå i examen tillsammans.",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TG340"
+    ],
+    "labelEn": "1TG340 replaces 1TG253, and the two courses cannot both count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "VALBAR TERMIN",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The semester consists of elective courses chosen freely."
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TG338 och 1TG331 kan inte ingå i examen tillsammans på grund av överlapp.",
+    "semester": 4,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TG338"
+    ],
+    "labelEn": "1TG338 and 1TG331 cannot both count toward the degree due to overlapping content."
+   }
+  },
+  {
+   "note": {
+    "textSv": "VALBAR TERMIN",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "The fifth semester is a free elective term.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TG314 ersätter 1TG295 och 1TG268. Ingen av dessa kan ingå i en examen samtidigt.",
+    "semester": 5,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TG314"
+    ],
+    "labelEn": "1TG314 replaces 1TG295 and 1TG268, and none of these courses may count toward the degree together.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Hållbar verksamhetsutveckling (1TG297) och Hållbar verksamhetsutveckling (1TG275) kan inte ingå tillsammans inom examenskravet.",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TG297"
+    ],
+    "labelEn": "Sustainable Organisational Development (1TG297) and Sustainable Organisational Development (1TG275) cannot both be counted toward the degree requirements.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TG276 och 1TG339 kan inte ingå i examen tillsammans på grund av innehållsmässigt överlapp.",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TG339"
+    ],
+    "labelEn": "1TG339 and 1TG276 cannot both count toward the degree due to overlapping content."
+   }
+  }
+ ]
+}

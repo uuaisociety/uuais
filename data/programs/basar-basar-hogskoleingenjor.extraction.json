@@ -1,0 +1,59 @@
+{
+ "edges": [],
+ "rules": [
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1BA203, 1BA204, 1BA205, 1BA206, 1BA207",
+    "semester": 1,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1BA203",
+     "1BA204",
+     "1BA205",
+     "1BA206",
+     "1BA207"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1BA203",
+     "1BA204",
+     "1BA205",
+     "1BA206",
+     "1BA207"
+    ],
+    "labelEn": "One of the listed courses must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1BA209, 1BA210, 1BA211, 1BA212, 1BA213",
+    "semester": 2,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1BA209",
+     "1BA210",
+     "1BA211",
+     "1BA212",
+     "1BA213"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1BA209",
+     "1BA210",
+     "1BA211",
+     "1BA212",
+     "1BA213"
+    ],
+    "labelEn": "One of these courses must be chosen.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

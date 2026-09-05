@@ -1,0 +1,257 @@
+{
+ "edges": [
+  {
+   "code": "1FA430",
+   "text": "Participation in Algebra and Vector Geometry or Linear algebra for engineers. Participation in Calculus for Engineers or Calculus II for engineers. Participation in Structural Mechanics.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA352",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA353",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA354",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE601",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE403",
+   "text": "60 credits in the Bachelor's Programme in Construction Engineering including the courses Structural Design in Construction Engineering and Calculus for Engineers.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE443",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA353",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA354",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE431",
+   "text": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Project 1: Designing of Detached House.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE439",
+      "type": "HARD"
+     },
+     {
+      "from": "1TS366",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE443",
+   "text": "Algebra and Vector Geometry or Linear Algebra for Engineers. Participation in Calculus for Engineers and Construction Mechanics.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA352",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA353",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA354",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE601",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE444",
+   "text": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Construction Materials and Project 1: Designing of Detached House.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE439",
+      "type": "HARD"
+     },
+     {
+      "from": "1TS366",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE442",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE687",
+   "text": "30 credits in technology",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE743",
+   "text": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE439",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TG318",
+   "text": "30 credits in any main field.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TM117",
+   "text": "60 credits within the Bachelor's Programme in Construction Engineering including Building Physics and Fluid and Thermodynamics.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE431",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA430",
+      "type": "HARD"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Byggnadsprojektering med ritteknik 10 hp (1TS366) ersätter kursen Byggnadsprojektering med ritteknik 5 hp (1TE440). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet.",
+    "semester": 1,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1TS366"
+    ],
+    "labelEn": "Building Design with Drawing 10 hp (1TS366) replaces the earlier 5 hp course; the two cannot both count toward the degree, and one of them is required.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1TM117, 5KV779, 1TE403, 1TE687, 1TE438, 1TM018",
+    "semester": 5,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1TM117",
+     "5KV779",
+     "1TE403",
+     "1TE687",
+     "1TE438",
+     "1TM018"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1TM117",
+     "5KV779",
+     "1TE403",
+     "1TE687",
+     "1TE438",
+     "1TM018"
+    ],
+    "labelEn": "One of the listed courses must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kurser som inte är obligatoriska kallas för valbara. Det är obligatoriskt att läsa minst 20 hp av de valbara kurserna i årskurs 3 (hit räknas inte s k tillvalskurser).",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "At least 20 credits of elective courses in year 3 are compulsory; so-called optional courses (tillvalskurser) do not count toward this requirement.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TE403, 1TM018 och 1TE447 passar för en studieinriktning mot konstruktion (kurserna kan kräva behörighetskedja).5KV779 och 1TG318 passar för en studieinriktning mot förvaltning (kurserna kan kräva behörighetskedja).1TM117, 1TE438 och 1TS329 passar för en studieinriktning mot energi och miljö (kurserna kan kräva behörighetskedja).",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TE403",
+     "1TM018",
+     "1TE447",
+     "5KV779",
+     "1TG318",
+     "1TM117",
+     "1TE438",
+     "1TS329"
+    ],
+    "labelEn": "The courses are grouped into suggested specialisations: construction (1TE403, 1TM018, 1TE447), management and maintenance (5KV779, 1TG318), and energy and environment (1TM117, 1TE438, 1TS329), each of which may require a prerequisite chain.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1TS329, 1TE447, 1TG318",
+    "semester": 6,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1TS329",
+     "1TE447",
+     "1TG318"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1TS329",
+     "1TE447",
+     "1TG318"
+    ],
+    "labelEn": "One of the courses 1TS329, 1TE447, or 1TG318 must be chosen.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

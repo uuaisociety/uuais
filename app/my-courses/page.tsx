@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import AdminGate from '@/components/auth/AdminGate';
 import { fetchCoursesByIdsClient } from "@/lib/firestore/courses";
 import type { Course } from "@/lib/courses";
 import CourseCard from "@/components/courses/CourseCard";
@@ -27,7 +28,7 @@ import { updatePageMeta } from "@/utils/seo";
 const MAX_GROUPS = 10;
 const MAX_COURSES_PER_GROUP = 50;
 
-export default function MyCoursesPage() {
+function MyCoursesPageContent() {
   const [user, setUser] = useState<{ uid: string } | null>(null);
   const [courses, setCourses] = useState<Course[]>([]);
   const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
@@ -401,5 +402,17 @@ export default function MyCoursesPage() {
         </Modal>
       )}
     </div>
+  );
+}
+
+/**
+ * Held back while the programme map launches first: the navigator and its favourites are
+ * the board's to look at until the course data behind them is ready to be public.
+ */
+export default function MyCoursesPage() {
+  return (
+    <AdminGate>
+      <MyCoursesPageContent />
+    </AdminGate>
   );
 }

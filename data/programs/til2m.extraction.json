@@ -1,0 +1,433 @@
+{
+ "edges": [
+  {
+   "code": "1TD433",
+   "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE685",
+   "text": "130 credits in science/engineering/pharmacy. Participation in Industrial Strategy and Organisation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TS310",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE687",
+   "text": "30 credits in technology",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE735",
+   "text": "Alternative 1: 130 credits, of which 90 credits in technology, 20 credits in mathematics and 5 credits at Master's level in industrial engineering and management. Participation in Industrial Strategy and Organisation, of which 3 credits must be completed, Innovation Management and Marketing for Industrial Companies. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternatiive 2: 150 credits within the Master's Programme in Industrial Engineering and Management, including Industrial Engineering and Management II: Organising, Production and Markets. Participation in 5 credits at Master's level in Technology or Industrial Engineering and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TS310",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE736",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE685",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE736",
+   "text": "120 credits including 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE742",
+   "text": "120 credits, of which 90 credits in technology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE763",
+   "text": "Alternative 1: 180 credits, of which 90 credits in Technology. Innovation Management, Marketing for Industrial Companies and also Industrial Strategy and Organisation. Participation in Industrialisation and Engineering Ethics. Participation in 5 credits at Master's level in Industrial Engineering and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 150 credits within Master's Programme in Industrial Engineering and Management, including Industrial Engineering and Management II: Organising, Production and Markets. Participation in 5 credits at Master's level in Technology or Industrial Engineering and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE736",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE685",
+      "type": "HARD"
+     },
+     {
+      "from": "1TS310",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE735",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE687",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE764",
+   "text": "120 credits, of which 90 credits in technology and 20 credits in mathematics. Participation in the course Industrial Management, Industrial Strategy and Organisation or Industrial Production Philosophies. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TS310",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TE777",
+   "text": "120 credits, of which 90 credits in science/engineering. Participation in Industrial Strategy and Organisation, Industrial Management, Innovation Management and Entrepreneurship or Industrial Engineering and Management I: the Functions of the Corporation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TS310",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE736",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TM116",
+   "text": "150 credits including 30 credits in courses at Master's level in industrial engineering and management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS310",
+   "text": "120 credits including 90 credits in technology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS311",
+   "text": "120 credits including 60 credits in science/engineering/medicine/pharmacy/business administration. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS321",
+   "text": "120 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TS325",
+   "text": "Option 1: 120 credits whereof 60 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Option 2: 120 credits whereof 60 credits in science/engineering. Participation in 25 credits in mathematics/statistics/scientific computing, of which 15 credits should be completed. The 25 credits should include statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TS327",
+   "text": "120 credits, including 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS328",
+   "text": "Option 1: 120 credits, including 90 credits in science/engineering. Participation in the course Industrial Project Management I. Option 2: 120 credits, including 90 credits in science/engineering. Industrial Engineering and Management I: The Functions of the Corporation, Industrial Management III: Project in Business and Technology Development. Participation in Strategic Management in Technology-Intensive Firms. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TS327",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TS338",
+   "text": "120 credits including 90 credits in technology or computer science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS341",
+   "text": "Option 1: 120 credits within the Master's Programme in Industrial Engineering and Management. Option 2: 120 credits within or a Bachelor's Degree within Science in Engineering or Technology. Participation in Industrial Strategy and Organisation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TS310",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TS342",
+   "text": "Option 1: 150 credits within the Master's Programme in Industrial Engineering and Management, including 10 credits at Master's level in technology. Option 2: 150 credits, including 90 credits in technology. Participation in Industrial Strategy and Organisation, of which 5 credits must be completed, and Innovation Management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TS310",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TE736",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TS345",
+   "text": "180 credits, of which 90 credits in technology and 30 credits at Master's level in industrial engineering and management.Participation in Qualitative and Quantitative Methods in Industrial Engineering and Management I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TS338",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TS346",
+   "text": "150 credits in science/engineering/pharmacy including 15 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS360",
+   "text": "120 credits, of which 90 credits in technology and 20 credits in mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS363",
+   "text": "120 credits including 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "1TS310 är förkunskapskrav till senare kurser.",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TS310"
+    ],
+    "labelEn": "1TS310 Industrial Strategy and Organisation is a prerequisite for later courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TS327 krävs för 1TS328.1TS363 ersätter 1TE779 och dessa kurser kan inte ingå i examen tillsammans.",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": "ledning-och-innovation"
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TS327",
+     "1TS328",
+     "1TS363"
+    ],
+    "labelEn": "1TS327 is required for 1TS328, and 1TS363 replaces 1TE779 (not in roster) so the two cannot both count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TD433 krävs för 1TS321 och 1TS325.",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": "industriell-analys"
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TD433",
+     "1TS321",
+     "1TS325"
+    ],
+    "labelEn": "1TD433 is a prerequisite for 1TS321 and 1TS325.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TS338 är förkunskapskrav till senare kurser.1TE736 är förkunskapskrav till senare kurser.",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": "industriell-analys"
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TS338",
+     "1TE736"
+    ],
+    "labelEn": "1TS338 and 1TE736 are prerequisite requirements for later courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TE777, 1TS341 och 1TS328 är valbara och kan ha schemakrockar.",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": "ledning-och-innovation"
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TE777",
+     "1TS341",
+     "1TS328"
+    ],
+    "labelEn": "1TE777, 1TS341 and 1TS328 are elective and may have schedule conflicts.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TE687 är förkunskapskrav för kommande kurser.",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TE687"
+    ],
+    "labelEn": "1TE687 Engineering Ethics is a prerequisite for upcoming courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TE685 är förkunskapskrav till senare kurser.1TS311 och 1TS342 är valbara och kan ha schemakrockar.",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": "ledning-och-innovation"
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TE685",
+     "1TS311",
+     "1TS342"
+    ],
+    "labelEn": "1TE685 is a prerequisite for later courses; 1TS311 and 1TS342 are electives and may have schedule clashes.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TE735 och 1TS345 är förkunskapskrav till senare kurser.",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": "industriell-analys"
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TE735",
+     "1TS345"
+    ],
+    "labelEn": "1TE735 and 1TS345 serve as prerequisite requirements for later courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TE077 inte kan ingå i examen tillsammans med någon av 1TS345 eller 1TS338.1TS345, 1TM116 och 1TE763 är förkunskapskrav till senare kurser.",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TS345",
+     "1TS338",
+     "1TM116",
+     "1TE763"
+    ],
+    "labelEn": "1TE077 cannot count toward the degree together with 1TS345 or 1TS338, and 1TS345, 1TM116, and 1TE763 are prerequisites for later courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1TS345, 1TM116 och 1TE763 är förkunskapskrav till senare kurser.1TE777, 1TS346, 1TS341 och 1TS328 är valbara och kan ha schemakrockar.",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1TS345",
+     "1TM116",
+     "1TE763",
+     "1TE777",
+     "1TS346",
+     "1TS341",
+     "1TS328"
+    ],
+    "labelEn": "1TS345, 1TM116 and 1TE763 are prerequisites for later courses, while 1TE777, 1TS346, 1TS341 and 1TS328 are electives that may have schedule conflicts.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

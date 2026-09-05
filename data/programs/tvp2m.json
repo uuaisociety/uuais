@@ -1,0 +1,451 @@
+{
+  "id": "10051",
+  "code": "TVP2M",
+  "revisionId": "10051",
+  "nameSv": "Masterprogram i vindkraftsprojektering",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "TEKNAT 2025/139",
+  "finalisedDate": "6 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1GV147",
+      "titleEn": "Wind Power Development and Management",
+      "titleSv": "Vindkraftsprojektering",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within engineering, science or social science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV149",
+      "titleEn": "Planning for Wind Energy",
+      "titleSv": "Planering för vindkraft",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree in engineering, science or social sciences. Also required is participation in Wind Power Development and Management, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV221",
+      "titleEn": "Wind Energy Resources and Technology",
+      "titleSv": "Vindresurser och teknik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Physics A1F, Wind Power Project Management",
+      "mainFieldSv": "Fysik A1F, Vindkraftsprojektering",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree in engineering, science or social science. Also required is participation in Wind Power Development and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV222",
+      "titleEn": "Project Course: Feasibility Study of a Wind Power Project",
+      "titleSv": "Projektkurs: förstudie till vindkraftsprojekt",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV153",
+      "titleEn": "Scientific Methods in Wind Power Project Management",
+      "titleSv": "Forskningsmetoder i vindkraftsprojektering",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV154",
+      "titleEn": "Trends in the Wind Industry",
+      "titleSv": "Trender i vindkraftsindustrin",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV143",
+      "titleEn": "Degree Project in Wind Power Project Management",
+      "titleSv": "Examensarbete i vindkraftsprojektering",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV156",
+      "titleEn": "Construction, Operation and Maintenance of Wind Farms",
+      "titleSv": "Byggnation, drift och underhåll av vindparker",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree in engineering, science or social science. Also required is 45 credits at Master's level in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV157",
+      "titleEn": "Wind Project Management and Finance",
+      "titleSv": "Ledning och finansiering av vindprojekt",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree in engineering, science or social science. Also required is 45 credits at Master's level in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV217",
+      "titleEn": "Professional Training in Wind Power Project Management",
+      "titleSv": "Yrkesanknuten praktik i vindkraftsprojektering",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "120 credit and 60 credits at Master's level in Wind Power Project Management. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV159",
+      "titleEn": "Specialisation in Planning for Wind Energy",
+      "titleSv": "Fördjupning i planering för vindkraft",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Planning for Wind Energy, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV160",
+      "titleEn": "Specialisation in Wind Resource Assessment",
+      "titleSv": "Fördjupning i vindresursbedömning",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Project Course: Feasibility Study of a Wind Power Project, 15 credits, and Wind Energy Resource and Technology, 10 credits, as well as 30 credits in mathematics, and 15 credits in Physics and/or Mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV183",
+      "titleEn": "Specialisation in Multi-Criteria Decision Analysis for Wind Power Development",
+      "titleSv": "Fördjupning i beslutsanalys för vindkraftsprojektering",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within engineering, science or social science. 60 credits of Master's level courses in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "code": "1GV161",
+      "titleEn": "Degree Project in Wind Power Project Management",
+      "titleSv": "Examensarbete i vindkraftsprojektering",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A2E",
+      "semester": 3,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Scientific Methods in Wind Power Project Management, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6. The course is only available after completion of for the degree course required courses at Master's level. Admission requires a project plan accepted by the department."
+    },
+    {
+      "code": "1GV161",
+      "titleEn": "Degree Project in Wind Power Project Management",
+      "titleSv": "Examensarbete i vindkraftsprojektering",
+      "credits": 45.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Scientific Methods in Wind Power Project Management, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6. The course is only available after completion of for the degree course required courses at Master's level. Admission requires a project plan accepted by the department."
+    },
+    {
+      "code": "1GV162",
+      "titleEn": "Degree Project in Wind Power Project Management",
+      "titleSv": "Examensarbete i vindkraftsprojektering",
+      "credits": 30.0,
+      "creditsInPeriod": 15.0,
+      "creditsInSemester": 30.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A2E",
+      "semester": 4,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV144",
+      "titleEn": "Project Course in Wind Power Project Management",
+      "titleSv": "Projektarbete i vindkraftsprojektering",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1GV146",
+      "titleEn": "Project Course in Wind Power Project Management",
+      "titleSv": "Projektarbete i vindkraftsprojektering",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Wind Power Project Management",
+      "mainFieldSv": "Vindkraftsprojektering",
+      "depthCode": "A1N",
+      "semester": 4,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Övriga kurser (valfri period):",
+      "labelEn": "Other courses may be taken in any period.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Övriga kurser (valfri period):",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "edges": [
+    {
+      "from": "1GV149",
+      "to": "1GV159",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Planning for Wind Energy, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1GV221",
+      "to": "1GV160",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Project Course: Feasibility Study of a Wind Power Project, 15 credits, and Wind Energy Resource and Technology, 10 credits, as well as 30 credits in mathematics, and 15 credits in Physics and/or Mechanics. Proficiency in English equivalent to the S"
+    },
+    {
+      "from": "1GV222",
+      "to": "1GV160",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Project Course: Feasibility Study of a Wind Power Project, 15 credits, and Wind Energy Resource and Technology, 10 credits, as well as 30 credits in mathematics, and 15 credits in Physics and/or Mechanics. Proficiency in English equivalent to the S"
+    },
+    {
+      "from": "1GV153",
+      "to": "1GV161",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Scientific Methods in Wind Power Project Management, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6. The course is only available after completion of for the degree course required courses at Master's "
+    }
+  ],
+  "revisions": [
+    {
+      "id": "10051",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "3572",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3318",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "2994",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2650",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2341",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2178",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1881",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1670",
+      "name": "Giltig från och med höstterminen 2018"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.957150+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10051",
+  "programmeTitle": "Masterprogram i vindkraftsprojektering, 120 hp (TVP2M)",
+  "programmeTitleEn": "Master's Programme in Wind Power Project Management, 120 credits (TVP2M)",
+  "programmeUri": "/utbildning/program/masterprogram-vindkraftsprojektering",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

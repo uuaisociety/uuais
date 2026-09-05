@@ -23,6 +23,12 @@ typography:
     fontWeight: 600
     lineHeight: 1.02
     letterSpacing: "-0.032em"
+  subhead:
+    fontFamily: "Instrument Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(1.5rem, 2.6vw, 2rem)"
+    fontWeight: 600
+    lineHeight: 1.1
+    letterSpacing: "-0.026em"
   title:
     fontFamily: "Instrument Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1.0625rem"
@@ -39,6 +45,11 @@ typography:
     fontSize: "0.6875rem"
     fontWeight: 500
     letterSpacing: "0.12em"
+  meta:
+    fontFamily: "Martian Mono, ui-monospace, monospace"
+    fontSize: "0.75rem"
+    fontWeight: 400
+    letterSpacing: "-0.01em"
 rounded:
   sm: "3px"
   md: "4px"
@@ -132,9 +143,11 @@ The palette is a warm/cool neutral pair (paper + ink) with a single deepened bra
 ### Hierarchy
 - **Display** (semibold, `clamp(2.75rem, 7vw, 5.5rem)`, 0.96 lh, `-0.038em`): hero headlines only, on the dark ink slab. The `display-xl` class.
 - **Headline** (semibold, `clamp(2rem, 4.4vw, 3.25rem)`, 1.02 lh, `-0.032em`): section opens, page titles on light surfaces. `display-lg`.
+- **Subhead** (semibold, `clamp(1.5rem, 2.6vw, 2rem)`, 1.1 lh, `-0.026em`): `h2` section heads *within* a page, sitting under a Headline. `display-md`.
 - **Title** (semibold, `1.0625rem`, ~1.3 lh, `-0.028em`): card titles, list headings. Tight tracking on all headings (`-0.028em` base for h2–h4).
 - **Body** (regular, `0.9375rem`, 1.6 lh): reading text, `text-muted-foreground` on light or `text-white/60` on ink slabs. Measure ~65ch.
 - **Label** (mono, 500, `0.6875rem`, `0.12em`, uppercase): eyebrows ("UPPSALA UNIVERSITY · AI SOCIETY"), section kickers, pills, form hints, table metadata. The `mono-label` class.
+- **Meta** (mono, 400, `0.75rem`, `-0.01em`, sentence case): mono metadata read as a phrase rather than an eyebrow — bylines, dates, reading time, model names. The `mono-meta` class.
 
 ### Named Rules
 **The Data-Versus-Prose Rule.** If it's a number, timestamp, tag, or eyebrow, set it in mono. If it's a sentence, set it in sans. Mixed usage is the signal that separates metadata from content.

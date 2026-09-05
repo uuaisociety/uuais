@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
+import AdminGate from '@/components/auth/AdminGate';
 import Link from "next/link";
 import { fetchCoursesClient, fetchCoursesByIdsClient, primeCourseClientCache } from "@/lib/firestore/courses";
 import type { Course } from "@/lib/courses";
@@ -13,7 +14,7 @@ import { Button } from "@/components/ui/Button";
 import { Heart } from "lucide-react";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
-export default function ExplorePage() {
+function ExplorePageContent() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [recommendedIds, setRecommendedIds] = useState<string[]>([]);
   const [recommendedCourses, setRecommendedCourses] = useState<Course[]>([]);
@@ -353,5 +354,17 @@ export default function ExplorePage() {
       </div>
     </div>
     </ErrorBoundary>
+  );
+}
+
+/**
+ * Held back while the programme map launches first: the navigator and its favourites are
+ * the board's to look at until the course data behind them is ready to be public.
+ */
+export default function ExplorePage() {
+  return (
+    <AdminGate>
+      <ExplorePageContent />
+    </AdminGate>
   );
 }

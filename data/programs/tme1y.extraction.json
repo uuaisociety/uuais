@@ -1,0 +1,230 @@
+{
+ "edges": [
+  {
+   "code": "1FA607",
+   "text": "Participation in Electrical Measurement Methods and Mechanics HI with at least 1 credit passed from each course. Participation in Medical Measurement Methods and Electronics.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE759",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA518",
+      "type": "HARD"
+     },
+     {
+      "from": "1TM024",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB704",
+   "text": "90 credits within an engineering programme",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA017",
+   "text": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA353",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA352",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MD016",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MD026",
+   "text": "60 credits in science/engineering. Introduction to Biomedical Engineering. Human-Computer Interaction. Scientific Computing. Computer Programming. At least 2 credits from each of the courses Regulatory Systems, Patient Safety and Ethics and Biomedical Sensor Technology.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TM036",
+      "type": "HARD"
+     },
+     {
+      "from": "1MD016",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD342",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE786",
+      "type": "HARD"
+     },
+     {
+      "from": "1EL402",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD342",
+   "text": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA353",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD433",
+   "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE686",
+   "text": "60 credits from an engineering programme.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE743",
+   "text": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TE786",
+   "text": "Introduction to Biomedical Engineering and one credit in Electrical Measurement Methods.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TM036",
+      "type": "HARD"
+     },
+     {
+      "from": "1TE759",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TM024",
+   "text": "Participation in Electric Measurement Techniques.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TE759",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TM120",
+   "text": "60 credits in engineering programs.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TS311",
+   "text": "120 credits including 60 credits in science/engineering/medicine/pharmacy/business administration. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "1TE785 Kvalitetsteknik och 1TS336 Kvalitetsteknik kan inte ingå i examen tillsammans.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [
+     "1TS336"
+    ],
+    "labelEn": "1TE785 Quality Engineering and 1TS336 Quality Management (Quality Engineering) cannot both count toward the degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Under period 1 läses 1MD026 Medicinsk informatik och antingen 1TM118 Verksamhetsförlagd utbildning eller 1TE743 Industriell ekonomi tillsammans med 3PE051 Implementering av medicinsk teknik.Under period 2 läses 1KB704 Miljöteknik och antingen 1TM118 Verksamhetsförlagd utbildning eller 1TE743 Industriell ekonomi tillsammans med 3PE051 Implementering av medicinsk teknik, dvs. den kombination som inte lästes under period 1.",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1MD026",
+     "1TM118",
+     "1TE743",
+     "3PE051",
+     "1KB704"
+    ],
+    "labelEn": "In semester 5, students take 1MD026 with 3PE051 in period 1 and 1KB704 with 3PE051 in period 2, taking both 1TM118 and 1TE743 in either order across the two periods.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1TM121, 1MA017, 1TE061, 1TM120, 1TS311",
+    "semester": 6,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1TM121",
+     "1MA017",
+     "1TE061",
+     "1TM120",
+     "1TS311"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1TM121",
+     "1MA017",
+     "1TE061",
+     "1TM120",
+     "1TS311"
+    ],
+    "labelEn": "One of the listed courses must be chosen.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

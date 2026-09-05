@@ -1,0 +1,155 @@
+{
+ "edges": [
+  {
+   "code": "1GE059",
+   "text": "A Bachelor's degree of at least 180 credits. Participation in Introduction to Sustainable Development 5 credits, Natural Resources and Sustainable Development 10 credits, Society and Environment 10 credits as well as Futures Studies: Exploring Sustainable Futures 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MV550",
+      "type": "SOFT"
+     },
+     {
+      "from": "1GV306",
+      "type": "SOFT"
+     },
+     {
+      "from": "1GV213",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1GV213",
+   "text": "A Bachelor's degree of at least 180 credits. Participation in Natural Resources and Sustainable Development 10 credits, Sustainable development: worldviews and visions 5 credits, as well as Society and environment 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1GV306",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MV554",
+      "type": "SOFT"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Samhälle och miljö, 10 hp (HU0002 SLU) Huvudområde(n) med fördjupning: Hållbar utveckling A1N",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Semester 1 includes the external SLU course 'Samhälle och miljö' (HU0002), 10 credits, in the main field of Sustainable Development at A1N level.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Praktisk tvärvetenskap, 15 hp (HU0004 SLU) Huvudområde(n) med fördjupning: Hållbar utveckling A1NPraktisk tvärvetenskap (15 hp) och/eller Energi, vatten och livsmedel (15 hp) krävs för Examensarbete E (30 hp).ELLER",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GE059"
+    ],
+    "labelEn": "Practical Interdisciplinarity (HU0004, SLU) and/or Energy, Water and Food (15 hp) are required before taking the Degree Project E (30 hp).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Examensarbete D i hållbar utveckling (15 hp) är till för studenter som ska avlägga en magisterexamen.",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GV041"
+    ],
+    "labelEn": "Degree Project D in Sustainable Development (15 hp) is intended for students pursuing a magister's (one-year master's) degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Den tredje terminen inleds med kurser Energi, vatten och livsmedel (15 hp) och/eller Praktik för en hållbar utveckling (15 hp eller 30 hp). Om samtliga kurser under år 1 är genomgåtts, har studenten även möjlighet att använda hela termin 3 till att läsa externa kurser för att fördjupa sig i hållbarhetsfrågor antingen inom sitt kandidatämne eller inom annat ämnesområde.",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GE059",
+     "1GE028",
+     "1GE033"
+    ],
+    "labelEn": "Semester 3 opens with Energy, Water and Food and/or the Internship for Sustainable Development (15 or 30 credits), and students who completed all year-1 courses may instead spend the semester on external sustainability-focused courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Praktisk tvärvetenskap (15 hp) och/eller Energi, vatten och livsmedel (15 hp) krävs för Examensarbete E (30 hp).OCH/ELLER",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1GE059"
+    ],
+    "labelEn": "Either Practical Interdisciplinary Work or Energy, Water and Food (15 hp) is required before taking Degree Project E (30 hp).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Praktik för en hållbar utveckling (15 hp) kan läsas antingen under period 1 eller 2.",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1GE028",
+     "1GE033"
+    ],
+    "labelEn": "The 15 hp Internship for a Sustainable Development may be taken in either period 1 or period 2.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Självständigt arbete i hållbar utveckling, A2E - Masterprogrammet i hållbar utveckling (SLU)Huvudområde(n) med fördjupning: Hållbar utveckling A2E",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1GV038"
+    ],
+    "labelEn": "The degree project must be the A2E-level independent project in Sustainable Development (Degree Project E, 1GV038) for the Master's programme in Sustainable Development (SLU).",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

@@ -1,0 +1,72 @@
+{
+ "edges": [],
+ "rules": [
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1GV500, 1GV501, 1GV502",
+    "semester": 1,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1GV500",
+     "1GV501",
+     "1GV502"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1GV500",
+     "1GV501",
+     "1GV502"
+    ],
+    "labelEn": "One of the courses 1GV500, 1GV501, or 1GV502 must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "En av kurserna ska väljas: 1GV503, 1GV504",
+    "semester": 2,
+    "period": null,
+    "trackId": null,
+    "choiceCodes": [
+     "1GV503",
+     "1GV504"
+    ]
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1GV503",
+     "1GV504"
+    ],
+    "labelEn": "One of the courses 1GV503 or 1GV504 must be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Antingen: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Examensarbete i Hållbar utveckling 20 av 45 hpEller: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Praktik i hållbar utveckling 15 hp Examensarbete i hållbar utveckling 5 av 30 hp.",
+    "semester": 3,
+    "period": null,
+    "trackId": null
+   },
+   "result": null
+  },
+  {
+   "note": {
+    "textSv": "Workshop serie 2: Tvärvetenskaplig metod och tillämpning en fördjupnings kurs 5 hp Antingen:Examensarbete i hållbar utveckling av kustområden 25 av 45 hp.Eller: Examensarbete i hållbar utveckling av kustområden 25 av 30 hp.",
+    "semester": 4,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "MUTUALLY_EXCLUSIVE",
+    "courseCodes": [],
+    "labelEn": "Either the 45-credit or the 30-credit thesis in sustainable development of coastal areas may count, but not both.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

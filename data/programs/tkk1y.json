@@ -1,0 +1,277 @@
+{
+  "id": "69742628-0a52-4a94-8f03-6c80558bae2d",
+  "code": "TKK1Y",
+  "revisionId": "69742628-0a52-4a94-8f03-6c80558bae2d",
+  "nameSv": "Högskoleingenjörsprogrammet i kärnkraftteknik",
+  "totalCredits": 60.0,
+  "semesters": 2,
+  "registrationNumber": "TEK-NAT 2025/139",
+  "finalisedDate": "5 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1FA014",
+      "titleEn": "Introduction to Nuclear Engineering",
+      "titleSv": "Introduktion till kärnkraftteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "90 credits in Science/Engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers."
+    },
+    {
+      "code": "1FA421",
+      "titleEn": "Reactor Physics",
+      "titleSv": "Reaktorfysik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA422",
+      "titleEn": "Nuclear Thermal Hydraulics and Steam Turbine Technology",
+      "titleSv": "Nukleär termohydraulik och ångturbinteknik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1EL008",
+      "titleEn": "Power Engineering and Three-Phase Systems",
+      "titleSv": "Elkraft- och trefassystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry."
+    },
+    {
+      "code": "1FA424",
+      "titleEn": "Chemistry, Materials and Fuels for Reactor Applications",
+      "titleSv": "Kemi, material och bränsle för reaktortillämpningar",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA426",
+      "titleEn": "Nuclear Power Safety",
+      "titleSv": "Kärnkraftsäkerhet",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "60 credits in science/engineering. Participation in Reactor Physics, Nuclear Thermal Hydraulics and Steam Turbine Technology or Reactor Physics with nuclear thermohydraulics."
+    },
+    {
+      "code": "1FA013",
+      "titleEn": "Nuclear Waste Management and Decommissioning",
+      "titleSv": "Kärnavfall och avveckling",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA427",
+      "titleEn": "Nuclear Power Operation",
+      "titleSv": "Kärnkraftdrift",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA428",
+      "titleEn": "Future Nuclear Energy Systems",
+      "titleSv": "Framtida nukleära energisystem",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G2F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1FA499",
+      "titleEn": "Degree Project in Nuclear Power Technology",
+      "titleSv": "Examensarbete i kärnkraftteknik",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G2E",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [
+        "1FA014",
+        "1EL008"
+      ],
+      "semester": 1,
+      "trackId": null,
+      "textSv": "1FA014 kan ersättas i examen av 1FA400, men båda kurserna kan inte samtidigt ingå i examen.1EL008 kan ej ingå i examen tillsammans med 1TE655.",
+      "labelEn": "1FA014 may be replaced in the degree by 1FA400 (but not both counted), and 1EL008 cannot be included in the degree together with 1TE655.",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "1FA014 kan ersättas i examen av 1FA400, men båda kurserna kan inte samtidigt ingå i examen.1EL008 kan ej ingå i examen tillsammans med 1TE655.",
+      "semester": 1,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [],
+  "revisions": [
+    {
+      "id": "69742628-0a52-4a94-8f03-6c80558bae2d",
+      "name": "Giltig från och med höstterminen 2026"
+    },
+    {
+      "id": "10000",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "3340",
+      "name": "Giltig från och med höstterminen 2024"
+    },
+    {
+      "id": "3036",
+      "name": "Giltig från och med höstterminen 2023"
+    },
+    {
+      "id": "2590",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2369",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2224",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "1416",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1190",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "976",
+      "name": "Giltig från och med höstterminen 2015"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.855298+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=69742628-0a52-4a94-8f03-6c80558bae2d",
+  "programmeTitle": "Högskoleingenjörsprogrammet i kärnkraftteknik, 60 hp (TKK1Y)",
+  "programmeTitleEn": "Bachelor's Programme in Nuclear Engineering, 60 credits (TKK1Y)",
+  "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-karnkraftteknik",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}

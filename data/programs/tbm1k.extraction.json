@@ -1,0 +1,514 @@
+{
+ "edges": [
+  {
+   "code": "1BG100",
+   "text": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D or participation in Bioscience 30 credits of which 20 credits must have been completed.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1BG103",
+   "text": "Alternative 1: 60 credits in biology, chemistry and/or earth sciences, including The Evolution and Diversity of Organisms (15 credits), Molecular Biology and Genetics (10 credits), Life and Interactions of Microorganisms (5 credits) and participation in Cell Biology (15 credits). Alternative 2: 60 credits in biology, chemistry and/or earth sciences, including Biology A: Patterns and Processes (22.5 credits), or Biology A: Patterns, Processes and Science Education (22.5 credits), and participation in Cell Biology (15 credits). Alternative 3: 60 credits in chemistry, including 10 credits in biochemistry and participation in Cell Biology (15 credits).",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG100",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG113",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG114",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG120",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG106",
+   "text": "General entry requirements",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1BG114",
+   "text": "Participation in Organism Evolution and Diversity 15 credits, and participation in Molecular Biology and Genetics 10 credits (can be taken in the same study period).",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG100",
+      "type": "SOFT"
+     },
+     {
+      "from": "1BG113",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG200",
+   "text": "60 credits in biology including The Evolution and Diversity of Organisms (15 credits), Ecology and Population Genetics (15 credits), and 7.5 credits in floristics and faunistics.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG100",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG105",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG106",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG201",
+   "text": "60 credits in biology including 1) Molecular Biology and Genetics (10 credits), Life and Interactions of Microorganisms (5 credits) and Cell Biology (15 credits), or 2) Biology A: Patterns and Processes (22.5 credits), or Biology A: Patterns, Processes and Science Education (22.5 credits), and Cell Biology (15 credits).",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG113",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG114",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG120",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG203",
+   "text": "60 credits in biology including 1) The Evolution and Diversity of Organisms (15 credits) and Physiology (15 credits), or 2) Biology A: Patterns and Processes (22.5 credits), or Biology A: Patterns, Processes and Science Education (22.5 credits), and Physiology (15 credits).",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG100",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG103",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG204",
+   "text": "60 credits in biology including The Evolution and Diversity of Organisms, 15 credits, or Biology A: Patterns and Processes (22.5 credits), or Biology A: Patterns, Processes and Science Education (22.5 credits). In both cases also 7.5 credits in floristics and faunistics, and the students must have taken the third-year Bachelor's course Ecology (15 credits) or Limnology (15 credits).",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG100",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG106",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG200",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG227",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG205",
+   "text": "60 credits in biology including 1) The Evolution and Diversity of Organisms (15 credits, course completed), Molecular Biology and Genetics (10 credits, course completed) and Ecology and Population Genetics (15 credits, course taken), or 2) Biology A: Patterns and Processes (22.5 credits) or Biology A: Patterns, Processes and Science Education (22.5 credits).",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG100",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG113",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG105",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG207",
+   "text": "60 credits in biology including 1) Molecular Biology and Genetics (10 credits), and Cell Biology (15 credits, course taken, 5 credits completed), or 2) Biology A: Patterns and Processes (22.5 credits) or Biology A: Patterns, Processes and Science Education (22.5 credits), and Cell Biology (15 credits, course taken, 5 credits completed).",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG113",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG120",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG209",
+   "text": "60 credits in biology including Molecular Biology and Genetics 10 credits, Cell Biology 15 credits and Physiology 15 credits. Participation in The Basic Principles of Chemistry 15 credits. Participation in Chemistry of Life – Organic Chemistry and Biochemistry 15 credits or participation in Organic Chemistry I 10 credits and Biochemistry I 5 credits. Of the courses requiring participation, 20 credits must be completed.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG113",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG120",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG103",
+      "type": "HARD"
+     },
+     {
+      "from": "1KB013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB416",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG210",
+   "text": "80 credits in biology equivalent to the basic course in biology within the Bachelor's Programme in Biology/Molecular Biology.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1BG217",
+   "text": "60 credits in biology including 1) The Evolution and Diversity of Organisms (15 credits), Ecology and Population Genetics (15 credits), and in addition, students must have taken Physiology (15 credits) or 2) Biology A: Patterns and Processes (22.5 credits) or Biology A: Patterns, Processes and Science Education (22.5 credits), and in addition, students must have taken Physiology (15 credits).",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG100",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG105",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG103",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG222",
+   "text": "60 credits in biology and 3 credits faunistics or zoology.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG106",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG227",
+   "text": "75 credits in biology, chemistry and/or earth science, of which at least 15 credits in chemistry and 35 credits in biology, including The Evolution and Diversity of Organisms, 15 credits, Ecology and Population Genetics, 15 credits, Life and Interactions of Microorganisms, 5 credits, and 7.5 credits taken in floristics and faunistics.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG100",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG105",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG106",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG114",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG230",
+   "text": "60 credits in biology including Molecular Biology and Genetics 10 credits, or Biology A: Patterns and Processes 22.5 credits or Biology A: Patterns, Processes and Science Education 22.5 credits. Participation in Cell Biology 15 credits, of which 5 credits completed, and Physiology 15 credits. Participation in The Basic Principles of Chemistry 15 credits and Chemistry of Life – Organic Chemistry and Biochemistry 15 credits, of which 20 credits must be completed, or The Basic Principles of Chemistry 15 credits, Organic Chemistry I 10 credits and Biochemistry I 5 credits, of which 20 credits must be completed. The course requires practical laboratory experience in molecular biology.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG113",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG120",
+      "type": "SOFT"
+     },
+     {
+      "from": "1BG103",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB013",
+      "type": "SOFT"
+     },
+     {
+      "from": "1KB416",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG235",
+   "text": "75 credits in biology, chemistry and/or earth science, where of 60 credits in biology, including 1) The Evolution and Diversity of Organisms, 15 credits, or 2) Biology A: Patterns and Processes (22.5 credits), alternatively Biology A: Patterns, Processes and Science Education (22.5 credits).",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG100",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG305",
+   "text": "Completed courses of 120 credits including (1) 60 credits in biology and 30 credits in chemistry or 30 credits in earth science, or (2) 90 credits in biology. In both cases, either of the advanced courses Ecology 15 credits or Limnology 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG200",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG227",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG308",
+   "text": "Completed courses of 120 credits including 60 credits in biology and 30 credits in chemistry. Participated in the advanced course Toxicology 15 credits. English 6. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG209",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG313",
+   "text": "Completed courses of 120 credits including 60 credits in biology and 30 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1BG319",
+   "text": "Completed courses of 120 credits including (1) 60 credits in biology and 30 credits in chemistry or 30 credits in earth science, or (2) 90 credits in biology. In both cases at least 6 credits competed of one of the advanced courses Ecology 15 credits, Limnology 15 credits, or Evolutionary Processes 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG200",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG227",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG324",
+   "text": "Completed courses of 120 credits including (1) 60 credits in biology and 30 credits in chemistry or 30 credits in earth science, or (2) 90 credits in biology, in both cases including either of the advanced courses Ecology 15 credits or Limnology 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG200",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG227",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG425",
+   "text": "60 credits in biology, or 45 credits in biology and 15 credits in chemistry or earth science",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1BG513",
+   "text": "Completed courses of 120 credits including (1) 60 credits in biology and 30 credits in chemistry or 30 credits in earth sciences, or (2) 90 credits in biology, in both cases including either of the advanced courses Ecology 15 credits or Limnology 15 credits, or (3) 90 credits in earth science including Dynamics of Earth Systems - Global Change 10 credits.Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG200",
+      "type": "HARD"
+     },
+     {
+      "from": "1BG227",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG514",
+   "text": "Completed courses of 120 credits including (1) 60 credits in biology and 30 credits in chemistry or 30 credits in earth science, or (2) 90 credits in biology. In both cases participation in either of the advanced courses Ecology 15 credits or Limnology 15 credits, of which at least 6 credits completed. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1BG200",
+      "type": "SOFT"
+     },
+     {
+      "from": "1BG227",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1BG515",
+   "text": "Completed courses of 120 credits including 60 credits in biology/medicine/pharmaceutical sciences and courses worth at least 15 credits in one of the following subjects: bioinformatics, biomedicine, biotechnology, evolution, genetics, genomics or systematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1KB103",
+   "text": "15 credits Chemistry including 5 credits from any of the courses Chemical Principles 10 credits, Basic Chemistry 10 credits, General Chemistry, or The Basic Principles of Chemistry, as well as participation in other Chemistry courses for 15 cr.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB013",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1KB421",
+   "text": "One of the following is required: (1) 60 credits of which at least 40 credits in chemistry including 10 credits in organic chemistry and 5 credits in biochemistry, or (2) 60 credits of which at least 40 credits in biology, together with 10 credits in organic chemistry and 5 credits in biochemistry, or (3) 60 credits within the Upper Secondary School Teacher Education Programme of which at least 30 credits in chemistry including 10 credits in organic chemistry and 5 credits in biochemistry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1KB416",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD433",
+   "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Under tredje året ska studenten läsa antingen 1BG210 Självständigt arbete i biologi 15 hp eller 1BG214 Examensarbete C i biologi 15 hp. Därutöver väljer studenten någon av nedanstående kurser på grundnivå. Studenten kan också välja kurser från avancerad nivå (max 60 hp), förutsatt att förkunskapskraven är uppfyllda och att studenten uppnått 120 hp.Se sist under termin 6 för övriga kurser som antingen går på deltid/sommartid eller där perioden ännu ej är bestämd.",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "CHOOSE_ONE",
+    "courseCodes": [
+     "1BG210",
+     "1BG214"
+    ],
+    "labelEn": "In the third year the student must take either 1BG210 Independent Project in Biology or 1BG214 Degree Project C in Biology (15 hp).",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1BG213 Biodiversitet och ekologi i Yunnan ges i mån av resurser.",
+    "semester": 6,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1BG213"
+    ],
+    "labelEn": "1BG213 Biodiversity and Ecology in Yunnan is offered subject to available resources.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Övriga kurser på deltid/sommartid eller ännu ej bestämd tid.",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Other courses are taken part-time/during summer or at times not yet determined.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "1MB205 ges i mån av resurser och under förutsättning att studentunderlaget är tillräckligt stort.",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1MB205"
+    ],
+    "labelEn": "1MB205 is offered subject to available resources and provided that student enrolment is sufficiently large.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

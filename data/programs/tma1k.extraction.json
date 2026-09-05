@@ -1,0 +1,1123 @@
+{
+ "edges": [
+  {
+   "code": "1DL210",
+   "text": "10 credits in computer programming (Program Design, Programming Techniques II, or the equivalent) and 10 credits in mathematics, including basic algebra. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M).",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA348",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL301",
+   "text": "60 credits of which 15 credits in mathematics or statistics. Participation in basic programming.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL311",
+   "text": "60 credits in mathematics and computer science, including Algebra I, Logic and Proof Techniques I, a second programming course and programming in at least one functional and one imperative language.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA027",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DL330",
+   "text": "120 credits with a second course in computer programming. 15 credits in mathematics, including Basic algebra. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD722",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA348",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1DT034",
+   "text": "120 credits with 30 credits in mathematics and 30 credits in computer science, including basic programming, data structures, and elementary logic. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1DT075",
+   "text": "120 credits including a second course in programming, Algorithms and Data Structures I, Algebra I and linear algebra. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1DL210",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA350",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD722",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA103",
+   "text": "Participation in Geometry and Calculus II/Several Variable Calculus/Several Variable Calculus, Limited Version/Several Variable Calculus M/Calculus in Several Variables. Participation in Linear Algebra II and Mechanics II/Applied Mechanics I/Mechanics/Mechanics KF.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA361",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA104",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA121",
+   "text": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA361",
+      "type": "HARD"
+     },
+     {
+      "from": "1FA104",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA211",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA521",
+   "text": "60 credits including Mechanics II/KF. Participation in Transform Methods/Fourier Analysis, Electromagnetism I/Electromagnetism, Waves and Optics and Mathematical Methods of Physics that can be taken in parallel. Knowledge in special relativity (from e.g. Mechanics III, which can be taken in parallel, or Astrophysics I).",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA211",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA603",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA522",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA121",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA103",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1FA603",
+   "text": "30 credits. Participation in Geometry and Calculus II/Several Variable Calculus M (curve and surface integrals) and Mechanics KF/Mechanics (force, energy, particle in motion) and at least 3 credits from Computer Programming 1.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA361",
+      "type": "SOFT"
+     },
+     {
+      "from": "1FA104",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA007",
+   "text": "60 credits in mathematics. Linear Algebra II. Participation in Basic Ring Theory or participation in Introduction to specialization mathematical physics (can be read in parallel).",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA349",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA011",
+   "text": "60 credits in mathematics or physics, of which 30 credits in mathematics. Linear Algebra II. Several Variable Calculus, Several Variable Calculus M or Geometry and Analysis III.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA361",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA020",
+   "text": "5 credits in mathematics. Participation in Single Variable Calculus or Single Variable Calculus M and in Linear Algebra I or Algebra and Geometry.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA350",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA022",
+   "text": "60 credits in mathematics or physics, including 30 credits in mathematics. Participation in Several Variable Calculus, Several Variable Calculus M or Geometry and Analysis III.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA361",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA024",
+   "text": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA360",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA350",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA032",
+   "text": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA361",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA053",
+   "text": "120 credits including 60 credits in mathematics. Several Variable Calculus, Several Variable Calculus M or Geometry and Analysis III. Linear Algebra II. Participation in Transform Methods or Fourier Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA361",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA211",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA079",
+   "text": "60 credits in mathematics. Several Variable Calculus M. Linear Algebra II. 15 credits mathematics at G2F level.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA361",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA099",
+   "text": "10 credits in mathematics. Participation in Several Variable Calculus, Several Variable Calculus M or Geometry and Analysis III. Participation in Linear Algebra II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA361",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA148",
+   "text": "120 credits including 45 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus or Several Variable Calculus M and in Ordinary Differential Equations I or Transform Methods. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA361",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA032",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA170",
+   "text": "30 credits in mathematics. Participation in Linear Algebra II. Participation in Probability and Statistics or Probability Theory I.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MS034",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA194",
+   "text": "15 credits in mathematics. Participation in Algebra I, Algebra II, Linear Algebra II and Several Variable Calculus M.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA206",
+   "text": "Parcipitation in Basic Algebra.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA348",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA211",
+   "text": "15 credits in mathematics. Participation in Several Variable Calculus, Several Variable Calculus M or Geometry and Analysis III. Participation in Linear Algebra II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA361",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA213",
+   "text": "60 credits in mathematics. Participation in Basic Ring Theory or Set Theory.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA349",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA031",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA255",
+   "text": "120 credits including 90 credits in mathematics. Financial Derivatives. Participation in Probability Theory II or Integration Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS036",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA256",
+   "text": "120 credits including 40 credits in mathematics. One of the courses Scientific Computing KF and Introduction to Scientific Computing. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD342",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA259",
+   "text": "120 credits including 90 credits in mathematics. Participation in Real Analysis. Basic Topology is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA362",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA358",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA331",
+   "text": "120 credits including 90 credits in mathematics. Linear Algebra II. Participation in Real Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA362",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA337",
+   "text": "120 credits including 90 credits Mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA348",
+   "text": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1MA350",
+   "text": "Participation in Basic Course in Mathematics or Basic Algebra.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA348",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA356",
+   "text": "60 credits in science/engineering, of which 50 credits in mathematics, including the following courses: Linear Algebra II and either Several Variable Calculus or Analysis in Several Variables.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA361",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA357",
+   "text": "60 credits in science/engineering, of which at least 45 credits in mathematics, including Linear Algebra II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA358",
+   "text": "60 credits in science/engineering, of which 45 credits in mathematics, including Linear Algebra II and one of the following: Several Variable Calculus, Several Variable Calculus M, Geometry and Analysis III, or Analysis in Several Variables.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA361",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MA362",
+   "text": "25 credits in mathematics. Participation in Linear Algebra II. Participation in one of the courses Calculus in Several Variables, Several Variable Calculus, or Several Variable Calculus M.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA361",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS003",
+   "text": "60 credits in mathematics. Participation in Probability Theory I and Inference Theory I.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS034",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MS035",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS012",
+   "text": "120 credits. Probability Theory I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS034",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS014",
+   "text": "120 credits in science/engineering. Participation in Inference Theory I or Probability and Statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS035",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS034",
+   "text": "10 credits in mathematics. Participation in Several Variable Calculus M, Several Variable Calculus or Several Variable Calculus Limited Version.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA361",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS035",
+   "text": "15 credits in mathematics. Participation in Probability Theory I.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS034",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS036",
+   "text": "60 credits including 20 credits in mathematics. Participation in Probability Theory I or Probability and Statistics. Participation in Several Variable Calculus M, Several Variable Calculus or Several Variable Calculus Limited Version. Participation in Linear Algebra II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS034",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA361",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS037",
+   "text": "60 credits including 20 credits in mathematics. Participation in Probability Theory II and Inference Theory I.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS036",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MS035",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS044",
+   "text": "120 credits. Participation in Applied Statistics or Inference Theory I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS035",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS369",
+   "text": "120 credits including 90 credits in mathematics. Participation in Regression Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS555",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1MS555",
+   "text": "60 credits in mathematics. Participation in Probability Theory I and Inference Theory I.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MS034",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MS035",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT242",
+   "text": "60 credits in science/engineering including Linear Algebra II, Probability and Statistics and Scientific Computing II or Computer Programming I",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT490",
+   "text": "60 credits in science/engineering including Single Variable Calculus, Linear Algebra II and participation in Transform Methods.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA360",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1RT700",
+   "text": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": null
+  },
+  {
+   "code": "1TD056",
+   "text": "120 credits in science/engineering including 30 credits in mathematics, where 5 credits linear algebra and 5 credits several variable calculus must be covered. Participation in Scientific Computing III or Scientific Computing for Partial Differential Equations. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA350",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA361",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD354",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD342",
+   "text": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD352",
+   "text": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in Linear Algebra II/Linear Algebra for Data Analysis/Geometry and Calculus II.",
+   "result": {
+    "edges": [
+     {
+      "from": "1MA350",
+      "type": "HARD"
+     },
+     {
+      "from": "1TD433",
+      "type": "SOFT"
+     },
+     {
+      "from": "1TD342",
+      "type": "SOFT"
+     },
+     {
+      "from": "1RT700",
+      "type": "SOFT"
+     },
+     {
+      "from": "1MA024",
+      "type": "SOFT"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD354",
+   "text": "120 credits in science/engineering. Scientific Computing II or Introduction to Scientific Computing or Scientific Computing, Bridging Course. Several Variable Calculus. Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD342",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA361",
+      "type": "HARD"
+     },
+     {
+      "from": "1MA024",
+      "type": "HARD"
+     }
+    ]
+   }
+  },
+  {
+   "code": "1TD433",
+   "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+   "result": {
+    "edges": []
+   }
+  },
+  {
+   "code": "1TD722",
+   "text": "Computer Programming I",
+   "result": {
+    "edges": [
+     {
+      "from": "1TD433",
+      "type": "HARD"
+     }
+    ]
+   }
+  }
+ ],
+ "rules": [
+  {
+   "note": {
+    "textSv": "Frivillig extrakurs:",
+    "semester": 1,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Voluntary extra course:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Frivillig extrakurs:",
+    "semester": 1,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Optional extra course.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Alternativa kurser:",
+    "semester": 2,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Alternative courses:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Alternativ kurs:",
+    "semester": 2,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Optional alternative course slot.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Alternativ kurs:",
+    "semester": 3,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Heading indicating an alternative course, but no specific courses are listed.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Alternativ kurs:",
+    "semester": 3,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "An alternative (elective) course may be chosen.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Alternativa kurser:",
+    "semester": 4,
+    "period": "Period 3",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Alternative courses.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Alternativa kurser:",
+    "semester": 4,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Alternative courses:"
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1MA031 Mängdlära ges endast jämna år.",
+    "semester": 4,
+    "period": "Period 4",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1MA031"
+    ],
+    "labelEn": "The course 1MA031 Set Theory is offered only in even-numbered years.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Årskurs 3Studenten kan välja bland ovan för terminerna 1-4 angivna kurser och bland nedan uppräknade kurser, förutsatt att förkunskapskraven är uppfyllda. Kurser om maximalt 30 hp ur fakultetens övriga utbud kan också läsas inom programmet. Observera att för kandidatexamen krävs att ett examensarbete om 15 högskolepoäng genomförs.",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "In year 3 students may choose among the courses listed for semesters 1-4 and other listed courses, plus up to 30 credits from the faculty's broader offerings, provided prerequisites are met, and a 15-credit degree project is required for the bachelor's degree.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser inom området matematik:",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses in the field of mathematics:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1MS369 Generaliserade linjära modeller ges endast jämna år.",
+    "semester": 5,
+    "period": "Period 1",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1MS369"
+    ],
+    "labelEn": "The course 1MS369 Generalised Linear Models is offered only in even-numbered years.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kursen 1MS370 Analys av kategoriska data ges endast udda år.",
+    "semester": 5,
+    "period": "Period 2",
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1MS370"
+    ],
+    "labelEn": "The course 1MS370 Analysis of Categorical Data is offered only in odd-numbered years.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser inom området datavetenskap:",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses within the field of computer science.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser inom området fysik:",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "1FA103",
+     "1FA104",
+     "1FA121",
+     "1FA521",
+     "1FA522",
+     "1FA603"
+    ],
+    "labelEn": "Elective courses in the field of physics.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser inom området nationalekonomi:",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "2NE470"
+    ],
+    "labelEn": "Elective courses in the field of economics.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Kurspaket Nationalekonomi A 30 hp",
+    "semester": 5,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [
+     "2NE470"
+    ],
+    "labelEn": "Course package in Economics A totalling 30 credits, which includes Economics A: Principles of Micro- and Macroeconomics.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser inom området matematik:",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses within the field of mathematics.",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser inom området datavetenskap:",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses in the area of computer science:",
+    "cohortBefore": null
+   }
+  },
+  {
+   "note": {
+    "textSv": "Valbara kurser inom området fysik:",
+    "semester": 6,
+    "period": null,
+    "trackId": null
+   },
+   "result": {
+    "type": "NOTE",
+    "courseCodes": [],
+    "labelEn": "Elective courses in the field of physics.",
+    "cohortBefore": null
+   }
+  }
+ ]
+}

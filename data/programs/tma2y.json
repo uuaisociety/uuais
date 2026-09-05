@@ -1,0 +1,409 @@
+{
+  "id": "12fb1388-7c5c-4c8b-9b4f-ac17e43b31d6",
+  "code": "TMA2Y",
+  "revisionId": "12fb1388-7c5c-4c8b-9b4f-ac17e43b31d6",
+  "nameSv": "Civilingenjörsprogrammet i teknisk matematik",
+  "totalCredits": 300.0,
+  "semesters": 10,
+  "registrationNumber": "TEK-NAT 2025/139",
+  "finalisedDate": "25 november 2025",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "1MA355",
+      "titleEn": "Introduction to Engineering Mathematics",
+      "titleSv": "Introduktion till teknisk matematik",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Technology",
+      "mainFieldSv": "Teknik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA360",
+      "titleEn": "Calculus in One Variable",
+      "titleSv": "Analys i en variabel",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 1",
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA348",
+      "titleEn": "Basic Algebra",
+      "titleSv": "Grundläggande algebra",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 1"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics D"
+    },
+    {
+      "code": "1TD433",
+      "titleEn": "Computer Programming I",
+      "titleSv": "Programmeringsteknik I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Computer Science",
+      "mainFieldSv": "Datavetenskap",
+      "depthCode": "G1N",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D"
+    },
+    {
+      "code": "1MA350",
+      "titleEn": "Linear Algebra I",
+      "titleSv": "Linjär algebra I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 1,
+      "periods": [
+        "Period 2"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Participation in Basic Course in Mathematics or Basic Algebra."
+    },
+    {
+      "code": "1FA107",
+      "titleEn": "Engineering Mechanics",
+      "titleSv": "Teknisk mekanik",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Physics",
+      "mainFieldSv": "Fysik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA361",
+      "titleEn": "Calculus in Several Variables",
+      "titleSv": "Analys i flera variabler",
+      "credits": 10.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 10.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3",
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "1MA024",
+      "titleEn": "Linear Algebra II",
+      "titleSv": "Linjär algebra II",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 3"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "code": "1MA032",
+      "titleEn": "Ordinary Differential Equations I",
+      "titleSv": "Ordinära differentialekvationer I",
+      "credits": 5.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 5.0,
+      "compulsory": true,
+      "mainFieldEn": "Mathematics",
+      "mainFieldSv": "Matematik",
+      "depthCode": "G1F",
+      "semester": 2,
+      "periods": [
+        "Period 4"
+      ],
+      "trackId": null,
+      "onlyProgramme": true,
+      "entryRequirements": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course."
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule-0",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 3,
+      "trackId": null,
+      "textSv": "Programmeringsteknik II (1TD722) Sannolikhetsteori I (1MS034)Introduktion till beräkningsvetenskap (1TD342)Inferensteori I (1MS035) Fourieranalys (1MA211)Elektromagnetism I (1FA514)",
+      "labelEn": "Lists the semester 3 courses: Programming Technology II, Probability Theory I, Introduction to Computational Science, Inference Theory I, Fourier Analysis, and Electromagnetism I.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-1",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 4,
+      "trackId": null,
+      "textSv": "Komplex analys, allmän kurs (1MA021) Teknisk termodynamik M Industriell ekonomi (1TE743)Matematisk modellering och problemlösning Beräkningsvetenskap för dataanalys (1TD352) Grupper och diskret matematik",
+      "labelEn": "Note listing semester 4 courses: Complex Analysis (1MA021), Engineering Thermodynamics M, Industrial Economics (1TE743), Mathematical Modelling and Problem Solving, Computational Science for Data Analysis (1TD352), and Groups and Discrete Mathematics.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-2",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 5,
+      "trackId": null,
+      "textSv": "Reglerteknik I (1RT490) Algoritmer och datastrukturer I (1DL210 )Introduktion till stokastiska processer med tillämpningar Optimeringsmetoder (1TD184)Studenten väljer antingen kurspaketet:Grafteori (1MA170)Komplexa nätverk eller Reell analys (1MA362)",
+      "labelEn": null,
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-3",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 6,
+      "trackId": null,
+      "textSv": "Perspektiv på matematik (1MA337) Regressionsanalys (1MS555)Självständigt arbete i teknisk matematik Valbara kurser: Mekanik III (1FA103) Statistisk maskininlärning (1RT700 )Strömningslära (1EL002)Hållfasthetslära (1TE654) Algoritmer och datastrukturer II (1DL231)Högprestandaprogrammering (1TD062) Partiella differentialekvationer, introduktionskurs (1MA053)",
+      "labelEn": "Semester 6 lists mandatory courses and elective options whose codes do not appear in the roster.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-4",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser:Introduktion till dataanalys (1MS041)Stora språkmodeller och sociala konsekvenser av artificiell intelligens (1RT730)Introduktion till dataanalys (1MS041)Topologisk analysValbara kurser: Sannolikhetsteori och martingaler (1MS045)Finansiella derivat (1MA209)Avancerad probabilistisk maskininlärning (1RT705) Analys av kategoriska data (1MS370) Databasteknik I (1DL310)Generaliserade linjära modeller (1MS369)Datorintensiv statistik och tillämpningar (1MS049)Statistisk maskininlärning (1RT700)",
+      "labelEn": "Semester 7 recommends courses such as Introduction to Data Analysis (1MS041) and lists elective options, none of which are in the roster.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-5",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 7,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser:Reglerteknik II (1RT495)Beräkningsvetenskap för PDE (1TD354)Tillämpade finita elementmetoder (1TD056)Tillämpad systemanalys (1RT242)Valbara kurser: Sannolikhetsteori och martingaler (1MS045)Finansiella derivat (1MA209)Partiella differentialekvationer (1MA216)Differentialtopologi (1MA259)Differentialgeometri (1MA011)Signalbehandling (1TE651)Tillämpad matematik (1MA148)Databasteknik I (1DL301)Generaliserade linjära modeller (1MS369)Statistisk maskininlärning (1RT700)Elektromagnetism II (1TE626)",
+      "labelEn": null,
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-6",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 8,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser:Dataanalysens grundvalar (1MS048)Djupinlärning (1RT720)Förstärkningsinlärning (1RT745)Valbara kurser:Data engineering I (1TD169)Robotteknologi (1TE783)Statistisk maskininlärning (1RT700)Markovprocesser (1MS020)Tidsserieanalys (1MS014)Data engineering II (1TD075)Parallell och distribuerad programmering (1TD070)Informationsutvinning I (1DL360)Specialisering i dataanalys (1MS050)",
+      "labelEn": "Foundations of Data Analysis, Deep Learning, and Reinforcement Learning are recommended courses, with a further list of elective courses provided.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-7",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 8,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser: Tillämpade dynamiska system Modellering av komplexa system (1MA256)Valbara kurser: Data engineering I (1TD169)Robotteknologi (1TE783)Mekanik III (1FA103)Kvantfysik (1FA521)Djupinlärning (1RT720)Markovprocesser (1MS012)Liegrupper (1MA333)Säkerhet i reglerteknik (1RT004)Principer för kvantdatorer och kvantprogrammering F (1FA019)Statistisk maskininlärning (1RT700)Tidsserieanalys (1MS014)Funktionalanalys (1MA331)Parallell och distribuerad programmering (1TD070)Informationsutvinning I (1DL360)",
+      "labelEn": "Applied Dynamical Systems / Modelling of Complex Systems (1MA256) is recommended, with the remaining listed courses being elective options.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-8",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 9,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser:Data, etik och rätt (1DL002)Datasäkerhet och integritet (1DT114)Projekt i teknisk matematikValbara kurser: Acceleratorbaserad programmering (1TD054)Informationsutvinning II (1DL460)Kurspaket inom Life Science",
+      "labelEn": "Data ethics and law, data security and integrity, and a project in technical mathematics are recommended, with electives such as accelerator-based programming, information extraction II, or a Life Science course package.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-9",
+      "type": "RECOMMENDED",
+      "courseCodes": [],
+      "semester": 9,
+      "trackId": null,
+      "textSv": "Rekommenderade kurser:Data, etik och rätt (1DL002)Datasäkerhet och integritet (1DT114)Projekt i teknisk matematikValbara kurser: Partiella differentialekvationer (1MA216)Avancerade numeriska metoder (1TD050)Reglerteknik III (1RT496)Analytisk mekanik (1FA163)Informationsutvinning II (1DL460)Kurspaket inom Life Science",
+      "labelEn": "Recommended courses (Data, Ethics and Law; Data Security and Integrity; Project in Technical Mathematics) and elective courses are listed for semester 9.",
+      "cohortBefore": null,
+      "source": "llm"
+    },
+    {
+      "id": "rule-10",
+      "type": "NOTE",
+      "courseCodes": [],
+      "semester": 10,
+      "trackId": null,
+      "textSv": "Examensarbete i teknisk matematik",
+      "labelEn": "Degree project in technical mathematics (thesis).",
+      "cohortBefore": null,
+      "source": "llm"
+    }
+  ],
+  "ruleTexts": [
+    {
+      "textSv": "Programmeringsteknik II (1TD722) Sannolikhetsteori I (1MS034)Introduktion till beräkningsvetenskap (1TD342)Inferensteori I (1MS035) Fourieranalys (1MA211)Elektromagnetism I (1FA514)",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Komplex analys, allmän kurs (1MA021) Teknisk termodynamik M Industriell ekonomi (1TE743)Matematisk modellering och problemlösning Beräkningsvetenskap för dataanalys (1TD352) Grupper och diskret matematik",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Reglerteknik I (1RT490) Algoritmer och datastrukturer I (1DL210 )Introduktion till stokastiska processer med tillämpningar Optimeringsmetoder (1TD184)Studenten väljer antingen kurspaketet:Grafteori (1MA170)Komplexa nätverk eller Reell analys (1MA362)",
+      "semester": 5,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Perspektiv på matematik (1MA337) Regressionsanalys (1MS555)Självständigt arbete i teknisk matematik Valbara kurser: Mekanik III (1FA103) Statistisk maskininlärning (1RT700 )Strömningslära (1EL002)Hållfasthetslära (1TE654) Algoritmer och datastrukturer II (1DL231)Högprestandaprogrammering (1TD062) Partiella differentialekvationer, introduktionskurs (1MA053)",
+      "semester": 6,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade kurser:Introduktion till dataanalys (1MS041)Stora språkmodeller och sociala konsekvenser av artificiell intelligens (1RT730)Introduktion till dataanalys (1MS041)Topologisk analysValbara kurser: Sannolikhetsteori och martingaler (1MS045)Finansiella derivat (1MA209)Avancerad probabilistisk maskininlärning (1RT705) Analys av kategoriska data (1MS370) Databasteknik I (1DL310)Generaliserade linjära modeller (1MS369)Datorintensiv statistik och tillämpningar (1MS049)Statistisk maskininlärning (1RT700)",
+      "semester": 7,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade kurser:Reglerteknik II (1RT495)Beräkningsvetenskap för PDE (1TD354)Tillämpade finita elementmetoder (1TD056)Tillämpad systemanalys (1RT242)Valbara kurser: Sannolikhetsteori och martingaler (1MS045)Finansiella derivat (1MA209)Partiella differentialekvationer (1MA216)Differentialtopologi (1MA259)Differentialgeometri (1MA011)Signalbehandling (1TE651)Tillämpad matematik (1MA148)Databasteknik I (1DL301)Generaliserade linjära modeller (1MS369)Statistisk maskininlärning (1RT700)Elektromagnetism II (1TE626)",
+      "semester": 7,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade kurser:Dataanalysens grundvalar (1MS048)Djupinlärning (1RT720)Förstärkningsinlärning (1RT745)Valbara kurser:Data engineering I (1TD169)Robotteknologi (1TE783)Statistisk maskininlärning (1RT700)Markovprocesser (1MS020)Tidsserieanalys (1MS014)Data engineering II (1TD075)Parallell och distribuerad programmering (1TD070)Informationsutvinning I (1DL360)Specialisering i dataanalys (1MS050)",
+      "semester": 8,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade kurser: Tillämpade dynamiska system Modellering av komplexa system (1MA256)Valbara kurser: Data engineering I (1TD169)Robotteknologi (1TE783)Mekanik III (1FA103)Kvantfysik (1FA521)Djupinlärning (1RT720)Markovprocesser (1MS012)Liegrupper (1MA333)Säkerhet i reglerteknik (1RT004)Principer för kvantdatorer och kvantprogrammering F (1FA019)Statistisk maskininlärning (1RT700)Tidsserieanalys (1MS014)Funktionalanalys (1MA331)Parallell och distribuerad programmering (1TD070)Informationsutvinning I (1DL360)",
+      "semester": 8,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade kurser:Data, etik och rätt (1DL002)Datasäkerhet och integritet (1DT114)Projekt i teknisk matematikValbara kurser: Acceleratorbaserad programmering (1TD054)Informationsutvinning II (1DL460)Kurspaket inom Life Science",
+      "semester": 9,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Rekommenderade kurser:Data, etik och rätt (1DL002)Datasäkerhet och integritet (1DT114)Projekt i teknisk matematikValbara kurser: Partiella differentialekvationer (1MA216)Avancerade numeriska metoder (1TD050)Reglerteknik III (1RT496)Analytisk mekanik (1FA163)Informationsutvinning II (1DL460)Kurspaket inom Life Science",
+      "semester": 9,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Examensarbete i teknisk matematik",
+      "semester": 10,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "ladok",
+  "edges": [
+    {
+      "from": "1MA350",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "from": "1MA360",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    }
+  ],
+  "revisions": [
+    {
+      "id": "12fb1388-7c5c-4c8b-9b4f-ac17e43b31d6",
+      "name": "Giltig från och med höstterminen 2026"
+    }
+  ],
+  "scrapedAt": "2026-09-03T05:46:15.850637+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=12fb1388-7c5c-4c8b-9b4f-ac17e43b31d6",
+  "programmeTitle": "Civilingenjörsprogrammet i teknisk matematik, 300 hp (TMA2Y)",
+  "programmeTitleEn": "Master's Programme in Engineering Mathematics, 300 credits (TMA2Y)",
+  "programmeUri": "/utbildning/program/civilingenjorsprogrammet-teknisk-matematik",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
+  "reviewed": false
+}
