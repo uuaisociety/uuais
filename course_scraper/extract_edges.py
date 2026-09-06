@@ -210,9 +210,9 @@ async def extract(session, semaphore, program, requirements, key, model, usage):
             'edges': edges, 'rules': rules}
 
 
-async def run(plans, requirements, key, model, usage):
+async def run(plans, requirements, key, model, usage, concurrency=CONCURRENCY_LIMIT):
     """One session and one pool for the whole run; written per programme so it stays resumable."""
-    semaphore = asyncio.Semaphore(CONCURRENCY_LIMIT)
+    semaphore = asyncio.Semaphore(concurrency)
     async with aiohttp.ClientSession() as session:
         for position, (slug, program, target) in enumerate(plans, start=1):
             extraction = await extract(session, semaphore, program, requirements, key, model, usage)
@@ -235,6 +235,8 @@ def main():
     parser.add_argument('--only', help='One programme slug, for a trial run')
     parser.add_argument('--force', action='store_true', help='Redo programmes already extracted')
     parser.add_argument('--limit', type=int, help='Stop after N programmes')
+    parser.add_argument('--concurrency', type=int, default=CONCURRENCY_LIMIT,
+                        help=f'In-flight requests; default {CONCURRENCY_LIMIT}.')
     args = parser.parse_args()
 
     key = load_api_key()
@@ -266,7 +268,7 @@ def main():
 
     print(f'{len(plans)} programmes to extract with {args.model}')
     usage = Usage()
-    asyncio.run(run(plans, requirements, key, args.model, usage))
+    asyncio.run(run(plans, requirements, key, args.model, usage, args.concurrency))
     print(f'\n{usage.calls} calls, {usage.prompt:,} prompt tokens, {usage.completion:,} completion tokens')
 
 

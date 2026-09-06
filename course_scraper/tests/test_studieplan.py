@@ -530,3 +530,23 @@ class TestParseSearchHits:
         hits, count = parse_search_hits(html)
         assert hits[0]["code"] == "UFÖ1Y"
         assert count == 1
+
+
+class TestSyllabusFallback:
+    """Over half the catalogue keeps its requirements in a separate syllabus document."""
+
+    def test_reads_the_newest_syllabus_a_course_page_offers(self):
+        from fetch_requirements import parse_syllabus_id
+        page = '"syllabi": [{"id": "51054", "name": "Syllabus valid from Autumn 2025"}, {"id": "40001", "name": "Autumn 2020"}]'
+        assert parse_syllabus_id(page) == '51054'
+
+    def test_a_course_page_with_no_syllabus_list(self):
+        from fetch_requirements import parse_syllabus_id
+        assert parse_syllabus_id('<html>nothing here</html>') is None
+
+    def test_requirements_are_read_the_same_way_from_either_page(self):
+        from fetch_requirements import parse_requirements
+        page = '{"entryRequirements":"\\u003cp>60 credits in science/engineering.\\u003c/p>","onlyProgramme":true}'
+        text, only = parse_requirements(page)
+        assert text == '60 credits in science/engineering.'
+        assert only is True
