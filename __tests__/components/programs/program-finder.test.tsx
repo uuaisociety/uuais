@@ -159,6 +159,34 @@ describe('ProgramFinder search', () => {
   })
 })
 
+describe('ProgramFinder groups', () => {
+  it('folds a category away and brings it back', async () => {
+    render(<ProgramFinder programmes={programmes} />)
+    const toggle = screen.getAllByRole('button', { expanded: true })[0]
+
+    await userEvent.click(toggle)
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+
+    await userEvent.click(toggle)
+    expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  })
+
+  it('reopens a folded category rather than hiding a match inside it', async () => {
+    // A closed group that swallows the results leaves the page looking broken.
+    render(<ProgramFinder programmes={programmes} />)
+    const toggle = screen.getAllByRole('button', { expanded: true })[0]
+    await userEvent.click(toggle)
+    expect(toggle).toHaveAttribute('aria-expanded', 'false')
+
+    await userEvent.type(search(), 'fysik')
+    expect(screen.queryAllByRole('button', { expanded: false })).toHaveLength(0)
+
+    // And it stays folded once the search is over.
+    await userEvent.clear(search())
+    expect(screen.queryAllByRole('button', { expanded: false }).length).toBeGreaterThan(0)
+  })
+})
+
 describe('ProgramFinder rows', () => {
   it('leads with the English name and keeps the Swedish title beneath it', () => {
     render(<ProgramFinder programmes={programmes} />)

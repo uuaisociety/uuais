@@ -154,7 +154,7 @@ export const Header: React.FC = () => {
                   onClick={() => setIsCommunityOpen((v) => !v)}
                   aria-expanded={isCommunityOpen}
                   aria-haspopup="true"
-                  className={`${navLinkClass(communityLinks.some((l) => isActive(l.href)))} inline-flex items-center gap-1 cursor-pointer`}
+                  className={`${navLinkClass(communityLinks.some((l) => isActive(l.href)))} inline-flex items-center gap-1 cursor-pointer transition-colors duration-300`}
                 >
                   Community
                   <ChevronDown className={`h-3 w-3 transition-transform duration-300 ${isCommunityOpen ? 'rotate-180' : ''}`} />
@@ -167,7 +167,7 @@ export const Header: React.FC = () => {
                         href={link.href}
                         onClick={() => setIsCommunityOpen(false)}
                         aria-current={isActive(link.href) ? 'page' : undefined}
-                        className={`block px-3 py-2 rounded-sm text-[0.8125rem] transition-colors ${
+                        className={`block px-3 py-2 rounded-sm text-[0.8125rem] transition-colors duration-300 ${
                           isActive(link.href)
                             ? 'text-current bg-current/[0.12]'
                             : 'text-current/70 hover:text-current hover:bg-current/[0.09]'
@@ -185,7 +185,7 @@ export const Header: React.FC = () => {
                     onClick={() => setIsProjectsOpen((v) => !v)}
                     aria-expanded={isProjectsOpen}
                     aria-haspopup="true"
-                    className={`${navLinkClass(pathname.startsWith('/projects') || pathname.startsWith('/explore'))} inline-flex items-center gap-1 cursor-pointer`}
+                    className={`${navLinkClass(pathname.startsWith('/projects') || pathname.startsWith('/explore'))} inline-flex items-center gap-1 cursor-pointer transition-colors duration-300`}
                   >
                     Projects
                     <ChevronDown className={`h-3 w-3 transition-transform duration-300 ${isProjectsOpen ? 'rotate-180' : ''}`} />
@@ -196,7 +196,7 @@ export const Header: React.FC = () => {
                         <Link
                           key={link.href}
                           href={link.href}
-                          className="block px-3 py-2 rounded-sm text-[0.8125rem] text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors"
+                          className="block px-3 py-2 rounded-sm text-[0.8125rem] text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors duration-300"
                         >
                           {link.label}
                           {link.badge && <BetaBadge />}

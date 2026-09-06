@@ -119,21 +119,21 @@ export default async function ProgramPage({ params }: { params: Promise<Params> 
             sourceUrl={program.sourceUrl}
           />
         ) : (
-        <ProgramExplorer
-          program={{
-            code: program.code,
-            nameSv: program.nameSv,
-            displayName: title.primary,
-            displayNameSv: title.secondary,
-            totalCredits: program.totalCredits,
-            semesters: program.semesters,
-          }}
-          specialisations={getSpecialisations(program)}
-          courses={program.courses}
-          tracks={program.tracks}
-          edges={program.edges}
-          rules={program.rules}
-        />
+          <ProgramExplorer
+            program={{
+              code: program.code,
+              nameSv: program.nameSv,
+              displayName: title.primary,
+              displayNameSv: title.secondary,
+              totalCredits: program.totalCredits,
+              semesters: program.semesters,
+            }}
+            specialisations={getSpecialisations(program)}
+            courses={program.courses}
+            tracks={program.tracks}
+            edges={program.edges}
+            rules={program.rules}
+          />
         )}
       </div>
     </div>

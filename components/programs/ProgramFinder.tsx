@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight, GraduationCap, Search } from "lucide-react";
+import { ArrowRight, ChevronDown, GraduationCap, Search } from "lucide-react";
 import type { ProgramIndexEntry } from "@/lib/programs";
 import {
   foldForSearch,
@@ -26,9 +26,22 @@ const GROUPS: { label: string; match: RegExp }[] = [
 
 type Row = ProgramIndexEntry & { slug: string };
 
+/** "Civilingenjör" and "Master's" both have to become an id the panel can be addressed by. */
+function slugForId(label: string): string {
+  return label
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .toLowerCase()
+    .replace(/^-|-$/g, "");
+}
+
 export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
   const [query, setQuery] = useState("");
   const [faculty, setFaculty] = useState("");
+  /** Groups the reader has folded away. Searching overrides it: a closed group must never
+   *  swallow a match and leave the page looking empty. */
+  const [closed, setClosed] = useState<ReadonlySet<string>>(new Set());
 
   const faculties = useMemo(
     () => [...new Set(programmes.map((p) => p.faculty))].sort((a, b) => a.localeCompare(b, "sv")),
@@ -151,14 +164,44 @@ export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
 
       {/* A hairline-divided list rather than 270 identical boxes: at this length the card
           borders were the loudest thing on the page and the row content the quietest. */}
-      {grouped.map((group) => (
+      {grouped.map((group) => {
+        const open = query.length > 0 || !closed.has(group.label);
+        const panelId = `group-${slugForId(group.label)}`;
+        return (
         <section key={group.label} className="mt-10">
-          <h2 className="flex items-baseline gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-muted-foreground">
-            {group.label}
-            <span className="opacity-60">{group.items.length}</span>
-            <span aria-hidden className="h-px min-w-6 flex-1 bg-border" />
+          <h2>
+            <button
+              type="button"
+              aria-expanded={open}
+              aria-controls={panelId}
+              onClick={() =>
+                setClosed((previous) => {
+                  const next = new Set(previous);
+                  if (next.has(group.label)) next.delete(group.label);
+                  else next.add(group.label);
+                  return next;
+                })
+              }
+              className="flex w-full items-baseline gap-3 rounded-sm py-1 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <ChevronDown
+                aria-hidden
+                className={`h-3 w-3 shrink-0 self-center transition-transform duration-300 ${open ? "" : "-rotate-90"}`}
+              />
+              {group.label}
+              <span className="opacity-60">{group.items.length}</span>
+              <span aria-hidden className="h-px min-w-6 flex-1 self-center bg-border" />
+            </button>
           </h2>
-          <ul className="mt-1 divide-y divide-border border-b border-border">
+          {/* The 0fr/1fr grid animates the real content height, so a group of 11 and a group
+              of 142 both close at the same rate without measuring either. */}
+          <div
+            id={panelId}
+            className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
+              open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+            }`}
+          >
+            <ul className="mt-1 min-h-0 divide-y divide-border border-b border-border">
             {group.items.map((program) => {
               // The site reads in English, so the English name leads and the
               // university's Swedish title sits beneath it.
@@ -218,9 +261,11 @@ export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
                 </li>
               );
             })}
-          </ul>
+            </ul>
+          </div>
         </section>
-      ))}
+        );
+      })}
     </>
   );
 }

@@ -665,3 +665,12 @@
   outline-offset: 2px;
   border-radius: var(--radius-md);
 }
+
+/* Set for the two frames a theme flip takes, and scoped to the map on purpose: the background
+   and header fading is the nice part, while a hundred course cards and every edge redrawing in
+   lockstep is what made the switch stutter. */
+[data-theme-switching] .react-flow *,
+[data-theme-switching] .react-flow *::before,
+[data-theme-switching] .react-flow *::after {
+  transition: none !important;
+}

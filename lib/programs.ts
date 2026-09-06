@@ -115,8 +115,10 @@ export type Program = {
   planFormat: PlanFormat;
   /** Which faculty's catalogue lists the programme. */
   faculty: string;
-  /** Set only when planFormat is 'syllabus': prose that names courses but never their codes. */
-  /** One entry per paragraph of the syllabus, so the page can set them as paragraphs. */
+  /**
+   * Set only when planFormat is 'syllabus': prose that names courses but never their codes,
+   * one entry per paragraph so the page can set them as paragraphs.
+   */
   syllabusLayout?: string[];
   syllabusEntryRequirements?: string | null;
   syllabusCourses?: SyllabusCourse[];

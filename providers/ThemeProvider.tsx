@@ -35,7 +35,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [theme])
 
   const toggleTheme = () => {
+    const root = document.documentElement
+    root.setAttribute('data-theme-switching', '')
     setTheme(prev => prev === 'dark' ? 'light' : 'dark')
+    // Two frames: one for React to swap the class, one for the browser to paint it.
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => root.removeAttribute('data-theme-switching'))
+    )
   }
 
   return (
