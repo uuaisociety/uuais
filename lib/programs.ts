@@ -253,7 +253,9 @@ export function getProgram(code: string): Program | null {
       console.error(`[Programs] Could not read ${entry.file}:`, error);
     }
   }
-  cache.set(key, program);
+  // Only a hit is cached: the public feedback endpoint passes a user-supplied slug in here,
+  // and caching misses would let a stream of junk slugs grow the map without bound.
+  if (program) cache.set(key, program);
   return program;
 }
 

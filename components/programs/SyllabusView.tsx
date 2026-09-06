@@ -25,15 +25,42 @@ export default function SyllabusView({
     else bySemester.set(course.semester, [...(bySemester.get(course.semester) ?? []), course]);
   }
   const semesters = [...bySemester.keys()].sort((a, b) => a - b);
+  // Rows are capped at 48rem below: across the full width the credits drifted most of a
+  // screen away from the course title they belong to.
+  // Twelve programmes publish a plan or syllabus with nothing in it at all. Saying so is the
+  // whole page; the intro below would otherwise point at courses and prose that are not there.
+  const empty = courses.length === 0 && layout.length === 0 && !entryRequirements;
+
+  if (empty) {
+    return (
+      <div className="space-y-5">
+        <p className="max-w-[68ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
+          Uppsala University publishes nothing about this programme&rsquo;s structure that we can
+          show here — no study plan, and a syllabus with no course list in it. Its own page is
+          the only source.
+        </p>
+        <a
+          href={sourceUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-[filter] hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+          Read it at uu.se
+          <ExternalLink aria-hidden className="h-4 w-4" />
+        </a>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-[70rem] space-y-6">
+    <div className="space-y-6">
       <p className="max-w-[68ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
         {planFormat === "syllabus"
-          ? "Uppsala University publishes no course-by-course study plan for this programme, only the programme syllabus below."
+          ? "Uppsala University publishes no course-by-course study plan for this programme, only the syllabus below."
           : "This programme's study plan describes each semester in prose rather than listing its courses."}{" "}
-        The courses it names carry no course codes, so they cannot be linked to their syllabuses
-        or drawn as a map.
+        {courses.length > 0
+          ? "The courses it names carry no course codes, so they cannot be linked to their syllabuses or drawn as a map."
+          : "It names no courses we can list, so there is nothing to draw as a map."}
       </p>
 
       {courses.length > 0 ? (
@@ -52,7 +79,7 @@ export default function SyllabusView({
                 {bySemester.get(semester)!.map((course, index) => (
                   <li
                     key={`${course.title}-${index}`}
-                    className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-2.5"
+                    className="flex max-w-[48rem] flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-2.5"
                   >
                     <span className="text-[0.9375rem] text-foreground">{course.title}</span>
                     {course.credits ? (
@@ -67,13 +94,17 @@ export default function SyllabusView({
           ))}
 
           {unplaced.length > 0 ? (
-            <ul
-              className={`divide-y divide-border border-t border-border ${semesters.length > 0 ? "mt-6" : "mt-4"}`}
-            >
+            <div className={semesters.length > 0 ? "mt-6" : "mt-4"}>
+              {semesters.length > 0 ? (
+                <h3 className="inline-block rounded-sm bg-muted px-1.5 py-0.5 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-muted-foreground">
+                  Semester not stated
+                </h3>
+              ) : null}
+              <ul className="mt-2 divide-y divide-border border-t border-border">
               {unplaced.map((course, index) => (
                 <li
                   key={`${course.title}-${index}`}
-                  className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-2.5"
+                  className="flex max-w-[48rem] flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-2.5"
                 >
                   <span className="text-[0.9375rem] text-foreground">{course.title}</span>
                   {course.credits ? (
@@ -82,8 +113,9 @@ export default function SyllabusView({
                     </span>
                   ) : null}
                 </li>
-              ))}
-            </ul>
+                ))}
+              </ul>
+            </div>
           ) : null}
         </section>
       ) : null}

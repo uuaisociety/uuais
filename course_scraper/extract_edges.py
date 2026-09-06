@@ -25,6 +25,8 @@ import aiohttp
 
 OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions'
 DEFAULT_MODEL = 'z-ai/glm-5.3-flash'
+#: Outside data/, which Next traces wholesale into every serverless bundle that reads a plan.
+DEFAULT_EXTRACTION_DIR = os.path.join(os.path.dirname(__file__) or '.', 'extractions')
 CONCURRENCY_LIMIT = 8
 MAX_ATTEMPTS = 3
 
@@ -144,6 +146,7 @@ async def ask(session, semaphore, key, model, system, prompt, usage):
         'temperature': 0,
     }
     for attempt in range(MAX_ATTEMPTS):
+        payload = None
         async with semaphore:
             try:
                 async with session.post(
@@ -152,13 +155,15 @@ async def ask(session, semaphore, key, model, system, prompt, usage):
                     json=body,
                     timeout=aiohttp.ClientTimeout(total=180),
                 ) as response:
-                    if response.status == 429 or response.status >= 500:
-                        await asyncio.sleep(2 * (attempt + 1))
-                        continue
-                    payload = await response.json()
+                    if response.status != 429 and response.status < 500:
+                        payload = await response.json()
             except Exception:  # noqa: BLE001 - one bad call must not stop the run
-                await asyncio.sleep(2 * (attempt + 1))
-                continue
+                payload = None
+        # Backing off outside the semaphore: held inside it, one rate-limited call put every
+        # other worker to sleep with it and throughput went to zero.
+        if payload is None:
+            await asyncio.sleep(2 * (attempt + 1))
+            continue
         usage.add(payload)
         choices = payload.get('choices') or []
         if not choices:
@@ -169,31 +174,29 @@ async def ask(session, semaphore, key, model, system, prompt, usage):
     return None
 
 
-async def extract(program, requirements, key, model, usage):
+async def extract(session, semaphore, program, requirements, key, model, usage):
     roster = roster_text(program)
     codes = {c['code'] for c in program['courses']}
-    semaphore = asyncio.Semaphore(CONCURRENCY_LIMIT)
     titles = {c['code']: (c.get('titleEn') or c.get('titleSv') or '') for c in program['courses']}
 
-    async with aiohttp.ClientSession() as session:
-        wanted = [
-            (code, (requirements.get(code) or {}).get('entryRequirements'))
-            for code in sorted(codes)
-        ]
-        wanted = [(code, text) for code, text in wanted if text]
+    wanted = [
+        (code, (requirements.get(code) or {}).get('entryRequirements'))
+        for code in sorted(codes)
+    ]
+    wanted = [(code, text) for code, text in wanted if text]
 
-        edge_results = await asyncio.gather(*(
-            ask(session, semaphore, key, model, EDGE_SYSTEM,
-                EDGE_PROMPT.format(code=code, title=titles.get(code, ''), roster=roster, text=text),
-                usage)
-            for code, text in wanted
-        ))
-        notes = program.get('ruleTexts') or []
-        rule_results = await asyncio.gather(*(
-            ask(session, semaphore, key, model, RULE_SYSTEM,
-                RULE_PROMPT.format(roster=roster, text=note.get('textSv') or ''), usage)
-            for note in notes
-        ))
+    edge_results = await asyncio.gather(*(
+        ask(session, semaphore, key, model, EDGE_SYSTEM,
+            EDGE_PROMPT.format(code=code, title=titles.get(code, ''), roster=roster, text=text),
+            usage)
+        for code, text in wanted
+    ))
+    notes = program.get('ruleTexts') or []
+    rule_results = await asyncio.gather(*(
+        ask(session, semaphore, key, model, RULE_SYSTEM,
+            RULE_PROMPT.format(roster=roster, text=note.get('textSv') or ''), usage)
+        for note in notes
+    ))
 
     edges = [
         {'code': code, 'text': text, 'result': result or {'edges': []}}
@@ -207,9 +210,27 @@ async def extract(program, requirements, key, model, usage):
             'edges': edges, 'rules': rules}
 
 
+async def run(plans, requirements, key, model, usage):
+    """One session and one pool for the whole run; written per programme so it stays resumable."""
+    semaphore = asyncio.Semaphore(CONCURRENCY_LIMIT)
+    async with aiohttp.ClientSession() as session:
+        for position, (slug, program, target) in enumerate(plans, start=1):
+            extraction = await extract(session, semaphore, program, requirements, key, model, usage)
+            with open(target, 'w', encoding='utf-8') as handle:
+                json.dump(extraction, handle, ensure_ascii=False, indent=2)
+                handle.write('\n')
+            found = sum(len((e['result'] or {}).get('edges') or []) for e in extraction['edges'])
+            print(f'  [{position}/{len(plans)}] {slug}: {len(extraction["edges"])} requirement '
+                  f'texts -> {found} edges, {len(extraction["rules"])} notes', flush=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description='Extract prerequisite edges and classify notes.')
     parser.add_argument('directory')
+    parser.add_argument(
+        '--extraction-dir',
+        help='Where to write the audit trail; defaults to <directory>-extraction.',
+    )
     parser.add_argument('--model', default=DEFAULT_MODEL)
     parser.add_argument('--only', help='One programme slug, for a trial run')
     parser.add_argument('--force', action='store_true', help='Redo programmes already extracted')
@@ -217,7 +238,11 @@ def main():
     args = parser.parse_args()
 
     key = load_api_key()
-    with open(os.path.join(args.directory, '_requirements.json'), encoding='utf-8') as handle:
+    # Kept out of the plan directory: nothing reads it at runtime, and Next traces whatever
+    # sits next to the plans into every serverless bundle.
+    extraction_dir = args.extraction_dir or DEFAULT_EXTRACTION_DIR
+    os.makedirs(extraction_dir, exist_ok=True)
+    with open(os.path.join(extraction_dir, '_requirements.json'), encoding='utf-8') as handle:
         requirements = json.load(handle)
 
     plans = []
@@ -232,7 +257,7 @@ def main():
             program = json.load(handle)
         if not program.get('courses'):
             continue
-        target = os.path.join(args.directory, f'{slug}.extraction.json')
+        target = os.path.join(extraction_dir, f'{slug}.extraction.json')
         if os.path.exists(target) and not args.force:
             continue
         plans.append((slug, program, target))
@@ -241,15 +266,7 @@ def main():
 
     print(f'{len(plans)} programmes to extract with {args.model}')
     usage = Usage()
-    for position, (slug, program, target) in enumerate(plans, start=1):
-        extraction = asyncio.run(extract(program, requirements, key, args.model, usage))
-        with open(target, 'w', encoding='utf-8') as handle:
-            json.dump(extraction, handle, ensure_ascii=False, indent=2)
-            handle.write('\n')
-        found = sum(len((e['result'] or {}).get('edges') or []) for e in extraction['edges'])
-        print(f'  [{position}/{len(plans)}] {slug}: {len(extraction["edges"])} requirement texts '
-              f'-> {found} edges, {len(extraction["rules"])} notes')
-
+    asyncio.run(run(plans, requirements, key, args.model, usage))
     print(f'\n{usage.calls} calls, {usage.prompt:,} prompt tokens, {usage.completion:,} completion tokens')
 
 

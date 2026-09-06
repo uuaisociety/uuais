@@ -13,10 +13,21 @@ import subprocess
 import sys
 
 
+#: Outside data/, which Next traces wholesale into every serverless bundle that reads a plan.
+DEFAULT_EXTRACTION_DIR = os.path.join(os.path.dirname(__file__) or '.', 'extractions')
+
+
 def main():
     parser = argparse.ArgumentParser(description='Merge all extractions in a directory.')
     parser.add_argument('directory')
+    parser.add_argument(
+        '--extraction-dir',
+        help='Where the audit trail lives; defaults to <directory>-extraction.',
+    )
     args = parser.parse_args()
+    # Kept out of the plan directory so Next does not trace 1.3 MB nothing reads at runtime
+    # into every serverless bundle that touches lib/programs.ts.
+    extraction_dir = args.extraction_dir or DEFAULT_EXTRACTION_DIR
 
     plans = [
         path
@@ -25,9 +36,11 @@ def main():
     ]
 
     merged, skipped = 0, []
-    requirements = os.path.join(args.directory, '_requirements.json')
+    requirements = os.path.join(extraction_dir, '_requirements.json')
     for plan in plans:
-        extraction = plan.replace('.json', '.extraction.json')
+        extraction = os.path.join(
+            extraction_dir, os.path.basename(plan).replace('.json', '.extraction.json')
+        )
         if not os.path.exists(extraction):
             skipped.append(os.path.basename(plan))
             continue

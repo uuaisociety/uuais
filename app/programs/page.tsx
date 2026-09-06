@@ -21,8 +21,9 @@ export default function ProgramsPage() {
           Programmes
         </h1>
         <p className="mt-3 max-w-[62ch] text-muted-foreground">
-          See a whole degree at once — every semester, how the courses depend on each
-          other, and where your specialisation branches off.
+          See a whole degree at once — every semester, how the courses depend on each other,
+          and where your specialisation branches off. Where the university publishes no study
+          plan, you get the programme syllabus it does publish instead.
         </p>
         {/* Caveat and retrieval date are one provenance fact, so they share a block. */}
         <div className="mt-6 max-w-[62ch] rounded-lg border border-border bg-card p-4">

@@ -25,12 +25,15 @@ export default function AccuracyNotice({
   report,
   /** A syllabus page has no arrows, no rules and no map, so it must not promise them. */
   kind = "map",
+  /** Twelve syllabus pages list nothing at all; the sentence below must not point at courses. */
+  hasCourses = true,
 }: {
   validFrom: string | null;
   scrapedAt: string;
   sourceUrl: string;
   reviewed: boolean;
   kind?: "map" | "syllabus";
+  hasCourses?: boolean;
   /** The reporting control, rendered where the caveat is made. */
   report?: React.ReactNode;
 }) {
@@ -42,7 +45,10 @@ export default function AccuracyNotice({
   return (
     // A full amber wash across a 1400px panel read as an error banner, so the one warm accent
     // is the mark beside the heading; two columns keep the caveat at a readable measure.
-    <aside className="rounded-lg border border-border bg-card p-4 sm:p-5 lg:flex lg:items-start lg:gap-8">
+    <aside
+      aria-label="How this page was generated"
+      className="rounded-lg border border-border bg-card p-4 sm:p-5 lg:flex lg:items-start lg:gap-8"
+    >
       <div className="flex gap-3 lg:flex-1">
         <span
           aria-hidden
@@ -62,8 +68,9 @@ export default function AccuracyNotice({
           <p className="mt-2 max-w-[68ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
             {kind === "syllabus" ? (
               <>
-                The course names below are read out of the syllabus&rsquo; own prose, which
-                carries no course codes and may be out of date.{" "}
+                {hasCourses
+                  ? "The course names below are read out of the syllabus’ own prose, which carries no course codes and may be out of date."
+                  : "Everything here is read out of the university’s own pages and may be out of date."}{" "}
                 <span className="font-medium text-foreground">
                   Always confirm against the official pages before choosing or applying for a
                   course.

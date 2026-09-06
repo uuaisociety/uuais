@@ -15,6 +15,7 @@ function row(overrides: Partial<Row> & Pick<Row, 'code' | 'programmeTitle'>): Ro
     courses: 60,
     tracks: 0,
     planFormat: 'legacy',
+    faculty: 'Teknisk-naturvetenskapliga fakulteten',
     validFrom: null,
     validFromYear: 2026,
     slug: overrides.code.toLowerCase(),
@@ -104,11 +105,57 @@ describe('ProgramFinder search', () => {
     render(<ProgramFinder programmes={programmes} />)
     await userEvent.type(search(), 'zzzz-no-such-programme')
 
-    expect(screen.getByText(/no programme matches/i)).toBeInTheDocument()
+    expect(screen.getByText(/no programme in the catalogue matches/i)).toBeInTheDocument()
     await userEvent.click(screen.getByRole('button', { name: /clear search/i }))
 
     expect(screen.getByText('3 of 3 programmes')).toBeInTheDocument()
     expect(search()).toHaveValue('')
+  })
+
+  it('says which faculty came up empty, and offers a way out of it', async () => {
+    // Clearing the search alone left the filter on, so the page stayed empty and the hint
+    // suggested searching for the very term that had just failed.
+    const withLaw = [
+      ...programmes,
+      row({
+        code: 'JJU2Y',
+        programmeTitle: 'Juristprogrammet, 270 hp (JJU2Y)',
+        faculty: 'Juridiska fakulteten',
+        courses: 0,
+        planFormat: 'syllabus',
+      }),
+    ]
+    render(<ProgramFinder programmes={withLaw} />)
+
+    await userEvent.selectOptions(screen.getByRole('combobox'), 'Juridiska fakulteten')
+    expect(screen.getByText('1 of 1 programmes')).toBeInTheDocument()
+
+    await userEvent.type(search(), 'fysik')
+    expect(screen.getByText(/no programme in Juridiska fakulteten matches/i)).toBeInTheDocument()
+
+    // Dropping the filter keeps the query and finds what the filter was hiding.
+    await userEvent.click(screen.getByRole('button', { name: /search all faculties/i }))
+    expect(search()).toHaveValue('fysik')
+    expect(listedCodes()).toEqual(['ttf2y', 'tfy2m'])
+  })
+
+  it('says a programme has no map rather than no courses when it lists some', () => {
+    // The label read off the coded-course count, so pages that do list courses in prose
+    // advertised "no course list" on the row that led to them.
+    render(
+      <ProgramFinder
+        programmes={[
+          row({
+            code: 'JJU2Y',
+            programmeTitle: 'Juristprogrammet, 270 hp (JJU2Y)',
+            courses: 0,
+            planFormat: 'syllabus',
+          }),
+        ]}
+      />
+    )
+    expect(screen.getByText(/syllabus only/i)).toBeInTheDocument()
+    expect(screen.queryByText(/no course list/i)).not.toBeInTheDocument()
   })
 })
 

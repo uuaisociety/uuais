@@ -15,8 +15,12 @@ import {
 const GROUPS: { label: string; match: RegExp }[] = [
   { label: "Civilingenjör", match: /^Civilingenj/ },
   { label: "Högskoleingenjör", match: /^Högskoleingenj/ },
-  { label: "Bachelor's", match: /^Kandidatprogram/ },
-  { label: "Master's", match: /^(Master|Magister)program/ },
+  { label: "Teacher education", match: /^(Ämneslärar|Speciallärar|Grundlärar|Förskollärar)/ },
+  { label: "Specialist nursing", match: /^Specialistsjuksk/ },
+  // Unanchored: "Ekonomie kandidatprogram" and "Politices masterprogram" put the qualifier
+  // first, and an anchored pattern filed them under Other.
+  { label: "Bachelor's", match: /kandidatprogram/i },
+  { label: "Master's", match: /(master|magister)program/i },
   { label: "Foundation year", match: /^Teknisk|^Tekniskt/ },
 ];
 
@@ -114,23 +118,38 @@ export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
       {matches.length === 0 ? (
         <div className="mt-10 rounded-lg border border-dashed border-border px-5 py-10 text-center">
           <p className="text-[0.9375rem] text-foreground">
-            No programme matches &ldquo;{query}&rdquo;.
+            No programme in {faculty ? faculty : "the catalogue"} matches &ldquo;{query}&rdquo;.
           </p>
           <p className="mt-1.5 text-[0.9375rem] text-muted-foreground">
-            Try a programme code such as TTF2Y, or a subject like fysik.
+            {faculty
+              ? "It may be taught by another faculty."
+              : "Try a programme code such as TTF2Y, or a subject like physics."}
           </p>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setQuery("")}
-            className="mt-4 font-mono text-[0.6875rem] uppercase tracking-[0.12em]"
-          >
-            Clear search
-          </Button>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setQuery("")}
+              className="font-mono text-[0.6875rem] uppercase tracking-[0.12em]"
+            >
+              Clear search
+            </Button>
+            {/* Clearing the search alone leaves the filter on, which is why the page stayed empty. */}
+            {faculty ? (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setFaculty("")}
+                className="font-mono text-[0.6875rem] uppercase tracking-[0.12em]"
+              >
+                Search all faculties
+              </Button>
+            ) : null}
+          </div>
         </div>
       ) : null}
 
-      {/* A hairline-divided list rather than 77 identical boxes: at this length the card
+      {/* A hairline-divided list rather than 270 identical boxes: at this length the card
           borders were the loudest thing on the page and the row content the quietest. */}
       {grouped.map((group) => (
         <section key={group.label} className="mt-10">
@@ -148,15 +167,20 @@ export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
                 program.programmeTitleEn
               );
               return (
-                <li key={program.file}>
+                <li
+                  key={program.file}
+                  className="[contain-intrinsic-size:auto_4rem] [content-visibility:auto]"
+                >
                   <Link
                     href={`/programs/${program.slug}`}
+                    // Off by default here: a viewport prefetch per row is 270 payloads.
+                    prefetch={false}
                     className="group flex items-center justify-between gap-4 rounded-sm px-2 py-3.5 transition-colors hover:bg-accent/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <span className="flex min-w-0 items-start gap-3">
                       <GraduationCap className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
                       <span className="min-w-0">
-                        <span className="block truncate text-[0.9375rem] font-medium text-foreground">
+                        <span className="block text-[0.9375rem] font-medium text-foreground line-clamp-2 sm:truncate">
                           {primary}
                         </span>
                         {secondary ? (
@@ -169,7 +193,11 @@ export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
                           <span className="mx-1.5 opacity-40">•</span>
                           {program.totalCredits} hp
                           <span className="mx-1.5 opacity-40">•</span>
-                          {program.courses > 0 ? `${program.courses} courses` : "no course list"}
+                          {program.courses > 0
+                            ? `${program.courses} courses`
+                            : program.planFormat === "syllabus"
+                              ? "syllabus only"
+                              : "no course map"}
                           {program.tracks > 0 ? (
                             <>
                               <span className="mx-1.5 opacity-40">•</span>
