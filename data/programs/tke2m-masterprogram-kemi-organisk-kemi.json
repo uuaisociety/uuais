@@ -197,7 +197,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in chemistry at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [
@@ -210,7 +210,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
-      "labelEn": "Only 30 of the 45 credits for the Degree Project E in Chemistry count in semester 4.",
+      "labelEn": "The degree project in chemistry is 30 of the 45 required credits.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -224,6 +224,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1KB469",
@@ -324,12 +325,13 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.947666+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.428716+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10039",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i kemi – Organisk kemi, 120 hp (TKE2M)",
   "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
   "programmeUri": "/utbildning/program/masterprogram-kemi-organisk-kemi",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

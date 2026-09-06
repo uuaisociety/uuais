@@ -1,0 +1,36 @@
+{
+  "id": "3197",
+  "code": "HES2M",
+  "revisionId": "3197",
+  "nameSv": "Masterprogram i estetik",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2023/63",
+  "finalisedDate": "23 september 2024",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3197",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "2915",
+      "name": "Giltig från och med höstterminen 2023"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.465009+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3197",
+  "validFrom": "Studieplan giltig från och med höstterminen 2025",
+  "validFromYear": 2025,
+  "programmeTitle": "Masterprogram i estetik, 120 hp (HES2M)",
+  "programmeTitleEn": "Master's Programme in Aesthetics, 120 credits (HES2M)",
+  "programmeUri": "/utbildning/program/masterprogram-estetik",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

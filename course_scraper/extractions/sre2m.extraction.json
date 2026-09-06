@@ -1,0 +1,216 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:35:35.873974+00:00",
+  "edges": [
+    {
+      "code": "2EU007",
+      "text": "Enrolment in the Master Programme in Russian and Eurasian Studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2EU008",
+      "text": "Enrolment in the Master's Programme in Russian and Eurasian Studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2EU011",
+      "text": "5 credits from the Master's Programme in Russian and Eurasian Studies",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2EU012",
+      "text": "5 credits from the Master's Programme in Russian and Eurasian Studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2EU013",
+      "text": "Introduction to Method and Knowledge Production in Russian and Eurasian Studies, 5 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "2EU008",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2EU014",
+      "text": "22.5 credits at Master's level within Russian and Eurasian Studies, including 7.5 credits from method courses including Introduction to Method and Knowledge Production in Russian and Eurasian Studies.",
+      "result": {
+        "edges": [
+          {
+            "from": "2EU008",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2EU015",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and with a main field of study within the Social Sciences or Arts.Language requirements: All applicants need to verify Russian language proficiency that corresponds to level B2 (according to the CEFR scale).",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2EU016",
+      "text": "45 credits within the Master's Programme in Russian and Eurasian Studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2EU017",
+      "text": "10 credits from the course Approaches to the Social Sciences.",
+      "result": {
+        "edges": [
+          {
+            "from": "2EU015",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2EU018",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including at least 90 credits in the social sciences or humanities. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2EU020",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including at least 90 credits in the social sciences or humanities. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2EU021",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including at least 90 credits in the social sciences or humanities. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5RY066",
+      "text": "Bachelor in social sciences or language sciences.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5RY067",
+      "text": "Bachelor in social sciences or language sciences.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5RY068",
+      "text": "Russian: An Introductory Course, 15hp.",
+      "result": {
+        "edges": [
+          {
+            "from": "5RY066",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5RY069",
+      "text": "Russian in professional contexts: introduction, 15 credits.",
+      "result": {
+        "edges": [
+          {
+            "from": "5RY067",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 5RY066, 5RY067, 2EU015",
+        "semester": 1,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "5RY066",
+          "5RY067",
+          "2EU015"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "5RY066",
+          "5RY067",
+          "2EU015"
+        ],
+        "labelEn": "One of these courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 5RY068, 5RY069, 2EU017",
+        "semester": 2,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "5RY068",
+          "5RY069",
+          "2EU017"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "5RY068",
+          "5RY069",
+          "2EU017"
+        ],
+        "labelEn": "One of the courses 5RY068, 5RY069, or 2EU017 must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 2EU018, 2EU021, 2EU020, 2EU016",
+        "semester": 3,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "2EU018",
+          "2EU021",
+          "2EU020",
+          "2EU016"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2EU018",
+          "2EU021",
+          "2EU020",
+          "2EU016"
+        ],
+        "labelEn": "One of the courses 2EU018, 2EU021, 2EU020, or 2EU016 must be chosen.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T07:31:18.555094+00:00",
+  "edges": [
+    {
+      "code": "1EL008",
+      "text": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1FA013",
+      "text": "60 credits in science/engineering. Participation Nuclear Power Safety. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology, or as alternative to those two: Reactor Physics with Nuclear Thermohydraulics.",
+      "result": {
+        "edges": [
+          {
+            "from": "1FA426",
+            "type": "SOFT"
+          },
+          {
+            "from": "1FA421",
+            "type": "SOFT"
+          },
+          {
+            "from": "1FA422",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA014",
+      "text": "90 credits in Science/Engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1FA421",
+      "text": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for Engineers. Introduction to Nuclear Engineering. Participation in Introduction to Nuclear Engineering, or studied simultaneously.",
+      "result": {
+        "edges": [
+          {
+            "from": "1FA014",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA422",
+      "text": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers. Participation in Introduction to Nuclear Engineering, or studied simultaneously.",
+      "result": {
+        "edges": [
+          {
+            "from": "1FA014",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA424",
+      "text": "110 credits within a bachelor or master program in mechanical or electrical engineering. Participation in Reactor Physics.",
+      "result": {
+        "edges": [
+          {
+            "from": "1FA421",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA426",
+      "text": "60 credits in science/engineering. Participation in Reactor Physics, Nuclear Thermal Hydraulics and Steam Turbine Technology or Reactor Physics with nuclear thermohydraulics.",
+      "result": {
+        "edges": [
+          {
+            "from": "1FA421",
+            "type": "SOFT"
+          },
+          {
+            "from": "1FA422",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA427",
+      "text": "60 credits in science/engineering. Participation in Nuclear Power Safety. Participation in Reactorphysics, Nuclear thermohydraulics and steam turbine technology, or alternatively to those two: Reactorphysics with nuclear thermohydraulics.",
+      "result": {
+        "edges": [
+          {
+            "from": "1FA426",
+            "type": "SOFT"
+          },
+          {
+            "from": "1FA421",
+            "type": "SOFT"
+          },
+          {
+            "from": "1FA422",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA428",
+      "text": "60 credits in science/engineering. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology.",
+      "result": {
+        "edges": [
+          {
+            "from": "1FA421",
+            "type": "SOFT"
+          },
+          {
+            "from": "1FA422",
+            "type": "SOFT"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "1FA014 kan ersättas i examen av 1FA400, men båda kurserna kan inte samtidigt ingå i examen.1EL008 kan ej ingå i examen tillsammans med 1TE655.",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "MUTUALLY_EXCLUSIVE",
+        "courseCodes": [
+          "1FA014",
+          "1EL008"
+        ],
+        "labelEn": "1FA014 may be replaced by 1FA400 but not both may count toward the degree, and 1EL008 cannot count together with 1TE655.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

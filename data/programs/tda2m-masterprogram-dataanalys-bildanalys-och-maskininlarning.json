@@ -179,7 +179,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 30 credits in mathematics and Computer Programming II or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MD042",
@@ -349,7 +349,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Period 1Projekt i dataanalys, 10 av 15 hp (1DL507)Valbara kurser:Avancerad probabilistisk maskininlärning, 5 hp (1RT705)Stora språkmodeller och sociala konsekvenser av artificiell intelligens, 5 hp (1RT730)Period 2Projekt i dataanalys, 5 av 15 hp (1DL507)Forskningsmetodik för bildanalys och maskininlärning, 5 hp (1MD048)Samtida metoder inom visuell databehandling, 5 hp (1MD049)Valbara kurser:Intelligenta interaktiva system, 5 hp (1MD032)",
-      "labelEn": "Semester 3 consists of the Project in Data Analysis course (1DL507) spread over both periods, with elective courses listed for each period.",
+      "labelEn": "A per-period course schedule listing a data analysis project and elective courses, none of which are on the roster.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -360,7 +360,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Examensarbete E i dataanalys, 30 hp (1DL510)",
-      "labelEn": "The note lists Degree Project E in Data Analysis (1DL510), a course code not present in the roster.",
+      "labelEn": "Degree Project E in Data Science, 30 credits (1DL510), a course not on the roster.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -427,6 +427,7 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1DL002",
@@ -463,12 +464,13 @@
       "name": "Giltig från och med höstterminen 2026"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.894527+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.374385+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=ee5ab186-39c3-4b79-a827-4b2f93496219",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i dataanalys – Bildanalys och maskininlärning, 120 hp (TDA2M)",
   "programmeTitleEn": "Master's Programme in Data Science – Machine Learning and Statistics, 120 credits (TDA2M)",
   "programmeUri": "/utbildning/program/masterprogram-dataanalys-bildanalys-och-maskininlarning",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

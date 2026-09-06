@@ -1,0 +1,35 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:32:04.112049+00:00",
+  "edges": [
+    {
+      "code": "2FE159",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2FE160",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2FE161",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2HK094",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": []
+}

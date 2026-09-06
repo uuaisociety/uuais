@@ -1,0 +1,166 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:35:08.129918+00:00",
+  "edges": [
+    {
+      "code": "2PS098",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS099",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS101",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS103",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS104",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required are 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS105",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS106",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS107",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS109",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS111",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS112",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS113",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required are 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS114",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS115",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS116",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS117",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6. A grade of E or higher on the courses 2PS101 and 2PS103 (or equivalent courses).",
+      "result": {
+        "edges": [
+          {
+            "from": "2PS101",
+            "type": "HARD"
+          },
+          {
+            "from": "2PS103",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2PS118",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required are 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Valbara kurser i psykologi, 15 hp",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Heading for elective psychology courses worth 15 credits.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Möjlighet att välja vetenskaplig praktik (15 hp) samt valbara kurser i psykologi eller inom andra närliggande ämnen (15 hp).Alternativt att välja valbara kurser i psykologi eller närliggande ämnen (30 hp, dvs hela terminen).",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [
+          "2PS112"
+        ],
+        "labelEn": "Students may take the internship (15 hp) plus 15 hp of electives, or alternatively 30 hp of elective courses for the whole semester.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

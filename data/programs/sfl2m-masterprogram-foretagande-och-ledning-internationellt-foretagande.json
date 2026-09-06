@@ -1,0 +1,33 @@
+{
+  "id": "2503",
+  "code": "SFL2M",
+  "revisionId": "2503",
+  "nameSv": "Masterprogram i företagande och ledning",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "SAMFAK 2024/43 Doss: 3.2.1",
+  "finalisedDate": "21 augusti 2024",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Samtliga studenter inom masterprogrammet läser kurser om 120 högskolepoäng (inklusive ett examensarbete om 30 högskolepoäng). Studenten läser kurser inom vald specialisering om 52,5 hp (inklusive examensarbete om 30 hp) samt kurser som läses gemensamt av alla (37,5 hp). Därtill läser studenten en termins valbara kurser om 30 hp. De programgemensamma kurserna är relevanta för progressionen i programmet som helhet, men även för specialiseringarna då delar av innehållet i kurserna är programgemensamt emedan andra delar är inriktade mot de fyra enskilda specialiseringarna.",
+    "Under den första och andra terminen läser studenterna obligatoriska kurser som är gemensamma för alla och kurser som är specifika för respektive vald specialisering. Under termin tre ges studenterna möjlighet till utlandsstudier, en termins praktik eller valbara kurser. Den avslutande, fjärde terminen ägnas åt examensarbete, samt åt seminarier i anslutning till detta.",
+    "Utbildningen följer en bunden studiegång, vilket innebär att kurserna och terminerna ska läsas i en fastställd ordning."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.505696+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2503",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i företagande och ledning – Internationellt företagande, 120 hp (SFL2M)",
+  "programmeTitleEn": "Master's Programme in Business and Management – Organisation, 120 credits (SFL2M)",
+  "programmeUri": "/utbildning/program/masterprogram-foretagande-och-ledning-internationellt-foretagande",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

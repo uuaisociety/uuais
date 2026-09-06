@@ -65,7 +65,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree including 60 credits in computer science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1DL002",
@@ -716,7 +716,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 45 credits in computer science/engineering/information systems including a continuation course in object oriented programming. English 6."
     },
     {
       "code": "1DT024",
@@ -812,7 +812,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 30 credits in mathematics and Computer Programming II or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1RT720",
@@ -869,7 +869,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering including Single Variable Calculus and Linear Algebra II"
     },
     {
       "code": "1DL034",
@@ -1004,7 +1004,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits with Linear Algebra I, Single Variable Calculus, Probability and Statistics and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1DT106",
@@ -1232,7 +1232,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of computer science courses at the advanced level (second cycle). A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1DL710",
@@ -1251,7 +1251,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of computer science courses at the advanced level. A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1DT440",
@@ -1444,7 +1444,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of computer science courses at the advanced level (second cycle). A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1DL710",
@@ -1464,7 +1464,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of computer science courses at the advanced level. A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MD033",
@@ -1604,7 +1604,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kurser väljs fritt bland nedanstående, under förutsättning att behörighetskraven är uppfyllda. Studierådgivning ges så att de valda kurserna tillsammans ska uppfylla examenskraven.",
-      "labelEn": "Courses are freely chosen subject to entry requirements, with study guidance to ensure the degree requirements are met.",
+      "labelEn": "Courses are chosen freely from those listed, provided eligibility requirements are met, with study guidance ensuring the degree requirements are fulfilled.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1615,13 +1615,12 @@
         "1DL340",
         "1DL360",
         "1DL530",
-        "1TD062",
-        "1DL450"
+        "1TD062"
       ],
       "semester": 1,
       "trackId": null,
       "textSv": "1DL010 Artificiell intelligens och 1DL340 Artificiell intelligens kan inte ingå i samma examen.1DL360 Informationsutvinning I och 1DL370 Informationsutvinning kan inte ingå i samma examen.1DL530 Introduktion till parallellprogrammering och 1TD062 Högprestandaprogrammering kan inte ingå i samma examen.1DL450 ges i mån av resurser.",
-      "labelEn": "1DL010, 1DL360, and 1DL530 each cannot be combined with their equivalents in the same degree, and 1DL450 is offered subject to resources.",
+      "labelEn": "Certain course pairs cannot both count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1637,18 +1636,25 @@
       "semester": 1,
       "trackId": null,
       "textSv": "1DT004 Realtidssystem och 1DT063 Realtidssystem I kan ej ingå i samma examen.1DL451 Modellering för kombinatorisk optimering kan inte ingå i samma examen som någon av 1DL441 Kombinatorisk optimering med villkorsprogrammering, 1DL442 Kombinatorisk optimering och villkorsprogrammering, 1DL448 Modellering för kombinatorisk optimering eller 1DL449 Villkorsmodellering för kombinatorisk optimering. 1DL305 Databasteknik I DV kan inte ingå i samma examen som 1DL301 Databasteknik I.",
-      "labelEn": "These courses are mutually exclusive and cannot both count toward the same degree.",
+      "labelEn": "These courses cannot both count toward the same degree: 1DT004 and 1DT063 are mutually exclusive, 1DL451 excludes older optimisation courses, and 1DL305 excludes 1DL301.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-3",
-      "type": "NOTE",
-      "courseCodes": [],
+      "type": "MUTUALLY_EXCLUSIVE",
+      "courseCodes": [
+        "1MD046",
+        "1DT194",
+        "1DT116",
+        "1TD062",
+        "1DL530",
+        "1DL490"
+      ],
       "semester": 2,
       "trackId": null,
       "textSv": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellprogrammering kan inte ingå i samma examen som 1DL550 Lågnivå-parallellprogrammering.1TD062 Högprestandaprogrammering kan inte ingå i samma examen som någon av 1DL560 Programmering av effektiva parallella program, 1DL530 Introduktion till parallellprogrammering och 1TD064 Högprestanda- och parallellberäkningar.1DL490 ges i mån av resurser.",
-      "labelEn": null,
+      "labelEn": "These courses cannot count in the same degree as their older equivalents, and 1DL490 is offered subject to available resources.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1675,7 +1681,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Den som önskar avlägga en magisterexamen väljer Examensarbete D nedan.",
-      "labelEn": "Students who wish to obtain a one-year master's degree (magisterexamen) should choose Degree Project D listed below.",
+      "labelEn": "Students wishing to obtain a master's degree choose Degree Project D below.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1692,7 +1698,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "1DT195 Trådlös kommunikation och inbyggda system, projekt, och 1DT103 Trådlös kommunikation och inbyggda system kan inte ingå i samma examen.1DT114 Datasäkerhet och integritet kan inte ingå i samma examen som 1DT098.1DT076 Data Engineering II kan inte ingå i samma examen som 1DT075 Data Engineering II.1MD043 Människa-robotinteraktion kan inte ingå i samma examen som 1MD044 Människa-robotinteraktion med forskningsprojekt.",
-      "labelEn": "These courses cannot both count toward the same degree with their listed counterpart.",
+      "labelEn": "These courses cannot both count toward the degree together with the courses they exclude.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1701,16 +1707,12 @@
       "type": "CHOOSE_ONE",
       "courseCodes": [
         "1DT540",
-        "1DT550",
-        "1DL465",
-        "1DL705",
-        "1DL710",
-        "1DT059"
+        "1DT550"
       ],
       "semester": 3,
       "trackId": null,
       "textSv": "Termin 3 och 4Den studerande kan under termin 3 välja bland ovan för termin 1 (period 1 och 2), förutsatt att förkunskapskraven är uppfyllda. Det är dessutom möjligt att läsa följande kurser. Den studerande förväntas under termin 3-4 läsa kursen 1DT540 Examensarbete E i datavetenskap, 30 hp alternativt 1DT550 Examensarbete E i datavetenskap, 45 hp. Vid få deltagare eller resursbrist kan följande kurser ställas in eller ges med annan undervisningsform: 1DL465, 1DL705, 1DL710, 1DT059.",
-      "labelEn": "In semesters 3-4 the student takes either 1DT540 or 1DT550 Degree Project E in Computer Science, while 1DL465, 1DL705, 1DL710 and 1DT059 may be cancelled or offered in another teaching form.",
+      "labelEn": "Students are expected to take either 1DT540 (30 hp) or 1DT550 (45 hp) as their degree project during terms 3-4.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1726,7 +1728,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "1DL010 Artificiell Intelligens och 1DL340 Artificiell Intelligens kan inte ingå i samma examen.1RT003 Avancerad probabilistisk maskininlärning och 1RT705 Avancerad probabilistisk maskininlärning kan inte ingå i samma examen.1DL370 Informationsutvinning kan inte ingå i samma examen som 1DL360 Informationsutvinning I, 1DL460 Informationsutvinning II eller 1DL025 Informationsutvinning.1TD054 Acceleratorbaserad programmering kan inte ingå i samma examen som 1TD055 Acceleratorbaserad programmering.",
-      "labelEn": "These courses cannot be combined with their older counterparts (1DL010, 1RT003, 1DL370/1DL460/1DL025, 1TD055) in the same degree.",
+      "labelEn": "Courses with older course codes cannot both count toward the same degree as their current equivalents.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -1788,6 +1790,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1DL451",
@@ -1825,34 +1828,6 @@
       "rationale": "1DL010 Artificiell Intelligens och 1DL340 Artificiell Intelligens kan inte ingå i samma examen.1RT003 Avancerad probabilistisk maskininlärning och 1RT705 Avancerad probabilistisk maskininlärning kan inte ingå i samma examen.1DL370 Informationsutvinning kan inte ingå i samma examen som 1DL360 Informationsutvinning I, 1DL460 Informationsutvinning II eller 1DL025 Informationsutvinning.1TD054 Accelera"
     },
     {
-      "from": "1DL340",
-      "to": "1DL450",
-      "type": "EXCLUSIVE",
-      "source": "llm",
-      "rationale": "1DL010 Artificiell intelligens och 1DL340 Artificiell intelligens kan inte ingå i samma examen.1DL360 Informationsutvinning I och 1DL370 Informationsutvinning kan inte ingå i samma examen.1DL530 Introduktion till parallellprogrammering och 1TD062 Högprestandaprogrammering kan inte ingå i samma examen.1DL450 ges i mån av resurser."
-    },
-    {
-      "from": "1DL360",
-      "to": "1DL450",
-      "type": "EXCLUSIVE",
-      "source": "llm",
-      "rationale": "1DL010 Artificiell intelligens och 1DL340 Artificiell intelligens kan inte ingå i samma examen.1DL360 Informationsutvinning I och 1DL370 Informationsutvinning kan inte ingå i samma examen.1DL530 Introduktion till parallellprogrammering och 1TD062 Högprestandaprogrammering kan inte ingå i samma examen.1DL450 ges i mån av resurser."
-    },
-    {
-      "from": "1DL530",
-      "to": "1DL450",
-      "type": "EXCLUSIVE",
-      "source": "llm",
-      "rationale": "1DL010 Artificiell intelligens och 1DL340 Artificiell intelligens kan inte ingå i samma examen.1DL360 Informationsutvinning I och 1DL370 Informationsutvinning kan inte ingå i samma examen.1DL530 Introduktion till parallellprogrammering och 1TD062 Högprestandaprogrammering kan inte ingå i samma examen.1DL450 ges i mån av resurser."
-    },
-    {
-      "from": "1TD062",
-      "to": "1DL450",
-      "type": "EXCLUSIVE",
-      "source": "llm",
-      "rationale": "1DL010 Artificiell intelligens och 1DL340 Artificiell intelligens kan inte ingå i samma examen.1DL360 Informationsutvinning I och 1DL370 Informationsutvinning kan inte ingå i samma examen.1DL530 Introduktion till parallellprogrammering och 1TD062 Högprestandaprogrammering kan inte ingå i samma examen.1DL450 ges i mån av resurser."
-    },
-    {
       "from": "1DT004",
       "to": "1DL451",
       "type": "EXCLUSIVE",
@@ -1865,13 +1840,6 @@
       "type": "EXCLUSIVE",
       "source": "llm",
       "rationale": "1DT004 Realtidssystem och 1DT063 Realtidssystem I kan ej ingå i samma examen.1DL451 Modellering för kombinatorisk optimering kan inte ingå i samma examen som någon av 1DL441 Kombinatorisk optimering med villkorsprogrammering, 1DL442 Kombinatorisk optimering och villkorsprogrammering, 1DL448 Modellering för kombinatorisk optimering eller 1DL449 Villkorsmodellering för kombinatorisk optimering. 1DL3"
-    },
-    {
-      "from": "1DL034",
-      "to": "1DL465",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits including 20 credits in computer science and 25 credits in mathematics or statistics. A second course in computer programming. Introduction to Data Science, alternatively both Data Mining I and an introductory course in machine learning. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1DL360",
@@ -1888,6 +1856,41 @@
       "rationale": "120 credits including 30 credits in mathematics including an introduction to linear algebra (Linear Algebra and Geometry I or the equivalent) and basic logic (Algebra I, Basic Course in Mathematics, or the equivalent), and 45 credits in computer science. Participation in Algorithms and Data Structures II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1DL530",
+      "to": "1DL490",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
+    },
+    {
+      "from": "1DT116",
+      "to": "1DL490",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
+    },
+    {
+      "from": "1DT194",
+      "to": "1DL490",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
+    },
+    {
+      "from": "1MD046",
+      "to": "1DL490",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
+    },
+    {
+      "from": "1TD062",
+      "to": "1DL490",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
+    },
+    {
       "from": "1DL340",
       "to": "1DL530",
       "type": "EXCLUSIVE",
@@ -1900,6 +1903,27 @@
       "type": "EXCLUSIVE",
       "source": "llm",
       "rationale": "1DL010 Artificiell intelligens och 1DL340 Artificiell intelligens kan inte ingå i samma examen.1DL360 Informationsutvinning I och 1DL370 Informationsutvinning kan inte ingå i samma examen.1DL530 Introduktion till parallellprogrammering och 1TD062 Högprestandaprogrammering kan inte ingå i samma examen.1DL450 ges i mån av resurser."
+    },
+    {
+      "from": "1DT116",
+      "to": "1DL530",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
+    },
+    {
+      "from": "1DT194",
+      "to": "1DL530",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
+    },
+    {
+      "from": "1MD046",
+      "to": "1DL530",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
     },
     {
       "from": "1DL610",
@@ -1938,6 +1962,13 @@
     },
     {
       "from": "1DT004",
+      "to": "1DT059",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Computer architecture, Operating systems, and Real-time systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DT004",
       "to": "1DT063",
       "type": "EXCLUSIVE",
       "source": "llm",
@@ -1956,13 +1987,6 @@
       "type": "EXCLUSIVE",
       "source": "llm",
       "rationale": "1DT195 Trådlös kommunikation och inbyggda system, projekt, och 1DT103 Trådlös kommunikation och inbyggda system kan inte ingå i samma examen.1DT114 Datasäkerhet och integritet kan inte ingå i samma examen som 1DT098.1DT076 Data Engineering II kan inte ingå i samma examen som 1DT075 Data Engineering II.1MD043 Människa-robotinteraktion kan inte ingå i samma examen som 1MD044 Människa-robotinteraktio"
-    },
-    {
-      "from": "1MA330",
-      "to": "1DT075",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits including a second course in programming, Algorithms and Data Structures I, Algebra I and linear algebra. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1DT004",
@@ -1986,32 +2010,25 @@
       "rationale": "1DT195 Trådlös kommunikation och inbyggda system, projekt, och 1DT103 Trådlös kommunikation och inbyggda system kan inte ingå i samma examen.1DT114 Datasäkerhet och integritet kan inte ingå i samma examen som 1DT098.1DT076 Data Engineering II kan inte ingå i samma examen som 1DT075 Data Engineering II.1MD043 Människa-robotinteraktion kan inte ingå i samma examen som 1MD044 Människa-robotinteraktio"
     },
     {
-      "from": "1DL002",
-      "to": "1DT540",
-      "type": "HARD",
+      "from": "1DT194",
+      "to": "1DT116",
+      "type": "EXCLUSIVE",
       "source": "llm",
-      "rationale": "A Bachelor's degree and, in addition, at least 30 credits in computer science at Master's level, including a course in ethics and courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
     },
     {
-      "from": "1MD004",
-      "to": "1DT540",
-      "type": "HARD",
+      "from": "1MD046",
+      "to": "1DT116",
+      "type": "EXCLUSIVE",
       "source": "llm",
-      "rationale": "A Bachelor's degree and, in addition, at least 30 credits in computer science at Master's level, including a course in ethics and courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
     },
     {
-      "from": "1DL002",
-      "to": "1DT550",
-      "type": "HARD",
+      "from": "1MD046",
+      "to": "1DT194",
+      "type": "EXCLUSIVE",
       "source": "llm",
-      "rationale": "A Bachelor's degree and, in addition, at least 30 credits in computer science at Master's level, including a course in ethics and courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
-      "from": "1MD004",
-      "to": "1DT550",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "A Bachelor's degree and, in addition, at least 30 credits in computer science at Master's level, including a course in ethics and courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
     },
     {
       "from": "1DL073",
@@ -2119,6 +2136,13 @@
       "rationale": "1DT195 Trådlös kommunikation och inbyggda system, projekt, och 1DT103 Trådlös kommunikation och inbyggda system kan inte ingå i samma examen.1DT114 Datasäkerhet och integritet kan inte ingå i samma examen som 1DT098.1DT076 Data Engineering II kan inte ingå i samma examen som 1DT075 Data Engineering II.1MD043 Människa-robotinteraktion kan inte ingå i samma examen som 1MD044 Människa-robotinteraktio"
     },
     {
+      "from": "1DL251",
+      "to": "1MD200",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits and (1) 15 credits in human-computer interaction at Master's level, or (2) 30 credits in computer science including Software Engineering and Project Management, or (3) 50 credits in computer science of which 10 credits at Master's level. Interface Programming with a User Perspective and Independent Project in Sociotechnical Systems Engineering - IT Systems. Proficiency in English equiv"
+    },
+    {
       "from": "1DL340",
       "to": "1RT705",
       "type": "EXCLUSIVE",
@@ -2196,16 +2220,30 @@
       "rationale": "1DL010 Artificiell intelligens och 1DL340 Artificiell intelligens kan inte ingå i samma examen.1DL360 Informationsutvinning I och 1DL370 Informationsutvinning kan inte ingå i samma examen.1DL530 Introduktion till parallellprogrammering och 1TD062 Högprestandaprogrammering kan inte ingå i samma examen.1DL450 ges i mån av resurser."
     },
     {
+      "from": "1DT116",
+      "to": "1TD062",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
+    },
+    {
+      "from": "1DT194",
+      "to": "1TD062",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
+    },
+    {
+      "from": "1MD046",
+      "to": "1TD062",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II.1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system.1DT116 Lågnivå-parallellpro"
+    },
+    {
       "from": "1DL305",
       "to": "1TD169",
       "type": "SOFT",
-      "source": "llm",
-      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
-    },
-    {
-      "from": "1MA330",
-      "to": "1TD169",
-      "type": "HARD",
       "source": "llm",
       "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
     },
@@ -2239,12 +2277,13 @@
       "name": "Giltig från och med höstterminen 2011"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.901515+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.381199+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10013",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i datavetenskap, 120 hp (TDV2M)",
   "programmeTitleEn": "Master's Programme in Computer Science, 120 credits (TDV2M)",
   "programmeUri": "/utbildning/program/masterprogram-datavetenskap",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

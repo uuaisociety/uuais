@@ -1,0 +1,284 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:26:32.537337+00:00",
+  "edges": [
+    {
+      "code": "2PS608",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2PS609",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3KR084",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3KR085",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3ME027",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PS058",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PT012",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PT013",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PT023",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PT025",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PT031",
+      "text": "Admission to the course requires a pass in the courses Physiotherapy I (3PT013) and Psychology I (2PS608).",
+      "result": {
+        "edges": [
+          {
+            "from": "3PT013",
+            "type": "HARD"
+          },
+          {
+            "from": "2PS608",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3PT032",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PT041",
+      "text": "Admission to the course requires that all courses of Term 1 and 2 as well as the clinical placement part (VFU) of the course Physiotherapy III have been approved.",
+      "result": {
+        "edges": [
+          {
+            "from": "3PT013",
+            "type": "HARD"
+          },
+          {
+            "from": "2PS608",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT012",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT023",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT025",
+            "type": "HARD"
+          },
+          {
+            "from": "3KR084",
+            "type": "HARD"
+          },
+          {
+            "from": "3KR085",
+            "type": "HARD"
+          },
+          {
+            "from": "3ME027",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT031",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3PT042",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PT043",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PT051",
+      "text": "Access to the course requires that all courses in semester 1 and 2, as well as the course Physiotherapy III (3PT031) are passed.",
+      "result": {
+        "edges": [
+          {
+            "from": "3PT013",
+            "type": "HARD"
+          },
+          {
+            "from": "2PS608",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT012",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT023",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT025",
+            "type": "HARD"
+          },
+          {
+            "from": "3KR084",
+            "type": "HARD"
+          },
+          {
+            "from": "3KR085",
+            "type": "HARD"
+          },
+          {
+            "from": "3ME027",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT031",
+            "type": "HARD"
+          },
+          {
+            "from": "2PS609",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT032",
+            "type": "HARD"
+          },
+          {
+            "from": "3SG069",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3PT052",
+      "text": "Admission to the course requires:* a pass in all courses of semesters 1-2* a pass in the course Physiotherapy III, 3PT031* passed clinical placement in the course Physiotherapy IVa, 3PT041",
+      "result": {
+        "edges": [
+          {
+            "from": "3PT013",
+            "type": "HARD"
+          },
+          {
+            "from": "2PS608",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT012",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT023",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT025",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT031",
+            "type": "HARD"
+          },
+          {
+            "from": "3PT041",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3PT061",
+      "text": "Admission to the course requires completion of the course Scientific methodology III and an assessed project plan.",
+      "result": {
+        "edges": [
+          {
+            "from": "3PT051",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3SG069",
+      "text": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Valbar kurs alternativt valbar VFU, 7,5 hp",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [],
+        "labelEn": "An elective course or, alternatively, an elective clinical placement (VFU) of 7.5 credits may be chosen.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

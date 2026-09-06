@@ -26,7 +26,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Accepted to the mathematical physics specialisation of Master's Programme in Physics"
     },
     {
       "code": "1MA007",
@@ -277,7 +277,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits with Statistical Mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA353",
@@ -355,7 +355,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 90 credits mathematics of 60 credits mathematics and 60 credits physics. Participation in Algebraic Structures or Symmetry and Group Theory in Physics. Participation in Linear Algebra III or Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA335",
@@ -375,7 +375,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 90 credits Mathematics. Differential topology participation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA336",
@@ -395,7 +395,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 90 credits Mathematics. Differential topology participation. Modules and homological algebra participation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA158",
@@ -710,7 +710,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Studenterna får läsa de kurser som de inte hade i sin tidigare utbildning:",
-      "labelEn": "Students may take courses that were not part of their previous education.",
+      "labelEn": "Students may take courses they have not previously studied in their earlier education.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -721,7 +721,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other selectable courses in this period:",
+      "labelEn": "This is a heading introducing other elective courses for the period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -745,7 +745,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Studenterna får läsa de kurser som de inte hade i sin tidigare utbildning:",
-      "labelEn": "Students may take the courses that they did not have in their previous education.",
+      "labelEn": "Students may take courses that they did not have in their previous education.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -756,7 +756,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses available during this period.",
+      "labelEn": "This is a heading introducing other elective courses for the period, with no specific courses named.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -782,7 +782,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kursen 1MA531 ges jämna år.",
-      "labelEn": "Course 1MA531 is offered every other year (in even years).",
+      "labelEn": "The course 1MA531 is offered in even-numbered years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -806,7 +806,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other optional courses during this period.",
+      "labelEn": "This is a heading introducing other elective courses for the period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -820,7 +820,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Kursen 1MA335 ges udda år.Kursen 1MA336 ges jämna år.",
-      "labelEn": "Course 1MA335 is offered in odd-numbered years and course 1MA336 in even-numbered years.",
+      "labelEn": "Course 1MA335 is offered in odd years and course 1MA336 is offered in even years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -833,7 +833,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Kursen 1MA056 ges jämna år.Kursen 1MA158 ges udda år.",
-      "labelEn": "Course 1MA056 is offered in even-numbered years, while course 1MA158 is offered in odd-numbered years.",
+      "labelEn": "Course 1MA056 is offered in even-numbered years (and 1MA158 in odd-numbered years).",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -844,7 +844,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses selectable during this period.",
+      "labelEn": "A heading indicating other elective courses available during this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -857,7 +857,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
-      "labelEn": "Students aiming for a magister degree choose 1FA597.",
+      "labelEn": "1FA597 is chosen by students who intend to take a magister's degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -868,7 +868,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Hela terminen:",
-      "labelEn": "The whole semester:",
+      "labelEn": "This is a heading indicating the following applies to the whole term.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -879,7 +879,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Övriga valbara kurser i termin 3:Se Termin 1",
-      "labelEn": "Other elective courses in semester 3: see Semester 1.",
+      "labelEn": "Other elective courses in semester 3 are the same as listed for semester 1.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -890,7 +890,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Hela terminen:",
-      "labelEn": "The whole semester:",
+      "labelEn": "This is a heading indicating courses spanning the entire semester.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -904,7 +904,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Ett examensarbete i fysik som även uppfyller kraven för ett examensarbete i matematik, kan efter beslut omtillgodoräknande också användas som ett examensarbete i matematik för en masterexamen med huvudområdet matematik.",
-      "labelEn": "A degree project in physics that also meets the requirements for a degree project in mathematics may, upon credit-transfer approval, also count as a mathematics degree project for a master's degree with mathematics as the main field.",
+      "labelEn": "A physics degree project can, upon credit-transfer decision, also count as a mathematics degree project for a master's with main field mathematics.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -915,7 +915,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Övriga valbara kurser i termin 4:Se Termin 2.",
-      "labelEn": "Other elective courses in semester 4: see semester 2.",
+      "labelEn": "Other elective courses in semester 4 are found under the semester 2 list.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -928,7 +928,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Kursen 1MA325 ges udda år.",
-      "labelEn": "The course 1MA325 is offered only in odd-numbered years.",
+      "labelEn": "The course 1MA325 is offered in odd-numbered years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -939,7 +939,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
-      "labelEn": "Other elective courses within the specialisation may be taken in any period.",
+      "labelEn": "Heading introducing other elective courses within the specialisation, allowed in any period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -950,7 +950,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Följande beteckningar används:G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)",
-      "labelEn": "The note defines the abbreviations G2F, A1N, A1F, A1E and A2E used to indicate the level and prerequisites of courses in the study plan.",
+      "labelEn": "Legend explaining the course level abbreviations used in the study plan.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -1084,6 +1084,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1SV037",
@@ -1128,16 +1129,9 @@
       "rationale": "120 credits in mathematics and/or physics. Participation in Mathematical Methods of Physics II or Differential topology. Symmetry and Group theory in Physics or Algebraic Structures. Analytical mechanics. Complex analysis."
     },
     {
-      "from": "1MA531",
-      "to": "1FA028",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits in mathematics and/or physics. Participation in Mathematical Methods of Physics II or Differential topology. Symmetry and Group theory in Physics or Algebraic Structures. Analytical mechanics. Complex analysis."
-    },
-    {
       "from": "1FA155",
       "to": "1FA153",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "120 credits in science/engineering including participation in Mathematical Methods of Physics II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
@@ -1191,11 +1185,39 @@
       "rationale": "120 credits including 90 credits in mathematics or 60 credits in mathematics and 60 credits in physics. Participation in Algebraic Structures or Mathematical Methods of Physics II. Participation in Linear Algebra III or Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1FA353",
+      "to": "1MA056",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 90 credits mathematics of 60 credits mathematics and 60 credits physics. Participation in Algebraic Structures or Symmetry and Group Theory in Physics. Participation in Linear Algebra III or Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA007",
+      "to": "1MA056",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 90 credits mathematics of 60 credits mathematics and 60 credits physics. Participation in Algebraic Structures or Symmetry and Group Theory in Physics. Participation in Linear Algebra III or Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1MA036",
       "to": "1MA325",
       "type": "SOFT",
       "source": "llm",
       "rationale": "120 credits including 90 credits in mathematics. Participation in Modules and Homological Algebra. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA259",
+      "to": "1MA335",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 90 credits Mathematics. Differential topology participation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA259",
+      "to": "1MA336",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 90 credits Mathematics. Differential topology participation. Modules and homological algebra participation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1FA163",
@@ -1222,12 +1244,13 @@
       "name": "Giltig från och med höstterminen 2025"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.917124+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.397603+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10022",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i fysik – Matematisk fysik, 120 hp (TFY2M)",
   "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)",
   "programmeUri": "/utbildning/program/masterprogram-fysik-matematisk-fysik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

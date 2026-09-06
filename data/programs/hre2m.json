@@ -1,0 +1,32 @@
+{
+  "id": "1987",
+  "code": "HRE2M",
+  "revisionId": "1987",
+  "nameSv": "Masterprogram i retorik",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2022/50",
+  "finalisedDate": "30 augusti 2022",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet omfattar två år. I programmet ingår kurser, examensarbeten och möjlighet till praktik. Praktik kan ingå till en omfattning av 7,5 eller 15 högskolepoäng. Studenten har därtill möjlighet att läsa ett antal fria kurser från antingen institutionens eller det övriga universitetets utbud. En obligatorisk kurs i retorikvetenskaplig teori och metod (7,5 högskolepoäng) läses första terminen. För att uppfylla fordringarna för masterexamen måste minst två av de valbara kurserna (sammanlagt 15 högskolepoäng) läsas inom huvudområdet litteraturvetenskap.",
+    "Under första terminen läses den obligatoriska kursen i retorikvetenskaplig teori och metod (7,5 högskolepoäng). Utbildningen planeras under första terminen tillsammans med studierektor för avancerad nivå och omfattar uppsatsskrivande och valbara kurser (inklusive eventuell praktik och/eller utlandsvistelse) och planeringen följs upp i början av termin tre. Första terminen ägnas uteslutande åt kursläsning. Under programmets andra år finns möjlighet finns till praktik och/eller utlandsvistelse."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.472976+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1987",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i retorik, 120 hp (HRE2M)",
+  "programmeTitleEn": "Master's Programme in Rhetoric, 120 credits (HRE2M)",
+  "programmeUri": "/utbildning/program/masterprogram-retorik",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

@@ -1,0 +1,113 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:20:44.250995+00:00",
+  "edges": [
+    {
+      "code": "3AP101",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, or Mathematics 2a or 2b or 2c, Science Studies 2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FB101",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, or Mathematics 2a or 2b or 2c, Science Studies 2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FB102",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, or Mathematics 2a or 2b or 2c, Science Studies 2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FF312",
+      "text": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FK400",
+      "text": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "År 1Det första året omfattar en introduktion till professionen samt grundläggande kurser i cellbiologi och farmaceutisk kemi. Under första året behandlas även organfunktion kopplat till hur läkemedel verkar.",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A descriptive heading summarizing the content of the first year of study.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "År 2Kurserna under det andra året behandlar läkemedelseffekter, hur läkemedel omsätts i kroppen samt olika beredningsformer. Vidare ingår kurser om läkemedelsanvändning på både samhälls- och individnivå.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Year 2 courses cover drug effects, drug metabolism in the body, dosage forms, and drug use at societal and individual levels.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "År 3År 3 fokuserar på receptariens yrkesroll med kurser som behandlar rådgivning kring receptfria läkemedel och lagar och föreskrifter inom hälso- och sjukvård. Vidare ingår en specialiseringsperiod på 5 veckor och ett fördjupningsprojekt på 10 veckor. Programmet avslutas med 10 veckors verksamhetsförlagd utbildning på apotek.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A general description of Year 3, covering courses on over-the-counter advice and healthcare legislation, a 5-week specialization period, a 10-week project, and a final 10-week pharmacy placement.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Specialiseringskurs 7,5 hp",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A specialization course of 7.5 credits.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Fördjupningsprojekt 15 hp",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A heading for the 15-credit advanced project course.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

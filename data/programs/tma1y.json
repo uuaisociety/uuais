@@ -26,7 +26,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D"
     },
     {
       "code": "1TE604",
@@ -46,7 +46,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D"
     },
     {
       "code": "1MA352",
@@ -65,7 +65,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D"
     },
     {
       "code": "1MA353",
@@ -84,7 +84,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Linear Algebra for Engineers."
     },
     {
       "code": "1TE606",
@@ -103,7 +103,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D"
     },
     {
       "code": "1TE607",
@@ -122,7 +122,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Algebra and Vector Geometry and Calculus for Engineers."
     },
     {
       "code": "1MA354",
@@ -141,7 +141,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Linear Algebra for Engineers and Calculus I for Engineers."
     },
     {
       "code": "1TE790",
@@ -160,7 +160,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in course Solid Mechanics"
     },
     {
       "code": "1FA518",
@@ -179,7 +179,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Algebra and Vector Geometry. Participation in one of the courses Calculus for Engineers and Single Variable Calculus, or taken in parallel."
     },
     {
       "code": "1TS362",
@@ -198,7 +198,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Computer Aided Design and Engineering Materials."
     },
     {
       "code": "1TD433",
@@ -312,7 +312,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "5 hp in mathematics. Participation in Calculus II for Engineers."
     },
     {
       "code": "1EL007",
@@ -369,7 +369,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits, including participation in a Solid Mechanics course, with 2 credits passed."
     },
     {
       "code": "1TS348",
@@ -388,7 +388,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "45 credits in Science/Technology."
     },
     {
       "code": "1TS336",
@@ -407,7 +407,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits within Programme of Science in Engineering, including Algebra and Vector Geometry. Participation in Statistics for Engineers."
     },
     {
       "code": "1EL011",
@@ -426,7 +426,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Computer Programming I and participation in Probability and Statistics or Statistics for Engineers."
     },
     {
       "code": "1TD342",
@@ -654,7 +654,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "105 credits within a Bachelor's Programme in Engineering"
     },
     {
       "code": "1FA013",
@@ -673,7 +673,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering. Participation Nuclear Power Safety. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology, or as alternative to those two: Reactor Physics with Nuclear Thermohydraulics."
     },
     {
       "code": "1FA427",
@@ -692,7 +692,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering. Participation in Nuclear Power Safety. Participation in Reactorphysics, Nuclear thermohydraulics and steam turbine technology, or alternatively to those two: Reactorphysics with nuclear thermohydraulics."
     },
     {
       "code": "1MI077",
@@ -711,7 +711,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "90 credits including Computer Aided Design, Machine Elements and Product Design I."
     },
     {
       "code": "1MI088",
@@ -730,7 +730,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Production Management I."
     },
     {
       "code": "1TE662",
@@ -794,7 +794,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "1TE631 Tillverkningsteknik och 1TS362 Tillverkningsteknik I kan inte ingå i examen tillsammans.",
-      "labelEn": "1TS362 cannot count toward the degree together with 1TE631 (Manufacturing Technology), which is not in the current roster.",
+      "labelEn": "1TE631 and 1TS362 cannot both count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -873,7 +873,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Kurser från olika profiler kan krocka schemamässigt under termin 5. Därför rekommenderas att kurser från EN profil läses.Några valbara kurser i årskurs 3 samt tillvalskurserna söks i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval.En av kurserna 1TE687 och 1FA014 är obligatorisk inom examenskravet.Kurserna 1TE686 och 1KB704 är obligatoriska för samtliga profiler termin 5.",
-      "labelEn": "One of 1TE687 Engineering Ethics or 1FA014 Introduction to Nuclear Engineering must be taken to satisfy the degree requirements.",
+      "labelEn": "One of the courses 1TE687 and 1FA014 must be taken to meet the degree requirements.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -936,7 +936,7 @@
     },
     {
       "id": "rule-10",
-      "type": "CHOOSE_ONE",
+      "type": "EITHER_OR",
       "courseCodes": [
         "1MI088",
         "1MI077",
@@ -947,7 +947,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "En av kurserna 1MI088 eller 1MI077, eller båda kurserna 1FA013 och 1FA427, är obligatoriska inom examenskravet.Kursen 1TE780 är obligatorisk för samtliga profiler termin 6.",
-      "labelEn": "One of 1MI088 or 1MI077, or both 1FA013 and 1FA427, is required for the degree, and 1TE780 is required for all specialisations in semester 6.",
+      "labelEn": "Students must take either one of 1MI088 or 1MI077, or both 1FA013 and 1FA427, and 1TE780 is mandatory for all profiles in term 6.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -1060,34 +1060,35 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1TD433",
       "to": "1EL007",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "30 credits from engineering programme. 5 credits first cycle course in programming should have been attended."
     },
     {
-      "from": "1MA352",
-      "to": "1EL008",
+      "from": "1TD433",
+      "to": "1EL011",
       "type": "HARD",
       "source": "llm",
-      "rationale": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry."
+      "rationale": "Computer Programming I and participation in Probability and Statistics or Statistics for Engineers."
     },
     {
-      "from": "1MA353",
-      "to": "1EL008",
-      "type": "HARD",
+      "from": "1FA022",
+      "to": "1FA013",
+      "type": "SOFT",
       "source": "llm",
-      "rationale": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry."
+      "rationale": "60 credits in science/engineering. Participation Nuclear Power Safety. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology, or as alternative to those two: Reactor Physics with Nuclear Thermohydraulics."
     },
     {
-      "from": "1MA354",
-      "to": "1EL008",
-      "type": "HARD",
+      "from": "1FA426",
+      "to": "1FA013",
+      "type": "SOFT",
       "source": "llm",
-      "rationale": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry."
+      "rationale": "60 credits in science/engineering. Participation Nuclear Power Safety. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology, or as alternative to those two: Reactor Physics with Nuclear Thermohydraulics."
     },
     {
       "from": "1MA353",
@@ -1104,6 +1105,41 @@
       "rationale": "90 credits in Science/Engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers."
     },
     {
+      "from": "1MA353",
+      "to": "1FA022",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers. Introduction to Nuclear Engineering. Participation in Introduction to Nuclear Engineering, or studied simultaneously."
+    },
+    {
+      "from": "1MA354",
+      "to": "1FA022",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers. Introduction to Nuclear Engineering. Participation in Introduction to Nuclear Engineering, or studied simultaneously."
+    },
+    {
+      "from": "1FA022",
+      "to": "1FA427",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in Nuclear Power Safety. Participation in Reactorphysics, Nuclear thermohydraulics and steam turbine technology, or alternatively to those two: Reactorphysics with nuclear thermohydraulics."
+    },
+    {
+      "from": "1FA426",
+      "to": "1FA427",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in Nuclear Power Safety. Participation in Reactorphysics, Nuclear thermohydraulics and steam turbine technology, or alternatively to those two: Reactorphysics with nuclear thermohydraulics."
+    },
+    {
+      "from": "1MA353",
+      "to": "1FA518",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Algebra and Vector Geometry. Participation in one of the courses Calculus for Engineers and Single Variable Calculus, or taken in parallel."
+    },
+    {
       "from": "1MA352",
       "to": "1MA017",
       "type": "SOFT",
@@ -1118,11 +1154,60 @@
       "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
     },
     {
-      "from": "1MA354",
-      "to": "1MA017",
+      "from": "1MA352",
+      "to": "1MA354",
       "type": "SOFT",
       "source": "llm",
-      "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+      "rationale": "Participation in Linear Algebra for Engineers and Calculus I for Engineers."
+    },
+    {
+      "from": "1MA353",
+      "to": "1MA354",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Linear Algebra for Engineers and Calculus I for Engineers."
+    },
+    {
+      "from": "1TE604",
+      "to": "1MI077",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "90 credits including Computer Aided Design, Machine Elements and Product Design I."
+    },
+    {
+      "from": "1TE633",
+      "to": "1MI077",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "90 credits including Computer Aided Design, Machine Elements and Product Design I."
+    },
+    {
+      "from": "1TE790",
+      "to": "1MI077",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "90 credits including Computer Aided Design, Machine Elements and Product Design I."
+    },
+    {
+      "from": "1TS348",
+      "to": "1MI088",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Production Management I."
+    },
+    {
+      "from": "1TE607",
+      "to": "1MI170",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "30 credits, including participation in a Solid Mechanics course, with 2 credits passed."
+    },
+    {
+      "from": "1MA354",
+      "to": "1MS008",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "5 hp in mathematics. Participation in Calculus II for Engineers."
     },
     {
       "from": "1MA353",
@@ -1137,6 +1222,20 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1MA352",
+      "to": "1TE607",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Vector Geometry and Calculus for Engineers."
+    },
+    {
+      "from": "1MA353",
+      "to": "1TE607",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Vector Geometry and Calculus for Engineers."
     },
     {
       "from": "1TE604",
@@ -1167,13 +1266,6 @@
       "rationale": "40 credits within an engineering programme. Computer Aided Design/3D CAD. Participation in Engineering Materials, Machine Elements and Manufacturing Methodologies."
     },
     {
-      "from": "1TE605",
-      "to": "1TE743",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes."
-    },
-    {
       "from": "1TS348",
       "to": "1TS312",
       "type": "SOFT",
@@ -1186,6 +1278,20 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "60 credits within any engineering programme. 15 credits in mathematics. Participation in Computer Programming I, whereof 2 credits should be completed."
+    },
+    {
+      "from": "1TE604",
+      "to": "1TS362",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Computer Aided Design and Engineering Materials."
+    },
+    {
+      "from": "1TE606",
+      "to": "1TS362",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Computer Aided Design and Engineering Materials."
     }
   ],
   "revisions": [
@@ -1254,12 +1360,13 @@
       "name": "Giltig från och med höstterminen 2015, version&nbsp;1"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.856696+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.329104+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=73518e38-e69a-4074-b48f-25bf3fb6a4dc",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Högskoleingenjörsprogrammet i maskinteknik, 180 hp (TMA1Y)",
   "programmeTitleEn": "Bachelor's Programme in Mechanical Engineering, 180 credits (TMA1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-maskinteknik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

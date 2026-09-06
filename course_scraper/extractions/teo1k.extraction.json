@@ -1,0 +1,242 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:53:48.405227+00:00",
+  "edges": [
+    {
+      "code": "1GV108",
+      "text": "30 credits in environmental science, biology, earth science, geography, social geography, national economics, sustainable energy transition or business.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV129",
+      "text": "Wind Power Basics, 7.5 credits, or Energy System and Environmental Impact, 7.5 credits, or Wind Power Planning and Permission, 7.5 credits, or Energy Production and Usage, 10 credits.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV166",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV164",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Science Studies level 2, Social Studies level 1b or level 1a2, or Mathematics 3b or 3c/Mathematics C, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV166",
+      "text": "Introduction to Sustainable Energy Transition, as well as Energy and Systems.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV169",
+            "type": "HARD"
+          },
+          {
+            "from": "1GV164",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV169",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Science Studies level 2, Social Studies level 1b or level 1a2, or Mathematics 3b or 3c/Mathematics C, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV172",
+      "text": "15 credits in environmental science, earth science or biology alternatively participation in 15 credits in sustainable energy transition.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV169",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV178",
+      "text": "40 credits sustainable energy transition including Energy and Systems as well as Energy Production and Usage.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV164",
+            "type": "HARD"
+          },
+          {
+            "from": "1GV166",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV179",
+      "text": "30 credits in sustainable energy transition including Energy and Systems as well as Energy Production and Usage. Participation in Innovations for Energy Transition.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV164",
+            "type": "HARD"
+          },
+          {
+            "from": "1GV166",
+            "type": "HARD"
+          },
+          {
+            "from": "1GV178",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV181",
+      "text": "60 credits in sustainable energy transition",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV184",
+      "text": "60 credits in sustainable energy transition",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV187",
+      "text": "60 credits in sustainable energy transition",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV188",
+      "text": "60 credits in sustainable energy transition including Social Change, Leadership and Participation as well as Planning and Environmental Justice (environmental science); or 75 credits in human geography.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV204",
+            "type": "HARD"
+          },
+          {
+            "from": "2KU091",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV190",
+      "text": "90 credits including 60 credits in sustainable energy transition with progressive specialisation including Philosophy of Science and Methodology in an Interdisciplinary Context. Participation in Research Design and Methodology in an Interdisciplinary Context.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV202",
+            "type": "HARD"
+          },
+          {
+            "from": "1GV203",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV202",
+      "text": "Introduction to Sustainable Energy Transition or Sustainable Development, CSR and Life Cycle Analysis.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV169",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV203",
+      "text": "60 credits in sustainable energy transition including Philosophy of Science and Methodology in an Interdisciplinary Context.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV202",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV204",
+      "text": "30 credits in sustainable energy transition including Introduction to Sustainable Energy Transition, 15 credits. Participation in Planning and Environmental Justice, 10 credits.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV169",
+            "type": "HARD"
+          },
+          {
+            "from": "2KU091",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TG292",
+      "text": "Project Management and Leadership. Participation in Social Change, Leadership and Participation.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TG316",
+            "type": "HARD"
+          },
+          {
+            "from": "1GV204",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TG316",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2KU091",
+      "text": "30 credits in sustainable energy transition, environmental science, geography, earth science or human geography",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Valfria kurser 30 hpTillvalskurser (valfria under period 1 och 2):",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Heading for elective courses totalling 30 credits, optional in periods 1 and 2.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

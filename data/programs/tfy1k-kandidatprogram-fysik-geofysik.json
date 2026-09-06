@@ -26,7 +26,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Mathematics Further level 2, or Physics 2, Mathematics 4/Mathematics E"
     },
     {
       "code": "1MA187",
@@ -46,7 +46,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Mathematics Further level 2, or Physics 2, Mathematics 4/Mathematics E"
     },
     {
       "code": "1FA602",
@@ -66,7 +66,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Mathematics Further level 2, or Physics 2, Mathematics 4/Mathematics E"
     },
     {
       "code": "1TD433",
@@ -105,7 +105,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Geometry and Calculus I."
     },
     {
       "code": "1FA602",
@@ -124,7 +124,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Mathematics Further level 2, or Physics 2, Mathematics 4/Mathematics E"
     },
     {
       "code": "1MS029",
@@ -143,7 +143,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Geometry and Analysis I."
     },
     {
       "code": "1TD342",
@@ -181,7 +181,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Mathematics Further level 2, or Physics 2, Mathematics 4/Mathematics E"
     },
     {
       "code": "1MA212",
@@ -335,7 +335,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering. One of these alternatives: 1) One of the courses Mechanics II, Mechanics KF, Applied Mechanics I. Participation in Electromagnetism I or Electromagnetism, these courses can also be taken in parallel. 2) Basics of Electrical Engineering III: Field Theory."
     },
     {
       "code": "1FA517",
@@ -354,7 +354,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Computer Programming I. Geometry and calculus I or Geometry and calculus II. Participation in Geometry and calculus II. Participation in Mechanics KF or Mechanics II."
     },
     {
       "code": "1MA032",
@@ -741,7 +741,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits in mathematics and physics. Admission requires a project plan accepted by the department."
     },
     {
       "code": "1FA034",
@@ -769,7 +769,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "eller",
-      "labelEn": "A fragmentary note reading \"eller\" (\"or\") that specifies no courses or alternatives.",
+      "labelEn": "A bare separator word meaning 'or' between alternatives.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -780,7 +780,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "eller",
-      "labelEn": "\"Or\" — a connective indicating alternatives, with no specific courses named in the note.",
+      "labelEn": "The word 'or' appears as a separator and names no courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -791,7 +791,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "eller",
-      "labelEn": "The note 'eller' means 'or' and only indicates that an alternative follows in the study plan.",
+      "labelEn": "The word 'or', serving as a separator with no course information.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -802,7 +802,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "eller",
-      "labelEn": "The word 'eller' (or) is a standalone fragment indicating an alternative, but it names no specific courses.",
+      "labelEn": "This is a bare word ('or') acting as a separator with no course content.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -813,7 +813,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Övriga kurser:Period 1 och 2",
-      "labelEn": "Other courses: Periods 1 and 2",
+      "labelEn": "Other courses are scheduled in periods 1 and 2.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -824,7 +824,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Period 3",
-      "labelEn": "Scheduled in study period 3.",
+      "labelEn": "A period heading indicating courses scheduled in study period 3.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -835,7 +835,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Period 4",
-      "labelEn": "Placement in teaching period 4 during semester 6.",
+      "labelEn": "Indicates that the following courses are scheduled in study period 4.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -846,7 +846,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Valfri period",
-      "labelEn": "Elective (free choice) period.",
+      "labelEn": "This marks an elective period in the schedule.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -902,6 +902,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1FA602",
@@ -916,6 +917,34 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "Participation in Geometry and Calculus II/Several Variable Calculus/Several Variable Calculus, Limited Version/Several Variable Calculus M/Calculus in Several Variables. Participation in Linear Algebra II and Mechanics II/Applied Mechanics I/Mechanics/Mechanics KF."
+    },
+    {
+      "from": "1FA602",
+      "to": "1FA121",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "from": "1MA024",
+      "to": "1FA121",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "from": "1MA188",
+      "to": "1FA121",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
+    },
+    {
+      "from": "1MA211",
+      "to": "1FA121",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Several Variable Calculus/Geometry and Calculus II/Several Variable Calculus, Limited Version. Mechanics II/KF/Applied Mechanics I or Mechanics. Participation in Linear Algebra II and Transform Methods/Fourier Analysis."
     },
     {
       "from": "1FA103",
@@ -953,6 +982,34 @@
       "rationale": "120 credits in science/engineering with Linear Algebra II. Participation in Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1FA602",
+      "to": "1FA517",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Computer Programming I. Geometry and calculus I or Geometry and calculus II. Participation in Geometry and calculus II. Participation in Mechanics KF or Mechanics II."
+    },
+    {
+      "from": "1MA187",
+      "to": "1FA517",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Computer Programming I. Geometry and calculus I or Geometry and calculus II. Participation in Geometry and calculus II. Participation in Mechanics KF or Mechanics II."
+    },
+    {
+      "from": "1MA188",
+      "to": "1FA517",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Computer Programming I. Geometry and calculus I or Geometry and calculus II. Participation in Geometry and calculus II. Participation in Mechanics KF or Mechanics II."
+    },
+    {
+      "from": "1TD433",
+      "to": "1FA517",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Computer Programming I. Geometry and calculus I or Geometry and calculus II. Participation in Geometry and calculus II. Participation in Mechanics KF or Mechanics II."
+    },
+    {
       "from": "1FA103",
       "to": "1FA521",
       "type": "SOFT",
@@ -979,6 +1036,20 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "60 credits including Mechanics II/KF. Participation in Transform Methods/Fourier Analysis, Electromagnetism I/Electromagnetism, Waves and Optics and Mathematical Methods of Physics that can be taken in parallel. Knowledge in special relativity (from e.g. Mechanics III, which can be taken in parallel, or Astrophysics I)."
+    },
+    {
+      "from": "1FA602",
+      "to": "1FA522",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. One of these alternatives: 1) One of the courses Mechanics II, Mechanics KF, Applied Mechanics I. Participation in Electromagnetism I or Electromagnetism, these courses can also be taken in parallel. 2) Basics of Electrical Engineering III: Field Theory."
+    },
+    {
+      "from": "1FA603",
+      "to": "1FA522",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. One of these alternatives: 1) One of the courses Mechanics II, Mechanics KF, Applied Mechanics I. Participation in Electromagnetism I or Electromagnetism, these courses can also be taken in parallel. 2) Basics of Electrical Engineering III: Field Theory."
     },
     {
       "from": "1FA602",
@@ -1072,6 +1143,20 @@
       "rationale": "60 credits in mathematics or physics, including 30 credits in mathematics. Participation in Several Variable Calculus, Several Variable Calculus M or Geometry and Analysis III."
     },
     {
+      "from": "1MA187",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "from": "1MA188",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
       "from": "1MA024",
       "to": "1MA032",
       "type": "SOFT",
@@ -1086,11 +1171,25 @@
       "rationale": "10 credits in mathematics. Participation in Linear Algebra II and in Several Variable Calculus, Several Variable Calculus, Limited Version, Several Variable Calculus M or Geometry and Analysis III. Several Variable Calculus, Several Variable Calculus, Limited Version or Calculus in Several Variables may also be taken in parallel with this course."
     },
     {
+      "from": "1MA187",
+      "to": "1MA188",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Geometry and Calculus I."
+    },
+    {
       "from": "1MA188",
       "to": "1MA212",
       "type": "SOFT",
       "source": "llm",
       "rationale": "3 credits mathematics. Participation in Geometry and Calculus II."
+    },
+    {
+      "from": "1MA187",
+      "to": "1MS029",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Geometry and Analysis I."
     },
     {
       "from": "1MA187",
@@ -1208,12 +1307,13 @@
       "name": "Giltig från och med höstterminen 2016, version&nbsp;1"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.871235+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.343287+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10061",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Kandidatprogram i fysik – Geofysik, 180 hp (TFY1K)",
   "programmeTitleEn": "Bachelor's Programme in Physics – Physics, 180 credits (TFY1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-fysik-geofysik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

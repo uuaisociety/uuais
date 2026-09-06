@@ -26,7 +26,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics D or participation in Bioscience 30 credits."
     },
     {
       "code": "1TS301",
@@ -46,7 +46,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E"
     },
     {
       "code": "1TS302",
@@ -65,7 +65,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E"
     },
     {
       "code": "1MA350",
@@ -103,7 +103,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E"
     },
     {
       "code": "1TS301",
@@ -122,7 +122,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E"
     },
     {
       "code": "1MA013",
@@ -181,7 +181,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Single Variable Calculus. Participation in either Linear Algebra and Geometry I, Linear Algebra I, or Algebra and Geometry."
     },
     {
       "code": "1MA024",
@@ -372,7 +372,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits within the Master's Programme in Industrial Engineering and Management. Industrial Engineering and Management I: The Functions of the Corporation. Participation in Industrial Engineering and Management II: Organizing, Production and Markets."
     },
     {
       "code": "1TS330",
@@ -811,7 +811,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Option 1: 150 credits, including 90 credits in technology and 15 credits at Master's level in Industrial Engineering and Management. Participation in Marketing for the Industrial Company and Innovation Management.Option 2: 150 credits within Master's Programme in Industrial Engineering and Management, including 5 credits at Master's level in Technology. Industrial Engineering and Management II: Organising, Production and Markets.Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1RT700",
@@ -1050,18 +1050,21 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kurserna Linjär algebra och geometri I, 5 hp (1MA025) och Linjär algebra I, 5 hp (1MA350) kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet.",
-      "labelEn": "Linear Algebra and Geometry I (1MA025) and Linear Algebra I (1MA350) cannot both count toward the degree; one is mandatory.",
+      "labelEn": "One of the linear algebra courses must be taken to meet the degree requirement, and they cannot both count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-1",
-      "type": "NOTE",
-      "courseCodes": [],
+      "type": "COHORT_SUBSTITUTION",
+      "courseCodes": [
+        "1TD342",
+        "1EL007"
+      ],
       "semester": 3,
       "trackId": null,
       "textSv": "Introduktion till beräkningsvetenskap (1TD342) ersätter kursen Beräkningsvetenskap I (1TD393). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet. Virtuell utveckling av automatiserade produktionssystem (1EL007) ersätter kursen Virtuell utveckling av automatiserade produktionssystem (1TS319). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet.",
-      "labelEn": null,
+      "labelEn": "Newer courses replace older versions, and only one of each pair may count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1099,11 +1102,13 @@
     {
       "id": "rule-4",
       "type": "NOTE",
-      "courseCodes": [],
+      "courseCodes": [
+        "1TS363"
+      ],
       "semester": 7,
       "trackId": null,
       "textSv": "I examen ska ingå minst 20 hp från den ena profileringen och minst 10 hp från den andra profileringen. Profileringskurser kan även läsas termin 8 och 9.Kurserna (1TE779) Organisering av kunskapsintensivt arbete och Organisering av teknikintensivt arbete (1TS363) kan inte ingå i examen samtidigt.",
-      "labelEn": null,
+      "labelEn": "1TE779 and 1TS363 cannot both count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1147,7 +1152,7 @@
       "semester": 8,
       "trackId": null,
       "textSv": "Kurserna Modellering och optimering av produktionssystem (1TS360) och Modellering och optimering av logistiska system(1TE776) kan inte ingå i examen samtidigt.",
-      "labelEn": "Courses 1TS360 and 1TE776 cannot both count toward the degree.",
+      "labelEn": "1TS360 and 1TE776 cannot both count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1188,7 +1193,7 @@
       "semester": 9,
       "trackId": null,
       "textSv": "Kursen Etik i teknik och organisering (1TS353) kan ingå både i profileringen mot Affärsutveckling och innovation och profileringen mot Industriell analys och digitalisering.",
-      "labelEn": "Course 1TS353 can count toward both the Business Development and Innovation and the Industrial Analysis and Digitalisation profiles.",
+      "labelEn": "Ethics in Technology and Organising may be included in both the Business Development and Innovation profile and the Industrial Analytics and Digitalisation profile.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -1292,13 +1297,21 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
     {
-      "from": "1DL210",
-      "to": "1DL360",
+      "from": "1DL042",
+      "to": "1DL210",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "10 credits in computer programming (Program Design, Programming Techniques II, or the equivalent) and 10 credits in mathematics, including basic algebra. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M)."
+    },
+    {
+      "from": "1DL042",
+      "to": "1DL301",
       "type": "SOFT",
       "source": "llm",
-      "rationale": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+      "rationale": "60 credits of which 15 credits in mathematics or statistics. Participation in basic programming."
     },
     {
       "from": "1DL301",
@@ -1345,9 +1358,16 @@
     {
       "from": "1DL042",
       "to": "1EL007",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "30 credits from engineering programme. 5 credits first cycle course in programming should have been attended."
+    },
+    {
+      "from": "1MA350",
+      "to": "1FA104",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Single Variable Calculus. Participation in either Linear Algebra and Geometry I, Linear Algebra I, or Algebra and Geometry."
     },
     {
       "from": "1MA010",
@@ -1369,6 +1389,20 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
+    },
+    {
+      "from": "1MA350",
+      "to": "1MA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Alternative 1: 3 credits in mathematics. Participation in Single Variable Calculus, Single Variable Calculus M or Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry. Alternative 2: 3 credits in mathematics. Participation in Geometry and Analysis I and Geometry and Analysis II."
     },
     {
       "from": "1MA013",
@@ -1418,13 +1452,6 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "60 credits in science/engineering including Single Variable Calculus, Linear Algebra II and participation in Transform Methods."
-    },
-    {
-      "from": "1DL042",
-      "to": "1RT700",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1MA013",
@@ -1491,6 +1518,104 @@
     },
     {
       "from": "1DL042",
+      "to": "1TD169",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
+    },
+    {
+      "from": "1DL301",
+      "to": "1TD169",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
+    },
+    {
+      "from": "1MA024",
+      "to": "1TD169",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
+    },
+    {
+      "from": "1MA350",
+      "to": "1TD169",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
+    },
+    {
+      "from": "1MS005",
+      "to": "1TD169",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
+    },
+    {
+      "from": "1DL042",
+      "to": "1TD184",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics of which 5 credits mathematics containing several variable calculus that can be taken in parallel. Computer Programming I. Participation in one of the courses Scientific Computing basic course, Scientific Computing I, Scientific Computing Bridging course or Numerical methods and Simulation. Proficiency in English equivalent to the Swedish upper secon"
+    },
+    {
+      "from": "1MA017",
+      "to": "1TD184",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics of which 5 credits mathematics containing several variable calculus that can be taken in parallel. Computer Programming I. Participation in one of the courses Scientific Computing basic course, Scientific Computing I, Scientific Computing Bridging course or Numerical methods and Simulation. Proficiency in English equivalent to the Swedish upper secon"
+    },
+    {
+      "from": "1TD342",
+      "to": "1TD184",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics of which 5 credits mathematics containing several variable calculus that can be taken in parallel. Computer Programming I. Participation in one of the courses Scientific Computing basic course, Scientific Computing I, Scientific Computing Bridging course or Numerical methods and Simulation. Proficiency in English equivalent to the Swedish upper secon"
+    },
+    {
+      "from": "1MA013",
+      "to": "1TD342",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+    },
+    {
+      "from": "1MA024",
+      "to": "1TD352",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    },
+    {
+      "from": "1MA350",
+      "to": "1TD352",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    },
+    {
+      "from": "1MS005",
+      "to": "1TD352",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    },
+    {
+      "from": "1TD342",
+      "to": "1TD352",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+    },
+    {
+      "from": "1TS318",
+      "to": "1TE051",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Option 1: 150 credits, including 90 credits in technology and 15 credits at Master's level in Industrial Engineering and Management. Participation in Marketing for the Industrial Company and Innovation Management.Option 2: 150 credits within Master's Programme in Industrial Engineering and Management, including 5 credits at Master's level in Technology. Industrial Engineering and Management II: Or"
+    },
+    {
+      "from": "1DL042",
       "to": "1TE717",
       "type": "SOFT",
       "source": "llm",
@@ -1512,6 +1637,13 @@
     },
     {
       "from": "1TS318",
+      "to": "1TE735",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Alternative 1: 130 credits, of which 90 credits in technology, 20 credits in mathematics and 5 credits at Master's level in industrial engineering and management. Participation in Industrial Strategy and Organisation, of which 3 credits must be completed, Innovation Management and Marketing for Industrial Companies. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TS318",
       "to": "1TE763",
       "type": "HARD",
       "source": "llm",
@@ -1520,9 +1652,93 @@
     {
       "from": "1TS301",
       "to": "1TS318",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "Participation in Industrial Engineering and Management I: The Functions of the Corporation, which of 10 credits must be completed."
+    },
+    {
+      "from": "1TS301",
+      "to": "1TS320",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits within the Master's Programme in Industrial Engineering and Management. Industrial Engineering and Management I: The Functions of the Corporation. Participation in Industrial Engineering and Management II: Organizing, Production and Markets."
+    },
+    {
+      "from": "1TS318",
+      "to": "1TS320",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits within the Master's Programme in Industrial Engineering and Management. Industrial Engineering and Management I: The Functions of the Corporation. Participation in Industrial Engineering and Management II: Organizing, Production and Markets."
+    },
+    {
+      "from": "1DL042",
+      "to": "1TS321",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA013",
+      "to": "1TS321",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA350",
+      "to": "1TS321",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MS005",
+      "to": "1TS321",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL042",
+      "to": "1TS325",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Option 1: 120 credits whereof 60 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Option 2: 120 credits whereof 60 credits in science/engineering. Participation in 25 credits in mathematics/statistics/scientific computing, of w"
+    },
+    {
+      "from": "1MA013",
+      "to": "1TS325",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Option 1: 120 credits whereof 60 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Option 2: 120 credits whereof 60 credits in science/engineering. Participation in 25 credits in mathematics/statistics/scientific computing, of w"
+    },
+    {
+      "from": "1MA350",
+      "to": "1TS325",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Option 1: 120 credits whereof 60 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Option 2: 120 credits whereof 60 credits in science/engineering. Participation in 25 credits in mathematics/statistics/scientific computing, of w"
+    },
+    {
+      "from": "1MS005",
+      "to": "1TS325",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Option 1: 120 credits whereof 60 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Option 2: 120 credits whereof 60 credits in science/engineering. Participation in 25 credits in mathematics/statistics/scientific computing, of w"
+    },
+    {
+      "from": "1TS301",
+      "to": "1TS328",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Option 1: 120 credits, including 90 credits in science/engineering. Participation in the course Industrial Project Management I. Option 2: 120 credits, including 90 credits in science/engineering. Industrial Engineering and Management I: The Functions of the Corporation, Industrial Management III: Project in Business and Technology Development. Participation in Strategic Management in Technology-I"
+    },
+    {
+      "from": "1TS320",
+      "to": "1TS328",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Option 1: 120 credits, including 90 credits in science/engineering. Participation in the course Industrial Project Management I. Option 2: 120 credits, including 90 credits in science/engineering. Industrial Engineering and Management I: The Functions of the Corporation, Industrial Management III: Project in Business and Technology Development. Participation in Strategic Management in Technology-I"
     },
     {
       "from": "1TS318",
@@ -1583,12 +1799,13 @@
       "name": "Giltig från och med höstterminen 2020"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.812934+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.288283+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=aec2f35d-04f4-4a33-9a54-44d67d940e26",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Civilingenjörsprogrammet i industriell ekonomi, 300 hp (TIE2Y)",
   "programmeTitleEn": "Master's Programme in Industrial Engineering and Management, 300 credits (TIE2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-industriell-ekonomi",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

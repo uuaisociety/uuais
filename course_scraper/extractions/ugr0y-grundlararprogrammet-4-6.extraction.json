@@ -1,0 +1,121 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T08:10:26.638321+00:00",
+  "edges": [
+    {
+      "code": "1BG049",
+      "text": "7.5 credits Leadership in Primary School, and 7.5 credits School Placement in Primary School.",
+      "result": {
+        "edges": [
+          {
+            "from": "4PE197",
+            "type": "HARD"
+          },
+          {
+            "from": "4PE199",
+            "type": "HARD"
+          },
+          {
+            "from": "4PE214",
+            "type": "HARD"
+          },
+          {
+            "from": "4PE261",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "4PE010",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE013",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE182",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE218",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5EN209",
+      "text": "15 credits, including Swedish 1, from the Primary School Teacher Education Programme, Grades 4-6 of the Compulsory School.",
+      "result": {
+        "edges": [
+          {
+            "from": "4PE013",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "15 hp av kursen Engelska 30 hp läses termin 2",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "5EN209"
+        ],
+        "labelEn": "15 credits of the 30-credit English course are taken in semester 2.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Fortsättning på kursen Engelska 30 hp (15 hp läses termin 3)",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "5EN209"
+        ],
+        "labelEn": "The English course continues over 30 credits, with 15 credits taken in semester 3.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Termin 7 består av studier i ett fördjupningsområde inom samhällsorienterade ämnen eller naturorienterande ämnen och teknik. Valbarheten varierar mellan höst- och vårtermin, där minst ett av alternativen ges varje termin för studenter i Uppsala. Endast ett av alternativen erbjuds för studenter på Campus Gotland. Ytterligare fördjupningsområde kan komma att erbjudas för studenter i Uppsala. Fördjupningsområde om 30 hp är obligatoriskt.",
+        "semester": 7,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2KU119",
+          "1BG049"
+        ],
+        "labelEn": "Term 7 requires a mandatory 30-credit specialization in either social studies or science and technology.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

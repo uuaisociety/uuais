@@ -62,7 +62,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MP034",
@@ -138,7 +138,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "130 credits, which of 90 credits in science/engineering, including 10 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1GE073",
@@ -307,7 +307,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and at least 30 credits in sustainable development at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [
@@ -318,7 +318,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Universiteit Gent och TU Bergakademie Freiberg Period Universitet Kursnamn Hp Nivå/Djup Område 1 Gent Introduction to the circular economy, economics and management of natural resources 4 A1N HU 1 Freiberg Problems and innovations in the process chain of mineral resources 4 A1N HU 2 Gent Sustainable systems engineering 5 A1N HU 2 Gent Sustainable development and multicriteria decision-making 3 A1N HU 2 Gent Rational Use of Materials 5 A1N HU 2 Gent Resource recovery and recycling technologies 5 A1N HU",
-      "labelEn": "Semester 1 is spent at Universiteit Gent and TU Bergakademie Freiberg taking introductory courses on circular economy, mineral resources, sustainable systems, and resource recovery.",
+      "labelEn": "A listing of courses taken at the partner universities Ghent and TU Bergakademie Freiberg, none of which match the programme roster.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -329,7 +329,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Uppsala universitet",
-      "labelEn": "Semester 2 is studied at Uppsala University.",
+      "labelEn": "This is a bare heading referring to Uppsala University and carries no requirement.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -346,7 +346,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Studenterna läser 1MP032 och väljer en av 1HY042, 1MP034 eller 1MP018, eller 1MP001 i period 4.",
-      "labelEn": "Students take 1MP032 and choose one of 1HY042, 1MP034, 1MP018, or 1MP001 in period 4.",
+      "labelEn": "Students take 1MP032 and must choose one of 1HY042, 1MP034, 1MP018 or 1MP001 in period 4.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -370,7 +370,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Sommartermin (TU Bergakademie Freiberg) Period Universitet Kursnamn Hp Nivå/Djup Område Sommar Freiberg Resurskemi 9 A1N HU",
-      "labelEn": "Summer-term course Resource Chemistry (9 hp, A1N) is taken at TU Bergakademie Freiberg.",
+      "labelEn": "Summer term entry listing the external course Resource Chemistry at TU Bergakademie Freiberg, 9 credits.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -381,20 +381,18 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Alla studenter läser gemensamt kursblock om 15 hp vid TU Bergakademie Freiberg, samt väljer fördjupningsspår under år 2:Gemensamt kursblock (TU Bergakademie Freiberg)* Period Universitet Kursnamn Hp Nivå/Djup Område 1/2 Freiberg SINReM Praktik 10 A1N HU 1-4 (year course) Freiberg Financial and sustainability reporting, financial planning and business valuation 5 A1N HU Kursen Financial and sustainability reporting, financial planning and business valuation ges på distans.",
-      "labelEn": "All students take a common 15-credit course block at TU Bergakademie Freiberg: a 10-credit SINReM internship (year-long, periods 1-2) plus the distance-taught course Financial and Sustainability Reporting, Financial Planning and Business Valuation (5 credits).",
+      "labelEn": "All students take a common 15-credit course block at TU Bergakademie Freiberg and choose a specialization track in year 2.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-6",
       "type": "NOTE",
-      "courseCodes": [
-        "1GV193"
-      ],
+      "courseCodes": [],
       "semester": 4,
       "trackId": null,
       "textSv": "Universitet Gent, TU Bergakademie Freiberg och Uppsala universitetStudenterna gör examensarbetet på samma lärosäte som fördjupningsspåret. Period Universitet Kursnamn Hp Nivå/Djup Område 3&4 Gent Master's dissertation (I002199) 30 A2E HU 3&4 Freiberg Master thesis in sustainable and innovative natural resource management 30 A2E HU",
-      "labelEn": "The degree project (30 hp, A2E) is taken at the same university as the student's specialisation track, with equivalent thesis courses at Ghent, Freiberg, and Uppsala.",
+      "labelEn": "Students complete their degree project at the same partner university as their specialization track, with the Ghent and Freiberg thesis courses listed.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -444,6 +442,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1TE769",
@@ -495,12 +494,13 @@
       "name": "Giltig från och med höstterminen 2020"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.932853+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.413651+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10048",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i hållbar och innovativ hantering av naturresurser – SINReM, 120 hp (THH2M)",
   "programmeTitleEn": "Master's Programme in Sustainable and Innovative Natural Resource Management – SINReM, 120 credits (THH2M)",
   "programmeUri": "/utbildning/program/masterprogram-hallbar-och-innovativ-hantering-av-naturresurser-sinrem",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

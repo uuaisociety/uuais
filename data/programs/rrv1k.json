@@ -1,0 +1,131 @@
+{
+  "id": "2624",
+  "code": "RRV1K",
+  "revisionId": "2624",
+  "nameSv": "Religionsvetarprogrammet",
+  "totalCredits": 180.0,
+  "semesters": 0,
+  "registrationNumber": null,
+  "finalisedDate": "28 januari 2025",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Den första terminen ger en grundläggande introduktion till religionsvetenskap och teologi som bas att stå på inför kommande terminer.",
+    "Termin 2-4 studeras religion utifrån religionshistoriska, religionsfilosofiska, beteendevetenskapliga, etiska, kyrkohistoriska och systemstiskt teologiska perspektiv.",
+    "Under termin 5 finns möjlighet att göra arbetsförlagd praktik, studera utomlands eller läsa valbara kurser.",
+    "Den sista terminen ägnas åt teori, metod och fördjupning samt författande av kandidatuppsats.",
+    "Termin 1",
+    "Introduktionskurs i religionsvetenskap, 30 hp",
+    "Termin 2",
+    "Religioner i världen I, 15 hp",
+    "Filosofi, livsåskådning och teologi, 7,5 hp",
+    "Religion, individ och samhälle, 7,5 hp",
+    "Termin 3",
+    "Religioner i världen II, 15 hp",
+    "Moderna kristna strömningar, 7,5 hp",
+    "Etik, livsåskådning och religion, 7,5 hp",
+    "Termin 4",
+    "Filosofiska perspektiv på religion, pluralism och politik, 7,5 hp",
+    "Religion i mediesamhället, 7,5 hp",
+    "Religion i fred och konflikt, 7,5 hp",
+    "Historiska perspektiv på religioner och samhällen, 7,5 hp",
+    "Termin 5",
+    "Praktik, 15 hp/30 hp eller",
+    "Utbytesstudier, 30 hp eller",
+    "Valbara kurser, 15 hp/30 hp",
+    "Termin 6",
+    "Fördjupningskurs i religionsvetenskap, 30 hp"
+  ],
+  "syllabusEntryRequirements": "Grundläggande behörighet",
+  "syllabusCourses": [
+    {
+      "title": "Introduktionskurs i religionsvetenskap",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Religioner i världen I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Filosofi, livsåskådning och teologi",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Religion, individ och samhälle",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Religioner i världen II",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Moderna kristna strömningar",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Etik, livsåskådning och religion",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Filosofiska perspektiv på religion, pluralism och politik",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Religion i mediesamhället",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Religion i fred och konflikt",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Historiska perspektiv på religioner och samhällen",
+      "credits": 7.5,
+      "semester": null
+    },
+    {
+      "title": "Praktik, / eller",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Utbytesstudier,  eller",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Valbara kurser, /",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningskurs i religionsvetenskap",
+      "credits": 30.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.585606+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2624",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Religionsvetarprogrammet, 180 hp (RRV1K)",
+  "programmeTitleEn": "Bachelor's Programme in Religious Studies, 180 credits (RRV1K)",
+  "programmeUri": "/utbildning/program/religionsvetarprogrammet",
+  "faculty": "Teologiska fakulteten",
+  "reviewed": false
+}

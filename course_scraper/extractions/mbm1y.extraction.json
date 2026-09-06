@@ -1,0 +1,180 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:24:32.123028+00:00",
+  "edges": [
+    {
+      "code": "3BL106",
+      "text": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 1b or level 1c, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 3b or 3c/Mathematics C",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3KK014",
+      "text": "At least 40 passed credits in subjects equivalent to year 1 in the program, and at most 1 practical test and 2 examinations left. For admission to the course as a separate course, an older biomedical science education or equivalent skills is/are required.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3KK015",
+      "text": "1: 40 passed credits in subjects equivalent year 1 in the programme and at most 2 examinations left from year 1. Completed clinical courses from semester 3 and 4.2: For admission to the course as a separate course, an older biomedical laboratory science education or equivalent skills is/are required, as well as a completed clinical programme course.Furthermore, passed practical tests are required for or 1 and 2.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3KK016",
+      "text": "1) At least 90 passed credit points in subjects equivalent to year 1 and 2 in the programme and completed clinical courses from semester 3 and 4, completed clinical practice for Practical Tuition I, as well as at most 2 examinations left of which no more than 1 from year 1.2) For admission to the course as a separate course, an older biomedical laboratory science education or equivalent skills is/are required, as well as a completed clinical programme course.Furthermore, passed practical tests are required for 1 and 2.",
+      "result": {
+        "edges": [
+          {
+            "from": "3KK015",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3KK019",
+      "text": "1) Passed courses equivalent to at least 90 credits corresponding to year 1 and 2 in the programme are required and maximum of two examinations left of which no more than one from year 1, as well as having completed the course Practical Tuition II. All practical examinations must be passed. 2) For admission to the course as a separate course, an older biomedical laboratory science education or equivalent skills, is/are required .",
+      "result": {
+        "edges": [
+          {
+            "from": "3KK016",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3MC322",
+      "text": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 1b or level 1c, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 3b or 3c/Mathematics C",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MC323",
+      "text": "1) Passed courses equivalent to at least 90 credits corresponding to year 1 and 2 in the programme are required and a maximum of two examinations left of which no more than one from year 1. 2) For admission to the course as a separate course, an older biomedical science education or equivalent skills is/are required.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MC324",
+      "text": "1) For admission, passed courses equivalent to at least 120 credits corresponding to year 1, 2 and 3 of the programme, are required. The courses Practical tuitition I and II must be passed. 2) For admission to the course as a separate course, an older biomedical science education or equivalent skills is / are required.",
+      "result": {
+        "edges": [
+          {
+            "from": "3KK015",
+            "type": "HARD"
+          },
+          {
+            "from": "3KK016",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3ME053",
+      "text": "At least 40 passed credits in subjects equivalent to school year 1 in the programme. At admission to a single subject course, older biomedical science education or equivalent skills are required.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3ME055",
+      "text": "At least 40 passed credits in subjects equivalent year 1 in the program, and at most 1 practical test and 2 examinations left. For admission to the course as a separate course, an older biomedical science education or equivalent skills is/are required.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3ME056",
+      "text": "1) 90 passed credits in subjects equivalent to year 1 and 2 in the program, and at most 2 examinations left of which no more than 1 from year 1.2) For admission to the course as a separate course, an older biomedical science education or equivalent skills is/are required.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MG042",
+      "text": "Entry to academic year 2 requires at least 40 credits completed in subjects equivalent to the first year of the programme, with non-completed course components amounting to a maximum of 1 practical test and 2 examinations. For admission to the course as a freestanding course, older biomedical laboratory science studies or equivalent skills are required.Responsible department: The Department of Immunology, Genetics and Pathology",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MG051",
+      "text": "1) Passed courses equivalent to at least 90 credits corresponding to year 1 and 2 in the programme are required and a maximum of two examinations left of which no more than one from year 1. 2) For admission to the course as a separate course, an older biomedical science education or equivalent skills is/are required.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3OG039",
+      "text": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 1b or level 1c, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 3b or 3c/Mathematics C",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PA020",
+      "text": "Entry to academic year 2 requires at least 40 credits completed in subjects equivalent to the first year of the programme, with non-completed course components amounting to a maximum of 1 practical test and 2 examinations. For admission to the course as a freestanding course, older biomedical laboratory science studies or equivalent skills are required.Responsible department: Department of Immunology, Genetics and Pathology.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Kursen 3BL106 Biokemi med molekylärbiologi fortsätter termin 2.",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3BL106"
+        ],
+        "labelEn": "The course Biochemistry and Molecular Biology continues in term 2.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Kursen 3KK014 Klinisk kemi med hematologi, toxikologi och farmakologi påbörjas termin 3.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3KK014"
+        ],
+        "labelEn": "The course 3KK014 begins in term 3.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Kursen 3KK015 Verksamhetsförlagd utbildning I fortsätter termin 5.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3KK015"
+        ],
+        "labelEn": "Practical Tuition I continues into semester 5.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

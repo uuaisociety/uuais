@@ -27,7 +27,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering of which at least 90 credits in Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TS327",
@@ -65,7 +65,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering, including Linear Algebra and Multivariable Calculus."
     },
     {
       "code": "1TE305",
@@ -84,7 +84,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering including basic courses in electronics, e.g. Electronics I or Electromagnetism II with Electric Circuits, Electrical Engineering II: Electric Circuit Theory."
     },
     {
       "code": "1TE765",
@@ -142,7 +142,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering including electric circuit theory. 30 credits in mathematics including linear algebra and multivariable calculus."
     },
     {
       "code": "1TS328",
@@ -315,7 +315,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "40 credits in science/engineering including Linear Algebra and Geometry, Thermodynamics, a basic course in Mechanics as well as Mechanics II/Electrical Power Transmission Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TE692",
@@ -353,7 +353,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. Power Electronics or Power Electronics I. Participation in High Voltage Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TE840",
@@ -372,7 +372,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 15 credits at advanced level in renewable electricity production including 5 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity Production, Solar Energy - Technologies and Systems, Generator Design; and 5 credits of the courses Analysis of Power Distribution Grids, Grid Connection of Variable Energy Sources, Analysis of Electric Power Systems, Power Electronics I, Power Electronics II in the Major fields of study Renewable Energy Production at Master's level. Thematic Studies in Renewable Electricity Production (can be taken in paralell). Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TE678",
@@ -470,7 +470,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering including 10 credits in electrical engineering. A project plan approved by the department is required for admission. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1KB274",
@@ -565,7 +565,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering including 10 credits in electrical engineering. A project plan approved by the department is required for admission. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TE724",
@@ -639,7 +639,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity Production, Solar Energy - Technologies and Systems, Generator Design; as well as 10 credits of the courses Analysis of Power Distribution Grids, Grid Connection of Variable Energy Sources, Analysis of Electric Power Systems, Power Electronics I, Power Electronics II in the Major fields of study Renewable Energy Production at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [
@@ -652,7 +652,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Vattenkraft - teknik och system, 10 hp (1TE029) erbjuds även under termin 3.",
-      "labelEn": "Hydroelectric Power - Technology and Systems (1TE029) is also offered in semester 3.",
+      "labelEn": "Hydroelectric Power - Technology and Systems is also offered during semester 3.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -680,7 +680,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "1TE840 Examensarbete i förnybar elproduktion 15 hp endast för studenter som önskar avsluta med en magisterexamen. Ges period 13-14.",
-      "labelEn": "1TE840 (15 hp) is only for students who wish to finish with a magister's degree and is given in periods 3-4 of year 1.",
+      "labelEn": "1TE840, 15 hp, is only for students who wish to finish with a one-year master's degree and is given in periods 1-3 and 1-4.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -694,7 +694,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Endast en av följande kurser i solenergi kan tas med i en examen: 1TE678 och 1TE028.",
-      "labelEn": "Only one of the solar energy courses 1TE678 and 1TE028 may count toward the degree.",
+      "labelEn": "Only one of 1TE678 and 1TE028 may count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -726,7 +726,22 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
+    {
+      "from": "1EL021",
+      "to": "1EL843",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Power Electronics or Power Electronics I. Participation in High Voltage Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE765",
+      "to": "1EL843",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Power Electronics or Power Electronics I. Participation in High Voltage Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
     {
       "from": "1TE078",
       "to": "1TE028",
@@ -740,27 +755,6 @@
       "type": "EXCLUSIVE",
       "source": "llm",
       "rationale": "Endast en av följande kurser i solenergi kan tas med i en examen: 1TE678 och 1TE028."
-    },
-    {
-      "from": "1TE304",
-      "to": "1TE038",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "120 credits in science/engineering including Multivariable Calculus, Electromagnetism, Automatic Control and a basic course in statistics. Participation in Mechanics Basic Course, or it could be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
-      "from": "1TE304",
-      "to": "1TE043",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits in science/engineering including Scientific Computing I, Power Engineering and a basic course in mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
-      "from": "1TE305",
-      "to": "1TE043",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits in science/engineering including Scientific Computing I, Power Engineering and a basic course in mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1TE029",
@@ -782,6 +776,13 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "150 credits in science/engineering, including Electromagnetism, Basic Mechanics and Electrical Power Systems. 10 credits at Master's level. In addition, participation in one of the courses Wind Power: Technology and Systems, Hydroelectric Power: Technology and Systems, Wave Power: Technology and Systems, Analysis of Electric Power Systems or Power System Analysis. Proficiency in English equivalent"
+    },
+    {
+      "from": "1TE304",
+      "to": "1TE078",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "40 credits in science/engineering including Linear Algebra and Geometry, Thermodynamics, a basic course in Mechanics as well as Mechanics II/Electrical Power Transmission Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1TE078",
@@ -810,6 +811,132 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "120 credits in science/engineering including Automatic Control I. In addition, participation in 10 credits in science/engineering at advanced level. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE766",
+      "to": "1TE737",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Automatic Control I. In addition, participation in 10 credits in science/engineering at advanced level. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE029",
+      "to": "1TE840",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 15 credits at advanced level in renewable electricity production including 5 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity Production, Solar Energy - Technologies and Systems, Gener"
+    },
+    {
+      "from": "1TE677",
+      "to": "1TE840",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 15 credits at advanced level in renewable electricity production including 5 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity Production, Solar Energy - Technologies and Systems, Gener"
+    },
+    {
+      "from": "1TE726",
+      "to": "1TE840",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 15 credits at advanced level in renewable electricity production including 5 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity Production, Solar Energy - Technologies and Systems, Gener"
+    },
+    {
+      "from": "1TE765",
+      "to": "1TE840",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 15 credits at advanced level in renewable electricity production including 5 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity Production, Solar Energy - Technologies and Systems, Gener"
+    },
+    {
+      "from": "1TE766",
+      "to": "1TE840",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 15 credits at advanced level in renewable electricity production including 5 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity Production, Solar Energy - Technologies and Systems, Gener"
+    },
+    {
+      "from": "1TE028",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
+    },
+    {
+      "from": "1TE029",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
+    },
+    {
+      "from": "1TE038",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
+    },
+    {
+      "from": "1TE043",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
+    },
+    {
+      "from": "1TE065",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
+    },
+    {
+      "from": "1TE677",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
+    },
+    {
+      "from": "1TE678",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
+    },
+    {
+      "from": "1TE726",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
+    },
+    {
+      "from": "1TE737",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
+    },
+    {
+      "from": "1TE754",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
+    },
+    {
+      "from": "1TE765",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
+    },
+    {
+      "from": "1TE766",
+      "to": "1TE841",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity "
     }
   ],
   "revisions": [
@@ -870,12 +997,13 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.923536+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.404299+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10017",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i förnybar elgenerering, 120 hp (TFE2M)",
   "programmeTitleEn": "Master's Programme in Renewable Electricity Production, 120 credits (TFE2M)",
   "programmeUri": "/utbildning/program/masterprogram-fornybar-elgenerering",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

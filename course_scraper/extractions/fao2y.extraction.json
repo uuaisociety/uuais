@@ -1,0 +1,152 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:19:20.067524+00:00",
+  "edges": [
+    {
+      "code": "3AP001",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3AP002",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FB014",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FI000",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FK036",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FM017",
+      "text": "Within the program, earlier courses should have been reviewed.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Det första året omfattar en kort introduktion till professionen samt grundläggande kurser i farmaceutisk vetenskap, cellbiologi och farmaceutisk kemi.Kursen 3AP002 läses under termin 1 (1 hp) och termin 2 (3 hp).",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3AP002"
+        ],
+        "labelEn": "The first year includes an introduction to the profession plus basic courses, and course 3AP002 is spread over terms 1 and 2.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Kursen 3AP002 läses under termin 1 (1 hp) och termin 2 (3 hp).",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "3AP002"
+        ],
+        "labelEn": "Course 3AP002 is taken partly in semester 1 (1 hp) and partly in semester 2 (3 hp).",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "År 2Kurserna under det andra året behandlar anatomi och organfunktion, hur läkemedel verkar och omsätts i kroppen samt statistisk metodik inom läkemedelsområdet.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A heading describing that year 2 courses cover anatomy, organ function, drug action and metabolism, and statistical methodology.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "År 3Under år 3 förmedlas en integrerad kunskap om läkemedelsutveckling och läkemedelsanvändning, inklusive kvalitetssäkring. Halva termin 6 omfattar verksamhetsförlagd utbildning på apotek.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Year 3 conveys integrated knowledge of drug development and drug use, including quality assurance, with half of semester 6 consisting of workplace training at a pharmacy.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Termin 7 omfattar kurser på avancerad nivå med fördjupning i farmaceutisk vetenskap, inom framför allt läkemedelsutveckling.",
+        "semester": 7,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "A heading describing semester 7 as advanced-level courses with a focus on pharmaceutical science, mainly drug development.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Termin 8 omfattar valbara fördjupningskurser om totalt 30 hp inom läkemedelsutveckling, läkemedelsanvändning och klinisk farmaci.",
+        "semester": 8,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Term 8 consists of elective advanced courses totalling 30 credits in drug development, drug use and clinical pharmacy.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "År 5Det sista året på avancerad nivå ägnas åt fortsatt fördjupning i farmaceutisk vetenskap med fokus på läkemedelsanvändning, ett valbart självständigt arbete (fördjupningsprojekt, 30 hp) samt verksamhetsförlagd utbildning på apotek.Fördjupningsprojekt",
+        "semester": 9,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Describes year 5 content including an optional degree project and pharmacy placement; no specific roster courses are named.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "id": "3542",
+  "code": "MSJ2Y",
+  "revisionId": "3542",
+  "nameSv": "Specialistsjuksköterskeprogrammet",
+  "totalCredits": 60.0,
+  "semesters": 2,
+  "registrationNumber": "MEDFARM 2022/2169",
+  "finalisedDate": "12 november 2024",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3PS316",
+      "titleEn": "Psychiatry within the Specialist Nurse's Area of Competence",
+      "titleSv": "Psykiatri inom specialistsjuksköterskans kompetensområde",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3PS055",
+      "titleEn": "Theory and Methodology in Caring Sciences",
+      "titleSv": "Vårdvetenskaplig teori och metod",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3PS318",
+      "titleEn": "Core Competencies within the Specialist Nurse's area of Competence",
+      "titleSv": "Kärnkompetenser inom specialistsjuksköterskans kompetensområde",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3PS317",
+      "titleEn": "Clinical Assessments within the Specialist Nurse's Area of Competence",
+      "titleSv": "Kliniska bedömningar inom specialistsjuksköterskans kompetensområde",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences A1N, Medical Science",
+      "mainFieldSv": "Medicinsk vetenskap A1N, Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3PS321",
+      "titleEn": "Nursing in Complex Psychiatric/Mental Health Care I",
+      "titleSv": "Omvårdnad vid komplex psykisk ohälsa och sjukdom I",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1N",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3PS322",
+      "titleEn": "Nursing in Complex Psychiatric/Mental Health Care II",
+      "titleSv": "Omvårdnad vid komplex psykisk ohälsa och sjukdom II",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3PS315",
+      "titleEn": "Degree Project with Focus on Psychiatric Care",
+      "titleSv": "Examensarbete med inriktning mot psykiatrisk vård",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Caring Sciences",
+      "mainFieldSv": "Vårdvetenskap",
+      "depthCode": "A1E",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3542",
+      "name": "Giltig från och med vårterminen 2025"
+    },
+    {
+      "id": "3095",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;2"
+    },
+    {
+      "id": "2833",
+      "name": "Giltig från och med höstterminen 2023, version&nbsp;1"
+    },
+    {
+      "id": "2536",
+      "name": "Giltig från och med höstterminen 2022"
+    },
+    {
+      "id": "2419",
+      "name": "Giltig från och med höstterminen 2021"
+    },
+    {
+      "id": "2084",
+      "name": "Giltig från och med höstterminen 2020"
+    },
+    {
+      "id": "2013",
+      "name": "Giltig från och med höstterminen 2019"
+    },
+    {
+      "id": "1738",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1515",
+      "name": "Giltig från och med höstterminen 2017"
+    },
+    {
+      "id": "1203",
+      "name": "Giltig från och med höstterminen 2016"
+    },
+    {
+      "id": "942",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "637",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "575",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;3"
+    },
+    {
+      "id": "230",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;2"
+    },
+    {
+      "id": "141",
+      "name": "Giltig från och med höstterminen 2010, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.553868+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3542",
+  "validFrom": "Studieplan giltig från och med vårterminen 2025",
+  "validFromYear": 2025,
+  "programmeTitle": "Specialistsjuksköterskeprogrammet – Psykiatrisk vård, 60 hp (MSJ2Y)",
+  "programmeTitleEn": "Specialist Nursing Programme – Theatre Care, 60 credits (MSJ2Y)",
+  "programmeUri": "/utbildning/program/specialistsjukskoterskeprogrammet-psykiatrisk-vard",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

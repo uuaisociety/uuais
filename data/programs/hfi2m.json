@@ -1,0 +1,36 @@
+{
+  "id": "3198",
+  "code": "HFI2M",
+  "revisionId": "3198",
+  "nameSv": "Masterprogram i filosofi",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2023/64",
+  "finalisedDate": "23 september 2024",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3198",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "2916",
+      "name": "Giltig från och med höstterminen 2023"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.466328+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3198",
+  "validFrom": "Studieplan giltig från och med höstterminen 2025",
+  "validFromYear": 2025,
+  "programmeTitle": "Masterprogram i filosofi, 120 hp (HFI2M)",
+  "programmeTitleEn": "Master's Programme in Philosophy, 120 credits (HFI2M)",
+  "programmeUri": "/utbildning/program/masterprogram-filosofi",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

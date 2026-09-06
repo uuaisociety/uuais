@@ -1,0 +1,138 @@
+{
+  "id": "1482",
+  "code": "HIH2E",
+  "revisionId": "1482",
+  "nameSv": "Masterprogram i international humanitarian action",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": null,
+  "finalisedDate": "27 maj 2020",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet består av följande kurser:",
+    "Första terminen 30 hp: GRUNDTERMIN",
+    "- The Intensive Programme, 5hp",
+    "- Juridiska dimensioner av humanitärt arbete, 5 hp",
+    "- Global politik och humanitärt arbete, 5 hp",
+    "- Antropologi och interkulturella aspekter av humanitärt arbete, 5 hp",
+    "- Folkhälsa i humanitärt arbete, 5 hp",
+    "- Management, 5 hp",
+    "Andra terminen 30 hp: SPECIALISERINGSTERMIN",
+    "Under andra terminen måste Uppsala-studenter åka på utbyte till ett annat NOHA-medlemsuniversitet och läsa kurser (30 hp) i humanitärt arbete där.",
+    "I sin tur erbjuds följande kurser till inkommande utbytesstudenter från andra NOHA-universitet:",
+    "- Konflikt och fredsbyggande, 15 hp",
+    "- Religion och humanitärt arbete, 5 hp",
+    "- Advanced Management, 5 hp",
+    "- Metodologi, 5 hp",
+    "Dessa kurser är inte tillgängliga för studenter som började masterprogrammet i Uppsala.",
+    "Tredje terminen 30 hp: KONTEXTUALISERINGSPERIOD",
+    "Alternativ 1: \"Regional Training\" vid NOHA-medlemsuniversitet eller NOHA-partneruniversitet, vanligtvis utanför Europa, 30 hp",
+    "Alternativ 2: praktikplats på humanitär organisation",
+    "- Praktik, 20 hp",
+    "- Karriärutvecklingsträning, 10hp",
+    "Fjärde terminen 30 hp: FORSKNINGSPERIOD",
+    "- Master's Thesis, 30 hp",
+    "Studenten måste ha avklarat minst 20 hp från masterprogrammets första termin innan hens studier under andra terminen kan godkännas.",
+    "Studenten måste ha avklarat minst 25 hp från masterprogrammets första termin och 20 hp från masterprogrammets andra termin innan hens studier under tredje terminen kan godkännas.",
+    "Studenten måste ha avklarat alla kurserna från masterprogrammets första termin, 25 hp från masterprogrammets andra termin och 20 hp från masterprogrammets tredje termin innan hen får påbörja fjärde terminen.",
+    "Undantag från den föreskrivna obligatoriska examensordningen ska endast ges i undantagsfall och måste godkännas av alla berörda universitet."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [
+    {
+      "title": "Första terminen : GRUNDTERMIN",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "- The Intensive Programme",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "- Juridiska dimensioner av humanitärt arbete",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "- Global politik och humanitärt arbete",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "- Antropologi och interkulturella aspekter av humanitärt arbete",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "- Folkhälsa i humanitärt arbete",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "- Management",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "Andra terminen : SPECIALISERINGSTERMIN",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "- Konflikt och fredsbyggande",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "- Religion och humanitärt arbete",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "- Advanced Management",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "- Metodologi",
+      "credits": 5.0,
+      "semester": null
+    },
+    {
+      "title": "- Praktik",
+      "credits": 20.0,
+      "semester": null
+    },
+    {
+      "title": "- Karriärutvecklingsträning",
+      "credits": 10.0,
+      "semester": null
+    },
+    {
+      "title": "Fjärde terminen : FORSKNINGSPERIOD",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "- Master's Thesis",
+      "credits": 30.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.569360+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1482",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i international humanitarian action, 120 hp (HIH2E)",
+  "programmeTitleEn": "Master's Programme in International Humanitarian Action, 120 credits (HIH2E)",
+  "programmeUri": "/utbildning/program/masterprogram-international-humanitarian-action",
+  "faculty": "Teologiska fakulteten",
+  "reviewed": false
+}

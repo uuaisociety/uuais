@@ -1,0 +1,33 @@
+{
+  "id": "2507",
+  "code": "HDH2M",
+  "revisionId": "2507",
+  "nameSv": "Masterprogram i digital humaniora",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2024/55",
+  "finalisedDate": "1 oktober 2024",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Masterprogrammet är tvåårigt och kurserna inom programmet ges på halvfart eller helfart.",
+    "Under år ett läses obligatoriska kurser omfattande totalt 60 hp med huvudområdet digital humaniora, inklusive en projektkurs med möjlighet till praktik (7,5 hp). Under år två läses en obligatorisk kurs i teori och metod (7,5 hp) samt en obligatorisk masteruppsatskurs (30 hp), båda med huvudområdet digital humaniora. Därtill läser studenten under år två valbara kurser om 22,5 hp inom universitetets utbud av sökbara kurser, till vilka studenten ansöker och antas i mån av behörighet och tillgång på plats.",
+    "Studierna under år 2 utgör en tydlig progression på studierna under år 1. Progressionen utgörs av breddning och avsevärt fördjupade kunskaper genom examensarbete i digital humaniora."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.463059+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2507",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i digital humaniora, 120 hp (HDH2M)",
+  "programmeTitleEn": "Master's Programme in Digital Humanities, 120 credits (HDH2M)",
+  "programmeUri": "/utbildning/program/masterprogram-digital-humaniora",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

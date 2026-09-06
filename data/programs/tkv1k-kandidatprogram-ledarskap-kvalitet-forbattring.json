@@ -260,7 +260,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "45 credits in Industrial Engineering and Management. Project Management and Leadership. Participation in Sustainable Development, CSR and Life Cycle Analysis and also Project in Quality Management."
     },
     {
       "code": "1GV202",
@@ -280,7 +280,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Introduction to Sustainable Energy Transition or Sustainable Development, CSR and Life Cycle Analysis."
     },
     {
       "code": "1GV108",
@@ -414,7 +414,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Option 1: 60 credits in Industrial Engineering and Management. Participation in Sustainable Development, CSR and Life Cycle Analysis, Management Systems and Leadership and also Lean Management.Option 2: 60 credits within the Bachelor's Programme in Sustainable Development in Industrial Engineering. Participation in Sustainable Development, CSR and Life Cycle Analysis, Production Management I and also Process Management and Management Systems."
     },
     {
       "code": "1TG339",
@@ -433,7 +433,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "110 credits, including 60 credits in Industrial Engineering and Management. Participation in Six Sigma and Change Management."
     },
     {
       "code": "1TG277",
@@ -452,7 +452,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "130 credits, of which 65 credits in industrial engineering and management. Participation in Degree Project Feasibility Study in Industrial Engineering and Management and also Sustainable Business Development."
     }
   ],
   "rules": [
@@ -478,7 +478,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "1TG340 ersätter 1TG253. Dessa kurser kan inte ingå i examen tillsammans.",
-      "labelEn": "1TG340 replaces 1TG253, and the two courses cannot both count toward the degree.",
+      "labelEn": "1TG340 replaces 1TG253, and these courses cannot both count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -489,7 +489,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "VALBAR TERMIN",
-      "labelEn": "The semester consists of elective courses chosen freely.",
+      "labelEn": "Heading indicating an elective term in the study plan.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -502,7 +502,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "1TG338 och 1TG331 kan inte ingå i examen tillsammans på grund av överlapp.",
-      "labelEn": "1TG338 and 1TG331 cannot both count toward the degree due to overlapping content.",
+      "labelEn": "1TG338 and 1TG331 cannot both count toward the degree due to overlap.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -513,7 +513,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "VALBAR TERMIN",
-      "labelEn": "The fifth semester is a free elective term.",
+      "labelEn": "Heading indicating an elective term.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -526,7 +526,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "1TG314 ersätter 1TG295 och 1TG268. Ingen av dessa kan ingå i en examen samtidigt.",
-      "labelEn": "1TG314 replaces 1TG295 and 1TG268, and none of these courses may count toward the degree together.",
+      "labelEn": "1TG314 replaces the older courses 1TG295 and 1TG268, and none of these may count toward the degree together.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -539,7 +539,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Hållbar verksamhetsutveckling (1TG297) och Hållbar verksamhetsutveckling (1TG275) kan inte ingå tillsammans inom examenskravet.",
-      "labelEn": "Sustainable Organisational Development (1TG297) and Sustainable Organisational Development (1TG275) cannot both be counted toward the degree requirements.",
+      "labelEn": "1TG297 and 1TG275 cannot both count toward the degree requirements.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -552,7 +552,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "1TG276 och 1TG339 kan inte ingå i examen tillsammans på grund av innehållsmässigt överlapp.",
-      "labelEn": "1TG339 and 1TG276 cannot both count toward the degree due to overlapping content.",
+      "labelEn": "1TG276 and 1TG339 cannot both count toward the degree due to overlapping content.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -608,7 +608,15 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
+    {
+      "from": "1TG240",
+      "to": "1GV202",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Introduction to Sustainable Energy Transition or Sustainable Development, CSR and Life Cycle Analysis."
+    },
     {
       "from": "1TG285",
       "to": "1TG236",
@@ -647,9 +655,44 @@
     {
       "from": "1TG316",
       "to": "1TG293",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "Participation in Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed."
+    },
+    {
+      "from": "1TG285",
+      "to": "1TG294",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "30 credits in Industrial Engineering and Management. Participation in Statistical Quality Control, Quality Management, of which 5 credits should be completed, and either Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed."
+    },
+    {
+      "from": "1TG316",
+      "to": "1TG294",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "30 credits in Industrial Engineering and Management. Participation in Statistical Quality Control, Quality Management, of which 5 credits should be completed, and either Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed."
+    },
+    {
+      "from": "1TG236",
+      "to": "1TG297",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Option 1: 60 credits in Industrial Engineering and Management. Participation in Sustainable Development, CSR and Life Cycle Analysis, Management Systems and Leadership and also Lean Management.Option 2: 60 credits within the Bachelor's Programme in Sustainable Development in Industrial Engineering. Participation in Sustainable Development, CSR and Life Cycle Analysis, Production Management I and a"
+    },
+    {
+      "from": "1TG240",
+      "to": "1TG297",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Option 1: 60 credits in Industrial Engineering and Management. Participation in Sustainable Development, CSR and Life Cycle Analysis, Management Systems and Leadership and also Lean Management.Option 2: 60 credits within the Bachelor's Programme in Sustainable Development in Industrial Engineering. Participation in Sustainable Development, CSR and Life Cycle Analysis, Production Management I and a"
+    },
+    {
+      "from": "1TG340",
+      "to": "1TG297",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Option 1: 60 credits in Industrial Engineering and Management. Participation in Sustainable Development, CSR and Life Cycle Analysis, Management Systems and Leadership and also Lean Management.Option 2: 60 credits within the Bachelor's Programme in Sustainable Development in Industrial Engineering. Participation in Sustainable Development, CSR and Life Cycle Analysis, Production Management I and a"
     },
     {
       "from": "1TG316",
@@ -657,6 +700,41 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "45 credits in Industrial Engineering and Management or Engineering programmes. Project Management and Leadership or Projects and Leadership."
+    },
+    {
+      "from": "1TG240",
+      "to": "1TG338",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "45 credits in Industrial Engineering and Management. Project Management and Leadership. Participation in Sustainable Development, CSR and Life Cycle Analysis and also Project in Quality Management."
+    },
+    {
+      "from": "1TG287",
+      "to": "1TG338",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "45 credits in Industrial Engineering and Management. Project Management and Leadership. Participation in Sustainable Development, CSR and Life Cycle Analysis and also Project in Quality Management."
+    },
+    {
+      "from": "1TG316",
+      "to": "1TG338",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "45 credits in Industrial Engineering and Management. Project Management and Leadership. Participation in Sustainable Development, CSR and Life Cycle Analysis and also Project in Quality Management."
+    },
+    {
+      "from": "1TG294",
+      "to": "1TG339",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "110 credits, including 60 credits in Industrial Engineering and Management. Participation in Six Sigma and Change Management."
+    },
+    {
+      "from": "1TG314",
+      "to": "1TG339",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "110 credits, including 60 credits in Industrial Engineering and Management. Participation in Six Sigma and Change Management."
     }
   ],
   "revisions": [
@@ -681,12 +759,13 @@
       "name": "Giltig från och med höstterminen 2024, version&nbsp;1"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.882163+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.354010+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10050",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Kandidatprogram i ledarskap – kvalitet – förbättring, 180 hp (TKV1K)",
   "programmeTitleEn": "Bachelor's Programme in Leadership – Quality Management – Improvement, 180 credits (TKV1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-ledarskap-kvalitet-forbattring",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

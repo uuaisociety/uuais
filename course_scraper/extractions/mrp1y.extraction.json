@@ -1,0 +1,28 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:29:11.280552+00:00",
+  "edges": [
+    {
+      "code": "3DR115",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MC125",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE073",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": []
+}

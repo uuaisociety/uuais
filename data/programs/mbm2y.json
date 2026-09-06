@@ -1,0 +1,184 @@
+{
+  "id": "3526",
+  "code": "MBM2Y",
+  "revisionId": "3526",
+  "nameSv": "Barnmorskeprogrammet",
+  "totalCredits": 90.0,
+  "semesters": 3,
+  "registrationNumber": "MEDFARM 2022/2169",
+  "finalisedDate": "12 november 2024",
+  "tracks": [],
+  "courses": [
+    {
+      "code": "3OG087",
+      "titleEn": "Reproductive Health I: The Midwife's Role and Uncomplicated Childbirth",
+      "titleSv": "Reproduktiv hälsa I. Barnmorskans roll med fokus på okomplicerat barnafödande",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Reproductive Health",
+      "mainFieldSv": "Reproduktiv hälsa",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3OG088",
+      "titleEn": "Reproductive Health II: Complicated Childbirth",
+      "titleSv": "Reproduktiv hälsa II. Komplicerat barnafödande",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Reproductive Health",
+      "mainFieldSv": "Reproduktiv hälsa",
+      "depthCode": "A1F",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3OG089",
+      "titleEn": "Women's Reproductive Health/Ill Health and Contraception",
+      "titleSv": "Kvinnors reproduktiva hälsa/ohälsa samt antikonception",
+      "credits": 7.5,
+      "creditsInPeriod": null,
+      "creditsInSemester": 7.5,
+      "compulsory": false,
+      "mainFieldEn": "Reproductive Health",
+      "mainFieldSv": "Reproduktiv hälsa",
+      "depthCode": "A1N",
+      "semester": 1,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3OG071",
+      "titleEn": "Childbirth and Postpartum Care, Clinical Education",
+      "titleSv": "Förlossnings- och postpartumvård, verksamhetsförlagd utbildning",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Reproductive Health",
+      "mainFieldSv": "Reproduktiv hälsa",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3OG083",
+      "titleEn": "Gynaecological and Antenatal Care, Clinical Education",
+      "titleSv": "Gynekologisk och antenatal vård, verksamhetsförlagd utbildning",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Reproductive Health",
+      "mainFieldSv": "Reproduktiv hälsa",
+      "depthCode": "A1F",
+      "semester": 2,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3OG084",
+      "titleEn": "Childbirth and Neonatal Care, Clinical Education",
+      "titleSv": "Förlossnings- och neonatalvård, fördjupning, verksamhetsförlagd utbildning",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Reproductive Health",
+      "mainFieldSv": "Reproduktiv hälsa",
+      "depthCode": "A1F",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    },
+    {
+      "code": "3OG040",
+      "titleEn": "Individual Degree Project in Reproductive Health",
+      "titleSv": "Självständigt arbete i reproduktiv hälsa",
+      "credits": 15.0,
+      "creditsInPeriod": null,
+      "creditsInSemester": 15.0,
+      "compulsory": false,
+      "mainFieldEn": "Reproductive Health",
+      "mainFieldSv": "Reproduktiv hälsa",
+      "depthCode": "A1E",
+      "semester": 3,
+      "periods": [],
+      "trackId": null,
+      "onlyProgramme": null,
+      "entryRequirements": null
+    }
+  ],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3526",
+      "name": "Giltig från och med vårterminen 2024, version&nbsp;3"
+    },
+    {
+      "id": "3081",
+      "name": "Giltig från och med vårterminen 2024, version&nbsp;2"
+    },
+    {
+      "id": "2821",
+      "name": "Giltig från och med vårterminen 2024, version&nbsp;1"
+    },
+    {
+      "id": "2006",
+      "name": "Giltig från och med vårterminen 2019"
+    },
+    {
+      "id": "1747",
+      "name": "Giltig från och med höstterminen 2018"
+    },
+    {
+      "id": "1696",
+      "name": "Giltig från och med vårterminen 2018"
+    },
+    {
+      "id": "1218",
+      "name": "Giltig från och med vårterminen 2016"
+    },
+    {
+      "id": "473",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;2"
+    },
+    {
+      "id": "169",
+      "name": "Giltig från och med höstterminen 2011, version&nbsp;1"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.525992+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3526",
+  "validFrom": "Studieplan giltig från och med vårterminen 2024, version 3",
+  "validFromYear": 2024,
+  "programmeTitle": "Barnmorskeprogrammet, 90 hp (MBM2Y)",
+  "programmeTitleEn": "Midwifery Programme, 90 credits (MBM2Y)",
+  "programmeUri": "/utbildning/program/barnmorskeprogrammet",
+  "faculty": "Medicinska fakulteten",
+  "reviewed": false
+}

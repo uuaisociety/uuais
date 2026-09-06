@@ -1,0 +1,119 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T07:16:31.030289+00:00",
+  "edges": [
+    {
+      "code": "1GV500",
+      "text": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV501",
+      "text": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV502",
+      "text": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV503",
+      "text": "180 credits of which 10 credits at the second-cycle level in Sustainable Development or Environmental Science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV504",
+      "text": "180 credits of which 15 credits at the second-cycle level in Sustainable Development or Environmental Science.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 1GV500, 1GV501, 1GV502",
+        "semester": 1,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "1GV500",
+          "1GV501",
+          "1GV502"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1GV500",
+          "1GV501",
+          "1GV502"
+        ],
+        "labelEn": "One of the courses 1GV500, 1GV501, or 1GV502 must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 1GV503, 1GV504",
+        "semester": 2,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "1GV503",
+          "1GV504"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1GV503",
+          "1GV504"
+        ],
+        "labelEn": "One of the courses 1GV503 or 1GV504 must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Antingen: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Examensarbete i Hållbar utveckling 20 av 45 hpEller: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Praktik i hållbar utveckling 15 hp Examensarbete i hållbar utveckling 5 av 30 hp.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [
+          "1GV501"
+        ],
+        "labelEn": "Two alternative tracks are offered: the interdisciplinary methods course with a 20 hp thesis portion, or the methods course with a 15 hp internship and a 5 hp thesis portion.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Workshop serie 2: Tvärvetenskaplig metod och tillämpning en fördjupnings kurs 5 hp Antingen:Examensarbete i hållbar utveckling av kustområden 25 av 45 hp.Eller: Examensarbete i hållbar utveckling av kustområden 25 av 30 hp.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [
+          "1GV501"
+        ],
+        "labelEn": "Either a 45 hp or a 30 hp degree project in sustainable development of coastal areas may be chosen, together with the 5 hp advanced course on scientific methods.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

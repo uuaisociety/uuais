@@ -1,0 +1,202 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:37:23.097563+00:00",
+  "edges": [
+    {
+      "code": "1MA098",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2HR118",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS006",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS007",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS012",
+      "text": "15 credits in information systems including 7.5 credits in programming.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS013",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS014",
+      "text": "15 credits in information systems, including 7.5 credits in programming.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS024",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS048",
+      "text": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS052",
+      "text": "15 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS053",
+      "text": "60 credits in information systems or the equivalent including 7.5 credits in databases and 7.5 credits in object-oriented programming.",
+      "result": {
+        "edges": [
+          {
+            "from": "2IS007",
+            "type": "HARD"
+          },
+          {
+            "from": "2IS006",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2IS061",
+      "text": "15 credits in information systems, including 7.5 credits in programming.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS062",
+      "text": "52.5 credits in information systems or the equivalent, including 7.5 credits object-oriented programming.",
+      "result": {
+        "edges": [
+          {
+            "from": "2IS006",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2IS064",
+      "text": "60 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS065",
+      "text": "60 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS066",
+      "text": "60 credits in information systems",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS068",
+      "text": "60 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS081",
+      "text": "60 credits information systems or equivalent including 7.5 credits in databases",
+      "result": {
+        "edges": [
+          {
+            "from": "2IS007",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "2IV061",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Valfri A-kurs, 30 hp",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "An elective A-level course worth 30 credits may be taken.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "KurspaketetSystemutveckling termin 5 30 hp, med delkurserna:",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Heading introducing the semester 5 Software Development course package of 30 credits with its sub-courses.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "KurspaketetSystemutveckling termin 6 30 hp, med delkurserna:",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "This is a heading introducing the Systems Development course package of 30 hp in semester 6 with its sub-courses listed below.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

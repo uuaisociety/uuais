@@ -1,0 +1,76 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:22:40.474943+00:00",
+  "edges": [
+    {
+      "code": "5SD300",
+      "text": "Bachelor's degree and knowledge of English corresponding to English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD303",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD305",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD306",
+      "text": "60 credits in game design at Master's level, including Advanced Game Design Research Methods, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD314",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD311",
+      "text": "Bachelor's degree and knowledge of English corresponding to English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD312",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD314",
+      "text": "15 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Denna termin väljer du kurser på totalt 30hp. Du kan även ansöka om utlandsstudier eller praktik. Institutionen erbjuder varje hösttermin ett varierande utbud av valbara kurser.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "General note that this semester consists of 30 credits of elective courses, with options for study abroad or internship.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

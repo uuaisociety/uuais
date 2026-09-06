@@ -1,0 +1,32 @@
+{
+  "id": "2463",
+  "code": "SSO2M",
+  "revisionId": "2463",
+  "nameSv": "Masterprogram i sociologi",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "SAMFAK 2024/85 Doss: 3.2.1",
+  "finalisedDate": "10 september 2024",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet omfattar 120 hp varav 67,5 hp är obligatoriska kurser.",
+    "Termin 1 inleds med den obligatoriska kursen Det sociologiska problemet, 7,5 hp, sedan följer tre kärnkurser om vardera 7,5 hp. Samtliga kurser under termin 2 är obligatoriska: Avancerade kvalitativa metoder 7,5 hp; Avancerade kvantitativa metoder 7,5 hp och projektkurs 15 hp. Om programmet avslutas efter ett år byts projektkursen 15 hp ut mot kursen Magisteruppsats i sociologi 15 hp. Termin 3 består, utöver en inledande kurs i komparativ sociologi, av valbara specialiserings- och uppsatsförberedande kurser. Termin 4 ägnas i sin helhet åt Examensarbete för masterexamen i sociologi, 30 hp."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.513600+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2463",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i sociologi, 120 hp (SSO2M)",
+  "programmeTitleEn": "Master's Programme in Sociology, 120 credits (SSO2M)",
+  "programmeUri": "/utbildning/program/masterprogram-sociologi",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

@@ -26,7 +26,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics E"
     },
     {
       "code": "1MA013",
@@ -65,7 +65,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Algebra and Geometry"
     },
     {
       "code": "1FA105",
@@ -84,7 +84,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Algebra and Geometry"
     },
     {
       "code": "1MA016",
@@ -332,7 +332,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering. Participation in transform methods. Participation in one of the courses Electronics I, Electromagnetism (10 credits), Electromagnetism II with Electric Circuits or participation in both Electromagnetism I and Electric Circuit Analysis or participation in Electromagnetism and Electric Circuits."
     },
     {
       "code": "1RT490",
@@ -370,7 +370,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "40 credits in science/engineering including Linear Algebra and Geometry, Thermodynamics, a basic course in Mechanics as well as Mechanics II/Electrical Power Transmission Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TE061",
@@ -389,7 +389,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "40 credits in science/engineering"
     },
     {
       "code": "1TE687",
@@ -427,7 +427,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits in science/engineering"
     },
     {
       "code": "1TE642",
@@ -465,7 +465,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering. One of these alternatives: 1) One of the courses Mechanics II, Mechanics KF, Applied Mechanics I. Participation in Electromagnetism I or Electromagnetism, these courses can also be taken in parallel. 2) Basics of Electrical Engineering III: Field Theory."
     },
     {
       "code": "1TE654",
@@ -503,7 +503,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science and technology within the syllabus of the Master's programme in Energy Systems Engineering, including 5 credits on statistics."
     },
     {
       "code": "1FA410",
@@ -640,7 +640,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in Science/Technology. Fluid Mechanics for Energy-Related Applications, Technical Thermodynamics, Introduction to Scientific Computing, System Analysis with Energy Applications, Energy and Life Cycle Assessment. Participation in Industrial Management, Business Studies or Industrial Management and Sustainable Innovation. Proficiency in English equivalent to the Swedish upper secondary course English 6.Urban and Decentralised Energy Systems is recommended."
     },
     {
       "code": "1TE038",
@@ -737,7 +737,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/technology. Technical Thermodynamics, System Analysis with Energy Applications, Computer Programming I, Scientific Computing for data analysis."
     },
     {
       "code": "1RT495",
@@ -775,7 +775,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering including Scientific Computing for Data Analysis, Basic Mathematical Statistics, Power Engineering and Technical Thermodynamics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1RT890",
@@ -946,7 +946,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "240 credits within the Master's programme in Energy Systems Engineering including Independent Project in Energy Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1RT495",
@@ -1079,7 +1079,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "50 credits within an engineering programme or 50 credits Electric Engineering. 10 credits Mathematic. Participation in Introduction to Scientific Computing (ability to use computer based calculation aids). Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA393",
@@ -1096,7 +1096,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "100 credits within the Master's Programme in Energy Systems Engineering"
     },
     {
       "code": "1FA394",
@@ -1113,7 +1113,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "130 credits within the Master's Programme in Energy Systems Engineering of which 10 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA456",
@@ -1141,7 +1141,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Introduktion till energisystem, 5 (av 10) hp (TN0367 SLU)* Huvudområde(n) med fördjupning: Teknik G1N",
-      "labelEn": "External course TN0367 Introduction to Energy Systems at SLU counts for 5 of 10 credits in the main field of Technology G1N.",
+      "labelEn": "A 5-credit introduction to energy systems course from SLU (TN0367), which is not on this programme's roster.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1152,7 +1152,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Introduktion till energisystem, 5 (av 10) hp (TN0367 SLU)* Huvudområde(n) med fördjupning: Teknik G1N",
-      "labelEn": "Refers to Introduction to Energy Systems (TN0367 at SLU), an external course counting 5 of 10 credits in semester 1.",
+      "labelEn": "Informational note about the 5 of 10 hp Introduction to Energy Systems course (TN0367 SLU) with main field of study Technology G1N.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1163,7 +1163,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Allmän kemi och kemiska energikällor, 5 (av 10) hp (KE0049 SLU)* Huvudområde(n) med fördjupning: Kemi G1N",
-      "labelEn": "Refers to external course KE0049 (SLU) General Chemistry and Chemical Energy Sources, 5 of 10 credits, main field Chemistry G1N, which is not on the roster.",
+      "labelEn": "General Chemistry and Chemical Energy Sources (KE0049, SLU), 5 of 10 credits, belongs to the main field of study Chemistry G1N.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1174,7 +1174,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Allmän kemi och kemiska energikällor, 5 (av 10) hp (KE0049 SLU)* Huvudområde(n) med fördjupning: Kemi G1N",
-      "labelEn": "General Chemistry and Chemical Energy Sources, 5 (of 10) credits (KE0049 SLU), main field of study with specialisation: Chemistry G1N",
+      "labelEn": "Informational entry for an external SLU course, General Chemistry and Chemical Energy Sources (KE0049), 5 of 10 credits, with subject area Chemistry G1N.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1185,7 +1185,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Energisystemens biogeokemiska förutsättningar, 5 (av 10) hp (BI1360 SLU)* Huvudområde(n) med fördjupning: Biologi G1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) G1N",
-      "labelEn": "Notes an external SLU course (BI1360, 'Biogeochemical prerequisites of energy systems'), counting 5 of 10 credits at G1N level in Biology/Earth Science, which is not on the roster.",
+      "labelEn": "An external SLU course, Energisystemens biogeokemiska förutsättningar (BI1360), may count for 5 of 10 credits at G1N level in biology/soil science.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1196,7 +1196,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Grundläggande matematisk statistik, 5 hp (MS0073 SLU)* Huvudområde(n) med fördjupning: Matematik (huvudområde vid SLU: Matematisk statistik) G1F",
-      "labelEn": "The 5-credit SLU course MS0073 Basic Mathematical Statistics is classified under the main field of Mathematics (Mathematical Statistics at SLU), level G1F.",
+      "labelEn": "Describes the external SLU course Basic Mathematical Statistics (MS0073), which is not on this programme's roster, with main field of study in Mathematics at level G1F.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1207,7 +1207,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Energisystemens biogeokemiska förutsättningar, 5 (av 10) hp (BI1360 SLU)* Huvudområde(n) med fördjupning: Biologi G1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) G1N",
-      "labelEn": "Notes an external SLU course BI1360 (Energisystemens biogeokemiska förutsättningar), 5 of 10 credits at G1N level in Biology/Geoscience, which is not part of the roster.",
+      "labelEn": "Describes an external SLU course (BI1360) not on the roster, with its credits and subject-level details.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1218,7 +1218,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Organisk kemi med energitillämpningar, 5 hp (KE0079 SLU)* Huvudområde(n) med fördjupning: Kemi G1F",
-      "labelEn": "External SLU course KE0079 Organic Chemistry with Energy Applications (5 credits), classified under main field of study Chemistry G1F.",
+      "labelEn": "Informational entry for the external SLU course KE0079 Organic Chemistry with Energy Applications (5 hp) at G1F level, which is not on the programme roster.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1229,7 +1229,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Systemanalys med energitillämpningar 5 hp (TN0373 SLU)* Huvudområde(n) med fördjupning: Teknik G1F",
-      "labelEn": "Systems Analysis with Energy Applications (5 credits, TN0373 at SLU) is an external course with main field of study Technology at G1F level, not part of the listed roster.",
+      "labelEn": "Informational note about an external SLU course, Systems Analysis with Energy Applications (TN0373), 5 credits, G1F level in Technology.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1240,7 +1240,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Ekonomistyrning för ingenjörer, 5 hp (FÖ0498 SLU)* Huvudområde(n) och successiv fördjupning: Företagsekonomi GXX",
-      "labelEn": "Financial Management for Engineers (FÖ0498, SLU) is an external course credited under the main field of Business Administration at GXX level.",
+      "labelEn": "The course Financial Management for Engineers, 7.5 credits (FÖ0498, SLU), is classified under the subject Business Administration with GXX progression level.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1251,7 +1251,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Energi- och livscykelanalys, 5 hp (TN0285 SLU)* Huvudområde(n) med fördjupning: Teknik G2F",
-      "labelEn": "Energy and Life Cycle Analysis, 5 credits (TN0285, SLU), with main field of study Technology at G2F level.",
+      "labelEn": "An external SLU course, Energy and Life Cycle Analysis (TN0285, 5 credits), is noted with main field of study Technology G2F.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1262,7 +1262,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Energisystemens miljöpåverkan, 5 hp (KE0069 SLU)* Huvudområde(n) med fördjupning: Kemi G1F, Biologi G1F",
-      "labelEn": "Environmental Impact of Energy Systems (KE0069, external SLU course, not on the roster) with main fields of Chemistry or Biology at G1F level.",
+      "labelEn": "Describes the external SLU course Environmental Impact of Energy Systems (KE0069, 5 credits) with main fields of study Chemistry and Biology at G1F level.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1275,7 +1275,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Alternativa kurser(Observera att Modern fysik är förkunskapskrav för kurser i ES4 & ES5)",
-      "labelEn": "Note that Modern Physics is a prerequisite for courses in ES4 and ES5.",
+      "labelEn": "Alternative courses section; Modern Physics is a prerequisite for the courses in study years ES4 and ES5.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1289,7 +1289,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Ingenjörsetik och Miljörätt kan ej räknas in i examen tillsammans med kurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\" (se Utbildningsplanen och Preciserade krav för programmet).",
-      "labelEn": "Engineering Ethics and Environmental Law cannot count toward the degree together with the course package 'Technology-Based Entrepreneurship and Business Development'.",
+      "labelEn": "Engineering Ethics and Environmental Law cannot be counted toward the degree together with the Technology-Based Entrepreneurship and Business Development course package.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1303,18 +1303,20 @@
       "semester": 6,
       "trackId": null,
       "textSv": "En av de två nedanstående kurserna i självständigt arbete är obligatorisk. Endast en av de två kan räknas med i examen.",
-      "labelEn": "One of the two independent project courses is compulsory, and only one of them may count toward the degree.",
+      "labelEn": "One of the two independent-project courses must be taken, and only one of them may count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-15",
       "type": "NOTE",
-      "courseCodes": [],
+      "courseCodes": [
+        "1FA311"
+      ],
       "semester": 6,
       "trackId": null,
       "textSv": "Självständigt arbete i energisystem, 15 hp (EX0946 SLU)* Huvudområde(n) med fördjupning: Teknik G2E",
-      "labelEn": "The independent project in energy systems (15 hp) may be taken as EX0946 at SLU, with main field of study Technology at level G2E.",
+      "labelEn": "The independent project in energy systems is taken as the 15 hp SLU course EX0946, with main field of Technology at level G2E.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1325,7 +1327,7 @@
       "semester": 7,
       "trackId": null,
       "textSv": "I årskurs 4 och 5 krockar vissa valbara kurser med varandra i schemat.För information kring detta, se programmets hemsida.",
-      "labelEn": "In years 4 and 5, some elective courses clash in the timetable; see the programme website for details.",
+      "labelEn": "Some elective courses in years 4 and 5 clash in the schedule; see the programme website for details.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1336,7 +1338,7 @@
       "semester": 7,
       "trackId": null,
       "textSv": "Ekonomistyrning för ingenjörer, 5 hp (FÖ0498 SLU)* Huvudområde(n) och successiv fördjupning: Företagsekonomi GXX",
-      "labelEn": "External course Management Accounting for Engineers (FÖ0498, SLU), 5 hp, counted under the main field Business Administration at GXX level; no roster code applies.",
+      "labelEn": "An external SLU course, Ekonomistyrning för ingenjörer (5 hp), classified under the main field of Business Administration.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1347,7 +1349,7 @@
       "semester": 7,
       "trackId": null,
       "textSv": "Miljökonsekvensbeskrivning, 5 hp (MX0162 SLU) Huvudområde(n) med fördjupning: Miljövetenskap (huvudområde vid SLU) A1N",
-      "labelEn": "Semester 7 note: Environmental Impact Assessment, 5 hp (MX0162 at SLU), advanced level A1N with main field of study Environmental Science at SLU.",
+      "labelEn": "An external SLU course, Environmental Impact Assessment (MX0162, 5 credits), is noted with advanced level in Environmental Science.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1358,7 +1360,7 @@
       "semester": 7,
       "trackId": null,
       "textSv": "Kursen Industriell ekonomi och hållbar innovation, 5 hp (G1N) kan tillgodoräknas med motsvarande kurs vid UU (Företagsekonomi eller Industriell ekonomi).",
-      "labelEn": "Industrial Economics and Sustainable Innovation (5 hp, G1N) may be credited with an equivalent UU course in Business Administration or Industrial Economics.",
+      "labelEn": "Industrial Economics and Sustainable Innovation may be credited with an equivalent course taken at Uppsala University.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1369,7 +1371,7 @@
       "semester": 7,
       "trackId": null,
       "textSv": "Geografiska informationssystem för ingenjörer, 5 hp (TE0018 SLU) Huvudområde(n) med fördjupning: Teknik Axx",
-      "labelEn": "Semester 7 includes an external SLU course, Geographic Information Systems for Engineers (TE0018), 5 credits, within the main field of Technology.",
+      "labelEn": "An external 5-credit course, Geographic Information Systems for Engineers (TE0018 at SLU), is noted with Technology as the advanced main field of study.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1391,7 +1393,7 @@
       "semester": 8,
       "trackId": null,
       "textSv": "I årskurs 4 och 5 krockar vissa valbara kurser med varandra i schemat.För information kring detta, se programmets hemsida.",
-      "labelEn": "Some elective courses in years 4–5 clash in the timetable; see the programme website for details.",
+      "labelEn": "Some elective courses in years 4 and 5 clash in the schedule; see the programme website for details.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1402,7 +1404,7 @@
       "semester": 8,
       "trackId": null,
       "textSv": "Bioenergi - teknik och system, 5 (av 10) hp (TN0352 SLU) Huvudområde(n) med fördjupning: Teknik A1N",
-      "labelEn": "An external SLU course, Bioenergy - Technology and Systems (TN0352), counts for 5 of 10 credits at A1N level in Technology.",
+      "labelEn": "An external SLU course on bioenergy (TN0352) may count for 5 of 10 credits.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1413,7 +1415,7 @@
       "semester": 8,
       "trackId": null,
       "textSv": "Bioenergi - teknik och system, 5 (av 10) hp (TN0352 SLU) Huvudområde(n) med fördjupning: Teknik A1N",
-      "labelEn": "Bioenergy - Technology and Systems, 5 of 10 credits (TN0352 at SLU), counted in the main field of Technology at advanced level A1N.",
+      "labelEn": "Information about the external SLU course Bioenergy - Technology and Systems (TN0352), 5 of 10 credits, with main field of study Technology A1N",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1424,7 +1426,7 @@
       "semester": 8,
       "trackId": null,
       "textSv": "Logistik, 5 hp (TN0365 SLU) Huvudområde(n) med fördjupning: Teknik A1N",
-      "labelEn": "External course Logistics, 5 credits (TN0365, SLU), with main field of study Technology at advanced level A1N.",
+      "labelEn": "An external 5-credit course in Logistics (TN0365, SLU) is credited with the main field of study Technology at advanced level (A1N).",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1435,7 +1437,7 @@
       "semester": 9,
       "trackId": null,
       "textSv": "I årskurs 4 i 5 krockar vissa valbara kurser med varandra i schemat.För information kring detta, se programmets hemsida.",
-      "labelEn": "Some elective courses in years 4 and 5 clash in the timetable; see the programme website for details.",
+      "labelEn": "Some elective courses in year 4 of 5 clash in the timetable; see the programme website for information.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1446,7 +1448,7 @@
       "semester": 9,
       "trackId": null,
       "textSv": "Energisystemplanering, 5 (av 10) hp (TN0347 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
-      "labelEn": "Energy Systems Planning (TN0347, SLU), 5 of 10 credits, is credited in the Technology main field at advanced level A1F.",
+      "labelEn": "Energy Systems Planning (TN0347, SLU), 5 of 10 credits, counts within the main field of Technology at advanced level A1F.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1457,7 +1459,7 @@
       "semester": 9,
       "trackId": null,
       "textSv": "Hållbar utveckling i energibranschen, 5 hp (TN0350 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
-      "labelEn": "External SLU course TN0350 Sustainable Development in the Energy Sector (5 credits), main field of study Technology at advanced level A1F.",
+      "labelEn": "The external SLU course Sustainable Development in the Energy Sector (TN0350), 5 credits, is listed at A1F level in Technology.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1470,7 +1472,7 @@
       "semester": 9,
       "trackId": null,
       "textSv": "Kursen 1TE700 uppfyller ES-programmets krav på teknik- och systemkurser och kan införas i examen som en sådan.",
-      "labelEn": "Power System Analysis fulfils the Energy Systems programme's requirement for technology and systems courses and may be counted in the degree as such.",
+      "labelEn": "1TE700 fulfills the ES programme's technology and systems course requirement and can count toward the degree as such.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1481,7 +1483,7 @@
       "semester": 9,
       "trackId": null,
       "textSv": "Energisystemplanering, 5 (av 10) hp (TN0347 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
-      "labelEn": "Energy Systems Planning (TN0347, SLU) contributes 5 of 10 credits with main field of Technology at A1F level; the course is not on this programme's roster.",
+      "labelEn": "Energy Systems Planning, 5 of 10 credits (TN0347, SLU), with main field of study Technology at advanced level A1F.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1494,7 +1496,7 @@
       "semester": 9,
       "trackId": null,
       "textSv": "Kursen MX0147 har huvudområde miljövetenskap som finns vid SLU men inte vid UU.Stora sociotekniska system kan ej räknas in i examen tillsammans med kurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\" (se Utbildningsplanen och Preciserade krav för programmet).",
-      "labelEn": "Large Sociotechnical Systems cannot count toward the degree together with the course package 'Technology-Based Entrepreneurship and Business Development'.",
+      "labelEn": "Large Sociotechnical Systems cannot be counted toward the degree together with the Technology-Based Entrepreneurship and Business Development course package.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1507,18 +1509,20 @@
       "semester": 10,
       "trackId": null,
       "textSv": "En av de två nedanstående kurserna \"Examensarbete i energisystem\" (1FA392 alternativt EX1032) är obligatorisk. Endast en av kurserna kan räknas med i examen.",
-      "labelEn": "One of the two degree project courses, 1FA392 or EX1032, is mandatory, but only one of them may count toward the degree.",
+      "labelEn": "One of the degree project courses (1FA392 or EX1032) must be taken, and only one of them may count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-33",
       "type": "NOTE",
-      "courseCodes": [],
+      "courseCodes": [
+        "1FA392"
+      ],
       "semester": 10,
       "trackId": null,
       "textSv": "Examensarbete i energisystem, 30 hp (EX1032 SLU) Huvudområde(n) med fördjupning: Teknik A2E",
-      "labelEn": "The degree project in Energy Systems (30 hp) is taken at SLU as EX1032 with main field of study Technology at level A2E.",
+      "labelEn": "The degree project in energy systems (30 credits) is taken as EX1032 at SLU with main field of study Technology at advanced level A2E.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1529,7 +1533,7 @@
       "semester": 10,
       "trackId": null,
       "textSv": "Tillvalskurser:",
-      "labelEn": "Elective courses.",
+      "labelEn": "This is a heading introducing a list of elective courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1540,29 +1544,33 @@
       "semester": 10,
       "trackId": null,
       "textSv": "Tillvalskurser i valfri period:",
-      "labelEn": "Optional elective courses may be taken in any period.",
+      "labelEn": "This is a heading introducing elective courses that may be taken in any period.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-36",
       "type": "NOTE",
-      "courseCodes": [],
+      "courseCodes": [
+        "1FA393"
+      ],
       "semester": 10,
       "trackId": null,
       "textSv": "Projektarbete i energisystem, 15 hp (TE0024 SLU) Huvudområde(n) med fördjupning: Teknik G2F",
-      "labelEn": "Project Work in Energy Systems (15 hp, TE0024 at SLU) counts with main field of study Technology at level G2F.",
+      "labelEn": "Describes a 15-credit Project Work in Energy Systems course (SLU code TE0024) at G2F level with main field of study in Technology.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-37",
       "type": "NOTE",
-      "courseCodes": [],
+      "courseCodes": [
+        "1FA394"
+      ],
       "semester": 10,
       "trackId": null,
       "textSv": "Fördjupande projektarbete i energisystem, 15 hp (TE0023 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
-      "labelEn": "An external 15 hp advanced project course in energy systems (TE0023, SLU) at A1F level may be credited.",
+      "labelEn": "Advanced Project Work in Energy Systems (15 hp, SLU code TE0023) has Technology as its main field of study at advanced level A1F.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1587,18 +1595,33 @@
       "semester": 10,
       "trackId": null,
       "textSv": "Sommarkurser",
-      "labelEn": "Summer courses.",
+      "labelEn": "Summer courses",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-40",
-      "type": "NOTE",
-      "courseCodes": [],
+      "type": "MUTUALLY_EXCLUSIVE",
+      "courseCodes": [
+        "1FA456",
+        "1FA410",
+        "1TD433",
+        "1EL004",
+        "1TD354",
+        "1TD352",
+        "1TD342",
+        "1TS309",
+        "5LH654",
+        "1TE700",
+        "1KB274",
+        "1TS356",
+        "1EL016",
+        "1TS359"
+      ],
       "semester": 10,
       "trackId": null,
       "textSv": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i examen: 1TD327 /1TD433, 1EL004/1TE637, 1TD354/1TD397, 1TD352/1TD395, 1TD342/1TD393, 1TS309/1GV134, 5LH654/5LH242, 1TE700/1TE754, FÖ0498(SLU)/FÖ0477(SLU), 1KB274/1KB765, 1TS356/1TE792, 1EL016/1FA529, 1TS359/TN0351(SLU).",
-      "labelEn": null,
+      "labelEn": "Only one course from each listed pair may count toward the degree, and 1FA456 (given remotely, subject to resources) may replace part of the Nuclear Power course.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1609,7 +1632,7 @@
       "semester": 10,
       "trackId": null,
       "textSv": "Övrig informationKurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\", 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare. Detta kurspaket ingår inte i programmets studieplanen (se Utbildningsplanen och Preciserade krav för programmet).",
-      "labelEn": "The optional course package 'Technology-Based Entrepreneurship and Business Development' (30 hp, semester 9) lies outside the programme study plan and counts toward the degree only for students admitted in 2025/2026 or earlier, with no guaranteed placement.",
+      "labelEn": "The technology-based entrepreneurship and business development course package is not part of the programme's study plan and can only count toward the degree for students admitted in 2025/2026 or earlier.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -1869,11 +1892,110 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
+    {
+      "from": "1FA410",
+      "to": "1EL004",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "1EL004",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD433",
+      "to": "1EL004",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1EL004",
+      "to": "1EL016",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA410",
+      "to": "1EL016",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "1EL016",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1KB274",
+      "to": "1EL016",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD342",
+      "to": "1EL016",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD352",
+      "to": "1EL016",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD354",
+      "to": "1EL016",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD433",
+      "to": "1EL016",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TE700",
+      "to": "1EL016",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TS356",
+      "to": "1EL016",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "5LH654",
+      "to": "1EL016",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
     {
       "from": "1FA105",
       "to": "1FA102",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "Participation in Mechanics Basic Course and a course in several variable calculus. The latter course may also be taken in parallel."
     },
@@ -1885,11 +2007,25 @@
       "rationale": "Participation in Mechanics Basic Course and a course in several variable calculus. The latter course may also be taken in parallel."
     },
     {
+      "from": "1FA311",
+      "to": "1FA392",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "240 credits within the Master's programme in Energy Systems Engineering including Independent Project in Energy Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1FA393",
       "to": "1FA394",
       "type": "EXCLUSIVE",
       "source": "llm",
       "rationale": "Endast en av kurserna \"Projektarbete i energisystem\" får ingå i examen.Endast en av kurserna \"Fördjupande projektarbete i energisystem\" får ingå i examen."
+    },
+    {
+      "from": "1FA456",
+      "to": "1FA410",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
     },
     {
       "from": "1FA527",
@@ -1934,13 +2070,6 @@
       "rationale": "120 credits in science/engineering including 30 credits in mathematics and 35 credits in physics. Nuclear Power Technology or 2 credits from Nuclear Power - Technology and 2 credits from Systems or Energy Physics II with Nuclear Energy. Proficiency in Swedish and English equivalent to the general entry requirements for Bachelor's level (first-cycle) studies."
     },
     {
-      "from": "1TE078",
-      "to": "1FA456",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "120 credits in science/engineering, including 30 credits in physics and 5 credits programming. Nuclear Physics or Modern Physics is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
       "from": "1FA105",
       "to": "1FA514",
       "type": "SOFT",
@@ -1976,6 +2105,20 @@
       "rationale": "Participation in Algebra and Geometry, or Linear Algebra I. Participation in Single Variable Calculus, or Calculus in One Variable. Participation in Scientific Computing I, Introduction to Scientific Programming, or Computer programming. Participation in Several Variable Calculus, or Calculus in Several Variables, or studied simultaneously. Participation in Mechanics Basic Course, or Technical Mec"
     },
     {
+      "from": "1FA102",
+      "to": "1FA522",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. One of these alternatives: 1) One of the courses Mechanics II, Mechanics KF, Applied Mechanics I. Participation in Electromagnetism I or Electromagnetism, these courses can also be taken in parallel. 2) Basics of Electrical Engineering III: Field Theory."
+    },
+    {
+      "from": "1FA514",
+      "to": "1FA522",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. One of these alternatives: 1) One of the courses Mechanics II, Mechanics KF, Applied Mechanics I. Participation in Electromagnetism I or Electromagnetism, these courses can also be taken in parallel. 2) Basics of Electrical Engineering III: Field Theory."
+    },
+    {
       "from": "1FA105",
       "to": "1FA527",
       "type": "SOFT",
@@ -2004,6 +2147,27 @@
       "rationale": "Single Variable Calculus. Participation in Several Variable Calculus, Mechanics Basic Course/Mechanics and one of the courses Scientific Computing I/Scientific Computing F or Computer Programming I."
     },
     {
+      "from": "1FA527",
+      "to": "1FA591",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Scientific Computing for Data Analysis, Basic Mathematical Statistics, Power Engineering and Technical Thermodynamics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD352",
+      "to": "1FA591",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Scientific Computing for Data Analysis, Basic Mathematical Statistics, Power Engineering and Technical Thermodynamics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE655",
+      "to": "1FA591",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Scientific Computing for Data Analysis, Basic Mathematical Statistics, Power Engineering and Technical Thermodynamics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1FA410",
       "to": "1FA594",
       "type": "SOFT",
@@ -2018,18 +2182,95 @@
       "rationale": "150 credits in science/engineering including 30 credits at Master's level. 5 credits in basic mathematical statistics. Participation in Nuclear Power - Technology and Systems, Hydroelectric Power - Technology and Systems, Analysis of Electric Power Systems, Energy Physics II with Nuclear Energy, Nuclear Reactor Physics, or Power System Analysis. These courses may also be taken in parallel. Profici"
     },
     {
-      "from": "1RT490",
-      "to": "1KB274",
+      "from": "1EL016",
+      "to": "1GV334",
       "type": "HARD",
       "source": "llm",
-      "rationale": "Alternative 1: 120 credits in science and technology, including 5 credits power engineering, 5 credits automatic control, and 5 credits scientific computing. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 130 credits in science and technology, including 10 credits in Energy Technology at Master's level. Proficiency in English equivalent to the Swe"
+      "rationale": "120 credits including courses in computational science I, programming/computational science II, statistics and electrical engineering and at least one of the courses Energy Systems Physics, Technical Thermodynamics, Fluid Mechanics for Energy-Related Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA527",
+      "to": "1GV334",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including courses in computational science I, programming/computational science II, statistics and electrical engineering and at least one of the courses Energy Systems Physics, Technical Thermodynamics, Fluid Mechanics for Energy-Related Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD342",
+      "to": "1GV334",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including courses in computational science I, programming/computational science II, statistics and electrical engineering and at least one of the courses Energy Systems Physics, Technical Thermodynamics, Fluid Mechanics for Energy-Related Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD352",
+      "to": "1GV334",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including courses in computational science I, programming/computational science II, statistics and electrical engineering and at least one of the courses Energy Systems Physics, Technical Thermodynamics, Fluid Mechanics for Energy-Related Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD433",
+      "to": "1GV334",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including courses in computational science I, programming/computational science II, statistics and electrical engineering and at least one of the courses Energy Systems Physics, Technical Thermodynamics, Fluid Mechanics for Energy-Related Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE655",
+      "to": "1GV334",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including courses in computational science I, programming/computational science II, statistics and electrical engineering and at least one of the courses Energy Systems Physics, Technical Thermodynamics, Fluid Mechanics for Energy-Related Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1EL004",
+      "to": "1KB274",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA410",
+      "to": "1KB274",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "1KB274",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
     },
     {
       "from": "1TD342",
       "to": "1KB274",
-      "type": "HARD",
+      "type": "EXCLUSIVE",
       "source": "llm",
-      "rationale": "Alternative 1: 120 credits in science and technology, including 5 credits power engineering, 5 credits automatic control, and 5 credits scientific computing. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 130 credits in science and technology, including 10 credits in Energy Technology at Master's level. Proficiency in English equivalent to the Swe"
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD352",
+      "to": "1KB274",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD354",
+      "to": "1KB274",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD433",
+      "to": "1KB274",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
     },
     {
       "from": "1TE655",
@@ -2037,6 +2278,27 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "Alternative 1: 120 credits in science and technology, including 5 credits power engineering, 5 credits automatic control, and 5 credits scientific computing. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 130 credits in science and technology, including 10 credits in Energy Technology at Master's level. Proficiency in English equivalent to the Swe"
+    },
+    {
+      "from": "1TE700",
+      "to": "1KB274",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TS309",
+      "to": "1KB274",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "5LH654",
+      "to": "1KB274",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
     },
     {
       "from": "1MA013",
@@ -2123,18 +2385,25 @@
       "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
-      "from": "1TD433",
-      "to": "1RT700",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
       "from": "1RT490",
       "to": "1RT890",
       "type": "HARD",
       "source": "llm",
       "rationale": "120 credits including Automatic Control I and a course in basic mathematical statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1EL004",
+      "to": "1TD342",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "1TD342",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
     },
     {
       "from": "1MA013",
@@ -2146,9 +2415,30 @@
     {
       "from": "1TD433",
       "to": "1TD342",
-      "type": "SOFT",
+      "type": "EXCLUSIVE",
       "source": "llm",
-      "rationale": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers."
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1EL004",
+      "to": "1TD352",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA410",
+      "to": "1TD352",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "1TD352",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
     },
     {
       "from": "1MA024",
@@ -2172,11 +2462,39 @@
       "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
     },
     {
+      "from": "1TD354",
+      "to": "1TD352",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
       "from": "1TD433",
       "to": "1TD352",
-      "type": "SOFT",
+      "type": "EXCLUSIVE",
       "source": "llm",
-      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1EL004",
+      "to": "1TD354",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA410",
+      "to": "1TD354",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "1TD354",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
     },
     {
       "from": "1MA016",
@@ -2200,6 +2518,27 @@
       "rationale": "120 credits in science/engineering. Scientific Computing II or Introduction to Scientific Computing or Scientific Computing, Bridging Course. Several Variable Calculus. Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1TD433",
+      "to": "1TD354",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA410",
+      "to": "1TD433",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "1TD433",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
       "from": "1TE078",
       "to": "1TE028",
       "type": "HARD",
@@ -2210,6 +2549,13 @@
       "from": "1FA105",
       "to": "1TE029",
       "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, including Electric Power Systems. Participation in a basic course in mechanics, or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6. Mechanics (1TE304) can be taken in parallel."
+    },
+    {
+      "from": "1TE655",
+      "to": "1TE029",
+      "type": "HARD",
       "source": "llm",
       "rationale": "120 credits in science/engineering, including Electric Power Systems. Participation in a basic course in mechanics, or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6. Mechanics (1TE304) can be taken in parallel."
     },
@@ -2312,6 +2658,48 @@
       "rationale": "150 credits in science/engineering, including Electromagnetism, Basic Mechanics and Electrical Power Systems. 10 credits at Master's level. In addition, participation in one of the courses Wind Power: Technology and Systems, Hydroelectric Power: Technology and Systems, Wave Power: Technology and Systems, Analysis of Electric Power Systems or Power System Analysis. Proficiency in English equivalent"
     },
     {
+      "from": "1TE655",
+      "to": "1TE065",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "150 credits in science/engineering, including Electromagnetism, Basic Mechanics and Electrical Power Systems. 10 credits at Master's level. In addition, participation in one of the courses Wind Power: Technology and Systems, Hydroelectric Power: Technology and Systems, Wave Power: Technology and Systems, Analysis of Electric Power Systems or Power System Analysis. Proficiency in English equivalent"
+    },
+    {
+      "from": "1FA102",
+      "to": "1TE078",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "40 credits in science/engineering including Linear Algebra and Geometry, Thermodynamics, a basic course in Mechanics as well as Mechanics II/Electrical Power Transmission Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA105",
+      "to": "1TE078",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "40 credits in science/engineering including Linear Algebra and Geometry, Thermodynamics, a basic course in Mechanics as well as Mechanics II/Electrical Power Transmission Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA527",
+      "to": "1TE078",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "40 credits in science/engineering including Linear Algebra and Geometry, Thermodynamics, a basic course in Mechanics as well as Mechanics II/Electrical Power Transmission Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA090",
+      "to": "1TE078",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "40 credits in science/engineering including Linear Algebra and Geometry, Thermodynamics, a basic course in Mechanics as well as Mechanics II/Electrical Power Transmission Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD342",
+      "to": "1TE649",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "50 credits within an engineering programme or 50 credits Electric Engineering. 10 credits Mathematic. Participation in Introduction to Scientific Computing (ability to use computer based calculation aids). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1FA105",
       "to": "1TE654",
       "type": "SOFT",
@@ -2324,6 +2712,125 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "30 credits in science/engineering. Participation in the courses Single Variable Calculus and Mechanics Basic Course."
+    },
+    {
+      "from": "1EL004",
+      "to": "1TE655",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in transform methods. Participation in one of the courses Electronics I, Electromagnetism (10 credits), Electromagnetism II with Electric Circuits or participation in both Electromagnetism I and Electric Circuit Analysis or participation in Electromagnetism and Electric Circuits."
+    },
+    {
+      "from": "1FA514",
+      "to": "1TE655",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in transform methods. Participation in one of the courses Electronics I, Electromagnetism (10 credits), Electromagnetism II with Electric Circuits or participation in both Electromagnetism I and Electric Circuit Analysis or participation in Electromagnetism and Electric Circuits."
+    },
+    {
+      "from": "1MA034",
+      "to": "1TE655",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in transform methods. Participation in one of the courses Electronics I, Electromagnetism (10 credits), Electromagnetism II with Electric Circuits or participation in both Electromagnetism I and Electric Circuit Analysis or participation in Electromagnetism and Electric Circuits."
+    },
+    {
+      "from": "1EL004",
+      "to": "1TE700",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA410",
+      "to": "1TE700",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "1TE700",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1RT490",
+      "to": "1TE700",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits, out of 5 credits at Master's level in science/engineering including Scientific Computing I, Electrical Power Engineering, Automatic Control I and one of the following courses: Wind Power - Technology and Systems, Wave Power - Technology and Systems, Hydroelectric Power - Technology and Systems. Hydroelectric Power - Technology and Systems could be taken in parallel. Proficiency in Eng"
+    },
+    {
+      "from": "1TD342",
+      "to": "1TE700",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD352",
+      "to": "1TE700",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD354",
+      "to": "1TE700",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD433",
+      "to": "1TE700",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TE029",
+      "to": "1TE700",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "130 credits, out of 5 credits at Master's level in science/engineering including Scientific Computing I, Electrical Power Engineering, Automatic Control I and one of the following courses: Wind Power - Technology and Systems, Wave Power - Technology and Systems, Hydroelectric Power - Technology and Systems. Hydroelectric Power - Technology and Systems could be taken in parallel. Proficiency in Eng"
+    },
+    {
+      "from": "1TE038",
+      "to": "1TE700",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits, out of 5 credits at Master's level in science/engineering including Scientific Computing I, Electrical Power Engineering, Automatic Control I and one of the following courses: Wind Power - Technology and Systems, Wave Power - Technology and Systems, Hydroelectric Power - Technology and Systems. Hydroelectric Power - Technology and Systems could be taken in parallel. Proficiency in Eng"
+    },
+    {
+      "from": "1TE043",
+      "to": "1TE700",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits, out of 5 credits at Master's level in science/engineering including Scientific Computing I, Electrical Power Engineering, Automatic Control I and one of the following courses: Wind Power - Technology and Systems, Wave Power - Technology and Systems, Hydroelectric Power - Technology and Systems. Hydroelectric Power - Technology and Systems could be taken in parallel. Proficiency in Eng"
+    },
+    {
+      "from": "1TE655",
+      "to": "1TE700",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits, out of 5 credits at Master's level in science/engineering including Scientific Computing I, Electrical Power Engineering, Automatic Control I and one of the following courses: Wind Power - Technology and Systems, Wave Power - Technology and Systems, Hydroelectric Power - Technology and Systems. Hydroelectric Power - Technology and Systems could be taken in parallel. Proficiency in Eng"
+    },
+    {
+      "from": "1TS309",
+      "to": "1TE700",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "5LH654",
+      "to": "1TE700",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
     },
     {
       "from": "1TE078",
@@ -2347,18 +2854,221 @@
       "rationale": "120 credits in science/engineering including Automatic Control I. In addition, participation in 10 credits in science/engineering at advanced level. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
-      "from": "1EL004",
-      "to": "1TE765",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits in science/engineering, including basic knowledge in electric circuit theory and electronics. Participation in Transform Methods (spec. Fourier series), or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
       "from": "1MA034",
       "to": "1TE765",
       "type": "SOFT",
       "source": "llm",
       "rationale": "120 credits in science/engineering, including basic knowledge in electric circuit theory and electronics. Participation in Transform Methods (spec. Fourier series), or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1EL004",
+      "to": "1TS309",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1EL016",
+      "to": "1TS309",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in Science/Technology. Fluid Mechanics for Energy-Related Applications, Technical Thermodynamics, Introduction to Scientific Computing, System Analysis with Energy Applications, Energy and Life Cycle Assessment. Participation in Industrial Management, Business Studies or Industrial Management and Sustainable Innovation. Proficiency in English equivalent to the Swedish upper secondary c"
+    },
+    {
+      "from": "1FA410",
+      "to": "1TS309",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "1TS309",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA527",
+      "to": "1TS309",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in Science/Technology. Fluid Mechanics for Energy-Related Applications, Technical Thermodynamics, Introduction to Scientific Computing, System Analysis with Energy Applications, Energy and Life Cycle Assessment. Participation in Industrial Management, Business Studies or Industrial Management and Sustainable Innovation. Proficiency in English equivalent to the Swedish upper secondary c"
+    },
+    {
+      "from": "1TD342",
+      "to": "1TS309",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD352",
+      "to": "1TS309",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD354",
+      "to": "1TS309",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD433",
+      "to": "1TS309",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1EL004",
+      "to": "1TS356",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA410",
+      "to": "1TS356",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "1TS356",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA527",
+      "to": "1TS356",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/technology. Technical Thermodynamics, System Analysis with Energy Applications, Computer Programming I, Scientific Computing for data analysis."
+    },
+    {
+      "from": "1KB274",
+      "to": "1TS356",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD342",
+      "to": "1TS356",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD352",
+      "to": "1TS356",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD354",
+      "to": "1TS356",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD433",
+      "to": "1TS356",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TE700",
+      "to": "1TS356",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TS309",
+      "to": "1TS356",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "5LH654",
+      "to": "1TS356",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1EL004",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1EL016",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA410",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1KB274",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD342",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD352",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD354",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD433",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
     },
     {
       "from": "1TE655",
@@ -2368,11 +3078,95 @@
       "rationale": "Option 1: 120 credits in science/engineering. Introduction to Energy Systems or Energy System Physics. System Analysis with Energy Applications or Systems Analysis and Operations Research. Participation in Power Engineering. Option 2: A Bachelor's degree with 90 credits in electrical engineering. 15 credits within power systems. Proficiency in English equivalent to the Swedish upper secondary cour"
     },
     {
+      "from": "1TE700",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TS309",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TS356",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "5LH654",
+      "to": "1TS359",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
       "from": "1TE687",
       "to": "2JS905",
       "type": "EXCLUSIVE",
       "source": "llm",
       "rationale": "Ingenjörsetik och Miljörätt kan ej räknas in i examen tillsammans med kurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\" (se Utbildningsplanen och Preciserade krav för programmet)."
+    },
+    {
+      "from": "1EL004",
+      "to": "5LH654",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA410",
+      "to": "5LH654",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1FA456",
+      "to": "5LH654",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD342",
+      "to": "5LH654",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD352",
+      "to": "5LH654",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD354",
+      "to": "5LH654",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TD433",
+      "to": "5LH654",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
+    },
+    {
+      "from": "1TS309",
+      "to": "5LH654",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA456 ges på distans.1FA456 ges i mån av resurser och kan ställas in.1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet.I följande kurspar kan endast en i varje kurspar räknas med i e"
     }
   ],
   "revisions": [
@@ -2445,12 +3239,13 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.810513+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.285965+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10067",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Civilingenjörsprogrammet i energisystem, 300 hp (TES2Y)",
   "programmeTitleEn": "Master's Programme in Energy Systems Engineering, 300 credits (TES2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-energisystem",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

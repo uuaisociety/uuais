@@ -179,7 +179,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D"
     },
     {
       "code": "1KB208",
@@ -198,7 +198,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "10 credits in science/engineering. Participation in General Chemistry or Chemical Principles I or Basic Chemistry, 10 credits, or The Basic Principles of Chemistry, 15 credits."
     },
     {
       "code": "1KB200",
@@ -217,7 +217,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in General Chemistry, Chemical Principles I, or Basic Chemistry, 10 credits, or The Basic Principles of Chemistry, 15 credits."
     },
     {
       "code": "1MP044",
@@ -422,7 +422,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Knowledge and skills corresponding to 60 credits in earth science"
     },
     {
       "code": "1GV111",
@@ -439,7 +439,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Knowledge and skills corresponding to 60 credits in earth science"
     },
     {
       "code": "1GV112",
@@ -456,7 +456,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Knowledge and skills corresponding to 60 credits in earth science"
     },
     {
       "code": "1GV173",
@@ -473,7 +473,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements"
     },
     {
       "code": "1GV103",
@@ -490,7 +490,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits in Earth Science"
     },
     {
       "code": "1GV034",
@@ -507,7 +507,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in Earth Science"
     },
     {
       "code": "1GV102",
@@ -524,22 +524,18 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in Earth Science"
     }
   ],
   "rules": [
     {
       "id": "rule-0",
       "type": "NOTE",
-      "courseCodes": [
-        "1KB013",
-        "1KB200",
-        "1KB208"
-      ],
+      "courseCodes": [],
       "semester": 4,
       "trackId": null,
       "textSv": "Annat biområde än kemi kan väljas.",
-      "labelEn": "A minor subject area other than chemistry may be chosen.",
+      "labelEn": "A main subject area other than chemistry may be chosen.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -550,7 +546,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "alternativt",
-      "labelEn": "The note simply reads \"alternatively\", indicating an alternative option without specifying any courses.",
+      "labelEn": "A bare word meaning 'alternatively' with no course information.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -561,7 +557,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "alternativt",
-      "labelEn": "Alternatives are permitted (unspecified), as noted in the study plan.",
+      "labelEn": "A bare separator word meaning \"alternatively\", naming no specific courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -572,7 +568,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Övriga kurser sommartid/terminstid",
-      "labelEn": "Other courses may be taken during the summer or during the semester.",
+      "labelEn": "A heading referring to other courses offered during summer or semester terms.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -604,6 +600,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1GV004",
@@ -669,13 +666,6 @@
       "rationale": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits and Structural Geology and Ground Stability, 10 credits."
     },
     {
-      "from": "1GE100",
-      "to": "1GV205",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "60 credits Earth Science. Participation in Mineralogy and Petrology, 10 credits. 10 credits in mathematics and 10 credits in GIS are recommended."
-    },
-    {
       "from": "1MP044",
       "to": "1GV205",
       "type": "SOFT",
@@ -688,13 +678,6 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4 or Bioscience 30 credits. At least 22 credits from Earth Science - Planet Earth, including The Earth as a Planet (5+3 credits) and all practical components."
-    },
-    {
-      "from": "1GE100",
-      "to": "1GV207",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "60 credits earth science. Participations in Mineralogy and Petrology 10 credits. 10 credits in GIS are recommended."
     },
     {
       "from": "1MP044",
@@ -780,12 +763,13 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.876730+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.348511+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10064",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Kandidatprogram i geovetenskap, 180 hp (TGE1K)",
   "programmeTitleEn": "Bachelor's Programme in Earth Science, 180 credits (TGE1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-geovetenskap",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

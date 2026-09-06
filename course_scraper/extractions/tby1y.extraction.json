@@ -1,0 +1,421 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:45:06.855864+00:00",
+  "edges": [
+    {
+      "code": "1FA430",
+      "text": "Participation in Algebra and Vector Geometry or Linear algebra for engineers. Participation in Calculus for Engineers or Calculus II for engineers. Participation in Structural Mechanics.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA352",
+            "type": "SOFT"
+          },
+          {
+            "from": "1MA353",
+            "type": "SOFT"
+          },
+          {
+            "from": "1MA354",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TE601",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV185",
+      "text": "60 credits within the Bachelor's Programme in Construction Engineering",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MA352",
+      "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MA353",
+      "text": "Participation in Linear Algebra for Engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA352",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MA354",
+      "text": "Participation in Linear Algebra for Engineers and Calculus I for Engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA352",
+            "type": "SOFT"
+          },
+          {
+            "from": "1MA353",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MS008",
+      "text": "5 hp in mathematics. Participation in Calculus II for Engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA354",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE403",
+      "text": "60 credits in the Bachelor's Programme in Construction Engineering including the courses Structural Design in Construction Engineering and Calculus for Engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE443",
+            "type": "HARD"
+          },
+          {
+            "from": "1MA353",
+            "type": "HARD"
+          },
+          {
+            "from": "1MA354",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE431",
+      "text": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Project 1: Designing of Detached House.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE439",
+            "type": "HARD"
+          },
+          {
+            "from": "1TS366",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE439",
+      "text": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE442",
+      "text": "Participation in Introduction to Construction Engineering.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE439",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE443",
+      "text": "Algebra and Vector Geometry or Linear Algebra for Engineers. Participation in Calculus for Engineers and Construction Mechanics.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA352",
+            "type": "HARD"
+          },
+          {
+            "from": "1MA353",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TE601",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE444",
+      "text": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Construction Materials and Project 1: Designing of Detached House.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE439",
+            "type": "HARD"
+          },
+          {
+            "from": "1TS366",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE442",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE447",
+      "text": "90 credits within the Bachelor's Programme in Construction Engineering. Participation in Structural Mechanics and Design.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE403",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE601",
+      "text": "Participation in Linear Algebra for Engineers, Calculus I for Engineers and Basic Structural Engineering.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA352",
+            "type": "SOFT"
+          },
+          {
+            "from": "1MA353",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TS365",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE687",
+      "text": "30 credits in technology",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE743",
+      "text": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE780",
+      "text": "105 credits within a Bachelor's Programme in Engineering",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TG318",
+      "text": "30 credits in any main field.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TM117",
+      "text": "60 credits within the Bachelor's Programme in Construction Engineering including Building Physics and Fluid and Thermodynamics.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE431",
+            "type": "HARD"
+          },
+          {
+            "from": "1FA430",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TS329",
+      "text": "60 credits in the Bachelor's Programme in Construction Engineering. Construction Materials, Building Design and Drawing, and Project 1: Designing of Detached House.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE442",
+            "type": "HARD"
+          },
+          {
+            "from": "1TS366",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TS365",
+      "text": "Participation in Introduction to Construction Engineering and also Building Design with Drawing (can be taken in parallel).",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE439",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TS366",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TS366",
+      "text": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TS367",
+      "text": "Participaction in Introduction to Construction Engineering, Building Design with Drawing and also Basic Structural Engineering.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE439",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TS366",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TS365",
+            "type": "SOFT"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Byggnadsprojektering med ritteknik 10 hp (1TS366) ersätter kursen Byggnadsprojektering med ritteknik 5 hp (1TE440). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet.",
+        "semester": 1,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "MUTUALLY_EXCLUSIVE",
+        "courseCodes": [
+          "1TS366"
+        ],
+        "labelEn": "The 10 hp course 1TS366 replaces the older 5 hp version, and the two courses cannot both count toward the degree.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 1TM117, 5KV779, 1TE403, 1TE687, 1TE438, 1TM018",
+        "semester": 5,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "1TM117",
+          "5KV779",
+          "1TE403",
+          "1TE687",
+          "1TE438",
+          "1TM018"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1TM117",
+          "5KV779",
+          "1TE403",
+          "1TE687",
+          "1TE438",
+          "1TM018"
+        ],
+        "labelEn": "One of these courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Kurser som inte är obligatoriska kallas för valbara. Det är obligatoriskt att läsa minst 20 hp av de valbara kurserna i årskurs 3 (hit räknas inte s k tillvalskurser).",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "At least 20 credits of elective courses must be taken in year 3; optional courses do not count toward this.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "1TE403, 1TM018 och 1TE447 passar för en studieinriktning mot konstruktion (kurserna kan kräva behörighetskedja).5KV779 och 1TG318 passar för en studieinriktning mot förvaltning (kurserna kan kräva behörighetskedja).1TM117, 1TE438 och 1TS329 passar för en studieinriktning mot energi och miljö (kurserna kan kräva behörighetskedja).",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "RECOMMENDED",
+        "courseCodes": [
+          "1TE403",
+          "1TM018",
+          "1TE447",
+          "5KV779",
+          "1TG318",
+          "1TM117",
+          "1TE438",
+          "1TS329"
+        ],
+        "labelEn": "Courses recommended for specialisation tracks in construction, property management, or energy and environment, possibly requiring prerequisite chains.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 1TS329, 1TE447, 1TG318",
+        "semester": 6,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "1TS329",
+          "1TE447",
+          "1TG318"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1TS329",
+          "1TE447",
+          "1TG318"
+        ],
+        "labelEn": "One of these courses must be chosen.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

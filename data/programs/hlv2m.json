@@ -1,0 +1,33 @@
+{
+  "id": "1986",
+  "code": "HLV2M",
+  "revisionId": "1986",
+  "nameSv": "Masterprogram i litteraturvetenskap",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2022/48",
+  "finalisedDate": "30 augusti 2022",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet omfattar två år. I programmet ingår kurser, examensarbeten och möjlighet till praktik. Praktik kan ingå till en omfattning av 7,5 eller 15 högskolepoäng. Studenten har därtill möjlighet att läsa ett antal valbara kurser från antingen institutionens eller det övriga universitetets utbud. En obligatorisk kurs i litteraturvetenskaplig teori och metod (7,5 högskolepoäng) läses första terminen. För att uppfylla fordringarna för masterexamen måste minst två av de valbara kurserna (sammanlagt 15 högskolepoäng) läsas inom huvudområdet litteraturvetenskap.",
+    "Under första terminen läses den obligatoriska kursen i litteraturvetenskaplig teori och metod (7,5 högskolepoäng). Utbildningen planeras under första terminen tillsammans med studierektor för avancerad nivå och omfattar uppsatsskrivande och valbara kurser (inklusive eventuell praktik och/eller utlandsvistelse) och planeringen följs upp i början av termin tre. Första terminen ägnas uteslutande åt kursläsning. Under programmets andra år finns möjlighet finns till praktik och/eller utlandsvistelse.",
+    "Möjlighet finns att komplettera en tidigare magisterexamen för att erhålla masterexamen."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.471714+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1986",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i litteraturvetenskap, 120 hp (HLV2M)",
+  "programmeTitleEn": "Master's Programme in Literature, 120 credits (HLV2M)",
+  "programmeUri": "/utbildning/program/masterprogram-litteraturvetenskap",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

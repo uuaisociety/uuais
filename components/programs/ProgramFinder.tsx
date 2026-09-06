@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { ArrowRight, GraduationCap, Search } from "lucide-react";
+import { ArrowRight, ChevronDown, GraduationCap, Search } from "lucide-react";
 import type { ProgramIndexEntry } from "@/lib/programs";
 import {
   foldForSearch,
@@ -15,39 +15,68 @@ import {
 const GROUPS: { label: string; match: RegExp }[] = [
   { label: "Civilingenjör", match: /^Civilingenj/ },
   { label: "Högskoleingenjör", match: /^Högskoleingenj/ },
-  { label: "Bachelor's", match: /^Kandidatprogram/ },
-  { label: "Master's", match: /^(Master|Magister)program/ },
+  { label: "Teacher education", match: /^(Ämneslärar|Speciallärar|Grundlärar|Förskollärar)/ },
+  { label: "Specialist nursing", match: /^Specialistsjuksk/ },
+  // Unanchored: "Ekonomie kandidatprogram" and "Politices masterprogram" put the qualifier
+  // first, and an anchored pattern filed them under Other.
+  { label: "Bachelor's", match: /kandidatprogram/i },
+  { label: "Master's", match: /(master|magister)program/i },
   { label: "Foundation year", match: /^Teknisk|^Tekniskt/ },
 ];
 
 type Row = ProgramIndexEntry & { slug: string };
 
+/** "Civilingenjör" and "Master's" both have to become an id the panel can be addressed by. */
+function slugForId(label: string): string {
+  return label
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .toLowerCase()
+    .replace(/^-|-$/g, "");
+}
+
 export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
   const [query, setQuery] = useState("");
+  const [faculty, setFaculty] = useState("");
+  /** Groups the reader has folded away. Searching overrides it: a closed group must never
+   *  swallow a match and leave the page looking empty. */
+  const [closed, setClosed] = useState<ReadonlySet<string>>(new Set());
+
+  const faculties = useMemo(
+    () => [...new Set(programmes.map((p) => p.faculty))].sort((a, b) => a.localeCompare(b, "sv")),
+    [programmes]
+  );
+
+  /** The search runs within the chosen faculty, so the count beneath it means what it says. */
+  const scoped = useMemo(
+    () => (faculty ? programmes.filter((p) => p.faculty === faculty) : programmes),
+    [programmes, faculty]
+  );
 
   // Folded once per list rather than per keystroke: the search runs over the Swedish
   // title, UU's English one and the code, so a reader may type either language.
   const haystacks = useMemo(
     () =>
-      programmes.map((p) =>
+      scoped.map((p) =>
         foldForSearch(
           `${p.programmeTitle} ${p.programmeTitleEn ?? ""} ${p.nameSv} ${p.code}`
         )
       ),
-    [programmes]
+    [scoped]
   );
 
   const matches = useMemo(() => {
     const needle = foldForSearch(query);
-    if (!needle) return programmes;
-    const exact = programmes.filter((_, index) => haystacks[index].includes(needle));
+    if (!needle) return scoped;
+    const exact = scoped.filter((_, index) => haystacks[index].includes(needle));
     // A typo otherwise empties the page, so a one-edit pass runs only when nothing matched
     // outright; short needles are left alone, where one edit is most of the word.
     if (exact.length > 0 || needle.length < 4) return exact;
-    return programmes.filter((_, index) =>
+    return scoped.filter((_, index) =>
       includesWithinOneEdit(haystacks[index], needle)
     );
-  }, [programmes, haystacks, query]);
+  }, [scoped, haystacks, query]);
 
   const grouped = useMemo(() => {
     const groups = GROUPS.map((group) => ({
@@ -76,42 +105,103 @@ export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
         />
       </label>
 
+      <label className="mt-3 block max-w-md">
+        <span className="sr-only">Filter by faculty</span>
+        <select
+          value={faculty}
+          onChange={(event) => setFaculty(event.target.value)}
+          className="w-full rounded-md border border-border bg-card px-3 py-2 text-[0.9375rem] text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+        >
+          <option value="">Every faculty</option>
+          {faculties.map((name) => (
+            <option key={name} value={name}>
+              {name}
+            </option>
+          ))}
+        </select>
+      </label>
+
       <p
         aria-live="polite"
         className="mt-2.5 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-muted-foreground"
       >
-        {matches.length} of {programmes.length} programmes
+        {matches.length} of {scoped.length} programmes
       </p>
 
       {matches.length === 0 ? (
         <div className="mt-10 rounded-lg border border-dashed border-border px-5 py-10 text-center">
           <p className="text-[0.9375rem] text-foreground">
-            No programme matches &ldquo;{query}&rdquo;.
+            No programme in {faculty ? faculty : "the catalogue"} matches &ldquo;{query}&rdquo;.
           </p>
           <p className="mt-1.5 text-[0.9375rem] text-muted-foreground">
-            Try a programme code such as TTF2Y, or a subject like fysik.
+            {faculty
+              ? "It may be taught by another faculty."
+              : "Try a programme code such as TTF2Y, or a subject like physics."}
           </p>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setQuery("")}
-            className="mt-4 font-mono text-[0.6875rem] uppercase tracking-[0.12em]"
-          >
-            Clear search
-          </Button>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setQuery("")}
+              className="font-mono text-[0.6875rem] uppercase tracking-[0.12em]"
+            >
+              Clear search
+            </Button>
+            {/* Clearing the search alone leaves the filter on, which is why the page stayed empty. */}
+            {faculty ? (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setFaculty("")}
+                className="font-mono text-[0.6875rem] uppercase tracking-[0.12em]"
+              >
+                Search all faculties
+              </Button>
+            ) : null}
+          </div>
         </div>
       ) : null}
 
-      {/* A hairline-divided list rather than 77 identical boxes: at this length the card
+      {/* A hairline-divided list rather than 270 identical boxes: at this length the card
           borders were the loudest thing on the page and the row content the quietest. */}
-      {grouped.map((group) => (
+      {grouped.map((group) => {
+        const open = query.length > 0 || !closed.has(group.label);
+        const panelId = `group-${slugForId(group.label)}`;
+        return (
         <section key={group.label} className="mt-10">
-          <h2 className="flex items-baseline gap-3 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-muted-foreground">
-            {group.label}
-            <span className="opacity-60">{group.items.length}</span>
-            <span aria-hidden className="h-px min-w-6 flex-1 bg-border" />
+          <h2>
+            <button
+              type="button"
+              aria-expanded={open}
+              aria-controls={panelId}
+              onClick={() =>
+                setClosed((previous) => {
+                  const next = new Set(previous);
+                  if (next.has(group.label)) next.delete(group.label);
+                  else next.add(group.label);
+                  return next;
+                })
+              }
+              className="flex w-full items-baseline gap-3 rounded-sm py-1 font-mono text-[0.6875rem] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <ChevronDown
+                aria-hidden
+                className={`h-3 w-3 shrink-0 self-center transition-transform duration-300 ${open ? "" : "-rotate-90"}`}
+              />
+              {group.label}
+              <span className="opacity-60">{group.items.length}</span>
+              <span aria-hidden className="h-px min-w-6 flex-1 self-center bg-border" />
+            </button>
           </h2>
-          <ul className="mt-1 divide-y divide-border border-b border-border">
+          {/* The 0fr/1fr grid animates the real content height, so a group of 11 and a group
+              of 142 both close at the same rate without measuring either. */}
+          <div
+            id={panelId}
+            className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
+              open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+            }`}
+          >
+            <ul className="mt-1 min-h-0 divide-y divide-border border-b border-border">
             {group.items.map((program) => {
               // The site reads in English, so the English name leads and the
               // university's Swedish title sits beneath it.
@@ -120,15 +210,20 @@ export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
                 program.programmeTitleEn
               );
               return (
-                <li key={program.file}>
+                <li
+                  key={program.file}
+                  className="[contain-intrinsic-size:auto_4rem] [content-visibility:auto]"
+                >
                   <Link
                     href={`/programs/${program.slug}`}
+                    // Off by default here: a viewport prefetch per row is 270 payloads.
+                    prefetch={false}
                     className="group flex items-center justify-between gap-4 rounded-sm px-2 py-3.5 transition-colors hover:bg-accent/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <span className="flex min-w-0 items-start gap-3">
                       <GraduationCap className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-foreground" />
                       <span className="min-w-0">
-                        <span className="block truncate text-[0.9375rem] font-medium text-foreground">
+                        <span className="block text-[0.9375rem] font-medium text-foreground line-clamp-2 sm:truncate">
                           {primary}
                         </span>
                         {secondary ? (
@@ -141,7 +236,11 @@ export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
                           <span className="mx-1.5 opacity-40">•</span>
                           {program.totalCredits} hp
                           <span className="mx-1.5 opacity-40">•</span>
-                          {program.courses} courses
+                          {program.courses > 0
+                            ? `${program.courses} courses`
+                            : program.planFormat === "syllabus"
+                              ? "syllabus only"
+                              : "no course map"}
                           {program.tracks > 0 ? (
                             <>
                               <span className="mx-1.5 opacity-40">•</span>
@@ -162,9 +261,11 @@ export default function ProgramFinder({ programmes }: { programmes: Row[] }) {
                 </li>
               );
             })}
-          </ul>
+            </ul>
+          </div>
         </section>
-      ))}
+        );
+      })}
     </>
   );
 }

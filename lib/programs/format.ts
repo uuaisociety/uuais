@@ -57,8 +57,9 @@ export function includesWithinOneEdit(text: string, pattern: string): boolean {
  */
 export function programSubjectEn(titleEn: string | null | undefined): string | null {
   if (!titleEn) return null;
+  // Å/Ä/Ö appear in codes (UFÖ1Y); without them the credits and code stay in the title.
   const withoutMeta = titleEn
-    .replace(/,\s*\d+(?:[.,]\d+)?\s*(?:credits|weeks)\s*\([A-Z0-9]+\)\s*$/i, '')
+    .replace(/,\s*\d+(?:[.,]\d+)?\s*(?:credits|weeks)\s*\([A-ZÅÄÖ0-9]+\)\s*$/i, '')
     .trim();
   const dash = withoutMeta.indexOf('–');
   const subject = (dash === -1 ? withoutMeta : withoutMeta.slice(0, dash))

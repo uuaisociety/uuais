@@ -1,0 +1,61 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:25:00.602778+00:00",
+  "edges": [
+    {
+      "code": "3FV172",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV186",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV371",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV372",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV377",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV378",
+      "text": "180 credits",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV379",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Research Design, Methods and Statistics within the Public Health Area, 15 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "3FV386",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": []
+}

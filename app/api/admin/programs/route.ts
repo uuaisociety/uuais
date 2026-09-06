@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
         });
 
         return NextResponse.json({
-            faculty: index.faculty,
+            faculties: index.faculties,
             scrapedAt: index.scrapedAt,
             programmes,
         });

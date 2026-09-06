@@ -1,0 +1,65 @@
+{
+  "id": "701",
+  "code": "SNE2M",
+  "revisionId": "701",
+  "nameSv": "Masterprogram i nationalekonomi",
+  "totalCredits": 120.0,
+  "semesters": 4,
+  "registrationNumber": "SAMFAK 2013/94 Doss 3:2:1",
+  "finalisedDate": "23 september 2013",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [
+    {
+      "textSv": "Termin 1 inleds med två metodkurser i mikroteori och analytiska metoder. Under den andra halvan av terminen läses en mer tillämpad kurs i mikroteori samt makroteori.",
+      "semester": 1,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Termin 2 ägnas åt kurser i statistik, ekonometrisk teori, tillämpad ekonometri och policyutvärdering. Varje kurs är på 7,5 högskolepoäng.",
+      "semester": 2,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Termin 3 har studenterna större valfrihet. Institutionen erbjuder följande valfria kurser: Financial theory, Applied macroeconomics, Labour economics, Policy evaluation, Political economics och Public Economics. Studenterna uppmuntras att under denna termin också läsa kurser på andra institutioner, såsom matematiska, sociologiska, statsvetenskapliga, ekonomisk historiska och statistiska institutionen, samt kurser vid SLU.",
+      "semester": 3,
+      "period": null,
+      "trackId": null
+    },
+    {
+      "textSv": "Termin 4 skriver studenterna masteruppsatser. En förutsättning för att få påbörja masteruppsatsen är att studenten klarat minst 75 hp i programmet.",
+      "semester": 4,
+      "period": null,
+      "trackId": null
+    }
+  ],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "701",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "472",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "188",
+      "name": "Giltig från och med höstterminen 2011"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.510411+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=701",
+  "validFrom": "Studieplan giltig från och med höstterminen 2013, version 2",
+  "validFromYear": 2013,
+  "programmeTitle": "Masterprogram i nationalekonomi, 120 hp (SNE2M)",
+  "programmeTitleEn": "Master's Programme in Economics, 120 credits (SNE2M)",
+  "programmeUri": "/utbildning/program/masterprogram-nationalekonomi",
+  "faculty": "Samhällsvetenskapliga fakulteten",
+  "reviewed": false
+}

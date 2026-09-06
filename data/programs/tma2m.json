@@ -161,7 +161,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 90 credits in mathematics. Regression Analysis participation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2NE831",
@@ -391,7 +391,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 90 credits in mathematics. Real Analysis participation. Complex Analysis participation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA217",
@@ -408,7 +408,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 90 credits in mathematics. Participation in Real Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1RT700",
@@ -732,7 +732,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 90 credits Mathematics. Differential topology participation. Modules and homological algebra participation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA056",
@@ -749,7 +749,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 90 credits mathematics of 60 credits mathematics and 60 credits physics. Participation in Algebraic Structures or Symmetry and Group Theory in Physics. Participation in Linear Algebra III or Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA337",
@@ -785,7 +785,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 15 credits in mathematics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA181",
@@ -802,7 +802,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 15 credits in financial mathematics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA531",
@@ -836,7 +836,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 90 credits in mathematics. Real Analysis participation. Complex Analysis participation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MS049",
@@ -887,7 +887,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 90 credits in mathematics. Participation in Real Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA080",
@@ -904,7 +904,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in mathematics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TD186",
@@ -1006,7 +1006,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university.Also required is 60 credits in economics and 15 credits in statistics (or closely related subject)."
     },
     {
       "code": "2NE811",
@@ -1023,7 +1023,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university.Also required is 60 credits in economics and 15 credits in statistics (or closely related subject)."
     },
     {
       "code": "1MA036",
@@ -1125,7 +1125,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits and 30 credits in mathematics at advanced level. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA342",
@@ -1142,7 +1142,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits and 30 credits in mathematics at advanced level. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MS051",
@@ -1159,7 +1159,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including Probability Theory II and Inference Theory II or equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA080",
@@ -1176,7 +1176,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in mathematics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA182",
@@ -1193,7 +1193,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in financial mathematics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [
@@ -1290,7 +1290,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Studenter väljer 30 hp per termin, valt från spår, bryggningskurser och/eller övriga kurser.",
-      "labelEn": "Students choose 30 credits per semester from track courses, bridging courses and/or other courses.",
+      "labelEn": "Students take 30 credits per semester chosen from tracks, bridge courses, and/or other courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1372,7 +1372,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Studenter väljer 30 hp kurser från terminens kurser.",
-      "labelEn": "Students choose 30 credits of courses from those offered in the semester.",
+      "labelEn": "Students choose 30 credits of courses from the term's offerings.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1619,7 +1619,15 @@
     }
   ],
   "planFormat": "ladok",
+  "syllabusCourses": [],
   "edges": [
+    {
+      "from": "1MA007",
+      "to": "1MA056",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 90 credits mathematics of 60 credits mathematics and 60 credits physics. Participation in Algebraic Structures or Symmetry and Group Theory in Physics. Participation in Linear Algebra III or Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
     {
       "from": "1MA209",
       "to": "1MA255",
@@ -1677,6 +1685,20 @@
       "rationale": "120 credits including 90 credits in mathematics. Linear Algebra II. Participation in Algebraic Structures and Differential Topology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1MA036",
+      "to": "1MA336",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 90 credits Mathematics. Differential topology participation. Modules and homological algebra participation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA259",
+      "to": "1MA336",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 90 credits Mathematics. Differential topology participation. Modules and homological algebra participation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1MA216",
       "to": "1MA338",
       "type": "SOFT",
@@ -1705,6 +1727,13 @@
       "rationale": "120 credits including 30 credits in mathematics och 10 credits in computer science. Participation in Introduction to Data Science. Participation in Linear Algebra for Data Science or Linear Algebra II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1MS036",
+      "to": "1MS051",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability Theory II and Inference Theory II or equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1MS041",
       "to": "1MS900",
       "type": "SOFT",
@@ -1725,12 +1754,13 @@
       "name": "Giltig från och med höstterminen 2026"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.951458+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.432840+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=53757e7c-b967-4250-83db-911b32fbdfc8",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i matematik, 120 hp (TMA2M)",
   "programmeTitleEn": "Master's Programme in Mathematics, 120 credits (TMA2M)",
   "programmeUri": "/utbildning/program/masterprogram-matematik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

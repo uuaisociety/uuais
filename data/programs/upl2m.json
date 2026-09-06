@@ -1,0 +1,48 @@
+{
+  "id": "3702",
+  "code": "UPL2M",
+  "revisionId": "3702",
+  "nameSv": "Masterprogram i pedagogiskt ledarskap",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "UTBVET 2025/8",
+  "finalisedDate": "6 februari 2025",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "legacy",
+  "syllabusCourses": [],
+  "edges": [],
+  "revisions": [
+    {
+      "id": "3702",
+      "name": "Giltig från och med höstterminen 2025"
+    },
+    {
+      "id": "721",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;2"
+    },
+    {
+      "id": "443",
+      "name": "Giltig från och med höstterminen 2013, version&nbsp;1"
+    },
+    {
+      "id": "346",
+      "name": "Giltig från och med höstterminen 2012"
+    },
+    {
+      "id": "124",
+      "name": "Giltig från och med höstterminen 2011"
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.598584+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=3702",
+  "validFrom": "Studieplan giltig från och med höstterminen 2025",
+  "validFromYear": 2025,
+  "programmeTitle": "Masterprogram i pedagogiskt ledarskap, 120 hp (UPL2M)",
+  "programmeTitleEn": "Master's Programme in Educational Management, 120 credits (UPL2M)",
+  "programmeUri": "/utbildning/program/masterprogram-pedagogiskt-ledarskap",
+  "faculty": "Fakulteten för utbildningsvetenskaper",
+  "reviewed": false
+}

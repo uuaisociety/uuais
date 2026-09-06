@@ -335,7 +335,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of Data Science courses at second-cycle level. A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MD710",
@@ -355,7 +355,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of Data Science courses at second-cycle level. A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1DL465",
@@ -402,7 +402,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "The following courses are elective.",
+      "labelEn": "A heading for elective courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -413,7 +413,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "Elective courses: this header indicates the courses that follow are electives, without naming any specific course.",
+      "labelEn": "This is a heading introducing elective courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -424,7 +424,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "Elective courses:",
+      "labelEn": "A heading marking the start of the elective courses section.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -435,7 +435,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "Elective courses:",
+      "labelEn": "This is a bare heading introducing the elective courses section.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -446,7 +446,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "Heading meaning 'Elective courses:'; it introduces a list of electives without naming any specific course.",
+      "labelEn": "This is a heading introducing the elective courses section.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -457,7 +457,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "Elective courses.",
+      "labelEn": "This is a heading introducing the elective courses section.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -518,6 +518,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1DL301",
@@ -562,6 +563,13 @@
       "rationale": "A Bachelor's degree and, in addition at least 30 credits in data science at Master's level. Data, ethics and law. Participation in course Project in Data Science. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1RT700",
+      "to": "1DT114",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including a second course in programming. Participation in a course in machine learning. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1TD062",
       "to": "1TD054",
       "type": "HARD",
@@ -572,13 +580,6 @@
       "from": "1DL301",
       "to": "1TD169",
       "type": "SOFT",
-      "source": "llm",
-      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
-    },
-    {
-      "from": "1MA330",
-      "to": "1TD169",
-      "type": "HARD",
       "source": "llm",
       "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
     }
@@ -625,12 +626,13 @@
       "name": "Giltig från och med höstterminen 2020"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.896012+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.375905+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10011",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i dataanalys – Data engineering, 120 hp (TDA2M)",
   "programmeTitleEn": "Master's Programme in Data Science – Machine Learning and Statistics, 120 credits (TDA2M)",
   "programmeUri": "/utbildning/program/masterprogram-dataanalys-data-engineering",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

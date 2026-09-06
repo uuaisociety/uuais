@@ -1,0 +1,367 @@
+{
+  "id": "2447",
+  "code": "RTE2M",
+  "revisionId": "2447",
+  "nameSv": "Masterprogram i teologi och religionsvetenskap",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": null,
+  "finalisedDate": "28 maj 2024",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Masterprogram i teologi och religionsvetenskap har två olika ingångar och ger möjlighet till antingen specialisering eller påbyggnad inom religionsvetenskap:",
+    "en ingång för student med kandidatexamen i religionsvetenskap som ger specialisering inom olika religionsvetenskapliga ämnen,",
+    "en ingång för student utan tidigare studier i religionsvetenskap där studenten får en religionsvetenskaplig påbyggnad.",
+    "Den student som har läst religionsvetenskap på grundnivå studerar religionsvetenskap utifrån en av fyra inriktningar: empirisk-praktisk, exegetisk-hermeneutisk, historisk eller filosofisk. Studenten får härigenom en god ämnesmässig grund kopplad till metodiska färdigheter.",
+    "Den student som inte har läst religionsvetenskap tidigare ägnar den första terminen åt en introduktion av olika religionsvetenskapliga ämnen och perspektiv. Därefter studerar studenten vidare inom en av de fyra ovan nämnda inriktningarna.",
+    "I inriktningarna fördjupar sig studenten och får specialiserade ämneskunskaper baserade på aktuell forskning inom Religionshistoria och global kristendom, Religionsbeteendevetenskap och praktisk teologi, Bibelvetenskap, Kyrkohistoria och missionshistoria, Etik och religionsfilosofi samt Systematisk teologi.",
+    "Efter ett år kan studenten avsluta sina studier med en magisterexamen i religionsvetenskap. Då skriver studenten en magisteruppsats under slutet av första året tillsammans med teori och ämnesspecialisering.",
+    "Under termin tre finns möjlighet att läsa valbara kurser, göra arbetsplatsförlagd praktik, eller studera utomlands.",
+    "Som valbara kurser räknas även kurser ur andra inriktningar på programmet än studentens egen. Inom inriktningarna Religionshistoria och global kristendom, Kyrkohistoria och missionshistoria, Etik och religionsfilosofi samt Systematisk teologi finns för den student som under termin två läst Fördjupningskurs IIa möjlighet att under termin tre läsa Fördjupningskurs IIb, eller tvärtom.",
+    "Den sista terminen ägnar studenten åt ytterligare ämnesspecialisering, teori och metod och skriver en masteruppsats.",
+    "Inriktningarna Religionshistoria och global kristendom, Religionsbeteendevetenskap och praktisk teologi, Bibelvetenskap, Kyrkohistoria och missionshistoria, Etik och religionsfilosofi, Systematisk teologi",
+    "Termin 1",
+    "Ämnes- och metodkurs, 15 hp",
+    "a) Empirisk-praktisk ämnes- och metodkurs, 15 hp",
+    "b) Exegetisk-hermeneutisk ämnes- och metodkurs, 15 hp",
+    "c) Historisk ämnes- och metodkurs, 15 hp",
+    "d) Filosofisk ämnes- och metodkurs, 15 hp",
+    "Fördjupningskurs I, 15 hp",
+    "a) Empirisk-praktisk fördjupningskurs I, 15 hp",
+    "b) Exegetisk-hermeneutisk fördjupningskurs I, 15 hp",
+    "c) Historisk fördjupningskurs I, 15 hp",
+    "d) Filosofisk fördjupningskurs I, 15 hp",
+    "Termin 2",
+    "Fördjupningskurs II, 15 hp",
+    "a) Empirisk-praktisk fördjupningskurs II, 15 hp",
+    "b) Exegetisk-hermeneutisk fördjupningskurs II, 15 hp",
+    "c) Historisk fördjupningskurs IIa - religionshistoria och global kristendom, 15 hp eller Historisk fördjupningskurs IIb - kyrkohistoria och missionshistoria, 15 hp",
+    "d) Filosofisk fördjupningskurs IIa - etik och religionsfilosofi eller Filosofisk fördjupningskurs IIb - systematisk teologi",
+    "Fördjupningskurs III, 15 hp",
+    "a) Empirisk-praktisk fördjupningskurs III, 15 hp",
+    "b) Exegetisk-hermeneutisk fördjupningskurs III, 15 hp",
+    "c) Historisk fördjupningskurs III, 15 hp",
+    "d) Filosofisk fördjupningskurs III, 15 hp",
+    "eller",
+    "Magisteruppsats, 15 hp",
+    "Termin 3",
+    "a) Valbara kurser, 30 hp",
+    "b) Praktik, 30 hp",
+    "c) Utbytesstudier, 30 hp",
+    "Termin 4",
+    "Masteruppsats, 30 hp",
+    "eller",
+    "Fördjupningskurs III, 15 hp",
+    "a) Empirisk-praktisk fördjupningskurs III, 15 hp",
+    "b) Exegetisk-hermeneutisk fördjupningskurs III, 15 hp",
+    "c) Historisk fördjupningskurs III, 15 hp",
+    "d) Filosofisk fördjupningskurs III, 15 hp",
+    "samt",
+    "Masteruppsats, 15 hp",
+    "Allmän inriktning",
+    "Den student som inte har religionsvetenskap som huvudområde i sin grundutbildning får under termin 1 en introduktion till teologiska och religionsvetenskapliga kunskaper, teorier och metoder på avancerad nivå. Under termin 2-4 ges fördjupning inom en av sex inriktningar.",
+    "Termin 1",
+    "Introduktion till religionsvetenskap på avancerad nivå, 30 hp",
+    "Termin 2",
+    "Ämnes- och metodkurs, 15 hp",
+    "a) Empirisk-praktisk ämnes- och metodkurs, 15 hp",
+    "b) Exegetisk-hermeneutisk ämnes- och metodkurs, 15 hp",
+    "c) Historisk ämnes- och metodkurs, 15 hp",
+    "d) Filosofisk ämnes- och metodkurs, 15 hp",
+    "Fördjupningskurs I, 15 hp",
+    "a) Empirisk-praktisk fördjupningskurs I, 15 hp",
+    "b) Exegetisk-hermeneutisk fördjupningskurs I, 15 hp",
+    "c) Historisk fördjupningskurs I, 15 hp",
+    "d) Filosofisk fördjupningskurs I, 15 hp",
+    "eller",
+    "Magisteruppsats, 15 hp",
+    "Termin 3",
+    "a) Valbara kurser, 30 hp",
+    "b) Praktik, 30 hp",
+    "c) Utbytesstudier, 30 hp",
+    "Termin 4",
+    "Masteruppsats, 30 hp",
+    "eller",
+    "Fördjupningskurs I, 15 hp",
+    "a) Empirisk-praktisk fördjupningskurs I, 15 hp",
+    "b) Exegetisk-hermeneutisk fördjupningskurs I, 15 hp",
+    "c) Historisk fördjupningskurs I, 15 hp",
+    "d) Filosofisk fördjupningskurs I, 15 hp",
+    "samt",
+    "Masteruppsats, 15 hp",
+    "Se respektive kursplan för mer information."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [
+    {
+      "title": "Ämnes- och metodkurs",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "a) Empirisk-praktisk ämnes- och metodkurs",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "b) Exegetisk-hermeneutisk ämnes- och metodkurs",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "c) Historisk ämnes- och metodkurs",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "d) Filosofisk ämnes- och metodkurs",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "a) Empirisk-praktisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "b) Exegetisk-hermeneutisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "c) Historisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "d) Filosofisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningskurs II",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "a) Empirisk-praktisk fördjupningskurs II",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "b) Exegetisk-hermeneutisk fördjupningskurs II",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningskurs III",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "a) Empirisk-praktisk fördjupningskurs III",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "b) Exegetisk-hermeneutisk fördjupningskurs III",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "c) Historisk fördjupningskurs III",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "d) Filosofisk fördjupningskurs III",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Magisteruppsats",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "a) Valbara kurser",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "b) Praktik",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "c) Utbytesstudier",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Masteruppsats",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningskurs III",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "a) Empirisk-praktisk fördjupningskurs III",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "b) Exegetisk-hermeneutisk fördjupningskurs III",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "c) Historisk fördjupningskurs III",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "d) Filosofisk fördjupningskurs III",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Masteruppsats",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Introduktion till religionsvetenskap på avancerad nivå",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Ämnes- och metodkurs",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "a) Empirisk-praktisk ämnes- och metodkurs",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "b) Exegetisk-hermeneutisk ämnes- och metodkurs",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "c) Historisk ämnes- och metodkurs",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "d) Filosofisk ämnes- och metodkurs",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "a) Empirisk-praktisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "b) Exegetisk-hermeneutisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "c) Historisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "d) Filosofisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Magisteruppsats",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "a) Valbara kurser",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "b) Praktik",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "c) Utbytesstudier",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Masteruppsats",
+      "credits": 30.0,
+      "semester": null
+    },
+    {
+      "title": "Fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "a) Empirisk-praktisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "b) Exegetisk-hermeneutisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "c) Historisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "d) Filosofisk fördjupningskurs I",
+      "credits": 15.0,
+      "semester": null
+    },
+    {
+      "title": "Masteruppsats",
+      "credits": 15.0,
+      "semester": null
+    }
+  ],
+  "scrapedAt": "2026-09-05T09:25:16.584438+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2447",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i teologi och religionsvetenskap – Systematisk teologi, 120 hp (RTE2M)",
+  "programmeTitleEn": "Master's Programme in Theology and Religious Studies – Systematic Theology, 120 credits (RTE2M)",
+  "programmeUri": "/utbildning/program/masterprogram-teologi-och-religionsvetenskap-systematisk-teologi",
+  "faculty": "Teologiska fakulteten",
+  "reviewed": false
+}

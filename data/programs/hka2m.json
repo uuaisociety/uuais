@@ -1,0 +1,32 @@
+{
+  "id": "1961",
+  "code": "HKA2M",
+  "revisionId": "1961",
+  "nameSv": "Masterprogram i kulturantropologi",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2022/47",
+  "finalisedDate": "30 augusti 2022",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Masterprogrammet är tvåårigt med möjlighet att avlägga magisterexamen efter ett år. Möjlighet finns även att komplettera en tidigare magisterexamen för att erhålla en masterexamen.",
+    "Programmets första termin innehåller en introduktionskurs och tre ämnesfördjupande kurser om det vetenskapliga hantverket och teoribildningen, samt en metodkurs med inriktning på etnografi. Under programmets andra termin läser studenterna i normalfallet två tematiska och ämnesfördjupande kurser, samt inleder examensarbetet och genomför den empiriska datainsamlingen. Programmets tredje termin består av valbara kurser. Inom ramen för dessa finns även möjlighet att göra praktik eller delta i internationellt studentutbyte genom universitetets och institutionens utbytesavtal. Termin fyra läses resterande valbara kurser och examensarbetet avslutas."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.470448+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1961",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i kulturantropologi, 120 hp (HKA2M)",
+  "programmeTitleEn": "Master's Programme in Cultural Anthropology, 120 credits (HKA2M)",
+  "programmeUri": "/utbildning/program/masterprogram-kulturantropologi",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

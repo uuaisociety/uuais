@@ -1,0 +1,33 @@
+{
+  "id": "1698",
+  "code": "HHU1K",
+  "revisionId": "1698",
+  "nameSv": "Humanioraprogrammet",
+  "totalCredits": 180.0,
+  "semesters": 0,
+  "registrationNumber": "UFV 2021/1097",
+  "finalisedDate": "25 maj 2021",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Programmet består av en inledande programspecifik termin och fem terminers studier i valfria ämnen på historisk-filosofiska fakulteten och/eller utomlands. Studenterna erbjuds även en avslutande programspecifik termin.",
+    "Termin 1: Inledande termin som ges i samarbete mellan fakultetens institutioner.",
+    "Termin 2-6: 90 hp (inkl examensarbete) i ett huvudämne. 60 hp fördelat på ett eller flera ämnen, utlandsstudier och/eller praktik."
+  ],
+  "syllabusEntryRequirements": "Grundläggande behörighet och Historia 1b eller 1a1+1a2, Samhällskunskap 1b eller 1a1+1a2",
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.448010+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1698",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Humanioraprogrammet, 180 hp (HHU1K)",
+  "programmeTitleEn": "Open Bachelor's Programme in the Humanities, 180 credits (HHU1K)",
+  "programmeUri": "/utbildning/program/humanioraprogrammet",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

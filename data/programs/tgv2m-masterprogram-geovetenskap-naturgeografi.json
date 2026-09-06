@@ -293,7 +293,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1GE072",
@@ -418,7 +418,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1GV054",
@@ -435,7 +435,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in mathematics and physics, or 60 credits in earth science and 15 credits in mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1BG211",
@@ -469,7 +469,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits with at least 90 credits in Earth Sciences and 15 credits mathematics, or 90 credits in Physics."
     },
     {
       "code": "1GV208",
@@ -503,7 +503,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Minimum 30 credits (passed) in Earth Science at advanced level and a course syllabus approved by the department."
     },
     {
       "code": "1GV174",
@@ -520,7 +520,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Minimum 30 credits (passed) in Earth Science at advanced level and a course syllabus approved by the department."
     },
     {
       "code": "1GV048",
@@ -537,7 +537,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Minimum 30 credits (passed) in Earth Science at advanced level and a project plan approved by the department."
     },
     {
       "code": "1GV049",
@@ -554,7 +554,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Minimum 30 credits (passed) in Earth Science at advanced level and a project plan approved by the department."
     },
     {
       "code": "1GV051",
@@ -571,7 +571,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Minimum 30 credits (passed) in Earth Science at advanced level and a project plan approved by the department."
     },
     {
       "code": "1GV131",
@@ -588,7 +588,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits on advanced level in Earth science"
     },
     {
       "code": "1GV132",
@@ -605,7 +605,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits on advanced level in Earth science"
     },
     {
       "code": "1GV133",
@@ -622,7 +622,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits on advanced level in Earth science"
     }
   ],
   "rules": [
@@ -633,7 +633,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Eller:",
-      "labelEn": "Or: — introduces an alternative option in the study plan.",
+      "labelEn": "A separator introducing an alternative option.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -644,7 +644,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "alternativt",
-      "labelEn": "Alternative course option (alternativt).",
+      "labelEn": "A bare marker meaning 'alternatively' with no courses named.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -657,7 +657,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Examensarbete E i geovetenskap, 15 (av 45) högskolepoäng (1GV085) kan vid behov påbörjas i denna period.",
-      "labelEn": "The Degree Project E in Earth Science (1GV085), 15 of 45 credits, may if needed be started during this period.",
+      "labelEn": "The Degree Project E in Earth Science (1GV085), 15 of 45 credits, may if needed be started in this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -670,7 +670,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "1GV085 Examensarbete E i geovetenskap, 30 (av 45) högskolepoäng.",
-      "labelEn": "Degree Project E in Earth Science (1GV085) contributes 30 of its 45 credits toward the requirement.",
+      "labelEn": "Only 30 of the 45 credits for this degree project count.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -683,7 +683,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "1GV220 Examensarbete E i geovetenskap, 30 (av 60) högskolepoäng.",
-      "labelEn": "Only 30 of the 60 credits for the Degree Project E in Earth Sciences count toward the degree.",
+      "labelEn": "Degree Project E in Earth Sciences counts for 30 of the 60 credits.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -694,7 +694,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Övriga kurser (varierade perioder):",
-      "labelEn": "Other courses, taught in varying periods.",
+      "labelEn": "This is a heading introducing other courses offered in varying periods.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -738,6 +738,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1GV014",
@@ -891,12 +892,13 @@
       "name": "Giltig från och med höstterminen 2012"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.928965+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.409794+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10027",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i geovetenskap – Naturgeografi, 120 hp (TGV2M)",
   "programmeTitleEn": "Master's Programme in Earth Science – Physical Geography, 120 credits (TGV2M)",
   "programmeUri": "/utbildning/program/masterprogram-geovetenskap-naturgeografi",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

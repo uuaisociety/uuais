@@ -112,8 +112,27 @@ export type Program = {
   /** The same programme in the university's English catalogue, matched by code. */
   programmeTitleEn: string | null;
   programmeUri: string;
-  planFormat: 'legacy' | 'ladok';
+  planFormat: PlanFormat;
+  /** Which faculty's catalogue lists the programme. */
+  faculty: string;
+  /**
+   * Set only when planFormat is 'syllabus': prose that names courses but never their codes,
+   * one entry per paragraph so the page can set them as paragraphs.
+   */
+  syllabusLayout?: string[];
+  syllabusEntryRequirements?: string | null;
+  syllabusCourses?: SyllabusCourse[];
 };
+
+/** A course a syllabus names in prose: no code, and a semester only where it says so. */
+export type SyllabusCourse = {
+  title: string;
+  credits: number | null;
+  semester: number | null;
+};
+
+/** 'syllabus' means UU publishes no study plan for the programme, so there is no map. */
+export type PlanFormat = 'legacy' | 'ladok' | 'syllabus';
 
 export type ProgramIndexEntry = {
   file: string;
@@ -126,13 +145,15 @@ export type ProgramIndexEntry = {
   semesters: number;
   courses: number;
   tracks: number;
-  planFormat: 'legacy' | 'ladok';
+  planFormat: PlanFormat;
+  faculty: string;
   validFrom: string | null;
   validFromYear: number | null;
 };
 
 export type ProgramIndex = {
-  faculty: string;
+  /** Every faculty the run covered, so a partial ingest is visible as one. */
+  faculties: string[];
   scrapedAt: string;
   programmes: ProgramIndexEntry[];
 };
@@ -234,7 +255,9 @@ export function getProgram(code: string): Program | null {
       console.error(`[Programs] Could not read ${entry.file}:`, error);
     }
   }
-  cache.set(key, program);
+  // Only a hit is cached: the public feedback endpoint passes a user-supplied slug in here,
+  // and caching misses would let a stream of junk slugs grow the map without bound.
+  if (program) cache.set(key, program);
   return program;
 }
 

@@ -115,7 +115,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E"
     },
     {
       "code": "1MA090",
@@ -134,7 +134,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics E"
     },
     {
       "code": "1MA360",
@@ -154,7 +154,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Basic Algebra or Algebra and Geometry (can be taken in parallel)."
     },
     {
       "code": "1TD433",
@@ -192,7 +192,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Algebra and Geometry"
     },
     {
       "code": "1MA361",
@@ -212,7 +212,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "5 credits in mathematics. Participation in Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry."
     },
     {
       "code": "1FA105",
@@ -231,7 +231,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Algebra and Geometry"
     },
     {
       "code": "1TE720",
@@ -250,7 +250,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in the courses Single Variable Calculus/Calculus in One Variable and Introduction to Scientific Computing/Computer Programming I. Participation in Linear Algebra and Geometry/Algebra and Geometry."
     },
     {
       "code": "1TM044",
@@ -269,7 +269,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Algebra and Geometry and in Mechanics Basic Course. Participation in Several Variable Calculus (can be taken in parallel) ."
     },
     {
       "code": "1FA514",
@@ -421,7 +421,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in the courses Computer Programming I, Single Variable Calculus, Multi Variable Calculus and Linear Algebra."
     },
     {
       "code": "1FA121",
@@ -459,7 +459,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Geometry and Analysis I."
     },
     {
       "code": "1TD352",
@@ -497,7 +497,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering"
     },
     {
       "code": "1FA522",
@@ -516,7 +516,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering. One of these alternatives: 1) One of the courses Mechanics II, Mechanics KF, Applied Mechanics I. Participation in Electromagnetism I or Electromagnetism, these courses can also be taken in parallel. 2) Basics of Electrical Engineering III: Field Theory."
     },
     {
       "code": "1FA535",
@@ -687,7 +687,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering including Mechanics II/Applied Mechanics I/Mechanics II F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TM043",
@@ -706,7 +706,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. Applied Mechanics I/Mechanics II F. Analysis in Several Variables. Participation in Mechanics III and in Introduction to Computational Science F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1EL002",
@@ -725,7 +725,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Applied Mechanics I/Mechanics II. Several Variable Calculus."
     },
     {
       "code": "1TE655",
@@ -744,7 +744,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering. Participation in transform methods. Participation in one of the courses Electronics I, Electromagnetism (10 credits), Electromagnetism II with Electric Circuits or participation in both Electromagnetism I and Electric Circuit Analysis or participation in Electromagnetism and Electric Circuits."
     },
     {
       "code": "1TE664",
@@ -763,7 +763,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits within the Master's Programme in Engineering Physics"
     },
     {
       "code": "1TD722",
@@ -1624,7 +1624,7 @@
       ],
       "trackId": "berakningsteknik__artificiell-intelligens",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Probability and Statistics."
     },
     {
       "code": "1RT720",
@@ -1833,7 +1833,7 @@
       ],
       "trackId": "inbyggda-system__hardvara-for-inbyggda-system",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. One of the courses Electronics I or Basics of Electrical Engineering I: Components and Circuits. One of the courses Electric Measuring Techniques, Applied Analogue Electronics or Analogue Electronics. One of the courses Electromagnetism I or Basics of Electrical Engineering III: Field Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA326",
@@ -1852,7 +1852,7 @@
       ],
       "trackId": "inbyggda-system__hardvara-for-inbyggda-system",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. One of the courses Computer Programming I, Computer Programming II or Program Design and Data Structures. One of the courses Electronics I, Digital Technology and Electronics, or Digital Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TE750",
@@ -1871,7 +1871,7 @@
       ],
       "trackId": "inbyggda-system__hardvara-for-inbyggda-system",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits within the Master's Programme in Engineering Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TE044",
@@ -1890,7 +1890,7 @@
       ],
       "trackId": "inbyggda-system__hardvara-for-inbyggda-system",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including Several Variable Calculus, Transform Methods, Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1EL011",
@@ -1909,7 +1909,7 @@
       ],
       "trackId": "inbyggda-system__hardvara-for-inbyggda-system",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Computer Programming I and participation in Probability and Statistics or Statistics for Engineers."
     },
     {
       "code": "1FA326",
@@ -1929,7 +1929,7 @@
       ],
       "trackId": "inbyggda-system__systemteknik",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. One of the courses Computer Programming I, Computer Programming II or Program Design and Data Structures. One of the courses Electronics I, Digital Technology and Electronics, or Digital Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TE747",
@@ -1949,7 +1949,7 @@
       ],
       "trackId": "inbyggda-system__systemteknik",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering including Signals and Systems as well as Probability and Statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TE748",
@@ -1968,7 +1968,7 @@
       ],
       "trackId": "inbyggda-system__systemteknik",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering including Applied Analogue Electronics (or Analogue Electronics), Electronics I and Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1EL011",
@@ -1987,7 +1987,7 @@
       ],
       "trackId": "inbyggda-system__systemteknik",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Computer Programming I and participation in Probability and Statistics or Statistics for Engineers."
     },
     {
       "code": "1FA680",
@@ -2120,7 +2120,7 @@
       ],
       "trackId": "tillampad-fysik__kvantteknologi",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits. Participation in Solid State Physics I/Solid state physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA019",
@@ -2177,7 +2177,7 @@
       ],
       "trackId": "tillampad-fysik__kvantteknologi",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. Participation in the courses Quantum Mechanics and Solid State Physics I/F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA592",
@@ -2273,7 +2273,7 @@
       ],
       "trackId": "hallbar-energiteknik",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering including 20 credits in mathematics. Technical Thermodynamics and Introduction to Scientific Computing/Scientific Computing I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1RT495",
@@ -2388,7 +2388,7 @@
       ],
       "trackId": "elektrifiering",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. Power Electronics or Power Electronics I. Participation in High Voltage Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1EL009",
@@ -3032,7 +3032,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "240 credits withing the Master programme in Engineering Physics including Independent Project in Engineering Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1EL014",
@@ -3872,7 +3872,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Probability and Statistics."
     },
     {
       "code": "1DL251",
@@ -3987,7 +3987,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including Several Variable Calculus, Transform Methods, Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA358",
@@ -4063,7 +4063,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "130 credits in science/engineering including Electronics I, Electromagnetism II, Applied Analogue Electronics as well as Design of Wireless Interfaces for Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA659",
@@ -4114,7 +4114,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "För studenter som antogs 2025 eller tidigare kan 1MA360 bytas mot 1MA013 i examen. 1MA360 och 1MA013 kan inte ingå i samma examen.",
-      "labelEn": "Students admitted in 2025 or earlier may replace 1MA360 with 1MA013 in the degree, and the two cannot both count toward the same degree.",
+      "labelEn": "Students admitted in 2025 or earlier may replace 1MA360 with 1MA013 in their degree, but the two courses cannot both count toward the same degree.",
       "cohortBefore": 2025,
       "source": "llm"
     },
@@ -4127,8 +4127,8 @@
       "semester": 2,
       "trackId": null,
       "textSv": "För studenter som antogs 2025 eller tidigare kan 1MA361 bytas mot 1MA016 i examen. 1MA361 och 1MA016 kan inte ingå i samma examen.",
-      "labelEn": "Students admitted in 2025 or earlier may substitute 1MA361 with 1MA016, and the two cannot both count toward the same degree.",
-      "cohortBefore": 2025,
+      "labelEn": "Students admitted in 2025 or earlier may replace 1MA361 with 1MA016, and the two cannot both count toward the degree.",
+      "cohortBefore": 2026,
       "source": "llm"
     },
     {
@@ -4140,7 +4140,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "För studenter som antogs 2025 eller tidigare kan 1TM044 bytas mot 1TE760 i examen. 1TM044 och 1TE760 kan inte ingå i samma examen.",
-      "labelEn": "Students admitted 2025 or earlier may substitute 1TM044 with 1TE760 in the degree, and the two cannot both count in the same degree.",
+      "labelEn": "Students admitted in 2025 or earlier may replace 1TM044 with 1TE760 in their degree, but the two courses cannot both count.",
       "cohortBefore": 2025,
       "source": "llm"
     },
@@ -4153,29 +4153,39 @@
       "semester": 3,
       "trackId": null,
       "textSv": "För studenter som antogs 2024 eller tidigare gäller:För inriktningarna Beräkningsteknik, Elektrifiering, Hållbar energiteknik och Inbyggda system är Tillämpad mekanik II (1TM014) och Mekanik III (1FA103) alternativobligatoriska inom examenskravet.För inriktningen Tillämpad fysik är Mekanik III (1FA103) obligatorisk inom examenskravet.1TM014 och 1FA103 får ingå i samma examen.För studenter som antogs 2025 eller senare gäller att Mekanik III är obligatorisk inom examenskravet för alla inriktningar.",
-      "labelEn": "For intakes up to 2024, Tillämpad mekanik II (1TM014) may be taken instead of Mekanik III (1FA103), which is required for all intakes from 2025 and cannot be combined with 1TM014 in the same degree.",
-      "cohortBefore": 2024,
+      "labelEn": "Students admitted before 2025 may take Applied Mechanics II (1TM014) in place of Mechanics III in some specialisations, while students admitted 2025 or later must take Mechanics III in all specialisations.",
+      "cohortBefore": 2025,
       "source": "llm"
     },
     {
       "id": "rule-4",
       "type": "NOTE",
-      "courseCodes": [],
+      "courseCodes": [
+        "1FA103",
+        "1RT490",
+        "1TM043",
+        "1EL002"
+      ],
       "semester": 5,
       "trackId": null,
       "textSv": "För de som ska välja inriktning till ht 2027 är Mekanik III obligatorisk i examenskravet för de som läser inriktningen Tillämpad fysik. För de studenter som ännu inte läst 1FA103 kan denna väljas här istället för 1RT490 vt 2027. 1RT490 kan då läsas i period 33 istället för Materialmekanikmodellering eller Strömningslära (de kurserna kan då tas i period 43) alternativt i valfri period i åk 4 eller period 51. För studenter som ska läsa inriktningen Inbyggda system bör 1RT490 läsas i period 33 eftersom den utgör behörighetskrav på kurser inom profilen.",
-      "labelEn": null,
+      "labelEn": "Mechanics III is mandatory for the Applied Physics track, and students who have not yet taken it may take it in place of Automatic Control I in spring 2027, rescheduling 1RT490 to another period.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-5",
-      "type": "NOTE",
-      "courseCodes": [],
+      "type": "COHORT_SUBSTITUTION",
+      "courseCodes": [
+        "1FA103",
+        "1RT490",
+        "1TM043",
+        "1EL002"
+      ],
       "semester": 6,
       "trackId": null,
       "textSv": "De studenter som läste 1FA103 HT2026 i p2 istället för 1RT490 kan läsa 1RT490 här istället för Materialmekanikmodellering eller Strömningslära (de kurserna kan då tas i period 43) alternativt i valfri period i åk 4 eller period 51. Studenter som ska läsa någon av inriktningarna Inbyggda system eller Hållbar energiteknik bör läsa 1RT490 här eftersom den utgör behörighetskrav på kurser inom inriktningarna.",
-      "labelEn": null,
+      "labelEn": "Students who took 1FA103 instead of 1RT490 may take 1RT490 in place of 1TM043 or 1EL002, and 1RT490 is advised for the Embedded Systems and Sustainable Energy Technology tracks.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4186,7 +4196,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Antingen",
-      "labelEn": "Either one of the alternative courses must be chosen.",
+      "labelEn": "A bare heading ('Either') introducing a choice of alternatives.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4197,7 +4207,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "eller",
-      "labelEn": "The Swedish word 'eller' ('or') simply indicates a choice between adjacent alternatives in the study plan, without naming any specific courses.",
+      "labelEn": "This is a bare separator word meaning 'or' and names no courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4211,19 +4221,23 @@
       "semester": 6,
       "trackId": null,
       "textSv": "En av kurserna Strömningslära (1EL002) eller Materialmekanikmodellering (1TM043) är obligatorisk inom examenskravet. För studenter som antogs 2024 eller tidigare kan 1TM043 bytas mot 1TE654 i examen.",
-      "labelEn": "One of the courses Fluid Mechanics (1EL002) or Computational Mechanics of Materials (1TM043) must be taken to fulfil the degree requirement.",
+      "labelEn": "Either Fluid Mechanics or Computational Mechanics of Materials is required; students admitted 2024 or earlier may replace 1TM043 with 1TE654 in their degree.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-9",
-      "type": "NOTE",
-      "courseCodes": [],
+      "type": "COHORT_SUBSTITUTION",
+      "courseCodes": [
+        "1TE655",
+        "1TM043",
+        "1EL002"
+      ],
       "semester": 6,
       "trackId": null,
       "textSv": "För de som ska välja inriktning till ht 2027 är Elkraftteknik obligatorisk i examenskravet för de som läser elektrifieringsinriktningen. Dessa läser då Elkraftteknik här vt 2027 istället för Materialmekanikmodellering eller Strömningslära (de kurserna kan då tas i Åk 4, p3)",
-      "labelEn": null,
-      "cohortBefore": null,
+      "labelEn": "Electrification-track students take Power Engineering in spring 2027 instead of Computational Mechanics of Materials or Applied Fluid Mechanics, which can then be taken in year 4 period 3.",
+      "cohortBefore": 2027,
       "source": "llm"
     },
     {
@@ -4236,7 +4250,7 @@
       "semester": 7,
       "trackId": "berakningsteknik",
       "textSv": "En av kurserna Tillämpade finita elementmetoder (1TD056) och Datoriserad bildanalys I (1TD396) är obligatorisk inom examenskravet för inriktningen beräkningsteknik. Tillämpade finita elementmetoder (1TD056) schemaläggs i profilen Tillämpad beräkningsteknik.",
-      "labelEn": "One of Applied Finite Element Methods (1TD056) and Computer-Assisted Image Analysis I (1TD396) is required for the computational engineering specialisation, with 1TD056 scheduled in the applied computational engineering profile.",
+      "labelEn": "One of Applied Finite Element Methods (1TD056) and Computer-Assisted Image Analysis I (1TD396) is required for the computational science and engineering track.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4247,7 +4261,7 @@
       "semester": 7,
       "trackId": "berakningsteknik",
       "textSv": "Antingen",
-      "labelEn": "The note 'Antingen' (either) is an incomplete either/or marker that specifies no courses.",
+      "labelEn": "Bare heading meaning \"either\" with no courses specified.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4258,7 +4272,7 @@
       "semester": 7,
       "trackId": "berakningsteknik",
       "textSv": "eller",
-      "labelEn": "The Swedish word 'eller' ('or') merely connects preceding alternatives without naming any specific courses.",
+      "labelEn": "The word 'or' appears alone, acting as a separator between alternatives rather than defining a rule.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4272,7 +4286,7 @@
       "semester": 7,
       "trackId": "berakningsteknik",
       "textSv": "Tillämpad djupinlärning i fysik och teknik (1FA370) kan inte tas med i examen tillsammans med Djupinlärning (1RT720)",
-      "labelEn": "Applied Deep Learning in Physics and Engineering (1FA370) cannot count toward the degree together with Deep Learning (1RT720).",
+      "labelEn": "Applied Deep Learning in Physics and Engineering and Deep Learning cannot both count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4286,7 +4300,7 @@
       "semester": 7,
       "trackId": "berakningsteknik__tillampad-berakningsteknik",
       "textSv": "En av kurserna Funktionalanalys med tillämpningar (1MA356) och Avancerad probabilistisk maskininlärning (1RT705) är obligatorisk inom examenskravet för inriktningen beräkningsteknik. Avancerad probabilistisk maskininlärning (1RT705) schemaläggs i profilen Artificiell intelligens i period 51.",
-      "labelEn": "One of Functional Analysis with Applications (1MA356) or Advanced Probabilistic Machine Learning (1RT705) must be taken to meet the degree requirements for the computational science specialisation.",
+      "labelEn": "One of Functional Analysis with Applications or Advanced Probabilistic Machine Learning is required within the degree requirements for the scientific computing track.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4300,7 +4314,7 @@
       "semester": 7,
       "trackId": "berakningsteknik__tillampad-berakningsteknik",
       "textSv": "En av kurserna Tillämpade finita elementmetoder (1TD056) eller Datoriserad bildanalys I (1TD396) är obligatorisk inom examenskravet för inriktningen beräkningsteknik. Datoriserad bildanalys I (1TD396) schemaläggs i profilen Artificiell intelligens.",
-      "labelEn": "One of Applied Finite Element Methods (1TD056) or Computer-Assisted Image Analysis I (1TD396) is required for the computational engineering specialisation.",
+      "labelEn": "One of Applied Finite Element Methods (1TD056) or Computer-Assisted Image Analysis I (1TD396) must be taken to meet the degree requirements of the computational science track.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4313,8 +4327,8 @@
       "semester": 7,
       "trackId": "inbyggda-system",
       "textSv": "Analog elektronik (1TE725) är obligatorisk inom examenskravet för de som tar ut examen enligt en studieplan före 2022/2023 då den ersattes av kursen Tillämpad analog elektronik (1TM012) som nu är obligatorisk inom inriktningen Inbyggda system. 1TE725 och 1TM012 kan inte ingå tillsammans i examen",
-      "labelEn": "Students on study plans before 2022/2023 may take Analogue Electronics (1TE725) instead of Applied Analogue Electronics (1TM012), and the two cannot both count toward the degree.",
-      "cohortBefore": "2022/2023",
+      "labelEn": "Students under study plans before 2022/2023 may take Analogue Electronics (1TE725, not on roster), which was replaced by 1TM012, and the two cannot both count toward the degree.",
+      "cohortBefore": 2022,
       "source": "llm"
     },
     {
@@ -4326,8 +4340,8 @@
       "semester": 7,
       "trackId": "inbyggda-system__systemteknik",
       "textSv": "Analog elektronik (1TE725) är obligatorisk inom examenskravet för de som tar ut examen enligt en studieplan före 2022/2023 då den ersattes av kursen Tillämpad analog elektronik (1TM012) som nu är obligatorisk inom inriktningen Inbyggda system. 1TE725 och 1TM012 kan inte ingå tillsammans i examen.",
-      "labelEn": "Students following a study plan before 2022/2023 take Analogue Electronics (1TE725, not on this roster), which was replaced by Applied Analogue Electronics (1TM012), and the two cannot both count toward the degree.",
-      "cohortBefore": "2022",
+      "labelEn": "Students admitted before 2022/2023 take Analogue Electronics (1TE725), which was replaced by Applied Analogue Electronics (1TM012), and the two cannot both count toward the degree.",
+      "cohortBefore": 2022,
       "source": "llm"
     },
     {
@@ -4340,7 +4354,7 @@
       "semester": 7,
       "trackId": "tillampad-fysik",
       "textSv": "En av kurserna Elektromagnetisk fältteori (1FA252) och Halvledarelektronik (1TE039) är obligatorisk inom examenskravet för inriktningen. För profilen rekommenderas Elektromagnetisk fältteori (1FA252).",
-      "labelEn": "One of Electromagnetic Field Theory (1FA252) or Semiconductor Electronics (1TE039) is required for the degree, with Electromagnetic Field Theory recommended for the profile.",
+      "labelEn": "One of Electromagnetic Field Theory or Semiconductor Electronics must be taken for the degree, and Electromagnetic Field Theory is recommended for the profile.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4354,7 +4368,7 @@
       "semester": 7,
       "trackId": "tillampad-fysik",
       "textSv": "En av kurserna Kärnfysik (1FA346) och Nanovetenskap (1FA026) är obligatorisk inom examenskravet för inriktningen. För profilen rekommenderas Kärnfysik (1FA346)",
-      "labelEn": "One of Nuclear Physics (1FA346) and Nanoscience (1FA026) is required for the degree, with Nuclear Physics recommended for the profile.",
+      "labelEn": "One of Nuclear Physics or Nanoscience must be taken for the degree, with Nuclear Physics recommended for the profile.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4368,7 +4382,7 @@
       "semester": 7,
       "trackId": "tillampad-fysik__kvantteknologi",
       "textSv": "En av kurserna Elektromagnetisk fältteori (1FA252) och Halvledarelektronik (1TE039) är obligatorisk inom examenskravet för inriktningen. För profilen rekommenderas Halvledarelektronik (1TE039).",
-      "labelEn": "One of Electromagnetic Field Theory (1FA252) or Semiconductor Electronics (1TE039) is required for the degree, with Semiconductor Electronics (1TE039) recommended for the profile.",
+      "labelEn": "One of Electromagnetic Field Theory and Semiconductor Electronics must be taken to meet the track's degree requirement, with Semiconductor Electronics recommended for this profile.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4382,7 +4396,7 @@
       "semester": 7,
       "trackId": "tillampad-fysik__kvantteknologi",
       "textSv": "En av kurserna Kärnfysik (1FA346) och Nanovetenskap (1FA026) är obligatorisk inom examenskravet för inriktningen. För profilen rekommenderas Nanovetenskap (1FA026).",
-      "labelEn": "One of Nuclear Physics (1FA346) or Nanoscience (1FA026) is required for the specialisation's degree requirements, with Nanoscience recommended for the profile.",
+      "labelEn": "One of Nuclear Physics or Nanoscience must be taken to meet the degree requirements, and Nanoscience is recommended for the profile.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4393,7 +4407,7 @@
       "semester": 7,
       "trackId": "hallbar-energiteknik",
       "textSv": "För examen med inriktningen krävs de obligatoriska kurserna för inriktningen samt det som specificeras i de programspecifika examenskraven i utbildningsplanen.",
-      "labelEn": "For a degree with this specialisation, the track's mandatory courses plus the programme-specific degree requirements in the study plan are required.",
+      "labelEn": "For a degree with this specialisation, the mandatory specialisation courses plus the programme-specific degree requirements in the study plan are required.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4404,7 +4418,7 @@
       "semester": 8,
       "trackId": "berakningsteknik__artificiell-intelligens",
       "textSv": "Antingen",
-      "labelEn": "\"Either\" — this is the start of an either/or choice; the alternative(s) continue elsewhere.",
+      "labelEn": "A bare heading meaning 'either' that introduces a choice but names no specific courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4415,7 +4429,7 @@
       "semester": 8,
       "trackId": "berakningsteknik__artificiell-intelligens",
       "textSv": "eller",
-      "labelEn": "The Swedish word 'eller' means 'or', indicating an alternative exists but no specific courses are named in this note.",
+      "labelEn": "This is a bare separator word ('or') naming no courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4429,7 +4443,7 @@
       "semester": 8,
       "trackId": "berakningsteknik__artificiell-intelligens",
       "textSv": "Djupinlärning (1RT720) kan inte tas med i examen tillsammans med Tillämpad djupinlärning i fysik och teknik (1FA370).",
-      "labelEn": "Deep Learning (1RT720) cannot be counted toward the degree together with Applied Deep Learning in Physics and Engineering (1FA370).",
+      "labelEn": "Deep Learning and Applied Deep Learning in Physics and Engineering cannot both be counted toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4440,7 +4454,7 @@
       "semester": 8,
       "trackId": "berakningsteknik__artificiell-intelligens",
       "textSv": "Antingen",
-      "labelEn": "The note reads only 'Antingen' ('Either'), an incomplete either/or rule that names no specific courses.",
+      "labelEn": "A bare heading reading 'Either' introducing an alternatives section.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4451,7 +4465,7 @@
       "semester": 8,
       "trackId": "berakningsteknik__artificiell-intelligens",
       "textSv": "eller",
-      "labelEn": "The Swedish word 'eller' ('or') appears alone without naming any courses or alternatives.",
+      "labelEn": "A bare fragment meaning 'or' with no course requirement.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4465,7 +4479,7 @@
       "semester": 8,
       "trackId": "berakningsteknik__artificiell-intelligens",
       "textSv": "Avancerad tillämpad djupinlärning i fysik och teknik (1FA006) kan inte tas med i examen tillsammans med Avancerad djupinlärning för bildbehandling (1MD042).",
-      "labelEn": "1FA006 Advanced Applied Deep Learning in Physics and Engineering cannot be counted toward the degree together with 1MD042 Advanced Deep Learning for Image Processing.",
+      "labelEn": "1FA006 and 1MD042 cannot both be counted toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4479,7 +4493,7 @@
       "semester": 9,
       "trackId": "berakningsteknik__artificiell-intelligens",
       "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
-      "labelEn": "Students admitted in 2021 or earlier may replace 1TS327 with 1TE743 in their degree.",
+      "labelEn": "Students admitted in 2021 or earlier may substitute 1TS327 with 1TE743 in their degree.",
       "cohortBefore": 2021,
       "source": "llm"
     },
@@ -4493,7 +4507,7 @@
       "semester": 9,
       "trackId": "berakningsteknik__artificiell-intelligens",
       "textSv": "En av kurserna Funktionalanalys med tillämpningar (1MA356) och Avancerad probabilistisk maskininlärning (1RT705) är obligatorisk inom examenskravet för inriktningen beräkningsteknik. Funktionalanalys med tillämpningar (1MA356) schemaläggs i profilen Tillämpad beräkningsteknik i period 41.",
-      "labelEn": "One of Functional Analysis with Applications (1MA356) and Advanced Probabilistic Machine Learning (1RT705) is required for the computational science and engineering specialisation.",
+      "labelEn": "One of Functional Analysis with Applications and Advanced Probabilistic Machine Learning must be taken for the scientific computing specialisation.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4507,8 +4521,8 @@
       "semester": 9,
       "trackId": "berakningsteknik__tillampad-berakningsteknik",
       "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
-      "labelEn": "Students admitted in 2021 or earlier may substitute 1TS327 with 1TE743 in the degree.",
-      "cohortBefore": 2021,
+      "labelEn": "Students admitted in 2021 or earlier may replace 1TS327 with 1TE743 in their degree.",
+      "cohortBefore": 2022,
       "source": "llm"
     },
     {
@@ -4521,7 +4535,7 @@
       "semester": 9,
       "trackId": "berakningsteknik__tillampad-berakningsteknik",
       "textSv": "En av kurserna Funktionalanalys med tillämpningar (1MA356) och Avancerad probabilistisk maskininlärning (1RT705) är obligatorisk inom examenskravet för inriktningen beräkningsteknik. Funktionalanalys med tillämpningar (1MA356) schemaläggs i profilen Tillämpad beräkningsteknik i period 41.",
-      "labelEn": "One of Functional Analysis with Applications (1MA356) and Advanced Probabilistic Machine Learning (1RT705) is required for the computational science and engineering specialisation, with 1MA356 scheduled in the Applied Computational Science profile in period 41.",
+      "labelEn": "One of Functional Analysis with Applications (1MA356) and Advanced Probabilistic Machine Learning (1RT705) is required for the computational science specialisation.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4535,7 +4549,7 @@
       "semester": 9,
       "trackId": "inbyggda-system__hardvara-for-inbyggda-system",
       "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
-      "labelEn": "For students admitted in 2021 or earlier, 1TS327 may be replaced by 1TE743 in the degree.",
+      "labelEn": "Students admitted in 2021 or earlier may substitute 1TE743 for 1TS327 in their degree.",
       "cohortBefore": 2021,
       "source": "llm"
     },
@@ -4549,7 +4563,7 @@
       "semester": 9,
       "trackId": "inbyggda-system__systemteknik",
       "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
-      "labelEn": "Students admitted in 2021 or earlier may substitute 1TS327 with 1TE743 in the degree.",
+      "labelEn": "Students admitted in 2021 or earlier may substitute 1TS327 with 1TE743 in their degree.",
       "cohortBefore": 2021,
       "source": "llm"
     },
@@ -4563,7 +4577,7 @@
       "semester": 9,
       "trackId": "tillampad-fysik__fysik",
       "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
-      "labelEn": "For students admitted in 2021 or earlier, 1TS327 may be replaced by 1TE743 in the degree.",
+      "labelEn": "Students admitted in 2021 or earlier may replace 1TS327 with 1TE743 in their degree.",
       "cohortBefore": 2021,
       "source": "llm"
     },
@@ -4591,7 +4605,7 @@
       "semester": 9,
       "trackId": "hallbar-energiteknik",
       "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
-      "labelEn": "Students admitted in 2021 or earlier may replace 1TS327 with 1TE743 in their degree.",
+      "labelEn": "Students admitted in 2021 or earlier may substitute 1TS327 with 1TE743 in their degree.",
       "cohortBefore": 2021,
       "source": "llm"
     },
@@ -4605,7 +4619,7 @@
       "semester": 9,
       "trackId": "elektrifiering",
       "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
-      "labelEn": "Students admitted in 2021 or earlier may substitute 1TS327 with 1TE743 in their degree.",
+      "labelEn": "Students admitted in 2021 or earlier may replace 1TS327 with 1TE743 in their degree.",
       "cohortBefore": 2021,
       "source": "llm"
     },
@@ -4616,7 +4630,7 @@
       "semester": 10,
       "trackId": null,
       "textSv": "Övriga valbara kurserAlla kurser under åk 1-3 samt inom inriktningarna är valbara för samtliga studenter på programmet.Nedanstående kurser sökes i konkurrens och det finns ingen garanti att få plats.",
-      "labelEn": "All courses from years 1–3 and within the specialisations are elective for all students on the programme, and the additional courses listed below are applied for competitively with no guarantee of placement.",
+      "labelEn": "General note that all years 1-3 and specialization courses are elective for all students, and that the courses listed below are applied for in competition with no guaranteed placement.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4630,7 +4644,7 @@
       "semester": 10,
       "trackId": null,
       "textSv": "Solenergi för elgenerering (1TE678) kan inte ingå i examen tillsammans med Solenergi - teknik och system (1TE028 eller 1TE206).",
-      "labelEn": "Solar Energy for Electricity Generation (1TE678) cannot count toward the degree together with Solar Energy - Technology and Systems (1TE028).",
+      "labelEn": "Solar Energy Technologies for Electricity Production (1TE678) cannot count toward the degree together with Solar Energy - Technology and Systems (1TE028).",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4643,7 +4657,7 @@
       "semester": 10,
       "trackId": null,
       "textSv": "Kursen Rymdprojekt (1FA256) ges enbart jämna år.",
-      "labelEn": "The course Space Project (1FA256) is offered only in even-numbered years.",
+      "labelEn": "The Space Mission Design Project course is offered only in even-numbered years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -4656,8 +4670,8 @@
       "semester": 10,
       "trackId": null,
       "textSv": "Övrig informationKurspaketet Teknikbaserat entreprenörskap och affärsutveckling, 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare.",
-      "labelEn": "The Technology-Based Entrepreneurship and Business Development course package (30 hp, semester 9) has no guaranteed place and only counts toward the engineering degree for students admitted in academic year 2025/2026 or earlier.",
-      "cohortBefore": null,
+      "labelEn": "The Technology-Based Entrepreneurship and Business Development course package (30 hp, semester 9, no guaranteed place) can only count toward the degree for students admitted in the 2025/2026 academic year or earlier.",
+      "cohortBefore": 2026,
       "source": "llm"
     }
   ],
@@ -4922,6 +4936,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1TD433",
@@ -4952,11 +4967,11 @@
       "rationale": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
-      "from": "1TD722",
-      "to": "1DL415",
+      "from": "1MA090",
+      "to": "1DL451",
       "type": "HARD",
       "source": "llm",
-      "rationale": "120 credits with a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+      "rationale": "120 credits including Basic Course in Mathematics and Algebra I or Basic Algebra, and a second course in computer programming or another combination of courses containing basic concepts in algebra, combinatorics, logic, graph theory, set theory and implementation of basic search algorithms. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1TD722",
@@ -5008,14 +5023,28 @@
       "rationale": "120 credits including a second course in programming. Participation in a course in machine learning. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
-      "from": "1TE624",
-      "to": "1EL013",
+      "from": "1MA361",
+      "to": "1EL002",
       "type": "HARD",
       "source": "llm",
-      "rationale": "120 credits in science/engineering including Electronics I / Analogue Electronics. in English equivalent to the Swedish upper secondary course English 6."
+      "rationale": "Applied Mechanics I/Mechanics II. Several Variable Calculus."
     },
     {
-      "from": "1TM012",
+      "from": "1TM044",
+      "to": "1EL002",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Applied Mechanics I/Mechanics II. Several Variable Calculus."
+    },
+    {
+      "from": "1TD433",
+      "to": "1EL011",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Computer Programming I and participation in Probability and Statistics or Statistics for Engineers."
+    },
+    {
+      "from": "1TE624",
       "to": "1EL013",
       "type": "HARD",
       "source": "llm",
@@ -5048,6 +5077,20 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "120 credits in science/engineering including Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1EL021",
+      "to": "1EL843",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Power Electronics or Power Electronics I. Participation in High Voltage Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE765",
+      "to": "1EL843",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Power Electronics or Power Electronics I. Participation in High Voltage Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1TE754",
@@ -5246,6 +5289,13 @@
       "rationale": "120 credits including Electromagnetism II/Electromagnetism and Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1FA514",
+      "to": "1FA252",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Electromagnetism II/Electromagnetism and Mathematical Methods of Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1TE626",
       "to": "1FA252",
       "type": "HARD",
@@ -5300,6 +5350,55 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "120 credits with Mechanics III. Electromagnetic Field Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD433",
+      "to": "1FA326",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of the courses Computer Programming I, Computer Programming II or Program Design and Data Structures. One of the courses Electronics I, Digital Technology and Electronics, or Digital Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD722",
+      "to": "1FA326",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of the courses Computer Programming I, Computer Programming II or Program Design and Data Structures. One of the courses Electronics I, Digital Technology and Electronics, or Digital Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE624",
+      "to": "1FA326",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of the courses Computer Programming I, Computer Programming II or Program Design and Data Structures. One of the courses Electronics I, Digital Technology and Electronics, or Digital Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA514",
+      "to": "1FA329",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of the courses Electronics I or Basics of Electrical Engineering I: Components and Circuits. One of the courses Electric Measuring Techniques, Applied Analogue Electronics or Analogue Electronics. One of the courses Electromagnetism I or Basics of Electrical Engineering III: Field Theory. Proficiency in English equivalent to the Swedish upper secondary cours"
+    },
+    {
+      "from": "1TE624",
+      "to": "1FA329",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of the courses Electronics I or Basics of Electrical Engineering I: Components and Circuits. One of the courses Electric Measuring Techniques, Applied Analogue Electronics or Analogue Electronics. One of the courses Electromagnetism I or Basics of Electrical Engineering III: Field Theory. Proficiency in English equivalent to the Swedish upper secondary cours"
+    },
+    {
+      "from": "1TE720",
+      "to": "1FA329",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of the courses Electronics I or Basics of Electrical Engineering I: Components and Circuits. One of the courses Electric Measuring Techniques, Applied Analogue Electronics or Analogue Electronics. One of the courses Electromagnetism I or Basics of Electrical Engineering III: Field Theory. Proficiency in English equivalent to the Swedish upper secondary cours"
+    },
+    {
+      "from": "1TM012",
+      "to": "1FA329",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of the courses Electronics I or Basics of Electrical Engineering I: Components and Circuits. One of the courses Electric Measuring Techniques, Applied Analogue Electronics or Analogue Electronics. One of the courses Electromagnetism I or Basics of Electrical Engineering III: Field Theory. Proficiency in English equivalent to the Swedish upper secondary cours"
     },
     {
       "from": "1FA103",
@@ -5400,6 +5499,13 @@
       "rationale": "120 credits in science/engineering with Sustainable Development from a Materials Perspective/Energy and Environmental Technology, Chemical Thermodynamics/Technical Thermodynamics and Probability and Statistics"
     },
     {
+      "from": "1FA352",
+      "to": "1FA495",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "200 credits within the Master's Programme in Engineering Physics, including 30 credits at second-cycle level. Quantum Mechanics. Industrial Project Management I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1FA105",
       "to": "1FA514",
       "type": "SOFT",
@@ -5428,6 +5534,20 @@
       "rationale": "Participation in Algebra and Geometry, or Linear Algebra I. Participation in Single Variable Calculus, or Calculus in One Variable. Participation in Scientific Computing I, Introduction to Scientific Programming, or Computer programming. Participation in Several Variable Calculus, or Calculus in Several Variables, or studied simultaneously. Participation in Mechanics Basic Course, or Technical Mec"
     },
     {
+      "from": "1FA514",
+      "to": "1FA522",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. One of these alternatives: 1) One of the courses Mechanics II, Mechanics KF, Applied Mechanics I. Participation in Electromagnetism I or Electromagnetism, these courses can also be taken in parallel. 2) Basics of Electrical Engineering III: Field Theory."
+    },
+    {
+      "from": "1TM044",
+      "to": "1FA522",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. One of these alternatives: 1) One of the courses Mechanics II, Mechanics KF, Applied Mechanics I. Participation in Electromagnetism I or Electromagnetism, these courses can also be taken in parallel. 2) Basics of Electrical Engineering III: Field Theory."
+    },
+    {
       "from": "1FA105",
       "to": "1FA527",
       "type": "SOFT",
@@ -5451,7 +5571,14 @@
     {
       "from": "1TD433",
       "to": "1FA527",
-      "type": "HARD",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Single Variable Calculus. Participation in Several Variable Calculus, Mechanics Basic Course/Mechanics and one of the courses Scientific Computing I/Scientific Computing F or Computer Programming I."
+    },
+    {
+      "from": "1TM044",
+      "to": "1FA527",
+      "type": "SOFT",
       "source": "llm",
       "rationale": "Single Variable Calculus. Participation in Several Variable Calculus, Mechanics Basic Course/Mechanics and one of the courses Scientific Computing I/Scientific Computing F or Computer Programming I."
     },
@@ -5528,14 +5655,14 @@
     {
       "from": "1FA352",
       "to": "1FA664",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "120 credits in science/engineering. Participation in the courses Quantum Mechanics, Advanced Course and Solid State Physics I/F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1TM013",
       "to": "1FA664",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "120 credits in science/engineering. Participation in the courses Quantum Mechanics, Advanced Course and Solid State Physics I/F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
@@ -5582,11 +5709,11 @@
       "rationale": "120 credits in science/engineering. Participation in Quantum Physics, Quantum Physics F, or Introduction to Materials Science (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
-      "from": "1TM035",
-      "to": "1GE052",
+      "from": "1FA527",
+      "to": "1GV334",
       "type": "HARD",
       "source": "llm",
-      "rationale": "180 credits including (1) 80 credits in physics and mathematics or (2) 70 credits in earth science and 45 credits in physics and mathematics. In both cases, Continuum Mechanics in Geophysics; Global Geophysics or The Physics and Dynamics of the Earth. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+      "rationale": "120 credits including courses in computational science I, programming/computational science II, statistics and electrical engineering and at least one of the courses Energy Systems Physics, Technical Thermodynamics, Fluid Mechanics for Energy-Related Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1FA404",
@@ -5601,6 +5728,13 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "200 credits with in the Master's Programme in Engineering Physics including Energy Physics I and 30 credits at second-cycle level. Solar Energy - Technology and Systems. Industrial Project Management I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE655",
+      "to": "1KB274",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Alternative 1: 120 credits in science and technology, including 5 credits power engineering, 5 credits automatic control, and 5 credits scientific computing. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 130 credits in science and technology, including 10 credits in Energy Technology at Master's level. Proficiency in English equivalent to the Swe"
     },
     {
       "from": "1MA361",
@@ -5764,6 +5898,20 @@
       "rationale": "60 credits in science/engineering, of which 45 credits in mathematics, including Linear Algebra II and one of the following: Several Variable Calculus, Several Variable Calculus M, Geometry and Analysis III, or Analysis in Several Variables."
     },
     {
+      "from": "1MA090",
+      "to": "1MA361",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "5 credits in mathematics. Participation in Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry."
+    },
+    {
+      "from": "1MA360",
+      "to": "1MA361",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "5 credits in mathematics. Participation in Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry."
+    },
+    {
       "from": "1MA024",
       "to": "1MA362",
       "type": "SOFT",
@@ -5869,6 +6017,13 @@
       "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1MS029",
+      "to": "1RT700",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1TD433",
       "to": "1RT700",
       "type": "HARD",
@@ -5891,6 +6046,13 @@
     },
     {
       "from": "1MA361",
+      "to": "1RT705",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, Statistical Machine Learning, a course in several variable analysis and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MS029",
       "to": "1RT705",
       "type": "HARD",
       "source": "llm",
@@ -5925,6 +6087,13 @@
       "rationale": "120 credits. Participation in Statistical Machine Learning and a second programming course. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1MA360",
+      "to": "1RT730",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra, Single Variable Calculus and a course in introductory programming. Statistical Machine Learning. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1RT700",
       "to": "1RT730",
       "type": "HARD",
@@ -5940,6 +6109,13 @@
     },
     {
       "from": "1MA360",
+      "to": "1RT745",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus, a second programming course. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MS029",
       "to": "1RT745",
       "type": "HARD",
       "source": "llm",
@@ -6002,11 +6178,11 @@
       "rationale": "120 credits in science/engineering. Scientific Computing for Partial Differential Equations. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
-      "from": "1TD433",
-      "to": "1TD062",
-      "type": "HARD",
+      "from": "1TD354",
+      "to": "1TD056",
+      "type": "SOFT",
       "source": "llm",
-      "rationale": "120 credits in science/engineering including 30 credits Mathematics and 10 credits in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+      "rationale": "120 credits in science/engineering including 30 credits in mathematics, where 5 credits linear algebra and 5 credits several variable calculus must be covered. Participation in Scientific Computing III or Scientific Computing for Partial Differential Equations. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1TD343",
@@ -6037,6 +6213,13 @@
       "rationale": "120 credits in engineering/science including Computer Programming I, Probability and Statistics, Linear Algebra II, Several Variable Calculus/Analysis in Several Variables. Participation in Statistical Machine Learning. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1MS029",
+      "to": "1TD179",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in engineering/science including Computer Programming I, Probability and Statistics, Linear Algebra II, Several Variable Calculus/Analysis in Several Variables. Participation in Statistical Machine Learning. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1RT700",
       "to": "1TD179",
       "type": "SOFT",
@@ -6049,6 +6232,27 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "120 credits in engineering/science including Computer Programming I, Probability and Statistics, Linear Algebra II, Several Variable Calculus/Analysis in Several Variables. Participation in Statistical Machine Learning. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA361",
+      "to": "1TD184",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics of which 5 credits mathematics containing several variable calculus that can be taken in parallel. Computer Programming I. Participation in one of the courses Scientific Computing basic course, Scientific Computing I, Scientific Computing Bridging course or Numerical methods and Simulation. Proficiency in English equivalent to the Swedish upper secon"
+    },
+    {
+      "from": "1TD343",
+      "to": "1TD184",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics of which 5 credits mathematics containing several variable calculus that can be taken in parallel. Computer Programming I. Participation in one of the courses Scientific Computing basic course, Scientific Computing I, Scientific Computing Bridging course or Numerical methods and Simulation. Proficiency in English equivalent to the Swedish upper secon"
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD184",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics of which 5 credits mathematics containing several variable calculus that can be taken in parallel. Computer Programming I. Participation in one of the courses Scientific Computing basic course, Scientific Computing I, Scientific Computing Bridging course or Numerical methods and Simulation. Proficiency in English equivalent to the Swedish upper secon"
     },
     {
       "from": "1TD343",
@@ -6077,6 +6281,34 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "120 credits including 30 credits in mathematics and 20 credits in computer science. Scientific Computing III or Scientific Computing for Partial Differential Equations. A project plan approved by the department for the completion of the course is required. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA024",
+      "to": "1TD343",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in the courses Computer Programming I, Single Variable Calculus, Multi Variable Calculus and Linear Algebra."
+    },
+    {
+      "from": "1MA360",
+      "to": "1TD343",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in the courses Computer Programming I, Single Variable Calculus, Multi Variable Calculus and Linear Algebra."
+    },
+    {
+      "from": "1MA361",
+      "to": "1TD343",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in the courses Computer Programming I, Single Variable Calculus, Multi Variable Calculus and Linear Algebra."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TD343",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in the courses Computer Programming I, Single Variable Calculus, Multi Variable Calculus and Linear Algebra."
     },
     {
       "from": "1MA024",
@@ -6254,9 +6486,30 @@
       "rationale": "120 credits in science/engineering including Scientific Computing I, Power Engineering and a basic course in mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1MA034",
+      "to": "1TE044",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Several Variable Calculus, Transform Methods, Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA361",
+      "to": "1TE044",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Several Variable Calculus, Transform Methods, Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE626",
+      "to": "1TE044",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including Several Variable Calculus, Transform Methods, Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1FA514",
       "to": "1TE624",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "30 credits in science/engineering including Electric Measuring Techniques. Electromagnetism I should have been attended. Parallel attendance of Transform Methods."
     },
@@ -6273,6 +6526,34 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "120 credits in science/engineering including Signals and Systems as well as Probability and Statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA514",
+      "to": "1TE655",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in transform methods. Participation in one of the courses Electronics I, Electromagnetism (10 credits), Electromagnetism II with Electric Circuits or participation in both Electromagnetism I and Electric Circuit Analysis or participation in Electromagnetism and Electric Circuits."
+    },
+    {
+      "from": "1MA034",
+      "to": "1TE655",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in transform methods. Participation in one of the courses Electronics I, Electromagnetism (10 credits), Electromagnetism II with Electric Circuits or participation in both Electromagnetism I and Electric Circuit Analysis or participation in Electromagnetism and Electric Circuits."
+    },
+    {
+      "from": "1TE624",
+      "to": "1TE655",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in transform methods. Participation in one of the courses Electronics I, Electromagnetism (10 credits), Electromagnetism II with Electric Circuits or participation in both Electromagnetism I and Electric Circuit Analysis or participation in Electromagnetism and Electric Circuits."
+    },
+    {
+      "from": "1TE626",
+      "to": "1TE655",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in transform methods. Participation in one of the courses Electronics I, Electromagnetism (10 credits), Electromagnetism II with Electric Circuits or participation in both Electromagnetism I and Electric Circuit Analysis or participation in Electromagnetism and Electric Circuits."
     },
     {
       "from": "1MA034",
@@ -6310,6 +6591,27 @@
       "rationale": "120 credits in science/engineering including Electromagnetism, Power Engineering, Energy System Physics/Modern Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1MA090",
+      "to": "1TE720",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in the courses Single Variable Calculus/Calculus in One Variable and Introduction to Scientific Computing/Computer Programming I. Participation in Linear Algebra and Geometry/Algebra and Geometry."
+    },
+    {
+      "from": "1MA360",
+      "to": "1TE720",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in the courses Single Variable Calculus/Calculus in One Variable and Introduction to Scientific Computing/Computer Programming I. Participation in Linear Algebra and Geometry/Algebra and Geometry."
+    },
+    {
+      "from": "1TD433",
+      "to": "1TE720",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in the courses Single Variable Calculus/Calculus in One Variable and Introduction to Scientific Computing/Computer Programming I. Participation in Linear Algebra and Geometry/Algebra and Geometry."
+    },
+    {
       "from": "1TD433",
       "to": "1TE723",
       "type": "HARD",
@@ -6343,6 +6645,62 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "120 credits in science/engineering including Automatic Control I. In addition, participation in 10 credits in science/engineering at advanced level. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE661",
+      "to": "1TE747",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Signals and Systems as well as Probability and Statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE624",
+      "to": "1TE748",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Applied Analogue Electronics (or Analogue Electronics), Electronics I and Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE626",
+      "to": "1TE748",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Applied Analogue Electronics (or Analogue Electronics), Electronics I and Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM012",
+      "to": "1TE748",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Applied Analogue Electronics (or Analogue Electronics), Electronics I and Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE624",
+      "to": "1TE749",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering including Electronics I, Electromagnetism II, Applied Analogue Electronics as well as Design of Wireless Interfaces for Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE626",
+      "to": "1TE749",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering including Electronics I, Electromagnetism II, Applied Analogue Electronics as well as Design of Wireless Interfaces for Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE748",
+      "to": "1TE749",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering including Electronics I, Electromagnetism II, Applied Analogue Electronics as well as Design of Wireless Interfaces for Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM012",
+      "to": "1TE749",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "130 credits in science/engineering including Electronics I, Electromagnetism II, Applied Analogue Electronics as well as Design of Wireless Interfaces for Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1FA103",
@@ -6408,6 +6766,20 @@
       "rationale": "120 credits in science/engineering, including basic knowledge in electric circuit theory and electronics. Participation in Transform Methods (spec. Fourier series), or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1TE664",
+      "to": "1TE864",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "240 credits withing the Master programme in Engineering Physics including Independent Project in Engineering Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM013",
+      "to": "1TG310",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits. Participation in Solid State Physics I/Solid state physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1TE624",
       "to": "1TM005",
       "type": "HARD",
@@ -6422,6 +6794,20 @@
       "rationale": "120 credits in science/engineering, including Electronics I or Analogue Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1FA352",
+      "to": "1TM008",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Participation in the courses Quantum Mechanics and Solid State Physics I/F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM013",
+      "to": "1TM008",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Participation in the courses Quantum Mechanics and Solid State Physics I/F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1FA527",
       "to": "1TM013",
       "type": "SOFT",
@@ -6429,11 +6815,74 @@
       "rationale": "60 credits in science/engineering. Participation in Technical Thermodynamics. Participation in Quantum Physics (can be taken in parallel)."
     },
     {
+      "from": "1TM044",
+      "to": "1TM035",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including Mechanics II/Applied Mechanics I/Mechanics II F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA103",
+      "to": "1TM043",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Applied Mechanics I/Mechanics II F. Analysis in Several Variables. Participation in Mechanics III and in Introduction to Computational Science F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA361",
+      "to": "1TM043",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Applied Mechanics I/Mechanics II F. Analysis in Several Variables. Participation in Mechanics III and in Introduction to Computational Science F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD343",
+      "to": "1TM043",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Applied Mechanics I/Mechanics II F. Analysis in Several Variables. Participation in Mechanics III and in Introduction to Computational Science F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM044",
+      "to": "1TM043",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Applied Mechanics I/Mechanics II F. Analysis in Several Variables. Participation in Mechanics III and in Introduction to Computational Science F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA105",
+      "to": "1TM044",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry and in Mechanics Basic Course. Participation in Several Variable Calculus (can be taken in parallel) ."
+    },
+    {
+      "from": "1MA090",
+      "to": "1TM044",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Algebra and Geometry and in Mechanics Basic Course. Participation in Several Variable Calculus (can be taken in parallel) ."
+    },
+    {
       "from": "1TS327",
       "to": "1TS328",
       "type": "SOFT",
       "source": "llm",
       "rationale": "Option 1: 120 credits, including 90 credits in science/engineering. Participation in the course Industrial Project Management I. Option 2: 120 credits, including 90 credits in science/engineering. Industrial Engineering and Management I: The Functions of the Corporation, Industrial Management III: Project in Business and Technology Development. Participation in Strategic Management in Technology-I"
+    },
+    {
+      "from": "1FA527",
+      "to": "1TS335",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 20 credits in mathematics. Technical Thermodynamics and Introduction to Scientific Computing/Scientific Computing I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TD343",
+      "to": "1TS335",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 20 credits in mathematics. Technical Thermodynamics and Introduction to Scientific Computing/Scientific Computing I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1FA253",
@@ -6525,12 +6974,13 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.846458+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.319998+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10072",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Civilingenjörsprogrammet i teknisk fysik, 300 hp (TTF2Y)",
   "programmeTitleEn": "Master's Programme in Engineering Physics, 300 credits (TTF2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-teknisk-fysik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

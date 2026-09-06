@@ -26,7 +26,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree of at least three full time years duration comprising the equivalent of 180 credits with technology, mathematics, computer science or equivalent as the main field of study, including 30 credits in mathematics and 30 credits in computer science including courses in programming, computer architecture and operating systems."
     },
     {
       "code": "1DT044",
@@ -409,7 +409,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. One of the courses Computer Programming I, Computer Programming II or Program Design and Data Structures. One of the courses Electronics I, Digital Technology and Electronics, or Digital Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TE663",
@@ -447,7 +447,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering including Single Variable Calculus and Linear Algebra II"
     },
     {
       "code": "1DL073",
@@ -655,7 +655,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Bachelor's degree, and in addition at least 30 credits of embedded systems courses at the advanced level. A by the department approved project plan is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1DT101",
@@ -672,7 +672,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Bachelor's degree, and in addition at least 30 credits of embedded systems courses at the advanced level. A by the department approved project plan is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1DT087",
@@ -993,7 +993,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Bachelor's degree, and in addition at least 30 credits of embedded systems courses at the advanced level. A by the department approved project plan is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1DT101",
@@ -1010,7 +1010,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Bachelor's degree, and in addition at least 30 credits of embedded systems courses at the advanced level. A by the department approved project plan is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1DT068",
@@ -1056,12 +1056,12 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 1,
       "trackId": null,
       "textSv": "Rekommenderade kurser:",
-      "labelEn": "Recommended courses:",
+      "labelEn": "This is a heading introducing the recommended courses list.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1072,7 +1072,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Alternativ:",
-      "labelEn": "Alternatives:",
+      "labelEn": "This is a heading indicating alternatives follow.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1085,18 +1085,18 @@
       "semester": 1,
       "trackId": null,
       "textSv": "För 1DL530 krävs en andra kurs i programmering utöver behörigheten för programmet.",
-      "labelEn": "1DL530 requires a second course in programming in addition to the programme's admission requirements.",
+      "labelEn": "1DL530 requires a second programming course in addition to the programme's admission requirements.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-3",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 1,
       "trackId": null,
       "textSv": "Rekommenderade kurser:",
-      "labelEn": "Recommended courses follow below.",
+      "labelEn": "This is a bare heading introducing a list of recommended courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1107,13 +1107,13 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Alternativ:",
-      "labelEn": "Alternatives (options) follow.",
+      "labelEn": "This is a bare heading meaning 'Alternatives:' with no specific courses named.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-5",
-      "type": "NOTE",
+      "type": "EITHER_OR",
       "courseCodes": [
         "1TE723",
         "1TE663",
@@ -1123,18 +1123,18 @@
       "semester": 1,
       "trackId": null,
       "textSv": "1TE723 är föreläsningsdelen av 1TE663.1DT063 är ett alternativ till 1DT004.",
-      "labelEn": "1TE723 is the lecture part of 1TE663, and 1DT063 is an alternative to 1DT004.",
+      "labelEn": "1TE723 is the lecture part of 1TE663, and 1DT063 may be taken as an alternative to 1DT004.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-6",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 2,
       "trackId": null,
       "textSv": "Rekommenderade kurser:",
-      "labelEn": "Recommended courses:",
+      "labelEn": "This is a heading introducing recommended courses; no specific course is named.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1145,29 +1145,32 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Alternativ:",
-      "labelEn": "Alternatives follow.",
+      "labelEn": "A heading introducing alternatives without naming any specific courses.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-8",
-      "type": "NOTE",
-      "courseCodes": [],
+      "type": "MUTUALLY_EXCLUSIVE",
+      "courseCodes": [
+        "1DT116",
+        "1DT115"
+      ],
       "semester": 2,
       "trackId": null,
       "textSv": "Antalet platser i kursen 1FA326 är begränsade, urval kan komma att göras.1TE723 är föreläsningsdelen av 1TE6631DT095 är föreläsningsdelen av 1DT1031DL550 och 1DT116 kan inte ingå i samma examen. 1DT107 och 1DT115 kan inte ingå i samma examen.",
-      "labelEn": null,
+      "labelEn": "Some courses cover overlapping content and cannot both count toward the same degree.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-9",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 2,
       "trackId": null,
       "textSv": "Rekommenderade kurser:",
-      "labelEn": "Recommended courses:",
+      "labelEn": "This is a heading introducing a list of recommended courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1178,7 +1181,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Alternativ:",
-      "labelEn": "Alternatives follow below.",
+      "labelEn": "A bare heading meaning 'Alternatives' with no course content.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1189,7 +1192,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Alternativa kurser:",
-      "labelEn": "Alternative (elective) courses are listed under this heading.",
+      "labelEn": "This is a bare heading for alternative courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1204,18 +1207,18 @@
       "semester": 2,
       "trackId": null,
       "textSv": "1DT100, 1DT101 och 1DT087 ges i period 13-14.1DT087 Examensarbete i inbyggda system 15 hp ges endast för studenter som önskar avsluta programmet med magisterexamen.",
-      "labelEn": "1DT100, 1DT101 and 1DT087 are offered in period 13–14; 1DT087 (15 hp Degree Project in Embedded Systems) is intended only for students who wish to complete the programme with a magister's degree.",
+      "labelEn": "Courses 1DT100, 1DT101 and 1DT087 are offered in period 13-14, and 1DT087 (15 hp) is only for students finishing the programme with a magister's degree.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-13",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 3,
       "trackId": null,
       "textSv": "Rekommenderade kurser:",
-      "labelEn": "Recommended courses.",
+      "labelEn": "A bare heading for recommended courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1226,18 +1229,18 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Alternativ:",
-      "labelEn": "A heading indicating that alternatives follow.",
+      "labelEn": "This is a heading indicating that alternatives follow.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-15",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 3,
       "trackId": null,
       "textSv": "Rekommenderade kurser:",
-      "labelEn": "Recommended courses:",
+      "labelEn": "A heading introducing a list of recommended courses, with no specific courses named.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1248,7 +1251,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Alternativ:",
-      "labelEn": "Alternatives are offered.",
+      "labelEn": "This is a heading marking an alternatives section with no courses named.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1273,7 +1276,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Alternativ:",
-      "labelEn": "Heading meaning 'Alternatives:', indicating that a list of alternative courses follows.",
+      "labelEn": "A heading introducing alternatives with no specific course named.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1284,7 +1287,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Alternativ:",
-      "labelEn": "Choose one of the alternative courses listed.",
+      "labelEn": "A bare heading indicating alternatives follow, with no courses named.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -1412,37 +1415,17 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
-    {
-      "from": "1TD722",
-      "to": "1DL340",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits including 15 credits in mathematics and 20 credits in computer science, including a second course in programming. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
-      "from": "1DL330",
-      "to": "1DL590",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "120 credits with 60 credits in computer science, including participation in Introduction to Parallel Programming. Functional programming is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
     {
       "from": "1DL530",
       "to": "1DL590",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "120 credits with 60 credits in computer science, including participation in Introduction to Parallel Programming. Functional programming is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1DT004",
-      "to": "1DT059",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits including Computer architecture, Operating systems, and Real-time systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
-      "from": "1DT024",
       "to": "1DT059",
       "type": "HARD",
       "source": "llm",
@@ -1540,11 +1523,11 @@
       "rationale": "120 credits including Computer Architecture and Operating Systems. Participation in Real Time Systems and Programming of Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
-      "from": "1TD722",
-      "to": "1DT116",
-      "type": "HARD",
+      "from": "1DT116",
+      "to": "1DT115",
+      "type": "EXCLUSIVE",
       "source": "llm",
-      "rationale": "120 credits including 60 credits in computer science, including programming in C and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+      "rationale": "Antalet platser i kursen 1FA326 är begränsade, urval kan komma att göras.1TE723 är föreläsningsdelen av 1TE6631DT095 är föreläsningsdelen av 1DT1031DL550 och 1DT116 kan inte ingå i samma examen. 1DT107 och 1DT115 kan inte ingå i samma examen."
     },
     {
       "from": "1DT052",
@@ -1555,13 +1538,6 @@
     },
     {
       "from": "1DT052",
-      "to": "1DT194",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits whereof 90 credits in computer science, mathematics, and technology, including Computer Networks I and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
-      "from": "1TD722",
       "to": "1DT194",
       "type": "HARD",
       "source": "llm",
@@ -1587,6 +1563,20 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "120 credits whereof 90 credits in science/engineering including 5 credits in programming with python or C. Participation in Computer Networks or Internet of Things or in Distributed Information Systems or Digital Communication. Participation in Probability and Statistics or Statistics for Engineers. Participation in Natural Computation Methods for Machine Learning or Statistical Machine Learning o"
+    },
+    {
+      "from": "1DT117",
+      "to": "1EL014",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits whereof 90 credits in science/engineering including 5 credits in programming with python or C. Participation in Computer Networks or Internet of Things or in Distributed Information Systems or Digital Communication. Participation in Probability and Statistics or Statistics for Engineers. Participation in Natural Computation Methods for Machine Learning or Statistical Machine Learning o"
+    },
+    {
+      "from": "1TD722",
+      "to": "1FA326",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. One of the courses Computer Programming I, Computer Programming II or Program Design and Data Structures. One of the courses Electronics I, Digital Technology and Electronics, or Digital Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "revisions": [
@@ -1643,12 +1633,13 @@
       "name": "Giltig från och med höstterminen 2014"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.937515+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.418376+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10032",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i inbyggda system, 120 hp (TIS2M)",
   "programmeTitleEn": "Master's Programme in Embedded Systems, 120 credits (TIS2M)",
   "programmeUri": "/utbildning/program/masterprogram-inbyggda-system",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

@@ -1,0 +1,155 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:22:53.130465+00:00",
+  "edges": [
+    {
+      "code": "5SD034",
+      "text": "60 credits in game design with progressive specialisation and 2 credits from Game Design 5: Theory and Methods.",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD069",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD064",
+      "text": "7.5 credit in game design",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD065",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD066",
+      "text": "30 credits, including 15 credits in game design and 15 credits in either game design, software engineering, expression in convergent media or industrial engineering and management.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD069",
+      "text": "60 credits in game design with progressive specialisation",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD071",
+      "text": "Game Design 1: Introduction, 15 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD065",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD075",
+      "text": "60 credits, including 45 credits in game design and 15 credits in either game design, computer science, expression in convergent media or industrial engineering and management.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD090",
+      "text": "Game Design 2 - Game Development, 7.5 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD064",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD509",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD510",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD511",
+      "text": "Art in Games and Games as an Art Form, 5 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD509",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD515",
+      "text": "Expression and 2D Graphics for Games 2, 7.5 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD511",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD516",
+      "text": "At least 4 credits from Expression, 3D Modelling and Texturing for Games",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD515",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD517",
+      "text": "Expression, 3D Modelling and Texturing for Games, 7.5 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD515",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Denna termin kan du välja att läsa 30 hp valbara kurser, göra praktik (max 30 hp) eller ägna dig åt utlandsstudier.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "In this term students may take 30 credits of elective courses, an internship (max 30 credits), or study abroad.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

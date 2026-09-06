@@ -178,7 +178,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering/pharmacy. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1KB447",
@@ -252,12 +252,13 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in chemistry at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [],
   "ruleTexts": [],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1KB264",
@@ -272,13 +273,6 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "120 credits in science/engineering with (1) 60 credits in chemistry or (2) 30 credits in chemistry and 30 credits in physics/biology. Participation in Biomaterials I of which 2 credits completed or participation in Materials synthesis of which 2 credits completed. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
-      "from": "1KB550",
-      "to": "1KB753",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry and physics, including at least 60 credits in chemistry. Participation in Spectroscopy. Chemical Bonding and Computational Chemistry is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics, chemistry, materials science and/or materials engineering"
     },
     {
       "from": "1KB750",
@@ -346,12 +340,13 @@
       "name": "Giltig från och med höstterminen 2014"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.942552+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.423296+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10035",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i kemi – Bio- och nanomaterial, 120 hp (TKE2M)",
   "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
   "programmeUri": "/utbildning/program/masterprogram-kemi-bio-och-nanomaterial",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

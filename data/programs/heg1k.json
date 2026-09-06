@@ -1,0 +1,31 @@
+{
+  "id": "2461",
+  "code": "HEG1K",
+  "revisionId": "2461",
+  "nameSv": "Kandidatprogram i egyptologi",
+  "totalCredits": 180.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2024/25",
+  "finalisedDate": "4 juni 2024",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Kandidatprogrammet är treårigt. Programmets studenter läser huvudområdet under de första tre terminerna. Den fjärde terminen erbjuder möjlighet till praktik samt valbara kurser inom institutionen och universitetet. Den femte terminen består av tre delkurser inom assyriologi. Den sjätte terminen innebär den avslutande språkkursen samt en kurs i problemformulering och vetenskapligt skrivande som leder fram till det avslutande kandidatuppsatsen."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.450436+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=2461",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Kandidatprogram i egyptologi, 180 hp (HEG1K)",
+  "programmeTitleEn": "Bachelor's Programme in Egyptology, 180 credits (HEG1K)",
+  "programmeUri": "/utbildning/program/kandidatprogram-egyptologi",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

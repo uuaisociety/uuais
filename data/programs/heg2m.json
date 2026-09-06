@@ -1,0 +1,32 @@
+{
+  "id": "1974",
+  "code": "HEG2M",
+  "revisionId": "1974",
+  "nameSv": "Masterprogram i egyptologi",
+  "totalCredits": 120.0,
+  "semesters": 0,
+  "registrationNumber": "HISTFILFAK 2022/39",
+  "finalisedDate": "30 augusti 2022",
+  "tracks": [],
+  "courses": [],
+  "rules": [],
+  "ruleTexts": [],
+  "planFormat": "syllabus",
+  "edges": [],
+  "revisions": [],
+  "syllabusLayout": [
+    "Masterprogrammet är tvåårigt med möjlighet att avlägga magisterexamen efter ett år.",
+    "Programmets första termin består av en kurs som läses med institutionens övriga ämnen samt och tre kurser inom huvudområdet. Under den andra terminen läser studenterna två valbara kurser och två kurser inom huvudområdet. Under termin tre läser studenterna en kurs i GIS och tre kurser inom huvudområdet. Termin fyra ägnas helt åt examensarbetet. Det finns möjlighet att göra praktik inom programmet. Studenterna har möjligheter att delta i internationellt studentutbyte genom universitetets och institutionens utbytesavtal."
+  ],
+  "syllabusEntryRequirements": null,
+  "syllabusCourses": [],
+  "scrapedAt": "2026-09-05T09:25:16.464427+00:00",
+  "sourceUrl": "https://www.uu.se/utbildning/utbildningsplan?query=1974",
+  "validFrom": null,
+  "validFromYear": null,
+  "programmeTitle": "Masterprogram i egyptologi, 120 hp (HEG2M)",
+  "programmeTitleEn": "Master's Programme in Egyptology, 120 credits (HEG2M)",
+  "programmeUri": "/utbildning/program/masterprogram-egyptologi",
+  "faculty": "Historisk-filosofiska fakulteten",
+  "reviewed": false
+}

@@ -1,0 +1,74 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:35:25.998182+00:00",
+  "edges": [
+    {
+      "code": "2PP401",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 2PP430, 2PP432, 2PP431, 2PP433, 2PP434",
+        "semester": 9,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "2PP430",
+          "2PP432",
+          "2PP431",
+          "2PP433",
+          "2PP434"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "2PP430",
+          "2PP432",
+          "2PP431",
+          "2PP433",
+          "2PP434"
+        ],
+        "labelEn": "One of the listed courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "- Externa valbara kurser kan tillgodoräknas inom programmet enligt programansvarigs beslut.- Denna termin läses 7,5 hp av kursen Examensarbete (30 hp).",
+        "semester": 9,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "2PP429"
+        ],
+        "labelEn": "External elective courses may be credited within the programme at the programme director's discretion, and this term covers 7.5 credits of the Master's thesis (30 credits).",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Examensarbete, 30 hp (22,5 hp)*Psykoterapeutisk fördjupning III, 7,5 hp** Obligatorisk",
+        "semester": 10,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "2PP429"
+        ],
+        "labelEn": "The Master's thesis (30 hp) and the psychotherapy specialisation course (7.5 hp) are mandatory.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

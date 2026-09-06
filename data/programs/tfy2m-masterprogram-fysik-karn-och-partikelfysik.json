@@ -27,7 +27,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Accepted to the Master's Programme in Physics, tracks physics or astronomy/space physics"
     },
     {
       "code": "1FA352",
@@ -707,7 +707,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Majoriteten av kurserna som erbjuds under termin 1 erbjuds även under termin 3.Studenterna förväntas dela upp belastningen mellan dessa två terminer.",
-      "labelEn": "Most courses offered in semester 1 are also offered in semester 3, and students are expected to spread their workload across these two semesters.",
+      "labelEn": "Most courses offered in semester 1 are also offered in semester 3, and students are expected to spread their workload across the two semesters.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -718,7 +718,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Antingen",
-      "labelEn": "\"Antingen\" (\"Either\") is an incomplete choice fragment with no courses specified.",
+      "labelEn": "Bare heading meaning 'either', likely introducing alternatives without naming courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -729,7 +729,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Eller",
-      "labelEn": "This is just the word 'Or', a connector fragment linking to adjacent text.",
+      "labelEn": "A bare word meaning 'Or' with no course content or requirement stated.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -744,7 +744,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Studenter med en preferens för experiment rekommenderas 1FA252; med preferens för teori och om 1FA252 studerats tidigare, rekommenderas 1FA257.Studenter utan tidigare erfarenhet av programmering med Python bör ta 1FA453:",
-      "labelEn": "Students preferring experiments are recommended 1FA252, those preferring theory (who have already taken 1FA252) are recommended 1FA257, and students without prior Python experience should take 1FA453.",
+      "labelEn": "Students preferring experiments are advised 1FA252, those preferring theory who already studied 1FA252 are advised 1FA257, and students without prior Python experience are advised 1FA453.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -755,18 +755,18 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses available this period:",
+      "labelEn": "This is a heading introducing other selectable courses for this period.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-5",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 1,
       "trackId": null,
       "textSv": "Studenter med en preferens för experiment rekommenderas att välja mellan dessa kurser:",
-      "labelEn": "Students with a preference for experiments are recommended to choose between these courses.",
+      "labelEn": "Heading indicating that students preferring experiments are recommended to choose between the courses listed below.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -777,7 +777,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Studenter med en preferens för teori rekommenderas att läsa dessa kurser:",
-      "labelEn": "Students with a preference for theory are recommended to take these courses.",
+      "labelEn": "Students with a preference for theory are advised to take these courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -785,12 +785,12 @@
       "id": "rule-7",
       "type": "RECOMMENDED",
       "courseCodes": [
-        "1FA002"
+        "1FA346"
       ],
       "semester": 1,
       "trackId": null,
       "textSv": "Studenter som vill studera kärnfysik men inte har någon tidigare erfarenhet, bör ta:",
-      "labelEn": "Students who want to study nuclear physics without prior experience are recommended to take the introductory physics course.",
+      "labelEn": "Students who want to study nuclear physics without prior experience are advised to take Nuclear Physics (1FA346).",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -801,7 +801,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses available during this period.",
+      "labelEn": "A heading introducing other elective courses available during this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -814,7 +814,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Studenter som vill studera partikelfysik men inte har någon tidigare erfarenhet, bör ta:",
-      "labelEn": "Students who want to study particle physics without previous experience should take Elementary Particle Physics.",
+      "labelEn": "Students who want to study particle physics without prior experience are advised to take Elementary Particle Physics.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -825,7 +825,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses available during this period.",
+      "labelEn": "This is a heading introducing other selectable courses for this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -836,7 +836,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Studenter med en preferens för experiment rekommenderas att läsa dessa kurser:",
-      "labelEn": "Students with a preference for experimental work are recommended to take these courses.",
+      "labelEn": "Students preferring experimental physics are recommended to take these courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -847,7 +847,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses available during this period.",
+      "labelEn": "This is a heading introducing other elective courses for this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -860,7 +860,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Kursen 1FA336 ges endast udda år.",
-      "labelEn": "Course 1FA336 (Nuclear Astrophysics) is only offered in odd-numbered years.",
+      "labelEn": "The course 1FA336 is only offered in odd-numbered years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -873,7 +873,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
-      "labelEn": "Students pursuing a one-year master's degree (magisterexamen) choose 1FA597 as their degree project.",
+      "labelEn": "1FA597 is chosen by students who will take a magister's degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -886,7 +886,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Se Termin 1.Studenter med en preferens för teori rekommenderas att läsa 1FA360 som ges under hela terminen.",
-      "labelEn": "Students with a preference for theory are recommended to take 1FA360, which is offered throughout the semester.",
+      "labelEn": "Students with a preference for theory are recommended to take 1FA360.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -897,7 +897,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Övrig valbar kurs i period 2:",
-      "labelEn": "Other elective course in period 2",
+      "labelEn": "A heading introducing other elective courses in period 2.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -908,7 +908,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
-      "labelEn": "Other elective courses within the specialisation (any period).",
+      "labelEn": "Heading introducing other elective courses within the specialization, offered in any period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -919,7 +919,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Följande beteckningar används:G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)",
-      "labelEn": "Legend explaining the Swedish course level designations (G2F, A1N, A1F, A1E, A2E) used in the study plan.",
+      "labelEn": "Legend explaining the abbreviations used to describe course levels and prerequisites.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -1041,6 +1041,7 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
     {
       "from": "1FA370",
@@ -1200,12 +1201,13 @@
       "name": "Giltig från och med höstterminen 2015"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.914749+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.395092+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10021",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i fysik – Kärn- och partikelfysik, 120 hp (TFY2M)",
   "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)",
   "programmeUri": "/utbildning/program/masterprogram-fysik-karn-och-partikelfysik",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }

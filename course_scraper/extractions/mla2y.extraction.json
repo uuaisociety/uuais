@@ -1,0 +1,104 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:27:59.881955+00:00",
+  "edges": [
+    {
+      "code": "3MC160",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MC161",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PE150",
+      "text": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concerned as part of clinical practice (Internship placement).",
+      "result": {
+        "edges": [
+          {
+            "from": "3NR637",
+            "type": "HARD"
+          },
+          {
+            "from": "3MC163",
+            "type": "HARD"
+          },
+          {
+            "from": "3MC162",
+            "type": "HARD"
+          },
+          {
+            "from": "3MC161",
+            "type": "HARD"
+          },
+          {
+            "from": "3FM009",
+            "type": "HARD"
+          },
+          {
+            "from": "3FM100",
+            "type": "HARD"
+          },
+          {
+            "from": "3MC160",
+            "type": "HARD"
+          },
+          {
+            "from": "3NR613",
+            "type": "HARD"
+          },
+          {
+            "from": "3PA025",
+            "type": "HARD"
+          },
+          {
+            "from": "3ME106",
+            "type": "HARD"
+          },
+          {
+            "from": "3KR161",
+            "type": "HARD"
+          },
+          {
+            "from": "3AM041",
+            "type": "HARD"
+          },
+          {
+            "from": "3AM042",
+            "type": "HARD"
+          },
+          {
+            "from": "3AM043",
+            "type": "HARD"
+          },
+          {
+            "from": "3AM044",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Läkarprogrammet erbjuder studenterna ett urval av valbara kurser under denna termin.",
+        "semester": 12,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "The medical programme offers students a selection of elective courses during this semester.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

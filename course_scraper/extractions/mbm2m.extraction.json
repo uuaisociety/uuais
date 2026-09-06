@@ -1,0 +1,193 @@
+{
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:24:43.008261+00:00",
+  "edges": [
+    {
+      "code": "1BG313",
+      "text": "Completed courses of 120 credits including 60 credits in biology and 30 credits in chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FK219",
+      "text": "150 credits of which 120 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in general chemistry and organic chemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FK229",
+      "text": "150 credits of which 90 credits in biomedicine, pharmaceutical science, natural science and/or technology. Prior studies should include 10 credits in chemistry and 7.5 credits in pharmacology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FV366",
+      "text": "120 credits in biomedicine, pharmaceutical bioscience, biochemistry, biology, biotechnology or equivalent education within biology/chemistry or medicine.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3KK005",
+      "text": "180 credits in medicine/pharmacy",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MC881",
+      "text": "180 credits from Bachelor's programmes in biomedicine, pharmacy, biology or equivalent that provides relevant knowledge of cell and molecular biology, chemistry, biochemistry and physiology. Knowledge and experience of laboratory work. English proficiency corresponding to English B in the Swedish school system.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MU015",
+      "text": "Registered in the Master Programme in Biomedicine at Uppsala University.An approved project plan.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MU130",
+      "text": "Registered in the Master Programme in Biomedicine at Uppsala University.An approved project plan.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MU315",
+      "text": "A minimum of 30 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan.",
+      "result": {
+        "edges": [
+          {
+            "from": "3MC881",
+            "type": "HARD"
+          },
+          {
+            "from": "3NR600",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3MU330",
+      "text": "A minimum of 30 credits from courses within the Master's programme in Biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan.",
+      "result": {
+        "edges": [
+          {
+            "from": "3MC881",
+            "type": "HARD"
+          },
+          {
+            "from": "3NR600",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3MU430",
+      "text": "A minimum of 60 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.",
+      "result": {
+        "edges": [
+          {
+            "from": "3MC881",
+            "type": "HARD"
+          },
+          {
+            "from": "3NR600",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3MU445",
+      "text": "A minimum of 60 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.",
+      "result": {
+        "edges": [
+          {
+            "from": "3MC881",
+            "type": "HARD"
+          },
+          {
+            "from": "3NR600",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3MU745",
+      "text": "A minimum of 60 credits from courses within the Master's programme in Biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan.",
+      "result": {
+        "edges": [
+          {
+            "from": "3MC881",
+            "type": "HARD"
+          },
+          {
+            "from": "3NR600",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3NR382",
+      "text": "180 credits from a biomedicine, pharmacy or biology programme or equivalent education providing knowledge within cell and molecular biology, chemistry and biochemistry, pharmacology, physiology and neurobiology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3NR600",
+      "text": "180 credits from a Bachelor's programme in biomedicine, pharmacy or biology or equivalent education providing knowledge of cell and molecular biology, chemistry and biochemistry, pharmacology, physiology and neurobiology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3NR731",
+      "text": "Admitted to Master's programme at the Faculty of Medicine at Uppsala University.Eligibility requires a project plan involving animal experiments to be approved by the course coordinator.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Period 1 och 2 utgörs av valbara kurser. Studenten läser totalt 15 hp under den första halvan av terminen.",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Periods 1 and 2 consist of elective courses totalling 15 credits during the first half of the semester.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Fritt val av kurser. Detta är några vanliga exempel.",
+        "semester": 3,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Courses are freely selectable; the listed options are only common examples.",
+        "cohortBefore": null
+      }
+    }
+  ]
+}

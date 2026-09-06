@@ -27,7 +27,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering, of which at least 15 credits in electrical engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MA269",
@@ -46,7 +46,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering including electric circuit theory. 30 credits in mathematics including linear algebra and multivariable calculus."
     },
     {
       "code": "1TE765",
@@ -180,7 +180,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering, of which 15 credits in Electrical Engineering. Participation in one of the courses Electric Propulsion Systems or All-Electric Powertrains. Participation in Design of Electric Motors, or taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1EL204",
@@ -218,7 +218,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering, including 15 credits in Electrical Engineering. Participation in Design of Electric Motors. Participation in Electric Vehicles on Land, Water and in the Air, or can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1EL207",
@@ -237,7 +237,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, and, in addition, 20 credits in the main field of study Electrical Engineering at Master's level, including Thematic Studies in All-Electrical Propulsion Systems. Participation in Electric Propulsion Systems or All-Electric Powertrains. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TS327",
@@ -444,7 +444,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering including 10 credits in electrical engineering. A project plan approved by the department is required for admission. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TE616",
@@ -461,7 +461,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering including 10 credits in electrical engineering. A project plan approved by the department is required for admission. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1EL216",
@@ -478,7 +478,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at Master's level in the main field of all-electric propulsion systems including Thematic Studies in All-Electric Propulsion Systems. Participation in 15 credits of applied courses at Master's level. The applied courses in the programme are Electric Cars, Electric Operation of Heavy Vehicles: Trucks, Buses and Work Machines, Electric Operation of Aircraft, Drones and Helicopters, Rail-Bound Electric Traffic: Trains and Trams, Electric Operation for Ships and Boats. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [
@@ -495,7 +495,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Varken 1EL998 eller 1EL997 kan ingå i examen tillsammans med någon av kurserna 1EL223, 1EL205, 1EL208, 1EL209, 1EL215.",
-      "labelEn": "Neither 1EL998 nor 1EL997 may count toward the degree together with any of the courses 1EL223, 1EL205, 1EL208, 1EL209 or 1EL215.",
+      "labelEn": "Neither 1EL998 nor 1EL997 may count toward the degree together with 1EL208, 1EL209, or 1EL215.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -506,7 +506,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "För de som önskar ta ut en magisterexamen:",
-      "labelEn": "For students who wish to obtain a magister's degree:",
+      "labelEn": "A heading addressed to students who wish to obtain a one-year master's degree, with no specific courses named.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -520,7 +520,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "En av kurserna 1EL208 och 1EL209 kan ställas in vid brist på resurser men minst en ges.",
-      "labelEn": "Due to limited resources, one of 1EL208 and 1EL209 may be cancelled, but at least one will be offered.",
+      "labelEn": "One of 1EL208 and 1EL209 may be cancelled due to lack of resources, but at least one will be offered.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -534,21 +534,18 @@
       "semester": 3,
       "trackId": null,
       "textSv": "En av kurserna 1EL211 och 1EL215 kan ställas in vid brist på resurser men minst en ges.",
-      "labelEn": "One of 1EL211 or 1EL215 may be cancelled due to lack of resources, but at least one is offered.",
+      "labelEn": "One of 1EL211 and 1EL215 may be cancelled due to lack of resources, but at least one will be offered.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-4",
       "type": "NOTE",
-      "courseCodes": [
-        "1TE615",
-        "1TE616"
-      ],
+      "courseCodes": [],
       "semester": 3,
       "trackId": null,
       "textSv": "Övrigt - under period 1 och 2 kan projektarbete även väljas:",
-      "labelEn": "During periods 1 and 2, project work courses may also be chosen.",
+      "labelEn": "During periods 1 and 2, project work can also be chosen.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -586,7 +583,22 @@
     }
   ],
   "planFormat": "legacy",
+  "syllabusCourses": [],
   "edges": [
+    {
+      "from": "1EL201",
+      "to": "1EL207",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, and, in addition, 20 credits in the main field of study Electrical Engineering at Master's level, including Thematic Studies in All-Electrical Propulsion Systems. Participation in Electric Propulsion Systems or All-Electric Powertrains. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TE692",
+      "to": "1EL207",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, and, in addition, 20 credits in the main field of study Electrical Engineering at Master's level, including Thematic Studies in All-Electrical Propulsion Systems. Participation in Electric Propulsion Systems or All-Electric Powertrains. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
     {
       "from": "1EL204",
       "to": "1EL208",
@@ -735,11 +747,46 @@
       "rationale": "140 credits in science/engineering, out of which 20 credits in electrical engineering at Master's level. Electric Propulsion Systems, and Batteries and Storage. Participation in Power Electronics II and Design of Electric Motors. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1EL201",
+      "to": "1EL216",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at Master's level in the main field of all-electric propulsion systems including Thematic Studies in All-Electric Propulsion Systems. Participation in 15 credits of applied courses at Master's level. The applied courses in the programme are Electric Cars, Electric Operation of Heavy Vehicles: Trucks, Buses and Wor"
+    },
+    {
+      "from": "1EL208",
+      "to": "1EL216",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at Master's level in the main field of all-electric propulsion systems including Thematic Studies in All-Electric Propulsion Systems. Participation in 15 credits of applied courses at Master's level. The applied courses in the programme are Electric Cars, Electric Operation of Heavy Vehicles: Trucks, Buses and Wor"
+    },
+    {
+      "from": "1EL209",
+      "to": "1EL216",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at Master's level in the main field of all-electric propulsion systems including Thematic Studies in All-Electric Propulsion Systems. Participation in 15 credits of applied courses at Master's level. The applied courses in the programme are Electric Cars, Electric Operation of Heavy Vehicles: Trucks, Buses and Wor"
+    },
+    {
+      "from": "1EL215",
+      "to": "1EL216",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at Master's level in the main field of all-electric propulsion systems including Thematic Studies in All-Electric Propulsion Systems. Participation in 15 credits of applied courses at Master's level. The applied courses in the programme are Electric Cars, Electric Operation of Heavy Vehicles: Trucks, Buses and Wor"
+    },
+    {
       "from": "1EL998",
       "to": "1EL997",
       "type": "EXCLUSIVE",
       "source": "llm",
       "rationale": "Varken 1EL998 eller 1EL997 kan ingå i examen tillsammans med någon av kurserna 1EL223, 1EL205, 1EL208, 1EL209, 1EL215."
+    },
+    {
+      "from": "1TE692",
+      "to": "1EL998",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering, of which 15 credits in Electrical Engineering. Participation in one of the courses Electric Propulsion Systems or All-Electric Powertrains. Participation in Design of Electric Motors, or taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1KB274",
@@ -771,12 +818,13 @@
       "name": "Giltig från och med höstterminen 2022"
     }
   ],
-  "scrapedAt": "2026-09-03T05:46:15.904142+00:00",
+  "scrapedAt": "2026-09-05T09:25:16.383725+00:00",
   "sourceUrl": "https://www.uu.se/utbildning/studieplan?query=10016",
+  "validFrom": "Studieplan giltig från och med höstterminen 2026",
+  "validFromYear": 2026,
   "programmeTitle": "Masterprogram i elektriska framdrivningssystem, 120 hp (TEF2M)",
   "programmeTitleEn": "Master's Programme in All-Electric Propulsion Systems, 120 credits (TEF2M)",
   "programmeUri": "/utbildning/program/masterprogram-elektriska-framdrivningssystem",
-  "validFrom": "Studieplan giltig från och med höstterminen 2026",
-  "validFromYear": 2026,
+  "faculty": "Teknisk-naturvetenskapliga fakulteten",
   "reviewed": false
 }
