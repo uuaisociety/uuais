@@ -14,9 +14,13 @@ programme page carries a notice saying so.
 | `index.json` | `ingest_faculty.py` | The catalogue: one row per plan, plus the scrape date |
 | `<slug>.json` | `ingest_faculty.py` → `merge_extraction.py` | The plan the app reads |
 | `<slug>.json` with `"planFormat": "syllabus"` | `ingest_faculty.py` | A programme UU publishes no study plan for: named courses and prose, no graph |
-| `_requirements.json` | `fetch_requirements.py` | Raw entry requirements for every course, shared across programmes |
-| `<slug>.extraction.json` | the LLM pass | **The audit trail** — every generated edge with the sentence it came from |
+| `course_scraper/extractions/_requirements.json` | `fetch_requirements.py` | Raw entry requirements for every course, shared across programmes |
+| `course_scraper/extractions/<slug>.extraction.json` | `extract_edges.py` | **The audit trail** — every generated edge with the sentence it came from, and the model that produced it |
 | `<slug>.edges.json` | a human | Optional corrections layered over the generated edges |
+
+Those two live in `course_scraper/extractions/` rather than here. Nothing reads them at
+runtime, and Next traces the whole of `data/` into every serverless bundle that reads a
+plan — 1.3 MB of audit trail across six of them, which moving out of `data/` removes.
 
 The `.extraction.json` files are the record of what the model was asked and what it
 answered. Keep them: they are how a reviewer checks an edge without re-running
@@ -37,12 +41,12 @@ uv run python ingest_faculty.py --out ../data/programs
 # 2. Entry requirements, which study plans do not carry - they live on each course
 #    page. One request per unique course across the whole faculty.
 uv run python fetch_requirements.py ../data/programs/*.json \
-  --out ../data/programs/_requirements.json
+  --out extractions/_requirements.json
 
-# 3. Extract prerequisite edges and classify the prose notes. Done out of band by an
-#    LLM, writing one <slug>.extraction.json per programme. Resolve course names
-#    against that programme's roster only - requirements name courses by title, not
-#    code, so a closed-world roster is what keeps the matching accurate.
+# 3. Extract prerequisite edges and classify the prose notes, one <slug>.extraction.json
+#    per programme. Each call sees only that programme's roster: requirements name
+#    courses by title, not code, so a closed world is what keeps the matching accurate.
+uv run python extract_edges.py ../data/programs --model z-ai/glm-5.3-flash
 
 # 4. Merge (deterministic) and apply any human corrections.
 uv run python merge_all.py ../data/programs
