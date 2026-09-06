@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:25:21.184288+00:00",
+  "generatedAt": "2026-09-06T06:21:58.990059+00:00",
   "edges": [
     {
       "code": "5FP004",
@@ -35,11 +35,11 @@
         "trackId": null
       },
       "result": {
-        "type": "CHOOSE_ONE",
+        "type": "NOTE",
         "courseCodes": [
           "5FP006"
         ],
-        "labelEn": "KOSA students must take an adapted, mandatory version of Practical Philosophy A.",
+        "labelEn": "KOSA students take an adapted version of Practical Philosophy A that replaces Metaethics and Value Theory, and cannot take Metaphysics.",
         "cohortBefore": null
       }
     },
@@ -55,7 +55,7 @@
         "courseCodes": [
           "5FP003"
         ],
-        "labelEn": "KOSA students take an adapted version of Practical Philosophy B in which a thematic course replaces the advanced course in metaethics and value theory.",
+        "labelEn": "KOSA students take an adapted version of Practical Philosophy B that replaces the advanced course in metaethics and value theory.",
         "cohortBefore": null
       }
     },
@@ -69,7 +69,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "General information: course order may vary and students must apply via antagning.se during the announced application periods, with no guaranteed seats for late applicants.",
+        "labelEn": "The course order may vary, and students apply via antagning.se during the announced application periods with no guaranteed seat for late applicants.",
         "cohortBefore": null
       }
     },
@@ -83,7 +83,7 @@
       "result": {
         "type": "EITHER_OR",
         "courseCodes": [],
-        "labelEn": "In term 4 students take either Political Science A or Cultural Anthropology A as a subsidiary subject.",
+        "labelEn": "In term 4 students take a minor subject in either Political Science A or Cultural Anthropology A, applying via antagning.se.",
         "cohortBefore": null
       }
     },
@@ -97,7 +97,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Term 5 consists of 30 credits of elective courses from the historical-philosophical or social sciences faculties, with guaranteed places only for philosophy department courses; internships or study abroad may also be chosen.",
+        "labelEn": "In semester 5, elective courses totalling 30 credits are taken at the Faculty of Arts or Social Sciences, with internships or study abroad also possible.",
         "cohortBefore": null
       }
     },
@@ -111,7 +111,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Students must apply for the course via antagning.se during the announced application periods; a place is not guaranteed for late applicants.",
+        "labelEn": "Students apply for the course via antagning.se during announced application periods, and a place is not guaranteed for late applicants.",
         "cohortBefore": null
       }
     }

@@ -208,7 +208,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valbara kurser omfattande totalt 15 hp eller del av masterprojekt 15 hp (av 45 hp-projekt).",
-      "labelEn": "Elective courses totalling 15 credits may be taken, or 15 credits as part of the 45-credit master's project.",
+      "labelEn": "Elective courses totalling 15 credits or a 15-credit part of the 45-credit master project.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -219,7 +219,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Masterprojekt 30 hp eller resterande del av 45 hp-projekt.",
-      "labelEn": "The master thesis is taken as 30 credits, or as the remaining part of a 45 credit project.",
+      "labelEn": "Master's project of 30 credits or the remaining part of a 45-credit project.",
       "cohortBefore": null,
       "source": "llm"
     }

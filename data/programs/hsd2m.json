@@ -24,7 +24,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Bachelor's degree and knowledge of English corresponding to English 6."
     },
     {
       "code": "5SD311",
@@ -41,7 +41,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Bachelor's degree and knowledge of English corresponding to English 6."
     },
     {
       "code": "5SD303",
@@ -58,7 +58,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "5SD312",
@@ -75,7 +75,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "5SD314",
@@ -92,7 +92,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "15 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "5SD305",
@@ -109,7 +109,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "5SD306",
@@ -126,7 +126,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in game design at Master's level, including Advanced Game Design Research Methods, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [
@@ -137,7 +137,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Denna termin väljer du kurser på totalt 30hp. Du kan även ansöka om utlandsstudier eller praktik. Institutionen erbjuder varje hösttermin ett varierande utbud av valbara kurser.",
-      "labelEn": "This term you choose elective courses totalling 30 credits, and may also apply for studies abroad or an internship.",
+      "labelEn": "General note that this semester consists of 30 credits of elective courses, with options for study abroad or internship.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -152,7 +152,15 @@
   ],
   "planFormat": "ladok",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "5SD314",
+      "to": "5SD306",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in game design at Master's level, including Advanced Game Design Research Methods, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
   "revisions": [
     {
       "id": "0c2fad61-9f04-4da8-bcdb-9cf643127591",

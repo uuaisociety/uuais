@@ -1,119 +1,206 @@
 {
- "edges": [
-  {
-   "code": "1GV147",
-   "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within engineering, science or social science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1GV149",
-   "text": "A Bachelor's degree in engineering, science or social sciences. Also required is participation in Wind Power Development and Management, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1GV147",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1GV156",
-   "text": "A Bachelor's degree in engineering, science or social science. Also required is 45 credits at Master's level in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1GV157",
-   "text": "A Bachelor's degree in engineering, science or social science. Also required is 45 credits at Master's level in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1GV159",
-   "text": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Planning for Wind Energy, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1GV149",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1GV160",
-   "text": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Project Course: Feasibility Study of a Wind Power Project, 15 credits, and Wind Energy Resource and Technology, 10 credits, as well as 30 credits in mathematics, and 15 credits in Physics and/or Mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1GV222",
-      "type": "HARD"
-     },
-     {
-      "from": "1GV221",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1GV161",
-   "text": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Scientific Methods in Wind Power Project Management, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6. The course is only available after completion of for the degree course required courses at Master's level. Admission requires a project plan accepted by the department.",
-   "result": {
-    "edges": [
-     {
-      "from": "1GV153",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1GV183",
-   "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within engineering, science or social science. 60 credits of Master's level courses in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1GV217",
-   "text": "120 credit and 60 credits at Master's level in Wind Power Project Management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1GV221",
-   "text": "A Bachelor's degree in engineering, science or social science. Also required is participation in Wind Power Development and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1GV147",
-      "type": "SOFT"
-     }
-    ]
-   }
-  }
- ],
- "rules": [
-  {
-   "note": {
-    "textSv": "Övriga kurser (valfri period):",
-    "semester": 4,
-    "period": null,
-    "trackId": null
-   },
-   "result": {
-    "type": "NOTE",
-    "courseCodes": [],
-    "labelEn": "Other courses may be taken in any period.",
-    "cohortBefore": null
-   }
-  }
- ]
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T08:08:28.641279+00:00",
+  "edges": [
+    {
+      "code": "1GV143",
+      "text": "A Bachelor's degree in engineering, science or social science. Also required is 30 credits at Master's level in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6. The course is only available after completion of for the degree course required courses at Master's level. Admission requires a project plan accepted by the department.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV144",
+      "text": "Bachelor of Science (180 credits) in engineering, science or social science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV146",
+      "text": "A Bachelor's degree in engineering, science or social science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV147",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within engineering, science or social science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV149",
+      "text": "A Bachelor's degree in engineering, science or social sciences. Also required is participation in Wind Power Development and Management, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV147",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV153",
+      "text": "A Bachelor's degree in science/engineering or social sciences. Wind Power Development and Management, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV147",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV154",
+      "text": "A Bachelor's degree in engineering, science or social science. Wind Power Development and Management, 15 credits, Planning for Wind Energy, 5 credits as well as Wind Energy Resource and Technology, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV147",
+            "type": "HARD"
+          },
+          {
+            "from": "1GV149",
+            "type": "HARD"
+          },
+          {
+            "from": "1GV221",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV156",
+      "text": "A Bachelor's degree in engineering, science or social science. Also required is 45 credits at Master's level in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV157",
+      "text": "A Bachelor's degree in engineering, science or social science. Also required is 45 credits at Master's level in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV159",
+      "text": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Planning for Wind Energy, 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV149",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV160",
+      "text": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Project Course: Feasibility Study of a Wind Power Project, 15 credits, and Wind Energy Resource and Technology, 10 credits, as well as 30 credits in mathematics, and 15 credits in Physics and/or Mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV222",
+            "type": "HARD"
+          },
+          {
+            "from": "1GV221",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV161",
+      "text": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Scientific Methods in Wind Power Project Management, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6. The course is only available after completion of for the degree course required courses at Master's level. Admission requires a project plan accepted by the department.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV153",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV162",
+      "text": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Scientific Methods in Wind Power Project Management, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6. The course is only available after completion of for the degree course required courses at Master's level. Admission requires a project plan accepted by the department.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV153",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV183",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within engineering, science or social science. 60 credits of Master's level courses in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV217",
+      "text": "120 credit and 60 credits at Master's level in Wind Power Project Management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV221",
+      "text": "A Bachelor's degree in engineering, science or social science. Also required is participation in Wind Power Development and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV147",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV222",
+      "text": "A Bachelor's degree in engineering, science or social sciences. Wind Power Development and Management, as well as participation in the courses Planning for Wind Energy and Wind Energy Resource and Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV147",
+            "type": "HARD"
+          },
+          {
+            "from": "1GV149",
+            "type": "SOFT"
+          },
+          {
+            "from": "1GV221",
+            "type": "SOFT"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Övriga kurser (valfri period):",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Other courses may be taken in any period.",
+        "cohortBefore": null
+      }
+    }
+  ]
 }

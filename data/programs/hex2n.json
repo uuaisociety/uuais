@@ -24,7 +24,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including 30 credits in game design or game development. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "5SD325",
@@ -41,7 +41,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including 30 credits in game design or game development. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "5SD326",
@@ -58,7 +58,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Introduction to Experimental Game Design, 15 credits (5SD324)"
     },
     {
       "code": "5SD327",
@@ -75,14 +75,36 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Introduction to Experimental Game Design, 15 credits (5SD324); Methods for Advanced and Reflective Practice, 15 credits (5SD325) and 7.5 credits from Game Development and Communication, 15 credits (5SD326)."
     }
   ],
   "rules": [],
   "ruleTexts": [],
   "planFormat": "ladok",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "5SD324",
+      "to": "5SD326",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Introduction to Experimental Game Design, 15 credits (5SD324)"
+    },
+    {
+      "from": "5SD324",
+      "to": "5SD327",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Introduction to Experimental Game Design, 15 credits (5SD324); Methods for Advanced and Reflective Practice, 15 credits (5SD325) and 7.5 credits from Game Development and Communication, 15 credits (5SD326)."
+    },
+    {
+      "from": "5SD325",
+      "to": "5SD327",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Introduction to Experimental Game Design, 15 credits (5SD324); Methods for Advanced and Reflective Practice, 15 credits (5SD325) and 7.5 credits from Game Development and Communication, 15 credits (5SD326)."
+    }
+  ],
   "revisions": [
     {
       "id": "2e6ac017-3f75-4614-9609-fdaee25bfaaa",

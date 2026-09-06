@@ -94,7 +94,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Archaeology A and Archaeology B"
     },
     {
       "code": "5AR026",
@@ -113,7 +113,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Archaeology A and Archaeology B"
     },
     {
       "code": "5AR724",
@@ -151,7 +151,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Archaeology A and Archaeology B"
     },
     {
       "code": "5AR660",
@@ -196,7 +196,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Studenten väljer en av kurserna och skriver examensarbete.",
-      "labelEn": "The student chooses one of the courses and writes a degree project.",
+      "labelEn": "The student chooses one of the courses and writes a degree thesis.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -211,7 +211,50 @@
   ],
   "planFormat": "legacy",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "5AR260",
+      "to": "5AR025",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Archaeology A and Archaeology B"
+    },
+    {
+      "from": "5AR640",
+      "to": "5AR025",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Archaeology A and Archaeology B"
+    },
+    {
+      "from": "5AR260",
+      "to": "5AR026",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Archaeology A and Archaeology B"
+    },
+    {
+      "from": "5AR640",
+      "to": "5AR026",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Archaeology A and Archaeology B"
+    },
+    {
+      "from": "5AR260",
+      "to": "5AR027",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Archaeology A and Archaeology B"
+    },
+    {
+      "from": "5AR640",
+      "to": "5AR027",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Archaeology A and Archaeology B"
+    }
+  ],
   "revisions": [
     {
       "id": "2544",

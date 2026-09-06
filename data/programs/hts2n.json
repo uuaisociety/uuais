@@ -24,7 +24,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "5SD322",
@@ -41,7 +41,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and at least 3.5 credits from Introduction to Transformative Game Design. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "5SD319",
@@ -58,7 +58,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and Introduction to Transformative Game Design, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "5SD320",
@@ -75,7 +75,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and Introduction to Transformative Game Design, 7.5 credits, and Transformative Game Design 1, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "5SD308",
@@ -109,7 +109,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "15 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "5SD307",
@@ -126,14 +126,43 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits in game design at Master's level, including Introduction to Game Design Research, 15 credits, or Introduction to Transformative Game Design, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [],
   "ruleTexts": [],
   "planFormat": "ladok",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "5SD321",
+      "to": "5SD307",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "30 credits in game design at Master's level, including Introduction to Game Design Research, 15 credits, or Introduction to Transformative Game Design, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "5SD321",
+      "to": "5SD319",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and Introduction to Transformative Game Design, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "5SD321",
+      "to": "5SD320",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and Introduction to Transformative Game Design, 7.5 credits, and Transformative Game Design 1, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "5SD322",
+      "to": "5SD320",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and Introduction to Transformative Game Design, 7.5 credits, and Transformative Game Design 1, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
   "revisions": [
     {
       "id": "bfded988-7eb1-48cf-8a98-73679b557fac",

@@ -1,234 +1,360 @@
 {
- "edges": [
-  {
-   "code": "1DL011",
-   "text": "120 credits including (1) Database Design I, 10 credits in programming, Genomics and Bioinformatics, or (2) Introduction to Bioinformatics, Computer Programming I, Computational Methods for Scientific Applications and Database Design I, or (3) 30 credits in mathematics and 30 credits in computer science including 5 credits in database design. Introduction to Bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1MB438",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1DL210",
-   "text": "10 credits in computer programming (Program Design, Programming Techniques II, or the equivalent) and 10 credits in mathematics, including basic algebra. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M).",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1DL231",
-   "text": "60 credits of which 15 credits in mathematics and 25 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology. Participation in Program Design and Data Structures of which 9 credits shall be completed, alternatively participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1DL210",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1DL340",
-   "text": "120 credits including 15 credits in mathematics and 20 credits in computer science, including a second course in programming. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TD722",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1DL360",
-   "text": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TD722",
-      "type": "HARD"
-     },
-     {
-      "from": "1DL210",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1KB162",
-   "text": "Alt 1. 120 credits within the Master's Programme in Molecular Biotechnology Engineering, including Biotechnical Methodology, Genomics and Bioinformatics, and Scientific Computing for Data Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alt 2. 120 credits including Introduction to Bioinformatics, Computer Programming I, Introduction to Statistics for Life Sciences and Computational Methods for Scientific Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alt 3. 120 credits including Introduction to Bioinformatics, Introduction to Statistics for Life Sciences and Introduction to Molecular Biology, Genetics and Evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1MB438",
-      "type": "HARD"
-     },
-     {
-      "from": "1MB465",
-      "type": "HARD"
-     },
-     {
-      "from": "1MB439",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1MB515",
-   "text": "120 credit and Molecular Evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1MB461",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1MB517",
-   "text": "Completed courses worth 120 credits and participation in the course Genome Analysis, of which at least 5 credits must have been completed . English 6. (A Swedish Degree of Bachelor satisfies this requirement.)",
-   "result": {
-    "edges": [
-     {
-      "from": "1MB462",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1MB519",
-   "text": "Alt 1. 210 credits within the Master's Programme in Molecular Biotechnology Engineering (300 credits) including 25 credits from completed profile courses: Proteomics and Metabolomics, Data Mining I, Statistical Inference for Bioinformatics or Statistical Inference for Technological Applications, Molecular Evolution, Information Management Systems, Big Data in Life Sciences, Genome Analysis, Knowledge-Based Systems in Bioinformatics, Automated Predictive Modelling. Alt 2. 30 credits in the Master's Programme in Bioinformatics (120 credits) including 25 credits of the following courses: Script Programming or Programming in Python or Computer Programming I, Statistical Inference for Bioinformatics or Statistical Inference for Technological Applications, Molecular Evolution, Information Management Systems, Big Data in Life Sciences, Genome Analysis, Knowledge-Based Systems in Bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1KB162",
-      "type": "HARD"
-     },
-     {
-      "from": "1DL360",
-      "type": "HARD"
-     },
-     {
-      "from": "1TS325",
-      "type": "HARD"
-     },
-     {
-      "from": "1MB461",
-      "type": "HARD"
-     },
-     {
-      "from": "1DL011",
-      "type": "HARD"
-     },
-     {
-      "from": "3FB034",
-      "type": "HARD"
-     },
-     {
-      "from": "1MB462",
-      "type": "HARD"
-     },
-     {
-      "from": "1MB416",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1RT700",
-   "text": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TD389",
-   "text": "120 credits including Computer Programming I and Scientific Computing II. Scientific Computing II may be replaced by Numerical Methods and Simulation, 5 credits, Scientific Computing, Bridging Course, 5 credits, or Scientific Computing and Calculus, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TD396",
-   "text": "120 credits including 30 credits in mathematics and 10 credits in computer science, including Scientific Computing I/Introduction to Scientific Computing and Computer Programming I, Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TD722",
-   "text": "Computer Programming I",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TS325",
-   "text": "Option 1: 120 credits whereof 60 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Option 2: 120 credits whereof 60 credits in science/engineering. Participation in 25 credits in mathematics/statistics/scientific computing, of which 15 credits should be completed. The 25 credits should include statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  }
- ],
- "rules": [
-  {
-   "note": {
-    "textSv": "--------------------------------------------------------------------------------------------------------TillvalskurserDessa kurser går i olika perioder och kan läsas under programmets gång som alternativ till andra kurser.",
-    "semester": 4,
-    "period": null,
-    "trackId": null
-   },
-   "result": {
-    "type": "NOTE",
-    "courseCodes": [],
-    "labelEn": "Elective courses run in different periods and may be taken during the programme as alternatives to other courses.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "1MB720 är enbart för de studenter som ska ta ut en magisterexamen.",
-    "semester": 4,
-    "period": null,
-    "trackId": null
-   },
-   "result": {
-    "type": "NOTE",
-    "courseCodes": [
-     "1MB720"
-    ],
-    "labelEn": "1MB720 is only for students pursuing a magister's degree.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "Endast en av kurserna Forskningspraktik, 1MB803, 1MB804, 1MB805, 1MB840, 1MB841 och 1MB842, kan ingå i examen.Endast en av kurserna Bibliografiskt projekt i bioinformatik, 1MB782 och 1MB783, kan ingå i examen.Endast en av kurserna Projektarbete, 1MB820 och 1MB822, kan ingå i examen.",
-    "semester": 4,
-    "period": null,
-    "trackId": null
-   },
-   "result": {
-    "type": "MUTUALLY_EXCLUSIVE",
-    "courseCodes": [
-     "1MB840",
-     "1MB841",
-     "1MB842",
-     "1MB782",
-     "1MB783"
-    ],
-    "labelEn": "Only one research training course, only one bibliographic literature project, and only one project work course may count toward the degree.",
-    "cohortBefore": null
-   }
-  }
- ]
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T06:43:36.719960+00:00",
+  "edges": [
+    {
+      "code": "1DL011",
+      "text": "120 credits including (1) Database Design I, 10 credits in programming, Genomics and Bioinformatics, or (2) Introduction to Bioinformatics, Computer Programming I, Computational Methods for Scientific Applications and Database Design I, or (3) 30 credits in mathematics and 30 credits in computer science including 5 credits in database design. Introduction to Bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MB438",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1DL210",
+      "text": "10 credits in computer programming (Program Design, Programming Techniques II, or the equivalent) and 10 credits in mathematics, including basic algebra. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M).",
+      "result": {
+        "edges": [
+          {
+            "from": "1TD722",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1DL231",
+      "text": "60 credits of which 15 credits in mathematics and 25 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology. Participation in Program Design and Data Structures of which 9 credits shall be completed, alternatively participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1DL210",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1DL340",
+      "text": "120 credits including 15 credits in mathematics and 20 credits in computer science, including a second course in programming. Alternatively 45 credits in the Master's Programme in Language Technology (HSP2M). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1DL360",
+      "text": "120 credits with 25 credits in mathematics, including mathematical statistics, 45 credits in computer science and/or engineering, including Database Design I and a second course in computer programming. Algorithms and Data Structures I is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1DL210",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1KB162",
+      "text": "Alt 1. 120 credits within the Master's Programme in Molecular Biotechnology Engineering, including Biotechnical Methodology, Genomics and Bioinformatics, and Scientific Computing for Data Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alt 2. 120 credits including Introduction to Bioinformatics, Computer Programming I, Introduction to Statistics for Life Sciences and Computational Methods for Scientific Applications. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alt 3. 120 credits including Introduction to Bioinformatics, Introduction to Statistics for Life Sciences and Introduction to Molecular Biology, Genetics and Evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MB438",
+            "type": "HARD"
+          },
+          {
+            "from": "1MB465",
+            "type": "HARD"
+          },
+          {
+            "from": "1MB439",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MB416",
+      "text": "Alt 1. 120 credits including Genomics and Bioinformatics, Probability and Statistics, and Computer Programming II. Alt 2. Introduction to Bioinformatics, Introduction to Programming, Scientific Computing and Statistics, and Programming in Python. Alt 3. 30 credits mathematics and 30 credits computer science. Introduction to Bioinformatics, and Script Programming. Alt 4. Participation in Introduction to Bioinformatics, Computer Programming I, Computational Methods for Scientific Applications, and Introduction to Statistics for Life Sciences. Alt 5. 25 credits mathematics or statistics and 30 credits computer science. Participation in Introduction to Bioinformatics, and Introduction to Statistics for Life Sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MB438",
+            "type": "HARD"
+          },
+          {
+            "from": "1TD722",
+            "type": "HARD"
+          },
+          {
+            "from": "1MB465",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MB438",
+      "text": "A Bachelor's degree including: Alternative 1) 15 credits mathematics or statistics, and 45 credits biology including 30 credits in molecular biology, cell biology, evolution or genetics; Alternative 2) 25 credits mathematics or statistics and 30 credits computer science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MB439",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 25 credits in mathematics or statistics and 30 credits in computer science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MB461",
+      "text": "Alt . 1) 120 credits in the engineering programme in molecular biotechnology. Alt . 2) 5 credits in the Master's (120 credits) programme in bioinformatics and participation in Introduction to Molecular Biology, Genetics and Evolution, or at least 15 credits biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MB439",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MB462",
+      "text": "120 credits. Participation in Molecular Evolution, and participation in course in programming 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MB461",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MB465",
+      "text": "Bachelor's degree of at least 180 credits including: Alt. 1) 15 credits mathematics or statistics and 45 credits biology of which 30 credits in molecular biology, cell biology, evolution or genetics; Alt. 2) 25 credits mathematics or statistics and 30 credits computer science; Alt. 3) 90 credits biology and/or chemistry (of which 10 credits biochemistry and 10 credits molecular biology) and 15 credits mathematics and/or statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MB515",
+      "text": "120 credit and Molecular Evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MB461",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MB517",
+      "text": "Completed courses worth 120 credits and participation in the course Genome Analysis, of which at least 5 credits must have been completed . English 6. (A Swedish Degree of Bachelor satisfies this requirement.)",
+      "result": {
+        "edges": [
+          {
+            "from": "1MB462",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MB519",
+      "text": "Alt 1. 210 credits within the Master's Programme in Molecular Biotechnology Engineering (300 credits) including 25 credits from completed profile courses: Proteomics and Metabolomics, Data Mining I, Statistical Inference for Bioinformatics or Statistical Inference for Technological Applications, Molecular Evolution, Information Management Systems, Big Data in Life Sciences, Genome Analysis, Knowledge-Based Systems in Bioinformatics, Automated Predictive Modelling. Alt 2. 30 credits in the Master's Programme in Bioinformatics (120 credits) including 25 credits of the following courses: Script Programming or Programming in Python or Computer Programming I, Statistical Inference for Bioinformatics or Statistical Inference for Technological Applications, Molecular Evolution, Information Management Systems, Big Data in Life Sciences, Genome Analysis, Knowledge-Based Systems in Bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1KB162",
+            "type": "HARD"
+          },
+          {
+            "from": "1DL360",
+            "type": "HARD"
+          },
+          {
+            "from": "1TS325",
+            "type": "HARD"
+          },
+          {
+            "from": "1MB461",
+            "type": "HARD"
+          },
+          {
+            "from": "1DL011",
+            "type": "HARD"
+          },
+          {
+            "from": "3FB034",
+            "type": "HARD"
+          },
+          {
+            "from": "1MB462",
+            "type": "HARD"
+          },
+          {
+            "from": "1MB416",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MB720",
+      "text": "Bachelor's degree, and in addition at least 30 credits of courses in Bioinformatics at advanced level, including courses at advanced level that are necessary for the project. Admission requires a project plan accepted by the department.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MB745",
+      "text": "Bachelor's degree, and in addition at least 30 credits of courses in Bioinformatics at advanced level, including courses at advanced level that are necessary for the project. Admission requires a project plan accepted by the department.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MB782",
+      "text": "Bachelor's degree and 20 credits in the Master's Programme in Bioinformatics (120 credits), of which 15 credits in the main field of study bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MB783",
+      "text": "Bachelor's degree and 20 credits in the Master's Programme in Bioinformatics (120 credits), of which 15 credits in the main field of study bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MB830",
+      "text": "Bachelor's degree, and in addition at least 30 credits of courses in Bioinformatics at advanced level, including courses at advanced level that are necessary for the project. Admission requires a project plan accepted by the department.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MB840",
+      "text": "Bachelor's degree and 20 credits in the Master's Programme in Bioinformatics (120 credits), of which 15 credits in the main field of study bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MB841",
+      "text": "Bachelor's degree and 20 credits in the Master's Programme in Bioinformatics (120 credits), of which 15 credits in the main field of study bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MB842",
+      "text": "Bachelor's degree and 20 credits in the Master's Programme in Bioinformatics (120 credits), of which 15 credits in the main field of study bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1RT700",
+      "text": "120 credits including Probability and Statistics, Linear Algebra II, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TD389",
+      "text": "120 credits including Computer Programming I and Scientific Computing II. Scientific Computing II may be replaced by Numerical Methods and Simulation, 5 credits, Scientific Computing, Bridging Course, 5 credits, or Scientific Computing and Calculus, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TD396",
+      "text": "120 credits including 30 credits in mathematics and 10 credits in computer science, including Scientific Computing I/Introduction to Scientific Computing and Computer Programming I, Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TD722",
+      "text": "Computer Programming I",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TS325",
+      "text": "Option 1: 120 credits whereof 60 credits in science/engineering, including 20 credits in mathematics, which should include single variable calculus, linear algebra and probability theory/statistics. Participation in Computer Programming I or Programming. Option 2: 120 credits whereof 60 credits in science/engineering. Participation in 25 credits in mathematics/statistics/scientific computing, of which 15 credits should be completed. The 25 credits should include statistics. Participation in Computer Programming I or Programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FB034",
+      "text": "120 credits including (1) 15 credits in computer science, including 5 credits in programming, and 15 credits in biology, or (2) 15 credits within the Master's Programme in Bioinformatics, including 5 credits in programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "--------------------------------------------------------------------------------------------------------TillvalskurserDessa kurser går i olika perioder och kan läsas under programmets gång som alternativ till andra kurser.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Heading for elective courses that run in different periods and can be taken as alternatives to other courses during the programme.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "1MB720 är enbart för de studenter som ska ta ut en magisterexamen.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "1MB720"
+        ],
+        "labelEn": "1MB720 is only for students pursuing a master's (magister) degree.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Endast en av kurserna Forskningspraktik, 1MB803, 1MB804, 1MB805, 1MB840, 1MB841 och 1MB842, kan ingå i examen.Endast en av kurserna Bibliografiskt projekt i bioinformatik, 1MB782 och 1MB783, kan ingå i examen.Endast en av kurserna Projektarbete, 1MB820 och 1MB822, kan ingå i examen.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "MUTUALLY_EXCLUSIVE",
+        "courseCodes": [
+          "1MB840",
+          "1MB841",
+          "1MB842",
+          "1MB782",
+          "1MB783"
+        ],
+        "labelEn": "Only one research training course and only one literature project course may count toward the degree.",
+        "cohortBefore": null
+      }
+    }
+  ]
 }

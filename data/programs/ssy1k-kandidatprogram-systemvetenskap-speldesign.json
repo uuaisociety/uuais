@@ -273,7 +273,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Speldesign och spelutveckling 1, 15 hpSpeldesign och spelutveckling 2, 15 hp",
-      "labelEn": "Lists Game Design and Game Development 1 and 2, 15 credits each, without stating a requirement.",
+      "labelEn": "Lists the courses Game Design and Game Development 1 and 2, 15 credits each, which do not appear on the roster.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -284,7 +284,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Valbara kurser 30 hp eller utbytesstudier. Studenterna har platsgaranti på:",
-      "labelEn": "Elective courses of 30 credits or exchange studies are allowed, and students have guaranteed placement on the courses listed below.",
+      "labelEn": "Students choose either 30 credits of elective courses or exchange studies, with guaranteed places on certain courses.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -305,7 +305,22 @@
   ],
   "planFormat": "ladok",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "2IS233",
+      "to": "2IS220",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Programming, 7.5 credits"
+    },
+    {
+      "from": "2IS222",
+      "to": "2IS227",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "30 credits in information systems or the equivalent including 7.5 credits in databases"
+    }
+  ],
   "revisions": [
     {
       "id": "041d6f54-ed13-453a-a3e8-39c2ab99c0b2",

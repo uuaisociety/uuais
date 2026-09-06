@@ -27,7 +27,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Accepted to the Master's Programme in Physics, tracks physics or astronomy/space physics"
     },
     {
       "code": "1FA209",
@@ -104,7 +104,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 30 credits in mathematics and 60 credits in physics, including Observational Astrophysics I and Astrophysics I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA262",
@@ -123,7 +123,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering including Computer Programming I, Astrophysics I, Quantum Physics and Statistical Mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA253",
@@ -686,7 +686,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kursen 1FA225 Teoretisk astrofysik ges bara jämna år.",
-      "labelEn": "The course 1FA225 Theoretical Astrophysics is offered only in even-numbered years.",
+      "labelEn": "The course Theoretical Astrophysics is only offered in even-numbered years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -699,7 +699,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kursen 1FA211 Observationell astrofysik II ges bara udda år.",
-      "labelEn": "The course Observational Astrophysics II (1FA211) is only offered in odd-numbered years.",
+      "labelEn": "The course Observational Astrophysics II is only offered in odd-numbered years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -710,7 +710,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses available this period.",
+      "labelEn": "Heading introducing other optional courses for this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -723,7 +723,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kursen 1FA262 Astrokemi ges bara udda år.",
-      "labelEn": "The course 1FA262 Astrochemistry is only offered in odd years.",
+      "labelEn": "The course 1FA262 Astrochemistry is offered only in odd-numbered years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -750,7 +750,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kursen 1FA211 Observationell astrofysik II ges bara udda år.",
-      "labelEn": "The course 1FA211 Observational Astrophysics II is only offered in odd-numbered years.",
+      "labelEn": "The course Observational Astrophysics II is only offered in odd-numbered years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -761,7 +761,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses available in this period.",
+      "labelEn": "This is a heading introducing other selectable courses for this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -769,13 +769,12 @@
       "id": "rule-8",
       "type": "NOTE",
       "courseCodes": [
-        "1FA204",
-        "1FA203"
+        "1FA204"
       ],
       "semester": 1,
       "trackId": null,
       "textSv": "Studenter som inte hade någon astronomi eller astrofysik i sina kandidatstudier väljer 1FA204. De rekommenderas även att ta 1FA203 under period 4",
-      "labelEn": "Students without astronomy or astrophysics in their bachelor studies choose 1FA204 and are also recommended to take 1FA203 in period 4.",
+      "labelEn": "Students without astronomy or astrophysics in their bachelor's studies must take 1FA204 and are also recommended to take 1FA203 in period 4.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -799,7 +798,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses available during this period.",
+      "labelEn": "This is a heading introducing other selectable courses for the period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -812,7 +811,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Kursen 1FA336 ges endast udda år.",
-      "labelEn": "The course 1FA336 is offered only in odd-numbered years.",
+      "labelEn": "The course 1FA336 is only offered in odd-numbered years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -823,7 +822,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses available this period.",
+      "labelEn": "This is a bare heading introducing other elective courses for the period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -836,7 +835,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
-      "labelEn": "Students aiming for a magister's degree choose 1FA597.",
+      "labelEn": "1FA597 is chosen by students who will take a one-year master's degree (magisterexamen).",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -847,7 +846,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Se termin 1.",
-      "labelEn": "Refers to semester 1 for the applicable course requirements.",
+      "labelEn": "See term 1 for details.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -860,7 +859,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "1FA694 Examensarbete E i fysik, 15 (av 45) högskolepoäng",
-      "labelEn": "Only 15 of the 45 credits for Degree Project E in Physics (1FA694) are counted in this semester.",
+      "labelEn": "Degree Project E in Physics counts for 15 of a possible 45 higher education credits.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -873,7 +872,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "1FA694 Examensarbete E i fysik, 30 (av 45) högskolepoäng",
-      "labelEn": "Only 30 of the 45 credits for Degree Project E in Physics (1FA694) count toward the degree.",
+      "labelEn": "The degree project 1FA694 counts for 30 of 45 credits.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -884,7 +883,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Övriga kurser inom inriktningen (valfri period):",
-      "labelEn": "Other courses within the specialisation (any period).",
+      "labelEn": "This is a heading introducing other courses in the specialisation that can be taken in any period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -895,7 +894,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Följande beteckningar används:G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)",
-      "labelEn": "The note defines the abbreviations used for course levels (G2F, A1N, A1F, A1E, A2E) describing prerequisite requirements and thesis types.",
+      "labelEn": "Legend explaining the abbreviations used for course levels and prerequisite requirements.",
       "cohortBefore": null,
       "source": "llm"
     }

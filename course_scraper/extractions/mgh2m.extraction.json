@@ -1,6 +1,58 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:30:11.917401+00:00",
-  "edges": [],
+  "generatedAt": "2026-09-06T06:27:16.842972+00:00",
+  "edges": [
+    {
+      "code": "3PE145",
+      "text": "University degree, minimum of 180 credits, in medicine, nursing, nutrition or another area relevant to global health. All applicants need to verify English language proficiency. This is normally attested by means of an internationally recognised test such as TOEFL or IELTS.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3PE146",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen (180 credits). The main field of study must be in medicine, nursing, nutrition or similar fields relevant for global health. All applicants need to have adequate proficiency in the English lagnuage. This is normally attested by means of an internationally recognised test such as TOEFL or IELTS. Applicants must have passed the course module Introduction to Global Health, 15 credits (from Global Health 1), or equivalent.",
+      "result": {
+        "edges": [
+          {
+            "from": "3PE145",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3PE147",
+      "text": "University degree, minimum of 180 credits, in medicine, nursing, nutrition or another area relevant to global health. All applicants need to verify English language proficiency. This is normally attested by means of an internationally recognised test such as TOEFL or IELTS. Applicants must have passed the course Global Health 1, or equivalent.",
+      "result": {
+        "edges": [
+          {
+            "from": "3PE145",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3PE148",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen (180 credits). The main field of study must be in medicine, nursing, nutrition or similar fields relevant for global health. All applicants need to have adequate proficiency in English language. This is normally attested by means of an internationally recognised test such as TOEFL or IELTS. Applicants must have passed the course Global Health 1, 30 credits and course module Research Methods II, 10 credits (from Global health 2) and course module Research Methods III, 7.5 credits (from Global health 3) or equivalent.",
+      "result": {
+        "edges": [
+          {
+            "from": "3PE145",
+            "type": "HARD"
+          },
+          {
+            "from": "3PE146",
+            "type": "HARD"
+          },
+          {
+            "from": "3PE147",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
   "rules": []
 }

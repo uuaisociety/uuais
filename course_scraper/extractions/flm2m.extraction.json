@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:22:33.929090+00:00",
+  "generatedAt": "2026-09-06T06:19:56.312726+00:00",
   "edges": [],
   "rules": [
     {
@@ -11,9 +11,9 @@
         "trackId": null
       },
       "result": {
-        "type": "EITHER_OR",
+        "type": "CHOOSE_ONE",
         "courseCodes": [],
-        "labelEn": "Students choose one of two alternatives: elective courses worth 22.5 credits, or a 7.5-credit elective course combined with a 15-credit master's project in drug management.",
+        "labelEn": "Students must choose one of the listed alternatives, one of which includes a master's thesis in drug management.",
         "cohortBefore": null
       }
     },
@@ -27,7 +27,7 @@
       "result": {
         "type": "CHOOSE_ONE",
         "courseCodes": [],
-        "labelEn": "One of three alternatives—elective courses, elective courses plus a 15 hp master's thesis, or a 30 hp master's thesis in drug management—must be chosen.",
+        "labelEn": "One of the listed options may be chosen, including elective courses with or without a master's thesis in drug management.",
         "cohortBefore": null
       }
     },
@@ -41,7 +41,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "This is a heading for elective courses.",
+        "labelEn": "This is a heading indicating elective courses.",
         "cohortBefore": null
       }
     }

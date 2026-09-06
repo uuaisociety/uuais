@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T13:27:03.074520+00:00",
+  "generatedAt": "2026-09-06T06:31:16.421544+00:00",
   "edges": [
     {
       "code": "2FE944",
@@ -168,7 +168,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Elective courses worth 30 credits or exchange studies; students have a guaranteed place on the following.",
+        "labelEn": "Elective courses worth 30 credits or exchange studies are allowed, and students have guaranteed placement.",
         "cohortBefore": null
       }
     }

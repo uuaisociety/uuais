@@ -41,7 +41,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2"
     },
     {
       "code": "4PE298",
@@ -58,7 +58,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2"
     },
     {
       "code": "2SC181",
@@ -126,7 +126,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6"
     },
     {
       "code": "5KA106",
@@ -446,7 +446,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Utbildningssociologi A 30 hp är ett kurspaket som består av kurserna Introduktion till utbildningssociologi 15 hp och Sociala skillnader i utbildning och samhälle 15 hp.",
-      "labelEn": "Education Sociology A (30 hp) is a course package consisting of Introduction to Sociology of Education and Social Differences in Education and Society.",
+      "labelEn": "Sociology of Education A (30 credits) is a course package consisting of Introduction to Sociology of Education (15 credits) and Social Differences in Education and Society (15 credits).",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -483,7 +483,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Kurserna Ekonomisk historia A: Ekonomi och samhälle 15 hp samt Ekonomisk historia A: Global omvandling och globalisering 1700-2000 15 hp utgör tillsammans kurspaketet Ekonomisk historia A 30 hp.",
-      "labelEn": "The two 15 hp Economic History A courses together form the 30 hp course package Economic History A.",
+      "labelEn": "The two Economic History A courses together form the 30 hp course package Economic History A.",
       "cohortBefore": null,
       "source": "llm"
     },

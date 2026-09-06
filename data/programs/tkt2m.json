@@ -198,7 +198,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits. Participation in Solid State Physics I/Solid state physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TM008",
@@ -217,7 +217,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. Participation in the courses Quantum Mechanics and Solid State Physics I/F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA592",
@@ -293,7 +293,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. Attended course in Solid State Physics I or 30 credits in physics/materials engineering/material science and Introduction to materials science and engineering (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA667",
@@ -519,7 +519,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. 30 credits at Master's level in the main field of study Quantum Technology including one of the courses Quantum Information and Second Generation Quantum Technology. One of the courses Photonics and Quantum Optics I, Optoelectronics and Spin-Based Technology I. Proficiency in English equivalent to the Swedish upper secondary course English 6. Admission requires a project plan accepted by the department."
     },
     {
       "code": "1FA693",
@@ -733,12 +733,12 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 1,
       "trackId": null,
       "textSv": "Rekommenderad kurs",
-      "labelEn": "A recommended course for the semester.",
+      "labelEn": "This is a bare heading marking the start of a recommended course section.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -749,18 +749,18 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Valbara kurser denna period",
-      "labelEn": "Elective courses during this period",
+      "labelEn": "A heading indicating elective courses for this period.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-2",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 1,
       "trackId": null,
       "textSv": "Rekommenderad kurs",
-      "labelEn": "A recommended course.",
+      "labelEn": "A heading indicating a recommended course.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -771,18 +771,18 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Valbara kurser denna period",
-      "labelEn": "Elective courses this period",
+      "labelEn": "This is a heading for elective courses in this period.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-4",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 2,
       "trackId": null,
       "textSv": "Rekommenderade kurser",
-      "labelEn": "Recommended courses",
+      "labelEn": "This is a heading introducing a list of recommended courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -793,7 +793,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Valbara kurser denna period:",
-      "labelEn": "Elective courses are available during this period.",
+      "labelEn": "This is a heading introducing the elective courses for this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -806,18 +806,18 @@
       "semester": 2,
       "trackId": null,
       "textSv": "1FA467 går i valfri period.",
-      "labelEn": "1FA467 is offered in any period of the semester (period freely chosen).",
+      "labelEn": "Course 1FA467 may be taken in any study period.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-7",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 2,
       "trackId": null,
       "textSv": "Rekommenderade kurser",
-      "labelEn": "Recommended courses.",
+      "labelEn": "Recommended courses",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -828,18 +828,18 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Valbara kurser denna period:",
-      "labelEn": "Elective courses are available during this period.",
+      "labelEn": "Heading introducing the elective courses for this period.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-9",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 3,
       "trackId": null,
       "textSv": "Rekommenderade kurser",
-      "labelEn": "Recommended courses for semester 3.",
+      "labelEn": "This is a heading introducing a list of recommended courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -850,7 +850,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valbar kurs denna period",
-      "labelEn": "Elective course of choice during this period.",
+      "labelEn": "The course during this period is taken as an elective.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -861,7 +861,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valbara kurser denna period",
-      "labelEn": "Elective courses apply during this period.",
+      "labelEn": "This is a heading indicating elective courses for this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -872,7 +872,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Tillvalskurser",
-      "labelEn": "Elective courses (optional).",
+      "labelEn": "Bare heading for elective courses",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -883,7 +883,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Termin 1: Period 1",
-      "labelEn": "Placement note referring to semester 1, period 1.",
+      "labelEn": "This is a heading indicating Term 1, Period 1.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -894,7 +894,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Termin 1: Period 2",
-      "labelEn": "The course is scheduled for semester 1, period 2.",
+      "labelEn": "This is a schedule heading indicating semester 1, period 2.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -905,7 +905,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Termin 2: Period 3",
-      "labelEn": "A timing note indicating semester 2, period 3.",
+      "labelEn": "A heading indicating semester 2, period 3.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -916,7 +916,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Termin 2: Period 4",
-      "labelEn": "This is a scheduling note indicating semester 2, period 4.",
+      "labelEn": "Indicates that the associated courses or activities take place in term 2, period 4.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -927,7 +927,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Termin 3: Period 1",
-      "labelEn": "Semester 3, Period 1.",
+      "labelEn": "Heading marking term 3, period 1.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -938,7 +938,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Termin 3: Period 2",
-      "labelEn": "A timing note referring to Term 3, Period 2, with no course or requirement specified.",
+      "labelEn": "A heading indicating Term 3, Period 2.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -1071,6 +1071,27 @@
     },
     {
       "from": "1FA352",
+      "to": "1FA024",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering with Quantum Physics and Solid State Physics. Participation in Quantum Mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM013",
+      "to": "1FA024",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering with Quantum Physics and Solid State Physics. Participation in Quantum Mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA352",
+      "to": "1FA347",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits with Quantum Physics and Mechanics III. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA352",
       "to": "1FA467",
       "type": "SOFT",
       "source": "llm",
@@ -1155,6 +1176,41 @@
     },
     {
       "from": "1FA592",
+      "to": "1FA692",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. 30 credits at Master's level in the main field of study Quantum Technology including one of the courses Quantum Information and Second Generation Quantum Technology. One of the courses Photonics and Quantum Optics I, Optoelectronics and Spin-Based Technology I. Proficiency in English equivalent to the Swedish upper secondary course Engli"
+    },
+    {
+      "from": "1FA664",
+      "to": "1FA692",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. 30 credits at Master's level in the main field of study Quantum Technology including one of the courses Quantum Information and Second Generation Quantum Technology. One of the courses Photonics and Quantum Optics I, Optoelectronics and Spin-Based Technology I. Proficiency in English equivalent to the Swedish upper secondary course Engli"
+    },
+    {
+      "from": "1FA665",
+      "to": "1FA692",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. 30 credits at Master's level in the main field of study Quantum Technology including one of the courses Quantum Information and Second Generation Quantum Technology. One of the courses Photonics and Quantum Optics I, Optoelectronics and Spin-Based Technology I. Proficiency in English equivalent to the Swedish upper secondary course Engli"
+    },
+    {
+      "from": "1FA670",
+      "to": "1FA692",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. 30 credits at Master's level in the main field of study Quantum Technology including one of the courses Quantum Information and Second Generation Quantum Technology. One of the courses Photonics and Quantum Optics I, Optoelectronics and Spin-Based Technology I. Proficiency in English equivalent to the Swedish upper secondary course Engli"
+    },
+    {
+      "from": "1TM008",
+      "to": "1FA692",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. 30 credits at Master's level in the main field of study Quantum Technology including one of the courses Quantum Information and Second Generation Quantum Technology. One of the courses Photonics and Quantum Optics I, Optoelectronics and Spin-Based Technology I. Proficiency in English equivalent to the Swedish upper secondary course Engli"
+    },
+    {
+      "from": "1FA592",
       "to": "1FA693",
       "type": "HARD",
       "source": "llm",
@@ -1177,9 +1233,37 @@
     {
       "from": "1TE015",
       "to": "1TE018",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "130 credits in science/engineering. Micro- and Nanotechnology I should have been attended. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM013",
+      "to": "1TG310",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits. Participation in Solid State Physics I/Solid state physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM013",
+      "to": "1TM003",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Attended course in Solid State Physics I or 30 credits in physics/materials engineering/material science and Introduction to materials science and engineering (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA352",
+      "to": "1TM008",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Participation in the courses Quantum Mechanics and Solid State Physics I/F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TM013",
+      "to": "1TM008",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Participation in the courses Quantum Mechanics and Solid State Physics I/F. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "revisions": [

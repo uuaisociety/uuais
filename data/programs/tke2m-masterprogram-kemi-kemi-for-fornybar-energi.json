@@ -252,7 +252,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in chemistry at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [],
@@ -301,13 +301,6 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "120 credits with 90 credits in chemistry and physics, of which at least 60 credits in chemistry including Catalysis. Participation in Photochemistry. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
-      "from": "1KB550",
-      "to": "1KB753",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "Alternative 1: 120 credits with 90 credits in chemistry and physics, including at least 60 credits in chemistry. Participation in Spectroscopy. Chemical Bonding and Computational Chemistry is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 120 credits with 75 credits in physics, chemistry, materials science and/or materials engineering"
     },
     {
       "from": "1KB750",

@@ -1,7 +1,50 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:21:41.303830+00:00",
-  "edges": [],
+  "generatedAt": "2026-09-06T06:19:20.067524+00:00",
+  "edges": [
+    {
+      "code": "3AP001",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3AP002",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FB014",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FI000",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FK036",
+      "text": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FM017",
+      "text": "Within the program, earlier courses should have been reviewed.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
   "rules": [
     {
       "note": {
@@ -15,7 +58,7 @@
         "courseCodes": [
           "3AP002"
         ],
-        "labelEn": "Describes the first year's basic courses and notes that 3AP002 is taken across semesters 1 and 2.",
+        "labelEn": "The first year includes an introduction to the profession plus basic courses, and course 3AP002 is spread over terms 1 and 2.",
         "cohortBefore": null
       }
     },
@@ -31,7 +74,7 @@
         "courseCodes": [
           "3AP002"
         ],
-        "labelEn": "Course 3AP002 is taught in semester 1 (1.5 credits) and semester 2 (3 credits).",
+        "labelEn": "Course 3AP002 is taken partly in semester 1 (1 hp) and partly in semester 2 (3 hp).",
         "cohortBefore": null
       }
     },
@@ -45,7 +88,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "A descriptive heading noting that year 2 covers anatomy and organ function, drug action and metabolism, and statistical methodology.",
+        "labelEn": "A heading describing that year 2 courses cover anatomy, organ function, drug action and metabolism, and statistical methodology.",
         "cohortBefore": null
       }
     },
@@ -59,7 +102,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Describes year 3 content, including that half of semester 6 consists of workplace-based training at a pharmacy.",
+        "labelEn": "Year 3 conveys integrated knowledge of drug development and drug use, including quality assurance, with half of semester 6 consisting of workplace training at a pharmacy.",
         "cohortBefore": null
       }
     },
@@ -73,7 +116,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Semester 7 consists of advanced-level courses specialising in pharmaceutical science, mainly in drug development.",
+        "labelEn": "A heading describing semester 7 as advanced-level courses with a focus on pharmaceutical science, mainly drug development.",
         "cohortBefore": null
       }
     },
@@ -87,7 +130,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Semester 8 consists of elective advanced courses totalling 30 hp in drug development, drug use and clinical pharmacy.",
+        "labelEn": "Term 8 consists of elective advanced courses totalling 30 credits in drug development, drug use and clinical pharmacy.",
         "cohortBefore": null
       }
     },
@@ -101,7 +144,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Year 5 description: advanced-level deepening in pharmaceutical science, an optional 30 hp degree project, and pharmacy work-based training.",
+        "labelEn": "Describes year 5 content including an optional degree project and pharmacy placement; no specific roster courses are named.",
         "cohortBefore": null
       }
     }

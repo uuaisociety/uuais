@@ -24,7 +24,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2"
     },
     {
       "code": "2PP404",
@@ -615,7 +615,7 @@
       "semester": 9,
       "trackId": null,
       "textSv": "- Externa valbara kurser kan tillgodoräknas inom programmet enligt programansvarigs beslut.- Denna termin läses 7,5 hp av kursen Examensarbete (30 hp).",
-      "labelEn": "External elective courses may be credited with the programme director's approval, and 7.5 credits of the Master's Thesis (30 credits) are taken this term.",
+      "labelEn": "External elective courses may be credited within the programme at the programme director's discretion, and this term covers 7.5 credits of the Master's thesis (30 credits).",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -628,7 +628,7 @@
       "semester": 10,
       "trackId": null,
       "textSv": "Examensarbete, 30 hp (22,5 hp)*Psykoterapeutisk fördjupning III, 7,5 hp** Obligatorisk",
-      "labelEn": "The Master's Thesis (30 hp) and Psychotherapeutic Deepening III (7.5 hp) are obligatory courses.",
+      "labelEn": "The Master's thesis (30 hp) and the psychotherapy specialisation course (7.5 hp) are mandatory.",
       "cohortBefore": null,
       "source": "llm"
     }

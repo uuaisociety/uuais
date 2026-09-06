@@ -177,14 +177,22 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Research Design, Methods and Statistics within the Public Health Area, 15 credits"
     }
   ],
   "rules": [],
   "ruleTexts": [],
   "planFormat": "legacy",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "3FV386",
+      "to": "3FV379",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Research Design, Methods and Statistics within the Public Health Area, 15 credits"
+    }
+  ],
   "revisions": [
     {
       "id": "2432",

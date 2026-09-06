@@ -24,7 +24,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D"
     },
     {
       "code": "3AP001",
@@ -41,7 +41,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D"
     },
     {
       "code": "3FK036",
@@ -58,7 +58,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D"
     },
     {
       "code": "3FI000",
@@ -75,7 +75,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D"
     },
     {
       "code": "3AP002",
@@ -92,7 +92,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D"
     },
     {
       "code": "3FM017",
@@ -109,7 +109,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Within the program, earlier courses should have been reviewed."
     },
     {
       "code": "3FC002",
@@ -160,7 +160,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D"
     },
     {
       "code": "3FF024",
@@ -615,7 +615,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Det första året omfattar en kort introduktion till professionen samt grundläggande kurser i farmaceutisk vetenskap, cellbiologi och farmaceutisk kemi.Kursen 3AP002 läses under termin 1 (1 hp) och termin 2 (3 hp).",
-      "labelEn": "Describes the first year's basic courses and notes that 3AP002 is taken across semesters 1 and 2.",
+      "labelEn": "The first year includes an introduction to the profession plus basic courses, and course 3AP002 is spread over terms 1 and 2.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -628,7 +628,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Kursen 3AP002 läses under termin 1 (1 hp) och termin 2 (3 hp).",
-      "labelEn": "Course 3AP002 is taught in semester 1 (1.5 credits) and semester 2 (3 credits).",
+      "labelEn": "Course 3AP002 is taken partly in semester 1 (1 hp) and partly in semester 2 (3 hp).",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -639,7 +639,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "År 2Kurserna under det andra året behandlar anatomi och organfunktion, hur läkemedel verkar och omsätts i kroppen samt statistisk metodik inom läkemedelsområdet.",
-      "labelEn": "A descriptive heading noting that year 2 covers anatomy and organ function, drug action and metabolism, and statistical methodology.",
+      "labelEn": "A heading describing that year 2 courses cover anatomy, organ function, drug action and metabolism, and statistical methodology.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -650,7 +650,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "År 3Under år 3 förmedlas en integrerad kunskap om läkemedelsutveckling och läkemedelsanvändning, inklusive kvalitetssäkring. Halva termin 6 omfattar verksamhetsförlagd utbildning på apotek.",
-      "labelEn": "Describes year 3 content, including that half of semester 6 consists of workplace-based training at a pharmacy.",
+      "labelEn": "Year 3 conveys integrated knowledge of drug development and drug use, including quality assurance, with half of semester 6 consisting of workplace training at a pharmacy.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -661,7 +661,7 @@
       "semester": 7,
       "trackId": null,
       "textSv": "Termin 7 omfattar kurser på avancerad nivå med fördjupning i farmaceutisk vetenskap, inom framför allt läkemedelsutveckling.",
-      "labelEn": "Semester 7 consists of advanced-level courses specialising in pharmaceutical science, mainly in drug development.",
+      "labelEn": "A heading describing semester 7 as advanced-level courses with a focus on pharmaceutical science, mainly drug development.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -672,7 +672,7 @@
       "semester": 8,
       "trackId": null,
       "textSv": "Termin 8 omfattar valbara fördjupningskurser om totalt 30 hp inom läkemedelsutveckling, läkemedelsanvändning och klinisk farmaci.",
-      "labelEn": "Semester 8 consists of elective advanced courses totalling 30 hp in drug development, drug use and clinical pharmacy.",
+      "labelEn": "Term 8 consists of elective advanced courses totalling 30 credits in drug development, drug use and clinical pharmacy.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -683,7 +683,7 @@
       "semester": 9,
       "trackId": null,
       "textSv": "År 5Det sista året på avancerad nivå ägnas åt fortsatt fördjupning i farmaceutisk vetenskap med fokus på läkemedelsanvändning, ett valbart självständigt arbete (fördjupningsprojekt, 30 hp) samt verksamhetsförlagd utbildning på apotek.Fördjupningsprojekt",
-      "labelEn": "Year 5 description: advanced-level deepening in pharmaceutical science, an optional 30 hp degree project, and pharmacy work-based training.",
+      "labelEn": "Describes year 5 content including an optional degree project and pharmacy placement; no specific roster courses are named.",
       "cohortBefore": null,
       "source": "llm"
     }

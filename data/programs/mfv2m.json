@@ -41,7 +41,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be in molecular biology, biomedicine, chemistry, biology, or a similar field of study that includes at least 15 credits in chemistry and/or biochemistry as well as 15 credits in cell biology, molecular biology and/or genetics. Also required is knowledge and practical experience of laboratory experiments in life sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "3MG023",
@@ -58,7 +58,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be in molecular biology, biomedicine, chemistry, biology, or a similar field of study that includes at least 15 credits in chemistry and/or biochemistry as well as 15 credits in cell biology, molecular biology and/or genetics. Also required is knowledge and practical experience of laboratory experiments in life sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "3MG106",
@@ -75,7 +75,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The degree must be in biology, biomedicine, molecular biology, chemistry or a similar field, and include organic/inorganic chemistry or analytical chemistry, totalling 15 credits; and courses in genetics or cell/molecular biology, totalling 15 credits."
     },
     {
       "code": "1KB155",
@@ -109,7 +109,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Admitted to Master Programme in Forensic Science."
     },
     {
       "code": "3MG103",
@@ -126,7 +126,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Minimum 37.5 credits of passed courses within the Master's programme in Forensic Science, or corresponding. This corresponds to in-depth knowledge of human genetics, forensic genetics, forensic medicine, analytical chemistry and how testimonies and technical evidence are collected, analysed and evaluated in criminal cases."
     }
   ],
   "rules": [
@@ -137,7 +137,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valbar period 15 hp3MG024 Litteraturprojekt i forensisk biologi 15 hpalternativt​3MG105 Examensarbete 45 hp",
-      "labelEn": "Students choose between a 15 hp literature project in forensic biology or a 45 hp degree project.",
+      "labelEn": "For the elective 15 hp period, students take either 3MG024 Literature Project in Forensic Biology or 3MG105 Degree Project, 45 hp; neither code appears on the roster.",
       "cohortBefore": null,
       "source": "llm"
     }

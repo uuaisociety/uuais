@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:38:08.826948+00:00",
+  "generatedAt": "2026-09-06T06:34:45.367190+00:00",
   "edges": [
     {
       "code": "2HR112",
@@ -47,9 +47,9 @@
         "trackId": null
       },
       "result": {
-        "type": "EITHER_OR",
+        "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "The advanced part consists of either B- and C-level courses in one main subject (economics or political science) plus an elective semester, or full A-, B- and C-level studies in peace and conflict studies, development studies, and statistics.",
+        "labelEn": "The advanced part consists of either B- and C-level courses in one main subject, Economics or Political Science, plus an elective or internship semester, or full A-, B- and C-level studies in Peace and Conflict Studies, Development Studies, and Statistics.",
         "cohortBefore": null
       }
     },
@@ -63,7 +63,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Refers the reader to Semester 4 for further information.",
+        "labelEn": "Refers the reader to Term 4 for further information.",
         "cohortBefore": null
       }
     },
@@ -77,7 +77,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "A pointer referring the reader to Term 4 for details.",
+        "labelEn": "See Term 4 for further information.",
         "cohortBefore": null
       }
     }

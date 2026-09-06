@@ -1,455 +1,688 @@
 {
- "edges": [
-  {
-   "code": "1EL007",
-   "text": "30 credits from engineering programme. 5 credits first cycle course in programming should have been attended.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TD433",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1EL008",
-   "text": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry.",
-   "result": {
-    "edges": [
-     {
-      "from": "1MA352",
-      "type": "HARD"
-     },
-     {
-      "from": "1MA353",
-      "type": "HARD"
-     },
-     {
-      "from": "1MA354",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1FA014",
-   "text": "90 credits in Science/Engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers.",
-   "result": {
-    "edges": [
-     {
-      "from": "1MA353",
-      "type": "HARD"
-     },
-     {
-      "from": "1MA354",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1FA022",
-   "text": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers. Introduction to Nuclear Engineering. Participation in Introduction to Nuclear Engineering, or studied simultaneously.",
-   "result": null
-  },
-  {
-   "code": "1FA426",
-   "text": "60 credits in science/engineering. Participation in Reactor Physics, Nuclear Thermal Hydraulics and Steam Turbine Technology or Reactor Physics with nuclear thermohydraulics.",
-   "result": {
-    "edges": [
-     {
-      "from": "1FA022",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1KB704",
-   "text": "90 credits within an engineering programme",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1MA017",
-   "text": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry.",
-   "result": {
-    "edges": [
-     {
-      "from": "1MA353",
-      "type": "SOFT"
-     },
-     {
-      "from": "1MA354",
-      "type": "SOFT"
-     },
-     {
-      "from": "1MA352",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TD342",
-   "text": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TD433",
-      "type": "SOFT"
-     },
-     {
-      "from": "1MA353",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TD433",
-   "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TE633",
-   "text": "40 credits within an engineering programme. Computer Aided Design/3D CAD. Participation in Engineering Materials, Machine Elements and Manufacturing Methodologies.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE604",
-      "type": "HARD"
-     },
-     {
-      "from": "1TE606",
-      "type": "SOFT"
-     },
-     {
-      "from": "1TE790",
-      "type": "SOFT"
-     },
-     {
-      "from": "1TS362",
-      "type": "SOFT"
-     },
-     {
-      "from": "1TM038",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE686",
-   "text": "60 credits from an engineering programme.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TE687",
-   "text": "30 credits in technology",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TE743",
-   "text": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes.",
-   "result": {
-    "edges": [
-     {
-      "from": "1FA014",
-      "type": "SOFT"
-     },
-     {
-      "from": "1TE605",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TM038",
-   "text": "40 credits of approved courses within the Bachelor's Programme in Mechanical Engineering.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TM120",
-   "text": "60 credits in engineering programs.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TS312",
-   "text": "60 credits within engineering programs. Participation in Production Management I.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TS348",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TS358",
-   "text": "60 credits within any engineering programme. 15 credits in mathematics. Participation in Computer Programming I, whereof 2 credits should be completed.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TD433",
-      "type": "SOFT"
-     }
-    ]
-   }
-  }
- ],
- "rules": [
-  {
-   "note": {
-    "textSv": "1TE631 Tillverkningsteknik och 1TS362 Tillverkningsteknik I kan inte ingå i examen tillsammans.",
-    "semester": 2,
-    "period": null,
-    "trackId": null
-   },
-   "result": {
-    "type": "MUTUALLY_EXCLUSIVE",
-    "courseCodes": [
-     "1TS362"
-    ],
-    "labelEn": "1TS362 cannot count toward the degree together with 1TE631 (Manufacturing Technology), which is not in the current roster.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "En av kurserna ska väljas: 1TS336, 1EL011, 1TD342",
-    "semester": 4,
-    "period": null,
-    "trackId": null,
-    "choiceCodes": [
-     "1TS336",
-     "1EL011",
-     "1TD342"
-    ]
-   },
-   "result": {
-    "type": "CHOOSE_ONE",
-    "courseCodes": [
-     "1TS336",
-     "1EL011",
-     "1TD342"
-    ],
-    "labelEn": "One of the listed courses must be chosen.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "1MI087 och 1TS348 kan inte ingå i examen tillsammans.",
-    "semester": 4,
-    "period": null,
-    "trackId": null
-   },
-   "result": {
-    "type": "MUTUALLY_EXCLUSIVE",
-    "courseCodes": [
-     "1TS348"
-    ],
-    "labelEn": "1MI087 and 1TS348 cannot both count toward the degree.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "En av kurserna ska väljas: 1TE686, 1FA014, 1FA022, 1KB704, 1EL008, 1FA426",
-    "semester": 5,
-    "period": null,
-    "trackId": null,
-    "choiceCodes": [
-     "1TE686",
-     "1FA014",
-     "1FA022",
-     "1KB704",
-     "1EL008",
-     "1FA426"
-    ]
-   },
-   "result": {
-    "type": "CHOOSE_ONE",
-    "courseCodes": [
-     "1TE686",
-     "1FA014",
-     "1FA022",
-     "1KB704",
-     "1EL008",
-     "1FA426"
-    ],
-    "labelEn": "One of the listed courses must be chosen.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "En av kurserna ska väljas: 1TE686, 1TE687, 1MA017, 1TS358, 1KB704, 1EL008, 1TS312",
-    "semester": 5,
-    "period": null,
-    "trackId": null,
-    "choiceCodes": [
-     "1TE686",
-     "1TE687",
-     "1MA017",
-     "1TS358",
-     "1KB704",
-     "1EL008",
-     "1TS312"
-    ]
-   },
-   "result": {
-    "type": "CHOOSE_ONE",
-    "courseCodes": [
-     "1TE686",
-     "1TE687",
-     "1MA017",
-     "1TS358",
-     "1KB704",
-     "1EL008",
-     "1TS312"
-    ],
-    "labelEn": "One of the listed courses must be chosen.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "Kurser från olika profiler kan krocka schemamässigt under termin 5. Därför rekommenderas att kurser från EN profil läses.Några valbara kurser i årskurs 3 samt tillvalskurserna söks i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval.En av kurserna 1TE687 och 1FA014 är obligatorisk inom examenskravet.Kurserna 1TE686 och 1KB704 är obligatoriska för samtliga profiler termin 5.",
-    "semester": 5,
-    "period": null,
-    "trackId": null
-   },
-   "result": {
-    "type": "CHOOSE_ONE",
-    "courseCodes": [
-     "1TE687",
-     "1FA014"
-    ],
-    "labelEn": "One of 1TE687 Engineering Ethics or 1FA014 Introduction to Nuclear Engineering must be taken to satisfy the degree requirements.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "En av kurserna ska väljas: 1TE780, 1FA013, 1FA427",
-    "semester": 6,
-    "period": null,
-    "trackId": null,
-    "choiceCodes": [
-     "1TE780",
-     "1FA013",
-     "1FA427"
-    ]
-   },
-   "result": {
-    "type": "CHOOSE_ONE",
-    "courseCodes": [
-     "1TE780",
-     "1FA013",
-     "1FA427"
-    ],
-    "labelEn": "One of the courses 1TE780, 1FA013, or 1FA427 must be chosen.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "En av kurserna ska väljas: 1TE780, 1MI077",
-    "semester": 6,
-    "period": null,
-    "trackId": null,
-    "choiceCodes": [
-     "1TE780",
-     "1MI077"
-    ]
-   },
-   "result": {
-    "type": "CHOOSE_ONE",
-    "courseCodes": [
-     "1TE780",
-     "1MI077"
-    ],
-    "labelEn": "One of the courses 1TE780 or 1MI077 must be chosen.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "En av kurserna ska väljas: 1TE780, 1MI088",
-    "semester": 6,
-    "period": null,
-    "trackId": null,
-    "choiceCodes": [
-     "1TE780",
-     "1MI088"
-    ]
-   },
-   "result": {
-    "type": "CHOOSE_ONE",
-    "courseCodes": [
-     "1TE780",
-     "1MI088"
-    ],
-    "labelEn": "One of the courses 1TE780 or 1MI088 must be chosen.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "En av kurserna ska väljas: 1TE693, 1TE695",
-    "semester": 6,
-    "period": null,
-    "trackId": null,
-    "choiceCodes": [
-     "1TE693",
-     "1TE695"
-    ]
-   },
-   "result": {
-    "type": "CHOOSE_ONE",
-    "courseCodes": [
-     "1TE693",
-     "1TE695"
-    ],
-    "labelEn": "One of the courses 1TE693 or 1TE695 must be chosen.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "En av kurserna 1MI088 eller 1MI077, eller båda kurserna 1FA013 och 1FA427, är obligatoriska inom examenskravet.Kursen 1TE780 är obligatorisk för samtliga profiler termin 6.",
-    "semester": 6,
-    "period": null,
-    "trackId": null
-   },
-   "result": {
-    "type": "CHOOSE_ONE",
-    "courseCodes": [
-     "1MI088",
-     "1MI077",
-     "1FA013",
-     "1FA427",
-     "1TE780"
-    ],
-    "labelEn": "One of 1MI088 or 1MI077, or both 1FA013 and 1FA427, is required for the degree, and 1TE780 is required for all specialisations in semester 6.",
-    "cohortBefore": null
-   }
-  }
- ]
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T07:45:47.182841+00:00",
+  "edges": [
+    {
+      "code": "1EL007",
+      "text": "30 credits from engineering programme. 5 credits first cycle course in programming should have been attended.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TD433",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1EL008",
+      "text": "60 credits in science/engineering 10 credits calculus or single variable calculus and 5 credits algebra and vector geometry.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1EL011",
+      "text": "Computer Programming I and participation in Probability and Statistics or Statistics for Engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TD433",
+            "type": "HARD"
+          },
+          {
+            "from": "1MS008",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA013",
+      "text": "60 credits in science/engineering. Participation Nuclear Power Safety. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology, or as alternative to those two: Reactor Physics with Nuclear Thermohydraulics.",
+      "result": {
+        "edges": [
+          {
+            "from": "1FA426",
+            "type": "SOFT"
+          },
+          {
+            "from": "1FA022",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA014",
+      "text": "90 credits in Science/Engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA353",
+            "type": "HARD"
+          },
+          {
+            "from": "1MA354",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA022",
+      "text": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers. Introduction to Nuclear Engineering. Participation in Introduction to Nuclear Engineering, or studied simultaneously.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA353",
+            "type": "HARD"
+          },
+          {
+            "from": "1MA354",
+            "type": "HARD"
+          },
+          {
+            "from": "1FA014",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA426",
+      "text": "60 credits in science/engineering. Participation in Reactor Physics, Nuclear Thermal Hydraulics and Steam Turbine Technology or Reactor Physics with nuclear thermohydraulics.",
+      "result": {
+        "edges": [
+          {
+            "from": "1FA022",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA427",
+      "text": "60 credits in science/engineering. Participation in Nuclear Power Safety. Participation in Reactorphysics, Nuclear thermohydraulics and steam turbine technology, or alternatively to those two: Reactorphysics with nuclear thermohydraulics.",
+      "result": {
+        "edges": [
+          {
+            "from": "1FA426",
+            "type": "SOFT"
+          },
+          {
+            "from": "1FA022",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1FA518",
+      "text": "Algebra and Vector Geometry. Participation in one of the courses Calculus for Engineers and Single Variable Calculus, or taken in parallel.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA353",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1KB704",
+      "text": "90 credits within an engineering programme",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MA017",
+      "text": "Participation in Single Variable Calculus or Calculus for Engineers. Participation in Linear Algebra I, Algebra and Geometry or Algebra and Vector Geometry.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA353",
+            "type": "SOFT"
+          },
+          {
+            "from": "1MA352",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MA352",
+      "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MA353",
+      "text": "Participation in Linear Algebra for Engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA352",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MA354",
+      "text": "Participation in Linear Algebra for Engineers and Calculus I for Engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA352",
+            "type": "SOFT"
+          },
+          {
+            "from": "1MA353",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MI077",
+      "text": "90 credits including Computer Aided Design, Machine Elements and Product Design I.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE604",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE790",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE633",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MI088",
+      "text": "Production Management I.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TS348",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MI170",
+      "text": "30 credits, including participation in a Solid Mechanics course, with 2 credits passed.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE607",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1MS008",
+      "text": "5 hp in mathematics. Participation in Calculus II for Engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA354",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TD342",
+      "text": "Participation in a course in programming in Python (for example Computer Programming I), or the course can be taken in parallel. Participation in one of the courses Single Variable Calculus, Single Variable Calculus M, Geometry and Calculus and Calculus for Engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TD433",
+            "type": "SOFT"
+          },
+          {
+            "from": "1MA353",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TD433",
+      "text": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE604",
+      "text": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE605",
+      "text": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE606",
+      "text": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE607",
+      "text": "Participation in Algebra and Vector Geometry and Calculus for Engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA352",
+            "type": "SOFT"
+          },
+          {
+            "from": "1MA353",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE633",
+      "text": "40 credits within an engineering programme. Computer Aided Design/3D CAD. Participation in Engineering Materials, Machine Elements and Manufacturing Methodologies.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE604",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE606",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TE790",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TS362",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TM038",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE686",
+      "text": "60 credits from an engineering programme.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE687",
+      "text": "30 credits in technology",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE743",
+      "text": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE780",
+      "text": "105 credits within a Bachelor's Programme in Engineering",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE790",
+      "text": "Participation in course Solid Mechanics",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE607",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TM038",
+      "text": "40 credits of approved courses within the Bachelor's Programme in Mechanical Engineering.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TM120",
+      "text": "60 credits in engineering programs.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TS312",
+      "text": "60 credits within engineering programs. Participation in Production Management I.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TS348",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TS336",
+      "text": "60 credits within Programme of Science in Engineering, including Algebra and Vector Geometry. Participation in Statistics for Engineers.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MS008",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TS348",
+      "text": "45 credits in Science/Technology.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TS358",
+      "text": "60 credits within any engineering programme. 15 credits in mathematics. Participation in Computer Programming I, whereof 2 credits should be completed.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TD433",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TS362",
+      "text": "Participation in Computer Aided Design and Engineering Materials.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE604",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TE606",
+            "type": "SOFT"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "1TE631 Tillverkningsteknik och 1TS362 Tillverkningsteknik I kan inte ingå i examen tillsammans.",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "MUTUALLY_EXCLUSIVE",
+        "courseCodes": [
+          "1TS362"
+        ],
+        "labelEn": "1TE631 and 1TS362 cannot both count toward the degree.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 1TS336, 1EL011, 1TD342",
+        "semester": 4,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "1TS336",
+          "1EL011",
+          "1TD342"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1TS336",
+          "1EL011",
+          "1TD342"
+        ],
+        "labelEn": "One of the courses 1TS336, 1EL011, or 1TD342 must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "1MI087 och 1TS348 kan inte ingå i examen tillsammans.",
+        "semester": 4,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "MUTUALLY_EXCLUSIVE",
+        "courseCodes": [
+          "1TS348"
+        ],
+        "labelEn": "1MI087 and 1TS348 cannot both count toward the degree.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 1TE686, 1FA014, 1FA022, 1KB704, 1EL008, 1FA426",
+        "semester": 5,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "1TE686",
+          "1FA014",
+          "1FA022",
+          "1KB704",
+          "1EL008",
+          "1FA426"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1TE686",
+          "1FA014",
+          "1FA022",
+          "1KB704",
+          "1EL008",
+          "1FA426"
+        ],
+        "labelEn": "One of the listed courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 1TE686, 1TE687, 1MA017, 1TS358, 1KB704, 1EL008, 1TS312",
+        "semester": 5,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "1TE686",
+          "1TE687",
+          "1MA017",
+          "1TS358",
+          "1KB704",
+          "1EL008",
+          "1TS312"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1TE686",
+          "1TE687",
+          "1MA017",
+          "1TS358",
+          "1KB704",
+          "1EL008",
+          "1TS312"
+        ],
+        "labelEn": "One of the listed courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Kurser från olika profiler kan krocka schemamässigt under termin 5. Därför rekommenderas att kurser från EN profil läses.Några valbara kurser i årskurs 3 samt tillvalskurserna söks i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval.En av kurserna 1TE687 och 1FA014 är obligatorisk inom examenskravet.Kurserna 1TE686 och 1KB704 är obligatoriska för samtliga profiler termin 5.",
+        "semester": 5,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1TE687",
+          "1FA014"
+        ],
+        "labelEn": "One of the courses 1TE687 and 1FA014 must be taken to meet the degree requirements.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 1TE780, 1FA013, 1FA427",
+        "semester": 6,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "1TE780",
+          "1FA013",
+          "1FA427"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1TE780",
+          "1FA013",
+          "1FA427"
+        ],
+        "labelEn": "One of these courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 1TE780, 1MI077",
+        "semester": 6,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "1TE780",
+          "1MI077"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1TE780",
+          "1MI077"
+        ],
+        "labelEn": "One of the listed courses must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 1TE780, 1MI088",
+        "semester": 6,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "1TE780",
+          "1MI088"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1TE780",
+          "1MI088"
+        ],
+        "labelEn": "One of the courses 1TE780 or 1MI088 must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna ska väljas: 1TE693, 1TE695",
+        "semester": 6,
+        "period": null,
+        "trackId": null,
+        "choiceCodes": [
+          "1TE693",
+          "1TE695"
+        ]
+      },
+      "result": {
+        "type": "CHOOSE_ONE",
+        "courseCodes": [
+          "1TE693",
+          "1TE695"
+        ],
+        "labelEn": "One of the two Practical Product Realisation courses (1TE693 or 1TE695) must be chosen.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "En av kurserna 1MI088 eller 1MI077, eller båda kurserna 1FA013 och 1FA427, är obligatoriska inom examenskravet.Kursen 1TE780 är obligatorisk för samtliga profiler termin 6.",
+        "semester": 6,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "EITHER_OR",
+        "courseCodes": [
+          "1MI088",
+          "1MI077",
+          "1FA013",
+          "1FA427",
+          "1TE780"
+        ],
+        "labelEn": "Students must take either one of 1MI088 or 1MI077, or both 1FA013 and 1FA427, and 1TE780 is mandatory for all profiles in term 6.",
+        "cohortBefore": null
+      }
+    }
+  ]
 }

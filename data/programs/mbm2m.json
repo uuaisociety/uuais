@@ -24,7 +24,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "180 credits from Bachelor's programmes in biomedicine, pharmacy, biology or equivalent that provides relevant knowledge of cell and molecular biology, chemistry, biochemistry and physiology. Knowledge and experience of laboratory work. English proficiency corresponding to English B in the Swedish school system."
     },
     {
       "code": "3NR600",
@@ -98,7 +98,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A minimum of 30 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan."
     },
     {
       "code": "3MU330",
@@ -117,7 +117,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A minimum of 30 credits from courses within the Master's programme in Biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan."
     },
     {
       "code": "3FK219",
@@ -155,7 +155,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in biomedicine, pharmaceutical bioscience, biochemistry, biology, biotechnology or equivalent education within biology/chemistry or medicine."
     },
     {
       "code": "3NR382",
@@ -208,7 +208,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Registered in the Master Programme in Biomedicine at Uppsala University.An approved project plan."
     },
     {
       "code": "3MU015",
@@ -225,7 +225,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Registered in the Master Programme in Biomedicine at Uppsala University.An approved project plan."
     },
     {
       "code": "3NR731",
@@ -242,7 +242,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Admitted to Master's programme at the Faculty of Medicine at Uppsala University.Eligibility requires a project plan involving animal experiments to be approved by the course coordinator."
     },
     {
       "code": "3MU445",
@@ -259,7 +259,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A minimum of 60 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology."
     },
     {
       "code": "3MU745",
@@ -276,7 +276,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A minimum of 60 credits from courses within the Master's programme in Biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan."
     },
     {
       "code": "3MU430",
@@ -293,7 +293,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A minimum of 60 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology."
     }
   ],
   "rules": [
@@ -304,7 +304,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Period 1 och 2 utgörs av valbara kurser. Studenten läser totalt 15 hp under den första halvan av terminen.",
-      "labelEn": "Periods 1 and 2 consist of elective courses, with 15 credits taken during the first half of the term.",
+      "labelEn": "Periods 1 and 2 consist of elective courses totalling 15 credits during the first half of the semester.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -315,7 +315,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Fritt val av kurser. Detta är några vanliga exempel.",
-      "labelEn": "Courses are freely chosen; the listed courses are just common examples.",
+      "labelEn": "Courses are freely selectable; the listed options are only common examples.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -336,7 +336,78 @@
   ],
   "planFormat": "legacy",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "3MC881",
+      "to": "3MU315",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A minimum of 30 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan."
+    },
+    {
+      "from": "3NR600",
+      "to": "3MU315",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A minimum of 30 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan."
+    },
+    {
+      "from": "3MC881",
+      "to": "3MU330",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A minimum of 30 credits from courses within the Master's programme in Biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan."
+    },
+    {
+      "from": "3NR600",
+      "to": "3MU330",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A minimum of 30 credits from courses within the Master's programme in Biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan."
+    },
+    {
+      "from": "3MC881",
+      "to": "3MU430",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A minimum of 60 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology."
+    },
+    {
+      "from": "3NR600",
+      "to": "3MU430",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A minimum of 60 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology."
+    },
+    {
+      "from": "3MC881",
+      "to": "3MU445",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A minimum of 60 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology."
+    },
+    {
+      "from": "3NR600",
+      "to": "3MU445",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A minimum of 60 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology."
+    },
+    {
+      "from": "3MC881",
+      "to": "3MU745",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A minimum of 60 credits from courses within the Master's programme in Biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan."
+    },
+    {
+      "from": "3NR600",
+      "to": "3MU745",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A minimum of 60 credits from courses within the Master's programme in Biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan."
+    }
+  ],
   "revisions": [
     {
       "id": "2412",

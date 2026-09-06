@@ -1,12 +1,88 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:27:36.913638+00:00",
+  "generatedAt": "2026-09-06T06:23:08.638347+00:00",
   "edges": [
+    {
+      "code": "5SD034",
+      "text": "60 credits in game design with progressive specialisation and 2 credits from Game Design 5: Theory and Methods.",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD069",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD064",
+      "text": "7.5 credit in game design",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD065",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
+      "result": {
+        "edges": []
+      }
+    },
     {
       "code": "5SD066",
       "text": "30 credits, including 15 credits in game design and 15 credits in either game design, software engineering, expression in convergent media or industrial engineering and management.",
       "result": {
         "edges": []
+      }
+    },
+    {
+      "code": "5SD069",
+      "text": "60 credits in game design with progressive specialisation",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD071",
+      "text": "Game Design 1: Introduction, 15 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD065",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD075",
+      "text": "60 credits, including 45 credits in game design and 15 credits in either game design, computer science, expression in convergent media or industrial engineering and management.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD090",
+      "text": "Game Design 2 - Game Development, 7.5 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD064",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD951",
+      "text": "At least 3,0 credits from Agile Game Development and Group Dynamics",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD954",
+            "type": "HARD"
+          }
+        ]
       }
     },
     {
@@ -19,6 +95,25 @@
             "type": "HARD"
           }
         ]
+      }
+    },
+    {
+      "code": "5SD953",
+      "text": "Project Management with Agile Methods, 7.5 credits",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD951",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD954",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
+      "result": {
+        "edges": []
       }
     }
   ],
@@ -33,7 +128,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "In this semester you may take 30 hp of elective courses, do an internship (max 30 hp), or study abroad.",
+        "labelEn": "This semester offers a choice between elective courses, an internship (max 30 credits), or studies abroad.",
         "cohortBefore": null
       }
     }

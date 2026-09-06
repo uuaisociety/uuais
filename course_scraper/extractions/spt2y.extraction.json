@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:39:12.632747+00:00",
+  "generatedAt": "2026-09-06T06:35:29.212282+00:00",
   "edges": [],
   "rules": [
     {
@@ -15,7 +15,7 @@
         "courseCodes": [
           "2PP540"
         ],
-        "labelEn": "The degree project is spread over terms: 5 credits in term 4 and the remaining 10 credits in term 6.",
+        "labelEn": "The degree project (15 hp) is split across terms, with 5 points in term 4 and the remaining 10 points in term 6.",
         "cohortBefore": null
       }
     },
@@ -31,7 +31,7 @@
         "courseCodes": [
           "2PP540"
         ],
-        "labelEn": "The degree project 2PP540 is split across terms, with 5 credits in term 4 and the remaining 10 credits in term 6.",
+        "labelEn": "The 15-credit degree project is split with 5 credits in term 4 and the remaining 10 credits in term 6.",
         "cohortBefore": null
       }
     }

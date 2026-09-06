@@ -235,7 +235,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in chemistry at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1BG349",
@@ -271,7 +271,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in chemistry at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [
@@ -284,7 +284,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
-      "labelEn": "The degree project 1KB053 counts as 30 of its 45 credits.",
+      "labelEn": "The degree project in chemistry comprises 30 of the 45 credits.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -306,13 +306,6 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "Completed courses worth 150 credits including (1) 60 credits in biology and 30 credits in chemistry, including one of the advanced courses Molecular Cell Biology 15 credits, Functional Genomics 15 credits, Molecular Infection Biology 15 credits, or Genome Biology 5 credits, or (2) 30 credits in the Master's Programme in Applied Biotechnology or the Master's Programme in Chemistry, specialising in "
-    },
-    {
-      "from": "1BG320",
-      "to": "1KB447",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits including 20 credits in chemistry. In addition, 10 credits in biochemistry or Cell Biology, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "revisions": [

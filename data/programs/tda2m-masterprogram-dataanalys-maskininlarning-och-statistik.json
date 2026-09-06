@@ -258,7 +258,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits with Linear Algebra I, Single Variable Calculus, Probability and Statistics and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TD352",
@@ -488,7 +488,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of Data Science courses at second-cycle level. A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MD710",
@@ -508,7 +508,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of Data Science courses at second-cycle level. A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1MS049",
@@ -555,7 +555,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "Elective courses:",
+      "labelEn": "Heading introducing the elective courses section.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -566,7 +566,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "Elective courses.",
+      "labelEn": "This is a heading introducing a list of elective courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -577,7 +577,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "Elective courses follow.",
+      "labelEn": "A heading introducing the elective courses section.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -601,7 +601,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "Heading indicating the following courses are elective.",
+      "labelEn": "This is a heading introducing the elective courses section.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -612,7 +612,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "Elective courses:",
+      "labelEn": "This is a heading introducing the elective courses section.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -623,7 +623,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valbara kurser:",
-      "labelEn": "Elective courses (heading preceding the list of elective courses).",
+      "labelEn": "This is a heading introducing a list of elective courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -749,13 +749,6 @@
       "rationale": "120 credits including 60 credits in mathematics and/or data science including at least 45 credits in mathematics. Participation in Introduction to Data Science or participation in both Inference Theory II and Regression Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
-      "from": "1MA330",
-      "to": "1RT001",
-      "type": "HARD",
-      "source": "llm",
-      "rationale": "120 credits including Probability and Statistics, Linear Algebra, Single Variable Calculus and a course in introductory programming. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
       "from": "1RT700",
       "to": "1RT705",
       "type": "HARD",
@@ -796,6 +789,13 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "120 credits in engineering/science including Computer Programming I, Probability and Statistics, Linear Algebra II, Several Variable Calculus/Analysis in Several Variables. Participation in Statistical Machine Learning. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA330",
+      "to": "1TD352",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including Algebra and Geometry/Linear Algebra and Geometry I/Linear algebra I. Participation in a programming course in Python (for example Computer Programming I). Participation in one of the courses Introduction to Scientific Computing, Scientific Computing I, or Statistical Machine Learning. Participation in Probability and Statistics or Mathematical Statistics KF. Participation in L"
     },
     {
       "from": "1RT700",

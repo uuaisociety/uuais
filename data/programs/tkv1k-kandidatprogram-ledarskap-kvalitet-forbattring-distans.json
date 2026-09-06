@@ -491,7 +491,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Option 1: 60 credits in Industrial Engineering and Management. Participation in Sustainable Development, CSR and Life Cycle Analysis, Management Systems and Leadership and also Lean Management.Option 2: 60 credits within the Bachelor's Programme in Sustainable Development in Industrial Engineering. Participation in Sustainable Development, CSR and Life Cycle Analysis, Production Management I and also Process Management and Management Systems."
     },
     {
       "code": "1TG339",
@@ -510,7 +510,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "110 credits, including 60 credits in Industrial Engineering and Management. Participation in Six Sigma and Change Management."
     },
     {
       "code": "1TG277",
@@ -529,7 +529,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "130 credits, of which 65 credits in industrial engineering and management. Participation in Degree Project Feasibility Study in Industrial Engineering and Management and also Sustainable Business Development."
     }
   ],
   "rules": [
@@ -542,7 +542,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "1TG340 ersätter 1TG253. Ingen av dessa kan ingå i examen tillsammans.",
-      "labelEn": "1TG340 replaces 1TG253, and the two cannot both count toward the degree.",
+      "labelEn": "1TG340 replaces the discontinued 1TG253, and the two courses cannot both count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -555,7 +555,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "1TG314 ersätter 1TG295 och 1TG268. Ingen av dessa kan ingå i examen tillsammans.",
-      "labelEn": "1TG314 replaces 1TG295 and 1TG268, and none of these courses may count together toward the degree.",
+      "labelEn": "1TG314 replaces the retired courses and cannot be counted toward the degree together with them.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -566,7 +566,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "VALBAR TERMIN",
-      "labelEn": "Elective semester.",
+      "labelEn": "This is a heading indicating an elective term.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -579,7 +579,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "1TG314 ersätter 1TG295 och 1TG268. 1TG314 kan inte ingå i examen tillsammans med vare sig 1TG295 eller 1TG268.",
-      "labelEn": "1TG314 replaces the retired courses 1TG295 and 1TG268 and cannot count toward the degree together with either of them.",
+      "labelEn": "1TG314 replaces 1TG295 and 1TG268 and cannot count toward the degree together with either of them.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -605,7 +605,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "1TG276 och 1TG339 kan inte ingå i examen tillsammans på grund av innehållsmässigt överlapp.",
-      "labelEn": "1TG339 cannot be counted together with 1TG276 in the degree due to content overlap.",
+      "labelEn": "1TG339 cannot count toward the degree together with 1TG276 due to content overlap.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -675,14 +675,14 @@
     {
       "from": "1TG285",
       "to": "1TG287",
-      "type": "HARD",
+      "type": "SOFT",
       "source": "llm",
       "rationale": "Participation in Quality Management, of which 5 credits must be completed, and participation in and 5 credits completed of either Project Management and Leadership or Projects and Leadership."
     },
     {
       "from": "1TG316",
       "to": "1TG287",
-      "type": "HARD",
+      "type": "SOFT",
       "source": "llm",
       "rationale": "Participation in Quality Management, of which 5 credits must be completed, and participation in and 5 credits completed of either Project Management and Leadership or Projects and Leadership."
     },
@@ -696,16 +696,37 @@
     {
       "from": "1TG285",
       "to": "1TG294",
-      "type": "HARD",
+      "type": "SOFT",
       "source": "llm",
       "rationale": "30 credits in Industrial Engineering and Management. Participation in Statistical Quality Control, Quality Management, of which 5 credits should be completed, and either Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed."
     },
     {
       "from": "1TG316",
       "to": "1TG294",
-      "type": "HARD",
+      "type": "SOFT",
       "source": "llm",
       "rationale": "30 credits in Industrial Engineering and Management. Participation in Statistical Quality Control, Quality Management, of which 5 credits should be completed, and either Project Management and Leadership, of which 5 credits should be completed, or Projects and Leadership, of which 5 credits should be completed."
+    },
+    {
+      "from": "1TG236",
+      "to": "1TG297",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Option 1: 60 credits in Industrial Engineering and Management. Participation in Sustainable Development, CSR and Life Cycle Analysis, Management Systems and Leadership and also Lean Management.Option 2: 60 credits within the Bachelor's Programme in Sustainable Development in Industrial Engineering. Participation in Sustainable Development, CSR and Life Cycle Analysis, Production Management I and a"
+    },
+    {
+      "from": "1TG240",
+      "to": "1TG297",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Option 1: 60 credits in Industrial Engineering and Management. Participation in Sustainable Development, CSR and Life Cycle Analysis, Management Systems and Leadership and also Lean Management.Option 2: 60 credits within the Bachelor's Programme in Sustainable Development in Industrial Engineering. Participation in Sustainable Development, CSR and Life Cycle Analysis, Production Management I and a"
+    },
+    {
+      "from": "1TG340",
+      "to": "1TG297",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Option 1: 60 credits in Industrial Engineering and Management. Participation in Sustainable Development, CSR and Life Cycle Analysis, Management Systems and Leadership and also Lean Management.Option 2: 60 credits within the Bachelor's Programme in Sustainable Development in Industrial Engineering. Participation in Sustainable Development, CSR and Life Cycle Analysis, Production Management I and a"
     },
     {
       "from": "1TG316",
@@ -713,6 +734,20 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "45 credits in Industrial Engineering and Management or Engineering programmes. Project Management and Leadership or Projects and Leadership."
+    },
+    {
+      "from": "1TG294",
+      "to": "1TG339",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "110 credits, including 60 credits in Industrial Engineering and Management. Participation in Six Sigma and Change Management."
+    },
+    {
+      "from": "1TG314",
+      "to": "1TG339",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "110 credits, including 60 credits in Industrial Engineering and Management. Participation in Six Sigma and Change Management."
     }
   ],
   "revisions": [

@@ -184,11 +184,13 @@
     {
       "id": "rule-0",
       "type": "NOTE",
-      "courseCodes": [],
+      "courseCodes": [
+        "4PE149"
+      ],
       "semester": 3,
       "trackId": null,
       "textSv": "Ett självständigt arbete genomförs inom ramen för studierna inom den utbildningsvetenskapliga kärnan.",
-      "labelEn": "The independent degree project is carried out within the educational science core studies.",
+      "labelEn": "The degree project is completed within the educational science core studies.",
       "cohortBefore": null,
       "source": "llm"
     }

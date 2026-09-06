@@ -188,7 +188,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Sommartermin 1:",
-      "labelEn": "This is a heading indicating the start of summer term 1.",
+      "labelEn": "This is a heading for Summer term 1.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -199,7 +199,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Hösttermin:",
-      "labelEn": "This is a heading marking the autumn term.",
+      "labelEn": "This is a heading indicating the autumn term.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -210,7 +210,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Vårtermin:",
-      "labelEn": "This is a heading indicating the start of the spring semester section.",
+      "labelEn": "This is a heading indicating the start of the spring term.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -221,7 +221,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Sommartermin 2:",
-      "labelEn": "This is a heading for the second summer term.",
+      "labelEn": "Summer term 2 heading.",
       "cohortBefore": null,
       "source": "llm"
     }

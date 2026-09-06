@@ -41,7 +41,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2"
     },
     {
       "code": "2KU103",
@@ -58,7 +58,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2"
     },
     {
       "code": "2LJ004",
@@ -109,7 +109,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2"
     },
     {
       "code": "2LJ106",
@@ -143,7 +143,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements"
     },
     {
       "code": "2FE038",
@@ -160,7 +160,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements"
     },
     {
       "code": "1GE302",
@@ -228,7 +228,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Admitted to the programme in Land Management. Introduction to Surveying Techniques is recommended."
     },
     {
       "code": "2KU114",
@@ -269,7 +269,15 @@
   "ruleTexts": [],
   "planFormat": "ladok",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "1GE302",
+      "to": "1GE301",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Admitted to the programme in Land Management. Introduction to Surveying Techniques is recommended."
+    }
+  ],
   "revisions": [
     {
       "id": "9569ca68-51f3-4519-8372-892d83064701",

@@ -254,7 +254,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Degree Project C in Meteorology 15 credits"
     },
     {
       "code": "1FA006",
@@ -552,7 +552,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 60 credits in advanced meteorology courses. Admission requires a project plan accepted by the department."
     }
   ],
   "rules": [
@@ -563,7 +563,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Alternativt:",
-      "labelEn": "Alternatively, other options may be chosen.",
+      "labelEn": "This is a heading introducing alternative options.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -574,7 +574,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övrig valbar kurs denna period:",
-      "labelEn": "An additional elective course may be chosen during this period.",
+      "labelEn": "A heading indicating other elective courses available during this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -585,7 +585,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övrig valbar kurs denna period:",
-      "labelEn": "Other elective courses are available this period.",
+      "labelEn": "Heading introducing other elective courses available this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -596,7 +596,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Alternativt:",
-      "labelEn": "Alternatively (unspecified alternative options).",
+      "labelEn": "A heading introducing an alternative option.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -609,7 +609,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kursen 1ME414 ges bara på svenska.",
-      "labelEn": "Course 1ME414 is only offered in Swedish.",
+      "labelEn": "The course 1ME414 is taught only in Swedish.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -622,7 +622,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Kursen 1ME421 är för magisterexamen.",
-      "labelEn": "Course 1ME421 is intended for the magister's degree.",
+      "labelEn": "The course 1ME421 counts toward the magister's degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -633,7 +633,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga kurser:",
-      "labelEn": "Other courses:",
+      "labelEn": "This is a heading introducing a section of other courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -644,7 +644,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Alternativt:",
-      "labelEn": "Alternatively: indicates that alternative course options may be chosen.",
+      "labelEn": "A heading introducing alternative course options.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -657,7 +657,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Kursen 1ME414 ges bara på svenska.",
-      "labelEn": "The course 1ME414 is only offered in Swedish.",
+      "labelEn": "The course 1ME414 is only taught in Swedish.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -668,7 +668,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
-      "labelEn": "Other elective courses within the specialisation may be taken in any period.",
+      "labelEn": "Heading introducing other elective courses within the specialisation for any period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -679,7 +679,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Följande beteckningar används:A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp",
-      "labelEn": "Legend explaining the course level designations (A1N, A1F, A1E, A2E, G2F) used in the plan.",
+      "labelEn": "Legend explaining the level and prerequisite codes used for courses in the plan.",
       "cohortBefore": null,
       "source": "llm"
     }

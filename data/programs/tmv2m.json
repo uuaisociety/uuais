@@ -26,7 +26,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering with 75 credits in physics, chemistry, materials engineering and/or materials science. 15 credits in mathematics."
     },
     {
       "code": "1FA546",
@@ -45,7 +45,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits (ECTS), of which 75 credits must be in Physics, Chemistry, Materials Science and/or Materials Engineering. 15 credits in Mathematics. English 6. (A Swedish Bachelor's degree fulfills the English language requirement.)"
     },
     {
       "code": "1FA681",
@@ -216,7 +216,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. Attended course in Solid State Physics I or 30 credits in physics/materials engineering/material science and Introduction to materials science and engineering (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TM002",
@@ -235,7 +235,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. Attended course in Solid State Physics I or 30 credits in physics/materials engineering/material science and introduction to Materials science (10 credits).English language proficiency that corresponds to English studies at upper secondary (high school) level in English (\"English 6\")."
     },
     {
       "code": "1KB263",
@@ -330,7 +330,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering/pharmacy. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1KB753",
@@ -766,7 +766,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and in addition 30 credits at Master's level in material science including Interdisciplinary Project Course in Materials Science I and Interdisciplinary Project Course in Materials Science II. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [
@@ -777,7 +777,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Alla studenter:",
-      "labelEn": "A heading indicating the following applies to all students.",
+      "labelEn": "This is a heading indicating the note applies to all students.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -788,20 +788,18 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Spår Kvantmaterial (studenter med fysik- eller materialbakgrund):",
-      "labelEn": "Track Quantum Materials (for students with a physics or materials background):",
+      "labelEn": "A track heading for the Quantum Materials track aimed at students with a physics or materials background.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-2",
       "type": "NOTE",
-      "courseCodes": [
-        "1KB311"
-      ],
+      "courseCodes": [],
       "semester": 2,
       "trackId": null,
       "textSv": "Spår Mjuka material (studenter med kemibakgrund):",
-      "labelEn": "Track 'Soft Materials' intended for students with a chemistry background.",
+      "labelEn": "Track heading for Soft Materials aimed at students with a chemistry background.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -812,21 +810,18 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Spår Energirelaterade material (studenter med fysik-, kemi eller materialbakgrund):",
-      "labelEn": "Track 'Energy-related materials' for students with a physics, chemistry or materials background.",
+      "labelEn": "Heading for the Energy-related materials track for students with a physics, chemistry or materials background.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-4",
       "type": "NOTE",
-      "courseCodes": [
-        "1FA654",
-        "1FA655"
-      ],
+      "courseCodes": [],
       "semester": 3,
       "trackId": null,
       "textSv": "Spår Kvantmaterial (studenter med fysik- eller materialbakgrund):",
-      "labelEn": "Track Quantum Materials for students with a physics or materials background.",
+      "labelEn": "Heading introducing the Quantum Materials track for students with a physics or materials background.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -837,7 +832,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Spår Mjuka material (studenter med kemibakgrund):",
-      "labelEn": "Track: Soft Materials (for students with a chemistry background).",
+      "labelEn": "Heading for the Soft Materials track intended for students with a chemistry background.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -848,7 +843,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Spår Energirelaterade material (studenter med fysik-, kemi- eller materialbakgrund):",
-      "labelEn": "Track in energy-related materials for students with a physics, chemistry or materials background.",
+      "labelEn": "A heading for the track in energy-related materials aimed at students with a physics, chemistry, or materials background.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -859,7 +854,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Alla spår:",
-      "labelEn": "All tracks:",
+      "labelEn": "This is a heading indicating that the following applies to all tracks.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -937,13 +932,6 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "120 credits in science/engineering. Participation in Introduction to Materials Science (10 credits), Chemical Bonding in Molecules and Materials and Introduction to Materials Synthesis and Characterisation. Proficiency in English equivalent to the Swedish upper secondary course English 6."
-    },
-    {
-      "from": "1FA681",
-      "to": "1FA557",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "120 credits in science/engineering. Participation in Quantum Materials I and Spectroscopy of Atoms and Molecules. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1FA651",
@@ -1030,11 +1018,18 @@
       "rationale": "120 credits in science/engineering. Participation in Quantum Mechanics or Atomic and Molecular Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
-      "from": "1FA651",
-      "to": "1KB236",
-      "type": "SOFT",
+      "from": "1FA652",
+      "to": "1FA690",
+      "type": "HARD",
       "source": "llm",
-      "rationale": "60 credits in science/engineering and parcipitation in a 5 credits course in materials science or materials chemistry."
+      "rationale": "A Bachelor's degree and in addition 30 credits at Master's level in material science including Interdisciplinary Project Course in Materials Science I and Interdisciplinary Project Course in Materials Science II. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA653",
+      "to": "1FA690",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree and in addition 30 credits at Master's level in material science including Interdisciplinary Project Course in Materials Science I and Interdisciplinary Project Course in Materials Science II. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1FA680",
@@ -1084,6 +1079,20 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "130 credits in science/engineering. Either materials chemistry and attended course in Surface physics and chemistry or Surface physics. Attended course in surface characterisation or Surface and materials analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1FA651",
+      "to": "1TM002",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Attended course in Solid State Physics I or 30 credits in physics/materials engineering/material science and introduction to Materials science (10 credits).English language proficiency that corresponds to English studies at upper secondary (high school) level in English (\"English 6\")."
+    },
+    {
+      "from": "1FA651",
+      "to": "1TM003",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering. Attended course in Solid State Physics I or 30 credits in physics/materials engineering/material science and Introduction to materials science and engineering (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1KB263",

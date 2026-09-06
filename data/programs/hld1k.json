@@ -24,7 +24,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6"
     },
     {
       "code": "5SD550",
@@ -75,7 +75,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "7.5 credit in game design"
     },
     {
       "code": "5SD080",
@@ -109,7 +109,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Game Design 1: Introduction, 15 credits"
     },
     {
       "code": "5SD066",
@@ -143,7 +143,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6"
     },
     {
       "code": "5SD090",
@@ -160,7 +160,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Game Design 2 - Game Development, 7.5 credits"
     },
     {
       "code": "5SD075",
@@ -177,7 +177,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits, including 45 credits in game design and 15 credits in either game design, computer science, expression in convergent media or industrial engineering and management."
     },
     {
       "code": "5SD069",
@@ -194,7 +194,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in game design with progressive specialisation"
     },
     {
       "code": "5SD034",
@@ -211,7 +211,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in game design with progressive specialisation and 2 credits from Game Design 5: Theory and Methods."
     }
   ],
   "rules": [
@@ -222,7 +222,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Denna termin kan du välja att läsa 30 hp valbara kurser, göra praktik (max 30 hp) eller ägna dig åt utlandsstudier.",
-      "labelEn": "This semester can be spent on 30 credits of elective courses, an internship (max 30 credits), or studies abroad.",
+      "labelEn": "This semester you may choose between taking 30 credits of elective courses, doing an internship (max 30 credits), or studying abroad.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -237,7 +237,22 @@
   ],
   "planFormat": "ladok",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "5SD065",
+      "to": "5SD071",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Game Design 1: Introduction, 15 credits"
+    },
+    {
+      "from": "5SD064",
+      "to": "5SD090",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Game Design 2 - Game Development, 7.5 credits"
+    }
+  ],
   "revisions": [
     {
       "id": "e7f2c4de-53ef-4bb8-8f1b-0bb3bd15f76b",

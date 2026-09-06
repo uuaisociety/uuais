@@ -184,9 +184,7 @@
     {
       "id": "rule-0",
       "type": "NOTE",
-      "courseCodes": [
-        "4PE149"
-      ],
+      "courseCodes": [],
       "semester": 3,
       "trackId": null,
       "textSv": "Ett självständigt arbete genomförs inom ramen för studierna inom den utbildningsvetenskapliga kärnan.",

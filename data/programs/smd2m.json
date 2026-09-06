@@ -24,7 +24,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree equivalent to a Swedish degree of at least 180 credits (i.e. three years of full-time studies) containing IT-related course modules comprising the equivalent of at least 30 credits in total. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
     },
     {
       "code": "2IS090",
@@ -58,7 +58,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and 15 credits in human-computer interaction at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
     },
     {
       "code": "2IV181",
@@ -75,7 +75,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and 15 credits in human-computer interaction at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
     },
     {
       "code": "2IV126",
@@ -92,7 +92,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and 15 credits in human-computer interaction at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
     },
     {
       "code": "1MD001",
@@ -126,7 +126,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 45 credits in computer science/engineering/information systems including a continuation course in object oriented programming. English 6."
     },
     {
       "code": "1MD004",
@@ -245,7 +245,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits in human–computer interaction at advanced level"
     },
     {
       "code": "2IV158",
@@ -262,7 +262,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits in Human–Computer Interaction at advanced level"
     },
     {
       "code": "2IV159",
@@ -313,7 +313,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and 60 credits at Master's level, including at least 30 credits in human-computer interaction and 15 credits in scientific method at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
     }
   ],
   "rules": [
@@ -349,7 +349,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "För vissa av dessa kurser krävs att studenten möter speciella förkunskapskrav, se behörighetskraven i kursplanen för respektive kurs.Kurserna Informations och tjänstedesign,7,5 hp (2IV182 ) och Etiska perspektiv på IT-system och design i MDI,7,5 hp (2IV181) ges inom kurspaketet Att designa för människan, 15 hp",
-      "labelEn": "Courses 2IV182 and 2IV181 are offered within the 15 hp course package 'Designing for humans', and some courses have specific prerequisites.",
+      "labelEn": "The courses 2IV182 and 2IV181 are given within the 15 hp course package 'Designing for Humans', and some courses have special prerequisite requirements.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -377,7 +377,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "För vissa av dessa kurser krävs att studenten möter speciella förkunskapskrav, se behörighetskraven i kursplanen för respektive kurs.",
-      "labelEn": "Some of these courses have specific prerequisite requirements; see the eligibility criteria in each course syllabus.",
+      "labelEn": "Some of these courses have specific prerequisite requirements, see the eligibility criteria in each course syllabus.",
       "cohortBefore": null,
       "source": "llm"
     }

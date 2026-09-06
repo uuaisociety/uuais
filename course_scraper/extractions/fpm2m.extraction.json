@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:23:58.848395+00:00",
+  "generatedAt": "2026-09-06T06:20:35.738147+00:00",
   "edges": [
     {
       "code": "3FB207",
@@ -89,7 +89,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Elective courses totalling 15 credits may be taken, or 15 credits as part of the 45-credit master's project.",
+        "labelEn": "Elective courses totalling 15 credits or a 15-credit part of the 45-credit master project.",
         "cohortBefore": null
       }
     },
@@ -103,7 +103,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "The master thesis is taken as 30 credits, or as the remaining part of a 45 credit project.",
+        "labelEn": "Master's project of 30 credits or the remaining part of a 45-credit project.",
         "cohortBefore": null
       }
     }

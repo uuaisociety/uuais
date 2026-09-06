@@ -1,10 +1,38 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:36:40.599559+00:00",
+  "generatedAt": "2026-09-06T06:33:28.660362+00:00",
   "edges": [
+    {
+      "code": "2IS017",
+      "text": "Bachelor's degree of 180 credits. Knowledge of English equivalent to what is required for general entry requirements for Swedish higher education at first-cycle level.",
+      "result": {
+        "edges": []
+      }
+    },
     {
       "code": "2IS018",
       "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 45 credits from semesters 1 and 2 of the Master's Programme in Management, Communication and IT. Proficiency in Swedish and English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS080",
+      "text": "Admitted to the Master's Programme in Management, Communication and IT, and 15 credits from semester 1.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS086",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS087",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
       "result": {
         "edges": []
       }
@@ -46,7 +74,7 @@
           "2IV116",
           "2IS037"
         ],
-        "labelEn": "One of the listed master's thesis courses must be chosen.",
+        "labelEn": "One of these master's thesis courses must be selected.",
         "cohortBefore": null
       }
     }

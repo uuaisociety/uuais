@@ -1,7 +1,21 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:31:25.279771+00:00",
+  "generatedAt": "2026-09-06T06:28:18.571006+00:00",
   "edges": [
+    {
+      "code": "3MR001",
+      "text": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology, biochemistry and genetics. Prerequisites in the form of completed 45 credits from the courses included in the first year studies of the Master's Programme in Medical Research or equivalent. This includes in-depth knowledge on advanced level in genetics/genomics, as well as mechanisms that regulate biological processes from gene to disease development and methods used to study them.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MR010",
+      "text": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology, biochemistry and genetics. Prerequisites in the form of completed 60 credits from the courses included in the first year studies of the Master's Programme in Medical Research or equivalent. This includes in-depth knowledge on advanced level in genetics/genomics, mechanisms that regulate biological processes from gene to disease development and methods used to study them, as well as basic principles for research work and scientific communication.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
     {
       "code": "3MR100",
       "text": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology, biochemistry and genetics. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
@@ -10,15 +24,24 @@
       }
     },
     {
+      "code": "3MR101",
+      "text": "Admitted to the Master's Programme in Medical Research.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MR102",
+      "text": "Admitted to the Master's Programme in Medical Research. Knowledge in English equivalent to that required for basic eligibility to Swedish higher education on basic level.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
       "code": "3MR103",
       "text": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology and biochemistry. In addition, 7.5 credits in genetics at Master's level are required. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
       "result": {
-        "edges": [
-          {
-            "from": "3MR104",
-            "type": "HARD"
-          }
-        ]
+        "edges": []
       }
     },
     {

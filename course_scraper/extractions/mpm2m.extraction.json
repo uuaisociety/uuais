@@ -1,7 +1,153 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:31:59.775006+00:00",
+  "generatedAt": "2026-09-06T06:28:58.689538+00:00",
   "edges": [
+    {
+      "code": "2ST133",
+      "text": "General entry requirements and Mathematics 3b or 3c/Mathematics C",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2ST134",
+      "text": "General entry requirements and Mathematics 3b or 3c/Mathematics C",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FF041",
+      "text": "Knowledge corresponding to Molecular techniques and data analysis in precision medicine I (7.5hp 3MG038)",
+      "result": {
+        "edges": [
+          {
+            "from": "3MG038",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3MG038",
+      "text": "180 credits, from an internationally recognised university. The degree must be in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, bioinformatics, cell-/molecular biology, genetics, life science, medical sciences, pharmacy, or a similar field of study. Also required are courses in human genetics, cell biology and molecular biology totaling 30 credits including knowledge corresponding to Medical genetics and cancer - molecular mechanisms (3MG022 or 3MG030).",
+      "result": {
+        "edges": [
+          {
+            "from": "3MG322",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3MG047",
+      "text": "180 credits from educational programmes in biology, biomedicine/medicine, biotechnology, pharmacy, medical sciences, or a similar field of study. Also required are courses in cell biology, genetics, biochemistry and molecular biology. Also required is knowledge corresponding to Molecular Techniques and Data Analysis in Precision Medicine I 7.5 credits (3MG038), Introduction to machine learning and artificial intelligence for life sciences 7.5 credits (3FF041), Introduction to programming in R 7.5 credits (2ST133), and Biostatistics 7.5 credits (2ST134).",
+      "result": {
+        "edges": [
+          {
+            "from": "3MG038",
+            "type": "HARD"
+          },
+          {
+            "from": "3FF041",
+            "type": "HARD"
+          },
+          {
+            "from": "2ST133",
+            "type": "HARD"
+          },
+          {
+            "from": "2ST134",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3MG055",
+      "text": "180 credits, from an internationally recognised university. The degree must be in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, bioinformatics, cell-/molecular biology, genetics, life science, medical sciences, pharmacy, or a similar field of study.A minimum of 60 credits of courses within the Master's Programme in Precision Medicine, including equivalent knowledge as the courses:- Molecular Techniques and Data Analysis in Precision Medicine I (3MG038, 7.5 credits)- Introduction to Machine Learning and AI for Life Sciences (3FF041, 7.5 credits)- Molecular Techniques and Data Analysis in Precision Medicine II (3MG047, 15 credits)- Biostatistics (2ST134, 7.5 credits)- Introduction to R (2ST133, 7.5 credits)",
+      "result": {
+        "edges": [
+          {
+            "from": "3MG038",
+            "type": "HARD"
+          },
+          {
+            "from": "3FF041",
+            "type": "HARD"
+          },
+          {
+            "from": "3MG047",
+            "type": "HARD"
+          },
+          {
+            "from": "2ST134",
+            "type": "HARD"
+          },
+          {
+            "from": "2ST133",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3MG056",
+      "text": "180 credits, from an internationally recognised university. The degree must be in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, bioinformatics, cell-/molecular biology, genetics, life science, medical sciences, pharmacy, or a similar field of study.A minimum of 60 credits of courses within the Master's Programme in Precision Medicine, including equivalent knowledge as the courses:- Molecular Techniques and Data Analysis in Precision Medicine I (3MG038, 7.5 credits)- Introduction to Machine Learning and AI for Life Sciences (3FF041, 7.5 credits)- Molecular Techniques and Data Analysis in Precision Medicine II (3MG047, 15 credits)- Biostatistics (2ST134, 7.5 credits)- Introduction to R (2ST133, 7.5 credits)",
+      "result": {
+        "edges": [
+          {
+            "from": "3MG038",
+            "type": "HARD"
+          },
+          {
+            "from": "3FF041",
+            "type": "HARD"
+          },
+          {
+            "from": "3MG047",
+            "type": "HARD"
+          },
+          {
+            "from": "2ST134",
+            "type": "HARD"
+          },
+          {
+            "from": "2ST133",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3MG065",
+      "text": "180 credits from an internationally recognised university. The degree must be in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, bioinformatics, cell-/molecular biology, genetics, life science, medical sciences, pharmacy, or a similar field of study.A minimum of 30 credits of courses within the Master's programme in Precision Medicine, including equivalent knowledge as the courses:-Molecular techniques and data analysis in precision medicine I (3MG038)-Introduction to machine learning and AI for life sciences (3FF041)-Molecular techniques and data analysis in precision medicine II (3MG047)-Biostatistics (2ST134, 7,5 hp)-Introduction to R (2ST133, 7,5hp)",
+      "result": {
+        "edges": [
+          {
+            "from": "3MG038",
+            "type": "HARD"
+          },
+          {
+            "from": "3FF041",
+            "type": "HARD"
+          },
+          {
+            "from": "3MG047",
+            "type": "HARD"
+          },
+          {
+            "from": "2ST134",
+            "type": "HARD"
+          },
+          {
+            "from": "2ST133",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
     {
       "code": "3MG322",
       "text": "180 credits from a programme in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, cell/molecular biology, genetics, life science, medical sciences or a similar field of study. Also required are courses in biochemistry, cell biology, chemistry, genetics, and molecular biology/genetics totalling at least 30 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
@@ -23,7 +169,7 @@
         "courseCodes": [
           "3MG056"
         ],
-        "labelEn": "Students may either start the 45 hp Master's Project in Precision Medicine (3MG056) or take elective courses totalling 15 hp.",
+        "labelEn": "Students may either start the 45-credit Master's Project in Precision Medicine (3MG056) or take elective courses totalling 15 credits during that period.",
         "cohortBefore": null
       }
     },
@@ -40,7 +186,7 @@
           "3MG055",
           "3MG056"
         ],
-        "labelEn": "Students may complete a 30-credit master's thesis or alternatively continue to a 45-credit thesis.",
+        "labelEn": "Either a 30-credit master's thesis or a continued 45-credit master's thesis may be taken.",
         "cohortBefore": null
       }
     }

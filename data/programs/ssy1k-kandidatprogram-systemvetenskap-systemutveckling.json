@@ -92,7 +92,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements"
     },
     {
       "code": "1MA098",
@@ -109,7 +109,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C"
     },
     {
       "code": "2IS012",
@@ -126,7 +126,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "15 credits in information systems including 7.5 credits in programming."
     },
     {
       "code": "2IS014",
@@ -143,7 +143,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "15 credits in information systems, including 7.5 credits in programming."
     },
     {
       "code": "2IS061",
@@ -160,7 +160,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "15 credits in information systems, including 7.5 credits in programming."
     },
     {
       "code": "2IS052",
@@ -177,7 +177,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "15 credits in information systems or the equivalent"
     },
     {
       "code": "2HR118",
@@ -194,7 +194,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements"
     },
     {
       "code": "2IS013",
@@ -211,7 +211,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6"
     },
     {
       "code": "2IS066",
@@ -313,7 +313,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in information systems or the equivalent"
     },
     {
       "code": "2IS068",
@@ -341,7 +341,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valfri A-kurs, 30 hp",
-      "labelEn": "This line is a heading for a free-choice slot of 30 credits at A-level, without naming any specific courses.",
+      "labelEn": "An elective A-level course worth 30 credits may be taken.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -352,7 +352,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "KurspaketetSystemutveckling termin 5 30 hp, med delkurserna:",
-      "labelEn": "Heading introducing a 30-credit course package in system development for semester 5 with its sub-courses to follow.",
+      "labelEn": "Heading introducing the semester 5 Software Development course package of 30 credits with its sub-courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -363,7 +363,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "KurspaketetSystemutveckling termin 6 30 hp, med delkurserna:",
-      "labelEn": "Heading introducing a 30-credit course package in systems development for semester 6.",
+      "labelEn": "This is a heading introducing the Systems Development course package of 30 hp in semester 6 with its sub-courses listed below.",
       "cohortBefore": null,
       "source": "llm"
     }

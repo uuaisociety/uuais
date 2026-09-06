@@ -1,10 +1,24 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:28:17.340134+00:00",
+  "generatedAt": "2026-09-06T06:23:38.813161+00:00",
   "edges": [
     {
       "code": "5LN429",
       "text": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5LN445",
+      "text": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5LN708",
+      "text": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject, 7.5 credits in computer programming and 7.5 credits in logic/discrete mathematics. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
       "result": {
         "edges": []
       }
@@ -26,7 +40,44 @@
       }
     },
     {
+      "code": "5LN710",
+      "text": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject, 15 credits in computer programming and 7.5 credits in logic/discrete mathematics. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
       "code": "5LN712",
+      "text": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject, 7.5 credits in computer programming and 7.5 credits in logic/discrete mathematics. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5LN713",
+      "text": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject, 7.5 credits in computer programming and 7.5 credits in logic/discrete mathematics. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5LN714",
+      "text": "30 credits second-cycle courses in language technology, including the courses Natural Language Processing and Machine Learning in Natural Language Processing.",
+      "result": {
+        "edges": [
+          {
+            "from": "5LN710",
+            "type": "HARD"
+          },
+          {
+            "from": "5LN708",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5LN715",
       "text": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject, 7.5 credits in computer programming and 7.5 credits in logic/discrete mathematics. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
       "result": {
         "edges": []
@@ -44,7 +95,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Elective courses worth 22.5 credits, with specializations in language technology to be offered.",
+        "labelEn": "Elective courses worth 22.5 credits; specializations in language technology will be offered.",
         "cohortBefore": null
       }
     },
@@ -58,7 +109,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "A heading indicating 15 credits of elective courses.",
+        "labelEn": "This is a heading for elective courses worth 15 credits.",
         "cohortBefore": null
       }
     }

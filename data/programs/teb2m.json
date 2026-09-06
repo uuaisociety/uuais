@@ -71,7 +71,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Bachelor's degree, and in addition courses in biology of at least 30 credits at the advanced level, including courses at advanced level that are necessary for the project. Admission requires a project plan accepted by the department."
     },
     {
       "code": "1BG368",
@@ -88,7 +88,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Bachelor's degree including alt 1) 60 credits biology and 30 credits chemistry or 30 credits earth sciences. alt 2) 90 credits biology. For admission, a project plan approved by the department is required"
     },
     {
       "code": "1BG368",
@@ -105,7 +105,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Bachelor's degree including alt 1) 60 credits biology and 30 credits chemistry or 30 credits earth sciences. alt 2) 90 credits biology. For admission, a project plan approved by the department is required"
     },
     {
       "code": "1BG362",
@@ -122,7 +122,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Bachelor's degree, and in addition courses in biology of at least 30 credits at the advanced level, including courses at advanced level that are necessary for the project. Admission requires a project plan accepted by the department."
     }
   ],
   "rules": [
@@ -133,7 +133,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Under termin 3 och 4 väljer studenterna vilket universitet de vill genomföra sina studier. Det är också möjligt att göra projekt vid Harvard University eller Université Lausanne. Period Kurskod Kursnamn Hp Nivå/Djup Område 1-2 RuG Research project 30 A1F B 1-2 RuG Thesis project 30 A2E B 1-2 UM2 Research project 30 A1F B 1-2 UM2 Thesis project 30 A2E B 1-2 LMU Research training + Skill course + kurser listade under termin 2 (totalt 30 hp) 30 A1N B 1-2 LMU Thesis project 30 A2E B",
-      "labelEn": "Students choose a partner university (RuG, UM2, or LMU; projects also possible at Harvard or Lausanne) for semesters 3–4, each offering a 30 hp research and/or thesis project.",
+      "labelEn": "In terms 3–4 students choose which partner university to study at, with project options abroad.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -144,7 +144,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Under termin 3 och 4 väljer studenterna vilket universitet de vill genomföra sina studier. Det är också möjligt att göra projekt vid Harvard University eller Université Lausanne. Period Kurskod Kursnamn Hp Nivå/Djup Område 3-4 RuG Research project 30 A1F B 3-4 RuG Thesis project 30 A2E B 3-4 UM2 Research project 30 A1F B 3-4 UM2 Thesis project 30 A2E B 3-4 LMU Thesis project 30 A2E B",
-      "labelEn": "In semesters 3–4 students choose a partner university (RuG, UM2, or LMU; projects also possible at Harvard or Lausanne) for a 30 hp research or thesis project.",
+      "labelEn": "Students choose their host university for terms 3 and 4, with project opportunities at Harvard University or Université Lausanne.",
       "cohortBefore": null,
       "source": "llm"
     }

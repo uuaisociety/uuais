@@ -75,7 +75,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E"
     },
     {
       "code": "1MA090",
@@ -94,7 +94,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics E"
     },
     {
       "code": "1FA105",
@@ -113,7 +113,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Algebra and Geometry"
     },
     {
       "code": "1KB018",
@@ -132,7 +132,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E"
     },
     {
       "code": "1MA013",
@@ -171,7 +171,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Algebra and Geometry"
     },
     {
       "code": "1MS005",
@@ -323,7 +323,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits in science/engineering"
     },
     {
       "code": "1FA514",
@@ -399,7 +399,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "10 credits in mathematics. Participation in one of the courses General Chemistry, Chemical Principles I, Basic Chemistry, or Basic Materials Chemistry, with at least 1 credit completed. Participation in Several Variable Calculus general course or participation in Several Variable Calculus."
     },
     {
       "code": "1KB100",
@@ -418,7 +418,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Basic Chemistry, 10 credits."
     },
     {
       "code": "1TV015",
@@ -513,7 +513,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits within the Master's Programme in Environmental and Water Engineering"
     },
     {
       "code": "1TV019",
@@ -530,7 +530,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits within the programme in Environmental and Water Engineering."
     },
     {
       "code": "1TV009",
@@ -547,7 +547,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "The first two study years within the programme in Aquatic and Environmental Engineering."
     },
     {
       "code": "1TV810",
@@ -659,7 +659,7 @@
       ],
       "trackId": "vattenresurser",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology, Environmental Measurement Techniques 15 credits and Soil Science 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TV443",
@@ -678,7 +678,7 @@
       ],
       "trackId": "vattenresurser",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology, Environmental Measurement Techniques, 15 credits, and Soil Science, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TV444",
@@ -697,7 +697,7 @@
       ],
       "trackId": "vattenresurser",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits and participation in Groundwater 5 credits and Runoff 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TV028",
@@ -735,7 +735,7 @@
       ],
       "trackId": "luftvard-och-klimat",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits of which 90 credits in science/engineering including the course Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TV022",
@@ -754,7 +754,7 @@
       ],
       "trackId": "luftvard-och-klimat",
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering. Participation in Air Quality and Applied Meteorology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1TV032",
@@ -879,7 +879,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "1KB018 och 1KB007 kan inte ingå i en examen tillsammans.",
-      "labelEn": "1KB018 Basic Chemistry and 1KB007 cannot both be counted toward the degree.",
+      "labelEn": "1KB018 and 1KB007 cannot both be counted toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -890,7 +890,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Biologi, 5 hp (BI1112 SLU)* Huvudområde(n) med fördjupning: Biologi G1N",
-      "labelEn": "Biology, 5 credits (BI1112 at SLU), main field of study Biology G1N, is an external course not in the local roster.",
+      "labelEn": "An external biology course (BI1112 at SLU) is noted, which is not on this programme's roster.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -901,7 +901,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Ekologi för miljö och vatten, 5 hp (BI1465 SLU) * Huvudområde(n) med fördjupning: Biologi G1F",
-      "labelEn": "Ecology for Environment and Water (BI1465, SLU) is noted with main field of study Biology at level G1F.",
+      "labelEn": "An external SLU course, Ecology for Environment and Water (5 hp), is included with main field Biology at G1F level.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -912,7 +912,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Markvetenskap för miljö och vatten, 5 (av 15) hp (MV0192 SLU)* Huvudområde(n) med fördjupning: Teknik G2F, Geovetenskap (huvudområde vid SLU: Markvetenskap) G2F",
-      "labelEn": "The external SLU course Soil Science for Environment and Water (MV0192, 5 of 15 credits) counts at G2F level with main fields Technology and Geoscience (Soil Science at SLU).",
+      "labelEn": "Information about the SLU course Soil Science for Environment and Water (MV0192), 5 of 15 credits, at G2F level.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -923,7 +923,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Markvetenskap för miljö och vatten, 5 (av 15) hp (MV0192 SLU)* Huvudområde(n) med fördjupning: Teknik G2F, Geovetenskap (huvudområde vid SLU: Markvetenskap) G2F",
-      "labelEn": "External SLU course Markvetenskap för miljö och vatten (MV0192, 5 of 15 credits) with main field of study Technology G2F and Geoscience G2F.",
+      "labelEn": "An SLU course, Soil Science for Environment and Water (MV0192), is noted with its main field of study and G2F level.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -934,7 +934,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Tillvalskurser när 120 hp har uppnåtts:",
-      "labelEn": "Elective courses are available once 120 credits have been completed.",
+      "labelEn": "Elective courses may be chosen once 120 credits have been completed.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -945,7 +945,7 @@
       "semester": 7,
       "trackId": null,
       "textSv": "Kurserna i åk 4 ges som sammanhängande terminsblock. Inom varje block finns ett antal samplanerade kurser om 5-15 hp. Blocken kommer att ge en genomtänkt helhet, innehållande såväl teoretisk fördjupning som tillämpningar. För examen krävs godkänt resultat från samtliga kurser inom minst två terminsblock.",
-      "labelEn": "Year 4 courses are organised into coordinated semester blocks; the degree requires passing all courses in at least two blocks.",
+      "labelEn": "Year 4 courses are grouped into coherent term blocks of 5-15 credits, and the degree requires passing all courses within at least two such blocks.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -956,7 +956,7 @@
       "semester": 7,
       "trackId": "uthalliga-vatten-och-avloppssystem",
       "textSv": "Enskilda avlopp och resursåtervinning, 5 hp (TN0363 SLU) Huvudområde(n) med fördjupning: Teknik A1N",
-      "labelEn": "External SLU course 'Enskilda avlopp och resursåtervinning' (TN0363, 5 hp) is credited with main field of study Technology at advanced level (A1N).",
+      "labelEn": "External SLU course 'Individual wastewater and resource recovery' (TN0363, 5 hp) with main field of study Technology A1N.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -967,7 +967,7 @@
       "semester": 7,
       "trackId": "uthalliga-vatten-och-avloppssystem",
       "textSv": "Val av VA-system, 10 hp (TN0372 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
-      "labelEn": "Elective 10 hp course 'Val av VA-system' (TN0372, SLU) counts toward the main field of study Technology at second-cycle level (A1F).",
+      "labelEn": "Describes the external SLU course Val av VA-system (TN0372), 10 credits, at advanced level (A1F) in Technology.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -978,7 +978,7 @@
       "semester": 7,
       "trackId": "markmiljo",
       "textSv": "Förorenad mark riskbedömning och åtgärder, 10 (av 20) hp (TE0020 SLU) Huvudområde(n) med fördjupning: Teknik A1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) A1N",
-      "labelEn": "Contaminated land risk assessment and remediation (10 of 20 credits, TE0020 at SLU), advanced level (A1N) in Technology and Earth Science (SLU main field: Soil Science).",
+      "labelEn": "Information about the SLU course TE0020 Contaminated Soil Risk Assessment and Remediation, worth 10 (of 20) credits, with main field of study Technology A1N and Soil Science at SLU.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -989,7 +989,7 @@
       "semester": 7,
       "trackId": "markmiljo",
       "textSv": "Avfallshantering, 5 hp (TE00§4 SLU) Huvudområde(n) med fördjupning: Teknik A1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) A1N",
-      "labelEn": "Waste Management, 5 hp, is an external SLU course (TE00§4) at advanced level (A1N) in Technology with SLU main field Soil Science.",
+      "labelEn": "Waste Management (5 credits, SLU) has main field of study Technology A1N and Geoscience, with SLU main field Soil Science.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1000,7 +1000,7 @@
       "semester": 7,
       "trackId": "markmiljo",
       "textSv": "Förorenad mark riskbedömning och åtgärder, 10 (av 20) hp (TE0020 SLU) Huvudområde(n) med fördjupning: Teknik A1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) A1N",
-      "labelEn": "External SLU course TE0020 (Contaminated Land: Risk Assessment and Remediation), 10 of 20 credits, counted in main fields Technology A1N or Geoscience A1N.",
+      "labelEn": "Information about an external SLU course on contaminated soil risk assessment and remediation.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1011,7 +1011,7 @@
       "semester": 8,
       "trackId": "vattenresurser",
       "textSv": "Vattenresursteknik, 5 hp (MV0190 SLU) Huvudområde(n) med fördjupning: Teknik A1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) A1N",
-      "labelEn": "Water Resources Technology (5 cr, MV0190 at SLU) is an external course at second-cycle level (A1N) with main field of study in Technology or Geoscience (SLU: Soil Science).",
+      "labelEn": "Describes the main field of study information for the external SLU course Water Resources Engineering (MV0190, 5 credits).",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1022,7 +1022,7 @@
       "semester": 8,
       "trackId": "vattenresurser",
       "textSv": "Projekt vattenresurser, 10 hp (MV0189 SLU) Huvudområde(n) med fördjupning: Teknik A1F, Geovetenskap (huvudområde vid SLU: Markvetenskap) A1F",
-      "labelEn": "Project Water Resources (10 hp, MV0189 at SLU) counts with main fields of Technology A1F and Geoscience A1F (at SLU: Soil Science).",
+      "labelEn": "Describes an external SLU project course in water resources (MV0189, 10 hp) with A1F level in Technology and Geoscience.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1033,7 +1033,7 @@
       "semester": 9,
       "trackId": "miljomanagement",
       "textSv": "Ekonomistyrning för ingenjörer (FÖ0498 SLU) Huvudområde(n) med fördjupning: Teknik G1F",
-      "labelEn": "Financial Management for Engineers (FÖ0498, SLU) counts with main field of study Technology at level G1F.",
+      "labelEn": "A note about the external SLU course Financial Management for Engineers (FÖ0498) classified at level G1F in Technology.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1044,7 +1044,7 @@
       "semester": 9,
       "trackId": "miljomanagement",
       "textSv": "Livscykelanalys för miljö- och vattenteknik, 5 hp (TN0313 SLU) Huvudområde(n) med fördjupning: Teknik A1N, Miljövetenskap (huvudområde vid SLU) A1N",
-      "labelEn": "Semester 9 includes the external SLU course TN0313 Life Cycle Analysis for Environmental and Water Engineering, 5 hp, at advanced level A1N (main field: Technology, or Environmental Science at SLU).",
+      "labelEn": "Information about an SLU course in life cycle analysis and its main field of study classification.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1055,7 +1055,7 @@
       "semester": 9,
       "trackId": "miljomanagement",
       "textSv": "Miljökonsekvensbeskrivning, 5 hp (MX0162 SLU) Huvudområde(n) med fördjupning: Miljövetenskap (huvudområde vid SLU) A1N",
-      "labelEn": "Environmental Impact Assessment, 5 hp (MX0162, SLU) is an external SLU course with main field of study Environmental Science at advanced level A1N, not on the programme roster.",
+      "labelEn": "A note about an external SLU course (Miljökonsekvensbeskrivning, MX0162) with its subject level, not part of the KTH roster.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1066,8 +1066,8 @@
       "semester": 9,
       "trackId": "ekosystemmodellering",
       "textSv": "Kurspaketet Teknikbaserat entreprenörskap och affärsutveckling, 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare.",
-      "labelEn": "Course package 'Technology-based Entrepreneurship and Business Development' (30 hp, semester 9) has no guaranteed places and counts toward the degree only for students admitted in 2025/2026 or earlier.",
-      "cohortBefore": null,
+      "labelEn": "The Technology-based Entrepreneurship and Business Development package (semester 9, no guaranteed placement) counts toward the degree only for students admitted 2025/2026 or earlier.",
+      "cohortBefore": 2025,
       "source": "llm"
     }
   ],
@@ -1187,7 +1187,7 @@
     {
       "from": "1FA105",
       "to": "1FA102",
-      "type": "SOFT",
+      "type": "HARD",
       "source": "llm",
       "rationale": "Participation in Mechanics Basic Course and a course in several variable calculus. The latter course may also be taken in parallel."
     },
@@ -1225,6 +1225,27 @@
       "type": "SOFT",
       "source": "llm",
       "rationale": "Participation in Algebra and Geometry, or Linear Algebra I. Participation in Single Variable Calculus, or Calculus in One Variable. Participation in Scientific Computing I, Introduction to Scientific Programming, or Computer programming. Participation in Several Variable Calculus, or Calculus in Several Variables, or studied simultaneously. Participation in Mechanics Basic Course, or Technical Mec"
+    },
+    {
+      "from": "1KB018",
+      "to": "1KB100",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Basic Chemistry, 10 credits."
+    },
+    {
+      "from": "1KB018",
+      "to": "1KB300",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "10 credits in mathematics. Participation in one of the courses General Chemistry, Chemical Principles I, Basic Chemistry, or Basic Materials Chemistry, with at least 1 credit completed. Participation in Several Variable Calculus general course or participation in Several Variable Calculus."
+    },
+    {
+      "from": "1MA017",
+      "to": "1KB300",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "10 credits in mathematics. Participation in one of the courses General Chemistry, Chemical Principles I, Basic Chemistry, or Basic Materials Chemistry, with at least 1 credit completed. Participation in Several Variable Calculus general course or participation in Several Variable Calculus."
     },
     {
       "from": "1KB018",
@@ -1407,6 +1428,27 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TV015",
+      "to": "1TV036",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits of which 90 credits in science/engineering including the course Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TV015",
+      "to": "1TV442",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology, Environmental Measurement Techniques 15 credits and Soil Science 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1TV015",
+      "to": "1TV443",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology, Environmental Measurement Techniques, 15 credits, and Soil Science, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "from": "1TV024",

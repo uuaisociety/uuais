@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:37:10.188117+00:00",
+  "generatedAt": "2026-09-06T06:34:10.189501+00:00",
   "edges": [
     {
       "code": "2FE159",
@@ -50,6 +50,13 @@
       "result": {
         "edges": []
       }
+    },
+    {
+      "code": "4PE193",
+      "text": "General entry requirements",
+      "result": {
+        "edges": []
+      }
     }
   ],
   "rules": [
@@ -95,7 +102,7 @@
           "2SC111",
           "2PP537"
         ],
-        "labelEn": "One of these three courses must be chosen.",
+        "labelEn": "One of these courses must be chosen.",
         "cohortBefore": null
       }
     }

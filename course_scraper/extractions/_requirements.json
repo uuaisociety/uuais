@@ -1,22 +1,22 @@
 {
   "1BA203": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, or Mathematics 2a or 2b or 2c",
     "onlyProgramme": null
   },
   "1BA204": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, or Mathematics 2a or 2b or 2c",
     "onlyProgramme": null
   },
   "1BA205": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, or Mathematics 2a or 2b or 2c",
     "onlyProgramme": null
   },
   "1BA206": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, or Mathematics 2a or 2b or 2c",
     "onlyProgramme": null
   },
   "1BA207": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, or Mathematics 2a or 2b or 2c",
     "onlyProgramme": null
   },
   "1BA209": {
@@ -56,11 +56,11 @@
     "onlyProgramme": true
   },
   "1BG104": {
-    "entryRequirements": null,
+    "entryRequirements": "Alternative 1: Biology 2, Mathematics 4/Mathematics D, as well as 60 credits within the programme and participation in Evolution and Diversity of Organisms 15 credits, Molecular Biology and Genetics 10 credits, and Life and Interactions of Microorganisms 5 credits.Alternative 2: Bioscience as well as another 30 credits within the programme and participation in Evolution and Diversity of Organisms 15 credits, Molecular Biology and Genetics 10 credits, and Life and Interactions of Microorganisms 5 credits.",
     "onlyProgramme": null
   },
   "1BG105": {
-    "entryRequirements": null,
+    "entryRequirements": "The Evolution and Diversity of Organisms, 15 credits, and participation in Molecular Biology and Genetics, 10 credits, Life and Interactions of Microorganisms, 5 credits, Quantitative Biology, 5 credits, and Mathematics and Statistics for Biologists, 10 credits.",
     "onlyProgramme": null
   },
   "1BG106": {
@@ -68,11 +68,11 @@
     "onlyProgramme": null
   },
   "1BG107": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Science Studies level 2, or Mathematics 3b or 3c/Mathematics C, Science Studies 2",
     "onlyProgramme": null
   },
   "1BG108": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "1BG113": {
@@ -124,11 +124,11 @@
     "onlyProgramme": null
   },
   "1BG213": {
-    "entryRequirements": null,
+    "entryRequirements": "75 credits in biology including 7.5 credits in floristics and faunistics. In addition, students must have taken the third-year Bachelor's course Ecology (15 credits) or Limnology (15 credits), with at least 5 credits completed.",
     "onlyProgramme": null
   },
   "1BG214": {
-    "entryRequirements": null,
+    "entryRequirements": "The basic course in biology 80 credits within the Bachelor programme in biology. For admission, a project plan approved by the department is required",
     "onlyProgramme": null
   },
   "1BG217": {
@@ -144,11 +144,11 @@
     "onlyProgramme": null
   },
   "1BG224": {
-    "entryRequirements": null,
+    "entryRequirements": "Biology, 80 credits equivalent basic course in biology within the Bachelor programme in biology.",
     "onlyProgramme": null
   },
   "1BG225": {
-    "entryRequirements": null,
+    "entryRequirements": "Biology, 80 credits equivalent basic course in biology within the Bachelor programme in biology.",
     "onlyProgramme": null
   },
   "1BG227": {
@@ -156,7 +156,7 @@
     "onlyProgramme": null
   },
   "1BG229": {
-    "entryRequirements": null,
+    "entryRequirements": "Biology, 80 credits equivalent basic course in biology within the Bachelor programme in biology and Floristics and faunistics 7.5 credits.",
     "onlyProgramme": null
   },
   "1BG230": {
@@ -208,11 +208,11 @@
     "onlyProgramme": null
   },
   "1BG362": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree, and in addition courses in biology of at least 30 credits at the advanced level, including courses at advanced level that are necessary for the project. Admission requires a project plan accepted by the department.",
     "onlyProgramme": null
   },
   "1BG368": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree including alt 1) 60 credits biology and 30 credits chemistry or 30 credits earth sciences. alt 2) 90 credits biology. For admission, a project plan approved by the department is required",
     "onlyProgramme": null
   },
   "1BG373": {
@@ -264,7 +264,7 @@
     "onlyProgramme": true
   },
   "1DL201": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Information Technology (introductory course), participation in Basic course in mathematics or Basic Algebra.",
     "onlyProgramme": null
   },
   "1DL210": {
@@ -344,7 +344,7 @@
     "onlyProgramme": true
   },
   "1DL490": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits with Linear Algebra I, Single Variable Calculus, Probability and Statistics and a second course in computer programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1DL507": {
@@ -380,19 +380,19 @@
     "onlyProgramme": true
   },
   "1DL705": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of computer science courses at the advanced level (second cycle). A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1DL710": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of computer science courses at the advanced level. A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1DL931": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Sociotechnical Systems Engineering including Algorithms and Data Structures I. Participation in Distributed Information Systems. Participation in Database Design I. Participation in Interface Programming with a User Perspective.",
     "onlyProgramme": null
   },
   "1DT003": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits including participation in Computer Architecture, of which at least 5 credits must be completed, and participation in Imperative and Object-Oriented Methods of Programming. Participation in System Design with a User Perspective or taken in parallel.",
     "onlyProgramme": null
   },
   "1DT004": {
@@ -408,7 +408,7 @@
     "onlyProgramme": true
   },
   "1DT032": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree including 60 credits in computer science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1DT034": {
@@ -424,7 +424,7 @@
     "onlyProgramme": null
   },
   "1DT051": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "1DT052": {
@@ -444,7 +444,7 @@
     "onlyProgramme": true
   },
   "1DT066": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits including 10credits in programming and participation in Algorithms and DataStructures I.",
     "onlyProgramme": null
   },
   "1DT068": {
@@ -460,19 +460,19 @@
     "onlyProgramme": true
   },
   "1DT078": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits where at least 45 credits are in computer science. Approved project plan.",
     "onlyProgramme": null
   },
   "1DT079": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits where at least 45 credits are in computer science. Approved project plan.",
     "onlyProgramme": null
   },
   "1DT081": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits with at least 45 credits in computer science. Approved project plan.",
     "onlyProgramme": null
   },
   "1DT086": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree of at least three full time years duration comprising the equivalent of 180 credits with technology, mathematics, computer science or equivalent as the main field of study, including 30 credits in mathematics and 30 credits in computer science including courses in programming, computer architecture and operating systems.",
     "onlyProgramme": null
   },
   "1DT087": {
@@ -480,7 +480,7 @@
     "onlyProgramme": true
   },
   "1DT088": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits with at least 45 credits in computer science. Approved project plan.",
     "onlyProgramme": null
   },
   "1DT090": {
@@ -488,19 +488,19 @@
     "onlyProgramme": true
   },
   "1DT093": {
-    "entryRequirements": null,
+    "entryRequirements": "15 credits in science/engineering. Participation in Algebra I and Program Design and Data Structures.",
     "onlyProgramme": null
   },
   "1DT096": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits including participation in Computer Architecture, of which at least 5 credits must be completed, and participation in Imperative and Object-Oriented Methods of Programming. The course System Design with a User Perspective, which can be taken in parallel.",
     "onlyProgramme": null
   },
   "1DT100": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree, and in addition at least 30 credits of embedded systems courses at the advanced level. A by the department approved project plan is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1DT101": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree, and in addition at least 30 credits of embedded systems courses at the advanced level. A by the department approved project plan is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1DT104": {
@@ -552,7 +552,7 @@
     "onlyProgramme": true
   },
   "1DT350": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Computer and Information Engineering.",
     "onlyProgramme": null
   },
   "1DT440": {
@@ -572,11 +572,11 @@
     "onlyProgramme": null
   },
   "1EL002": {
-    "entryRequirements": null,
+    "entryRequirements": "Applied Mechanics I/Mechanics II. Several Variable Calculus.",
     "onlyProgramme": null
   },
   "1EL003": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering, of which at least 15 credits in Mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1EL004": {
@@ -596,7 +596,7 @@
     "onlyProgramme": null
   },
   "1EL011": {
-    "entryRequirements": null,
+    "entryRequirements": "Computer Programming I and participation in Probability and Statistics or Statistics for Engineers.",
     "onlyProgramme": null
   },
   "1EL013": {
@@ -636,7 +636,7 @@
     "onlyProgramme": true
   },
   "1EL066": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering including basic course in Electricity and Electric Measurement Technique, for example Electronics, Electrical Measurement Methods or Basics of Electrical Engineering II: Electric Circuit Theory.",
     "onlyProgramme": null
   },
   "1EL104": {
@@ -644,7 +644,7 @@
     "onlyProgramme": true
   },
   "1EL201": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering, of which at least 15 credits in electrical engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1EL202": {
@@ -660,7 +660,7 @@
     "onlyProgramme": true
   },
   "1EL207": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, and, in addition, 20 credits in the main field of study Electrical Engineering at Master's level, including Thematic Studies in All-Electrical Propulsion Systems. Participation in Electric Propulsion Systems or All-Electric Powertrains. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1EL208": {
@@ -684,7 +684,7 @@
     "onlyProgramme": true
   },
   "1EL216": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at Master's level in the main field of all-electric propulsion systems including Thematic Studies in All-Electric Propulsion Systems. Participation in 15 credits of applied courses at Master's level. The applied courses in the programme are Electric Cars, Electric Operation of Heavy Vehicles: Trucks, Buses and Work Machines, Electric Operation of Aircraft, Drones and Helicopters, Rail-Bound Electric Traffic: Trains and Trams, Electric Operation for Ships and Boats. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1EL402": {
@@ -692,11 +692,11 @@
     "onlyProgramme": null
   },
   "1EL781": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1EL843": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering. Power Electronics or Power Electronics I. Participation in High Voltage Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1EL995": {
@@ -708,15 +708,15 @@
     "onlyProgramme": true
   },
   "1EL997": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering, including 15 credits in Electrical Engineering. Participation in Design of Electric Motors. Participation in Electric Vehicles on Land, Water and in the Air, or can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1EL998": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering, of which 15 credits in Electrical Engineering. Participation in one of the courses Electric Propulsion Systems or All-Electric Powertrains. Participation in Design of Electric Motors, or taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1FA002": {
-    "entryRequirements": null,
+    "entryRequirements": "Accepted to the Master's Programme in Physics, tracks physics or astronomy/space physics",
     "onlyProgramme": null
   },
   "1FA006": {
@@ -740,7 +740,7 @@
     "onlyProgramme": null
   },
   "1FA013": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering. Participation Nuclear Power Safety. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology, or as alternative to those two: Reactor Physics with Nuclear Thermohydraulics.",
     "onlyProgramme": null
   },
   "1FA014": {
@@ -780,7 +780,7 @@
     "onlyProgramme": true
   },
   "1FA030": {
-    "entryRequirements": null,
+    "entryRequirements": "Accepted to the mathematical physics specialisation of Master's Programme in Physics",
     "onlyProgramme": null
   },
   "1FA032": {
@@ -812,11 +812,11 @@
     "onlyProgramme": null
   },
   "1FA104": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Single Variable Calculus. Participation in either Linear Algebra and Geometry I, Linear Algebra I, or Algebra and Geometry.",
     "onlyProgramme": null
   },
   "1FA105": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Algebra and Geometry",
     "onlyProgramme": null
   },
   "1FA107": {
@@ -856,7 +856,7 @@
     "onlyProgramme": null
   },
   "1FA160": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits with Statistical Mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1FA163": {
@@ -896,7 +896,7 @@
     "onlyProgramme": null
   },
   "1FA211": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 30 credits in mathematics and 60 credits in physics, including Observational Astrophysics I and Astrophysics I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1FA218": {
@@ -904,7 +904,7 @@
     "onlyProgramme": null
   },
   "1FA219": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "1FA223": {
@@ -952,11 +952,11 @@
     "onlyProgramme": null
   },
   "1FA262": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering including Computer Programming I, Astrophysics I, Quantum Physics and Statistical Mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1FA311": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science and technology within the syllabus of the Master's programme in Energy Systems Engineering, including 5 credits on statistics.",
     "onlyProgramme": null
   },
   "1FA318": {
@@ -964,11 +964,11 @@
     "onlyProgramme": null
   },
   "1FA326": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering. One of the courses Computer Programming I, Computer Programming II or Program Design and Data Structures. One of the courses Electronics I, Digital Technology and Electronics, or Digital Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1FA329": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering. One of the courses Electronics I or Basics of Electrical Engineering I: Components and Circuits. One of the courses Electric Measuring Techniques, Applied Analogue Electronics or Analogue Electronics. One of the courses Electromagnetism I or Basics of Electrical Engineering III: Field Theory. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1FA333": {
@@ -1020,15 +1020,15 @@
     "onlyProgramme": null
   },
   "1FA392": {
-    "entryRequirements": null,
+    "entryRequirements": "240 credits within the Master's programme in Energy Systems Engineering including Independent Project in Energy Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1FA393": {
-    "entryRequirements": null,
+    "entryRequirements": "100 credits within the Master's Programme in Energy Systems Engineering",
     "onlyProgramme": null
   },
   "1FA394": {
-    "entryRequirements": null,
+    "entryRequirements": "130 credits within the Master's Programme in Energy Systems Engineering of which 10 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1FA401": {
@@ -1048,15 +1048,15 @@
     "onlyProgramme": null
   },
   "1FA421": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for Engineers. Introduction to Nuclear Engineering. Participation in Introduction to Nuclear Engineering, or studied simultaneously.",
     "onlyProgramme": null
   },
   "1FA422": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers. Participation in Introduction to Nuclear Engineering, or studied simultaneously.",
     "onlyProgramme": null
   },
   "1FA424": {
-    "entryRequirements": null,
+    "entryRequirements": "110 credits within a bachelor or master program in mechanical or electrical engineering. Participation in Reactor Physics.",
     "onlyProgramme": null
   },
   "1FA426": {
@@ -1064,11 +1064,11 @@
     "onlyProgramme": true
   },
   "1FA427": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering. Participation in Nuclear Power Safety. Participation in Reactorphysics, Nuclear thermohydraulics and steam turbine technology, or alternatively to those two: Reactorphysics with nuclear thermohydraulics.",
     "onlyProgramme": null
   },
   "1FA428": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology.",
     "onlyProgramme": null
   },
   "1FA430": {
@@ -1116,7 +1116,7 @@
     "onlyProgramme": null
   },
   "1FA513": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Algebra and Geometry, Single Variable Calculus, and Computer Programming I.",
     "onlyProgramme": null
   },
   "1FA514": {
@@ -1128,11 +1128,11 @@
     "onlyProgramme": null
   },
   "1FA517": {
-    "entryRequirements": null,
+    "entryRequirements": "Computer Programming I. Geometry and calculus I or Geometry and calculus II. Participation in Geometry and calculus II. Participation in Mechanics KF or Mechanics II.",
     "onlyProgramme": null
   },
   "1FA518": {
-    "entryRequirements": null,
+    "entryRequirements": "Algebra and Vector Geometry. Participation in one of the courses Calculus for Engineers and Single Variable Calculus, or taken in parallel.",
     "onlyProgramme": null
   },
   "1FA521": {
@@ -1140,7 +1140,7 @@
     "onlyProgramme": null
   },
   "1FA522": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering. One of these alternatives: 1) One of the courses Mechanics II, Mechanics KF, Applied Mechanics I. Participation in Electromagnetism I or Electromagnetism, these courses can also be taken in parallel. 2) Basics of Electrical Engineering III: Field Theory.",
     "onlyProgramme": null
   },
   "1FA526": {
@@ -1164,7 +1164,7 @@
     "onlyProgramme": null
   },
   "1FA546": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits (ECTS), of which 75 credits must be in Physics, Chemistry, Materials Science and/or Materials Engineering. 15 credits in Mathematics. English 6. (A Swedish Bachelor's degree fulfills the English language requirement.)",
     "onlyProgramme": null
   },
   "1FA557": {
@@ -1208,7 +1208,7 @@
     "onlyProgramme": null
   },
   "1FA591": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering including Scientific Computing for Data Analysis, Basic Mathematical Statistics, Power Engineering and Technical Thermodynamics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1FA592": {
@@ -1228,11 +1228,11 @@
     "onlyProgramme": true
   },
   "1FA599": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in physics including Thermodynamics and Quantum Physics. 10 credits in modern physics, e.g. Nuclear Physics, Particle Physics, Condensed Matter Physics, Astrophysics I, Astrophysics II. Particle Physics and Condensed Matter Physics may be taken in parallel. Admission requires a project plan accepted by the department.",
     "onlyProgramme": null
   },
   "1FA602": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Mathematics Further level 2, or Physics 2, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1FA603": {
@@ -1240,11 +1240,11 @@
     "onlyProgramme": true
   },
   "1FA605": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits in mathematics and physics. Admission requires a project plan accepted by the department.",
     "onlyProgramme": null
   },
   "1FA606": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Mathematics Further level 2, or Physics 2, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1FA607": {
@@ -1252,7 +1252,7 @@
     "onlyProgramme": true
   },
   "1FA608": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Mathematics Further level 2, or Physics 2, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1FA612": {
@@ -1260,7 +1260,7 @@
     "onlyProgramme": true
   },
   "1FA651": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering with 75 credits in physics, chemistry, materials engineering and/or materials science. 15 credits in mathematics.",
     "onlyProgramme": null
   },
   "1FA652": {
@@ -1336,11 +1336,11 @@
     "onlyProgramme": null
   },
   "1FA690": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and in addition 30 credits at Master's level in material science including Interdisciplinary Project Course in Materials Science I and Interdisciplinary Project Course in Materials Science II. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1FA692": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. 30 credits at Master's level in the main field of study Quantum Technology including one of the courses Quantum Information and Second Generation Quantum Technology. One of the courses Photonics and Quantum Optics I, Optoelectronics and Spin-Based Technology I. Proficiency in English equivalent to the Swedish upper secondary course English 6. Admission requires a project plan accepted by the department.",
     "onlyProgramme": null
   },
   "1FA693": {
@@ -1364,7 +1364,7 @@
     "onlyProgramme": null
   },
   "1GE028": {
-    "entryRequirements": null,
+    "entryRequirements": "Completed first year of studies in the Master programme for sustainable development including Introduction to Sustainable Development 5 hp, Sustainable Development: Worldviews and Visions 5 credits, Natural Resources and Sustainable Development 10 credits and Society and environment 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GE029": {
@@ -1384,7 +1384,7 @@
     "onlyProgramme": null
   },
   "1GE033": {
-    "entryRequirements": null,
+    "entryRequirements": "Completed one year of studies in the Master programme in sustainable development including Introduction to Sustainable Development, Sustainable Development: Worldviews and Visions - a Seminar Series, Our Natural Resources and Society and environment.",
     "onlyProgramme": null
   },
   "1GE034": {
@@ -1488,7 +1488,7 @@
     "onlyProgramme": null
   },
   "1GE301": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to the programme in Land Management. Introduction to Surveying Techniques is recommended.",
     "onlyProgramme": null
   },
   "1GE302": {
@@ -1532,15 +1532,15 @@
     "onlyProgramme": null
   },
   "1GV034": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in Earth Science",
     "onlyProgramme": null
   },
   "1GV038": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in sustainable development at Master's level, including Interdisciplinary Practice (MX0139 SLU) or Energy, Water and Food (1GV059). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV041": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in sustainable development at Master's level, including courses at Master's level that are necessary for the project. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV042": {
@@ -1548,19 +1548,19 @@
     "onlyProgramme": null
   },
   "1GV048": {
-    "entryRequirements": null,
+    "entryRequirements": "Minimum 30 credits (passed) in Earth Science at advanced level and a project plan approved by the department.",
     "onlyProgramme": null
   },
   "1GV049": {
-    "entryRequirements": null,
+    "entryRequirements": "Minimum 30 credits (passed) in Earth Science at advanced level and a project plan approved by the department.",
     "onlyProgramme": null
   },
   "1GV051": {
-    "entryRequirements": null,
+    "entryRequirements": "Minimum 30 credits (passed) in Earth Science at advanced level and a project plan approved by the department.",
     "onlyProgramme": null
   },
   "1GV054": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in mathematics and physics, or 60 credits in earth science and 15 credits in mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV064": {
@@ -1572,11 +1572,11 @@
     "onlyProgramme": null
   },
   "1GV102": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in Earth Science",
     "onlyProgramme": null
   },
   "1GV103": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits in Earth Science",
     "onlyProgramme": null
   },
   "1GV108": {
@@ -1584,15 +1584,15 @@
     "onlyProgramme": null
   },
   "1GV109": {
-    "entryRequirements": null,
+    "entryRequirements": "Knowledge and skills corresponding to 60 credits in earth science",
     "onlyProgramme": null
   },
   "1GV111": {
-    "entryRequirements": null,
+    "entryRequirements": "Knowledge and skills corresponding to 60 credits in earth science",
     "onlyProgramme": null
   },
   "1GV112": {
-    "entryRequirements": null,
+    "entryRequirements": "Knowledge and skills corresponding to 60 credits in earth science",
     "onlyProgramme": null
   },
   "1GV129": {
@@ -1600,27 +1600,27 @@
     "onlyProgramme": true
   },
   "1GV131": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits on advanced level in Earth science",
     "onlyProgramme": null
   },
   "1GV132": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits on advanced level in Earth science",
     "onlyProgramme": null
   },
   "1GV133": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits on advanced level in Earth science",
     "onlyProgramme": null
   },
   "1GV143": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree in engineering, science or social science. Also required is 30 credits at Master's level in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6. The course is only available after completion of for the degree course required courses at Master's level. Admission requires a project plan accepted by the department.",
     "onlyProgramme": null
   },
   "1GV144": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor of Science (180 credits) in engineering, science or social science.",
     "onlyProgramme": null
   },
   "1GV146": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree in engineering, science or social science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV147": {
@@ -1632,11 +1632,11 @@
     "onlyProgramme": null
   },
   "1GV153": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree in science/engineering or social sciences. Wind Power Development and Management, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV154": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree in engineering, science or social science. Wind Power Development and Management, 15 credits, Planning for Wind Energy, 5 credits as well as Wind Energy Resource and Technology, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV156": {
@@ -1660,11 +1660,11 @@
     "onlyProgramme": true
   },
   "1GV162": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree in engineering, science or social science. Also required is 60 credits at Master's level in wind power project management including Scientific Methods in Wind Power Project Management, 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6. The course is only available after completion of for the degree course required courses at Master's level. Admission requires a project plan accepted by the department.",
     "onlyProgramme": null
   },
   "1GV163": {
-    "entryRequirements": null,
+    "entryRequirements": "Minimum 30 credits (passed) in Earth Science at advanced level and a course syllabus approved by the department.",
     "onlyProgramme": null
   },
   "1GV164": {
@@ -1672,11 +1672,11 @@
     "onlyProgramme": null
   },
   "1GV166": {
-    "entryRequirements": null,
+    "entryRequirements": "Introduction to Sustainable Energy Transition, as well as Energy and Systems.",
     "onlyProgramme": null
   },
   "1GV169": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Science Studies level 2, Social Studies level 1b or level 1a2, or Mathematics 3b or 3c/Mathematics C, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "1GV172": {
@@ -1684,11 +1684,11 @@
     "onlyProgramme": null
   },
   "1GV173": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "1GV174": {
-    "entryRequirements": null,
+    "entryRequirements": "Minimum 30 credits (passed) in Earth Science at advanced level and a course syllabus approved by the department.",
     "onlyProgramme": null
   },
   "1GV177": {
@@ -1696,11 +1696,11 @@
     "onlyProgramme": null
   },
   "1GV178": {
-    "entryRequirements": null,
+    "entryRequirements": "40 credits sustainable energy transition including Energy and Systems as well as Energy Production and Usage.",
     "onlyProgramme": null
   },
   "1GV179": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits in sustainable energy transition including Energy and Systems as well as Energy Production and Usage. Participation in Innovations for Energy Transition.",
     "onlyProgramme": null
   },
   "1GV181": {
@@ -1716,7 +1716,7 @@
     "onlyProgramme": true
   },
   "1GV185": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits within the Bachelor's Programme in Construction Engineering",
     "onlyProgramme": null
   },
   "1GV187": {
@@ -1724,11 +1724,11 @@
     "onlyProgramme": true
   },
   "1GV188": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in sustainable energy transition including Social Change, Leadership and Participation as well as Planning and Environmental Justice (environmental science); or 75 credits in human geography.",
     "onlyProgramme": null
   },
   "1GV190": {
-    "entryRequirements": null,
+    "entryRequirements": "90 credits including 60 credits in sustainable energy transition with progressive specialisation including Philosophy of Science and Methodology in an Interdisciplinary Context. Participation in Research Design and Methodology in an Interdisciplinary Context.",
     "onlyProgramme": null
   },
   "1GV191": {
@@ -1740,7 +1740,7 @@
     "onlyProgramme": null
   },
   "1GV193": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and at least 30 credits in sustainable development at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV195": {
@@ -1752,11 +1752,11 @@
     "onlyProgramme": null
   },
   "1GV202": {
-    "entryRequirements": null,
+    "entryRequirements": "Introduction to Sustainable Energy Transition or Sustainable Development, CSR and Life Cycle Analysis.",
     "onlyProgramme": null
   },
   "1GV203": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in sustainable energy transition including Philosophy of Science and Methodology in an Interdisciplinary Context.",
     "onlyProgramme": null
   },
   "1GV204": {
@@ -1804,7 +1804,7 @@
     "onlyProgramme": null
   },
   "1GV220": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in earth science at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV221": {
@@ -1812,11 +1812,11 @@
     "onlyProgramme": null
   },
   "1GV222": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree in engineering, science or social sciences. Wind Power Development and Management, as well as participation in the courses Planning for Wind Energy and Wind Energy Resource and Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV306": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV334": {
@@ -1828,23 +1828,23 @@
     "onlyProgramme": true
   },
   "1GV500": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV501": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV502": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1GV503": {
-    "entryRequirements": null,
+    "entryRequirements": "180 credits of which 10 credits at the second-cycle level in Sustainable Development or Environmental Science.",
     "onlyProgramme": null
   },
   "1GV504": {
-    "entryRequirements": null,
+    "entryRequirements": "180 credits of which 15 credits at the second-cycle level in Sustainable Development or Environmental Science.",
     "onlyProgramme": null
   },
   "1HY013": {
@@ -1860,7 +1860,7 @@
     "onlyProgramme": null
   },
   "1HY042": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1HY043": {
@@ -1880,7 +1880,7 @@
     "onlyProgramme": null
   },
   "1HY125": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits with at least 90 credits in Earth Sciences and 15 credits mathematics, or 90 credits in Physics.",
     "onlyProgramme": null
   },
   "1HY141": {
@@ -1896,7 +1896,7 @@
     "onlyProgramme": true
   },
   "1KB013": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "1KB016": {
@@ -1904,7 +1904,7 @@
     "onlyProgramme": null
   },
   "1KB018": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1KB049": {
@@ -1912,11 +1912,11 @@
     "onlyProgramme": null
   },
   "1KB052": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in chemistry at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1KB053": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in chemistry at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1KB057": {
@@ -1928,11 +1928,11 @@
     "onlyProgramme": null
   },
   "1KB099": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. Participation in 30 credits within the main field of Battery Technology at advanced level, of which 20 credits must have been completed. Introduction to Energy Storage. Rechargeable Batteries. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1KB100": {
-    "entryRequirements": null,
+    "entryRequirements": "Basic Chemistry, 10 credits.",
     "onlyProgramme": null
   },
   "1KB101": {
@@ -1972,11 +1972,11 @@
     "onlyProgramme": true
   },
   "1KB200": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in General Chemistry, Chemical Principles I, or Basic Chemistry, 10 credits, or The Basic Principles of Chemistry, 15 credits.",
     "onlyProgramme": null
   },
   "1KB201": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Introduction to Materials Science, 5 credits.",
     "onlyProgramme": null
   },
   "1KB203": {
@@ -1988,11 +1988,11 @@
     "onlyProgramme": null
   },
   "1KB207": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering including Basic Materials Chemistry and Chemical Thermodynamics.",
     "onlyProgramme": null
   },
   "1KB208": {
-    "entryRequirements": null,
+    "entryRequirements": "10 credits in science/engineering. Participation in General Chemistry or Chemical Principles I or Basic Chemistry, 10 credits, or The Basic Principles of Chemistry, 15 credits.",
     "onlyProgramme": null
   },
   "1KB210": {
@@ -2032,7 +2032,7 @@
     "onlyProgramme": true
   },
   "1KB265": {
-    "entryRequirements": null,
+    "entryRequirements": "Either (1) 120 credits in science/engineering including Solid State Chemistry, Materials Chemistry 10 hp, and Surface Characterisation. Participation in Surface and Materials Analysis or Materials Synthesis, or (2) 120 credits in science/engineering including Materials Chemistry 5 hp, Materials Analysis for Batteries 10 hp, and Synthesis of Battery Materials 5 hp.",
     "onlyProgramme": null
   },
   "1KB268": {
@@ -2060,7 +2060,7 @@
     "onlyProgramme": true
   },
   "1KB282": {
-    "entryRequirements": null,
+    "entryRequirements": "Introduction to Materials Engineering, and Basic Materials Chemistry",
     "onlyProgramme": null
   },
   "1KB284": {
@@ -2072,7 +2072,7 @@
     "onlyProgramme": true
   },
   "1KB286": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering. Participation in Materials and Manufacturing Processes I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1KB288": {
@@ -2084,7 +2084,7 @@
     "onlyProgramme": null
   },
   "1KB300": {
-    "entryRequirements": null,
+    "entryRequirements": "10 credits in mathematics. Participation in one of the courses General Chemistry, Chemical Principles I, Basic Chemistry, or Basic Materials Chemistry, with at least 1 credit completed. Participation in Several Variable Calculus general course or participation in Several Variable Calculus.",
     "onlyProgramme": null
   },
   "1KB301": {
@@ -2100,7 +2100,7 @@
     "onlyProgramme": true
   },
   "1KB308": {
-    "entryRequirements": null,
+    "entryRequirements": "Chemical Principles I or General Chemistry, 5 credits in mathematics and participation in Single Variable Analysis.",
     "onlyProgramme": null
   },
   "1KB309": {
@@ -2124,15 +2124,15 @@
     "onlyProgramme": true
   },
   "1KB408": {
-    "entryRequirements": null,
+    "entryRequirements": "5 credits in science/engineering. Participation in General Chemistry or Chemical Principles I or Basic Chemistry 10 credits, or The Basic Principles of Chemistry 15 credits, participation in Organic Chemistry I 10 credits (can be taken in parallel).",
     "onlyProgramme": null
   },
   "1KB409": {
-    "entryRequirements": null,
+    "entryRequirements": "5 credits in science/engineering. Participation in General Chemistry or Chemical Principles I or Basic Chemistry, 10 credits, or The Basic Principles of Chemistry, 15 credits, participation in Organic Chemistry I, 10 credits.",
     "onlyProgramme": null
   },
   "1KB410": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in General Chemistry or Chemical Principles I or Basic Chemistry, 10 credits or The Basic Principles of Chemistry, 15 credits.",
     "onlyProgramme": null
   },
   "1KB416": {
@@ -2160,7 +2160,7 @@
     "onlyProgramme": null
   },
   "1KB429": {
-    "entryRequirements": null,
+    "entryRequirements": "One of the following is required: (1) 120 credits including Biochemical Technology, 10 credits, or Methods in Biotechnology, 5 credits. 5 credits at Master's level in chemistry/pharmaceutical sciences/molecular biotechnology, or the course Experimental Methods in Structural Biology, 10 credits. Participation in Biologicals I, 7.5 credits; (2) 120 credits including drug development. Participation in Biologicals I, 7.5 credits; (3) Within the Master of Science Programme in Pharmacy, participation in all courses of semesters 1-7 and at least 150 credits in the programme including Pharmaceutical Biotechnology, as well as participation in Biologicals 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1KB433": {
@@ -2232,7 +2232,7 @@
     "onlyProgramme": true
   },
   "1KB559": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits including 40 credits in chemistry and 20 credits in mathematics. Participation in Physical Chemistry I, 10 credits, and Principles of Thermodynamics, 5 credits.",
     "onlyProgramme": null
   },
   "1KB566": {
@@ -2320,7 +2320,7 @@
     "onlyProgramme": null
   },
   "1KB770": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including either Methods in Biotechnology and Cell biology, or Trends in Molecular biology and biotechnology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1KB772": {
@@ -2332,11 +2332,11 @@
     "onlyProgramme": true
   },
   "1MA009": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Basic Algebra.",
     "onlyProgramme": null
   },
   "1MA010": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics D or participation in Bioscience 30 credits.",
     "onlyProgramme": null
   },
   "1MA011": {
@@ -2372,11 +2372,11 @@
     "onlyProgramme": true
   },
   "1MA027": {
-    "entryRequirements": null,
+    "entryRequirements": "5 credits in mathematics of computer science. Participation in Basic Algebra.",
     "onlyProgramme": null
   },
   "1MA031": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in mathematics.",
     "onlyProgramme": null
   },
   "1MA032": {
@@ -2392,7 +2392,7 @@
     "onlyProgramme": true
   },
   "1MA038": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 90 credits in mathematics. Real Analysis participation. Complex Analysis participation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MA053": {
@@ -2400,11 +2400,11 @@
     "onlyProgramme": true
   },
   "1MA056": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 90 credits mathematics of 60 credits mathematics and 60 credits physics. Participation in Algebraic Structures or Symmetry and Group Theory in Physics. Participation in Linear Algebra III or Quantum Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MA071": {
-    "entryRequirements": null,
+    "entryRequirements": "Alternative 1: Biology 2, Mathematics 4/Mathematics D, as well as 60 credits within the programme and participation in Evolution and Diversity of Organisms 15 credits, Molecular Biology and Genetics 10 credits, and Life and Interactions of Microorganisms 5 credits. Alternative 2: Bioscience as well as another 30 credits within the programme and participation in Evolution and Diversity of Organisms 15 credits, Molecular Biology and Genetics 10 credits, and Life and Interactions of Microorganisms 5 credits.",
     "onlyProgramme": null
   },
   "1MA079": {
@@ -2412,19 +2412,19 @@
     "onlyProgramme": true
   },
   "1MA080": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in mathematics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MA081": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and, in addition, at least 15 credits in mathematics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MA090": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1MA098": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, or Mathematics 3b or 3c/Mathematics C",
     "onlyProgramme": null
   },
   "1MA099": {
@@ -2440,19 +2440,19 @@
     "onlyProgramme": true
   },
   "1MA181": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and, in addition, at least 15 credits in financial mathematics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MA182": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in financial mathematics at Master's level. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MA187": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Mathematics Further level 2, or Physics 2, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1MA188": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Geometry and Calculus I.",
     "onlyProgramme": null
   },
   "1MA194": {
@@ -2492,7 +2492,7 @@
     "onlyProgramme": true
   },
   "1MA217": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 90 credits in mathematics. Participation in Real Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MA255": {
@@ -2508,7 +2508,7 @@
     "onlyProgramme": true
   },
   "1MA269": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering including electric circuit theory. 30 credits in mathematics including linear algebra and multivariable calculus.",
     "onlyProgramme": null
   },
   "1MA325": {
@@ -2540,11 +2540,11 @@
     "onlyProgramme": true
   },
   "1MA335": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 90 credits Mathematics. Differential topology participation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MA336": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 90 credits Mathematics. Differential topology participation. Modules and homological algebra participation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MA337": {
@@ -2560,11 +2560,11 @@
     "onlyProgramme": null
   },
   "1MA342": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits and 30 credits in mathematics at advanced level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MA344": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits and 30 credits in mathematics at advanced level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MA346": {
@@ -2576,7 +2576,7 @@
     "onlyProgramme": true
   },
   "1MA349": {
-    "entryRequirements": null,
+    "entryRequirements": "5 credits in mathematics. Participation in Basic Algebra.",
     "onlyProgramme": null
   },
   "1MA350": {
@@ -2588,19 +2588,19 @@
     "onlyProgramme": null
   },
   "1MA352": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D",
     "onlyProgramme": null
   },
   "1MA353": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Linear Algebra for Engineers.",
     "onlyProgramme": null
   },
   "1MA354": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Linear Algebra for Engineers and Calculus I for Engineers.",
     "onlyProgramme": null
   },
   "1MA355": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1MA356": {
@@ -2616,15 +2616,15 @@
     "onlyProgramme": true
   },
   "1MA359": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1MA360": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Basic Algebra or Algebra and Geometry (can be taken in parallel).",
     "onlyProgramme": null
   },
   "1MA361": {
-    "entryRequirements": null,
+    "entryRequirements": "5 credits in mathematics. Participation in Calculus in One Variable. Participation in Linear Algebra I or Algebra and Geometry.",
     "onlyProgramme": null
   },
   "1MA362": {
@@ -2636,23 +2636,23 @@
     "onlyProgramme": true
   },
   "1MB102": {
-    "entryRequirements": null,
+    "entryRequirements": "Introduction to Molecular Biotechnology. 5 credits chemistry.",
     "onlyProgramme": null
   },
   "1MB112": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1MB203": {
-    "entryRequirements": null,
+    "entryRequirements": "Introduction to Molecular Biotechnology. Participation in Cell Biology of which 6 credits should be completed.",
     "onlyProgramme": null
   },
   "1MB204": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits within the Master's Programme in Molecular Biotechnology Engineering of which 15 credits chemistry. Participation in Cell Biology of which 6 credits should be completed.",
     "onlyProgramme": null
   },
   "1MB205": {
-    "entryRequirements": null,
+    "entryRequirements": "Alternative 1: 40 credits in the Engineering programme in molecular biotechnology.Alternative 2: 30 credits biology including Molecular biology and genetics 10 credits together with Microbiology with infection biology 5 credits or Life and Interactions of Microorganisms 5 credits, and 30 credits chemistry.Alternative 3: 35 credits chemistry including 5 credits biochemistry.",
     "onlyProgramme": null
   },
   "1MB311": {
@@ -2660,11 +2660,11 @@
     "onlyProgramme": true
   },
   "1MB332": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Molecular Biotechnology Engineering",
     "onlyProgramme": null
   },
   "1MB335": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits within the Master's Programme in Molecular Biotechnology Engineering including Introductory Organic Chemistry or Organic Chemistry I and Probability and Statistics. Participation in Structural Bioinformatics of which 2 credits should be completed, and participation in Database Design I and Computer Programming II.",
     "onlyProgramme": null
   },
   "1MB381": {
@@ -2672,23 +2672,23 @@
     "onlyProgramme": null
   },
   "1MB405": {
-    "entryRequirements": null,
+    "entryRequirements": "Alternative 1: 120 credits including Project in Laboratory Synthetic Biology I 15 credits or Independent Project in Molecular Biotechnology. Proficiency in English equivalent to the Swedish upper secondary course English 6.Alternative 2: Bachelor's degree of at least 180 credits including 45 credits biology and biochemistry, whereof at least 30 credits in cell and molecular biology/biochemistry. Course in project management is recommended. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MB416": {
-    "entryRequirements": null,
+    "entryRequirements": "Alt 1. 120 credits including Genomics and Bioinformatics, Probability and Statistics, and Computer Programming II. Alt 2. Introduction to Bioinformatics, Introduction to Programming, Scientific Computing and Statistics, and Programming in Python. Alt 3. 30 credits mathematics and 30 credits computer science. Introduction to Bioinformatics, and Script Programming. Alt 4. Participation in Introduction to Bioinformatics, Computer Programming I, Computational Methods for Scientific Applications, and Introduction to Statistics for Life Sciences. Alt 5. 25 credits mathematics or statistics and 30 credits computer science. Participation in Introduction to Bioinformatics, and Introduction to Statistics for Life Sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MB433": {
-    "entryRequirements": null,
+    "entryRequirements": "Alternative 1) 120 credits including Microbiology and Genomics and Bioinformatics and 5 credits at Master's level. Alternative 2) 15 credits within the Master's Programme in Applied Biotechnology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MB438": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree including: Alternative 1) 15 credits mathematics or statistics, and 45 credits biology including 30 credits in molecular biology, cell biology, evolution or genetics; Alternative 2) 25 credits mathematics or statistics and 30 credits computer science.",
     "onlyProgramme": null
   },
   "1MB439": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 25 credits in mathematics or statistics and 30 credits in computer science.",
     "onlyProgramme": null
   },
   "1MB444": {
@@ -2704,11 +2704,11 @@
     "onlyProgramme": true
   },
   "1MB461": {
-    "entryRequirements": null,
+    "entryRequirements": "Alt . 1) 120 credits in the engineering programme in molecular biotechnology. Alt . 2) 5 credits in the Master's (120 credits) programme in bioinformatics and participation in Introduction to Molecular Biology, Genetics and Evolution, or at least 15 credits biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MB462": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits. Participation in Molecular Evolution, and participation in course in programming 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MB464": {
@@ -2716,7 +2716,7 @@
     "onlyProgramme": true
   },
   "1MB465": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree of at least 180 credits including: Alt. 1) 15 credits mathematics or statistics and 45 credits biology of which 30 credits in molecular biology, cell biology, evolution or genetics; Alt. 2) 25 credits mathematics or statistics and 30 credits computer science; Alt. 3) 90 credits biology and/or chemistry (of which 10 credits biochemistry and 10 credits molecular biology) and 15 credits mathematics and/or statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MB466": {
@@ -2740,47 +2740,47 @@
     "onlyProgramme": true
   },
   "1MB720": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree, and in addition at least 30 credits of courses in Bioinformatics at advanced level, including courses at advanced level that are necessary for the project. Admission requires a project plan accepted by the department.",
     "onlyProgramme": null
   },
   "1MB745": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree, and in addition at least 30 credits of courses in Bioinformatics at advanced level, including courses at advanced level that are necessary for the project. Admission requires a project plan accepted by the department.",
     "onlyProgramme": null
   },
   "1MB773": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Molecular Biotechnology Engineering including Independent Project in Molecular Biotechnology.",
     "onlyProgramme": null
   },
   "1MB774": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Molecular Biotechnology Engineering including Independent Project in Molecular Biotechnology.",
     "onlyProgramme": null
   },
   "1MB775": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Molecular Biotechnology Engineering Programme including Independent Project in Molecular Biotechnology.",
     "onlyProgramme": null
   },
   "1MB782": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree and 20 credits in the Master's Programme in Bioinformatics (120 credits), of which 15 credits in the main field of study bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MB783": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree and 20 credits in the Master's Programme in Bioinformatics (120 credits), of which 15 credits in the main field of study bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MB830": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree, and in addition at least 30 credits of courses in Bioinformatics at advanced level, including courses at advanced level that are necessary for the project. Admission requires a project plan accepted by the department.",
     "onlyProgramme": null
   },
   "1MB840": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree and 20 credits in the Master's Programme in Bioinformatics (120 credits), of which 15 credits in the main field of study bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MB841": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree and 20 credits in the Master's Programme in Bioinformatics (120 credits), of which 15 credits in the main field of study bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MB842": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree and 20 credits in the Master's Programme in Bioinformatics (120 credits), of which 15 credits in the main field of study bioinformatics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MB930": {
@@ -2824,7 +2824,7 @@
     "onlyProgramme": true
   },
   "1MD034": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits. Participation in Imperative and Object-Oriented Programming Methodology.",
     "onlyProgramme": null
   },
   "1MD041": {
@@ -2848,7 +2848,7 @@
     "onlyProgramme": true
   },
   "1MD046": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 45 credits in computer science/engineering/information systems including a continuation course in object oriented programming. English 6.",
     "onlyProgramme": null
   },
   "1MD110": {
@@ -2860,11 +2860,11 @@
     "onlyProgramme": true
   },
   "1MD705": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of Data Science courses at second-cycle level. A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MD710": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, and in addition at least 30 credits of Data Science courses at second-cycle level. A project plan approved by the department is necessary. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1ME038": {
@@ -2896,7 +2896,7 @@
     "onlyProgramme": null
   },
   "1ME411": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 60 credits in advanced meteorology courses. Admission requires a project plan accepted by the department.",
     "onlyProgramme": null
   },
   "1ME414": {
@@ -2904,7 +2904,7 @@
     "onlyProgramme": null
   },
   "1ME415": {
-    "entryRequirements": null,
+    "entryRequirements": "Degree Project C in Meteorology 15 credits",
     "onlyProgramme": null
   },
   "1ME416": {
@@ -2956,15 +2956,15 @@
     "onlyProgramme": null
   },
   "1MI077": {
-    "entryRequirements": null,
+    "entryRequirements": "90 credits including Computer Aided Design, Machine Elements and Product Design I.",
     "onlyProgramme": null
   },
   "1MI088": {
-    "entryRequirements": null,
+    "entryRequirements": "Production Management I.",
     "onlyProgramme": null
   },
   "1MI170": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits, including participation in a Solid Mechanics course, with 2 credits passed.",
     "onlyProgramme": null
   },
   "1MP001": {
@@ -3040,7 +3040,7 @@
     "onlyProgramme": true
   },
   "1MS008": {
-    "entryRequirements": null,
+    "entryRequirements": "5 hp in mathematics. Participation in Calculus II for Engineers.",
     "onlyProgramme": null
   },
   "1MS012": {
@@ -3052,7 +3052,7 @@
     "onlyProgramme": true
   },
   "1MS029": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Geometry and Analysis I.",
     "onlyProgramme": null
   },
   "1MS030": {
@@ -3100,7 +3100,7 @@
     "onlyProgramme": true
   },
   "1MS051": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including Probability Theory II and Inference Theory II or equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MS052": {
@@ -3108,7 +3108,7 @@
     "onlyProgramme": true
   },
   "1MS321": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Basic Algebra and participation in Single Variable Calculus.",
     "onlyProgramme": null
   },
   "1MS369": {
@@ -3116,7 +3116,7 @@
     "onlyProgramme": true
   },
   "1MS370": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 90 credits in mathematics. Regression Analysis participation. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MS555": {
@@ -3128,19 +3128,19 @@
     "onlyProgramme": true
   },
   "1MS926": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Probability and Statistics.",
     "onlyProgramme": null
   },
   "1MV550": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MV554": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1MV555": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree of at least 180 credits. Participation in courses Introduction to Sustainable Development, 5 credits, and Sustainable Development: Worldviews and Visions, 5 credits, of which 3 credits must be completed. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1PA002": {
@@ -3172,7 +3172,7 @@
     "onlyProgramme": true
   },
   "1RT155": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits science/engineering including Single Variable Calculus. Participation in courses Linear Algebra II and Transform Methods.",
     "onlyProgramme": null
   },
   "1RT242": {
@@ -3180,11 +3180,11 @@
     "onlyProgramme": true
   },
   "1RT317": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits including Linear Algebra II, Probability and Statistics, Programming, Scientific Computing II and participation in Automatic Control I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1RT485": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering including Single Variable Calculus and Linear Algebra II",
     "onlyProgramme": null
   },
   "1RT490": {
@@ -3232,7 +3232,7 @@
     "onlyProgramme": null
   },
   "1TD047": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and 15 credits in mathematics and/or statistics as well as participation in 5 credits programming (Python recommended). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TD051": {
@@ -3296,7 +3296,7 @@
     "onlyProgramme": true
   },
   "1TD343": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in the courses Computer Programming I, Single Variable Calculus, Multi Variable Calculus and Linear Algebra.",
     "onlyProgramme": null
   },
   "1TD352": {
@@ -3308,7 +3308,7 @@
     "onlyProgramme": true
   },
   "1TD388": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 30 credits in mathematics and Computer Programming II or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TD389": {
@@ -3348,11 +3348,11 @@
     "onlyProgramme": null
   },
   "1TE022": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering, including Engineering materials and participation in Surface engineering and materials selection for function and design. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE024": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits, including Engineering Materials and attended course in Surface Engineering and Materials Selection for Function and Design; or Introduction to Materials Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE028": {
@@ -3384,11 +3384,11 @@
     "onlyProgramme": true
   },
   "1TE044": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including Several Variable Calculus, Transform Methods, Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE051": {
-    "entryRequirements": null,
+    "entryRequirements": "Option 1: 150 credits, including 90 credits in technology and 15 credits at Master's level in Industrial Engineering and Management. Participation in Marketing for the Industrial Company and Innovation Management.Option 2: 150 credits within Master's Programme in Industrial Engineering and Management, including 5 credits at Master's level in Technology. Industrial Engineering and Management II: Organising, Production and Markets.Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE056": {
@@ -3400,7 +3400,7 @@
     "onlyProgramme": null
   },
   "1TE061": {
-    "entryRequirements": null,
+    "entryRequirements": "40 credits in science/engineering",
     "onlyProgramme": null
   },
   "1TE065": {
@@ -3420,7 +3420,7 @@
     "onlyProgramme": true
   },
   "1TE078": {
-    "entryRequirements": null,
+    "entryRequirements": "40 credits in science/engineering including Linear Algebra and Geometry, Thermodynamics, a basic course in Mechanics as well as Mechanics II/Electrical Power Transmission Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE300": {
@@ -3428,7 +3428,7 @@
     "onlyProgramme": true
   },
   "1TE301": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering including Analogue Electronics as well as Basics of Electrical Engineering II: Electric Circuit Theory.",
     "onlyProgramme": null
   },
   "1TE303": {
@@ -3436,11 +3436,11 @@
     "onlyProgramme": null
   },
   "1TE304": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering, including Linear Algebra and Multivariable Calculus.",
     "onlyProgramme": null
   },
   "1TE305": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering including basic courses in electronics, e.g. Electronics I or Electromagnetism II with Electric Circuits, Electrical Engineering II: Electric Circuit Theory.",
     "onlyProgramme": null
   },
   "1TE403": {
@@ -3460,11 +3460,11 @@
     "onlyProgramme": null
   },
   "1TE439": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
     "onlyProgramme": null
   },
   "1TE442": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Introduction to Construction Engineering.",
     "onlyProgramme": null
   },
   "1TE443": {
@@ -3476,47 +3476,47 @@
     "onlyProgramme": true
   },
   "1TE447": {
-    "entryRequirements": null,
+    "entryRequirements": "90 credits within the Bachelor's Programme in Construction Engineering. Participation in Structural Mechanics and Design.",
     "onlyProgramme": null
   },
   "1TE601": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Linear Algebra for Engineers, Calculus I for Engineers and Basic Structural Engineering.",
     "onlyProgramme": null
   },
   "1TE604": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
     "onlyProgramme": null
   },
   "1TE605": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
     "onlyProgramme": null
   },
   "1TE606": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
     "onlyProgramme": null
   },
   "1TE607": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Algebra and Vector Geometry and Calculus for Engineers.",
     "onlyProgramme": null
   },
   "1TE609": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1TE610": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1TE615": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering including 10 credits in electrical engineering. A project plan approved by the department is required for admission. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE616": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering including 10 credits in electrical engineering. A project plan approved by the department is required for admission. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE623": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering",
     "onlyProgramme": null
   },
   "1TE624": {
@@ -3540,7 +3540,7 @@
     "onlyProgramme": null
   },
   "1TE649": {
-    "entryRequirements": null,
+    "entryRequirements": "50 credits within an engineering programme or 50 credits Electric Engineering. 10 credits Mathematic. Participation in Introduction to Scientific Computing (ability to use computer based calculation aids). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE651": {
@@ -3552,7 +3552,7 @@
     "onlyProgramme": true
   },
   "1TE655": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering. Participation in transform methods. Participation in one of the courses Electronics I, Electromagnetism (10 credits), Electromagnetism II with Electric Circuits or participation in both Electromagnetism I and Electric Circuit Analysis or participation in Electromagnetism and Electric Circuits.",
     "onlyProgramme": null
   },
   "1TE660": {
@@ -3572,11 +3572,11 @@
     "onlyProgramme": true
   },
   "1TE664": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Engineering Physics",
     "onlyProgramme": null
   },
   "1TE667": {
-    "entryRequirements": null,
+    "entryRequirements": "Attended courses: Basics of Electrical Engineering I: Components and Circuits as well as Algebra and Vector Geometry/Algebra and Geometry.",
     "onlyProgramme": null
   },
   "1TE668": {
@@ -3588,7 +3588,7 @@
     "onlyProgramme": null
   },
   "1TE670": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering, including basic courses in electrical circuits and electromagnetism.",
     "onlyProgramme": null
   },
   "1TE675": {
@@ -3596,7 +3596,7 @@
     "onlyProgramme": true
   },
   "1TE677": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering of which at least 90 credits in Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE678": {
@@ -3628,7 +3628,7 @@
     "onlyProgramme": true
   },
   "1TE691": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Sociotechnical Systems Engineering. Participation in Energy System Physics, Electromagnetism and Power Engineering.",
     "onlyProgramme": null
   },
   "1TE692": {
@@ -3644,7 +3644,7 @@
     "onlyProgramme": null
   },
   "1TE698": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering/pharmacy. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE700": {
@@ -3660,15 +3660,15 @@
     "onlyProgramme": null
   },
   "1TE704": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
     "onlyProgramme": null
   },
   "1TE705": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
     "onlyProgramme": null
   },
   "1TE706": {
-    "entryRequirements": null,
+    "entryRequirements": "240 credits withing the Master programme in in Electrical Engineering including Independent Project in Electrical Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE708": {
@@ -3680,7 +3680,7 @@
     "onlyProgramme": true
   },
   "1TE720": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in the courses Single Variable Calculus/Calculus in One Variable and Introduction to Scientific Computing/Computer Programming I. Participation in Linear Algebra and Geometry/Algebra and Geometry.",
     "onlyProgramme": null
   },
   "1TE721": {
@@ -3724,7 +3724,7 @@
     "onlyProgramme": null
   },
   "1TE741": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits. Participation in Thin Films Technology I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE742": {
@@ -3744,19 +3744,19 @@
     "onlyProgramme": true
   },
   "1TE747": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering including Signals and Systems as well as Probability and Statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE748": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering including Applied Analogue Electronics (or Analogue Electronics), Electronics I and Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE749": {
-    "entryRequirements": null,
+    "entryRequirements": "130 credits in science/engineering including Electronics I, Electromagnetism II, Applied Analogue Electronics as well as Design of Wireless Interfaces for Embedded Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE750": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Engineering Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE752": {
@@ -3768,11 +3768,11 @@
     "onlyProgramme": true
   },
   "1TE758": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
     "onlyProgramme": null
   },
   "1TE759": {
-    "entryRequirements": null,
+    "entryRequirements": "Algebra and Vector Geometry.",
     "onlyProgramme": null
   },
   "1TE763": {
@@ -3796,11 +3796,11 @@
     "onlyProgramme": true
   },
   "1TE768": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering. Analogue Electronics, Introduction to Scientific Computing, a basic course in statistics, a basic course in automatic control systems. Participation in Graphical Programming in LabVIEW.",
     "onlyProgramme": null
   },
   "1TE769": {
-    "entryRequirements": null,
+    "entryRequirements": "130 credits, which of 90 credits in science/engineering, including 10 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE770": {
@@ -3816,7 +3816,7 @@
     "onlyProgramme": true
   },
   "1TE780": {
-    "entryRequirements": null,
+    "entryRequirements": "105 credits within a Bachelor's Programme in Engineering",
     "onlyProgramme": null
   },
   "1TE786": {
@@ -3824,39 +3824,39 @@
     "onlyProgramme": true
   },
   "1TE788": {
-    "entryRequirements": null,
+    "entryRequirements": "Introduction to Biomedical Engineering.",
     "onlyProgramme": null
   },
   "1TE790": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in course Solid Mechanics",
     "onlyProgramme": null
   },
   "1TE791": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering including Basics of Electrical Engineering II: Electric Circuit Theory. Basics of Electrical Engineering III: Field Theory. Transform Methods should have been attended.",
     "onlyProgramme": null
   },
   "1TE840": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 15 credits at advanced level in renewable electricity production including 5 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity Production, Solar Energy - Technologies and Systems, Generator Design; and 5 credits of the courses Analysis of Power Distribution Grids, Grid Connection of Variable Energy Sources, Analysis of Electric Power Systems, Power Electronics I, Power Electronics II in the Major fields of study Renewable Energy Production at Master's level. Thematic Studies in Renewable Electricity Production (can be taken in paralell). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE841": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity Production, Solar Energy - Technologies and Systems, Generator Design; as well as 10 credits of the courses Analysis of Power Distribution Grids, Grid Connection of Variable Energy Sources, Analysis of Electric Power Systems, Power Electronics I, Power Electronics II in the Major fields of study Renewable Energy Production at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE860": {
-    "entryRequirements": null,
+    "entryRequirements": "240 credits within the Master Programme in Materials Engineering including Independent Project in Materials Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE864": {
-    "entryRequirements": null,
+    "entryRequirements": "240 credits withing the Master programme in Engineering Physics including Independent Project in Engineering Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE865": {
-    "entryRequirements": null,
+    "entryRequirements": "240 credits within the Master Programme in Sociotechnical Systems including one of the courses Degree Project in Systems in Sociotechnical Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TE962": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree of at least 180 credits and in addition 50 credits at second cycle whereof at least 40 credits in Industrial Engineering and Management. Industrialisation. Participation in Qualitative and Quantitative Method, Innovation: Traditions, Theories, Trends and Industrial Development Project.Proficiency in English equivalent to the Swedish upper secondary course English 6.The student should show sufficient depth in the topic in relation to the proposed problem area for the thesis.",
     "onlyProgramme": null
   },
   "1TG236": {
@@ -3868,7 +3868,7 @@
     "onlyProgramme": true
   },
   "1TG277": {
-    "entryRequirements": null,
+    "entryRequirements": "130 credits, of which 65 credits in industrial engineering and management. Participation in Degree Project Feasibility Study in Industrial Engineering and Management and also Sustainable Business Development.",
     "onlyProgramme": null
   },
   "1TG284": {
@@ -3884,7 +3884,7 @@
     "onlyProgramme": true
   },
   "1TG292": {
-    "entryRequirements": null,
+    "entryRequirements": "Project Management and Leadership. Participation in Social Change, Leadership and Participation.",
     "onlyProgramme": null
   },
   "1TG293": {
@@ -3896,7 +3896,7 @@
     "onlyProgramme": true
   },
   "1TG297": {
-    "entryRequirements": null,
+    "entryRequirements": "Option 1: 60 credits in Industrial Engineering and Management. Participation in Sustainable Development, CSR and Life Cycle Analysis, Management Systems and Leadership and also Lean Management.Option 2: 60 credits within the Bachelor's Programme in Sustainable Development in Industrial Engineering. Participation in Sustainable Development, CSR and Life Cycle Analysis, Production Management I and also Process Management and Management Systems.",
     "onlyProgramme": null
   },
   "1TG300": {
@@ -3908,7 +3908,7 @@
     "onlyProgramme": null
   },
   "1TG310": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits. Participation in Solid State Physics I/Solid state physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TG314": {
@@ -3928,11 +3928,11 @@
     "onlyProgramme": true
   },
   "1TG338": {
-    "entryRequirements": null,
+    "entryRequirements": "45 credits in Industrial Engineering and Management. Project Management and Leadership. Participation in Sustainable Development, CSR and Life Cycle Analysis and also Project in Quality Management.",
     "onlyProgramme": null
   },
   "1TG339": {
-    "entryRequirements": null,
+    "entryRequirements": "110 credits, including 60 credits in Industrial Engineering and Management. Participation in Six Sigma and Change Management.",
     "onlyProgramme": null
   },
   "1TG340": {
@@ -3940,19 +3940,19 @@
     "onlyProgramme": true
   },
   "1TM000": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Materials Engineering",
     "onlyProgramme": null
   },
   "1TM001": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Chemical Engineering",
     "onlyProgramme": null
   },
   "1TM002": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering. Attended course in Solid State Physics I or 30 credits in physics/materials engineering/material science and introduction to Materials science (10 credits).English language proficiency that corresponds to English studies at upper secondary (high school) level in English (\"English 6\").",
     "onlyProgramme": null
   },
   "1TM003": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering. Attended course in Solid State Physics I or 30 credits in physics/materials engineering/material science and Introduction to materials science and engineering (10 credits). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TM004": {
@@ -3972,11 +3972,11 @@
     "onlyProgramme": null
   },
   "1TM008": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering. Participation in the courses Quantum Mechanics and Solid State Physics I/F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TM009": {
-    "entryRequirements": null,
+    "entryRequirements": "130 credits in science/engineering. Engineering Materials or Introduction to Materials Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TM012": {
@@ -4000,11 +4000,11 @@
     "onlyProgramme": null
   },
   "1TM035": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering including Mechanics II/Applied Mechanics I/Mechanics II F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TM036": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
     "onlyProgramme": null
   },
   "1TM038": {
@@ -4012,15 +4012,15 @@
     "onlyProgramme": true
   },
   "1TM039": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Introduction to Biomedical Engineering and in Anatomy and Physiology.",
     "onlyProgramme": null
   },
   "1TM043": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering. Applied Mechanics I/Mechanics II F. Analysis in Several Variables. Participation in Mechanics III and in Introduction to Computational Science F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TM044": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Algebra and Geometry and in Mechanics Basic Course. Participation in Several Variable Calculus (can be taken in parallel) .",
     "onlyProgramme": null
   },
   "1TM104": {
@@ -4032,7 +4032,7 @@
     "onlyProgramme": null
   },
   "1TM106": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering including 10 credits advanced courses. Materials Chemistry for Additive Manufacturing or Materials Chemistry 10 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TM109": {
@@ -4084,7 +4084,7 @@
     "onlyProgramme": true
   },
   "1TM143": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering including Materials chemistry.",
     "onlyProgramme": null
   },
   "1TM144": {
@@ -4100,19 +4100,19 @@
     "onlyProgramme": null
   },
   "1TS301": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1TS302": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1TS303": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1TS309": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in Science/Technology. Fluid Mechanics for Energy-Related Applications, Technical Thermodynamics, Introduction to Scientific Computing, System Analysis with Energy Applications, Energy and Life Cycle Assessment. Participation in Industrial Management, Business Studies or Industrial Management and Sustainable Innovation. Proficiency in English equivalent to the Swedish upper secondary course English 6.Urban and Decentralised Energy Systems is recommended.",
     "onlyProgramme": null
   },
   "1TS310": {
@@ -4136,7 +4136,7 @@
     "onlyProgramme": true
   },
   "1TS320": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits within the Master's Programme in Industrial Engineering and Management. Industrial Engineering and Management I: The Functions of the Corporation. Participation in Industrial Engineering and Management II: Organizing, Production and Markets.",
     "onlyProgramme": null
   },
   "1TS321": {
@@ -4156,7 +4156,7 @@
     "onlyProgramme": true
   },
   "1TS329": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in the Bachelor's Programme in Construction Engineering. Construction Materials, Building Design and Drawing, and Project 1: Designing of Detached House.",
     "onlyProgramme": null
   },
   "1TS330": {
@@ -4168,11 +4168,11 @@
     "onlyProgramme": null
   },
   "1TS335": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering including 20 credits in mathematics. Technical Thermodynamics and Introduction to Scientific Computing/Scientific Computing I. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TS336": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits within Programme of Science in Engineering, including Algebra and Vector Geometry. Participation in Statistics for Engineers.",
     "onlyProgramme": null
   },
   "1TS338": {
@@ -4208,11 +4208,11 @@
     "onlyProgramme": true
   },
   "1TS348": {
-    "entryRequirements": null,
+    "entryRequirements": "45 credits in Science/Technology.",
     "onlyProgramme": null
   },
   "1TS350": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Sociotechnical Systems Engineering. Independent project in Sociotechnical Systems Engineering. Participation in Thesis Preparatory In-depth Course. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TS352": {
@@ -4232,7 +4232,7 @@
     "onlyProgramme": null
   },
   "1TS356": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/technology. Technical Thermodynamics, System Analysis with Energy Applications, Computer Programming I, Scientific Computing for data analysis.",
     "onlyProgramme": null
   },
   "1TS357": {
@@ -4252,7 +4252,7 @@
     "onlyProgramme": true
   },
   "1TS362": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Computer Aided Design and Engineering Materials.",
     "onlyProgramme": null
   },
   "1TS363": {
@@ -4264,15 +4264,15 @@
     "onlyProgramme": true
   },
   "1TS365": {
-    "entryRequirements": null,
+    "entryRequirements": "Participation in Introduction to Construction Engineering and also Building Design with Drawing (can be taken in parallel).",
     "onlyProgramme": null
   },
   "1TS366": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
     "onlyProgramme": null
   },
   "1TS367": {
-    "entryRequirements": null,
+    "entryRequirements": "Participaction in Introduction to Construction Engineering, Building Design with Drawing and also Basic Structural Engineering.",
     "onlyProgramme": null
   },
   "1TS368": {
@@ -4280,11 +4280,11 @@
     "onlyProgramme": true
   },
   "1TV000": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 2, or Physics 2, Chemistry 1, Mathematics 4/Mathematics E",
     "onlyProgramme": null
   },
   "1TV009": {
-    "entryRequirements": null,
+    "entryRequirements": "The first two study years within the programme in Aquatic and Environmental Engineering.",
     "onlyProgramme": null
   },
   "1TV015": {
@@ -4292,11 +4292,11 @@
     "onlyProgramme": true
   },
   "1TV017": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the Master's Programme in Environmental and Water Engineering",
     "onlyProgramme": null
   },
   "1TV019": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits within the programme in Environmental and Water Engineering.",
     "onlyProgramme": null
   },
   "1TV021": {
@@ -4304,7 +4304,7 @@
     "onlyProgramme": true
   },
   "1TV022": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in science/engineering. Participation in Air Quality and Applied Meteorology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TV024": {
@@ -4324,19 +4324,19 @@
     "onlyProgramme": true
   },
   "1TV036": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits of which 90 credits in science/engineering including the course Meteorology, Hydrology and Environmental Measurement Techniques, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TV442": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology, Environmental Measurement Techniques 15 credits and Soil Science 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TV443": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits of which 90 credits in science/engineering including Meteorology, Hydrology, Environmental Measurement Techniques, 15 credits, and Soil Science, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TV444": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits and participation in Groundwater 5 credits and Runoff 5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "1TV445": {
@@ -4388,39 +4388,39 @@
     "onlyProgramme": null
   },
   "2EU007": {
-    "entryRequirements": null,
+    "entryRequirements": "Enrolment in the Master Programme in Russian and Eurasian Studies.",
     "onlyProgramme": null
   },
   "2EU008": {
-    "entryRequirements": null,
+    "entryRequirements": "Enrolment in the Master's Programme in Russian and Eurasian Studies.",
     "onlyProgramme": null
   },
   "2EU011": {
-    "entryRequirements": null,
+    "entryRequirements": "5 credits from the Master's Programme in Russian and Eurasian Studies",
     "onlyProgramme": null
   },
   "2EU012": {
-    "entryRequirements": null,
+    "entryRequirements": "5 credits from the Master's Programme in Russian and Eurasian Studies.",
     "onlyProgramme": null
   },
   "2EU013": {
-    "entryRequirements": null,
+    "entryRequirements": "Introduction to Method and Knowledge Production in Russian and Eurasian Studies, 5 credits",
     "onlyProgramme": null
   },
   "2EU014": {
-    "entryRequirements": null,
+    "entryRequirements": "22.5 credits at Master's level within Russian and Eurasian Studies, including 7.5 credits from method courses including Introduction to Method and Knowledge Production in Russian and Eurasian Studies.",
     "onlyProgramme": null
   },
   "2EU015": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and with a main field of study within the Social Sciences or Arts.Language requirements: All applicants need to verify Russian language proficiency that corresponds to level B2 (according to the CEFR scale).",
     "onlyProgramme": null
   },
   "2EU016": {
-    "entryRequirements": null,
+    "entryRequirements": "45 credits within the Master's Programme in Russian and Eurasian Studies.",
     "onlyProgramme": null
   },
   "2EU017": {
-    "entryRequirements": null,
+    "entryRequirements": "10 credits from the course Approaches to the Social Sciences.",
     "onlyProgramme": null
   },
   "2EU018": {
@@ -4448,7 +4448,7 @@
     "onlyProgramme": null
   },
   "2FE030": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in science/engineering.",
     "onlyProgramme": null
   },
   "2FE033": {
@@ -4456,7 +4456,7 @@
     "onlyProgramme": true
   },
   "2FE038": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "2FE159": {
@@ -4492,27 +4492,27 @@
     "onlyProgramme": null
   },
   "2FE968": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English.",
     "onlyProgramme": null
   },
   "2FE970": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English.",
     "onlyProgramme": null
   },
   "2FE971": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English.",
     "onlyProgramme": null
   },
   "2FE972": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English.In addition, to be eligible students are required to have been registered on 30 credits within the Master's Programme in Sustainable Management, of which at least 15 credits must be passed.",
     "onlyProgramme": null
   },
   "2FE981": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English.",
     "onlyProgramme": null
   },
   "2FE991": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English.",
     "onlyProgramme": null
   },
   "2FE995": {
@@ -4600,7 +4600,7 @@
     "onlyProgramme": true
   },
   "2HR118": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "2HR121": {
@@ -4616,19 +4616,19 @@
     "onlyProgramme": null
   },
   "2IS012": {
-    "entryRequirements": null,
+    "entryRequirements": "15 credits in information systems including 7.5 credits in programming.",
     "onlyProgramme": null
   },
   "2IS013": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Social Studies level 1b or level 1a2, English level 2, or Mathematics 3b or 3c/Mathematics C, Social Studies 1b or 1a1+1a2, English 6",
     "onlyProgramme": null
   },
   "2IS014": {
-    "entryRequirements": null,
+    "entryRequirements": "15 credits in information systems, including 7.5 credits in programming.",
     "onlyProgramme": null
   },
   "2IS017": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree of 180 credits. Knowledge of English equivalent to what is required for general entry requirements for Swedish higher education at first-cycle level.",
     "onlyProgramme": null
   },
   "2IS018": {
@@ -4648,7 +4648,7 @@
     "onlyProgramme": null
   },
   "2IS052": {
-    "entryRequirements": null,
+    "entryRequirements": "15 credits in information systems or the equivalent",
     "onlyProgramme": null
   },
   "2IS053": {
@@ -4656,15 +4656,15 @@
     "onlyProgramme": null
   },
   "2IS059": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "2IS060": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "2IS061": {
-    "entryRequirements": null,
+    "entryRequirements": "15 credits in information systems, including 7.5 credits in programming.",
     "onlyProgramme": null
   },
   "2IS062": {
@@ -4676,7 +4676,7 @@
     "onlyProgramme": null
   },
   "2IS065": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in information systems or the equivalent",
     "onlyProgramme": null
   },
   "2IS066": {
@@ -4704,15 +4704,15 @@
     "onlyProgramme": true
   },
   "2IS078": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "2IS079": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "2IS080": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to the Master's Programme in Management, Communication and IT, and 15 credits from semester 1.",
     "onlyProgramme": null
   },
   "2IS081": {
@@ -4720,7 +4720,7 @@
     "onlyProgramme": null
   },
   "2IS082": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree of 180 credits and 60 credits at Master's level, including at least 30 credits in information systems Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "2IS085": {
@@ -4728,11 +4728,11 @@
     "onlyProgramme": null
   },
   "2IS086": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "2IS087": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "2IS088": {
@@ -4828,7 +4828,7 @@
     "onlyProgramme": null
   },
   "2IV061": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "2IV095": {
@@ -4844,11 +4844,11 @@
     "onlyProgramme": null
   },
   "2IV125": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree equivalent to a Swedish degree of at least 180 credits (i.e. three years of full-time studies) containing IT-related course modules comprising the equivalent of at least 30 credits in total. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "2IV126": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and 15 credits in human-computer interaction at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "2IV143": {
@@ -4860,15 +4860,15 @@
     "onlyProgramme": null
   },
   "2IV152": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and 60 credits at Master's level, including at least 30 credits in human-computer interaction and 15 credits in scientific method at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "2IV157": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits in human–computer interaction at advanced level",
     "onlyProgramme": null
   },
   "2IV158": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits in Human–Computer Interaction at advanced level",
     "onlyProgramme": null
   },
   "2IV159": {
@@ -4924,11 +4924,11 @@
     "onlyProgramme": true
   },
   "2IV181": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and 15 credits in human-computer interaction at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "2IV182": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and 15 credits in human-computer interaction at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "2JF068": {
@@ -4952,7 +4952,7 @@
     "onlyProgramme": null
   },
   "2JS905": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits in science/engineering",
     "onlyProgramme": null
   },
   "2JS907": {
@@ -4976,19 +4976,19 @@
     "onlyProgramme": null
   },
   "2KU074": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree equivalent to a Swedish degree of at least 180 credits with at least 90 credits in business studies. Proficiency in English. This is normally attested by means of an internationally recognised test such as TOEFL or IELTS.",
     "onlyProgramme": null
   },
   "2KU091": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits in sustainable energy transition, environmental science, geography, earth science or human geography",
     "onlyProgramme": null
   },
   "2KU103": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2KU111": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "2KU114": {
@@ -5028,15 +5028,15 @@
     "onlyProgramme": null
   },
   "2NE466": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2NE467": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2NE470": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and English 6, Mathematics 3b/3c, Social Studies 1b/1a1+1a2 or English B, Mathematics C, Civics A",
     "onlyProgramme": null
   },
   "2NE474": {
@@ -5048,11 +5048,11 @@
     "onlyProgramme": null
   },
   "2NE811": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university.Also required is 60 credits in economics and 15 credits in statistics (or closely related subject).",
     "onlyProgramme": null
   },
   "2NE814": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university.Also required is 60 credits in economics and 15 credits in statistics (or closely related subject).",
     "onlyProgramme": null
   },
   "2NE831": {
@@ -5076,7 +5076,7 @@
     "onlyProgramme": null
   },
   "2PP401": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2PP402": {
@@ -5284,43 +5284,43 @@
     "onlyProgramme": null
   },
   "2PS098": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2PS099": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2PS101": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2PS103": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2PS104": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required are 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2PS105": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2PS106": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2PS107": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "2PS109": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2PS111": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2PS112": {
@@ -5332,11 +5332,11 @@
     "onlyProgramme": true
   },
   "2PS114": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2PS115": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "2PS116": {
@@ -5344,7 +5344,7 @@
     "onlyProgramme": true
   },
   "2PS117": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6. A grade of E or higher on the courses 2PS101 and 2PS103 (or equivalent courses).",
     "onlyProgramme": null
   },
   "2PS118": {
@@ -5352,7 +5352,7 @@
     "onlyProgramme": true
   },
   "2PS162": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2PS171": {
@@ -5364,11 +5364,11 @@
     "onlyProgramme": true
   },
   "2PS608": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2PS609": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2PS612": {
@@ -5384,7 +5384,7 @@
     "onlyProgramme": null
   },
   "2SA121": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2SA193": {
@@ -5428,7 +5428,7 @@
     "onlyProgramme": null
   },
   "2SC141": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2SC143": {
@@ -5448,15 +5448,15 @@
     "onlyProgramme": true
   },
   "2SC162": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2SC163": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2SC164": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "2SC181": {
@@ -5520,7 +5520,7 @@
     "onlyProgramme": null
   },
   "2ST116": {
-    "entryRequirements": null,
+    "entryRequirements": "52.5 credits in statistics at Master's level",
     "onlyProgramme": null
   },
   "2ST120": {
@@ -5548,11 +5548,11 @@
     "onlyProgramme": null
   },
   "2ST133": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics 3b or 3c/Mathematics C",
     "onlyProgramme": null
   },
   "2ST134": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics 3b or 3c/Mathematics C",
     "onlyProgramme": null
   },
   "2ST135": {
@@ -5584,11 +5584,11 @@
     "onlyProgramme": null
   },
   "3AP001": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "3AP002": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "3AP003": {
@@ -5616,7 +5616,7 @@
     "onlyProgramme": null
   },
   "3AP101": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, or Mathematics 2a or 2b or 2c, Science Studies 2",
     "onlyProgramme": null
   },
   "3AP102": {
@@ -5636,7 +5636,7 @@
     "onlyProgramme": null
   },
   "3BL106": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 1b or level 1c, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 3b or 3c/Mathematics C",
     "onlyProgramme": null
   },
   "3DR041": {
@@ -5648,7 +5648,7 @@
     "onlyProgramme": null
   },
   "3DR115": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a2",
     "onlyProgramme": null
   },
   "3DR221": {
@@ -5692,15 +5692,15 @@
     "onlyProgramme": null
   },
   "3DR406": {
-    "entryRequirements": null,
+    "entryRequirements": "Passed all previous courses in the Master Programme in Medical Nuclide Techniques.",
     "onlyProgramme": null
   },
   "3DR407": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits, and Nuclide Production and Radiochemistry, 9 credits.",
     "onlyProgramme": null
   },
   "3DR408": {
-    "entryRequirements": null,
+    "entryRequirements": "Passed all previous courses in the Master programme Medical Nuclide Techniques.",
     "onlyProgramme": null
   },
   "3DR409": {
@@ -5728,7 +5728,7 @@
     "onlyProgramme": null
   },
   "3FB014": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "3FB028": {
@@ -5744,7 +5744,7 @@
     "onlyProgramme": null
   },
   "3FB034": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including (1) 15 credits in computer science, including 5 credits in programming, and 15 credits in biology, or (2) 15 credits within the Master's Programme in Bioinformatics, including 5 credits in programming. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "3FB037": {
@@ -5752,15 +5752,15 @@
     "onlyProgramme": null
   },
   "3FB059": {
-    "entryRequirements": null,
+    "entryRequirements": "Accepted on the Master's Programme in Biopharmaceuticals FBL2M",
     "onlyProgramme": null
   },
   "3FB101": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, or Mathematics 2a or 2b or 2c, Science Studies 2",
     "onlyProgramme": null
   },
   "3FB102": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, or Mathematics 2a or 2b or 2c, Science Studies 2",
     "onlyProgramme": null
   },
   "3FB103": {
@@ -5836,7 +5836,7 @@
     "onlyProgramme": null
   },
   "3FF041": {
-    "entryRequirements": null,
+    "entryRequirements": "Knowledge corresponding to Molecular techniques and data analysis in precision medicine I (7.5hp 3MG038)",
     "onlyProgramme": null
   },
   "3FF042": {
@@ -5888,7 +5888,7 @@
     "onlyProgramme": null
   },
   "3FF312": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "3FF475": {
@@ -5944,7 +5944,7 @@
     "onlyProgramme": null
   },
   "3FI000": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "3FK034": {
@@ -5952,11 +5952,11 @@
     "onlyProgramme": null
   },
   "3FK036": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "3FK111": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to Master Programme in Forensic Science.",
     "onlyProgramme": null
   },
   "3FK150": {
@@ -5996,7 +5996,7 @@
     "onlyProgramme": null
   },
   "3FK400": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "3FK407": {
@@ -6008,7 +6008,7 @@
     "onlyProgramme": null
   },
   "3FM017": {
-    "entryRequirements": null,
+    "entryRequirements": "Within the program, earlier courses should have been reviewed.",
     "onlyProgramme": null
   },
   "3FM100": {
@@ -6052,7 +6052,7 @@
     "onlyProgramme": null
   },
   "3FS010": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to the Master's Programme in Biopharmaceuticals and participated in prior courses on the program.",
     "onlyProgramme": null
   },
   "3FS075": {
@@ -6084,11 +6084,11 @@
     "onlyProgramme": null
   },
   "3FV329": {
-    "entryRequirements": null,
+    "entryRequirements": "To be admitted to the Specialist Nursing Programme, a licence to practice as a nurse issued from The National Board of Health and Welfare is required as well as a Bachelor´s Degree of 180 credits with at least 90 credits in the main field of study that is Caring Sciences, Caring Sciences with a specialisation in Nursing, Nursing Science, or an equivalent foreign degree. Furthermore, professional activity as a nurse equivalent to a minimum of 12 months full time is required.",
     "onlyProgramme": null
   },
   "3FV340": {
-    "entryRequirements": null,
+    "entryRequirements": "Passed courses including 15 credits in the chosen specialisation.",
     "onlyProgramme": null
   },
   "3FV351": {
@@ -6104,11 +6104,11 @@
     "onlyProgramme": null
   },
   "3FV361": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to and commenced studies in the specialist nursing programme. Passed courses including 15 credits in the chosen specialisation.",
     "onlyProgramme": null
   },
   "3FV366": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits in biomedicine, pharmaceutical bioscience, biochemistry, biology, biotechnology or equivalent education within biology/chemistry or medicine.",
     "onlyProgramme": null
   },
   "3FV371": {
@@ -6128,7 +6128,7 @@
     "onlyProgramme": null
   },
   "3FV379": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Research Design, Methods and Statistics within the Public Health Area, 15 credits",
     "onlyProgramme": null
   },
   "3FV382": {
@@ -6168,19 +6168,19 @@
     "onlyProgramme": null
   },
   "3KK014": {
-    "entryRequirements": null,
+    "entryRequirements": "At least 40 passed credits in subjects equivalent to year 1 in the program, and at most 1 practical test and 2 examinations left. For admission to the course as a separate course, an older biomedical science education or equivalent skills is/are required.",
     "onlyProgramme": null
   },
   "3KK015": {
-    "entryRequirements": null,
+    "entryRequirements": "1: 40 passed credits in subjects equivalent year 1 in the programme and at most 2 examinations left from year 1. Completed clinical courses from semester 3 and 4.2: For admission to the course as a separate course, an older biomedical laboratory science education or equivalent skills is/are required, as well as a completed clinical programme course.Furthermore, passed practical tests are required for or 1 and 2.",
     "onlyProgramme": null
   },
   "3KK016": {
-    "entryRequirements": null,
+    "entryRequirements": "1) At least 90 passed credit points in subjects equivalent to year 1 and 2 in the programme and completed clinical courses from semester 3 and 4, completed clinical practice for Practical Tuition I, as well as at most 2 examinations left of which no more than 1 from year 1.2) For admission to the course as a separate course, an older biomedical laboratory science education or equivalent skills is/are required, as well as a completed clinical programme course.Furthermore, passed practical tests are required for 1 and 2.",
     "onlyProgramme": null
   },
   "3KK019": {
-    "entryRequirements": null,
+    "entryRequirements": "1) Passed courses equivalent to at least 90 credits corresponding to year 1 and 2 in the programme are required and maximum of two examinations left of which no more than one from year 1, as well as having completed the course Practical Tuition II. All practical examinations must be passed. 2) For admission to the course as a separate course, an older biomedical laboratory science education or equivalent skills, is/are required .",
     "onlyProgramme": null
   },
   "3KK020": {
@@ -6204,23 +6204,23 @@
     "onlyProgramme": null
   },
   "3KR035": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to and commenced studies in the specialist nursing programme. Passed courses including 15 credits in the chosen specialisation.",
     "onlyProgramme": null
   },
   "3KR036": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to and commenced studies in the specialist nursing programme. Passed courses including 15 credits in the chosen specialisation.",
     "onlyProgramme": null
   },
   "3KR037": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to and commenced studies in the specialist nursing programme. Passed courses including 15 credits in the chosen specialisation.",
     "onlyProgramme": null
   },
   "3KR038": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to and commenced studies in the specialist nursing programme. Passed courses including 15 credits in the chosen specialisation.",
     "onlyProgramme": null
   },
   "3KR039": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to and commenced studies in the specialist nursing programme. Passed courses including 15 credits in the chosen specialisation.",
     "onlyProgramme": null
   },
   "3KR044": {
@@ -6252,11 +6252,11 @@
     "onlyProgramme": null
   },
   "3KR084": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3KR085": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3KR161": {
@@ -6376,23 +6376,23 @@
     "onlyProgramme": null
   },
   "3MC125": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3MC126": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physics 2, Chemistry 1, Mathematics 3c/Mathematics D",
     "onlyProgramme": null
   },
   "3MC127": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3MC160": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "3MC161": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D",
     "onlyProgramme": null
   },
   "3MC162": {
@@ -6404,15 +6404,15 @@
     "onlyProgramme": null
   },
   "3MC322": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 1b or level 1c, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 3b or 3c/Mathematics C",
     "onlyProgramme": null
   },
   "3MC323": {
-    "entryRequirements": null,
+    "entryRequirements": "1) Passed courses equivalent to at least 90 credits corresponding to year 1 and 2 in the programme are required and a maximum of two examinations left of which no more than one from year 1. 2) For admission to the course as a separate course, an older biomedical science education or equivalent skills is/are required.",
     "onlyProgramme": null
   },
   "3MC324": {
-    "entryRequirements": null,
+    "entryRequirements": "1) For admission, passed courses equivalent to at least 120 credits corresponding to year 1, 2 and 3 of the programme, are required. The courses Practical tuitition I and II must be passed. 2) For admission to the course as a separate course, an older biomedical science education or equivalent skills is / are required.",
     "onlyProgramme": null
   },
   "3MC555": {
@@ -6420,23 +6420,23 @@
     "onlyProgramme": null
   },
   "3MC881": {
-    "entryRequirements": null,
+    "entryRequirements": "180 credits from Bachelor's programmes in biomedicine, pharmacy, biology or equivalent that provides relevant knowledge of cell and molecular biology, chemistry, biochemistry and physiology. Knowledge and experience of laboratory work. English proficiency corresponding to English B in the Swedish school system.",
     "onlyProgramme": null
   },
   "3ME027": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3ME053": {
-    "entryRequirements": null,
+    "entryRequirements": "At least 40 passed credits in subjects equivalent to school year 1 in the programme. At admission to a single subject course, older biomedical science education or equivalent skills are required.",
     "onlyProgramme": null
   },
   "3ME055": {
-    "entryRequirements": null,
+    "entryRequirements": "At least 40 passed credits in subjects equivalent year 1 in the program, and at most 1 practical test and 2 examinations left. For admission to the course as a separate course, an older biomedical science education or equivalent skills is/are required.",
     "onlyProgramme": null
   },
   "3ME056": {
-    "entryRequirements": null,
+    "entryRequirements": "1) 90 passed credits in subjects equivalent to year 1 and 2 in the program, and at most 2 examinations left of which no more than 1 from year 1.2) For admission to the course as a separate course, an older biomedical science education or equivalent skills is/are required.",
     "onlyProgramme": null
   },
   "3ME071": {
@@ -6476,11 +6476,11 @@
     "onlyProgramme": null
   },
   "3ME093": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to and commenced studies in the specialist nursing programme. Passed courses including 15 credits in the chosen specialisation.",
     "onlyProgramme": null
   },
   "3ME094": {
-    "entryRequirements": null,
+    "entryRequirements": "Passed courses including 15 credits in the chosen specialisation.",
     "onlyProgramme": null
   },
   "3ME104": {
@@ -6504,47 +6504,47 @@
     "onlyProgramme": null
   },
   "3MG023": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be in molecular biology, biomedicine, chemistry, biology, or a similar field of study that includes at least 15 credits in chemistry and/or biochemistry as well as 15 credits in cell biology, molecular biology and/or genetics. Also required is knowledge and practical experience of laboratory experiments in life sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "3MG038": {
-    "entryRequirements": null,
+    "entryRequirements": "180 credits, from an internationally recognised university. The degree must be in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, bioinformatics, cell-/molecular biology, genetics, life science, medical sciences, pharmacy, or a similar field of study. Also required are courses in human genetics, cell biology and molecular biology totaling 30 credits including knowledge corresponding to Medical genetics and cancer - molecular mechanisms (3MG022 or 3MG030).",
     "onlyProgramme": null
   },
   "3MG042": {
-    "entryRequirements": null,
+    "entryRequirements": "Entry to academic year 2 requires at least 40 credits completed in subjects equivalent to the first year of the programme, with non-completed course components amounting to a maximum of 1 practical test and 2 examinations. For admission to the course as a freestanding course, older biomedical laboratory science studies or equivalent skills are required.Responsible department: The Department of Immunology, Genetics and Pathology",
     "onlyProgramme": null
   },
   "3MG047": {
-    "entryRequirements": null,
+    "entryRequirements": "180 credits from educational programmes in biology, biomedicine/medicine, biotechnology, pharmacy, medical sciences, or a similar field of study. Also required are courses in cell biology, genetics, biochemistry and molecular biology. Also required is knowledge corresponding to Molecular Techniques and Data Analysis in Precision Medicine I 7.5 credits (3MG038), Introduction to machine learning and artificial intelligence for life sciences 7.5 credits (3FF041), Introduction to programming in R 7.5 credits (2ST133), and Biostatistics 7.5 credits (2ST134).",
     "onlyProgramme": null
   },
   "3MG051": {
-    "entryRequirements": null,
+    "entryRequirements": "1) Passed courses equivalent to at least 90 credits corresponding to year 1 and 2 in the programme are required and a maximum of two examinations left of which no more than one from year 1. 2) For admission to the course as a separate course, an older biomedical science education or equivalent skills is/are required.",
     "onlyProgramme": null
   },
   "3MG055": {
-    "entryRequirements": null,
+    "entryRequirements": "180 credits, from an internationally recognised university. The degree must be in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, bioinformatics, cell-/molecular biology, genetics, life science, medical sciences, pharmacy, or a similar field of study.A minimum of 60 credits of courses within the Master's Programme in Precision Medicine, including equivalent knowledge as the courses:- Molecular Techniques and Data Analysis in Precision Medicine I (3MG038, 7.5 credits)- Introduction to Machine Learning and AI for Life Sciences (3FF041, 7.5 credits)- Molecular Techniques and Data Analysis in Precision Medicine II (3MG047, 15 credits)- Biostatistics (2ST134, 7.5 credits)- Introduction to R (2ST133, 7.5 credits)",
     "onlyProgramme": null
   },
   "3MG056": {
-    "entryRequirements": null,
+    "entryRequirements": "180 credits, from an internationally recognised university. The degree must be in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, bioinformatics, cell-/molecular biology, genetics, life science, medical sciences, pharmacy, or a similar field of study.A minimum of 60 credits of courses within the Master's Programme in Precision Medicine, including equivalent knowledge as the courses:- Molecular Techniques and Data Analysis in Precision Medicine I (3MG038, 7.5 credits)- Introduction to Machine Learning and AI for Life Sciences (3FF041, 7.5 credits)- Molecular Techniques and Data Analysis in Precision Medicine II (3MG047, 15 credits)- Biostatistics (2ST134, 7.5 credits)- Introduction to R (2ST133, 7.5 credits)",
     "onlyProgramme": null
   },
   "3MG065": {
-    "entryRequirements": null,
+    "entryRequirements": "180 credits from an internationally recognised university. The degree must be in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, bioinformatics, cell-/molecular biology, genetics, life science, medical sciences, pharmacy, or a similar field of study.A minimum of 30 credits of courses within the Master's programme in Precision Medicine, including equivalent knowledge as the courses:-Molecular techniques and data analysis in precision medicine I (3MG038)-Introduction to machine learning and AI for life sciences (3FF041)-Molecular techniques and data analysis in precision medicine II (3MG047)-Biostatistics (2ST134, 7,5 hp)-Introduction to R (2ST133, 7,5hp)",
     "onlyProgramme": null
   },
   "3MG103": {
-    "entryRequirements": null,
+    "entryRequirements": "Minimum 37.5 credits of passed courses within the Master's programme in Forensic Science, or corresponding. This corresponds to in-depth knowledge of human genetics, forensic genetics, forensic medicine, analytical chemistry and how testimonies and technical evidence are collected, analysed and evaluated in criminal cases.",
     "onlyProgramme": null
   },
   "3MG106": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The degree must be in biology, biomedicine, molecular biology, chemistry or a similar field, and include organic/inorganic chemistry or analytical chemistry, totalling 15 credits; and courses in genetics or cell/molecular biology, totalling 15 credits.",
     "onlyProgramme": null
   },
   "3MG110": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be in molecular biology, biomedicine, chemistry, biology, or a similar field of study that includes at least 15 credits in chemistry and/or biochemistry as well as 15 credits in cell biology, molecular biology and/or genetics. Also required is knowledge and practical experience of laboratory experiments in life sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "3MG322": {
@@ -6552,7 +6552,7 @@
     "onlyProgramme": null
   },
   "3MG323": {
-    "entryRequirements": null,
+    "entryRequirements": "BSc, Bachelor's degree, equivalent to a Swedish degree of at least 180 credits in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, cell/molecular biology, genetics, life science, medical sciences or a similar field of study giving relevant knowledge in bio-/chemistry, cell- and molecular biology as well as genetics. Knowledge of and experience in laboratory work. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "3MG325": {
@@ -6572,11 +6572,11 @@
     "onlyProgramme": null
   },
   "3MK007": {
-    "entryRequirements": null,
+    "entryRequirements": "Minimum 60 credits of courses within the Master programme in infection biology/equivalent. This corresponds to in-depth knowledge of the biological mechanisms regulating infectious processes, how infections are diagnosed and treated and knowledge of microbial epidemiology and evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "3MK011": {
-    "entryRequirements": null,
+    "entryRequirements": "Minimum 60 credits of courses within the Master's Programme in Infection Biology or the equivalent. This corresponds to in-depth knowledge of the biological mechanisms regulating infectious processes, how infections are diagnosed and treated and knowledge of microbial epidemiology and evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "3MK012": {
@@ -6588,19 +6588,19 @@
     "onlyProgramme": null
   },
   "3MK014": {
-    "entryRequirements": null,
+    "entryRequirements": "Prerequisites equivalent to 40 credits of the courses included in year one of the Master's programme in infection biology or equivalent. This corresponds to in-depth knowledge of the biological mechanisms and processes that regulate infection with bacteria and viruses, the immunological response to infection by these as well as knowledge of relevant research methods in infectious biology research. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "3MK015": {
-    "entryRequirements": null,
+    "entryRequirements": "Prerequisites equivalent to 45 credits of the courses included in year one of the Master's Programme in Infection Biology or equivalent. This corresponds to in-depth knowledge of the biological mechanisms regulating infectious processes, how infections are diagnosed and treated and knowledge of microbial epidemiology and evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "3MR001": {
-    "entryRequirements": null,
+    "entryRequirements": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology, biochemistry and genetics. Prerequisites in the form of completed 45 credits from the courses included in the first year studies of the Master's Programme in Medical Research or equivalent. This includes in-depth knowledge on advanced level in genetics/genomics, as well as mechanisms that regulate biological processes from gene to disease development and methods used to study them.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "3MR010": {
-    "entryRequirements": null,
+    "entryRequirements": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology, biochemistry and genetics. Prerequisites in the form of completed 60 credits from the courses included in the first year studies of the Master's Programme in Medical Research or equivalent. This includes in-depth knowledge on advanced level in genetics/genomics, mechanisms that regulate biological processes from gene to disease development and methods used to study them, as well as basic principles for research work and scientific communication.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "3MR100": {
@@ -6608,11 +6608,11 @@
     "onlyProgramme": null
   },
   "3MR101": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to the Master's Programme in Medical Research.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "3MR102": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to the Master's Programme in Medical Research. Knowledge in English equivalent to that required for basic eligibility to Swedish higher education on basic level.",
     "onlyProgramme": null
   },
   "3MR103": {
@@ -6624,31 +6624,31 @@
     "onlyProgramme": true
   },
   "3MU015": {
-    "entryRequirements": null,
+    "entryRequirements": "Registered in the Master Programme in Biomedicine at Uppsala University.An approved project plan.",
     "onlyProgramme": null
   },
   "3MU130": {
-    "entryRequirements": null,
+    "entryRequirements": "Registered in the Master Programme in Biomedicine at Uppsala University.An approved project plan.",
     "onlyProgramme": null
   },
   "3MU315": {
-    "entryRequirements": null,
+    "entryRequirements": "A minimum of 30 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan.",
     "onlyProgramme": null
   },
   "3MU330": {
-    "entryRequirements": null,
+    "entryRequirements": "A minimum of 30 credits from courses within the Master's programme in Biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan.",
     "onlyProgramme": null
   },
   "3MU430": {
-    "entryRequirements": null,
+    "entryRequirements": "A minimum of 60 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.",
     "onlyProgramme": null
   },
   "3MU445": {
-    "entryRequirements": null,
+    "entryRequirements": "A minimum of 60 credits from courses within the Master's programme in biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.",
     "onlyProgramme": null
   },
   "3MU745": {
-    "entryRequirements": null,
+    "entryRequirements": "A minimum of 60 credits from courses within the Master's programme in Biomedicine including the courses Homeostasis and Endocrine Disorders with a focus on Major Diseases and Advanced Neurobiology.An approved project plan.",
     "onlyProgramme": null
   },
   "3MX009": {
@@ -6676,11 +6676,11 @@
     "onlyProgramme": null
   },
   "3NR731": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to Master's programme at the Faculty of Medicine at Uppsala University.Eligibility requires a project plan involving animal experiments to be approved by the course coordinator.",
     "onlyProgramme": null
   },
   "3OG039": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 1b or level 1c, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 3b or 3c/Mathematics C",
     "onlyProgramme": null
   },
   "3OG040": {
@@ -6720,7 +6720,7 @@
     "onlyProgramme": null
   },
   "3PA020": {
-    "entryRequirements": null,
+    "entryRequirements": "Entry to academic year 2 requires at least 40 credits completed in subjects equivalent to the first year of the programme, with non-completed course components amounting to a maximum of 1 practical test and 2 examinations. For admission to the course as a freestanding course, older biomedical laboratory science studies or equivalent skills are required.Responsible department: Department of Immunology, Genetics and Pathology.",
     "onlyProgramme": null
   },
   "3PA025": {
@@ -6732,7 +6732,7 @@
     "onlyProgramme": null
   },
   "3PE048": {
-    "entryRequirements": null,
+    "entryRequirements": "Admitted to and commenced studies in the specialist nursing programme. Passed courses including 15 credits in the chosen specialisation.",
     "onlyProgramme": null
   },
   "3PE051": {
@@ -6756,23 +6756,23 @@
     "onlyProgramme": null
   },
   "3PE145": {
-    "entryRequirements": null,
+    "entryRequirements": "University degree, minimum of 180 credits, in medicine, nursing, nutrition or another area relevant to global health. All applicants need to verify English language proficiency. This is normally attested by means of an internationally recognised test such as TOEFL or IELTS.",
     "onlyProgramme": null
   },
   "3PE146": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen (180 credits). The main field of study must be in medicine, nursing, nutrition or similar fields relevant for global health. All applicants need to have adequate proficiency in the English lagnuage. This is normally attested by means of an internationally recognised test such as TOEFL or IELTS. Applicants must have passed the course module Introduction to Global Health, 15 credits (from Global Health 1), or equivalent.",
     "onlyProgramme": null
   },
   "3PE147": {
-    "entryRequirements": null,
+    "entryRequirements": "University degree, minimum of 180 credits, in medicine, nursing, nutrition or another area relevant to global health. All applicants need to verify English language proficiency. This is normally attested by means of an internationally recognised test such as TOEFL or IELTS. Applicants must have passed the course Global Health 1, or equivalent.",
     "onlyProgramme": null
   },
   "3PE148": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen (180 credits). The main field of study must be in medicine, nursing, nutrition or similar fields relevant for global health. All applicants need to have adequate proficiency in English language. This is normally attested by means of an internationally recognised test such as TOEFL or IELTS. Applicants must have passed the course Global Health 1, 30 credits and course module Research Methods II, 10 credits (from Global health 2) and course module Research Methods III, 7.5 credits (from Global health 3) or equivalent.",
     "onlyProgramme": null
   },
   "3PE150": {
-    "entryRequirements": null,
+    "entryRequirements": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concerned as part of clinical practice (Internship placement).",
     "onlyProgramme": null
   },
   "3PE151": {
@@ -6788,7 +6788,7 @@
     "onlyProgramme": null
   },
   "3PS058": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3PS315": {
@@ -6816,51 +6816,51 @@
     "onlyProgramme": null
   },
   "3PT012": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3PT013": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3PT023": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3PT025": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3PT031": {
-    "entryRequirements": null,
+    "entryRequirements": "Admission to the course requires a pass in the courses Physiotherapy I (3PT013) and Psychology I (2PS608).",
     "onlyProgramme": null
   },
   "3PT032": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3PT041": {
-    "entryRequirements": null,
+    "entryRequirements": "Admission to the course requires that all courses of Term 1 and 2 as well as the clinical placement part (VFU) of the course Physiotherapy III have been approved.",
     "onlyProgramme": null
   },
   "3PT042": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3PT043": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3PT051": {
-    "entryRequirements": null,
+    "entryRequirements": "Access to the course requires that all courses in semester 1 and 2, as well as the course Physiotherapy III (3PT031) are passed.",
     "onlyProgramme": null
   },
   "3PT052": {
-    "entryRequirements": null,
+    "entryRequirements": "Admission to the course requires:* a pass in all courses of semesters 1-2* a pass in the course Physiotherapy III, 3PT031* passed clinical placement in the course Physiotherapy IVa, 3PT041",
     "onlyProgramme": null
   },
   "3PT061": {
-    "entryRequirements": null,
+    "entryRequirements": "Admission to the course requires completion of the course Scientific methodology III and an assessed project plan.",
     "onlyProgramme": null
   },
   "3PT062": {
@@ -6868,11 +6868,11 @@
     "onlyProgramme": null
   },
   "3SG069": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Physical Education and Health level 1, Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Physical Education and Health 1, Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3SJ160": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Science Studies 2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "3SJ260": {
@@ -6904,19 +6904,19 @@
     "onlyProgramme": null
   },
   "4PE010": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
     "onlyProgramme": null
   },
   "4PE011": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
     "onlyProgramme": null
   },
   "4PE012": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
     "onlyProgramme": null
   },
   "4PE013": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
     "onlyProgramme": null
   },
   "4PE024": {
@@ -6948,7 +6948,7 @@
     "onlyProgramme": null
   },
   "4PE073": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "4PE089": {
@@ -7048,31 +7048,31 @@
     "onlyProgramme": null
   },
   "4PE182": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
     "onlyProgramme": null
   },
   "4PE183": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
     "onlyProgramme": null
   },
   "4PE185": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, or Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "4PE186": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, or Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "4PE187": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, or Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "4PE188": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, or Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "4PE193": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements",
     "onlyProgramme": null
   },
   "4PE196": {
@@ -7132,11 +7132,11 @@
     "onlyProgramme": null
   },
   "4PE217": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
     "onlyProgramme": null
   },
   "4PE218": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or Mathematics 2a or 2b or 2c, Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
     "onlyProgramme": null
   },
   "4PE219": {
@@ -7276,11 +7276,11 @@
     "onlyProgramme": null
   },
   "4PE297": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "4PE298": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
     "onlyProgramme": null
   },
   "4PE299": {
@@ -7304,11 +7304,11 @@
     "onlyProgramme": null
   },
   "4PE306": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in Swedish and English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "4PE307": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in Swedish and Engligsh equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "4PE308": {
@@ -7324,15 +7324,15 @@
     "onlyProgramme": null
   },
   "5AR025": {
-    "entryRequirements": null,
+    "entryRequirements": "Archaeology A and Archaeology B",
     "onlyProgramme": null
   },
   "5AR026": {
-    "entryRequirements": null,
+    "entryRequirements": "Archaeology A and Archaeology B",
     "onlyProgramme": null
   },
   "5AR027": {
-    "entryRequirements": null,
+    "entryRequirements": "Archaeology A and Archaeology B",
     "onlyProgramme": null
   },
   "5AR260": {
@@ -7368,23 +7368,23 @@
     "onlyProgramme": null
   },
   "5AR810": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within the Faculty of Arts, the Faculty of Social Sciences or the Faculty of Science and Technology.",
     "onlyProgramme": null
   },
   "5AR815": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within the Faculty of Arts, the Faculty of Social Sciences or the Faculty of Science and Technology.",
     "onlyProgramme": null
   },
   "5CM012": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5CM013": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree including a main field of study within the humanities or social sciences and 30 credits of course work successfully completed within the Master's programme in Holocaust and Genocide Studies.",
     "onlyProgramme": null
   },
   "5CM019": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5EE105": {
@@ -7432,7 +7432,7 @@
     "onlyProgramme": null
   },
   "5HG009": {
-    "entryRequirements": null,
+    "entryRequirements": "120 credits including 90 credits in a subject in the humanities or the social sciences. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5HG015": {
@@ -7448,7 +7448,7 @@
     "onlyProgramme": null
   },
   "5HG018": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English.",
     "onlyProgramme": null
   },
   "5HG019": {
@@ -7468,7 +7468,7 @@
     "onlyProgramme": null
   },
   "5LH150": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
     "onlyProgramme": null
   },
   "5LH650": {
@@ -7496,7 +7496,7 @@
     "onlyProgramme": null
   },
   "5LN321": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and English level 2, or English 6",
     "onlyProgramme": null
   },
   "5LN323": {
@@ -7508,11 +7508,11 @@
     "onlyProgramme": true
   },
   "5LN445": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
     "onlyProgramme": null
   },
   "5LN708": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject, 7.5 credits in computer programming and 7.5 credits in logic/discrete mathematics. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
     "onlyProgramme": null
   },
   "5LN709": {
@@ -7520,7 +7520,7 @@
     "onlyProgramme": null
   },
   "5LN710": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject, 15 credits in computer programming and 7.5 credits in logic/discrete mathematics. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
     "onlyProgramme": null
   },
   "5LN712": {
@@ -7528,15 +7528,15 @@
     "onlyProgramme": null
   },
   "5LN713": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject, 7.5 credits in computer programming and 7.5 credits in logic/discrete mathematics. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
     "onlyProgramme": null
   },
   "5LN714": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits second-cycle courses in language technology, including the courses Natural Language Processing and Machine Learning in Natural Language Processing.",
     "onlyProgramme": null
   },
   "5LN715": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree and (1) 60 credits in language technology/computational linguistics, or (2) 60 credits in computer science, or (3) 60 credits in a language subject, 7.5 credits in computer programming and 7.5 credits in logic/discrete mathematics. Knowledge of English equivalent to what is required for entry to Swedish first-cycle courses and study programmes.",
     "onlyProgramme": null
   },
   "5LV211": {
@@ -7556,31 +7556,31 @@
     "onlyProgramme": null
   },
   "5RY066": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor in social sciences or language sciences.",
     "onlyProgramme": null
   },
   "5RY067": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor in social sciences or language sciences.",
     "onlyProgramme": null
   },
   "5RY068": {
-    "entryRequirements": null,
+    "entryRequirements": "Russian: An Introductory Course, 15hp.",
     "onlyProgramme": null
   },
   "5RY069": {
-    "entryRequirements": null,
+    "entryRequirements": "Russian in professional contexts: introduction, 15 credits.",
     "onlyProgramme": null
   },
   "5SD034": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in game design with progressive specialisation and 2 credits from Game Design 5: Theory and Methods.",
     "onlyProgramme": null
   },
   "5SD064": {
-    "entryRequirements": null,
+    "entryRequirements": "7.5 credit in game design",
     "onlyProgramme": null
   },
   "5SD065": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
     "onlyProgramme": null
   },
   "5SD066": {
@@ -7588,15 +7588,15 @@
     "onlyProgramme": true
   },
   "5SD069": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in game design with progressive specialisation",
     "onlyProgramme": null
   },
   "5SD071": {
-    "entryRequirements": null,
+    "entryRequirements": "Game Design 1: Introduction, 15 credits",
     "onlyProgramme": null
   },
   "5SD075": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits, including 45 credits in game design and 15 credits in either game design, computer science, expression in convergent media or industrial engineering and management.",
     "onlyProgramme": null
   },
   "5SD080": {
@@ -7604,27 +7604,27 @@
     "onlyProgramme": null
   },
   "5SD090": {
-    "entryRequirements": null,
+    "entryRequirements": "Game Design 2 - Game Development, 7.5 credits",
     "onlyProgramme": null
   },
   "5SD300": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree and knowledge of English corresponding to English 6.",
     "onlyProgramme": null
   },
   "5SD303": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD305": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD306": {
-    "entryRequirements": null,
+    "entryRequirements": "60 credits in game design at Master's level, including Advanced Game Design Research Methods, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD307": {
-    "entryRequirements": null,
+    "entryRequirements": "30 credits in game design at Master's level, including Introduction to Game Design Research, 15 credits, or Introduction to Transformative Game Design, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD308": {
@@ -7632,59 +7632,59 @@
     "onlyProgramme": null
   },
   "5SD311": {
-    "entryRequirements": null,
+    "entryRequirements": "Bachelor's degree and knowledge of English corresponding to English 6.",
     "onlyProgramme": null
   },
   "5SD312": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD314": {
-    "entryRequirements": null,
+    "entryRequirements": "15 credits at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD319": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and Introduction to Transformative Game Design, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD320": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and Introduction to Transformative Game Design, 7.5 credits, and Transformative Game Design 1, 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD321": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD322": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, and at least 3.5 credits from Introduction to Transformative Game Design. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD324": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including 30 credits in game design or game development. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD325": {
-    "entryRequirements": null,
+    "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including 30 credits in game design or game development. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
     "onlyProgramme": null
   },
   "5SD326": {
-    "entryRequirements": null,
+    "entryRequirements": "Introduction to Experimental Game Design, 15 credits (5SD324)",
     "onlyProgramme": null
   },
   "5SD327": {
-    "entryRequirements": null,
+    "entryRequirements": "Introduction to Experimental Game Design, 15 credits (5SD324); Methods for Advanced and Reflective Practice, 15 credits (5SD325) and 7.5 credits from Game Development and Communication, 15 credits (5SD326).",
     "onlyProgramme": null
   },
   "5SD509": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
     "onlyProgramme": null
   },
   "5SD510": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
     "onlyProgramme": null
   },
   "5SD511": {
-    "entryRequirements": null,
+    "entryRequirements": "Art in Games and Games as an Art Form, 5 credits",
     "onlyProgramme": null
   },
   "5SD515": {
@@ -7696,7 +7696,7 @@
     "onlyProgramme": true
   },
   "5SD517": {
-    "entryRequirements": null,
+    "entryRequirements": "Expression, 3D Modelling and Texturing for Games, 7.5 credits",
     "onlyProgramme": null
   },
   "5SD533": {
@@ -7708,15 +7708,15 @@
     "onlyProgramme": true
   },
   "5SD551": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
     "onlyProgramme": null
   },
   "5SD816": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics Further level 1c, English level 2 or Mathematics 3c/Mathematics D, English 6",
     "onlyProgramme": null
   },
   "5SD817": {
-    "entryRequirements": null,
+    "entryRequirements": "Module 1, 3.5 credits from the course Introduction to C++ for Game Developers, 7.5 credits.",
     "onlyProgramme": null
   },
   "5SD820": {
@@ -7728,15 +7728,15 @@
     "onlyProgramme": true
   },
   "5SD822": {
-    "entryRequirements": null,
+    "entryRequirements": "Scalable Game Worlds in C++, 7.5 credits (5SD820)",
     "onlyProgramme": null
   },
   "5SD901": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics Further level 1c, English level 2 or Mathematics 3c/Mathematics D, English 6",
     "onlyProgramme": null
   },
   "5SD951": {
-    "entryRequirements": null,
+    "entryRequirements": "At least 3,0 credits from Agile Game Development and Group Dynamics",
     "onlyProgramme": null
   },
   "5SD952": {
@@ -7744,11 +7744,11 @@
     "onlyProgramme": true
   },
   "5SD953": {
-    "entryRequirements": null,
+    "entryRequirements": "Project Management with Agile Methods, 7.5 credits",
     "onlyProgramme": null
   },
   "5SD954": {
-    "entryRequirements": null,
+    "entryRequirements": "General entry requirements and Mathematics level 2a or level 2b or level 2c, English level 2, or Mathematics 2a or 2b or 2c, English 6",
     "onlyProgramme": null
   },
   "5SV228": {

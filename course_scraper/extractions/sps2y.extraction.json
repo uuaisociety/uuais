@@ -1,7 +1,15 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:39:07.832679+00:00",
-  "edges": [],
+  "generatedAt": "2026-09-06T06:35:25.998182+00:00",
+  "edges": [
+    {
+      "code": "2PP401",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Social Studies level 1b or level 1a2, or Mathematics 2a or 2b or 2c, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
   "rules": [
     {
       "note": {
@@ -26,7 +34,7 @@
           "2PP433",
           "2PP434"
         ],
-        "labelEn": "One of these courses must be chosen.",
+        "labelEn": "One of the listed courses must be chosen.",
         "cohortBefore": null
       }
     },
@@ -42,7 +50,7 @@
         "courseCodes": [
           "2PP429"
         ],
-        "labelEn": "External elective courses may be credited with the programme director's approval, and 7.5 credits of the Master's Thesis (30 credits) are taken this term.",
+        "labelEn": "External elective courses may be credited within the programme at the programme director's discretion, and this term covers 7.5 credits of the Master's thesis (30 credits).",
         "cohortBefore": null
       }
     },
@@ -58,7 +66,7 @@
         "courseCodes": [
           "2PP429"
         ],
-        "labelEn": "The Master's Thesis (30 hp) and Psychotherapeutic Deepening III (7.5 hp) are obligatory courses.",
+        "labelEn": "The Master's thesis (30 hp) and the psychotherapy specialisation course (7.5 hp) are mandatory.",
         "cohortBefore": null
       }
     }

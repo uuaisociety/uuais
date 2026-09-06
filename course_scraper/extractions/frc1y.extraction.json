@@ -1,7 +1,43 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:20:08.495403+00:00",
-  "edges": [],
+  "generatedAt": "2026-09-06T06:20:44.250995+00:00",
+  "edges": [
+    {
+      "code": "3AP101",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, or Mathematics 2a or 2b or 2c, Science Studies 2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FB101",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, or Mathematics 2a or 2b or 2c, Science Studies 2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FB102",
+      "text": "General entry requirements and Mathematics level 2a or level 2b or level 2c, Science Studies level 2, or Mathematics 2a or 2b or 2c, Science Studies 2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FF312",
+      "text": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3FK400",
+      "text": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
   "rules": [
     {
       "note": {
@@ -13,7 +49,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "A general overview of the first year, covering the profession introduction, basic courses in cell biology and pharmaceutical chemistry, and organ function in relation to drug action.",
+        "labelEn": "A descriptive heading summarizing the content of the first year of study.",
         "cohortBefore": null
       }
     },
@@ -27,7 +63,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "A heading for Year 2 describing that its courses cover drug effects, drug metabolism, dosage forms, and drug use at societal and individual levels.",
+        "labelEn": "Year 2 courses cover drug effects, drug metabolism in the body, dosage forms, and drug use at societal and individual levels.",
         "cohortBefore": null
       }
     },
@@ -41,7 +77,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Describes Year 3's focus on the prescriptionist professional role, plus a 5-week specialization, a 10-week project, and a final 10-week pharmacy placement.",
+        "labelEn": "A general description of Year 3, covering courses on over-the-counter advice and healthcare legislation, a 5-week specialization period, a 10-week project, and a final 10-week pharmacy placement.",
         "cohortBefore": null
       }
     },
@@ -55,7 +91,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Specialization course worth 7.5 credits",
+        "labelEn": "A specialization course of 7.5 credits.",
         "cohortBefore": null
       }
     },
@@ -69,7 +105,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "This is a heading for an in-depth/specialisation project worth 15 credits, not matching any rostered course.",
+        "labelEn": "A heading for the 15-credit advanced project course.",
         "cohortBefore": null
       }
     }

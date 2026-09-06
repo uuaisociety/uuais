@@ -45,7 +45,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for Engineers. Introduction to Nuclear Engineering. Participation in Introduction to Nuclear Engineering, or studied simultaneously."
     },
     {
       "code": "1FA422",
@@ -64,7 +64,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in physics/engineering. Calculus for Engineers/Single Variable Calculus/Calculus II for engineers. Participation in Introduction to Nuclear Engineering, or studied simultaneously."
     },
     {
       "code": "1EL008",
@@ -102,7 +102,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "110 credits within a bachelor or master program in mechanical or electrical engineering. Participation in Reactor Physics."
     },
     {
       "code": "1FA426",
@@ -140,7 +140,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering. Participation Nuclear Power Safety. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology, or as alternative to those two: Reactor Physics with Nuclear Thermohydraulics."
     },
     {
       "code": "1FA427",
@@ -159,7 +159,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering. Participation in Nuclear Power Safety. Participation in Reactorphysics, Nuclear thermohydraulics and steam turbine technology, or alternatively to those two: Reactorphysics with nuclear thermohydraulics."
     },
     {
       "code": "1FA428",
@@ -178,7 +178,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in science/engineering. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology."
     },
     {
       "code": "1FA499",
@@ -201,7 +201,7 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "NOTE",
+      "type": "MUTUALLY_EXCLUSIVE",
       "courseCodes": [
         "1FA014",
         "1EL008"
@@ -209,7 +209,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "1FA014 kan ersättas i examen av 1FA400, men båda kurserna kan inte samtidigt ingå i examen.1EL008 kan ej ingå i examen tillsammans med 1TE655.",
-      "labelEn": "1FA014 may be replaced in the degree by 1FA400 (but not both counted), and 1EL008 cannot be included in the degree together with 1TE655.",
+      "labelEn": "1FA014 may be replaced by 1FA400 but not both may count toward the degree, and 1EL008 cannot count together with 1TE655.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -224,7 +224,71 @@
   ],
   "planFormat": "ladok",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "1FA014",
+      "to": "1EL008",
+      "type": "EXCLUSIVE",
+      "source": "llm",
+      "rationale": "1FA014 kan ersättas i examen av 1FA400, men båda kurserna kan inte samtidigt ingå i examen.1EL008 kan ej ingå i examen tillsammans med 1TE655."
+    },
+    {
+      "from": "1FA421",
+      "to": "1FA013",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation Nuclear Power Safety. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology, or as alternative to those two: Reactor Physics with Nuclear Thermohydraulics."
+    },
+    {
+      "from": "1FA422",
+      "to": "1FA013",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation Nuclear Power Safety. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology, or as alternative to those two: Reactor Physics with Nuclear Thermohydraulics."
+    },
+    {
+      "from": "1FA426",
+      "to": "1FA013",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation Nuclear Power Safety. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology, or as alternative to those two: Reactor Physics with Nuclear Thermohydraulics."
+    },
+    {
+      "from": "1FA421",
+      "to": "1FA427",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in Nuclear Power Safety. Participation in Reactorphysics, Nuclear thermohydraulics and steam turbine technology, or alternatively to those two: Reactorphysics with nuclear thermohydraulics."
+    },
+    {
+      "from": "1FA422",
+      "to": "1FA427",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in Nuclear Power Safety. Participation in Reactorphysics, Nuclear thermohydraulics and steam turbine technology, or alternatively to those two: Reactorphysics with nuclear thermohydraulics."
+    },
+    {
+      "from": "1FA426",
+      "to": "1FA427",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in Nuclear Power Safety. Participation in Reactorphysics, Nuclear thermohydraulics and steam turbine technology, or alternatively to those two: Reactorphysics with nuclear thermohydraulics."
+    },
+    {
+      "from": "1FA421",
+      "to": "1FA428",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology."
+    },
+    {
+      "from": "1FA422",
+      "to": "1FA428",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in science/engineering. Participation in Reactor Physics and Nuclear Thermal Hydraulics and Steam Turbine Technology."
+    }
+  ],
   "revisions": [
     {
       "id": "69742628-0a52-4a94-8f03-6c80558bae2d",

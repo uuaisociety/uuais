@@ -64,7 +64,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within the Faculty of Arts, the Faculty of Social Sciences or the Faculty of Science and Technology."
     },
     {
       "code": "5AR815",
@@ -83,7 +83,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within the Faculty of Arts, the Faculty of Social Sciences or the Faculty of Science and Technology."
     },
     {
       "code": "5AR810",
@@ -102,7 +102,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within the Faculty of Arts, the Faculty of Social Sciences or the Faculty of Science and Technology."
     },
     {
       "code": "5AR815",
@@ -121,7 +121,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within the Faculty of Arts, the Faculty of Social Sciences or the Faculty of Science and Technology."
     },
     {
       "code": "5AR810",
@@ -140,7 +140,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within the Faculty of Arts, the Faculty of Social Sciences or the Faculty of Science and Technology."
     },
     {
       "code": "5AR815",
@@ -159,7 +159,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within the Faculty of Arts, the Faculty of Social Sciences or the Faculty of Science and Technology."
     }
   ],
   "rules": [
@@ -170,7 +170,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "LU0085 Forskningsprocessens kontext och process I: teorier och metoder. (SLU - Sveriges Lantbruksuniversitet)",
-      "labelEn": "This note names an external SLU course, LU0085, which is not on the programme roster.",
+      "labelEn": "The course LU0085 'Research Process Context and Process I: Theories and Methods' is offered by SLU (Swedish University of Agricultural Sciences).",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -181,7 +181,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Valbar kurs om 7,5 hp.",
-      "labelEn": "The course is an elective worth 7.5 credits.",
+      "labelEn": "An elective course worth 7.5 credits.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -192,7 +192,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
-      "labelEn": "Elective courses may be taken within or outside the department, with options for internships and individual in-depth or method courses.",
+      "labelEn": "Elective courses within or outside the department, with opportunities for internships and individual specialisation and method courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -203,7 +203,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
-      "labelEn": "Elective courses may be taken within or outside the department, including possible internships and individual specialization or method courses.",
+      "labelEn": "Elective courses may be taken within or outside the department, including internships and individual in-depth or method courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -214,7 +214,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
-      "labelEn": "Elective courses may be taken within or outside the department, including internships and individual in-depth or method courses.",
+      "labelEn": "Elective courses may be taken within or outside the department, with opportunities for internships and individual advanced or method courses.",
       "cohortBefore": null,
       "source": "llm"
     }

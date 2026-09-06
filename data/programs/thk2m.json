@@ -26,7 +26,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1GV501",
@@ -45,7 +45,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1GV502",
@@ -64,7 +64,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree of at least 180 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1GV503",
@@ -83,7 +83,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "180 credits of which 10 credits at the second-cycle level in Sustainable Development or Environmental Science."
     },
     {
       "code": "1GV504",
@@ -102,7 +102,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "180 credits of which 15 credits at the second-cycle level in Sustainable Development or Environmental Science."
     }
   ],
   "rules": [
@@ -138,22 +138,26 @@
     {
       "id": "rule-2",
       "type": "NOTE",
-      "courseCodes": [],
+      "courseCodes": [
+        "1GV501"
+      ],
       "semester": 3,
       "trackId": null,
       "textSv": "Antingen: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Examensarbete i Hållbar utveckling 20 av 45 hpEller: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Praktik i hållbar utveckling 15 hp Examensarbete i hållbar utveckling 5 av 30 hp.",
-      "labelEn": null,
+      "labelEn": "Two alternative tracks are offered: the interdisciplinary methods course with a 20 hp thesis portion, or the methods course with a 15 hp internship and a 5 hp thesis portion.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-3",
       "type": "NOTE",
-      "courseCodes": [],
+      "courseCodes": [
+        "1GV501"
+      ],
       "semester": 4,
       "trackId": null,
       "textSv": "Workshop serie 2: Tvärvetenskaplig metod och tillämpning en fördjupnings kurs 5 hp Antingen:Examensarbete i hållbar utveckling av kustområden 25 av 45 hp.Eller: Examensarbete i hållbar utveckling av kustområden 25 av 30 hp.",
-      "labelEn": "Either the 45-credit or the 30-credit thesis in sustainable development of coastal areas may count, but not both.",
+      "labelEn": "Either a 45 hp or a 30 hp degree project in sustainable development of coastal areas may be chosen, together with the 5 hp advanced course on scientific methods.",
       "cohortBefore": null,
       "source": "llm"
     }

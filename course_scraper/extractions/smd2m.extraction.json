@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:34:30.217213+00:00",
+  "generatedAt": "2026-09-06T06:32:33.710242+00:00",
   "edges": [
     {
       "code": "1MD001",
@@ -55,6 +55,13 @@
       }
     },
     {
+      "code": "1MD046",
+      "text": "120 credits including 45 credits in computer science/engineering/information systems including a continuation course in object oriented programming. English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
       "code": "1MD200",
       "text": "120 credits and (1) 15 credits in human-computer interaction at Master's level, or (2) 30 credits in computer science including Software Engineering and Project Management, or (3) 50 credits in computer science of which 10 credits at Master's level. Interface Programming with a User Perspective and Independent Project in Sociotechnical Systems Engineering - IT Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
       "result": {
@@ -69,6 +76,41 @@
       }
     },
     {
+      "code": "2IV125",
+      "text": "A Bachelor's degree equivalent to a Swedish degree of at least 180 credits (i.e. three years of full-time studies) containing IT-related course modules comprising the equivalent of at least 30 credits in total. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV126",
+      "text": "A Bachelor's degree and 15 credits in human-computer interaction at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV152",
+      "text": "A Bachelor's degree and 60 credits at Master's level, including at least 30 credits in human-computer interaction and 15 credits in scientific method at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV157",
+      "text": "30 credits in human–computer interaction at advanced level",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV158",
+      "text": "30 credits in Human–Computer Interaction at advanced level",
+      "result": {
+        "edges": []
+      }
+    },
+    {
       "code": "2IV159",
       "text": "General entry requirements",
       "result": {
@@ -78,6 +120,20 @@
     {
       "code": "2IV176",
       "text": "A Bachelor's degree and 7.5 credits in human-computer interaction. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV181",
+      "text": "A Bachelor's degree and 15 credits in human-computer interaction at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IV182",
+      "text": "A Bachelor's degree and 15 credits in human-computer interaction at Master's level. Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
       "result": {
         "edges": []
       }
@@ -117,7 +173,7 @@
           "1MD044",
           "1MD045"
         ],
-        "labelEn": "One of these courses must be chosen.",
+        "labelEn": "One of the listed courses must be chosen.",
         "cohortBefore": null
       }
     },
@@ -134,7 +190,7 @@
           "2IV182",
           "2IV181"
         ],
-        "labelEn": "Courses 2IV182 and 2IV181 are offered within the 15 hp course package 'Designing for humans', and some courses have specific prerequisites.",
+        "labelEn": "The courses 2IV182 and 2IV181 are given within the 15 hp course package 'Designing for Humans', and some courses have special prerequisite requirements.",
         "cohortBefore": null
       }
     },
@@ -161,7 +217,7 @@
           "2IV159",
           "1MD033"
         ],
-        "labelEn": "One of the listed courses must be selected.",
+        "labelEn": "One of the listed courses must be chosen.",
         "cohortBefore": null
       }
     },
@@ -175,7 +231,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Some of these courses have specific prerequisite requirements; see the eligibility criteria in each course syllabus.",
+        "labelEn": "Some of these courses have specific prerequisite requirements, see the eligibility criteria in each course syllabus.",
         "cohortBefore": null
       }
     }

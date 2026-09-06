@@ -75,7 +75,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements"
     },
     {
       "code": "2IS059",
@@ -92,7 +92,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements"
     },
     {
       "code": "2IS079",
@@ -109,7 +109,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements"
     },
     {
       "code": "2IS060",
@@ -126,7 +126,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements"
     },
     {
       "code": "2IV095",
@@ -324,7 +324,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Kurspaketet Informationssystem och digital kommunikation 30 hp söks. Där ingår följande kurser:",
-      "labelEn": "Heading introducing the 30 hp course package Information Systems and Digital Communication and the courses it contains.",
+      "labelEn": "This is a heading introducing the 30 hp course package 'Information Systems and Digital Communication' whose courses are listed below.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -335,7 +335,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valfri termin.",
-      "labelEn": "This is an elective semester.",
+      "labelEn": "This is an elective semester with free choice of courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -348,21 +348,20 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Välj ett av följande kurspaket:Medie- och kommunikationsvetenskap B, digitala mediestudier 30 hp, med delkurserna",
-      "labelEn": "Choose one of the listed course packages; this one is Media and Communication Studies B: Digital Media Studies (30 hp) with its sub-courses.",
+      "labelEn": "Choose one of the listed course packages, here Media and Communication Studies B: Digital Media Studies (30 hp) with its sub-courses.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-3",
-      "type": "EITHER_OR",
+      "type": "NOTE",
       "courseCodes": [
-        "2IV165",
-        "2IV166"
+        "2IV165"
       ],
       "semester": 4,
       "trackId": null,
       "textSv": "ellerMedie- och kommunikationsvetenskap B, journalistikstudier 30 hp, med delkurserna",
-      "labelEn": "Alternatively, Media and Communication Studies B: Journalism Studies, 30 credits, with its sub-courses may be taken.",
+      "labelEn": "Alternatively, Media and Communication Studies B: Journalism Studies (30 hp) may be taken with its sub-courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -375,7 +374,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "ellerMedie- och kommunikationsvetenskap B, studier i organisationskommunikation 30 hp, med delkurserna",
-      "labelEn": "Alternatively, Media and Communication Studies B: Organisational Communication Studies (30 hp) may be taken with its sub-courses.",
+      "labelEn": "Alternatively, Media and Communication Studies B: Organisational Communication Studies (30 credits) with its sub-courses may be taken.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -383,12 +382,14 @@
       "id": "rule-5",
       "type": "NOTE",
       "courseCodes": [
-        "2IV180"
+        "2IV180",
+        "2IV171",
+        "2IV146"
       ],
       "semester": 5,
       "trackId": null,
       "textSv": "Välj C-nivå inom samma spår som under termin 4:Medie- och kommunikationsvetenskap C, digitala mediestudier 30 hp, med delkurserna",
-      "labelEn": "Students must take C-level courses in the same track as chosen in semester 4, here the digital media studies track.",
+      "labelEn": "Choose the C-level digital media studies track matching the track taken in semester 4.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -401,7 +402,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "ellerMedie- och kommunikationsvetenskap C, journalistikstudier 30 hp med delkurserna",
-      "labelEn": "Alternatively, the 30 hp Media and Communication Studies C journalism studies package with its sub-courses may be taken.",
+      "labelEn": "As an alternative, Media and Communication Studies C in journalism studies (30 credits) may be taken with its sub-courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -414,7 +415,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "ellerMedie- och kommunikationsvetenskap C, studier i organisationskommunikation 30 hp, med delkurserna",
-      "labelEn": "Alternatively, Media and Communication Studies C in organisational communication (30 hp) may be taken with its sub-courses.",
+      "labelEn": "As an alternative, Media and Communication Studies C studies in organisational communication (30 hp) can be taken with its sub-courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -425,7 +426,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Valfri termin.",
-      "labelEn": "The semester is optional/free choice.",
+      "labelEn": "The semester is optional for elective/free-choice studies.",
       "cohortBefore": null,
       "source": "llm"
     }

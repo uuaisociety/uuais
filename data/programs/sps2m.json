@@ -24,7 +24,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2PS099",
@@ -41,7 +41,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2PS101",
@@ -58,7 +58,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2PS103",
@@ -75,7 +75,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2PS104",
@@ -92,7 +92,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required are 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2PS105",
@@ -109,7 +109,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognized university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2PS106",
@@ -126,7 +126,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2PS107",
@@ -143,7 +143,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements"
     },
     {
       "code": "2PS109",
@@ -160,7 +160,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2PS111",
@@ -177,7 +177,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2PS112",
@@ -228,7 +228,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2PS115",
@@ -245,7 +245,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "2PS116",
@@ -296,7 +296,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6. A grade of E or higher on the courses 2PS101 and 2PS103 (or equivalent courses)."
     }
   ],
   "rules": [
@@ -307,7 +307,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Valbara kurser i psykologi, 15 hp",
-      "labelEn": "Elective courses in psychology, 15 credits",
+      "labelEn": "Heading for elective psychology courses worth 15 credits.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -320,7 +320,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Möjlighet att välja vetenskaplig praktik (15 hp) samt valbara kurser i psykologi eller inom andra närliggande ämnen (15 hp).Alternativt att välja valbara kurser i psykologi eller närliggande ämnen (30 hp, dvs hela terminen).",
-      "labelEn": "Students may take the 15 hp scientific internship plus 15 hp of electives, or alternatively 30 hp of electives for the whole semester.",
+      "labelEn": "Students may take the internship (15 hp) plus 15 hp of electives, or alternatively 30 hp of elective courses for the whole semester.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -341,7 +341,22 @@
   ],
   "planFormat": "legacy",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "2PS101",
+      "to": "2PS117",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6. A grade of E or higher on the courses 2PS101 and 2PS103 (or equivalent courses)."
+    },
+    {
+      "from": "2PS103",
+      "to": "2PS117",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Also required is 90 credits in psychology with at least 7.5 credits in methods and statistics. Proficiency in English equivalent to the Swedish upper secondary course English 6. A grade of E or higher on the courses 2PS101 and 2PS103 (or equivalent courses)."
+    }
+  ],
   "revisions": [
     {
       "id": "2763",

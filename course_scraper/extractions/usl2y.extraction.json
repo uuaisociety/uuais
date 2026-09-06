@@ -1,6 +1,21 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:48:08.962341+00:00",
-  "edges": [],
+  "generatedAt": "2026-09-06T08:11:03.457724+00:00",
+  "edges": [
+    {
+      "code": "4PE306",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in Swedish and English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE307",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. Proficiency in Swedish and Engligsh equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
   "rules": []
 }

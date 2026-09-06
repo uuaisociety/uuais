@@ -24,7 +24,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics Further level 1b or level 1c, Science Studies level 2, or Mathematics 3b or 3c/Mathematics C, Science Studies 2"
     },
     {
       "code": "1GV004",
@@ -118,7 +118,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Biology level 2, Physics level 1b or level 1a2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4/Mathematics D"
     },
     {
       "code": "1KB208",
@@ -137,7 +137,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "10 credits in science/engineering. Participation in General Chemistry or Chemical Principles I or Basic Chemistry, 10 credits, or The Basic Principles of Chemistry, 15 credits."
     },
     {
       "code": "1KB200",
@@ -156,7 +156,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in General Chemistry, Chemical Principles I, or Basic Chemistry, 10 credits, or The Basic Principles of Chemistry, 15 credits."
     },
     {
       "code": "1MP044",
@@ -361,7 +361,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Knowledge and skills corresponding to 60 credits in earth science"
     },
     {
       "code": "1GV111",
@@ -378,7 +378,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Knowledge and skills corresponding to 60 credits in earth science"
     },
     {
       "code": "1GV112",
@@ -395,7 +395,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Knowledge and skills corresponding to 60 credits in earth science"
     },
     {
       "code": "1GV173",
@@ -412,7 +412,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements"
     },
     {
       "code": "1GV103",
@@ -429,7 +429,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "30 credits in Earth Science"
     },
     {
       "code": "1GV034",
@@ -446,7 +446,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in Earth Science"
     },
     {
       "code": "1GV102",
@@ -463,7 +463,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in Earth Science"
     }
   ],
   "rules": [
@@ -476,22 +476,18 @@
       "semester": 2,
       "trackId": null,
       "textSv": "För studenter inom sökalternativ för samhällsvetare som inte har Ma D från gymnasiet krävs Biovetenskap 30 hp för tillträde till 1MA010 Baskurs i matematik 5 hp.",
-      "labelEn": "Students in the social-science admission track without upper-secondary Ma D must complete Bioscience 30 hp (1BG107) before admission to 1MA010 Basic Course in Mathematics 5 hp.",
+      "labelEn": "Students in the social science admission track without upper secondary Mathematics D must take Bioscience 30 hp before the Basic Course in Mathematics.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-1",
       "type": "NOTE",
-      "courseCodes": [
-        "1KB013",
-        "1KB200",
-        "1KB208"
-      ],
+      "courseCodes": [],
       "semester": 4,
       "trackId": null,
       "textSv": "Annat biområde än kemi kan väljas.",
-      "labelEn": "A bio-area other than chemistry may be chosen instead.",
+      "labelEn": "A bio subject area other than chemistry may be chosen.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -502,7 +498,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "alternativt",
-      "labelEn": "Alternatively.",
+      "labelEn": "A separator word meaning 'alternatively' that introduces an option without naming specific courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -513,7 +509,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Övriga kurser sommartid/terminstid.",
-      "labelEn": "Other courses may be taken during the summer term or during the regular semester.",
+      "labelEn": "Heading for other courses offered during summer or semester terms.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -597,13 +593,6 @@
       "rationale": "Sedimentology, Stratigraphy and Palaeobiology, 10 credits and Structural Geology and Ground Stability, 10 credits."
     },
     {
-      "from": "1GE100",
-      "to": "1GV205",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "60 credits Earth Science. Participation in Mineralogy and Petrology, 10 credits. 10 credits in mathematics and 10 credits in GIS are recommended."
-    },
-    {
       "from": "1MP044",
       "to": "1GV205",
       "type": "SOFT",
@@ -625,13 +614,6 @@
       "rationale": "General entry requirements and Biology 2, Physics 1a or 1b1+1b2, Chemistry 2, Mathematics 4 or Bioscience 30 credits. At least 22 credits from Earth Science - Planet Earth, including The Earth as a Planet (5+3 credits) and all practical components."
     },
     {
-      "from": "1GE100",
-      "to": "1GV207",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "60 credits earth science. Participations in Mineralogy and Petrology 10 credits. 10 credits in GIS are recommended."
-    },
-    {
       "from": "1MP044",
       "to": "1GV207",
       "type": "SOFT",
@@ -649,13 +631,6 @@
       "from": "1GV206",
       "to": "1MP044",
       "type": "HARD",
-      "source": "llm",
-      "rationale": "60 credits in Earth Science, including Earth Science - Planet Earth, 30 credits and Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Chemistry is recommended."
-    },
-    {
-      "from": "1KB013",
-      "to": "1MP044",
-      "type": "SOFT",
       "source": "llm",
       "rationale": "60 credits in Earth Science, including Earth Science - Planet Earth, 30 credits and Sedimentology, Stratigraphy and Palaeobiology, 10 credits. Chemistry is recommended."
     }

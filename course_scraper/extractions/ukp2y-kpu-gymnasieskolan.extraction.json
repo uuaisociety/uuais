@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:48:02.613833+00:00",
+  "generatedAt": "2026-09-06T08:10:56.450172+00:00",
   "edges": [],
   "rules": [
     {
@@ -12,8 +12,10 @@
       },
       "result": {
         "type": "NOTE",
-        "courseCodes": [],
-        "labelEn": "The independent degree project is carried out within the educational science core studies.",
+        "courseCodes": [
+          "4PE149"
+        ],
+        "labelEn": "The degree project is completed within the educational science core studies.",
         "cohortBefore": null
       }
     }

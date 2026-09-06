@@ -24,7 +24,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Accepted on the Master's Programme in Biopharmaceuticals FBL2M"
     },
     {
       "code": "3FB028",
@@ -58,7 +58,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Admitted to the Master's Programme in Biopharmaceuticals and participated in prior courses on the program."
     },
     {
       "code": "3FB037",
@@ -109,7 +109,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "One of the following is required: (1) 120 credits including Biochemical Technology, 10 credits, or Methods in Biotechnology, 5 credits. 5 credits at Master's level in chemistry/pharmaceutical sciences/molecular biotechnology, or the course Experimental Methods in Structural Biology, 10 credits. Participation in Biologicals I, 7.5 credits; (2) 120 credits including drug development. Participation in Biologicals I, 7.5 credits; (3) Within the Master of Science Programme in Pharmacy, participation in all courses of semesters 1-7 and at least 150 credits in the programme including Pharmaceutical Biotechnology, as well as participation in Biologicals 7.5 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "3FF031",
@@ -154,7 +154,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Under det andra året väljer studenten kurser.Valbara fördjupningskurser 15 hp och del av masterprojekt 45 hp eller valbara fördjupningskurser 30 hp.",
-      "labelEn": "In the second year the student chooses either elective advanced courses of 15 credits plus part of the master project (45 credits) or elective advanced courses of 30 credits.",
+      "labelEn": "In the second year, students choose either 15 credits of elective advanced courses plus part of the master's thesis (45 credits) or 30 credits of elective advanced courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -165,7 +165,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Masterprojekt 30 hp eller resterande del av 45 hp-projekt.",
-      "labelEn": "Refers to the master's degree project of 30 credits or the remaining part of a 45-credit project.",
+      "labelEn": "Refers to the master's thesis of 30 credits or the remaining part of a 45-credit project.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -187,6 +187,13 @@
   "planFormat": "legacy",
   "syllabusCourses": [],
   "edges": [
+    {
+      "from": "3FB028",
+      "to": "1KB429",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "One of the following is required: (1) 120 credits including Biochemical Technology, 10 credits, or Methods in Biotechnology, 5 credits. 5 credits at Master's level in chemistry/pharmaceutical sciences/molecular biotechnology, or the course Experimental Methods in Structural Biology, 10 credits. Participation in Biologicals I, 7.5 credits; (2) 120 credits including drug development. Participation i"
+    },
     {
       "from": "3FB028",
       "to": "3FB031",

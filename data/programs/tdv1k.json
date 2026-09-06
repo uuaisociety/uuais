@@ -45,7 +45,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics Further level 2, or Mathematics 4/Mathematics D"
     },
     {
       "code": "1MA350",
@@ -83,7 +83,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Information Technology (introductory course), participation in Basic course in mathematics or Basic Algebra."
     },
     {
       "code": "1DL201",
@@ -102,7 +102,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Information Technology (introductory course), participation in Basic course in mathematics or Basic Algebra."
     },
     {
       "code": "1MA009",
@@ -121,7 +121,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Basic Algebra."
     },
     {
       "code": "1DT093",
@@ -140,7 +140,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "15 credits in science/engineering. Participation in Algebra I and Program Design and Data Structures."
     },
     {
       "code": "1MA027",
@@ -159,7 +159,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "5 credits in mathematics of computer science. Participation in Basic Algebra."
     },
     {
       "code": "1MA013",
@@ -238,7 +238,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits including participation in Computer Architecture, of which at least 5 credits must be completed, and participation in Imperative and Object-Oriented Methods of Programming. The course System Design with a User Perspective, which can be taken in parallel."
     },
     {
       "code": "1MD034",
@@ -257,7 +257,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits. Participation in Imperative and Object-Oriented Programming Methodology."
     },
     {
       "code": "1MS321",
@@ -276,7 +276,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Basic Algebra and participation in Single Variable Calculus."
     },
     {
       "code": "1DL311",
@@ -542,7 +542,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits including 30 credits in mathematics and Computer Programming II or the equivalent. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1DT066",
@@ -561,7 +561,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits including 10credits in programming and participation in Algorithms and DataStructures I."
     },
     {
       "code": "1MA017",
@@ -749,7 +749,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits where at least 45 credits are in computer science. Approved project plan."
     },
     {
       "code": "1DT079",
@@ -766,7 +766,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits where at least 45 credits are in computer science. Approved project plan."
     }
   ],
   "rules": [
@@ -780,7 +780,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kursen 1MA348 Grundläggande Algebra ersätter 1MA350 Algebra I inom programmet och kan inte tas med i examen tillsammans med denna.",
-      "labelEn": "1MA348 Basic Algebra replaces 1MA350 Linear Algebra I within the programme, and the two cannot both count toward the degree.",
+      "labelEn": "1MA348 replaces 1MA350 in the programme and both cannot be counted toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -793,7 +793,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kursen 1MA350 Linjär Algebra ersätter 1MA025 Linjär Algebra och Geometri I inom programmet och kan inte tas med i examen tillsammans med denna.",
-      "labelEn": "1MA350 Linear Algebra replaces 1MA025 Linear Algebra and Geometry I within the programme and cannot count toward the degree together with it.",
+      "labelEn": "1MA350 replaces 1MA025 and cannot both count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -804,7 +804,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Samt en av följande kurser:",
-      "labelEn": "Additionally, one of the following courses must be taken.",
+      "labelEn": "In addition, one of the following courses must be taken.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -817,18 +817,18 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Kursen 1DL305 Databasteknik I DV ersätter 1DL301 Databasteknik I inom programmet och kan inte tas med i examen tillsammans med denna.",
-      "labelEn": "1DL305 Database Design I CS replaces 1DL301 Database Design I within the programme and the two cannot both count toward the degree.",
+      "labelEn": "1DL305 replaces the older 1DL301, and the two courses cannot both count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-4",
-      "type": "RECOMMENDED",
+      "type": "NOTE",
       "courseCodes": [],
       "semester": 6,
       "trackId": null,
       "textSv": "Rekommenderade valbara kurser period 33.Den studerande kan i period 33 välja en kombination av nedanstående kurser, omfattande sammanlagt 15 hp inom perioden, förutsatt att behörighetskraven är uppfyllda.",
-      "labelEn": "Recommended elective courses for period 3: the student may select a combination of the courses below totalling 15 ECTS credits, provided the entry requirements are met.",
+      "labelEn": "Heading for recommended elective courses in period 33, where students may pick a combination totalling 15 credits if eligibility requirements are met.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -839,7 +839,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Övriga kurser (valbar period).",
-      "labelEn": "Other courses may be selected during an elective period.",
+      "labelEn": "Other courses during the elective period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -850,7 +850,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Följande beteckningar används ovan:G1N - Grundnivå, kursen kräver inte tidigare högskolestudierG1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hpG2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpG2E - Grundnivå, examensarbete för högskoleingenjörsexamen och kandidatexamenA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp",
-      "labelEn": "Legend explaining the course-level abbreviations (G1N, G1F, G2F, G2E, A1N) used in the study plan.",
+      "labelEn": "Legend explaining the qualification-level codes (G1N, G1F, G2F, G2E, A1N) used in the study plan.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -903,6 +903,20 @@
   "syllabusCourses": [],
   "edges": [
     {
+      "from": "1DL221",
+      "to": "1DL034",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits of which 15 credits in mathematics and 15 credits in computer science. Probability and Statistics or Probability and Statistics DV. Algebra and Geometry or Linear Algebra and Geometry I. Participation in a second course in programming."
+    },
+    {
+      "from": "1MA350",
+      "to": "1DL034",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits of which 15 credits in mathematics and 15 credits in computer science. Probability and Statistics or Probability and Statistics DV. Algebra and Geometry or Linear Algebra and Geometry I. Participation in a second course in programming."
+    },
+    {
       "from": "1MS321",
       "to": "1DL034",
       "type": "HARD",
@@ -924,11 +938,25 @@
       "rationale": "60 credits of which 15 credits in mathematics and 25 credits in computer science. Alternatively 45 credits in the Master's Programme in Language Technology. Participation in Program Design and Data Structures of which 9 credits shall be completed, alternatively participation in Algorithms and Data Structures I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
-      "from": "1DL221",
-      "to": "1DL321",
+      "from": "1MA348",
+      "to": "1DL305",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits in mathematics or computer science. Participation in discrete mathematics (for instance Algebra I), algorithms and data structures, and a second course in programming."
+    },
+    {
+      "from": "1MA027",
+      "to": "1DL311",
       "type": "HARD",
       "source": "llm",
-      "rationale": "60 credits including 15 credits in mathematics and 30 credits in computer science, including Operating Systems and a second course in computer programming."
+      "rationale": "60 credits in mathematics and computer science, including Algebra I, Logic and Proof Techniques I, a second programming course and programming in at least one functional and one imperative language."
+    },
+    {
+      "from": "1MA348",
+      "to": "1DL311",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in mathematics and computer science, including Algebra I, Logic and Proof Techniques I, a second programming course and programming in at least one functional and one imperative language."
     },
     {
       "from": "1DT096",
@@ -945,6 +973,20 @@
       "rationale": "120 credits including 30 credits in mathematics including an introduction to linear algebra (Linear Algebra and Geometry I or the equivalent) and basic logic (Algebra I, Basic Course in Mathematics, or the equivalent), and 45 credits in computer science. Participation in Algorithms and Data Structures II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
+      "from": "1MA348",
+      "to": "1DL481",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics including an introduction to linear algebra (Linear Algebra and Geometry I or the equivalent) and basic logic (Algebra I, Basic Course in Mathematics, or the equivalent), and 45 credits in computer science. Participation in Algorithms and Data Structures II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA350",
+      "to": "1DL481",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including 30 credits in mathematics including an introduction to linear algebra (Linear Algebra and Geometry I or the equivalent) and basic logic (Algebra I, Basic Course in Mathematics, or the equivalent), and 45 credits in computer science. Participation in Algorithms and Data Structures II. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
       "from": "1DT093",
       "to": "1DT052",
       "type": "HARD",
@@ -952,11 +994,53 @@
       "rationale": "15 credits in mathematics and 30 credits in computer science, including at least one second course in computer programming and at least 5 credits in computer architecture."
     },
     {
+      "from": "1MA350",
+      "to": "1DT075",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "120 credits including a second course in programming, Algorithms and Data Structures I, Algebra I and linear algebra. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1DL201",
+      "to": "1DT093",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "15 credits in science/engineering. Participation in Algebra I and Program Design and Data Structures."
+    },
+    {
+      "from": "1MA348",
+      "to": "1DT093",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "15 credits in science/engineering. Participation in Algebra I and Program Design and Data Structures."
+    },
+    {
+      "from": "1DL221",
+      "to": "1DT096",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits including participation in Computer Architecture, of which at least 5 credits must be completed, and participation in Imperative and Object-Oriented Methods of Programming. The course System Design with a User Perspective, which can be taken in parallel."
+    },
+    {
+      "from": "1DT093",
+      "to": "1DT096",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits including participation in Computer Architecture, of which at least 5 credits must be completed, and participation in Imperative and Object-Oriented Methods of Programming. The course System Design with a User Perspective, which can be taken in parallel."
+    },
+    {
       "from": "1DT052",
       "to": "1DT117",
       "type": "SOFT",
       "source": "llm",
       "rationale": "120 credits including 90 credits in computer science and mathematics with participation in Computer Networks I. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1MA348",
+      "to": "1MA009",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Participation in Basic Algebra."
     },
     {
       "from": "1MA348",
@@ -1009,15 +1093,50 @@
     },
     {
       "from": "1MA348",
+      "to": "1MA027",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "5 credits in mathematics of computer science. Participation in Basic Algebra."
+    },
+    {
+      "from": "1MA348",
       "to": "1MA350",
       "type": "EXCLUSIVE",
       "source": "llm",
       "rationale": "Kursen 1MA348 Grundläggande Algebra ersätter 1MA350 Algebra I inom programmet och kan inte tas med i examen tillsammans med denna."
     },
     {
+      "from": "1DL221",
+      "to": "1MD034",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "60 credits. Participation in Imperative and Object-Oriented Programming Methodology."
+    },
+    {
+      "from": "1MA013",
+      "to": "1MS321",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Basic Algebra and participation in Single Variable Calculus."
+    },
+    {
+      "from": "1MA348",
+      "to": "1MS321",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Basic Algebra and participation in Single Variable Calculus."
+    },
+    {
       "from": "1DL305",
       "to": "1TD169",
       "type": "SOFT",
+      "source": "llm",
+      "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
+    },
+    {
+      "from": "1MA024",
+      "to": "1TD169",
+      "type": "HARD",
       "source": "llm",
       "rationale": "120 credits in science/engineering including 50 credits in computer science and mathematics, of which at least 20 credits in computer science and 20 credits in mathematics. Computer science is to include at least 10 credits programming and participation in Database Design I. Mathematics is to include linear algebra and probability and statistics. Proficiency in English equivalent to the Swedish up"
     },

@@ -254,7 +254,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in chemistry at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1BG349",
@@ -290,7 +290,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree and, in addition, at least 30 credits in chemistry at Master's level, including courses at Master's level that are necessary for the project. Admission requires a project plan accepted by the department. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [
@@ -303,7 +303,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
-      "labelEn": "Only 30 of the 45 credits for the Degree Project E in Chemistry (1KB053) count in this semester.",
+      "labelEn": "The degree project in chemistry comprises 30 of the 45 higher education credits.",
       "cohortBefore": null,
       "source": "llm"
     }

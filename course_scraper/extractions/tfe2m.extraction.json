@@ -1,299 +1,473 @@
 {
- "edges": [
-  {
-   "code": "1EL021",
-   "text": "120 credits in science/engineering including Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1KB274",
-   "text": "Alternative 1: 120 credits in science and technology, including 5 credits power engineering, 5 credits automatic control, and 5 credits scientific computing. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 130 credits in science and technology, including 10 credits in Energy Technology at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 120 credits in science and technology, including 15 credits in power engineering. Ability to use computer-based calculation tools, such as MATLAB Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TE028",
-   "text": "120 credits in science/engineering including Modern Physics, Quantum Physics or Quantum Physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE078",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE029",
-   "text": "120 credits in science/engineering, including Electric Power Systems. Participation in a basic course in mechanics, or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6. Mechanics (1TE304) can be taken in parallel.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE754",
-      "type": "HARD"
-     },
-     {
-      "from": "1TE304",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE038",
-   "text": "120 credits in science/engineering including Multivariable Calculus, Electromagnetism, Automatic Control and a basic course in statistics. Participation in Mechanics Basic Course, or it could be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE304",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE043",
-   "text": "120 credits in science/engineering including Scientific Computing I, Power Engineering and a basic course in mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE304",
-      "type": "HARD"
-     },
-     {
-      "from": "1TE305",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE065",
-   "text": "150 credits in science/engineering, including Electromagnetism, Basic Mechanics and Electrical Power Systems. 10 credits at Master's level. In addition, participation in one of the courses Wind Power: Technology and Systems, Hydroelectric Power: Technology and Systems, Wave Power: Technology and Systems, Analysis of Electric Power Systems or Power System Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE029",
-      "type": "SOFT"
-     },
-     {
-      "from": "1TE038",
-      "type": "SOFT"
-     },
-     {
-      "from": "1TE043",
-      "type": "SOFT"
-     },
-     {
-      "from": "1TE754",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE678",
-   "text": "120 credits in science/engineering including Electromagnetism, Power Engineering, Energy System Physics/Modern Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE078",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE690",
-   "text": "120 credits in science/engineering including Electronics, Electromagnetism and Electrical Power Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TE692",
-   "text": "130 credits in science/engineering including Power Engineering and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE765",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE724",
-   "text": "180 credits in science/engineering including 10 credits at Master's level. Modern Physics, Quantum Physics or Quantum Physics F. Participation in Solar Energy - Technology and Systems or Solar Energy Technologies for Electricity Production (may be taken in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE078",
-      "type": "HARD"
-     },
-     {
-      "from": "1TE028",
-      "type": "SOFT"
-     },
-     {
-      "from": "1TE678",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE726",
-   "text": "120 credits including Power Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE754",
-      "type": "HARD"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE737",
-   "text": "120 credits in science/engineering including Automatic Control I. In addition, participation in 10 credits in science/engineering at advanced level. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE765",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE754",
-   "text": "120 credits in science/engineering including Automatic Control I. Participation in a basic course in Power Engineering, such as Power Engineering, or Electromagnetism and Power Engineering, or Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TE765",
-   "text": "120 credits in science/engineering, including basic knowledge in electric circuit theory and electronics. Participation in Transform Methods (spec. Fourier series), or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1MA269",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TE766",
-   "text": "120 credits in science/engineering. Participation in 10 credits at Master's level in science/engineering. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TE765",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TS327",
-   "text": "120 credits, including 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1TS328",
-   "text": "Option 1: 120 credits, including 90 credits in science/engineering. Participation in the course Industrial Project Management I. Option 2: 120 credits, including 90 credits in science/engineering. Industrial Engineering and Management I: The Functions of the Corporation, Industrial Management III: Project in Business and Technology Development. Participation in Strategic Management in Technology-Intensive Firms. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1TS327",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1TS359",
-   "text": "Option 1: 120 credits in science/engineering. Introduction to Energy Systems or Energy System Physics. System Analysis with Energy Applications or Systems Analysis and Operations Research. Participation in Power Engineering. Option 2: A Bachelor's degree with 90 credits in electrical engineering. 15 credits within power systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  }
- ],
- "rules": [
-  {
-   "note": {
-    "textSv": "Vattenkraft - teknik och system, 10 hp (1TE029) erbjuds även under termin 3.",
-    "semester": 1,
-    "period": "Period 1",
-    "trackId": null
-   },
-   "result": {
-    "type": "NOTE",
-    "courseCodes": [
-     "1TE029"
-    ],
-    "labelEn": "Hydroelectric Power - Technology and Systems (1TE029) is also offered in semester 3.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "1TE028 är behörighetskrav för 1TE724 (kan läsas parallellt).1TE678 är den rekommenderade kursen inom solenergi i programmet.",
-    "semester": 2,
-    "period": "Period 3",
-    "trackId": null
-   },
-   "result": {
-    "type": "RECOMMENDED",
-    "courseCodes": [
-     "1TE028",
-     "1TE724",
-     "1TE678"
-    ],
-    "labelEn": "1TE028 is a prerequisite for 1TE724 (they may be taken in parallel), and 1TE678 is the recommended solar energy course in the programme.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "1TE840 Examensarbete i förnybar elproduktion 15 hp endast för studenter som önskar avsluta med en magisterexamen. Ges period 13-14.",
-    "semester": 2,
-    "period": null,
-    "trackId": null
-   },
-   "result": {
-    "type": "NOTE",
-    "courseCodes": [
-     "1TE840"
-    ],
-    "labelEn": "1TE840 (15 hp) is only for students who wish to finish with a magister's degree and is given in periods 3-4 of year 1.",
-    "cohortBefore": null
-   }
-  },
-  {
-   "note": {
-    "textSv": "Endast en av följande kurser i solenergi kan tas med i en examen: 1TE678 och 1TE028.",
-    "semester": 3,
-    "period": "Period 1",
-    "trackId": null
-   },
-   "result": {
-    "type": "MUTUALLY_EXCLUSIVE",
-    "courseCodes": [
-     "1TE678",
-     "1TE028"
-    ],
-    "labelEn": "Only one of the solar energy courses 1TE678 and 1TE028 may count toward the degree.",
-    "cohortBefore": null
-   }
-  }
- ]
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T07:01:19.618580+00:00",
+  "edges": [
+    {
+      "code": "1EL021",
+      "text": "120 credits in science/engineering including Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1EL843",
+      "text": "120 credits in science/engineering. Power Electronics or Power Electronics I. Participation in High Voltage Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE765",
+            "type": "HARD"
+          },
+          {
+            "from": "1EL021",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1KB274",
+      "text": "Alternative 1: 120 credits in science and technology, including 5 credits power engineering, 5 credits automatic control, and 5 credits scientific computing. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 2: 130 credits in science and technology, including 10 credits in Energy Technology at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6. Alternative 3: 120 credits in science and technology, including 15 credits in power engineering. Ability to use computer-based calculation tools, such as MATLAB Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1MA269",
+      "text": "60 credits in science/engineering including electric circuit theory. 30 credits in mathematics including linear algebra and multivariable calculus.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE028",
+      "text": "120 credits in science/engineering including Modern Physics, Quantum Physics or Quantum Physics F. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE078",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE029",
+      "text": "120 credits in science/engineering, including Electric Power Systems. Participation in a basic course in mechanics, or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6. Mechanics (1TE304) can be taken in parallel.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE754",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE304",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE038",
+      "text": "120 credits in science/engineering including Multivariable Calculus, Electromagnetism, Automatic Control and a basic course in statistics. Participation in Mechanics Basic Course, or it could be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE043",
+      "text": "120 credits in science/engineering including Scientific Computing I, Power Engineering and a basic course in mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE065",
+      "text": "150 credits in science/engineering, including Electromagnetism, Basic Mechanics and Electrical Power Systems. 10 credits at Master's level. In addition, participation in one of the courses Wind Power: Technology and Systems, Hydroelectric Power: Technology and Systems, Wave Power: Technology and Systems, Analysis of Electric Power Systems or Power System Analysis. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE038",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TE029",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TE043",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TE754",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE078",
+      "text": "40 credits in science/engineering including Linear Algebra and Geometry, Thermodynamics, a basic course in Mechanics as well as Mechanics II/Electrical Power Transmission Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE304",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE304",
+      "text": "60 credits in science/engineering, including Linear Algebra and Multivariable Calculus.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE305",
+      "text": "60 credits in science/engineering including basic courses in electronics, e.g. Electronics I or Electromagnetism II with Electric Circuits, Electrical Engineering II: Electric Circuit Theory.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE615",
+      "text": "120 credits in science/engineering including 10 credits in electrical engineering. A project plan approved by the department is required for admission. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE616",
+      "text": "120 credits in science/engineering including 10 credits in electrical engineering. A project plan approved by the department is required for admission. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE677",
+      "text": "120 credits in science/engineering of which at least 90 credits in Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE678",
+      "text": "120 credits in science/engineering including Electromagnetism, Power Engineering, Energy System Physics/Modern Physics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE078",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE690",
+      "text": "120 credits in science/engineering including Electronics, Electromagnetism and Electrical Power Engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE692",
+      "text": "130 credits in science/engineering including Power Engineering and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE765",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE724",
+      "text": "180 credits in science/engineering including 10 credits at Master's level. Modern Physics, Quantum Physics or Quantum Physics F. Participation in Solar Energy - Technology and Systems or Solar Energy Technologies for Electricity Production (may be taken in parallel). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE078",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE028",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TE678",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE726",
+      "text": "120 credits including Power Systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE754",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE737",
+      "text": "120 credits in science/engineering including Automatic Control I. In addition, participation in 10 credits in science/engineering at advanced level. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE765",
+            "type": "SOFT"
+          },
+          {
+            "from": "1TE766",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE754",
+      "text": "120 credits in science/engineering including Automatic Control I. Participation in a basic course in Power Engineering, such as Power Engineering, or Electromagnetism and Power Engineering, or Electromagnetism II. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TE765",
+      "text": "120 credits in science/engineering, including basic knowledge in electric circuit theory and electronics. Participation in Transform Methods (spec. Fourier series), or the course can be taken in parallel. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1MA269",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE766",
+      "text": "120 credits in science/engineering. Participation in 10 credits at Master's level in science/engineering. Participation in one of the courses Power Electronics I and Power Electronics. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE765",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE840",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 15 credits at advanced level in renewable electricity production including 5 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity Production, Solar Energy - Technologies and Systems, Generator Design; and 5 credits of the courses Analysis of Power Distribution Grids, Grid Connection of Variable Energy Sources, Analysis of Electric Power Systems, Power Electronics I, Power Electronics II in the Major fields of study Renewable Energy Production at Master's level. Thematic Studies in Renewable Electricity Production (can be taken in paralell). Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE029",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE038",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE043",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE678",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE028",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE065",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE726",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE737",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE754",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE765",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE766",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE677",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TE841",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. In addition, 30 credits at advanced level in Renewable Electricity Production including Thematic Studies in Renewable Electricity Production and 15 credits of the courses Hydroelectric Power - Technologies and Systems, Wind Power - Technologies and Systems, Wave Power - Technologies and Systems, Solar Energy Technologies for Electricity Production, Solar Energy - Technologies and Systems, Generator Design; as well as 10 credits of the courses Analysis of Power Distribution Grids, Grid Connection of Variable Energy Sources, Analysis of Electric Power Systems, Power Electronics I, Power Electronics II in the Major fields of study Renewable Energy Production at Master's level. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TE677",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE029",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE038",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE043",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE678",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE028",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE065",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE726",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE737",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE754",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE765",
+            "type": "HARD"
+          },
+          {
+            "from": "1TE766",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TS327",
+      "text": "120 credits, including 90 credits in science/engineering. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1TS328",
+      "text": "Option 1: 120 credits, including 90 credits in science/engineering. Participation in the course Industrial Project Management I. Option 2: 120 credits, including 90 credits in science/engineering. Industrial Engineering and Management I: The Functions of the Corporation, Industrial Management III: Project in Business and Technology Development. Participation in Strategic Management in Technology-Intensive Firms. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1TS327",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1TS359",
+      "text": "Option 1: 120 credits in science/engineering. Introduction to Energy Systems or Energy System Physics. System Analysis with Energy Applications or Systems Analysis and Operations Research. Participation in Power Engineering. Option 2: A Bachelor's degree with 90 credits in electrical engineering. 15 credits within power systems. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Vattenkraft - teknik och system, 10 hp (1TE029) erbjuds även under termin 3.",
+        "semester": 1,
+        "period": "Period 1",
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "1TE029"
+        ],
+        "labelEn": "Hydroelectric Power - Technology and Systems is also offered during semester 3.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "1TE028 är behörighetskrav för 1TE724 (kan läsas parallellt).1TE678 är den rekommenderade kursen inom solenergi i programmet.",
+        "semester": 2,
+        "period": "Period 3",
+        "trackId": null
+      },
+      "result": {
+        "type": "RECOMMENDED",
+        "courseCodes": [
+          "1TE028",
+          "1TE724",
+          "1TE678"
+        ],
+        "labelEn": "1TE028 is a prerequisite for 1TE724 (they may be taken in parallel), and 1TE678 is the recommended solar energy course in the programme.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "1TE840 Examensarbete i förnybar elproduktion 15 hp endast för studenter som önskar avsluta med en magisterexamen. Ges period 13-14.",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [
+          "1TE840"
+        ],
+        "labelEn": "1TE840, 15 hp, is only for students who wish to finish with a one-year master's degree and is given in periods 1-3 and 1-4.",
+        "cohortBefore": null
+      }
+    },
+    {
+      "note": {
+        "textSv": "Endast en av följande kurser i solenergi kan tas med i en examen: 1TE678 och 1TE028.",
+        "semester": 3,
+        "period": "Period 1",
+        "trackId": null
+      },
+      "result": {
+        "type": "MUTUALLY_EXCLUSIVE",
+        "courseCodes": [
+          "1TE678",
+          "1TE028"
+        ],
+        "labelEn": "Only one of 1TE678 and 1TE028 may count toward the degree.",
+        "cohortBefore": null
+      }
+    }
+  ]
 }

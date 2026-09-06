@@ -870,7 +870,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Upplägg 1:",
-      "labelEn": "Header introducing the first programme track/setup option.",
+      "labelEn": "A heading introducing the first programme layout option.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -881,7 +881,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Upplägg 2:",
-      "labelEn": "Setup 2 (study plan variant):",
+      "labelEn": "This is a heading introducing option 2 of the programme structure.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -894,7 +894,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "1GV219 ges endast på svenska.",
-      "labelEn": "1GV219 is only offered in Swedish.",
+      "labelEn": "The course 1GV219 is only offered in Swedish.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -905,7 +905,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övriga alternativ:",
-      "labelEn": "Other alternatives (unspecified additional options follow this heading).",
+      "labelEn": "A heading introducing other course options.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -919,7 +919,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kurserna 1FA252 och 1FA257 kan schemaläggas samtidigt, studenter förväntas inte läsa dem under samma period.",
-      "labelEn": "Courses 1FA252 and 1FA257 may be scheduled in parallel, but students are not expected to take both during the same period.",
+      "labelEn": "Courses 1FA252 and 1FA257 may be scheduled at the same time, but students are not expected to take them in the same period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -943,7 +943,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Upplägg 1:",
-      "labelEn": "Header reading 'Upplägg 1:' (Layout/Option 1:), introducing a track without naming any courses.",
+      "labelEn": "This is a heading introducing the first course plan option.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -954,7 +954,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Upplägg 2:",
-      "labelEn": "This indicates study plan setup/track 2, without specifying courses.",
+      "labelEn": "A heading introducing the second study plan structure, with no course requirements stated.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -967,7 +967,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "1GV219 ges endast på svenska.",
-      "labelEn": "1GV219 is taught only in Swedish.",
+      "labelEn": "The course 1GV219 is offered only in Swedish.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -978,7 +978,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övriga alternativ:",
-      "labelEn": "Other alternatives.",
+      "labelEn": "Bare heading introducing other options, with no courses named.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -992,7 +992,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "1MP022 och 1MP024 är blockkurser som ges med 100% studietakt.",
-      "labelEn": "1MP022 and 1MP024 are block courses given at 100% study pace.",
+      "labelEn": "1MP022 and 1MP024 are block courses taught at 100% study pace.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1003,7 +1003,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Upplägg 1:",
-      "labelEn": "Heading for study option 1.",
+      "labelEn": "This is a heading introducing option 1 of the study plan.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1014,7 +1014,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Upplägg 2:",
-      "labelEn": "Setup/Option 2",
+      "labelEn": "Heading introducing the second study plan layout option.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1025,7 +1025,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga alternativ:",
-      "labelEn": "Other alternatives follow (heading with no specific courses listed).",
+      "labelEn": "A bare heading for other options.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1047,7 +1047,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga alternativ:",
-      "labelEn": "Other alternatives:",
+      "labelEn": "A heading meaning 'Other alternatives' with no course content.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1060,7 +1060,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Kursen 1GE038 är för magisterexamen.",
-      "labelEn": "Course 1GE038 counts toward the magister's degree (one-year master's).",
+      "labelEn": "The course 1GE038 is intended for the magister degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1071,7 +1071,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Övriga alternativ:",
-      "labelEn": "Other alternatives:",
+      "labelEn": "A heading introducing other options, with no specific course named.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1082,7 +1082,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Övriga alternativ:",
-      "labelEn": "Other alternatives.",
+      "labelEn": "Heading indicating other alternatives follow.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1093,7 +1093,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Övriga kurser som kan läsas under valfri period:",
-      "labelEn": "Other courses that may be taken during any period.",
+      "labelEn": "Heading for other courses that may be taken during any period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -1104,7 +1104,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Följande beteckningar används:G1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hpG2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)",
-      "labelEn": "The note is a legend explaining the course level designations (G1F, G2F, A1N, A1F, A1E, A2E) used in the study plan.",
+      "labelEn": "Legend explaining the course level codes (G1F, G2F, A1N, A1F, A1E, A2E) used in the programme.",
       "cohortBefore": null,
       "source": "llm"
     }

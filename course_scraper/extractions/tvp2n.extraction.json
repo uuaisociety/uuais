@@ -1,51 +1,94 @@
 {
- "edges": [
-  {
-   "code": "1GV147",
-   "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within engineering, science or social science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": []
-   }
-  },
-  {
-   "code": "1GV149",
-   "text": "A Bachelor's degree in engineering, science or social sciences. Also required is participation in Wind Power Development and Management, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1GV147",
-      "type": "SOFT"
-     }
-    ]
-   }
-  },
-  {
-   "code": "1GV221",
-   "text": "A Bachelor's degree in engineering, science or social science. Also required is participation in Wind Power Development and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
-   "result": {
-    "edges": [
-     {
-      "from": "1GV147",
-      "type": "SOFT"
-     }
-    ]
-   }
-  }
- ],
- "rules": [
-  {
-   "note": {
-    "textSv": "Övriga kurser (valfri period)",
-    "semester": 2,
-    "period": null,
-    "trackId": null
-   },
-   "result": {
-    "type": "NOTE",
-    "courseCodes": [],
-    "labelEn": "Other courses may be taken in any period.",
-    "cohortBefore": null
-   }
-  }
- ]
+  "model": "z-ai/glm-5.3-flash",
+  "generatedAt": "2026-09-06T08:08:53.861432+00:00",
+  "edges": [
+    {
+      "code": "1GV143",
+      "text": "A Bachelor's degree in engineering, science or social science. Also required is 30 credits at Master's level in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6. The course is only available after completion of for the degree course required courses at Master's level. Admission requires a project plan accepted by the department.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV144",
+      "text": "Bachelor of Science (180 credits) in engineering, science or social science.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV146",
+      "text": "A Bachelor's degree in engineering, science or social science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV147",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within engineering, science or social science. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "1GV149",
+      "text": "A Bachelor's degree in engineering, science or social sciences. Also required is participation in Wind Power Development and Management, 15 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV147",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV221",
+      "text": "A Bachelor's degree in engineering, science or social science. Also required is participation in Wind Power Development and Management. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV147",
+            "type": "SOFT"
+          }
+        ]
+      }
+    },
+    {
+      "code": "1GV222",
+      "text": "A Bachelor's degree in engineering, science or social sciences. Wind Power Development and Management, as well as participation in the courses Planning for Wind Energy and Wind Energy Resource and Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": [
+          {
+            "from": "1GV147",
+            "type": "HARD"
+          },
+          {
+            "from": "1GV149",
+            "type": "SOFT"
+          },
+          {
+            "from": "1GV221",
+            "type": "SOFT"
+          }
+        ]
+      }
+    }
+  ],
+  "rules": [
+    {
+      "note": {
+        "textSv": "Övriga kurser (valfri period)",
+        "semester": 2,
+        "period": null,
+        "trackId": null
+      },
+      "result": {
+        "type": "NOTE",
+        "courseCodes": [],
+        "labelEn": "Other courses may be taken in any study period.",
+        "cohortBefore": null
+      }
+    }
+  ]
 }

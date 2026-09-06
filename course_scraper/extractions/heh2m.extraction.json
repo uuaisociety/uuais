@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:24:19.505682+00:00",
+  "generatedAt": "2026-09-06T06:21:09.278485+00:00",
   "edges": [
     {
       "code": "2EH421",
@@ -12,6 +12,20 @@
     {
       "code": "5AR764",
       "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5AR810",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within the Faculty of Arts, the Faculty of Social Sciences or the Faculty of Science and Technology.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5AR815",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university. The main field of study must be within the Faculty of Arts, the Faculty of Social Sciences or the Faculty of Science and Technology.",
       "result": {
         "edges": []
       }
@@ -28,7 +42,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "This note names an external SLU course, LU0085, which is not on the programme roster.",
+        "labelEn": "The course LU0085 'Research Process Context and Process I: Theories and Methods' is offered by SLU (Swedish University of Agricultural Sciences).",
         "cohortBefore": null
       }
     },
@@ -42,7 +56,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "The course is an elective worth 7.5 credits.",
+        "labelEn": "An elective course worth 7.5 credits.",
         "cohortBefore": null
       }
     },
@@ -56,7 +70,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Elective courses may be taken within or outside the department, with options for internships and individual in-depth or method courses.",
+        "labelEn": "Elective courses within or outside the department, with opportunities for internships and individual specialisation and method courses.",
         "cohortBefore": null
       }
     },
@@ -70,7 +84,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Elective courses may be taken within or outside the department, including possible internships and individual specialization or method courses.",
+        "labelEn": "Elective courses may be taken within or outside the department, including internships and individual in-depth or method courses.",
         "cohortBefore": null
       }
     },
@@ -84,7 +98,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Elective courses may be taken within or outside the department, including internships and individual in-depth or method courses.",
+        "labelEn": "Elective courses may be taken within or outside the department, with opportunities for internships and individual advanced or method courses.",
         "cohortBefore": null
       }
     }

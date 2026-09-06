@@ -45,7 +45,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Admitted to the Master's Programme in Medical Research.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
     },
     {
       "code": "3MR102",
@@ -64,7 +64,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Admitted to the Master's Programme in Medical Research. Knowledge in English equivalent to that required for basic eligibility to Swedish higher education on basic level."
     },
     {
       "code": "3MR104",
@@ -119,7 +119,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology, biochemistry and genetics. Prerequisites in the form of completed 45 credits from the courses included in the first year studies of the Master's Programme in Medical Research or equivalent. This includes in-depth knowledge on advanced level in genetics/genomics, as well as mechanisms that regulate biological processes from gene to disease development and methods used to study them.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
     },
     {
       "code": "3MR010",
@@ -136,7 +136,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Undergraduate education of 180 credits within life sciences (e.g. biomedicine, biotechnology, medicine, veterinary medicine) including at least 10 credits each of cell biology, biochemistry and genetics. Prerequisites in the form of completed 60 credits from the courses included in the first year studies of the Master's Programme in Medical Research or equivalent. This includes in-depth knowledge on advanced level in genetics/genomics, mechanisms that regulate biological processes from gene to disease development and methods used to study them, as well as basic principles for research work and scientific communication.Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies."
     }
   ],
   "rules": [],

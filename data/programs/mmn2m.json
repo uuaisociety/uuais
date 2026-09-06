@@ -115,7 +115,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Passed all previous courses in the Master Programme in Medical Nuclide Techniques."
     },
     {
       "code": "3DR407",
@@ -132,7 +132,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits, and Nuclide Production and Radiochemistry, 9 credits."
     },
     {
       "code": "3DR408",
@@ -151,7 +151,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Passed all previous courses in the Master programme Medical Nuclide Techniques."
     }
   ],
   "rules": [
@@ -164,7 +164,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kursen 3DR409 börjar i slutet på höstterminen (3 Hp) och fortsätter på vårterminen (3 Hp).",
-      "labelEn": "The course 3DR409 starts at the end of the autumn semester (3 credits) and continues into the spring semester (3 credits).",
+      "labelEn": "The course 3DR409 begins in the latter part of the autumn term (3 hp) and continues into the spring term (3 hp).",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -200,6 +200,97 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits, Nuclide Production and Radiochemistry, 9 credits, and Detection Techniques and Dosimetry, 12 credits."
+    },
+    {
+      "from": "3DR401",
+      "to": "3DR406",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passed all previous courses in the Master Programme in Medical Nuclide Techniques."
+    },
+    {
+      "from": "3DR402",
+      "to": "3DR406",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passed all previous courses in the Master Programme in Medical Nuclide Techniques."
+    },
+    {
+      "from": "3DR403",
+      "to": "3DR406",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passed all previous courses in the Master Programme in Medical Nuclide Techniques."
+    },
+    {
+      "from": "3DR409",
+      "to": "3DR406",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passed all previous courses in the Master Programme in Medical Nuclide Techniques."
+    },
+    {
+      "from": "3DR401",
+      "to": "3DR407",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits, and Nuclide Production and Radiochemistry, 9 credits."
+    },
+    {
+      "from": "3DR402",
+      "to": "3DR407",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits, and Nuclide Production and Radiochemistry, 9 credits."
+    },
+    {
+      "from": "3DR401",
+      "to": "3DR408",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passed all previous courses in the Master programme Medical Nuclide Techniques."
+    },
+    {
+      "from": "3DR402",
+      "to": "3DR408",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passed all previous courses in the Master programme Medical Nuclide Techniques."
+    },
+    {
+      "from": "3DR403",
+      "to": "3DR408",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passed all previous courses in the Master programme Medical Nuclide Techniques."
+    },
+    {
+      "from": "3DR405",
+      "to": "3DR408",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passed all previous courses in the Master programme Medical Nuclide Techniques."
+    },
+    {
+      "from": "3DR406",
+      "to": "3DR408",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passed all previous courses in the Master programme Medical Nuclide Techniques."
+    },
+    {
+      "from": "3DR407",
+      "to": "3DR408",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passed all previous courses in the Master programme Medical Nuclide Techniques."
+    },
+    {
+      "from": "3DR409",
+      "to": "3DR408",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passed all previous courses in the Master programme Medical Nuclide Techniques."
     }
   ],
   "revisions": [

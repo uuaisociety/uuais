@@ -1,7 +1,55 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:24:10.283556+00:00",
+  "generatedAt": "2026-09-06T06:20:57.496567+00:00",
   "edges": [
+    {
+      "code": "5AR025",
+      "text": "Archaeology A and Archaeology B",
+      "result": {
+        "edges": [
+          {
+            "from": "5AR260",
+            "type": "HARD"
+          },
+          {
+            "from": "5AR640",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5AR026",
+      "text": "Archaeology A and Archaeology B",
+      "result": {
+        "edges": [
+          {
+            "from": "5AR260",
+            "type": "HARD"
+          },
+          {
+            "from": "5AR640",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5AR027",
+      "text": "Archaeology A and Archaeology B",
+      "result": {
+        "edges": [
+          {
+            "from": "5AR260",
+            "type": "HARD"
+          },
+          {
+            "from": "5AR640",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
     {
       "code": "5AR260",
       "text": "General entry requirements and History level 1b or level 1a2, Social Studies level 1b or level 1a2, English level 2, or History 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2, English 6",
@@ -26,9 +74,9 @@
         "trackId": null
       },
       "result": {
-        "type": "NOTE",
+        "type": "CHOOSE_ONE",
         "courseCodes": [],
-        "labelEn": "The student chooses one of the courses and writes a degree project.",
+        "labelEn": "The student chooses one of the courses and writes a degree thesis.",
         "cohortBefore": null
       }
     }

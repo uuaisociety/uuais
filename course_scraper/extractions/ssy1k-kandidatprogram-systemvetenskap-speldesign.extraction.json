@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:42:16.513978+00:00",
+  "generatedAt": "2026-09-06T06:36:57.353206+00:00",
   "edges": [
     {
       "code": "2IS064",
@@ -27,7 +27,12 @@
       "code": "2IS220",
       "text": "Programming, 7.5 credits",
       "result": {
-        "edges": []
+        "edges": [
+          {
+            "from": "2IS233",
+            "type": "HARD"
+          }
+        ]
       }
     },
     {
@@ -55,7 +60,12 @@
       "code": "2IS227",
       "text": "30 credits in information systems or the equivalent including 7.5 credits in databases",
       "result": {
-        "edges": []
+        "edges": [
+          {
+            "from": "2IS222",
+            "type": "HARD"
+          }
+        ]
       }
     },
     {
@@ -112,7 +122,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Lists Game Design and Game Development 1 and 2, 15 credits each, without stating a requirement.",
+        "labelEn": "Lists the courses Game Design and Game Development 1 and 2, 15 credits each, which do not appear on the roster.",
         "cohortBefore": null
       }
     },
@@ -124,9 +134,9 @@
         "trackId": null
       },
       "result": {
-        "type": "NOTE",
+        "type": "EITHER_OR",
         "courseCodes": [],
-        "labelEn": "Elective courses of 30 credits or exchange studies are allowed, and students have guaranteed placement on the courses listed below.",
+        "labelEn": "Students choose either 30 credits of elective courses or exchange studies, with guaranteed places on certain courses.",
         "cohortBefore": null
       }
     }

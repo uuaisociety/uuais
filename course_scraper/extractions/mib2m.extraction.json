@@ -1,10 +1,24 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:30:54.987695+00:00",
+  "generatedAt": "2026-09-06T06:27:47.464721+00:00",
   "edges": [
     {
       "code": "3MK000",
       "text": "180 credits in biology, bio-/medicine, biotechnology, pharmacy, pharmaceutical bioscience, (pharmaceutical)chemistry, medical science, agriculture, animal science, veterinary medicine or international education giving relevant knowledge in cell biology, genetics (bio)chemistry, immunology and molecular biology. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MK007",
+      "text": "Minimum 60 credits of courses within the Master programme in infection biology/equivalent. This corresponds to in-depth knowledge of the biological mechanisms regulating infectious processes, how infections are diagnosed and treated and knowledge of microbial epidemiology and evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MK011",
+      "text": "Minimum 60 credits of courses within the Master's Programme in Infection Biology or the equivalent. This corresponds to in-depth knowledge of the biological mechanisms regulating infectious processes, how infections are diagnosed and treated and knowledge of microbial epidemiology and evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
       "result": {
         "edges": []
       }
@@ -22,6 +36,20 @@
       "result": {
         "edges": []
       }
+    },
+    {
+      "code": "3MK014",
+      "text": "Prerequisites equivalent to 40 credits of the courses included in year one of the Master's programme in infection biology or equivalent. This corresponds to in-depth knowledge of the biological mechanisms and processes that regulate infection with bacteria and viruses, the immunological response to infection by these as well as knowledge of relevant research methods in infectious biology research. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MK015",
+      "text": "Prerequisites equivalent to 45 credits of the courses included in year one of the Master's Programme in Infection Biology or equivalent. This corresponds to in-depth knowledge of the biological mechanisms regulating infectious processes, how infections are diagnosed and treated and knowledge of microbial epidemiology and evolution. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
     }
   ],
   "rules": [
@@ -35,7 +63,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "During semesters 2 and/or 3, course(s) may be replaced by a 15 or 30 credit research project course in infection biology.",
+        "labelEn": "In terms 2 and/or 3, courses may be replaced by a 15 or 30 credit research project course in infection biology.",
         "cohortBefore": null
       }
     },
@@ -49,7 +77,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Courses in semesters 2 and/or 3 may be replaced by a 15 or 30 credit research project course in infection biology.",
+        "labelEn": "During semester 2 and/or 3 courses may be replaced by a 15 or 30 credit research project course in infection biology.",
         "cohortBefore": null
       }
     },
@@ -61,12 +89,12 @@
         "trackId": null
       },
       "result": {
-        "type": "EITHER_OR",
+        "type": "NOTE",
         "courseCodes": [
           "3MK011",
           "3MK007"
         ],
-        "labelEn": "A 45 hp degree project started in semester 3 may replace the compulsory 30 hp master's thesis course.",
+        "labelEn": "A 45 hp degree project in infection biology started in semester 3 may replace the mandatory 30 hp master's degree project course.",
         "cohortBefore": null
       }
     }

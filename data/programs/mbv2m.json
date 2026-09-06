@@ -196,7 +196,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "alternativt3DR715 Datortomografi, 15 hpalternativtValbara kurser motsvarande 15 hp",
-      "labelEn": "Either take 3DR715 Computed Tomography (15 credits) or elective courses corresponding to 15 credits.",
+      "labelEn": "Alternatively, Computed Tomography (15 hp) or elective courses totalling 15 hp may be taken.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -207,7 +207,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "alternativt3DR915 Nuklearmedicin och PET, 15 hpalternativtValbara kurser motsvarande 15 hp",
-      "labelEn": "Alternatively, Nuclear Medicine and PET (15 hp) may be taken, or elective courses corresponding to 15 hp.",
+      "labelEn": "Alternatively 3DR915 Nuclear Medicine and PET, 15 hp, or elective courses totalling 15 hp.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -218,7 +218,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "alternativt3DR815 Magnetisk resonanstomografi, 15 hpalternativtValbara kurser motsvarande 15 hp",
-      "labelEn": "Students may choose either 3DR815 Magnetic Resonance Tomography or elective courses totalling 15 hp.",
+      "labelEn": "Alternatively, a non-roster course or 15 hp of elective courses may be taken.",
       "cohortBefore": null,
       "source": "llm"
     }

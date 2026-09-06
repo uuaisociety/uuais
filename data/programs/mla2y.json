@@ -41,7 +41,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D"
     },
     {
       "code": "3MC161",
@@ -58,7 +58,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Biology level 2, Physics level 2, Chemistry level 2, Mathematics Further level 2, or Biology 2, Physics 2, Chemistry 2, Mathematics 4/Mathematics D"
     },
     {
       "code": "3MC162",
@@ -313,7 +313,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concerned as part of clinical practice (Internship placement)."
     },
     {
       "code": "3MX009",
@@ -407,7 +407,113 @@
   ],
   "planFormat": "ladok",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "3AM041",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3AM042",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3AM043",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3AM044",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3FM009",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3FM100",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3KR161",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3MC160",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3MC161",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3MC162",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3MC163",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3ME106",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3NR613",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3NR637",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    },
+    {
+      "from": "3PA025",
+      "to": "3PE150",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Passinggrade on the courses Pharmacology, Physiology, Clinical Anatomy with embryology, Medical cell biology, Medical Microbiology, Metabolism and endocrinology, the building and function of the Human body, Neurobiology, Pathology and immunology, Clinical medicin 1, Clinical medicin 2, PD 1-2 and PD 3-4.Furthermore, entry to the course assumes that the region provides a spot for the person concern"
+    }
+  ],
   "revisions": [
     {
       "id": "e0638afb-40dc-454f-a157-4fc606c082b9",

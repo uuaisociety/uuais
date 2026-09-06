@@ -245,7 +245,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "52.5 credits in statistics at Master's level"
     }
   ],
   "rules": [
@@ -256,7 +256,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Period 1-2",
-      "labelEn": "Timing note: the course runs during periods 1 and 2.",
+      "labelEn": "The course runs during periods 1 and 2.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -267,7 +267,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Period 3-4",
-      "labelEn": "The courses are scheduled for study periods 3 and 4.",
+      "labelEn": "The course or section is scheduled in periods 3 and 4.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -278,7 +278,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Period 1-2",
-      "labelEn": "The relevant course(s) run during periods 1 and 2.",
+      "labelEn": "The course or section runs during periods 1 and 2.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -289,7 +289,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Period 3-4",
-      "labelEn": "This refers to study periods 3-4.",
+      "labelEn": "The following courses are offered in periods 3-4.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -300,7 +300,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Välj två av följande tre kurser för period 1-2:",
-      "labelEn": "Choose two of the following three courses during periods 1-2.",
+      "labelEn": "Students must choose two of the following three courses for periods 1-2.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -311,7 +311,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Period 3-4:",
-      "labelEn": "A heading indicating courses scheduled in periods 3-4.",
+      "labelEn": "This is a heading indicating a time period (periods 3-4) with no course requirements stated.",
       "cohortBefore": null,
       "source": "llm"
     }

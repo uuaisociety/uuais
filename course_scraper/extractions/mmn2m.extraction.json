@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:31:42.913879+00:00",
+  "generatedAt": "2026-09-06T06:28:31.422796+00:00",
   "edges": [
     {
       "code": "3DR401",
@@ -54,6 +54,86 @@
       }
     },
     {
+      "code": "3DR406",
+      "text": "Passed all previous courses in the Master Programme in Medical Nuclide Techniques.",
+      "result": {
+        "edges": [
+          {
+            "from": "3DR401",
+            "type": "HARD"
+          },
+          {
+            "from": "3DR402",
+            "type": "HARD"
+          },
+          {
+            "from": "3DR403",
+            "type": "HARD"
+          },
+          {
+            "from": "3DR409",
+            "type": "HARD"
+          },
+          {
+            "from": "3DR405",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3DR407",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. Radiation Protection and Medical Effects, 6 credits, and Nuclide Production and Radiochemistry, 9 credits.",
+      "result": {
+        "edges": [
+          {
+            "from": "3DR401",
+            "type": "HARD"
+          },
+          {
+            "from": "3DR402",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "3DR408",
+      "text": "Passed all previous courses in the Master programme Medical Nuclide Techniques.",
+      "result": {
+        "edges": [
+          {
+            "from": "3DR401",
+            "type": "HARD"
+          },
+          {
+            "from": "3DR402",
+            "type": "HARD"
+          },
+          {
+            "from": "3DR403",
+            "type": "HARD"
+          },
+          {
+            "from": "3DR409",
+            "type": "HARD"
+          },
+          {
+            "from": "3DR405",
+            "type": "HARD"
+          },
+          {
+            "from": "3DR406",
+            "type": "HARD"
+          },
+          {
+            "from": "3DR407",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
       "code": "3DR409",
       "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university in life sciences (e.g. physics, radiophysics, chemistry or biology), medicine, pharmacy, nursing, or other relevant university education. All applicants need to verify English language proficiency equivalent to the Swedish upper secondary course English 6.",
       "result": {
@@ -74,7 +154,7 @@
         "courseCodes": [
           "3DR409"
         ],
-        "labelEn": "The course 3DR409 starts at the end of the autumn semester (3 credits) and continues into the spring semester (3 credits).",
+        "labelEn": "The course 3DR409 begins in the latter part of the autumn term (3 hp) and continues into the spring term (3 hp).",
         "cohortBefore": null
       }
     }

@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:32:08.215264+00:00",
+  "generatedAt": "2026-09-06T06:30:36.290636+00:00",
   "edges": [
     {
       "code": "4PE089",
@@ -24,6 +24,34 @@
             "type": "HARD"
           }
         ]
+      }
+    },
+    {
+      "code": "4PE185",
+      "text": "General entry requirements and Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, or Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE186",
+      "text": "General entry requirements and Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, or Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE187",
+      "text": "General entry requirements and Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, or Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "4PE188",
+      "text": "General entry requirements and Science Studies level 1b or level 1a2, Social Studies level 1b or level 1a2, or Science Studies 1b or 1a1+1a2, Social Studies 1b or 1a1+1a2",
+      "result": {
+        "edges": []
       }
     }
   ],

@@ -103,7 +103,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Fördjupningsdelen består av a) B- och C-kurser i något av huvudämnena Nationalekonomi och Statskunskap samt en termin som kan användas för valfria kurser eller praktik och därmed fördjupning eller breddning av utbildningen eller b) A-, B- och C-kurser i Freds- och konfliktkunskap, Utvecklingsstudier och Statistik.",
-      "labelEn": "The advanced part consists of either B- and C-level courses in one main subject (economics or political science) plus an elective semester, or full A-, B- and C-level studies in peace and conflict studies, development studies, and statistics.",
+      "labelEn": "The advanced part consists of either B- and C-level courses in one main subject, Economics or Political Science, plus an elective or internship semester, or full A-, B- and C-level studies in Peace and Conflict Studies, Development Studies, and Statistics.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -114,7 +114,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Se Termin 4.",
-      "labelEn": "Refers the reader to Semester 4 for further information.",
+      "labelEn": "Refers the reader to Term 4 for further information.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -125,7 +125,7 @@
       "semester": 6,
       "trackId": null,
       "textSv": "Se Termin 4.",
-      "labelEn": "A pointer referring the reader to Term 4 for details.",
+      "labelEn": "See Term 4 for further information.",
       "cohortBefore": null,
       "source": "llm"
     }

@@ -27,7 +27,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Accepted to the Master's Programme in Physics, tracks physics or astronomy/space physics"
     },
     {
       "code": "1FA352",
@@ -218,7 +218,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits with Statistical Mechanics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1FA370",
@@ -736,7 +736,7 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "NOTE",
+      "type": "RECOMMENDED",
       "courseCodes": [
         "1FA163",
         "1FA252",
@@ -750,7 +750,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kurserna 1FA163, 1FA252, 1FA156, 1FA140 ska väljas om en student inte läst motsvarande innehåll tidigare. Studenter med mer avancerad bakgrund kan även välja kurserna från termin 3 eller forskningsprojekt istället för kurser (se projektkurser 1FA566, 1FA565, 1FA195, 1FA193 längst ner på sidan).",
-      "labelEn": "Take 1FA163, 1FA252, 1FA156 and 1FA140 if this content has not been studied before; students with a more advanced background may instead choose semester-3 courses or a project course (1FA566, 1FA565, 1FA195, 1FA193).",
+      "labelEn": "Students without prior knowledge should take these courses, while those with a more advanced background may instead choose semester 3 courses or the listed project courses.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -761,7 +761,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses available this period.",
+      "labelEn": "This is a heading introducing other selectable courses for the period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -772,7 +772,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses available during this period.",
+      "labelEn": "This is a heading introducing other selectable courses for this period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -785,7 +785,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Kursen 1FA160 ges bara udda år.",
-      "labelEn": "The course 1FA160 is offered only in odd-numbered years.",
+      "labelEn": "The course 1FA160 is only offered in odd-numbered years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -796,7 +796,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Other elective courses this period:",
+      "labelEn": "This is a heading introducing other elective courses for the period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -809,7 +809,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Kursen 1FA158 ges endast udda år.",
-      "labelEn": "The course 1FA158 is only offered in odd-numbered years.",
+      "labelEn": "The course 1FA158 is offered only in odd-numbered years.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -820,7 +820,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga valbara kurser denna period:",
-      "labelEn": "Note indicating other elective courses available during this period",
+      "labelEn": "This is a heading introducing other optional courses for the period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -833,7 +833,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
-      "labelEn": "Students pursuing a one-year magister degree choose 1FA597.",
+      "labelEn": "1FA597 is chosen by students who will take a magister degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -844,7 +844,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
-      "labelEn": "Other elective courses within the specialisation, in any period.",
+      "labelEn": "A heading introducing other optional courses within the specialization, open in any study period.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -855,7 +855,7 @@
       "semester": 4,
       "trackId": null,
       "textSv": "Följande beteckningar används:G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hpA1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hpA1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivåA1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)",
-      "labelEn": "Legend explaining the level abbreviations: G2F (basic level, requires 60 hp of prior higher education), A1N (advanced level requiring 120 hp of basic courses), A1F (advanced level requiring prior advanced courses), A1E (master's thesis, 60 hp) and A2E (master's thesis, 120 hp).",
+      "labelEn": "Legend explaining the level designations G2F, A1N, A1F, A1E, and A2E used in the study plan.",
       "cohortBefore": null,
       "source": "llm"
     }

@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:23:12.183686+00:00",
+  "generatedAt": "2026-09-06T06:20:19.233928+00:00",
   "edges": [
     {
       "code": "3FB028",
@@ -75,7 +75,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "The first year consists of mandatory courses providing broad knowledge in drug development, with alternative courses available for students who already covered equivalent material.",
+        "labelEn": "The first year consists of mandatory courses for broad drug development knowledge, with alternative courses available for students who already covered equivalent content in prior studies.",
         "cohortBefore": null
       }
     },
@@ -89,7 +89,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "During the second year, the student chooses courses.",
+        "labelEn": "In the second year the student chooses courses.",
         "cohortBefore": null
       }
     },
@@ -103,7 +103,7 @@
       "result": {
         "type": "EITHER_OR",
         "courseCodes": [],
-        "labelEn": "Students can either take 15 credits of elective advanced courses plus 45 credits within the master project, or 30 credits of elective advanced courses.",
+        "labelEn": "You may either take 15 credits of elective advanced courses plus part of the master's project, or 30 credits of elective advanced courses.",
         "cohortBefore": null
       }
     },
@@ -117,7 +117,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Concerns the master's thesis project of 30 credits or a 45-credit thesis taken in part.",
+        "labelEn": "Refers to the master's thesis of 30 credits or part of a 45-credit thesis.",
         "cohortBefore": null
       }
     }

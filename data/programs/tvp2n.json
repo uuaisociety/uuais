@@ -83,7 +83,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree in engineering, science or social sciences. Wind Power Development and Management, as well as participation in the courses Planning for Wind Energy and Wind Energy Resource and Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1GV143",
@@ -102,7 +102,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree in engineering, science or social science. Also required is 30 credits at Master's level in wind power project management. Proficiency in English equivalent to the Swedish upper secondary course English 6. The course is only available after completion of for the degree course required courses at Master's level. Admission requires a project plan accepted by the department."
     },
     {
       "code": "1GV144",
@@ -119,7 +119,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Bachelor of Science (180 credits) in engineering, science or social science."
     },
     {
       "code": "1GV146",
@@ -136,7 +136,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree in engineering, science or social science. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [
@@ -147,7 +147,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Övriga kurser (valfri period)",
-      "labelEn": "Other courses may be taken in any period.",
+      "labelEn": "Other courses may be taken in any study period.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -162,7 +162,29 @@
   ],
   "planFormat": "legacy",
   "syllabusCourses": [],
-  "edges": [],
+  "edges": [
+    {
+      "from": "1GV147",
+      "to": "1GV222",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree in engineering, science or social sciences. Wind Power Development and Management, as well as participation in the courses Planning for Wind Energy and Wind Energy Resource and Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1GV149",
+      "to": "1GV222",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "A Bachelor's degree in engineering, science or social sciences. Wind Power Development and Management, as well as participation in the courses Planning for Wind Energy and Wind Energy Resource and Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1GV221",
+      "to": "1GV222",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "A Bachelor's degree in engineering, science or social sciences. Wind Power Development and Management, as well as participation in the courses Planning for Wind Energy and Wind Energy Resource and Technology. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    }
+  ],
   "revisions": [
     {
       "id": "10003",

@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:45:45.161639+00:00",
+  "generatedAt": "2026-09-06T06:37:27.541663+00:00",
   "edges": [
     {
       "code": "2IS071",
@@ -26,6 +26,13 @@
     {
       "code": "2IS076",
       "text": "90 credits in information systems or the equivalent",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "2IS082",
+      "text": "A Bachelor's degree of 180 credits and 60 credits at Master's level, including at least 30 credits in information systems Proficiency in English equivalent to the general entry requirements for first-cycle (Bachelor's level) studies.",
       "result": {
         "edges": []
       }

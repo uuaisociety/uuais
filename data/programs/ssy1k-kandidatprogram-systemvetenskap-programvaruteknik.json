@@ -341,7 +341,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Valbara kurser 30 hp eller utbytesstudier. Studenterna har platsgaranti på:",
-      "labelEn": "Elective courses worth 30 credits or exchange studies; students have guaranteed places on the courses listed below.",
+      "labelEn": "Elective courses worth 30 credits or exchange studies are allowed.",
       "cohortBefore": null,
       "source": "llm"
     }

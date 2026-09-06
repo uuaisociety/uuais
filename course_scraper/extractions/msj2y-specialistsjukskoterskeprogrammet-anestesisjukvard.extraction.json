@@ -1,6 +1,14 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:31:59.776703+00:00",
-  "edges": [],
+  "generatedAt": "2026-09-06T06:29:42.680125+00:00",
+  "edges": [
+    {
+      "code": "3KR037",
+      "text": "Admitted to and commenced studies in the specialist nursing programme. Passed courses including 15 credits in the chosen specialisation.",
+      "result": {
+        "edges": []
+      }
+    }
+  ],
   "rules": []
 }

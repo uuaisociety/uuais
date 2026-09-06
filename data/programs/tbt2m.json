@@ -83,7 +83,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "120 credits in science/engineering, of which at least 15 credits in Mathematics. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     },
     {
       "code": "1KB236",
@@ -349,7 +349,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Either (1) 120 credits in science/engineering including Solid State Chemistry, Materials Chemistry 10 hp, and Surface Characterisation. Participation in Surface and Materials Analysis or Materials Synthesis, or (2) 120 credits in science/engineering including Materials Chemistry 5 hp, Materials Analysis for Batteries 10 hp, and Synthesis of Battery Materials 5 hp."
     },
     {
       "code": "1KB288",
@@ -461,7 +461,7 @@
       "periods": [],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. Participation in 30 credits within the main field of Battery Technology at advanced level, of which 20 credits must have been completed. Introduction to Energy Storage. Rechargeable Batteries. Proficiency in English equivalent to the Swedish upper secondary course English 6."
     }
   ],
   "rules": [
@@ -472,7 +472,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "För alla studenter:",
-      "labelEn": "This note applies to all students, but no specific requirement is stated.",
+      "labelEn": "A heading indicating the following applies to all students.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -483,7 +483,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "För studenter som följer spår batterimaterial:",
-      "labelEn": "Applies to students following the battery materials track.",
+      "labelEn": "This is a heading addressed to students following the battery materials track.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -494,7 +494,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "För studenter som följer spår battericeller och system:",
-      "labelEn": "For students following the track in battery cells and systems:",
+      "labelEn": "This is a heading introducing content for students following the battery cells and systems track.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -505,7 +505,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "För alla studenter:",
-      "labelEn": "For all students:",
+      "labelEn": "A bare heading addressed to all students with no content.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -516,7 +516,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "För studenter som följer spår batterimaterial:",
-      "labelEn": "Applies to students following the battery materials track.",
+      "labelEn": "This is a heading indicating the following applies to students on the battery materials track.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -527,7 +527,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "För studenter som följer spår battericeller och system:",
-      "labelEn": "For students following the battery cells and systems track.",
+      "labelEn": "This is a heading addressing students following the battery cells and systems track.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -540,7 +540,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "1EL033 ges i mån av resurser.",
-      "labelEn": "1EL033 is offered subject to available resources.",
+      "labelEn": "The course 1EL033 is offered subject to available resources.",
       "cohortBefore": null,
       "source": "llm"
     }
@@ -605,6 +605,41 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "120 credits in science/engineering. Introduction to Electromobility or participation in Batteries and Storage. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB738",
+      "to": "1KB099",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. Participation in 30 credits within the main field of Battery Technology at advanced level, of which 20 credits must have been completed. Introduction to Energy Storage. Rechargeable Batteries. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB744",
+      "to": "1KB099",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen. Participation in 30 credits within the main field of Battery Technology at advanced level, of which 20 credits must have been completed. Introduction to Energy Storage. Rechargeable Batteries. Proficiency in English equivalent to the Swedish upper secondary course English 6."
+    },
+    {
+      "from": "1KB230",
+      "to": "1KB265",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Either (1) 120 credits in science/engineering including Solid State Chemistry, Materials Chemistry 10 hp, and Surface Characterisation. Participation in Surface and Materials Analysis or Materials Synthesis, or (2) 120 credits in science/engineering including Materials Chemistry 5 hp, Materials Analysis for Batteries 10 hp, and Synthesis of Battery Materials 5 hp."
+    },
+    {
+      "from": "1KB729",
+      "to": "1KB265",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Either (1) 120 credits in science/engineering including Solid State Chemistry, Materials Chemistry 10 hp, and Surface Characterisation. Participation in Surface and Materials Analysis or Materials Synthesis, or (2) 120 credits in science/engineering including Materials Chemistry 5 hp, Materials Analysis for Batteries 10 hp, and Synthesis of Battery Materials 5 hp."
+    },
+    {
+      "from": "1KB732",
+      "to": "1KB265",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "Either (1) 120 credits in science/engineering including Solid State Chemistry, Materials Chemistry 10 hp, and Surface Characterisation. Participation in Surface and Materials Analysis or Materials Synthesis, or (2) 120 credits in science/engineering including Materials Chemistry 5 hp, Materials Analysis for Batteries 10 hp, and Synthesis of Battery Materials 5 hp."
     },
     {
       "from": "1KB230",

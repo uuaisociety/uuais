@@ -1,10 +1,17 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:28:41.943948+00:00",
+  "generatedAt": "2026-09-06T06:24:11.089942+00:00",
   "edges": [
     {
       "code": "3MG322",
       "text": "180 credits from a programme in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, cell/molecular biology, genetics, life science, medical sciences or a similar field of study. Also required are courses in biochemistry, cell biology, chemistry, genetics, and molecular biology/genetics totalling at least 30 credits. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "3MG323",
+      "text": "BSc, Bachelor's degree, equivalent to a Swedish degree of at least 180 credits in biochemistry/chemistry, biology, biomedicine/medicine, biotechnology, cell/molecular biology, genetics, life science, medical sciences or a similar field of study giving relevant knowledge in bio-/chemistry, cell- and molecular biology as well as genetics. Knowledge of and experience in laboratory work. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
       "result": {
         "edges": []
       }
@@ -42,7 +49,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Semester with elective courses (15 hp) or the start of a 45 hp master project in molecular medicine.",
+        "labelEn": "Elective period of 15 hp or alternatively the start of a 45 hp master project in molecular medicine.",
         "cohortBefore": null
       }
     },
@@ -56,7 +63,7 @@
       "result": {
         "type": "NOTE",
         "courseCodes": [],
-        "labelEn": "Continuation of a 45.0 hp master project or a Master project in Molecular Medicine, 30.0 hp, advanced level.",
+        "labelEn": "Continuation of a 45.0 hp master project, or the Master Project in Molecular Medicine at 30.0 hp, advanced level.",
         "cohortBefore": null
       }
     }

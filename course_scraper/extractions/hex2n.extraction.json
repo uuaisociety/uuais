@@ -1,6 +1,53 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:24:19.506456+00:00",
-  "edges": [],
+  "generatedAt": "2026-09-06T06:21:13.789353+00:00",
+  "edges": [
+    {
+      "code": "5SD324",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including 30 credits in game design or game development. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD325",
+      "text": "A Bachelor's degree, equivalent to a Swedish Kandidatexamen, from an internationally recognised university, including 30 credits in game design or game development. Proficiency in English equivalent to the Swedish upper secondary course English 6.",
+      "result": {
+        "edges": []
+      }
+    },
+    {
+      "code": "5SD326",
+      "text": "Introduction to Experimental Game Design, 15 credits (5SD324)",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD324",
+            "type": "HARD"
+          }
+        ]
+      }
+    },
+    {
+      "code": "5SD327",
+      "text": "Introduction to Experimental Game Design, 15 credits (5SD324); Methods for Advanced and Reflective Practice, 15 credits (5SD325) and 7.5 credits from Game Development and Communication, 15 credits (5SD326).",
+      "result": {
+        "edges": [
+          {
+            "from": "5SD324",
+            "type": "HARD"
+          },
+          {
+            "from": "5SD325",
+            "type": "HARD"
+          },
+          {
+            "from": "5SD326",
+            "type": "HARD"
+          }
+        ]
+      }
+    }
+  ],
   "rules": []
 }

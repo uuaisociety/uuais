@@ -1,6 +1,6 @@
 {
   "model": "z-ai/glm-5.3-flash",
-  "generatedAt": "2026-09-05T12:29:27.612788+00:00",
+  "generatedAt": "2026-09-06T06:24:50.024170+00:00",
   "edges": [
     {
       "code": "3FV371",
@@ -21,7 +21,7 @@
       "result": {
         "type": "EITHER_OR",
         "courseCodes": [],
-        "labelEn": "Either take 3DR715 Computed Tomography (15 credits) or elective courses corresponding to 15 credits.",
+        "labelEn": "Alternatively, Computed Tomography (15 hp) or elective courses totalling 15 hp may be taken.",
         "cohortBefore": null
       }
     },
@@ -35,7 +35,7 @@
       "result": {
         "type": "EITHER_OR",
         "courseCodes": [],
-        "labelEn": "Alternatively, Nuclear Medicine and PET (15 hp) may be taken, or elective courses corresponding to 15 hp.",
+        "labelEn": "Alternatively 3DR915 Nuclear Medicine and PET, 15 hp, or elective courses totalling 15 hp.",
         "cohortBefore": null
       }
     },
@@ -49,7 +49,7 @@
       "result": {
         "type": "EITHER_OR",
         "courseCodes": [],
-        "labelEn": "Students may choose either 3DR815 Magnetic Resonance Tomography or elective courses totalling 15 hp.",
+        "labelEn": "Alternatively, a non-roster course or 15 hp of elective courses may be taken.",
         "cohortBefore": null
       }
     }

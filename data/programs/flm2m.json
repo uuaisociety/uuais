@@ -52,7 +52,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "samt ett av nedanstående alternativ:a) Valbara kurser om 22,5 hpb) Valbar kurs 7,5 hp och magisterprojekt i läkemedelsanvändning, 3FB009, 15 hp",
-      "labelEn": "Students choose one of two alternatives: elective courses worth 22.5 credits, or a 7.5-credit elective course combined with a 15-credit master's project in drug management.",
+      "labelEn": "Students must choose one of the listed alternatives, one of which includes a master's thesis in drug management.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -63,7 +63,7 @@
       "semester": 2,
       "trackId": null,
       "textSv": "Ett av nedanstående alternativ kan väljas:a) Valbara kurser b) Valbara kurser och magisterprojekt i läkemedelsanvändning 15 hp (3FB009) ellerc) Magisterprojekt i läkemedelsanvändning 30 hp (3FB008).",
-      "labelEn": "One of three alternatives—elective courses, elective courses plus a 15 hp master's thesis, or a 30 hp master's thesis in drug management—must be chosen.",
+      "labelEn": "One of the listed options may be chosen, including elective courses with or without a master's thesis in drug management.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -74,7 +74,7 @@
       "semester": 3,
       "trackId": null,
       "textSv": "Valbara kurser.",
-      "labelEn": "This is a heading for elective courses.",
+      "labelEn": "This is a heading indicating elective courses.",
       "cohortBefore": null,
       "source": "llm"
     }

@@ -26,7 +26,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D"
     },
     {
       "code": "1MA352",
@@ -45,7 +45,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Mathematics Further level 1c, or Mathematics 3c/Mathematics D"
     },
     {
       "code": "1TS366",
@@ -65,7 +65,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "General entry requirements and Physics level 2, Chemistry level 1, Mathematics Further level 1c, or Physics 2, Chemistry 1, Mathematics 3c/Mathematics D"
     },
     {
       "code": "1MA353",
@@ -84,7 +84,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Linear Algebra for Engineers."
     },
     {
       "code": "1TS365",
@@ -103,7 +103,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Introduction to Construction Engineering and also Building Design with Drawing (can be taken in parallel)."
     },
     {
       "code": "1TE601",
@@ -123,7 +123,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Linear Algebra for Engineers, Calculus I for Engineers and Basic Structural Engineering."
     },
     {
       "code": "1TE442",
@@ -143,7 +143,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Introduction to Construction Engineering."
     },
     {
       "code": "1MA354",
@@ -162,7 +162,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participation in Linear Algebra for Engineers and Calculus I for Engineers."
     },
     {
       "code": "1TS367",
@@ -181,7 +181,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "Participaction in Introduction to Construction Engineering, Building Design with Drawing and also Basic Structural Engineering."
     },
     {
       "code": "1FA430",
@@ -278,7 +278,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "5 hp in mathematics. Participation in Calculus II for Engineers."
     },
     {
       "code": "1TS357",
@@ -337,7 +337,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits within the Bachelor's Programme in Construction Engineering"
     },
     {
       "code": "1TE743",
@@ -490,7 +490,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "105 credits within a Bachelor's Programme in Engineering"
     },
     {
       "code": "1TS329",
@@ -509,7 +509,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "60 credits in the Bachelor's Programme in Construction Engineering. Construction Materials, Building Design and Drawing, and Project 1: Designing of Detached House."
     },
     {
       "code": "1TE447",
@@ -528,7 +528,7 @@
       ],
       "trackId": null,
       "onlyProgramme": null,
-      "entryRequirements": null
+      "entryRequirements": "90 credits within the Bachelor's Programme in Construction Engineering. Participation in Structural Mechanics and Design."
     },
     {
       "code": "1TG318",
@@ -577,7 +577,7 @@
       "semester": 1,
       "trackId": null,
       "textSv": "Byggnadsprojektering med ritteknik 10 hp (1TS366) ersätter kursen Byggnadsprojektering med ritteknik 5 hp (1TE440). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet.",
-      "labelEn": "Building Design with Drawing 10 hp (1TS366) replaces the earlier 5 hp course; the two cannot both count toward the degree, and one of them is required.",
+      "labelEn": "The 10 hp course 1TS366 replaces the older 5 hp version, and the two courses cannot both count toward the degree.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -606,13 +606,13 @@
       "semester": 5,
       "trackId": null,
       "textSv": "Kurser som inte är obligatoriska kallas för valbara. Det är obligatoriskt att läsa minst 20 hp av de valbara kurserna i årskurs 3 (hit räknas inte s k tillvalskurser).",
-      "labelEn": "At least 20 credits of elective courses in year 3 are compulsory; so-called optional courses (tillvalskurser) do not count toward this requirement.",
+      "labelEn": "At least 20 credits of elective courses must be taken in year 3; optional courses do not count toward this.",
       "cohortBefore": null,
       "source": "llm"
     },
     {
       "id": "rule-3",
-      "type": "NOTE",
+      "type": "RECOMMENDED",
       "courseCodes": [
         "1TE403",
         "1TM018",
@@ -626,7 +626,7 @@
       "semester": 5,
       "trackId": null,
       "textSv": "1TE403, 1TM018 och 1TE447 passar för en studieinriktning mot konstruktion (kurserna kan kräva behörighetskedja).5KV779 och 1TG318 passar för en studieinriktning mot förvaltning (kurserna kan kräva behörighetskedja).1TM117, 1TE438 och 1TS329 passar för en studieinriktning mot energi och miljö (kurserna kan kräva behörighetskedja).",
-      "labelEn": "The courses are grouped into suggested specialisations: construction (1TE403, 1TM018, 1TE447), management and maintenance (5KV779, 1TG318), and energy and environment (1TM117, 1TE438, 1TS329), each of which may require a prerequisite chain.",
+      "labelEn": "Courses recommended for specialisation tracks in construction, property management, or energy and environment, possibly requiring prerequisite chains.",
       "cohortBefore": null,
       "source": "llm"
     },
@@ -723,6 +723,27 @@
       "rationale": "Participation in Algebra and Vector Geometry or Linear algebra for engineers. Participation in Calculus for Engineers or Calculus II for engineers. Participation in Structural Mechanics."
     },
     {
+      "from": "1MA352",
+      "to": "1MA354",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Linear Algebra for Engineers and Calculus I for Engineers."
+    },
+    {
+      "from": "1MA353",
+      "to": "1MA354",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Linear Algebra for Engineers and Calculus I for Engineers."
+    },
+    {
+      "from": "1MA354",
+      "to": "1MS008",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "5 hp in mathematics. Participation in Calculus II for Engineers."
+    },
+    {
       "from": "1MA353",
       "to": "1TE403",
       "type": "HARD",
@@ -758,6 +779,13 @@
       "rationale": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Project 1: Designing of Detached House."
     },
     {
+      "from": "1TE439",
+      "to": "1TE442",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Introduction to Construction Engineering."
+    },
+    {
       "from": "1MA352",
       "to": "1TE443",
       "type": "HARD",
@@ -766,13 +794,6 @@
     },
     {
       "from": "1MA353",
-      "to": "1TE443",
-      "type": "SOFT",
-      "source": "llm",
-      "rationale": "Algebra and Vector Geometry or Linear Algebra for Engineers. Participation in Calculus for Engineers and Construction Mechanics."
-    },
-    {
-      "from": "1MA354",
       "to": "1TE443",
       "type": "SOFT",
       "source": "llm",
@@ -807,11 +828,32 @@
       "rationale": "Introduction to Construction Engineering. Building Design and Drawing. Participation in Construction Materials and Project 1: Designing of Detached House."
     },
     {
-      "from": "1TE439",
-      "to": "1TE743",
+      "from": "1TE403",
+      "to": "1TE447",
       "type": "SOFT",
       "source": "llm",
-      "rationale": "15 credits in science/engineering. Participation in the introductory course for one of the Faculty's programmes."
+      "rationale": "90 credits within the Bachelor's Programme in Construction Engineering. Participation in Structural Mechanics and Design."
+    },
+    {
+      "from": "1MA352",
+      "to": "1TE601",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Linear Algebra for Engineers, Calculus I for Engineers and Basic Structural Engineering."
+    },
+    {
+      "from": "1MA353",
+      "to": "1TE601",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Linear Algebra for Engineers, Calculus I for Engineers and Basic Structural Engineering."
+    },
+    {
+      "from": "1TS365",
+      "to": "1TE601",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participation in Linear Algebra for Engineers, Calculus I for Engineers and Basic Structural Engineering."
     },
     {
       "from": "1FA430",
@@ -826,6 +868,41 @@
       "type": "HARD",
       "source": "llm",
       "rationale": "60 credits within the Bachelor's Programme in Construction Engineering including Building Physics and Fluid and Thermodynamics."
+    },
+    {
+      "from": "1TE442",
+      "to": "1TS329",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in the Bachelor's Programme in Construction Engineering. Construction Materials, Building Design and Drawing, and Project 1: Designing of Detached House."
+    },
+    {
+      "from": "1TS366",
+      "to": "1TS329",
+      "type": "HARD",
+      "source": "llm",
+      "rationale": "60 credits in the Bachelor's Programme in Construction Engineering. Construction Materials, Building Design and Drawing, and Project 1: Designing of Detached House."
+    },
+    {
+      "from": "1TE439",
+      "to": "1TS367",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participaction in Introduction to Construction Engineering, Building Design with Drawing and also Basic Structural Engineering."
+    },
+    {
+      "from": "1TS365",
+      "to": "1TS367",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participaction in Introduction to Construction Engineering, Building Design with Drawing and also Basic Structural Engineering."
+    },
+    {
+      "from": "1TS366",
+      "to": "1TS367",
+      "type": "SOFT",
+      "source": "llm",
+      "rationale": "Participaction in Introduction to Construction Engineering, Building Design with Drawing and also Basic Structural Engineering."
     }
   ],
   "revisions": [
