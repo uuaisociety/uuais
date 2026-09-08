@@ -274,8 +274,16 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased transition-colors duration-300;
+    @apply bg-background text-foreground font-sans antialiased transition-[background-color] duration-300;
     font-feature-settings: "ss01", "cv01";
+  }
+
+  /* Text owns its theme fade rather than inheriting one from `body`. An
+     animating inherited `color` re-resolves every frame, which cancels and
+     restarts any descendant colour transition — inside a <button> that
+     doubled the header dropdowns' fade (~650ms vs ~345ms for the links). */
+  :where(h1, h2, h3, h4, p, li, blockquote, dd, dt) {
+    transition: color 0.3s var(--ease-ios);
   }
 
   /* Display headings: tight tracking, optical sizing — the KTH-style
