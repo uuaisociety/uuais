@@ -77,7 +77,7 @@ export const Footer: React.FC = () => {
                 height={40}
                 className="h-9 w-9"
               />
-              <span className="text-base font-semibold tracking-[-0.03em]">UU AI Society</span>
+              <span className="text-base font-semibold tracking-[-0.03em] transition-colors duration-300">UU AI Society</span>
             </div>
             <p className="text-[0.9375rem] leading-relaxed text-muted-foreground max-w-xs mb-7">
               Connecting students passionate about artificial intelligence — through hands-on
