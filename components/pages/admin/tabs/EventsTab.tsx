@@ -24,6 +24,11 @@ const categoryOptions = [
   { value: "other", label: "Other" },
 ];
 
+// The stored `status` field is only written at creation time, so derive the
+// upcoming/past state from `eventStartAt` like the public pages do.
+const isUpcoming = (event: Event) =>
+  !!event.eventStartAt && new Date(event.eventStartAt).getTime() > Date.now();
+
 const EventsTab: React.FC = () => {
   const { state, dispatch } = useApp();
   const events = state.events;
@@ -201,10 +206,10 @@ const EventsTab: React.FC = () => {
                       {event.title}
                     </h3>
                     <Tag
-                      variant={event.status === "upcoming" ? "green" : "gray"}
+                      variant={isUpcoming(event) ? "green" : "gray"}
                       size="sm"
                     >
-                      {event.status}
+                      {isUpcoming(event) ? "upcoming" : "past"}
                     </Tag>
                     <Tag variant="blue" size="sm">
                       {categoryOptions.find(
