@@ -13,6 +13,7 @@ import { FieldGroup, InputBase, SelectBase, TextareaBase } from '@/components/ui
 import { useNotify } from '@/components/ui/Notifications';
 import { DiscordCta } from '@/components/common/DiscordCta';
 import { useRouter } from 'next/navigation';
+import { currentRedirect } from '@/lib/login-redirect';
 
 const JoinPage: React.FC = () => {
   const router = useRouter();
@@ -121,7 +122,8 @@ const JoinPage: React.FC = () => {
       const { refreshProfile } = await import('@/hooks/useAdmin');
       await refreshProfile();
       notify({ type: 'success', title: 'Saved', message: 'Profile saved successfully.' });
-      router.push('/account');
+      // Registration is often a detour (e.g. an application form) — return there, not /account.
+      router.push(currentRedirect() || '/account');
     } catch {
       // Error silently handled
     } finally {

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { signInWithGooglePopup, signInWithGithubPopup } from '@/lib/firebase-client'
 import { getUserProfile } from '@/lib/firestore'
 import { useRouter } from 'next/navigation'
+import { joinUrl, currentRedirect } from '@/lib/login-redirect'
 
 import type { FC } from "react";
 import Link from "next/link";
@@ -21,7 +22,7 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
     const [error, setError] = useState<string | null>(null);
 
     // A provider account that never created a profile is signed out by the
-    // RegistrationGate off /join; send it to /join to complete account creation.
+    // RegistrationGate off /join; send it to /join to complete account creation, keeping the redirect.
     const handleAuth = async (signIn: () => Promise<{ uid: string }>) => {
         setError(null);
         try {
@@ -34,7 +35,7 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
                 console.warn('Failed to load profile after sign-in:', e);
             }
             if (!completed) {
-                router.push('/join');
+                router.push(joinUrl(currentRedirect()));
                 return;
             }
             after();

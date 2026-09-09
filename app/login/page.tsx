@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import LoginModal from '@/components/ui/LoginModal'
 import { useAdmin } from '@/hooks/useAdmin'
 import { updatePageMeta } from '@/utils/seo'
+import { currentRedirect, joinUrl } from '@/lib/login-redirect'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -16,12 +17,11 @@ export default function LoginPage() {
   }, []);
 
   const after = () => {
-    const params = new URLSearchParams(window.location.search)
-    const redirect = params.get('redirect')
-    // Only allow local paths to prevent open redirects to external sites
-    // (including protocol-relative URLs like //evil.com)
-    router.push(redirect && redirect.startsWith('/') && !redirect.startsWith('//') ? redirect : '/account')
+    router.push(currentRedirect() || '/account')
   }
+
+  // Read once on mount so the param survives the /join detour.
+  const [redirect] = useState<string | null>(() => currentRedirect())
 
   // A provider account that never created a profile is signed out by the
   // RegistrationGate off /join; point the user at account creation.
@@ -33,7 +33,7 @@ export default function LoginPage() {
         <div className="max-w-xs mx-auto px-4 mb-4">
           <p className="p-3 rounded-md border border-yellow-300 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-950 text-sm text-yellow-900 dark:text-yellow-200">
             This account hasn&apos;t created a profile yet —{' '}
-            <Link href="/join" className="underline font-medium">create an account</Link> to continue.
+            <Link href={joinUrl(redirect)} className="underline font-medium">create an account</Link> to continue.
           </p>
         </div>
       )}

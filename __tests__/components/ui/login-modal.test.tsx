@@ -81,6 +81,26 @@ describe('LoginCard', () => {
     expect(after).not.toHaveBeenCalled()
   })
 
+  it('carries the pending redirect into /join so the detour still ends at the target', async () => {
+    window.history.replaceState({}, '', '/login?redirect=%2Fapply%2Fteam')
+    mockSignInWithGooglePopup.mockResolvedValue(mockUser)
+    mockGetUserProfile.mockResolvedValue(null)
+    render(<LoginCard after={jest.fn()} />)
+    await userEvent.click(screen.getByText(/Continue with Google/))
+    expect(mockRouterPush).toHaveBeenCalledWith('/join?redirect=%2Fapply%2Fteam')
+    window.history.replaceState({}, '', '/')
+  })
+
+  it('ignores an off-site redirect when detouring to /join', async () => {
+    window.history.replaceState({}, '', '/login?redirect=%2F%2Fevil.com')
+    mockSignInWithGooglePopup.mockResolvedValue(mockUser)
+    mockGetUserProfile.mockResolvedValue(null)
+    render(<LoginCard after={jest.fn()} />)
+    await userEvent.click(screen.getByText(/Continue with Google/))
+    expect(mockRouterPush).toHaveBeenCalledWith('/join')
+    window.history.replaceState({}, '', '/')
+  })
+
   it('redirects to /join when the profile is incomplete', async () => {
     mockSignInWithGooglePopup.mockResolvedValue(mockUser)
     mockGetUserProfile.mockResolvedValue({ id: 'u1', isMember: true }) // missing privacyAcceptedAt

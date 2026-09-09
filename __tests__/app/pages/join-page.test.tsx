@@ -187,6 +187,23 @@ describe('JoinPage', () => {
       expect(mockedNav().useRouter().push).toHaveBeenCalledWith('/account')
     })
 
+    it('returns to the pending redirect after save instead of /account', async () => {
+      window.history.replaceState({}, '', '/join?redirect=%2Fapply%2Fteam')
+      mockedUsers().upsertUserProfile.mockResolvedValue(undefined)
+      mockedUsers().getUserProfile
+        .mockResolvedValueOnce(null)
+        .mockResolvedValueOnce({ id: 'u1', displayName: 'TestUser', isMember: true })
+
+      render(<JoinPage />)
+      await triggerAuthCallback(mockUser)
+      fireEvent.click(screen.getByLabelText(/I accept the/))
+      fireEvent.click(screen.getByText('Save & Become Member'))
+
+      await screen.findByText('Save & Become Member')
+      expect(mockedNav().useRouter().push).toHaveBeenCalledWith('/apply/team')
+      window.history.replaceState({}, '', '/')
+    })
+
     it('can update displayName field', async () => {
       render(<JoinPage />)
       await triggerAuthCallback(mockUser)
