@@ -75,6 +75,7 @@ describe('TeamApplicationPage', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     localStorage.clear()
+    sessionStorage.clear()
     mockAuthUser = null
     mockGetTeamApplicationByUid.mockResolvedValue(null)
     mockSubscribeToCampaignQuestions.mockImplementation(() => jest.fn())
@@ -354,6 +355,7 @@ mockCampaigns([sampleCampaign])
   })
 
   it('explains why Submit is blocked until the confirmation is ticked', () => {
+    mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
 mockCampaigns([sampleCampaign])
     render(<TeamApplicationPage />)
@@ -524,4 +526,128 @@ mockCampaigns([sampleCampaign])
 
     global.fetch = originalFetch
   })
+
+  describe('signing in mid-application', () => {
+    const fillToReview = () => {
+      fireEvent.click(screen.getByText('Continue'))
+      fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
+      fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
+      fireEvent.click(screen.getByText('Continue'))
+      fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), { target: { value: 'https://linkedin.com/in/alice' } })
+      fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'))
+      fireEvent.click(screen.getByText('Continue'))
+      fireEvent.click(screen.getByRole('button', { name: /Add IT Member/i }))
+      fireEvent.change(screen.getByPlaceholderText(/Tell us why you want to join/), { target: { value: 'I am excited to contribute to AI.' } })
+      fireEvent.click(screen.getByText('Continue'))
+      fireEvent.click(screen.getByLabelText(/I confirm the information above is accurate/i))
+    }
+
+    it('labels the action "Sign in to submit" and warns on Review when signed out', async () => {
+      mockCampaigns([sampleCampaign])
+      render(<TeamApplicationPage />)
+      fillToReview()
+
+      expect(screen.getByRole('button', { name: /Sign in to submit/i })).toBeInTheDocument()
+      expect(screen.queryByRole('button', { name: /^Submit application/i })).not.toBeInTheDocument()
+      expect(screen.getByText(/You're not signed in yet/)).toBeInTheDocument()
+      expect(screen.getByText(/Nothing is sent until you press Submit application/)).toBeInTheDocument()
+    })
+
+    it('hands the campaign-scoped form to sign-in instead of submitting', async () => {
+      mockCampaigns([sampleCampaign])
+      const fetchMock = jest.fn()
+      const originalFetch = global.fetch
+      global.fetch = fetchMock as unknown as typeof fetch
+
+      render(<TeamApplicationPage />)
+      fillToReview()
+      fireEvent.click(screen.getByRole('button', { name: /Sign in to submit/i }))
+
+      expect(fetchMock).not.toHaveBeenCalled()
+      const pending = JSON.parse(sessionStorage.getItem('pendingApplication.v2')!)
+      expect(pending.campaignId).toBe('spring2026')
+      expect(pending.resumeAttached).toBe(false)
+      expect(pending.form.name).toBe('Alex')
+      expect(pending.form.motivation).toBe('I am excited to contribute to AI.')
+      expect(pending.form.roleRanking).toHaveLength(1)
+      expect(pending.form.agree).toBe(true)
+
+      global.fetch = originalFetch
+    })
+
+    it('restores the handed-over application on the Review step and says it is not submitted', async () => {
+      sessionStorage.setItem('pendingApplication.v2', JSON.stringify({
+        campaignId: 'spring2026',
+        resumeAttached: false,
+        form: {
+          name: 'Alex', email: 'alex@test.com', linkedin: 'https://linkedin.com/in/alice',
+          interests: ['ai_research'], motivation: 'I am excited to contribute to AI.',
+          roleRanking: [{ roleId: 'it_member', teamId: 'it', title: 'IT Member', teamName: 'IT' }],
+          agree: true, customAnswers: {},
+        },
+      }))
+      mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
+      mockCampaigns([sampleCampaign])
+      render(<TeamApplicationPage />)
+
+      await waitFor(() => expect(mockNotify).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Not submitted yet — finish below' })
+      ))
+      expect(screen.getByRole('heading', { name: /Review & Submit/i, level: 2 })).toBeInTheDocument()
+      expect(screen.getByText(/not been submitted yet/)).toBeInTheDocument()
+      // The restored ranking survives the campaign-change reset that also runs on mount.
+      expect(screen.getByText('IT Member')).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /Submit application/i })).toBeInTheDocument()
+      expect(sessionStorage.getItem('pendingApplication.v2')).toBeNull()
+    })
+
+    it('sends the user back to the resume step when a resume was attached', async () => {
+      sessionStorage.setItem('pendingApplication.v2', JSON.stringify({
+        campaignId: 'spring2026',
+        resumeAttached: true,
+        form: { name: 'Alex', email: 'alex@test.com', interests: [], roleRanking: [], customAnswers: {} },
+      }))
+      mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
+      mockCampaigns([sampleCampaign])
+      render(<TeamApplicationPage />)
+
+      await waitFor(() => expect(screen.getByRole('heading', { name: /Experience & Interests/i, level: 2 })).toBeInTheDocument())
+      expect(screen.getByText(/Re-attach your resume on this step/)).toBeInTheDocument()
+    })
+
+    it('keeps a handoff for another campaign untouched', async () => {
+      const other = JSON.stringify({ campaignId: 'autumn2025', resumeAttached: false, form: { name: 'Alex' } })
+      sessionStorage.setItem('pendingApplication.v2', other)
+      mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
+      mockCampaigns([sampleCampaign])
+      render(<TeamApplicationPage />)
+
+      await waitFor(() => expect(screen.getByText('Spring 2026 Recruitment')).toBeInTheDocument())
+      expect(sessionStorage.getItem('pendingApplication.v2')).toBe(other)
+    })
+
+    it('does not consume the handoff while the visitor is still signed out', async () => {
+      const pending = JSON.stringify({ campaignId: 'spring2026', resumeAttached: false, form: { name: 'Alex' } })
+      sessionStorage.setItem('pendingApplication.v2', pending)
+      mockCampaigns([sampleCampaign])
+      render(<TeamApplicationPage />)
+
+      await waitFor(() => expect(screen.getByText('Spring 2026 Recruitment')).toBeInTheDocument())
+      expect(sessionStorage.getItem('pendingApplication.v2')).toBe(pending)
+    })
+
+    it('adopts the signed-out draft after sign-in so the form is not lost', async () => {
+      localStorage.setItem('teamApplicationDraft:spring2026:anon', JSON.stringify({
+        name: 'Alex', email: 'alex@test.com', step: 1, interests: [], roleRanking: [],
+      }))
+      mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
+      mockCampaigns([sampleCampaign])
+      render(<TeamApplicationPage />)
+
+      await waitFor(() => expect(mockNotify).toHaveBeenCalledWith(expect.objectContaining({ title: 'Draft restored' })))
+      expect(screen.getByLabelText(/Full name/i)).toHaveValue('Alex')
+      expect(localStorage.getItem('teamApplicationDraft:spring2026:anon')).toBeNull()
+    })
+  })
+
 })

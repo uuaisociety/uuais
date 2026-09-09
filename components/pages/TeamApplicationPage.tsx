@@ -22,7 +22,7 @@ import TagComponent from "@/components/ui/Tag";
 import PDFDropzone from "@/components/ui/PDFDropzone";
 import { useNotify } from "@/components/ui/Notifications";
 import { auth, refreshSessionCookie } from "@/lib/firebase-client";
-import { loginUrl } from "@/lib/login-redirect";
+import { joinUrl, loginUrl } from "@/lib/login-redirect";
 import { getUserProfile, type UserProfile } from "@/lib/firestore/users";
 import { subscribeToCampaignQuestions } from "@/lib/firestore/campaignQuestions";
 import { subscribeOpenCampaigns } from "@/lib/firestore/applicationCampaigns";
@@ -99,6 +99,14 @@ const emptyForm: TeamFormData = {
 };
 
 const DRAFT_PREFIX = "teamApplicationDraft";
+// Hands the in-progress form to the post-sign-in mount; versioned so a stale entry is ignored, not half-restored.
+const PENDING_KEY = "pendingApplication.v2";
+
+interface PendingApplication {
+  campaignId: string;
+  resumeAttached: boolean;
+  form: Partial<TeamFormData>;
+}
 
 // Does the form hold anything worth persisting? An untouched form is skipped
 // so we never create a draft the moment someone opens the page.
@@ -181,6 +189,9 @@ export default function TeamApplicationPage() {
   const [form, setForm] = useState<TeamFormData>(emptyForm);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const [signedIn, setSignedIn] = useState(false);
+  // Set when this mount restored a form handed over by the sign-in redirect.
+  const [restored, setRestored] = useState<{ resumeNeeded: boolean } | null>(null);
   const [customQuestions, setCustomQuestions] = useState<CampaignQuestion[]>([]);
 
   // Roles currently open in this campaign (respects per-role status + deadline)
@@ -231,6 +242,7 @@ export default function TeamApplicationPage() {
   // Prefill from auth profile
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(async (user) => {
+      setSignedIn(!!user);
       if (!user) { setAuthLoading(false); return; }
       setForm((prev) => ({
         ...prev,
@@ -258,24 +270,6 @@ export default function TeamApplicationPage() {
     return () => unsub();
   }, []);
 
-  // Restore a pending application saved before login redirect
-  useEffect(() => {
-    if (authLoading) return;
-    const raw = sessionStorage.getItem("pendingApplication");
-    if (!raw) return;
-    try {
-      const saved = JSON.parse(raw) as Partial<TeamFormData>;
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setForm((prev) => ({ ...prev, ...saved }));
-      sessionStorage.removeItem("pendingApplication");
-      // Jump to the experience step so they can re-attach their resume
-      setStep(2);
-      notify({ type: "info", title: "Application restored", message: "Please re-attach your resume before submitting." });
-    } catch {
-      sessionStorage.removeItem("pendingApplication");
-    }
-  }, [authLoading, notify]);
-
   // Reset preferences when the campaign changes so stale rankings from another campaign don't bleed in.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -287,7 +281,37 @@ export default function TeamApplicationPage() {
   // campaign + user so sessions never bleed into each other. The resume File
   // can't be serialized — we remember it was attached and ask again on restore.
   const draftKey = campaign ? `${DRAFT_PREFIX}:${campaign.id}:${auth.currentUser?.uid || "anon"}` : null;
+  const anonDraftKey = campaign ? `${DRAFT_PREFIX}:${campaign.id}:anon` : null;
   const draftRestoredRef = useRef(false);
+
+  // Restore the sign-in handoff, but only once signed in — a back-navigation must not consume it.
+  useEffect(() => {
+    if (authLoading || !signedIn || !campaign?.id) return;
+    const raw = sessionStorage.getItem(PENDING_KEY);
+    if (!raw) return;
+    try {
+      const saved = JSON.parse(raw) as PendingApplication;
+      if (saved.campaignId !== campaign.id) return;
+      sessionStorage.removeItem(PENDING_KEY);
+      // The handoff is newer than any autosaved draft, so it wins and the signed-out draft goes.
+      draftRestoredRef.current = true;
+      try { localStorage.removeItem(`${DRAFT_PREFIX}:${campaign.id}:anon`); } catch { /* best-effort */ }
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setForm((prev) => ({ ...prev, ...saved.form, resume: null }));
+      setRestored({ resumeNeeded: !!saved.resumeAttached });
+      // A File can't survive the redirect, so a pending resume means back to that step.
+      setStep(saved.resumeAttached ? 2 : WIZARD_STEPS.length - 1);
+      notify({
+        type: "info",
+        title: "Not submitted yet — finish below",
+        message: saved.resumeAttached
+          ? "You're signed in and your answers are back. Re-attach your resume, then press Submit application."
+          : "You're signed in and your answers are back. Press Submit application to finish.",
+      });
+    } catch {
+      sessionStorage.removeItem(PENDING_KEY);
+    }
+  }, [authLoading, signedIn, campaign?.id, notify]);
 
   // Restore the saved draft once, after auth and the campaign have settled.
   useEffect(() => {
@@ -295,7 +319,12 @@ export default function TeamApplicationPage() {
     if (draftRestoredRef.current) return;
     draftRestoredRef.current = true;
     try {
-      const raw = localStorage.getItem(draftKey);
+      // Adopt the "anon" draft so signing in mid-form never drops what was typed.
+      let raw = localStorage.getItem(draftKey);
+      if (!raw && anonDraftKey && anonDraftKey !== draftKey) {
+        raw = localStorage.getItem(anonDraftKey);
+        if (raw) localStorage.removeItem(anonDraftKey);
+      }
       if (!raw) return;
       const saved = JSON.parse(raw) as Partial<TeamFormData> & { resumeAttached?: boolean; step?: number };
       const { resumeAttached, ...fields } = saved;
@@ -314,7 +343,7 @@ export default function TeamApplicationPage() {
     } catch {
       localStorage.removeItem(draftKey);
     }
-  }, [authLoading, draftKey, submitted, submitting, hasApplied, notify]);
+  }, [authLoading, draftKey, anonDraftKey, submitted, submitting, hasApplied, notify]);
 
   // Auto-save once the user has engaged (step > 0) and holds real content.
   useEffect(() => {
@@ -375,8 +404,13 @@ export default function TeamApplicationPage() {
     if (!auth.currentUser) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { resume: _resume, ...rest } = form;
-      sessionStorage.setItem("pendingApplication", JSON.stringify(rest));
-      router.push("/login?redirect=/apply/team");
+      const pending: PendingApplication = {
+        campaignId: campaign.id,
+        resumeAttached: !!form.resume,
+        form: rest,
+      };
+      try { sessionStorage.setItem(PENDING_KEY, JSON.stringify(pending)); } catch { /* private mode — the draft still covers a reload */ }
+      router.push(loginUrl(pathname));
       return;
     }
     // Refresh the httpOnly session cookie (only set at /api/login) so a prior account doesn't 409 the dedup lock.
@@ -590,6 +624,8 @@ export default function TeamApplicationPage() {
     !form.agree && !submitting
       ? "Confirm that your information is accurate to submit."
       : undefined;
+  // Never label the button "Submit" when pressing it only starts sign-in.
+  const submitLabel = signedIn ? "Submit application" : "Sign in to submit";
 
   const campaignRoles = campaign.roles && campaign.roles.length > 0 ? campaign.roles : [];
   const teamsWithRoles = campaign.teams.map((teamId) => ({
@@ -633,6 +669,26 @@ export default function TeamApplicationPage() {
 
       {/* Wizard */}
       <div id="wizard" ref={wizardRef} className="scroll-mt-24 py-12 bg-background min-h-screen">
+        {/* Returning from sign-in used to look like a silent failure — say what is still needed. */}
+        {restored && !submitted && (
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+            <div
+              role="status"
+              className="rounded-md border border-primary/40 bg-primary/10 p-4 text-sm"
+            >
+              <p className="font-medium text-foreground flex items-start gap-2">
+                <Check className="h-4 w-4 shrink-0 mt-0.5 text-primary" />
+                You&apos;re signed in and your answers are back — but your application has
+                <span className="underline">&nbsp;not been submitted yet</span>.
+              </p>
+              <p className="mt-1.5 pl-6 text-muted-foreground">
+                {restored.resumeNeeded
+                  ? "Re-attach your resume on this step, then continue to Review and press “Submit application”."
+                  : "Press “Submit application” below to finish."}
+              </p>
+            </div>
+          </div>
+        )}
         <MultiStepWizard
           steps={WIZARD_STEPS}
           currentStep={step}
@@ -641,7 +697,7 @@ export default function TeamApplicationPage() {
           onSubmit={handleSubmit}
           canNext={canNext}
           canBack={true}
-          submitLabel="Submit application"
+          submitLabel={submitLabel}
           submitDisabled={submitDisabled}
           nextDisabledHint={nextDisabledHint}
           submitDisabledHint={submitDisabledHint}
@@ -721,13 +777,13 @@ export default function TeamApplicationPage() {
                   </div>
                 )}
               </div>
-              {!form.email && (
-                <div className="flex items-center gap-2 text-sm text-chart-3 bg-chart-3/10 rounded-md p-3 border border-chart-3/40">
-                  <Lock className="h-4 w-4 shrink-0" />
+              {!signedIn && !authLoading && (
+                <div className="flex items-start gap-2 text-sm text-chart-3 bg-chart-3/10 rounded-md p-3 border border-chart-3/40">
+                  <Lock className="h-4 w-4 shrink-0 mt-0.5" />
                   <span>
                     You need to <Link href={loginUrl(pathname)} className="underline font-medium">sign in</Link> or{" "}
-                    <Link href="/join" className="underline font-medium">register</Link> to submit your application.
-                    You can still fill the form now and sign in before submitting.
+                    <Link href={joinUrl(pathname)} className="underline font-medium">create an account</Link> to submit your application.
+                    You can fill the form now — your answers are saved and brought back after you sign in.
                   </span>
                 </div>
               )}
@@ -1073,6 +1129,20 @@ export default function TeamApplicationPage() {
                   Please review your application before submitting.
                 </p>
               </div>
+              {!signedIn && !authLoading && (
+                <div className="flex items-start gap-2 text-sm text-chart-3 bg-chart-3/10 rounded-md p-3 border border-chart-3/40">
+                  <Lock className="h-4 w-4 shrink-0 mt-0.5" />
+                  <span>
+                    <span className="font-medium">You&apos;re not signed in yet.</span>{" "}
+                    &ldquo;Sign in to submit&rdquo; saves your answers, takes you to sign-in, and brings you
+                    straight back here.
+                    {fieldEnabled("resume") && form.resume
+                      ? " Your resume file can't be carried over, so you'll re-attach it when you return."
+                      : ""}{" "}
+                    Nothing is sent until you press Submit application after signing in.
+                  </span>
+                </div>
+              )}
               <Card>
                 <div className="p-6 space-y-5">
                   <SummarySection icon={GraduationCap} title="Profile">

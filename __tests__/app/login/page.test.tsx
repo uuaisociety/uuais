@@ -56,6 +56,16 @@ describe('LoginPage', () => {
     global.__setAdminState?.(null)
   })
 
+  it('keeps the pending redirect on the account-creation link', () => {
+    window.history.replaceState({}, '', '/login?redirect=%2Fapply%2Fteam')
+    global.__setAdminState?.({ user: { uid: 'u1' }, profileLoading: false, profile: null })
+    render(<LoginPage />)
+    expect(screen.getByRole('link', { name: 'create an account' }))
+      .toHaveAttribute('href', '/join?redirect=%2Fapply%2Fteam')
+    global.__setAdminState?.(null)
+    window.history.replaceState({}, '', '/')
+  })
+
   it('hides the account-creation notice for members with a complete profile', () => {
     global.__setAdminState?.({
       user: { uid: 'u1' },
