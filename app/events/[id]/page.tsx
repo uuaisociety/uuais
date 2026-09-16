@@ -13,6 +13,7 @@ import { SITE_URL } from "@/app/metadata";
 
 import campus from "@/public/images/campus.png";
 import EventDetailClient from "@/components/events/EventDetailClient";
+import FormattedText from "@/components/ui/FormattedText";
 import { getEventByIdServer, getRelatedEventsServer } from "@/lib/server-events";
 
 const categoryOptions = [
@@ -152,9 +153,10 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(event.description || '') }}
               />
             ) : (
-              <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground whitespace-pre-wrap">
-                {event.description}
-              </div>
+              <FormattedText
+                text={event.description || ''}
+                className="max-w-none text-lg leading-relaxed text-muted-foreground"
+              />
             )}
           </CardContent>
         </Card>
@@ -187,7 +189,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                   <span className="text-muted-foreground">
                     Location:
                   </span>
-                  <span className="text-foreground font-medium">
+                  <span className="text-foreground font-medium text-right">
                     {event.location}
                   </span>
                 </div>

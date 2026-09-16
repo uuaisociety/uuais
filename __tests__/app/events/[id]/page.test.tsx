@@ -144,6 +144,18 @@ describe('EventDetailPage', () => {
     expect(screen.getByText('World')).toBeInTheDocument()
   })
 
+  it('renders URLs in a plain-text description as clickable links', async () => {
+    mockGetEventByIdServer.mockResolvedValue({
+      ...mockEvent,
+      description: 'Sign up at https://uuais.com/signup or email board@uuais.com',
+    })
+    await renderPage('event-1')
+    const link = screen.getByRole('link', { name: 'https://uuais.com/signup' })
+    expect(link).toHaveAttribute('href', 'https://uuais.com/signup')
+    expect(link).toHaveAttribute('target', '_blank')
+    expect(screen.getByRole('link', { name: 'board@uuais.com' })).toHaveAttribute('href', 'mailto:board@uuais.com')
+  })
+
   it('shows TBA for registration capacity when maxCapacity is not set', async () => {
     mockGetEventByIdServer.mockResolvedValue({ ...mockEvent, registrationRequired: true })
     await renderPage('event-1')
