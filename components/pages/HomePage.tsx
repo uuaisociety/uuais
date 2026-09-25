@@ -113,10 +113,7 @@ const HomePage: React.FC = () => {
           <div className="order-2 lg:order-1 px-6 sm:px-8 lg:px-8 pb-14 lg:py-14">
             <p className="mono-label text-foreground/65 mb-6">Uppsala · AI Society</p>
 
-            <h1 className="display-xl mb-7">
-              Build the future.
-              <span className="block text-foreground/65">(Start here.)</span>
-            </h1>
+            <h1 className="display-xl mb-7">Welcome to Test</h1>
 
             <p className="text-base sm:text-lg text-current/60 max-w-md leading-relaxed mb-9">
               Uniting Uppsala students driven by AI, tech, and meaningful collaboration.

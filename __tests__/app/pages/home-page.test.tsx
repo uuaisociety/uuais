@@ -17,7 +17,7 @@ describe('HomePage', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
     render(<HomePage />)
     expect(screen.getByText('Uppsala · AI Society')).toBeInTheDocument()
-    expect(screen.getByText('Build the future.')).toBeInTheDocument()
+    expect(screen.getByText('Welcome to Test')).toBeInTheDocument()
   })
 
   it('renders feature cards section', () => {
