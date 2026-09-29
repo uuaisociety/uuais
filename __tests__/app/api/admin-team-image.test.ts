@@ -1,6 +1,7 @@
 import { createAuthMocks } from '@/__tests__/helpers/mocks'
 
 const mockBucketFile = { save: jest.fn().mockResolvedValue(undefined), makePublic: jest.fn().mockResolvedValue(undefined), getSignedUrl: jest.fn().mockResolvedValue(['http://signed.url']), exists: jest.fn().mockResolvedValue([true]), delete: jest.fn().mockResolvedValue(undefined) }
+const mockBucketFileForPath = jest.fn(() => mockBucketFile)
 const mockDocRef = { update: jest.fn().mockResolvedValue(undefined) }
 
 const { mockGetTokens, authEdgeFactory, authConfigFactory } = createAuthMocks()
@@ -15,7 +16,7 @@ jest.mock('firebase-admin', () => ({
   auth: jest.fn(() => ({})),
   firestore: jest.fn(() => ({ doc: jest.fn(() => mockDocRef) })),
   FieldValue: { serverTimestamp: jest.fn(() => ({})) },
-  storage: jest.fn(() => ({ bucket: jest.fn(() => ({ file: jest.fn(() => mockBucketFile) })) })),
+  storage: jest.fn(() => ({ bucket: jest.fn(() => ({ file: mockBucketFileForPath })) })),
 }))
 
 describe('POST /api/admin/team-image', () => {
@@ -77,12 +78,45 @@ describe('POST /api/admin/team-image', () => {
     expect(body.urlPublic).toMatch(/storage\.googleapis\.com/)
   })
 
-  it('rejects uploads outside the team-images folder', async () => {
+  it('uploads event images to event-images and saves to that bucket path', async () => {
+    process.env.FIREBASE_STORAGE_BUCKET = 'test-bucket'
     mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'admin', admin: true } })
     const { POST } = await import('@/app/api/admin/team-image/route')
     const pngBytes = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 0, 0, 0, 0, 0])
     const formData = new FormData()
-    formData.set('folder', 'uploads')
+    formData.set('folder', 'event-images')
+    formData.set('file', new Blob([pngBytes], { type: 'image/png' }), 'poster.png')
+    const req = new Request('http://localhost/api/admin/team-image', { method: 'POST', body: formData })
+    const res = await POST(req as unknown as Request)
+    const body = await res.json()
+    expect(res.status).toBe(200)
+    expect(body.path).toMatch(/^event-images\/\d+-poster\.png$/)
+    expect(mockBucketFileForPath).toHaveBeenCalledWith(body.path)
+    expect(mockBucketFile.save).toHaveBeenCalled()
+  })
+
+  it('deletes an event image when replacing it with another event image', async () => {
+    process.env.FIREBASE_STORAGE_BUCKET = 'test-bucket'
+    mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'admin', admin: true } })
+    const { POST } = await import('@/app/api/admin/team-image/route')
+    const pngBytes = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 0, 0, 0, 0, 0])
+    const formData = new FormData()
+    formData.set('folder', 'event-images')
+    formData.set('previousPath', 'event-images/old-poster.png')
+    formData.set('file', new Blob([pngBytes], { type: 'image/png' }), 'poster.png')
+    const req = new Request('http://localhost/api/admin/team-image', { method: 'POST', body: formData })
+    const res = await POST(req as unknown as Request)
+    expect(res.status).toBe(200)
+    expect(mockBucketFileForPath).toHaveBeenCalledWith('event-images/old-poster.png')
+    expect(mockBucketFile.delete).toHaveBeenCalled()
+  })
+
+  it.each(['uploads', 'event-images/../team-images', 'event-images-old'])('rejects uploads outside approved image folders: %s', async (folder) => {
+    mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'admin', admin: true } })
+    const { POST } = await import('@/app/api/admin/team-image/route')
+    const pngBytes = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 0, 0, 0, 0, 0])
+    const formData = new FormData()
+    formData.set('folder', folder)
     formData.set('file', new Blob([pngBytes], { type: 'image/png' }), 'photo.png')
     const req = new Request('http://localhost/api/admin/team-image', { method: 'POST', body: formData })
     const res = await POST(req as unknown as Request)
@@ -121,6 +155,17 @@ describe('DELETE /api/admin/team-image', () => {
     expect(body.deleted).toBe(true)
   })
 
+  it('deletes event images', async () => {
+    mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'admin', admin: true } })
+    const { DELETE } = await import('@/app/api/admin/team-image/route')
+    const req = new Request('http://localhost/api/admin/team-image', { method: 'DELETE', body: JSON.stringify({ path: 'event-images/poster.png' }) })
+    const res = await DELETE(req as unknown as Request)
+    const body = await res.json()
+    expect(res.status).toBe(200)
+    expect(body.deleted).toBe(true)
+    expect(mockBucketFileForPath).toHaveBeenCalledWith('event-images/poster.png')
+  })
+
   it('handles non-existent file gracefully', async () => {
     mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'admin', admin: true } })
     mockBucketFile.exists.mockResolvedValue([false])
@@ -133,10 +178,10 @@ describe('DELETE /api/admin/team-image', () => {
     expect(body.reason).toBe('not-found')
   })
 
-  it('rejects deletion outside the team-images folder', async () => {
+  it.each(['team-applications/secret.pdf', 'event-images/../secret.png', 'event-images-old/secret.png'])('rejects deletion outside approved image folders: %s', async (path) => {
     mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'admin', admin: true } })
     const { DELETE } = await import('@/app/api/admin/team-image/route')
-    const req = new Request('http://localhost/api/admin/team-image', { method: 'DELETE', body: JSON.stringify({ path: 'team-applications/secret.pdf' }) })
+    const req = new Request('http://localhost/api/admin/team-image', { method: 'DELETE', body: JSON.stringify({ path }) })
     const res = await DELETE(req as unknown as Request)
     expect(res.status).toBe(400)
   })

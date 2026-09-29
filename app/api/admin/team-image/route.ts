@@ -8,9 +8,9 @@ function sanitizeFilename(name: string) {
   return name.replace(/[^a-zA-Z0-9_.-]/g, '_');
 }
 
-// Only allow storage paths under team-images/, mirroring the storage rules' public folder.
+// Only allow paths in the team and event image folders.
 function isSafeImagePath(path: string): boolean {
-  return path.startsWith('team-images/') && !path.includes('..') && !path.includes('\\');
+  return (path.startsWith('team-images/') || path.startsWith('event-images/')) && !path.includes('..') && !path.includes('\\');
 }
 
 function isLikelyImage(buf: Buffer, contentType?: string) {
