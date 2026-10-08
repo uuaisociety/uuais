@@ -11,6 +11,7 @@ import { updatePageMeta } from '@/utils/seo';
 import HeroSplash from '@/components/HeroSplash';
 import TeamTabsSection from '@/components/team/TeamTabsSection';
 import { DiscordCta } from '@/components/common/DiscordCta';
+import HistorySection from '@/components/about/HistorySection';
 
 // The parens are a visual accent; each section is named by `aria-label` instead.
 const SectionHead: React.FC<{ paren: string; title: string }> = ({ paren, title }) => (
@@ -22,6 +23,7 @@ const SectionHead: React.FC<{ paren: string; title: string }> = ({ paren, title 
 // The merged sections lost their nav slots, so they stay one click away here.
 const sections = [
   { id: 'mission', label: 'Mission' },
+  { id: 'history', label: 'History' },
   { id: 'team', label: 'Team' },
   { id: 'contact', label: 'Contact' },
   { id: 'faq', label: 'FAQ' },
@@ -58,7 +60,7 @@ const AboutPage: React.FC = () => {
   useEffect(() => {
     updatePageMeta(
       'About Us',
-      'Learn about UU AI Society\'s mission, vision, and the team behind our community — and how to get in touch',
+      'Learn about UU AI Society\'s history, mission, vision, and the team behind our community — and how to get in touch',
     );
   }, []);
 
@@ -70,12 +72,16 @@ const AboutPage: React.FC = () => {
 
   // Light up the jump link for whichever section is currently under the header.
   useEffect(() => {
+    const intersecting = new Map<string, Element>();
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible.length > 0) setActiveSection(visible[0].target.id);
+        entries.forEach(({ target, isIntersecting }) => {
+          if (isIntersecting) intersecting.set(target.id, target);
+          else intersecting.delete(target.id);
+        });
+        const visible = [...intersecting.values()]
+          .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+        setActiveSection(visible[0]?.id ?? null);
       },
       // Only the band just below the sticky nav counts as "current".
       { rootMargin: '-112px 0px -70% 0px' },
@@ -157,6 +163,8 @@ const AboutPage: React.FC = () => {
             </Card>
           </div>
         </section>
+
+        <HistorySection />
 
         {/* Team */}
         <section id="team" tabIndex={-1} aria-label="Meet our team" className="scroll-mt-28 pt-24 sm:pt-32">

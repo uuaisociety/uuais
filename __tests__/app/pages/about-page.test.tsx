@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react'
+import { act, render, screen, within } from '@testing-library/react'
 import AboutPage from '@/components/pages/AboutPage'
 import { defaultAppState } from '@/__tests__/helpers/fixtures'
 
@@ -51,16 +51,64 @@ describe('AboutPage', () => {
     expect(screen.getByRole('heading', { name: /our team/i })).toBeInTheDocument()
   })
 
+  it('places the history section between mission and team with sources and a join link', () => {
+    renderWith(defaultAppState)
+    const nav = screen.getByRole('navigation', { name: 'On this page' })
+    expect(within(nav).getByRole('link', { name: 'History' })).toHaveAttribute('href', '#history')
+
+    const regions = screen.getAllByRole('region')
+    const sectionNames = regions.map((region) => region.getAttribute('aria-label'))
+    expect(sectionNames.indexOf('Our mission and vision')).toBeLessThan(sectionNames.indexOf('History of UU AI Society'))
+    expect(sectionNames.indexOf('History of UU AI Society')).toBeLessThan(sectionNames.indexOf('Meet our team'))
+
+    const history = screen.getByRole('region', { name: 'History of UU AI Society' })
+    expect(within(history).getByRole('heading', { name: /\(our\) history/i })).toBeInTheDocument()
+    expect(within(history).getByRole('link', { name: /anders wall foundation/i })).toHaveAttribute('href', expect.stringContaining('wallstiftelsen.se'))
+    expect(within(history).getAllByRole('link', { name: /uppsala university/i })[0]).toHaveAttribute('href', expect.stringContaining('uu.se'))
+    expect(within(history).getByRole('link', { name: /join us/i })).toHaveAttribute('href', '/join')
+  })
+
   it('links every section in the on-page nav', () => {
     renderWith(defaultAppState)
     const nav = screen.getByRole('navigation', { name: 'On this page' })
     for (const [label, href] of [
       ['Mission', '#mission'],
+      ['History', '#history'],
       ['Team', '#team'],
       ['Contact', '#contact'],
       ['FAQ', '#faq'],
     ]) {
       expect(within(nav).getByRole('link', { name: label })).toHaveAttribute('href', href)
+    }
+  })
+
+  it('keeps History active when another section leaves the observation band', () => {
+    const originalObserver = globalThis.IntersectionObserver
+    let onIntersection: IntersectionObserverCallback = () => {}
+    globalThis.IntersectionObserver = jest.fn((callback) => {
+      return {
+        observe: jest.fn((element: Element) => {
+          if (element.id === 'history') onIntersection = callback
+        }),
+        unobserve: jest.fn(),
+        disconnect: jest.fn(),
+      }
+    }) as unknown as typeof IntersectionObserver
+
+    try {
+      renderWith(defaultAppState)
+      const mission = screen.getByRole('region', { name: 'Our mission and vision' })
+      const history = screen.getByRole('region', { name: 'History of UU AI Society' })
+      const emit = (entries: { target: Element; isIntersecting: boolean }[]) => {
+        act(() => onIntersection(entries as IntersectionObserverEntry[], {} as IntersectionObserver))
+      }
+      emit([{ target: mission, isIntersecting: true }, { target: history, isIntersecting: true }])
+      emit([{ target: mission, isIntersecting: false }])
+      const nav = screen.getByRole('navigation', { name: 'On this page' })
+      expect(within(nav).getByRole('link', { name: 'History' })).toHaveAttribute('aria-current', 'location')
+      expect(within(nav).getByRole('link', { name: 'Mission' })).not.toHaveAttribute('aria-current')
+    } finally {
+      globalThis.IntersectionObserver = originalObserver
     }
   })
 
