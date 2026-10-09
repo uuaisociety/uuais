@@ -1,0 +1,13 @@
+{
+  "outline": {
+    "id": "hld-fixture",
+    "code": "HLD1K",
+    "name": "Kandidatprogram i speldesign",
+    "credits": "180 hp",
+    "isLadokOutline": true,
+    "semesters": [
+      {"number": 3, "courses": [], "choices": [], "texts": [{"nameSv": "Scripting för leveldesign, 7,5 hp", "nameEn": "Scripting for Level Design, 7.5 credits"}]},
+      {"number": 4, "courses": [], "choices": [], "texts": [{"nameSv": "Arkitekturhistoria för leveldesign, 7,5 hp", "nameEn": "Architectural History for Level Design, 7.5 credits"}]}
+    ]
+  }
+}

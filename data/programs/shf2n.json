@@ -188,5 +188,9 @@
   "programmeTitleEn": "Master's Programme in Sustainable Management, 60 credits (SHF2N)",
   "programmeUri": "/utbildning/program/magisterprogram-hallbart-foretagande-och-ledning",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

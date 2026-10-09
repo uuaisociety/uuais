@@ -127,5 +127,14 @@
   "programmeTitleEn": "Bachelor's Programme in Religious Studies, 180 credits (RRV1K)",
   "programmeUri": "/utbildning/program/religionsvetarprogrammet",
   "faculty": "Teologiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

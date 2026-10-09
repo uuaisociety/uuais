@@ -29,5 +29,14 @@
   "programmeTitleEn": "Open Bachelor's Programme in the Humanities, 180 credits (HHU1K)",
   "programmeUri": "/utbildning/program/humanioraprogrammet",
   "faculty": "Historisk-filosofiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

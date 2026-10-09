@@ -268,7 +268,7 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "2PE381",
         "2SC018",
@@ -276,14 +276,14 @@
       ],
       "semester": 5,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 2PE381, 2SC018, 2PP536",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Rubrik saknas i källan.",
+      "labelEn": "No heading in source.",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-1",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "2PE382",
         "2SC111",
@@ -291,8 +291,8 @@
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 2PE382, 2SC111, 2PP537",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Rubrik saknas i källan.",
+      "labelEn": "No heading in source.",
       "cohortBefore": null,
       "source": "plan"
     }
@@ -358,5 +358,22 @@
   "programmeTitleEn": "Bachelor's Programme in Human Resource Management and Working Life, 180 credits (SPA1K)",
   "programmeUri": "/utbildning/program/program-med-inriktning-mot-personal-och-arbetslivsfragor",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 5,
+        "textSv": "Rubrik saknas i källan."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 6,
+        "textSv": "Rubrik saknas i källan."
+      }
+    ]
+  }
 }

@@ -1391,5 +1391,39 @@
   "programmeTitleEn": "Bachelor's Programme in Biology/Molecular Biology, 180 credits (TBM1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-biologi",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Följande beteckningar används: G1N - Grundnivå, kursen kräver inte tidigare högskolestudier G1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hp G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp G2E - Grundnivå, examensarbete för kandidatexamen (180 hp) A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Under tredje året ska studenten läsa antingen 1BG210 Självständigt arbete i biologi 15 hp eller 1BG214 Examensarbete C i biologi 15 hp. Därutöver väljer studenten någon av nedanstående kurser på grundnivå. Studenten kan också välja kurser från avancerad nivå (max 60 hp), förutsatt att förkunskapskraven är uppfyllda och att studenten uppnått 120 hp. Se sist under termin 6 för övriga kurser som antingen går på deltid/sommartid eller där perioden ännu ej är bestämd."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "1BG213 Biodiversitet och ekologi i Yunnan ges i mån av resurser."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Övriga kurser på deltid/sommartid eller ännu ej bestämd tid."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "1MB205 ges i mån av resurser och under förutsättning att studentunderlaget är tillräckligt stort."
+      }
+    ]
+  }
 }

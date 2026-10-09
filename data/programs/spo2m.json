@@ -29,5 +29,14 @@
   "programmeTitleEn": "Master's Programme in Political Science, 120 credits (SPO2M)",
   "programmeUri": "/utbildning/program/politices-masterprogram",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

@@ -90,5 +90,14 @@
   "programmeTitleEn": "Occupational Therapy Programme, 180 credits (MAT1Y)",
   "programmeUri": "/utbildning/program/arbetsterapeutprogrammet",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

@@ -828,15 +828,15 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TE686",
         "1TE744"
       ],
       "semester": 4,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TE686, 1TE744",
-      "labelEn": "Choose one of 2 courses.",
+      "textSv": "Valbara kurser",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
@@ -856,7 +856,7 @@
     },
     {
       "id": "rule-2",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TE300",
         "1TE058",
@@ -866,14 +866,14 @@
       ],
       "semester": 5,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TE300, 1TE058, 1MA017, 1EL104, 1TE303",
-      "labelEn": "Choose one of 5 courses.",
+      "textSv": "Profil mot elektroteknik",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-3",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1FA014",
         "1FA022",
@@ -881,8 +881,8 @@
       ],
       "semester": 5,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1FA014, 1FA022, 1FA426",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Profil mot kärnkraftteknik",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
@@ -901,7 +901,7 @@
     },
     {
       "id": "rule-5",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TE670",
         "1FA326",
@@ -912,8 +912,8 @@
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TE670, 1FA326, 1TE615, 1TE616, 1FA329, 1MA017",
-      "labelEn": "Choose one of 6 courses.",
+      "textSv": "Profil mot elektroteknik",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
@@ -1376,5 +1376,52 @@
   "programmeTitleEn": "Bachelor's Programme in Electrical Engineering, 180 credits (TEL1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-elektroteknik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 4,
+        "textSv": "Valbara kurser"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "1TE661 Signaler och system är obligatorisk inom examenskravet men ges inte läsåret 2026/2027 eftersom den byter årskurs. En av kurserna 1TE744 och 1TE686 är obligatorisk inom examenskravet."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 5,
+        "textSv": "Profil mot elektroteknik"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 5,
+        "textSv": "Profil mot kärnkraftteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "1TE661 Signaler och system är obligatorisk inom examenskravet men ges inte läsåret 2026/2027 eftersom den byter årskurs. Samtliga valbara kurser i årskurs 3 (termin 5 och 6) sökes i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval. 1TE058 kan läsas i period 3 istället."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 6,
+        "textSv": "Profil mot elektroteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Samtliga valbara kurser i årskurs 3 (termin 5 och 6) sökes i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval."
+      }
+    ]
+  }
 }

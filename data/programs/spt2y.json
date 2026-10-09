@@ -373,5 +373,22 @@
   "programmeTitleEn": "Psychotherapy Programme, 90 credits (SPT2Y)",
   "programmeUri": "/utbildning/program/psykoterapeutprogrammet",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "2PP540 Vetenskapligt arbete/specialistarbete (15 hp) - 5 poäng termin 4, resterande 10 poäng termin 6"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "2PP540 Vetenskapligt arbete/specialistarbete (15 hp) - 5 poäng termin 4, resterande 10 poäng termin 6"
+      }
+    ]
+  }
 }

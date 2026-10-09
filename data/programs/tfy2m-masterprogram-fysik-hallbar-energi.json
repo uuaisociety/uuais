@@ -952,5 +952,78 @@
   "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)",
   "programmeUri": "/utbildning/program/masterprogram-fysik-hallbar-energi",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Vid få deltagare kan följande kurser ställas in eller ges med annan undervisningsform: 1FA033, 1FA587 och 1FA570. Standardutbudet omfattar grundläggande fysikkurser, energiutvinning baserad på fission och fusion, modern programmering inklusive AI, dynamiska och komplexa system. Studenter kan fördjupa och bredda sina ämnen eller omfördela sitt fokus genom att välja bland de ytterligare alternativen, där huvudexemplen är: - Solenergi med kurserna 1TE028, 1TE724 (standardval), 1FA571, 1FA590 - Vågkraft med kursen 1TE043 - Grundläggande kärnfysiklagar med kurserna 1FA352, 1FA010"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Det är möjligt att byta ut vissa kurser mellan termin 1 och termin 3.",
+        "textEn": "It is possible to exchange certain courses between Semester 1 and Semester 3."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1TE043 kräver 1TE655 eller motsvarande. 1TE655 ges bara på svenska.",
+        "textEn": "1TE043 requires 1TE655 or the equivalent. 1TE655 is available only in Swedish."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
+        "textEn": "1FA597 is chosen by the students who will take a 60 credits Master's degree."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Se termin 1.",
+        "textEn": "See Semester 1."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
+        "textEn": "Other eligible courses within the specialization (optional period):"
+      }
+    ]
+  }
 }

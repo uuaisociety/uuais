@@ -800,7 +800,7 @@
     },
     {
       "id": "rule-1",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TS336",
         "1EL011",
@@ -808,8 +808,8 @@
       ],
       "semester": 4,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TS336, 1EL011, 1TD342",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Rubrik saknas i källan.",
+      "labelEn": "No heading in source.",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -828,7 +828,7 @@
     },
     {
       "id": "rule-3",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TE686",
         "1FA014",
@@ -839,14 +839,14 @@
       ],
       "semester": 5,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TE686, 1FA014, 1FA022, 1KB704, 1EL008, 1FA426",
-      "labelEn": "Choose one of 6 courses.",
+      "textSv": "Profil kärnkraft, termin 5",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-4",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TE686",
         "1TE687",
@@ -858,8 +858,8 @@
       ],
       "semester": 5,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TE686, 1TE687, 1MA017, 1TS358, 1KB704, 1EL008, 1TS312",
-      "labelEn": "Choose one of 7 courses.",
+      "textSv": "Profilerna produktutveckling och produktionsledning, termin 5",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
@@ -879,7 +879,7 @@
     },
     {
       "id": "rule-6",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TE780",
         "1FA013",
@@ -887,50 +887,50 @@
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TE780, 1FA013, 1FA427",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Profil kärnkraft, termin 6",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-7",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TE780",
         "1MI077"
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TE780, 1MI077",
-      "labelEn": "Choose one of 2 courses.",
+      "textSv": "Profil produktutveckling, termin 6",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-8",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TE780",
         "1MI088"
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TE780, 1MI088",
-      "labelEn": "Choose one of 2 courses.",
+      "textSv": "Profil produktionsledning, termin 6",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-9",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TE693",
         "1TE695"
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TE693, 1TE695",
-      "labelEn": "Choose one of 2 courses.",
+      "textSv": "Tillvalskurser som kan läsas när studenten uppfyller förkunskapskraven",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
@@ -1368,5 +1368,76 @@
   "programmeTitleEn": "Bachelor's Programme in Mechanical Engineering, 180 credits (TMA1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-maskinteknik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1TE631 Tillverkningsteknik och 1TS362 Tillverkningsteknik I kan inte ingå i examen tillsammans."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 4,
+        "textSv": "Rubrik saknas i källan."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "1MI087 och 1TS348 kan inte ingå i examen tillsammans."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 5,
+        "textSv": "Profil kärnkraft, termin 5"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 5,
+        "textSv": "Profilerna produktutveckling och produktionsledning, termin 5"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Kurser från olika profiler kan krocka schemamässigt under termin 5. Därför rekommenderas att kurser från EN profil läses. Några valbara kurser i årskurs 3 samt tillvalskurserna söks i konkurrens med studenter från andra program, varför plats inte kan garanteras på förstahandsval. En av kurserna 1TE687 och 1FA014 är obligatorisk inom examenskravet. Kurserna 1TE686 och 1KB704 är obligatoriska för samtliga profiler termin 5."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 6,
+        "textSv": "Profil kärnkraft, termin 6"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 6,
+        "textSv": "Profil produktutveckling, termin 6"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 6,
+        "textSv": "Profil produktionsledning, termin 6"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 6,
+        "textSv": "Tillvalskurser som kan läsas när studenten uppfyller förkunskapskraven"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "En av kurserna 1MI088 eller 1MI077, eller båda kurserna 1FA013 och 1FA427, är obligatoriska inom examenskravet. Kursen 1TE780 är obligatorisk för samtliga profiler termin 6."
+      }
+    ]
+  }
 }

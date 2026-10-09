@@ -25,5 +25,14 @@
   "programmeTitleEn": "Master's Programme in Religion in Peace and Conflict, 120 credits (RRP2M)",
   "programmeUri": "/utbildning/program/masterprogram-religion-fred-konflikt",
   "faculty": "Teologiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

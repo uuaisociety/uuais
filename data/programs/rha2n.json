@@ -78,5 +78,14 @@
   "programmeTitleEn": "Master's Programme in Humanitarian Action and Conflict, 60 credits (RHA2N)",
   "programmeUri": "/utbildning/program/magisterprogram-humanitart-arbete-vid-konflikter",
   "faculty": "Teologiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

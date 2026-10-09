@@ -1474,5 +1474,50 @@
   "programmeTitleEn": "Bachelor's Programme in Physics – Physics, 180 credits (TFY1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-fysik-fysik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Följande beteckningar används: G1N - Grundnivå, kursen kräver inte tidigare högskolestudier G1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hp G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp G2E - Grundnivå, examensarbete för kandidatexamen (180 hp) A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "eller",
+        "textEn": "or"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "eller",
+        "textEn": "or"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Övriga kurser: Period 1 och 2",
+        "textEn": "Other Courses: Period 1 and 2"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Period 4",
+        "textEn": "Period 4"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Valfri period",
+        "textEn": "Any period"
+      }
+    ]
+  }
 }

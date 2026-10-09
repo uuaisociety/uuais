@@ -269,5 +269,34 @@
   "programmeTitleEn": "Bridging Teacher Education Programme – Upper Secondary Education (Condensed Course), 90 credits (UKK2Y)",
   "programmeUri": "/utbildning/program/komprimerad-kpu-7-9",
   "faculty": "Fakulteten för utbildningsvetenskaper",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Sommartermin 1:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Hösttermin:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Vårtermin:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Sommartermin 2:"
+      }
+    ]
+  }
 }

@@ -3247,5 +3247,294 @@
   "programmeTitleEn": "Master's Programme in Energy Systems Engineering, 300 credits (TES2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-energisystem",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Kurser märkta med SLU ges av kursansvarig institution vid SLU."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Introduktion till energisystem, 5 (av 10) hp (TN0367 SLU) * Huvudområde(n) med fördjupning: Teknik G1N",
+        "textEn": "Introduction to Energy Systems, 5 (out of 10) credits (TN0367 SLU) * Main field(s) of study and in-depth level: Technology G1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Introduktion till energisystem, 5 (av 10) hp (TN0367 SLU) * Huvudområde(n) med fördjupning: Teknik G1N",
+        "textEn": "Introduction to Energy Systems, 5 (out of 10) credits (TN0367 SLU) * Main field(s) of study and in-depth level: Technology G1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Allmän kemi och kemiska energikällor, 5 (av 10) hp (KE0049 SLU)* Huvudområde(n) med fördjupning: Kemi G1N",
+        "textEn": "General Chemistry and Chemical Sources of Energy, 5 (out of 10) credits (KE0049 SLU)* Main field(s) of study and in-depth level: Chemistry G1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Allmän kemi och kemiska energikällor, 5 (av 10) hp (KE0049 SLU)* Huvudområde(n) med fördjupning: Kemi G1N",
+        "textEn": "General Chemistry and Chemical Sources of Energy, 5 (out of 10) credits (KE0049 SLU)* Main field(s) of study and in-depth level: Chemistry G1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Energisystemens biogeokemiska förutsättningar, 5 (av 10) hp (BI1360 SLU)* Huvudområde(n) med fördjupning: Biologi G1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) G1N",
+        "textEn": "Natural resources for energy systems in a biogeochemical perspective, 5 (out of 10) credits (BI1360 SLU)* Main field(s) of study and in-depth level: G1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Grundläggande matematisk statistik, 5 hp (MS0073 SLU)* Huvudområde(n) med fördjupning: Matematik (huvudområde vid SLU: Matematisk statistik) G1F",
+        "textEn": "Basic Mathematical Statistics, 5 credits (MS0073 SLU)* Main field(s) of study and in-depth level: Mathematics (main field of study at SLU: Mathematical Statistics) G1F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Energisystemens biogeokemiska förutsättningar, 5 (av 10) hp (BI1360 SLU)* Huvudområde(n) med fördjupning: Biologi G1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) G1N",
+        "textEn": "Natural resources for energy systems in a biogeochemical perspective, 5 (out of 10) credits (BI1360 SLU)* Main field(s) of study and in-depth level: G1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Organisk kemi med energitillämpningar, 5 hp (KE0079 SLU)* Huvudområde(n) med fördjupning: Kemi G1F",
+        "textEn": "Organic Chemistry with energy applications 5 credits (KE0079 SLU)* Main field(s) of study and in-depth level: Chemistry G1F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Systemanalys med energitillämpningar 5 hp (TN0373 SLU)* Huvudområde(n) med fördjupning: Teknik G1F",
+        "textEn": "System analysis with energy applications, 5 credits (TN0373 SLU)* Main field(s) of study and in-depth level: Technology G1F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Ekonomistyrning för ingenjörer, 5 hp (FÖ0498 SLU)* Huvudområde(n) och successiv fördjupning: Företagsekonomi GXX",
+        "textEn": "Managerial Accounting for Engineers, 5 credits (FÖ0498 SLU)* Main field(s) of study and in-depth level: Business Studies GXX"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Energi- och livscykelanalys, 5 hp (TN0285 SLU)* Huvudområde(n) med fördjupning: Teknik G2F",
+        "textEn": "Energy and Life Cycle Assessment, 5 credits (TN0285 SLU)* Main field(s) of study and in-depth level: Technology G2F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Energisystemens miljöpåverkan, 5 hp (KE0069 SLU)* Huvudområde(n) med fördjupning: Kemi G1F, Biologi G1F",
+        "textEn": "Environmental Impacts of Energy Systems, 5 credits (KE0069 SLU)* Main field(s) of study and in-depth level: Chemistry G1F, Biology G1F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Alternativa kurser (Observera att Modern fysik är förkunskapskrav för kurser i ES4 & ES5)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Ingenjörsetik och Miljörätt kan ej räknas in i examen tillsammans med kurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\" (se Utbildningsplanen och Preciserade krav för programmet)."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "En av de två nedanstående kurserna i självständigt arbete är obligatorisk. Endast en av de två kan räknas med i examen.",
+        "textEn": "One of the courses 1FA311 and EX0946 is mandatory. The students take one of these courses."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Självständigt arbete i energisystem, 15 hp (EX0946 SLU)* Huvudområde(n) med fördjupning: Teknik G2E",
+        "textEn": "Independent Project in Energy Systems, 15 credits (EX0946 SLU)* Main field(s) of study and in-depth level: Technology G2E"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "I årskurs 4 och 5 krockar vissa valbara kurser med varandra i schemat. För information kring detta, se programmets hemsida."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Ekonomistyrning för ingenjörer, 5 hp (FÖ0498 SLU)* Huvudområde(n) och successiv fördjupning: Företagsekonomi GXX",
+        "textEn": "Managerial Accounting for Engineers, 5 credits (FÖ0498 SLU)* Main field(s) of study and in-depth level: Business Studies GXX"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Miljökonsekvensbeskrivning, 5 hp (MX0162 SLU) Huvudområde(n) med fördjupning: Miljövetenskap (huvudområde vid SLU) A1N",
+        "textEn": "Environmental Impact Assessment 5 credits (MX0162 SLU) Main field(s) of study and in-depth level: Environmental science A1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Kursen Industriell ekonomi och hållbar innovation, 5 hp (G1N) kan tillgodoräknas med motsvarande kurs vid UU (Företagsekonomi eller Industriell ekonomi)."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Geografiska informationssystem för ingenjörer, 5 hp (TE0018 SLU) Huvudområde(n) med fördjupning: Teknik Axx",
+        "textEn": "Geographic information systems for engineers, 5 credits (TE0018 SLU) Main field(s) of study and in-depth level: Technology Axx"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "TE0018 kan ej räknas in i examen tillsammans med TE0005, TE0008 eller TE0016."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "I årskurs 4 och 5 krockar vissa valbara kurser med varandra i schemat. För information kring detta, se programmets hemsida."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Bioenergi - teknik och system, 5 (av 10) hp (TN0352 SLU) Huvudområde(n) med fördjupning: Teknik A1N",
+        "textEn": "Bioenergy - Technology and Systems, 5 (out of 10) credits (TN0352 SLU) Main field(s) of study and in-depth level: Technology A1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Bioenergi - teknik och system, 5 (av 10) hp (TN0352 SLU) Huvudområde(n) med fördjupning: Teknik A1N",
+        "textEn": "Bioenergy - Technology and Systems, 5 (out of 10) credits (TN0352 SLU) Main field(s) of study and in-depth level: Technology A1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Logistik, 5 hp (TN0365 SLU) Huvudområde(n) med fördjupning: Teknik A1N",
+        "textEn": "Logistics, 5 credits (TN0365 SLU) Main field(s) of study and in-depth level: Technology A1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "I årskurs 4 i 5 krockar vissa valbara kurser med varandra i schemat. För information kring detta, se programmets hemsida."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Energisystemplanering, 5 (av 10) hp (TN0347 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
+        "textEn": "Energy Systems Planning, 5 (out of 10) credits (TN0347 SLU) Main field(s) of study and in-depth level: Technology A1F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Hållbar utveckling i energibranschen, 5 hp (TN0350 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
+        "textEn": "Sustainable development in the energy sector, 5 credits (TN0350 SLU) Main field(s) of study and in-depth level: Technology A1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Kursen 1TE700 uppfyller ES-programmets krav på teknik- och systemkurser och kan införas i examen som en sådan."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Energisystemplanering, 5 (av 10) hp (TN0347 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
+        "textEn": "Energy Systems Planning, 5 (out of 10) credits (TN0347 SLU) Main field(s) of study and in-depth level: Technology A1F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Kursen MX0147 har huvudområde miljövetenskap som finns vid SLU men inte vid UU. Stora sociotekniska system kan ej räknas in i examen tillsammans med kurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\" (se Utbildningsplanen och Preciserade krav för programmet)."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "En av de två nedanstående kurserna \"Examensarbete i energisystem\" (1FA392 alternativt EX1032) är obligatorisk. Endast en av kurserna kan räknas med i examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Examensarbete i energisystem, 30 hp (EX1032 SLU) Huvudområde(n) med fördjupning: Teknik A2E",
+        "textEn": "Degree Project in Energy Systems Engineering, 30 credits (EX1032 SLU) Main field(s) of study and in-depth level: Technology A2E"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Tillvalskurser:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Tillvalskurser i valfri period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Projektarbete i energisystem, 15 hp (TE0024 SLU) Huvudområde(n) med fördjupning: Teknik G2F",
+        "textEn": "Project Work in Energy Systems Engineering, 15 credits (TE0024 SLU) Main field(s) of study and in-depth level: Technology G2F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Fördjupande projektarbete i energisystem, 15 hp (TE0023 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
+        "textEn": "Advanced Project Work in Energy Systems Engineering, 15 credits (TE0023 SLU) Main field(s) of study and in-depth level: Technology A1F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Endast en av kurserna \"Projektarbete i energisystem\" får ingå i examen. Endast en av kurserna \"Fördjupande projektarbete i energisystem\" får ingå i examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Sommarkurser",
+        "textEn": "Summer courses"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "1FA456 ges på distans. 1FA456 ges i mån av resurser och kan ställas in. 1FA456 kan ersätta Skriftlig rapport: simuleringsuppgift och designuppgifter (3 hp) av Kärnkraft teknik och system. Om 1FA456 istället räknas in i examen tillsammans med hela kärnkraft teknik och system så räknas 1FA456 endast in med 3 hp pga av det stora överlappet. I följande kurspar kan endast en i varje kurspar räknas med i examen: 1TD327 /1TD433, 1EL004/1TE637, 1TD354/1TD397, 1TD352/1TD395, 1TD342/1TD393, 1TS309/1GV134, 5LH654/5LH242, 1TE700/1TE754, FÖ0498(SLU)/FÖ0477(SLU), 1KB274/1KB765, 1TS356/1TE792, 1EL016/1FA529, 1TS359/TN0351(SLU)."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Övrig information Kurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\", 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare. Detta kurspaket ingår inte i programmets studieplanen (se Utbildningsplanen och Preciserade krav för programmet)."
+      }
+    ]
+  }
 }

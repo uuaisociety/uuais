@@ -622,5 +622,16 @@
   "programmeTitleEn": "Physiotherapy Programme, 180 credits (MFT1Y)",
   "programmeUri": "/utbildning/program/fysioterapeutprogrammet",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Valbar kurs alternativt valbar VFU, 7,5 hp"
+      }
+    ]
+  }
 }

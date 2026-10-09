@@ -1,0 +1,314 @@
+{
+  "outline": {
+    "id": "10019",
+    "code": "TFY2M",
+    "name": "Masterprogram i fysik",
+    "credits": "120&nbsp;hp",
+    "introductoryRemarks": "<p>Studieplanen inneh&aring;ller tv&aring; alternativa uppl&auml;gg t o m &aring;r 1 period 3:</p><p><strong>Uppl&auml;gg 1</strong> &auml;r f&ouml;r studenter utan tidigare bakgrund i geofysik, t ex studenter som l&auml;st ett kandidatprogram i fysik eller ett kandidatprogram i geovetenskap med ett tillr&auml;ckligt h&ouml;gt antal h&ouml;gskolepo&auml;ng i fysik och matematik.</p><p class=\"linebreak\"><strong>Uppl&auml;gg 2</strong> &auml;r f&ouml;r studenter som l&auml;st geofysikkurser inom kandidatprogrammet i fysik med inriktning mot geofysik vid Uppsala universitet.</p>",
+    "isLadokOutline": false,
+    "semesters": [
+      {
+        "content": [
+          {
+            "type": "period",
+            "period": {
+              "nameSv": "Period 1",
+              "nameEn": "Period 1"
+            },
+            "content": [
+              {
+                "textSv": "<p><strong>Uppl&auml;gg 1:</strong></p>",
+                "textEn": "<p><strong>Option 1:</strong></p>",
+                "type": "text",
+                "period": {
+                  "nameSv": "Period 1",
+                  "nameEn": "Period 1"
+                }
+              },
+              {
+                "type": "courses",
+                "courses": [
+                  {
+                    "code": "1GE017",
+                    "compulsory": false,
+                    "linkTextEn": "Applied and Environmental Geophysics, 10&nbsp;credits (1GE017)",
+                    "linkTextSv": "Tillämpad och miljöinriktad geofysik, 10&nbsp;hp (1GE017)",
+                    "mainFieldOfStudyEn": "Earth Science&nbsp;G2F, Physics&nbsp;G2F",
+                    "mainFieldOfStudySv": "Fysik&nbsp;G2F, Geovetenskap&nbsp;G2F"
+                  },
+                  {
+                    "code": "1FA453",
+                    "compulsory": false,
+                    "linkTextEn": "Scientific Programming in Python with Applications in Physics, 5&nbsp;credits (1FA453)",
+                    "linkTextSv": "Programmering i Python med tillämpningar inom fysik, 5&nbsp;hp (1FA453)",
+                    "mainFieldOfStudyEn": "Computer Science&nbsp;A1N, Physics&nbsp;A1N",
+                    "mainFieldOfStudySv": "Datavetenskap&nbsp;A1N, Fysik&nbsp;A1N"
+                  }
+                ]
+              },
+              {
+                "textSv": "<p><strong>Uppl&auml;gg 2:</strong></p>",
+                "textEn": "<p><strong>Option 2:</strong></p>",
+                "type": "text",
+                "period": {
+                  "nameSv": "Period 1",
+                  "nameEn": "Period 1"
+                }
+              },
+              {
+                "type": "courses",
+                "courses": [
+                  {
+                    "code": "1GV219",
+                    "compulsory": false,
+                    "linkTextEn": "Geology for Physicists, 10&nbsp;av&nbsp;15&nbsp;credits (1GV219)",
+                    "linkTextSv": "Geologi för fysiker, 10&nbsp;av&nbsp;15&nbsp;hp (1GV219)",
+                    "mainFieldOfStudyEn": "Earth Science&nbsp;G1F",
+                    "mainFieldOfStudySv": "Geovetenskap&nbsp;G1F"
+                  },
+                  {
+                    "code": "1GE039",
+                    "compulsory": false,
+                    "linkTextEn": "Applied Geoinformatics for Earth Sciences, 5&nbsp;credits (1GE039)",
+                    "linkTextSv": "Tillämpad geoinformatik för geovetenskaper, 5&nbsp;hp (1GE039)",
+                    "mainFieldOfStudyEn": "Earth Science&nbsp;A1N, Geography&nbsp;A1N",
+                    "mainFieldOfStudySv": "Geografi&nbsp;A1N, Geovetenskap&nbsp;A1N"
+                  }
+                ]
+              },
+              {
+                "textSv": "<p>1GV219 ges&nbsp;endast p&aring; svenska.</p>",
+                "textEn": "<p>1GV219 is only given in Swedish.</p>",
+                "type": "text",
+                "period": {
+                  "nameSv": "Period 1",
+                  "nameEn": "Period 1"
+                }
+              },
+              {
+                "textSv": "<p><strong>&Ouml;vriga alternativ:</strong></p>",
+                "textEn": "<p><strong>Other alternatives:</strong></p>",
+                "type": "text",
+                "period": {
+                  "nameSv": "Period 1",
+                  "nameEn": "Period 1"
+                }
+              },
+              {
+                "type": "courses",
+                "courses": [
+                  {
+                    "code": "1FA257",
+                    "compulsory": false,
+                    "linkTextEn": "Classical Electrodynamics, 10&nbsp;credits (1FA257)",
+                    "linkTextSv": "Klassisk elektrodynamik, 10&nbsp;hp (1FA257)",
+                    "mainFieldOfStudyEn": "Physics&nbsp;A1F",
+                    "mainFieldOfStudySv": "Fysik&nbsp;A1F"
+                  },
+                  {
+                    "code": "1FA252",
+                    "compulsory": false,
+                    "linkTextEn": "Electromagnetic Field Theory, 5&nbsp;credits (1FA252)",
+                    "linkTextSv": "Elektromagnetisk fältteori, 5&nbsp;hp (1FA252)",
+                    "mainFieldOfStudyEn": "Physics&nbsp;A1N, Technology&nbsp;A1N",
+                    "mainFieldOfStudySv": "Fysik&nbsp;A1N, Teknik&nbsp;A1N"
+                  }
+                ]
+              },
+              {
+                "textSv": "<p>Kurserna 1FA252 och 1FA257 kan schemal&auml;ggas samtidigt, studenter f&ouml;rv&auml;ntas inte l&auml;sa dem under samma period.</p>",
+                "textEn": "<p>The courses 1FA252 and 1FA257 may be scheduled to be taught simultaneously, students are not expected to read them during the same period.</p>",
+                "type": "text",
+                "period": {
+                  "nameSv": "Period 1",
+                  "nameEn": "Period 1"
+                }
+              },
+              {
+                "type": "courses",
+                "courses": [
+                  {
+                    "code": "1FA253",
+                    "compulsory": false,
+                    "linkTextEn": "Fluid Mechanics, 5&nbsp;credits (1FA253)",
+                    "linkTextSv": "Fluidmekanik, 5&nbsp;hp (1FA253)",
+                    "mainFieldOfStudyEn": "Physics&nbsp;A1N, Technology&nbsp;A1N",
+                    "mainFieldOfStudySv": "Fysik&nbsp;A1N, Teknik&nbsp;A1N"
+                  },
+                  {
+                    "code": "1GV014",
+                    "compulsory": false,
+                    "linkTextEn": "Dynamics of Earth Systems: Global Change, 10&nbsp;credits (1GV014)",
+                    "linkTextSv": "Dynamiska geosystem - global förändring, 10&nbsp;hp (1GV014)",
+                    "mainFieldOfStudyEn": "Earth Science&nbsp;A1N",
+                    "mainFieldOfStudySv": "Geovetenskap&nbsp;A1N"
+                  },
+                  {
+                    "code": "1TV445",
+                    "compulsory": false,
+                    "linkTextEn": "Engineering Geology and Geotechnical Engineering, 5&nbsp;credits (1TV445)",
+                    "linkTextSv": "Ingenjörsgeologi och geoteknik, 5&nbsp;hp (1TV445)",
+                    "mainFieldOfStudyEn": "Technology&nbsp;A1N",
+                    "mainFieldOfStudySv": "Teknik&nbsp;A1N"
+                  }
+                ]
+              },
+              {
+                "textSv": "<p>1TV445 ges&nbsp;endast p&aring; svenska.</p>",
+                "textEn": "<p>1TV445 is only given in Swedish.</p>",
+                "type": "text",
+                "period": {
+                  "nameSv": "Period 1",
+                  "nameEn": "Period 1"
+                }
+              }
+            ]
+          },
+          {
+            "type": "period",
+            "period": {
+              "nameSv": "Period 2",
+              "nameEn": "Period 2"
+            },
+            "content": [
+              {
+                "textSv": "<p><strong>Uppl&auml;gg 1:</strong></p>",
+                "textEn": "<p><strong>Option 1:</strong></p>",
+                "type": "text",
+                "period": {
+                  "nameSv": "Period 2",
+                  "nameEn": "Period 2"
+                }
+              },
+              {
+                "type": "courses",
+                "courses": [
+                  {
+                    "code": "1GE009",
+                    "compulsory": false,
+                    "linkTextEn": "Global Geophysics, 10&nbsp;credits (1GE009)",
+                    "linkTextSv": "Global geofysik, 10&nbsp;hp (1GE009)",
+                    "mainFieldOfStudyEn": "Earth Science&nbsp;A1N, Physics&nbsp;A1N",
+                    "mainFieldOfStudySv": "Fysik&nbsp;A1N, Geovetenskap&nbsp;A1N"
+                  },
+                  {
+                    "code": "1GE063",
+                    "compulsory": false,
+                    "linkTextEn": "The Physics and Dynamics of the Earth, 5&nbsp;credits (1GE063)",
+                    "linkTextSv": "Jordens fysik och dynamik, 5&nbsp;hp (1GE063)",
+                    "mainFieldOfStudyEn": "Earth Science&nbsp;A1N, Physics&nbsp;A1N",
+                    "mainFieldOfStudySv": "Fysik&nbsp;A1N, Geovetenskap&nbsp;A1N"
+                  },
+                  {
+                    "code": "1GE049",
+                    "compulsory": false,
+                    "linkTextEn": "Time Series Analysis of Geophysical Data, 5&nbsp;credits (1GE049)",
+                    "linkTextSv": "Tidsserieanalys av geofysiska data, 5&nbsp;hp (1GE049)",
+                    "mainFieldOfStudyEn": "Earth Science&nbsp;A1N, Physics&nbsp;A1N",
+                    "mainFieldOfStudySv": "Fysik&nbsp;A1N, Geovetenskap&nbsp;A1N"
+                  }
+                ]
+              },
+              {
+                "textSv": "<p><strong>Uppl&auml;gg 2:</strong></p>",
+                "textEn": "<p><strong>Option 2:</strong></p>",
+                "type": "text",
+                "period": {
+                  "nameSv": "Period 2",
+                  "nameEn": "Period 2"
+                }
+              },
+              {
+                "type": "courses",
+                "courses": [
+                  {
+                    "code": "1FA370",
+                    "compulsory": false,
+                    "linkTextEn": "Applied Deep Learning in Physics and Engineering, 5&nbsp;credits (1FA370)",
+                    "linkTextSv": "Tillämpad djupinlärning i fysik och teknik, 5&nbsp;hp (1FA370)",
+                    "mainFieldOfStudyEn": "Physics&nbsp;A1N, Technology&nbsp;A1N",
+                    "mainFieldOfStudySv": "Fysik&nbsp;A1N, Teknik&nbsp;A1N"
+                  },
+                  {
+                    "code": "1TD184",
+                    "compulsory": false,
+                    "linkTextEn": "Optimisation, 5&nbsp;credits (1TD184)",
+                    "linkTextSv": "Optimeringsmetoder, 5&nbsp;hp (1TD184)",
+                    "mainFieldOfStudyEn": "Computational Science&nbsp;A1N, Computer Science&nbsp;A1N, Data Science&nbsp;A1N, Technology&nbsp;A1N",
+                    "mainFieldOfStudySv": "Dataanalys&nbsp;A1N, Datavetenskap&nbsp;A1N, Teknik&nbsp;A1N, Tillämpad beräkningsvetenskap&nbsp;A1N"
+                  },
+                  {
+                    "code": "1GV219",
+                    "compulsory": false,
+                    "linkTextEn": "Geology for Physicists, 5&nbsp;av&nbsp;15&nbsp;credits (1GV219)",
+                    "linkTextSv": "Geologi för fysiker, 5&nbsp;av&nbsp;15&nbsp;hp (1GV219)",
+                    "mainFieldOfStudyEn": "Earth Science&nbsp;G1F",
+                    "mainFieldOfStudySv": "Geovetenskap&nbsp;G1F"
+                  }
+                ]
+              },
+              {
+                "textSv": "<p>1GV219 ges&nbsp;endast p&aring; svenska.</p>",
+                "textEn": "<p>1GV219 is only given in Swedish.</p>",
+                "type": "text",
+                "period": {
+                  "nameSv": "Period 2",
+                  "nameEn": "Period 2"
+                }
+              },
+              {
+                "textSv": "<p><strong>&Ouml;vriga alternativ:</strong></p>",
+                "textEn": "<p><strong>Other alternatives:</strong></p>",
+                "type": "text",
+                "period": {
+                  "nameSv": "Period 2",
+                  "nameEn": "Period 2"
+                }
+              },
+              {
+                "type": "courses",
+                "courses": [
+                  {
+                    "code": "1TD354",
+                    "compulsory": false,
+                    "linkTextEn": "Scientific Computing for Partial Differential Equations, 5&nbsp;credits (1TD354)",
+                    "linkTextSv": "Beräkningsvetenskap för partiella differentialekvationer, 5&nbsp;hp (1TD354)",
+                    "mainFieldOfStudyEn": "Computational Science&nbsp;A1N, Computer Science&nbsp;A1N, Technology&nbsp;A1N",
+                    "mainFieldOfStudySv": "Datavetenskap&nbsp;A1N, Teknik&nbsp;A1N, Tillämpad beräkningsvetenskap&nbsp;A1N"
+                  },
+                  {
+                    "code": "1MP024",
+                    "compulsory": false,
+                    "linkTextEn": "Challenges in Deep and High Stress Mining, 5&nbsp;credits (1MP024)",
+                    "linkTextSv": "Gruvbrytningens utmaningar, 5&nbsp;hp (1MP024)",
+                    "mainFieldOfStudyEn": "Earth Science&nbsp;A1N",
+                    "mainFieldOfStudySv": "Geovetenskap&nbsp;A1N"
+                  },
+                  {
+                    "code": "1MP022",
+                    "compulsory": false,
+                    "linkTextEn": "Critical Metals and Minerals, 5&nbsp;credits (1MP022)",
+                    "linkTextSv": "Kritiska metaller och mineral, 5&nbsp;hp (1MP022)",
+                    "mainFieldOfStudyEn": "Earth Science&nbsp;A1N",
+                    "mainFieldOfStudySv": "Geovetenskap&nbsp;A1N"
+                  }
+                ]
+              },
+              {
+                "textSv": "<p>1MP022 och 1MP024 &auml;r blockkurser som ges med 100% studietakt.</p>",
+                "textEn": "<p>1MP022 and 1MP024 are block courses given at 100% study pace.</p>",
+                "type": "text",
+                "period": {
+                  "nameSv": "Period 2",
+                  "nameEn": "Period 2"
+                }
+              }
+            ]
+          }
+        ],
+        "nameSv": "Termin 1",
+        "nameEn": "Semester 1"
+      }
+    ]
+  }
+}

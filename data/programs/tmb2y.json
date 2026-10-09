@@ -1460,7 +1460,7 @@
     },
     {
       "id": "rule-5",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MB466",
         "1MB447",
@@ -1476,8 +1476,8 @@
       ],
       "semester": 7,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MB466, 1MB447, 1DL360, 1RT490, 1DL210, 1KB162, 1RT490, 1KB756, 1DL400, 1TD396, 1DL231",
-      "labelEn": "Choose one of 11 courses.",
+      "textSv": "Rubrik saknas i källan.",
+      "labelEn": "No heading in source.",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -1496,7 +1496,7 @@
     },
     {
       "id": "rule-7",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MB449",
         "1MB433",
@@ -1514,8 +1514,8 @@
       ],
       "semester": 8,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MB449, 1MB433, 1MB444, 1MB461, 1TS325, 1MB416, 3FB028, 1KB429, 1KB770, 1MB464, 3FB034, 1MB462, 1TE769",
-      "labelEn": "Choose one of 13 courses.",
+      "textSv": "Rubrik saknas i källan.",
+      "labelEn": "No heading in source.",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -1547,7 +1547,7 @@
     },
     {
       "id": "rule-9",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1KB447",
         "1MB517",
@@ -1556,14 +1556,14 @@
       ],
       "semester": 9,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1KB447, 1MB517, 1MB515, 1DL011",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Rubrik saknas i källan.",
+      "labelEn": "No heading in source.",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-10",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1KB769",
         "1MB519",
@@ -1571,8 +1571,8 @@
       ],
       "semester": 9,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1KB769, 1MB519, 1MB518",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Obligatoriska kurser period 2",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
@@ -1594,7 +1594,7 @@
     },
     {
       "id": "rule-12",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TV451",
         "1RT002",
@@ -1602,28 +1602,28 @@
       ],
       "semester": 10,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TV451, 1RT002, 1RT495",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Tillvalskurser period 1",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-13",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TE061",
         "1DL481"
       ],
       "semester": 10,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TE061, 1DL481",
-      "labelEn": "Choose one of 2 courses.",
+      "textSv": "Tillvalskurser period 3",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-14",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "2FE030",
         "1KB425",
@@ -1631,14 +1631,14 @@
       ],
       "semester": 10,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 2FE030, 1KB425, 1TE698",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Tillvalskurser period 4",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-15",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MB773",
         "1MB774",
@@ -1646,14 +1646,14 @@
       ],
       "semester": 10,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MB773, 1MB774, 1MB775",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "För följande kurser kontakta examinator vid kursansvarig institution (IBG, www.ibg.uu.se) för registrering:",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-16",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MB205",
         "1MB405",
@@ -1661,8 +1661,8 @@
       ],
       "semester": 10,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MB205, 1MB405, 1MB381",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Följande kurser utlyses efter särskild ordning. Kontakta kursansvarig institution (IBG, www.ibg.uu.se) för information:",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     }
@@ -2773,5 +2773,112 @@
   "programmeTitleEn": "Master's Programme in Molecular Biotechnology Engineering, 300 credits (TMB2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-molekylar-bioteknik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "För studenter som antogs 2022 eller tidigare ska 1MA090 eller både 1MA010 och 1MA025 ingå i examen. 1KB018 och 1KB007 kan inte ingå i samma examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1KB473, 1KB472 och 1KB410 kan inte ingå i samma examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "För studenter som antogs 2021 eller tidigare ska 1TD342 eller 1TD393 ingå i examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "För studenter som antogs 2017 eller tidigare ska följande kurser ingå i examen: 1FA533 eller 1FA528 1TE743 eller 1KB501 1MB335 eller både 1MB321 och 1MB331 För studenter som antogs 2021 eller tidigare ska 1TD352 eller 1TD395 ingå i examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "För studenter som antogs 2017 eller tidigare ska följande kurser ingå i examen: 1FA533 eller 1FA528 1TE743 eller 1KB501 1MB335 eller både 1MB321 och 1MB331 För studenter som antogs 2019 eller tidigare ska 1MB344 eller 1RT700 ingå i examen. För studenter som antogs 2020 eller senare ska 1RT700 eller 1DL034 ingå i examen."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 7,
+        "textSv": "Rubrik saknas i källan."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "En av de obligatoriska slutkurserna i period 52 (termin 9 andra delen) ska ingå i examen. Se respektive kursplan för förkunskapskrav till slutkurserna för respektive profil. Kurserna i period 41 kan även läsas i period 51. 1MB466 ersätter 1M436 och 1MB429 och kan inte ingå i samma examen som någon av dessa kurser. I period 41-42 undviks schemakrockar om kurser inom samma grupp nedan väljs: Period 41: A: 1MB466, 1MB447 B: 1MB466, 1RT490, 1KB162 C: 1DL210, 1DL360, 1KB162 Period 42: A: 1MB466, 1RT490, 1TD396 B: 1KB756, 1MB466, 1TD396 C: 1DL231, 1DL400, 1TD396"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 8,
+        "textSv": "Rubrik saknas i källan."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "En av de obligatoriska slutkurserna i period 52 (termin 9 andra delen) ska ingå i examen. Se respektive kursplan för förkunskapskrav till slutkurserna för respektive profil. 1KB770 och 1KB768 kan inte ingå i samma examen. I period 43-44 undviks schemakrockar om kurser inom samma grupp nedan väljs: Period 43: A: 1MB449, 1MB444 B: 1MB449, 1MB433 C: 1MB461, 1MB416, 1TS325 D: 3FB028, 1KB429 Period 44: A: 1MB464, 1TE698 B: 1KB770 C: 3FB034, 1MB462 D: 1TE698, 1TE769"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 9,
+        "textSv": "Rubrik saknas i källan."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 9,
+        "textSv": "Obligatoriska kurser period 2"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "En av de obligatoriska slutkurserna i period 52 (termin 9 andra delen) ska ingå i examen. Se respektive kursplan för förkunskapskrav till slutkurserna för respektive profil. 1KB447 ersätter 1KB457 och 1KB446 och kan inte ingå i examen tillsammans med någon av dessa. 1DL011 ersätter 1DL417. Dessa kurser kan inte ingå i samma examen. I period 51 undviks schemakrockar om kurser inom samma grupp nedan väljs: A/B: 1KB447 C: 1MB515, 1DL011 D: 1MB515, 1MB517"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 10,
+        "textSv": "Tillvalskurser period 1"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 10,
+        "textSv": "Tillvalskurser period 3"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 10,
+        "textSv": "Tillvalskurser period 4"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 10,
+        "textSv": "För följande kurser kontakta examinator vid kursansvarig institution (IBG, www.ibg.uu.se) för registrering:"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 10,
+        "textSv": "Följande kurser utlyses efter särskild ordning. Kontakta kursansvarig institution (IBG, www.ibg.uu.se) för information:"
+      }
+    ]
+  }
 }

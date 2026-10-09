@@ -1252,5 +1252,155 @@
   "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)",
   "programmeUri": "/utbildning/program/masterprogram-fysik-matematisk-fysik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Vid få deltagare kan följande kurser ställas in eller ges med annan undervisningsform: 1FA160, 1FA158 och 1FA028."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Studenterna får läsa de kurser som de inte hade i sin tidigare utbildning:",
+        "textEn": "Students can take the courses that they did not have in their previous education:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 1MA531 ges jämna år.",
+        "textEn": "The course 1MA531 is given in even years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Studenterna får läsa de kurser som de inte hade i sin tidigare utbildning:",
+        "textEn": "Students can take the courses that they did not have in their previous education:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 1FA160 ges bara udda år.",
+        "textEn": "The course 1FA160 is only offered in odd years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 1MA531 ges jämna år.",
+        "textEn": "The course 1MA531 is given in even years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Kursen 1MA056 ges jämna år.",
+        "textEn": "The course 1MA056 is given in even years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Kursen 1MA335 ges udda år. Kursen 1MA336 ges jämna år.",
+        "textEn": "The course 1MA335 is given in odd years. The course 1MA336 is given in even years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Kursen 1MA056 ges jämna år. Kursen 1MA158 ges udda år.",
+        "textEn": "The course 1MA056 is given in even years. The course 1MA158 is given in odd years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
+        "textEn": "1FA597 is chosen by the students who will take a 60 credits Master's degree."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Hela terminen:",
+        "textEn": "Full semester:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Övriga valbara kurser i termin 3: Se Termin 1",
+        "textEn": "Other eligible courses Semester 3: See Semester 1."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Hela terminen:",
+        "textEn": "Full Semester:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Ett examensarbete i fysik som även uppfyller kraven för ett examensarbete i matematik, kan efter beslut omtillgodoräknande också användas som ett examensarbete i matematik för en masterexamen med huvudområdet matematik.",
+        "textEn": "A degree project in physics that also meets the requirements for a degree project in mathematics can, after a decision on crediting, also be used as a degree project in mathematics for a master's degree with the main field of mathematics."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Övriga valbara kurser i termin 4: Se Termin 2.",
+        "textEn": "Other eligible courses Semester 4: See Semester 2."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Kursen 1MA325 ges udda år.",
+        "textEn": "The course 1MA325 is given in odd years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
+        "textEn": "Other eligible courses within the specialization (optinal period):"
+      }
+    ]
+  }
 }

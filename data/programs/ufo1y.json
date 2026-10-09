@@ -539,5 +539,9 @@
   "programmeTitleEn": "Preschool Teacher Education Programme, 210 credits (UFÖ1Y)",
   "programmeUri": "/utbildning/program/forskollararprogrammet",
   "faculty": "Fakulteten för utbildningsvetenskaper",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

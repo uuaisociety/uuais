@@ -826,5 +826,45 @@
   "programmeTitleEn": "Master's Programme in All-Electric Propulsion Systems, 120 credits (TEF2M)",
   "programmeUri": "/utbildning/program/masterprogram-elektriska-framdrivningssystem",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Varken 1EL998 eller 1EL997 kan ingå i examen tillsammans med någon av kurserna 1EL223, 1EL205, 1EL208, 1EL209, 1EL215.",
+        "textEn": "Neither 1EL998 nor 1EL997 can be included in a degree together with any of the courses 1EL223, 1EL205, 1EL208, 1EL209, 1EL215."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "För de som önskar ta ut en magisterexamen:",
+        "textEn": "1EL207 Degree Project in Electrical Engineering 15.0 credits only for students who wish to finish with a Degree of Master of Science (60 credits)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "En av kurserna 1EL208 och 1EL209 kan ställas in vid brist på resurser men minst en ges.",
+        "textEn": "Either 1EL208 or 1EL209 may be cancelled if resources are limited, but at least one will be offered."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "En av kurserna 1EL211 och 1EL215 kan ställas in vid brist på resurser men minst en ges.",
+        "textEn": "Either 1EL211 or 1EL215 may be cancelled if resources are limited, but at least one will be offered."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Övrigt - under period 1 och 2 kan projektarbete även väljas:",
+        "textEn": "Other - during periods 1 and 2, project work can also be chosen:"
+      }
+    ]
+  }
 }

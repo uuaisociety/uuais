@@ -427,5 +427,28 @@
   "programmeTitleEn": "Biomedical Laboratory Science Programme, 180 credits (MBM1Y)",
   "programmeUri": "/utbildning/program/biomedicinska-analytikerprogrammet",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 3BL106 Biokemi med molekylärbiologi fortsätter termin 2."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Kursen 3KK014 Klinisk kemi med hematologi, toxikologi och farmakologi påbörjas termin 3."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Kursen 3KK015 Verksamhetsförlagd utbildning I fortsätter termin 5."
+      }
+    ]
+  }
 }

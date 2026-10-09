@@ -1,0 +1,12 @@
+{
+  "outline": {
+    "id": "e0638afb-40dc-454f-a157-4fc606c082b9",
+    "code": "MLA2Y",
+    "name": "Läkarprogrammet",
+    "credits": "360 hp",
+    "isLadokOutline": true,
+    "semesters": [
+      {"number": 12, "courses": [], "choices": [], "texts": [{"nameSv": "Valbar kurs, 7,5 hp", "nameEn": "Elective course, 7.5 credits", "descriptionSv": "<p>Läkarprogrammet erbjuder studenterna ett urval av valbara kurser under denna termin.</p>"}]}
+    ]
+  }
+}

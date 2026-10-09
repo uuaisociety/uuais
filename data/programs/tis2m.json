@@ -1641,5 +1641,150 @@
   "programmeTitleEn": "Master's Programme in Embedded Systems, 120 credits (TIS2M)",
   "programmeUri": "/utbildning/program/masterprogram-inbyggda-system",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Rekommenderade kurser:",
+        "textEn": "Recommended courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Alternativ:",
+        "textEn": "Optional courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "För 1DL530 krävs en andra kurs i programmering utöver behörigheten för programmet.",
+        "textEn": "For 1DL530, a second course in programming is required in addition to the eligibility for the program."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Rekommenderade kurser:",
+        "textEn": "Recommended courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Alternativ:",
+        "textEn": "Optional courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1TE723 är föreläsningsdelen av 1TE663. 1DT063 är ett alternativ till 1DT004.",
+        "textEn": "1TE723 and 1TE663 have the same content except that 1TE663 includes a project."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Rekommenderade kurser:",
+        "textEn": "Recommended courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Alternativ:",
+        "textEn": "Optional courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Antalet platser i kursen 1FA326 är begränsade, urval kan komma att göras. 1TE723 är föreläsningsdelen av 1TE663 1DT095 är föreläsningsdelen av 1DT103 1DL550 och 1DT116 kan inte ingå i samma examen. 1DT107 och 1DT115 kan inte ingå i samma examen.",
+        "textEn": "A limited number of students can take the course 1FA326. 1TE723 and 1TE663 have the same content except that 1TE663 includes a project. 1DT095 and 1DT103 have the same content except that 1DT103 includes a project. 1DL550 and 1DT116 cannot be included in the same degree. 1DT107 and 1DT115 cannot be included in the same degree."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Rekommenderade kurser:",
+        "textEn": "Recommended courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Alternativ:",
+        "textEn": "Optional courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Alternativa kurser:",
+        "textEn": "Optional courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1DT100, 1DT101 och 1DT087 ges i period 13-14. 1DT087 Examensarbete i inbyggda system 15 hp ges endast för studenter som önskar avsluta programmet med magisterexamen.",
+        "textEn": "1DT100, 1DT101 and 1DT087 are given in period 13-14. Degree Project in Embedded Systems 1DT087 is only for students studying towards a one-year Master."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Rekommenderade kurser:",
+        "textEn": "Recommended courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Alternativ:",
+        "textEn": "Optional courses :"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Rekommenderade kurser:",
+        "textEn": "Recommended courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Alternativ:",
+        "textEn": "Optional courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "1DT100 och 1DT101 ges i period 21-22.",
+        "textEn": "1DT100 and 1DT101 are given in period 21-22."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Alternativ:",
+        "textEn": "Optional courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Alternativ:",
+        "textEn": "Optional courses:"
+      }
+    ]
+  }
 }

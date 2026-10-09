@@ -2470,5 +2470,79 @@
   "programmeTitleEn": "Master's Programme in Electrical Engineering, 300 credits (TEL2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-elektroteknik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "1TE661 Signaler och system är obligatorisk inom examenskravet men inte ges läsåret 2026/2027 eftersom den byter årskurs."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "1TE661 Signaler och system är obligatorisk inom examenskravet men inte ges läsåret 2026/2027 eftersom den byter årskurs."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Profilering erbjuds mot förnybar elgenerering eller styrning av elektriska system. För examen krävs minst 40 hp inom en profil. Observera att vissa kurser krävs som förkunskap för senare kurser. Observera att kurser som går på olika profiler kan krocka i schemat. 1TE765 kan räknas som profilkurs för den student som läst den tidigare."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "5 hp väljs exempelvis bland den andra profilens kurser.",
+        "trackId": "styrning-av-elektriska-system"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Observera att kurser som går på olika profiler kan krocka i schemat.",
+        "trackId": "styrning-av-elektriska-system"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Observera att kurser som går på olika profiler kan krocka i schemat."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Observera att kurser som går på olika profiler kan krocka i schemat."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "1TM005 ersätter 1TE784. Dessa kurser kan inte ingå i examen samtidigt.",
+        "textEn": "1TM005 is replacing 1TE784. These courses may not be included in the same degree."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Kurspaketet Teknikbaserat entreprenörskap och affärsutveckling, 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Tillvalskurser:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Antalet platser i kursen 1FA326 är begränsade, urval kan komma att göras."
+      }
+    ]
+  }
 }

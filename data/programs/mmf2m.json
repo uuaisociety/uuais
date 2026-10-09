@@ -162,5 +162,22 @@
   "programmeTitleEn": "Master's Programme in Medical Research, 120 credits (MMF2M)",
   "programmeUri": "/utbildning/program/masterprogram-medicinsk-forskning",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "blocked",
+    "issues": [
+      {
+        "kind": "malformed-course",
+        "message": "A course row is missing a code or positive finite credit value.",
+        "semester": 2,
+        "textSv": "Cellulär kommunikation, 15 av 7,5 hp (3MR102)"
+      },
+      {
+        "kind": "malformed-course",
+        "message": "A course row is missing a code or positive finite credit value.",
+        "semester": 2,
+        "textSv": "Cell- och tumörbiologi, 15 av 7,5 hp (3MR104)"
+      }
+    ]
+  }
 }

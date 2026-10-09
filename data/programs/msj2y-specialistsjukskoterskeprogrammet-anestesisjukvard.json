@@ -166,5 +166,9 @@
   "programmeTitleEn": "Specialist Nursing Programme – Theatre Care, 60 credits (MSJ2Y)",
   "programmeUri": "/utbildning/program/specialistsjukskoterskeprogrammet-anestesisjukvard",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

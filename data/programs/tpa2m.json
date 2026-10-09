@@ -250,5 +250,31 @@
   "programmeTitleEn": "Master's Programme in Palaeobiology – PANGEA, 120 credits (TPA2M)",
   "programmeUri": "/utbildning/program/masterprogram-paleobiologi-pangea",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Under termin 1 läses följande kurser vid Université de Lille, Frankrike: Learning and Evaluation Situation, collaborative projects, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Biostratigraphy, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Introductory Micropalaeontology, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Geobiology, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Carbonate Facies Analysis, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Quantitative Palaeontology, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Phylogenetics, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Geobiosphere Interactions in Deep Time, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Statistics Initiation with R, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N Project (Design) Management, 3 högskolepoäng. Huvudområde(n) med fördjupning: Geovetenskap A1N",
+        "textEn": "During the first semester the following courses are given by Université de Lille, France: Learning and Evaluation Situation, collaborative projects, 3 ECTS credits. Main field(s) of study and in-depth level: Earth Science A1N Biostratigraphy, 3 ECTS credits. Main field(s) of study and in-depth level: Earth Science A1N Introductory Micropalaeontology, 3 ECTS credits. Main field(s) of study and in-depth level: Earth Science A1N Geobiology, 3 ECTS credits. Main field(s) of study and in-depth level: Earth Science A1N Carbonate Facies Analysis, 3 ECTS credits. Main field(s) of study and in-depth level: Earth Science A1N Quantitative Palaeontology, 3 ECTS credits. Main field(s) of study and in-depth level: Earth Science A1N Phylogenetics, 3 ECTS credits. Main field(s) of study and in-depth level: Earth Science A1N Geobiosphere Interactions in Deep Time, 3 ECTS credits. Main field(s) of study and in-depth level: Earth Science A1N Statistics Initiation with R, 3 ECTS credits. Main field(s) of study and in-depth level: Earth Science A1N Project (Design) Management, 3 ECTS credits. Main field(s) of study and in-depth level: Earth Science A1N ​"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Uppsala universitet",
+        "textEn": "Uppsala University"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Examensarbeteskursen kan alternativt läsas vid: Université de Lille, Frankrike (Learning and Evaluation Situation, Bibliographic project & internship, 30 ECTS) Eller vid de andra partneruniversiteten: University of Minho (Dissertation/Project, 30 ECTS) National and Kapodistrian University of Athens (Postgraduate dissertation in climatic variations and impact on the environment, 30 ECTS) Huvudområde(n) med fördjupning: Geovetenskap A2E för samtliga examensarbeten.",
+        "textEn": "The degree project course can alternatively be conducted at Université de Lille, France: Université de Lille, Frankrike (Learning and Evaluation Situation, Bibliographic project & internship, 30 ECTS) Or at one of the other partner universities: University of Minho (Dissertation/Project, 30 ECTS) National and Kapodistrian University of Athens (Postgraduate dissertation in climatic variations and impact on the environment, 30 ECTS) Main field(s) of study and in-depth level: Earth Science A2E for all degree project courses."
+      }
+    ]
+  }
 }

@@ -229,5 +229,9 @@
   "programmeTitleEn": "Master's Programme in Information Systems, 120 credits (SSY2M)",
   "programmeUri": "/utbildning/program/masterprogram-systemvetenskap",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

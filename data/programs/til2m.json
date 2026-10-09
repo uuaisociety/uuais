@@ -976,5 +976,86 @@
   "programmeTitleEn": "Master's Programme in Industrial Management and Innovation, 120 credits (TIL2M)",
   "programmeUri": "/utbildning/program/masterprogram-industriell-ledning-och-innovation",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1TS310 är förkunskapskrav till senare kurser.",
+        "textEn": "1TS310 is a a prerequisite for later courses."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1TS327 krävs för 1TS328. 1TS363 ersätter 1TE779 och dessa kurser kan inte ingå i examen tillsammans.",
+        "textEn": "1TS327 is a prerequisite for 1TS328. 1TS363 replaces 1TE779 and these courses cannot be included in the same degree.",
+        "trackId": "ledning-och-innovation"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1TD433 krävs för 1TS321 och 1TS325.",
+        "textEn": "1TD433 is a a prerequisite for 1TS321 and 1TS325.",
+        "trackId": "industriell-analys"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1TS338 är förkunskapskrav till senare kurser. 1TE736 är förkunskapskrav till senare kurser.",
+        "textEn": "1TS338 is a prerequisite for later courses. 1TE736 is a prerequisite for later courses.",
+        "trackId": "industriell-analys"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1TE777, 1TS341 och 1TS328 är valbara och kan ha schemakrockar.",
+        "textEn": "11TE777, 1TS341 and 1TS328 are elective and might collide in the schedule.",
+        "trackId": "ledning-och-innovation"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1TE687 är förkunskapskrav för kommande kurser.",
+        "textEn": "1TE687 is a prerequisite for later courses."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1TE685 är förkunskapskrav till senare kurser. 1TS311 och 1TS342 är valbara och kan ha schemakrockar.",
+        "textEn": "1TE685 is a prerequisite for later courses. 1TS311 and 1TS342 are elective and might collide in the schedule.",
+        "trackId": "ledning-och-innovation"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1TE735 och 1TS345 är förkunskapskrav till senare kurser.",
+        "textEn": "1TE735 and 1TS345 are prerequisites for later courses.",
+        "trackId": "industriell-analys"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "1TE077 inte kan ingå i examen tillsammans med någon av 1TS345 eller 1TS338. 1TS345, 1TM116 och 1TE763 är förkunskapskrav till senare kurser.",
+        "textEn": "1TE077 cannot be included in the same degree as either of 1TS345 or 1TS338. 1TS345, 1TM116 and 1TE763 are prerequisites for later courses."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "1TS345, 1TM116 och 1TE763 är förkunskapskrav till senare kurser. 1TE777, 1TS346, 1TS341 och 1TS328 är valbara och kan ha schemakrockar.",
+        "textEn": "1TS345, 1TM116 and 1TE763 are prerequisites for later courses. 1TE777, 1TS346, 1TS341 and 1TS328 are elective and might collide in the schedule."
+      }
+    ]
+  }
 }

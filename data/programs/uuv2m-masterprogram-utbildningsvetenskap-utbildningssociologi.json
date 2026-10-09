@@ -44,5 +44,14 @@
   "programmeTitleEn": "Master's Programme in Educational Sciences – Special Education, 120 credits (UUV2M)",
   "programmeUri": "/utbildning/program/masterprogram-utbildningsvetenskap-utbildningssociologi",
   "faculty": "Fakulteten för utbildningsvetenskaper",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "blocked",
+    "issues": [
+      {
+        "kind": "malformed-semester",
+        "message": "The source outline has no semester list."
+      }
+    ]
+  }
 }

@@ -1209,5 +1209,141 @@
   "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)",
   "programmeUri": "/utbildning/program/masterprogram-fysik-karn-och-partikelfysik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Vid få deltagare kan följande kurser ställas in eller ges med annan undervisningsform: 1FA587, 1FA330, 1FA350, 1FA360, 1FA227, 1FA570 och 1FA451. Studenter kan göra forskningsprojekt av olika längd istället för kurser när som helst under sina studier (se projektkurser 1FA566, 1FA565, 1FA195, 1FA193 som listas längst ner på denna sida). Studenter bör bestämma sina preferenser för eventuell teoretisk eller experimentell forskning och för grundläggande kärnfysik (t.ex. hadronfysik), partikel- eller astropartikelfysik för att avgöra vissa aspekter av sin studieplan. Studenter som är intresserade av tillämpad kärnfysik kan också konsultera inriktningen Fysik för hållbar energi och komplexa system."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Majoriteten av kurserna som erbjuds under termin 1 erbjuds även under termin 3. Studenterna förväntas dela upp belastningen mellan dessa två terminer.",
+        "textEn": "The majority of courses offered in semester 1 are also offered in semester 3. Students are expected to divide the work load between these two semesters."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Antingen",
+        "textEn": "Either"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Eller",
+        "textEn": "Or"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Studenter med en preferens för experiment rekommenderas 1FA252; med preferens för teori och om 1FA252 studerats tidigare, rekommenderas 1FA257. Studenter utan tidigare erfarenhet av programmering med Python bör ta 1FA453:",
+        "textEn": "Students with a preference for experimental physics are recommended to take 1FA252; students with a preference for theory and those who took 1FA252 previously are recommended to take 1FA257. Students without programming experience in Python are recommended to take 1FA453:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Studenter med en preferens för experiment rekommenderas att välja mellan dessa kurser:",
+        "textEn": "Students with a preference for experimental physics are advised to choose from these courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Studenter med en preferens för teori rekommenderas att läsa dessa kurser:",
+        "textEn": "Students with a preference for theoretical physics are advised to choose from these courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Studenter som vill studera kärnfysik men inte har någon tidigare erfarenhet, bör ta:",
+        "textEn": "Students who want to study nuclear physics but have no previous experience in this subject should take:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible course this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Studenter som vill studera partikelfysik men inte har någon tidigare erfarenhet, bör ta:",
+        "textEn": "Students who want to study particle physics but have no previous experience in this subject should take:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Studenter med en preferens för experiment rekommenderas att läsa dessa kurser:",
+        "textEn": "Students with a preference for experimental physics are advised to choose from these courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Kursen 1FA336 ges endast udda år.",
+        "textEn": "The course 1FA336 is only given in odd years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
+        "textEn": "1FA597 is chosen by the students who will take a one-year Master's degree."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Se Termin 1. Studenter med en preferens för teori rekommenderas att läsa 1FA360 som ges under hela terminen.",
+        "textEn": "See Semester 1. Students with a preference for theoretical physics are advised to choose 1FA360 which is taught through the entire semester."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Övrig valbar kurs i period 2:",
+        "textEn": "Other eligible course this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
+        "textEn": "Other eligible courses within the specialisation (optional period):"
+      }
+    ]
+  }
 }

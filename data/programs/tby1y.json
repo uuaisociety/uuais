@@ -583,7 +583,7 @@
     },
     {
       "id": "rule-1",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TM117",
         "5KV779",
@@ -594,8 +594,8 @@
       ],
       "semester": 5,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TM117, 5KV779, 1TE403, 1TE687, 1TE438, 1TM018",
-      "labelEn": "Choose one of 6 courses.",
+      "textSv": "Rubrik saknas i källan.",
+      "labelEn": "No heading in source.",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -632,7 +632,7 @@
     },
     {
       "id": "rule-4",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TS329",
         "1TE447",
@@ -640,8 +640,8 @@
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TS329, 1TE447, 1TG318",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Rubrik saknas i källan.",
+      "labelEn": "No heading in source.",
       "cohortBefore": null,
       "source": "plan"
     }
@@ -975,5 +975,40 @@
   "programmeTitleEn": "Bachelor's Programme in Construction Engineering, 180 credits (TBY1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-byggteknik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Byggnadsprojektering med ritteknik 10 hp (1TS366) ersätter kursen Byggnadsprojektering med ritteknik 5 hp (1TE440). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 5,
+        "textSv": "Rubrik saknas i källan."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Kurser som inte är obligatoriska kallas för valbara. Det är obligatoriskt att läsa minst 20 hp av de valbara kurserna i årskurs 3 (hit räknas inte s k tillvalskurser)."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "1TE403, 1TM018 och 1TE447 passar för en studieinriktning mot konstruktion (kurserna kan kräva behörighetskedja). 5KV779 och 1TG318 passar för en studieinriktning mot förvaltning (kurserna kan kräva behörighetskedja). 1TM117, 1TE438 och 1TS329 passar för en studieinriktning mot energi och miljö (kurserna kan kräva behörighetskedja)."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 6,
+        "textSv": "Rubrik saknas i källan."
+      }
+    ]
+  }
 }

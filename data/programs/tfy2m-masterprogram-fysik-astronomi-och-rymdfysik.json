@@ -1143,5 +1143,141 @@
   "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)",
   "programmeUri": "/utbildning/program/masterprogram-fysik-astronomi-och-rymdfysik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Vid få deltagare kan följande kurser ställas in eller ges med annan undervisningsform: 1FA211, 1FA255, 1FA587, 1FA256, 1FA350, 1FA227 och 1FA570."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Majoriteten av kurserna som erbjuds under termin 1 erbjuds även under termin 3. Studenterna förväntas dela upp belastningen mellan dessa två terminer.",
+        "textEn": "The majority of courses offered in Semester 1 are also offered in Semester 3. Students are expected to divide the workload between these two semesters."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 1FA225 Teoretisk astrofysik ges bara jämna år.",
+        "textEn": "The course 1FA225 Theoretical Astrophysics is only given in even years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 1FA211 Observationell astrofysik II ges bara udda år.",
+        "textEn": "The course 1FA211 Observational Astrophysics II is only given in odd years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 1FA262 Astrokemi ges bara udda år.",
+        "textEn": "The course 1FA262 Astrochemistry s given odd years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kurserna 1FA252 och 1FA257 kan schemaläggas samtidigt, studenter förväntas inte läsa dem under samma period.",
+        "textEn": "The courses 1FA252 and 1FA257 can be scheduled at the same time, students are not expected to take them in the same period."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 1FA211 Observationell astrofysik II ges bara udda år.",
+        "textEn": "The course 1FA211 Observational Astrophysics II is only given in odd years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Studenter som inte hade någon astronomi eller astrofysik i sina kandidatstudier väljer 1FA204. De rekommenderas även att ta 1FA203 under period 4",
+        "textEn": "Students who had no astronomy or astrophysics in their bachelor studies choose 1FA204. They are also recommended to take 1FA203 during period 4."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 1FA256 Rymdprojekt ges bara jämna år.",
+        "textEn": "The course 1FA256 Space Mission Design Project is given even years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Kursen 1FA336 ges endast udda år.",
+        "textEn": "The course 1FA336 is only given in odd years."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Övriga valbara kurser denna period:",
+        "textEn": "Other eligible courses this period:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1FA597 väljs av de studenter som ska ta en magisterexamen.",
+        "textEn": "1FA597 is for the one-year Master's students."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Se termin 1.",
+        "textEn": "See semester 1."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "1FA694 Examensarbete E i fysik, 15 (av 45) högskolepoäng",
+        "textEn": "1FA694 Degree Project E in Physics, 15 (of 45) credits"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "1FA694 Examensarbete E i fysik, 30 (av 45) högskolepoäng",
+        "textEn": "1FA694 Degree Project E in Physics, 30 (of 45) credits"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Övriga kurser inom inriktningen (valfri period):",
+        "textEn": "Other courses within the specialisation (any period):"
+      }
+    ]
+  }
 }

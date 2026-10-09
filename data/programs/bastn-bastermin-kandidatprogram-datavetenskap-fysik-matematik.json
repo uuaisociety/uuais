@@ -115,7 +115,7 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1BA203",
         "1BA209",
@@ -126,8 +126,8 @@
       ],
       "semester": 1,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1BA203, 1BA209, 1BA210, 1BA211, 1BA212, 1BA213",
-      "labelEn": "Choose one of 6 courses.",
+      "textSv": "Kurser inom bastermin",
+      "labelEn": "Courses within the foundation semester programme",
       "cohortBefore": null,
       "source": "plan"
     }
@@ -165,5 +165,17 @@
   "programmeTitleEn": "Science and Technology Foundation Semester Programme – Reserved Place on the Bachelor's Programme in Computer Science, Physics or Mathematics, 20 weeks (BASTN)",
   "programmeUri": "/utbildning/program/bastermin-kandidatprogram-datavetenskap-fysik-matematik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 1,
+        "textSv": "Kurser inom bastermin",
+        "textEn": "Courses within the foundation semester programme"
+      }
+    ]
+  }
 }

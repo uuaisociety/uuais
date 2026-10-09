@@ -887,5 +887,94 @@
   "programmeTitleEn": "Speech and Language Pathology Programme, 240 credits (MLG2Y)",
   "programmeUri": "/utbildning/program/logopedprogrammet",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "OBS: Under termin 1 läses delkurs LY1 (4,5 hp) som är en del av kursen Logopedens yrkesroll . Kursen omfattar totalt 30 hp.",
+        "textEn": "NOTE: Semester 1 contains first part of the course (4,5 credits) Professional Development . The whole course is 30 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "OBS: Under termin 2 läses delkurs LY2 (5 hp) som är en del av kursen Logopedens yrkesroll . Kursen omfattar totalt 30 hp.",
+        "textEn": "NOTE: Semester 2 contains second part of the course (5 credits) Professional Development . The whole course is 30 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "OBS: Under termin 3 läses delkurs LY3 (1,5 hp) som är en del av kursen Logopedens yrkesroll . Kursen omfattar totalt 30 hp.",
+        "textEn": "NOTE: Semester 3 contains the third part of the course (3 credits) Professional Development . The whole course is 30 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "OBS: Under termin 4 läses delkurs LY4 (5,5 hp) som är en del av kursen Logopedens yrkesroll . Kursen omfattar totalt 30 hp.",
+        "textEn": "NOTE: Semester 4 contains the fourth part of the course (5,5 credits) Professional Development . The whole course is 30 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "OBS: Under termin 5 läses delkurs LY5 (3 hp) som är en del av kursen Logopedens yrkesroll . Kursen omfattar totalt 30 hp.",
+        "textEn": "NOTE: Semester 5 contains the fifth part of the course (3 credits) Professional Development . The whole course is 30 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "OBS: Under termin 6 läses delkurs LY6 (4,5 hp) som är en del av kursen Logopedens yrkesroll . Kursen omfattar totalt 30 hp.",
+        "textEn": "NOTE: Semester 6 contains the sixth part of the course (4,5 credits) Professional Development . The whole course is 30 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "OBS: Under termin 6 läses delkurs 1 (3 hp) del av kursen Forskningsmetodik och statistik . Kursen omfattar totalt 7,5 hp.",
+        "textEn": "NOTE: Semester 6 contains the first part (3 credits) of the course Research Methodology and Statistics . The whole course is 7,5 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "OBS: Under termin 7 läses del 1 (6,5 hp) av kursen Examensarbete i logopedi . Kursen omfattar totalt 30 hp.",
+        "textEn": "NOTE: Semester 7 contains the first part (6,5 credits) of the course Degree Project in Speech-Language Pathology . The whole course is 30 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "OBS: Under termin 7 läses delkurs LY7 (4 hp) som är en del av kursen Logopedens yrkesroll . Kursen omfattar totalt 30 hp.",
+        "textEn": "NOTE: Semester 7 contains the seventh part of the course (4 credits) Professional Development . The whole course is 30 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "OBS: Under termin 8 läses delkurs 2 (4,5 hp) del av kursen Forskningsmetodik och statistik . Kursen omfattar totalt 7,5 hp.",
+        "textEn": "NOTE: Semester 8 contains the second part (4,5 credits) of the course Research Methodology and Statistics . The whole course is 7,5 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "OBS: Under termin 8 läses delkurs LY8 (2 hp) som är en del av kursen Logopedens yrkesroll . Kursen omfattar totalt 30 hp.",
+        "textEn": "NOTE: Semester 8 contains the eighth part of the course (2 credits) Professional Development . The whole course is 30 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "OBS: Under termin 8 läses del 2 (23,5 hp) av kursen Examensarbete i logopedi . Kursen omfattar totalt 30 hp.",
+        "textEn": "NOTE: Semester 8 contains the second part (23,5 credits) of the course Degree Project in Speech-Language Pathology . The whole course is 30 credits."
+      }
+    ]
+  }
 }

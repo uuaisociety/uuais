@@ -134,5 +134,14 @@
   "programmeTitleEn": "Master's Programme in International Humanitarian Action, 120 credits (HIH2E)",
   "programmeUri": "/utbildning/program/masterprogram-international-humanitarian-action",
   "faculty": "Teologiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

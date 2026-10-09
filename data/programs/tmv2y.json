@@ -1531,5 +1531,149 @@
   "programmeTitleEn": "Master's Programme in Environmental and Water Engineering, 300 credits (TMV2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-miljo-och-vattenteknik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Kurser märkta med SLU ges av kursansvarig institution vid SLU."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1KB018 och 1KB007 kan inte ingå i en examen tillsammans."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Biologi, 5 hp (BI1112 SLU) * Huvudområde(n) med fördjupning: Biologi G1N",
+        "textEn": "Biology, 5 hp (BI1112 SLU) * Main field(s) of study and in-depth level: Biology G1N"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Ekologi för miljö och vatten, 5 hp (BI1465 SLU) * Huvudområde(n) med fördjupning: Biologi G1F",
+        "textEn": "Ecology for Environment and Water, 5 credits (BI1465 SLU) * Main field(s) of study and in-depth level: Biology G1F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Markvetenskap för miljö och vatten, 5 (av 15) hp (MV0192 SLU) * Huvudområde(n) med fördjupning: Teknik G2F, Geovetenskap (huvudområde vid SLU: Markvetenskap) G2F",
+        "textEn": "Soil Science for Environment and Water, 5 (out of 15) credits (MV0192 SLU) * Main field(s) of study and in-depth level: Technology G2F, Earth Sciences (main field of study at SLU: Soil Science) G2F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Markvetenskap för miljö och vatten, 5 (av 15) hp (MV0192 SLU) * Huvudområde(n) med fördjupning: Teknik G2F, Geovetenskap (huvudområde vid SLU: Markvetenskap) G2F",
+        "textEn": "Soil Science for Environment and Water, 5 (out of 15) credits (MV0192 SLU) * Main field(s) of study and in-depth level: Technology G2F, Earth Sciences (main field of study at SLU: Soil Science) G2F"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Tillvalskurser när 120 hp har uppnåtts:",
+        "textEn": "Optional courses when 120 credits have been achieved:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Kurserna i åk 4 ges som sammanhängande terminsblock. Inom varje block finns ett antal samplanerade kurser om 5-15 hp. Blocken kommer att ge en genomtänkt helhet, innehållande såväl teoretisk fördjupning som tillämpningar. För examen krävs godkänt resultat från samtliga kurser inom minst två terminsblock."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Enskilda avlopp och resursåtervinning, 5 hp (TN0363 SLU) Huvudområde(n) med fördjupning: Teknik A1N",
+        "textEn": "On-site wastewater systems and resource recovery, 5 credits (TN0363 SLU) Main field(s) of study and in-depth level: Technology A1N",
+        "trackId": "uthalliga-vatten-och-avloppssystem"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Val av VA-system, 10 hp (TN0372 SLU) Huvudområde(n) med fördjupning: Teknik A1F",
+        "textEn": "Selection of Water and Sanitation System, 10 credits (TN0372 SLU) Main field(s) of study and in-depth level: Technology A1F",
+        "trackId": "uthalliga-vatten-och-avloppssystem"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Förorenad mark riskbedömning och åtgärder, 10 (av 20) hp (TE0020 SLU) Huvudområde(n) med fördjupning: Teknik A1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) A1N",
+        "textEn": "Contaminated Soils - Risk Assessment and Remediation, 10 (out of 20) credits (TE0020 SLU) Main field(s) of study and in-depth level: Technology A1N, Earth Sciences (main field of study at SLU: Soil Science) A1N",
+        "trackId": "markmiljo"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Avfallshantering, 5 hp (TE00§4 SLU) Huvudområde(n) med fördjupning: Teknik A1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) A1N",
+        "textEn": "Waste Management, 5 credits (TE0014 SLU) Main field(s) of study and in-depth level: Technology A1N, Earth Sciences (main field of study at SLU: Soil Science) A1N",
+        "trackId": "markmiljo"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Förorenad mark riskbedömning och åtgärder, 10 (av 20) hp (TE0020 SLU) Huvudområde(n) med fördjupning: Teknik A1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) A1N",
+        "textEn": "Contaminated Soils - Risk Assessment and Remediation, 10 (out of 20) credits (TE0020 SLU) Main field(s) of study and in-depth level: Technology A1N, Earth Sciences (main field of study at SLU: Soil Science) A1N",
+        "trackId": "markmiljo"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Vattenresursteknik, 5 hp (MV0190 SLU) Huvudområde(n) med fördjupning: Teknik A1N, Geovetenskap (huvudområde vid SLU: Markvetenskap) A1N",
+        "textEn": "Water Resource Engineering, 5 credits (MV0190 SLU) Main field(s) of study and in-depth level: Technology A1N, Earth Sciences (main field of study at SLU: Soil Science) A1N",
+        "trackId": "vattenresurser"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Projekt vattenresurser, 10 hp (MV0189 SLU) Huvudområde(n) med fördjupning: Teknik A1F, Geovetenskap (huvudområde vid SLU: Markvetenskap) A1F",
+        "textEn": "Project Water Resources, 10 credits (MV0189 SLU) Main field(s) of study and in-depth level: Technology A1F, Earth Sciences (main field of study at SLU: Soil Science) A1F",
+        "trackId": "vattenresurser"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Ekonomistyrning för ingenjörer (FÖ0498 SLU) Huvudområde(n) med fördjupning: Teknik G1F",
+        "textEn": "Managerial Accounting for Engineers (FÖ0498 SLU) Main field(s) of study and in-depth level: Technology G1F",
+        "trackId": "miljomanagement"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Livscykelanalys för miljö- och vattenteknik, 5 hp (TN0313 SLU) Huvudområde(n) med fördjupning: Teknik A1N, Miljövetenskap (huvudområde vid SLU) A1N",
+        "textEn": "Life Cycle Assessment for Environmental Engineering, 5 credits (TN0313 SLU) Main field(s) of study and in-depth level: Technology A1N, Environmental Science (main field of study at SLU) A1N",
+        "trackId": "miljomanagement"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Miljökonsekvensbeskrivning, 5 hp (MX0162 SLU) Huvudområde(n) med fördjupning: Miljövetenskap (huvudområde vid SLU) A1N",
+        "textEn": "Environmental Impact Assessment, 5 credits (MX0162 SLU) Main field(s) of study and in-depth level: Environmental Science (main field of study at SLU) A1N",
+        "trackId": "miljomanagement"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Kurspaketet Teknikbaserat entreprenörskap och affärsutveckling, 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare.",
+        "trackId": "ekosystemmodellering"
+      }
+    ]
+  }
 }

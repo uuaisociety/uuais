@@ -339,5 +339,16 @@
   "programmeTitleEn": "Bachelor's Programme in Nuclear Engineering, 60 credits (TKK1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-karnkraftteknik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1FA014 kan ersättas i examen av 1FA400, men båda kurserna kan inte samtidigt ingå i examen. 1EL008 kan ej ingå i examen tillsammans med 1TE655."
+      }
+    ]
+  }
 }

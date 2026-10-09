@@ -226,5 +226,16 @@
   "programmeTitleEn": "Bridging Teacher Education Programme – Upper Secondary Education, 90 credits (UKP2Y)",
   "programmeUri": "/utbildning/program/kpu-7-9",
   "faculty": "Fakulteten för utbildningsvetenskaper",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Ett självständigt arbete genomförs inom ramen för studierna inom den utbildningsvetenskapliga kärnan."
+      }
+    ]
+  }
 }

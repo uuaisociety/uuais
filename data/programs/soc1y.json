@@ -449,5 +449,17 @@
   "programmeTitleEn": "Social Work Programme, 210 credits (SOC1Y)",
   "programmeUri": "/utbildning/program/socionomprogrammet",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Valbara kurser på avancerad nivå inom ämnet socialt arbete om totalt 30 hp.",
+        "textEn": "Elective courses on advanced level in social work totaling 30 credits."
+      }
+    ]
+  }
 }

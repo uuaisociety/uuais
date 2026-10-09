@@ -201,5 +201,9 @@
   "programmeTitleEn": "Nursing Programme, 180 credits (MSJ1Y)",
   "programmeUri": "/utbildning/program/sjukskoterskeprogrammet",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

@@ -370,5 +370,9 @@
   "programmeTitleEn": "Radiography Programme, 180 credits (MRP1Y)",
   "programmeUri": "/utbildning/program/rontgensjukskoterskeprogrammet",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

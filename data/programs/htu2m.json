@@ -118,5 +118,14 @@
   "programmeTitleEn": "Master's Programme in Turkic Studies, 120 credits (HTU2M)",
   "programmeUri": "/utbildning/program/masterprogram-turkiska-studier",
   "faculty": "Språkvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

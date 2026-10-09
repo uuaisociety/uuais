@@ -426,5 +426,24 @@
   "programmeTitleEn": "Master's Programme in Biomedicine, 120 credits (MBM2M)",
   "programmeUri": "/utbildning/program/masterprogram-biomedicin",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Period 1 och 2 utgörs av valbara kurser. Studenten läser totalt 15 hp under den första halvan av terminen.",
+        "textEn": "Period 1 and 2 are eligible courses. The student takes a total of 15 credits during this half of the semester."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Fritt val av kurser. Detta är några vanliga exempel.",
+        "textEn": "Free choice of courses. These are some examples."
+      }
+    ]
+  }
 }

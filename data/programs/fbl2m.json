@@ -216,5 +216,24 @@
   "programmeTitleEn": "Master's Programme in Biopharmaceuticals, 120 credits (FBL2M)",
   "programmeUri": "/utbildning/program/masterprogram-biologiska-lakemedel",
   "faculty": "Farmaceutiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Under det andra året väljer studenten kurser. Valbara fördjupningskurser 15 hp och del av masterprojekt 45 hp eller valbara fördjupningskurser 30 hp.",
+        "textEn": "During the second year, the student chooses courses. Elective courses 15 credits and part of a Master's project 45 credits or elective courses 30 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Masterprojekt 30 hp eller resterande del av 45 hp-projekt.",
+        "textEn": "Master's project 30 credits or remaining part of Master's project 45 credits."
+      }
+    ]
+  }
 }

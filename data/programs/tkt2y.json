@@ -2037,7 +2037,7 @@
     },
     {
       "id": "rule-1",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1KB211",
         "1KB502",
@@ -2047,14 +2047,14 @@
       ],
       "semester": 5,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1KB211, 1KB502, 1KB210, 1KB772, 1KB240",
-      "labelEn": "Choose one of 5 courses.",
+      "textSv": "Inriktning material",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-2",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1KB444",
         "3FF218",
@@ -2062,14 +2062,14 @@
       ],
       "semester": 5,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1KB444, 3FF218, 1KB428",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Inriktning läkemedel",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-3",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TM143",
         "1TM144",
@@ -2078,14 +2078,14 @@
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TM143, 1TM144, 1KB204, 1TM001",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Inriktning material",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-4",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "3FF219",
         "3FK150",
@@ -2093,14 +2093,14 @@
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 3FF219, 3FK150, 1TM001",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Inriktning läkemedel",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-5",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TM146",
         "1KB260",
@@ -2112,14 +2112,14 @@
       ],
       "semester": 7,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TM146, 1KB260, 1TM006, 1KB281, 1TG300, 1TE015, 1TE016",
-      "labelEn": "Choose one of 7 courses.",
+      "textSv": "Inriktning material",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-6",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "3FG202",
         "1KB465",
@@ -2128,14 +2128,14 @@
       ],
       "semester": 7,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 3FG202, 1KB465, 1KB479, 3FF216",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Inriktning läkemedel",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-7",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1KB286",
         "1TE018",
@@ -2160,14 +2160,14 @@
       ],
       "semester": 8,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1KB286, 1TE018, 1TE741, 1KB263, 1TE022, 1TM034, 1KB729, 1KB728, 1TM009, 1TM105, 1TM002, 1TM003, 1KB264, 1TE024, 1KB311, 1TE698, 1KB566, 1KB271, 1KB738, 1TM106",
-      "labelEn": "Choose one of 20 courses.",
+      "textSv": "Inriktning material",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-8",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "3FF036",
         "3FF275",
@@ -2200,14 +2200,14 @@
       ],
       "semester": 8,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 3FF036, 3FF275, 3FF209, 3FF276, 3FK219, 3FK229, 3FB207, 3FN209, 3FG288, 3FB028, 1KB429, 1KB470, 1KB481, 1KB263, 3FK281, 3FG005, 3FF208, 3FB030, 3FG240, 3FF502, 3FB225, 3FF031, 3FF206, 1KB425, 1KB767, 1KB311, 1TE698, 1KB264",
-      "labelEn": "Choose one of 28 courses.",
+      "textSv": "Inriktning läkemedel",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-9",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1KB268",
         "1KB570",
@@ -2224,14 +2224,14 @@
       ],
       "semester": 9,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1KB268, 1KB570, 1TM109, 1KB349, 1TE074, 1KB741, 1KB288, 1TM104, 1TE072, 1KB360, 1TM007, 1TM135",
-      "labelEn": "Choose one of 12 courses.",
+      "textSv": "Inriktning material",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-10",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "3FK214",
         "3FG203",
@@ -2239,14 +2239,14 @@
       ],
       "semester": 9,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 3FK214, 3FG203, 3FX221",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Inriktning läkemedel",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-11",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1KB057",
         "1KB058",
@@ -2254,8 +2254,8 @@
       ],
       "semester": 10,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1KB057, 1KB058, 1KB710",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Tillvalskurser:",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     }
@@ -3262,5 +3262,82 @@
   "programmeTitleEn": "Master's Programme in Chemical Engineering, 300 credits (TKT2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-kemiteknik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1KB016 ersätter 1KB000 och dessa kan inte ingå i examen tillsammans. 1MA350 ersätter 1MA025 och dessa kan inte ingå i examen tillsammans."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 5,
+        "textSv": "Inriktning material"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 5,
+        "textSv": "Inriktning läkemedel"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 6,
+        "textSv": "Inriktning material"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 6,
+        "textSv": "Inriktning läkemedel"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 7,
+        "textSv": "Inriktning material"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 7,
+        "textSv": "Inriktning läkemedel"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 8,
+        "textSv": "Inriktning material"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 8,
+        "textSv": "Inriktning läkemedel"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 9,
+        "textSv": "Inriktning material"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 9,
+        "textSv": "Inriktning läkemedel"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 10,
+        "textSv": "Tillvalskurser:"
+      }
+    ]
+  }
 }

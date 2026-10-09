@@ -42,5 +42,14 @@
   "programmeTitleEn": "Joint Nordic Master's Programme in Environmental Law, 120 credits (JMI2N)",
   "programmeUri": "/utbildning/program/nordiskt-masterprogram-miljoratt",
   "faculty": "Juridiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

@@ -61,5 +61,38 @@
   "programmeTitleEn": "Master's Programme in Economics, 120 credits (SNE2M)",
   "programmeUri": "/utbildning/program/masterprogram-nationalekonomi",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Termin 1 inleds med två metodkurser i mikroteori och analytiska metoder. Under den andra halvan av terminen läses en mer tillämpad kurs i mikroteori samt makroteori.",
+        "textEn": "The first semester begins with two methodology courses in micro theory and analytical methods. During the second half of the semester the students take a more applied course in micro theory and one in macro theory."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Termin 2 ägnas åt kurser i statistik, ekonometrisk teori, tillämpad ekonometri och policyutvärdering. Varje kurs är på 7,5 högskolepoäng.",
+        "textEn": "The second semester is devoted to statistics, econometric theory, applied econometrics and policy evaluation. Each course amounts to 7.5 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Termin 3 har studenterna större valfrihet. Institutionen erbjuder följande valfria kurser: Financial theory, Applied macroeconomics, Labour economics, Policy evaluation, Political economics och Public Economics. Studenterna uppmuntras att under denna termin också läsa kurser på andra institutioner, såsom matematiska, sociologiska, statsvetenskapliga, ekonomisk historiska och statistiska institutionen, samt kurser vid SLU.",
+        "textEn": "During the third semester, students have more choice. The department offers the following elective courses: Financial Theory, Applied Macroeconomics, Policy Evaluation, Political Economics, Labour Economics and Public Economics. Students are also encouraged to apply for courses at other departments, such as Mathematics, Sociology, Political Science, Economic History and the Statistics Department, and also courses at the agricultural university (SLU)."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Termin 4 skriver studenterna masteruppsatser. En förutsättning för att få påbörja masteruppsatsen är att studenten klarat minst 75 hp i programmet.",
+        "textEn": "During the fourth semester of year 2 students write their Master's theses. A prerequisite for writing the Master's thesis is that the student has passed at least 75 ECTS credits in the programme."
+      }
+    ]
+  }
 }

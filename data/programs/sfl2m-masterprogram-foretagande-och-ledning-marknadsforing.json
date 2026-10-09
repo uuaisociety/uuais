@@ -29,5 +29,14 @@
   "programmeTitleEn": "Master's Programme in Business and Management – Organisation, 120 credits (SFL2M)",
   "programmeUri": "/utbildning/program/masterprogram-foretagande-och-ledning-marknadsforing",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

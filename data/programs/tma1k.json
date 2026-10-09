@@ -2658,5 +2658,135 @@
   "programmeTitleEn": "Bachelor's Programme in Mathematics, 180 credits (TMA1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-matematik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Följande beteckningar används: G1N - Grundnivå, kursen kräver inte tidigare högskolestudier G1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hp G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp G2E - Grundnivå, examensarbete för kandidatexamen (180 hp) A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Frivillig extrakurs:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Frivillig extrakurs:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Alternativa kurser:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Alternativ kurs:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Alternativ kurs:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Alternativ kurs:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Alternativa kurser:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Alternativa kurser:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Kursen 1MA031 Mängdlära ges endast jämna år."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Årskurs 3 Studenten kan välja bland ovan för terminerna 1-4 angivna kurser och bland nedan uppräknade kurser, förutsatt att förkunskapskraven är uppfyllda. Kurser om maximalt 30 hp ur fakultetens övriga utbud kan också läsas inom programmet. Observera att för kandidatexamen krävs att ett examensarbete om 15 högskolepoäng genomförs."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Valbara kurser inom området matematik:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Kursen 1MS369 Generaliserade linjära modeller ges endast jämna år."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Kursen 1MS370 Analys av kategoriska data ges endast udda år."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Valbara kurser inom området datavetenskap:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Valbara kurser inom området fysik:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Valbara kurser inom området nationalekonomi:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Kurspaket Nationalekonomi A 30 hp"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Valbara kurser inom området matematik:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Valbara kurser inom området datavetenskap:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Valbara kurser inom området fysik:"
+      }
+    ]
+  }
 }

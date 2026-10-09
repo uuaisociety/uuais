@@ -502,5 +502,64 @@
   "programmeTitleEn": "Master's Programme in Sustainable and Innovative Natural Resource Management – SINReM, 120 credits (THH2M)",
   "programmeUri": "/utbildning/program/masterprogram-hallbar-och-innovativ-hantering-av-naturresurser-sinrem",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Masterprogrammet ges gemensamt med Universiteit Gent, Belgien och TU Bergakademie Freiberg, Tyskland. År 1: Studenterna läser kurser om 22 hp vid Universitet Gent och en kurs om 4 hp vid TU Bergakademie Freiberg under termin 1. Studenterna läser kurser om 25 hp vid Uppsala universiet under termin 2 och en kurs om 9 hp vid Universitet Gent under sommartermin. År 2: Studenterna läser kurser om 15 hp vid TU Bergakademie Freiberg och kurser om 15 hp vid valbart partneruniversitet t ex Uppsala universitet under termin 3. Under termin 4 läser studenterna examensarbete om 30 hp vid valbart partneruniversitet t ex Uppsala universitet. Nivå/Djup anges med: G2F = Grundnivå, har minst 60 hp kurs/er som förkunskapskrav A1N = Avancerad nivå, har endast kurs/er på grundnivå som förkunskapskrav A1F = Avancerad nivå, har kurs/er på avancerad nivå som förkunskapskrav A2E = Examensarbete för masterexamen Område anges med förkortningarna: HU = hållbar utveckling GV = geovetenskap TB = tillämpad bioteknik T = teknik I = industriell teknik I de fall kurserna ges av annat lärosäte anges Uppsala universitets klassificering av nivå/djup och område."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Universiteit Gent och TU Bergakademie Freiberg Period Universitet Kursnamn Hp Nivå/Djup Område 1 Gent Introduction to the circular economy, economics and management of natural resources 4 A1N HU 1 Freiberg Problems and innovations in the process chain of mineral resources 4 A1N HU 2 Gent Sustainable systems engineering 5 A1N HU 2 Gent Sustainable development and multicriteria decision-making 3 A1N HU 2 Gent Rational Use of Materials 5 A1N HU 2 Gent Resource recovery and recycling technologies 5 A1N HU",
+        "textEn": "Universiteit Gent och TU Bergakademie Freiberg Period University Course name Credits Level/Depth Maine field of study 1 Gent Introduction to the circular economy, economics and management of natural resources 4 A1N HU 1 Freiberg Problems and innovations in the process chain of mineral resources 4 A1N HU 2 Gent Sustainable systems engineering 5 A1N HU 2 Gent Sustainable development and multicriteria decision-making 3 A1N HU 2 Gent Rational Use of Materials 5 A1N HU 2 Gent Resource recovery and recycling technologies 5 A1N HU"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Uppsala universitet",
+        "textEn": "Uppsala University"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Studenterna läser 1MP032 och väljer en av 1HY042, 1MP034 eller 1MP018, eller 1MP001 i period 4.",
+        "textEn": "The students study 1MP032 and select one of 1HY042, 1MP034 or 1MP018, or 1MP001 in period 4."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1MP001 är valbar kurs.",
+        "textEn": "1MP001 is an eligable course."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Sommartermin (TU Bergakademie Freiberg) Period Universitet Kursnamn Hp Nivå/Djup Område Sommar Freiberg Resurskemi 9 A1N HU",
+        "textEn": "Summer semester (TU Bergakademie Freiberg) Period University Course name Credits Level/Depth Main field of study Summer Freiberg Resources Chemistry 9 A1N HU"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Alla studenter läser gemensamt kursblock om 15 hp vid TU Bergakademie Freiberg, samt väljer fördjupningsspår under år 2: Gemensamt kursblock (TU Bergakademie Freiberg)* Period Universitet Kursnamn Hp Nivå/Djup Område 1/2 Freiberg SINReM Praktik 10 A1N HU 1-4 (year course) Freiberg Financial and sustainability reporting, financial planning and business valuation 5 A1N HU Kursen Financial and sustainability reporting, financial planning and business valuation ges på distans.",
+        "textEn": "Common to all students, independent of study track in year 2, is the block of courses below: Common block of courses (TU Bergakademi Freiberg)* Period University Course name Credits Level/Depth Main field of study 1/2 Freiberg The Training in Industry 10 A1N HU 1-4 (year course) Freiberg Financial and sustainability reporting, financial planning and business valuation 5 A1N HU The course Financial and sustainability reporting, financial planning and business valuation is given online."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Universitet Gent, TU Bergakademie Freiberg och Uppsala universitet Studenterna gör examensarbetet på samma lärosäte som fördjupningsspåret. Period Universitet Kursnamn Hp Nivå/Djup Område 3&4 Gent Master's dissertation (I002199) 30 A2E HU 3&4 Freiberg Master thesis in sustainable and innovative natural resource management 30 A2E HU",
+        "textEn": "Ghent University, TU Bergakademie Freiberg and Uppsala University The students register to the Master Thesis at the university providing their selected study track. Period University Course name Credits Level/Depth Main field of study 3&4 Gent Master's dissertation (I002199) 30 A2E HU 3&4 Freiberg Master thesis in sustainable and innovative natural resource management 30 A2E HU"
+      }
+    ]
+  }
 }

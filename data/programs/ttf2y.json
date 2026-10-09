@@ -6982,5 +6982,302 @@
   "programmeTitleEn": "Master's Programme in Engineering Physics, 300 credits (TTF2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-teknisk-fysik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Programmet har fem inriktningar som startar årskurs 4. Inriktning beräkningsteknik Man kan med datorsimulering studera processer som är omöjliga eller alltför dyra att utföra i laboratorier eller i verkligheten. Datorberäkningar baserade på matematiska och statistiska modeller är ett standardverktyg inom teknik och fysik vid sidan av experiment och teoriutveckling. Datorberäkningar är ett ingenjörsverktyg för att förstå olika processer samt ge ny kunskap och nya produkter. Artificiell intelligens baserade på datorberäkningar blir allt viktigare inom många ingenjörsområden. Inriktningen syftar mot gedigna kunskaper om de beräkningsvetenskapliga, matematiska, statistiska och datavetenskapliga grunderna för sådana verktyg. Centralt är också att belysa hur beräkningsteknik kommer till användning inom olika grenar av fysik och teknik. Inriktningen består av ett antal kärnkurser inom det beräkningstekniska området. Därtill finns kompletterande kurser som valfritt kan komponeras samman till två olika fördjupningsprofiler: tillämpad beräkningsteknik och artificiell intelligens. En civilingenjör med examen från teknisk fysik, inriktning beräkningsteknik, har den kompetens som krävs för att utgående från en problemställning i fysik eller teknik bedöma vilka beräkningstekniska verktyg (modeller, algoritmer och programvara) som är lämpliga att använda för att ge problemet en lösning. Inriktning elektrifiering För att klara den fortsatta elektrifieringen av samhället måste inte enbart elproduktionen ökas, vi måste även klara av en högre energiöverföring och elektrifiering av fordonsflottan. Stora tekniska framsteg har skett de senaste åren tack vare utvecklingen inom kraftelektronik, såväl inom avancerad design för styrning av elektriska fordon både på land, i vatten och i luften, som komponenter för att hantera höga spänningar och effekter i elnäten. En större andel av förnybar energiproduktion i det svenska elnätet ställer dessutom högre krav på flexibiliteten. Det svenska elnätet har byggts upp under decennier för en årlig produktion som matchar dagens samhälle, och för att klara elektrifieringen behövs nya lösningar för att elproduktionen ska kunna ökas med 50% över 15 år, en tidshorisont som innebär ett stort behov av ingenjörer med både bredd och djup inom såväl matematik och fysik som teknik. En teknisk fysiker får just denna bredd och djup och kommer därmed att ha de rätta kunskaperna och verktygen för att bidra med nya lösningar inom elektrifieringen. Inriktningen leder till ett gediget kunnande inom kraftelektronik för att tillämpas på högspänning och elektriska nät, en hett eftertraktad specialisering i näringslivet. Inriktning hållbar energiteknik Hållbar utveckling genomsyrar redan all verksamhet inom såväl näringsliv som samhället och i framtiden kommer kunskap och kompetens inom området att bli allt viktigare. Inriktningen hållbar energiteknik fördjupar och breddar kunskaper om såväl de senaste som de kommande tekniska lösningarna för hållbar energiförsörjning vilket på många sätt är nyckeln till ekologisk, social och ekonomisk hållbarhet. Inom inriktningen fördjupas kunskapen inom teknik och fysik för att bl.a. förstå energiomvandling, distribution och lagring. Examensarbetet kan ofta göras i samarbete med industrin inom den valda branschen. Kurser i energifysik och hållbar energiteknik ger en bas och det är möjligt att fördjupa sig i såväl solenergi som batteriteknik, fjärrvärme, vind- och vågkraft. En examen med inriktning hållbar energiteknik ger de rätta förutsättningarna för att leda eller delta i den nödvändiga teknikomställningen som krävs för att uppnå de globala målen för hållbar utveckling. Inriktning inbyggda system Området inbyggda system genomgår en revolution. Utvecklingen inom internet, trådlös kommunikation och energisnålare lösningar innebär att applikationer med inbyggda system växer explosionsartat. Med inbyggda system kan styr-, mät- och informationsinsamling göras enklare och billigare, och med en genuin fysikbakgrund vidgas användningsområdena ytterligare. Såväl hård- som mjukvara behandlas och konstruktionsövningar breddar kunnandet. Inriktningen är uppdelad i två fördjupningsprofiler, hårdvara för inbyggda system och systemteknik. Avsikten med upplägget är att utbilda avancerade ingenjörer med unik multikompetens, där teori, experiment och konstruktion samverkar hos tekniska fysiker med ett helhetstänkande. Teori används för att integrera intelligens i inbyggda system, fysik är oumbärligt för att förstå och designa mätningar medan elektronik och datateknik behövs för att förverkliga lösningarna. Med kompletterande konstruktions - och installationsövningar har den färdigutbildade tekniska fysikern redskap som kan användas i de mest skiftande situationer. Denna mångsidiga och avancerade kompetens har stor efterfrågan, inte minst för att driva projekt som kräver insikter från flera områden. Inriktning tillämpad fysik Näringslivet efterfrågar ingenjörer med breda kunskaper inom den tillämpade fysikens olika områden, gedigen analys- och värderingsförmåga samt färdigheter inom såväl teoretisk som experimentell forskning och utveckling. Den grundläggande fysiken och dess matematiska formulering har fått ökad betydelse genom tillämpningar i nya områden som utveckling av nya energikällor, bioteknik eller finansiell matematik. Samtidigt sprids moderna fysikaliska mätmetoder till allt fler branscher. För att möta dessa behov erbjuder inriktningen tillämpad fysik kurser i både experimentella och teoretiska metoder för att bredda kompetensen. Sofistikerad utrustning i renrum samt acceleratorer, detektorer och spektroskopisk utrustning ger en allsidig experimentell träning. Examensarbetet kan ofta göras i samarbete med industrin inom den valda branschen. Det finns två fördjupningsprofiler: fysik och kvantteknologi. Den första ger solid förståelse av kvantfysik, materia och strålning som möjliggör nya tillämpningar för medicinsk fysik, detektorer, samt strålskydd medan kvantteknologi fördjupar och breddar kunskaper om såväl de senaste inom fotonik och nanoteknologi som kommande tekniska lösningarna för kvantinformation och kvantdatorer. Tillämpade fysiker är relevanta för både näringsliv och universitet - inte minst för industriell forskning och utveckling eller doktorandstudier."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "För studenter som antogs 2025 eller tidigare kan 1MA360 bytas mot 1MA013 i examen. 1MA360 och 1MA013 kan inte ingå i samma examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "För studenter som antogs 2025 eller tidigare kan 1MA361 bytas mot 1MA016 i examen. 1MA361 och 1MA016 kan inte ingå i samma examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "För studenter som antogs 2025 eller tidigare kan 1TM044 bytas mot 1TE760 i examen. 1TM044 och 1TE760 kan inte ingå i samma examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "För studenter som antogs 2024 eller tidigare gäller: För inriktningarna Beräkningsteknik, Elektrifiering, Hållbar energiteknik och Inbyggda system är Tillämpad mekanik II (1TM014) och Mekanik III (1FA103) alternativobligatoriska inom examenskravet. För inriktningen Tillämpad fysik är Mekanik III (1FA103) obligatorisk inom examenskravet. 1TM014 och 1FA103 får ingå i samma examen. För studenter som antogs 2025 eller senare gäller att Mekanik III är obligatorisk inom examenskravet för alla inriktningar."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "För de som ska välja inriktning till ht 2027 är Mekanik III obligatorisk i examenskravet för de som läser inriktningen Tillämpad fysik. För de studenter som ännu inte läst 1FA103 kan denna väljas här istället för 1RT490 vt 2027. 1RT490 kan då läsas i period 33 istället för Materialmekanikmodellering eller Strömningslära (de kurserna kan då tas i period 43) alternativt i valfri period i åk 4 eller period 51. För studenter som ska läsa inriktningen Inbyggda system bör 1RT490 läsas i period 33 eftersom den utgör behörighetskrav på kurser inom profilen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "De studenter som läste 1FA103 HT2026 i p2 istället för 1RT490 kan läsa 1RT490 här istället för Materialmekanikmodellering eller Strömningslära (de kurserna kan då tas i period 43) alternativt i valfri period i åk 4 eller period 51. Studenter som ska läsa någon av inriktningarna Inbyggda system eller Hållbar energiteknik bör läsa 1RT490 här eftersom den utgör behörighetskrav på kurser inom inriktningarna."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Antingen"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "eller"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "En av kurserna Strömningslära (1EL002) eller Materialmekanikmodellering (1TM043) är obligatorisk inom examenskravet. För studenter som antogs 2024 eller tidigare kan 1TM043 bytas mot 1TE654 i examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "För de som ska välja inriktning till ht 2027 är Elkraftteknik obligatorisk i examenskravet för de som läser elektrifieringsinriktningen. Dessa läser då Elkraftteknik här vt 2027 istället för Materialmekanikmodellering eller Strömningslära (de kurserna kan då tas i Åk 4, p3)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "En av kurserna Tillämpade finita elementmetoder (1TD056) och Datoriserad bildanalys I (1TD396) är obligatorisk inom examenskravet för inriktningen beräkningsteknik. Tillämpade finita elementmetoder (1TD056) schemaläggs i profilen Tillämpad beräkningsteknik.",
+        "trackId": "berakningsteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Antingen",
+        "trackId": "berakningsteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "eller",
+        "trackId": "berakningsteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Tillämpad djupinlärning i fysik och teknik (1FA370) kan inte tas med i examen tillsammans med Djupinlärning (1RT720)",
+        "trackId": "berakningsteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "En av kurserna Funktionalanalys med tillämpningar (1MA356) och Avancerad probabilistisk maskininlärning (1RT705) är obligatorisk inom examenskravet för inriktningen beräkningsteknik. Avancerad probabilistisk maskininlärning (1RT705) schemaläggs i profilen Artificiell intelligens i period 51.",
+        "trackId": "berakningsteknik__tillampad-berakningsteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "En av kurserna Tillämpade finita elementmetoder (1TD056) eller Datoriserad bildanalys I (1TD396) är obligatorisk inom examenskravet för inriktningen beräkningsteknik. Datoriserad bildanalys I (1TD396) schemaläggs i profilen Artificiell intelligens.",
+        "trackId": "berakningsteknik__tillampad-berakningsteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Analog elektronik (1TE725) är obligatorisk inom examenskravet för de som tar ut examen enligt en studieplan före 2022/2023 då den ersattes av kursen Tillämpad analog elektronik (1TM012) som nu är obligatorisk inom inriktningen Inbyggda system. 1TE725 och 1TM012 kan inte ingå tillsammans i examen",
+        "trackId": "inbyggda-system"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Analog elektronik (1TE725) är obligatorisk inom examenskravet för de som tar ut examen enligt en studieplan före 2022/2023 då den ersattes av kursen Tillämpad analog elektronik (1TM012) som nu är obligatorisk inom inriktningen Inbyggda system. 1TE725 och 1TM012 kan inte ingå tillsammans i examen.",
+        "trackId": "inbyggda-system__systemteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "En av kurserna Elektromagnetisk fältteori (1FA252) och Halvledarelektronik (1TE039) är obligatorisk inom examenskravet för inriktningen. För profilen rekommenderas Elektromagnetisk fältteori (1FA252).",
+        "trackId": "tillampad-fysik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "En av kurserna Kärnfysik (1FA346) och Nanovetenskap (1FA026) är obligatorisk inom examenskravet för inriktningen. För profilen rekommenderas Kärnfysik (1FA346)",
+        "trackId": "tillampad-fysik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "En av kurserna Elektromagnetisk fältteori (1FA252) och Halvledarelektronik (1TE039) är obligatorisk inom examenskravet för inriktningen. För profilen rekommenderas Halvledarelektronik (1TE039).",
+        "trackId": "tillampad-fysik__kvantteknologi"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "En av kurserna Kärnfysik (1FA346) och Nanovetenskap (1FA026) är obligatorisk inom examenskravet för inriktningen. För profilen rekommenderas Nanovetenskap (1FA026).",
+        "trackId": "tillampad-fysik__kvantteknologi"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "För examen med inriktningen krävs de obligatoriska kurserna för inriktningen samt det som specificeras i de programspecifika examenskraven i utbildningsplanen.",
+        "trackId": "hallbar-energiteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Antingen",
+        "trackId": "berakningsteknik__artificiell-intelligens"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "eller",
+        "trackId": "berakningsteknik__artificiell-intelligens"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Djupinlärning (1RT720) kan inte tas med i examen tillsammans med Tillämpad djupinlärning i fysik och teknik (1FA370).",
+        "trackId": "berakningsteknik__artificiell-intelligens"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Antingen",
+        "trackId": "berakningsteknik__artificiell-intelligens"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "eller",
+        "trackId": "berakningsteknik__artificiell-intelligens"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Avancerad tillämpad djupinlärning i fysik och teknik (1FA006) kan inte tas med i examen tillsammans med Avancerad djupinlärning för bildbehandling (1MD042).",
+        "trackId": "berakningsteknik__artificiell-intelligens"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
+        "trackId": "berakningsteknik__artificiell-intelligens"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "En av kurserna Funktionalanalys med tillämpningar (1MA356) och Avancerad probabilistisk maskininlärning (1RT705) är obligatorisk inom examenskravet för inriktningen beräkningsteknik. Funktionalanalys med tillämpningar (1MA356) schemaläggs i profilen Tillämpad beräkningsteknik i period 41.",
+        "trackId": "berakningsteknik__artificiell-intelligens"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
+        "trackId": "berakningsteknik__tillampad-berakningsteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "En av kurserna Funktionalanalys med tillämpningar (1MA356) och Avancerad probabilistisk maskininlärning (1RT705) är obligatorisk inom examenskravet för inriktningen beräkningsteknik. Funktionalanalys med tillämpningar (1MA356) schemaläggs i profilen Tillämpad beräkningsteknik i period 41.",
+        "trackId": "berakningsteknik__tillampad-berakningsteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
+        "trackId": "inbyggda-system__hardvara-for-inbyggda-system"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
+        "trackId": "inbyggda-system__systemteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
+        "trackId": "tillampad-fysik__fysik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
+        "trackId": "tillampad-fysik__kvantteknologi"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
+        "trackId": "hallbar-energiteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "För studenter som antogs 2021 eller tidigare kan 1TS327 bytas mot 1TE743 i examen.",
+        "trackId": "elektrifiering"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Övriga valbara kurser Alla kurser under åk 1-3 samt inom inriktningarna är valbara för samtliga studenter på programmet. Nedanstående kurser sökes i konkurrens och det finns ingen garanti att få plats."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Solenergi för elgenerering (1TE678) kan inte ingå i examen tillsammans med Solenergi - teknik och system (1TE028 eller 1TE206)."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Kursen Rymdprojekt (1FA256) ges enbart jämna år."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Övrig information Kurspaketet Teknikbaserat entreprenörskap och affärsutveckling, 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare."
+      }
+    ]
+  }
 }

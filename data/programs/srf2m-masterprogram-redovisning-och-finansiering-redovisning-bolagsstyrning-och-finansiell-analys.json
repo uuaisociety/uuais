@@ -29,5 +29,14 @@
   "programmeTitleEn": "Master's Programme in Accounting and Financial Management – Strategic Management Control, 120 credits (SRF2M)",
   "programmeUri": "/utbildning/program/masterprogram-redovisning-och-finansiering-redovisning-bolagsstyrning-och-finansiell-analys",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

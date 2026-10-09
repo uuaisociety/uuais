@@ -179,5 +179,28 @@
   "programmeTitleEn": "Bachelor's Programme in Political Science, 180 credits (SPO1K)",
   "programmeUri": "/utbildning/program/politices-kandidatprogram",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Fördjupningsdelen består av a) B- och C-kurser i något av huvudämnena Nationalekonomi och Statskunskap samt en termin som kan användas för valfria kurser eller praktik och därmed fördjupning eller breddning av utbildningen eller b) A-, B- och C-kurser i Freds- och konfliktkunskap, Utvecklingsstudier och Statistik."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Se Termin 4."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Se Termin 4."
+      }
+    ]
+  }
 }

@@ -73,5 +73,14 @@
   "programmeTitleEn": "Master's Programme in Human Rights, 120 credits (RMR2M)",
   "programmeUri": "/utbildning/program/masterprogram-manskliga-rattigheter",
   "faculty": "Teologiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

@@ -3004,5 +3004,88 @@
   "programmeTitleEn": "Master's Programme in Computer and Information Engineering, 300 credits (TIT2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-informationsteknologi",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Avklarad kurs 1DL201 räknas även som motsvarande Algoritmer och Datastrukturer I samt Funktionell programmering."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Avklarad kurs 1DT003 räknas även som motsvarande Datakommunikation I samt Operativsystem I."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "1TD403 kan inte ingå i examen tillsammans med annan grundkurs i beräkningsvetenskap (exempelvis 1TD394, 1TD393 eller 1TD333) eller Beräkningsvetenskap II (1TD395)."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "En av kurserna 1DL034 och 1MA017 är obligatorisk inom examenskravet. Kursen Introduktion till Dataanalys (1MS041) som läses under läsperiod 1-2 under år 4 på profilen Dataanalys har Flervariabelanalys som förkunskapskrav. Studenter som har för avsikt att läsa profilen Dataanalys och inte redan har läst flervariabelanalys måste därför välja 1MA017 i denna läsperiod för att bli behörig till den inledande kursen på profilen Dataanalys."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Programmet har fem profiler under år 4 och 5: dataanalys (da), datorsystem (ds), inbyggda system (is), människa, maskin och samhälle (mms) samt mjukvaruutveckling (mu). En i studieplanen specificerad profil kan ersättas med en individuell profil i samråd med studievägledare. För närmare information om vilka krav som då gäller, se utbildningsplanen. Samtliga kurser inom en profil krävs för examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Minst tre av nedanstående kurser",
+        "trackId": "mjukvaruutveckling"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Valbara kurser Valbara kurser under årskurs 4 termin 1. Nedan redovisas valbara kurser under årskurs 4 termin 1. De i respektive profil rekommenderade kurserna kombineras med kurser från antingen en annan profil eller från nedanstående kurslista. Valbara kurser nedan kan ställas in vid brist på resurser eller vid för få sökande. Kurserna 1DT081 samt 1DT088 går inte att söka på ordinarie väg. Dessa kurskoder används vid projektarbeten som ligger utanför den ordinarie studieplanen. Vid intresse av ett projekt som endera av dessa kurser, kontakta programmets studievägledare.",
+        "trackId": "mjukvaruutveckling"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Valbara kurser Valbara kurser under årskurs 4 termin 2. Nedan redovisas valbara kurser under årskurs 4 termin 2. De i respektive profil rekommenderade kurserna kombineras med kurser från antingen en annan profil eller från nedanstående kurslista. Valbara kurser nedan kan ställas in vid brist på resurser eller vid för få sökande. Kurserna 1DT081 samt 1DT088 används vid projektarbeten som ligger utanför den ordinarie studieplanen och går inte att söka på ordinarie väg.",
+        "trackId": "mjukvaruutveckling"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "En av kurserna 1DT012 och 1MD033 läses under termin 9.",
+        "trackId": "manniska-maskin-och-samhalle"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Valbara kurser Valbara kurser under årskurs 5, termin 1. Nedan redovisas valbara kurser under årskurs 5, termin 1. De i respektive profil rekommenderade kurserna kombineras med kurser från antingen en annan profil eller från nedanstående kurslista. Valbara kurser nedan kan ställas in vid brist på resurser eller vid för få sökande. Kurserna 1DT081 samt 1DT088 används vid projektarbeten som ligger utanför den ordinarie studieplanen.",
+        "trackId": "mjukvaruutveckling"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Övrig information Kurspaketet \"Teknikbaserat entreprenörskap och affärsutveckling\", 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare.",
+        "trackId": "mjukvaruutveckling"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Vid normal studiegång genomföres examensarbetet med start i period 3, men det går även att genomföra det med start i period 1 eller 2 ."
+      }
+    ]
+  }
 }

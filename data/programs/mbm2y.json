@@ -180,5 +180,9 @@
   "programmeTitleEn": "Midwifery Programme, 90 credits (MBM2Y)",
   "programmeUri": "/utbildning/program/barnmorskeprogrammet",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

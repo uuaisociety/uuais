@@ -2285,5 +2285,78 @@
   "programmeTitleEn": "Master's Programme in Computer Science, 120 credits (TDV2M)",
   "programmeUri": "/utbildning/program/masterprogram-datavetenskap",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Följande beteckningar används: G1N - Grundnivå, kursen kräver inte tidigare högskolestudier G1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hp G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp A1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivå A1E - Avancerad nivå, examensarbete för magisterexamen (60 hp) A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kurser väljs fritt bland nedanstående, under förutsättning att behörighetskraven är uppfyllda. Studierådgivning ges så att de valda kurserna tillsammans ska uppfylla examenskraven.",
+        "textEn": "Courses are selected freely from below, provided that eligibility requirements are fulfilled. Study counselling is provided so that the selected courses together fullfill graduation requirements."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1DL010 Artificiell intelligens och 1DL340 Artificiell intelligens kan inte ingå i samma examen. 1DL360 Informationsutvinning I och 1DL370 Informationsutvinning kan inte ingå i samma examen. 1DL530 Introduktion till parallellprogrammering och 1TD062 Högprestandaprogrammering kan inte ingå i samma examen. 1DL450 ges i mån av resurser.",
+        "textEn": "1DL010 Artificial Intelligence and 1DL340 Artificial Intelligence cannot be included in the same degree. 1DL360 Data Mining I and 1DL370 Data Mining cannot be included in the same degree. 1DL530 Introduction to Parallel Programming and 1TD062 High Performance Programming cannot be included in the same degree. 1DL450 is given in terms of resources."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1DT004 Realtidssystem och 1DT063 Realtidssystem I kan ej ingå i samma examen. 1DL451 Modellering för kombinatorisk optimering kan inte ingå i samma examen som någon av 1DL441 Kombinatorisk optimering med villkorsprogrammering, 1DL442 Kombinatorisk optimering och villkorsprogrammering, 1DL448 Modellering för kombinatorisk optimering eller 1DL449 Villkorsmodellering för kombinatorisk optimering. 1DL305 Databasteknik I DV kan inte ingå i samma examen som 1DL301 Databasteknik I.",
+        "textEn": "1DT004 and 1DT063 cannot be included in the same degree. 1DL451 cannot be included in the same degree as any of 1DL441, 1DL442, 1DL448 or 1DL449. 1DL305 cannot be included in the same degree as 1DL301."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1MD046 Användargränssnitt: programmering och utvärdering kan inte ingå i samma examen som 1MD002 Gränssnittsprogrammering I och 1MD003 Gränssnittsprogrammering II. 1DT194 Trådlös kommunikation och nätverksbaserade inbyggda system kan inte ingå i samma examen som någon av 1DT095 Trådlös kommunikation och inbyggda system och 1DT103 Trådlös kommunikation och inbyggda system. 1DT116 Lågnivå-parallellprogrammering kan inte ingå i samma examen som 1DL550 Lågnivå-parallellprogrammering. 1TD062 Högprestandaprogrammering kan inte ingå i samma examen som någon av 1DL560 Programmering av effektiva parallella program, 1DL530 Introduktion till parallellprogrammering och 1TD064 Högprestanda- och parallellberäkningar. 1DL490 ges i mån av resurser.",
+        "textEn": "1MD046 cannot be included in the same degree as 1MD002 and 1MD003. 1DT194 Wireless Communication and Networked Embedded Systems cannot be included in the same degree as 1DT095 Wireless Communication and Networked Embedded Systems and 1DT103 Wireless Communication and Networked Embedded Systems. 1DT116 cannot be included in the same degree as 1DL550. 1TD062 cannot be included in the same degree as any of 1DL560, 1DL530, 1TD480 and 1TD064. 1DL490 is given in terms of resources."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1DL705 och 1DL710 ges i mån av resurser.",
+        "textEn": "1DL705 and 1DL710 are given in terms of resources."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Den som önskar avlägga en magisterexamen väljer Examensarbete D nedan.",
+        "textEn": "The student who intends to obtain A Degree of Master (One Year) shall take the course Degree project D below."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1DT195 Trådlös kommunikation och inbyggda system, projekt, och 1DT103 Trådlös kommunikation och inbyggda system kan inte ingå i samma examen. 1DT114 Datasäkerhet och integritet kan inte ingå i samma examen som 1DT098. 1DT076 Data Engineering II kan inte ingå i samma examen som 1DT075 Data Engineering II. 1MD043 Människa-robotinteraktion kan inte ingå i samma examen som 1MD044 Människa-robotinteraktion med forskningsprojekt.",
+        "textEn": "1DT195 and 1DT103 cannot be included in the same degree. 1DT114 cannot be included in the same degree as 1DT098. 1DT076 cannot be included in the same degree as 1DT075. 1MD043 cannot be included in the same degree as 1MD044."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Termin 3 och 4 Den studerande kan under termin 3 välja bland ovan för termin 1 (period 1 och 2), förutsatt att förkunskapskraven är uppfyllda. Det är dessutom möjligt att läsa följande kurser. Den studerande förväntas under termin 3-4 läsa kursen 1DT540 Examensarbete E i datavetenskap, 30 hp alternativt 1DT550 Examensarbete E i datavetenskap, 45 hp. Vid få deltagare eller resursbrist kan följande kurser ställas in eller ges med annan undervisningsform: 1DL465, 1DL705, 1DL710, 1DT059.",
+        "textEn": "Semester 3 and 4 In semester 3, the student can choose from the above for semester 1 (periods 1 and 2), provided that the prerequisites are met. It is also possible to take the following courses. During semester 3-4, the student is expected to take the course 1DT540, 30 credits or 1DT550, 45 credits. In case of few participants or lack of resources, the following courses can be cancelled or given with another form of teaching: 1DL465, 1DL705, 1DL710, 1DT059."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "1DL010 Artificiell Intelligens och 1DL340 Artificiell Intelligens kan inte ingå i samma examen. 1RT003 Avancerad probabilistisk maskininlärning och 1RT705 Avancerad probabilistisk maskininlärning kan inte ingå i samma examen. 1DL370 Informationsutvinning kan inte ingå i samma examen som 1DL360 Informationsutvinning I, 1DL460 Informationsutvinning II eller 1DL025 Informationsutvinning. 1TD054 Acceleratorbaserad programmering kan inte ingå i samma examen som 1TD055 Acceleratorbaserad programmering.",
+        "textEn": "1DL010 Artificial Intelligence and 1DL340 Artificial Intelligence cannot be included in the same degree. 1RT003 Advanced Probabilistic Machine Learning and 1RT705 Advanced Probabilistic Machine Learning cannot be included in the same degree. 1DL370 Data Mining cannot be included in the same degree as 1DL360 Data Mining I, 1DL460 Data Mining II or 1DL025 Data Mining. 1TD054 cannot be included in the same degree as 1TD055."
+      }
+    ]
+  }
 }

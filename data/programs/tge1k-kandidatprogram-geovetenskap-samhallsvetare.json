@@ -725,5 +725,39 @@
   "programmeTitleEn": "Bachelor's Programme in Earth Science, 180 credits (TGE1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-geovetenskap-samhallsvetare",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Följande beteckningar används: G1N - Grundnivå, kursen kräver inte tidigare högskolestudier G1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hp G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp G2E - Grundnivå, examensarbete för kandidatexamen (180 hp)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "För studenter inom sökalternativ för samhällsvetare som inte har Ma D från gymnasiet krävs Biovetenskap 30 hp för tillträde till 1MA010 Baskurs i matematik 5 hp."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Annat biområde än kemi kan väljas."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "alternativt"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Övriga kurser sommartid/terminstid."
+      }
+    ]
+  }
 }

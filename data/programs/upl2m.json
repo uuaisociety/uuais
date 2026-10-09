@@ -44,5 +44,14 @@
   "programmeTitleEn": "Master's Programme in Educational Management, 120 credits (UPL2M)",
   "programmeUri": "/utbildning/program/masterprogram-pedagogiskt-ledarskap",
   "faculty": "Fakulteten för utbildningsvetenskaper",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "blocked",
+    "issues": [
+      {
+        "kind": "malformed-semester",
+        "message": "The source outline has no semester list."
+      }
+    ]
+  }
 }

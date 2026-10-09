@@ -837,5 +837,31 @@
   "programmeTitleEn": "Master's Programme in Bioinformatics – Computer Science Background, 120 credits (TBK2M)",
   "programmeUri": "/utbildning/program/masterprogram-bioinformatik-datavetenskaplig-bakgrund",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "-------------------------------------------------------------------------------------------------------- Tillvalskurser Dessa kurser går i olika perioder och kan läsas under programmets gång som alternativ till andra kurser.",
+        "textEn": "-------------------------------------------------------------------------------------------------------- Optional courses These courses are given in different periods and can replace other courses in the programme."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "1MB720 är enbart för de studenter som ska ta ut en magisterexamen.",
+        "textEn": "1MB720 is only for the one-year Master's students."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Endast en av kurserna Forskningspraktik, 1MB803, 1MB804, 1MB805, 1MB840, 1MB841 och 1MB842, kan ingå i examen. Endast en av kurserna Bibliografiskt projekt i bioinformatik, 1MB782 och 1MB783, kan ingå i examen. Endast en av kurserna Projektarbete, 1MB820 och 1MB822, kan ingå i examen.",
+        "textEn": "The courses Research Training in Bioinformatics, 1MB803, 1MB804, 1MB805, 1MB840, 1MB841 and 1MB842, cannot be included in the same degree (only one of them can be included in the master's degree). The courses Literature Project in Bioinformatics, 1MB782 and 1MB783, cannot be included in the same degree. The courses Project Work in Bioinformatics, 1MB820 and 1MB822, cannot be included in the same degree."
+      }
+    ]
+  }
 }

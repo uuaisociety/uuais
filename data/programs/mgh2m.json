@@ -133,5 +133,9 @@
   "programmeTitleEn": "Master's Programme in Global Health, 120 credits (MGH2M)",
   "programmeUri": "/utbildning/program/masterprogram-global-halsa",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

@@ -452,7 +452,7 @@
     },
     {
       "id": "rule-1",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "5HA302",
         "5LH150",
@@ -468,8 +468,8 @@
       ],
       "semester": 4,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 5HA302, 5LH150, 5KA106, 5EE105, 5LV310, 5LV211, 5RT000, 5GN004, 5SV228, 2EH310, 2EH326",
-      "labelEn": "Choose one of 11 courses.",
+      "textSv": "Utlandsstudier eller breddningskurser 30 hp, exempelvis någon av följande:",
+      "labelEn": "Exchange Studier or Elective Courses 30 credits. For example:",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -489,7 +489,7 @@
     },
     {
       "id": "rule-3",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "2SC188",
         "2SC189",
@@ -501,8 +501,8 @@
       ],
       "semester": 5,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 2SC188, 2SC189, 2SC193, 2SC146, 4PE178, 4PE179, 4PE181",
-      "labelEn": "Choose one of 7 courses.",
+      "textSv": "Utlandsstudier, praktik eller breddningskurser 30 hp, exempelvis någon av följande:",
+      "labelEn": "Exchange Studier, Internship or Elective Courses 30 credits. For example:",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -515,8 +515,8 @@
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 4UK063, 2SC108",
-      "labelEn": "Choose one of 2 courses.",
+      "textSv": "Välj en av dessa kurser:",
+      "labelEn": "Choose one of these courses:",
       "cohortBefore": null,
       "source": "plan"
     }
@@ -604,5 +604,38 @@
   "programmeTitleEn": "Bachelor's Programme in Sociology, 180 credits (SSC1K)",
   "programmeUri": "/utbildning/program/sociologiprogrammet",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Utbildningssociologi A 30 hp är ett kurspaket som består av kurserna Introduktion till utbildningssociologi 15 hp och Sociala skillnader i utbildning och samhälle 15 hp.",
+        "textEn": "Sociology of Education A 30 credits is a course package which comprises the courses Introduction to Sociology of Education 15 credits and Social Differences in Education and Society 15 credits."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 4,
+        "textSv": "Utlandsstudier eller breddningskurser 30 hp, exempelvis någon av följande:",
+        "textEn": "Exchange Studier or Elective Courses 30 credits. For example:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Observera:\nKurserna Ekonomisk historia A: Ekonomi och samhälle 15 hp samt Ekonomisk historia A: Global omvandling och globalisering 1700-2000 15 hp utgör tillsammans kurspaketet Ekonomisk historia A 30 hp.",
+        "textEn": "Note:\nThe courses Economic History A: Economy and Society 15 credits and Economic History A: Global Transformation and Globalisation 1700-2000 15 credits are part of the course package Economic History A 30 credits."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 5,
+        "textSv": "Utlandsstudier, praktik eller breddningskurser 30 hp, exempelvis någon av följande:",
+        "textEn": "Exchange Studier, Internship or Elective Courses 30 credits. For example:"
+      }
+    ]
+  }
 }
