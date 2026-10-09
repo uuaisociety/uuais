@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Handle, Position, type NodeProps } from "reactflow";
-import { ArrowDown } from "lucide-react";
-import type { ProgramCourse } from "@/lib/programs";
-import { Button } from "@/components/ui/Button";
-import { CATEGORY_STYLE } from "./constants";
+import React from 'react';
+import { Handle, Position, type NodeProps } from 'reactflow';
+import { ArrowDown } from 'lucide-react';
+import type { ProgramCourse } from '@/lib/programs';
+import { Button } from '@/components/ui/Button';
+import { CATEGORY_STYLE } from './constants';
 
 export type ElectivePoolData = {
   semester: number;
@@ -14,16 +14,19 @@ export type ElectivePoolData = {
 };
 
 /**
- * Stands in for a semester's pool of free electives: drawn individually they would make the
+ * Stands in for a semester's pool of listed electives: drawn individually they would make the
  * column an order of magnitude taller than any other and force the whole map to zoom out.
  */
 function ElectivePoolNode({ data }: NodeProps<ElectivePoolData>) {
   const { courses, onOpen } = data;
-  const credits = courses.reduce((sum, course) => sum + (course.credits ?? 0), 0);
 
   return (
     <div className="h-full w-full overflow-hidden rounded-md border border-dashed border-border bg-card">
-      <Handle type="target" position={Position.Left} className="!h-1.5 !w-1.5 !border-0 !bg-border" />
+      <Handle
+        type="target"
+        position={Position.Left}
+        className="!h-1.5 !w-1.5 !border-0 !bg-border"
+      />
 
       <Button
         variant="bare"
@@ -39,18 +42,15 @@ function ElectivePoolNode({ data }: NodeProps<ElectivePoolData>) {
           />
           <span className="min-w-0">
             <span className="block text-[0.9375rem] font-semibold leading-tight text-foreground">
-              Free electives
+              Additional listed courses
             </span>
             <span className="mt-0.5 block font-mono text-[0.6875rem] leading-tight text-muted-foreground">
-              {courses.length} to choose from
+              {courses.length} course rows listed
             </span>
           </span>
         </span>
 
-        <span className="mt-2 flex items-center justify-between gap-2">
-          <span className="font-mono text-[0.6875rem] tracking-[0.1em] text-muted-foreground">
-            {credits} hp offered
-          </span>
+        <span className="mt-2 flex items-center justify-end gap-2">
           <span className="inline-flex items-center gap-1 text-[0.6875rem] font-medium text-foreground">
             See list
             <ArrowDown className="h-3 w-3" />
@@ -58,7 +58,11 @@ function ElectivePoolNode({ data }: NodeProps<ElectivePoolData>) {
         </span>
       </Button>
 
-      <Handle type="source" position={Position.Right} className="!h-1.5 !w-1.5 !border-0 !bg-border" />
+      <Handle
+        type="source"
+        position={Position.Right}
+        className="!h-1.5 !w-1.5 !border-0 !bg-border"
+      />
     </div>
   );
 }

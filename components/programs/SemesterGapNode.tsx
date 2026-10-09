@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import React from "react";
-import type { NodeProps } from "reactflow";
-import { Button } from "@/components/ui/Button";
-import { SlidersHorizontal } from "lucide-react";
-import type { Orientation } from "@/lib/programs/layout";
+import React from 'react';
+import type { NodeProps } from 'reactflow';
+import { Button } from '@/components/ui/Button';
+import { SlidersHorizontal } from 'lucide-react';
+import type { Orientation } from '@/lib/programs/layout';
 
 /** Why a run of semesters is standing empty in this view. */
-export type SemesterGapReason = "track" | "other-track" | "empty";
+export type SemesterGapReason = 'track' | 'other-track' | 'empty';
 
 export type SemesterGapData = {
   /** Consecutive semesters this marker stands in for. */
@@ -25,20 +25,23 @@ function label(semesters: number[]): string {
   return first === last ? `Semester ${first}` : `Semester ${first}–${last}`;
 }
 
-const COPY: Record<SemesterGapReason, { heading: string; body: string; action: string | null }> = {
+const COPY: Record<
+  SemesterGapReason,
+  { heading: string; body: string; action: string | null }
+> = {
   track: {
-    heading: "Taught inside a specialisation",
-    body: "The study plan lists no common courses here — these semesters belong to the specialisations. Pick one to see what it teaches.",
-    action: "Choose a specialisation",
+    heading: 'Taught inside a specialisation',
+    body: 'The study plan lists no common courses here — these semesters belong to the specialisations. Pick one to see what it teaches.',
+    action: 'Choose a specialisation',
   },
-  "other-track": {
-    heading: "Not part of this specialisation",
-    body: "This specialisation lists nothing here. Other specialisations do teach these semesters.",
-    action: "Change specialisation",
+  'other-track': {
+    heading: 'Not part of this specialisation',
+    body: 'This specialisation lists nothing here. Other specialisations do teach these semesters.',
+    action: 'Change specialisation',
   },
   empty: {
-    heading: "No courses listed",
-    body: "The study plan names no courses for this stretch of the programme.",
+    heading: 'No coded courses shown',
+    body: 'The source may describe courses or choices in prose. Check the official study plan for this stretch of the programme.',
     action: null,
   },
 };
@@ -49,17 +52,17 @@ const COPY: Record<SemesterGapReason, { heading: string; body: string; action: s
  */
 function SemesterGapNode({ data }: NodeProps<SemesterGapData>) {
   const copy = COPY[data.reason];
-  const vertical = data.orientation === "vertical";
+  const vertical = data.orientation === 'vertical';
 
   return (
     <div
       className={`flex h-full w-full select-none overflow-hidden rounded-lg border border-dashed border-border bg-muted/40 px-4 py-3 ${
-        vertical ? "flex-row items-center gap-5" : "flex-col gap-2"
+        vertical ? 'flex-row items-center gap-5' : 'flex-col gap-2'
       }`}
     >
       <p
         className={`shrink-0 font-mono text-[0.6875rem] uppercase leading-none tracking-[0.12em] text-muted-foreground ${
-          vertical ? "w-28" : ""
+          vertical ? 'w-28' : ''
         }`}
       >
         {label(data.semesters)}
@@ -69,7 +72,9 @@ function SemesterGapNode({ data }: NodeProps<SemesterGapData>) {
         <p className="text-[1.0625rem] font-semibold leading-tight tracking-[-0.028em] text-foreground">
           {copy.heading}
         </p>
-        <p className="mt-1.5 text-[0.9375rem] leading-relaxed text-muted-foreground">{copy.body}</p>
+        <p className="mt-1.5 text-[0.9375rem] leading-relaxed text-muted-foreground">
+          {copy.body}
+        </p>
 
         {copy.action && data.onChooseTrack ? (
           <Button

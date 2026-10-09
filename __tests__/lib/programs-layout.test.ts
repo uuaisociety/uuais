@@ -14,7 +14,7 @@ function course(
   code: string,
   semester: number,
   periods: string[] = ['Period 1'],
-  extra: Partial<ProgramCourse> = {}
+  extra: Partial<ProgramCourse> = {},
 ): ProgramCourse {
   return {
     code,
@@ -35,7 +35,12 @@ function course(
   };
 }
 
-const edge = (from: string, to: string): ProgramEdge => ({ from, to, type: 'HARD', source: 'llm' });
+const edge = (from: string, to: string): ProgramEdge => ({
+  from,
+  to,
+  type: 'HARD',
+  source: 'llm',
+});
 
 const nodeFor = (layout: ReturnType<typeof layoutProgram>, code: string) =>
   layout.nodes.find((n) => n.course.code === code);
@@ -45,25 +50,35 @@ describe('layoutProgram columns', () => {
     const layout = layoutProgram(
       [course('A', 1, ['Period 1']), course('B', 1, ['Period 2'])],
       [],
-      'horizontal'
+      'horizontal',
     );
-    expect(layout.columns.map((c) => c.period)).toEqual(['Period 1', 'Period 2']);
+    expect(layout.columns.map((c) => c.period)).toEqual([
+      'Period 1',
+      'Period 2',
+    ]);
   });
 
   it('orders periods by number, not by discovery order', () => {
     const layout = layoutProgram(
       [course('B', 1, ['Period 2']), course('A', 1, ['Period 1'])],
       [],
-      'horizontal'
+      'horizontal',
     );
-    expect(layout.columns.map((c) => c.period)).toEqual(['Period 1', 'Period 2']);
+    expect(layout.columns.map((c) => c.period)).toEqual([
+      'Period 1',
+      'Period 2',
+    ]);
   });
 
   it('separates semesters by a wider gap than periods', () => {
     const layout = layoutProgram(
-      [course('A', 1, ['Period 1']), course('B', 1, ['Period 2']), course('C', 2, ['Period 3'])],
+      [
+        course('A', 1, ['Period 1']),
+        course('B', 1, ['Period 2']),
+        course('C', 2, ['Period 3']),
+      ],
       [],
-      'horizontal'
+      'horizontal',
     );
     const [p1, p2, p3] = layout.columns.map((c) => c.x);
     expect(p2 - p1).toBe(NODE_WIDTH + COLUMN_GAP);
@@ -74,7 +89,7 @@ describe('layoutProgram columns', () => {
     const layout = layoutProgram(
       [course('A', 1, ['Period 1']), course('B', 1, ['Period 2'])],
       [],
-      'horizontal'
+      'horizontal',
     );
     expect(layout.semesters).toHaveLength(1);
     expect(layout.semesters[0].periods).toEqual(['Period 1', 'Period 2']);
@@ -85,18 +100,43 @@ describe('layoutProgram columns', () => {
     const layout = layoutProgram(
       [
         course('A', 1),
-        course('B', 1, ['Period 1'], { compulsory: false, creditsInSemester: 100 }),
+        course('B', 1, ['Period 1'], {
+          compulsory: false,
+          creditsInSemester: 100,
+        }),
       ],
       [],
-      'horizontal'
+      'horizontal',
     );
     expect(layout.semesters[0].credits).toBe(5);
   });
 });
 
 describe('layoutProgram placement', () => {
+  it('disambiguates repeated runs from the same semester while preserving the first run id', () => {
+    const layout = layoutProgram(
+      [
+        course('A', 1, ['Period 1', 'Period 3', 'Period 5']),
+        course('B', 1, ['Period 2']),
+        course('C', 1, ['Period 4']),
+      ],
+      [],
+      'horizontal',
+    );
+
+    expect(
+      layout.nodes
+        .filter((node) => node.course.code === 'A')
+        .map((node) => node.id),
+    ).toEqual(['A', 'A__1', 'A__1__2']);
+  });
+
   it('spans a course across the periods it runs in', () => {
-    const layout = layoutProgram([course('A', 1, ['Period 1', 'Period 2'])], [], 'horizontal');
+    const layout = layoutProgram(
+      [course('A', 1, ['Period 1', 'Period 2'])],
+      [],
+      'horizontal',
+    );
     const node = nodeFor(layout, 'A');
     expect(node?.periodSpan).toBe(2);
     expect(node?.width).toBe(NODE_WIDTH * 2 + COLUMN_GAP);
@@ -104,7 +144,11 @@ describe('layoutProgram placement', () => {
   });
 
   it('gives a single-period course a single-column width', () => {
-    const layout = layoutProgram([course('A', 1, ['Period 1'])], [], 'horizontal');
+    const layout = layoutProgram(
+      [course('A', 1, ['Period 1'])],
+      [],
+      'horizontal',
+    );
     expect(nodeFor(layout, 'A')?.width).toBe(NODE_WIDTH);
   });
 
@@ -113,7 +157,7 @@ describe('layoutProgram placement', () => {
     const layout = layoutProgram(
       [course('A', 1, ['Period 1', 'Period 2']), course('B', 1, ['Period 2'])],
       [],
-      'horizontal'
+      'horizontal',
     );
     expect(nodeFor(layout, 'A')?.y).toBe(0);
     expect(nodeFor(layout, 'B')?.y).toBe(NODE_HEIGHT + ROW_GAP);
@@ -123,7 +167,7 @@ describe('layoutProgram placement', () => {
     const layout = layoutProgram(
       [course('A', 1, ['Period 1']), course('B', 1, ['Period 1'])],
       [],
-      'horizontal'
+      'horizontal',
     );
     const ys = layout.nodes.map((n) => n.y).sort((a, b) => a - b);
     expect(ys).toEqual([0, NODE_HEIGHT + ROW_GAP]);
@@ -133,16 +177,18 @@ describe('layoutProgram placement', () => {
     const layout = layoutProgram(
       [course('A', 1, ['Period 1']), course('B', 2, ['Period 3'])],
       [edge('A', 'B')],
-      'horizontal'
+      'horizontal',
     );
-    expect(nodeFor(layout, 'B')?.x).toBeGreaterThan(nodeFor(layout, 'A')?.x as number);
+    expect(nodeFor(layout, 'B')?.x).toBeGreaterThan(
+      nodeFor(layout, 'A')?.x as number,
+    );
   });
 
   it('swaps the axis when vertical', () => {
     const layout = layoutProgram(
       [course('A', 1, ['Period 1']), course('B', 2, ['Period 3'])],
       [],
-      'vertical'
+      'vertical',
     );
     expect(nodeFor(layout, 'A')?.x).toBe(0);
     // Time advances by the card's height when the map runs vertically.
@@ -153,7 +199,7 @@ describe('layoutProgram placement', () => {
     const layout = layoutProgram(
       [course('A', 1, ['Period 1']), course('B', 1, ['Period 1'])],
       [],
-      'vertical'
+      'vertical',
     );
     const xs = layout.nodes.map((n) => n.x).sort((a, b) => a - b);
     expect(xs).toEqual([0, NODE_WIDTH + ROW_GAP]);
@@ -177,8 +223,14 @@ describe('layoutProgram placement', () => {
       course('C2', 1, ['Period 2']),
       course('C1', 1, ['Period 2']),
     ];
-    const layout = layoutProgram(courses, [edge('P1', 'C1'), edge('P2', 'C2')], 'horizontal');
-    expect(nodeFor(layout, 'C1')?.y).toBeLessThan(nodeFor(layout, 'C2')?.y as number);
+    const layout = layoutProgram(
+      courses,
+      [edge('P1', 'C1'), edge('P2', 'C2')],
+      'horizontal',
+    );
+    expect(nodeFor(layout, 'C1')?.y).toBeLessThan(
+      nodeFor(layout, 'C2')?.y as number,
+    );
   });
 
   it('drops a course whose period has no column', () => {
@@ -194,14 +246,19 @@ describe('layoutProgram pools', () => {
       [course('A', 10, ['Period 1'])],
       [],
       'horizontal',
-      new Set([10])
+      new Set([10]),
     );
     const slot = layout.poolSlots.get(10);
     expect(slot?.y).toBe(NODE_HEIGHT + ROW_GAP);
   });
 
   it('gives a semester that is only a pool its own column', () => {
-    const layout = layoutProgram([course('A', 1)], [], 'horizontal', new Set([10]));
+    const layout = layoutProgram(
+      [course('A', 1)],
+      [],
+      'horizontal',
+      new Set([10]),
+    );
     expect(layout.semesters.map((s) => s.semester)).toEqual([1, 10]);
     expect(layout.poolSlots.get(10)?.y).toBe(0);
   });
@@ -210,9 +267,12 @@ describe('layoutProgram pools', () => {
 describe('partitionElectivePools', () => {
   it('collapses a large pool of optional trunk courses', () => {
     const optional = Array.from({ length: 10 }, (_, i) =>
-      course(`E${i}`, 10, ['Period 1'], { compulsory: false })
+      course(`E${i}`, 10, ['Period 1'], { compulsory: false }),
     );
-    const { laidOut, pools } = partitionElectivePools([course('T', 10), ...optional]);
+    const { laidOut, pools } = partitionElectivePools([
+      course('T', 10),
+      ...optional,
+    ]);
     expect(laidOut.map((c) => c.code)).toEqual(['T']);
     expect(pools).toHaveLength(1);
     expect(pools[0].courses).toHaveLength(10);
@@ -220,7 +280,7 @@ describe('partitionElectivePools', () => {
 
   it('leaves a small group laid out individually', () => {
     const optional = Array.from({ length: 3 }, (_, i) =>
-      course(`E${i}`, 10, ['Period 1'], { compulsory: false })
+      course(`E${i}`, 10, ['Period 1'], { compulsory: false }),
     );
     const { pools, laidOut } = partitionElectivePools(optional);
     expect(pools).toHaveLength(0);
@@ -229,7 +289,10 @@ describe('partitionElectivePools', () => {
 
   it('never pools a compulsory or track course', () => {
     const many = Array.from({ length: 12 }, (_, i) =>
-      course(`C${i}`, 7, ['Period 1'], { compulsory: false, trackId: 'some-track' })
+      course(`C${i}`, 7, ['Period 1'], {
+        compulsory: false,
+        trackId: 'some-track',
+      }),
     );
     expect(partitionElectivePools(many).pools).toHaveLength(0);
   });
@@ -237,7 +300,9 @@ describe('partitionElectivePools', () => {
   it('pools each semester independently', () => {
     const build = (semester: number) =>
       Array.from({ length: 9 }, (_, i) =>
-        course(`S${semester}E${i}`, semester, ['Period 1'], { compulsory: false })
+        course(`S${semester}E${i}`, semester, ['Period 1'], {
+          compulsory: false,
+        }),
       );
     const { pools } = partitionElectivePools([...build(9), ...build(10)]);
     expect(pools.map((p) => p.semester)).toEqual([9, 10]);
@@ -259,18 +324,24 @@ describe('layoutProgram choice groups', () => {
       [edge('P', 'C')],
       'horizontal',
       new Set(),
-      [{ id: 'rule-1', courseCodes: ['OPT_A', 'OPT_B'] }]
+      [{ id: 'rule-1', courseCodes: ['OPT_A', 'OPT_B'] }],
     );
     const rowOf = (code: string) =>
-      (layout.nodes.find((n) => n.course.code === code)?.y ?? 0) / (NODE_HEIGHT + ROW_GAP);
+      (layout.nodes.find((n) => n.course.code === code)?.y ?? 0) /
+      (NODE_HEIGHT + ROW_GAP);
     expect(Math.abs(rowOf('OPT_A') - rowOf('OPT_B'))).toBe(1);
   });
 
   it('leaves ordering untouched when there are no groups', () => {
-    const courses = [course('A', 1, ['Period 1']), course('B', 1, ['Period 1'])];
+    const courses = [
+      course('A', 1, ['Period 1']),
+      course('B', 1, ['Period 1']),
+    ];
     const withGroups = layoutProgram(courses, [], 'horizontal', new Set(), []);
     const plain = layoutProgram(courses, [], 'horizontal');
-    expect(withGroups.nodes.map((n) => n.y)).toEqual(plain.nodes.map((n) => n.y));
+    expect(withGroups.nodes.map((n) => n.y)).toEqual(
+      plain.nodes.map((n) => n.y),
+    );
   });
 
   it('ignores a group whose courses are not on screen', () => {
@@ -279,7 +350,7 @@ describe('layoutProgram choice groups', () => {
       [],
       'horizontal',
       new Set(),
-      [{ id: 'rule-1', courseCodes: ['GONE_1', 'GONE_2'] }]
+      [{ id: 'rule-1', courseCodes: ['GONE_1', 'GONE_2'] }],
     );
     expect(layout.nodes).toHaveLength(1);
   });
@@ -293,41 +364,92 @@ describe('layoutProgram collapsed semesters', () => {
   ];
 
   it('places no cards for a collapsed semester', () => {
-    const layout = layoutProgram(courses, [], 'horizontal', new Set(), [], new Set([1]));
+    const layout = layoutProgram(
+      courses,
+      [],
+      'horizontal',
+      new Set(),
+      [],
+      new Set([1]),
+    );
     expect(layout.nodes.map((n) => n.course.code)).toEqual(['C']);
   });
 
   it('keeps the band so the semester can be brought back', () => {
-    const layout = layoutProgram(courses, [], 'horizontal', new Set(), [], new Set([1]));
+    const layout = layoutProgram(
+      courses,
+      [],
+      'horizontal',
+      new Set(),
+      [],
+      new Set([1]),
+    );
     expect(layout.semesters.map((s) => s.semester)).toEqual([1, 2]);
   });
 
   it('reports how many courses it is hiding', () => {
-    const layout = layoutProgram(courses, [], 'horizontal', new Set(), [], new Set([1]));
+    const layout = layoutProgram(
+      courses,
+      [],
+      'horizontal',
+      new Set(),
+      [],
+      new Set([1]),
+    );
     expect(layout.semesters[0].collapsedCount).toBe(2);
     expect(layout.semesters[1].collapsedCount).toBe(0);
   });
 
   it('still reports the credits it is hiding', () => {
-    const layout = layoutProgram(courses, [], 'horizontal', new Set(), [], new Set([1]));
+    const layout = layoutProgram(
+      courses,
+      [],
+      'horizontal',
+      new Set(),
+      [],
+      new Set([1]),
+    );
     expect(layout.semesters[0].credits).toBe(10);
   });
 
   it('collapses a semester to a single column', () => {
     const expanded = layoutProgram(courses, [], 'horizontal');
-    const collapsed = layoutProgram(courses, [], 'horizontal', new Set(), [], new Set([1]));
-    expect(collapsed.semesters[0].span).toBeLessThan(expanded.semesters[0].span);
+    const collapsed = layoutProgram(
+      courses,
+      [],
+      'horizontal',
+      new Set(),
+      [],
+      new Set([1]),
+    );
+    expect(collapsed.semesters[0].span).toBeLessThan(
+      expanded.semesters[0].span,
+    );
   });
 
   it('closes the gap the collapsed semester leaves behind', () => {
     const expanded = layoutProgram(courses, [], 'horizontal');
-    const collapsed = layoutProgram(courses, [], 'horizontal', new Set(), [], new Set([1]));
+    const collapsed = layoutProgram(
+      courses,
+      [],
+      'horizontal',
+      new Set(),
+      [],
+      new Set([1]),
+    );
     expect(collapsed.semesters[1].x).toBeLessThan(expanded.semesters[1].x);
   });
 
   it('behaves normally when nothing is collapsed', () => {
     const plain = layoutProgram(courses, [], 'horizontal');
-    const empty = layoutProgram(courses, [], 'horizontal', new Set(), [], new Set());
+    const empty = layoutProgram(
+      courses,
+      [],
+      'horizontal',
+      new Set(),
+      [],
+      new Set(),
+    );
     expect(empty.nodes).toHaveLength(plain.nodes.length);
   });
 });
@@ -337,7 +459,9 @@ describe('layoutProgram placement identity', () => {
     // A profile inherits its specialisation's courses, so the same code arrives twice.
     const shared = [
       course('1RT495', 7, ['Period 1'], { trackId: 'inbyggda-system' }),
-      course('1RT495', 7, ['Period 1'], { trackId: 'inbyggda-system__systemteknik' }),
+      course('1RT495', 7, ['Period 1'], {
+        trackId: 'inbyggda-system__systemteknik',
+      }),
     ];
     const layout = layoutProgram(shared, [], 'horizontal');
     const ids = layout.nodes.map((n) => n.id);
@@ -347,7 +471,9 @@ describe('layoutProgram placement identity', () => {
   it('draws a duplicated course once when both rows are the same column', () => {
     const shared = [
       course('1RT495', 7, ['Period 1'], { trackId: 'inbyggda-system' }),
-      course('1RT495', 7, ['Period 1'], { trackId: 'inbyggda-system__systemteknik' }),
+      course('1RT495', 7, ['Period 1'], {
+        trackId: 'inbyggda-system__systemteknik',
+      }),
     ];
     expect(layoutProgram(shared, [], 'horizontal').nodes).toHaveLength(1);
   });
@@ -361,7 +487,9 @@ describe('layoutProgram placement identity', () => {
     ];
     const layout = layoutProgram(spanning, [], 'horizontal');
     const node = layout.nodes.find((n) => n.course.code === '1DL201');
-    expect(layout.nodes.filter((n) => n.course.code === '1DL201')).toHaveLength(1);
+    expect(layout.nodes.filter((n) => n.course.code === '1DL201')).toHaveLength(
+      1,
+    );
     expect(node?.periodSpan).toBe(2);
     expect(node?.width).toBeGreaterThan(NODE_WIDTH);
   });
@@ -401,7 +529,10 @@ describe('layoutProgram completeness', () => {
       course('1GV144', 1, [], { compulsory: false }),
     ];
     const layout = layoutProgram(courses, [], 'horizontal');
-    expect(layout.nodes.map((n) => n.course.code).sort()).toEqual(['1GV144', '1GV147']);
+    expect(layout.nodes.map((n) => n.course.code).sort()).toEqual([
+      '1GV144',
+      '1GV147',
+    ]);
   });
 
   it('sorts the unplaced-course column after the real periods', () => {
@@ -411,7 +542,8 @@ describe('layoutProgram completeness', () => {
       course('C', 1, []),
     ];
     const layout = layoutProgram(courses, [], 'horizontal');
-    const x = (code: string) => layout.nodes.find((n) => n.course.code === code)?.x ?? -1;
+    const x = (code: string) =>
+      layout.nodes.find((n) => n.course.code === code)?.x ?? -1;
     expect(x('C')).toBeGreaterThan(x('B'));
   });
 
@@ -419,18 +551,31 @@ describe('layoutProgram completeness', () => {
     // Several master's programmes have no compulsory courses at all; "0 hp" over a
     // semester of 30 hp courses is worse than reporting what is offered.
     const courses = [
-      course('X', 1, ['Period 1'], { compulsory: false, creditsInSemester: 15 }),
-      course('Y', 1, ['Period 2'], { compulsory: false, creditsInSemester: 15 }),
+      course('X', 1, ['Period 1'], {
+        compulsory: false,
+        creditsInSemester: 15,
+      }),
+      course('Y', 1, ['Period 2'], {
+        compulsory: false,
+        creditsInSemester: 15,
+      }),
     ];
-    expect(layoutProgram(courses, [], 'horizontal').semesters[0].credits).toBe(30);
+    expect(layoutProgram(courses, [], 'horizontal').semesters[0].credits).toBe(
+      30,
+    );
   });
 
   it('still counts only compulsory credits where a semester has them', () => {
     const courses = [
       course('REQ', 1, ['Period 1'], { creditsInSemester: 10 }),
-      course('OPT', 1, ['Period 2'], { compulsory: false, creditsInSemester: 100 }),
+      course('OPT', 1, ['Period 2'], {
+        compulsory: false,
+        creditsInSemester: 100,
+      }),
     ];
-    expect(layoutProgram(courses, [], 'horizontal').semesters[0].credits).toBe(10);
+    expect(layoutProgram(courses, [], 'horizontal').semesters[0].credits).toBe(
+      10,
+    );
   });
 });
 
@@ -445,10 +590,12 @@ describe('layoutProgram missing semesters', () => {
       new Set(),
       [],
       new Set(),
-      new Set([2, 3])
+      new Set([2, 3]),
     );
     expect(layout.semesters.map((s) => s.semester)).toEqual([1, 2, 3, 4]);
-    expect(layout.semesters.filter((s) => s.gap).map((s) => s.semester)).toEqual([2, 3]);
+    expect(
+      layout.semesters.filter((s) => s.gap).map((s) => s.semester),
+    ).toEqual([2, 3]);
   });
 
   it('places the gap between the semesters it separates, in order', () => {
@@ -459,7 +606,7 @@ describe('layoutProgram missing semesters', () => {
       new Set(),
       [],
       new Set(),
-      new Set([2, 3])
+      new Set([2, 3]),
     );
     const x = (semester: number) =>
       layout.semesters.find((s) => s.semester === semester)?.x ?? -1;
@@ -476,7 +623,7 @@ describe('layoutProgram missing semesters', () => {
       new Set(),
       [],
       new Set(),
-      new Set([2, 3])
+      new Set([2, 3]),
     );
     // Semester 4 is pushed along by the space the gap now occupies, but nothing is
     // added to or dropped from the map itself.
@@ -514,6 +661,6 @@ describe('layoutProgram over the published programmes', () => {
         const ids = nodes.map((node) => node.id);
         expect(new Set(ids).size).toBe(ids.length);
       }
-    }
+    },
   );
 });

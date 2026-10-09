@@ -27,6 +27,27 @@ describe('getProgram', () => {
     expect(getProgram('ttf2y')?.code).toBe('TTF2Y');
   });
 
+  it('reads updated programme data on each development request', () => {
+    const environment = jest.replaceProperty(process, 'env', {
+      ...process.env,
+      NODE_ENV: 'development',
+    });
+    const fs = jest.requireActual<typeof import('fs')>('fs');
+    const read = jest.spyOn(fs, 'readFileSync');
+    try {
+      getProgram('ttf2y');
+      getProgram('ttf2y');
+      expect(
+        read.mock.calls.filter(([file]) =>
+          String(file).endsWith('/ttf2y.json'),
+        ),
+      ).toHaveLength(2);
+    } finally {
+      read.mockRestore();
+      environment.restore();
+    }
+  });
+
   it('returns null for an unknown programme', () => {
     expect(getProgram('NOPE')).toBeNull();
   });
@@ -69,12 +90,16 @@ describe('programme data integrity', () => {
     const rows = program.courses.filter((c) => c.code === '1FA105');
     expect(rows.map((r) => r.semester).sort()).toEqual([1, 2]);
     expect(rows.every((r) => r.credits === 10)).toBe(true);
-    expect(rows.reduce((sum, r) => sum + (r.creditsInSemester ?? 0), 0)).toBe(10);
+    expect(rows.reduce((sum, r) => sum + (r.creditsInSemester ?? 0), 0)).toBe(
+      10,
+    );
   });
 
   it('gives the trunk semesters their real credit load', () => {
     const groups = groupBySemester(program, getVisibleCourses(program, null));
-    const credits = Object.fromEntries(groups.map((g) => [g.semester, g.credits]));
+    const credits = Object.fromEntries(
+      groups.map((g) => [g.semester, g.credits]),
+    );
     // A full-time semester is 30 hp. Semesters 3 and 6 list either/or alternatives
     // that both carry the compulsory flag, so their listed sum differs until the
     // choose-one rules are extracted.
@@ -87,7 +112,7 @@ describe('programme data integrity', () => {
 
   it('keeps semesters 1-6 and the thesis semester free of tracks', () => {
     const trunk = new Set(
-      program.courses.filter((c) => c.trackId === null).map((c) => c.semester)
+      program.courses.filter((c) => c.trackId === null).map((c) => c.semester),
     );
     expect([...trunk].sort((a, b) => a - b)).toEqual([1, 2, 3, 4, 5, 6, 10]);
   });
@@ -102,14 +127,19 @@ describe('getSpecialisations', () => {
 
   it('nests profiles under their specialisation', () => {
     const applied = specialisations.find((s) => s.id === 'tillampad-fysik');
-    expect(applied?.profiles.map((p) => p.profileSv).sort()).toEqual(['Fysik', 'Kvantteknologi']);
+    expect(applied?.profiles.map((p) => p.profileSv).sort()).toEqual([
+      'Fysik',
+      'Kvantteknologi',
+    ]);
     expect(applied?.baseTrackId).toBe('tillampad-fysik');
   });
 
   it('normalises the specialisation UU spells with inconsistent casing', () => {
     // The study plan writes both "Inriktning beräkningsteknik" and
     // "Inriktning Beräkningsteknik, profil ...".
-    const computational = specialisations.find((s) => s.id === 'berakningsteknik');
+    const computational = specialisations.find(
+      (s) => s.id === 'berakningsteknik',
+    );
     expect(computational).toBeDefined();
     expect(computational?.profiles).toHaveLength(2);
   });
@@ -137,7 +167,8 @@ describe('getVisibleCourses', () => {
         const seen = new Set<string>();
         for (const course of getVisibleCourses(current, trackId)) {
           const key = `${course.code}@${course.semester}`;
-          if (seen.has(key)) duplicates.push(`${entry.code}/${trackId ?? 'trunk'}/${key}`);
+          if (seen.has(key))
+            duplicates.push(`${entry.code}/${trackId ?? 'trunk'}/${key}`);
           seen.add(key);
         }
       }
@@ -147,11 +178,16 @@ describe('getVisibleCourses', () => {
 
   it('adds the selected track to the trunk', () => {
     const visible = getVisibleCourses(program, 'elektrifiering');
-    expect(new Set(visible.map((c) => c.trackId))).toEqual(new Set([null, 'elektrifiering']));
+    expect(new Set(visible.map((c) => c.trackId))).toEqual(
+      new Set([null, 'elektrifiering']),
+    );
   });
 
   it('lets a profile inherit its bare specialisation courses', () => {
-    const visible = getVisibleCourses(program, 'tillampad-fysik__kvantteknologi');
+    const visible = getVisibleCourses(
+      program,
+      'tillampad-fysik__kvantteknologi',
+    );
     const tracks = new Set(visible.map((c) => c.trackId));
     expect(tracks).toContain('tillampad-fysik__kvantteknologi');
     expect(tracks).toContain('tillampad-fysik');
@@ -168,11 +204,13 @@ describe('groupBySemester', () => {
   it('returns one bucket per semester, in order', () => {
     const groups = groupBySemester(program, getVisibleCourses(program, null));
     expect(groups).toHaveLength(10);
-    expect(groups.map((g) => g.semester)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    expect(groups.map((g) => g.semester)).toEqual([
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    ]);
   });
 
   it('counts only compulsory credits toward a semester total', () => {
-    // Semester 10 is the 30 hp thesis plus a large pool of free electives.
+    // Semester 10 is the 30 hp thesis plus a large pool of noncompulsory course rows.
     const groups = groupBySemester(program, getVisibleCourses(program, null));
     expect(groups[9].credits).toBe(30);
   });
@@ -184,7 +222,10 @@ describe('groupBySemester', () => {
 });
 
 describe('categoriseCourse', () => {
-  const base: Pick<ProgramCourse, 'compulsory' | 'trackId' | 'titleEn' | 'titleSv' | 'credits'> = {
+  const base: Pick<
+    ProgramCourse,
+    'compulsory' | 'trackId' | 'titleEn' | 'titleSv' | 'credits'
+  > = {
     compulsory: false,
     trackId: null,
     titleEn: 'Something',
@@ -193,20 +234,67 @@ describe('categoriseCourse', () => {
   };
 
   it('marks a compulsory trunk course as core', () => {
-    expect(categoriseCourse({ ...base, compulsory: true })).toBe('MANDATORY_CORE');
+    expect(categoriseCourse({ ...base, compulsory: true })).toBe(
+      'MANDATORY_CORE',
+    );
   });
 
   it('marks the degree project as thesis regardless of compulsoriness', () => {
     expect(
-      categoriseCourse({ ...base, titleEn: 'Degree Project in Engineering Physics', credits: 30 })
+      categoriseCourse({
+        ...base,
+        titleEn: 'Degree Project in Engineering Physics',
+        credits: 30,
+      }),
     ).toBe('PROJECT_THESIS');
   });
 
-  it('treats a non-compulsory course inside a track as a required choice', () => {
-    expect(categoriseCourse({ ...base, trackId: 'elektrifiering' })).toBe('MANDATORY_ELECTIVE');
+  it('recognises explicit project-course wording without matching project management titles', () => {
+    const ordinaryTitles = [
+      'Scientific Methods in Wind Power Project Management',
+      'Wind Project Management and Finance',
+      'Professional Training in Wind Power Project Management',
+    ];
+    for (const titleEn of ordinaryTitles) {
+      expect(categoriseCourse({ ...base, titleEn, compulsory: true })).toBe(
+        'MANDATORY_CORE',
+      );
+      expect(categoriseCourse({ ...base, titleEn })).toBe('OPTIONAL_ELECTIVE');
+    }
+    expect(
+      categoriseCourse({
+        ...base,
+        titleEn: 'Project Course in Engineering Physics',
+      }),
+    ).toBe('PROJECT_THESIS');
   });
 
-  it('treats a non-compulsory trunk course as a free elective', () => {
+  it('recognises a named thesis and does not infer thesis from 30 hp alone', () => {
+    expect(
+      categoriseCourse({
+        ...base,
+        titleEn: "Bachelor's Thesis",
+        credits: 15,
+        compulsory: true,
+      }),
+    ).toBe('PROJECT_THESIS');
+    expect(
+      categoriseCourse({
+        ...base,
+        titleEn: 'Advanced course',
+        credits: 30,
+        compulsory: true,
+      }),
+    ).toBe('MANDATORY_CORE');
+  });
+
+  it('labels a non-compulsory course inside a track by its specialisation', () => {
+    expect(categoriseCourse({ ...base, trackId: 'elektrifiering' })).toBe(
+      'MANDATORY_ELECTIVE',
+    );
+  });
+
+  it('keeps an unmarked trunk course in the listed-course category', () => {
     expect(categoriseCourse(base)).toBe('OPTIONAL_ELECTIVE');
   });
 
@@ -223,7 +311,7 @@ describe('getVisibleEdges', () => {
         { from: 'A', to: 'B', type: 'HARD', source: 'llm' },
         { from: 'A', to: 'Z', type: 'HARD', source: 'llm' },
       ],
-      courses
+      courses,
     );
     expect(edges).toHaveLength(1);
     expect(edges[0].to).toBe('B');
@@ -233,7 +321,9 @@ describe('getVisibleEdges', () => {
 describe('getVisibleRules', () => {
   it('keeps trunk rules and the selected track only', () => {
     const rules = getVisibleRules(program, 'elektrifiering');
-    expect(rules.every((r) => r.trackId === null || r.trackId === 'elektrifiering')).toBe(true);
+    expect(
+      rules.every((r) => r.trackId === null || r.trackId === 'elektrifiering'),
+    ).toBe(true);
   });
 });
 
@@ -283,16 +373,21 @@ describe('the programme index', () => {
       const loaded = getProgram(programSlug(entry));
       expect(loaded).not.toBeNull();
       // The index counts distinct codes, which is the promise the finder's row makes.
-      expect(new Set(loaded?.courses.map((c) => c.code)).size).toBe(entry.courses);
+      expect(new Set(loaded?.courses.map((c) => c.code)).size).toBe(
+        entry.courses,
+      );
     }
   });
 
   it('gives a programme with no study plan its syllabus to show instead', () => {
     // Well over a third of the university publishes no study plan; an empty map is a dead end.
-    const syllabus = index.programmes.filter((entry) => entry.planFormat === 'syllabus');
+    const syllabus = index.programmes.filter(
+      (entry) => entry.planFormat === 'syllabus',
+    );
     expect(syllabus.length).toBeGreaterThan(80);
     const withProse = syllabus.filter(
-      (entry) => (getProgram(programSlug(entry))?.syllabusLayout?.length ?? 0) > 0
+      (entry) =>
+        (getProgram(programSlug(entry))?.syllabusLayout?.length ?? 0) > 0,
     );
     // One programme (RRP2M) publishes an empty syllabus; the rest carry their prose.
     expect(withProse.length).toBeGreaterThanOrEqual(syllabus.length - 1);
@@ -307,8 +402,12 @@ describe('the programme index', () => {
 
   it('finds the specialisations that are not written as "Inriktning"', () => {
     // Elektroteknik writes "Profil mot X"; a narrower parser saw no tracks at all.
-    const withTracks = index.programmes.filter((p) => p.tracks > 0).map((p) => p.code);
-    expect(withTracks).toEqual(expect.arrayContaining(['TEL2Y', 'TIT2Y', 'TTF2Y']));
+    const withTracks = index.programmes
+      .filter((p) => p.tracks > 0)
+      .map((p) => p.code);
+    expect(withTracks).toEqual(
+      expect.arrayContaining(['TEL2Y', 'TIT2Y', 'TTF2Y']),
+    );
   });
 });
 
@@ -321,7 +420,7 @@ describe('specialisation without profile-free years', () => {
       const visible = getVisibleCourses(program, trackId);
       expect(visible.filter((c) => c.semester === 8).length).toBeGreaterThan(0);
       expect(visible.filter((c) => c.semester === 9).length).toBeGreaterThan(0);
-    }
+    },
   );
 
   it('gives every selectable track content in years 4 and 5', () => {
@@ -329,7 +428,7 @@ describe('specialisation without profile-free years', () => {
       const visible = getVisibleCourses(program, track.id);
       for (const semester of [7, 8, 9]) {
         expect(
-          visible.filter((c) => c.semester === semester).length
+          visible.filter((c) => c.semester === semester).length,
         ).toBeGreaterThan(0);
       }
     }
@@ -342,7 +441,10 @@ describe('specialisation without profile-free years', () => {
 
   it('narrows to the profile when one is chosen', () => {
     const all = getVisibleCourses(program, 'berakningsteknik');
-    const one = getVisibleCourses(program, 'berakningsteknik__artificiell-intelligens');
+    const one = getVisibleCourses(
+      program,
+      'berakningsteknik__artificiell-intelligens',
+    );
     expect(one.length).toBeLessThan(all.length);
   });
 });

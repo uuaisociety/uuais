@@ -91,15 +91,17 @@ def build_rules(program, extraction):
 
         # A Ladok plan states its either/or groups as data, so those need no model.
         choice_codes = [c for c in (source.get('choiceCodes') or []) if c in roster]
-        if len(choice_codes) > 1:
+        if choice_codes:
+            choice_type = source.get('choiceType')
+            choice_type = 'CHOOSE_ONE' if choice_type == 'CHOOSE_ONE' and len(choice_codes) > 1 else 'NOTE'
             rules.append({
                 'id': f'rule-{index}',
-                'type': 'CHOOSE_ONE',
+                'type': choice_type,
                 'courseCodes': choice_codes,
                 'semester': source['semester'],
                 'trackId': source['trackId'],
                 'textSv': source['textSv'],
-                'labelEn': f'Choose one of {len(choice_codes)} courses.',
+                'labelEn': source.get('textEn'),
                 'cohortBefore': None,
                 'source': 'plan',
             })

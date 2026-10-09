@@ -1,0 +1,14 @@
+[
+  {
+    "code": "SRE2M",
+    "revisionId": "5da05087-6dd3-4476-9e51-739043859046",
+    "issue": {
+      "kind": "source-conflict",
+      "message": "The study plan lists Russian and Approaches to the Social Sciences as alternatives in semesters 1 and 2, while the programme syllabus says Russian is compulsory in both semesters. The sources conflict; verify the requirements with the department. No course is inferred as mandatory.",
+      "sourceUrls": [
+        "https://www.uu.se/utbildning/studieplan?query=5da05087-6dd3-4476-9e51-739043859046",
+        "https://www.uu.se/utbildning/utbildningsplan?query=d0937087-c952-11f0-a255-650837bd40cf"
+      ]
+    }
+  }
+]

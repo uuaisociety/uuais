@@ -77,6 +77,8 @@ export type ProgramRule = {
   textSv: string;
   labelEn: string | null;
   cohortBefore: number | null;
+  /** Provenance for generated rule labels; omitted in older records. */
+  source?: 'plan' | 'llm' | 'manual';
 };
 
 export type ProgramEdge = {
@@ -113,6 +115,8 @@ export type Program = {
   programmeTitleEn: string | null;
   programmeUri: string;
   planFormat: PlanFormat;
+  /** Conservative source validation; maps without a recognized safe status are withheld. */
+  safety?: ProgramSafety;
   /** Which faculty's catalogue lists the programme. */
   faculty: string;
   /**
@@ -133,6 +137,20 @@ export type SyllabusCourse = {
 
 /** 'syllabus' means UU publishes no study plan for the programme, so there is no map. */
 export type PlanFormat = 'legacy' | 'ladok' | 'syllabus';
+
+export type ProgramSafetyIssue = {
+  kind: string;
+  message: string;
+  semester?: number;
+  trackId?: string;
+  textSv?: string;
+  textEn?: string;
+};
+
+export type ProgramSafety = {
+  status: 'ok' | 'warning' | 'blocked';
+  issues: ProgramSafetyIssue[];
+};
 
 export type ProgramIndexEntry = {
   file: string;
@@ -158,6 +176,15 @@ export type ProgramIndex = {
   programmes: ProgramIndexEntry[];
 };
 
+export function isProgramMapBlocked(
+  program: Pick<Program, 'planFormat' | 'safety'>,
+): boolean {
+  return (
+    program.planFormat !== 'syllabus' &&
+    !['ok', 'warning'].includes(program.safety?.status ?? '')
+  );
+}
+
 /** A specialisation and the profiles beneath it, as the track picker presents them. */
 export type ProgramSpecialisation = {
   id: string;
@@ -170,22 +197,27 @@ export type ProgramSpecialisation = {
 
 // ---- Categorisation ----
 
-const THESIS_PATTERN = /(examensarbete|degree project|självständigt arbete)/i;
-const PROJECT_PATTERN = /(\bprojekt\b|\bproject\b)/i;
+const THESIS_PATTERN =
+  /(examensarbete|degree project|självständigt arbete|thesis)/i;
+const PROJECT_PATTERN =
+  /\b(?:project\s+(?:course|work|in|for|with)|projektkurs(?:en)?|projektarbete(?:t)?|projekt\s+i)\b/i;
 
 /**
- * Assigns the colour category a course card is drawn with: `compulsory` comes from the study
- * plan, everything else is a judgement the plan does not encode.
+ * Assigns the card category. Only `compulsory` is source-backed; title and track categories
+ * describe the row without inferring whether a course is required or elective.
  */
 export function categoriseCourse(
-  course: Pick<ProgramCourse, 'compulsory' | 'trackId' | 'titleEn' | 'titleSv' | 'credits'>
+  course: Pick<
+    ProgramCourse,
+    'compulsory' | 'trackId' | 'titleEn' | 'titleSv' | 'credits'
+  >,
 ): ProgramCourseCategory {
   const title = `${course.titleEn} ${course.titleSv}`;
 
-  if (THESIS_PATTERN.test(title) || (course.credits ?? 0) >= 30) return 'PROJECT_THESIS';
+  if (THESIS_PATTERN.test(title)) return 'PROJECT_THESIS';
   if (course.compulsory) return 'MANDATORY_CORE';
   if (PROJECT_PATTERN.test(title)) return 'PROJECT_THESIS';
-  // Inside a track, a non-compulsory course is still a required choice for that track.
+  // The track identifies where the source lists the course, not whether it is compulsory.
   if (course.trackId) return 'MANDATORY_ELECTIVE';
   return 'OPTIONAL_ELECTIVE';
 }
@@ -198,7 +230,9 @@ export function categoriseCourse(
  * shipped, because together they are roughly a sixth of what a programme page sends the browser.
  */
 type RawProgram = Omit<Program, 'courses' | 'edges'> & {
-  courses: (Omit<ProgramCourse, 'category'> & { mainFieldSv?: string | null })[];
+  courses: (Omit<ProgramCourse, 'category'> & {
+    mainFieldSv?: string | null;
+  })[];
   edges: (ProgramEdge & { rationale?: string })[];
 };
 
@@ -211,7 +245,10 @@ const DATA_DIR = path.join(process.cwd(), 'data', 'programs');
  */
 const cache = new Map<string, Program | null>();
 
-function without<T extends object, K extends keyof T>(source: T, key: K): Omit<T, K> {
+function without<T extends object, K extends keyof T>(
+  source: T,
+  key: K,
+): Omit<T, K> {
   const copy = { ...source };
   delete copy[key];
   return copy;
@@ -240,7 +277,8 @@ function entryFor(code: string): ProgramIndexEntry | null {
 
 export function getProgram(code: string): Program | null {
   const key = code.toLowerCase();
-  const cached = cache.get(key);
+  const cacheEnabled = process.env.NODE_ENV !== 'development';
+  const cached = cacheEnabled ? cache.get(key) : undefined;
   if (cached !== undefined) return cached;
 
   const entry = entryFor(key);
@@ -248,7 +286,7 @@ export function getProgram(code: string): Program | null {
   if (entry) {
     try {
       const raw = JSON.parse(
-        fs.readFileSync(path.join(DATA_DIR, entry.file), 'utf8')
+        fs.readFileSync(path.join(DATA_DIR, entry.file), 'utf8'),
       ) as RawProgram;
       program = hydrate(raw);
     } catch (error) {
@@ -257,7 +295,7 @@ export function getProgram(code: string): Program | null {
   }
   // Only a hit is cached: the public feedback endpoint passes a user-supplied slug in here,
   // and caching misses would let a stream of junk slugs grow the map without bound.
-  if (program) cache.set(key, program);
+  if (program && cacheEnabled) cache.set(key, program);
   return program;
 }
 
