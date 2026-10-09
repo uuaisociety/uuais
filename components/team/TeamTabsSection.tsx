@@ -40,11 +40,6 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
   const [activeTab, setActiveTab] = useState<TeamCategory>('board');
   const tabsRef = useRef<HTMLDivElement>(null);
 
-  const isLead = useCallback((member: TeamMember) => {
-    const pos = member.position.toLowerCase();
-    return pos.startsWith('head of') || pos.startsWith('chairman') || pos.startsWith('director') || pos.startsWith('lead');
-  }, []);
-
   const placeholderImage = '/images/logo-highdef.png';
 
   const socialClass =
@@ -160,9 +155,8 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
                   <p className="text-sm text-muted-foreground mt-0.5">
                     {member.position}
                   </p>
-                  {(isLead(member) || member.badge) && (
+                  {member.badge && (
                     <div className="flex flex-wrap gap-2 mt-2.5">
-                      {isLead(member) && <Tag variant="yellow" size="sm">Lead</Tag>}
                       {member.badge && <Tag variant="red" size="sm">{member.badge}</Tag>}
                     </div>
                   )}

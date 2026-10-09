@@ -69,11 +69,12 @@ export interface Event {
   }[];
 }
 
-export type TeamCategory = 'board' | 'development' | 'it' | 'growth' | 'partnerships_events' | 'founders' | 'alumni';
+export type TeamCategory = 'board' | 'development' | 'research' | 'it' | 'growth' | 'partnerships_events' | 'founders' | 'alumni';
 
 export const TEAM_CATEGORIES: TeamCategory[] = [
   'board',
   'development',
+  'research',
   'it',
   'growth',
   'partnerships_events',
@@ -84,6 +85,7 @@ export const TEAM_CATEGORIES: TeamCategory[] = [
 export const TEAM_CATEGORY_LABELS: Record<TeamCategory, string> = {
   board: 'Board',
   development: 'Development',
+  research: 'Research',
   it: 'IT',
   growth: 'Growth',
   partnerships_events: 'Partnerships & Events',

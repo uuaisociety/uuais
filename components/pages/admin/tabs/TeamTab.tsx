@@ -95,7 +95,7 @@ const handleAddTeamMember = () => {
       teams: teamForm.teams.length > 0 ? teamForm.teams : undefined,
       years: teamForm.years,
       bio: teamForm.bio || undefined,
-      badge: teamForm.badge || undefined,
+      badge: teamForm.badge.trim() || undefined,
       notes: teamForm.notes || undefined,
     } as TeamMember;
     dispatch({ firestoreAction: 'ADD_TEAM_MEMBER', payload: newMember });
@@ -111,7 +111,7 @@ const updatedMember = {
         teams: teamForm.teams.length > 0 ? teamForm.teams : undefined,
         years: teamForm.years,
         bio: teamForm.bio || undefined,
-        badge: teamForm.badge || undefined,
+        badge: teamForm.badge.trim() || undefined,
         notes: teamForm.notes || undefined,
       } as TeamMember;
       dispatch({ firestoreAction: 'UPDATE_TEAM_MEMBER', payload: updatedMember });

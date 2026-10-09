@@ -1,4 +1,4 @@
-import { collection, query, getDocs, addDoc, updateDoc, deleteDoc, onSnapshot, DocumentData, doc, orderBy, writeBatch } from 'firebase/firestore';
+import { collection, query, getDocs, addDoc, updateDoc, deleteDoc, onSnapshot, DocumentData, doc, orderBy, writeBatch, deleteField } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 import { TeamMember } from '@/types';
 import { stripUndefined } from './utils';
@@ -15,14 +15,18 @@ export const addTeamMember = async (member: Omit<TeamMember, 'id'>): Promise<str
   const q = query(membersRef, orderBy('order', 'asc'));
   const snapshot = await getDocs(q);
   const maxOrder = snapshot.docs.length > 0 ? Math.max(...snapshot.docs.map(d => d.data().order ?? 0)) : -1;
-  const payload = stripUndefined({ ...member, order: maxOrder + 1 }) as DocumentData;
+  const payload = stripUndefined({ ...member, badge: member.badge?.trim() || undefined, order: maxOrder + 1 }) as DocumentData;
   const docRef = await addDoc(membersRef, payload);
   return docRef.id;
 };
 
 export const updateTeamMember = async (id: string, member: Partial<TeamMember>): Promise<void> => {
   const memberRef = doc(db, 'teamMembers', id);
-  await updateDoc(memberRef, stripUndefined(member) as DocumentData);
+  const updates = stripUndefined(member) as DocumentData;
+  if (Object.prototype.hasOwnProperty.call(member, 'badge')) {
+    updates.badge = member.badge?.trim() ? member.badge.trim() : deleteField();
+  }
+  await updateDoc(memberRef, updates);
 };
 
 export const deleteTeamMember = async (id: string): Promise<void> => {
