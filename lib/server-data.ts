@@ -43,9 +43,42 @@ function sanitize(value: unknown): unknown {
   return value;
 }
 
-function normalizeDoc<T>(doc: { id: string; data: () => Record<string, unknown> }): T {
+function normalizeDoc<T>(doc: {
+  id: string;
+  data: () => Record<string, unknown>;
+}): T {
   const raw = sanitize(doc.data()) as Record<string, unknown>;
   return { id: doc.id, ...raw } as unknown as T;
+}
+
+const PUBLIC_TEAM_FIELDS = [
+  'name',
+  'position',
+  'bio',
+  'image',
+  'linkedin',
+  'twitter',
+  'github',
+  'website',
+  'published',
+  'teams',
+  'order',
+  'years',
+  'badge',
+  'companyEmail',
+  'email',
+] as const;
+
+function normalizePublicTeamDoc(doc: {
+  id: string;
+  data: () => Record<string, unknown>;
+}): TeamMember {
+  const raw = sanitize(doc.data()) as Record<string, unknown>;
+  const projected: Record<string, unknown> = { id: doc.id };
+  for (const field of PUBLIC_TEAM_FIELDS) {
+    if (raw[field] !== undefined) projected[field] = raw[field];
+  }
+  return projected as unknown as TeamMember;
 }
 
 /**
@@ -56,15 +89,25 @@ function normalizeDoc<T>(doc: { id: string; data: () => Record<string, unknown> 
  * Pass `{ throwOnError: true }` (used by the MCP layer) to rethrow instead so
  * callers can distinguish "empty site" from "data source unavailable".
  */
-export async function getPublicSeed(options?: { throwOnError?: boolean }): Promise<PublicSeed> {
+export async function getPublicSeed(options?: {
+  throwOnError?: boolean;
+}): Promise<PublicSeed> {
   try {
     // Dynamic import so a failed admin SDK init degrades gracefully instead of
     // throwing during module evaluation.
     const { adminDb } = await import('@/lib/firebase-admin');
 
     const [eventsSnap, jobsSnap, faqsSnap, teamSnap] = await Promise.all([
-      adminDb.collection('events').where('published', '==', true).orderBy('eventStartAt', 'desc').get(),
-      adminDb.collection('jobs').where('published', '==', true).orderBy('createdAt', 'desc').get(),
+      adminDb
+        .collection('events')
+        .where('published', '==', true)
+        .orderBy('eventStartAt', 'desc')
+        .get(),
+      adminDb
+        .collection('jobs')
+        .where('published', '==', true)
+        .orderBy('createdAt', 'desc')
+        .get(),
       adminDb.collection('faqs').orderBy('order', 'asc').get(),
       adminDb.collection('teamMembers').orderBy('order', 'asc').get(),
     ]);
@@ -73,7 +116,9 @@ export async function getPublicSeed(options?: { throwOnError?: boolean }): Promi
       events: eventsSnap.docs.map((d) => normalizeDoc<Event>(d)),
       jobs: jobsSnap.docs.map((d) => normalizeDoc<Job>(d)),
       faqs: faqsSnap.docs.map((d) => normalizeDoc<FAQ>(d)),
-      teamMembers: teamSnap.docs.map((d) => normalizeDoc<TeamMember>(d)),
+      teamMembers: teamSnap.docs
+        .filter((d) => d.data().published !== false)
+        .map(normalizePublicTeamDoc),
     };
   } catch (error) {
     if (options?.throwOnError) throw error;

@@ -3,7 +3,9 @@ import React from 'react';
 
 const mockUnsubscribe = jest.fn();
 
-jest.mock('@/contexts/AppContext', () => jest.requireActual('@/contexts/AppContext'));
+jest.mock('@/contexts/AppContext', () =>
+  jest.requireActual('@/contexts/AppContext'),
+);
 
 jest.mock('firebase/auth', () => ({
   onIdTokenChanged: jest.fn(),
@@ -62,38 +64,107 @@ jest.mock('@/lib/firestore/showcase', () => ({
 
 import { AppProvider, useApp } from '@/contexts/AppContext';
 import {
-  subscribeToEvents, addEvent, updateEvent, deleteEvent,
+  subscribeToEvents,
+  addEvent,
+  updateEvent,
+  deleteEvent,
 } from '@/lib/firestore/events';
 import {
-  subscribeToTeamMembers, addTeamMember, updateTeamMember, deleteTeamMember, moveTeamMember,
+  subscribeToTeamMembers,
+  addTeamMember,
+  updateTeamMember,
+  deleteTeamMember,
+  moveTeamMember,
 } from '@/lib/firestore/team';
 import {
-  subscribeToBlogPosts, addBlogPost, updateBlogPost, deleteBlogPost,
+  subscribeToBlogPosts,
+  addBlogPost,
+  updateBlogPost,
+  deleteBlogPost,
 } from '@/lib/firestore/blog';
 import {
-  subscribeToFaqs, addFaq, updateFaq, deleteFaq,
+  subscribeToFaqs,
+  addFaq,
+  updateFaq,
+  deleteFaq,
 } from '@/lib/firestore/faqs';
 import {
-  subscribeToJobs, addJob, updateJob, deleteJob,
+  subscribeToJobs,
+  addJob,
+  updateJob,
+  deleteJob,
 } from '@/lib/firestore/jobs';
-import { subscribeToShowcaseProjects, addShowcaseProject, updateShowcaseProject, deleteShowcaseProject } from '@/lib/firestore/showcase';
+import {
+  subscribeToShowcaseProjects,
+  addShowcaseProject,
+  updateShowcaseProject,
+  deleteShowcaseProject,
+} from '@/lib/firestore/showcase';
 import { onIdTokenChanged } from 'firebase/auth';
 
-const mockEvent = { id: 'evt-1', title: 'Test Event', description: 'Desc', location: 'Loc', image: '', category: 'workshop' as const, status: 'upcoming' as const, registrationRequired: false, eventStartAt: '2026-01-01T00:00:00Z' };
+const mockEvent = {
+  id: 'evt-1',
+  title: 'Test Event',
+  description: 'Desc',
+  location: 'Loc',
+  image: '',
+  category: 'workshop' as const,
+  status: 'upcoming' as const,
+  registrationRequired: false,
+  eventStartAt: '2026-01-01T00:00:00Z',
+};
 const mockTeamMember = { id: 'tm-1', name: 'Alice', position: 'Dev' };
-const mockBlogPost = { id: 'bp-1', title: 'Post', excerpt: 'Excerpt', content: 'Content', author: 'Bob', date: '2026-01-01', image: '', tags: [], published: true };
-const mockFaq = { id: 'faq-1', question: 'Q?', answer: 'A!', category: 'general', order: 0, published: true };
-const mockJob = { id: 'job-1', type: 'job' as const, title: 'Engineer', company: 'Co', description: 'desc', published: true };
+const mockBlogPost = {
+  id: 'bp-1',
+  title: 'Post',
+  excerpt: 'Excerpt',
+  content: 'Content',
+  author: 'Bob',
+  date: '2026-01-01',
+  image: '',
+  tags: [],
+  published: true,
+};
+const mockFaq = {
+  id: 'faq-1',
+  question: 'Q?',
+  answer: 'A!',
+  category: 'general',
+  order: 0,
+  published: true,
+};
+const mockJob = {
+  id: 'job-1',
+  type: 'job' as const,
+  title: 'Engineer',
+  company: 'Co',
+  description: 'desc',
+  published: true,
+};
 
-function renderApp() {
-  return renderHook(() => useApp(), { wrapper: AppProvider as React.FC<{ children: React.ReactNode }> });
+function renderApp(seed?: Parameters<typeof AppProvider>[0]['seed']) {
+  const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <AppProvider seed={seed}>{children}</AppProvider>
+  );
+  return renderHook(() => useApp(), { wrapper: Wrapper });
 }
 
 describe('AppContext', () => {
-  let idTokenCallback: ((user: { uid: string; getIdTokenResult?: () => Promise<{ claims: Record<string, boolean> }> } | null) => void) | null = null;
+  let idTokenCallback:
+    | ((
+        user: {
+          uid: string;
+          getIdTokenResult?: () => Promise<{ claims: Record<string, boolean> }>;
+        } | null,
+      ) => void)
+    | null = null;
 
   beforeEach(() => {
     jest.clearAllMocks();
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({}),
+    }) as unknown as typeof fetch;
     idTokenCallback = null;
     (onIdTokenChanged as jest.Mock).mockImplementation((_auth, cb) => {
       idTokenCallback = cb;
@@ -116,29 +187,75 @@ describe('AppContext', () => {
   it('subscribes to firestore collections and id token changes on mount', async () => {
     renderApp();
     await waitFor(() => expect(subscribeToEvents).toHaveBeenCalledTimes(1));
-    expect(subscribeToTeamMembers).toHaveBeenCalledTimes(1);
+    expect(subscribeToTeamMembers).not.toHaveBeenCalled();
     // Blog posts are subscribed for all users (public sees published only)
     expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
     expect(subscribeToFaqs).toHaveBeenCalledTimes(1);
     expect(subscribeToJobs).toHaveBeenCalledTimes(1);
-    await waitFor(() => expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1));
+    await waitFor(() =>
+      expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1),
+    );
     await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
     expect(idTokenCallback).not.toBeNull();
   });
 
   it('subscribes to blog posts with includeUnpublished false for public users', async () => {
     renderApp();
-    await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledWith(expect.any(Function), { includeUnpublished: false }));
+    await waitFor(() =>
+      expect(subscribeToBlogPosts).toHaveBeenCalledWith(expect.any(Function), {
+        includeUnpublished: false,
+      }),
+    );
   });
 
   it('re-subscribes to blog posts with includeUnpublished true once admin id token resolves', async () => {
     renderApp();
     await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1));
     act(() => {
-      idTokenCallback!({ uid: 'admin-1', getIdTokenResult: () => Promise.resolve({ claims: { admin: true } }) });
+      idTokenCallback!({
+        uid: 'admin-1',
+        getIdTokenResult: () => Promise.resolve({ claims: { admin: true } }),
+      });
     });
     await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledTimes(2));
-    expect(subscribeToBlogPosts).toHaveBeenLastCalledWith(expect.any(Function), { includeUnpublished: true });
+    expect(subscribeToBlogPosts).toHaveBeenLastCalledWith(
+      expect.any(Function),
+      { includeUnpublished: true },
+    );
+  });
+
+  it('preserves public SSR seed initially and prevents a stale admin callback from restoring private data after sign-out', async () => {
+    const oldFetch = global.fetch;
+    global.fetch = jest.fn(() => new Promise<Response>(() => {}));
+    try {
+      const { result } = renderApp({
+        teamMembers: [{ ...mockTeamMember, notes: 'private' }],
+      });
+      await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
+      expect(result.current.state.teamMembers).toEqual([
+        { ...mockTeamMember, notes: 'private' },
+      ]);
+      act(() => {
+        idTokenCallback!({
+          uid: 'admin-1',
+          getIdTokenResult: () => Promise.resolve({ claims: { admin: true } }),
+        });
+      });
+      await waitFor(() =>
+        expect(subscribeToTeamMembers).toHaveBeenCalledTimes(1),
+      );
+      const staleAdminCallback = (subscribeToTeamMembers as jest.Mock).mock
+        .calls[0][0] as (members: (typeof mockTeamMember)[]) => void;
+      act(() => staleAdminCallback([{ ...mockTeamMember, notes: 'private' }]));
+      act(() => {
+        idTokenCallback!(null);
+      });
+      await waitFor(() => expect(result.current.state.teamMembers).toEqual([]));
+      act(() => staleAdminCallback([{ ...mockTeamMember, notes: 'private' }]));
+      expect(result.current.state.teamMembers).toEqual([]);
+    } finally {
+      global.fetch = oldFetch;
+    }
   });
 
   it('does not tear down and re-create listeners when the id token resolves with the same (non-admin) claim', async () => {
@@ -146,7 +263,10 @@ describe('AppContext', () => {
     renderApp();
     await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1));
     act(() => {
-      idTokenCallback!({ uid: 'user-1', getIdTokenResult: () => Promise.resolve({ claims: {} }) });
+      idTokenCallback!({
+        uid: 'user-1',
+        getIdTokenResult: () => Promise.resolve({ claims: {} }),
+      });
     });
     await act(async () => {
       await Promise.resolve();
@@ -156,46 +276,69 @@ describe('AppContext', () => {
   });
 
   it('throws useApp outside provider', () => {
-    expect(() => renderHook(() => useApp())).toThrow('useApp must be used within an AppProvider');
+    expect(() => renderHook(() => useApp())).toThrow(
+      'useApp must be used within an AppProvider',
+    );
   });
 
   describe('showcase subscription edge cases', () => {
     it('does not flash showcaseUnavailable for an empty cache snapshot before the server answers', async () => {
       const { result } = renderApp();
-      await waitFor(() => expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1));
-      const cb = (subscribeToShowcaseProjects as jest.Mock).mock.calls[0][0] as (
+      await waitFor(() =>
+        expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1),
+      );
+      const cb = (subscribeToShowcaseProjects as jest.Mock).mock
+        .calls[0][0] as (
         projects: unknown[],
         meta: { fromCache: boolean },
       ) => void;
 
       // Cold start: the SDK's first snapshot is cache-only and empty — "unknown", not a failure.
-      await act(async () => { cb([], { fromCache: true }); });
+      await act(async () => {
+        cb([], { fromCache: true });
+      });
       expect(result.current.state.showcaseUnavailable).toBe(false);
 
       // The server answers: empty is now truth.
-      await act(async () => { cb([], { fromCache: false }); });
+      await act(async () => {
+        cb([], { fromCache: false });
+      });
       expect(result.current.state.showcaseUnavailable).toBe(false);
 
       // A cache-empty snapshot after a server answer is a real "could not ask".
-      await act(async () => { cb([], { fromCache: true }); });
+      await act(async () => {
+        cb([], { fromCache: true });
+      });
       expect(result.current.state.showcaseUnavailable).toBe(true);
     });
 
     it('ignores a stale showcase error after an admin re-subscribe', async () => {
       const { result } = renderApp();
-      await waitFor(() => expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1));
-      const publicSub = (subscribeToShowcaseProjects as jest.Mock).mock.calls[0];
+      await waitFor(() =>
+        expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1),
+      );
+      const publicSub = (subscribeToShowcaseProjects as jest.Mock).mock
+        .calls[0];
       act(() => {
-        idTokenCallback!({ uid: 'admin-1', getIdTokenResult: () => Promise.resolve({ claims: { admin: true } }) });
+        idTokenCallback!({
+          uid: 'admin-1',
+          getIdTokenResult: () => Promise.resolve({ claims: { admin: true } }),
+        });
       });
-      await waitFor(() => expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(2));
+      await waitFor(() =>
+        expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(2),
+      );
       const adminSub = (subscribeToShowcaseProjects as jest.Mock).mock.calls[1];
 
       // The superseded public listener fails after the healthy admin stream is up.
-      await act(async () => { publicSub[1].onError(new Error('stale stream')); });
+      await act(async () => {
+        publicSub[1].onError(new Error('stale stream'));
+      });
       expect(result.current.state.showcaseUnavailable).toBe(false);
 
-      await act(async () => { adminSub[1].onError(new Error('stream down')); });
+      await act(async () => {
+        adminSub[1].onError(new Error('stream down'));
+      });
       expect(result.current.state.showcaseUnavailable).toBe(true);
     });
   });
@@ -204,7 +347,10 @@ describe('AppContext', () => {
     it('SET_EVENTS', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_EVENTS', payload: [mockEvent] });
+        await result.current.dispatch({
+          type: 'SET_EVENTS',
+          payload: [mockEvent],
+        });
       });
       expect(result.current.state.events).toEqual([mockEvent]);
       expect(result.current.state.isLoading).toBe(false);
@@ -213,7 +359,10 @@ describe('AppContext', () => {
     it('ADD_EVENT', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'ADD_EVENT', payload: mockEvent });
+        await result.current.dispatch({
+          type: 'ADD_EVENT',
+          payload: mockEvent,
+        });
       });
       expect(result.current.state.events).toEqual([mockEvent]);
     });
@@ -221,11 +370,17 @@ describe('AppContext', () => {
     it('UPDATE_EVENT', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_EVENTS', payload: [mockEvent] });
+        await result.current.dispatch({
+          type: 'SET_EVENTS',
+          payload: [mockEvent],
+        });
       });
       const updated = { ...mockEvent, title: 'Updated' };
       await act(async () => {
-        await result.current.dispatch({ type: 'UPDATE_EVENT', payload: updated });
+        await result.current.dispatch({
+          type: 'UPDATE_EVENT',
+          payload: updated,
+        });
       });
       expect(result.current.state.events).toEqual([updated]);
     });
@@ -233,10 +388,16 @@ describe('AppContext', () => {
     it('DELETE_EVENT', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_EVENTS', payload: [mockEvent] });
+        await result.current.dispatch({
+          type: 'SET_EVENTS',
+          payload: [mockEvent],
+        });
       });
       await act(async () => {
-        await result.current.dispatch({ type: 'DELETE_EVENT', payload: mockEvent.id });
+        await result.current.dispatch({
+          type: 'DELETE_EVENT',
+          payload: mockEvent.id,
+        });
       });
       expect(result.current.state.events).toEqual([]);
     });
@@ -244,7 +405,10 @@ describe('AppContext', () => {
     it('SET_TEAM_MEMBERS', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_TEAM_MEMBERS', payload: [mockTeamMember] });
+        await result.current.dispatch({
+          type: 'SET_TEAM_MEMBERS',
+          payload: [mockTeamMember],
+        });
       });
       expect(result.current.state.teamMembers).toEqual([mockTeamMember]);
     });
@@ -252,7 +416,10 @@ describe('AppContext', () => {
     it('ADD_TEAM_MEMBER', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'ADD_TEAM_MEMBER', payload: mockTeamMember });
+        await result.current.dispatch({
+          type: 'ADD_TEAM_MEMBER',
+          payload: mockTeamMember,
+        });
       });
       expect(result.current.state.teamMembers).toEqual([mockTeamMember]);
     });
@@ -260,11 +427,17 @@ describe('AppContext', () => {
     it('UPDATE_TEAM_MEMBER', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_TEAM_MEMBERS', payload: [mockTeamMember] });
+        await result.current.dispatch({
+          type: 'SET_TEAM_MEMBERS',
+          payload: [mockTeamMember],
+        });
       });
       const updated = { ...mockTeamMember, name: 'Updated Alice' };
       await act(async () => {
-        await result.current.dispatch({ type: 'UPDATE_TEAM_MEMBER', payload: updated });
+        await result.current.dispatch({
+          type: 'UPDATE_TEAM_MEMBER',
+          payload: updated,
+        });
       });
       expect(result.current.state.teamMembers).toEqual([updated]);
     });
@@ -272,10 +445,16 @@ describe('AppContext', () => {
     it('DELETE_TEAM_MEMBER', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_TEAM_MEMBERS', payload: [mockTeamMember] });
+        await result.current.dispatch({
+          type: 'SET_TEAM_MEMBERS',
+          payload: [mockTeamMember],
+        });
       });
       await act(async () => {
-        await result.current.dispatch({ type: 'DELETE_TEAM_MEMBER', payload: mockTeamMember.id });
+        await result.current.dispatch({
+          type: 'DELETE_TEAM_MEMBER',
+          payload: mockTeamMember.id,
+        });
       });
       expect(result.current.state.teamMembers).toEqual([]);
     });
@@ -283,7 +462,10 @@ describe('AppContext', () => {
     it('SET_BLOG_POSTS', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_BLOG_POSTS', payload: [mockBlogPost] });
+        await result.current.dispatch({
+          type: 'SET_BLOG_POSTS',
+          payload: [mockBlogPost],
+        });
       });
       expect(result.current.state.blogPosts).toEqual([mockBlogPost]);
     });
@@ -323,16 +505,25 @@ describe('AppContext', () => {
     it('SET_SHOWCASE_PROJECTS', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [mockShowcaseProject] });
+        await result.current.dispatch({
+          type: 'SET_SHOWCASE_PROJECTS',
+          payload: [mockShowcaseProject],
+        });
       });
-      expect(result.current.state.showcaseProjects).toEqual([mockShowcaseProject]);
+      expect(result.current.state.showcaseProjects).toEqual([
+        mockShowcaseProject,
+      ]);
     });
 
     // An empty result served from cache means "could not ask", not "nothing there".
     it('marks the showcase unavailable when an empty result came from cache', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [], fromCache: true });
+        await result.current.dispatch({
+          type: 'SET_SHOWCASE_PROJECTS',
+          payload: [],
+          fromCache: true,
+        });
       });
       expect(result.current.state.showcaseUnavailable).toBe(true);
       expect(result.current.state.showcaseLoaded).toBe(true);
@@ -341,7 +532,11 @@ describe('AppContext', () => {
     it('trusts an empty result the server actually answered', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [], fromCache: false });
+        await result.current.dispatch({
+          type: 'SET_SHOWCASE_PROJECTS',
+          payload: [],
+          fromCache: false,
+        });
       });
       expect(result.current.state.showcaseUnavailable).toBe(false);
     });
@@ -349,7 +544,11 @@ describe('AppContext', () => {
     it('clears the unavailable flag once cached projects do arrive', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_SHOWCASE_PROJECTS', payload: [], fromCache: true });
+        await result.current.dispatch({
+          type: 'SET_SHOWCASE_PROJECTS',
+          payload: [],
+          fromCache: true,
+        });
       });
       await act(async () => {
         await result.current.dispatch({
@@ -373,7 +572,10 @@ describe('AppContext', () => {
     it('ADD_BLOG_POST regular action', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'ADD_BLOG_POST', payload: mockBlogPost });
+        await result.current.dispatch({
+          type: 'ADD_BLOG_POST',
+          payload: mockBlogPost,
+        });
       });
       expect(result.current.state.blogPosts).toEqual([mockBlogPost]);
     });
@@ -381,11 +583,17 @@ describe('AppContext', () => {
     it('UPDATE_BLOG_POST regular action', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_BLOG_POSTS', payload: [mockBlogPost] });
+        await result.current.dispatch({
+          type: 'SET_BLOG_POSTS',
+          payload: [mockBlogPost],
+        });
       });
       const updated = { ...mockBlogPost, title: 'Updated Post' };
       await act(async () => {
-        await result.current.dispatch({ type: 'UPDATE_BLOG_POST', payload: updated });
+        await result.current.dispatch({
+          type: 'UPDATE_BLOG_POST',
+          payload: updated,
+        });
       });
       expect(result.current.state.blogPosts).toEqual([updated]);
     });
@@ -393,10 +601,16 @@ describe('AppContext', () => {
     it('DELETE_BLOG_POST regular action', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_BLOG_POSTS', payload: [mockBlogPost] });
+        await result.current.dispatch({
+          type: 'SET_BLOG_POSTS',
+          payload: [mockBlogPost],
+        });
       });
       await act(async () => {
-        await result.current.dispatch({ type: 'DELETE_BLOG_POST', payload: mockBlogPost.id });
+        await result.current.dispatch({
+          type: 'DELETE_BLOG_POST',
+          payload: mockBlogPost.id,
+        });
       });
       expect(result.current.state.blogPosts).toEqual([]);
     });
@@ -416,7 +630,10 @@ describe('AppContext', () => {
       });
       const updated = { ...mockFaq, question: 'Updated Q?' };
       await act(async () => {
-        await result.current.dispatch({ type: 'UPDATE_FAQS', payload: updated });
+        await result.current.dispatch({
+          type: 'UPDATE_FAQS',
+          payload: updated,
+        });
       });
       expect(result.current.state.faqs).toEqual([updated]);
     });
@@ -427,7 +644,10 @@ describe('AppContext', () => {
         await result.current.dispatch({ type: 'SET_FAQS', payload: [mockFaq] });
       });
       await act(async () => {
-        await result.current.dispatch({ type: 'DELETE_FAQS', payload: mockFaq.id });
+        await result.current.dispatch({
+          type: 'DELETE_FAQS',
+          payload: mockFaq.id,
+        });
       });
       expect(result.current.state.faqs).toEqual([]);
     });
@@ -458,7 +678,10 @@ describe('AppContext', () => {
         await result.current.dispatch({ type: 'SET_JOBS', payload: [mockJob] });
       });
       await act(async () => {
-        await result.current.dispatch({ type: 'DELETE_JOB', payload: mockJob.id });
+        await result.current.dispatch({
+          type: 'DELETE_JOB',
+          payload: mockJob.id,
+        });
       });
       expect(result.current.state.jobs).toEqual([]);
     });
@@ -483,9 +706,21 @@ describe('AppContext', () => {
   describe('firestoreAction dispatching', () => {
     it('ADD_EVENT calls addEvent', async () => {
       const { result } = renderApp();
-      const payload = { title: 'New Event', description: 'Desc', location: 'Loc', image: '', category: 'workshop' as const, status: 'upcoming' as const, registrationRequired: false, eventStartAt: '2026-01-01T00:00:00Z' };
+      const payload = {
+        title: 'New Event',
+        description: 'Desc',
+        location: 'Loc',
+        image: '',
+        category: 'workshop' as const,
+        status: 'upcoming' as const,
+        registrationRequired: false,
+        eventStartAt: '2026-01-01T00:00:00Z',
+      };
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'ADD_EVENT', payload });
+        await result.current.dispatch({
+          firestoreAction: 'ADD_EVENT',
+          payload,
+        });
       });
       expect(addEvent).toHaveBeenCalledWith(payload);
     });
@@ -493,7 +728,10 @@ describe('AppContext', () => {
     it('UPDATE_EVENT calls updateEvent', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'UPDATE_EVENT', payload: mockEvent });
+        await result.current.dispatch({
+          firestoreAction: 'UPDATE_EVENT',
+          payload: mockEvent,
+        });
       });
       expect(updateEvent).toHaveBeenCalledWith(mockEvent.id, mockEvent);
     });
@@ -501,7 +739,10 @@ describe('AppContext', () => {
     it('DELETE_EVENT calls deleteEvent', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'DELETE_EVENT', payload: 'evt-1' });
+        await result.current.dispatch({
+          firestoreAction: 'DELETE_EVENT',
+          payload: 'evt-1',
+        });
       });
       expect(deleteEvent).toHaveBeenCalledWith('evt-1');
     });
@@ -510,7 +751,10 @@ describe('AppContext', () => {
       const { result } = renderApp();
       const payload = { name: 'Bob', position: 'Dev' };
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'ADD_TEAM_MEMBER', payload });
+        await result.current.dispatch({
+          firestoreAction: 'ADD_TEAM_MEMBER',
+          payload,
+        });
       });
       expect(addTeamMember).toHaveBeenCalledWith(payload);
     });
@@ -518,30 +762,64 @@ describe('AppContext', () => {
     it('MOVE_TEAM_MEMBER calls moveTeamMember with current state', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_TEAM_MEMBERS', payload: [mockTeamMember] });
+        await result.current.dispatch({
+          type: 'SET_TEAM_MEMBERS',
+          payload: [mockTeamMember],
+        });
       });
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'MOVE_TEAM_MEMBER', payload: { memberId: 'tm-1', direction: 'up' } });
+        await result.current.dispatch({
+          firestoreAction: 'MOVE_TEAM_MEMBER',
+          payload: { memberId: 'tm-1', direction: 'up' },
+        });
       });
-      expect(moveTeamMember).toHaveBeenCalledWith([mockTeamMember], 'tm-1', 'up', undefined);
+      expect(moveTeamMember).toHaveBeenCalledWith(
+        [mockTeamMember],
+        'tm-1',
+        'up',
+        undefined,
+      );
     });
 
     it('MOVE_TEAM_MEMBER forwards the active year', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ type: 'SET_TEAM_MEMBERS', payload: [mockTeamMember] });
+        await result.current.dispatch({
+          type: 'SET_TEAM_MEMBERS',
+          payload: [mockTeamMember],
+        });
       });
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'MOVE_TEAM_MEMBER', payload: { memberId: 'tm-1', direction: 'down', year: 2026 } });
+        await result.current.dispatch({
+          firestoreAction: 'MOVE_TEAM_MEMBER',
+          payload: { memberId: 'tm-1', direction: 'down', year: 2026 },
+        });
       });
-      expect(moveTeamMember).toHaveBeenCalledWith([mockTeamMember], 'tm-1', 'down', 2026);
+      expect(moveTeamMember).toHaveBeenCalledWith(
+        [mockTeamMember],
+        'tm-1',
+        'down',
+        2026,
+      );
     });
 
     it('ADD_BLOG_POST calls addBlogPost', async () => {
       const { result } = renderApp();
-      const payload = { title: 'New Post', excerpt: 'Excerpt', content: 'Content', author: 'A', date: '2026-01-01', image: '', tags: [], published: true };
+      const payload = {
+        title: 'New Post',
+        excerpt: 'Excerpt',
+        content: 'Content',
+        author: 'A',
+        date: '2026-01-01',
+        image: '',
+        tags: [],
+        published: true,
+      };
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'ADD_BLOG_POST', payload });
+        await result.current.dispatch({
+          firestoreAction: 'ADD_BLOG_POST',
+          payload,
+        });
       });
       expect(addBlogPost).toHaveBeenCalledWith(payload);
     });
@@ -549,22 +827,37 @@ describe('AppContext', () => {
     it('UPDATE_BLOG_POST calls updateBlogPost', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'UPDATE_BLOG_POST', payload: mockBlogPost });
+        await result.current.dispatch({
+          firestoreAction: 'UPDATE_BLOG_POST',
+          payload: mockBlogPost,
+        });
       });
-      expect(updateBlogPost).toHaveBeenCalledWith(mockBlogPost.id, mockBlogPost);
+      expect(updateBlogPost).toHaveBeenCalledWith(
+        mockBlogPost.id,
+        mockBlogPost,
+      );
     });
 
     it('DELETE_BLOG_POST calls deleteBlogPost', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'DELETE_BLOG_POST', payload: 'bp-1' });
+        await result.current.dispatch({
+          firestoreAction: 'DELETE_BLOG_POST',
+          payload: 'bp-1',
+        });
       });
       expect(deleteBlogPost).toHaveBeenCalledWith('bp-1');
     });
 
     it('ADD_FAQS calls addFaq', async () => {
       const { result } = renderApp();
-      const payload = { question: 'Q?', answer: 'A!', category: 'general', order: 0, published: true };
+      const payload = {
+        question: 'Q?',
+        answer: 'A!',
+        category: 'general',
+        order: 0,
+        published: true,
+      };
       await act(async () => {
         await result.current.dispatch({ firestoreAction: 'ADD_FAQS', payload });
       });
@@ -574,7 +867,10 @@ describe('AppContext', () => {
     it('UPDATE_FAQS calls updateFaq', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'UPDATE_FAQS', payload: mockFaq });
+        await result.current.dispatch({
+          firestoreAction: 'UPDATE_FAQS',
+          payload: mockFaq,
+        });
       });
       expect(updateFaq).toHaveBeenCalledWith(mockFaq.id, mockFaq);
     });
@@ -582,7 +878,10 @@ describe('AppContext', () => {
     it('DELETE_FAQS calls deleteFaq', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'DELETE_FAQS', payload: 'faq-1' });
+        await result.current.dispatch({
+          firestoreAction: 'DELETE_FAQS',
+          payload: 'faq-1',
+        });
       });
       expect(deleteFaq).toHaveBeenCalledWith('faq-1');
     });
@@ -590,8 +889,16 @@ describe('AppContext', () => {
     it('ADD_JOB calls addJob and returns the id', async () => {
       (addJob as jest.Mock).mockResolvedValue('new-job-id');
       const { result } = renderApp();
-      const payload = { type: 'job' as const, title: 'Eng', company: 'Co', description: 'desc', published: true };
-      const returned = await act(async () => result.current.dispatch({ firestoreAction: 'ADD_JOB', payload }));
+      const payload = {
+        type: 'job' as const,
+        title: 'Eng',
+        company: 'Co',
+        description: 'desc',
+        published: true,
+      };
+      const returned = await act(async () =>
+        result.current.dispatch({ firestoreAction: 'ADD_JOB', payload }),
+      );
       expect(addJob).toHaveBeenCalledWith(payload);
       expect(returned).toBe('new-job-id');
     });
@@ -599,7 +906,10 @@ describe('AppContext', () => {
     it('UPDATE_JOB calls updateJob', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'UPDATE_JOB', payload: mockJob });
+        await result.current.dispatch({
+          firestoreAction: 'UPDATE_JOB',
+          payload: mockJob,
+        });
       });
       expect(updateJob).toHaveBeenCalledWith(mockJob.id, mockJob);
     });
@@ -607,7 +917,10 @@ describe('AppContext', () => {
     it('DELETE_JOB calls deleteJob', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'DELETE_JOB', payload: 'job-1' });
+        await result.current.dispatch({
+          firestoreAction: 'DELETE_JOB',
+          payload: 'job-1',
+        });
       });
       expect(deleteJob).toHaveBeenCalledWith('job-1');
     });
@@ -616,12 +929,25 @@ describe('AppContext', () => {
       (addShowcaseProject as jest.Mock).mockResolvedValue('sp-1');
       const { result } = renderApp();
       const payload = {
-        title: 'Course Navigator', description: 'Explore courses',
-        category: 'app' as const, creatorUserId: 'u1', creatorName: 'Ada',
-        links: {}, tags: [], votes: 0, published: false, featured: false,
-        createdAt: '2026-01-01T00:00:00Z', updatedAt: '2026-01-01T00:00:00Z',
+        title: 'Course Navigator',
+        description: 'Explore courses',
+        category: 'app' as const,
+        creatorUserId: 'u1',
+        creatorName: 'Ada',
+        links: {},
+        tags: [],
+        votes: 0,
+        published: false,
+        featured: false,
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
       };
-      const returned = await act(async () => result.current.dispatch({ firestoreAction: 'ADD_SHOWCASE_PROJECT', payload }));
+      const returned = await act(async () =>
+        result.current.dispatch({
+          firestoreAction: 'ADD_SHOWCASE_PROJECT',
+          payload,
+        }),
+      );
       expect(addShowcaseProject).toHaveBeenCalledWith(payload);
       expect(returned).toBe('sp-1');
     });
@@ -629,12 +955,25 @@ describe('AppContext', () => {
     it('UPDATE_SHOWCASE_PROJECT calls updateShowcaseProject', async () => {
       const { result } = renderApp();
       const project = {
-        id: 'sp-1', title: 'Updated', description: 'Desc', category: 'app' as const,
-        creatorUserId: 'u1', creatorName: 'Ada', links: {}, tags: [], votes: 0,
-        published: true, featured: false, createdAt: '2026-01-01T00:00:00Z', updatedAt: '2026-01-01T00:00:00Z',
+        id: 'sp-1',
+        title: 'Updated',
+        description: 'Desc',
+        category: 'app' as const,
+        creatorUserId: 'u1',
+        creatorName: 'Ada',
+        links: {},
+        tags: [],
+        votes: 0,
+        published: true,
+        featured: false,
+        createdAt: '2026-01-01T00:00:00Z',
+        updatedAt: '2026-01-01T00:00:00Z',
       };
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'UPDATE_SHOWCASE_PROJECT', payload: project });
+        await result.current.dispatch({
+          firestoreAction: 'UPDATE_SHOWCASE_PROJECT',
+          payload: project,
+        });
       });
       expect(updateShowcaseProject).toHaveBeenCalledWith('sp-1', project);
     });
@@ -642,7 +981,10 @@ describe('AppContext', () => {
     it('DELETE_SHOWCASE_PROJECT calls deleteShowcaseProject', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'DELETE_SHOWCASE_PROJECT', payload: 'sp-1' });
+        await result.current.dispatch({
+          firestoreAction: 'DELETE_SHOWCASE_PROJECT',
+          payload: 'sp-1',
+        });
       });
       expect(deleteShowcaseProject).toHaveBeenCalledWith('sp-1');
     });
@@ -650,15 +992,24 @@ describe('AppContext', () => {
     it('UPDATE_TEAM_MEMBER firestore calls updateTeamMember', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'UPDATE_TEAM_MEMBER', payload: mockTeamMember });
+        await result.current.dispatch({
+          firestoreAction: 'UPDATE_TEAM_MEMBER',
+          payload: mockTeamMember,
+        });
       });
-      expect(updateTeamMember).toHaveBeenCalledWith(mockTeamMember.id, mockTeamMember);
+      expect(updateTeamMember).toHaveBeenCalledWith(
+        mockTeamMember.id,
+        mockTeamMember,
+      );
     });
 
     it('DELETE_TEAM_MEMBER firestore calls deleteTeamMember', async () => {
       const { result } = renderApp();
       await act(async () => {
-        await result.current.dispatch({ firestoreAction: 'DELETE_TEAM_MEMBER', payload: 'tm-1' });
+        await result.current.dispatch({
+          firestoreAction: 'DELETE_TEAM_MEMBER',
+          payload: 'tm-1',
+        });
       });
       expect(deleteTeamMember).toHaveBeenCalledWith('tm-1');
     });
@@ -668,7 +1019,19 @@ describe('AppContext', () => {
     (addEvent as jest.Mock).mockRejectedValue(new Error('db error'));
     const { result } = renderApp();
     await act(async () => {
-      await result.current.dispatch({ firestoreAction: 'ADD_EVENT', payload: { title: 'X', description: 'Desc', location: 'L', image: '', category: 'workshop' as const, status: 'upcoming' as const, registrationRequired: false, eventStartAt: '2026-01-01T00:00:00Z' } });
+      await result.current.dispatch({
+        firestoreAction: 'ADD_EVENT',
+        payload: {
+          title: 'X',
+          description: 'Desc',
+          location: 'L',
+          image: '',
+          category: 'workshop' as const,
+          status: 'upcoming' as const,
+          registrationRequired: false,
+          eventStartAt: '2026-01-01T00:00:00Z',
+        },
+      });
     });
     expect(result.current.state.error).toBe('Failed to sync with database');
   });
@@ -677,7 +1040,10 @@ describe('AppContext', () => {
     const { result } = renderApp();
     let outcome: unknown;
     await act(async () => {
-      outcome = await result.current.dispatch({ firestoreAction: 'DELETE_EVENT', payload: 'e-1' });
+      outcome = await result.current.dispatch({
+        firestoreAction: 'DELETE_EVENT',
+        payload: 'e-1',
+      });
     });
     expect(outcome).toBe(true);
   });
@@ -687,7 +1053,19 @@ describe('AppContext', () => {
     const { result } = renderApp();
     let outcome: unknown = null;
     await act(async () => {
-      outcome = await result.current.dispatch({ firestoreAction: 'ADD_EVENT', payload: { title: 'X', description: 'Desc', location: 'L', image: '', category: 'workshop' as const, status: 'upcoming' as const, registrationRequired: false, eventStartAt: '2026-01-01T00:00:00Z' } });
+      outcome = await result.current.dispatch({
+        firestoreAction: 'ADD_EVENT',
+        payload: {
+          title: 'X',
+          description: 'Desc',
+          location: 'L',
+          image: '',
+          category: 'workshop' as const,
+          status: 'upcoming' as const,
+          registrationRequired: false,
+          eventStartAt: '2026-01-01T00:00:00Z',
+        },
+      });
     });
     expect(outcome).toBe(false);
   });
@@ -696,8 +1074,11 @@ describe('AppContext', () => {
     const { result } = renderApp();
     const initialState = { ...result.current.state };
     await act(async () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await result.current.dispatch({ type: 'UNKNOWN_ACTION' as any, payload: null });
+      await result.current.dispatch({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        type: 'UNKNOWN_ACTION' as any,
+        payload: null,
+      });
     });
     expect(result.current.state).toEqual(initialState);
   });
