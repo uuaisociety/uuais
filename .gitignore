@@ -35,6 +35,7 @@
 /build
 
 # misc
+/tmp/
 
 # browser-use virtual environment
 .venv-browser-use/
