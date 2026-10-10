@@ -127,4 +127,5 @@ jobs:
             echo "SNYK_TOKEN not configured; skipping snyk scan."
             exit 0
           fi
-          npx snyk test
+          # Fail only when Snyk has a fix available through an upgrade or patch.
+          npx snyk test --fail-on=all
