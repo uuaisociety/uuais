@@ -4,7 +4,12 @@ export interface AIChat {
   id: string;
   userId: string;
   title: string;
-  messages: { role: 'user' | 'assistant'; content: string; timestamp: string; recommendations?: string[] }[];
+  messages: {
+    role: 'user' | 'assistant';
+    content: string;
+    timestamp: string;
+    recommendations?: string[];
+  }[];
   recommendedCourseIds: string[];
   createdAt: string;
   updatedAt: string;
@@ -69,7 +74,16 @@ export interface Event {
   }[];
 }
 
-export type TeamCategory = 'board' | 'development' | 'research' | 'it' | 'growth' | 'partnerships_events' | 'founders' | 'alumni';
+export type TeamCategory =
+  | 'board'
+  | 'development'
+  | 'research'
+  | 'it'
+  | 'growth'
+  | 'partnerships_events'
+  | 'founders'
+  | 'alumni'
+  | 'finance';
 
 export const TEAM_CATEGORIES: TeamCategory[] = [
   'board',
@@ -78,6 +92,7 @@ export const TEAM_CATEGORIES: TeamCategory[] = [
   'it',
   'growth',
   'partnerships_events',
+  'finance',
   'founders',
   'alumni',
 ];
@@ -90,6 +105,7 @@ export const TEAM_CATEGORY_LABELS: Record<TeamCategory, string> = {
   growth: 'Growth',
   partnerships_events: 'Partnerships & Events',
   founders: 'Founders',
+  finance: 'Finance',
   alumni: 'Alumni',
 };
 
@@ -147,7 +163,15 @@ export interface BlogPost {
   featured?: boolean;
 }
 
-export type ShowcaseCategory = 'app' | 'website' | 'github' | 'model' | 'video' | 'research' | 'demo' | 'other';
+export type ShowcaseCategory =
+  | 'app'
+  | 'website'
+  | 'github'
+  | 'model'
+  | 'video'
+  | 'research'
+  | 'demo'
+  | 'other';
 
 export const SHOWCASE_CATEGORIES: ShowcaseCategory[] = [
   'app',
@@ -254,7 +278,13 @@ export interface EventRegistration {
   userId: string;
   registrationData: Record<string, string | number | boolean | string[]>;
   registeredAt: string;
-  status: 'registered' | 'waitlist' | 'invited' | 'confirmed' | 'declined' | 'cancelled';
+  status:
+    | 'registered'
+    | 'waitlist'
+    | 'invited'
+    | 'confirmed'
+    | 'declined'
+    | 'cancelled';
   userName?: string | null;
   userEmail?: string | null;
   selectedAt?: string | null;
@@ -272,7 +302,8 @@ export interface EventCustomQuestion {
   order: number;
 }
 
-export type JobType = 'startup' | 'internship' | 'master_thesis' | 'job' | 'other';
+export type JobType =
+  'startup' | 'internship' | 'master_thesis' | 'job' | 'other';
 
 export interface Job {
   id: string;
@@ -312,7 +343,7 @@ export interface Application {
   coverFile?: { path?: string; url?: string } | null;
   /** ISO string from some writes; Firestore Timestamp from server / API */
   createdAt?: string | Timestamp;
-};
+}
 
 // ---------------------------------------------------------------------------
 // Application campaigns (team applications) — replaces board-apply
@@ -320,7 +351,8 @@ export interface Application {
 
 export type CampaignStatus = 'open' | 'closed' | 'draft';
 
-export type CustomQuestionType = 'text' | 'textarea' | 'select' | 'radio' | 'checkbox';
+export type CustomQuestionType =
+  'text' | 'textarea' | 'select' | 'radio' | 'checkbox';
 
 export interface CampaignQuestion {
   id: string;
