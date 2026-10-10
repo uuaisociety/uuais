@@ -21,8 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          # Next.js 16 requires Node >=20.9; 22 is current LTS (Vercel default)
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies
@@ -48,7 +47,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies
@@ -60,6 +59,39 @@ jobs:
       - name: Integration tests
         run: npm run test:integration
 
+  vercel-build:
+    name: Vercel-like build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Restore build cache
+        uses: actions/cache@v4
+        with:
+          path: work/vercel-test/cache
+          key: ${{ runner.os }}-vercel-build-${{ hashFiles('.nvmrc', 'package-lock.json', 'package.json', 'next.config.ts', 'scripts/test-vercel-build.mjs') }}
+
+      - name: Test build harness
+        run: node --test scripts/test-vercel-build.test.mjs
+
+      - name: Vercel-like production build
+        run: npm run test:vercel
+
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vercel-build-logs
+          path: work/vercel-test/*.log
+          retention-days: 7
+
   e2e:
     name: E2E tests
     runs-on: ubuntu-latest
@@ -70,7 +102,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies
@@ -112,7 +144,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies

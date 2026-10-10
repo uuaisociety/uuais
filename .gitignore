@@ -109,3 +109,4 @@ next-env.d.ts
 __pycache__/
 *.pyc
 .venv/
+work/

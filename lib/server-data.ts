@@ -1,4 +1,5 @@
 import type { Event, FAQ, Job, TeamMember } from '@/types';
+import { isLocalBuildFixtureEnabled } from '@/lib/local-build-fixture';
 
 export interface PublicSeed {
   events: Event[];
@@ -92,6 +93,7 @@ function normalizePublicTeamDoc(doc: {
 export async function getPublicSeed(options?: {
   throwOnError?: boolean;
 }): Promise<PublicSeed> {
+  if (isLocalBuildFixtureEnabled()) return { ...EMPTY_SEED };
   try {
     // Dynamic import so a failed admin SDK init degrades gracefully instead of
     // throwing during module evaluation.

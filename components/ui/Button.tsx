@@ -1,74 +1,74 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
-import type { LucideIcon } from "lucide-react"
+import * as React from 'react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { LucideIcon } from 'lucide-react';
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils';
 
 // Pill geometry, one accent, no gradients. Press feedback is a small scale on
 // :active — the iOS cue — rather than a hover glow.
 const buttonVariants = cva(
   [
-    "cursor-pointer relative z-0 isolate inline-flex items-center justify-center gap-2",
-    "rounded-md whitespace-nowrap font-medium tracking-[-0.01em]",
-    "transition-[background-color,color,box-shadow,transform,border-color] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]",
-    "active:scale-[0.97] active:duration-100",
-    "disabled:pointer-events-none disabled:opacity-45",
-    "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-  ].join(" "),
+    'cursor-pointer relative z-0 isolate inline-flex items-center justify-center gap-2',
+    'rounded-md whitespace-nowrap font-medium tracking-[-0.01em]',
+    'transition-[background-color,color,box-shadow,transform,border-color] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]',
+    'active:scale-[0.97] active:duration-100',
+    'disabled:pointer-events-none disabled:opacity-45',
+    'outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+  ].join(' '),
   {
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110",
+          'bg-primary text-primary-foreground shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110',
         destructive:
-          "bg-destructive text-primary-foreground shadow-[inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110",
+          'bg-destructive text-primary-foreground shadow-[inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110',
         outline:
-          "border border-border bg-transparent text-foreground hover:bg-foreground/[0.045] hover:border-foreground/25",
+          'border border-border bg-transparent text-foreground hover:bg-foreground/[0.045] hover:border-foreground/25',
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-foreground/[0.08]",
+          'bg-secondary text-secondary-foreground hover:bg-foreground/[0.08]',
         ghost:
-          "text-foreground/75 hover:text-foreground hover:bg-foreground/[0.055]",
-        link: "rounded-none text-primary underline-offset-4 hover:underline active:scale-100",
+          'text-foreground/75 hover:text-foreground hover:bg-foreground/[0.055]',
+        link: 'rounded-none text-primary underline-offset-4 hover:underline active:scale-100',
         // Liquid glass — the surface picks up whatever sits behind it.
-        cta: "bg-primary text-primary-foreground glass glass-sheen glass-interactive glass-no-lift rounded-md shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110 ",
+        cta: 'bg-primary text-primary-foreground glass glass-sheen glass-interactive glass-no-lift rounded-md shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110 ',
         ctaSoft:
-          "glass rounded-md text-foreground shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110 hover:bg-[var(--glass-bg-strong)]",
+          'glass rounded-md text-foreground shadow-[0_1px_2px_var(--tw-shadow-color,rgba(0,0,0,0.12)),inset_0_1px_0_0_rgba(255,255,255,0.22)] hover:brightness-110 hover:bg-[var(--glass-bg-strong)]',
         // A control whose surface is something else — a whole card, a strip along a band.
         // It keeps the system's focus ring and press feedback but brings its own geometry.
-        bare: "bg-transparent text-inherit font-normal",
+        bare: 'bg-transparent text-inherit font-normal',
       },
       size: {
-        default: "h-10 px-5 text-sm has-[>svg]:pr-4",
-        sm: "h-8 px-3.5 text-[0.8125rem] gap-1.5",
-        lg: "h-11 px-6 text-[0.9375rem]",
-        xl: "h-13 px-7 text-base",
-        icon: "size-10 px-0",
+        default: 'h-10 px-5 text-sm has-[>svg]:pr-4',
+        sm: 'h-8 px-3.5 text-[0.8125rem] gap-1.5',
+        lg: 'h-11 px-6 text-[0.9375rem]',
+        xl: 'h-13 px-7 text-base',
+        icon: 'size-10 px-0',
         // Brings no geometry: for a control whose own surface sets the padding.
-        none: "h-auto p-0",
+        none: 'h-auto p-0',
         // Icon controls inside dense furniture: a course card's row of actions, and the
         // help affordance that sits inline with a line of text.
-        iconSm: "size-8 px-0",
-        iconXs: "size-5 px-0",
+        iconSm: 'size-8 px-0',
+        iconXs: 'size-5 px-0',
       },
       fullWidth: {
-        true: "w-full",
-        false: "",
-      }
+        true: 'w-full',
+        false: '',
+      },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: 'default',
+      size: 'default',
       fullWidth: false,
     },
-  }
-)
+  },
+);
 
-interface ButtonProps extends React.ComponentProps<"button">,
-  VariantProps<typeof buttonVariants> {
-    asChild?: boolean
-    icon?: LucideIcon
-    isLoading?: boolean
-    fullWidth?: boolean
+interface ButtonProps
+  extends React.ComponentProps<'button'>, VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+  icon?: LucideIcon;
+  isLoading?: boolean;
+  fullWidth?: boolean;
 }
 
 function Button({
@@ -83,13 +83,23 @@ function Button({
   disabled,
   ...props
 }: ButtonProps) {
-  const classes = cn(buttonVariants({ variant, size, fullWidth }), className)
+  const classes = cn(buttonVariants({ variant, size, fullWidth }), className);
 
   if (asChild) {
     // Ensure there's exactly one child element when using `asChild`.
-    const child = React.Children.only(children) as React.ReactElement
-    const childClass = cn((child.props && child.props.className) || '', classes)
-    const mergedProps = { ...props, className: childClass, disabled: disabled || isLoading }
+    const child = React.Children.only(children) as React.ReactElement<{
+      className?: string;
+      children?: React.ReactNode;
+    }>;
+    const childClass = cn(
+      (child.props && child.props.className) || '',
+      classes,
+    );
+    const mergedProps = {
+      ...props,
+      className: childClass,
+      disabled: disabled || isLoading,
+    };
 
     const inner = (
       <>
@@ -99,9 +109,9 @@ function Button({
         {Icon && !isLoading && <Icon className="size-4" />}
         {child.props && child.props.children}
       </>
-    )
+    );
 
-    return React.cloneElement(child, mergedProps, inner)
+    return React.cloneElement(child, mergedProps, inner);
   }
 
   return (
@@ -117,7 +127,7 @@ function Button({
       {Icon && !isLoading && <Icon className="size-4" />}
       {children}
     </button>
-  )
+  );
 }
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };

@@ -198,9 +198,18 @@ describe('POST /api/showcase/image', () => {
   it('returns 413 for oversized request bodies', async () => {
     const big = new Uint8Array(5 * 1024 * 1024);
     big.set(pngBytes);
-    const res = await POST(
-      makeUploadReq(new Blob([big], { type: 'image/png' })),
+    const encodedRequest = makeUploadReq(
+      new Blob([big], { type: 'image/png' }),
     );
+    // Incoming server bodies are byte-backed; Request(FormData) uses Undici's lazy client encoder.
+    const headers = new Headers(encodedRequest.headers);
+    headers.set('content-length', '1');
+    const request = new Request(encodedRequest.url, {
+      method: 'POST',
+      headers,
+      body: await encodedRequest.arrayBuffer(),
+    });
+    const res = await POST(request);
     expect(res.status).toBe(413);
     expect(mockBucketFile.save).not.toHaveBeenCalled();
   });
