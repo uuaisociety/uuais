@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { inlineCriticalCss } from './inline-critical-css.mjs';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const htmlFor = (name) => `<!doctype html><html><head><link rel="stylesheet" href="/_next/static/app.css" data-precedence="next"></head><body><header class="${name}">Header</header><main><section class="${name}">Hero</section></main></body></html>`;
+const htmlFor = (name, cssHref = '/_next/static/app.css') => `<!doctype html><html><head><link rel="stylesheet" href="${cssHref}" data-precedence="next"></head><body><header class="${name}">Header</header><main><section class="${name}">Hero</section></main></body></html>`;
 
 async function makeProject(t) {
   await mkdir(path.join(repoRoot, 'tmp'), { recursive: true });
@@ -16,18 +17,39 @@ async function makeProject(t) {
 }
 
 async function writeCss(project, packaged, rule) {
+  const content = `${rule}{color:red}.unused{color:blue}`;
+  const fileName = packaged
+    ? `${createHash('sha256').update(content).digest('hex')}.css`
+    : 'app.css';
   const directory = packaged
-    ? path.join(project, '.next/output/static/_next/static')
+    ? path.join(project, '.next/output/static/_next/static/immutable/chunks')
     : path.join(project, '.next/static/chunks');
   await mkdir(directory, { recursive: true });
-  await writeFile(path.join(directory, 'app.css'), `${rule}{color:red}.unused{color:blue}`);
+  const cssPath = path.join(directory, fileName);
+  const href = packaged ? `/_next/static/immutable/chunks/${fileName}` : '/_next/static/app.css';
+  await writeFile(cssPath, content);
+  return { cssPath, href, content };
 }
 
-async function assertPatched(project, htmlPath, expectedClass, unexpectedClass) {
+async function snapshotFiles(root) {
+  const files = {};
+  async function visit(directory, relative = '') {
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      const childRelative = path.join(relative, entry.name);
+      const child = path.join(directory, entry.name);
+      if (entry.isDirectory()) await visit(child, childRelative);
+      else files[childRelative] = await readFile(child);
+    }
+  }
+  await visit(root);
+  return files;
+}
+
+async function assertPatched(project, htmlPath, expectedClass, unexpectedClass, cssHref = '/_next/static/app.css') {
   const html = await readFile(htmlPath, 'utf8');
   assert.match(html, new RegExp(`<style data-critical>[\\s\\S]*\\.${expectedClass}\\{`));
   assert.doesNotMatch(html, new RegExp(`\\.${unexpectedClass}\\{`));
-  assert.match(html, /<link rel="preload" as="style" href="\/_next\/static\/app\.css"/);
+  assert.ok(html.includes(`<link rel="preload" as="style" href="${cssHref}"`));
   assert.match(html, /<noscript><link rel="stylesheet"[^>]*data-precedence="next"><\/noscript>/);
 }
 
@@ -54,15 +76,23 @@ test('prefers Vercel v3 packaged body and CSS over stale Next server output', as
   await mkdir(path.dirname(packagedHtml), { recursive: true });
   await mkdir(path.dirname(localHtml), { recursive: true });
   await writeFile(path.join(output, 'config.json'), JSON.stringify({ version: 3 }));
-  await writeFile(packagedHtml, htmlFor('packaged-hero'));
+  const css = await writeCss(project, true, '.packaged-hero');
+  await writeFile(packagedHtml, htmlFor('packaged-hero', css.href));
   await writeFile(localHtml, htmlFor('stale-local'));
-  await writeCss(project, true, '.packaged-hero');
   await writeCss(project, false, '.stale-local');
+  const staticDir = path.join(output, 'static');
+  const configPath = path.join(output, 'config.json');
+  const originalConfig = await readFile(configPath);
+  const originalStaticFiles = await snapshotFiles(staticDir);
 
   await inlineCriticalCss(project);
+  await inlineCriticalCss(project);
 
-  await assertPatched(project, packagedHtml, 'packaged-hero', 'stale-local');
+  await assertPatched(project, packagedHtml, 'packaged-hero', 'stale-local', css.href);
+  assert.equal((await readFile(packagedHtml, 'utf8')).match(/<style data-critical>/g).length, 1);
   assert.equal(await readFile(localHtml, 'utf8'), htmlFor('stale-local'));
+  assert.deepEqual(await snapshotFiles(staticDir), originalStaticFiles);
+  assert.deepEqual(await readFile(configPath), originalConfig);
 });
 
 for (const [name, relativeHtml] of [
@@ -75,12 +105,12 @@ for (const [name, relativeHtml] of [
     const htmlPath = path.join(output, relativeHtml);
     await mkdir(path.dirname(htmlPath), { recursive: true });
     await writeFile(path.join(output, 'config.json'), JSON.stringify({ version: 3 }));
-    await writeFile(htmlPath, htmlFor('packaged-hero'));
-    await writeCss(project, true, '.packaged-hero');
+    const css = await writeCss(project, true, '.packaged-hero');
+    await writeFile(htmlPath, htmlFor('packaged-hero', css.href));
 
     await inlineCriticalCss(project);
 
-    await assertPatched(project, htmlPath, 'packaged-hero', 'unused');
+    await assertPatched(project, htmlPath, 'packaged-hero', 'unused', css.href);
   });
 }
 

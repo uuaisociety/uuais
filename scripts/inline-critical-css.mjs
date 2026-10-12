@@ -257,7 +257,11 @@ function getBuildOutput(projectRoot) {
       if (!htmlPath) {
         throw new Error(`Vercel Build Output API v3 is missing the packaged homepage (checked ${candidates.join(', ')}).`);
       }
-      return { htmlPath, staticDir: path.join(vercelOutput, 'static') };
+      return {
+        htmlPath,
+        staticDir: path.join(vercelOutput, 'static'),
+        packaged: true,
+      };
     }
   }
 
@@ -265,11 +269,15 @@ function getBuildOutput(projectRoot) {
   if (!fs.existsSync(htmlPath)) {
     throw new Error(`index.html not found at ${htmlPath} — run \`next build\` first.`);
   }
-  return { htmlPath, staticDir: path.join(projectRoot, '.next', 'static') };
+  return {
+    htmlPath,
+    staticDir: path.join(projectRoot, '.next', 'static'),
+    packaged: false,
+  };
 }
 
 export async function inlineCriticalCss(projectRoot = root) {
-  const { htmlPath, staticDir } = getBuildOutput(projectRoot);
+  const { htmlPath, staticDir, packaged } = getBuildOutput(projectRoot);
   const html = fs.readFileSync(htmlPath, 'utf8');
   const aboveClasses = aboveFoldClasses(html);
   console.log('Above-fold classes:', aboveClasses.size);
@@ -294,13 +302,14 @@ export async function inlineCriticalCss(projectRoot = root) {
   const patched = patchHtml(html, criticalCss);
   fs.writeFileSync(htmlPath, patched);
 
-  // Write alongside the largest packaged CSS so the artifact follows either output layout.
-  const criticalPath = path.join(path.dirname(cssPaths[0]), 'critical-home.css');
-  fs.writeFileSync(criticalPath, criticalCss);
-
   console.log('Critical CSS bytes:', criticalCss.length);
+  console.log('HTML path:', htmlPath);
   console.log('HTML:', html.length, '->', patched.length);
-  console.log('Written critical CSS to', criticalPath);
+  if (!packaged) {
+    const criticalPath = path.join(path.dirname(cssPaths[0]), 'critical-home.css');
+    fs.writeFileSync(criticalPath, criticalCss);
+    console.log('Written critical CSS to', criticalPath);
+  }
 }
 
 const invokedPath = process.argv[1] && path.resolve(process.argv[1]);
