@@ -78,6 +78,9 @@ jobs:
           path: work/vercel-test/cache
           key: ${{ runner.os }}-vercel-build-${{ hashFiles('.nvmrc', 'package-lock.json', 'package.json', 'next.config.ts', 'scripts/test-vercel-build.mjs', 'scripts/inline-critical-css.mjs') }}
 
+      - name: Install test dependencies
+        run: npm ci
+
       - name: Test build harness
         run: node --test scripts/test-vercel-build.test.mjs scripts/inline-critical-css.test.mjs
 
