@@ -76,10 +76,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: work/vercel-test/cache
-          key: ${{ runner.os }}-vercel-build-${{ hashFiles('.nvmrc', 'package-lock.json', 'package.json', 'next.config.ts', 'scripts/test-vercel-build.mjs') }}
+          key: ${{ runner.os }}-vercel-build-${{ hashFiles('.nvmrc', 'package-lock.json', 'package.json', 'next.config.ts', 'scripts/test-vercel-build.mjs', 'scripts/inline-critical-css.mjs') }}
 
       - name: Test build harness
-        run: node --test scripts/test-vercel-build.test.mjs
+        run: node --test scripts/test-vercel-build.test.mjs scripts/inline-critical-css.test.mjs
 
       - name: Vercel-like production build
         run: npm run test:vercel

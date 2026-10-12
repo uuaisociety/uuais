@@ -18,6 +18,7 @@ const config: Config = {
     '<rootDir>/e2e/',
     '<rootDir>/tmp/',
     '<rootDir>/scripts/test-vercel-build.test.mjs',
+    '<rootDir>/scripts/inline-critical-css.test.mjs',
   ],
   verbose: false,
   silent: false,

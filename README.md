@@ -7,6 +7,7 @@ This is a [Next.js](https://nextjs.org) project for the Uppsala University AI So
 ## How to Run Locally
 
 ### Prerequisites
+
 - Node.js (version 20.9 or higher; `.nvmrc` pins Node 22 to match CI)
 - npm, yarn, pnpm, or bun package manager
 
@@ -20,33 +21,37 @@ This is a [Next.js](https://nextjs.org) project for the Uppsala University AI So
    ```
 
 #### Setup Firebase (Database and Authentication)
+
 (Based on https://www.scipress.io/post/OMsrfAaWdIgwNEF0P6za/Part-2---Firebase)
 
 2. **Login and setup dev project**
 
-   ```bash 
+   ```bash
     npm install -g firebase-tools
     cd lib/
     firebase login # Use uuais account
     firebase use dev
-    ```
+   ```
 
 3. **Create service account**
-  - Go to https://console.firebase.google.com/u/2/project/uuais-dev/settings/general/web:OTg4MTQwOTYtNDI4NS00Zjk1LThkOWEtZTE2YmFkYmUwN2Yx
-  - Go to Service Accounts
-  - Click on "Create new private key"
-  - **Save the file outside your project directory** (e.g., `~/.config/firebase/uuais-dev-service-account.json`). This prevents accidental commits to version control.
+
+- Go to https://console.firebase.google.com/u/2/project/uuais-dev/settings/general/web:OTg4MTQwOTYtNDI4NS00Zjk1LThkOWEtZTE2YmFkYmUwN2Yx
+- Go to Service Accounts
+- Click on "Create new private key"
+- **Save the file outside your project directory** (e.g., `~/.config/firebase/uuais-dev-service-account.json`). This prevents accidental commits to version control.
 
 4. **Copy SDK setup and configuration**
-  - Go to https://console.firebase.google.com/u/2/project/uuais-dev/settings/general/web:OTg4MTQwOTYtNDI4NS00Zjk1LThkOWEtZTE2YmFkYmUwN2Yx
-  - Scroll down to uuais-dev web app
-  - Copy over values from apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId
+
+- Go to https://console.firebase.google.com/u/2/project/uuais-dev/settings/general/web:OTg4MTQwOTYtNDI4NS00Zjk1LThkOWEtZTE2YmFkYmUwN2Yx
+- Scroll down to uuais-dev web app
+- Copy over values from apiKey, authDomain, projectId, storageBucket, messagingSenderId, appId
   to .env file (see below).
 
 5. **Environment Variables**
-  - Create a .env file in the root of your project and add the Firebase config values from .env.example
 
-  > **Security note:** The `.env` file and any Firebase service account JSON files are private. Never commit them to git. The `.gitignore` already excludes `.env` and `*firebase-adminsdk*.json`, but be careful not to rename or relocate them into tracked paths.
+- Create a .env file in the root of your project and add the Firebase config values from .env.example
+
+> **Security note:** The `.env` file and any Firebase service account JSON files are private. Never commit them to git. The `.gitignore` already excludes `.env` and `*firebase-adminsdk*.json`, but be careful not to rename or relocate them into tracked paths.
 
       ```bash
       NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
@@ -63,28 +68,31 @@ This is a [Next.js](https://nextjs.org) project for the Uppsala University AI So
 
 6. **Run the App in the development server**
 
-   ```bash
-   npm install
-   ```
-   ```bash
-   npm run dev
-   # or
-   npx next dev --turbopack
-   ```
-   
+```bash
+npm install
+```
+
+```bash
+npm run dev
+# or
+npx next dev --turbopack
+```
+
 Your app should now be running at [http://localhost:3000](http://localhost:3000)
 
 The page will automatically reload when you make changes to the code.
 
 7. **Set admin user**
-  - Navigate to [http://localhost:3000/admin](http://localhost:3000/admin)
-  - Sign in with Google
-  - You will see that you are not authorized.
-  - Install dev packages and set the email as an admin (replace <email> with your gmail):
-   ```bash
-   npm install -D @types/node @types/react @types/react-dom
-   npm run set:admin -- <email> true
-   ```
+
+- Navigate to [http://localhost:3000/admin](http://localhost:3000/admin)
+- Sign in with Google
+- You will see that you are not authorized.
+- Install dev packages and set the email as an admin (replace <email> with your gmail):
+
+```bash
+npm install -D @types/node @types/react @types/react-dom
+npm run set:admin -- <email> true
+```
 
 If updating firestore.rules, storage.rules or firestore.indexes.json, these need to be updated manually (development or prod)
 
@@ -96,7 +104,6 @@ firebase deploy --only firestore:rules
 firebase deploy --only storage:rules
 firebase deploy --only firestore:indexes
 ```
-
 
 ### Available Scripts
 
@@ -125,6 +132,8 @@ npm run test:watch  # Watch mode — re-runs on file changes
 npm run test:coverage  # Run with coverage report
 npm run test:integration  # API route tests (mocked Firebase)
 npm run test:e2e    # Playwright E2E smoke tests (auto-starts dev server)
+npm run test:vercel # Clean local install and production build approximation
+node scripts/test-vercel-build.test.mjs
 ```
 
 CI (`.github/workflows/ci.yml`) runs lint, type checking, and all three test suites on every push/PR.
@@ -134,15 +143,15 @@ CI (`.github/workflows/ci.yml`) runs lint, type checking, and all three test sui
 Create test files in the `__tests__/` directory:
 
 ```tsx
-import { render, screen } from '@testing-library/react'
-import NotFound from '../app/not-found'
+import { render, screen } from '@testing-library/react';
+import NotFound from '../app/not-found';
 
 describe('NotFound', () => {
   it('renders the 404 heading', () => {
-    render(<NotFound />)
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('404')
-  })
-})
+    render(<NotFound />);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('404');
+  });
+});
 ```
 
 ### What's Pre-Configured
@@ -180,9 +189,6 @@ To learn more about the technologies used in this project:
 - [TypeScript](https://www.typescriptlang.org/docs/) - TypeScript documentation
 - [Firebase](https://firebase.google.com/docs) - Firebase documentation
 - [Radix UI](https://www.radix-ui.com/) - Accessible component library
-
-
-
 
 ## Local Firebase Setup (Emulators)
 

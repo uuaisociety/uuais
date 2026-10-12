@@ -2,7 +2,7 @@
 /**
  * Critical CSS inliner for the homepage.
  *
- * Scans the prerendered homepage HTML (`.next/server/app/index.html`), collects
+ * Scans the prerendered homepage HTML (Next output or Vercel output v3), collects
  * the class names used in the above-the-fold region (fixed header + hero, i.e.
  * everything up to the first content-visibility:auto section), then filters the
  * compiled Tailwind CSS down to just the rules those classes need — preserving
@@ -21,12 +21,6 @@ import postcss from 'postcss';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
-const htmlPath = path.join(root, '.next', 'server', 'app', 'index.html');
-
-if (!fs.existsSync(htmlPath)) {
-  console.error('index.html not found — run `next build` first.');
-  process.exit(1);
-}
 
 /**
  * Find the compiled CSS files. The output location varies by bundler and
@@ -34,8 +28,7 @@ if (!fs.existsSync(htmlPath)) {
  * `.next/static/css/*.css`), so scan `.next/static` recursively instead of
  * assuming one hardcoded path.
  */
-function findCssFiles() {
-  const staticDir = path.join(root, '.next', 'static');
+function findCssFiles(staticDir) {
   if (!fs.existsSync(staticDir)) return [];
   const out = [];
   const stack = [staticDir];
@@ -249,7 +242,34 @@ function patchHtml(html, criticalCss) {
   return patched.replace('</head>', styleTag + '</head>');
 }
 
-async function main() {
+function getBuildOutput(projectRoot) {
+  const vercelOutput = path.join(projectRoot, '.next', 'output');
+  const configPath = path.join(vercelOutput, 'config.json');
+  if (fs.existsSync(configPath)) {
+    const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    if (config.version === 3) {
+      const candidates = [
+        path.join(vercelOutput, 'functions', 'index.prerender-fallback.body'),
+        path.join(vercelOutput, 'functions', 'index.prerender-fallback.html'),
+        path.join(vercelOutput, 'static', 'index.html'),
+      ];
+      const htmlPath = candidates.find((candidate) => fs.existsSync(candidate));
+      if (!htmlPath) {
+        throw new Error(`Vercel Build Output API v3 is missing the packaged homepage (checked ${candidates.join(', ')}).`);
+      }
+      return { htmlPath, staticDir: path.join(vercelOutput, 'static') };
+    }
+  }
+
+  const htmlPath = path.join(projectRoot, '.next', 'server', 'app', 'index.html');
+  if (!fs.existsSync(htmlPath)) {
+    throw new Error(`index.html not found at ${htmlPath} — run \`next build\` first.`);
+  }
+  return { htmlPath, staticDir: path.join(projectRoot, '.next', 'static') };
+}
+
+export async function inlineCriticalCss(projectRoot = root) {
+  const { htmlPath, staticDir } = getBuildOutput(projectRoot);
   const html = fs.readFileSync(htmlPath, 'utf8');
   const aboveClasses = aboveFoldClasses(html);
   console.log('Above-fold classes:', aboveClasses.size);
@@ -257,9 +277,9 @@ async function main() {
   // The main Tailwind sheet is the largest .css produced by the build (font css
   // is the only other render-blocking sheet; we include it too). Location
   // differs by bundler/environment, so scan .next/static recursively.
-  const cssFiles = findCssFiles();
+  const cssFiles = findCssFiles(staticDir);
   if (cssFiles.length === 0) {
-    console.warn('No compiled CSS found — skipping critical-CSS inlining.');
+    console.warn(`No compiled CSS found in ${staticDir} — skipping critical-CSS inlining.`);
     return;
   }
   const cssPaths = cssFiles
@@ -274,8 +294,7 @@ async function main() {
   const patched = patchHtml(html, criticalCss);
   fs.writeFileSync(htmlPath, patched);
 
-  // Write alongside the largest source CSS so the artifact lives in the same
-  // dir regardless of bundler layout.
+  // Write alongside the largest packaged CSS so the artifact follows either output layout.
   const criticalPath = path.join(path.dirname(cssPaths[0]), 'critical-home.css');
   fs.writeFileSync(criticalPath, criticalCss);
 
@@ -284,4 +303,10 @@ async function main() {
   console.log('Written critical CSS to', criticalPath);
 }
 
-main().catch((e) => { console.error(e); process.exit(1); });
+const invokedPath = process.argv[1] && path.resolve(process.argv[1]);
+if (invokedPath === fileURLToPath(import.meta.url)) {
+  inlineCriticalCss().catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });
+}
