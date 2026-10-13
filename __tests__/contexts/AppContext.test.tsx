@@ -156,16 +156,18 @@ describe('AppContext', () => {
           uid: string;
           getIdTokenResult?: () => Promise<{ claims: Record<string, boolean> }>;
         } | null,
-      ) => void)
+      ) => void | Promise<void>)
     | null = null;
 
   beforeEach(() => {
     jest.clearAllMocks();
+    global.__mockPathname = '/';
     global.fetch = jest.fn().mockResolvedValue({
       ok: true,
       json: async () => ({}),
     }) as unknown as typeof fetch;
     idTokenCallback = null;
+    (subscribeToEvents as jest.Mock).mockImplementation(() => mockUnsubscribe);
     (onIdTokenChanged as jest.Mock).mockImplementation((_auth, cb) => {
       idTokenCallback = cb;
       return mockUnsubscribe;
@@ -187,6 +189,10 @@ describe('AppContext', () => {
   it('subscribes to firestore collections and id token changes on mount', async () => {
     renderApp();
     await waitFor(() => expect(subscribeToEvents).toHaveBeenCalledTimes(1));
+    expect((subscribeToEvents as jest.Mock).mock.calls[0][1]).toEqual({
+      includeUnpublished: false,
+      recentOnly: true,
+    });
     expect(subscribeToTeamMembers).not.toHaveBeenCalled();
     // Blog posts are subscribed for all users (public sees published only)
     expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
@@ -197,6 +203,135 @@ describe('AppContext', () => {
     );
     await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
     expect(idTokenCallback).not.toBeNull();
+  });
+
+  it('loads team through the provider only when requested and subscribes only on admin routes', async () => {
+    const fetchMock = global.fetch as jest.Mock;
+    const { result, rerender } = renderApp();
+    await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
+    expect(fetchMock).not.toHaveBeenCalledWith('/api/team');
+    expect(subscribeToTeamMembers).not.toHaveBeenCalled();
+    await act(async () => {
+      await result.current.teamDirectory.ensureLoaded();
+    });
+    expect(fetchMock).toHaveBeenCalledWith('/api/team');
+    await act(async () => {
+      await idTokenCallback!({
+        uid: 'admin-1',
+        getIdTokenResult: () => Promise.resolve({ claims: { admin: true } }),
+      });
+    });
+    expect(subscribeToTeamMembers).not.toHaveBeenCalled();
+    global.__mockPathname = '/admin';
+    rerender();
+    await waitFor(() =>
+      expect(subscribeToTeamMembers).toHaveBeenCalledTimes(1),
+    );
+  });
+
+  afterEach(() => {
+    global.__mockPathname = '';
+  });
+
+  it('skips event listeners on unrelated and event detail routes', async () => {
+    global.__mockPathname = '/courses';
+    const { rerender } = renderApp();
+    await waitFor(() => expect(subscribeToJobs).toHaveBeenCalledTimes(1));
+    expect(subscribeToEvents).not.toHaveBeenCalled();
+    global.__mockPathname = '/events/evt-1';
+    rerender();
+    await act(async () => {
+      await Promise.resolve();
+    });
+    expect(subscribeToEvents).not.toHaveBeenCalled();
+    expect(subscribeToJobs).toHaveBeenCalledTimes(1);
+    expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
+  });
+
+  it('starts and stops event listening across route groups without restarting other listeners', async () => {
+    global.__mockPathname = '/courses';
+    const eventUnsubscribe = jest.fn();
+    (subscribeToEvents as jest.Mock).mockImplementation(() => eventUnsubscribe);
+    const { rerender } = renderApp();
+    await waitFor(() => expect(subscribeToJobs).toHaveBeenCalledTimes(1));
+    expect(subscribeToEvents).not.toHaveBeenCalled();
+    global.__mockPathname = '/';
+    rerender();
+    await waitFor(() => expect(subscribeToEvents).toHaveBeenCalledTimes(1));
+    expect((subscribeToEvents as jest.Mock).mock.calls[0][1]).toEqual({
+      includeUnpublished: false,
+      recentOnly: true,
+    });
+    global.__mockPathname = '/events';
+    rerender();
+    await act(async () => {
+      await Promise.resolve();
+    });
+    global.__mockPathname = '/blog/post-1';
+    rerender();
+    await act(async () => {
+      await Promise.resolve();
+    });
+    await waitFor(() => expect(subscribeToEvents).toHaveBeenCalledTimes(2));
+    expect((subscribeToEvents as jest.Mock).mock.calls[1][1]).toEqual({
+      includeUnpublished: false,
+      recentOnly: false,
+    });
+    const jobsCount = (subscribeToJobs as jest.Mock).mock.calls.length;
+    const blogsCount = (subscribeToBlogPosts as jest.Mock).mock.calls.length;
+    global.__mockPathname = '/events/evt-1';
+    rerender();
+    await waitFor(() => expect(eventUnsubscribe).toHaveBeenCalled());
+    expect(subscribeToEvents).toHaveBeenCalledTimes(2);
+    expect(subscribeToJobs).toHaveBeenCalledTimes(jobsCount);
+    expect(subscribeToBlogPosts).toHaveBeenCalledTimes(blogsCount);
+  });
+
+  it('clears draft events on sign-out and ignores callbacks from the old admin listener', async () => {
+    global.__mockPathname = '/admin';
+    const { result } = renderApp();
+    await waitFor(() => expect(subscribeToEvents).toHaveBeenCalledTimes(1));
+    await act(async () => {
+      await idTokenCallback!({
+        uid: 'admin-1',
+        getIdTokenResult: () => Promise.resolve({ claims: { admin: true } }),
+      });
+    });
+    await waitFor(() => expect(subscribeToEvents).toHaveBeenCalledTimes(2));
+    expect((subscribeToEvents as jest.Mock).mock.calls[1][1]).toEqual({
+      includeUnpublished: true,
+      recentOnly: false,
+    });
+    const adminCallback = (subscribeToEvents as jest.Mock).mock.calls[1][0] as (
+      events: (typeof mockEvent)[],
+    ) => void;
+    const published = { ...mockEvent, published: true };
+    const draft = { ...mockEvent, id: 'draft', published: false };
+    act(() =>
+      adminCallback([
+        published,
+        draft,
+        { ...mockEvent, id: 'missing-published' },
+      ]),
+    );
+    expect(result.current.state.events).toContainEqual(draft);
+    await act(async () => {
+      await idTokenCallback!(null);
+    });
+    await waitFor(() =>
+      expect(result.current.state.events).toEqual([published]),
+    );
+    act(() => adminCallback([published, draft]));
+    expect(result.current.state.events).toEqual([published]);
+  });
+
+  it('unsubscribes the active event listener on unmount', async () => {
+    const eventUnsubscribe = jest.fn();
+    (subscribeToEvents as jest.Mock).mockImplementation(() => eventUnsubscribe);
+    const { unmount } = renderApp();
+    await waitFor(() => expect(subscribeToEvents).toHaveBeenCalledTimes(1));
+    unmount();
+    expect(eventUnsubscribe).toHaveBeenCalledTimes(1);
   });
 
   it('subscribes to blog posts with includeUnpublished false for public users', async () => {
@@ -225,6 +360,7 @@ describe('AppContext', () => {
   });
 
   it('preserves public SSR seed initially and prevents a stale admin callback from restoring private data after sign-out', async () => {
+    global.__mockPathname = '/admin';
     const oldFetch = global.fetch;
     global.fetch = jest.fn(() => new Promise<Response>(() => {}));
     try {

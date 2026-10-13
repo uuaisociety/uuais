@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState, useMemo, useRef, useCallback } from 'react';
 import { Mail, Globe } from 'lucide-react';
@@ -6,36 +6,66 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { LinkedinIcon, GithubIcon } from '@hugeicons/core-free-icons';
 import { Card } from '@/components/ui/Card';
 import Image from 'next/image';
-import { TeamMember, TEAM_CATEGORIES, TEAM_CATEGORY_LABELS, TeamCategory } from '@/types';
+import {
+  TeamMember,
+  TEAM_CATEGORIES,
+  TEAM_CATEGORY_LABELS,
+  TeamCategory,
+} from '@/types';
 import { Button } from '@/components/ui/Button';
 import Tag from '@/components/ui/Tag';
 import StyledSelect from '@/components/ui/StyledSelect';
+import type {
+  TeamDirectoryMetadata,
+  TeamDirectoryYear,
+} from '@/lib/team-directory-types';
 
 interface TeamTabsSectionProps {
   members: TeamMember[];
+  metadata?: TeamDirectoryMetadata | null;
+  selectedTeam?: TeamCategory;
+  selectedYear?: TeamDirectoryYear;
+  loading?: boolean;
+  error?: string | null;
+  onSelectionChange?: (team: TeamCategory, year: TeamDirectoryYear) => void;
+  onRetry?: () => void;
 }
 
-const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
-  const published = useMemo(() => members.filter(m => m.published !== false), [members]);
+const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({
+  members,
+  metadata,
+  selectedTeam,
+  selectedYear: loadedYear,
+  loading,
+  error,
+  onSelectionChange,
+  onRetry,
+}) => {
+  const published = useMemo(
+    () => members.filter((m) => m.published !== false),
+    [members],
+  );
 
   const years = useMemo(() => {
     const yrSet = new Set<number>();
-    published.forEach(m => {
-      if (m.years && m.years.length > 0) m.years.forEach(y => yrSet.add(y));
+    published.forEach((m) => {
+      if (m.years && m.years.length > 0) m.years.forEach((y) => yrSet.add(y));
     });
     return Array.from(yrSet).sort((a, b) => b - a);
   }, [published]);
+  const availableYears = metadata?.years ?? years;
 
   const [selectedYear, setSelectedYear] = useState<number | 'all' | null>(null);
 
   const effectiveYear = useMemo(() => {
     if (selectedYear !== null) return selectedYear;
     const CURRENT_YEAR = new Date().getFullYear();
-    if (years.length === 0) return 'all';
-    if (years.includes(CURRENT_YEAR)) return CURRENT_YEAR;
-    if (years.includes(CURRENT_YEAR - 1)) return CURRENT_YEAR - 1;
-    return years[0] ?? 'all';
-  }, [selectedYear, years]);
+    if (metadata) return metadata.defaultYear;
+    if (availableYears.length === 0) return 'all';
+    if (availableYears.includes(CURRENT_YEAR)) return CURRENT_YEAR;
+    if (availableYears.includes(CURRENT_YEAR - 1)) return CURRENT_YEAR - 1;
+    return availableYears[0] ?? 'all';
+  }, [selectedYear, availableYears, metadata]);
 
   const [activeTab, setActiveTab] = useState<TeamCategory>('board');
   const tabsRef = useRef<HTMLDivElement>(null);
@@ -45,58 +75,116 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
   const socialClass =
     'size-9 grid place-items-center rounded-sm text-muted-foreground hover:text-foreground hover:bg-foreground/[0.055] transition-colors duration-300';
 
-  const getFilteredMembers = useCallback((team: TeamCategory) => {
-    return published.filter(m => {
-      const teamMatch = m.teams && m.teams.length > 0
-        ? m.teams.includes(team)
-        : team === 'board';
-      if (!teamMatch) return false;
-      if (effectiveYear === 'all') return true;
-      return !m.years || m.years.length === 0 || m.years.includes(effectiveYear);
-    }).sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-  }, [published, effectiveYear]);
+  const getFilteredMembers = useCallback(
+    (team: TeamCategory) => {
+      return published
+        .filter((m) => {
+          const teamMatch =
+            m.teams && m.teams.length > 0
+              ? m.teams.includes(team)
+              : team === 'board';
+          if (!teamMatch) return false;
+          if (effectiveYear === 'all') return true;
+          return (
+            !m.years || m.years.length === 0 || m.years.includes(effectiveYear)
+          );
+        })
+        .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    },
+    [published, effectiveYear],
+  );
 
   const scrollTabIntoView = useCallback((tab: string) => {
     if (!tabsRef.current) return;
-    const btn = tabsRef.current.querySelector(`[data-tab="${tab}"]`) as HTMLElement;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    btn?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
+    const btn = tabsRef.current.querySelector(
+      `[data-tab="${tab}"]`,
+    ) as HTMLElement;
+    const reduce = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    btn?.scrollIntoView({
+      behavior: reduce ? 'auto' : 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
   }, []);
 
-  const handleTabChange = useCallback((tab: TeamCategory) => {
-    setActiveTab(tab);
-    scrollTabIntoView(tab);
-  }, [scrollTabIntoView]);
+  const handleTabChange = useCallback(
+    (tab: TeamCategory) => {
+      setActiveTab(tab);
+      scrollTabIntoView(tab);
+    },
+    [scrollTabIntoView],
+  );
 
   const tabCounts = useMemo(() => {
+    if (metadata)
+      return (
+        metadata.countsByYear[
+          effectiveYear === 'all' ? 'all' : String(effectiveYear)
+        ] ?? {}
+      );
     const counts: Record<string, number> = {};
-    TEAM_CATEGORIES.forEach(cat => {
+    TEAM_CATEGORIES.forEach((cat) => {
       counts[cat] = getFilteredMembers(cat).length;
     });
     return counts;
-  }, [getFilteredMembers]);
+  }, [getFilteredMembers, metadata, effectiveYear]);
 
   // A year change can empty the active category, so derive the tab like effectiveYear.
-  const effectiveTab = tabCounts[activeTab] > 0
-    ? activeTab
-    : TEAM_CATEGORIES.find(cat => tabCounts[cat] > 0) ?? activeTab;
+  const effectiveTab =
+    tabCounts[activeTab] > 0
+      ? activeTab
+      : (TEAM_CATEGORIES.find((cat) => tabCounts[cat] > 0) ?? activeTab);
 
-  const activeMembers = useMemo(() => getFilteredMembers(effectiveTab), [getFilteredMembers, effectiveTab]);
+  const activeMembers = useMemo(
+    () => getFilteredMembers(effectiveTab),
+    [getFilteredMembers, effectiveTab],
+  );
+
+  React.useEffect(() => {
+    if (!metadata || !onSelectionChange) return;
+    if (selectedTeam !== effectiveTab || loadedYear !== effectiveYear)
+      onSelectionChange(effectiveTab, effectiveYear);
+  }, [
+    metadata,
+    onSelectionChange,
+    selectedTeam,
+    loadedYear,
+    effectiveTab,
+    effectiveYear,
+  ]);
 
   return (
     <div>
       {/* Year selector */}
-      {years.length > 0 && (
+      {availableYears.length > 0 && (
         <div className="flex mb-5">
           <StyledSelect
             label="Filter team by academic year"
             value={effectiveYear === 'all' ? 'all' : String(effectiveYear)}
             onChange={(v) => setSelectedYear(v === 'all' ? 'all' : parseInt(v))}
             options={[
-              ...years.map(y => ({ value: String(y), label: `${y}/${String(y + 1).slice(2)}` })),
+              ...availableYears.map((y) => ({
+                value: String(y),
+                label: `${y}/${String(y + 1).slice(2)}`,
+              })),
               { value: 'all', label: 'All years' },
             ]}
           />
+        </div>
+      )}
+
+      {error && (
+        <div className="mb-6 flex flex-wrap items-center gap-3" role="alert">
+          <p className="text-sm text-muted-foreground">
+            Could not load team profiles.
+          </p>
+          {onRetry && (
+            <Button variant="outline" size="sm" onClick={onRetry}>
+              Retry
+            </Button>
+          )}
         </div>
       )}
 
@@ -109,7 +197,7 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
           role="group"
           aria-label="Team filters"
         >
-          {TEAM_CATEGORIES.map(cat => {
+          {TEAM_CATEGORIES.map((cat) => {
             const count = tabCounts[cat];
             if (count === 0) return null;
             return (
@@ -132,11 +220,20 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
       </div>
 
       <p role="status" className="sr-only">
-        {activeMembers.length} {activeMembers.length === 1 ? 'member' : 'members'} in {TEAM_CATEGORY_LABELS[effectiveTab]}
+        {activeMembers.length}{' '}
+        {activeMembers.length === 1 ? 'member' : 'members'} in{' '}
+        {TEAM_CATEGORY_LABELS[effectiveTab]}
       </p>
 
       {/* Team member grid */}
-      {activeMembers.length > 0 ? (
+      {loading && activeMembers.length === 0 ? (
+        <p
+          className="border-t border-border py-16 text-center mono-meta text-muted-foreground"
+          role="status"
+        >
+          Loading team profiles...
+        </p>
+      ) : activeMembers.length > 0 ? (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {activeMembers.map((member) => (
             <Card key={member.id} variant="glass" className="p-6 flex flex-col">
@@ -157,7 +254,11 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
                   </p>
                   {member.badge && (
                     <div className="flex flex-wrap gap-2 mt-2.5">
-                      {member.badge && <Tag variant="red" size="sm">{member.badge}</Tag>}
+                      {member.badge && (
+                        <Tag variant="red" size="sm">
+                          {member.badge}
+                        </Tag>
+                      )}
                     </div>
                   )}
                 </div>
@@ -179,15 +280,17 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({ members }) => {
                     <Mail className="h-4 w-4" />
                   </a>
                 )}
-                {!member.personalEmail && !member.companyEmail && member.email && (
-                  <a
-                    href={`mailto:${member.email}`}
-                    className={socialClass}
-                    aria-label={`Email ${member.name}`}
-                  >
-                    <Mail className="h-4 w-4" />
-                  </a>
-                )}
+                {!member.personalEmail &&
+                  !member.companyEmail &&
+                  member.email && (
+                    <a
+                      href={`mailto:${member.email}`}
+                      className={socialClass}
+                      aria-label={`Email ${member.name}`}
+                    >
+                      <Mail className="h-4 w-4" />
+                    </a>
+                  )}
                 {member.linkedin && (
                   <a
                     href={member.linkedin}

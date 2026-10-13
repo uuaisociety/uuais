@@ -6,7 +6,10 @@ import React, {
   useReducer,
   ReactNode,
   useEffect,
+  useRef,
+  useState,
 } from 'react';
+import { usePathname } from 'next/navigation';
 import {
   Event,
   TeamMember,
@@ -17,6 +20,11 @@ import {
 } from '../types';
 import { scheduleIdle } from '@/lib/idle';
 import { hasCachedIdentity } from '@/lib/identity-cache';
+import { useEventArchive, type EventArchive } from '@/contexts/useEventArchive';
+import {
+  usePublicTeamDirectory,
+  type PublicTeamDirectory,
+} from '@/contexts/usePublicTeamDirectory';
 
 interface AppState {
   events: Event[];
@@ -38,6 +46,7 @@ type AppAction =
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null }
   | { type: 'SET_EVENTS'; payload: Event[] }
+  | { type: 'CLEAR_PRIVATE_EVENTS' }
   | { type: 'ADD_EVENT'; payload: Event }
   | { type: 'UPDATE_EVENT'; payload: Event }
   | { type: 'DELETE_EVENT'; payload: string }
@@ -111,6 +120,11 @@ const initialState: AppState = {
 
 const appReducer = (state: AppState, action: AppAction): AppState => {
   switch (action.type) {
+    case 'CLEAR_PRIVATE_EVENTS':
+      return {
+        ...state,
+        events: state.events.filter((event) => event.published === true),
+      };
     case 'SET_LOADING':
       return { ...state, isLoading: action.payload };
     case 'SET_ERROR':
@@ -221,6 +235,8 @@ const AppContext = createContext<
   | {
       state: AppState;
       dispatch: AppDispatch;
+      eventArchive: EventArchive;
+      teamDirectory: PublicTeamDirectory;
     }
   | undefined
 >(undefined);
@@ -231,6 +247,19 @@ export const AppProvider: React.FC<{
     Pick<AppState, 'events' | 'jobs' | 'faqs' | 'teamMembers' | 'blogPosts'>
   >;
 }> = ({ children, seed }) => {
+  const pathname = usePathname() ?? '';
+  const [isAdmin, setIsAdmin] = useState(false);
+  const isAdminRef = useRef(false);
+  const needsEvents =
+    pathname === '/' ||
+    pathname === '/events' ||
+    pathname.startsWith('/blog/') ||
+    pathname === '/admin' ||
+    pathname.startsWith('/admin/');
+  const isAdminRoute = pathname === '/admin' || pathname.startsWith('/admin/');
+  const eventSubscriptionMode = !(pathname === '/' || pathname === '/events')
+    ? 'full'
+    : 'recent';
   const initState: AppState = {
     ...initialState,
     ...(seed || {}),
@@ -238,6 +267,8 @@ export const AppProvider: React.FC<{
     blogPostsLoaded: seed ? seed.blogPosts !== undefined : false,
   };
   const [state, dispatch] = useReducer(appReducer, initState);
+  const eventArchive = useEventArchive();
+  const teamDirectory = usePublicTeamDirectory();
 
   // Swallow only the Firestore SDK's unhandled internal assertions (thrown when a denied watch stream is torn down) so they can't brick a screen via an error boundary.
   useEffect(() => {
@@ -269,17 +300,11 @@ export const AppProvider: React.FC<{
   // Realtime Firestore listeners start after the main thread goes idle so they stay out of the critical network chain (LCP); SSR-seeded data already paints the content.
   useEffect(() => {
     // Listener refs are mutated async (dynamic import) so a late chunk from a superseded subscribe() can't clobber the active one.
-    const unsubscribeEvents: { current: (() => void) | null } = {
-      current: null,
-    };
     const unsubscribeJobs: { current: (() => void) | null } = { current: null };
     const unsubscribeBlogPosts: { current: (() => void) | null } = {
       current: null,
     };
     const unsubscribeShowcase: { current: (() => void) | null } = {
-      current: null,
-    };
-    const unsubscribeTeamMembers: { current: (() => void) | null } = {
       current: null,
     };
     const unsubscribeFaqs: { current: (() => void) | null } = { current: null };
@@ -312,27 +337,6 @@ export const AppProvider: React.FC<{
           ref.current = unsub;
         });
       };
-
-      // Unsubscribe previous
-      if (unsubscribeEvents.current) {
-        try {
-          unsubscribeEvents.current();
-        } catch {
-          /* ignore */
-        }
-        unsubscribeEvents.current = null;
-      }
-      attach(
-        import('@/lib/firestore/events'),
-        unsubscribeEvents,
-        ({ subscribeToEvents }) =>
-          subscribeToEvents(
-            (events) => {
-              dispatch({ type: 'SET_EVENTS', payload: events });
-            },
-            { includeUnpublished },
-          ),
-      );
 
       if (unsubscribeJobs.current) {
         try {
@@ -414,55 +418,11 @@ export const AppProvider: React.FC<{
     // Returning visitors (cached identity) get realtime data immediately; anonymous visitors defer the firestore streams until after LCP / first interaction.
     scheduleIdle(
       () => {
+        if (disposed) return;
         // Initial subscription: assume not admin (public)
         subscribe(false);
 
         // Other static subscriptions that don't depend on auth
-        let teamGeneration = 0;
-        let teamWasAdmin = false;
-        const subscribeTeamMembers = (admin: boolean) => {
-          const teamGen = ++teamGeneration;
-          if (unsubscribeTeamMembers.current) unsubscribeTeamMembers.current();
-          unsubscribeTeamMembers.current = null;
-          if (admin) {
-            teamWasAdmin = true;
-            void import('@/lib/firestore/team').then(
-              ({ subscribeToTeamMembers: subscribeAdminTeam }) => {
-                if (!disposed && teamGen === teamGeneration)
-                  unsubscribeTeamMembers.current = subscribeAdminTeam(
-                    (members) => {
-                      if (!disposed && teamGen === teamGeneration)
-                        dispatch({
-                          type: 'SET_TEAM_MEMBERS',
-                          payload: members,
-                        });
-                    },
-                  );
-              },
-            );
-          } else {
-            if (teamWasAdmin)
-              dispatch({ type: 'SET_TEAM_MEMBERS', payload: [] });
-            teamWasAdmin = false;
-            void fetch('/api/team')
-              .then((response) => (response.ok ? response.json() : null))
-              .then((data) => {
-                if (
-                  !disposed &&
-                  teamGen === teamGeneration &&
-                  data &&
-                  Array.isArray(data.teamMembers)
-                )
-                  dispatch({
-                    type: 'SET_TEAM_MEMBERS',
-                    payload: data.teamMembers,
-                  });
-              })
-              .catch(() => {});
-          }
-        };
-        subscribeTeamMembers(false);
-
         void import('@/lib/firestore/faqs').then(({ subscribeToFaqs }) => {
           if (disposed) return;
           unsubscribeFaqs.current = subscribeToFaqs((faqs) => {
@@ -492,11 +452,16 @@ export const AppProvider: React.FC<{
               }
             }
             // Ignore stale auth events that resolved after a newer one applied.
-            if (gen !== authGeneration) return;
+            if (disposed || gen !== authGeneration) return;
             // Avoid re-subscribing when the admin claim did not change.
             if (currentAdminClaim === adminClaim) return;
             currentAdminClaim = adminClaim;
-            subscribeTeamMembers(adminClaim);
+            isAdminRef.current = adminClaim;
+            if (!adminClaim) {
+              dispatch({ type: 'CLEAR_PRIVATE_EVENTS' });
+              dispatch({ type: 'SET_TEAM_MEMBERS', payload: [] });
+            }
+            setIsAdmin(adminClaim);
             // Re-subscribe with adminClaim (true/false)
             subscribe(adminClaim);
           });
@@ -508,13 +473,6 @@ export const AppProvider: React.FC<{
     // Cleanup subscriptions on unmount
     return () => {
       disposed = true;
-      if (unsubscribeEvents.current) {
-        try {
-          unsubscribeEvents.current();
-        } catch {
-          /* ignore */
-        }
-      }
       if (unsubscribeJobs.current) {
         try {
           unsubscribeJobs.current();
@@ -536,13 +494,6 @@ export const AppProvider: React.FC<{
           /* ignore */
         }
       }
-      if (unsubscribeTeamMembers.current) {
-        try {
-          unsubscribeTeamMembers.current();
-        } catch {
-          /* ignore */
-        }
-      }
       if (unsubscribeFaqs.current) {
         try {
           unsubscribeFaqs.current();
@@ -559,6 +510,58 @@ export const AppProvider: React.FC<{
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (!isAdmin || !isAdminRoute) {
+      if (isAdminRef.current)
+        dispatch({ type: 'SET_TEAM_MEMBERS', payload: [] });
+      return;
+    }
+    let disposed = false;
+    let unsubscribe: (() => void) | null = null;
+    void import('@/lib/firestore/team').then(({ subscribeToTeamMembers }) => {
+      if (disposed) return;
+      unsubscribe = subscribeToTeamMembers((members) => {
+        if (!disposed && isAdminRef.current && isAdminRoute)
+          dispatch({ type: 'SET_TEAM_MEMBERS', payload: members });
+      });
+    });
+    return () => {
+      disposed = true;
+      unsubscribe?.();
+    };
+  }, [isAdmin, isAdminRoute]);
+
+  // Route changes only restart the event stream when its visibility or need changes.
+  useEffect(() => {
+    if (!needsEvents) return;
+    let disposed = false;
+    let unsubscribe: (() => void) | null = null;
+    scheduleIdle(
+      () => {
+        if (disposed) return;
+        void import('@/lib/firestore/events').then(({ subscribeToEvents }) => {
+          if (disposed) return;
+          unsubscribe = subscribeToEvents(
+            (events) => {
+              if (!disposed && (!isAdmin || isAdminRef.current)) {
+                dispatch({ type: 'SET_EVENTS', payload: events });
+              }
+            },
+            {
+              includeUnpublished: isAdmin,
+              recentOnly: eventSubscriptionMode === 'recent',
+            },
+          );
+        });
+      },
+      hasCachedIdentity() ? 0 : 3500,
+    );
+    return () => {
+      disposed = true;
+      unsubscribe?.();
+    };
+  }, [needsEvents, isAdmin, eventSubscriptionMode]);
 
   // Enhanced dispatch with Firestore sync
   const enhancedDispatch = async (action: AppAction | FirestoreAction) => {
@@ -682,7 +685,9 @@ export const AppProvider: React.FC<{
   };
 
   return (
-    <AppContext.Provider value={{ state, dispatch: enhancedDispatch }}>
+    <AppContext.Provider
+      value={{ state, dispatch: enhancedDispatch, eventArchive, teamDirectory }}
+    >
       {children}
     </AppContext.Provider>
   );
