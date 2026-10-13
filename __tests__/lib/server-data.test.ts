@@ -22,25 +22,24 @@ const mockTeamDocs = [
   },
 ];
 let mockQueryCount = 0;
+const mockWhere = jest.fn();
 
 jest.mock('@/lib/firebase-admin', () => ({
   adminDb: {
-    collection: (name: string) => ({
-      where: () => ({
-        orderBy: () => ({
-          get: async () => {
-            mockQueryCount += 1;
-            return { docs: [] };
-          },
-        }),
-      }),
-      orderBy: () => ({
+    collection: (name: string) => {
+      const query = {
+        where: (...args: unknown[]) => {
+          mockWhere(name, ...args);
+          return query;
+        },
+        orderBy: () => query,
         get: async () => {
           mockQueryCount += 1;
           return { docs: name === 'teamMembers' ? mockTeamDocs : [] };
         },
-      }),
-    }),
+      };
+      return query;
+    },
   },
 }));
 
@@ -56,6 +55,7 @@ describe('getPublicSeed team projection', () => {
       delete process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
     else process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID = originalProjectId;
     mockQueryCount = 0;
+    mockWhere.mockClear();
   });
 
   it('keeps the public team contract and drops private and future fields', async () => {
@@ -94,5 +94,30 @@ describe('getPublicSeed team projection', () => {
 
     expect(seed.teamMembers).toHaveLength(1);
     expect(mockQueryCount).toBe(4);
+  });
+
+  it('fetches public team members with one collection query', async () => {
+    const { getPublicTeamMembers } = await import('@/lib/server-data');
+    const members = await getPublicTeamMembers();
+    expect(members).toHaveLength(1);
+    expect(members[0]).not.toHaveProperty('personalEmail');
+    expect(mockQueryCount).toBe(1);
+  });
+
+  it('bounds SSR event reads while preserving complete raw event queries', async () => {
+    const { getPublicSeed } = await import('@/lib/server-data');
+    await getPublicSeed({ throwOnError: true, recentEventsOnly: true });
+    expect(mockWhere).toHaveBeenCalledWith('events', 'published', '==', true);
+    expect(mockWhere).toHaveBeenCalledWith(
+      'events',
+      'eventStartAt',
+      '>=',
+      expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/),
+    );
+    mockWhere.mockClear();
+    await getPublicSeed({ throwOnError: true });
+    expect(
+      mockWhere.mock.calls.filter(([collection]) => collection === 'events'),
+    ).toEqual([['events', 'published', '==', true]]);
   });
 });
