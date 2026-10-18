@@ -29,5 +29,14 @@
   "programmeTitleEn": "Bachelor's Programme in Urban and Regional Planning, 180 credits (SSP1K)",
   "programmeUri": "/utbildning/program/samhallsplaneringsprogram",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

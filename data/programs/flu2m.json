@@ -263,5 +263,38 @@
   "programmeTitleEn": "Master's Programme in Drug Discovery and Development, 120 credits (FLU2M)",
   "programmeUri": "/utbildning/program/masterprogram-lakemedelsutveckling",
   "faculty": "Farmaceutiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Det första året består av obligatoriska kurser med syfte att ge studenten en bred kunskap inom läkemedelsutveckling. För studenter som läst motsvarande kurs i sin grundutbildning finns alternativa kurser.",
+        "textEn": "The first year consists of compulsory courses with the aim to provide the student a broad knowledge in drug development. There are alternative courses for students who already taken corresponding courses within their Bachelor education."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Under det andra året väljer studenten kurser.",
+        "textEn": "During the second year, the student chooses courses."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Valbara fördjupningskurser 15 hp och del av masterprojekt 45 hp eller valbara fördjupningskurser 30 hp.",
+        "textEn": "Elective courses 15 credits and part of a Master's project 45 credits or elective courses 30 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Masterprojekt 30 hp eller del av masterprojekt 45 hp.",
+        "textEn": "Master's project 30 credits or part of Master's project 45 credits."
+      }
+    ]
+  }
 }

@@ -1,0 +1,16 @@
+/node_modules/
+/.next/
+/out/
+/build/
+/coverage/
+/tmp/
+/work/
+/dataconnect/
+/dataconnect-generated/
+/functions/
+/.venv/
+/.venv-browser-use/
+**/.venv/
+.env*
+package-lock.json
+course_scraper/uv.lock

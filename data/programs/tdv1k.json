@@ -1295,5 +1295,46 @@
   "programmeTitleEn": "Bachelor's Programme in Computer Science, 180 credits (TDV1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-datavetenskap",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 1MA348 Grundläggande Algebra ersätter 1MA350 Algebra I inom programmet och kan inte tas med i examen tillsammans med denna."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 1MA350 Linjär Algebra ersätter 1MA025 Linjär Algebra och Geometri I inom programmet och kan inte tas med i examen tillsammans med denna."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Samt en av följande kurser:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Kursen 1DL305 Databasteknik I DV ersätter 1DL301 Databasteknik I inom programmet och kan inte tas med i examen tillsammans med denna."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Rekommenderade valbara kurser period 33. Den studerande kan i period 33 välja en kombination av nedanstående kurser, omfattande sammanlagt 15 hp inom perioden, förutsatt att behörighetskraven är uppfyllda."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Övriga kurser (valbar period)."
+      }
+    ]
+  }
 }

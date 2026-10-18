@@ -40,5 +40,14 @@
   "programmeTitleEn": "Master's Programme in English – English Literature, 120 credits (HEN2M)",
   "programmeUri": "/utbildning/program/masterprogram-engelska-engelsk-litteratur",
   "faculty": "Språkvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

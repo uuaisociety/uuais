@@ -569,5 +569,28 @@
   "programmeTitleEn": "Primary School Teacher Education Programme – Primary Education – School Years 4-6, 240 credits (UGR0Y)",
   "programmeUri": "/utbildning/program/grundlararprogrammet-4-6",
   "faculty": "Fakulteten för utbildningsvetenskaper",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "15 hp av kursen Engelska 30 hp läses termin 2"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Fortsättning på kursen Engelska 30 hp (15 hp läses termin 3)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Termin 7 består av studier i ett fördjupningsområde inom samhällsorienterade ämnen eller naturorienterande ämnen och teknik. Valbarheten varierar mellan höst- och vårtermin, där minst ett av alternativen ges varje termin för studenter i Uppsala. Endast ett av alternativen erbjuds för studenter på Campus Gotland. Ytterligare fördjupningsområde kan komma att erbjudas för studenter i Uppsala. Fördjupningsområde om 30 hp är obligatoriskt."
+      }
+    ]
+  }
 }

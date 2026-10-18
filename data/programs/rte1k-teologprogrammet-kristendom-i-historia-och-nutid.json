@@ -214,5 +214,14 @@
   "programmeTitleEn": "Bachelor's Programme in Theology – Islam: Past and Present, 180 credits (RTE1K)",
   "programmeUri": "/utbildning/program/teologprogrammet-kristendom-i-historia-och-nutid",
   "faculty": "Teologiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

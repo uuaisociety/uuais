@@ -2856,5 +2856,143 @@
   "programmeTitleEn": "Master's Programme in Materials Engineering, 300 credits (TTM2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-teknisk-fysik-med-materialvetenskap",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "En av kurserna Beräkningsvetenskap I (1TD393) och Introduktion till beräkningsvetenskap (1TD342) är obligatorisk inom examenskravet. Dessa kurser kan inte ingå i examen tillsammans."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "1KB282, Hållbar utveckling ur ett materialperspektiv kan inte ingå i examen tillsammans med 1KB268 Material för hållbar utveckling."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Minst tre av de valbara kursblocken (15 hp per block) år 4 och och år 5 krävs för examen. Ett av de tre blocken ska väljas från period 2, årskurs 5 som innehåller en projektkurs (10 hp)."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Basblock i mikro- och nanoteknik"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Basblock i materialtillverkning och modellering"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "1TM112 Datorbaserad materialmekanik I ersätter 1TE026 Hållfasthetsanalys med finita element. Dessa två kurser kan inte ingå i examen tillsammans."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Basblock i tillverkning och tillämpning"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Basblock i material för energitillämpningar",
+        "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Basblock i materialmodellering",
+        "trackId": "1-i-mikro-och-nanoteknik-med-inriktning-biomaterial"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Minst tre av de valbara kursblocken (15 hp per block) år 4 och och år 5 krävs för examen. Ett av de tre blocken ska väljas från period 2, årskurs 5 som innehåller en projektkurs (10 hp)."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Basblock i materialanalys"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "1FA457, Livscykelanalyser för energi och material kan inte ingå i examen tillsammans med 1KB268 Material för hållbar utveckling."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "1FA457, Livscykelanalyser för energi och material kan inte ingå i examen tillsammans med 1KB268 Material för hållbar utveckling.",
+        "trackId": "material-for-energitillampningar"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Alternativ Entreprenörskolan i Uppsala 60 hp (ej platsgaranti).",
+        "trackId": "material-for-energitillampningar"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Ett av de tre blocken ska väljas från period 2, årskurs 5 som innehåller en projektkurs (10 hp).",
+        "trackId": "material-for-energitillampningar"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Valbara kurser",
+        "trackId": "materialtillverkning"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Kurspaketet Teknikbaserat entreprenörskap och affärsutveckling, 30 hp, termin 9. Ingen platsgaranti. Kan bara ingå i civilingenjörsexamen för de som antagits till programmet läsåret 2025/2026 eller tidigare."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Tillvalskurser:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Kan förläggas till valfri period"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Maximalt 15 högskolepoäng Forskningspraktik i materialvetenskap får ingå i examen. 1TE738 och 1TE740 kan ersätta valbar projektkurs i fördjupningsblocket i årskurs 5 period 2.",
+        "textEn": "A maximum of 15 credits Research Training in Materials Science can be included in the degree."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Övergångsregler för studenter antagna före 2019. För studenter som ansöker om examen enligt de preciserade examenskrav som gällde före ht 2022 kan valbara kurser i de nya kursblocken år 4 och 5 räknas till de minst 40 hp ickeobligatoriska kurser som måste ingå i examen. 1TM143 Tekniska material 5 hp tillsammans med 1TM006 Ytteknik och materialval för funktion och design 5 hp ersätter 1TM663 Material i tekniska system 10 hp. 1TM146 Yt och materialanalys 5 hp tillsammans med 1TM144 Ytavbildning 5 hp ersätter 1TE013 Materialanalys 10 hp. 1KB282 Hållbar utveckling ur ett materialperspektiv 5 hp tillsammans med 1FA457 Livscykelanalyser för energi och material 5 hp ersätter 1KB268 Material för hållbar utveckling 10 hp. Övergångsregler 1TD433 Programmeringsteknik I, 5 hp tillsammans med 1TD342 Introduktion till beräkningsvetenskap, 5 hp ersätter 1TD393 Beräkningsvetenskap I, 5 hp tillsammans med 1TD395 Beräkningsvetenskap II, 5 hp. Studenterna måste alltså ha med antingen kombinationen 1TD433 och 1TD342 eller kombinationen 1TD393 och 1TD395 i examen. 1TM112 Datorbaserad materialmekanik I, 5 hp ersätter 1TE026 Hållfasthetsanalys med finita element, 5 hp."
+      }
+    ]
+  }
 }

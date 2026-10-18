@@ -354,5 +354,24 @@
   "programmeTitleEn": "Master's Programme in Precision Medicine, 120 credits (MPM2M)",
   "programmeUri": "/utbildning/program/masterprogram-precisionsmedicin",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Start av examensarbete: Masterprojekt i Precisionsmedicin, 45 hp (3MG056) alternativt Period med valbar(a) kurs(er) motsvarande 15.0 hp",
+        "textEn": "Start of degree project: Master's project in Precision Medicine, 45 credits (3MG056) alternatively Elective period equivalent to 15.0 credits"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Examensarbete 30 hp, alternativt fortsättning på examensarbete 45 hp.",
+        "textEn": "Master`s Project 30 credits, alternatively continuation of Master`s Project 45 credits."
+      }
+    ]
+  }
 }

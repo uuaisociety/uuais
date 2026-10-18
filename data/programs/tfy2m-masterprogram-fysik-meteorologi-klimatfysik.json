@@ -799,5 +799,85 @@
   "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)",
   "programmeUri": "/utbildning/program/masterprogram-fysik-meteorologi-klimatfysik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Vid få deltagare kan följande kurser ställas in eller ges med annan undervisningsform: 1ME416 och 1ME408."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Alternativt:",
+        "textEn": "Alternative:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Övrig valbar kurs denna period:",
+        "textEn": "Other elective courses within the specialisation (optional period):"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Övrig valbar kurs denna period:",
+        "textEn": "Other elective courses within the specialisation (optional period):"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Alternativt:",
+        "textEn": "Alternative:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 1ME414 ges bara på svenska.",
+        "textEn": "The course 1ME414 is given only in Swedish."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Kursen 1ME421 är för magisterexamen.",
+        "textEn": "1ME421 is for the one-year Master's students."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Övriga kurser:",
+        "textEn": "Other courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Alternativt:",
+        "textEn": "Alternative :"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Kursen 1ME414 ges bara på svenska.",
+        "textEn": "The course 1ME414 is given only in Swedish."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Övriga valbara kurser inom inriktningen (valfri period):",
+        "textEn": "Other elective courses within the specialisation (optional period):"
+      }
+    ]
+  }
 }

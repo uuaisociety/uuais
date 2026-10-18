@@ -223,5 +223,9 @@
   "programmeTitleEn": "Special Needs Teacher Education Programme – The Development of Language, Writing and Reading, 90 credits (USL2Y)",
   "programmeUri": "/utbildning/program/speciallararprogrammet",
   "faculty": "Fakulteten för utbildningsvetenskaper",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

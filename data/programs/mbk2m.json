@@ -162,5 +162,24 @@
   "programmeTitleEn": "Master's Programme in Molecular Medicine, 120 credits (MBK2M)",
   "programmeUri": "/utbildning/program/masterprogram-molekylar-medicin",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Bioimaging och cellanalys, 7.5 hp, Avancerad nivå Regenerativ medicin, 7.5 hp, Avancerad nivå Valbar period, 15 hp Period med valbara kurser motsvarande 15.0 hp eller Start av ett 45.0 hp Masterprojekt Masterprojekt i molekylär medicin, 45.0 hp, Avancerad nivå Masterprojekt i molekylär medicin inklusive försöksdjursvetenskap , 45.0 hp, Avancerad nivå",
+        "textEn": "Bioimaging and Cell Analysis , 7.5 credits, second-cycle level Regenerative Medicine , 7.5 credits, second-cycle level Elective period , 15 credits ​Period of elective courses equivalent to 15.0 credits or Start of 45 credits Master's degree project Master`s Degree Project in Molecular Medicine , 45 credits, second-cycle level Master`s Degree Project in Molecular Medicine Including Laboratory Animal Science , 45 credits, second-cycle level"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Fortsättning på 45,0 hp masterprojekt eller Masterprojekt i molekylär medicin, 30,0 hp, Avancerad nivå",
+        "textEn": "Continuation of 45.0 credits Master`s Degree Project or Master`s Degree Project in Molecular Medicine, 30.0 credits, second-cycle level"
+      }
+    ]
+  }
 }

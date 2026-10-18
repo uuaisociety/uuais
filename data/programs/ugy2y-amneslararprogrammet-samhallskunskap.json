@@ -47,5 +47,14 @@
   "programmeTitleEn": "Upper Secondary School Teacher Education Programme – Technology and Mathematics, 330 credits (UGY2Y)",
   "programmeUri": "/utbildning/program/amneslararprogrammet-samhallskunskap",
   "faculty": "Fakulteten för utbildningsvetenskaper",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

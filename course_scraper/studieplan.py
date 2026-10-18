@@ -51,7 +51,7 @@ PROFILE_SUFFIX_RE = re.compile(r'^(?P<spec>.+?),\s*profil\s+(?P<profile>.+)$', r
 # "Profil mot X" / "Spår - X" carry a connective before the name.
 LEADING_CONNECTIVE_RE = re.compile(r'^(?:mot|i|inom|för)\s+', re.IGNORECASE)
 # "..., 5 av 10 hp (1MA360)" or "..., 5 hp (1MA090)" / English "credits"
-CREDITS_RE = re.compile(r',\s*([\d,.]+)(?:\s*av\s*([\d,.]+))?\s*(?:hp|credits)\b', re.IGNORECASE)
+CREDITS_RE = re.compile(r',\s*([\d,.]+)(?:\s*(?:av|of)\s*([\d,.]+))?\s*(?:hp|credits)\b', re.IGNORECASE)
 # "Mathematics G1F" -> ("Mathematics", "G1F")
 MAIN_FIELD_RE = re.compile(r'^(.*?)\s*([GA]\d[A-Z])$')
 
@@ -261,8 +261,26 @@ def collect_rule_texts(outline):
 
 def build_program(blob, source_url):
     """Assembles the Program record from a parsed studieplan blob."""
-    outline = blob['outline']
-    if outline.get('isLadokOutline'):
+    outline = blob.get('outline') if isinstance(blob, dict) else None
+    if not isinstance(outline, dict):
+        return {
+            'id': None, 'code': None, 'revisionId': None, 'nameSv': '', 'totalCredits': None,
+            'semesters': 0, 'registrationNumber': None, 'finalisedDate': None, 'tracks': [],
+            'courses': [], 'rules': [], 'ruleTexts': [], 'planFormat': 'legacy', 'syllabusCourses': [],
+            'edges': [], 'revisions': [], 'scrapedAt': datetime.now(timezone.utc).isoformat(),
+            'sourceUrl': source_url,
+            'safety': {'status': 'blocked', 'issues': [{'kind': 'malformed-outline', 'message': 'The source outline is missing or malformed.'}]},
+        }
+    is_ladok = bool(outline.get('isLadokOutline'))
+    plan_format = 'ladok' if is_ladok else 'legacy'
+    from program_validation import validate_program
+    preflight = validate_program(blob, {
+        'revisionId': outline.get('id'), 'planFormat': plan_format, 'courses': [], 'tracks': [],
+    })
+    malformed_source = any(issue['kind'].startswith('malformed-') for issue in preflight['issues'])
+    if malformed_source:
+        courses, tracks, rule_texts = [], [], []
+    elif is_ladok:
         courses, rule_texts = flatten_ladok(outline)
         tracks = []
     else:
@@ -270,13 +288,14 @@ def build_program(blob, source_url):
         rule_texts = collect_rule_texts(outline)
     total_credits, _ = parse_credits(f", {clean_html_text(outline.get('credits')) or ''}")
 
-    return {
+    record = {
         'id': outline.get('id'),
         'code': outline.get('code'),
         'revisionId': outline.get('id'),
         'nameSv': outline.get('name'),
+        'introductoryRemarks': clean_html_text(outline.get('introductoryRemarks')) or None,
         'totalCredits': total_credits,
-        'semesters': len(outline.get('semesters') or []),
+        'semesters': len(outline['semesters']) if isinstance(outline.get('semesters'), list) else 0,
         'registrationNumber': outline.get('registrationNumber'),
         'finalisedDate': clean_html_text(outline.get('finalisedDate')),
         'tracks': tracks,
@@ -285,12 +304,16 @@ def build_program(blob, source_url):
         'ruleTexts': rule_texts,
         'planFormat': 'ladok' if outline.get('isLadokOutline') else 'legacy',
         # Only where the plan lists no courses at all: otherwise the prose repeats the rows.
-        'syllabusCourses': [] if courses else courses_from_semester_texts(outline),
+        'syllabusCourses': [] if courses or malformed_source else courses_from_semester_texts(outline),
         'edges': [],
         'revisions': blob.get('revisions') or [],
         'scrapedAt': datetime.now(timezone.utc).isoformat(),
         'sourceUrl': source_url,
     }
+    record['safety'] = validate_program(blob, record)
+    if malformed_source:
+        record['safety'] = preflight
+    return record
 
 
 #: A credit figure closing a line, e.g. "civilrätt, 30 högskolepoäng,".
@@ -385,7 +408,7 @@ def build_syllabus_program(syllabus, source_url):
     else:
         entry = clean_html_text(entry)
 
-    return {
+    record = {
         'id': syllabus.get('id'),
         'code': syllabus.get('code'),
         'revisionId': syllabus.get('id'),
@@ -410,6 +433,8 @@ def build_syllabus_program(syllabus, source_url):
         'scrapedAt': datetime.now(timezone.utc).isoformat(),
         'sourceUrl': source_url,
     }
+    record['safety'] = {'status': 'warning', 'issues': [{'kind': 'syllabus-only', 'message': 'The university publishes no coded course map.'}]}
+    return record
 
 
 def parse_outline_ids(html_content):
@@ -461,6 +486,18 @@ def parse_search_hits(html_content):
 
 #: Periods 1-2 fall in the autumn term, 3-4 in the spring, so a semester's parity picks its own.
 TERM_PERIODS = {1: {'1', '2'}, 0: {'3', '4'}}
+LADOK_CHOOSE_ONE = re.compile(
+    r'^\s*(?:välj\s+en\s+av\s+(?:dessa|följande)\s+kurser|'
+    r'choose\s+one\s+of\s+(?:these|the\s+following)\s+courses)\s*[:.]?\s*$',
+    re.I,
+)
+
+
+def ladok_choice_type(name_sv, name_en):
+    """Only classify a source group as one-of when its heading says so explicitly."""
+    if any(LADOK_CHOOSE_ONE.fullmatch(clean_html_text(name) or '') for name in (name_sv, name_en)):
+        return 'CHOOSE_ONE'
+    return 'NOTE'
 
 
 def parse_ladok_course(education, semester, period_names):
@@ -517,19 +554,33 @@ def flatten_ladok(outline):
         for choice in sem.get('choices') or []:
             codes = [add((part.get('education') or {}), number, False) for part in choice.get('parts') or []]
             codes = [c for c in codes if c]
-            if len(codes) > 1:
+            title_sv = clean_html_text(choice.get('nameSv'))
+            title_en = clean_html_text(choice.get('nameEn'))
+            heading = title_sv or title_en
+            if heading or len(codes) > 1:
                 notes.append({
-                    'textSv': 'En av kurserna ska väljas: ' + ', '.join(codes),
+                    'textSv': heading or 'Rubrik saknas i källan.',
+                    'textEn': title_en,
                     'semester': number,
                     'period': None,
                     'trackId': None,
                     'choiceCodes': codes,
+                    'choiceType': ladok_choice_type(title_sv, title_en),
                 })
 
         for text in sem.get('texts') or []:
-            cleaned = clean_html_text(text.get('descriptionSv'))
-            if cleaned:
-                notes.append({'textSv': cleaned, 'semester': number, 'period': None, 'trackId': None})
+            cleaned_sv = '\n'.join(clean_html_text(text[key]) for key in ('descriptionSv', 'textSv') if text.get(key))
+            cleaned_en = '\n'.join(clean_html_text(text[key]) for key in ('descriptionEn', 'textEn') if text.get(key))
+            title_sv = clean_html_text(text.get('nameSv'))
+            title_en = clean_html_text(text.get('nameEn'))
+            if cleaned_sv or cleaned_en or title_sv or title_en:
+                notes.append({
+                    'textSv': '\n'.join(value for value in (title_sv, cleaned_sv) if value),
+                    'textEn': '\n'.join(value for value in (title_en, cleaned_en) if value),
+                    'semester': number,
+                    'period': None,
+                    'trackId': None,
+                })
 
     return (list(courses.values()), notes)
 

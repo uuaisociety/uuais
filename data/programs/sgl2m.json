@@ -31,5 +31,14 @@
   "programmeTitleEn": "Master's Programme in Global Markets, Local Creativities, 120 credits (SGL2M)",
   "programmeUri": "/utbildning/program/masterprogram-globala-marknader-och-lokal-kreativitet",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

@@ -732,5 +732,59 @@
   "programmeTitleEn": "Master's Programme in Battery Technology and Energy Storage, 120 credits (TBT2M)",
   "programmeUri": "/utbildning/program/masterprogram-batteriteknik-och-energilagring",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "För alla studenter:",
+        "textEn": "All students:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "För studenter som följer spår batterimaterial:",
+        "textEn": "For students following track battery materials:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "För studenter som följer spår battericeller och system:",
+        "textEn": "For students that follow track battery cells and systems:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "För alla studenter:",
+        "textEn": "For all students:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "För studenter som följer spår batterimaterial:",
+        "textEn": "For students following track battery materials:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "För studenter som följer spår battericeller och system:",
+        "textEn": "For students that follow track battery cells and systems:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "1EL033 ges i mån av resurser.",
+        "textEn": "1EL033 is only given if there are enough resources."
+      }
+    ]
+  }
 }

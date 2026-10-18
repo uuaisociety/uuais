@@ -123,6 +123,7 @@ describe('TeamTabsSection', () => {
     render(<TeamTabsSection members={members} />);
     expect(screen.getByText('Board')).toBeInTheDocument();
     expect(screen.queryByText('Development')).not.toBeInTheDocument();
+    expect(screen.queryByText('Research')).not.toBeInTheDocument();
     expect(screen.queryByText('IT')).not.toBeInTheDocument();
     expect(screen.queryByText('Growth')).not.toBeInTheDocument();
     expect(screen.queryByText('Partnerships & Events')).not.toBeInTheDocument();
@@ -153,6 +154,17 @@ describe('TeamTabsSection', () => {
 
     // Click Development tab
     fireEvent.click(screen.getByText('Development'));
+    expect(screen.getByText('Bob')).toBeInTheDocument();
+    expect(screen.queryByText('Alice')).not.toBeInTheDocument();
+  });
+
+  it('shows Research members when the Research tab is selected', () => {
+    const members = [
+      createMember({ name: 'Alice', teams: ['board'] }),
+      createMember({ name: 'Bob', teams: ['research'] }),
+    ];
+    render(<TeamTabsSection members={members} />);
+    fireEvent.click(screen.getByRole('button', { name: /Research/ }));
     expect(screen.getByText('Bob')).toBeInTheDocument();
     expect(screen.queryByText('Alice')).not.toBeInTheDocument();
   });
@@ -225,10 +237,10 @@ describe('TeamTabsSection', () => {
     { position: 'Chairman of the Board', desc: 'Chairman' },
     { position: 'Director of AI', desc: 'Director' },
     { position: 'Lead Developer', desc: 'Lead' },
-  ])('shows "Lead" badge for position starting with "$desc"', ({ position }) => {
+  ])('does not infer a badge from position "$desc"', ({ position }) => {
     const members = [createMember({ name: 'Alice', position })];
     render(<TeamTabsSection members={members} />);
-    expect(screen.getByText('Lead')).toBeInTheDocument();
+    expect(screen.queryByText('Lead')).not.toBeInTheDocument();
   });
 
   it('does not show "Lead" badge for regular positions', () => {
@@ -243,6 +255,12 @@ describe('TeamTabsSection', () => {
     const members = [createMember({ name: 'Alice', badge: 'New Member' })];
     render(<TeamTabsSection members={members} />);
     expect(screen.getByText('New Member')).toBeInTheDocument();
+  });
+
+  it('shows an explicitly assigned Lead badge', () => {
+    const members = [createMember({ name: 'Alice', badge: 'Lead' })];
+    render(<TeamTabsSection members={members} />);
+    expect(screen.getByText('Lead')).toBeInTheDocument();
   });
 
   // ── Bio ────────────────────────────────────────────────────────────────

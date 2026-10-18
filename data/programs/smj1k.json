@@ -598,5 +598,64 @@
   "programmeTitleEn": "Bachelor's Programme in Media, Communication and Journalism Studies, 180 credits (SMJ1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-medie-och-kommunikationsvetenskap-och-journalistik",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Kurspaketet Informationssystem och digital kommunikation 30 hp söks. Där ingår följande kurser:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Valfri termin."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Välj ett av följande kurspaket: Medie- och kommunikationsvetenskap B, digitala mediestudier 30 hp, med delkurserna"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "eller Medie- och kommunikationsvetenskap B, journalistikstudier 30 hp, med delkurserna"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "eller Medie- och kommunikationsvetenskap B, studier i organisationskommunikation 30 hp, med delkurserna"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Välj C-nivå inom samma spår som under termin 4: Medie- och kommunikationsvetenskap C, digitala mediestudier 30 hp, med delkurserna"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "eller Medie- och kommunikationsvetenskap C, journalistikstudier 30 hp med delkurserna"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "eller Medie- och kommunikationsvetenskap C, studier i organisationskommunikation 30 hp, med delkurserna"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Valfri termin."
+      }
+    ]
+  }
 }

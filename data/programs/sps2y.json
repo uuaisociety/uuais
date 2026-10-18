@@ -591,7 +591,7 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "2PP430",
         "2PP432",
@@ -601,8 +601,8 @@
       ],
       "semester": 9,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 2PP430, 2PP432, 2PP431, 2PP433, 2PP434",
-      "labelEn": "Choose one of 5 courses.",
+      "textSv": "Rubrik saknas i källan.",
+      "labelEn": "No heading in source.",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -709,5 +709,30 @@
   "programmeTitleEn": "Psychology Programme, 300 credits (SPS2Y)",
   "programmeUri": "/utbildning/program/psykologprogrammet",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 9,
+        "textSv": "Rubrik saknas i källan."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Observera\n- Externa valbara kurser kan tillgodoräknas inom programmet enligt programansvarigs beslut. - Denna termin läses 7,5 hp av kursen Examensarbete (30 hp).",
+        "textEn": "Note\n- External elective courses may be credited within the programme according to the Program Director's decision. - This semester includes 7,5 credits of the course Master's Thesis (30 credits)."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Examensarbete, 30 hp (22,5 hp)* Psykoterapeutisk fördjupning III, 7,5 hp* * Obligatorisk",
+        "textEn": "Master's Thesis, 30 credits (22,5 credits)* Psychotherapy with Advanced Studies in Psychodynamic or Cognitive Behavioural Theory III, 7,5 credits* *Compulsory"
+      }
+    ]
+  }
 }

@@ -1070,7 +1070,7 @@
     },
     {
       "id": "rule-2",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TE763",
         "1TS363",
@@ -1078,14 +1078,14 @@
       ],
       "semester": 7,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TE763, 1TS363, 1TS328",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Profilering Affärsutveckling och innovation",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-3",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1DL360",
         "1DL400",
@@ -1094,8 +1094,8 @@
       ],
       "semester": 7,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1DL360, 1DL400, 1TS321, 1DT118",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Profilering Industriell analys och digitalisering",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
@@ -1114,7 +1114,7 @@
     },
     {
       "id": "rule-5",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TS311",
         "1TE742",
@@ -1123,14 +1123,14 @@
       ],
       "semester": 8,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TS311, 1TE742, 1TE735, 1TE051",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Profilering Affärsutveckling och innovation",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-6",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1RT700",
         "1TD169",
@@ -1138,8 +1138,8 @@
       ],
       "semester": 8,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1RT700, 1TD169, 1TS360",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Profilering Industriell analys och digitalisering",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
@@ -1158,29 +1158,29 @@
     },
     {
       "id": "rule-8",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TS344",
         "2JS560"
       ],
       "semester": 9,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TS344, 2JS560",
-      "labelEn": "Choose one of 2 courses.",
+      "textSv": "Profilering Affärsutveckling och innovation",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-9",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1RT705",
         "1TS316"
       ],
       "semester": 9,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1RT705, 1TS316",
-      "labelEn": "Choose one of 2 courses.",
+      "textSv": "Profilering Industriell analys och digitalisering",
+      "labelEn": null,
       "cohortBefore": null,
       "source": "plan"
     },
@@ -1807,5 +1807,76 @@
   "programmeTitleEn": "Master's Programme in Industrial Engineering and Management, 300 credits (TIE2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-industriell-ekonomi",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kurserna Linjär algebra och geometri I, 5 hp (1MA025) och Linjär algebra I, 5 hp (1MA350) kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Introduktion till beräkningsvetenskap (1TD342) ersätter kursen Beräkningsvetenskap I (1TD393). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet. Virtuell utveckling av automatiserade produktionssystem (1EL007) ersätter kursen Virtuell utveckling av automatiserade produktionssystem (1TS319). Kurserna kan inte samtidigt ingå i examen. En av kurserna är obligatorisk inom examenskravet."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 7,
+        "textSv": "Profilering Affärsutveckling och innovation"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 7,
+        "textSv": "Profilering Industriell analys och digitalisering"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "I examen ska ingå minst 20 hp från den ena profileringen och minst 10 hp från den andra profileringen. Profileringskurser kan även läsas termin 8 och 9. Kurserna (1TE779) Organisering av kunskapsintensivt arbete och Organisering av teknikintensivt arbete (1TS363) kan inte ingå i examen samtidigt."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 8,
+        "textSv": "Profilering Affärsutveckling och innovation"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 8,
+        "textSv": "Profilering Industriell analys och digitalisering"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "Kurserna Modellering och optimering av produktionssystem (1TS360) och Modellering och optimering av logistiska system(1TE776) kan inte ingå i examen samtidigt."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 9,
+        "textSv": "Profilering Affärsutveckling och innovation"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 9,
+        "textSv": "Profilering Industriell analys och digitalisering"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Kursen Etik i teknik och organisering (1TS353) kan ingå både i profileringen mot Affärsutveckling och innovation och profileringen mot Industriell analys och digitalisering."
+      }
+    ]
+  }
 }

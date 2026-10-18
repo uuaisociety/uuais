@@ -282,5 +282,9 @@
   "programmeTitleEn": "Dietetics Programme, 180 credits (SDI1Y)",
   "programmeUri": "/utbildning/program/dietistprogrammet",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

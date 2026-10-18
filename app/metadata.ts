@@ -1,19 +1,32 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from 'next';
 
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://uuais.com';
+function getSiteUrl(value: string): string {
+  try {
+    new URL(value);
+    return value;
+  } catch {
+    return 'https://uuais.com';
+  }
+}
 
-const description = 'UU AI Society - Connecting students passionate about Artificial Intelligence in Uppsala';
+export const SITE_URL = getSiteUrl(
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://uuais.com',
+);
+
+const description =
+  'UU AI Society - Connecting students passionate about Artificial Intelligence in Uppsala';
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: '#c8102e',
-}
+};
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'UU AI Society',
-    template: '%s | UU AI Society'
+    template: '%s | UU AI Society',
   },
   description,
   keywords: [
@@ -50,7 +63,7 @@ export const metadata: Metadata = {
       {
         rel: 'apple-touch-icon-precomposed',
         url: '/images/apple-touch-icon.png',
-      }
+      },
     ],
   },
   manifest: '/site.webmanifest',
@@ -69,7 +82,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: {
       default: 'UU AI Society',
-      template: '%s | UU AI Society'
+      template: '%s | UU AI Society',
     },
     description,
     type: 'website',
@@ -80,7 +93,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: 'UU AI Society',
-      }
+      },
     ],
     siteName: 'UU AI Society',
   },
@@ -95,5 +108,5 @@ export const metadata: Metadata = {
   },
   other: {
     'msapplication-TileColor': '#c8102e',
-  }
-}
+  },
+};

@@ -111,5 +111,14 @@
   "programmeTitleEn": "Bachelor's Programme in Languages, 180 credits (HSV1K)",
   "programmeUri": "/utbildning/program/sprakvetarprogrammet",
   "faculty": "Språkvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

@@ -200,5 +200,29 @@
   "programmeTitleEn": "Master's Programme in Evolutionary Biology – MEME, 120 credits (TEB2M)",
   "programmeUri": "/utbildning/program/masterprogram-evolutionsbiologi-meme",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Studiegången inom programmet anges nedan per studieår. Varje år är indelat i fyra perioder, period 11 betyder alltså år ett period ett osv. Det tvååriga programmet ges inte i sin helhet i Uppsala. I varje kohort startar ungefär hälften av studenterna i Uppsala och resten i Groningen. Under termin 2 bedrivs studier antingen i Montpellier eller i München. Under termin 3 och 4 gör studenterna egna forskningsprojekt vid något eller några av de fyra partneruniversiteten eller hos de affilierade universiteten. Nivå/Djup anges med; A1N = Avancerad nivå, har endast kurs/er på grundnivå som förkunskapskrav A1F = Avancerad nivå, har kurs/er på avancerad nivå som förkunskapskrav A1E = Examensarbete för magisterexamen A2E = Examensarbete för masterexamen. Område anges med förkortningarna, t.ex. B=Biologi; I de fall kurserna ges av annat lärosäte anges Uppsala universitets bedömning av Nivå/Djup och område."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Under termin 3 och 4 väljer studenterna vilket universitet de vill genomföra sina studier. Det är också möjligt att göra projekt vid Harvard University eller Université Lausanne. Period Kurskod Kursnamn Hp Nivå/Djup Område 1-2 RuG Research project 30 A1F B 1-2 RuG Thesis project 30 A2E B 1-2 UM2 Research project 30 A1F B 1-2 UM2 Thesis project 30 A2E B 1-2 LMU Research training + Skill course + kurser listade under termin 2 (totalt 30 hp) 30 A1N B 1-2 LMU Thesis project 30 A2E B",
+        "textEn": "During semester 3 and 4 the students choose at which university they want to study. It is also possible to do a project at Harvard University or at Université Lausanne. Period Course code Course name Credits Level/Depth Main field of study 1-2 RuG Research project 30 A1F B 1-2 RuG Thesis project 30 A2E B 1-2 UM2 Research project 30 A1F B 1-2 UM2 Thesis project 30 A2E B 1-2 LMU Research training + Skill course + courses listed under semester 2 (a total of 30 credits) 30 A1N B 1-2 LMU Thesis project 30 A2E B"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Under termin 3 och 4 väljer studenterna vilket universitet de vill genomföra sina studier. Det är också möjligt att göra projekt vid Harvard University eller Université Lausanne. Period Kurskod Kursnamn Hp Nivå/Djup Område 3-4 RuG Research project 30 A1F B 3-4 RuG Thesis project 30 A2E B 3-4 UM2 Research project 30 A1F B 3-4 UM2 Thesis project 30 A2E B 3-4 LMU Thesis project 30 A2E B",
+        "textEn": "During semester 3 and 4 the students choose at which university they want to study. It is also possible to do a project at Harvard University or at Université Lausanne. Period Course code Course name Credits Level/Depth Main field of study 3-4 RuG Research project 30 A1F B 3-4 RuG Thesis project 30 A2E B 3-4 UM2 Research project 30 A1F B 3-4 UM2 Thesis project 30 A2E B 3-4 LMU Thesis project 30 A2E B"
+      }
+    ]
+  }
 }

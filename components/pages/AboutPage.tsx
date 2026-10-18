@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { Card } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { useApp } from "@/contexts/AppContext";
-import { updatePageMeta } from "@/utils/seo";
-import HeroSplash from "@/components/HeroSplash";
-import TeamTabsSection from "@/components/team/TeamTabsSection";
-import { DiscordCta } from "@/components/common/DiscordCta";
-import HistorySection from "@/components/about/HistorySection";
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import { Card } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { useApp } from '@/contexts/AppContext';
+import { updatePageMeta } from '@/utils/seo';
+import HeroSplash from '@/components/HeroSplash';
+import TeamTabsSection from '@/components/team/TeamTabsSection';
+import { DiscordCta } from '@/components/common/DiscordCta';
+import HistorySection from '@/components/about/HistorySection';
 
 // The parens are a visual accent; each section is named by `aria-label` instead.
 const SectionHead: React.FC<{ paren: string; title: string }> = ({
@@ -24,38 +24,38 @@ const SectionHead: React.FC<{ paren: string; title: string }> = ({
 
 // The merged sections lost their nav slots, so they stay one click away here.
 const sections = [
-  { id: "mission", label: "Mission" },
-  { id: "team", label: "Team" },
-  { id: "contact", label: "Contact" },
-  { id: "faq", label: "FAQ" },
-  { id: "history", label: "History" },
+  { id: 'mission', label: 'Mission' },
+  { id: 'team', label: 'Team' },
+  { id: 'contact', label: 'Contact' },
+  { id: 'faq', label: 'FAQ' },
+  { id: 'history', label: 'History' },
 ];
 
 const contactInfo = [
   {
-    title: "General",
-    email: "contact@uuais.com",
-    description: "For general inquiries.",
+    title: 'General',
+    email: 'contact@uuais.com',
+    description: 'For general inquiries.',
   },
   {
-    title: "Website",
-    email: "it@uuais.com",
-    description: "For questions about the website.",
+    title: 'Website',
+    email: 'it@uuais.com',
+    description: 'For questions about the website.',
   },
   {
-    title: "Partnerships",
-    email: "partnerships@uuais.com",
-    description: "For partnerships, sponsorships, or collaborations.",
+    title: 'Partnerships',
+    email: 'partnerships@uuais.com',
+    description: 'For partnerships, sponsorships, or collaborations.',
   },
   {
-    title: "Development",
-    email: "dev@uuais.com",
-    description: "For inquiries related to our projects.",
+    title: 'Development',
+    email: 'dev@uuais.com',
+    description: 'For inquiries related to our projects.',
   },
   {
-    title: "Research",
-    email: "research@uuais.com",
-    description: "For research collaborations.",
+    title: 'Research',
+    email: 'research@uuais.com',
+    description: 'For research collaborations.',
   },
 ];
 
@@ -78,12 +78,23 @@ const convertEmailsToLinks = (text: string): React.ReactNode =>
     );
 
 const AboutPage: React.FC = () => {
-  const { state } = useApp();
+  const { state, teamDirectory } = useApp();
+  const ensureTeamDirectoryLoaded = teamDirectory.ensureLoaded;
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   useEffect(() => {
+    let active = true;
+    queueMicrotask(() => {
+      if (active) void ensureTeamDirectoryLoaded();
+    });
+    return () => {
+      active = false;
+    };
+  }, [ensureTeamDirectoryLoaded]);
+
+  useEffect(() => {
     updatePageMeta(
-      "About Us",
+      'About Us',
       "Learn about UU AI Society's history, mission, vision, and the team behind our community — and how to get in touch",
     );
   }, []);
@@ -92,7 +103,7 @@ const AboutPage: React.FC = () => {
   useEffect(() => {
     const id = window.location.hash.slice(1);
     if (id)
-      document.getElementById(id)?.scrollIntoView({ behavior: "instant" });
+      document.getElementById(id)?.scrollIntoView({ behavior: 'instant' });
   }, []);
 
   // Light up the jump link for whichever section is currently under the header.
@@ -111,7 +122,7 @@ const AboutPage: React.FC = () => {
         setActiveSection(visible[0]?.id ?? null);
       },
       // Observe just inside the anchor target to avoid fractional overlap with the previous section.
-      { rootMargin: "-120px 0px -70% 0px" },
+      { rootMargin: '-120px 0px -70% 0px' },
     );
     sections.forEach(({ id }) => {
       const el = document.getElementById(id);
@@ -151,19 +162,19 @@ const AboutPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
           <div
             className="flex gap-0.5 overflow-x-auto py-2"
-            style={{ scrollbarWidth: "none" }}
+            style={{ scrollbarWidth: 'none' }}
           >
             {sections.map((section) => (
               <a
                 key={section.id}
                 href={`#${section.id}`}
                 aria-current={
-                  activeSection === section.id ? "location" : undefined
+                  activeSection === section.id ? 'location' : undefined
                 }
                 className={`shrink-0 px-3 py-1.5 rounded-sm mono-label transition-colors duration-300 ${
                   activeSection === section.id
-                    ? "text-current bg-current/[0.12]"
-                    : "text-current/60 hover:text-current hover:bg-current/[0.07]"
+                    ? 'text-current bg-current/[0.12]'
+                    : 'text-current/60 hover:text-current hover:bg-current/[0.07]'
                 }`}
               >
                 {section.label}
@@ -214,7 +225,16 @@ const AboutPage: React.FC = () => {
           className="scroll-mt-28 pt-24 sm:pt-32"
         >
           <SectionHead paren="Meet" title="our team" />
-          <TeamTabsSection members={state.teamMembers} />
+          <TeamTabsSection
+            members={teamDirectory.directory?.teamMembers ?? []}
+            metadata={teamDirectory.directory?.metadata}
+            selectedTeam={teamDirectory.directory?.team}
+            selectedYear={teamDirectory.directory?.year}
+            loading={teamDirectory.loading}
+            error={teamDirectory.error}
+            onSelectionChange={teamDirectory.loadSelection}
+            onRetry={teamDirectory.retry}
+          />
         </section>
 
         {/* Contact */}

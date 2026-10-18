@@ -260,5 +260,33 @@
   "programmeTitleEn": "Master's Programme in Biomedical Laboratory Science, 120 credits (MBV2M)",
   "programmeUri": "/utbildning/program/masterprogram-biomedicinsk-laboratorievetenskap",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "I studieplanen anges kursordning och kurser för studier på halvfart och det framgår även vilka kurser som är obligatoriska och valbara. Endast valbara kurser med platsgaranti har namngivits. För studier på helfart kan termin 1 och 3, samt 2 och 4 kombineras, och de två sista kurserna läsas på helfart."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "alternativt 3DR715 Datortomografi, 15 hp alternativt Valbara kurser motsvarande 15 hp"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "alternativt 3DR915 Nuklearmedicin och PET, 15 hp alternativt Valbara kurser motsvarande 15 hp"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "alternativt 3DR815 Magnetisk resonanstomografi, 15 hp alternativt Valbara kurser motsvarande 15 hp"
+      }
+    ]
+  }
 }

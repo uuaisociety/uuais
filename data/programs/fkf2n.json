@@ -27,5 +27,14 @@
   "programmeTitleEn": "Master's Programme in Clinical Pharmacy, 60 credits (FKF2N)",
   "programmeUri": "/utbildning/program/magisterprogram-klinisk-farmaci",
   "faculty": "Farmaceutiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

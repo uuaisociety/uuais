@@ -12,13 +12,15 @@ export const CATEGORY_STYLE: Record<
     color: 'var(--chart-5)',
   },
   MANDATORY_ELECTIVE: {
-    label: 'Mandatory elective',
-    description: 'Choose within your specialisation',
+    label: 'Specialisation course',
+    description:
+      'Listed within this specialisation; the source does not mark it compulsory',
     color: 'var(--chart-2)',
   },
   OPTIONAL_ELECTIVE: {
-    label: 'Optional elective',
-    description: 'Recommended but not required',
+    label: 'Listed course',
+    description:
+      'The source does not mark this course compulsory; confirm official requirements and restrictions',
     color: 'var(--chart-4)',
   },
   PROJECT_THESIS: {
@@ -27,13 +29,16 @@ export const CATEGORY_STYLE: Record<
     color: 'var(--chart-3)',
   },
   OTHER: {
-    label: 'Other / free elective',
+    label: 'Other listed course',
     description: 'Other courses',
     color: 'var(--muted-foreground)',
   },
 };
 
-export const STATUS_STYLE: Record<CourseStatus, { label: string; color: string }> = {
+export const STATUS_STYLE: Record<
+  CourseStatus,
+  { label: string; color: string }
+> = {
   COMPLETED: { label: 'Completed', color: 'var(--chart-4)' },
   IN_PROGRESS: { label: 'In progress', color: 'var(--chart-2)' },
   UPCOMING: { label: 'Upcoming', color: 'var(--chart-3)' },
@@ -46,7 +51,13 @@ export const STATUS_STYLE: Record<CourseStatus, { label: string; color: string }
  */
 export const EDGE_STYLE: Record<
   ProgramEdgeType,
-  { label: string; description: string; dash?: string; color: string; opacity: number }
+  {
+    label: string;
+    description: string;
+    dash?: string;
+    color: string;
+    opacity: number;
+  }
 > = {
   HARD: {
     label: 'Hard requirement',

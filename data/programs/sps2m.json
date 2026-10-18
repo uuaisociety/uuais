@@ -371,5 +371,24 @@
   "programmeTitleEn": "Master's Programme in Psychology, 120 credits (SPS2M)",
   "programmeUri": "/utbildning/program/masterprogram-psykologi",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Valbara kurser i psykologi, 15 hp",
+        "textEn": "Elective courses in psychology, 15 credits"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Möjlighet att välja vetenskaplig praktik (15 hp) samt valbara kurser i psykologi eller inom andra närliggande ämnen (15 hp). Alternativt att välja valbara kurser i psykologi eller närliggande ämnen (30 hp, dvs hela terminen).",
+        "textEn": "Possibility to choose internship (15 credits) and elective courses in psychology or interdisciplinary fields 15 credits. Or possibility to choose elective courses in psychology or interdisciplinary fields (30 credits, the whole semester)."
+      }
+    ]
+  }
 }

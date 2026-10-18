@@ -57,5 +57,14 @@
   "programmeTitleEn": "Master's Programme in Swedish – Swedish and Scandinavian Languages, 120 credits (HSV2M)",
   "programmeUri": "/utbildning/program/masterprogram-svenska-flersprakighet-och-svenska-som-andrasprak",
   "faculty": "Språkvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

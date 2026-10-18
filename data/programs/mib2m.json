@@ -247,5 +247,31 @@
   "programmeTitleEn": "Master's Programme in Infection Biology, 120 credits (MIB2M)",
   "programmeUri": "/utbildning/program/masterprogram-infektionsbiologi",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Under termin 2 och/eller 3 kan kurs/kurser bytas ut mot forskningsprojektkurs inom infektionsbiologi om 15 eller 30 Hp.",
+        "textEn": "During semester 2 and/or 3 course/courses may be exchanged for a research project course in infection biology corresponding to 15 or 30 credits"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Under termin 2 och/eller 3 kan kurs/kurser bytas ut mot forskningsprojektkurs inom infektionsbiologi om 15 eller 30 Hp.",
+        "textEn": "During semester 2 and/or 3 course/courses may be exchanged for a research project course in infection biology corresponding to 15 or 30 credits"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Under termin 3 finns möjlighet att påbörja ett examensarbete om 45 hp i infektionsbiologi, denna kurs ersätter i så fall den obligatoriska 30 hp masterprojektkursen.",
+        "textEn": "During the third semester a Master's degree project in infection biology of 45 credits may be started, this course will in this case replace the mandatory 30 credits Master's degree project course."
+      }
+    ]
+  }
 }

@@ -780,5 +780,52 @@
   "programmeTitleEn": "Bachelor's Programme in Leadership – Quality Management – Improvement, 180 credits (TKV1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-ledarskap-kvalitet-forbattring-distans",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "1TG340 ersätter 1TG253. Ingen av dessa kan ingå i examen tillsammans.",
+        "textEn": "1TG340 replaces 1TG253, and cannot be included in a degree at the same time."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "1TG314 ersätter 1TG295 och 1TG268. Ingen av dessa kan ingå i examen tillsammans.",
+        "textEn": "1TG314 replaces 1TG295 and 1TG268, and cannot be included in a degree at the same time."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "VALBAR TERMIN",
+        "textEn": "ELIGIBLE SEMESTER"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "1TG314 ersätter 1TG295 och 1TG268. 1TG314 kan inte ingå i examen tillsammans med vare sig 1TG295 eller 1TG268.",
+        "textEn": "1TG314 replaces 1TG295 and 1TG268, neither of which can be included in a degree at the same time."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "1TG340 ersätter 1TG253. Dessa kurser kan inte ingå i examen tillsammans.",
+        "textEn": "1TG340 replaces 1TG253, and cannot be included in a degree at the same time."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "1TG276 och 1TG339 kan inte ingå i examen tillsammans på grund av innehållsmässigt överlapp.",
+        "textEn": "1TG276 och 1TG339 cannot be included in the degree together due to overlap."
+      }
+    ]
+  }
 }

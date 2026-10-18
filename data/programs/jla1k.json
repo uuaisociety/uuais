@@ -308,5 +308,9 @@
   "programmeTitleEn": "Bachelor's Programme in Land Management, 180 credits (JLA1K)",
   "programmeUri": "/utbildning/program/lantmateriprogrammet",
   "faculty": "Juridiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

@@ -128,5 +128,31 @@
   "programmeTitleEn": "Master's Programme in Drug Management, 120 credits (FLM2M)",
   "programmeUri": "/utbildning/program/masterprogram-lakemedelsanvandning",
   "faculty": "Farmaceutiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "samt ett av nedanstående alternativ: a) Valbara kurser om 22,5 hp b) Valbar kurs 7,5 hp och magisterprojekt i läkemedelsanvändning, 3FB009, 15 hp",
+        "textEn": "and one of the alternatives: a) Elective courses 22.5 credits b) Elective courses 7.5 credits and Degree Project 3FB009, 15 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Ett av nedanstående alternativ kan väljas: a) Valbara kurser b) Valbara kurser och magisterprojekt i läkemedelsanvändning 15 hp (3FB009) eller c) Magisterprojekt i läkemedelsanvändning 30 hp (3FB008).",
+        "textEn": "One of the alternatives: a) Elective courses, b) Elective courses and degree projekt 15 credits (code 3FB009) or c) Degree project 30 credits (code 3FB008)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Valbara kurser.",
+        "textEn": "Elective courses."
+      }
+    ]
+  }
 }

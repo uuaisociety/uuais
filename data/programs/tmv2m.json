@@ -1136,5 +1136,71 @@
   "programmeTitleEn": "Master's Programme in Materials Science, 120 credits (TMV2M)",
   "programmeUri": "/utbildning/program/masterprogram-materialvetenskap",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "blocked",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Följande beteckningar används: A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp A1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivå A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Alla studenter:",
+        "textEn": "All students:"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 2,
+        "textSv": "Spår Kvantmaterial (studenter med fysik- eller materialbakgrund):",
+        "textEn": "Track Quantum materials (students with physics och materials background):"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 2,
+        "textSv": "Spår Mjuka material (studenter med kemibakgrund):",
+        "textEn": "Track Soft materials (students with chemistry background):"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 2,
+        "textSv": "Spår Energirelaterade material (studenter med fysik-, kemi eller materialbakgrund):",
+        "textEn": "Track Energy-related materials (students with physics/chemistry/materials background):"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 3,
+        "textSv": "Spår Kvantmaterial (studenter med fysik- eller materialbakgrund):",
+        "textEn": "Track Quantum materials (students with physics och materials background):"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 3,
+        "textSv": "Spår Mjuka material (studenter med kemibakgrund):",
+        "textEn": "Track Soft materials (students with chemistry background):"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 3,
+        "textSv": "Spår Energirelaterade material (studenter med fysik-, kemi- eller materialbakgrund):",
+        "textEn": "Track Energy-related materials (students with physics/chemistry/materials background):"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Alla spår:",
+        "textEn": "All tracks:"
+      }
+    ]
+  }
 }

@@ -1,4 +1,4 @@
-"use server";
+'use server';
 
 import { adminDb } from '@/lib/firebase-admin';
 import { gzipSync, gunzipSync } from 'zlib';
@@ -10,47 +10,64 @@ const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 // In-memory cache for the current process (faster than Firestore read)
 let memoryCache: { courses: Course[]; timestamp: number } | null = null;
+let coursesInFlight: Promise<Course[]> | null = null;
+let cacheGeneration = 0;
+let cacheInvalidation: Promise<void> | null = null;
 
 /**
  * Get courses from persistent cache or refresh from source.
- * This ensures at most 1 read per day for the full course catalog,
- * regardless of how many users or server instances are active.
+ * Warm process hits are free; cold processes read the cache document and expired caches scan the course collection.
  */
 async function getCachedCourses(): Promise<Course[]> {
+  while (cacheInvalidation) await cacheInvalidation;
   const now = Date.now();
-  
+
   // 1. Check in-memory cache first (fastest, same process)
-  if (memoryCache && (now - memoryCache.timestamp) < CACHE_TTL_MS) {
-    console.log("Returning memoryCache");
+  if (memoryCache && now - memoryCache.timestamp < CACHE_TTL_MS) {
+    console.log('Returning memoryCache');
     return memoryCache.courses;
   }
-  
+
+  if (coursesInFlight) return coursesInFlight;
+
+  const generation = cacheGeneration;
+  const loading = loadCachedCourses(generation);
+  coursesInFlight = loading;
+  try {
+    return await loading;
+  } finally {
+    if (coursesInFlight === loading) coursesInFlight = null;
+  }
+}
+
+async function loadCachedCourses(generation: number): Promise<Course[]> {
   try {
     // 2. Check persistent Firestore cache (shared across all instances)
-    const cacheDoc = await adminDb.collection(CACHE_COLLECTION).doc(CACHE_DOC_ID).get();
-    
+    const cacheDoc = await adminDb
+      .collection(CACHE_COLLECTION)
+      .doc(CACHE_DOC_ID)
+      .get();
+
     if (cacheDoc.exists) {
       const data = cacheDoc.data();
-      const cacheAge = now - (data?.updatedAt ?? 0);
-      
+      const cacheAge = Date.now() - (data?.updatedAt ?? 0);
+
       if (cacheAge < CACHE_TTL_MS && data?.data && data?.compressed) {
         // Persistent cache is valid - decompress and use it
         const compressed = Buffer.from(data.data, 'base64');
         const decompressed = gunzipSync(compressed);
         const courses = JSON.parse(decompressed.toString()) as Course[];
-        memoryCache = { courses, timestamp: now };
-        console.log("Returning cacheDoc");
+        if (generation === cacheGeneration)
+          memoryCache = { courses, timestamp: Date.now() };
+        console.log('Returning cacheDoc');
         return courses;
       }
     }
-    
-    // 3. Cache miss or expired - refresh from source
-    return await refreshCourseCache();
   } catch (error) {
     console.error('Cache read failed, falling back to source:', error);
-    // Fallback: fetch directly from source without caching
-    return await fetchCoursesFromSource();
   }
+  // Cache misses, and cache read failures, refresh through the same write-tolerant path.
+  return refreshCourseCache(generation);
 }
 
 /**
@@ -59,13 +76,13 @@ async function getCachedCourses(): Promise<Course[]> {
  */
 function sanitizeCourseForCache(course: Course): Record<string, unknown> {
   const sanitized: Record<string, unknown> = {};
-  
+
   for (const [key, value] of Object.entries(course)) {
     if (value !== undefined) {
       sanitized[key] = value;
     }
   }
-  
+
   return sanitized;
 }
 
@@ -73,20 +90,21 @@ function sanitizeCourseForCache(course: Course): Record<string, unknown> {
  * Refresh the cache by fetching all courses from Firestore and storing them.
  * This is the ONLY place where we read the entire courses collection.
  */
-async function refreshCourseCache(): Promise<Course[]> {
-  console.log("Refreshing course cache");
+async function refreshCourseCache(generation: number): Promise<Course[]> {
+  console.log('Refreshing course cache');
   const courses = await fetchCoursesFromSource();
   const now = Date.now();
-  
+  if (generation === cacheGeneration) memoryCache = { courses, timestamp: now };
+
   try {
     // Sanitize courses before storing (Firestore doesn't accept undefined)
     const sanitizedCourses = courses.map(sanitizeCourseForCache);
-    
+
     // Compress courses to fit within Firestore's 1MB document limit
     const jsonString = JSON.stringify(sanitizedCourses);
     const compressed = gzipSync(jsonString);
     const base64Data = compressed.toString('base64');
-    
+
     // Store in persistent cache (shared across all instances)
     await adminDb.collection(CACHE_COLLECTION).doc(CACHE_DOC_ID).set({
       data: base64Data,
@@ -95,15 +113,14 @@ async function refreshCourseCache(): Promise<Course[]> {
       version: 2,
       courseCount: courses.length,
     });
-    
-    // Update in-memory cache
-    memoryCache = { courses, timestamp: now };
-    
-    console.log(`[Courses] Cache refreshed with ${courses.length} courses at ${new Date(now).toISOString()}`);
+
+    console.log(
+      `[Courses] Cache refreshed with ${courses.length} courses at ${new Date(now).toISOString()}`,
+    );
   } catch (error) {
     console.error('Failed to write cache, but returning courses:', error);
   }
-  
+
   return courses;
 }
 
@@ -112,18 +129,38 @@ async function refreshCourseCache(): Promise<Course[]> {
  */
 async function fetchCoursesFromSource(): Promise<Course[]> {
   const snapshot = await adminDb.collection('courses').get();
-  return snapshot.docs.map(doc => docToCourse(doc.id, doc.data() as Record<string, unknown>));
+  return snapshot.docs.map((doc) =>
+    docToCourse(doc.id, doc.data() as Record<string, unknown>),
+  );
 }
 
 /**
  * Force refresh the cache - useful for admin operations or scheduled jobs.
  */
 export async function invalidateCourseCache(): Promise<void> {
+  cacheGeneration += 1;
   memoryCache = null;
+  const pendingLoad = coursesInFlight;
+  const previousInvalidation = cacheInvalidation;
+  coursesInFlight = null;
+  const invalidation = (async () => {
+    await previousInvalidation;
+    try {
+      await pendingLoad;
+    } catch {
+      // Ignore a failed request while clearing stale cache data.
+    }
+    try {
+      await adminDb.collection(CACHE_COLLECTION).doc(CACHE_DOC_ID).delete();
+    } catch {
+      // Ignore if it doesn't exist.
+    }
+  })();
+  cacheInvalidation = invalidation;
   try {
-    await adminDb.collection(CACHE_COLLECTION).doc(CACHE_DOC_ID).delete();
-  } catch {
-    // Ignore if doesn't exist
+    await invalidation;
+  } finally {
+    if (cacheInvalidation === invalidation) cacheInvalidation = null;
   }
 }
 
@@ -239,25 +276,47 @@ function normalizeLevel(lvl?: string): Course['level'] | undefined {
   if (!lvl) return undefined;
   const v = lvl.toLowerCase();
   if (v.includes('preparatory')) return 'Preparatory';
-  if (v.includes("bachelor")) return "Bachelor's";
-  if (v.includes("master")) return "Master's";
+  if (v.includes('bachelor')) return "Bachelor's";
+  if (v.includes('master')) return "Master's";
   return undefined;
 }
 
 function docToCourse(id: string, data: Record<string, unknown>): Course {
-  const title = (data.Course_name as string)?.trim() || (data.title as string)?.trim() || 'Untitled Course';
+  const title =
+    (data.Course_name as string)?.trim() ||
+    (data.title as string)?.trim() ||
+    'Untitled Course';
   const code = (data.code as string) || '';
   const link = (data.Link as string) || (data.link as string) || '';
-  const description = (data.course_content as string)?.trim() || (data.description as string)?.trim() || '';
-  const Learning_outcomes = (data.Learning_outcomes as string) || (data.learning_outcomes as string) || '';
+  const description =
+    (data.course_content as string)?.trim() ||
+    (data.description as string)?.trim() ||
+    '';
+  const Learning_outcomes =
+    (data.Learning_outcomes as string) ||
+    (data.learning_outcomes as string) ||
+    '';
   const level = normalizeLevel(data.level as string | undefined);
   const creditsRaw = data.credits;
-  const credits = typeof creditsRaw === 'number' ? creditsRaw : (typeof creditsRaw === 'string' ? parseFloat(creditsRaw) || undefined : undefined);
-  const creditsTag = credits ? `${credits} credits` : (typeof creditsRaw === 'string' ? creditsRaw : '');
+  const credits =
+    typeof creditsRaw === 'number'
+      ? creditsRaw
+      : typeof creditsRaw === 'string'
+        ? parseFloat(creditsRaw) || undefined
+        : undefined;
+  const creditsTag = credits
+    ? `${credits} credits`
+    : typeof creditsRaw === 'string'
+      ? creditsRaw
+      : '';
 
   const tags = [
     ...(creditsTag ? [creditsTag] : []),
-    ...(data.language_of_instruction ? [data.language_of_instruction as string] : (data.language ? [data.language as string] : [])),
+    ...(data.language_of_instruction
+      ? [data.language_of_instruction as string]
+      : data.language
+        ? [data.language as string]
+        : []),
     ...(data.location ? [data.location as string] : []),
     ...(data.pace_of_study ? [`Pace: ${data.pace_of_study as string}`] : []),
     ...(level ? [level] : []),
@@ -283,10 +342,14 @@ function docToCourse(id: string, data: Record<string, unknown>): Course {
     entry_requirements,
     prerequisites: (data.prerequisites as string[] | null) ?? null,
     prerequisite_of: (data.prerequisite_of as string[] | null) ?? null,
-    language_of_instruction: (data.language_of_instruction as string) || (data.language as string) || undefined,
+    language_of_instruction:
+      (data.language_of_instruction as string) ||
+      (data.language as string) ||
+      undefined,
     pace_of_study: (data.pace_of_study as string) || undefined,
     location: (data.location as string) || undefined,
-    study_period: (data.study_period as string) || (data.period as string) || undefined,
+    study_period:
+      (data.study_period as string) || (data.period as string) || undefined,
     fees: (data.fees as string) || undefined,
     about_blurb: (data.about_blurb as string) || undefined,
     application_code: (data.application_code as string) || undefined,
@@ -296,10 +359,14 @@ function docToCourse(id: string, data: Record<string, unknown>): Course {
     selection: (data.selection as string) || undefined,
     syllabus_link: (data.syllabus_link as string) || undefined,
     teaching_form: (data.teaching_form as string) || undefined,
-    instruction: (data.Instruction as string) || (data.instruction as string) || undefined,
-    assessment: (data.Assessment as string) || (data.assessment as string) || undefined,
-    syllabus: (data.Syllabus as string) || (data.syllabus as string) || undefined,
-    structured_requirements: (data.structured_requirements as StructuredRequirement) || undefined,
+    instruction:
+      (data.Instruction as string) || (data.instruction as string) || undefined,
+    assessment:
+      (data.Assessment as string) || (data.assessment as string) || undefined,
+    syllabus:
+      (data.Syllabus as string) || (data.syllabus as string) || undefined,
+    structured_requirements:
+      (data.structured_requirements as StructuredRequirement) || undefined,
   };
 }
 
@@ -334,28 +401,36 @@ export type CourseConnection = {
  * @param maxConnections - Max number of related/prereq courses to return (default 20)
  */
 export async function fetchCourseConnections(
-  id: string, 
-  maxConnections: number = 20
+  id: string,
+  maxConnections: number = 20,
 ): Promise<CourseConnection | undefined> {
   const doc = await adminDb.collection('courses').doc(id).get();
   if (!doc.exists) return undefined;
-  
+
   const data = doc.data() as Record<string, unknown>;
-  const title = (data.Course_name as string)?.trim() || (data.title as string)?.trim() || 'Untitled';
+  const title =
+    (data.Course_name as string)?.trim() ||
+    (data.title as string)?.trim() ||
+    'Untitled';
   const code = (data.code as string) || '';
   const level = normalizeLevel(data.level as string | undefined);
   const creditsRaw = data.credits;
-  const credits = typeof creditsRaw === 'number' ? creditsRaw : (typeof creditsRaw === 'string' ? parseFloat(creditsRaw) || undefined : undefined);
-  
+  const credits =
+    typeof creditsRaw === 'number'
+      ? creditsRaw
+      : typeof creditsRaw === 'string'
+        ? parseFloat(creditsRaw) || undefined
+        : undefined;
+
   const prereqs = (data.prerequisites as string[] | null) ?? null;
   const prereqOf = (data.prerequisite_of as string[] | null) ?? null;
   const related = (data.relatedCourses as string[]) || [];
-  
+
   // Cap the number of connections to prevent overwhelming the graph
   const cappedPrereqs = prereqs ? prereqs.slice(0, maxConnections) : null;
   const cappedPrereqOf = prereqOf ? prereqOf.slice(0, maxConnections) : null;
   const cappedRelated = related.slice(0, maxConnections);
-  
+
   return {
     id,
     title,
@@ -375,10 +450,10 @@ export async function fetchCourseConnections(
 export async function fetchMultipleCourseConnections(
   ids: string[],
   maxConnections: number = 20,
-  maxConcurrency: number = 5
+  maxConcurrency: number = 5,
 ): Promise<Map<string, CourseConnection>> {
   const results = new Map<string, CourseConnection>();
-  
+
   // Process in batches to avoid overwhelming Firestore
   for (let i = 0; i < ids.length; i += maxConcurrency) {
     const batch = ids.slice(i, i + maxConcurrency);
@@ -388,7 +463,7 @@ export async function fetchMultipleCourseConnections(
     });
     await Promise.all(batchPromises);
   }
-  
+
   return results;
 }
 
@@ -396,10 +471,11 @@ export async function searchCourses(query: string): Promise<Course[]> {
   const courses = await fetchCourses();
   const q = query.trim().toLowerCase();
   if (!q) return courses;
-  return courses.filter((c) =>
-    c.title.toLowerCase().includes(q) ||
-    c.description.toLowerCase().includes(q) ||
-    c.tags.some((t) => t.toLowerCase().includes(q)) ||
-    c.code.toLowerCase().includes(q)
+  return courses.filter(
+    (c) =>
+      c.title.toLowerCase().includes(q) ||
+      c.description.toLowerCase().includes(q) ||
+      c.tags.some((t) => t.toLowerCase().includes(q)) ||
+      c.code.toLowerCase().includes(q),
   );
 }

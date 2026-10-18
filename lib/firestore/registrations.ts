@@ -41,17 +41,50 @@ function parseRegDoc(d: { id: string; data(): DocumentData }): RegistrationDoc {
     status: data.status || 'registered',
     registeredAt: data.registeredAt,
     userId: data.userId,
-    registrationData: data.registrationData as Record<string, unknown> | undefined,
+    registrationData: data.registrationData as
+      Record<string, unknown> | undefined,
   };
 }
 
-export async function fetchRegistrationsByEventIds(eventIds: string[]): Promise<Map<string, RegistrationDoc[]>> {
+function mapEventRegistration(d: {
+  id: string;
+  exists(): boolean;
+  data(): DocumentData;
+}): EventRegistration {
+  const data = d.exists() ? d.data() : undefined;
+  const registeredAt =
+    data?.registeredAt instanceof Timestamp
+      ? data.registeredAt.toDate().toISOString()
+      : '';
+  return {
+    id: d.id,
+    eventId: data?.eventId ?? '',
+    userId: data?.userId ?? '',
+    registrationData: (data?.registrationData ??
+      {}) as EventRegistration['registrationData'],
+    registeredAt,
+    status: (data?.status ?? 'registered') as EventRegistration['status'],
+    userName: (data?.userName ?? null) as EventRegistration['userName'],
+    userEmail: (data?.userEmail ?? null) as EventRegistration['userEmail'],
+    selectedAt: (data?.selectedAt ?? null) as EventRegistration['selectedAt'],
+    confirmedAt: (data?.confirmedAt ??
+      null) as EventRegistration['confirmedAt'],
+    confirmationToken: (data?.confirmationToken ??
+      null) as EventRegistration['confirmationToken'],
+  } as EventRegistration;
+}
+
+export async function fetchRegistrationsByEventIds(
+  eventIds: string[],
+): Promise<Map<string, RegistrationDoc[]>> {
   const grouped = new Map<string, RegistrationDoc[]>();
   if (!eventIds.length) return grouped;
 
   for (let i = 0; i < eventIds.length; i += BATCH_SIZE) {
     const batch = eventIds.slice(i, i + BATCH_SIZE);
-    const snap = await getDocs(query(collection(db, 'registrations'), where('eventId', 'in', batch)));
+    const snap = await getDocs(
+      query(collection(db, 'registrations'), where('eventId', 'in', batch)),
+    );
     snap.docs.forEach((d) => {
       const r = parseRegDoc(d);
       const list = grouped.get(r.eventId);
@@ -67,107 +100,64 @@ export async function fetchRegistrationsByEventIds(eventIds: string[]): Promise<
 // CRUD operations
 // ---------------------------------------------------------------------------
 
-export const getMyRegistrations = async (userId: string): Promise<EventRegistration[]> => {
+export const getMyRegistrations = async (
+  userId: string,
+): Promise<EventRegistration[]> => {
   const regRef = collection(db, 'registrations');
   const qy = query(regRef, where('userId', '==', userId));
   const snapshot = await getDocs(qy);
-  return snapshot.docs.map((d) => {
-    const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
-    const ts = data?.registeredAt;
-    const registeredAt = ts instanceof Timestamp ? ts.toDate().toISOString() : '';
-    const registrationData = (data?.registrationData ?? {}) as EventRegistration['registrationData'];
-    return {
-      id: d.id,
-      eventId: data?.eventId ?? '',
-      userId: data?.userId ?? '',
-      registrationData,
-      registeredAt,
-      status: (data?.status ?? 'registered') as EventRegistration['status'],
-      userName: (data?.userName ?? null) as EventRegistration['userName'],
-      userEmail: (data?.userEmail ?? null) as EventRegistration['userEmail'],
-      selectedAt: (data?.selectedAt ?? null) as EventRegistration['selectedAt'],
-      confirmedAt: (data?.confirmedAt ?? null) as EventRegistration['confirmedAt'],
-      confirmationToken: (data?.confirmationToken ?? null) as EventRegistration['confirmationToken'],
-    } as EventRegistration;
-  });
+  return snapshot.docs.map(mapEventRegistration);
 };
 
-export const getEventRegistrations = async (eventId: string): Promise<EventRegistration[]> => {
+export const getEventRegistrations = async (
+  eventId: string,
+): Promise<EventRegistration[]> => {
   const regRef = collection(db, 'registrations');
   const qy = query(regRef, where('eventId', '==', eventId));
   const snapshot = await getDocs(qy);
-  return snapshot.docs.map((d) => {
-    const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
-    const ts = data?.registeredAt;
-    const registeredAt = ts instanceof Timestamp ? ts.toDate().toISOString() : '';
-    const registrationData = (data?.registrationData ?? {}) as EventRegistration['registrationData'];
-    return {
-      id: d.id,
-      eventId: data?.eventId ?? '',
-      userId: data?.userId ?? '',
-      registrationData,
-      registeredAt,
-      status: (data?.status ?? 'registered') as EventRegistration['status'],
-      userName: (data?.userName ?? null) as EventRegistration['userName'],
-      userEmail: (data?.userEmail ?? null) as EventRegistration['userEmail'],
-      selectedAt: (data?.selectedAt ?? null) as EventRegistration['selectedAt'],
-      confirmedAt: (data?.confirmedAt ?? null) as EventRegistration['confirmedAt'],
-      confirmationToken: (data?.confirmationToken ?? null) as EventRegistration['confirmationToken'],
-    } as EventRegistration;
-  });
+  return snapshot.docs.map(mapEventRegistration);
 };
 
 export const subscribeToEventRegistrations = (
   eventId: string,
-  callback: (regs: EventRegistration[]) => void
+  callback: (regs: EventRegistration[]) => void,
 ) => {
   const regRef = collection(db, 'registrations');
   const qy = query(regRef, where('eventId', '==', eventId));
   return onSnapshot(
     qy,
     (snapshot) => {
-      const regs: EventRegistration[] = snapshot.docs.map((d) => {
-        const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
-        const ts = data?.registeredAt;
-        const registeredAt = ts instanceof Timestamp ? ts.toDate().toISOString() : '';
-        const registrationData = (data?.registrationData ?? {}) as EventRegistration['registrationData'];
-        return {
-          id: d.id,
-          eventId: data?.eventId ?? '',
-          userId: data?.userId ?? '',
-          registrationData,
-          registeredAt,
-          status: (data?.status ?? 'registered') as EventRegistration['status'],
-          userName: (data?.userName ?? null) as EventRegistration['userName'],
-          userEmail: (data?.userEmail ?? null) as EventRegistration['userEmail'],
-          selectedAt: (data?.selectedAt ?? null) as EventRegistration['selectedAt'],
-          confirmedAt: (data?.confirmedAt ?? null) as EventRegistration['confirmedAt'],
-          confirmationToken: (data?.confirmationToken ?? null) as EventRegistration['confirmationToken'],
-        } as EventRegistration;
-      });
+      const regs = snapshot.docs.map(mapEventRegistration);
       callback(regs);
     },
     (error) => {
       console.error('Firestore subscription failed:', error);
       callback([]);
-    }
+    },
   );
 };
 
 export const registerForEvent = async (
   eventId: string,
-  payload: Omit<EventRegistration, 'id' | 'eventId' | 'registeredAt' | 'status' | 'userId'> & {
+  payload: Omit<
+    EventRegistration,
+    'id' | 'eventId' | 'registeredAt' | 'status' | 'userId'
+  > & {
     registrationData: EventRegistration['registrationData'];
     userId: string;
     userEmail?: string;
     userName?: string;
   },
-  options?: { waitlist?: boolean }
+  options?: { waitlist?: boolean },
 ): Promise<string> => {
   const regRef = collection(db, 'registrations');
 
   {
-    const qDup = query(regRef, where('eventId', '==', eventId), where('userId', '==', payload.userId));
+    const qDup = query(
+      regRef,
+      where('eventId', '==', eventId),
+      where('userId', '==', payload.userId),
+    );
     const sDup = await getDocs(qDup);
     let hasActive = false;
     for (const d of sDup.docs) {
@@ -183,7 +173,8 @@ export const registerForEvent = async (
         hasActive = true;
       }
     }
-    if (hasActive) throw new Error('You have already registered for this event.');
+    if (hasActive)
+      throw new Error('You have already registered for this event.');
   }
 
   const eventRef = doc(db, 'events', eventId);
@@ -192,25 +183,41 @@ export const registerForEvent = async (
     const eventSnap = await getDoc(eventRef);
     eventData = eventSnap.exists() ? (eventSnap.data() as Partial<Event>) : {};
   } catch (err: unknown) {
-    if (err && typeof err === 'object' && 'code' in err && (err as { code?: string }).code === 'permission-denied') {
+    if (
+      err &&
+      typeof err === 'object' &&
+      'code' in err &&
+      (err as { code?: string }).code === 'permission-denied'
+    ) {
       throw new Error('You do not have permission to register for this event.');
     }
     throw err;
   }
 
-  const maxCapacity = typeof eventData.maxCapacity === 'number' ? eventData.maxCapacity : undefined;
-  const currentRegistrations = typeof eventData.currentRegistrations === 'number' ? eventData.currentRegistrations : 0;
-  const isCapacityFull = typeof maxCapacity === 'number' ? currentRegistrations >= maxCapacity : false;
+  const maxCapacity =
+    typeof eventData.maxCapacity === 'number'
+      ? eventData.maxCapacity
+      : undefined;
+  const currentRegistrations =
+    typeof eventData.currentRegistrations === 'number'
+      ? eventData.currentRegistrations
+      : 0;
+  const isCapacityFull =
+    typeof maxCapacity === 'number'
+      ? currentRegistrations >= maxCapacity
+      : false;
 
   const lastRegistrationAtIso = eventData.registrationClosesAt;
   const now = new Date();
-  const isAfterLastRegistration = typeof lastRegistrationAtIso === 'string' && lastRegistrationAtIso
-    ? now.getTime() > new Date(lastRegistrationAtIso).getTime()
-    : false;
+  const isAfterLastRegistration =
+    typeof lastRegistrationAtIso === 'string' && lastRegistrationAtIso
+      ? now.getTime() > new Date(lastRegistrationAtIso).getTime()
+      : false;
 
-  const status: EventRegistration['status'] = (options?.waitlist || isCapacityFull || isAfterLastRegistration)
-    ? 'waitlist'
-    : 'registered';
+  const status: EventRegistration['status'] =
+    options?.waitlist || isCapacityFull || isAfterLastRegistration
+      ? 'waitlist'
+      : 'registered';
 
   const regDoc: Record<string, unknown> = {
     eventId,
@@ -241,21 +248,23 @@ export const registerForEvent = async (
 // ----------------------------
 
 function randomToken(length = 32): string {
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const alphabet =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let out = '';
   const array = new Uint32Array(length);
-  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
-    crypto.getRandomValues(array);
-    for (let i = 0; i < length; i++) out += alphabet[array[i] % alphabet.length];
-  } else {
-    for (let i = 0; i < length; i++) out += alphabet[Math.floor(Math.random() * alphabet.length)];
-  }
+  if (
+    typeof crypto === 'undefined' ||
+    typeof crypto.getRandomValues !== 'function'
+  )
+    throw new Error('Secure random generator unavailable');
+  crypto.getRandomValues(array);
+  for (let i = 0; i < length; i++) out += alphabet[array[i] % alphabet.length];
   return out;
 }
 
 export async function inviteRegistrant(
   regId: string,
-  options?: { baseUrl?: string; expiresInDays?: number }
+  options?: { baseUrl?: string; expiresInDays?: number },
 ): Promise<void> {
   const regRef = doc(db, 'registrations', regId);
   const regSnap = await getDoc(regRef);
@@ -279,7 +288,9 @@ export async function inviteRegistrant(
     const userId = String(reg.userId || '');
     if (userId) {
       const userSnap = await getDoc(doc(db, 'users', userId));
-      const u = userSnap.exists() ? (userSnap.data() as DocumentData) : undefined;
+      const u = userSnap.exists()
+        ? (userSnap.data() as DocumentData)
+        : undefined;
       unsub = !!u?.unsubscribedFromEmails;
     }
   } catch (err) {
@@ -287,7 +298,9 @@ export async function inviteRegistrant(
   }
   if (unsub) return;
 
-  const base = options?.baseUrl || (typeof window !== 'undefined' ? window.location.origin : '');
+  const base =
+    options?.baseUrl ||
+    (typeof window !== 'undefined' ? window.location.origin : '');
   const link = `${base}/confirm/${token}`;
   let subject = 'You are invited to confirm your spot';
   try {
@@ -311,100 +324,75 @@ export async function inviteRegistrant(
   });
 }
 
-export async function confirmRegistrationByToken(token: string): Promise<{ ok: boolean; message: string }> {
-  if (!token) return { ok: false, message: 'Invalid token' };
-  const regRef = collection(db, 'registrations');
-  const qy = query(regRef, where('confirmationToken', '==', token));
-  const snap = await getDocs(qy);
-  if (snap.empty) return { ok: false, message: 'Token not found or already used' };
-  const d = snap.docs[0];
-  const reg = d.data() as DocumentData;
-  if (reg.status !== 'invited') return { ok: false, message: 'This invitation is no longer valid' };
-
-  const eventId = String(reg.eventId || '');
-  if (!eventId) return { ok: false, message: 'Event missing' };
-  const eventRef = doc(db, 'events', eventId);
-  const eventSnap = await getDoc(eventRef);
-  const eventData = eventSnap.exists() ? (eventSnap.data() as Partial<Event>) : {};
-
-  const maxCapacity = typeof eventData.maxCapacity === 'number' ? eventData.maxCapacity : undefined;
-  const currentRegistrations = typeof eventData.currentRegistrations === 'number' ? eventData.currentRegistrations : 0;
-  if (typeof maxCapacity === 'number' && currentRegistrations >= maxCapacity) {
-    return { ok: false, message: 'Sorry, the event is full' };
-  }
-
-  await updateDoc(doc(db, 'registrations', d.id), {
-    status: 'confirmed',
-    confirmedAt: new Date().toISOString(),
-    confirmationToken: null,
-  } as DocumentData);
-
-  await updateDoc(eventRef, { currentRegistrations: increment(1) });
-  return { ok: true, message: 'Registration confirmed' };
+export async function confirmRegistrationByToken(
+  token: string,
+): Promise<{ ok: boolean; message: string }> {
+  return confirmViaApi({ token });
 }
 
 export async function declineRegistration(regId: string): Promise<void> {
-  await updateDoc(doc(db, 'registrations', regId), { status: 'declined' } as DocumentData);
+  await updateDoc(doc(db, 'registrations', regId), {
+    status: 'declined',
+  } as DocumentData);
 }
 
 export async function cancelRegistration(regId: string): Promise<void> {
-  await updateDoc(doc(db, 'registrations', regId), { status: 'cancelled' } as DocumentData);
+  await updateDoc(doc(db, 'registrations', regId), {
+    status: 'cancelled',
+  } as DocumentData);
 }
 
-export async function getMyRegistrationForEvent(userId: string, eventId: string): Promise<EventRegistration | null> {
+export async function getMyRegistrationForEvent(
+  userId: string,
+  eventId: string,
+): Promise<EventRegistration | null> {
   const regRef = collection(db, 'registrations');
-  const qy = query(regRef, where('userId', '==', userId), where('eventId', '==', eventId));
+  const qy = query(
+    regRef,
+    where('userId', '==', userId),
+    where('eventId', '==', eventId),
+  );
   const snap = await getDocs(qy);
   if (snap.empty) return null;
   const d = snap.docs[0];
-  const data: DocumentData | undefined = d.exists() ? d.data() : undefined;
-  const ts = data?.registeredAt;
-  const registeredAt = ts instanceof Timestamp ? ts.toDate().toISOString() : '';
-  const registrationData = (data?.registrationData ?? {}) as EventRegistration['registrationData'];
-  return {
-    id: d.id,
-    eventId: data?.eventId ?? '',
-    userId: data?.userId ?? '',
-    registrationData,
-    registeredAt,
-    status: (data?.status ?? 'registered') as EventRegistration['status'],
-    userName: (data?.userName ?? null) as EventRegistration['userName'],
-    userEmail: (data?.userEmail ?? null) as EventRegistration['userEmail'],
-    selectedAt: (data?.selectedAt ?? null) as EventRegistration['selectedAt'],
-    confirmedAt: (data?.confirmedAt ?? null) as EventRegistration['confirmedAt'],
-    confirmationToken: (data?.confirmationToken ?? null) as EventRegistration['confirmationToken'],
-  } as EventRegistration;
+  return mapEventRegistration(d);
 }
 
-export async function cancelMyRegistrationForEvent(userId: string, eventId: string): Promise<void> {
+export async function cancelMyRegistrationForEvent(
+  userId: string,
+  eventId: string,
+): Promise<void> {
   const regRef = collection(db, 'registrations');
-  const qy = query(regRef, where('userId', '==', userId), where('eventId', '==', eventId));
+  const qy = query(
+    regRef,
+    where('userId', '==', userId),
+    where('eventId', '==', eventId),
+  );
   const snap = await getDocs(qy);
   if (snap.empty) return;
-  const d = snap.docs.find((x) => (x.data() as DocumentData)?.status !== 'cancelled') || snap.docs[0];
-  await updateDoc(doc(db, 'registrations', d.id), { status: 'cancelled' } as DocumentData);
+  const d =
+    snap.docs.find((x) => (x.data() as DocumentData)?.status !== 'cancelled') ||
+    snap.docs[0];
+  await updateDoc(doc(db, 'registrations', d.id), {
+    status: 'cancelled',
+  } as DocumentData);
 }
 
-export async function confirmRegistration(regId: string, token: string): Promise<{ ok: boolean; message: string }> {
-  const ref = doc(db, 'registrations', regId);
-  const snap = await getDoc(ref);
-  if (!snap.exists()) return { ok: false, message: 'Registration not found' };
-  const data = snap.data() as DocumentData;
-  if (data.status !== 'invited') return { ok: false, message: 'Not invited' };
-  if (!data.confirmationToken || data.confirmationToken !== token) return { ok: false, message: 'Invalid token' };
+export async function confirmRegistration(
+  regId: string,
+  token: string,
+): Promise<{ ok: boolean; message: string }> {
+  return confirmViaApi({ regId, token });
+}
 
-  const eventId = String(data.eventId || '');
-  if (!eventId) return { ok: false, message: 'Event missing' };
-  const eventRef = doc(db, 'events', eventId);
-  const eventSnap = await getDoc(eventRef);
-  const eventData = eventSnap.exists() ? (eventSnap.data() as Partial<Event>) : {};
-  const maxCapacity = typeof eventData.maxCapacity === 'number' ? eventData.maxCapacity : undefined;
-  const currentRegistrations = typeof eventData.currentRegistrations === 'number' ? eventData.currentRegistrations : 0;
-  if (typeof maxCapacity === 'number' && currentRegistrations >= maxCapacity) {
-    return { ok: false, message: 'Event full' };
-  }
-
-  await updateDoc(ref, { status: 'confirmed', confirmedAt: new Date().toISOString(), confirmationToken: null } as DocumentData);
-  await updateDoc(eventRef, { currentRegistrations: increment(1) });
-  return { ok: true, message: 'Confirmed' };
+async function confirmViaApi(payload: {
+  regId?: string;
+  token: string;
+}): Promise<{ ok: boolean; message: string }> {
+  const response = await fetch('/api/registrations/confirm', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  return response.json();
 }

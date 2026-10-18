@@ -1,19 +1,32 @@
 import { adminDb } from '@/lib/firebase-admin';
+import { isLocalBuildFixtureEnabled } from '@/lib/local-build-fixture';
 import type { ShowcaseProject } from '@/types';
 
 /** Look up a published project by slug (preferred) or Firestore id. Returns null on miss or unpublished. */
-export async function findPublishedShowcaseProject(idOrSlug: string): Promise<ShowcaseProject | null> {
+export async function findPublishedShowcaseProject(
+  idOrSlug: string,
+): Promise<ShowcaseProject | null> {
+  if (isLocalBuildFixtureEnabled()) return null;
   try {
-    const bySlug = await adminDb.collection('showcaseProjects').where('slug', '==', idOrSlug).limit(1).get();
+    const bySlug = await adminDb
+      .collection('showcaseProjects')
+      .where('slug', '==', idOrSlug)
+      .limit(1)
+      .get();
     if (!bySlug.empty) {
       const doc = bySlug.docs[0];
       const data = doc.data();
-      if (data?.published === true) return { id: doc.id, ...data } as unknown as ShowcaseProject;
+      if (data?.published === true)
+        return { id: doc.id, ...data } as unknown as ShowcaseProject;
     }
-    const byId = await adminDb.collection('showcaseProjects').doc(idOrSlug).get();
+    const byId = await adminDb
+      .collection('showcaseProjects')
+      .doc(idOrSlug)
+      .get();
     if (byId.exists) {
       const data = byId.data();
-      if (data?.published === true) return { id: byId.id, ...data } as unknown as ShowcaseProject;
+      if (data?.published === true)
+        return { id: byId.id, ...data } as unknown as ShowcaseProject;
     }
     return null;
   } catch (e) {
@@ -23,12 +36,21 @@ export async function findPublishedShowcaseProject(idOrSlug: string): Promise<Sh
 }
 
 /** All published projects, newest first (used for the sitemap). */
-export async function getPublishedShowcaseProjects(): Promise<ShowcaseProject[]> {
+export async function getPublishedShowcaseProjects(): Promise<
+  ShowcaseProject[]
+> {
+  if (isLocalBuildFixtureEnabled()) return [];
   try {
-    const snapshot = await adminDb.collection('showcaseProjects').where('published', '==', true).get();
+    const snapshot = await adminDb
+      .collection('showcaseProjects')
+      .where('published', '==', true)
+      .get();
     return snapshot.docs
-      .map((d) => ({ id: d.id, ...d.data() } as unknown as ShowcaseProject))
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+      .map((d) => ({ id: d.id, ...d.data() }) as unknown as ShowcaseProject)
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      );
   } catch (e) {
     console.warn('getPublishedShowcaseProjects failed:', e);
     return [];

@@ -1199,7 +1199,7 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MS369",
         "1MA148",
@@ -1212,14 +1212,14 @@
       ],
       "semester": 1,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MS369, 1MA148, 1MA215, 1MS041, 1MA216, 1MS045, 1TD354, 1MS370",
-      "labelEn": "Choose one of 8 courses.",
+      "textSv": "Spår: Tillämpad matematik och statistik",
+      "labelEn": "Track: Applied Mathematics and Statistics",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-1",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "2NE831",
         "1MS045",
@@ -1228,14 +1228,14 @@
       ],
       "semester": 1,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 2NE831, 1MS045, 1MA209, 1TD354",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Spår: Finansiell matematik",
+      "labelEn": "Track: Financial Mathematics",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-2",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MA259",
         "1MA216",
@@ -1244,14 +1244,14 @@
       ],
       "semester": 1,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MA259, 1MA216, 1MA036, 1MA215",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Spår: Matematik",
+      "labelEn": "Track: Mathematics",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-3",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MA007",
         "1MA362",
@@ -1259,14 +1259,14 @@
       ],
       "semester": 1,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MA007, 1MA362, 1MS036",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Bryggningskurser",
+      "labelEn": "Bridging courses",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-4",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MA531",
         "1MS049",
@@ -1278,8 +1278,8 @@
       ],
       "semester": 1,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MA531, 1MS049, 1MA196, 1MS052, 1MA038, 1MA217, 1RT700",
-      "labelEn": "Choose one of 7 courses.",
+      "textSv": "Övriga kurser",
+      "labelEn": "Alternative coures",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -1296,7 +1296,7 @@
     },
     {
       "id": "rule-6",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TD062",
         "1MS012",
@@ -1309,14 +1309,14 @@
       ],
       "semester": 2,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TD062, 1MS012, 1MS900, 1MS048, 1MA331, 1MA256, 1MS050, 1MS014",
-      "labelEn": "Choose one of 8 courses.",
+      "textSv": "Spår: Tillämpad matematik och statistik",
+      "labelEn": "Track: Applied Mathematics and Statistics",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-7",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MS012",
         "1MA053",
@@ -1325,14 +1325,14 @@
       ],
       "semester": 2,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MS012, 1MA053, 1MA255, 1MS014",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Spår: Finansiell matematik",
+      "labelEn": "Track: Financial Mathematics",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-8",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MA333",
         "1MA338",
@@ -1345,14 +1345,14 @@
       ],
       "semester": 2,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MA333, 1MA338, 1MA325, 1MS030, 1MA331, 1MA332, 1MA336, 1MA056",
-      "labelEn": "Choose one of 8 courses.",
+      "textSv": "Spår: Matematik",
+      "labelEn": "Track: Mathematics",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-9",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MA337",
         "1MA081",
@@ -1360,8 +1360,8 @@
       ],
       "semester": 2,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MA337, 1MA081, 1MA181",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Alla spår",
+      "labelEn": "All tracks",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -1378,7 +1378,7 @@
     },
     {
       "id": "rule-11",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MA531",
         "1MA038",
@@ -1401,14 +1401,14 @@
       ],
       "semester": 3,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MA531, 1MA038, 1MS049, 1MA259, 1MA217, 1MA080, 1TD186, 1MA209, 1MA215, 1MS041, 1RT001, 2NE814, 2NE811, 1MA036, 1MA216, 1MA196, 1TD056, 1MS052",
-      "labelEn": "Choose one of 18 courses.",
+      "textSv": "Preliminär studieplan 2027/2028",
+      "labelEn": "Preliminary outline 2027/2028",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-12",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MA344",
         "1MA342",
@@ -1416,22 +1416,22 @@
       ],
       "semester": 3,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MA344, 1MA342, 1MS051",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Kurser som kan ges i valfri period under programmet.",
+      "labelEn": "Courses that can be given in any period during the programmen.",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-13",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1MA080",
         "1MA182"
       ],
       "semester": 4,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1MA080, 1MA182",
-      "labelEn": "Choose one of 2 courses.",
+      "textSv": "Preliminär studieplan 2027/2028",
+      "labelEn": "Preliminary outline 2027/2028",
       "cohortBefore": null,
       "source": "plan"
     }
@@ -1762,5 +1762,149 @@
   "programmeTitleEn": "Master's Programme in Mathematics, 120 credits (TMA2M)",
   "programmeUri": "/utbildning/program/masterprogram-matematik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "blocked",
+    "issues": [
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 1,
+        "textSv": "Spår: Tillämpad matematik och statistik",
+        "textEn": "Track: Applied Mathematics and Statistics"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 1,
+        "textSv": "Spår: Tillämpad matematik och statistik",
+        "textEn": "Track: Applied Mathematics and Statistics"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 1,
+        "textSv": "Spår: Finansiell matematik",
+        "textEn": "Track: Financial Mathematics"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 1,
+        "textSv": "Spår: Finansiell matematik",
+        "textEn": "Track: Financial Mathematics"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 1,
+        "textSv": "Spår: Matematik",
+        "textEn": "Track: Mathematics"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 1,
+        "textSv": "Spår: Matematik",
+        "textEn": "Track: Mathematics"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 1,
+        "textSv": "Bryggningskurser",
+        "textEn": "Bridging courses"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 1,
+        "textSv": "Övriga kurser",
+        "textEn": "Alternative coures"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Studenter väljer 30 hp per termin, valt från spår, bryggningskurser och/eller övriga kurser."
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 2,
+        "textSv": "Spår: Tillämpad matematik och statistik",
+        "textEn": "Track: Applied Mathematics and Statistics"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 2,
+        "textSv": "Spår: Tillämpad matematik och statistik",
+        "textEn": "Track: Applied Mathematics and Statistics"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 2,
+        "textSv": "Spår: Finansiell matematik",
+        "textEn": "Track: Financial Mathematics"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 2,
+        "textSv": "Spår: Finansiell matematik",
+        "textEn": "Track: Financial Mathematics"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "A named source track is not represented as a parsed programme track.",
+        "semester": 2,
+        "textSv": "Spår: Matematik",
+        "textEn": "Track: Mathematics"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 2,
+        "textSv": "Spår: Matematik",
+        "textEn": "Track: Mathematics"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 2,
+        "textSv": "Alla spår",
+        "textEn": "All tracks"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Studenter väljer 30 hp kurser från terminens kurser.",
+        "textEn": "The students chooses 30 credits from the courses avaliable this semester."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 3,
+        "textSv": "Preliminär studieplan 2027/2028",
+        "textEn": "Preliminary outline 2027/2028"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 3,
+        "textSv": "Kurser som kan ges i valfri period under programmet.",
+        "textEn": "Courses that can be given in any period during the programmen."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 4,
+        "textSv": "Preliminär studieplan 2027/2028",
+        "textEn": "Preliminary outline 2027/2028"
+      }
+    ]
+  }
 }

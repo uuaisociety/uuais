@@ -233,7 +233,7 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1KB467",
         "1KB750",
@@ -242,14 +242,14 @@
       ],
       "semester": 1,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1KB467, 1KB750, 1KB550, 1KB285",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Kurser inom inriktningen",
+      "labelEn": "Courses within the specialisation",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-1",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1KB753",
         "1KB275",
@@ -258,14 +258,14 @@
       ],
       "semester": 2,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1KB753, 1KB275, 1KB271, 1KB284",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Kurser inom inriktningen",
+      "labelEn": "Courses within the specialisation",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-2",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1KB766",
         "1KB349",
@@ -273,8 +273,8 @@
       ],
       "semester": 3,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1KB766, 1KB349, 1KB363",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Preliminär studieplan 2027/2028",
+      "labelEn": "Preliminary outline 2027/2028",
       "cohortBefore": null,
       "source": "plan"
     }
@@ -383,5 +383,31 @@
   "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
   "programmeUri": "/utbildning/program/masterprogram-kemi-fysikalisk-kemi-och-berakningskemi",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 1,
+        "textSv": "Kurser inom inriktningen",
+        "textEn": "Courses within the specialisation"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 2,
+        "textSv": "Kurser inom inriktningen",
+        "textEn": "Courses within the specialisation"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 3,
+        "textSv": "Preliminär studieplan 2027/2028",
+        "textEn": "Preliminary outline 2027/2028"
+      }
+    ]
+  }
 }

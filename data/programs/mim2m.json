@@ -44,5 +44,14 @@
   "programmeTitleEn": "International Master's Programme in Innovative Medicine, 120 credits (MIM2M)",
   "programmeUri": "/utbildning/program/masterprogram-innovativ-medicin",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "blocked",
+    "issues": [
+      {
+        "kind": "malformed-semester",
+        "message": "The source outline has no semester list."
+      }
+    ]
+  }
 }

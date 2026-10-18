@@ -149,15 +149,15 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "2PE172",
         "4PE096"
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 2PE172, 4PE096",
-      "labelEn": "Choose one of 2 courses.",
+      "textSv": "Rubrik saknas i källan.",
+      "labelEn": "No heading in source.",
       "cohortBefore": null,
       "source": "plan"
     }
@@ -195,5 +195,16 @@
   "programmeTitleEn": "Bachelor's Programme in Education with a Focus on Children and Youth, 180 credits (UPE1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-pedagogik-barn-unga",
   "faculty": "Fakulteten för utbildningsvetenskaper",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 6,
+        "textSv": "Rubrik saknas i källan."
+      }
+    ]
+  }
 }

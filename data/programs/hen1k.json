@@ -33,5 +33,14 @@
   "programmeTitleEn": "Bachelor's Programme in Global English Studies, 180 credits (HEN1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-engelska-med-globala-perspektiv",
   "faculty": "Språkvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

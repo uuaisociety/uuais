@@ -111,5 +111,14 @@
   "programmeTitleEn": "Master's Programme in Euroculture, 120 credits (HEC2M)",
   "programmeUri": "/utbildning/program/masterprogram-euroculture",
   "faculty": "Teologiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

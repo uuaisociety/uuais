@@ -390,5 +390,22 @@
   "programmeTitleEn": "Master's Programme in Chemistry – Physical and Computational Chemistry, 120 credits (TKE2M)",
   "programmeUri": "/utbildning/program/masterprogram-kemi-biokemi",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Följande beteckningar används: G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp A1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivå A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "1KB053 Examensarbete E i kemi, 30 (av 45) högskolepoäng",
+        "textEn": "1KB053 Degree Project E in Chemistry 30 (of 45) credits"
+      }
+    ]
+  }
 }

@@ -488,5 +488,9 @@
   "programmeTitleEn": "Primary School Teacher Education Programme – Primary Education – School Years 4-6, 240 credits (UGR0Y)",
   "programmeUri": "/utbildning/program/grundlararprogrammet-f-3",
   "faculty": "Fakulteten för utbildningsvetenskaper",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

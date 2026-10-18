@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useMemo, useState } from "react";
-import { ExternalLink, Search } from "lucide-react";
-import type { ElectivePool } from "@/lib/programs/layout";
-import { courseHref } from "@/lib/programs/format";
-import { CATEGORY_STYLE } from "./constants";
+import React, { useMemo, useState } from 'react';
+import { ExternalLink, Search } from 'lucide-react';
+import type { ElectivePool } from '@/lib/programs/layout';
+import { courseHref } from '@/lib/programs/format';
+import { CATEGORY_STYLE } from './constants';
 
 /**
  * The free-elective pools listed in full: on the canvas they are one card, but choosing
@@ -19,34 +19,43 @@ export default function ElectivePoolSection({
   id: string;
   fromPath?: string;
 }) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
 
   const all = useMemo(
     () =>
       pools
-        .flatMap((pool) => pool.courses.map((course) => ({ course, semester: pool.semester })))
+        .flatMap((pool) =>
+          pool.courses.map((course) => ({ course, semester: pool.semester })),
+        )
         .sort((a, b) =>
-          (a.course.titleEn || a.course.titleSv).localeCompare(b.course.titleEn || b.course.titleSv)
+          (a.course.titleEn || a.course.titleSv).localeCompare(
+            b.course.titleEn || b.course.titleSv,
+          ),
         ),
-    [pools]
+    [pools],
   );
 
   const matches = useMemo(() => {
     const needle = query.trim().toLowerCase();
     if (!needle) return all;
     return all.filter(({ course }) =>
-      `${course.code} ${course.titleEn} ${course.titleSv} ${course.mainFieldEn ?? ""}`
+      `${course.code} ${course.titleEn} ${course.titleSv} ${course.mainFieldEn ?? ''}`
         .toLowerCase()
-        .includes(needle)
+        .includes(needle),
     );
   }, [all, query]);
 
   if (all.length === 0) return null;
 
-  const semesters = [...new Set(pools.map((p) => p.semester))].sort((a, b) => a - b);
+  const semesters = [...new Set(pools.map((p) => p.semester))].sort(
+    (a, b) => a - b,
+  );
 
   return (
-    <section id={id} className="scroll-mt-24 rounded-lg border border-border bg-card p-5">
+    <section
+      id={id}
+      className="scroll-mt-24 rounded-lg border border-border bg-card p-5"
+    >
       <div className="flex flex-wrap items-start justify-between gap-x-6 gap-y-3">
         <div className="min-w-0">
           {/* Set like every other section heading on this page, so the map, the rules
@@ -55,19 +64,22 @@ export default function ElectivePoolSection({
             <span
               aria-hidden
               className="h-2.5 w-2.5 rounded-sm"
-              style={{ backgroundColor: CATEGORY_STYLE.OPTIONAL_ELECTIVE.color }}
+              style={{
+                backgroundColor: CATEGORY_STYLE.OPTIONAL_ELECTIVE.color,
+              }}
             />
-            Free electives
+            Additional listed courses
           </h2>
           <p className="mt-2 max-w-[62ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
-            {all.length} optional courses offered in semester
-            {semesters.length > 1 ? "s" : ""} {semesters.join(", ")}. Choose the ones that
-            make up your remaining credits.
+            {all.length} course rows listed in semester
+            {semesters.length > 1 ? 's' : ''} {semesters.join(', ')}. The source
+            does not establish whether every row is optional or required. Check
+            the official study plan for requirements and restrictions.
           </p>
         </div>
 
         <label className="relative">
-          <span className="sr-only">Search free electives</span>
+          <span className="sr-only">Search additional listed courses</span>
           <Search
             aria-hidden
             className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
@@ -84,7 +96,7 @@ export default function ElectivePoolSection({
 
       {matches.length === 0 ? (
         <p className="mt-6 rounded-md border border-dashed border-border px-4 py-8 text-center text-[0.9375rem] text-muted-foreground">
-          No elective matches &ldquo;{query}&rdquo;.
+          No listed course matches &ldquo;{query}&rdquo;.
         </p>
       ) : (
         // Rows on hairlines rather than 50-odd bordered tiles: at this count the
@@ -103,7 +115,7 @@ export default function ElectivePoolSection({
                     {course.titleEn || course.titleSv}
                   </span>
                   <span className="mt-1 block truncate font-mono text-[0.6875rem] tracking-[0.1em] text-muted-foreground">
-                    {course.credits ?? "?"} hp
+                    {course.credits ?? '?'} hp total
                     <span className="mx-1.5 opacity-40">•</span>
                     {course.code}
                     {course.mainFieldEn ? (

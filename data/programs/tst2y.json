@@ -2590,5 +2590,107 @@
   "programmeTitleEn": "Master's Programme in Sociotechnical Systems Engineering, 300 credits (TST2Y)",
   "programmeUri": "/utbildning/program/civilingenjorsprogrammet-system-teknik-och-samhalle",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1EL781 och 1TE781 kan inte ingå i en examen tillsammans."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Följande kurser årskurs 3 passar inom: Profilering mot IT-system: 1DL210, 1MD031, 1DL301 och 1DT066. Profilering mot energisystem: 1FA401, 1EL015 och TE655."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "5LH650 och 5LH221 kan inte ingå i examen tillsammans."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Självständigt arbete inom system i teknik och samhälle, 15 hp. En kurs Självständigt arbete inom system i teknik och samhälle är obligatorisk för examen."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "Följande kurser årskurs 4 passar inom: Profilering mot IT-system: 1DL360, 1DL400 och 1DT072. Profilering mot energisystem: 1TE754, 1TE726 och 1GV334. Uppsatsförberedande fördjupningskurs samt Uppsats STS är obligatoriska kurser inom ett av de hum/sam ämnen som är uppräknade nedan. Studenten skriver normalt uppsats inom samma ämne som läses i den uppsatsförberedande fördjupningskursen. Kurserna ges fördelade på 5 hp period 1 och 5 hp period 2."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "5LH651 och 5LH222 kan inte ingå i examen tillsammans."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 7,
+        "textSv": "1RT495 ges även i period 4"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "En av kurserna Uppsats STS är obligatorisk inom programmet. Kurserna ges fördelade på 5 hp period 3 och 10 hp period 4."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "5LH622 och 5LH223 kan inte ingå i examen tillsammans."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 8,
+        "textSv": "1RT700 ges även i period 2. 1TS350 och 1TE773 kan inte ingå i examen tillsammans."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "Följande kurser årskurs 5 passar inom: Profilering mot IT-system: 1DL251. Profilering mot energisystem: 1TE037."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "1DL251 ges även i p3. 2FE033 ges på kvällstid (p1 och p3) alternativt kan studenten läsa 1DL251 på dagtid."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 9,
+        "textSv": "5LH226 och 5LH653 kan inte ingå i examen tillsammans."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Tillvalskurser:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Geografiska informationssystem för ingenjörer, 5 hp (TE0018 SLU) Huvudområde(n) med fördjupning: Teknik Axx",
+        "textEn": "Geographic information systems for engineers, 5 credits (TE0018 SLU) Main field(s) of study and in-depth level: Technology Axx"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 10,
+        "textSv": "Kurs 1TE038 och 1TE043 börjar i period 3 men fortsätter in i period 4."
+      }
+    ]
+  }
 }

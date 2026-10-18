@@ -79,7 +79,7 @@ export const POOL_THRESHOLD = 8;
  */
 export function partitionElectivePools(
   courses: ProgramCourse[],
-  threshold: number = POOL_THRESHOLD
+  threshold: number = POOL_THRESHOLD,
 ): { laidOut: ProgramCourse[]; pools: ElectivePool[] } {
   const optionalBySemester = new Map<number, ProgramCourse[]>();
   for (const course of courses) {
@@ -112,7 +112,10 @@ function periodNumber(period: string): number {
  * The (semester, period) pairs the visible courses occupy, in teaching order; a semester
  * with courses but no stated period still gets one column.
  */
-function collectColumns(courses: ProgramCourse[], reservedSemesters: Set<number>) {
+function collectColumns(
+  courses: ProgramCourse[],
+  reservedSemesters: Set<number>,
+) {
   const bySemester = new Map<number, Set<string>>();
   // A course whose study plan states no period still needs a column, or it is dropped.
   const needsFallback = new Set<number>();
@@ -134,14 +137,15 @@ function collectColumns(courses: ProgramCourse[], reservedSemesters: Set<number>
   const keys: { semester: number; period: string }[] = [];
   for (const semester of [...bySemester.keys()].sort((a, b) => a - b)) {
     const periods = [...(bySemester.get(semester) as Set<string>)].sort(
-      (a, b) => periodNumber(a) - periodNumber(b)
+      (a, b) => periodNumber(a) - periodNumber(b),
     );
     if (periods.length === 0) {
       keys.push({ semester, period: '' });
       continue;
     }
     // The unplaced-course column sorts last, after the real teaching periods.
-    for (const period of periods.filter((p) => p !== '')) keys.push({ semester, period });
+    for (const period of periods.filter((p) => p !== ''))
+      keys.push({ semester, period });
     if (periods.includes('')) keys.push({ semester, period: '' });
   }
   return keys;
@@ -152,13 +156,21 @@ function collectColumns(courses: ProgramCourse[], reservedSemesters: Set<number>
  * free, so a two-period course does not sit on top of its second period's occupant.
  */
 function packRows(
-  placements: { id: string; course: ProgramCourse; start: number; end: number; order: number }[],
-  columnCount: number
+  placements: {
+    id: string;
+    course: ProgramCourse;
+    start: number;
+    end: number;
+    order: number;
+  }[],
+  columnCount: number,
 ): Map<string, number> {
   const occupied: boolean[][] = Array.from({ length: columnCount }, () => []);
   const rows = new Map<string, number>();
 
-  for (const placement of [...placements].sort((a, b) => a.start - b.start || a.order - b.order)) {
+  for (const placement of [...placements].sort(
+    (a, b) => a.start - b.start || a.order - b.order,
+  )) {
     let row = 0;
     for (;;) {
       let free = true;
@@ -188,7 +200,7 @@ function barycentreOrder(
   items: { id: string; course: ProgramCourse }[],
   incoming: Map<string, string[]>,
   rowOf: Map<string, number>,
-  groupOf: Map<string, string>
+  groupOf: Map<string, string>,
 ): Map<string, number> {
   const scored = items.map(({ id, course }, index) => {
     const parents = (incoming.get(course.code) ?? [])
@@ -209,7 +221,8 @@ function barycentreOrder(
   for (const entry of scored) {
     if (!entry.group) continue;
     const best = groupScore.get(entry.group);
-    if (best === undefined || entry.barycentre < best) groupScore.set(entry.group, entry.barycentre);
+    if (best === undefined || entry.barycentre < best)
+      groupScore.set(entry.group, entry.barycentre);
   }
   for (const entry of scored) {
     if (entry.group) entry.barycentre = groupScore.get(entry.group) as number;
@@ -219,7 +232,7 @@ function barycentreOrder(
     (a, b) =>
       a.barycentre - b.barycentre ||
       (a.group ?? '').localeCompare(b.group ?? '') ||
-      a.index - b.index
+      a.index - b.index,
   );
   return new Map(scored.map((entry, order) => [entry.id, order]));
 }
@@ -232,7 +245,7 @@ export function layoutProgram(
   pooledSemesters: Set<number> = new Set(),
   choiceGroups: { id: string; courseCodes: string[] }[] = [],
   collapsedSemesters: Set<number> = new Set(),
-  gapSemesters: Set<number> = new Set()
+  gapSemesters: Set<number> = new Set(),
 ): ProgramLayout {
   // A collapsed semester keeps its band, and so its column, but contributes no cards.
   const allCourses = courses;
@@ -249,9 +262,11 @@ export function layoutProgram(
 
   const columnKeys = collectColumns(
     visibleCourses,
-    new Set([...pooledSemesters, ...collapsedSemesters, ...gapSemesters])
+    new Set([...pooledSemesters, ...collapsedSemesters, ...gapSemesters]),
   );
-  const indexOf = new Map(columnKeys.map((key, index) => [`${key.semester}|${key.period}`, index]));
+  const indexOf = new Map(
+    columnKeys.map((key, index) => [`${key.semester}|${key.period}`, index]),
+  );
 
   const horizontal = orientation === 'horizontal';
   // Time runs along the card's width when horizontal and its height when vertical.
@@ -264,7 +279,10 @@ export function layoutProgram(
   columnKeys.forEach((key, index) => {
     if (index > 0) {
       cursor +=
-        timeStep + (columnKeys[index - 1].semester === key.semester ? COLUMN_GAP : SEMESTER_GAP);
+        timeStep +
+        (columnKeys[index - 1].semester === key.semester
+          ? COLUMN_GAP
+          : SEMESTER_GAP);
     }
     offsets.push(cursor);
   });
@@ -298,12 +316,14 @@ export function layoutProgram(
 
   const placements: Placement[] = [];
   for (const [code, entries] of byCode) {
+    const placementIds = new Set<string>();
     // A profile inherits its specialisation's courses, listing one twice; keep one per column.
     const columnOwner = new Map<number, ProgramCourse>();
     for (const course of entries) {
       for (const period of course.periods.length ? course.periods : ['']) {
         const column = indexOf.get(`${course.semester}|${period}`);
-        if (column !== undefined && !columnOwner.has(column)) columnOwner.set(column, course);
+        if (column !== undefined && !columnOwner.has(column))
+          columnOwner.set(column, course);
       }
     }
     if (columnOwner.size === 0) continue;
@@ -314,9 +334,17 @@ export function layoutProgram(
     let runIndex = 0;
 
     const pushRun = (start: number, end: number) => {
+      const baseId =
+        runIndex === 0
+          ? code
+          : `${code}__${(columnOwner.get(start) as ProgramCourse).semester}`;
+      let id = baseId;
+      let disambiguator = runIndex;
+      while (placementIds.has(id)) id = `${baseId}__${disambiguator++}`;
+      placementIds.add(id);
       placements.push({
         // The first run keeps the bare code so code-to-code edges land on the earliest run.
-        id: runIndex === 0 ? code : `${code}__${(columnOwner.get(start) as ProgramCourse).semester}`,
+        id,
         course: columnOwner.get(start) as ProgramCourse,
         start,
         end,
@@ -352,7 +380,9 @@ export function layoutProgram(
       placement.order = order.get(placement.id) ?? 0;
     }
     // Provisional rows, refined by packRows; keyed by code because edges are code-to-code.
-    group.forEach((placement) => rowOf.set(placement.course.code, placement.order));
+    group.forEach((placement) =>
+      rowOf.set(placement.course.code, placement.order),
+    );
   }
 
   const rows = packRows(placements, columnKeys.length);
@@ -408,8 +438,13 @@ export function layoutProgram(
     const compulsory = inSemester.filter((c) => c.compulsory);
     // A programme that marks nothing compulsory would otherwise report "0 hp" for a full semester.
     const counted = compulsory.length > 0 ? compulsory : inSemester;
-    group.credits = counted.reduce((sum, c) => sum + (c.creditsInSemester ?? 0), 0);
-    group.collapsedCount = collapsedSemesters.has(group.semester) ? inSemester.length : 0;
+    group.credits = counted.reduce(
+      (sum, c) => sum + (c.creditsInSemester ?? 0),
+      0,
+    );
+    group.collapsedCount = collapsedSemesters.has(group.semester)
+      ? inSemester.length
+      : 0;
   }
 
   // The pool card hangs below the last individually placed course of its semester.

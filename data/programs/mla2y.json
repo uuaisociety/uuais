@@ -536,5 +536,17 @@
   "programmeTitleEn": "Medicine Programme, 360 credits (MLA2Y)",
   "programmeUri": "/utbildning/program/lakarprogrammet",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 12,
+        "textSv": "Valbar kurs, 7,5 hp\nLäkarprogrammet erbjuder studenterna ett urval av valbara kurser under denna termin.",
+        "textEn": "Elective course, 7.5 credits"
+      }
+    ]
+  }
 }

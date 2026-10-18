@@ -204,5 +204,15 @@
   "programmeTitleEn": "Specialist Nursing Programme – Theatre Care, 60 credits (MSJ2Y)",
   "programmeUri": "/utbildning/program/specialistsjukskoterskeprogrammet-psykiatrisk-vard",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Inriktningen ges även på halvfart - då gäller annan turordning på kurserna. För mer information kontakta vardstudievagledning@uu.se"
+      }
+    ]
+  }
 }

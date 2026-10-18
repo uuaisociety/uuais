@@ -552,5 +552,22 @@
   "programmeTitleEn": "Bachelor's Programme in Energy Transition – Sustainability and Leadership, 180 credits (TEO1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-energiomstallning-hallbarhet-och-ledarskap",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Följande beteckningar används: G1N - Grundnivå, kursen kräver inte tidigare högskolestudier G1F - Grundnivå, kursen kräver tidigare högskolestudier mindre än 60 hp G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp G2E - Grundnivå, examensarbete för kandidatexamen (180 hp)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Valfria kurser 30 hp Tillvalskurser (valfria under period 1 och 2):",
+        "textEn": "Elective courses 30 credits Elective course (optional during period 1 and 2)"
+      }
+    ]
+  }
 }

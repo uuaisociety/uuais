@@ -30,5 +30,14 @@
   "programmeTitleEn": "Bachelor's Programme in Archaeology and Ancient History, 180 credits (HAH1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-arkeologi-och-antik-historia",
   "faculty": "Historisk-filosofiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

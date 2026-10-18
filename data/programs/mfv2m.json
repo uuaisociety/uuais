@@ -191,5 +191,17 @@
   "programmeTitleEn": "Master's Programme in Forensic Science, 120 credits (MFV2M)",
   "programmeUri": "/utbildning/program/masterprogram-forensisk-vetenskap",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Valbar period 15 hp 3MG024 Litteraturprojekt i forensisk biologi 15 hp alternativt ​3MG105 Examensarbete 45 hp",
+        "textEn": "Elective period 15 credits 3MG024 Literature project in forensic biology 15 credits or ​3MG105 Master's degree project 45 credits"
+      }
+    ]
+  }
 }

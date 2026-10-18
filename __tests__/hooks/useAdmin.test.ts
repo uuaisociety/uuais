@@ -20,6 +20,10 @@ jest.mock('@/lib/firebase-client', () => ({
   refreshSessionCookie: jest.fn(),
 }));
 
+jest.mock('@/lib/idle', () => ({
+  scheduleIdle: jest.fn((callback: () => void) => callback()),
+}));
+
 jest.mock('@/lib/firestore/users', () => ({
   getUserProfile: jest.fn().mockResolvedValue(null),
 }));
@@ -53,15 +57,25 @@ describe('useAdmin', () => {
     mockAuth.currentUser = null;
     authCallback = null;
 
-    ({ renderHook, act, waitFor } = jest.requireActual('@testing-library/react'));
+    ({ renderHook, act, waitFor } = jest.requireActual(
+      '@testing-library/react',
+    ));
     const auth = jest.requireMock('firebase/auth') as Record<string, jest.Mock>;
     onAuthStateChanged = auth.onAuthStateChanged;
     getIdTokenResult = auth.getIdTokenResult;
     signInWithPopup = auth.signInWithPopup;
     signOut = auth.signOut;
-    refreshSessionCookie = (jest.requireMock('@/lib/firebase-client') as { refreshSessionCookie: jest.Mock }).refreshSessionCookie;
-    getUserProfile = (jest.requireMock('@/lib/firestore/users') as { getUserProfile: jest.Mock }).getUserProfile;
-    useAdmin = (jest.requireMock('@/hooks/useAdmin') as typeof import('@/hooks/useAdmin')).useAdmin;
+    refreshSessionCookie = (
+      jest.requireMock('@/lib/firebase-client') as {
+        refreshSessionCookie: jest.Mock;
+      }
+    ).refreshSessionCookie;
+    getUserProfile = (
+      jest.requireMock('@/lib/firestore/users') as { getUserProfile: jest.Mock }
+    ).getUserProfile;
+    useAdmin = (
+      jest.requireMock('@/hooks/useAdmin') as typeof import('@/hooks/useAdmin')
+    ).useAdmin;
 
     onAuthStateChanged.mockImplementation((_auth, cb) => {
       authCallback = cb;
@@ -130,7 +144,9 @@ describe('useAdmin', () => {
   });
 
   it('handles super admin user', async () => {
-    getIdTokenResult.mockResolvedValue({ claims: { admin: true, superAdmin: true } });
+    getIdTokenResult.mockResolvedValue({
+      claims: { admin: true, superAdmin: true },
+    });
     const { result } = loadHook();
     await waitFor(() => expect(authCallback).not.toBeNull());
     await act(async () => {
@@ -156,7 +172,10 @@ describe('useAdmin', () => {
 
   it('loads the user profile and persists it in the cache', async () => {
     getIdTokenResult.mockResolvedValue({ claims: { admin: true } });
-    getUserProfile.mockResolvedValue({ id: 'test-uid', displayName: 'ProfileName' });
+    getUserProfile.mockResolvedValue({
+      id: 'test-uid',
+      displayName: 'ProfileName',
+    });
     mockAuth.currentUser = mockUser;
     const { result } = loadHook();
     await waitFor(() => expect(authCallback).not.toBeNull());
@@ -164,7 +183,10 @@ describe('useAdmin', () => {
       await authCallback!(mockUser);
     });
     expect(getUserProfile).toHaveBeenCalledWith('test-uid');
-    expect(result.current.profile).toEqual({ id: 'test-uid', displayName: 'ProfileName' });
+    expect(result.current.profile).toEqual({
+      id: 'test-uid',
+      displayName: 'ProfileName',
+    });
     expect(result.current.cached?.name).toBe('ProfileName');
   });
 
@@ -172,7 +194,11 @@ describe('useAdmin', () => {
     getIdTokenResult.mockResolvedValue({ claims: {} });
     getUserProfile.mockResolvedValue({ id: 'test-uid', name: 'RealName' });
     mockAuth.currentUser = mockUser;
-    const user = { uid: 'test-uid', email: 'test@example.com', displayName: 'AuthName' } as User;
+    const user = {
+      uid: 'test-uid',
+      email: 'test@example.com',
+      displayName: 'AuthName',
+    } as User;
     const { result } = loadHook();
     await waitFor(() => expect(authCallback).not.toBeNull());
     await act(async () => {
@@ -185,7 +211,13 @@ describe('useAdmin', () => {
   it('reads the cached identity from localStorage on start', () => {
     window.localStorage.setItem(
       'uuais.identity',
-      JSON.stringify({ uid: 'cached-uid', name: 'CachedUser', email: null, photoURL: null, isAdmin: true }),
+      JSON.stringify({
+        uid: 'cached-uid',
+        name: 'CachedUser',
+        email: null,
+        photoURL: null,
+        isAdmin: true,
+      }),
     );
     const { result } = loadHook();
     expect(result.current.cached).toEqual({
@@ -195,6 +227,46 @@ describe('useAdmin', () => {
       photoURL: null,
       isAdmin: true,
     });
+  });
+
+  it('lets an eager consumer advance deferred auth once and shares its resolved profile', async () => {
+    const scheduled: Array<() => void> = [];
+    const { scheduleIdle } = jest.requireMock('@/lib/idle') as {
+      scheduleIdle: jest.Mock;
+    };
+    scheduleIdle.mockImplementation((callback: () => void, delay: number) => {
+      expect(delay).toBe(3500);
+      scheduled.push(callback);
+    });
+    getIdTokenResult.mockResolvedValue({ claims: {} });
+    const profile = {
+      id: 'test-uid',
+      isMember: true,
+      privacyAcceptedAt: 'accepted',
+    };
+    getUserProfile.mockResolvedValue(profile);
+
+    const header = loadHook();
+    expect(scheduleIdle).toHaveBeenCalledTimes(1);
+    expect(onAuthStateChanged).not.toHaveBeenCalled();
+
+    const newsletter = renderHook(() => useAdmin({ eager: true }));
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    await act(async () => {
+      await authCallback!(mockUser);
+    });
+    expect(newsletter.result.current.profile).toEqual(profile);
+    expect(getUserProfile).toHaveBeenCalledTimes(1);
+
+    await act(async () => scheduled[0]());
+    expect(onAuthStateChanged).toHaveBeenCalledTimes(1);
+
+    const laterConsumer = loadHook();
+    expect(laterConsumer.result.current.profile).toEqual(profile);
+    expect(getUserProfile).toHaveBeenCalledTimes(1);
+    header.unmount();
+    newsletter.unmount();
+    laterConsumer.unmount();
   });
 
   it('calls signInWithPopup and mints the session cookie on signInWithGoogle', async () => {
@@ -208,8 +280,8 @@ describe('useAdmin', () => {
   });
 
   it('calls signOut and clears the auth cookie on logout', async () => {
-    const mockFetch = jest.fn().mockResolvedValue({ ok: true })
-    global.fetch = mockFetch as unknown as typeof fetch
+    const mockFetch = jest.fn().mockResolvedValue({ ok: true });
+    global.fetch = mockFetch as unknown as typeof fetch;
     const { result } = loadHook();
     await act(async () => {
       await result.current.logout();
@@ -230,7 +302,11 @@ describe('useAdmin', () => {
 
   it('ignores a stale auth event that resolves after a newer one (prevents user flicker)', async () => {
     let resolveClaims!: (v: { claims: Record<string, boolean> }) => void;
-    getIdTokenResult.mockReturnValue(new Promise((res) => { resolveClaims = res; }));
+    getIdTokenResult.mockReturnValue(
+      new Promise((res) => {
+        resolveClaims = res;
+      }),
+    );
     const { result } = loadHook();
     await waitFor(() => expect(authCallback).not.toBeNull());
     const staleUser = { uid: 'test-uid', email: 'a@example.com' } as User;
@@ -254,7 +330,12 @@ describe('useAdmin', () => {
     getIdTokenResult.mockResolvedValue({ claims: {} });
     getUserProfile
       .mockResolvedValueOnce({ id: 'test-uid', name: 'OldName' })
-      .mockResolvedValue({ id: 'test-uid', name: 'NewName', isMember: true, privacyAcceptedAt: '2026-01-01T00:00:00Z' });
+      .mockResolvedValue({
+        id: 'test-uid',
+        name: 'NewName',
+        isMember: true,
+        privacyAcceptedAt: '2026-01-01T00:00:00Z',
+      });
     mockAuth.currentUser = mockUser;
     const { result } = loadHook();
     await waitFor(() => expect(authCallback).not.toBeNull());
@@ -263,12 +344,19 @@ describe('useAdmin', () => {
     });
     expect(result.current.profile).toEqual({ id: 'test-uid', name: 'OldName' });
 
-    const { refreshProfile } = jest.requireMock('@/hooks/useAdmin') as typeof import('@/hooks/useAdmin');
+    const { refreshProfile } = jest.requireMock(
+      '@/hooks/useAdmin',
+    ) as typeof import('@/hooks/useAdmin');
     await act(async () => {
       await refreshProfile();
     });
     expect(getUserProfile).toHaveBeenLastCalledWith('test-uid');
-    expect(result.current.profile).toEqual({ id: 'test-uid', name: 'NewName', isMember: true, privacyAcceptedAt: '2026-01-01T00:00:00Z' });
+    expect(result.current.profile).toEqual({
+      id: 'test-uid',
+      name: 'NewName',
+      isMember: true,
+      privacyAcceptedAt: '2026-01-01T00:00:00Z',
+    });
   });
 
   it('refreshProfile is a no-op when signed out', async () => {
@@ -277,7 +365,9 @@ describe('useAdmin', () => {
     await act(async () => {
       await authCallback!(null);
     });
-    const { refreshProfile } = jest.requireMock('@/hooks/useAdmin') as typeof import('@/hooks/useAdmin');
+    const { refreshProfile } = jest.requireMock(
+      '@/hooks/useAdmin',
+    ) as typeof import('@/hooks/useAdmin');
     await act(async () => {
       await refreshProfile();
     });

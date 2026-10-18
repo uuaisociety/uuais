@@ -196,5 +196,46 @@
   "programmeTitleEn": "Biomedicine Programme, 180 credits (MBN1K)",
   "programmeUri": "/utbildning/program/biomedicinprogrammet",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Biomedicinsk introduktion och grundläggande kemi, 15,5 hp Biokemi, 7 hp Cell- och molekylärbiologi, (7,5 hp av 15 hp)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Cell- och molekylärbiologi, (7,5 hp av 15 hp) Statistik och dataanalys, 5 hp Vävnads- och utvecklingsbiologi, 10 hp Anatomi, 7,5 hp"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Metabolism, 5 hp Neurobiologi, 10 hp Fysiologi, 15 hp"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Medicinsk genetik, 7,5 hp Immunologi, 7,5 gp Bakteriologi, 7,5 hp Virologi, 7,5 hp"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Professionell utveckling, 7,5 hp Försöksdjursvetenskap och avancerad databearbetning, 8 hp Farmakologi med läkemedelskemi, 14,5 hp"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 6,
+        "textSv": "Sjukdomslära, 15 hp Examensarbete, 15 hp"
+      }
+    ]
+  }
 }

@@ -29,5 +29,14 @@
   "programmeTitleEn": "Bachelor's Programme in Business and Economics, 180 credits (SEK1K)",
   "programmeUri": "/utbildning/program/ekonomie-kandidatprogram",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

@@ -900,5 +900,57 @@
   "programmeTitleEn": "Master's Programme in Earth Science – Physical Geography, 120 credits (TGV2M)",
   "programmeUri": "/utbildning/program/masterprogram-geovetenskap-naturgeografi",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Följande beteckningar används: G2F - Grundnivå, kursen kräver tidigare högskolestudier minst 60 hp A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp A1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivå A1E - Avancerad nivå, examensarbete för magisterexamen (60 hp) A2E - Avancerad nivå, examensarbete för masterexamen (120 hp)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Eller:",
+        "textEn": "Or:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "alternativt",
+        "textEn": "alternatively"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Examensarbete E i geovetenskap, 15 (av 45) högskolepoäng (1GV085) kan vid behov påbörjas i denna period.",
+        "textEn": "Degree Project E in Earth Science, 15 (of 45) credits (1GV085) can be started during this period, if needed."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "1GV085 Examensarbete E i geovetenskap, 30 (av 45) högskolepoäng.",
+        "textEn": "1GV085 Degree Project E in Earth Science, 30 (of 45) credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "1GV220 Examensarbete E i geovetenskap, 30 (av 60) högskolepoäng.",
+        "textEn": "1GV220 Degree Project E in Earth Science, 30 (of 60) credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Övriga kurser (varierade perioder):",
+        "textEn": "Other courses (variable periods):"
+      }
+    ]
+  }
 }

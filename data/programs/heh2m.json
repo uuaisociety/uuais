@@ -272,5 +272,50 @@
   "programmeTitleEn": "Master's Programme in Global Environmental History, 120 credits (HEH2M)",
   "programmeUri": "/utbildning/program/masterprogram-global-miljohistoria",
   "faculty": "Historisk-filosofiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Studieplanen ska ses som ett förslag - den första terminen erbjuds ett kurspaket, men i övrigt finns en stor flexibilitet inom programmet och studenter uppmuntras att läsa kurser som gynnar det personliga intresset och examensarbetet. Du kan skriva examensarbete om 45 eller 60 hp, på heltid (100 %) eller halvtid (50 %), tillsammans med valfria kurser."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "LU0085 Forskningsprocessens kontext och process I: teorier och metoder. (SLU - Sveriges Lantbruksuniversitet)",
+        "textEn": "LU0085 The Context and Process of Research I; Theories and Methods. (SLU: Swedish University of Agricultural Sciences)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Valbar kurs om 7,5 hp.",
+        "textEn": "Optional course, 7,5 credits."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+        "textEn": "Optional courses within or outside the department. Possibilities to do intership and individual in-depth and methods courses."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+        "textEn": "Optional courses within or outside the department. Possibilities to do intership and individual in-depth and methods courses."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Valbara kurser inom eller utom institutionen. Möjlighet till praktik och individuella fördjupnings- och metodkurser.",
+        "textEn": "Optional courses within out outside the department. Possibilities to do intership and individual in-depth and methods courses."
+      }
+    ]
+  }
 }

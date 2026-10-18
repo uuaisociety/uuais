@@ -30,5 +30,14 @@
   "programmeTitleEn": "Master's Programme in Peace and Conflict Studies, 120 credits (SFK2M)",
   "programmeUri": "/utbildning/program/masterprogram-freds-och-konfliktstudier",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

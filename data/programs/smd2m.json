@@ -319,7 +319,7 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "2IV182",
         "2IV181",
@@ -334,8 +334,8 @@
       ],
       "semester": 2,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 2IV182, 2IV181, 2IV126, 1MD001, 1MD046, 1MD004, 1MD200, 1MD043, 1MD044, 1MD045",
-      "labelEn": "Choose one of 10 courses.",
+      "textSv": "Välj 30 hp av följande kurser:",
+      "labelEn": "Choose 30 credits from these courses:",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -355,7 +355,7 @@
     },
     {
       "id": "rule-2",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "2IV176",
         "2IV157",
@@ -365,8 +365,8 @@
       ],
       "semester": 3,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 2IV176, 2IV157, 2IV158, 2IV159, 1MD033",
-      "labelEn": "Choose one of 5 courses.",
+      "textSv": "Välj 30 hp av följande kurser:",
+      "labelEn": "Choose 30 credits from these courses:",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -523,5 +523,38 @@
   "programmeTitleEn": "Master's Programme in Human–Computer Interaction, 120 credits (SMD2M)",
   "programmeUri": "/utbildning/program/masterprogram-manniska-datorinteraktion",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 2,
+        "textSv": "Välj 30 hp av följande kurser:",
+        "textEn": "Choose 30 credits from these courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Observera:\nFör vissa av dessa kurser krävs att studenten möter speciella förkunskapskrav, se behörighetskraven i kursplanen för respektive kurs. Kurserna Informations och tjänstedesign,7,5 hp (2IV182 ) och Etiska perspektiv på IT-system och design i MDI,7,5 hp (2IV181) ges inom kurspaketet Att designa för människan, 15 hp",
+        "textEn": "Note:\nFor some of these courses, the student must meet special prerequisites, see the entry requirements in the syllabus for each course. The courses Interaction and Service Design 7,5 credits (2IV182 ) and Ethical Perspectives on IT Systems and Design in HCI, 7,5 credits (2IV181) are part of the course package Designing for People 15 credits"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 3,
+        "textSv": "Välj 30 hp av följande kurser:",
+        "textEn": "Choose 30 credits from these courses:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Observera:\nFör vissa av dessa kurser krävs att studenten möter speciella förkunskapskrav, se behörighetskraven i kursplanen för respektive kurs.",
+        "textEn": "Note:\nFor some of these courses, the student must meet special prerequisites, see the entry requirements in the syllabus for each course."
+      }
+    ]
+  }
 }

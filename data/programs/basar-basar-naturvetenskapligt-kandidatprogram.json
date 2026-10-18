@@ -183,7 +183,7 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1BA203",
         "1BA204",
@@ -193,14 +193,14 @@
       ],
       "semester": 1,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1BA203, 1BA204, 1BA205, 1BA206, 1BA207",
-      "labelEn": "Choose one of 5 courses.",
+      "textSv": "Kurser inom basåret:",
+      "labelEn": "Courses within the foundation year programme",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-1",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1BA209",
         "1BA210",
@@ -210,8 +210,8 @@
       ],
       "semester": 2,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1BA209, 1BA210, 1BA211, 1BA212, 1BA213",
-      "labelEn": "Choose one of 5 courses.",
+      "textSv": "Kurser inom basåret:",
+      "labelEn": "Courses within the foundation year programme",
       "cohortBefore": null,
       "source": "plan"
     }
@@ -261,5 +261,24 @@
   "programmeTitleEn": "Science and Technology Foundation Year Programme – Reserved Place on the Teacher Education Programme, Mathematics, Technology or Natural Science Subjects, 40 weeks (BASAR)",
   "programmeUri": "/utbildning/program/basar-naturvetenskapligt-kandidatprogram",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 1,
+        "textSv": "Kurser inom basåret:",
+        "textEn": "Courses within the foundation year programme"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 2,
+        "textSv": "Kurser inom basåret:",
+        "textEn": "Courses within the foundation year programme"
+      }
+    ]
+  }
 }

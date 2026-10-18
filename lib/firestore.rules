@@ -32,7 +32,7 @@ service cloud.firestore {
 
     // Helper: limit updates to only specific keys
     function changedOnly(allowed) {
-      return request.resource.data.diff(resource.data).changedKeys().hasOnly(allowed);
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(allowed);
     }
 
     // Helper: field unchanged equality
@@ -109,9 +109,8 @@ service cloud.firestore {
     }
 
     // TEAM MEMBERS
-    // NOTE: `notes` field is admin-only per UI convention but publicly readable via client SDK (collection is world-readable)
     match /teamMembers/{id} {
-      allow read: if true;
+      allow read: if isAdmin();
       allow create, update, delete: if isAdmin();
     }
 
@@ -300,19 +299,6 @@ service cloud.firestore {
         && changedOnly(['status'])
         && request.resource.data.status == 'cancelled';
 
-      // Exception: allow invited -> confirmed transition for token-based confirmation on the public confirmation page.
-      // Constraints:
-      // - Only fields changed: status, confirmedAt, confirmationToken
-      // - Existing status must be 'invited'
-      // - New status must be 'confirmed'
-      // - Existing confirmationToken must be non-null
-      // - New confirmationToken must be null
-      allow update: if
-        changedOnly(['status','confirmedAt','confirmationToken']) &&
-        resource.data.status == 'invited' &&
-        request.resource.data.status == 'confirmed' &&
-        resource.data.confirmationToken != null &&
-        request.resource.data.confirmationToken == null;
     }
 
     // APPLICATION LIMITS (anti-spam cooldown & campaign locks — admin cleanup on deletion)

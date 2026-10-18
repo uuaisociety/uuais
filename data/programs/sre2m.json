@@ -293,8 +293,8 @@
       ],
       "semester": 1,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 5RY066, 5RY067, 2EU015",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Välj en av dessa kurser:",
+      "labelEn": "Choose one of these courses:",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -308,14 +308,14 @@
       ],
       "semester": 2,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 5RY068, 5RY069, 2EU017",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Välj en av dessa kurser:",
+      "labelEn": "Choose one of these courses:",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-2",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "2EU018",
         "2EU021",
@@ -324,8 +324,8 @@
       ],
       "semester": 3,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 2EU018, 2EU021, 2EU020, 2EU016",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Valfria kurser avancerad nivå 30 hp. Välj 30 hp från dessa kurser:",
+      "labelEn": "Elective courses advanced level 30 credits. Choose 30 credits from these courses:",
       "cohortBefore": null,
       "source": "plan"
     }
@@ -439,5 +439,25 @@
   "programmeTitleEn": "Master's Programme in Russian and Eurasian Studies, 120 credits (SRE2M)",
   "programmeUri": "/utbildning/program/masterprogram-rysslands-och-eurasienstudier",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-conflict",
+        "message": "The study plan lists Russian and Approaches to the Social Sciences as alternatives in semesters 1 and 2, while the programme syllabus says Russian is compulsory in both semesters. The sources conflict; verify the requirements with the department. No course is inferred as mandatory.",
+        "sourceUrls": [
+          "https://www.uu.se/utbildning/studieplan?query=5da05087-6dd3-4476-9e51-739043859046",
+          "https://www.uu.se/utbildning/utbildningsplan?query=d0937087-c952-11f0-a255-650837bd40cf"
+        ]
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 3,
+        "textSv": "Valfria kurser avancerad nivå 30 hp. Välj 30 hp från dessa kurser:",
+        "textEn": "Elective courses advanced level 30 credits. Choose 30 credits from these courses:"
+      }
+    ]
+  }
 }

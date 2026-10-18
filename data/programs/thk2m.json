@@ -108,7 +108,7 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1GV500",
         "1GV501",
@@ -116,22 +116,22 @@
       ],
       "semester": 1,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1GV500, 1GV501, 1GV502",
-      "labelEn": "Choose one of 3 courses.",
+      "textSv": "Kurser inom programmet",
+      "labelEn": "Courses within the programme",
       "cohortBefore": null,
       "source": "plan"
     },
     {
       "id": "rule-1",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1GV503",
         "1GV504"
       ],
       "semester": 2,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1GV503, 1GV504",
-      "labelEn": "Choose one of 2 courses.",
+      "textSv": "Kurser inom programmet",
+      "labelEn": "Courses within the programme",
       "cohortBefore": null,
       "source": "plan"
     },
@@ -214,5 +214,38 @@
   "programmeTitleEn": "Master's Programme in Sustainable Development of Coastal Areas, 120 credits (THK2M)",
   "programmeUri": "/utbildning/program/masterprogram-hallbar-utveckling-av-kustomraden",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 1,
+        "textSv": "Kurser inom programmet",
+        "textEn": "Courses within the programme"
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 2,
+        "textSv": "Kurser inom programmet",
+        "textEn": "Courses within the programme"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Preliminär studieplan 2027/2028\nAntingen: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Examensarbete i Hållbar utveckling 20 av 45 hp Eller: Workshop serie 1: Tvärvetenskaplig metod och tillämpning, en fördjupningskurs 10 hp Praktik i hållbar utveckling 15 hp Examensarbete i hållbar utveckling 5 av 30 hp.",
+        "textEn": "Preliminary outline 2027/2028\nEither: Workshop serie 1: Advanced interdisciplinary method and application (10 credits) Degree project in sustainable development of coastal areas 20 of 45 credits Or: Workshop serie 1: Advanced interdisciplinary method and application (10 credits) Internship in sustainable development, 15 credits Degree project in sustainable development of coastal areas 5 of 30 credits"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Preliminär studieplan 2027/2028\nWorkshop serie 2: Tvärvetenskaplig metod och tillämpning en fördjupnings kurs 5 hp Antingen: Examensarbete i hållbar utveckling av kustområden 25 av 45 hp. Eller: Examensarbete i hållbar utveckling av kustområden 25 av 30 hp.",
+        "textEn": "Preliminary outline 2027/2028\nWorkshop serie 2: Advanced interdisciplinary method and application, 5 credits Either: Degree project in sustainable development of coastal areas 25 of 45 credits Or: Degree project in sustainable development of coastal areas 25 of 30 credits"
+      }
+    ]
+  }
 }

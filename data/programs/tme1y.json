@@ -688,7 +688,7 @@
     },
     {
       "id": "rule-2",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "1TM121",
         "1MA017",
@@ -698,8 +698,8 @@
       ],
       "semester": 6,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 1TM121, 1MA017, 1TE061, 1TM120, 1TS311",
-      "labelEn": "Choose one of 5 courses.",
+      "textSv": "Rubrik saknas i källan.",
+      "labelEn": "No heading in source.",
       "cohortBefore": null,
       "source": "plan"
     }
@@ -971,5 +971,28 @@
   "programmeTitleEn": "Bachelor's Programme in Biomedical Engineering, 180 credits (TME1Y)",
   "programmeUri": "/utbildning/program/hogskoleingenjorsprogrammet-medicinsk-teknik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "1TE785 Kvalitetsteknik och 1TS336 Kvalitetsteknik kan inte ingå i examen tillsammans."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 5,
+        "textSv": "Under period 1 läses 1MD026 Medicinsk informatik och antingen 1TM118 Verksamhetsförlagd utbildning eller 1TE743 Industriell ekonomi tillsammans med 3PE051 Implementering av medicinsk teknik. Under period 2 läses 1KB704 Miljöteknik och antingen 1TM118 Verksamhetsförlagd utbildning eller 1TE743 Industriell ekonomi tillsammans med 3PE051 Implementering av medicinsk teknik, dvs. den kombination som inte lästes under period 1."
+      },
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 6,
+        "textSv": "Rubrik saknas i källan."
+      }
+    ]
+  }
 }

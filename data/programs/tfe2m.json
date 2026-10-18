@@ -1005,5 +1005,38 @@
   "programmeTitleEn": "Master's Programme in Renewable Electricity Production, 120 credits (TFE2M)",
   "programmeUri": "/utbildning/program/masterprogram-fornybar-elgenerering",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Vattenkraft - teknik och system, 10 hp (1TE029) erbjuds även under termin 3.",
+        "textEn": "The course Hydroelectric power - Technology and Systems, 10 credits (1TE029) is also given during the third semester."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1TE028 är behörighetskrav för 1TE724 (kan läsas parallellt). 1TE678 är den rekommenderade kursen inom solenergi i programmet.",
+        "textEn": "1TE028 is an entry requirement for the course 1TE724 (the courses may be taken simultaneously). 1TE678 is the recommended solar energy course within the programme."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "1TE840 Examensarbete i förnybar elproduktion 15 hp endast för studenter som önskar avsluta med en magisterexamen. Ges period 13-14.",
+        "textEn": "1TE840 Degree Project in Renewable Electricity Production 15 credits, only for students who wish to finish with a Degree of Master of Science-One Year. The course is given in periods 13-14."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Endast en av följande kurser i solenergi kan tas med i en examen: 1TE678 och 1TE028.",
+        "textEn": "1TE678 and 1TE028 cannot be included in the same degree."
+      }
+    ]
+  }
 }

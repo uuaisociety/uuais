@@ -28,5 +28,14 @@
   "programmeTitleEn": "Master's Programme in Sociology, 120 credits (SSO2M)",
   "programmeUri": "/utbildning/program/masterprogram-sociologi",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

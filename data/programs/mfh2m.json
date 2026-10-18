@@ -215,5 +215,9 @@
   "programmeTitleEn": "Master's Programme in Public Health, 120 credits (MFH2M)",
   "programmeUri": "/utbildning/program/masterprogram-folkhalsa",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "ok",
+    "issues": []
+  }
 }

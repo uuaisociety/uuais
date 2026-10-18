@@ -38,5 +38,14 @@
   "programmeTitleEn": "Master's Programme in Law for Social Work, 60 credits (JJS2N)",
   "programmeUri": "/utbildning/program/magisterprogram-juridik-for-socialt-arbete",
   "faculty": "Juridiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

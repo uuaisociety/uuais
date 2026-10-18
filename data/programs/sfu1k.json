@@ -62,5 +62,14 @@
   "programmeTitleEn": "Bachelor's Programme in Peace and Development Studies, 180 credits (SFU1K)",
   "programmeUri": "/utbildning/program/kandidatprogram-freds-och-utvecklingsstudier",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

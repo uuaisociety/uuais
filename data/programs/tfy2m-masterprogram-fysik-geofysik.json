@@ -1417,5 +1417,155 @@
   "programmeTitleEn": "Master's Programme in Physics – Theoretical Physics: Quantum Fields and Strings, 120 credits (TFY2M)",
   "programmeUri": "/utbildning/program/masterprogram-fysik-geofysik",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "blocked",
+    "issues": [
+      {
+        "kind": "unsupported-structure",
+        "message": "Introductory remarks define alternative programme layouts.",
+        "textSv": "Studieplanen innehåller två alternativa upplägg t o m år 1 period 3: Upplägg 1 är för studenter utan tidigare bakgrund i geofysik, t ex studenter som läst ett kandidatprogram i fysik eller ett kandidatprogram i geovetenskap med ett tillräckligt högt antal högskolepoäng i fysik och matematik. Upplägg 2 är för studenter som läst geofysikkurser inom kandidatprogrammet i fysik med inriktning mot geofysik vid Uppsala universitet."
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 1,
+        "textSv": "Upplägg 1:",
+        "textEn": "Option 1:"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 1,
+        "textSv": "Upplägg 2:",
+        "textEn": "Option 2:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1GV219 ges endast på svenska.",
+        "textEn": "1GV219 is only given in Swedish."
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 1,
+        "textSv": "Övriga alternativ:",
+        "textEn": "Other alternatives:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kurserna 1FA252 och 1FA257 kan schemaläggas samtidigt, studenter förväntas inte läsa dem under samma period.",
+        "textEn": "The courses 1FA252 and 1FA257 may be scheduled to be taught simultaneously, students are not expected to read them during the same period."
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1TV445 ges endast på svenska.",
+        "textEn": "1TV445 is only given in Swedish."
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 1,
+        "textSv": "Upplägg 1:",
+        "textEn": "Option 1:"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 1,
+        "textSv": "Upplägg 2:",
+        "textEn": "Option 2:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1GV219 ges endast på svenska.",
+        "textEn": "1GV219 is only given in Swedish."
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 1,
+        "textSv": "Övriga alternativ:",
+        "textEn": "Other alternatives:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "1MP022 och 1MP024 är blockkurser som ges med 100% studietakt.",
+        "textEn": "1MP022 and 1MP024 are block courses given at 100% study pace."
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 2,
+        "textSv": "Upplägg 1:",
+        "textEn": "Option 1:"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 2,
+        "textSv": "Upplägg 2:",
+        "textEn": "Option 2:"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 2,
+        "textSv": "Övriga alternativ:",
+        "textEn": "Other alternatives:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Från och med denna period kan studenter, som följer upplägg 1 eller 2, läsa samma kurser.",
+        "textEn": "From this period onwards, students following option 1 or 2 can have the same courses."
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 2,
+        "textSv": "Övriga alternativ:",
+        "textEn": "Other alternatives:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Kursen 1GE038 är för magisterexamen.",
+        "textEn": "The course 1GE038 is for a one-year Master's degree."
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 3,
+        "textSv": "Övriga alternativ:",
+        "textEn": "Other alternatives:"
+      },
+      {
+        "kind": "unsupported-structure",
+        "message": "The source defines an unparsed structural branch.",
+        "semester": 3,
+        "textSv": "Övriga alternativ:",
+        "textEn": "Other alternatives:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 4,
+        "textSv": "Övriga kurser som kan läsas under valfri period:",
+        "textEn": "Optional courses that can be taken during any period of the programme:"
+      }
+    ]
+  }
 }

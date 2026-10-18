@@ -379,5 +379,52 @@
   "programmeTitleEn": "Master's Programme in Statistics and Data Science, 120 credits (SSD2M)",
   "programmeUri": "/utbildning/program/masterprogram-statistik-och-dataanalys",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Period 1-2",
+        "textEn": "Period 1-2"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Period 3-4",
+        "textEn": "Period 3-4"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Period 1-2",
+        "textEn": "Period 1-2"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Period 3-4",
+        "textEn": "Period 3-4"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Välj två av följande tre kurser för period 1-2:",
+        "textEn": "Choose two of the following three courses for period 1-2:"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 3,
+        "textSv": "Period 3-4:",
+        "textEn": "Period 3-4:"
+      }
+    ]
+  }
 }

@@ -1,20 +1,21 @@
 
 
+from merge_extraction import build_rules
 from studieplan import (
     build_program,
     build_syllabus_program,
-    courses_from_semester_texts,
-    extract_syllabus,
-    flatten_ladok,
-    parse_syllabus_courses,
-    parse_syllabus_id,
     collect_rule_texts,
+    courses_from_semester_texts,
     extract_outline,
+    extract_syllabus,
     flatten_courses,
+    flatten_ladok,
     parse_credits,
     parse_main_field,
-    parse_title,
     parse_search_hits,
+    parse_syllabus_courses,
+    parse_syllabus_id,
+    parse_title,
     parse_track_header,
     slugify,
 )
@@ -394,6 +395,24 @@ class TestFlattenLadok:
         by_semester = {c["semester"]: c for c in courses}
         assert by_semester[1]["periods"] == ["Period 1", "Period 2"]
         assert by_semester[2]["periods"] == ["Period 3"]
+
+    def test_only_explicit_one_of_headings_create_choose_one_rules(self):
+        def course(code):
+            return {"education": _ladok_education(code, 15.0, [])}
+
+        outline = {"semesters": [{"number": 3, "choices": [
+            {"nameSv": "Välj en av dessa kurser:", "nameEn": "Choose one of these courses:",
+             "parts": [course("1AA001"), course("1AA002")]},
+            {"nameSv": "Välj 30 hp av följande kurser:", "nameEn": "Choose 30 credits from these courses:",
+             "parts": [course("1AA003"), course("1AA004")]},
+        ]}]}
+        courses, notes = flatten_ladok(outline)
+        rules = build_rules({"courses": courses}, {"rules": [{"note": note, "result": {}} for note in notes]})
+
+        assert [(rule["type"], rule["textSv"], rule["labelEn"]) for rule in rules] == [
+            ("CHOOSE_ONE", "Välj en av dessa kurser:", "Choose one of these courses:"),
+            ("NOTE", "Välj 30 hp av följande kurser:", "Choose 30 credits from these courses:"),
+        ]
 
 
 #: How UU actually serves it: entity-encoded, one course per <p class="linebreak">.

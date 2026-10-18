@@ -1,15 +1,14 @@
-"use client";
+'use client';
 
-import React from "react";
-import type { NodeProps } from "reactflow";
-import { ChevronDown, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import React from 'react';
+import type { NodeProps } from 'reactflow';
+import { ChevronDown, ChevronRight } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
 
 export type PeriodBandData = {
   semester: number;
-  credits: number;
   periods: string[];
-  orientation: "horizontal" | "vertical";
+  orientation: 'horizontal' | 'vertical';
   collapsed: boolean;
   hiddenCount: number;
   /** The specialisation this whole semester belongs to, when one does. */
@@ -19,7 +18,7 @@ export type PeriodBandData = {
   onToggle: () => void;
 };
 
-const shortPeriod = (period: string) => period.replace(/^Period\s*/, "P");
+const shortPeriod = (period: string) => period.replace(/^Period\s*/, 'P');
 
 /**
  * Groups a semester's periods so the wider gap between bands marks the semester break. The
@@ -34,7 +33,7 @@ function PeriodBandNode({ data }: NodeProps<PeriodBandData>) {
       size="none"
       onClick={data.onToggle}
       aria-expanded={!data.collapsed}
-      title={data.collapsed ? "Expand semester" : "Collapse semester"}
+      title={data.collapsed ? 'Expand semester' : 'Collapse semester'}
       className="pointer-events-auto -m-1 flex h-auto min-w-0 items-center justify-start gap-1 rounded px-1 py-1.5 text-foreground hover:text-foreground/70"
     >
       <Chevron className="h-3 w-3 shrink-0 opacity-60" />
@@ -52,11 +51,11 @@ function PeriodBandNode({ data }: NodeProps<PeriodBandData>) {
 
   const hidden = (
     <span className="font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-muted-foreground">
-      {data.hiddenCount} course{data.hiddenCount === 1 ? "" : "s"} hidden
+      {data.hiddenCount} course{data.hiddenCount === 1 ? '' : 's'} hidden
     </span>
   );
 
-  if (data.orientation === "vertical") {
+  if (data.orientation === 'vertical') {
     return (
       <div className="pointer-events-none flex h-full w-full select-none overflow-hidden rounded-lg border border-border bg-muted/40">
         {/* In the offset gutter: never covers a card, wide enough to spell the semester out. */}
@@ -65,9 +64,6 @@ function PeriodBandNode({ data }: NodeProps<PeriodBandData>) {
           style={{ width: data.railWidth }}
         >
           {toggle}
-          <span className="font-mono text-[0.6875rem] leading-none text-muted-foreground">
-            {data.credits} hp
-          </span>
           {track}
 
           {/* In the rail, not the slab the first card covers; centred on the stretch it names. */}
@@ -76,7 +72,9 @@ function PeriodBandNode({ data }: NodeProps<PeriodBandData>) {
               <span
                 key={period}
                 className="absolute left-2.5 right-2.5 -translate-y-1/2 truncate font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-muted-foreground"
-                style={{ top: `${((index + 0.5) / data.periods.length) * 100}%` }}
+                style={{
+                  top: `${((index + 0.5) / data.periods.length) * 100}%`,
+                }}
               >
                 {period}
               </span>
@@ -105,9 +103,6 @@ function PeriodBandNode({ data }: NodeProps<PeriodBandData>) {
         <span className="flex min-w-0 items-baseline gap-2.5">
           {toggle}
           {track}
-        </span>
-        <span className="shrink-0 font-mono text-[0.6875rem] leading-none text-muted-foreground">
-          {data.credits} hp
         </span>
       </div>
 

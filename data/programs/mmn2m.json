@@ -315,5 +315,17 @@
   "programmeTitleEn": "Master's Programme in Medical Nuclide Techniques, 120 credits (MMN2M)",
   "programmeUri": "/utbildning/program/masterprogram-medicinsk-nuklidteknik",
   "faculty": "Medicinska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 1,
+        "textSv": "Kursen 3DR409 börjar i slutet på höstterminen (3 Hp) och fortsätter på vårterminen (3 Hp).",
+        "textEn": "The course 3DR409 begins at the end of the autumn term (3 credits) and continues in the spring term (3 credits)."
+      }
+    ]
+  }
 }

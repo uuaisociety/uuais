@@ -32,5 +32,14 @@
   "programmeTitleEn": "Master's Programme in Investment Treaty Arbitration, 60 credits (JIS2N)",
   "programmeUri": "/utbildning/program/magisterprogram-internationell-investeringsratt",
   "faculty": "Juridiska fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "syllabus-only",
+        "message": "The university publishes no coded course map."
+      }
+    ]
+  }
 }

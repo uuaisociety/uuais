@@ -200,7 +200,7 @@
   "rules": [
     {
       "id": "rule-0",
-      "type": "CHOOSE_ONE",
+      "type": "NOTE",
       "courseCodes": [
         "2FE880",
         "2IV115",
@@ -209,8 +209,8 @@
       ],
       "semester": 4,
       "trackId": null,
-      "textSv": "En av kurserna ska väljas: 2FE880, 2IV115, 2IV116, 2IS037",
-      "labelEn": "Choose one of 4 courses.",
+      "textSv": "Välj den uppsatskurs som tillhör ditt huvudområde av dessa fyra kurser:",
+      "labelEn": "Choose the thesis course that corresponds with your main field of study:",
       "cohortBefore": null,
       "source": "plan"
     }
@@ -274,5 +274,17 @@
   "programmeTitleEn": "Master's Programme in Management, Communication and IT, 120 credits (SMK2M)",
   "programmeUri": "/utbildning/program/masterprogram-management-kommunikation-och-it",
   "faculty": "Samhällsvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "unsupported-choice-constraint",
+        "message": "A source course group has no safely parsed selection rule.",
+        "semester": 4,
+        "textSv": "Välj den uppsatskurs som tillhör ditt huvudområde av dessa fyra kurser:",
+        "textEn": "Choose the thesis course that corresponds with your main field of study:"
+      }
+    ]
+  }
 }

@@ -255,5 +255,22 @@
   "programmeTitleEn": "Master's Programme in Wind Power Project Management, 60 credits (TVP2N)",
   "programmeUri": "/utbildning/program/magisterprogram-vindkraftsprojektering",
   "faculty": "Teknisk-naturvetenskapliga fakulteten",
-  "reviewed": false
+  "reviewed": false,
+  "safety": {
+    "status": "warning",
+    "issues": [
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "textSv": "Följande beteckningar används: A1N - Avancerad nivå, kursen kräver endast kurser på grundnivå, minst 120 hp A1F - Avancerad nivå, kursen kräver tidigare kurser på avancerad nivå A1E - Avancerad nivå, examensarbete för magisterexamen (60 hp)"
+      },
+      {
+        "kind": "source-text-content",
+        "message": "Source text is retained verbatim because it is not a coded course row.",
+        "semester": 2,
+        "textSv": "Övriga kurser (valfri period)",
+        "textEn": "Other courses (any period)"
+      }
+    ]
+  }
 }
