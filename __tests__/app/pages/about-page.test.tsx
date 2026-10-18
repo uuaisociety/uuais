@@ -1,4 +1,5 @@
 import { render, screen, within, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import AboutPage from '@/components/pages/AboutPage';
 import { defaultAppState } from '@/__tests__/helpers/fixtures';
 
@@ -77,15 +78,176 @@ describe('AboutPage', () => {
     ).toBeInTheDocument();
   });
 
+  it('places the year history after FAQ and before the join invitation', () => {
+    renderWith(defaultAppState);
+    const history = screen.getByRole('region', {
+      name: 'History of UU AI Society',
+    });
+    const faq = screen.getByRole('region', {
+      name: 'Frequently asked questions',
+    });
+    const join = screen.getByRole('region', { name: 'Join UU AI Society' });
+    expect(
+      faq.compareDocumentPosition(history) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      history.compareDocumentPosition(join) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      within(history).getByRole('heading', { name: '(Our) history' }),
+    ).toBeInTheDocument();
+    const foundingPanel = within(history).getByRole('article', {
+      name: '2025 history',
+    });
+    expect(
+      within(foundingPanel).getByText('2025', { selector: 'p' }),
+    ).toBeInTheDocument();
+    expect(
+      within(foundingPanel).getByRole('heading', {
+        name: 'A student society takes shape',
+      }),
+    ).toBeInTheDocument();
+    expect(
+      within(foundingPanel).getByText(/Founded in April 2025/),
+    ).toBeInTheDocument();
+    expect(
+      within(history).getByRole('img', { name: 'Uppsala University campus' }),
+    ).toBeInTheDocument();
+    expect(
+      within(history).getByRole('button', { name: '2025' }),
+    ).toHaveAttribute('aria-pressed', 'true');
+    const yearNavigation = within(history).getByRole('navigation', {
+      name: 'History by year',
+    });
+    const photo = within(history).getByRole('img', {
+      name: 'Uppsala University campus',
+    });
+    const summary = within(history).getByText(/Founded in April 2025/);
+    expect(
+      yearNavigation.compareDocumentPosition(photo) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(
+      photo.compareDocumentPosition(summary) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+
+  it('switches the year summary and image with the year rail', async () => {
+    const user = userEvent.setup();
+    renderWith(defaultAppState);
+    const history = screen.getByRole('region', {
+      name: 'History of UU AI Society',
+    });
+    const photo = within(history).getByRole('img', {
+      name: 'Uppsala University campus',
+    });
+    await user.click(within(history).getByRole('button', { name: '2026' }));
+    const currentPanel = within(history).getByRole('article', {
+      name: '2026 history',
+    });
+    expect(
+      within(currentPanel).getByRole('heading', {
+        name: 'Building, recognition, and community',
+      }),
+    ).toBeInTheDocument();
+    expect(
+      within(currentPanel).getByText(
+        /National AI Startup Competition round was announced/,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      within(history).getByRole('img', { name: 'Uppsala University campus' }),
+    ).toBe(photo);
+    expect(
+      within(history).queryByRole('article', { name: '2025 history' }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(history).queryByRole('link', { name: 'Anders Wall Foundation' }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(history).getByRole('button', { name: '2026' }),
+    ).toHaveAttribute('aria-pressed', 'true');
+    expect(
+      within(currentPanel).getByRole('link', { name: 'Uppsala University' }),
+    ).toHaveAttribute(
+      'href',
+      'https://www.uu.se/en/news/2026/2026-09-09-alexander-sundquist-is-named-uppsala-student-of-the-year-2026',
+    );
+    expect(
+      within(currentPanel).getByRole('link', { name: 'UU AI Society' }),
+    ).toHaveAttribute(
+      'href',
+      'https://www.uuais.com/events/OgJIGnOVGOiAXhvEHUIP',
+    );
+  });
+
+  it('uses previous and next controls without wrapping', async () => {
+    const user = userEvent.setup();
+    renderWith(defaultAppState);
+    const history = screen.getByRole('region', {
+      name: 'History of UU AI Society',
+    });
+    const previous = within(history).getByRole('button', {
+      name: 'Previous year',
+    });
+    const next = within(history).getByRole('button', { name: 'Next year' });
+    expect(previous).toBeDisabled();
+    expect(next).toBeEnabled();
+    await user.click(next);
+    expect(
+      within(history).getByText('2026', { selector: 'p' }),
+    ).toBeInTheDocument();
+    expect(next).toBeDisabled();
+    expect(previous).toBeEnabled();
+    await user.click(previous);
+    expect(
+      within(
+        within(history).getByRole('article', { name: '2025 history' }),
+      ).getByText('2025', { selector: 'p' }),
+    ).toBeInTheDocument();
+    expect(previous).toBeDisabled();
+    await user.click(next);
+    await user.click(previous);
+    expect(
+      within(history).getByRole('heading', {
+        name: 'A student society takes shape',
+      }),
+    ).toBeInTheDocument();
+  });
+
+  it('supports keyboard selection of a year', async () => {
+    const user = userEvent.setup();
+    renderWith(defaultAppState);
+    const history = screen.getByRole('region', {
+      name: 'History of UU AI Society',
+    });
+    const yearButton = within(history).getByRole('button', { name: '2026' });
+    yearButton.focus();
+    expect(yearButton).toHaveFocus();
+    await user.keyboard('{Enter}');
+    expect(
+      within(history).getByRole('heading', {
+        name: 'Building, recognition, and community',
+      }),
+    ).toBeInTheDocument();
+  });
+
   it('links every section in the on-page nav', () => {
     renderWith(defaultAppState);
     const nav = screen.getByRole('navigation', { name: 'On this page' });
-    for (const [label, href] of [
+    const links = [
       ['Mission', '#mission'],
       ['Team', '#team'],
       ['Contact', '#contact'],
       ['FAQ', '#faq'],
-    ]) {
+      ['History', '#history'],
+    ];
+    expect(
+      within(nav)
+        .getAllByRole('link')
+        .map((link) => link.textContent),
+    ).toEqual(links.map(([label]) => label));
+    for (const [label, href] of links) {
       expect(within(nav).getByRole('link', { name: label })).toHaveAttribute(
         'href',
         href,

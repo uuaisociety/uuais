@@ -36,6 +36,8 @@ const buttonVariants = cva(
         // A control whose surface is something else — a whole card, a strip along a band.
         // It keeps the system's focus ring and press feedback but brings its own geometry.
         bare: 'bg-transparent text-inherit font-normal',
+        timeline:
+          'justify-start gap-3 rounded-sm bg-transparent font-mono text-xs font-normal tracking-wide text-muted-foreground hover:bg-transparent hover:text-foreground aria-pressed:text-foreground active:scale-100',
       },
       size: {
         default: 'h-10 px-5 text-sm has-[>svg]:pr-4',
