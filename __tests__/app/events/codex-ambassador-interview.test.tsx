@@ -2,8 +2,17 @@ import { render, screen, within } from '@testing-library/react';
 import InterviewPage, {
   metadata,
 } from '@/app/events/codex-ambassador-interview/page';
+import { CODEX_AMBASSADOR_INTERVIEW_PUBLISH_AT } from '@/lib/content-publication';
 
 describe('Codex ambassador interview page', () => {
+  beforeEach(() => {
+    jest.useFakeTimers({ now: CODEX_AMBASSADOR_INTERVIEW_PUBLISH_AT });
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
   it('renders all five questions, the three tips, and all original resource links', () => {
     render(<InterviewPage />);
 
@@ -62,6 +71,20 @@ describe('Codex ambassador interview page', () => {
     expect(metadata.alternates?.canonical).toMatch(
       /\/events\/codex-ambassador-interview$/,
     );
+  });
+
+  it('does not render before release and becomes available at the release instant', () => {
+    jest.setSystemTime(CODEX_AMBASSADOR_INTERVIEW_PUBLISH_AT.getTime() - 1);
+    expect(() => InterviewPage()).toThrow('NEXT_NOT_FOUND');
+
+    jest.setSystemTime(CODEX_AMBASSADOR_INTERVIEW_PUBLISH_AT);
+    render(<InterviewPage />);
+    expect(
+      screen.getByRole('heading', {
+        name: 'Interview with the Codex Ambassador',
+        level: 1,
+      }),
+    ).toBeInTheDocument();
   });
 
   it('uses the supplied portrait and event photos with descriptive alternatives', () => {

@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { SITE_URL } from '@/app/metadata';
+import { isCodexAmbassadorInterviewPublished } from '@/lib/content-publication';
 import shuangPortrait from '@/public/images/interviews/codex-ambassador/shuang-zheng.webp';
 import communityAtBanners from '@/public/images/interviews/codex-ambassador/community-event-codex-uuais.webp';
 import communityInLectureRoom from '@/public/images/interviews/codex-ambassador/community-event-lecture.webp';
@@ -16,10 +18,16 @@ export const metadata: Metadata = {
   },
 };
 
+export const dynamic = 'force-dynamic';
+
 const answerLinkClass =
   'text-foreground underline decoration-foreground/35 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm';
 
 export default function CodexAmbassadorInterviewPage() {
+  if (!isCodexAmbassadorInterviewPublished()) {
+    notFound();
+  }
+
   return (
     <div className="min-h-screen bg-background px-5 pb-24 pt-24 sm:px-8 sm:pt-28">
       <article className="mx-auto max-w-5xl">

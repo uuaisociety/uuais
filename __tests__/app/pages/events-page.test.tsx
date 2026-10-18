@@ -1,9 +1,10 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { act, render, screen, fireEvent } from '@testing-library/react';
 import EventsPage from '@/components/pages/EventsPage';
 import { updatePageMeta } from '@/utils/seo';
 import { defaultAppState } from '@/__tests__/helpers/fixtures';
 import type { EventArchivePage } from '@/contexts/useEventArchive';
 import type { Event } from '@/types';
+import { CODEX_AMBASSADOR_INTERVIEW_PUBLISH_AT } from '@/lib/content-publication';
 const mockUseApp = jest.fn();
 const mockEventArchive = {
   pages: {} as Record<string, EventArchivePage>,
@@ -63,6 +64,11 @@ describe('EventsPage', () => {
     jest.clearAllMocks();
     mockEventArchive.pages = {};
     mockEventArchive.searchEvents = null;
+    jest.useFakeTimers({ now: CODEX_AMBASSADOR_INTERVIEW_PUBLISH_AT });
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
   });
 
   it('shows empty state when no events', () => {
@@ -77,6 +83,35 @@ describe('EventsPage', () => {
     expect(
       screen.getByText('No upcoming events match your search criteria.'),
     ).toBeInTheDocument();
+  });
+
+  it('keeps the interview link hidden before release and reveals it at release while open', () => {
+    jest.setSystemTime(CODEX_AMBASSADOR_INTERVIEW_PUBLISH_AT.getTime() - 1);
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+    render(<EventsPage />);
+
+    expect(
+      screen.queryByRole('link', {
+        name: 'a conversation with the Codex Ambassador',
+      }),
+    ).not.toBeInTheDocument();
+
+    act(() => jest.advanceTimersByTime(1));
+    expect(
+      screen.getByRole('link', {
+        name: 'a conversation with the Codex Ambassador',
+      }),
+    ).toHaveAttribute('href', '/events/codex-ambassador-interview');
+  });
+
+  it('clears the pending publication timer when the Events page unmounts', () => {
+    jest.setSystemTime(CODEX_AMBASSADOR_INTERVIEW_PUBLISH_AT.getTime() - 1);
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+    const { unmount } = render(<EventsPage />);
+
+    expect(jest.getTimerCount()).toBeGreaterThan(0);
+    unmount();
+    expect(jest.getTimerCount()).toBe(0);
   });
 
   it('does not flash the empty state while events are still loading', () => {

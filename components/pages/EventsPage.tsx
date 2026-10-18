@@ -16,6 +16,7 @@ import campus from '@/public/images/campus.png';
 import type { Event } from '@/types';
 import type { EventArchiveCategory } from '@/contexts/useEventArchive';
 import { EVENT_PAGE_SIZE as PAST_EVENTS_PAGE_SIZE } from '@/lib/event-pagination';
+import { CODEX_AMBASSADOR_INTERVIEW_PUBLISH_AT } from '@/lib/content-publication';
 
 const EventsPage: React.FC = () => {
   const { state, eventArchive } = useApp();
@@ -26,6 +27,29 @@ const EventsPage: React.FC = () => {
   const [visiblePastCount, setVisiblePastCount] = useState(
     PAST_EVENTS_PAGE_SIZE,
   );
+  const [interviewPublished, setInterviewPublished] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: number | undefined;
+    const updatePublicationState = () => {
+      const delay =
+        CODEX_AMBASSADOR_INTERVIEW_PUBLISH_AT.getTime() - Date.now();
+      if (delay <= 0) {
+        setInterviewPublished(true);
+        return;
+      }
+
+      timeoutId = window.setTimeout(
+        updatePublicationState,
+        Math.min(delay, 2_147_483_647),
+      );
+    };
+
+    updatePublicationState();
+    return () => {
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+    };
+  }, []);
 
   useEffect(() => {
     updatePageMeta(
@@ -253,15 +277,17 @@ const EventsPage: React.FC = () => {
           )}
         </div>
 
-        <p className="mt-5 text-sm text-muted-foreground">
-          From the community:{' '}
-          <Link
-            href="/events/codex-ambassador-interview"
-            className="text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
-          >
-            a conversation with the Codex Ambassador
-          </Link>
-        </p>
+        {interviewPublished && (
+          <p className="mt-5 text-sm text-muted-foreground">
+            From the community:{' '}
+            <Link
+              href="/events/codex-ambassador-interview"
+              className="text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+            >
+              a conversation with the Codex Ambassador
+            </Link>
+          </p>
+        )}
 
         {/* Events Grid */}
         {!searching && !state.eventsLoaded && activeTab === 'upcoming' ? (
