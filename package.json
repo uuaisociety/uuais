@@ -78,7 +78,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@next/eslint-plugin-next": "^16.4.0",
+    "@next/eslint-plugin-next": "^16.4.2",
     "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.8.0",
@@ -93,7 +93,7 @@
     "autoprefixer": "^10.4.21",
     "dotenv": "^17.2.2",
     "eslint": "^9.39.2",
-    "eslint-config-next": "^16.4.0",
+    "eslint-config-next": "^16.4.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-security": "^3.0.1",
