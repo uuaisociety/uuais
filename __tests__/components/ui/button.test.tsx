@@ -50,6 +50,21 @@ describe('Button', () => {
     expect(handleClick).not.toHaveBeenCalled()
   })
 
+  it('supports the selected timeline control state without press scaling', async () => {
+    const handleClick = jest.fn()
+    render(
+      <Button variant="timeline" aria-pressed="true" onClick={handleClick}>
+        2026
+      </Button>
+    )
+    const button = screen.getByRole('button', { name: '2026' })
+    expect(button).toHaveAttribute('aria-pressed', 'true')
+    expect(button.className).toContain('active:scale-100')
+    expect(button.className).not.toContain('active:scale-[0.97]')
+    await userEvent.click(button)
+    expect(handleClick).toHaveBeenCalledTimes(1)
+  })
+
   it('renders asChild by cloning child element', () => {
     render(
       <Button asChild>
