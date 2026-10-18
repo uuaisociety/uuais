@@ -70,6 +70,11 @@ describe('EventsPage', () => {
     render(<EventsPage />);
     expect(screen.getByText('No events found')).toBeInTheDocument();
     expect(
+      screen.getByRole('link', {
+        name: 'a conversation with the Codex Ambassador',
+      }),
+    ).toHaveAttribute('href', '/events/codex-ambassador-interview');
+    expect(
       screen.getByText('No upcoming events match your search criteria.'),
     ).toBeInTheDocument();
   });

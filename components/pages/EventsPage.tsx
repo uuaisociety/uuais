@@ -253,6 +253,16 @@ const EventsPage: React.FC = () => {
           )}
         </div>
 
+        <p className="mt-5 text-sm text-muted-foreground">
+          From the community:{' '}
+          <Link
+            href="/events/codex-ambassador-interview"
+            className="text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+          >
+            a conversation with the Codex Ambassador
+          </Link>
+        </p>
+
         {/* Events Grid */}
         {!searching && !state.eventsLoaded && activeTab === 'upcoming' ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 pt-10">
