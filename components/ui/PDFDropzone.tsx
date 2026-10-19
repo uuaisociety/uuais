@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useState, useRef } from "react";
-import { FileText, Upload } from "lucide-react";
+import React, { useState, useRef } from 'react';
+import { FileText, Upload } from 'lucide-react';
 
 const MAX_BYTES = 3 * 1024 * 1024;
 
@@ -9,19 +9,25 @@ interface PDFDropzoneProps {
   file: File | null;
   onChange: (f: File | null) => void;
   onError?: (msg: string) => void;
+  label?: string;
 }
 
-export default function PDFDropzone({ file, onChange, onError }: PDFDropzoneProps) {
+export default function PDFDropzone({
+  file,
+  onChange,
+  onError,
+  label = 'Resume',
+}: PDFDropzoneProps) {
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const accept = (f: File) => {
-    if (f.type !== "application/pdf") {
-      onError?.("Resume must be a PDF.");
+    if (f.type !== 'application/pdf') {
+      onError?.(`${label} must be a PDF.`);
       return;
     }
     if (f.size > MAX_BYTES) {
-      onError?.("Resume must be at most 3MB.");
+      onError?.(`${label} must be at most 3MB.`);
       return;
     }
     onChange(f);
@@ -44,7 +50,9 @@ export default function PDFDropzone({ file, onChange, onError }: PDFDropzoneProp
       <div className="flex items-center gap-3 p-3 rounded-md border border-border bg-card/70">
         <FileText className="h-5 w-5 text-primary shrink-0" />
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-foreground truncate">{file.name}</p>
+          <p className="text-sm font-medium text-foreground truncate">
+            {file.name}
+          </p>
           <p className="text-xs text-muted-foreground">
             {(file.size / 1024 / 1024).toFixed(2)} MB · PDF
           </p>
@@ -64,21 +72,24 @@ export default function PDFDropzone({ file, onChange, onError }: PDFDropzoneProp
     <div
       role="button"
       tabIndex={0}
-      aria-label="Upload resume"
+      aria-label={`Upload ${label.toLowerCase()}`}
       onDrop={handleDrop}
-      onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+      onDragOver={(e) => {
+        e.preventDefault();
+        setDragging(true);
+      }}
       onDragLeave={() => setDragging(false)}
       onClick={() => inputRef.current?.click()}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
+        if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           inputRef.current?.click();
         }
       }}
       className={`w-full border-2 border-dashed rounded-md p-5 flex items-center justify-center gap-3 cursor-pointer transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
         dragging
-          ? "border-primary bg-primary/10"
-          : "border-border hover:border-border hover:border-foreground/30"
+          ? 'border-primary bg-primary/10'
+          : 'border-border hover:border-border hover:border-foreground/30'
       }`}
     >
       <input
@@ -90,9 +101,11 @@ export default function PDFDropzone({ file, onChange, onError }: PDFDropzoneProp
       />
       <Upload className="h-5 w-5 text-muted-foreground" />
       <div className="text-sm text-muted-foreground">
-        Drag & drop your resume here, or{" "}
+        Drag & drop your {label.toLowerCase()} here, or{' '}
         <span className="text-primary underline">browse</span>
-        <span className="block text-xs text-muted-foreground mt-0.5">PDF, max 3MB</span>
+        <span className="block text-xs text-muted-foreground mt-0.5">
+          PDF, max 3MB
+        </span>
       </div>
     </div>
   );

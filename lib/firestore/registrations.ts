@@ -17,6 +17,14 @@ import {
 import { db } from '@/lib/firebase-client';
 import { Event, EventRegistration } from '@/types';
 import { sendTemplatedEmail } from '@/lib/email';
+import { deleteRegistrationFiles } from '@/lib/registration-files';
+
+// Best-effort: a failed cleanup must never block cancel/decline; the 60-day
+// storage cleanup cron removes anything left behind.
+const cleanupRegistrationFiles = (regId: string) =>
+  deleteRegistrationFiles(regId).catch((err) =>
+    console.warn('Failed to delete registration files:', err),
+  );
 
 // ---------------------------------------------------------------------------
 // Batch helper for analytics (avoids N+1 queries over event IDs)
@@ -165,6 +173,8 @@ export const registerForEvent = async (
       const status = String(data?.status || 'registered');
       if (status === 'cancelled') {
         try {
+          // Cleanup first: the server derives file paths from the stored doc.
+          await cleanupRegistrationFiles(d.id);
           await deleteDoc(doc(db, 'registrations', d.id));
         } catch (err) {
           console.warn('Failed to delete cancelled registration:', err);
@@ -334,12 +344,14 @@ export async function declineRegistration(regId: string): Promise<void> {
   await updateDoc(doc(db, 'registrations', regId), {
     status: 'declined',
   } as DocumentData);
+  await cleanupRegistrationFiles(regId);
 }
 
 export async function cancelRegistration(regId: string): Promise<void> {
   await updateDoc(doc(db, 'registrations', regId), {
     status: 'cancelled',
   } as DocumentData);
+  await cleanupRegistrationFiles(regId);
 }
 
 export async function getMyRegistrationForEvent(
@@ -376,6 +388,7 @@ export async function cancelMyRegistrationForEvent(
   await updateDoc(doc(db, 'registrations', d.id), {
     status: 'cancelled',
   } as DocumentData);
+  await cleanupRegistrationFiles(d.id);
 }
 
 export async function confirmRegistration(

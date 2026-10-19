@@ -272,11 +272,22 @@ export interface RegistrationQuestion {
   eventTypes: string[];
 }
 
+/** A file stored in Cloud Storage. `url` (signed) is optional and can expire — prefer downloading via `path`. */
+export interface UploadedFileRef {
+  path?: string;
+  name?: string;
+  size?: number;
+  url?: string;
+}
+
 export interface EventRegistration {
   id: string;
   eventId: string;
   userId: string;
-  registrationData: Record<string, string | number | boolean | string[]>;
+  registrationData: Record<
+    string,
+    string | number | boolean | string[] | UploadedFileRef
+  >;
   registeredAt: string;
   status:
     | 'registered'
@@ -296,7 +307,7 @@ export interface EventCustomQuestion {
   id: string;
   eventId: string;
   question: string;
-  type: 'text' | 'textarea' | 'select' | 'checkbox' | 'radio';
+  type: 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'file';
   options?: string[];
   required: boolean;
   order: number;
@@ -337,10 +348,10 @@ export interface Application {
   role: string;
   /** stable role id (matches `BoardPosition.id`) when available */
   roleId?: string;
-  cv?: { path?: string; url?: string } | null;
+  cv?: UploadedFileRef | null;
   coverOption?: 'text' | 'file';
   coverText?: string | null;
-  coverFile?: { path?: string; url?: string } | null;
+  coverFile?: UploadedFileRef | null;
   /** ISO string from some writes; Firestore Timestamp from server / API */
   createdAt?: string | Timestamp;
 }
@@ -417,7 +428,7 @@ export interface TeamApplication {
   program?: string;
   graduationYear?: string;
   linkedin?: string;
-  resume?: { path?: string; url?: string } | null;
+  resume?: UploadedFileRef | null;
   interests?: string[];
   /** Ordered ranked roles (index 0 = first choice). Replaces teamRanking for new submissions. */
   roleRanking?: RoleChoice[];

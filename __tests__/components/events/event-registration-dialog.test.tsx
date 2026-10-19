@@ -1,4 +1,10 @@
-import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
+import {
+  render,
+  screen,
+  fireEvent,
+  act,
+  waitFor,
+} from '@testing-library/react';
 import EventRegistrationDialog from '@/components/events/EventRegistrationDialog';
 import type { Event, EventCustomQuestion } from '@/types';
 
@@ -24,6 +30,10 @@ jest.mock('@/lib/firestore/registrations', () => ({
   getMyRegistrations: jest.fn(),
   cancelRegistration: jest.fn(),
   confirmRegistration: jest.fn(),
+}));
+
+jest.mock('@/lib/registration-files', () => ({
+  uploadRegistrationFile: jest.fn(),
 }));
 
 jest.mock('@/lib/firestore/questions', () => {
@@ -98,7 +108,10 @@ jest.mock('@/components/ui/ConfirmModal', () => ({
 
 async function simulateAuth(user: Record<string, unknown> | null) {
   const cb = authCallbackHolder.current;
-  if (cb) await act(async () => { await cb(user); });
+  if (cb)
+    await act(async () => {
+      await cb(user);
+    });
 }
 
 function mockedRegistrations() {
@@ -116,6 +129,12 @@ function mockedUsers() {
   };
 }
 
+function mockedRegistrationFiles() {
+  return jest.requireMock('@/lib/registration-files') as {
+    uploadRegistrationFile: jest.Mock;
+  };
+}
+
 function mockedQuestionsModule() {
   return jest.requireMock('@/lib/firestore/questions') as {
     subscribeToEventCustomQuestions: jest.Mock;
@@ -124,7 +143,8 @@ function mockedQuestionsModule() {
 }
 
 function getNotifyMock(): jest.Mock {
-  return jest.requireMock('@/components/ui/Notifications')._mockNotify as jest.Mock;
+  return jest.requireMock('@/components/ui/Notifications')
+    ._mockNotify as jest.Mock;
 }
 
 // ====================================================================
@@ -168,11 +188,15 @@ describe('EventRegistrationDialog', () => {
     it('renders past event message when eventStartAt is in the past', () => {
       const pastEvent = createEvent({ eventStartAt: '2020-01-01T00:00:00Z' });
       render(<EventRegistrationDialog event={pastEvent} />);
-      expect(screen.getByText('This event has already passed.')).toBeInTheDocument();
+      expect(
+        screen.getByText('This event has already passed.'),
+      ).toBeInTheDocument();
       // No registration UI
       expect(screen.queryByText('Register Now')).not.toBeInTheDocument();
       expect(screen.queryByText('Join Waitlist')).not.toBeInTheDocument();
-      expect(screen.queryByText(/sign in and become a member/)).not.toBeInTheDocument();
+      expect(
+        screen.queryByText(/sign in and become a member/),
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -444,6 +468,14 @@ describe('EventRegistrationDialog', () => {
           required: false,
           order: 5,
         },
+        {
+          id: 'q6',
+          eventId: 'evt1',
+          question: 'Upload your CV',
+          type: 'file',
+          required: false,
+          order: 6,
+        },
       ];
       act(() => {
         mockedQuestionsModule()._triggerQuestions(questions);
@@ -457,6 +489,7 @@ describe('EventRegistrationDialog', () => {
       expect(screen.getByText('Pick one')).toBeInTheDocument();
       expect(screen.getByText('Choose radio')).toBeInTheDocument();
       expect(screen.getByText('Check all')).toBeInTheDocument();
+      expect(screen.getByText('Upload your CV')).toBeInTheDocument();
 
       // Check input types via document queries (labels lack htmlFor, so inputs
       // have no accessible name — role queries won't work here; the dialog is
@@ -465,7 +498,10 @@ describe('EventRegistrationDialog', () => {
       expect(document.querySelector('textarea')).toBeInTheDocument();
       expect(document.querySelector('select')).toBeInTheDocument();
       expect(document.querySelector('input[type="radio"]')).toBeInTheDocument();
-      expect(document.querySelector('input[type="checkbox"]')).toBeInTheDocument();
+      expect(
+        document.querySelector('input[type="checkbox"]'),
+      ).toBeInTheDocument();
+      expect(document.querySelector('input[type="file"]')).toBeInTheDocument();
     });
 
     it('shows required indicator on required questions', async () => {
@@ -524,6 +560,132 @@ describe('EventRegistrationDialog', () => {
           }),
         );
       });
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // File upload questions
+  // ------------------------------------------------------------------
+  describe('file upload questions', () => {
+    beforeEach(() => {
+      mockedUsers().getUserProfile.mockResolvedValue({
+        id: 'user1',
+        isMember: true,
+        email: 'test@test.com',
+        displayName: 'Test User',
+      });
+      mockedRegistrations().getMyRegistrations.mockResolvedValue([]);
+    });
+
+    const fileQuestion: EventCustomQuestion = {
+      id: 'q-file',
+      eventId: 'evt1',
+      question: 'Upload your CV',
+      type: 'file',
+      required: true,
+      order: 1,
+    };
+
+    function openWithFileQuestion() {
+      act(() => {
+        mockedQuestionsModule()._triggerQuestions([fileQuestion]);
+      });
+      fireEvent.click(screen.getByText('Register Now'));
+    }
+
+    function selectFile(file: File) {
+      const input = document.querySelector(
+        'input[type="file"]',
+      ) as HTMLInputElement;
+      fireEvent.change(input, { target: { files: [file] } });
+    }
+
+    it('warns when a required file question is unanswered', async () => {
+      render(<EventRegistrationDialog event={createEvent()} />);
+      await simulateAuth(mockUser);
+      openWithFileQuestion();
+
+      fireEvent.click(screen.getByRole('button', { name: 'Register' }));
+
+      await waitFor(() => {
+        expect(getNotifyMock()).toHaveBeenCalledWith(
+          expect.objectContaining({ type: 'warning', title: 'Missing answer' }),
+        );
+      });
+      expect(mockedRegistrations().registerForEvent).not.toHaveBeenCalled();
+    });
+
+    it('rejects non-PDF files at the dropzone', async () => {
+      render(<EventRegistrationDialog event={createEvent()} />);
+      await simulateAuth(mockUser);
+      openWithFileQuestion();
+
+      selectFile(new File(['x'], 'cv.txt', { type: 'text/plain' }));
+
+      await waitFor(() => {
+        expect(getNotifyMock()).toHaveBeenCalledWith(
+          expect.objectContaining({ type: 'warning', title: 'Invalid file' }),
+        );
+      });
+    });
+
+    it('uploads the file and stores its reference in registrationData', async () => {
+      const ref = {
+        path: 'registrations/evt1/user1/123_cv.pdf',
+        name: 'cv.pdf',
+        size: 12,
+      };
+      mockedRegistrationFiles().uploadRegistrationFile.mockResolvedValue(ref);
+      mockedRegistrations().registerForEvent.mockResolvedValue('reg1');
+
+      render(<EventRegistrationDialog event={createEvent()} />);
+      await simulateAuth(mockUser);
+      openWithFileQuestion();
+
+      selectFile(
+        new File(['%PDF-1.4 cv'], 'cv.pdf', { type: 'application/pdf' }),
+      );
+      fireEvent.click(screen.getByRole('button', { name: 'Register' }));
+
+      await waitFor(() => {
+        expect(
+          mockedRegistrationFiles().uploadRegistrationFile,
+        ).toHaveBeenCalledWith('evt1', expect.any(File));
+        expect(mockedRegistrations().registerForEvent).toHaveBeenCalledWith(
+          'evt1',
+          expect.objectContaining({
+            registrationData: expect.objectContaining({
+              'Upload your CV': ref,
+            }),
+          }),
+          { waitlist: false },
+        );
+      });
+    });
+
+    it('shows an error and does not register when the upload fails', async () => {
+      mockedRegistrationFiles().uploadRegistrationFile.mockRejectedValue(
+        new Error('Upload failed'),
+      );
+
+      render(<EventRegistrationDialog event={createEvent()} />);
+      await simulateAuth(mockUser);
+      openWithFileQuestion();
+
+      selectFile(
+        new File(['%PDF-1.4 cv'], 'cv.pdf', { type: 'application/pdf' }),
+      );
+      fireEvent.click(screen.getByRole('button', { name: 'Register' }));
+
+      await waitFor(() => {
+        expect(getNotifyMock()).toHaveBeenCalledWith(
+          expect.objectContaining({
+            type: 'error',
+            title: 'Registration failed',
+          }),
+        );
+      });
+      expect(mockedRegistrations().registerForEvent).not.toHaveBeenCalled();
     });
   });
 
@@ -656,7 +818,9 @@ describe('EventRegistrationDialog', () => {
       fireEvent.click(screen.getByRole('button', { name: 'Register' }));
 
       await waitFor(() => {
-        expect(screen.queryByText('Register for Event')).not.toBeInTheDocument();
+        expect(
+          screen.queryByText('Register for Event'),
+        ).not.toBeInTheDocument();
       });
     });
   });
@@ -694,9 +858,9 @@ describe('EventRegistrationDialog', () => {
       fireEvent.click(screen.getByTestId('confirm-modal-confirm'));
 
       await waitFor(() => {
-        expect(
-          mockedRegistrations().cancelRegistration,
-        ).toHaveBeenCalledWith('reg1');
+        expect(mockedRegistrations().cancelRegistration).toHaveBeenCalledWith(
+          'reg1',
+        );
         expect(getNotifyMock()).toHaveBeenCalledWith(
           expect.objectContaining({ type: 'success', title: 'Cancelled' }),
         );
@@ -713,12 +877,8 @@ describe('EventRegistrationDialog', () => {
       // Click cancel in modal (Keep registration)
       fireEvent.click(screen.getByTestId('confirm-modal-cancel'));
 
-      expect(
-        screen.queryByTestId('confirm-modal'),
-      ).not.toBeInTheDocument();
-      expect(
-        mockedRegistrations().cancelRegistration,
-      ).not.toHaveBeenCalled();
+      expect(screen.queryByTestId('confirm-modal')).not.toBeInTheDocument();
+      expect(mockedRegistrations().cancelRegistration).not.toHaveBeenCalled();
     });
 
     it('shows error notification when cancel fails', async () => {
@@ -774,9 +934,10 @@ describe('EventRegistrationDialog', () => {
       fireEvent.click(screen.getByText('Confirm spot'));
 
       await waitFor(() => {
-        expect(
-          mockedRegistrations().confirmRegistration,
-        ).toHaveBeenCalledWith('reg1', 'tok123');
+        expect(mockedRegistrations().confirmRegistration).toHaveBeenCalledWith(
+          'reg1',
+          'tok123',
+        );
         expect(getNotifyMock()).toHaveBeenCalledWith(
           expect.objectContaining({
             type: 'success',
