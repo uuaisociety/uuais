@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/blog-draft",
       "schedule": "0 8 * * 1"
+    },
+    {
+      "path": "/api/cron/registrations-cleanup",
+      "schedule": "0 3 * * *"
     }
   ]
 }

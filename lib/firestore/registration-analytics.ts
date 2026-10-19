@@ -1,4 +1,11 @@
-import { collection, query, where, getDocs, DocumentData, Timestamp } from 'firebase/firestore';
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  DocumentData,
+  Timestamp,
+} from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 import { getEventCustomQuestions } from './questions';
 import { getUserProfile } from './users';
@@ -7,14 +14,17 @@ import type { EventCustomQuestion } from '@/types';
 
 export interface RegistrationAnalytics {
   registrationsPerDay: { date: string; count: number }[];
-  statusBreakdownPerEvent: Record<string, {
-    registered: number;
-    waitlist: number;
-    invited: number;
-    confirmed: number;
-    declined: number;
-    cancelled: number;
-  }>;
+  statusBreakdownPerEvent: Record<
+    string,
+    {
+      registered: number;
+      waitlist: number;
+      invited: number;
+      confirmed: number;
+      declined: number;
+      cancelled: number;
+    }
+  >;
   aggregatedCustomAnswers: Record<string, Record<string, number>>;
 }
 
@@ -49,19 +59,32 @@ function toDateKey(ts: unknown): string {
   return '';
 }
 
-export async function getRegistrationAnalytics(eventIds: string[]): Promise<RegistrationAnalytics> {
+export async function getRegistrationAnalytics(
+  eventIds: string[],
+): Promise<RegistrationAnalytics> {
   const perDay: Record<string, number> = {};
   const statusPerEvent: RegistrationAnalytics['statusBreakdownPerEvent'] = {};
   const customAnswers: Record<string, Record<string, number>> = {};
 
   if (!eventIds.length) {
-    return { registrationsPerDay: [], statusBreakdownPerEvent: {}, aggregatedCustomAnswers: {} };
+    return {
+      registrationsPerDay: [],
+      statusBreakdownPerEvent: {},
+      aggregatedCustomAnswers: {},
+    };
   }
 
   const regByEvent = await fetchRegistrationsByEventIds(eventIds);
 
   for (const [eventId, docs] of regByEvent) {
-    const statuses = { registered: 0, waitlist: 0, invited: 0, confirmed: 0, declined: 0, cancelled: 0 };
+    const statuses = {
+      registered: 0,
+      waitlist: 0,
+      invited: 0,
+      confirmed: 0,
+      declined: 0,
+      cancelled: 0,
+    };
 
     docs.forEach((r) => {
       if (r.status in statuses) statuses[r.status as keyof typeof statuses]++;
@@ -72,11 +95,15 @@ export async function getRegistrationAnalytics(eventIds: string[]): Promise<Regi
       const regData = r.registrationData;
       if (regData && typeof regData === 'object') {
         Object.entries(regData).forEach(([question, answer]) => {
+          // File answers are stored as objects and don't aggregate into charts.
+          if (answer && typeof answer === 'object' && !Array.isArray(answer))
+            return;
           const strAnswer = String(answer ?? '').trim();
           if (!strAnswer) return;
           const qKey = `${eventId}::${question}`;
           if (!customAnswers[qKey]) customAnswers[qKey] = {};
-          customAnswers[qKey][strAnswer] = (customAnswers[qKey][strAnswer] ?? 0) + 1;
+          customAnswers[qKey][strAnswer] =
+            (customAnswers[qKey][strAnswer] ?? 0) + 1;
         });
       }
     });
@@ -88,15 +115,32 @@ export async function getRegistrationAnalytics(eventIds: string[]): Promise<Regi
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([date, count]) => ({ date, count }));
 
-  return { registrationsPerDay, statusBreakdownPerEvent: statusPerEvent, aggregatedCustomAnswers: customAnswers };
+  return {
+    registrationsPerDay,
+    statusBreakdownPerEvent: statusPerEvent,
+    aggregatedCustomAnswers: customAnswers,
+  };
 }
 
-export async function getEventDetailAnalytics(eventId: string): Promise<EventDetailAnalytics> {
-  const regSnap = await getDocs(query(collection(db, 'registrations'), where('eventId', '==', eventId)));
+export async function getEventDetailAnalytics(
+  eventId: string,
+): Promise<EventDetailAnalytics> {
+  const regSnap = await getDocs(
+    query(collection(db, 'registrations'), where('eventId', '==', eventId)),
+  );
   const questions = await getEventCustomQuestions(eventId);
-  const nonFreeText = questions.filter((q) => q.type !== 'text' && q.type !== 'textarea');
+  const nonFreeText = questions.filter(
+    (q) => q.type !== 'text' && q.type !== 'textarea' && q.type !== 'file',
+  );
 
-  const statusCounts = { registered: 0, waitlist: 0, invited: 0, confirmed: 0, declined: 0, cancelled: 0 };
+  const statusCounts = {
+    registered: 0,
+    waitlist: 0,
+    invited: 0,
+    confirmed: 0,
+    declined: 0,
+    cancelled: 0,
+  };
   const answerMap: Record<string, Record<string, number>> = {};
   const registrationsPerDayMap: Record<string, number> = {};
   const userIds = new Set<string>();
@@ -106,14 +150,18 @@ export async function getEventDetailAnalytics(eventId: string): Promise<EventDet
   for (const doc of regSnap.docs) {
     const data = doc.data() as DocumentData;
     const status: string = data?.status || 'registered';
-    if (status in statusCounts) statusCounts[status as keyof typeof statusCounts]++;
+    if (status in statusCounts)
+      statusCounts[status as keyof typeof statusCounts]++;
 
     const dateKey = toDateKey(data?.registeredAt);
-    if (dateKey) registrationsPerDayMap[dateKey] = (registrationsPerDayMap[dateKey] ?? 0) + 1;
+    if (dateKey)
+      registrationsPerDayMap[dateKey] =
+        (registrationsPerDayMap[dateKey] ?? 0) + 1;
 
     if (data?.userId) userIds.add(data.userId);
 
-    const regData = data?.registrationData as Record<string, unknown> | undefined;
+    const regData = data?.registrationData as
+      Record<string, unknown> | undefined;
     if (!regData) continue;
 
     for (const q of nonFreeText) {

@@ -4,9 +4,31 @@ import { TextEncoder, TextDecoder } from 'util';
 import { ReadableStream } from 'stream/web';
 
 // jsdom doesn't expose these Node web globals (confirmed via bare probe).
-if (typeof globalThis.TextEncoder === 'undefined') globalThis.TextEncoder = TextEncoder as unknown as typeof globalThis.TextEncoder;
-if (typeof globalThis.TextDecoder === 'undefined') globalThis.TextDecoder = TextDecoder as unknown as typeof globalThis.TextDecoder;
-if (typeof globalThis.ReadableStream === 'undefined') globalThis.ReadableStream = ReadableStream as unknown as typeof globalThis.ReadableStream;
+if (typeof globalThis.TextEncoder === 'undefined')
+  globalThis.TextEncoder =
+    TextEncoder as unknown as typeof globalThis.TextEncoder;
+if (typeof globalThis.TextDecoder === 'undefined')
+  globalThis.TextDecoder =
+    TextDecoder as unknown as typeof globalThis.TextDecoder;
+if (typeof globalThis.ReadableStream === 'undefined')
+  globalThis.ReadableStream =
+    ReadableStream as unknown as typeof globalThis.ReadableStream;
+
+// jsdom's Blob lacks text() (confirmed via bare probe); used by validatePdfFile.
+if (typeof Blob !== 'undefined' && typeof Blob.prototype.text !== 'function') {
+  Object.defineProperty(Blob.prototype, 'text', {
+    configurable: true,
+    writable: true,
+    value(this: Blob) {
+      return new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result ?? ''));
+        reader.onerror = () => reject(reader.error);
+        reader.readAsText(this);
+      });
+    },
+  });
+}
 
 // jsdom lacks Response (Headers is provided). Minimal Response used by route tests.
 if (typeof globalThis.Response === 'undefined') {
@@ -18,23 +40,39 @@ if (typeof globalThis.Response === 'undefined') {
         else for (const [k, v] of Object.entries(init)) this.set(k, String(v));
       }
     }
-    get(name: string) { return this.map.get(name.toLowerCase()) ?? null; }
-    has(name: string) { return this.map.has(name.toLowerCase()); }
-    set(name: string, value: string) { this.map.set(name.toLowerCase(), value); }
+    get(name: string) {
+      return this.map.get(name.toLowerCase()) ?? null;
+    }
+    has(name: string) {
+      return this.map.has(name.toLowerCase());
+    }
+    set(name: string, value: string) {
+      this.map.set(name.toLowerCase(), value);
+    }
   }
   class ResponseMock {
     status: number;
     ok: boolean;
     headers: HeadersMock;
     private bodyText: string;
-    constructor(body?: unknown, init?: { status?: number; headers?: Record<string, string> | [string, string][] }) {
+    constructor(
+      body?: unknown,
+      init?: {
+        status?: number;
+        headers?: Record<string, string> | [string, string][];
+      },
+    ) {
       this.bodyText = typeof body === 'string' ? body : '';
       this.status = init?.status ?? 200;
       this.ok = this.status >= 200 && this.status < 300;
       this.headers = new HeadersMock(init?.headers);
     }
-    async text() { return this.bodyText; }
-    async json() { return JSON.parse(this.bodyText); }
+    async text() {
+      return this.bodyText;
+    }
+    async json() {
+      return JSON.parse(this.bodyText);
+    }
   }
   globalThis.Response = ResponseMock as unknown as typeof globalThis.Response;
 }
@@ -44,9 +82,12 @@ declare global {
   var __mockTheme: string | undefined;
   var __setMockTheme: ((theme: 'light' | 'dark') => void) | undefined;
   var __setMockParams: ((params: Record<string, string>) => void) | undefined;
-  var __setAppState: ((state: Record<string, unknown> | null) => void) | undefined;
-  var __setAdminState: ((state: Record<string, unknown> | null) => void) | undefined;
-  var __setCollectionData: ((entries: Record<string, unknown> | null) => void) | undefined;
+  var __setAppState:
+    ((state: Record<string, unknown> | null) => void) | undefined;
+  var __setAdminState:
+    ((state: Record<string, unknown> | null) => void) | undefined;
+  var __setCollectionData:
+    ((entries: Record<string, unknown> | null) => void) | undefined;
 }
 
 beforeEach(() => {
@@ -92,7 +133,9 @@ if (typeof globalThis.IntersectionObserver === 'undefined') {
     observe() {}
     unobserve() {}
     disconnect() {}
-    takeRecords() { return []; }
+    takeRecords() {
+      return [];
+    }
   } as unknown as typeof IntersectionObserver;
 }
 
@@ -102,7 +145,10 @@ if (typeof Element !== 'undefined' && !Element.prototype.hasPointerCapture) {
 if (typeof Element !== 'undefined' && !Element.prototype.setPointerCapture) {
   Element.prototype.setPointerCapture = () => {};
 }
-if (typeof Element !== 'undefined' && !Element.prototype.releasePointerCapture) {
+if (
+  typeof Element !== 'undefined' &&
+  !Element.prototype.releasePointerCapture
+) {
   Element.prototype.releasePointerCapture = () => {};
 }
 
@@ -113,7 +159,10 @@ global.__setMockTheme = (theme: 'light' | 'dark') => {
   global.__mockTheme = theme;
 };
 jest.mock('@/providers/ThemeProvider', () => ({
-  useTheme: () => ({ theme: global.__mockTheme || 'dark', toggleTheme: jest.fn() }),
+  useTheme: () => ({
+    theme: global.__mockTheme || 'dark',
+    toggleTheme: jest.fn(),
+  }),
 }));
 
 const mockParams: Record<string, string> = {};
@@ -132,7 +181,9 @@ jest.mock('next/navigation', () => ({
     return mockParams;
   },
   useSearchParams() {
-    return new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+    return new URLSearchParams(
+      typeof window !== 'undefined' ? window.location.search : '',
+    );
   },
   notFound: jest.fn(() => {
     throw new Error('NEXT_NOT_FOUND');
@@ -190,7 +241,10 @@ global.__setAppState = (state: Record<string, unknown> | null) => {
   __mockAppState = state;
 };
 jest.mock('@/contexts/AppContext', () => ({
-  useApp: () => ({ state: __mockAppState || __defaultAppState, dispatch: jest.fn() }),
+  useApp: () => ({
+    state: __mockAppState || __defaultAppState,
+    dispatch: jest.fn(),
+  }),
   AppProvider: ({ children }: { children: React.ReactNode }) => children,
 }));
 
@@ -202,17 +256,20 @@ global.__setCollectionData = (entries: Record<string, unknown> | null) => {
 };
 jest.mock('@/lib/firestore/useCollectionData', () => ({
   useCollectionData: (subscribe: unknown) => {
-    const name = typeof subscribe === 'function' && subscribe.name ? subscribe.name : 'default';
+    const name =
+      typeof subscribe === 'function' && subscribe.name
+        ? subscribe.name
+        : 'default';
     const entry = __mockCollectionData[name];
     return entry !== undefined ? entry : __defaultCollectionData;
   },
 }));
 
-jest.mock("@/utils/seo", () => ({
+jest.mock('@/utils/seo', () => ({
   updatePageMeta: jest.fn(),
 }));
 
-jest.mock("@/lib/firestore", () => {
+jest.mock('@/lib/firestore', () => {
   const stub = jest.fn();
   return {
     getEvents: stub,
