@@ -1,21 +1,41 @@
-"use client";
+'use client';
 
-import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import { auth, linkGoogleToCurrentUser, linkGithubToCurrentUser, linkMicrosoftToCurrentUser } from "@/lib/firebase-client";
-import { getUserProfile, upsertUserProfile, updateUserProfile, getMyRegistrations, getAllEvents, type UserProfile } from "@/lib/firestore";
-import { cancelRegistration, confirmRegistration } from "@/lib/firestore/registrations";
-import type { EventRegistration } from "@/types";
-import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader } from "@/components/ui/Card";
-import { FieldGroup, InputBase, SelectBase, TextareaBase } from "@/components/ui/Form";
-import { useNotify } from "@/components/ui/Notifications";
-import ConfirmModal from "@/components/ui/ConfirmModal";
-import LoginModal from '@/components/ui/LoginModal'
-import { useRouter } from "next/navigation";
-import * as CookieConsent from "vanilla-cookieconsent";
-import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
-import { updatePageMeta } from "@/utils/seo";
+import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
+import {
+  auth,
+  linkGoogleToCurrentUser,
+  linkGithubToCurrentUser,
+  linkMicrosoftToCurrentUser,
+} from '@/lib/firebase-client';
+import {
+  getUserProfile,
+  upsertUserProfile,
+  updateUserProfile,
+  getMyRegistrations,
+  getAllEvents,
+  type UserProfile,
+} from '@/lib/firestore';
+import {
+  cancelRegistration,
+  confirmRegistration,
+} from '@/lib/firestore/registrations';
+import type { EventRegistration } from '@/types';
+import { Button } from '@/components/ui/Button';
+import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import {
+  FieldGroup,
+  InputBase,
+  SelectBase,
+  TextareaBase,
+} from '@/components/ui/Form';
+import { useNotify } from '@/components/ui/Notifications';
+import ConfirmModal from '@/components/ui/ConfirmModal';
+import LoginModal from '@/components/ui/LoginModal';
+import { useRouter } from 'next/navigation';
+import * as CookieConsent from 'vanilla-cookieconsent';
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
+import { updatePageMeta } from '@/utils/seo';
 
 export default function AccountPage() {
   const { notify } = useNotify();
@@ -24,14 +44,23 @@ export default function AccountPage() {
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState<Partial<UserProfile>>({});
   const [registrations, setRegistrations] = useState<EventRegistration[]>([]);
-  const [eventMeta, setEventMeta] = useState<Record<string, { title: string; startAt?: string; date?: string; time?: string }>>({});
+  const [eventMeta, setEventMeta] = useState<
+    Record<
+      string,
+      { title: string; startAt?: string; date?: string; time?: string }
+    >
+  >({});
   const [providers, setProviders] = useState<string[]>([]);
   const [confirmRegId, setConfirmRegId] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [confirmCancel, setConfirmCancel] = useState(false);
+  const [confirmDeleteAccount, setConfirmDeleteAccount] = useState(false);
 
   useEffect(() => {
-    updatePageMeta('My Account', 'Manage your UU AI Society account and event registrations');
+    updatePageMeta(
+      'My Account',
+      'Manage your UU AI Society account and event registrations',
+    );
   }, []);
 
   useEffect(() => {
@@ -45,22 +74,27 @@ export default function AccountPage() {
       setUid(u.uid);
       const p = await getUserProfile(u.uid);
       setForm(p || {});
-      setProviders((u.providerData || []).map(pd => pd.providerId));
+      setProviders((u.providerData || []).map((pd) => pd.providerId));
       const regs = await getMyRegistrations(u.uid);
       const events = await getAllEvents();
       // Only display registrations to events that are published and not already past more than 24 hours ago
-      const filtered = regs.filter(
-        reg => events.some(ev => ev.id === reg.eventId && ev.published === true &&
-          ev.eventStartAt && new Date(ev.eventStartAt).getTime() > new Date().getTime() - 24 * 60 * 60 * 1000
-        )
+      const filtered = regs.filter((reg) =>
+        events.some(
+          (ev) =>
+            ev.id === reg.eventId &&
+            ev.published === true &&
+            ev.eventStartAt &&
+            new Date(ev.eventStartAt).getTime() >
+              new Date().getTime() - 24 * 60 * 60 * 1000,
+        ),
       );
       // Build event meta map (title + time)
       try {
-        const map: Record<string, { title: string; startAt?: string; }> = {};
+        const map: Record<string, { title: string; startAt?: string }> = {};
         for (const ev of events) {
           map[ev.id] = { title: ev.title, startAt: ev.eventStartAt };
         }
-        
+
         setEventMeta(map);
         setRegistrations(filtered);
       } catch (err) {
@@ -74,22 +108,29 @@ export default function AccountPage() {
 
   const isLinked = useMemo(() => {
     return {
-      google: providers.includes("google.com"),
-      github: providers.includes("github.com"),
-      microsoft: providers.includes("microsoft.com"),
+      google: providers.includes('google.com'),
+      github: providers.includes('github.com'),
+      microsoft: providers.includes('microsoft.com'),
     };
   }, [providers]);
 
-  const handleLink = async (prov: "google" | "github" | "microsoft") => {
+  const handleLink = async (prov: 'google' | 'github' | 'microsoft') => {
     if (!auth.currentUser) return;
     try {
-      if (prov === "google") await linkGoogleToCurrentUser(auth.currentUser);
-      if (prov === "github") await linkGithubToCurrentUser(auth.currentUser);
-      if (prov === "microsoft") await linkMicrosoftToCurrentUser(auth.currentUser);
+      if (prov === 'google') await linkGoogleToCurrentUser(auth.currentUser);
+      if (prov === 'github') await linkGithubToCurrentUser(auth.currentUser);
+      if (prov === 'microsoft')
+        await linkMicrosoftToCurrentUser(auth.currentUser);
       // refresh providers list
       await auth.currentUser.reload();
-      setProviders((auth.currentUser.providerData || []).map(pd => pd.providerId));
-      notify({ type: 'success', title: 'Linked', message: `${prov[0].toUpperCase() + prov.slice(1)} linked successfully.` });
+      setProviders(
+        (auth.currentUser.providerData || []).map((pd) => pd.providerId),
+      );
+      notify({
+        type: 'success',
+        title: 'Linked',
+        message: `${prov[0].toUpperCase() + prov.slice(1)} linked successfully.`,
+      });
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : 'Could not link provider.';
       notify({ type: 'error', title: 'Link failed', message: msg });
@@ -114,9 +155,14 @@ export default function AccountPage() {
       const { refreshProfile } = await import('@/hooks/useAdmin');
       await refreshProfile();
       setIsEditing(false);
-      notify({ type: 'success', title: 'Saved', message: 'Account updated successfully.' });
+      notify({
+        type: 'success',
+        title: 'Saved',
+        message: 'Account updated successfully.',
+      });
     } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : 'Could not save your account.';
+      const msg =
+        e instanceof Error ? e.message : 'Could not save your account.';
       notify({ type: 'error', title: 'Save failed', message: msg });
     }
   };
@@ -128,8 +174,34 @@ export default function AccountPage() {
     setForm(p || {});
     setIsEditing(false);
   };
+  const handleDeleteAccount = async () => {
+    try {
+      const res = await fetch('/api/account/delete', { method: 'POST' });
+      const body = await res.json().catch(() => null);
+      if (!res.ok)
+        throw new Error(body?.error || `Deletion failed (${res.status})`);
+      await auth.signOut();
+      notify({
+        type: 'success',
+        title: 'Account deleted',
+        message: 'Your account and personal data have been deleted.',
+      });
+      router.push('/');
+    } catch (e: unknown) {
+      const msg =
+        e instanceof Error ? e.message : 'Could not delete your account.';
+      notify({ type: 'error', title: 'Deletion failed', message: msg });
+    } finally {
+      setConfirmDeleteAccount(false);
+    }
+  };
+
   if (loading) {
-    return <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">Loading...</div>;
+    return (
+      <div className="pt-24 px-4 max-w-5xl mx-auto text-gray-700 dark:text-gray-200">
+        Loading...
+      </div>
+    );
   }
 
   if (!uid) {
@@ -138,335 +210,727 @@ export default function AccountPage() {
 
   return (
     <ErrorBoundary>
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12">
-      <div className="max-w-5xl mx-auto px-4 space-y-8">
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">My Account</h1>
-        </div>
-        {registrations.length > 0 && (
-        <Card>
-          <CardHeader>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">My Event Applications</h2>
-          </CardHeader>
-          <CardContent>
-              <ul className="space-y-2">
-                {registrations.map((r) => (
-                  <li key={r.id} className="flex items-center justify-between text-gray-800 dark:text-gray-200">
-                    <div className="flex items-center gap-2">
-                      <span>
-                      <Link className="underline" href={`/events/${r.eventId}`}>{eventMeta[r.eventId]?.title || 'Unknown'}</Link>
-                        {(() => {
-                          const meta = eventMeta[r.eventId];
-                          if (!meta) return null;
-                          let dt: Date | null = null;
-                          if (meta.startAt) {
-                            const d = new Date(meta.startAt);
-                            if (!isNaN(d.getTime())) dt = d;
-                          }
-                          if (!dt && meta.date && meta.time) {
-                            const d = new Date(`${meta.date}T${meta.time}`);
-                            if (!isNaN(d.getTime())) dt = d;
-                          }
-                          return dt ? <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">• {dt.toLocaleString()}</span> : null;
-                        })()}
-                      </span>
-                      <span className="text-sm">• {r.status}{r.registeredAt ? ` • ${new Date(r.registeredAt).toLocaleString()}` : ''}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {r.status === 'invited' && (
-                        <Button
-                          size="sm"
-                          className="bg-green-600/80 hover:bg-green-600 text-white"
-                          onClick={async () => {
-                            try {
-                              if (!r.confirmationToken) throw new Error('Missing confirmation token. Please contact us if you have problems confirming your spot.');
-                              const res = await confirmRegistration(r.id, r.confirmationToken);
-                              if (!res.ok) throw new Error(res.message);
-                              notify({ type: 'success', title: 'Confirmed', message: 'Your spot has been confirmed.' });
-                              // refresh registrations
-                              if (uid) {
-                                const fresh = await getMyRegistrations(uid);
-                                setRegistrations(fresh);
-                              }
-                            } catch (e: unknown) {
-                              const msg = e instanceof Error ? e.message : 'Could not confirm. Please contact us if you have problems confirming your spot.';
-                              notify({ type: 'error', title: 'Confirm failed', message: msg });
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12">
+        <div className="max-w-5xl mx-auto px-4 space-y-8">
+          <div className="flex items-center justify-between">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+              My Account
+            </h1>
+          </div>
+          {registrations.length > 0 && (
+            <Card>
+              <CardHeader>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  My Event Applications
+                </h2>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {registrations.map((r) => (
+                    <li
+                      key={r.id}
+                      className="flex items-center justify-between text-gray-800 dark:text-gray-200"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span>
+                          <Link
+                            className="underline"
+                            href={`/events/${r.eventId}`}
+                          >
+                            {eventMeta[r.eventId]?.title || 'Unknown'}
+                          </Link>
+                          {(() => {
+                            const meta = eventMeta[r.eventId];
+                            if (!meta) return null;
+                            let dt: Date | null = null;
+                            if (meta.startAt) {
+                              const d = new Date(meta.startAt);
+                              if (!isNaN(d.getTime())) dt = d;
                             }
-                          }}
-                        >
-                          Confirm spot
-                        </Button>
-                      )}
-                      {/* Only display cancel if we are registered, waitlist or invited */}
-                      {(r.status === 'registered' || r.status === 'waitlist' || r.status === 'invited') && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => setConfirmRegId(r.id)}
-                        >
-                          Cancel
-                        </Button>
-                      )}
+                            if (!dt && meta.date && meta.time) {
+                              const d = new Date(`${meta.date}T${meta.time}`);
+                              if (!isNaN(d.getTime())) dt = d;
+                            }
+                            return dt ? (
+                              <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
+                                • {dt.toLocaleString()}
+                              </span>
+                            ) : null;
+                          })()}
+                        </span>
+                        <span className="text-sm">
+                          • {r.status}
+                          {r.registeredAt
+                            ? ` • ${new Date(r.registeredAt).toLocaleString()}`
+                            : ''}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {r.status === 'invited' && (
+                          <Button
+                            size="sm"
+                            className="bg-green-600/80 hover:bg-green-600 text-white"
+                            onClick={async () => {
+                              try {
+                                if (!r.confirmationToken)
+                                  throw new Error(
+                                    'Missing confirmation token. Please contact us if you have problems confirming your spot.',
+                                  );
+                                const res = await confirmRegistration(
+                                  r.id,
+                                  r.confirmationToken,
+                                );
+                                if (!res.ok) throw new Error(res.message);
+                                notify({
+                                  type: 'success',
+                                  title: 'Confirmed',
+                                  message: 'Your spot has been confirmed.',
+                                });
+                                // refresh registrations
+                                if (uid) {
+                                  const fresh = await getMyRegistrations(uid);
+                                  setRegistrations(fresh);
+                                }
+                              } catch (e: unknown) {
+                                const msg =
+                                  e instanceof Error
+                                    ? e.message
+                                    : 'Could not confirm. Please contact us if you have problems confirming your spot.';
+                                notify({
+                                  type: 'error',
+                                  title: 'Confirm failed',
+                                  message: msg,
+                                });
+                              }
+                            }}
+                          >
+                            Confirm spot
+                          </Button>
+                        )}
+                        {/* Only display cancel if we are registered, waitlist or invited */}
+                        {(r.status === 'registered' ||
+                          r.status === 'waitlist' ||
+                          r.status === 'invited') && (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => setConfirmRegId(r.id)}
+                          >
+                            Cancel
+                          </Button>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          )}
+          <div className="grid md:grid-cols-3 gap-6">
+            <Card className="md:col-span-2">
+              <CardHeader>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Profile
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  {isEditing
+                    ? 'Update your membership details.'
+                    : 'View your membership details.'}
+                </p>
+              </CardHeader>
+              {!isEditing ? (
+                <CardContent className="space-y-6">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    Personal Information
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Display name
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {form.displayName || (
+                          <span className="text-gray-400 italic">Not set</span>
+                        )}
+                      </p>
                     </div>
-                  </li>
-                ))}
-              </ul>
-          </CardContent>
-        </Card>
-        )}
-        <div className="grid md:grid-cols-3 gap-6">
-          <Card className="md:col-span-2">
-            <CardHeader>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Profile</h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">{isEditing ? 'Update your membership details.' : 'View your membership details.'}</p>
-            </CardHeader>
-            {!isEditing ? (
-            <CardContent className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Display name</p>
-                  <p className="text-gray-900 dark:text-white">{form.displayName || <span className="text-gray-400 italic">Not set</span>}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Full name</p>
-                  <p className="text-gray-900 dark:text-white">{form.name || <span className="text-gray-400 italic">Not set</span>}</p>
-                </div>
-              </div>
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Full name
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {form.name || (
+                          <span className="text-gray-400 italic">Not set</span>
+                        )}
+                      </p>
+                    </div>
+                  </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Contact & Social</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Student status</p>
-                  <p className="text-gray-900 dark:text-white capitalize">{form.studentStatus ?? 'Student'}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Campus</p>
-                  <p className="text-gray-900 dark:text-white">{form.campus ?? 'Uppsala'}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">LinkedIn URL</p>
-                  <p className="text-gray-900 dark:text-white">{form.linkedin ? <a href={form.linkedin} className="underline" target="_blank" rel="noreferrer">{form.linkedin}</a> : <span className="text-gray-400 italic">Not set</span>}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">GitHub URL</p>
-                  <p className="text-gray-900 dark:text-white">{form.github ? <a href={form.github} className="underline" target="_blank" rel="noreferrer">{form.github}</a> : <span className="text-gray-400 italic">Not set</span>}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Website</p>
-                  <p className="text-gray-900 dark:text-white">{form.website ? <a href={form.website} className="underline" target="_blank" rel="noreferrer">{form.website}</a> : <span className="text-gray-400 italic">Not set</span>}</p>
-                </div>
-              </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    Contact & Social
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Student status
+                      </p>
+                      <p className="text-gray-900 dark:text-white capitalize">
+                        {form.studentStatus ?? 'Student'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Campus
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {form.campus ?? 'Uppsala'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        LinkedIn URL
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {form.linkedin ? (
+                          <a
+                            href={form.linkedin}
+                            className="underline"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {form.linkedin}
+                          </a>
+                        ) : (
+                          <span className="text-gray-400 italic">Not set</span>
+                        )}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        GitHub URL
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {form.github ? (
+                          <a
+                            href={form.github}
+                            className="underline"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {form.github}
+                          </a>
+                        ) : (
+                          <span className="text-gray-400 italic">Not set</span>
+                        )}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Website
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {form.website ? (
+                          <a
+                            href={form.website}
+                            className="underline"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {form.website}
+                          </a>
+                        ) : (
+                          <span className="text-gray-400 italic">Not set</span>
+                        )}
+                      </p>
+                    </div>
+                  </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Academic Information</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">University</p>
-                  <p className="text-gray-900 dark:text-white capitalize">{form.university ?? 'Uppsala'}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Program/Major</p>
-                  <p className="text-gray-900 dark:text-white">{form.program || <span className="text-gray-400 italic">Not set</span>}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Expected Graduation Year</p>
-                  <p className="text-gray-900 dark:text-white">{form.expectedGraduationYear ?? <span className="text-gray-400 italic">Not set</span>}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Gender</p>
-                  <p className="text-gray-900 dark:text-white capitalize">{form.gender === 'prefer_not' ? 'Prefer not to say' : form.gender === 'nonbinary' ? 'Non-binary' : (form.gender ?? 'Other')}</p>
-                </div>
-              </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    Academic Information
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        University
+                      </p>
+                      <p className="text-gray-900 dark:text-white capitalize">
+                        {form.university ?? 'Uppsala'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Program/Major
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {form.program || (
+                          <span className="text-gray-400 italic">Not set</span>
+                        )}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Expected Graduation Year
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {form.expectedGraduationYear ?? (
+                          <span className="text-gray-400 italic">Not set</span>
+                        )}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Gender
+                      </p>
+                      <p className="text-gray-900 dark:text-white capitalize">
+                        {form.gender === 'prefer_not'
+                          ? 'Prefer not to say'
+                          : form.gender === 'nonbinary'
+                            ? 'Non-binary'
+                            : (form.gender ?? 'Other')}
+                      </p>
+                    </div>
+                  </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">How did you hear of us?</p>
-                  <p className="text-gray-900 dark:text-white">{form.heardOfUs || <span className="text-gray-400 italic">Not set</span>}</p>
-                </div>
-              </div>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        How did you hear of us?
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {form.heardOfUs || (
+                          <span className="text-gray-400 italic">Not set</span>
+                        )}
+                      </p>
+                    </div>
+                  </div>
 
-              <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Bio</p>
-                <p className="text-gray-900 dark:text-white">{form.bio || <span className="text-gray-400 italic">Not set</span>}</p>
-              </div>
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Bio
+                    </p>
+                    <p className="text-gray-900 dark:text-white">
+                      {form.bio || (
+                        <span className="text-gray-400 italic">Not set</span>
+                      )}
+                    </p>
+                  </div>
 
-              <div className="flex items-center gap-6">
-                <span className="text-gray-800 dark:text-gray-200">
-                  Newsletter: {form.newsletter ? 'Subscribed' : 'Not subscribed'}
-                </span>
-                <span className="text-gray-800 dark:text-gray-200">
-                  Looking for job: {form.lookingForJob ? 'Yes' : 'No'}
-                </span>
-              </div>
+                  <div className="flex items-center gap-6">
+                    <span className="text-gray-800 dark:text-gray-200">
+                      Newsletter:{' '}
+                      {form.newsletter ? 'Subscribed' : 'Not subscribed'}
+                    </span>
+                    <span className="text-gray-800 dark:text-gray-200">
+                      Looking for job: {form.lookingForJob ? 'Yes' : 'No'}
+                    </span>
+                  </div>
 
-              <div className="space-y-2">
-                <p className="text-sm text-gray-500 dark:text-gray-400">Privacy: {form.privacyAcceptedAt ? `accepted at ${new Date(form.privacyAcceptedAt).toLocaleString()}` : 'not accepted yet'}</p>
-                <p className="text-gray-800 dark:text-gray-200">Marketing: {form.marketingOptIn ? 'Opted in' : 'Opted out'}</p>
-                <p className="text-gray-800 dark:text-gray-200">Analytics: {form.analyticsOptIn ? 'Opted in' : 'Opted out'}</p>
-                <p className="text-gray-800 dark:text-gray-200">Partner contact: {form.partnerContactOptIn ? 'Opted in' : 'Opted out'}</p>
-              </div>
+                  <div className="space-y-2">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      Privacy:{' '}
+                      {form.privacyAcceptedAt
+                        ? `accepted at ${new Date(form.privacyAcceptedAt).toLocaleString()}`
+                        : 'not accepted yet'}
+                    </p>
+                    <p className="text-gray-800 dark:text-gray-200">
+                      Marketing:{' '}
+                      {form.marketingOptIn ? 'Opted in' : 'Opted out'}
+                    </p>
+                    <p className="text-gray-800 dark:text-gray-200">
+                      Analytics:{' '}
+                      {form.analyticsOptIn ? 'Opted in' : 'Opted out'}
+                    </p>
+                    <p className="text-gray-800 dark:text-gray-200">
+                      Partner contact:{' '}
+                      {form.partnerContactOptIn ? 'Opted in' : 'Opted out'}
+                    </p>
+                  </div>
 
-              <div className="flex justify-end">
-                <Button variant="outline" onClick={() => setIsEditing(true)}>Edit</Button>
-              </div>
-            </CardContent>
-            ) : (
-            <CardContent className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <FieldGroup label="Display name" requiredHint="Required. Shown publicly.">
-                  <InputBase placeholder="e.g. Alex" value={form.displayName || ""} onChange={(e) => setForm(f => ({ ...f, displayName: e.target.value }))} />
-                </FieldGroup>
-                <FieldGroup label="Full name" requiredHint="Required.">
-                  <InputBase placeholder="e.g. Alex Doe" value={form.name || ""} onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))} />
-                </FieldGroup>
-              </div>
+                  <div className="flex justify-end">
+                    <Button
+                      variant="outline"
+                      onClick={() => setIsEditing(true)}
+                    >
+                      Edit
+                    </Button>
+                  </div>
+                </CardContent>
+              ) : (
+                <CardContent className="space-y-6">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    Personal Information
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <FieldGroup
+                      label="Display name"
+                      requiredHint="Required. Shown publicly."
+                    >
+                      <InputBase
+                        placeholder="e.g. Alex"
+                        value={form.displayName || ''}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            displayName: e.target.value,
+                          }))
+                        }
+                      />
+                    </FieldGroup>
+                    <FieldGroup label="Full name" requiredHint="Required.">
+                      <InputBase
+                        placeholder="e.g. Alex Doe"
+                        value={form.name || ''}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, name: e.target.value }))
+                        }
+                      />
+                    </FieldGroup>
+                  </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Contact & Social</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <FieldGroup label="Student status" requiredHint="Optional">
-                  <SelectBase value={form.studentStatus ?? "student"} onChange={(e) => setForm(f => ({ ...f, studentStatus: e.target.value as 'student' | 'alumni' | 'other' }))}>
-                    <option value="student">Student</option>
-                    <option value="alumni">Alumni</option>
-                    <option value="other">Other</option>
-                  </SelectBase>
-                </FieldGroup>
-                <FieldGroup label="Campus" requiredHint="Optional">
-                  <SelectBase value={form.campus ?? "Uppsala"} onChange={(e) => setForm(f => ({ ...f, campus: e.target.value as 'Uppsala' | 'Gotland' | 'other' }))}>
-                    <option value="Uppsala">Uppsala</option>
-                    <option value="Gotland">Gotland</option>
-                    <option value="other">Other</option>
-                  </SelectBase>
-                </FieldGroup>
-                <FieldGroup label="LinkedIn URL" requiredHint="Optional">
-                  <InputBase placeholder="https://linkedin.com/in/..." inputMode="url" autoComplete="url" value={form.linkedin || ""} onChange={(e) => setForm(f => ({ ...f, linkedin: e.target.value }))} />
-                </FieldGroup>
-                <FieldGroup label="GitHub URL" requiredHint="Optional">
-                  <InputBase placeholder="https://github.com/username" inputMode="url" autoComplete="url" value={form.github || ""} onChange={(e) => setForm(f => ({ ...f, github: e.target.value }))} />
-                </FieldGroup>
-                <FieldGroup label="Website" requiredHint="Optional">
-                  <InputBase placeholder="https://example.com" inputMode="url" autoComplete="url" value={form.website || ""} onChange={(e) => setForm(f => ({ ...f, website: e.target.value }))} />
-                </FieldGroup>
-              </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    Contact & Social
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <FieldGroup label="Student status" requiredHint="Optional">
+                      <SelectBase
+                        value={form.studentStatus ?? 'student'}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            studentStatus: e.target.value as
+                              'student' | 'alumni' | 'other',
+                          }))
+                        }
+                      >
+                        <option value="student">Student</option>
+                        <option value="alumni">Alumni</option>
+                        <option value="other">Other</option>
+                      </SelectBase>
+                    </FieldGroup>
+                    <FieldGroup label="Campus" requiredHint="Optional">
+                      <SelectBase
+                        value={form.campus ?? 'Uppsala'}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            campus: e.target.value as
+                              'Uppsala' | 'Gotland' | 'other',
+                          }))
+                        }
+                      >
+                        <option value="Uppsala">Uppsala</option>
+                        <option value="Gotland">Gotland</option>
+                        <option value="other">Other</option>
+                      </SelectBase>
+                    </FieldGroup>
+                    <FieldGroup label="LinkedIn URL" requiredHint="Optional">
+                      <InputBase
+                        placeholder="https://linkedin.com/in/..."
+                        inputMode="url"
+                        autoComplete="url"
+                        value={form.linkedin || ''}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, linkedin: e.target.value }))
+                        }
+                      />
+                    </FieldGroup>
+                    <FieldGroup label="GitHub URL" requiredHint="Optional">
+                      <InputBase
+                        placeholder="https://github.com/username"
+                        inputMode="url"
+                        autoComplete="url"
+                        value={form.github || ''}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, github: e.target.value }))
+                        }
+                      />
+                    </FieldGroup>
+                    <FieldGroup label="Website" requiredHint="Optional">
+                      <InputBase
+                        placeholder="https://example.com"
+                        inputMode="url"
+                        autoComplete="url"
+                        value={form.website || ''}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, website: e.target.value }))
+                        }
+                      />
+                    </FieldGroup>
+                  </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Academic Information</h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <FieldGroup label="University" requiredHint="Required if student.">
-                  <SelectBase value={form.university ?? "Uppsala"} onChange={(e) => setForm(f => ({ ...f, university: e.target.value as 'Uppsala' | 'none' | 'other' }))}>
-                    <option value="Uppsala">Uppsala</option>
-                    <option value="none">None</option>
-                    <option value="other">Other</option>
-                  </SelectBase>
-                </FieldGroup>
-                <FieldGroup label="Program/Major" requiredHint="Required if student.">
-                  <InputBase placeholder="e.g. Computer Science" value={form.program || ""} onChange={(e) => setForm(f => ({ ...f, program: e.target.value }))} />
-                </FieldGroup>
-                <FieldGroup label="Expected Graduation Year" requiredHint="Optional">
-                  <InputBase placeholder="e.g. 2026" type="number" value={form.expectedGraduationYear ?? ''} onChange={(e) => setForm(f => ({ ...f, expectedGraduationYear: e.target.value ? Number(e.target.value) : undefined }))} />
-                </FieldGroup>
-                <FieldGroup label="Gender" requiredHint="Optional">
-                  <SelectBase value={form.gender || "other"} onChange={(e) => setForm(f => ({ ...f, gender: e.target.value }))}>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="nonbinary">Non-binary</option>
-                    <option value="prefer_not">Prefer not to say</option>
-                    <option value="other">Other</option>
-                  </SelectBase>
-                </FieldGroup>
-              </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <FieldGroup label="How did you hear of us?" requiredHint="Optional">
-                  <SelectBase
-                    value={form.heardOfUs || ''}
-                    onChange={(e) => {
-                      const v = e.target.value;
-                      if (v === 'other') {
-                        setForm(f => ({ ...f, heardOfUs: '' }));
-                      } else {
-                        setForm(f => ({ ...f, heardOfUs: v }));
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    Academic Information
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <FieldGroup
+                      label="University"
+                      requiredHint="Required if student."
+                    >
+                      <SelectBase
+                        value={form.university ?? 'Uppsala'}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            university: e.target.value as
+                              'Uppsala' | 'none' | 'other',
+                          }))
+                        }
+                      >
+                        <option value="Uppsala">Uppsala</option>
+                        <option value="none">None</option>
+                        <option value="other">Other</option>
+                      </SelectBase>
+                    </FieldGroup>
+                    <FieldGroup
+                      label="Program/Major"
+                      requiredHint="Required if student."
+                    >
+                      <InputBase
+                        placeholder="e.g. Computer Science"
+                        value={form.program || ''}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, program: e.target.value }))
+                        }
+                      />
+                    </FieldGroup>
+                    <FieldGroup
+                      label="Expected Graduation Year"
+                      requiredHint="Optional"
+                    >
+                      <InputBase
+                        placeholder="e.g. 2026"
+                        type="number"
+                        value={form.expectedGraduationYear ?? ''}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            expectedGraduationYear: e.target.value
+                              ? Number(e.target.value)
+                              : undefined,
+                          }))
+                        }
+                      />
+                    </FieldGroup>
+                    <FieldGroup label="Gender" requiredHint="Optional">
+                      <SelectBase
+                        value={form.gender || 'other'}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, gender: e.target.value }))
+                        }
+                      >
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="nonbinary">Non-binary</option>
+                        <option value="prefer_not">Prefer not to say</option>
+                        <option value="other">Other</option>
+                      </SelectBase>
+                    </FieldGroup>
+                  </div>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <FieldGroup
+                      label="How did you hear of us?"
+                      requiredHint="Optional"
+                    >
+                      <SelectBase
+                        value={form.heardOfUs || ''}
+                        onChange={(e) => {
+                          const v = e.target.value;
+                          if (v === 'other') {
+                            setForm((f) => ({ ...f, heardOfUs: '' }));
+                          } else {
+                            setForm((f) => ({ ...f, heardOfUs: v }));
+                          }
+                        }}
+                      >
+                        <option value="">Select an option</option>
+                        <option value="posters">Posters</option>
+                        <option value="instagram">Instagram</option>
+                        <option value="linkedin">LinkedIn</option>
+                        <option value="friends">Friends</option>
+                        <option value="events">Events</option>
+                        <option value="lecture">During lecture</option>
+                        <option value="other">Other</option>
+                      </SelectBase>
+                    </FieldGroup>
+                    {(form.heardOfUs === '' ||
+                      (form.heardOfUs &&
+                        ![
+                          'posters',
+                          'instagram',
+                          'linkedin',
+                          'friends',
+                          'events',
+                          'lecture',
+                        ].includes(form.heardOfUs))) && (
+                      <FieldGroup
+                        label="If other, please specify"
+                        requiredHint="Optional"
+                      >
+                        <InputBase
+                          placeholder="Type here"
+                          value={form.heardOfUs || ''}
+                          onChange={(e) =>
+                            setForm((f) => ({
+                              ...f,
+                              heardOfUs: e.target.value,
+                            }))
+                          }
+                        />
+                      </FieldGroup>
+                    )}
+                  </div>
+                  <FieldGroup label="Bio" requiredHint="Optional">
+                    <TextareaBase
+                      placeholder="Write a short bio"
+                      value={form.bio || ''}
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, bio: e.target.value }))
                       }
-                    }}
-                  >
-                    <option value="">Select an option</option>
-                    <option value="posters">Posters</option>
-                    <option value="instagram">Instagram</option>
-                    <option value="linkedin">LinkedIn</option>
-                    <option value="friends">Friends</option>
-                    <option value="events">Events</option>
-                    <option value="lecture">During lecture</option>
-                    <option value="other">Other</option>
-                  </SelectBase>
-                </FieldGroup>
-                {(form.heardOfUs === '' || (form.heardOfUs && !['posters', 'instagram', 'linkedin', 'friends', 'events', 'lecture'].includes(form.heardOfUs))) && (
-                  <FieldGroup label="If other, please specify" requiredHint="Optional">
-                    <InputBase placeholder="Type here" value={form.heardOfUs || ''} onChange={(e) => setForm(f => ({ ...f, heardOfUs: e.target.value }))} />
+                    />
                   </FieldGroup>
-                )}
-              </div>
-              <FieldGroup label="Bio" requiredHint="Optional">
-                <TextareaBase placeholder="Write a short bio" value={form.bio || ""} onChange={(e) => setForm(f => ({ ...f, bio: e.target.value }))} />
-              </FieldGroup>
-              <div className="flex items-center gap-6">
-                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input type="checkbox" checked={!!form.newsletter} onChange={(e) => setForm(f => ({ ...f, newsletter: e.target.checked }))} />
-                  Subscribe to newsletter
-                </label>
-                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input type="checkbox" checked={!!form.lookingForJob} onChange={(e) => setForm(f => ({ ...f, lookingForJob: e.target.checked }))} />
-                  Looking for job opportunities
-                </label>
-              </div>
-              <div className="space-y-2">
-                <div className="text-sm text-gray-700 dark:text-gray-300">
-                  Privacy: {form.privacyAcceptedAt ? `accepted at ${new Date(form.privacyAcceptedAt).toLocaleString()}` : 'not accepted yet'}
-                </div>
-                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input type="checkbox" checked={!!form.marketingOptIn} onChange={(e) => setForm(f => ({ ...f, marketingOptIn: e.target.checked }))} />
-                  Allow marketing communications
-                </label>
-                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input type="checkbox" checked={!!form.analyticsOptIn} onChange={(e) => setForm(f => ({ ...f, analyticsOptIn: e.target.checked }))} />
-                  Allow anonymous analytics
-                </label>
-                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input type="checkbox" checked={!!form.partnerContactOptIn} onChange={(e) => setForm(f => ({ ...f, partnerContactOptIn: e.target.checked }))} />
-                  Allow contact from partner companies
-                </label>
-                <div className="text-xs text-gray-600 dark:text-gray-400">
-                  View our <a href="/privacy" className="underline" target="_blank" rel="noreferrer">Privacy Policy</a>
-                </div>
-              </div>
-              <div className="flex justify-end gap-3">
-                <Button variant="outline" onClick={() => setConfirmCancel(true)}>Cancel</Button>
-                <Button variant="outline" onClick={handleSave}>Save</Button>
-              </div>
-            </CardContent>
-            )}
-          </Card>
+                  <div className="flex items-center gap-6">
+                    <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                      <input
+                        type="checkbox"
+                        checked={!!form.newsletter}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            newsletter: e.target.checked,
+                          }))
+                        }
+                      />
+                      Subscribe to newsletter
+                    </label>
+                    <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                      <input
+                        type="checkbox"
+                        checked={!!form.lookingForJob}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            lookingForJob: e.target.checked,
+                          }))
+                        }
+                      />
+                      Looking for job opportunities
+                    </label>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-sm text-gray-700 dark:text-gray-300">
+                      Privacy:{' '}
+                      {form.privacyAcceptedAt
+                        ? `accepted at ${new Date(form.privacyAcceptedAt).toLocaleString()}`
+                        : 'not accepted yet'}
+                    </div>
+                    <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                      <input
+                        type="checkbox"
+                        checked={!!form.marketingOptIn}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            marketingOptIn: e.target.checked,
+                          }))
+                        }
+                      />
+                      Allow marketing communications
+                    </label>
+                    <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                      <input
+                        type="checkbox"
+                        checked={!!form.analyticsOptIn}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            analyticsOptIn: e.target.checked,
+                          }))
+                        }
+                      />
+                      Allow anonymized usage analytics (link and page
+                      interactions)
+                    </label>
+                    <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                      <input
+                        type="checkbox"
+                        checked={!!form.partnerContactOptIn}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            partnerContactOptIn: e.target.checked,
+                          }))
+                        }
+                      />
+                      Allow contact from partner companies
+                    </label>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">
+                      View our{' '}
+                      <a
+                        href="/privacy"
+                        className="underline"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Privacy Policy
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex justify-end gap-3">
+                    <Button
+                      variant="outline"
+                      onClick={() => setConfirmCancel(true)}
+                    >
+                      Cancel
+                    </Button>
+                    <Button variant="outline" onClick={handleSave}>
+                      Save
+                    </Button>
+                  </div>
+                </CardContent>
+              )}
+            </Card>
 
-          <Card>
-            <CardHeader>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Linked Accounts</h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">Link multiple providers to your account.</p>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-gray-800 dark:text-gray-200">Google</span>
-                {isLinked.google ? (
-                  <span className="text-green-600">Linked</span>
-                ) : (
-                  <Button variant="outline" onClick={() => handleLink("google")}>Link</Button>
-                )}
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-gray-800 dark:text-gray-200">GitHub</span>
-                {isLinked.github ? (
-                  <span className="text-green-600">Linked</span>
-                ) : (
-                  <Button variant="outline" onClick={() => handleLink("github")}>Link</Button>
-                )}
-              </div>
-              {/* <div className="flex items-center justify-between">
+            <Card>
+              <CardHeader>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Linked Accounts
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  Link multiple providers to your account.
+                </p>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-800 dark:text-gray-200">
+                    Google
+                  </span>
+                  {isLinked.google ? (
+                    <span className="text-green-600">Linked</span>
+                  ) : (
+                    <Button
+                      variant="outline"
+                      onClick={() => handleLink('google')}
+                    >
+                      Link
+                    </Button>
+                  )}
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-gray-800 dark:text-gray-200">
+                    GitHub
+                  </span>
+                  {isLinked.github ? (
+                    <span className="text-green-600">Linked</span>
+                  ) : (
+                    <Button
+                      variant="outline"
+                      onClick={() => handleLink('github')}
+                    >
+                      Link
+                    </Button>
+                  )}
+                </div>
+                {/* <div className="flex items-center justify-between">
                 <span className="text-gray-800 dark:text-gray-200">Microsoft</span>
                 {isLinked.microsoft ? (
                   <span className="text-green-600">Linked</span>
@@ -474,65 +938,110 @@ export default function AccountPage() {
                   <Button onClick={() => handleLink("microsoft")}>Link</Button>
                 )}
               </div> */}
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Cookie Settings</h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">Manage your cookie preferences.</p>
-            </CardHeader>
-            <CardContent>
-              <Button variant="outline" onClick={() => CookieConsent.showPreferences()}>
-                Change cookie settings
-              </Button>
-            </CardContent>
-          </Card>
+            <Card>
+              <CardHeader>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Cookie Settings
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  Manage your cookie preferences.
+                </p>
+              </CardHeader>
+              <CardContent>
+                <Button
+                  variant="outline"
+                  onClick={() => CookieConsent.showPreferences()}
+                >
+                  Change cookie settings
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Delete Account
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  Permanently delete your profile, event registrations,
+                  attendance history, and uploaded files.
+                </p>
+              </CardHeader>
+              <CardContent>
+                <Button
+                  variant="outline"
+                  className="border-red-300 text-red-700 hover:bg-red-50 dark:border-red-800 dark:text-red-300 dark:hover:bg-red-900/20"
+                  onClick={() => setConfirmDeleteAccount(true)}
+                >
+                  Delete account
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
 
-        
-      </div>
-
-      <style jsx global>{`
-        .input { @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white; }
-      `}</style>
-
-      {/* Confirm unregister modal */}
-      <ConfirmModal
-        open={!!confirmRegId}
-        title="Unregister from event"
-        description="Are you sure you want to unregister from this event?"
-        confirmText="Yes, unregister"
-        cancelText="Keep registration"
-        onClose={() => setConfirmRegId(null)}
-        onConfirm={async () => {
-          if (!confirmRegId) return;
-          try {
-            await cancelRegistration(confirmRegId);
-            notify({ type: 'success', title: 'Cancelled', message: 'Your registration has been cancelled.' });
-            if (uid) {
-              const fresh = await getMyRegistrations(uid);
-              setRegistrations(fresh);
-            }
-          } catch (e: unknown) {
-            const msg = e instanceof Error ? e.message : 'Could not cancel. Please contact us if you have problems unregistering for the event.';
-            notify({ type: 'error', title: 'Cancel failed', message: msg });
-          } finally {
-            setConfirmRegId(null);
+        <style jsx global>{`
+          .input {
+            @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white;
           }
-        }}
-      />
-      {/* Confirm discard changes modal */}
-      <ConfirmModal
-        open={confirmCancel}
-        title="Discard changes"
-        description="Are you sure you want to discard all unsaved changes?"
-        confirmText="Yes, discard"
-        cancelText="Keep editing"
-        onClose={() => setConfirmCancel(false)}
-        onConfirm={handleCancelEdit}
-      />
-    </div>
+        `}</style>
+
+        {/* Confirm unregister modal */}
+        <ConfirmModal
+          open={!!confirmRegId}
+          title="Unregister from event"
+          description="Are you sure you want to unregister from this event?"
+          confirmText="Yes, unregister"
+          cancelText="Keep registration"
+          onClose={() => setConfirmRegId(null)}
+          onConfirm={async () => {
+            if (!confirmRegId) return;
+            try {
+              await cancelRegistration(confirmRegId);
+              notify({
+                type: 'success',
+                title: 'Cancelled',
+                message: 'Your registration has been cancelled.',
+              });
+              if (uid) {
+                const fresh = await getMyRegistrations(uid);
+                setRegistrations(fresh);
+              }
+            } catch (e: unknown) {
+              const msg =
+                e instanceof Error
+                  ? e.message
+                  : 'Could not cancel. Please contact us if you have problems unregistering for the event.';
+              notify({ type: 'error', title: 'Cancel failed', message: msg });
+            } finally {
+              setConfirmRegId(null);
+            }
+          }}
+        />
+        {/* Confirm discard changes modal */}
+        <ConfirmModal
+          open={confirmCancel}
+          title="Discard changes"
+          description="Are you sure you want to discard all unsaved changes?"
+          confirmText="Yes, discard"
+          cancelText="Keep editing"
+          onClose={() => setConfirmCancel(false)}
+          onConfirm={handleCancelEdit}
+        />
+        {/* Confirm account deletion modal */}
+        <ConfirmModal
+          open={confirmDeleteAccount}
+          title="Delete account"
+          description="This permanently deletes your profile, event registrations, attendance history, uploaded files, and sign-in. This cannot be undone."
+          confirmText="Delete my account"
+          cancelText="Keep account"
+          onClose={() => setConfirmDeleteAccount(false)}
+          onConfirm={handleDeleteAccount}
+        />
+      </div>
     </ErrorBoundary>
   );
 }
