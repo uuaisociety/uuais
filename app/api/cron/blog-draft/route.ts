@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
+import { isValidCronRequest } from '@/lib/cron-auth';
 import { generateBlogDraft } from '@/lib/ai/blog/generate';
 import { fetchNewsCandidates } from '@/lib/ai/blog/news';
 
@@ -31,21 +32,24 @@ async function hasRecentAiDigest(): Promise<boolean> {
 }
 
 export async function GET(req: NextRequest) {
-  const secret = process.env.CRON_SECRET;
-  if (!secret || req.headers.get('authorization') !== `Bearer ${secret}`) {
+  if (!isValidCronRequest(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
     if (await hasRecentAiDigest()) {
-      return NextResponse.json({ success: true, skipped: true, reason: 'An AI digest already exists from the last 7 days' });
+      return NextResponse.json({
+        success: true,
+        skipped: true,
+        reason: 'An AI digest already exists from the last 7 days',
+      });
     }
 
     const { candidates, warnings } = await fetchNewsCandidates({ limit: 40 });
     if (candidates.length === 0) {
       return NextResponse.json(
         { success: false, error: 'No news candidates available', warnings },
-        { status: 502 }
+        { status: 502 },
       );
     }
 
@@ -57,12 +61,15 @@ export async function GET(req: NextRequest) {
         allCandidates: candidates,
         notes: 'Automated weekly digest — please review before publishing.',
       },
-      'cron'
+      'cron',
     );
 
     return NextResponse.json({ success: true, draftId, warnings });
   } catch (error) {
     console.error('cron blog-draft error:', error);
-    return NextResponse.json({ success: false, error: 'Weekly digest generation failed' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: 'Weekly digest generation failed' },
+      { status: 500 },
+    );
   }
 }

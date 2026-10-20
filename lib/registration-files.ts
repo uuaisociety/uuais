@@ -31,15 +31,3 @@ export async function uploadRegistrationFile(
 export function registrationFileDownloadUrl(path: string): string {
   return `/api/admin/registrations/file?path=${encodeURIComponent(path)}`;
 }
-
-/** Deletes the attachments of one of the caller's registrations (server verifies ownership). */
-export async function deleteRegistrationFiles(regId: string): Promise<void> {
-  const res = await fetch(
-    `/api/registrations/file?regId=${encodeURIComponent(regId)}`,
-    { method: 'DELETE' },
-  );
-  if (!res.ok) {
-    const body = await res.json().catch(() => null);
-    throw new Error(body?.error || `Delete failed (${res.status})`);
-  }
-}

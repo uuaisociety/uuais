@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -9,12 +9,14 @@ import PDFDropzone from '@/components/ui/PDFDropzone';
 import { Event, EventCustomQuestion, UploadedFileRef } from '@/types';
 import {
   registerForEvent,
+  getMyRegistrationForEvent,
   getMyRegistrations,
   cancelRegistration,
   confirmRegistration,
 } from '@/lib/firestore/registrations';
 import { subscribeToEventCustomQuestions } from '@/lib/firestore/questions';
 import { uploadRegistrationFile } from '@/lib/registration-files';
+import { profilePrefillValue } from '@/lib/registration-prefill';
 import { getUserProfile, type UserProfile } from '@/lib/firestore/users';
 import { auth } from '@/lib/firebase-client';
 import { useNotify } from '@/components/ui/Notifications';
@@ -44,6 +46,12 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
   );
   const [uid, setUid] = useState<string | null>(null);
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const prefillOwnerRef = useRef<string | null>(null);
+  const prefilledQuestionsRef = useRef<Set<string>>(new Set());
+  const answersRef = useRef<Record<string, string | string[]>>({});
+  const questionsRef = useRef<EventCustomQuestion[]>([]);
+  const profileRef = useRef<UserProfile | null>(null);
+  const openRef = useRef(false);
   const [alreadyRegistered, setAlreadyRegistered] = useState<null | {
     status: string;
     regId: string;
@@ -55,20 +63,63 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
     additionalInfo: '',
   });
 
+  // Keep the ref in sync for callbacks that run outside the render cycle.
+  useEffect(() => {
+    answersRef.current = customAnswers;
+  }, [customAnswers]);
+
+  // Pre-fill empty answers from the member's profile when a question maps to a
+  // known field (e.g. "Name", "Email", "Program/Major"). Never overwrites input.
+  // Called from handlers/subscriptions (not an effect) so state updates stay
+  // pure and safe under StrictMode's double-invoked updaters.
+  const applyPrefill = useCallback(
+    (qs: EventCustomQuestion[], p: UserProfile | null) => {
+      if (!openRef.current || !p || qs.length === 0) return;
+      if (prefillOwnerRef.current !== p.id) {
+        prefillOwnerRef.current = p.id;
+        prefilledQuestionsRef.current = new Set();
+      }
+      const current = answersRef.current;
+      let next: Record<string, string | string[]> | null = null;
+      for (const q of qs) {
+        if (prefilledQuestionsRef.current.has(q.id)) continue;
+        const answer = current[q.id];
+        const isEmpty =
+          answer === undefined ||
+          answer === '' ||
+          (Array.isArray(answer) && answer.length === 0);
+        if (!isEmpty) continue;
+        const value = profilePrefillValue(q, p);
+        if (value === undefined) continue;
+        next = next || { ...current };
+        next[q.id] = value;
+        prefilledQuestionsRef.current.add(q.id);
+      }
+      if (next) {
+        answersRef.current = next;
+        setCustomAnswers(next);
+      }
+    },
+    [],
+  );
+
   // Subscribe to event-specific custom questions
   useEffect(() => {
     const unsub = subscribeToEventCustomQuestions(event.id, (qs) => {
+      questionsRef.current = qs;
       setCustomQuestions(qs);
+      applyPrefill(qs, profileRef.current);
     });
     return () => {
       if (typeof unsub === 'function') unsub();
     };
-  }, [event.id]);
+  }, [event.id, applyPrefill]);
 
   // Auth + profile + my registrations
   useEffect(() => {
     const unsub = auth.onAuthStateChanged(async (u) => {
       if (!u) {
+        profileRef.current = null;
         setUid(null);
         setProfile(null);
         setAlreadyRegistered(null);
@@ -76,7 +127,9 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
       }
       setUid(u.uid);
       const p = await getUserProfile(u.uid);
+      profileRef.current = p;
       setProfile(p);
+      applyPrefill(questionsRef.current, p);
       try {
         const regs = await getMyRegistrations(u.uid);
         const mine = regs.find(
@@ -97,7 +150,22 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
       }
     });
     return () => unsub();
-  }, [event.id]);
+  }, [event.id, applyPrefill]);
+
+  const openDialog = () => {
+    openRef.current = true;
+    setIsOpen(true);
+    applyPrefill(customQuestions, profile);
+  };
+
+  const closeDialog = () => {
+    openRef.current = false;
+    setIsOpen(false);
+    setCustomAnswers({});
+    setCustomFiles({});
+    setFormData({ additionalInfo: '' });
+    prefilledQuestionsRef.current = new Set();
+  };
 
   const canApply = Boolean(uid && profile?.isMember);
 
@@ -138,6 +206,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const uploadedRefs: UploadedFileRef[] = [];
 
     try {
       if (!uid || !profile?.isMember) {
@@ -162,10 +231,9 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
       for (const q of customQuestions) {
         const file = customFiles[q.id];
         if (q.type === 'file' && file) {
-          uploadedFiles[q.question] = await uploadRegistrationFile(
-            event.id,
-            file,
-          );
+          const ref = await uploadRegistrationFile(event.id, file);
+          uploadedFiles[q.question] = ref;
+          uploadedRefs.push(ref);
         }
       }
 
@@ -187,7 +255,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
         ),
       } as const;
 
-      await registerForEvent(
+      const regId = await registerForEvent(
         event.id,
         {
           registrationData,
@@ -199,11 +267,18 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
         { waitlist: isWaitlistOnly },
       );
 
+      const stored = await getMyRegistrationForEvent(uid, event.id).catch(
+        () => null,
+      );
+
       // Reset form and close dialog
       setFormData({
         additionalInfo: '',
       });
       setCustomFiles({});
+      setCustomAnswers({});
+      prefilledQuestionsRef.current = new Set();
+      openRef.current = false;
       setIsOpen(false);
 
       // Show success message via notification
@@ -214,12 +289,23 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
           ? 'You have been added to the waitlist. We will contact you if a spot opens.'
           : 'You are registered for the event.',
       });
-      if (isWaitlistOnly) {
-        setAlreadyRegistered({ status: 'waitlist', regId: '' });
-      } else {
-        setAlreadyRegistered({ status: 'registered', regId: '' });
-      }
+      setAlreadyRegistered({
+        status: stored?.status || (isWaitlistOnly ? 'waitlist' : 'registered'),
+        regId: stored?.id || regId,
+        token: stored?.confirmationToken,
+      });
     } catch (error) {
+      if (uploadedRefs.length > 0) {
+        void Promise.all(
+          uploadedRefs.map((ref) => {
+            if (!ref.path) return Promise.resolve();
+            return fetch(
+              `/api/registrations/file?path=${encodeURIComponent(ref.path)}`,
+              { method: 'DELETE' },
+            ).catch(() => undefined);
+          }),
+        );
+      }
       console.error('Registration failed:', error);
       const msg = error instanceof Error ? error.message : String(error);
       notify({ type: 'error', title: 'Registration failed', message: msg });
@@ -308,12 +394,12 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
         </div>
       ) : canApply ? (
         <Button
-          className={`${
+          className={
             isWaitlistOnly
-              ? 'bg-chart-3 hover:brightness-110'
-              : 'bg-primary hover:brightness-110'
-          } text-white`}
-          onClick={() => setIsOpen(true)}
+              ? 'border border-primary text-primary hover:bg-primary/10'
+              : 'bg-primary text-white hover:brightness-110'
+          }
+          onClick={openDialog}
         >
           {isWaitlistOnly ? 'Join Waitlist' : 'Register Now'}
         </Button>
@@ -329,8 +415,8 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
       {isOpen && !alreadyRegistered && (
         <Modal
           open={isOpen}
-          onClose={() => setIsOpen(false)}
-          title={isCapacityFull ? 'Join Waitlist' : 'Register for Event'}
+          onClose={closeDialog}
+          title={isWaitlistOnly ? 'Join Waitlist' : 'Register for Event'}
           description={event.title}
           size="md"
         >
@@ -346,14 +432,48 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                     <div className="space-y-4">
                       {customQuestions.map((q) => (
                         <div key={q.id}>
-                          <label className="block text-sm font-medium text-foreground mb-1">
-                            {q.question}{' '}
-                            {q.required && (
-                              <span className="text-primary">*</span>
-                            )}
-                          </label>
+                          {q.type !== 'radio' &&
+                          q.type !== 'checkbox' &&
+                          q.type !== 'file' ? (
+                            <label
+                              htmlFor={`cq_${q.id}`}
+                              className="block text-sm font-medium text-foreground mb-1"
+                            >
+                              {q.question}{' '}
+                              {q.required && (
+                                <>
+                                  <span
+                                    className="text-primary"
+                                    aria-hidden="true"
+                                  >
+                                    *
+                                  </span>
+                                  <span className="sr-only"> (required)</span>
+                                </>
+                              )}
+                            </label>
+                          ) : (
+                            <p
+                              id={`cq_${q.id}_group`}
+                              className="block text-sm font-medium text-foreground mb-1"
+                            >
+                              {q.question}{' '}
+                              {q.required && (
+                                <>
+                                  <span
+                                    className="text-primary"
+                                    aria-hidden="true"
+                                  >
+                                    *
+                                  </span>
+                                  <span className="sr-only"> (required)</span>
+                                </>
+                              )}
+                            </p>
+                          )}
                           {q.type === 'text' && (
                             <input
+                              id={`cq_${q.id}`}
                               type="text"
                               value={(customAnswers[q.id] as string) || ''}
                               onChange={(e) => handleCustomAnswerChange(q, e)}
@@ -362,6 +482,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                           )}
                           {q.type === 'textarea' && (
                             <textarea
+                              id={`cq_${q.id}`}
                               value={(customAnswers[q.id] as string) || ''}
                               onChange={(e) => handleCustomAnswerChange(q, e)}
                               rows={3}
@@ -370,6 +491,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                           )}
                           {q.type === 'select' && (
                             <select
+                              id={`cq_${q.id}`}
                               value={(customAnswers[q.id] as string) || ''}
                               onChange={(e) => handleCustomAnswerChange(q, e)}
                               className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring bg-card text-foreground transition-colors duration-300"
@@ -383,7 +505,11 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                             </select>
                           )}
                           {q.type === 'radio' && (
-                            <div className="space-y-2">
+                            <div
+                              className="space-y-2"
+                              role="group"
+                              aria-labelledby={`cq_${q.id}_group`}
+                            >
                               {(q.options || []).map((opt) => (
                                 <label
                                   key={opt}
@@ -406,7 +532,11 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                             </div>
                           )}
                           {q.type === 'checkbox' && (
-                            <div className="space-y-1">
+                            <div
+                              className="space-y-1"
+                              role="group"
+                              aria-labelledby={`cq_${q.id}_group`}
+                            >
                               {(q.options && q.options.length > 0
                                 ? q.options
                                 : ['Yes']
@@ -436,7 +566,7 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                           )}
                           {q.type === 'file' && (
                             <PDFDropzone
-                              label="File"
+                              label={q.question}
                               file={customFiles[q.id] || null}
                               onChange={(f) =>
                                 setCustomFiles((prev) => ({
@@ -459,11 +589,25 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
                   </div>
                 )}
                 {/* Submit Button */}
+                <p className="text-xs text-muted-foreground">
+                  Your answers are shared with event organisers. Uploaded files
+                  are deleted 60 days after the event and registration answers
+                  after 36 months. See our{' '}
+                  <Link
+                    href="/privacy"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline"
+                  >
+                    Privacy Policy
+                  </Link>
+                  .
+                </p>
                 <div className="flex justify-end space-x-3 pt-4 border-t border-border">
                   <Button
                     type="button"
                     variant="outline"
-                    onClick={() => setIsOpen(false)}
+                    onClick={closeDialog}
                     disabled={isSubmitting}
                   >
                     Cancel

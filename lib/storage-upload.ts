@@ -7,10 +7,9 @@ const SIGNED_URL_TTL_MS = 40 * 24 * 60 * 60 * 1000;
 export async function saveFileToStorage(
   file: File,
   destPath: string,
-  options?: { signedUrl?: boolean },
+  options?: { signedUrl?: boolean; buffer?: Buffer },
 ): Promise<{ path: string; url?: string }> {
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
+  const buffer = options?.buffer ?? Buffer.from(await file.arrayBuffer());
   const bucket = admin.storage().bucket();
   const gfile = bucket.file(destPath);
   await gfile.save(buffer, {

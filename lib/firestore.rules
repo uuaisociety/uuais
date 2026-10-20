@@ -95,17 +95,9 @@ service cloud.firestore {
     match /events/{eventId} {
       allow read: if resource.data.published == true || isAdmin();
 
-      // Full create/update/delete restricted to admins
+      // Full create/update/delete restricted to admins. currentRegistrations
+      // is maintained server-side (Admin SDK) when registrations change.
       allow create, update, delete: if isAdmin();
-
-      allow update: if changedOnly(['currentRegistrations'])
-        // Allow increment when currentRegistrations was previously missing/null
-        // (treat as 0) or when it's explicitly incremented by +1.
-        && (
-          (resource.data.currentRegistrations == null && request.resource.data.currentRegistrations == 1)
-          || (request.resource.data.currentRegistrations == resource.data.currentRegistrations + 1)
-        )
-        && (resource.data.maxCapacity == null || request.resource.data.currentRegistrations <= resource.data.maxCapacity);
     }
 
     // TEAM MEMBERS
@@ -258,47 +250,27 @@ service cloud.firestore {
     }
 
     // REGISTRATIONS
+    // Registrations are created, cancelled, declined, and removed via server
+    // routes (Admin SDK), which enforce capacity, duplicates, deadlines, and
+    // keep events.currentRegistrations consistent. Clients can only read.
     match /registrations/{regId} {
-      // Only members can create a registration for themselves
-      allow create: if isMember()
-        // Ensure registration is created for the caller
-        && request.resource.data.userId == request.auth.uid
-        // Lock certain fields: only these are allowed by client
-        && request.resource.data.keys().hasOnly(
-             ['eventId', 'registrationData', 'registeredAt', 'status', 'userEmail', 'userName', 'userId']
-           )
-        // Restrict status to registered|waitlist
-        && (request.resource.data.status in ['registered', 'waitlist'])
-        // registeredAt must be a timestamp. When clients use serverTimestamp
-        // transforms the field can appear as null in the request, so allow
-        // either a timestamp or null here.
-        && (
-          (request.resource.data.registeredAt is timestamp) ||
-          (request.resource.data.registeredAt == null)
-        );
-
       // Users can read their own registrations; admins can read all
       allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
 
-      // Only admins may delete registrations by default
-      allow delete: if isAdmin();
-
-      // Allow a user to delete their own registration if it has already been cancelled.
-      // This supports a clean re-register flow by removing stale cancelled docs.
-      allow delete: if isSignedIn() && resource.data.userId == request.auth.uid && resource.data.status == 'cancelled';
-
-      // Admin full update
+      // Admin full update (invitation flow)
       allow update: if isAdmin();
+    }
 
-      // Allow a signed-in user to cancel their own registration by setting status -> 'cancelled'
-      // Constraints:
-      // - Only the owner (userId == auth.uid)
-      // - Only allowed field change: status
-      // - New status must be exactly 'cancelled'
-      allow update: if isSignedIn() && resource.data.userId == request.auth.uid
-        && changedOnly(['status'])
-        && request.resource.data.status == 'cancelled';
+    // APPEND-ONLY ADMIN AUDIT TRAIL
+    match /adminAuditLogs/{logId} {
+      allow read: if isSuperAdmin();
+      allow create: if isAdmin();
+      allow update, delete: if false;
+    }
 
+    // EVENT ATTENDANCE — admin-only so public event reads never expose attendee IDs
+    match /eventAttendance/{eventId} {
+      allow read, write: if isAdmin();
     }
 
     // APPLICATION LIMITS (anti-spam cooldown & campaign locks — admin cleanup on deletion)

@@ -14,6 +14,8 @@ import {
   validatePdfFile,
 } from '@/lib/pdf-upload';
 import { saveFileToStorage } from '@/lib/storage-upload';
+import { scanPdfBuffer } from '@/lib/malware-scan';
+import { randomBytes } from 'node:crypto';
 
 const UPLOAD_LIMIT = 10;
 const UPLOAD_WINDOW_MS = 10 * 60 * 1000;
@@ -89,8 +91,18 @@ export async function POST(req: NextRequest) {
     if (!safeName)
       return NextResponse.json({ error: 'Invalid filename' }, { status: 400 });
 
-    const path = `registrations/${eventId}/${uid}/${Date.now()}_${safeName}`;
-    await saveFileToStorage(file, path);
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const scan = await scanPdfBuffer(buffer, safeName);
+    if (!scan.ok)
+      return NextResponse.json(
+        { error: scan.message || 'File rejected' },
+        { status: 400 },
+      );
+
+    // Opaque object name: the original filename is kept only as display metadata.
+    const objectName = `${Date.now()}_${randomBytes(8).toString('hex')}.pdf`;
+    const path = `registrations/${eventId}/${uid}/${objectName}`;
+    await saveFileToStorage(file, path, { buffer });
 
     return NextResponse.json({ path, name: safeName, size: file.size });
   } catch (err) {

@@ -5,6 +5,7 @@ import { adminAuth, adminDb } from '@/lib/firebase-admin';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
 import {
   collectRegistrationFilePaths,
+  collectUserStorageFilePaths,
   deleteStorageFiles,
 } from '@/lib/server-registration-files';
 
@@ -42,6 +43,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Storage-first: orphaned uploads are not referenced by any registration,
+    // so list the caller's prefix as well. If a file cannot be deleted the
+    // request fails and the account stays intact, so the user can retry.
+    try {
+      const storedPaths = await collectUserStorageFilePaths(uid);
+      storedPaths.forEach((p) => filePaths.add(p));
+    } catch (err) {
+      console.warn('Failed to list stored files for', uid, err);
+    }
+    await deleteStorageFiles(Array.from(filePaths), { failOnError: true });
+
     let deletedDocs = 0;
     while (true) {
       const page = await adminDb
@@ -69,7 +81,6 @@ export async function POST(req: NextRequest) {
     }
 
     await adminDb.collection('users').doc(uid).delete();
-    await deleteStorageFiles(Array.from(filePaths));
 
     let authDeleted = false;
     try {

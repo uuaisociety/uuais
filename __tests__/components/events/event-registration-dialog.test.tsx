@@ -5,6 +5,7 @@ import {
   act,
   waitFor,
 } from '@testing-library/react';
+import { StrictMode } from 'react';
 import EventRegistrationDialog from '@/components/events/EventRegistrationDialog';
 import type { Event, EventCustomQuestion } from '@/types';
 
@@ -27,6 +28,7 @@ jest.mock('@/lib/firebase-client', () => ({
 
 jest.mock('@/lib/firestore/registrations', () => ({
   registerForEvent: jest.fn(),
+  getMyRegistrationForEvent: jest.fn().mockResolvedValue(null),
   getMyRegistrations: jest.fn(),
   cancelRegistration: jest.fn(),
   confirmRegistration: jest.fn(),
@@ -560,6 +562,139 @@ describe('EventRegistrationDialog', () => {
           }),
         );
       });
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // Profile pre-fill
+  // ------------------------------------------------------------------
+  describe('profile pre-fill', () => {
+    beforeEach(() => {
+      mockedUsers().getUserProfile.mockResolvedValue({
+        id: 'user1',
+        isMember: true,
+        displayName: 'Ada Lovelace',
+        email: 'ada@uu.se',
+        program: 'Computer Science',
+        linkedin: 'https://linkedin.com/in/ada',
+      });
+      mockedRegistrations().getMyRegistrations.mockResolvedValue([]);
+    });
+
+    const prefillQuestions: EventCustomQuestion[] = [
+      {
+        id: 'q1',
+        eventId: 'evt1',
+        question: 'What is your name?',
+        type: 'text',
+        required: false,
+        order: 1,
+      },
+      {
+        id: 'q2',
+        eventId: 'evt1',
+        question: 'Email',
+        type: 'text',
+        required: false,
+        order: 2,
+      },
+      {
+        id: 'q3',
+        eventId: 'evt1',
+        question: 'Program/Major',
+        type: 'select',
+        options: ['Computer Science', 'Other'],
+        required: false,
+        order: 3,
+      },
+      {
+        id: 'q4',
+        eventId: 'evt1',
+        question: 'LinkedIn profile',
+        type: 'text',
+        required: false,
+        order: 4,
+      },
+      {
+        id: 'q5',
+        eventId: 'evt1',
+        question: 'Favourite colour',
+        type: 'text',
+        required: false,
+        order: 5,
+      },
+    ];
+
+    function textInputs(): HTMLInputElement[] {
+      return Array.from(
+        document.querySelectorAll('input[type="text"]'),
+      ) as HTMLInputElement[];
+    }
+
+    it('pre-fills matching questions from the member profile', async () => {
+      render(<EventRegistrationDialog event={createEvent()} />);
+      await simulateAuth(mockUser);
+
+      act(() => {
+        mockedQuestionsModule()._triggerQuestions(prefillQuestions);
+      });
+      fireEvent.click(screen.getByText('Register Now'));
+
+      await waitFor(() => {
+        expect(textInputs()[2].value).toBe('https://linkedin.com/in/ada');
+      });
+      expect(textInputs()[0].value).toBe('Ada Lovelace');
+      expect(textInputs()[1].value).toBe('ada@uu.se');
+      // Question with no matching profile field stays empty
+      expect(textInputs()[3].value).toBe('');
+      expect(
+        (document.querySelector('select') as HTMLSelectElement).value,
+      ).toBe('Computer Science');
+    });
+
+    it('pre-fills under StrictMode where state updaters run twice', async () => {
+      render(
+        <StrictMode>
+          <EventRegistrationDialog event={createEvent()} />
+        </StrictMode>,
+      );
+      await simulateAuth(mockUser);
+
+      act(() => {
+        mockedQuestionsModule()._triggerQuestions(prefillQuestions);
+      });
+      fireEvent.click(screen.getByText('Register Now'));
+
+      await waitFor(() => {
+        expect(textInputs()[0].value).toBe('Ada Lovelace');
+      });
+      expect(textInputs()[1].value).toBe('ada@uu.se');
+      expect(textInputs()[2].value).toBe('https://linkedin.com/in/ada');
+    });
+
+    it('does not overwrite an answer the user typed', async () => {
+      render(<EventRegistrationDialog event={createEvent()} />);
+      await simulateAuth(mockUser);
+
+      act(() => {
+        mockedQuestionsModule()._triggerQuestions(prefillQuestions);
+      });
+      fireEvent.click(screen.getByText('Register Now'));
+
+      await waitFor(() => {
+        expect(textInputs()[0].value).toBe('Ada Lovelace');
+      });
+
+      fireEvent.change(textInputs()[0], {
+        target: { value: 'My Own Name' },
+      });
+
+      act(() => {
+        mockedQuestionsModule()._triggerQuestions(prefillQuestions);
+      });
+
+      expect(textInputs()[0].value).toBe('My Own Name');
+      expect(textInputs()[1].value).toBe('ada@uu.se');
     });
   });
 

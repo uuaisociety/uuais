@@ -78,6 +78,36 @@ describe('DELETE /api/registrations/file', () => {
     expect(mockStorageFile).not.toHaveBeenCalled();
   });
 
+  it('lets an admin delete files for any registration', async () => {
+    mockGetTokens.mockResolvedValue({
+      decodedToken: { uid: 'admin1', admin: true },
+    });
+    const res = await call();
+    const body = await res.json();
+    expect(res.status).toBe(200);
+    expect(body).toEqual({ success: true, deleted: 1 });
+    expect(mockStorageFile).toHaveBeenCalledWith(OWNED_PATH);
+  });
+
+  it('scopes admin deletes to the registration owner prefix, not the admin uid', async () => {
+    mockGetTokens.mockResolvedValue({
+      decodedToken: { uid: 'admin1', admin: true },
+    });
+    regDocRef.get.mockResolvedValue({
+      exists: true,
+      data: () => ({
+        userId: 'user1',
+        eventId: 'evt1',
+        registrationData: {
+          a: { path: 'registrations/evt1/admin1/123_cv.pdf' },
+        },
+      }),
+    });
+    const res = await call();
+    expect(await res.json()).toEqual({ success: true, deleted: 0 });
+    expect(mockStorageFile).not.toHaveBeenCalled();
+  });
+
   it('deletes the file referenced by the registration', async () => {
     const res = await call();
     const body = await res.json();
