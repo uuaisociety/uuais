@@ -309,7 +309,10 @@ export async function DELETE(req: NextRequest) {
           : null;
       const event = eventRef ? await transaction.get(eventRef) : null;
 
-      transaction.update(regRef, { status: mode, counted: false });
+      transaction.update(regRef, {
+        status: mode === 'decline' ? 'declined' : 'cancelled',
+        counted: false,
+      });
 
       if (eventRef && event?.exists) {
         const total = event.get('currentRegistrations');

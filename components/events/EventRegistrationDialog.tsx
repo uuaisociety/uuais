@@ -394,9 +394,10 @@ const EventRegistrationDialog: React.FC<EventRegistrationDialogProps> = ({
         </div>
       ) : canApply ? (
         <Button
+          variant={isWaitlistOnly ? 'outline' : 'default'}
           className={
             isWaitlistOnly
-              ? 'border border-primary text-primary hover:bg-primary/10'
+              ? 'border-primary text-primary hover:bg-primary/10'
               : 'bg-primary text-white hover:brightness-110'
           }
           onClick={openDialog}

@@ -282,7 +282,7 @@ describe('/api/registrations', () => {
       expect(res.status).toBe(200);
       expect(body.success).toBe(true);
       expect(mockTxUpdate).toHaveBeenCalledWith(regDocRef, {
-        status: 'cancel',
+        status: 'cancelled',
         counted: false,
       });
       expect(mockDeleteRegistrationFilePaths).toHaveBeenCalledWith(ownData);
