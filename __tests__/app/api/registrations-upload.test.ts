@@ -52,7 +52,7 @@ describe('POST /api/registrations/upload', () => {
     });
     eventDocRef.get.mockResolvedValue({
       exists: true,
-      data: () => ({ title: 'Event' }),
+      data: () => ({ title: 'Event', published: true }),
     });
   });
 
@@ -101,6 +101,18 @@ describe('POST /api/registrations/upload', () => {
     expect(res.status).toBe(404);
   });
 
+  it('returns 403 when the event is not published', async () => {
+    mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } });
+    eventDocRef.get.mockResolvedValue({
+      exists: true,
+      data: () => ({ title: 'Draft', published: false }),
+    });
+    const { POST } = await import('@/app/api/registrations/upload/route');
+    const res = await POST(uploadRequest() as never);
+    expect(res.status).toBe(403);
+    expect(mockStorageFile).not.toHaveBeenCalled();
+  });
+
   it('rejects non-PDF uploads', async () => {
     mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } });
     const { POST } = await import('@/app/api/registrations/upload/route');
@@ -139,28 +151,84 @@ describe('POST /api/registrations/upload', () => {
 
     expect(res.status).toBe(200);
     expect(mockStorageFile).toHaveBeenCalledWith(
-      expect.stringMatching(/^registrations\/evt1\/user1\/\d+_cv\.pdf$/),
+      expect.stringMatching(
+        /^registrations\/evt1\/user1\/\d+_[0-9a-f]{16}\.pdf$/,
+      ),
     );
     expect(mockStorageSave).toHaveBeenCalledWith(expect.any(Buffer), {
       metadata: { contentType: 'application/pdf' },
     });
-    expect(body.path).toMatch(/^registrations\/evt1\/user1\/\d+_cv\.pdf$/);
+    expect(body.path).toMatch(
+      /^registrations\/evt1\/user1\/\d+_[0-9a-f]{16}\.pdf$/,
+    );
     expect(body.name).toBe('cv.pdf');
     expect(body.size).toBeGreaterThan(0);
   });
 
-  it('sanitizes path traversal attempts in the filename', async () => {
+  it('sanitizes path traversal attempts in the filename and stores an opaque object name', async () => {
     mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } });
     const { POST } = await import('@/app/api/registrations/upload/route');
     const res = await POST(
       uploadRequest({ file: pdfFile('../../evil.pdf') }) as never,
     );
+    const body = await res.json();
     expect(res.status).toBe(200);
-    expect(mockStorageFile).toHaveBeenCalledWith(
-      expect.stringMatching(
-        /^registrations\/evt1\/user1\/\d+_\.\._\.\._evil\.pdf$/,
-      ),
+    expect(body.name).toBe('.._.._evil.pdf');
+    expect(body.path).toMatch(
+      /^registrations\/evt1\/user1\/\d+_[0-9a-f]{16}\.pdf$/,
     );
+    expect(body.path).not.toContain('evil');
+  });
+
+  it('rejects uploads when malware scanning flags the file', async () => {
+    process.env.MALWARE_SCAN_PROVIDER = 'cloudmersive';
+    process.env.MALWARE_SCAN_API_KEY = 'test-key';
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ CleanResult: false }),
+    }) as unknown as typeof fetch;
+    mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } });
+    const { POST } = await import('@/app/api/registrations/upload/route');
+    const res = await POST(uploadRequest() as never);
+    expect(res.status).toBe(400);
+    expect((await res.json()).error).toMatch(/malware/i);
+    expect(mockStorageFile).not.toHaveBeenCalled();
+    delete process.env.MALWARE_SCAN_PROVIDER;
+    delete process.env.MALWARE_SCAN_API_KEY;
+  });
+
+  it('fails closed when the malware scanner is unreachable', async () => {
+    process.env.MALWARE_SCAN_PROVIDER = 'cloudmersive';
+    process.env.MALWARE_SCAN_API_KEY = 'test-key';
+    global.fetch = jest
+      .fn()
+      .mockRejectedValue(new Error('scanner down')) as unknown as typeof fetch;
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } });
+    const { POST } = await import('@/app/api/registrations/upload/route');
+    const res = await POST(uploadRequest() as never);
+    expect(res.status).toBe(400);
+    expect((await res.json()).error).toMatch(/unavailable/i);
+    expect(mockStorageFile).not.toHaveBeenCalled();
+    warn.mockRestore();
+    delete process.env.MALWARE_SCAN_PROVIDER;
+    delete process.env.MALWARE_SCAN_API_KEY;
+  });
+
+  it('stores the file when the malware scan is clean', async () => {
+    process.env.MALWARE_SCAN_PROVIDER = 'cloudmersive';
+    process.env.MALWARE_SCAN_API_KEY = 'test-key';
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ CleanResult: true }),
+    }) as unknown as typeof fetch;
+    mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } });
+    const { POST } = await import('@/app/api/registrations/upload/route');
+    const res = await POST(uploadRequest() as never);
+    expect(res.status).toBe(200);
+    expect(mockStorageFile).toHaveBeenCalled();
+    delete process.env.MALWARE_SCAN_PROVIDER;
+    delete process.env.MALWARE_SCAN_API_KEY;
   });
 
   it('rate limits repeated uploads from the same member', async () => {

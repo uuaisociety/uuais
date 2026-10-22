@@ -98,7 +98,9 @@ export async function POST(req: NextRequest) {
       if (!event.exists) return { ok: false, message: 'Event missing' };
       const max = event.get('maxCapacity');
       const current = event.get('currentRegistrations');
+      const wasCounted = registration.get('counted') === true;
       if (
+        !wasCounted &&
         typeof max === 'number' &&
         (typeof current === 'number' ? current : 0) >= max
       )
@@ -110,10 +112,13 @@ export async function POST(req: NextRequest) {
         status: 'confirmed',
         confirmedAt: new Date().toISOString(),
         confirmationToken: null,
+        counted: true,
       });
-      transaction.update(eventRef, {
-        currentRegistrations: FieldValue.increment(1),
-      });
+      if (!wasCounted) {
+        transaction.update(eventRef, {
+          currentRegistrations: FieldValue.increment(1),
+        });
+      }
       return {
         ok: true,
         message: regId ? 'Confirmed' : 'Registration confirmed',

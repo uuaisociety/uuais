@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
-import { getStorageBucketName } from '@/lib/image-upload';
+import { logAdminAction } from '@/lib/server-audit-log';
 import '@/lib/firebase-admin';
 import admin from 'firebase-admin';
 
@@ -48,13 +48,7 @@ export async function handleAdminFileDownload(
       return NextResponse.json({ error: 'invalid path' }, { status: 400 });
     }
 
-    const appOptions = admin.app().options as
-      { storageBucket?: string } | undefined;
-    const bucketName = getStorageBucketName(appOptions);
-    const bucket = bucketName
-      ? admin.storage().bucket(bucketName)
-      : admin.storage().bucket();
-    const file = bucket.file(path);
+    const file = admin.storage().bucket().file(path);
 
     const [exists] = await file.exists();
     if (!exists)
@@ -63,6 +57,15 @@ export async function handleAdminFileDownload(
     const [metadata] = await file.getMetadata();
     const [buffer] = await file.download();
     const name = path.split('/').pop() || 'file.pdf';
+
+    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    await logAdminAction({
+      action: 'download',
+      adminUid: auth.session.uid,
+      path,
+      ip: forwarded || undefined,
+    });
+
     return new NextResponse(new Uint8Array(buffer), {
       headers: {
         'Content-Type':
@@ -70,7 +73,7 @@ export async function handleAdminFileDownload(
             ? metadata.contentType
             : 'application/pdf',
         'Content-Disposition': `attachment; filename="${name.replace(/[^a-zA-Z0-9_.-]/g, '_')}"`,
-        'Cache-Control': 'private, max-age=60',
+        'Cache-Control': 'no-store',
       },
     });
   } catch (err) {

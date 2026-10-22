@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from 'react';
 import { Shield, Eye, Database, UserCheck, Mail, Calendar } from 'lucide-react';
@@ -18,10 +18,11 @@ export const PrivacyPage: React.FC = () => {
             Privacy Policy
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            Your privacy is important to us. This policy explains how we collect, use, and protect your information.
+            Your privacy is important to us. This policy explains how we
+            collect, use, and protect your information.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            Last updated: August 16, 2026
+            Last updated: October 19, 2026
           </p>
         </div>
 
@@ -34,7 +35,12 @@ export const PrivacyPage: React.FC = () => {
               Introduction
             </h2>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              UU AI Society (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy and ensuring compliance with the General Data Protection Regulation (GDPR) and other applicable privacy laws. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or participate in our activities.
+              UU AI Society (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;)
+              is committed to protecting your privacy and ensuring compliance
+              with the General Data Protection Regulation (GDPR) and other
+              applicable privacy laws. This Privacy Policy explains how we
+              collect, use, disclose, and safeguard your information when you
+              visit our website or participate in our activities.
             </p>
           </section>
 
@@ -46,21 +52,32 @@ export const PrivacyPage: React.FC = () => {
             </h2>
             <div className="space-y-4">
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Personal Information</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  Personal Information
+                </h3>
                 <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
                   <li>Name and contact information (email address)</li>
                   <li>University affiliation and student status</li>
                   <li>Professional interests and AI-related experience</li>
                   <li>Event attendance and participation data</li>
-                  <li>Submitted applications for events and membership</li>
+                  <li>
+                    Submitted applications for events and membership, including
+                    answers to registration questions and uploaded documents
+                    (e.g. CVs)
+                  </li>
                 </ul>
               </div>
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Technical Information</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  Technical Information
+                </h3>
                 <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
                   <li>IP address and browser information</li>
                   <li>Website usage patterns and preferences</li>
-                  <li>Cookies and similar tracking technologies (you can manage your preferences via our cookie consent banner)</li>
+                  <li>
+                    Cookies and similar tracking technologies (you can manage
+                    your preferences via our cookie consent banner)
+                  </li>
                 </ul>
               </div>
             </div>
@@ -73,9 +90,13 @@ export const PrivacyPage: React.FC = () => {
               How We Use Your Information
             </h2>
             <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
-              <p className="text-gray-700 dark:text-gray-300 mb-4">We use your information for the following purposes:</p>
+              <p className="text-gray-700 dark:text-gray-300 mb-4">
+                We use your information for the following purposes:
+              </p>
               <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
-                <li>To communicate about events, workshops, and society activities</li>
+                <li>
+                  To communicate about events, workshops, and society activities
+                </li>
                 <li>To manage membership and event registrations</li>
                 <li>To send newsletters and updates about AI developments</li>
                 <li>To improve our website and services</li>
@@ -92,15 +113,28 @@ export const PrivacyPage: React.FC = () => {
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Consent</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  Consent
+                </h3>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
                   For newsletter subscriptions and marketing communications
                 </p>
               </div>
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Legitimate Interest</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  Legitimate Interest
+                </h3>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
                   For society operations and member engagement
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  Contract
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  For administering event registrations, confirming places, and
+                  tracking attendance for events you sign up to
                 </p>
               </div>
             </div>
@@ -112,19 +146,50 @@ export const PrivacyPage: React.FC = () => {
               Your Rights Under GDPR
             </h2>
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
-              <p className="text-gray-700 dark:text-gray-300 mb-4">You have the following rights regarding your personal data:</p>
+              <p className="text-gray-700 dark:text-gray-300 mb-4">
+                You have the following rights regarding your personal data:
+              </p>
               <div className="grid md:grid-cols-2 gap-4">
                 <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1 text-sm">
-                  <li><strong>Access:</strong> Request copies of your personal data</li>
-                  <li><strong>Rectification:</strong> Correct inaccurate information</li>
-                  <li><strong>Erasure:</strong> Request deletion of your data</li>
-                  <li><strong>Portability:</strong> Transfer your data to another service</li>
+                  <li>
+                    <strong>Access:</strong> Request copies of your personal
+                    data
+                  </li>
+                  <li>
+                    <strong>Rectification:</strong> Correct inaccurate
+                    information
+                  </li>
+                  <li>
+                    <strong>Erasure:</strong> Delete your account and associated
+                    data yourself from{' '}
+                    <a
+                      href="/account"
+                      className="text-blue-600 dark:text-blue-400 underline"
+                    >
+                      My Account
+                    </a>
+                    , or contact us
+                  </li>
+                  <li>
+                    <strong>Portability:</strong> Transfer your data to another
+                    service
+                  </li>
                 </ul>
                 <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1 text-sm">
-                  <li><strong>Restriction:</strong> Limit how we use your data</li>
-                  <li><strong>Objection:</strong> Object to certain processing</li>
-                  <li><strong>Withdraw consent:</strong> At any time for consent-based processing</li>
-                  <li><strong>Complaint:</strong> Lodge a complaint with supervisory authorities</li>
+                  <li>
+                    <strong>Restriction:</strong> Limit how we use your data
+                  </li>
+                  <li>
+                    <strong>Objection:</strong> Object to certain processing
+                  </li>
+                  <li>
+                    <strong>Withdraw consent:</strong> At any time for
+                    consent-based processing
+                  </li>
+                  <li>
+                    <strong>Complaint:</strong> Lodge a complaint with
+                    supervisory authorities
+                  </li>
                 </ul>
               </div>
             </div>
@@ -138,13 +203,24 @@ export const PrivacyPage: React.FC = () => {
             </h2>
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
               <p className="text-gray-700 dark:text-gray-300 mb-4">
-                We retain your personal information only as long as necessary for the purposes outlined in this policy:
+                We retain your personal information only as long as necessary
+                for the purposes outlined in this policy:
               </p>
               <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
                 {/* <li>Membership data: Duration of membership plus 2 years</li> */}
                 <li>Newsletter subscriptions: Until you unsubscribe</li>
-                <li>Event participation: 3 years for historical records</li>
-                <li>Website analytics: 26 months (Vercel Analytics default)</li>
+                <li>Event registration answers: 36 months after the event</li>
+                <li>
+                  Uploaded event documents (e.g. CVs): 60 days after the event
+                </li>
+                <li>
+                  Event participation and attendance: 36 months after the event
+                </li>
+                <li>
+                  Website analytics: 26 months (Vercel Analytics default);
+                  first-party aggregate counters are kept without personal data
+                </li>
+                <li>Account profile: Until you delete your account</li>
               </ul>
             </div>
           </section>
@@ -156,7 +232,10 @@ export const PrivacyPage: React.FC = () => {
             </h2>
             <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
               <p className="text-gray-700 dark:text-gray-300">
-                We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. This includes encryption, secure servers, and regular security assessments.
+                We implement appropriate technical and organizational measures
+                to protect your personal data against unauthorized access,
+                alteration, disclosure, or destruction. This includes
+                encryption, secure servers, and regular security assessments.
               </p>
             </div>
           </section>
@@ -168,18 +247,51 @@ export const PrivacyPage: React.FC = () => {
             </h2>
             <div className="space-y-3">
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Analytics</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  Hosting, Database &amp; Files
+                </h3>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
-                  We use Vercel Analytics to understand website usage. Analytics are only activated after you provide consent via our cookie banner. You can change your preference at any time.
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 text-sm mt-2">
-                  We also collect first-party aggregate metrics — such as unique reads and clicks on our events, jobs, and blog posts — to understand engagement. These are anonymous counts (no personal data, no user identity, no cross-site tracking) stored on the basis of legitimate interest, and are not linked to your consent preferences.
+                  We use Firebase and Google Cloud (Google Ireland Limited) for
+                  authentication, database, and encrypted file storage. Uploaded
+                  event documents are stored with access restricted to
+                  authorised administrators.
                 </p>
               </div>
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Email Services</h3>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  Analytics
+                </h3>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
-                  We use secure email services for communications, all compliant with GDPR requirements.
+                  We use Vercel Analytics to understand website usage. Analytics
+                  are only activated after you provide consent via our cookie
+                  banner. You can change your preference at any time.
+                </p>
+                <p className="text-gray-700 dark:text-gray-300 text-sm mt-2">
+                  We also collect first-party aggregate metrics — such as unique
+                  reads and clicks on our events, jobs, and blog posts — to
+                  understand engagement. These are anonymous counts (no personal
+                  data, no user identity, no cross-site tracking) stored on the
+                  basis of legitimate interest.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  Email Services
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  We use secure email services for communications, all compliant
+                  with GDPR requirements.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  Malware Scanning
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  Uploaded PDFs may be scanned by a third-party malware scanning
+                  service before being stored. The file is transmitted solely
+                  for scanning and is not retained by the scanner beyond the
+                  check.
                 </p>
               </div>
             </div>
@@ -193,13 +305,35 @@ export const PrivacyPage: React.FC = () => {
             </h2>
             <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
               <p className="text-gray-700 dark:text-gray-300 mb-4">
-                If you have questions about this Privacy Policy or wish to exercise your rights, please contact us:
+                If you have questions about this Privacy Policy or wish to
+                exercise your rights, please contact us:
               </p>
               <div className="space-y-2 text-gray-700 dark:text-gray-300">
-                <p><strong>Email:</strong> <a href="mailto:it@uuais.com" className="text-blue-600 dark:text-blue-400">it@uuais.com</a></p>
-                <p><strong>General Contact:</strong> <a href="mailto:contact@uuais.com" className="text-blue-600 dark:text-blue-400">contact@uuais.com</a></p>
-                <p><strong>Organization Number:</strong> 802551-8930</p>
-                <p><strong>Response Time:</strong> We will respond to your request within 30 days as required by GDPR</p>
+                <p>
+                  <strong>Email:</strong>{' '}
+                  <a
+                    href="mailto:it@uuais.com"
+                    className="text-blue-600 dark:text-blue-400"
+                  >
+                    it@uuais.com
+                  </a>
+                </p>
+                <p>
+                  <strong>General Contact:</strong>{' '}
+                  <a
+                    href="mailto:contact@uuais.com"
+                    className="text-blue-600 dark:text-blue-400"
+                  >
+                    contact@uuais.com
+                  </a>
+                </p>
+                <p>
+                  <strong>Organization Number:</strong> 802551-8930
+                </p>
+                <p>
+                  <strong>Response Time:</strong> We will respond to your
+                  request within 30 days as required by GDPR
+                </p>
               </div>
             </div>
           </section>
@@ -211,7 +345,11 @@ export const PrivacyPage: React.FC = () => {
             </h2>
             <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
               <p className="text-gray-700 dark:text-gray-300">
-                We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new policy on our website and updating the &quot;Last updated&quot; date. Your continued use of our services after such modifications constitutes acceptance of the updated policy.
+                We may update this Privacy Policy from time to time. We will
+                notify you of any material changes by posting the new policy on
+                our website and updating the &quot;Last updated&quot; date. Your
+                continued use of our services after such modifications
+                constitutes acceptance of the updated policy.
               </p>
             </div>
           </section>

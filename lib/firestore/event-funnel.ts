@@ -22,7 +22,10 @@ export interface EventFunnel {
   };
 }
 
-export async function getEventFunnel(eventIds: string[], clicksMap?: Record<string, number>): Promise<EventFunnel[]> {
+export async function getEventFunnel(
+  eventIds: string[],
+  clicksMap?: Record<string, number>,
+): Promise<EventFunnel[]> {
   if (!eventIds.length) return [];
 
   clicksMap ??= await getEventClicksCounts(eventIds);
@@ -30,17 +33,37 @@ export async function getEventFunnel(eventIds: string[], clicksMap?: Record<stri
 
   const results = await Promise.all(
     eventIds.map(async (eventId) => {
-      const eventSnap = await getDoc(doc(db, 'events', eventId));
+      const [eventSnap, attendanceSnap] = await Promise.all([
+        getDoc(doc(db, 'events', eventId)),
+        getDoc(doc(db, 'eventAttendance', eventId)),
+      ]);
       if (!eventSnap.exists()) return null;
       const evt = eventSnap.data() as DocumentData;
-
-      const registrations = typeof evt.currentRegistrations === 'number' ? evt.currentRegistrations : 0;
-      const attendees: Array<{ attended: boolean | null }> = Array.isArray(evt.attendees) ? evt.attendees : [];
+      const registrations =
+        typeof evt.currentRegistrations === 'number'
+          ? evt.currentRegistrations
+          : 0;
+      const attendanceData = attendanceSnap.exists()
+        ? (attendanceSnap.data() as DocumentData)
+        : undefined;
+      const attendees: Array<{ attended: boolean | null }> = Array.isArray(
+        attendanceData?.entries,
+      )
+        ? attendanceData!.entries
+        : [];
       const attended = attendees.filter((a) => a.attended === true).length;
 
-      const breakdown = { registered: 0, waitlist: 0, invited: 0, confirmed: 0, declined: 0, cancelled: 0 };
+      const breakdown = {
+        registered: 0,
+        waitlist: 0,
+        invited: 0,
+        confirmed: 0,
+        declined: 0,
+        cancelled: 0,
+      };
       (regByEvent.get(eventId) ?? []).forEach((r) => {
-        if (r.status in breakdown) breakdown[r.status as keyof typeof breakdown]++;
+        if (r.status in breakdown)
+          breakdown[r.status as keyof typeof breakdown]++;
       });
 
       const clicks = clicksMap[eventId] ?? 0;
@@ -51,8 +74,10 @@ export async function getEventFunnel(eventIds: string[], clicksMap?: Record<stri
         clicks,
         registrations,
         attended,
-        viewToRegPct: clicks > 0 ? Math.round((registrations / clicks) * 100) : 0,
-        regToAttendPct: registrations > 0 ? Math.round((attended / registrations) * 100) : 0,
+        viewToRegPct:
+          clicks > 0 ? Math.round((registrations / clicks) * 100) : 0,
+        regToAttendPct:
+          registrations > 0 ? Math.round((attended / registrations) * 100) : 0,
         statusBreakdown: breakdown,
       };
     }),

@@ -2,8 +2,9 @@
 
 import React, { useState, useRef } from 'react';
 import { FileText, Upload } from 'lucide-react';
+import { MAX_PDF_BYTES } from '@/lib/pdf-upload';
 
-const MAX_BYTES = 3 * 1024 * 1024;
+const MAX_BYTES = MAX_PDF_BYTES;
 
 interface PDFDropzoneProps {
   file: File | null;
@@ -60,7 +61,7 @@ export default function PDFDropzone({
         <button
           type="button"
           onClick={() => onChange(null)}
-          className="text-sm text-primary hover:underline shrink-0"
+          className="text-sm text-primary hover:underline shrink-0 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           Remove
         </button>

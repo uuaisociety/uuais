@@ -78,6 +78,36 @@ describe('DELETE /api/registrations/file', () => {
     expect(mockStorageFile).not.toHaveBeenCalled();
   });
 
+  it('lets an admin delete files for any registration', async () => {
+    mockGetTokens.mockResolvedValue({
+      decodedToken: { uid: 'admin1', admin: true },
+    });
+    const res = await call();
+    const body = await res.json();
+    expect(res.status).toBe(200);
+    expect(body).toEqual({ success: true, deleted: 1 });
+    expect(mockStorageFile).toHaveBeenCalledWith(OWNED_PATH);
+  });
+
+  it('scopes admin deletes to the registration owner prefix, not the admin uid', async () => {
+    mockGetTokens.mockResolvedValue({
+      decodedToken: { uid: 'admin1', admin: true },
+    });
+    regDocRef.get.mockResolvedValue({
+      exists: true,
+      data: () => ({
+        userId: 'user1',
+        eventId: 'evt1',
+        registrationData: {
+          a: { path: 'registrations/evt1/admin1/123_cv.pdf' },
+        },
+      }),
+    });
+    const res = await call();
+    expect(await res.json()).toEqual({ success: true, deleted: 0 });
+    expect(mockStorageFile).not.toHaveBeenCalled();
+  });
+
   it('deletes the file referenced by the registration', async () => {
     const res = await call();
     const body = await res.json();
@@ -123,5 +153,39 @@ describe('DELETE /api/registrations/file', () => {
     }
     const res = await call();
     expect(res.status).toBe(429);
+  });
+
+  describe('path rollback', () => {
+    async function callPath(path: string) {
+      const { DELETE } = await import('@/app/api/registrations/file/route');
+      const req = new Request(
+        `http://localhost/api/registrations/file?path=${encodeURIComponent(path)}`,
+        { method: 'DELETE' },
+      );
+      return DELETE(req as never);
+    }
+
+    it("deletes a file under the caller's own prefix", async () => {
+      const res = await callPath('registrations/evt1/user1/999_new.pdf');
+      expect(res.status).toBe(200);
+      expect(mockStorageFile).toHaveBeenCalledWith(
+        'registrations/evt1/user1/999_new.pdf',
+      );
+    });
+
+    it("rejects other users' files and unsafe paths", async () => {
+      for (const bad of [
+        'registrations/evt1/user2/999_new.pdf',
+        'registrations/evt1/user1/../user2/x.pdf',
+        'registrations/evt1/user1//x.pdf',
+        'team-applications/user1/x.pdf',
+        'registrations/../user1/x.pdf',
+        '',
+      ]) {
+        const res = await callPath(bad);
+        expect(res.status).toBe(400);
+      }
+      expect(mockStorageFile).not.toHaveBeenCalled();
+    });
   });
 });

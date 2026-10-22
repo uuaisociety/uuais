@@ -18,14 +18,26 @@ export type UserEventHistoryEntry = {
   attended: boolean | null;
 };
 
-export async function getEventAttendance(eventId: string): Promise<EventAttendanceEntry[]> {
+type AttendanceDoc = { entries: EventAttendanceEntry[] };
+
+function attendanceRef(eventId: string) {
+  return doc(db, 'eventAttendance', eventId);
+}
+
+function entriesFrom(data: DocumentData | undefined): EventAttendanceEntry[] {
+  return Array.isArray(data?.entries)
+    ? (data.entries as EventAttendanceEntry[])
+    : [];
+}
+
+/** Admin-only: attendance lives in a restricted collection so public event reads never expose attendee IDs. */
+export async function getEventAttendance(
+  eventId: string,
+): Promise<EventAttendanceEntry[]> {
   if (!eventId) return [];
-  const ref = doc(db, 'events', eventId);
-  const snap = await getDoc(ref);
+  const snap = await getDoc(attendanceRef(eventId));
   if (!snap.exists()) return [];
-  const data = snap.data() as DocumentData;
-  const attendees = Array.isArray(data.attendees) ? (data.attendees as EventAttendanceEntry[]) : [];
-  return attendees;
+  return entriesFrom(snap.data());
 }
 
 export const subscribeToEventAttendance = (
@@ -33,22 +45,15 @@ export const subscribeToEventAttendance = (
   callback: (entries: EventAttendanceEntry[]) => void,
 ) => {
   if (!eventId) return () => {};
-  const ref = doc(db, 'events', eventId);
   return onSnapshot(
-    ref,
+    attendanceRef(eventId),
     (snap) => {
-      if (!snap.exists()) {
-        callback([]);
-        return;
-      }
-      const data = snap.data() as DocumentData;
-      const attendees = Array.isArray(data.attendees) ? (data.attendees as EventAttendanceEntry[]) : [];
-      callback(attendees);
+      callback(snap.exists() ? entriesFrom(snap.data()) : []);
     },
     (error) => {
       console.error('Firestore subscription failed:', error);
       callback([]);
-    }
+    },
   );
 };
 
@@ -59,48 +64,50 @@ export async function setAttendanceForUser(
 ): Promise<void> {
   if (!eventId || !userId) return;
 
-  const eventRef = doc(db, 'events', eventId);
-  const userRef = doc(db, 'users', userId);
-
   await runTransaction(db, async (tx) => {
-    const [eventSnap, userSnap] = await Promise.all([
-      tx.get(eventRef),
+    const attRef = attendanceRef(eventId);
+    const userRef = doc(db, 'users', userId);
+
+    const [attSnap, userSnap] = await Promise.all([
+      tx.get(attRef),
       tx.get(userRef),
     ]);
 
-    const eventData = (eventSnap.exists() ? (eventSnap.data() as DocumentData) : {}) as DocumentData;
-    const userData = (userSnap.exists() ? (userSnap.data() as DocumentData) : {}) as DocumentData;
+    const entries = entriesFrom(
+      attSnap.exists() ? (attSnap.data() as DocumentData) : undefined,
+    );
+    const userData = (
+      userSnap.exists() ? (userSnap.data() as DocumentData) : {}
+    ) as DocumentData;
 
-    const attendees: EventAttendanceEntry[] = Array.isArray(eventData.attendees)
-      ? (eventData.attendees as EventAttendanceEntry[])
-      : [];
-    const eventHistory: UserEventHistoryEntry[] = Array.isArray(userData.eventHistory)
+    const eventHistory: UserEventHistoryEntry[] = Array.isArray(
+      userData.eventHistory,
+    )
       ? (userData.eventHistory as UserEventHistoryEntry[])
       : [];
 
     const nowTs = attended ? Date.now() : null;
 
-    const nextAttendees = (() => {
-      const idx = attendees.findIndex((a) => a.userId === userId);
-      if (idx === -1) {
-        return attendees.concat({ userId, attended, timestamp: nowTs });
-      }
-      const copy = attendees.slice();
+    const nextEntries = (() => {
+      const idx = entries.findIndex((a) => a.userId === userId);
+      if (idx === -1)
+        return entries.concat({ userId, attended, timestamp: nowTs });
+      const copy = entries.slice();
       copy[idx] = { ...copy[idx], attended, timestamp: nowTs };
       return copy;
     })();
 
     const nextHistory = (() => {
       const idx = eventHistory.findIndex((h) => h.eventId === eventId);
-      if (idx === -1) {
-        return eventHistory.concat({ eventId, attended });
-      }
+      if (idx === -1) return eventHistory.concat({ eventId, attended });
       const copy = eventHistory.slice();
       copy[idx] = { ...copy[idx], attended };
       return copy;
     })();
 
-    tx.set(eventRef, { attendees: nextAttendees }, { merge: true });
+    tx.set(attRef, { entries: nextEntries } satisfies AttendanceDoc, {
+      merge: true,
+    });
     tx.set(userRef, { eventHistory: nextHistory }, { merge: true });
   });
 }

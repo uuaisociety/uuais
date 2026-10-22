@@ -10,7 +10,9 @@ import {
   TextareaBase,
 } from '@/components/ui/Form';
 import { Edit3, Trash2 } from 'lucide-react';
+import ConfirmModal from '@/components/ui/ConfirmModal';
 import { EventCustomQuestion } from '@/types';
+import { prefillFieldLabel } from '@/lib/registration-prefill';
 
 type QuestionInput = {
   question: string;
@@ -68,6 +70,7 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({
     order: initialOrder,
   });
   const [optionsText, setOptionsText] = useState<string>('');
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
   // when editing a default question, we prefill the form but save as a new custom question (override)
 
   if (!open) return null;
@@ -148,6 +151,8 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({
     setOptionsText('');
   };
 
+  const prefillHint = prefillFieldLabel(form.question, form.type);
+
   return (
     <Modal
       open={open}
@@ -159,59 +164,65 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({
       size="lg"
     >
       <div className="space-y-3 mb-6">
-        {sortedQuestions.map((q) => (
-          <div
-            key={q.id}
-            className="border border-border rounded p-3 flex items-start justify-between"
-          >
-            <div>
-              <div className="font-medium">
-                {q.question}
-                {q.id?.startsWith('default:') ? ' (default)' : ''}
-              </div>
-              <div className="text-xs text-muted-foreground">
-                {q.type} • Order {q.order} •{' '}
-                {q.required ? 'Required' : 'Optional'}
-              </div>
-              {q.options && q.options.length > 0 && (
-                <div className="text-xs text-muted-foreground mt-1">
-                  Options: {q.options.join(', ')}
+        {sortedQuestions.map((q) => {
+          const prefill = prefillFieldLabel(q.question, q.type);
+          return (
+            <div
+              key={q.id}
+              className="border border-border rounded p-3 flex items-start justify-between gap-3"
+            >
+              <div className="min-w-0">
+                <div className="font-medium">
+                  {q.question}
+                  {q.id?.startsWith('default:') ? ' (default)' : ''}
                 </div>
-              )}
-            </div>
-            <div className="flex gap-2">
-              {mode === 'edit' && editingId === q.id ? (
+                <div className="text-xs text-muted-foreground">
+                  {q.type} • Order {q.order} •{' '}
+                  {q.required ? 'Required' : 'Optional'}
+                </div>
+                {prefill && (
+                  <div className="text-xs text-primary mt-1">
+                    May pre-fill from member profile: {prefill}
+                  </div>
+                )}
+                {q.options && q.options.length > 0 && (
+                  <div className="text-xs text-muted-foreground mt-1">
+                    Options: {q.options.join(', ')}
+                  </div>
+                )}
+              </div>
+              <div className="flex gap-2 shrink-0">
+                {mode === 'edit' && editingId === q.id ? (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    icon={Edit3}
+                    onClick={() => stopEdit()}
+                  >
+                    Editing...
+                  </Button>
+                ) : (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    icon={Edit3}
+                    onClick={() => startEdit(q)}
+                  >
+                    Edit
+                  </Button>
+                )}
                 <Button
                   size="sm"
-                  variant="outline"
-                  icon={Edit3}
-                  onClick={() => stopEdit()}
+                  variant="destructive"
+                  icon={Trash2}
+                  onClick={() => setDeleteTargetId(q.id)}
                 >
-                  Editing...
+                  Delete
                 </Button>
-              ) : (
-                <Button
-                  size="sm"
-                  variant="outline"
-                  icon={Edit3}
-                  onClick={() => startEdit(q)}
-                >
-                  Edit
-                </Button>
-              )}
-              <Button
-                size="sm"
-                variant="destructive"
-                icon={Trash2}
-                onClick={async () => {
-                  if (confirm('Delete this question?')) await onDelete(q.id);
-                }}
-              >
-                Delete
-              </Button>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         {sortedQuestions.length === 0 && (
           <div className="text-sm text-muted-foreground">No questions yet.</div>
         )}
@@ -246,16 +257,31 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({
             </Button>
           )}
         </div>
-        <FieldGroup label="Question" requiredHint="Required.">
+        <div className="flex flex-col gap-1">
+          <label
+            htmlFor="event-question-input"
+            className="text-xs font-medium text-foreground"
+          >
+            Question
+            <span className="ml-1 text-[11px] font-normal text-muted-foreground">
+              Required.
+            </span>
+          </label>
           <InputBase
+            id="event-question-input"
             value={form.question}
             onChange={(e) =>
               setForm((prev) => ({ ...prev, question: e.target.value }))
             }
             required
           />
-        </FieldGroup>
-        <div className="grid grid-cols-2 gap-4">
+          {prefillHint && (
+            <span className="text-xs text-primary">
+              May pre-fill from member profile: {prefillHint}
+            </span>
+          )}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FieldGroup label="Type">
             <SelectBase
               value={form.type}
@@ -348,6 +374,19 @@ const EventQuestionsModal: React.FC<EventQuestionsModalProps> = ({
           </Button>
         </div>
       </form>
+      <ConfirmModal
+        open={!!deleteTargetId}
+        title="Delete question"
+        description="Delete this question? Existing answers remain stored with registrations but the question will no longer be shown."
+        confirmText="Delete question"
+        cancelText="Keep question"
+        onClose={() => setDeleteTargetId(null)}
+        onConfirm={async () => {
+          const id = deleteTargetId;
+          setDeleteTargetId(null);
+          if (id) await onDelete(id);
+        }}
+      />
     </Modal>
   );
 };

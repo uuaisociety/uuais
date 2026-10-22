@@ -3,28 +3,16 @@ import {
   query,
   where,
   getDocs,
-  addDoc,
   onSnapshot,
   doc,
   getDoc,
   updateDoc,
-  serverTimestamp,
-  increment,
   DocumentData,
   Timestamp,
-  deleteDoc,
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
 import { Event, EventRegistration } from '@/types';
 import { sendTemplatedEmail } from '@/lib/email';
-import { deleteRegistrationFiles } from '@/lib/registration-files';
-
-// Best-effort: a failed cleanup must never block cancel/decline; the 60-day
-// storage cleanup cron removes anything left behind.
-const cleanupRegistrationFiles = (regId: string) =>
-  deleteRegistrationFiles(regId).catch((err) =>
-    console.warn('Failed to delete registration files:', err),
-  );
 
 // ---------------------------------------------------------------------------
 // Batch helper for analytics (avoids N+1 queries over event IDs)
@@ -145,6 +133,10 @@ export const subscribeToEventRegistrations = (
   );
 };
 
+/**
+ * Registers via the server route so capacity, duplicates, deadlines, and the
+ * event counter are enforced authoritatively.
+ */
 export const registerForEvent = async (
   eventId: string,
   payload: Omit<
@@ -158,99 +150,24 @@ export const registerForEvent = async (
   },
   options?: { waitlist?: boolean },
 ): Promise<string> => {
-  const regRef = collection(db, 'registrations');
-
-  {
-    const qDup = query(
-      regRef,
-      where('eventId', '==', eventId),
-      where('userId', '==', payload.userId),
-    );
-    const sDup = await getDocs(qDup);
-    let hasActive = false;
-    for (const d of sDup.docs) {
-      const data = d.data() as DocumentData;
-      const status = String(data?.status || 'registered');
-      if (status === 'cancelled') {
-        try {
-          // Cleanup first: the server derives file paths from the stored doc.
-          await cleanupRegistrationFiles(d.id);
-          await deleteDoc(doc(db, 'registrations', d.id));
-        } catch (err) {
-          console.warn('Failed to delete cancelled registration:', err);
-        }
-      } else {
-        hasActive = true;
-      }
-    }
-    if (hasActive)
-      throw new Error('You have already registered for this event.');
+  const res = await fetch('/api/registrations', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      eventId,
+      registrationData: payload.registrationData,
+      userEmail: payload.userEmail,
+      userName: payload.userName,
+      waitlist: options?.waitlist === true,
+    }),
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw new Error(body?.error || `Registration failed (${res.status})`);
   }
-
-  const eventRef = doc(db, 'events', eventId);
-  let eventData: Partial<Event> = {};
-  try {
-    const eventSnap = await getDoc(eventRef);
-    eventData = eventSnap.exists() ? (eventSnap.data() as Partial<Event>) : {};
-  } catch (err: unknown) {
-    if (
-      err &&
-      typeof err === 'object' &&
-      'code' in err &&
-      (err as { code?: string }).code === 'permission-denied'
-    ) {
-      throw new Error('You do not have permission to register for this event.');
-    }
-    throw err;
-  }
-
-  const maxCapacity =
-    typeof eventData.maxCapacity === 'number'
-      ? eventData.maxCapacity
-      : undefined;
-  const currentRegistrations =
-    typeof eventData.currentRegistrations === 'number'
-      ? eventData.currentRegistrations
-      : 0;
-  const isCapacityFull =
-    typeof maxCapacity === 'number'
-      ? currentRegistrations >= maxCapacity
-      : false;
-
-  const lastRegistrationAtIso = eventData.registrationClosesAt;
-  const now = new Date();
-  const isAfterLastRegistration =
-    typeof lastRegistrationAtIso === 'string' && lastRegistrationAtIso
-      ? now.getTime() > new Date(lastRegistrationAtIso).getTime()
-      : false;
-
-  const status: EventRegistration['status'] =
-    options?.waitlist || isCapacityFull || isAfterLastRegistration
-      ? 'waitlist'
-      : 'registered';
-
-  const regDoc: Record<string, unknown> = {
-    eventId,
-    registrationData: payload.registrationData,
-    registeredAt: serverTimestamp(),
-    status,
-    userEmail: payload.userEmail || null,
-    userName: payload.userName || null,
-    userId: payload.userId,
-  };
-
-  const docRef = await addDoc(regRef, regDoc as DocumentData);
-  const newRegId = docRef.id;
-
-  if (status === 'registered') {
-    try {
-      await updateDoc(eventRef, { currentRegistrations: increment(1) });
-    } catch (err: unknown) {
-      console.warn('Failed to increment event.currentRegistrations', err);
-    }
-  }
-
-  return newRegId;
+  const body = (await res.json()) as { regId?: string };
+  if (!body.regId) throw new Error('Registration failed');
+  return body.regId;
 };
 
 // ----------------------------
@@ -282,11 +199,16 @@ export async function inviteRegistrant(
   const reg = regSnap.data() as DocumentData;
   const token = randomToken(40);
   const selectedAtIso = new Date().toISOString();
+  const counted =
+    typeof reg.counted === 'boolean'
+      ? reg.counted
+      : reg.status === 'registered' || reg.status === 'confirmed';
 
   await updateDoc(regRef, {
     status: 'invited',
     selectedAt: selectedAtIso,
     confirmationToken: token,
+    counted,
   } as DocumentData);
 
   const to = (reg.userEmail as string | null) || null;
@@ -340,18 +262,38 @@ export async function confirmRegistrationByToken(
   return confirmViaApi({ token });
 }
 
-export async function declineRegistration(regId: string): Promise<void> {
-  await updateDoc(doc(db, 'registrations', regId), {
-    status: 'declined',
-  } as DocumentData);
-  await cleanupRegistrationFiles(regId);
+async function mutateRegistration(
+  regId: string,
+  mode: 'cancel' | 'decline',
+): Promise<void> {
+  const res = await fetch(
+    `/api/registrations?regId=${encodeURIComponent(regId)}&mode=${mode}`,
+    { method: 'DELETE' },
+  );
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw new Error(body?.error || `Request failed (${res.status})`);
+  }
 }
 
 export async function cancelRegistration(regId: string): Promise<void> {
-  await updateDoc(doc(db, 'registrations', regId), {
-    status: 'cancelled',
-  } as DocumentData);
-  await cleanupRegistrationFiles(regId);
+  await mutateRegistration(regId, 'cancel');
+}
+
+export async function declineRegistration(regId: string): Promise<void> {
+  await mutateRegistration(regId, 'decline');
+}
+
+/** Admin-only (server-enforced): deletes a registration and its files. */
+export async function removeRegistration(regId: string): Promise<void> {
+  const res = await fetch(
+    `/api/admin/registrations?regId=${encodeURIComponent(regId)}`,
+    { method: 'DELETE' },
+  );
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw new Error(body?.error || `Remove failed (${res.status})`);
+  }
 }
 
 export async function getMyRegistrationForEvent(
@@ -385,10 +327,7 @@ export async function cancelMyRegistrationForEvent(
   const d =
     snap.docs.find((x) => (x.data() as DocumentData)?.status !== 'cancelled') ||
     snap.docs[0];
-  await updateDoc(doc(db, 'registrations', d.id), {
-    status: 'cancelled',
-  } as DocumentData);
-  await cleanupRegistrationFiles(d.id);
+  await cancelRegistration(d.id);
 }
 
 export async function confirmRegistration(

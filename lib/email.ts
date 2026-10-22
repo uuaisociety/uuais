@@ -25,8 +25,10 @@ export async function sendEmail(input: SendEmailInput): Promise<string> {
   };
   if (input.cc) (payload as Record<string, unknown>).cc = input.cc;
   if (input.bcc) (payload as Record<string, unknown>).bcc = input.bcc;
-  if (input.replyTo) (payload as Record<string, unknown>).replyTo = input.replyTo;
-  if (input.headers) (payload as Record<string, unknown>).headers = input.headers;
+  if (input.replyTo)
+    (payload as Record<string, unknown>).replyTo = input.replyTo;
+  if (input.headers)
+    (payload as Record<string, unknown>).headers = input.headers;
 
   const ref = await addDoc(collection(db, 'mail'), payload);
   return ref.id;
@@ -42,10 +44,26 @@ async function loadTemplate(path: string): Promise<string> {
   return await res.text();
 }
 
-function render(template: string, vars: Record<string, string | number | null | undefined>): string {
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function render(
+  template: string,
+  vars: Record<string, string | number | null | undefined>,
+  options?: { rawKeys?: string[] },
+): string {
   return template.replace(/{{\s*([a-zA-Z0-9_]+)\s*}}/g, (_, key) => {
     const v = vars[key];
-    return v === null || v === undefined ? '' : String(v);
+    if (v === null || v === undefined) return '';
+    const s = String(v);
+    // Values are user-controlled (names, titles) — escape unless explicitly raw.
+    return options?.rawKeys?.includes(key) ? s : escapeHtml(s);
   });
 }
 
@@ -57,21 +75,32 @@ export type SendTemplatedEmailInput = {
   unsubscribeUrl?: string;
 };
 
-export async function sendTemplatedEmail(input: SendTemplatedEmailInput): Promise<string> {
-  const baseUnsubUrl = input.unsubscribeUrl || `${process.env.NEXT_PUBLIC_SITE_URL || ''}/account`;
+export async function sendTemplatedEmail(
+  input: SendTemplatedEmailInput,
+): Promise<string> {
+  const baseUnsubUrl =
+    input.unsubscribeUrl || `${process.env.NEXT_PUBLIC_SITE_URL || ''}/account`;
   const [bodyHtml, footerHtml] = await Promise.all([
     loadTemplate(input.templatePath),
     loadTemplate('/email-templates/partials/unsubscribe.html'),
   ]);
   const footer = render(footerHtml, { unsubscribe_url: baseUnsubUrl });
-  const html = render(bodyHtml, { ...(input.variables || {}), footer });
+  const html = render(
+    bodyHtml,
+    { ...(input.variables || {}), footer },
+    { rawKeys: ['footer'] },
+  );
   return sendEmail({ to: input.to, subject: input.subject, html });
 }
 
 // Convenience wrappers
-export async function sendWelcomeEmail(to: string, vars: { name: string; account_url?: string }): Promise<string> {
+export async function sendWelcomeEmail(
+  to: string,
+  vars: { name: string; account_url?: string },
+): Promise<string> {
   const subject = 'Welcome to UUAIS';
-  const accountUrl = vars.account_url || `${process.env.NEXT_PUBLIC_SITE_URL || ''}/account`;
+  const accountUrl =
+    vars.account_url || `${process.env.NEXT_PUBLIC_SITE_URL || ''}/account`;
   return sendTemplatedEmail({
     to,
     subject,
@@ -80,7 +109,11 @@ export async function sendWelcomeEmail(to: string, vars: { name: string; account
   });
 }
 
-export async function sendNewsletterEmail(to: string | string[], subject: string, contentVars: Record<string, string | number> = {}): Promise<string> {
+export async function sendNewsletterEmail(
+  to: string | string[],
+  subject: string,
+  contentVars: Record<string, string | number> = {},
+): Promise<string> {
   return sendTemplatedEmail({
     to,
     subject,

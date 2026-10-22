@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Users, Send, ChevronDown, Check, X } from 'lucide-react';
+import { Users, Send, ChevronDown, Check, X, Trash2 } from 'lucide-react';
 import { Modal } from '@/components/ui/Modal';
 import {
   subscribeToEventRegistrations,
   inviteRegistrant,
+  removeRegistration,
 } from '@/lib/firestore/registrations';
 import {
   subscribeToEventAttendance,
@@ -25,6 +26,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Tag } from '@/components/ui/Tag';
+import ConfirmModal from '@/components/ui/ConfirmModal';
 import {
   isUploadedFileRef,
   registrationFileDownloadUrl,
@@ -35,6 +37,14 @@ function answerToText(value: unknown): string {
   if (Array.isArray(value)) return value.join(', ');
   if (typeof value === 'boolean') return value ? 'Yes' : 'No';
   return String(value ?? '');
+}
+
+function answerToCsvText(value: unknown, baseUrl: string): string {
+  if (isUploadedFileRef(value)) {
+    const url = `${baseUrl}${registrationFileDownloadUrl(value.path)}`;
+    return value.name ? `${value.name} (${url})` : url;
+  }
+  return answerToText(value);
 }
 
 function AnswerValue({ value }: { value: unknown }) {
@@ -69,11 +79,14 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
   questions = [],
 }) => {
   const [registrations, setRegistrations] = useState<EventRegistration[]>([]);
+  const [loaded, setLoaded] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [invitingId, setInvitingId] = useState<string | null>(null);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const [selected, setSelected] = useState<Record<string, boolean>>({});
   const [bulkInviting, setBulkInviting] = useState(false);
+  const [bulkRemoving, setBulkRemoving] = useState(false);
+  const [removeTargets, setRemoveTargets] = useState<EventRegistration[]>([]);
   const [sortKey, setSortKey] = useState<'name' | 'status' | 'time'>('time');
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
   const { notify } = useNotify();
@@ -86,7 +99,10 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
 
   useEffect(() => {
     if (!open || !eventId) return;
-    const unsub = subscribeToEventRegistrations(eventId, setRegistrations);
+    const unsub = subscribeToEventRegistrations(eventId, (regs) => {
+      setRegistrations(regs);
+      setLoaded(true);
+    });
     return () => {
       if (typeof unsub === 'function') unsub();
     };
@@ -152,6 +168,8 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
     totalRegistered > 0
       ? Math.round((attendedCount / totalRegistered) * 100)
       : 0;
+
+  const selectedRegistrations = registrations.filter((r) => !!selected[r.id]);
 
   // Derive a display name using userName or common name fields from registrationData
   const displayNameFor = (r: EventRegistration): string => {
@@ -236,32 +254,44 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
     regs: EventRegistration[],
     qs: import('@/types').EventCustomQuestion[] | undefined,
   ) => {
+    const exportable = regs.filter(
+      (r) => r.status !== 'cancelled' && r.status !== 'declined',
+    );
+    const omitted = regs.length - exportable.length;
+    const baseUrl = (
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (typeof window !== 'undefined' ? window.location.origin : '')
+    ).replace(/\/$/, '');
     const hasQs = !!(qs && qs.length > 0);
     let headers: string[] = ['Name', 'Email', 'Status', 'Signed Up'];
     if (hasQs) {
       headers = headers.concat(qs!.map((q) => q.question));
     } else {
       const fieldSet = new Set<string>();
-      regs.forEach((r) => {
+      exportable.forEach((r) => {
         Object.keys(r.registrationData || {}).forEach((k) => fieldSet.add(k));
       });
       headers = headers.concat(Array.from(fieldSet));
     }
 
+    // Neutralize spreadsheet formula injection in user-controlled cells.
+    const csvSafe = (s: string) => (/^[=+\-@\t\r]/.test(s) ? `'${s}` : s);
     const escape = (val: unknown) => {
-      const s = Array.isArray(val)
-        ? val.join(', ')
-        : typeof val === 'boolean'
-          ? val
-            ? 'Yes'
-            : 'No'
-          : String(val ?? '');
+      const s = csvSafe(
+        Array.isArray(val)
+          ? val.join(', ')
+          : typeof val === 'boolean'
+            ? val
+              ? 'Yes'
+              : 'No'
+            : String(val ?? ''),
+      );
       if (s.includes('"') || s.includes(',') || s.includes('\n'))
         return '"' + s.replace(/"/g, '""') + '"';
       return s;
     };
 
-    const rows = regs
+    const rows = exportable
       .slice()
       .sort((a, b) => compareRegs(a, b, sortKey, sortDir))
       .map((r) => {
@@ -288,7 +318,7 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
                 Object.prototype.hasOwnProperty.call(data, k as string)
               ) {
                 const v = (data as Record<string, unknown>)[k as string];
-                return answerToText(v);
+                return answerToCsvText(v, baseUrl);
               }
             }
             return '';
@@ -299,7 +329,7 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
             const v = (r.registrationData || {})[
               k as keyof NonNullable<EventRegistration['registrationData']>
             ];
-            return answerToText(v);
+            return answerToCsvText(v, baseUrl);
           });
           return base.concat(valuesStr).map(escape).join(',');
         }
@@ -313,6 +343,16 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
     a.download = `registrations-${eventTitle.replace(/\s+/g, '-').toLowerCase()}.csv`;
     a.click();
     URL.revokeObjectURL(url);
+    if (omitted > 0)
+      notify({
+        type: 'info',
+        message: `Exported ${exportable.length} registrations; ${omitted} cancelled/declined excluded`,
+      });
+    void fetch('/api/admin/audit-log', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ eventId, count: exportable.length }),
+    }).catch(() => undefined);
   };
 
   if (!open) return null;
@@ -356,7 +396,9 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
       }
     >
       <div className="p-4">
-        {registrations.length === 0 ? (
+        {!loaded ? (
+          <p className="text-sm text-foreground/80">Loading registrations…</p>
+        ) : registrations.length === 0 ? (
           <p className="text-sm text-foreground/80">No registrations yet.</p>
         ) : (
           <>
@@ -397,15 +439,13 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
                 >
                   Close all
                 </Button>
-                {/* Show selected count next to bulk invite */}
+                {/* Show selected count next to bulk actions */}
                 {(() => {
-                  const selectedCount = registrations.filter(
-                    (r) => !!selected[r.id],
-                  ).length;
+                  const selectedCount = selectedRegistrations.length;
                   return (
                     <Button
                       size="sm"
-                      className="bg-primary text-primary-foreground"
+                      variant="outline"
                       disabled={true} //bulkInviting || registrations.every(r => !(selected[r.id] && (r.status === 'registered' || r.status === 'waitlist')))}
                       onClick={async () => {
                         setBulkInviting(true);
@@ -450,401 +490,517 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
                 >
                   Export CSV
                 </Button>
+                <Button
+                  size="sm"
+                  variant="destructive"
+                  disabled={bulkRemoving || selectedRegistrations.length === 0}
+                  onClick={() => setRemoveTargets(selectedRegistrations)}
+                >
+                  <Trash2 className="h-4 w-4 mr-1" />
+                  {bulkRemoving
+                    ? 'Removing…'
+                    : `Remove selected (${selectedRegistrations.length})`}
+                </Button>
               </div>
             </div>
-            <Table className="min-w-full text-left">
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="py-2 pr-2">
-                    <input
-                      type="checkbox"
-                      aria-label="Select all"
-                      checked={
-                        registrations.length > 0 &&
-                        registrations.every((r) => !!selected[r.id])
-                      }
-                      onChange={(e) => {
-                        const checked = e.target.checked;
-                        const next: Record<string, boolean> = {};
-                        for (const r of registrations) next[r.id] = checked;
-                        setSelected(next);
-                      }}
-                    />
-                  </TableHead>
-                  {/* Sortable column headers with indicators */}
-                  <TableHead
-                    className="py-2 pr-4 cursor-pointer select-none"
-                    onClick={() => toggleSort('name')}
-                  >
-                    Name{' '}
-                    {sortKey === 'name' && (
-                      <span className="ml-1">
-                        {sortDir === 'asc' ? '▲' : '▼'}
-                      </span>
-                    )}
-                  </TableHead>
-                  <TableHead className="py-2 pr-4">Email</TableHead>
-                  <TableHead
-                    className="py-2 pr-4 cursor-pointer select-none"
-                    onClick={() => toggleSort('status')}
-                  >
-                    Status{' '}
-                    {sortKey === 'status' && (
-                      <span className="ml-1">
-                        {sortDir === 'asc' ? '▲' : '▼'}
-                      </span>
-                    )}
-                  </TableHead>
-                  <TableHead
-                    className="py-2 pr-4 cursor-pointer select-none"
-                    onClick={() => toggleSort('time')}
-                  >
-                    Signed Up{' '}
-                    {sortKey === 'time' && (
-                      <span className="ml-1">
-                        {sortDir === 'asc' ? '▲' : '▼'}
-                      </span>
-                    )}
-                  </TableHead>
-                  <TableHead className="py-2 pr-2 text-right">
-                    Actions
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {registrations
-                  .slice()
-                  .sort((a, b) => compareRegs(a, b, sortKey, sortDir))
-                  .map((r) => {
-                    const getStr = (key: string): string => {
-                      const raw = r.registrationData?.[key];
-                      return typeof raw === 'string' ? raw : '';
-                    };
-                    const first =
-                      getStr('firstName') ||
-                      getStr('First Name') ||
-                      getStr('first_name');
-                    const last =
-                      getStr('lastName') ||
-                      getStr('Last Name') ||
-                      getStr('last_name');
-                    const fallbackName =
-                      first || last
-                        ? `${first} ${last}`.trim()
-                        : getStr('Name') || '';
-                    const fallbackEmail = getStr('email') || getStr('Email');
-                    const name = (r.userName || '').trim() || fallbackName;
-                    const email = (r.userEmail || '').trim() || fallbackEmail;
-                    const signedUp = r.registeredAt
-                      ? new Date(r.registeredAt).toLocaleString()
-                      : '—';
-                    const status = r.status || 'registered';
-                    const attendanceEntry = attendanceByUser[r.userId];
-                    const isPresent = attendanceEntry?.attended === true;
-
-                    const statusTag = () => {
-                      switch (status) {
-                        case 'registered':
-                          return (
-                            <Tag variant="green" size="sm">
-                              registered
-                            </Tag>
-                          );
-                        case 'waitlist':
-                          return (
-                            <Tag variant="yellow" size="sm">
-                              waitlist
-                            </Tag>
-                          );
-                        case 'invited':
-                          return (
-                            <Tag variant="blue" size="sm">
-                              invited
-                            </Tag>
-                          );
-                        case 'confirmed':
-                          return (
-                            <Tag variant="green" size="sm">
-                              confirmed
-                            </Tag>
-                          );
-                        case 'declined':
-                        case 'cancelled':
-                          return (
-                            <Tag variant="gray" size="sm">
-                              {status}
-                            </Tag>
-                          );
-                        default:
-                          return (
-                            <Tag variant="gray" size="sm">
-                              {status}
-                            </Tag>
-                          );
-                      }
-                    };
-
-                    const toggle = () =>
-                      setExpanded((s) => ({ ...s, [r.id]: !s[r.id] }));
-
-                    const getAnswerValue = (
-                      q: import('@/types').EventCustomQuestion,
-                    ): unknown => {
-                      const data = r.registrationData || {};
-                      const candidates = [
-                        q.id,
-                        q.question,
-                        q.question.trim(),
-                        q.question.trim().toLowerCase(),
-                        q.question.replace(/\s+/g, ''),
-                        q.question.replace(/\s+/g, '_'),
-                      ];
-                      for (const k of candidates) {
-                        if (
-                          k &&
-                          Object.prototype.hasOwnProperty.call(
-                            data,
-                            k as string,
-                          )
-                        ) {
-                          return (data as Record<string, unknown>)[k as string];
+            <div className="overflow-x-auto -mx-1 px-1">
+              <Table className="min-w-full text-left">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="py-2 pr-2">
+                      <input
+                        type="checkbox"
+                        aria-label="Select all"
+                        checked={
+                          registrations.length > 0 &&
+                          registrations.every((r) => !!selected[r.id])
                         }
+                        onChange={(e) => {
+                          const checked = e.target.checked;
+                          const next: Record<string, boolean> = {};
+                          for (const r of registrations) next[r.id] = checked;
+                          setSelected(next);
+                        }}
+                      />
+                    </TableHead>
+                    {/* Sortable column headers with indicators */}
+                    <TableHead
+                      className="py-2 pr-4"
+                      aria-sort={
+                        sortKey === 'name'
+                          ? sortDir === 'asc'
+                            ? 'ascending'
+                            : 'descending'
+                          : 'none'
                       }
-                      return '';
-                    };
+                    >
+                      <button
+                        type="button"
+                        onClick={() => toggleSort('name')}
+                        className="flex items-center gap-1 select-none rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        Name{' '}
+                        {sortKey === 'name' && (
+                          <span className="ml-1" aria-hidden="true">
+                            {sortDir === 'asc' ? '▲' : '▼'}
+                          </span>
+                        )}
+                      </button>
+                    </TableHead>
+                    <TableHead className="py-2 pr-4">Email</TableHead>
+                    <TableHead
+                      className="py-2 pr-4"
+                      aria-sort={
+                        sortKey === 'status'
+                          ? sortDir === 'asc'
+                            ? 'ascending'
+                            : 'descending'
+                          : 'none'
+                      }
+                    >
+                      <button
+                        type="button"
+                        onClick={() => toggleSort('status')}
+                        className="flex items-center gap-1 select-none rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        Status{' '}
+                        {sortKey === 'status' && (
+                          <span className="ml-1" aria-hidden="true">
+                            {sortDir === 'asc' ? '▲' : '▼'}
+                          </span>
+                        )}
+                      </button>
+                    </TableHead>
+                    <TableHead
+                      className="py-2 pr-4"
+                      aria-sort={
+                        sortKey === 'time'
+                          ? sortDir === 'asc'
+                            ? 'ascending'
+                            : 'descending'
+                          : 'none'
+                      }
+                    >
+                      <button
+                        type="button"
+                        onClick={() => toggleSort('time')}
+                        className="flex items-center gap-1 select-none rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        Signed Up{' '}
+                        {sortKey === 'time' && (
+                          <span className="ml-1" aria-hidden="true">
+                            {sortDir === 'asc' ? '▲' : '▼'}
+                          </span>
+                        )}
+                      </button>
+                    </TableHead>
+                    <TableHead className="py-2 pr-2 text-right">
+                      Actions
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {registrations
+                    .slice()
+                    .sort((a, b) => compareRegs(a, b, sortKey, sortDir))
+                    .map((r) => {
+                      const getStr = (key: string): string => {
+                        const raw = r.registrationData?.[key];
+                        return typeof raw === 'string' ? raw : '';
+                      };
+                      const first =
+                        getStr('firstName') ||
+                        getStr('First Name') ||
+                        getStr('first_name');
+                      const last =
+                        getStr('lastName') ||
+                        getStr('Last Name') ||
+                        getStr('last_name');
+                      const fallbackName =
+                        first || last
+                          ? `${first} ${last}`.trim()
+                          : getStr('Name') || '';
+                      const fallbackEmail = getStr('email') || getStr('Email');
+                      const name = (r.userName || '').trim() || fallbackName;
+                      const email = (r.userEmail || '').trim() || fallbackEmail;
+                      const signedUp = r.registeredAt
+                        ? new Date(r.registeredAt).toLocaleString()
+                        : '—';
+                      const status = r.status || 'registered';
+                      const attendanceEntry = attendanceByUser[r.userId];
+                      const isPresent = attendanceEntry?.attended === true;
 
-                    return (
-                      <React.Fragment key={r.id}>
-                        <TableRow
-                          className={`border-t border-border hover:bg-foreground/[0.04]
+                      const statusTag = () => {
+                        switch (status) {
+                          case 'registered':
+                            return (
+                              <Tag variant="green" size="sm">
+                                registered
+                              </Tag>
+                            );
+                          case 'waitlist':
+                            return (
+                              <Tag variant="yellow" size="sm">
+                                waitlist
+                              </Tag>
+                            );
+                          case 'invited':
+                            return (
+                              <Tag variant="blue" size="sm">
+                                invited
+                              </Tag>
+                            );
+                          case 'confirmed':
+                            return (
+                              <Tag variant="green" size="sm">
+                                confirmed
+                              </Tag>
+                            );
+                          case 'declined':
+                          case 'cancelled':
+                            return (
+                              <Tag variant="gray" size="sm">
+                                {status}
+                              </Tag>
+                            );
+                          default:
+                            return (
+                              <Tag variant="gray" size="sm">
+                                {status}
+                              </Tag>
+                            );
+                        }
+                      };
+
+                      const toggle = () =>
+                        setExpanded((s) => ({ ...s, [r.id]: !s[r.id] }));
+
+                      const getAnswerValue = (
+                        q: import('@/types').EventCustomQuestion,
+                      ): unknown => {
+                        const data = r.registrationData || {};
+                        const candidates = [
+                          q.id,
+                          q.question,
+                          q.question.trim(),
+                          q.question.trim().toLowerCase(),
+                          q.question.replace(/\s+/g, ''),
+                          q.question.replace(/\s+/g, '_'),
+                        ];
+                        for (const k of candidates) {
+                          if (
+                            k &&
+                            Object.prototype.hasOwnProperty.call(
+                              data,
+                              k as string,
+                            )
+                          ) {
+                            return (data as Record<string, unknown>)[
+                              k as string
+                            ];
+                          }
+                        }
+                        return '';
+                      };
+
+                      return (
+                        <React.Fragment key={r.id}>
+                          <TableRow
+                            className={`border-t border-border hover:bg-foreground/[0.04]
                             ${isPresent ? 'bg-green-200/80 dark:bg-green-900/20 hover:bg-green-200/90 dark:hover:bg-green-900/40' : ''}`}
-                        >
-                          <TableCell className="py-2 pr-2">
-                            <input
-                              type="checkbox"
-                              aria-label={`Select ${name || email || r.id}`}
-                              checked={!!selected[r.id]}
-                              onChange={(e) =>
-                                setSelected((s) => ({
-                                  ...s,
-                                  [r.id]: e.target.checked,
-                                }))
-                              }
-                            />
-                          </TableCell>
-                          <TableCell className="py-2 pr-4">
-                            {name || '—'}
-                          </TableCell>
-                          <TableCell className="py-2 pr-4">
-                            {email || '—'}
-                          </TableCell>
-                          <TableCell className="py-2 pr-4">
-                            {statusTag()}
-                          </TableCell>
-                          <TableCell className="py-2 pr-4">
-                            {signedUp}
-                          </TableCell>
-                          <TableCell className="py-2 pr-2">
-                            <div className="flex items-center gap-2 justify-end">
-                              <Button
-                                size="sm"
-                                variant={isPresent ? 'outline' : 'outline'}
-                                onClick={async () => {
-                                  if (!eventId || !r.userId) return;
-                                  const next = !isPresent;
-                                  try {
-                                    await setAttendanceForUser(
-                                      eventId,
-                                      r.userId,
-                                      next,
-                                    );
-                                    setAttendanceByUser((prev) => ({
-                                      ...prev,
-                                      [r.userId]: {
-                                        userId: r.userId,
-                                        attended: next,
-                                        timestamp: next ? Date.now() : null,
-                                      },
-                                    }));
-                                    notify({
-                                      type: next ? 'success' : 'warning',
-                                      message: next
-                                        ? `${name || email || r.id} marked as present`
-                                        : `${name || email || r.id} marked as absent`,
-                                    });
-                                  } catch (e) {
-                                    notify({
-                                      type: 'error',
-                                      message:
-                                        e instanceof Error
-                                          ? e.message
-                                          : 'Failed to update attendance',
-                                    });
-                                  }
-                                }}
-                              >
-                                {isPresent ? (
-                                  <>
-                                    <Check className="h-4 w-4 mr-1" />
-                                    Mark absent
-                                  </>
-                                ) : (
-                                  <>
-                                    <X className="h-4 w-4 mr-1" />
-                                    Mark present
-                                  </>
-                                )}
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                disabled={true} //invitingId === r.id || status === 'invited' || status === 'confirmed'
-                                onClick={async () => {
-                                  try {
-                                    setInvitingId(r.id);
-                                    const baseUrl =
-                                      process.env.NEXT_PUBLIC_SITE_URL ||
-                                      (typeof window !== 'undefined'
-                                        ? window.location.origin
-                                        : '');
-                                    await inviteRegistrant(r.id, { baseUrl });
-                                    notify({
-                                      type: 'success',
-                                      message: 'Invitation sent',
-                                    });
-                                  } catch (e) {
-                                    notify({
-                                      type: 'error',
-                                      message:
-                                        e instanceof Error
-                                          ? e.message
-                                          : 'Failed to send invitation',
-                                    });
-                                  } finally {
-                                    setInvitingId(null);
-                                  }
-                                }}
-                                title="Send invitation"
-                              >
-                                <Send className="h-4 w-4" /> Invite
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={toggle}
-                              >
-                                <ChevronDown
-                                  className={`h-4 w-4 mr-1 transition-transform ${expanded[r.id] ? 'rotate-180' : ''}`}
-                                />
-                                {expanded[r.id]
-                                  ? 'Hide details'
-                                  : 'View details'}
-                              </Button>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                        {expanded[r.id] && (
-                          <TableRow className="bg-foreground/[0.03]">
-                            <TableCell colSpan={6} className="p-3">
-                              {(() => {
-                                const profile = r.userId
-                                  ? userProfiles[r.userId]
-                                  : undefined;
-                                if (
-                                  profile?.program ||
-                                  profile?.expectedGraduationYear
-                                ) {
-                                  return (
-                                    <div className="mb-3 pb-3 border-b border-border text-sm text-foreground/80">
-                                      <span className="font-medium">
-                                        Program:
-                                      </span>{' '}
-                                      {profile.program || (
-                                        <span className="text-muted-foreground italic">
-                                          Not provided
-                                        </span>
-                                      )}
-                                      <span className="mx-2">|</span>
-                                      <span className="font-medium">
-                                        Graduation Year:
-                                      </span>{' '}
-                                      {profile.expectedGraduationYear || (
-                                        <span className="text-muted-foreground italic">
-                                          Not provided
-                                        </span>
-                                      )}
-                                    </div>
-                                  );
+                          >
+                            <TableCell className="py-2 pr-2">
+                              <input
+                                type="checkbox"
+                                aria-label={`Select ${name || email || r.id}`}
+                                checked={!!selected[r.id]}
+                                onChange={(e) =>
+                                  setSelected((s) => ({
+                                    ...s,
+                                    [r.id]: e.target.checked,
+                                  }))
                                 }
-                                return null;
-                              })()}
-                              {questions && questions.length > 0 ? (
-                                <Table className="w-full">
-                                  <TableHeader>
-                                    <TableRow>
-                                      <TableHead className="w-1/3">
-                                        Question
-                                      </TableHead>
-                                      <TableHead>Answer</TableHead>
-                                    </TableRow>
-                                  </TableHeader>
-                                  <TableBody>
-                                    {questions.map((q) => {
-                                      const answer = getAnswerValue(q);
-                                      return (
-                                        <TableRow key={q.id}>
-                                          <TableCell className="align-top text-foreground/80">
-                                            {q.question}
-                                          </TableCell>
-                                          <TableCell className="align-top text-foreground whitespace-pre-wrap wrap-break-word">
-                                            {answerToText(answer) ? (
-                                              <AnswerValue value={answer} />
-                                            ) : (
-                                              '—'
-                                            )}
-                                          </TableCell>
-                                        </TableRow>
+                              />
+                            </TableCell>
+                            <TableCell className="py-2 pr-4">
+                              {name || '—'}
+                            </TableCell>
+                            <TableCell className="py-2 pr-4">
+                              {email || '—'}
+                            </TableCell>
+                            <TableCell className="py-2 pr-4">
+                              {statusTag()}
+                            </TableCell>
+                            <TableCell className="py-2 pr-4">
+                              {signedUp}
+                            </TableCell>
+                            <TableCell className="py-2 pr-2">
+                              <div className="flex flex-wrap items-center gap-2 justify-end">
+                                <Button
+                                  size="sm"
+                                  variant={isPresent ? 'outline' : 'outline'}
+                                  onClick={async () => {
+                                    if (!eventId || !r.userId) return;
+                                    const next = !isPresent;
+                                    try {
+                                      await setAttendanceForUser(
+                                        eventId,
+                                        r.userId,
+                                        next,
                                       );
-                                    })}
-                                  </TableBody>
-                                </Table>
-                              ) : (
-                                <Table className="w-full">
-                                  <TableHeader>
-                                    <TableRow>
-                                      <TableHead className="w-1/3">
-                                        Question
-                                      </TableHead>
-                                      <TableHead>Answer</TableHead>
-                                    </TableRow>
-                                  </TableHeader>
-                                  <TableBody>
-                                    {Object.entries(
-                                      r.registrationData || {},
-                                    ).map(([k, v]) => (
-                                      <TableRow key={k}>
-                                        <TableCell className="align-top text-foreground/80">
-                                          {k}
-                                        </TableCell>
-                                        <TableCell className="align-top text-foreground whitespace-pre-wrap wrap-break-word">
-                                          <AnswerValue value={v} />
-                                        </TableCell>
-                                      </TableRow>
-                                    ))}
-                                  </TableBody>
-                                </Table>
-                              )}
+                                      setAttendanceByUser((prev) => ({
+                                        ...prev,
+                                        [r.userId]: {
+                                          userId: r.userId,
+                                          attended: next,
+                                          timestamp: next ? Date.now() : null,
+                                        },
+                                      }));
+                                      notify({
+                                        type: next ? 'success' : 'warning',
+                                        message: next
+                                          ? `${name || email || r.id} marked as present`
+                                          : `${name || email || r.id} marked as absent`,
+                                      });
+                                    } catch (e) {
+                                      notify({
+                                        type: 'error',
+                                        message:
+                                          e instanceof Error
+                                            ? e.message
+                                            : 'Failed to update attendance',
+                                      });
+                                    }
+                                  }}
+                                >
+                                  {isPresent ? (
+                                    <>
+                                      <Check className="h-4 w-4 mr-1" />
+                                      Mark absent
+                                    </>
+                                  ) : (
+                                    <>
+                                      <X className="h-4 w-4 mr-1" />
+                                      Mark present
+                                    </>
+                                  )}
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  disabled={true} //invitingId === r.id || status === 'invited' || status === 'confirmed'
+                                  onClick={async () => {
+                                    try {
+                                      setInvitingId(r.id);
+                                      const baseUrl =
+                                        process.env.NEXT_PUBLIC_SITE_URL ||
+                                        (typeof window !== 'undefined'
+                                          ? window.location.origin
+                                          : '');
+                                      await inviteRegistrant(r.id, { baseUrl });
+                                      notify({
+                                        type: 'success',
+                                        message: 'Invitation sent',
+                                      });
+                                    } catch (e) {
+                                      notify({
+                                        type: 'error',
+                                        message:
+                                          e instanceof Error
+                                            ? e.message
+                                            : 'Failed to send invitation',
+                                      });
+                                    } finally {
+                                      setInvitingId(null);
+                                    }
+                                  }}
+                                  title="Send invitation"
+                                >
+                                  <Send className="h-4 w-4" /> Invite
+                                </Button>
+                                <Button
+                                  size="sm"
+                                  variant="outline"
+                                  onClick={toggle}
+                                >
+                                  <ChevronDown
+                                    className={`h-4 w-4 mr-1 transition-transform ${expanded[r.id] ? 'rotate-180' : ''}`}
+                                  />
+                                  {expanded[r.id]
+                                    ? 'Hide details'
+                                    : 'View details'}
+                                </Button>
+                              </div>
                             </TableCell>
                           </TableRow>
-                        )}
-                      </React.Fragment>
-                    );
-                  })}
-              </TableBody>
-            </Table>
+                          {expanded[r.id] && (
+                            <TableRow className="bg-foreground/[0.03]">
+                              <TableCell colSpan={6} className="p-3">
+                                {(() => {
+                                  const profile = r.userId
+                                    ? userProfiles[r.userId]
+                                    : undefined;
+                                  if (
+                                    profile?.program ||
+                                    profile?.expectedGraduationYear
+                                  ) {
+                                    return (
+                                      <div className="mb-3 pb-3 border-b border-border text-sm text-foreground/80">
+                                        <span className="font-medium">
+                                          Program:
+                                        </span>{' '}
+                                        {profile.program || (
+                                          <span className="text-muted-foreground italic">
+                                            Not provided
+                                          </span>
+                                        )}
+                                        <span className="mx-2">|</span>
+                                        <span className="font-medium">
+                                          Graduation Year:
+                                        </span>{' '}
+                                        {profile.expectedGraduationYear || (
+                                          <span className="text-muted-foreground italic">
+                                            Not provided
+                                          </span>
+                                        )}
+                                      </div>
+                                    );
+                                  }
+                                  return null;
+                                })()}
+                                {questions && questions.length > 0 ? (
+                                  <Table className="w-full">
+                                    <TableHeader>
+                                      <TableRow>
+                                        <TableHead className="w-1/3">
+                                          Question
+                                        </TableHead>
+                                        <TableHead>Answer</TableHead>
+                                      </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                      {questions.map((q) => {
+                                        const answer = getAnswerValue(q);
+                                        return (
+                                          <TableRow key={q.id}>
+                                            <TableCell className="align-top text-foreground/80">
+                                              {q.question}
+                                            </TableCell>
+                                            <TableCell className="align-top text-foreground whitespace-pre-wrap wrap-break-word">
+                                              {answerToText(answer) ? (
+                                                <AnswerValue value={answer} />
+                                              ) : (
+                                                '—'
+                                              )}
+                                            </TableCell>
+                                          </TableRow>
+                                        );
+                                      })}
+                                    </TableBody>
+                                  </Table>
+                                ) : (
+                                  <Table className="w-full">
+                                    <TableHeader>
+                                      <TableRow>
+                                        <TableHead className="w-1/3">
+                                          Question
+                                        </TableHead>
+                                        <TableHead>Answer</TableHead>
+                                      </TableRow>
+                                    </TableHeader>
+                                    <TableBody>
+                                      {Object.entries(
+                                        r.registrationData || {},
+                                      ).map(([k, v]) => (
+                                        <TableRow key={k}>
+                                          <TableCell className="align-top text-foreground/80">
+                                            {k}
+                                          </TableCell>
+                                          <TableCell className="align-top text-foreground whitespace-pre-wrap wrap-break-word">
+                                            <AnswerValue value={v} />
+                                          </TableCell>
+                                        </TableRow>
+                                      ))}
+                                    </TableBody>
+                                  </Table>
+                                )}
+                                {Object.values(r.registrationData || {}).some(
+                                  isUploadedFileRef,
+                                ) && (
+                                  <p className="mt-2 text-xs text-muted-foreground">
+                                    Uploaded files are automatically deleted 60
+                                    days after the event.
+                                  </p>
+                                )}
+                              </TableCell>
+                            </TableRow>
+                          )}
+                        </React.Fragment>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            </div>
           </>
         )}
       </div>
+      <ConfirmModal
+        open={removeTargets.length > 0}
+        title={
+          removeTargets.length === 1
+            ? 'Remove registration'
+            : `Remove ${removeTargets.length} registrations`
+        }
+        description={
+          removeTargets.length === 1
+            ? `Remove registration for ${
+                removeTargets[0]?.userName ||
+                removeTargets[0]?.userEmail ||
+                removeTargets[0]?.id ||
+                'this member'
+              }? Their answers and uploaded files will be deleted. This cannot be undone.`
+            : `Remove the ${removeTargets.length} selected registrations? Their answers and uploaded files will be deleted. This cannot be undone.`
+        }
+        confirmText={
+          removeTargets.length === 1
+            ? 'Remove registration'
+            : `Remove ${removeTargets.length} registrations`
+        }
+        cancelText="Keep registrations"
+        onClose={() => setRemoveTargets([])}
+        onConfirm={async () => {
+          const targets = removeTargets;
+          if (targets.length === 0) return;
+          setBulkRemoving(true);
+          let removed = 0;
+          for (const target of targets) {
+            try {
+              await removeRegistration(target.id);
+              removed++;
+            } catch (e) {
+              console.warn('Remove failed for', target.id, e);
+            }
+          }
+          setBulkRemoving(false);
+          setRemoveTargets([]);
+          setSelected({});
+          if (removed > 0) {
+            notify({
+              type: 'success',
+              message:
+                removed === 1
+                  ? `${targets[0].userName || targets[0].userEmail || targets[0].id} removed from this event`
+                  : `${removed} registrations removed from this event`,
+            });
+          }
+          if (removed < targets.length) {
+            notify({
+              type: 'error',
+              message: `${targets.length - removed} registration(s) could not be removed`,
+            });
+          }
+        }}
+      />
     </Modal>
   );
 };
