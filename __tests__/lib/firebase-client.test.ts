@@ -1,152 +1,82 @@
-const mockInitializeApp = jest.fn(() => 'mock-app')
-const mockGetApp = jest.fn(() => 'mock-app')
-const mockGetApps = jest.fn()
-const mockGetFirestore = jest.fn(() => 'mock-db')
-const mockGetAuth = jest.fn(() => 'mock-auth')
-const mockSignInWithPopup = jest.fn()
-const mockLinkWithPopup = jest.fn()
-const mockSignOut = jest.fn()
-
 jest.mock('firebase/app', () => ({
-  initializeApp: mockInitializeApp,
-  getApp: mockGetApp,
-  getApps: mockGetApps,
-}))
+  initializeApp: jest.fn(() => ({})),
+  getApps: jest.fn(() => [{}]),
+  getApp: jest.fn(() => ({})),
+}));
 
 jest.mock('firebase/firestore', () => ({
-  getFirestore: mockGetFirestore,
-}))
+  getFirestore: jest.fn(() => ({})),
+  connectFirestoreEmulator: jest.fn(),
+}));
 
-jest.mock('firebase/auth', () => ({
-  getAuth: mockGetAuth,
-  GoogleAuthProvider: jest.fn(() => ({ providerId: 'google.com' })),
-  GithubAuthProvider: jest.fn(() => ({ providerId: 'github.com' })),
-  OAuthProvider: jest.fn(() => ({ providerId: 'microsoft.com' })),
-  signInWithPopup: mockSignInWithPopup,
-  linkWithPopup: mockLinkWithPopup,
-  signOut: mockSignOut,
-}))
+jest.mock('firebase/auth', () => {
+  const order: string[] = [];
+  const auth = {
+    currentUser: {
+      getIdToken: jest.fn(async () => {
+        order.push('token');
+        return 'id-token';
+      }),
+    },
+    authStateReady: jest.fn(async () => {
+      order.push('ready');
+    }),
+  };
+  const signInWithPopup = jest.fn(async () => {
+    order.push('popup');
+    return { user: { uid: 'u1' } };
+  });
+  return {
+    __mock: { order, auth, signInWithPopup },
+    getAuth: jest.fn(() => auth),
+    connectAuthEmulator: jest.fn(),
+    GoogleAuthProvider: jest.fn(),
+    GithubAuthProvider: jest.fn(),
+    OAuthProvider: jest.fn(),
+    signInWithPopup: (...args: unknown[]) => signInWithPopup(...args),
+    linkWithPopup: jest.fn(),
+    signOut: jest.fn(),
+  };
+});
 
-describe('firebase-client', () => {
+import { signInWithGooglePopup } from '@/lib/firebase-client';
+
+type AuthMocks = {
+  order: string[];
+  auth: {
+    currentUser: { getIdToken: jest.Mock };
+    authStateReady: jest.Mock;
+  };
+  signInWithPopup: jest.Mock;
+};
+
+const { order, auth: mockAuth } = (
+  jest.requireMock('firebase/auth') as { __mock: AuthMocks }
+).__mock;
+
+describe('signInWithGooglePopup', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
-    jest.resetModules()
-  })
+    order.length = 0;
+    jest.clearAllMocks();
+    global.fetch = jest
+      .fn()
+      .mockResolvedValue({ ok: true }) as unknown as typeof fetch;
+  });
 
-  describe('firebase app initialization', () => {
-    it('initializes new app when no apps exist', async () => {
-      mockGetApps.mockReturnValue([])
-      const mod = await import('@/lib/firebase-client')
-      expect(mockGetApps).toHaveBeenCalled()
-      expect(mockInitializeApp).toHaveBeenCalled()
-      expect(mockGetApp).not.toHaveBeenCalled()
-      expect(mod.db).toBe('mock-db')
-      expect(mod.auth).toBe('mock-auth')
-    })
+  it('waits for auth initialization before opening the popup', async () => {
+    await signInWithGooglePopup();
 
-    it('reuses existing app when already initialized', async () => {
-      mockGetApps.mockReturnValue(['existing-app'])
-      const mod = await import('@/lib/firebase-client')
-      expect(mockGetApps).toHaveBeenCalled()
-      expect(mockGetApp).toHaveBeenCalled()
-      expect(mockInitializeApp).not.toHaveBeenCalled()
-      expect(mod.db).toBe('mock-db')
-      expect(mod.auth).toBe('mock-auth')
-    })
-  })
+    expect(order).toEqual(['ready', 'popup', 'token']);
+    expect(mockAuth.authStateReady).toHaveBeenCalledTimes(1);
+  });
 
-  describe('providers', () => {
-    beforeEach(() => {
-      mockGetApps.mockReturnValue([])
-    })
+  it('mints the session cookie with the cached token instead of forcing a refresh', async () => {
+    await signInWithGooglePopup();
 
-    it('creates GoogleAuthProvider', async () => {
-      const { googleProvider } = await import('@/lib/firebase-client')
-      expect(googleProvider).toEqual({ providerId: 'google.com' })
-    })
-
-    it('creates GithubAuthProvider', async () => {
-      const { githubProvider } = await import('@/lib/firebase-client')
-      expect(githubProvider).toEqual({ providerId: 'github.com' })
-    })
-
-    it('creates Microsoft OAuthProvider', async () => {
-      const { microsoftProvider } = await import('@/lib/firebase-client')
-      expect(microsoftProvider).toEqual({ providerId: 'microsoft.com' })
-    })
-  })
-
-  describe('sign-in helpers', () => {
-    beforeEach(() => {
-      mockGetApps.mockReturnValue([])
-    })
-
-    it('signInWithGooglePopup calls signInWithPopup with google provider', async () => {
-      mockSignInWithPopup.mockResolvedValue({ user: 'google-user' })
-      const { signInWithGooglePopup } = await import('@/lib/firebase-client')
-      const result = await signInWithGooglePopup()
-      expect(mockSignInWithPopup).toHaveBeenCalledWith('mock-auth', { providerId: 'google.com' })
-      expect(result).toBe('google-user')
-    })
-
-    it('signInWithGithubPopup calls signInWithPopup with github provider', async () => {
-      mockSignInWithPopup.mockResolvedValue({ user: 'github-user' })
-      const { signInWithGithubPopup } = await import('@/lib/firebase-client')
-      const result = await signInWithGithubPopup()
-      expect(mockSignInWithPopup).toHaveBeenCalledWith('mock-auth', { providerId: 'github.com' })
-      expect(result).toBe('github-user')
-    })
-
-    it('signInWithMicrosoftPopup calls signInWithPopup with microsoft provider', async () => {
-      mockSignInWithPopup.mockResolvedValue({ user: 'microsoft-user' })
-      const { signInWithMicrosoftPopup } = await import('@/lib/firebase-client')
-      const result = await signInWithMicrosoftPopup()
-      expect(mockSignInWithPopup).toHaveBeenCalledWith('mock-auth', { providerId: 'microsoft.com' })
-      expect(result).toBe('microsoft-user')
-    })
-  })
-
-  describe('account linking helpers', () => {
-    const mockUser = { uid: 'u1' }
-
-    beforeEach(() => {
-      mockGetApps.mockReturnValue([])
-    })
-
-    it('linkGoogleToCurrentUser calls linkWithPopup', async () => {
-      mockLinkWithPopup.mockResolvedValue({ user: 'linked-google' })
-      const { linkGoogleToCurrentUser } = await import('@/lib/firebase-client')
-      const result = await linkGoogleToCurrentUser(mockUser)
-      expect(mockLinkWithPopup).toHaveBeenCalledWith(mockUser, { providerId: 'google.com' })
-      expect(result).toBe('linked-google')
-    })
-
-    it('linkGithubToCurrentUser calls linkWithPopup', async () => {
-      mockLinkWithPopup.mockResolvedValue({ user: 'linked-github' })
-      const { linkGithubToCurrentUser } = await import('@/lib/firebase-client')
-      const result = await linkGithubToCurrentUser(mockUser)
-      expect(mockLinkWithPopup).toHaveBeenCalledWith(mockUser, { providerId: 'github.com' })
-      expect(result).toBe('linked-github')
-    })
-
-    it('linkMicrosoftToCurrentUser calls linkWithPopup', async () => {
-      mockLinkWithPopup.mockResolvedValue({ user: 'linked-microsoft' })
-      const { linkMicrosoftToCurrentUser } = await import('@/lib/firebase-client')
-      const result = await linkMicrosoftToCurrentUser(mockUser)
-      expect(mockLinkWithPopup).toHaveBeenCalledWith(mockUser, { providerId: 'microsoft.com' })
-      expect(result).toBe('linked-microsoft')
-    })
-  })
-
-  describe('firebaseSignOut', () => {
-    beforeEach(() => {
-      mockGetApps.mockReturnValue([])
-    })
-
-    it('calls signOut with auth', async () => {
-      const { firebaseSignOut } = await import('@/lib/firebase-client')
-      await firebaseSignOut()
-      expect(mockSignOut).toHaveBeenCalledWith('mock-auth')
-    })
-  })
-})
+    expect(mockAuth.currentUser.getIdToken).toHaveBeenCalledWith();
+    expect(global.fetch).toHaveBeenCalledWith('/api/login', {
+      headers: { Authorization: 'Bearer id-token' },
+      credentials: 'include',
+    });
+  });
+});

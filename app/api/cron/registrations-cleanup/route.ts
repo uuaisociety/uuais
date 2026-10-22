@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { getStorageBucketName } from '@/lib/image-upload';
 import { isValidCronRequest } from '@/lib/cron-auth';
 import { adminDb } from '@/lib/firebase-admin';
 import '@/lib/firebase-admin';
@@ -41,12 +40,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const appOptions = admin.app().options as
-      { storageBucket?: string } | undefined;
-    const bucketName = getStorageBucketName(appOptions);
-    const bucket = bucketName
-      ? admin.storage().bucket(bucketName)
-      : admin.storage().bucket();
+    const bucket = admin.storage().bucket();
 
     const [files] = await bucket.getFiles({
       prefix: REGISTRATION_FILE_PREFIX,

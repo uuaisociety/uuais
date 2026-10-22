@@ -47,23 +47,25 @@ export const githubProvider = new GithubAuthProvider();
 // Microsoft uses a generic OAuthProvider with providerId 'microsoft.com'
 export const microsoftProvider = new OAuthProvider('microsoft.com');
 
-export const signInWithGooglePopup = async () => {
-  const result = await signInWithPopup(auth, googleProvider);
+// Wait for the initial persisted-user lookup before signing in; otherwise a slow
+// initialization can finish after the popup and clear the newly signed-in user.
+const signInWithPopupAfterReady = async (
+  provider: Parameters<typeof signInWithPopup>[1],
+) => {
+  await auth.authStateReady();
+  const result = await signInWithPopup(auth, provider);
   await refreshSessionCookie();
   return result.user;
 };
 
-export const signInWithGithubPopup = async () => {
-  const result = await signInWithPopup(auth, githubProvider);
-  await refreshSessionCookie();
-  return result.user;
-};
+export const signInWithGooglePopup = () =>
+  signInWithPopupAfterReady(googleProvider);
 
-export const signInWithMicrosoftPopup = async () => {
-  const result = await signInWithPopup(auth, microsoftProvider);
-  await refreshSessionCookie();
-  return result.user;
-};
+export const signInWithGithubPopup = () =>
+  signInWithPopupAfterReady(githubProvider);
+
+export const signInWithMicrosoftPopup = () =>
+  signInWithPopupAfterReady(microsoftProvider);
 
 // Account linking helpers (link additional providers to the same Firebase user)
 export const linkGoogleToCurrentUser = async (user: User) => {
@@ -93,7 +95,9 @@ export const firebaseSignOut = async () => {
  * server API request that must authenticate as the current user.
  */
 export async function refreshSessionCookie(): Promise<void> {
-  const token = await auth.currentUser?.getIdToken(true);
+  // The token was just minted by sign-in; forcing a refresh adds a failure mode
+  // where SDK token invalidation signs the user back out.
+  const token = await auth.currentUser?.getIdToken();
   if (!token) return;
   await fetch('/api/login', {
     headers: { Authorization: `Bearer ${token}` },

@@ -2,7 +2,10 @@ import { User } from 'firebase/auth';
 
 const mockUnsubscribe = jest.fn();
 let authCallback: ((user: User | null) => void) | null = null;
-const mockAuth = { currentUser: null as User | null };
+const mockAuth = {
+  currentUser: null as User | null,
+  authStateReady: jest.fn().mockResolvedValue(undefined),
+};
 
 // jest.setup.ts mocks '@/hooks/useAdmin' globally; restore the real module here.
 jest.mock('@/hooks/useAdmin', () => jest.requireActual('@/hooks/useAdmin'));
@@ -274,6 +277,10 @@ describe('useAdmin', () => {
     await act(async () => {
       await result.current.signInWithGoogle();
     });
+    expect(mockAuth.authStateReady).toHaveBeenCalledTimes(1);
+    expect(mockAuth.authStateReady.mock.invocationCallOrder[0]).toBeLessThan(
+      signInWithPopup.mock.invocationCallOrder[0],
+    );
     expect(signInWithPopup).toHaveBeenCalledTimes(1);
     expect(signInWithPopup).toHaveBeenCalledWith(mockAuth, expect.any(Object));
     expect(refreshSessionCookie).toHaveBeenCalledTimes(1);

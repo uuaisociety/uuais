@@ -216,6 +216,8 @@ export function useAdmin(options?: { eager?: boolean }): AdminState {
       import('@/lib/firebase-client'),
     ]);
     const provider = new GoogleAuthProvider();
+    // Wait for the persisted-user lookup so a slow init can't clear this sign-in.
+    await auth.authStateReady();
     await signInWithPopup(auth, provider);
     // Mint the httpOnly cookie so server APIs authenticate as this user (logout clears it, so re-login re-mints).
     await refreshSessionCookie();
