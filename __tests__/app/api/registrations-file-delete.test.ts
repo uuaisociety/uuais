@@ -154,4 +154,38 @@ describe('DELETE /api/registrations/file', () => {
     const res = await call();
     expect(res.status).toBe(429);
   });
+
+  describe('path rollback', () => {
+    async function callPath(path: string) {
+      const { DELETE } = await import('@/app/api/registrations/file/route');
+      const req = new Request(
+        `http://localhost/api/registrations/file?path=${encodeURIComponent(path)}`,
+        { method: 'DELETE' },
+      );
+      return DELETE(req as never);
+    }
+
+    it("deletes a file under the caller's own prefix", async () => {
+      const res = await callPath('registrations/evt1/user1/999_new.pdf');
+      expect(res.status).toBe(200);
+      expect(mockStorageFile).toHaveBeenCalledWith(
+        'registrations/evt1/user1/999_new.pdf',
+      );
+    });
+
+    it("rejects other users' files and unsafe paths", async () => {
+      for (const bad of [
+        'registrations/evt1/user2/999_new.pdf',
+        'registrations/evt1/user1/../user2/x.pdf',
+        'registrations/evt1/user1//x.pdf',
+        'team-applications/user1/x.pdf',
+        'registrations/../user1/x.pdf',
+        '',
+      ]) {
+        const res = await callPath(bad);
+        expect(res.status).toBe(400);
+      }
+      expect(mockStorageFile).not.toHaveBeenCalled();
+    });
+  });
 });

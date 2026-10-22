@@ -32,7 +32,9 @@ function eventIdFromPath(path: string): string {
  * - deletes event-registration attachments 60 days after the event date
  *   (orphaned objects fall back to a 90-day maximum age);
  * - deletes registration documents 36 months after the event date, matching
- *   the privacy policy's retention statement.
+ *   the privacy policy's retention statement (for deleted events: 36 months
+ *   after registering);
+ * - deletes attendance of deleted events 36 months after they were deleted.
  */
 export async function GET(req: NextRequest) {
   if (!isValidCronRequest(req)) {
@@ -57,11 +59,43 @@ export async function GET(req: NextRequest) {
     }
 
     const eventsSnap = await adminDb.collection('events').get();
+    const existingEventIds = new Set(eventsSnap.docs.map((d) => d.id));
     const eventStartById = new Map<string, number>();
     for (const docSnap of eventsSnap.docs) {
       const start = docSnap.get('eventStartAt');
       const ms = typeof start === 'string' ? Date.parse(start) : NaN;
       if (Number.isFinite(ms)) eventStartById.set(docSnap.id, ms);
+    }
+
+    // One-time migration: move embedded attendee lists to the admin-only
+    // eventAttendance collection, then drop the publicly readable field.
+    // Runs first so later failures cannot block it; entries already in
+    // eventAttendance are newer edits and win over the legacy list.
+    let migrated = 0;
+    for (const docSnap of eventsSnap.docs) {
+      const attendees = docSnap.get('attendees');
+      if (!Array.isArray(attendees)) continue;
+      const attRef = adminDb.collection('eventAttendance').doc(docSnap.id);
+      if (attendees.length > 0) {
+        const attSnap = await attRef.get();
+        const existing: Array<Record<string, unknown>> =
+          attSnap.exists && Array.isArray(attSnap.get('entries'))
+            ? (attSnap.get('entries') as Array<Record<string, unknown>>)
+            : [];
+        const byUser = new Map(
+          existing.map((e) => [String(e.userId ?? ''), e]),
+        );
+        for (const entry of attendees as Array<Record<string, unknown>>)
+          byUser.set(String(entry.userId ?? ''), {
+            ...entry,
+            ...byUser.get(String(entry.userId ?? '')),
+          });
+        await attRef.set({ entries: Array.from(byUser.values()) });
+        migrated++;
+      }
+      await docSnap.ref.update({
+        attendees: admin.firestore.FieldValue.delete(),
+      });
     }
 
     const now = Date.now();
@@ -119,33 +153,44 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    // One-time migration: move embedded attendee lists to the admin-only
-    // eventAttendance collection, then drop the publicly readable field.
-    let migrated = 0;
-    for (const docSnap of eventsSnap.docs) {
-      const attendees = docSnap.get('attendees');
-      if (!Array.isArray(attendees)) continue;
-      const attRef = adminDb.collection('eventAttendance').doc(docSnap.id);
-      if (attendees.length > 0) {
-        const attSnap = await attRef.get();
-        const existing: Array<Record<string, unknown>> =
-          attSnap.exists && Array.isArray(attSnap.get('entries'))
-            ? (attSnap.get('entries') as Array<Record<string, unknown>>)
-            : [];
-        const byUser = new Map(
-          existing.map((e) => [String(e.userId ?? ''), e]),
-        );
-        for (const entry of attendees as Array<Record<string, unknown>>)
-          byUser.set(String(entry.userId ?? ''), {
-            ...byUser.get(String(entry.userId ?? '')),
-            ...entry,
+    // Registrations of deleted events have no event date; registeredAt (which
+    // precedes the event) bounds their retention instead.
+    const cutoff = admin.firestore.Timestamp.fromMillis(
+      now - DOCUMENT_RETENTION_MS,
+    );
+    const oldRegs = await adminDb
+      .collection('registrations')
+      .where('registeredAt', '<', cutoff)
+      .limit(Math.max(0, MAX_DOC_DELETES_PER_RUN - deletedDocs))
+      .get();
+    const orphanRegs = oldRegs.docs.filter(
+      (d) => !existingEventIds.has(String(d.get('eventId') ?? '')),
+    );
+    for (let i = 0; i < orphanRegs.length; i += 400) {
+      const writeBatch = adminDb.batch();
+      orphanRegs.slice(i, i + 400).forEach((d) => writeBatch.delete(d.ref));
+      await writeBatch.commit();
+      deletedDocs += Math.min(400, orphanRegs.length - i);
+    }
+
+    // Attendance of deleted events: stamp when the event was first seen
+    // missing, then purge after the document retention period.
+    const attendanceSnap = await adminDb.collection('eventAttendance').get();
+    for (const docSnap of attendanceSnap.docs) {
+      if (existingEventIds.has(docSnap.id)) {
+        if (docSnap.get('orphanedAt') !== undefined)
+          await docSnap.ref.update({
+            orphanedAt: admin.firestore.FieldValue.delete(),
           });
-        await attRef.set({ entries: Array.from(byUser.values()) });
-        migrated++;
+        continue;
       }
-      await docSnap.ref.update({
-        attendees: admin.firestore.FieldValue.delete(),
-      });
+      const orphanedAt = docSnap.get('orphanedAt');
+      if (typeof orphanedAt !== 'number') {
+        await docSnap.ref.update({ orphanedAt: now });
+      } else if (now - orphanedAt > DOCUMENT_RETENTION_MS) {
+        await docSnap.ref.delete();
+        deletedDocs++;
+      }
     }
 
     return NextResponse.json({

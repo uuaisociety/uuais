@@ -5,6 +5,7 @@ import {
   getFirestore,
   doc,
   getDoc,
+  setDoc,
   updateDoc,
   terminate,
 } from 'firebase/firestore';
@@ -108,10 +109,22 @@ try {
       injectedField: true,
     }),
   );
-  await updateDoc(doc(member, 'registrations/invited'), {
-    status: 'cancelled',
-  });
-  passed++;
+  await denied(() =>
+    setDoc(doc(admin, 'adminAuditLogs/forged'), {
+      action: 'download',
+      adminUid: 'someone-else',
+    }),
+  );
+  // Cancelling goes through DELETE /api/registrations (Admin SDK) so the
+  // event's seat counter stays consistent; direct client writes are denied.
+  await denied(() =>
+    updateDoc(doc(member, 'registrations/invited'), {
+      status: 'cancelled',
+    }),
+  );
+  await denied(() =>
+    updateDoc(doc(member, 'events/event-1'), { currentRegistrations: 1 }),
+  );
   console.log(`Firestore security rules: ${passed} checks passed`);
 } finally {
   await Promise.all(

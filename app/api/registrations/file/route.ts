@@ -7,18 +7,24 @@ import {
   collectRegistrationFilePaths,
   deleteStorageFiles,
 } from '@/lib/server-registration-files';
+import { isSafeStoragePath } from '@/lib/admin-file-download';
 
 const DELETE_LIMIT = 20;
 const DELETE_WINDOW_MS = 10 * 60 * 1000;
 const REG_ID_RE = /^[A-Za-z0-9_-]{1,128}$/;
+const OWN_UPLOAD_RE = /^registrations\/[A-Za-z0-9_-]{1,128}\/([^/]+)\//;
 
 /**
  * DELETE /api/registrations/file?regId=...
+ * DELETE /api/registrations/file?path=...
  *
  * Deletes the Storage attachments referenced by a registration. Owners may
  * delete their own; admins may delete any. File paths are derived from the
  * stored document and must live under registrations/{eventId}/{ownerUid}/ —
  * callers cannot name arbitrary files.
+ *
+ * The path form rolls back an upload whose registration failed; it only
+ * accepts files under the caller's own registrations/{eventId}/{uid}/ prefix.
  */
 export async function DELETE(req: NextRequest) {
   try {
@@ -39,7 +45,21 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    const regId = new URL(req.url).searchParams.get('regId') || '';
+    const params = new URL(req.url).searchParams;
+    const path = params.get('path');
+    if (path !== null) {
+      const match = OWN_UPLOAD_RE.exec(path);
+      if (!match || match[1] !== uid || !isSafeStoragePath(path, match[0])) {
+        return NextResponse.json(
+          { error: 'Invalid file path' },
+          { status: 400 },
+        );
+      }
+      const deleted = await deleteStorageFiles([path]);
+      return NextResponse.json({ success: true, deleted });
+    }
+
+    const regId = params.get('regId') || '';
     if (!REG_ID_RE.test(regId)) {
       return NextResponse.json(
         { error: 'Invalid registration id' },

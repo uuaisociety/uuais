@@ -181,6 +181,8 @@ export default function AccountPage() {
       if (!res.ok)
         throw new Error(body?.error || `Deletion failed (${res.status})`);
       await auth.signOut();
+      // Clear the httpOnly AuthToken cookie, which outlives the deleted account.
+      await fetch('/api/logout', { method: 'POST' }).catch(() => undefined);
       notify({
         type: 'success',
         title: 'Account deleted',

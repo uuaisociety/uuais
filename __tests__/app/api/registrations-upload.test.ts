@@ -52,7 +52,7 @@ describe('POST /api/registrations/upload', () => {
     });
     eventDocRef.get.mockResolvedValue({
       exists: true,
-      data: () => ({ title: 'Event' }),
+      data: () => ({ title: 'Event', published: true }),
     });
   });
 
@@ -99,6 +99,18 @@ describe('POST /api/registrations/upload', () => {
     const { POST } = await import('@/app/api/registrations/upload/route');
     const res = await POST(uploadRequest() as never);
     expect(res.status).toBe(404);
+  });
+
+  it('returns 403 when the event is not published', async () => {
+    mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } });
+    eventDocRef.get.mockResolvedValue({
+      exists: true,
+      data: () => ({ title: 'Draft', published: false }),
+    });
+    const { POST } = await import('@/app/api/registrations/upload/route');
+    const res = await POST(uploadRequest() as never);
+    expect(res.status).toBe(403);
+    expect(mockStorageFile).not.toHaveBeenCalled();
   });
 
   it('rejects non-PDF uploads', async () => {

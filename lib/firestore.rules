@@ -261,11 +261,10 @@ service cloud.firestore {
       allow update: if isAdmin();
     }
 
-    // APPEND-ONLY ADMIN AUDIT TRAIL
+    // APPEND-ONLY ADMIN AUDIT TRAIL — written only by the server (Admin SDK)
     match /adminAuditLogs/{logId} {
       allow read: if isSuperAdmin();
-      allow create: if isAdmin();
-      allow update, delete: if false;
+      allow create, update, delete: if false;
     }
 
     // EVENT ATTENDANCE — admin-only so public event reads never expose attendee IDs

@@ -67,16 +67,17 @@ export async function DELETE(req: NextRequest) {
         (current.get('counted') === undefined &&
           (status === 'registered' || status === 'confirmed'));
 
+      // Firestore transactions require every read before any write.
+      const eventRef =
+        counted && eventId ? adminDb.collection('events').doc(eventId) : null;
+      const event = eventRef ? await transaction.get(eventRef) : null;
+
       transaction.delete(regRef);
 
-      if (counted && eventId) {
-        const eventRef = adminDb.collection('events').doc(eventId);
-        const event = await transaction.get(eventRef);
-        if (event.exists) {
-          const total = event.get('currentRegistrations');
-          const next = Math.max(0, (typeof total === 'number' ? total : 0) - 1);
-          transaction.update(eventRef, { currentRegistrations: next });
-        }
+      if (eventRef && event?.exists) {
+        const total = event.get('currentRegistrations');
+        const next = Math.max(0, (typeof total === 'number' ? total : 0) - 1);
+        transaction.update(eventRef, { currentRegistrations: next });
       }
     });
 

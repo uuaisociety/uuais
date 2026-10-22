@@ -82,6 +82,11 @@ export async function POST(req: NextRequest) {
     const event = await adminDb.collection('events').doc(eventId).get();
     if (!event.exists)
       return NextResponse.json({ error: 'Event not found' }, { status: 404 });
+    if (event.data()?.published !== true)
+      return NextResponse.json(
+        { error: 'Event is not open for registration' },
+        { status: 403 },
+      );
 
     const pdfError = await validatePdfFile(file, 'File');
     if (pdfError)

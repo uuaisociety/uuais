@@ -18,15 +18,20 @@ const DELETE_WINDOW_MS = 60 * 60 * 1000;
  * POST /api/account/delete
  *
  * Self-service erasure: removes the caller's registrations (and attached
- * PDFs), attendance entries, newsletter subscription, profile document, and
- * Firebase Auth account. Required by GDPR Art. 17.
+ * PDFs, releasing any seats they held), attendance entries, showcase votes,
+ * course-planner data, AI chats, profile document (including newsletter
+ * subscription and transcript data), and Firebase Auth account. Required by
+ * GDPR Art. 17. Every step is idempotent, so a failed request can be retried.
  */
 export async function POST(req: NextRequest) {
   const auth = await requireAuth(req);
   if (!auth.ok) return authFailureResponse(auth.reason);
   const { uid } = auth.session;
 
-  if (!checkWindow(`account-delete:${uid}`, DELETE_LIMIT, DELETE_WINDOW_MS)) {
+  if (
+    !checkWindow(`account-delete:${uid}`, DELETE_LIMIT, DELETE_WINDOW_MS)
+      .allowed
+  ) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
   }
 
@@ -54,19 +59,31 @@ export async function POST(req: NextRequest) {
     }
     await deleteStorageFiles(Array.from(filePaths), { failOnError: true });
 
-    let deletedDocs = 0;
-    while (true) {
-      const page = await adminDb
-        .collection('registrations')
-        .where('userId', '==', uid)
-        .limit(400)
-        .get();
-      if (page.empty) break;
-      const batch = adminDb.batch();
-      page.docs.forEach((d) => batch.delete(d.ref));
-      await batch.commit();
-      deletedDocs += page.size;
-      if (deletedDocs > 5000) break;
+    // One transaction per registration so counted seats are released.
+    for (const docSnap of regsSnap.docs) {
+      await adminDb.runTransaction(async (transaction) => {
+        const current = await transaction.get(docSnap.ref);
+        if (!current.exists) return;
+        const status = String(current.get('status') || 'registered');
+        const counted =
+          current.get('counted') === true ||
+          (current.get('counted') === undefined &&
+            (status === 'registered' || status === 'confirmed'));
+        const eventId = current.get('eventId');
+        const eventRef =
+          counted && typeof eventId === 'string' && eventId
+            ? adminDb.collection('events').doc(eventId)
+            : null;
+        const event = eventRef ? await transaction.get(eventRef) : null;
+
+        transaction.delete(docSnap.ref);
+
+        if (eventRef && event?.exists) {
+          const total = event.get('currentRegistrations');
+          const next = Math.max(0, (typeof total === 'number' ? total : 0) - 1);
+          transaction.update(eventRef, { currentRegistrations: next });
+        }
+      });
     }
 
     const attendanceSnap = await adminDb.collection('eventAttendance').get();
@@ -80,17 +97,42 @@ export async function POST(req: NextRequest) {
         await docSnap.ref.update({ entries: filtered });
     }
 
-    await adminDb.collection('users').doc(uid).delete();
+    const votesSnap = await adminDb
+      .collection('showcaseVotes')
+      .where('userId', '==', uid)
+      .get();
+    for (const docSnap of votesSnap.docs) await docSnap.ref.delete();
 
-    let authDeleted = false;
-    try {
-      await adminAuth.deleteUser(uid);
-      authDeleted = true;
-    } catch (err) {
-      console.warn('Failed to delete auth user', uid, err);
+    const categoriesSnap = await adminDb
+      .collection('course_categories')
+      .doc(uid)
+      .collection('categories')
+      .get();
+    for (const docSnap of categoriesSnap.docs) {
+      await adminDb.recursiveDelete(
+        adminDb.collection('category_courses').doc(docSnap.id),
+      );
     }
 
-    return NextResponse.json({ success: true, authDeleted });
+    // recursiveDelete also removes subcollections (e.g. users/{uid}/transcript_data).
+    for (const collection of [
+      'course_categories',
+      'favorites',
+      'ai_chats',
+      'programProgress',
+      'users',
+    ]) {
+      await adminDb.recursiveDelete(adminDb.collection(collection).doc(uid));
+    }
+
+    try {
+      await adminAuth.deleteUser(uid);
+    } catch (err) {
+      if ((err as { code?: unknown })?.code !== 'auth/user-not-found')
+        throw err;
+    }
+
+    return NextResponse.json({ success: true });
   } catch (err) {
     console.error('account deletion error', err);
     return NextResponse.json(
