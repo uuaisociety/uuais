@@ -574,6 +574,103 @@
 }
 .animate-page-in { animation: page-in 0.25s var(--ease-ios) backwards; }
 
+.history-layout {
+  display: grid;
+  gap: 2rem;
+}
+.history-navigation {
+  position: relative;
+  display: flex;
+  width: max-content;
+  gap: 2rem;
+}
+.history-navigation::before {
+  position: absolute;
+  top: 9px;
+  right: 2rem;
+  left: 2rem;
+  height: 1px;
+  background: var(--border);
+  content: "";
+}
+.history-year-button {
+  min-width: 4rem;
+  min-height: 2.75rem;
+  padding: 0.25rem 0.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.history-year-marker {
+  width: 0.625rem;
+  height: 0.625rem;
+  flex: none;
+  border: 1px solid color-mix(in oklch, var(--muted-foreground) 50%, transparent);
+  border-radius: 9999px;
+  background: var(--background);
+  transition: border-color 0.2s var(--ease-ios), background-color 0.2s var(--ease-ios);
+}
+.history-year-button:not([aria-pressed="true"]):hover .history-year-marker {
+  border-color: var(--foreground);
+}
+.history-year-marker-active {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+.history-year-number {
+  font-size: clamp(4.5rem, 9vw, 6rem);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+@media (min-width: 1024px) {
+  .history-layout {
+    grid-template-columns: minmax(15rem, 0.8fr) 5.5rem minmax(0, 1.6fr);
+    align-items: center;
+    column-gap: 2.5rem;
+  }
+  .history-navigation {
+    width: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+  .history-navigation::before {
+    top: 1.375rem;
+    right: auto;
+    left: 13px;
+    width: 1px;
+    height: auto;
+    bottom: 1.375rem;
+  }
+  .history-year-button {
+    min-width: 0;
+    flex-direction: row;
+    gap: 0.75rem;
+  }
+}
+
+.history-year-panels { display: grid; }
+.history-year-panel {
+  grid-area: 1 / 1;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.22s var(--ease-ios), visibility 0s linear 0.22s;
+}
+.history-year-panel-active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .history-year-panel,
+  .history-year-panel-active {
+    transition: none;
+  }
+}
+
 /* Requirements popover — a soft flow-in from the edge of the card it belongs to, so
    the panel reads as emerging from that course rather than appearing on top of the
    map. Short enough not to delay a reader skimming several courses in a row. */
