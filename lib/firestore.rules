@@ -35,11 +35,6 @@ service cloud.firestore {
       return request.resource.data.diff(resource.data).affectedKeys().hasOnly(allowed);
     }
 
-    // Helper: field unchanged equality
-    function unchanged(field) {
-      return request.resource.data[field] == resource.data[field];
-    }
-
     // Helper: an optional string field is absent, or a string within `max`
     function strWithin(data, field, max) {
       return !(field in data) || (data[field] is string && data[field].size() <= max);
@@ -76,16 +71,18 @@ service cloud.firestore {
         && emailMatchesAuth()
         // Limit client-writable fields; prevent role escalation
         && request.resource.data.keys().hasOnly([
-          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails','eventHistory'
+          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails'
         ]);
 
       // Update own doc but cannot alter privileged fields except allowed ones.
-      // isMember is admin-managed: users set it once at create, then only admins may change it.
+      // isMember is admin-managed: users set it once (at create, or on a doc that lacks it), then only admins may change it.
+      // Check changed keys, not all keys: existing docs hold isMember and createdAt, which must stay untouched.
       allow update: if isSignedIn() && request.auth.uid == uid
         && emailMatchesAuth()
-        && request.resource.data.keys().hasOnly([
-          'displayName','email','photoURL','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails','eventHistory'
-        ]);
+        && changedOnly([
+          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails'
+        ])
+        && (!('isMember' in resource.data) || request.resource.data.get('isMember', null) == resource.data.isMember);
 
       // Admin full control
       allow create, update, delete: if isAdmin();

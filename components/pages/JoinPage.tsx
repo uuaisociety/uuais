@@ -1,5 +1,4 @@
-'use client'
-
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
@@ -9,7 +8,12 @@ import { GithubIcon, GoogleIcon } from '@hugeicons/core-free-icons';
 import { updatePageMeta } from '@/utils/seo';
 import type { UserProfile } from '@/lib/firestore/users';
 import Link from 'next/link';
-import { FieldGroup, InputBase, SelectBase, TextareaBase } from '@/components/ui/Form';
+import {
+  FieldGroup,
+  InputBase,
+  SelectBase,
+  TextareaBase,
+} from '@/components/ui/Form';
 import { useNotify } from '@/components/ui/Notifications';
 import { DiscordCta } from '@/components/common/DiscordCta';
 import { useRouter } from 'next/navigation';
@@ -25,7 +29,10 @@ const JoinPage: React.FC = () => {
   const { notify } = useNotify();
 
   useEffect(() => {
-    updatePageMeta('Join Us', 'Create an account and become a member of UU AI Society');
+    updatePageMeta(
+      'Join Us',
+      'Create an account and become a member of UU AI Society',
+    );
   }, []);
 
   useEffect(() => {
@@ -49,7 +56,10 @@ const JoinPage: React.FC = () => {
           ...prev,
           ...(p || { isMember: true }),
           // default fallbacks from auth
-          displayName: p?.displayName ?? u.displayName ?? (u.email ? u.email.split('@')[0] : prev.displayName),
+          displayName:
+            p?.displayName ??
+            u.displayName ??
+            (u.email ? u.email.split('@')[0] : prev.displayName),
           email: p?.email ?? u.email ?? prev.email,
         }));
       });
@@ -62,30 +72,49 @@ const JoinPage: React.FC = () => {
 
   // Warn before leaving with an unfinished registration (the RegistrationGate signs the user out off /join).
   useEffect(() => {
-    const incomplete = Boolean(uid) && !(Boolean(profile?.isMember) && Boolean(profile?.privacyAcceptedAt));
+    const incomplete =
+      Boolean(uid) &&
+      !(Boolean(profile?.isMember) && Boolean(profile?.privacyAcceptedAt));
     if (!incomplete) return;
 
     const beforeUnload = (e: BeforeUnloadEvent) => {
       e.preventDefault();
-      e.returnValue = "";
+      e.returnValue = '';
     };
-    window.addEventListener("beforeunload", beforeUnload);
+    window.addEventListener('beforeunload', beforeUnload);
 
     const confirmLeave = () =>
-      window.confirm("Are you sure you want to leave? Your registration is not complete yet.");
+      window.confirm(
+        'Are you sure you want to leave? Your registration is not complete yet.',
+      );
 
     // Client-side navigation (header links, cards) doesn't fire beforeunload, so intercept it here.
     // Capture phase fires BEFORE Next.js Link's own onClick, otherwise Link navigates first and the guard never runs.
     const onClick = (e: MouseEvent) => {
-      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      const anchor = (e.target as Element | null)?.closest?.("a");
+      if (
+        e.defaultPrevented ||
+        e.button !== 0 ||
+        e.metaKey ||
+        e.ctrlKey ||
+        e.shiftKey ||
+        e.altKey
+      )
+        return;
+      const anchor = (e.target as Element | null)?.closest?.('a');
       if (!anchor) return;
-      const href = anchor.getAttribute("href");
+      const href = anchor.getAttribute('href');
       if (!href) return;
-      if (anchor.target && anchor.target !== "_self") return;
-      if (href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("javascript:")) return;
+      if (anchor.target && anchor.target !== '_self') return;
+      if (
+        href.startsWith('#') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:') ||
+        href.startsWith('javascript:')
+      )
+        return;
       const url = new URL(href, window.location.href);
-      if (url.origin !== window.location.origin || url.pathname === "/join") return;
+      if (url.origin !== window.location.origin || url.pathname === '/join')
+        return;
 
       e.preventDefault();
       e.stopPropagation();
@@ -93,11 +122,11 @@ const JoinPage: React.FC = () => {
         router.push(url.pathname + url.search + url.hash);
       }
     };
-    document.addEventListener("click", onClick, true);
+    document.addEventListener('click', onClick, true);
 
     return () => {
-      window.removeEventListener("beforeunload", beforeUnload);
-      document.removeEventListener("click", onClick, true);
+      window.removeEventListener('beforeunload', beforeUnload);
+      document.removeEventListener('click', onClick, true);
     };
   }, [uid, profile, router]);
 
@@ -108,9 +137,12 @@ const JoinPage: React.FC = () => {
       const data: Partial<UserProfile> = {
         ...form,
         isMember: true,
-        privacyAcceptedAt: privacyAccepted ? new Date().toISOString() : undefined,
+        privacyAcceptedAt: privacyAccepted
+          ? new Date().toISOString()
+          : undefined,
       };
-      const { upsertUserProfile, updateUserProfile, getUserProfile } = await import('@/lib/firestore/users');
+      const { upsertUserProfile, updateUserProfile, getUserProfile } =
+        await import('@/lib/firestore/users');
       if (!profile) {
         await upsertUserProfile(uid, data);
       } else {
@@ -121,11 +153,17 @@ const JoinPage: React.FC = () => {
       // Refresh the shared useAdmin store so RegistrationGate doesn't bounce the user back to /join.
       const { refreshProfile } = await import('@/hooks/useAdmin');
       await refreshProfile();
-      notify({ type: 'success', title: 'Saved', message: 'Profile saved successfully.' });
+      notify({
+        type: 'success',
+        title: 'Saved',
+        message: 'Profile saved successfully.',
+      });
       // Registration is often a detour (e.g. an application form) — return there, not /account.
       router.push(currentRedirect() || '/account');
-    } catch {
-      // Error silently handled
+    } catch (e: unknown) {
+      const msg =
+        e instanceof Error ? e.message : 'Could not save your profile.';
+      notify({ type: 'error', title: 'Save failed', message: msg });
     } finally {
       setSaving(false);
     }
@@ -135,35 +173,66 @@ const JoinPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 dark:[color-scheme:dark]">
       <div className="max-w-3xl mx-auto px-4 space-y-8">
         <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">Join UU AI Society</h1>
-          <p className="text-gray-600 dark:text-gray-300">Create an account to become a member of UU AI Society.</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">
+            Join UU AI Society
+          </h1>
+          <p className="text-gray-600 dark:text-gray-300">
+            Create an account to become a member of UU AI Society.
+          </p>
         </div>
 
         {/* Logged-in/member banner */}
-        {uid && (
-          (profile?.isMember && profile?.privacyAcceptedAt) ? (
+        {uid &&
+          (profile?.isMember && profile?.privacyAcceptedAt ? (
             <div className="p-4 rounded-md border border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950 text-blue-900 dark:text-blue-200">
-              You are logged in {form.displayName ? `as ${form.displayName}` : ''}. You are already a member. Manage your details anytime in <Link href="/account">your account settings</Link>.
+              You are logged in{' '}
+              {form.displayName ? `as ${form.displayName}` : ''}. You are
+              already a member. Manage your details anytime in{' '}
+              <Link href="/account">your account settings</Link>.
             </div>
           ) : (
             <div className="p-4 rounded-md border border-yellow-200 dark:border-yellow-900 bg-yellow-50 dark:bg-yellow-950 text-yellow-900 dark:text-yellow-200">
-              To access this resource, please complete your profile below and accept the privacy policy.
+              To access this resource, please complete your profile below and
+              accept the privacy policy.
             </div>
-          )
-        )}
+          ))}
 
         {!uid && (
           <Card>
             <CardHeader>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Create Account</h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">Use one of the providers below.</p>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Create Account
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">
+                Use one of the providers below.
+              </p>
             </CardHeader>
             <CardContent className="space-y-3 flex flex-col md:flex-col justify-center gap-2 pt-4 items-center max-w-md mx-auto">
-              <Button onClick={() => { void import('@/lib/firebase-client').then((m) => m.signInWithGooglePopup()); }} variant="outline">
-                <span className="flex items-center gap-2"><HugeiconsIcon icon={GoogleIcon} className="h-4 w-4"/> Continue with Google</span>
+              <Button
+                onClick={() => {
+                  void import('@/lib/firebase-client').then((m) =>
+                    m.signInWithGooglePopup(),
+                  );
+                }}
+                variant="outline"
+              >
+                <span className="flex items-center gap-2">
+                  <HugeiconsIcon icon={GoogleIcon} className="h-4 w-4" />{' '}
+                  Continue with Google
+                </span>
               </Button>
-              <Button onClick={() => { void import('@/lib/firebase-client').then((m) => m.signInWithGithubPopup()); }} variant="outline">
-                <span className="flex items-center gap-2"><HugeiconsIcon icon={GithubIcon} className="h-4 w-4"/> Continue with GitHub</span>
+              <Button
+                onClick={() => {
+                  void import('@/lib/firebase-client').then((m) =>
+                    m.signInWithGithubPopup(),
+                  );
+                }}
+                variant="outline"
+              >
+                <span className="flex items-center gap-2">
+                  <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />{' '}
+                  Continue with GitHub
+                </span>
               </Button>
             </CardContent>
           </Card>
@@ -172,64 +241,185 @@ const JoinPage: React.FC = () => {
         {uid && (
           <Card>
             <CardHeader>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Complete your profile</h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">These details help us serve members better. You can edit them anytime in <Link href="/account" className="underline">your account settings</Link>.</p>
+              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                Complete your profile
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">
+                These details help us serve members better. You can edit them
+                anytime in{' '}
+                <Link href="/account" className="underline">
+                  your account settings
+                </Link>
+                .
+              </p>
             </CardHeader>
             <CardContent className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Personal Information
+              </h3>
               <div className="grid md:grid-cols-2 gap-4">
-                <FieldGroup label="Display name" requiredHint="Required. Shown publicly.">
-                  <InputBase maxLength={100} placeholder="e.g. Alex" value={form.displayName || ''} onChange={(e) => setForm(f => ({ ...f, displayName: e.target.value }))} />
+                <FieldGroup
+                  label="Display name"
+                  requiredHint="Required. Shown publicly."
+                >
+                  <InputBase
+                    maxLength={100}
+                    placeholder="e.g. Alex"
+                    value={form.displayName || ''}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, displayName: e.target.value }))
+                    }
+                  />
                 </FieldGroup>
                 <FieldGroup label="Full name" requiredHint="Required">
-                  <InputBase maxLength={100} placeholder="e.g. Alex Doe" value={form.name || ''} onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))} />
+                  <InputBase
+                    maxLength={100}
+                    placeholder="e.g. Alex Doe"
+                    value={form.name || ''}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, name: e.target.value }))
+                    }
+                  />
                 </FieldGroup>
               </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Contact & Social</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Contact & Social
+              </h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <FieldGroup label="Student status" requiredHint="Optional.">
-                  <SelectBase value={form.studentStatus ?? 'student'} onChange={(e) => setForm(f => ({ ...f, studentStatus: e.target.value as 'student' | 'alumni' | 'other' }))}>
+                  <SelectBase
+                    value={form.studentStatus ?? 'student'}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        studentStatus: e.target.value as
+                          'student' | 'alumni' | 'other',
+                      }))
+                    }
+                  >
                     <option value="student">Student</option>
                     <option value="alumni">Alumni</option>
                     <option value="other">Other</option>
                   </SelectBase>
                 </FieldGroup>
                 <FieldGroup label="Campus" requiredHint="Optional">
-                  <SelectBase value={form.campus ?? 'Uppsala'} onChange={(e) => setForm(f => ({ ...f, campus: e.target.value as 'Uppsala' | 'Gotland' | 'other' }))}>
+                  <SelectBase
+                    value={form.campus ?? 'Uppsala'}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        campus: e.target.value as
+                          'Uppsala' | 'Gotland' | 'other',
+                      }))
+                    }
+                  >
                     <option value="Uppsala">Uppsala</option>
                     <option value="Gotland">Gotland</option>
                     <option value="other">Other</option>
                   </SelectBase>
                 </FieldGroup>
                 <FieldGroup label="LinkedIn URL" requiredHint="Optional">
-                  <InputBase maxLength={200} placeholder="https://linkedin.com/in/..." inputMode="url" autoComplete="url" value={form.linkedin || ''} onChange={(e) => setForm(f => ({ ...f, linkedin: e.target.value }))} />
+                  <InputBase
+                    maxLength={200}
+                    placeholder="https://linkedin.com/in/..."
+                    inputMode="url"
+                    autoComplete="url"
+                    value={form.linkedin || ''}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, linkedin: e.target.value }))
+                    }
+                  />
                 </FieldGroup>
                 <FieldGroup label="GitHub URL" requiredHint="Optional">
-                  <InputBase maxLength={200} placeholder="https://github.com/username" inputMode="url" autoComplete="url" value={form.github || ''} onChange={(e) => setForm(f => ({ ...f, github: e.target.value }))} />
+                  <InputBase
+                    maxLength={200}
+                    placeholder="https://github.com/username"
+                    inputMode="url"
+                    autoComplete="url"
+                    value={form.github || ''}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, github: e.target.value }))
+                    }
+                  />
                 </FieldGroup>
                 <FieldGroup label="Website" requiredHint="Optional">
-                  <InputBase maxLength={500} placeholder="https://example.com" inputMode="url" autoComplete="url" value={form.website || ''} onChange={(e) => setForm(f => ({ ...f, website: e.target.value }))} />
+                  <InputBase
+                    maxLength={500}
+                    placeholder="https://example.com"
+                    inputMode="url"
+                    autoComplete="url"
+                    value={form.website || ''}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, website: e.target.value }))
+                    }
+                  />
                 </FieldGroup>
               </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Academic Information</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Academic Information
+              </h3>
               <div className="grid md:grid-cols-2 gap-4">
-                <FieldGroup label="University" requiredHint="Required if student.">
-                  <SelectBase value={form.university ?? 'Uppsala'} onChange={(e) => setForm(f => ({ ...f, university: e.target.value as 'Uppsala' | 'none' | 'other' }))}>
+                <FieldGroup
+                  label="University"
+                  requiredHint="Required if student."
+                >
+                  <SelectBase
+                    value={form.university ?? 'Uppsala'}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        university: e.target.value as
+                          'Uppsala' | 'none' | 'other',
+                      }))
+                    }
+                  >
                     <option value="Uppsala">Uppsala</option>
                     <option value="none">None</option>
                     <option value="other">Other</option>
                   </SelectBase>
                 </FieldGroup>
-                <FieldGroup label="Program / Major" requiredHint="Required if student.">
-                  <InputBase maxLength={200} placeholder="e.g. Computer Science" value={form.program || ''} onChange={(e) => setForm(f => ({ ...f, program: e.target.value }))} />
+                <FieldGroup
+                  label="Program / Major"
+                  requiredHint="Required if student."
+                >
+                  <InputBase
+                    maxLength={200}
+                    placeholder="e.g. Computer Science"
+                    value={form.program || ''}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, program: e.target.value }))
+                    }
+                  />
                 </FieldGroup>
-                <FieldGroup label="Expected Graduation Year" requiredHint="Optional">
-                  <InputBase placeholder="e.g. 2026" type="number" min={1900} max={2100} value={form.expectedGraduationYear ?? ''} onChange={(e) => setForm(f => ({ ...f, expectedGraduationYear: e.target.value ? Number(e.target.value) : undefined }))} />
+                <FieldGroup
+                  label="Expected Graduation Year"
+                  requiredHint="Optional"
+                >
+                  <InputBase
+                    placeholder="e.g. 2026"
+                    type="number"
+                    min={1900}
+                    max={2100}
+                    value={form.expectedGraduationYear ?? ''}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        expectedGraduationYear: e.target.value
+                          ? Number(e.target.value)
+                          : undefined,
+                      }))
+                    }
+                  />
                 </FieldGroup>
                 <FieldGroup label="Gender" requiredHint="Optional">
-                  <SelectBase value={form.gender || 'other'} onChange={(e) => setForm(f => ({ ...f, gender: e.target.value }))}>
+                  <SelectBase
+                    value={form.gender || 'other'}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, gender: e.target.value }))
+                    }
+                  >
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="nonbinary">Non-binary</option>
@@ -240,15 +430,18 @@ const JoinPage: React.FC = () => {
               </div>
               {/* Heard of us */}
               <div className="grid md:grid-cols-2 gap-4">
-                <FieldGroup label="How did you hear of us?" requiredHint="Optional">
+                <FieldGroup
+                  label="How did you hear of us?"
+                  requiredHint="Optional"
+                >
                   <SelectBase
                     value={form.heardOfUs || ''}
-                    onChange={(e)=>{
+                    onChange={(e) => {
                       const v = e.target.value;
                       if (v === 'other') {
-                        setForm(f=>({ ...f, heardOfUs: '' }));
+                        setForm((f) => ({ ...f, heardOfUs: '' }));
                       } else {
-                        setForm(f=>({ ...f, heardOfUs: v }));
+                        setForm((f) => ({ ...f, heardOfUs: v }));
                       }
                     }}
                   >
@@ -262,45 +455,132 @@ const JoinPage: React.FC = () => {
                     <option value="other">Other</option>
                   </SelectBase>
                 </FieldGroup>
-                {(form.heardOfUs === '' || (form.heardOfUs && !['posters','instagram','linkedin','friends','events','lecture'].includes(form.heardOfUs))) && (
-                  <FieldGroup label="If other, please specify" requiredHint="Optional">
-                    <InputBase maxLength={200} placeholder="Type here" value={form.heardOfUs || ''} onChange={(e)=>setForm(f=>({...f, heardOfUs: e.target.value}))} />
+                {(form.heardOfUs === '' ||
+                  (form.heardOfUs &&
+                    ![
+                      'posters',
+                      'instagram',
+                      'linkedin',
+                      'friends',
+                      'events',
+                      'lecture',
+                    ].includes(form.heardOfUs))) && (
+                  <FieldGroup
+                    label="If other, please specify"
+                    requiredHint="Optional"
+                  >
+                    <InputBase
+                      maxLength={200}
+                      placeholder="Type here"
+                      value={form.heardOfUs || ''}
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, heardOfUs: e.target.value }))
+                      }
+                    />
                   </FieldGroup>
                 )}
               </div>
               <FieldGroup label="Bio" requiredHint="Optional">
-                <TextareaBase maxLength={500} placeholder="Write a short bio" value={form.bio || ''} onChange={(e) => setForm(f => ({ ...f, bio: e.target.value }))} />
+                <TextareaBase
+                  maxLength={500}
+                  placeholder="Write a short bio"
+                  value={form.bio || ''}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, bio: e.target.value }))
+                  }
+                />
               </FieldGroup>
               <div className="flex items-center gap-6">
                 <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input type="checkbox" checked={!!form.newsletter} onChange={(e) => setForm(f => ({ ...f, newsletter: e.target.checked }))} />
+                  <input
+                    type="checkbox"
+                    checked={!!form.newsletter}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, newsletter: e.target.checked }))
+                    }
+                  />
                   Subscribe to newsletter
                 </label>
                 <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input type="checkbox" checked={!!form.lookingForJob} onChange={(e) => setForm(f => ({ ...f, lookingForJob: e.target.checked }))} />
+                  <input
+                    type="checkbox"
+                    checked={!!form.lookingForJob}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        lookingForJob: e.target.checked,
+                      }))
+                    }
+                  />
                   Looking for job opportunities
                 </label>
               </div>
               <div className="flex flex-col gap-3 pt-2">
                 <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input type="checkbox" checked={privacyAccepted} onChange={(e) => setPrivacyAccepted(e.target.checked)} />
-                  I accept the <a className="underline" href="/privacy" target="_blank" rel="noreferrer">Privacy Policy</a> (required)
+                  <input
+                    type="checkbox"
+                    checked={privacyAccepted}
+                    onChange={(e) => setPrivacyAccepted(e.target.checked)}
+                  />
+                  I accept the{' '}
+                  <a
+                    className="underline"
+                    href="/privacy"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Privacy Policy
+                  </a>{' '}
+                  (required)
                 </label>
                 <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input type="checkbox" checked={!!form.marketingOptIn} onChange={(e) => setForm(f => ({ ...f, marketingOptIn: e.target.checked }))} />
+                  <input
+                    type="checkbox"
+                    checked={!!form.marketingOptIn}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        marketingOptIn: e.target.checked,
+                      }))
+                    }
+                  />
                   Allow marketing communications
                 </label>
                 <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input type="checkbox" checked={!!form.analyticsOptIn} onChange={(e) => setForm(f => ({ ...f, analyticsOptIn: e.target.checked }))} />
+                  <input
+                    type="checkbox"
+                    checked={!!form.analyticsOptIn}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        analyticsOptIn: e.target.checked,
+                      }))
+                    }
+                  />
                   Allow anonymous analytics
                 </label>
                 <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input type="checkbox" checked={!!form.partnerContactOptIn} onChange={(e) => setForm(f => ({ ...f, partnerContactOptIn: e.target.checked }))} />
+                  <input
+                    type="checkbox"
+                    checked={!!form.partnerContactOptIn}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        partnerContactOptIn: e.target.checked,
+                      }))
+                    }
+                  />
                   Allow contact from partner companies
                 </label>
               </div>
               <div className="flex justify-end">
-                <Button variant="outline" disabled={saving || !privacyAccepted} onClick={handleSave}>{saving ? 'Saving...' : 'Save & Become Member'}</Button>
+                <Button
+                  variant="outline"
+                  disabled={saving || !privacyAccepted}
+                  onClick={handleSave}
+                >
+                  {saving ? 'Saving...' : 'Save & Become Member'}
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -310,10 +590,16 @@ const JoinPage: React.FC = () => {
 
         <Card>
           <CardHeader>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Already a member?</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+              Already a member?
+            </h2>
           </CardHeader>
           <CardContent>
-            <p className="text-gray-600 dark:text-gray-300">Manage your profile and linked accounts in <Link href="/account">your account settings</Link>. Your event applications appear there as well.</p>
+            <p className="text-gray-600 dark:text-gray-300">
+              Manage your profile and linked accounts in{' '}
+              <Link href="/account">your account settings</Link>. Your event
+              applications appear there as well.
+            </p>
           </CardContent>
         </Card>
       </div>
