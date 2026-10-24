@@ -70,6 +70,29 @@ try {
     currentRegistrations: { integerValue: '0' },
     maxCapacity: { integerValue: '10' },
   });
+  await seed('users/profile-1', {
+    displayName: { stringValue: 'Profile' },
+    studentStatus: { stringValue: 'student' },
+    isMember: { booleanValue: false },
+    createdAt: { stringValue: '2026-01-01T00:00:00.000Z' },
+  });
+  // Stub doc as left by an admin attendance write: no isMember yet.
+  await seed('users/profile-2', {
+    eventHistory: {
+      arrayValue: {
+        values: [
+          {
+            mapValue: {
+              fields: {
+                eventId: { stringValue: 'event-1' },
+                attended: { booleanValue: true },
+              },
+            },
+          },
+        ],
+      },
+    },
+  });
   const anonymous = client('anonymous');
   const member = client('member', { sub: 'member-1' });
   const admin = client('admin', { sub: 'admin-1', admin: true });
@@ -77,6 +100,9 @@ try {
     sub: 'super-admin-1',
     superAdmin: true,
   });
+  const profileOwner = client('profile-owner', { sub: 'profile-1' });
+  const stubOwner = client('stub-owner', { sub: 'profile-2' });
+  const newUser = client('new-user', { sub: 'profile-3' });
   await denied(() => getDoc(doc(anonymous, 'teamMembers/private')));
   await denied(() => getDoc(doc(member, 'teamMembers/private')));
   for (const db of [admin, superAdmin]) {
@@ -124,6 +150,48 @@ try {
   );
   await denied(() =>
     updateDoc(doc(member, 'events/event-1'), { currentRegistrations: 1 }),
+  );
+  // Profile docs already hold isMember and createdAt; they must not block
+  // edits to other fields, but users may not change them or add new keys.
+  await updateDoc(doc(profileOwner, 'users/profile-1'), {
+    studentStatus: 'alumni',
+    updatedAt: new Date().toISOString(),
+  });
+  passed++;
+  await denied(() =>
+    updateDoc(doc(profileOwner, 'users/profile-1'), { isMember: true }),
+  );
+  await denied(() =>
+    updateDoc(doc(profileOwner, 'users/profile-1'), { createdAt: 'forged' }),
+  );
+  await denied(() =>
+    updateDoc(doc(profileOwner, 'users/profile-1'), { id: 'profile-1' }),
+  );
+  // Attendance history is admin-recorded; users may not write their own.
+  await denied(() =>
+    updateDoc(doc(profileOwner, 'users/profile-1'), {
+      eventHistory: [{ eventId: 'event-1', attended: true }],
+    }),
+  );
+  await denied(() =>
+    setDoc(doc(newUser, 'users/profile-3'), {
+      displayName: 'New',
+      eventHistory: [{ eventId: 'event-1', attended: true }],
+    }),
+  );
+  await setDoc(doc(newUser, 'users/profile-3'), {
+    displayName: 'New',
+    isMember: true,
+  });
+  passed++;
+  // A doc without isMember may gain it, as at create (the /join flow).
+  await updateDoc(doc(stubOwner, 'users/profile-2'), {
+    isMember: true,
+    privacyAcceptedAt: new Date().toISOString(),
+  });
+  passed++;
+  await denied(() =>
+    updateDoc(doc(stubOwner, 'users/profile-2'), { isMember: false }),
   );
   console.log(`Firestore security rules: ${passed} checks passed`);
 } finally {

@@ -116,6 +116,7 @@ firebase deploy --only firestore:indexes
 - `npm run test:coverage` - Runs Jest with coverage report
 - `npm run test:integration` - Runs API route tests (Jest integration config)
 - `npm run test:e2e` - Runs Playwright E2E smoke tests (starts dev server automatically)
+- `npm run test:rules` - Runs Firestore security rules checks against a throwaway emulator
 - `npm run security` - Runs a Snyk dependency scan (requires `snyk auth`)
 - `npm run set:admin -- <email> true` - Sets an admin user
 - `npm run set:admin -- <email> false` - Removes an admin user
@@ -133,8 +134,11 @@ npm run test:coverage  # Run with coverage report
 npm run test:integration  # API route tests (mocked Firebase)
 npm run test:e2e    # Playwright E2E smoke tests (auto-starts dev server)
 npm run test:vercel # Clean local install and production build approximation
+npm run test:rules  # Firestore security rules against a throwaway emulator (needs Java)
 node scripts/test-vercel-build.test.mjs
 ```
+
+`npm run test:rules` starts its own Firestore emulator on port 8089 (`lib/firebase.rules-test.json`, project `demo-uuais-security`), so it can run alongside `npm run emulators`.
 
 CI (`.github/workflows/ci.yml`) runs lint, type checking, and all three test suites on every push/PR.
 

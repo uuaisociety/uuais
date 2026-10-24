@@ -24,7 +24,7 @@
     "test:vercel": "node scripts/test-vercel-build.mjs",
     "security": "npm audit",
     "prepare": "husky",
-    "test:rules": "node scripts/test-firestore-security.mjs",
+    "test:rules": "firebase emulators:exec --only firestore --config lib/firebase.rules-test.json --project demo-uuais-security \"node scripts/test-firestore-security.mjs\"",
     "format": "prettier --write . --ignore-unknown",
     "format:check": "prettier --check . --ignore-unknown"
   },
