@@ -16,3 +16,5 @@ export * from './firestore/courses';
 export * from './firestore/applicationCampaigns';
 export * from './firestore/campaignQuestions';
 export * from './firestore/teamApplications';
+export * from './firestore/cvs';
+export * from './firestore/partners';

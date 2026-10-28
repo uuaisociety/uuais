@@ -82,10 +82,30 @@ service cloud.firestore {
         && changedOnly([
           'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails'
         ])
-        && (!('isMember' in resource.data) || request.resource.data.get('isMember', null) == resource.data.isMember);
+        && (!('isMember' in resource.data) || request.resource.data.get('isMember', null) == resource.data.isMember)
+        // A shared CV implies partner contact: the opt-in stays on until the CV is removed.
+        && (!exists(/databases/$(database)/documents/cvs/$(uid))
+          || request.resource.data.get('partnerContactOptIn', false) == true);
 
       // Admin full control
       allow create, update, delete: if isAdmin();
+    }
+
+    // MEMBER CVS — shared with partners on consent; written only by /api/account/cv (Admin SDK).
+    match /cvs/{uid} {
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
+      allow write: if false;
+    }
+
+    // PARTNER ALLOWLIST — keyed by lowercased email. A signed-in user may read only
+    // the entry for their own verified email (so the client knows it is a partner);
+    // CV access itself is re-checked server-side on every request.
+    match /partnerAccounts/{email} {
+      allow read: if isAdmin()
+        || (isSignedIn()
+          && request.auth.token.email_verified == true
+          && request.auth.token.email.lower() == email);
+      allow write: if isAdmin();
     }
 
     // EVENTS

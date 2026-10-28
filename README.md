@@ -120,6 +120,8 @@ firebase deploy --only firestore:indexes
 - `npm run security` - Runs a Snyk dependency scan (requires `snyk auth`)
 - `npm run set:admin -- <email> true` - Sets an admin user
 - `npm run set:admin -- <email> false` - Removes an admin user
+- `npm run add:partner -- <email> [company]` - Gives a partner company access to shared CVs
+- `npm run remove:partner -- <email>` - Removes that access
 
 ## Testing
 

@@ -8,6 +8,9 @@ export interface ServerSession {
   uid: string;
   isAdmin: boolean;
   isSuperAdmin: boolean;
+  /** Sign-in email, used to match the partner allowlist (see lib/partner-access). */
+  email?: string;
+  emailVerified: boolean;
 }
 
 export type AuthFailureReason = 'no-auth' | 'invalid-token' | 'not-admin';
@@ -27,6 +30,8 @@ async function resolveSession(req: NextRequest): Promise<AuthResult> {
         uid: decoded.uid,
         isAdmin: decoded.admin === true || decoded.superAdmin === true,
         isSuperAdmin: decoded.superAdmin === true,
+        email: decoded.email,
+        emailVerified: decoded.email_verified === true,
       },
     };
   } catch (err) {
@@ -41,7 +46,8 @@ export async function requireAuth(req: NextRequest): Promise<AuthResult> {
 
 export async function requireAdmin(req: NextRequest): Promise<AuthResult> {
   const result = await resolveSession(req);
-  if (result.ok && !result.session.isAdmin) return { ok: false, reason: 'not-admin' };
+  if (result.ok && !result.session.isAdmin)
+    return { ok: false, reason: 'not-admin' };
   return result;
 }
 
@@ -58,6 +64,8 @@ export async function getServerSession(): Promise<ServerSession | null> {
       uid: decoded.uid,
       isAdmin: decoded.admin === true || decoded.superAdmin === true,
       isSuperAdmin: decoded.superAdmin === true,
+      email: decoded.email,
+      emailVerified: decoded.email_verified === true,
     };
   } catch {
     return null;
@@ -66,7 +74,10 @@ export async function getServerSession(): Promise<ServerSession | null> {
 
 export function authFailureResponse(reason: AuthFailureReason): NextResponse {
   if (reason === 'not-admin') {
-    return NextResponse.json({ error: 'Forbidden: Admin access required' }, { status: 403 });
+    return NextResponse.json(
+      { error: 'Forbidden: Admin access required' },
+      { status: 403 },
+    );
   }
   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 }

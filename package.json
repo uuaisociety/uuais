@@ -16,6 +16,8 @@
     "set:admin": "ts-node tools/setAdminClaim.ts",
     "remove:admin": "ts-node tools/removeAdminClaim.ts",
     "set:superadmin": "ts-node tools/setSuperAdminClaim.ts",
+    "add:partner": "ts-node tools/partnerAccess.ts add",
+    "remove:partner": "ts-node tools/partnerAccess.ts remove",
     "test": "jest --silent",
     "test:watch": "jest --watch",
     "test:coverage": "jest --config jest.config.ts --coverage",

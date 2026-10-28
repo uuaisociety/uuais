@@ -75,6 +75,15 @@ try {
     studentStatus: { stringValue: 'student' },
     isMember: { booleanValue: false },
     createdAt: { stringValue: '2026-01-01T00:00:00.000Z' },
+    // profile-1 shares a CV (cvs/profile-1 below), which keeps partner contact on.
+    partnerContactOptIn: { booleanValue: true },
+  });
+  await seed('partnerAccounts/hr@partner.example', {
+    email: { stringValue: 'hr@partner.example' },
+  });
+  await seed('cvs/profile-1', {
+    path: { stringValue: 'cvs/profile-1/cv.pdf' },
+    consentAt: { stringValue: '2026-10-28T00:00:00.000Z' },
   });
   // Stub doc as left by an admin attendance write: no isMember yet.
   await seed('users/profile-2', {
@@ -103,6 +112,16 @@ try {
   const profileOwner = client('profile-owner', { sub: 'profile-1' });
   const stubOwner = client('stub-owner', { sub: 'profile-2' });
   const newUser = client('new-user', { sub: 'profile-3' });
+  const partner = client('partner', {
+    sub: 'partner-1',
+    email: 'HR@Partner.example',
+    email_verified: true,
+  });
+  const unverifiedPartner = client('unverified-partner', {
+    sub: 'partner-2',
+    email: 'hr@partner.example',
+    email_verified: false,
+  });
   await denied(() => getDoc(doc(anonymous, 'teamMembers/private')));
   await denied(() => getDoc(doc(member, 'teamMembers/private')));
   for (const db of [admin, superAdmin]) {
@@ -193,6 +212,52 @@ try {
   await denied(() =>
     updateDoc(doc(stubOwner, 'users/profile-2'), { isMember: false }),
   );
+  // CV consent records are server-written; owners and admins may only read them.
+  for (const db of [profileOwner, admin]) {
+    assert.equal(
+      (await getDoc(doc(db, 'cvs/profile-1'))).get('path'),
+      'cvs/profile-1/cv.pdf',
+    );
+    passed++;
+  }
+  await denied(() => getDoc(doc(member, 'cvs/profile-1')));
+  // While a CV is shared the partner-contact opt-in can't be switched off...
+  await denied(() =>
+    updateDoc(doc(profileOwner, 'users/profile-1'), {
+      partnerContactOptIn: false,
+    }),
+  );
+  // ...but a member without a shared CV may opt out.
+  await updateDoc(doc(stubOwner, 'users/profile-2'), {
+    partnerContactOptIn: false,
+  });
+  passed++;
+  await denied(() =>
+    updateDoc(doc(profileOwner, 'cvs/profile-1'), { consentAt: 'forged' }),
+  );
+  await denied(() =>
+    setDoc(doc(member, 'cvs/member-1'), { path: 'cvs/member-1/cv.pdf' }),
+  );
+  // The partner allowlist: readable only for your own verified email (any case),
+  // writable only by admins.
+  assert.equal(
+    (await getDoc(doc(partner, 'partnerAccounts/hr@partner.example'))).exists(),
+    true,
+  );
+  passed++;
+  await denied(() =>
+    getDoc(doc(unverifiedPartner, 'partnerAccounts/hr@partner.example')),
+  );
+  await denied(() => getDoc(doc(member, 'partnerAccounts/hr@partner.example')));
+  await denied(() =>
+    setDoc(doc(partner, 'partnerAccounts/other@partner.example'), {
+      email: 'other@partner.example',
+    }),
+  );
+  await setDoc(doc(admin, 'partnerAccounts/new@partner.example'), {
+    email: 'new@partner.example',
+  });
+  passed++;
   console.log(`Firestore security rules: ${passed} checks passed`);
 } finally {
   await Promise.all(

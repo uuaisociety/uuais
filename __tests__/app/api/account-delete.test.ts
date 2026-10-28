@@ -156,7 +156,7 @@ describe('POST /api/account/delete', () => {
     expect(res.status).toBe(200);
     expect(body).toEqual({ success: true });
     expect(mockDeleteStorageFiles).toHaveBeenCalledWith(
-      ['registrations/evt1/user1/a.pdf'],
+      ['registrations/evt1/user1/a.pdf', 'cvs/user1/cv.pdf'],
       { failOnError: true },
     );
     expect(mockTxDelete).toHaveBeenCalledWith(docRef('registrations/reg1'));
@@ -174,6 +174,7 @@ describe('POST /api/account/delete', () => {
         'favorites/user1',
         'ai_chats/user1',
         'programProgress/user1',
+        'cvs/user1',
         'users/user1',
       ]),
     );
@@ -202,7 +203,11 @@ describe('POST /api/account/delete', () => {
     const res = await erase();
     expect(res.status).toBe(200);
     expect(mockDeleteStorageFiles).toHaveBeenCalledWith(
-      ['registrations/evt1/user1/a.pdf', 'registrations/evt1/user1/orphan.pdf'],
+      [
+        'registrations/evt1/user1/a.pdf',
+        'registrations/evt1/user1/orphan.pdf',
+        'cvs/user1/cv.pdf',
+      ],
       { failOnError: true },
     );
   });

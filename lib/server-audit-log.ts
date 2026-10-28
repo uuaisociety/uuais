@@ -10,6 +10,10 @@ export interface AdminAuditEntry {
   path?: string;
   count?: number;
   ip?: string;
+  /** Set when the actor is a partner account rather than an admin. */
+  role?: 'partner';
+  /** The partner's sign-in email, since partner accounts have no member profile. */
+  email?: string;
 }
 
 /** Append-only audit trail for admin access to registration PII. Best-effort. */
