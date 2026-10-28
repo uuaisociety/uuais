@@ -9,6 +9,7 @@ import ConfirmModal from '@/components/ui/ConfirmModal';
 import PDFDropzone from '@/components/ui/PDFDropzone';
 import { useNotify } from '@/components/ui/Notifications';
 import { getMyCv, type MemberCv } from '@/lib/firestore';
+import { refreshSessionCookie } from '@/lib/firebase-client';
 import { CV_CONSENT_TEXT } from '@/lib/cv-consent';
 import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 
@@ -80,6 +81,18 @@ export default function CvCard({
     fetchCv();
   };
 
+  // The API authenticates with the httpOnly session cookie, which is only set at
+  // sign-in: a member who stays signed in to Firebase can be without one (or
+  // with one that can no longer be refreshed), and would get a 401. Re-mint it
+  // from the current Firebase user first.
+  const ensureSession = async () => {
+    try {
+      await refreshSessionCookie();
+    } catch {
+      // Best-effort; the request below reports any auth error.
+    }
+  };
+
   const resetForm = () => {
     setFile(null);
     setConsent(false);
@@ -93,6 +106,7 @@ export default function CvCard({
       const body = new FormData();
       body.set('file', file);
       body.set('consent', 'true');
+      await ensureSession();
       const res = await fetch('/api/account/cv', { method: 'POST', body });
       const data = await res.json().catch(() => null);
       if (!res.ok)
@@ -114,6 +128,7 @@ export default function CvCard({
 
   const handleRemove = async () => {
     try {
+      await ensureSession();
       const res = await fetch('/api/account/cv', { method: 'DELETE' });
       const data = await res.json().catch(() => null);
       if (!res.ok)

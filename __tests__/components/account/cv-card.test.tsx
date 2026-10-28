@@ -6,6 +6,10 @@ jest.mock('@/lib/firestore', () => ({
   getMyCv: (...args: unknown[]) => mockGetMyCv(...args),
 }));
 
+const mockRefreshSessionCookie = jest.fn().mockResolvedValue(undefined);
+jest.mock('@/lib/firebase-client', () => ({
+  refreshSessionCookie: () => mockRefreshSessionCookie(),
+}));
 jest.mock('@/components/ui/Notifications', () => ({
   useNotify: () => ({ notify: jest.fn() }),
 }));
@@ -46,6 +50,39 @@ describe('CvCard', () => {
       },
     });
     expect(share).toBeEnabled();
+  });
+
+  it('re-mints the session cookie before uploading, so a stale session cannot 401', async () => {
+    mockGetMyCv.mockResolvedValue(null);
+    const order: string[] = [];
+    mockRefreshSessionCookie.mockImplementationOnce(async () => {
+      order.push('session');
+    });
+    // jsdom has no fetch; stand in for the upload request.
+    const realFetch = global.fetch;
+    global.fetch = jest.fn(async () => {
+      order.push('upload');
+      return { ok: true, json: async () => storedCv };
+    }) as unknown as typeof fetch;
+    render(<CvCard uid="user1" isMember emailVerified />);
+
+    const share = await screen.findByRole('button', { name: 'Share CV' });
+    fireEvent.click(screen.getByRole('checkbox'));
+    fireEvent.change(
+      document.querySelector('input[type="file"]') as HTMLInputElement,
+      {
+        target: {
+          files: [
+            new File(['%PDF-1.4'], 'cv.pdf', { type: 'application/pdf' }),
+          ],
+        },
+      },
+    );
+    fireEvent.click(share);
+
+    expect(await screen.findByText('Alex CV.pdf')).toBeInTheDocument();
+    expect(order).toEqual(['session', 'upload']);
+    global.fetch = realFetch;
   });
 
   it('shows the stored CV with replace and withdraw actions', async () => {
