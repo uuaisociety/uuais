@@ -196,4 +196,17 @@ describe('findPdfActiveContent', () => {
       ),
     ).toBeNull();
   });
+
+  it('still scans an object stream that pretends to be an image', async () => {
+    expect(
+      await findPdfActiveContent(
+        pdf(
+          obj(
+            '/Type /ObjStm /Subtype /Image /Filter /FlateDecode',
+            deflateSync(action),
+          ),
+        ),
+      ),
+    ).toBe('JavaScript');
+  });
 });

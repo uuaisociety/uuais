@@ -1,9 +1,14 @@
 // tools/partnerAccess.ts
-// Manages the partner allowlist (partnerAccounts/{email}). A listed address may
-// sign in with Google (a verified email is required) and review shared CVs at
-// /partners/cvs. No prior sign-in is needed, and changes apply immediately.
+// Manages the partner allowlist (partnerAccounts/{email}). Adding a partner also
+// creates (or vets) their Auth account and binds the entry to it, so nobody can
+// pre-register the address; see lib/partner-provisioning. The partner then signs
+// in on /partners/cvs with an emailed link. Changes apply on their next page load.
 import 'dotenv/config';
 import admin from 'firebase-admin';
+import {
+  deprovisionPartner,
+  provisionPartner,
+} from '../lib/partner-provisioning';
 import fs from 'fs';
 
 // Explicitly control emulator usage for Admin SDK to avoid ECONNREFUSED when emulator isn't running
@@ -45,33 +50,35 @@ if (saPath) {
 
 admin.initializeApp({ credential });
 
-// Same rule as lib/partner-email.ts; tools run without the app's path aliases.
-const partnerEmailKey = (email: string) => email.trim().toLowerCase();
-
 async function addPartner(email: string, company?: string) {
-  const key = partnerEmailKey(email);
-  await admin
-    .firestore()
-    .collection('partnerAccounts')
-    .doc(key)
-    .set({
-      email: key,
-      ...(company ? { company } : {}),
-      addedAt: new Date().toISOString(),
-    });
+  const result = await provisionPartner(
+    admin.auth(),
+    admin.firestore(),
+    email,
+    company,
+  );
+  if (result.replaced)
+    console.warn(
+      `Deleted an unverified or password account that was already registered to ${result.key}; it may have been created by someone else.`,
+    );
   console.log(
-    `Added ${key} to the partner allowlist${company ? ` (${company})` : ''}.`,
+    `Added ${result.key} to the partner allowlist${company ? ` (${company})` : ''}, bound to account ${result.uid}.`,
   );
   console.log(
-    'They can sign in with Google using this address and open /partners/cvs.',
+    'They can now open /partners/cvs and sign in with the emailed link sent to this address.',
   );
 }
 
 async function removePartner(email: string) {
-  const key = partnerEmailKey(email);
-  await admin.firestore().collection('partnerAccounts').doc(key).delete();
+  const { key, removed } = await deprovisionPartner(
+    admin.auth(),
+    admin.firestore(),
+    email,
+  );
   console.log(
-    `Removed ${key} from the partner allowlist. Access ends on their next page load.`,
+    removed
+      ? `Removed ${key} from the partner allowlist and signed the account out. Access ends on their next page load.`
+      : `${key} was not on the partner allowlist.`,
   );
 }
 

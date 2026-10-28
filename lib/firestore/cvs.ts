@@ -13,6 +13,8 @@ export type MemberCv = {
   uploadedAt: string;
   consentAt: string;
   consentVersion: string;
+  /** The member's partner-contact choice before sharing; restored on removal. */
+  priorPartnerContactOptIn?: boolean;
 };
 
 export const getMyCv = async (uid: string): Promise<MemberCv | null> => {

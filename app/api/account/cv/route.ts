@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { requireAuth, authFailureResponse } from '@/lib/server-auth';
-import { adminDb } from '@/lib/firebase-admin';
+import { adminAuth, adminDb } from '@/lib/firebase-admin';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
 import {
   getFormFile,
@@ -47,6 +47,24 @@ export async function POST(req: NextRequest) {
     const auth = await requireAuth(req);
     if (!auth.ok) return authFailureResponse(auth.reason);
     const { uid } = auth.session;
+    // Membership is self-declared, so a verified email is what ties a shared CV
+    // to a real person partners can contact. Checked live, so a member who just
+    // linked Google isn't held back by an older session token.
+    const verified =
+      auth.session.emailVerified ||
+      (await adminAuth
+        .getUser(uid)
+        .then((u) => u.emailVerified)
+        .catch(() => false));
+    if (!verified) {
+      return NextResponse.json(
+        {
+          error:
+            'To share your CV, your email needs to be verified. Link your Google account under Linked Accounts, then try again.',
+        },
+        { status: 403 },
+      );
+    }
     const limited = rateLimited(uid);
     if (limited) return limited;
 

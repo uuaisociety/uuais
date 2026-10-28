@@ -1044,6 +1044,9 @@ export default function AccountPage() {
             <CvCard
               uid={uid}
               isMember={form.isMember === true}
+              emailVerified={
+                isLinked.google || auth.currentUser?.emailVerified === true
+              }
               onCvChange={handleCvChange}
             />
           </div>

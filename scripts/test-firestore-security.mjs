@@ -6,6 +6,7 @@ import {
   doc,
   getDoc,
   setDoc,
+  deleteDoc,
   updateDoc,
   terminate,
 } from 'firebase/firestore';
@@ -254,8 +255,47 @@ try {
       email: 'other@partner.example',
     }),
   );
-  await setDoc(doc(admin, 'partnerAccounts/new@partner.example'), {
-    email: 'new@partner.example',
+  // The allowlist is server-only (tools/partnerAccess.ts binds each entry to a
+  // vetted account), so not even an admin client may grant CV access.
+  await denied(() =>
+    setDoc(doc(admin, 'partnerAccounts/new@partner.example'), {
+      email: 'new@partner.example',
+    }),
+  );
+
+  // Profiles: deletion is server-only (full erasure), even for admins...
+  await denied(() => deleteDoc(doc(admin, 'users/profile-2')));
+  await denied(() => deleteDoc(doc(profileOwner, 'users/profile-1')));
+  // ...a profile can't be re-created with partner contact off while a CV is shared...
+  // (profile-5 has a shared CV but no profile doc, e.g. a half-finished erasure.)
+  const freshUser = client('fresh-user', { sub: 'profile-5' });
+  await seed('cvs/profile-5', { path: { stringValue: 'cvs/profile-5/cv.pdf' } });
+  await denied(() =>
+    setDoc(doc(freshUser, 'users/profile-5'), {
+      displayName: 'New',
+      isMember: true,
+      partnerContactOptIn: false,
+    }),
+  );
+  await setDoc(doc(freshUser, 'users/profile-5'), {
+    displayName: 'New',
+    isMember: true,
+    partnerContactOptIn: true,
+  });
+  passed++;
+  // ...and fields partners see are bounded.
+  await denied(() =>
+    updateDoc(doc(stubOwner, 'users/profile-2'), { name: 'x'.repeat(101) }),
+  );
+  await denied(() =>
+    updateDoc(doc(stubOwner, 'users/profile-2'), {
+      expectedGraduationYear: 2026.5,
+    }),
+  );
+  await updateDoc(doc(stubOwner, 'users/profile-2'), {
+    name: 'Anna Svensson',
+    program: 'Computer Science',
+    expectedGraduationYear: 2027,
   });
   passed++;
   console.log(`Firestore security rules: ${passed} checks passed`);

@@ -25,10 +25,13 @@ const linkClass =
 export default function CvCard({
   uid,
   isMember,
+  emailVerified,
   onCvChange,
 }: {
   uid: string;
   isMember: boolean;
+  /** Sharing needs a verified email (the server enforces it too). */
+  emailVerified: boolean;
   /** Told whenever the shared CV is loaded, added, replaced or removed. */
   onCvChange?: (cv: MemberCv | null) => void;
 }) {
@@ -158,6 +161,16 @@ export default function CvCard({
             Complete your membership
           </Link>{' '}
           to add one.
+        </p>
+      );
+    }
+
+    if (!emailVerified && !cv) {
+      return (
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          To share your CV, your email needs to be verified, so partners know
+          they’re reaching a real student. Link your Google account under Linked
+          Accounts, then come back here.
         </p>
       );
     }

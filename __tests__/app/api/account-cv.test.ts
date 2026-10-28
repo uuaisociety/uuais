@@ -48,7 +48,11 @@ const ref = (name: 'users' | 'cvs') => ({
 const userRef = ref('users');
 const cvRef = ref('cvs');
 
+let liveEmailVerified = false;
 jest.mock('@/lib/firebase-admin', () => ({
+  adminAuth: {
+    getUser: async () => ({ emailVerified: liveEmailVerified }),
+  },
   adminDb: {
     collection: (name: string) => ({
       doc: () => (name === 'cvs' ? cvRef : userRef),
@@ -94,7 +98,10 @@ describe('/api/account/cv', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     resetRateLimits();
-    mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } });
+    mockGetTokens.mockResolvedValue({
+      decodedToken: { uid: 'user1', email_verified: true },
+    });
+    liveEmailVerified = false;
     db.users = { isMember: true, partnerContactOptIn: false };
     db.cvs = null;
   });
@@ -115,6 +122,19 @@ describe('/api/account/cv', () => {
     }
     expect(mockStorageFile).not.toHaveBeenCalled();
     expect(db.cvs).toBeNull();
+  });
+
+  it('requires a verified email before a CV can be shared', async () => {
+    mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } });
+    const { POST } = await import('@/app/api/account/cv/route');
+    const res = await POST(uploadRequest() as never);
+    expect(res.status).toBe(403);
+    expect((await res.json()).error).toMatch(/verified/);
+    expect(mockStorageFile).not.toHaveBeenCalled();
+
+    // A member who just linked Google is verified in Firebase before their token refreshes.
+    liveEmailVerified = true;
+    expect((await POST(uploadRequest() as never)).status).toBe(200);
   });
 
   it('returns 403 for non-members', async () => {
