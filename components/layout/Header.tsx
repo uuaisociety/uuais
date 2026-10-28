@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,6 +10,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { loginUrl } from '@/lib/login-redirect';
 import { useOpenCampaigns } from '@/lib/firestore/useOpenCampaigns';
+import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 
 // Desktop top level. The wordmark already goes home, so Home only earns a slot
 // in the mobile list, where a vertical menu has room for it.
@@ -17,6 +18,7 @@ const navigation = [
   { name: 'Events', href: '/events' },
   { name: 'Blog', href: '/blog', badge: 'Beta' },
   { name: 'About', href: '/about' },
+  ...(PARTNERS_PAGE_PUBLIC ? [{ name: 'Partners', href: '/partners' }] : []),
 ];
 
 const mobileNavigation = [{ name: 'Home', href: '/' }, ...navigation];
@@ -53,7 +55,9 @@ export const Header: React.FC = () => {
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const mobileButtonRef = useRef<HTMLButtonElement>(null);
   const { user, isAdmin, cached, logout } = useAdmin();
-  const visibleProjectLinks = projectLinks.filter((link) => !link.adminOnly || isAdmin);
+  const visibleProjectLinks = projectLinks.filter(
+    (link) => !link.adminOnly || isAdmin,
+  );
 
   // Close the menus on navigation rather than letting them hang over the new page.
   // Done during render (state adjustment when a prop changes) instead of an effect.
@@ -67,12 +71,16 @@ export const Header: React.FC = () => {
   // Hide the Apply CTA when no open application campaign exists (show it while
   // campaigns are still loading to avoid a flicker on first paint).
   const { campaigns, loaded: campaignsLoaded } = useOpenCampaigns();
-  const showApply = !campaignsLoaded || campaigns.some((c) => c.status === 'open');
+  const showApply =
+    !campaignsLoaded || campaigns.some((c) => c.status === 'open');
 
   // Rendered from the persisted identity so the name survives a reload instead
   // of blanking while Firebase re-resolves the session.
   const identity = user
-    ? { name: cached?.name || user.displayName || user.email, showAdmin: isAdmin }
+    ? {
+        name: cached?.name || user.displayName || user.email,
+        showAdmin: isAdmin,
+      }
     : cached
       ? { name: cached.name || cached.email, showAdmin: cached.isAdmin }
       : null;
@@ -82,8 +90,16 @@ export const Header: React.FC = () => {
   useEffect(() => {
     if (!isProjectsOpen && !isCommunityOpen) return;
     const handleClickOutside = (event: MouseEvent) => {
-      if (isProjectsOpen && !projectsRef.current?.contains(event.target as Node)) setIsProjectsOpen(false);
-      if (isCommunityOpen && !communityRef.current?.contains(event.target as Node)) setIsCommunityOpen(false);
+      if (
+        isProjectsOpen &&
+        !projectsRef.current?.contains(event.target as Node)
+      )
+        setIsProjectsOpen(false);
+      if (
+        isCommunityOpen &&
+        !communityRef.current?.contains(event.target as Node)
+      )
+        setIsCommunityOpen(false);
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
@@ -105,7 +121,11 @@ export const Header: React.FC = () => {
     if (!isMenuOpen) return;
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
-      if (mobileButtonRef.current?.contains(target) || mobileMenuRef.current?.contains(target)) return;
+      if (
+        mobileButtonRef.current?.contains(target) ||
+        mobileMenuRef.current?.contains(target)
+      )
+        return;
       setIsMenuOpen(false);
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -124,9 +144,12 @@ export const Header: React.FC = () => {
       <header className="fixed top-0 left-0 right-0 z-50 glass-nav">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="h-14 flex items-center justify-between gap-2">
-
             {/* Wordmark */}
-            <Link href="/" aria-label="UU AI Society" className="flex items-center gap-2 pl-1 shrink-0 group">
+            <Link
+              href="/"
+              aria-label="UU AI Society"
+              className="flex items-center gap-2 pl-1 shrink-0 group"
+            >
               <Image
                 src="/images/logo-highdef.png"
                 alt=""
@@ -143,7 +166,13 @@ export const Header: React.FC = () => {
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center gap-0.5">
               {navigation.map((item) => (
-                <Link key={item.name} href={item.href} prefetch className={navLinkClass(isActive(item.href))} aria-current={isActive(item.href) ? "page" : undefined}>
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  prefetch
+                  className={navLinkClass(isActive(item.href))}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
                   {item.name}
                   {item.badge && <BetaBadge />}
                 </Link>
@@ -157,7 +186,9 @@ export const Header: React.FC = () => {
                   className={`${navLinkClass(communityLinks.some((l) => isActive(l.href)))} inline-flex items-center gap-1 cursor-pointer transition-colors duration-300`}
                 >
                   Community
-                  <ChevronDown className={`h-3 w-3 transition-transform duration-300 ${isCommunityOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown
+                    className={`h-3 w-3 transition-transform duration-300 ${isCommunityOpen ? 'rotate-180' : ''}`}
+                  />
                 </button>
                 {isCommunityOpen && (
                   <div className="glass-pop absolute left-0 mt-2 w-52 rounded-md p-1.5 animate-rise">
@@ -181,33 +212,40 @@ export const Header: React.FC = () => {
               </div>
 
               <div className="relative" ref={projectsRef}>
-                  <button
-                    onClick={() => setIsProjectsOpen((v) => !v)}
-                    aria-expanded={isProjectsOpen}
-                    aria-haspopup="true"
-                    className={`${navLinkClass(pathname.startsWith('/projects') || pathname.startsWith('/explore'))} inline-flex items-center gap-1 cursor-pointer transition-colors duration-300`}
-                  >
-                    Projects
-                    <ChevronDown className={`h-3 w-3 transition-transform duration-300 ${isProjectsOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  {isProjectsOpen && (
-                    <div className="glass-pop absolute left-0 mt-2 w-52 rounded-md p-1.5 animate-rise">
-                      {visibleProjectLinks.map((link) => (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          className="block px-3 py-2 rounded-sm text-[0.8125rem] text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors duration-300"
-                        >
-                          {link.label}
-                          {link.badge && <BetaBadge />}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                <button
+                  onClick={() => setIsProjectsOpen((v) => !v)}
+                  aria-expanded={isProjectsOpen}
+                  aria-haspopup="true"
+                  className={`${navLinkClass(pathname.startsWith('/projects') || pathname.startsWith('/explore'))} inline-flex items-center gap-1 cursor-pointer transition-colors duration-300`}
+                >
+                  Projects
+                  <ChevronDown
+                    className={`h-3 w-3 transition-transform duration-300 ${isProjectsOpen ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {isProjectsOpen && (
+                  <div className="glass-pop absolute left-0 mt-2 w-52 rounded-md p-1.5 animate-rise">
+                    {visibleProjectLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="block px-3 py-2 rounded-sm text-[0.8125rem] text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors duration-300"
+                      >
+                        {link.label}
+                        {link.badge && <BetaBadge />}
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {identity?.showAdmin && (
-                <Link href="/admin" className={navLinkClass(isActive('/admin'))}>Admin</Link>
+                <Link
+                  href="/admin"
+                  className={navLinkClass(isActive('/admin'))}
+                >
+                  Admin
+                </Link>
               )}
             </nav>
 
@@ -232,10 +270,16 @@ export const Header: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <Link href="/join" className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors">
+                    <Link
+                      href="/join"
+                      className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors"
+                    >
                       Register
                     </Link>
-                    <Link href={loginUrl(pathname)} className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors">
+                    <Link
+                      href={loginUrl(pathname)}
+                      className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors"
+                    >
                       Login
                     </Link>
                   </>
@@ -245,7 +289,12 @@ export const Header: React.FC = () => {
               <ThemeToggle className="text-current/60 hover:text-current hover:bg-current/[0.09]" />
 
               {showApply && (
-                <Button asChild variant="cta" size="sm" className="hidden sm:inline-flex">
+                <Button
+                  asChild
+                  variant="cta"
+                  size="sm"
+                  className="hidden sm:inline-flex"
+                >
                   <Link href="/apply/team">Apply</Link>
                 </Button>
               )}
@@ -258,7 +307,11 @@ export const Header: React.FC = () => {
                 aria-controls="mobile-menu"
               >
                 <span className="sr-only">Open main menu</span>
-                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {isMenuOpen ? (
+                  <X className="h-5 w-5" />
+                ) : (
+                  <Menu className="h-5 w-5" />
+                )}
               </button>
             </div>
           </div>
@@ -269,7 +322,9 @@ export const Header: React.FC = () => {
             id="mobile-menu"
             inert={!isMenuOpen}
             className={`lg:hidden overflow-x-hidden overflow-y-auto origin-top transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
-              isMenuOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+              isMenuOpen
+                ? 'max-h-[80vh] opacity-100'
+                : 'max-h-0 opacity-0 pointer-events-none'
             }`}
           >
             <div className="py-2 border-t border-current/10">
@@ -278,9 +333,11 @@ export const Header: React.FC = () => {
                   key={item.name}
                   href={item.href}
                   prefetch
-                  aria-current={isActive(item.href) ? "page" : undefined}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
                   className={`block px-3.5 py-2.5 rounded-sm text-sm font-medium transition-colors ${
-                    isActive(item.href) ? 'text-current bg-current/[0.12]' : 'text-current/65 hover:text-current hover:bg-current/[0.07]'
+                    isActive(item.href)
+                      ? 'text-current bg-current/[0.12]'
+                      : 'text-current/65 hover:text-current hover:bg-current/[0.07]'
                   }`}
                 >
                   {item.name}
@@ -288,15 +345,19 @@ export const Header: React.FC = () => {
                 </Link>
               ))}
 
-              <p className="px-3.5 pt-3 pb-1 mono-label text-current/45">Community</p>
+              <p className="px-3.5 pt-3 pb-1 mono-label text-current/45">
+                Community
+              </p>
               {communityLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMenuOpen(false)}
-                  aria-current={isActive(link.href) ? "page" : undefined}
+                  aria-current={isActive(link.href) ? 'page' : undefined}
                   className={`block px-3.5 py-2.5 rounded-sm text-sm font-medium transition-colors ${
-                    isActive(link.href) ? 'text-current bg-current/[0.12]' : 'text-current/65 hover:text-current hover:bg-current/[0.07]'
+                    isActive(link.href)
+                      ? 'text-current bg-current/[0.12]'
+                      : 'text-current/65 hover:text-current hover:bg-current/[0.07]'
                   }`}
                 >
                   {link.label}
@@ -305,14 +366,22 @@ export const Header: React.FC = () => {
 
               <div className="my-1.5 h-px bg-current/10" />
               {visibleProjectLinks.map((link) => (
-                <Link key={link.href} href={link.href} onClick={() => setIsMenuOpen(false)} className="block px-3.5 py-2.5 rounded-sm text-sm text-current/65 hover:text-current hover:bg-current/[0.07] transition-colors">
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-3.5 py-2.5 rounded-sm text-sm text-current/65 hover:text-current hover:bg-current/[0.07] transition-colors"
+                >
                   {link.label}
                   {link.badge && <BetaBadge />}
                 </Link>
               ))}
 
               {identity?.showAdmin && (
-                <Link href="/admin" className="block px-3.5 py-2.5 rounded-sm text-sm text-current/65 hover:text-current hover:bg-current/[0.07] transition-colors">
+                <Link
+                  href="/admin"
+                  className="block px-3.5 py-2.5 rounded-sm text-sm text-current/65 hover:text-current hover:bg-current/[0.07] transition-colors"
+                >
                   Admin
                 </Link>
               )}
@@ -320,26 +389,43 @@ export const Header: React.FC = () => {
               <div className="my-1.5 h-px bg-current/10" />
               {identity ? (
                 <>
-                  <Link href="/account" className="block px-3.5 py-2.5 rounded-sm mono-meta text-current/65 hover:text-current transition-colors">
+                  <Link
+                    href="/account"
+                    className="block px-3.5 py-2.5 rounded-sm mono-meta text-current/65 hover:text-current transition-colors"
+                  >
                     {identity.name}
                   </Link>
-                  <button onClick={() => logout()} className="w-full text-left px-3.5 py-2.5 rounded-sm mono-label text-current/60 hover:text-current transition-colors cursor-pointer">
+                  <button
+                    onClick={() => logout()}
+                    className="w-full text-left px-3.5 py-2.5 rounded-sm mono-label text-current/60 hover:text-current transition-colors cursor-pointer"
+                  >
                     Logout
                   </button>
                 </>
               ) : (
                 <div className="flex gap-2 px-1.5 py-1.5">
-                  <Link href={loginUrl(pathname)} className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-current/65 border border-current/10 hover:bg-current/[0.07] transition-colors">
+                  <Link
+                    href={loginUrl(pathname)}
+                    className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-current/65 border border-current/10 hover:bg-current/[0.07] transition-colors"
+                  >
                     Login
                   </Link>
-                  <Link href="/join" className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-current/65 border border-current/10 hover:bg-current/[0.07] transition-colors">
+                  <Link
+                    href="/join"
+                    className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-current/65 border border-current/10 hover:bg-current/[0.07] transition-colors"
+                  >
                     Register
                   </Link>
                 </div>
               )}
 
               {showApply && (
-                <Button asChild variant="cta" fullWidth className="sm:hidden mt-1.5">
+                <Button
+                  asChild
+                  variant="cta"
+                  fullWidth
+                  className="sm:hidden mt-1.5"
+                >
                   <Link href="/apply/team">Apply</Link>
                 </Button>
               )}

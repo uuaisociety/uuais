@@ -19,6 +19,8 @@ type Store = {
   profileLoading: boolean;
   isAdmin: boolean;
   isSuperAdmin: boolean;
+  /** On the partner allowlist; partner accounts have no member profile. UI only, the server re-checks. */
+  isPartner: boolean;
   claims: Record<string, unknown> | null;
   profile: UserProfile | null;
   /** Last known identity from localStorage. Display only — never a permission gate. */
@@ -31,6 +33,7 @@ let store: Store = {
   profileLoading: false,
   isAdmin: false,
   isSuperAdmin: false,
+  isPartner: false,
   claims: null,
   profile: null,
   cached: null,
@@ -58,6 +61,14 @@ const loadProfile = (uid: string): Promise<UserProfile | null> => {
   }
   return request;
 };
+
+// Only a verified email can match the allowlist; rules enforce the same.
+const loadIsPartner = (u: User): Promise<boolean> =>
+  u.email && u.emailVerified
+    ? import('@/lib/firestore/partners')
+        .then(({ isPartnerEmail }) => isPartnerEmail(u.email as string))
+        .catch(() => false)
+    : Promise.resolve(false);
 
 /** Re-read the signed-in user's profile and publish it to the store so dependent UI sees fresh data after a save. */
 export const refreshProfile = async (): Promise<void> => {
@@ -101,6 +112,7 @@ const initializeAuth = () => {
           profileLoading: false,
           isAdmin: false,
           isSuperAdmin: false,
+          isPartner: false,
           claims: null,
           profile: null,
           cached: null,
@@ -138,7 +150,10 @@ const initializeAuth = () => {
         },
       });
 
-      const profile = await loadProfile(u.uid);
+      const [profile, isPartner] = await Promise.all([
+        loadProfile(u.uid),
+        loadIsPartner(u),
+      ]);
       if (gen !== authGeneration) return;
 
       const name =
@@ -151,7 +166,7 @@ const initializeAuth = () => {
         isAdmin,
       };
       writeCache(identity);
-      setStore({ profile, profileLoading: false, cached: identity });
+      setStore({ profile, isPartner, profileLoading: false, cached: identity });
     });
   });
 };
@@ -193,6 +208,7 @@ export type AdminState = {
   profileLoading: boolean;
   isAdmin: boolean;
   isSuperAdmin: boolean;
+  isPartner: boolean;
   claims: Record<string, unknown> | null;
   profile: UserProfile | null;
   cached: CachedIdentity | null;

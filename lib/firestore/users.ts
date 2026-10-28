@@ -5,7 +5,6 @@ import {
   getDoc,
   setDoc,
   updateDoc,
-  deleteDoc,
   DocumentData,
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
@@ -47,11 +46,6 @@ export const listUsers = async (): Promise<UserProfile[]> => {
     (docSnap) =>
       ({ id: docSnap.id, ...(docSnap.data() as DocumentData) }) as UserProfile,
   );
-};
-
-export const deleteUser = async (uid: string): Promise<void> => {
-  const ref = doc(db, 'users', uid);
-  await deleteDoc(ref);
 };
 
 export const getUserProfile = async (

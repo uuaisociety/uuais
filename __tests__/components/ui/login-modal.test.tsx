@@ -6,8 +6,12 @@ const mockSignInWithGooglePopup = jest.fn();
 const mockSignInWithGithubPopup = jest.fn();
 const mockGetUserProfile = jest.fn();
 const mockRouterPush = jest.fn();
+const mockIsPartnerEmail = jest.fn();
 
 jest.mock('@/lib/firebase-client', () => ({
+  auth: {
+    currentUser: { email: 'hr@partner.example', emailVerified: true },
+  },
   signInWithGooglePopup: (...args: unknown[]) =>
     mockSignInWithGooglePopup(...args),
   signInWithGithubPopup: (...args: unknown[]) =>
@@ -16,6 +20,7 @@ jest.mock('@/lib/firebase-client', () => ({
 
 jest.mock('@/lib/firestore', () => ({
   getUserProfile: (...args: unknown[]) => mockGetUserProfile(...args),
+  isPartnerEmail: (...args: unknown[]) => mockIsPartnerEmail(...args),
 }));
 
 jest.mock('next/navigation', () => ({
@@ -32,6 +37,18 @@ describe('LoginCard', () => {
       isMember: true,
       privacyAcceptedAt: '2026-01-01T00:00:00Z',
     });
+    mockIsPartnerEmail.mockResolvedValue(false);
+  });
+
+  it('lets a partner account through without a member profile', async () => {
+    mockSignInWithGooglePopup.mockResolvedValue(mockUser);
+    mockIsPartnerEmail.mockResolvedValue(true);
+    mockGetUserProfile.mockResolvedValue(null);
+    const after = jest.fn();
+    render(<LoginCard after={after} />);
+    await userEvent.click(screen.getByText(/Continue with Google/));
+    expect(after).toHaveBeenCalled();
+    expect(mockRouterPush).not.toHaveBeenCalled();
   });
 
   it('renders login heading and description', () => {

@@ -19,6 +19,8 @@ export default function PDFDropzone({
   onError,
   label = 'Resume',
 }: PDFDropzoneProps) {
+  // Keep acronyms like "CV" upper-case in running text.
+  const noun = label === label.toUpperCase() ? label : label.toLowerCase();
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -73,7 +75,7 @@ export default function PDFDropzone({
     <div
       role="button"
       tabIndex={0}
-      aria-label={`Upload ${label.toLowerCase()}`}
+      aria-label={`Upload ${noun}`}
       onDrop={handleDrop}
       onDragOver={(e) => {
         e.preventDefault();
@@ -102,7 +104,7 @@ export default function PDFDropzone({
       />
       <Upload className="h-5 w-5 text-muted-foreground" />
       <div className="text-sm text-muted-foreground">
-        Drag & drop your {label.toLowerCase()} here, or{' '}
+        Drag & drop your {noun} here, or{' '}
         <span className="text-primary underline">browse</span>
         <span className="block text-xs text-muted-foreground mt-0.5">
           PDF, max 3MB

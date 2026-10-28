@@ -7,7 +7,18 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/account', '/admin', '/api/', '/me', '/checkin', '/confirm', '/_next/', '/static/', '/private/'],
+        disallow: [
+          '/account',
+          '/admin',
+          '/partners/cvs',
+          '/api/',
+          '/me',
+          '/checkin',
+          '/confirm',
+          '/_next/',
+          '/static/',
+          '/private/',
+        ],
       },
       {
         userAgent: 'Bytespider',

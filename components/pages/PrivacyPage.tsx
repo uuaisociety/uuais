@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Shield, Eye, Database, UserCheck, Mail, Calendar } from 'lucide-react';
+import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 
 export const PrivacyPage: React.FC = () => {
   return (
@@ -22,7 +23,7 @@ export const PrivacyPage: React.FC = () => {
             collect, use, and protect your information.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            Last updated: October 19, 2026
+            Last updated: October 28, 2026
           </p>
         </div>
 
@@ -57,8 +58,15 @@ export const PrivacyPage: React.FC = () => {
                 </h3>
                 <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
                   <li>Name and contact information (email address)</li>
-                  <li>University affiliation and student status</li>
-                  <li>Professional interests and AI-related experience</li>
+                  <li>
+                    University affiliation, student status and expected
+                    graduation year (optional)
+                  </li>
+                  <li>Gender (optional)</li>
+                  <li>Social media profiles (optional)</li>
+                  <li>
+                    Professional interests and AI-related experience (optional)
+                  </li>
                   <li>Event attendance and participation data</li>
                   <li>
                     Submitted applications for events and membership, including
@@ -117,7 +125,8 @@ export const PrivacyPage: React.FC = () => {
                   Consent
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
-                  For newsletter subscriptions and marketing communications
+                  For newsletter subscriptions, marketing communications, and
+                  sharing your CV with our partners
                 </p>
               </div>
               <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
@@ -137,6 +146,76 @@ export const PrivacyPage: React.FC = () => {
                   tracking attendance for events you sign up to
                 </p>
               </div>
+            </div>
+          </section>
+
+          {/* CV sharing */}
+          <section id="cv-sharing" className="scroll-mt-24">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              Sharing Your CV and Account Information with Partners
+            </h2>
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+              <p className="text-gray-700 dark:text-gray-300 mb-4">
+                Members can choose to upload a CV on{' '}
+                <a
+                  href="/account"
+                  className="text-blue-600 dark:text-blue-400 underline"
+                >
+                  My Account
+                </a>
+                . This is entirely optional and not a condition of membership.
+              </p>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                <li>
+                  <strong>What we share:</strong> the PDF you upload, together
+                  with your name, email address, programme, and expected
+                  graduation year from your profile. We also store the file name
+                  and when you gave consent
+                </li>
+                <li>
+                  <strong>Who receives it:</strong> authorised board members,
+                  and{' '}
+                  {PARTNERS_PAGE_PUBLIC ? (
+                    <>
+                      the partner companies listed on our{' '}
+                      <a
+                        href="/partners"
+                        className="text-blue-600 dark:text-blue-400 underline"
+                      >
+                        Partners page
+                      </a>
+                    </>
+                  ) : (
+                    'our partner companies'
+                  )}
+                  , for internships, thesis projects, and job opportunities.
+                  Partners view CVs through a sign-in-only page, and every
+                  download is logged
+                </li>
+                <li>
+                  <strong>Legal basis:</strong> your consent (GDPR Art. 6(1)(a))
+                </li>
+                <li>
+                  <strong>Partner contact:</strong> while your CV is shared,
+                  partners may contact you about these opportunities, so
+                  &quot;Allow contact from partner companies&quot; stays
+                  switched on until you remove your CV, which restores the
+                  choice you had before sharing it
+                </li>
+                <li>
+                  <strong>Withdrawing consent:</strong> remove your CV on My
+                  Account at any time. It is deleted immediately and no longer
+                  shared. A partner that has already received a copy handles it
+                  under its own privacy policy; contact us at{' '}
+                  <a
+                    href="mailto:it@uuais.com"
+                    className="text-blue-600 dark:text-blue-400 underline"
+                  >
+                    it@uuais.com
+                  </a>{' '}
+                  and we will forward your deletion request
+                </li>
+              </ul>
             </div>
           </section>
 
@@ -220,6 +299,14 @@ export const PrivacyPage: React.FC = () => {
                   Website analytics: 26 months (Vercel Analytics default);
                   first-party aggregate counters are kept without personal data
                 </li>
+                <li>
+                  CV shared with partners: Until you remove it or delete your
+                  account
+                </li>
+                <li>
+                  Access and consent logs (who downloaded a CV, admin actions,
+                  and when CV-sharing consent was given or withdrawn): 30 days
+                </li>
                 <li>Account profile: Until you delete your account</li>
               </ul>
             </div>
@@ -235,7 +322,7 @@ export const PrivacyPage: React.FC = () => {
                 We implement appropriate technical and organizational measures
                 to protect your personal data against unauthorized access,
                 alteration, disclosure, or destruction. This includes
-                encryption, secure servers, and regular security assessments.
+                encryption, secure servers, and security assessments.
               </p>
             </div>
           </section>
@@ -253,7 +340,7 @@ export const PrivacyPage: React.FC = () => {
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
                   We use Firebase and Google Cloud (Google Ireland Limited) for
                   authentication, database, and encrypted file storage. Uploaded
-                  event documents are stored with access restricted to
+                  event documents and CVs are stored with access restricted to
                   authorised administrators.
                 </p>
               </div>

@@ -9,6 +9,9 @@ import {
   signInWithPopup,
   linkWithPopup,
   signOut,
+  sendSignInLinkToEmail,
+  isSignInWithEmailLink,
+  signInWithEmailLink,
   User,
 } from 'firebase/auth';
 
@@ -66,6 +69,54 @@ export const signInWithGithubPopup = () =>
 
 export const signInWithMicrosoftPopup = () =>
   signInWithPopupAfterReady(microsoftProvider);
+
+// Passwordless email-link sign-in, for addresses no OAuth provider covers (e.g.
+// a partner's Microsoft 365 work email). Using the link verifies the email.
+// The address is remembered so the same browser can finish without re-typing it;
+// a link opened elsewhere must re-confirm it, which stops a forwarded link
+// signing someone else in.
+const EMAIL_FOR_SIGN_IN_KEY = 'emailForSignIn';
+
+export const sendEmailSignInLink = async (
+  email: string,
+  continueUrl: string,
+) => {
+  await sendSignInLinkToEmail(auth, email, {
+    url: continueUrl,
+    handleCodeInApp: true,
+  });
+  try {
+    window.localStorage.setItem(EMAIL_FOR_SIGN_IN_KEY, email);
+  } catch {
+    // Storage blocked: the user re-confirms their email when opening the link.
+  }
+};
+
+export const isEmailSignInLink = (href: string) =>
+  isSignInWithEmailLink(auth, href);
+
+export const storedEmailForSignIn = (): string | null => {
+  try {
+    return window.localStorage.getItem(EMAIL_FOR_SIGN_IN_KEY);
+  } catch {
+    return null;
+  }
+};
+
+export const signInWithEmailLinkAfterReady = async (
+  email: string,
+  href: string,
+) => {
+  await auth.authStateReady();
+  const result = await signInWithEmailLink(auth, email, href);
+  try {
+    window.localStorage.removeItem(EMAIL_FOR_SIGN_IN_KEY);
+  } catch {
+    // Nothing to clean up.
+  }
+  await refreshSessionCookie();
+  return result.user;
+};
 
 // Account linking helpers (link additional providers to the same Firebase user)
 export const linkGoogleToCurrentUser = async (user: User) => {

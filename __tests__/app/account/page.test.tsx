@@ -13,12 +13,17 @@ jest.mock('@/lib/firebase-client', () => ({
   linkMicrosoftToCurrentUser: jest.fn(() => Promise.resolve()),
 }));
 
+const mockGetMyCv = jest.fn<Promise<unknown>, unknown[]>(() =>
+  Promise.resolve(null),
+);
+
 jest.mock('@/lib/firestore', () => ({
   getUserProfile: jest.fn(),
   upsertUserProfile: jest.fn(),
   updateUserProfile: jest.fn(),
   getMyRegistrations: jest.fn(),
   getAllEvents: jest.fn(),
+  getMyCv: (...args: unknown[]) => mockGetMyCv(...args),
 }));
 
 jest.mock('@/lib/firestore/registrations', () => ({
@@ -605,6 +610,44 @@ describe('AccountPage', () => {
       (getAllEvents as jest.Mock).mockResolvedValue(allEvents);
       auth.currentUser = mockUser;
     };
+
+    it('locks partner contact on while a CV is shared, explaining why', async () => {
+      defaults();
+      (getUserProfile as jest.Mock).mockResolvedValue({
+        ...fullProfile,
+        isMember: true,
+      });
+      mockGetMyCv.mockResolvedValueOnce({
+        id: 'user-123',
+        path: 'cvs/user-123/cv.pdf',
+        fileName: 'cv.pdf',
+        size: 1000,
+        uploadedAt: '2026-10-28T10:00:00.000Z',
+        consentAt: '2026-10-28T10:00:00.000Z',
+        consentVersion: '2026-10-28.2',
+      });
+      render(<AccountPage />);
+      fireEvent.click(await screen.findByText('Edit'));
+
+      const box = await screen.findByRole('checkbox', {
+        name: 'Allow contact from partner companies',
+      });
+      await waitFor(() => expect(box).toBeDisabled());
+      expect(box).toBeChecked();
+      expect(box).toHaveAccessibleDescription(
+        'Please remove your CV if you do not want to be contacted by our partners',
+      );
+    });
+
+    it('leaves partner contact editable without a shared CV', async () => {
+      defaults();
+      render(<AccountPage />);
+      fireEvent.click(await screen.findByText('Edit'));
+      const box = screen.getByRole('checkbox', {
+        name: 'Allow contact from partner companies',
+      });
+      expect(box).toBeEnabled();
+    });
 
     it('switches to edit mode when Edit button is clicked', async () => {
       defaults();

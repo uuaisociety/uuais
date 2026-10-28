@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { Button } from '@/components/ui/Button';
 import {
+  auth,
   signInWithGooglePopup,
   signInWithGithubPopup,
 } from '@/lib/firebase-client';
-import { getUserProfile } from '@/lib/firestore';
+import { getUserProfile, isPartnerEmail } from '@/lib/firestore';
 import { useRouter } from 'next/navigation';
 import { joinUrl, currentRedirect } from '@/lib/login-redirect';
 
@@ -19,9 +20,21 @@ interface LoginCardProps {
   after: () => void;
 }
 
+// The pending redirect lives in the URL, which the server render can't see.
+// Rendering the bare /join on the server and during hydration, then the full
+// link right after, keeps the markup identical and avoids a hydration mismatch.
+const noSubscribe = () => () => {};
+const useJoinHref = () =>
+  useSyncExternalStore(
+    noSubscribe,
+    () => joinUrl(currentRedirect()),
+    () => joinUrl(null),
+  );
+
 const LoginCard: FC<LoginCardProps> = ({ after }) => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const joinHref = useJoinHref();
 
   // A provider account that never created a profile is signed out by the
   // RegistrationGate off /join; send it to /join to complete account creation, keeping the redirect.
@@ -29,6 +42,16 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
     setError(null);
     try {
       const user = await signIn();
+      // Partner-company accounts (allowlisted by verified email) have no member profile by design.
+      const current = auth.currentUser;
+      const email = current?.emailVerified ? current.email : null;
+      const isPartner = email
+        ? await isPartnerEmail(email).catch(() => false)
+        : false;
+      if (isPartner) {
+        after();
+        return;
+      }
       let completed = true;
       try {
         const profile = await getUserProfile(user.uid);
@@ -95,7 +118,7 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
         <div className="text-center mt-8">
           <p className="text-sm text-gray-600 dark:text-gray-400">
             New here?{' '}
-            <Link href={joinUrl(currentRedirect())} className="underline">
+            <Link href={joinHref} className="underline">
               Create an account
             </Link>
           </p>

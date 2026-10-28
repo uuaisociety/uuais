@@ -1,6 +1,7 @@
 import { unstable_cache } from 'next/cache';
 import { MetadataRoute } from 'next';
 import { SITE_URL } from './metadata';
+import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 import { getPublicSeed } from '@/lib/server-data';
 import { listPrograms, programSlug } from '@/lib/programs';
 import {
@@ -115,6 +116,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     },
+    ...(PARTNERS_PAGE_PUBLIC
+      ? [
+          {
+            url: `${baseUrl}/partners`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.5,
+          },
+        ]
+      : []),
     {
       url: `${baseUrl}/join`,
       lastModified: new Date(),

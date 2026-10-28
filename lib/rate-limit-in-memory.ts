@@ -3,7 +3,9 @@ interface WindowState {
   resetAt: number;
 }
 
-const windows = new Map<string, WindowState>();
+// One store per bucket, so an unauthenticated endpoint filling its store (e.g.
+// with rotating IPs) only fails closed for itself, not for every other limiter.
+const buckets = new Map<string, Map<string, WindowState>>();
 const MAX_WINDOWS = 10_000;
 const SWEEP_INTERVAL_MS = 60_000;
 let nextSweepAt = 0;
@@ -18,13 +20,21 @@ export function checkWindow(
   key: string,
   limit: number,
   windowMs: number,
+  bucket = 'default',
 ): RateWindowResult {
   const now = Date.now();
   if (now >= nextSweepAt) {
-    for (const [existingKey, window] of windows) {
-      if (now >= window.resetAt) windows.delete(existingKey);
+    for (const store of buckets.values()) {
+      for (const [existingKey, window] of store) {
+        if (now >= window.resetAt) store.delete(existingKey);
+      }
     }
     nextSweepAt = now + SWEEP_INTERVAL_MS;
+  }
+  let windows = buckets.get(bucket);
+  if (!windows) {
+    windows = new Map();
+    buckets.set(bucket, windows);
   }
   let state = windows.get(key);
   if (!state && windows.size >= MAX_WINDOWS) {
@@ -43,6 +53,6 @@ export function checkWindow(
 }
 
 export function resetRateLimits(): void {
-  windows.clear();
+  buckets.clear();
   nextSweepAt = 0;
 }

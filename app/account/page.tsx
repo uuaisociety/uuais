@@ -15,6 +15,7 @@ import {
   getMyRegistrations,
   getAllEvents,
   type UserProfile,
+  type MemberCv,
 } from '@/lib/firestore';
 import {
   cancelRegistration,
@@ -36,6 +37,12 @@ import { useRouter } from 'next/navigation';
 import * as CookieConsent from 'vanilla-cookieconsent';
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
 import { updatePageMeta } from '@/utils/seo';
+import CvCard from '@/components/account/CvCard';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 export default function AccountPage() {
   const { notify } = useNotify();
@@ -55,6 +62,20 @@ export default function AccountPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [confirmDeleteAccount, setConfirmDeleteAccount] = useState(false);
+  // A shared CV locks partner contact on (the upload route sets it, rules keep it).
+  const [hasCv, setHasCv] = useState(false);
+  const handleCvChange = (cv: MemberCv | null) => {
+    setHasCv(Boolean(cv));
+    if (cv)
+      setForm((f) =>
+        f.partnerContactOptIn ? f : { ...f, partnerContactOptIn: true },
+      );
+    // Removing the CV restored the member's earlier choice server-side; show it.
+    else if (hasCv && uid)
+      void getUserProfile(uid).then((p) =>
+        setForm((f) => ({ ...f, partnerContactOptIn: p?.partnerContactOptIn })),
+      );
+  };
 
   useEffect(() => {
     updatePageMeta(
@@ -852,19 +873,52 @@ export default function AccountPage() {
                       Allow anonymized usage analytics (link and page
                       interactions)
                     </label>
-                    <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                      <input
-                        type="checkbox"
-                        checked={!!form.partnerContactOptIn}
-                        onChange={(e) =>
-                          setForm((f) => ({
-                            ...f,
-                            partnerContactOptIn: e.target.checked,
-                          }))
-                        }
-                      />
-                      Allow contact from partner companies
-                    </label>
+                    {hasCv ? (
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          {/* Focusable while locked, so the reason is reachable by keyboard too. */}
+                          <label
+                            tabIndex={0}
+                            className="flex w-fit items-center gap-2 text-gray-800 dark:text-gray-200 cursor-not-allowed opacity-70"
+                          >
+                            <input
+                              type="checkbox"
+                              checked
+                              disabled
+                              readOnly
+                              aria-describedby="partner-contact-locked"
+                              // Disabled inputs swallow hover in some browsers; let the label get it.
+                              className="pointer-events-none"
+                            />
+                            Allow contact from partner companies
+                          </label>
+                        </TooltipTrigger>
+                        <TooltipContent side="top" sideOffset={6}>
+                          Please remove your CV if you do not want to be
+                          contacted by our partners
+                        </TooltipContent>
+                      </Tooltip>
+                    ) : (
+                      <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
+                        <input
+                          type="checkbox"
+                          checked={!!form.partnerContactOptIn}
+                          onChange={(e) =>
+                            setForm((f) => ({
+                              ...f,
+                              partnerContactOptIn: e.target.checked,
+                            }))
+                          }
+                        />
+                        Allow contact from partner companies
+                      </label>
+                    )}
+                    {hasCv && (
+                      <span id="partner-contact-locked" className="sr-only">
+                        Please remove your CV if you do not want to be contacted
+                        by our partners
+                      </span>
+                    )}
                     <div className="text-xs text-gray-600 dark:text-gray-400">
                       View our{' '}
                       <a
@@ -892,96 +946,109 @@ export default function AccountPage() {
               )}
             </Card>
 
-            <Card>
-              <CardHeader>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Linked Accounts
-                </h2>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Link multiple providers to your account.
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-800 dark:text-gray-200">
-                    Google
-                  </span>
-                  {isLinked.google ? (
+            {/* Account settings stack beside the profile; the optional CV card spans below. */}
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Linked Accounts
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    Link multiple providers to your account.
+                  </p>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-800 dark:text-gray-200">
+                      Google
+                    </span>
+                    {isLinked.google ? (
+                      <span className="text-green-600">Linked</span>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        onClick={() => handleLink('google')}
+                      >
+                        Link
+                      </Button>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-800 dark:text-gray-200">
+                      GitHub
+                    </span>
+                    {isLinked.github ? (
+                      <span className="text-green-600">Linked</span>
+                    ) : (
+                      <Button
+                        variant="outline"
+                        onClick={() => handleLink('github')}
+                      >
+                        Link
+                      </Button>
+                    )}
+                  </div>
+                  {/* <div className="flex items-center justify-between">
+                  <span className="text-gray-800 dark:text-gray-200">Microsoft</span>
+                  {isLinked.microsoft ? (
                     <span className="text-green-600">Linked</span>
                   ) : (
-                    <Button
-                      variant="outline"
-                      onClick={() => handleLink('google')}
-                    >
-                      Link
-                    </Button>
+                    <Button onClick={() => handleLink("microsoft")}>Link</Button>
                   )}
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-800 dark:text-gray-200">
-                    GitHub
-                  </span>
-                  {isLinked.github ? (
-                    <span className="text-green-600">Linked</span>
-                  ) : (
-                    <Button
-                      variant="outline"
-                      onClick={() => handleLink('github')}
-                    >
-                      Link
-                    </Button>
-                  )}
-                </div>
-                {/* <div className="flex items-center justify-between">
-                <span className="text-gray-800 dark:text-gray-200">Microsoft</span>
-                {isLinked.microsoft ? (
-                  <span className="text-green-600">Linked</span>
-                ) : (
-                  <Button onClick={() => handleLink("microsoft")}>Link</Button>
-                )}
-              </div> */}
-              </CardContent>
-            </Card>
+                </div> */}
+                </CardContent>
+              </Card>
 
-            <Card>
-              <CardHeader>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Cookie Settings
-                </h2>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Manage your cookie preferences.
-                </p>
-              </CardHeader>
-              <CardContent>
-                <Button
-                  variant="outline"
-                  onClick={() => CookieConsent.showPreferences()}
-                >
-                  Change cookie settings
-                </Button>
-              </CardContent>
-            </Card>
+              <Card>
+                <CardHeader>
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Cookie Settings
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    Manage your cookie preferences.
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <Button
+                    variant="outline"
+                    onClick={() => CookieConsent.showPreferences()}
+                  >
+                    Change cookie settings
+                  </Button>
+                </CardContent>
+              </Card>
 
-            <Card>
-              <CardHeader>
-                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                  Delete Account
-                </h2>
-                <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Permanently delete your profile, event registrations,
-                  attendance history, and uploaded files.
-                </p>
-              </CardHeader>
-              <CardContent>
-                <Button
-                  variant="outline"
-                  className="border-red-300 text-red-700 hover:bg-red-50 dark:border-red-800 dark:text-red-300 dark:hover:bg-red-900/20"
-                  onClick={() => setConfirmDeleteAccount(true)}
-                >
-                  Delete account
-                </Button>
-              </CardContent>
-            </Card>
+              <Card>
+                <CardHeader>
+                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    Delete Account
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">
+                    Permanently delete your profile, shared CV, event
+                    registrations, attendance history, team and board
+                    applications, showcase projects, and uploaded files.
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <Button
+                    variant="outline"
+                    className="border-red-300 text-red-700 hover:bg-red-50 dark:border-red-800 dark:text-red-300 dark:hover:bg-red-900/20"
+                    onClick={() => setConfirmDeleteAccount(true)}
+                  >
+                    Delete account
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+
+            <CvCard
+              uid={uid}
+              isMember={form.isMember === true}
+              emailVerified={
+                isLinked.google || auth.currentUser?.emailVerified === true
+              }
+              onCvChange={handleCvChange}
+            />
           </div>
         </div>
 
@@ -1037,7 +1104,7 @@ export default function AccountPage() {
         <ConfirmModal
           open={confirmDeleteAccount}
           title="Delete account"
-          description="This permanently deletes your profile, event registrations, attendance history, uploaded files, and sign-in. This cannot be undone."
+          description="This permanently deletes your profile, shared CV, event registrations, attendance history, team and board applications, showcase projects, uploaded files, and sign-in. This cannot be undone."
           confirmText="Delete my account"
           cancelText="Keep account"
           onClose={() => setConfirmDeleteAccount(false)}

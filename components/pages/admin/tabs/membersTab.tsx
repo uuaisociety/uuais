@@ -1,50 +1,61 @@
-"use client";
+'use client';
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { type UserProfile, listUsers, updateUserProfile, deleteUser } from "@/lib/firestore";
-import { Button } from "@/components/ui/Button";
-import { Modal } from "@/components/ui/Modal";
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  type UserProfile,
+  type MemberCv,
+  listUsers,
+  listCvs,
+  updateUserProfile,
+} from '@/lib/firestore';
+import { Button } from '@/components/ui/Button';
+import { Modal } from '@/components/ui/Modal';
+import ConfirmModal from '@/components/ui/ConfirmModal';
 import TableControls, { TablePagination } from '@/components/ui/TableControls';
-import { useNotify } from "@/components/ui/Notifications";
-import { Download, Trash2} from 'lucide-react';
+import { useNotify } from '@/components/ui/Notifications';
+import { Download, Trash2 } from 'lucide-react';
 
 type EditableUser = UserProfile & Record<string, unknown>;
 
 const fieldOrder: string[] = [
-  "displayName",
-  "name",
-  "email",
-  "photoURL",
-  "isMember",
-  "studentStatus",
-  "campus",
-  "university",
-  "program",
-  "expectedGraduationYear",
-  "gender",
-  "linkedin",
-  "github",
-  "website",
-  "bio",
-  "heardOfUs",
-  "newsletter",
-  "lookingForJob",
-  "privacyAcceptedAt",
-  "marketingOptIn",
-  "analyticsOptIn",
-  "partnerContactOptIn",
-  "createdAt",
-  "updatedAt",
-  "unsubscribedFromEmails",
+  'displayName',
+  'name',
+  'email',
+  'photoURL',
+  'isMember',
+  'studentStatus',
+  'campus',
+  'university',
+  'program',
+  'expectedGraduationYear',
+  'gender',
+  'linkedin',
+  'github',
+  'website',
+  'bio',
+  'heardOfUs',
+  'newsletter',
+  'lookingForJob',
+  'privacyAcceptedAt',
+  'marketingOptIn',
+  'analyticsOptIn',
+  'partnerContactOptIn',
+  'createdAt',
+  'updatedAt',
+  'unsubscribedFromEmails',
 ];
 
 function downloadCsv(users: EditableUser[]) {
   const headers = ['id', ...fieldOrder];
   const rows = [
     headers,
-    ...users.map((u) => headers.map((h) => (u as Record<string, unknown>)[h] ?? '')),
+    ...users.map((u) =>
+      headers.map((h) => (u as Record<string, unknown>)[h] ?? ''),
+    ),
   ];
-  const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n');
+  const csv = rows
+    .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(','))
+    .join('\n');
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -62,10 +73,22 @@ type SortableThProps = {
   children: React.ReactNode;
 };
 
-const SortableTh: React.FC<SortableThProps> = ({ column, sortKey, sortDir, onToggle, children }) => (
+const SortableTh: React.FC<SortableThProps> = ({
+  column,
+  sortKey,
+  sortDir,
+  onToggle,
+  children,
+}) => (
   <th
     className="py-2 pr-4"
-    aria-sort={sortKey === column ? (sortDir === 'asc' ? 'ascending' : 'descending') : undefined}
+    aria-sort={
+      sortKey === column
+        ? sortDir === 'asc'
+          ? 'ascending'
+          : 'descending'
+        : undefined
+    }
   >
     <button
       type="button"
@@ -86,28 +109,35 @@ export default function MembersTab() {
   const { notify } = useNotify();
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState<EditableUser[]>([]);
-  const [filter, setFilter] = useState("");
+  const [cvs, setCvs] = useState<Record<string, MemberCv>>({});
+  const [filter, setFilter] = useState('');
   const [sortKey, setSortKey] = useState<string | null>('updatedAt');
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
   const [selected, setSelected] = useState<EditableUser | null>(null);
   const [draft, setDraft] = useState<Record<string, unknown>>({});
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  const refresh = useCallback(async (opts?: { notify?: boolean }) => {
-    setLoading(true);
-    try {
-      const u = await listUsers();
-      u.sort((a, b) => (b.updatedAt || "").localeCompare(a.updatedAt || ""));
-      setUsers(u);
-      // Notify only on an explicit user-triggered refresh — silent on mount/save/delete.
-      if (opts?.notify) notify({ type: 'success', message: 'Members refreshed.' });
-    } finally {
-      setLoading(false);
-    }
-  }, [notify]);
+  const refresh = useCallback(
+    async (opts?: { notify?: boolean }) => {
+      setLoading(true);
+      try {
+        const [u, c] = await Promise.all([listUsers(), listCvs()]);
+        u.sort((a, b) => (b.updatedAt || '').localeCompare(a.updatedAt || ''));
+        setUsers(u);
+        setCvs(Object.fromEntries(c.map((cv) => [cv.id, cv])));
+        // Notify only on an explicit user-triggered refresh — silent on mount/save/delete.
+        if (opts?.notify)
+          notify({ type: 'success', message: 'Members refreshed.' });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [notify],
+  );
 
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect */
@@ -121,7 +151,7 @@ export default function MembersTab() {
     return users.filter((u) =>
       [u.name, u.displayName, u.email, u.program, u.campus, u.university]
         .filter(Boolean)
-        .some((v) => String(v).toLowerCase().includes(q))
+        .some((v) => String(v).toLowerCase().includes(q)),
     );
   }, [users, filter]);
 
@@ -134,7 +164,8 @@ export default function MembersTab() {
       // Treat undefined/null as empty string
       const sa = va === undefined || va === null ? '' : String(va);
       const sb = vb === undefined || vb === null ? '' : String(vb);
-      if (sortDir === 'asc') return sa.localeCompare(sb, undefined, { numeric: true });
+      if (sortDir === 'asc')
+        return sa.localeCompare(sb, undefined, { numeric: true });
       return sb.localeCompare(sa, undefined, { numeric: true });
     });
     return s;
@@ -183,14 +214,30 @@ export default function MembersTab() {
     }
   };
 
+  // Full erasure on the server (CV, registrations, files, profile, sign-in), the
+  // same as a member deleting their own account; never just the profile doc.
   const onDelete = async () => {
     if (!selected) return;
+    setConfirmDelete(false);
     setDeleting(true);
     try {
-      await deleteUser(selected.id);
+      const res = await fetch(
+        `/api/admin/members?uid=${encodeURIComponent(selected.id)}`,
+        { method: 'DELETE' },
+      );
+      const body = await res.json().catch(() => null);
+      if (!res.ok)
+        throw new Error(body?.error || `Deletion failed (${res.status})`);
       await refresh();
       close();
       notify({ type: 'success', title: 'Deleted', message: 'Member deleted.' });
+    } catch (e) {
+      notify({
+        type: 'error',
+        title: 'Deletion failed',
+        message:
+          e instanceof Error ? e.message : 'Could not delete the member.',
+      });
     } finally {
       setDeleting(false);
     }
@@ -201,7 +248,10 @@ export default function MembersTab() {
 
     // Merge keys from ordering, selected and draft
     const keys = Array.from(
-      new Set([...fieldOrder, ...Object.keys({ ...(selected ?? {}), ...(draft ?? {}) })])
+      new Set([
+        ...fieldOrder,
+        ...Object.keys({ ...(selected ?? {}), ...(draft ?? {}) }),
+      ]),
     );
 
     const booleanFields = new Set([
@@ -211,13 +261,13 @@ export default function MembersTab() {
       'analyticsOptIn',
       'partnerContactOptIn',
       'isMember',
-      'unsubscribedFromEmails'
+      'unsubscribedFromEmails',
     ]);
 
     const enumOptions: Record<string, string[]> = {
       studentStatus: ['student', 'alumni', 'other'],
       campus: ['Uppsala', 'Gotland', 'other'],
-      university: ['Uppsala', 'none', 'other']
+      university: ['Uppsala', 'none', 'other'],
     };
 
     const getValue = (k: string) => {
@@ -235,105 +285,135 @@ export default function MembersTab() {
         size="lg"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {keys.map((k) => {
-              const val = getValue(k);
-              // Show booleans using checkbox regardless of draft presence
-              if (booleanFields.has(k)) {
-                return (
-                  <div key={k} className="flex items-center gap-2">
-                    <label className="inline-flex items-center gap-2 text-foreground">
-                      <input
-                        type="checkbox"
-                        checked={Boolean(val)}
-                        onChange={(e) => onChangeField(k, e.target.checked)}
-                      />
-                      <span className="text-xs text-muted-foreground">{k}</span>
-                    </label>
-                  </div>
-                );
-              }
-
-              if (enumOptions[k]) {
-                return (
-                  <div key={k} className="flex flex-col gap-1">
-                    <label className="text-xs text-muted-foreground">{k}</label>
-                    <select
-                      className="input"
-                      value={val === undefined ? '' : String(val)}
-                      onChange={(e) => onChangeField(k, e.target.value === '' ? undefined : e.target.value)}
-                    >
-                      <option value=""></option>
-                      {enumOptions[k].map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                );
-              }
-
-              if (k === 'expectedGraduationYear') {
-                return (
-                  <div key={k} className="flex flex-col gap-1">
-                    <label className="text-xs text-muted-foreground">{k}</label>
+          {keys.map((k) => {
+            const val = getValue(k);
+            // Show booleans using checkbox regardless of draft presence
+            if (booleanFields.has(k)) {
+              return (
+                <div key={k} className="flex items-center gap-2">
+                  <label className="inline-flex items-center gap-2 text-foreground">
                     <input
-                      className="input"
-                      type="number"
-                      value={String(val ?? '')}
-                      onChange={(e) => onChangeField(k, e.target.value === '' ? undefined : Number(e.target.value))}
+                      type="checkbox"
+                      checked={Boolean(val)}
+                      onChange={(e) => onChangeField(k, e.target.checked)}
                     />
-                  </div>
-                );
-              }
+                    <span className="text-xs text-muted-foreground">{k}</span>
+                  </label>
+                </div>
+              );
+            }
 
-              if (k.toLowerCase().includes('at') && typeof val === 'string') {
-                // show date-time-ish fields as date input when possible
-                const iso = val as string;
-                const dateVal = iso ? new Date(iso).toISOString().slice(0, 16) : '';
-                return (
-                  <div key={k} className="flex flex-col gap-1">
-                    <label className="text-xs text-muted-foreground">{k}</label>
-                    <input
-                      className="input"
-                      type="datetime-local"
-                      value={dateVal}
-                      onChange={(e) => onChangeField(k, e.target.value ? new Date(e.target.value).toISOString() : undefined)}
-                    />
-                  </div>
-                );
-              }
+            if (enumOptions[k]) {
+              return (
+                <div key={k} className="flex flex-col gap-1">
+                  <label className="text-xs text-muted-foreground">{k}</label>
+                  <select
+                    className="input"
+                    value={val === undefined ? '' : String(val)}
+                    onChange={(e) =>
+                      onChangeField(
+                        k,
+                        e.target.value === '' ? undefined : e.target.value,
+                      )
+                    }
+                  >
+                    <option value=""></option>
+                    {enumOptions[k].map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              );
+            }
 
+            if (k === 'expectedGraduationYear') {
               return (
                 <div key={k} className="flex flex-col gap-1">
                   <label className="text-xs text-muted-foreground">{k}</label>
                   <input
                     className="input"
+                    type="number"
                     value={String(val ?? '')}
-                    onChange={(e) => onChangeField(k, e.target.value)}
+                    onChange={(e) =>
+                      onChangeField(
+                        k,
+                        e.target.value === ''
+                          ? undefined
+                          : Number(e.target.value),
+                      )
+                    }
                   />
                 </div>
               );
-            })}
-          </div>
+            }
 
-          <div className="mt-4 flex justify-between">
+            if (k.toLowerCase().includes('at') && typeof val === 'string') {
+              // show date-time-ish fields as date input when possible
+              const iso = val as string;
+              const dateVal = iso
+                ? new Date(iso).toISOString().slice(0, 16)
+                : '';
+              return (
+                <div key={k} className="flex flex-col gap-1">
+                  <label className="text-xs text-muted-foreground">{k}</label>
+                  <input
+                    className="input"
+                    type="datetime-local"
+                    value={dateVal}
+                    onChange={(e) =>
+                      onChangeField(
+                        k,
+                        e.target.value
+                          ? new Date(e.target.value).toISOString()
+                          : undefined,
+                      )
+                    }
+                  />
+                </div>
+              );
+            }
+
+            return (
+              <div key={k} className="flex flex-col gap-1">
+                <label className="text-xs text-muted-foreground">{k}</label>
+                <input
+                  className="input"
+                  value={String(val ?? '')}
+                  onChange={(e) => onChangeField(k, e.target.value)}
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-4 flex justify-between">
+          <Button
+            variant="destructive"
+            onClick={() => setConfirmDelete(true)}
+            disabled={deleting || saving}
+          >
+            <Trash2 className="h-4 w-4" aria-hidden />{' '}
+            {deleting ? 'Deleting...' : 'Delete'}
+          </Button>
+          <div className="flex gap-2">
             <Button
-              variant="destructive"
-              onClick={onDelete}
-              disabled={deleting || saving}
+              variant="secondary"
+              onClick={close}
+              disabled={saving || deleting}
             >
-              <Trash2 className="h-4 w-4" aria-hidden /> {deleting ? 'Deleting...' : 'Delete'}
+              Cancel
             </Button>
-            <div className="flex gap-2">
-              <Button variant="secondary" onClick={close} disabled={saving || deleting}>
-                Cancel
-              </Button>
-              <Button variant="outline" onClick={onSave} disabled={saving || deleting}>
-                {saving ? 'Saving...' : 'Save'}
-              </Button>
-            </div>
+            <Button
+              variant="outline"
+              onClick={onSave}
+              disabled={saving || deleting}
+            >
+              {saving ? 'Saving...' : 'Save'}
+            </Button>
           </div>
+        </div>
       </Modal>
     );
   };
@@ -351,15 +431,21 @@ export default function MembersTab() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between flex-wrap gap-2">
-        <h2 className="text-xl font-semibold tracking-[-0.028em] text-foreground">Members</h2>
+        <h2 className="text-xl font-semibold tracking-[-0.028em] text-foreground">
+          Members
+        </h2>
         <div className="flex items-center gap-2">
-          <Button variant="outline" icon={Download} onClick={() => downloadCsv(users)}>
+          <Button
+            variant="outline"
+            icon={Download}
+            onClick={() => downloadCsv(users)}
+          >
             CSV
           </Button>
           <TableControls
             filter={filter}
             setFilter={setFilter}
-            loading={loading} 
+            loading={loading}
             onRefresh={() => refresh({ notify: true })}
           />
         </div>
@@ -367,28 +453,84 @@ export default function MembersTab() {
 
       <div className="overflow-x-auto">
         <table className="min-w-full text-left text-sm">
-          <thead className="text-muted-foreground">
+          <thead className="text-muted-foreground px-4">
             <tr>
-              <SortableTh column="name" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Name</SortableTh>
-              <SortableTh column="email" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Email</SortableTh>
-              <SortableTh column="isMember" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Member</SortableTh>
-              <SortableTh column="campus" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Campus</SortableTh>
-              <SortableTh column="program" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Program</SortableTh>
-              <SortableTh column="university" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>University</SortableTh>
-              <SortableTh column="updatedAt" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort}>Updated</SortableTh>
+              <SortableTh
+                column="name"
+                sortKey={sortKey}
+                sortDir={sortDir}
+                onToggle={toggleSort}
+              >
+                Name
+              </SortableTh>
+              <SortableTh
+                column="email"
+                sortKey={sortKey}
+                sortDir={sortDir}
+                onToggle={toggleSort}
+              >
+                Email
+              </SortableTh>
+              <SortableTh
+                column="isMember"
+                sortKey={sortKey}
+                sortDir={sortDir}
+                onToggle={toggleSort}
+              >
+                Member
+              </SortableTh>
+              <SortableTh
+                column="campus"
+                sortKey={sortKey}
+                sortDir={sortDir}
+                onToggle={toggleSort}
+              >
+                Campus
+              </SortableTh>
+              <SortableTh
+                column="program"
+                sortKey={sortKey}
+                sortDir={sortDir}
+                onToggle={toggleSort}
+              >
+                Program
+              </SortableTh>
+              <SortableTh
+                column="university"
+                sortKey={sortKey}
+                sortDir={sortDir}
+                onToggle={toggleSort}
+              >
+                University
+              </SortableTh>
+              <SortableTh
+                column="updatedAt"
+                sortKey={sortKey}
+                sortDir={sortDir}
+                onToggle={toggleSort}
+              >
+                Updated
+              </SortableTh>
+              <th className="py-2 pr-4">CV</th>
               <th className="py-2 pr-4"></th>
             </tr>
           </thead>
-          <tbody className="text-foreground">
+          <tbody className="text-foreground px-4">
             {loading ? (
               <tr>
-                <td className="py-3 text-center text-muted-foreground" colSpan={8}>
+                <td
+                  className="py-3 text-center text-muted-foreground"
+                  colSpan={9}
+                >
                   Loading...
                 </td>
               </tr>
             ) : filtered.length === 0 ? (
               <tr>
-                <td className="py-8 text-center text-muted-foreground" colSpan={8}>
+                <td
+                  className="py-8 text-center text-muted-foreground"
+                  colSpan={9}
+                >
                   No users match your search.
                 </td>
               </tr>
@@ -398,13 +540,32 @@ export default function MembersTab() {
                   key={m.id}
                   className="border-t border-border hover:bg-foreground/[0.03]"
                 >
-                  <td className="py-2 pr-4">{m.name || m.displayName || "-"}</td>
-                  <td className="py-2 pr-4">{m.email || "-"}</td>
-                  <td className="py-2 pr-4">{m.isMember ? "Yes" : "No"}</td>
-                  <td className="py-2 pr-4">{m.campus || "-"}</td>
-                  <td className="py-2 pr-4">{m.program || "-"}</td>
-                  <td className="py-2 pr-4">{m.university || "-"}</td>
-                  <td className="py-2 pr-4">{m.updatedAt ? new Date(m.updatedAt).toLocaleDateString() : "-"}</td>
+                  <td className="pl-1 pr-4">
+                    {m.name || m.displayName || '-'}
+                  </td>
+                  <td className="py-2 pr-4">{m.email || '-'}</td>
+                  <td className="py-2 pr-4">{m.isMember ? 'Yes' : 'No'}</td>
+                  <td className="py-2 pr-4">{m.campus || '-'}</td>
+                  <td className="py-2 pr-4">{m.program || '-'}</td>
+                  <td className="py-2 pr-4">{m.university || '-'}</td>
+                  <td className="py-2 pr-4">
+                    {m.updatedAt
+                      ? new Date(m.updatedAt).toLocaleDateString()
+                      : '-'}
+                  </td>
+                  <td className="py-2 pr-4">
+                    {cvs[m.id] ? (
+                      <a
+                        href={`/api/cvs?uid=${encodeURIComponent(m.id)}`}
+                        className="text-primary hover:brightness-110 hover:underline"
+                        title={`Consent ${new Date(cvs[m.id].consentAt).toLocaleDateString()} (v${cvs[m.id].consentVersion})`}
+                      >
+                        Download
+                      </a>
+                    ) : (
+                      '-'
+                    )}
+                  </td>
                   <td className="py-2 pr-4">
                     <Button variant="outline" onClick={() => open(m)}>
                       Edit
@@ -426,6 +587,16 @@ export default function MembersTab() {
       />
 
       {renderEditor()}
+
+      <ConfirmModal
+        open={confirmDelete}
+        title="Delete member"
+        description={`This permanently deletes ${selected?.name || selected?.displayName || selected?.email || 'this member'}'s account: profile, shared CV, event registrations and uploaded files, attendance history, and sign-in. This cannot be undone.`}
+        confirmText="Delete member"
+        cancelText="Keep member"
+        onClose={() => setConfirmDelete(false)}
+        onConfirm={onDelete}
+      />
     </div>
   );
 }
