@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import PartnersPage from '@/components/pages/PartnersPage';
 import { SITE_URL } from '@/app/metadata';
+import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 
 export const metadata: Metadata = {
   title: 'Partners',
@@ -10,5 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  // Hidden until launch (see lib/feature-flags); /partners/cvs stays available.
+  if (!PARTNERS_PAGE_PUBLIC) notFound();
   return <PartnersPage />;
 }

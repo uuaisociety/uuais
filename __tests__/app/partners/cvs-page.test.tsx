@@ -64,8 +64,9 @@ describe('/partners/cvs', () => {
         email: 'anna@student.uu.se',
         program: 'Computer Science',
         expectedGraduationYear: 2027,
+        isMember: true,
       },
-      u2: { name: 'Åsa Öberg' },
+      u2: { name: 'Åsa Öberg', isMember: true },
     };
   });
 
@@ -112,6 +113,22 @@ describe('/partners/cvs', () => {
     expect(
       screen.getByRole('button', { name: 'Download all (2)' }),
     ).toBeInTheDocument();
+  });
+
+  it('lists only current members, with spoofing characters and oversized text cleaned', async () => {
+    mockGetServerSession.mockResolvedValue(session({ isPartner: true }));
+    cvDocs.push({ id: 'u3', consentAt: '2026-10-01T00:00:00.000Z' });
+    profiles.u3 = { name: 'Revoked Member', isMember: false };
+    profiles.u1.name = 'Anna \u202eSvensson';
+    profiles.u1.program = 'x'.repeat(5000);
+    render(await Page());
+
+    expect(screen.queryByText('Revoked Member')).not.toBeInTheDocument();
+    expect(screen.getByText('Anna Svensson')).toBeInTheDocument();
+    expect(screen.getByText('2 CVs')).toBeInTheDocument();
+    const text = document.body.textContent ?? '';
+    expect(text).toContain('x'.repeat(150));
+    expect(text).not.toContain('x'.repeat(151));
   });
 
   it('says so when nobody has shared a CV', async () => {

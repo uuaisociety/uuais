@@ -46,7 +46,8 @@ describe('Header', () => {
       expect(screen.getAllByText('Events').length).toBe(2);
       expect(screen.getAllByText('Blog').length).toBe(2);
       expect(screen.getAllByText('About').length).toBe(2);
-      expect(screen.getAllByText('Partners').length).toBe(2);
+      // Hidden until the Partners page launches (see partners-flag.test.tsx).
+      expect(screen.queryByText('Partners')).not.toBeInTheDocument();
     });
 
     it('keeps Home in the mobile menu only — the wordmark covers it on desktop', () => {

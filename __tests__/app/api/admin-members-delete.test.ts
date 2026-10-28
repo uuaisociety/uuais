@@ -12,6 +12,17 @@ jest.mock('@/lib/account-erasure', () => ({
   eraseAccount: (...args: unknown[]) => mockErase(...args),
 }));
 
+// Target accounts' custom claims, by uid.
+let claims: Record<string, Record<string, unknown>>;
+jest.mock('@/lib/firebase-admin', () => ({
+  adminAuth: {
+    getUser: async (uid: string) => {
+      if (!(uid in claims)) throw { code: 'auth/user-not-found' };
+      return { uid, customClaims: claims[uid] };
+    },
+  },
+}));
+
 const mockLog = jest.fn().mockResolvedValue(undefined);
 jest.mock('@/lib/server-audit-log', () => ({
   logAdminAction: (...args: unknown[]) => mockLog(...args),
@@ -32,6 +43,34 @@ describe('DELETE /api/admin/members', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     resetRateLimits();
+    claims = {
+      member1: {},
+      admin2: { admin: true },
+      super1: { superAdmin: true },
+    };
+  });
+
+  it('keeps the hierarchy: only a superAdmin can erase an admin', async () => {
+    asAdmin();
+    const { DELETE } = await import('@/app/api/admin/members/route');
+    for (const uid of ['admin2', 'super1']) {
+      const res = await DELETE(remove(uid) as never);
+      expect(res.status).toBe(403);
+    }
+    expect(mockErase).not.toHaveBeenCalled();
+
+    mockGetTokens.mockResolvedValue({
+      decodedToken: { uid: 'super2', superAdmin: true },
+    });
+    expect((await DELETE(remove('admin2') as never)).status).toBe(200);
+    expect(mockErase).toHaveBeenCalledWith('admin2');
+  });
+
+  it('still erases leftover data for a member whose sign-in is already gone', async () => {
+    asAdmin();
+    const { DELETE } = await import('@/app/api/admin/members/route');
+    expect((await DELETE(remove('ghost1') as never)).status).toBe(200);
+    expect(mockErase).toHaveBeenCalledWith('ghost1');
   });
 
   it('refuses anyone who is not an admin', async () => {

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Shield, Eye, Database, UserCheck, Mail, Calendar } from 'lucide-react';
+import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 
 export const PrivacyPage: React.FC = () => {
   return (
@@ -173,13 +174,20 @@ export const PrivacyPage: React.FC = () => {
                 </li>
                 <li>
                   <strong>Who receives it:</strong> authorised board members,
-                  and the partner companies listed on our{' '}
-                  <a
-                    href="/partners"
-                    className="text-blue-600 dark:text-blue-400 underline"
-                  >
-                    Partners page
-                  </a>
+                  and{' '}
+                  {PARTNERS_PAGE_PUBLIC ? (
+                    <>
+                      the partner companies listed on our{' '}
+                      <a
+                        href="/partners"
+                        className="text-blue-600 dark:text-blue-400 underline"
+                      >
+                        Partners page
+                      </a>
+                    </>
+                  ) : (
+                    'our partner companies'
+                  )}
                   , for internships, thesis projects, and job opportunities.
                   Partners view CVs through a sign-in-only page, and every
                   download is logged
@@ -191,7 +199,8 @@ export const PrivacyPage: React.FC = () => {
                   <strong>Partner contact:</strong> while your CV is shared,
                   partners may contact you about these opportunities, so
                   &quot;Allow contact from partner companies&quot; stays
-                  switched on until you remove your CV
+                  switched on until you remove your CV, which restores the
+                  choice you had before sharing it
                 </li>
                 <li>
                   <strong>Withdrawing consent:</strong> remove your CV on My
@@ -293,6 +302,10 @@ export const PrivacyPage: React.FC = () => {
                 <li>
                   CV shared with partners: Until you remove it or delete your
                   account
+                </li>
+                <li>
+                  Access and consent logs (who downloaded a CV, admin actions,
+                  and when CV-sharing consent was given or withdrawn): 30 days
                 </li>
                 <li>Account profile: Until you delete your account</li>
               </ul>

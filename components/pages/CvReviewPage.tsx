@@ -7,6 +7,7 @@ import UseDifferentEmailButton from '@/components/auth/UseDifferentEmailButton';
 import PartnerNotFound from '@/components/auth/PartnerNotFound';
 import DownloadAllCvsButton from '@/components/partners/DownloadAllCvsButton';
 import type { SharedCv } from '@/lib/export-cvs';
+import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 
 // Member (name + email) | Programme | Graduates | Shared | PDF
 const COLUMNS =
@@ -52,7 +53,11 @@ export default function CvReviewPage({ access, cvs = [] }: Props) {
             <div className="flex flex-wrap gap-3">
               <UseDifferentEmailButton />
               <Button asChild variant="ghost">
-                <Link href="/partners">Back to partners</Link>
+                {PARTNERS_PAGE_PUBLIC ? (
+                  <Link href="/partners">Back to partners</Link>
+                ) : (
+                  <Link href="/">Back to home</Link>
+                )}
               </Button>
             </div>
           </>

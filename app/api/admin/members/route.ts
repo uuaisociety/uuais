@@ -4,6 +4,7 @@ import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { logAdminAction } from '@/lib/server-audit-log';
 import { eraseAccount } from '@/lib/account-erasure';
+import { adminAuth } from '@/lib/firebase-admin';
 
 export const runtime = 'nodejs';
 
@@ -46,6 +47,22 @@ export async function DELETE(req: NextRequest) {
   }
 
   try {
+    // Keep the hierarchy: only a superAdmin may erase an admin or superAdmin.
+    const target = await adminAuth.getUser(uid).catch((err: unknown) => {
+      if ((err as { code?: unknown })?.code === 'auth/user-not-found')
+        return null;
+      throw err;
+    });
+    const targetIsAdmin =
+      target?.customClaims?.admin === true ||
+      target?.customClaims?.superAdmin === true;
+    if (targetIsAdmin && !auth.session.isSuperAdmin) {
+      return NextResponse.json(
+        { error: 'Only a superAdmin can delete an admin account.' },
+        { status: 403 },
+      );
+    }
+
     await eraseAccount(uid);
     const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
     await logAdminAction({

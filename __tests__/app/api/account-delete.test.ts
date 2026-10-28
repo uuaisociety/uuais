@@ -21,6 +21,14 @@ jest.mock('@/lib/server-registration-files', () => ({
   deleteStorageFiles: (...args: unknown[]) => mockDeleteStorageFiles(...args),
 }));
 
+// Applications and showcase projects (collector covered in its own tests).
+const mockCollectSubmissions = jest.fn();
+jest.mock('@/lib/account-erasure-submissions', () => ({
+  collectSubmissions: (...args: unknown[]) => mockCollectSubmissions(...args),
+}));
+const mockBatchDelete = jest.fn();
+const mockBatchCommit = jest.fn().mockResolvedValue(undefined);
+
 // Registration docs owned by user1, keyed by doc path.
 let regs: Record<string, Record<string, unknown>>;
 let eventCount: number;
@@ -38,6 +46,7 @@ const docRef = (path: string) => ({ path });
 jest.mock('@/lib/firebase-admin', () => ({
   adminAuth: { deleteUser: (...args: unknown[]) => mockDeleteUser(...args) },
   adminDb: {
+    batch: () => ({ delete: mockBatchDelete, commit: mockBatchCommit }),
     recursiveDelete: (...args: unknown[]) => mockRecursiveDelete(...args),
     runTransaction: async (
       fn: (tx: {
@@ -119,6 +128,7 @@ describe('POST /api/account/delete', () => {
     jest.clearAllMocks();
     mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'user1' } });
     mockCheckWindow.mockReturnValue({ allowed: true });
+    mockCollectSubmissions.mockResolvedValue({ filePaths: [], refs: [] });
     eventCount = 5;
     regs = {
       'registrations/reg1': {
@@ -210,6 +220,35 @@ describe('POST /api/account/delete', () => {
       ],
       { failOnError: true },
     );
+  });
+
+  it('erases applications and showcase work: their files first, then their documents', async () => {
+    const order: string[] = [];
+    mockCollectSubmissions.mockResolvedValue({
+      filePaths: ['team-applications/1_cv.pdf', 'showcase/user1/cover.png'],
+      refs: [docRef('teamApplications/a1'), docRef('showcaseProjects/p1')],
+    });
+    mockDeleteStorageFiles.mockImplementation(async () => {
+      order.push('files');
+      return 1;
+    });
+    mockBatchCommit.mockImplementation(async () => {
+      order.push('docs');
+    });
+    const res = await erase();
+
+    expect(res.status).toBe(200);
+    expect(mockCollectSubmissions).toHaveBeenCalledWith('user1');
+    expect(mockDeleteStorageFiles.mock.calls[0][0]).toEqual(
+      expect.arrayContaining([
+        'team-applications/1_cv.pdf',
+        'showcase/user1/cover.png',
+      ]),
+    );
+    expect(mockBatchDelete).toHaveBeenCalledWith(docRef('teamApplications/a1'));
+    expect(mockBatchDelete).toHaveBeenCalledWith(docRef('showcaseProjects/p1'));
+    expect(order.indexOf('files')).toBeLessThan(order.indexOf('docs'));
+    mockDeleteStorageFiles.mockImplementation(async () => 1);
   });
 
   it('keeps the account when file deletion fails', async () => {

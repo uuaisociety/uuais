@@ -32,10 +32,21 @@ const toAscii = (part: string): string =>
     .normalize('NFKD')
     .replace(/[^A-Za-z0-9-]/g, '');
 
+// Long enough for any real name; short enough for every filesystem and archive tool.
+const MAX_BASE_LENGTH = 100;
+// Device names Windows refuses as a file name, whatever the extension.
+const WINDOWS_RESERVED = /^(con|prn|aux|nul|com[1-9]|lpt[1-9])$/i;
+
+const toBaseName = (parts: string[]): string | null => {
+  if (!parts.length) return null;
+  const base = parts.join('_').slice(0, MAX_BASE_LENGTH);
+  return WINDOWS_RESERVED.test(base) ? `CV_${base}` : base;
+};
+
 /** `Firstname_Lastname.pdf`, accents kept; shared by single and bulk downloads. */
 export function cvFileName(fullName: unknown): string {
-  const parts = nameParts(fullName);
-  return parts.length ? `${parts.join('_')}.pdf` : 'cv.pdf';
+  const base = toBaseName(nameParts(fullName));
+  return base ? `${base}.pdf` : 'cv.pdf';
 }
 
 /**
@@ -44,9 +55,10 @@ export function cvFileName(fullName: unknown): string {
  * browsers that support RFC 6266; `filename` is the ASCII fallback.
  */
 export function cvContentDisposition(fullName: unknown): string {
-  const parts = nameParts(fullName);
   const unicode = cvFileName(fullName);
-  const asciiParts = parts.map(toAscii).filter(Boolean);
-  const ascii = asciiParts.length ? `${asciiParts.join('_')}.pdf` : 'cv.pdf';
+  const asciiBase = toBaseName(
+    nameParts(fullName).map(toAscii).filter(Boolean),
+  );
+  const ascii = asciiBase ? `${asciiBase}.pdf` : 'cv.pdf';
   return `attachment; filename="${ascii}"; filename*=UTF-8''${encodeURIComponent(unicode)}`;
 }

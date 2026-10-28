@@ -10,6 +10,7 @@ import {
 } from '@/lib/bounded-request-body';
 import {
   MAX_PDF_BYTES,
+  findPdfActiveContent,
   sanitizePdfFileName,
   validatePdfFile,
 } from '@/lib/pdf-upload';
@@ -17,6 +18,7 @@ import { saveFileToStorage } from '@/lib/storage-upload';
 import { scanPdfBuffer } from '@/lib/malware-scan';
 import { deleteStorageFiles } from '@/lib/server-registration-files';
 import { CV_CONSENT_VERSION } from '@/lib/cv-consent';
+import { logAdminAction } from '@/lib/server-audit-log';
 
 const CV_LIMIT = 10;
 const CV_WINDOW_MS = 10 * 60 * 1000;
@@ -85,6 +87,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid filename' }, { status: 400 });
 
     const buffer = Buffer.from(await file.arrayBuffer());
+    // CVs go straight to partner companies, so refuse anything that can act.
+    const active = await findPdfActiveContent(buffer);
+    if (active) {
+      console.warn(`CV upload rejected for ${uid}: active content (${active})`);
+      return NextResponse.json(
+        {
+          error:
+            'This PDF contains scripts, attachments or interactive content, so we can’t share it with partners. Please export your CV again as a plain PDF.',
+        },
+        { status: 400 },
+      );
+    }
     const scan = await scanPdfBuffer(buffer, fileName);
     if (!scan.ok)
       return NextResponse.json(
@@ -104,13 +118,46 @@ export async function POST(req: NextRequest) {
       consentAt: now,
       consentVersion: CV_CONSENT_VERSION,
     };
-    await adminDb.collection('cvs').doc(uid).set(cv);
-    // Sharing a CV means partners may get in touch, so contact opt-in follows it;
-    // rules keep it on until the CV is removed.
-    await adminDb
-      .collection('users')
-      .doc(uid)
-      .set({ partnerContactOptIn: true, updatedAt: now }, { merge: true });
+    const usersRef = adminDb.collection('users').doc(uid);
+    const cvRef = adminDb.collection('cvs').doc(uid);
+    // One transaction, re-reading the profile: if the account was erased while
+    // this upload was being scanned and saved, don't resurrect its CV.
+    const stored = await adminDb.runTransaction(async (tx) => {
+      const [user, existing] = await Promise.all([
+        tx.get(usersRef),
+        tx.get(cvRef),
+      ]);
+      if (!user.exists) return false;
+      // Sharing a CV switches partner contact on (rules keep it on); remember the
+      // member's own choice from before their first upload so removing the CV
+      // restores it. A replacement keeps the original choice.
+      const prior = existing.exists
+        ? existing.get('priorPartnerContactOptIn') === true
+        : user.get('partnerContactOptIn') === true;
+      tx.set(cvRef, { ...cv, priorPartnerContactOptIn: prior });
+      tx.set(
+        usersRef,
+        { partnerContactOptIn: true, updatedAt: now },
+        { merge: true },
+      );
+      return true;
+    });
+    if (!stored) {
+      await deleteStorageFiles([path]);
+      return NextResponse.json(
+        { error: 'Your account no longer exists.' },
+        { status: 409 },
+      );
+    }
+
+    // Consent history (kept 30 days with the other access logs). Best-effort:
+    // the current consent itself lives on cvs/{uid}.
+    await logAdminAction({
+      action: 'consent-granted',
+      adminUid: uid,
+      path,
+      consentVersion: CV_CONSENT_VERSION,
+    });
 
     return NextResponse.json({ id: uid, ...cv });
   } catch (err) {
@@ -124,7 +171,8 @@ export async function POST(req: NextRequest) {
 
 /**
  * DELETE /api/account/cv — removes the CV file and its consent record, which
- * withdraws consent. File first, so a failure never leaves an unlisted file.
+ * withdraws consent, and restores the partner-contact choice the member had
+ * before sharing. File first, so a failure never leaves an unlisted file.
  */
 export async function DELETE(req: NextRequest) {
   try {
@@ -134,8 +182,24 @@ export async function DELETE(req: NextRequest) {
     const limited = rateLimited(uid);
     if (limited) return limited;
 
+    const cvRef = adminDb.collection('cvs').doc(uid);
+    const record = await cvRef.get();
     await deleteStorageFiles([cvPath(uid)], { failOnError: true });
-    await adminDb.collection('cvs').doc(uid).delete();
+    await cvRef.delete();
+    if (record.exists) {
+      const usersRef = adminDb.collection('users').doc(uid);
+      const user = await usersRef.get();
+      if (user.exists)
+        await usersRef.update({
+          partnerContactOptIn: record.get('priorPartnerContactOptIn') === true,
+          updatedAt: new Date().toISOString(),
+        });
+      await logAdminAction({
+        action: 'consent-withdrawn',
+        adminUid: uid,
+        path: cvPath(uid),
+      });
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

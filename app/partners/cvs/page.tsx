@@ -10,9 +10,19 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// Display hygiene for member-typed text: invisible format characters (e.g.
+// right-to-left overrides that make text read differently) dropped, length
+// capped like the Firestore rules, so no profile can bloat or spoof the page.
+const clean = (value: unknown, max: number): string =>
+  String(value ?? '')
+    .replace(/\p{Cf}/gu, '')
+    .trim()
+    .slice(0, max);
+
 // Members who consented to sharing, with the profile details their consent
 // covers (name, email, programme, expected graduation year). Read with the
 // Admin SDK so partner accounts never get client access to member profiles.
+// Only current members are listed: sharing is a member benefit.
 async function loadSharedCvs(): Promise<SharedCv[]> {
   const records = await adminDb.collection('cvs').get();
   if (records.empty) return [];
@@ -21,16 +31,17 @@ async function loadSharedCvs(): Promise<SharedCv[]> {
   );
   const byUid = new Map(profiles.map((p) => [p.id, p]));
   return records.docs
+    .filter((d) => byUid.get(d.id)?.get('isMember') === true)
     .map((d) => {
       const p = byUid.get(d.id);
       const year = Number(p?.get('expectedGraduationYear'));
       return {
         uid: d.id,
-        name: String(
-          p?.get('name') || p?.get('displayName') || 'Unnamed member',
-        ),
-        email: String(p?.get('email') || ''),
-        program: String(p?.get('program') || ''),
+        name:
+          clean(p?.get('name') || p?.get('displayName'), 100) ||
+          'Unnamed member',
+        email: clean(p?.get('email'), 254),
+        program: clean(p?.get('program'), 150),
         graduationYear: Number.isInteger(year) && year > 0 ? year : null,
         consentAt: String(d.get('consentAt') || ''),
       };

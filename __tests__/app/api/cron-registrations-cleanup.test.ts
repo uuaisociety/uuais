@@ -42,6 +42,11 @@ const mockAdminDb = {
 };
 
 jest.mock('@/lib/firebase-admin', () => ({ adminDb: mockAdminDb }));
+// The purge itself is covered by the server-audit-log tests.
+const mockPurgeAuditLogs = jest.fn().mockResolvedValue(3);
+jest.mock('@/lib/server-audit-log', () => ({
+  purgeExpiredAuditLogs: (...args: unknown[]) => mockPurgeAuditLogs(...args),
+}));
 jest.mock('firebase-admin', () => ({
   storage: () => ({
     bucket: () => ({ getFiles: (...args: unknown[]) => mockGetFiles(...args) }),
@@ -158,6 +163,7 @@ describe('GET /api/cron/registrations-cleanup', () => {
       deleted: 3,
       deletedDocs: 0,
       migrated: 0,
+      purgedAuditLogs: 3,
     });
     expect(expired.delete).toHaveBeenCalledTimes(1);
     expect(orphan.delete).toHaveBeenCalledTimes(1);
@@ -192,6 +198,7 @@ describe('GET /api/cron/registrations-cleanup', () => {
       deleted: 0,
       deletedDocs: 0,
       migrated: 0,
+      purgedAuditLogs: 3,
     });
     warn.mockRestore();
   });
@@ -329,6 +336,13 @@ describe('GET /api/cron/registrations-cleanup', () => {
     expect(recentOrphan.ref.delete).not.toHaveBeenCalled();
     expect(expiredOrphan.ref.delete).toHaveBeenCalled();
     expect(body.deletedDocs).toBe(1);
+  });
+
+  it('purges audit-log entries past their 30-day retention', async () => {
+    const res = await call('test-secret');
+    expect(res.status).toBe(200);
+    expect(mockPurgeAuditLogs).toHaveBeenCalled();
+    expect((await res.json()).purgedAuditLogs).toBe(3);
   });
 
   it('returns 500 when listing fails', async () => {

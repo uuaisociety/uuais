@@ -55,21 +55,33 @@ export async function GET(req: NextRequest) {
     if (!exists)
       return NextResponse.json({ error: 'CV not found' }, { status: 404 });
 
-    const [[buffer], profile] = await Promise.all([
-      file.download(),
-      adminDb.collection('users').doc(uid).get(),
-    ]);
+    const profile = await adminDb.collection('users').doc(uid).get();
+    // Sharing is a member benefit: a revoked or erased member's CV isn't served.
+    if (profile.get('isMember') !== true)
+      return NextResponse.json({ error: 'CV not found' }, { status: 404 });
 
+    // The privacy policy promises every download is logged, so no log, no file.
     const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
-    await logAdminAction({
-      action: 'download',
-      adminUid: session.uid,
-      path,
-      ip: forwarded || undefined,
-      ...(session.isAdmin
-        ? {}
-        : { role: 'partner' as const, email: session.email }),
-    });
+    try {
+      await logAdminAction(
+        {
+          action: 'download',
+          adminUid: session.uid,
+          path,
+          ip: forwarded || undefined,
+          ...(session.isAdmin
+            ? {}
+            : { role: 'partner' as const, email: session.email }),
+        },
+        { required: true },
+      );
+    } catch {
+      return NextResponse.json(
+        { error: 'Downloads are temporarily unavailable. Please try again.' },
+        { status: 503 },
+      );
+    }
+    const [buffer] = await file.download();
 
     return new NextResponse(new Uint8Array(buffer), {
       headers: {
@@ -79,6 +91,8 @@ export async function GET(req: NextRequest) {
         ),
         'Cache-Control': 'no-store',
         'X-Content-Type-Options': 'nosniff',
+        // Belt and braces should a browser ever render it in our origin anyway.
+        'Content-Security-Policy': 'sandbox',
       },
     });
   } catch (err) {

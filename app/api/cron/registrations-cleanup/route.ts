@@ -4,6 +4,7 @@ import { isValidCronRequest } from '@/lib/cron-auth';
 import { adminDb } from '@/lib/firebase-admin';
 import '@/lib/firebase-admin';
 import admin from 'firebase-admin';
+import { purgeExpiredAuditLogs } from '@/lib/server-audit-log';
 
 export const runtime = 'nodejs';
 export const maxDuration = 300;
@@ -34,7 +35,9 @@ function eventIdFromPath(path: string): string {
  * - deletes registration documents 36 months after the event date, matching
  *   the privacy policy's retention statement (for deleted events: 36 months
  *   after registering);
- * - deletes attendance of deleted events 36 months after they were deleted.
+ * - deletes attendance of deleted events 36 months after they were deleted;
+ * - deletes admin audit-log entries (incl. CV downloads and consent events)
+ *   older than 30 days. Runs here because Vercel Hobby allows two crons.
  */
 export async function GET(req: NextRequest) {
   if (!isValidCronRequest(req)) {
@@ -193,12 +196,15 @@ export async function GET(req: NextRequest) {
       }
     }
 
+    const purgedAuditLogs = await purgeExpiredAuditLogs();
+
     return NextResponse.json({
       success: true,
       scanned: files.length,
       deleted,
       deletedDocs,
       migrated,
+      purgedAuditLogs,
     });
   } catch (err) {
     console.error('registrations cleanup cron error', err);

@@ -26,3 +26,16 @@ describe('in-memory rate limits', () => {
     expect(checkWindow('another-client', 1, 1000).allowed).toBe(true);
   });
 });
+
+describe('rate-limit buckets', () => {
+  it('fills one bucket without failing closed for another', async () => {
+    const { checkWindow, resetRateLimits } =
+      await import('@/lib/rate-limit-in-memory');
+    resetRateLimits();
+    for (let i = 0; i < 10_000; i++)
+      checkWindow(`ip-${i}`, 10, 60_000, 'flood');
+    expect(checkWindow('ip-new', 10, 60_000, 'flood').allowed).toBe(false);
+    expect(checkWindow('cv-download:partner', 10, 60_000).allowed).toBe(true);
+    resetRateLimits();
+  });
+});

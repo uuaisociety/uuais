@@ -10,6 +10,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { loginUrl } from '@/lib/login-redirect';
 import { useOpenCampaigns } from '@/lib/firestore/useOpenCampaigns';
+import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 
 // Desktop top level. The wordmark already goes home, so Home only earns a slot
 // in the mobile list, where a vertical menu has room for it.
@@ -17,7 +18,7 @@ const navigation = [
   { name: 'Events', href: '/events' },
   { name: 'Blog', href: '/blog', badge: 'Beta' },
   { name: 'About', href: '/about' },
-  { name: 'Partners', href: '/partners' },
+  ...(PARTNERS_PAGE_PUBLIC ? [{ name: 'Partners', href: '/partners' }] : []),
 ];
 
 const mobileNavigation = [{ name: 'Home', href: '/' }, ...navigation];

@@ -8,12 +8,13 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { LinkedinIcon, InstagramIcon } from '@hugeicons/core-free-icons';
 import { DiscordCta } from '@/components/common/DiscordCta';
 import { logoBox, partnersInTier } from '@/lib/partners';
+import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 
 const quickLinks = [
   { href: '/', label: 'Home' },
   { href: '/events', label: 'Events' },
   { href: '/careers', label: 'Job board' },
-  { href: '/partners', label: 'Partners' },
+  ...(PARTNERS_PAGE_PUBLIC ? [{ href: '/partners', label: 'Partners' }] : []),
   { href: '/about', label: 'About us' },
   { href: '/about#contact', label: 'Contact' },
 ];
@@ -33,44 +34,75 @@ export const Footer: React.FC = () => {
   return (
     <footer className="mt-24 px-5 sm:px-8">
       <div className="max-w-6xl mx-auto">
-        {/* Principal (Alpha) partners only, kept quiet; every tier lives on /partners. */}
-        {/* Equal side columns keep the logos on the page's true centre, whatever the label and link widths. */}
-        <div className="py-10 border-t border-border flex flex-col items-center gap-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-10">
-          <p className="mono-label text-muted-foreground lg:justify-self-start">
-            Principal partners
-          </p>
-          <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-5">
-            {partnersInTier('alpha').map((p) => (
-              <li key={p.name}>
+        {PARTNERS_PAGE_PUBLIC ? (
+          <>
+            {/* Principal (Alpha) partners only, kept quiet; every tier lives on /partners. */}
+            {/* Equal side columns keep the logos on the page's true centre, whatever the label and link widths. */}
+            <div className="py-10 border-t border-border flex flex-col items-center gap-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-10">
+              <p className="mono-label text-muted-foreground lg:justify-self-start">
+                Principal partners
+              </p>
+              <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-5">
+                {partnersInTier('alpha').map((p) => (
+                  <li key={p.name}>
+                    <a
+                      href={p.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${p.name} (opens in a new tab)`}
+                      className="block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      <Image
+                        src={p.logo}
+                        alt={p.name}
+                        loading="lazy"
+                        {...logoBox(p, 6400)}
+                        className="grayscale opacity-55 hover:grayscale-0 hover:opacity-100 transition-[opacity,filter] duration-300 dark:brightness-0 dark:invert dark:opacity-60 dark:hover:opacity-100"
+                      />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/partners"
+                className="group inline-flex items-center gap-1.5 mono-label text-muted-foreground hover:text-foreground transition-colors duration-300 lg:justify-self-end"
+              >
+                All partners
+                <ArrowRight
+                  className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5"
+                  aria-hidden
+                />
+              </Link>
+            </div>
+          </>
+        ) : (
+          // Until the Partners page launches: the original "Our partners" row.
+          <div className="pt-16 pb-16 border-t border-border">
+            <p className="mono-label text-muted-foreground mb-8">
+              Our partners
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              {partnersInTier('gamma').map((p) => (
                 <a
+                  key={p.name}
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${p.name} (opens in a new tab)`}
-                  className="block rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="glass glass-interactive rounded-md h-20 flex items-center justify-center px-4"
                 >
                   <Image
                     src={p.logo}
                     alt={p.name}
                     loading="lazy"
-                    {...logoBox(p, 6400)}
-                    className="grayscale opacity-55 hover:grayscale-0 hover:opacity-100 transition-[opacity,filter] duration-300 dark:brightness-0 dark:invert dark:opacity-60 dark:hover:opacity-100"
+                    {...logoBox(p, 2400)}
+                    className="object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 dark:invert dark:brightness-0 dark:opacity-70"
                   />
                 </a>
-              </li>
-            ))}
-          </ul>
-          <Link
-            href="/partners"
-            className="group inline-flex items-center gap-1.5 mono-label text-muted-foreground hover:text-foreground transition-colors duration-300 lg:justify-self-end"
-          >
-            All partners
-            <ArrowRight
-              className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5"
-              aria-hidden
-            />
-          </Link>
-        </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Columns */}
         <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr] gap-12 py-16 border-t border-border">

@@ -40,4 +40,13 @@ describe('cvContentDisposition', () => {
     expect(asciiName(cvContentDisposition(undefined))).toBe('cv.pdf');
     expect(asciiName(cvContentDisposition('***'))).toBe('cv.pdf');
   });
+
+  it('caps very long names and defuses reserved Windows device names', () => {
+    expect(asciiName(cvContentDisposition('a'.repeat(5000)))).toBe(
+      `${'a'.repeat(100)}.pdf`,
+    );
+    expect(asciiName(cvContentDisposition('CON'))).toBe('CV_CON.pdf');
+    expect(asciiName(cvContentDisposition('nul'))).toBe('CV_nul.pdf');
+    expect(cvContentDisposition('a'.repeat(5000)).length).toBeLessThan(400);
+  });
 });

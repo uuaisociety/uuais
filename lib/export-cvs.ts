@@ -11,22 +11,34 @@ export type SharedCv = {
   consentAt: string;
 };
 
-/** Zip entry per CV; repeated names get " (2)", " (3)" so no file is overwritten. */
+/**
+ * Zip entry per CV; repeated names get " (2)", " (3)" so no file is overwritten.
+ * Names are compared the way Windows and macOS do (case- and Unicode-form-
+ * insensitively), or "Anna Berg" and "anna berg" would overwrite each other there.
+ */
 export function uniqueCvFileNames(cvs: SharedCv[]): string[] {
   const seen = new Map<string, number>();
   return cvs.map((cv) => {
     const name = cvFileName(cv.name);
-    const n = (seen.get(name) ?? 0) + 1;
-    seen.set(name, n);
+    const key = name.normalize('NFKC').toLowerCase();
+    const n = (seen.get(key) ?? 0) + 1;
+    seen.set(key, n);
     return n === 1 ? name : name.replace(/\.pdf$/, ` (${n}).pdf`);
   });
 }
 
-// Profile fields are member-typed; a leading =, +, - or @ would run as a
-// formula when a partner opens the CSV in a spreadsheet.
+// Profile fields are member-typed and partners open this in spreadsheets, where a
+// leading =, +, - or @ runs as a formula. Line breaks are flattened first (a
+// newline could start a fresh, unguarded cell in some importers), invisible
+// format characters (e.g. right-to-left overrides) are dropped, and the guard
+// also sees through leading whitespace and full-width ＝＋－＠.
 const csvCell = (value: unknown): string => {
-  const text = String(value ?? '');
-  const safe = /^[=+\-@\t\r]/.test(text) ? `'${text}` : text;
+  const text = String(value ?? '')
+    .replace(/[\r\n\t\v\f\u2028\u2029]+/g, ' ')
+    .replace(/\p{Cf}/gu, '');
+  const safe = /^\s*[=+\-@\uFF1D\uFF0B\uFF0D\uFF20]/.test(text)
+    ? `'${text}`
+    : text;
   return `"${safe.replace(/"/g, '""')}"`;
 };
 

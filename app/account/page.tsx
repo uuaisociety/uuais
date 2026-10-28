@@ -70,6 +70,11 @@ export default function AccountPage() {
       setForm((f) =>
         f.partnerContactOptIn ? f : { ...f, partnerContactOptIn: true },
       );
+    // Removing the CV restored the member's earlier choice server-side; show it.
+    else if (hasCv && uid)
+      void getUserProfile(uid).then((p) =>
+        setForm((f) => ({ ...f, partnerContactOptIn: p?.partnerContactOptIn })),
+      );
   };
 
   useEffect(() => {
@@ -1019,8 +1024,9 @@ export default function AccountPage() {
                     Delete Account
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300 text-sm">
-                    Permanently delete your profile, event registrations,
-                    attendance history, and uploaded files.
+                    Permanently delete your profile, shared CV, event
+                    registrations, attendance history, team and board
+                    applications, showcase projects, and uploaded files.
                   </p>
                 </CardHeader>
                 <CardContent>
@@ -1095,7 +1101,7 @@ export default function AccountPage() {
         <ConfirmModal
           open={confirmDeleteAccount}
           title="Delete account"
-          description="This permanently deletes your profile, event registrations, attendance history, uploaded files, and sign-in. This cannot be undone."
+          description="This permanently deletes your profile, shared CV, event registrations, attendance history, team and board applications, showcase projects, uploaded files, and sign-in. This cannot be undone."
           confirmText="Delete my account"
           cancelText="Keep account"
           onClose={() => setConfirmDeleteAccount(false)}

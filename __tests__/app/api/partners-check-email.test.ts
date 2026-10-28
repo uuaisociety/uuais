@@ -47,11 +47,19 @@ describe('POST /api/partners/check-email', () => {
     expect(await approved(res)).toBe(true);
   });
 
-  it('approves an admin', async () => {
+  it('never reveals whether an address belongs to an admin', async () => {
     const { POST } = await import('@/app/api/partners/check-email/route');
     expect(await approved(await POST(check('board@uuais.com') as never))).toBe(
-      true,
+      false,
     );
+  });
+
+  it('keeps its own rate-limit store, so filling it cannot block other routes', async () => {
+    const { POST } = await import('@/app/api/partners/check-email/route');
+    const { checkWindow } = await import('@/lib/rate-limit-in-memory');
+    for (let i = 0; i < 11; i++)
+      await POST(check('nobody@example.com') as never);
+    expect(checkWindow('1.1.1.1', 1, 60_000).allowed).toBe(true);
   });
 
   it('does not approve ordinary members or unknown addresses', async () => {

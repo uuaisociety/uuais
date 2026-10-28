@@ -37,26 +37,24 @@ describe('Footer', () => {
     expect(screen.getByText('it@uuais.com')).toBeInTheDocument();
   });
 
-  it('renders partner section', () => {
+  // Default: the Partners page isn't public yet (lib/feature-flags); the flag-on
+  // footer is covered in partners-flag.test.tsx.
+  it('keeps the original partner row while the Partners page is hidden', () => {
     render(<Footer />);
-    expect(screen.getByText('Principal partners')).toBeInTheDocument();
-  });
-
-  it('shows only the principal (Alpha) partners and links to the full page', () => {
-    render(<Footer />);
+    expect(screen.getByText('Our partners')).toBeInTheDocument();
+    expect(screen.queryByText('Principal partners')).not.toBeInTheDocument();
     const logos = screen
       .getAllByRole('img')
       .map((img) => img.getAttribute('alt'))
       .filter(Boolean);
-    expect(logos).toEqual(['Jane Street']);
-    expect(screen.getByRole('link', { name: /All partners/ })).toHaveAttribute(
-      'href',
-      '/partners',
-    );
-    expect(screen.getByRole('link', { name: 'Partners' })).toHaveAttribute(
-      'href',
-      '/partners',
-    );
+    expect(logos).toContain('Voi');
+    expect(logos).not.toContain('Jane Street');
+    expect(
+      screen.queryByRole('link', { name: /All partners/ }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: 'Partners' }),
+    ).not.toBeInTheDocument();
   });
 
   it('renders privacy policy link', () => {

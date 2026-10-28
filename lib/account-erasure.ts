@@ -4,12 +4,15 @@ import {
   collectUserStorageFilePaths,
   deleteStorageFiles,
 } from '@/lib/server-registration-files';
+import { collectSubmissions } from '@/lib/account-erasure-submissions';
 
 /**
  * Erases a member's account: registrations (and attached PDFs, releasing any
- * seats they held), attendance entries, showcase votes, course-planner data, AI
- * chats, shared CV, profile document (including newsletter subscription and
- * transcript data), and Firebase Auth account. Required by GDPR Art. 17.
+ * seats they held), attendance entries, showcase votes, team and board
+ * applications (with their resumes, CVs and cover files), showcase projects
+ * (with covers and votes on them), course-planner data, AI chats, shared CV,
+ * profile document (including newsletter subscription and transcript data), and
+ * Firebase Auth account. Required by GDPR Art. 17.
  *
  * Used by self-service deletion and by admins in the Members tab, so both
  * remove exactly the same data. Every step is idempotent, so a failed run can be
@@ -38,6 +41,9 @@ export async function eraseAccount(uid: string): Promise<void> {
     console.warn('Failed to list stored files for', uid, err);
   }
   filePaths.add(`cvs/${uid}/cv.pdf`);
+  // Applications and showcase projects: files go with the rest, docs further down.
+  const submissions = await collectSubmissions(uid);
+  submissions.filePaths.forEach((p) => filePaths.add(p));
   await deleteStorageFiles(Array.from(filePaths), { failOnError: true });
 
   // One transaction per registration so counted seats are released.
@@ -95,6 +101,13 @@ export async function eraseAccount(uid: string): Promise<void> {
     );
   }
 
+  // Firestore batches hold at most 500 writes.
+  for (let i = 0; i < submissions.refs.length; i += 500) {
+    const batch = adminDb.batch();
+    submissions.refs.slice(i, i + 500).forEach((ref) => batch.delete(ref));
+    await batch.commit();
+  }
+
   // recursiveDelete also removes subcollections (e.g. users/{uid}/transcript_data).
   for (const collection of [
     'course_categories',
@@ -106,6 +119,10 @@ export async function eraseAccount(uid: string): Promise<void> {
   ]) {
     await adminDb.recursiveDelete(adminDb.collection(collection).doc(uid));
   }
+
+  // Again at the end: a CV upload that was mid-flight when the files were first
+  // deleted may have saved its PDF since (its record write then sees no profile).
+  await deleteStorageFiles([`cvs/${uid}/cv.pdf`], { failOnError: true });
 
   try {
     await adminAuth.deleteUser(uid);

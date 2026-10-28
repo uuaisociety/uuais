@@ -40,6 +40,24 @@ service cloud.firestore {
       return !(field in data) || (data[field] is string && data[field].size() <= max);
     }
 
+    // Profile fields partners see next to a shared CV: bounded so a member can't
+    // bloat the partner page (or its zip index) with megabyte-sized values.
+    function partnerVisibleFieldsOk(d) {
+      return strWithin(d, 'name', 100)
+        && strWithin(d, 'displayName', 100)
+        && strWithin(d, 'email', 254)
+        && strWithin(d, 'program', 150)
+        && (!('expectedGraduationYear' in d) || d.expectedGraduationYear == null
+          || (d.expectedGraduationYear is int
+            && d.expectedGraduationYear >= 1950 && d.expectedGraduationYear <= 2100));
+    }
+
+    // Helper: a shared CV implies partner contact, so the opt-in stays on while cvs/{uid} exists.
+    function cvOptInKept(uid) {
+      return !exists(/databases/$(database)/documents/cvs/$(uid))
+        || request.resource.data.get('partnerContactOptIn', false) == true;
+    }
+
     // Helper: rules cannot iterate, but the tag list is capped, so each slot is checked by index
     function tagWithin(tags, i, max) {
       return tags.size() <= i || (tags[i] is string && tags[i].size() > 0 && tags[i].size() <= max);
@@ -72,7 +90,10 @@ service cloud.firestore {
         // Limit client-writable fields; prevent role escalation
         && request.resource.data.keys().hasOnly([
           'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails'
-        ]);
+        ])
+        && partnerVisibleFieldsOk(request.resource.data)
+        // Re-creating a profile while a CV is still shared must keep partner contact on too.
+        && cvOptInKept(uid);
 
       // Update own doc but cannot alter privileged fields except allowed ones.
       // isMember is admin-managed: users set it once (at create, or on a doc that lacks it), then only admins may change it.
@@ -83,12 +104,13 @@ service cloud.firestore {
           'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails'
         ])
         && (!('isMember' in resource.data) || request.resource.data.get('isMember', null) == resource.data.isMember)
-        // A shared CV implies partner contact: the opt-in stays on until the CV is removed.
-        && (!exists(/databases/$(database)/documents/cvs/$(uid))
-          || request.resource.data.get('partnerContactOptIn', false) == true);
+        && partnerVisibleFieldsOk(request.resource.data)
+        && cvOptInKept(uid);
 
-      // Admin full control
-      allow create, update, delete: if isAdmin();
+      // Admin edits. Deleting a profile is server-only (lib/account-erasure), so a
+      // member is never half-erased with their CV still shared.
+      allow create, update: if isAdmin();
+      allow delete: if false;
     }
 
     // MEMBER CVS — shared with partners on consent; written only by /api/account/cv (Admin SDK).
@@ -105,7 +127,8 @@ service cloud.firestore {
         || (isSignedIn()
           && request.auth.token.email_verified == true
           && request.auth.token.email.lower() == email);
-      allow write: if isAdmin();
+      // Server-only (tools/partnerAccess.ts): an entry is bound to a vetted account.
+      allow write: if false;
     }
 
     // EVENTS

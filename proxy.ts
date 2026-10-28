@@ -42,9 +42,14 @@ export async function proxy(request: NextRequest) {
       loginPath: '/api/login',
       logoutPath: '/api/logout',
       handleValidToken: async (tokens, headers) => {
-        const isAdmin = tokens.decodedToken.admin === true || tokens.decodedToken.superAdmin === true;
+        const isAdmin =
+          tokens.decodedToken.admin === true ||
+          tokens.decodedToken.superAdmin === true;
         if (!isAdmin) {
-          return NextResponse.json({ error: 'Forbidden: Admin access required' }, { status: 403 });
+          return NextResponse.json(
+            { error: 'Forbidden: Admin access required' },
+            { status: 403 },
+          );
         }
         return NextResponse.next({ request: { headers } });
       },
@@ -66,5 +71,12 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*', '/api/:path*', '/programs/:code+'],
+  // /partners/cvs reads the session in a server component, so its token must be
+  // refreshed (and a revoked one dropped) here first, like the API routes.
+  matcher: [
+    '/admin/:path*',
+    '/api/:path*',
+    '/programs/:code+',
+    '/partners/cvs',
+  ],
 };

@@ -10,6 +10,7 @@ import PDFDropzone from '@/components/ui/PDFDropzone';
 import { useNotify } from '@/components/ui/Notifications';
 import { getMyCv, type MemberCv } from '@/lib/firestore';
 import { CV_CONSENT_TEXT } from '@/lib/cv-consent';
+import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString(undefined, {
@@ -276,11 +277,13 @@ export default function CvCard({
             email, programme, and expected graduation year. Leaving it out
             changes nothing about your membership.
           </p>
-          <p className="mt-3 text-sm text-muted-foreground">
-            <Link href="/partners" className={linkClass}>
-              See who our partners are
-            </Link>
-          </p>
+          {PARTNERS_PAGE_PUBLIC && (
+            <p className="mt-3 text-sm text-muted-foreground">
+              <Link href="/partners" className={linkClass}>
+                See who our partners are
+              </Link>
+            </p>
+          )}
         </div>
         <div>{renderBody()}</div>
       </div>

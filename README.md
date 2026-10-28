@@ -105,6 +105,12 @@ firebase deploy --only storage:rules
 firebase deploy --only firestore:indexes
 ```
 
+Admin audit logs (CV downloads, admin actions, CV consent events) are kept 30 days. The daily `registrations-cleanup` cron deletes older entries. Optionally, also let Firestore expire them on the `expireAt` field each entry carries:
+
+```bash
+gcloud firestore fields ttls update expireAt --collection-group=adminAuditLogs --enable-ttl --project=<project-id>
+```
+
 ### Available Scripts
 
 - `npm run dev` - Runs the development server with Turbopack
@@ -120,8 +126,8 @@ firebase deploy --only firestore:indexes
 - `npm run security` - Runs a Snyk dependency scan (requires `snyk auth`)
 - `npm run set:admin -- <email> true` - Sets an admin user
 - `npm run set:admin -- <email> false` - Removes an admin user
-- `npm run add:partner -- <email> [company]` - Gives a partner company access to shared CVs
-- `npm run remove:partner -- <email>` - Removes that access
+- `npm run add:partner -- <email> [company]` - Gives a partner company access to shared CVs (creates and binds their sign-in account)
+- `npm run remove:partner -- <email>` - Removes that access (and the account the tool created)
 
 ## Testing
 

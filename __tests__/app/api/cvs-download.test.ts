@@ -23,7 +23,8 @@ jest.mock('@/lib/server-audit-log', () => ({
 
 let cvRecord: Record<string, unknown> | null;
 let profile: Record<string, unknown> | null;
-let allowlist: Set<string>;
+// Allowlisted email -> the account add:partner bound it to.
+let allowlist: Map<string, string>;
 const snap = (data: Record<string, unknown> | null) => ({
   exists: data !== null,
   get: (key: string) => data?.[key],
@@ -34,7 +35,11 @@ jest.mock('@/lib/firebase-admin', () => ({
       doc: (id: string) => ({
         get: async () =>
           name === 'partnerAccounts'
-            ? snap(allowlist.has(id) ? { email: id } : null)
+            ? snap(
+                allowlist.has(id)
+                  ? { email: id, uid: allowlist.get(id) }
+                  : null,
+              )
             : snap(name === 'cvs' ? cvRecord : profile),
       }),
     }),
@@ -59,8 +64,8 @@ describe('GET /api/cvs', () => {
     jest.clearAllMocks();
     resetRateLimits();
     cvRecord = { path: 'cvs/member1/cv.pdf' };
-    profile = { name: 'Anna Svensson' };
-    allowlist = new Set(['hr@partner.example']);
+    profile = { name: 'Anna Svensson', isMember: true };
+    allowlist = new Map([['hr@partner.example', 'viewer1']]);
     mockExists.mockResolvedValue([true]);
     mockDownload.mockResolvedValue([Buffer.from('%PDF-1.4 cv')]);
   });
@@ -105,15 +110,43 @@ describe('GET /api/cvs', () => {
       'filename="Anna_Svensson.pdf"',
     );
     expect(res.headers.get('Cache-Control')).toBe('no-store');
+    expect(res.headers.get('Content-Security-Policy')).toBe('sandbox');
     expect(mockFile).toHaveBeenCalledWith('cvs/member1/cv.pdf');
-    expect(mockLog).toHaveBeenCalledWith({
-      action: 'download',
-      adminUid: 'viewer1',
-      path: 'cvs/member1/cv.pdf',
-      ip: '1.2.3.4',
-      role: 'partner',
-      email: 'HR@Partner.example',
-    });
+    expect(mockLog).toHaveBeenCalledWith(
+      {
+        action: 'download',
+        adminUid: 'viewer1',
+        path: 'cvs/member1/cv.pdf',
+        ip: '1.2.3.4',
+        role: 'partner',
+        email: 'HR@Partner.example',
+      },
+      { required: true },
+    );
+  });
+
+  it('refuses another account that merely carries the allowlisted email (pre-registered with a password)', async () => {
+    allowlist.set('hr@partner.example', 'the-real-partner-uid');
+    as(partner);
+    const { GET } = await import('@/app/api/cvs/route');
+    expect((await GET(download() as never)).status).toBe(403);
+    expect(mockFile).not.toHaveBeenCalled();
+  });
+
+  it('does not serve the CV of someone who is no longer a member', async () => {
+    as(partner);
+    profile = { name: 'Anna Svensson', isMember: false };
+    const { GET } = await import('@/app/api/cvs/route');
+    expect((await GET(download() as never)).status).toBe(404);
+    expect(mockDownload).not.toHaveBeenCalled();
+  });
+
+  it('refuses to hand out a CV it could not log', async () => {
+    as(partner);
+    mockLog.mockRejectedValueOnce(new Error('firestore down'));
+    const { GET } = await import('@/app/api/cvs/route');
+    expect((await GET(download() as never)).status).toBe(503);
+    expect(mockDownload).not.toHaveBeenCalled();
   });
 
   it('refuses an allowlisted email that the provider has not verified', async () => {
@@ -137,6 +170,7 @@ describe('GET /api/cvs', () => {
     expect(res.status).toBe(200);
     expect(mockLog).toHaveBeenCalledWith(
       expect.not.objectContaining({ role: expect.anything() }),
+      { required: true },
     );
   });
 });

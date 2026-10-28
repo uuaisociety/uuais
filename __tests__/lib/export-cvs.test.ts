@@ -20,6 +20,15 @@ describe('uniqueCvFileNames', () => {
       ]),
     ).toEqual(['Anna_Svensson.pdf', 'Åsa_Öberg.pdf', 'Anna_Svensson (2).pdf']);
   });
+
+  it('treats names differing only in case as the same file (Windows/macOS would overwrite)', () => {
+    expect(
+      uniqueCvFileNames([
+        cv({ uid: 'a', name: 'Anna Berg' }),
+        cv({ uid: 'b', name: 'anna berg' }),
+      ]),
+    ).toEqual(['Anna_Berg.pdf', 'anna_berg (2).pdf']);
+  });
 });
 
 describe('cvIndexCsv', () => {
@@ -39,6 +48,25 @@ describe('cvIndexCsv', () => {
     expect(cvIndexCsv([cv({})], [null])).toContain(
       '"not included (download failed)"',
     );
+  });
+
+  it('closes formula-guard bypasses: line breaks, leading space, full-width signs, hidden characters', () => {
+    const csv = cvIndexCsv(
+      [
+        cv({ program: '\n=1+5' }),
+        cv({ program: ' \u00a0=cmd' }),
+        cv({ program: '＝HYPERLINK("x")' }),
+        cv({ name: '\u202e=evil' }),
+      ],
+      ['a.pdf', 'b.pdf', 'c.pdf', 'd.pdf'],
+    );
+    const rows = csv.slice(1).split('\r\n');
+    expect(rows).toHaveLength(5); // the newline did not start a new row
+    expect(csv).toContain(`"' =1+5"`);
+    expect(csv).toContain(`"' \u00a0=cmd"`);
+    expect(csv).toContain(`"'＝HYPERLINK(""x"")"`);
+    expect(csv).toContain(`"'=evil"`);
+    expect(csv).not.toContain('\u202e');
   });
 
   it('neutralises spreadsheet formulas and escapes quotes in member-typed fields', () => {
