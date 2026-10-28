@@ -586,6 +586,17 @@
   transform-origin: left center;
 }
 
+/* Partner marquee — the track holds two identical copies and slides one copy-width
+   left, so the loop seams invisibly. Hover or keyboard focus pauses it so a logo can
+   be read and clicked. */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 40s linear infinite; }
+.animate-marquee:hover,
+.animate-marquee:focus-within { animation-play-state: paused; }
+
 @layer components {
   .thinking-dot {
     @apply opacity-0 inline-block;
