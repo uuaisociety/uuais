@@ -14,10 +14,12 @@ jest.mock('@/app/metadata', () => ({
   SITE_URL: 'https://uuais.com',
 }));
 
-jest.mock('dompurify', () => ({
-  sanitize: (input: string) => input,
-}));
-
+// isomorphic-dompurify's jsdom 30 is ESM-only under Jest; build the same
+// thing it does (DOMPurify over a jsdom window) from the jsdom Jest ships.
+jest.mock('isomorphic-dompurify', () => {
+  const { JSDOM } = jest.requireActual('jsdom');
+  return jest.requireActual('dompurify')(new JSDOM('').window);
+});
 jest.mock('@/components/events/EventDetailClient', () => ({
   __esModule: true,
   default: () => <div data-testid="event-detail-client" />,

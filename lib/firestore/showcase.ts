@@ -24,22 +24,30 @@ export const ensureUniqueShowcaseSlug = async (
   for (let n = 1; n < 100; n += 1) {
     const candidate = n === 1 ? base : `${base}-${n}`;
     const snapshot = await getDocs(query(ref, where('slug', '==', candidate)));
-    if (snapshot.docs.every((docSnap) => docSnap.id === excludeId)) return candidate;
+    if (snapshot.docs.every((docSnap) => docSnap.id === excludeId))
+      return candidate;
   }
   // 99 projects sharing a title is not a real case; fall back to the unique id.
   return excludeId ? `${base}-${excludeId}` : base;
 };
 
-export const addShowcaseProject = async (project: Omit<ShowcaseProject, 'id'>): Promise<string> => {
+export const addShowcaseProject = async (
+  project: Omit<ShowcaseProject, 'id'>,
+): Promise<string> => {
   const ref = collection(db, 'showcaseProjects');
   const docRef = await addDoc(ref, stripUndefined(project) as DocumentData);
   return docRef.id;
 };
 
-export const updateShowcaseProject = async (id: string, patch: Partial<ShowcaseProject>): Promise<void> => {
+export const updateShowcaseProject = async (
+  id: string,
+  patch: Partial<ShowcaseProject>,
+): Promise<void> => {
   const ref = doc(db, 'showcaseProjects', id);
   // The full project object carries `id`, but the id is the document key — writing it into the doc is noise.
-  const safe: Record<string, unknown> = { ...(patch as Record<string, unknown>) };
+  const safe: Record<string, unknown> = {
+    ...(patch as Record<string, unknown>),
+  };
   delete safe.id;
   const safePatch = stripUndefined(safe) as DocumentData;
   await updateDoc(ref, safePatch);
@@ -58,9 +66,14 @@ export const subscribeToShowcaseProjects = (
   options?: { includeUnpublished?: boolean; onError?: (error: Error) => void },
 ) => {
   const ref = collection(db, 'showcaseProjects');
-  const qy = options && options.includeUnpublished
-    ? query(ref, orderBy('createdAt', 'desc'))
-    : query(ref, where('published', '==', true), orderBy('createdAt', 'desc'));
+  const qy =
+    options && options.includeUnpublished
+      ? query(ref, orderBy('createdAt', 'desc'))
+      : query(
+          ref,
+          where('published', '==', true),
+          orderBy('createdAt', 'desc'),
+        );
 
   return onSnapshot(
     qy,
@@ -105,28 +118,13 @@ export const subscribeToMyShowcaseProjects = (
   );
 };
 
-/** Tell the builder their project went live. Best-effort: a mail failure must never block the publish. */
+/** Tell the builder their project went live (the server checks their address and unsubscribe). Best-effort: a mail failure must never block the publish. */
 export const notifyShowcaseApproved = async (
   project: ShowcaseProject,
-  baseUrl?: string,
 ): Promise<void> => {
   try {
-    const { getUserProfile } = await import('@/lib/firestore/users');
-    const profile = await getUserProfile(project.creatorUserId);
-    if (!profile?.email || profile.unsubscribedFromEmails) return;
-
-    const origin = baseUrl || (typeof window !== 'undefined' ? window.location.origin : '');
-    const { sendTemplatedEmail } = await import('@/lib/email');
-    await sendTemplatedEmail({
-      to: profile.email,
-      subject: `${project.title} is live on the showcase`,
-      templatePath: '/email-templates/showcaseApproved.html',
-      variables: {
-        name: profile.displayName || profile.name || project.creatorName || 'there',
-        project_title: project.title,
-        project_url: `${origin}/showcase/${project.slug || project.id}`,
-      },
-    });
+    const { requestAdminEmail } = await import('@/lib/email');
+    await requestAdminEmail('showcase-approved', project.id);
   } catch (e) {
     console.warn('Failed to send showcase approval email:', e);
   }

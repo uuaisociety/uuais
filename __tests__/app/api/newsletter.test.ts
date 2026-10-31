@@ -49,16 +49,14 @@ describe('POST /api/newsletter', () => {
     mockRunTransaction.mockImplementation(
       async (callback: (tx: unknown) => unknown) =>
         callback({
-          get: jest
-            .fn()
-            .mockResolvedValue({
-              exists: true,
-              data: () => ({
-                isMember: true,
-                privacyAcceptedAt: '2026-01-01',
-                unrelated: 'keep',
-              }),
+          get: jest.fn().mockResolvedValue({
+            exists: true,
+            data: () => ({
+              isMember: true,
+              privacyAcceptedAt: '2026-01-01',
+              unrelated: 'keep',
             }),
+          }),
           update: mockUpdate,
         }),
     );
@@ -120,6 +118,43 @@ describe('POST /api/newsletter', () => {
     expect((await POST(makeReq('{"newsletter":true}') as never)).status).toBe(
       403,
     );
+    expect(mockUpdate).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    { exists: true, data: () => ({ isMember: false, newsletter: true }) },
+    {
+      exists: true,
+      data: () => ({ isMember: true, privacyAcceptedAt: '', newsletter: true }),
+    },
+  ])('lets a non-member unsubscribe', async (profile) => {
+    mockRunTransaction.mockImplementation(
+      async (callback: (tx: unknown) => unknown) =>
+        callback({
+          get: jest.fn().mockResolvedValue(profile),
+          update: mockUpdate,
+        }),
+    );
+    const response = await POST(makeReq('{"newsletter":false}') as never);
+    expect(response.status).toBe(200);
+    expect(mockUpdate).toHaveBeenCalledWith(
+      { ref: 'user-ref' },
+      { newsletter: false, updatedAt: expect.any(String) },
+    );
+  });
+
+  it('answers an unsubscribe without a profile with nothing to write', async () => {
+    mockRunTransaction.mockImplementation(
+      async (callback: (tx: unknown) => unknown) =>
+        callback({
+          get: jest
+            .fn()
+            .mockResolvedValue({ exists: false, data: () => undefined }),
+          update: mockUpdate,
+        }),
+    );
+    const response = await POST(makeReq('{"newsletter":false}') as never);
+    expect(response.status).toBe(200);
     expect(mockUpdate).not.toHaveBeenCalled();
   });
 

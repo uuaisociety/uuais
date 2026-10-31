@@ -450,11 +450,6 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
                       onClick={async () => {
                         setBulkInviting(true);
                         try {
-                          const baseUrl =
-                            process.env.NEXT_PUBLIC_SITE_URL ||
-                            (typeof window !== 'undefined'
-                              ? window.location.origin
-                              : '');
                           const targets = registrations.filter(
                             (r) =>
                               selected[r.id] &&
@@ -463,7 +458,7 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
                           );
                           for (const r of targets) {
                             try {
-                              await inviteRegistrant(r.id, { baseUrl });
+                              await inviteRegistrant(r.id);
                             } catch (e) {
                               console.warn('Invite failed for', r.id, e);
                             }
@@ -792,12 +787,7 @@ const EventRegistrationsModal: React.FC<EventRegistrationsModalProps> = ({
                                   onClick={async () => {
                                     try {
                                       setInvitingId(r.id);
-                                      const baseUrl =
-                                        process.env.NEXT_PUBLIC_SITE_URL ||
-                                        (typeof window !== 'undefined'
-                                          ? window.location.origin
-                                          : '');
-                                      await inviteRegistrant(r.id, { baseUrl });
+                                      await inviteRegistrant(r.id);
                                       notify({
                                         type: 'success',
                                         message: 'Invitation sent',

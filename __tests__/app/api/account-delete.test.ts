@@ -35,8 +35,7 @@ let eventCount: number;
 const mockTxDelete = jest.fn();
 const mockTxUpdate = jest.fn();
 const mockRecursiveDelete = jest.fn().mockResolvedValue(undefined);
-const mockVoteDelete = jest.fn().mockResolvedValue(undefined);
-const mockAttendanceUpdate = jest.fn().mockResolvedValue(undefined);
+const mockDocDelete = jest.fn().mockResolvedValue(undefined);
 const mockDeleteUser = jest.fn().mockResolvedValue(undefined);
 const mockRegsGet = jest.fn();
 
@@ -62,6 +61,24 @@ jest.mock('@/lib/firebase-admin', () => ({
               exists: true,
               get: () => eventCount,
             };
+          if (ref.path === 'showcaseVotes/p9_user1')
+            return {
+              exists: true,
+              get: (key: string) => (key === 'projectId' ? 'p9' : undefined),
+            };
+          if (ref.path === 'showcaseProjects/p9')
+            return { exists: true, get: () => 3 };
+          if (ref.path === 'eventAttendance/evt1')
+            return {
+              exists: true,
+              get: (key: string) =>
+                key === 'entries'
+                  ? [
+                      { userId: 'user1', attended: true },
+                      { userId: 'other', attended: false },
+                    ]
+                  : undefined,
+            };
           const data = regs[ref.path];
           return {
             exists: !!data,
@@ -78,25 +95,14 @@ jest.mock('@/lib/firebase-admin', () => ({
       if (name === 'eventAttendance')
         return {
           get: jest.fn().mockResolvedValue({
-            docs: [
-              {
-                get: (key: string) =>
-                  key === 'entries'
-                    ? [
-                        { userId: 'user1', attended: true },
-                        { userId: 'other', attended: false },
-                      ]
-                    : undefined,
-                ref: { update: mockAttendanceUpdate },
-              },
-            ],
+            docs: [{ ref: docRef('eventAttendance/evt1') }],
           }),
         };
       if (name === 'showcaseVotes')
         return {
           where: () => ({
             get: jest.fn().mockResolvedValue({
-              docs: [{ ref: { delete: mockVoteDelete } }],
+              docs: [{ ref: docRef('showcaseVotes/p9_user1') }],
             }),
           }),
         };
@@ -107,6 +113,21 @@ jest.mock('@/lib/firebase-admin', () => ({
             collection: () => ({
               get: jest.fn().mockResolvedValue({ docs: [{ id: 'cat1' }] }),
             }),
+          }),
+        };
+      if (name === 'category_courses')
+        return {
+          doc: (id: string) => docRef(`category_courses/${id}`),
+          // Mappings left by deleted categories, found by their uid prefix.
+          listDocuments: jest
+            .fn()
+            .mockResolvedValue([{ id: 'user1_orphan' }, { id: 'other_cat' }]),
+        };
+      if (name === 'cvs')
+        return {
+          doc: (id: string) => ({
+            ...docRef(`cvs/${id}`),
+            delete: () => mockDocDelete(`cvs/${id}`),
           }),
         };
       return { doc: (id: string) => docRef(`${name}/${id}`) };
@@ -170,16 +191,21 @@ describe('POST /api/account/delete', () => {
       { failOnError: true },
     );
     expect(mockTxDelete).toHaveBeenCalledWith(docRef('registrations/reg1'));
-    expect(mockAttendanceUpdate).toHaveBeenCalledWith({
+    expect(mockTxUpdate).toHaveBeenCalledWith(docRef('eventAttendance/evt1'), {
       entries: [{ userId: 'other', attended: false }],
     });
-    expect(mockVoteDelete).toHaveBeenCalled();
+    expect(mockTxDelete).toHaveBeenCalledWith(docRef('showcaseVotes/p9_user1'));
+    // The member's votes come off the projects' counters, as an unvote would.
+    expect(mockTxUpdate).toHaveBeenCalledWith(docRef('showcaseProjects/p9'), {
+      votes: 2,
+    });
     const recursivePaths = mockRecursiveDelete.mock.calls.map(
       ([ref]) => (ref as { path: string }).path,
     );
     expect(recursivePaths).toEqual(
       expect.arrayContaining([
         'category_courses/cat1',
+        'category_courses/user1_orphan',
         'course_categories/user1',
         'favorites/user1',
         'ai_chats/user1',
@@ -188,7 +214,26 @@ describe('POST /api/account/delete', () => {
         'users/user1',
       ]),
     );
+    expect(recursivePaths).not.toContain('category_courses/other_cat');
     expect(mockDeleteUser).toHaveBeenCalledWith('user1');
+  });
+
+  it('removes the CV consent record first, so partners stop seeing the member', async () => {
+    await erase();
+    expect(mockDocDelete).toHaveBeenCalledWith('cvs/user1');
+    expect(mockDocDelete.mock.invocationCallOrder[0]).toBeLessThan(
+      mockDeleteStorageFiles.mock.invocationCallOrder[0],
+    );
+  });
+
+  it('keeps the account when stored files cannot be listed', async () => {
+    mockCollectUserStoragePaths.mockRejectedValueOnce(new Error('list failed'));
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const res = await erase();
+    expect(res.status).toBe(500);
+    expect(mockDeleteStorageFiles).not.toHaveBeenCalled();
+    expect(mockDeleteUser).not.toHaveBeenCalled();
+    error.mockRestore();
   });
 
   it('releases the seat held by a counted registration', async () => {
@@ -202,7 +247,7 @@ describe('POST /api/account/delete', () => {
     regs['registrations/reg1'].status = 'waitlist';
     await erase();
     expect(mockTxDelete).toHaveBeenCalled();
-    expect(mockTxUpdate).not.toHaveBeenCalled();
+    expect(mockTxUpdate).not.toHaveBeenCalledWith(eventRef, expect.anything());
   });
 
   it('includes orphaned files found under the user storage prefix', async () => {

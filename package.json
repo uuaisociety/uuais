@@ -61,6 +61,7 @@
     "firebase": "^13.0.0",
     "firebase-admin": "^13.5.0",
     "input-otp": "^1.4.2",
+    "isomorphic-dompurify": "^4.6.0",
     "jose": "^6.1.0",
     "jszip": "^3.10.1",
     "lucide-react": "^0.486.0",

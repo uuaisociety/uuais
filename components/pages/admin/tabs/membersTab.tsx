@@ -6,13 +6,14 @@ import {
   type MemberCv,
   listUsers,
   listCvs,
-  updateUserProfile,
 } from '@/lib/firestore';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import ConfirmModal from '@/components/ui/ConfirmModal';
 import TableControls, { TablePagination } from '@/components/ui/TableControls';
 import { useNotify } from '@/components/ui/Notifications';
+import { downloadCsv as downloadRowsCsv } from './analytics/AnalyticsShared';
+import { refreshSessionCookie } from '@/lib/firebase-client';
 import { Download, Trash2 } from 'lucide-react';
 
 type EditableUser = UserProfile & Record<string, unknown>;
@@ -45,24 +46,84 @@ const fieldOrder: string[] = [
   'unsubscribedFromEmails',
 ];
 
-function downloadCsv(users: EditableUser[]) {
+// Only the member may change these (Firestore rules enforce it), so the
+// editor shows them read-only and never writes them.
+const memberOwnedFields = new Set([
+  'email',
+  'newsletter',
+  'privacyAcceptedAt',
+  'marketingOptIn',
+  'analyticsOptIn',
+  'partnerContactOptIn',
+]);
+
+// What an admin may edit (enforced by /api/admin/members/profile); every other
+// field is shown read-only.
+const adminEditableFields = new Set([
+  'displayName',
+  'name',
+  'photoURL',
+  'isMember',
+  'studentStatus',
+  'campus',
+  'university',
+  'program',
+  'expectedGraduationYear',
+  'gender',
+  'linkedin',
+  'github',
+  'website',
+  'bio',
+  'heardOfUs',
+  'lookingForJob',
+  'unsubscribedFromEmails',
+]);
+
+// Exports are audit-logged on the server first; no log, no download.
+async function logExport(kind: 'members' | 'newsletter', count: number) {
+  try {
+    await refreshSessionCookie();
+  } catch {
+    /* best-effort; the log call surfaces auth errors */
+  }
+  const res = await fetch('/api/admin/members/export', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ kind, count }),
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw new Error(body?.error || `Export failed (${res.status})`);
+  }
+}
+
+async function downloadCsv(users: EditableUser[]) {
+  await logExport('members', users.length);
   const headers = ['id', ...fieldOrder];
-  const rows = [
-    headers,
-    ...users.map((u) =>
-      headers.map((h) => (u as Record<string, unknown>)[h] ?? ''),
-    ),
-  ];
-  const csv = rows
-    .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(','))
-    .join('\n');
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `members-${new Date().toISOString().slice(0, 10)}.csv`;
-  a.click();
-  URL.revokeObjectURL(url);
+  downloadRowsCsv(
+    [
+      headers,
+      ...users.map((u) =>
+        headers.map((h) => (u as Record<string, unknown>)[h] ?? ''),
+      ),
+    ],
+    `members-${new Date().toISOString().slice(0, 10)}.csv`,
+  );
+}
+
+// Members who opted in to the newsletter and haven't unsubscribed from emails.
+async function downloadNewsletterCsv(users: EditableUser[]) {
+  const recipients = users.filter(
+    (u) => u.newsletter && !u.unsubscribedFromEmails && u.email,
+  );
+  await logExport('newsletter', recipients.length);
+  downloadRowsCsv(
+    [
+      ['name', 'email'],
+      ...recipients.map((u) => [u.name || u.displayName || '', u.email]),
+    ],
+    `newsletter-${new Date().toISOString().slice(0, 10)}.csv`,
+  );
 }
 
 type SortableThProps = {
@@ -202,13 +263,37 @@ export default function MembersTab() {
     if (!selected) return;
     setSaving(true);
     try {
-      const update: Record<string, unknown> = { ...draft };
-      // Ensure updatedAt set
-      update.updatedAt = new Date().toISOString();
-      await updateUserProfile(selected.id, update);
+      // Only editable fields, and only those the admin actually changed.
+      const update = Object.fromEntries(
+        Object.entries(draft).filter(
+          ([k, v]) =>
+            adminEditableFields.has(k) &&
+            v !== undefined &&
+            v !== (selected as Record<string, unknown>)[k],
+        ),
+      );
+      try {
+        await refreshSessionCookie();
+      } catch {
+        /* best-effort; the save call surfaces auth errors */
+      }
+      const res = await fetch('/api/admin/members/profile', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uid: selected.id, update }),
+      });
+      const body = await res.json().catch(() => null);
+      if (!res.ok)
+        throw new Error(body?.error || `Save failed (${res.status})`);
       await refresh();
       close();
       notify({ type: 'success', title: 'Saved', message: 'Member updated.' });
+    } catch (e) {
+      notify({
+        type: 'error',
+        title: 'Save failed',
+        message: e instanceof Error ? e.message : 'Could not save the member.',
+      });
     } finally {
       setSaving(false);
     }
@@ -287,6 +372,35 @@ export default function MembersTab() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {keys.map((k) => {
             const val = getValue(k);
+            // An admin may suppress email but never undo a member's unsubscribe.
+            const lockedUnsubscribe =
+              k === 'unsubscribedFromEmails' &&
+              selected.unsubscribedFromEmails === true;
+            if (!adminEditableFields.has(k) || lockedUnsubscribe) {
+              return (
+                <div key={k} className="flex flex-col gap-1">
+                  <span className="text-xs text-muted-foreground">
+                    {k}
+                    {memberOwnedFields.has(k)
+                      ? ' (set by the member)'
+                      : lockedUnsubscribe
+                        ? ' (only the member can undo this)'
+                        : ' (read-only)'}
+                  </span>
+                  <span className="text-sm text-foreground">
+                    {typeof val === 'boolean'
+                      ? val
+                        ? 'Yes'
+                        : 'No'
+                      : val === undefined || val === null || val === ''
+                        ? '—'
+                        : typeof val === 'object'
+                          ? JSON.stringify(val)
+                          : String(val)}
+                  </span>
+                </div>
+              );
+            }
             // Show booleans using checkbox regardless of draft presence
             if (booleanFields.has(k)) {
               return (
@@ -418,6 +532,16 @@ export default function MembersTab() {
     );
   };
 
+  const runExport = (download: (users: EditableUser[]) => Promise<void>) => {
+    download(users).catch((e) =>
+      notify({
+        type: 'error',
+        title: 'Export failed',
+        message: e instanceof Error ? e.message : 'Could not export members.',
+      }),
+    );
+  };
+
   const toggleSort = (key: string) => {
     if (sortKey === key) {
       setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
@@ -438,9 +562,16 @@ export default function MembersTab() {
           <Button
             variant="outline"
             icon={Download}
-            onClick={() => downloadCsv(users)}
+            onClick={() => runExport(downloadCsv)}
           >
             CSV
+          </Button>
+          <Button
+            variant="outline"
+            icon={Download}
+            onClick={() => runExport(downloadNewsletterCsv)}
+          >
+            Newsletter CSV
           </Button>
           <TableControls
             filter={filter}

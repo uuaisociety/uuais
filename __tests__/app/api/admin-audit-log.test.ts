@@ -28,8 +28,9 @@ async function log(body: unknown) {
 }
 
 describe('POST /api/admin/audit-log', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     jest.clearAllMocks();
+    (await import('@/lib/rate-limit-in-memory')).resetRateLimits();
     mockGetTokens.mockResolvedValue({
       decodedToken: { uid: 'admin1', admin: true },
     });
@@ -72,6 +73,16 @@ describe('POST /api/admin/audit-log', () => {
     });
   });
 
+  it.each([-1, 1.5, 1e300])(
+    'only records a count that is a non-negative integer (%p)',
+    async (count) => {
+      await log({ eventId: 'evt1', count });
+      expect(mockLogAdminAction).toHaveBeenCalledWith(
+        expect.objectContaining({ count: undefined }),
+      );
+    },
+  );
+
   it('returns 400 for invalid JSON', async () => {
     const { POST } = await import('@/app/api/admin/audit-log/route');
     const res = await POST(auditRequest('{not json'));
@@ -82,5 +93,13 @@ describe('POST /api/admin/audit-log', () => {
     const { POST } = await import('@/app/api/admin/audit-log/route');
     const res = await POST(auditRequest('x'.repeat(5000)));
     expect(res.status).toBe(413);
+  });
+
+  it('rate-limits each admin so the trail cannot be flooded', async () => {
+    const { resetRateLimits } = await import('@/lib/rate-limit-in-memory');
+    resetRateLimits();
+    for (let i = 0; i < 60; i++) expect((await log({})).status).toBe(200);
+    expect((await log({})).status).toBe(429);
+    resetRateLimits();
   });
 });

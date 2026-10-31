@@ -9,6 +9,8 @@ import {
   deleteDoc,
   updateDoc,
   terminate,
+  increment,
+  serverTimestamp,
 } from 'firebase/firestore';
 
 const projectId = 'demo-uuais-security';
@@ -269,7 +271,9 @@ try {
   // ...a profile can't be re-created with partner contact off while a CV is shared...
   // (profile-5 has a shared CV but no profile doc, e.g. a half-finished erasure.)
   const freshUser = client('fresh-user', { sub: 'profile-5' });
-  await seed('cvs/profile-5', { path: { stringValue: 'cvs/profile-5/cv.pdf' } });
+  await seed('cvs/profile-5', {
+    path: { stringValue: 'cvs/profile-5/cv.pdf' },
+  });
   await denied(() =>
     setDoc(doc(freshUser, 'users/profile-5'), {
       displayName: 'New',
@@ -297,6 +301,208 @@ try {
     program: 'Computer Science',
     expectedGraduationYear: 2027,
   });
+  passed++;
+  // Admin profile edits go through the logged server route; from the client an
+  // admin may only record attendance on an existing profile, never create one.
+  for (const field of [
+    { email: 'other@example.com' },
+    { marketingOptIn: true },
+    { partnerContactOptIn: false },
+    { privacyAcceptedAt: '2020-01-01T00:00:00.000Z' },
+    { displayName: 'Edited' },
+    { isMember: true },
+    { unsubscribedFromEmails: false },
+  ]) {
+    await denied(() => updateDoc(doc(admin, 'users/profile-1'), field));
+  }
+  await denied(() =>
+    setDoc(doc(admin, 'users/admin-made'), { newsletter: true }),
+  );
+  await denied(() =>
+    setDoc(doc(admin, 'users/erased'), { eventHistory: [] }, { merge: true }),
+  );
+  await setDoc(
+    doc(admin, 'users/profile-1'),
+    { eventHistory: [{ eventId: 'event-1', attended: true }] },
+    { merge: true },
+  );
+  passed++;
+  // Category ids carry the owner's uid, so nobody can claim another's mapping.
+  await denied(() =>
+    setDoc(doc(member, 'course_categories/member-1/categories/someone_cat'), {
+      userId: 'member-1',
+    }),
+  );
+  await denied(() =>
+    setDoc(doc(member, 'course_categories/member-1/categories/member-1_'), {
+      userId: 'member-1',
+    }),
+  );
+  await setDoc(
+    doc(member, 'course_categories/member-1/categories/member-1_cat'),
+    { userId: 'member-1' },
+  );
+  passed++;
+  // Mappings: the caller must own the category, and a prefixed id must carry
+  // the caller's uid; legacy un-prefixed ids keep working for their owner.
+  await setDoc(
+    doc(member, 'category_courses/member-1_cat/courses/c1'),
+    { addedAt: 1 },
+  );
+  passed++;
+  await seed('course_categories/member-1/categories/profile-1_cat', {
+    userId: { stringValue: 'member-1' },
+  });
+  await denied(() =>
+    setDoc(doc(member, 'category_courses/profile-1_cat/courses/c1'), {
+      addedAt: 1,
+    }),
+  );
+  await seed(
+    'course_categories/member-1/categories/0b8f7c1e-4c1d-4f7a-9a51-2b7d1f2c9e10',
+    { userId: { stringValue: 'member-1' } },
+  );
+  await setDoc(
+    doc(
+      member,
+      'category_courses/0b8f7c1e-4c1d-4f7a-9a51-2b7d1f2c9e10/courses/c1',
+    ),
+    { addedAt: 1 },
+  );
+  passed++;
+  await denied(() =>
+    setDoc(doc(newUser, 'category_courses/member-1_cat/courses/c2'), {
+      addedAt: 1,
+    }),
+  );
+
+  // Application and mail writes that must be logged go through server routes.
+  await seed('teamApplications/app-1', { uid: { stringValue: 'member-1' } });
+  await seed('boardApplications/board-1', {
+    email: { stringValue: 'a@example.com' },
+  });
+  await denied(() => deleteDoc(doc(admin, 'teamApplications/app-1')));
+  await denied(() => deleteDoc(doc(admin, 'boardApplications/board-1')));
+  for (const db of [admin, superAdmin]) {
+    await denied(() =>
+      setDoc(doc(db, 'mail/forged'), {
+        to: 'anyone@example.com',
+        message: { subject: 'Hi', html: 'x' },
+      }),
+    );
+  }
+
+  // Config: the catch-all must not open the News Desk docs.
+  await seed('config/blog_ai_settings', {
+    systemPrompt: { stringValue: 'internal' },
+  });
+  await seed('config/embeddings', { dims: { integerValue: '2' } });
+  await denied(() => getDoc(doc(anonymous, 'config/blog_ai_settings')));
+  await denied(() => getDoc(doc(member, 'config/blog_news_seen')));
+  await denied(() =>
+    setDoc(doc(admin, 'config/blog_ai_settings'), { feeds: [] }),
+  );
+  await denied(() => setDoc(doc(admin, 'config/ai_settings'), { limit: 1 }));
+  await setDoc(doc(superAdmin, 'config/blog_ai_settings'), { feeds: [] });
+  passed++;
+  assert.equal(
+    (await getDoc(doc(admin, 'config/blog_ai_settings'))).exists(),
+    true,
+  );
+  passed++;
+  assert.equal(
+    (await getDoc(doc(anonymous, 'config/embeddings'))).get('dims'),
+    2,
+  );
+  passed++;
+  await setDoc(doc(admin, 'config/embeddings'), { dims: 3 });
+  passed++;
+
+  // Showcase drafts: a cover path only in the member's own upload folder.
+  // (profile-3 created its profile above with isMember: true.)
+  const draft = (coverImagePath) => ({
+    title: 'Draft',
+    description: 'A project',
+    category: 'other',
+    creatorUserId: 'profile-3',
+    links: {},
+    tags: [],
+    votes: 0,
+    published: false,
+    featured: false,
+    createdAt: '2026-10-31T00:00:00.000Z',
+    updatedAt: '2026-10-31T00:00:00.000Z',
+    ...(coverImagePath === undefined ? {} : { coverImagePath }),
+  });
+  for (const path of [
+    'showcase/victim/cover.png',
+    'showcase/profile-3/../victim/cover.png',
+    'showcase/profile-3/..',
+    'showcase/profile-3x/cover.png',
+    'team-images/x.png',
+  ]) {
+    await denied(() =>
+      setDoc(doc(newUser, `showcaseProjects/bad-${passed}`), draft(path)),
+    );
+  }
+  await setDoc(
+    doc(newUser, 'showcaseProjects/own-cover'),
+    draft('showcase/profile-3/123-cover.png'),
+  );
+  passed++;
+  await setDoc(doc(newUser, 'showcaseProjects/no-cover'), draft(undefined));
+  passed++;
+
+  // Analytics counters: only for content that exists, with typed fields.
+  await denied(() =>
+    setDoc(doc(anonymous, 'analyticsEvents/made-up'), {
+      clicks: 1,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await denied(() =>
+    setDoc(doc(anonymous, 'analyticsJobs/made-up'), {
+      clicks: 0,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await denied(() =>
+    setDoc(doc(anonymous, 'analyticsBlogs/made-up'), {
+      reads: 1,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await setDoc(
+    doc(anonymous, 'analyticsEvents/event-1'),
+    { clicks: increment(1), updatedAt: serverTimestamp() },
+    { merge: true },
+  );
+  passed++;
+  await denied(() =>
+    setDoc(
+      doc(anonymous, 'analyticsEvents/event-1'),
+      { clicks: increment(1), updatedAt: 'x'.repeat(1000) },
+      { merge: true },
+    ),
+  );
+  await denied(() =>
+    setDoc(
+      doc(anonymous, 'analyticsEvents/event-1'),
+      { clicks: increment(5), updatedAt: serverTimestamp() },
+      { merge: true },
+    ),
+  );
+  await setDoc(
+    doc(anonymous, 'analyticsEvents/event-1'),
+    { clicks: increment(1), updatedAt: serverTimestamp() },
+    { merge: true },
+  );
+  passed++;
+  await setDoc(
+    doc(anonymous, 'analyticsEvents/event-1'),
+    { externalRegistrationClicks: increment(1), updatedAt: serverTimestamp() },
+    { merge: true },
+  );
   passed++;
   console.log(`Firestore security rules: ${passed} checks passed`);
 } finally {

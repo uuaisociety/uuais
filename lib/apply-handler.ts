@@ -4,7 +4,17 @@ import { requireAuth, type ServerSession } from '@/lib/server-auth';
 import { adminDb } from '@/lib/firebase-admin';
 import admin from 'firebase-admin';
 import { MAX_ROLE_RANKING } from '@/lib/constants';
-import { sanitizePdfFileName, validatePdfFile } from '@/lib/pdf-upload';
+import {
+  MAX_PDF_BYTES,
+  findPdfActiveContent,
+  sanitizePdfFileName,
+  validatePdfFile,
+} from '@/lib/pdf-upload';
+import { scanPdfBuffer } from '@/lib/malware-scan';
+import {
+  MULTIPART_OVERHEAD_BYTES,
+  readBoundedFormData,
+} from '@/lib/bounded-request-body';
 import { saveFileToStorage } from '@/lib/storage-upload';
 import type { CampaignRole, RoleChoice } from '@/types';
 
@@ -64,6 +74,15 @@ const MAX_INTERESTS_RAW_CHARS = 20000;
 const MAX_TEAM_RANKING_RAW_CHARS = 5000;
 const MAX_CUSTOM_ANSWERS_RAW_CHARS = 400000;
 const MAX_ROLE_RANKING_RAW_CHARS = 5000;
+// The resume plus the largest text fields at up to 3 bytes per UTF-8 character.
+const MAX_MULTIPART_BYTES =
+  MAX_PDF_BYTES +
+  MULTIPART_OVERHEAD_BYTES +
+  3 *
+    (MAX_CUSTOM_ANSWERS_RAW_CHARS +
+      MAX_INTERESTS_RAW_CHARS +
+      MAX_TEAM_RANKING_RAW_CHARS +
+      MAX_ROLE_RANKING_RAW_CHARS);
 
 const DEFAULT_STANDARD_FIELDS = [
   'name',
@@ -170,7 +189,12 @@ export async function handleApplicationPost(
   const session = authResult.session;
 
   try {
-    const form = await req.formData();
+    const form = await readBoundedFormData(req, MAX_MULTIPART_BYTES);
+    if (!form)
+      return NextResponse.json(
+        { error: 'Application is too large' },
+        { status: 413 },
+      );
 
     const campaignId = (form.get('campaignId') as string) || '';
     if (!campaignId)
@@ -523,6 +547,7 @@ export async function handleApplicationPost(
     const resumeFile = form.get('resume') as File | null;
     let savedResume: { path?: string; url?: string } | null = null;
     let resumeFileName = '';
+    let resumeBuffer: Buffer | undefined;
     if (enabledFields.includes('resume') && resumeFile && resumeFile.size > 0) {
       const pdfError = await validatePdfFile(resumeFile, 'Resume');
       if (pdfError)
@@ -531,6 +556,27 @@ export async function handleApplicationPost(
       if (!resumeFileName)
         return NextResponse.json(
           { error: 'Invalid resume filename' },
+          { status: 400 },
+        );
+      // Same checks as member CVs: admins open these files too.
+      resumeBuffer = Buffer.from(await resumeFile.arrayBuffer());
+      const active = await findPdfActiveContent(resumeBuffer);
+      if (active) {
+        console.warn(
+          `Resume upload rejected for ${session.uid}: active content (${active})`,
+        );
+        return NextResponse.json(
+          {
+            error:
+              'This PDF contains scripts, attachments or interactive content. Please export your resume again as a plain PDF.',
+          },
+          { status: 400 },
+        );
+      }
+      const scan = await scanPdfBuffer(resumeBuffer, resumeFileName);
+      if (!scan.ok)
+        return NextResponse.json(
+          { error: scan.message || 'File rejected' },
           { status: 400 },
         );
     }
@@ -722,12 +768,14 @@ export async function handleApplicationPost(
       });
     });
 
-    if (resumeFile && resumeFile.size > 0) {
+    // Only a resume that passed the checks above (the field may be disabled).
+    if (resumeFile && resumeBuffer) {
       try {
         const timestamp = Date.now();
         const resumePath = `team-applications/${timestamp}_${resumeFileName}`;
         savedResume = await saveFileToStorage(resumeFile, resumePath, {
           signedUrl: true,
+          buffer: resumeBuffer,
         });
         await appRef.set({ resume: savedResume }, { merge: true });
       } catch (uploadErr) {

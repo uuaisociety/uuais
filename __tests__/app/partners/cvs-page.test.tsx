@@ -1,5 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import Page from '@/app/partners/cvs/page';
+import { resetRateLimits } from '@/lib/rate-limit-in-memory';
 
 const mockGetServerSession = jest.fn();
 jest.mock('@/lib/server-auth', () => ({
@@ -19,6 +20,14 @@ jest.mock('@/components/auth/UseDifferentEmailButton', () => ({
 jest.mock('@/components/auth/PartnerEmailSignIn', () => ({
   __esModule: true,
   default: () => <div>partner email sign-in</div>,
+}));
+
+const mockLog = jest.fn().mockResolvedValue(undefined);
+jest.mock('@/lib/server-audit-log', () => ({
+  logAdminAction: (...args: unknown[]) => mockLog(...args),
+}));
+jest.mock('next/headers', () => ({
+  headers: async () => new Headers({ 'x-forwarded-for': '1.2.3.4, 10.0.0.1' }),
 }));
 
 let cvDocs: { id: string; consentAt: string }[];
@@ -54,6 +63,7 @@ const session = (claims: Record<string, boolean>) => ({
 describe('/partners/cvs', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    resetRateLimits();
     cvDocs = [
       { id: 'u2', consentAt: '2026-10-20T10:00:00.000Z' },
       { id: 'u1', consentAt: '2026-10-28T10:00:00.000Z' },
@@ -129,6 +139,30 @@ describe('/partners/cvs', () => {
     const text = document.body.textContent ?? '';
     expect(text).toContain('x'.repeat(150));
     expect(text).not.toContain('x'.repeat(151));
+    // Partners see member details here, so the view itself is logged.
+    expect(mockLog).toHaveBeenCalledWith({
+      action: 'view',
+      adminUid: 'viewer',
+      count: 2,
+      ip: '1.2.3.4',
+      role: 'partner',
+      email: undefined,
+    });
+  });
+
+  it('stops logging a partner’s reloads past the hourly limit, still showing the list', async () => {
+    mockGetServerSession.mockResolvedValue(session({ isPartner: true }));
+    for (let i = 0; i < 31; i++) await Page();
+    expect(mockLog).toHaveBeenCalledTimes(30);
+    render(await Page());
+    expect(screen.getByText('2 CVs')).toBeInTheDocument();
+  });
+
+  it('does not log an admin opening the list', async () => {
+    mockGetServerSession.mockResolvedValue(session({ isAdmin: true }));
+    render(await Page());
+    expect(screen.getByText('2 CVs')).toBeInTheDocument();
+    expect(mockLog).not.toHaveBeenCalled();
   });
 
   it('says so when nobody has shared a CV', async () => {

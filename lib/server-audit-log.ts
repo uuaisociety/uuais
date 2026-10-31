@@ -9,8 +9,12 @@ export interface AdminAuditEntry {
   action:
     | 'download'
     | 'export'
+    // A partner opening the shared-CV list (count = members listed).
+    | 'view'
     | 'remove'
     | 'update'
+    // An admin queuing a templated email (template = its kind).
+    | 'email'
     // A member granting or withdrawing CV-sharing consent (actor = the member).
     | 'consent-granted'
     | 'consent-withdrawn';
@@ -26,6 +30,12 @@ export interface AdminAuditEntry {
   email?: string;
   /** Consent wording version, for consent events. */
   consentVersion?: string;
+  /** For a multi-step action logged before and after it runs (member erasure). */
+  status?: 'started' | 'completed';
+  /** Names (never values) of the profile fields an admin edit changed. */
+  fields?: string[];
+  /** Email kind, for email events. */
+  template?: string;
 }
 
 /**
@@ -57,10 +67,11 @@ export async function logAdminAction(
 
 /**
  * Deletes audit entries older than the retention period. Run daily by the
- * retention cron; bounded per run so a large backlog drains over several days.
+ * retention cron. The bound only keeps a run inside the cron's time limit; a
+ * day's entries are far fewer, so each run drains everything that expired.
  */
 export async function purgeExpiredAuditLogs(
-  maxDeletes = 2000,
+  maxDeletes = 50_000,
 ): Promise<number> {
   const cutoff = Timestamp.fromMillis(Date.now() - AUDIT_LOG_RETENTION_MS);
   let deleted = 0;

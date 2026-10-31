@@ -19,6 +19,10 @@ import { collectSubmissions } from '@/lib/account-erasure-submissions';
  * retried; it throws if a stored file cannot be deleted, leaving the account intact.
  */
 export async function eraseAccount(uid: string): Promise<void> {
+  // The consent record first: partners list and download only CVs that have
+  // one, so a run that fails later never leaves the member shown to them.
+  await adminDb.collection('cvs').doc(uid).delete();
+
   const filePaths = new Set<string>();
 
   const regsSnap = await adminDb
@@ -32,14 +36,10 @@ export async function eraseAccount(uid: string): Promise<void> {
   }
 
   // Storage-first: orphaned uploads are not referenced by any registration,
-  // so list the caller's prefix as well. If a file cannot be deleted the
-  // request fails and the account stays intact, so the user can retry.
-  try {
-    const storedPaths = await collectUserStorageFilePaths(uid);
-    storedPaths.forEach((p) => filePaths.add(p));
-  } catch (err) {
-    console.warn('Failed to list stored files for', uid, err);
-  }
+  // so list the caller's prefix as well. If files cannot be listed or deleted
+  // the request fails and the account stays intact, so the user can retry.
+  const storedPaths = await collectUserStorageFilePaths(uid);
+  storedPaths.forEach((p) => filePaths.add(p));
   filePaths.add(`cvs/${uid}/cv.pdf`);
   // Applications and showcase projects: files go with the rest, docs further down.
   const submissions = await collectSubmissions(uid);
@@ -73,31 +73,65 @@ export async function eraseAccount(uid: string): Promise<void> {
     });
   }
 
+  // In a transaction per event, so an admin marking someone else's attendance
+  // meanwhile isn't overwritten.
   const attendanceSnap = await adminDb.collection('eventAttendance').get();
   for (const docSnap of attendanceSnap.docs) {
-    const entries = docSnap.get('entries');
-    if (!Array.isArray(entries)) continue;
-    const filtered = entries.filter(
-      (e: { userId?: string }) => e?.userId !== uid,
-    );
-    if (filtered.length !== entries.length)
-      await docSnap.ref.update({ entries: filtered });
+    await adminDb.runTransaction(async (transaction) => {
+      const current = await transaction.get(docSnap.ref);
+      const entries = current.exists ? current.get('entries') : undefined;
+      if (!Array.isArray(entries)) return;
+      const filtered = entries.filter(
+        (e: { userId?: string }) => e?.userId !== uid,
+      );
+      if (filtered.length !== entries.length)
+        transaction.update(docSnap.ref, { entries: filtered });
+    });
   }
 
   const votesSnap = await adminDb
     .collection('showcaseVotes')
     .where('userId', '==', uid)
     .get();
-  for (const docSnap of votesSnap.docs) await docSnap.ref.delete();
+  // Like an unvote: the project's counter drops with the vote, floored at 0.
+  for (const docSnap of votesSnap.docs) {
+    await adminDb.runTransaction(async (transaction) => {
+      const vote = await transaction.get(docSnap.ref);
+      if (!vote.exists) return;
+      const projectId = vote.get('projectId');
+      const projectRef =
+        typeof projectId === 'string' && projectId
+          ? adminDb.collection('showcaseProjects').doc(projectId)
+          : null;
+      const project = projectRef ? await transaction.get(projectRef) : null;
+
+      transaction.delete(docSnap.ref);
+
+      if (projectRef && project?.exists) {
+        const total = project.get('votes');
+        const next = Math.max(0, (typeof total === 'number' ? total : 0) - 1);
+        transaction.update(projectRef, { votes: next });
+      }
+    });
+  }
 
   const categoriesSnap = await adminDb
     .collection('course_categories')
     .doc(uid)
     .collection('categories')
     .get();
-  for (const docSnap of categoriesSnap.docs) {
+  // Course mappings of the member's categories, plus any left behind by a
+  // category deleted before its mappings (those ids start with the uid).
+  // listDocuments, since mapping parents only exist through their subcollection.
+  const mappingIds = new Set(categoriesSnap.docs.map((d) => d.id));
+  const mappingRefs = await adminDb
+    .collection('category_courses')
+    .listDocuments();
+  for (const ref of mappingRefs)
+    if (ref.id.startsWith(`${uid}_`)) mappingIds.add(ref.id);
+  for (const id of mappingIds) {
     await adminDb.recursiveDelete(
-      adminDb.collection('category_courses').doc(docSnap.id),
+      adminDb.collection('category_courses').doc(id),
     );
   }
 

@@ -31,7 +31,10 @@ function getTomorrowDate(): Date {
 
 async function getDailyLimit(): Promise<number> {
   try {
-    const settingsDoc = await adminDb.collection('config').doc('ai_settings').get();
+    const settingsDoc = await adminDb
+      .collection('config')
+      .doc('ai_settings')
+      .get();
     if (settingsDoc.exists) {
       const data = settingsDoc.data();
       if (data && typeof data.rateLimitRequestsPerDay === 'number') {
@@ -39,19 +42,26 @@ async function getDailyLimit(): Promise<number> {
       }
     }
   } catch (e) {
-    console.warn('Failed to load AI settings from Firestore, using default:', e);
+    console.warn(
+      'Failed to load AI settings from Firestore, using default:',
+      e,
+    );
   }
   // Fallback to env var or default
-  return parseInt(process.env.RATE_LIMIT_REQUESTS_PER_DAY || String(DEFAULT_RATE_LIMIT_REQUESTS_PER_DAY), 10);
+  return parseInt(
+    process.env.RATE_LIMIT_REQUESTS_PER_DAY ||
+      String(DEFAULT_RATE_LIMIT_REQUESTS_PER_DAY),
+    10,
+  );
 }
 
 export async function checkRateLimit(userId: string): Promise<RateLimitStatus> {
   const dailyLimit = await getDailyLimit();
   const today = getTodayString();
   const docRef = adminDb.collection('ai_usage').doc(`${userId}_${today}`);
-  
+
   const docSnap = await docRef.get();
-  
+
   if (!docSnap.exists) {
     return {
       allowed: true,
@@ -60,10 +70,10 @@ export async function checkRateLimit(userId: string): Promise<RateLimitStatus> {
       totalRequests: 0,
     };
   }
-  
+
   const data = docSnap.data() as AIUsageRecord;
   const remaining = Math.max(0, dailyLimit - data.requestCount);
-  
+
   return {
     allowed: remaining > 0,
     remaining,
@@ -74,12 +84,12 @@ export async function checkRateLimit(userId: string): Promise<RateLimitStatus> {
 
 export async function incrementUsage(
   userId: string,
-  tokensUsed: number
+  tokensUsed: number,
 ): Promise<RateLimitStatus> {
   const dailyLimit = await getDailyLimit();
   const today = getTodayString();
   const docRef = adminDb.collection('ai_usage').doc(`${userId}_${today}`);
-  
+
   await docRef.set(
     {
       userId,
@@ -88,17 +98,71 @@ export async function incrementUsage(
       tokenUsage: FieldValue.increment(tokensUsed),
       lastRequest: FieldValue.serverTimestamp(),
     },
-    { merge: true }
+    { merge: true },
   );
-  
+
   const newStatus = await checkRateLimit(userId);
-  
+
   const warningThreshold = Math.ceil(dailyLimit * 0.3); // Warn at 30% remaining
   if (newStatus.remaining === warningThreshold) {
-    console.warn(`User ${userId} approaching rate limit: ${newStatus.remaining} requests remaining`);
+    console.warn(
+      `User ${userId} approaching rate limit: ${newStatus.remaining} requests remaining`,
+    );
   }
-  
+
   return newStatus;
+}
+
+/**
+ * Claims one of today's requests before the AI call, in a transaction, so
+ * concurrent requests can't all pass a check made before any of them counted.
+ * Tokens are added afterwards with `recordTokens`.
+ */
+export async function reserveRequest(
+  userId: string,
+): Promise<RateLimitStatus & { date: string }> {
+  const dailyLimit = await getDailyLimit();
+  const date = getTodayString();
+  const docRef = adminDb.collection('ai_usage').doc(`${userId}_${date}`);
+
+  const { reserved, used } = await adminDb.runTransaction(
+    async (transaction) => {
+      const snap = await transaction.get(docRef);
+      const count = snap.exists ? Number(snap.get('requestCount')) || 0 : 0;
+      if (count >= dailyLimit) return { reserved: false, used: count };
+      transaction.set(
+        docRef,
+        {
+          userId,
+          date,
+          requestCount: count + 1,
+          lastRequest: FieldValue.serverTimestamp(),
+        },
+        { merge: true },
+      );
+      return { reserved: true, used: count + 1 };
+    },
+  );
+
+  return {
+    allowed: reserved,
+    remaining: Math.max(0, dailyLimit - used),
+    resetAt: getTomorrowDate(),
+    totalRequests: used,
+    date,
+  };
+}
+
+/** Adds a finished request's tokens to the day it was reserved on. */
+export async function recordTokens(
+  userId: string,
+  date: string,
+  tokensUsed: number,
+): Promise<void> {
+  await adminDb
+    .collection('ai_usage')
+    .doc(`${userId}_${date}`)
+    .set({ tokenUsage: FieldValue.increment(tokensUsed) }, { merge: true });
 }
 
 export async function getUsageStats(userId: string): Promise<{
@@ -106,17 +170,17 @@ export async function getUsageStats(userId: string): Promise<{
   last7Days: { date: string; requests: number; tokens: number }[];
 }> {
   const todayStatus = await checkRateLimit(userId);
-  
+
   const last7Days: { date: string; requests: number; tokens: number }[] = [];
-  
+
   for (let i = 0; i < 7; i++) {
     const date = new Date();
     date.setDate(date.getDate() - i);
     const dateStr = date.toISOString().split('T')[0];
-    
+
     const docRef = adminDb.collection('ai_usage').doc(`${userId}_${dateStr}`);
     const docSnap = await docRef.get();
-    
+
     if (docSnap.exists) {
       const data = docSnap.data() as AIUsageRecord;
       last7Days.push({
@@ -128,7 +192,7 @@ export async function getUsageStats(userId: string): Promise<{
       last7Days.push({ date: dateStr, requests: 0, tokens: 0 });
     }
   }
-  
+
   return { today: todayStatus, last7Days };
 }
 
@@ -136,7 +200,7 @@ export class RateLimitError extends Error {
   constructor(
     message: string,
     public resetAt: Date,
-    public remaining: number = 0
+    public remaining: number = 0,
   ) {
     super(message);
     this.name = 'RateLimitError';

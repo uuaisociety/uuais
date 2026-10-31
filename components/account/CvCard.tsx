@@ -10,7 +10,7 @@ import PDFDropzone from '@/components/ui/PDFDropzone';
 import { useNotify } from '@/components/ui/Notifications';
 import { getMyCv, type MemberCv } from '@/lib/firestore';
 import { refreshSessionCookie } from '@/lib/firebase-client';
-import { CV_CONSENT_TEXT } from '@/lib/cv-consent';
+import { CV_CONSENT_TEXT, CV_CONSENT_VERSION } from '@/lib/cv-consent';
 import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 
 const formatDate = (iso: string) =>
@@ -106,6 +106,7 @@ export default function CvCard({
       const body = new FormData();
       body.set('file', file);
       body.set('consent', 'true');
+      body.set('consentVersion', CV_CONSENT_VERSION);
       await ensureSession();
       const res = await fetch('/api/account/cv', { method: 'POST', body });
       const data = await res.json().catch(() => null);

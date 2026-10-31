@@ -8,13 +8,14 @@ export const MAX_EVENTS_IN_CONTEXT = 3;
 export const DEFAULT_PER_FEED_LIMIT = 6;
 export const DEFAULT_MAX_CANDIDATES = 30;
 export const MAX_CANDIDATES_FOR_AUTO = 40;
-export const VALID_TYPES: BlogPostType[] = ['weekly-digest', 'event-preview', 'event-recap'];
+export const VALID_TYPES: BlogPostType[] = [
+  'weekly-digest',
+  'event-preview',
+  'event-recap',
+];
 
 /** Exa news search endpoint. */
 export const EXA_SEARCH_URL = 'https://api.exa.ai/search';
-
-/** Hosts next/image is configured to serve (next.config.ts `images.remotePatterns`). */
-export const ALLOWED_IMAGE_HOSTS = ['firebasestorage.googleapis.com', 'drive.google.com', 'storage.googleapis.com'];
 
 /** Cap on the reasoning trace persisted with a draft and forwarded to the admin console. */
 export const MAX_REASONING_TRACE = 20000;
@@ -30,21 +31,76 @@ export const DEFAULT_BLOG_IMAGE = '/images/campus.png';
 /** Curated AI news sources (`rss` parses feeds; `scrape` pulls article links from page HTML for outlets without feeds). */
 export const DEFAULT_BLOG_FEEDS: BlogFeed[] = [
   { name: 'OpenAI News', type: 'rss', url: 'https://openai.com/news/rss.xml' },
-  { name: 'Google DeepMind', type: 'rss', url: 'https://deepmind.google/blog/rss.xml' },
-  { name: 'Google AI Blog', type: 'rss', url: 'https://blog.google/technology/ai/rss/' },
-  { name: 'Anthropic News', type: 'scrape', url: 'https://www.anthropic.com/news', hrefPrefix: '/news/' },
-  { name: 'Hugging Face Blog', type: 'rss', url: 'https://huggingface.co/blog/feed.xml' },
-  { name: 'MIT Technology Review AI', type: 'rss', url: 'https://www.technologyreview.com/topic/artificial-intelligence/feed' },
-  { name: 'The Verge AI', type: 'rss', url: 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml' },
-  { name: 'TechCrunch AI', type: 'rss', url: 'https://techcrunch.com/category/artificial-intelligence/feed/' },
-  { name: 'Ars Technica AI', type: 'rss', url: 'https://arstechnica.com/ai/feed/' },
-  { name: 'VentureBeat AI', type: 'rss', url: 'https://venturebeat.com/category/ai/feed/' },
+  {
+    name: 'Google DeepMind',
+    type: 'rss',
+    url: 'https://deepmind.google/blog/rss.xml',
+  },
+  {
+    name: 'Google AI Blog',
+    type: 'rss',
+    url: 'https://blog.google/technology/ai/rss/',
+  },
+  {
+    name: 'Anthropic News',
+    type: 'scrape',
+    url: 'https://www.anthropic.com/news',
+    hrefPrefix: '/news/',
+  },
+  {
+    name: 'Hugging Face Blog',
+    type: 'rss',
+    url: 'https://huggingface.co/blog/feed.xml',
+  },
+  {
+    name: 'MIT Technology Review AI',
+    type: 'rss',
+    url: 'https://www.technologyreview.com/topic/artificial-intelligence/feed',
+  },
+  {
+    name: 'The Verge AI',
+    type: 'rss',
+    url: 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml',
+  },
+  {
+    name: 'TechCrunch AI',
+    type: 'rss',
+    url: 'https://techcrunch.com/category/artificial-intelligence/feed/',
+  },
+  {
+    name: 'Ars Technica AI',
+    type: 'rss',
+    url: 'https://arstechnica.com/ai/feed/',
+  },
+  {
+    name: 'VentureBeat AI',
+    type: 'rss',
+    url: 'https://venturebeat.com/category/ai/feed/',
+  },
   { name: 'arXiv cs.AI', type: 'rss', url: 'https://rss.arxiv.org/rss/cs.AI' },
-  { name: 'Simon Willison', type: 'rss', url: 'https://simonwillison.net/atom/everything/' },
+  {
+    name: 'Simon Willison',
+    type: 'rss',
+    url: 'https://simonwillison.net/atom/everything/',
+  },
   { name: 'The Decoder', type: 'rss', url: 'https://the-decoder.com/feed/' },
-  { name: 'DeepSeek News', type: 'scrape', url: 'https://www.deepseek.com/news', hrefPrefix: '/news/' },
-  { name: 'Z.ai releases', type: 'scrape', url: 'https://huggingface.co/zai-org', hrefPrefix: '/zai-org/' },
-  { name: 'Breakit (Svensk tech)', type: 'rss', url: 'https://www.breakit.se/feed/artiklar' },
+  {
+    name: 'DeepSeek News',
+    type: 'scrape',
+    url: 'https://www.deepseek.com/news',
+    hrefPrefix: '/news/',
+  },
+  {
+    name: 'Z.ai releases',
+    type: 'scrape',
+    url: 'https://huggingface.co/zai-org',
+    hrefPrefix: '/zai-org/',
+  },
+  {
+    name: 'Breakit (Svensk tech)',
+    type: 'rss',
+    url: 'https://www.breakit.se/feed/artiklar',
+  },
   { name: 'Di Digital', type: 'rss', url: 'https://www.di.se/rss' },
 ];
 
@@ -128,7 +184,8 @@ export const DEFAULT_BLOG_AI_SETTINGS: BlogAISettings = {
   systemPrompt: DEFAULT_BLOG_SYSTEM_PROMPT,
   model: 'deepseek/deepseek-v4-flash-0731',
   feeds: DEFAULT_BLOG_FEEDS,
-  exaQuery: 'major AI news, model releases, and AI research breakthroughs this week',
+  exaQuery:
+    'major AI news, model releases, and AI research breakthroughs this week',
   editorialNotes: DEFAULT_EDITORIAL_NOTES,
   maxOutputTokens: 4096,
   updatedAt: null,

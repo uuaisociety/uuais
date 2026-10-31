@@ -292,6 +292,58 @@ describe('NewsletterPage', () => {
     },
   );
 
+  it('lets a subscribed non-member unsubscribe but not subscribe', async () => {
+    mockUseAdmin.mockReturnValue({
+      loading: false,
+      profileLoading: false,
+      user: { uid: 'u1' },
+      profile: { isMember: false, newsletter: true },
+    });
+    render(<NewsletterPage />);
+    expect(
+      screen.getByRole('link', { name: 'Complete membership' }),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Subscribe' })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Unsubscribe' }));
+    await waitFor(() =>
+      expect(global.fetch).toHaveBeenCalledWith(
+        '/api/newsletter',
+        expect.objectContaining({ body: '{"newsletter":false}' }),
+      ),
+    );
+    expect(
+      await screen.findByText('You are unsubscribed from the newsletter.'),
+    ).toBeInTheDocument();
+  });
+
+  it('honours an unsubscribe link for a subscribed non-member', async () => {
+    mockUseAdmin.mockReturnValue({
+      loading: false,
+      profileLoading: false,
+      user: { uid: 'u1' },
+      profile: { isMember: false, newsletter: true },
+    });
+    render(<NewsletterPage requestedSubscription={false} />);
+    await waitFor(() =>
+      expect(global.fetch).toHaveBeenCalledWith(
+        '/api/newsletter',
+        expect.objectContaining({ body: '{"newsletter":false}' }),
+      ),
+    );
+  });
+
+  it('does not show unsubscribe to a non-member who is not subscribed', () => {
+    mockUseAdmin.mockReturnValue({
+      loading: false,
+      profileLoading: false,
+      user: { uid: 'u1' },
+      profile: { isMember: false },
+    });
+    render(<NewsletterPage requestedSubscription={true} />);
+    expect(screen.queryByRole('button', { name: 'Unsubscribe' })).toBeNull();
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+
   it('allows subscribing when the newsletter flag is missing', async () => {
     mockUseAdmin.mockReturnValue({
       loading: false,

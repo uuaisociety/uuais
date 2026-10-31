@@ -37,8 +37,8 @@ function rateLimited(uid: string): NextResponse | null {
 }
 
 /**
- * POST /api/account/cv — multipart/form-data with `file` (PDF) and
- * `consent=true`. Stores the member's CV for sharing with partner companies.
+ * POST /api/account/cv — multipart/form-data with `file` (PDF), `consent=true`
+ * and the `consentVersion` of the wording shown. Stores the member's CV for sharing with partner companies.
  * Consent is recorded server-side with the wording version the member saw;
  * Storage and Firestore rules deny client writes to both.
  */
@@ -79,6 +79,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json(
         { error: 'Consent is required to share your CV with partners' },
         { status: 400 },
+      );
+    }
+    // The stored version must be the wording the member actually saw, so a page
+    // loaded before the wording changed has to be reloaded first.
+    if (formData.get('consentVersion') !== CV_CONSENT_VERSION) {
+      return NextResponse.json(
+        {
+          error:
+            'The consent text has been updated. Reload the page, review it, and try again.',
+        },
+        { status: 409 },
       );
     }
 

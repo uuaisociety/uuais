@@ -26,6 +26,35 @@ function eventIdFromPath(path: string): string {
   return rest.split('/')[0] || '';
 }
 
+// Attendance is also copied into each attendee's profile (users.eventHistory),
+// so it goes from there first and the attendance doc last: a failed run leaves
+// the doc in place to retry. Entries are never removed, only reset, so they
+// list every profile holding a copy.
+async function purgeAttendance(
+  docSnap: FirebaseFirestore.QueryDocumentSnapshot,
+): Promise<void> {
+  const eventId = docSnap.id;
+  const entries = docSnap.get('entries');
+  const userIds = new Set<string>();
+  if (Array.isArray(entries))
+    for (const e of entries as Array<{ userId?: unknown }>)
+      if (typeof e?.userId === 'string' && e.userId) userIds.add(e.userId);
+  for (const uid of userIds) {
+    const userRef = adminDb.collection('users').doc(uid);
+    await adminDb.runTransaction(async (transaction) => {
+      const user = await transaction.get(userRef);
+      const history = user.exists ? user.get('eventHistory') : undefined;
+      if (!Array.isArray(history)) return;
+      const kept = history.filter(
+        (h: { eventId?: unknown }) => h?.eventId !== eventId,
+      );
+      if (kept.length !== history.length)
+        transaction.update(userRef, { eventHistory: kept });
+    });
+  }
+  await docSnap.ref.delete();
+}
+
 /**
  * GET /api/cron/registrations-cleanup
  *
@@ -35,13 +64,23 @@ function eventIdFromPath(path: string): string {
  * - deletes registration documents 36 months after the event date, matching
  *   the privacy policy's retention statement (for deleted events: 36 months
  *   after registering);
- * - deletes attendance of deleted events 36 months after they were deleted;
+ * - deletes attendance (and the copy in attendees' profiles) 36 months after
+ *   the event, or for deleted events 36 months after they were deleted;
  * - deletes admin audit-log entries (incl. CV downloads and consent events)
  *   older than 30 days. Runs here because Vercel Hobby allows two crons.
  */
 export async function GET(req: NextRequest) {
   if (!isValidCronRequest(req)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  // First and on its own, so a failure in the cleanup below never keeps audit
+  // entries past their retention.
+  let purgedAuditLogs: number | null = null;
+  try {
+    purgedAuditLogs = await purgeExpiredAuditLogs();
+  } catch (err) {
+    console.error('audit log purge failed', err);
   }
 
   try {
@@ -176,11 +215,18 @@ export async function GET(req: NextRequest) {
       deletedDocs += Math.min(400, orphanRegs.length - i);
     }
 
-    // Attendance of deleted events: stamp when the event was first seen
-    // missing, then purge after the document retention period.
+    // Attendance: purged 36 months after the event. For deleted events, stamp
+    // when the event was first seen missing, then purge after the same period.
     const attendanceSnap = await adminDb.collection('eventAttendance').get();
     for (const docSnap of attendanceSnap.docs) {
+      if (deletedDocs >= MAX_DOC_DELETES_PER_RUN) break;
       if (existingEventIds.has(docSnap.id)) {
+        const startMs = eventStartById.get(docSnap.id);
+        if (startMs !== undefined && now - startMs > DOCUMENT_RETENTION_MS) {
+          await purgeAttendance(docSnap);
+          deletedDocs++;
+          continue;
+        }
         if (docSnap.get('orphanedAt') !== undefined)
           await docSnap.ref.update({
             orphanedAt: admin.firestore.FieldValue.delete(),
@@ -191,12 +237,10 @@ export async function GET(req: NextRequest) {
       if (typeof orphanedAt !== 'number') {
         await docSnap.ref.update({ orphanedAt: now });
       } else if (now - orphanedAt > DOCUMENT_RETENTION_MS) {
-        await docSnap.ref.delete();
+        await purgeAttendance(docSnap);
         deletedDocs++;
       }
     }
-
-    const purgedAuditLogs = await purgeExpiredAuditLogs();
 
     return NextResponse.json({
       success: true,

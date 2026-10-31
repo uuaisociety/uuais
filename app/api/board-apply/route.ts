@@ -3,6 +3,18 @@ import type { NextRequest } from 'next/server';
 import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { adminDb } from '@/lib/firebase-admin';
 import admin from 'firebase-admin';
+import {
+  MAX_PDF_BYTES,
+  findPdfActiveContent,
+  sanitizePdfFileName,
+  validatePdfFile,
+} from '@/lib/pdf-upload';
+import { scanPdfBuffer } from '@/lib/malware-scan';
+import {
+  MULTIPART_OVERHEAD_BYTES,
+  readBoundedFormData,
+} from '@/lib/bounded-request-body';
+import { saveFileToStorage } from '@/lib/storage-upload';
 
 export const runtime = 'nodejs';
 
@@ -15,6 +27,9 @@ interface AppError extends Error {
 const DEFAULT_COOLDOWN_SECONDS = 1 * 60; // 1 minute
 const DEFAULT_MAX_TOTAL_APPLICATIONS = 10;
 const COVER_LETTER_MAX_CHARS = 3500;
+// CV and cover PDFs plus the cover text at up to 3 bytes per UTF-8 character.
+const MAX_MULTIPART_BYTES =
+  2 * MAX_PDF_BYTES + MULTIPART_OVERHEAD_BYTES + 3 * COVER_LETTER_MAX_CHARS;
 
 function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
@@ -24,17 +39,24 @@ function safeKeyPart(s: string): string {
   return encodeURIComponent(s);
 }
 
-async function saveFileToStorage(file: File, destPath: string) {
-  // file is a web File/Blob
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
-  const bucket = admin.storage().bucket();
-  const gfile = bucket.file(destPath);
-  await gfile.save(buffer, { metadata: { contentType: file.type || 'application/octet-stream' } });
-  // Generate a signed read URL valid for 40 days
-  const expires = Date.now() + 40 * 24 * 60 * 60 * 1000;
-  const [url] = await gfile.getSignedUrl({ action: 'read', expires });
-  return { path: destPath, url };
+// Same checks as member CVs, since admins open these files: returns the
+// checked bytes and a safe file name, or an error message.
+async function checkPdf(
+  file: File,
+  label: string,
+): Promise<{ buffer: Buffer; fileName: string } | { error: string }> {
+  const invalid = await validatePdfFile(file, label);
+  if (invalid) return { error: invalid };
+  const fileName = sanitizePdfFileName(file.name);
+  if (!fileName) return { error: `Invalid ${label.toLowerCase()} filename` };
+  const buffer = Buffer.from(await file.arrayBuffer());
+  if (await findPdfActiveContent(buffer))
+    return {
+      error: `${label} contains scripts, attachments or interactive content. Please export it again as a plain PDF.`,
+    };
+  const scan = await scanPdfBuffer(buffer, fileName);
+  if (!scan.ok) return { error: scan.message || `${label} rejected` };
+  return { buffer, fileName };
 }
 
 export async function POST(req: NextRequest) {
@@ -44,7 +66,12 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const form = await req.formData();
+    const form = await readBoundedFormData(req, MAX_MULTIPART_BYTES);
+    if (!form)
+      return NextResponse.json(
+        { error: 'Application is too large' },
+        { status: 413 },
+      );
 
     const name = (form.get('name') as string) || '';
     const email = (form.get('email') as string) || '';
@@ -56,43 +83,63 @@ export async function POST(req: NextRequest) {
     const roleId = (form.get('roleId') as string) || '';
 
     if (!name || !email) {
-      return NextResponse.json({ error: 'Missing name or email' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Missing name or email' },
+        { status: 400 },
+      );
     }
     if (!role) {
       return NextResponse.json({ error: 'Role is required' }, { status: 400 });
     }
     if (!agree) {
-      return NextResponse.json({ error: 'Agreement required' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Agreement required' },
+        { status: 400 },
+      );
     }
 
     const emailNormalized = normalizeEmail(email);
     // Prefer a stable role id for uniqueness; fall back to role title if older clients submit no roleId.
-    const roleKey = roleId?.trim() ? `id:${roleId.trim()}` : `title:${role.trim()}`;
+    const roleKey = roleId?.trim()
+      ? `id:${roleId.trim()}`
+      : `title:${role.trim()}`;
 
     const cvFile = form.get('cv') as File | null;
     if (!cvFile) {
-      return NextResponse.json({ error: 'CV file is required' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'CV file is required' },
+        { status: 400 },
+      );
     }
-    if (cvFile.type !== 'application/pdf') {
-      return NextResponse.json({ error: 'CV must be a PDF' }, { status: 400 });
-    }
-    if (cvFile.size > 3 * 1024 * 1024) {
-      return NextResponse.json({ error: 'CV must be <= 3MB' }, { status: 400 });
-    }
+    const cv = await checkPdf(cvFile, 'CV');
+    if ('error' in cv)
+      return NextResponse.json({ error: cv.error }, { status: 400 });
 
+    let cover: { buffer: Buffer; fileName: string } | null = null;
+    const coverFile = form.get('coverFile') as File | null;
     if (coverOption === 'file') {
-      const coverFile = form.get('coverFile') as File | null;
-      if (!coverFile) return NextResponse.json({ error: 'Cover file missing' }, { status: 400 });
-      if (coverFile.type !== 'application/pdf') return NextResponse.json({ error: 'Cover must be PDF' }, { status: 400 });
-      if (coverFile.size > 3 * 1024 * 1024) return NextResponse.json({ error: 'Cover must be <= 3MB' }, { status: 400 });
+      if (!coverFile)
+        return NextResponse.json(
+          { error: 'Cover file missing' },
+          { status: 400 },
+        );
+      const checked = await checkPdf(coverFile, 'Cover');
+      if ('error' in checked)
+        return NextResponse.json({ error: checked.error }, { status: 400 });
+      cover = checked;
     } else {
       if (!coverText || !(coverText as string).trim()) {
-        return NextResponse.json({ error: 'Cover letter text is required when choosing text option' }, { status: 400 });
+        return NextResponse.json(
+          { error: 'Cover letter text is required when choosing text option' },
+          { status: 400 },
+        );
       }
       if (coverText.length > COVER_LETTER_MAX_CHARS) {
         return NextResponse.json(
-          { error: `Cover letter text is too long. Maximum is ${COVER_LETTER_MAX_CHARS} characters (about one A4 page).` },
-          { status: 400 }
+          {
+            error: `Cover letter text is too long. Maximum is ${COVER_LETTER_MAX_CHARS} characters (about one A4 page).`,
+          },
+          { status: 400 },
         );
       }
     }
@@ -100,8 +147,13 @@ export async function POST(req: NextRequest) {
     // -------------------------------
     // Anti-spam / duplicate protection
     // -------------------------------
-    const cooldownSeconds = Number(process.env.BOARD_APPLY_COOLDOWN_SECONDS || DEFAULT_COOLDOWN_SECONDS);
-    const maxTotalApplications = Number(process.env.BOARD_APPLY_MAX_TOTAL_APPLICATIONS || DEFAULT_MAX_TOTAL_APPLICATIONS);
+    const cooldownSeconds = Number(
+      process.env.BOARD_APPLY_COOLDOWN_SECONDS || DEFAULT_COOLDOWN_SECONDS,
+    );
+    const maxTotalApplications = Number(
+      process.env.BOARD_APPLY_MAX_TOTAL_APPLICATIONS ||
+        DEFAULT_MAX_TOTAL_APPLICATIONS,
+    );
     const nowMs = Date.now();
 
     // Best-effort current count (used only to initialize a counter once).
@@ -115,18 +167,28 @@ export async function POST(req: NextRequest) {
         .get();
       existingCount = existingCountSnap.data().count || 0;
     } catch {
-      const existingSnap = await adminDb.collection('boardApplications').where('emailNormalized', '==', emailNormalized).get();
+      const existingSnap = await adminDb
+        .collection('boardApplications')
+        .where('emailNormalized', '==', emailNormalized)
+        .get();
       existingCount = existingSnap.size;
     }
 
     const userKey = safeKeyPart(emailNormalized);
     const roleLockKey = `${userKey}__${safeKeyPart(roleKey)}`;
-    const limitsRef = adminDb.collection('boardApplicationUserLimits').doc(userKey);
-    const roleLockRef = adminDb.collection('boardApplicationUserRoleLocks').doc(roleLockKey);
+    const limitsRef = adminDb
+      .collection('boardApplicationUserLimits')
+      .doc(userKey);
+    const roleLockRef = adminDb
+      .collection('boardApplicationUserRoleLocks')
+      .doc(roleLockKey);
     const appRef = adminDb.collection('boardApplications').doc();
 
     await adminDb.runTransaction(async (tx) => {
-      const [limitsDoc, roleLockDoc] = await Promise.all([tx.get(limitsRef), tx.get(roleLockRef)]);
+      const [limitsDoc, roleLockDoc] = await Promise.all([
+        tx.get(limitsRef),
+        tx.get(roleLockRef),
+      ]);
 
       if (roleLockDoc.exists) {
         const msg = 'You have already applied for this position.';
@@ -137,24 +199,46 @@ export async function POST(req: NextRequest) {
       }
 
       const limitsData = limitsDoc.exists ? limitsDoc.data() : null;
-      const limits = limitsData as { lastAppliedAtMs?: number; totalApplications?: number } | null;
-      const lastAppliedAtMs = typeof limits?.lastAppliedAtMs === 'number' ? limits.lastAppliedAtMs : 0;
+      const limits = limitsData as {
+        lastAppliedAtMs?: number;
+        totalApplications?: number;
+      } | null;
+      const lastAppliedAtMs =
+        typeof limits?.lastAppliedAtMs === 'number'
+          ? limits.lastAppliedAtMs
+          : 0;
       const totalApplications =
-        typeof limits?.totalApplications === 'number' ? limits.totalApplications : (limitsDoc.exists ? 0 : existingCount);
+        typeof limits?.totalApplications === 'number'
+          ? limits.totalApplications
+          : limitsDoc.exists
+            ? 0
+            : existingCount;
 
       const cooldownMs = Math.max(0, cooldownSeconds) * 1000;
-      if (cooldownMs > 0 && lastAppliedAtMs && nowMs - lastAppliedAtMs < cooldownMs) {
+      if (
+        cooldownMs > 0 &&
+        lastAppliedAtMs &&
+        nowMs - lastAppliedAtMs < cooldownMs
+      ) {
         const retryAfterMs = cooldownMs - (nowMs - lastAppliedAtMs);
         const retryAfterSeconds = Math.max(1, Math.ceil(retryAfterMs / 1000));
-        const err = new Error('Too many applications submitted. Please try again in a few moments.') as AppError;
+        const err = new Error(
+          'Too many applications submitted. Please try again in a few moments.',
+        ) as AppError;
         err.status = 429;
         err.code = 'RATE_LIMITED';
         err.retryAfterSeconds = retryAfterSeconds;
         throw err;
       }
 
-      if (Number.isFinite(maxTotalApplications) && maxTotalApplications > 0 && totalApplications >= maxTotalApplications) {
-        const err = new Error(`You have reached the maximum number of applications (${maxTotalApplications}).`) as AppError;
+      if (
+        Number.isFinite(maxTotalApplications) &&
+        maxTotalApplications > 0 &&
+        totalApplications >= maxTotalApplications
+      ) {
+        const err = new Error(
+          `You have reached the maximum number of applications (${maxTotalApplications}).`,
+        ) as AppError;
         err.status = 403;
         err.code = 'MAX_TOTAL_REACHED';
         throw err;
@@ -167,9 +251,16 @@ export async function POST(req: NextRequest) {
           totalApplications: totalApplications + 1,
           updatedAt: admin.firestore.FieldValue.serverTimestamp(),
         },
-        { merge: true }
+        { merge: true },
       );
-      tx.set(roleLockRef, { applicationId: appRef.id, createdAt: admin.firestore.FieldValue.serverTimestamp() }, { merge: false });
+      tx.set(
+        roleLockRef,
+        {
+          applicationId: appRef.id,
+          createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        },
+        { merge: false },
+      );
       tx.set(appRef, {
         name,
         email,
@@ -191,13 +282,18 @@ export async function POST(req: NextRequest) {
     try {
       // Save files to storage
       const timestamp = Date.now();
-      const cvPath = `board-applications/${timestamp}_${cvFile.name}`;
-      savedCv = await saveFileToStorage(cvFile, cvPath);
+      const cvPath = `board-applications/${timestamp}_${cv.fileName}`;
+      savedCv = await saveFileToStorage(cvFile, cvPath, {
+        signedUrl: true,
+        buffer: cv.buffer,
+      });
 
-      if (coverOption === 'file') {
-        const coverFile = form.get('coverFile') as File;
-        const coverPath = `board-applications/${timestamp}_cover_${coverFile.name}`;
-        savedCover = await saveFileToStorage(coverFile, coverPath);
+      if (coverFile && cover) {
+        const coverPath = `board-applications/${timestamp}_cover_${cover.fileName}`;
+        savedCover = await saveFileToStorage(coverFile, coverPath, {
+          signedUrl: true,
+          buffer: cover.buffer,
+        });
       }
 
       // Attach file refs to the reserved application doc
@@ -206,17 +302,28 @@ export async function POST(req: NextRequest) {
           cv: savedCv,
           coverFile: coverOption === 'file' ? savedCover : null,
         },
-        { merge: true }
+        { merge: true },
       );
     } catch (uploadErr) {
       // Best-effort rollback to avoid leaving a "reserved" application without files.
       try {
         await adminDb.runTransaction(async (tx) => {
           const limitsDoc = await tx.get(limitsRef);
-          const rollbackData = limitsDoc.data() as { totalApplications?: number } | undefined;
-          const currentTotal = typeof rollbackData?.totalApplications === 'number' ? rollbackData.totalApplications : null;
+          const rollbackData = limitsDoc.data() as
+            { totalApplications?: number } | undefined;
+          const currentTotal =
+            typeof rollbackData?.totalApplications === 'number'
+              ? rollbackData.totalApplications
+              : null;
           if (typeof currentTotal === 'number' && currentTotal > 0) {
-            tx.set(limitsRef, { totalApplications: currentTotal - 1, updatedAt: admin.firestore.FieldValue.serverTimestamp() }, { merge: true });
+            tx.set(
+              limitsRef,
+              {
+                totalApplications: currentTotal - 1,
+                updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+              },
+              { merge: true },
+            );
           }
           tx.delete(roleLockRef);
           tx.delete(appRef);
@@ -246,7 +353,12 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(responseDoc);
   } catch (err) {
-    const anyErr = err as { status?: number; message?: string; code?: string; retryAfterSeconds?: number };
+    const anyErr = err as {
+      status?: number;
+      message?: string;
+      code?: string;
+      retryAfterSeconds?: number;
+    };
     const status = typeof anyErr?.status === 'number' ? anyErr.status : 500;
     if (status >= 500) console.error('board-apply POST error', err);
     return NextResponse.json(
@@ -255,7 +367,7 @@ export async function POST(req: NextRequest) {
         code: anyErr?.code,
         retryAfterSeconds: anyErr?.retryAfterSeconds,
       },
-      { status }
+      { status },
     );
   }
 }

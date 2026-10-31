@@ -1,78 +1,78 @@
-// Verifies template variable rendering, including HTML escaping of user data.
-const mockAddDoc = jest.fn().mockResolvedValue({ id: 'mail1' });
-
-jest.mock('firebase/firestore', () => ({
-  collection: jest.fn(() => 'mail-collection'),
-  addDoc: (...args: unknown[]) => mockAddDoc(...args),
-  serverTimestamp: () => 'SERVER_TS',
-}));
-jest.mock('@/lib/firebase-client', () => ({ db: {} }));
-
-import { sendTemplatedEmail, sendWelcomeEmail } from '@/lib/email';
+// Verifies template variable rendering, including HTML escaping of user data,
+// and the client helper that asks the server to send an email.
+import { renderTemplatedEmail, requestAdminEmail } from '@/lib/email';
 
 const templates: Record<string, string> = {
-  '/email-templates/test.html':
+  'https://uuais.test/email-templates/test.html':
     '<h1>Hello {{name}}</h1><p>{{confirm_link}}</p>{{footer}}',
-  '/email-templates/partials/unsubscribe.html':
+  'https://uuais.test/email-templates/partials/unsubscribe.html':
     '<a href="{{unsubscribe_url}}">Unsubscribe</a>',
 };
 
-function sentHtml(): string {
-  const payload = mockAddDoc.mock.calls[0][1] as {
-    message: { html: string; subject: string };
-    to: string;
-  };
-  return payload.message.html;
-}
+const render = (variables?: Record<string, string>, unsubscribeUrl?: string) =>
+  renderTemplatedEmail({
+    origin: 'https://uuais.test',
+    templatePath: '/email-templates/test.html',
+    variables,
+    unsubscribeUrl,
+  });
 
 describe('email template rendering', () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    global.fetch = jest.fn(async (url: string) => ({
+    global.fetch = jest.fn(async (url: URL | string) => ({
       ok: true,
       text: async () => templates[String(url)] ?? '',
     })) as unknown as typeof fetch;
   });
 
   it('escapes user-controlled variables', async () => {
-    await sendTemplatedEmail({
-      to: 'user@example.com',
-      subject: 'Hi',
-      templatePath: '/email-templates/test.html',
-      variables: { name: '<img src=x onerror=alert(1)>' },
-    });
-
-    const html = sentHtml();
+    const html = await render({ name: '<img src=x onerror=alert(1)>' });
     expect(html).toContain('&lt;img src=x onerror=alert(1)&gt;');
     expect(html).not.toContain('<img src=x');
   });
 
   it('keeps the footer raw HTML', async () => {
-    await sendTemplatedEmail({
-      to: 'user@example.com',
-      subject: 'Hi',
-      templatePath: '/email-templates/test.html',
-      variables: { name: 'Ada' },
-      unsubscribeUrl: 'https://uuais.com/account?a=1&b=2',
-    });
-
-    const html = sentHtml();
+    const html = await render(
+      { name: 'Ada' },
+      'https://uuais.com/account?a=1&b=2',
+    );
     expect(html).toContain('<a href="https://uuais.com/account?a=1&amp;b=2">');
   });
 
   it('renders missing variables as empty strings', async () => {
-    await sendTemplatedEmail({
-      to: 'user@example.com',
-      subject: 'Hi',
-      templatePath: '/email-templates/test.html',
-    });
-    expect(sentHtml()).toContain('<p></p>');
+    expect(await render()).toContain('<p></p>');
   });
 
-  it('sendWelcomeEmail renders the welcome template', async () => {
-    templates['/email-templates/welcome.html'] =
-      '<p>Welcome {{name}}</p>{{footer}}';
-    await sendWelcomeEmail('user@example.com', { name: 'Ada' });
-    expect(sentHtml()).toContain('Welcome Ada');
+  it('fails when a template cannot be loaded', async () => {
+    global.fetch = jest.fn(async () => ({
+      ok: false,
+      text: async () => '',
+    })) as unknown as typeof fetch;
+    await expect(render()).rejects.toThrow(/Failed to load template/);
+  });
+});
+
+describe('requestAdminEmail', () => {
+  it('posts the kind and record id to the admin mail route', async () => {
+    const mockFetch = jest.fn().mockResolvedValue({ ok: true });
+    global.fetch = mockFetch as unknown as typeof fetch;
+    await requestAdminEmail('event-invite', 'reg-1');
+    expect(mockFetch).toHaveBeenCalledWith('/api/admin/mail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ kind: 'event-invite', id: 'reg-1' }),
+    });
+  });
+
+  it('throws the server error', async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: false,
+      status: 500,
+      json: async () => ({ error: 'Sending the email failed.' }),
+    }) as unknown as typeof fetch;
+    await expect(requestAdminEmail('event-invite', 'reg-1')).rejects.toThrow(
+      /Sending the email failed/,
+    );
   });
 });

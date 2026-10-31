@@ -108,6 +108,8 @@ export async function setAttendanceForUser(
     tx.set(attRef, { entries: nextEntries } satisfies AttendanceDoc, {
       merge: true,
     });
-    tx.set(userRef, { eventHistory: nextHistory }, { merge: true });
+    // Never recreate a profile that doesn't exist (e.g. an erased member).
+    if (userSnap.exists())
+      tx.set(userRef, { eventHistory: nextHistory }, { merge: true });
   });
 }

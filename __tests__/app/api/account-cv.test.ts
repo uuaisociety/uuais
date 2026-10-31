@@ -79,11 +79,20 @@ function pdfFile(content = '%PDF-1.4 test cv content') {
 }
 
 function uploadRequest(
-  options: { consent?: string | null; file?: File | null } = {},
+  options: {
+    consent?: string | null;
+    consentVersion?: string;
+    file?: File | null;
+  } = {},
 ) {
-  const { consent = 'true', file = pdfFile() } = options;
+  const {
+    consent = 'true',
+    consentVersion = CV_CONSENT_VERSION,
+    file = pdfFile(),
+  } = options;
   const formData = new FormData();
   if (consent !== null) formData.set('consent', consent);
+  formData.set('consentVersion', consentVersion);
   if (file) formData.set('file', file);
   return new Request('http://localhost/api/account/cv', {
     method: 'POST',
@@ -135,6 +144,15 @@ describe('/api/account/cv', () => {
     // A member who just linked Google is verified in Firebase before their token refreshes.
     liveEmailVerified = true;
     expect((await POST(uploadRequest() as never)).status).toBe(200);
+  });
+
+  it('refuses consent given to outdated wording', async () => {
+    const { POST } = await import('@/app/api/account/cv/route');
+    const res = await POST(
+      uploadRequest({ consentVersion: '2020-01-01' }) as never,
+    );
+    expect(res.status).toBe(409);
+    expect(mockStorageFile).not.toHaveBeenCalled();
   });
 
   it('returns 403 for non-members', async () => {

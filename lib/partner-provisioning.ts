@@ -33,6 +33,16 @@ async function hasPassword(auth: Auth, uid: string): Promise<boolean> {
   return false;
 }
 
+// A member profile or shared CV: deleting such an account here would skip the
+// full erasure (lib/account-erasure) and orphan the member's data.
+async function hasMemberData(db: Db, uid: string): Promise<boolean> {
+  const [profile, cv] = await Promise.all([
+    db.collection('users').doc(uid).get(),
+    db.collection('cvs').doc(uid).get(),
+  ]);
+  return profile.exists || cv.exists;
+}
+
 const onlyEmailProvider = (user: UserRecord) =>
   user.providerData.every((p) => p.providerId === 'password');
 
@@ -62,6 +72,11 @@ export async function provisionPartner(
     });
 
   let replaced = false;
+  if (user && (await hasMemberData(db, user.uid))) {
+    throw new PartnerProvisioningError(
+      `${key} belongs to a member account (it has a profile or a shared CV), so it can't be made a partner account. Use a different address, or erase that member in the admin Members tab first.`,
+    );
+  }
   if (user) {
     const password = await hasPassword(auth, user.uid);
     if (onlyEmailProvider(user)) {
@@ -98,25 +113,32 @@ export async function provisionPartner(
   return { key, uid: user.uid, ownsAccount, replaced };
 }
 
-/** Removes the entry; deletes the account the tool created, or signs a vetted one out everywhere. */
+/**
+ * Removes the entry; deletes the account the tool created, or signs a vetted one
+ * out everywhere. An account that has since gained member data is only signed
+ * out (`memberAccount`), since deleting it here would skip the full erasure.
+ */
 export async function deprovisionPartner(
   auth: Auth,
   db: Db,
   email: string,
-): Promise<{ key: string; removed: boolean }> {
+): Promise<{ key: string; removed: boolean; memberAccount?: boolean }> {
   const key = partnerEmailKey(email);
   const ref = db.collection('partnerAccounts').doc(key);
   const snap = await ref.get();
   if (!snap.exists) return { key, removed: false };
   const uid = snap.get('uid');
   await ref.delete();
+  let memberAccount = false;
   if (typeof uid === 'string' && uid) {
+    memberAccount = await hasMemberData(db, uid);
     try {
-      if (snap.get('ownsAccount') === true) await auth.deleteUser(uid);
+      if (snap.get('ownsAccount') === true && !memberAccount)
+        await auth.deleteUser(uid);
       else await auth.revokeRefreshTokens(uid);
     } catch (err) {
       if (!isNotFound(err)) throw err;
     }
   }
-  return { key, removed: true };
+  return { key, removed: true, ...(memberAccount ? { memberAccount } : {}) };
 }

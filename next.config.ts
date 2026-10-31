@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { IMAGE_REMOTE_PATTERNS } from './lib/image-hosts';
 
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
@@ -10,6 +11,9 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   outputFileTracingRoot: projectRoot,
   turbopack: { root: projectRoot },
+  // Keeps the Node build (with its jsdom window) on the server; the browser
+  // build would be a no-op sanitizer there.
+  serverExternalPackages: ['isomorphic-dompurify'],
   experimental: {
     useTypeScriptCli: false,
     instantInsights: {
@@ -18,20 +22,8 @@ const nextConfig: NextConfig = {
   },
   images: {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'firebasestorage.googleapis.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'drive.google.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'storage.googleapis.com',
-      },
-    ],
+    // Only the app's own buckets (see lib/image-hosts.ts).
+    remotePatterns: IMAGE_REMOTE_PATTERNS,
   },
   async redirects() {
     return [

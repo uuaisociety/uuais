@@ -3,8 +3,12 @@ import type { NextRequest } from 'next/server';
 import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { readBoundedRequest } from '@/lib/bounded-request-body';
 import { logAdminAction } from '@/lib/server-audit-log';
+import { checkWindow } from '@/lib/rate-limit-in-memory';
 
 const MAX_BODY_BYTES = 4 * 1024;
+// Well above real exports, low enough that a script can't flood the trail.
+const LOG_LIMIT = 60;
+const LOG_WINDOW_MS = 60 * 60 * 1000;
 const EVENT_ID_RE = /^[A-Za-z0-9_-]{1,128}$/;
 
 /**
@@ -17,6 +21,11 @@ export async function POST(req: NextRequest) {
   try {
     const auth = await requireAdmin(req);
     if (!auth.ok) return authFailureResponse(auth.reason);
+    if (
+      !checkWindow(`audit-log:${auth.session.uid}`, LOG_LIMIT, LOG_WINDOW_MS)
+        .allowed
+    )
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
 
     const bounded = await readBoundedRequest(req, MAX_BODY_BYTES);
     if (!bounded)
@@ -36,8 +45,8 @@ export async function POST(req: NextRequest) {
         ? payload.eventId
         : undefined;
     const count =
-      typeof payload.count === 'number' && Number.isFinite(payload.count)
-        ? payload.count
+      Number.isSafeInteger(payload.count) && (payload.count as number) >= 0
+        ? (payload.count as number)
         : undefined;
 
     const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
