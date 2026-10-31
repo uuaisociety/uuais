@@ -269,7 +269,9 @@ try {
   // ...a profile can't be re-created with partner contact off while a CV is shared...
   // (profile-5 has a shared CV but no profile doc, e.g. a half-finished erasure.)
   const freshUser = client('fresh-user', { sub: 'profile-5' });
-  await seed('cvs/profile-5', { path: { stringValue: 'cvs/profile-5/cv.pdf' } });
+  await seed('cvs/profile-5', {
+    path: { stringValue: 'cvs/profile-5/cv.pdf' },
+  });
   await denied(() =>
     setDoc(doc(freshUser, 'users/profile-5'), {
       displayName: 'New',
@@ -297,6 +299,36 @@ try {
     program: 'Computer Science',
     expectedGraduationYear: 2027,
   });
+  passed++;
+  // Admins edit profiles, but a member's email and consent choices are theirs.
+  for (const field of [
+    { email: 'other@example.com' },
+    { marketingOptIn: true },
+    { partnerContactOptIn: false },
+    { privacyAcceptedAt: '2020-01-01T00:00:00.000Z' },
+  ]) {
+    await denied(() => updateDoc(doc(admin, 'users/profile-1'), field));
+  }
+  await denied(() =>
+    setDoc(doc(admin, 'users/admin-made'), { newsletter: true }),
+  );
+  await updateDoc(doc(admin, 'users/profile-1'), { displayName: 'Edited' });
+  passed++;
+  // Category ids carry the owner's uid, so nobody can claim another's mapping.
+  await denied(() =>
+    setDoc(doc(member, 'course_categories/member-1/categories/someone_cat'), {
+      userId: 'member-1',
+    }),
+  );
+  await denied(() =>
+    setDoc(doc(member, 'course_categories/member-1/categories/member-1_'), {
+      userId: 'member-1',
+    }),
+  );
+  await setDoc(
+    doc(member, 'course_categories/member-1/categories/member-1_cat'),
+    { userId: 'member-1' },
+  );
   passed++;
   console.log(`Firestore security rules: ${passed} checks passed`);
 } finally {

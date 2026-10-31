@@ -43,7 +43,9 @@ const where = (collection: string, field: string, value: string) =>
 /**
  * Team applications (+ resume, campaign lock, limit counters), board
  * applications (+ CV and cover file, role locks, limit counter) and showcase
- * projects (+ cover images, other members' votes on them) belonging to `uid`.
+ * projects (+ cover images, other members' votes on them) belonging to `uid`,
+ * plus their AI and showcase usage counters, queued emails and any partner
+ * allowlist entry.
  */
 export async function collectSubmissions(uid: string): Promise<Submissions> {
   const email = await verifiedEmail(uid);
@@ -104,7 +106,10 @@ export async function collectSubmissions(uid: string): Promise<Submissions> {
 
   const projects = await where('showcaseProjects', 'creatorUserId', uid);
   for (const project of projects.docs) {
-    const cover = fileIn({ path: project.get('coverImagePath') }, 'showcase/');
+    const cover = fileIn(
+      { path: project.get('coverImagePath') },
+      `showcase/${uid}/`,
+    );
     if (cover) files.add(cover);
     const votes = await where('showcaseVotes', 'projectId', project.id);
     votes.docs.forEach((vote) => add(vote.ref));
@@ -116,6 +121,27 @@ export async function collectSubmissions(uid: string): Promise<Submissions> {
     .bucket()
     .getFiles({ prefix: `showcase/${uid}/` });
   stored.forEach((f) => files.add(f.name));
+
+  // Per-user usage counters, queued emails to the member, and a partner
+  // allowlist entry bound to this account.
+  const usage = await Promise.all([
+    where('ai_usage', 'userId', uid),
+    where('showcase_usage', 'uid', uid),
+    where('partnerAccounts', 'uid', uid),
+    ...(email ? [where('mail', 'to', email)] : []),
+  ]);
+  usage.forEach((snap) => snap.docs.forEach((d) => add(d.ref)));
+  if (email) {
+    // Not a message also addressed to others: deleting it would cancel or
+    // erase their copy.
+    const shared = await adminDb
+      .collection('mail')
+      .where('to', 'array-contains', email)
+      .get();
+    shared.docs
+      .filter((d) => (d.get('to') as unknown[]).length === 1)
+      .forEach((d) => add(d.ref));
+  }
 
   return { filePaths: [...files], refs: [...refs.values()] };
 }

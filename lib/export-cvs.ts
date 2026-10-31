@@ -42,7 +42,11 @@ const csvCell = (value: unknown): string => {
   return `"${safe.replace(/"/g, '""')}"`;
 };
 
-/** members.csv: one row per CV in the zip, so the files can be sorted by programme or year. */
+/**
+ * members.csv: one row per CV in the zip, so the files can be sorted by
+ * programme or year. CVs that failed to download (`null` name, e.g. withdrawn
+ * meanwhile) are left out, so no details go out without their CV's consent.
+ */
 export function cvIndexCsv(
   cvs: SharedCv[],
   fileNames: (string | null)[],
@@ -56,14 +60,20 @@ export function cvIndexCsv(
       'Shared',
       'File',
     ],
-    ...cvs.map((cv, i) => [
-      cv.name,
-      cv.email,
-      cv.program,
-      cv.graduationYear ?? '',
-      cv.consentAt.slice(0, 10),
-      fileNames[i] ?? 'not included (download failed)',
-    ]),
+    ...cvs.flatMap((cv, i) =>
+      fileNames[i]
+        ? [
+            [
+              cv.name,
+              cv.email,
+              cv.program,
+              cv.graduationYear ?? '',
+              cv.consentAt.slice(0, 10),
+              fileNames[i],
+            ],
+          ]
+        : [],
+    ),
   ];
   // The BOM makes Excel read the file as UTF-8, so å/ä/ö survive.
   return '﻿' + rows.map((r) => r.map(csvCell).join(',')).join('\r\n');

@@ -88,7 +88,27 @@ export async function eraseAccount(uid: string): Promise<void> {
     .collection('showcaseVotes')
     .where('userId', '==', uid)
     .get();
-  for (const docSnap of votesSnap.docs) await docSnap.ref.delete();
+  // Like an unvote: the project's counter drops with the vote, floored at 0.
+  for (const docSnap of votesSnap.docs) {
+    await adminDb.runTransaction(async (transaction) => {
+      const vote = await transaction.get(docSnap.ref);
+      if (!vote.exists) return;
+      const projectId = vote.get('projectId');
+      const projectRef =
+        typeof projectId === 'string' && projectId
+          ? adminDb.collection('showcaseProjects').doc(projectId)
+          : null;
+      const project = projectRef ? await transaction.get(projectRef) : null;
+
+      transaction.delete(docSnap.ref);
+
+      if (projectRef && project?.exists) {
+        const total = project.get('votes');
+        const next = Math.max(0, (typeof total === 'number' ? total : 0) - 1);
+        transaction.update(projectRef, { votes: next });
+      }
+    });
+  }
 
   const categoriesSnap = await adminDb
     .collection('course_categories')

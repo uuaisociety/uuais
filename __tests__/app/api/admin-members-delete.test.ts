@@ -100,21 +100,41 @@ describe('DELETE /api/admin/members', () => {
     const res = await DELETE(remove('member1') as never);
     expect(res.status).toBe(200);
     expect(mockErase).toHaveBeenCalledWith('member1');
-    expect(mockLog).toHaveBeenCalledWith({
+    const entry = {
       action: 'remove',
       adminUid: 'admin1',
       path: 'users/member1',
       ip: '1.2.3.4',
+    };
+    expect(mockLog).toHaveBeenNthCalledWith(
+      1,
+      { ...entry, status: 'started' },
+      { required: true },
+    );
+    expect(mockLog).toHaveBeenNthCalledWith(2, {
+      ...entry,
+      status: 'completed',
     });
   });
 
-  it('reports a failed erasure without logging a removal', async () => {
+  it('refuses to erase when the start cannot be logged', async () => {
+    asAdmin();
+    mockLog.mockRejectedValueOnce(new Error('firestore down'));
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const { DELETE } = await import('@/app/api/admin/members/route');
+    expect((await DELETE(remove('member1') as never)).status).toBe(500);
+    expect(mockErase).not.toHaveBeenCalled();
+    error.mockRestore();
+  });
+
+  it('reports a failed erasure without logging it as completed', async () => {
     asAdmin();
     mockErase.mockRejectedValueOnce(new Error('storage down'));
     const error = jest.spyOn(console, 'error').mockImplementation(() => {});
     const { DELETE } = await import('@/app/api/admin/members/route');
     expect((await DELETE(remove('member1') as never)).status).toBe(500);
-    expect(mockLog).not.toHaveBeenCalled();
+    expect(mockLog).toHaveBeenCalledTimes(1);
+    expect(mockLog.mock.calls[0][0]).toMatchObject({ status: 'started' });
     error.mockRestore();
   });
 });

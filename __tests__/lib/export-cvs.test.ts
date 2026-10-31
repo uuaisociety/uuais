@@ -44,10 +44,13 @@ describe('cvIndexCsv', () => {
     );
   });
 
-  it('marks CVs that failed to download', () => {
-    expect(cvIndexCsv([cv({})], [null])).toContain(
-      '"not included (download failed)"',
+  it('leaves out members whose CV failed to download (e.g. withdrawn meanwhile)', () => {
+    const csv = cvIndexCsv(
+      [cv({}), cv({ name: 'Bo Ek', email: 'bo@student.uu.se' })],
+      ['Anna_Svensson.pdf', null],
     );
+    expect(csv.slice(1).split('\r\n')).toHaveLength(2);
+    expect(csv).not.toContain('bo@student.uu.se');
   });
 
   it('closes formula-guard bypasses: line breaks, leading space, full-width signs, hidden characters', () => {

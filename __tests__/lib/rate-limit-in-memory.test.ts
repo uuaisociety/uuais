@@ -38,4 +38,17 @@ describe('rate-limit buckets', () => {
     expect(checkWindow('cv-download:partner', 10, 60_000).allowed).toBe(true);
     resetRateLimits();
   });
+
+  it('keeps each key prefix in its own bucket by default', async () => {
+    const { checkWindow, resetRateLimits } =
+      await import('@/lib/rate-limit-in-memory');
+    resetRateLimits();
+    for (let i = 0; i < 10_000; i++)
+      checkWindow(`registration-confirm:ip-${i}`, 10, 60_000);
+    expect(checkWindow('registration-confirm:ip-new', 10, 60_000).allowed).toBe(
+      false,
+    );
+    expect(checkWindow('account-delete:user1', 10, 60_000).allowed).toBe(true);
+    resetRateLimits();
+  });
 });

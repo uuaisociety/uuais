@@ -53,6 +53,11 @@ service cloud.firestore {
     }
 
     // Helper: a shared CV implies partner contact, so the opt-in stays on while cvs/{uid} exists.
+    // Profile fields only the member may write (see the users admin rules).
+    function memberOwnedFields() {
+      return ['email','newsletter','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn'];
+    }
+
     function cvOptInKept(uid) {
       return !exists(/databases/$(database)/documents/cvs/$(uid))
         || request.resource.data.get('partnerContactOptIn', false) == true;
@@ -107,9 +112,14 @@ service cloud.firestore {
         && partnerVisibleFieldsOk(request.resource.data)
         && cvOptInKept(uid);
 
-      // Admin edits. Deleting a profile is server-only (lib/account-erasure), so a
-      // member is never half-erased with their CV still shared.
-      allow create, update: if isAdmin();
+      // Admin edits, except the member's own email and consent choices: those
+      // record what the member agreed to, so only the member may change them.
+      // Deleting a profile is server-only (lib/account-erasure), so a member is
+      // never half-erased with their CV still shared.
+      allow create: if isAdmin()
+        && !request.resource.data.keys().hasAny(memberOwnedFields());
+      allow update: if isAdmin()
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(memberOwnedFields());
       allow delete: if false;
     }
 
@@ -440,8 +450,13 @@ service cloud.firestore {
 
     // COURSE CATEGORIES - user-defined categories
     match /course_categories/{userId}/categories/{categoryId} {
-      // Users can only read/write their own categories
-      allow read, write: if isSignedIn() && request.auth.uid == userId;
+      // Users can only read/write their own categories. New ids start with the
+      // owner's uid: category_courses is keyed by category id alone, so a
+      // borrowed id would open another user's course mapping.
+      allow read, update, delete: if isSignedIn() && request.auth.uid == userId;
+      allow create: if isSignedIn() && request.auth.uid == userId
+        && categoryId.size() > userId.size() + 1
+        && categoryId[0:userId.size() + 1] == userId + '_';
     }
 
     // CATEGORY COURSES - many-to-many mapping

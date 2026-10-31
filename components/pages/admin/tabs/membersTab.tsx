@@ -13,6 +13,7 @@ import { Modal } from '@/components/ui/Modal';
 import ConfirmModal from '@/components/ui/ConfirmModal';
 import TableControls, { TablePagination } from '@/components/ui/TableControls';
 import { useNotify } from '@/components/ui/Notifications';
+import { downloadCsv as downloadRowsCsv } from './analytics/AnalyticsShared';
 import { Download, Trash2 } from 'lucide-react';
 
 type EditableUser = UserProfile & Record<string, unknown>;
@@ -45,6 +46,17 @@ const fieldOrder: string[] = [
   'unsubscribedFromEmails',
 ];
 
+// Only the member may change these (Firestore rules enforce it), so the
+// editor shows them read-only and never writes them.
+const memberOwnedFields = new Set([
+  'email',
+  'newsletter',
+  'privacyAcceptedAt',
+  'marketingOptIn',
+  'analyticsOptIn',
+  'partnerContactOptIn',
+]);
+
 function downloadCsv(users: EditableUser[]) {
   const headers = ['id', ...fieldOrder];
   const rows = [
@@ -63,6 +75,20 @@ function downloadCsv(users: EditableUser[]) {
   a.download = `members-${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+// Members who opted in to the newsletter and haven't unsubscribed from emails.
+function downloadNewsletterCsv(users: EditableUser[]) {
+  const rows = [
+    ['name', 'email'],
+    ...users
+      .filter((u) => u.newsletter && !u.unsubscribedFromEmails && u.email)
+      .map((u) => [u.name || u.displayName || '', u.email as string]),
+  ];
+  downloadRowsCsv(
+    rows,
+    `newsletter-${new Date().toISOString().slice(0, 10)}.csv`,
+  );
 }
 
 type SortableThProps = {
@@ -203,6 +229,7 @@ export default function MembersTab() {
     setSaving(true);
     try {
       const update: Record<string, unknown> = { ...draft };
+      memberOwnedFields.forEach((k) => delete update[k]);
       // Ensure updatedAt set
       update.updatedAt = new Date().toISOString();
       await updateUserProfile(selected.id, update);
@@ -287,6 +314,24 @@ export default function MembersTab() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {keys.map((k) => {
             const val = getValue(k);
+            if (memberOwnedFields.has(k)) {
+              return (
+                <div key={k} className="flex flex-col gap-1">
+                  <span className="text-xs text-muted-foreground">
+                    {k} (set by the member)
+                  </span>
+                  <span className="text-sm text-foreground">
+                    {typeof val === 'boolean'
+                      ? val
+                        ? 'Yes'
+                        : 'No'
+                      : val === undefined || val === null || val === ''
+                        ? '—'
+                        : String(val)}
+                  </span>
+                </div>
+              );
+            }
             // Show booleans using checkbox regardless of draft presence
             if (booleanFields.has(k)) {
               return (
@@ -441,6 +486,13 @@ export default function MembersTab() {
             onClick={() => downloadCsv(users)}
           >
             CSV
+          </Button>
+          <Button
+            variant="outline"
+            icon={Download}
+            onClick={() => downloadNewsletterCsv(users)}
+          >
+            Newsletter CSV
           </Button>
           <TableControls
             filter={filter}

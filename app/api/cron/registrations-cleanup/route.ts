@@ -44,6 +44,15 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  // First and on its own, so a failure in the cleanup below never keeps audit
+  // entries past their retention.
+  let purgedAuditLogs: number | null = null;
+  try {
+    purgedAuditLogs = await purgeExpiredAuditLogs();
+  } catch (err) {
+    console.error('audit log purge failed', err);
+  }
+
   try {
     const bucket = admin.storage().bucket();
 
@@ -195,8 +204,6 @@ export async function GET(req: NextRequest) {
         deletedDocs++;
       }
     }
-
-    const purgedAuditLogs = await purgeExpiredAuditLogs();
 
     return NextResponse.json({
       success: true,

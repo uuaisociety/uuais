@@ -345,9 +345,19 @@ describe('GET /api/cron/registrations-cleanup', () => {
     expect((await res.json()).purgedAuditLogs).toBe(3);
   });
 
-  it('returns 500 when listing fails', async () => {
+  it('returns 500 when listing fails, after still purging audit logs', async () => {
     mockGetFiles.mockRejectedValue(new Error('bucket unavailable'));
     const res = await call('test-secret');
     expect(res.status).toBe(500);
+    expect(mockPurgeAuditLogs).toHaveBeenCalled();
+  });
+
+  it('still cleans registrations when the audit purge fails', async () => {
+    mockPurgeAuditLogs.mockRejectedValueOnce(new Error('firestore down'));
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const res = await call('test-secret');
+    expect(res.status).toBe(200);
+    expect((await res.json()).purgedAuditLogs).toBeNull();
+    error.mockRestore();
   });
 });

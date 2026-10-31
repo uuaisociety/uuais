@@ -3,6 +3,8 @@ import type { NextRequest } from 'next/server';
 import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { adminDb } from '@/lib/firebase-admin';
 import admin from 'firebase-admin';
+import { isSafeStoragePath } from '@/lib/admin-file-download';
+import { logAdminAction } from '@/lib/server-audit-log';
 
 function safeKeyPart(s: string): string {
   return encodeURIComponent(s);
@@ -15,20 +17,36 @@ export async function DELETE(req: NextRequest) {
     if (!auth.ok) return authFailureResponse(auth.reason);
 
     const body = await req.json();
-    const { id, campaignId, emailNormalized } = body as { id?: string; campaignId?: string; emailNormalized?: string };
-    if (!id || !campaignId) return NextResponse.json({ error: 'missing id/campaignId' }, { status: 400 });
+    const { id, campaignId, emailNormalized } = body as {
+      id?: string;
+      campaignId?: string;
+      emailNormalized?: string;
+    };
+    if (!id || !campaignId)
+      return NextResponse.json(
+        { error: 'missing id/campaignId' },
+        { status: 400 },
+      );
 
     // Derive the identity that keyed the lock/limits docs at create time.
     let identity = emailNormalized || '';
     const appRef = adminDb.collection('teamApplications').doc(id);
     const appSnap = await appRef.get();
     if (appSnap.exists) {
-      const data = appSnap.data() as { uid?: string; emailNormalized?: string; resume?: { path?: string } | null };
+      const data = appSnap.data() as {
+        uid?: string;
+        emailNormalized?: string;
+        resume?: { path?: string } | null;
+      };
       if (typeof data.uid === 'string' && data.uid) identity = data.uid;
-      if (!identity && typeof data.emailNormalized === 'string') identity = data.emailNormalized;
+      if (!identity && typeof data.emailNormalized === 'string')
+        identity = data.emailNormalized;
 
-      // Best-effort resume cleanup from Cloud Storage.
-      if (data.resume?.path) {
+      // Best-effort resume cleanup from Cloud Storage, and only of a team-application upload.
+      if (
+        typeof data.resume?.path === 'string' &&
+        isSafeStoragePath(data.resume.path, 'team-applications/')
+      ) {
         try {
           const bucket = admin.storage().bucket();
           const gfile = bucket.file(data.resume.path);
@@ -40,13 +58,27 @@ export async function DELETE(req: NextRequest) {
       }
     }
 
-    const lockKey = identity ? `${safeKeyPart(identity)}__${safeKeyPart(campaignId)}` : null;
+    const lockKey = identity
+      ? `${safeKeyPart(identity)}__${safeKeyPart(campaignId)}`
+      : null;
     const deletes: Promise<unknown>[] = [appRef.delete()];
     if (lockKey) {
-      deletes.push(adminDb.collection('applicationCampaignLocks').doc(lockKey).delete());
-      deletes.push(adminDb.collection('applicationUserLimits').doc(safeKeyPart(identity!)).delete());
+      deletes.push(
+        adminDb.collection('applicationCampaignLocks').doc(lockKey).delete(),
+      );
+      deletes.push(
+        adminDb
+          .collection('applicationUserLimits')
+          .doc(safeKeyPart(identity!))
+          .delete(),
+      );
     }
     await Promise.all(deletes);
+    await logAdminAction({
+      action: 'remove',
+      adminUid: auth.session.uid,
+      path: `teamApplications/${id}`,
+    });
 
     return NextResponse.json({ ok: true });
   } catch (err) {

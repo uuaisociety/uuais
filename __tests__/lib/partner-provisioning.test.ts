@@ -40,21 +40,31 @@ function fakes(initial: User[] = []) {
     }),
     revokeRefreshTokens: jest.fn(async () => undefined),
   };
+  // users/{uid} and cvs/{uid} are member data; partnerAccounts entries go in docs.
+  const memberDocs = new Set<string>();
   const db = {
-    collection: () => ({
-      doc: (id: string) => ({
-        set: async (d: Record<string, unknown>) => void docs.set(id, d),
-        delete: async () => void docs.delete(id),
-        // Like Firestore, a snapshot is a copy taken at read time.
-        get: async () => {
-          const data = docs.has(id) ? { ...docs.get(id) } : undefined;
-          return { exists: data !== undefined, get: (k: string) => data?.[k] };
-        },
-      }),
+    collection: (name: string) => ({
+      doc: (id: string) =>
+        name !== 'partnerAccounts'
+          ? {
+              get: async () => ({ exists: memberDocs.has(`${name}/${id}`) }),
+            }
+          : {
+              set: async (d: Record<string, unknown>) => void docs.set(id, d),
+              delete: async () => void docs.delete(id),
+              // Like Firestore, a snapshot is a copy taken at read time.
+              get: async () => {
+                const data = docs.has(id) ? { ...docs.get(id) } : undefined;
+                return {
+                  exists: data !== undefined,
+                  get: (k: string) => data?.[k],
+                };
+              },
+            },
     }),
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return { auth: auth as any, db: db as any, users, docs };
+  return { auth: auth as any, db: db as any, users, docs, memberDocs };
 }
 
 describe('provisionPartner', () => {
@@ -138,6 +148,39 @@ describe('provisionPartner', () => {
     ).rejects.toBeInstanceOf(PartnerProvisioningError);
     expect(f.auth.deleteUser).not.toHaveBeenCalled();
     expect(f.docs.size).toBe(0);
+  });
+});
+
+describe('member accounts', () => {
+  const planted = {
+    uid: 'm1',
+    email: 'hr@partner.example',
+    emailVerified: false,
+    passwordHash: 'h',
+    providerData: [{ providerId: 'password' }],
+  };
+
+  it.each(['users/m1', 'cvs/m1'])(
+    'refuses, and never deletes, an account with member data (%s)',
+    async (path) => {
+      const f = fakes([planted]);
+      f.memberDocs.add(path);
+      await expect(
+        provisionPartner(f.auth, f.db, 'hr@partner.example'),
+      ).rejects.toThrow(/member account/);
+      expect(f.auth.deleteUser).not.toHaveBeenCalled();
+      expect(f.docs.size).toBe(0);
+    },
+  );
+
+  it('on removal, only signs out a created account that has since become a member', async () => {
+    const f = fakes();
+    const created = await provisionPartner(f.auth, f.db, 'a@partner.example');
+    f.memberDocs.add(`users/${created.uid}`);
+    const r = await deprovisionPartner(f.auth, f.db, 'a@partner.example');
+    expect(r).toMatchObject({ removed: true, memberAccount: true });
+    expect(f.auth.deleteUser).not.toHaveBeenCalled();
+    expect(f.auth.revokeRefreshTokens).toHaveBeenCalledWith(created.uid);
   });
 });
 

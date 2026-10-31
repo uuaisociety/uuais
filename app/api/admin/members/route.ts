@@ -63,14 +63,18 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    await eraseAccount(uid);
     const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
-    await logAdminAction({
-      action: 'remove',
+    const entry = {
+      action: 'remove' as const,
       adminUid,
       path: `users/${uid}`,
       ip: forwarded || undefined,
-    });
+    };
+    // Logged before erasing (and refused if that fails), so an erasure that
+    // dies midway still leaves a record of who started it.
+    await logAdminAction({ ...entry, status: 'started' }, { required: true });
+    await eraseAccount(uid);
+    await logAdminAction({ ...entry, status: 'completed' });
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('admin member deletion error', err);

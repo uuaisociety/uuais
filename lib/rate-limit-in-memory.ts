@@ -5,6 +5,7 @@ interface WindowState {
 
 // One store per bucket, so an unauthenticated endpoint filling its store (e.g.
 // with rotating IPs) only fails closed for itself, not for every other limiter.
+// The bucket defaults to the key's prefix ("mcp" for "mcp:burst:1.2.3.4").
 const buckets = new Map<string, Map<string, WindowState>>();
 const MAX_WINDOWS = 10_000;
 const SWEEP_INTERVAL_MS = 60_000;
@@ -20,7 +21,7 @@ export function checkWindow(
   key: string,
   limit: number,
   windowMs: number,
-  bucket = 'default',
+  bucket = key.includes(':') ? key.slice(0, key.indexOf(':')) : 'default',
 ): RateWindowResult {
   const now = Date.now();
   if (now >= nextSweepAt) {

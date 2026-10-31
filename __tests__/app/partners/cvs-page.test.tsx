@@ -21,6 +21,14 @@ jest.mock('@/components/auth/PartnerEmailSignIn', () => ({
   default: () => <div>partner email sign-in</div>,
 }));
 
+const mockLog = jest.fn().mockResolvedValue(undefined);
+jest.mock('@/lib/server-audit-log', () => ({
+  logAdminAction: (...args: unknown[]) => mockLog(...args),
+}));
+jest.mock('next/headers', () => ({
+  headers: async () => new Headers({ 'x-forwarded-for': '1.2.3.4, 10.0.0.1' }),
+}));
+
 let cvDocs: { id: string; consentAt: string }[];
 let profiles: Record<string, Record<string, unknown>>;
 jest.mock('@/lib/firebase-admin', () => ({
@@ -129,6 +137,22 @@ describe('/partners/cvs', () => {
     const text = document.body.textContent ?? '';
     expect(text).toContain('x'.repeat(150));
     expect(text).not.toContain('x'.repeat(151));
+    // Partners see member details here, so the view itself is logged.
+    expect(mockLog).toHaveBeenCalledWith({
+      action: 'view',
+      adminUid: 'viewer',
+      count: 2,
+      ip: '1.2.3.4',
+      role: 'partner',
+      email: undefined,
+    });
+  });
+
+  it('does not log an admin opening the list', async () => {
+    mockGetServerSession.mockResolvedValue(session({ isAdmin: true }));
+    render(await Page());
+    expect(screen.getByText('2 CVs')).toBeInTheDocument();
+    expect(mockLog).not.toHaveBeenCalled();
   });
 
   it('says so when nobody has shared a CV', async () => {

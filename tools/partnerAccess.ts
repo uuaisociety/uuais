@@ -70,7 +70,7 @@ async function addPartner(email: string, company?: string) {
 }
 
 async function removePartner(email: string) {
-  const { key, removed } = await deprovisionPartner(
+  const { key, removed, memberAccount } = await deprovisionPartner(
     admin.auth(),
     admin.firestore(),
     email,
@@ -80,6 +80,10 @@ async function removePartner(email: string) {
       ? `Removed ${key} from the partner allowlist and signed the account out. Access ends on their next page load.`
       : `${key} was not on the partner allowlist.`,
   );
+  if (memberAccount)
+    console.warn(
+      `The account behind ${key} now has a member profile or shared CV, so it was kept. To delete it, erase it in the admin Members tab.`,
+    );
 }
 
 (async () => {

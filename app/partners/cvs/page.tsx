@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { getServerSession } from '@/lib/server-auth';
 import { canReviewCvs } from '@/lib/partner-access';
 import { adminDb } from '@/lib/firebase-admin';
 import CvReviewPage from '@/components/pages/CvReviewPage';
 import type { SharedCv } from '@/lib/export-cvs';
+import { logAdminAction } from '@/lib/server-audit-log';
 
 export const metadata: Metadata = {
   title: 'CV review',
@@ -54,5 +56,22 @@ export default async function Page() {
   // Partners sign in here, by emailed link only; members never need this page.
   if (!session) return <CvReviewPage access="signin" />;
   if (!(await canReviewCvs(session))) return <CvReviewPage access="denied" />;
-  return <CvReviewPage access="granted" cvs={await loadSharedCvs()} />;
+  const cvs = await loadSharedCvs();
+  // Partners see member details here before any download, so the view is
+  // logged too (best-effort: a log failure doesn't block the list).
+  if (!session.isAdmin) {
+    const forwarded = (await headers())
+      .get('x-forwarded-for')
+      ?.split(',')[0]
+      ?.trim();
+    await logAdminAction({
+      action: 'view',
+      adminUid: session.uid,
+      count: cvs.length,
+      ip: forwarded || undefined,
+      role: 'partner',
+      email: session.email,
+    });
+  }
+  return <CvReviewPage access="granted" cvs={cvs} />;
 }

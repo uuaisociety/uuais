@@ -35,7 +35,6 @@ let eventCount: number;
 const mockTxDelete = jest.fn();
 const mockTxUpdate = jest.fn();
 const mockRecursiveDelete = jest.fn().mockResolvedValue(undefined);
-const mockVoteDelete = jest.fn().mockResolvedValue(undefined);
 const mockAttendanceUpdate = jest.fn().mockResolvedValue(undefined);
 const mockDeleteUser = jest.fn().mockResolvedValue(undefined);
 const mockRegsGet = jest.fn();
@@ -62,6 +61,13 @@ jest.mock('@/lib/firebase-admin', () => ({
               exists: true,
               get: () => eventCount,
             };
+          if (ref.path === 'showcaseVotes/p9_user1')
+            return {
+              exists: true,
+              get: (key: string) => (key === 'projectId' ? 'p9' : undefined),
+            };
+          if (ref.path === 'showcaseProjects/p9')
+            return { exists: true, get: () => 3 };
           const data = regs[ref.path];
           return {
             exists: !!data,
@@ -96,7 +102,7 @@ jest.mock('@/lib/firebase-admin', () => ({
         return {
           where: () => ({
             get: jest.fn().mockResolvedValue({
-              docs: [{ ref: { delete: mockVoteDelete } }],
+              docs: [{ ref: docRef('showcaseVotes/p9_user1') }],
             }),
           }),
         };
@@ -173,7 +179,11 @@ describe('POST /api/account/delete', () => {
     expect(mockAttendanceUpdate).toHaveBeenCalledWith({
       entries: [{ userId: 'other', attended: false }],
     });
-    expect(mockVoteDelete).toHaveBeenCalled();
+    expect(mockTxDelete).toHaveBeenCalledWith(docRef('showcaseVotes/p9_user1'));
+    // The member's votes come off the projects' counters, as an unvote would.
+    expect(mockTxUpdate).toHaveBeenCalledWith(docRef('showcaseProjects/p9'), {
+      votes: 2,
+    });
     const recursivePaths = mockRecursiveDelete.mock.calls.map(
       ([ref]) => (ref as { path: string }).path,
     );
@@ -202,7 +212,7 @@ describe('POST /api/account/delete', () => {
     regs['registrations/reg1'].status = 'waitlist';
     await erase();
     expect(mockTxDelete).toHaveBeenCalled();
-    expect(mockTxUpdate).not.toHaveBeenCalled();
+    expect(mockTxUpdate).not.toHaveBeenCalledWith(eventRef, expect.anything());
   });
 
   it('includes orphaned files found under the user storage prefix', async () => {
