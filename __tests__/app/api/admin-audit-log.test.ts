@@ -73,6 +73,16 @@ describe('POST /api/admin/audit-log', () => {
     });
   });
 
+  it.each([-1, 1.5, 1e300])(
+    'only records a count that is a non-negative integer (%p)',
+    async (count) => {
+      await log({ eventId: 'evt1', count });
+      expect(mockLogAdminAction).toHaveBeenCalledWith(
+        expect.objectContaining({ count: undefined }),
+      );
+    },
+  );
+
   it('returns 400 for invalid JSON', async () => {
     const { POST } = await import('@/app/api/admin/audit-log/route');
     const res = await POST(auditRequest('{not json'));

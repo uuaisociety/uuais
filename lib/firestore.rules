@@ -53,11 +53,6 @@ service cloud.firestore {
     }
 
     // Helper: a shared CV implies partner contact, so the opt-in stays on while cvs/{uid} exists.
-    // Profile fields only the member may write (see the users admin rules).
-    function memberOwnedFields() {
-      return ['email','newsletter','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn'];
-    }
-
     function cvOptInKept(uid) {
       return !exists(/databases/$(database)/documents/cvs/$(uid))
         || request.resource.data.get('partnerContactOptIn', false) == true;
@@ -112,14 +107,14 @@ service cloud.firestore {
         && partnerVisibleFieldsOk(request.resource.data)
         && cvOptInKept(uid);
 
-      // Admin edits, except the member's own email and consent choices: those
-      // record what the member agreed to, so only the member may change them.
-      // Deleting a profile is server-only (lib/account-erasure), so a member is
-      // never half-erased with their CV still shared.
-      allow create: if isAdmin()
-        && !request.resource.data.keys().hasAny(memberOwnedFields());
+      // Admin profile edits go through /api/admin/members/profile (audit-logged,
+      // never the member's email or consent choices). From the client an admin
+      // may only record attendance history on an existing profile; never create
+      // one, so an erased member stays erased. Deleting a profile is server-only
+      // (lib/account-erasure), so a member is never half-erased with their CV
+      // still shared.
       allow update: if isAdmin()
-        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(memberOwnedFields());
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['eventHistory','updatedAt']);
       allow delete: if false;
     }
 
@@ -196,6 +191,11 @@ service cloud.firestore {
         && strWithin(request.resource.data, 'creatorName', 120)
         && strWithin(request.resource.data, 'coverImage', 1000)
         && strWithin(request.resource.data, 'coverImagePath', 500)
+        // Only a cover in the member's own upload folder: an admin deleting the
+        // draft later removes this path with admin rights.
+        && (!('coverImagePath' in request.resource.data)
+          || (request.resource.data.coverImagePath.matches('showcase/' + request.auth.uid + '/[^/]+')
+            && !request.resource.data.coverImagePath.matches('.*/[.][.]?')))
         && request.resource.data.category is string
         && request.resource.data.category.size() <= 40
         && request.resource.data.createdAt is string
@@ -251,9 +251,11 @@ service cloud.firestore {
     }
 
     // BOARD APPLICATIONS (submissions; API may write via Admin SDK — client read/list admin-only)
+    // Deleting goes through /api/admin/board-applications, which removes the files and logs it.
     match /boardApplications/{applicationId} {
       allow read: if isAdmin();
-      allow create, update, delete: if isAdmin();
+      allow create, update: if isAdmin();
+      allow delete: if false;
     }
 
     // APPLICATION CAMPAIGNS — public read only for open campaigns (so applicants see them); admin read/write
@@ -268,10 +270,12 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
-    // TEAM APPLICATIONS (API writes via Admin SDK — admins read/delete all, applicants read their own)
+    // TEAM APPLICATIONS (API writes via Admin SDK — admins read all, applicants read their own)
+    // Deleting goes through /api/admin/team-applications, which removes the resume and locks and logs it.
    match /teamApplications/{applicationId} {
       allow read: if isAdmin() || (isSignedIn() && resource.data.uid == request.auth.uid);
-      allow create, update, delete: if isAdmin();
+      allow create, update: if isAdmin();
+      allow delete: if false;
    }
 
     // REGISTRATION QUESTIONS (global)
@@ -336,24 +340,29 @@ service cloud.firestore {
       // Admin can read analytics; you can open reads if you want
       allow read: if isAdmin();
 
-      // Create initial doc with clicks:1
-      allow create: if request.resource.data.keys().hasOnly(['clicks', 'externalRegistrationClicks', 'updatedAt'])
-        && request.resource.data.clicks == 1;
+      // Create initial doc with clicks:1, only for an event that exists, so
+      // anonymous writes can't fill the collection with arbitrary ids.
+      allow create: if exists(/databases/$(database)/documents/events/$(eventId))
+        && request.resource.data.keys().hasOnly(['clicks', 'externalRegistrationClicks', 'updatedAt'])
+        && request.resource.data.clicks == 1
+        && (!('externalRegistrationClicks' in request.resource.data)
+          || request.resource.data.externalRegistrationClicks in [0, 1])
+        && request.resource.data.updatedAt == request.time;
 
       // Update: only clicks (+1) or externalRegistrationClicks (+1) and updatedAt allowed
       allow update: if changedOnly(['clicks', 'externalRegistrationClicks', 'updatedAt'])
+        && request.resource.data.updatedAt == request.time
         && (
           (
             request.resource.data.clicks == resource.data.clicks + 1
-            && request.resource.data.externalRegistrationClicks == resource.data.externalRegistrationClicks
+            && request.resource.data.get('externalRegistrationClicks', null) == resource.data.get('externalRegistrationClicks', null)
           )
           || (
-            // Allow increment when externalRegistrationClicks was previously missing/null
-            // (treat as 0) or when it's explicitly incremented by +1.
-            (resource.data.externalRegistrationClicks == null && request.resource.data.externalRegistrationClicks == 1)
-            || request.resource.data.externalRegistrationClicks == resource.data.externalRegistrationClicks + 1
+            // externalRegistrationClicks +1, treating a missing/null count as 0.
+            request.resource.data.get('externalRegistrationClicks', 0)
+              == (resource.data.get('externalRegistrationClicks', 0) == null ? 0 : resource.data.get('externalRegistrationClicks', 0)) + 1
+            && request.resource.data.clicks == resource.data.clicks
           )
-          && request.resource.data.clicks == resource.data.clicks
         );
 
       // No deletes from clients
@@ -364,10 +373,13 @@ service cloud.firestore {
     match /analyticsJobs/{jobId} {
       allow read: if isAdmin();
 
-      allow create: if request.resource.data.keys().hasOnly(['clicks', 'updatedAt'])
-        && request.resource.data.clicks == 0;
+      allow create: if exists(/databases/$(database)/documents/jobs/$(jobId))
+        && request.resource.data.keys().hasOnly(['clicks', 'updatedAt'])
+        && request.resource.data.clicks == 0
+        && request.resource.data.updatedAt == request.time;
       allow update: if changedOnly(['clicks', 'updatedAt'])
-        && request.resource.data.clicks == resource.data.clicks + 1;
+        && request.resource.data.clicks == resource.data.clicks + 1
+        && request.resource.data.updatedAt == request.time;
 
       allow delete: if isAdmin();
     }
@@ -377,10 +389,13 @@ service cloud.firestore {
       allow read: if isAdmin();
 
       // reads == 0 (admin post-creation seed) or 1 (first visitor read) allowed.
-      allow create: if request.resource.data.keys().hasOnly(['reads', 'updatedAt'])
-        && (request.resource.data.reads == 0 || request.resource.data.reads == 1);
+      allow create: if exists(/databases/$(database)/documents/blogPosts/$(blogId))
+        && request.resource.data.keys().hasOnly(['reads', 'updatedAt'])
+        && (request.resource.data.reads == 0 || request.resource.data.reads == 1)
+        && request.resource.data.updatedAt == request.time;
       allow update: if changedOnly(['reads', 'updatedAt'])
-        && request.resource.data.reads == resource.data.reads + 1;
+        && request.resource.data.reads == resource.data.reads + 1
+        && request.resource.data.updatedAt == request.time;
 
       allow delete: if isAdmin();
     }
@@ -423,8 +438,9 @@ service cloud.firestore {
 
     // MAIL QUEUE for Firebase Trigger Email extension
     match /mail/{messageId} {
-      // Only admins can enqueue outgoing emails from the client
-      allow create: if isAdmin();
+      // Server-only: /api/admin/mail queues templated emails and logs each one,
+      // so an admin can't send arbitrary mail from the society's address.
+      allow create: if false;
       // Optional: allow admins to read messages for debugging
       allow read: if isAdmin();
       // No client updates or deletes
@@ -460,11 +476,17 @@ service cloud.firestore {
     }
 
     // CATEGORY COURSES - many-to-many mapping
+    // The caller must own a category with this id. Ids with an owner prefix
+    // ("<uid>_...") must carry the caller's own uid; legacy un-prefixed ids
+    // (created before the prefix rule) still work for the category's owner.
+    function ownsCategoryCourses(categoryId) {
+      return isSignedIn()
+        && get(/databases/$(database)/documents/course_categories/$(request.auth.uid)/categories/$(categoryId)).data.userId == request.auth.uid
+        && (!categoryId.matches('[^_]+_.+')
+          || categoryId.matches(request.auth.uid + '_.+'));
+    }
     match /category_courses/{categoryId}/courses/{courseId} {
-      // Allow read if user owns the category (need to check parent)
-      allow read: if isSignedIn() && get(/databases/$(database)/documents/course_categories/$(request.auth.uid)/categories/$(categoryId)).data.userId == request.auth.uid;
-      // Allow write if user owns the category
-      allow write: if isSignedIn() && get(/databases/$(database)/documents/course_categories/$(request.auth.uid)/categories/$(categoryId)).data.userId == request.auth.uid;
+      allow read, write: if ownsCategoryCourses(categoryId);
     }
 
     // AI SETTINGS - admin configuration
@@ -478,7 +500,8 @@ service cloud.firestore {
     // AI NEWS DESK - internal settings and the used-articles store are only read from the admin dashboard.
     match /config/blog_ai_settings {
       allow read: if isAdmin();
-      allow write: if isAdmin();
+      // Only super admins can change the News Desk settings (as the admin UI says).
+      allow write: if isSuperAdmin();
     }
     match /config/blog_news_seen {
       allow read: if isAdmin();
@@ -502,9 +525,12 @@ service cloud.firestore {
 
     // CONFIG - application configuration (embedding projections, prerequisite graph, etc.)
     match /config/{configId} {
-      // ai_settings is intentionally superadmin-only (see its own rule above)
-      allow read: if true;
-      allow write: if isAdmin() && configId != 'ai_settings';
+      // Docs with their own rule above are excluded here: rules are OR'd, so
+      // this catch-all would otherwise open them (ai_settings writes, and the
+      // admin-only News Desk docs entirely).
+      allow read: if !(configId in ['blog_ai_settings', 'blog_news_seen']);
+      allow write: if isAdmin()
+        && !(configId in ['ai_settings', 'blog_ai_settings', 'blog_news_seen']);
     }
 
     // TRANSCRIPT DATA - user-uploaded academic records (privacy-first)

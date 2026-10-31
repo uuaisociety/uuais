@@ -1,15 +1,27 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Card, CardContent } from "@/components/ui/Card";
+import React from 'react';
+import { Card, CardContent } from '@/components/ui/Card';
 
-export function downloadCsv(rows: string[][], filename: string) {
-  const csv = rows
-    .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(","))
-    .join("\n");
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+// Cells can hold member-typed text, and a spreadsheet runs a leading =, +, - or @
+// as a formula. Same guard as lib/export-cvs.ts: flatten line breaks, drop
+// invisible format characters, and see through leading whitespace and
+// full-width ＝＋－＠.
+export function csvCell(value: unknown): string {
+  const text = String(value ?? '')
+    .replace(/[\r\n\t\v\f\u2028\u2029]+/g, ' ')
+    .replace(/\p{Cf}/gu, '');
+  const safe = /^\s*[=+\-@\uFF1D\uFF0B\uFF0D\uFF20]/.test(text)
+    ? `'${text}`
+    : text;
+  return `"${safe.replace(/"/g, '""')}"`;
+}
+
+export function downloadCsv(rows: unknown[][], filename: string) {
+  const csv = rows.map((r) => r.map(csvCell).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
+  const a = document.createElement('a');
   a.href = url;
   a.download = filename;
   a.click();
@@ -17,7 +29,7 @@ export function downloadCsv(rows: string[][], filename: string) {
 }
 
 export function shortDate(iso: string | undefined | null): string {
-  if (!iso) return "—";
+  if (!iso) return '—';
   return new Date(iso).toLocaleDateString();
 }
 
@@ -43,7 +55,7 @@ export function cumulativeSignups(
 
 export function eventMonthKey(iso: string): string {
   const d = new Date(iso);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
 }
 
 export const Row: React.FC<{
@@ -63,9 +75,7 @@ export const StatCard: React.FC<{ title: string; value: number }> = ({
   <Card>
     <CardContent className="p-4 flex items-center justify-between">
       <span className="text-sm text-muted-foreground">{title}</span>
-      <span className="text-xl font-bold text-foreground">
-        {value}
-      </span>
+      <span className="text-xl font-bold text-foreground">{value}</span>
     </CardContent>
   </Card>
 );

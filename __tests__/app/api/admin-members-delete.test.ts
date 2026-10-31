@@ -14,12 +14,23 @@ jest.mock('@/lib/account-erasure', () => ({
 
 // Target accounts' custom claims, by uid.
 let claims: Record<string, Record<string, unknown>>;
+// uids bound to a partnerAccounts entry.
+let partnerUids: string[];
 jest.mock('@/lib/firebase-admin', () => ({
   adminAuth: {
     getUser: async (uid: string) => {
       if (!(uid in claims)) throw { code: 'auth/user-not-found' };
       return { uid, customClaims: claims[uid] };
     },
+  },
+  adminDb: {
+    collection: () => ({
+      where: (_f: string, _op: string, uid: string) => ({
+        limit: () => ({
+          get: async () => ({ empty: !partnerUids.includes(uid) }),
+        }),
+      }),
+    }),
   },
 }));
 
@@ -47,7 +58,19 @@ describe('DELETE /api/admin/members', () => {
       member1: {},
       admin2: { admin: true },
       super1: { superAdmin: true },
+      partner1: {},
     };
+    partnerUids = ['partner1'];
+  });
+
+  it('refuses to erase a partner account, pointing to the partner tool', async () => {
+    asAdmin();
+    const { DELETE } = await import('@/app/api/admin/members/route');
+    const res = await DELETE(remove('partner1') as never);
+    expect(res.status).toBe(403);
+    expect((await res.json()).error).toContain('tools/partnerAccess.ts remove');
+    expect(mockErase).not.toHaveBeenCalled();
+    expect(mockLog).not.toHaveBeenCalled();
   });
 
   it('keeps the hierarchy: only a superAdmin can erase an admin', async () => {

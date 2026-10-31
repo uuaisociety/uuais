@@ -49,6 +49,16 @@ export async function POST(req: NextRequest) {
     const member = await adminDb.runTransaction(async (tx) => {
       const user = await tx.get(userRef);
       const profile = user.data();
+      // Unsubscribing is always allowed, so someone whose membership lapsed
+      // isn't stuck on the list; without a profile there's nothing to undo.
+      if (!newsletter) {
+        if (user.exists)
+          tx.update(userRef, {
+            newsletter,
+            updatedAt: new Date().toISOString(),
+          });
+        return true;
+      }
       if (
         !user.exists ||
         profile?.isMember !== true ||

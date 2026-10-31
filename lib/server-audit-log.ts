@@ -13,6 +13,8 @@ export interface AdminAuditEntry {
     | 'view'
     | 'remove'
     | 'update'
+    // An admin queuing a templated email (template = its kind).
+    | 'email'
     // A member granting or withdrawing CV-sharing consent (actor = the member).
     | 'consent-granted'
     | 'consent-withdrawn';
@@ -30,6 +32,10 @@ export interface AdminAuditEntry {
   consentVersion?: string;
   /** For a multi-step action logged before and after it runs (member erasure). */
   status?: 'started' | 'completed';
+  /** Names (never values) of the profile fields an admin edit changed. */
+  fields?: string[];
+  /** Email kind, for email events. */
+  template?: string;
 }
 
 /**

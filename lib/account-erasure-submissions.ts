@@ -27,12 +27,22 @@ const fileIn = (value: unknown, prefix: string): string | null => {
 async function verifiedEmail(uid: string): Promise<string | null> {
   try {
     const user = await adminAuth.getUser(uid);
-    return user.emailVerified && user.email
-      ? user.email.trim().toLowerCase()
-      : null;
+    return user.emailVerified && user.email ? user.email.trim() : null;
   } catch (err) {
     if ((err as { code?: unknown })?.code === 'auth/user-not-found')
       return null;
+    throw err;
+  }
+}
+
+// Whether `address` is another account's sign-in email, so mail to it is that
+// person's, not the member's.
+async function belongsToOther(address: string, uid: string): Promise<boolean> {
+  try {
+    return (await adminAuth.getUserByEmail(address)).uid !== uid;
+  } catch (err) {
+    if ((err as { code?: unknown })?.code === 'auth/user-not-found')
+      return false;
     throw err;
   }
 }
@@ -48,7 +58,8 @@ const where = (collection: string, field: string, value: string) =>
  * allowlist entry.
  */
 export async function collectSubmissions(uid: string): Promise<Submissions> {
-  const email = await verifiedEmail(uid);
+  const signInEmail = await verifiedEmail(uid);
+  const email = signInEmail?.toLowerCase() ?? null;
   const files = new Set<string>();
   const refs = new Map<string, DocRef>();
   const add = (ref: DocRef) => refs.set(ref.path, ref);
@@ -65,6 +76,10 @@ export async function collectSubmissions(uid: string): Promise<Submissions> {
         campaignId?: unknown;
         resume?: unknown;
       };
+      // The email is typed into the form, so an application matched by it but
+      // sent by another signed-in account is theirs, not the member's.
+      if (typeof data.uid === 'string' && data.uid && data.uid !== uid)
+        continue;
       const resume = fileIn(data.resume, 'team-applications/');
       if (resume) files.add(resume);
       const identity =
@@ -88,7 +103,13 @@ export async function collectSubmissions(uid: string): Promise<Submissions> {
     add(adminDb.collection('applicationUserLimits').doc(keyPart(email)));
     const boards = await where('boardApplications', 'emailNormalized', email);
     for (const app of boards.docs) {
-      const data = app.data() as { cv?: unknown; coverFile?: unknown };
+      const data = app.data() as {
+        uid?: unknown;
+        cv?: unknown;
+        coverFile?: unknown;
+      };
+      if (typeof data.uid === 'string' && data.uid && data.uid !== uid)
+        continue;
       for (const f of [data.cv, data.coverFile]) {
         const path = fileIn(f, 'board-applications/');
         if (path) files.add(path);
@@ -122,24 +143,44 @@ export async function collectSubmissions(uid: string): Promise<Submissions> {
     .getFiles({ prefix: `showcase/${uid}/` });
   stored.forEach((f) => files.add(f.name));
 
-  // Per-user usage counters, queued emails to the member, and a partner
-  // allowlist entry bound to this account.
+  // Per-user usage counters and a partner allowlist entry bound to this account.
   const usage = await Promise.all([
     where('ai_usage', 'userId', uid),
     where('showcase_usage', 'uid', uid),
     where('partnerAccounts', 'uid', uid),
-    ...(email ? [where('mail', 'to', email)] : []),
   ]);
   usage.forEach((snap) => snap.docs.forEach((d) => add(d.ref)));
-  if (email) {
-    // Not a message also addressed to others: deleting it would cancel or
-    // erase their copy.
-    const shared = await adminDb
-      .collection('mail')
-      .where('to', 'array-contains', email)
-      .get();
-    shared.docs
-      .filter((d) => (d.get('to') as unknown[]).length === 1)
+
+  // Queued emails to the member. `to` is stored as written, so look for the
+  // sign-in email as stored and lowercased, and for the addresses typed into
+  // the member's own registrations (invites go there), unless one is another
+  // account's sign-in email.
+  const addresses = new Set<string>();
+  if (signInEmail) [signInEmail, email!].forEach((a) => addresses.add(a));
+  const regs = await where('registrations', 'userId', uid);
+  for (const reg of regs.docs) {
+    const typed = reg.get('userEmail');
+    if (typeof typed !== 'string' || !typed.trim()) continue;
+    for (const a of [typed.trim(), typed.trim().toLowerCase()])
+      if (!addresses.has(a) && !(await belongsToOther(a, uid)))
+        addresses.add(a);
+  }
+  for (const address of addresses) {
+    const [single, listed] = await Promise.all([
+      where('mail', 'to', address),
+      adminDb.collection('mail').where('to', 'array-contains', address).get(),
+    ]);
+    // Not a message also addressed to others (in to, cc or bcc): deleting it
+    // would cancel or erase their copy.
+    [...single.docs, ...listed.docs]
+      .filter((d) => {
+        const to = d.get('to');
+        return (
+          (typeof to === 'string' || (Array.isArray(to) && to.length === 1)) &&
+          !d.get('cc') &&
+          !d.get('bcc')
+        );
+      })
       .forEach((d) => add(d.ref));
   }
 

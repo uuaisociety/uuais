@@ -56,6 +56,7 @@ describe('DELETE /api/admin/team-applications', () => {
       data: () => ({
         uid: 'auth-uid-1',
         emailNormalized: 'alice@test.com',
+        campaignId: 'spring2026',
         resume: { path: 'team-applications/123_resume.pdf' },
       }),
     });
@@ -85,7 +86,7 @@ describe('DELETE /api/admin/team-applications', () => {
     expect(res.status).toBe(403);
   });
 
-  it('returns 400 when id/campaignId missing', async () => {
+  it('returns 400 when id is missing or not a plain document id', async () => {
     mockGetTokens.mockResolvedValue({
       decodedToken: { uid: 'admin', admin: true },
     });
@@ -96,6 +97,14 @@ describe('DELETE /api/admin/team-applications', () => {
     });
     const res = await DELETE(req as unknown as Request);
     expect(res.status).toBe(400);
+    for (const id of ['a/b/c', '..', 42]) {
+      const bad = new Request('http://localhost/api/admin/team-applications', {
+        method: 'DELETE',
+        body: JSON.stringify({ id }),
+      });
+      expect((await DELETE(bad as unknown as Request)).status).toBe(400);
+    }
+    expect(mockAppRef.delete).not.toHaveBeenCalled();
   });
 
   it('deletes app, uid-keyed lock/limits, and the resume from storage', async () => {
@@ -131,6 +140,7 @@ describe('DELETE /api/admin/team-applications', () => {
       action: 'remove',
       adminUid: 'admin',
       path: 'teamApplications/app-1',
+      ip: undefined,
     });
   });
 
@@ -161,7 +171,10 @@ describe('DELETE /api/admin/team-applications', () => {
     });
     mockAppRef.get.mockResolvedValue({
       exists: true,
-      data: () => ({ emailNormalized: 'bob@test.com' }),
+      data: () => ({
+        emailNormalized: 'bob@test.com',
+        campaignId: 'spring2026',
+      }),
     });
     const { DELETE } = await import('@/app/api/admin/team-applications/route');
     const req = new Request('http://localhost/api/admin/team-applications', {
@@ -180,6 +193,26 @@ describe('DELETE /api/admin/team-applications', () => {
     expect(mockLimitsRef.delete).toHaveBeenCalled();
   });
 
+  // The body can't steer which lock/limits docs are cleared.
+  it('ignores identity and campaign in the request body', async () => {
+    mockGetTokens.mockResolvedValue({
+      decodedToken: { uid: 'admin', admin: true },
+    });
+    const { DELETE } = await import('@/app/api/admin/team-applications/route');
+    const req = new Request('http://localhost/api/admin/team-applications', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        id: 'app-1',
+        emailNormalized: 'victim@test.com',
+        campaignId: 'other',
+      }),
+    });
+    expect((await DELETE(req as unknown as Request)).status).toBe(200);
+    expect(mockLockDoc).toHaveBeenCalledWith('auth-uid-1__spring2026');
+    expect(mockLimitsDoc).toHaveBeenCalledWith('auth-uid-1');
+    expect(mockLockDoc).toHaveBeenCalledTimes(1);
+  });
+
   it('still deletes the application when the doc is missing', async () => {
     mockGetTokens.mockResolvedValue({
       decodedToken: { uid: 'admin', admin: true },
@@ -193,5 +226,6 @@ describe('DELETE /api/admin/team-applications', () => {
     const res = await DELETE(req as unknown as Request);
     expect(res.status).toBe(200);
     expect(mockAppRef.delete).toHaveBeenCalled();
+    expect(mockLockDoc).not.toHaveBeenCalled();
   });
 });

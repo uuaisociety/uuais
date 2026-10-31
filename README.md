@@ -101,7 +101,7 @@ cd lib/
 firebase login # your uuais account
 firebase use dev
 firebase deploy --only firestore:rules
-firebase deploy --only storage:rules
+firebase deploy --only storage
 firebase deploy --only firestore:indexes
 ```
 

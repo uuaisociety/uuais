@@ -6,20 +6,26 @@
  * without jest.mock() calls — those only run when FIREBASE_ENV=ci.
  */
 
-import { createAuthMocks } from '@/__tests__/helpers/mocks'
+import { createAuthMocks } from '@/__tests__/helpers/mocks';
 
-const mockRunTransaction = jest.fn()
+const mockRunTransaction = jest.fn();
 
-const { mockGetTokens, authEdgeFactory } = createAuthMocks()
+const { mockGetTokens, authEdgeFactory } = createAuthMocks();
 
-jest.mock('next-firebase-auth-edge', () => authEdgeFactory)
+jest.mock('next-firebase-auth-edge', () => authEdgeFactory);
 
 jest.mock('firebase-admin', () => {
-  const FieldValue = { serverTimestamp: () => ({ _method: 'serverTimestamp' }) }
-  const firestoreFn = () => ({ runTransaction: (...args: unknown[]) => mockRunTransaction(...args) })
-  ;(firestoreFn as { FieldValue: typeof FieldValue }).FieldValue = FieldValue
+  const FieldValue = {
+    serverTimestamp: () => ({ _method: 'serverTimestamp' }),
+  };
+  const firestoreFn = () => ({
+    runTransaction: (...args: unknown[]) => mockRunTransaction(...args),
+  });
+  (firestoreFn as { FieldValue: typeof FieldValue }).FieldValue = FieldValue;
   return {
-    firestore: firestoreFn as typeof firestoreFn & { FieldValue: typeof FieldValue },
+    firestore: firestoreFn as typeof firestoreFn & {
+      FieldValue: typeof FieldValue;
+    },
     storage: () => ({
       bucket: () => ({
         file: () => ({
@@ -29,12 +35,12 @@ jest.mock('firebase-admin', () => {
       }),
     }),
     FieldValue,
-  }
-})
+  };
+});
 
 jest.mock('@/lib/auth-config', () => ({
   authConfig: { apiKey: 'test', serviceAccount: {} },
-}))
+}));
 
 function createDocRef(id = 'doc-id') {
   return {
@@ -42,16 +48,23 @@ function createDocRef(id = 'doc-id') {
     get: jest.fn().mockResolvedValue({ exists: false, data: () => null }),
     set: jest.fn().mockResolvedValue(undefined),
     delete: jest.fn().mockResolvedValue(undefined),
-  }
+  };
 }
 
 function createCollectionMock() {
-  const chain: Record<string, jest.Mock> = {} as Record<string, jest.Mock>
-  chain.where = jest.fn(() => chain)
-  chain.count = jest.fn(() => chain)
-  chain.get = jest.fn().mockResolvedValue({ data: () => ({ count: 0 }), size: 0 })
-  chain.doc = jest.fn(() => createDocRef())
-  return chain as { where: jest.Mock; count: jest.Mock; get: jest.Mock; doc: jest.Mock }
+  const chain: Record<string, jest.Mock> = {} as Record<string, jest.Mock>;
+  chain.where = jest.fn(() => chain);
+  chain.count = jest.fn(() => chain);
+  chain.get = jest
+    .fn()
+    .mockResolvedValue({ data: () => ({ count: 0 }), size: 0 });
+  chain.doc = jest.fn(() => createDocRef());
+  return chain as {
+    where: jest.Mock;
+    count: jest.Mock;
+    get: jest.Mock;
+    doc: jest.Mock;
+  };
 }
 
 jest.mock('@/lib/firebase-admin', () => ({
@@ -59,112 +72,211 @@ jest.mock('@/lib/firebase-admin', () => ({
     collection: jest.fn(() => createCollectionMock()),
     runTransaction: (...args: unknown[]) => mockRunTransaction(...args),
   },
-}))
+}));
 
 type MockTx = {
   get: jest.Mock;
   set: jest.Mock;
   delete: jest.Mock;
-}
+};
 
 beforeEach(() => {
-  jest.clearAllMocks()
-  mockRunTransaction.mockImplementation(async (cb: (tx: MockTx) => Promise<void>) => {
-    const tx: MockTx = {
-      get: jest.fn().mockResolvedValue({ exists: false, data: () => null }),
-      set: jest.fn().mockResolvedValue(undefined),
-      delete: jest.fn().mockResolvedValue(undefined),
-    }
-    await cb(tx)
-  })
-})
+  jest.clearAllMocks();
+  mockRunTransaction.mockImplementation(
+    async (cb: (tx: MockTx) => Promise<void>) => {
+      const tx: MockTx = {
+        get: jest.fn().mockResolvedValue({ exists: false, data: () => null }),
+        set: jest.fn().mockResolvedValue(undefined),
+        delete: jest.fn().mockResolvedValue(undefined),
+      };
+      await cb(tx);
+    },
+  );
+});
+
+const PLAIN_PDF = '%PDF-1.4\n1 0 obj << /Type /Catalog >> endobj\n%%EOF';
+const ACTIVE_PDF =
+  '%PDF-1.4\n1 0 obj << /OpenAction << /S /JavaScript /JS (app.alert(1)) >> >> endobj\n%%EOF';
+
+function boardForm(cv: string, cvName = 'cv.pdf') {
+  const formData = new FormData();
+  formData.set('name', 'Alice');
+  formData.set('email', 'alice@test.com');
+  formData.set('role', 'Chairperson');
+  formData.set('agree', 'true');
+  formData.set('cv', new Blob([cv], { type: 'application/pdf' }), cvName);
+  formData.set('coverOption', 'text');
+  formData.set('coverText', 'I am interested in this role.');
+  return formData;
+}
 
 describe('POST /api/board-apply', () => {
   describe('authentication', () => {
     it('returns 401 when no auth token', async () => {
-      mockGetTokens.mockResolvedValue(null)
+      mockGetTokens.mockResolvedValue(null);
 
-      const { POST } = await import('@/app/api/board-apply/route')
-      const req = new Request('http://localhost/api/board-apply', { method: 'POST' })
-      const res = await POST(req as unknown as Request)
-      const body = await res.json()
+      const { POST } = await import('@/app/api/board-apply/route');
+      const req = new Request('http://localhost/api/board-apply', {
+        method: 'POST',
+      });
+      const res = await POST(req as unknown as Request);
+      const body = await res.json();
 
-      expect(res.status).toBe(401)
-      expect(body.error).toBe('Unauthorized')
-    })
-  })
+      expect(res.status).toBe(401);
+      expect(body.error).toBe('Unauthorized');
+    });
+  });
 
   describe('validation', () => {
     it('returns 400 when name is missing', async () => {
-      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'admin1', admin: true } })
+      mockGetTokens.mockResolvedValue({
+        decodedToken: { uid: 'admin1', admin: true },
+      });
 
-      const { POST } = await import('@/app/api/board-apply/route')
-      const formData = new FormData()
-      formData.set('email', 'a@b.com')
-      const req = new Request('http://localhost/api/board-apply', { method: 'POST', body: formData })
-      const res = await POST(req as unknown as Request)
-      const body = await res.json()
+      const { POST } = await import('@/app/api/board-apply/route');
+      const formData = new FormData();
+      formData.set('email', 'a@b.com');
+      const req = new Request('http://localhost/api/board-apply', {
+        method: 'POST',
+        body: formData,
+      });
+      const res = await POST(req as unknown as Request);
+      const body = await res.json();
 
-      expect(res.status).toBe(400)
-      expect(body.error).toMatch(/name|email/i)
-    })
+      expect(res.status).toBe(400);
+      expect(body.error).toMatch(/name|email/i);
+    });
 
     it('returns 400 when no CV file', async () => {
-      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'admin1', admin: true } })
+      mockGetTokens.mockResolvedValue({
+        decodedToken: { uid: 'admin1', admin: true },
+      });
 
-      const { POST } = await import('@/app/api/board-apply/route')
-      const formData = new FormData()
-      formData.set('name', 'Alice')
-      formData.set('email', 'a@b.com')
-      formData.set('role', 'Chair')
-      formData.set('agree', 'true')
-      const req = new Request('http://localhost/api/board-apply', { method: 'POST', body: formData })
-      const res = await POST(req as unknown as Request)
-      const body = await res.json()
+      const { POST } = await import('@/app/api/board-apply/route');
+      const formData = new FormData();
+      formData.set('name', 'Alice');
+      formData.set('email', 'a@b.com');
+      formData.set('role', 'Chair');
+      formData.set('agree', 'true');
+      const req = new Request('http://localhost/api/board-apply', {
+        method: 'POST',
+        body: formData,
+      });
+      const res = await POST(req as unknown as Request);
+      const body = await res.json();
 
-      expect(res.status).toBe(400)
-      expect(body.error).toMatch(/CV/i)
-    })
+      expect(res.status).toBe(400);
+      expect(body.error).toMatch(/CV/i);
+    });
 
     it('returns 400 on missing agreement', async () => {
-      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'admin1', admin: true } })
+      mockGetTokens.mockResolvedValue({
+        decodedToken: { uid: 'admin1', admin: true },
+      });
 
-      const { POST } = await import('@/app/api/board-apply/route')
-      const formData = new FormData()
-      formData.set('name', 'Alice')
-      formData.set('email', 'a@b.com')
-      formData.set('role', 'Chair')
-      formData.set('cv', new Blob([''], { type: 'application/pdf' }), 'cv.pdf')
-      const req = new Request('http://localhost/api/board-apply', { method: 'POST', body: formData })
-      const res = await POST(req as unknown as Request)
-      const body = await res.json()
+      const { POST } = await import('@/app/api/board-apply/route');
+      const formData = new FormData();
+      formData.set('name', 'Alice');
+      formData.set('email', 'a@b.com');
+      formData.set('role', 'Chair');
+      formData.set('cv', new Blob([''], { type: 'application/pdf' }), 'cv.pdf');
+      const req = new Request('http://localhost/api/board-apply', {
+        method: 'POST',
+        body: formData,
+      });
+      const res = await POST(req as unknown as Request);
+      const body = await res.json();
 
-      expect(res.status).toBe(400)
-      expect(body.error).toMatch(/agreement/i)
-    })
-  })
+      expect(res.status).toBe(400);
+      expect(body.error).toMatch(/agreement/i);
+    });
+  });
 
   describe('successful submission', () => {
     it('writes application and returns 200', async () => {
-      mockGetTokens.mockResolvedValue({ decodedToken: { uid: 'admin1', admin: true } })
+      mockGetTokens.mockResolvedValue({
+        decodedToken: { uid: 'admin1', admin: true },
+      });
 
-      const { POST } = await import('@/app/api/board-apply/route')
-      const formData = new FormData()
-      formData.set('name', 'Alice')
-      formData.set('email', 'alice@test.com')
-      formData.set('role', 'Chairperson')
-      formData.set('agree', 'true')
-      formData.set('cv', new Blob([''], { type: 'application/pdf' }), 'cv.pdf')
-      formData.set('coverOption', 'text')
-      formData.set('coverText', 'I am interested in this role.')
+      const { POST } = await import('@/app/api/board-apply/route');
+      const formData = new FormData();
+      formData.set('name', 'Alice');
+      formData.set('email', 'alice@test.com');
+      formData.set('role', 'Chairperson');
+      formData.set('agree', 'true');
+      formData.set(
+        'cv',
+        new Blob([PLAIN_PDF], { type: 'application/pdf' }),
+        'cv.pdf',
+      );
+      formData.set('coverOption', 'text');
+      formData.set('coverText', 'I am interested in this role.');
 
-      const req = new Request('http://localhost/api/board-apply', { method: 'POST', body: formData })
-      const res = await POST(req as unknown as Request)
+      const req = new Request('http://localhost/api/board-apply', {
+        method: 'POST',
+        body: formData,
+      });
+      const res = await POST(req as unknown as Request);
 
-      expect(res.status).toBe(200)
-      const body = await res.json()
-      expect(body.name).toBe('Alice')
-      expect(body.id).toBeDefined()
-    })
-  })
-})
+      expect(res.status).toBe(200);
+      const body = await res.json();
+      expect(body.name).toBe('Alice');
+      expect(body.id).toBeDefined();
+    });
+  });
+
+  describe('file checks', () => {
+    beforeEach(() => {
+      mockGetTokens.mockResolvedValue({
+        decodedToken: { uid: 'admin1', admin: true },
+      });
+    });
+
+    it('rejects a file that is not a PDF', async () => {
+      const { POST } = await import('@/app/api/board-apply/route');
+      const req = new Request('http://localhost/api/board-apply', {
+        method: 'POST',
+        body: boardForm('hello'),
+      });
+      const res = await POST(req as unknown as Request);
+      expect(res.status).toBe(400);
+      expect(mockRunTransaction).not.toHaveBeenCalled();
+    });
+
+    it('rejects a PDF with active content', async () => {
+      const { POST } = await import('@/app/api/board-apply/route');
+      const req = new Request('http://localhost/api/board-apply', {
+        method: 'POST',
+        body: boardForm(ACTIVE_PDF),
+      });
+      const res = await POST(req as unknown as Request);
+      expect(res.status).toBe(400);
+      expect((await res.json()).error).toMatch(/scripts/i);
+      expect(mockRunTransaction).not.toHaveBeenCalled();
+    });
+
+    it('stores the CV under a sanitized name', async () => {
+      const { POST } = await import('@/app/api/board-apply/route');
+      const req = new Request('http://localhost/api/board-apply', {
+        method: 'POST',
+        body: boardForm(PLAIN_PDF, '../../x/cv.pdf'),
+      });
+      const res = await POST(req as unknown as Request);
+      expect(res.status).toBe(200);
+      const body = await res.json();
+      expect(body.cv.path).toMatch(
+        /^board-applications\/\d+_\.\._\.\._x_cv\.pdf$/,
+      );
+    });
+
+    it('returns 413 for an oversized body', async () => {
+      const { POST } = await import('@/app/api/board-apply/route');
+      const req = new Request('http://localhost/api/board-apply', {
+        method: 'POST',
+        body: boardForm(PLAIN_PDF + ' '.repeat(7 * 1024 * 1024)),
+      });
+      const res = await POST(req as unknown as Request);
+      expect(res.status).toBe(413);
+    });
+  });
+});

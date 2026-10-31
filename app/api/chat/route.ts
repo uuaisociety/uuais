@@ -1,9 +1,21 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { checkRateLimit, incrementUsage, RateLimitError } from '@/lib/ai/rate-limit';
+import {
+  checkRateLimit,
+  recordTokens,
+  reserveRequest,
+  RateLimitError,
+} from '@/lib/ai/rate-limit';
 import { processRAGRequest } from '@/lib/ai/rag';
 import { OpenRouterError } from '@/lib/ai/openrouter';
 import { requireAuth } from '@/lib/server-auth';
+import { readBoundedRequest } from '@/lib/bounded-request-body';
+
+// Bounds on what one request can send to the embedding and chat models.
+const MAX_BODY_BYTES = 256 * 1024;
+const MAX_QUERY_CHARS = 2000;
+const MAX_HISTORY_MESSAGES = 20;
+const MAX_HISTORY_MESSAGE_CHARS = 4000;
 
 interface ChatRequest {
   query: string;
@@ -11,24 +23,27 @@ interface ChatRequest {
 }
 
 function normalizeConversationHistory(
-  conversationHistory: ChatRequest['conversationHistory']
+  conversationHistory: ChatRequest['conversationHistory'],
 ): { role: 'user' | 'assistant'; content: string }[] {
   if (!Array.isArray(conversationHistory)) {
     return [];
   }
 
   return conversationHistory
-    .filter((message): message is { role: 'user' | 'assistant'; content: string } => {
-      return (
-        Boolean(message) &&
-        (message.role === 'user' || message.role === 'assistant') &&
-        typeof message.content === 'string' &&
-        message.content.trim().length > 0
-      );
-    })
+    .filter(
+      (message): message is { role: 'user' | 'assistant'; content: string } => {
+        return (
+          Boolean(message) &&
+          (message.role === 'user' || message.role === 'assistant') &&
+          typeof message.content === 'string' &&
+          message.content.trim().length > 0
+        );
+      },
+    )
+    .slice(-MAX_HISTORY_MESSAGES)
     .map((message) => ({
       role: message.role,
-      content: message.content.trim(),
+      content: message.content.trim().slice(0, MAX_HISTORY_MESSAGE_CHARS),
     }));
 }
 
@@ -38,7 +53,7 @@ export async function POST(req: NextRequest) {
     if (!auth.ok) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Authentication required' },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -46,44 +61,63 @@ export async function POST(req: NextRequest) {
     if (!uid) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Invalid token: missing user ID' },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
     // Parse request body
+    const bounded = await readBoundedRequest(req, MAX_BODY_BYTES);
+    if (!bounded) {
+      return NextResponse.json(
+        { error: 'Payload too large', message: 'Request body too large' },
+        { status: 413 },
+      );
+    }
     let body: ChatRequest;
     try {
-      body = await req.json();
+      body = await bounded.json();
     } catch {
       return NextResponse.json(
         { error: 'Bad request', message: 'Invalid JSON body' },
-        { status: 400 }
+        { status: 400 },
       );
     }
-    
+
     const { query, conversationHistory } = body;
-    const normalizedConversationHistory = normalizeConversationHistory(conversationHistory);
+    const normalizedConversationHistory =
+      normalizeConversationHistory(conversationHistory);
     if (!query || typeof query !== 'string' || query.trim().length === 0) {
       return NextResponse.json(
         { error: 'Bad request', message: 'Query is required' },
-        { status: 400 }
+        { status: 400 },
       );
     }
-    
-    // Check rate limit
-    const rateLimitStatus = await checkRateLimit(uid);
+    if (query.trim().length > MAX_QUERY_CHARS) {
+      return NextResponse.json(
+        {
+          error: 'Bad request',
+          message: `Query must be at most ${MAX_QUERY_CHARS} characters`,
+        },
+        { status: 400 },
+      );
+    }
+
+    // Claim a request before the AI call. It isn't refunded if the call fails:
+    // a provider error may still have cost tokens, and a refund would let
+    // failing requests run without limit.
+    const rateLimitStatus = await reserveRequest(uid);
     if (!rateLimitStatus.allowed) {
       return NextResponse.json(
-        { 
-          error: 'Rate limit exceeded', 
+        {
+          error: 'Rate limit exceeded',
           message: `You have reached your daily limit of ${rateLimitStatus.totalRequests} requests. Limit resets at midnight.`,
           resetAt: rateLimitStatus.resetAt.toISOString(),
-          remaining: 0
+          remaining: 0,
         },
-        { status: 429 }
+        { status: 429 },
       );
     }
-    
+
     // Process RAG request
     const { result, usage, debug } = await processRAGRequest({
       query: query.trim(),
@@ -91,10 +125,13 @@ export async function POST(req: NextRequest) {
       conversationHistory: normalizedConversationHistory,
       includeDebug: isAdmin,
     });
-    
-    // Increment usage
-    const newStatus = await incrementUsage(uid, usage.totalTokens);
-    
+
+    // Best-effort: the request is already counted, so a failure here only
+    // loses the token tally.
+    await recordTokens(uid, rateLimitStatus.date, usage.totalTokens).catch(
+      (err) => console.warn('Failed to record AI token usage', err),
+    );
+
     // Return response
     return NextResponse.json({
       success: true,
@@ -106,27 +143,26 @@ export async function POST(req: NextRequest) {
       },
       ...(isAdmin && debug ? { debug } : {}),
       rateLimit: {
-        remaining: newStatus.remaining,
-        total: newStatus.totalRequests,
-        resetAt: newStatus.resetAt.toISOString(),
+        remaining: rateLimitStatus.remaining,
+        total: rateLimitStatus.totalRequests,
+        resetAt: rateLimitStatus.resetAt.toISOString(),
       },
     });
-    
   } catch (error) {
     console.error('Chat API error:', error);
-    
+
     if (error instanceof RateLimitError) {
       return NextResponse.json(
-        { 
-          error: 'Rate limit exceeded', 
+        {
+          error: 'Rate limit exceeded',
           message: error.message,
           resetAt: error.resetAt.toISOString(),
-          remaining: error.remaining
+          remaining: error.remaining,
         },
-        { status: 429 }
+        { status: 429 },
       );
     }
-    
+
     if (error instanceof OpenRouterError) {
       const statusCode = error.statusCode || 503;
       const type = statusCode === 401 ? 'api_key' : 'server';
@@ -135,21 +171,21 @@ export async function POST(req: NextRequest) {
           ? 'AI provider authentication failed. Please contact an admin.'
           : 'The AI service is temporarily unavailable. Please try again in a moment.';
       return NextResponse.json(
-        { 
-          error: 'AI service error', 
+        {
+          error: 'AI service error',
           message: userMessage,
-          type
+          type,
         },
-        { status: statusCode }
+        { status: statusCode },
       );
     }
-    
+
     return NextResponse.json(
-      { 
-        error: 'Internal server error', 
-        message: 'An unexpected error occurred. Please try again.' 
+      {
+        error: 'Internal server error',
+        message: 'An unexpected error occurred. Please try again.',
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -160,7 +196,7 @@ export async function GET(req: NextRequest) {
     if (!auth.ok) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Authentication required' },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -168,12 +204,12 @@ export async function GET(req: NextRequest) {
     if (!uid) {
       return NextResponse.json(
         { error: 'Unauthorized', message: 'Invalid token: missing user ID' },
-        { status: 401 }
+        { status: 401 },
       );
     }
-    
+
     const rateLimitStatus = await checkRateLimit(uid);
-    
+
     return NextResponse.json({
       remaining: rateLimitStatus.remaining,
       total: rateLimitStatus.totalRequests,
@@ -184,7 +220,7 @@ export async function GET(req: NextRequest) {
     console.error('Rate limit check error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

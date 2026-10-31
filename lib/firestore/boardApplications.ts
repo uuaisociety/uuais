@@ -1,5 +1,11 @@
-import { collection, addDoc, deleteDoc, doc, onSnapshot, DocumentData, Timestamp } from 'firebase/firestore';
-import { db } from '@/lib/firebase-client';
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  DocumentData,
+  Timestamp,
+} from 'firebase/firestore';
+import { db, refreshSessionCookie } from '@/lib/firebase-client';
 import { stripUndefined } from './utils';
 
 export type BoardApplication = {
@@ -24,38 +30,69 @@ function applicationSortKey(createdAt: BoardApplication['createdAt']): number {
   return 0;
 }
 
-export const addBoardApplication = async (app: Omit<BoardApplication, 'id' | 'createdAt'>): Promise<string> => {
+export const addBoardApplication = async (
+  app: Omit<BoardApplication, 'id' | 'createdAt'>,
+): Promise<string> => {
   const ref = collection(db, 'boardApplications');
   const safe = stripUndefined(app as Record<string, unknown>) as DocumentData;
   if (typeof safe.email === 'string' && !safe.emailNormalized) {
     safe.emailNormalized = safe.email.trim().toLowerCase();
   }
-  const docRef = await addDoc(ref, { ...safe, createdAt: new Date().toISOString() } as DocumentData);
+  const docRef = await addDoc(ref, {
+    ...safe,
+    createdAt: new Date().toISOString(),
+  } as DocumentData);
   return docRef.id;
 };
 
 export const listBoardApplications = async (): Promise<BoardApplication[]> => {
   const ref = collection(db, 'boardApplications');
   const snapshot = await (await import('firebase/firestore')).getDocs(ref);
-  return snapshot.docs.map((d) => ({ id: d.id, ...(d.data() as DocumentData) } as BoardApplication));
+  return snapshot.docs.map(
+    (d) => ({ id: d.id, ...(d.data() as DocumentData) }) as BoardApplication,
+  );
 };
 
+// Admin deletion via the API route, which also removes the CV/cover files and audit-logs it.
 export const deleteBoardApplication = async (id: string): Promise<void> => {
-  await deleteDoc(doc(db, 'boardApplications', id));
+  // Refresh the httpOnly session cookie so the admin claim stays current (cookie minted pre-grant returns 403).
+  try {
+    await refreshSessionCookie();
+  } catch {
+    /* best-effort; the delete call surfaces auth errors */
+  }
+  const res = await fetch('/api/admin/board-applications', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id }),
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => null);
+    throw new Error(
+      body?.error || `Failed to delete application (${res.status})`,
+    );
+  }
 };
 
-export const subscribeToBoardApplications = (callback: (applications: BoardApplication[]) => void) => {
+export const subscribeToBoardApplications = (
+  callback: (applications: BoardApplication[]) => void,
+) => {
   const ref = collection(db, 'boardApplications');
   return onSnapshot(
     ref,
     (snapshot) => {
-      const list = snapshot.docs.map((d) => ({ id: d.id, ...d.data() } as BoardApplication));
-      list.sort((a, b) => applicationSortKey(b.createdAt) - applicationSortKey(a.createdAt));
+      const list = snapshot.docs.map(
+        (d) => ({ id: d.id, ...d.data() }) as BoardApplication,
+      );
+      list.sort(
+        (a, b) =>
+          applicationSortKey(b.createdAt) - applicationSortKey(a.createdAt),
+      );
       callback(list);
     },
     (error) => {
       console.error('Firestore subscription failed:', error);
       callback([]);
-    }
+    },
   );
 };

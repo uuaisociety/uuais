@@ -6,6 +6,12 @@ import { adminDb } from '@/lib/firebase-admin';
 import CvReviewPage from '@/components/pages/CvReviewPage';
 import type { SharedCv } from '@/lib/export-cvs';
 import { logAdminAction } from '@/lib/server-audit-log';
+import { checkWindow } from '@/lib/rate-limit-in-memory';
+
+// Views logged per partner; reloads beyond this aren't, so a loop can't flood
+// the audit trail. Downloads are always logged.
+const VIEW_LOG_LIMIT = 30;
+const VIEW_LOG_WINDOW_MS = 60 * 60 * 1000;
 
 export const metadata: Metadata = {
   title: 'CV review',
@@ -59,7 +65,14 @@ export default async function Page() {
   const cvs = await loadSharedCvs();
   // Partners see member details here before any download, so the view is
   // logged too (best-effort: a log failure doesn't block the list).
-  if (!session.isAdmin) {
+  if (
+    !session.isAdmin &&
+    checkWindow(
+      `partner-view:${session.uid}`,
+      VIEW_LOG_LIMIT,
+      VIEW_LOG_WINDOW_MS,
+    ).allowed
+  ) {
     const forwarded = (await headers())
       .get('x-forwarded-for')
       ?.split(',')[0]

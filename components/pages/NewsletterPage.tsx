@@ -25,6 +25,10 @@ export default function NewsletterPage({
     profile?.isMember && profile.privacyAcceptedAt?.trim(),
   );
   const canManage = Boolean(user && !loading && !profileLoading && isReady);
+  // Unsubscribing needs no membership, so a lapsed member can still leave.
+  const canUnsubscribe = Boolean(
+    user && !loading && !profileLoading && profile?.newsletter === true,
+  );
 
   const updateSubscription = useCallback(
     async (
@@ -34,7 +38,8 @@ export default function NewsletterPage({
         ? `${user.uid}:${requestedSubscription}`
         : null,
     ) => {
-      if (!canManage || pending) return;
+      if (!(newsletter ? canManage : canManage || canUnsubscribe) || pending)
+        return;
       setPending(true);
       setError('');
       setMessage('');
@@ -69,7 +74,7 @@ export default function NewsletterPage({
         setPending(false);
       }
     },
-    [canManage, pending, requestedSubscription, router, user],
+    [canManage, canUnsubscribe, pending, requestedSubscription, router, user],
   );
 
   useEffect(() => {
@@ -84,12 +89,22 @@ export default function NewsletterPage({
       autoAttempt.current = null;
       return;
     }
-    if (!user || !canManage || pending) return;
+    const allowed = requestedSubscription
+      ? canManage
+      : canManage || canUnsubscribe;
+    if (!user || !allowed || pending) return;
     const attempt = `${user.uid}:${requestedSubscription}`;
     if (autoAttempt.current === attempt) return;
     autoAttempt.current = attempt;
     void updateSubscription(requestedSubscription, true, attempt);
-  }, [canManage, pending, requestedSubscription, updateSubscription, user]);
+  }, [
+    canManage,
+    canUnsubscribe,
+    pending,
+    requestedSubscription,
+    updateSubscription,
+    user,
+  ]);
 
   const returnPath =
     requestedSubscription === null
@@ -145,6 +160,38 @@ export default function NewsletterPage({
             >
               <Link href={joinUrl(returnPath)}>Complete membership</Link>
             </Button>
+            {profile?.newsletter === true && (
+              <>
+                <p className="mt-6 text-base sm:text-sm" role="status">
+                  You are currently subscribed.
+                </p>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="mt-3 w-full sm:w-auto"
+                  disabled={pending}
+                  onClick={() => void updateSubscription(false)}
+                >
+                  {pending ? 'Saving…' : 'Unsubscribe'}
+                </Button>
+              </>
+            )}
+            {error && (
+              <p
+                role="alert"
+                className="mt-4 text-base text-destructive sm:text-sm"
+              >
+                {error}
+              </p>
+            )}
+            {message && (
+              <p
+                role="status"
+                className="mt-4 text-base text-muted-foreground sm:text-sm"
+              >
+                {message}
+              </p>
+            )}
           </div>
         ) : (
           <div className="mt-8 border-t border-border pt-6">

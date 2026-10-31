@@ -1,5 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import Page from '@/app/partners/cvs/page';
+import { resetRateLimits } from '@/lib/rate-limit-in-memory';
 
 const mockGetServerSession = jest.fn();
 jest.mock('@/lib/server-auth', () => ({
@@ -62,6 +63,7 @@ const session = (claims: Record<string, boolean>) => ({
 describe('/partners/cvs', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    resetRateLimits();
     cvDocs = [
       { id: 'u2', consentAt: '2026-10-20T10:00:00.000Z' },
       { id: 'u1', consentAt: '2026-10-28T10:00:00.000Z' },
@@ -146,6 +148,14 @@ describe('/partners/cvs', () => {
       role: 'partner',
       email: undefined,
     });
+  });
+
+  it('stops logging a partner’s reloads past the hourly limit, still showing the list', async () => {
+    mockGetServerSession.mockResolvedValue(session({ isPartner: true }));
+    for (let i = 0; i < 31; i++) await Page();
+    expect(mockLog).toHaveBeenCalledTimes(30);
+    render(await Page());
+    expect(screen.getByText('2 CVs')).toBeInTheDocument();
   });
 
   it('does not log an admin opening the list', async () => {

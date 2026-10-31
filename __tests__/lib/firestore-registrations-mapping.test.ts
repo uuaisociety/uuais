@@ -22,7 +22,7 @@ jest.mock('firebase/firestore', () => ({
 }));
 
 jest.mock('@/lib/firebase-client', () => ({ db: {} }));
-jest.mock('@/lib/email', () => ({ sendTemplatedEmail: jest.fn() }));
+jest.mock('@/lib/email', () => ({ requestAdminEmail: jest.fn() }));
 
 import { Timestamp } from 'firebase/firestore';
 import {

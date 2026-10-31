@@ -45,8 +45,8 @@ export async function POST(req: NextRequest) {
         ? payload.eventId
         : undefined;
     const count =
-      typeof payload.count === 'number' && Number.isFinite(payload.count)
-        ? payload.count
+      Number.isSafeInteger(payload.count) && (payload.count as number) >= 0
+        ? (payload.count as number)
         : undefined;
 
     const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();

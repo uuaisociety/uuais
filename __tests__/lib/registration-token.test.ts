@@ -17,7 +17,7 @@ jest.mock('firebase/firestore', () => ({
   deleteDoc: jest.fn(),
 }));
 jest.mock('@/lib/firebase-client', () => ({ db: {} }));
-jest.mock('@/lib/email', () => ({ sendTemplatedEmail: jest.fn() }));
+jest.mock('@/lib/email', () => ({ requestAdminEmail: jest.fn() }));
 
 describe('registration confirmation token generation', () => {
   it('fails closed when secure browser randomness is unavailable', async () => {

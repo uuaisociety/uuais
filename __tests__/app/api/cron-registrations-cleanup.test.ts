@@ -9,6 +9,9 @@ const mockAttendanceGet = jest.fn();
 const mockAttendanceSet = jest.fn().mockResolvedValue(undefined);
 const mockBatchDelete = jest.fn();
 const mockBatchCommit = jest.fn().mockResolvedValue(undefined);
+// users/{uid} docs read inside transactions, and the updates written to them.
+let mockUsers: Record<string, Record<string, unknown>>;
+const mockUserUpdate = jest.fn();
 
 const mockAdminDb = {
   collection: jest.fn((name: string) => {
@@ -33,8 +36,19 @@ const mockAdminDb = {
           }),
         }),
       };
+    if (name === 'users') return { doc: (id: string) => ({ id }) };
     throw new Error(`unexpected collection ${name}`);
   }),
+  runTransaction: jest.fn(async (fn: (tx: unknown) => Promise<unknown>) =>
+    fn({
+      get: async ({ id }: { id: string }) => ({
+        exists: id in mockUsers,
+        get: (k: string) => mockUsers[id]?.[k],
+      }),
+      update: (ref: { id: string }, data: unknown) =>
+        mockUserUpdate(ref.id, data),
+    }),
+  ),
   batch: jest.fn(() => ({
     delete: (...args: unknown[]) => mockBatchDelete(...args),
     commit: (...args: unknown[]) => mockBatchCommit(...args),
@@ -104,6 +118,7 @@ describe('GET /api/cron/registrations-cleanup', () => {
     mockAttendanceGet.mockResolvedValue({ exists: false });
     mockOldRegistrationsGet.mockResolvedValue({ docs: [] });
     mockAttendanceListGet.mockResolvedValue({ docs: [] });
+    mockUsers = {};
   });
 
   afterAll(() => {
@@ -335,6 +350,48 @@ describe('GET /api/cron/registrations-cleanup', () => {
     expect(recentOrphan.ref.update).not.toHaveBeenCalled();
     expect(recentOrphan.ref.delete).not.toHaveBeenCalled();
     expect(expiredOrphan.ref.delete).toHaveBeenCalled();
+    expect(body.deletedDocs).toBe(1);
+  });
+
+  it('purges attendance 36 months after the event, from profiles too', async () => {
+    mockEventsGet.mockResolvedValue({
+      docs: [
+        eventDoc('old', new Date(Date.now() - 1100 * DAY_MS).toISOString()),
+        eventDoc('recent', new Date(Date.now() - 100 * DAY_MS).toISOString()),
+      ],
+    });
+    const attendanceDoc = (id: string, userIds: string[]) => ({
+      id,
+      get: (key: string) =>
+        key === 'entries'
+          ? userIds.map((userId) => ({ userId, attended: true }))
+          : undefined,
+      ref: {
+        update: jest.fn().mockResolvedValue(undefined),
+        delete: jest.fn().mockResolvedValue(undefined),
+      },
+    });
+    const old = attendanceDoc('old', ['u1', 'gone']);
+    const recent = attendanceDoc('recent', ['u1']);
+    mockAttendanceListGet.mockResolvedValue({ docs: [old, recent] });
+    mockUsers = {
+      u1: {
+        eventHistory: [
+          { eventId: 'old', attended: true },
+          { eventId: 'recent', attended: true },
+        ],
+      },
+    };
+
+    const res = await call('test-secret');
+    const body = await res.json();
+
+    expect(mockUserUpdate).toHaveBeenCalledTimes(1);
+    expect(mockUserUpdate).toHaveBeenCalledWith('u1', {
+      eventHistory: [{ eventId: 'recent', attended: true }],
+    });
+    expect(old.ref.delete).toHaveBeenCalled();
+    expect(recent.ref.delete).not.toHaveBeenCalled();
     expect(body.deletedDocs).toBe(1);
   });
 

@@ -1,32 +1,40 @@
-import React from "react";
-import DOMPurify from 'dompurify';
-import { notFound } from "next/navigation";
-import type { Metadata } from "next";
-import { Card, CardContent } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { Tag as UiTag } from "@/components/ui/Tag";
-import { ArrowLeft, Calendar, Clock, MapPin, Tag } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-import { format } from "date-fns";
-import { SITE_URL } from "@/app/metadata";
+import React from 'react';
+// Plain dompurify needs a DOM, so on the server it would return its input unchanged.
+import DOMPurify from 'isomorphic-dompurify';
+import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { Card, CardContent } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Tag as UiTag } from '@/components/ui/Tag';
+import { ArrowLeft, Calendar, Clock, MapPin, Tag } from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { format } from 'date-fns';
+import { SITE_URL } from '@/app/metadata';
 
-import campus from "@/public/images/campus.png";
-import EventDetailClient from "@/components/events/EventDetailClient";
-import FormattedText from "@/components/ui/FormattedText";
-import { getEventByIdServer, getRelatedEventsServer } from "@/lib/server-events";
+import campus from '@/public/images/campus.png';
+import EventDetailClient from '@/components/events/EventDetailClient';
+import FormattedText from '@/components/ui/FormattedText';
+import {
+  getEventByIdServer,
+  getRelatedEventsServer,
+} from '@/lib/server-events';
 
 const categoryOptions = [
-  { value: "all", label: "All Categories" },
-  { value: "workshop", label: "Workshop" },
-  { value: "guest_lecture", label: "Guest Lecture" },
-  { value: "hackathon", label: "Hackathon" },
-  { value: "other", label: "Other" },
+  { value: 'all', label: 'All Categories' },
+  { value: 'workshop', label: 'Workshop' },
+  { value: 'guest_lecture', label: 'Guest Lecture' },
+  { value: 'hackathon', label: 'Hackathon' },
+  { value: 'other', label: 'Other' },
 ];
 
 export const dynamic = 'force-dynamic';
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
   const { id } = await params;
   if (!id) return { title: 'Event' };
   const event = await getEventByIdServer(id);
@@ -38,7 +46,11 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function EventDetailPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function EventDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   const event = await getEventByIdServer(id);
   if (!event) {
@@ -53,19 +65,19 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
   const isPastEvent = eventStart < now;
 
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Event",
+    '@context': 'https://schema.org',
+    '@type': 'Event',
     name: event.title,
     startDate: event.eventStartAt,
-    location: { "@type": "Place", name: event.location },
+    location: { '@type': 'Place', name: event.location },
     description: event.description,
     eventAttendanceMode: event.registrationRequired
-      ? "https://schema.org/OfflineEventAttendanceMode"
+      ? 'https://schema.org/OfflineEventAttendanceMode'
       : undefined,
     image: event.image,
     organizer: {
-      "@type": "Organization",
-      name: "UU AI Society",
+      '@type': 'Organization',
+      name: 'UU AI Society',
       url: SITE_URL,
     },
   };
@@ -75,7 +87,10 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          // Escaped so a `</script>` in the description can't end this tag.
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+          }}
         />
 
         {/* Back Button */}
@@ -90,7 +105,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
               {event.title}
             </h1>
             {isUpcoming || !isPastEvent ? (
-              <UiTag variant="red">{isUpcoming ? "Upcoming" : "Today"}</UiTag>
+              <UiTag variant="red">{isUpcoming ? 'Upcoming' : 'Today'}</UiTag>
             ) : (
               <UiTag variant="gray">Past Event</UiTag>
             )}
@@ -100,12 +115,12 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
             <div className="flex items-center gap-2">
               <Calendar className="w-5 h-5" />
               <span>
-                {format(new Date(event.eventStartAt), "EEEE, MMMM dd, yyyy")}
+                {format(new Date(event.eventStartAt), 'EEEE, MMMM dd, yyyy')}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <Clock className="w-5 h-5" />
-              <span>{format(new Date(event.eventStartAt), "HH:mm")}</span>
+              <span>{format(new Date(event.eventStartAt), 'HH:mm')}</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-5 h-5" />
@@ -116,8 +131,11 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                 <Tag className="w-5 h-5" />
                 <span>
                   {categoryOptions.find(
-                    (option) => option.value === event.category?.toLowerCase()
-                  )?.label || event.category.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+                    (option) => option.value === event.category?.toLowerCase(),
+                  )?.label ||
+                    event.category
+                      .replace(/_/g, ' ')
+                      .replace(/\b\w/g, (c) => c.toUpperCase())}
                 </span>
               </div>
             )}
@@ -150,7 +168,9 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
             {/<\/?[a-z][\s\S]*>/i.test(event.description || '') ? (
               <div
                 className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground"
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(event.description || '') }}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(event.description || ''),
+                }}
               />
             ) : (
               <FormattedText
@@ -170,38 +190,34 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    Date:
-                  </span>
+                  <span className="text-muted-foreground">Date:</span>
                   <span className="text-foreground font-medium">
-                    {format(new Date(event.eventStartAt), "MMM dd, yyyy")}
+                    {format(new Date(event.eventStartAt), 'MMM dd, yyyy')}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    Time:
-                  </span>
+                  <span className="text-muted-foreground">Time:</span>
                   <span className="text-foreground font-medium">
-                    {format(new Date(event.eventStartAt), "HH:mm")}
+                    {format(new Date(event.eventStartAt), 'HH:mm')}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    Location:
-                  </span>
+                  <span className="text-muted-foreground">Location:</span>
                   <span className="text-foreground font-medium text-right">
                     {event.location}
                   </span>
                 </div>
                 {event.category && (
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      Category:
-                    </span>
+                    <span className="text-muted-foreground">Category:</span>
                     <span className="text-foreground font-medium">
                       {categoryOptions.find(
-                        (option) => option.value === event.category?.toLowerCase()
-                      )?.label || event.category.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
+                        (option) =>
+                          option.value === event.category?.toLowerCase(),
+                      )?.label ||
+                        event.category
+                          .replace(/_/g, ' ')
+                          .replace(/\b\w/g, (c) => c.toUpperCase())}
                     </span>
                   </div>
                 )}
@@ -217,11 +233,9 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                 </h3>
                 <div className="space-y-3">
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      Capacity:
-                    </span>
+                    <span className="text-muted-foreground">Capacity:</span>
                     <span className="text-foreground font-medium">
-                      {event.maxCapacity || "TBA"}
+                      {event.maxCapacity || 'TBA'}
                     </span>
                   </div>
                 </div>
@@ -232,12 +246,12 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
 
         {/* Related Events */}
         {related.length > 0 && (
-        <div className="mt-12 ">
-          <h3 className="text-2xl font-bold text-foreground mb-6">
-            Other Upcoming Events
-          </h3>
-          <div className="grid md:grid-cols-2 gap-6 ">
-            {related.map((relatedEvent) => (
+          <div className="mt-12 ">
+            <h3 className="text-2xl font-bold text-foreground mb-6">
+              Other Upcoming Events
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6 ">
+              {related.map((relatedEvent) => (
                 <Card
                   key={relatedEvent.id}
                   variant="default"
@@ -263,7 +277,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                         <span>
                           {format(
                             new Date(relatedEvent.eventStartAt),
-                            "MMM dd, yyyy"
+                            'MMM dd, yyyy',
                           )}
                         </span>
                       </div>
@@ -273,13 +287,15 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                       </div>
                     </div>
                     <Button asChild variant="outline" size="sm">
-                      <Link href={`/events/${relatedEvent.id}`}>View Details</Link>
+                      <Link href={`/events/${relatedEvent.id}`}>
+                        View Details
+                      </Link>
                     </Button>
                   </CardContent>
                 </Card>
               ))}
+            </div>
           </div>
-        </div>
         )}
       </div>
     </div>

@@ -1,15 +1,11 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    function isSignedIn() {
-      return request.auth != null;
-    }
-    function isAdmin() {
-      return isSignedIn() && (request.auth.token.admin == true || request.auth.token.superAdmin == true);
-    }
+    // Uploads go through /api/admin/team-image (Admin SDK), which checks the
+    // image type, size and rate; clients never write Storage directly.
     match /team-images/{allPaths=**} {
       allow read: if true;
-      allow write: if isAdmin();
+      allow write: if false;
     }
 
     // other folders can have different rules

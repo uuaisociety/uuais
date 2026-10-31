@@ -1,4 +1,10 @@
-import { collection, onSnapshot, deleteDoc, doc, Timestamp } from 'firebase/firestore';
+import {
+  collection,
+  onSnapshot,
+  deleteDoc,
+  doc,
+  Timestamp,
+} from 'firebase/firestore';
 import { db, refreshSessionCookie } from '@/lib/firebase-client';
 import { TeamApplication, RoleChoice } from '@/types';
 import { ensureString, ensureNumber } from './utils';
@@ -39,7 +45,10 @@ function ensureRoleChoices(v: unknown): RoleChoice[] | undefined {
   return out.length > 0 ? out : undefined;
 }
 
-function docToApplication(id: string, data: Record<string, unknown>): TeamApplication {
+function docToApplication(
+  id: string,
+  data: Record<string, unknown>,
+): TeamApplication {
   return {
     id,
     campaignId: ensureString(data.campaignId),
@@ -48,21 +57,33 @@ function docToApplication(id: string, data: Record<string, unknown>): TeamApplic
     emailNormalized: ensureString(data.emailNormalized) || undefined,
     uid: typeof data.uid === 'string' ? data.uid : undefined,
     gender: typeof data.gender === 'string' ? data.gender : undefined,
-    university: typeof data.university === 'string' ? data.university : undefined,
+    university:
+      typeof data.university === 'string' ? data.university : undefined,
     program: typeof data.program === 'string' ? data.program : undefined,
-    graduationYear: typeof data.graduationYear === 'string' ? data.graduationYear : undefined,
+    graduationYear:
+      typeof data.graduationYear === 'string' ? data.graduationYear : undefined,
     linkedin: typeof data.linkedin === 'string' ? data.linkedin : undefined,
-    resume: typeof data.resume === 'object' ? (data.resume as { path?: string; url?: string } | null) : null,
+    resume:
+      typeof data.resume === 'object'
+        ? (data.resume as { path?: string; url?: string } | null)
+        : null,
     interests: ensureStringArray(data.interests),
     roleRanking: ensureRoleChoices(data.roleRanking),
     teamRanking: ensureStringArray(data.teamRanking),
-    customTeam: typeof data.customTeam === 'string' ? data.customTeam : undefined,
-    customRole: typeof data.customRole === 'string' ? data.customRole : undefined,
-    weeklyHours: typeof data.weeklyHours === 'number' ? data.weeklyHours : ensureNumber(data.weeklyHours, 0),
-    motivation: typeof data.motivation === 'string' ? data.motivation : undefined,
+    customTeam:
+      typeof data.customTeam === 'string' ? data.customTeam : undefined,
+    customRole:
+      typeof data.customRole === 'string' ? data.customRole : undefined,
+    weeklyHours:
+      typeof data.weeklyHours === 'number'
+        ? data.weeklyHours
+        : ensureNumber(data.weeklyHours, 0),
+    motivation:
+      typeof data.motivation === 'string' ? data.motivation : undefined,
     customAnswers: ensureStringRecord(data.customAnswers),
     agree: typeof data.agree === 'boolean' ? data.agree : undefined,
-    newsletter: typeof data.newsletter === 'boolean' ? data.newsletter : undefined,
+    newsletter:
+      typeof data.newsletter === 'boolean' ? data.newsletter : undefined,
     updatedAt: data.updatedAt as string | Timestamp | undefined,
     createdAt: data.createdAt as string | Timestamp | undefined,
   };
@@ -85,49 +106,70 @@ export async function deleteTeamApplication(id: string): Promise<void> {
 // Admin deletion: also removes lock/limits docs + resume via the API route (Storage).
 export async function deleteTeamApplicationWithLimits(
   id: string,
-  emailNormalized: string,
-  campaignId: string,
 ): Promise<void> {
   // Refresh the httpOnly session cookie so the admin claim stays current (cookie minted pre-grant returns 403).
   try {
     await refreshSessionCookie();
-  } catch { /* best-effort; the delete call surfaces auth errors */ }
+  } catch {
+    /* best-effort; the delete call surfaces auth errors */
+  }
   const res = await fetch('/api/admin/team-applications', {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id, emailNormalized, campaignId }),
+    body: JSON.stringify({ id }),
   });
   if (!res.ok) {
     const body = await res.json().catch(() => null);
-    throw new Error(body?.error || `Failed to delete application (${res.status})`);
+    throw new Error(
+      body?.error || `Failed to delete application (${res.status})`,
+    );
   }
 }
 
-export function subscribeToTeamApplications(callback: (applications: TeamApplication[]) => void) {
+export function subscribeToTeamApplications(
+  callback: (applications: TeamApplication[]) => void,
+) {
   return onSnapshot(
     collection(db, COLLECTION),
     (snapshot) => {
-      const list = snapshot.docs.map((d) => docToApplication(d.id, d.data() as Record<string, unknown>));
-      list.sort((a, b) => applicationSortKey(b.createdAt) - applicationSortKey(a.createdAt));
+      const list = snapshot.docs.map((d) =>
+        docToApplication(d.id, d.data() as Record<string, unknown>),
+      );
+      list.sort(
+        (a, b) =>
+          applicationSortKey(b.createdAt) - applicationSortKey(a.createdAt),
+      );
       callback(list);
     },
     (error) => {
       console.error('Firestore subscription failed:', error);
       callback([]);
-    }
+    },
   );
 }
 
-export async function listTeamApplicationsByCampaign(campaignId: string): Promise<TeamApplication[]> {
+export async function listTeamApplicationsByCampaign(
+  campaignId: string,
+): Promise<TeamApplication[]> {
   const { getDocs, query, where } = await import('firebase/firestore');
-  const q = query(collection(db, COLLECTION), where('campaignId', '==', campaignId));
+  const q = query(
+    collection(db, COLLECTION),
+    where('campaignId', '==', campaignId),
+  );
   const snapshot = await getDocs(q);
-  const list = snapshot.docs.map((d) => docToApplication(d.id, d.data() as Record<string, unknown>));
-  list.sort((a, b) => applicationSortKey(b.createdAt) - applicationSortKey(a.createdAt));
+  const list = snapshot.docs.map((d) =>
+    docToApplication(d.id, d.data() as Record<string, unknown>),
+  );
+  list.sort(
+    (a, b) => applicationSortKey(b.createdAt) - applicationSortKey(a.createdAt),
+  );
   return list;
 }
 
-export async function getTeamApplicationByUid(uid: string, campaignId: string): Promise<TeamApplication | null> {
+export async function getTeamApplicationByUid(
+  uid: string,
+  campaignId: string,
+): Promise<TeamApplication | null> {
   const { getDocs, query, where } = await import('firebase/firestore');
   const q = query(
     collection(db, COLLECTION),
@@ -140,7 +182,10 @@ export async function getTeamApplicationByUid(uid: string, campaignId: string): 
   return docToApplication(doc.id, doc.data() as Record<string, unknown>);
 }
 
-export async function getTeamApplicationByEmail(email: string, campaignId: string): Promise<TeamApplication | null> {
+export async function getTeamApplicationByEmail(
+  email: string,
+  campaignId: string,
+): Promise<TeamApplication | null> {
   const { getDocs, query, where } = await import('firebase/firestore');
   const q = query(
     collection(db, COLLECTION),

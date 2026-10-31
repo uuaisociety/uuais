@@ -6,41 +6,40 @@ import admin from 'firebase-admin';
 import { isSafeStoragePath } from '@/lib/admin-file-download';
 import { logAdminAction } from '@/lib/server-audit-log';
 
+const ID_RE = /^[A-Za-z0-9_-]{1,128}$/;
+
 function safeKeyPart(s: string): string {
   return encodeURIComponent(s);
 }
 
-// DELETE body: { id, campaignId, emailNormalized? } — deletes app + lock/limits docs (uid, fallback email) + resume from Storage.
+// DELETE body: { id } — deletes app + lock/limits docs (uid, fallback email) + resume from Storage.
+// The lock/limits keys come from the stored application only, never the request body.
 export async function DELETE(req: NextRequest) {
   try {
     const auth = await requireAdmin(req);
     if (!auth.ok) return authFailureResponse(auth.reason);
 
     const body = await req.json();
-    const { id, campaignId, emailNormalized } = body as {
-      id?: string;
-      campaignId?: string;
-      emailNormalized?: string;
-    };
-    if (!id || !campaignId)
-      return NextResponse.json(
-        { error: 'missing id/campaignId' },
-        { status: 400 },
-      );
+    const { id } = (body ?? {}) as { id?: unknown };
+    if (typeof id !== 'string' || !ID_RE.test(id))
+      return NextResponse.json({ error: 'invalid id' }, { status: 400 });
 
-    // Derive the identity that keyed the lock/limits docs at create time.
-    let identity = emailNormalized || '';
+    // Derive the identity and campaign that keyed the lock/limits docs at create time.
+    let identity = '';
+    let campaignId = '';
     const appRef = adminDb.collection('teamApplications').doc(id);
     const appSnap = await appRef.get();
     if (appSnap.exists) {
       const data = appSnap.data() as {
         uid?: string;
         emailNormalized?: string;
+        campaignId?: string;
         resume?: { path?: string } | null;
       };
       if (typeof data.uid === 'string' && data.uid) identity = data.uid;
       if (!identity && typeof data.emailNormalized === 'string')
         identity = data.emailNormalized;
+      if (typeof data.campaignId === 'string') campaignId = data.campaignId;
 
       // Best-effort resume cleanup from Cloud Storage, and only of a team-application upload.
       if (
@@ -58,26 +57,26 @@ export async function DELETE(req: NextRequest) {
       }
     }
 
-    const lockKey = identity
-      ? `${safeKeyPart(identity)}__${safeKeyPart(campaignId)}`
-      : null;
     const deletes: Promise<unknown>[] = [appRef.delete()];
-    if (lockKey) {
+    if (identity && campaignId) {
+      const lockKey = `${safeKeyPart(identity)}__${safeKeyPart(campaignId)}`;
       deletes.push(
         adminDb.collection('applicationCampaignLocks').doc(lockKey).delete(),
       );
       deletes.push(
         adminDb
           .collection('applicationUserLimits')
-          .doc(safeKeyPart(identity!))
+          .doc(safeKeyPart(identity))
           .delete(),
       );
     }
     await Promise.all(deletes);
+    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
     await logAdminAction({
       action: 'remove',
       adminUid: auth.session.uid,
       path: `teamApplications/${id}`,
+      ip: forwarded || undefined,
     });
 
     return NextResponse.json({ ok: true });

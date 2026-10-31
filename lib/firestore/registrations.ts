@@ -11,8 +11,8 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
-import { Event, EventRegistration } from '@/types';
-import { sendTemplatedEmail } from '@/lib/email';
+import { EventRegistration } from '@/types';
+import { requestAdminEmail } from '@/lib/email';
 
 // ---------------------------------------------------------------------------
 // Batch helper for analytics (avoids N+1 queries over event IDs)
@@ -189,10 +189,7 @@ function randomToken(length = 32): string {
   return out;
 }
 
-export async function inviteRegistrant(
-  regId: string,
-  options?: { baseUrl?: string; expiresInDays?: number },
-): Promise<void> {
+export async function inviteRegistrant(regId: string): Promise<void> {
   const regRef = doc(db, 'registrations', regId);
   const regSnap = await getDoc(regRef);
   if (!regSnap.exists()) throw new Error('Registration not found');
@@ -211,49 +208,9 @@ export async function inviteRegistrant(
     counted,
   } as DocumentData);
 
-  const to = (reg.userEmail as string | null) || null;
-  const name = (reg.userName as string | null) || null;
-  if (!to) return;
-
-  let unsub = false;
-  try {
-    const userId = String(reg.userId || '');
-    if (userId) {
-      const userSnap = await getDoc(doc(db, 'users', userId));
-      const u = userSnap.exists()
-        ? (userSnap.data() as DocumentData)
-        : undefined;
-      unsub = !!u?.unsubscribedFromEmails;
-    }
-  } catch (err) {
-    console.warn('Failed to check unsubscribe status:', err);
-  }
-  if (unsub) return;
-
-  const base =
-    options?.baseUrl ||
-    (typeof window !== 'undefined' ? window.location.origin : '');
-  const link = `${base}/confirm/${token}`;
-  let subject = 'You are invited to confirm your spot';
-  try {
-    const eventId = String(reg.eventId || '');
-    if (eventId) {
-      const eSnap = await getDoc(doc(db, 'events', eventId));
-      const e = eSnap.exists() ? (eSnap.data() as Partial<Event>) : undefined;
-      if (e?.title) subject = `Invitation to ${e.title}`;
-    }
-  } catch (err) {
-    console.warn('Failed to fetch event title for email:', err);
-  }
-  await sendTemplatedEmail({
-    to,
-    subject,
-    templatePath: '/email-templates/eventRegistration.html',
-    variables: {
-      name: name || '',
-      confirm_link: link,
-    },
-  });
+  // The server sends the invitation from the stored registration (address,
+  // token, unsubscribe check), and logs it.
+  await requestAdminEmail('event-invite', regId);
 }
 
 export async function confirmRegistrationByToken(

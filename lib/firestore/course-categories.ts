@@ -127,8 +127,9 @@ export const deleteCategory = async (
     'categories',
     categoryId,
   );
-  await deleteDoc(categoryRef);
 
+  // Mappings first: the rules allow them only while the caller still owns the
+  // category, so deleting the category first would orphan them.
   const categoryCoursesRef = collection(
     db,
     'category_courses',
@@ -138,6 +139,8 @@ export const deleteCategory = async (
   const snapshot = await getDocs(categoryCoursesRef);
   const deletePromises = snapshot.docs.map((docSnap) => deleteDoc(docSnap.ref));
   await Promise.all(deletePromises);
+
+  await deleteDoc(categoryRef);
 };
 
 export const getCategoryCourses = async (

@@ -15,6 +15,11 @@ jest.mock('@/lib/firebase-admin', () => ({
       if (!authUser) throw { code: 'auth/user-not-found' };
       return authUser;
     },
+    // Other accounts' sign-in emails.
+    getUserByEmail: async (address: string) => {
+      if (address === 'bo@uu.se') return { uid: 'u3' };
+      throw { code: 'auth/user-not-found' };
+    },
   },
   adminDb: {
     collection: (name: string) => ({
@@ -85,6 +90,15 @@ describe('collectSubmissions', () => {
             resume: { path: 'team-applications/2.pdf' },
           },
         },
+        // Another account's application that typed the member's email.
+        {
+          id: 't5',
+          data: {
+            uid: 'u2',
+            emailNormalized: 'anna@student.uu.se',
+            campaignId: 'c4',
+          },
+        },
         // A crafted path outside the submission's prefix is never collected.
         {
           id: 't4',
@@ -131,10 +145,20 @@ describe('collectSubmissions', () => {
       ],
       showcase_usage: [{ id: 'u1_vote', data: { uid: 'u1' } }],
       partnerAccounts: [{ id: 'anna@student.uu.se', data: { uid: 'u1' } }],
+      registrations: [
+        { id: 'r1', data: { userId: 'u1', userEmail: ' Anna.Alt@Gmail.com ' } },
+        // An address typed in that is another account's sign-in email.
+        { id: 'r2', data: { userId: 'u1', userEmail: 'bo@uu.se' } },
+      ],
       mail: [
         { id: 'm1', data: { to: 'anna@student.uu.se' } },
         { id: 'm2', data: { to: ['anna@student.uu.se'] } },
         { id: 'm3', data: { to: ['anna@student.uu.se', 'bo@uu.se'] } },
+        { id: 'm4', data: { to: 'Anna@Student.uu.se' } },
+        { id: 'm5', data: { to: 'Anna.Alt@Gmail.com' } },
+        { id: 'm6', data: { to: 'anna.alt@gmail.com' } },
+        { id: 'm7', data: { to: 'bo@uu.se' } },
+        { id: 'm8', data: { to: 'anna@student.uu.se', cc: 'bo@uu.se' } },
       ],
       showcaseVotes: [{ id: 'p1_u9', data: { projectId: 'p1', userId: 'u9' } }],
     };
@@ -162,6 +186,9 @@ describe('collectSubmissions', () => {
         'boardApplications/b1',
         'mail/m1',
         'mail/m2',
+        'mail/m4',
+        'mail/m5',
+        'mail/m6',
         'partnerAccounts/anna@student.uu.se',
         'showcaseProjects/p1',
         'showcaseProjects/p2',
@@ -172,6 +199,19 @@ describe('collectSubmissions', () => {
         'teamApplications/t4',
       ].sort(),
     );
+  });
+
+  it('leaves another account’s application that typed the member’s email', async () => {
+    const { refs } = await collectSubmissions('u1');
+    expect(paths(refs)).not.toContain('teamApplications/t5');
+    expect(paths(refs)).not.toContain('applicationCampaignLocks/u2__c4');
+  });
+
+  it('never deletes mail also sent to others or to another account’s address', async () => {
+    const { refs } = await collectSubmissions('u1');
+    expect(paths(refs)).not.toContain('mail/m3');
+    expect(paths(refs)).not.toContain('mail/m7');
+    expect(paths(refs)).not.toContain('mail/m8');
   });
 
   it('never matches by an unverified email, so nobody can erase another person’s application', async () => {

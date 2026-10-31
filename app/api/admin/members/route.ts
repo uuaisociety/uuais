@@ -4,7 +4,7 @@ import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { logAdminAction } from '@/lib/server-audit-log';
 import { eraseAccount } from '@/lib/account-erasure';
-import { adminAuth } from '@/lib/firebase-admin';
+import { adminAuth, adminDb } from '@/lib/firebase-admin';
 
 export const runtime = 'nodejs';
 
@@ -59,6 +59,21 @@ export async function DELETE(req: NextRequest) {
     if (targetIsAdmin && !auth.session.isSuperAdmin) {
       return NextResponse.json(
         { error: 'Only a superAdmin can delete an admin account.' },
+        { status: 403 },
+      );
+    }
+    // Partner accounts are managed with the partner tool, not from here.
+    const partner = await adminDb
+      .collection('partnerAccounts')
+      .where('uid', '==', uid)
+      .limit(1)
+      .get();
+    if (!partner.empty) {
+      return NextResponse.json(
+        {
+          error:
+            'This is a partner account. Remove it with `tools/partnerAccess.ts remove` instead.',
+        },
         { status: 403 },
       );
     }
