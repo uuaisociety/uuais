@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Card, CardContent, CardHeader } from "@/components/ui/Card";
-import { Row } from "./AnalyticsShared";
-import type { Event, BlogPost, Job, TeamMember, BoardPosition } from "@/types";
-import type { BoardApplication } from "@/lib/firestore/boardApplications";
-import type { MemberAnalytics } from "@/lib/firestore/member-analytics";
-import type { EventFunnel } from "@/lib/firestore/event-funnel";
-import type { AIAnalytics } from "@/lib/firestore/ai-analytics";
+import React from 'react';
+import Link from 'next/link';
+import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { Row } from './AnalyticsShared';
+import type { Event, BlogPost, Job, TeamMember, BoardPosition } from '@/types';
+import type { BoardApplication } from '@/lib/firestore/boardApplications';
+import type { MemberAnalytics } from '@/lib/firestore/member-analytics';
+import type { EventFunnel } from '@/lib/firestore/event-funnel';
+import type { AIAnalytics } from '@/lib/firestore/ai-analytics';
 
 interface Props {
   events: Event[];
@@ -28,53 +29,103 @@ interface Props {
 }
 
 const OverviewTab: React.FC<Props> = ({
-  events, blogs, jobs, teamMembers, boardPositions, applicants,
-  memberAnalytics, funnelData, aiAnalytics,
-  totalClicks, totalBlogReads, totalJobClicks,
+  events,
+  blogs,
+  jobs,
+  teamMembers,
+  boardPositions,
+  applicants,
+  memberAnalytics,
+  funnelData,
+  aiAnalytics,
+  totalClicks,
+  totalBlogReads,
+  totalJobClicks,
 }) => (
   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-foreground">Events</h3></CardHeader>
+      <CardHeader>
+        <h3 className="text-lg font-semibold text-foreground">Events</h3>
+      </CardHeader>
       <CardContent className="space-y-3">
         <Row label="Total events" value={events.length} />
         <Row label="Unique clicks" value={totalClicks} />
-        <Row label="Registrations" value={events.reduce((s, e) => s + (e.currentRegistrations ?? 0), 0)} />
-        <Row label="Avg view→reg" value={funnelData.length ? `${Math.round(funnelData.reduce((s, f) => s + f.viewToRegPct, 0) / funnelData.length)}%` : "—"} />
+        <Row
+          label="Registrations"
+          value={events.reduce((s, e) => s + (e.currentRegistrations ?? 0), 0)}
+        />
+        <Row
+          label="Avg view→reg"
+          value={
+            funnelData.length
+              ? `${Math.round(funnelData.reduce((s, f) => s + f.viewToRegPct, 0) / funnelData.length)}%`
+              : '—'
+          }
+        />
       </CardContent>
     </Card>
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-foreground">Newsletter</h3></CardHeader>
+      <CardHeader>
+        <h3 className="text-lg font-semibold text-foreground">Newsletter</h3>
+      </CardHeader>
       <CardContent className="space-y-3">
         <Row label="Total posts" value={blogs.length} />
         <Row label="Unique reads" value={totalBlogReads} />
-        <Row label="Published" value={`${blogs.filter((b) => b.published).length} / ${blogs.length}`} />
+        <Row
+          label="Published"
+          value={`${blogs.filter((b) => b.published).length} / ${blogs.length}`}
+        />
       </CardContent>
     </Card>
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-foreground">Members</h3></CardHeader>
+      <CardHeader>
+        <h3 className="text-lg font-semibold text-foreground">Members</h3>
+      </CardHeader>
       <CardContent className="space-y-3">
-        <Row label="Total users" value={memberAnalytics?.totalUsers ?? "—"} />
-        <Row label="Marketing opt-in" value={memberAnalytics?.marketingOptIn ?? "—"} />
-        <Row label="Newsletter opt-in" value={memberAnalytics?.newsletter ?? "—"} />
+        <Row label="Total users" value={memberAnalytics?.totalUsers ?? '—'} />
+        <Row
+          label="Marketing opt-in"
+          value={memberAnalytics?.marketingOptIn ?? '—'}
+        />
+        <Row
+          label="Newsletter opt-in"
+          value={memberAnalytics?.newsletter ?? '—'}
+        />
+        <Row label="Shared CVs" value={memberAnalytics?.sharedCvs ?? '—'} />
+        <Link
+          href="/partners/cvs"
+          className="inline-block text-sm text-primary hover:brightness-110 hover:underline"
+        >
+          View shared CVs →
+        </Link>
       </CardContent>
     </Card>
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-foreground">Jobs</h3></CardHeader>
+      <CardHeader>
+        <h3 className="text-lg font-semibold text-foreground">Jobs</h3>
+      </CardHeader>
       <CardContent className="space-y-3">
         <Row label="Total postings" value={jobs.length} />
         <Row label="Apply clicks" value={totalJobClicks} />
       </CardContent>
     </Card>
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-foreground">AI Assistant</h3></CardHeader>
+      <CardHeader>
+        <h3 className="text-lg font-semibold text-foreground">AI Assistant</h3>
+      </CardHeader>
       <CardContent className="space-y-3">
-        <Row label="Total chats" value={aiAnalytics?.totalChats ?? "—"} />
-        <Row label="Unique users" value={aiAnalytics?.uniqueUsers ?? "—"} />
-        <Row label="Avg messages/chat" value={aiAnalytics?.avgMessagesPerChat ?? "—"} />
+        <Row label="Total chats" value={aiAnalytics?.totalChats ?? '—'} />
+        <Row label="Unique users" value={aiAnalytics?.uniqueUsers ?? '—'} />
+        <Row
+          label="Avg messages/chat"
+          value={aiAnalytics?.avgMessagesPerChat ?? '—'}
+        />
       </CardContent>
     </Card>
     <Card>
-      <CardHeader><h3 className="text-lg font-semibold text-foreground">Team</h3></CardHeader>
+      <CardHeader>
+        <h3 className="text-lg font-semibold text-foreground">Team</h3>
+      </CardHeader>
       <CardContent className="space-y-3">
         <Row label="Team members" value={teamMembers.length} />
         <Row label="Board positions" value={boardPositions.length} />

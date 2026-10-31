@@ -118,6 +118,11 @@
     --chart-4: oklch(0.6 0.12 165);
     --chart-5: oklch(0.55 0.16 305);
 
+    /* Admin analytics charts: CVD-checked against the card surface (blue, orange). */
+    --viz-1: #2a78d6;
+    --viz-2: #eb6834;
+    --viz-muted: #b9b7b0;
+
     --sidebar: oklch(0.975 0.004 95);
     --sidebar-foreground: oklch(0.18 0.012 265);
     --sidebar-primary: oklch(0.565 0.208 27.5);
@@ -194,6 +199,10 @@
     --chart-3: oklch(0.78 0.15 85);
     --chart-4: oklch(0.7 0.13 165);
     --chart-5: oklch(0.66 0.18 305);
+
+    --viz-1: #3987e5;
+    --viz-2: #d95926;
+    --viz-muted: #4a4c52;
 
     --sidebar: oklch(0.185 0.013 265);
     --sidebar-foreground: oklch(0.96 0.003 95);

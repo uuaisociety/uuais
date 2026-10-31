@@ -33,24 +33,29 @@ export function shortDate(iso: string | undefined | null): string {
   return new Date(iso).toLocaleDateString();
 }
 
-export function topN(
-  map: Record<string, number>,
-  n: number,
-): { name: string; value: number }[] {
-  return Object.entries(map)
-    .sort(([, a], [, b]) => b - a)
-    .slice(0, n)
-    .map(([name, value]) => ({ name, value }));
-}
-
 export function cumulativeSignups(
   monthly: { month: string; count: number }[],
 ): { month: string; signups: number; cumulative: number }[] {
+  if (monthly.length === 0) return [];
+  // Months with no signups are absent from `monthly`; fill them in as zeros so
+  // the time axis is even.
+  const counts = new Map(monthly.map((m) => [m.month, m.count]));
+  const sorted = [...counts.keys()].sort();
+  let [y, mo] = sorted[0].split('-').map(Number);
+  const [endY, endMo] = sorted[sorted.length - 1].split('-').map(Number);
+  const out: { month: string; signups: number; cumulative: number }[] = [];
   let running = 0;
-  return monthly.map((m) => {
-    running += m.count;
-    return { month: m.month, signups: m.count, cumulative: running };
-  });
+  while (y < endY || (y === endY && mo <= endMo)) {
+    const month = `${y}-${String(mo).padStart(2, '0')}`;
+    const signups = counts.get(month) ?? 0;
+    running += signups;
+    out.push({ month, signups, cumulative: running });
+    if (++mo > 12) {
+      mo = 1;
+      y++;
+    }
+  }
+  return out;
 }
 
 export function eventMonthKey(iso: string): string {

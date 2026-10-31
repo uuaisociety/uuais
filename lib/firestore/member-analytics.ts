@@ -1,3 +1,5 @@
+import { collection, getCountFromServer } from 'firebase/firestore';
+import { db } from '@/lib/firebase-client';
 import { listUsers } from './users';
 
 export interface MemberAnalytics {
@@ -7,6 +9,8 @@ export interface MemberAnalytics {
   analyticsOptIn: number;
   lookingForJob: number;
   newsletter: number;
+  /** Members with a CV shared to partners (cvs/{uid} docs). */
+  sharedCvs: number;
   heardOfUs: Record<string, number>;
   gender: Record<string, number>;
   studentStatus: Record<string, number>;
@@ -19,7 +23,10 @@ function getMonthKey(iso: string): string {
 }
 
 export async function getMemberAnalytics(): Promise<MemberAnalytics> {
-  const users = await listUsers();
+  const [users, cvCount] = await Promise.all([
+    listUsers(),
+    getCountFromServer(collection(db, 'cvs')),
+  ]);
 
   let marketingOptIn = 0;
   let partnerContactOptIn = 0;
@@ -65,6 +72,7 @@ export async function getMemberAnalytics(): Promise<MemberAnalytics> {
     analyticsOptIn,
     lookingForJob,
     newsletter,
+    sharedCvs: cvCount.data().count,
     heardOfUs,
     gender,
     studentStatus,

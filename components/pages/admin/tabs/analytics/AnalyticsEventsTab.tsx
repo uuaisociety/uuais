@@ -1,17 +1,26 @@
-"use client";
+'use client';
 
-import React, { useCallback, useState } from "react";
-import { Card, CardContent, CardHeader } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { Download, ExternalLink, ArrowLeft } from "lucide-react";
+import React, { useCallback, useState } from 'react';
+import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Download, ExternalLink, ArrowLeft } from 'lucide-react';
+import { downloadCsv, shortDate } from './AnalyticsShared';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-} from "recharts";
-import { downloadCsv, shortDate } from "./AnalyticsShared";
-import { getEventDetailAnalytics, type EventDetailAnalytics } from "@/lib/firestore/registration-analytics";
-import type { EventFunnel } from "@/lib/firestore/event-funnel";
-import type { RegistrationAnalytics } from "@/lib/firestore/registration-analytics";
-import type { Event } from "@/types";
+  ChartCard,
+  RankedBars,
+  TimeAreaChart,
+  VIZ,
+  fillDays,
+  rankWithOther,
+  seriesSummary,
+} from './AnalyticsCharts';
+import {
+  getEventDetailAnalytics,
+  type EventDetailAnalytics,
+} from '@/lib/firestore/registration-analytics';
+import type { EventFunnel } from '@/lib/firestore/event-funnel';
+import type { RegistrationAnalytics } from '@/lib/firestore/registration-analytics';
+import type { Event } from '@/types';
 
 interface Props {
   funnelData: EventFunnel[];
@@ -20,26 +29,28 @@ interface Props {
 }
 
 const statusLabel: Record<string, string> = {
-  registered: "Registered",
-  waitlist: "Waitlist",
-  invited: "Invited",
-  confirmed: "Confirmed",
-  declined: "Declined",
-  cancelled: "Cancelled",
+  registered: 'Registered',
+  waitlist: 'Waitlist',
+  invited: 'Invited',
+  confirmed: 'Confirmed',
+  declined: 'Declined',
+  cancelled: 'Cancelled',
 };
 
 const statusColor: Record<string, string> = {
-  registered: "text-primary",
-  waitlist: "text-amber-600",
-  invited: "text-purple-600",
-  confirmed: "text-green-600",
-  declined: "text-red-600",
-  cancelled: "text-muted-foreground",
+  registered: 'text-primary',
+  waitlist: 'text-amber-600',
+  invited: 'text-purple-600',
+  confirmed: 'text-green-600',
+  declined: 'text-red-600',
+  cancelled: 'text-muted-foreground',
 };
 
 const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
-  const [detailData, setDetailData] = useState<EventDetailAnalytics | null>(null);
+  const [detailData, setDetailData] = useState<EventDetailAnalytics | null>(
+    null,
+  );
   const [detailLoading, setDetailLoading] = useState(false);
 
   const selectedEvent = selectedEventId
@@ -67,17 +78,39 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
 
   const downloadFunnelCsv = useCallback(() => {
     const rows = [
-      ["Event", "Clicks", "Registrations", "Attended", "View→Reg %", "Reg→Attend %",
-       "Registered", "Waitlist", "Invited", "Confirmed", "Declined", "Cancelled"],
+      [
+        'Event',
+        'Clicks',
+        'Registrations',
+        'Attended',
+        'View→Reg %',
+        'Reg→Attend %',
+        'Registered',
+        'Waitlist',
+        'Invited',
+        'Confirmed',
+        'Declined',
+        'Cancelled',
+      ],
       ...funnelData.map((f) => [
-        f.title, String(f.clicks), String(f.registrations), String(f.attended),
-        `${f.viewToRegPct}%`, `${f.regToAttendPct}%`,
-        String(f.statusBreakdown.registered), String(f.statusBreakdown.waitlist),
-        String(f.statusBreakdown.invited), String(f.statusBreakdown.confirmed),
-        String(f.statusBreakdown.declined), String(f.statusBreakdown.cancelled),
+        f.title,
+        String(f.clicks),
+        String(f.registrations),
+        String(f.attended),
+        `${f.viewToRegPct}%`,
+        `${f.regToAttendPct}%`,
+        String(f.statusBreakdown.registered),
+        String(f.statusBreakdown.waitlist),
+        String(f.statusBreakdown.invited),
+        String(f.statusBreakdown.confirmed),
+        String(f.statusBreakdown.declined),
+        String(f.statusBreakdown.cancelled),
       ]),
     ];
-    downloadCsv(rows, `event-funnel-${new Date().toISOString().slice(0, 10)}.csv`);
+    downloadCsv(
+      rows,
+      `event-funnel-${new Date().toISOString().slice(0, 10)}.csv`,
+    );
   }, [funnelData]);
 
   if (selectedEventId && selectedEvent) {
@@ -93,7 +126,9 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
           Back to all events
         </Button>
 
-        <h3 className="text-xl font-bold text-foreground">{selectedEvent.title}</h3>
+        <h3 className="text-xl font-bold text-foreground">
+          {selectedEvent.title}
+        </h3>
 
         {detailLoading && (
           <div className="animate-pulse space-y-6">
@@ -110,91 +145,78 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
           <div className="space-y-6">
             {/* Status breakdown cards */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-              {Object.entries(detailData.statusCounts).map(([status, count]) => (
-                <Card key={status}>
-                  <CardContent className="p-4 text-center">
-                    <p className={`text-lg font-bold ${statusColor[status] || "text-foreground"}`}>
-                      {count}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      {statusLabel[status] || status}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
+              {Object.entries(detailData.statusCounts).map(
+                ([status, count]) => (
+                  <Card key={status}>
+                    <CardContent className="p-4 text-center">
+                      <p
+                        className={`text-lg font-bold ${statusColor[status] || 'text-foreground'}`}
+                      >
+                        {count}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-0.5">
+                        {statusLabel[status] || status}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ),
+              )}
             </div>
 
             {/* Registrations per day */}
-            {detailData.registrationsPerDay.length > 0 && (
-              <Card>
-                <CardHeader><h4 className="font-semibold text-foreground">Registrations Per Day</h4></CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={200}>
-                    <LineChart data={detailData.registrationsPerDay} margin={{ left: 10, right: 10 }}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                      <YAxis allowDecimals={false} />
-                      <Tooltip />
-                      <Line type="monotone" dataKey="count" name="Registrations" stroke="#3b82f6" strokeWidth={2} dot={false} />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            )}
+            {detailData.registrationsPerDay.length > 0 &&
+              (() => {
+                const perDay = fillDays(detailData.registrationsPerDay, [
+                  'count',
+                ]);
+                return (
+                  <ChartCard
+                    title="Registrations per day"
+                    summary={seriesSummary(perDay, 'count', 'registrations')}
+                  >
+                    <TimeAreaChart
+                      data={perDay}
+                      xKey="date"
+                      series={[
+                        {
+                          key: 'count',
+                          name: 'Registrations',
+                          color: VIZ.primary,
+                        },
+                      ]}
+                    />
+                  </ChartCard>
+                );
+              })()}
 
             {/* Registrant demographics */}
             {(Object.keys(detailData.memberDemographics.gender).length > 0 ||
-              Object.keys(detailData.memberDemographics.studentStatus).length > 0) && (
+              Object.keys(detailData.memberDemographics.studentStatus).length >
+                0) && (
               <div className="grid md:grid-cols-2 gap-6">
-                {Object.keys(detailData.memberDemographics.gender).length > 0 && (
-                  <Card>
-                    <CardHeader><h4 className="font-semibold text-foreground">Gender</h4></CardHeader>
-                    <CardContent>
-                      <div className="space-y-1.5">
-                        {Object.entries(detailData.memberDemographics.gender)
-                          .sort(([, a], [, b]) => b - a)
-                          .map(([label, count]) => {
-                            const total = Object.values(detailData.memberDemographics.gender).reduce((s, c) => s + c, 0);
-                            const pct = total > 0 ? Math.round((count / total) * 100) : 0;
-                            return (
-                              <div key={label} className="flex items-center gap-3 text-sm">
-                                <span className="flex-1 text-foreground/80 capitalize">{label}</span>
-                                <span className="font-semibold text-foreground w-8 text-right">{count}</span>
-                                <div className="w-20 h-2 bg-foreground/[0.06] rounded-full overflow-hidden shrink-0">
-                                  <div className="h-full bg-blue-500 rounded-full transition-all" style={{ width: `${pct}%` }} />
-                                </div>
-                                <span className="text-xs text-muted-foreground w-10 text-right">{pct}%</span>
-                              </div>
-                            );
-                          })}
-                      </div>
-                    </CardContent>
-                  </Card>
+                {Object.keys(detailData.memberDemographics.gender).length >
+                  0 && (
+                  <ChartCard title="Gender">
+                    <RankedBars
+                      data={rankWithOther(
+                        detailData.memberDemographics.gender,
+                        4,
+                      )}
+                      capitalize
+                    />
+                  </ChartCard>
                 )}
-                {Object.keys(detailData.memberDemographics.studentStatus).length > 0 && (
-                  <Card>
-                    <CardHeader><h4 className="font-semibold text-foreground">Student Status</h4></CardHeader>
-                    <CardContent>
-                      <div className="space-y-1.5">
-                        {Object.entries(detailData.memberDemographics.studentStatus)
-                          .sort(([, a], [, b]) => b - a)
-                          .map(([label, count]) => {
-                            const total = Object.values(detailData.memberDemographics.studentStatus).reduce((s, c) => s + c, 0);
-                            const pct = total > 0 ? Math.round((count / total) * 100) : 0;
-                            return (
-                              <div key={label} className="flex items-center gap-3 text-sm">
-                                <span className="flex-1 text-foreground/80 capitalize">{label}</span>
-                                <span className="font-semibold text-foreground w-8 text-right">{count}</span>
-                                <div className="w-20 h-2 bg-foreground/[0.06] rounded-full overflow-hidden shrink-0">
-                                  <div className="h-full bg-green-500 rounded-full transition-all" style={{ width: `${pct}%` }} />
-                                </div>
-                                <span className="text-xs text-muted-foreground w-10 text-right">{pct}%</span>
-                              </div>
-                            );
-                          })}
-                      </div>
-                    </CardContent>
-                  </Card>
+                {Object.keys(detailData.memberDemographics.studentStatus)
+                  .length > 0 && (
+                  <ChartCard title="Student status">
+                    <RankedBars
+                      data={rankWithOther(
+                        detailData.memberDemographics.studentStatus,
+                        4,
+                      )}
+                      capitalize
+                    />
+                  </ChartCard>
                 )}
               </div>
             )}
@@ -202,45 +224,23 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
             {/* Answer distributions */}
             {detailData.questions.length > 0 && (
               <div className="grid md:grid-cols-2 gap-6">
-                {detailData.questions.map((q) => {
-                  const entries = Object.entries(q.answers).sort(([, a], [, b]) => b - a);
-                  const total = entries.reduce((s, [, c]) => s + c, 0);
-                  return (
-                    <Card key={q.questionId}>
-                      <CardHeader>
-                        <h4 className="font-semibold text-foreground text-sm">
-                          {q.questionText}
-                        </h4>
-                        <p className="text-xs text-muted-foreground capitalize">{q.type} · {detailData.total} responses</p>
-                      </CardHeader>
-                      <CardContent>
-                        {entries.length === 0 && (
-                          <p className="text-sm text-muted-foreground italic">No answers</p>
-                        )}
-                        {entries.length > 0 && (
-                          <div className="space-y-1.5">
-                            {entries.map(([answer, count]) => {
-                              const pct = total > 0 ? Math.round((count / total) * 100) : 0;
-                              return (
-                                <div key={answer} className="flex items-center gap-3 text-sm">
-                                  <span className="flex-1 text-foreground/80 truncate">{answer}</span>
-                                  <span className="font-semibold text-foreground w-8 text-right">{count}</span>
-                                  <div className="w-20 h-2 bg-foreground/[0.06] rounded-full overflow-hidden shrink-0">
-                                    <div
-                                      className="h-full bg-red-500 rounded-full transition-all"
-                                      style={{ width: `${pct}%` }}
-                                    />
-                                  </div>
-                                  <span className="text-xs text-muted-foreground w-10 text-right">{pct}%</span>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  );
-                })}
+                {detailData.questions.map((q) => (
+                  <ChartCard
+                    key={q.questionId}
+                    title={q.questionText}
+                    summary={
+                      <span className="capitalize">
+                        {q.type} · {detailData.total} responses
+                      </span>
+                    }
+                  >
+                    <RankedBars
+                      data={Object.entries(q.answers)
+                        .sort(([, a], [, b]) => b - a)
+                        .map(([name, value]) => ({ name, value }))}
+                    />
+                  </ChartCard>
+                ))}
               </div>
             )}
 
@@ -253,7 +253,9 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
         )}
 
         {!detailLoading && !detailData && (
-          <p className="text-sm text-muted-foreground italic">Failed to load event details.</p>
+          <p className="text-sm text-muted-foreground italic">
+            Failed to load event details.
+          </p>
         )}
       </div>
     );
@@ -268,7 +270,12 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
             <h3 className="text-lg font-semibold text-foreground">
               Event Funnel — Click → Registration → Attendance
             </h3>
-            <Button size="sm" variant="outline" icon={Download} onClick={downloadFunnelCsv}>
+            <Button
+              size="sm"
+              variant="outline"
+              icon={Download}
+              onClick={downloadFunnelCsv}
+            >
               CSV
             </Button>
           </div>
@@ -298,17 +305,35 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                     <td className="py-2 pr-4 font-medium text-primary hover:brightness-110 hover:underline whitespace-nowrap">
                       {f.title}
                     </td>
-                    <td className="py-2 pr-4 text-foreground/80 whitespace-nowrap">{shortDate(f.date)}</td>
+                    <td className="py-2 pr-4 text-foreground/80 whitespace-nowrap">
+                      {shortDate(f.date)}
+                    </td>
                     <td className="py-2 pr-4 whitespace-nowrap">{f.clicks}</td>
-                    <td className="py-2 pr-4 whitespace-nowrap">{f.registrations}</td>
-                    <td className="py-2 pr-4 whitespace-nowrap">{f.attended}</td>
                     <td className="py-2 pr-4 whitespace-nowrap">
-                      <span className={f.viewToRegPct > 30 ? "text-green-600" : "text-amber-600"}>
+                      {f.registrations}
+                    </td>
+                    <td className="py-2 pr-4 whitespace-nowrap">
+                      {f.attended}
+                    </td>
+                    <td className="py-2 pr-4 whitespace-nowrap">
+                      <span
+                        className={
+                          f.viewToRegPct > 30
+                            ? 'text-green-600'
+                            : 'text-amber-600'
+                        }
+                      >
                         {f.viewToRegPct}%
                       </span>
                     </td>
                     <td className="py-2 pr-4 whitespace-nowrap">
-                      <span className={f.regToAttendPct > 50 ? "text-green-600" : "text-amber-600"}>
+                      <span
+                        className={
+                          f.regToAttendPct > 50
+                            ? 'text-green-600'
+                            : 'text-amber-600'
+                        }
+                      >
                         {f.regToAttendPct}%
                       </span>
                     </td>
@@ -316,7 +341,10 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                       {(() => {
                         const evt = events.find((e) => e.id === f.eventId);
                         return evt?.feedbackFormUrl ? (
-                          <a href={evt.feedbackFormUrl} target="_blank" rel="noreferrer"
+                          <a
+                            href={evt.feedbackFormUrl}
+                            target="_blank"
+                            rel="noreferrer"
                             className="inline-flex items-center gap-1 text-primary hover:brightness-110 hover:underline"
                             onClick={(e) => e.stopPropagation()}
                           >
@@ -331,7 +359,12 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                 ))}
                 {funnelData.length === 0 && (
                   <tr>
-                    <td colSpan={8} className="py-4 text-muted-foreground text-center">No events found</td>
+                    <td
+                      colSpan={8}
+                      className="py-4 text-muted-foreground text-center"
+                    >
+                      No events found
+                    </td>
                   </tr>
                 )}
               </tbody>
@@ -343,7 +376,11 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
       {regAnalytics && (
         <div className="grid md:grid-cols-2 gap-6">
           <Card>
-            <CardHeader><h4 className="font-semibold text-foreground">Registration Status Across Events</h4></CardHeader>
+            <CardHeader>
+              <h4 className="font-semibold text-foreground">
+                Registration Status Across Events
+              </h4>
+            </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <table className="min-w-full text-sm">
@@ -359,45 +396,67 @@ const EventsTab: React.FC<Props> = ({ funnelData, events, regAnalytics }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {Object.entries(regAnalytics.statusBreakdownPerEvent).map(([eid, s]) => {
-                      const evt = events.find((e) => e.id === eid);
-                      return (
-                        <tr key={eid} className="border-b border-border">
-                          <td className="py-2 pr-4 font-medium text-foreground whitespace-nowrap">{evt?.title || eid.slice(0, 8)}</td>
-                          <td className="py-2 pr-4 whitespace-nowrap">{s.registered}</td>
-                          <td className="py-2 pr-4 whitespace-nowrap">{s.waitlist}</td>
-                          <td className="py-2 pr-4 whitespace-nowrap">{s.invited}</td>
-                          <td className="py-2 pr-4 whitespace-nowrap">{s.confirmed}</td>
-                          <td className="py-2 pr-4 whitespace-nowrap">{s.declined}</td>
-                          <td className="py-2 pr-4 whitespace-nowrap">{s.cancelled}</td>
-                        </tr>
-                      );
-                    })}
+                    {Object.entries(regAnalytics.statusBreakdownPerEvent).map(
+                      ([eid, s]) => {
+                        const evt = events.find((e) => e.id === eid);
+                        return (
+                          <tr key={eid} className="border-b border-border">
+                            <td className="py-2 pr-4 font-medium text-foreground whitespace-nowrap">
+                              {evt?.title || eid.slice(0, 8)}
+                            </td>
+                            <td className="py-2 pr-4 whitespace-nowrap">
+                              {s.registered}
+                            </td>
+                            <td className="py-2 pr-4 whitespace-nowrap">
+                              {s.waitlist}
+                            </td>
+                            <td className="py-2 pr-4 whitespace-nowrap">
+                              {s.invited}
+                            </td>
+                            <td className="py-2 pr-4 whitespace-nowrap">
+                              {s.confirmed}
+                            </td>
+                            <td className="py-2 pr-4 whitespace-nowrap">
+                              {s.declined}
+                            </td>
+                            <td className="py-2 pr-4 whitespace-nowrap">
+                              {s.cancelled}
+                            </td>
+                          </tr>
+                        );
+                      },
+                    )}
                   </tbody>
                 </table>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader><h4 className="font-semibold text-foreground">Registrations Per Day</h4></CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={regAnalytics.registrationsPerDay} margin={{ left: 10, right: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                  <YAxis allowDecimals={false} />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="count" name="Registrations" stroke="#3b82f6" strokeWidth={2} dot={false} />
-                </LineChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
+          {(() => {
+            const perDay = fillDays(regAnalytics.registrationsPerDay, [
+              'count',
+            ]);
+            return (
+              <ChartCard
+                title="Registrations per day"
+                summary={seriesSummary(perDay, 'count', 'registrations')}
+              >
+                <TimeAreaChart
+                  data={perDay}
+                  xKey="date"
+                  series={[
+                    { key: 'count', name: 'Registrations', color: VIZ.primary },
+                  ]}
+                />
+              </ChartCard>
+            );
+          })()}
         </div>
       )}
 
       <p className="text-xs text-muted-foreground">
-        Clicks are deduped client-side per browser (cookie-consent gated). Click an event to see detailed registration answers.
+        Clicks are deduped client-side per browser (cookie-consent gated). Click
+        an event to see detailed registration answers.
       </p>
     </div>
   );

@@ -1,12 +1,16 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
+import { StatCard } from './AnalyticsShared';
 import {
-  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-} from "recharts";
-import { StatCard } from "./AnalyticsShared";
-import type { AIAnalytics } from "@/lib/firestore/ai-analytics";
-import { Card, CardContent, CardHeader } from "@/components/ui/Card";
+  ChartCard,
+  RankedBars,
+  TimeAreaChart,
+  VIZ,
+  fillDays,
+  seriesSummary,
+} from './AnalyticsCharts';
+import type { AIAnalytics } from '@/lib/firestore/ai-analytics';
 
 interface Props {
   aiAnalytics: AIAnalytics | null;
@@ -16,59 +20,60 @@ const AITab: React.FC<Props> = ({ aiAnalytics }) => (
   <div className="space-y-6">
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <StatCard title="Total Chats" value={aiAnalytics?.totalChats ?? 0} />
-      <StatCard title="Total Messages" value={aiAnalytics?.totalMessages ?? 0} />
+      <StatCard
+        title="Total Messages"
+        value={aiAnalytics?.totalMessages ?? 0}
+      />
       <StatCard title="Unique Users" value={aiAnalytics?.uniqueUsers ?? 0} />
-      <StatCard title="Avg Msgs/Chat" value={aiAnalytics?.avgMessagesPerChat ?? 0} />
+      <StatCard
+        title="Avg Msgs/Chat"
+        value={aiAnalytics?.avgMessagesPerChat ?? 0}
+      />
     </div>
 
-    {aiAnalytics && (
-      <div className="grid md:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader><h4 className="font-semibold text-foreground">Chats Per Day</h4></CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={200}>
-              <LineChart data={aiAnalytics.chatsPerDay} margin={{ left: 10, right: 10 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                <YAxis allowDecimals={false} />
-                <Tooltip />
-                <Line type="monotone" dataKey="count" name="Chats" stroke="#a855f7" strokeWidth={2} dot={false} />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader><h4 className="font-semibold text-foreground">Messages Per Day</h4></CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={200}>
-              <LineChart data={aiAnalytics.messagesPerDay} margin={{ left: 10, right: 10 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                <YAxis allowDecimals={false} />
-                <Tooltip />
-                <Line type="monotone" dataKey="count" name="Messages" stroke="#6366f1" strokeWidth={2} dot={false} />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card className="md:col-span-2">
-          <CardHeader><h4 className="font-semibold text-foreground">Top Recommended Courses</h4></CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={250}>
-              <BarChart data={aiAnalytics.topRecommendedCourses} layout="vertical" margin={{ left: 20, right: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" />
-                <YAxis type="category" dataKey="courseId" width={180} tick={{ fontSize: 11 }} />
-                <Tooltip />
-                <Bar dataKey="count" fill="#a855f7" radius={[0, 4, 4, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-      </div>
-    )}
+    {aiAnalytics &&
+      (() => {
+        const chats = fillDays(aiAnalytics.chatsPerDay, ['count']);
+        const messages = fillDays(aiAnalytics.messagesPerDay, ['count']);
+        return (
+          <div className="grid md:grid-cols-2 gap-6">
+            <ChartCard
+              title="Chats per day"
+              summary={seriesSummary(chats, 'count', 'chats')}
+            >
+              <TimeAreaChart
+                data={chats}
+                xKey="date"
+                series={[{ key: 'count', name: 'Chats', color: VIZ.primary }]}
+              />
+            </ChartCard>
+            <ChartCard
+              title="Messages per day"
+              summary={seriesSummary(messages, 'count', 'messages')}
+            >
+              <TimeAreaChart
+                data={messages}
+                xKey="date"
+                series={[
+                  { key: 'count', name: 'Messages', color: VIZ.primary },
+                ]}
+              />
+            </ChartCard>
+            <ChartCard
+              className="md:col-span-2"
+              title="Top recommended courses"
+              summary="Share of recommendations among the courses listed"
+            >
+              <RankedBars
+                data={aiAnalytics.topRecommendedCourses.map((c) => ({
+                  name: c.courseId,
+                  value: c.count,
+                }))}
+              />
+            </ChartCard>
+          </div>
+        );
+      })()}
 
     {!aiAnalytics && (
       <p className="text-muted-foreground text-sm italic">

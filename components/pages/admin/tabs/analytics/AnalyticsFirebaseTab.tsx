@@ -1,13 +1,18 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Flame } from "lucide-react";
+import React from 'react';
+import { Flame } from 'lucide-react';
+import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { StatCard } from './AnalyticsShared';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
-} from "recharts";
-import { Card, CardContent, CardHeader } from "@/components/ui/Card";
-import { StatCard } from "./AnalyticsShared";
-import type { FirebaseAnalyticsResponse } from "@/lib/firestore/firebase-analytics";
+  ChartCard,
+  Legend,
+  TimeAreaChart,
+  VIZ,
+  fillDays,
+  seriesSummary,
+} from './AnalyticsCharts';
+import type { FirebaseAnalyticsResponse } from '@/lib/firestore/firebase-analytics';
 
 interface Props {
   firebaseData: FirebaseAnalyticsResponse | null;
@@ -25,19 +30,47 @@ const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
         <CardContent className="p-6 space-y-3">
           <div className="flex items-center gap-3 text-amber-600">
             <Flame className="h-6 w-6" />
-            <h3 className="text-lg font-semibold">Firebase Analytics — Not Configured</h3>
+            <h3 className="text-lg font-semibold">
+              Firebase Analytics — Not Configured
+            </h3>
           </div>
-          <p className="text-muted-foreground text-sm">{firebaseData.message}</p>
+          <p className="text-muted-foreground text-sm">
+            {firebaseData.message}
+          </p>
           <div className="text-sm text-muted-foreground space-y-1 border-t border-border pt-3">
             <p className="font-medium text-foreground/80">Setup steps:</p>
             <ol className="list-decimal list-inside space-y-1">
-              <li>Find your GA4 property ID: Google Analytics → <strong>Admin → Property Settings</strong> (numeric ID)</li>
-              <li>Add <code className="bg-foreground/[0.06] px-1 rounded">GA4_PROPERTY_ID</code> to your <code className="bg-foreground/[0.06] px-1 rounded">.env.local</code></li>
-              <li>Enable the <strong>Google Analytics Data API</strong> at <code className="bg-foreground/[0.06] px-1 rounded">console.cloud.google.com/apis/library/analyticsdata.googleapis.com</code></li>
-              <li>In GA4 Admin → <strong>Property Access Management</strong>, add your Firebase service account email as a <strong>Viewer</strong></li>
+              <li>
+                Find your GA4 property ID: Google Analytics →{' '}
+                <strong>Admin → Property Settings</strong> (numeric ID)
+              </li>
+              <li>
+                Add{' '}
+                <code className="bg-foreground/[0.06] px-1 rounded">
+                  GA4_PROPERTY_ID
+                </code>{' '}
+                to your{' '}
+                <code className="bg-foreground/[0.06] px-1 rounded">
+                  .env.local
+                </code>
+              </li>
+              <li>
+                Enable the <strong>Google Analytics Data API</strong> at{' '}
+                <code className="bg-foreground/[0.06] px-1 rounded">
+                  console.cloud.google.com/apis/library/analyticsdata.googleapis.com
+                </code>
+              </li>
+              <li>
+                In GA4 Admin → <strong>Property Access Management</strong>, add
+                your Firebase service account email as a <strong>Viewer</strong>
+              </li>
             </ol>
             <p className="mt-2 text-xs">
-              Your Firebase service account email is the value of <code className="bg-foreground/[0.06] px-1 rounded">client_email</code> in your service account JSON file.
+              Your Firebase service account email is the value of{' '}
+              <code className="bg-foreground/[0.06] px-1 rounded">
+                client_email
+              </code>{' '}
+              in your service account JSON file.
             </p>
           </div>
         </CardContent>
@@ -47,85 +80,135 @@ const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
     {!firebaseLoading && firebaseData?.configured && firebaseData.rows && (
       <div className="space-y-4">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard title="Active Users" value={Math.round(firebaseData.totals?.activeUsers ?? 0)} />
-          <StatCard title="Page Views" value={Math.round(firebaseData.totals?.screenPageViews ?? 0)} />
-          <StatCard title="Sessions" value={Math.round(firebaseData.totals?.sessions ?? 0)} />
-          <StatCard title="Events" value={Math.round(firebaseData.totals?.eventCount ?? 0)} />
+          <StatCard
+            title="Active Users"
+            value={Math.round(firebaseData.totals?.activeUsers ?? 0)}
+          />
+          <StatCard
+            title="Page Views"
+            value={Math.round(firebaseData.totals?.screenPageViews ?? 0)}
+          />
+          <StatCard
+            title="Sessions"
+            value={Math.round(firebaseData.totals?.sessions ?? 0)}
+          />
+          <StatCard
+            title="Events"
+            value={Math.round(firebaseData.totals?.eventCount ?? 0)}
+          />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader><h4 className="font-semibold text-foreground">Daily Active Users & Page Views</h4></CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={firebaseData.rows} margin={{ left: 10, right: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Line type="monotone" dataKey="activeUsers" name="Active Users" stroke="#3b82f6" strokeWidth={2} dot={false} />
-                  <Line type="monotone" dataKey="screenPageViews" name="Page Views" stroke="#ef4444" strokeWidth={2} dot={false} />
-                </LineChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader><h4 className="font-semibold text-foreground">Sessions & Events</h4></CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={firebaseData.rows} margin={{ left: 10, right: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Line type="monotone" dataKey="sessions" name="Sessions" stroke="#22c55e" strokeWidth={2} dot={false} />
-                  <Line type="monotone" dataKey="eventCount" name="Events" stroke="#a855f7" strokeWidth={2} dot={false} />
-                </LineChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader><h4 className="font-semibold text-foreground">New vs Returning Users</h4></CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={firebaseData.rows} margin={{ left: 10, right: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Line type="monotone" dataKey="newUsers" name="New Users" stroke="#06b6d4" strokeWidth={2} dot={false} />
-                  <Line type="monotone" dataKey="totalUsers" name="Total Users" stroke="#eab308" strokeWidth={2} dot={false} />
-                </LineChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader><h4 className="font-semibold text-foreground">Avg Session Duration & Bounce Rate</h4></CardHeader>
-            <CardContent>
-              <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={firebaseData.rows} margin={{ left: 10, right: 10 }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" tick={{ fontSize: 11 }} />
-                  <YAxis yAxisId="left" />
-                  <YAxis yAxisId="right" orientation="right" />
-                  <Tooltip />
-                  <Legend />
-                  <Line yAxisId="left" type="monotone" dataKey="averageSessionDuration" name="Avg Session (s)" stroke="#8b5cf6" strokeWidth={2} dot={false} />
-                  <Line yAxisId="right" type="monotone" dataKey="bounceRate" name="Bounce Rate %" stroke="#f97316" strokeWidth={2} dot={false} />
-                </LineChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </div>
+        {(() => {
+          const rows = fillDays(
+            firebaseData.rows.map((r) => ({
+              ...r,
+              returningUsers: Math.max(0, r.totalUsers - r.newUsers),
+            })),
+            [
+              'activeUsers',
+              'screenPageViews',
+              'sessions',
+              'eventCount',
+              'newUsers',
+              'totalUsers',
+              'returningUsers',
+              'averageSessionDuration',
+              'bounceRate',
+            ],
+          );
+          const metric = (
+            key: keyof (typeof rows)[number] & string,
+            title: string,
+            unit: string | null,
+          ) => (
+            <ChartCard
+              key={key}
+              title={title}
+              summary={seriesSummary(rows, key, unit)}
+            >
+              <TimeAreaChart
+                data={rows}
+                xKey="date"
+                height={160}
+                series={[{ key, name: title, color: VIZ.primary }]}
+              />
+            </ChartCard>
+          );
+          return (
+            <div className="grid md:grid-cols-2 gap-6">
+              {metric('activeUsers', 'Active users', null)}
+              {metric('screenPageViews', 'Page views', 'views')}
+              {metric('sessions', 'Sessions', 'sessions')}
+              {metric('eventCount', 'Events', 'events')}
+              <ChartCard
+                className="md:col-span-2"
+                title="New vs returning users"
+                summary="Stacked: the top edge is all users that day"
+              >
+                <Legend
+                  items={[
+                    { label: 'New', color: VIZ.primary },
+                    { label: 'Returning', color: VIZ.secondary },
+                  ]}
+                />
+                <TimeAreaChart
+                  data={rows}
+                  xKey="date"
+                  stacked
+                  series={[
+                    { key: 'newUsers', name: 'New', color: VIZ.primary },
+                    {
+                      key: 'returningUsers',
+                      name: 'Returning',
+                      color: VIZ.secondary,
+                    },
+                  ]}
+                />
+              </ChartCard>
+              <ChartCard
+                title="Avg session duration"
+                summary="Seconds per session"
+              >
+                <TimeAreaChart
+                  data={rows}
+                  xKey="date"
+                  height={160}
+                  valueFormat={(v) => `${v.toFixed(1)}s`}
+                  series={[
+                    {
+                      key: 'averageSessionDuration',
+                      name: 'Avg session',
+                      color: VIZ.primary,
+                    },
+                  ]}
+                />
+              </ChartCard>
+              <ChartCard
+                title="Bounce rate"
+                summary="Share of sessions with no engagement"
+              >
+                <TimeAreaChart
+                  data={rows}
+                  xKey="date"
+                  height={160}
+                  valueFormat={(v) => `${v.toFixed(1)}%`}
+                  series={[
+                    {
+                      key: 'bounceRate',
+                      name: 'Bounce rate',
+                      color: VIZ.primary,
+                    },
+                  ]}
+                />
+              </ChartCard>
+            </div>
+          );
+        })()}
 
         <Card>
-          <CardHeader><h4 className="font-semibold text-foreground">Daily Breakdown</h4></CardHeader>
+          <CardHeader>
+            <h4 className="font-semibold text-foreground">Daily Breakdown</h4>
+          </CardHeader>
           <CardContent>
             <div className="overflow-x-auto">
               <table className="min-w-full text-sm">
@@ -144,14 +227,20 @@ const FirebaseTab: React.FC<Props> = ({ firebaseData, firebaseLoading }) => (
                 <tbody>
                   {firebaseData.rows.map((row) => (
                     <tr key={row.date} className="border-b border-border">
-                      <td className="py-2 pr-4 font-medium text-foreground">{row.date}</td>
+                      <td className="py-2 pr-4 font-medium text-foreground">
+                        {row.date}
+                      </td>
                       <td className="py-2 pr-4">{row.activeUsers}</td>
                       <td className="py-2 pr-4">{row.screenPageViews}</td>
                       <td className="py-2 pr-4">{row.sessions}</td>
                       <td className="py-2 pr-4">{row.eventCount}</td>
                       <td className="py-2 pr-4">{row.newUsers}</td>
-                      <td className="py-2 pr-4">{row.averageSessionDuration.toFixed(1)}s</td>
-                      <td className="py-2 pr-4">{row.bounceRate.toFixed(1)}%</td>
+                      <td className="py-2 pr-4">
+                        {row.averageSessionDuration.toFixed(1)}s
+                      </td>
+                      <td className="py-2 pr-4">
+                        {row.bounceRate.toFixed(1)}%
+                      </td>
                     </tr>
                   ))}
                 </tbody>
