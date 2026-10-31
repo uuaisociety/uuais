@@ -17,7 +17,8 @@ import {
 
 /**
  * Read-only MCP server exposing UUAIS site data (events, FAQs, team, jobs,
- * board positions, application campaigns) sourced from Firestore.
+ * board positions, application campaigns) sourced from Firestore, plus a
+ * website-admin lookup the Mattermost bot uses for per-member access checks.
  *
  * Scoped securely: every tool is read-only (`readOnlyHint`), there is no agent,
  * no write access, and no filesystem/network access beyond the Firestore reads
@@ -50,11 +51,32 @@ async function getPositionsAndCampaigns() {
   const { adminDb } = await import('@/lib/firebase-admin');
   const [positionsSnap, campaignsSnap] = await Promise.all([
     adminDb.collection('board-positions').orderBy('order', 'asc').get(),
-    adminDb.collection('applicationCampaigns').where('status', '==', 'open').get(),
+    adminDb
+      .collection('applicationCampaigns')
+      .where('status', '==', 'open')
+      .get(),
   ]);
   return {
     positions: positionsSnap.docs.map((d) => ({ id: d.id, ...d.data() })),
     campaigns: campaignsSnap.docs.map((d) => ({ id: d.id, ...d.data() })),
+  };
+}
+
+/** Website admin flags for one email, matching server-auth's isAdmin rule; disabled accounts hold none. */
+async function getMemberRole(email: string) {
+  const { adminAuth } = await import('@/lib/firebase-admin');
+  const user = await adminAuth.getUserByEmail(email).catch((err: unknown) => {
+    if ((err as { code?: unknown })?.code === 'auth/user-not-found')
+      return null;
+    throw err;
+  });
+  if (!user) return { found: false, admin: false, superAdmin: false };
+  const claims = user.disabled ? {} : (user.customClaims ?? {});
+  const superAdmin = claims.superAdmin === true;
+  return {
+    found: true,
+    admin: claims.admin === true || superAdmin,
+    superAdmin,
   };
 }
 
@@ -71,7 +93,13 @@ export function createUuaisMcpServer(): McpServer {
         'Get UUAIS events from the society website (published events, newest first). ' +
         'Use for questions about upcoming events, past events, event details, dates, locations, or registration.',
       inputSchema: z.object({
-        limit: z.number().int().min(1).max(50).default(10).describe('Maximum number of events to return (default 10)'),
+        limit: z
+          .number()
+          .int()
+          .min(1)
+          .max(50)
+          .default(10)
+          .describe('Maximum number of events to return (default 10)'),
         upcomingOnly: z
           .boolean()
           .default(false)
@@ -100,13 +128,17 @@ export function createUuaisMcpServer(): McpServer {
         category: z
           .string()
           .optional()
-          .describe("Optional FAQ category to filter by (e.g. 'general', 'membership')"),
+          .describe(
+            "Optional FAQ category to filter by (e.g. 'general', 'membership')",
+          ),
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
     async ({ category }) =>
       withSeed((seed) => {
-        const faqs = category ? seed.faqs.filter((f) => f.category === category) : seed.faqs;
+        const faqs = category
+          ? seed.faqs.filter((f) => f.category === category)
+          : seed.faqs;
         return { faqs };
       }),
   );
@@ -131,7 +163,9 @@ export function createUuaisMcpServer(): McpServer {
     async ({ category }) =>
       withSeed((seed) => {
         const team = category
-          ? seed.teamMembers.filter((m) => m.teams?.includes(category as TeamCategory))
+          ? seed.teamMembers.filter((m) =>
+              m.teams?.includes(category as TeamCategory),
+            )
           : seed.teamMembers;
         return { team };
       }),
@@ -144,7 +178,13 @@ export function createUuaisMcpServer(): McpServer {
         'Get job, internship, and thesis opportunities posted on the UUAIS website. ' +
         'Use for questions about open positions, career opportunities, or companies recruiting.',
       inputSchema: z.object({
-        limit: z.number().int().min(1).max(50).default(20).describe('Maximum number of jobs to return (default 20)'),
+        limit: z
+          .number()
+          .int()
+          .min(1)
+          .max(50)
+          .default(20)
+          .describe('Maximum number of jobs to return (default 20)'),
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
@@ -180,18 +220,29 @@ export function createUuaisMcpServer(): McpServer {
         'open board positions and campaigns, open jobs, and FAQ/team counts. ' +
         'Use as a first stop when a question is broad or you are unsure which tool to call.',
       inputSchema: z.object({
-        eventLimit: z.number().int().min(1).max(10).default(5).describe('Maximum upcoming events to include'),
+        eventLimit: z
+          .number()
+          .int()
+          .min(1)
+          .max(10)
+          .default(5)
+          .describe('Maximum upcoming events to include'),
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
     async ({ eventLimit }) => {
       try {
-        const [seed, { positions, campaigns }] = await Promise.all([getPublicSeedForMcp(), getPositionsAndCampaigns()]);
+        const [seed, { positions, campaigns }] = await Promise.all([
+          getPublicSeedForMcp(),
+          getPositionsAndCampaigns(),
+        ]);
         const now = new Date().toISOString();
         return jsonText({
           overview: {
             available: true,
-            upcomingEvents: seed.events.filter((e) => e.eventStartAt >= now).slice(0, eventLimit),
+            upcomingEvents: seed.events
+              .filter((e) => e.eventStartAt >= now)
+              .slice(0, eventLimit),
             boardPositions: positions,
             openCampaigns: campaigns,
             openJobs: seed.jobs.length,
@@ -213,7 +264,13 @@ export function createUuaisMcpServer(): McpServer {
         'Get published blog posts from the UUAIS website (newest first). ' +
         'Use for news, articles, announcements, project write-ups, and anything the society has published.',
       inputSchema: z.object({
-        limit: z.number().int().min(1).max(25).default(5).describe('Maximum number of posts to return (default 5)'),
+        limit: z
+          .number()
+          .int()
+          .min(1)
+          .max(25)
+          .default(5)
+          .describe('Maximum number of posts to return (default 5)'),
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
@@ -237,7 +294,8 @@ export function createUuaisMcpServer(): McpServer {
     },
     async ({ id }) => {
       const result = await getBlogPostById(id);
-      if (result.status === 'unavailable') return jsonText({ available: false });
+      if (result.status === 'unavailable')
+        return jsonText({ available: false });
       return jsonText({ post: result.item });
     },
   );
@@ -250,12 +308,23 @@ export function createUuaisMcpServer(): McpServer {
         'description, tags, language, and more. Use for questions about specific courses, study planning, ' +
         'machine-learning/AI courses, prerequisites, or levels.',
       inputSchema: z.object({
-        search: z.string().optional().describe('Free-text search over title, code, description, and tags'),
+        search: z
+          .string()
+          .optional()
+          .describe('Free-text search over title, code, description, and tags'),
         level: z
           .string()
           .optional()
-          .describe("Filter by level: 'Preparatory', \"Bachelor's\", or \"Master's\""),
-        limit: z.number().int().min(1).max(25).default(10).describe('Maximum number of courses to return (default 10)'),
+          .describe(
+            'Filter by level: \'Preparatory\', "Bachelor\'s", or "Master\'s"',
+          ),
+        limit: z
+          .number()
+          .int()
+          .min(1)
+          .max(25)
+          .default(10)
+          .describe('Maximum number of courses to return (default 10)'),
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
@@ -266,7 +335,10 @@ export function createUuaisMcpServer(): McpServer {
       let filtered = courses;
       if (term) {
         filtered = filtered.filter((c) =>
-          [c.title, c.code, c.description, (c.tags ?? []).join(' ')].join(' ').toLowerCase().includes(term),
+          [c.title, c.code, c.description, (c.tags ?? []).join(' ')]
+            .join(' ')
+            .toLowerCase()
+            .includes(term),
         );
       }
       if (level) {
@@ -299,7 +371,8 @@ export function createUuaisMcpServer(): McpServer {
     },
     async ({ id }) => {
       const result = await getCourseById(id);
-      if (result.status === 'unavailable') return jsonText({ available: false });
+      if (result.status === 'unavailable')
+        return jsonText({ available: false });
       return jsonText({ course: result.item });
     },
   );
@@ -331,7 +404,13 @@ export function createUuaisMcpServer(): McpServer {
         'most-read blog posts. Use for questions like "which event is most popular" or what content ' +
         'gets the most attention.',
       inputSchema: z.object({
-        limit: z.number().int().min(1).max(10).default(5).describe('Maximum items per category to return (default 5)'),
+        limit: z
+          .number()
+          .int()
+          .min(1)
+          .max(10)
+          .default(5)
+          .describe('Maximum items per category to return (default 5)'),
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
@@ -350,8 +429,18 @@ export function createUuaisMcpServer(): McpServer {
         'team members, and courses. Returns grouped hits with type, title, and a short snippet. ' +
         'Use when you are not sure which tool to call or the answer could be in several places.',
       inputSchema: z.object({
-        query: z.string().min(1).max(200).describe('Search terms to look for across all site content'),
-        limit: z.number().int().min(1).max(25).default(10).describe('Maximum number of hits to return (default 10)'),
+        query: z
+          .string()
+          .min(1)
+          .max(200)
+          .describe('Search terms to look for across all site content'),
+        limit: z
+          .number()
+          .int()
+          .min(1)
+          .max(25)
+          .default(10)
+          .describe('Maximum number of hits to return (default 10)'),
       }),
       annotations: READ_ONLY_ANNOTATIONS,
     },
@@ -368,12 +457,38 @@ export function createUuaisMcpServer(): McpServer {
       description:
         'Get overall statistics about the UUAIS website: counts of events, upcoming events, jobs, FAQs, ' +
         'team members, board positions, open application campaigns, blog posts, and courses. ' +
-        'Use for questions about the size/scale of the society\'s activities.',
+        "Use for questions about the size/scale of the society's activities.",
       inputSchema: z.object({}),
       annotations: READ_ONLY_ANNOTATIONS,
     },
     async () => {
       return jsonText(await getSiteStats());
+    },
+  );
+
+  server.registerTool(
+    'getUuaisMemberRole',
+    {
+      description:
+        'Access check used by the UUAIS Mattermost bot itself: whether the website account with this email ' +
+        'is an admin. Returns only found/admin/superAdmin flags. Not for answering member questions.',
+      inputSchema: z.object({
+        email: z
+          .string()
+          .trim()
+          .toLowerCase()
+          .pipe(z.email())
+          .describe('Society email of the member asking'),
+      }),
+      annotations: READ_ONLY_ANNOTATIONS,
+    },
+    async ({ email }) => {
+      try {
+        return jsonText(await getMemberRole(email));
+      } catch (error) {
+        console.error('[mcp] getMemberRole failed:', error);
+        return jsonText({ available: false });
+      }
     },
   );
 
