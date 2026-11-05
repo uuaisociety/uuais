@@ -843,6 +843,41 @@ describe('AccountPage', () => {
       });
       expect(specifyInput).toHaveValue('From a conference');
     });
+
+    it('asks who referred them when "Referral" is selected', async () => {
+      defaults();
+      render(<AccountPage />);
+      fireEvent.click(await screen.findByText('Edit'));
+
+      expect(
+        screen.queryByPlaceholderText('Name of the person who referred you'),
+      ).not.toBeInTheDocument();
+      fireEvent.change(screen.getByDisplayValue('Friends'), {
+        target: { value: 'referral' },
+      });
+
+      expect(
+        screen.queryByPlaceholderText('Type here'),
+      ).not.toBeInTheDocument();
+      const referrerInput = screen.getByPlaceholderText(
+        'Name of the person who referred you',
+      );
+      fireEvent.change(referrerInput, { target: { value: 'Ada' } });
+      expect(referrerInput).toHaveValue('Ada');
+    });
+
+    it('shows who referred them on the profile view', async () => {
+      defaults();
+      (getUserProfile as jest.Mock).mockResolvedValue({
+        ...fullProfile,
+        heardOfUs: 'referral',
+        referredBy: 'Ada Lovelace',
+      });
+      render(<AccountPage />);
+
+      expect(await screen.findByText('Ada Lovelace')).toBeInTheDocument();
+      expect(screen.getByText('From who?')).toBeInTheDocument();
+    });
   });
 
   describe('account linking', () => {

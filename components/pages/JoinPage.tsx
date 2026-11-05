@@ -438,11 +438,14 @@ const JoinPage: React.FC = () => {
                     value={form.heardOfUs || ''}
                     onChange={(e) => {
                       const v = e.target.value;
-                      if (v === 'other') {
-                        setForm((f) => ({ ...f, heardOfUs: '' }));
-                      } else {
-                        setForm((f) => ({ ...f, heardOfUs: v }));
-                      }
+                      setForm((f) => ({
+                        ...f,
+                        heardOfUs: v === 'other' ? '' : v,
+                        // Drop the referrer once Referral is no longer the answer.
+                        ...(v !== 'referral' && f.referredBy
+                          ? { referredBy: '' }
+                          : {}),
+                      }));
                     }}
                   >
                     <option value="">Select an option</option>
@@ -450,11 +453,24 @@ const JoinPage: React.FC = () => {
                     <option value="instagram">Instagram</option>
                     <option value="linkedin">LinkedIn</option>
                     <option value="friends">Friends</option>
+                    <option value="referral">Referral</option>
                     <option value="events">Events</option>
                     <option value="lecture">During lecture</option>
                     <option value="other">Other</option>
                   </SelectBase>
                 </FieldGroup>
+                {form.heardOfUs === 'referral' && (
+                  <FieldGroup label="From who?" requiredHint="Optional">
+                    <InputBase
+                      maxLength={200}
+                      placeholder="Name of the person who referred you"
+                      value={form.referredBy || ''}
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, referredBy: e.target.value }))
+                      }
+                    />
+                  </FieldGroup>
+                )}
                 {(form.heardOfUs === '' ||
                   (form.heardOfUs &&
                     ![
@@ -462,6 +478,7 @@ const JoinPage: React.FC = () => {
                       'instagram',
                       'linkedin',
                       'friends',
+                      'referral',
                       'events',
                       'lecture',
                     ].includes(form.heardOfUs))) && (

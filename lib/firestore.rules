@@ -89,7 +89,7 @@ service cloud.firestore {
         && emailMatchesAuth()
         // Limit client-writable fields; prevent role escalation
         && request.resource.data.keys().hasOnly([
-          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails'
+          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','referredBy','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails'
         ])
         && partnerVisibleFieldsOk(request.resource.data)
         // Re-creating a profile while a CV is still shared must keep partner contact on too.
@@ -101,7 +101,7 @@ service cloud.firestore {
       allow update: if isSignedIn() && request.auth.uid == uid
         && emailMatchesAuth()
         && changedOnly([
-          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails'
+          'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','referredBy','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','updatedAt','unsubscribedFromEmails'
         ])
         && (!('isMember' in resource.data) || request.resource.data.get('isMember', null) == resource.data.isMember)
         && partnerVisibleFieldsOk(request.resource.data)

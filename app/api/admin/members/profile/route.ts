@@ -30,6 +30,7 @@ const STRING_FIELDS: Record<string, number> = {
   website: 500,
   bio: 2000,
   heardOfUs: 500,
+  referredBy: 200,
 };
 const BOOLEAN_FIELDS = new Set([
   'isMember',

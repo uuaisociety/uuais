@@ -35,6 +35,7 @@ const fieldOrder: string[] = [
   'website',
   'bio',
   'heardOfUs',
+  'referredBy',
   'newsletter',
   'lookingForJob',
   'privacyAcceptedAt',
@@ -75,6 +76,7 @@ const adminEditableFields = new Set([
   'website',
   'bio',
   'heardOfUs',
+  'referredBy',
   'lookingForJob',
   'unsubscribedFromEmails',
 ]);

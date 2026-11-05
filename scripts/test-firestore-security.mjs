@@ -180,6 +180,11 @@ try {
     updatedAt: new Date().toISOString(),
   });
   passed++;
+  await updateDoc(doc(profileOwner, 'users/profile-1'), {
+    heardOfUs: 'referral',
+    referredBy: 'A friend',
+  });
+  passed++;
   await denied(() =>
     updateDoc(doc(profileOwner, 'users/profile-1'), { isMember: true }),
   );

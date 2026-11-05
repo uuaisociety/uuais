@@ -343,6 +343,53 @@ describe('JoinPage', () => {
 
       expect(screen.getByPlaceholderText('Type here')).toBeInTheDocument();
     });
+
+    it('asks who referred them when "Referral" is selected, and saves it', async () => {
+      mockedUsers().upsertUserProfile.mockResolvedValue(undefined);
+      render(<JoinPage />);
+      await triggerAuthCallback(mockUser);
+
+      const select = screen.getByDisplayValue('Select an option');
+      fireEvent.change(select, { target: { value: 'referral' } });
+
+      expect(
+        screen.queryByPlaceholderText('Type here'),
+      ).not.toBeInTheDocument();
+      fireEvent.change(
+        screen.getByPlaceholderText('Name of the person who referred you'),
+        { target: { value: 'Ada' } },
+      );
+      fireEvent.click(screen.getByLabelText(/I accept the/));
+      fireEvent.click(screen.getByText('Save & Become Member'));
+
+      await waitFor(() =>
+        expect(mockedUsers().upsertUserProfile).toHaveBeenCalledWith(
+          'u3',
+          expect.objectContaining({ heardOfUs: 'referral', referredBy: 'Ada' }),
+        ),
+      );
+    });
+
+    it('clears the referrer when switching away from "Referral"', async () => {
+      render(<JoinPage />);
+      await triggerAuthCallback(mockUser);
+
+      const select = screen.getByDisplayValue('Select an option');
+      fireEvent.change(select, { target: { value: 'referral' } });
+      fireEvent.change(
+        screen.getByPlaceholderText('Name of the person who referred you'),
+        { target: { value: 'Ada' } },
+      );
+      fireEvent.change(select, { target: { value: 'instagram' } });
+      expect(
+        screen.queryByPlaceholderText('Name of the person who referred you'),
+      ).not.toBeInTheDocument();
+
+      fireEvent.change(select, { target: { value: 'referral' } });
+      expect(
+        screen.getByPlaceholderText('Name of the person who referred you'),
+      ).toHaveValue('');
+    });
   });
 
   describe('error handling', () => {

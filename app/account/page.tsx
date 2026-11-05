@@ -525,6 +525,20 @@ export default function AccountPage() {
                         )}
                       </p>
                     </div>
+                    {form.heardOfUs === 'referral' && (
+                      <div>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                          From who?
+                        </p>
+                        <p className="text-gray-900 dark:text-white">
+                          {form.referredBy || (
+                            <span className="text-gray-400 italic">
+                              Not set
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   <div>
@@ -758,11 +772,14 @@ export default function AccountPage() {
                         value={form.heardOfUs || ''}
                         onChange={(e) => {
                           const v = e.target.value;
-                          if (v === 'other') {
-                            setForm((f) => ({ ...f, heardOfUs: '' }));
-                          } else {
-                            setForm((f) => ({ ...f, heardOfUs: v }));
-                          }
+                          setForm((f) => ({
+                            ...f,
+                            heardOfUs: v === 'other' ? '' : v,
+                            // Drop the referrer once Referral is no longer the answer.
+                            ...(v !== 'referral' && f.referredBy
+                              ? { referredBy: '' }
+                              : {}),
+                          }));
                         }}
                       >
                         <option value="">Select an option</option>
@@ -770,11 +787,27 @@ export default function AccountPage() {
                         <option value="instagram">Instagram</option>
                         <option value="linkedin">LinkedIn</option>
                         <option value="friends">Friends</option>
+                        <option value="referral">Referral</option>
                         <option value="events">Events</option>
                         <option value="lecture">During lecture</option>
                         <option value="other">Other</option>
                       </SelectBase>
                     </FieldGroup>
+                    {form.heardOfUs === 'referral' && (
+                      <FieldGroup label="From who?" requiredHint="Optional">
+                        <InputBase
+                          maxLength={200}
+                          placeholder="Name of the person who referred you"
+                          value={form.referredBy || ''}
+                          onChange={(e) =>
+                            setForm((f) => ({
+                              ...f,
+                              referredBy: e.target.value,
+                            }))
+                          }
+                        />
+                      </FieldGroup>
+                    )}
                     {(form.heardOfUs === '' ||
                       (form.heardOfUs &&
                         ![
@@ -782,6 +815,7 @@ export default function AccountPage() {
                           'instagram',
                           'linkedin',
                           'friends',
+                          'referral',
                           'events',
                           'lecture',
                         ].includes(form.heardOfUs))) && (

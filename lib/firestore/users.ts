@@ -28,6 +28,7 @@ export type UserProfile = {
   website?: string;
   bio?: string;
   heardOfUs?: string;
+  referredBy?: string;
   newsletter?: boolean;
   lookingForJob?: boolean;
   privacyAcceptedAt?: string;

@@ -108,10 +108,21 @@ describe('PATCH /api/admin/members/profile', () => {
     const { PATCH } = await import('@/app/api/admin/members/profile/route');
     for (const update of [
       { name: 'x'.repeat(101) },
+      { referredBy: 'x'.repeat(201) },
       { isMember: 'yes' },
       { expectedGraduationYear: 3000 },
     ])
       expect((await PATCH(patch('member1', update))).status).toBe(400);
+  });
+
+  it('accepts who referred a member, up to 200 characters', async () => {
+    const { PATCH } = await import('@/app/api/admin/members/profile/route');
+    const referredBy = 'x'.repeat(200);
+    expect((await PATCH(patch('member1', { referredBy }))).status).toBe(200);
+    expect(mockUpdate).toHaveBeenCalledWith(
+      'member1',
+      expect.objectContaining({ referredBy }),
+    );
   });
 
   it("never undoes a member's unsubscribe", async () => {
