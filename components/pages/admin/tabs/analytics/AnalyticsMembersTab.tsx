@@ -28,6 +28,9 @@ const answered = (m: Record<string, number>) =>
     .reduce((s, v) => s + v, 0)
     .toLocaleString('en')} answered`;
 
+const plural = (n: number, word: string) =>
+  `${n.toLocaleString('en')} ${word}${n === 1 ? '' : 's'}`;
+
 const MembersTab: React.FC<Props> = ({
   memberAnalytics,
   chartData,
@@ -37,6 +40,19 @@ const MembersTab: React.FC<Props> = ({
   const currentMonth = eventMonthKey(new Date().toISOString());
   const thisMonth =
     chartData.find((d) => d.month === currentMonth)?.signups ?? 0;
+
+  // Top 10, ranked so ties share a place (1, 2, 2, 4).
+  const topReferrers = useMemo(() => {
+    const list = memberAnalytics?.referrers.slice(0, 10) ?? [];
+    return list.map((r) => ({
+      ...r,
+      rank: list.findIndex((x) => x.count === r.count) + 1,
+    }));
+  }, [memberAnalytics]);
+  const referralCount = (memberAnalytics?.referrers ?? []).reduce(
+    (s, r) => s + r.count,
+    0,
+  );
 
   const downloadMembersCsv = useCallback(() => {
     if (!memberAnalytics) return;
@@ -54,6 +70,9 @@ const MembersTab: React.FC<Props> = ({
       ...Object.entries(memberAnalytics.heardOfUs)
         .sort(([, a], [, b]) => b - a)
         .map(([k, v]) => [k, String(v)]),
+      [],
+      ['Referred by', 'Referrals'],
+      ...memberAnalytics.referrers.map((r) => [r.name, String(r.count)]),
       [],
       ['Gender', 'Count'],
       ...Object.entries(memberAnalytics.gender)
@@ -177,6 +196,35 @@ const MembersTab: React.FC<Props> = ({
               />
             </ChartCard>
           </div>
+          <ChartCard
+            title="Top referrers"
+            summary={`${plural(referralCount, 'referral')} · ${plural(memberAnalytics.referrers.length, 'referrer')}`}
+          >
+            {topReferrers.length === 0 ? (
+              <p className="text-sm text-muted-foreground italic">
+                No referrals yet
+              </p>
+            ) : (
+              <ol className="space-y-2">
+                {topReferrers.map((r) => (
+                  <li
+                    key={r.name}
+                    className="flex items-baseline gap-3 text-sm"
+                  >
+                    <span className="w-6 text-right text-xs text-muted-foreground tabular-nums">
+                      {r.rank}
+                    </span>
+                    <span className="flex-1 min-w-0 truncate text-foreground/80">
+                      {r.name}
+                    </span>
+                    <span className="font-semibold text-foreground tabular-nums">
+                      {r.count.toLocaleString('en')}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </ChartCard>
         </div>
       )}
 
