@@ -10,6 +10,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import { loginUrl } from '@/lib/login-redirect';
 import { useOpenCampaigns } from '@/lib/firestore/useOpenCampaigns';
+import { useGuessContest } from '@/lib/firestore/useGuessContest';
 import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
 
 // Desktop top level. The wordmark already goes home, so Home only earns a slot
@@ -20,8 +21,6 @@ const navigation = [
   { name: 'About', href: '/about' },
   ...(PARTNERS_PAGE_PUBLIC ? [{ name: 'Partners', href: '/partners' }] : []),
 ];
-
-const mobileNavigation = [{ name: 'Home', href: '/' }, ...navigation];
 
 // What members do here, grouped: their work and their opportunities.
 const communityLinks = [
@@ -73,6 +72,14 @@ export const Header: React.FC = () => {
   const { campaigns, loaded: campaignsLoaded } = useOpenCampaigns();
   const showApply =
     !campaignsLoaded || campaigns.some((c) => c.status === 'open');
+
+  // The fair guessing game sits in the top level only while an admin has it open.
+  const { contest } = useGuessContest();
+  const topNavigation: { name: string; href: string; badge?: string }[] =
+    contest?.open
+      ? [...navigation, { name: 'Guess', href: '/guess' }]
+      : navigation;
+  const mobileNavigation = [{ name: 'Home', href: '/' }, ...topNavigation];
 
   // Rendered from the persisted identity so the name survives a reload instead
   // of blanking while Firebase re-resolves the session.
@@ -165,7 +172,7 @@ export const Header: React.FC = () => {
 
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center gap-0.5">
-              {navigation.map((item) => (
+              {topNavigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}

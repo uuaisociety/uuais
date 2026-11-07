@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import {
@@ -12,14 +12,17 @@ import {
   Rocket,
   Bot,
   Inbox,
-  ChevronRight, GraduationCap } from 'lucide-react';
+  ChevronRight,
+  GraduationCap,
+  Hash,
+} from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/Card';
 import EventsTab from '@/components/pages/admin/tabs/EventsTab';
 import TeamTab from '@/components/pages/admin/tabs/TeamTab';
 import BlogTab from '@/components/pages/admin/tabs/BlogTab';
 import ShowcaseTab from '@/components/pages/admin/tabs/ShowcaseTab';
 import FAQTab from '@/components/pages/admin/tabs/FAQTab';
-import BoardTab from '@/components/pages/admin/tabs/BoardTab'
+import BoardTab from '@/components/pages/admin/tabs/BoardTab';
 import ApplicationsTab from '@/components/pages/admin/tabs/ApplicationsTab';
 import AnalyticsTab from '@/components/pages/admin/tabs/AnalyticsTab';
 import MembersTab from '@/components/pages/admin/tabs/membersTab';
@@ -28,13 +31,34 @@ import ProgramFeedbackTab from '@/components/pages/admin/tabs/ProgramFeedbackTab
 import JobsTab from '@/components/pages/admin/tabs/JobsTab';
 import AISettingsTab from '@/components/pages/admin/tabs/AISettingsTab';
 import BlogAISettingsTab from '@/components/pages/admin/tabs/BlogAISettingsTab';
+import GuessTab from '@/components/pages/admin/tabs/GuessTab';
 import { updatePageMeta } from '@/utils/seo';
 import { TabErrorBoundary } from '@/components/ui/TabErrorBoundary';
 import AdminStatusStrip from '@/components/pages/admin/AdminStatusStrip';
-import { useAdminOverview, type AdminTabKey } from '@/components/pages/admin/useAdminOverview';
-import { ANALYTICS_SUBTABS, type AnalyticsTabKey } from '@/components/pages/admin/tabs/analytics/useAnalyticsData';
+import {
+  useAdminOverview,
+  type AdminTabKey,
+} from '@/components/pages/admin/useAdminOverview';
+import {
+  ANALYTICS_SUBTABS,
+  type AnalyticsTabKey,
+} from '@/components/pages/admin/tabs/analytics/useAnalyticsData';
 
-const ADMIN_TABS = ['events', 'team', 'blog', 'showcase', 'faq', 'analytics', 'members', 'programs', 'jobs', 'ai-settings', 'applications', 'board-applications'] as const;
+const ADMIN_TABS = [
+  'events',
+  'team',
+  'blog',
+  'showcase',
+  'faq',
+  'analytics',
+  'members',
+  'programs',
+  'jobs',
+  'ai-settings',
+  'applications',
+  'board-applications',
+  'guess',
+] as const;
 
 type NavChild = { key: string; label: string };
 type NavItem = {
@@ -48,17 +72,28 @@ const NAV_ITEMS: NavItem[] = [
   { key: 'events', label: 'Events', icon: Calendar },
   { key: 'team', label: 'Team', icon: Users },
   {
-    key: 'blog', label: 'Blog', icon: FileText, children: [
+    key: 'blog',
+    label: 'Blog',
+    icon: FileText,
+    children: [
       { key: 'posts', label: 'Posts' },
       { key: 'ai-settings', label: 'AI News Desk' },
     ],
   },
   { key: 'showcase', label: 'Showcase', icon: Rocket },
   { key: 'faq', label: 'FAQ', icon: HelpCircle },
-  { key: 'analytics', label: 'Analytics', icon: TrendingUp, children: ANALYTICS_SUBTABS },
+  {
+    key: 'analytics',
+    label: 'Analytics',
+    icon: TrendingUp,
+    children: ANALYTICS_SUBTABS,
+  },
   { key: 'members', label: 'Members', icon: UserRound },
   {
-    key: 'programs', label: 'Programmes', icon: GraduationCap, children: [
+    key: 'programs',
+    label: 'Programmes',
+    icon: GraduationCap,
+    children: [
       { key: 'overview', label: 'Overview' },
       { key: 'feedback', label: 'Feedback' },
     ],
@@ -66,6 +101,7 @@ const NAV_ITEMS: NavItem[] = [
   { key: 'jobs', label: 'Jobs', icon: BriefcaseBusiness },
   { key: 'ai-settings', label: 'AI Settings', icon: Bot },
   { key: 'applications', label: 'Applications', icon: Inbox },
+  { key: 'guess', label: 'Guessing game', icon: Hash },
 ];
 
 const AdminDashboard: React.FC = () => {
@@ -75,10 +111,17 @@ const AdminDashboard: React.FC = () => {
   // an effect so the initial render matches the server (avoids hydration
   // mismatch on /admin deep links) before syncing to the stored/URL tab.
   const [activeTab, setActiveTab] = useState<Tab>('events');
-  const [blogSubtab, setBlogSubtab] = useState<'posts' | 'ai-settings'>('posts');
-  const [programsSubtab, setProgramsSubtab] = useState<'overview' | 'feedback'>('overview');
-  const [analyticsSubtab, setAnalyticsSubtab] = useState<AnalyticsTabKey>('overview');
-  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
+  const [blogSubtab, setBlogSubtab] = useState<'posts' | 'ai-settings'>(
+    'posts',
+  );
+  const [programsSubtab, setProgramsSubtab] = useState<'overview' | 'feedback'>(
+    'overview',
+  );
+  const [analyticsSubtab, setAnalyticsSubtab] =
+    useState<AnalyticsTabKey>('overview');
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(
+    {},
+  );
   useEffect(() => {
     const params = new URL(window.location.href).searchParams;
     const fromUrl = params.get('tab');
@@ -87,31 +130,34 @@ const AdminDashboard: React.FC = () => {
       setActiveTab(fromUrl as Tab);
       const sub = params.get('sub');
       if (fromUrl === 'blog' && (sub === 'posts' || sub === 'ai-settings')) {
-         
         setBlogSubtab(sub);
       }
-      if (fromUrl === 'analytics' && ANALYTICS_SUBTABS.some((s) => s.key === sub)) {
-         
+      if (
+        fromUrl === 'analytics' &&
+        ANALYTICS_SUBTABS.some((s) => s.key === sub)
+      ) {
         setAnalyticsSubtab(sub as AnalyticsTabKey);
       }
-      if (fromUrl === 'programs' && (sub === 'overview' || sub === 'feedback')) {
-         
+      if (
+        fromUrl === 'programs' &&
+        (sub === 'overview' || sub === 'feedback')
+      ) {
         setProgramsSubtab(sub);
       }
       return;
     }
     const saved = localStorage.getItem('adminDashboardTab');
     if (tabValues.includes(saved as Tab)) {
-       
       setActiveTab(saved as Tab);
     }
     try {
       const savedExpanded = localStorage.getItem('adminDashboardExpanded');
       if (savedExpanded) {
-         
         setExpandedGroups(JSON.parse(savedExpanded));
       }
-    } catch { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
   }, [tabValues]);
   // The URL is owned by the restore effect until the user clicks a tab (avoids clobbering ?tab= before restore lands).
   const tabClicked = useRef(false);
@@ -131,7 +177,8 @@ const AdminDashboard: React.FC = () => {
   const setSub = (tab: Tab, sub: string) => {
     if (tab === 'blog') setBlogSubtab(sub as 'posts' | 'ai-settings');
     else if (tab === 'analytics') setAnalyticsSubtab(sub as AnalyticsTabKey);
-    else if (tab === 'programs') setProgramsSubtab(sub as 'overview' | 'feedback');
+    else if (tab === 'programs')
+      setProgramsSubtab(sub as 'overview' | 'feedback');
   };
   const toggleGroup = (key: AdminTabKey) => {
     setExpandedGroups((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -139,12 +186,18 @@ const AdminDashboard: React.FC = () => {
   const { items, loaded } = useAdminOverview();
 
   useEffect(() => {
-    updatePageMeta('Admin Dashboard', 'Manage UU AI Society content and events');
+    updatePageMeta(
+      'Admin Dashboard',
+      'Manage UU AI Society content and events',
+    );
   }, []);
 
   useEffect(() => {
     localStorage.setItem('adminDashboardTab', activeTab);
-    localStorage.setItem('adminDashboardExpanded', JSON.stringify(expandedGroups));
+    localStorage.setItem(
+      'adminDashboardExpanded',
+      JSON.stringify(expandedGroups),
+    );
     if (!tabClicked.current) return;
     const url = new URL(window.location.href);
     if (url.searchParams.get('tab') !== activeTab) {
@@ -176,8 +229,12 @@ const AdminDashboard: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-2xl md:text-3xl font-semibold tracking-[-0.032em] text-foreground">Admin Dashboard</h1>
-          <p className="text-muted-foreground text-sm mt-1">Manage your UU AI Society content and events</p>
+          <h1 className="text-2xl md:text-3xl font-semibold tracking-[-0.032em] text-foreground">
+            Admin Dashboard
+          </h1>
+          <p className="text-muted-foreground text-sm mt-1">
+            Manage your UU AI Society content and events
+          </p>
         </div>
 
         {/* What needs attention */}
@@ -193,18 +250,27 @@ const AdminDashboard: React.FC = () => {
 
         {/* Sidebar + content */}
         <div className="mt-8 lg:grid lg:grid-cols-[13rem_1fr] lg:gap-8 lg:items-start">
-          <nav aria-label="Admin sections" className="flex lg:flex-col gap-1 overflow-x-auto pb-2 mb-6 lg:mb-0 lg:pb-0 lg:sticky lg:top-20 [mask-image:linear-gradient(to_right,black_88%,transparent)] lg:[mask-image:none]">
+          <nav
+            aria-label="Admin sections"
+            className="flex lg:flex-col gap-1 overflow-x-auto pb-2 mb-6 lg:mb-0 lg:pb-0 lg:sticky lg:top-20 [mask-image:linear-gradient(to_right,black_88%,transparent)] lg:[mask-image:none]"
+          >
             {NAV_ITEMS.map((item) => {
               const { key, label, icon: Icon, children } = item;
-              const isOpen = expandedGroups[key] !== false && (activeTab === key || expandedGroups[key] === true);
+              const isOpen =
+                expandedGroups[key] !== false &&
+                (activeTab === key || expandedGroups[key] === true);
               const isActive = activeTab === key;
               return (
                 <div key={key} className="shrink-0">
-                  <div className={`flex items-center rounded-md transition-colors duration-200 ${isActive ? 'bg-primary/10' : 'hover:bg-foreground/[0.04]'}`}>
+                  <div
+                    className={`flex items-center rounded-md transition-colors duration-200 ${isActive ? 'bg-primary/10' : 'hover:bg-foreground/[0.04]'}`}
+                  >
                     <button
                       onClick={() => changeTab(key)}
                       className={`flex items-center gap-2.5 flex-1 px-3 py-3 rounded-md text-sm transition-colors duration-200 cursor-pointer ${
-                        isActive ? 'text-primary font-medium' : 'text-muted-foreground hover:text-foreground'
+                        isActive
+                          ? 'text-primary font-medium'
+                          : 'text-muted-foreground hover:text-foreground'
                       }`}
                     >
                       <Icon className="h-4 w-4 shrink-0" aria-hidden />
@@ -218,7 +284,9 @@ const AdminDashboard: React.FC = () => {
                         aria-expanded={isOpen}
                         className="p-2 mr-1 rounded-md text-muted-foreground hover:text-foreground cursor-pointer"
                       >
-                        <ChevronRight className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`} />
+                        <ChevronRight
+                          className={`h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`}
+                        />
                       </button>
                     )}
                   </div>
@@ -229,8 +297,11 @@ const AdminDashboard: React.FC = () => {
                         return (
                           <button
                             key={child.key}
-                            onClick={() => { setSub(key, child.key); changeTab(key); }}
-                            aria-current={subActive ? "page" : undefined}
+                            onClick={() => {
+                              setSub(key, child.key);
+                              changeTab(key);
+                            }}
+                            aria-current={subActive ? 'page' : undefined}
                             className={`flex items-center w-full px-3 py-2 rounded-md text-sm transition-colors duration-200 cursor-pointer ${
                               subActive
                                 ? 'bg-primary/10 text-primary font-medium'
@@ -286,7 +357,10 @@ const AdminDashboard: React.FC = () => {
                   )}
                   {activeTab === 'analytics' && (
                     <TabErrorBoundary name="Analytics">
-                      <AnalyticsTab activeSubtab={analyticsSubtab} onSelectSubtab={(k) => setAnalyticsSubtab(k)} />
+                      <AnalyticsTab
+                        activeSubtab={analyticsSubtab}
+                        onSelectSubtab={(k) => setAnalyticsSubtab(k)}
+                      />
                     </TabErrorBoundary>
                   )}
                   {activeTab === 'faq' && (
@@ -306,7 +380,11 @@ const AdminDashboard: React.FC = () => {
                   )}
                   {activeTab === 'programs' && (
                     <TabErrorBoundary name="Programmes">
-                      {programsSubtab === 'overview' ? <ProgramsTab /> : <ProgramFeedbackTab />}
+                      {programsSubtab === 'overview' ? (
+                        <ProgramsTab />
+                      ) : (
+                        <ProgramFeedbackTab />
+                      )}
                     </TabErrorBoundary>
                   )}
                   {activeTab === 'ai-settings' && (
@@ -317,6 +395,11 @@ const AdminDashboard: React.FC = () => {
                   {activeTab === 'applications' && (
                     <TabErrorBoundary name="Applications">
                       <ApplicationsTab />
+                    </TabErrorBoundary>
+                  )}
+                  {activeTab === 'guess' && (
+                    <TabErrorBoundary name="Guessing game">
+                      <GuessTab />
                     </TabErrorBoundary>
                   )}
                 </div>
