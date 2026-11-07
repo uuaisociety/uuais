@@ -1,5 +1,6 @@
 import { collection, getCountFromServer } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
+import { rankReferrers, type ReferrerCount } from '@/lib/referrals';
 import { listUsers } from './users';
 
 export interface MemberAnalytics {
@@ -16,7 +17,7 @@ export interface MemberAnalytics {
    * Who referred members, most referrals first. Names are free text, so
    * spellings differing only in case or spacing count as one person.
    */
-  referrers: { name: string; count: number }[];
+  referrers: ReferrerCount[];
   gender: Record<string, number>;
   studentStatus: Record<string, number>;
   monthlySignups: { month: string; count: number }[];
@@ -40,7 +41,6 @@ export async function getMemberAnalytics(): Promise<MemberAnalytics> {
   let newsletter = 0;
 
   const heardOfUs: Record<string, number> = {};
-  const referrerMap: Record<string, { name: string; count: number }> = {};
   const gender: Record<string, number> = {};
   const studentStatus: Record<string, number> = {};
   const monthlyMap: Record<string, number> = {};
@@ -54,13 +54,6 @@ export async function getMemberAnalytics(): Promise<MemberAnalytics> {
 
     const how = u.heardOfUs?.trim();
     if (how) heardOfUs[how] = (heardOfUs[how] ?? 0) + 1;
-
-    const referrer = u.referredBy?.trim().replace(/\s+/g, ' ');
-    if (how === 'referral' && referrer) {
-      const key = referrer.toLowerCase();
-      referrerMap[key] ??= { name: referrer, count: 0 };
-      referrerMap[key].count++;
-    }
 
     const g = u.gender?.trim();
     if (g) gender[g] = (gender[g] ?? 0) + 1;
@@ -78,9 +71,7 @@ export async function getMemberAnalytics(): Promise<MemberAnalytics> {
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([month, count]) => ({ month, count }));
 
-  const referrers = Object.values(referrerMap).sort(
-    (a, b) => b.count - a.count || a.name.localeCompare(b.name),
-  );
+  const referrers = rankReferrers(users);
 
   return {
     totalUsers: users.length,
