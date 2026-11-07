@@ -185,6 +185,24 @@ try {
     referredBy: 'A friend',
   });
   passed++;
+  // The referrer name is shown on the public leaderboard: bounded string only.
+  await updateDoc(doc(profileOwner, 'users/profile-1'), {
+    referredBy: 'x'.repeat(200),
+  });
+  passed++;
+  await denied(() =>
+    updateDoc(doc(profileOwner, 'users/profile-1'), {
+      referredBy: 'x'.repeat(201),
+    }),
+  );
+  await denied(() =>
+    updateDoc(doc(profileOwner, 'users/profile-1'), { referredBy: 42 }),
+  );
+  await denied(() =>
+    updateDoc(doc(profileOwner, 'users/profile-1'), {
+      referredBy: { name: 'A friend' },
+    }),
+  );
   await denied(() =>
     updateDoc(doc(profileOwner, 'users/profile-1'), { isMember: true }),
   );

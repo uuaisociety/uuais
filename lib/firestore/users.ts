@@ -8,7 +8,15 @@ import {
   DocumentData,
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase-client';
+import { sanitizeReferrerName } from '@/lib/referrals';
 import { stripUndefined } from './utils';
+
+// The referrer name can be shown publicly (lib/referrals.ts), so store it cleaned.
+function cleanReferrer<T extends { referredBy?: string }>(data: T): T {
+  return typeof data.referredBy === 'string'
+    ? { ...data, referredBy: sanitizeReferrerName(data.referredBy) }
+    : data;
+}
 
 export type UserProfile = {
   id: string;
@@ -69,10 +77,9 @@ export const upsertUserProfile = async (
   await setDoc(
     ref,
     {
-      ...(stripUndefined(data as Record<string, unknown>) as Record<
-        string,
-        unknown
-      >),
+      ...(stripUndefined(
+        cleanReferrer(data) as Record<string, unknown>,
+      ) as Record<string, unknown>),
       updatedAt: new Date().toISOString(),
       createdAt: data?.createdAt ?? new Date().toISOString(),
     },
@@ -89,7 +96,9 @@ export const updateUserProfile = async (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { id: _omit, ...fields } = patch as Partial<UserProfile>;
   await updateDoc(ref, {
-    ...(stripUndefined(fields as Record<string, unknown>) as DocumentData),
+    ...(stripUndefined(
+      cleanReferrer(fields) as Record<string, unknown>,
+    ) as DocumentData),
     updatedAt: new Date().toISOString(),
   } as DocumentData);
 };

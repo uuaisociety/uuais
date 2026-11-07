@@ -98,6 +98,16 @@ describe('users', () => {
         { merge: true },
       );
     });
+
+    it('stores the referrer name sanitized', async () => {
+      const { upsertUserProfile } = await import('@/lib/firestore/users');
+      await upsertUserProfile('u1', { referredBy: '  A\u200Bda\u202E <b> ' });
+      expect(mockSetDoc).toHaveBeenCalledWith(
+        'mock-ref',
+        expect.objectContaining({ referredBy: 'Ada b' }),
+        { merge: true },
+      );
+    });
   });
 
   describe('updateUserProfile', () => {
@@ -111,6 +121,24 @@ describe('users', () => {
           updatedAt: expect.any(String),
         }),
       );
+    });
+
+    it('stores the referrer name sanitized and leaves other fields alone', async () => {
+      const { updateUserProfile } = await import('@/lib/firestore/users');
+      await updateUserProfile('u1', {
+        referredBy: 'Ｂo\u0000',
+        bio: '  untouched  ',
+      });
+      expect(mockUpdateDoc).toHaveBeenCalledWith(
+        'mock-ref',
+        expect.objectContaining({ referredBy: 'Bo', bio: '  untouched  ' }),
+      );
+    });
+
+    it('does not add a referrer name when none was given', async () => {
+      const { updateUserProfile } = await import('@/lib/firestore/users');
+      await updateUserProfile('u1', { displayName: 'Updated' });
+      expect(mockUpdateDoc.mock.calls[0][1]).not.toHaveProperty('referredBy');
     });
   });
 

@@ -19,6 +19,9 @@ describe('PrivacyPage', () => {
     expect(screen.getByText('Introduction')).toBeInTheDocument();
     expect(screen.getByText('Information We Collect')).toBeInTheDocument();
     expect(screen.getByText('How We Use Your Information')).toBeInTheDocument();
+    expect(
+      screen.getByText('Referrals and the Referral Leaderboard'),
+    ).toBeInTheDocument();
     expect(screen.getByText('Your Rights Under GDPR')).toBeInTheDocument();
     expect(screen.getByText('Data Retention')).toBeInTheDocument();
     expect(screen.getByText('Data Security')).toBeInTheDocument();

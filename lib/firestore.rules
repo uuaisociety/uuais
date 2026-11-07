@@ -92,6 +92,8 @@ service cloud.firestore {
           'displayName','email','photoURL','isMember','studentStatus','campus','university','expectedGraduationYear','linkedin','github','website','bio','name','gender','program','heardOfUs','referredBy','newsletter','lookingForJob','privacyAcceptedAt','marketingOptIn','analyticsOptIn','partnerContactOptIn','createdAt','updatedAt','unsubscribedFromEmails'
         ])
         && partnerVisibleFieldsOk(request.resource.data)
+        // Shown on the public referral leaderboard; the client also strips odd characters.
+        && strWithin(request.resource.data, 'referredBy', 200)
         // Re-creating a profile while a CV is still shared must keep partner contact on too.
         && cvOptInKept(uid);
 
@@ -105,6 +107,7 @@ service cloud.firestore {
         ])
         && (!('isMember' in resource.data) || request.resource.data.get('isMember', null) == resource.data.isMember)
         && partnerVisibleFieldsOk(request.resource.data)
+        && strWithin(request.resource.data, 'referredBy', 200)
         && cvOptInKept(uid);
 
       // Admin profile edits go through /api/admin/members/profile (audit-logged,

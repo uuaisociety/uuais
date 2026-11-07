@@ -23,7 +23,7 @@ export const PrivacyPage: React.FC = () => {
             collect, use, and protect your information.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            Last updated: October 28, 2026
+            Last updated: November 7, 2026
           </p>
         </div>
 
@@ -63,6 +63,10 @@ export const PrivacyPage: React.FC = () => {
                     graduation year (optional)
                   </li>
                   <li>Gender (optional)</li>
+                  <li>
+                    How you heard about us and, if someone referred you, their
+                    name (optional)
+                  </li>
                   <li>Social media profiles (optional)</li>
                   <li>
                     Professional interests and AI-related experience (optional)
@@ -108,6 +112,15 @@ export const PrivacyPage: React.FC = () => {
                 <li>To manage membership and event registrations</li>
                 <li>To send newsletters and updates about AI developments</li>
                 <li>To improve our website and services</li>
+                <li>
+                  To recognise members who refer others, on our public{' '}
+                  <a
+                    href="#referrals"
+                    className="text-blue-600 dark:text-blue-400 underline"
+                  >
+                    referral leaderboard
+                  </a>
+                </li>
                 <li>To comply with legal obligations</li>
                 <li>To market our services and events to businesses</li>
               </ul>
@@ -214,6 +227,56 @@ export const PrivacyPage: React.FC = () => {
                     it@uuais.com
                   </a>{' '}
                   and we will forward your deletion request
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          {/* Referrals */}
+          <section id="referrals" className="scroll-mt-24">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+              Referrals and the Referral Leaderboard
+            </h2>
+            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+              <p className="text-gray-700 dark:text-gray-300 mb-4">
+                If you answer &quot;Referral&quot; to &quot;How did you hear
+                about us?&quot;, you can name the person who referred you. This
+                is optional. Only enter a name if that person is happy for it to
+                be shown internally.
+              </p>
+              <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                <li>
+                  <strong>What may be shown internally:</strong> the name you
+                  enter, and how many members named the same person, on our
+                  referral leaderboard. We never show who named them
+                </li>
+                <li>
+                  <strong>If someone names you:</strong> your name, as they
+                  typed it, and the number of members who named you may appear
+                  on the leaderboard
+                </li>
+                <li>
+                  <strong>Legal basis:</strong> our legitimate interest in
+                  recognising members who help the society grow (GDPR Art.
+                  6(1)(f))
+                </li>
+                <li>
+                  <strong>Removing a name:</strong> change or clear the name on{' '}
+                  <a
+                    href="/account"
+                    className="text-blue-600 dark:text-blue-400 underline"
+                  >
+                    My Account
+                  </a>{' '}
+                  at any time and it stops counting. If you have been named and
+                  do not want to appear, contact us at{' '}
+                  <a
+                    href="mailto:it@uuais.com"
+                    className="text-blue-600 dark:text-blue-400 underline"
+                  >
+                    it@uuais.com
+                  </a>{' '}
+                  and we will remove it
                 </li>
               </ul>
             </div>
