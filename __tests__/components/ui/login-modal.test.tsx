@@ -168,6 +168,24 @@ describe('LoginCard', () => {
     expect(after).not.toHaveBeenCalled();
   });
 
+  it('explains how to get in when the email already has another sign-in method', async () => {
+    mockSignInWithGithubPopup.mockRejectedValue(
+      Object.assign(
+        new Error(
+          'Firebase: Error (auth/account-exists-with-different-credential).',
+        ),
+        {
+          code: 'auth/account-exists-with-different-credential',
+        },
+      ),
+    );
+    render(<LoginCard after={jest.fn()} />);
+    await userEvent.click(screen.getByText(/Continue with GitHub/));
+    expect(screen.getByRole('alert')).toHaveTextContent(
+      /already has an account that uses a different sign-in method.*Linked Accounts/,
+    );
+  });
+
   it('still calls after when the profile lookup fails', async () => {
     mockSignInWithGooglePopup.mockResolvedValue(mockUser);
     mockGetUserProfile.mockRejectedValue(new Error('network'));

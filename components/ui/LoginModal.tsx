@@ -11,6 +11,7 @@ import { getUserProfile, isPartnerEmail } from '@/lib/firestore';
 import { useRouter } from 'next/navigation';
 import { joinUrl, currentRedirect } from '@/lib/login-redirect';
 import EmailLinkSignIn from '@/components/auth/EmailLinkSignIn';
+import { signInErrorMessage } from '@/lib/sign-in-error';
 
 import type { FC } from 'react';
 import Link from 'next/link';
@@ -71,9 +72,7 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
       const user = await signIn();
       await finishSignIn(user.uid);
     } catch (e) {
-      setError(
-        e instanceof Error ? e.message : 'Sign-in failed. Please try again.',
-      );
+      setError(signInErrorMessage(e));
       console.error('Sign-in failed:', e);
     }
   };
@@ -125,6 +124,7 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
           label="Email"
           placeholder="you@example.com"
           contactEmail="contact@uuais.com"
+          alternative="continue with Google or GitHub"
           onSignedIn={(user) => finishSignIn(user.uid)}
         />
         {error && (

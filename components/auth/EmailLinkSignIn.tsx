@@ -36,7 +36,24 @@ const pageUrl = (): string => {
   return url.pathname + url.search;
 };
 
-const errorMessages = (contactEmail: string): Record<string, string> => ({
+// reCAPTCHA (enforced on the email provider) refused the request: a low score
+// (VPN, Tor, locked-down browser) or no token at all (the reCAPTCHA script was blocked).
+const RECAPTCHA_CODES = [
+  'auth/captcha-check-failed',
+  'auth/missing-recaptcha-token',
+  'auth/invalid-recaptcha-token',
+];
+
+const errorMessages = (
+  contactEmail: string,
+  alternative: string,
+): Record<string, string> => ({
+  ...Object.fromEntries(
+    RECAPTCHA_CODES.map((code) => [
+      code,
+      `We couldn’t verify this request. Try again without a VPN or in another browser, or ${alternative}.`,
+    ]),
+  ),
   'auth/invalid-email': 'That doesn’t look like a valid email address.',
   'auth/missing-email': 'Enter your email address.',
   'auth/email-link-mismatch':
@@ -65,6 +82,8 @@ interface EmailLinkSignInProps {
   placeholder: string;
   /** Who to contact when email sign-in is switched off in Firebase. */
   contactEmail: string;
+  /** Another way in, offered when reCAPTCHA refuses the request; defaults to contacting `contactEmail`. */
+  alternative?: string;
   /** Checked before any link is sent; false shows `notAllowed` and sends nothing. */
   allowed?: (email: string) => Promise<boolean>;
   notAllowed?: ReactNode;
@@ -76,6 +95,7 @@ export default function EmailLinkSignIn({
   label,
   placeholder,
   contactEmail,
+  alternative = `contact ${contactEmail}`,
   allowed,
   notAllowed,
   onSignedIn,
@@ -89,7 +109,7 @@ export default function EmailLinkSignIn({
   // would fail with invalid-action-code after the first one signed in.
   const linkHandled = useRef(false);
 
-  const ERRORS = errorMessages(contactEmail);
+  const ERRORS = errorMessages(contactEmail, alternative);
   const errorMessage = (e: unknown): string =>
     ERRORS[errorCode(e) ?? ''] ?? 'Sign-in failed. Please try again.';
 

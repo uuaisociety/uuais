@@ -19,6 +19,8 @@ jest.mock('@/lib/firebase-client', () => {
       }),
       _callbackHolder: callbackHolder,
     },
+    signInWithGooglePopup: jest.fn(),
+    signInWithGithubPopup: jest.fn(),
     // The email-link form under the provider buttons.
     isEmailSignInLink: jest.fn(() => false),
     storedEmailForSignIn: jest.fn(() => null),
@@ -153,6 +155,32 @@ describe('JoinPage', () => {
         ),
       );
       window.history.replaceState({}, '', '/');
+    });
+
+    it('shows why a GitHub sign-in was refused instead of failing silently', async () => {
+      const firebase = jest.requireMock('@/lib/firebase-client') as {
+        signInWithGithubPopup: jest.Mock;
+      };
+      firebase.signInWithGithubPopup.mockRejectedValueOnce(
+        Object.assign(new Error('exists'), {
+          code: 'auth/account-exists-with-different-credential',
+        }),
+      );
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+      render(<JoinPage />);
+
+      fireEvent.click(
+        screen.getByRole('button', { name: /Continue with GitHub/ }),
+      );
+
+      expect(
+        await screen.findByText(
+          /already has an account that uses a different sign-in method/,
+        ),
+      ).toBeInTheDocument();
+      errorSpy.mockRestore();
     });
 
     it('does not show profile form when logged out', () => {

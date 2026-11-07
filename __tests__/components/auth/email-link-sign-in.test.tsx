@@ -33,12 +33,13 @@ describe('EmailLinkSignIn', () => {
 
   afterEach(() => errorSpy.mockRestore());
 
-  const renderForm = () =>
+  const renderForm = (alternative?: string) =>
     render(
       <EmailLinkSignIn
         label="Email"
         placeholder="you@example.com"
         contactEmail="contact@uuais.com"
+        alternative={alternative}
         onSignedIn={jest.fn()}
       />,
     );
@@ -80,6 +81,37 @@ describe('EmailLinkSignIn', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent(
       'Please contact contact@uuais.com.',
+    );
+  });
+
+  it.each(['auth/captcha-check-failed', 'auth/missing-recaptcha-token'])(
+    'offers another way in when reCAPTCHA refuses the request (%s)',
+    async (code) => {
+      mockSendEmailSignInLink.mockRejectedValue(
+        Object.assign(new Error(code), { code }),
+      );
+      renderForm('continue with Google or GitHub');
+
+      await requestLink();
+
+      expect(await screen.findByRole('alert')).toHaveTextContent(
+        'We couldn’t verify this request. Try again without a VPN or in another browser, or continue with Google or GitHub.',
+      );
+    },
+  );
+
+  it('points to the contact address when no other way in is given', async () => {
+    mockSendEmailSignInLink.mockRejectedValue(
+      Object.assign(new Error('blocked'), {
+        code: 'auth/captcha-check-failed',
+      }),
+    );
+    renderForm();
+
+    await requestLink();
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      /in another browser, or contact contact@uuais\.com\.$/,
     );
   });
 });
