@@ -17,7 +17,15 @@ import {
 import { useNotify } from '@/components/ui/Notifications';
 import { DiscordCta } from '@/components/common/DiscordCta';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import { currentRedirect } from '@/lib/login-redirect';
+import { signInErrorMessage } from '@/lib/sign-in-error';
+
+// Loaded on demand, like the provider buttons' Firebase import, so the page doesn't ship Firebase up front.
+const EmailLinkSignIn = dynamic(
+  () => import('@/components/auth/EmailLinkSignIn'),
+  { ssr: false },
+);
 
 const JoinPage: React.FC = () => {
   const router = useRouter();
@@ -26,7 +34,22 @@ const JoinPage: React.FC = () => {
   const [form, setForm] = useState<Partial<UserProfile>>({});
   const [saving, setSaving] = useState(false);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
+  const [signInError, setSignInError] = useState<string | null>(null);
   const { notify } = useNotify();
+
+  // On success the auth listener below shows the profile form.
+  const popupSignIn = async (provider: 'google' | 'github') => {
+    setSignInError(null);
+    try {
+      const m = await import('@/lib/firebase-client');
+      await (provider === 'google'
+        ? m.signInWithGooglePopup()
+        : m.signInWithGithubPopup());
+    } catch (e) {
+      setSignInError(signInErrorMessage(e));
+      console.error('Sign-in failed:', e);
+    }
+  };
 
   useEffect(() => {
     updatePageMeta(
@@ -204,15 +227,13 @@ const JoinPage: React.FC = () => {
                 Create Account
               </h2>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
-                Use one of the providers below.
+                Use one of the options below.
               </p>
             </CardHeader>
             <CardContent className="space-y-3 flex flex-col md:flex-col justify-center gap-2 pt-4 items-center max-w-md mx-auto">
               <Button
                 onClick={() => {
-                  void import('@/lib/firebase-client').then((m) =>
-                    m.signInWithGooglePopup(),
-                  );
+                  void popupSignIn('google');
                 }}
                 variant="outline"
               >
@@ -223,9 +244,7 @@ const JoinPage: React.FC = () => {
               </Button>
               <Button
                 onClick={() => {
-                  void import('@/lib/firebase-client').then((m) =>
-                    m.signInWithGithubPopup(),
-                  );
+                  void popupSignIn('github');
                 }}
                 variant="outline"
               >
@@ -234,6 +253,30 @@ const JoinPage: React.FC = () => {
                   Continue with GitHub
                 </span>
               </Button>
+              {signInError && (
+                <p
+                  role="alert"
+                  className="max-w-xs text-sm text-red-600 dark:text-red-400 text-center"
+                >
+                  {signInError}
+                </p>
+              )}
+              <div
+                role="separator"
+                className="flex items-center gap-3 my-5 w-full max-w-xs text-xs text-muted-foreground"
+              >
+                <span className="h-px flex-1 bg-border" />
+                or
+                <span className="h-px flex-1 bg-border" />
+              </div>
+              {/* The link returns here; the auth listener above then shows the profile form. */}
+              <EmailLinkSignIn
+                label="Email"
+                placeholder="you@example.com"
+                contactEmail="contact@uuais.com"
+                alternative="continue with Google or GitHub"
+                onSignedIn={() => {}}
+              />
             </CardContent>
           </Card>
         )}

@@ -19,6 +19,14 @@ jest.mock('@/lib/firebase-client', () => {
       }),
       _callbackHolder: callbackHolder,
     },
+    signInWithGooglePopup: jest.fn(),
+    signInWithGithubPopup: jest.fn(),
+    // The email-link form under the provider buttons.
+    isEmailSignInLink: jest.fn(() => false),
+    storedEmailForSignIn: jest.fn(() => null),
+    emailLinkCooldownSeconds: jest.fn(() => 0),
+    sendEmailSignInLink: jest.fn(),
+    signInWithEmailLinkAfterReady: jest.fn(),
   };
 });
 
@@ -124,6 +132,55 @@ describe('JoinPage', () => {
       expect(
         screen.getByRole('button', { name: /Continue with GitHub/ }),
       ).toBeInTheDocument();
+    });
+
+    it('offers an emailed sign-in link that returns to /join with the redirect', async () => {
+      window.history.replaceState({}, '', '/join?redirect=%2Fapply');
+      const firebase = jest.requireMock('@/lib/firebase-client') as {
+        sendEmailSignInLink: jest.Mock;
+      };
+      render(<JoinPage />);
+
+      fireEvent.change(await screen.findByLabelText('Email'), {
+        target: { value: 'ada@student.uu.se' },
+      });
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Email me a sign-in link' }),
+      );
+
+      await waitFor(() =>
+        expect(firebase.sendEmailSignInLink).toHaveBeenCalledWith(
+          'ada@student.uu.se',
+          `${window.location.origin}/join?redirect=%2Fapply`,
+        ),
+      );
+      window.history.replaceState({}, '', '/');
+    });
+
+    it('shows why a GitHub sign-in was refused instead of failing silently', async () => {
+      const firebase = jest.requireMock('@/lib/firebase-client') as {
+        signInWithGithubPopup: jest.Mock;
+      };
+      firebase.signInWithGithubPopup.mockRejectedValueOnce(
+        Object.assign(new Error('exists'), {
+          code: 'auth/account-exists-with-different-credential',
+        }),
+      );
+      const errorSpy = jest
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+      render(<JoinPage />);
+
+      fireEvent.click(
+        screen.getByRole('button', { name: /Continue with GitHub/ }),
+      );
+
+      expect(
+        await screen.findByText(
+          /already has an account that uses a different sign-in method/,
+        ),
+      ).toBeInTheDocument();
+      errorSpy.mockRestore();
     });
 
     it('does not show profile form when logged out', () => {

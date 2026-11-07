@@ -36,10 +36,15 @@ jest.mock('firebase/auth', () => {
     signInWithPopup: (...args: unknown[]) => signInWithPopup(...args),
     linkWithPopup: jest.fn(),
     signOut: jest.fn(),
+    sendSignInLinkToEmail: jest.fn(async () => {}),
   };
 });
 
-import { signInWithGooglePopup } from '@/lib/firebase-client';
+import {
+  emailLinkCooldownSeconds,
+  sendEmailSignInLink,
+  signInWithGooglePopup,
+} from '@/lib/firebase-client';
 
 type AuthMocks = {
   order: string[];
@@ -78,5 +83,53 @@ describe('signInWithGooglePopup', () => {
       headers: { Authorization: 'Bearer id-token' },
       credentials: 'include',
     });
+  });
+});
+
+describe('email sign-in link cooldown', () => {
+  const now = 1_800_000_000_000;
+  let nowSpy: jest.SpyInstance;
+
+  beforeEach(() => {
+    window.localStorage.clear();
+    nowSpy = jest.spyOn(Date, 'now').mockReturnValue(now);
+  });
+
+  afterEach(() => nowSpy.mockRestore());
+
+  it('lets a browser that sent nothing request a link', () => {
+    expect(emailLinkCooldownSeconds()).toBe(0);
+  });
+
+  it('holds the next request for a minute after a link is sent', async () => {
+    await sendEmailSignInLink('a@example.com', 'https://uuais.com/login');
+    expect(emailLinkCooldownSeconds()).toBe(60);
+
+    nowSpy.mockReturnValue(now + 59_500);
+    expect(emailLinkCooldownSeconds()).toBe(1);
+
+    nowSpy.mockReturnValue(now + 60_000);
+    expect(emailLinkCooldownSeconds()).toBe(0);
+  });
+
+  it('starts no cooldown when Firebase refuses to send', async () => {
+    const { sendSignInLinkToEmail } = jest.requireMock('firebase/auth') as {
+      sendSignInLinkToEmail: jest.Mock;
+    };
+    sendSignInLinkToEmail.mockRejectedValueOnce(
+      Object.assign(new Error('quota'), { code: 'auth/quota-exceeded' }),
+    );
+    await expect(
+      sendEmailSignInLink('a@example.com', 'https://uuais.com/login'),
+    ).rejects.toThrow('quota');
+    expect(emailLinkCooldownSeconds()).toBe(0);
+  });
+
+  it('does not lock the form when the stored time is in the future', () => {
+    window.localStorage.setItem(
+      'emailForSignInSentAt',
+      String(now + 3_600_000),
+    );
+    expect(emailLinkCooldownSeconds()).toBe(0);
   });
 });
