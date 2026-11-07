@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import LoginCard from '@/components/ui/LoginModal';
 
@@ -7,6 +7,10 @@ const mockSignInWithGithubPopup = jest.fn();
 const mockGetUserProfile = jest.fn();
 const mockRouterPush = jest.fn();
 const mockIsPartnerEmail = jest.fn();
+const mockIsEmailSignInLink = jest.fn();
+const mockStoredEmailForSignIn = jest.fn();
+const mockSendEmailSignInLink = jest.fn();
+const mockSignInWithEmailLink = jest.fn();
 
 jest.mock('@/lib/firebase-client', () => ({
   auth: {
@@ -16,6 +20,12 @@ jest.mock('@/lib/firebase-client', () => ({
     mockSignInWithGooglePopup(...args),
   signInWithGithubPopup: (...args: unknown[]) =>
     mockSignInWithGithubPopup(...args),
+  isEmailSignInLink: (...args: unknown[]) => mockIsEmailSignInLink(...args),
+  storedEmailForSignIn: () => mockStoredEmailForSignIn(),
+  emailLinkCooldownSeconds: () => 0,
+  sendEmailSignInLink: (...args: unknown[]) => mockSendEmailSignInLink(...args),
+  signInWithEmailLinkAfterReady: (...args: unknown[]) =>
+    mockSignInWithEmailLink(...args),
 }));
 
 jest.mock('@/lib/firestore', () => ({
@@ -38,6 +48,8 @@ describe('LoginCard', () => {
       privacyAcceptedAt: '2026-01-01T00:00:00Z',
     });
     mockIsPartnerEmail.mockResolvedValue(false);
+    mockIsEmailSignInLink.mockReturnValue(false);
+    mockStoredEmailForSignIn.mockReturnValue(null);
   });
 
   it('lets a partner account through without a member profile', async () => {
@@ -163,5 +175,61 @@ describe('LoginCard', () => {
     render(<LoginCard after={after} />);
     await userEvent.click(screen.getByText(/Continue with Google/));
     expect(after).toHaveBeenCalledTimes(1);
+  });
+
+  describe('email sign-in link', () => {
+    const LINK = '/login?redirect=%2Fapply&apiKey=k&oobCode=abc&mode=signIn';
+
+    afterEach(() => window.history.replaceState({}, '', '/'));
+
+    it('emails a link that returns to the login page, keeping the redirect', async () => {
+      window.history.replaceState({}, '', '/login?redirect=%2Fapply');
+      mockSendEmailSignInLink.mockResolvedValue(undefined);
+      render(<LoginCard after={jest.fn()} />);
+
+      await userEvent.type(screen.getByLabelText('Email'), 'ada@student.uu.se');
+      await userEvent.click(
+        screen.getByRole('button', { name: 'Email me a sign-in link' }),
+      );
+
+      expect(mockSendEmailSignInLink).toHaveBeenCalledWith(
+        'ada@student.uu.se',
+        `${window.location.origin}/login?redirect=%2Fapply`,
+      );
+      expect(await screen.findByText('Check your inbox')).toBeInTheDocument();
+    });
+
+    it('sends a new account from the link to /join, keeping the redirect', async () => {
+      window.history.replaceState({}, '', LINK);
+      mockIsEmailSignInLink.mockReturnValue(true);
+      mockStoredEmailForSignIn.mockReturnValue('ada@student.uu.se');
+      mockSignInWithEmailLink.mockResolvedValue({ uid: 'u2' });
+      mockGetUserProfile.mockResolvedValue(null);
+      const after = jest.fn();
+      render(<LoginCard after={after} />);
+
+      await waitFor(() =>
+        expect(mockRouterPush).toHaveBeenCalledWith('/join?redirect=%2Fapply'),
+      );
+      expect(mockSignInWithEmailLink).toHaveBeenCalledWith(
+        'ada@student.uu.se',
+        `${window.location.origin}${LINK}`,
+      );
+      expect(mockGetUserProfile).toHaveBeenCalledWith('u2');
+      expect(after).not.toHaveBeenCalled();
+      expect(window.location.search).toBe('?redirect=%2Fapply');
+    });
+
+    it('lets a member with a finished profile straight through', async () => {
+      window.history.replaceState({}, '', LINK);
+      mockIsEmailSignInLink.mockReturnValue(true);
+      mockStoredEmailForSignIn.mockReturnValue('ada@student.uu.se');
+      mockSignInWithEmailLink.mockResolvedValue({ uid: 'u1' });
+      const after = jest.fn();
+      render(<LoginCard after={after} />);
+
+      await waitFor(() => expect(after).toHaveBeenCalledTimes(1));
+      expect(mockRouterPush).not.toHaveBeenCalled();
+    });
   });
 });

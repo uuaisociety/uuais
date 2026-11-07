@@ -1,21 +1,22 @@
-import { render, screen } from '@testing-library/react'
-import AdminGate from '@/components/auth/AdminGate'
+import { render, screen } from '@testing-library/react';
+import AdminGate from '@/components/auth/AdminGate';
 
 jest.mock('@/lib/firebase-client', () => ({
   signInWithGooglePopup: jest.fn(),
   signInWithGithubPopup: jest.fn(),
-}))
+  isEmailSignInLink: jest.fn(() => false),
+}));
 
 jest.mock('@/hooks/useAdmin', () => ({
   useAdmin: jest.fn(),
-}))
+}));
 
-const mockUseAdmin = jest.requireMock('@/hooks/useAdmin').useAdmin
+const mockUseAdmin = jest.requireMock('@/hooks/useAdmin').useAdmin;
 
 describe('AdminGate', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
-  })
+    jest.clearAllMocks();
+  });
 
   it('shows loading state', () => {
     mockUseAdmin.mockReturnValue({
@@ -26,10 +27,14 @@ describe('AdminGate', () => {
       claims: null,
       signInWithGoogle: jest.fn(),
       logout: jest.fn(),
-    })
-    render(<AdminGate><p>admin content</p></AdminGate>)
-    expect(screen.getByText('Checking permissions...')).toBeInTheDocument()
-  })
+    });
+    render(
+      <AdminGate>
+        <p>admin content</p>
+      </AdminGate>,
+    );
+    expect(screen.getByText('Checking permissions...')).toBeInTheDocument();
+  });
 
   it('shows login modal when no user', () => {
     mockUseAdmin.mockReturnValue({
@@ -40,10 +45,14 @@ describe('AdminGate', () => {
       claims: null,
       signInWithGoogle: jest.fn(),
       logout: jest.fn(),
-    })
-    render(<AdminGate><p>admin content</p></AdminGate>)
-    expect(screen.getByText('Login')).toBeInTheDocument()
-  })
+    });
+    render(
+      <AdminGate>
+        <p>admin content</p>
+      </AdminGate>,
+    );
+    expect(screen.getByText('Login')).toBeInTheDocument();
+  });
 
   it('shows unauthorized message when user is not admin', () => {
     mockUseAdmin.mockReturnValue({
@@ -54,10 +63,14 @@ describe('AdminGate', () => {
       claims: null,
       signInWithGoogle: jest.fn(),
       logout: jest.fn(),
-    })
-    render(<AdminGate><p>admin content</p></AdminGate>)
-    expect(screen.getByText('Admin Access Required')).toBeInTheDocument()
-  })
+    });
+    render(
+      <AdminGate>
+        <p>admin content</p>
+      </AdminGate>,
+    );
+    expect(screen.getByText('Admin Access Required')).toBeInTheDocument();
+  });
 
   it('renders children when user is admin', () => {
     mockUseAdmin.mockReturnValue({
@@ -68,8 +81,12 @@ describe('AdminGate', () => {
       claims: { admin: true },
       signInWithGoogle: jest.fn(),
       logout: jest.fn(),
-    })
-    render(<AdminGate><p>admin content</p></AdminGate>)
-    expect(screen.getByText('admin content')).toBeInTheDocument()
-  })
-})
+    });
+    render(
+      <AdminGate>
+        <p>admin content</p>
+      </AdminGate>,
+    );
+    expect(screen.getByText('admin content')).toBeInTheDocument();
+  });
+});

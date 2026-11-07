@@ -71,11 +71,31 @@ export const signInWithMicrosoftPopup = () =>
   signInWithPopupAfterReady(microsoftProvider);
 
 // Passwordless email-link sign-in, for addresses no OAuth provider covers (e.g.
-// a partner's Microsoft 365 work email). Using the link verifies the email.
+// a partner's Microsoft 365 work email, or a member without Google/GitHub).
+// Using the link verifies the email.
 // The address is remembered so the same browser can finish without re-typing it;
 // a link opened elsewhere must re-confirm it, which stops a forwarded link
 // signing someone else in.
 const EMAIL_FOR_SIGN_IN_KEY = 'emailForSignIn';
+
+// One link per browser per minute, so an impatient second click or a reload
+// doesn't spend the project's daily sign-in email quota.
+const EMAIL_LINK_SENT_AT_KEY = 'emailForSignInSentAt';
+const EMAIL_LINK_COOLDOWN_MS = 60_000;
+
+/** Seconds this browser must wait before requesting another sign-in link (0 = may send). */
+export const emailLinkCooldownSeconds = (): number => {
+  try {
+    const sentAt = Number(window.localStorage.getItem(EMAIL_LINK_SENT_AT_KEY));
+    const left = sentAt + EMAIL_LINK_COOLDOWN_MS - Date.now();
+    // A timestamp from the future (a changed clock) doesn't lock the form.
+    return left > 0 && left <= EMAIL_LINK_COOLDOWN_MS
+      ? Math.ceil(left / 1000)
+      : 0;
+  } catch {
+    return 0;
+  }
+};
 
 export const sendEmailSignInLink = async (
   email: string,
@@ -87,6 +107,7 @@ export const sendEmailSignInLink = async (
   });
   try {
     window.localStorage.setItem(EMAIL_FOR_SIGN_IN_KEY, email);
+    window.localStorage.setItem(EMAIL_LINK_SENT_AT_KEY, String(Date.now()));
   } catch {
     // Storage blocked: the user re-confirms their email when opening the link.
   }

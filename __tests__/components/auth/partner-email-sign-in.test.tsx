@@ -8,6 +8,7 @@ const mockIsEmailSignInLink = jest.fn();
 const mockStoredEmailForSignIn = jest.fn();
 const mockSignInWithEmailLink = jest.fn();
 jest.mock('@/lib/firebase-client', () => ({
+  emailLinkCooldownSeconds: () => 0,
   sendEmailSignInLink: (...args: unknown[]) => mockSendEmailSignInLink(...args),
   isEmailSignInLink: (...args: unknown[]) => mockIsEmailSignInLink(...args),
   storedEmailForSignIn: () => mockStoredEmailForSignIn(),
@@ -156,9 +157,10 @@ describe('PartnerEmailSignIn', () => {
     await waitFor(() => expect(mockRefresh).toHaveBeenCalledTimes(1));
     expect(mockSignInWithEmailLink).toHaveBeenCalledWith(
       'hr@partner.example',
-      window.location.href,
+      `${window.location.origin}${LINK}`,
     );
     expect(mockReplace).toHaveBeenCalledWith('/partners/cvs');
+    expect(window.location.search).toBe('');
   });
 
   it('uses a single-use link only once, even when effects run twice', async () => {
