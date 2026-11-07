@@ -523,6 +523,20 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // GUESSING GAME - one guess per user, tied to their auth email, only while an admin has it open
+    match /guesses/{uid} {
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
+      allow create, update: if isSignedIn() && request.auth.uid == uid
+        && get(/databases/$(database)/documents/config/guess_contest).data.get('open', false) == true
+        && request.resource.data.keys().hasOnly(['email', 'guess', 'updatedAt'])
+        && request.auth.token.email is string
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.guess is int
+        && request.resource.data.guess >= 0
+        && request.resource.data.guess <= 999999999
+        && request.resource.data.updatedAt == request.time;
+    }
+
     // CONFIG - application configuration (embedding projections, prerequisite graph, etc.)
     match /config/{configId} {
       // Docs with their own rule above are excluded here: rules are OR'd, so

@@ -148,6 +148,7 @@ export async function eraseAccount(uid: string): Promise<void> {
     'favorites',
     'ai_chats',
     'programProgress',
+    'guesses',
     'cvs',
     'users',
   ]) {

@@ -15,6 +15,11 @@ jest.mock('@/lib/firestore/useOpenCampaigns', () => ({
   useOpenCampaigns: () => mockUseOpenCampaigns(),
 }));
 
+const mockUseGuessContest = jest.fn();
+jest.mock('@/lib/firestore/useGuessContest', () => ({
+  useGuessContest: () => mockUseGuessContest(),
+}));
+
 const g = global as { __mockPathname?: string };
 
 function mockAdminState(overrides: Record<string, unknown> = {}) {
@@ -38,6 +43,29 @@ describe('Header', () => {
     mockAdminState();
     global.__setAppState?.(null);
     mockUseOpenCampaigns.mockReturnValue({ campaigns: [], loaded: false });
+    mockUseGuessContest.mockReturnValue({ contest: null, loaded: false });
+  });
+
+  describe('guessing game link', () => {
+    it('is hidden while the game is closed', () => {
+      mockUseGuessContest.mockReturnValue({
+        contest: { item: 'candy', open: false },
+        loaded: true,
+      });
+      render(<Header />);
+      expect(screen.queryByText('Guess')).not.toBeInTheDocument();
+    });
+
+    it('shows in desktop and mobile nav while the game is open', () => {
+      mockUseGuessContest.mockReturnValue({
+        contest: { item: 'candy', open: true },
+        loaded: true,
+      });
+      render(<Header />);
+      const links = screen.getAllByRole('link', { name: 'Guess' });
+      expect(links.length).toBe(2);
+      links.forEach((link) => expect(link).toHaveAttribute('href', '/guess'));
+    });
   });
 
   describe('navigation links', () => {

@@ -509,6 +509,55 @@ try {
     { merge: true },
   );
   passed++;
+  // Guessing game: own doc, own auth email, whole numbers, only while open.
+  const guesser = client('guesser', {
+    sub: 'guesser-1',
+    email: 'guesser@example.com',
+  });
+  const guess = (fields = {}) => ({
+    email: 'guesser@example.com',
+    guess: 42,
+    updatedAt: serverTimestamp(),
+    ...fields,
+  });
+  await denied(() => setDoc(doc(guesser, 'guesses/guesser-1'), guess()));
+  await seed('config/guess_contest', { open: { booleanValue: false } });
+  await denied(() => setDoc(doc(guesser, 'guesses/guesser-1'), guess()));
+  await seed('config/guess_contest', { open: { booleanValue: true } });
+  await setDoc(doc(guesser, 'guesses/guesser-1'), guess());
+  passed++;
+  await setDoc(doc(guesser, 'guesses/guesser-1'), guess({ guess: 7 }));
+  passed++;
+  await denied(() => setDoc(doc(anonymous, 'guesses/guesser-1'), guess()));
+  await denied(() => setDoc(doc(member, 'guesses/guesser-1'), guess()));
+  for (const bad of [
+    { email: 'someone-else@example.com' },
+    { guess: -1 },
+    { guess: 1.5 },
+    { guess: '42' },
+    { guess: 1_000_000_000 },
+    { updatedAt: '2026-11-07T00:00:00.000Z' },
+    { extra: true },
+  ]) {
+    await denied(() => setDoc(doc(guesser, 'guesses/guesser-1'), guess(bad)));
+  }
+  assert.equal(
+    (await getDoc(doc(guesser, 'guesses/guesser-1'))).get('guess'),
+    7,
+  );
+  passed++;
+  await denied(() => getDoc(doc(member, 'guesses/guesser-1')));
+  assert.equal(
+    (await getDoc(doc(admin, 'guesses/guesser-1'))).get('email'),
+    'guesser@example.com',
+  );
+  passed++;
+  await denied(() =>
+    setDoc(doc(member, 'config/guess_contest'), { open: true }),
+  );
+  await setDoc(doc(admin, 'config/guess_contest'), { item: 'candy', open: true });
+  passed++;
+
   console.log(`Firestore security rules: ${passed} checks passed`);
 } finally {
   await Promise.all(

@@ -23,6 +23,9 @@ jest.mock('@/hooks/useAdmin', () => ({
 jest.mock('@/lib/firestore/useOpenCampaigns', () => ({
   useOpenCampaigns: () => ({ campaigns: [], loaded: false }),
 }));
+jest.mock('@/lib/firestore/useGuessContest', () => ({
+  useGuessContest: () => ({ contest: null, loaded: false }),
+}));
 
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';

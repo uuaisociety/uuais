@@ -125,6 +125,11 @@ describe('eraseAccount', () => {
     expect(calls.filter((c) => c.includes('eventAttendance/e2'))).toEqual([]);
   });
 
+  it('deletes the member’s guessing-game entry, which holds their email', async () => {
+    await eraseAccount('u1');
+    expect(calls).toContain('recursiveDelete guesses/u1');
+  });
+
   it('deletes course mappings of the member’s categories and orphans with their uid', async () => {
     await eraseAccount('u1');
     const swept = calls
