@@ -41,18 +41,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  // Firebase's email action handler, served from our own domain
-  async rewrites() {
-    const project = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
-    return project
-      ? [
-          {
-            source: '/__/auth/:path*',
-            destination: `https://${project}.firebaseapp.com/__/auth/:path*`,
-          },
-        ]
-      : [];
-  },
   async headers() {
     return [
       {
