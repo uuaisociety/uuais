@@ -427,6 +427,76 @@ describe('JoinPage', () => {
       );
     });
 
+    it('asks for the friend\'s name when "Friends" is selected, and saves it', async () => {
+      mockedUsers().upsertUserProfile.mockResolvedValue(undefined);
+      render(<JoinPage />);
+      await triggerAuthCallback(mockUser);
+
+      const select = screen.getByDisplayValue('Select an option');
+      fireEvent.change(select, { target: { value: 'friends' } });
+      fireEvent.change(
+        screen.getByPlaceholderText('Name of the person who referred you'),
+        { target: { value: 'Ada' } },
+      );
+      fireEvent.click(screen.getByLabelText(/I accept the/));
+      fireEvent.click(screen.getByText('Save & Become Member'));
+
+      await waitFor(() =>
+        expect(mockedUsers().upsertUserProfile).toHaveBeenCalledWith(
+          'u3',
+          expect.objectContaining({ heardOfUs: 'friends', referredBy: 'Ada' }),
+        ),
+      );
+    });
+
+    it('hints "please specify below" only on mobile, where the box stacks below', async () => {
+      const width = window.innerWidth;
+      try {
+        window.innerWidth = 375;
+        const { unmount } = render(<JoinPage />);
+        await triggerAuthCallback(mockUser);
+        for (const label of ['Friends', 'Referral', 'Other']) {
+          expect(
+            screen.getByRole('option', {
+              name: `${label} (please specify below)`,
+            }),
+          ).toBeInTheDocument();
+        }
+        expect(
+          screen.getByRole('option', { name: 'Events' }),
+        ).toBeInTheDocument();
+        unmount();
+
+        window.innerWidth = 1024;
+        render(<JoinPage />);
+        await triggerAuthCallback(mockUser);
+        expect(
+          screen.getByRole('option', { name: 'Friends' }),
+        ).toBeInTheDocument();
+        expect(
+          screen.queryByText(/please specify below/),
+        ).not.toBeInTheDocument();
+      } finally {
+        window.innerWidth = width;
+      }
+    });
+
+    it('keeps the name when switching between "Friends" and "Referral"', async () => {
+      render(<JoinPage />);
+      await triggerAuthCallback(mockUser);
+
+      const select = screen.getByDisplayValue('Select an option');
+      fireEvent.change(select, { target: { value: 'friends' } });
+      fireEvent.change(
+        screen.getByPlaceholderText('Name of the person who referred you'),
+        { target: { value: 'Ada' } },
+      );
+      fireEvent.change(select, { target: { value: 'referral' } });
+      expect(
+        screen.getByPlaceholderText('Name of the person who referred you'),
+      ).toHaveValue('Ada');
+    });
+
     it('clears the referrer when switching away from "Referral"', async () => {
       render(<JoinPage />);
       await triggerAuthCallback(mockUser);

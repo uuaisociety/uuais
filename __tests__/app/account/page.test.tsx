@@ -846,13 +846,17 @@ describe('AccountPage', () => {
 
     it('asks who referred them when "Referral" is selected', async () => {
       defaults();
+      (getUserProfile as jest.Mock).mockResolvedValue({
+        ...fullProfile,
+        heardOfUs: 'instagram',
+      });
       render(<AccountPage />);
       fireEvent.click(await screen.findByText('Edit'));
 
       expect(
         screen.queryByPlaceholderText('Name of the person who referred you'),
       ).not.toBeInTheDocument();
-      fireEvent.change(screen.getByDisplayValue('Friends'), {
+      fireEvent.change(screen.getByDisplayValue('Instagram'), {
         target: { value: 'referral' },
       });
 
@@ -864,6 +868,31 @@ describe('AccountPage', () => {
       );
       fireEvent.change(referrerInput, { target: { value: 'Ada' } });
       expect(referrerInput).toHaveValue('Ada');
+    });
+
+    it('asks for the friend\'s name when "Friends" is selected', async () => {
+      defaults();
+      render(<AccountPage />);
+      fireEvent.click(await screen.findByText('Edit'));
+
+      // fullProfile.heardOfUs is 'friends'
+      const referrerInput = screen.getByPlaceholderText(
+        'Name of the person who referred you',
+      );
+      fireEvent.change(referrerInput, { target: { value: 'Ada' } });
+      expect(referrerInput).toHaveValue('Ada');
+    });
+
+    it('shows which friend referred them on the profile view', async () => {
+      defaults();
+      (getUserProfile as jest.Mock).mockResolvedValue({
+        ...fullProfile,
+        referredBy: 'Bo Friend',
+      });
+      render(<AccountPage />);
+
+      expect(await screen.findByText('Bo Friend')).toBeInTheDocument();
+      expect(screen.getByText('From who?')).toBeInTheDocument();
     });
 
     it('shows who referred them on the profile view', async () => {

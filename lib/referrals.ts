@@ -2,6 +2,15 @@ export type ReferrerCount = { name: string; count: number };
 
 export const REFERRER_NAME_MAX = 200;
 
+/** "How did you hear of us?" answers that ask for a name and count as a referral. */
+export const REFERRAL_SOURCES = ['referral', 'friends'];
+
+export function isReferralSource(heardOfUs: unknown): boolean {
+  return (
+    typeof heardOfUs === 'string' && REFERRAL_SOURCES.includes(heardOfUs.trim())
+  );
+}
+
 /**
  * Cleans a typed referrer name. It can be shown publicly on the referral
  * leaderboard, so besides collapsing whitespace it is NFKC-normalised (so
@@ -34,8 +43,7 @@ export function rankReferrers(
   const byName = new Map<string, ReferrerCount>();
   for (const u of users) {
     const referrer = sanitizeReferrerName(u.referredBy);
-    const how = typeof u.heardOfUs === 'string' ? u.heardOfUs.trim() : '';
-    if (how !== 'referral' || !referrer) continue;
+    if (!isReferralSource(u.heardOfUs) || !referrer) continue;
     const key = referrer.toLowerCase();
     const entry = byName.get(key) ?? { name: referrer, count: 0 };
     entry.count++;

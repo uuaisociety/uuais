@@ -62,6 +62,16 @@ describe('rankReferrers', () => {
     expect(({} as { count?: unknown }).count).toBeUndefined();
   });
 
+  it('counts "Friends" answers as referrals, but no other source', () => {
+    const ranked = rankReferrers([
+      { heardOfUs: 'referral', referredBy: 'Ada' },
+      { heardOfUs: 'friends', referredBy: 'ada' },
+      { heardOfUs: 'instagram', referredBy: 'Ada' },
+      { heardOfUs: 'friends' },
+    ]);
+    expect(ranked).toEqual([{ name: 'Ada', count: 2 }]);
+  });
+
   it('skips non-string values instead of throwing', () => {
     const ranked = rankReferrers([
       { heardOfUs: 'referral', referredBy: 42 },

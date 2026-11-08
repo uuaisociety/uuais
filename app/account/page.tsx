@@ -43,9 +43,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { isReferralSource } from '@/lib/referrals';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export default function AccountPage() {
   const { notify } = useNotify();
+  // The follow-up box only sits below the select on mobile; beside it on md+.
+  const specifyBelow = useIsMobile() ? ' (please specify below)' : '';
   const router = useRouter();
   const [uid, setUid] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -525,7 +529,7 @@ export default function AccountPage() {
                         )}
                       </p>
                     </div>
-                    {form.heardOfUs === 'referral' && (
+                    {isReferralSource(form.heardOfUs) && (
                       <div>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
                           From who?
@@ -775,8 +779,8 @@ export default function AccountPage() {
                           setForm((f) => ({
                             ...f,
                             heardOfUs: v === 'other' ? '' : v,
-                            // Drop the referrer once Referral is no longer the answer.
-                            ...(v !== 'referral' && f.referredBy
+                            // Drop the referrer once Referral/Friends is no longer the answer.
+                            ...(!isReferralSource(v) && f.referredBy
                               ? { referredBy: '' }
                               : {}),
                           }));
@@ -786,14 +790,16 @@ export default function AccountPage() {
                         <option value="posters">Posters</option>
                         <option value="instagram">Instagram</option>
                         <option value="linkedin">LinkedIn</option>
-                        <option value="friends">Friends</option>
-                        <option value="referral">Referral</option>
+                        <option value="friends">{`Friends${specifyBelow}`}</option>
+                        <option value="referral">
+                          {`Referral${specifyBelow}`}
+                        </option>
                         <option value="events">Events</option>
                         <option value="lecture">During lecture</option>
-                        <option value="other">Other</option>
+                        <option value="other">{`Other${specifyBelow}`}</option>
                       </SelectBase>
                     </FieldGroup>
-                    {form.heardOfUs === 'referral' && (
+                    {isReferralSource(form.heardOfUs) && (
                       <FieldGroup label="From who?" requiredHint="Optional">
                         <InputBase
                           maxLength={200}

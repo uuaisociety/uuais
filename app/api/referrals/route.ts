@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
-import { rankReferrers } from '@/lib/referrals';
+import { rankReferrers, REFERRAL_SOURCES } from '@/lib/referrals';
 import { clientIp } from '@/lib/client-ip';
 
 export const runtime = 'nodejs';
@@ -99,7 +99,7 @@ export async function GET(request: NextRequest) {
     // Read only the two fields the count needs, never the rest of the profile.
     const snap = await adminDb
       .collection('users')
-      .where('heardOfUs', '==', 'referral')
+      .where('heardOfUs', 'in', REFERRAL_SOURCES)
       .select('heardOfUs', 'referredBy')
       .get();
     const referrers = rankReferrers(snap.docs.map((d) => d.data()));

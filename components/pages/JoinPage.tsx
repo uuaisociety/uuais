@@ -20,6 +20,8 @@ import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { currentRedirect } from '@/lib/login-redirect';
 import { signInErrorMessage } from '@/lib/sign-in-error';
+import { isReferralSource } from '@/lib/referrals';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Loaded on demand, like the provider buttons' Firebase import, so the page doesn't ship Firebase up front.
 const EmailLinkSignIn = dynamic(
@@ -36,6 +38,8 @@ const JoinPage: React.FC = () => {
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [signInError, setSignInError] = useState<string | null>(null);
   const { notify } = useNotify();
+  // The follow-up box only sits below the select on mobile; beside it on md+.
+  const specifyBelow = useIsMobile() ? ' (please specify below)' : '';
 
   // On success the auth listener below shows the profile form.
   const popupSignIn = async (provider: 'google' | 'github') => {
@@ -484,8 +488,8 @@ const JoinPage: React.FC = () => {
                       setForm((f) => ({
                         ...f,
                         heardOfUs: v === 'other' ? '' : v,
-                        // Drop the referrer once Referral is no longer the answer.
-                        ...(v !== 'referral' && f.referredBy
+                        // Drop the referrer once Referral/Friends is no longer the answer.
+                        ...(!isReferralSource(v) && f.referredBy
                           ? { referredBy: '' }
                           : {}),
                       }));
@@ -495,14 +499,14 @@ const JoinPage: React.FC = () => {
                     <option value="posters">Posters</option>
                     <option value="instagram">Instagram</option>
                     <option value="linkedin">LinkedIn</option>
-                    <option value="friends">Friends</option>
-                    <option value="referral">Referral</option>
+                    <option value="friends">{`Friends${specifyBelow}`}</option>
+                    <option value="referral">{`Referral${specifyBelow}`}</option>
                     <option value="events">Events</option>
                     <option value="lecture">During lecture</option>
-                    <option value="other">Other</option>
+                    <option value="other">{`Other${specifyBelow}`}</option>
                   </SelectBase>
                 </FieldGroup>
-                {form.heardOfUs === 'referral' && (
+                {isReferralSource(form.heardOfUs) && (
                   <FieldGroup label="From who?" requiredHint="Optional">
                     <InputBase
                       maxLength={200}

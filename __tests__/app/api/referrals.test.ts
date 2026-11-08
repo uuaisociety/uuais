@@ -82,6 +82,7 @@ describe('GET /api/referrals', () => {
         { heardOfUs: 'referral', referredBy: 'Ada Lovelace' },
         { heardOfUs: 'referral', referredBy: ' ada  lovelace' },
         { heardOfUs: 'referral', referredBy: 'Bo' },
+        { heardOfUs: 'friends', referredBy: 'ada lovelace' },
         { heardOfUs: 'referral' },
       ]),
     );
@@ -92,11 +93,14 @@ describe('GET /api/referrals', () => {
     expect(res.headers.get('Cache-Control')).toBe('no-store');
     expect(await res.json()).toEqual({
       referrers: [
-        { name: 'Ada Lovelace', count: 2 },
+        { name: 'Ada Lovelace', count: 3 },
         { name: 'Bo', count: 1 },
       ],
     });
-    expect(mockWhere).toHaveBeenCalledWith('heardOfUs', '==', 'referral');
+    expect(mockWhere).toHaveBeenCalledWith('heardOfUs', 'in', [
+      'referral',
+      'friends',
+    ]);
     expect(mockSelect).toHaveBeenCalledWith('heardOfUs', 'referredBy');
   });
 
