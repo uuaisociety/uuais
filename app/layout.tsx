@@ -5,7 +5,6 @@ import { Footer } from '@/components/layout/Footer';
 import { PageTransition } from '@/components/layout/PageTransition';
 import { Providers } from './providers';
 import { AppProvider } from '@/contexts/AppContext';
-import { getCachedPublicSeed } from '@/lib/server-data-cache';
 import { NotificationsProvider } from '@/components/ui/Notifications';
 import RegistrationGate from '@/components/auth/RegistrationGate';
 import { AnalyticsWithConsent } from '@/components/common/AnalyticsWithConsent';
@@ -37,13 +36,11 @@ const mono = localFont({
   display: 'swap',
 });
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const seed = await getCachedPublicSeed();
-
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body
@@ -76,7 +73,7 @@ export default async function RootLayout({
         />
         <Providers>
           <NotificationsProvider>
-            <AppProvider seed={seed}>
+            <AppProvider>
               {/* Ambient colour fields the glass surfaces refract */}
               <div className="ambient" aria-hidden />
               {bgTexture === 'grain' && <div className="grain" aria-hidden />}
@@ -94,7 +91,8 @@ export default async function RootLayout({
               </div>
             </AppProvider>
           </NotificationsProvider>
-          <AnalyticsWithConsent />
+          {/* Vercel Analytics and Speed Insights only exist on Vercel's edge (/_vercel/*). */}
+          {process.env.VERCEL ? <AnalyticsWithConsent /> : null}
         </Providers>
       </body>
     </html>

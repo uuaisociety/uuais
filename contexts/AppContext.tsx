@@ -33,7 +33,9 @@ interface AppState {
   blogPosts: BlogPost[];
   blogPostsLoaded: boolean;
   faqs: FAQ[];
+  faqsLoaded: boolean;
   jobs: Job[];
+  jobsLoaded: boolean;
   showcaseProjects: ShowcaseProject[];
   showcaseLoaded: boolean;
   /** The showcase could not be read from the server — an empty list here means "unknown", not "none". */
@@ -110,7 +112,9 @@ const initialState: AppState = {
   blogPosts: [],
   blogPostsLoaded: false,
   faqs: [],
+  faqsLoaded: false,
   jobs: [],
+  jobsLoaded: false,
   showcaseProjects: [],
   showcaseLoaded: false,
   showcaseUnavailable: false,
@@ -180,7 +184,7 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         blogPosts: state.blogPosts.filter((post) => post.id !== action.payload),
       };
     case 'SET_FAQS':
-      return { ...state, faqs: action.payload };
+      return { ...state, faqs: action.payload, faqsLoaded: true };
     case 'ADD_FAQS':
       return { ...state, faqs: [...state.faqs, action.payload] };
     case 'UPDATE_FAQS':
@@ -196,7 +200,7 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         faqs: state.faqs.filter((f) => f.id !== action.payload),
       };
     case 'SET_JOBS':
-      return { ...state, jobs: action.payload };
+      return { ...state, jobs: action.payload, jobsLoaded: true };
     case 'ADD_JOB':
       return { ...state, jobs: [...state.jobs, action.payload] };
     case 'UPDATE_JOB':
@@ -243,10 +247,7 @@ const AppContext = createContext<
 
 export const AppProvider: React.FC<{
   children: ReactNode;
-  seed?: Partial<
-    Pick<AppState, 'events' | 'jobs' | 'faqs' | 'teamMembers' | 'blogPosts'>
-  >;
-}> = ({ children, seed }) => {
+}> = ({ children }) => {
   const pathname = usePathname() ?? '';
   const [isAdmin, setIsAdmin] = useState(false);
   const isAdminRef = useRef(false);
@@ -260,13 +261,7 @@ export const AppProvider: React.FC<{
   const eventSubscriptionMode = !(pathname === '/' || pathname === '/events')
     ? 'full'
     : 'recent';
-  const initState: AppState = {
-    ...initialState,
-    ...(seed || {}),
-    eventsLoaded: !!seed?.events,
-    blogPostsLoaded: seed ? seed.blogPosts !== undefined : false,
-  };
-  const [state, dispatch] = useReducer(appReducer, initState);
+  const [state, dispatch] = useReducer(appReducer, initialState);
   const eventArchive = useEventArchive();
   const teamDirectory = usePublicTeamDirectory();
 
@@ -688,6 +683,30 @@ export const AppProvider: React.FC<{
     <AppContext.Provider
       value={{ state, dispatch: enhancedDispatch, eventArchive, teamDirectory }}
     >
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+/** SSR seed for one page. Kept out of the root layout: data there lands in every page's
+ *  cached output, so one registration rewrote all ~300 ISR pages. Each seeded value shows
+ *  until the realtime stream for that collection delivers. */
+export const AppSeed: React.FC<{
+  children: ReactNode;
+  seed: Partial<Pick<AppState, 'events' | 'jobs' | 'faqs'>>;
+}> = ({ children, seed }) => {
+  const app = useApp();
+  const { state } = app;
+  const seeded: AppState = {
+    ...state,
+    ...(seed.events && !state.eventsLoaded
+      ? { events: seed.events, eventsLoaded: true }
+      : {}),
+    ...(seed.jobs && !state.jobsLoaded ? { jobs: seed.jobs } : {}),
+    ...(seed.faqs && !state.faqsLoaded ? { faqs: seed.faqs } : {}),
+  };
+  return (
+    <AppContext.Provider value={{ ...app, state: seeded }}>
       {children}
     </AppContext.Provider>
   );

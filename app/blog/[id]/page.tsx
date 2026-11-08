@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import BlogDetailPage from '@/components/pages/BlogDetailPage';
 import { findPublishedBlogPost } from '@/lib/blog-server';
 import { SITE_URL } from '@/app/metadata';
+import { AppSeed } from '@/contexts/AppContext';
+import { getCachedPublicSeed } from '@/lib/server-data-cache';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -9,7 +11,9 @@ interface PageProps {
 
 const FALLBACK_IMAGE = '/images/logo-highdef.png';
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { id } = await params;
   const post = await findPublishedBlogPost(id);
 
@@ -34,7 +38,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url,
       siteName: 'UU AI Society',
       images: [{ url: image, width: 1200, height: 630, alt: post.title }],
-      ...(post.date ? { publishedTime: new Date(post.date).toISOString() } : {}),
+      ...(post.date
+        ? { publishedTime: new Date(post.date).toISOString() }
+        : {}),
     },
     twitter: {
       card: 'summary_large_image',
@@ -47,5 +53,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
-  return <BlogDetailPage postId={id} />;
+  const { events } = await getCachedPublicSeed();
+  return (
+    <AppSeed seed={{ events }}>
+      <BlogDetailPage postId={id} />
+    </AppSeed>
+  );
 }
