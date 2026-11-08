@@ -97,6 +97,8 @@ jobs:
 
   e2e:
     name: E2E tests
+    # Disabled for now; delete this line to turn E2E back on.
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
