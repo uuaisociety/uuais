@@ -124,11 +124,57 @@ async function refreshCourseCache(generation: number): Promise<Course[]> {
   return courses;
 }
 
+/** Every field docToCourse reads**/
+export const COURSE_SOURCE_FIELDS = [
+  'about_blurb',
+  'application_code',
+  'application_deadline',
+  'assessment',
+  'Assessment',
+  'code',
+  'course_content',
+  'Course_name',
+  'credits',
+  'description',
+  'entry_requirements',
+  'fees',
+  'instruction',
+  'Instruction',
+  'instructional_time',
+  'language',
+  'language_of_instruction',
+  'learning_outcomes',
+  'Learning_outcomes',
+  'level',
+  'link',
+  'Link',
+  'location',
+  'pace_of_study',
+  'period',
+  'prerequisite_of',
+  'prerequisites',
+  'reading_list_link',
+  'relatedCourses',
+  'requirements',
+  'selection',
+  'structured_requirements',
+  'study_period',
+  'syllabus',
+  'Syllabus',
+  'syllabus_link',
+  'tags',
+  'teaching_form',
+  'title',
+];
+
 /**
  * Direct fetch from Firestore source - expensive operation, use sparingly.
  */
 async function fetchCoursesFromSource(): Promise<Course[]> {
-  const snapshot = await adminDb.collection('courses').get();
+  const snapshot = await adminDb
+    .collection('courses')
+    .select(...COURSE_SOURCE_FIELDS)
+    .get();
   return snapshot.docs.map((doc) =>
     docToCourse(doc.id, doc.data() as Record<string, unknown>),
   );
