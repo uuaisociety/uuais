@@ -24,6 +24,13 @@ const BURST_WINDOW_MS = 60_000;
 const AUTH_FAIL_LIMIT = 10;
 const AUTH_FAIL_WINDOW_MS = 15 * 60_000;
 
+const CACHE_MS = 5 * 60_000;
+const POLL_LIMIT = 20;
+const POLL_WINDOW_MS = 10 * 60_000;
+
+let cached: { at: number; referrers: ReturnType<typeof rankReferrers> } | null =
+  null;
+
 function clientKey(request: NextRequest): string {
   return clientIp(request.headers) || 'unknown';
 }
@@ -69,6 +76,25 @@ export async function GET(request: NextRequest) {
     );
   }
 
+  const poll = checkWindow('referrals:poll', POLL_LIMIT, POLL_WINDOW_MS);
+  if (!poll.allowed) {
+    const retryAfter = Math.max(
+      1,
+      Math.ceil((poll.resetAt - Date.now()) / 1000),
+    );
+    return NextResponse.json(
+      { error: 'Too many requests' },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } },
+    );
+  }
+
+  if (cached && Date.now() - cached.at < CACHE_MS) {
+    return NextResponse.json(
+      { referrers: cached.referrers },
+      { headers: NO_STORE },
+    );
+  }
+
   try {
     // Read only the two fields the count needs, never the rest of the profile.
     const snap = await adminDb
@@ -77,6 +103,7 @@ export async function GET(request: NextRequest) {
       .select('heardOfUs', 'referredBy')
       .get();
     const referrers = rankReferrers(snap.docs.map((d) => d.data()));
+    cached = { at: Date.now(), referrers };
     return NextResponse.json({ referrers }, { headers: NO_STORE });
   } catch (error) {
     console.error('[referrals] failed to count referrals', error);

@@ -40,6 +40,8 @@ describe('GET /api/referrals', () => {
 
   beforeEach(() => {
     jest.clearAllMocks();
+    // A fresh route module per test: its five-minute count cache lives in module scope.
+    jest.resetModules();
     resetRateLimits();
     process.env.REFERRALS_API_TOKEN = 'referrals-token';
     process.env.MCP_ADMIN_TOKEN = 'mcp-token';
@@ -121,16 +123,52 @@ describe('GET /api/referrals', () => {
     expect(statuses[10]).toBe(429);
   });
 
-  it('returns 429 after the per-IP burst limit', async () => {
+  const authorized = (ip = '10.0.0.8') =>
+    get({ Authorization: 'Bearer referrals-token', 'x-forwarded-for': ip });
+
+  it('reads Firestore once per five minutes however often it is polled', async () => {
+    mockGet.mockResolvedValue(
+      docs([{ heardOfUs: 'referral', referredBy: 'Bo' }]),
+    );
+    const { GET } = await import('@/app/api/referrals/route');
+    const now = Date.now();
+    const clock = jest.spyOn(Date, 'now').mockReturnValue(now);
+    try {
+      for (let i = 0; i < 3; i++)
+        expect((await GET(authorized())).status).toBe(200);
+      expect(mockGet).toHaveBeenCalledTimes(1);
+      clock.mockReturnValue(now + 5 * 60_000);
+      const res = await GET(authorized());
+      expect(await res.json()).toEqual({
+        referrers: [{ name: 'Bo', count: 1 }],
+      });
+      expect(mockGet).toHaveBeenCalledTimes(2);
+    } finally {
+      clock.mockRestore();
+    }
+  });
+
+  it('does not cache a failed count', async () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    mockGet
+      .mockRejectedValueOnce(new Error('boom'))
+      .mockResolvedValueOnce(docs([]));
+    const { GET } = await import('@/app/api/referrals/route');
+    expect((await GET(authorized())).status).toBe(500);
+    expect((await GET(authorized())).status).toBe(200);
+    expect(mockGet).toHaveBeenCalledTimes(2);
+    spy.mockRestore();
+  });
+
+  it('caps polling across all token holders and says when to retry', async () => {
     mockGet.mockResolvedValue(docs([]));
     const { GET } = await import('@/app/api/referrals/route');
-    const headers = {
-      Authorization: 'Bearer referrals-token',
-      'x-forwarded-for': '10.0.0.8',
-    };
-    let last = 0;
-    for (let i = 0; i < 61; i++) last = (await GET(get(headers))).status;
-    expect(last).toBe(429);
-    expect(mockGet).toHaveBeenCalledTimes(60);
+    // Different addresses share the cap: behind Cloudflare one poller's IP varies.
+    for (let i = 0; i < 20; i++)
+      expect((await GET(authorized(`10.0.0.${i}`))).status).toBe(200);
+    const res = await GET(authorized('10.0.1.1'));
+    expect(res.status).toBe(429);
+    expect(Number(res.headers.get('Retry-After'))).toBeGreaterThan(0);
+    expect(mockGet).toHaveBeenCalledTimes(1);
   });
 });

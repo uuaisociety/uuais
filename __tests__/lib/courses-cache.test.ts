@@ -36,6 +36,64 @@ describe('server course cache', () => {
     mockSelect.mockReset();
   });
 
+  it('exports only functions, as a "use server" module must', async () => {
+    // Next refuses to load a "use server" file that exports anything else, which breaks
+    // every course page.
+    const mod = await import('@/lib/courses');
+    const nonFunctions = Object.entries(mod)
+      .filter(([, value]) => typeof value !== 'function')
+      .map(([name]) => name);
+    expect(nonFunctions).toEqual([]);
+  });
+
+  it('builds course graph connections from the cache, without a read per course', async () => {
+    mockSourceGet.mockResolvedValue({
+      docs: [
+        {
+          id: 'c1',
+          data: () => ({
+            Course_name: 'One',
+            code: 'C1',
+            level: 'Bachelor',
+            credits: '7.5',
+            prerequisites: ['c2', 'c3'],
+            prerequisite_of: null,
+            relatedCourses: ['c2'],
+          }),
+        },
+        { id: 'c2', data: () => ({ Course_name: 'Two', code: 'C2' }) },
+      ],
+    });
+    const { fetchCourseConnections, fetchMultipleCourseConnections } =
+      await import('@/lib/courses');
+    expect(await fetchCourseConnections('c1', 1)).toEqual(
+      expect.objectContaining({
+        id: 'c1',
+        title: 'One',
+        code: 'C1',
+        credits: 7.5,
+        prerequisites: ['c2'],
+        prerequisite_of: null,
+        relatedCourses: ['c2'],
+      }),
+    );
+    const many = await fetchMultipleCourseConnections(['c1', 'c2', 'missing']);
+    expect([...many.keys()].sort()).toEqual(['c1', 'c2']);
+    // Only the cold cache's document read and scan, however many courses were asked for.
+    expect(mockGet).toHaveBeenCalledTimes(1);
+    expect(mockSourceGet).toHaveBeenCalledTimes(1);
+  });
+
+  it('looks single courses up in the cache instead of reading each one', async () => {
+    const { fetchCourseById } = await import('@/lib/courses');
+    expect((await fetchCourseById('course-1'))?.title).toBe('Course One');
+    expect(await fetchCourseById('missing')).toBeUndefined();
+    await fetchCourseById('course-1');
+    // One cache-document read and one scan for the cold cache; no read per lookup.
+    expect(mockGet).toHaveBeenCalledTimes(1);
+    expect(mockSourceGet).toHaveBeenCalledTimes(1);
+  });
+
   it('scans only the fields it maps, never the embedding vectors', async () => {
     // Records every field the mapper touches; any it reads must have been requested.
     const read = new Set<string>();

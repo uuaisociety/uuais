@@ -125,7 +125,7 @@ async function refreshCourseCache(generation: number): Promise<Course[]> {
 }
 
 /** Every field docToCourse reads**/
-export const COURSE_SOURCE_FIELDS = [
+const COURSE_SOURCE_FIELDS = [
   'about_blurb',
   'application_code',
   'application_deadline',
@@ -423,9 +423,7 @@ export async function fetchCourses(): Promise<Course[]> {
 }
 
 export async function fetchCourseById(id: string): Promise<Course | undefined> {
-  const doc = await adminDb.collection('courses').doc(id).get();
-  if (!doc.exists) return undefined;
-  return docToCourse(doc.id, doc.data() as Record<string, unknown>);
+  return (await fetchCourses()).find((course) => course.id === id);
 }
 
 // ---- Lightweight course connection data for graphs ----
@@ -450,42 +448,21 @@ export async function fetchCourseConnections(
   id: string,
   maxConnections: number = 20,
 ): Promise<CourseConnection | undefined> {
-  const doc = await adminDb.collection('courses').doc(id).get();
-  if (!doc.exists) return undefined;
-
-  const data = doc.data() as Record<string, unknown>;
-  const title =
-    (data.Course_name as string)?.trim() ||
-    (data.title as string)?.trim() ||
-    'Untitled';
-  const code = (data.code as string) || '';
-  const level = normalizeLevel(data.level as string | undefined);
-  const creditsRaw = data.credits;
-  const credits =
-    typeof creditsRaw === 'number'
-      ? creditsRaw
-      : typeof creditsRaw === 'string'
-        ? parseFloat(creditsRaw) || undefined
-        : undefined;
-
-  const prereqs = (data.prerequisites as string[] | null) ?? null;
-  const prereqOf = (data.prerequisite_of as string[] | null) ?? null;
-  const related = (data.relatedCourses as string[]) || [];
+  // From the course cache like fetchCourseById: the graph asks for every prerequisite and
+  // related course, so a read per course cost up to 61 reads per course-page view.
+  const course = await fetchCourseById(id);
+  if (!course) return undefined;
 
   // Cap the number of connections to prevent overwhelming the graph
-  const cappedPrereqs = prereqs ? prereqs.slice(0, maxConnections) : null;
-  const cappedPrereqOf = prereqOf ? prereqOf.slice(0, maxConnections) : null;
-  const cappedRelated = related.slice(0, maxConnections);
-
   return {
     id,
-    title,
-    code,
-    prerequisites: cappedPrereqs,
-    prerequisite_of: cappedPrereqOf,
-    relatedCourses: cappedRelated,
-    level,
-    credits,
+    title: course.title,
+    code: course.code,
+    prerequisites: course.prerequisites?.slice(0, maxConnections) ?? null,
+    prerequisite_of: course.prerequisite_of?.slice(0, maxConnections) ?? null,
+    relatedCourses: course.relatedCourses.slice(0, maxConnections),
+    level: course.level,
+    credits: course.credits,
   };
 }
 
@@ -500,7 +477,7 @@ export async function fetchMultipleCourseConnections(
 ): Promise<Map<string, CourseConnection>> {
   const results = new Map<string, CourseConnection>();
 
-  // Process in batches to avoid overwhelming Firestore
+  // Lookups hit the course cache; batching only bounds how many run at once
   for (let i = 0; i < ids.length; i += maxConcurrency) {
     const batch = ids.slice(i, i + maxConcurrency);
     const batchPromises = batch.map(async (id) => {
