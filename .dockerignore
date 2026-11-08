@@ -1,0 +1,41 @@
+# Build context for deploy/railway.Dockerfile. Mirrors what npm run test:vercel leaves out
+# (scripts/test-vercel-build.mjs), plus folders the app never reads.
+.git
+.next
+.vercel
+.turbo
+node_modules
+coverage
+dist
+out
+output
+tmp
+work
+test-results
+playwright-report
+blob-report
+**/*.log
+**/.env*
+**/.npmrc
+**/.yarnrc
+**/.yarnrc.yml
+**/.git-credentials
+**/*credentials*.json
+**/*service*account*.json
+**/*firebase-adminsdk*
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+course_scraper
+images
+# Local tool and agent folders.
+.venv*
+.conda
+.claude
+.agents
+.opencode
+.codex
+.windsurf
+.impeccable
+.playwright-mcp
