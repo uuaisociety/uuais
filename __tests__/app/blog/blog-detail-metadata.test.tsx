@@ -1,18 +1,24 @@
-import { generateMetadata } from '@/app/blog/[id]/page'
-import { findPublishedBlogPost } from '@/lib/blog-server'
+import { generateMetadata } from '@/app/blog/[id]/page';
+import { findPublishedBlogPost } from '@/lib/blog-server';
 
 jest.mock('@/lib/blog-server', () => ({
   findPublishedBlogPost: jest.fn(),
   getPublishedBlogPosts: jest.fn(),
-}))
+}));
 
 // The page imports BlogDetailPage, which pulls in firebase-client at module
 // scope; mock it so tests run without Firebase env vars (CI has none).
 jest.mock('@/lib/firebase-client', () => ({
   auth: { currentUser: null },
-}))
+}));
 
-const mockFind = findPublishedBlogPost as jest.Mock
+// The page seeds related events from the server cache, whose next/cache import needs a
+// Request global that jsdom lacks.
+jest.mock('@/lib/server-data-cache', () => ({
+  getCachedPublicSeed: jest.fn(),
+}));
+
+const mockFind = findPublishedBlogPost as jest.Mock;
 
 const basePost = {
   id: 'p1',
@@ -24,36 +30,53 @@ const basePost = {
   image: '/images/x.jpg',
   tags: ['ai'],
   published: true,
-}
+};
 
 describe('blog detail generateMetadata', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
-  })
+    jest.clearAllMocks();
+  });
 
   it('returns generic metadata when the post is not found', async () => {
-    mockFind.mockResolvedValue(null)
-    const meta = await generateMetadata({ params: Promise.resolve({ id: 'nope' }) })
-    expect(meta.title).toBe('Blog')
-    expect(meta.openGraph).toBeUndefined()
-  })
+    mockFind.mockResolvedValue(null);
+    const meta = await generateMetadata({
+      params: Promise.resolve({ id: 'nope' }),
+    });
+    expect(meta.title).toBe('Blog');
+    expect(meta.openGraph).toBeUndefined();
+  });
 
   it('returns OG metadata for a published post using its slug', async () => {
-    mockFind.mockResolvedValue({ ...basePost, slug: 'gpt-6-launch' })
-    const meta = await generateMetadata({ params: Promise.resolve({ id: 'gpt-6-launch' }) })
-    expect(meta.title).toBe('GPT-6 Launch')
-    expect(meta.description).toBe('A big new model')
-    expect(meta.alternates?.canonical).toBe('https://uuais.com/blog/gpt-6-launch')
-    expect(meta.openGraph?.type).toBe('article')
-    expect(meta.openGraph?.url).toBe('https://uuais.com/blog/gpt-6-launch')
-    expect(meta.openGraph?.images).toEqual([{ url: '/images/x.jpg', width: 1200, height: 630, alt: 'GPT-6 Launch' }])
-    expect(meta.twitter?.card).toBe('summary_large_image')
-  })
+    mockFind.mockResolvedValue({ ...basePost, slug: 'gpt-6-launch' });
+    const meta = await generateMetadata({
+      params: Promise.resolve({ id: 'gpt-6-launch' }),
+    });
+    expect(meta.title).toBe('GPT-6 Launch');
+    expect(meta.description).toBe('A big new model');
+    expect(meta.alternates?.canonical).toBe(
+      'https://uuais.com/blog/gpt-6-launch',
+    );
+    expect(meta.openGraph?.type).toBe('article');
+    expect(meta.openGraph?.url).toBe('https://uuais.com/blog/gpt-6-launch');
+    expect(meta.openGraph?.images).toEqual([
+      { url: '/images/x.jpg', width: 1200, height: 630, alt: 'GPT-6 Launch' },
+    ]);
+    expect(meta.twitter?.card).toBe('summary_large_image');
+  });
 
   it('falls back to the post id when no slug exists', async () => {
-    mockFind.mockResolvedValue({ ...basePost, image: '' })
-    const meta = await generateMetadata({ params: Promise.resolve({ id: 'p1' }) })
-    expect(meta.openGraph?.url).toBe('https://uuais.com/blog/p1')
-    expect(meta.openGraph?.images).toEqual([{ url: '/images/logo-highdef.png', width: 1200, height: 630, alt: 'GPT-6 Launch' }])
-  })
-})
+    mockFind.mockResolvedValue({ ...basePost, image: '' });
+    const meta = await generateMetadata({
+      params: Promise.resolve({ id: 'p1' }),
+    });
+    expect(meta.openGraph?.url).toBe('https://uuais.com/blog/p1');
+    expect(meta.openGraph?.images).toEqual([
+      {
+        url: '/images/logo-highdef.png',
+        width: 1200,
+        height: 630,
+        alt: 'GPT-6 Launch',
+      },
+    ]);
+  });
+});

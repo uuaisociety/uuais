@@ -62,7 +62,7 @@ jest.mock('@/lib/firestore/showcase', () => ({
   deleteShowcaseProject: jest.fn(),
 }));
 
-import { AppProvider, useApp } from '@/contexts/AppContext';
+import { AppProvider, AppSeed, useApp } from '@/contexts/AppContext';
 import {
   subscribeToEvents,
   addEvent,
@@ -142,9 +142,18 @@ const mockJob = {
   published: true,
 };
 
-function renderApp(seed?: Parameters<typeof AppProvider>[0]['seed']) {
+function renderApp() {
   const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <AppProvider seed={seed}>{children}</AppProvider>
+    <AppProvider>{children}</AppProvider>
+  );
+  return renderHook(() => useApp(), { wrapper: Wrapper });
+}
+
+function renderSeeded(seed: React.ComponentProps<typeof AppSeed>['seed']) {
+  const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    <AppProvider>
+      <AppSeed seed={seed}>{children}</AppSeed>
+    </AppProvider>
   );
   return renderHook(() => useApp(), { wrapper: Wrapper });
 }
@@ -359,18 +368,13 @@ describe('AppContext', () => {
     );
   });
 
-  it('preserves public SSR seed initially and prevents a stale admin callback from restoring private data after sign-out', async () => {
+  it('prevents a stale admin callback from restoring private data after sign-out', async () => {
     global.__mockPathname = '/admin';
     const oldFetch = global.fetch;
     global.fetch = jest.fn(() => new Promise<Response>(() => {}));
     try {
-      const { result } = renderApp({
-        teamMembers: [{ ...mockTeamMember, notes: 'private' }],
-      });
+      const { result } = renderApp();
       await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
-      expect(result.current.state.teamMembers).toEqual([
-        { ...mockTeamMember, notes: 'private' },
-      ]);
       act(() => {
         idTokenCallback!({
           uid: 'admin-1',
@@ -383,6 +387,9 @@ describe('AppContext', () => {
       const staleAdminCallback = (subscribeToTeamMembers as jest.Mock).mock
         .calls[0][0] as (members: (typeof mockTeamMember)[]) => void;
       act(() => staleAdminCallback([{ ...mockTeamMember, notes: 'private' }]));
+      expect(result.current.state.teamMembers).toEqual([
+        { ...mockTeamMember, notes: 'private' },
+      ]);
       act(() => {
         idTokenCallback!(null);
       });
@@ -409,6 +416,48 @@ describe('AppContext', () => {
     });
     expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
     expect(subscribeToEvents).toHaveBeenCalledTimes(1);
+  });
+
+  describe('AppSeed', () => {
+    it('shows the page seed until each realtime stream delivers', async () => {
+      const seededEvent = { ...mockEvent, id: 'evt-seed' };
+      const seededJob = { ...mockJob, id: 'job-seed' };
+      const seededFaq = { ...mockFaq, id: 'faq-seed' };
+      const { result } = renderSeeded({
+        events: [seededEvent],
+        jobs: [seededJob],
+        faqs: [seededFaq],
+      });
+      expect(result.current.state.events).toEqual([seededEvent]);
+      expect(result.current.state.eventsLoaded).toBe(true);
+      expect(result.current.state.jobs).toEqual([seededJob]);
+      expect(result.current.state.faqs).toEqual([seededFaq]);
+
+      await waitFor(() => expect(subscribeToEvents).toHaveBeenCalledTimes(1));
+      await waitFor(() => expect(subscribeToJobs).toHaveBeenCalledTimes(1));
+      await waitFor(() => expect(subscribeToFaqs).toHaveBeenCalledTimes(1));
+      const pushEvents = (subscribeToEvents as jest.Mock).mock.calls[0][0];
+      const pushJobs = (subscribeToJobs as jest.Mock).mock.calls[0][0];
+      const pushFaqs = (subscribeToFaqs as jest.Mock).mock.calls[0][0];
+
+      // An empty stream result is still the truth, so the seed must not reappear.
+      act(() => pushJobs([]));
+      expect(result.current.state.jobs).toEqual([]);
+      expect(result.current.state.events).toEqual([seededEvent]);
+
+      act(() => pushEvents([mockEvent]));
+      act(() => pushFaqs([mockFaq]));
+      expect(result.current.state.events).toEqual([mockEvent]);
+      expect(result.current.state.faqs).toEqual([mockFaq]);
+    });
+
+    it('leaves collections the page did not seed alone', () => {
+      const { result } = renderSeeded({ faqs: [mockFaq] });
+      expect(result.current.state.faqs).toEqual([mockFaq]);
+      expect(result.current.state.events).toEqual([]);
+      expect(result.current.state.eventsLoaded).toBe(false);
+      expect(result.current.state.jobs).toEqual([]);
+    });
   });
 
   it('throws useApp outside provider', () => {

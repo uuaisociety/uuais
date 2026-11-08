@@ -53,7 +53,7 @@ describe('cached public server data', () => {
     else process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID = oldProject;
   });
 
-  it('configures separate 60-second seed and team caches', async () => {
+  it('configures a 15-minute seed cache and separate 60-second team caches', async () => {
     mockSeed.mockResolvedValue({
       events: [],
       jobs: [],
@@ -70,7 +70,7 @@ describe('cached public server data', () => {
     await getCachedPublicSeed();
     await getCachedPublicTeamDirectory();
     expect(mockCacheConfigs.map((config) => config.options.revalidate)).toEqual(
-      [60, 60, 60],
+      [900, 60, 60],
     );
     expect(mockCacheConfigs.map((config) => config.keys)).toEqual([
       ['public-ssr-seed-v3-recent-events-no-team', 'test-project'],
