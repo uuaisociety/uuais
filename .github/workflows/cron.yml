@@ -1,0 +1,33 @@
+name: Cron (when not on Vercel)
+
+# Stands in for the crons in vercel.json while the site is hosted elsewhere (see
+# docs/railway-hosting.md). Runs only while the CRON_BASE_URL repository variable is
+# set; delete that variable when moving back to Vercel so the jobs don't run twice.
+on:
+  schedule:
+    - cron: '0 8 * * 1' # /api/cron/blog-draft, as in vercel.json
+    - cron: '0 3 * * *' # /api/cron/registrations-cleanup, as in vercel.json
+  workflow_dispatch:
+    inputs:
+      job:
+        description: Which cron endpoint to call
+        type: choice
+        options: [blog-draft, registrations-cleanup]
+
+permissions: {}
+
+jobs:
+  call:
+    if: vars.CRON_BASE_URL != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Call the cron endpoint
+        env:
+          BASE_URL: ${{ vars.CRON_BASE_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          JOB: ${{ inputs.job || (github.event.schedule == '0 8 * * 1' && 'blog-draft' || 'registrations-cleanup') }}
+        run: |
+          curl --fail-with-body --silent --show-error --max-time 320 \
+            -H "Authorization: Bearer $CRON_SECRET" \
+            "$BASE_URL/api/cron/$JOB"
