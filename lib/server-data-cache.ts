@@ -16,6 +16,10 @@ import type {
 
 const EMPTY_SEED = { events: [], jobs: [], faqs: [], teamMembers: [] };
 const CACHE_SECONDS = 60;
+/** The pages that render the seed take this revalidate. Live Firestore listeners replace
+ *  the seed seconds after load, so it only has to be fresh enough for crawlers and the
+ *  first paint, and every refresh re-runs the events, jobs and FAQ queries. */
+const SEED_CACHE_SECONDS = 15 * 60;
 const EMPTY_TEAM_COUNTS = {
   board: 0,
   development: 0,
@@ -48,7 +52,7 @@ const getCachedSeed = unstable_cache(
       includeTeamMembers: false,
     }),
   ['public-ssr-seed-v3-recent-events-no-team', projectId()],
-  { revalidate: CACHE_SECONDS },
+  { revalidate: SEED_CACHE_SECONDS },
 );
 
 const getCachedTeamDirectoryIndex = unstable_cache(

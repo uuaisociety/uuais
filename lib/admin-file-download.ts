@@ -5,6 +5,7 @@ import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { logAdminAction } from '@/lib/server-audit-log';
 import '@/lib/firebase-admin';
 import admin from 'firebase-admin';
+import { clientIp } from '@/lib/client-ip';
 
 const DOWNLOAD_LIMIT = 120;
 const DOWNLOAD_WINDOW_MS = 60_000;
@@ -58,7 +59,7 @@ export async function handleAdminFileDownload(
     const [buffer] = await file.download();
     const name = path.split('/').pop() || 'file.pdf';
 
-    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    const forwarded = clientIp(req.headers);
     await logAdminAction({
       action: 'download',
       adminUid: auth.session.uid,

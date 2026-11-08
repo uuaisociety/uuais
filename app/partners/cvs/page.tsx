@@ -7,6 +7,7 @@ import CvReviewPage from '@/components/pages/CvReviewPage';
 import type { SharedCv } from '@/lib/export-cvs';
 import { logAdminAction } from '@/lib/server-audit-log';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
+import { clientIp } from '@/lib/client-ip';
 
 // Views logged per partner; reloads beyond this aren't, so a loop can't flood
 // the audit trail. Downloads are always logged.
@@ -73,10 +74,7 @@ export default async function Page() {
       VIEW_LOG_WINDOW_MS,
     ).allowed
   ) {
-    const forwarded = (await headers())
-      .get('x-forwarded-for')
-      ?.split(',')[0]
-      ?.trim();
+    const forwarded = clientIp(await headers());
     await logAdminAction({
       action: 'view',
       adminUid: session.uid,

@@ -4,6 +4,7 @@ import type { NextRequest } from 'next/server';
 import { adminDb } from '@/lib/firebase-admin';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { rankReferrers } from '@/lib/referrals';
+import { clientIp } from '@/lib/client-ip';
 
 export const runtime = 'nodejs';
 
@@ -24,11 +25,7 @@ const AUTH_FAIL_LIMIT = 10;
 const AUTH_FAIL_WINDOW_MS = 15 * 60_000;
 
 function clientKey(request: NextRequest): string {
-  return (
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    request.headers.get('x-real-ip') ||
-    'unknown'
-  );
+  return clientIp(request.headers) || 'unknown';
 }
 
 /** Constant-time comparison: hash both so the buffers always match in length. */

@@ -4,6 +4,7 @@ import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { readBoundedRequest } from '@/lib/bounded-request-body';
 import { logAdminAction } from '@/lib/server-audit-log';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
+import { clientIp } from '@/lib/client-ip';
 
 const MAX_BODY_BYTES = 1024;
 const EXPORT_LIMIT = 30;
@@ -48,7 +49,7 @@ export async function POST(req: NextRequest) {
     if (typeof count !== 'number' || !Number.isSafeInteger(count) || count < 0)
       return NextResponse.json({ error: 'Invalid count' }, { status: 400 });
 
-    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    const forwarded = clientIp(req.headers);
     await logAdminAction(
       {
         action: 'export',

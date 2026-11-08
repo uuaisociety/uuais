@@ -4,6 +4,7 @@ import { adminDb } from '@/lib/firebase-admin';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { readBoundedRequestBody } from '@/lib/bounded-request-body';
 import { partnerEmailKey } from '@/lib/partner-email';
+import { clientIp } from '@/lib/client-ip';
 
 // Low enough that probing which addresses are partners is slow, high enough for
 // a partner fixing a typo a few times.
@@ -21,14 +22,7 @@ const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,253}$/;
  */
 export async function POST(req: NextRequest) {
   try {
-    // On Vercel the platform sets x-vercel-forwarded-for itself, so a client cannot
-    // forge it; anywhere else that header is client-controlled, so ignore it there.
-    const ip =
-      (process.env.VERCEL
-        ? req.headers.get('x-vercel-forwarded-for')?.trim()
-        : undefined) ||
-      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-      'unknown';
+    const ip = clientIp(req.headers) || 'unknown';
     // Own bucket: rotating IPs can fill this store, but then only this endpoint
     // fails closed, not CV downloads, uploads or account deletion.
     const rate = checkWindow(

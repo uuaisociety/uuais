@@ -5,6 +5,7 @@ import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { logAdminAction } from '@/lib/server-audit-log';
 import { eraseAccount } from '@/lib/account-erasure';
 import { adminAuth, adminDb } from '@/lib/firebase-admin';
+import { clientIp } from '@/lib/client-ip';
 
 export const runtime = 'nodejs';
 
@@ -78,7 +79,7 @@ export async function DELETE(req: NextRequest) {
       );
     }
 
-    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    const forwarded = clientIp(req.headers);
     const entry = {
       action: 'remove' as const,
       adminUid,

@@ -5,6 +5,7 @@ import { readBoundedRequest } from '@/lib/bounded-request-body';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { logAdminAction, type AdminAuditEntry } from '@/lib/server-audit-log';
 import { adminAuth, adminDb } from '@/lib/firebase-admin';
+import { clientIp } from '@/lib/client-ip';
 
 export const runtime = 'nodejs';
 
@@ -130,7 +131,7 @@ export async function PATCH(req: NextRequest) {
       );
     if (changed.length === 0) return NextResponse.json({ success: true });
 
-    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    const forwarded = clientIp(req.headers);
     const entry: AdminAuditEntry = {
       action: 'update',
       adminUid,

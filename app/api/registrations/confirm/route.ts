@@ -6,12 +6,12 @@ import { adminDb } from '@/lib/firebase-admin';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { readBoundedRequest } from '@/lib/bounded-request-body';
 import { isIP } from 'node:net';
+import { clientIp } from '@/lib/client-ip';
 
 const MAX_CONFIRM_BODY_BYTES = 4 * 1024;
 
 export async function POST(req: NextRequest) {
-  const forwardedIp =
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || '';
+  const forwardedIp = clientIp(req.headers) || '';
   const ip = isIP(forwardedIp) ? forwardedIp : 'unknown';
   const rate = checkWindow(`registration-confirm:${ip}`, 10, 60 * 60 * 1000);
   if (!rate.allowed)

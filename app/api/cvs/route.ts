@@ -7,6 +7,7 @@ import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { logAdminAction } from '@/lib/server-audit-log';
 import { cvContentDisposition } from '@/lib/cv-file';
 import admin from 'firebase-admin';
+import { clientIp } from '@/lib/client-ip';
 
 const DOWNLOAD_LIMIT = 120;
 const DOWNLOAD_WINDOW_MS = 60_000;
@@ -61,7 +62,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'CV not found' }, { status: 404 });
 
     // The privacy policy promises every download is logged, so no log, no file.
-    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    const forwarded = clientIp(req.headers);
     try {
       await logAdminAction(
         {

@@ -5,6 +5,7 @@ import { adminDb } from '@/lib/firebase-admin';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { deleteRegistrationFilePaths } from '@/lib/server-registration-files';
 import { logAdminAction } from '@/lib/server-audit-log';
+import { clientIp } from '@/lib/client-ip';
 
 const REMOVE_LIMIT = 60;
 const REMOVE_WINDOW_MS = 10 * 60 * 1000;
@@ -84,7 +85,7 @@ export async function DELETE(req: NextRequest) {
     // Doc is gone first, so a file failure can never leave dead links behind.
     const deleted = await deleteRegistrationFilePaths(data);
 
-    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    const forwarded = clientIp(req.headers);
     await logAdminAction({
       action: 'remove',
       adminUid,

@@ -4,6 +4,7 @@ import { requireAdmin, authFailureResponse } from '@/lib/server-auth';
 import { readBoundedRequest } from '@/lib/bounded-request-body';
 import { logAdminAction } from '@/lib/server-audit-log';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
+import { clientIp } from '@/lib/client-ip';
 
 const MAX_BODY_BYTES = 4 * 1024;
 // Well above real exports, low enough that a script can't flood the trail.
@@ -49,7 +50,7 @@ export async function POST(req: NextRequest) {
         ? (payload.count as number)
         : undefined;
 
-    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    const forwarded = clientIp(req.headers);
     await logAdminAction({
       action: 'export',
       adminUid: auth.session.uid,

@@ -5,6 +5,7 @@ import { adminDb } from '@/lib/firebase-admin';
 import admin from 'firebase-admin';
 import { isSafeStoragePath } from '@/lib/admin-file-download';
 import { logAdminAction } from '@/lib/server-audit-log';
+import { clientIp } from '@/lib/client-ip';
 
 const ID_RE = /^[A-Za-z0-9_-]{1,128}$/;
 
@@ -44,7 +45,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     await appRef.delete();
-    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    const forwarded = clientIp(req.headers);
     await logAdminAction({
       action: 'remove',
       adminUid: auth.session.uid,

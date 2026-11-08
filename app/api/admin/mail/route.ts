@@ -7,6 +7,7 @@ import { checkWindow } from '@/lib/rate-limit-in-memory';
 import { logAdminAction, type AdminAuditEntry } from '@/lib/server-audit-log';
 import { adminDb } from '@/lib/firebase-admin';
 import { renderTemplatedEmail } from '@/lib/email';
+import { clientIp } from '@/lib/client-ip';
 
 export const runtime = 'nodejs';
 
@@ -148,7 +149,7 @@ export async function POST(req: NextRequest) {
       variables: email.variables,
     });
     const mailRef = adminDb.collection('mail').doc();
-    const forwarded = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    const forwarded = clientIp(req.headers);
     const entry: AdminAuditEntry = {
       action: 'email',
       adminUid: auth.session.uid,

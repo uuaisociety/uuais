@@ -2,6 +2,7 @@ import { createHash, timingSafeEqual } from 'node:crypto';
 import type { NextRequest } from 'next/server';
 import { handleMcpRequest } from '@/lib/mcp/uuais-admin';
 import { checkWindow } from '@/lib/rate-limit-in-memory';
+import { clientIp } from '@/lib/client-ip';
 
 /**
  * MCP (Model Context Protocol) endpoint exposing UUAIS site data to the
@@ -20,11 +21,7 @@ const AUTH_FAIL_LIMIT = 10;
 const AUTH_FAIL_WINDOW_MS = 15 * 60_000;
 
 function clientKey(request: NextRequest): string {
-  return (
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    request.headers.get('x-real-ip') ||
-    'unknown'
-  );
+  return clientIp(request.headers) || 'unknown';
 }
 
 /**
@@ -46,7 +43,11 @@ function isAuthorized(request: NextRequest): boolean {
   return safeEqual(token, expected);
 }
 
-function jsonError(message: string, status: number, extra?: Record<string, string>) {
+function jsonError(
+  message: string,
+  status: number,
+  extra?: Record<string, string>,
+) {
   return new Response(JSON.stringify({ error: message }), {
     status,
     headers: { 'Content-Type': 'application/json', ...extra },
@@ -61,11 +62,17 @@ export async function POST(request: NextRequest) {
   }
 
   if (!isAuthorized(request)) {
-    const fail = checkWindow(`mcp:authfail:${ip}`, AUTH_FAIL_LIMIT, AUTH_FAIL_WINDOW_MS);
+    const fail = checkWindow(
+      `mcp:authfail:${ip}`,
+      AUTH_FAIL_LIMIT,
+      AUTH_FAIL_WINDOW_MS,
+    );
     if (!fail.allowed) {
       return jsonError('Too many requests', 429);
     }
-    return jsonError('Unauthorized', 401, { 'WWW-Authenticate': 'Bearer realm="api"' });
+    return jsonError('Unauthorized', 401, {
+      'WWW-Authenticate': 'Bearer realm="api"',
+    });
   }
 
   try {
