@@ -5,14 +5,14 @@ const mockTeamIds = jest.fn();
 const mockCacheEntries = new Map<string, unknown>();
 const mockCacheConfigs: Array<{
   keys: string[];
-  options: { revalidate: number };
+  options: { revalidate: number; tags?: string[] };
 }> = [];
 
 jest.mock('next/cache', () => ({
   unstable_cache: (
     fn: (...args: unknown[]) => unknown,
     keys: string[],
-    options: { revalidate: number },
+    options: { revalidate: number; tags?: string[] },
   ) => {
     mockCacheConfigs.push({ keys, options });
     return (...args: unknown[]) => {
@@ -53,7 +53,7 @@ describe('cached public server data', () => {
     else process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID = oldProject;
   });
 
-  it('configures a 15-minute seed cache and separate 60-second team caches', async () => {
+  it('configures a 15-minute seed cache and day-long team caches an admin edit can clear', async () => {
     mockSeed.mockResolvedValue({
       events: [],
       jobs: [],
@@ -70,8 +70,13 @@ describe('cached public server data', () => {
     await getCachedPublicSeed();
     await getCachedPublicTeamDirectory();
     expect(mockCacheConfigs.map((config) => config.options.revalidate)).toEqual(
-      [900, 60, 60],
+      [900, 86400, 86400],
     );
+    expect(mockCacheConfigs.map((config) => config.options.tags)).toEqual([
+      undefined,
+      ['team-directory'],
+      ['team-directory'],
+    ]);
     expect(mockCacheConfigs.map((config) => config.keys)).toEqual([
       ['public-ssr-seed-v3-recent-events-no-team', 'test-project'],
       ['public-team-directory-index-v1', 'test-project'],

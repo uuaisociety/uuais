@@ -2,12 +2,17 @@ const mockGet = jest.fn();
 const mockSet = jest.fn();
 const mockDelete = jest.fn();
 const mockSourceGet = jest.fn();
+const mockSelect = jest.fn();
 
 jest.mock('@/lib/firebase-admin', () => ({
   adminDb: {
     collection: (name: string) => ({
       doc: () => ({ get: mockGet, set: mockSet, delete: mockDelete }),
       get: name === 'courses' ? mockSourceGet : mockGet,
+      select: (...fields: string[]) => {
+        mockSelect(...fields);
+        return { get: mockSourceGet };
+      },
     }),
   },
 }));
@@ -28,6 +33,26 @@ describe('server course cache', () => {
     mockSet.mockReset().mockResolvedValue(undefined);
     mockDelete.mockReset().mockResolvedValue(undefined);
     mockSourceGet.mockReset().mockResolvedValue(snapshot);
+    mockSelect.mockReset();
+  });
+
+  it('scans only the fields it maps, never the embedding vectors', async () => {
+    // Records every field the mapper touches; any it reads must have been requested.
+    const read = new Set<string>();
+    const full = new Proxy({} as Record<string, unknown>, {
+      get: (_target, key) => {
+        if (typeof key === 'string') read.add(key);
+        return undefined;
+      },
+    });
+    mockSourceGet.mockResolvedValue({
+      docs: [{ id: 'course-1', data: () => full }],
+    });
+    const { fetchCourses } = await import('@/lib/courses');
+    await fetchCourses();
+    const selected = mockSelect.mock.calls[0] as string[];
+    expect(selected).not.toContain('embedding');
+    expect([...read].filter((key) => !selected.includes(key))).toEqual([]);
   });
 
   it('coalesces concurrent cold loads and keeps memory cache if persistence fails', async () => {

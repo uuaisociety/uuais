@@ -195,7 +195,7 @@ describe('AppContext', () => {
     expect(result.current.state.error).toBeNull();
   });
 
-  it('subscribes to firestore collections and id token changes on mount', async () => {
+  it('opens the home page listeners and the id token listener on mount', async () => {
     renderApp();
     await waitFor(() => expect(subscribeToEvents).toHaveBeenCalledTimes(1));
     expect((subscribeToEvents as jest.Mock).mock.calls[0][1]).toEqual({
@@ -203,15 +203,15 @@ describe('AppContext', () => {
       recentOnly: true,
     });
     expect(subscribeToTeamMembers).not.toHaveBeenCalled();
-    // Blog posts are subscribed for all users (public sees published only)
-    expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
-    expect(subscribeToFaqs).toHaveBeenCalledTimes(1);
-    expect(subscribeToJobs).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1));
     await waitFor(() =>
       expect(subscribeToShowcaseProjects).toHaveBeenCalledTimes(1),
     );
     await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
     expect(idTokenCallback).not.toBeNull();
+    // The home page shows neither jobs nor FAQs, so it doesn't pay their reads.
+    expect(subscribeToJobs).not.toHaveBeenCalled();
+    expect(subscribeToFaqs).not.toHaveBeenCalled();
   });
 
   it('loads team through the provider only when requested and subscribes only on admin routes', async () => {
@@ -245,7 +245,7 @@ describe('AppContext', () => {
   it('skips event listeners on unrelated and event detail routes', async () => {
     global.__mockPathname = '/courses';
     const { rerender } = renderApp();
-    await waitFor(() => expect(subscribeToJobs).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
     expect(subscribeToEvents).not.toHaveBeenCalled();
     global.__mockPathname = '/events/evt-1';
     rerender();
@@ -253,8 +253,8 @@ describe('AppContext', () => {
       await Promise.resolve();
     });
     expect(subscribeToEvents).not.toHaveBeenCalled();
-    expect(subscribeToJobs).toHaveBeenCalledTimes(1);
-    expect(subscribeToBlogPosts).toHaveBeenCalledTimes(1);
+    expect(subscribeToJobs).not.toHaveBeenCalled();
+    expect(subscribeToBlogPosts).not.toHaveBeenCalled();
   });
 
   it('starts and stops event listening across route groups without restarting other listeners', async () => {
@@ -262,7 +262,7 @@ describe('AppContext', () => {
     const eventUnsubscribe = jest.fn();
     (subscribeToEvents as jest.Mock).mockImplementation(() => eventUnsubscribe);
     const { rerender } = renderApp();
-    await waitFor(() => expect(subscribeToJobs).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
     expect(subscribeToEvents).not.toHaveBeenCalled();
     global.__mockPathname = '/';
     rerender();
@@ -418,8 +418,70 @@ describe('AppContext', () => {
     expect(subscribeToEvents).toHaveBeenCalledTimes(1);
   });
 
+  describe('route-scoped listeners', () => {
+    const opened = () => ({
+      events: (subscribeToEvents as jest.Mock).mock.calls.length,
+      blogPosts: (subscribeToBlogPosts as jest.Mock).mock.calls.length,
+      showcase: (subscribeToShowcaseProjects as jest.Mock).mock.calls.length,
+      jobs: (subscribeToJobs as jest.Mock).mock.calls.length,
+      faqs: (subscribeToFaqs as jest.Mock).mock.calls.length,
+    });
+    const none = { events: 0, blogPosts: 0, showcase: 0, jobs: 0, faqs: 0 };
+
+    it.each([
+      ['/programs/tdv1k', none],
+      ['/careers', { ...none, jobs: 1 }],
+      ['/about', { ...none, faqs: 1 }],
+      ['/blog', { ...none, blogPosts: 1 }],
+      ['/blog/post-1', { ...none, events: 1, blogPosts: 1 }],
+      ['/showcase/p-1', { ...none, showcase: 1 }],
+      ['/admin', { events: 1, blogPosts: 1, showcase: 1, jobs: 1, faqs: 1 }],
+    ])('%s opens only the listeners it renders', async (path, expected) => {
+      global.__mockPathname = path;
+      renderApp();
+      await waitFor(() => expect(onIdTokenChanged).toHaveBeenCalledTimes(1));
+      // Let every pending listener open before counting.
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      });
+      expect(opened()).toEqual(expected);
+    });
+
+    it('closes a listener when navigation leaves the routes that render it', async () => {
+      global.__mockPathname = '/careers';
+      const jobsUnsubscribe = jest.fn();
+      (subscribeToJobs as jest.Mock).mockImplementationOnce(
+        () => jobsUnsubscribe,
+      );
+      const { rerender } = renderApp();
+      await waitFor(() => expect(subscribeToJobs).toHaveBeenCalledTimes(1));
+      await act(async () => {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+      });
+      global.__mockPathname = '/programs/tdv1k';
+      rerender();
+      expect(jobsUnsubscribe).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('clears the public team directory cache after an admin team edit', async () => {
+    const { result } = renderApp();
+    await act(async () => {
+      await result.current.dispatch({
+        firestoreAction: 'ADD_TEAM_MEMBER',
+        payload: { name: 'Bob', position: 'Dev' },
+      });
+    });
+    expect(addTeamMember).toHaveBeenCalled();
+    expect(global.fetch).toHaveBeenCalledWith('/api/admin/team-directory', {
+      method: 'POST',
+    });
+  });
+
   describe('AppSeed', () => {
     it('shows the page seed until each realtime stream delivers', async () => {
+      // Admin routes open every stream the seed covers.
+      global.__mockPathname = '/admin';
       const seededEvent = { ...mockEvent, id: 'evt-seed' };
       const seededJob = { ...mockJob, id: 'job-seed' };
       const seededFaq = { ...mockFaq, id: 'faq-seed' };

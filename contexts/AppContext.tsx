@@ -245,6 +245,49 @@ const AppContext = createContext<
   | undefined
 >(undefined);
 
+let firstIdlePromise: Promise<void> | null = null;
+
+/** Resolves once the first page load has gone idle, keeping listeners out of the critical
+ *  network chain (LCP). After that, listeners opened by client navigation start at once. */
+function firstIdle(): Promise<void> {
+  firstIdlePromise ??= new Promise((resolve) =>
+    scheduleIdle(resolve, hasCachedIdentity() ? 0 : 3500),
+  );
+  return firstIdlePromise;
+}
+
+/** Opens a Firestore listener after the first idle period. The returned cleanup closes it,
+ *  and `live()` turns false at the same moment so a late snapshot from it is dropped. */
+function openStream(
+  open: (live: () => boolean) => Promise<() => void>,
+): () => void {
+  let closed = false;
+  let unsubscribe: (() => void) | null = null;
+  const close = (unsub: () => void) => {
+    try {
+      unsub();
+    } catch {
+      /* ignore */
+    }
+  };
+  void firstIdle()
+    .then(() => (closed ? null : open(() => !closed)))
+    .then((unsub) => {
+      if (!unsub) return;
+      if (closed) close(unsub);
+      else unsubscribe = unsub;
+    });
+  return () => {
+    closed = true;
+    if (unsubscribe) close(unsubscribe);
+  };
+}
+
+/** The public team directory is cached for a day; an admin edit clears it (best effort). */
+function refreshPublicTeamDirectory(): void {
+  void fetch('/api/admin/team-directory', { method: 'POST' }).catch(() => {});
+}
+
 export const AppProvider: React.FC<{
   children: ReactNode;
 }> = ({ children }) => {
@@ -261,6 +304,20 @@ export const AppProvider: React.FC<{
   const eventSubscriptionMode = !(pathname === '/' || pathname === '/events')
     ? 'full'
     : 'recent';
+  // Each listener below runs only on the routes that render its collection: every new visit
+  // re-reads the whole collection, and Firestore reads are capped at 50K/day.
+  const needsBlogPosts =
+    pathname === '/' ||
+    pathname === '/blog' ||
+    pathname.startsWith('/blog/') ||
+    isAdminRoute;
+  const needsShowcase =
+    pathname === '/' ||
+    pathname === '/showcase' ||
+    pathname.startsWith('/showcase/') ||
+    isAdminRoute;
+  const needsJobs = pathname === '/careers' || isAdminRoute;
+  const needsFaqs = pathname === '/about' || isAdminRoute;
   const [state, dispatch] = useReducer(appReducer, initialState);
   const eventArchive = useEventArchive();
   const teamDirectory = usePublicTeamDirectory();
@@ -292,84 +349,94 @@ export const AppProvider: React.FC<{
     };
   }, []);
 
-  // Realtime Firestore listeners start after the main thread goes idle so they stay out of the critical network chain (LCP); SSR-seeded data already paints the content.
+  // Admin claim: decides whether the listeners below include drafts.
   useEffect(() => {
-    // Listener refs are mutated async (dynamic import) so a late chunk from a superseded subscribe() can't clobber the active one.
-    const unsubscribeJobs: { current: (() => void) | null } = { current: null };
-    const unsubscribeBlogPosts: { current: (() => void) | null } = {
-      current: null,
-    };
-    const unsubscribeShowcase: { current: (() => void) | null } = {
-      current: null,
-    };
-    const unsubscribeFaqs: { current: (() => void) | null } = { current: null };
-    let idTokenUnsub: (() => void) | null = null;
     let disposed = false;
-    // Bumped on every subscribe() so a listener from an older call drops itself instead of replacing the current one.
-    let subscriptionGeneration = 0;
-
-    const subscribe = (includeUnpublished = false) => {
-      // includeUnpublished: boolean indicates admin status
-      const gen = ++subscriptionGeneration;
-
-      // Subscribe once the chunk loads, dropping the listener if a newer subscribe() superseded us.
-      const attach = <T,>(
-        importPromise: Promise<T>,
-        ref: { current: (() => void) | null },
-        make: (mod: T) => () => void,
-      ) => {
-        void importPromise.then((mod) => {
-          if (disposed) return;
-          const unsub = make(mod);
-          if (gen !== subscriptionGeneration) {
+    let idTokenUnsub: (() => void) | null = null;
+    // Starts false so the first fire is a no-op for non-admins.
+    let currentAdminClaim = false;
+    let authGeneration = 0;
+    void firstIdle()
+      .then(() =>
+        Promise.all([import('firebase/auth'), import('@/lib/firebase-client')]),
+      )
+      .then(([{ onIdTokenChanged }, { auth }]) => {
+        if (disposed) return;
+        idTokenUnsub = onIdTokenChanged(auth, async (user) => {
+          const gen = ++authGeneration;
+          let adminClaim = false;
+          if (user) {
+            // Read cached claims without forcing a network refresh; onIdTokenChanged fires on token refresh.
             try {
-              unsub();
-            } catch {
-              /* ignore */
+              const tokenResult = await user.getIdTokenResult();
+              adminClaim = !!tokenResult.claims.admin;
+            } catch (err) {
+              console.warn('Failed to refresh ID token', err);
+              return;
             }
-            return;
           }
-          ref.current = unsub;
+          // Ignore stale auth events that resolved after a newer one applied.
+          if (disposed || gen !== authGeneration) return;
+          // Avoid restarting the listeners when the admin claim did not change.
+          if (currentAdminClaim === adminClaim) return;
+          currentAdminClaim = adminClaim;
+          isAdminRef.current = adminClaim;
+          if (!adminClaim) {
+            dispatch({ type: 'CLEAR_PRIVATE_EVENTS' });
+            dispatch({ type: 'SET_TEAM_MEMBERS', payload: [] });
+          }
+          setIsAdmin(adminClaim);
         });
-      };
-
-      if (unsubscribeJobs.current) {
-        try {
-          unsubscribeJobs.current();
-        } catch {
-          /* ignore */
-        }
-        unsubscribeJobs.current = null;
+      });
+    return () => {
+      disposed = true;
+      try {
+        idTokenUnsub?.();
+      } catch {
+        /* ignore */
       }
-      attach(
-        import('@/lib/firestore/jobs'),
-        unsubscribeJobs,
-        ({ subscribeToJobs }) =>
-          subscribeToJobs(
-            (jobs) => {
-              dispatch({ type: 'SET_JOBS', payload: jobs });
-            },
-            { includeUnpublished },
-          ),
-      );
+    };
+  }, []);
 
-      // Showcase: public visitors only see published projects; admins see all (incl. drafts)
-      if (unsubscribeShowcase.current) {
-        try {
-          unsubscribeShowcase.current();
-        } catch {
-          /* ignore */
-        }
-        unsubscribeShowcase.current = null;
-      }
-      // Flips only on a server-answered snapshot: the SDK's first snapshot is often cache-only, so before that an empty cache result is a cold start, not "could not ask" (the flash bug).
-      let hasReceivedServerSnapshot = false;
-      attach(
-        import('@/lib/firestore/showcase'),
-        unsubscribeShowcase,
+  // Public visitors see published items; admins see all (incl. drafts).
+  useEffect(() => {
+    if (!needsJobs) return;
+    return openStream((live) =>
+      import('@/lib/firestore/jobs').then(({ subscribeToJobs }) =>
+        subscribeToJobs(
+          (jobs) => {
+            if (live()) dispatch({ type: 'SET_JOBS', payload: jobs });
+          },
+          { includeUnpublished: isAdmin },
+        ),
+      ),
+    );
+  }, [needsJobs, isAdmin]);
+
+  useEffect(() => {
+    if (!needsBlogPosts) return;
+    return openStream((live) =>
+      import('@/lib/firestore/blog').then(({ subscribeToBlogPosts }) =>
+        subscribeToBlogPosts(
+          (posts) => {
+            if (live()) dispatch({ type: 'SET_BLOG_POSTS', payload: posts });
+          },
+          { includeUnpublished: isAdmin },
+        ),
+      ),
+    );
+  }, [needsBlogPosts, isAdmin]);
+
+  useEffect(() => {
+    if (!needsShowcase) return;
+    // Flips only on a server-answered snapshot: the SDK's first snapshot is often cache-only, so before that an empty cache result is a cold start, not "could not ask" (the flash bug).
+    let hasReceivedServerSnapshot = false;
+    return openStream((live) =>
+      import('@/lib/firestore/showcase').then(
         ({ subscribeToShowcaseProjects }) =>
           subscribeToShowcaseProjects(
             (projects, meta) => {
+              if (!live()) return;
               if (!meta.fromCache) hasReceivedServerSnapshot = true;
               dispatch({
                 type: 'SET_SHOWCASE_PROJECTS',
@@ -378,133 +445,27 @@ export const AppProvider: React.FC<{
               });
             },
             {
-              includeUnpublished,
+              includeUnpublished: isAdmin,
+              // A listener already closed (admin or route change) must not mark a healthy stream unavailable.
               onError: () => {
-                // A stale listener from a superseded subscribe() must not mark the showcase unavailable after a healthy re-subscribe.
-                if (gen !== subscriptionGeneration) return;
-                dispatch({ type: 'SET_SHOWCASE_UNAVAILABLE' });
+                if (live()) dispatch({ type: 'SET_SHOWCASE_UNAVAILABLE' });
               },
             },
           ),
-      );
-
-      // Blog posts: public visitors see published posts; admins see all (incl. drafts)
-      if (unsubscribeBlogPosts.current) {
-        try {
-          unsubscribeBlogPosts.current();
-        } catch {
-          /* ignore */
-        }
-        unsubscribeBlogPosts.current = null;
-      }
-      attach(
-        import('@/lib/firestore/blog'),
-        unsubscribeBlogPosts,
-        ({ subscribeToBlogPosts }) =>
-          subscribeToBlogPosts(
-            (posts) => {
-              dispatch({ type: 'SET_BLOG_POSTS', payload: posts });
-            },
-            { includeUnpublished },
-          ),
-      );
-    };
-
-    // Returning visitors (cached identity) get realtime data immediately; anonymous visitors defer the firestore streams until after LCP / first interaction.
-    scheduleIdle(
-      () => {
-        if (disposed) return;
-        // Initial subscription: assume not admin (public)
-        subscribe(false);
-
-        // Other static subscriptions that don't depend on auth
-        void import('@/lib/firestore/faqs').then(({ subscribeToFaqs }) => {
-          if (disposed) return;
-          unsubscribeFaqs.current = subscribeToFaqs((faqs) => {
-            dispatch({ type: 'SET_FAQS', payload: faqs });
-          });
-        });
-
-        // Listen for ID token changes; starts false so the first fire is a no-op for non-admins.
-        let currentAdminClaim: boolean | null = false;
-        let authGeneration = 0;
-        void Promise.all([
-          import('firebase/auth'),
-          import('@/lib/firebase-client'),
-        ]).then(([{ onIdTokenChanged }, { auth }]) => {
-          if (disposed) return;
-          idTokenUnsub = onIdTokenChanged(auth, async (user) => {
-            const gen = ++authGeneration;
-            let adminClaim = false;
-            if (user) {
-              // Read cached claims without forcing a network refresh; onIdTokenChanged fires on token refresh.
-              try {
-                const tokenResult = await user.getIdTokenResult();
-                adminClaim = !!tokenResult.claims.admin;
-              } catch (err) {
-                console.warn('Failed to refresh ID token', err);
-                return;
-              }
-            }
-            // Ignore stale auth events that resolved after a newer one applied.
-            if (disposed || gen !== authGeneration) return;
-            // Avoid re-subscribing when the admin claim did not change.
-            if (currentAdminClaim === adminClaim) return;
-            currentAdminClaim = adminClaim;
-            isAdminRef.current = adminClaim;
-            if (!adminClaim) {
-              dispatch({ type: 'CLEAR_PRIVATE_EVENTS' });
-              dispatch({ type: 'SET_TEAM_MEMBERS', payload: [] });
-            }
-            setIsAdmin(adminClaim);
-            // Re-subscribe with adminClaim (true/false)
-            subscribe(adminClaim);
-          });
-        });
-      },
-      hasCachedIdentity() ? 0 : 3500,
+      ),
     );
+  }, [needsShowcase, isAdmin]);
 
-    // Cleanup subscriptions on unmount
-    return () => {
-      disposed = true;
-      if (unsubscribeJobs.current) {
-        try {
-          unsubscribeJobs.current();
-        } catch {
-          /* ignore */
-        }
-      }
-      if (unsubscribeBlogPosts.current) {
-        try {
-          unsubscribeBlogPosts.current();
-        } catch {
-          /* ignore */
-        }
-      }
-      if (unsubscribeShowcase.current) {
-        try {
-          unsubscribeShowcase.current();
-        } catch {
-          /* ignore */
-        }
-      }
-      if (unsubscribeFaqs.current) {
-        try {
-          unsubscribeFaqs.current();
-        } catch {
-          /* ignore */
-        }
-      }
-      if (idTokenUnsub) {
-        try {
-          idTokenUnsub();
-        } catch {
-          /* ignore */
-        }
-      }
-    };
-  }, []);
+  useEffect(() => {
+    if (!needsFaqs) return;
+    return openStream((live) =>
+      import('@/lib/firestore/faqs').then(({ subscribeToFaqs }) =>
+        subscribeToFaqs((faqs) => {
+          if (live()) dispatch({ type: 'SET_FAQS', payload: faqs });
+        }),
+      ),
+    );
+  }, [needsFaqs]);
 
   useEffect(() => {
     if (!isAdmin || !isAdminRoute) {
@@ -530,32 +491,21 @@ export const AppProvider: React.FC<{
   // Route changes only restart the event stream when its visibility or need changes.
   useEffect(() => {
     if (!needsEvents) return;
-    let disposed = false;
-    let unsubscribe: (() => void) | null = null;
-    scheduleIdle(
-      () => {
-        if (disposed) return;
-        void import('@/lib/firestore/events').then(({ subscribeToEvents }) => {
-          if (disposed) return;
-          unsubscribe = subscribeToEvents(
-            (events) => {
-              if (!disposed && (!isAdmin || isAdminRef.current)) {
-                dispatch({ type: 'SET_EVENTS', payload: events });
-              }
-            },
-            {
-              includeUnpublished: isAdmin,
-              recentOnly: eventSubscriptionMode === 'recent',
-            },
-          );
-        });
-      },
-      hasCachedIdentity() ? 0 : 3500,
+    return openStream((live) =>
+      import('@/lib/firestore/events').then(({ subscribeToEvents }) =>
+        subscribeToEvents(
+          (events) => {
+            if (live() && (!isAdmin || isAdminRef.current)) {
+              dispatch({ type: 'SET_EVENTS', payload: events });
+            }
+          },
+          {
+            includeUnpublished: isAdmin,
+            recentOnly: eventSubscriptionMode === 'recent',
+          },
+        ),
+      ),
     );
-    return () => {
-      disposed = true;
-      unsubscribe?.();
-    };
   }, [needsEvents, isAdmin, eventSubscriptionMode]);
 
   // Enhanced dispatch with Firestore sync
@@ -587,16 +537,19 @@ export const AppProvider: React.FC<{
             await (
               await import('@/lib/firestore/team')
             ).addTeamMember(action.payload);
+            refreshPublicTeamDirectory();
             break;
           case 'UPDATE_TEAM_MEMBER':
             await (
               await import('@/lib/firestore/team')
             ).updateTeamMember(action.payload.id, action.payload);
+            refreshPublicTeamDirectory();
             break;
           case 'DELETE_TEAM_MEMBER':
             await (
               await import('@/lib/firestore/team')
             ).deleteTeamMember(action.payload);
+            refreshPublicTeamDirectory();
             break;
           case 'MOVE_TEAM_MEMBER':
             await (
@@ -607,6 +560,7 @@ export const AppProvider: React.FC<{
               action.payload.direction,
               action.payload.year,
             );
+            refreshPublicTeamDirectory();
             break;
           case 'ADD_BLOG_POST':
             await (

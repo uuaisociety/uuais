@@ -15,7 +15,10 @@ import type {
 } from '@/lib/team-directory-types';
 
 const EMPTY_SEED = { events: [], jobs: [], faqs: [], teamMembers: [] };
-const CACHE_SECONDS = 60;
+const CACHE_SECONDS = 24 * 60 * 60;
+/** Cleared by POST /api/admin/team-directory after an admin edit, so a day's cache never
+ *  shows a stale roster. */
+export const TEAM_DIRECTORY_TAG = 'team-directory';
 /** The pages that render the seed take this revalidate. Live Firestore listeners replace
  *  the seed seconds after load, so it only has to be fresh enough for crawlers and the
  *  first paint, and every refresh re-runs the events, jobs and FAQ queries. */
@@ -58,14 +61,14 @@ const getCachedSeed = unstable_cache(
 const getCachedTeamDirectoryIndex = unstable_cache(
   async () => getPublicTeamDirectoryIndex(),
   ['public-team-directory-index-v1', projectId()],
-  { revalidate: CACHE_SECONDS },
+  { revalidate: CACHE_SECONDS, tags: [TEAM_DIRECTORY_TAG] },
 );
 
 const getCachedTeamProfiles = unstable_cache(
   async (team: TeamCategory, year: TeamDirectoryYear, ids: string[]) =>
     getPublicTeamMembersForSelection(team, year, ids),
   ['public-team-selected-profiles-v1', projectId()],
-  { revalidate: CACHE_SECONDS },
+  { revalidate: CACHE_SECONDS, tags: [TEAM_DIRECTORY_TAG] },
 );
 
 export async function getCachedPublicSeed() {
