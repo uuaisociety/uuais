@@ -37,7 +37,11 @@ RUN AUTH_COOKIE_SIGNATURE_KEY_CURRENT=build-only-not-a-secret \
 
 FROM node:24-slim
 WORKDIR /app
-ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1
+# The heap cap makes V8 collect garbage before it grows to its default limit (525 MB in
+# Railway's 1 GB container), since Railway bills for memory. A fresh server uses about
+# 330 MB in total, heap included. It lives here rather than in a service variable because
+# Railpack passes service variables to `next build`, which needs a bigger heap.
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 NODE_OPTIONS=--max-old-space-size=320
 # Owned by the runtime user so ISR can write regenerated pages under .next.
 COPY --from=build --chown=node:node /app ./
 USER node

@@ -1,0 +1,45 @@
+name: Restart Railway service
+
+# Railway bills for memory, and the server's memory climbs during the day and never comes
+# back down. Restarting the running deployment resets it without a rebuild (see
+# docs/railway-hosting.md). Runs only while the RAILWAY_SERVICE_ID repository variable is
+# set; delete it when moving back to Vercel.
+on:
+  schedule:
+    - cron: '17 4 * * *' # clear of the 03:00 registrations-cleanup cron
+    - cron: '17 16 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  restart:
+    if: vars.RAILWAY_SERVICE_ID != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Restart the latest successful deployment
+        shell: bash
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          SERVICE_ID: ${{ vars.RAILWAY_SERVICE_ID }}
+          ENVIRONMENT_ID: ${{ vars.RAILWAY_ENVIRONMENT_ID }}
+        run: |
+          gql() {
+            curl --fail-with-body --silent --show-error --max-time 30 \
+              https://backboard.railway.com/graphql/v2 \
+              -H "Project-Access-Token: $RAILWAY_TOKEN" \
+              -H 'Content-Type: application/json' \
+              -d "$1"
+          }
+          res=$(gql "$(jq -n --arg s "$SERVICE_ID" --arg e "$ENVIRONMENT_ID" '{
+            query: "query($s: String!, $e: String!) { deployments(first: 1, input: {serviceId: $s, environmentId: $e, status: {in: [SUCCESS]}}) { edges { node { id } } } }",
+            variables: {s: $s, e: $e}
+          }')")
+          id=$(jq -er '.data.deployments.edges[0].node.id' <<<"$res") || { echo "$res"; exit 1; }
+          res=$(gql "$(jq -n --arg id "$id" '{
+            query: "mutation($id: String!) { deploymentRestart(id: $id) }",
+            variables: {id: $id}
+          }')")
+          jq -e '.data.deploymentRestart == true' <<<"$res" >/dev/null || { echo "$res"; exit 1; }
+          echo "Restarted deployment $id"
