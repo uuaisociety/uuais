@@ -272,7 +272,7 @@ export const Header: React.FC = () => {
                       onClick={() => logout()}
                       className="px-3 py-1.5 rounded-sm mono-label text-current/60 hover:text-current transition-colors cursor-pointer"
                     >
-                      Logout
+                      Sign out
                     </button>
                   </>
                 ) : (
@@ -281,13 +281,13 @@ export const Header: React.FC = () => {
                       href="/join"
                       className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors"
                     >
-                      Register
+                      Join
                     </Link>
                     <Link
                       href={loginUrl(pathname)}
                       className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors"
                     >
-                      Login
+                      Sign in
                     </Link>
                   </>
                 )}
@@ -406,7 +406,7 @@ export const Header: React.FC = () => {
                     onClick={() => logout()}
                     className="w-full text-left px-3.5 py-2.5 rounded-sm mono-label text-current/60 hover:text-current transition-colors cursor-pointer"
                   >
-                    Logout
+                    Sign out
                   </button>
                 </>
               ) : (
@@ -415,13 +415,13 @@ export const Header: React.FC = () => {
                     href={loginUrl(pathname)}
                     className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-current/65 border border-current/10 hover:bg-current/[0.07] transition-colors"
                   >
-                    Login
+                    Sign in
                   </Link>
                   <Link
                     href="/join"
                     className="flex-1 text-center px-3 py-2 rounded-sm mono-label text-current/65 border border-current/10 hover:bg-current/[0.07] transition-colors"
                   >
-                    Register
+                    Join
                   </Link>
                 </div>
               )}
