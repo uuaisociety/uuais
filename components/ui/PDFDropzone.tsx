@@ -11,6 +11,8 @@ interface PDFDropzoneProps {
   onChange: (f: File | null) => void;
   onError?: (msg: string) => void;
   label?: string;
+  /** Classes for the "browse" link; defaults to the brand-red link the application forms use. */
+  linkClassName?: string;
 }
 
 export default function PDFDropzone({
@@ -18,6 +20,7 @@ export default function PDFDropzone({
   onChange,
   onError,
   label = 'Resume',
+  linkClassName = 'text-primary underline',
 }: PDFDropzoneProps) {
   // Keep acronyms like "CV" upper-case in running text.
   const noun = label === label.toUpperCase() ? label : label.toLowerCase();
@@ -105,7 +108,7 @@ export default function PDFDropzone({
       <Upload className="h-5 w-5 text-muted-foreground" />
       <div className="text-sm text-muted-foreground">
         Drag & drop your {noun} here, or{' '}
-        <span className="text-primary underline">browse</span>
+        <span className={linkClassName}>browse</span>
         <span className="block text-xs text-muted-foreground mt-0.5">
           PDF, max 3MB
         </span>
