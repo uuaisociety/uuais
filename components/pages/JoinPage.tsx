@@ -1,49 +1,191 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/Button';
-import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import React, { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { GithubIcon, GoogleIcon } from '@hugeicons/core-free-icons';
-import { updatePageMeta } from '@/utils/seo';
-import type { UserProfile } from '@/lib/firestore/users';
-import Link from 'next/link';
-import {
-  FieldGroup,
-  InputBase,
-  SelectBase,
-  TextareaBase,
-} from '@/components/ui/Form';
+import { Button } from '@/components/ui/Button';
+import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { FieldGroup, InputBase, SelectBase } from '@/components/ui/Form';
 import { useNotify } from '@/components/ui/Notifications';
 import { DiscordCta } from '@/components/common/DiscordCta';
-import { useRouter } from 'next/navigation';
-import dynamic from 'next/dynamic';
+import EmailLinkSignIn from '@/components/auth/EmailLinkSignIn';
+import { updatePageMeta } from '@/utils/seo';
+import {
+  ensureAuth,
+  publishProfile,
+  refreshProfile,
+  useAdmin,
+} from '@/hooks/useAdmin';
 import { currentRedirect } from '@/lib/login-redirect';
 import { signInErrorMessage } from '@/lib/sign-in-error';
 import { isReferralSource } from '@/lib/referrals';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { TimeoutError, withTimeout } from '@/lib/with-timeout';
+import type { UserProfile } from '@/lib/firestore/users';
 
-// Loaded on demand, like the provider buttons' Firebase import, so the page doesn't ship Firebase up front.
-const EmailLinkSignIn = dynamic(
-  () => import('@/components/auth/EmailLinkSignIn'),
-  { ssr: false },
-);
+// A hung Firestore write would otherwise leave "Creating your account…" spinning forever.
+const SAVE_TIMEOUT_MS = 15_000;
+
+const HEARD_OF_US = [
+  ['posters', 'Posters'],
+  ['instagram', 'Instagram'],
+  ['linkedin', 'LinkedIn'],
+  ['friends', 'Friends'],
+  ['referral', 'Referral'],
+  ['events', 'Events'],
+  ['lecture', 'During a lecture'],
+  ['other', 'Other'],
+] as const;
+const KNOWN_SOURCES: string[] = HEARD_OF_US.map(([value]) => value);
+
+type Draft = {
+  name: string;
+  studentStatus: 'student' | 'alumni' | 'other';
+  program: string;
+  heardSource: string;
+  heardOther: string;
+  referredBy: string;
+  newsletter: boolean;
+};
+
+const EMPTY_DRAFT: Draft = {
+  name: '',
+  studentStatus: 'student',
+  program: '',
+  heardSource: '',
+  heardOther: '',
+  referredBy: '',
+  newsletter: false,
+};
+
+// Kept per tab, so a reload or a detour to the privacy policy doesn't wipe what was typed.
+const draftKey = (uid: string) => `joinDraft:${uid}`;
+
+const readDraft = (uid: string): Partial<Draft> | null => {
+  try {
+    const raw = window.sessionStorage.getItem(draftKey(uid));
+    return raw ? (JSON.parse(raw) as Partial<Draft>) : null;
+  } catch {
+    return null;
+  }
+};
+
+const writeDraft = (uid: string, draft: Draft | null) => {
+  try {
+    if (draft)
+      window.sessionStorage.setItem(draftKey(uid), JSON.stringify(draft));
+    else window.sessionStorage.removeItem(draftKey(uid));
+  } catch {
+    // Storage blocked: the form just isn't restored after a reload.
+  }
+};
+
+/** Start from what's already known: a half-finished profile, then the sign-in provider's name. */
+const initialDraft = (
+  profile: UserProfile | null,
+  providerName: string | null,
+): Draft => {
+  const heard = profile?.heardOfUs ?? '';
+  const known = !heard || KNOWN_SOURCES.includes(heard);
+  return {
+    ...EMPTY_DRAFT,
+    // The Firestore rules cap names at 100 characters; a long provider name mustn't block saving.
+    name: (profile?.name || profile?.displayName || providerName || '').slice(
+      0,
+      100,
+    ),
+    studentStatus: profile?.studentStatus ?? 'student',
+    program: profile?.program ?? '',
+    heardSource: known ? heard : 'other',
+    heardOther: known ? '' : heard,
+    referredBy: profile?.referredBy ?? '',
+    newsletter: Boolean(profile?.newsletter),
+  };
+};
+
+const saveErrorMessage = (e: unknown): string => {
+  if (e instanceof TimeoutError)
+    return 'Creating your account is taking longer than usual. It will finish by itself once your connection is back, or you can try again. What you typed is kept.';
+  const code = (e as { code?: unknown })?.code;
+  if (code === 'unavailable')
+    return 'You seem to be offline. Check your connection and try again. What you typed is kept.';
+  return 'We couldn’t create your account. Please try again, or contact contact@uuais.com if it keeps failing.';
+};
 
 const JoinPage: React.FC = () => {
   const router = useRouter();
-  const [uid, setUid] = useState<string | null>(null);
-  const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [form, setForm] = useState<Partial<UserProfile>>({});
-  const [saving, setSaving] = useState(false);
-  const [privacyAccepted, setPrivacyAccepted] = useState(false);
-  const [signInError, setSignInError] = useState<string | null>(null);
   const { notify } = useNotify();
-  // The follow-up box only sits below the select on mobile; beside it on md+.
-  const specifyBelow = useIsMobile() ? ' (please specify below)' : '';
+  const { user, loading, cached, profile, profileLoading, profileError } =
+    useAdmin();
+  const uid = user?.uid ?? null;
+  const completed =
+    Boolean(profile?.isMember) && Boolean(profile?.privacyAcceptedAt);
 
-  // On success the auth listener below shows the profile form.
+  const [pendingProvider, setPendingProvider] = useState<
+    'google' | 'github' | null
+  >(null);
+  const [signInError, setSignInError] = useState<string | null>(null);
+
+  const [draft, setDraft] = useState<Draft>(EMPTY_DRAFT);
+  const [draftFor, setDraftFor] = useState<string | null>(null);
+  const [privacyAccepted, setPrivacyAccepted] = useState(false);
+  const [errors, setErrors] = useState<{ name?: string; privacy?: string }>({});
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [created, setCreated] = useState(false);
+
+  const nameRef = useRef<HTMLInputElement>(null);
+  const privacyRef = useRef<HTMLInputElement>(null);
+  const formHeadingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    updatePageMeta(
+      'Join Us',
+      'Create an account and become a member of UU AI Society',
+    );
+    // Arriving from an emailed sign-in link: start auth now so the page (and
+    // the header) show the signed-in state without the usual idle delay.
+    if (new URLSearchParams(window.location.search).has('oobCode'))
+      ensureAuth();
+  }, []);
+
+  // Fill the form once per signed-in user, from a saved draft if this tab has one.
+  const showForm = Boolean(uid) && !profileLoading && !profileError;
+  if (showForm && uid && draftFor !== uid) {
+    setDraftFor(uid);
+    setDraft({
+      ...initialDraft(profile, user?.displayName ?? null),
+      ...readDraft(uid),
+    });
+  }
+
+  // Move focus to the form when it replaces the sign-in options.
+  const formVisible = showForm && !completed && !created;
+  useEffect(() => {
+    if (!formVisible) return;
+    formHeadingRef.current?.focus();
+    // Another tab (e.g. the one the email link opened) may finish the account;
+    // re-check on return so this one shows "already a member" instead of the form.
+    const recheck = () => {
+      if (document.visibilityState === 'visible') void refreshProfile();
+    };
+    document.addEventListener('visibilitychange', recheck);
+    return () => document.removeEventListener('visibilitychange', recheck);
+  }, [formVisible]);
+
+  const update = (patch: Partial<Draft>) => {
+    setDraft((d) => {
+      const next = { ...d, ...patch };
+      if (uid) writeDraft(uid, next);
+      return next;
+    });
+  };
+
   const popupSignIn = async (provider: 'google' | 'github') => {
     setSignInError(null);
+    setPendingProvider(provider);
+    ensureAuth();
     try {
       const m = await import('@/lib/firebase-client');
       await (provider === 'google'
@@ -52,211 +194,175 @@ const JoinPage: React.FC = () => {
     } catch (e) {
       setSignInError(signInErrorMessage(e));
       console.error('Sign-in failed:', e);
+    } finally {
+      setPendingProvider(null);
     }
   };
 
-  useEffect(() => {
-    updatePageMeta(
-      'Join Us',
-      'Create an account and become a member of UU AI Society',
+  // Hovering or focusing a provider button starts the SDK download, so the popup opens right on click.
+  const warmFirebase = () => {
+    void import('@/lib/firebase-client');
+  };
+
+  // A timed-out save can still commit later, and the user may retry meanwhile: finish only once.
+  const finished = useRef(false);
+  const finish = (saved: UserProfile) => {
+    if (finished.current) return;
+    finished.current = true;
+    setCreated(true);
+    setSaveError(null);
+    writeDraft(saved.id, null);
+    // Show a member straight away (gate, header, /account); a read reconciles in the background.
+    publishProfile(saved);
+    void refreshProfile();
+    notify({
+      type: 'success',
+      title: 'Account created',
+      message: 'Welcome to UU AI Society! You are now a member.',
+      timeoutMs: 6000,
+    });
+    // Registration is often a detour (e.g. an application form) — return there.
+    const target = currentRedirect();
+    router.push(
+      !target || target.split('?')[0] === '/account'
+        ? '/account?welcome=1'
+        : target,
     );
-  }, []);
+  };
 
-  useEffect(() => {
-    let unsub: (() => void) | null = null;
-    let cancelled = false;
-    (async () => {
-      const { auth } = await import('@/lib/firebase-client');
-      if (cancelled) return;
-      unsub = auth.onAuthStateChanged(async (u) => {
-        if (!u) {
-          setUid(null);
-          setProfile(null);
-          setForm({});
-          return;
-        }
-        setUid(u.uid);
-        const { getUserProfile } = await import('@/lib/firestore/users');
-        const p = await getUserProfile(u.uid);
-        setProfile(p);
-        setForm((prev) => ({
-          ...prev,
-          ...(p || { isMember: true }),
-          // default fallbacks from auth
-          displayName:
-            p?.displayName ??
-            u.displayName ??
-            (u.email ? u.email.split('@')[0] : prev.displayName),
-          email: p?.email ?? u.email ?? prev.email,
-        }));
-      });
-    })();
-    return () => {
-      cancelled = true;
-      if (unsub) unsub();
+  const handleCreate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!uid || saving) return;
+    const name = draft.name.trim();
+    const nextErrors = {
+      name: name ? undefined : 'Please enter your name.',
+      privacy: privacyAccepted
+        ? undefined
+        : 'Please accept the privacy policy to create your account.',
     };
-  }, []);
+    setErrors(nextErrors);
+    if (nextErrors.name) {
+      nameRef.current?.focus();
+      return;
+    }
+    if (nextErrors.privacy) {
+      privacyRef.current?.focus();
+      return;
+    }
 
-  // Warn before leaving with an unfinished registration (the RegistrationGate signs the user out off /join).
-  useEffect(() => {
-    const incomplete =
-      Boolean(uid) &&
-      !(Boolean(profile?.isMember) && Boolean(profile?.privacyAcceptedAt));
-    if (!incomplete) return;
-
-    const beforeUnload = (e: BeforeUnloadEvent) => {
-      e.preventDefault();
-      e.returnValue = '';
-    };
-    window.addEventListener('beforeunload', beforeUnload);
-
-    const confirmLeave = () =>
-      window.confirm(
-        'Are you sure you want to leave? Your registration is not complete yet.',
-      );
-
-    // Client-side navigation (header links, cards) doesn't fire beforeunload, so intercept it here.
-    // Capture phase fires BEFORE Next.js Link's own onClick, otherwise Link navigates first and the guard never runs.
-    const onClick = (e: MouseEvent) => {
-      if (
-        e.defaultPrevented ||
-        e.button !== 0 ||
-        e.metaKey ||
-        e.ctrlKey ||
-        e.shiftKey ||
-        e.altKey
-      )
-        return;
-      const anchor = (e.target as Element | null)?.closest?.('a');
-      if (!anchor) return;
-      const href = anchor.getAttribute('href');
-      if (!href) return;
-      if (anchor.target && anchor.target !== '_self') return;
-      if (
-        href.startsWith('#') ||
-        href.startsWith('mailto:') ||
-        href.startsWith('tel:') ||
-        href.startsWith('javascript:')
-      )
-        return;
-      const url = new URL(href, window.location.href);
-      if (url.origin !== window.location.origin || url.pathname === '/join')
-        return;
-
-      e.preventDefault();
-      e.stopPropagation();
-      if (confirmLeave()) {
-        router.push(url.pathname + url.search + url.hash);
-      }
-    };
-    document.addEventListener('click', onClick, true);
-
-    return () => {
-      window.removeEventListener('beforeunload', beforeUnload);
-      document.removeEventListener('click', onClick, true);
-    };
-  }, [uid, profile, router]);
-
-  const handleSave = async () => {
-    if (!uid) return;
     setSaving(true);
-    try {
-      const data: Partial<UserProfile> = {
-        ...form,
-        isMember: true,
-        privacyAcceptedAt: privacyAccepted
-          ? new Date().toISOString()
-          : undefined,
-      };
-      const { upsertUserProfile, updateUserProfile, getUserProfile } =
+    setSaveError(null);
+    const heardOfUs =
+      draft.heardSource === 'other'
+        ? draft.heardOther.trim()
+        : draft.heardSource;
+    const save = (async (): Promise<UserProfile> => {
+      const { getUserProfile, upsertUserProfile, updateUserProfile } =
         await import('@/lib/firestore/users');
-      if (!profile) {
-        await upsertUserProfile(uid, data);
-      } else {
-        await updateUserProfile(uid, data);
+      // Read fresh: another tab may have created the profile since this one loaded.
+      const existing = await getUserProfile(uid);
+      if (existing?.isMember && existing.privacyAcceptedAt) return existing;
+      const data: Partial<UserProfile> = {
+        name,
+        displayName: existing?.displayName || name,
+        email: user?.email ?? undefined,
+        studentStatus: draft.studentStatus,
+        program:
+          draft.studentStatus === 'student' ? draft.program.trim() : undefined,
+        heardOfUs: heardOfUs || undefined,
+        referredBy: isReferralSource(draft.heardSource)
+          ? draft.referredBy.trim()
+          : undefined,
+        newsletter: draft.newsletter,
+        privacyAcceptedAt: new Date().toISOString(),
+      };
+      if (!existing) {
+        await upsertUserProfile(uid, { ...data, isMember: true });
+        return { ...data, id: uid, isMember: true } as UserProfile;
       }
-      const refreshed = await getUserProfile(uid);
-      setProfile(refreshed);
-      // Refresh the shared useAdmin store so RegistrationGate doesn't bounce the user back to /join.
-      const { refreshProfile } = await import('@/hooks/useAdmin');
-      await refreshProfile();
-      notify({
-        type: 'success',
-        title: 'Saved',
-        message: 'Profile saved successfully.',
-      });
-      // Registration is often a detour (e.g. an application form) — return there, not /account.
-      router.push(currentRedirect() || '/account');
-    } catch (e: unknown) {
-      const msg =
-        e instanceof Error ? e.message : 'Could not save your profile.';
-      notify({ type: 'error', title: 'Save failed', message: msg });
+      // isMember is admin-managed once set; only add it when missing.
+      const patch = 'isMember' in existing ? data : { ...data, isMember: true };
+      await updateUserProfile(uid, patch);
+      return { ...existing, ...patch, id: uid } as UserProfile;
+    })();
+    try {
+      finish(await withTimeout(save, SAVE_TIMEOUT_MS));
+    } catch (err) {
+      console.error('Creating the profile failed:', err);
+      // A slow write is still queued and commits once the connection is back; finish then.
+      if (err instanceof TimeoutError) save.then(finish, () => undefined);
+      setSaveError(saveErrorMessage(err));
     } finally {
       setSaving(false);
     }
   };
 
+  const redirect = currentRedirect();
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 dark:[color-scheme:dark]">
-      <div className="max-w-3xl mx-auto px-4 space-y-8">
+      <div className="max-w-xl mx-auto px-4 space-y-8">
         <div className="text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">
             Join UU AI Society
           </h1>
           <p className="text-gray-600 dark:text-gray-300">
-            Create an account to become a member of UU AI Society.
+            Free membership for anyone interested in AI. It takes about a
+            minute.
           </p>
         </div>
 
-        {/* Logged-in/member banner */}
-        {uid &&
-          (profile?.isMember && profile?.privacyAcceptedAt ? (
-            <div className="p-4 rounded-md border border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950 text-blue-900 dark:text-blue-200">
-              You are logged in{' '}
-              {form.displayName ? `as ${form.displayName}` : ''}. You are
-              already a member. Manage your details anytime in{' '}
-              <Link href="/account">your account settings</Link>.
-            </div>
-          ) : (
-            <div className="p-4 rounded-md border border-yellow-200 dark:border-yellow-900 bg-yellow-50 dark:bg-yellow-950 text-yellow-900 dark:text-yellow-200">
-              To access this resource, please complete your profile below and
-              accept the privacy policy.
-            </div>
-          ))}
-
-        {!uid && (
+        {!uid && loading && cached ? (
+          // A returning visitor: their session is still being restored.
+          <p
+            role="status"
+            className="text-center text-gray-600 dark:text-gray-300"
+          >
+            Checking your account…
+          </p>
+        ) : !uid ? (
           <Card>
             <CardHeader>
+              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Step 1 of 2
+              </p>
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                Create Account
+                Create your account
               </h2>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
-                Use one of the options below.
+                Choose how you want to sign in. Already a member? Sign in the
+                same way and we&apos;ll take you to your account.
               </p>
             </CardHeader>
-            <CardContent className="space-y-3 flex flex-col md:flex-col justify-center gap-2 pt-4 items-center max-w-md mx-auto">
-              <Button
-                onClick={() => {
-                  void popupSignIn('google');
-                }}
-                variant="outline"
-              >
-                <span className="flex items-center gap-2">
-                  <HugeiconsIcon icon={GoogleIcon} className="h-4 w-4" />{' '}
-                  Continue with Google
-                </span>
-              </Button>
-              <Button
-                onClick={() => {
-                  void popupSignIn('github');
-                }}
-                variant="outline"
-              >
-                <span className="flex items-center gap-2">
-                  <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />{' '}
-                  Continue with GitHub
-                </span>
-              </Button>
+            <CardContent className="flex flex-col items-center gap-3 pt-4">
+              <div className="flex w-full max-w-xs flex-col gap-3">
+                <Button
+                  variant="outline"
+                  isLoading={pendingProvider === 'google'}
+                  disabled={pendingProvider !== null}
+                  onPointerEnter={warmFirebase}
+                  onFocus={warmFirebase}
+                  onClick={() => void popupSignIn('google')}
+                >
+                  <span className="flex items-center gap-2">
+                    <HugeiconsIcon icon={GoogleIcon} className="h-4 w-4" />
+                    Continue with Google
+                  </span>
+                </Button>
+                <Button
+                  variant="outline"
+                  isLoading={pendingProvider === 'github'}
+                  disabled={pendingProvider !== null}
+                  onPointerEnter={warmFirebase}
+                  onFocus={warmFirebase}
+                  onClick={() => void popupSignIn('github')}
+                >
+                  <span className="flex items-center gap-2">
+                    <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />
+                    Continue with GitHub
+                  </span>
+                </Button>
+              </div>
               {signInError && (
                 <p
                   role="alert"
@@ -267,405 +373,260 @@ const JoinPage: React.FC = () => {
               )}
               <div
                 role="separator"
-                className="flex items-center gap-3 my-5 w-full max-w-xs text-xs text-muted-foreground"
+                className="flex items-center gap-3 my-3 w-full max-w-xs text-xs text-muted-foreground"
               >
                 <span className="h-px flex-1 bg-border" />
                 or
                 <span className="h-px flex-1 bg-border" />
               </div>
-              {/* The link returns here; the auth listener above then shows the profile form. */}
+              {/* The link returns here; the shared auth store then shows the details step. */}
               <EmailLinkSignIn
-                label="Email"
+                label="Email (any address, e.g. your student email)"
                 placeholder="you@example.com"
                 contactEmail="contact@uuais.com"
                 alternative="continue with Google or GitHub"
-                onSignedIn={() => {}}
+                onSignedIn={() => ensureAuth()}
               />
             </CardContent>
           </Card>
-        )}
-
-        {uid && (
+        ) : profileLoading ? (
+          <p
+            role="status"
+            className="text-center text-gray-600 dark:text-gray-300"
+          >
+            Loading your account…
+          </p>
+        ) : profileError ? (
+          <Card>
+            <CardContent className="space-y-3 pt-6 text-center">
+              <p role="alert" className="text-gray-800 dark:text-gray-200">
+                We couldn&apos;t load your account. This is usually a connection
+                problem, and we&apos;ll keep trying.
+              </p>
+              <Button variant="outline" onClick={() => void refreshProfile()}>
+                Try again now
+              </Button>
+            </CardContent>
+          </Card>
+        ) : created ? (
+          <p
+            role="status"
+            className="text-center text-gray-800 dark:text-gray-200"
+          >
+            Account created. Taking you {redirect ? 'back' : 'to your account'}…
+          </p>
+        ) : completed ? (
           <Card>
             <CardHeader>
               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                Complete your profile
+                You&apos;re already a member
               </h2>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
-                These details help us serve members better. You can edit them
-                anytime in{' '}
-                <Link href="/account" className="underline">
-                  your account settings
-                </Link>
-                .
+                Signed in as{' '}
+                {profile?.displayName || profile?.name || user?.email}.
               </p>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Personal Information
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <FieldGroup
-                  label="Display name"
-                  requiredHint="Required. Shown publicly."
-                >
-                  <InputBase
-                    maxLength={100}
-                    placeholder="e.g. Alex"
-                    value={form.displayName || ''}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, displayName: e.target.value }))
-                    }
-                  />
-                </FieldGroup>
-                <FieldGroup label="Full name" requiredHint="Required">
-                  <InputBase
-                    maxLength={100}
-                    placeholder="e.g. Alex Doe"
-                    value={form.name || ''}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, name: e.target.value }))
-                    }
-                  />
-                </FieldGroup>
-              </div>
+            <CardContent className="flex flex-wrap gap-3">
+              {redirect && (
+                <Button asChild variant="default">
+                  <Link href={redirect}>Continue</Link>
+                </Button>
+              )}
+              <Button asChild variant={redirect ? 'outline' : 'default'}>
+                <Link href="/account">Go to my account</Link>
+              </Button>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card>
+            <CardHeader>
+              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Step 2 of 2
+              </p>
+              <h2
+                ref={formHeadingRef}
+                tabIndex={-1}
+                className="text-2xl font-semibold text-gray-900 dark:text-white outline-none"
+              >
+                A few details about you
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">
+                Signed in as {user?.email}. You can add more (LinkedIn, CV, bio)
+                later in your account.
+              </p>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleCreate} noValidate className="space-y-5">
+                <div>
+                  <FieldGroup label="Your name" requiredHint="Required">
+                    <InputBase
+                      ref={nameRef}
+                      maxLength={100}
+                      autoComplete="name"
+                      placeholder="e.g. Alex Doe"
+                      required
+                      aria-required="true"
+                      aria-invalid={Boolean(errors.name)}
+                      aria-describedby={errors.name ? 'name-error' : undefined}
+                      value={draft.name}
+                      onChange={(e) => {
+                        update({ name: e.target.value });
+                        if (errors.name)
+                          setErrors((x) => ({ ...x, name: undefined }));
+                      }}
+                    />
+                  </FieldGroup>
+                  {errors.name && (
+                    <p
+                      id="name-error"
+                      className="mt-1 text-sm text-red-600 dark:text-red-400"
+                    >
+                      {errors.name}
+                    </p>
+                  )}
+                </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Contact & Social
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <FieldGroup label="Student status" requiredHint="Optional.">
+                <FieldGroup label="I am a">
                   <SelectBase
-                    value={form.studentStatus ?? 'student'}
+                    value={draft.studentStatus}
                     onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        studentStatus: e.target.value as
-                          'student' | 'alumni' | 'other',
-                      }))
+                      update({
+                        studentStatus: e.target.value as Draft['studentStatus'],
+                      })
                     }
                   >
                     <option value="student">Student</option>
                     <option value="alumni">Alumni</option>
-                    <option value="other">Other</option>
+                    <option value="other">Something else</option>
                   </SelectBase>
                 </FieldGroup>
-                <FieldGroup label="Campus" requiredHint="Optional">
-                  <SelectBase
-                    value={form.campus ?? 'Uppsala'}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        campus: e.target.value as
-                          'Uppsala' | 'Gotland' | 'other',
-                      }))
-                    }
-                  >
-                    <option value="Uppsala">Uppsala</option>
-                    <option value="Gotland">Gotland</option>
-                    <option value="other">Other</option>
-                  </SelectBase>
-                </FieldGroup>
-                <FieldGroup label="LinkedIn URL" requiredHint="Optional">
-                  <InputBase
-                    maxLength={200}
-                    placeholder="https://linkedin.com/in/..."
-                    inputMode="url"
-                    autoComplete="url"
-                    value={form.linkedin || ''}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, linkedin: e.target.value }))
-                    }
-                  />
-                </FieldGroup>
-                <FieldGroup label="GitHub URL" requiredHint="Optional">
-                  <InputBase
-                    maxLength={200}
-                    placeholder="https://github.com/username"
-                    inputMode="url"
-                    autoComplete="url"
-                    value={form.github || ''}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, github: e.target.value }))
-                    }
-                  />
-                </FieldGroup>
-                <FieldGroup label="Website" requiredHint="Optional">
-                  <InputBase
-                    maxLength={500}
-                    placeholder="https://example.com"
-                    inputMode="url"
-                    autoComplete="url"
-                    value={form.website || ''}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, website: e.target.value }))
-                    }
-                  />
-                </FieldGroup>
-              </div>
 
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Academic Information
-              </h3>
-              <div className="grid md:grid-cols-2 gap-4">
-                <FieldGroup
-                  label="University"
-                  requiredHint="Required if student."
-                >
-                  <SelectBase
-                    value={form.university ?? 'Uppsala'}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        university: e.target.value as
-                          'Uppsala' | 'none' | 'other',
-                      }))
-                    }
-                  >
-                    <option value="Uppsala">Uppsala</option>
-                    <option value="none">None</option>
-                    <option value="other">Other</option>
-                  </SelectBase>
-                </FieldGroup>
-                <FieldGroup
-                  label="Program / Major"
-                  requiredHint="Required if student."
-                >
-                  <InputBase
-                    maxLength={200}
-                    placeholder="e.g. Computer Science"
-                    value={form.program || ''}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, program: e.target.value }))
-                    }
-                  />
-                </FieldGroup>
-                <FieldGroup
-                  label="Expected Graduation Year"
-                  requiredHint="Optional"
-                >
-                  <InputBase
-                    placeholder="e.g. 2026"
-                    type="number"
-                    min={1900}
-                    max={2100}
-                    value={form.expectedGraduationYear ?? ''}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        expectedGraduationYear: e.target.value
-                          ? Number(e.target.value)
-                          : undefined,
-                      }))
-                    }
-                  />
-                </FieldGroup>
-                <FieldGroup label="Gender" requiredHint="Optional">
-                  <SelectBase
-                    value={form.gender || 'other'}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, gender: e.target.value }))
-                    }
-                  >
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="nonbinary">Non-binary</option>
-                    <option value="prefer_not">Prefer not to say</option>
-                    <option value="other">Other</option>
-                  </SelectBase>
-                </FieldGroup>
-              </div>
-              {/* Heard of us */}
-              <div className="grid md:grid-cols-2 gap-4">
-                <FieldGroup
-                  label="How did you hear of us?"
-                  requiredHint="Optional"
-                >
-                  <SelectBase
-                    value={form.heardOfUs || ''}
-                    onChange={(e) => {
-                      const v = e.target.value;
-                      setForm((f) => ({
-                        ...f,
-                        heardOfUs: v === 'other' ? '' : v,
-                        // Drop the referrer once Referral/Friends is no longer the answer.
-                        ...(!isReferralSource(v) && f.referredBy
-                          ? { referredBy: '' }
-                          : {}),
-                      }));
-                    }}
-                  >
-                    <option value="">Select an option</option>
-                    <option value="posters">Posters</option>
-                    <option value="instagram">Instagram</option>
-                    <option value="linkedin">LinkedIn</option>
-                    <option value="friends">{`Friends${specifyBelow}`}</option>
-                    <option value="referral">{`Referral${specifyBelow}`}</option>
-                    <option value="events">Events</option>
-                    <option value="lecture">During lecture</option>
-                    <option value="other">{`Other${specifyBelow}`}</option>
-                  </SelectBase>
-                </FieldGroup>
-                {isReferralSource(form.heardOfUs) && (
-                  <FieldGroup label="From who?" requiredHint="Optional">
+                {draft.studentStatus === 'student' && (
+                  <FieldGroup label="Programme / major" requiredHint="Optional">
                     <InputBase
-                      maxLength={200}
-                      placeholder="Name of the person who referred you"
-                      value={form.referredBy || ''}
-                      onChange={(e) =>
-                        setForm((f) => ({ ...f, referredBy: e.target.value }))
-                      }
+                      // The Firestore rules cap this at 150 characters.
+                      maxLength={150}
+                      placeholder="e.g. Computer Science"
+                      value={draft.program}
+                      onChange={(e) => update({ program: e.target.value })}
                     />
                   </FieldGroup>
                 )}
-                {(form.heardOfUs === '' ||
-                  (form.heardOfUs &&
-                    ![
-                      'posters',
-                      'instagram',
-                      'linkedin',
-                      'friends',
-                      'referral',
-                      'events',
-                      'lecture',
-                    ].includes(form.heardOfUs))) && (
-                  <FieldGroup
-                    label="If other, please specify"
-                    requiredHint="Optional"
+
+                <FieldGroup
+                  label="How did you hear about us?"
+                  requiredHint="Optional"
+                >
+                  <SelectBase
+                    value={draft.heardSource}
+                    onChange={(e) => update({ heardSource: e.target.value })}
                   >
+                    <option value="">Select an option</option>
+                    {HEARD_OF_US.map(([value, label]) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ))}
+                  </SelectBase>
+                </FieldGroup>
+                {isReferralSource(draft.heardSource) && (
+                  <FieldGroup label="Who told you?" requiredHint="Optional">
+                    <InputBase
+                      maxLength={200}
+                      placeholder="Their name"
+                      value={draft.referredBy}
+                      onChange={(e) => update({ referredBy: e.target.value })}
+                    />
+                  </FieldGroup>
+                )}
+                {draft.heardSource === 'other' && (
+                  <FieldGroup label="Where?" requiredHint="Optional">
                     <InputBase
                       maxLength={200}
                       placeholder="Type here"
-                      value={form.heardOfUs || ''}
-                      onChange={(e) =>
-                        setForm((f) => ({ ...f, heardOfUs: e.target.value }))
-                      }
+                      value={draft.heardOther}
+                      onChange={(e) => update({ heardOther: e.target.value })}
                     />
                   </FieldGroup>
                 )}
-              </div>
-              <FieldGroup label="Bio" requiredHint="Optional">
-                <TextareaBase
-                  maxLength={500}
-                  placeholder="Write a short bio"
-                  value={form.bio || ''}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, bio: e.target.value }))
-                  }
-                />
-              </FieldGroup>
-              <div className="flex items-center gap-6">
-                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input
-                    type="checkbox"
-                    checked={!!form.newsletter}
-                    onChange={(e) =>
-                      setForm((f) => ({ ...f, newsletter: e.target.checked }))
-                    }
-                  />
-                  Subscribe to newsletter
-                </label>
-                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input
-                    type="checkbox"
-                    checked={!!form.lookingForJob}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        lookingForJob: e.target.checked,
-                      }))
-                    }
-                  />
-                  Looking for job opportunities
-                </label>
-              </div>
-              <div className="flex flex-col gap-3 pt-2">
-                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input
-                    type="checkbox"
-                    checked={privacyAccepted}
-                    onChange={(e) => setPrivacyAccepted(e.target.checked)}
-                  />
-                  I accept the{' '}
-                  <a
-                    className="underline"
-                    href="/privacy"
-                    target="_blank"
-                    rel="noreferrer"
+
+                <div className="space-y-3 pt-1">
+                  <label className="flex items-start gap-2 text-gray-800 dark:text-gray-200">
+                    <input
+                      type="checkbox"
+                      className="mt-1"
+                      checked={draft.newsletter}
+                      onChange={(e) => update({ newsletter: e.target.checked })}
+                    />
+                    <span>Email me the newsletter about events and news</span>
+                  </label>
+                  <div>
+                    <label className="flex items-start gap-2 text-gray-800 dark:text-gray-200">
+                      <input
+                        ref={privacyRef}
+                        type="checkbox"
+                        className="mt-1"
+                        required
+                        aria-required="true"
+                        aria-invalid={Boolean(errors.privacy)}
+                        aria-describedby={
+                          errors.privacy ? 'privacy-error' : undefined
+                        }
+                        checked={privacyAccepted}
+                        onChange={(e) => {
+                          setPrivacyAccepted(e.target.checked);
+                          if (e.target.checked)
+                            setErrors((x) => ({ ...x, privacy: undefined }));
+                        }}
+                      />
+                      <span>
+                        I accept the{' '}
+                        <a
+                          className="underline"
+                          href="/privacy"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          privacy policy
+                        </a>{' '}
+                        <span className="text-muted-foreground">
+                          (required)
+                        </span>
+                      </span>
+                    </label>
+                    {errors.privacy && (
+                      <p
+                        id="privacy-error"
+                        className="mt-1 text-sm text-red-600 dark:text-red-400"
+                      >
+                        {errors.privacy}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {saveError && (
+                  <p
+                    role="alert"
+                    className="text-sm text-red-600 dark:text-red-400"
                   >
-                    Privacy Policy
-                  </a>{' '}
-                  (required)
-                </label>
-                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input
-                    type="checkbox"
-                    checked={!!form.marketingOptIn}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        marketingOptIn: e.target.checked,
-                      }))
-                    }
-                  />
-                  Allow marketing communications
-                </label>
-                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input
-                    type="checkbox"
-                    checked={!!form.analyticsOptIn}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        analyticsOptIn: e.target.checked,
-                      }))
-                    }
-                  />
-                  Allow anonymous analytics
-                </label>
-                <label className="flex items-center gap-2 text-gray-800 dark:text-gray-200">
-                  <input
-                    type="checkbox"
-                    checked={!!form.partnerContactOptIn}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        partnerContactOptIn: e.target.checked,
-                      }))
-                    }
-                  />
-                  Allow contact from partner companies
-                </label>
-              </div>
-              <div className="flex justify-end">
+                    {saveError}
+                  </p>
+                )}
                 <Button
-                  variant="outline"
-                  disabled={saving || !privacyAccepted}
-                  onClick={handleSave}
+                  type="submit"
+                  variant="default"
+                  fullWidth
+                  isLoading={saving}
                 >
-                  {saving ? 'Saving...' : 'Save & Become Member'}
+                  {saving ? 'Creating your account…' : 'Create my account'}
                 </Button>
-              </div>
+              </form>
             </CardContent>
           </Card>
         )}
 
         <DiscordCta variant="panel" />
-
-        <Card>
-          <CardHeader>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-              Already a member?
-            </h2>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-600 dark:text-gray-300">
-              Manage your profile and linked accounts in{' '}
-              <Link href="/account">your account settings</Link>. Your event
-              applications appear there as well.
-            </p>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
