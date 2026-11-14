@@ -191,7 +191,7 @@ describe('PartnerEmailSignIn', () => {
       await screen.findByText(/opened the link on a different device/),
     ).toBeInTheDocument();
     await userEvent.type(
-      screen.getByLabelText('Work email'),
+      screen.getByLabelText('Email address the link was sent to'),
       'wrong@example.com',
     );
     await userEvent.click(screen.getByRole('button', { name: 'Sign in' }));
@@ -200,9 +200,11 @@ describe('PartnerEmailSignIn', () => {
     );
     expect(window.location.search).toContain('oobCode=abc');
 
-    await userEvent.clear(screen.getByLabelText('Work email'));
+    await userEvent.clear(
+      screen.getByLabelText('Email address the link was sent to'),
+    );
     await userEvent.type(
-      screen.getByLabelText('Work email'),
+      screen.getByLabelText('Email address the link was sent to'),
       'hr@partner.example',
     );
     await userEvent.click(screen.getByRole('button', { name: 'Sign in' }));

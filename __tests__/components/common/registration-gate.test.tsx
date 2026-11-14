@@ -1,7 +1,8 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import RegistrationGate from '@/components/auth/RegistrationGate';
 
 const mockPush = jest.fn();
+const mockReplace = jest.fn();
 const unsubscribe = jest.fn();
 
 jest.mock('@/lib/firebase-client', () => ({
@@ -19,6 +20,7 @@ const mockAdminState = {
   user: null,
   loading: false,
   profileLoading: false,
+  profileError: false,
   profile: null,
   isAdmin: false,
   isSuperAdmin: false,
@@ -34,18 +36,32 @@ jest.mock('@/hooks/useAdmin', () => ({
 }));
 
 jest.mock('next/navigation', () => ({
-  useRouter: () => ({ push: mockPush }),
+  useRouter: () => ({ push: mockPush, replace: mockReplace }),
   usePathname: () => global.__mockPathname || '',
 }));
 
 describe('RegistrationGate', () => {
+  const member = {
+    id: 'u1',
+    isMember: true,
+    privacyAcceptedAt: '2026-01-01T00:00:00Z',
+  };
+  const signedInWithout = (profile: unknown = null) =>
+    Object.assign(mockAdminState, {
+      user: { uid: 'u1' },
+      profileLoading: false,
+      profile,
+    });
+
   beforeEach(() => {
     jest.clearAllMocks();
     global.__mockPathname = '/';
+    window.history.replaceState({}, '', '/');
     Object.assign(mockAdminState, {
       user: null,
       loading: false,
       profileLoading: false,
+      profileError: false,
       profile: null,
       isAdmin: false,
       isSuperAdmin: false,
@@ -54,108 +70,91 @@ describe('RegistrationGate', () => {
     });
   });
 
-  it('renders nothing', () => {
+  it('renders nothing for anonymous visitors', () => {
+    global.__mockPathname = '/account';
+    const { container } = render(<RegistrationGate />);
+    expect(container).toBeEmptyDOMElement();
+    expect(mockReplace).not.toHaveBeenCalled();
+  });
+
+  it('renders nothing for a member with a complete profile', () => {
+    Object.assign(mockAdminState, { user: { uid: 'u1' }, profile: member });
+    global.__mockPathname = '/account';
+    const { container } = render(<RegistrationGate />);
+    expect(container).toBeEmptyDOMElement();
+    expect(mockReplace).not.toHaveBeenCalled();
+  });
+
+  it('never signs anyone out', () => {
+    signedInWithout();
+    for (const path of ['/account', '/events', '/join', '/login']) {
+      global.__mockPathname = path;
+      render(<RegistrationGate />);
+    }
+    expect(mockAdminState.logout).not.toHaveBeenCalled();
+  });
+
+  it('sends an unfinished account on a member-only page to /join, keeping the page', () => {
+    signedInWithout();
+    global.__mockPathname = '/account';
+    window.history.replaceState({}, '', '/account?tab=cv');
+    render(<RegistrationGate />);
+    expect(mockReplace).toHaveBeenCalledWith(
+      '/join?redirect=%2Faccount%3Ftab%3Dcv',
+    );
+  });
+
+  it('reminds an unfinished account on public pages instead of redirecting', () => {
+    signedInWithout({ id: 'u1', isMember: true }); // missing privacyAcceptedAt
+    global.__mockPathname = '/events';
+    render(<RegistrationGate />);
+    expect(mockReplace).not.toHaveBeenCalled();
+    expect(
+      screen.getByRole('link', { name: 'Finish creating your account' }),
+    ).toHaveAttribute('href', '/join?redirect=%2Fevents');
+  });
+
+  it('does not send a home-page joiner back to the home page', () => {
+    signedInWithout();
+    global.__mockPathname = '/';
+    render(<RegistrationGate />);
+    expect(
+      screen.getByRole('link', { name: 'Finish creating your account' }),
+    ).toHaveAttribute('href', '/join');
+  });
+
+  it.each(['/join', '/login', '/privacy'])('stays quiet on %s', (path) => {
+    signedInWithout();
+    global.__mockPathname = path;
+    const { container } = render(<RegistrationGate />);
+    expect(container).toBeEmptyDOMElement();
+    expect(mockReplace).not.toHaveBeenCalled();
+  });
+
+  it('leaves partner accounts alone, which have no member profile by design', () => {
+    signedInWithout();
+    mockAdminState.isPartner = true;
+    global.__mockPathname = '/partners/cvs';
     const { container } = render(<RegistrationGate />);
     expect(container).toBeEmptyDOMElement();
   });
 
-  it('does not sign out anonymous visitors', () => {
-    global.__mockPathname = '/account';
-    render(<RegistrationGate />);
-    expect(mockAdminState.logout).not.toHaveBeenCalled();
-    expect(mockPush).not.toHaveBeenCalled();
-  });
-
-  it('does not sign out a member with a complete profile', () => {
-    Object.assign(mockAdminState, {
-      user: { uid: 'u1' },
-      profileLoading: false,
-      profile: {
-        id: 'u1',
-        isMember: true,
-        privacyAcceptedAt: '2026-01-01T00:00:00Z',
-      },
-    });
-    global.__mockPathname = '/account';
-    render(<RegistrationGate />);
-    expect(mockAdminState.logout).not.toHaveBeenCalled();
-  });
-
-  it('signs out an incomplete-profile user who navigates off /join', () => {
-    Object.assign(mockAdminState, {
-      user: { uid: 'u1' },
-      profileLoading: false,
-      profile: null,
-    });
-    global.__mockPathname = '/account';
-    render(<RegistrationGate />);
-    expect(mockAdminState.logout).toHaveBeenCalledTimes(1);
-  });
-
-  it('signs out an incomplete-profile user browsing public pages', () => {
-    Object.assign(mockAdminState, {
-      user: { uid: 'u1' },
-      profileLoading: false,
-      profile: { id: 'u1', isMember: true }, // missing privacyAcceptedAt
-    });
-    global.__mockPathname = '/events';
-    render(<RegistrationGate />);
-    expect(mockAdminState.logout).toHaveBeenCalledTimes(1);
-  });
-
-  it('does not sign out a partner account, which has no member profile by design', () => {
-    Object.assign(mockAdminState, {
-      user: { uid: 'p1' },
-      profileLoading: false,
-      profile: null,
-      isPartner: true,
-    });
-    global.__mockPathname = '/partners/cvs';
-    render(<RegistrationGate />);
-    expect(mockAdminState.logout).not.toHaveBeenCalled();
-  });
-
-  it('does not sign out an incomplete-profile user while on /join', () => {
-    Object.assign(mockAdminState, {
-      user: { uid: 'u1' },
-      profileLoading: false,
-      profile: null,
-    });
-    global.__mockPathname = '/join';
-    render(<RegistrationGate />);
-    expect(mockAdminState.logout).not.toHaveBeenCalled();
-  });
-
-  it('does not sign out an incomplete-profile user on the login page', () => {
-    Object.assign(mockAdminState, {
-      user: { uid: 'u1' },
-      profileLoading: false,
-      profile: null,
-    });
-    global.__mockPathname = '/login';
-    render(<RegistrationGate />);
-    expect(mockAdminState.logout).not.toHaveBeenCalled();
-  });
-
-  it('does not sign out an incomplete-profile user on the privacy page', () => {
-    Object.assign(mockAdminState, {
-      user: { uid: 'u1' },
-      profileLoading: false,
-      profile: null,
-    });
-    global.__mockPathname = '/privacy';
-    render(<RegistrationGate />);
-    expect(mockAdminState.logout).not.toHaveBeenCalled();
-  });
-
   it('waits for the profile lookup before deciding', () => {
-    Object.assign(mockAdminState, {
-      user: { uid: 'u1' },
-      profileLoading: true,
-      profile: null,
-    });
+    signedInWithout();
+    mockAdminState.profileLoading = true;
     global.__mockPathname = '/account';
-    render(<RegistrationGate />);
+    const { container } = render(<RegistrationGate />);
+    expect(container).toBeEmptyDOMElement();
+    expect(mockReplace).not.toHaveBeenCalled();
+  });
+
+  it('treats a failed profile read as unknown, not unregistered', () => {
+    signedInWithout();
+    mockAdminState.profileError = true;
+    global.__mockPathname = '/account';
+    const { container } = render(<RegistrationGate />);
+    expect(container).toBeEmptyDOMElement();
+    expect(mockReplace).not.toHaveBeenCalled();
     expect(mockAdminState.logout).not.toHaveBeenCalled();
   });
 });

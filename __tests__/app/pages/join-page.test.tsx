@@ -1,34 +1,22 @@
 import {
+  act,
   render,
   screen,
   fireEvent,
-  act,
   waitFor,
 } from '@testing-library/react';
 import JoinPage from '@/components/pages/JoinPage';
 
-jest.mock('@/lib/firebase-client', () => {
-  const callbackHolder: { current: ((user: unknown) => void) | null } = {
-    current: null,
-  };
-  return {
-    auth: {
-      onAuthStateChanged: jest.fn((cb: (user: unknown) => void) => {
-        callbackHolder.current = cb;
-        return jest.fn();
-      }),
-      _callbackHolder: callbackHolder,
-    },
-    signInWithGooglePopup: jest.fn(),
-    signInWithGithubPopup: jest.fn(),
-    // The email-link form under the provider buttons.
-    isEmailSignInLink: jest.fn(() => false),
-    storedEmailForSignIn: jest.fn(() => null),
-    emailLinkCooldownSeconds: jest.fn(() => 0),
-    sendEmailSignInLink: jest.fn(),
-    signInWithEmailLinkAfterReady: jest.fn(),
-  };
-});
+jest.mock('@/lib/firebase-client', () => ({
+  signInWithGooglePopup: jest.fn(),
+  signInWithGithubPopup: jest.fn(),
+  // The email-link form under the provider buttons.
+  isEmailSignInLink: jest.fn(() => false),
+  storedEmailForSignIn: jest.fn(() => null),
+  emailLinkCooldownSeconds: jest.fn(() => 0),
+  sendEmailSignInLink: jest.fn(),
+  signInWithEmailLinkAfterReady: jest.fn(),
+}));
 
 jest.mock('@/lib/firestore/users', () => ({
   getUserProfile: jest.fn(),
@@ -55,929 +43,553 @@ jest.mock('@/utils/seo', () => ({
   updatePageMeta: jest.fn(),
 }));
 
-async function triggerAuthCallback(user: Record<string, unknown> | null) {
-  const firebase = jest.requireMock('@/lib/firebase-client') as {
-    auth: {
-      _callbackHolder: {
-        current: ((u: unknown) => Promise<void> | void) | null;
-      };
-    };
-  };
-  await waitFor(() => {
-    expect(firebase.auth._callbackHolder.current).not.toBeNull();
-  });
-  const cb = firebase.auth._callbackHolder.current;
-  if (cb)
-    await act(async () => {
-      await cb(user);
-    });
-}
-
-function mockedUsers() {
-  return jest.requireMock('@/lib/firestore/users') as {
+const users = () =>
+  jest.requireMock('@/lib/firestore/users') as {
     getUserProfile: jest.Mock;
     upsertUserProfile: jest.Mock;
     updateUserProfile: jest.Mock;
   };
-}
-
-function mockedNav() {
-  return jest.requireMock('next/navigation') as {
-    useRouter: () => { push: jest.Mock };
-  };
-}
-
-function mockedNotify() {
-  return (
+const firebase = () =>
+  jest.requireMock('@/lib/firebase-client') as Record<string, jest.Mock>;
+const push = () =>
+  (
+    jest.requireMock('next/navigation') as {
+      useRouter: () => { push: jest.Mock };
+    }
+  ).useRouter().push;
+const notify = () =>
+  (
     jest.requireMock('@/components/ui/Notifications') as {
       useNotify: () => { notify: jest.Mock };
     }
   ).useNotify().notify;
-}
+const admin = () =>
+  jest.requireMock('@/hooks/useAdmin') as {
+    ensureAuth: jest.Mock;
+    refreshProfile: jest.Mock;
+    publishProfile: jest.Mock;
+  };
 
-function mockedSeo() {
-  return jest.requireMock('@/utils/seo') as { updatePageMeta: jest.Mock };
-}
+const newUser = {
+  uid: 'u1',
+  email: 'alex@student.uu.se',
+  displayName: 'Alex Doe',
+};
+
+const signedIn = (state: Record<string, unknown> = {}) =>
+  global.__setAdminState?.({
+    user: newUser,
+    loading: false,
+    profileLoading: false,
+    profileError: false,
+    profile: null,
+    cached: null,
+    ...state,
+  });
+
+const fillAndSubmit = () => {
+  fireEvent.click(screen.getByRole('checkbox', { name: /privacy policy/ }));
+  fireEvent.click(screen.getByRole('button', { name: 'Create my account' }));
+};
 
 describe('JoinPage', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    global.__setAdminState?.(null);
+    window.sessionStorage.clear();
+    window.history.replaceState({}, '', '/join');
+    users().getUserProfile.mockResolvedValue(null);
+    users().upsertUserProfile.mockResolvedValue(undefined);
+    users().updateUserProfile.mockResolvedValue(undefined);
   });
 
-  it('renders page heading', () => {
+  afterAll(() => global.__setAdminState?.(null));
+
+  it('renders the page heading', () => {
     render(<JoinPage />);
     expect(screen.getByText('Join UU AI Society')).toBeInTheDocument();
-    expect(screen.getByText(/Create an account/)).toBeInTheDocument();
   });
 
   it('calls updatePageMeta on mount', () => {
     render(<JoinPage />);
-    expect(mockedSeo().updatePageMeta).toHaveBeenCalledWith(
-      'Join Us',
-      expect.any(String),
-    );
+    expect(
+      (jest.requireMock('@/utils/seo') as { updatePageMeta: jest.Mock })
+        .updatePageMeta,
+    ).toHaveBeenCalledWith('Join Us', expect.any(String));
   });
 
-  describe('logged out', () => {
-    it('renders already-a-member section', () => {
+  describe('signed out', () => {
+    it('shows step 1 with Google, GitHub and the email form straight away', () => {
       render(<JoinPage />);
-      expect(screen.getByText('Already a member?')).toBeInTheDocument();
-    });
-
-    it('renders sign-in buttons for registration', () => {
-      render(<JoinPage />);
+      expect(screen.getByText('Step 1 of 2')).toBeInTheDocument();
       expect(
         screen.getByRole('button', { name: /Continue with Google/ }),
       ).toBeInTheDocument();
       expect(
         screen.getByRole('button', { name: /Continue with GitHub/ }),
       ).toBeInTheDocument();
+      // The email form is part of the page, not a lazily loaded chunk.
+      expect(
+        screen.getByRole('button', { name: 'Email me a sign-in link' }),
+      ).toBeInTheDocument();
     });
 
-    it('offers an emailed sign-in link that returns to /join with the redirect', async () => {
-      window.history.replaceState({}, '', '/join?redirect=%2Fapply');
-      const firebase = jest.requireMock('@/lib/firebase-client') as {
-        sendEmailSignInLink: jest.Mock;
-      };
+    it('starts auth and opens the Google popup on click', async () => {
+      firebase().signInWithGooglePopup.mockResolvedValue({ uid: 'u1' });
       render(<JoinPage />);
+      fireEvent.click(
+        screen.getByRole('button', { name: /Continue with Google/ }),
+      );
+      await waitFor(() =>
+        expect(firebase().signInWithGooglePopup).toHaveBeenCalled(),
+      );
+      expect(admin().ensureAuth).toHaveBeenCalled();
+    });
 
-      fireEvent.change(await screen.findByLabelText('Email'), {
-        target: { value: 'ada@student.uu.se' },
+    it('shows no error when the user closes the popup', async () => {
+      firebase().signInWithGooglePopup.mockRejectedValue(
+        Object.assign(
+          new Error('Firebase: Error (auth/popup-closed-by-user).'),
+          {
+            code: 'auth/popup-closed-by-user',
+          },
+        ),
+      );
+      render(<JoinPage />);
+      fireEvent.click(
+        screen.getByRole('button', { name: /Continue with Google/ }),
+      );
+      await waitFor(() =>
+        expect(
+          screen.getByRole('button', { name: /Continue with Google/ }),
+        ).toBeEnabled(),
+      );
+      expect(screen.queryByText(/Firebase/)).not.toBeInTheDocument();
+    });
+
+    it('explains a failed popup sign-in in plain words', async () => {
+      firebase().signInWithGithubPopup.mockRejectedValue(
+        Object.assign(new Error('x'), {
+          code: 'auth/account-exists-with-different-credential',
+        }),
+      );
+      render(<JoinPage />);
+      fireEvent.click(
+        screen.getByRole('button', { name: /Continue with GitHub/ }),
+      );
+      expect(
+        await screen.findByText(/already has an account that uses a different/),
+      ).toBeInTheDocument();
+    });
+
+    it('emails a sign-in link that returns to /join with the redirect', async () => {
+      window.history.replaceState({}, '', '/join?redirect=%2Fapply');
+      firebase().sendEmailSignInLink.mockResolvedValue(undefined);
+      render(<JoinPage />);
+      fireEvent.change(screen.getByPlaceholderText('you@example.com'), {
+        target: { value: 'alex@student.uu.se' },
       });
       fireEvent.click(
         screen.getByRole('button', { name: 'Email me a sign-in link' }),
       );
-
       await waitFor(() =>
-        expect(firebase.sendEmailSignInLink).toHaveBeenCalledWith(
-          'ada@student.uu.se',
+        expect(firebase().sendEmailSignInLink).toHaveBeenCalledWith(
+          'alex@student.uu.se',
           `${window.location.origin}/join?redirect=%2Fapply`,
         ),
       );
-      window.history.replaceState({}, '', '/');
+      expect(await screen.findByText('Check your inbox')).toBeInTheDocument();
     });
 
-    it('shows why a GitHub sign-in was refused instead of failing silently', async () => {
-      const firebase = jest.requireMock('@/lib/firebase-client') as {
-        signInWithGithubPopup: jest.Mock;
-      };
-      firebase.signInWithGithubPopup.mockRejectedValueOnce(
-        Object.assign(new Error('exists'), {
-          code: 'auth/account-exists-with-different-credential',
-        }),
+    it('starts auth right away when opened from an emailed link', () => {
+      window.history.replaceState(
+        {},
+        '',
+        '/join?apiKey=k&oobCode=abc&mode=signIn',
       );
-      const errorSpy = jest
-        .spyOn(console, 'error')
-        .mockImplementation(() => {});
       render(<JoinPage />);
-
-      fireEvent.click(
-        screen.getByRole('button', { name: /Continue with GitHub/ }),
-      );
-
-      expect(
-        await screen.findByText(
-          /already has an account that uses a different sign-in method/,
-        ),
-      ).toBeInTheDocument();
-      errorSpy.mockRestore();
+      expect(admin().ensureAuth).toHaveBeenCalled();
     });
 
-    it('does not show profile form when logged out', () => {
+    it('shows a neutral checking state while a returning session restores', () => {
+      global.__setAdminState?.({
+        user: null,
+        loading: true,
+        cached: { uid: 'u1', name: 'Alex' },
+      });
       render(<JoinPage />);
+      expect(screen.getByText('Checking your account…')).toBeInTheDocument();
       expect(
-        screen.queryByText('Complete your profile'),
+        screen.queryByRole('button', { name: /Continue with Google/ }),
       ).not.toBeInTheDocument();
     });
   });
 
-  describe('logged in - new member', () => {
-    const mockUser = {
-      uid: 'u1',
-      displayName: 'TestUser',
-      email: 'test@uu.se',
-    };
-
-    beforeEach(() => {
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-    });
-
-    it('shows profile completion form after auth', async () => {
+  describe('signed in, no profile yet', () => {
+    it('shows the short details form, prefilled with the provider name', () => {
+      signedIn();
       render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      expect(screen.getByText('Complete your profile')).toBeInTheDocument();
-    });
-
-    it('hides sign-in card when logged in', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
+      expect(screen.getByText('Step 2 of 2')).toBeInTheDocument();
+      expect(
+        screen.getByText(/Signed in as alex@student.uu.se/),
+      ).toBeInTheDocument();
+      expect(screen.getByRole('textbox', { name: /Your name/ })).toHaveValue(
+        'Alex Doe',
+      );
       expect(
         screen.queryByRole('button', { name: /Continue with Google/ }),
       ).not.toBeInTheDocument();
     });
 
-    it('shows yellow banner for incomplete profile', async () => {
+    it('never prefills the name from the email address', () => {
+      signedIn({ user: { ...newUser, displayName: null } });
       render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
+      expect(screen.getByRole('textbox', { name: /Your name/ })).toHaveValue(
+        '',
+      );
+    });
+
+    it('moves focus to the details step', () => {
+      signedIn();
+      render(<JoinPage />);
       expect(
-        screen.getByText(/please complete your profile/),
+        screen.getByRole('heading', { name: 'A few details about you' }),
+      ).toHaveFocus();
+    });
+
+    it('keeps the button enabled and explains a missing privacy acceptance', async () => {
+      signedIn();
+      render(<JoinPage />);
+      const button = screen.getByRole('button', { name: 'Create my account' });
+      expect(button).toBeEnabled();
+      fireEvent.click(button);
+      expect(
+        await screen.findByText(/Please accept the privacy policy/),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('checkbox', { name: /privacy policy/ }),
+      ).toHaveFocus();
+      expect(users().upsertUserProfile).not.toHaveBeenCalled();
+    });
+
+    it('requires a name', async () => {
+      signedIn({ user: { ...newUser, displayName: null } });
+      render(<JoinPage />);
+      fillAndSubmit();
+      expect(
+        await screen.findByText('Please enter your name.'),
+      ).toBeInTheDocument();
+      expect(screen.getByRole('textbox', { name: /Your name/ })).toHaveFocus();
+      expect(
+        screen.getByRole('textbox', { name: /Your name/ }),
+      ).toHaveAttribute('aria-invalid', 'true');
+      expect(users().upsertUserProfile).not.toHaveBeenCalled();
+    });
+
+    it('creates the profile, publishes it and lands on the welcome view', async () => {
+      signedIn();
+      render(<JoinPage />);
+      fireEvent.change(screen.getByRole('textbox', { name: /Programme/ }), {
+        target: { value: 'Computer Science' },
+      });
+      fireEvent.click(screen.getByRole('checkbox', { name: /newsletter/ }));
+      fillAndSubmit();
+      await waitFor(() =>
+        expect(users().upsertUserProfile).toHaveBeenCalledWith(
+          'u1',
+          expect.objectContaining({
+            name: 'Alex Doe',
+            displayName: 'Alex Doe',
+            email: 'alex@student.uu.se',
+            studentStatus: 'student',
+            program: 'Computer Science',
+            newsletter: true,
+            isMember: true,
+            privacyAcceptedAt: expect.any(String),
+          }),
+        ),
+      );
+      expect(admin().publishProfile).toHaveBeenCalledWith(
+        expect.objectContaining({ id: 'u1', isMember: true, name: 'Alex Doe' }),
+      );
+      expect(admin().refreshProfile).toHaveBeenCalled();
+      expect(push()).toHaveBeenCalledWith('/account?welcome=1');
+      expect(notify()).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Account created' }),
+      );
+      expect(
+        screen.getByText(/Account created\. Taking you/),
       ).toBeInTheDocument();
     });
 
-    it('pre-fills displayName from auth', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      expect(screen.getByDisplayValue('TestUser')).toBeInTheDocument();
-    });
-
-    it('calls getUserProfile with uid', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      expect(mockedUsers().getUserProfile).toHaveBeenCalledWith('u1');
-    });
-
-    it('disables save button when privacy not accepted', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      expect(screen.getByText('Save & Become Member')).toBeDisabled();
-    });
-
-    it('enables save button when privacy is accepted', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      fireEvent.click(screen.getByLabelText(/I accept the/));
-      expect(screen.getByText('Save & Become Member')).not.toBeDisabled();
-    });
-
-    it('calls upsertUserProfile on save for new profile', async () => {
-      mockedUsers().upsertUserProfile.mockResolvedValue(undefined);
-      mockedUsers()
-        .getUserProfile.mockResolvedValueOnce(null)
-        .mockResolvedValueOnce({
-          id: 'u1',
-          displayName: 'TestUser',
-          isMember: true,
-        });
-
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      fireEvent.click(screen.getByLabelText(/I accept the/));
-      fireEvent.click(screen.getByText('Save & Become Member'));
-
-      await waitFor(() =>
-        expect(mockedUsers().upsertUserProfile).toHaveBeenCalledWith(
-          'u1',
-          expect.objectContaining({ isMember: true }),
-        ),
-      );
-    });
-
-    it('shows saving state while submitting', async () => {
-      mockedUsers().upsertUserProfile.mockImplementation(
-        () => new Promise(() => {}),
-      );
-
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      fireEvent.click(screen.getByLabelText(/I accept the/));
-      fireEvent.click(screen.getByText('Save & Become Member'));
-
-      expect(screen.getByText('Saving...')).toBeInTheDocument();
-    });
-
-    it('navigates to /account after save', async () => {
-      mockedUsers().upsertUserProfile.mockResolvedValue(undefined);
-      mockedUsers()
-        .getUserProfile.mockResolvedValueOnce(null)
-        .mockResolvedValueOnce({
-          id: 'u1',
-          displayName: 'TestUser',
-          isMember: true,
-        });
-
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      fireEvent.click(screen.getByLabelText(/I accept the/));
-      fireEvent.click(screen.getByText('Save & Become Member'));
-
-      await screen.findByText('Save & Become Member');
-      expect(mockedNav().useRouter().push).toHaveBeenCalledWith('/account');
-    });
-
-    it('returns to the pending redirect after save instead of /account', async () => {
+    it('returns to the pending redirect after creating the account', async () => {
       window.history.replaceState({}, '', '/join?redirect=%2Fapply%2Fteam');
-      mockedUsers().upsertUserProfile.mockResolvedValue(undefined);
-      mockedUsers()
-        .getUserProfile.mockResolvedValueOnce(null)
-        .mockResolvedValueOnce({
-          id: 'u1',
-          displayName: 'TestUser',
-          isMember: true,
-        });
-
+      signedIn();
       render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      fireEvent.click(screen.getByLabelText(/I accept the/));
-      fireEvent.click(screen.getByText('Save & Become Member'));
-
-      await screen.findByText('Save & Become Member');
-      expect(mockedNav().useRouter().push).toHaveBeenCalledWith('/apply/team');
-      window.history.replaceState({}, '', '/');
+      fillAndSubmit();
+      await waitFor(() => expect(push()).toHaveBeenCalledWith('/apply/team'));
     });
 
-    it('can update displayName field', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      const input = screen.getByDisplayValue('TestUser');
-      fireEvent.change(input, { target: { value: 'NewName' } });
-      expect(screen.getByDisplayValue('NewName')).toBeInTheDocument();
-    });
-  });
-
-  describe('logged in - existing member', () => {
-    const mockUser = {
-      uid: 'u2',
-      displayName: 'Member',
-      email: 'member@uu.se',
-    };
-
-    beforeEach(() => {
-      mockedUsers().getUserProfile.mockResolvedValue({
-        id: 'u2',
-        displayName: 'Member',
+    it('updates instead of creating when another tab already created the profile', async () => {
+      signedIn();
+      users().getUserProfile.mockResolvedValue({
+        id: 'u1',
         isMember: true,
-        privacyAcceptedAt: '2024-01-01T00:00:00Z',
+        createdAt: '2026-01-01T00:00:00Z',
       });
-    });
-
-    it('shows blue already-member banner', async () => {
       render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      expect(screen.getByText(/You are already a member/)).toBeInTheDocument();
-    });
-
-    it('calls updateUserProfile on save for existing profile', async () => {
-      mockedUsers()
-        .getUserProfile.mockResolvedValueOnce({
-          id: 'u2',
-          displayName: 'Member',
-          isMember: true,
-          privacyAcceptedAt: '2024-01-01T00:00:00Z',
-        })
-        .mockResolvedValueOnce({
-          id: 'u2',
-          displayName: 'Member',
-          isMember: true,
-        });
-
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-      fireEvent.click(screen.getByLabelText(/I accept the/));
-      fireEvent.click(screen.getByText('Save & Become Member'));
-
-      await waitFor(() =>
-        expect(mockedUsers().updateUserProfile).toHaveBeenCalledWith(
-          'u2',
-          expect.any(Object),
-        ),
+      fillAndSubmit();
+      await waitFor(() => expect(users().updateUserProfile).toHaveBeenCalled());
+      expect(users().upsertUserProfile).not.toHaveBeenCalled();
+      // isMember is admin-managed once set, so it isn't re-sent.
+      expect(users().updateUserProfile.mock.calls[0][1]).not.toHaveProperty(
+        'isMember',
       );
     });
-  });
 
-  describe('heard of us - other', () => {
-    const mockUser = { uid: 'u3', displayName: 'User', email: 'u@uu.se' };
-
-    beforeEach(() => {
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-    });
-
-    it('shows text input when "Other" is selected', async () => {
+    it('shows the save error inline and keeps the form when saving fails', async () => {
+      signedIn();
+      users().upsertUserProfile.mockRejectedValue(
+        Object.assign(new Error('offline'), { code: 'unavailable' }),
+      );
       render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-
-      const select = screen.getByDisplayValue('Select an option');
-      fireEvent.change(select, { target: { value: 'other' } });
-
-      expect(screen.getByPlaceholderText('Type here')).toBeInTheDocument();
-    });
-
-    it('asks who referred them when "Referral" is selected, and saves it', async () => {
-      mockedUsers().upsertUserProfile.mockResolvedValue(undefined);
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-
-      const select = screen.getByDisplayValue('Select an option');
-      fireEvent.change(select, { target: { value: 'referral' } });
-
+      fillAndSubmit();
       expect(
-        screen.queryByPlaceholderText('Type here'),
-      ).not.toBeInTheDocument();
-      fireEvent.change(
-        screen.getByPlaceholderText('Name of the person who referred you'),
-        { target: { value: 'Ada' } },
+        await screen.findByText(/You seem to be offline/),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: 'Create my account' }),
+      ).toBeEnabled();
+      expect(screen.getByRole('textbox', { name: /Your name/ })).toHaveValue(
+        'Alex Doe',
       );
-      fireEvent.click(screen.getByLabelText(/I accept the/));
-      fireEvent.click(screen.getByText('Save & Become Member'));
-
-      await waitFor(() =>
-        expect(mockedUsers().upsertUserProfile).toHaveBeenCalledWith(
-          'u3',
-          expect.objectContaining({ heardOfUs: 'referral', referredBy: 'Ada' }),
-        ),
-      );
+      expect(push()).not.toHaveBeenCalled();
     });
 
-    it('asks for the friend\'s name when "Friends" is selected, and saves it', async () => {
-      mockedUsers().upsertUserProfile.mockResolvedValue(undefined);
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-
-      const select = screen.getByDisplayValue('Select an option');
-      fireEvent.change(select, { target: { value: 'friends' } });
-      fireEvent.change(
-        screen.getByPlaceholderText('Name of the person who referred you'),
-        { target: { value: 'Ada' } },
-      );
-      fireEvent.click(screen.getByLabelText(/I accept the/));
-      fireEvent.click(screen.getByText('Save & Become Member'));
-
-      await waitFor(() =>
-        expect(mockedUsers().upsertUserProfile).toHaveBeenCalledWith(
-          'u3',
-          expect.objectContaining({ heardOfUs: 'friends', referredBy: 'Ada' }),
-        ),
-      );
-    });
-
-    it('hints "please specify below" only on mobile, where the box stacks below', async () => {
-      const width = window.innerWidth;
+    it('stops waiting on a slow save, then finishes by itself when the write lands', async () => {
+      jest.useFakeTimers();
       try {
-        window.innerWidth = 375;
-        const { unmount } = render(<JoinPage />);
-        await triggerAuthCallback(mockUser);
-        for (const label of ['Friends', 'Referral', 'Other']) {
-          expect(
-            screen.getByRole('option', {
-              name: `${label} (please specify below)`,
-            }),
-          ).toBeInTheDocument();
-        }
-        expect(
-          screen.getByRole('option', { name: 'Events' }),
-        ).toBeInTheDocument();
-        unmount();
-
-        window.innerWidth = 1024;
+        signedIn();
+        let commit: () => void = () => {};
+        users().upsertUserProfile.mockReturnValue(
+          new Promise<void>((resolve) => {
+            commit = resolve;
+          }),
+        );
         render(<JoinPage />);
-        await triggerAuthCallback(mockUser);
+        fillAndSubmit();
         expect(
-          screen.getByRole('option', { name: 'Friends' }),
+          await screen.findByRole('button', { name: /Creating your account/ }),
         ).toBeInTheDocument();
+        await jest.advanceTimersByTimeAsync(15_000);
         expect(
-          screen.queryByText(/please specify below/),
-        ).not.toBeInTheDocument();
+          await screen.findByText(/taking longer than usual/),
+        ).toBeInTheDocument();
+        expect(push()).not.toHaveBeenCalled();
+
+        await act(async () => {
+          commit();
+        });
+        await waitFor(() =>
+          expect(push()).toHaveBeenCalledWith('/account?welcome=1'),
+        );
+        expect(notify()).toHaveBeenCalledTimes(1);
       } finally {
-        window.innerWidth = width;
+        jest.useRealTimers();
       }
     });
 
-    it('keeps the name when switching between "Friends" and "Referral"', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-
-      const select = screen.getByDisplayValue('Select an option');
-      fireEvent.change(select, { target: { value: 'friends' } });
-      fireEvent.change(
-        screen.getByPlaceholderText('Name of the person who referred you'),
-        { target: { value: 'Ada' } },
-      );
-      fireEvent.change(select, { target: { value: 'referral' } });
-      expect(
-        screen.getByPlaceholderText('Name of the person who referred you'),
-      ).toHaveValue('Ada');
-    });
-
-    it('clears the referrer when switching away from "Referral"', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback(mockUser);
-
-      const select = screen.getByDisplayValue('Select an option');
-      fireEvent.change(select, { target: { value: 'referral' } });
-      fireEvent.change(
-        screen.getByPlaceholderText('Name of the person who referred you'),
-        { target: { value: 'Ada' } },
-      );
-      fireEvent.change(select, { target: { value: 'instagram' } });
-      expect(
-        screen.queryByPlaceholderText('Name of the person who referred you'),
-      ).not.toBeInTheDocument();
-
-      fireEvent.change(select, { target: { value: 'referral' } });
-      expect(
-        screen.getByPlaceholderText('Name of the person who referred you'),
-      ).toHaveValue('');
-    });
-  });
-
-  describe('error handling', () => {
-    it('resets saving state when upsertUserProfile fails (new member)', async () => {
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-      mockedUsers().upsertUserProfile.mockRejectedValue(new Error('API error'));
-
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-      fireEvent.click(screen.getByLabelText(/I accept the/));
-      fireEvent.click(screen.getByText('Save & Become Member'));
-
-      // Saving state appears immediately
-      expect(screen.getByText('Saving...')).toBeInTheDocument();
-
-      // Wait for finally block to reset saving state
-      await waitFor(() => {
-        expect(screen.queryByText('Saving...')).not.toBeInTheDocument();
-      });
-
-      // Form remains visible — no navigation
-      expect(screen.getByText('Save & Become Member')).toBeInTheDocument();
-      expect(screen.getByLabelText(/I accept the/)).toBeInTheDocument();
-      expect(mockedNav().useRouter().push).not.toHaveBeenCalled();
-      expect(mockedNotify()).toHaveBeenCalledWith(
-        expect.objectContaining({ type: 'error', message: 'API error' }),
-      );
-    });
-
-    it('resets saving state when updateUserProfile fails (existing member)', async () => {
-      mockedUsers().updateUserProfile.mockRejectedValue(new Error('API error'));
-      mockedUsers().getUserProfile.mockResolvedValue({
-        id: 'u2',
-        displayName: 'Member',
+    it('does not overwrite an account another tab already finished', async () => {
+      signedIn();
+      const done = {
+        id: 'u1',
+        name: 'From Tab Two',
+        program: 'Tab Two Programme',
         isMember: true,
-        privacyAcceptedAt: '2024-01-01T00:00:00Z',
-      });
-
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u2',
-        displayName: 'Member',
-        email: 'm@uu.se',
-      });
-      fireEvent.click(screen.getByLabelText(/I accept the/));
-      fireEvent.click(screen.getByText('Save & Become Member'));
-
-      expect(screen.getByText('Saving...')).toBeInTheDocument();
-
-      await waitFor(() => {
-        expect(screen.queryByText('Saving...')).not.toBeInTheDocument();
-      });
-
-      expect(screen.getByText('Save & Become Member')).toBeInTheDocument();
-      expect(mockedNav().useRouter().push).not.toHaveBeenCalled();
-      expect(mockedNotify()).toHaveBeenCalledWith(
-        expect.objectContaining({ type: 'error', message: 'API error' }),
-      );
-    });
-  });
-
-  describe('auth null callback', () => {
-    it('hides profile form when auth callback fires with null', async () => {
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-      render(<JoinPage />);
-
-      // Initially logged out — no form
-      expect(
-        screen.queryByText('Complete your profile'),
-      ).not.toBeInTheDocument();
-
-      // Log in — form appears
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-      expect(screen.getByText('Complete your profile')).toBeInTheDocument();
-
-      // Auth callback fires with null (user signs out) — form disappears
-      await triggerAuthCallback(null);
-      expect(
-        screen.queryByText('Complete your profile'),
-      ).not.toBeInTheDocument();
-    });
-  });
-
-  describe('form field interactions', () => {
-    beforeEach(() => {
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-    });
-
-    it('changes student status select', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const select = screen.getByDisplayValue('Student');
-      fireEvent.change(select, { target: { value: 'alumni' } });
-      expect(screen.getByDisplayValue('Alumni')).toBeInTheDocument();
-
-      fireEvent.change(select, { target: { value: 'other' } });
-      // "Other" now matches both student status and gender selects
-      const others = screen.getAllByDisplayValue('Other');
-      expect(others.length).toBe(2);
-    });
-
-    it('changes gender select', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const select = screen.getByDisplayValue('Other');
-      fireEvent.change(select, { target: { value: 'male' } });
-      expect(screen.getByDisplayValue('Male')).toBeInTheDocument();
-
-      fireEvent.change(select, { target: { value: 'female' } });
-      expect(screen.getByDisplayValue('Female')).toBeInTheDocument();
-
-      fireEvent.change(select, { target: { value: 'nonbinary' } });
-      expect(screen.getByDisplayValue('Non-binary')).toBeInTheDocument();
-
-      fireEvent.change(select, { target: { value: 'prefer_not' } });
-      expect(screen.getByDisplayValue('Prefer not to say')).toBeInTheDocument();
-    });
-
-    it('changes program input', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const input = screen.getByPlaceholderText('e.g. Computer Science');
-      fireEvent.change(input, { target: { value: 'Data Science' } });
-      expect(screen.getByDisplayValue('Data Science')).toBeInTheDocument();
-    });
-
-    it('changes expected graduation year', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const input = screen.getByPlaceholderText('e.g. 2026');
-      fireEvent.change(input, { target: { value: '2027' } });
-      expect(screen.getByDisplayValue('2027')).toBeInTheDocument();
-    });
-
-    it('changes university select', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      // University and campus selects both default to "Uppsala"; pick the second one
-      const universitySelect = screen.getAllByDisplayValue('Uppsala')[1];
-      fireEvent.change(universitySelect, { target: { value: 'none' } });
-      expect(screen.getByDisplayValue('None')).toBeInTheDocument();
-    });
-
-    it('changes bio textarea', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const textarea = screen.getByPlaceholderText('Write a short bio');
-      fireEvent.change(textarea, { target: { value: 'AI enthusiast' } });
-      expect(screen.getByDisplayValue('AI enthusiast')).toBeInTheDocument();
-    });
-
-    it('toggles newsletter checkbox', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const checkbox = screen.getByLabelText('Subscribe to newsletter');
-      expect(checkbox).not.toBeChecked();
-      fireEvent.click(checkbox);
-      expect(checkbox).toBeChecked();
-      fireEvent.click(checkbox);
-      expect(checkbox).not.toBeChecked();
-    });
-
-    it('toggles looking for job checkbox', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const checkbox = screen.getByLabelText('Looking for job opportunities');
-      expect(checkbox).not.toBeChecked();
-      fireEvent.click(checkbox);
-      expect(checkbox).toBeChecked();
-      fireEvent.click(checkbox);
-      expect(checkbox).not.toBeChecked();
-    });
-  });
-
-  describe('marketing/analytics/partner opt-in checkboxes', () => {
-    beforeEach(() => {
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-    });
-
-    it('toggles marketing opt-in checkbox', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const checkbox = screen.getByLabelText('Allow marketing communications');
-      expect(checkbox).not.toBeChecked();
-      fireEvent.click(checkbox);
-      expect(checkbox).toBeChecked();
-      fireEvent.click(checkbox);
-      expect(checkbox).not.toBeChecked();
-    });
-
-    it('toggles analytics opt-in checkbox', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const checkbox = screen.getByLabelText('Allow anonymous analytics');
-      expect(checkbox).not.toBeChecked();
-      fireEvent.click(checkbox);
-      expect(checkbox).toBeChecked();
-      fireEvent.click(checkbox);
-      expect(checkbox).not.toBeChecked();
-    });
-
-    it('toggles partner contact opt-in checkbox', async () => {
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const checkbox = screen.getByLabelText(
-        'Allow contact from partner companies',
-      );
-      expect(checkbox).not.toBeChecked();
-      fireEvent.click(checkbox);
-      expect(checkbox).toBeChecked();
-      fireEvent.click(checkbox);
-      expect(checkbox).not.toBeChecked();
-    });
-  });
-
-  describe('logged in - existing member pre-fills', () => {
-    it('pre-fills fields from existing profile data (displayName, name, program, bio)', async () => {
-      const mockProfile = {
-        id: 'u4',
-        displayName: 'ProfileName',
-        name: 'John Doe',
-        email: 'john@uu.se',
-        isMember: true,
-        privacyAcceptedAt: '2024-01-01T00:00:00Z',
-        program: 'Computer Science',
-        bio: 'AI researcher',
+        privacyAcceptedAt: '2026-01-01T00:00:00Z',
       };
-      mockedUsers().getUserProfile.mockResolvedValue(mockProfile);
-
+      users().getUserProfile.mockResolvedValue(done);
       render(<JoinPage />);
-      // Auth displayName is "AuthName" but profile's displayName should take precedence
-      await triggerAuthCallback({
-        uid: 'u4',
-        displayName: 'AuthName',
-        email: 'auth@uu.se',
-      });
+      fillAndSubmit();
+      await waitFor(() =>
+        expect(push()).toHaveBeenCalledWith('/account?welcome=1'),
+      );
+      expect(users().upsertUserProfile).not.toHaveBeenCalled();
+      expect(users().updateUserProfile).not.toHaveBeenCalled();
+      expect(admin().publishProfile).toHaveBeenCalledWith(done);
+    });
 
-      // displayName from profile (not auth)
-      expect(screen.getByDisplayValue('ProfileName')).toBeInTheDocument();
-      // name from profile (spread from profile object)
-      expect(screen.getByDisplayValue('John Doe')).toBeInTheDocument();
-      // program from profile
-      expect(screen.getByDisplayValue('Computer Science')).toBeInTheDocument();
-      // bio from profile
-      expect(screen.getByDisplayValue('AI researcher')).toBeInTheDocument();
+    it('re-checks the profile when the tab becomes visible again', () => {
+      signedIn();
+      render(<JoinPage />);
+      admin().refreshProfile.mockClear();
+      document.dispatchEvent(new Event('visibilitychange'));
+      expect(admin().refreshProfile).toHaveBeenCalled();
+    });
+
+    it('trims a very long provider name to what the rules accept', () => {
+      signedIn({ user: { ...newUser, displayName: 'A'.repeat(120) } });
+      render(<JoinPage />);
+      expect(screen.getByRole('textbox', { name: /Your name/ })).toHaveValue(
+        'A'.repeat(100),
+      );
+    });
+
+    it('shows the welcome on /account when the detour started there', async () => {
+      window.history.replaceState({}, '', '/join?redirect=%2Faccount');
+      signedIn();
+      render(<JoinPage />);
+      fillAndSubmit();
+      await waitFor(() =>
+        expect(push()).toHaveBeenCalledWith('/account?welcome=1'),
+      );
+    });
+
+    it('restores what was typed after a reload', () => {
+      signedIn();
+      const { unmount } = render(<JoinPage />);
+      fireEvent.change(screen.getByRole('textbox', { name: /Your name/ }), {
+        target: { value: 'Alexandra' },
+      });
+      unmount();
+      render(<JoinPage />);
+      expect(screen.getByRole('textbox', { name: /Your name/ })).toHaveValue(
+        'Alexandra',
+      );
+    });
+
+    it('hides the programme field for non-students', () => {
+      signedIn();
+      render(<JoinPage />);
+      fireEvent.change(screen.getByRole('combobox', { name: 'I am a' }), {
+        target: { value: 'alumni' },
+      });
+      expect(
+        screen.queryByRole('textbox', { name: /Programme/ }),
+      ).not.toBeInTheDocument();
+    });
+
+    it('asks who referred them and saves it', async () => {
+      signedIn();
+      render(<JoinPage />);
+      fireEvent.change(
+        screen.getByRole('combobox', { name: /How did you hear/ }),
+        { target: { value: 'referral' } },
+      );
+      fireEvent.change(screen.getByRole('textbox', { name: /Who told you/ }), {
+        target: { value: 'Ada Lovelace' },
+      });
+      fillAndSubmit();
+      await waitFor(() =>
+        expect(users().upsertUserProfile).toHaveBeenCalledWith(
+          'u1',
+          expect.objectContaining({
+            heardOfUs: 'referral',
+            referredBy: 'Ada Lovelace',
+          }),
+        ),
+      );
+    });
+
+    it('saves a free-text answer for "Other"', async () => {
+      signedIn();
+      render(<JoinPage />);
+      fireEvent.change(
+        screen.getByRole('combobox', { name: /How did you hear/ }),
+        { target: { value: 'other' } },
+      );
+      fireEvent.change(screen.getByRole('textbox', { name: /Where\?/ }), {
+        target: { value: 'Reddit' },
+      });
+      fillAndSubmit();
+      await waitFor(() =>
+        expect(users().upsertUserProfile).toHaveBeenCalledWith(
+          'u1',
+          expect.objectContaining({ heardOfUs: 'Reddit' }),
+        ),
+      );
+    });
+
+    it('limits the programme to what the Firestore rules accept', () => {
+      signedIn();
+      render(<JoinPage />);
+      expect(
+        screen.getByRole('textbox', { name: /Programme/ }),
+      ).toHaveAttribute('maxLength', '150');
     });
   });
 
-  describe('leave guard', () => {
-    let confirmSpy: jest.SpyInstance;
-
-    beforeEach(() => {
-      confirmSpy = jest.spyOn(window, 'confirm').mockReturnValue(true);
-    });
-
-    afterEach(() => {
-      confirmSpy.mockRestore();
-    });
-
-    const clickLink = (href: string) => {
-      const link = document.createElement('a');
-      link.setAttribute('href', href);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    };
-
-    it('registers beforeunload while profile incomplete', async () => {
-      const addSpy = jest.spyOn(window, 'addEventListener');
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-
+  describe('other signed-in states', () => {
+    it('tells an existing member they are already a member', () => {
+      signedIn({
+        profile: {
+          id: 'u1',
+          displayName: 'Alex',
+          isMember: true,
+          privacyAcceptedAt: '2026-01-01T00:00:00Z',
+        },
+      });
       render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      expect(addSpy).toHaveBeenCalledWith('beforeunload', expect.any(Function));
-      addSpy.mockRestore();
+      expect(screen.getByText("You're already a member")).toBeInTheDocument();
+      expect(
+        screen.getByRole('link', { name: 'Go to my account' }),
+      ).toHaveAttribute('href', '/account');
+      expect(
+        screen.queryByRole('button', { name: 'Create my account' }),
+      ).not.toBeInTheDocument();
     });
 
-    it('does not register beforeunload when profile is complete', async () => {
-      const addSpy = jest.spyOn(window, 'addEventListener');
-      mockedUsers().getUserProfile.mockResolvedValue({
-        id: 'u2',
-        displayName: 'Member',
-        isMember: true,
-        privacyAcceptedAt: '2024-01-01T00:00:00Z',
+    it('offers to continue to the pending redirect for an existing member', () => {
+      window.history.replaceState({}, '', '/join?redirect=%2Fevents%2Fe1');
+      signedIn({
+        profile: {
+          id: 'u1',
+          isMember: true,
+          privacyAcceptedAt: '2026-01-01T00:00:00Z',
+        },
       });
-
       render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u2',
-        displayName: 'Member',
-        email: 'm@uu.se',
-      });
-
-      const calls = addSpy.mock.calls.filter(
-        ([name]) => name === 'beforeunload',
+      expect(screen.getByRole('link', { name: 'Continue' })).toHaveAttribute(
+        'href',
+        '/events/e1',
       );
-      expect(calls).toHaveLength(0);
-      addSpy.mockRestore();
     });
 
-    it('warns and navigates when leaving via an in-app link', async () => {
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
+    it('prefills a half-finished profile', () => {
+      signedIn({
+        profile: {
+          id: 'u1',
+          name: 'Alex Old',
+          program: 'Physics',
+          isMember: true,
+        },
       });
-
-      clickLink('/events');
-      expect(confirmSpy).toHaveBeenCalledWith(
-        expect.stringMatching(/sure you want to leave/),
+      render(<JoinPage />);
+      expect(screen.getByRole('textbox', { name: /Your name/ })).toHaveValue(
+        'Alex Old',
       );
-      expect(mockedNav().useRouter().push).toHaveBeenCalledWith('/events');
+      expect(screen.getByRole('textbox', { name: /Programme/ })).toHaveValue(
+        'Physics',
+      );
     });
 
-    it('intercepts before a Link handler navigates', async () => {
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-      const linkHandler = jest.fn();
-
+    it('shows a loading state while the profile loads', () => {
+      signedIn({ profileLoading: true });
       render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const link = document.createElement('a');
-      link.setAttribute('href', '/events');
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        linkHandler();
-      });
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-
-      expect(confirmSpy).toHaveBeenCalled();
-      expect(linkHandler).not.toHaveBeenCalled();
-      expect(mockedNav().useRouter().push).toHaveBeenCalledWith('/events');
+      expect(screen.getByText('Loading your account…')).toBeInTheDocument();
     });
 
-    it('blocks navigation when the user cancels', async () => {
-      confirmSpy.mockReturnValue(false);
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-
+    it('offers a retry instead of an empty form when the profile read failed', () => {
+      signedIn({ profileError: true });
       render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      clickLink('/events');
-      expect(confirmSpy).toHaveBeenCalled();
-      expect(mockedNav().useRouter().push).not.toHaveBeenCalled();
-    });
-
-    it('does not warn for links that stay on /join', async () => {
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      clickLink('/join');
-      expect(confirmSpy).not.toHaveBeenCalled();
-      expect(mockedNav().useRouter().push).not.toHaveBeenCalled();
-    });
-
-    it('does not warn for links opened in a new tab', async () => {
-      mockedUsers().getUserProfile.mockResolvedValue(null);
-
-      render(<JoinPage />);
-      await triggerAuthCallback({
-        uid: 'u1',
-        displayName: 'Test',
-        email: 't@uu.se',
-      });
-
-      const link = document.createElement('a');
-      link.setAttribute('href', '/privacy');
-      link.setAttribute('target', '_blank');
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-
-      expect(confirmSpy).not.toHaveBeenCalled();
-      expect(mockedNav().useRouter().push).not.toHaveBeenCalled();
+      expect(
+        screen.getByText(/couldn.t load your account/),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: 'Create my account' }),
+      ).not.toBeInTheDocument();
+      fireEvent.click(screen.getByRole('button', { name: 'Try again now' }));
+      expect(admin().refreshProfile).toHaveBeenCalled();
     });
   });
 });

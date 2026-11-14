@@ -366,6 +366,73 @@ describe('useAdmin', () => {
     });
   });
 
+  it('treats a failed profile read as unknown, not as a missing profile', async () => {
+    getIdTokenResult.mockResolvedValue({ claims: {} });
+    getUserProfile.mockRejectedValueOnce(
+      Object.assign(new Error('client is offline'), { code: 'unavailable' }),
+    );
+    const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    await act(async () => {
+      await authCallback!(mockUser);
+    });
+    expect(result.current.user).toBe(mockUser);
+    expect(result.current.profileLoading).toBe(false);
+    expect(result.current.profileError).toBe(true);
+    expect(result.current.profile).toBeNull();
+  });
+
+  it('retries a failed profile read automatically and clears the error', async () => {
+    jest.useFakeTimers();
+    try {
+      getIdTokenResult.mockResolvedValue({ claims: {} });
+      const member = {
+        id: 'test-uid',
+        isMember: true,
+        privacyAcceptedAt: '2026-01-01T00:00:00Z',
+      };
+      getUserProfile
+        .mockRejectedValueOnce(new Error('network'))
+        .mockResolvedValue(member);
+      const { result } = loadHook();
+      await waitFor(() => expect(authCallback).not.toBeNull());
+      await act(async () => {
+        await authCallback!(mockUser);
+      });
+      expect(result.current.profileError).toBe(true);
+
+      await act(async () => {
+        await jest.advanceTimersByTimeAsync(2_000);
+      });
+      await waitFor(() => expect(result.current.profileError).toBe(false));
+      expect(result.current.profile).toEqual(member);
+      expect(getUserProfile).toHaveBeenCalledTimes(2);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it('refreshProfile recovers from an earlier failed read', async () => {
+    getIdTokenResult.mockResolvedValue({ claims: {} });
+    getUserProfile
+      .mockRejectedValueOnce(new Error('network'))
+      .mockResolvedValue({ id: 'test-uid', name: 'Alex' });
+    const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    await act(async () => {
+      await authCallback!(mockUser);
+    });
+    expect(result.current.profileError).toBe(true);
+    const { refreshProfile } = jest.requireMock(
+      '@/hooks/useAdmin',
+    ) as typeof import('@/hooks/useAdmin');
+    await act(async () => {
+      await refreshProfile();
+    });
+    expect(result.current.profileError).toBe(false);
+    expect(result.current.profile).toEqual({ id: 'test-uid', name: 'Alex' });
+  });
+
   it('refreshProfile is a no-op when signed out', async () => {
     const { result } = loadHook();
     await waitFor(() => expect(authCallback).not.toBeNull());

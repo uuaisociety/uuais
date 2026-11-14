@@ -198,6 +198,7 @@ const __defaultAdminState = {
   user: null,
   loading: false,
   profileLoading: false,
+  profileError: false,
   profile: null,
   isAdmin: false,
   isSuperAdmin: false,
@@ -211,6 +212,8 @@ global.__setAdminState = (state: Record<string, unknown> | null) => {
 jest.mock('@/hooks/useAdmin', () => ({
   useAdmin: () => __mockAdminState || __defaultAdminState,
   refreshProfile: jest.fn().mockResolvedValue(undefined),
+  ensureAuth: jest.fn(),
+  publishProfile: jest.fn(),
 }));
 
 jest.mock('next/image', () => {
