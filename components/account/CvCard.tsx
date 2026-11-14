@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
 import ConfirmModal from '@/components/ui/ConfirmModal';
 import PDFDropzone from '@/components/ui/PDFDropzone';
 import { useNotify } from '@/components/ui/Notifications';
@@ -185,8 +184,8 @@ export default function CvCard({
       return (
         <p className="text-sm text-muted-foreground leading-relaxed">
           To share your CV, your email needs to be verified, so partners know
-          they’re reaching a real student. Link your Google account under Linked
-          Accounts, then come back here.
+          they’re reaching a real student. Link your Google account under
+          Sign-in methods, then come back here.
         </p>
       );
     }
@@ -235,6 +234,8 @@ export default function CvCard({
           file={file}
           onChange={setFile}
           label="CV"
+          // Ink, not red: red is reserved for the page's one primary action.
+          linkClassName="text-foreground underline underline-offset-2"
           onError={(message) =>
             notify({ type: 'error', title: 'Invalid file', message })
           }
@@ -291,11 +292,11 @@ export default function CvCard({
   };
 
   return (
-    <Card className="md:col-span-3">
-      <div className="p-6 grid md:grid-cols-[1fr_1.15fr] gap-6 md:gap-10">
+    <section>
+      <div className="space-y-6">
         <div>
           <div className="flex items-baseline gap-3 mb-2">
-            <h2 className="text-xl font-semibold text-foreground">
+            <h2 className="text-[1.0625rem] font-semibold tracking-[-0.028em] text-foreground">
               CV for partners
             </h2>
             <span className="mono-label text-muted-foreground">Optional</span>
@@ -326,6 +327,6 @@ export default function CvCard({
         onClose={() => setConfirmRemove(false)}
         onConfirm={handleRemove}
       />
-    </Card>
+    </section>
   );
 }
