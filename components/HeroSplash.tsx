@@ -17,6 +17,8 @@ export const LIGHT_SPLASH =
 interface HeroSplashProps {
   /** Geometry + spacing classes. The slab background/text are theme-aware. */
   className?: string;
+  /** Replaces the light-mode splash, e.g. where the default cool lobe would sit behind a tab row. */
+  lightSplash?: string;
   children?: React.ReactNode;
 }
 
@@ -26,6 +28,7 @@ interface HeroSplashProps {
 // text-current/* for any muted text so it follows the slab's tone.
 export const HeroSplash: React.FC<HeroSplashProps> = ({
   className = '',
+  lightSplash = LIGHT_SPLASH,
   children,
 }) => {
   const { theme } = useTheme();
@@ -47,7 +50,7 @@ export const HeroSplash: React.FC<HeroSplashProps> = ({
       <div
         aria-hidden
         className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ease-[var(--ease-ios)] ${isDark ? 'opacity-0' : 'opacity-100'}`}
-        style={{ background: LIGHT_SPLASH }}
+        style={{ background: lightSplash }}
       />
       {children}
     </section>
