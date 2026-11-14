@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import { joinUrl, currentRedirect } from '@/lib/login-redirect';
 import EmailLinkSignIn from '@/components/auth/EmailLinkSignIn';
 import { signInErrorMessage } from '@/lib/sign-in-error';
+import { ensureAuth } from '@/hooks/useAdmin';
 
 import type { FC } from 'react';
 import Link from 'next/link';
@@ -36,11 +37,15 @@ const useJoinHref = () =>
 const LoginCard: FC<LoginCardProps> = ({ after }) => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState<'google' | 'github' | null>(null);
   const joinHref = useJoinHref();
 
-  // A provider account that never created a profile is signed out by the
-  // RegistrationGate off /join; send it to /join to complete account creation, keeping the redirect.
+  // A provider account that never created a profile can't use member pages;
+  // send it to /join to complete account creation, keeping the redirect.
   const finishSignIn = async (uid: string) => {
+    // Start the shared auth store now (not after its idle delay), so /join or
+    // /account show the signed-in user instead of a signed-out page first.
+    ensureAuth();
     // Partner-company accounts (allowlisted by verified email) have no member profile by design.
     const current = auth.currentUser;
     const email = current?.emailVerified ? current.email : null;
@@ -66,14 +71,20 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
     after();
   };
 
-  const handleAuth = async (signIn: () => Promise<{ uid: string }>) => {
+  const handleAuth = async (
+    provider: 'google' | 'github',
+    signIn: () => Promise<{ uid: string }>,
+  ) => {
     setError(null);
+    setPending(provider);
     try {
       const user = await signIn();
       await finishSignIn(user.uid);
     } catch (e) {
       setError(signInErrorMessage(e));
       console.error('Sign-in failed:', e);
+    } finally {
+      setPending(null);
     }
   };
 
@@ -82,16 +93,18 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
       <div className="max-w-xs mx-auto px-4">
         <div className="flex flex-col items-center justify-center pb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white pb-2">
-            Login
+            Sign in
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-sm text-center">
-            Please login using one of the options below to continue.
+            Use the same method you used when you joined.
           </p>
         </div>
         <div className="space-y-3 gap-1 flex flex-col justify-center">
           <Button
             variant="outline"
-            onClick={() => handleAuth(signInWithGooglePopup)}
+            isLoading={pending === 'google'}
+            disabled={pending !== null}
+            onClick={() => handleAuth('google', signInWithGooglePopup)}
           >
             <span className="flex items-center gap-2">
               <HugeiconsIcon icon={GoogleIcon} className="h-4 w-4" /> Continue
@@ -100,7 +113,9 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
           </Button>
           <Button
             variant="outline"
-            onClick={() => handleAuth(signInWithGithubPopup)}
+            isLoading={pending === 'github'}
+            disabled={pending !== null}
+            onClick={() => handleAuth('github', signInWithGithubPopup)}
           >
             <span className="flex items-center gap-2">
               <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" /> Continue
