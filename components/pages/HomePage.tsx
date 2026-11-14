@@ -1,5 +1,4 @@
-'use client'
-
+'use client';
 
 import React, { useEffect } from 'react';
 import Link from 'next/link';
@@ -57,7 +56,8 @@ const pillars = [
   },
   {
     title: 'Community',
-    description: 'Find like-minded students and connect with the AI community at large.',
+    description:
+      'Find like-minded students and connect with the AI community at large.',
   },
   {
     title: 'Innovation',
@@ -75,32 +75,36 @@ const HomePage: React.FC = () => {
   const { state } = useApp();
 
   useEffect(() => {
-    updatePageMeta('Home', 'UU AI Society - Connecting students passionate about Artificial Intelligence');
+    updatePageMeta(
+      'Home',
+      'UU AI Society - Connecting students passionate about Artificial Intelligence',
+    );
   }, []);
 
   const now = new Date();
   const upcomingEvents = state.events
-    .filter(event => event.published === true)
-    .filter(event => !event.publishAt || new Date(event.publishAt) <= now)
-    .filter(event => event.eventStartAt && new Date(event.eventStartAt) > now)
+    .filter((event) => event.published === true)
+    .filter((event) => !event.publishAt || new Date(event.publishAt) <= now)
+    .filter((event) => event.eventStartAt && new Date(event.eventStartAt) > now)
     .slice(0, 3);
 
   // Featured first, then newest — and capped like the events and blog sections.
   const showcaseProjects = state.showcaseProjects
-    .filter(p => p.published)
-    .sort((a, b) =>
-      Number(b.featured) - Number(a.featured) ||
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .filter((p) => p.published)
+    .sort(
+      (a, b) =>
+        Number(b.featured) - Number(a.featured) ||
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    )
     .slice(0, 3);
 
   const latestPosts = state.blogPosts
-    .filter(post => post.published)
+    .filter((post) => post.published)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
 
   return (
     <div className="pb-24">
-
       {/* ---------------------------------------------------------------- Hero
           A theme-aware slab — dark ink in dark mode, white paper in light —
           with interior radial light. Reads as an object on the page and gives
@@ -111,7 +115,9 @@ const HomePage: React.FC = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto pt-14 grid grid-rows-[auto_1fr] lg:grid-rows-none lg:grid-cols-[1.05fr_0.95fr] items-center lg:content-stretch min-h-[calc(100dvh+3.5rem)]">
           <div className="order-2 lg:order-1 px-6 sm:px-8 lg:px-8 pb-14 lg:py-14">
-            <p className="mono-label text-foreground/65 mb-6">Uppsala · AI Society</p>
+            <p className="mono-label text-foreground/65 mb-6">
+              Uppsala · AI Society
+            </p>
 
             <h1 className="display-xl mb-7">
               Build the future.
@@ -119,19 +125,20 @@ const HomePage: React.FC = () => {
             </h1>
 
             <p className="text-base sm:text-lg text-current/60 max-w-md leading-relaxed mb-9">
-              Uniting Uppsala students driven by AI, tech, and meaningful collaboration.
+              Uniting Uppsala students driven by AI, tech, and meaningful
+              collaboration.
             </p>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <Button asChild variant="cta" size="lg">
-                <Link
-                  href="/events"
-                  className="dark:bg-white dark:text-ink"
-                >
-                  Our events
+                <Link href="/join" className="dark:bg-white dark:text-ink">
+                  Join for free
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg">
+                <Link href="/events">Our events</Link>
+              </Button>
+              <Button asChild variant="ghost" size="lg" className="px-3">
                 <Link href="/about">
                   Learn about UU AI Society
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -163,7 +170,9 @@ const HomePage: React.FC = () => {
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>
-                  <h3 className="text-lg font-semibold tracking-[-0.02em] mb-2">{pillar.title}</h3>
+                  <h3 className="text-lg font-semibold tracking-[-0.02em] mb-2">
+                    {pillar.title}
+                  </h3>
                   <p className="text-[0.9375rem] leading-relaxed text-muted-foreground max-w-sm">
                     {pillar.description}
                   </p>
@@ -177,7 +186,11 @@ const HomePage: React.FC = () => {
       {/* -------------------------------------------------------------- Events */}
       <section className="px-5 sm:px-8 pt-24 sm:pt-32 cv-auto">
         <div className="max-w-6xl mx-auto">
-          <SectionHead paren="Upcoming" title="Events" action={{ href: '/events', label: 'See all events' }} />
+          <SectionHead
+            paren="Upcoming"
+            title="Events"
+            action={{ href: '/events', label: 'See all events' }}
+          />
 
           {state.eventsLoaded && upcomingEvents.length === 0 ? (
             <div className="border-t border-border py-16 text-center">
@@ -199,45 +212,47 @@ const HomePage: React.FC = () => {
                     </div>
                   ))
                 : upcomingEvents.map((event, i) => (
-                <Link
-                  key={event.id}
-                  href={`/events/${event.id}`}
-                  className="glass glass-interactive group flex flex-col overflow-hidden rounded-md"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image
-                      src={event.image || campus}
-                      alt=""
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
-                      loading={i === 0 ? "eager" : "lazy"}
-                      fetchPriority={i === 0 ? "high" : "auto"}
-                    />
-                    <span className="absolute top-3 left-3 pill bg-black/45 text-white backdrop-blur-md">
-                      {categoryOptions.find(o => o.value === event.category)?.label || event.category}
-                    </span>
-                  </div>
+                    <Link
+                      key={event.id}
+                      href={`/events/${event.id}`}
+                      className="glass glass-interactive group flex flex-col overflow-hidden rounded-md"
+                    >
+                      <div className="relative aspect-[16/10] overflow-hidden">
+                        <Image
+                          src={event.image || campus}
+                          alt=""
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-[1.04]"
+                          loading={i === 0 ? 'eager' : 'lazy'}
+                          fetchPriority={i === 0 ? 'high' : 'auto'}
+                        />
+                        <span className="absolute top-3 left-3 pill bg-black/45 text-white backdrop-blur-md">
+                          {categoryOptions.find(
+                            (o) => o.value === event.category,
+                          )?.label || event.category}
+                        </span>
+                      </div>
 
-                  <div className="flex flex-col flex-1 p-5">
-                    <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] leading-snug mb-2">
-                      {event.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground line-clamp-2 mb-5">
-                      {event.description}
-                    </p>
-                    <div className="mt-auto flex items-center justify-between pt-4 border-t border-border">
-                      <span className="mono-meta text-foreground/65">
-                        {(() => {
-                          const d = new Date(event.eventStartAt);
-                          return `${format(d, 'd MMM yyyy')} · ${format(d, 'HH:mm')}`;
-                        })()}
-                      </span>
-                      <ArrowUpRight className="h-4 w-4 text-foreground/60 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
+                      <div className="flex flex-col flex-1 p-5">
+                        <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em] leading-snug mb-2">
+                          {event.title}
+                        </h3>
+                        <p className="text-sm leading-relaxed text-muted-foreground line-clamp-2 mb-5">
+                          {event.description}
+                        </p>
+                        <div className="mt-auto flex items-center justify-between pt-4 border-t border-border">
+                          <span className="mono-meta text-foreground/65">
+                            {(() => {
+                              const d = new Date(event.eventStartAt);
+                              return `${format(d, 'd MMM yyyy')} · ${format(d, 'HH:mm')}`;
+                            })()}
+                          </span>
+                          <ArrowUpRight className="h-4 w-4 text-foreground/60 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
             </div>
           )}
         </div>
@@ -247,7 +262,11 @@ const HomePage: React.FC = () => {
           A peek at the projects the community is building. */}
       <section className="px-5 sm:px-8 pt-24 sm:pt-32 cv-auto">
         <div className="max-w-6xl mx-auto">
-          <SectionHead paren="Community" title="What members are building" action={{ href: '/showcase', label: 'View Showcase' }} />
+          <SectionHead
+            paren="Community"
+            title="What members are building"
+            action={{ href: '/showcase', label: 'View Showcase' }}
+          />
 
           {showcaseProjects.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -284,7 +303,8 @@ const HomePage: React.FC = () => {
                     </p>
                     <div className="mt-auto flex items-center justify-between pt-4 border-t border-border">
                       <span className="mono-meta text-foreground/65 truncate">
-                        By {project.creatorName || 'member'} · {(project.votes || 0)} votes
+                        By {project.creatorName || 'member'} ·{' '}
+                        {project.votes || 0} votes
                       </span>
                       <ArrowUpRight className="h-4 w-4 text-foreground/60 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>
@@ -308,7 +328,11 @@ const HomePage: React.FC = () => {
       {latestPosts.length > 0 && (
         <section className="px-5 sm:px-8 pt-24 sm:pt-32 cv-auto">
           <div className="max-w-6xl mx-auto">
-            <SectionHead paren="From the blog" title="Articles" action={{ href: '/blog', label: 'Read the blog' }} />
+            <SectionHead
+              paren="From the blog"
+              title="Articles"
+              action={{ href: '/blog', label: 'Read the blog' }}
+            />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {latestPosts.map((post) => (
@@ -332,7 +356,9 @@ const HomePage: React.FC = () => {
                           <Sparkles className="h-3 w-3" />
                           AI News Desk
                         </span>
-                        <span className="pill bg-black/45 text-white backdrop-blur-md">Beta</span>
+                        <span className="pill bg-black/45 text-white backdrop-blur-md">
+                          Beta
+                        </span>
                       </span>
                     )}
                   </div>
@@ -346,7 +372,8 @@ const HomePage: React.FC = () => {
                     </p>
                     <div className="mt-auto flex items-center justify-between pt-4 border-t border-border">
                       <span className="mono-meta text-foreground/65">
-                        {post.author} · {format(new Date(post.date), 'd MMM yyyy')}
+                        {post.author} ·{' '}
+                        {format(new Date(post.date), 'd MMM yyyy')}
                       </span>
                       <ArrowUpRight className="h-4 w-4 text-foreground/60 transition-all duration-300 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </div>
@@ -362,12 +389,15 @@ const HomePage: React.FC = () => {
       <section className="px-5 sm:px-8 pt-24 sm:pt-32 cv-auto">
         <div className="max-w-6xl mx-auto">
           <div className="glass rounded-lg px-8 sm:px-14 py-14 sm:py-20 text-center">
-            <p className="mono-label text-foreground/65 mb-6">Membership is free</p>
+            <p className="mono-label text-foreground/65 mb-6">
+              Membership is free
+            </p>
             <h2 className="display-lg mb-5 max-w-2xl mx-auto">
               Everything starts with <span className="paren">(showing up)</span>
             </h2>
             <p className="text-muted-foreground max-w-md mx-auto mb-9 leading-relaxed">
-              Join the society, get the newsletter, and hear about events before anyone else.
+              Join the society, get the newsletter, and hear about events before
+              anyone else.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
