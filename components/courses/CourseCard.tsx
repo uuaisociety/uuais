@@ -1,15 +1,54 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/Card";
-import { Button } from "@/components/ui/Button";
-import { Tag } from "@/components/ui/Tag";
-import { Heart } from "lucide-react";
-import type { Course } from "@/lib/courses";
-import { auth } from "@/lib/firebase-client";
-import { onAuthStateChanged } from "firebase/auth";
-import { isCourseFavorited, toggleFavorite } from "@/lib/firestore/favorites";
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Card, CardContent } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Tag } from '@/components/ui/Tag';
+import { Heart } from 'lucide-react';
+import { SkeletonBox, SkeletonText } from '@/components/ui/skeleton';
+import type { Course } from '@/lib/courses';
+import { auth } from '@/lib/firebase-client';
+import { onAuthStateChanged } from 'firebase/auth';
+import { isCourseFavorited, toggleFavorite } from '@/lib/firestore/favorites';
+
+const COURSE_CARD_CLASS =
+  'h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700';
+const COURSE_CARD_CONTENT_CLASS = 'p-6 flex flex-col h-full';
+const TAG_CLASS =
+  'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
+
+/** A course card while the courses load: the card's own shell, with bars for the level, code, title and description. */
+export function CourseCardSkeleton() {
+  return (
+    <Card aria-hidden className={COURSE_CARD_CLASS}>
+      <CardContent className={COURSE_CARD_CONTENT_CLASS}>
+        <div className="mb-3">
+          <SkeletonText
+            className="inline-block text-[11px] px-2 py-0.5 mb-1"
+            widths={['4rem']}
+          />
+          <SkeletonText
+            className="text-xs uppercase tracking-wide"
+            widths={['30%']}
+          />
+          <SkeletonText
+            className="text-xl font-semibold mt-1"
+            widths={['80%']}
+          />
+        </div>
+        <SkeletonText className="mb-4" lines={3} />
+        <div className="flex flex-wrap gap-2 mb-6">
+          <Tag className={`${TAG_CLASS} w-16`}>{'\u00a0'}</Tag>
+          <Tag className={`${TAG_CLASS} w-12`}>{'\u00a0'}</Tag>
+        </div>
+        <div className="mt-auto flex items-center gap-2">
+          <SkeletonBox className="h-10 flex-1 rounded-md" />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
 
 type Props = {
   course: Course;
@@ -21,7 +60,7 @@ type Props = {
 
 export default function CourseCard({
   course,
-  hrefBase = "/course",
+  hrefBase = '/course',
   initialFavorited = false,
   onFavoriteChange,
   children,
@@ -52,7 +91,7 @@ export default function CourseCard({
           setIsFavorited(favorited);
         }
       } catch (e) {
-        console.error("Failed to check favorite status:", e);
+        console.error('Failed to check favorite status:', e);
       }
     });
 
@@ -73,15 +112,15 @@ export default function CourseCard({
       setIsFavorited(newStatus);
       onFavoriteChange?.(newStatus);
     } catch (e) {
-      console.error("Failed to toggle favorite:", e);
+      console.error('Failed to toggle favorite:', e);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <Card className="h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-      <CardContent className="p-6 flex flex-col h-full">
+    <Card className={COURSE_CARD_CLASS}>
+      <CardContent className={COURSE_CARD_CONTENT_CLASS}>
         <div className="mb-3">
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1">
@@ -90,8 +129,12 @@ export default function CourseCard({
                   {course.level}
                 </span>
               )}
-              <div className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">{course.code}</div>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mt-1">{course.title} - {course.id}</h3>
+              <div className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                {course.code}
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mt-1">
+                {course.title} - {course.id}
+              </h3>
             </div>
             {user && (
               <Button
@@ -99,25 +142,33 @@ export default function CourseCard({
                 disabled={isLoading}
                 className={`p-2 rounded-full transition-colors transition-shadow bg-transparent border-none shadow-none ${
                   isFavorited
-                    ? "text-red-500 hover:text-red-600"
-                    : "text-gray-400 hover:text-red-500"
+                    ? 'text-red-500 hover:text-red-600'
+                    : 'text-gray-400 hover:text-red-500'
                 }`}
-                aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
+                aria-label={
+                  isFavorited ? 'Remove from favorites' : 'Add to favorites'
+                }
               >
                 {/* Animated heart on click  */}
-                <Heart className={`h-5 w-5 cursor-pointer 
+                <Heart
+                  className={`h-5 w-5 cursor-pointer 
                   bg-transparent border-none 
                   transition-colors duration-300 
                   hover:text-red-500 hover:fill-current 
-                  ${isFavorited ? " text-red-500 fill-current" : ""}`} />
+                  ${isFavorited ? ' text-red-500 fill-current' : ''}`}
+                />
               </Button>
             )}
           </div>
         </div>
-        <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">{course.description}</p>
+        <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+          {course.description}
+        </p>
         <div className="flex flex-wrap gap-2 mb-6">
           {course.tags.map((t) => (
-            <Tag key={t} className="bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">{t}</Tag>
+            <Tag key={t} className={TAG_CLASS}>
+              {t}
+            </Tag>
           ))}
         </div>
         <div className="mt-auto flex items-center gap-2">

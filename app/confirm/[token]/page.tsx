@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
@@ -6,7 +6,19 @@ import Link from 'next/link';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { confirmRegistrationByToken } from '@/lib/firestore/registrations';
+import { SkeletonRegion, SkeletonText } from '@/components/ui/skeleton';
 import { updatePageMeta } from '@/utils/seo';
+
+const ResultActions = () => (
+  <div className="flex gap-3">
+    <Link href="/events">
+      <Button>Browse Events</Button>
+    </Link>
+    <Link href="/account">
+      <Button variant="outline">Go to Account</Button>
+    </Link>
+  </div>
+);
 
 const ConfirmPage: React.FC = () => {
   const params = useParams();
@@ -37,7 +49,9 @@ const ConfirmPage: React.FC = () => {
         if (mounted) setStatus('done');
       }
     })();
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, [token]);
 
   return (
@@ -45,24 +59,33 @@ const ConfirmPage: React.FC = () => {
       <div className="max-w-xl mx-auto px-4">
         <Card className="bg-white dark:bg-gray-800">
           <CardHeader>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Event Confirmation</h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              Event Confirmation
+            </h1>
           </CardHeader>
           <CardContent>
             {status !== 'done' ? (
-              <p className="text-gray-700 dark:text-gray-300">Processing your confirmation...</p>
+              // The result's own frame: a line for the message, then its two buttons (inert until it arrives).
+              <SkeletonRegion label="Processing your confirmation...">
+                <div className="space-y-4">
+                  <SkeletonText widths={['80%']} />
+                  <div inert>
+                    <ResultActions />
+                  </div>
+                </div>
+              </SkeletonRegion>
             ) : (
               <div className="space-y-4">
-                <p className={ok ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}>
+                <p
+                  className={
+                    ok
+                      ? 'text-green-700 dark:text-green-300'
+                      : 'text-red-700 dark:text-red-300'
+                  }
+                >
                   {message}
                 </p>
-                <div className="flex gap-3">
-                  <Link href="/events">
-                    <Button>Browse Events</Button>
-                  </Link>
-                  <Link href="/account">
-                    <Button variant="outline">Go to Account</Button>
-                  </Link>
-                </div>
+                <ResultActions />
               </div>
             )}
           </CardContent>

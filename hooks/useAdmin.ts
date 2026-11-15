@@ -205,7 +205,9 @@ const initializeAuth = () => {
         claims: tokenClaims,
         cached: {
           uid: u.uid,
-          name: u.displayName,
+          // Keep the last profile name for this user until the profile loads, so it doesn't flip to the auth name and back.
+          name:
+            (store.cached?.uid === u.uid && store.cached.name) || u.displayName,
           email: u.email,
           photoURL: u.photoURL,
           isAdmin,

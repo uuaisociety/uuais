@@ -31,14 +31,40 @@ import ConfirmModal from '@/components/ui/ConfirmModal';
 import LoginModal from '@/components/ui/LoginModal';
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
 import { Tag, type TagVariant } from '@/components/ui/Tag';
-import { HeroSplash } from '@/components/HeroSplash';
-
-// The default light splash puts a cool lobe low-left, right behind the tab row;
-// here only the warm glow stays, up high, away from the tabs.
-const ACCOUNT_LIGHT_SPLASH =
-  'radial-gradient(45rem 26rem at 80% 0%, oklch(from var(--primary) l c h / 16%), transparent 62%)';
 import CvCard from '@/components/account/CvCard';
-import { DISCORD_INVITE } from '@/components/common/DiscordCta';
+import {
+  ABOUT,
+  ABOUT_HINT,
+  AccountBand,
+  AccountSkeleton,
+  GetInvolved,
+  HEADING_CLASS,
+  HEARD_OF_US,
+  KNOWN_SOURCES,
+  LINKS,
+  METER_CLASS,
+  MeterHead,
+  PAGE_CLASS,
+  PANELS_CLASS,
+  PROFILE_AFTER_CLASS,
+  PROFILE_ASIDE_CLASS,
+  PROFILE_GRID_CLASS,
+  PROFILE_MAIN_CLASS,
+  ROW_CLASS,
+  ROW_LABEL_CLASS,
+  ROW_VALUE_CLASS,
+  RegistrationsSkeleton,
+  SectionHeading,
+  TABLIST_CLASS,
+  TABS,
+  initialsOf,
+  linkClass,
+  meterSegmentClass,
+  tabClass,
+  type FieldDef,
+  type FieldKey,
+  type TabId,
+} from '@/components/account/AccountLayout';
 import { updatePageMeta } from '@/utils/seo';
 import { isReferralSource } from '@/lib/referrals';
 import { publishProfile, refreshProfile, useAdmin } from '@/hooks/useAdmin';
@@ -50,15 +76,6 @@ const REGISTRATIONS_TIMEOUT_MS = 15_000;
 const SAVE_TIMEOUT_MS = 20_000;
 
 // ------------------------------------------------------------------ tabs
-
-// `short` labels let all four tabs fit a phone screen.
-const TABS = [
-  { id: 'profile', label: 'Profile', short: 'Profile' },
-  { id: 'cv', label: 'CV for partners', short: 'CV' },
-  { id: 'events', label: 'Events', short: 'Events' },
-  { id: 'settings', label: 'Sign-in & privacy', short: 'Privacy' },
-] as const;
-type TabId = (typeof TABS)[number]['id'];
 
 // The open tab lives in the URL hash (#cv, #events…) so links and reloads land on it.
 const TAB_EVENT = 'account-tab';
@@ -96,142 +113,6 @@ const useJustJoined = () =>
   );
 
 // ------------------------------------------------------------------ profile fields
-
-type FieldKey =
-  | 'name'
-  | 'displayName'
-  | 'studentStatus'
-  | 'program'
-  | 'expectedGraduationYear'
-  | 'university'
-  | 'campus'
-  | 'gender'
-  | 'bio'
-  | 'linkedin'
-  | 'github'
-  | 'website'
-  | 'heardOfUs';
-
-type FieldDef = {
-  key: FieldKey;
-  label: string;
-  hint?: string;
-  kind: 'text' | 'url' | 'year' | 'select' | 'textarea' | 'heard';
-  /** Matches the Firestore rules' caps where they exist. */
-  max?: number;
-  options?: [string, string][];
-  placeholder?: string;
-};
-
-const HEARD_OF_US: [string, string][] = [
-  ['posters', 'Posters'],
-  ['instagram', 'Instagram'],
-  ['linkedin', 'LinkedIn'],
-  ['friends', 'Friends'],
-  ['referral', 'Referral'],
-  ['events', 'Events'],
-  ['lecture', 'During a lecture'],
-  ['other', 'Other'],
-];
-const KNOWN_SOURCES = HEARD_OF_US.map(([v]) => v);
-
-const ABOUT: FieldDef[] = [
-  { key: 'name', label: 'Full name', kind: 'text', max: 100 },
-  {
-    key: 'displayName',
-    label: 'Display name',
-    hint: 'Shown publicly',
-    kind: 'text',
-    max: 100,
-  },
-  {
-    key: 'studentStatus',
-    label: 'I am a',
-    kind: 'select',
-    options: [
-      ['student', 'Student'],
-      ['alumni', 'Alumni'],
-      ['other', 'Other'],
-    ],
-  },
-  {
-    key: 'program',
-    label: 'Programme',
-    kind: 'text',
-    max: 150,
-    placeholder: 'e.g. Computer Science',
-  },
-  {
-    key: 'expectedGraduationYear',
-    label: 'Expected graduation',
-    kind: 'year',
-    placeholder: 'e.g. 2028',
-  },
-  {
-    key: 'university',
-    label: 'University',
-    kind: 'select',
-    options: [
-      ['Uppsala', 'Uppsala University'],
-      ['other', 'Other'],
-      ['none', 'None'],
-    ],
-  },
-  {
-    key: 'campus',
-    label: 'Campus',
-    kind: 'select',
-    options: [
-      ['Uppsala', 'Uppsala'],
-      ['Gotland', 'Gotland'],
-      ['other', 'Other'],
-    ],
-  },
-  {
-    key: 'gender',
-    label: 'Gender',
-    kind: 'select',
-    options: [
-      ['male', 'Male'],
-      ['female', 'Female'],
-      ['nonbinary', 'Non-binary'],
-      ['prefer_not', 'Prefer not to say'],
-      ['other', 'Other'],
-    ],
-  },
-  {
-    key: 'bio',
-    label: 'Bio',
-    kind: 'textarea',
-    max: 500,
-    placeholder: 'A sentence or two about what you’re into',
-  },
-];
-
-const LINKS: FieldDef[] = [
-  {
-    key: 'linkedin',
-    label: 'LinkedIn',
-    kind: 'url',
-    max: 200,
-    placeholder: 'https://linkedin.com/in/…',
-  },
-  {
-    key: 'github',
-    label: 'GitHub',
-    kind: 'url',
-    max: 200,
-    placeholder: 'https://github.com/username',
-  },
-  {
-    key: 'website',
-    label: 'Website',
-    kind: 'url',
-    max: 500,
-    placeholder: 'https://example.com',
-  },
-  { key: 'heardOfUs', label: 'How you found us', kind: 'heard' },
-];
 
 const isEmpty = (v: unknown) => v === undefined || v === null || v === '';
 
@@ -345,21 +226,6 @@ const Status = ({ children }: { children: ReactNode }) => (
   </div>
 );
 
-const SectionHeading = ({
-  children,
-  hint,
-}: {
-  children: ReactNode;
-  hint?: ReactNode;
-}) => (
-  <div className="mb-3">
-    <h2 className="text-[1.0625rem] font-semibold tracking-[-0.028em] text-foreground">
-      {children}
-    </h2>
-    {hint && <p className="text-sm text-muted-foreground mt-1">{hint}</p>}
-  </div>
-);
-
 const ToggleRow = ({
   label,
   description,
@@ -401,8 +267,15 @@ export default function AccountPage() {
   const { notify } = useNotify();
   const router = useRouter();
   // The shared auth store already holds the profile (e.g. straight after /join), so the page renders without re-reading it.
-  const { user, loading, profile, profileLoading, profileError, isPartner } =
-    useAdmin({ eager: true });
+  const {
+    user,
+    loading,
+    profile,
+    profileLoading,
+    profileError,
+    isPartner,
+    cached,
+  } = useAdmin({ eager: true });
   const uid = user?.uid ?? null;
   const tab = useSyncExternalStore(subscribeTab, readTab, () => 'profile');
 
@@ -619,9 +492,9 @@ export default function AccountPage() {
 
   // ---- states before the page
 
-  if (loading) return <Status>Loading your account…</Status>;
+  if (loading) return <AccountSkeleton cached={cached} />;
   if (!uid) return <LoginModal after={() => router.push('/account')} />;
-  if (profileLoading) return <Status>Loading your account…</Status>;
+  if (profileLoading) return <AccountSkeleton cached={cached} />;
   if (profileError) {
     return (
       <Status>
@@ -657,13 +530,9 @@ export default function AccountPage() {
 
   const name =
     current.displayName || current.name || user?.email?.split('@')[0] || '';
-  const initials =
-    (current.name || current.displayName || user?.email || '?')
-      .split(/[\s@._-]+/)
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((w) => w[0]?.toUpperCase())
-      .join('') || '?';
+  const initials = initialsOf(
+    current.name || current.displayName || user?.email || '?',
+  );
   const memberSince = current.createdAt ? formatDate(current.createdAt) : null;
   const meter = completeness(current, hasCv === true);
   const invites = registrations.filter((r) => r.status === 'invited');
@@ -872,17 +741,12 @@ export default function AccountPage() {
               </div>
             </form>
           ) : (
-            <div
-              key={f.key}
-              className="grid grid-cols-[1fr_auto] sm:grid-cols-[13rem_1fr_auto] items-center gap-x-6 gap-y-0.5 py-3 border-t border-border"
-            >
-              <dt className="text-sm text-muted-foreground col-span-2 sm:col-span-1">
+            <div key={f.key} className={ROW_CLASS}>
+              <dt className={ROW_LABEL_CLASS}>
                 {f.label}
                 {f.hint && <span className="mono-meta ml-2">{f.hint}</span>}
               </dt>
-              <dd className="text-foreground font-medium min-w-0">
-                {displayValue(f)}
-              </dd>
+              <dd className={ROW_VALUE_CLASS}>{displayValue(f)}</dd>
               <dd>
                 <Button
                   size="sm"
@@ -976,9 +840,7 @@ export default function AccountPage() {
 
   const registrationsBody = (compact: boolean) =>
     registrationsState === 'loading' ? (
-      <p role="status" className="text-sm text-muted-foreground py-3">
-        Loading your applications…
-      </p>
+      <RegistrationsSkeleton />
     ) : registrationsState === 'error' ? (
       <div role="alert" className="text-sm py-3">
         <p className="text-foreground">
@@ -1049,87 +911,65 @@ export default function AccountPage() {
     document.getElementById(`tab-${next.id}`)?.focus();
   };
 
-  const linkClass =
-    'underline underline-offset-3 decoration-border hover:decoration-current';
-
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-background pb-24 transition-colors duration-300">
-        <HeroSplash
-          // In light mode the band is near-white on paper; the hairline gives the tabs an edge to sit on.
-          className="-mt-14 border-b border-border"
-          lightSplash={ACCOUNT_LIGHT_SPLASH}
-        >
-          <div className="relative z-10 max-w-6xl mx-auto px-5 sm:px-8 pt-24 sm:pt-28">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 pb-8">
-              <div className="flex items-center gap-5 min-w-0">
-                <div
-                  aria-hidden
-                  className="size-14 sm:size-16 shrink-0 rounded-full border border-current/15 bg-current/[0.05] grid place-items-center text-lg sm:text-xl font-semibold"
-                >
-                  {initials}
-                </div>
-                <div className="min-w-0">
-                  <h1 className="display-lg break-words">
-                    {justJoined ? `Welcome, ${name}` : name}
-                  </h1>
-                  <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-current/65">
-                    <span className="inline-flex items-center gap-2 text-current font-medium">
-                      {justJoined
-                        ? 'Your account is ready. You’re now a member.'
-                        : isMemberComplete
-                          ? 'Member'
-                          : 'Partner account'}
-                    </span>
-                    <span aria-hidden className="hidden sm:inline">
-                      ·
-                    </span>
-                    <span className="mono-meta [overflow-wrap:anywhere] basis-full sm:basis-auto">
-                      {user?.email}
-                      {memberSince ? ` · since ${memberSince}` : ''}
-                    </span>
-                  </p>
-                </div>
+      <div className={PAGE_CLASS}>
+        <AccountBand
+          avatar={initials}
+          heading={
+            <h1 className={HEADING_CLASS}>
+              {justJoined ? `Welcome, ${name}` : name}
+            </h1>
+          }
+          status={
+            <>
+              <span className="inline-flex items-center gap-2 text-current font-medium">
+                {justJoined
+                  ? 'Your account is ready. You’re now a member.'
+                  : isMemberComplete
+                    ? 'Member'
+                    : 'Partner account'}
+              </span>
+              <span aria-hidden className="hidden sm:inline">
+                ·
+              </span>
+              <span className="mono-meta [overflow-wrap:anywhere] basis-full sm:basis-auto">
+                {user?.email}
+                {memberSince ? ` · since ${memberSince}` : ''}
+              </span>
+            </>
+          }
+          meter={
+            <>
+              <MeterHead count={`${meter.done} / ${meter.total} done`} />
+              <div
+                role="meter"
+                aria-label="Profile completeness"
+                aria-valuemin={0}
+                aria-valuemax={meter.total}
+                aria-valuenow={meter.done}
+                className={METER_CLASS}
+              >
+                {Array.from({ length: meter.total }, (_, i) => (
+                  <span key={i} className={meterSegmentClass(i < meter.done)} />
+                ))}
               </div>
-
-              <div className="w-full md:w-72 shrink-0">
-                <p className="flex items-baseline justify-between mb-2.5 text-current/65">
-                  <span>Profile</span>
-                  <span className="mono-meta text-current">
-                    {meter.done} / {meter.total} done
-                  </span>
-                </p>
-                <div
-                  role="meter"
-                  aria-label="Profile completeness"
-                  aria-valuemin={0}
-                  aria-valuemax={meter.total}
-                  aria-valuenow={meter.done}
-                  className="grid grid-cols-10 gap-1"
+              {meter.missing.length > 0 && (
+                <button
+                  type="button"
+                  onClick={finishProfile}
+                  className="mt-3 text-sm text-left underline underline-offset-3 decoration-current/30 hover:decoration-current cursor-pointer"
                 >
-                  {Array.from({ length: meter.total }, (_, i) => (
-                    <span
-                      key={i}
-                      className={`h-1.5 rounded-[2px] transition-colors duration-300 ${i < meter.done ? 'bg-current' : 'bg-current/15'}`}
-                    />
-                  ))}
-                </div>
-                {meter.missing.length > 0 && (
-                  <button
-                    type="button"
-                    onClick={finishProfile}
-                    className="mt-3 text-sm text-left underline underline-offset-3 decoration-current/30 hover:decoration-current cursor-pointer"
-                  >
-                    Add {listOf(meter.missing.slice(0, 3))}
-                  </button>
-                )}
-              </div>
-            </div>
-
+                  Add {listOf(meter.missing.slice(0, 3))}
+                </button>
+              )}
+            </>
+          }
+          tabs={
             <div
               role="tablist"
               aria-label="Account sections"
-              className="flex sm:gap-1 overflow-x-auto border-t border-current/10 -mx-2 sm:mx-0"
+              className={TABLIST_CLASS}
             >
               {TABS.map((t, i) => (
                 <button
@@ -1145,7 +985,7 @@ export default function AccountPage() {
                   tabIndex={tab === t.id ? 0 : -1}
                   onClick={() => selectTab(t.id)}
                   onKeyDown={(e) => onTabKey(e, i)}
-                  className={`shrink-0 flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 pt-3.5 pb-4 text-sm font-medium border-b-2 transition-colors duration-200 cursor-pointer ${tab === t.id ? 'border-primary text-current' : 'border-transparent text-current/60 hover:text-current'}`}
+                  className={`${tabClass(tab === t.id)} cursor-pointer`}
                 >
                   <span className="sm:hidden">{t.short}</span>
                   <span className="hidden sm:inline">{t.label}</span>
@@ -1153,23 +993,21 @@ export default function AccountPage() {
                 </button>
               ))}
             </div>
-          </div>
-        </HeroSplash>
+          }
+        />
 
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-10">
+        <div className={PANELS_CLASS}>
           {/* Every panel stays mounted (hidden when closed) so the CV and event state behind the tab labels is always known. */}
           <section
             id="panel-profile"
             role="tabpanel"
             aria-labelledby="tab-profile"
             hidden={tab !== 'profile'}
-            className="grid lg:grid-cols-[1fr_20rem] lg:grid-rows-[auto_1fr] gap-x-14 gap-y-12"
+            className={PROFILE_GRID_CLASS}
           >
-            <div className="space-y-10 min-w-0 lg:col-start-1 lg:row-start-1 lg:row-span-2">
+            <div className={PROFILE_MAIN_CLASS}>
               <div>
-                <SectionHeading hint="Your display name is shown publicly, for example on the referral leaderboard.">
-                  About you
-                </SectionHeading>
+                <SectionHeading hint={ABOUT_HINT}>About you</SectionHeading>
                 {rows(ABOUT)}
               </div>
               <div>
@@ -1179,7 +1017,7 @@ export default function AccountPage() {
             </div>
             {/* An invite waiting for an answer comes first on small screens, above the long profile list. */}
             <aside
-              className={`lg:col-start-2 lg:row-start-1 ${invites.length > 0 ? 'order-first lg:order-none' : ''}`}
+              className={`${PROFILE_ASIDE_CLASS} ${invites.length > 0 ? 'order-first lg:order-none' : ''}`}
             >
               <div className="border-t border-foreground pt-4">
                 <SectionHeading>
@@ -1197,30 +1035,8 @@ export default function AccountPage() {
                 )}
               </div>
             </aside>
-            <div className="lg:col-start-2 lg:row-start-2 self-start">
-              <div className="border-t border-foreground pt-4">
-                <SectionHeading>Get involved</SectionHeading>
-                <ul className="text-sm space-y-2.5">
-                  <li>
-                    <a
-                      href={DISCORD_INVITE}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={linkClass}
-                    >
-                      Join our Discord
-                    </a>{' '}
-                    <span className="text-muted-foreground">
-                      to meet other members
-                    </span>
-                  </li>
-                  <li>
-                    <Link href="/events" className={linkClass}>
-                      Browse upcoming events
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+            <div className={PROFILE_AFTER_CLASS}>
+              <GetInvolved />
             </div>
           </section>
 

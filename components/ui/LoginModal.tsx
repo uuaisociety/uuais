@@ -15,7 +15,14 @@ import { signInErrorMessage } from '@/lib/sign-in-error';
 import { ensureAuth } from '@/hooks/useAdmin';
 
 import type { FC } from 'react';
-import Link from 'next/link';
+import {
+  LOGIN_COLUMN_CLASS,
+  LOGIN_PAGE_CLASS,
+  LOGIN_PROVIDERS_CLASS,
+  LoginFooter,
+  LoginHeading,
+  OrSeparator,
+} from '@/components/auth/LoginLayout';
 import { GoogleIcon, GithubIcon } from '@hugeicons/core-free-icons';
 import { HugeiconsIcon } from '@hugeicons/react';
 
@@ -89,17 +96,10 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-xs mx-auto px-4">
-        <div className="flex flex-col items-center justify-center pb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white pb-2">
-            Sign in
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300 text-sm text-center">
-            Use the same method you used when you joined.
-          </p>
-        </div>
-        <div className="space-y-3 gap-1 flex flex-col justify-center">
+    <div className={LOGIN_PAGE_CLASS}>
+      <div className={LOGIN_COLUMN_CLASS}>
+        <LoginHeading />
+        <div className={LOGIN_PROVIDERS_CLASS}>
           <Button
             variant="outline"
             isLoading={pending === 'google'}
@@ -126,14 +126,7 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
                         <span className="flex items-center gap-2"><MicrosoftIcon className="h-4 w-4" /> Continue with Microsoft</span>
                     </Button> */}
         </div>
-        <div
-          role="separator"
-          className="flex items-center gap-3 my-5 text-xs text-muted-foreground"
-        >
-          <span className="h-px flex-1 bg-border" />
-          or
-          <span className="h-px flex-1 bg-border" />
-        </div>
+        <OrSeparator />
         {/* No Google or GitHub account: a one-time link to any email, which returns here. */}
         <EmailLinkSignIn
           label="Email"
@@ -150,20 +143,7 @@ const LoginCard: FC<LoginCardProps> = ({ after }) => {
             {error}
           </p>
         )}
-        <div className="text-center mt-8">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            New here?{' '}
-            <Link href={joinHref} className="underline">
-              Create an account
-            </Link>
-          </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-            <Link href="/privacy" className="underline">
-              Privacy Policy
-            </Link>
-            {/* | <Link href="/terms" className="underline">Terms of Service</Link> */}
-          </p>
-        </div>
+        <LoginFooter joinHref={joinHref} />
       </div>
     </div>
   );

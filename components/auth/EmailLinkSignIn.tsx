@@ -5,6 +5,8 @@ import type { ReactNode } from 'react';
 import type { User } from 'firebase/auth';
 import { Button } from '@/components/ui/Button';
 import { FieldGroup, InputBase } from '@/components/ui/Form';
+import { FieldBox } from '@/components/ui/FieldSkeleton';
+import { SkeletonBox } from '@/components/ui/skeleton';
 
 // Passwordless sign-in: a one-time link to the user's email, which returns to
 // the page it was requested from. Shared by the partner CV page and member login.
@@ -83,6 +85,20 @@ const errorCode = (e: unknown): string | undefined => {
   const code = (e as { code?: unknown })?.code;
   return typeof code === 'string' ? code : undefined;
 };
+
+const EMAIL_LINK_CLASS = 'w-full max-w-xs mx-auto';
+
+/** The idle form while its page loads: the field's label, an empty field and the send button. */
+export const EmailLinkSignInSkeleton = ({ label }: { label: string }) => (
+  <div aria-hidden className={EMAIL_LINK_CLASS}>
+    <div className="space-y-3">
+      <FieldGroup label={label}>
+        <FieldBox />
+      </FieldGroup>
+      <SkeletonBox className="h-10 rounded-md" />
+    </div>
+  </div>
+);
 
 type Step = 'idle' | 'sent' | 'confirm' | 'completing';
 
@@ -227,7 +243,7 @@ export default function EmailLinkSignIn({
 
   return (
     // Centred in a narrow column, like the member login page.
-    <div className="w-full max-w-xs mx-auto">
+    <div className={EMAIL_LINK_CLASS}>
       {step === 'completing' ? (
         <p role="status" className="text-center text-muted-foreground">
           Signing you in…

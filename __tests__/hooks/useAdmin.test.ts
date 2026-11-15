@@ -232,6 +232,29 @@ describe('useAdmin', () => {
     });
   });
 
+  it('keeps the cached profile name for the same user while the profile loads', async () => {
+    window.localStorage.setItem(
+      'uuais.identity',
+      JSON.stringify({
+        uid: 'test-uid',
+        name: 'CachedName',
+        email: 'test@example.com',
+        photoURL: null,
+        isAdmin: false,
+      }),
+    );
+    getIdTokenResult.mockResolvedValue({ claims: {} });
+    getUserProfile.mockReturnValue(new Promise(() => {}));
+    mockAuth.currentUser = mockUser;
+    const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    await act(async () => {
+      void authCallback!(mockUser);
+    });
+    await waitFor(() => expect(result.current.profileLoading).toBe(true));
+    expect(result.current.cached?.name).toBe('CachedName');
+  });
+
   it('lets an eager consumer advance deferred auth once and shares its resolved profile', async () => {
     const scheduled: Array<() => void> = [];
     const { scheduleIdle } = jest.requireMock('@/lib/idle') as {

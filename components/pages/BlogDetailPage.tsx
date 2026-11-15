@@ -1,11 +1,21 @@
-'use client'
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import DOMPurify from 'dompurify';
 import { notFound, useParams } from 'next/navigation';
 import { Card, CardContent, CardMedia } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { ArrowLeft, Calendar, User, Sparkles, ExternalLink, Clock, Bot, ChevronDown, ChevronUp } from 'lucide-react';
+import {
+  ArrowLeft,
+  Calendar,
+  User,
+  Sparkles,
+  ExternalLink,
+  Clock,
+  Bot,
+  ChevronDown,
+  ChevronUp,
+} from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
@@ -16,6 +26,76 @@ import { updatePageMeta } from '@/utils/seo';
 import { postPath } from '@/lib/slugify';
 import { previewImageFor } from '@/lib/blog-preview';
 import BlogReactions from '@/components/blog/BlogReactions';
+import { TagBar } from '@/components/ui/TagBar';
+import {
+  SkeletonBox,
+  SkeletonRegion,
+  SkeletonText,
+} from '@/components/ui/skeleton';
+
+// ------------------------------------------------------------------ shared with the skeleton
+
+const PAGE_CLASS = 'min-h-screen bg-background pt-24 pb-24';
+const COLUMN_CLASS = 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8';
+const TITLE_CLASS = 'text-4xl font-bold text-foreground mb-4';
+const META_CLASS =
+  'flex flex-wrap items-center gap-x-5 gap-y-2 text-muted-foreground mb-6';
+const TAGS_CLASS = 'flex flex-wrap gap-2 mb-6';
+const EXCERPT_CLASS = 'text-xl text-muted-foreground leading-relaxed';
+const IMAGE_CLASS = 'w-full h-64 sm:h-80 md:h-96 rounded-xl';
+const PROSE_CLASS =
+  'prose prose-lg max-w-xl mx-auto dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-li:text-muted-foreground prose-blockquote:text-muted-foreground';
+
+const BackToBlog = () => (
+  <Link href="/blog">
+    <Button variant="outline" className="min-h-11 mb-8" icon={ArrowLeft}>
+      Back to Blog
+    </Button>
+  </Link>
+);
+
+const MetaBar = ({
+  icon: Icon,
+  width,
+}: {
+  icon: typeof User;
+  width: string;
+}) => (
+  <span className="inline-flex items-center gap-2">
+    <Icon className="w-4 h-4" aria-hidden />
+    <SkeletonText className="mono-meta" widths={[width]} />
+  </span>
+);
+
+/** An article while the posts load: the real back link, then the header, image and body as placeholders. */
+export const BlogDetailSkeleton = () => (
+  <SkeletonRegion label="Loading article…" className={PAGE_CLASS}>
+    <div className={COLUMN_CLASS}>
+      <BackToBlog />
+      <div className="mb-8">
+        <SkeletonText className={TITLE_CLASS} lines={2} />
+        <div className={META_CLASS}>
+          <MetaBar icon={User} width="6rem" />
+          <MetaBar icon={Calendar} width="8rem" />
+          <MetaBar icon={Clock} width="5rem" />
+        </div>
+        <div className={TAGS_CLASS}>
+          <TagBar size="md" />
+          <TagBar size="md" />
+        </div>
+        <SkeletonText className={EXCERPT_CLASS} lines={2} />
+      </div>
+      <div className="mb-8">
+        <SkeletonBox className={IMAGE_CLASS} />
+      </div>
+      <Card className="h-full pt-4" aria-hidden>
+        <CardContent className="p-8">
+          <SkeletonText className={PROSE_CLASS} lines={8} />
+        </CardContent>
+      </Card>
+    </div>
+  </SkeletonRegion>
+);
 
 interface BlogDetailPageProps {
   /** Firestore id or slug of the post. Falls back to the route param. */
@@ -28,7 +108,9 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
   const { state } = useApp();
   const [showReasoning, setShowReasoning] = useState(false);
 
-  const blogPost = state.blogPosts.find(post => post.slug === blogId || post.id === blogId);
+  const blogPost = state.blogPosts.find(
+    (post) => post.slug === blogId || post.id === blogId,
+  );
 
   // Set dynamic page title based on blog post
   useEffect(() => {
@@ -45,18 +127,7 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
   }, [blogPost]);
 
   if (!state.blogPostsLoaded) {
-    return (
-      <div className="min-h-screen bg-background pt-24 py-12">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="animate-pulse space-y-6">
-            <div className="h-8 bg-foreground/10 rounded w-2/3" />
-            <div className="h-64 bg-foreground/10 rounded" />
-            <div className="h-4 bg-foreground/10 rounded w-3/4" />
-            <div className="h-4 bg-foreground/10 rounded w-1/2" />
-          </div>
-        </div>
-      </div>
-    );
+    return <BlogDetailSkeleton />;
   }
 
   if (!blogPost) {
@@ -65,14 +136,24 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
 
   const relatedEventIds = blogPost.relatedEventIds;
   const relatedEvents = relatedEventIds
-    ? state.events.filter(event => relatedEventIds.includes(event.id))
+    ? state.events.filter((event) => relatedEventIds.includes(event.id))
     : [];
-  const readingMinutes = Math.max(1, Math.round(blogPost.content.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length / 220));
+  const readingMinutes = Math.max(
+    1,
+    Math.round(
+      blogPost.content
+        .replace(/<[^>]+>/g, ' ')
+        .split(/\s+/)
+        .filter(Boolean).length / 220,
+    ),
+  );
 
   const relatedPosts = state.blogPosts
-    .filter(post => post.id !== blogPost.id && post.published)
-    .map(post => {
-      const overlap = (post.tags || []).filter(tag => (blogPost.tags || []).includes(tag)).length;
+    .filter((post) => post.id !== blogPost.id && post.published)
+    .map((post) => {
+      const overlap = (post.tags || []).filter((tag) =>
+        (blogPost.tags || []).includes(tag),
+      ).length;
       const sameStream = post.authorType === blogPost.authorType ? 1 : 0;
       return { post, overlap, sameStream };
     })
@@ -81,7 +162,7 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
       if (a.sameStream !== b.sameStream) return b.sameStream - a.sameStream;
       return new Date(b.post.date).getTime() - new Date(a.post.date).getTime();
     })
-    .map(entry => entry.post)
+    .map((entry) => entry.post)
     .slice(0, 2);
 
   // reviewerName falls back to the account email, so strip anything after @
@@ -95,29 +176,25 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
       .replace(/\.+/g, '.');
 
   return (
-    <div className="min-h-screen bg-background pt-24 pb-24">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className={PAGE_CLASS}>
+      <div className={COLUMN_CLASS}>
         {/* Back Button */}
-        <Link href="/blog">
-          <Button variant="outline" className="min-h-11 mb-8" icon={ArrowLeft}>
-            Back to Blog
-          </Button>
-        </Link>
+        <BackToBlog />
 
         {/* Blog Post Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
-            {blogPost.title}
-          </h1>
+          <h1 className={TITLE_CLASS}>{blogPost.title}</h1>
 
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-muted-foreground mb-6">
+          <div className={META_CLASS}>
             <span className="inline-flex items-center gap-2">
               <User className="w-4 h-4" aria-hidden />
               <span className="mono-meta">{blogPost.author}</span>
             </span>
             <span className="inline-flex items-center gap-2">
               <Calendar className="w-4 h-4" aria-hidden />
-              <span className="mono-meta">{format(new Date(blogPost.date), 'MMMM dd, yyyy')}</span>
+              <span className="mono-meta">
+                {format(new Date(blogPost.date), 'MMMM dd, yyyy')}
+              </span>
             </span>
             <span className="inline-flex items-center gap-2">
               <Clock className="w-4 h-4" aria-hidden />
@@ -132,8 +209,9 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
           </div>
 
           {/* Tags */}
-          {(blogPost.authorType === 'ai' || (blogPost.tags && blogPost.tags.length > 0)) && (
-            <div className="flex flex-wrap gap-2 mb-6">
+          {(blogPost.authorType === 'ai' ||
+            (blogPost.tags && blogPost.tags.length > 0)) && (
+            <div className={TAGS_CLASS}>
               {blogPost.authorType === 'ai' && (
                 <Tag variant="blue" size="md">
                   <Sparkles className="h-3 w-3 mr-1" />
@@ -141,7 +219,9 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
                 </Tag>
               )}
               {blogPost.authorType === 'ai' && (
-                <Tag variant="green" size="md">Beta</Tag>
+                <Tag variant="green" size="md">
+                  Beta
+                </Tag>
               )}
               {blogPost.tags.map((tag, index) => (
                 <Link
@@ -150,16 +230,16 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
                   className="inline-block rounded-sm hover:opacity-75 active:scale-95 transition-all duration-150 cursor-pointer"
                   aria-label={`Filter articles by tag ${tag}`}
                 >
-                  <Tag variant="red" size="md">{tag}</Tag>
+                  <Tag variant="red" size="md">
+                    {tag}
+                  </Tag>
                 </Link>
               ))}
             </div>
           )}
 
           {/* Excerpt */}
-          <p className="text-xl text-muted-foreground leading-relaxed">
-            {blogPost.excerpt}
-          </p>
+          <p className={EXCERPT_CLASS}>{blogPost.excerpt}</p>
 
           {blogPost.authorType === 'ai' && (
             <div className="border border-primary/15 bg-primary/[0.04] text-muted-foreground px-4 py-3 rounded-lg flex items-start gap-3 mt-6">
@@ -175,7 +255,8 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
                   </a>
                 ) : (
                   'the UUAIS team'
-                )}.
+                )}
+                .
               </p>
             </div>
           )}
@@ -189,7 +270,7 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
             width={800}
             height={400}
             priority
-            className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-xl shadow-lg"
+            className={`${IMAGE_CLASS} object-cover shadow-lg`}
           />
         </div>
 
@@ -197,8 +278,10 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
         <Card className="h-full pt-4">
           <CardContent className="p-8">
             <div
-              className="prose prose-lg max-w-xl mx-auto dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-li:text-muted-foreground prose-blockquote:text-muted-foreground"
-              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogPost.content) }}
+              className={PROSE_CLASS}
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(blogPost.content),
+              }}
             />
           </CardContent>
         </Card>
@@ -214,9 +297,7 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
         {/* Sources */}
         {blogPost.sources && blogPost.sources.length > 0 && (
           <div className="mt-12">
-            <h2 className="display-md text-foreground mb-6">
-              Sources
-            </h2>
+            <h2 className="display-md text-foreground mb-6">Sources</h2>
             <ul className="space-y-3">
               {blogPost.sources.map((source, index) => (
                 <li key={index}>
@@ -242,14 +323,15 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
               variant="outline"
               className="min-h-11"
               icon={showReasoning ? ChevronUp : ChevronDown}
-              onClick={() => setShowReasoning(v => !v)}
+              onClick={() => setShowReasoning((v) => !v)}
             >
               {showReasoning ? 'Hide' : 'View'} full reasoning trace
             </Button>
             {showReasoning && (
               <div className="mt-4 rounded-lg border border-border bg-foreground/[0.03] p-4">
                 <p className="text-xs text-muted-foreground mb-3">
-                  The raw reasoning the AI News Desk model produced while writing this article.
+                  The raw reasoning the AI News Desk model produced while
+                  writing this article.
                 </p>
                 <pre className="whitespace-pre-wrap font-mono text-xs text-muted-foreground leading-relaxed max-h-96 overflow-y-auto">
                   {blogPost.reasoningTrace}
@@ -262,9 +344,7 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
         {/* Related Events */}
         {relatedEvents.length > 0 && (
           <div className="mt-12">
-            <h2 className="display-md text-foreground mb-6">
-              Related Events
-            </h2>
+            <h2 className="display-md text-foreground mb-6">Related Events</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {relatedEvents.map((event) => (
                 <Link key={event.id} href={`/events/${event.id}`}>
@@ -292,11 +372,9 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <div className="mt-12">
-          <h2 className="display-md text-foreground mb-6">
-            Related Posts
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {relatedPosts.map((post) => (
+            <h2 className="display-md text-foreground mb-6">Related Posts</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {relatedPosts.map((post) => (
                 <Card key={post.id} variant="glass" className="h-full">
                   <CardContent className="p-6">
                     {post.image && (
@@ -321,8 +399,8 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ postId }) => {
                   </CardContent>
                 </Card>
               ))}
+            </div>
           </div>
-        </div>
         )}
       </div>
     </div>

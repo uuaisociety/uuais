@@ -15,6 +15,11 @@ import {
 import { Button } from '@/components/ui/Button';
 import Tag from '@/components/ui/Tag';
 import StyledSelect from '@/components/ui/StyledSelect';
+import {
+  SkeletonBox,
+  SkeletonRegion,
+  SkeletonText,
+} from '@/components/ui/skeleton';
 import type {
   TeamDirectoryMetadata,
   TeamDirectoryYear,
@@ -30,6 +35,54 @@ interface TeamTabsSectionProps {
   onSelectionChange?: (team: TeamCategory, year: TeamDirectoryYear) => void;
   onRetry?: () => void;
 }
+
+// Shared by the member cards and their loading placeholders.
+const TEAM_GRID = 'grid sm:grid-cols-2 lg:grid-cols-3 gap-5';
+const TEAM_CARD = 'p-6 flex flex-col';
+const TEAM_CARD_HEAD = 'flex items-start gap-4 mb-4';
+
+const TeamCardSkeleton = () => (
+  <Card variant="glass" className={TEAM_CARD} aria-hidden>
+    <div className={TEAM_CARD_HEAD}>
+      <SkeletonBox className="w-16 h-16 rounded-full shrink-0" />
+      <div className="min-w-0 flex-1">
+        <SkeletonText className="text-[1.0625rem]" widths={['65%']} />
+        <SkeletonText className="text-sm mt-0.5" widths={['45%']} />
+      </div>
+    </div>
+    <SkeletonText className="text-sm leading-relaxed mb-5" lines={2} />
+    <SkeletonBox className="size-9 rounded-sm mt-auto" />
+  </Card>
+);
+
+const TeamCardsSkeleton = () => (
+  <div aria-hidden className={TEAM_GRID}>
+    <TeamCardSkeleton />
+    <TeamCardSkeleton />
+    <TeamCardSkeleton />
+  </div>
+);
+
+/** The member grid while profiles load. */
+export const TeamGridSkeleton = () => (
+  <SkeletonRegion label="Loading team profiles...">
+    <TeamCardsSkeleton />
+  </SkeletonRegion>
+);
+
+/** The whole section before anything is known (inside a page skeleton, which announces the load): the team tabs row, then the grid. */
+export const TeamSectionSkeleton = () => (
+  <div aria-hidden>
+    <div className="mb-10">
+      <div className="flex gap-2 p-1">
+        {['w-24', 'w-32', 'w-28'].map((w) => (
+          <SkeletonBox key={w} className={`h-10 rounded-md ${w}`} />
+        ))}
+      </div>
+    </div>
+    <TeamCardsSkeleton />
+  </div>
+);
 
 const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({
   members,
@@ -227,17 +280,12 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({
 
       {/* Team member grid */}
       {loading && activeMembers.length === 0 ? (
-        <p
-          className="border-t border-border py-16 text-center mono-meta text-muted-foreground"
-          role="status"
-        >
-          Loading team profiles...
-        </p>
+        <TeamGridSkeleton />
       ) : activeMembers.length > 0 ? (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className={TEAM_GRID}>
           {activeMembers.map((member) => (
-            <Card key={member.id} variant="glass" className="p-6 flex flex-col">
-              <div className="flex items-start gap-4 mb-4">
+            <Card key={member.id} variant="glass" className={TEAM_CARD}>
+              <div className={TEAM_CARD_HEAD}>
                 <Image
                   src={member.image || placeholderImage}
                   alt=""

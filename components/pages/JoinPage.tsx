@@ -11,6 +11,22 @@ import { FieldGroup, InputBase, SelectBase } from '@/components/ui/Form';
 import { useNotify } from '@/components/ui/Notifications';
 import { DiscordCta } from '@/components/common/DiscordCta';
 import EmailLinkSignIn from '@/components/auth/EmailLinkSignIn';
+import { SkeletonRegion } from '@/components/ui/skeleton';
+import {
+  CreateAccountHeader,
+  DetailsHeader,
+  DetailsStepSkeleton,
+  EMAIL_LABEL,
+  JOIN_COLUMN_CLASS,
+  JOIN_LABELS,
+  JOIN_PAGE_CLASS,
+  JoinIntro,
+  JoinOrSeparator,
+  NEWSLETTER_CONSENT,
+  PrivacyConsent,
+  SIGN_IN_CONTENT_CLASS,
+  SIGN_IN_PROVIDERS_CLASS,
+} from '@/components/pages/JoinLayout';
 import { updatePageMeta } from '@/utils/seo';
 import {
   ensureAuth,
@@ -300,42 +316,20 @@ const JoinPage: React.FC = () => {
   const redirect = currentRedirect();
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-24 pb-12 dark:[color-scheme:dark]">
-      <div className="max-w-xl mx-auto px-4 space-y-8">
-        <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">
-            Join UU AI Society
-          </h1>
-          <p className="text-gray-600 dark:text-gray-300">
-            Free membership for anyone interested in AI. It takes about a
-            minute.
-          </p>
-        </div>
+    <div className={JOIN_PAGE_CLASS}>
+      <div className={JOIN_COLUMN_CLASS}>
+        <JoinIntro />
 
         {!uid && loading && cached ? (
           // A returning visitor: their session is still being restored.
-          <p
-            role="status"
-            className="text-center text-gray-600 dark:text-gray-300"
-          >
-            Checking your account…
-          </p>
+          <SkeletonRegion label="Checking your account…">
+            <DetailsStepSkeleton email={cached.email} />
+          </SkeletonRegion>
         ) : !uid ? (
           <Card>
-            <CardHeader>
-              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Step 1 of 2
-              </p>
-              <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                Create your account
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">
-                Choose how you want to sign in. Already a member? Sign in the
-                same way and we&apos;ll take you to your account.
-              </p>
-            </CardHeader>
-            <CardContent className="flex flex-col items-center gap-3 pt-4">
-              <div className="flex w-full max-w-xs flex-col gap-3">
+            <CreateAccountHeader />
+            <CardContent className={SIGN_IN_CONTENT_CLASS}>
+              <div className={SIGN_IN_PROVIDERS_CLASS}>
                 <Button
                   variant="outline"
                   isLoading={pendingProvider === 'google'}
@@ -371,17 +365,10 @@ const JoinPage: React.FC = () => {
                   {signInError}
                 </p>
               )}
-              <div
-                role="separator"
-                className="flex items-center gap-3 my-3 w-full max-w-xs text-xs text-muted-foreground"
-              >
-                <span className="h-px flex-1 bg-border" />
-                or
-                <span className="h-px flex-1 bg-border" />
-              </div>
+              <JoinOrSeparator />
               {/* The link returns here; the shared auth store then shows the details step. */}
               <EmailLinkSignIn
-                label="Email (any address, e.g. your student email)"
+                label={EMAIL_LABEL}
                 placeholder="you@example.com"
                 contactEmail="contact@uuais.com"
                 alternative="continue with Google or GitHub"
@@ -390,12 +377,9 @@ const JoinPage: React.FC = () => {
             </CardContent>
           </Card>
         ) : profileLoading ? (
-          <p
-            role="status"
-            className="text-center text-gray-600 dark:text-gray-300"
-          >
-            Loading your account…
-          </p>
+          <SkeletonRegion label="Loading your account…">
+            <DetailsStepSkeleton email={user?.email} />
+          </SkeletonRegion>
         ) : profileError ? (
           <Card>
             <CardContent className="space-y-3 pt-6 text-center">
@@ -439,26 +423,14 @@ const JoinPage: React.FC = () => {
           </Card>
         ) : (
           <Card>
-            <CardHeader>
-              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Step 2 of 2
-              </p>
-              <h2
-                ref={formHeadingRef}
-                tabIndex={-1}
-                className="text-2xl font-semibold text-gray-900 dark:text-white outline-none"
-              >
-                A few details about you
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 text-sm">
-                Signed in as {user?.email}. You can add more (LinkedIn, CV, bio)
-                later in your account.
-              </p>
-            </CardHeader>
+            <DetailsHeader email={user?.email} headingRef={formHeadingRef} />
             <CardContent>
               <form onSubmit={handleCreate} noValidate className="space-y-5">
                 <div>
-                  <FieldGroup label="Your name" requiredHint="Required">
+                  <FieldGroup
+                    label={JOIN_LABELS.name[0]}
+                    requiredHint={JOIN_LABELS.name[1]}
+                  >
                     <InputBase
                       ref={nameRef}
                       maxLength={100}
@@ -486,7 +458,7 @@ const JoinPage: React.FC = () => {
                   )}
                 </div>
 
-                <FieldGroup label="I am a">
+                <FieldGroup label={JOIN_LABELS.status[0]}>
                   <SelectBase
                     value={draft.studentStatus}
                     onChange={(e) =>
@@ -502,7 +474,10 @@ const JoinPage: React.FC = () => {
                 </FieldGroup>
 
                 {draft.studentStatus === 'student' && (
-                  <FieldGroup label="Programme / major" requiredHint="Optional">
+                  <FieldGroup
+                    label={JOIN_LABELS.program[0]}
+                    requiredHint={JOIN_LABELS.program[1]}
+                  >
                     <InputBase
                       // The Firestore rules cap this at 150 characters.
                       maxLength={150}
@@ -514,8 +489,8 @@ const JoinPage: React.FC = () => {
                 )}
 
                 <FieldGroup
-                  label="How did you hear about us?"
-                  requiredHint="Optional"
+                  label={JOIN_LABELS.heard[0]}
+                  requiredHint={JOIN_LABELS.heard[1]}
                 >
                   <SelectBase
                     value={draft.heardSource}
@@ -558,7 +533,7 @@ const JoinPage: React.FC = () => {
                       checked={draft.newsletter}
                       onChange={(e) => update({ newsletter: e.target.checked })}
                     />
-                    <span>Email me the newsletter about events and news</span>
+                    <span>{NEWSLETTER_CONSENT}</span>
                   </label>
                   <div>
                     <label className="flex items-start gap-2 text-gray-800 dark:text-gray-200">
@@ -579,20 +554,7 @@ const JoinPage: React.FC = () => {
                             setErrors((x) => ({ ...x, privacy: undefined }));
                         }}
                       />
-                      <span>
-                        I accept the{' '}
-                        <a
-                          className="underline"
-                          href="/privacy"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          privacy policy
-                        </a>{' '}
-                        <span className="text-muted-foreground">
-                          (required)
-                        </span>
-                      </span>
+                      <PrivacyConsent />
                     </label>
                     {errors.privacy && (
                       <p
