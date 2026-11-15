@@ -15,6 +15,12 @@ import {
 import { Button } from '@/components/ui/Button';
 import Tag from '@/components/ui/Tag';
 import StyledSelect from '@/components/ui/StyledSelect';
+import {
+  TEAM_CARD,
+  TEAM_CARD_HEAD,
+  TEAM_GRID,
+  TeamGridSkeleton,
+} from '@/components/team/TeamLayout';
 import type {
   TeamDirectoryMetadata,
   TeamDirectoryYear,
@@ -227,17 +233,12 @@ const TeamTabsSection: React.FC<TeamTabsSectionProps> = ({
 
       {/* Team member grid */}
       {loading && activeMembers.length === 0 ? (
-        <p
-          className="border-t border-border py-16 text-center mono-meta text-muted-foreground"
-          role="status"
-        >
-          Loading team profiles...
-        </p>
+        <TeamGridSkeleton />
       ) : activeMembers.length > 0 ? (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className={TEAM_GRID}>
           {activeMembers.map((member) => (
-            <Card key={member.id} variant="glass" className="p-6 flex flex-col">
-              <div className="flex items-start gap-4 mb-4">
+            <Card key={member.id} variant="glass" className={TEAM_CARD}>
+              <div className={TEAM_CARD_HEAD}>
                 <Image
                   src={member.image || placeholderImage}
                   alt=""

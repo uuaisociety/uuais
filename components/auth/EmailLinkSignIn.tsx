@@ -1,20 +1,30 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { ReactNode } from 'react';
 import type { User } from 'firebase/auth';
 import { Button } from '@/components/ui/Button';
 import { FieldGroup, InputBase } from '@/components/ui/Form';
-import {
-  emailLinkCooldownSeconds,
-  isEmailSignInLink,
-  sendEmailSignInLink,
-  signInWithEmailLinkAfterReady,
-  storedEmailForSignIn,
-} from '@/lib/firebase-client';
+import { FieldBox } from '@/components/ui/FieldSkeleton';
+import { SkeletonBox } from '@/components/ui/skeleton';
 
 // Passwordless sign-in: a one-time link to the user's email, which returns to
 // the page it was requested from. Shared by the partner CV page and member login.
+
+// The Firebase SDK loads on first use, so the email field renders with the page
+// instead of waiting for the SDK on a slow connection.
+const firebase = () => import('@/lib/firebase-client');
+
+// False in the server render and until hydration. The form is visible before
+// React attaches its handlers on a slow connection; submitting it then would
+// reload the page natively and drop the typed address.
+const noSubscribe = () => () => {};
+const useHydrated = () =>
+  useSyncExternalStore(
+    noSubscribe,
+    () => true,
+    () => false,
+  );
 
 // The custom sender set for sign-in emails under Firebase Authentication → Templates.
 const SENDER = 'noreply@uuais.com';
@@ -67,12 +77,28 @@ const errorMessages = (
     'Too many sign-in attempts. Please wait a few minutes and try again.',
   'auth/quota-exceeded':
     'Too many sign-in emails were sent today. Please try again tomorrow.',
+  'auth/network-request-failed':
+    'We couldn’t reach the sign-in service. Check your connection and try again.',
 });
 
 const errorCode = (e: unknown): string | undefined => {
   const code = (e as { code?: unknown })?.code;
   return typeof code === 'string' ? code : undefined;
 };
+
+const EMAIL_LINK_CLASS = 'w-full max-w-xs mx-auto';
+
+/** The idle form while its page loads: the field's label, an empty field and the send button. */
+export const EmailLinkSignInSkeleton = ({ label }: { label: string }) => (
+  <div aria-hidden className={EMAIL_LINK_CLASS}>
+    <div className="space-y-3">
+      <FieldGroup label={label}>
+        <FieldBox />
+      </FieldGroup>
+      <SkeletonBox className="h-10 rounded-md" />
+    </div>
+  </div>
+);
 
 type Step = 'idle' | 'sent' | 'confirm' | 'completing';
 
@@ -108,6 +134,13 @@ export default function EmailLinkSignIn({
   // A link is single-use: a second attempt (React re-running effects in dev)
   // would fail with invalid-action-code after the first one signed in.
   const linkHandled = useRef(false);
+  // Move focus to "Check your inbox" so keyboard and screen-reader users hear the step change.
+  const sentRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const hydrated = useHydrated();
+  useEffect(() => {
+    if (step === 'sent') sentRef.current?.focus();
+  }, [step]);
 
   const ERRORS = errorMessages(contactEmail, alternative);
   const errorMessage = (e: unknown): string =>
@@ -117,6 +150,7 @@ export default function EmailLinkSignIn({
     setStep('completing');
     setError(null);
     try {
+      const { signInWithEmailLinkAfterReady } = await firebase();
       const user = await signInWithEmailLinkAfterReady(address, href);
       // Drop the spent link from the URL, keeping the page's own query.
       window.history.replaceState(null, '', pageUrl());
@@ -141,13 +175,29 @@ export default function EmailLinkSignIn({
   // forwarded link can't sign someone else in.
   useEffect(() => {
     const href = window.location.href;
-    if (linkHandled.current || !isEmailSignInLink(href)) return;
+    // Only a link carries a one-time code; skip loading the SDK on ordinary visits.
+    if (linkHandled.current || !new URL(href).searchParams.has('oobCode'))
+      return;
     linkHandled.current = true;
-    const stored = storedEmailForSignIn();
-    /* eslint-disable react-hooks/set-state-in-effect */
-    if (stored) void complete(stored, href);
-    else setStep('confirm');
-    /* eslint-enable react-hooks/set-state-in-effect */
+    setStep('completing');
+    firebase().then(
+      ({ isEmailSignInLink, storedEmailForSignIn }) => {
+        if (!isEmailSignInLink(href)) {
+          setStep('idle');
+          return;
+        }
+        const stored = storedEmailForSignIn();
+        if (stored) void complete(stored, href);
+        else setStep('confirm');
+      },
+      (err: unknown) => {
+        // The SDK chunk didn't load (bad connection). The link is still good:
+        // confirming the email retries the sign-in.
+        console.error('Loading sign-in failed:', err);
+        setError(ERRORS['auth/network-request-failed']);
+        setStep('confirm');
+      },
+    );
     // Runs once on landing; `complete` closes over nothing that changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -161,15 +211,18 @@ export default function EmailLinkSignIn({
       await complete(address, window.location.href);
       return;
     }
-    const wait = emailLinkCooldownSeconds();
-    if (wait > 0) {
-      setError(
-        `A sign-in link was just sent. Please wait ${wait} seconds before requesting another.`,
-      );
-      return;
-    }
     setSending(true);
+    let sent = false;
     try {
+      const { emailLinkCooldownSeconds, sendEmailSignInLink } =
+        await firebase();
+      const wait = emailLinkCooldownSeconds();
+      if (wait > 0) {
+        setError(
+          `A sign-in link was just sent. Please wait ${wait} seconds before requesting another.`,
+        );
+        return;
+      }
       // Refused addresses get no email at all, just the not-allowed message.
       if (allowed && !(await allowed(address))) {
         setNotFound(true);
@@ -180,6 +233,7 @@ export default function EmailLinkSignIn({
         `${window.location.origin}${pageUrl()}`,
       );
       setStep('sent');
+      sent = true;
     } catch (err) {
       setError(
         errorCode(err)
@@ -191,18 +245,25 @@ export default function EmailLinkSignIn({
       console.error('Sending sign-in link failed:', err);
     } finally {
       setSending(false);
+      // The busy button lost focus; put it back on the field next to the message.
+      if (!sent) inputRef.current?.focus();
     }
   };
 
   return (
     // Centred in a narrow column, like the member login page.
-    <div className="w-full max-w-xs mx-auto">
+    <div className={EMAIL_LINK_CLASS}>
       {step === 'completing' ? (
         <p role="status" className="text-center text-muted-foreground">
           Signing you in…
         </p>
       ) : step === 'sent' ? (
-        <div role="status" className="text-center">
+        <div
+          role="status"
+          ref={sentRef}
+          tabIndex={-1}
+          className="text-center outline-none"
+        >
           <p className="font-medium text-foreground">Check your inbox</p>
           <p className="text-muted-foreground mt-1 leading-relaxed">
             We sent a sign-in link to {email.trim()}. It works once and expires
@@ -228,8 +289,14 @@ export default function EmailLinkSignIn({
               email it was sent to, to finish signing in.
             </p>
           )}
-          <FieldGroup label={label}>
+          <FieldGroup
+            label={
+              step === 'confirm' ? 'Email address the link was sent to' : label
+            }
+          >
             <InputBase
+              ref={inputRef}
+              disabled={!hydrated}
               type="email"
               required
               autoComplete="email"
@@ -238,7 +305,12 @@ export default function EmailLinkSignIn({
               onChange={(e) => setEmail(e.target.value)}
             />
           </FieldGroup>
-          <Button type="submit" variant="ctaSoft" fullWidth isLoading={sending}>
+          <Button
+            type="submit"
+            variant="ctaSoft"
+            fullWidth
+            isLoading={sending || !hydrated}
+          >
             {step === 'confirm' ? 'Sign in' : 'Email me a sign-in link'}
           </Button>
         </form>

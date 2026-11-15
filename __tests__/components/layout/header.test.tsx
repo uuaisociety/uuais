@@ -132,8 +132,8 @@ describe('Header', () => {
 
     it('renders register and login links when not authenticated', () => {
       render(<Header />);
-      expect(screen.getAllByText('Register').length).toBe(2);
-      expect(screen.getAllByText('Login').length).toBe(2);
+      expect(screen.getAllByText('Join').length).toBe(2);
+      expect(screen.getAllByText('Sign in').length).toBe(2);
     });
 
     it('always renders the logo and wordmark', () => {
@@ -319,7 +319,7 @@ describe('Header', () => {
       accountLinks.forEach((link) =>
         expect(link).toHaveAttribute('href', '/account'),
       );
-      expect(screen.getAllByText('Logout').length).toBe(2);
+      expect(screen.getAllByText('Sign out').length).toBe(2);
     });
 
     it('does not show Admin link for non-admin users', () => {
@@ -367,7 +367,7 @@ describe('Header', () => {
       accountLinks.forEach((link) =>
         expect(link).toHaveAttribute('href', '/account'),
       );
-      expect(screen.getAllByText('Logout').length).toBe(2);
+      expect(screen.getAllByText('Sign out').length).toBe(2);
     });
   });
 
@@ -428,7 +428,7 @@ describe('Header', () => {
 
     it('calls logout function when Logout button is clicked', () => {
       render(<Header />);
-      const logoutButton = screen.getAllByText('Logout')[0];
+      const logoutButton = screen.getAllByText('Sign out')[0];
       fireEvent.click(logoutButton);
       expect(mockLogout).toHaveBeenCalledTimes(1);
     });

@@ -14,10 +14,10 @@
       "destructive": { "role": "primary", "displayName": "Destructive Red", "canonical": "oklch(0.565 0.208 27.5)", "tonalRamp": ["oklch(0.16 0.12 27.5)", "oklch(0.25 0.15 27.5)", "oklch(0.34 0.18 27.5)", "oklch(0.43 0.19 27.5)", "oklch(0.565 0.208 27.5)", "oklch(0.66 0.17 27.5)", "oklch(0.78 0.12 27.5)", "oklch(0.92 0.05 27.5)"] }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Hero headlines only, on the dark ink slab." },
+      "display": { "displayName": "Display", "purpose": "Hero headlines only, on the hero band (ink in dark mode, paper in light mode)." },
       "headline": { "displayName": "Headline", "purpose": "Section opens and page titles on light surfaces." },
       "title": { "displayName": "Title", "purpose": "Card titles and list headings." },
-      "body": { "displayName": "Body", "purpose": "Reading text; muted ink on light, white/60 on ink slabs." },
+      "body": { "displayName": "Body", "purpose": "Reading text; muted ink on light, current/60 on the hero band." },
       "label": { "displayName": "Label / Mono", "purpose": "Eyebrows, metadata, pills, timestamps, form hints — anything that is data, not prose." }
     },
     "shadows": [
@@ -98,13 +98,13 @@
   ],
   "narrative": {
     "northStar": "The Frosted Society Notebook",
-    "overview": "The site reads as a student society's editorial notebook pressed under frosted glass — tight display headings and mono metadata floating above soft ambient colour, with every surface a translucent pane that picks up the light behind it. It is warm, precise, and quietly confident: the paper is never pure white, the red is never a hard alert, and the ink is slightly cool where it types and slightly warm where it slabs. Light mode is a warm paper page with near-white glass cards; dark mode is a cool ink page with darker glass. The hero and navigation stay a deep warm ink in both themes so the landing reads as one continuous slab. Density is editorial — generous section spacing, hairline borders, and one accent colour used sparingly. The system deliberately avoids gradients, glows, and card-bloat: depth comes from blur, specular hairlines, and soft lifted shadows, not from filling surfaces with colour.",
+    "overview": "The site reads as a student society's editorial notebook pressed under frosted glass — tight display headings and mono metadata floating above soft ambient colour, with every surface a translucent pane that picks up the light behind it. It is warm, precise, and quietly confident: the paper is never pure white, the red is never a hard alert, and the ink is slightly cool where it types and slightly warm where it slabs. Light mode is a warm paper page with near-white glass cards; dark mode is a cool ink page with darker glass. The hero band (the shared HeroSplash) and the navigation follow the theme: a deep warm ink slab with a red interior glow in dark mode, white card paper with a soft splash in light mode. Density is editorial — generous section spacing, hairline borders, and one accent colour used sparingly. The system deliberately avoids gradients, glows, and card-bloat: depth comes from blur, specular hairlines, and soft lifted shadows, not from filling surfaces with colour.",
     "keyCharacteristics": [
       "Warm paper / cool ink neutrals, one deepened brand red",
       "Liquid-glass surfaces: translucent fill + backdrop-filter blur + specular top edge + soft shadow",
       "Editorial typography: tight Instrument Sans display, Martian Mono for metadata/pills",
       "The (parenthetical) accent word — red, inline, the signature flourish",
-      "Dark ink hero + nav slab in both themes",
+      "Theme-aware hero + nav band: warm ink in dark mode, white paper in light mode",
       "No gradients, no glow, motion is springy-but-not-bouncy (--ease-ios)"
     ],
     "rules": [
@@ -125,7 +125,7 @@
     ],
     "donts": [
       "Don't reintroduce hard-coded #990000-style reds, raw oklch(...) literals, or the legacy bg-gray-50 dark:bg-gray-900 page wrappers — remap them to tokens.",
-      "Don't use red/gradient hero backgrounds (from-red-600 via-red-700 to-red-800). Heroes are dark ink slabs with an interior radial glow, or nothing.",
+      "Don't use red/gradient hero backgrounds (from-red-600 via-red-700 to-red-800). Heroes use the shared HeroSplash band (ink with an interior glow in dark mode, paper with a soft splash in light mode), or nothing.",
       "Don't use border-l-4 side-tab accents, bounce/elastic easing, or gradient text — all rejected.",
       "Don't add a second text colour (blue links etc.) or place grey text on the red accent; on colour, use the surface's own ink or near-white.",
       "Don't paint a solid opaque panel for the mobile menu — it inherits the header's glass so it blurs what's behind it.",

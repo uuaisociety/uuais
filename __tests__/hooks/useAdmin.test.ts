@@ -232,6 +232,29 @@ describe('useAdmin', () => {
     });
   });
 
+  it('keeps the cached profile name for the same user while the profile loads', async () => {
+    window.localStorage.setItem(
+      'uuais.identity',
+      JSON.stringify({
+        uid: 'test-uid',
+        name: 'CachedName',
+        email: 'test@example.com',
+        photoURL: null,
+        isAdmin: false,
+      }),
+    );
+    getIdTokenResult.mockResolvedValue({ claims: {} });
+    getUserProfile.mockReturnValue(new Promise(() => {}));
+    mockAuth.currentUser = mockUser;
+    const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    await act(async () => {
+      void authCallback!(mockUser);
+    });
+    await waitFor(() => expect(result.current.profileLoading).toBe(true));
+    expect(result.current.cached?.name).toBe('CachedName');
+  });
+
   it('lets an eager consumer advance deferred auth once and shares its resolved profile', async () => {
     const scheduled: Array<() => void> = [];
     const { scheduleIdle } = jest.requireMock('@/lib/idle') as {
@@ -364,6 +387,138 @@ describe('useAdmin', () => {
       isMember: true,
       privacyAcceptedAt: '2026-01-01T00:00:00Z',
     });
+  });
+
+  it('treats a failed profile read as unknown, not as a missing profile', async () => {
+    getIdTokenResult.mockResolvedValue({ claims: {} });
+    getUserProfile.mockRejectedValueOnce(
+      Object.assign(new Error('client is offline'), { code: 'unavailable' }),
+    );
+    const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    await act(async () => {
+      await authCallback!(mockUser);
+    });
+    expect(result.current.user).toBe(mockUser);
+    expect(result.current.profileLoading).toBe(false);
+    expect(result.current.profileError).toBe(true);
+    expect(result.current.profile).toBeNull();
+  });
+
+  it('does not retry a read the security rules refused', async () => {
+    jest.useFakeTimers();
+    try {
+      getIdTokenResult.mockResolvedValue({ claims: {} });
+      getUserProfile.mockRejectedValue(
+        Object.assign(new Error('denied'), { code: 'permission-denied' }),
+      );
+      const { result } = loadHook();
+      await waitFor(() => expect(authCallback).not.toBeNull());
+      await act(async () => {
+        await authCallback!(mockUser);
+      });
+      expect(result.current.profileError).toBe(true);
+      await act(async () => {
+        await jest.advanceTimersByTimeAsync(60_000);
+      });
+      expect(getUserProfile).toHaveBeenCalledTimes(1);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it('waits for a hidden tab to be shown before retrying', async () => {
+    jest.useFakeTimers();
+    const hidden = jest.spyOn(document, 'hidden', 'get').mockReturnValue(true);
+    try {
+      getIdTokenResult.mockResolvedValue({ claims: {} });
+      getUserProfile
+        .mockRejectedValueOnce(new Error('network'))
+        .mockResolvedValue({ id: 'test-uid', name: 'Alex' });
+      const { result } = loadHook();
+      await waitFor(() => expect(authCallback).not.toBeNull());
+      await act(async () => {
+        await authCallback!(mockUser);
+      });
+      await act(async () => {
+        await jest.advanceTimersByTimeAsync(60_000);
+      });
+      expect(getUserProfile).toHaveBeenCalledTimes(1);
+
+      hidden.mockReturnValue(false);
+      await act(async () => {
+        document.dispatchEvent(new Event('visibilitychange'));
+        await jest.advanceTimersByTimeAsync(0);
+      });
+      await waitFor(() => expect(result.current.profileError).toBe(false));
+      expect(getUserProfile).toHaveBeenCalledTimes(2);
+    } finally {
+      hidden.mockRestore();
+      jest.useRealTimers();
+    }
+  });
+
+  it('clears unfinished join drafts on sign-out', async () => {
+    window.sessionStorage.setItem('joinDraft:test-uid', '{"name":"Alex"}');
+    window.sessionStorage.setItem('other', 'kept');
+    loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    await act(async () => {
+      await authCallback!(null);
+    });
+    expect(window.sessionStorage.getItem('joinDraft:test-uid')).toBeNull();
+    expect(window.sessionStorage.getItem('other')).toBe('kept');
+  });
+
+  it('retries a failed profile read automatically and clears the error', async () => {
+    jest.useFakeTimers();
+    try {
+      getIdTokenResult.mockResolvedValue({ claims: {} });
+      const member = {
+        id: 'test-uid',
+        isMember: true,
+        privacyAcceptedAt: '2026-01-01T00:00:00Z',
+      };
+      getUserProfile
+        .mockRejectedValueOnce(new Error('network'))
+        .mockResolvedValue(member);
+      const { result } = loadHook();
+      await waitFor(() => expect(authCallback).not.toBeNull());
+      await act(async () => {
+        await authCallback!(mockUser);
+      });
+      expect(result.current.profileError).toBe(true);
+
+      await act(async () => {
+        await jest.advanceTimersByTimeAsync(2_000);
+      });
+      await waitFor(() => expect(result.current.profileError).toBe(false));
+      expect(result.current.profile).toEqual(member);
+      expect(getUserProfile).toHaveBeenCalledTimes(2);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it('refreshProfile recovers from an earlier failed read', async () => {
+    getIdTokenResult.mockResolvedValue({ claims: {} });
+    getUserProfile
+      .mockRejectedValueOnce(new Error('network'))
+      .mockResolvedValue({ id: 'test-uid', name: 'Alex' });
+    const { result } = loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    await act(async () => {
+      await authCallback!(mockUser);
+    });
+    expect(result.current.profileError).toBe(true);
+    const { refreshProfile } = jest.requireMock(
+      '@/hooks/useAdmin',
+    ) as typeof import('@/hooks/useAdmin');
+    await act(async () => {
+      await refreshProfile();
+    });
+    expect(result.current.profileError).toBe(false);
+    expect(result.current.profile).toEqual({ id: 'test-uid', name: 'Alex' });
   });
 
   it('refreshProfile is a no-op when signed out', async () => {

@@ -1,82 +1,89 @@
-import { render, screen } from '@testing-library/react'
-import HomePage from '@/components/pages/HomePage'
-import { defaultAppState, createMockBlogPost } from '@/__tests__/helpers/fixtures'
+import { render, screen } from '@testing-library/react';
+import HomePage from '@/components/pages/HomePage';
+import {
+  defaultAppState,
+  createMockBlogPost,
+} from '@/__tests__/helpers/fixtures';
 
-const mockUseApp = jest.fn()
+const mockUseApp = jest.fn();
 jest.mock('@/contexts/AppContext', () => ({
   useApp: () => mockUseApp(),
   AppProvider: ({ children }: { children: React.ReactNode }) => children,
-}))
+}));
 
 describe('HomePage', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
-  })
+    jest.clearAllMocks();
+  });
 
   it('renders hero section', () => {
-    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
-    render(<HomePage />)
-    expect(screen.getByText('Uppsala · AI Society')).toBeInTheDocument()
-    expect(screen.getByText('Build the future.')).toBeInTheDocument()
-  })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+    render(<HomePage />);
+    expect(screen.getByText('Uppsala · AI Society')).toBeInTheDocument();
+    expect(screen.getByText('Build the future.')).toBeInTheDocument();
+  });
 
   it('renders feature cards section', () => {
-    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
-    render(<HomePage />)
-    expect(screen.getByText('Join UU AI Society')).toBeInTheDocument()
-    expect(screen.getByText('AI knowledge')).toBeInTheDocument()
-    expect(screen.getByText('Community')).toBeInTheDocument()
-    expect(screen.getByText('Innovation')).toBeInTheDocument()
-    expect(screen.getByText('Industry connections')).toBeInTheDocument()
-  })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+    render(<HomePage />);
+    expect(screen.getByText('Join UU AI Society')).toBeInTheDocument();
+    expect(screen.getByText('AI knowledge')).toBeInTheDocument();
+    expect(screen.getByText('Community')).toBeInTheDocument();
+    expect(screen.getByText('Innovation')).toBeInTheDocument();
+    expect(screen.getByText('Industry connections')).toBeInTheDocument();
+  });
 
   it('renders CTA buttons', () => {
-    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
-    render(<HomePage />)
-    expect(screen.getByText('Our events')).toBeInTheDocument()
-    expect(screen.getByText('Learn about UU AI Society')).toBeInTheDocument()
-  })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+    render(<HomePage />);
+    expect(screen.getByText('Join for free').closest('a')).toHaveAttribute(
+      'href',
+      '/join',
+    );
+    expect(screen.getByText('Our events')).toBeInTheDocument();
+    expect(screen.getByText('Learn about UU AI Society')).toBeInTheDocument();
+  });
 
   it('hero text and CTAs are theme-aware (inverted on the paper slab)', () => {
-    global.__setMockTheme?.('light')
-    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
-    const { container } = render(<HomePage />)
+    global.__setMockTheme?.('light');
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+    const { container } = render(<HomePage />);
 
     // Primary CTA: brand red on the light slab, white button on the dark slab
-    const primaryCta = screen.getByText('Our events').closest('a')
-    expect(primaryCta?.className).toContain('bg-primary')
-    expect(primaryCta?.className).toContain('dark:bg-white')
-    expect(primaryCta?.className).toContain('dark:text-ink')
+    const primaryCta = screen.getByText('Join for free').closest('a');
+    expect(primaryCta?.className).toContain('bg-primary');
+    expect(primaryCta?.className).toContain('dark:bg-white');
+    expect(primaryCta?.className).toContain('dark:text-ink');
 
     // Muted hero text follows the slab tone via currentColor
-    const eyebrow = screen.getByText('Uppsala · AI Society')
-    expect(eyebrow.className).toContain('text-foreground/65')
+    const eyebrow = screen.getByText('Uppsala · AI Society');
+    expect(eyebrow.className).toContain('text-foreground/65');
 
     // The hero slab itself is the shared, theme-aware HeroSplash
-    expect(container.querySelector('section')?.className).toContain('bg-card')
-  })
+    expect(container.querySelector('section')?.className).toContain('bg-card');
+  });
 
   it('renders upcoming events section heading', () => {
-    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
-    render(<HomePage />)
-    expect(screen.getByText('Events')).toBeInTheDocument()
-  })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+    render(<HomePage />);
+    expect(screen.getByText('Events')).toBeInTheDocument();
+  });
 
   it('shows empty events message when no upcoming events', () => {
-    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
-    render(<HomePage />)
-    expect(screen.getByText(/No events scheduled/)).toBeInTheDocument()
-  })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+    render(<HomePage />);
+    expect(screen.getByText(/No events scheduled/)).toBeInTheDocument();
+  });
 
   it('does not flash the empty events message while events are still loading', () => {
     mockUseApp.mockReturnValue({
       state: { ...defaultAppState, eventsLoaded: false, events: [] },
       dispatch: jest.fn(),
-    })
-    render(<HomePage />)
-    expect(screen.queryByText(/No events scheduled/)).not.toBeInTheDocument()
-    expect(screen.getByText('Events')).toBeInTheDocument()
-  })
+    });
+    render(<HomePage />);
+    expect(screen.queryByText(/No events scheduled/)).not.toBeInTheDocument();
+    expect(screen.getByText('Events')).toBeInTheDocument();
+  });
 
   it('renders upcoming event cards', () => {
     const event = {
@@ -90,51 +97,59 @@ describe('HomePage', () => {
       published: true,
       registrationRequired: false,
       eventStartAt: new Date(Date.now() + 86400000 * 7).toISOString(),
-    }
+    };
     mockUseApp.mockReturnValue({
       state: { ...defaultAppState, events: [event] },
       dispatch: jest.fn(),
-    })
-    render(<HomePage />)
-    expect(screen.getByText('Test Workshop')).toBeInTheDocument()
-    expect(screen.getByText('Workshop')).toBeInTheDocument()
-    expect(screen.getByText('See all events')).toBeInTheDocument()
-  })
+    });
+    render(<HomePage />);
+    expect(screen.getByText('Test Workshop')).toBeInTheDocument();
+    expect(screen.getByText('Workshop')).toBeInTheDocument();
+    expect(screen.getByText('See all events')).toBeInTheDocument();
+  });
 
   it('renders latest articles when blog posts exist', () => {
     mockUseApp.mockReturnValue({
       state: {
         ...defaultAppState,
-        blogPosts: [createMockBlogPost({ id: 'b1', title: 'Weekly AI Digest', authorType: 'ai' })],
+        blogPosts: [
+          createMockBlogPost({
+            id: 'b1',
+            title: 'Weekly AI Digest',
+            authorType: 'ai',
+          }),
+        ],
       },
       dispatch: jest.fn(),
-    })
-    render(<HomePage />)
-    expect(screen.getByText('Articles')).toBeInTheDocument()
-    expect(screen.getByText('Weekly AI Digest')).toBeInTheDocument()
-    expect(screen.getByText('Read the blog')).toBeInTheDocument()
-  })
+    });
+    render(<HomePage />);
+    expect(screen.getByText('Articles')).toBeInTheDocument();
+    expect(screen.getByText('Weekly AI Digest')).toBeInTheDocument();
+    expect(screen.getByText('Read the blog')).toBeInTheDocument();
+  });
 
   it('hides the articles section when there are no published posts', () => {
-    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
-    render(<HomePage />)
-    expect(screen.queryByText('Articles')).not.toBeInTheDocument()
-  })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+    render(<HomePage />);
+    expect(screen.queryByText('Articles')).not.toBeInTheDocument();
+  });
 
   it('renders community showcase section heading', () => {
-    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
-    render(<HomePage />)
-    expect(screen.getByText('What members are building')).toBeInTheDocument()
-    expect(screen.getByText('View Showcase')).toBeInTheDocument()
-  })
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+    render(<HomePage />);
+    expect(screen.getByText('What members are building')).toBeInTheDocument();
+    expect(screen.getByText('View Showcase')).toBeInTheDocument();
+  });
 
   it('shows empty showcase message when no projects', () => {
-    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
-    render(<HomePage />)
+    mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+    render(<HomePage />);
     expect(
-      screen.getByText("No showcase projects yet. Be the first to share what you're building.")
-    ).toBeInTheDocument()
-  })
+      screen.getByText(
+        "No showcase projects yet. Be the first to share what you're building.",
+      ),
+    ).toBeInTheDocument();
+  });
 
   it('renders showcase project cards', () => {
     const project = {
@@ -151,14 +166,14 @@ describe('HomePage', () => {
       featured: false,
       createdAt: '2026-07-01T00:00:00Z',
       updatedAt: '2026-07-01T00:00:00Z',
-    }
+    };
     mockUseApp.mockReturnValue({
       state: { ...defaultAppState, showcaseProjects: [project] },
       dispatch: jest.fn(),
-    })
-    render(<HomePage />)
-    expect(screen.getByText('Course Navigator')).toBeInTheDocument()
-    expect(screen.getByText('Apps')).toBeInTheDocument()
-    expect(screen.getByText(/By Ada/)).toBeInTheDocument()
-  })
-})
+    });
+    render(<HomePage />);
+    expect(screen.getByText('Course Navigator')).toBeInTheDocument();
+    expect(screen.getByText('Apps')).toBeInTheDocument();
+    expect(screen.getByText(/By Ada/)).toBeInTheDocument();
+  });
+});

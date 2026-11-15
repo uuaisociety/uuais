@@ -5,7 +5,18 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { refreshProfile, useAdmin } from '@/hooks/useAdmin';
 import { Button } from '@/components/ui/Button';
-import { joinUrl, loginUrl } from '@/lib/login-redirect';
+import { joinUrl } from '@/lib/login-redirect';
+import {
+  MEMBER_BODY_CLASS,
+  MemberCard,
+  SignInPrompt,
+} from '@/components/pages/MemberCard';
+import {
+  AccountLine,
+  BodySkeleton,
+  NewsletterIntro,
+  SIGNED_OUT_TEXT,
+} from '@/components/pages/NewsletterLayout';
 
 type NewsletterPageProps = {
   requestedSubscription?: boolean | null;
@@ -14,7 +25,9 @@ type NewsletterPageProps = {
 export default function NewsletterPage({
   requestedSubscription = null,
 }: NewsletterPageProps) {
-  const { user, profile, loading, profileLoading } = useAdmin({ eager: true });
+  const { user, profile, loading, profileLoading, cached } = useAdmin({
+    eager: true,
+  });
   const router = useRouter();
   const autoAttempt = useRef<string | null>(null);
   const latestIntent = useRef<string | null>(null);
@@ -112,135 +125,101 @@ export default function NewsletterPage({
       : `/newsletter?subscribe=${requestedSubscription}`;
 
   return (
-    <section className="mx-auto max-w-xl px-4 pt-8 pb-12 sm:px-6 sm:py-28">
-      <div className="rounded-xl border border-border bg-card/70 p-5 glass-shadow sm:p-8">
-        <p className="mono-label text-muted-foreground">UU AI SOCIETY</p>
-        <h1 className="display-lg mt-3">Newsletter</h1>
-        <p className="mt-4 max-w-prose text-base text-muted-foreground">
-          Subscribe to the UU AI Society newsletter. Manage your subscription
-          here anytime.
-        </p>
+    <MemberCard title="Newsletter">
+      <NewsletterIntro />
 
-        {loading || (user && profileLoading) ? (
-          <p
-            role="status"
-            className="mt-8 text-base text-muted-foreground sm:text-sm"
-          >
-            Loading your account…
+      {loading || (user && profileLoading) ? (
+        <BodySkeleton
+          email={user ? user.email : cached ? cached.email : undefined}
+          returnPath={returnPath}
+        />
+      ) : !user ? (
+        <SignInPrompt text={SIGNED_OUT_TEXT} returnPath={returnPath} />
+      ) : !isReady ? (
+        <div className="mt-8">
+          <p className="text-base text-muted-foreground sm:text-sm">
+            Complete your website membership to manage the newsletter.
           </p>
-        ) : !user ? (
-          <div className="mt-8">
-            <p className="text-base text-muted-foreground sm:text-sm">
-              Log in with your member account to subscribe or manage your
-              subscription.
-            </p>
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <Button asChild size="lg" className="w-full sm:w-auto">
-                <Link href={loginUrl(returnPath)}>Log in</Link>
-              </Button>
+          <Button
+            asChild
+            size="lg"
+            className="mt-5 w-full whitespace-normal px-3 sm:w-auto"
+          >
+            <Link href={joinUrl(returnPath)}>Complete membership</Link>
+          </Button>
+          {profile?.newsletter === true && (
+            <>
+              <p className="mt-6 text-base sm:text-sm" role="status">
+                You are currently subscribed.
+              </p>
               <Button
-                asChild
                 size="lg"
                 variant="outline"
-                className="w-full sm:w-auto"
+                className="mt-3 w-full sm:w-auto"
+                disabled={pending}
+                onClick={() => void updateSubscription(false)}
               >
-                <Link href={joinUrl(returnPath)}>Create an account</Link>
+                {pending ? 'Saving…' : 'Unsubscribe'}
               </Button>
-            </div>
-          </div>
-        ) : !isReady ? (
-          <div className="mt-8">
-            <p className="text-base text-muted-foreground sm:text-sm">
-              Complete your website membership to manage the newsletter.
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="mt-5 w-full whitespace-normal px-3 sm:w-auto"
+            </>
+          )}
+          {error && (
+            <p
+              role="alert"
+              className="mt-4 text-base text-destructive sm:text-sm"
             >
-              <Link href={joinUrl(returnPath)}>Complete membership</Link>
-            </Button>
-            {profile?.newsletter === true && (
-              <>
-                <p className="mt-6 text-base sm:text-sm" role="status">
-                  You are currently subscribed.
-                </p>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="mt-3 w-full sm:w-auto"
-                  disabled={pending}
-                  onClick={() => void updateSubscription(false)}
-                >
-                  {pending ? 'Saving…' : 'Unsubscribe'}
-                </Button>
-              </>
-            )}
-            {error && (
-              <p
-                role="alert"
-                className="mt-4 text-base text-destructive sm:text-sm"
-              >
-                {error}
-              </p>
-            )}
-            {message && (
-              <p
-                role="status"
-                className="mt-4 text-base text-muted-foreground sm:text-sm"
-              >
-                {message}
-              </p>
-            )}
-          </div>
-        ) : (
-          <div className="mt-8 border-t border-border pt-6">
-            {profile?.email && (
-              <p className="text-base text-muted-foreground sm:text-sm">
-                Account:{' '}
-                <span className="mt-1 block text-foreground [overflow-wrap:anywhere]">
-                  {profile.email}
-                </span>
-              </p>
-            )}
-            <p className="mt-3 text-base sm:text-sm" role="status">
-              {profile?.newsletter === true
-                ? 'You are currently subscribed.'
-                : 'You are currently unsubscribed.'}
+              {error}
             </p>
-            <Button
-              size="lg"
-              className="mt-5 w-full sm:w-auto"
-              disabled={pending}
-              onClick={() =>
-                void updateSubscription(profile?.newsletter !== true)
-              }
+          )}
+          {message && (
+            <p
+              role="status"
+              className="mt-4 text-base text-muted-foreground sm:text-sm"
             >
-              {pending
-                ? 'Saving…'
-                : profile?.newsletter === true
-                  ? 'Unsubscribe'
-                  : 'Subscribe'}
-            </Button>
-            {error && (
-              <p
-                role="alert"
-                className="mt-4 text-base text-destructive sm:text-sm"
-              >
-                {error}
-              </p>
-            )}
-            {message && (
-              <p
-                role="status"
-                className="mt-4 text-base text-muted-foreground sm:text-sm"
-              >
-                {message}
-              </p>
-            )}
-          </div>
-        )}
-      </div>
-    </section>
+              {message}
+            </p>
+          )}
+        </div>
+      ) : (
+        <div className={MEMBER_BODY_CLASS}>
+          {profile?.email && <AccountLine email={profile.email} />}
+          <p className="mt-3 text-base sm:text-sm" role="status">
+            {profile?.newsletter === true
+              ? 'You are currently subscribed.'
+              : 'You are currently unsubscribed.'}
+          </p>
+          <Button
+            size="lg"
+            className="mt-5 w-full sm:w-auto"
+            disabled={pending}
+            onClick={() =>
+              void updateSubscription(profile?.newsletter !== true)
+            }
+          >
+            {pending
+              ? 'Saving…'
+              : profile?.newsletter === true
+                ? 'Unsubscribe'
+                : 'Subscribe'}
+          </Button>
+          {error && (
+            <p
+              role="alert"
+              className="mt-4 text-base text-destructive sm:text-sm"
+            >
+              {error}
+            </p>
+          )}
+          {message && (
+            <p
+              role="status"
+              className="mt-4 text-base text-muted-foreground sm:text-sm"
+            >
+              {message}
+            </p>
+          )}
+        </div>
+      )}
+    </MemberCard>
   );
 }

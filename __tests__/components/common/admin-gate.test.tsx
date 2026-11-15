@@ -51,7 +51,7 @@ describe('AdminGate', () => {
         <p>admin content</p>
       </AdminGate>,
     );
-    expect(screen.getByText('Login')).toBeInTheDocument();
+    expect(screen.getByText('Sign in')).toBeInTheDocument();
   });
 
   it('shows unauthorized message when user is not admin', () => {

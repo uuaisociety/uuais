@@ -65,8 +65,10 @@ describe('LoginCard', () => {
 
   it('renders login heading and description', () => {
     render(<LoginCard after={jest.fn()} />);
-    expect(screen.getByText('Login')).toBeInTheDocument();
-    expect(screen.getByText(/Please login using one/)).toBeInTheDocument();
+    expect(screen.getByText('Sign in')).toBeInTheDocument();
+    expect(
+      screen.getByText(/Use the same method you used when you joined/),
+    ).toBeInTheDocument();
   });
 
   it('renders SSO buttons', () => {
@@ -77,14 +79,14 @@ describe('LoginCard', () => {
 
   it('renders join link', () => {
     render(<LoginCard after={jest.fn()} />);
-    expect(screen.getByText('Create an account')).toBeInTheDocument();
+    expect(screen.getByText('Join UU AI Society')).toBeInTheDocument();
   });
 
   it('preserves the newsletter return path when choosing account creation', () => {
     window.history.replaceState({}, '', '/login?redirect=%2Fnewsletter');
     render(<LoginCard after={jest.fn()} />);
     expect(
-      screen.getByRole('link', { name: 'Create an account' }),
+      screen.getByRole('link', { name: 'Join UU AI Society' }),
     ).toHaveAttribute('href', '/join?redirect=%2Fnewsletter');
     window.history.replaceState({}, '', '/');
   });
@@ -157,15 +159,34 @@ describe('LoginCard', () => {
     expect(after).not.toHaveBeenCalled();
   });
 
-  it('shows an error instead of silently failing when sign-in rejects', async () => {
+  it('shows a plain error instead of silently failing when sign-in rejects', async () => {
     mockSignInWithGooglePopup.mockRejectedValue(
-      new Error('auth/popup-blocked'),
+      Object.assign(new Error('Firebase: Error (auth/popup-blocked).'), {
+        code: 'auth/popup-blocked',
+      }),
     );
     const after = jest.fn();
     render(<LoginCard after={after} />);
     await userEvent.click(screen.getByText(/Continue with Google/));
-    expect(screen.getByRole('alert')).toHaveTextContent('auth/popup-blocked');
+    expect(screen.getByRole('alert')).toHaveTextContent(
+      /blocked the sign-in window/,
+    );
+    expect(screen.getByRole('alert')).not.toHaveTextContent('Firebase');
     expect(after).not.toHaveBeenCalled();
+  });
+
+  it('shows nothing when the user closes the sign-in popup', async () => {
+    mockSignInWithGooglePopup.mockRejectedValue(
+      Object.assign(new Error('Firebase: Error (auth/popup-closed-by-user).'), {
+        code: 'auth/popup-closed-by-user',
+      }),
+    );
+    render(<LoginCard after={jest.fn()} />);
+    await userEvent.click(screen.getByText(/Continue with Google/));
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    expect(
+      screen.getByText(/Continue with Google/).closest('button'),
+    ).toBeEnabled();
   });
 
   it('explains how to get in when the email already has another sign-in method', async () => {
@@ -182,7 +203,7 @@ describe('LoginCard', () => {
     render(<LoginCard after={jest.fn()} />);
     await userEvent.click(screen.getByText(/Continue with GitHub/));
     expect(screen.getByRole('alert')).toHaveTextContent(
-      /already has an account that uses a different sign-in method.*Linked Accounts/,
+      /already has an account that uses a different sign-in method.*Sign-in methods/,
     );
   });
 

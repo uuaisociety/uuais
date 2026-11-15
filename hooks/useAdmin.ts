@@ -10,6 +10,7 @@ import {
   type CachedIdentity,
 } from '@/lib/identity-cache';
 import type { UserProfile } from '@/lib/firestore/users';
+import { withTimeout } from '@/lib/with-timeout';
 
 /** A single module-level auth subscription shared by every consumer (so readers get the resolved state synchronously); auth is lazy-loaded and registered once idle, keeping the iframe fetch out of the critical network chain (LCP). */
 
@@ -23,6 +24,8 @@ type Store = {
   isPartner: boolean;
   claims: Record<string, unknown> | null;
   profile: UserProfile | null;
+  /** The profile read failed or timed out (offline, Firestore down): the profile is unknown, not missing. Retried automatically. */
+  profileError: boolean;
   /** Last known identity from localStorage. Display only — never a permission gate. */
   cached: CachedIdentity | null;
 };
@@ -31,6 +34,7 @@ let store: Store = {
   user: null,
   loading: true,
   profileLoading: false,
+  profileError: false,
   isAdmin: false,
   isSuperAdmin: false,
   isPartner: false,
@@ -48,18 +52,77 @@ const setStore = (patch: Partial<Store>) => {
   listeners.forEach((l) => l());
 };
 
-/** Profile lookups are memoised per uid so navigation never refetches. */
+/** Successful profile lookups are memoised per uid so navigation never refetches; failures are not, so they're retried. */
 const profileRequests = new Map<string, Promise<UserProfile | null>>();
 
+// A hung Firestore read would otherwise leave every profile-dependent page loading forever.
+const PROFILE_TIMEOUT_MS = 15_000;
+
+/** Resolves null only when the profile document doesn't exist; rejects when the read fails. */
 const loadProfile = (uid: string): Promise<UserProfile | null> => {
   let request = profileRequests.get(uid);
   if (!request) {
-    request = import('@/lib/firestore/users')
-      .then(({ getUserProfile }) => getUserProfile(uid))
-      .catch(() => null);
-    profileRequests.set(uid, request);
+    const attempt = withTimeout(
+      import('@/lib/firestore/users').then(({ getUserProfile }) =>
+        getUserProfile(uid),
+      ),
+      PROFILE_TIMEOUT_MS,
+    );
+    attempt.catch(() => {
+      if (profileRequests.get(uid) === attempt) profileRequests.delete(uid);
+    });
+    profileRequests.set(uid, attempt);
+    request = attempt;
   }
   return request;
+};
+
+// Retry a failed profile read with backoff (capped low: a server-side outage
+// never fires the browser's `online` event), and as soon as the browser is back online.
+const RETRY_DELAYS_MS = [2_000, 4_000, 8_000, 10_000];
+let retryTimer: ReturnType<typeof setTimeout> | null = null;
+let retryAttempt = 0;
+
+let waitingForVisible = false;
+
+// A hidden tab doesn't keep reading; it retries once it's shown again.
+const retryWhenVisible = () => {
+  if (document.hidden) return;
+  document.removeEventListener('visibilitychange', retryWhenVisible);
+  waitingForVisible = false;
+  void refreshProfile();
+};
+
+const clearProfileRetry = () => {
+  if (retryTimer) clearTimeout(retryTimer);
+  retryTimer = null;
+  retryAttempt = 0;
+  if (waitingForVisible) {
+    document.removeEventListener('visibilitychange', retryWhenVisible);
+    waitingForVisible = false;
+  }
+};
+
+// A refusal by the security rules won't fix itself; offline errors and timeouts will.
+const isTransient = (e: unknown) => {
+  const code = (e as { code?: unknown })?.code;
+  return code !== 'permission-denied' && code !== 'unauthenticated';
+};
+
+const scheduleProfileRetry = (error: unknown) => {
+  if (retryTimer || waitingForVisible || !isTransient(error)) return;
+  const delay =
+    RETRY_DELAYS_MS[Math.min(retryAttempt, RETRY_DELAYS_MS.length - 1)];
+  retryAttempt += 1;
+  retryTimer = setTimeout(() => {
+    retryTimer = null;
+    if (document.hidden) {
+      waitingForVisible = true;
+      document.addEventListener('visibilitychange', retryWhenVisible);
+      return;
+    }
+    void refreshProfile();
+  }, delay);
 };
 
 // Only a verified email can match the allowlist; rules enforce the same.
@@ -70,20 +133,52 @@ const loadIsPartner = (u: User): Promise<boolean> =>
         .catch(() => false)
     : Promise.resolve(false);
 
-/** Re-read the signed-in user's profile and publish it to the store so dependent UI sees fresh data after a save. */
+/** Re-read the signed-in user's profile and publish it to the store so dependent UI sees fresh data after a save. Never throws: a failed read is retried and leaves the store as it was (an earlier `profileError` stays set; a profile that already loaded stays shown); a successful one clears `profileError`. */
 export const refreshProfile = async (): Promise<void> => {
   const uid = store.user?.uid;
   if (!uid) return;
   profileRequests.delete(uid);
-  const profile = await loadProfile(uid);
+  let profile: UserProfile | null;
+  try {
+    profile = await loadProfile(uid);
+  } catch (e) {
+    console.warn('Profile read failed; retrying', e);
+    if (store.user?.uid !== uid) return;
+    // An earlier error stays an error; a profile that already loaded stays shown.
+    scheduleProfileRetry(e);
+    return;
+  }
   if (store.user?.uid !== uid) return;
+  clearProfileRetry();
+  publish(profile);
+};
+
+const publish = (profile: UserProfile | null) => {
   const cached = store.cached
     ? {
         ...store.cached,
         name: profile?.displayName || profile?.name || store.cached.name,
       }
     : null;
-  setStore({ profile, profileLoading: false, cached });
+  if (cached) writeCache(cached);
+  setStore({ profile, profileLoading: false, profileError: false, cached });
+};
+
+/** Publish a profile the caller just wrote, so the header, gate and pages see it without waiting for a read. */
+export const publishProfile = (profile: UserProfile): void => {
+  if (store.user?.uid !== profile.id) return;
+  publish(profile);
+};
+
+/** /join keeps unfinished drafts per tab (joinDraft:<uid>); drop them on sign-out so the next person in this tab doesn't inherit them. */
+const clearJoinDrafts = () => {
+  try {
+    Object.keys(window.sessionStorage)
+      .filter((k) => k.startsWith('joinDraft:'))
+      .forEach((k) => window.sessionStorage.removeItem(k));
+  } catch {
+    // Storage blocked: there's nothing stored either.
+  }
 };
 
 let started = false;
@@ -104,12 +199,15 @@ const initializeAuth = () => {
 
       if (!u) {
         profileRequests.clear();
+        clearProfileRetry();
         writeCache(null);
+        clearJoinDrafts();
         if (gen !== authGeneration) return;
         setStore({
           user: null,
           loading: false,
           profileLoading: false,
+          profileError: false,
           isAdmin: false,
           isSuperAdmin: false,
           isPartner: false,
@@ -138,24 +236,40 @@ const initializeAuth = () => {
         user: u,
         loading: false,
         profileLoading: true,
+        profileError: false,
         isAdmin,
         isSuperAdmin,
         claims: tokenClaims,
         cached: {
           uid: u.uid,
-          name: u.displayName,
+          // Keep the last profile name for this user until the profile loads, so it doesn't flip to the auth name and back.
+          name:
+            (store.cached?.uid === u.uid && store.cached.name) || u.displayName,
           email: u.email,
           photoURL: u.photoURL,
           isAdmin,
         },
       });
 
-      const [profile, isPartner] = await Promise.all([
-        loadProfile(u.uid),
+      const [profileResult, isPartner] = await Promise.all([
+        loadProfile(u.uid).then(
+          (profile) => ({ ok: true as const, profile }),
+          (error: unknown) => ({ ok: false as const, error }),
+        ),
         loadIsPartner(u),
       ]);
       if (gen !== authGeneration) return;
 
+      if (!profileResult.ok) {
+        // Unknown, not missing: keep the user signed in and retry, never treat them as unregistered.
+        console.warn('Profile read failed; retrying', profileResult.error);
+        setStore({ isPartner, profileLoading: false, profileError: true });
+        scheduleProfileRetry(profileResult.error);
+        return;
+      }
+
+      clearProfileRetry();
+      const { profile } = profileResult;
       const name =
         profile?.displayName || profile?.name || u.displayName || null;
       const identity: CachedIdentity = {
@@ -166,7 +280,20 @@ const initializeAuth = () => {
         isAdmin,
       };
       writeCache(identity);
-      setStore({ profile, isPartner, profileLoading: false, cached: identity });
+      setStore({
+        profile,
+        isPartner,
+        profileLoading: false,
+        profileError: false,
+        cached: identity,
+      });
+    });
+
+    window.addEventListener('online', () => {
+      if (store.profileError) {
+        clearProfileRetry();
+        void refreshProfile();
+      }
     });
   });
 };
@@ -182,6 +309,9 @@ const start = (eager = false) => {
   }
   if (eager) initializeAuth();
 };
+
+/** Start the auth subscription now instead of after the idle delay, e.g. right after a sign-in so the shared store sees the new user. */
+export const ensureAuth = (): void => start(true);
 
 const subscribe = (listener: () => void) => {
   start();
@@ -211,6 +341,7 @@ export type AdminState = {
   isPartner: boolean;
   claims: Record<string, unknown> | null;
   profile: UserProfile | null;
+  profileError: boolean;
   cached: CachedIdentity | null;
   signInWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;

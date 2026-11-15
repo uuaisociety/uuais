@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -6,13 +6,23 @@ import { Loader2, ImagePlus, Trash2 } from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
 import { useAdmin } from '@/hooks/useAdmin';
 import { useNotify } from '@/components/ui/Notifications';
-import { FieldGroup, InputBase, SelectBase, TextareaBase } from '@/components/ui/Form';
+import {
+  FieldGroup,
+  InputBase,
+  SelectBase,
+  TextareaBase,
+} from '@/components/ui/Form';
 import { Modal } from '@/components/ui/Modal';
 import { Button } from '@/components/ui/Button';
 import Tag from '@/components/ui/Tag';
 import ShowcaseCover from '@/components/showcase/ShowcaseCover';
 import { safeExternalUrl } from '@/components/showcase/showcaseLinks';
-import { SHOWCASE_CATEGORIES, SHOWCASE_CATEGORY_LABELS, SHOWCASE_LIMITS, type ShowcaseCategory } from '@/types';
+import {
+  SHOWCASE_CATEGORIES,
+  SHOWCASE_CATEGORY_LABELS,
+  SHOWCASE_LIMITS,
+  type ShowcaseCategory,
+} from '@/types';
 import { getUserProfile } from '@/lib/firestore/users';
 import { slugify } from '@/lib/slugify';
 
@@ -23,8 +33,15 @@ type Access = 'checking' | 'allowed' | 'not-member';
 const linkKeys = ['github', 'website', 'demo', 'video'] as const;
 
 /** The one reading of the tag field: the form previews this and the submit sends it, so nothing is trimmed unseen. */
-export function parseTags(text: string): { tags: string[]; tooLong: string[]; overflow: number } {
-  const raw = text.split(',').map((t) => t.trim().toLowerCase()).filter(Boolean);
+export function parseTags(text: string): {
+  tags: string[];
+  tooLong: string[];
+  overflow: number;
+} {
+  const raw = text
+    .split(',')
+    .map((t) => t.trim().toLowerCase())
+    .filter(Boolean);
   const unique = Array.from(new Set(raw));
   const tooLong = unique.filter((t) => t.length > SHOWCASE_LIMITS.tag);
   return {
@@ -41,7 +58,13 @@ const linkPlaceholder: Record<(typeof linkKeys)[number], string> = {
   video: 'https://youtube.com/watch?v=…',
 };
 
-export default function ShowcaseSubmissionModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function ShowcaseSubmissionModal({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
   const { dispatch } = useApp();
   const { user, isAdmin } = useAdmin();
   const { notify } = useNotify();
@@ -51,7 +74,12 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
   const [description, setDescription] = useState('');
   const [details, setDetails] = useState('');
   const [category, setCategory] = useState<ShowcaseCategory>('other');
-  const [links, setLinks] = useState<{ github?: string; website?: string; demo?: string; video?: string }>({});
+  const [links, setLinks] = useState<{
+    github?: string;
+    website?: string;
+    demo?: string;
+    video?: string;
+  }>({});
   const [tagsText, setTagsText] = useState('');
   const [cover, setCover] = useState<UploadResult | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -136,11 +164,19 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
 
   const handleUpload = async (file: File) => {
     if (!file.type.startsWith('image/')) {
-      notify({ type: 'error', title: 'Invalid file', message: 'Only image files are allowed.' });
+      notify({
+        type: 'error',
+        title: 'Invalid file',
+        message: 'Only image files are allowed.',
+      });
       return;
     }
     if (file.size > 4 * 1024 * 1024) {
-      notify({ type: 'error', title: 'File too large', message: 'Cover images must be under 4 MB.' });
+      notify({
+        type: 'error',
+        title: 'File too large',
+        message: 'Cover images must be under 4 MB.',
+      });
       return;
     }
     setUploading(true);
@@ -149,16 +185,31 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
       fd.append('file', file);
       fd.append('folder', 'showcase');
       if (cover?.path) fd.append('previousPath', cover.path);
-      const res = await fetch('/api/showcase/image', { method: 'POST', body: fd });
+      const res = await fetch('/api/showcase/image', {
+        method: 'POST',
+        body: fd,
+      });
       if (!res.ok) {
         const data = (await res.json().catch(() => ({}))) as { error?: string };
-        notify({ type: 'error', title: 'Upload failed', message: data.error || 'Please try again.' });
+        notify({
+          type: 'error',
+          title: 'Upload failed',
+          message: data.error || 'Please try again.',
+        });
         return;
       }
-      const data = (await res.json()) as { url?: string | null; urlPublic?: string | null; path: string };
+      const data = (await res.json()) as {
+        url?: string | null;
+        urlPublic?: string | null;
+        path: string;
+      };
       setCover({ url: data.urlPublic || data.url || '', path: data.path });
     } catch {
-      notify({ type: 'error', title: 'Upload failed', message: 'Please try again.' });
+      notify({
+        type: 'error',
+        title: 'Upload failed',
+        message: 'Please try again.',
+      });
     } finally {
       setUploading(false);
     }
@@ -173,7 +224,11 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
   const handleSubmit = async () => {
     if (!user || access !== 'allowed') return;
     if (!title.trim() || !description.trim()) {
-      notify({ type: 'error', title: 'Missing fields', message: 'Title and description are required.' });
+      notify({
+        type: 'error',
+        title: 'Missing fields',
+        message: 'Title and description are required.',
+      });
       return;
     }
     const invalidLink = linkKeys.find((k) => {
@@ -215,7 +270,11 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
     setSubmitting(true);
     try {
       const tags = parsedTags.tags;
-      const name = user.displayName || (user as unknown as { name?: string }).name || user.email || 'Member';
+      const name =
+        user.displayName ||
+        (user as unknown as { name?: string }).name ||
+        user.email ||
+        'Member';
       await dispatch({
         firestoreAction: 'ADD_SHOWCASE_PROJECT',
         payload: {
@@ -241,42 +300,60 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
       notify({
         type: 'success',
         title: 'Submitted for review',
-        message: 'The board reviews new projects before they go live. Yours will appear on the showcase once approved.',
+        message:
+          'The board reviews new projects before they go live. Yours will appear on the showcase once approved.',
       });
       // Submitted successfully, so the cover now belongs to the project.
       setCover(null);
       onClose();
     } catch {
-      notify({ type: 'error', title: 'Submission failed', message: 'Something went wrong. Please try again.' });
+      notify({
+        type: 'error',
+        title: 'Submission failed',
+        message: 'Something went wrong. Please try again.',
+      });
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <Modal open={open} onClose={handleClose} title="Share your project" size="md">
+    <Modal
+      open={open}
+      onClose={handleClose}
+      title="Share your project"
+      size="md"
+    >
       {!user ? (
         <div className="py-8 text-center">
-          <h3 className="text-lg font-semibold tracking-[-0.02em] text-foreground">Log in to share a project</h3>
+          <h3 className="text-lg font-semibold tracking-[-0.02em] text-foreground">
+            Sign in to share a project
+          </h3>
           <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            The showcase is built by society members. Log in with your student account to add what you
-            have been building.
+            The showcase is built by society members. Sign in with your student
+            account to add what you have been building.
           </p>
           <Button asChild className="mt-6">
-            <Link href="/login?redirect=/showcase">Log in</Link>
+            <Link href="/login?redirect=/showcase">Sign in</Link>
           </Button>
         </div>
       ) : access === 'checking' ? (
-        <div className="flex items-center justify-center gap-2 py-16 text-sm text-muted-foreground" aria-live="polite">
+        <div
+          className="flex items-center justify-center gap-2 py-16 text-sm text-muted-foreground"
+          aria-live="polite"
+        >
           <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
           Checking your membership…
         </div>
       ) : access === 'not-member' ? (
         <div className="py-8 text-center">
-          <h3 className="text-lg font-semibold tracking-[-0.02em] text-foreground">Members can share projects</h3>
+          <h3 className="text-lg font-semibold tracking-[-0.02em] text-foreground">
+            Members can share projects
+          </h3>
           <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            The showcase is for work by UU AI Society members. Membership is open to all Uppsala
-            students and takes a minute and then come back and add your project.
+            The showcase is for work by UU AI Society members. Membership is
+            open to all Uppsala students and takes a minute and then come back
+            and add your project.
           </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
             <Button asChild>
@@ -296,8 +373,9 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
           className="max-h-[75vh] overflow-y-auto"
         >
           <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
-            Projects are reviewed by the board before they go live. Anything you built with AI counts:
-            course work, hackathon builds, side projects etc.
+            Projects are reviewed by the board before they go live. Anything you
+            built with AI counts: course work, hackathon builds, side projects
+            etc.
           </p>
 
           <div className="grid gap-4 md:grid-cols-2">
@@ -310,7 +388,12 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
               />
             </FieldGroup>
             <FieldGroup label="Category" requiredHint="Required.">
-              <SelectBase value={category} onChange={(e) => setCategory(e.target.value as ShowcaseCategory)}>
+              <SelectBase
+                value={category}
+                onChange={(e) =>
+                  setCategory(e.target.value as ShowcaseCategory)
+                }
+              >
                 {SHOWCASE_CATEGORIES.map((c) => (
                   <option key={c} value={c}>
                     {SHOWCASE_CATEGORY_LABELS[c]}
@@ -340,7 +423,9 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
               <TextareaBase
                 value={details}
                 onChange={(e) => setDetails(e.target.value)}
-                placeholder={'How did it start? What was hard? What would you do differently?\n\nLeave a blank line between paragraphs.'}
+                placeholder={
+                  'How did it start? What was hard? What would you do differently?\n\nLeave a blank line between paragraphs.'
+                }
                 rows={6}
                 maxLength={SHOWCASE_LIMITS.details}
               />
@@ -349,10 +434,16 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
 
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             {linkKeys.map((k) => (
-              <FieldGroup key={k} label={k.charAt(0).toUpperCase() + k.slice(1)} requiredHint="Optional">
+              <FieldGroup
+                key={k}
+                label={k.charAt(0).toUpperCase() + k.slice(1)}
+                requiredHint="Optional"
+              >
                 <InputBase
                   value={links[k] || ''}
-                  onChange={(e) => setLinks((l) => ({ ...l, [k]: e.target.value }))}
+                  onChange={(e) =>
+                    setLinks((l) => ({ ...l, [k]: e.target.value }))
+                  }
                   placeholder={linkPlaceholder[k]}
                   maxLength={SHOWCASE_LIMITS.link}
                 />
@@ -378,7 +469,9 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
               {parsedTags.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1.5">
                   {parsedTags.tags.map((tag) => (
-                    <Tag key={tag} variant="gray" size="sm">{tag}</Tag>
+                    <Tag key={tag} variant="gray" size="sm">
+                      {tag}
+                    </Tag>
                   ))}
                 </div>
               )}
@@ -386,14 +479,17 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
                 <p className="mt-2 text-xs leading-relaxed text-primary">
                   {parsedTags.overflow > 0 && (
                     <>
-                      {parsedTags.overflow} tag{parsedTags.overflow === 1 ? '' : 's'} over the limit
-                      of {SHOWCASE_LIMITS.tagCount}
+                      {parsedTags.overflow} tag
+                      {parsedTags.overflow === 1 ? '' : 's'} over the limit of{' '}
+                      {SHOWCASE_LIMITS.tagCount}
                       {parsedTags.tooLong.length > 0 && '. '}
                     </>
                   )}
                   {parsedTags.tooLong.length > 0 && (
                     <>
-                      {parsedTags.tooLong.length === 1 ? 'One tag is' : `${parsedTags.tooLong.length} tags are`}{' '}
+                      {parsedTags.tooLong.length === 1
+                        ? 'One tag is'
+                        : `${parsedTags.tooLong.length} tags are`}{' '}
                       longer than {SHOWCASE_LIMITS.tag} characters.
                     </>
                   )}
@@ -405,7 +501,9 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
           <div className="mt-4">
             <span className="text-xs font-medium text-foreground">
               Cover image
-              <span className="ml-1 text-[11px] font-normal text-muted-foreground">Optional</span>
+              <span className="ml-1 text-[11px] font-normal text-muted-foreground">
+                Optional
+              </span>
             </span>
             {cover ? (
               <div className="mt-2 flex items-center gap-3">
@@ -457,7 +555,9 @@ export default function ShowcaseSubmissionModal({ open, onClose }: { open: boole
               Cancel
             </Button>
             <Button type="submit" disabled={submitting || uploading}>
-              {submitting && <Loader2 className="h-4 w-4 animate-spin" aria-hidden />}
+              {submitting && (
+                <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
+              )}
               Submit for review
             </Button>
           </div>

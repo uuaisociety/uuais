@@ -54,7 +54,7 @@ describe('GuessPage', () => {
     mockUseAdmin.mockReturnValue({ user: null, loading: false });
     render(<GuessPage />);
     expect(screen.queryByLabelText('Your guess')).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Log in' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Sign in' })).toHaveAttribute(
       'href',
       '/login?redirect=%2Fguess',
     );

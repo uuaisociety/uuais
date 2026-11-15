@@ -1,17 +1,24 @@
-'use client'
+'use client';
 
 import React, { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { useSearchParams } from 'next/navigation';
-import { ArrowUpRight, Clock, RefreshCw, Search, Star, WifiOff, X } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Clock,
+  RefreshCw,
+  Search,
+  Star,
+  WifiOff,
+  X,
+} from 'lucide-react';
 import { useApp } from '@/contexts/AppContext';
 import { useAdmin } from '@/hooks/useAdmin';
 import { updatePageMeta } from '@/utils/seo';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import Tag from '@/components/ui/Tag';
-import HeroSplash from '@/components/HeroSplash';
 import {
   SHOWCASE_CATEGORIES,
   SHOWCASE_CATEGORY_LABELS,
@@ -25,19 +32,39 @@ import VoteButton from '@/components/showcase/VoteButton';
 import { useShowcaseVote } from '@/components/showcase/useShowcaseVote';
 import { useCollectionData } from '@/lib/firestore/useCollectionData';
 import { subscribeToMyShowcaseProjects } from '@/lib/firestore/showcase';
+import { SkeletonRegion } from '@/components/ui/skeleton';
+import {
+  CARD_BODY_CLASS,
+  CARD_CLASS,
+  CARD_EXCERPT_CLASS,
+  CARD_FOOTER_CLASS,
+  CARD_TITLE_CLASS,
+  chipClass,
+  CONTENT_CLASS,
+  GRID_CLASS,
+  LEAD_BODY_CLASS,
+  LEAD_CLASS,
+  LEAD_COVER_CLASS,
+  LEAD_GRID_CLASS,
+  MoreHead,
+  PAGE_CLASS,
+  SEARCH_ICON_CLASS,
+  SEARCH_INPUT_CLASS,
+  SEARCH_WRAP_CLASS,
+  ShowcaseContentSkeleton,
+  ShowcaseHero,
+  SORT_GROUP_CLASS,
+  sortClass,
+  SORTS,
+  type SortKey,
+  TOOLBAR_CLASS,
+} from '@/components/showcase/ShowcaseLayout';
 
 // Loaded only when someone opens it — keeps Radix Dialog + the form out of the first-visit bundle.
 const ShowcaseSubmissionModal = dynamic(
   () => import('@/components/showcase/ShowcaseSubmissionModal'),
   { ssr: false },
 );
-
-type SortKey = 'newest' | 'votes';
-
-const SORTS: { key: SortKey; label: string }[] = [
-  { key: 'newest', label: 'Newest' },
-  { key: 'votes', label: 'Most voted' },
-];
 
 const showcaseHref = (p: ShowcaseProject) => `/showcase/${p.slug || p.id}`;
 
@@ -59,7 +86,10 @@ const ShowcasePage: React.FC = () => {
   const [showSubmit, setShowSubmit] = useState(false);
 
   useEffect(() => {
-    updatePageMeta('Showcase', 'AI projects built by UU AI Society members — from hackathon builds to research prototypes');
+    updatePageMeta(
+      'Showcase',
+      'AI projects built by UU AI Society members — from hackathon builds to research prototypes',
+    );
   }, []);
 
   // Adopt ?q= on navigation, but never sync back in an effect — a two-way sync ping-pongs.
@@ -97,7 +127,8 @@ const ShowcasePage: React.FC = () => {
   // Category counts drive the filter labels, so an empty filter is visible before it is clicked.
   const counts = useMemo(() => {
     const map = new Map<ShowcaseCategory, number>();
-    for (const p of published) map.set(p.category, (map.get(p.category) ?? 0) + 1);
+    for (const p of published)
+      map.set(p.category, (map.get(p.category) ?? 0) + 1);
     return map;
   }, [published]);
 
@@ -129,8 +160,12 @@ const ShowcasePage: React.FC = () => {
     active === 'all' ? null : SHOWCASE_CATEGORY_LABELS[active];
 
   const renderCard = (p: ShowcaseProject) => (
-    <Card key={p.id} variant="glass" hover className="h-full flex flex-col">
-      <Link href={showcaseHref(p)} aria-label={`Open ${p.title}`} className="block">
+    <Card key={p.id} variant="glass" hover className={CARD_CLASS}>
+      <Link
+        href={showcaseHref(p)}
+        aria-label={`Open ${p.title}`}
+        className="block"
+      >
         <ShowcaseCover
           title={p.title}
           image={p.coverImage}
@@ -138,21 +173,28 @@ const ShowcasePage: React.FC = () => {
         />
       </Link>
 
-      <CardContent className="flex flex-1 flex-col p-5">
+      <CardContent className={CARD_BODY_CLASS}>
         <div className="mb-3 flex flex-wrap items-center gap-2">
-          <span className="mono-label text-primary">{SHOWCASE_CATEGORY_LABELS[p.category]}</span>
-          {p.featured && <Tag variant="yellow" size="sm">Featured</Tag>}
+          <span className="mono-label text-primary">
+            {SHOWCASE_CATEGORY_LABELS[p.category]}
+          </span>
+          {p.featured && (
+            <Tag variant="yellow" size="sm">
+              Featured
+            </Tag>
+          )}
         </div>
 
-        <h3 className="mb-2 text-[1.0625rem] font-semibold leading-snug tracking-[-0.02em] break-words">
-          <Link href={showcaseHref(p)} className="transition-colors duration-300 hover:text-primary">
+        <h3 className={CARD_TITLE_CLASS}>
+          <Link
+            href={showcaseHref(p)}
+            className="transition-colors duration-300 hover:text-primary"
+          >
             {p.title}
           </Link>
         </h3>
 
-        <p className="mb-4 line-clamp-3 break-words text-sm leading-relaxed text-muted-foreground">
-          {p.description}
-        </p>
+        <p className={CARD_EXCERPT_CLASS}>{p.description}</p>
 
         {(p.tags || []).length > 0 && (
           <div className="mb-4 flex flex-wrap gap-2">
@@ -162,7 +204,7 @@ const ShowcasePage: React.FC = () => {
           </div>
         )}
 
-        <div className="mt-auto flex items-center justify-between gap-2 border-t border-border pt-4">
+        <div className={CARD_FOOTER_CLASS}>
           <Link
             href={`/showcase?q=${encodeURIComponent(p.creatorName || '')}`}
             className="mono-meta min-w-0 truncate text-foreground/65 transition-colors duration-300 hover:text-primary"
@@ -186,87 +228,77 @@ const ShowcasePage: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background transition-colors pb-24">
-      <HeroSplash>
-        <div className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-20 sm:px-8">
-          <p className="mono-label text-current/65 mb-6">UU AI Society · Built by members</p>
-          <h1 className="display-lg mb-4">Showcase</h1>
-          <p className="max-w-2xl text-base leading-relaxed text-current/65 sm:text-lg">
-            AI projects built by members of the society — from weekend hackathon builds to ongoing
-            research prototypes. Every project here was made by an Uppsala student.
-          </p>
-          <Button type="button" variant="cta" onClick={() => setShowSubmit(true)} className="mt-8">
+    <div className={PAGE_CLASS}>
+      <ShowcaseHero
+        action={
+          <Button
+            type="button"
+            variant="cta"
+            onClick={() => setShowSubmit(true)}
+            className="mt-8"
+          >
             Share your project
           </Button>
-        </div>
-      </HeroSplash>
+        }
+      />
 
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <div className={CONTENT_CLASS}>
         {/* Toolbar: category filters with live counts, sort, and search */}
-        <div className="flex flex-col gap-4 pt-10 lg:flex-row lg:items-start lg:justify-between">
+        <div className={TOOLBAR_CLASS}>
           <div className="flex flex-wrap gap-2">
             <button
               type="button"
               onClick={() => setActive('all')}
               aria-pressed={active === 'all'}
-              className={`inline-flex min-h-9 cursor-pointer items-center gap-1.5 rounded-md border px-3 mono-label transition-colors duration-300 ${
-                active === 'all'
-                  ? 'border-primary/30 bg-primary/[0.07] text-primary'
-                  : 'border-border text-muted-foreground hover:border-foreground/25 hover:text-foreground'
-              }`}
+              className={`${chipClass(active === 'all')} cursor-pointer`}
             >
               All
-              <span className="tabular-nums opacity-60">{published.length}</span>
+              <span className="tabular-nums opacity-60">
+                {published.length}
+              </span>
             </button>
-            {SHOWCASE_CATEGORIES.filter((c) => (counts.get(c) ?? 0) > 0).map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => setActive(c)}
-                aria-pressed={active === c}
-                className={`inline-flex min-h-9 cursor-pointer items-center gap-1.5 rounded-md border px-3 mono-label transition-colors duration-300 ${
-                  active === c
-                    ? 'border-primary/30 bg-primary/[0.07] text-primary'
-                    : 'border-border text-muted-foreground hover:border-foreground/25 hover:text-foreground'
-                }`}
-              >
-                {SHOWCASE_CATEGORY_LABELS[c]}
-                <span className="tabular-nums opacity-60">{counts.get(c)}</span>
-              </button>
-            ))}
+            {SHOWCASE_CATEGORIES.filter((c) => (counts.get(c) ?? 0) > 0).map(
+              (c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setActive(c)}
+                  aria-pressed={active === c}
+                  className={`${chipClass(active === c)} cursor-pointer`}
+                >
+                  {SHOWCASE_CATEGORY_LABELS[c]}
+                  <span className="tabular-nums opacity-60">
+                    {counts.get(c)}
+                  </span>
+                </button>
+              ),
+            )}
           </div>
 
           <div className="flex shrink-0 flex-wrap items-center gap-3">
-            <div className="flex items-center gap-1 rounded-md border border-border p-0.5">
+            <div className={SORT_GROUP_CLASS}>
               {SORTS.map((s) => (
                 <button
                   key={s.key}
                   type="button"
                   onClick={() => setSort(s.key)}
                   aria-pressed={sort === s.key}
-                  className={`inline-flex min-h-9 cursor-pointer items-center rounded-sm px-2.5 mono-label transition-colors duration-300 ${
-                    sort === s.key
-                      ? 'bg-foreground/[0.07] text-foreground'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
+                  className={`${sortClass(sort === s.key)} cursor-pointer`}
                 >
                   {s.label}
                 </button>
               ))}
             </div>
 
-            <div className="relative w-full sm:w-64">
-              <Search
-                className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground"
-                aria-hidden
-              />
+            <div className={SEARCH_WRAP_CLASS}>
+              <Search className={SEARCH_ICON_CLASS} aria-hidden />
               <input
                 type="search"
                 value={query}
                 onChange={(e) => updateQuery(e.target.value)}
                 placeholder="Search projects"
                 aria-label="Search projects"
-                className="min-h-10 w-full rounded-md border border-border bg-card py-2 pl-9 pr-3 text-sm text-foreground transition-colors placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring"
+                className={`${SEARCH_INPUT_CLASS} text-foreground transition-colors placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-ring`}
               />
             </div>
           </div>
@@ -274,7 +306,10 @@ const ShowcasePage: React.FC = () => {
 
         {/* Active filter readout */}
         {(query || activeFilterLabel) && (
-          <div className="mt-4 flex flex-wrap items-center gap-2" aria-live="polite">
+          <div
+            className="mt-4 flex flex-wrap items-center gap-2"
+            aria-live="polite"
+          >
             <span className="text-sm text-muted-foreground">
               {filtered.length} {filtered.length === 1 ? 'project' : 'projects'}
             </span>
@@ -306,78 +341,85 @@ const ShowcasePage: React.FC = () => {
         {awaitingReview.length > 0 && (
           <div className="mt-8 rounded-xl border border-border bg-card/70 p-5">
             <div className="flex items-center gap-2">
-              <Clock className="h-3.5 w-3.5 text-muted-foreground" aria-hidden />
+              <Clock
+                className="h-3.5 w-3.5 text-muted-foreground"
+                aria-hidden
+              />
               <h2 className="mono-label text-muted-foreground">
-                Your {awaitingReview.length === 1 ? 'submission' : 'submissions'}
+                Your{' '}
+                {awaitingReview.length === 1 ? 'submission' : 'submissions'}
               </h2>
             </div>
             <ul className="mt-3 divide-y divide-border">
               {awaitingReview.map((p) => (
-                <li key={p.id} className="flex flex-wrap items-center gap-3 py-2.5">
+                <li
+                  key={p.id}
+                  className="flex flex-wrap items-center gap-3 py-2.5"
+                >
                   <span className="min-w-0 flex-1 truncate text-sm font-medium text-foreground">
                     {p.title}
                   </span>
-                  <Tag variant="yellow" size="sm">In review</Tag>
+                  <Tag variant="yellow" size="sm">
+                    In review
+                  </Tag>
                 </li>
               ))}
             </ul>
             <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-              The board reviews submissions before they go live. Yours appears on the showcase as
-              soon as it is approved — no need to submit it again.
+              The board reviews submissions before they go live. Yours appears
+              on the showcase as soon as it is approved — no need to submit it
+              again.
             </p>
           </div>
         )}
 
         {!state.showcaseLoaded ? (
-          <div className="mt-10 animate-pulse space-y-6" aria-busy="true" aria-live="polite">
-            <div className="h-72 rounded-xl bg-foreground/[0.06]" />
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {[0, 1, 2].map((i) => (
-                <div key={i} className="overflow-hidden rounded-xl border border-border bg-card/70">
-                  <div className="aspect-[16/10] bg-foreground/[0.06]" />
-                  <div className="space-y-3 p-5">
-                    <div className="h-4 w-3/4 rounded bg-foreground/[0.06]" />
-                    <div className="h-3 w-full rounded bg-foreground/[0.04]" />
-                    <div className="h-3 w-2/3 rounded bg-foreground/[0.04]" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <SkeletonRegion label="Loading projects…">
+            <ShowcaseContentSkeleton />
+          </SkeletonRegion>
         ) : lead ? (
           <>
             {/* The lead project carries the first viewport — the artefact leads, not the interface. */}
-            <Card variant="glass" hover className="mt-10 overflow-hidden">
+            <Card variant="glass" hover className={LEAD_CLASS}>
               <Link
                 href={showcaseHref(lead)}
                 aria-label={`Open ${lead.title}`}
-                className="grid md:grid-cols-2"
+                className={LEAD_GRID_CLASS}
               >
                 <ShowcaseCover
                   title={lead.title}
                   image={lead.coverImage}
-                  className="aspect-[16/10] md:aspect-auto md:h-full md:min-h-[22rem]"
+                  className={LEAD_COVER_CLASS}
                   sizes="(min-width: 768px) 50vw, 100vw"
                   priority
                 />
-                <div className="flex flex-col justify-center p-6 sm:p-10">
+                <div className={LEAD_BODY_CLASS}>
                   <div className="mb-4 flex flex-wrap items-center gap-2">
                     <span className="mono-label text-primary">
                       {SHOWCASE_CATEGORY_LABELS[lead.category]}
                     </span>
-                    {lead.featured && <Tag variant="yellow" size="sm">Featured</Tag>}
+                    {lead.featured && (
+                      <Tag variant="yellow" size="sm">
+                        Featured
+                      </Tag>
+                    )}
                   </div>
                   <h2 className="display-md mb-3 break-words">{lead.title}</h2>
                   <p className="mb-6 max-w-prose break-words leading-relaxed text-muted-foreground">
                     {lead.description}
                   </p>
                   <div className="flex items-center gap-4 mono-meta text-foreground/65">
-                    <span className="truncate">By {lead.creatorName || 'member'}</span>
+                    <span className="truncate">
+                      By {lead.creatorName || 'member'}
+                    </span>
                     <span className="inline-flex items-center gap-1.5 tabular-nums">
                       <Star className="h-3.5 w-3.5" aria-hidden />
                       {votesFor(lead)}
                     </span>
-                    <ArrowUpRight className="ml-auto h-4 w-4 shrink-0 text-foreground/60" aria-hidden />
+                    <ArrowUpRight
+                      className="ml-auto h-4 w-4 shrink-0 text-foreground/60"
+                      aria-hidden
+                    />
                   </div>
                 </div>
               </Link>
@@ -385,32 +427,33 @@ const ShowcasePage: React.FC = () => {
 
             {rest.length > 0 && (
               <div className="mt-14">
-                <div className="mb-8 flex items-end justify-between gap-6">
-                  <h2 className="display-md">
-                    <span className="paren">(More)</span> projects
-                  </h2>
-                  <span className="mono-label shrink-0 text-muted-foreground">
-                    {rest.length} {rest.length === 1 ? 'project' : 'projects'}
-                  </span>
-                </div>
-                <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {rest.map(renderCard)}
-                </div>
+                <MoreHead
+                  count={`${rest.length} ${rest.length === 1 ? 'project' : 'projects'}`}
+                />
+                <div className={GRID_CLASS}>{rest.map(renderCard)}</div>
               </div>
             )}
           </>
         ) : state.showcaseUnavailable ? (
           /* An unreachable server is not an empty gallery — "no projects yet" would be a claim we cannot stand behind. */
           <div className="mt-10 rounded-xl border border-dashed border-border bg-card/50 px-6 py-16 text-center">
-            <WifiOff className="mx-auto h-5 w-5 text-muted-foreground" aria-hidden />
+            <WifiOff
+              className="mx-auto h-5 w-5 text-muted-foreground"
+              aria-hidden
+            />
             <h2 className="mt-4 text-lg font-semibold tracking-[-0.02em] text-foreground">
               Could not load the showcase
             </h2>
             <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-              The projects could not be reached — usually a dropped connection. They are still
-              there; the page just could not read them.
+              The projects could not be reached — usually a dropped connection.
+              They are still there; the page just could not read them.
             </p>
-            <Button type="button" variant="outline" onClick={() => window.location.reload()} className="mt-6">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => window.location.reload()}
+              className="mt-6"
+            >
               <RefreshCw className="h-4 w-4" aria-hidden />
               Try again
             </Button>
@@ -418,7 +461,9 @@ const ShowcasePage: React.FC = () => {
         ) : (
           <div className="mt-10 rounded-xl border border-dashed border-border bg-card/50 px-6 py-16 text-center">
             <h2 className="text-lg font-semibold tracking-[-0.02em] text-foreground">
-              {published.length === 0 ? 'No projects yet' : 'No projects match that search'}
+              {published.length === 0
+                ? 'No projects yet'
+                : 'No projects match that search'}
             </h2>
             <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
               {published.length === 0
@@ -426,7 +471,12 @@ const ShowcasePage: React.FC = () => {
                 : 'Try a different search term, or clear the filters to see every project.'}
             </p>
             {published.length === 0 ? (
-              <Button type="button" variant="cta" onClick={() => setShowSubmit(true)} className="mt-6">
+              <Button
+                type="button"
+                variant="cta"
+                onClick={() => setShowSubmit(true)}
+                className="mt-6"
+              >
                 Share your project
               </Button>
             ) : (
@@ -452,16 +502,25 @@ const ShowcasePage: React.FC = () => {
               <span className="paren">(Show)</span> and tell
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">
-              Built something with AI this term? A hackathon project, a course assignment you are proud
-              of, a weekend experiment — all of it belongs here. All skill levels welcome.
+              Built something with AI this term? A hackathon project, a course
+              assignment you are proud of, a weekend experiment — all of it
+              belongs here. All skill levels welcome.
             </p>
-            <Button type="button" variant="cta" onClick={() => setShowSubmit(true)} className="mt-6">
-              {user ? 'Share your project' : 'Log in to share your project'}
+            <Button
+              type="button"
+              variant="cta"
+              onClick={() => setShowSubmit(true)}
+              className="mt-6"
+            >
+              {user ? 'Share your project' : 'Sign in to share your project'}
             </Button>
           </section>
         )}
 
-        <ShowcaseSubmissionModal open={showSubmit} onClose={() => setShowSubmit(false)} />
+        <ShowcaseSubmissionModal
+          open={showSubmit}
+          onClose={() => setShowSubmit(false)}
+        />
       </div>
     </div>
   );

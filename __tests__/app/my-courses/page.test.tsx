@@ -29,6 +29,7 @@ jest.mock('@/components/courses/CourseCard', () => ({
       {children}
     </div>
   ),
+  CourseCardSkeleton: () => <div data-testid="course-card-skeleton" />,
 }));
 
 jest.mock('@/lib/firestore/favorites', () => ({
@@ -144,6 +145,7 @@ describe('MyCoursesPage', () => {
     render(<MyCoursesPage />);
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
+    expect(screen.getAllByTestId('course-card-skeleton')).toHaveLength(2);
   });
 
   it('shows empty favorites message when user has no favorites and no categories', async () => {

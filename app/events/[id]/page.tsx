@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Tag as UiTag } from '@/components/ui/Tag';
-import { ArrowLeft, Calendar, Clock, MapPin, Tag } from 'lucide-react';
+import { Calendar, Clock, MapPin, Tag } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
@@ -14,6 +14,18 @@ import { SITE_URL } from '@/app/metadata';
 
 import campus from '@/public/images/campus.png';
 import EventDetailClient from '@/components/events/EventDetailClient';
+import {
+  BackToEvents,
+  EVENT_ABOUT_CONTENT_CLASS,
+  EVENT_ABOUT_HEADING_CLASS,
+  EVENT_COLUMN_CLASS,
+  EVENT_FACT_CLASS,
+  EVENT_FACTS_CLASS,
+  EVENT_IMAGE_CLASS,
+  EVENT_PAGE_CLASS,
+  EVENT_SECTION_CARD_CLASS,
+  EVENT_TITLE_CLASS,
+} from '@/components/events/EventDetailLayout';
 import FormattedText from '@/components/ui/FormattedText';
 import {
   getEventByIdServer,
@@ -83,8 +95,8 @@ export default async function EventDetailPage({
   };
 
   return (
-    <div className="min-h-screen bg-background py-12 pt-24">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className={EVENT_PAGE_CLASS}>
+      <div className={EVENT_COLUMN_CLASS}>
         <script
           type="application/ld+json"
           // Escaped so a `</script>` in the description can't end this tag.
@@ -94,16 +106,12 @@ export default async function EventDetailPage({
         />
 
         {/* Back Button */}
-        <Button asChild variant="outline" className="mb-8" icon={ArrowLeft}>
-          <Link href="/events">Back to Events</Link>
-        </Button>
+        <BackToEvents />
 
         {/* Event Header */}
         <div className="mb-8">
           <div className="flex items-start justify-between mb-4">
-            <h1 className="text-4xl font-bold text-foreground">
-              {event.title}
-            </h1>
+            <h1 className={EVENT_TITLE_CLASS}>{event.title}</h1>
             {isUpcoming || !isPastEvent ? (
               <UiTag variant="red">{isUpcoming ? 'Upcoming' : 'Today'}</UiTag>
             ) : (
@@ -111,23 +119,23 @@ export default async function EventDetailPage({
             )}
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4 text-muted-foreground mb-6">
-            <div className="flex items-center gap-2">
+          <div className={EVENT_FACTS_CLASS}>
+            <div className={EVENT_FACT_CLASS}>
               <Calendar className="w-5 h-5" />
               <span>
                 {format(new Date(event.eventStartAt), 'EEEE, MMMM dd, yyyy')}
               </span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className={EVENT_FACT_CLASS}>
               <Clock className="w-5 h-5" />
               <span>{format(new Date(event.eventStartAt), 'HH:mm')}</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className={EVENT_FACT_CLASS}>
               <MapPin className="w-5 h-5" />
               <span>{event.location}</span>
             </div>
             {event.category && (
-              <div className="flex items-center gap-2">
+              <div className={EVENT_FACT_CLASS}>
                 <Tag className="w-5 h-5" />
                 <span>
                   {categoryOptions.find(
@@ -154,17 +162,15 @@ export default async function EventDetailPage({
               width={800}
               height={400}
               fetchPriority="high"
-              className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg shadow-lg"
+              className={EVENT_IMAGE_CLASS}
             />
           </div>
         )}
 
         {/* Event Description */}
-        <Card className="h-full bg-card pt-4">
-          <CardContent className="pt-4 pb-6 pl-6 pr-6">
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              About This Event
-            </h2>
+        <Card className={EVENT_SECTION_CARD_CLASS}>
+          <CardContent className={EVENT_ABOUT_CONTENT_CLASS}>
+            <h2 className={EVENT_ABOUT_HEADING_CLASS}>About This Event</h2>
             {/<\/?[a-z][\s\S]*>/i.test(event.description || '') ? (
               <div
                 className="prose prose-lg max-w-none dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground"

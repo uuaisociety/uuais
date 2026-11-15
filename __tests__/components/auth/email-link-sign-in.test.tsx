@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { renderToString } from 'react-dom/server';
 import EmailLinkSignIn from '@/components/auth/EmailLinkSignIn';
 
 // Partner-specific behaviour (allowlist, link completion) is covered in
@@ -113,5 +114,31 @@ describe('EmailLinkSignIn', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent(
       /in another browser, or contact contact@uuais\.com\.$/,
     );
+  });
+
+  it('keeps the server-rendered form inert until hydration, so an early submit cannot reload and drop the address', () => {
+    const html = renderToString(
+      <EmailLinkSignIn
+        label="Email"
+        placeholder="you@example.com"
+        contactEmail="contact@uuais.com"
+        onSignedIn={jest.fn()}
+      />,
+    );
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    expect(
+      doc.querySelector('input[type="email"]')?.hasAttribute('disabled'),
+    ).toBe(true);
+    expect(
+      doc.querySelector('button[type="submit"]')?.hasAttribute('disabled'),
+    ).toBe(true);
+  });
+
+  it('is usable once hydrated, and returns focus to the field after an error', async () => {
+    mockCooldownSeconds.mockReturnValue(42);
+    renderForm();
+    expect(screen.getByPlaceholderText('you@example.com')).toBeEnabled();
+    await requestLink();
+    expect(screen.getByPlaceholderText('you@example.com')).toHaveFocus();
   });
 });

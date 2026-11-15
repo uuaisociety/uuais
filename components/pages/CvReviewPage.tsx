@@ -8,6 +8,12 @@ import PartnerNotFound from '@/components/auth/PartnerNotFound';
 import DownloadAllCvsButton from '@/components/partners/DownloadAllCvsButton';
 import type { SharedCv } from '@/lib/export-cvs';
 import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
+import {
+  COLUMN,
+  CvReviewHeader,
+  LEDE,
+  PAGE,
+} from '@/components/partners/CvReviewLayout';
 
 // Member (name + email) | Programme | Graduates | Shared | PDF
 const COLUMNS =
@@ -30,16 +36,13 @@ type Props =
 
 export default function CvReviewPage({ access, cvs = [] }: Props) {
   return (
-    <div className="bg-background min-h-screen pt-24 sm:pt-28 pb-24 transition-colors duration-300">
-      <div className="max-w-4xl mx-auto px-5 sm:px-8">
-        <p className="mono-label text-muted-foreground mb-4">Partner access</p>
-        <h1 className="display-lg mb-4">
-          Member <span className="paren">(CVs)</span>
-        </h1>
+    <div className={PAGE}>
+      <div className={COLUMN}>
+        <CvReviewHeader />
 
         {access === 'signin' ? (
           <>
-            <p className="text-muted-foreground leading-relaxed max-w-2xl mb-8">
+            <p className={`${LEDE} mb-8`}>
               Sign in with the work email your company&apos;s partnership with
               UU AI Society is registered to. We&apos;ll email you a one-time
               sign-in link.
@@ -63,7 +66,7 @@ export default function CvReviewPage({ access, cvs = [] }: Props) {
           </>
         ) : (
           <>
-            <p className="text-muted-foreground leading-relaxed max-w-2xl mb-10">
+            <p className={`${LEDE} mb-10`}>
               Members who chose to share their CV with our partners. Every
               download is logged. Use CVs only for recruitment, and delete
               copies you no longer need.
