@@ -1,5 +1,6 @@
 import { act, render, screen } from '@testing-library/react';
 import RootLoading from '@/app/loading';
+import HomeLoading from '@/app/(home)/loading';
 import EventsLoading from '@/app/events/loading';
 import EventLoading from '@/app/events/[id]/loading';
 import InterviewLoading from '@/app/events/codex-ambassador-interview/loading';
@@ -7,13 +8,7 @@ import AboutLoading from '@/app/about/loading';
 import CareersLoading from '@/app/careers/loading';
 import PartnersLoading from '@/app/partners/loading';
 import CvsLoading from '@/app/partners/cvs/loading';
-import { TeamGridSkeleton } from '@/components/team/TeamTabsSection';
-
-// The page modules pull in data clients the skeletons never touch.
-jest.mock('@/lib/firestore/analytics', () => ({
-  incrementJobClick: jest.fn(),
-}));
-jest.mock('@/contexts/AppContext', () => ({ useApp: jest.fn() }));
+import { TeamGridSkeleton } from '@/components/team/TeamLayout';
 
 const mockFlags = { PARTNERS_PAGE_PUBLIC: true };
 jest.mock('@/lib/feature-flags', () => ({
@@ -31,10 +26,9 @@ afterEach(() => setPathname(''));
 const busyRoot = (container: HTMLElement) =>
   container.querySelector('[aria-busy="true"]');
 
-describe('root loading.tsx', () => {
-  it('shows the home skeleton straight away on /', () => {
-    setPathname('/');
-    const { container } = render(<RootLoading />);
+describe('root and home loading.tsx', () => {
+  it('the home page shows its skeleton straight away', () => {
+    const { container } = render(<HomeLoading />);
     expect(busyRoot(container)).toBeInTheDocument();
     expect(
       screen.getByRole('heading', { level: 1, name: /Build the future/ }),

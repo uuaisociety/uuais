@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import { JoinSkeleton } from '@/components/pages/JoinLayout';
-import { NewsletterSkeleton } from '@/components/pages/NewsletterPage';
-import { GuessSkeleton } from '@/components/pages/GuessPage';
+import { NewsletterSkeleton } from '@/components/pages/NewsletterLayout';
+import { GuessSkeleton } from '@/components/pages/GuessLayout';
 import { TeamApplicationSkeleton } from '@/components/pages/TeamApplicationSkeleton';
 import { LoginSkeleton } from '@/components/auth/LoginLayout';
 
@@ -14,14 +14,6 @@ jest.mock('@/hooks/useAdmin', () => ({
 jest.mock('next/navigation', () => ({
   useRouter: () => ({ push: jest.fn(), replace: jest.fn() }),
   usePathname: () => '/',
-}));
-jest.mock('@/lib/firestore/useGuessContest', () => ({
-  useGuessContest: () => ({ contest: null, loaded: false }),
-}));
-jest.mock('@/lib/firestore/guess-contest', () => ({
-  MAX_GUESS_DIGITS: 9,
-  getMyGuess: jest.fn(),
-  submitGuess: jest.fn(),
 }));
 
 // Skeletons hold no working controls: placeholders, or the page's own controls made inert.
@@ -82,10 +74,10 @@ describe('NewsletterSkeleton', () => {
       screen.getByRole('heading', { name: 'Newsletter' }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/Log in with your member account/),
+      screen.getByText(/Sign in with your member account/),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('link', { name: 'Log in' }).closest('[inert]'),
+      screen.getByRole('link', { name: 'Sign in' }).closest('[inert]'),
     ).not.toBeNull();
     expectNoLiveButtons(container);
   });
@@ -112,7 +104,7 @@ describe('GuessSkeleton', () => {
   it('shows the sign-in prompt otherwise', () => {
     render(<GuessSkeleton signedIn={false} />);
     expect(
-      screen.getByText('Log in to submit your guess.'),
+      screen.getByText('Sign in to submit your guess.'),
     ).toBeInTheDocument();
   });
 });

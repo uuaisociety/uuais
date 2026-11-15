@@ -52,13 +52,14 @@ describe('NewsletterPage', () => {
 
   it('prompts anonymous visitors to log in or join with a newsletter return path', () => {
     render(<NewsletterPage />);
-    expect(screen.getByRole('link', { name: 'Log in' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Sign in' })).toHaveAttribute(
       'href',
       '/login?redirect=%2Fnewsletter',
     );
-    expect(
-      screen.getByRole('link', { name: 'Create an account' }),
-    ).toHaveAttribute('href', '/join?redirect=%2Fnewsletter');
+    expect(screen.getByRole('link', { name: 'Join' })).toHaveAttribute(
+      'href',
+      '/join?redirect=%2Fnewsletter',
+    );
   });
 
   it.each([true, false])(
@@ -208,13 +209,11 @@ describe('NewsletterPage', () => {
     'preserves subscribe=%s through login and join redirects',
     (requestedSubscription) => {
       render(<NewsletterPage requestedSubscription={requestedSubscription} />);
-      expect(screen.getByRole('link', { name: 'Log in' })).toHaveAttribute(
+      expect(screen.getByRole('link', { name: 'Sign in' })).toHaveAttribute(
         'href',
         `/login?redirect=${encodeURIComponent(`/newsletter?subscribe=${requestedSubscription}`)}`,
       );
-      expect(
-        screen.getByRole('link', { name: 'Create an account' }),
-      ).toHaveAttribute(
+      expect(screen.getByRole('link', { name: 'Join' })).toHaveAttribute(
         'href',
         `/join?redirect=${encodeURIComponent(`/newsletter?subscribe=${requestedSubscription}`)}`,
       );

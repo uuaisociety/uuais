@@ -405,6 +405,71 @@ describe('useAdmin', () => {
     expect(result.current.profile).toBeNull();
   });
 
+  it('does not retry a read the security rules refused', async () => {
+    jest.useFakeTimers();
+    try {
+      getIdTokenResult.mockResolvedValue({ claims: {} });
+      getUserProfile.mockRejectedValue(
+        Object.assign(new Error('denied'), { code: 'permission-denied' }),
+      );
+      const { result } = loadHook();
+      await waitFor(() => expect(authCallback).not.toBeNull());
+      await act(async () => {
+        await authCallback!(mockUser);
+      });
+      expect(result.current.profileError).toBe(true);
+      await act(async () => {
+        await jest.advanceTimersByTimeAsync(60_000);
+      });
+      expect(getUserProfile).toHaveBeenCalledTimes(1);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it('waits for a hidden tab to be shown before retrying', async () => {
+    jest.useFakeTimers();
+    const hidden = jest.spyOn(document, 'hidden', 'get').mockReturnValue(true);
+    try {
+      getIdTokenResult.mockResolvedValue({ claims: {} });
+      getUserProfile
+        .mockRejectedValueOnce(new Error('network'))
+        .mockResolvedValue({ id: 'test-uid', name: 'Alex' });
+      const { result } = loadHook();
+      await waitFor(() => expect(authCallback).not.toBeNull());
+      await act(async () => {
+        await authCallback!(mockUser);
+      });
+      await act(async () => {
+        await jest.advanceTimersByTimeAsync(60_000);
+      });
+      expect(getUserProfile).toHaveBeenCalledTimes(1);
+
+      hidden.mockReturnValue(false);
+      await act(async () => {
+        document.dispatchEvent(new Event('visibilitychange'));
+        await jest.advanceTimersByTimeAsync(0);
+      });
+      await waitFor(() => expect(result.current.profileError).toBe(false));
+      expect(getUserProfile).toHaveBeenCalledTimes(2);
+    } finally {
+      hidden.mockRestore();
+      jest.useRealTimers();
+    }
+  });
+
+  it('clears unfinished join drafts on sign-out', async () => {
+    window.sessionStorage.setItem('joinDraft:test-uid', '{"name":"Alex"}');
+    window.sessionStorage.setItem('other', 'kept');
+    loadHook();
+    await waitFor(() => expect(authCallback).not.toBeNull());
+    await act(async () => {
+      await authCallback!(null);
+    });
+    expect(window.sessionStorage.getItem('joinDraft:test-uid')).toBeNull();
+    expect(window.sessionStorage.getItem('other')).toBe('kept');
+  });
+
   it('retries a failed profile read automatically and clears the error', async () => {
     jest.useFakeTimers();
     try {

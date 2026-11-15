@@ -3,7 +3,7 @@ import {
   ConnectionsSkeleton,
   CourseDetailSkeleton,
   CONNECTIONS_HEIGHT,
-} from '@/components/courses/course-detail-layout';
+} from '@/components/courses/CourseDetailLayout';
 import { CourseCardSkeleton } from '@/components/courses/CourseCard';
 
 jest.mock('@/lib/firebase-client', () => ({ auth: {} }));

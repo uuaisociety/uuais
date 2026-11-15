@@ -94,6 +94,7 @@ jest.mock('@/hooks/useAdmin', () => {
 jest.mock('@/lib/firestore/registrations', () => ({
   cancelRegistration: jest.fn(),
   confirmRegistration: jest.fn(),
+  declineRegistration: jest.fn(),
 }));
 
 const mockNotify = jest.fn();
@@ -152,6 +153,7 @@ import {
 import {
   cancelRegistration,
   confirmRegistration,
+  declineRegistration,
 } from '@/lib/firestore/registrations';
 import * as CookieConsent from 'vanilla-cookieconsent';
 
@@ -418,6 +420,44 @@ describe('profile rows', () => {
     expect(await screen.findByText('Alex Lindqvist')).toBeInTheDocument();
   });
 
+  it('returns focus to the row after the editor closes', async () => {
+    signIn();
+    await renderPage();
+    fireEvent.click(screen.getByRole('button', { name: 'Edit full name' }));
+    fireEvent.keyDown(screen.getByLabelText('Full name'), { key: 'Escape' });
+    expect(
+      screen.getByRole('button', { name: 'Edit full name' }),
+    ).toHaveFocus();
+  });
+
+  it('adds https:// to a bare web address and refuses other schemes', async () => {
+    signIn();
+    await renderPage();
+    fireEvent.click(screen.getByRole('button', { name: 'Add github' }));
+    fireEvent.change(screen.getByLabelText('GitHub'), {
+      target: { value: 'github.com/alex' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+    await waitFor(() =>
+      expect(updateUserProfile).toHaveBeenCalledWith('user-123', {
+        github: 'https://github.com/alex',
+      }),
+    );
+
+    fireEvent.click(await screen.findByRole('button', { name: 'Add website' }));
+    fireEvent.change(screen.getByLabelText('Website'), {
+      target: { value: 'javascript:alert(1)' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
+    expect(await screen.findByLabelText('Website')).toBeInTheDocument();
+    expect(mockNotify).toHaveBeenCalledWith(
+      expect.objectContaining({
+        message: 'Enter a web address starting with https://',
+      }),
+    );
+    expect(updateUserProfile).toHaveBeenCalledTimes(1);
+  });
+
   it('cancels an edit with Escape without saving', async () => {
     signIn();
     await renderPage();
@@ -569,6 +609,26 @@ describe('events', () => {
     expect(cancelRegistration).toHaveBeenCalledWith('r2');
   });
 
+  it('declines an invitation rather than cancelling it', async () => {
+    signIn(mockUser, member, regs);
+    (declineRegistration as jest.Mock).mockResolvedValue(undefined);
+    await renderPage();
+    fireEvent.click(
+      await within(screen.getByRole('complementary')).findByRole('button', {
+        name: 'Decline AI Workshop',
+      }),
+    );
+    expect(screen.getByTestId('confirm-modal')).toHaveAttribute(
+      'data-title',
+      'Decline invitation',
+    );
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('modal-confirm'));
+    });
+    expect(declineRegistration).toHaveBeenCalledWith('r1');
+    expect(cancelRegistration).not.toHaveBeenCalled();
+  });
+
   it('shows an empty state with a link to events', async () => {
     signIn();
     await renderPage();
@@ -638,6 +698,65 @@ describe('sign-in & privacy', () => {
     );
   });
 
+  it('moves a switch at once and ignores repeat clicks while it saves', async () => {
+    signIn();
+    let finishWrite: () => void = () => {};
+    (updateUserProfile as jest.Mock).mockReturnValue(
+      new Promise<void>((resolve) => {
+        finishWrite = resolve;
+      }),
+    );
+    await openSettings();
+    const newsletter = screen.getByRole('switch', { name: /Newsletter/ });
+    fireEvent.click(newsletter);
+    expect(newsletter).not.toBeChecked();
+    expect(newsletter).toBeDisabled();
+    expect(newsletter).toHaveAttribute('aria-busy', 'true');
+    fireEvent.click(newsletter);
+    expect(updateUserProfile).toHaveBeenCalledTimes(1);
+    await act(async () => {
+      finishWrite();
+    });
+    expect(newsletter).toBeEnabled();
+  });
+
+  it('says a timed-out save is still pending and re-reads once it lands', async () => {
+    jest.useFakeTimers();
+    try {
+      signIn();
+      let finishWrite: () => void = () => {};
+      (updateUserProfile as jest.Mock).mockReturnValue(
+        new Promise<void>((resolve) => {
+          finishWrite = resolve;
+        }),
+      );
+      await openSettings();
+      fireEvent.click(screen.getByRole('switch', { name: /Newsletter/ }));
+      await act(async () => {
+        await jest.advanceTimersByTimeAsync(20_000);
+      });
+      expect(mockNotify).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Still saving' }),
+      );
+      admin().refreshProfile.mockClear();
+      await act(async () => {
+        finishWrite();
+      });
+      expect(admin().refreshProfile).toHaveBeenCalled();
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it('describes a switch through aria-describedby, not its name', async () => {
+    signIn();
+    await openSettings();
+    const newsletter = screen.getByRole('switch', { name: 'Newsletter' });
+    expect(newsletter).toHaveAccessibleDescription(
+      'Events and news from the society.',
+    );
+  });
+
   it('locks partner contact on while a CV is shared, explaining why', async () => {
     signIn();
     mockGetMyCv.mockResolvedValue({
@@ -691,6 +810,13 @@ describe('sign-in & privacy', () => {
     expect(fetchMock).toHaveBeenCalledWith('/api/account/delete', {
       method: 'POST',
     });
+    // The session cookie is re-minted for this user before the deletion request.
+    const refresh = (
+      firebaseClient as unknown as { refreshSessionCookie: jest.Mock }
+    ).refreshSessionCookie;
+    expect(refresh.mock.invocationCallOrder[0]).toBeLessThan(
+      fetchMock.mock.invocationCallOrder[0],
+    );
     await waitFor(() => expect(auth.signOut).toHaveBeenCalled());
   });
 

@@ -79,14 +79,14 @@ describe('LoginCard', () => {
 
   it('renders join link', () => {
     render(<LoginCard after={jest.fn()} />);
-    expect(screen.getByText('Create an account')).toBeInTheDocument();
+    expect(screen.getByText('Join UU AI Society')).toBeInTheDocument();
   });
 
   it('preserves the newsletter return path when choosing account creation', () => {
     window.history.replaceState({}, '', '/login?redirect=%2Fnewsletter');
     render(<LoginCard after={jest.fn()} />);
     expect(
-      screen.getByRole('link', { name: 'Create an account' }),
+      screen.getByRole('link', { name: 'Join UU AI Society' }),
     ).toHaveAttribute('href', '/join?redirect=%2Fnewsletter');
     window.history.replaceState({}, '', '/');
   });

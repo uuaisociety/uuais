@@ -1,28 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { BlogSkeleton } from '@/components/pages/BlogPage';
-import { BlogDetailSkeleton } from '@/components/pages/BlogDetailPage';
-import { ShowcaseSkeleton } from '@/components/pages/ShowcasePage';
-import { ShowcaseDetailSkeleton } from '@/components/pages/ShowcaseDetailPage';
+import { BlogSkeleton } from '@/components/blog/BlogLayout';
+import { BlogDetailSkeleton } from '@/components/blog/BlogDetailLayout';
+import { ShowcaseSkeleton } from '@/components/showcase/ShowcaseLayout';
+import { ShowcaseDetailSkeleton } from '@/components/showcase/ShowcaseDetailLayout';
 import BlogLoading from '@/app/blog/loading';
 import BlogPostLoading from '@/app/blog/[id]/loading';
 import ShowcaseLoading from '@/app/showcase/loading';
 import ShowcaseProjectLoading from '@/app/showcase/[id]/loading';
-
-jest.mock('@/contexts/AppContext', () => ({ useApp: jest.fn() }));
-jest.mock('@/hooks/useAdmin', () => ({ useAdmin: jest.fn() }));
-jest.mock('@/lib/firestore/useCollectionData', () => ({
-  useCollectionData: jest.fn(),
-}));
-jest.mock('@/lib/firestore/showcase', () => ({
-  subscribeToMyShowcaseProjects: jest.fn(),
-}));
-jest.mock('@/lib/firestore/analytics', () => ({
-  incrementBlogRead: jest.fn(),
-}));
-jest.mock('@/components/showcase/useShowcaseVote', () => ({
-  useShowcaseVote: jest.fn(),
-}));
-jest.mock('@/components/blog/BlogReactions', () => () => null);
 
 const setPathname = (p: string) => {
   (global as unknown as { __mockPathname?: string }).__mockPathname = p;

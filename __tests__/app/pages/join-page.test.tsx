@@ -419,12 +419,20 @@ describe('JoinPage', () => {
       expect(admin().publishProfile).toHaveBeenCalledWith(done);
     });
 
-    it('re-checks the profile when the tab becomes visible again', () => {
-      signedIn();
-      render(<JoinPage />);
-      admin().refreshProfile.mockClear();
-      document.dispatchEvent(new Event('visibilitychange'));
-      expect(admin().refreshProfile).toHaveBeenCalled();
+    it('re-checks the profile when the tab becomes visible again, at most every 30 s', () => {
+      const now = jest.spyOn(Date, 'now').mockReturnValue(1_000_000);
+      try {
+        signedIn();
+        render(<JoinPage />);
+        admin().refreshProfile.mockClear();
+        document.dispatchEvent(new Event('visibilitychange'));
+        expect(admin().refreshProfile).not.toHaveBeenCalled();
+        now.mockReturnValue(1_031_000);
+        document.dispatchEvent(new Event('visibilitychange'));
+        expect(admin().refreshProfile).toHaveBeenCalledTimes(1);
+      } finally {
+        now.mockRestore();
+      }
     });
 
     it('trims a very long provider name to what the rules accept', () => {
