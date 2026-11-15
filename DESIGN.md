@@ -101,14 +101,14 @@ components:
 
 The site reads as a student society's editorial notebook pressed under frosted glass — tight display headings and mono metadata floating above soft ambient colour, with every surface a translucent pane that picks up the light behind it. It is warm, precise, and quietly confident: the paper is never pure white, the red is never a hard alert, and the ink is slightly cool where it types and slightly warm where it slabs.
 
-Light mode is a warm paper page with near-white glass cards; dark mode is a cool ink page with darker glass. The hero and navigation stay a deep warm ink in both themes so the landing reads as one continuous slab. Density is editorial — generous section spacing (`pt-24`/`sm:pt-32`), hairline borders, and one accent colour used sparingly (on hover, on the `(paren)` accent word, and on primary actions only). The system deliberately avoids gradients, glows, and card-bloat: depth comes from blur, specular hairlines, and soft lifted shadows, not from filling surfaces with colour.
+Light mode is a warm paper page with near-white glass cards; dark mode is a cool ink page with darker glass. The hero band (the shared `HeroSplash`) and the navigation follow the theme: a deep warm ink slab with a red interior glow in dark mode, white card paper with a soft splash in light mode, so in either theme the band reads as one continuous surface with the header. Density is editorial — generous section spacing (`pt-24`/`sm:pt-32`), hairline borders, and one accent colour used sparingly (on hover, on the `(paren)` accent word, and on primary actions only). The system deliberately avoids gradients, glows, and card-bloat: depth comes from blur, specular hairlines, and soft lifted shadows, not from filling surfaces with colour.
 
 **Key Characteristics:**
 - Warm paper / cool ink neutrals, one deepened brand red
 - Liquid-glass surfaces: translucent fill + `backdrop-filter` blur + specular top edge + soft shadow
 - Editorial typography: tight `Instrument Sans` display, `Martian Mono` for metadata/pills
 - The `(parenthetical)` accent word — red, inline, the signature flourish
-- Dark ink hero + nav slab in both themes
+- Theme-aware hero + nav band: warm ink in dark mode, white paper in light mode
 - No gradients, no glow, motion is springy-but-not-bouncy (`--ease-ios`)
 
 ## Colors
@@ -123,7 +123,7 @@ The palette is a warm/cool neutral pair (paper + ink) with a single deepened bra
 - **Cool Ink** (`oklch(0.18 0.012 265)`): light-mode foreground text. Slightly cool to contrast the warm paper.
 - **Muted Ink** (`oklch(0.505 0.014 265)`): secondary text, labels, metadata, placeholders.
 - **Surface White** (`oklch(1 0 0)`): opaque cards and inputs on light mode.
-- **Warm Ink** (`oklch(0.16 0.02 20)`): the dark slab colour for the hero and glass-nav in both themes. Warmer than the type ink so dark surfaces feel substantial, not sterile.
+- **Warm Ink** (`oklch(0.16 0.02 20)`): the slab colour for the hero band and glass-nav in dark mode (light mode uses Surface White for the band). Warmer than the type ink so dark surfaces feel substantial, not sterile.
 - **Dark Paper** (`oklch(0.155 0.012 265)`): dark-mode page background.
 - **Dark Card** (`oklch(0.205 0.014 265)`): dark-mode card surface.
 - **Hairline** (`oklch(0.18 0.012 265 / 10%)` light, `oklch(1 0 0 / 11%)` dark): the default border — a translucent hairline, never a solid grey line.
@@ -141,11 +141,11 @@ The palette is a warm/cool neutral pair (paper + ink) with a single deepened bra
 **Character:** A grotesque display face set tight and large for editorial confidence, paired with a technical monospace for anything that is *data* rather than prose — eyebrows, metadata, pills, timestamps. The pairing says "society newsletter" not "corporate SaaS".
 
 ### Hierarchy
-- **Display** (semibold, `clamp(2.75rem, 7vw, 5.5rem)`, 0.96 lh, `-0.038em`): hero headlines only, on the dark ink slab. The `display-xl` class.
+- **Display** (semibold, `clamp(2.75rem, 7vw, 5.5rem)`, 0.96 lh, `-0.038em`): hero headlines only, on the hero band (ink in dark mode, paper in light mode). The `display-xl` class.
 - **Headline** (semibold, `clamp(2rem, 4.4vw, 3.25rem)`, 1.02 lh, `-0.032em`): section opens, page titles on light surfaces. `display-lg`.
 - **Subhead** (semibold, `clamp(1.5rem, 2.6vw, 2rem)`, 1.1 lh, `-0.026em`): `h2` section heads *within* a page, sitting under a Headline. `display-md`.
 - **Title** (semibold, `1.0625rem`, ~1.3 lh, `-0.028em`): card titles, list headings. Tight tracking on all headings (`-0.028em` base for h2–h4).
-- **Body** (regular, `0.9375rem`, 1.6 lh): reading text, `text-muted-foreground` on light or `text-white/60` on ink slabs. Measure ~65ch.
+- **Body** (regular, `0.9375rem`, 1.6 lh): reading text, `text-muted-foreground` on paper, or `text-current/60` on the hero band so it follows the band's tone. Measure ~65ch.
 - **Label** (mono, 500, `0.6875rem`, `0.12em`, uppercase): eyebrows ("UPPSALA UNIVERSITY · AI SOCIETY"), section kickers, pills, form hints, table metadata. The `mono-label` class.
 - **Meta** (mono, 400, `0.75rem`, `-0.01em`, sentence case): mono metadata read as a phrase rather than an eyebrow — bylines, dates, reading time, model names. The `mono-meta` class.
 
@@ -174,7 +174,7 @@ The system is **layered, not shadowy**. Depth comes from translucent glass over 
 
 ## Shapes
 
-The form language is tight and near-square — a quiet, editorial corner scale rather than heavy pill radii. The scale runs `--radius-sm: 3px`, `md: 4px`, `lg: 6px`, `xl: 8px`, `2xl: 12px`. Buttons are `rounded-md` (4px); glass cards and surfaces are `rounded-xl` (8px); pills/tags are `rounded-sm` (3px) with mono uppercase type (the `.pill` class) — only real chips like status tags use a fuller radius. Borders are 1px translucent hairlines (`--border`). The one deliberate exception is the hero: a full-bleed ink slab with no corner radius, so it reads as the page's foundation rather than a card.
+The form language is tight and near-square — a quiet, editorial corner scale rather than heavy pill radii. The scale runs `--radius-sm: 3px`, `md: 4px`, `lg: 6px`, `xl: 8px`, `2xl: 12px`. Buttons are `rounded-md` (4px); glass cards and surfaces are `rounded-xl` (8px); pills/tags are `rounded-sm` (3px) with mono uppercase type (the `.pill` class) — only real chips like status tags use a fuller radius. Borders are 1px translucent hairlines (`--border`). The one deliberate exception is the hero: a full-bleed band (ink in dark mode, paper in light mode) with no corner radius, so it reads as the page's foundation rather than a card.
 
 ## Components
 
@@ -225,7 +225,7 @@ The form language is tight and near-square — a quiet, editorial corner scale r
 
 ### Don't:
 - **Don't** reintroduce hard-coded `#990000`-style reds, raw `oklch(...)` literals, or the legacy `bg-gray-50 dark:bg-gray-900` page wrappers — remap them to tokens.
-- **Don't** use red/gradient hero backgrounds (`from-red-600 via-red-700 to-red-800`). Heroes are dark ink slabs with an interior radial glow, or nothing.
+- **Don't** use red/gradient hero backgrounds (`from-red-600 via-red-700 to-red-800`). Heroes use the shared `HeroSplash` band (ink with an interior radial glow in dark mode, paper with a soft splash in light mode), or nothing. A page may pass its own `lightSplash` when the default lobe would sit behind its content (e.g. /account's tab row).
 - **Don't** use `border-l-4` side-tab accents, bounce/elastic easing, or gradient text — all rejected.
 - **Don't** add a second text colour (blue links etc.) or place grey text on the red accent; on colour, use the surface's own ink or near-white.
 - **Don't** paint a solid opaque panel for the mobile menu — it inherits the header's glass so it blurs what's behind it.
