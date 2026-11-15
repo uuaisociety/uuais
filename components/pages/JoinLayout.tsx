@@ -109,7 +109,7 @@ export const PrivacyConsent = () => (
 // The page's own headings and labels, inert, with placeholders for the controls.
 
 /** Step 1 (signed out) while it loads. */
-export const SignInStepSkeleton = () => (
+const SignInStepSkeleton = () => (
   <Card inert>
     <CreateAccountHeader />
     <CardContent className={SIGN_IN_CONTENT_CLASS}>

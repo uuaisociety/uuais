@@ -21,7 +21,7 @@ import {
   fetchMultipleCourseConnections,
 } from '@/lib/courses';
 import { TargetLabelEdge } from './TargetLabelEdge';
-import { CONNECTIONS_FRAME_CLASS } from './course-detail-layout';
+import { CONNECTIONS_FRAME_CLASS } from './CourseDetailLayout';
 
 type Props = {
   focus: Course;

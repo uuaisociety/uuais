@@ -1,9 +1,9 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { EventsSkeleton } from '@/components/pages/EventsPage';
-import EventLoading from './[id]/loading';
-import InterviewLoading from './codex-ambassador-interview/loading';
+import { EventsSkeleton } from '@/components/events/EventsLayout';
+import { EventDetailSkeleton } from '@/components/events/EventDetailLayout';
+import { RouteFallback } from '@/components/layout/RouteFallback';
 
 // Shown straight away: it is the page's own frame, so there is nothing to pop.
 // A navigation prefetches only down to the first loading boundary, which is this
@@ -12,6 +12,6 @@ export default function Loading() {
   const pathname = usePathname();
   if (pathname === '/events') return <EventsSkeleton />;
   if (pathname === '/events/codex-ambassador-interview')
-    return <InterviewLoading />;
-  return <EventLoading />;
+    return <RouteFallback />;
+  return <EventDetailSkeleton />;
 }

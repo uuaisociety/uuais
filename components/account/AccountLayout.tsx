@@ -11,7 +11,7 @@ import { SkeletonRegion, SkeletonText } from '@/components/ui/skeleton';
 
 // The default light splash puts a cool lobe low-left, right behind the tab row;
 // here only the warm glow stays, up high, away from the tabs.
-export const ACCOUNT_LIGHT_SPLASH =
+const ACCOUNT_LIGHT_SPLASH =
   'radial-gradient(45rem 26rem at 80% 0%, oklch(from var(--primary) l c h / 16%), transparent 62%)';
 
 // `short` labels let all four tabs fit a phone screen.

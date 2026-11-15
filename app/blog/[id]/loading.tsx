@@ -1,4 +1,4 @@
-import { BlogDetailSkeleton } from '@/components/pages/BlogDetailPage';
+import { BlogDetailSkeleton } from '@/components/blog/BlogDetailLayout';
 
 // Shown straight away: it is the article's own frame, and the page's own loading
 // state while posts stream in.

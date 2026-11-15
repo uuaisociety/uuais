@@ -1,6 +1,6 @@
 'use client';
 
-import { NewsletterSkeleton } from '@/components/pages/NewsletterPage';
+import { NewsletterSkeleton } from '@/components/pages/NewsletterLayout';
 import { useAdmin } from '@/hooks/useAdmin';
 
 // Shown straight away: it is the page's own card, with the panel the visitor

@@ -22,7 +22,7 @@ export const MemberCard = ({
   </section>
 );
 
-/** What a signed-out visitor sees: why to log in, then Log in and Create an account. */
+/** What a signed-out visitor sees: why to sign in, then Sign in and Join. */
 export const SignInPrompt = ({
   text,
   returnPath,
@@ -34,10 +34,10 @@ export const SignInPrompt = ({
     <p className="text-base text-muted-foreground sm:text-sm">{text}</p>
     <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
       <Button asChild size="lg" className="w-full sm:w-auto">
-        <Link href={loginUrl(returnPath)}>Log in</Link>
+        <Link href={loginUrl(returnPath)}>Sign in</Link>
       </Button>
       <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
-        <Link href={joinUrl(returnPath)}>Create an account</Link>
+        <Link href={joinUrl(returnPath)}>Join</Link>
       </Button>
     </div>
   </div>

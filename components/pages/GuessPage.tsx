@@ -1,79 +1,26 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { ReactNode } from 'react';
 import { useAdmin } from '@/hooks/useAdmin';
 import { Button } from '@/components/ui/Button';
-import {
-  SkeletonBox,
-  SkeletonRegion,
-  SkeletonText,
-} from '@/components/ui/skeleton';
 import {
   MEMBER_BODY_CLASS,
   MemberCard,
   SignInPrompt,
 } from '@/components/pages/MemberCard';
+import {
+  BodySkeleton,
+  GuessLabel,
+  GuessTitle,
+  ITEM_PLACEHOLDER,
+  SIGNED_OUT_TEXT,
+} from '@/components/pages/GuessLayout';
 import { useGuessContest } from '@/lib/firestore/useGuessContest';
 import {
   getMyGuess,
   MAX_GUESS_DIGITS,
   submitGuess,
 } from '@/lib/firestore/guess-contest';
-
-const SIGNED_OUT_TEXT = 'Log in to submit your guess.';
-
-/** "Guess the amount of (item)"; `item` is a placeholder while the game loads. */
-const GuessTitle = ({ item }: { item: ReactNode }) => (
-  <>
-    Guess the amount
-    {item && (
-      <>
-        {' '}
-        of <span className="paren">({item})</span>
-      </>
-    )}
-  </>
-);
-
-const ITEM_PLACEHOLDER = (
-  <SkeletonText className="inline-block" widths={['5em']} />
-);
-
-const GuessLabel = () => (
-  <label htmlFor="guess" className="mono-label text-muted-foreground">
-    Your guess
-  </label>
-);
-
-/**
- * The card's body while the game and account load: the guess form for someone
- * signed in (or signed in here before), otherwise the sign-in prompt.
- */
-const BodySkeleton = ({ signedIn }: { signedIn: boolean }) => (
-  <SkeletonRegion label="Loading…">
-    {signedIn ? (
-      <div inert className={MEMBER_BODY_CLASS}>
-        <GuessLabel />
-        <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-          <span className="block h-11 w-full rounded-md border border-border bg-background sm:flex-1" />
-          <SkeletonBox className="h-11 w-full rounded-md sm:w-36" />
-        </div>
-      </div>
-    ) : (
-      <div inert>
-        <SignInPrompt text={SIGNED_OUT_TEXT} returnPath="/guess" />
-      </div>
-    )}
-  </SkeletonRegion>
-);
-
-/** The guessing game while its route loads. `signedIn`: someone was signed in here before. */
-export const GuessSkeleton = ({ signedIn }: { signedIn: boolean }) => (
-  <MemberCard title={<GuessTitle item={ITEM_PLACEHOLDER} />}>
-    <BodySkeleton signedIn={signedIn} />
-  </MemberCard>
-);
 
 export default function GuessPage() {
   const { user, loading, cached } = useAdmin({ eager: true });

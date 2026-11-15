@@ -1,4 +1,4 @@
-import { AboutSkeleton } from '@/components/pages/AboutPage';
+import { AboutSkeleton } from '@/components/pages/AboutLayout';
 
 // Shown straight away: it is the page's own frame, so there is nothing to pop.
 export default function Loading() {

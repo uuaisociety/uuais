@@ -6,7 +6,6 @@ import { notFound, useParams } from 'next/navigation';
 import { Card, CardContent, CardMedia } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import {
-  ArrowLeft,
   Calendar,
   User,
   Sparkles,
@@ -26,76 +25,18 @@ import { updatePageMeta } from '@/utils/seo';
 import { postPath } from '@/lib/slugify';
 import { previewImageFor } from '@/lib/blog-preview';
 import BlogReactions from '@/components/blog/BlogReactions';
-import { TagBar } from '@/components/ui/TagBar';
 import {
-  SkeletonBox,
-  SkeletonRegion,
-  SkeletonText,
-} from '@/components/ui/skeleton';
-
-// ------------------------------------------------------------------ shared with the skeleton
-
-const PAGE_CLASS = 'min-h-screen bg-background pt-24 pb-24';
-const COLUMN_CLASS = 'max-w-4xl mx-auto px-4 sm:px-6 lg:px-8';
-const TITLE_CLASS = 'text-4xl font-bold text-foreground mb-4';
-const META_CLASS =
-  'flex flex-wrap items-center gap-x-5 gap-y-2 text-muted-foreground mb-6';
-const TAGS_CLASS = 'flex flex-wrap gap-2 mb-6';
-const EXCERPT_CLASS = 'text-xl text-muted-foreground leading-relaxed';
-const IMAGE_CLASS = 'w-full h-64 sm:h-80 md:h-96 rounded-xl';
-const PROSE_CLASS =
-  'prose prose-lg max-w-xl mx-auto dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-a:text-primary prose-strong:text-foreground prose-li:text-muted-foreground prose-blockquote:text-muted-foreground';
-
-const BackToBlog = () => (
-  <Link href="/blog">
-    <Button variant="outline" className="min-h-11 mb-8" icon={ArrowLeft}>
-      Back to Blog
-    </Button>
-  </Link>
-);
-
-const MetaBar = ({
-  icon: Icon,
-  width,
-}: {
-  icon: typeof User;
-  width: string;
-}) => (
-  <span className="inline-flex items-center gap-2">
-    <Icon className="w-4 h-4" aria-hidden />
-    <SkeletonText className="mono-meta" widths={[width]} />
-  </span>
-);
-
-/** An article while the posts load: the real back link, then the header, image and body as placeholders. */
-export const BlogDetailSkeleton = () => (
-  <SkeletonRegion label="Loading article…" className={PAGE_CLASS}>
-    <div className={COLUMN_CLASS}>
-      <BackToBlog />
-      <div className="mb-8">
-        <SkeletonText className={TITLE_CLASS} lines={2} />
-        <div className={META_CLASS}>
-          <MetaBar icon={User} width="6rem" />
-          <MetaBar icon={Calendar} width="8rem" />
-          <MetaBar icon={Clock} width="5rem" />
-        </div>
-        <div className={TAGS_CLASS}>
-          <TagBar size="md" />
-          <TagBar size="md" />
-        </div>
-        <SkeletonText className={EXCERPT_CLASS} lines={2} />
-      </div>
-      <div className="mb-8">
-        <SkeletonBox className={IMAGE_CLASS} />
-      </div>
-      <Card className="h-full pt-4" aria-hidden>
-        <CardContent className="p-8">
-          <SkeletonText className={PROSE_CLASS} lines={8} />
-        </CardContent>
-      </Card>
-    </div>
-  </SkeletonRegion>
-);
+  BackToBlog,
+  BlogDetailSkeleton,
+  COLUMN_CLASS,
+  EXCERPT_CLASS,
+  IMAGE_CLASS,
+  META_CLASS,
+  PAGE_CLASS,
+  PROSE_CLASS,
+  TAGS_CLASS,
+  TITLE_CLASS,
+} from '@/components/blog/BlogDetailLayout';
 
 interface BlogDetailPageProps {
   /** Firestore id or slug of the post. Falls back to the route param. */

@@ -1,8 +1,8 @@
 'use client';
 
 // The home page's static pieces, shared by the page and its loading skeleton
-// (the root loading boundary), so the skeleton has the page's exact geometry.
-// Kept free of the page's data and canvases: the root boundary ships with every route.
+// (the (home) loading boundary), so the skeleton has the page's exact geometry.
+// Kept free of the page's data and canvases: the boundary ships ahead of the page.
 
 import React from 'react';
 import Link from 'next/link';

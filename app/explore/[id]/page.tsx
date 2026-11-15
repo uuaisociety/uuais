@@ -3,7 +3,7 @@ import CourseUnavailable from '@/components/courses/CourseUnavailable';
 import {
   COURSE_CONTAINER_CLASS,
   COURSE_PAGE_CLASS,
-} from '@/components/courses/course-detail-layout';
+} from '@/components/courses/CourseDetailLayout';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';

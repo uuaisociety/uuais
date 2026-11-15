@@ -21,7 +21,7 @@ import {
   COURSE_PANEL_CLASS,
   CONNECTIONS_HEIGHT,
   ConnectionsSkeleton,
-} from './course-detail-layout';
+} from './CourseDetailLayout';
 //import { evaluateEligibility, buildProfileFromTranscript, type EligibilityResult } from "@/lib/eligibility/engine";
 //import { type EligibilityResult } from "@/lib/eligibility/engine";
 

@@ -1,92 +1,22 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { refreshProfile, useAdmin } from '@/hooks/useAdmin';
 import { Button } from '@/components/ui/Button';
 import { joinUrl } from '@/lib/login-redirect';
 import {
-  SkeletonBox,
-  SkeletonRegion,
-  SkeletonText,
-} from '@/components/ui/skeleton';
-import {
   MEMBER_BODY_CLASS,
   MemberCard,
   SignInPrompt,
 } from '@/components/pages/MemberCard';
-
-const SIGNED_OUT_TEXT =
-  'Log in with your member account to subscribe or manage your subscription.';
-
-const NewsletterIntro = () => (
-  <p className="mt-4 max-w-prose text-base text-muted-foreground">
-    Subscribe to the UU AI Society newsletter. Manage your subscription here
-    anytime.
-  </p>
-);
-
-/** The account line under the hairline: "Account:" and the address. */
-const AccountLine = ({ email }: { email: ReactNode }) => (
-  <p className="text-base text-muted-foreground sm:text-sm">
-    Account:{' '}
-    <span className="mt-1 block text-foreground [overflow-wrap:anywhere]">
-      {email}
-    </span>
-  </p>
-);
-
-/**
- * The card's body while the account loads: a member's subscription panel when
- * someone is (or was last) signed in, otherwise the sign-in prompt.
- */
-const BodySkeleton = ({
-  email,
-  returnPath,
-}: {
-  email: string | null | undefined;
-  returnPath: string;
-}) => (
-  <SkeletonRegion label="Loading your account…">
-    {email !== undefined ? (
-      <div className={MEMBER_BODY_CLASS}>
-        <AccountLine
-          email={
-            email || (
-              <SkeletonText className="inline-block" widths={['12rem']} />
-            )
-          }
-        />
-        <SkeletonText
-          className="mt-3 text-base sm:text-sm"
-          widths={['14rem']}
-        />
-        <SkeletonBox className="mt-5 h-11 w-full rounded-md sm:w-32" />
-      </div>
-    ) : (
-      <div inert>
-        <SignInPrompt text={SIGNED_OUT_TEXT} returnPath={returnPath} />
-      </div>
-    )}
-  </SkeletonRegion>
-);
-
-/** The newsletter page while its route loads. `cached` is the last signed-in identity, if any. */
-export const NewsletterSkeleton = ({
-  cached,
-}: {
-  cached: { email: string | null } | null;
-}) => (
-  <MemberCard title="Newsletter">
-    <NewsletterIntro />
-    <BodySkeleton
-      email={cached ? cached.email : undefined}
-      returnPath="/newsletter"
-    />
-  </MemberCard>
-);
+import {
+  AccountLine,
+  BodySkeleton,
+  NewsletterIntro,
+  SIGNED_OUT_TEXT,
+} from '@/components/pages/NewsletterLayout';
 
 type NewsletterPageProps = {
   requestedSubscription?: boolean | null;
