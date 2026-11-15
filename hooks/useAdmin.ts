@@ -83,19 +83,44 @@ const RETRY_DELAYS_MS = [2_000, 4_000, 8_000, 10_000];
 let retryTimer: ReturnType<typeof setTimeout> | null = null;
 let retryAttempt = 0;
 
+let waitingForVisible = false;
+
+// A hidden tab doesn't keep reading; it retries once it's shown again.
+const retryWhenVisible = () => {
+  if (document.hidden) return;
+  document.removeEventListener('visibilitychange', retryWhenVisible);
+  waitingForVisible = false;
+  void refreshProfile();
+};
+
 const clearProfileRetry = () => {
   if (retryTimer) clearTimeout(retryTimer);
   retryTimer = null;
   retryAttempt = 0;
+  if (waitingForVisible) {
+    document.removeEventListener('visibilitychange', retryWhenVisible);
+    waitingForVisible = false;
+  }
 };
 
-const scheduleProfileRetry = () => {
-  if (retryTimer) return;
+// A refusal by the security rules won't fix itself; offline errors and timeouts will.
+const isTransient = (e: unknown) => {
+  const code = (e as { code?: unknown })?.code;
+  return code !== 'permission-denied' && code !== 'unauthenticated';
+};
+
+const scheduleProfileRetry = (error: unknown) => {
+  if (retryTimer || waitingForVisible || !isTransient(error)) return;
   const delay =
     RETRY_DELAYS_MS[Math.min(retryAttempt, RETRY_DELAYS_MS.length - 1)];
   retryAttempt += 1;
   retryTimer = setTimeout(() => {
     retryTimer = null;
+    if (document.hidden) {
+      waitingForVisible = true;
+      document.addEventListener('visibilitychange', retryWhenVisible);
+      return;
+    }
     void refreshProfile();
   }, delay);
 };
@@ -108,7 +133,7 @@ const loadIsPartner = (u: User): Promise<boolean> =>
         .catch(() => false)
     : Promise.resolve(false);
 
-/** Re-read the signed-in user's profile and publish it to the store so dependent UI sees fresh data after a save. Never throws: a failed read is retried, and sets `profileError` only when no profile was ever loaded (a known profile stays shown). */
+/** Re-read the signed-in user's profile and publish it to the store so dependent UI sees fresh data after a save. Never throws: a failed read is retried and leaves the store as it was (an earlier `profileError` stays set; a profile that already loaded stays shown); a successful one clears `profileError`. */
 export const refreshProfile = async (): Promise<void> => {
   const uid = store.user?.uid;
   if (!uid) return;
@@ -120,7 +145,7 @@ export const refreshProfile = async (): Promise<void> => {
     console.warn('Profile read failed; retrying', e);
     if (store.user?.uid !== uid) return;
     // An earlier error stays an error; a profile that already loaded stays shown.
-    scheduleProfileRetry();
+    scheduleProfileRetry(e);
     return;
   }
   if (store.user?.uid !== uid) return;
@@ -145,6 +170,17 @@ export const publishProfile = (profile: UserProfile): void => {
   publish(profile);
 };
 
+/** /join keeps unfinished drafts per tab (joinDraft:<uid>); drop them on sign-out so the next person in this tab doesn't inherit them. */
+const clearJoinDrafts = () => {
+  try {
+    Object.keys(window.sessionStorage)
+      .filter((k) => k.startsWith('joinDraft:'))
+      .forEach((k) => window.sessionStorage.removeItem(k));
+  } catch {
+    // Storage blocked: there's nothing stored either.
+  }
+};
+
 let started = false;
 let authInitialized = false;
 
@@ -165,6 +201,7 @@ const initializeAuth = () => {
         profileRequests.clear();
         clearProfileRetry();
         writeCache(null);
+        clearJoinDrafts();
         if (gen !== authGeneration) return;
         setStore({
           user: null,
@@ -227,7 +264,7 @@ const initializeAuth = () => {
         // Unknown, not missing: keep the user signed in and retry, never treat them as unregistered.
         console.warn('Profile read failed; retrying', profileResult.error);
         setStore({ isPartner, profileLoading: false, profileError: true });
-        scheduleProfileRetry();
+        scheduleProfileRetry(profileResult.error);
         return;
       }
 
