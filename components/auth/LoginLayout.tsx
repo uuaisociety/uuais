@@ -39,7 +39,7 @@ export const LoginFooter = ({ joinHref }: { joinHref: string }) => (
     <p className="text-sm text-gray-600 dark:text-gray-400">
       New here?{' '}
       <Link href={joinHref} className="underline">
-        Create an account
+        Join UU AI Society
       </Link>
     </p>
     <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">

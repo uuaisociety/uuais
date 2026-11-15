@@ -180,15 +180,24 @@ export default function EmailLinkSignIn({
       return;
     linkHandled.current = true;
     setStep('completing');
-    void firebase().then(({ isEmailSignInLink, storedEmailForSignIn }) => {
-      if (!isEmailSignInLink(href)) {
-        setStep('idle');
-        return;
-      }
-      const stored = storedEmailForSignIn();
-      if (stored) void complete(stored, href);
-      else setStep('confirm');
-    });
+    firebase().then(
+      ({ isEmailSignInLink, storedEmailForSignIn }) => {
+        if (!isEmailSignInLink(href)) {
+          setStep('idle');
+          return;
+        }
+        const stored = storedEmailForSignIn();
+        if (stored) void complete(stored, href);
+        else setStep('confirm');
+      },
+      (err: unknown) => {
+        // The SDK chunk didn't load (bad connection). The link is still good:
+        // confirming the email retries the sign-in.
+        console.error('Loading sign-in failed:', err);
+        setError(ERRORS['auth/network-request-failed']);
+        setStep('confirm');
+      },
+    );
     // Runs once on landing; `complete` closes over nothing that changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

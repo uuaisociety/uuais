@@ -183,8 +183,13 @@ const JoinPage: React.FC = () => {
     formHeadingRef.current?.focus();
     // Another tab (e.g. the one the email link opened) may finish the account;
     // re-check on return so this one shows "already a member" instead of the form.
+    // At most every 30 s, so tab-switching doesn't turn into a read each time.
+    let lastCheck = Date.now();
     const recheck = () => {
-      if (document.visibilityState === 'visible') void refreshProfile();
+      if (document.visibilityState !== 'visible') return;
+      if (Date.now() - lastCheck < 30_000) return;
+      lastCheck = Date.now();
+      void refreshProfile();
     };
     document.addEventListener('visibilitychange', recheck);
     return () => document.removeEventListener('visibilitychange', recheck);
@@ -222,6 +227,14 @@ const JoinPage: React.FC = () => {
 
   // A timed-out save can still commit later, and the user may retry meanwhile: finish only once.
   const finished = useRef(false);
+  // A late save must not navigate a user who has since left /join.
+  const mounted = useRef(true);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
   const finish = (saved: UserProfile) => {
     if (finished.current) return;
     finished.current = true;
@@ -237,6 +250,7 @@ const JoinPage: React.FC = () => {
       message: 'Welcome to UU AI Society! You are now a member.',
       timeoutMs: 6000,
     });
+    if (!mounted.current) return;
     // Registration is often a detour (e.g. an application form) — return there.
     const target = currentRedirect();
     router.push(
