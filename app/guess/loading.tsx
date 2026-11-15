@@ -1,6 +1,6 @@
 'use client';
 
-import { GuessSkeleton } from '@/components/pages/GuessPage';
+import { GuessSkeleton } from '@/components/pages/GuessLayout';
 import { useAdmin } from '@/hooks/useAdmin';
 
 // Shown straight away: it is the page's own card, with the guess form for
