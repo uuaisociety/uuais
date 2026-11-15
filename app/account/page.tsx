@@ -1,6 +1,12 @@
 'use client';
 
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -10,9 +16,9 @@ import {
   auth,
   linkGoogleToCurrentUser,
   linkGithubToCurrentUser,
+  refreshSessionCookie,
 } from '@/lib/firebase-client';
 import {
-  upsertUserProfile,
   updateUserProfile,
   getMyRegistrations,
   getAllEvents,
@@ -22,6 +28,7 @@ import {
 import {
   cancelRegistration,
   confirmRegistration,
+  declineRegistration,
 } from '@/lib/firestore/registrations';
 import type { EventRegistration } from '@/types';
 import { Button } from '@/components/ui/Button';
@@ -69,7 +76,7 @@ import { updatePageMeta } from '@/utils/seo';
 import { isReferralSource } from '@/lib/referrals';
 import { publishProfile, refreshProfile, useAdmin } from '@/hooks/useAdmin';
 import { joinUrl } from '@/lib/login-redirect';
-import { withTimeout } from '@/lib/with-timeout';
+import { TimeoutError, withTimeout } from '@/lib/with-timeout';
 
 // Event applications are secondary; a hung read shows a retry instead of blocking the page.
 const REGISTRATIONS_TIMEOUT_MS = 15_000;
@@ -231,6 +238,7 @@ const ToggleRow = ({
   description,
   checked,
   disabled,
+  busy,
   lockedReason,
   onChange,
 }: {
@@ -238,28 +246,52 @@ const ToggleRow = ({
   description?: string;
   checked: boolean;
   disabled?: boolean;
+  /** A save for this switch is in flight. */
+  busy?: boolean;
   lockedReason?: string;
   onChange: (next: boolean) => void;
-}) => (
-  <label className="flex items-start justify-between gap-6 py-3.5 border-t border-border cursor-pointer has-[:disabled]:cursor-not-allowed">
-    <span>
-      <span className="block text-foreground font-medium">{label}</span>
-      {(lockedReason || description) && (
-        <span className="block text-sm text-muted-foreground mt-0.5">
-          {lockedReason || description}
+}) => {
+  const labelId = useId();
+  const descriptionId = useId();
+  const detail = lockedReason || description;
+  return (
+    <label className="flex items-start justify-between gap-6 py-3.5 border-t border-border cursor-pointer has-[:disabled]:cursor-not-allowed">
+      <span>
+        <span id={labelId} className="block text-foreground font-medium">
+          {label}
         </span>
-      )}
-    </span>
-    <input
-      type="checkbox"
-      role="switch"
-      className="mt-1 size-4 accent-[var(--primary)]"
-      checked={checked}
-      disabled={disabled}
-      onChange={(e) => onChange(e.target.checked)}
-    />
-  </label>
-);
+        {detail && (
+          <span
+            id={descriptionId}
+            className="block text-sm text-muted-foreground mt-0.5"
+          >
+            {detail}
+          </span>
+        )}
+      </span>
+      <input
+        type="checkbox"
+        role="switch"
+        className="mt-1 size-4 accent-[var(--primary)]"
+        checked={checked}
+        disabled={disabled || busy}
+        aria-busy={busy || undefined}
+        aria-labelledby={labelId}
+        aria-describedby={detail ? descriptionId : undefined}
+        onChange={(e) => onChange(e.target.checked)}
+      />
+    </label>
+  );
+};
+
+/** Profile links are rendered as hrefs, so only web URLs are kept; a bare "linkedin.com/in/x" gets https://. */
+const normalizeUrl = (value: string): string | null => {
+  const v = value.trim();
+  if (!v) return '';
+  if (/^https?:\/\//i.test(v)) return v;
+  if (/^[a-z][a-z0-9+.-]*:/i.test(v)) return null;
+  return `https://${v}`;
+};
 
 // ------------------------------------------------------------------ page
 
@@ -298,6 +330,20 @@ export default function AccountPage() {
   const [editing, setEditing] = useState<FieldKey | null>(null);
   const [draft, setDraft] = useState<Partial<UserProfile>>({});
   const [saving, setSaving] = useState(false);
+  // Return focus to the row's Edit button when its editor closes.
+  const editButtons = useRef<
+    Partial<Record<FieldKey, HTMLButtonElement | null>>
+  >({});
+  const lastEdited = useRef<FieldKey | null>(null);
+  useEffect(() => {
+    if (editing !== null || !lastEdited.current) return;
+    editButtons.current[lastEdited.current]?.focus();
+    lastEdited.current = null;
+  }, [editing]);
+  // Switches move at once; the value shown while their save is in flight.
+  const [pendingToggles, setPendingToggles] = useState<
+    Partial<Record<keyof UserProfile, boolean>>
+  >({});
 
   const [hasCv, setHasCv] = useState<boolean | null>(null);
   const [providers, setProviders] = useState<string[] | null>(null);
@@ -307,7 +353,7 @@ export default function AccountPage() {
   >('loading');
   const [eventMeta, setEventMeta] = useState<EventMeta>({});
   const [registrationsAttempt, setRegistrationsAttempt] = useState(0);
-  const [confirmRegId, setConfirmRegId] = useState<string | null>(null);
+  const [confirmReg, setConfirmReg] = useState<EventRegistration | null>(null);
   const [confirmDeleteAccount, setConfirmDeleteAccount] = useState(false);
 
   useEffect(() => {
@@ -344,30 +390,48 @@ export default function AccountPage() {
 
   const save = async (patch: Partial<UserProfile>): Promise<boolean> => {
     if (!uid) return false;
+    // Only a finished member profile is edited here; creating one (and with it
+    // membership and privacy acceptance) happens on /join.
+    if (!profile) {
+      notify({
+        type: 'error',
+        title: 'Not saved',
+        message: 'Finish creating your account on the Join page first.',
+      });
+      return false;
+    }
+    const write = updateUserProfile(uid, patch);
     try {
-      await withTimeout(
-        profile
-          ? updateUserProfile(uid, patch)
-          : upsertUserProfile(uid, { ...patch, isMember: true }),
-        SAVE_TIMEOUT_MS,
-      );
+      await withTimeout(write, SAVE_TIMEOUT_MS);
       // Show the change everywhere at once; a read reconciles it in the background.
       publishProfile({ ...current, ...patch, id: uid } as UserProfile);
       void refreshProfile();
       return true;
     } catch (e) {
       console.error('Saving the profile failed:', e);
-      notify({
-        type: 'error',
-        title: 'Not saved',
-        message:
-          'Your change wasn’t saved. Check your connection and try again.',
-      });
+      if (e instanceof TimeoutError) {
+        // The write stays queued and may still land; show whatever the server ends up with.
+        write.then(refreshProfile, refreshProfile);
+        notify({
+          type: 'warning',
+          title: 'Still saving',
+          message:
+            'Your connection is slow. The change will apply when you’re back online; check back in a moment.',
+        });
+      } else {
+        notify({
+          type: 'error',
+          title: 'Not saved',
+          message:
+            'Your change wasn’t saved. Check your connection and try again.',
+        });
+      }
       return false;
     }
   };
 
   const startEdit = (key: FieldKey) => {
+    lastEdited.current = key;
     setEditing(key);
     setDraft(
       key === 'heardOfUs'
@@ -385,6 +449,23 @@ export default function AccountPage() {
       patch.referredBy = '';
     for (const [k, v] of Object.entries(patch))
       if (typeof v === 'string') patch[k] = v.trim();
+    if (
+      editing === 'linkedin' ||
+      editing === 'github' ||
+      editing === 'website'
+    ) {
+      const url = normalizeUrl(String(patch[editing] ?? ''));
+      if (url === null) {
+        setSaving(false);
+        notify({
+          type: 'error',
+          title: 'Not saved',
+          message: 'Enter a web address starting with https://',
+        });
+        return;
+      }
+      patch[editing] = url;
+    }
     const ok = await save(patch as Partial<UserProfile>);
     setSaving(false);
     if (ok) {
@@ -394,13 +475,23 @@ export default function AccountPage() {
   };
 
   const toggle = async (key: keyof UserProfile, value: boolean) => {
-    if (await save({ [key]: value }))
+    if (key in pendingToggles) return;
+    setPendingToggles((p) => ({ ...p, [key]: value }));
+    const ok = await save({ [key]: value });
+    setPendingToggles((p) => {
+      const next = { ...p };
+      delete next[key];
+      return next;
+    });
+    if (ok)
       notify({
         type: 'success',
         title: 'Saved',
         message: 'Preference updated.',
       });
   };
+  const toggleValue = (key: keyof UserProfile) =>
+    pendingToggles[key] ?? Boolean(current[key]);
 
   const handleCvChange = (cv: MemberCv | null) => {
     const had = hasCv;
@@ -448,7 +539,8 @@ export default function AccountPage() {
         title: 'Confirmed',
         message: 'Your spot has been confirmed.',
       });
-      if (uid) setRegistrations(await getMyRegistrations(uid));
+      // Reload through the same filter as the first load, so past events don't reappear.
+      setRegistrationsAttempt((n) => n + 1);
     } catch (e: unknown) {
       notify({
         type: 'error',
@@ -465,6 +557,8 @@ export default function AccountPage() {
 
   const handleDeleteAccount = async () => {
     try {
+      // The route deletes whoever the session cookie names; make sure that's this user.
+      await refreshSessionCookie();
       const res = await fetch('/api/account/delete', { method: 'POST' });
       const body = await res.json().catch(() => null);
       if (!res.ok)
@@ -571,7 +665,7 @@ export default function AccountPage() {
     }
     if (f.kind === 'select')
       return f.options?.find(([k]) => k === v)?.[1] ?? String(v);
-    if (f.kind === 'url')
+    if (f.kind === 'url' && /^https?:\/\//i.test(String(v)))
       return (
         <a
           href={String(v)}
@@ -709,8 +803,13 @@ export default function AccountPage() {
             <form
               key={f.key}
               onSubmit={saveRow}
+              // Bare addresses like "github.com/me" are completed on save, so skip the browser's URL check.
+              noValidate
               onKeyDown={(e) => {
-                if (e.key === 'Escape') setEditing(null);
+                if (e.key === 'Escape') {
+                  e.preventDefault();
+                  setEditing(null);
+                }
               }}
               className="grid sm:grid-cols-[13rem_1fr] gap-x-6 gap-y-2 py-4 border-t border-border"
             >
@@ -749,6 +848,9 @@ export default function AccountPage() {
               <dd className={ROW_VALUE_CLASS}>{displayValue(f)}</dd>
               <dd>
                 <Button
+                  ref={(el) => {
+                    editButtons.current[f.key] = el;
+                  }}
                   size="sm"
                   variant="ghost"
                   className={
@@ -826,7 +928,7 @@ export default function AccountPage() {
                   size="sm"
                   variant={r.status === 'invited' ? 'ghost' : 'outline'}
                   aria-label={`${r.status === 'invited' ? 'Decline' : 'Cancel'} ${eventMeta[r.eventId]?.title ?? 'this event'}`}
-                  onClick={() => setConfirmRegId(r.id)}
+                  onClick={() => setConfirmReg(r)}
                 >
                   {r.status === 'invited' ? 'Decline' : 'Cancel'}
                 </Button>
@@ -903,10 +1005,19 @@ export default function AccountPage() {
   };
 
   const onTabKey = (e: React.KeyboardEvent, index: number) => {
-    const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-    if (!step) return;
+    const target =
+      e.key === 'ArrowRight'
+        ? (index + 1) % TABS.length
+        : e.key === 'ArrowLeft'
+          ? (index - 1 + TABS.length) % TABS.length
+          : e.key === 'Home'
+            ? 0
+            : e.key === 'End'
+              ? TABS.length - 1
+              : -1;
+    if (target < 0) return;
     e.preventDefault();
-    const next = TABS[(index + step + TABS.length) % TABS.length];
+    const next = TABS[target];
     selectTab(next.id);
     document.getElementById(`tab-${next.id}`)?.focus();
   };
@@ -1136,12 +1247,14 @@ export default function AccountPage() {
                 <ToggleRow
                   label="Newsletter"
                   description="Events and news from the society."
-                  checked={Boolean(current.newsletter)}
+                  checked={toggleValue('newsletter')}
+                  busy={'newsletter' in pendingToggles}
                   onChange={(v) => void toggle('newsletter', v)}
                 />
                 <ToggleRow
                   label="Marketing communications"
-                  checked={Boolean(current.marketingOptIn)}
+                  checked={toggleValue('marketingOptIn')}
+                  busy={'marketingOptIn' in pendingToggles}
                   onChange={(v) => void toggle('marketingOptIn', v)}
                 />
                 <ToggleRow
@@ -1152,19 +1265,22 @@ export default function AccountPage() {
                       ? 'On while your CV is shared. Remove your CV to turn this off.'
                       : undefined
                   }
-                  checked={hasCv ? true : Boolean(current.partnerContactOptIn)}
+                  checked={hasCv ? true : toggleValue('partnerContactOptIn')}
                   disabled={Boolean(hasCv)}
+                  busy={'partnerContactOptIn' in pendingToggles}
                   onChange={(v) => void toggle('partnerContactOptIn', v)}
                 />
                 <ToggleRow
                   label="Looking for job opportunities"
-                  checked={Boolean(current.lookingForJob)}
+                  checked={toggleValue('lookingForJob')}
+                  busy={'lookingForJob' in pendingToggles}
                   onChange={(v) => void toggle('lookingForJob', v)}
                 />
                 <ToggleRow
                   label="Anonymous usage analytics"
                   description="Link and page interactions, never tied to your name."
-                  checked={Boolean(current.analyticsOptIn)}
+                  checked={toggleValue('analyticsOptIn')}
+                  busy={'analyticsOptIn' in pendingToggles}
                   onChange={(v) => void toggle('analyticsOptIn', v)}
                 />
               </div>
@@ -1207,22 +1323,43 @@ export default function AccountPage() {
         </div>
 
         <ConfirmModal
-          open={!!confirmRegId}
-          title="Unregister from event"
-          description="Are you sure you want to unregister from this event?"
-          confirmText="Yes, unregister"
-          cancelText="Keep registration"
-          onClose={() => setConfirmRegId(null)}
+          open={!!confirmReg}
+          title={
+            confirmReg?.status === 'invited'
+              ? 'Decline invitation'
+              : 'Unregister from event'
+          }
+          description={
+            confirmReg?.status === 'invited'
+              ? 'Are you sure you want to decline your spot? It will go to someone else.'
+              : 'Are you sure you want to unregister from this event?'
+          }
+          confirmText={
+            confirmReg?.status === 'invited'
+              ? 'Yes, decline'
+              : 'Yes, unregister'
+          }
+          cancelText={
+            confirmReg?.status === 'invited'
+              ? 'Keep my spot'
+              : 'Keep registration'
+          }
+          onClose={() => setConfirmReg(null)}
           onConfirm={async () => {
-            if (!confirmRegId) return;
+            if (!confirmReg) return;
+            const declining = confirmReg.status === 'invited';
             try {
-              await cancelRegistration(confirmRegId);
+              // An invitation is declined (its own status), not cancelled.
+              if (declining) await declineRegistration(confirmReg.id);
+              else await cancelRegistration(confirmReg.id);
               notify({
                 type: 'success',
-                title: 'Cancelled',
-                message: 'Your registration has been cancelled.',
+                title: declining ? 'Declined' : 'Cancelled',
+                message: declining
+                  ? 'You declined the invitation.'
+                  : 'Your registration has been cancelled.',
               });
-              if (uid) setRegistrations(await getMyRegistrations(uid));
+              setRegistrationsAttempt((n) => n + 1);
             } catch (e: unknown) {
               notify({
                 type: 'error',
@@ -1233,7 +1370,7 @@ export default function AccountPage() {
                     : 'Could not cancel. Please contact us if you have problems unregistering for the event.',
               });
             } finally {
-              setConfirmRegId(null);
+              setConfirmReg(null);
             }
           }}
         />
