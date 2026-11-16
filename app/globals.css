@@ -280,6 +280,9 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    /* Reserve the scrollbar's lane so the fixed header doesn't slide sideways
+       when a short loading skeleton grows into a scrolling page. */
+    scrollbar-gutter: stable;
   }
 
   body {
@@ -603,6 +606,26 @@
   to { transform: translateX(-50%); }
 }
 .animate-marquee { animation: marquee 40s linear infinite; }
+
+/* Hero orbits (HeroAnimation): zero-size layers centred on the nabla, rotated
+   by the compositor. Steps come from the inline timing function. The glyphs
+   counter-rotate so they stay upright. Paused while the hero is off-screen. */
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+.hero-orbit {
+  position: absolute;
+  inset: 0 auto auto 0;
+  animation-name: orbit-spin;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.hero-orbit-glyph {
+  animation-name: orbit-spin;
+  animation-iteration-count: infinite;
+  animation-direction: reverse;
+  will-change: transform;
+}
+.hero-orbits[data-paused] .hero-orbit,
+.hero-orbits[data-paused] .hero-orbit-glyph { animation-play-state: paused; }
 .animate-marquee:hover,
 .animate-marquee:focus-within { animation-play-state: paused; }
 
@@ -701,4 +724,19 @@
 [data-theme-switching] .react-flow *::before,
 [data-theme-switching] .react-flow *::after {
   transition: none !important;
+}
+
+/* Header hints set by the pre-paint script (lib/pre-paint-script.ts) from the last-known
+   identity and Apply state, so the server-rendered header already has its final shape.
+   Unlayered on purpose, to outrank the utilities on these elements. The header clears the
+   attributes once React has the live values. */
+html[data-auth] [data-header-anon] {
+  display: none;
+}
+html:not([data-auth="admin"]) [data-header-admin] {
+  display: none;
+}
+/* Apply stays hidden until campaigns load, unless one was open last visit. */
+html:not([data-apply="open"]) [data-header-apply] {
+  display: none;
 }

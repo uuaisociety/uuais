@@ -15,23 +15,25 @@ describe('HeroSplash', () => {
     expect(screen.getByText('Hero content')).toBeInTheDocument();
   });
 
-  it('renders a dark ink slab in dark mode', () => {
+  it('styles both themes with dark: variants so server HTML matches the pre-painted theme', () => {
     const { container } = render(<HeroSplash />);
     const section = container.querySelector('section');
-    expect(section?.className).toContain('bg-ink');
-    expect(section?.className).toContain('text-white');
+    // White paper by default, warm ink once <html> carries .dark
+    expect(section?.className).toMatch(/(^|\s)bg-card(\s|$)/);
+    expect(section?.className).toMatch(/(^|\s)text-foreground(\s|$)/);
+    expect(section?.className).toContain('dark:bg-ink');
+    expect(section?.className).toContain('dark:text-white');
     // The splash layer sits behind the content and never intercepts events
     const splash = container.querySelector('[aria-hidden="true"]');
     expect(splash?.className).toContain('absolute');
     expect(splash?.className).toContain('pointer-events-none');
   });
 
-  it('renders a white paper slab in light mode', () => {
+  it('renders identical markup whatever the theme context says', () => {
+    const dark = render(<HeroSplash />).container.innerHTML;
     global.__setMockTheme?.('light');
-    const { container } = render(<HeroSplash />);
-    const section = container.querySelector('section');
-    expect(section?.className).toContain('bg-card');
-    expect(section?.className).toContain('text-foreground');
+    const light = render(<HeroSplash />).container.innerHTML;
+    expect(light).toBe(dark);
   });
 
   it('uses an ink-tinted splash in dark mode and a cool light splash in light mode', () => {
@@ -42,25 +44,18 @@ describe('HeroSplash', () => {
     expect(LIGHT_SPLASH).not.toContain('from var(--ink)');
   });
 
-  it('crossfades both splashes on a theme switch instead of swapping one gradient', () => {
-    const { container, rerender } = render(<HeroSplash />);
-    const layers = () =>
-      Array.from(
-        container.querySelectorAll<HTMLElement>('[aria-hidden="true"]'),
-      );
-    const visible = () =>
-      layers().find((l) => l.className.includes('opacity-100'));
-
-    expect(layers()).toHaveLength(2);
-    layers().forEach((l) =>
-      expect(l.className).toContain('transition-opacity'),
+  it('keeps both splashes mounted and crossfades them with dark: opacity', () => {
+    const { container } = render(<HeroSplash />);
+    const layers = Array.from(
+      container.querySelectorAll<HTMLElement>('[aria-hidden="true"]'),
     );
-    expect(visible()?.style.background).toBe(DARK_SPLASH);
-
-    global.__setMockTheme?.('light');
-    rerender(<HeroSplash />);
-    expect(layers()).toHaveLength(2);
-    expect(visible()?.style.background).toBe(LIGHT_SPLASH);
+    expect(layers).toHaveLength(2);
+    layers.forEach((l) => expect(l.className).toContain('transition-opacity'));
+    const [darkLayer, lightLayer] = layers;
+    expect(darkLayer.style.background).toBe(DARK_SPLASH);
+    expect(darkLayer.className).toContain('opacity-0 dark:opacity-100');
+    expect(lightLayer.style.background).toBe(LIGHT_SPLASH);
+    expect(lightLayer.className).toContain('opacity-100 dark:opacity-0');
   });
 
   it('passes geometry classes through to the section', () => {

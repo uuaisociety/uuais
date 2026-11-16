@@ -1,7 +1,5 @@
 'use client';
 
-import { useTheme } from '@/providers/ThemeProvider';
-
 // Interior radial light for the hero slab. Two gradients mirror the ambient
 // blobs behind the glass: a brand-red glow and a secondary tint for depth.
 // Dark mode lights the primary hot on the ink; light mode softens the red and
@@ -31,25 +29,24 @@ export const HeroSplash: React.FC<HeroSplashProps> = ({
   lightSplash = LIGHT_SPLASH,
   children,
 }) => {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
   return (
     <section
-      // Only the slab fades here. Animating `color` too would restart the text's own
-      // fade (globals.css) every frame and leave the hero copy stalled half-faded.
-      className={`relative overflow-hidden transition-[background-color] duration-300 ease-[var(--ease-ios)] ${isDark ? 'bg-ink text-white' : 'bg-card text-foreground'} ${className}`}
+      // Themed with `dark:` rather than the theme context so the server HTML is
+      // already right for the pre-painted <html> class. Only the slab fades here.
+      // Animating `color` too would restart the text's own fade (globals.css)
+      // every frame and leave the hero copy stalled half-faded.
+      className={`relative overflow-hidden transition-[background-color] duration-300 ease-[var(--ease-ios)] bg-card text-foreground dark:bg-ink dark:text-white ${className}`}
     >
       {/* Gradients cannot interpolate, so swapping one background would snap the glow
           while the slab colour fades. Both splashes stay mounted and crossfade instead. */}
       <div
         aria-hidden
-        className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ease-[var(--ease-ios)] ${isDark ? 'opacity-100' : 'opacity-0'}`}
+        className="absolute inset-0 pointer-events-none transition-opacity duration-300 ease-[var(--ease-ios)] opacity-0 dark:opacity-100"
         style={{ background: DARK_SPLASH }}
       />
       <div
         aria-hidden
-        className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ease-[var(--ease-ios)] ${isDark ? 'opacity-0' : 'opacity-100'}`}
+        className="absolute inset-0 pointer-events-none transition-opacity duration-300 ease-[var(--ease-ios)] opacity-100 dark:opacity-0"
         style={{ background: lightSplash }}
       />
       {children}

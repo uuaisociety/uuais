@@ -1,15 +1,19 @@
-'use client'
+'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { useTheme } from '@/providers/ThemeProvider';
+
+// Clicking the hero spawns a few math symbols that drift in from the edges and
+// spring toward the pointer. Each symbol is a small element moved with a CSS
+// transform, so a frame only updates a handful of transforms for the
+// compositor; a canvas the size of the hero would have to be cleared, redrawn
+// and re-uploaded every frame instead. The colour follows the theme via CSS.
 
 // === Types ===
 
 interface FloatingSymbol {
-  text: string;
+  el: HTMLSpanElement;
   x: number;
   y: number;
-  opacity: number;
   life: number;
   maxLife: number;
   offsetX: number;
@@ -17,79 +21,124 @@ interface FloatingSymbol {
   rotation: number;
 }
 
+const MATH_SYMBOLS = [
+  '∇L',
+  '∂f',
+  'δ',
+  'Σ',
+  'λ',
+  'dx',
+  '∂',
+  'f(x)',
+  '∫',
+  '∇',
+  '∞',
+  '≈',
+  'θ',
+  'π',
+  'Δ',
+  '∏',
+  '∐',
+  '∑',
+  '∈',
+  '∉',
+  '∩',
+  '∪',
+  '⊂',
+  '⊃',
+  '⇒',
+  '⇔',
+  '≤',
+  '≥',
+  '≠',
+  '≈',
+  '∝',
+  '∽',
+  '∂²',
+  '∇²',
+  '∮',
+];
+
+// Physics steps are per frame, so a fixed 30fps keeps the motion the same on
+// 60Hz and 144Hz screens, and halves the work on the fast ones.
+const FRAME_INTERVAL = 1000 / 30;
+const MAX_SYMBOLS = 60;
+
 // === Main Component ===
 
 const FloatingSymbolsCanvas: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>(0);
-  const symbolsRef = useRef<FloatingSymbol[]>([]);
-  const mousePosRef = useRef({ x: 0, y: 0 });
-  const prevTsRef = useRef(0);
-  const { theme } = useTheme();
+  const layerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const layer = layerRef.current;
+    if (!layer) return;
 
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    // White glyphs on the ink slab, near-ink on the paper slab.
-    const glyphColor = theme === 'dark' ? 'rgba(255, 255, 255, 1)' : 'rgba(30, 28, 27, 1)';
-
-    const dpr = window.devicePixelRatio || 1;
-
-    const resize = () => {
-      const r = canvas.getBoundingClientRect();
-      const w = Math.round(r.width * dpr);
-      const h = Math.round(r.height * dpr);
-      if (w === canvas.width && h === canvas.height) return;
-      canvas.width = w;
-      canvas.height = h;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-
-    // Sync the backing store with the element whenever it resizes for any
-    // reason (font/image load, media-query reflow, mobile URL-bar, zoom) —
-    // window.resize alone misses those and leaves the drawing clipped.
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
-    resize();
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const symbols: FloatingSymbol[] = [];
+    const mouse = { x: 0, y: 0 };
+    let raf = 0;
+    let running = false;
+    let lastTs = 0;
+    let isIntersecting = true;
 
     // === Mouse Tracking ===
     const handleMouseMove = (e: MouseEvent) => {
-      const r = canvas.getBoundingClientRect();
-      mousePosRef.current = { x: e.clientX - r.left, y: e.clientY - r.top };
+      const r = layer.getBoundingClientRect();
+      mouse.x = e.clientX - r.left;
+      mouse.y = e.clientY - r.top;
     };
 
     // === Click Handler - Spawn Math Symbols ===
     const handleClick = (e: MouseEvent) => {
-      const r = canvas.getBoundingClientRect();
+      if (reducedMotion.matches) return;
+      const r = layer.getBoundingClientRect();
       const x = e.clientX - r.left;
       const y = e.clientY - r.top;
 
       if (x < 0 || x > r.width || y < 0 || y > r.height) return;
 
-      const mathSymbols = ['∇L', '∂f', 'δ', 'Σ', 'λ', 'dx', '∂', 'f(x)', '∫', '∇', '∞', '≈', 'θ', 'π', 'Δ', '∏', '∐', '∑', '∈', '∉', '∩', '∪', '⊂', '⊃', '⇒', '⇔', '≤', '≥', '≠', '≈', '∝', '∽', '∂²', '∇²', '∮'];
       const count = 3 + Math.floor(Math.random() * 3);
 
       for (let i = 0; i < count; i++) {
-        const edge = ['top', 'bottom', 'left', 'right'][Math.floor(Math.random() * 4)];
+        const edge = ['top', 'bottom', 'left', 'right'][
+          Math.floor(Math.random() * 4)
+        ];
         let sx: number, sy: number;
 
         switch (edge) {
-          case 'top': sx = Math.random() * r.width; sy = -30; break;
-          case 'bottom': sx = Math.random() * r.width; sy = r.height + 30; break;
-          case 'left': sx = -30; sy = Math.random() * r.height; break;
-          case 'right': sx = r.width + 30; sy = Math.random() * r.height; break;
-          default: sx = Math.random() * r.width; sy = -30; break;
+          case 'top':
+            sx = Math.random() * r.width;
+            sy = -30;
+            break;
+          case 'bottom':
+            sx = Math.random() * r.width;
+            sy = r.height + 30;
+            break;
+          case 'left':
+            sx = -30;
+            sy = Math.random() * r.height;
+            break;
+          case 'right':
+            sx = r.width + 30;
+            sy = Math.random() * r.height;
+            break;
+          default:
+            sx = Math.random() * r.width;
+            sy = -30;
+            break;
         }
 
-        symbolsRef.current.push({
-          text: mathSymbols[Math.floor(Math.random() * mathSymbols.length)],
+        const el = document.createElement('span');
+        el.className =
+          'absolute left-0 top-0 font-mono text-base leading-none whitespace-nowrap opacity-0 will-change-transform';
+        el.textContent =
+          MATH_SYMBOLS[Math.floor(Math.random() * MATH_SYMBOLS.length)];
+        layer.appendChild(el);
+
+        symbols.push({
+          el,
           x: sx,
           y: sy,
-          opacity: 0,
           life: 0,
           maxLife: 3000 + Math.random() * 2000,
           offsetX: (Math.random() - 0.5) * 30,
@@ -98,18 +147,15 @@ const FloatingSymbolsCanvas: React.FC = () => {
         });
       }
 
-      // The loop is started on demand — kick it off now that there's something to draw.
+      // Limit max symbols
+      while (symbols.length > MAX_SYMBOLS) symbols.shift()?.el.remove();
+
+      // The loop is started on demand — kick it off now that there's something to move.
       startLoop();
     };
 
-    // === Draw Symbols ===
-    const draw = (dt: number) => {
-      const symbols = symbolsRef.current;
-      if (symbols.length === 0) return;
-
-      // Limit max symbols
-      while (symbols.length > 60) symbols.shift();
-
+    // === Move Symbols ===
+    const update = (dt: number) => {
       for (let i = symbols.length - 1; i >= 0; i--) {
         const sym = symbols[i];
         sym.life += dt;
@@ -117,13 +163,14 @@ const FloatingSymbolsCanvas: React.FC = () => {
 
         // Remove dead symbols
         if (life >= 1) {
+          sym.el.remove();
           symbols.splice(i, 1);
           continue;
         }
 
         // Spring attraction toward mouse
-        const dx = mousePosRef.current.x - sym.x;
-        const dy = mousePosRef.current.y - sym.y;
+        const dx = mouse.x - sym.x;
+        const dy = mouse.y - sym.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
         if (dist > 0) {
@@ -135,7 +182,7 @@ const FloatingSymbolsCanvas: React.FC = () => {
           sym.y += dy * radial + (dx / dist) * tangent * dist;
 
           // Rotation toward mouse
-          sym.rotation += ((angle * 180 / Math.PI) + 90 - sym.rotation) * 0.05;
+          sym.rotation += ((angle * 180) / Math.PI + 90 - sym.rotation) * 0.05;
         }
 
         // Calculate opacity with fade in/out
@@ -148,99 +195,82 @@ const FloatingSymbolsCanvas: React.FC = () => {
           opacity = 0.15 * (1 - (life - 0.5) / 0.5);
         }
 
-        ctx.save();
-        ctx.translate(Math.round(sym.x + sym.offsetX), Math.round(sym.y + sym.offsetY));
-        ctx.rotate((sym.rotation * Math.PI) / 180);
-        ctx.globalAlpha = Math.max(0, Math.min(1, opacity));
-        ctx.fillStyle = glyphColor;
-        ctx.font = '16px monospace';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(sym.text, 0, 0);
-        ctx.restore();
+        sym.el.style.transform = `translate(${sym.x + sym.offsetX}px, ${sym.y + sym.offsetY}px) translate(-50%, -50%) rotate(${sym.rotation}deg)`;
+        sym.el.style.opacity = String(Math.max(0, Math.min(1, opacity)));
       }
     };
 
     // === Animation Loop ===
-    // Runs only while on-screen, tab visible, and no reduced motion; paints at half cadence.
-    // The loop stays stopped until the first click spawns symbols — an empty canvas has nothing to animate, so a rAF loop would just burn main-thread frames.
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let running = false;
-    let frame = 0;
-
+    // Runs only while symbols exist, on-screen, in a visible tab.
     const animate = (ts: number) => {
       if (!running) return;
-      if (!prevTsRef.current) prevTsRef.current = ts;
-      const dt = Math.min(ts - prevTsRef.current, 50);
-      prevTsRef.current = ts;
-
-      frame++;
-      if (frame % 2 === 0 && symbolsRef.current.length > 0) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        draw(dt);
-        // Stop once the last symbol has faded out — the canvas is static again.
-        if (symbolsRef.current.length === 0) {
-          stopLoop();
-          return;
-        }
+      if (lastTs && ts - lastTs < FRAME_INTERVAL - 2) {
+        raf = requestAnimationFrame(animate);
+        return;
       }
-      animationRef.current = requestAnimationFrame(animate);
+      const dt = lastTs ? Math.min(ts - lastTs, 50) : 0;
+      lastTs = ts;
+      update(dt);
+      // Stop once the last symbol has faded out.
+      if (symbols.length === 0) {
+        stopLoop();
+        return;
+      }
+      raf = requestAnimationFrame(animate);
     };
 
     const startLoop = () => {
-      if (running || reducedMotion.matches || symbolsRef.current.length === 0) return;
+      if (
+        running ||
+        reducedMotion.matches ||
+        symbols.length === 0 ||
+        !isIntersecting ||
+        document.hidden
+      )
+        return;
       running = true;
-      prevTsRef.current = 0;
-      animationRef.current = requestAnimationFrame(animate);
+      lastTs = 0;
+      raf = requestAnimationFrame(animate);
     };
 
     const stopLoop = () => {
       if (!running) return;
       running = false;
-      cancelAnimationFrame(animationRef.current);
+      cancelAnimationFrame(raf);
     };
 
-    // Stop animating when the canvas scrolls out of view or the tab is hidden.
-    let isIntersecting = true;
+    // Stop animating when the hero scrolls out of view or the tab is hidden.
     const onIntersect = (entries: IntersectionObserverEntry[]) => {
       isIntersecting = entries[entries.length - 1].isIntersecting;
-      if (isIntersecting && !document.hidden) startLoop();
+      if (isIntersecting) startLoop();
       else stopLoop();
     };
     const onVisibilityChange = () => {
       if (document.hidden) stopLoop();
-      else if (isIntersecting) startLoop();
+      else startLoop();
     };
     const io = new IntersectionObserver(onIntersect);
-    io.observe(canvas);
+    io.observe(layer);
     document.addEventListener('visibilitychange', onVisibilityChange);
 
-    window.addEventListener('resize', resize);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('click', handleClick);
-
-    if (!reducedMotion.matches && symbolsRef.current.length > 0) {
-      startLoop();
-    } else {
-      draw(0);
-    }
 
     return () => {
       stopLoop();
       io.disconnect();
       document.removeEventListener('visibilitychange', onVisibilityChange);
-      window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('click', handleClick);
+      symbols.forEach((s) => s.el.remove());
     };
-  }, [theme]);
+  }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
+    <div
+      ref={layerRef}
       aria-hidden="true"
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ width: '100%', height: '100%' }}
+      className="absolute inset-0 overflow-hidden pointer-events-none text-[rgb(30,28,27)] dark:text-white"
     />
   );
 };

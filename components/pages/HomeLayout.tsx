@@ -114,7 +114,9 @@ export const HomeHero: React.FC<{
           </div>
         </div>
 
-        <div className="order-1 lg:order-2 flex items-center justify-center w-full min-h-[10rem] pt-8 lg:pt-0 lg:h-full">
+        {/* lg:pt-px keeps the canvas just below the header's 1px border: any overlap
+            makes the header's backdrop blur redraw on every animation frame. */}
+        <div className="order-1 lg:order-2 flex items-center justify-center w-full min-h-[10rem] pt-8 lg:pt-px lg:h-full">
           {animation ?? (
             // The animation canvas's box (it has a 200px min height).
             <div className="w-full h-full min-h-[200px]" />
