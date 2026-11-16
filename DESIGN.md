@@ -206,6 +206,7 @@ The form language is tight and near-square — a quiet, editorial corner scale r
 - **The header** is a fixed, theme-aware glass bar (`glass-nav`): light frosted in light mode, dark ink in dark mode, `h-14` with a 24px blur. It follows the theme on every page.
 - **Type:** mono-label for Register/Login/Logout, sans medium for nav links, `text-current/60` resting → full on hover.
 - **Active:** a translucent current-colour fill (`bg-current/[0.12]`) with full-strength text.
+- **Layout:** wordmark and right cluster are equal `flex-1` columns, so the desktop nav sits centred and never moves while the page loads. The theme, the signed-in slot and the Apply CTA are laid out before first paint from the last-known values (`lib/pre-paint-script.ts`); the signed-in name truncates rather than widening the cluster.
 - **Mobile:** hamburger opens a menu that inherits the header's glass surface (no separate opaque panel), `lg:` reveals the full desktop nav. The dropdown/popover (`glass-pop`) is a stronger frosted panel — `blur(40px)`, more opaque, own shadow.
 
 ### Modals

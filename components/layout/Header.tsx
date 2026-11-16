@@ -6,12 +6,13 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { useAdmin } from '@/hooks/useAdmin';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useSyncExternalStore } from 'react';
 import { Button } from '@/components/ui/Button';
 import { loginUrl } from '@/lib/login-redirect';
 import { useOpenCampaigns } from '@/lib/firestore/useOpenCampaigns';
 import { useGuessContest } from '@/lib/firestore/useGuessContest';
 import { PARTNERS_PAGE_PUBLIC } from '@/lib/feature-flags';
+import { APPLY_STATE_KEY } from '@/lib/pre-paint-script';
 
 // Desktop top level. The wordmark already goes home, so Home only earns a slot
 // in the mobile list, where a vertical menu has room for it.
@@ -36,6 +37,8 @@ const projectLinks = [
   { href: '/explore', label: 'Course navigator', adminOnly: true },
   { href: '/my-courses', label: 'My favourites', adminOnly: true },
 ];
+
+const noopSubscribe = () => () => {};
 
 const BetaBadge: React.FC = () => (
   <span className="ml-1.5 inline-flex items-center font-mono uppercase tracking-[0.1em] text-[0.625rem] leading-none rounded-sm px-1.5 py-[3px] border border-border bg-chart-4/15 text-[#0f7a55] dark:bg-chart-4/20 dark:text-chart-4">
@@ -67,11 +70,47 @@ export const Header: React.FC = () => {
     setIsCommunityOpen(false);
   }
 
-  // Hide the Apply CTA when no open application campaign exists (show it while
-  // campaigns are still loading to avoid a flicker on first paint).
+  // Apply only shows while a campaign is open. Until campaigns load it stays
+  // rendered but hidden by CSS, unless the last visit saw one open (the
+  // pre-paint script sets data-apply="open"), so it never flashes in and out.
   const { campaigns, loaded: campaignsLoaded } = useOpenCampaigns();
-  const showApply =
-    !campaignsLoaded || campaigns.some((c) => c.status === 'open');
+  const hasOpenCampaign = campaigns.some((c) => c.status === 'open');
+  const showApply = !campaignsLoaded || hasOpenCampaign;
+  // Whether Apply was already on screen before campaigns loaded; if not, it
+  // fades in when a campaign turns out to be open instead of popping in.
+  const [applyShownEarly] = useState(
+    () =>
+      typeof document !== 'undefined' &&
+      document.documentElement.getAttribute('data-apply') === 'open',
+  );
+
+  // False only while hydrating the server HTML, which cannot know who is signed in.
+  const hydrated = useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false,
+  );
+
+  // The pre-paint script laid the header out from the cached identity
+  // (data-auth); React has it from here on.
+  useEffect(() => {
+    document.documentElement.removeAttribute('data-auth');
+  }, []);
+
+  // Remember whether a campaign was open, so the next load can show Apply from
+  // the first paint instead of fading it in once this resolves.
+  useEffect(() => {
+    if (!campaignsLoaded) return;
+    try {
+      window.localStorage.setItem(
+        APPLY_STATE_KEY,
+        hasOpenCampaign ? 'open' : 'closed',
+      );
+    } catch {
+      /* storage blocked — Apply just fades in on the next load */
+    }
+    document.documentElement.removeAttribute('data-apply');
+  }, [campaignsLoaded, hasOpenCampaign]);
 
   // The fair guessing game sits in the top level only while an admin has it open.
   const { contest } = useGuessContest();
@@ -150,25 +189,30 @@ export const Header: React.FC = () => {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 glass-nav">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-14 flex items-center justify-between gap-2">
+          {/* Equal-width side columns keep the nav centred, so the identity and
+              Apply resolving on the right never push it sideways. No wrapping:
+              a squeezed column must keep its width, not break the wordmark. */}
+          <div className="h-14 flex items-center justify-between gap-2 whitespace-nowrap">
             {/* Wordmark */}
-            <Link
-              href="/"
-              aria-label="UU AI Society"
-              className="flex items-center gap-2 pl-1 shrink-0 group"
-            >
-              <Image
-                src="/images/logo-highdef.png"
-                alt=""
-                width={40}
-                height={40}
-                className="h-8 w-8"
-                priority
-              />
-              <span className="hidden sm:block text-[0.9375rem] font-semibold tracking-[-0.03em] transition-colors duration-300">
-                UU AI Society
-              </span>
-            </Link>
+            <div className="flex flex-1 basis-0">
+              <Link
+                href="/"
+                aria-label="UU AI Society"
+                className="flex items-center gap-2 pl-1 shrink-0 group"
+              >
+                <Image
+                  src="/images/logo-highdef.png"
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="h-8 w-8"
+                  priority
+                />
+                <span className="hidden sm:block text-[0.9375rem] font-semibold tracking-[-0.03em] transition-colors duration-300">
+                  UU AI Society
+                </span>
+              </Link>
+            </div>
 
             {/* Desktop nav */}
             <nav className="hidden lg:flex items-center gap-0.5">
@@ -246,9 +290,10 @@ export const Header: React.FC = () => {
                 )}
               </div>
 
-              {identity?.showAdmin && (
+              {(identity?.showAdmin || !hydrated) && (
                 <Link
                   href="/admin"
+                  data-header-admin={hydrated ? undefined : ''}
                   className={navLinkClass(isActive('/admin'))}
                 >
                   Admin
@@ -257,50 +302,57 @@ export const Header: React.FC = () => {
             </nav>
 
             {/* Right cluster */}
-            <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
-              <div className="hidden md:flex items-center gap-1">
+            <div className="flex flex-1 basis-0 justify-end items-center gap-1 sm:gap-1.5">
+              {/* Room for the longest signed-in state (140px name + Sign out). The
+                  name gives way first when space is tight, so it never adds to the
+                  cluster's minimum width and never pushes the nav when it loads. */}
+              <div className="hidden md:flex basis-[15.25rem] min-w-0 justify-end items-center gap-1">
                 {identity ? (
                   <>
                     <Link
                       href="/account"
-                      className={`max-w-[140px] truncate px-3 py-1.5 rounded-sm mono-meta text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors ${isActive('/account') ? 'bg-current/[0.12]' : ''}`}
+                      className={`w-0 basis-[max-content] min-w-0 max-w-[140px] truncate px-3 py-1.5 rounded-sm mono-meta text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors ${isActive('/account') ? 'bg-current/[0.12]' : ''}`}
                       title={identity.name ?? undefined}
                     >
                       {identity.name}
                     </Link>
                     <button
                       onClick={() => logout()}
-                      className="px-3 py-1.5 rounded-sm mono-label text-current/60 hover:text-current transition-colors cursor-pointer"
+                      className="shrink-0 px-3 py-1.5 rounded-sm mono-label text-current/60 hover:text-current transition-colors cursor-pointer"
                     >
                       Sign out
                     </button>
                   </>
                 ) : (
-                  <>
+                  <span
+                    className="contents"
+                    data-header-anon={hydrated ? undefined : ''}
+                  >
                     <Link
                       href="/join"
-                      className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors"
+                      className="shrink-0 px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors"
                     >
                       Join
                     </Link>
                     <Link
                       href={loginUrl(pathname)}
-                      className="px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors"
+                      className="shrink-0 px-3 py-1.5 rounded-sm mono-label text-current/70 hover:text-current hover:bg-current/[0.07] transition-colors"
                     >
                       Sign in
                     </Link>
-                  </>
+                  </span>
                 )}
               </div>
 
-              <ThemeToggle className="text-current/60 hover:text-current hover:bg-current/[0.09]" />
+              <ThemeToggle className="shrink-0 text-current/60 hover:text-current hover:bg-current/[0.09]" />
 
               {showApply && (
                 <Button
                   asChild
                   variant="cta"
                   size="sm"
-                  className="hidden sm:inline-flex"
+                  className={`hidden sm:inline-flex shrink-0 ${campaignsLoaded && !applyShownEarly ? 'animate-in fade-in duration-300' : ''}`}
+                  data-header-apply={campaignsLoaded ? undefined : ''}
                 >
                   <Link href="/apply/team">Apply</Link>
                 </Button>
@@ -309,7 +361,7 @@ export const Header: React.FC = () => {
               <button
                 ref={mobileButtonRef}
                 onClick={() => setIsMenuOpen((v) => !v)}
-                className="lg:hidden size-11 grid place-items-center rounded-sm text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors cursor-pointer"
+                className="lg:hidden size-11 shrink-0 grid place-items-center rounded-sm text-current/70 hover:text-current hover:bg-current/[0.09] transition-colors cursor-pointer"
                 aria-expanded={isMenuOpen}
                 aria-controls="mobile-menu"
               >

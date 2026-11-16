@@ -13,6 +13,7 @@ import { AnalyticsWithConsent } from '@/components/common/AnalyticsWithConsent';
 // import { metadata, viewport } from "./metadata";
 export { metadata, viewport } from './metadata';
 import { SITE_URL } from './metadata';
+import { PRE_PAINT_SCRIPT } from '@/lib/pre-paint-script';
 
 // Background texture layer — flip between "grain", "vignette", or "none" to compare.
 const bgTexture: 'grain' | 'vignette' | 'none' = 'grain';
@@ -43,6 +44,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
+      <head>
+        {/* Theme and header hints before first paint; see lib/pre-paint-script.ts */}
+        <script dangerouslySetInnerHTML={{ __html: PRE_PAINT_SCRIPT }} />
+      </head>
       <body
         className={`${display.variable} ${mono.variable} font-sans bg-background text-foreground min-h-screen`}
       >

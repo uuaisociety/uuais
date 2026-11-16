@@ -1,5 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { renderToString } from 'react-dom/server';
 import { Header } from '@/components/layout/Header';
+import { APPLY_STATE_KEY } from '@/lib/pre-paint-script';
 
 jest.mock('@/components/ui/ThemeToggle', () => ({
   ThemeToggle: () => <div data-testid="theme-toggle" />,
@@ -486,6 +488,87 @@ describe('Header', () => {
       screen
         .getAllByRole('link', { name: 'Member Showcase' })
         .forEach((link) => expect(link).toHaveAttribute('href', '/showcase'));
+    });
+  });
+
+  describe('pre-paint layout hints', () => {
+    const html = document.documentElement;
+    afterEach(() => {
+      html.removeAttribute('data-auth');
+      html.removeAttribute('data-apply');
+      localStorage.clear();
+    });
+
+    it('server HTML carries the slots the pre-paint CSS hides or reveals', () => {
+      const markup = renderToString(<Header />);
+      // Sign-in links, a hidden Admin link and the Apply CTA, so a returning
+      // member's header has its final shape before hydration.
+      expect(markup).toContain('data-header-anon');
+      expect(markup).toContain('data-header-admin');
+      expect(markup).toContain('data-header-apply');
+    });
+
+    it('drops the hydration-only slots once rendered on the client', () => {
+      render(<Header />);
+      expect(document.querySelector('[data-header-anon]')).toBeNull();
+      expect(document.querySelector('[data-header-admin]')).toBeNull();
+      expect(screen.queryByText('Admin')).not.toBeInTheDocument();
+    });
+
+    it('clears the cached-identity hint after mount', () => {
+      html.setAttribute('data-auth', 'admin');
+      render(<Header />);
+      expect(html.hasAttribute('data-auth')).toBe(false);
+    });
+
+    it('marks Apply as pending (hidden by CSS) until campaigns load', () => {
+      render(<Header />);
+      const apply = screen
+        .getAllByRole('link', { name: 'Apply' })
+        .find((a) => a.hasAttribute('data-header-apply'));
+      expect(apply).toBeDefined();
+      expect(localStorage.getItem(APPLY_STATE_KEY)).toBeNull();
+    });
+
+    it('fades Apply in when a campaign turns out to be open', () => {
+      mockUseOpenCampaigns.mockReturnValue({
+        campaigns: [{ id: 'c1', status: 'open' }],
+        loaded: true,
+      });
+      render(<Header />);
+      const desktop = screen
+        .getAllByRole('link', { name: 'Apply' })
+        .find((a) => a.className.includes('sm:inline-flex'));
+      expect(desktop).not.toHaveAttribute('data-header-apply');
+      expect(desktop?.className).toContain('fade-in');
+    });
+
+    it('does not fade Apply in when it was already shown before paint', () => {
+      html.setAttribute('data-apply', 'open');
+      mockUseOpenCampaigns.mockReturnValue({
+        campaigns: [{ id: 'c1', status: 'open' }],
+        loaded: true,
+      });
+      render(<Header />);
+      const desktop = screen
+        .getAllByRole('link', { name: 'Apply' })
+        .find((a) => a.className.includes('sm:inline-flex'));
+      expect(desktop?.className).not.toContain('fade-in');
+    });
+
+    it('remembers the Apply state and clears the hint once campaigns load', () => {
+      html.setAttribute('data-apply', 'open');
+      mockUseOpenCampaigns.mockReturnValue({
+        campaigns: [{ id: 'c1', status: 'open' }],
+        loaded: true,
+      });
+      const { rerender } = render(<Header />);
+      expect(html.hasAttribute('data-apply')).toBe(false);
+      expect(localStorage.getItem(APPLY_STATE_KEY)).toBe('open');
+
+      mockUseOpenCampaigns.mockReturnValue({ campaigns: [], loaded: true });
+      rerender(<Header />);
+      expect(localStorage.getItem(APPLY_STATE_KEY)).toBe('closed');
     });
   });
 });
