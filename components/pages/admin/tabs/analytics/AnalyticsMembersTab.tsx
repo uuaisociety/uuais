@@ -1,10 +1,18 @@
 'use client';
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import Link from 'next/link';
 import { Download, ExternalLink } from 'lucide-react';
-import { downloadCsv, eventMonthKey, StatCard } from './AnalyticsShared';
+import {
+  dailySignupSeries,
+  downloadCsv,
+  granularityFor,
+  periodKey,
+  rollUp,
+  StatCard,
+  type Granularity,
+} from './AnalyticsShared';
 import {
   ChartCard,
   ColumnChart,
@@ -12,16 +20,45 @@ import {
   RankedBars,
   TimeAreaChart,
   VIZ,
+  formatDay,
   formatMonth,
   rankWithOther,
 } from './AnalyticsCharts';
 import type { MemberAnalytics } from '@/lib/firestore/member-analytics';
+import type { Event } from '@/types';
 
 interface Props {
   memberAnalytics: MemberAnalytics | null;
-  chartData: { month: string; signups: number; cumulative: number }[];
-  eventMarkers: string[];
+  events: Event[];
 }
+
+/** Axis ticks and tooltip headings for each period size. */
+const FORMATS: Record<
+  Granularity,
+  { tick: (s: string) => string; label: (s: string) => string }
+> = {
+  day: { tick: formatDay, label: formatDay },
+  week: { tick: formatDay, label: (s) => `Week of ${formatDay(s)}` },
+  month: { tick: formatMonth, label: formatMonth },
+};
+
+/** "2026-11-23" → "Nov 23, 2026" (local date, no timezone shift). */
+const longDay = (s: string) => {
+  const [y, m, d] = s.split('-').map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString('en', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+};
+
+/** Preset ranges for the signup charts, ending today. */
+const RANGES = [
+  { key: 'month', label: 'Last month', months: 1 },
+  { key: 'year', label: 'Last year', months: 12 },
+  { key: 'all', label: 'All time', months: null },
+] as const;
+type RangeKey = (typeof RANGES)[number]['key'];
 
 const answered = (m: Record<string, number>) =>
   `${Object.values(m)
@@ -31,15 +68,52 @@ const answered = (m: Record<string, number>) =>
 const plural = (n: number, word: string) =>
   `${n.toLocaleString('en')} ${word}${n === 1 ? '' : 's'}`;
 
-const MembersTab: React.FC<Props> = ({
-  memberAnalytics,
-  chartData,
-  eventMarkers,
-}) => {
-  const eventMonths = useMemo(() => new Set(eventMarkers), [eventMarkers]);
-  const currentMonth = eventMonthKey(new Date().toISOString());
-  const thisMonth =
-    chartData.find((d) => d.month === currentMonth)?.signups ?? 0;
+const MembersTab: React.FC<Props> = ({ memberAnalytics, events }) => {
+  // A preset, or a range dragged out on a chart (inclusive "YYYY-MM-DD").
+  const [view, setView] = useState<RangeKey | { from: string; to: string }>(
+    'month',
+  );
+
+  const days = useMemo(
+    () => dailySignupSeries(memberAnalytics?.dailySignups ?? []),
+    [memberAnalytics],
+  );
+  const visibleDays = useMemo(() => {
+    if (typeof view === 'object')
+      return days.filter((d) => d.date >= view.from && d.date <= view.to);
+    const months = RANGES.find((r) => r.key === view)!.months;
+    if (months === null) return days;
+    // Up to and including today, e.g. Oct 24 – Nov 23.
+    const from = new Date();
+    from.setMonth(from.getMonth() - months);
+    from.setDate(from.getDate() + 1);
+    const fromKey = periodKey(from, 'day');
+    return days.filter((d) => d.date >= fromKey);
+  }, [days, view]);
+  // The fewer days in view, the finer the columns: zooming in reaches days.
+  const granularity = granularityFor(visibleDays.length);
+  const chartData = useMemo(
+    () => rollUp(visibleDays, granularity),
+    [visibleDays, granularity],
+  );
+  const fmt = FORMATS[granularity];
+  const zoomTo = (from: number, to: number) =>
+    setView({ from: chartData[from].start, to: chartData[to].end });
+
+  const thisMonth = periodKey(new Date(), 'month');
+  const newThisMonth = days
+    .filter((d) => d.date.startsWith(thisMonth))
+    .reduce((s, d) => s + d.signups, 0);
+
+  const eventPeriods = useMemo(
+    () =>
+      new Set(
+        events
+          .filter((e) => e.eventStartAt)
+          .map((e) => periodKey(new Date(e.eventStartAt), granularity)),
+      ),
+    [events, granularity],
+  );
 
   // Top 10, ranked so ties share a place (1, 2, 2, 4).
   const topReferrers = useMemo(() => {
@@ -132,13 +206,49 @@ const MembersTab: React.FC<Props> = ({
       {memberAnalytics && (
         <div className="grid md:grid-cols-2 gap-6">
           <ChartCard
+            className="md:col-span-2"
             title="Members over time"
-            summary={`${memberAnalytics.totalUsers.toLocaleString('en')} members · ${thisMonth} new this month`}
+            summary={`${memberAnalytics.totalUsers.toLocaleString('en')} members · ${newThisMonth} new this month · ${
+              visibleDays.length
+                ? `${longDay(visibleDays[0].date)} – ${longDay(visibleDays.at(-1)!.date)}`
+                : 'no signups yet'
+            }`}
+            action={
+              <div
+                className="flex flex-wrap bg-foreground/[0.05] rounded-md p-1 gap-1"
+                role="group"
+                aria-label="Signup chart range"
+              >
+                {RANGES.map((r) => (
+                  <button
+                    key={r.key}
+                    type="button"
+                    aria-pressed={view === r.key}
+                    onClick={() => setView(r.key)}
+                    className={`px-3 py-1 rounded text-sm font-medium transition-colors duration-300 ${
+                      view === r.key
+                        ? 'bg-primary text-primary-foreground'
+                        : 'text-foreground/60 hover:text-foreground'
+                    }`}
+                  >
+                    {r.label}
+                  </button>
+                ))}
+              </div>
+            }
           >
+            <p className="text-xs text-muted-foreground mb-2">
+              Total members · drag across either chart to zoom in
+            </p>
             <TimeAreaChart
               data={chartData}
-              xKey="month"
-              xFormat={formatMonth}
+              xKey="period"
+              height={160}
+              xFormat={fmt.tick}
+              labelFormat={fmt.label}
+              syncId="member-signups"
+              banded
+              onZoom={zoomTo}
               series={[
                 {
                   key: 'cumulative',
@@ -147,26 +257,32 @@ const MembersTab: React.FC<Props> = ({
                 },
               ]}
             />
-          </ChartCard>
-          <ChartCard
-            title="New signups per month"
-            summary="Months with an event are highlighted"
-          >
-            <Legend
-              items={[
-                { label: 'Month with an event', color: VIZ.primary },
-                { label: 'No event', color: VIZ.muted },
-              ]}
-            />
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 mt-5 mb-2">
+              <p className="text-xs text-muted-foreground">
+                New signups per {granularity}
+              </p>
+              <Legend
+                items={[
+                  {
+                    label: `${granularity[0].toUpperCase()}${granularity.slice(1)} with an event`,
+                    color: VIZ.primary,
+                  },
+                  { label: 'No event', color: VIZ.muted },
+                ]}
+              />
+            </div>
             <ColumnChart
               data={chartData}
-              xKey="month"
+              xKey="period"
               yKey="signups"
               name="New signups"
-              height={176}
-              xFormat={formatMonth}
+              height={160}
+              xFormat={fmt.tick}
+              labelFormat={fmt.label}
+              syncId="member-signups"
+              onZoom={zoomTo}
               colorFor={(r) =>
-                eventMonths.has(r.month) ? VIZ.primary : VIZ.muted
+                eventPeriods.has(r.period) ? VIZ.primary : VIZ.muted
               }
             />
           </ChartCard>

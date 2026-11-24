@@ -1,30 +1,49 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useAnalyticsData, type AnalyticsTabKey } from "./analytics/useAnalyticsData";
-import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
-import dynamic from "next/dynamic";
-import AnalyticsOverviewTab from "./analytics/AnalyticsOverviewTab";
-import AnalyticsNewsletterTab from "./analytics/AnalyticsNewsletterTab";
-import AnalyticsJobsTab from "./analytics/AnalyticsJobsTab";
+import React from 'react';
+import {
+  useAnalyticsData,
+  type AnalyticsTabKey,
+} from './analytics/useAnalyticsData';
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
+import dynamic from 'next/dynamic';
+import AnalyticsOverviewTab from './analytics/AnalyticsOverviewTab';
+import AnalyticsNewsletterTab from './analytics/AnalyticsNewsletterTab';
+import AnalyticsJobsTab from './analytics/AnalyticsJobsTab';
 
-const AnalyticsEventsTab = dynamic(() => import("./analytics/AnalyticsEventsTab"), { ssr: false });
-const AnalyticsMembersTab = dynamic(() => import("./analytics/AnalyticsMembersTab"), { ssr: false });
-const AnalyticsAITab = dynamic(() => import("./analytics/AnalyticsAITab"), { ssr: false });
-const AnalyticsFirebaseTab = dynamic(() => import("./analytics/AnalyticsFirebaseTab"), { ssr: false });
+const AnalyticsEventsTab = dynamic(
+  () => import('./analytics/AnalyticsEventsTab'),
+  { ssr: false },
+);
+const AnalyticsMembersTab = dynamic(
+  () => import('./analytics/AnalyticsMembersTab'),
+  { ssr: false },
+);
+const AnalyticsAITab = dynamic(() => import('./analytics/AnalyticsAITab'), {
+  ssr: false,
+});
+const AnalyticsFirebaseTab = dynamic(
+  () => import('./analytics/AnalyticsFirebaseTab'),
+  { ssr: false },
+);
 
 interface AnalyticsTabProps {
   activeSubtab: AnalyticsTabKey;
   onSelectSubtab: (key: AnalyticsTabKey) => void;
 }
 
-const AnalyticsTab: React.FC<AnalyticsTabProps> = ({ activeSubtab, onSelectSubtab }) => {
+const AnalyticsTab: React.FC<AnalyticsTabProps> = ({
+  activeSubtab,
+  onSelectSubtab,
+}) => {
   const d = useAnalyticsData(activeSubtab, onSelectSubtab);
 
   return (
     <div>
-      <h2 className="text-xl font-semibold tracking-[-0.028em] text-foreground mb-4">Analytics</h2>
-      {activeSubtab === "overview" && (
+      <h2 className="text-xl font-semibold tracking-[-0.028em] text-foreground mb-4">
+        Analytics
+      </h2>
+      {activeSubtab === 'overview' && (
         <ErrorBoundary>
           <AnalyticsOverviewTab
             events={d.events}
@@ -45,34 +64,44 @@ const AnalyticsTab: React.FC<AnalyticsTabProps> = ({ activeSubtab, onSelectSubta
           />
         </ErrorBoundary>
       )}
-      {activeSubtab === "events" && (
+      {activeSubtab === 'events' && (
         <ErrorBoundary>
-          <AnalyticsEventsTab funnelData={d.funnelData} events={d.events} regAnalytics={d.regAnalytics} />
+          <AnalyticsEventsTab
+            funnelData={d.funnelData}
+            events={d.events}
+            regAnalytics={d.regAnalytics}
+          />
         </ErrorBoundary>
       )}
-      {activeSubtab === "members" && (
+      {activeSubtab === 'members' && (
         <ErrorBoundary>
-          <AnalyticsMembersTab memberAnalytics={d.memberAnalytics} chartData={d.chartData} eventMarkers={d.eventMarkers} />
+          <AnalyticsMembersTab
+            memberAnalytics={d.memberAnalytics}
+            events={d.events}
+          />
         </ErrorBoundary>
       )}
-      {activeSubtab === "newsletter" && (
+      {activeSubtab === 'newsletter' && (
         <ErrorBoundary>
           <AnalyticsNewsletterTab blogs={d.blogs} blogReads={d.blogReads} />
         </ErrorBoundary>
       )}
-      {activeSubtab === "jobs" && (
+      {activeSubtab === 'jobs' && (
         <ErrorBoundary>
           <AnalyticsJobsTab jobs={d.jobs} jobClicks={d.jobClicks} />
         </ErrorBoundary>
       )}
-      {activeSubtab === "ai" && (
+      {activeSubtab === 'ai' && (
         <ErrorBoundary>
           <AnalyticsAITab aiAnalytics={d.aiAnalytics} />
         </ErrorBoundary>
       )}
-      {activeSubtab === "firebase" && (
+      {activeSubtab === 'firebase' && (
         <ErrorBoundary>
-          <AnalyticsFirebaseTab firebaseData={d.firebaseData} firebaseLoading={d.firebaseLoading} />
+          <AnalyticsFirebaseTab
+            firebaseData={d.firebaseData}
+            firebaseLoading={d.firebaseLoading}
+          />
         </ErrorBoundary>
       )}
     </div>

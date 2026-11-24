@@ -33,34 +33,99 @@ export function shortDate(iso: string | undefined | null): string {
   return new Date(iso).toLocaleDateString();
 }
 
-export function cumulativeSignups(
-  monthly: { month: string; count: number }[],
-): { month: string; signups: number; cumulative: number }[] {
-  if (monthly.length === 0) return [];
-  // Months with no signups are absent from `monthly`; fill them in as zeros so
-  // the time axis is even.
-  const counts = new Map(monthly.map((m) => [m.month, m.count]));
-  const sorted = [...counts.keys()].sort();
-  let [y, mo] = sorted[0].split('-').map(Number);
-  const [endY, endMo] = sorted[sorted.length - 1].split('-').map(Number);
-  const out: { month: string; signups: number; cumulative: number }[] = [];
+export type Granularity = 'day' | 'week' | 'month';
+
+const pad = (n: number) => String(n).padStart(2, '0');
+
+/** Local midnight at the start of d's day, week (from Monday) or month. */
+function periodStart(d: Date, g: Granularity): Date {
+  if (g === 'month') return new Date(d.getFullYear(), d.getMonth(), 1);
+  const start = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  if (g === 'week') start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
+  return start;
+}
+
+/** "2026-11-23" for a day, the week's Monday for a week, "2026-11" for a month. */
+export function periodKey(d: Date, g: Granularity): string {
+  const s = periodStart(d, g);
+  const month = `${s.getFullYear()}-${pad(s.getMonth() + 1)}`;
+  return g === 'month' ? month : `${month}-${pad(s.getDate())}`;
+}
+
+const parseLocalDay = (s: string) => {
+  const [y, m, d] = s.split('-').map(Number);
+  return new Date(y, m - 1, d);
+};
+
+export type SignupDay = { date: string; signups: number; cumulative: number };
+
+/**
+ * Signups per day with a running total, from the first signup through today.
+ * Days with no signups are filled in as zeros so the time axis is even.
+ */
+export function dailySignupSeries(
+  daily: { date: string; count: number }[],
+  now = new Date(),
+): SignupDay[] {
+  const counts = new Map(daily.map((d) => [d.date, d.count]));
+  const days = daily
+    .map((d) => parseLocalDay(d.date).getTime())
+    .filter((t) => !Number.isNaN(t));
+  if (days.length === 0) return [];
+  const last = Math.max(now.getTime(), ...days);
+  const out: SignupDay[] = [];
   let running = 0;
-  while (y < endY || (y === endY && mo <= endMo)) {
-    const month = `${y}-${String(mo).padStart(2, '0')}`;
-    const signups = counts.get(month) ?? 0;
+  // Calendar steps, not fixed milliseconds, so DST changes don't skip a day.
+  for (
+    let p = new Date(Math.min(...days));
+    p.getTime() <= last;
+    p.setDate(p.getDate() + 1)
+  ) {
+    const date = periodKey(p, 'day');
+    const signups = counts.get(date) ?? 0;
     running += signups;
-    out.push({ month, signups, cumulative: running });
-    if (++mo > 12) {
-      mo = 1;
-      y++;
-    }
+    out.push({ date, signups, cumulative: running });
   }
   return out;
 }
 
-export function eventMonthKey(iso: string): string {
-  const d = new Date(iso);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+export type SignupPoint = {
+  /** periodKey of the day, week or month. */
+  period: string;
+  /** First and last day of the series inside this period. */
+  start: string;
+  end: string;
+  signups: number;
+  /** Running total at the end of the period. */
+  cumulative: number;
+};
+
+/** Days up to ~4 months, weeks up to ~2 years, months beyond: about 120 points at most. */
+export function granularityFor(days: number): Granularity {
+  return days <= 120 ? 'day' : days <= 7 * 120 ? 'week' : 'month';
+}
+
+/** Group a daily series into periods (consecutive days, so one pass). */
+export function rollUp(days: SignupDay[], g: Granularity): SignupPoint[] {
+  const out: SignupPoint[] = [];
+  for (const d of days) {
+    const period = periodKey(parseLocalDay(d.date), g);
+    const last = out.at(-1);
+    if (last?.period === period) {
+      last.end = d.date;
+      last.signups += d.signups;
+      last.cumulative = d.cumulative;
+    } else {
+      out.push({
+        period,
+        start: d.date,
+        end: d.date,
+        signups: d.signups,
+        cumulative: d.cumulative,
+      });
+    }
+  }
+  return out;
 }
 
 export const Row: React.FC<{

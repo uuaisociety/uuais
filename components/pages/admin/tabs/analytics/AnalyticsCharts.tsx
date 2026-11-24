@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AreaChart,
   Area,
@@ -11,7 +11,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  ReferenceArea,
   ResponsiveContainer,
+  type MouseHandlerDataParam,
 } from 'recharts';
 import { Card, CardContent } from '@/components/ui/Card';
 
@@ -110,15 +112,25 @@ export function rankWithOther(
 export const ChartCard: React.FC<{
   title: string;
   summary?: React.ReactNode;
+  /** Shown at the top right, e.g. a reset button. */
+  action?: React.ReactNode;
   className?: string;
   children: React.ReactNode;
-}> = ({ title, summary, className, children }) => (
+}> = ({ title, summary, action, className, children }) => (
   <Card className={className}>
     <CardContent className="p-5">
-      <div className="mb-4">
+      <div className="mb-4 grid sm:grid-cols-[1fr_auto] items-start gap-x-3">
         <h4 className="font-semibold text-foreground">{title}</h4>
+        {/* Under the summary on phones, top right from sm up. */}
+        {action && (
+          <div className="row-start-3 mt-3 sm:row-start-1 sm:col-start-2 sm:row-span-2 sm:mt-0">
+            {action}
+          </div>
+        )}
         {summary && (
-          <p className="mono-meta text-muted-foreground mt-0.5">{summary}</p>
+          <p className="col-start-1 mono-meta text-muted-foreground mt-0.5">
+            {summary}
+          </p>
         )}
       </div>
       {children}
@@ -186,6 +198,58 @@ const ChartTooltip: React.FC<{
 
 export type Series = { key: string; name: string; color: string };
 
+/** Index range a chart can be zoomed to by dragging across it. */
+export type OnZoom = (from: number, to: number) => void;
+
+/**
+ * Drag across a chart to select a range of points; on release, `onZoom` gets
+ * the first and last index. A click without dragging does nothing.
+ */
+function useDragZoom<T extends object>(
+  data: T[],
+  xKey: string,
+  onZoom?: OnZoom,
+) {
+  const [drag, setDrag] = useState<{ from: number; to: number } | null>(null);
+  if (!onZoom)
+    return { handlers: {}, selection: null, style: undefined, className: '' };
+  const at = (s: MouseHandlerDataParam) =>
+    s.activeTooltipIndex == null ? null : Number(s.activeTooltipIndex);
+  const label = (i: number) =>
+    String((data[i] as Record<string, unknown>)?.[xKey] ?? '');
+  return {
+    handlers: {
+      onMouseDown: (s: MouseHandlerDataParam) => {
+        const i = at(s);
+        if (i !== null) setDrag({ from: i, to: i });
+      },
+      onMouseMove: (s: MouseHandlerDataParam) => {
+        const i = at(s);
+        if (drag && i !== null && i !== drag.to) setDrag({ ...drag, to: i });
+      },
+      onMouseUp: () => {
+        if (drag && drag.from !== drag.to)
+          onZoom(Math.min(drag.from, drag.to), Math.max(drag.from, drag.to));
+        setDrag(null);
+      },
+      onMouseLeave: () => setDrag(null),
+    },
+    selection:
+      drag && drag.from !== drag.to ? (
+        <ReferenceArea
+          x1={label(Math.min(drag.from, drag.to))}
+          x2={label(Math.max(drag.from, drag.to))}
+          fill="var(--foreground)"
+          fillOpacity={0.08}
+          ifOverflow="visible"
+        />
+      ) : null,
+    style: { cursor: 'crosshair', userSelect: 'none' } as const,
+    // Dragging focuses the chart; keep its outline for keyboard focus only.
+    className: '[&_:focus:not(:focus-visible)]:outline-none',
+  };
+}
+
 /** Area chart over a date (or month) axis. One y-scale only; `stacked` sums the series. */
 export function TimeAreaChart<T extends object>({
   data,
@@ -194,7 +258,11 @@ export function TimeAreaChart<T extends object>({
   height = 200,
   stacked = false,
   xFormat = formatDay,
+  labelFormat = xFormat,
   valueFormat = compact,
+  syncId,
+  banded = false,
+  onZoom,
 }: {
   data: T[];
   xKey: string;
@@ -202,14 +270,33 @@ export function TimeAreaChart<T extends object>({
   height?: number;
   stacked?: boolean;
   xFormat?: (s: string) => string;
+  /** Tooltip heading; defaults to the tick format. */
+  labelFormat?: (s: string) => string;
   valueFormat?: (v: number) => string;
+  /** Charts sharing a syncId share their hover position. */
+  syncId?: string;
+  /** Put points at column centres, to line up with a ColumnChart. */
+  banded?: boolean;
+  onZoom?: OnZoom;
 }) {
+  const zoom = useDragZoom(data, xKey, onZoom);
   return (
-    <ResponsiveContainer width="100%" height={height}>
-      <AreaChart data={data} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
+    <ResponsiveContainer
+      width="100%"
+      height={height}
+      style={zoom.style}
+      className={zoom.className}
+    >
+      <AreaChart
+        data={data}
+        margin={{ top: 4, right: 8, bottom: 0, left: 0 }}
+        syncId={syncId}
+        {...zoom.handlers}
+      >
         <CartesianGrid vertical={false} stroke="var(--border)" />
         <XAxis
           dataKey={xKey}
+          scale={banded ? 'band' : 'auto'}
           tick={TICK}
           tickLine={false}
           axisLine={{ stroke: 'var(--border)' }}
@@ -227,7 +314,7 @@ export function TimeAreaChart<T extends object>({
         <Tooltip
           cursor={{ stroke: 'var(--muted-foreground)', strokeWidth: 1 }}
           content={
-            <ChartTooltip labelFormat={xFormat} valueFormat={valueFormat} />
+            <ChartTooltip labelFormat={labelFormat} valueFormat={valueFormat} />
           }
         />
         {series.map((s) => (
@@ -251,6 +338,7 @@ export function TimeAreaChart<T extends object>({
             }}
           />
         ))}
+        {zoom.selection}
       </AreaChart>
     </ResponsiveContainer>
   );
@@ -265,6 +353,9 @@ export function ColumnChart<T extends object>({
   height = 200,
   colorFor,
   xFormat = (s: string) => s,
+  labelFormat = xFormat,
+  syncId,
+  onZoom,
 }: {
   data: T[];
   xKey: string;
@@ -273,13 +364,28 @@ export function ColumnChart<T extends object>({
   height?: number;
   colorFor?: (row: T) => string;
   xFormat?: (s: string) => string;
+  /** Tooltip heading; defaults to the tick format. */
+  labelFormat?: (s: string) => string;
+  /** Charts sharing a syncId share their hover position. */
+  syncId?: string;
+  onZoom?: OnZoom;
 }) {
+  const zoom = useDragZoom(data, xKey, onZoom);
   return (
-    <ResponsiveContainer width="100%" height={height}>
+    <ResponsiveContainer
+      width="100%"
+      height={height}
+      style={zoom.style}
+      className={zoom.className}
+    >
       <BarChart
         data={data}
         margin={{ top: 4, right: 8, bottom: 0, left: 0 }}
-        barCategoryGap={2}
+        // A share of each column, not fixed pixels: with ~100 columns a
+        // fixed gap leaves no room for the bar.
+        barCategoryGap="20%"
+        syncId={syncId}
+        {...zoom.handlers}
       >
         <CartesianGrid vertical={false} stroke="var(--border)" />
         <XAxis
@@ -300,7 +406,9 @@ export function ColumnChart<T extends object>({
         />
         <Tooltip
           cursor={{ fill: 'var(--foreground)', fillOpacity: 0.04 }}
-          content={<ChartTooltip labelFormat={xFormat} valueFormat={compact} />}
+          content={
+            <ChartTooltip labelFormat={labelFormat} valueFormat={compact} />
+          }
         />
         <Bar
           dataKey={yKey}
@@ -313,6 +421,7 @@ export function ColumnChart<T extends object>({
           {colorFor &&
             data.map((row, i) => <Cell key={i} fill={colorFor(row)} />)}
         </Bar>
+        {zoom.selection}
       </BarChart>
     </ResponsiveContainer>
   );

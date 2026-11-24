@@ -21,11 +21,18 @@ export interface MemberAnalytics {
   gender: Record<string, number>;
   studentStatus: Record<string, number>;
   monthlySignups: { month: string; count: number }[];
+  /** Signups per local calendar day ("2026-11-23"), oldest first. */
+  dailySignups: { date: string; count: number }[];
 }
 
 function getMonthKey(iso: string): string {
   const d = new Date(iso);
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
+
+function getDayKey(iso: string): string {
+  const d = new Date(iso);
+  return `${getMonthKey(iso)}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
 export async function getMemberAnalytics(): Promise<MemberAnalytics> {
@@ -44,6 +51,7 @@ export async function getMemberAnalytics(): Promise<MemberAnalytics> {
   const gender: Record<string, number> = {};
   const studentStatus: Record<string, number> = {};
   const monthlyMap: Record<string, number> = {};
+  const dailyMap: Record<string, number> = {};
 
   for (const u of users) {
     if (u.marketingOptIn) marketingOptIn++;
@@ -64,12 +72,17 @@ export async function getMemberAnalytics(): Promise<MemberAnalytics> {
     if (u.createdAt) {
       const key = getMonthKey(u.createdAt);
       monthlyMap[key] = (monthlyMap[key] ?? 0) + 1;
+      const day = getDayKey(u.createdAt);
+      dailyMap[day] = (dailyMap[day] ?? 0) + 1;
     }
   }
 
   const monthlySignups = Object.entries(monthlyMap)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([month, count]) => ({ month, count }));
+  const dailySignups = Object.entries(dailyMap)
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([date, count]) => ({ date, count }));
 
   const referrers = rankReferrers(users);
 
@@ -86,5 +99,6 @@ export async function getMemberAnalytics(): Promise<MemberAnalytics> {
     gender,
     studentStatus,
     monthlySignups,
+    dailySignups,
   };
 }

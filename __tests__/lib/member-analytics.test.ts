@@ -39,3 +39,20 @@ describe('getMemberAnalytics referrers', () => {
     expect((await getMemberAnalytics()).referrers).toEqual([]);
   });
 });
+
+describe('getMemberAnalytics daily signups', () => {
+  it('counts signups per local calendar day, oldest first', async () => {
+    const at = (y: number, m: number, d: number, h: number) =>
+      new Date(y, m - 1, d, h).toISOString();
+    mockListUsers.mockResolvedValue([
+      { id: '1', createdAt: at(2026, 11, 3, 23) },
+      { id: '2', createdAt: at(2026, 11, 2, 9) },
+      { id: '3', createdAt: at(2026, 11, 3, 0) },
+      { id: '4' },
+    ]);
+    expect((await getMemberAnalytics()).dailySignups).toEqual([
+      { date: '2026-11-02', count: 1 },
+      { date: '2026-11-03', count: 2 },
+    ]);
+  });
+});

@@ -18,15 +18,12 @@ const analytics = (
   gender: {},
   studentStatus: {},
   monthlySignups: [],
+  dailySignups: [],
 });
 
 const renderTab = (referrers: MemberAnalytics['referrers']) =>
   render(
-    <AnalyticsMembersTab
-      memberAnalytics={analytics(referrers)}
-      chartData={[]}
-      eventMarkers={[]}
-    />,
+    <AnalyticsMembersTab memberAnalytics={analytics(referrers)} events={[]} />,
   );
 
 describe('Members analytics: top referrers', () => {
