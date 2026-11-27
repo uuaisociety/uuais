@@ -18,6 +18,7 @@ import {
   Tag,
   Lock,
   Loader2,
+  EyeOff,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
@@ -54,7 +55,11 @@ import { auth, refreshSessionCookie } from '@/lib/firebase-client';
 import { joinUrl, loginUrl } from '@/lib/login-redirect';
 import { getUserProfile, type UserProfile } from '@/lib/firestore/users';
 import { subscribeToCampaignQuestions } from '@/lib/firestore/campaignQuestions';
-import { subscribeOpenCampaigns } from '@/lib/firestore/applicationCampaigns';
+import {
+  subscribeAllCampaigns,
+  subscribeOpenCampaigns,
+} from '@/lib/firestore/applicationCampaigns';
+import { useAdmin } from '@/hooks/useAdmin';
 import { useCollectionData } from '@/lib/firestore/useCollectionData';
 import { getTeamApplicationByUid } from '@/lib/firestore/teamApplications';
 import { MAX_ROLE_RANKING } from '@/lib/constants';
@@ -176,6 +181,15 @@ const hasDraftContent = (f: TeamFormData): boolean =>
   f.newsletter ||
   Object.keys(f.customAnswers).length > 0;
 
+const DraftBadge = ({ className = '' }: { className?: string }) => (
+  <span
+    className={`inline-flex items-center gap-1.5 rounded-sm border border-dashed border-chart-3 bg-chart-3/20 px-2 py-1 text-xs font-bold uppercase tracking-wider text-chart-3 ${className}`}
+  >
+    <EyeOff className="h-3.5 w-3.5" aria-hidden />
+    Draft · admins only
+  </span>
+);
+
 // Collapsible rich-text description: starts clamped to 3 lines with an ellipsis,
 // with a Show more/Show less toggle once it overflows.
 const CollapsibleDescription: React.FC<{
@@ -224,11 +238,19 @@ export default function TeamApplicationPage() {
   const pathname = usePathname();
   const wizardRef = useRef<HTMLDivElement>(null);
 
-  // Find the first open campaign (public view — open campaigns only)
+  // The open campaign for everyone. Admins (who may read drafts) fall back to
+  // a draft as a preview when nothing is open.
+  const { isAdmin } = useAdmin();
   const { data: campaigns, loaded: campaignsLoaded } =
-    useCollectionData<ApplicationCampaign>(subscribeOpenCampaigns, []);
+    useCollectionData<ApplicationCampaign>(
+      isAdmin ? subscribeAllCampaigns : subscribeOpenCampaigns,
+      [isAdmin],
+    );
   const campaign: ApplicationCampaign | null =
-    campaigns.find((c) => c.status === 'open') || null;
+    campaigns.find((c) => c.status === 'open') ||
+    (isAdmin ? campaigns.find((c) => c.status === 'draft') : undefined) ||
+    null;
+  const isDraft = campaign?.status === 'draft';
 
   // Which standard fields this campaign actually wants shown/required
   const enabledFields = campaign?.enabledStandardFields?.length
@@ -504,6 +526,28 @@ export default function TeamApplicationPage() {
     campaign?.teamInfo?.[teamId]?.name || TEAM_NAMES[teamId] || teamId;
 
   const handleNext = () => {
+    // With a single open role there is nothing to rank — pre-select it on the
+    // way into Role Selection so the applicant only has to confirm it.
+    const soleRole = openRoles.length === 1 ? openRoles[0] : null;
+    if (step === 2 && roleSelectionEnabled && soleRole) {
+      setForm((p) =>
+        p.roleRanking.some((r) => !r.custom)
+          ? p
+          : {
+              ...p,
+              roleRanking: [
+                {
+                  roleId: soleRole.id,
+                  teamId: soleRole.teamId,
+                  title: soleRole.title,
+                  teamName: teamNameFor(soleRole.teamId),
+                  justification: '',
+                },
+                ...p.roleRanking,
+              ],
+            },
+      );
+    }
     setStep((s) => Math.min(s + 1, WIZARD_STEPS.length - 1));
     setTimeout(
       () =>
@@ -522,7 +566,7 @@ export default function TeamApplicationPage() {
 
   const handleSubmit = async () => {
     if (!form.agree) return;
-    if (!campaign) return;
+    if (!campaign || isDraft) return;
     if (hasApplied) {
       notify({
         type: 'error',
@@ -642,8 +686,7 @@ export default function TeamApplicationPage() {
             No active campaigns
           </h1>
           <p className="text-muted-foreground">
-            There are no open application campaigns right now. Please check back
-            later.
+            There are no open application campaigns right now. Check back later.
           </p>
         </div>
       </div>
@@ -742,8 +785,8 @@ export default function TeamApplicationPage() {
             No roles are open right now
           </h1>
           <p className="text-muted-foreground mb-6">
-            {campaign.title} is not currently accepting role applications.
-            Please check back later.
+            {campaign.title} is not currently accepting role applications. Check
+            back later.
           </p>
           <Button asChild variant="outline">
             <Link href="/">Back to home</Link>
@@ -763,6 +806,7 @@ export default function TeamApplicationPage() {
       return typeof ans === 'string' && ans.trim().length > 0;
     });
 
+  const singleRole = openRoles.length === 1;
   const realRoleRanking = form.roleRanking.filter((r) => !r.custom);
   const roleSelectionValid =
     !roleSelectionEnabled || realRoleRanking.length > 0;
@@ -804,12 +848,15 @@ export default function TeamApplicationPage() {
         : step === 3
           ? fieldEnabled('motivation') && form.motivation.trim().length < 25
             ? `Write at least 25 characters of motivation (${form.motivation.trim().length} so far).`
-            : 'Rank at least one role to continue.'
+            : singleRole
+              ? 'Add the role to continue.'
+              : 'Rank at least one role to continue.'
           : undefined;
 
-  const submitDisabled = !form.agree || submitting;
-  const submitDisabledHint =
-    !form.agree && !submitting
+  const submitDisabled = isDraft || !form.agree || submitting;
+  const submitDisabledHint = isDraft
+    ? 'Draft campaign: submitting is off until it is set to Open.'
+    : !form.agree && !submitting
       ? 'Confirm that your information is accurate to submit.'
       : undefined;
   // Never label the button "Submit" when pressing it only starts sign-in.
@@ -831,6 +878,7 @@ export default function TeamApplicationPage() {
       {/* Hero header — full on step 0, compact on steps 1+ */}
       {step === 0 ? (
         <CampaignHero
+          badge={isDraft && <DraftBadge className="mb-4" />}
           subtitle={campaign.subtitle}
           title={campaign.title}
           description={campaign.description}
@@ -839,6 +887,7 @@ export default function TeamApplicationPage() {
       ) : (
         <HeroSplash className="py-5 pt-28">
           <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            {isDraft && <DraftBadge className="mb-2" />}
             <h1 className="text-xl font-bold">{campaign.title}</h1>
             <p className="text-sm text-current/60">{campaign.subtitle}</p>
           </div>
@@ -847,6 +896,25 @@ export default function TeamApplicationPage() {
 
       {/* Wizard */}
       <div id="wizard" ref={wizardRef} className={WIZARD_SECTION_CLASS}>
+        {isDraft && (
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+            <div
+              role="status"
+              className="flex items-start gap-3 rounded-md border-2 border-dashed border-chart-3 bg-chart-3/10 p-4 text-sm"
+            >
+              <EyeOff className="h-5 w-5 shrink-0 text-chart-3" aria-hidden />
+              <div>
+                <p className="font-semibold text-foreground">
+                  Draft preview: only admins can see this campaign.
+                </p>
+                <p className="mt-1 text-muted-foreground">
+                  Submitting is off. Set the campaign to Open in Admin →
+                  Applications to publish it.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
         {/* Returning from sign-in used to look like a silent failure — say what is still needed. */}
         {restored && !submitted && (
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
@@ -886,11 +954,11 @@ export default function TeamApplicationPage() {
             <div className="space-y-6">
               <LookingFor />
               <div>
-                <OpenRolesHead />
+                <OpenRolesHead single={singleRole} />
                 {teamsWithRoles.length === 0 ? (
                   <Card>
                     <div className="p-5 text-sm text-muted-foreground">
-                      No roles are open right now. Please check back later.
+                      No roles are open right now. Check back later.
                     </div>
                   </Card>
                 ) : (
@@ -904,12 +972,7 @@ export default function TeamApplicationPage() {
                         `Join the ${teamName} team and contribute to the society.`;
                       const Icon = TEAM_ICONS[teamId] || Rocket;
                       return (
-                        <Card
-                          key={teamId}
-                          variant="default"
-                          hover
-                          className="group"
-                        >
+                        <Card key={teamId} variant="default">
                           <div className="p-5 sm:p-6">
                             <div className="flex items-start gap-4">
                               <div className="shrink-0 w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -950,9 +1013,9 @@ export default function TeamApplicationPage() {
                                       </TagComponent>
                                     </div>
                                     {role.description && (
-                                      <CollapsibleDescription
+                                      <FormattedText
                                         text={role.description}
-                                        className="text-sm text-muted-foreground mt-1.5"
+                                        className="text-sm text-muted-foreground mt-1.5 max-w-[65ch]"
                                       />
                                     )}
                                     {role.deadline && (
@@ -1009,7 +1072,7 @@ export default function TeamApplicationPage() {
                   <User className="h-4 w-4" />
                   {profile
                     ? "We've prefilled your details from your account."
-                    : 'Please fill in your details.'}
+                    : 'Fill in your details.'}
                 </p>
               </div>
               <Card className="overflow-visible">
@@ -1358,8 +1421,9 @@ export default function TeamApplicationPage() {
                   Role Selection
                 </h2>
                 <p className="text-sm text-muted-foreground mb-2">
-                  Rank the roles you&apos;d like to join by preference, set your
-                  availability, and tell us why you want to contribute.
+                  {singleRole
+                    ? 'Confirm your role, set your availability, and tell us why you want to join.'
+                    : 'Rank your roles, set your availability, and tell us why you want to join.'}
                 </p>
               </div>
               <Card>
@@ -1461,7 +1525,7 @@ export default function TeamApplicationPage() {
                   Review &amp; Submit
                 </h2>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Please review your application before submitting.
+                  Check your answers before submitting.
                 </p>
               </div>
               {!signedIn && !authLoading && (

@@ -203,6 +203,53 @@ describe('Header', () => {
       expect(screen.getAllByRole('link', { name: 'Apply' }).length).toBe(2);
     });
 
+    it('shows admins a Draft-marked Apply when only a draft exists', () => {
+      mockAdminState({ isAdmin: true });
+      mockUseOpenCampaigns.mockReturnValue({
+        campaigns: [
+          {
+            id: 'c1',
+            status: 'draft',
+            title: 'Draft',
+            subtitle: '',
+            description: '',
+            deadline: '',
+            teams: [],
+            enabledStandardFields: [],
+          },
+        ],
+        loaded: true,
+      });
+      render(<Header />);
+      expect(
+        screen.getAllByRole('link', {
+          name: /Apply \(draft preview, admins only\)/,
+        }).length,
+      ).toBe(2);
+    });
+
+    it('hides Apply from non-admins when only a draft exists', () => {
+      mockUseOpenCampaigns.mockReturnValue({
+        campaigns: [
+          {
+            id: 'c1',
+            status: 'draft',
+            title: 'Draft',
+            subtitle: '',
+            description: '',
+            deadline: '',
+            teams: [],
+            enabledStandardFields: [],
+          },
+        ],
+        loaded: true,
+      });
+      render(<Header />);
+      expect(
+        screen.queryByRole('link', { name: /Apply/ }),
+      ).not.toBeInTheDocument();
+    });
+
     it('shows Apply while campaigns are still loading', () => {
       mockUseOpenCampaigns.mockReturnValue({ campaigns: [], loaded: false });
       render(<Header />);

@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { Sparkles, Clock, ChevronDown } from 'lucide-react';
+import { Clock, ChevronDown } from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import HeroSplash from '@/components/HeroSplash';
 import MultiStepWizard, { WizardStep } from '@/components/ui/MultiStepWizard';
@@ -34,18 +34,19 @@ export const CampaignHero = ({
   title,
   description,
   deadline,
+  badge,
 }: {
   subtitle: ReactNode;
   title: ReactNode;
   description: ReactNode;
   deadline: ReactNode;
+  /** Shown above the title, e.g. the Draft marker in an admin preview. */
+  badge?: ReactNode;
 }) => (
   <HeroSplash className="min-h-[50vh]">
     <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16">
-      <p className="mono-label text-current/65 mb-6 flex items-center gap-2">
-        <Sparkles className="h-4 w-4" />
-        {subtitle}
-      </p>
+      {badge}
+      <p className="mono-label text-current/65 mb-6">{subtitle}</p>
       <h1 className="display-lg mb-6">{title}</h1>
       <p className="text-base sm:text-lg text-current/60 mb-6 max-w-2xl leading-relaxed">
         {description}
@@ -78,13 +79,10 @@ export const LookingFor = () => (
   </div>
 );
 
-export const OpenRolesHead = () => (
-  <>
-    <h3 className="text-lg font-semibold text-foreground mb-4">Open Roles</h3>
-    <p className="text-sm text-muted-foreground mb-4">
-      Explore the roles you can apply for.
-    </p>
-  </>
+export const OpenRolesHead = ({ single = false }: { single?: boolean }) => (
+  <h3 className="text-lg font-semibold text-foreground mb-4">
+    {single ? 'Open Role' : 'Open Roles'}
+  </h3>
 );
 
 const noop = () => {};

@@ -73,9 +73,27 @@ export const Header: React.FC = () => {
   // Apply only shows while a campaign is open. Until campaigns load it stays
   // rendered but hidden by CSS, unless the last visit saw one open (the
   // pre-paint script sets data-apply="open"), so it never flashes in and out.
-  const { campaigns, loaded: campaignsLoaded } = useOpenCampaigns();
+  const { campaigns, loaded: campaignsLoaded } = useOpenCampaigns({
+    includeDrafts: isAdmin,
+  });
   const hasOpenCampaign = campaigns.some((c) => c.status === 'open');
-  const showApply = !campaignsLoaded || hasOpenCampaign;
+  // Admins get Apply for a draft too, marked as a draft preview.
+  const applyIsDraft =
+    isAdmin && !hasOpenCampaign && campaigns.some((c) => c.status === 'draft');
+  const showApply = !campaignsLoaded || hasOpenCampaign || applyIsDraft;
+  const applyLabel = applyIsDraft ? (
+    <>
+      Apply
+      <span className="ml-1.5 rounded-sm bg-chart-3/20 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-chart-3">
+        Draft
+      </span>
+    </>
+  ) : (
+    'Apply'
+  );
+  const applyDraftClass = applyIsDraft
+    ? 'border-dashed border-chart-3 hover:border-chart-3 hover:bg-chart-3/10'
+    : '';
   // Whether Apply was already on screen before campaigns loaded; if not, it
   // fades in when a campaign turns out to be open instead of popping in.
   const [applyShownEarly] = useState(
@@ -349,12 +367,26 @@ export const Header: React.FC = () => {
               {showApply && (
                 <Button
                   asChild
-                  variant="cta"
+                  variant={applyIsDraft ? 'outline' : 'cta'}
                   size="sm"
-                  className={`hidden sm:inline-flex shrink-0 ${campaignsLoaded && !applyShownEarly ? 'animate-in fade-in duration-300' : ''}`}
+                  className={`hidden sm:inline-flex shrink-0 ${applyDraftClass} ${campaignsLoaded && !applyShownEarly ? 'animate-in fade-in duration-300' : ''}`}
                   data-header-apply={campaignsLoaded ? undefined : ''}
                 >
-                  <Link href="/apply/team">Apply</Link>
+                  <Link
+                    href="/apply/team"
+                    aria-label={
+                      applyIsDraft
+                        ? 'Apply (draft preview, admins only)'
+                        : undefined
+                    }
+                    title={
+                      applyIsDraft
+                        ? 'Draft campaign, only visible to admins'
+                        : undefined
+                    }
+                  >
+                    {applyLabel}
+                  </Link>
                 </Button>
               )}
 
@@ -481,11 +513,20 @@ export const Header: React.FC = () => {
               {showApply && (
                 <Button
                   asChild
-                  variant="cta"
+                  variant={applyIsDraft ? 'outline' : 'cta'}
                   fullWidth
-                  className="sm:hidden mt-1.5"
+                  className={`sm:hidden mt-1.5 ${applyDraftClass}`}
                 >
-                  <Link href="/apply/team">Apply</Link>
+                  <Link
+                    href="/apply/team"
+                    aria-label={
+                      applyIsDraft
+                        ? 'Apply (draft preview, admins only)'
+                        : undefined
+                    }
+                  >
+                    {applyLabel}
+                  </Link>
                 </Button>
               )}
             </div>

@@ -1,56 +1,80 @@
-import { render, screen, fireEvent, waitFor, within } from '@testing-library/react'
-import TeamApplicationPage from '@/components/pages/TeamApplicationPage'
-import { defaultAppState } from '@/__tests__/helpers/fixtures'
-import { UU_PROGRAMMES } from '@/components/pages/apply/sampleData'
-import type { ApplicationCampaign } from '@/types'
+import {
+  render,
+  screen,
+  fireEvent,
+  waitFor,
+  within,
+} from '@testing-library/react';
+import TeamApplicationPage from '@/components/pages/TeamApplicationPage';
+import { defaultAppState } from '@/__tests__/helpers/fixtures';
+import { UU_PROGRAMMES } from '@/components/pages/apply/sampleData';
+import type { ApplicationCampaign } from '@/types';
 
-const mockUseApp = jest.fn()
-const mockNotify = jest.fn()
-const mockSubscribeToCampaignQuestions = jest.fn(() => jest.fn())
-let mockAuthUser: unknown = null
+const mockUseApp = jest.fn();
+const mockNotify = jest.fn();
+const mockSubscribeToCampaignQuestions = jest.fn(() => jest.fn());
+let mockAuthUser: unknown = null;
 
 function mockCampaigns(campaigns: unknown[], loaded = true) {
-  mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() })
-  global.__setCollectionData?.({ subscribeOpenCampaigns: { data: campaigns, loaded } })
+  mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
+  global.__setCollectionData?.({
+    subscribeOpenCampaigns: { data: campaigns, loaded },
+  });
 }
 
 const mockRefreshSessionCookie = jest.fn(async () => {
-  const token = mockAuthUser && typeof (mockAuthUser as { getIdToken?: unknown }).getIdToken === 'function'
-    ? await (mockAuthUser as { getIdToken: (f: boolean) => Promise<string> }).getIdToken(true)
-    : null
-  if (token) await global.fetch('/api/login', { headers: { Authorization: `Bearer ${token}` }, credentials: 'include' })
-})
+  const token =
+    mockAuthUser &&
+    typeof (mockAuthUser as { getIdToken?: unknown }).getIdToken === 'function'
+      ? await (
+          mockAuthUser as { getIdToken: (f: boolean) => Promise<string> }
+        ).getIdToken(true)
+      : null;
+  if (token)
+    await global.fetch('/api/login', {
+      headers: { Authorization: `Bearer ${token}` },
+      credentials: 'include',
+    });
+});
 
 jest.mock('@/contexts/AppContext', () => ({
   useApp: () => mockUseApp(),
   AppProvider: ({ children }: { children: React.ReactNode }) => children,
-}))
+}));
 
 jest.mock('@/components/ui/Notifications', () => ({
   useNotify: () => ({ notify: mockNotify }),
-}))
+}));
 
 jest.mock('@/lib/firebase-client', () => ({
   auth: {
-    get currentUser() { return mockAuthUser },
-    onAuthStateChanged: (cb: (u: unknown) => void) => { cb(mockAuthUser); return jest.fn(); },
+    get currentUser() {
+      return mockAuthUser;
+    },
+    onAuthStateChanged: (cb: (u: unknown) => void) => {
+      cb(mockAuthUser);
+      return jest.fn();
+    },
   },
-  refreshSessionCookie: (...args: unknown[]) => mockRefreshSessionCookie(...args),
-}))
+  refreshSessionCookie: (...args: unknown[]) =>
+    mockRefreshSessionCookie(...args),
+}));
 
-const mockGetTeamApplicationByUid = jest.fn().mockResolvedValue(null)
+const mockGetTeamApplicationByUid = jest.fn().mockResolvedValue(null);
 
 jest.mock('@/lib/firestore/teamApplications', () => ({
-  getTeamApplicationByUid: (...args: unknown[]) => mockGetTeamApplicationByUid(...args),
-}))
+  getTeamApplicationByUid: (...args: unknown[]) =>
+    mockGetTeamApplicationByUid(...args),
+}));
 
 jest.mock('@/lib/firestore/users', () => ({
   getUserProfile: jest.fn().mockResolvedValue(null),
-}))
+}));
 
 jest.mock('@/lib/firestore/campaignQuestions', () => ({
-  subscribeToCampaignQuestions: (...args: unknown[]) => mockSubscribeToCampaignQuestions(...args),
-}))
+  subscribeToCampaignQuestions: (...args: unknown[]) =>
+    mockSubscribeToCampaignQuestions(...args),
+}));
 
 const sampleCampaign: ApplicationCampaign = {
   id: 'spring2026',
@@ -61,324 +85,564 @@ const sampleCampaign: ApplicationCampaign = {
   status: 'open',
   teams: ['it', 'development', 'growth'],
   roles: [
-    { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 },
-    { id: 'development_member', teamId: 'development', title: 'Development Member', status: 'open', order: 1 },
-    { id: 'growth_member', teamId: 'growth', title: 'Growth Member', status: 'open', order: 2 },
+    {
+      id: 'it_member',
+      teamId: 'it',
+      title: 'IT Member',
+      status: 'open',
+      order: 0,
+    },
+    {
+      id: 'development_member',
+      teamId: 'development',
+      title: 'Development Member',
+      status: 'open',
+      order: 1,
+    },
+    {
+      id: 'growth_member',
+      teamId: 'growth',
+      title: 'Growth Member',
+      status: 'open',
+      order: 2,
+    },
   ],
   enabledStandardFields: [
-    'name', 'email', 'gender', 'university', 'program', 'graduationYear',
-    'linkedin', 'resume', 'interests', 'teamRanking', 'weeklyHours', 'motivation',
+    'name',
+    'email',
+    'gender',
+    'university',
+    'program',
+    'graduationYear',
+    'linkedin',
+    'resume',
+    'interests',
+    'teamRanking',
+    'weeklyHours',
+    'motivation',
   ],
-}
+};
 
 describe('TeamApplicationPage', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
-    localStorage.clear()
-    sessionStorage.clear()
-    mockAuthUser = null
-    mockGetTeamApplicationByUid.mockResolvedValue(null)
-    mockSubscribeToCampaignQuestions.mockImplementation(() => jest.fn())
-  })
+    jest.clearAllMocks();
+    localStorage.clear();
+    sessionStorage.clear();
+    mockAuthUser = null;
+    mockGetTeamApplicationByUid.mockResolvedValue(null);
+    mockSubscribeToCampaignQuestions.mockImplementation(() => jest.fn());
+  });
 
   it('shows loading state when no campaigns', () => {
-    mockCampaigns([], false)
-    render(<TeamApplicationPage />)
-    expect(screen.getByText('Loading campaigns…')).toBeInTheDocument()
-  })
+    mockCampaigns([], false);
+    render(<TeamApplicationPage />);
+    expect(screen.getByText('Loading campaigns…')).toBeInTheDocument();
+  });
 
   it('shows no active campaigns message when only closed/draft campaigns exist', () => {
-    mockCampaigns([{ ...sampleCampaign, status: 'closed' }], true)
-    render(<TeamApplicationPage />)
-    expect(screen.getByText('No active campaigns')).toBeInTheDocument()
-  })
+    mockCampaigns([{ ...sampleCampaign, status: 'closed' }], true);
+    render(<TeamApplicationPage />);
+    expect(screen.getByText('No active campaigns')).toBeInTheDocument();
+  });
+
+  it('hides a draft campaign from non-admins', () => {
+    global.__setCollectionData?.({
+      subscribeOpenCampaigns: { data: [], loaded: true },
+      subscribeAllCampaigns: {
+        data: [{ ...sampleCampaign, status: 'draft' }],
+        loaded: true,
+      },
+    });
+    render(<TeamApplicationPage />);
+    expect(screen.getByText('No active campaigns')).toBeInTheDocument();
+  });
+
+  it('shows admins a draft campaign, clearly marked', () => {
+    global.__setAdminState?.({ isAdmin: true, user: null, loading: false });
+    global.__setCollectionData?.({
+      subscribeAllCampaigns: {
+        data: [{ ...sampleCampaign, status: 'draft' }],
+        loaded: true,
+      },
+    });
+    try {
+      render(<TeamApplicationPage />);
+      expect(screen.getByText('Spring 2026 Recruitment')).toBeInTheDocument();
+      expect(screen.getByText(/Draft · admins only/)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Draft preview: only admins can see this campaign/),
+      ).toBeInTheDocument();
+    } finally {
+      global.__setAdminState?.(null);
+    }
+  });
 
   it('renders hero with campaign title and overview', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    expect(screen.getByText('Spring 2026 Recruitment')).toBeInTheDocument()
-    expect(screen.getByText(/We are looking for passionate students/)).toBeInTheDocument()
-    expect(screen.getByText('Open Roles')).toBeInTheDocument()
-  })
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    expect(screen.getByText('Spring 2026 Recruitment')).toBeInTheDocument();
+    expect(
+      screen.getByText(/We are looking for passionate students/),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Open Roles')).toBeInTheDocument();
+  });
 
   it('shows team cards from campaign teams', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    expect(screen.getByText('IT')).toBeInTheDocument()
-    expect(screen.getByText('Development')).toBeInTheDocument()
-    expect(screen.getByText('Growth')).toBeInTheDocument()
-  })
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    expect(screen.getByText('IT')).toBeInTheDocument();
+    expect(screen.getByText('Development')).toBeInTheDocument();
+    expect(screen.getByText('Growth')).toBeInTheDocument();
+  });
 
   it('renders team and role descriptions with rich formatting on the overview', () => {
     const richCampaign: ApplicationCampaign = {
       ...sampleCampaign,
       teamInfo: {
-        it: { description: 'We keep the infra running.\n\n- Servers\n- Networking' },
+        it: {
+          description: 'We keep the infra running.\n\n- Servers\n- Networking',
+        },
       },
       roles: [
         {
           ...sampleCampaign.roles[0],
-          description: '# What you will do\n\nHelp with sysadmin.\nContact it@uuais.com',
+          description:
+            '# What you will do\n\nHelp with sysadmin.\nContact it@uuais.com',
         },
         ...sampleCampaign.roles.slice(1),
       ],
-    }
-    mockCampaigns([richCampaign])
-    render(<TeamApplicationPage />)
+    };
+    mockCampaigns([richCampaign]);
+    render(<TeamApplicationPage />);
     // Team description renders paragraphs and bullet points
-    expect(screen.getByText('We keep the infra running.')).toBeInTheDocument()
-    expect(screen.getByText('Servers')).toBeInTheDocument()
-    expect(screen.getByText('Networking')).toBeInTheDocument()
+    expect(screen.getByText('We keep the infra running.')).toBeInTheDocument();
+    expect(screen.getByText('Servers')).toBeInTheDocument();
+    expect(screen.getByText('Networking')).toBeInTheDocument();
     // Role description renders a heading and auto-links the email
-    expect(screen.getByRole('heading', { name: 'What you will do' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'it@uuais.com' })).toHaveAttribute('href', 'mailto:it@uuais.com')
-  })
+    expect(
+      screen.getByRole('heading', { name: 'What you will do' }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'it@uuais.com' })).toHaveAttribute(
+      'href',
+      'mailto:it@uuais.com',
+    );
+  });
 
   it('separates multiple roles in the same team with a markdown-style --- delimiter', () => {
     const multiRoleCampaign: ApplicationCampaign = {
       ...sampleCampaign,
       teams: ['it', 'growth'],
       roles: [
-        { id: 'it_member', teamId: 'it', title: 'IT Member', status: 'open', order: 0 },
-        { id: 'it_lead', teamId: 'it', title: 'IT Lead', status: 'open', order: 1 },
-        { id: 'growth_member', teamId: 'growth', title: 'Growth Member', status: 'open', order: 2 },
+        {
+          id: 'it_member',
+          teamId: 'it',
+          title: 'IT Member',
+          status: 'open',
+          order: 0,
+        },
+        {
+          id: 'it_lead',
+          teamId: 'it',
+          title: 'IT Lead',
+          status: 'open',
+          order: 1,
+        },
+        {
+          id: 'growth_member',
+          teamId: 'growth',
+          title: 'Growth Member',
+          status: 'open',
+          order: 2,
+        },
       ],
-    }
-    mockCampaigns([multiRoleCampaign])
-    render(<TeamApplicationPage />)
+    };
+    mockCampaigns([multiRoleCampaign]);
+    render(<TeamApplicationPage />);
 
-    expect(screen.getByText('IT Member')).toBeInTheDocument()
-    expect(screen.getByText('IT Lead')).toBeInTheDocument()
-    expect(screen.getByText('Growth Member')).toBeInTheDocument()
+    expect(screen.getByText('IT Member')).toBeInTheDocument();
+    expect(screen.getByText('IT Lead')).toBeInTheDocument();
+    expect(screen.getByText('Growth Member')).toBeInTheDocument();
     // One --- delimiter between the two IT roles; none between different teams
-    expect(screen.getAllByText('---').length).toBe(1)
-  })
+    expect(screen.getAllByText('---').length).toBe(1);
+  });
 
   it('clamps overflowing descriptions and expands/collapses them on toggle', () => {
-    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', { configurable: true, get: () => 200 })
-    Object.defineProperty(HTMLElement.prototype, 'clientHeight', { configurable: true, get: () => 50 })
+    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', {
+      configurable: true,
+      get: () => 200,
+    });
+    Object.defineProperty(HTMLElement.prototype, 'clientHeight', {
+      configurable: true,
+      get: () => 50,
+    });
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
 
-    const showMore = screen.getAllByRole('button', { name: /Show more/i })
-    expect(showMore.length).toBeGreaterThan(0)
-    fireEvent.click(showMore[0])
-    expect(screen.getAllByRole('button', { name: /Show less/i }).length).toBeGreaterThan(0)
-    fireEvent.click(screen.getAllByRole('button', { name: /Show less/i })[0])
-    expect(screen.getAllByRole('button', { name: /Show more/i }).length).toBeGreaterThan(0)
+    const showMore = screen.getAllByRole('button', { name: /Show more/i });
+    expect(showMore.length).toBeGreaterThan(0);
+    fireEvent.click(showMore[0]);
+    expect(
+      screen.getAllByRole('button', { name: /Show less/i }).length,
+    ).toBeGreaterThan(0);
+    fireEvent.click(screen.getAllByRole('button', { name: /Show less/i })[0]);
+    expect(
+      screen.getAllByRole('button', { name: /Show more/i }).length,
+    ).toBeGreaterThan(0);
 
-    delete (HTMLElement.prototype as { scrollHeight?: unknown }).scrollHeight
-    delete (HTMLElement.prototype as { clientHeight?: unknown }).clientHeight
-  })
+    delete (HTMLElement.prototype as { scrollHeight?: unknown }).scrollHeight;
+    delete (HTMLElement.prototype as { clientHeight?: unknown }).clientHeight;
+  });
 
   it('navigates to profile step on Continue click', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    fireEvent.click(screen.getByText('Continue'))
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    fireEvent.click(screen.getByText('Continue'));
     // "Your Profile" appears in step-nav as well as h2; match the h2 heading specifically
-    expect(screen.getByRole('heading', { name: 'Your Profile', level: 2 })).toBeInTheDocument()
-  })
+    expect(
+      screen.getByRole('heading', { name: 'Your Profile', level: 2 }),
+    ).toBeInTheDocument();
+  });
 
   it('shows team selection step heading after navigating to step 4', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
     // Step 0 -> 1 (Overview -> Profile)
-    fireEvent.click(screen.getByText('Continue'))
-    const nameInput = screen.getByLabelText(/Full name/i)
-    const emailInput = screen.getByLabelText(/^Email/i)
-    fireEvent.change(nameInput, { target: { value: 'Alex' } })
-    fireEvent.change(emailInput, { target: { value: 'alex@test.com' } })
+    fireEvent.click(screen.getByText('Continue'));
+    const nameInput = screen.getByLabelText(/Full name/i);
+    const emailInput = screen.getByLabelText(/^Email/i);
+    fireEvent.change(nameInput, { target: { value: 'Alex' } });
+    fireEvent.change(emailInput, { target: { value: 'alex@test.com' } });
     // Step 1 -> 2 (Profile -> Experience)
-    fireEvent.click(screen.getByText('Continue'))
+    fireEvent.click(screen.getByText('Continue'));
     // On step 2 (Experience), set linkedin and select an area of interest to enable Continue
-    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), { target: { value: 'https://linkedin.com/in/alice' } })
-    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'))
-    fireEvent.click(screen.getByText('Continue'))
-    expect(screen.getByRole('heading', { name: 'Role Selection', level: 2 })).toBeInTheDocument()
-    expect(screen.getByText('Weekly Availability')).toBeInTheDocument()
-    expect(screen.getByText('Personal motivation')).toBeInTheDocument()
-  })
+    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), {
+      target: { value: 'https://linkedin.com/in/alice' },
+    });
+    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'));
+    fireEvent.click(screen.getByText('Continue'));
+    expect(
+      screen.getByRole('heading', { name: 'Role Selection', level: 2 }),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Weekly Availability')).toBeInTheDocument();
+    expect(screen.getByText('Personal motivation')).toBeInTheDocument();
+  });
 
   it('renders review step after completing all steps', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
-    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), { target: { value: 'https://linkedin.com/in/alice' } })
-    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'))
-    fireEvent.click(screen.getByText('Continue'))
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/Full name/i), {
+      target: { value: 'Alex' },
+    });
+    fireEvent.change(screen.getByLabelText(/^Email/i), {
+      target: { value: 'alex@test.com' },
+    });
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), {
+      target: { value: 'https://linkedin.com/in/alice' },
+    });
+    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'));
+    fireEvent.click(screen.getByText('Continue'));
     // Step 3: rank a role so Continue is enabled (canNext needs motivation >= 25 chars AND a ranked role).
-    fireEvent.click(screen.getByRole('button', { name: /Add IT Member/i }))
-    fireEvent.change(screen.getByPlaceholderText(/Tell us why you want to join/), { target: { value: 'I am excited to contribute to AI.' } })
-    fireEvent.click(screen.getByText('Continue'))
-    expect(screen.getByRole('heading', { name: /Review & Submit/i, level: 2 })).toBeInTheDocument()
-  })
+    fireEvent.click(screen.getByRole('button', { name: /Add IT Member/i }));
+    fireEvent.change(
+      screen.getByPlaceholderText(/Tell us why you want to join/),
+      { target: { value: 'I am excited to contribute to AI.' } },
+    );
+    fireEvent.click(screen.getByText('Continue'));
+    expect(
+      screen.getByRole('heading', { name: /Review & Submit/i, level: 2 }),
+    ).toBeInTheDocument();
+  });
+
+  it('adapts the copy and pre-selects the role when only one role is open', () => {
+    const singleRoleCampaign: ApplicationCampaign = {
+      ...sampleCampaign,
+      teams: ['it'],
+      roles: [
+        {
+          id: 'it_member',
+          teamId: 'it',
+          title: 'IT Member',
+          status: 'open',
+          order: 0,
+          description: 'Keep the infra running.',
+        },
+      ],
+    };
+    mockCampaigns([singleRoleCampaign]);
+    render(<TeamApplicationPage />);
+    expect(screen.getByText('Open Role')).toBeInTheDocument();
+    // Role description is shown in full on the overview, no Show more toggle needed
+    expect(screen.getByText('Keep the infra running.')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/Full name/i), {
+      target: { value: 'Alex' },
+    });
+    fireEvent.change(screen.getByLabelText(/^Email/i), {
+      target: { value: 'alex@test.com' },
+    });
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), {
+      target: { value: 'https://linkedin.com/in/alice' },
+    });
+    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'));
+    fireEvent.click(screen.getByText('Continue'));
+
+    expect(screen.getByText(/Confirm your role/)).toBeInTheDocument();
+    expect(screen.getByText('Your Role')).toBeInTheDocument();
+    // Already added: removable, and no "Add" button left to click
+    expect(
+      screen.getByRole('button', { name: /Remove IT Member/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: /Add IT Member/i }),
+    ).not.toBeInTheDocument();
+    fireEvent.change(
+      screen.getByPlaceholderText(/Tell us why you want to join/),
+      { target: { value: 'I am excited to contribute to AI.' } },
+    );
+    fireEvent.click(screen.getByText('Continue'));
+    expect(
+      screen.getByRole('heading', { name: /Review & Submit/i, level: 2 }),
+    ).toBeInTheDocument();
+  });
 
   it('renders the custom-interest row as a text field without a dead checkbox', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
-    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
-    fireEvent.click(screen.getByText('Continue'))
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/Full name/i), {
+      target: { value: 'Alex' },
+    });
+    fireEvent.change(screen.getByLabelText(/^Email/i), {
+      target: { value: 'alex@test.com' },
+    });
+    fireEvent.click(screen.getByText('Continue'));
 
-    const customInput = screen.getByPlaceholderText('Describe your area of interest')
-    expect(customInput).toBeInTheDocument()
+    const customInput = screen.getByPlaceholderText(
+      'Describe your area of interest',
+    );
+    expect(customInput).toBeInTheDocument();
     // No non-functional checkbox masquerading as a selector
-    expect(customInput.closest('label')?.querySelector('input[type="checkbox"]')).toBeNull()
+    expect(
+      customInput.closest('label')?.querySelector('input[type="checkbox"]'),
+    ).toBeNull();
     // Typing in the field counts toward the "at least one area" requirement
-    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), { target: { value: 'https://linkedin.com/in/alice' } })
-    fireEvent.change(customInput, { target: { value: 'AI Ethics' } })
-    expect(screen.getByRole('button', { name: /Continue/i })).toBeEnabled()
-  })
+    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), {
+      target: { value: 'https://linkedin.com/in/alice' },
+    });
+    fireEvent.change(customInput, { target: { value: 'AI Ethics' } });
+    expect(screen.getByRole('button', { name: /Continue/i })).toBeEnabled();
+  });
 
   it('filters the programme list as you type and selects with Enter', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    fireEvent.click(screen.getByText('Continue'))
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    fireEvent.click(screen.getByText('Continue'));
 
-    const combobox = screen.getByRole('combobox', { name: /Program/ })
-    fireEvent.focus(combobox)
-    fireEvent.change(combobox, { target: { value: 'computer sci' } })
+    const combobox = screen.getByRole('combobox', { name: /Program/ });
+    fireEvent.focus(combobox);
+    fireEvent.change(combobox, { target: { value: 'computer sci' } });
 
     // Filtered matches appear in the listbox (subset of the 300+ programmes)
-    const listbox = screen.getByRole('listbox')
-    const matches = within(listbox).getAllByRole('option').map((o) => o.textContent)
-    expect(matches.some((m) => m?.includes('Computer Science'))).toBe(true)
-    expect(matches.length).toBeLessThan(UU_PROGRAMMES.length)
+    const listbox = screen.getByRole('listbox');
+    const matches = within(listbox)
+      .getAllByRole('option')
+      .map((o) => o.textContent);
+    expect(matches.some((m) => m?.includes('Computer Science'))).toBe(true);
+    expect(matches.length).toBeLessThan(UU_PROGRAMMES.length);
 
     // Enter commits the first (highlighted) match
-    fireEvent.keyDown(combobox, { key: 'Enter' })
-    expect(combobox).toHaveValue(matches[0])
-  })
+    fireEvent.keyDown(combobox, { key: 'Enter' });
+    expect(combobox).toHaveValue(matches[0]);
+  });
 
   it('commits free text when no programme matches', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    fireEvent.click(screen.getByText('Continue'))
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    fireEvent.click(screen.getByText('Continue'));
 
-    const combobox = screen.getByRole('combobox', { name: /Program/ })
-    fireEvent.focus(combobox)
-    fireEvent.change(combobox, { target: { value: 'AI Ethics' } })
-    expect(screen.getByText(/No programmes match/)).toBeInTheDocument()
+    const combobox = screen.getByRole('combobox', { name: /Program/ });
+    fireEvent.focus(combobox);
+    fireEvent.change(combobox, { target: { value: 'AI Ethics' } });
+    expect(screen.getByText(/No programmes match/)).toBeInTheDocument();
 
-    fireEvent.blur(combobox)
-    expect(combobox).toHaveValue('AI Ethics')
-  })
+    fireEvent.blur(combobox);
+    expect(combobox).toHaveValue('AI Ethics');
+  });
 
   it('hides standard fields that the campaign has disabled', () => {
     const limitedCampaign: ApplicationCampaign = {
       ...sampleCampaign,
       enabledStandardFields: ['name', 'email'],
-    }
-    mockCampaigns([limitedCampaign])
-    render(<TeamApplicationPage />)
-    fireEvent.click(screen.getByText('Continue'))
+    };
+    mockCampaigns([limitedCampaign]);
+    render(<TeamApplicationPage />);
+    fireEvent.click(screen.getByText('Continue'));
     // Name/email still render, but disabled fields (LinkedIn, etc.) do not
-    expect(screen.getByLabelText(/Full name/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/^Email/i)).toBeInTheDocument()
-    expect(screen.queryByLabelText(/LinkedIn URL/i)).not.toBeInTheDocument()
-    expect(screen.queryByText('Areas of Interest')).not.toBeInTheDocument()
+    expect(screen.getByLabelText(/Full name/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^Email/i)).toBeInTheDocument();
+    expect(screen.queryByLabelText(/LinkedIn URL/i)).not.toBeInTheDocument();
+    expect(screen.queryByText('Areas of Interest')).not.toBeInTheDocument();
     // Continue is enabled without filling the disabled LinkedIn/interests fields
-    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
-    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.click(screen.getByText('Continue'))
-    expect(screen.getByRole('heading', { name: /Role Selection/i, level: 2 })).toBeInTheDocument()
-  })
+    fireEvent.change(screen.getByLabelText(/Full name/i), {
+      target: { value: 'Alex' },
+    });
+    fireEvent.change(screen.getByLabelText(/^Email/i), {
+      target: { value: 'alex@test.com' },
+    });
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.click(screen.getByText('Continue'));
+    expect(
+      screen.getByRole('heading', { name: /Role Selection/i, level: 2 }),
+    ).toBeInTheDocument();
+  });
 
   it('shows applications closed when the campaign deadline has passed', () => {
-    mockCampaigns([{ ...sampleCampaign, deadline: '2020-01-01' }], true)
-    render(<TeamApplicationPage />)
-    expect(screen.getByText('Applications Closed')).toBeInTheDocument()
-    expect(screen.queryByText('Continue')).not.toBeInTheDocument()
-  })
+    mockCampaigns([{ ...sampleCampaign, deadline: '2020-01-01' }], true);
+    render(<TeamApplicationPage />);
+    expect(screen.getByText('Applications Closed')).toBeInTheDocument();
+    expect(screen.queryByText('Continue')).not.toBeInTheDocument();
+  });
 
   it('shows "no roles open" screen when role selection is enabled but no roles are open', () => {
-    mockCampaigns([{ ...sampleCampaign, roles: [] }], true)
-    render(<TeamApplicationPage />)
-    expect(screen.getByText('No roles are open right now')).toBeInTheDocument()
-    expect(screen.queryByText('Continue')).not.toBeInTheDocument()
-  })
+    mockCampaigns([{ ...sampleCampaign, roles: [] }], true);
+    render(<TeamApplicationPage />);
+    expect(screen.getByText('No roles are open right now')).toBeInTheDocument();
+    expect(screen.queryByText('Continue')).not.toBeInTheDocument();
+  });
 
   it('does not block the form when role selection is disabled even without roles', () => {
-    mockCampaigns([{
-      ...sampleCampaign,
-      roles: [],
-      enabledStandardFields: ['name', 'email', 'motivation', 'linkedin'],
-    }], true)
-    render(<TeamApplicationPage />)
-    expect(screen.queryByText('No roles are open right now')).not.toBeInTheDocument()
-    expect(screen.getByText('Continue')).toBeInTheDocument()
-  })
+    mockCampaigns(
+      [
+        {
+          ...sampleCampaign,
+          roles: [],
+          enabledStandardFields: ['name', 'email', 'motivation', 'linkedin'],
+        },
+      ],
+      true,
+    );
+    render(<TeamApplicationPage />);
+    expect(
+      screen.queryByText('No roles are open right now'),
+    ).not.toBeInTheDocument();
+    expect(screen.getByText('Continue')).toBeInTheDocument();
+  });
 
   it('blocks advancing when a required custom question is unanswered', () => {
-    mockSubscribeToCampaignQuestions.mockImplementation((_id: string, cb: (qs: unknown[]) => void) => {
-      cb([{ id: 'q1', question: 'Why do you want to join?', required: true, type: 'textarea' }])
-      return jest.fn()
-    })
+    mockSubscribeToCampaignQuestions.mockImplementation(
+      (_id: string, cb: (qs: unknown[]) => void) => {
+        cb([
+          {
+            id: 'q1',
+            question: 'Why do you want to join?',
+            required: true,
+            type: 'textarea',
+          },
+        ]);
+        return jest.fn();
+      },
+    );
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
-    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), { target: { value: 'https://linkedin.com/in/alice' } })
-    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'))
-    expect(screen.getByRole('button', { name: /Continue/i })).toBeDisabled()
-    fireEvent.change(screen.getByLabelText(/Why do you want to join/), { target: { value: 'I love AI.' } })
-    expect(screen.getByRole('button', { name: /Continue/i })).toBeEnabled()
-  })
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/Full name/i), {
+      target: { value: 'Alex' },
+    });
+    fireEvent.change(screen.getByLabelText(/^Email/i), {
+      target: { value: 'alex@test.com' },
+    });
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), {
+      target: { value: 'https://linkedin.com/in/alice' },
+    });
+    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'));
+    expect(screen.getByRole('button', { name: /Continue/i })).toBeDisabled();
+    fireEvent.change(screen.getByLabelText(/Why do you want to join/), {
+      target: { value: 'I love AI.' },
+    });
+    expect(screen.getByRole('button', { name: /Continue/i })).toBeEnabled();
+  });
 
   it('explains why Continue is blocked with an actionable hint', () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    fireEvent.click(screen.getByText('Continue'))
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    fireEvent.click(screen.getByText('Continue'));
     // No name yet — the hint names the missing field
-    expect(screen.getByText('Enter your full name to continue.')).toBeInTheDocument()
-    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
+    expect(
+      screen.getByText('Enter your full name to continue.'),
+    ).toBeInTheDocument();
+    fireEvent.change(screen.getByLabelText(/Full name/i), {
+      target: { value: 'Alex' },
+    });
     // Now the email is the blocker — the hint updates
-    expect(screen.getByText('Enter a valid email address to continue.')).toBeInTheDocument()
-  })
+    expect(
+      screen.getByText('Enter a valid email address to continue.'),
+    ).toBeInTheDocument();
+  });
 
   it('explains why Submit is blocked until the confirmation is ticked', () => {
-    mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
+    mockAuthUser = {
+      uid: 'user-1',
+      email: 'alex@test.com',
+      displayName: 'Alex',
+    };
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
-    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), { target: { value: 'https://linkedin.com/in/alice' } })
-    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'))
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.click(screen.getByRole('button', { name: /Add IT Member/i }))
-    fireEvent.change(screen.getByPlaceholderText(/Tell us why you want to join/), { target: { value: 'I am excited to contribute to AI.' } })
-    fireEvent.click(screen.getByText('Continue'))
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/Full name/i), {
+      target: { value: 'Alex' },
+    });
+    fireEvent.change(screen.getByLabelText(/^Email/i), {
+      target: { value: 'alex@test.com' },
+    });
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), {
+      target: { value: 'https://linkedin.com/in/alice' },
+    });
+    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'));
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.click(screen.getByRole('button', { name: /Add IT Member/i }));
+    fireEvent.change(
+      screen.getByPlaceholderText(/Tell us why you want to join/),
+      { target: { value: 'I am excited to contribute to AI.' } },
+    );
+    fireEvent.click(screen.getByText('Continue'));
     // Review step: Submit is disabled until the agreement is confirmed
-    const submit = screen.getByRole('button', { name: /Submit application/i })
-    expect(submit).toBeDisabled()
-    expect(screen.getByText('Confirm that your information is accurate to submit.')).toBeInTheDocument()
-    fireEvent.click(screen.getByLabelText(/I confirm the information above is accurate/i))
-    expect(screen.getByRole('button', { name: /Submit application/i })).toBeEnabled()
-  })
+    const submit = screen.getByRole('button', { name: /Submit application/i });
+    expect(submit).toBeDisabled();
+    expect(
+      screen.getByText('Confirm that your information is accurate to submit.'),
+    ).toBeInTheDocument();
+    fireEvent.click(
+      screen.getByLabelText(/I confirm the information above is accurate/i),
+    );
+    expect(
+      screen.getByRole('button', { name: /Submit application/i }),
+    ).toBeEnabled();
+  });
 
   it('shows "Already Applied!" instead of the form for a signed-in user who already applied', async () => {
-    mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
+    mockAuthUser = {
+      uid: 'user-1',
+      email: 'alex@test.com',
+      displayName: 'Alex',
+    };
     mockGetTeamApplicationByUid.mockResolvedValue({
       id: 'app-1',
       campaignId: 'spring2026',
@@ -387,17 +651,20 @@ mockCampaigns([sampleCampaign])
       emailNormalized: 'alex@test.com',
       uid: 'user-1',
       roleRanking: [{ roleId: 'it_member', teamId: 'it' }],
-    })
+    });
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
 
-    expect(await screen.findByText('Already Applied!')).toBeInTheDocument()
+    expect(await screen.findByText('Already Applied!')).toBeInTheDocument();
     // Neither the application form nor the add-role UI should render
-    expect(screen.queryByText('Continue')).not.toBeInTheDocument()
-    expect(screen.queryByText('Add new roles')).not.toBeInTheDocument()
-    expect(mockGetTeamApplicationByUid).toHaveBeenCalledWith('user-1', 'spring2026')
-  })
+    expect(screen.queryByText('Continue')).not.toBeInTheDocument();
+    expect(screen.queryByText('Add new roles')).not.toBeInTheDocument();
+    expect(mockGetTeamApplicationByUid).toHaveBeenCalledWith(
+      'user-1',
+      'spring2026',
+    );
+  });
 
   it('does not flash "Already Applied!" while a submission is in flight', async () => {
     mockAuthUser = {
@@ -405,249 +672,417 @@ mockCampaigns([sampleCampaign])
       email: 'alex@test.com',
       displayName: 'Alex',
       getIdToken: jest.fn().mockResolvedValue('id-token-1'),
-    }
-    mockGetTeamApplicationByUid.mockResolvedValue(null)
+    };
+    mockGetTeamApplicationByUid.mockResolvedValue(null);
 
-    mockCampaigns([sampleCampaign])
+    mockCampaigns([sampleCampaign]);
 
     // Deferred fetch so we control when the submit response arrives
-    let resolveFetch: (v: { ok: boolean; json: () => Promise<unknown> }) => void
-    const fetchPromise = new Promise<{ ok: boolean; json: () => Promise<unknown> }>((res) => {
-      resolveFetch = res
-    })
+    let resolveFetch: (v: {
+      ok: boolean;
+      json: () => Promise<unknown>;
+    }) => void;
+    const fetchPromise = new Promise<{
+      ok: boolean;
+      json: () => Promise<unknown>;
+    }>((res) => {
+      resolveFetch = res;
+    });
     const fetchMock = jest.fn((url: string) =>
       url === '/api/login'
         ? Promise.resolve({ ok: true, json: async () => ({}) })
-        : fetchPromise
-    )
-    const originalFetch = global.fetch
-    global.fetch = fetchMock as unknown as typeof fetch
+        : fetchPromise,
+    );
+    const originalFetch = global.fetch;
+    global.fetch = fetchMock as unknown as typeof fetch;
 
-    const { rerender } = render(<TeamApplicationPage />)
+    const { rerender } = render(<TeamApplicationPage />);
 
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
-    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), { target: { value: 'https://linkedin.com/in/alice' } })
-    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'))
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.click(screen.getByRole('button', { name: /Add IT Member/i }))
-    fireEvent.change(screen.getByPlaceholderText(/Tell us why you want to join/), { target: { value: 'I am excited to contribute to AI.' } })
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.click(screen.getByLabelText(/I confirm the information above is accurate/i))
-    fireEvent.click(screen.getByRole('button', { name: /Submit application/i }))
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/Full name/i), {
+      target: { value: 'Alex' },
+    });
+    fireEvent.change(screen.getByLabelText(/^Email/i), {
+      target: { value: 'alex@test.com' },
+    });
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), {
+      target: { value: 'https://linkedin.com/in/alice' },
+    });
+    fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'));
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.click(screen.getByRole('button', { name: /Add IT Member/i }));
+    fireEvent.change(
+      screen.getByPlaceholderText(/Tell us why you want to join/),
+      { target: { value: 'I am excited to contribute to AI.' } },
+    );
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.click(
+      screen.getByLabelText(/I confirm the information above is accurate/i),
+    );
+    fireEvent.click(
+      screen.getByRole('button', { name: /Submit application/i }),
+    );
 
-    rerender(<TeamApplicationPage />)
+    rerender(<TeamApplicationPage />);
 
-    expect(screen.queryByText('Already Applied!')).not.toBeInTheDocument()
+    expect(screen.queryByText('Already Applied!')).not.toBeInTheDocument();
 
     // Success response resolves — the submitted screen must win
-    resolveFetch({ ok: true, json: async () => ({}) })
-    expect(await screen.findByText('Application Submitted!')).toBeInTheDocument()
-    expect(screen.queryByText('Already Applied!')).not.toBeInTheDocument()
+    resolveFetch({ ok: true, json: async () => ({}) });
+    expect(
+      await screen.findByText('Application Submitted!'),
+    ).toBeInTheDocument();
+    expect(screen.queryByText('Already Applied!')).not.toBeInTheDocument();
 
     // The session cookie is refreshed to the current account before applying
     expect(fetchMock).toHaveBeenCalledWith(
       '/api/login',
-      expect.objectContaining({ headers: { Authorization: 'Bearer id-token-1' } }),
-    )
+      expect.objectContaining({
+        headers: { Authorization: 'Bearer id-token-1' },
+      }),
+    );
 
-    global.fetch = originalFetch
-  })
+    global.fetch = originalFetch;
+  });
 
   it('persists a draft to localStorage as the user fills the form', async () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    fireEvent.click(screen.getByText('Continue'))
-    fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
-    fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    fireEvent.click(screen.getByText('Continue'));
+    fireEvent.change(screen.getByLabelText(/Full name/i), {
+      target: { value: 'Alex' },
+    });
+    fireEvent.change(screen.getByLabelText(/^Email/i), {
+      target: { value: 'alex@test.com' },
+    });
 
     // Debounced save (400ms) — wait for it to land.
-    await new Promise((r) => setTimeout(r, 450))
+    await new Promise((r) => setTimeout(r, 450));
 
-    const keys = Object.keys(localStorage).filter((k) => k.startsWith('teamApplicationDraft'))
-    expect(keys.length).toBe(1)
-    const saved = JSON.parse(localStorage.getItem(keys[0])!)
-    expect(saved.name).toBe('Alex')
-    expect(saved.email).toBe('alex@test.com')
-    expect(saved.step).toBe(1)
-  })
+    const keys = Object.keys(localStorage).filter((k) =>
+      k.startsWith('teamApplicationDraft'),
+    );
+    expect(keys.length).toBe(1);
+    const saved = JSON.parse(localStorage.getItem(keys[0])!);
+    expect(saved.name).toBe('Alex');
+    expect(saved.email).toBe('alex@test.com');
+    expect(saved.step).toBe(1);
+  });
 
   it('does not create a draft on a fresh page visit', async () => {
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
-    await new Promise((r) => setTimeout(r, 450))
-    const keys = Object.keys(localStorage).filter((k) => k.startsWith('teamApplicationDraft'))
-    expect(keys.length).toBe(0)
-  })
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
+    await new Promise((r) => setTimeout(r, 450));
+    const keys = Object.keys(localStorage).filter((k) =>
+      k.startsWith('teamApplicationDraft'),
+    );
+    expect(keys.length).toBe(0);
+  });
 
   it('restores the saved draft and notifies the user on a fresh mount', async () => {
-    localStorage.setItem('teamApplicationDraft:spring2026:anon', JSON.stringify({
-      name: 'Alex', email: 'alex@test.com', step: 1, interests: [], roleRanking: [],
-    }))
+    localStorage.setItem(
+      'teamApplicationDraft:spring2026:anon',
+      JSON.stringify({
+        name: 'Alex',
+        email: 'alex@test.com',
+        step: 1,
+        interests: [],
+        roleRanking: [],
+      }),
+    );
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
-    render(<TeamApplicationPage />)
+    mockCampaigns([sampleCampaign]);
+    render(<TeamApplicationPage />);
 
-    await waitFor(() => expect(mockNotify).toHaveBeenCalledWith(expect.objectContaining({ title: 'Draft restored' })))
-    expect(screen.getByRole('heading', { name: 'Your Profile', level: 2 })).toBeInTheDocument()
-    expect(screen.getByLabelText(/Full name/i)).toHaveValue('Alex')
-  })
+    await waitFor(() =>
+      expect(mockNotify).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Draft restored' }),
+      ),
+    );
+    expect(
+      screen.getByRole('heading', { name: 'Your Profile', level: 2 }),
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText(/Full name/i)).toHaveValue('Alex');
+  });
 
   it('clears the draft after a successful submission', async () => {
-    mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
-    localStorage.setItem('teamApplicationDraft:spring2026:user-1', JSON.stringify({
-      name: 'Alex', email: 'alex@test.com', step: 4, interests: [], roleRanking: [],
-    }))
+    mockAuthUser = {
+      uid: 'user-1',
+      email: 'alex@test.com',
+      displayName: 'Alex',
+    };
+    localStorage.setItem(
+      'teamApplicationDraft:spring2026:user-1',
+      JSON.stringify({
+        name: 'Alex',
+        email: 'alex@test.com',
+        step: 4,
+        interests: [],
+        roleRanking: [],
+      }),
+    );
     mockUseApp.mockReturnValue({ state: defaultAppState, dispatch: jest.fn() });
-mockCampaigns([sampleCampaign])
+    mockCampaigns([sampleCampaign]);
 
     const fetchMock = jest.fn((url: string) =>
       url === '/api/login'
         ? Promise.resolve({ ok: true, json: async () => ({}) })
-        : Promise.resolve({ ok: true, json: async () => ({}) })
-    )
-    const originalFetch = global.fetch
-    global.fetch = fetchMock as unknown as typeof fetch
+        : Promise.resolve({ ok: true, json: async () => ({}) }),
+    );
+    const originalFetch = global.fetch;
+    global.fetch = fetchMock as unknown as typeof fetch;
 
-    render(<TeamApplicationPage />)
-    await waitFor(() => expect(mockNotify).toHaveBeenCalledWith(expect.objectContaining({ title: 'Draft restored' })))
+    render(<TeamApplicationPage />);
+    await waitFor(() =>
+      expect(mockNotify).toHaveBeenCalledWith(
+        expect.objectContaining({ title: 'Draft restored' }),
+      ),
+    );
 
     // Land on the review step (restored step 4) and submit.
-    fireEvent.click(screen.getByLabelText(/I confirm the information above is accurate/i))
-    fireEvent.click(screen.getByRole('button', { name: /Submit application/i }))
+    fireEvent.click(
+      screen.getByLabelText(/I confirm the information above is accurate/i),
+    );
+    fireEvent.click(
+      screen.getByRole('button', { name: /Submit application/i }),
+    );
 
-    expect(await screen.findByText('Application Submitted!')).toBeInTheDocument()
-    await new Promise((r) => setTimeout(r, 100))
-    expect(localStorage.getItem('teamApplicationDraft:spring2026:user-1')).toBeNull()
+    expect(
+      await screen.findByText('Application Submitted!'),
+    ).toBeInTheDocument();
+    await new Promise((r) => setTimeout(r, 100));
+    expect(
+      localStorage.getItem('teamApplicationDraft:spring2026:user-1'),
+    ).toBeNull();
 
-    global.fetch = originalFetch
-  })
+    global.fetch = originalFetch;
+  });
 
   describe('signing in mid-application', () => {
     const fillToReview = () => {
-      fireEvent.click(screen.getByText('Continue'))
-      fireEvent.change(screen.getByLabelText(/Full name/i), { target: { value: 'Alex' } })
-      fireEvent.change(screen.getByLabelText(/^Email/i), { target: { value: 'alex@test.com' } })
-      fireEvent.click(screen.getByText('Continue'))
-      fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), { target: { value: 'https://linkedin.com/in/alice' } })
-      fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'))
-      fireEvent.click(screen.getByText('Continue'))
-      fireEvent.click(screen.getByRole('button', { name: /Add IT Member/i }))
-      fireEvent.change(screen.getByPlaceholderText(/Tell us why you want to join/), { target: { value: 'I am excited to contribute to AI.' } })
-      fireEvent.click(screen.getByText('Continue'))
-      fireEvent.click(screen.getByLabelText(/I confirm the information above is accurate/i))
-    }
+      fireEvent.click(screen.getByText('Continue'));
+      fireEvent.change(screen.getByLabelText(/Full name/i), {
+        target: { value: 'Alex' },
+      });
+      fireEvent.change(screen.getByLabelText(/^Email/i), {
+        target: { value: 'alex@test.com' },
+      });
+      fireEvent.click(screen.getByText('Continue'));
+      fireEvent.change(screen.getByLabelText(/LinkedIn URL/i), {
+        target: { value: 'https://linkedin.com/in/alice' },
+      });
+      fireEvent.click(screen.getByLabelText('AI Research & Theoretical ML'));
+      fireEvent.click(screen.getByText('Continue'));
+      fireEvent.click(screen.getByRole('button', { name: /Add IT Member/i }));
+      fireEvent.change(
+        screen.getByPlaceholderText(/Tell us why you want to join/),
+        { target: { value: 'I am excited to contribute to AI.' } },
+      );
+      fireEvent.click(screen.getByText('Continue'));
+      fireEvent.click(
+        screen.getByLabelText(/I confirm the information above is accurate/i),
+      );
+    };
 
     it('labels the action "Sign in to submit" and warns on Review when signed out', async () => {
-      mockCampaigns([sampleCampaign])
-      render(<TeamApplicationPage />)
-      fillToReview()
+      mockCampaigns([sampleCampaign]);
+      render(<TeamApplicationPage />);
+      fillToReview();
 
-      expect(screen.getByRole('button', { name: /Sign in to submit/i })).toBeInTheDocument()
-      expect(screen.queryByRole('button', { name: /^Submit application/i })).not.toBeInTheDocument()
-      expect(screen.getByText(/You're not signed in yet/)).toBeInTheDocument()
-      expect(screen.getByText(/Nothing is sent until you press Submit application/)).toBeInTheDocument()
-    })
+      expect(
+        screen.getByRole('button', { name: /Sign in to submit/i }),
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: /^Submit application/i }),
+      ).not.toBeInTheDocument();
+      expect(screen.getByText(/You're not signed in yet/)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Nothing is sent until you press Submit application/),
+      ).toBeInTheDocument();
+    });
 
     it('hands the campaign-scoped form to sign-in instead of submitting', async () => {
-      mockCampaigns([sampleCampaign])
-      const fetchMock = jest.fn()
-      const originalFetch = global.fetch
-      global.fetch = fetchMock as unknown as typeof fetch
+      mockCampaigns([sampleCampaign]);
+      const fetchMock = jest.fn();
+      const originalFetch = global.fetch;
+      global.fetch = fetchMock as unknown as typeof fetch;
 
-      render(<TeamApplicationPage />)
-      fillToReview()
-      fireEvent.click(screen.getByRole('button', { name: /Sign in to submit/i }))
+      render(<TeamApplicationPage />);
+      fillToReview();
+      fireEvent.click(
+        screen.getByRole('button', { name: /Sign in to submit/i }),
+      );
 
-      expect(fetchMock).not.toHaveBeenCalled()
-      const pending = JSON.parse(sessionStorage.getItem('pendingApplication.v2')!)
-      expect(pending.campaignId).toBe('spring2026')
-      expect(pending.resumeAttached).toBe(false)
-      expect(pending.form.name).toBe('Alex')
-      expect(pending.form.motivation).toBe('I am excited to contribute to AI.')
-      expect(pending.form.roleRanking).toHaveLength(1)
-      expect(pending.form.agree).toBe(true)
+      expect(fetchMock).not.toHaveBeenCalled();
+      const pending = JSON.parse(
+        sessionStorage.getItem('pendingApplication.v2')!,
+      );
+      expect(pending.campaignId).toBe('spring2026');
+      expect(pending.resumeAttached).toBe(false);
+      expect(pending.form.name).toBe('Alex');
+      expect(pending.form.motivation).toBe('I am excited to contribute to AI.');
+      expect(pending.form.roleRanking).toHaveLength(1);
+      expect(pending.form.agree).toBe(true);
 
-      global.fetch = originalFetch
-    })
+      global.fetch = originalFetch;
+    });
 
     it('restores the handed-over application on the Review step and says it is not submitted', async () => {
-      sessionStorage.setItem('pendingApplication.v2', JSON.stringify({
-        campaignId: 'spring2026',
-        resumeAttached: false,
-        form: {
-          name: 'Alex', email: 'alex@test.com', linkedin: 'https://linkedin.com/in/alice',
-          interests: ['ai_research'], motivation: 'I am excited to contribute to AI.',
-          roleRanking: [{ roleId: 'it_member', teamId: 'it', title: 'IT Member', teamName: 'IT' }],
-          agree: true, customAnswers: {},
-        },
-      }))
-      mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
-      mockCampaigns([sampleCampaign])
-      render(<TeamApplicationPage />)
+      sessionStorage.setItem(
+        'pendingApplication.v2',
+        JSON.stringify({
+          campaignId: 'spring2026',
+          resumeAttached: false,
+          form: {
+            name: 'Alex',
+            email: 'alex@test.com',
+            linkedin: 'https://linkedin.com/in/alice',
+            interests: ['ai_research'],
+            motivation: 'I am excited to contribute to AI.',
+            roleRanking: [
+              {
+                roleId: 'it_member',
+                teamId: 'it',
+                title: 'IT Member',
+                teamName: 'IT',
+              },
+            ],
+            agree: true,
+            customAnswers: {},
+          },
+        }),
+      );
+      mockAuthUser = {
+        uid: 'user-1',
+        email: 'alex@test.com',
+        displayName: 'Alex',
+      };
+      mockCampaigns([sampleCampaign]);
+      render(<TeamApplicationPage />);
 
-      await waitFor(() => expect(mockNotify).toHaveBeenCalledWith(
-        expect.objectContaining({ title: 'Not submitted yet — finish below' })
-      ))
-      expect(screen.getByRole('heading', { name: /Review & Submit/i, level: 2 })).toBeInTheDocument()
-      expect(screen.getByText(/not been submitted yet/)).toBeInTheDocument()
+      await waitFor(() =>
+        expect(mockNotify).toHaveBeenCalledWith(
+          expect.objectContaining({
+            title: 'Not submitted yet — finish below',
+          }),
+        ),
+      );
+      expect(
+        screen.getByRole('heading', { name: /Review & Submit/i, level: 2 }),
+      ).toBeInTheDocument();
+      expect(screen.getByText(/not been submitted yet/)).toBeInTheDocument();
       // The restored ranking survives the campaign-change reset that also runs on mount.
-      expect(screen.getByText('IT Member')).toBeInTheDocument()
-      expect(screen.getByRole('button', { name: /Submit application/i })).toBeInTheDocument()
-      expect(sessionStorage.getItem('pendingApplication.v2')).toBeNull()
-    })
+      expect(screen.getByText('IT Member')).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /Submit application/i }),
+      ).toBeInTheDocument();
+      expect(sessionStorage.getItem('pendingApplication.v2')).toBeNull();
+    });
 
     it('sends the user back to the resume step when a resume was attached', async () => {
-      sessionStorage.setItem('pendingApplication.v2', JSON.stringify({
-        campaignId: 'spring2026',
-        resumeAttached: true,
-        form: { name: 'Alex', email: 'alex@test.com', interests: [], roleRanking: [], customAnswers: {} },
-      }))
-      mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
-      mockCampaigns([sampleCampaign])
-      render(<TeamApplicationPage />)
+      sessionStorage.setItem(
+        'pendingApplication.v2',
+        JSON.stringify({
+          campaignId: 'spring2026',
+          resumeAttached: true,
+          form: {
+            name: 'Alex',
+            email: 'alex@test.com',
+            interests: [],
+            roleRanking: [],
+            customAnswers: {},
+          },
+        }),
+      );
+      mockAuthUser = {
+        uid: 'user-1',
+        email: 'alex@test.com',
+        displayName: 'Alex',
+      };
+      mockCampaigns([sampleCampaign]);
+      render(<TeamApplicationPage />);
 
-      await waitFor(() => expect(screen.getByRole('heading', { name: /Experience & Interests/i, level: 2 })).toBeInTheDocument())
-      expect(screen.getByText(/Re-attach your resume on this step/)).toBeInTheDocument()
-    })
+      await waitFor(() =>
+        expect(
+          screen.getByRole('heading', {
+            name: /Experience & Interests/i,
+            level: 2,
+          }),
+        ).toBeInTheDocument(),
+      );
+      expect(
+        screen.getByText(/Re-attach your resume on this step/),
+      ).toBeInTheDocument();
+    });
 
     it('keeps a handoff for another campaign untouched', async () => {
-      const other = JSON.stringify({ campaignId: 'autumn2025', resumeAttached: false, form: { name: 'Alex' } })
-      sessionStorage.setItem('pendingApplication.v2', other)
-      mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
-      mockCampaigns([sampleCampaign])
-      render(<TeamApplicationPage />)
+      const other = JSON.stringify({
+        campaignId: 'autumn2025',
+        resumeAttached: false,
+        form: { name: 'Alex' },
+      });
+      sessionStorage.setItem('pendingApplication.v2', other);
+      mockAuthUser = {
+        uid: 'user-1',
+        email: 'alex@test.com',
+        displayName: 'Alex',
+      };
+      mockCampaigns([sampleCampaign]);
+      render(<TeamApplicationPage />);
 
-      await waitFor(() => expect(screen.getByText('Spring 2026 Recruitment')).toBeInTheDocument())
-      expect(sessionStorage.getItem('pendingApplication.v2')).toBe(other)
-    })
+      await waitFor(() =>
+        expect(screen.getByText('Spring 2026 Recruitment')).toBeInTheDocument(),
+      );
+      expect(sessionStorage.getItem('pendingApplication.v2')).toBe(other);
+    });
 
     it('does not consume the handoff while the visitor is still signed out', async () => {
-      const pending = JSON.stringify({ campaignId: 'spring2026', resumeAttached: false, form: { name: 'Alex' } })
-      sessionStorage.setItem('pendingApplication.v2', pending)
-      mockCampaigns([sampleCampaign])
-      render(<TeamApplicationPage />)
+      const pending = JSON.stringify({
+        campaignId: 'spring2026',
+        resumeAttached: false,
+        form: { name: 'Alex' },
+      });
+      sessionStorage.setItem('pendingApplication.v2', pending);
+      mockCampaigns([sampleCampaign]);
+      render(<TeamApplicationPage />);
 
-      await waitFor(() => expect(screen.getByText('Spring 2026 Recruitment')).toBeInTheDocument())
-      expect(sessionStorage.getItem('pendingApplication.v2')).toBe(pending)
-    })
+      await waitFor(() =>
+        expect(screen.getByText('Spring 2026 Recruitment')).toBeInTheDocument(),
+      );
+      expect(sessionStorage.getItem('pendingApplication.v2')).toBe(pending);
+    });
 
     it('adopts the signed-out draft after sign-in so the form is not lost', async () => {
-      localStorage.setItem('teamApplicationDraft:spring2026:anon', JSON.stringify({
-        name: 'Alex', email: 'alex@test.com', step: 1, interests: [], roleRanking: [],
-      }))
-      mockAuthUser = { uid: 'user-1', email: 'alex@test.com', displayName: 'Alex' }
-      mockCampaigns([sampleCampaign])
-      render(<TeamApplicationPage />)
+      localStorage.setItem(
+        'teamApplicationDraft:spring2026:anon',
+        JSON.stringify({
+          name: 'Alex',
+          email: 'alex@test.com',
+          step: 1,
+          interests: [],
+          roleRanking: [],
+        }),
+      );
+      mockAuthUser = {
+        uid: 'user-1',
+        email: 'alex@test.com',
+        displayName: 'Alex',
+      };
+      mockCampaigns([sampleCampaign]);
+      render(<TeamApplicationPage />);
 
-      await waitFor(() => expect(mockNotify).toHaveBeenCalledWith(expect.objectContaining({ title: 'Draft restored' })))
-      expect(screen.getByLabelText(/Full name/i)).toHaveValue('Alex')
-      expect(localStorage.getItem('teamApplicationDraft:spring2026:anon')).toBeNull()
-    })
-  })
-
-})
+      await waitFor(() =>
+        expect(mockNotify).toHaveBeenCalledWith(
+          expect.objectContaining({ title: 'Draft restored' }),
+        ),
+      );
+      expect(screen.getByLabelText(/Full name/i)).toHaveValue('Alex');
+      expect(
+        localStorage.getItem('teamApplicationDraft:spring2026:anon'),
+      ).toBeNull();
+    });
+  });
+});
